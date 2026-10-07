@@ -1,6 +1,6 @@
 # Active Agent Queue
 
-GP-CONFIG-017 exact tested source integration follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b` through genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a`. All 236 critical source/build entries match tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`; only the NeoPixel speed calculation moves after the existing null guard. The native035 accepted catalog retains original C, committed-before-build F/M/tree, earliest reviewed R and exact accepted E. Preserved UF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5, 796672 bytes, was freshly rehashed. Owner-reported GP_CONFIG_017_HW_V1 seven-row PASS and empty gaps remain exact: static/SHIFT/XWAVE RGB and actual Mac/XInput RF10 A, GC/Switch/WUP-028 Ultimate/X1, clean releases, mode changes/reconnect/reboot, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byte-exact immediate/postreboot restoration. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. Historical aggregate FAIL/TIMEOUT and synthetic/cache applicability failures remain recorded; no full aggregate PASS, rebuild or physical retest is claimed. This dedicated integration snapshot still requires actual focused Revision3 checks, fresh independent review and live publication before separate strict DONE. All98 other orders and accepted014/020 hardware evidence are unchanged. The frozen owner test environment is untouched; the same persistent H3 executor retains sole publication authority for 017DONE then the authorized021/038 chain.
+GP-CONFIG-017 is DONE after reviewed exact tested-source integration `a9232dd71dbaac888d343227bbdc8f2d66bcb20a` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a` follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b`; the native035 catalog preserves original C, exact F/M/tree, earliest reviewed R and accepted E. All236 critical source/build inputs equal tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`. The accepted UF2 remains e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5,796672bytes, freshly rehashed. Seven owner-reported GP_CONFIG_017_HW_V1 rows PASS with empty gaps; Mac/XInput satisfies SHIFT/XWAVE actual-host coverage, GC/Switch/WUP-028 and Mac/XInput Ultimate/X1 pass, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 was restored byte-exactly before and after reboot. Initial focused19PASS/navigationFAIL and repaired7metadataPASS both preserve nativeMATCH; the actual failure remains recorded. Fresh independent integration review approves exact source/catalog/correspondence. Historical aggregate FAIL/TIMEOUT and framework debt remain honest; no full aggregate PASS, rebuild or retest. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. All98 other orders and accepted014/020 evidence remain unchanged. The same H3 executor next evaluates existing021/038 authority, source conformance and a safely executable rejected-storage test/recovery route. No C021 candidate, device operation or new work order is claimed. The owner test environment stays frozen and untouched. The initial2026-10-02 adoption recorded RUNWAY_OK; current marker records PLANNING_REQUIRED.
 
 GP-CONFIG-017 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `5994f1657e45e0883c6c75468a19be7e3b49a72c`, sole composition parent `a7b8758a4d9d353fcfeb0592cc155b4f50f4f358`, tree `0404687bb795e78f0f607fbad865369578615cff`. Mk6 build, resolved21-role decoder closure and owner-held UF2 custody PASS. Preserved UF2 SHA-256 `e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5`, 796672 bytes, locator `local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2`. All15 actual focused checks PASS/nativeMATCH; independent source witnesses verify all1430tracked modes/index/live,236critical==C017 and99queue==strict035DONE. Exact runtime/cache source pins,19prebuild decoder roles and native tracked source/index proof remain unchanged through build/custody. Fresh independent review approves exact source/build/custody/correspondence and conditional staged GP_CONFIG_017_HW_V1. Actual native full aggregate FAIL/AGGREGATE_TIMEOUT/nativeUNAVAILABLE retained with13 outcomes; outer fullnativeMATCH,300/120 unchanged. Unchanged034 synthetic applicability FAIL remains separate honestTier3 debt; additional root prebuild cache-classification FAIL stopped before compilation and remains retained, with exact copied-cache pins/native build integrity and actual decoder proof supplying the final build basis. No fullaggregatePASS or post-cache fullcampaignauthenticatePASS. This canonical handoff has five source-free docs/control-plane paths; candidateHAL remains unmerged. GP-VAL-035 strictDONE `ace41056887ec08616a5c67f026880e1b0d8e81a`; originalC017 `478f438804275f3e0c23e6f36bfd26e34aa343bf` preserved. First owner action: one connection on accepted firmware in normal gameplay mode, model/backend/host/profile/startup/RGB baseline and anomalies. No firmware or Config change yet. Fresh Config/raw backup, safe byte-exact restoration and actual static/SHIFT/XWAVE profiles/expectations precede any mutation; ordinary menu selection persists Config after intentional disconnect/reboot. Required seven physical rows pending; no inherited014 acceptance. All98otherorders and exact014/020PASS unchanged. Persistent H3 reaches hardwarewait and releases solecanonical authority only after reviewed pending publication/liveverification. Existing ownerchain resumes only after actual exact humanHEP PASS. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.
 
@@ -697,7 +697,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-017",
       "title": "Null RGB ordering",
-      "status": "HARDWARE_VALIDATED",
+      "status": "DONE",
       "branch": "codex/gp-config-017-built-f",
       "objective": "Source and GP-CONFIG-016 support moving only the existing null branch before speed access while preserving time bookkeeping/non-null behavior; no fallback choice.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -736,7 +736,24 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+        "reviewed_implementation_sha": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+        "prior_canonical_integration_sha": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+        "reviewed_changed_paths": [
+          "HAL/pico/include/comms/NeoPixelBackend.hpp",
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json"
+        ],
+        "independent_review_provenance": "Fresh independent Sol val034_review APPROVED exact integration a9232dd71dbaac888d343227bbdc8f2d66bcb20a and tree ded7c519f96650c3f63cbabd44b59c961dc6e8b7; report SHA256 d59f6afb879ad9382136d7d7819ad8fd80e695efa05019641a84e10907248e0d. Independent native accepted transition, source/index, exact236critical/testedF, genuineR-E-Jcatalog, immutablehardwaretuple/protocol/evidence and freshUF2hash verified. Separate strict completion independently reviewed before publication.",
+        "validation_provenance": "Revision3 candidate-critical/affected regression basis: native017 ACCEPTED_TRANSITION and critical236 exact testedF5994f1657e45e0883c6c75468a19be7e3b49a72c. Actual initial20focused results19PASS/1navigationFAIL with nativeMATCH; navigation sentence restored in solechild and7fresh metadata checksPASS/nativeMATCH. Cumulative unchanged19PASS plus7freshmetadata, not20freshfinalchecks. Allfive full protected consumers,010semantics,original016historicalreplay,current017dualtimeABI/36negatives,014capacity,019selection,KBDpipeline and hardwarecorrespondence execute. InitialnavigationFAIL retained. Preserved testedUF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672bytes freshly rehashed; owner HEP GP_CONFIG_017_HW_V1 sevenrowPASS and emptygaps unchanged, About5994f165/glyph_mk6, Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byteexact immediate/postreboot. HistoricalaggregateFAIL/TIMEOUT, synthetic034/cacheapplicabilityFAIL and nativeUNAVAILABLE retained; no fullaggregatePASS/rebuild/retest. DirectSwitchdynamic and forcednullinvalidRGB NOT_TESTED; physicalnullUNKNOWN/rootcauseUNPROVEN/NunchukNOT_TESTED."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -24526,3 +24543,607 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config017-hardware-handoff:end -->
+
+
+## GP-CONFIG-017 exact tested integration and strict completion
+
+<!-- gp-config017-completion:start -->
+```json
+{
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-017",
+  "implementation_base": "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+  "reviewed_live_integration": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+  "source_merge": "3fb0af34ba945641ba8c8be432ea4533f3abee2a",
+  "critical236_exact_tested_F": true,
+  "other98_orders_unchanged": true,
+  "independent_review_sha256": "d59f6afb879ad9382136d7d7819ad8fd80e695efa05019641a84e10907248e0d",
+  "independent_review": {
+    "reviewed_sha": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+    "reviewed_tree": "ded7c519f96650c3f63cbabd44b59c961dc6e8b7",
+    "verdict": "APPROVED",
+    "blocking_findings": [],
+    "reviewer": {
+      "agent": "/root/val034_review",
+      "model": "gpt-6.1-sol",
+      "owner_model_eligibility": "Confirmed",
+      "role": "Fresh independent postimplementation tested-source integration review"
+    },
+    "scope": "Exact C017 hardware-tested source integration and native accepted catalog/correspondence at I2 only. Strict completion and future C021 activation/implementation are separate steps. No new physical execution, source change, build, replay or hardware adjudication by this reviewer.",
+    "graph": {
+      "source_free_E": "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+      "real_source_merge_J": "3fb0af34ba945641ba8c8be432ea4533f3abee2a",
+      "J_parents": [
+        "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+        "5994f1657e45e0883c6c75468a19be7e3b49a72c"
+      ],
+      "initial_I": "158c74c15b23a394bb9c80337c274d0e032cdea5",
+      "initial_I_parent": "3fb0af34ba945641ba8c8be432ea4533f3abee2a",
+      "final_I_parent": "158c74c15b23a394bb9c80337c274d0e032cdea5",
+      "earliest_review_R": "8d4f7b9d2fd1ef8b3cb7fc1a324bf7e1cc7f7461",
+      "built_F": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+      "F_parent_M": "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+      "F_tree": "0404687bb795e78f0f607fbad865369578615cff",
+      "original_C": "478f438804275f3e0c23e6f36bfd26e34aa343bf"
+    },
+    "source_and_history": {
+      "native_authenticate": "Reviewer independently PASS ACCEPTED_TRANSITION at initial I and final I2",
+      "tracked_HEAD_index_live": "Unchanged native clean candidate proof independently PASS at both heads; final critical236 exact tested F/C",
+      "production_delta": "E\u2192J changes only NeoPixelBackend.hpp exact tested blob4724544d5989fdf403c5e6e0accab721371bc9d3/SHA71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b. Existing null block remains byte-exact; speed calculation moves below it. Nonnull time/static/SHIFT/XWAVE behavior preserved.",
+      "total_E_to_I2": "Six paths only: one HAL source, accepted017 catalog, four current docs. Final child adds only one historical/current runway navigation sentence; all other bytes unchanged from initial I.",
+      "E_source_free": "E critical236 exact B017/accepted014; no originalC017/F ancestor, no017acceptedcatalog.",
+      "catalog": "Exact native035 tuple pins originalC/F/M/tree, earliestR, immutableE and genuine mergeJ; no self-authored evidence substitution or reseal.",
+      "queue": "Complete99-item/root queue payload exact E; all98 other objects unchanged. C017 remains HARDWARE_VALIDATED/PASS, true dependency and empty gaps; no strictDONE claim.",
+      "immutable_metadata": "Protocol/evidence/result bytes and modes exact E\u2192J\u2192initialI\u2192I2; accepted014/020 source/evidence/catalog preserved by native predecessor/history proof. Historical005/010/011/012/016 artifacts/checkers and KBD/019 source authority remain unchanged because finite six-path delta excludes them; no claim all historical suites freshly reran."
+    },
+    "hardware_and_owner_authority": {
+      "owner_complete": "Actual userMessage01a115ba-efdc-78d1-ab8d-d00b9e49a9c0 independently retrieved from daemon; exact tuple and HEP\u2192integration/DONE\u2192021 direction verified.",
+      "newer_proceed": "Actual userMessage01a1164b-63f2-70f3-a873-e2e36a0177b4 independently retrieved; newer than earlier pause.",
+      "HEP": "Separate independent final review dae033608ba3a49a63162f754a0c4a77913fa04bab3790fbd9ec9e66fca88027 approves exact source-free E; all seven required rows PASS, anomalies/gaps empty. Seven named HEP report pins independently match actual files.",
+      "owner_attachment": "Complete attachment SHA5581559a7f4a7def12c41532518a00f5a7a64f5b5f427b1b51d4ef77c304c709 independently byte-matched verbatim in Git E result. Human dynamic PARTIAL retained.",
+      "dynamic_applicability": "Actual SHIFT/XWAVE Mac/XInput RGB and RF10/A observations satisfy unchanged original protocol ordinary supported USB requirement; profiles exclude GC. Ultimate/X1 actual GC/Switch/WUP028 and Mac/XInput observed. No binding direct-native-Switch dynamic requirement exists; direct native Switch dynamic remains NOT_TESTED. No inherited014 hardware acceptance or mini-screen-only output proof.",
+      "restoration": "Independent HEP confirms original4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 immediate and postreboot byte equality, temporary4875/246704f87a1da502533ca616b723f88c4162b86592234be424cc978ad9044c62 exact. Existing source-derived capacity/reference/roundtrip proofs reviewed by HEP.",
+      "forced_null_invalid_RGB": "NOT_TESTED",
+      "physical_null_reachability": "UNKNOWN",
+      "root_cause": "UNPROVEN",
+      "Nunchuk": "NOT_TESTED"
+    },
+    "artifact_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
+    "artifact_size": 796672,
+    "artifact_custody": "Reviewer independently rehashed primary owner content-addressed UF2; regular nonsymlink0444/796672, exact e681 digest. No frozen build environment access, rebuild, amendment or artifact substitution.",
+    "protocol_sha256": "05645e32a49b83656da0b32ff12e61956e51fa229ff8490d3e41787624570bcf",
+    "actual_validation": {
+      "initial_I": "20 actual focused commands,19 PASS/one docs-navigation FAIL; native window MATCH. Original FAIL retained.",
+      "final_I2": "Seven affected metadata commands fresh PASS/native window MATCH. Independent full native accepted source/history/correspondence and clean HEAD/index/live PASS.",
+      "source_and_host_basis": "Initial source/host outcomes carried over the independent byte-exact one-sentence-only child. Includes all five full protected bodies,010semantic correspondence, original016 full native replay, repaired017 current full host proof, current014 dualABI,019 and KBD, new035 transition unit and hardware correspondence suite. No claim20 freshly executed I2 commands.",
+      "full_aggregate": "No new aggregate run or PASS claim; production120/checker and300/aggregate limits unchanged."
+    },
+    "retained_Tier3_debt": [
+      "Original034 broad synthetic fixture admission FAIL before phase assertions; native014 predecessor/current proof preserved.",
+      "Original actual full aggregates FAIL/AGGREGATE_TIMEOUT and native final proof UNAVAILABLE; separate outer fingerprint MATCH only in its measured window.",
+      "Historical extra prebuild ignored-cache classification FAIL; exact tracked/source/cache/dependency proof supplies scoped build basis.",
+      "Historical decoder CLI argument and immutable739c identity failures retained; unchanged native21-role API proof PASS with exact F bound separately.",
+      "Historical postbuild full-native fingerprint UNAVAILABLE at ignored embedded dependency directory; no full postbuild MATCH or reproducibility claim."
+    ],
+    "live_truth": {
+      "ordinary_minimal_read": "DNS failure, inconclusive",
+      "identical_permitted_network_retry": "SUCCESS",
+      "canonical": "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+      "frozen_feature": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+      "temporal_scope": "Independently observed before publication; root sole publisher."
+    },
+    "report_provenance": [
+      {
+        "path": "/private/tmp/glyph-config017-resume/integration-independent-native.json",
+        "sha256": "0db022b8a215528a3bbbf20af51884ed8732cdacd0aca49c43106348fa94f4ba"
+      },
+      {
+        "path": "/private/tmp/glyph-config017-resume/integration-final-independent-native.json",
+        "sha256": "65e2183b7f01e47c9655cff11081137fa08dc552b0dd32be660fd3e1f0476df2"
+      },
+      {
+        "path": "/private/tmp/glyph-config017-resume/integration-review-owner-readback.json",
+        "sha256": "b440284efbcdc5d24769418e41743a5a8dc09e2c921eb355ab4ef2c424cfac18"
+      },
+      {
+        "path": "/private/tmp/glyph-config017-resume/integration-native.json",
+        "sha256": "b36c6b0563b9d45ac0aac1977777c10c1a3d6aca9edd7254c033104eb78e6209"
+      },
+      {
+        "path": "/private/tmp/glyph-config017-resume/focused-validation.json",
+        "sha256": "a9f68910176458e3826e07753c73b832c3f7d84b56552295113a66cf5ec6202f"
+      },
+      {
+        "path": "/private/tmp/glyph-config017-resume/repair-validation.json",
+        "sha256": "68a14c08dc26c8a7f2ebf71f2a7f55cf464bba8c664144f51dbf702fca8581e0"
+      },
+      {
+        "path": "/private/tmp/glyph-config017-resume/integration-preparation.json",
+        "sha256": "a7af2ebad522a8c140cf0b77e368d286d9e5f006d80a41eeeab4f6fd0907f420"
+      },
+      {
+        "path": "/private/tmp/glyph-c017-hep/reviewer-final.json",
+        "sha256": "dae033608ba3a49a63162f754a0c4a77913fa04bab3790fbd9ec9e66fca88027"
+      },
+      {
+        "path": "/private/tmp/glyph-c017-hep/worker-result.json",
+        "sha256": "1df414d8ee2972f3ac7cfc3a3e6b8e3f93a5d1e90c3b41e8b7946f07f988d816"
+      }
+    ],
+    "reserved_hardware_worktree_access": false,
+    "frozen_F_build_environment_access": false,
+    "reviewer_repository_mutations_builds_device_actions": false,
+    "created_utc": "2026-10-07T12:48:40.278137+00:00"
+  },
+  "validation_basis": {
+    "head": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+    "basis": "19initial unchanged PASS and7 fresh metadata PASS; originalnavFAIL retained",
+    "fullnative": "MATCH bothactualruns",
+    "native_final": {
+      "phase": "ACCEPTED_TRANSITION",
+      "contract": "c017_neopixel",
+      "candidate": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+      "base": "a6b7750e271324972c51915563fe0dc22f941f95",
+      "predecessor_phase": "ACCEPTED_TRANSITION",
+      "target": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+      "critical_paths": [
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "include/core/config_button_validation.hpp",
+        "src/core/config_button_validation.cpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "include/modes/CustomControllerMode.hpp",
+        "src/modes/CustomControllerMode.cpp"
+      ],
+      "accepted_metadata_paths": [
+        "docs/calibration/gp_config_020_hardware_result.md",
+        "docs/calibration/fixtures/gp_config_014_hardware_evidence.json",
+        "docs/calibration/gp_config_017_hardware_result.md",
+        "docs/calibration/fixtures/gp_config_017_hardware_evidence.json",
+        "docs/calibration/fixtures/gp_config_020_hardware_evidence.json",
+        "docs/calibration/gp_config_014_hardware_result.md",
+        "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+        "docs/agent_framework/GP_CONFIG_020_HARDWARE_PROTOCOL.md",
+        "docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md"
+      ],
+      "changed_paths": [
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/fixtures/gp_val035_c017_transition.json",
+        "docs/calibration/gp_config_017_hardware_result.md",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/gp_val035_accepted_transitions.json",
+        "tools/glyph_campaign_transition.py",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/neo_harness.cpp",
+        "tools/run_glyph_runtime_config_validation.py",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "tools/glyph_checker_context.py",
+        "HAL/pico/include/comms/NeoPixelBackend.hpp",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "tools/check_glyph_neopixel_historical_replay.py",
+        "docs/CURRENT_STATE.md",
+        "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+        "docs/AGENT_CONTEXT.md",
+        "tools/glyph_c014_campaign_transition.py",
+        "docs/calibration/fixtures/gp_config_017_hardware_evidence.json",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "docs/runtime_config/fixtures/gp_config_017_neopixel_repaired_current.json",
+        "tools/test_glyph_c017_campaign_transition.py",
+        "docs/ROADMAP.md",
+        "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h",
+        "docs/runtime_config/gp_config_017_neopixel_repaired_current.md",
+        "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+        "tools/glyph_c017_campaign_transition.py",
+        "tools/glyph_hardware_correspondence.py",
+        "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+        "tools/check_glyph_gp_config019_usb_name_selection.py"
+      ],
+      "object_roots": [
+        "47c087533db46cbde9d78108a6c9bdff34c33bcd",
+        "9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0",
+        "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+        "76cb953cd6bfe5398db11669f3d195175361700c",
+        "d2f78cd3a3fa38c60d04dab54236ee630ead379e",
+        "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+        "3138ade526cabde23a0abedcb94acae8512579d1",
+        "4fb7c1e9507547774ff9f55cd7788355648d5d1e",
+        "0eb7f23b9f6b765e717d5e7455faa615695f0ebb",
+        "c1a9f0fb9e1d3461d813b31d1643344e3e34d223",
+        "93b3c9ee8f702886f731714281ce143428724a17",
+        "41ba14202450860340e07bea161f7910c3af922c",
+        "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+        "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+        "b55ee1301733700b7187bd650ec33f09ca3db1c8",
+        "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+        "85c1ec43abffb737d080f19190b393c591b862ef",
+        "a8e249eb210b7cd1e010e27dee8f4c61f8fcb537",
+        "3194fd86c5391f19e598acae7879d6898e3e2072",
+        "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+        "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+        "8d4f7b9d2fd1ef8b3cb7fc1a324bf7e1cc7f7461",
+        "fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d",
+        "0a5dd751c391198140ed146853a69fc825d902c7",
+        "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+        "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+        "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+        "0efef62a9d4a6254466325eeb0e33184a4848fab",
+        "d9ad6132ca0912398839673cc0da24e54a924210",
+        "bce59d34bcb6b4158a5f755293f20102c7a0abb9",
+        "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+        "3fb0af34ba945641ba8c8be432ea4533f3abee2a",
+        "3369819a34f82d579e21adff125a25de854f1b9b",
+        "12cad41ee8157010c512e4772ff62ffdb68771e6",
+        "38017600deb243b5e281edec6d0d378b997d9e40",
+        "e5c455637056ac535347c1176dd41c9a9d84d85a",
+        "60614dae8150338160b3440aef6b275bf073fecf",
+        "d9d1e72bb18a5e1dbdf05c829a1d11362893933f",
+        "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+        "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+        "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+        "de36d24422a67e8be7992217856c76e8420a71f6",
+        "793c04c333e86c7656b7c3142bbab8a7c4a78b08",
+        "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+        "7911692afed3e68becefd8e3c90413d4e230ea82",
+        "6b36d99b0624047558ed8f9ede83dcaee78e72a9",
+        "49528e32849069e87f2729c24be35a21b002b6df",
+        "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+        "d786c244183343f89287a040055b7eaeae1e41f3",
+        "9ce55e71eff2be6fee366b52434042985de263e6",
+        "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+        "328c6a1bfb09eb035c2065d0de080283307f34d6",
+        "a6b7750e271324972c51915563fe0dc22f941f95",
+        "6a10c02909ba27136a427c0360969770988a4684",
+        "6eb288e61a0d148530474eef12bd0aa3243e8526",
+        "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+        "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+        "6cb59e97ddfdb96830432923ac588a76383153b7",
+        "a3664be5354ec4253122eb2e738e70e5dfdb9ccc"
+      ],
+      "source_candidates": {
+        "src/core/config_button_validation.cpp": "3138ade526cabde23a0abedcb94acae8512579d1",
+        "include/core/config_button_validation.hpp": "3138ade526cabde23a0abedcb94acae8512579d1",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp": "3138ade526cabde23a0abedcb94acae8512579d1",
+        "include/modes/CustomControllerMode.hpp": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+        "src/modes/CustomControllerMode.cpp": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+        "HAL/pico/include/comms/NeoPixelBackend.hpp": "478f438804275f3e0c23e6f36bfd26e34aa343bf"
+      },
+      "host_overlay_paths": [
+        "tools/check_glyph_gp_config014_modifier_capacity.py",
+        "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
+        "tools/check_glyph_custom_modifier_cache_characterization.py",
+        "tools/check_glyph_gp_config012_button_mask_characterization.py"
+      ],
+      "kbd_host_paths": [
+        "tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp",
+        "tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp",
+        "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
+        "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+        "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+      ],
+      "config019_host_paths": [
+        "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
+        "tools/check_glyph_gp_config019_usb_name_selection.py",
+        "tools/fixtures/gp_config019_usb_name_selection/main.cpp",
+        "tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp",
+        "docs/calibration/gp_config_019_usb_name_selection_characterization.md"
+      ],
+      "evidence_commit": "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+      "critical236_exact_F": true
+    },
+    "initial_report_sha256": "a9f68910176458e3826e07753c73b832c3f7d84b56552295113a66cf5ec6202f",
+    "repair_report_sha256": "68a14c08dc26c8a7f2ebf71f2a7f55cf464bba8c664144f51dbf702fca8581e0",
+    "initial_report": {
+      "kind": "FOCUSED_ACTUAL_C017_INTEGRATION",
+      "head": "158c74c15b23a394bb9c80337c274d0e032cdea5",
+      "results": [
+        {
+          "command": [
+            "python3",
+            "tools/test_glyph_c017_campaign_transition.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 22.499,
+          "log": "/private/tmp/glyph-config017-resume/focused-01-test_glyph_c017_campaign_transition.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 13.267,
+          "log": "/private/tmp/glyph-config017-resume/focused-02-check_glyph_config_010_integration_semantic_correspondence.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_neopixel_historical_replay.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 29.192,
+          "log": "/private/tmp/glyph-config017-resume/focused-03-check_glyph_neopixel_historical_replay.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_runtime_config_validation_health.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 0.105,
+          "log": "/private/tmp/glyph-config017-resume/focused-04-check_glyph_runtime_config_validation_health.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_generated_source_owned_generator_contract.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 18.069,
+          "log": "/private/tmp/glyph-config017-resume/focused-05-check_glyph_generated_source_owned_generator_contract.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 29.436,
+          "log": "/private/tmp/glyph-config017-resume/focused-06-check_glyph_generated_source_owned_baseline_artifact.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_generated_source_owned_artifact_install.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 15.021,
+          "log": "/private/tmp/glyph-config017-resume/focused-07-check_glyph_generated_source_owned_artifact_install.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 25.369,
+          "log": "/private/tmp/glyph-config017-resume/focused-08-check_glyph_coordinate_native_runtime_profile_contract.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_docs_navigation.py"
+          ],
+          "status": "FAIL",
+          "exit_code": 1,
+          "duration_seconds": 0.128,
+          "log": "/private/tmp/glyph-config017-resume/focused-09-check_glyph_docs_navigation.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_docs_agent_surface.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 13.515,
+          "log": "/private/tmp/glyph-config017-resume/focused-10-check_glyph_docs_agent_surface.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_agent_framework_docs.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 16.814,
+          "log": "/private/tmp/glyph-config017-resume/focused-11-check_glyph_agent_framework_docs.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_agentic_sequence_protocol.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 0.069,
+          "log": "/private/tmp/glyph-config017-resume/focused-12-check_glyph_agentic_sequence_protocol.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_neopixel_historical_replay.py",
+            "--repaired-current"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 51.032,
+          "log": "/private/tmp/glyph-config017-resume/focused-13-check_glyph_neopixel_historical_replay.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_checker_census.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 1.461,
+          "log": "/private/tmp/glyph-config017-resume/focused-14-check_glyph_checker_census.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/test_glyph_docs_agent_surface_integration.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 7.483,
+          "log": "/private/tmp/glyph-config017-resume/focused-15-test_glyph_docs_agent_surface_integration.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/test_glyph_hardware_correspondence.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 39.847,
+          "log": "/private/tmp/glyph-config017-resume/focused-16-test_glyph_hardware_correspondence.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_gp_config_017_neopixel_repaired_current.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 21.386,
+          "log": "/private/tmp/glyph-config017-resume/focused-17-check_glyph_gp_config_017_neopixel_repaired_current.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_gp_config014_modifier_capacity.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 81.127,
+          "log": "/private/tmp/glyph-config017-resume/focused-18-check_glyph_gp_config014_modifier_capacity.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_gp_config019_usb_name_selection.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 73.334,
+          "log": "/private/tmp/glyph-config017-resume/focused-19-check_glyph_gp_config019_usb_name_selection.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 10.965,
+          "log": "/private/tmp/glyph-config017-resume/focused-20-check_glyph_gp_kbd_001_keyboard_pipeline.log"
+        }
+      ],
+      "full_native_preservation": {
+        "before": "3df41103e1f9c11c2c1d69d3f07661e508d1193caae466385ffdc56738dcf297",
+        "after": "3df41103e1f9c11c2c1d69d3f07661e508d1193caae466385ffdc56738dcf297",
+        "status": "MATCH"
+      },
+      "full_aggregate_run": false,
+      "production_limits_unchanged": true,
+      "status": "FAIL"
+    },
+    "repair_report": {
+      "kind": "FOCUSED_ACTUAL_C017_INTEGRATION",
+      "head": "a9232dd71dbaac888d343227bbdc8f2d66bcb20a",
+      "results": [
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_checker_census.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 1.434,
+          "log": "/private/tmp/glyph-config017-resume/repair-01-check_glyph_checker_census.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_runtime_config_validation_health.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 0.076,
+          "log": "/private/tmp/glyph-config017-resume/repair-02-check_glyph_runtime_config_validation_health.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_agent_framework_docs.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 16.113,
+          "log": "/private/tmp/glyph-config017-resume/repair-03-check_glyph_agent_framework_docs.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_agentic_sequence_protocol.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 0.067,
+          "log": "/private/tmp/glyph-config017-resume/repair-04-check_glyph_agentic_sequence_protocol.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_docs_navigation.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 0.059,
+          "log": "/private/tmp/glyph-config017-resume/repair-05-check_glyph_docs_navigation.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_docs_agent_surface.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 13.13,
+          "log": "/private/tmp/glyph-config017-resume/repair-06-check_glyph_docs_agent_surface.log"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/test_glyph_docs_agent_surface_integration.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "duration_seconds": 6.834,
+          "log": "/private/tmp/glyph-config017-resume/repair-07-test_glyph_docs_agent_surface_integration.log"
+        }
+      ],
+      "full_native_preservation": {
+        "before": "fd33d65ade691b36160e76a472660f771c3b019bc650b87d7a68d4e849e07d00",
+        "after": "fd33d65ade691b36160e76a472660f771c3b019bc650b87d7a68d4e849e07d00",
+        "status": "MATCH"
+      },
+      "full_aggregate_run": false,
+      "production_limits_unchanged": true,
+      "status": "PASS"
+    },
+    "full_aggregate_pass": false,
+    "hardware": "Exact owner HEP sevenrowPASS, not synthetic",
+    "source_build_tuple": "Preserved exactF5994/e681/796672; no rebuild or retest"
+  },
+  "prior_summaries": {
+    "docs/project/ACTIVE_AGENT_QUEUE.md": "GP-CONFIG-017 exact tested source integration follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b` through genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a`. All 236 critical source/build entries match tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`; only the NeoPixel speed calculation moves after the existing null guard. The native035 accepted catalog retains original C, committed-before-build F/M/tree, earliest reviewed R and exact accepted E. Preserved UF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5, 796672 bytes, was freshly rehashed. Owner-reported GP_CONFIG_017_HW_V1 seven-row PASS and empty gaps remain exact: static/SHIFT/XWAVE RGB and actual Mac/XInput RF10 A, GC/Switch/WUP-028 Ultimate/X1, clean releases, mode changes/reconnect/reboot, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byte-exact immediate/postreboot restoration. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. Historical aggregate FAIL/TIMEOUT and synthetic/cache applicability failures remain recorded; no full aggregate PASS, rebuild or physical retest is claimed. This dedicated integration snapshot still requires actual focused Revision3 checks, fresh independent review and live publication before separate strict DONE. All98 other orders and accepted014/020 hardware evidence are unchanged. The frozen owner test environment is untouched; the same persistent H3 executor retains sole publication authority for 017DONE then the authorized021/038 chain.",
+    "docs/AGENT_CONTEXT.md": "GP-CONFIG-017 exact tested source integration follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b` through genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a`. All 236 critical source/build entries match tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`; only the NeoPixel speed calculation moves after the existing null guard. The native035 accepted catalog retains original C, committed-before-build F/M/tree, earliest reviewed R and exact accepted E. Preserved UF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5, 796672 bytes, was freshly rehashed. Owner-reported GP_CONFIG_017_HW_V1 seven-row PASS and empty gaps remain exact: static/SHIFT/XWAVE RGB and actual Mac/XInput RF10 A, GC/Switch/WUP-028 Ultimate/X1, clean releases, mode changes/reconnect/reboot, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byte-exact immediate/postreboot restoration. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. Historical aggregate FAIL/TIMEOUT and synthetic/cache applicability failures remain recorded; no full aggregate PASS, rebuild or physical retest is claimed. This dedicated integration snapshot still requires actual focused Revision3 checks, fresh independent review and live publication before separate strict DONE. All98 other orders and accepted014/020 hardware evidence are unchanged. The frozen owner test environment is untouched; the same persistent H3 executor retains sole publication authority for 017DONE then the authorized021/038 chain.",
+    "prior_campaign_summary": "GP-CONFIG-017 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `5994f1657e45e0883c6c75468a19be7e3b49a72c`, sole composition parent `a7b8758a4d9d353fcfeb0592cc155b4f50f4f358`, tree `0404687bb795e78f0f607fbad865369578615cff`. Mk6 build, resolved21-role decoder closure and owner-held UF2 custody PASS. Preserved UF2 SHA-256 `e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5`, 796672 bytes, locator `local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2`. All15 actual focused checks PASS/nativeMATCH; independent source witnesses verify all1430tracked modes/index/live,236critical==C017 and99queue==strict035DONE. Exact runtime/cache source pins,19prebuild decoder roles and native tracked source/index proof remain unchanged through build/custody. Fresh independent review approves exact source/build/custody/correspondence and conditional staged GP_CONFIG_017_HW_V1. Actual native full aggregate FAIL/AGGREGATE_TIMEOUT/nativeUNAVAILABLE retained with13 outcomes; outer fullnativeMATCH,300/120 unchanged. Unchanged034 synthetic applicability FAIL remains separate honestTier3 debt; additional root prebuild cache-classification FAIL stopped before compilation and remains retained, with exact copied-cache pins/native build integrity and actual decoder proof supplying the final build basis. No fullaggregatePASS or post-cache fullcampaignauthenticatePASS. This canonical handoff has five source-free docs/control-plane paths; candidateHAL remains unmerged. GP-VAL-035 strictDONE `ace41056887ec08616a5c67f026880e1b0d8e81a`; originalC017 `478f438804275f3e0c23e6f36bfd26e34aa343bf` preserved. First owner action: one connection on accepted firmware in normal gameplay mode, model/backend/host/profile/startup/RGB baseline and anomalies. No firmware or Config change yet. Fresh Config/raw backup, safe byte-exact restoration and actual static/SHIFT/XWAVE profiles/expectations precede any mutation; ordinary menu selection persists Config after intentional disconnect/reboot. Required seven physical rows pending; no inherited014 acceptance. All98otherorders and exact014/020PASS unchanged. Persistent H3 reaches hardwarewait and releases solecanonical authority only after reviewed pending publication/liveverification. Existing ownerchain resumes only after actual exact humanHEP PASS. NunchukNOT_TESTED; rootcauseUNPROVEN; physicalnullreachabilityUNKNOWN.",
+    "docs/CURRENT_STATE.md": "GP-CONFIG-017 exact tested source integration follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b` through genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a`. All 236 critical source/build entries match tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`; only the NeoPixel speed calculation moves after the existing null guard. The native035 accepted catalog retains original C, committed-before-build F/M/tree, earliest reviewed R and exact accepted E. Preserved UF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5, 796672 bytes, was freshly rehashed. Owner-reported GP_CONFIG_017_HW_V1 seven-row PASS and empty gaps remain exact: static/SHIFT/XWAVE RGB and actual Mac/XInput RF10 A, GC/Switch/WUP-028 Ultimate/X1, clean releases, mode changes/reconnect/reboot, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byte-exact immediate/postreboot restoration. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. Historical aggregate FAIL/TIMEOUT and synthetic/cache applicability failures remain recorded; no full aggregate PASS, rebuild or physical retest is claimed. This dedicated integration snapshot still requires actual focused Revision3 checks, fresh independent review and live publication before separate strict DONE. All98 other orders and accepted014/020 hardware evidence are unchanged. The frozen owner test environment is untouched; the same persistent H3 executor retains sole publication authority for 017DONE then the authorized021/038 chain. The initial 2026-10-02 adoption recorded RUNWAY_OK; the current marker records PLANNING_REQUIRED.",
+    "docs/ROADMAP.md": "GP-CONFIG-017 exact tested source integration follows source-free HEP E `f886864c44fd1047e670ae3ff35ebc8b1775b43b` through genuine source merge `3fb0af34ba945641ba8c8be432ea4533f3abee2a`. All 236 critical source/build entries match tested F `5994f1657e45e0883c6c75468a19be7e3b49a72c`; only the NeoPixel speed calculation moves after the existing null guard. The native035 accepted catalog retains original C, committed-before-build F/M/tree, earliest reviewed R and exact accepted E. Preserved UF2 e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5, 796672 bytes, was freshly rehashed. Owner-reported GP_CONFIG_017_HW_V1 seven-row PASS and empty gaps remain exact: static/SHIFT/XWAVE RGB and actual Mac/XInput RF10 A, GC/Switch/WUP-028 Ultimate/X1, clean releases, mode changes/reconnect/reboot, and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 byte-exact immediate/postreboot restoration. Direct native Switch dynamic RGB and forced null/invalid RGB remain NOT_TESTED; physical null reachability UNKNOWN, root cause UNPROVEN, Nunchuk NOT_TESTED. Historical aggregate FAIL/TIMEOUT and synthetic/cache applicability failures remain recorded; no full aggregate PASS, rebuild or physical retest is claimed. This dedicated integration snapshot still requires actual focused Revision3 checks, fresh independent review and live publication before separate strict DONE. All98 other orders and accepted014/020 hardware evidence are unchanged. The frozen owner test environment is untouched; the same persistent H3 executor retains sole publication authority for 017DONE then the authorized021/038 chain."
+  },
+  "firmware_builds": 0,
+  "physical_retests": 0,
+  "owner_test_environment_access": "NONE",
+  "next_step": "SameH3 existing021/038 activation assessment; physical stimulus/recovery route must be established without newwriter or destructivefault; no newfullchat/Planner/Curator"
+}
+```
+<!-- gp-config017-completion:end -->
