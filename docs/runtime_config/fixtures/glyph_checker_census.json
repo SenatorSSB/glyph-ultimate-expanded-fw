@@ -1029,7 +1029,7 @@
       },
       "checker_id": "c021_proof_replay",
       "defines_main": true,
-      "file_size_bytes": 26968,
+      "file_size_bytes": 26985,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate/ENGINE",
@@ -1082,7 +1082,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "45c1fe911100b73b1fb4dd91b1bb28bad5547d2139c25606cc4aee768990ca53",
+      "sha256": "f171268548848d7731bb2f2678aff321d919719419ae5087f04ee9abe93eb126",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

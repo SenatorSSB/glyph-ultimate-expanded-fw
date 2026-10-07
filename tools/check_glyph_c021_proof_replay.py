@@ -321,7 +321,7 @@ def main():
                 if args.consumer:
                     historical_dir=directory/'historical';historical_dir.mkdir()
                     def current_native035():
-                        command=[sys.executable,'-B','-u',str(ROOT/'tools/test_glyph_c021_campaign_transition.py')]
+                        command=[sys.executable,'-B','-u',str(ROOT/'tools/test_glyph_c021_campaign_transition.py'),'--current-only']
                         native=private_command(command,ROOT,dict(os.environ),directory,'current038')
                         require(native.returncode==0 and not native.stderr and 'PASS' in native.stdout,
                                 'current038 direct native proof failed\n'+native.stdout+native.stderr)

@@ -4,6 +4,7 @@
 Disposable Git snapshots are synthetic validation inputs, never hardware evidence.
 """
 from __future__ import annotations
+import argparse
 import json
 import os
 from pathlib import Path
@@ -352,5 +353,24 @@ def main():
     return 0
 
 
+def current_admission_only():
+    """Separate035 current consequence; full noarg lifecycle lane stays mandatory."""
+    begun=time.monotonic();current=proof.authenticate(ROOT)
+    assert current['contract']=='c021_persisted_recovery'
+    assert current['predecessor_phase']=='ACCEPTED_TRANSITION'
+    assert current['phase'] in {'BASELINE','CANDIDATE_VALIDATION_ONLY','SOURCE_FREE_PROCESSOR','ACCEPTED_TRANSITION'}
+    assert {proof.C,proof.B,proof.READY} <= current['object_roots']
+    count=len(proof.critical_tree(ROOT,current['target']))
+    assert count==(236 if current['phase'] in {'BASELINE','SOURCE_FREE_PROCESSOR'} else 238)
+    print(json.dumps({'classification':'CURRENT_ADMISSION_ONLY_NOT_HARDWARE','status':'PASS',
+        'head':current['target'],'phase':current['phase'],'critical_input_count':count,
+        'full_noarg_synthetic_lifecycle_lane':'SEPARATE_REQUIRED_MANIFEST_ENTRY',
+        'elapsed_seconds':time.monotonic()-begun,'hardware_acceptance':'NOT_CLAIMED','target_build':'NOT_RUN'},indent=2))
+    return 0
+
+
 if __name__ == '__main__':
-    raise SystemExit(main())
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--current-only',action='store_true')
+    arguments=parser.parse_args()
+    raise SystemExit(current_admission_only() if arguments.current_only else main())

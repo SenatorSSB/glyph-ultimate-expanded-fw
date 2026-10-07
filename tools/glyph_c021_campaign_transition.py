@@ -383,7 +383,7 @@ ROOTS |= frozenset(('0da68bdab9bf0fed4ed595538bea9aba7d2f49f3', '1a4b9311c8f7ae6
 CONSUMER_FIXTURE = 'docs/runtime_config/fixtures/gp_val038_c021_consumer_replay.json'
 CONSUMER_FIXTURE_SHA256 = '6724b99d5bb66f086a91fc7676fc08aa6488015783bbc134deaf8a8776a6cf31'
 CONSUMER_WRAPPER = 'tools/check_glyph_c021_proof_replay.py'
-CONSUMER_WRAPPER_SHA256 = '45c1fe911100b73b1fb4dd91b1bb28bad5547d2139c25606cc4aee768990ca53'
+CONSUMER_WRAPPER_SHA256 = 'f171268548848d7731bb2f2678aff321d919719419ae5087f04ee9abe93eb126'
 
 
 def _consumer_contract(root: Path, head: str):
