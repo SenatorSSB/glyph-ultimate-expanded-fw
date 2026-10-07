@@ -174,26 +174,37 @@ def verify_historical_snapshot(root,value):
         raw=regular(root,path,0o644 if mode=='100644' else 0o755);require(blob(raw)==identity,'historical live bytes: '+path)
     require(git(root,'status','--porcelain','--untracked-files=all')==b'','historical snapshot dirty/untracked')
 
+def private_command(command,cwd,env,directory,label):
+    """Keep descendants in the unchanged runner's owned process group.
+
+    File-backed output permits bounded parent reaping on an inner timeout;
+    the native outer runner owns cleanup of every remaining descendant.
+    """
+    stdout_path=directory/(label+'.stdout.log');stderr_path=directory/(label+'.stderr.log')
+    with stdout_path.open('wb') as out,stderr_path.open('wb') as err:
+        child=subprocess.Popen(command,cwd=cwd,env=env,stdin=subprocess.DEVNULL,stdout=out,stderr=err)
+        timed_out=False
+        try:child.wait(timeout=100)
+        except subprocess.TimeoutExpired:
+            timed_out=True;child.kill();child.wait(timeout=2)
+    record={'command':command,'exit':'TIMEOUT100' if timed_out else child.returncode,
+            'stdout':stdout_path.read_text(errors='replace'),'stderr':stderr_path.read_text(errors='replace'),
+            'process_ownership':'INHERITED_NATIVE_WRAPPER_GROUP'}
+    (directory/(label+'.json')).write_text(json.dumps(record,indent=2)+'\n')
+    require(not timed_out,'private original/main TIMEOUT100 (retained FAIL): '+label+'\n'+record['stdout']+record['stderr'])
+    return subprocess.CompletedProcess(command,child.returncode,record['stdout'],record['stderr'])
+
 def run_historical(root,directory,value,consumer,proof):
     lane=value['consumer_lanes'][consumer];snapshot=directory/'historical-B'
     support=historical_snapshot(root,snapshot,value,proof['object_roots'])
     env=dict(os.environ)
     for key in ('GLYPH_CHECKER_BASE','GLYPH_CHECKER_EXPECTED_MERGE_BASE','GLYPH_HOST_MOUNT_FAIL','GLYPH_HOST_CONFIG_FAIL','GLYPH_HOST_RGB_CTOR_OFFSETS'):env.pop(key,None)
-    scratch=directory/'historical-tmp';scratch.mkdir();env.update(TMPDIR=str(scratch),PYTHONDONTWRITEBYTECODE='1',GLYPH_CHECKER_BASE=B,GLYPH_CHECKER_EXPECTED_MERGE_BASE=B)
+    scratch=directory/'historical-tmp';scratch.mkdir();env.update(TMPDIR=str(scratch),PYTHONDONTWRITEBYTECODE='1',PYTHONUNBUFFERED='1',GLYPH_CHECKER_BASE=B,GLYPH_CHECKER_EXPECTED_MERGE_BASE=B)
     runs=[]
     for index,command in enumerate(lane['commands']):
         actual=[sys.executable,'-B','-u',*command[1:]]
-        child=subprocess.Popen(actual,cwd=snapshot,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,start_new_session=True)
-        try:
-            stdout,stderr=child.communicate(timeout=100)
-        except subprocess.TimeoutExpired:
-            os.killpg(child.pid,signal.SIGKILL);stdout,stderr=child.communicate()
-            record={'command':actual,'exit':'TIMEOUT100','stdout':stdout,'stderr':stderr}
-            (directory/('historical-'+str(index)+'.json')).write_text(json.dumps(record,indent=2)+'\n')
-            raise ReplayError('original historical main TIMEOUT100 (retained FAIL): '+consumer+'\n'+stdout+stderr)
-        result=subprocess.CompletedProcess(actual,child.returncode,stdout,stderr)
+        result=private_command(actual,snapshot,env,directory,'historical-'+str(index))
         record={'command':actual,'exit':result.returncode,'stdout':result.stdout,'stderr':result.stderr};runs.append(record)
-        (directory/('historical-'+str(index)+'.json')).write_text(json.dumps(record,indent=2)+'\n')
         require(result.returncode==0 and 'PASS' in result.stdout,'original historical main failed (retained FAIL): '+consumer+'\n'+result.stdout+result.stderr)
     verify_historical_snapshot(snapshot,value)
     return {'classification':'ACTUAL_IMMUTABLE_ORIGINAL_MAIN_REPLAY','consumer':consumer,'support':support,'runs':runs}
@@ -307,21 +318,27 @@ def main():
                 bridges=run_current_consumers(ROOT,current_root/'current-consumers',value,current_root/'candidate',current_root/'host-output')
                 return evidence,bridges
             try:
-                if args.consumer=='transition035':
+                if args.consumer:
                     historical_dir=directory/'historical';historical_dir.mkdir()
-                    historical=run_historical(ROOT,historical_dir,value,args.consumer,before)
-                    command=[sys.executable,'-B',str(ROOT/'tools/test_glyph_c021_campaign_transition.py')]
-                    native=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=100)
-                    require(native.returncode==0 and not native.stderr and 'PASS' in native.stdout,'current038 direct native proof failed\n'+native.stdout+native.stderr)
-                    print(native.stdout,end='')
-                elif args.consumer:
-                    historical_dir=directory/'historical';historical_dir.mkdir()
+                    def current_native035():
+                        command=[sys.executable,'-B','-u',str(ROOT/'tools/test_glyph_c021_campaign_transition.py')]
+                        native=private_command(command,ROOT,dict(os.environ),directory,'current038')
+                        require(native.returncode==0 and not native.stderr and 'PASS' in native.stdout,
+                                'current038 direct native proof failed\n'+native.stdout+native.stderr)
+                        return native
                     # Independent roots, subprocesses, modules, objects and logs.
-                    # Both actual engines remain unchanged; neither result substitutes for the other.
                     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
                         old=executor.submit(run_historical,ROOT,historical_dir,value,args.consumer,before)
-                        new=executor.submit(current_positive)
-                        historical=old.result();result,current=new.result()
+                        new=executor.submit(current_native035 if args.consumer=='transition035' else current_positive)
+                        outcomes={};errors=[]
+                        for label,future in (('historical',old),('current',new)):
+                            try:outcomes[label]=future.result()
+                            except (ValueError,AssertionError,OSError,subprocess.SubprocessError) as error:
+                                errors.append(label+': '+str(error))
+                        require(not errors,'actual paired proof failure (both outcomes inspected)\n'+'\n'.join(errors))
+                    historical=outcomes['historical']
+                    if args.consumer=='transition035':print(outcomes['current'].stdout,end='')
+                    else:result,current=outcomes['current']
                 else:result,current=current_positive()
             finally:
                 require(authenticate(ROOT)==before,'actual root/phase changed during replay');verify_fixture(ROOT)

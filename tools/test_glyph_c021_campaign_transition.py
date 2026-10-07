@@ -67,6 +67,11 @@ def rewrite_queue(root, order, updates):
 
 def phase_controls(root, head, before, after, observations):
     """Build a disposable graph with synthetic-only rows; never build firmware."""
+    def phase(snapshot):
+        target=git(snapshot,'rev-parse','HEAD').decode().strip()
+        result=proof._lifecycle(snapshot,target,before,after)
+        print(json.dumps({'synthetic_phase':result['phase'],'head':target}),flush=True)
+        return result
     changed = sorted(git(root, 'diff', '--name-only', proof.READY, head).decode().splitlines())
     evidence = {
         'schema_name':'glyph_done_completion_evidence', 'schema_version':1,
@@ -78,7 +83,7 @@ def phase_controls(root, head, before, after, observations):
     rewrite_queue(root, 'GP-VAL-038', {'status':'DONE', 'done_evidence':evidence})
     commit(root, 'Synthetic-only strict governance completion')
     D = git(root, 'rev-parse', 'HEAD').decode().strip()
-    assert proof.authenticate(root)['phase'] == 'BASELINE'
+    assert phase(root)['phase'] == 'BASELINE'
     for path in proof.CRITICAL:
         mode, _, identity = after[path]
         file = root / path; file.parent.mkdir(parents=True, exist_ok=True)
@@ -89,7 +94,7 @@ def phase_controls(root, head, before, after, observations):
     F = git(root, 'commit-tree', tree, '-p', M, '-m', 'Synthetic-only empty F; no firmware built').decode().strip()
     git(root, 'update-ref', 'refs/heads/synthetic021F', F)
     git(root, 'checkout', '-q', 'synthetic021F')
-    assert proof.authenticate(root)['phase'] == 'CANDIDATE_VALIDATION_ONLY'
+    assert phase(root)['phase'] == 'CANDIDATE_VALIDATION_ONLY'
     git(root, 'checkout', '-q', 'synthetic038')
     digest = 'a' * 64
     locator = f'local_backups/hardware-artifacts/{F}/{digest}/firmware.uf2'
@@ -111,7 +116,7 @@ def phase_controls(root, head, before, after, observations):
     commit(root, 'Synthetic-only pending reviewed snapshot')
     R = git(root, 'rev-parse', 'HEAD').decode().strip()
     assert proof._reviewed_build(root, state, before, after, protocol) == (F,M,tree)
-    pending = proof.authenticate(root)
+    pending = phase(root)
     assert pending['phase'] == 'BASELINE' and {F,M} <= pending['object_roots']
     pending_pack=git(root,'-c','protocol.allow=never','pack-objects','--revs','--stdout',
                      data=('\n'.join(sorted(set(pending['object_roots'])|{R}))+'\n').encode())
@@ -131,24 +136,25 @@ def phase_controls(root, head, before, after, observations):
     rejected(lambda: proof._reviewed_build(root,state,before,after,protocol+b'\n- UF2 SHA-256: `'+digest.encode()+b'`\n'),
              'duplicate pending protocol identity', observations)
     file=root/proof.PROTOCOL; file.write_bytes(protocol+b'\n')
-    rejected(lambda: proof.authenticate(root), 'pending protocol live byte substitution', observations)
+    rejected(lambda: phase(root), 'pending protocol live byte substitution', observations)
     file.write_bytes(protocol)
     for flag, undo in (('--assume-unchanged','--no-assume-unchanged'),('--skip-worktree','--no-skip-worktree')):
         git(root,'update-index',flag,proof.PROTOCOL)
-        rejected(lambda: proof.authenticate(root),'pending protocol index '+flag,observations)
+        rejected(lambda: phase(root),'pending protocol index '+flag,observations)
         git(root,'update-index',undo,proof.PROTOCOL)
     # Mutate native queue snapshots and exercise the actual outer pending gate.
     for key,value in (('firmware_artifact_sha256','b'*64),
                        ('candidate_base_configurator_sha',proof.B)):
         rewrite_queue(root,'GP-CONFIG-021',{key:value})
         commit(root,'Synthetic invalid pending queue '+key)
-        rejected(lambda:proof.authenticate(root),'committed pending queue '+key,observations)
+        rejected(lambda:proof.authenticate(root) if key=='firmware_artifact_sha256' else phase(root),
+                 'committed pending queue '+key,observations)
         rewrite_queue(root,'GP-CONFIG-021',{key:state[key]})
         commit(root,'Restore synthetic pending queue '+key)
     state=rewrite_queue(root,'GP-CONFIG-021',{'status':'HARDWARE_TEST_REQUIRED',
         'hardware_evidence_dependency_satisfied':False})
     commit(root,'Synthetic native HARDWARE_TEST_REQUIRED snapshot')
-    assert proof.authenticate(root)['phase']=='BASELINE'
+    assert phase(root)['phase']=='BASELINE'
     # Native hardware schema receives only unmistakably synthetic observations.
     payload = json.loads(proof.raw_bytes(root,proof.B,proof.previous.EVIDENCE))
     synthetic_text = 'SYNTHETIC VALIDATION INPUT ONLY; no human test or physical acceptance.'
@@ -179,7 +185,7 @@ def phase_controls(root, head, before, after, observations):
     E=git(root,'rev-parse','HEAD').decode().strip()
     processor=proof._processor(root,E,state,before,after)
     assert processor['review_commit']==R and processor['evidence_commit']==E
-    assert proof.authenticate(root)['phase']=='SOURCE_FREE_PROCESSOR'
+    assert phase(root)['phase']=='SOURCE_FREE_PROCESSOR'
     # Earliest exact-tuple R must be regular, even if a child restores its mode.
     with tempfile.TemporaryDirectory(prefix='synthetic038-index-') as index_dir:
         environment=dict(os.environ,GIT_INDEX_FILE=str(Path(index_dir)/'index'))
@@ -204,18 +210,18 @@ def phase_controls(root, head, before, after, observations):
     (root/proof.TRANSITIONS).write_text(json.dumps({'schema_version':1,'accepted_transitions':[record]},indent=2)+'\n')
     commit(root,'Synthetic-only accepted transition catalog')
     catalog_head=git(root,'rev-parse','HEAD').decode().strip()
-    assert proof.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+    assert phase(root)['phase']=='ACCEPTED_TRANSITION'
     completion=dict(evidence,implementation_base_sha=E,reviewed_implementation_sha=I,
         prior_canonical_integration_sha=I,
         reviewed_changed_paths=sorted(proof.CRITICAL))
     rewrite_queue(root,'GP-CONFIG-021',{'status':'DONE','done_evidence':completion})
     commit(root,'Synthetic-only strict product completion')
-    assert proof.authenticate(root)['phase']=='ACCEPTED_TRANSITION'
+    assert phase(root)['phase']=='ACCEPTED_TRANSITION'
     # A later restoration cannot erase mutations of accepted immutable metadata.
     file=root/proof.PROTOCOL;file.write_bytes(protocol+b'\n')
     commit(root,'Synthetic accepted protocol mutation')
     file.write_bytes(protocol);commit(root,'Synthetic accepted protocol restoration')
-    rejected(lambda:proof.authenticate(root),'E descendant protocol mutate then restore',observations)
+    rejected(lambda:phase(root),'E descendant protocol mutate then restore',observations)
     return {'synthetic038DONE':D,'syntheticM':M,'syntheticF':F,'syntheticR':R,
             'syntheticE':E,'syntheticI':I,'syntheticCatalog':catalog_head,
             'physical_acceptance':'NOT_CLAIMED','firmware_build':'NOT_RUN'}

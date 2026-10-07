@@ -1029,7 +1029,7 @@
       },
       "checker_id": "c021_proof_replay",
       "defines_main": true,
-      "file_size_bytes": 25980,
+      "file_size_bytes": 26968,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate/ENGINE",
@@ -1047,7 +1047,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 338,
+      "line_count": 355,
       "parse_error": null,
       "path": "tools/check_glyph_c021_proof_replay.py",
       "potential_branch_identity_signals": [
@@ -1082,7 +1082,7 @@
       "runtime_config_relevance_signals": [
         "runtime_config_docs"
       ],
-      "sha256": "0ee09d93d077e28d42cbbbec4c5dea87728d99247857e22a78d1f185fb9d7843",
+      "sha256": "45c1fe911100b73b1fb4dd91b1bb28bad5547d2139c25606cc4aee768990ca53",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

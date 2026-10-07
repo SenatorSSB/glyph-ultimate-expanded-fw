@@ -383,7 +383,7 @@ ROOTS |= frozenset(('0da68bdab9bf0fed4ed595538bea9aba7d2f49f3', '1a4b9311c8f7ae6
 CONSUMER_FIXTURE = 'docs/runtime_config/fixtures/gp_val038_c021_consumer_replay.json'
 CONSUMER_FIXTURE_SHA256 = '6724b99d5bb66f086a91fc7676fc08aa6488015783bbc134deaf8a8776a6cf31'
 CONSUMER_WRAPPER = 'tools/check_glyph_c021_proof_replay.py'
-CONSUMER_WRAPPER_SHA256 = '0ee09d93d077e28d42cbbbec4c5dea87728d99247857e22a78d1f185fb9d7843'
+CONSUMER_WRAPPER_SHA256 = '45c1fe911100b73b1fb4dd91b1bb28bad5547d2139c25606cc4aee768990ca53'
 
 
 def _consumer_contract(root: Path, head: str):
@@ -515,6 +515,26 @@ def authenticate(root: Path):
         _stage_and_live(root, head, path, tree[path])
     _consumer_contract(root, head)
     _manifest_contract(root, head)
+    lifecycle = _lifecycle(root, head, before, after)
+    lifecycle['changed_paths'] = frozenset(delta | dirty)
+    lifecycle['object_roots'] |= predecessor['object_roots']
+    return lifecycle
+
+
+@original._proof_invocation
+def _lifecycle(root: Path, head: str, before: dict, after: dict):
+    """Native021 phase graph, after full admission in public authenticate.
+
+    Tests reuse this actual bounded phase gate on private synthetic graphs.
+    Production always verifies original predecessor/source/host custody first.
+    """
+    root = Path(root).resolve()
+    require(_git(root, 'rev-parse', 'HEAD').decode().strip() == head,
+            '021 phase graph HEAD substitution')
+    current = critical_tree(root, head)
+    require(current in (before, after), '021 phase source outside B/C critical trees')
+    _current_integrity(root, head, current)
+    tree = _tree(root, head)
     records = _catalog(current_bytes(root, TRANSITIONS))
     state = item(root, head, 'GP-CONFIG-021')
     pending_build = None
@@ -627,7 +647,7 @@ def authenticate(root: Path):
     metadata = frozenset(p for helper in (stateutil.predecessor, stateutil, previous)
                          for p in (helper.PROTOCOL, helper.EVIDENCE, helper.RESULT))
     if processor: metadata |= frozenset((PROTOCOL, EVIDENCE, RESULT))
-    roots = set(ROOTS) | set(predecessor['object_roots'])
+    roots = set(ROOTS)
     if pending_build: roots.update(pending_build[:2])
     if processor: roots |= {processor[k] for k in ('build', 'parent', 'review_commit', 'evidence_commit', 'evidence_root')}
     if records: roots.add(records[0]['integration'])
@@ -635,7 +655,7 @@ def authenticate(root: Path):
     return {'phase': phase, 'contract': 'c021_persisted_recovery', 'candidate': C, 'base': B,
             'predecessor_phase': 'ACCEPTED_TRANSITION', 'target': head,
             'critical_paths': protected, 'accepted_metadata_paths': metadata,
-            'changed_paths': frozenset(delta | dirty), 'object_roots': frozenset(roots),
+            'object_roots': frozenset(roots),
             'source_candidates': source_candidates, 'host_overlay_paths': CONSUMER_PATHS,
             'kbd_host_paths': stateutil.KBD_HOSTS, 'config019_host_paths': stateutil.CONFIG019_HOSTS,
             'evidence_commit': processor['evidence_commit'] if processor else None}
