@@ -1474,6 +1474,7 @@
         "tools/extract_glyph_identity_runtime_tables.py",
         "tools/glyph_c017_campaign_transition.py",
         "tools/glyph_c020_abi_repair_transition.py",
+        "tools/glyph_campaign_transition.py",
         "tools/glyph_checker_context.py"
       ],
       "load_bearing": true,
