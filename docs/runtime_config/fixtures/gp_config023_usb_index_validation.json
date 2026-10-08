@@ -1,0 +1,164 @@
+{
+  "schema_name": "glyph_gp_config023_usb_index_validation",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-023",
+  "candidate_base": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
+  "pinned_inputs": {
+    "gp_config013_base": "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+    "gp_config021_base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "gp_config022_base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "gp_config022_accepted_transition": "ec95a1437c428cefd86c2fc8c6220c50319522b9"
+  },
+  "production_sources": [
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae"
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    {
+      "path": "include/core/config_button_validation.hpp",
+      "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f"
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11"
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "sha256": "a45124019b1e24ee6b44a09b0c5d88e121113e1eb9e8ff1b7f6f8fb90ce4d0d4"
+    },
+    {
+      "path": "src/core/config_button_validation.cpp",
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "sha256": "5e3a262be086a981de9832117398be690be52fd1cfc881f88473f9638d32cf8b"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+      "sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+      "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+      "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87"
+    }
+  ],
+  "host_sources": [
+    {
+      "path": "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+      "sha256": "171f1542946c9f0f0d97c4e9410ba5b45a4d4a6018426b9d227932d13a7fc19d"
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp",
+      "sha256": "2e291a59a37cfdbba29ed017a123b380bfeebea769f20441d7df97e028700da9"
+    }
+  ],
+  "production_fragments": {
+    "initialize_backends_sha256": "cb5eca0652f2555a6ace87037fe1ce66aed3c2a13801aa7723c22e8b4c7837d9",
+    "default_selectors_sha256": "0ac13fa680676c0ab32692eb4152e61b9e634e837a17937cf7e114cff15a484a",
+    "persistence_validation_and_load_sha256": "7e59bc3ea73ee15042e82aec1deacb1ec4083efd03bbe72dae32afdb6cbfe7b3",
+    "startup_recovery_sha256": "9dbc49cddb61b63cea8b91aff02b474e927b130891a7806ab15dc118ac0252c2"
+  },
+  "expected": {
+    "index_count_matrix": "counts 0..15 by indices 0..255; exactly 4096 cases; accepted iff 1 <= index <= count <= actual generated extent 15",
+    "oversized_counts": "16..255 rejected by actual generated extent",
+    "invalid_routes": "five invalid pre-selector states and one selector-created invalid state reject before downstream callbacks and saves",
+    "valid_routes": [
+      "GameCube",
+      "USB XInput",
+      "Keyboard through DInput",
+      "watchdog DInput"
+    ],
+    "abi_modes": [
+      "default enum",
+      "-fshort-enums"
+    ],
+    "sanitizers": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ]
+  },
+  "coverage_limits": [
+    "Host-only source-bound proof; no firmware build or hardware claim.",
+    "Uses exact initialize_backends and default selector bodies extracted from the pinned production source; peripheral backend constructors and physical device behavior are callback stubs.",
+    "SetConfig consumer ordering is source-checked but ConfiguratorBackend COBS packet transport is not executed.",
+    "The host File/LittleFS double returns saved byte vectors and treats CheckSavedConfig as accepted. It exercises actual nanopb decoding, semantic validation, and LoadConfigChecked refusal/publication boundaries, but not CRC/header validation or real flash/filesystem I/O.",
+    "Startup recovery executes actual draw_recovery_page/refuse_boot bodies and source-checks setup ordering; the full hardware setup, OLED driver, second-core scheduler, and physical display are not executed."
+  ],
+  "hardware_acceptance": "NOT_CLAIMED",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "adopted_checker_attempts": [
+    {
+      "command": "python3 tools/check_glyph_gp_config021_persisted_recovery.py",
+      "result": "FAIL at exact C021 sole-parent approved B contract; this is the C023 candidate branch"
+    },
+    {
+      "command": "python3 tools/check_glyph_gp_config022_rgb_target_validation.py --output /private/tmp/gp-config023-cross-c022",
+      "result": "FAIL at frozen source hash check for HAL/pico/src/comms/backend_init.cpp; C023 modifies this affected source and the bounded C023 checker tests the exact current bodies"
+    }
+  ],
+  "consumer_contracts": {
+    "setconfig": "source-checked ConfiguratorBackend::HandleSetConfig ordering: decode, invoke Persistence::ValidateConfig, save, then publish live Config",
+    "stored_load": "executed exact Persistence::LoadConfigChecked; validates candidate before publishing and does not save rejected data",
+    "glyph_adapter": "actual validate_glyph_config calls shared validate_config_semantics",
+    "startup": "actual Glyph setup validates defaults/stored Config before backends; invalid post-selector index refuses before mode bindings/fallback and the secondary core gates menu construction",
+    "startup_refusal": "executed exact refusal body clears watchdog scratch and publishes after recovery-page rendering when available"
+  },
+  "decoder_cases": {
+    "omitted_index": "pb_decode accepts omitted field to zero-initialized value; production semantic validator rejects",
+    "zero_index": "actual nanopb decode succeeds; production semantic validator rejects",
+    "out_of_range": "actual nanopb decode succeeds for 2 and 255; semantic validator rejects against one populated backend",
+    "uint8_overflow": "actual nanopb decoder rejects wire value 256 under generated IS_8 representation",
+    "valid_control": "actual nanopb decode plus semantic validation accepts index 1 with one backend"
+  },
+  "persistence_load": {
+    "method": "exact extracted Persistence::LoadConfigChecked and Persistence::ValidateConfig/SetValidator bodies",
+    "invalid_cases": "omitted, zero, 2, 255, and 256",
+    "assertions": "Rejected result; caller Config byte-exact; stored bytes byte-exact; no SaveConfig call"
+  },
+  "startup_recovery_execution": {
+    "method": "exact extracted draw_recovery_page and refuse_boot bodies",
+    "assertions": "Startup Config invalid / Recovery required / Operation refused order; display before publish; watchdog scratch zeroed; display-unavailable path publishes without drawing"
+  }
+}

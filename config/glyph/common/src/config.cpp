@@ -1,6 +1,7 @@
 #include "button_positions.hpp"
 #include "comms/backend_init.hpp"
 #include "core/CommunicationBackend.hpp"
+#include "core/config_usb_default_validation.hpp"
 #include "core/KeyboardMode.hpp"
 #include "core/Persistence.hpp"
 #include "core/mode_selection.hpp"
@@ -60,7 +61,14 @@ namespace {
 // therefore acquire this lock even while core0 has not entered setup yet.
 auto_init_mutex(boot_state_mutex);
 
-enum class BootOutcome { Pending, Normal, StoredConfigRejected, StorageFailure, DefaultsRejected };
+enum class BootOutcome {
+    Pending,
+    Normal,
+    StoredConfigRejected,
+    StorageFailure,
+    DefaultsRejected,
+    StartupConfigRejected
+};
 struct BootSnapshot {
     BootOutcome outcome = BootOutcome::Pending;
     bool display_ready = false;
@@ -97,6 +105,8 @@ void draw_recovery_page(BootOutcome outcome) {
         display.println("Stored Config rejected");
     } else if (outcome == BootOutcome::DefaultsRejected) {
         display.println("Config defaults rejected");
+    } else if (outcome == BootOutcome::StartupConfigRejected) {
+        display.println("Startup Config invalid");
     } else {
         display.println("Config storage failure");
     }
@@ -170,7 +180,7 @@ void setup() {
     }
 
     // Create array of input sources to be used.
-    backend_count = initialize_backends(
+    const size_t initialized_backend_count = initialize_backends(
         backends,
         inputs,
         input_sources,
@@ -182,6 +192,13 @@ void setup() {
         &detect_console,
         &init_secondary_backends_glyph
     );
+
+    if (!is_valid_usb_default_index(config)) {
+        refuse_boot(BootOutcome::StartupConfigRejected, display_ready);
+        return;
+    }
+
+    backend_count = initialized_backend_count;
 
     setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count);
 

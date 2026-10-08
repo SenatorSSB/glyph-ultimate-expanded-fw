@@ -92,6 +92,13 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
         return false;
     }
 
+    if (!is_valid_usb_default_index(config)) {
+        return reference_error(error,
+            "Default USB backend index is %d but only %d backend configs are defined",
+            static_cast<uint8_t>(config.default_usb_backend_config),
+            static_cast<uint8_t>(config.communication_backend_configs_count));
+    }
+
     if (config.default_backend_config > config.communication_backend_configs_count) {
         return reference_error(error,
             "Default backend ID is %d but only %d backend configs are defined",

@@ -11,6 +11,7 @@
 #include "comms/XInputBackend.hpp"
 #include "core/CommunicationBackend.hpp"
 #include "core/config_utils.hpp"
+#include "core/config_usb_default_validation.hpp"
 #include "core/mode_selection.hpp"
 #include "core/pinout.hpp"
 
@@ -33,6 +34,12 @@ size_t initialize_backends(
     secondary_backend_initializer_t init_secondary_backends,
     primary_backend_initializer_t init_primary_backend
 ) {
+    // Reject an invalid required USB selection before selectors, initializers,
+    // console detection, descriptors, or persistence can observe it.
+    if (!is_valid_usb_default_index(config)) {
+        return 0;
+    }
+
     // Make sure required function pointers are not null.
     if (get_backend_config == nullptr || get_usb_backend_config == nullptr ||
         init_primary_backend == nullptr || detect_console == nullptr) {
@@ -41,6 +48,11 @@ size_t initialize_backends(
 
     CommunicationBackendConfig backend_config = CommunicationBackendConfig_init_zero;
     get_backend_config(backend_config, inputs, config);
+
+    // The named selector can apply watchdog scratch values to Config.
+    if (!is_valid_usb_default_index(config)) {
+        return 0;
+    }
 
     CommunicationBackend *primary_backend = nullptr;
 
@@ -52,7 +64,7 @@ size_t initialize_backends(
     if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED || has_watchdog_override) {
         /* Must check default USB backend here and initialize it before console detection, so that
          * we can respond correctly to device descriptor requests from host. */
-        CommunicationBackendConfig usb_backend_config;
+        CommunicationBackendConfig usb_backend_config = CommunicationBackendConfig_init_zero;
         get_usb_backend_config(usb_backend_config, config);
         init_primary_backend(
             primary_backend,
