@@ -74,11 +74,19 @@ class C023AdmissionTests(unittest.TestCase):
 
 class C023HardwarePendingTests(unittest.TestCase):
     def setUp(self) -> None:
-        head = campaign._git(ROOT, "rev-parse", "HEAD").decode().strip()
-        self.order = campaign.item(ROOT, head, "GP-CONFIG-023")
+        self.order = campaign.item(ROOT, campaign.R, "GP-CONFIG-023")
+
+    def _pending(self, order):
+        original_current = campaign.current_bytes
+        def historical_current(root, path):
+            if path in {campaign.EVIDENCE, campaign.RESULT, campaign.PROTOCOL}:
+                return campaign.raw_bytes(root, campaign.R, path)
+            return original_current(root, path)
+        with patch.object(campaign, "current_bytes", side_effect=historical_current):
+            return campaign._hardware_pending_contract(ROOT, order)
 
     def test_exact_pending_handoff_is_admitted_without_physical_acceptance(self) -> None:
-        record = campaign._hardware_pending_contract(ROOT, self.order)
+        record = self._pending(self.order)
         self.assertEqual(record["result"], "NOT_TESTED")
         self.assertTrue(all(step["observed"].startswith("NOT_TESTED") for step in record["steps"]))
 
@@ -86,15 +94,17 @@ class C023HardwarePendingTests(unittest.TestCase):
         bad_identity = dict(self.order)
         bad_identity["firmware_artifact_sha256"] = "0" * 64
         with self.assertRaises(CorrespondenceError):
-            campaign._hardware_pending_contract(ROOT, bad_identity)
+            self._pending(bad_identity)
 
-        evidence = json.loads((ROOT / campaign.EVIDENCE).read_text())
+        evidence = json.loads(campaign.raw_bytes(ROOT, campaign.R, campaign.EVIDENCE))
         evidence["steps"][0]["observed"] = "PASS"
         original_current = campaign.current_bytes
 
         def tampered_current(root, path):
             if path == campaign.EVIDENCE:
                 return (json.dumps(evidence) + "\n").encode()
+            if path in {campaign.RESULT, campaign.PROTOCOL}:
+                return campaign.raw_bytes(root, campaign.R, path)
             return original_current(root, path)
 
         with patch.object(campaign, "current_bytes", side_effect=tampered_current):
@@ -123,8 +133,8 @@ class C023CatalogDispatchTests(unittest.TestCase):
             _, c023_roots = runner.required_catalog([c023])
             authenticate_c023.assert_called_once_with(ROOT)
         c023_proof = c023_proofs[0]
-        self.assertEqual(c023_proof["phase"], "SOURCE_FREE_PROCESSOR")
-        self.assertEqual(c023_proof["handoff_stage"], "HARDWARE_PENDING")
+        self.assertIn(c023_proof["phase"], {"SOURCE_FREE_PROCESSOR", "ACCEPTED_TRANSITION"})
+        self.assertIn(c023_proof["handoff_stage"], {"HARDWARE_PENDING", "HARDWARE_VALIDATED"})
         self.assertIn(campaign.C, c023_proof["object_roots"])
         self.assertIn(campaign.C, c023_roots)
 
@@ -138,6 +148,42 @@ class C023CatalogDispatchTests(unittest.TestCase):
             _, c022_roots = runner.required_catalog([c022])
             authenticate_c022.assert_called_once_with(ROOT)
         self.assertNotIn(campaign.C, c022_roots)
+
+
+class C023HardwareAcceptanceControls(unittest.TestCase):
+    """Synthetic row/schema negatives confer no physical acceptance."""
+    def setUp(self):
+        self.record = json.loads(campaign.raw_bytes(ROOT, campaign.R, campaign.EVIDENCE))
+        self.record.update(result="PASS", anomalies=[], evidence_gaps=[])
+        for row in self.record["steps"]:
+            row["observed"] = "PASS synthetic acceptance control; no hardware claim"
+        self.result = (campaign.KEYBOARD_DISPOSITION + "\nPRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT\n"
+                       "POST_BETA_KEYBOARD_PHYSICAL_VALIDATION\nPHYSICAL_NOT_SAFELY_TESTABLE\n").encode()
+
+    def test_missing_duplicate_or_partial_row_rejected(self):
+        for mutation in ("missing", "duplicate", "partial"):
+            record = copy.deepcopy(self.record)
+            if mutation == "missing": record["steps"].pop()
+            if mutation == "duplicate": record["steps"][-1] = record["steps"][0]
+            if mutation == "partial": record["steps"][0]["observed"] = "PARTIAL"
+            with self.assertRaises(CorrespondenceError):
+                campaign._hardware_rows(record, self.result)
+
+    def test_keyboard_physical_pass_or_missing_owner_scope_rejected(self):
+        for raw in (self.result + b"Keyboard physical PASS", self.result.replace(
+                campaign.KEYBOARD_DISPOSITION.encode(), b"Keyboard untested")):
+            with self.assertRaises(CorrespondenceError):
+                campaign._hardware_rows(self.record, raw)
+
+    def test_predecessor_catalog_loss_extra_or_forged_tuple_rejected(self):
+        prior = campaign.previous._catalog(campaign.raw_bytes(ROOT, campaign.B,
+                                                             campaign.previous.TRANSITIONS))
+        forged = {"work_order":"GP-CONFIG-023", "candidate":campaign.C, "build":"0"*40,
+                  "parent":campaign.C, "tree":campaign.F_TREE, "review_commit":campaign.R,
+                  "evidence_commit":"1"*40, "integration":"2"*40}
+        for records in ([], prior + [forged], prior + [forged, forged]):
+            with self.assertRaises(CorrespondenceError):
+                campaign._catalog({"schema_version":1,"accepted_transitions":records}, prior)
 
 
 if __name__ == "__main__":

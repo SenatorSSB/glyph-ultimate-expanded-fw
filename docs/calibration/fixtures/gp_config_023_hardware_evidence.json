@@ -13,101 +13,95 @@
   "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
   "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md",
   "candidate_protocol_version": "GP_CONFIG_023_HW_V1",
-  "pre_update_sha256_verified": false,
-  "controller_model_revision": "Glyph Mk6; exact physical revision pending owner report.",
-  "firmware_profile_state": "No hardware update or physical test reported. Current firmware, Config, and profile state pending owner report.",
-  "update_method": "No update performed. Owner manual established route and exact pre-update hashes required before action.",
-  "host_platform_adapter": "Pending owner report for each tested route.",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Owner reports Raspberry Pi Pico; exact physical Glyph revision UNKNOWN. Mk6 is the reviewed build selector.",
+  "firmware_profile_state": "Exact C023 tested with valid corrected Config4178/4f9f...e2d0fe and persisted invalid index9/273621...fa6f5. Final accepted C017 About5994f165 with original4201/f589...1480 restored.",
+  "update_method": "Owner performed established manual firmware/Config/recovery actions. Authoritative owner packet identifies exact tested F/tree/UF2. Processor independently rehashed preserved bytes; no processor device action.",
+  "host_platform_adapter": "Mac USB XInput and DInput; owner GameCube route report, adapter model UNKNOWN; direct Nintendo Switch USB. Owner identifies Pico serialE4651C128B364739 and Configurator port/dev/cu.usbmodem1101.",
   "preconditions": [
-    "Protocol prepared with all physical rows NOT_TESTED.",
-    "Exact candidate F and preserved UF2 identity recorded.",
-    "No device or Config write has been performed by the build/review process."
+    "Actual direct owner user message01a11da0-71a1-7071-b938-d039d4525eb3 in daemon turn01a11da0-70b0-7891-b085-56fce9677568 independently retrieved; exact receipt and complete hardware packet archived in result.",
+    "pre_update_sha256_verified=true records an INFERRED owner protocol attestation from the authoritative exact-tested F/tree/UF2 tuple, not a separately transcribed C023 pre-update hash event. Individual pre-update timing is independently UNKNOWN; the processor rehash is later custody verification only. Exact tested candidate/artifact identity supplied by owner; current preserved C023 and C017 regular0444 UF2 hashes/sizes and nonoverlapping UF2 payload bounds independently verified.",
+    "Final exact-tip independent handoff/build review0f1648fb PASS verified, including reproduced byte-identical artifact from recorded31pins/10symlinks. Original invocation prebuild hashes unavailable; prior transcript witness remains invalidated.",
+    "Fresh complete Config/raw backup and original restoration JSON, valid block11-only correction and three isolated invalid-index variants independently roundtrip exact schema. All18 full wrappers checked; no test artifact substituted.",
+    "Owner explicitly defers first-beta physical Keyboard; original protocol remains byte-identical. Configured custom modifier profile absent; no claim every built-in modifier is absent."
   ],
   "steps": [
     {
       "id": "valid_stored_startup",
       "instruction": "Valid stored Config startup across supported GC, XInput, DInput, Switch, and Keyboard routes.",
       "expected": "Valid stored Config startup across supported GC, XInput, DInput, Switch, and Keyboard routes.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner reports exact C023/About36bf0f31 with valid raw4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe; backend count8, one-based default1/XInput. 'XInput, DInput, Gamecube, and Switch USB work all as expected'. Mac USB/XInput; GameCube host reported (adapter model UNKNOWN); direct Switch USB. Keyboard physical route = NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA under directly verified owner scope supersession; no physical Keyboard acceptance inferred."
     },
     {
       "id": "ordinary_selection_profile_modifier",
       "instruction": "Exercise valid default selection, held-input startup, menu entry, watchdog recovery, ordinary selection, profile, and modifier behavior on existing configurations. Do not use unsupported hot replacement.",
       "expected": "Exercise valid default selection, held-input startup, menu entry, watchdog recovery, ordinary selection, profile, and modifier behavior on existing configurations. Do not use unsupported hot replacement.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner 'all match': default Ultimate; held RF3 selects DInput/Melee; MB1 menu then Melee; controlled reconnect/watchdog persistence and usable controls on Mac. Actual decoded Config has13 profiles, zero custom_modes and all custom_mode_config0: configured custom AnalogModifier subcase NOT_APPLICABLE. This does not assert absence of hardcoded gameplay modifiers; owner's original broader applicability statement is preserved verbatim in result archive."
     },
     {
       "id": "reconnect_reboot",
       "instruction": "Reconnect and reboot with valid stored state.",
       "expected": "Reconnect and reboot with valid stored state.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner 'all match' on C023 restored valid raw, Mac/XInput/Ultimate; normal reconnect and ordinary reboot including controls/release/RGB. Independent full post-reboot raw equals4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe."
     },
     {
       "id": "external_invalid_index_rejection",
       "instruction": "Safely reachable invalid external index rejection; retain prior accepted operation and stored bytes.",
       "expected": "Safely reachable invalid external index rejection; retain prior accepted operation and stored bytes.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner submitted explicit ZERO through established Configurator transport and observed exact 'Default USB backend index is 0 but only 8 backend configs are defined'; 'all match'. Full pre/post GET raw equals valid4178/4f9f...e2d0fe; no accepted update/fallback. OMITTED and ZERO raw both4176/0b3e6d7f9e87042c56aeca33a345c99977b5f4422287b8d69e62a6c487e50693, independently decode0 and exact-source reject. Index9/count8 exact-source rejection independently passes. Separate physical omitted SET not claimed."
     },
     {
       "id": "invalid_stored_refusal_gc_usb",
       "instruction": "With a reviewed invalid stored Config and approved manual setup, verify refusal before gameplay on GC and USB; confirm the refusal message on a working display. Test display-init-failure refusal only through an existing safely reachable route; otherwise record that physical subcase NOT_TESTED. Confirm the stored file remains byte-identical after recovery.",
       "expected": "With a reviewed invalid stored Config and approved manual setup, verify refusal before gameplay on GC and USB; confirm the refusal message on a working display. Test display-init-failure refusal only through an existing safely reachable route; otherwise record that physical subcase NOT_TESTED. Confirm the stored file remains byte-identical after recovery.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner 'refusal all match': exact C023 with persisted index9 raw4178/273621e302233b4fc7094a28f09d83af40ef79ff47b30b5349181d9b63dfa6f5 in GC and USB contexts refused before normal gameplay, reports, menu/profile/RGB/Configurator initialization and no silent fallback. Working-display protocol observation included in owner all-match report. Unsafe display-failure stimulus was not induced: PHYSICAL_NOT_SAFELY_TESTABLE; separate exact-source whole-startup display-success/failure host proof passes both ABIs, no physical display-failure PASS."
     },
     {
       "id": "invalid_stored_refusal_reboot",
       "instruction": "Repeat refusal after ordinary reboot; prove file retention after recovery.",
       "expected": "Repeat refusal after ordinary reboot; prove file retention after recovery.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner 'reboot refusal all match' with same persisted invalid index9 raw on ordinary reboot; no silent fallback. Exact rejected stored bytes recovered unchanged via C017."
     },
     {
       "id": "manual_recovery",
       "instruction": "Existing manual recovery route and observed recovery identity.",
       "expected": "Existing manual recovery route and observed recovery identity.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner manual exact accepted C017/UF2 recovery; observed automatic Configurator entry and independently retained full invalid4178/273621...fa6f5 raw. C017 source permits default Configurator construction, but its out-of-range getter leaves a local backend config uninitialized: deterministic cause of observed entry remains UNPROVEN. This observation does not establish C023 fallback."
     },
     {
       "id": "restoration",
       "instruction": "Exact original Config restoration and normal startup after reboot.",
       "expected": "Exact original Config restoration and normal startup after reboot.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner 'verified, final state all normal'; exact accepted C017 plus fresh original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480. Full immediate and post-reboot wrappers independently match original every byte."
     },
     {
       "id": "rollback",
       "instruction": "Exact accepted GP-CONFIG-017 rollback if needed.",
       "expected": "Exact accepted GP-CONFIG-017 rollback if needed.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS owner exact C017 F5994f1657e45e0883c6c75468a19be7e3b49a72c/tree0404687bb795e78f0f607fbad865369578615cff/UF2e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672 via manual RPI-RP2 route; version confirmed before invalid store, recovery artifact rehashed each use. Invalid index prevents normal About UI after recovery; actual Configurator transport then restored original. Final About5994f165 owner confirmed."
     },
     {
       "id": "safe_stop_and_anomalies",
       "instruction": "Record unavailable routes and all anomalies; do not infer PASS.",
       "expected": "Record unavailable routes and all anomalies; do not infer PASS.",
-      "observed": "NOT_TESTED \u2014 pending owner report."
+      "observed": "PASS LF1 discrepancy triggered safe stop and preserved anomaly/reassessment. Active Ultimate uses RGB3; corrected RGB11 belongs to SNES/Keyboard mode. No unsafe action; no contradictory C023 block11 physical LF1 claim. C023 block11 LF1 remains NOT_TESTED. Keyboard deferred; display failure not induced; Nunchuk NOT_TESTED; root cause UNPROVEN."
     }
   ],
   "negative_regression_checks": [
-    "Focused C023 host proof passes in default and short-enum ABIs with ASan/UBSan; this is host evidence only.",
-    "No physical stimulus or device action has been performed."
+    "Physical explicit-zero SET rejected with exact error and full accepted stored raw unchanged; omitted/zero byte identity and index9 rejection independently source-bound host verified in both ABIs.",
+    "Physical persisted index9 refusal repeated on reboot; C017 recovery read every rejected byte unchanged.",
+    "Fresh exact-source4096case/120accepted USB matrix, default/short enum ASan/UBSan PASS. Fresh whole-startup40cases/2ABIs prove invalid index refusal under both successful/failed display initialization with unchanged stored/caller bytes and no normal constructors/reports.",
+    "Host evidence does not establish physical Keyboard or display-failure execution."
   ],
   "power_cycle_reconnect_checks": [
-    "NOT_TESTED \u2014 valid-state reboot/reconnect pending owner report.",
-    "NOT_TESTED \u2014 invalid stored-state reboot refusal pending owner report."
+    "Valid C023 normal reconnect/reboot owner all-match; full post-reboot valid raw exact.",
+    "Persisted-invalid C023 ordinary reboot repeats refusal and no fallback.",
+    "Final C017 original immediate and post-reboot raw equality and owner normal usable state."
   ],
-  "result": "NOT_TESTED",
+  "result": "PASS",
   "anomalies": [],
-  "rollback_recovery": "NOT_TESTED \u2014 no firmware update, Config write, or recovery action performed.",
-  "tester": "Pending owner physical observations; independent Hardware Evidence Processor review required.",
-  "tested_at": "2026-10-08T19:00:20Z",
-  "evidence_gaps": [
-    "valid_stored_startup: pending owner physical observation and processor review.",
-    "ordinary_selection_profile_modifier: pending owner physical observation and processor review.",
-    "reconnect_reboot: pending owner physical observation and processor review.",
-    "external_invalid_index_rejection: pending owner physical observation and processor review.",
-    "invalid_stored_refusal_gc_usb: pending owner physical observation and processor review.",
-    "invalid_stored_refusal_reboot: pending owner physical observation and processor review.",
-    "manual_recovery: pending owner physical observation and processor review.",
-    "restoration: pending owner physical observation and processor review.",
-    "rollback: pending owner physical observation and processor review.",
-    "safe_stop_and_anomalies: pending owner physical observation and processor review."
-  ]
+  "rollback_recovery": "PASS owner exact C017 F5994f1657e45e0883c6c75468a19be7e3b49a72c/tree0404687bb795e78f0f607fbad865369578615cff/UF2e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672 via manual RPI-RP2 route; version confirmed before invalid store, recovery artifact rehashed each use. Invalid index prevents normal About UI after recovery; actual Configurator transport then restored original. Final About5994f165 owner confirmed. PASS owner 'verified, final state all normal'; exact accepted C017 plus fresh original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480. Full immediate and post-reboot wrappers independently match original every byte.",
+  "tester": "Project owner physical observations; independent Hardware Evidence Processor /root, source/custody specialist /root/c023_source_applicability and fresh reviewer /root/c023_hep_review.",
+  "tested_at": "2026-10-08T22:26:56Z",
+  "evidence_gaps": []
 }

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 import glyph_c022_campaign_transition as previous
@@ -32,6 +33,8 @@ F = "36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39"
 F_TREE = "45fa24dc7f95a5cd0e796c2c7c3b46f91688b329"
 ARTIFACT_SHA256 = "7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224"
 ARTIFACT_SIZE = 803840
+R = "0f1648fb9c17fbded5bc1265b2702c542e689ce0"
+PROTOCOL_SHA256 = "97ab3e50e10f38c012544b523cb67cebed32faf261b47609fdd6c095337a5c66"
 MAPPING = "docs/runtime_config/fixtures/gp_val042_c023_transition.json"
 TRANSITIONS = "docs/runtime_config/fixtures/gp_val042_accepted_transitions.json"
 PROTOCOL = "docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md"
@@ -39,6 +42,13 @@ RESULT = "docs/calibration/gp_config_023_hardware_result.md"
 EVIDENCE = "docs/calibration/fixtures/gp_config_023_hardware_evidence.json"
 HANDOFF_START = "<!-- gp-config023-handoff-val042-activation:start -->"
 HANDOFF_END = "<!-- gp-config023-handoff-val042-activation:end -->"
+REQUIRED_ROWS = (
+    "valid_stored_startup", "ordinary_selection_profile_modifier",
+    "reconnect_reboot", "external_invalid_index_rejection",
+    "invalid_stored_refusal_gc_usb", "invalid_stored_refusal_reboot",
+    "manual_recovery", "restoration", "rollback", "safe_stop_and_anomalies",
+)
+KEYBOARD_DISPOSITION = "NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA"
 CRITICAL = frozenset((
     "HAL/pico/src/comms/backend_init.cpp",
     "config/glyph/common/src/config.cpp",
@@ -275,10 +285,7 @@ def source_contract(root: Path):
             "C023 source/build-role conformance mismatch")
     prior_catalog = previous._catalog(raw_bytes(root, B, previous.TRANSITIONS))
     catalog = json.loads(current_bytes(root, TRANSITIONS), object_pairs_hook=unique)
-    require(set(catalog) == {"schema_version", "accepted_transitions"}
-            and type(catalog["schema_version"]) is int and catalog["schema_version"] == 1
-            and catalog["accepted_transitions"] == prior_catalog,
-            "C023 catalog must preserve the exact accepted C022 transition without inventing C023 PASS")
+    _catalog(catalog, prior_catalog)
     handoff = _handoff(root, None)
     prior, _ = previous.predecessor_contract(root)
     previous.source_contract(root)
@@ -291,11 +298,170 @@ def source_contract(root: Path):
     return before, after, prior, mapping
 
 
+def _catalog(value: dict, prior: list) -> list:
+    require(set(value) == {"schema_version", "accepted_transitions"}
+            and type(value["schema_version"]) is int and value["schema_version"] == 1
+            and type(value["accepted_transitions"]) is list,
+            "C023 catalog schema substitution")
+    records = value["accepted_transitions"]
+    require(records[:len(prior)] == prior and len(records) in (len(prior), len(prior) + 1),
+            "C023 catalog lost/replaced predecessor or added extra transition")
+    added = records[len(prior):]
+    if added:
+        record = added[0]
+        fields = {"work_order", "candidate", "build", "parent", "tree",
+                  "review_commit", "evidence_commit", "integration"}
+        require(type(record) is dict and set(record) == fields
+                and record["work_order"] == "GP-CONFIG-023"
+                and (record["candidate"], record["build"], record["parent"], record["tree"],
+                     record["review_commit"]) == (C, F, C, F_TREE, R)
+                and all(type(record[k]) is str and re.fullmatch("[0-9a-f]{40}", record[k])
+                        for k in fields - {"work_order"}),
+                "C023 accepted catalog tuple substitution")
+    return added
+
+
+def _hardware_rows(evidence: dict, result: bytes):
+    require(evidence["result"] == "PASS"
+            and evidence["anomalies"] == evidence["evidence_gaps"] == []
+            and [step["id"] for step in evidence["steps"]] == list(REQUIRED_ROWS)
+            and all(step["observed"].strip().startswith("PASS") for step in evidence["steps"]),
+            "C023 physical row missing/failing")
+    text = result.decode("utf-8")
+    require(KEYBOARD_DISPOSITION in text
+            and "PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT" in text
+            and "POST_BETA_KEYBOARD_PHYSICAL_VALIDATION" in text
+            and "PHYSICAL_NOT_SAFELY_TESTABLE" in text
+            and "Keyboard physical PASS" not in text,
+            "C023 owner scope/physical limitation missing or Keyboard PASS invented")
+
+
+def _processor(root: Path, revision: str, state: dict, before: dict):
+    require(state["status"] == "HARDWARE_VALIDATED"
+            and state["hardware_result"] == "PASS"
+            and state["hardware_evidence_dependency_satisfied"] is True
+            and state["hardware_evidence_gaps"] == []
+            and ancestor(root, R, revision) and not ancestor(root, F, revision)
+            and critical_tree(root, revision) == before,
+            "C023 first PASS must be source-free E after reviewed R")
+    pending = item(root, R, "GP-CONFIG-023")
+    acceptance = {"status", "hardware_result", "hardware_evidence_dependency_satisfied",
+                  "hardware_evidence_gaps", "hardware_evidence_record"}
+    require({k:v for k,v in state.items() if k not in acceptance}
+            == {k:v for k,v in pending.items() if k not in acceptance},
+            "C023 E changed non-acceptance work-order authority")
+    reference = state["hardware_evidence_record"]
+    if reference == "repo-json:" + EVIDENCE:
+        evidence_root = revision
+    else:
+        match = re.fullmatch("git-json:([0-9a-f]{40}):" + re.escape(EVIDENCE), str(reference))
+        require(match is not None, "C023 evidence lacks immutable Git root")
+        evidence_root = match.group(1)
+    require(ancestor(root, R, evidence_root) and ancestor(root, evidence_root, revision),
+            "C023 evidence root outside R-to-E chronology")
+    from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
+    validated = dict(state, hardware_evidence_record="git-json:" + evidence_root + ":" + EVIDENCE)
+    validate_work_order(validated, evidence_repo_root=root)
+    validate_evidence_record(validated, evidence_repo_root=root)
+    payload = raw_bytes(root, evidence_root, EVIDENCE)
+    result = raw_bytes(root, revision, RESULT)
+    _hardware_rows(json.loads(payload, object_pairs_hook=unique), result)
+    protocol = raw_bytes(root, revision, PROTOCOL)
+    require(sha(protocol) == PROTOCOL_SHA256 and protocol == raw_bytes(root, R, PROTOCOL),
+            "C023 historical protocol replaced")
+    return {"evidence_commit":revision, "evidence_root":evidence_root,
+            "payload":payload, "result":result, "protocol":protocol, "native":state}
+
+
+def _accepted(root: Path, revision: str, record: dict, processor: dict, after: dict):
+    integration = record["integration"]
+    require(record["evidence_commit"] == processor["evidence_commit"]
+            and _git(root, "rev-list", "--parents", "-n", "1", integration).decode().split()
+                == [integration, processor["evidence_commit"], F]
+            and ancestor(root, integration, revision)
+            and critical_tree(root, integration) == after,
+            "C023 I must be genuine exact [E,F] integration")
+    old, merged = _tree(root, processor["evidence_commit"]), _tree(root, integration)
+    delta = {p for p in old.keys() | merged.keys() if old.get(p) != merged.get(p)}
+    require(delta == CRITICAL | HOSTS
+            and all(merged[p] == _tree(root, F)[p] for p in delta),
+            "C023 I contains noncandidate or incomplete source/proof delta")
+    from glyph_hardware_correspondence import verify_correspondence
+    verify_correspondence(root, F, C, target=revision, integrated=True, check_worktree=False)
+
+
+def _lifecycle(root: Path, head: str, before: dict, after: dict):
+    """Latch the first immutable E; later I and DONE retain that exact acceptance."""
+    prior = previous._catalog(raw_bytes(root, B, previous.TRANSITIONS))
+    processor = None
+    first_catalog = None
+    done = False
+    for revision in _git(root, "rev-list", "--reverse", "--topo-order", R + ".." + head).decode().split():
+        row = item(root, revision, "GP-CONFIG-023")
+        records = (_catalog(json.loads(raw_bytes(root, revision, TRANSITIONS), object_pairs_hook=unique), prior)
+                   if TRANSITIONS in _tree(root, revision) else [])
+        if processor and not ancestor(root, processor["evidence_commit"], revision):
+            require(row["hardware_result"] is None and row["status"] not in {"HARDWARE_VALIDATED", "DONE"}
+                    and not records, "C023 competing PASS/catalog outside first E ancestry")
+            continue
+        accepted = row["hardware_result"] == "PASS" or row["status"] in {"HARDWARE_VALIDATED", "DONE"}
+        if accepted:
+            require(row["status"] in {"HARDWARE_VALIDATED", "DONE"} and row["hardware_result"] == "PASS"
+                    and row["hardware_evidence_dependency_satisfied"] is True
+                    and row["hardware_evidence_gaps"] == [], "C023 invalid PASS state")
+            if processor is None:
+                processor = _processor(root, revision, row, before)
+            else:
+                require(previous.stateutil.same_acceptance(row, processor["native"]),
+                        "C023 immutable E acceptance replaced/downgraded")
+            require(not done or row["status"] == "DONE", "C023 DONE downgraded")
+        elif processor:
+            require(False, "C023 accepted PASS erased")
+        if processor:
+            for path, key in ((PROTOCOL, "protocol"), (EVIDENCE, "payload"), (RESULT, "result")):
+                require(_tree(root, revision).get(path, ())[:2] == ("100644", "blob")
+                        and raw_bytes(root, revision, path) == processor[key],
+                        "C023 accepted evidence/protocol/result replaced: " + path)
+        if records:
+            require(processor is not None, "C023 catalog before source-free E")
+            if first_catalog is None:
+                first_catalog = records[0]
+            require(records == [first_catalog], "C023 catalog replaced")
+            _accepted(root, revision, first_catalog, processor, after)
+        elif first_catalog:
+            require(False, "C023 accepted catalog removed")
+        if row["status"] == "DONE":
+            require(records, "C023 DONE before I catalog")
+            from check_glyph_agent_framework_docs import validate_completion_evidence
+            queue = previous.stateutil.parsed_queue(raw_bytes(root, revision, QUEUE))
+            validate_completion_evidence(row, row["done_evidence"], policy=queue["completion_correspondence"],
+                                         publication_sha=revision, repo_root=root)
+            done = True
+    state = item(root, head, "GP-CONFIG-023")
+    require((state["hardware_result"] == "PASS" or state["status"] in {"HARDWARE_VALIDATED", "DONE"})
+            == (processor is not None), "C023 current status/history mismatch")
+    records = _catalog(json.loads(current_bytes(root, TRANSITIONS), object_pairs_hook=unique), prior)
+    if processor:
+        require(previous.stateutil.same_acceptance(state, processor["native"]), "C023 current acceptance replacement")
+        for path in (QUEUE, PROTOCOL, EVIDENCE, RESULT):
+            _stage_and_live(root, head, path, _tree(root, head)[path])
+        require(critical_tree(root, head) == before or records,
+                "C023 integrated PASS lacks accepted catalog")
+        require(critical_tree(root, head) != before or not records,
+                "C023 source-free E contains I catalog")
+    else:
+        require(not records, "C023 accepted catalog without HEP")
+    return processor, records
+
+
 @original._proof_invocation
 def authenticate(root: Path):
     root = Path(root).resolve()
     before, after, prior, mapping = source_contract(root)
     head = _git(root, "rev-parse", "HEAD").decode().strip()
+    require(_git(root, "rev-list", "--parents", "-n", "1", F).decode().split() == [F, C]
+            and _git(root, "rev-parse", F + "^{tree}").decode().strip() == F_TREE
+            and critical_tree(root, F) == after, "C023 exact tested F/source correspondence changed")
     require(ancestor(root, B, head), "C023 governance snapshot lost canonical B ancestry")
     current = critical_tree(root, head)
     require(current in (before, after), "C023 current source outside exact B/C critical trees")
@@ -312,7 +478,10 @@ def authenticate(root: Path):
             and done042.get("prior_canonical_integration_sha") == VAL042_I
             and handoff["candidate_state"] == "PRESERVED_UNBUILT_UNMERGED",
             "C023 source-free handoff requires exact GP-VAL-042 strict DONE")
-    if c023_order["status"] == "PREAUTHORIZED":
+    processor, records = _lifecycle(root, head, before, after)
+    if processor:
+        handoff_stage = "HARDWARE_VALIDATED"
+    elif c023_order["status"] == "PREAUTHORIZED":
         require(c023_order["candidate_git_sha"] == C
                 and c023_order["candidate_base_configurator_sha"] == B
                 and c023_order["firmware_artifact_build_path"] is None
@@ -324,14 +493,15 @@ def authenticate(root: Path):
         handoff_stage = "HARDWARE_PENDING"
     if current == after:
         require(c_is_ancestor, "C023 source integrated without exact candidate ancestry")
-        phase = "CANDIDATE_VALIDATION_ONLY"
+        phase = "ACCEPTED_TRANSITION" if processor else "CANDIDATE_VALIDATION_ONLY"
         source_candidate = C
     else:
         require(not c_is_ancestor, "C023 source-free governance snapshot contains candidate ancestry")
         phase = "SOURCE_FREE_PROCESSOR"
         source_candidate = C
     delta = set(filter(None, _git(root, "diff", "--no-renames", "--name-only", "-z", B, head).decode().split("\0")))
-    require(delta <= GOVERNANCE | CRITICAL, "C023 unknown governance/source delta")
+    require(delta <= GOVERNANCE | CRITICAL | (HOSTS if records else frozenset()),
+            "C023 unknown governance/source delta")
     tree = _tree(root, head)
     for path in delta:
         require(tree.get(path, ())[:2] == ("100644", "blob"), "C023 nonregular changed path: " + path)
@@ -378,6 +548,10 @@ def authenticate(root: Path):
     for path in HOSTS:
         require(candidate_tree := _tree(root, C).get(path), "C023 candidate proof absent: " + path)
         require(raw_bytes(root, C, path), "C023 empty candidate proof: " + path)
+        if records:
+            require(tree.get(path) == _tree(root, F).get(path),
+                    "C023 accepted host proof differs from exact F: " + path)
+            _stage_and_live(root, head, path, tree[path])
     require(MAPPING in tree and TRANSITIONS in tree,
             "C023 governance mapping/catalog must be committed")
     _stage_and_live(root, head, MAPPING, tree[MAPPING])
@@ -386,8 +560,12 @@ def authenticate(root: Path):
             "candidate": C, "base": B,
             "target": head, "critical_paths": previous.CRITICAL | CRITICAL,
             "source_candidates": {path: source_candidate for path in CRITICAL},
-            "changed_paths": frozenset(delta), "accepted_metadata_paths": frozenset(),
-            "object_roots": frozenset(set(prior["object_roots"]) | {C, B})}
+            "changed_paths": frozenset(delta),
+            "accepted_metadata_paths": frozenset((PROTOCOL, EVIDENCE, RESULT)) if processor else frozenset(),
+            "evidence_commit": processor["evidence_commit"] if processor else None,
+            "object_roots": frozenset(set(prior["object_roots"]) | {C, B, F, R}
+                | ({processor["evidence_commit"], processor["evidence_root"]} if processor else set())
+                | ({records[0]["integration"]} if records else set()))}
 
 
 @original._proof_invocation
