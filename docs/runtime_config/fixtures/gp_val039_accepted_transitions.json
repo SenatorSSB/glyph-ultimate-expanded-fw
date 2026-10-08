@@ -1,4 +1,15 @@
 {
   "schema_version": 1,
-  "accepted_transitions": []
+  "accepted_transitions": [
+    {
+      "work_order": "GP-CONFIG-022",
+      "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+      "build": "bfec69fd5e176ed9a720780a76ff269c7cc29926",
+      "parent": "da592cb4ae06b4406d5f2f1ba72ad865a96afe2d",
+      "tree": "e8971174019a46f15e374da314fb42ef5ed714d0",
+      "review_commit": "18f4583dfb7b7a77982354e4324f57c681411570",
+      "evidence_commit": "0955f1f1082aadb86f16cf97612294f083321b45",
+      "integration": "292f27cf88a9e814b1086bd544378b7e733e25e3"
+    }
+  ]
 }
