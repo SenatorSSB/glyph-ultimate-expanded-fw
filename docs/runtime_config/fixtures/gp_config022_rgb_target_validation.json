@@ -1,0 +1,868 @@
+{
+  "schema_name": "glyph_gp_config022_rgb_target_validation",
+  "schema_version": 1,
+  "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+  "expected_cases": {
+    "short": {
+      "validation": 534,
+      "decoder": 538,
+      "persistence": 827,
+      "setconfig": 1139
+    },
+    "ordinary": {
+      "validation": 539,
+      "decoder": 538,
+      "persistence": 827,
+      "setconfig": 1139
+    }
+  },
+  "pins": {
+    "tools/glyph_tracked_worktree_integrity.py": {
+      "sha256": "604bea90c4b3cb2cbb0fdf023918da7ba45d1be7d128c2b40050e09e5a220fc7",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp": {
+      "sha256": "253a9ab7eeb11f1a059765d78a5633b32ff8e895ec68099275ba97eab277c0a0",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/DInputBackend.hpp": {
+      "sha256": "d647b49a4c338f0abaa03b9a3d9518f7a3a25b4b51cce0d1c830d8c98742475e",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/GamecubeBackend.hpp": {
+      "sha256": "222893f7441a9a539318de2e67babe0f34c9634468ab90a5f3f952c57ba3c73c",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/N64Backend.hpp": {
+      "sha256": "50a1b0f125346b5881c2665c3da2fbb0485aa563dbf98aedc70bb8c105047cd0",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/NeoPixelBackend.hpp": {
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/NesBackend.hpp": {
+      "sha256": "a07f99ec7da25c529c42b62e2d8d92faa1ef8b6b1052e55a1b401063f1cd8f12",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/NintendoSwitchBackend.hpp": {
+      "sha256": "201faa4dbaaddb5badf274e350f17ab9d6b3e6e286de321094d590e0c031540c",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/SnesBackend.hpp": {
+      "sha256": "a55c6001beb1d42c82a5ff81b603add089e15687e43700bfec7afe106922d925",
+      "mode": "100644"
+    },
+    "HAL/pico/include/comms/XInputBackend.hpp": {
+      "sha256": "e0cf78a9c800461f4636b0e4ecebc47a52f7b1e001f709af210373f4bf9229cf",
+      "mode": "100644"
+    },
+    "HAL/pico/include/core/KeyboardMode.hpp": {
+      "sha256": "6bc35650a119ec942e26015dcb36361ffb284e0f8221134ccd5776ebdfb7a7b5",
+      "mode": "100644"
+    },
+    "HAL/pico/include/core/Persistence.hpp": {
+      "sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/ConfigMenu.hpp": {
+      "sha256": "16c4c1da62c3b0309a51779780727d1191b6c7bb4bff1a6b1bde2c69c68a8088",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/ConfigMenuAssets/GlyphMenuBitmaps.h": {
+      "sha256": "2571a4f5d3f7952ba007ef022cc24e24bb9069f4e99e94c2e193dd398c0e4dd7",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/DefaultConfigMenu.hpp": {
+      "sha256": "94c6404c37fa6de41563ba06fe839a169b2281d990d8bde36d61c6f29238fa7f",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/DisplayMode.hpp": {
+      "sha256": "6dfa4950dc2280df961de0198ea3a01c0a271b2f8fc3334374463793fa316a29",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/InputDisplay.hpp": {
+      "sha256": "4f06b4ec13b1359b676e7945e0be473231192e70256fc81c2ed563bb09e987d4",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/RemapMenu.hpp": {
+      "sha256": "fed30a80b3f4a76dd09a0eaa3a7742d8cf953ca77aff5b18c70d5df06700c135",
+      "mode": "100644"
+    },
+    "HAL/pico/include/display/RgbBrightnessMenu.hpp": {
+      "sha256": "d752ea83abefeaccd390d58df6826a001397038f650a5539ac5342cf6a23c521",
+      "mode": "100644"
+    },
+    "HAL/pico/include/gpio.hpp": {
+      "sha256": "0a1bf79395451be05260e928a2c5197e2804f04e9d375f43d35378f1bc406553",
+      "mode": "100644"
+    },
+    "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp": {
+      "sha256": "45c3dfd010eebbcce79329df30f71f3d25a33759b30ecbe9fe2cc95fa1e5df30",
+      "mode": "100644"
+    },
+    "HAL/pico/include/input/debounce.hpp": {
+      "sha256": "75327d780827f78b87993fcb9dc584b67ec9847346112f19a3a8b3918e7503ae",
+      "mode": "100644"
+    },
+    "HAL/pico/include/rgb/ButtonLocations.hpp": {
+      "sha256": "4b1a0aa989c2c162e0700b0d30c22f0f1653dc27708ad8cc51f27c97cdb6cb05",
+      "mode": "100644"
+    },
+    "HAL/pico/include/serial.hpp": {
+      "sha256": "829424b1189ab60bb604a994a44257779c4cc38155108afd73250fc960698297",
+      "mode": "100644"
+    },
+    "HAL/pico/include/stdlib.hpp": {
+      "sha256": "676ecc6f5a9b333bf2c55a9df11ddf037a83fe217788c17f887fae4851ea90bc",
+      "mode": "100644"
+    },
+    "HAL/pico/include/util/state_util.hpp": {
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/DInputBackend.cpp": {
+      "sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/GamecubeBackend.cpp": {
+      "sha256": "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/N64Backend.cpp": {
+      "sha256": "8cdf98be87caaeb23b9a0412a6bfd08bc98615a2f64f6e5ea3096a9fb60535ce",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/NesBackend.cpp": {
+      "sha256": "60b721c48257df2a8d2783f666cfb4ffdb75c61eb649978b4b64c69ceade0fa2",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/NintendoSwitchBackend.cpp": {
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/SnesBackend.cpp": {
+      "sha256": "cbe6b62c117469b0ba970b17c939d1966cff0078e09e51242aa2c106d6941660",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/XInputBackend.cpp": {
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/backend_init.cpp": {
+      "sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea",
+      "mode": "100644"
+    },
+    "HAL/pico/src/comms/console_detection.cpp": {
+      "sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c",
+      "mode": "100644"
+    },
+    "HAL/pico/src/core/KeyboardMode.cpp": {
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+      "mode": "100644"
+    },
+    "HAL/pico/src/core/Persistence.cpp": {
+      "sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+      "mode": "100644"
+    },
+    "HAL/pico/src/display/ConfigMenu.cpp": {
+      "sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be",
+      "mode": "100644"
+    },
+    "HAL/pico/src/display/DefaultConfigMenu.cpp": {
+      "sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+      "mode": "100644"
+    },
+    "HAL/pico/src/display/InputDisplay.cpp": {
+      "sha256": "761f3a5bb6357a278042356e25c691ef82bb45030ee6588cd6571a08e2e6480b",
+      "mode": "100644"
+    },
+    "HAL/pico/src/display/RemapMenu.cpp": {
+      "sha256": "3707564737f8e9f4652e1daddedb6f0e40c94a2cc741d89bc29760d94a39b7fb",
+      "mode": "100644"
+    },
+    "HAL/pico/src/display/RgbBrightnessMenu.cpp": {
+      "sha256": "2a1cf75ef2db9c933404c5a60d4850836b0ba6faf16579a6d7f258701afad650",
+      "mode": "100644"
+    },
+    "HAL/pico/src/gpio.cpp": {
+      "sha256": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c",
+      "mode": "100644"
+    },
+    "HAL/pico/src/reboot.cpp": {
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e",
+      "mode": "100644"
+    },
+    "HAL/pico/src/rgb/ButtonLocations.cpp": {
+      "sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f",
+      "mode": "100644"
+    },
+    "HAL/pico/src/serial.cpp": {
+      "sha256": "4a38620ffc8683d55d61d88a262ebc1f2a9f830dbd086fca8733f0253e222e4d",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/LEDTemplates.hpp": {
+      "sha256": "913df323d7eebe69146dec8e03cb4cc944a927b56d482a039a67f3cd3e42ec53",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/config_rgb_target_domain.hpp": {
+      "sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/display/AboutMenu.hpp": {
+      "sha256": "decc5c33755d07974c906bb68a0a77c083c7349cc329cc3a838177069418736f",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/display/Font4x7Fixed.h": {
+      "sha256": "697738b9192b5c97872ccf3b0a6f94970e1f3df95d88efa8bb27958d85079d5f",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/display/GlyphConfigMenu.hpp": {
+      "sha256": "428ad8033d9a03adbf51526a7cb494287da0525e6c493f83f8c19d8d366f64d7",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/display/MenuButtonHints.hpp": {
+      "sha256": "2773d48665657301e72c071114eba137f7ab0fc257e845ee0419664a750ebfed",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/display/OopsieMenu.hpp": {
+      "sha256": "d4b29b14d2421b284b7a3d42f3c717ece9df2e9e45026190b10901f277c8df24",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/display/Picopixel.h": {
+      "sha256": "035c01e6d48efdfef1e4de6152d0d03910210e449236506ec7c8f71799073363",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/glyph_config_validation.hpp": {
+      "sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/glyph_overrides.hpp": {
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/icons/12x12bitmaps.hpp": {
+      "sha256": "6c8b930223444cc753e2e1ba0a77886fc49879eaf1360db8e7f50686e7c1891e",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/icons/16x16bitmaps.hpp": {
+      "sha256": "d7dea73e0a0ffaac25d3cd095a11bd71e4c12a000492e58279f8320904d843e2",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/icons/menubases.hpp": {
+      "sha256": "ec71e2e9d304782edffb457ff46aac6151644a4a9fc80c1299de2055486b7873",
+      "mode": "100644"
+    },
+    "config/glyph/common/include/icons/splashscreen.hpp": {
+      "sha256": "241acda95bcb2b4ced277e020c85c0afc6ff4108acc817094682f4d9c6b41fa2",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/LEDTemplates.cpp": {
+      "sha256": "a30275c41a87d152fc653caf084c80a9dfb59493b73c40639e8eedbeb6c264a7",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/config.cpp": {
+      "sha256": "806271234be664c77dbe5c6540d540f9ef53b77cda21555ee1e78636597e81a9",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/display/AboutMenu.cpp": {
+      "sha256": "d53f71f87cb407c477b588f28cbd4ebadb522326f560e1209b8a3bacb832beee",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/display/GlyphConfigMenu.cpp": {
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/display/MenuButtonHints.cpp": {
+      "sha256": "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/display/OopsieMenu.cpp": {
+      "sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2",
+      "mode": "100644"
+    },
+    "config/glyph/common/src/glyph_config_validation.cpp": {
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "mode": "100644"
+    },
+    "config/glyph/glyph_mk6/include/button_positions.hpp": {
+      "sha256": "73b84b62bec59650ed5a027b0d6100bb09109618c65611ca6bf37b8877736e2f",
+      "mode": "100644"
+    },
+    "config/glyph/glyph_mk6/include/glyph_pinout.hpp": {
+      "sha256": "1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6",
+      "mode": "100644"
+    },
+    "config/glyph/glyph_mk6/include/matrix_definition.hpp": {
+      "sha256": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1",
+      "mode": "100644"
+    },
+    "config/glyph/glyph_mk6/include/neopixel_definitions.hpp": {
+      "sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32",
+      "mode": "100644"
+    },
+    "docs/calibration/gp_config_021_hardware_result.md": {
+      "sha256": "4e89a919785c29ecf5278fa890875754114497b2949ed037c2f209227664aca4",
+      "mode": "100644"
+    },
+    "docs/runtime_config/gp_config022_rgb_target_validation.md": {
+      "sha256": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41",
+      "mode": "100644"
+    },
+    "include/comms/B0XXInputViewer.hpp": {
+      "sha256": "3c64aa64e551830da8c4779686e2f289457dcdbe405319533b9bc8a44e14833f",
+      "mode": "100644"
+    },
+    "include/comms/IntegratedDisplay.hpp": {
+      "sha256": "8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae",
+      "mode": "100644"
+    },
+    "include/comms/console_detection.hpp": {
+      "sha256": "dfde769f360b8cac0b9e0deaa4d2f35f53d26f0f3c6fff769e6727d31b8a7e8e",
+      "mode": "100644"
+    },
+    "include/core/CommunicationBackend.hpp": {
+      "sha256": "bfee254cb9175cdff2fe81406648c0b53d4e35b158a5a120ba985b0dd62bd6c1",
+      "mode": "100644"
+    },
+    "include/core/ControllerMode.hpp": {
+      "sha256": "bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47",
+      "mode": "100644"
+    },
+    "include/core/InputMode.hpp": {
+      "sha256": "dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee",
+      "mode": "100644"
+    },
+    "include/core/InputSource.hpp": {
+      "sha256": "10c5e42a7c624ff89d3ab14389a071fab9f332a973fff7db3791358334aa500a",
+      "mode": "100644"
+    },
+    "include/core/config_button_validation.hpp": {
+      "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f",
+      "mode": "100644"
+    },
+    "include/core/config_rgb_target_validation.hpp": {
+      "sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+      "mode": "100644"
+    },
+    "include/core/config_utils.hpp": {
+      "sha256": "c4aaf06ebaf36422510a9f746bec20cbdc87bef099de2981c456719c637e076f",
+      "mode": "100644"
+    },
+    "include/core/config_validation.hpp": {
+      "sha256": "b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5",
+      "mode": "100644"
+    },
+    "include/core/mode_selection.hpp": {
+      "sha256": "277d5e9cc1a4e165f571b4b3601614ef0caa21f6ff39f0bf8ae26b2dab3dd17e",
+      "mode": "100644"
+    },
+    "include/core/pinout.hpp": {
+      "sha256": "6ec5dcf6130383825a1fb5c0ce573a563a97719d7015cef68cb4c7e7cabf906a",
+      "mode": "100644"
+    },
+    "include/core/socd.hpp": {
+      "sha256": "88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91",
+      "mode": "100644"
+    },
+    "include/core/state.hpp": {
+      "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3",
+      "mode": "100644"
+    },
+    "include/img/remap.hpp": {
+      "sha256": "62cd1efb2f2fa30089b4a11f236712c582cf3b99b23dc350676cd2f858f1fbff",
+      "mode": "100644"
+    },
+    "include/img/update.hpp": {
+      "sha256": "ae7cb4bd3ea6d3e8d1f581b75612bf0f1254cde142b37c494e2bc7087fcebbcf",
+      "mode": "100644"
+    },
+    "include/input/SwitchMatrixInput.hpp": {
+      "sha256": "9f7fa65db078877d53cc851c8a906ac6c37ddbbb615f28266fc35bcd301f88f6",
+      "mode": "100644"
+    },
+    "include/modes/64.hpp": {
+      "sha256": "2839f6573877ff438e674e8e3c406850e02c2624bac7c79975cbe637e3b99442",
+      "mode": "100644"
+    },
+    "include/modes/CustomControllerMode.hpp": {
+      "sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414",
+      "mode": "100644"
+    },
+    "include/modes/CustomKeyboardMode.hpp": {
+      "sha256": "c907de266f4ebeea8518511cf725c57bf52c85c0c9827f25cc2a7d20381f9464",
+      "mode": "100644"
+    },
+    "include/modes/FgcMode.hpp": {
+      "sha256": "90b854be77c26b268399f0f6d3849e27f804f83b4ab61eaedede34d83353da78",
+      "mode": "100644"
+    },
+    "include/modes/Melee20Button.hpp": {
+      "sha256": "38dfa8a874455d3f865c722bf6bfe4ebf607292085375440cb46ccf294c53cd6",
+      "mode": "100644"
+    },
+    "include/modes/ProjectM.hpp": {
+      "sha256": "35f2e3695bfc8c209400a5c66f2ba81f02341ed22f24591ab044beac09c9d115",
+      "mode": "100644"
+    },
+    "include/modes/Rivals2.hpp": {
+      "sha256": "90bfc5ab82915b63f41504c78a50e8e8565df44734c36016428b3dba3f5b20dc",
+      "mode": "100644"
+    },
+    "include/modes/RivalsOfAether.hpp": {
+      "sha256": "5feadf8205b79807bd467184aa0a195e07fcc090af367010a7aaf3e77d0afb0e",
+      "mode": "100644"
+    },
+    "include/modes/SenscopePrototype.hpp": {
+      "sha256": "8c17dd70815e30e356355cc7f28a199441f92872d63dcae6277ff86ae609bcd1",
+      "mode": "100644"
+    },
+    "include/modes/Ultimate.hpp": {
+      "sha256": "5e4adf71353d77f0b147f55eb6215d5a014128af55ccf6725914ded15752a031",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp": {
+      "sha256": "0486efd34d98a2a89620bdf3159a609e5c3bb3b1d0170db1380446ec5c75ff4c",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeDigital.hpp": {
+      "sha256": "d08c02c66b0258c9d9bbae9d53a04f1375edc6f3a8579808c2609199dac475e7",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeDirection.hpp": {
+      "sha256": "c9b1e29aecaa6993f12324503a8631f9625c8917883677cca3ff7baba05a5dd3",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeForce.hpp": {
+      "sha256": "c3ea72442fa9ff1ac263d24453da61d6ceaa061d4a033251d8a4d47be1e387be",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeModifier.hpp": {
+      "sha256": "14aaddebe44ac170a53889564bf3202a9d28cb6ed79f4ebf7f9d344f04f16ca8",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeOutput.hpp": {
+      "sha256": "7e79a6b10b35dd56fbc49a38b14caa796ce05f7acf9eefb04e549a334070af29",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeResolver.hpp": {
+      "sha256": "001f6b923bbab6917f8a86030e2235550f2b865ce40ecc273a072c7456dd9fc5",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeSelfTest.hpp": {
+      "sha256": "39d0151759e199e2e70e1e74716e1beff8b38f8d5fb6f38efac8ea28b1e2d0a1",
+      "mode": "100644"
+    },
+    "include/prototypes/senscope/SenscopePrototypeTypes.hpp": {
+      "sha256": "1c3cd07ddcee4ce1cb4f5d33b66392c88b7217bf5dc9d021a1cf058bf4c5d0fe",
+      "mode": "100644"
+    },
+    "include/reboot.hpp": {
+      "sha256": "bcc6237cd7c3b85e263cdfd2f265aaf257537a75fc6518acb4edf5f0ab14ef6d",
+      "mode": "100644"
+    },
+    "lib/TUCompositeHID/include/TUCompositeHID.hpp": {
+      "sha256": "a1b6a39213696018fb11e7694baff07c255b042b9bfce5989592a2403031763d",
+      "mode": "100644"
+    },
+    "lib/TUCompositeHID/include/TUGamepad.hpp": {
+      "sha256": "4e8b6b3ad56bfa5506a5febb5a4c018b7ac68fc9d35ae926b7ade55fd2a61c06",
+      "mode": "100644"
+    },
+    "lib/TUCompositeHID/include/TUKeyboard.hpp": {
+      "sha256": "29421cd802dc74ffb930ffbff16045cc3764d4129327751b0949d3dbb873e7d7",
+      "mode": "100644"
+    },
+    "lib/TUCompositeHID/src/TUCompositeHID.cpp": {
+      "sha256": "8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294",
+      "mode": "100644"
+    },
+    "lib/TUCompositeHID/src/TUGamepad.cpp": {
+      "sha256": "b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e",
+      "mode": "100644"
+    },
+    "lib/TUCompositeHID/src/TUKeyboard.cpp": {
+      "sha256": "bc046bbf1b998caf53bc58deed4b4927da050a9e3d24cf9a1e7da0373ab41ca9",
+      "mode": "100644"
+    },
+    "src/comms/B0XXInputViewer.cpp": {
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e",
+      "mode": "100644"
+    },
+    "src/comms/IntegratedDisplay.cpp": {
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e",
+      "mode": "100644"
+    },
+    "src/core/CommunicationBackend.cpp": {
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575",
+      "mode": "100644"
+    },
+    "src/core/ControllerMode.cpp": {
+      "sha256": "1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8",
+      "mode": "100644"
+    },
+    "src/core/InputMode.cpp": {
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+      "mode": "100644"
+    },
+    "src/core/InputSource.cpp": {
+      "sha256": "daeefea10d724ea5be8c9ea4faeee3d0d8716a4e091a3ce57537604d4b111ad8",
+      "mode": "100644"
+    },
+    "src/core/config_button_validation.cpp": {
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "mode": "100644"
+    },
+    "src/core/config_rgb_target_validation.cpp": {
+      "sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+      "mode": "100644"
+    },
+    "src/core/config_utils.cpp": {
+      "sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab",
+      "mode": "100644"
+    },
+    "src/core/config_validation.cpp": {
+      "sha256": "d9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e",
+      "mode": "100644"
+    },
+    "src/core/mode_selection.cpp": {
+      "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+      "mode": "100644"
+    },
+    "src/core/socd.cpp": {
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+      "mode": "100644"
+    },
+    "src/modes/64.cpp": {
+      "sha256": "ee374d38fc3293e884e97dddb2d48a0fd410a9a4b84f5311206f3b5921a4ca49",
+      "mode": "100644"
+    },
+    "src/modes/CustomControllerMode.cpp": {
+      "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+      "mode": "100644"
+    },
+    "src/modes/CustomKeyboardMode.cpp": {
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+      "mode": "100644"
+    },
+    "src/modes/FgcMode.cpp": {
+      "sha256": "236de331e38c68a221f44ececf4444b601b3c1e56b1ac20bb6422390720f5ef0",
+      "mode": "100644"
+    },
+    "src/modes/Melee20Button.cpp": {
+      "sha256": "42f9be54340a918172194ecf152bb1aaad8762da9f5f04c4f52925a679929522",
+      "mode": "100644"
+    },
+    "src/modes/ProjectM.cpp": {
+      "sha256": "ad3b3c1b80e1157a13adb3b3166569f8f955d2f94462426aeb5ea31070a94c2a",
+      "mode": "100644"
+    },
+    "src/modes/Rivals2.cpp": {
+      "sha256": "44242d673f75fa417168f69c63075345eaabad6c8ef5b90393ef01b56ddd329c",
+      "mode": "100644"
+    },
+    "src/modes/RivalsOfAether.cpp": {
+      "sha256": "ccc04805c353d4beec97164d45ac0a5dfb0792e5816b4cf1882f3ec7a7e80c4e",
+      "mode": "100644"
+    },
+    "src/modes/SenscopePrototype.cpp": {
+      "sha256": "cadadf8668701d6296e69688519e1a0679835150e9135d6e1b5f9369e23d01c8",
+      "mode": "100644"
+    },
+    "src/modes/Ultimate.cpp": {
+      "sha256": "a40d24db990f0f59ab20ba76257596210e9ccca459415e78235374c2996b2dfd",
+      "mode": "100644"
+    },
+    "src/modes/UltimateIdentityRuntimeTables.hpp": {
+      "sha256": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb",
+      "mode": "100644"
+    },
+    "src/modes/UltimateRuntimeConfigInterpreter.hpp": {
+      "sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108",
+      "mode": "100644"
+    },
+    "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp": {
+      "sha256": "e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeDigital.cpp": {
+      "sha256": "1e070471ad29d1ed9ed753b05187e92bc9166228ef0b961068d03befe10cc5cd",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeDirection.cpp": {
+      "sha256": "852bc5f9886e1e69c9e978b12cbac8a37482926972a06f2fa38799d51693641e",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeForce.cpp": {
+      "sha256": "413f62bacc6b2ce2c71525ebd82df11e0292467d8ff845a27744b3bcae295efe",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeModifier.cpp": {
+      "sha256": "0b7f895499d6a203f772fde35298524698b4822fd64063187bc05c13fafd9cde",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeOutput.cpp": {
+      "sha256": "cac775337faba93ee47cebed2035557e1a92b04f5ade9b32e8a695560b09e623",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeResolver.cpp": {
+      "sha256": "24a20cdb21a7d8ad3a1ff775f4c1c34fc08c190c15db38744d8afb7e1db04d31",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeSelfTest.cpp": {
+      "sha256": "f20a15b5e751a6bd531967112fe53c54fffd1f969e549c5b0e9f8e3465bb0c79",
+      "mode": "100644"
+    },
+    "src/prototypes/senscope/SenscopePrototypeValidation.cpp": {
+      "sha256": "5b39b461a168a5eb84b581797805f4a1a7a7b5fd7db2a64d1ada37cbdcdbc528",
+      "mode": "100644"
+    },
+    "tools/check_glyph_gp_config021_persisted_recovery.py": {
+      "sha256": "2dc78d118dd2936ad9544a297ef00a66a140f90dc58152c87c2abbe423ef556d",
+      "mode": "100644"
+    },
+    "tools/check_glyph_gp_config022_rgb_target_validation.py": {
+      "sha256": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.c": {
+      "sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.h": {
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb.h": {
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c": {
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h": {
+      "sha256": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c": {
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h": {
+      "sha256": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config012_button_host/schema/config.proto": {
+      "sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config017_neopixel_repaired_current/include/FastLED.h": {
+      "sha256": "ab8265928fbd359362aa70dd5547ac1876d001515a79764159513ada960388db",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config020_button_validation/abi_probe.cpp": {
+      "sha256": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp": {
+      "sha256": "d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h": {
+      "sha256": "712027e87b9709c1aeb2b6094011c25455e6802fbf66010e8f6f780a92983b69",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp": {
+      "sha256": "d7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp": {
+      "sha256": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h": {
+      "sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h": {
+      "sha256": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h": {
+      "sha256": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp": {
+      "sha256": "cf1ca013c2f2e049bde4b410d6568384f8d0c1dcb44d82cd418cd71db8e136f3",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp": {
+      "sha256": "f98bb3a985033934e5c9aa312a0729e0d35ed0167e0eb01cc309a4480b575899",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h": {
+      "sha256": "2fc037980c1841c55e4004adb4e87a1ae550173519896a710b78d48394bb24ed",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h": {
+      "sha256": "47c1d2a93fccf06237e00691dcd69036b5b7cfb54dd21416bcc97844d4132453",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h": {
+      "sha256": "3d39e2da342d981461094c69d73229d88a345549499b5069b6e430e76a704dac",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp": {
+      "sha256": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h": {
+      "sha256": "678fd01f158f519d2fee8ffbf027937fb14d4b40d141c618d6c16ea4e4b38a1a",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c": {
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h": {
+      "sha256": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp": {
+      "sha256": "0951794f79b39ac63535af69b580092212e4647066c200ce6df188482e09560d",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h": {
+      "sha256": "854797409140abd8761a44625980a83b73dc62f973e9c8bef94d071cf447eb59",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h": {
+      "sha256": "f1a8348ce2b2fed336e269b851bf1031789268802741e9c20a24f8e7d7f2ef57",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h": {
+      "sha256": "02acc526601a3bc61fc434690198eae72da75869e43ad9e24ffc21ead9e72ce0",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp": {
+      "sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h": {
+      "sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h": {
+      "sha256": "6fbf22c418b965c8b3bd1d20d8412d13950043b34ac61ed1f7b5b9bfa4f4ad5d",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h": {
+      "sha256": "f720ec13215f1adbc31ebe561651428c45dd05a3c0b3025d6cbd49be772d57a9",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Print.h": {
+      "sha256": "4950bf9f0a8ec926ce95c225ecf47c6401ae6df17c4353460e1378c4053c9d8a",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Stream.h": {
+      "sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/Wire.h": {
+      "sha256": "9e4b6a768ab81737df13372d053225d92c98bfd433de1af55b4bb54fa725321f",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h": {
+      "sha256": "5c29ced4a047d158ff1e929f9c1679c3eed08cf4f129fb555f7e67d8c981dce3",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h": {
+      "sha256": "47568bbfdd939867e0e0a78613f46a03e6277c4c16661a729ccdd09b988160ea",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h": {
+      "sha256": "f0221f7ab67c22e5ee206c7c8801bd5e09db61c76bf1f7d668495b92f958d5ab",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp": {
+      "sha256": "d87bf97b2ed727954698b931c70d1f0cd8ec9fff70d8bc5b76ed398476365f00",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h": {
+      "sha256": "a2ff6f0ceb9a050416c56ba2d587348c77259a02dd0ba1fc9f81db3c58cc439c",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h": {
+      "sha256": "430c019c88bae951f854bc9fd98615ffc7ef419d6894f5d17edf30278392ba5b",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h": {
+      "sha256": "0531eca33b73e7de9fa6db45f9b9bb5670e7760665a35b9450bdde264b5b4d8b",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h": {
+      "sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h": {
+      "sha256": "2213c23f05f2d03183470a64548b7cfddf78a57d80cb09fc74fe745f3df43408",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h": {
+      "sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h": {
+      "sha256": "de247bcb527348f3a965565be09f0774eebf1203fed7be09e3a1a6e5ad825dc1",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h": {
+      "sha256": "7ee1334c6ec489ba911676c855833b1c1d516b4bd572a39801c526a1fd3c09c9",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp": {
+      "sha256": "e744c7eeec31865b0a3dc954ca8c40982901c9c5ad94605941343f109db833cb",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp": {
+      "sha256": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp": {
+      "sha256": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp": {
+      "sha256": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp": {
+      "sha256": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp": {
+      "sha256": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130",
+      "mode": "100644"
+    },
+    "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp": {
+      "sha256": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97",
+      "mode": "100644"
+    }
+  },
+  "evidence_classification": "HOST_ONLY_NO_HARDWARE_ACCEPTANCE",
+  "historical_archive": "Git-preserved C021 original Config, never fresh owner evidence",
+  "source_scope": [
+    "include/core/config_rgb_target_validation.hpp",
+    "src/core/config_rgb_target_validation.cpp",
+    "config/glyph/common/include/config_rgb_target_domain.hpp",
+    "config/glyph/common/include/glyph_config_validation.hpp",
+    "config/glyph/common/src/glyph_config_validation.cpp",
+    "config/glyph/common/src/config.cpp",
+    "config/glyph/common/include/glyph_overrides.hpp"
+  ]
+}
