@@ -1,0 +1,65 @@
+{
+  "schema_name": "glyph_gp_val045_c024_candidate_activation",
+  "schema_version": 1,
+  "work_order": "GP-VAL-045",
+  "candidate_git_sha": "8ab1173b0690f5ed3e994f95af797c9e9a265525",
+  "candidate_tree": "15ed2d35d561d6b1709499fe42083ca4d789e920",
+  "candidate_base_configurator_sha": "b404453ef22cc994eec54338b8a23c3ba61df808",
+  "candidate_branch": "codex/gp-config-024-usb-profile-identity",
+  "live_remote_verified": true,
+  "independent_source_review": {
+    "result": "PASS",
+    "review_sha256": "b6645bbc5b2101394f0991e58577c6ff09b2ea5fca2237666470f3116c2abf21"
+  },
+  "independent_source_applicability_review": {
+    "result": "PASS",
+    "reviewer": "source_applicability"
+  },
+  "independent_build_role_review": {
+    "result": "PASS",
+    "reviewer": "abi_source_build"
+  },
+  "focused_candidate_proof": {
+    "result": "PASS",
+    "enum_modes": [
+      "default-enum",
+      "short-enum"
+    ],
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "full_target_abi_layout": "NOT_CLAIMED"
+  },
+  "candidate_scope": {
+    "regular_100644_paths": 10,
+    "exact_direct_parent": true,
+    "production_paths": [
+      "HAL/pico/src/display/DefaultConfigMenu.cpp"
+    ]
+  },
+  "affected_current_consumers_before_val045": [
+    {
+      "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
+      "state": "CURRENT_SOURCE_PHASE_IDENTITY_PENDING"
+    },
+    {
+      "checker": "tools/check_glyph_config_menu_invalid_state_characterization.py",
+      "state": "CURRENT_SOURCE_PHASE_IDENTITY_PENDING"
+    },
+    {
+      "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
+      "state": "CURRENT_SOURCE_PHASE_IDENTITY_PENDING"
+    },
+    {
+      "checker": "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
+      "state": "CURRENT_SOURCE_PHASE_IDENTITY_PENDING"
+    }
+  ],
+  "firmware_build": "NOT_RUN",
+  "hardware_acceptance": "NOT_CLAIMED",
+  "val045_activation": "ACTIVATABLE",
+  "c024_resumption": "WAITING_FOR_STRICT_VAL045_DONE",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN"
+}
