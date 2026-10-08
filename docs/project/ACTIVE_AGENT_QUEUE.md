@@ -1,8 +1,8 @@
 # Active Agent Queue
 
-## Current GP-CONFIG-022 exact hardware handoff
+## Current GP-CONFIG-022 exact hardware evidence
 
-GP-CONFIG-022 is HARDWARE_TEST_REQUIRED at exact committed-before-build F `bfec69fd5e176ed9a720780a76ff269c7cc29926`, tree `e8971174019a46f15e374da314fb42ef5ed714d0`, sole empty-child parent M `da592cb4ae06b4406d5f2f1ba72ad865a96afe2d`. Genuine M parents source-free strict039 DONE `77f0dc7ea96271b8595c71dbb792dd85346edf28` and preserved C022 `b4e03566ceaa0815df7ba0eef975cf0ac0583622`; all243 critical F inputs equal C and exactly seven production paths differ from D. Mk6 build PASS: RAM105784/262144 and flash389344/1568768; preserved UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539`, 802816 bytes, regular0444 content-addressed locator `local_backups/hardware-artifacts/bfec69fd5e176ed9a720780a76ff269c7cc29926/4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539/firmware.uf2`. Fresh independent exact-F source/build/custody/correspondence/protocol review PASS with no findings; report SHA2565959f19f206bda1145d9a8e1ccbd785b481e19b707f4cb1cc1700043ce50d626. Cache-free exact-F public native authentication PASS; original cache-workflow nativeFAIL and earlier CLI/aggregate/synthetic/context failures and timeouts remain explicit framework debt, no fullaggregate/all17PASS. Canonical238 critical inputs remain acceptedF021; C022 source/catalog is unmerged. All ten physical rows are NOT_TESTED. First owner action is a fresh raw Config GET/backup on existing accepted017 through the established safe read workflow, without firmware/Config change. Exact codec roundtrip, minimal block11 count11/LF1black correction/restoration artifacts, full diffs and independent review precede separately authorized manual Config write. Normal gameplay gate includes one grouped all11-target block11 appearance matrix. GP-VAL-039 remains strictDONE; all98 other orders and prior receipts/evidence unchanged. Same UD029 campaign reaches genuine hardware wait after reviewed live handoff; no Planner/Curator/neworder/fullchat. One ordinary successor used, exceptional repairs zero. Nunchuk NOT_TESTED; root cause UNPROVEN. The initial2026-10-02 adoption recorded RUNWAY_OK; current marker remains PLANNING_REQUIRED.
+GP-CONFIG-022 is HARDWARE_VALIDATED with source-free HEP PASS for exact F `bfec69fd5e176ed9a720780a76ff269c7cc29926`, tree `e8971174019a46f15e374da314fb42ef5ed714d0`, UF2 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` /802816bytes. Nine human rowsPASS; originalstatic_dynamicPARTIAL is preserved, with physicallytestedSTATICPASS and each SHIFT/XWAVE physical NOT_APPLICABLE_NO_EXISTING_OWNER_CONFIGURATION under directlyverifiedownerdisposition. Exactanimationimplementation unchanged beyondsharedtargetgate, all243criticalF==C, affectedhostproof bothABIs/231negatives/6rawcontrolsPASS, no physicalcontradiction. No physicaldynamicPASS claimed. MB1cyan/noKeyboardoutput/ordinarymenu is EXPECTED_LOCAL_UI_BEHAVIOR, backed by selectedkeymap/localUI source. Full23wrapper raw/JSON/roundtrips match; exactapprovedblock11count20->11, storedLF1cyan->explicitblack, removalnineemptyrecords, other10cyan/unrelatedfields preserved. InvalidSET exactRGBerror and corrected4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe unchanged; originalrefusaltwice/retentionPASS. Finalaccepted017 About5994f165 plus original4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 restored immediately/postreboot andnormal. Sessioncodec/profile-selection/recoverytimeouts/mountincident retained, hostmountnonattributed; no unresolvedproductcontradiction. Canonical238criticalinputs remainaccepted021, C022source/catalog unmerged; GP-VAL-039strictDONE andall98otherorders/receipts/evidence unchanged. ExactE/native/focusedpostmutationreview precedespublication; historicalaggregateFAIL/TIMEOUT/frameworkdebt retained, nofullaggregatePASS. SamepersistentH3 resumesexacttestedsourceintegration/freshreview/separateDONE->023 afterHEPpublication; nonewPlanner/Curator/order/fullchat/retest/deviceaction. NunchukNOT_TESTED; rootcauseUNPROVEN. Initial2026-10-02 adoption recorded RUNWAY_OK; currentmarker remainsPLANNING_REQUIRED.
 
 ## Current GP-CONFIG-021 exact hardware evidence
 
@@ -169,15 +169,14 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 4,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
+    "hardware_pending": 0,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
     "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
-    "HARDWARE_TEST_REQUIRED"
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -1105,7 +1104,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-022",
       "title": "Validate physical RGB targets at both acceptance seams",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "HARDWARE_VALIDATED",
       "branch": "codex/gp-config-022-build",
       "objective": "Owner GLYPH-UD-024 resolves physical RGB semantics. Exact 76-pixel map has 36 named targets, independent of gameplay state. 021 stable callback/private acceptance permits both producer seams with refusal on persisted rejection.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1153,19 +1152,15 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": "bfec69fd5e176ed9a720780a76ff269c7cc29926",
       "candidate_base_configurator_sha": "da592cb4ae06b4406d5f2f1ba72ad865a96afe2d",
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/bfec69fd5e176ed9a720780a76ff269c7cc29926/4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539/firmware.uf2",
       "firmware_artifact_sha256": "4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
-      "hardware_evidence_gaps": [
-        "All ten exact human GP_CONFIG_022_HW_V1 rows remain NOT_TESTED; no inherited predecessor or host acceptance.",
-        "Fresh owner raw GET/byte-exact backup, exact-F minimal corrected/restoration packet and independent artifact/route review precede any later action.",
-        "Separately explicit owner approval for exact reviewed Config artifacts and the existing manual write/recovery route is required before Config writes."
-      ]
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_config_022_hardware_evidence.json",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
     },
     {
       "id": "GP-VAL-039",
@@ -8322,11 +8317,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

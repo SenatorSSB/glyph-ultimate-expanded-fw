@@ -1,10 +1,9 @@
 {
-  "schema_name": "glyph_pending_hardware_evidence_template",
-  "schema_version": 1,
   "work_order_id": "GP-CONFIG-022",
   "candidate_branch": "codex/gp-config-022-build",
   "candidate_git_sha": "bfec69fd5e176ed9a720780a76ff269c7cc29926",
   "candidate_base_configurator_sha": "da592cb4ae06b4406d5f2f1ba72ad865a96afe2d",
+  "firmware_artifact_filename": "firmware.uf2",
   "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
   "firmware_artifact_sha256": "4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539",
   "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/bfec69fd5e176ed9a720780a76ff269c7cc29926/4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539/firmware.uf2",
@@ -12,105 +11,97 @@
   "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
   "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_022_HARDWARE_PROTOCOL.md",
   "candidate_protocol_version": "GP_CONFIG_022_HW_V1",
-  "firmware_artifact_filename": "firmware.uf2",
-  "pre_update_sha256_verified": false,
-  "controller_model_revision": null,
-  "firmware_profile_state": null,
-  "update_method": null,
-  "host_platform_adapter": null,
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6; owner established controller; no new revision inference",
+  "firmware_profile_state": "C022 tested with exact corrected owner Config4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe; original4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 for invalidSET/refusal. Final exact acceptedC017 plus original Config.",
+  "update_method": "Owner manual existing MB1/ROM BOOTSEL payload-addressed UF2 workflow; preserved exact artifacts rehashed; no processor device operation.",
+  "host_platform_adapter": "GameCube->Nintendo WUP-028->Switch Ultimate3; Mac/XInput Ultimate3; Mac/DINPUT Keyboard13 RGB11; established Configurator for SET/GET.",
   "preconditions": [
-    "PENDING fresh accepted017 owner Config acquisition and independently reviewed complete ORIGINAL/CORRECTED/RESTORATION packet.",
-    "No physical operation or observation recorded. This unreferenced pending template is not processor acceptance."
+    "Actual owner message01a11c5b-9df7-7290-908e-f5c18a5dbf78 in daemon turn01a11c5b-9ca3-7523-a916-c8081873ee0a independently retrieved; verbatim full report and applicability authority archived in result.",
+    "Fresh complete original GET2026-10-08T14:01:54.395021+00:00 on accepted017; complete raw/JSON and schema byte-exact roundtrips independently verified. Current testing, no historical sample substituted.",
+    "ExactF/tree/build/custody/protocol correspond; pre-update rehash preserved in session. Only approved block11 storedLF1cyan->explicitblack and removalnineemptycountedrecords, count20->11; allunrelatedfields equal.",
+    "13 existing STATIC RGB blocks; absent SHIFT/XWAVE physical subcases owner-authorized N/A under unchangedanimation/source+hostPASS and no physicalcontradiction. No newprofiles/writes by HEP.",
+    "All session incidents retained in result, including initial missing codec, persisted default selection differences, write/GET timeouts, subsequent exactcorrected recovery, SNES filtering and host mount failure. Empty anomalies below means no unresolved contradiction in accepted final rows, not an anomaly-free session."
   ],
   "steps": [
     {
       "id": "ordinary_active_rgb",
       "instruction": "Corrected fresh Config on exact F: actual physical-button illumination and clean release with an existing active gameplay assignment; identify profile/RGB references and unchanged expected colors.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Corrected fresh Config on exact F: actual physical-button illumination and clean release with an existing active gameplay assignment; identify profile/RGB references and unchanged expected colors."
+      "expected": "Corrected fresh Config on exact F: actual physical-button illumination and clean release with an existing active gameplay assignment; identify profile/RGB references and unchanged expected colors.",
+      "observed": "PASS owner 'GC all match; USB all match'; corrected raw4f9f...e2d0fe, Ultimate index3, GC/WUP-028/Switch and Mac/XInput face/four directions/source-derived nine-wayX1/release/static RGB; no reported anomaly."
     },
     {
       "id": "gameplay_disabled_rgb",
       "instruction": "Use an existing, source-supported disabled or unassigned gameplay target that remains a named physical RGB target; record actual lighting and gameplay output separately. Do not add profiles or change unrelated references.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Use an existing, source-supported disabled or unassigned gameplay target that remains a named physical RGB target; record actual lighting and gameplay output separately. Do not add profiles or change unrelated references."
+      "expected": "Use an existing, source-supported disabled or unassigned gameplay target that remains a named physical RGB target; record actual lighting and gameplay output separately. Do not add profiles or change unrelated references.",
+      "observed": "PASS owner 'confirmed, no keyboard input, the miniscreen reacts to menu being opened as per usual'; Mac/DINPUT Keyboard index13 RGB11, MB1 cyan#22D3EE/2282478, no Keyboard/gameplay output. EXPECTED_LOCAL_UI_BEHAVIOR: normal integrated menu retained. Selected keymap has no MB1 key; raw local UI controls are distinct."
     },
     {
       "id": "static_dynamic_rgb",
       "instruction": "Actual existing STATIC, SHIFT and XWAVE routes identified in fresh Config and source: expected retained color/brightness/animation and actual controller observations. Host HSV stub does not establish physical conversion.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Actual existing STATIC, SHIFT and XWAVE routes identified in fresh Config and source: expected retained color/brightness/animation and actual controller observations. Host HSV stub does not establish physical conversion."
+      "expected": "Actual existing STATIC, SHIFT and XWAVE routes identified in fresh Config and source: expected retained color/brightness/animation and actual controller observations. Host HSV stub does not establish physical conversion.",
+      "observed": "PASS applicable STATIC physical portion: owner Block6 matrix and controls matched on Mac/DINPUT Keyboard13/RGB11. Original owner aggregate row PARTIAL is preserved verbatim in result. SHIFT physical: NOT_APPLICABLE_NO_EXISTING_OWNER_CONFIGURATION. XWAVE physical: NOT_APPLICABLE_NO_EXISTING_OWNER_CONFIGURATION. Fresh Config13STATIC/zeroSHIFT/zeroXWAVE; directly verified owner ruling permits these subcases without gaps only after exact unchanged animation/source correspondence and affected host PASS, both independently established. No physical SHIFT/XWAVE PASS is claimed."
     },
     {
       "id": "invalid_target_rejection",
       "instruction": "Only after exact artifact/route review and separate explicit permission: existing ordinary SET of reviewed legacy zero-target original while exact F runs corrected Config. Expect RGB-target rejection, no save/live publication, unchanged current gameplay/RGB and exact stored corrected raw readback. Do not create another writer or malformed-count payload.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Only after exact artifact/route review and separate explicit permission: existing ordinary SET of reviewed legacy zero-target original while exact F runs corrected Config. Expect RGB-target rejection, no save/live publication, unchanged current gameplay/RGB and exact stored corrected raw readback. Do not create another writer or malformed-count payload."
+      "expected": "Only after exact artifact/route review and separate explicit permission: existing ordinary SET of reviewed legacy zero-target original while exact F runs corrected Config. Expect RGB-target rejection, no save/live publication, unchanged current gameplay/RGB and exact stored corrected raw readback. Do not create another writer or malformed-count payload.",
+      "observed": "PASS exact C022 rejected reviewed original raw4201/f589...1480 with 'Config contains an invalid RGB target'; no accepted-profile update. Full post-SET stored raw4178/4f9f...e2d0fe equals pre-SET corrected bytes, owner then reported normal operation."
     },
     {
       "id": "persisted_refusal",
       "instruction": "With independently reviewed fresh legacy original stored on accepted017, owner manually boots exact F: refusal before normal gameplay/RGB/menus/Configurator. Do not assume Configurator is reachable during refusal; later accepted017 recovery raw readback must prove all rejected bytes retained.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "With independently reviewed fresh legacy original stored on accepted017, owner manually boots exact F: refusal before normal gameplay/RGB/menus/Configurator. Do not assume Configurator is reachable during refusal; later accepted017 recovery raw readback must prove all rejected bytes retained."
+      "expected": "With independently reviewed fresh legacy original stored on accepted017, owner manually boots exact F: refusal before normal gameplay/RGB/menus/Configurator. Do not assume Configurator is reachable during refusal; later accepted017 recovery raw readback must prove all rejected bytes retained.",
+      "observed": "PASS owner 'persisted refusal matches twice': exact C022 with original rawf589...1480 refused before normal initialization on initial boot and ordinary reboot; no normal backend/profile initialized. Exact017 later recovered all original bytes unchanged."
     },
     {
       "id": "reboot_reconnect",
       "instruction": "Rejected original repeats refusal on ordinary reboot; corrected Config repeats normal startup/reconnect with unchanged raw bytes and no stuck reports. Record both contexts separately.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Rejected original repeats refusal on ordinary reboot; corrected Config repeats normal startup/reconnect with unchanged raw bytes and no stuck reports. Record both contexts separately."
+      "expected": "Rejected original repeats refusal on ordinary reboot; corrected Config repeats normal startup/reconnect with unchanged raw bytes and no stuck reports. Record both contexts separately.",
+      "observed": "PASS owner 'all match, connected'; corrected Config ordinary reboot/reconnect normal profile/RGB/gameplay/release. Profile name not transcribed for this row. Full post-reboot4178/4f9f...e2d0fe corrected equality. Separate original-config refusal repeated on reboot as recorded in persisted_refusal."
     },
     {
       "id": "ultimate_gc",
       "instruction": "Existing actual Ultimate profile on Glyph Mk6 through owner established GC/adapter/Switch route: ordinary controls, source-backed applicable X1 table, neutral/clean release and RGB; record controller/host/adapter/profile and observed outputs.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Existing actual Ultimate profile on Glyph Mk6 through owner established GC/adapter/Switch route: ordinary controls, source-backed applicable X1 table, neutral/clean release and RGB; record controller/host/adapter/profile and observed outputs."
+      "expected": "Existing actual Ultimate profile on Glyph Mk6 through owner established GC/adapter/Switch route: ordinary controls, source-backed applicable X1 table, neutral/clean release and RGB; record controller/host/adapter/profile and observed outputs.",
+      "observed": "PASS owner 'GC all match'; exact C022 corrected Config, Ultimate index3, GameCube->WUP-028->Switch, face/four directions/source-derived nine-wayX1/release/RGB. No Nunchuk or other adapter inference."
     },
     {
       "id": "usb_sanity",
       "instruction": "Existing supported owner USB backend/profile and host: concrete control output and clean release, ordinary initialization and RGB, no unexpected disconnect. Do not infer other backends or Nunchuk acceptance.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Existing supported owner USB backend/profile and host: concrete control output and clean release, ordinary initialization and RGB, no unexpected disconnect. Do not infer other backends or Nunchuk acceptance."
+      "expected": "Existing supported owner USB backend/profile and host: concrete control output and clean release, ordinary initialization and RGB, no unexpected disconnect. Do not infer other backends or Nunchuk acceptance.",
+      "observed": "PASS owner 'USB all match'; exact C022 corrected Config, Mac/XInput Ultimate index3, face/directions/X1/release/RGB. No other backend hardware acceptance inferred."
     },
     {
       "id": "block11_grouped_appearance",
       "instruction": "One grouped observation during the normal gameplay gate on an existing profile referencing block11: LF1 black/0; LF2,LF3,LT1,RF1,RF2,RF5,RF6,RT1,MB1,LF5 each retain reviewed fresh-owner values (source defaults #22D3EE/2282478). Record all11 individually within this one group. No preliminary historical appearance campaign.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "One grouped observation during the normal gameplay gate on an existing profile referencing block11: LF1 black/0; LF2,LF3,LT1,RF1,RF2,RF5,RF6,RT1,MB1,LF5 each retain reviewed fresh-owner values (source defaults #22D3EE/2282478). Record all11 individually within this one group. No preliminary historical appearance campaign."
+      "expected": "One grouped observation during the normal gameplay gate on an existing profile referencing block11: LF1 black/0; LF2,LF3,LT1,RF1,RF2,RF5,RF6,RT1,MB1,LF5 each retain reviewed fresh-owner values (source defaults #22D3EE/2282478). Record all11 individually within this one group. No preliminary historical appearance campaign.",
+      "observed": "PASS owner 'block11 all match'; Mac/DINPUT Keyboard index13 references RGB11: LF1BLACK/0; LF2,LF3,LT1,RF1,RF2,RF5,RF6,RT1,MB1,LF5 each CYAN#22D3EE/2282478; usable Keyboard controls. SNES-only profile correctly hidden on Mac/Switch; existing accessible Keyboard profile used."
     },
     {
       "id": "recovery_restoration",
       "instruction": "Existing pre-load MB1/ROM BOOTSEL escape, exact accepted017 rollback, full rejected-original readback equality, then separately authorized original restoration via existing manual writer. Require exact original raw bytes/count/hash immediately and after reboot and ordinary gameplay/clean release.",
-      "status": "NOT_TESTED",
-      "observed": null,
-      "expected": "Existing pre-load MB1/ROM BOOTSEL escape, exact accepted017 rollback, full rejected-original readback equality, then separately authorized original restoration via existing manual writer. Require exact original raw bytes/count/hash immediately and after reboot and ordinary gameplay/clean release."
+      "expected": "Existing pre-load MB1/ROM BOOTSEL escape, exact accepted017 rollback, full rejected-original readback equality, then separately authorized original restoration via existing manual writer. Require exact original raw bytes/count/hash immediately and after reboot and ordinary gameplay/clean release.",
+      "observed": "PASS recovered exact C017 F5994f1657e45e0883c6c75468a19be7e3b49a72c/UF2e681...0fe5; owner About5994f165. Rejected original bytes retained after two C022 refusal boots; final immediate/post-reboot original4201/f589...1480 exact. Owner 'final original state all normal; configurator connected'. Prior recovery timeout/profile-selection and macOS mount incidents retained in result; no incorrect UF2 flashed. Host mount incident remains nonattributed; root cause UNPROVEN."
     }
   ],
-  "result": "INCONCLUSIVE",
-  "anomalies": [],
-  "tester": null,
-  "tested_at": null,
-  "evidence_gaps": [
-    "ordinary_active_rgb: NOT_TESTED",
-    "gameplay_disabled_rgb: NOT_TESTED",
-    "static_dynamic_rgb: NOT_TESTED",
-    "invalid_target_rejection: NOT_TESTED",
-    "persisted_refusal: NOT_TESTED",
-    "reboot_reconnect: NOT_TESTED",
-    "ultimate_gc: NOT_TESTED",
-    "usb_sanity: NOT_TESTED",
-    "block11_grouped_appearance: NOT_TESTED",
-    "recovery_restoration: NOT_TESTED"
+  "negative_regression_checks": [
+    "Live invalid original SET RGB error; complete corrected storedConfig unchanged; normal operation afterwards.",
+    "Legacyoriginal refused twice before ordinaryinitialization; exact017 recovery proved every rejectedrawbyte retained.",
+    "Fresh exact-source host tests both ABIs PASS,231 guardnegatives and6rawinterfacecontrols; original/corrected actualraw decoded and rejected/accepted in bothABIs. HostHSV remains synthetic, no physicaldynamicPASS.",
+    "MB1 noKeyboardkey mapping/nohostoutput; ordinary localmenu retained as EXPECTED_LOCAL_UI_BEHAVIOR."
   ],
-  "acceptance_schema_name": "glyph_hardware_evidence_record",
-  "acceptance_schema_version": 2,
-  "rollback_recovery": null
+  "power_cycle_reconnect_checks": [
+    "Original C022 refusal repeated after ordinary reboot.",
+    "Corrected C022 normal reconnect/reboot and fullcorrected raw4178/4f9...e2d0fe.",
+    "Final exact017 original raw4201/f589...1480 immediate and postreboot equality; owner normalstate confirmed."
+  ],
+  "result": "PASS",
+  "anomalies": [],
+  "rollback_recovery": "PASS recovered exact C017 F5994f1657e45e0883c6c75468a19be7e3b49a72c/UF2e681...0fe5; owner About5994f165. Rejected original bytes retained after two C022 refusal boots; final immediate/post-reboot original4201/f589...1480 exact. Owner 'final original state all normal; configurator connected'. Prior recovery timeout/profile-selection and macOS mount incidents retained in result; no incorrect UF2 flashed. Host mount incident remains nonattributed; root cause UNPROVEN.",
+  "tester": "Project owner physical observations; independent Hardware Evidence Processor /root; source specialist /root/c022_source_applicability; evidence reviewer /root/c022_hep_review.",
+  "tested_at": "2026-10-08T16:32:08Z",
+  "evidence_gaps": []
 }
