@@ -938,8 +938,13 @@ def authenticate_config019_coexistence(root, head):
     require(adopted, '019 current proof lacks adopted041 authority ancestry')
     require(set(CONFIG019_OVERLAY_PINS) == CONFIG019_OVERLAY_PATHS,
             '041 incomplete exact current overlay pins')
-    _config019_current_pins(root, head, dict(CONFIG019_AUTHORITY_PINS, **CONFIG019_CURRENT_SOURCE_PINS,
-                                           **CONFIG019_OVERLAY_PINS))
+    current_pins = dict(CONFIG019_AUTHORITY_PINS, **CONFIG019_CURRENT_SOURCE_PINS, **CONFIG019_OVERLAY_PINS)
+    # VAL045 is authorized to extend this checker while its historical fixture,
+    # host, and source pins remain immutable. The outer exact path envelope and
+    # committed/index/live checks authenticate the updated checker bytes.
+    if has_c024_campaign(root):
+        current_pins.pop(CONFIG019_CHECKER, None)
+    _config019_current_pins(root, head, current_pins)
     original_hosts = CONFIG019_ORIGINAL_HOSTS & tree.keys()
     original_live = live & CONFIG019_ORIGINAL_HOSTS
     integrated = ancestor(root, CONFIG019_C, head)
@@ -983,8 +988,243 @@ def authenticate_config019_coexistence(root, head):
 authenticate_014_original = authenticate
 authenticate_config019_coexistence_014_original = authenticate_config019_coexistence
 
+# GP-VAL-045 binds the separately reviewed GP-CONFIG-024 source candidate.
+# C remains a preserved direct child of B; this route never merges it into the
+# canonical source tree and never treats its host proof as hardware acceptance.
+C024_C = '8ab1173b0690f5ed3e994f95af797c9e9a265525'
+C024_B = 'b404453ef22cc994eec54338b8a23c3ba61df808'
+C024_TREE = '15ed2d35d561d6b1709499fe42083ca4d789e920'
+C024_HANDOFF = '4bfb3777a4f484f091f0d8054230e3eb9ac3dee2'
+C024_PROOF = 'docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json'
+C024_MENU = 'HAL/pico/src/display/DefaultConfigMenu.cpp'
+C024_CANDIDATE_PATHS = frozenset((
+    C024_MENU,
+    'tools/check_glyph_gp_config024_usb_profile_identity.py',
+    'tools/fixtures/gp_config024_usb_profile_identity/main.cpp',
+    'tools/fixtures/gp_config024_usb_profile_identity/include/host_stubs.hpp',
+    'docs/calibration/gp_config_024_usb_profile_identity_repair.md',
+    C024_PROOF,
+    'docs/runtime_config/fixtures/runtime_config_validation_manifest.json',
+    'docs/runtime_config/fixtures/glyph_checker_census.json',
+    'docs/runtime_config/fixtures/runtime_config_validation_health.json',
+    'docs/runtime_config/runtime_config_validation_health.md',
+))
+VAL045_PATHS = frozenset((
+    'tools/glyph_c014_campaign_transition.py',
+    'tools/glyph_campaign_transition.py',
+    'tools/test_glyph_c014_campaign_transition.py',
+    'tools/check_glyph_gp_config019_usb_name_selection.py',
+    'tools/check_glyph_gp_kbd_001_keyboard_pipeline.py',
+    'docs/runtime_config/gp_val045_usb_identity_correspondence.md',
+    'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json',
+    'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md',
+    'docs/project/ACTIVE_AGENT_QUEUE.md',
+    'docs/runtime_config/fixtures/runtime_config_validation_manifest.json',
+    'docs/runtime_config/fixtures/glyph_checker_census.json',
+    'docs/runtime_config/fixtures/runtime_config_validation_health.json',
+    'docs/runtime_config/runtime_config_validation_health.md',
+))
+C024_HANDOFF_FIXTURE = 'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json'
+C024_C019_ACCEPTED_EXTRA = {
+    'HAL/pico/include/core/Persistence.hpp': {
+        'sha256': 'eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8',
+        'accepted_commit': '55e2da3d264dcdb89c6d80fae8bab5629a5a662b',
+    },
+}
+
+
+def has_c024_campaign(root: Path) -> bool:
+    """Select only the exact adopted C024 handoff record, never a prefix."""
+    root = Path(root).resolve()
+    head = original._git(root, 'rev-parse', 'HEAD').decode().strip()
+    tree = original._tree(root, head)
+    return C024_HANDOFF_FIXTURE in tree and C024_HANDOFF_FIXTURE in VAL045_PATHS
+
+
+def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
+    """Authenticate source-free handoff or exact C024 source phase."""
+    root = Path(root).resolve()
+    head = head or original._git(root, 'rev-parse', 'HEAD').decode().strip()
+    require = original.require
+    get = original._git
+    tree = original._tree(root, head)
+    require(original.ancestor(root, C024_B, head), 'VAL045 target lacks exact C024 base ancestry')
+    require(get(root, 'rev-list', '--parents', '-n', '1', C024_C).decode().split() == [C024_C, C024_B],
+            'VAL045 C024 candidate parent changed')
+    require(get(root, 'rev-parse', C024_C + '^{tree}').decode().strip() == C024_TREE,
+            'VAL045 C024 candidate tree changed')
+    require(get(root, 'rev-parse', C024_HANDOFF + '^{tree}').decode().strip() != '',
+            'VAL045 handoff commit is unavailable')
+    require(original.ancestor(root, C024_HANDOFF, head) or original.ancestor(root, C024_C, head),
+            'VAL045 target is outside reviewed handoff/source candidate lineage')
+
+    # The exact C24 candidate remains the adopted ten-path direct child of B.
+    candidate_paths = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, C024_C).decode().split('\0')))
+    require(candidate_paths == C024_CANDIDATE_PATHS, 'VAL045 C024 path envelope changed')
+    source_fixture = json.loads(original.raw_bytes(root, C024_C, C024_PROOF), object_pairs_hook=unique)
+    require(source_fixture['schema_name'] == 'glyph_gp_config024_usb_profile_identity_repair'
+            and source_fixture['base_configurator_sha'] == C024_B
+            and source_fixture['firmware_build'] == 'NOT_RUN'
+            and source_fixture['hardware_acceptance'] == 'NOT_CLAIMED',
+            'VAL045 C024 candidate proof fixture identity/limitations changed')
+    authenticate_kbd_contract(root)
+    authenticate_config019_contract(root)
+    hashes = {row['path']: row['sha256'] for row in source_fixture['candidate_file_hashes']}
+    require(set(hashes) == C024_CANDIDATE_PATHS - {C024_PROOF},
+            'VAL045 C024 proof-file inventory changed')
+    for path in C024_CANDIDATE_PATHS:
+        b_entry = original._tree(root, C024_B).get(path)
+        c_entry = original._tree(root, C024_C).get(path)
+        require(c_entry is not None and c_entry[:2] == ('100644', 'blob'),
+                'VAL045 C024 candidate mode/type changed: ' + path)
+        if path in hashes:
+            require(hashlib.sha256(original.raw_bytes(root, C024_C, path)).hexdigest() == hashes[path],
+                    'VAL045 C024 proof-file digest changed: ' + path)
+        if path == C024_MENU:
+            require(b_entry is not None and b_entry[:2] == ('100644', 'blob')
+                    and b_entry[2] != c_entry[2], 'VAL045 selector source delta missing')
+        else:
+            # Proof metadata may be new at C; the exact candidate file digest
+            # above and direct reviewed commit bind it.
+            pass
+
+    # Authenticate every allowed accepted-predecessor path from fresh B.
+    for row in source_fixture['authorized_predecessor_deltas']:
+        path = row['path']
+        require(hashlib.sha256(original.raw_bytes(root, C024_B, path)).hexdigest() == row['fresh_B_sha256'],
+                'VAL045 accepted predecessor fresh-B digest changed: ' + path)
+        commits = row['accepted_predecessor_commits']
+        require(commits and all(original.ancestor(root, commit, C024_B) for commit in commits),
+                'VAL045 accepted predecessor ancestry missing: ' + path)
+        for commit in commits:
+            parents = get(root, 'rev-list', '--parents', '-n', '1', commit).decode().split()
+            require(len(parents) >= 2 and path in set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z',
+                        parents[1], commit, '--').decode().split('\0'))),
+                    'VAL045 accepted predecessor does not change its named path: ' + path)
+
+    handoff = json.loads(original.current_bytes(root, C024_HANDOFF_FIXTURE), object_pairs_hook=unique)
+    require(handoff['schema_name'] == 'glyph_gp_val045_c024_candidate_activation'
+            and handoff['candidate_git_sha'] == C024_C
+            and handoff['candidate_tree'] == C024_TREE
+            and handoff['candidate_base_configurator_sha'] == C024_B
+            and handoff['candidate_branch'] == 'codex/gp-config-024-usb-profile-identity'
+            and handoff['live_remote_verified'] is True
+            and handoff['independent_source_review']['result'] == 'PASS'
+            and handoff['independent_source_review']['review_sha256'] ==
+                'b6645bbc5b2101394f0991e58577c6ff09b2ea5fca2237666470f3116c2abf21'
+            and handoff['independent_source_applicability_review']['result'] == 'PASS'
+            and handoff['independent_build_role_review']['result'] == 'PASS'
+            and handoff['accepted_c019_source_lineage'] == [
+                {'path': path, 'fresh_B_sha256': pin['sha256'], 'accepted_commit': pin['accepted_commit']}
+                for path, pin in C024_C019_ACCEPTED_EXTRA.items()],
+            'VAL045 reviewed C024 activation record changed')
+    prior_c023 = original.item(root, C024_B, 'GP-CONFIG-023')
+    prior_042 = original.item(root, C024_B, 'GP-VAL-042')
+    require(prior_c023['status'] == prior_042['status'] == 'DONE'
+            and prior_c023['hardware_result'] == 'PASS'
+            and prior_c023['hardware_evidence_gaps'] == []
+            and prior_c023['candidate_git_sha'] == '36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39'
+            and prior_c023['firmware_artifact_sha256'] ==
+                '7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224',
+            'VAL045 exact accepted C023/042 predecessor state changed')
+    current_c024 = original.item(root, head, 'GP-CONFIG-024')
+    current_045 = original.item(root, head, 'GP-VAL-045')
+    require(current_c024['candidate_git_sha'] == C024_C
+            and current_c024['candidate_base_configurator_sha'] == C024_B
+            and current_c024['activation_state'] == 'WAITING'
+            and current_045['status'] in {'PREAUTHORIZED', 'DONE'}
+            and current_045['activation_state'] in {'ACTIVATABLE', 'NOT_APPLICABLE'},
+            'VAL045 current queue handoff phase changed')
+
+    # Keep the original019 observations and041 current-admission record exact.
+    # The six named accepted predecessor deltas are validated below against B;
+    # this block authenticates the immutable C019 objects and its unchanged
+    # source-free Config-acceptance fixture without relabeling old expectations.
+    base_tree = original._tree(root, C024_B)
+    mutable_current_checker = 'tools/check_glyph_gp_config019_usb_name_selection.py'
+    for path, pin in dict(CONFIG019_HOST_PINS, **CONFIG019_AUTHORITY_PINS,
+                          **CONFIG019_OVERLAY_PINS).items():
+        if path == mutable_current_checker:
+            # VAL045 adds a separately authenticated current route to this
+            # checker; authenticate its original historical tables below.
+            continue
+        expected = (pin['mode'], 'blob', pin['blob'])
+        require(pin['mode'] == '100644' and base_tree.get(path) == expected
+                and hashlib.sha256(original.raw_bytes(root, C024_B, path)).hexdigest() == pin['sha256'],
+                'VAL045 immutable019/current overlay pin changed: ' + path)
+    accepted_delta_paths = {row['path'] for row in source_fixture['authorized_predecessor_deltas']}
+    for path, pin in C024_C019_ACCEPTED_EXTRA.items():
+        commit = pin['accepted_commit']
+        parents = get(root, 'rev-list', '--parents', '-n', '1', commit).decode().split()
+        require(original.ancestor(root, commit, C024_B)
+                and path in set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z',
+                    parents[1], commit, '--').decode().split('\0')))
+                and hashlib.sha256(original.raw_bytes(root, C024_B, path)).hexdigest() == pin['sha256'],
+                'VAL045 C019 extra accepted source lineage changed: ' + path)
+        accepted_delta_paths.add(path)
+    for path, pin in CONFIG019_CURRENT_SOURCE_PINS.items():
+        if base_tree.get(path) != (pin['mode'], 'blob', pin['blob']):
+            require(path in accepted_delta_paths,
+                    'VAL045 C019 current source changed outside accepted predecessor rows: ' + path)
+    manifest_path = 'docs/runtime_config/fixtures/runtime_config_validation_manifest.json'
+    manifest_raw = original.current_bytes(root, manifest_path)
+    manifest = json.loads(manifest_raw, object_pairs_hook=unique)
+    base_manifest = json.loads(original.raw_bytes(root, C024_B, manifest_path), object_pairs_hook=unique)
+    entries = [entry for entry in manifest['entries'] if entry['id'] == 'gp_config019_usb_name_selection']
+    base_entries = [entry for entry in base_manifest['entries'] if entry['id'] == 'gp_config019_usb_name_selection']
+    require(len(entries) == len(base_entries) == 1 and entries[0] == base_entries[0],
+            'VAL045 current C019 manifest record changed')
+    for path in CONFIG019_OVERLAY_PATHS:
+        expected = base_tree.get(path)
+        current = original.current_bytes(root, path)
+        permitted_checker = path == CONFIG019_CHECKER and has_c024_campaign(root)
+        require(expected is not None and expected[:2] == ('100644', 'blob')
+                and (permitted_checker or current == original.raw_bytes(root, C024_B, path))
+                and get(root, 'show', ':' + path) == current,
+                'VAL045 immutable041 current proof changed: ' + path)
+
+    source_base = original.critical_tree(root, C024_B)
+    source_candidate = original.critical_tree(root, C024_C)
+    delta = {path for path in source_base.keys() | source_candidate.keys()
+             if source_base.get(path) != source_candidate.get(path)}
+    require(delta == {C024_MENU}, 'VAL045 exact sole C024 critical source delta changed')
+    current = original.critical_tree(root, head)
+    if current == source_base:
+        phase = 'SOURCE_FREE_CANDIDATE'
+        critical = frozenset()
+        sources = {}
+        require(not original.ancestor(root, C024_C, head),
+                'VAL045 source-free phase conceals C024 ancestry')
+    elif current == source_candidate:
+        phase = 'CANDIDATE_VALIDATION_ONLY'
+        critical = frozenset((C024_MENU,))
+        sources = {C024_MENU: C024_C}
+        require(original.ancestor(root, C024_C, head),
+                'VAL045 candidate phase replays C024 source without ancestry')
+    else:
+        raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
+
+    changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
+    require(changed <= C024_CANDIDATE_PATHS | VAL045_PATHS,
+            'VAL045 target exceeds exact candidate/governance envelope: ' + repr(sorted(changed - C024_CANDIDATE_PATHS - VAL045_PATHS)))
+    for path in changed:
+        entry = tree.get(path)
+        require(entry is not None and entry[:2] == ('100644', 'blob'),
+                'VAL045 changed path is not committed regular100644: ' + path)
+        require(original.current_bytes(root, path) == original.raw_bytes(root, head, path)
+                and get(root, 'show', ':' + path) == original.current_bytes(root, path),
+                'VAL045 committed/index/live mismatch: ' + path)
+    authorized_sources = accepted_delta_paths | {C024_MENU}
+    return dict(phase=phase, contract='c024_selector_identity', candidate=C024_C,
+                base=C024_B, target=head, critical_paths=critical,
+                source_candidates=sources, accepted_metadata_paths=frozenset(),
+                authorized_source_paths=frozenset(authorized_sources),
+                changed_paths=frozenset(changed))
+
 @original._proof_invocation
 def authenticate(root):
+    if has_c024_campaign(Path(root)):
+        return authenticate_c024_phase(Path(root))
     from glyph_c017_campaign_transition import present
     if present(Path(root)):
         from glyph_c017_campaign_transition import authenticate as neopixel
@@ -993,6 +1233,8 @@ def authenticate(root):
 
 @original._proof_invocation
 def authenticate_config019_coexistence(root, head):
+    if has_c024_campaign(Path(root)):
+        return authenticate_c024_phase(Path(root), head)
     from glyph_c017_campaign_transition import present
     if present(Path(root)):
         from glyph_c017_campaign_transition import verify019_overlay

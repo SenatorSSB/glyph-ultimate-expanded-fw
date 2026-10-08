@@ -183,6 +183,8 @@ CURRENT_FIXTURE = 'docs/runtime_config/fixtures/gp_val041_usb_name_current_accep
 CURRENT_REPORT = 'docs/runtime_config/gp_val041_usb_name_current_acceptance.md'
 CURRENT_HARNESS = 'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp'
 CURRENT_FILE_SHA256 = {'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp': 'be0ace2b917ade71cde930e5e3293443bfe26f4713a4d40d82008a22e0615e1b', 'docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json': 'c918594c260e8a4a675d84c0b808be1c87ac876ea8b2ca138316162de2863453', 'docs/runtime_config/gp_val041_usb_name_current_acceptance.md': '9aa78efa0e35eb483281865e2e25f6611c9653beccb4757ba399959a0012eaab'}
+VAL045_FIXTURE = 'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json'
+VAL045_CURRENT_FRAGMENTS = None
 
 # GP-VAL-041 separately pinned current overlay. Historical definitions above are retained.
 import argparse
@@ -270,10 +272,11 @@ def guard_critical_inputs(head):
 
 
 def authenticate_current():
+    global VAL045_CURRENT_FRAGMENTS
     # Identity-only catalogue authentication never calls this host proof.
     from glyph_c014_campaign_transition import authenticate_config019_coexistence
     head = git_read('rev-parse', 'HEAD').decode().strip()
-    authenticate_config019_coexistence(REPOSITORY_ROOT, head)
+    campaign = authenticate_config019_coexistence(REPOSITORY_ROOT, head)
     guard_critical_inputs(head)
     require(Path(git_read('rev-parse', '--show-toplevel').decode().strip()).resolve() == REPOSITORY_ROOT.resolve(),
             'checker repository root mismatch')
@@ -323,19 +326,37 @@ def authenticate_current():
         record, raw = object_record(ACCEPTED_F020, pin['path'])
         require(record == pin, 'current source not exact accepted F020: ' + pin['path'])
         live_record, _ = object_record(head, pin['path'])
-        require(live_record == pin, 'committed current source drift: ' + pin['path'])
+        if live_record != pin:
+            require(campaign.get('contract') == 'c024_selector_identity'
+                    and pin['path'] in campaign['authorized_source_paths'],
+                    'committed current source drift: ' + pin['path'])
+            require(git_read(head + ':' + pin['path']) == git_read(campaign['target'] + ':' + pin['path']),
+                    'accepted C024 current source object mismatch: ' + pin['path'])
         require(git_read('ls-files', '-v', '--', pin['path']) == ('H ' + pin['path'] + '\n').encode(),
                 'current source index flag trap: ' + pin['path'])
         index = git_read('ls-files', '--stage', '-z', '--', pin['path'])
-        require(index == (pin['mode'] + ' ' + pin['blob'] + ' 0\t' + pin['path'] + '\0').encode(),
+        expected_index = live_record['mode'] + ' ' + live_record['blob'] + ' 0\t' + pin['path'] + '\0'
+        require(index == expected_index.encode(),
                 'staged current source substitution: ' + pin['path'])
-        current[pin['path']] = live_file(pin['path'], pin['sha256'])
+        source_bytes = git_read(head + ':' + pin['path'])
+        require(live_file(pin['path'], digest(source_bytes)) == source_bytes,
+                'live current source differs from committed bytes: ' + pin['path'])
+        current[pin['path']] = source_bytes
     differences = [p for p in SOURCE_SHA256 if historical[p] != current[p]]
-    require(differences == ['HAL/pico/src/comms/ConfiguratorBackend.cpp'], 'unexpected current source difference')
-    old = historical[differences[0]].decode(); new = current[differences[0]].decode()
-    require(new.count(ACCEPTED_INCLUDE) == 1 and new.count(ACCEPTED_GUARD) == 1 and
-            new.replace(ACCEPTED_INCLUDE, '', 1).replace(ACCEPTED_GUARD, '', 1) == old,
-            'current source delta exceeds exact accepted guard')
+    if campaign.get('contract') == 'c024_selector_identity':
+        require(set(differences) <= campaign['authorized_source_paths'],
+                'current source differences exceed accepted C024 predecessor lineage')
+        phase_record = json.loads(live_file(VAL045_FIXTURE, digest((REPOSITORY_ROOT / VAL045_FIXTURE).read_bytes())), object_pairs_hook=unique)
+        actual_fragments = fragments()
+        VAL045_CURRENT_FRAGMENTS = phase_record['candidate_current_fragments']
+        require({key: digest(value.encode()) for key, value in actual_fragments.items()} == VAL045_CURRENT_FRAGMENTS,
+                'current C024 source fragments differ from finite VAL045 pins')
+    else:
+        require(differences == ['HAL/pico/src/comms/ConfiguratorBackend.cpp'], 'unexpected current source difference')
+        old = historical[differences[0]].decode(); new = current[differences[0]].decode()
+        require(new.count(ACCEPTED_INCLUDE) == 1 and new.count(ACCEPTED_GUARD) == 1 and
+                new.replace(ACCEPTED_INCLUDE, '', 1).replace(ACCEPTED_GUARD, '', 1) == old,
+                'current source delta exceeds exact accepted guard')
     return value, historical, current, head
 
 
@@ -369,8 +390,10 @@ def current_route(temp, value, current):
         parts = fragments()
     finally:
         ROOT = saved
-    require({k: digest(v.encode()) for k, v in parts.items()} == value['current_fragments'], 'current fragment substitution')
-    require([k for k in parts if digest(parts[k].encode()) != FRAGMENT_SHA256[k]] == ['acceptance'], 'unexpected current fragment drift')
+    expected_fragments = VAL045_CURRENT_FRAGMENTS if VAL045_CURRENT_FRAGMENTS is not None else value['current_fragments']
+    require({k: digest(v.encode()) for k, v in parts.items()} == expected_fragments, 'current fragment substitution')
+    if VAL045_CURRENT_FRAGMENTS is None:
+        require([k for k in parts if digest(parts[k].encode()) != FRAGMENT_SHA256[k]] == ['acceptance'], 'unexpected current fragment drift')
     require(parts['acceptance'].replace(ACCEPTED_GUARD, '', 1) ==
             fragment_from_snapshot(temp / 'historical', 'acceptance'), 'acceptance body equivalence exceeds exact guard')
     pieces = [('void DefaultConfigMenu::BuildUsbPage(Config &config) {\n' + body + '}\n')

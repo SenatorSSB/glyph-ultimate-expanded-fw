@@ -7,3 +7,5 @@ The exact ten-path candidate proof passed, including the production selector, co
 Before VAL045, four current consumers still stopped on source-phase identity/routing: C012 button characterization, invalid config-menu state characterization, C019 USB name selection, and KBD-001 keyboard pipeline. Those observations are preserved as activation context. VAL045 must extend the finite current-source routes and run the actual consumers while preserving the immutable C019 and KBD historical evidence.
 
 The canonical queue records C024 as waiting and VAL045 as mechanically activatable. No firmware build, UF2, device action, or hardware acceptance has occurred. C024 build and hardware work resume only after strict VAL045 DONE. Nunchuk remains NOT_TESTED; root cause remains UNPROVEN.
+
+The C019 current-source closure also contains `HAL/pico/include/core/Persistence.hpp`, an exact accepted C021 integration delta. VAL045 binds its fresh-B digest to C021 integration `55e2da3d264dcdb89c6d80fae8bab5629a5a662b` and verifies that commit changed the named path.

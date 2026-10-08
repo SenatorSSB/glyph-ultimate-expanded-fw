@@ -61,5 +61,26 @@
   "val045_activation": "ACTIVATABLE",
   "c024_resumption": "WAITING_FOR_STRICT_VAL045_DONE",
   "nunchuk": "NOT_TESTED",
-  "root_cause": "UNPROVEN"
+  "root_cause": "UNPROVEN",
+  "accepted_c019_source_lineage": [
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "fresh_B_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+      "accepted_commit": "55e2da3d264dcdb89c6d80fae8bab5629a5a662b"
+    }
+  ],
+  "candidate_current_fragments": {
+    "defaults": "448faedb616a633d41bbb19cfd98268e374f8d1092017c03b6e0e1fb1eecdb16",
+    "default_copy": "fb34a4b4eeaf27de120f21e866f4dd6294fec326a9e9b0be9d1f832215fda834",
+    "sameName": "b7faa9e5b31de90ac1dfe0254286beb22e68a1d673dab82dd4f9fd1879d179c4",
+    "selector": "84adc0bd5918ce8bbdc1d94fb746a845f3474a47dff3e260b3bb6c0ac0fa403c",
+    "usb_menu": "c5f6d0cc98d8c077fd2a914437734ea9f3a47b3e25c62561becebb5caedf1e9d",
+    "acceptance": "390437fc4e42d60c8c2e20f2e1a34ebbe3d69239d32b63114dd32fdb97253de7",
+    "load": "5de037b51fc03f30f2dcc001c53307eb38a530bdcded24e6fc5a6c3497a93e82",
+    "mask_helpers": "1e422153ff64a5991c88b1fc8a0957ac31c65d26e9ba623459025d3a9cf40e15",
+    "backend_helpers": "f1d9899958ea5c7372188d349c9aea82e593c8e329c6223a39a6a165d54a0fbc",
+    "backend_selector": "de38f52b6d0362985a4107407dc6ed12deb41ac6c5cf522e3ebf38cc43aa322d",
+    "usb_getter": "807d98db9948beabf51edee14d6cfaa6326ce5f33039dbb458adfd178318311b",
+    "watchdog_consumer": "cb5eca0652f2555a6ace87037fe1ce66aed3c2a13801aa7723c22e8b4c7837d9"
+  }
 }

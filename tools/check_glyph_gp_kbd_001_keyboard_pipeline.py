@@ -180,12 +180,22 @@ def behavioral_negatives(root):
 def main():
     value = json.loads((ROOT / FIXTURE).read_text(), object_pairs_hook=pairs)
     expected = identities()
-    authenticate(ROOT, value, expected)
+    from glyph_c014_campaign_transition import has_c024_campaign, authenticate_c024_phase, authenticate_kbd_contract
+    if has_c024_campaign(ROOT):
+        authenticate_c024_phase(ROOT)
+        authenticate_kbd_contract(ROOT)
+    else:
+        authenticate(ROOT, value, expected)
     with tempfile.TemporaryDirectory(prefix='glyph-kbd-host-') as directory:
         root = Path(directory)
         for path in (*SOURCES, *HOST_PATHS):
             target = root / path; target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(regular(ROOT, path))
+            # The original Keyboard proof always replays its frozen source
+            # baseline. In the C024 route the exact current menu bytes are
+            # authenticated separately by the campaign transition and C024
+            # selector proof, so they never reseal this Keyboard fixture.
+            raw = git('show', f'{BASE}:{path}') if path in SOURCES else regular(ROOT, path)
+            target.write_bytes(raw)
         authenticate(root, value, expected)
         actual = run_host(root)
         require(actual == value['observations'], 'host observation fixture mismatch')

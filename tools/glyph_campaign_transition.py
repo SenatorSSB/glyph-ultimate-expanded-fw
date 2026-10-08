@@ -9,6 +9,16 @@ from contextvars import ContextVar
 from functools import wraps
 from glyph_hardware_correspondence import CorrespondenceError, classify_path, verify_correspondence, _git, _immutable_query_cache, _tree as _uncached_tree
 
+# VAL045 owns only these exact source-free evidence files. Register the literal
+# paths with the shared classifier when this campaign router is loaded; do not
+# infer a directory prefix or classify neighboring files.
+VAL045_EVIDENCE_PATHS = frozenset((
+    'docs/runtime_config/gp_val045_usb_identity_correspondence.md',
+    'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json',
+))
+import glyph_hardware_correspondence as _correspondence
+_correspondence.NON_BEHAVIORAL_PATHS = _correspondence.NON_BEHAVIORAL_PATHS | VAL045_EVIDENCE_PATHS
+
 C = '256bf44cea71f6d5c87aa1675c8dac9f6b79259f'
 B = '3dac79dac4eefcf832510817e8cb5ecd6a27f219'
 C_TREE = '45831eeb88ece9c8b293e2e819ee5ecb362b64ec'
@@ -379,6 +389,28 @@ def authenticate(root):
 @_proof_invocation
 def verify_current_source(root, path, historical_sha256):
     """Prove exact B/C first, then expose frozen B bytes for historical assertions."""
+    from glyph_c014_campaign_transition import has_c024_campaign, authenticate_c024_phase, C024_B, C024_C, CONFIG019_F020, KBD_C
+    if has_c024_campaign(Path(root)):
+        proof = authenticate_c024_phase(Path(root))
+        revision = C024_C if proof['phase'] == 'CANDIDATE_VALIDATION_ONLY' else C024_B
+        actual = _git(root, 'show', proof['target'] + ':' + path)
+        expected = _git(root, 'show', revision + ':' + path)
+        require(actual == expected and current_bytes(root, path) == actual
+                and _git(root, 'show', ':' + path) == actual,
+                'VAL045 current source identity mismatch: ' + path)
+        revisions = [C024_B, C024_C, CONFIG019_F020, KBD_C]
+        candidate_fixture = json.loads(_git(root, 'show', C024_C +
+            ':docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json'))
+        for row in candidate_fixture['authorized_predecessor_deltas']:
+            revisions.extend(row['accepted_predecessor_commits'])
+        for source_revision in dict.fromkeys(revisions):
+            try:
+                old = _git(root, 'show', source_revision + ':' + path)
+            except CorrespondenceError:
+                continue
+            if hashlib.sha256(old).hexdigest() == historical_sha256:
+                return old
+        raise CorrespondenceError('VAL045 historical source pin is outside exact accepted lineage: ' + path)
     from glyph_c023_campaign_transition import has_source_overlay as c023_overlay
     if c023_overlay(Path(root)):
         from glyph_c023_campaign_transition import verify_current_source as usb_index
@@ -425,6 +457,9 @@ def _c014_present(root):
 @_proof_invocation
 def authenticate(root):
     root = Path(root).resolve()
+    from glyph_c014_campaign_transition import has_c024_campaign, authenticate_c024_phase
+    if has_c024_campaign(root):
+        return authenticate_c024_phase(root)
     from glyph_c023_campaign_transition import has_source_overlay as c023_overlay
     if c023_overlay(root):
         from glyph_c023_campaign_transition import authenticate as usb_index
