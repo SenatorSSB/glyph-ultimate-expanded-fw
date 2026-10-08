@@ -1,0 +1,113 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-023",
+  "candidate_branch": "codex/gp-config-023-release-safety",
+  "candidate_git_sha": "36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39",
+  "candidate_base_configurator_sha": "b224227a76cb8edb73e5f4b2ad5de874d1",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39/7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224/firmware.uf2",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_023_HW_V1",
+  "pre_update_sha256_verified": false,
+  "controller_model_revision": "Glyph Mk6; exact physical revision pending owner report.",
+  "firmware_profile_state": "No hardware update or physical test reported. Current firmware, Config, and profile state pending owner report.",
+  "update_method": "No update performed. Owner manual established route and exact pre-update hashes required before action.",
+  "host_platform_adapter": "Pending owner report for each tested route.",
+  "preconditions": [
+    "Protocol prepared with all physical rows NOT_TESTED.",
+    "Exact candidate F and preserved UF2 identity recorded.",
+    "No device or Config write has been performed by the build/review process."
+  ],
+  "steps": [
+    {
+      "id": "valid_stored_startup",
+      "instruction": "Valid stored Config startup across supported GC, XInput, DInput, Switch, and Keyboard routes.",
+      "expected": "Valid stored Config startup across supported GC, XInput, DInput, Switch, and Keyboard routes.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "ordinary_selection_profile_modifier",
+      "instruction": "Exercise valid default selection, held-input startup, menu entry, watchdog recovery, ordinary selection, profile, and modifier behavior on existing configurations. Do not use unsupported hot replacement.",
+      "expected": "Exercise valid default selection, held-input startup, menu entry, watchdog recovery, ordinary selection, profile, and modifier behavior on existing configurations. Do not use unsupported hot replacement.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "reconnect_reboot",
+      "instruction": "Reconnect and reboot with valid stored state.",
+      "expected": "Reconnect and reboot with valid stored state.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "external_invalid_index_rejection",
+      "instruction": "Safely reachable invalid external index rejection; retain prior accepted operation and stored bytes.",
+      "expected": "Safely reachable invalid external index rejection; retain prior accepted operation and stored bytes.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "invalid_stored_refusal_gc_usb",
+      "instruction": "With a reviewed invalid stored Config and approved manual setup, verify refusal before gameplay on GC and USB; confirm the refusal message on a working display. Test display-init-failure refusal only through an existing safely reachable route; otherwise record that physical subcase NOT_TESTED. Confirm the stored file remains byte-identical after recovery.",
+      "expected": "With a reviewed invalid stored Config and approved manual setup, verify refusal before gameplay on GC and USB; confirm the refusal message on a working display. Test display-init-failure refusal only through an existing safely reachable route; otherwise record that physical subcase NOT_TESTED. Confirm the stored file remains byte-identical after recovery.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "invalid_stored_refusal_reboot",
+      "instruction": "Repeat refusal after ordinary reboot; prove file retention after recovery.",
+      "expected": "Repeat refusal after ordinary reboot; prove file retention after recovery.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "manual_recovery",
+      "instruction": "Existing manual recovery route and observed recovery identity.",
+      "expected": "Existing manual recovery route and observed recovery identity.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "restoration",
+      "instruction": "Exact original Config restoration and normal startup after reboot.",
+      "expected": "Exact original Config restoration and normal startup after reboot.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "rollback",
+      "instruction": "Exact accepted GP-CONFIG-017 rollback if needed.",
+      "expected": "Exact accepted GP-CONFIG-017 rollback if needed.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    },
+    {
+      "id": "safe_stop_and_anomalies",
+      "instruction": "Record unavailable routes and all anomalies; do not infer PASS.",
+      "expected": "Record unavailable routes and all anomalies; do not infer PASS.",
+      "observed": "NOT_TESTED \u2014 pending owner report."
+    }
+  ],
+  "negative_regression_checks": [
+    "Focused C023 host proof passes in default and short-enum ABIs with ASan/UBSan; this is host evidence only.",
+    "No physical stimulus or device action has been performed."
+  ],
+  "power_cycle_reconnect_checks": [
+    "NOT_TESTED \u2014 valid-state reboot/reconnect pending owner report.",
+    "NOT_TESTED \u2014 invalid stored-state reboot refusal pending owner report."
+  ],
+  "result": "NOT_TESTED",
+  "anomalies": [],
+  "rollback_recovery": "NOT_TESTED \u2014 no firmware update, Config write, or recovery action performed.",
+  "tester": "Pending owner physical observations; independent Hardware Evidence Processor review required.",
+  "tested_at": "2026-10-08T19:00:20Z",
+  "evidence_gaps": [
+    "valid_stored_startup: pending owner physical observation and processor review.",
+    "ordinary_selection_profile_modifier: pending owner physical observation and processor review.",
+    "reconnect_reboot: pending owner physical observation and processor review.",
+    "external_invalid_index_rejection: pending owner physical observation and processor review.",
+    "invalid_stored_refusal_gc_usb: pending owner physical observation and processor review.",
+    "invalid_stored_refusal_reboot: pending owner physical observation and processor review.",
+    "manual_recovery: pending owner physical observation and processor review.",
+    "restoration: pending owner physical observation and processor review.",
+    "rollback: pending owner physical observation and processor review.",
+    "safe_stop_and_anomalies: pending owner physical observation and processor review."
+  ]
+}

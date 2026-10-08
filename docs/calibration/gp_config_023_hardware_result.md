@@ -1,0 +1,9 @@
+# GP-CONFIG-023 hardware evidence result
+
+Overall HEP result: **NOT_TESTED / HARDWARE_TEST_REQUIRED**. The exact candidate build and UF2 custody passed; no physical test, firmware update, Config write, or rollback has been performed. All ten required physical evidence rows remain pending. No hardware PASS or merge authorization is claimed.
+
+Exact candidate F `36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39`; tree `45fa24dc7f95a5cd0e796c2c7c3b46f91688b329`; sole parent `03bbf5da14a7d450f2986b12ad69ec6b3f704bad`. Preserved UF2 SHA-256 `7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224`, 803840 bytes, at the exact content-addressed locator in the evidence fixture. Canonical firmware remains unchanged pending exact human hardware PASS.
+
+The approved Mk6 build fallback passed on exact committed F: RAM `105784 / 262144` bytes; flash `389816 / 1568768` bytes. The live pre-build check reported all 31 selected inputs and 10 audited symlinks matched their recorded pins; its per-input snapshot was not retained. The retained post-build audit records every file hash/size and symlink target, with all 31 inputs and 10 links matching. The focused C023 host proof passed under ASan/UBSan in both enum ABIs. These results do not establish physical behavior.
+
+The ten required rows, exact identities, preconditions, observations, and evidence gaps are listed in [the machine evidence fixture](fixtures/gp_config_023_hardware_evidence.json). The owner must follow [GP_CONFIG_023_HW_V1](../agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md), perform any device action manually through an established route, and report results for independent processor review. No invalid Config write is authorized by this pending handoff.
