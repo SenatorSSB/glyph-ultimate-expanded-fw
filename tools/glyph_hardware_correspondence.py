@@ -291,6 +291,21 @@ NON_BEHAVIORAL_PATHS |= frozenset((
     'docs/calibration/fixtures/gp_config_022_hardware_evidence.json',
 ))
 
+# GP-VAL-042: exact C023 proof and governance artifacts. Production helper and
+# validation paths remain critical by their explicit source classification.
+NON_BEHAVIORAL_PATHS |= frozenset((
+    'docs/runtime_config/fixtures/gp_config023_usb_index_validation.json',
+    'docs/runtime_config/gp_config023_usb_index_validation.md',
+    'tools/check_glyph_gp_config023_usb_index_validation.py',
+    'tools/fixtures/gp_config023_usb_host/host_stubs.hpp',
+    'tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp',
+    'docs/runtime_config/fixtures/gp_val042_c023_transition.json',
+    'docs/runtime_config/fixtures/gp_val042_accepted_transitions.json',
+    'tools/glyph_c023_campaign_transition.py',
+    'tools/test_glyph_c023_campaign_transition.py',
+    'tools/check_glyph_c023_proof_replay.py',
+))
+
 
 def classify_path(path: str) -> str:
     """Classify canonical Git paths; never normalize an ambiguous alias."""

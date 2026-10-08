@@ -127,6 +127,7 @@ def validate_health(value: dict[str, Any], census_value: dict[str, Any], manifes
     expected_results = [
         {"id": "identity_table_source_sync", "path": "tools/check_glyph_identity_runtime_table_source_sync.py", "classification": "repaired_current_load_bearing_source_sync_checker", "starting_configurator": {"exit_code": 1, "error": "stale 27-table interpreter bridge fixture"}, "feature_branch": {"result": "PASS"}},
         {"id": "runtime_semantics_evaluator_bridge", "path": "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py", "classification": "repaired_current_load_bearing_evaluator_bridge_checker", "starting_configurator": {"exit_code": 1, "error": "stale Ultimate.cpp SHA and 27-table bridge lineage"}, "feature_branch": {"result": "PASS"}},
+        {"id": "gp_config023_usb_index_validation", "path": "tools/check_glyph_c023_proof_replay.py", "classification": "exact_C023_candidate_host_proof_replay", "starting_configurator": {"exit_code": 1, "error": "C023 host proof is introduced by the exact reviewed candidate and is absent at B023"}, "feature_branch": {"result": "PASS"}},
     ]
     if value["checker_results"] != expected_results:
         raise ValueError("checker result correspondence is stale")
@@ -137,7 +138,12 @@ def validate_health(value: dict[str, Any], census_value: dict[str, Any], manifes
         source = manifest_records.get(record["id"])
         if source is None or source["path"] != record["path"] or source["applicability"] != "current" or source["load_bearing"] is not True or record["path"] not in census_paths:
             raise ValueError("current checker result source correspondence is stale")
-    if value["known_preexisting_failures"] != [{"id": e["id"], "result": "PRE_EXISTING_FIXTURE_DRIFT", "starting_configurator_exit_code": 1} for e in expected_results]:
+    # The new C023 replay command has no implementation at B023 by design; it
+    # is not a known failing checker and must not be recast as fixture drift.
+    existing_baseline_failures = [e for e in expected_results
+                                  if e["id"] in {"identity_table_source_sync",
+                                                 "runtime_semantics_evaluator_bridge"}]
+    if value["known_preexisting_failures"] != [{"id": e["id"], "result": "PRE_EXISTING_FIXTURE_DRIFT", "starting_configurator_exit_code": 1} for e in existing_baseline_failures]:
         raise ValueError("known pre-existing failure correspondence is stale")
     expected_historical = [
         {"id": "identity_generated_evaluator_input", "path": "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py", "fixture": "docs/calibration/fixtures/glyph_identity_runtime_generated_config_prototype_2026-05-28.json", "classification": "HISTORICAL_BRANCH_EVIDENCE", "current_aggregate_pass": False},

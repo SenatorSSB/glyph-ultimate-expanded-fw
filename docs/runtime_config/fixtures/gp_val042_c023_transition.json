@@ -1,0 +1,158 @@
+{
+  "schema_name": "glyph_gp_val042_c023_transition",
+  "schema_version": 1,
+  "work_order": "GP-VAL-042",
+  "candidate": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+  "base": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
+  "tree": "da886ff6d9b2d545bd93ce50745ae353129d8e7c",
+  "raw_inventory_sha256": "0bd5c9cfc481bb4e7fc3b595f59efa7c415695a7b01df3b55a84ebfd66a6a4b4",
+  "entries": [
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+      "new_blob": "4b8957496f6316a2aa64d9b33ee6bbc60132e612",
+      "status": "M",
+      "new_sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c",
+      "bytes": 11244
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "a4bf459c676235fc175a850249d075911b4e58f6",
+      "new_blob": "05295604484da47077a595c7b4f9b74a1ba6d49b",
+      "status": "M",
+      "new_sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae",
+      "bytes": 12426
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "97f9cba7ff09bdefa23d13b0711dd1e28e71f692",
+      "status": "A",
+      "new_sha256": "c1cbbc0f31ffa40bcaed7db21946069a08bbd6d885cd54c198e39a607b30e8e0",
+      "bytes": 5801
+    },
+    {
+      "path": "docs/runtime_config/gp_config023_usb_index_validation.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "4312e8777d5b8b3655dafab61468be34803ce01f",
+      "status": "A",
+      "new_sha256": "7c56b822af71e81c6ff74d0e82c4f316a9724b56ec1318136f6ef45cd1648fb2",
+      "bytes": 2754
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "b91148336567287b17cc0b73cae0fddc5f39aadb",
+      "status": "A",
+      "new_sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11",
+      "bytes": 184
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "92042dd4745bce79b1d7d773edacba302e8a6d7c",
+      "new_blob": "b7b180a7edae77f426c64cd740638f83d2df02a6",
+      "status": "M",
+      "new_sha256": "a45124019b1e24ee6b44a09b0c5d88e121113e1eb9e8ff1b7f6f8fb90ce4d0d4",
+      "bytes": 609
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "7a442014e0c5176e360ece8b64a8e88c02547716",
+      "status": "A",
+      "new_sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+      "bytes": 448
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "46fd7df78b160f1f874614852c4784583f7dc727",
+      "new_blob": "70070045463fee42181b7c34e8eac9d1a34159ce",
+      "status": "M",
+      "new_sha256": "5e3a262be086a981de9832117398be690be52fd1cfc881f88473f9638d32cf8b",
+      "bytes": 6947
+    },
+    {
+      "path": "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "ee115e4b54856615b6819767e4d4c8ae6805c46b",
+      "status": "A",
+      "new_sha256": "ec60e2a2ce57d5d79447b240a63be6ee191a7fb9dab16355f65885b598eac01f",
+      "bytes": 13839
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "e711f6f73ada888f15dfe08ad822c7dcdf6fe21d",
+      "status": "A",
+      "new_sha256": "b813240ea035d3bfb124535f110f7dd6d65e92981977e9f9018c4729b01a4732",
+      "bytes": 1585
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "a2704c9bc7cfc51bd1b6691c941ef5418a988502",
+      "status": "A",
+      "new_sha256": "971b40091ec507d3b2e7347d8c78ce5b6acb5cf05fcbe32ec444cb6244a1bd04",
+      "bytes": 12434
+    }
+  ],
+  "review": {
+    "status": "APPROVED_EXACT_C023_FOR_GP_VAL_042_ONLY",
+    "reviewed_candidate": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+    "reviewed_base": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
+    "reviewed_tree": "da886ff6d9b2d545bd93ce50745ae353129d8e7c",
+    "findings": [],
+    "scope": "Exactly six authorized production paths and five proof artifacts; all 100644.",
+    "source_findings": "Required one-based index and fixed-array extent validation only; no schema/default/decoder/backend-type/callback-ABI/persistence architecture changes.",
+    "proof_findings": "Candidate checker passes in default and short-enum ABIs with ASan/UBSan; disclosed decoder, persistence-I/O, and startup-display/UI limits remain for C023 resumption.",
+    "build_state": "Firmware unbuilt; candidate unmerged; no hardware claim.",
+    "reviewer": "fresh independent C023 reviewer"
+  },
+  "review_sha256": "fb38dfcc2bf7c4c8707879733b258114549743fc63f393ee0b24438892d94170",
+  "conformance": {
+    "production_paths": [
+      "HAL/pico/src/comms/backend_init.cpp",
+      "config/glyph/common/src/config.cpp",
+      "include/core/config_usb_default_validation.hpp",
+      "include/core/config_validation.hpp",
+      "src/core/config_usb_default_validation.cpp",
+      "src/core/config_validation.cpp"
+    ],
+    "proof_paths": [
+      "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+      "docs/runtime_config/gp_config023_usb_index_validation.md",
+      "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+      "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp"
+    ],
+    "all_changed_modes": "100644",
+    "schema_default_decoder_unchanged": true,
+    "candidate_checker": "tools/check_glyph_gp_config023_usb_index_validation.py",
+    "candidate_checker_sha256": "ec60e2a2ce57d5d79447b240a63be6ee191a7fb9dab16355f65885b598eac01f",
+    "candidate_report_sha256": "7c56b822af71e81c6ff74d0e82c4f316a9724b56ec1318136f6ef45cd1648fb2",
+    "candidate_fixture_sha256": "c1cbbc0f31ffa40bcaed7db21946069a08bbd6d885cd54c198e39a607b30e8e0",
+    "firmware_build": "NOT_RUN_BY_ORDER"
+  }
+}

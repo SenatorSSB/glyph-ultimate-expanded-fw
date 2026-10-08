@@ -16,6 +16,34 @@ critical difference fails, including a path untouched by the historical candidat
 an addition, deletion, rename, type change or executable-bit change. This preserves
 GP-VAL-014's useful ancestry and narrow protected-source applicability checks.
 
+## GP-CONFIG-023 candidate-only checkpoint
+
+Candidate C023 is `03bbf5da14a7d450f2986b12ad69ec6b3f704bad`, direct child of
+B023 `b224227a76cb8edb73e5f4b2ad5de874d1e61ad1`, with tree
+`da886ff6d9b2d545bd93ce50745ae353129d8e7c` and raw NUL inventory SHA-256
+`0bd5c9cfc481bb4e7fc3b595f59efa7c415695a7b01df3b55a84ebfd66a6a4b4` over
+exactly six production and five host-proof paths. The independent C review
+approved that scope. Its host proof passes both enum ABIs with ASan/UBSan;
+decoder packets, persistence I/O, startup display behavior, firmware build,
+artifact custody, and hardware acceptance are not established by that proof.
+
+GP-VAL-042 must integrate source-free and reach strict DONE before C023 resumes.
+The later exact F023 must descend from C023 and preserve the candidate's entire
+critical tree. Only the exact F023 build, preserved artifact, independent review,
+and owner hardware PASS can authorize firmware integration. This candidate
+checkpoint does not create a hardware acceptance record.
+
+The GP-VAL-042 aggregate adversarial run remains FAIL at the older GP-VAL-037
+campaign-catalog expectation: 20 expected roots versus 77 roots returned by
+the authenticated C022 predecessor closure, with no expected root missing.
+Independent review classifies the 57-root difference as valid immutable
+predecessor/acceptance closure and the synthetic expected set as stale. Preserve
+that result as FRAMEWORK_VALIDATION_DEBT; do not claim aggregate PASS. The same
+review found that source-free C023 replay lacked an explicit candidate object
+root. The exact C023 command now authenticates the source-free transition and
+includes C in its root closure. Its focused dispatch test passes and confirms
+that C022-only selection stays on the C022 proof and excludes C.
+
 ## Classification and scope
 
 Current Revision 3 GLYPH-UD-027 uses Tier-1/Tier-2 relevant correspondence,

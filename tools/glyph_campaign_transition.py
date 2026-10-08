@@ -379,6 +379,10 @@ def authenticate(root):
 @_proof_invocation
 def verify_current_source(root, path, historical_sha256):
     """Prove exact B/C first, then expose frozen B bytes for historical assertions."""
+    from glyph_c023_campaign_transition import has_source_overlay as c023_overlay
+    if c023_overlay(Path(root)):
+        from glyph_c023_campaign_transition import verify_current_source as usb_index
+        return usb_index(root, path, historical_sha256)
     from glyph_c022_campaign_transition import present as c022_present
     if c022_present(Path(root)):
         from glyph_c022_campaign_transition import verify_current_source as rgb_targets
@@ -421,6 +425,10 @@ def _c014_present(root):
 @_proof_invocation
 def authenticate(root):
     root = Path(root).resolve()
+    from glyph_c023_campaign_transition import has_source_overlay as c023_overlay
+    if c023_overlay(root):
+        from glyph_c023_campaign_transition import authenticate as usb_index
+        return usb_index(root)
     from glyph_c022_campaign_transition import present as c022_present
     if c022_present(root):
         from glyph_c022_campaign_transition import authenticate as rgb_targets

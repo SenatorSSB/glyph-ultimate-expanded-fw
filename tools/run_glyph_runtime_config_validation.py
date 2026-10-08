@@ -187,6 +187,25 @@ def c022_replay_arguments(entry: dict[str, object]) -> bool:
     return True
 
 
+def c023_replay_arguments(entry: dict[str, object]) -> bool:
+    """Only the exact GP-VAL-042 replay command binds the C023 source proof."""
+    path = 'tools/check_glyph_c023_proof_replay.py'
+    if entry['path'] != path and entry['id'] != 'gp_config023_usb_index_validation':
+        return False
+    expected = {'id': 'gp_config023_usb_index_validation', 'path': path,
+                'command': ['python3', path], 'category': 'candidate_safety',
+                'applicability': 'current', 'branch_policy': 'content_and_scope',
+                'required_arguments': [], 'mutation_risk': 'temporary_file_only',
+                'load_bearing': True, 'historical': False}
+    if any(entry.get(key) != value for key, value in expected.items()):
+        raise ValueError('invalid exact GP-VAL-042 replay command/phase contract')
+    if (not tracked_regular_stage_zero(path) or (ROOT / path).stat().st_mode & 0o111
+            or any((ROOT / parent).is_symlink() for parent in PurePosixPath(path).parents)
+            or git('ls-files', '-v', '-z', '--', path).stdout != 'H ' + path + '\0'):
+        raise ValueError('GP-VAL-042 replay requires tracked regular100644 input')
+    return True
+
+
 def c021_replay_arguments(entry: dict[str, object]) -> bool:
     """Exact038 current/replay commands; the old main bodies remain immutable."""
     path = 'tools/check_glyph_c021_proof_replay.py'
@@ -287,7 +306,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if not isinstance(checker_id, str) or checker_id in ids:
             raise ValueError(f"duplicate checker ID: {checker_id}")
         ids.add(checker_id)
-        campaign_arguments = c022_replay_arguments(entry) or c021_replay_arguments(entry) or campaign_guard_arguments(entry) or c017_replay_arguments(entry)
+        campaign_arguments = c023_replay_arguments(entry) or c022_replay_arguments(entry) or c021_replay_arguments(entry) or campaign_guard_arguments(entry) or c017_replay_arguments(entry)
         if entry["category"] not in categories:
             raise ValueError(f"invalid category: {entry['category']}")
         if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
@@ -341,6 +360,13 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
             rows = [entry for entry in entries if entry['id'] == identity]
             if len(rows) != 1 or not c022_replay_arguments(rows[0]):
                 raise ValueError('missing required039 current immutable/current proof: ' + identity)
+    c023_markers = ('docs/runtime_config/fixtures/gp_val042_c023_transition.json',
+                    'docs/runtime_config/fixtures/gp_val042_accepted_transitions.json',
+                    'tools/glyph_c023_campaign_transition.py')
+    if any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c023_markers):
+        row = [entry for entry in entries if entry['id'] == 'gp_config023_usb_index_validation']
+        if len(row) != 1 or not c023_replay_arguments(row[0]):
+            raise ValueError('missing required042 exact C023 candidate replay')
     exclusions: list[dict[str, object]] = []
     exclusion_ids: set[str] = set()
     exclusion_paths: set[str] = set()
@@ -378,7 +404,11 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if signals:
             strong_paths.add(census_entry["path"])
     replay_paths = frozenset()
-    if any(entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
+    if any(entry['id'] == 'gp_config023_usb_index_validation' and c023_replay_arguments(entry)
+           for entry in entries):
+        from glyph_c023_campaign_transition import replay_covered_checker_paths
+        replay_paths = replay_covered_checker_paths(ROOT)
+    elif any(entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
            for entry in entries):
         from glyph_c022_campaign_transition import replay_covered_checker_paths
         replay_paths = replay_covered_checker_paths(ROOT)
@@ -775,15 +805,29 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         }.items())
     campaign_consumers.extend((
         ('gp_config022_rgb_target_validation', ['python3', 'tools/check_glyph_c022_proof_replay.py']),
+        ('gp_config023_usb_index_validation', ['python3', 'tools/check_glyph_c023_proof_replay.py']),
         ('gp_val039_c022_transition', ['python3', 'tools/test_glyph_c022_campaign_transition.py']),
     ))
     if any(entry['applicability'] == 'current'
            and entry['id'] == identity and entry['command'] == command
            for entry in selected for identity, command in campaign_consumers):
         from glyph_campaign_transition import ROOTS, TRANSITIONS, authenticate
-        proof = authenticate(ROOT)
+        c023_selected = any(entry['applicability'] == 'current'
+                            and entry['id'] == 'gp_config023_usb_index_validation'
+                            and entry['command'] == ['python3', 'tools/check_glyph_c023_proof_replay.py']
+                            for entry in selected)
+        # The exact C023 replay command needs the candidate commit even while
+        # GP-VAL-042 is still source-free. Authenticate that bounded source
+        # contract whenever the command is selected; source overlay is only a
+        # phase fact inside the authenticator, not a reason to fall back to
+        # the predecessor's smaller object-root catalog.
+        if c023_selected:
+            from glyph_c023_campaign_transition import authenticate as authenticate_c023
+            proof = authenticate_c023(ROOT)
+        else:
+            proof = authenticate(ROOT)
         roots.update(ROOTS)
-        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity', 'c017_neopixel', 'c021_persisted_recovery', 'c022_rgb_targets'}:
+        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity', 'c017_neopixel', 'c021_persisted_recovery', 'c022_rgb_targets', 'c023_usb_index'}:
             # GP-VAL-043 exports only roots whose finite candidate, authority and
             # accepted-transition contracts passed the actual phase proof. The
             # mutable mapping/catalog never supplies runner authority by itself.

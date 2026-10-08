@@ -5685,6 +5685,29 @@
       "reason": "Authenticated immutable C022 host proof under both enum layouts, complete209input closure, real decoder/SET/load/startup/static/dynamic consumers and negative controls. Native exact mode/blob admission resolves only the retained original CLI predicate failure; no target build or hardware acceptance."
     },
     {
+      "id": "gp_config023_usb_index_validation",
+      "path": "tools/check_glyph_c023_proof_replay.py",
+      "command": [
+        "python3",
+        "tools/check_glyph_c023_proof_replay.py"
+      ],
+      "category": "candidate_safety",
+      "applicability": "current",
+      "branch_policy": "content_and_scope",
+      "required_arguments": [],
+      "mutation_risk": "temporary_file_only",
+      "source_dependencies": [
+        "docs/runtime_config/fixtures/gp_val042_accepted_transitions.json",
+        "docs/runtime_config/fixtures/gp_val042_c023_transition.json",
+        "tools/glyph_c022_campaign_transition.py",
+        "tools/glyph_c023_campaign_transition.py",
+        "tools/glyph_hardware_correspondence.py"
+      ],
+      "load_bearing": true,
+      "historical": false,
+      "reason": "Replay the exact independently reviewed C023 candidate host proof in both ABI modes with sanitizers; authenticate the exact six-source/five-proof inventory and preserve the candidate unbuilt/unmerged until GP-VAL-042 strict DONE."
+    },
+    {
       "id": "gp_val039_c022_transition",
       "path": "tools/test_glyph_c022_campaign_transition.py",
       "command": [

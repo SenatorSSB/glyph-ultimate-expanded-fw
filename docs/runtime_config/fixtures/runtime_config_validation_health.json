@@ -8,7 +8,7 @@
   },
   "repository_checker_census": {
     "artifact": "docs/runtime_config/fixtures/glyph_checker_census.json",
-    "discovered_count": 221,
+    "discovered_count": 222,
     "validated": true
   },
   "aggregate_census_freshness": {
@@ -18,8 +18,8 @@
     "result": "PASS"
   },
   "curated_runtime_config_scope": {
-    "manifest_entry_count": 62,
-    "current_load_bearing_count": 56,
+    "manifest_entry_count": 63,
+    "current_load_bearing_count": 57,
     "historical_or_evidentiary_count": 6,
     "explicit_exclusion_count": 43
   },
@@ -43,6 +43,18 @@
       "starting_configurator": {
         "exit_code": 1,
         "error": "stale Ultimate.cpp SHA and 27-table bridge lineage"
+      },
+      "feature_branch": {
+        "result": "PASS"
+      }
+    },
+    {
+      "id": "gp_config023_usb_index_validation",
+      "path": "tools/check_glyph_c023_proof_replay.py",
+      "classification": "exact_C023_candidate_host_proof_replay",
+      "starting_configurator": {
+        "exit_code": 1,
+        "error": "C023 host proof is introduced by the exact reviewed candidate and is absent at B023"
       },
       "feature_branch": {
         "result": "PASS"
