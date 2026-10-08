@@ -1242,7 +1242,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
           "tools/test_glyph_c022_campaign_transition.py"
         ],
         "independent_review_provenance": "Fresh independent c021_integration_review APPROVED exact f4a466b1b5ca7ea008b66473d64951e84ef18f08; review SHA256 52d9c76ae5ad47826f90c8f6ab1dfd64a051c4ccf1e3059bf469c4b756553b93. Exact27source-free paths,238critical equality to acceptedF021, immutableC preservation, fullprotectedfive, native predecessor and finite closed roots verified. Separate strict completion reviewed before publication. Separate postsealed final-attempt classification SHA256 9d5135755e4b9423119f60e69bde868cc24346aa36b78f57e9fd0678f5b97bf8 leaves approval unchanged.",
-        "validation_provenance": "Actual complete authenticated immutableC host componentPASS149s: bothenumABIs,209inputclosure,231original+723newrejectors and6rawinterfacecontrols. Actual141native+13supplemental phase/identity rejectors and branch/detached positives in bothcontextsPASS. Allfive unchanged full protected mainsPASS in source-freeG and genuineprivate[G,C] composition; actual010 semantics/currentWebSerialguard/new3runner casesPASS. Native17ID command/root contracts and72finite authenticated roots are exact. Fresh representative historical dispatch and preserved unchanged acceptedE proof establish historical transport/observations; repeated native wrapper120TIMEOUTs remain actual and do not become all17PASS. Source-free focused12PASS/contextunitFAIL/wholeadversarial120TIMEOUT with nativeMATCH. Direct wholeadversarialFAIL235.852 in byte-exact legacy037 expected-root branch, already missing prior017/021 contracts; nativefullaggregateFAIL first035wrapperCHECKER_TIMEOUT120.009 with original/isolatedMATCH, unchanged300/120limits. Originalclean-C CLI modepredicateFAIL retained. All named concrete Tier1/Tier2 facts independently established; timing/synthetic/catalog-expectation debt remains explicit, no full aggregate/registeredTIMEOUT PASS. ExactC source remains unmerged;targetbuild/hardware pending. Fresh independent review must approve this bounded basis before canonical publication. Finalattemptindex SHA256 5c25db340558e67677a8e706070d2d31d2180687f27329cc0cf7f4c35f5e2aa2 preserves11nativeTIMEOUT/1old038syntheticcontextFAIL/6unavailablecleanupEPERM records, freshbutton012 andKBD001 componentPASS, button020TIMEOUT,13NOT_RUN afterfocusedstop; noall17PASS orcleanup/orphanabsence claim. Old038 exactE test incorrectly expectsBASELINE afteralreadyacceptedC021; nativeACCEPTED_TRANSITION is correct. Independent bounded classification finds no current safety contradiction; original sealed basis/index unchanged."
+        "validation_provenance": "Actual complete authenticated immutableC host componentPASS149s: bothenumABIs,209inputclosure,231original+723newrejectors and6rawinterfacecontrols. Actual141native+13supplemental phase/identity rejectors and branch/detached positives in bothcontextsPASS. Allfive unchanged full protected mainsPASS in source-freeG and genuineprivate[G,C] composition; actual010 semantics/currentWebSerialguard/new3runner casesPASS. Native17ID command/root contracts and72finite authenticated roots are exact. Fresh representative historical dispatch and preserved unchanged acceptedE proof establish historical transport/observations; repeated native wrapper120TIMEOUTs remain actual and do not become all17PASS. Source-free focused12PASS/contextunitFAIL/wholeadversarial120TIMEOUT with nativeMATCH. Direct wholeadversarialFAIL235.852 in byte-exact legacy037 expected-root branch, already missing prior017/021 contracts; nativefullaggregateFAIL first035wrapperCHECKER_TIMEOUT120.009 with original/isolatedMATCH, unchanged300/120limits. Originalclean-C CLI modepredicateFAIL retained. All named concrete Tier1/Tier2 facts independently established; timing/synthetic/catalog-expectation debt remains explicit, no full aggregate/registeredTIMEOUT PASS. ExactC source remains unmerged;targetbuild/hardware pending. Fresh independent review must approve this bounded basis before canonical publication. Finalattemptindex SHA256 5c25db340558e67677a8e706070d2d31d2180687f27329cc0cf7f4c35f5e2aa2 preserves11nativeTIMEOUT/1old038syntheticcontextFAIL/6unavailablecleanupEPERM records, freshbutton012 andKBD001 componentPASS, button020TIMEOUT,13NOT_RUN afterfocusedstop; noall17PASS orcleanup/orphanabsence claim. Old038 exactE test incorrectly expectsBASELINE afteralreadyacceptedC021; nativeACCEPTED_TRANSITION is correct. Independent bounded classification finds no current safety contradiction; original sealed basis/index unchanged. Initial strictcompletion a750fae88d276fa5463d5cf4dcd5076cdd650c8b actual6metadataPASS/1frameworkFAIL with nativeMATCH retained: human empty Ready IDs summary required literal(none), while queueJSONwas alreadycorrect. Fourhumanmarkers corrected in descendant; finalfreshsevenchecks/native/review required beforepublication."
       },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
@@ -8323,7 +8323,7 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -32001,6 +32001,113 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
         "excluded_path_access": false
       }
     }
+  },
+  "strict_completion_initial_failure": {
+    "candidate": "a750fae88d276fa5463d5cf4dcd5076cdd650c8b",
+    "actual_validation": {
+      "head": "a750fae88d276fa5463d5cf4dcd5076cdd650c8b",
+      "kind": "STRICT039DONE_FOUR_SOURCE_FREE_DOCS",
+      "results": [
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_checker_census.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "failure_kind": null,
+          "duration_seconds": 1.6462980000069365,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/check_glyph_checker_census.log",
+          "log_sha256": "b50785c39bb682878da77c34a3af9b103ae35dc98155be9fbc8effe8fde35b27"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_runtime_config_validation_health.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "failure_kind": null,
+          "duration_seconds": 0.18786100001307204,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/check_glyph_runtime_config_validation_health.log",
+          "log_sha256": "a66bd6727fea31a4c85865e1ff132df6ae6bd9720f2d50fd2b1733890ade0177"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_agent_framework_docs.py"
+          ],
+          "status": "FAIL",
+          "exit_code": 1,
+          "failure_kind": null,
+          "duration_seconds": 15.183810834016185,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/check_glyph_agent_framework_docs.log",
+          "log_sha256": "49c14fe6361665382d705d8f0fa9ff2bc581643e9461a78b4e5ae024cd91216a"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_agentic_sequence_protocol.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "failure_kind": null,
+          "duration_seconds": 0.07511475001228973,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/check_glyph_agentic_sequence_protocol.log",
+          "log_sha256": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_docs_navigation.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "failure_kind": null,
+          "duration_seconds": 0.06281262496486306,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/check_glyph_docs_navigation.log",
+          "log_sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/check_glyph_docs_agent_surface.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "failure_kind": null,
+          "duration_seconds": 24.21066429198254,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/check_glyph_docs_agent_surface.log",
+          "log_sha256": "78f06d279a12d321da299f0504f990f9d3b012d67caf74b36dc7f9517d132d2d"
+        },
+        {
+          "command": [
+            "python3",
+            "tools/test_glyph_docs_agent_surface_integration.py"
+          ],
+          "status": "PASS",
+          "exit_code": 0,
+          "failure_kind": null,
+          "duration_seconds": 7.930089333036449,
+          "log": "/private/tmp/glyph-config022/039-strict-completion-validation/test_glyph_docs_agent_surface_integration.log",
+          "log_sha256": "00222fe92847a834c43bb7c2937b731deb9ccded1e91a817a61890a4b233e4c2"
+        }
+      ],
+      "native_phase": "BASELINE",
+      "critical238_equal_READY": true,
+      "native_preservation": {
+        "before": "5548d1066038fe2e9ecfb1bc50d35615efd44b2296564532f4fd1ec6228e9401",
+        "after": "5548d1066038fe2e9ecfb1bc50d35615efd44b2296564532f4fd1ec6228e9401",
+        "status": "MATCH"
+      },
+      "status": "FAIL",
+      "full_aggregate": "PRIOR_ACTUAL_FAIL_RETAINED_NO_REPEAT",
+      "build": "NOT_RUN",
+      "hardware": "PENDING"
+    },
+    "result_sha256": "3f3c55460b3915992c9188a6c1530f06b22ed35d1e3421dfce58fbd9aae2eaef",
+    "cause": "Human Ready IDs empty field literal none differed from required (none); queue JSON and238critical unchanged.",
+    "repair": "Only fourhuman summary literals and039 own failure provenance; finalfrozen7/native/review remain required."
   }
 }
 ```
