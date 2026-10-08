@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <config.pb.h>
+#include "core/config_usb_default_validation.hpp"
 
 struct ConfigValidationError {
     char message[128] = {};

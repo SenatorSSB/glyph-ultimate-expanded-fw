@@ -1,0 +1,121 @@
+{
+  "schema_name": "glyph_gp_config023_usb_index_validation",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-023",
+  "candidate_base": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
+  "pinned_inputs": {
+    "gp_config013_base": "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+    "gp_config021_base": "c6887115f2e44f0803eb0956ebb574633cec53be",
+    "gp_config022_base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "gp_config022_accepted_transition": "ec95a1437c428cefd86c2fc8c6220c50319522b9"
+  },
+  "production_sources": [
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae"
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    {
+      "path": "include/core/config_button_validation.hpp",
+      "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f"
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11"
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "sha256": "a45124019b1e24ee6b44a09b0c5d88e121113e1eb9e8ff1b7f6f8fb90ce4d0d4"
+    },
+    {
+      "path": "src/core/config_button_validation.cpp",
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "sha256": "5e3a262be086a981de9832117398be690be52fd1cfc881f88473f9638d32cf8b"
+    },
+    {
+      "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+      "sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323"
+    }
+  ],
+  "host_sources": [
+    {
+      "path": "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+      "sha256": "b813240ea035d3bfb124535f110f7dd6d65e92981977e9f9018c4729b01a4732"
+    },
+    {
+      "path": "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp",
+      "sha256": "971b40091ec507d3b2e7347d8c78ce5b6acb5cf05fcbe32ec444cb6244a1bd04"
+    }
+  ],
+  "production_fragments": {
+    "initialize_backends_sha256": "cb5eca0652f2555a6ace87037fe1ce66aed3c2a13801aa7723c22e8b4c7837d9",
+    "default_selectors_sha256": "0ac13fa680676c0ab32692eb4152e61b9e634e837a17937cf7e114cff15a484a"
+  },
+  "expected": {
+    "index_count_matrix": "counts 0..15 by indices 0..255; exactly 4096 cases; accepted iff 1 <= index <= count <= actual generated extent 15",
+    "oversized_counts": "16..255 rejected by actual generated extent",
+    "invalid_routes": "five invalid pre-selector states and one selector-created invalid state reject before downstream callbacks and saves",
+    "valid_routes": [
+      "GameCube",
+      "USB XInput",
+      "Keyboard through DInput",
+      "watchdog DInput"
+    ],
+    "abi_modes": [
+      "default enum",
+      "-fshort-enums"
+    ],
+    "sanitizers": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer"
+    ]
+  },
+  "coverage_limits": [
+    "Host-only source-bound proof; no firmware build or hardware claim.",
+    "Uses the exact initialize_backends and default selector bodies extracted from the pinned production source; peripheral backend constructors and physical device behavior are callback stubs.",
+    "Invalid SET-style coverage calls the exact production semantic validator and verifies caller bytes remain unchanged. ConfiguratorBackend packet decoding, persistence implementation, and startup display/recovery UI are not executed by this bounded harness.",
+    "Consumer ordering checks authenticate exact source bodies for SetConfig, LoadConfigChecked, Glyph validation, and startup refusal. They do not execute ConfiguratorBackend packet decode, persistence I/O, or display/UI."
+  ],
+  "hardware_acceptance": "NOT_CLAIMED",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "adopted_checker_attempts": [
+    {
+      "command": "python3 tools/check_glyph_gp_config021_persisted_recovery.py",
+      "result": "FAIL at exact C021 sole-parent approved B contract; this is the C023 candidate branch"
+    },
+    {
+      "command": "python3 tools/check_glyph_gp_config022_rgb_target_validation.py --output /private/tmp/gp-config023-cross-c022",
+      "result": "FAIL at frozen source hash check for HAL/pico/src/comms/backend_init.cpp; C023 modifies this affected source and the bounded C023 checker tests the exact current bodies"
+    }
+  ],
+  "consumer_contracts": {
+    "setconfig": "actual ConfiguratorBackend::HandleSetConfig decodes, invokes Persistence::ValidateConfig, saves, then publishes live Config",
+    "stored_load": "actual Persistence::LoadConfigChecked validates candidate before publishing and never saves rejected data",
+    "glyph_adapter": "actual validate_glyph_config calls shared validate_config_semantics",
+    "startup": "actual Glyph setup validates defaults/stored Config before backends; invalid post-selector index refuses before mode bindings/fallback and the secondary core gates menu construction",
+    "startup_refusal": "clears watchdog scratch selection and publishes the recovery decision after core-owned display work"
+  }
+}
