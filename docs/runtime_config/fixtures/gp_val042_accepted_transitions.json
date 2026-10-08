@@ -10,6 +10,16 @@
       "review_commit": "18f4583dfb7b7a77982354e4324f57c681411570",
       "evidence_commit": "0955f1f1082aadb86f16cf97612294f083321b45",
       "integration": "292f27cf88a9e814b1086bd544378b7e733e25e3"
+    },
+    {
+      "work_order": "GP-CONFIG-023",
+      "candidate": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "build": "36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39",
+      "parent": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "tree": "45fa24dc7f95a5cd0e796c2c7c3b46f91688b329",
+      "review_commit": "0f1648fb9c17fbded5bc1265b2702c542e689ce0",
+      "evidence_commit": "9fcd8ef94879f3959a1eea619b298fd2507111f2",
+      "integration": "e44ec59c57c0db194381f8d2dddce08aab81b5f6"
     }
   ]
 }
