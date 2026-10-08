@@ -8411,7 +8411,7 @@ Immediate Ready: 0
 Recorded Preauthorized: 2
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 1
+Hardware-pending: 0
 Effective authorized runway: 0
 Target effective authorized runway: 4
 Primary liveness: PLANNING_REQUIRED

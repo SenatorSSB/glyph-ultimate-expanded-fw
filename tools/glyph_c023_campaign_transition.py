@@ -375,13 +375,29 @@ def _processor(root: Path, revision: str, state: dict, before: dict):
 
 def _accepted(root: Path, revision: str, record: dict, processor: dict, after: dict):
     integration = record["integration"]
+    parents = _git(root, "rev-list", "--parents", "-n", "1", integration).decode().split()
     require(record["evidence_commit"] == processor["evidence_commit"]
-            and _git(root, "rev-list", "--parents", "-n", "1", integration).decode().split()
-                == [integration, processor["evidence_commit"], F]
+            and len(parents) == 3 and parents[0] == integration and parents[2] == F
+            and ancestor(root, processor["evidence_commit"], parents[1])
+            and not ancestor(root, F, parents[1])
+            and critical_tree(root, parents[1]) == critical_tree(root, B)
             and ancestor(root, integration, revision)
             and critical_tree(root, integration) == after,
-            "C023 I must be genuine exact [E,F] integration")
-    old, merged = _tree(root, processor["evidence_commit"]), _tree(root, integration)
+            "C023 I must genuinely merge tested F after immutable source-free E")
+    for path, key in ((PROTOCOL, "protocol"), (EVIDENCE, "payload"), (RESULT, "result")):
+        require(_tree(root, parents[1]).get(path, ())[:2] == ("100644", "blob")
+                and raw_bytes(root, parents[1], path) == processor[key],
+                "C023 source-free integration parent replaced E evidence: " + path)
+    require(previous.stateutil.same_acceptance(item(root, parents[1], "GP-CONFIG-023"),
+                                               processor["native"])
+            and not _catalog(json.loads(raw_bytes(root, parents[1], TRANSITIONS),
+                                        object_pairs_hook=unique),
+                             previous._catalog(raw_bytes(root, B, previous.TRANSITIONS))),
+            "C023 source-free integration parent changed acceptance or contains I catalog")
+    parent_delta = set(filter(None, _git(root, "diff", "--no-renames", "--name-only", "-z",
+                                        B, parents[1]).decode().split("\0")))
+    require(parent_delta <= GOVERNANCE, "C023 source-free integration parent exceeds finite governance")
+    old, merged = _tree(root, parents[1]), _tree(root, integration)
     delta = {p for p in old.keys() | merged.keys() if old.get(p) != merged.get(p)}
     require(delta == CRITICAL | HOSTS
             and all(merged[p] == _tree(root, F)[p] for p in delta),
@@ -418,6 +434,10 @@ def _lifecycle(root: Path, head: str, before: dict, after: dict):
         elif processor:
             require(False, "C023 accepted PASS erased")
         if processor:
+            current = critical_tree(root, revision)
+            require(current in (before, after)
+                    and (current != after or ancestor(root, F, revision)),
+                    "C023 accepted history contains untested source or replay")
             for path, key in ((PROTOCOL, "protocol"), (EVIDENCE, "payload"), (RESULT, "result")):
                 require(_tree(root, revision).get(path, ())[:2] == ("100644", "blob")
                         and raw_bytes(root, revision, path) == processor[key],
