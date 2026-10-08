@@ -2,7 +2,7 @@
 
 ## Current GP-CONFIG-022 exact hardware evidence
 
-GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN. Existing GP-CONFIG-023 / GP-VAL-042 remain the next authorized chain.
+GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN. GP-CONFIG-023 is now mechanically ACTIVATABLE for its fresh exact-scope candidate from the next live B023; GP-VAL-042 remains WAITING for that committed candidate and independent scope review.
 
 ## Current GP-CONFIG-021 exact hardware evidence
 
@@ -167,16 +167,16 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "runway": {
     "immediate_ready": 0,
     "recorded_preauthorized": 4,
-    "mechanically_activatable_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
-    "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
+    "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
+    "primary_liveness": "RUNWAY_LOW"
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -7785,7 +7785,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve C023 without replay; source-free GP-VAL-042 integrates independently; F023 descendant C023 with entirecriticaltree equal C-to-F; no H3 merge before exact build/custody/review/physical PASS.",
         "Do not route around rejected C020/037handoff or infer safehardwarefixtures; stop on unavailable mandatorymanual recovery."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": null,
@@ -8335,11 +8335,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 1; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
