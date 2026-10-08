@@ -2,7 +2,7 @@
 
 ## Current GP-CONFIG-022 exact hardware evidence
 
-GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN. GP-CONFIG-023 is HARDWARE_VALIDATED with source-free HEP PASS for exact F `36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39`, tree `45fa24dc7f95a5cd0e796c2c7c3b46f91688b329`, UF2 `7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224` /803840bytes. All ten owner rows accepted for first-beta scope: GC, XInput, DInput gamepad and Switch USB, ordinary selection/reconnect/reboot, explicit-zero rejection preserving valid state, persisted-index9 refusal/reboot/retention, manual recovery and exact original restoration. Omitted/zero raw identity and index9 error independently source-bound; separate omitted physical SET not claimed. Final controller remains accepted C017 About5994f165 with original4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 exact immediate/postreboot and usable. Final exact-tip R0f1648fb build/handoff review PASS resolves prior pending prose; original transcript witness remains invalidated, original prebuild hashes unavailable, later31pin/10link reproduction byte-identical. Physical display failure remains PHYSICAL_NOT_SAFELY_TESTABLE; exact-source whole-startup40cases/bothABIs and index4096cases/120accepted plus actualraw10checks PASS. Configured custom modifier profile absent; no claim all builtin modifiers absent. LF1 safe-stop observation was inapplicable UltimateRGB3 versus correctedRGB11; C023 block11 physical LF1 NOT_TESTED. C017 automatic Configurator recovery observed; deterministic source cause UNPROVEN. Keyboard physical route = NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA under directly verified later owner scope supersession; original C023 protocol remains immutable, GP-KBD-001 host evidence and PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT unchanged. One deferred nonexecuting item POST_BETA_KEYBOARD_PHYSICAL_VALIDATION; no Keyboard change/test now. Nunchuk NOT_TESTED; root cause UNPROVEN. Canonical critical source remains accepted C022; C023 source and I catalog unintegrated, GP-VAL-042 strict DONE and all98 other orders/receipts/evidence unchanged. Named control-plane acceptance now preserves R->E->I without early source/DONE. Actual exact-E/focused/native/negative review precedes publication; aggregate/synthetic/time-limit debt retained, no full aggregate PASS. Same persistent H3 proceeds exact tested-source integration/fresh review/separate DONE then existing C024/VAL045, with no new Planner/Curator/full chat for mechanics. Public release human-owned. Initial2026-10-02 adoption recorded RUNWAY_OK; current machine marker remains PLANNING_REQUIRED.
+GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN. GP-CONFIG-023 is DONE after exact source integration and strict completion; its source-free HEP PASS remains tied to for exact F `36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39`, tree `45fa24dc7f95a5cd0e796c2c7c3b46f91688b329`, UF2 `7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224` /803840bytes. All ten owner rows accepted for first-beta scope: GC, XInput, DInput gamepad and Switch USB, ordinary selection/reconnect/reboot, explicit-zero rejection preserving valid state, persisted-index9 refusal/reboot/retention, manual recovery and exact original restoration. Omitted/zero raw identity and index9 error independently source-bound; separate omitted physical SET not claimed. Final controller remains accepted C017 About5994f165 with original4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 exact immediate/postreboot and usable. Final exact-tip R0f1648fb build/handoff review PASS resolves prior pending prose; original transcript witness remains invalidated, original prebuild hashes unavailable, later31pin/10link reproduction byte-identical. Physical display failure remains PHYSICAL_NOT_SAFELY_TESTABLE; exact-source whole-startup40cases/bothABIs and index4096cases/120accepted plus actualraw10checks PASS. Configured custom modifier profile absent; no claim all builtin modifiers absent. LF1 safe-stop observation was inapplicable UltimateRGB3 versus correctedRGB11; C023 block11 physical LF1 NOT_TESTED. C017 automatic Configurator recovery observed; deterministic source cause UNPROVEN. Keyboard physical route = NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA under directly verified later owner scope supersession; original C023 protocol remains immutable, GP-KBD-001 host evidence and PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT unchanged. One deferred nonexecuting item POST_BETA_KEYBOARD_PHYSICAL_VALIDATION; no Keyboard change/test now. Nunchuk NOT_TESTED; root cause UNPROVEN. Canonical critical source remains accepted C022; C023 source and I catalog unintegrated, GP-VAL-042 strict DONE and all98 other orders/receipts/evidence unchanged. Named control-plane acceptance now preserves R->E->I without early source/DONE. Actual exact-E/focused/native/negative review precedes publication; aggregate/synthetic/time-limit debt retained, no full aggregate PASS. Same persistent H3 has mechanically activated existing C024 (PREAUTHORIZED/ACTIVATABLE) after exact live C023 DONE; fresh C024 B is `0b7b264cedce9be5d5a014e9e9e13c3817115f47`. The existing VAL045 remains its sole ordinary successor. No new Planner/Curator/full chat is needed for these authorized mechanical transitions. Public release human-owned. Initial2026-10-02 adoption recorded RUNWAY_OK; current machine marker remains PLANNING_REQUIRED.
 
 ## Current GP-CONFIG-021 exact hardware evidence
 
@@ -209,16 +209,16 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "runway": {
     "immediate_ready": 0,
     "recorded_preauthorized": 2,
-    "mechanically_activatable_preauthorized": 0,
+    "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "PLANNING_REQUIRED"
+    "primary_liveness": "RUNWAY_LOW"
   },
   "signals": [
-    "PLANNING_REQUIRED",
+    "RUNWAY_LOW",
     "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -7829,11 +7829,11 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
           "HAL/pico/src/comms/backend_init.cpp",
           "config/glyph/common/src/config.cpp",
           "docs/runtime_config/fixtures/glyph_checker_census.json",
-    "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
-    "docs/runtime_config/fixtures/runtime_config_validation_health.json",
-    "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
           "docs/runtime_config/gp_config023_usb_index_validation.md",
-    "docs/runtime_config/runtime_config_validation_health.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
           "include/core/config_usb_default_validation.hpp",
           "include/core/config_validation.hpp",
           "src/core/config_usb_default_validation.cpp",
@@ -8159,7 +8159,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Changed future042 authority module/API or independent consumer requiring an edit outside fifteen-path045 envelope returns CURATION_REQUIRED. No generic exemption, history reseal, silent successor skip or third successor without direct owner approval.",
         "Hardware FAIL/PARTIAL/INCONCLUSIVE, mismatched/missing exact acceptance, pending dependent H3 candidate/failure, unavailable safe operator Config/restoration route or unsupported physical fixture stops. Missing objective predecessor alone remains WAITING."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; receipt 3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b direct child of 2c10ff7c19a5ea8a945339d94246218e2f16dcc2, sibling of immutable Planner fbf2d1c99569ddee3e5432501ddc868bbdee4990; later descendant adoption authorizes only024/045 PREAUTHORIZED/WAITING. Three initial dispositions consumed; Keyboard policy resolved by actual userMessage01a108e9-62b1-7150-b641-fd8f11208653 and independently fetched original source as recorded in docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md; physical acceptance pending. All97prior work orders remain exact.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; receipt 3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b direct child of 2c10ff7c19a5ea8a945339d94246218e2f16dcc2, sibling of immutable Planner fbf2d1c99569ddee3e5432501ddc868bbdee4990; later descendant adoption authorizes only024/045 PREAUTHORIZED/WAITING. Three initial dispositions consumed; Keyboard policy resolved by actual userMessage01a108e9-62b1-7150-b641-fd8f11208653 and independently fetched original source as recorded in docs/agent_framework/PORTFOLIO_20261005_0028_CURATOR.md; physical acceptance pending. All97prior work orders remain exact. Exact C023 strict DONE live-verified at 0b7b264cedce9be5d5a014e9e9e13c3817115f47; GLYPH-UD-029 direct owner directive 01a11da0-71a1-7071-b938-d039d4525eb3 supplies the fresh mechanical continuation grant.",
       "automated_validation": [
         "Literal repaired-selector and actual InputMode/mode-setup positives and negatives described in scope; exact source/default/schema/accepted decoder/build-role pins; pointer/row identity, invalid/no-effects, original Config/input byte preservation and exactly one ordered action. Historical019/KBD expectations remain immutable; current repaired proof separately authenticated.",
         "Actual affected dispatcher and real012/config-menu/019/KBD and protected consumer mains, exact current/historical correspondence, mode/blob/omission/source/index/object/parent/host/review negatives, manifest/census/health and applicable framework/runway/sequence/navigation/surface/integration checks; relevant native frozen fingerprint MATCH and fresh independent review. Actual broad aggregate FAIL/incomplete remains honest Tier3 debt unless concrete Tier1/Tier2 contradiction.",
@@ -8181,9 +8181,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Hardware FAIL/PARTIAL/INCONCLUSIVE, mismatched/missing exact acceptance, pending dependent H3 candidate/failure, unavailable safe operator Config/restoration route or unsupported physical fixture stops. Missing objective predecessor alone remains WAITING.",
         "Before build/hardware/integration stop at named045 gate retaining exact C024; 045 strict DONE mechanically resumes preserved024 after fresh grant. No firmware merge before exact required manual PASS, no hardware evidence borrowed from020/014, no extra dependent handoff."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "ACTIVATABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -8428,19 +8428,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
 Ready IDs: (none)
 Immediate Ready: 0
 Recorded Preauthorized: 2
-Mechanically activatable Preauthorized: 0
+Mechanically activatable Preauthorized: 1
 Invalidated Preauthorized: 0
 Hardware-pending: 0
-Effective authorized runway: 0
+Effective authorized runway: 1
 Target effective authorized runway: 4
-Primary liveness: PLANNING_REQUIRED
+Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
