@@ -25,10 +25,18 @@ QUEUE = previous.QUEUE
 
 C = "03bbf5da14a7d450f2986b12ad69ec6b3f704bad"
 B = "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1"
+VAL042_I = "c2b604b1edf5bfa0551fe73a568a1f50a48ea30d"
 TREE = "da886ff6d9b2d545bd93ce50745ae353129d8e7c"
 RAW = "0bd5c9cfc481bb4e7fc3b595f59efa7c415695a7b01df3b55a84ebfd66a6a4b4"
+F = "36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39"
+F_TREE = "45fa24dc7f95a5cd0e796c2c7c3b46f91688b329"
+ARTIFACT_SHA256 = "7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224"
+ARTIFACT_SIZE = 803840
 MAPPING = "docs/runtime_config/fixtures/gp_val042_c023_transition.json"
 TRANSITIONS = "docs/runtime_config/fixtures/gp_val042_accepted_transitions.json"
+PROTOCOL = "docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md"
+RESULT = "docs/calibration/gp_config_023_hardware_result.md"
+EVIDENCE = "docs/calibration/fixtures/gp_config_023_hardware_evidence.json"
 HANDOFF_START = "<!-- gp-config023-handoff-val042-activation:start -->"
 HANDOFF_END = "<!-- gp-config023-handoff-val042-activation:end -->"
 CRITICAL = frozenset((
@@ -66,6 +74,7 @@ GOVERNANCE = frozenset((
     "tools/glyph_c023_campaign_transition.py",
     "tools/test_glyph_c023_campaign_transition.py",
     "tools/check_glyph_c023_proof_replay.py",
+    PROTOCOL, RESULT, EVIDENCE,
 ))
 
 
@@ -143,6 +152,77 @@ def _handoff(root: Path, ref: str | None) -> dict:
         "candidate_state": "PRESERVED_UNBUILT_UNMERGED",
     }, "C023 source-free handoff identity/content mismatch")
     return value
+
+
+def _hardware_pending_contract(root: Path, order: dict) -> dict:
+    """Accept only the reviewed exact-F pending handoff, with no physical result."""
+    expected_locator = (
+        "local_backups/hardware-artifacts/"
+        f"{F}/{ARTIFACT_SHA256}/firmware.uf2"
+    )
+    require(
+        order["status"] == "HARDWARE_TEST_REQUIRED"
+        and order["branch"] == "codex/gp-config-023-release-safety"
+        and order["candidate_git_sha"] == F
+        and order["candidate_base_configurator_sha"] == B
+        and order["firmware_artifact_build_path"] == ".pio/build/glyph_mk6/firmware.uf2"
+        and order["preserved_firmware_artifact_locator"] == expected_locator
+        and order["firmware_artifact_sha256"] == ARTIFACT_SHA256
+        and order["hardware_evidence_dependency_satisfied"] is False
+        and order["hardware_evidence_record"] is None
+        and order["hardware_result"] is None
+        and order["hardware_evidence_gaps"] == [],
+        "C023 hardware-pending queue identity or non-claim changed",
+    )
+    require(
+        _git(root, "rev-list", "--parents", "-n", "1", F).decode().split() == [F, C]
+        and _git(root, "rev-parse", F + "^{tree}").decode().strip() == F_TREE,
+        "C023 exact F parent/tree changed",
+    )
+    evidence = json.loads(current_bytes(root, EVIDENCE), object_pairs_hook=unique)
+    required_rows = (
+        "valid_stored_startup", "ordinary_selection_profile_modifier",
+        "reconnect_reboot", "external_invalid_index_rejection",
+        "invalid_stored_refusal_gc_usb", "invalid_stored_refusal_reboot",
+        "manual_recovery", "restoration", "rollback", "safe_stop_and_anomalies",
+    )
+    require(
+        evidence["work_order_id"] == "GP-CONFIG-023"
+        and evidence["candidate_branch"] == order["branch"]
+        and evidence["candidate_git_sha"] == F
+        and evidence["candidate_base_configurator_sha"] == B
+        and evidence["firmware_artifact_sha256"] == ARTIFACT_SHA256
+        and evidence["preserved_firmware_artifact_locator"] == expected_locator
+        and evidence["candidate_protocol_reference"] == PROTOCOL
+        and evidence["candidate_protocol_version"] == "GP_CONFIG_023_HW_V1"
+        and evidence["pre_update_sha256_verified"] is False
+        and evidence["result"] == "NOT_TESTED"
+        and evidence["anomalies"] == []
+        and [step["id"] for step in evidence["steps"]] == list(required_rows)
+        and all(step["observed"].startswith("NOT_TESTED") for step in evidence["steps"])
+        and evidence["rollback_recovery"].startswith("NOT_TESTED")
+        and len(evidence["evidence_gaps"]) == len(required_rows),
+        "C023 pending fixture must preserve exact identity and all physical rows NOT_TESTED",
+    )
+    protocol = current_bytes(root, PROTOCOL).decode("utf-8")
+    result = current_bytes(root, RESULT).decode("utf-8")
+    protocol_identity = (
+        F, F_TREE, C, B, ARTIFACT_SHA256, expected_locator,
+        "Do not write a Config or prepare/store an invalid Config without separate explicit owner approval",
+        "The owner performs any device or Config action manually",
+        "No executor or reviewer writes to a device",
+    )
+    require(
+        "Status: `HARDWARE_TEST_REQUIRED`" in protocol
+        and all(f"`{row}`" in protocol for row in required_rows)
+        and all(value in protocol for value in protocol_identity)
+        and F in result
+        and ARTIFACT_SHA256 in result
+        and "NOT_TESTED / HARDWARE_TEST_REQUIRED" in result
+        and "no physical test" in result,
+        "C023 pending protocol/result identity or physical non-claim changed",
+    )
+    return evidence
 
 
 @original._proof_invocation
@@ -223,17 +303,25 @@ def authenticate(root: Path):
     c023_order = item(root, head, "GP-CONFIG-023")
     val042_order = item(root, head, "GP-VAL-042")
     handoff = _handoff(root, head)
-    require(c023_order["status"] == "PREAUTHORIZED"
-            and val042_order["status"] == "PREAUTHORIZED"
-            and c023_order["candidate_git_sha"] == C
-            and c023_order["candidate_base_configurator_sha"] == B
-            and c023_order["firmware_artifact_build_path"] is None
-            and c023_order["hardware_result"] is None
-            and val042_order["candidate_git_sha"] == C
-            and val042_order["candidate_base_configurator_sha"] == B
-            and val042_order["activation_state"] == "ACTIVATABLE"
+    done042 = val042_order["done_evidence"]
+    require(val042_order["status"] == "DONE"
+            and isinstance(done042, dict)
+            and done042.get("mode") == "DIRECT_ANCESTRY"
+            and done042.get("implementation_base_sha") == B
+            and done042.get("reviewed_implementation_sha") == VAL042_I
+            and done042.get("prior_canonical_integration_sha") == VAL042_I
             and handoff["candidate_state"] == "PRESERVED_UNBUILT_UNMERGED",
-            "C023/042 queue state or hardware non-claim changed")
+            "C023 source-free handoff requires exact GP-VAL-042 strict DONE")
+    if c023_order["status"] == "PREAUTHORIZED":
+        require(c023_order["candidate_git_sha"] == C
+                and c023_order["candidate_base_configurator_sha"] == B
+                and c023_order["firmware_artifact_build_path"] is None
+                and c023_order["hardware_result"] is None,
+                "C023 pre-build queue state changed")
+        handoff_stage = "PROCESSOR_READY"
+    else:
+        _hardware_pending_contract(root, c023_order)
+        handoff_stage = "HARDWARE_PENDING"
     if current == after:
         require(c_is_ancestor, "C023 source integrated without exact candidate ancestry")
         phase = "CANDIDATE_VALIDATION_ONLY"
@@ -294,7 +382,8 @@ def authenticate(root: Path):
             "C023 governance mapping/catalog must be committed")
     _stage_and_live(root, head, MAPPING, tree[MAPPING])
     _stage_and_live(root, head, TRANSITIONS, tree[TRANSITIONS])
-    return {"contract": "c023_usb_index", "phase": phase, "candidate": C, "base": B,
+    return {"contract": "c023_usb_index", "phase": phase, "handoff_stage": handoff_stage,
+            "candidate": C, "base": B,
             "target": head, "critical_paths": previous.CRITICAL | CRITICAL,
             "source_candidates": {path: source_candidate for path in CRITICAL},
             "changed_paths": frozenset(delta), "accepted_metadata_paths": frozenset(),

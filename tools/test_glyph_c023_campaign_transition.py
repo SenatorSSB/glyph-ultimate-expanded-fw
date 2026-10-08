@@ -72,6 +72,36 @@ class C023AdmissionTests(unittest.TestCase):
         self._reject(transitions=catalog)
 
 
+class C023HardwarePendingTests(unittest.TestCase):
+    def setUp(self) -> None:
+        head = campaign._git(ROOT, "rev-parse", "HEAD").decode().strip()
+        self.order = campaign.item(ROOT, head, "GP-CONFIG-023")
+
+    def test_exact_pending_handoff_is_admitted_without_physical_acceptance(self) -> None:
+        record = campaign._hardware_pending_contract(ROOT, self.order)
+        self.assertEqual(record["result"], "NOT_TESTED")
+        self.assertTrue(all(step["observed"].startswith("NOT_TESTED") for step in record["steps"]))
+
+    def test_pending_candidate_or_result_substitution_is_rejected(self) -> None:
+        bad_identity = dict(self.order)
+        bad_identity["firmware_artifact_sha256"] = "0" * 64
+        with self.assertRaises(CorrespondenceError):
+            campaign._hardware_pending_contract(ROOT, bad_identity)
+
+        evidence = json.loads((ROOT / campaign.EVIDENCE).read_text())
+        evidence["steps"][0]["observed"] = "PASS"
+        original_current = campaign.current_bytes
+
+        def tampered_current(root, path):
+            if path == campaign.EVIDENCE:
+                return (json.dumps(evidence) + "\n").encode()
+            return original_current(root, path)
+
+        with patch.object(campaign, "current_bytes", side_effect=tampered_current):
+            with self.assertRaises(CorrespondenceError):
+                campaign._hardware_pending_contract(ROOT, self.order)
+
+
 class C023CatalogDispatchTests(unittest.TestCase):
     """The exact replay receives C023 roots before source integration."""
 
@@ -94,6 +124,7 @@ class C023CatalogDispatchTests(unittest.TestCase):
             authenticate_c023.assert_called_once_with(ROOT)
         c023_proof = c023_proofs[0]
         self.assertEqual(c023_proof["phase"], "SOURCE_FREE_PROCESSOR")
+        self.assertEqual(c023_proof["handoff_stage"], "HARDWARE_PENDING")
         self.assertIn(campaign.C, c023_proof["object_roots"])
         self.assertIn(campaign.C, c023_roots)
 

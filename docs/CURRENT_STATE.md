@@ -2,9 +2,7 @@
 
 ## Active C023 / GP-VAL-042 checkpoint
 
-The exact C023 candidate F `36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39` was built from committed source and preserved with UF2 SHA-256 `7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224` (803840 bytes). Independent review approved the exact build, custody, and protocol; pre-build per-input pin output was not retained, while the post-build 31-input/10-symlink audit is retained. GP-CONFIG-023 is now HARDWARE_TEST_REQUIRED. All ten physical rows remain NOT_TESTED; no Config write, device update, hardware PASS, or merge has occurred. GP-VAL-042 remains DONE at `c2b604b1edf5bfa0551fe73a568a1f50a48ea30d`. Nunchuk NOT_TESTED; root cause UNPROVEN.
-
-The initial 2026-10-02 adoption recorded RUNWAY_OK; the current machine-derived marker above supersedes that historical liveness.
+The exact C023 candidate F `36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39` was built from committed source and preserved with UF2 SHA-256 `7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224` (803840 bytes). Independent review approved the exact build, custody, and protocol; pre-build per-input pin output was not retained, while the post-build 31-input/10-symlink audit is retained. GP-CONFIG-023 is now HARDWARE_TEST_REQUIRED. All ten physical rows remain NOT_TESTED; no Config write, device update, hardware PASS, or merge has occurred. GP-VAL-042 remains DONE at `c2b604b1edf5bfa0551fe73a568a1f50a48ea30d`. Nunchuk NOT_TESTED; root cause UNPROVEN. The initial 2026-10-02 adoption recorded RUNWAY_OK; the current machine-derived marker above supersedes that historical liveness.
 
 GP-VAL-042 review found the aggregate adversarial suite still fails in its older GP-VAL-037 campaign-catalog expectation: it expects 20 roots while the current authenticated C022 predecessor closure returns 77, with no expected root missing. Independent review classified the 57-root difference as valid immutable C022 predecessor/acceptance closure and the synthetic expectation as stale; preserve this as FRAMEWORK_VALIDATION_DEBT and do not claim aggregate PASS. That diagnosis also exposed a separate source-free replay gap: the C023 candidate commit was absent from the runner's explicitly authenticated root set. The exact C023 replay now uses its source-free authenticator and includes candidate C; a focused dispatch test passes and confirms C022-only selection still excludes C.
 
@@ -17,15 +15,7 @@ Status label: CURRENT. <!-- current-runway:start -->
 <!-- current-runway:end -->
 Read `docs/AGENT_CONTEXT.md` first, then `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` before runtime-config work. Historical evidence is indexed from `docs/archive/README.md` and `docs/calibration/INDEX.md`; the marker defines current authorization. The bounded post-C020 GLYPH-UD-027/028 pass installs the current three-tier policy and transport-only contract; see the current post-C020 section in AGENT_CONTEXT and VALIDATION_AND_GATES.md. All 97 orders/runway and exact C020 acceptance stay unchanged; older stage instructions below do not request repeated work. The current C014 handoff below records the completed mechanical activation and exact candidate; GP-CONFIG-014 now waits at the exact built/custodied hardware handoff below.
 <!-- current-runway-summary:start -->
-Ready IDs: (none)
-Immediate Ready: 0
-Recorded Preauthorized: 2
-Mechanically activatable Preauthorized: 0
-Invalidated Preauthorized: 0
-Hardware-pending: 1
-Effective authorized runway: 0
-Target effective authorized runway: 4
-Primary liveness: PLANNING_REQUIRED
+Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 1; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 **Current Agentic Operating State:** GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN.
 CUSTOM_RUNNER_NOT_REQUIRED; retired official-configurator historical evidence remains at `tools/check_glyph_official_configurator_validation.py`; the older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined.
@@ -114,20 +104,10 @@ historical completion prose below does not authorize implementation.
 
 ## Readiness
 
-- Ready for docs/tools and checker work: yes.
-- Ready for coordinate-native negative-corpus, positive-corpus, and validator follow-up work: yes,
-  including deterministic selection semantics and offline dry-run fixtures.
-- Ready for source-owned generator/evaluator design: yes, when source-backed and
-  scoped outside active firmware behavior.
-- Candidate-generation diff diagnosis is documented and executable; the current
-  classification is `TABLE_CONTENT_DIFFERENT`, so this remains hardware-candidate
-  material rather than a canonicalization-only branch.
-- Current lane before active behavior: blocked until a selected activation
-  strategy is implemented and hardware-gated.
-- Hardware test required for this docs/checker cleanup: no.
-- Hardware test required for future behavior-changing firmware source deltas:
-  yes, before merge.
-- Product approval required before runtime-loaded config, storage, device write, protobuf binary write, flashing automation, external adapter output, or neutral profile schema changes.
+- Ready for docs/tools, coordinate-native validator/corpus work, and source-owned generator/evaluator design when source-backed and outside active firmware behavior.
+- Candidate-generation diff diagnosis is executable and remains `TABLE_CONTENT_DIFFERENT`; it is hardware-candidate material, not a canonicalization-only branch.
+- Active behavior remains gated on an implemented activation strategy and exact hardware review. This docs/checker cleanup needs no hardware test; future behavior-changing firmware deltas need exact hardware PASS before merge.
+- Product approval is required before runtime-loaded config, storage, device write, protobuf binary write, flashing automation, external adapter output, or neutral profile schema changes.
 ## Non-Claims
 - No push-to-device behavior is implemented or claimed.
 - No universal official configurator compatibility claim is made.

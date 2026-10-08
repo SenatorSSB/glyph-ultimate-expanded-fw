@@ -4,7 +4,7 @@
   "work_order_id": "GP-CONFIG-023",
   "candidate_branch": "codex/gp-config-023-release-safety",
   "candidate_git_sha": "36bf0f314afe19fc8fcbf4caf97b5bf5f83dac39",
-  "candidate_base_configurator_sha": "b224227a76cb8edb73e5f4b2ad5de874d1",
+  "candidate_base_configurator_sha": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
   "firmware_artifact_filename": "firmware.uf2",
   "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
   "firmware_artifact_sha256": "7e8833e5a83d1656e51f9ca258de78e7808eda2a6f3da918759a1553575f1224",

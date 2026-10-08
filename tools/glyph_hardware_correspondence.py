@@ -304,6 +304,9 @@ NON_BEHAVIORAL_PATHS |= frozenset((
     'tools/glyph_c023_campaign_transition.py',
     'tools/test_glyph_c023_campaign_transition.py',
     'tools/check_glyph_c023_proof_replay.py',
+    'docs/agent_framework/GP_CONFIG_023_HARDWARE_PROTOCOL.md',
+    'docs/calibration/gp_config_023_hardware_result.md',
+    'docs/calibration/fixtures/gp_config_023_hardware_evidence.json',
 ))
 
 
