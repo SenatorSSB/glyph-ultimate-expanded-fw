@@ -15,19 +15,32 @@ downstream callback. The valid route checks cover GameCube, USB XInput,
 Keyboard through DInput, and a watchdog DInput selection with a saved mode
 update.
 
-The production semantic validator rejects an invalid SET-style Config without
-changing its caller bytes. The harness does not run `ConfiguratorBackend` packet
-decoding or the persistence implementation, so it does not claim byte-retention
-or saved-file recovery behavior. Startup display and recovery UI are also not
-executed. Peripheral constructors and host/device behavior are callback stubs.
+The actual nanopb decoder accepts an omitted USB index as zero and decodes
+explicit zero, 2, and 255. The production semantic validator then rejects all
+four because the required index must identify a populated backend. Nanopb
+itself rejects wire value 256 under the generated 8-bit field representation.
+Index 1 with one backend passes both decode and semantic validation.
+
+The harness executes the exact production `Persistence::SetValidator`,
+`ValidateConfig`, and `LoadConfigChecked` bodies against saved-byte vectors.
+For omitted, zero, 2, 255, and 256, the load result is `Rejected`; the caller
+Config and saved bytes remain byte-exact, and no save occurs. It also executes
+the exact `draw_recovery_page` and `refuse_boot` bodies. The startup refusal
+displays `Startup Config invalid`, `Recovery required`, and `Operation refused`
+in order, clears watchdog scratch values, then publishes the refusal. With the
+display unavailable, it publishes without drawing. Peripheral constructors
+and host/device behavior remain callback stubs.
 
 Separate source-bound callsite checks verify that `HandleSetConfig` invokes the
 shared validator before saving and publishing, `LoadConfigChecked` validates
 before publishing, and Glyph's adapter calls `validate_config_semantics`. They
 also verify that invalid startup selection reaches refusal before mode-binding
 setup and zero-backend fallback, and that the secondary core gates normal menu
-construction after refusal. These are source-order checks, not runtime UI or
-storage simulations.
+construction after refusal. The broader setup and secondary-core ordering
+remains source-checked. The host double does not run `ConfiguratorBackend` COBS
+packet transport, real CRC/header validation, flash/filesystem I/O, the OLED
+driver or scheduler, or a physical display. These results do not establish
+hardware or physical UI behavior.
 
 The adopted standalone C021 checker was attempted with
 `python3 tools/check_glyph_gp_config021_persisted_recovery.py`; it stopped at
@@ -39,8 +52,9 @@ hash for `HAL/pico/src/comms/backend_init.cpp` differs from the authorized C023
 source. The C023 checker instead authenticates and executes the current
 initializer and selector fragments directly.
 
-The checker compiles the actual production validation sources and two exact
-source fragments in both the default and short-enum ABIs with AddressSanitizer
-and UndefinedBehaviorSanitizer. This is host-only evidence: hardware acceptance
-is **NOT_CLAIMED**, Nunchuk remains **NOT_TESTED**, and root cause remains
+The checker compiles the actual production validation sources, generated
+nanopb decoder, and exact initializer, selector, persistence, and recovery
+fragments in both the default and short-enum ABIs with AddressSanitizer and
+UndefinedBehaviorSanitizer. This is host-only evidence: hardware acceptance is
+**NOT_CLAIMED**, Nunchuk remains **NOT_TESTED**, and root cause remains
 **UNPROVEN**.

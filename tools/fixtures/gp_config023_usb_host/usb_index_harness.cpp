@@ -26,6 +26,25 @@ static CommunicationBackendConfig usb_result = CommunicationBackendConfig_init_z
 static CommunicationBackend primary;
 static CommunicationBackend *secondary_storage[2]{};
 static std::vector<CommunicationBackendId> primary_ids;
+enum class BootOutcome { Pending, Normal, StoredConfigRejected, StorageFailure, DefaultsRejected, StartupConfigRejected };
+static std::vector<std::string> recovery_events;
+static constexpr int SSD1306_WHITE = 1;
+struct HostDisplay {
+    void clearDisplay() { recovery_events.push_back("clear"); }
+    void setFont(void *) { recovery_events.push_back("font"); }
+    void setTextSize(int value) { recovery_events.push_back("size=" + std::to_string(value)); }
+    void setTextColor(int value) { recovery_events.push_back("color=" + std::to_string(value)); }
+    void setCursor(int x, int y) { recovery_events.push_back("cursor=" + std::to_string(x) + "," + std::to_string(y)); }
+    void println(const char *text) { recovery_events.push_back(std::string("text=") + text); }
+    void display() { recovery_events.push_back("display"); }
+};
+static HostDisplay display;
+static BootOutcome published_outcome = BootOutcome::Pending;
+
+void publish_boot_state(BootOutcome outcome, bool) {
+    published_outcome = outcome;
+    recovery_events.push_back("publish=" + std::to_string(static_cast<unsigned>(outcome)));
+}
 
 CommunicationBackendConfig backend_config_from_id(CommunicationBackendId backend_id,
     const CommunicationBackendConfig *configs, size_t count) {
@@ -74,6 +93,8 @@ static void init_primary(CommunicationBackend *&out, CommunicationBackendId back
 
 #include "production_backend_init.inc"
 #include "production_backend_selectors.inc"
+#include "production_persistence.inc"
+#include "production_recovery.inc"
 
 static Config config_with_count(unsigned count, unsigned index) {
     Config config = Config_init_zero;
@@ -242,6 +263,94 @@ static void failure_containment() {
     std::cout << "containment invalid_config=REJECT caller_bytes=BYTE_EXACT validator_persistence=NOT_APPLICABLE\n";
 }
 
+static std::vector<uint8_t> wire_config(bool include_usb_index, unsigned usb_index) {
+    // Empty repeated backend-config message (Config tag 2), followed by optional tag 7.
+    std::vector<uint8_t> wire{0x12, 0x00};
+    if (include_usb_index) {
+        wire.push_back(0x38);
+        do {
+            uint8_t byte = static_cast<uint8_t>(usb_index & 0x7f);
+            usb_index >>= 7;
+            if (usb_index != 0) byte |= 0x80;
+            wire.push_back(byte);
+        } while (usb_index != 0);
+    }
+    return wire;
+}
+
+static bool decode_and_validate(const std::vector<uint8_t> &wire, bool decoder_expected,
+                               unsigned decoded_index_expected) {
+    Config candidate = Config_init_default;
+    pb_istream_t stream = pb_istream_from_buffer(wire.data(), wire.size());
+    const bool decoded = pb_decode(&stream, Config_fields, &candidate);
+    require(decoded == decoder_expected, "actual nanopb decoder verdict mismatch");
+    if (!decoded) return false;
+    require(candidate.default_usb_backend_config == decoded_index_expected &&
+            candidate.communication_backend_configs_count == 1,
+            "actual nanopb decoded USB index/backend extent mismatch");
+    ConfigValidationError error{};
+    return validate_config_semantics(candidate, error);
+}
+
+static void decoder_and_persisted_refusal() {
+    require(persistence.SetValidator(validate_config_semantics), "actual persistence validator install");
+    const struct Case { const char *label; bool present; unsigned index; bool decoder_accepts; } cases[] = {
+        {"omitted", false, 0, true}, {"zero", true, 0, true},
+        {"out_of_range_2", true, 2, true}, {"out_of_range_255", true, 255, true},
+        {"varint_256", true, 256, false}, {"valid_1", true, 1, true}
+    };
+    for (const auto &item : cases) {
+        const auto bytes = wire_config(item.present, item.index);
+        const bool valid = decode_and_validate(bytes, item.decoder_accepts,
+            item.present ? item.index : 0);
+        require(valid == (std::string(item.label) == "valid_1"),
+                "nanopb-decoded required index semantic verdict");
+        if (std::string(item.label) == "valid_1") {
+            std::cout << "decoder_case " << item.label << " decode=PASS semantic=PASS\n";
+            continue;
+        }
+
+        LittleFS.saved_bytes = bytes;
+        const auto saved_before = LittleFS.saved_bytes;
+        Config caller = config_with_count(1, 1);
+        const Config caller_before = caller;
+        const unsigned saves_before = persistence.saves;
+        require(persistence.LoadConfigChecked(caller) == Persistence::LoadResult::Rejected,
+                "production LoadConfigChecked did not refuse invalid stored index");
+        require(std::memcmp(&caller_before, &caller, sizeof(Config)) == 0,
+                "rejected stored Config changed caller bytes");
+        require(LittleFS.saved_bytes == saved_before,
+                "rejected stored Config bytes changed");
+        require(persistence.saves == saves_before, "rejected stored Config reached SaveConfig");
+        std::cout << "decoder_case " << item.label << " decode="
+                  << (item.decoder_accepts ? "PASS" : "REJECT")
+                  << " semantic=" << (item.decoder_accepts ? "REJECT" : "NOT_REACHED")
+                  << " stored=REJECT caller=BYTE_EXACT saved=BYTE_EXACT\n";
+    }
+}
+
+static void executable_recovery_refusal() {
+    recovery_events.clear();
+    published_outcome = BootOutcome::Pending;
+    watchdog_hw->scratch[0] = 9;
+    watchdog_hw->scratch[1] = 7;
+    refuse_boot(BootOutcome::StartupConfigRejected, true);
+    const std::vector<std::string> expected{
+        "clear", "font", "size=1", "color=1", "cursor=0,0",
+        "text=Startup Config invalid", "text=Recovery required", "text=Operation refused",
+        "display", "publish=5"
+    };
+    require(recovery_events == expected, "actual recovery display text/order mismatch");
+    require(published_outcome == BootOutcome::StartupConfigRejected &&
+            watchdog_hw->scratch[0] == 0 && watchdog_hw->scratch[1] == 0,
+            "actual refusal outcome/watchdog cleanup mismatch");
+    recovery_events.clear();
+    refuse_boot(BootOutcome::StartupConfigRejected, false);
+    require(recovery_events == std::vector<std::string>{"publish=5"},
+            "display-unavailable startup refusal drew UI or failed to publish");
+    std::cout << "startup_recovery executable_display=PASS exact_text_and_order=PASS scratch_clear=PASS display_unavailable=PASS\n";
+}
+
 int main() {
     try {
         static_assert(sizeof(GameModeConfig::name) > 0);
@@ -249,6 +358,8 @@ int main() {
         invalid_start_and_post_selector();
         valid_routes();
         failure_containment();
+        decoder_and_persisted_refusal();
+        executable_recovery_refusal();
         std::cout << "gp_config023_usb_index_validation: PASS (host-only; no hardware claim)\n";
         return 0;
     } catch (const std::exception &error) {

@@ -17,6 +17,7 @@ HOST = "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp"
 STUBS = "tools/fixtures/gp_config023_usb_host/host_stubs.hpp"
 DECODER = "tools/fixtures/gp_config012_button_host"
 BASE = "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1"
+CANDIDATE = "03bbf5da14a7d450f2986b12ad69ec6b3f704bad"
 SOURCE_SHA256 = {
     "HAL/pico/src/comms/backend_init.cpp": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c",
     "config/glyph/common/src/config.cpp": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae",
@@ -30,14 +31,22 @@ SOURCE_SHA256 = {
     "HAL/pico/src/comms/ConfiguratorBackend.cpp": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
     "HAL/pico/src/core/Persistence.cpp": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
     "tools/fixtures/gp_config012_button_host/generated/config.pb.h": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+    "tools/fixtures/gp_config012_button_host/generated/config.pb.c": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
 }
 HOST_SHA256 = {
-    HOST: "971b40091ec507d3b2e7347d8c78ce5b6acb5cf05fcbe32ec444cb6244a1bd04",
-    STUBS: "b813240ea035d3bfb124535f110f7dd6d65e92981977e9f9018c4729b01a4732",
+    HOST: "2e291a59a37cfdbba29ed017a123b380bfeebea769f20441d7df97e028700da9",
+    STUBS: "171f1542946c9f0f0d97c4e9410ba5b45a4d4a6018426b9d227932d13a7fc19d",
 }
 FRAGMENT_SHA256 = {
     "initialize_backends": "cb5eca0652f2555a6ace87037fe1ce66aed3c2a13801aa7723c22e8b4c7837d9",
     "selectors": "0ac13fa680676c0ab32692eb4152e61b9e634e837a17937cf7e114cff15a484a",
+    "persistence": "7e59bc3ea73ee15042e82aec1deacb1ec4083efd03bbe72dae32afdb6cbfe7b3",
+    "recovery": "9dbc49cddb61b63cea8b91aff02b474e927b130891a7806ab15dc118ac0252c2",
 }
 
 
@@ -122,6 +131,10 @@ def production_fragments() -> dict[str, str]:
     return {
         "initialize_backends": fragment(source, "size_t initialize_backends(", "void init_primary_backend("),
         "selectors": fragment(source, "backend_config_selector_t get_backend_config_default = [](", "// clang-format on"),
+        "persistence": fragment("HAL/pico/src/core/Persistence.cpp", "bool Persistence::SetValidator(", "bool Persistence::SaveConfig(" ) +
+            fragment("HAL/pico/src/core/Persistence.cpp", "Persistence::LoadResult Persistence::LoadConfigChecked(", "bool Persistence::CheckSavedConfig()"),
+        "recovery": fragment("config/glyph/common/src/config.cpp", "void draw_recovery_page(", "void refuse_boot(") +
+            fragment("config/glyph/common/src/config.cpp", "void refuse_boot(", "}  // namespace"),
     }
 
 
@@ -188,8 +201,10 @@ def run(command: list[str]) -> subprocess.CompletedProcess[str]:
 
 
 def compile_and_run(temp: Path, fragments: dict[str, str], short_enum: bool) -> str:
+    output_names = {"initialize_backends": "backend_init", "selectors": "backend_selectors",
+                    "persistence": "persistence", "recovery": "recovery"}
     for name, body in fragments.items():
-        (temp / ("production_" + ("backend_init" if name == "initialize_backends" else "backend_selectors") + ".inc")).write_text(body)
+        (temp / ("production_" + output_names[name] + ".inc")).write_text(body)
     includes = ["-I" + str(ROOT / "tools/fixtures/gp_config023_usb_host"),
                 "-I" + str(ROOT / "include"),
                 "-I" + str(ROOT / DECODER / "generated"),
@@ -203,6 +218,13 @@ def compile_and_run(temp: Path, fragments: dict[str, str], short_enum: bool) -> 
     for index, source in enumerate(sources):
         obj = temp / f"{index}.o"
         run(["c++", "-std=gnu++20", *flags, *includes, "-c", str(ROOT / source), "-o", str(obj)])
+        objects.append(str(obj))
+    for index, source in enumerate(["tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+                                    "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+                                    "tools/fixtures/gp_config012_button_host/generated/config.pb.c"]):
+        obj = temp / f"c{index}.o"
+        cflags = [flag for flag in flags if flag != "-g"]
+        run(["cc", "-std=c99", *cflags, *includes, "-c", str(ROOT / source), "-o", str(obj)])
         objects.append(str(obj))
     binary = temp / ("usb-index-short-enum" if short_enum else "usb-index-default-enum")
     run(["c++", *flags, *objects, "-o", str(binary)])
@@ -219,30 +241,41 @@ def main() -> int:
         for name, body in parts.items():
             require(digest(body.encode()) == FRAGMENT_SHA256[name], "production fragment changed: " + name)
         head = git("rev-parse", "HEAD").decode().strip()
-        require(head == value["candidate_base"] or
-                git("show", "-s", "--format=%P", head).decode().strip() == value["candidate_base"],
-                "checker must run on the exact B023 base or its direct candidate child")
+        parent = git("show", "-s", "--format=%P", head).decode().strip()
+        require(head == value["candidate_base"] or parent == value["candidate_base"] or
+                (parent == CANDIDATE and
+                 git("show", "-s", "--format=%P", parent).decode().strip() == value["candidate_base"]),
+                "checker must run on exact B023, C023, or its direct F023 child")
         require(git("branch", "--show-current").decode().strip() == "codex/gp-config-023-release-safety",
                 "candidate branch changed")
-        parent = git("show", "-s", "--format=%P", head).decode().strip()
+        b_parent = "9644ae6648558326b8157b5368faa9e6086aa034"
         if head == BASE:
-            require(parent == "9644ae6648558326b8157b5368faa9e6086aa034", "B023 ancestry changed")
-        else:
+            require(parent == b_parent, "B023 ancestry changed")
+        elif head == CANDIDATE:
             require(parent == BASE, "C023 must be a direct child of B023")
-            require(git("show", "-s", "--format=%P", parent).decode().strip() ==
-                    "9644ae6648558326b8157b5368faa9e6086aa034", "B023 ancestry changed")
+            require(git("show", "-s", "--format=%P", parent).decode().strip() == b_parent,
+                    "B023 ancestry changed")
+        else:
+            require(parent == CANDIDATE, "F023 must be a direct child of immutable C023")
+            require(git("show", "-s", "--format=%P", parent).decode().strip() == BASE,
+                    "C023 must remain a direct child of B023")
         with tempfile.TemporaryDirectory(prefix="glyph-config023-usb-index-") as folder:
             outputs = []
             for short_enum in (False, True):
                 outputs.append(compile_and_run(Path(folder), parts, short_enum))
         require(outputs[0] == outputs[1], "ABI observations differ")
         lines = outputs[0].splitlines()
-        require(len(lines) == 8 and lines[-1] == "gp_config023_usb_index_validation: PASS (host-only; no hardware claim)",
+        require(len(lines) == 15 and lines[-1] == "gp_config023_usb_index_validation: PASS (host-only; no hardware claim)",
                 "unexpected bounded proof output:\n" + outputs[0])
         require(lines[0].startswith("index_matrix counts=0..15 indices=0..255 cases=4096 accepted=120 actual_extent=15"),
                 "index/count matrix result")
+        require(all(any(line.startswith("decoder_case " + name + " ") for line in lines) for name in
+                    ("omitted", "zero", "out_of_range_2", "out_of_range_255", "varint_256", "valid_1")),
+                "actual decoder/persisted refusal cases missing")
+        require(any(line.startswith("startup_recovery executable_display=PASS") for line in lines),
+                "executable startup recovery proof missing")
         print(outputs[0], end="")
-        print("ABIs=default,short-enum ASan_UBSan=PASS exact_production_fragments=2 hardware=NOT_CLAIMED")
+        print("ABIs=default,short-enum ASan_UBSan=PASS exact_production_fragments=6 hardware=NOT_CLAIMED")
         return 0
     except (OSError, subprocess.SubprocessError, ProofError, KeyError, TypeError, ValueError) as error:
         print("gp_config023_usb_index_validation: FAIL: " + str(error))

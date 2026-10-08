@@ -7365,6 +7365,79 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_config023_usb_index_validation",
+      "defines_main": true,
+      "file_size_bytes": 16786,
+      "hard_coded_branch_like_strings": [
+        "branch",
+        "candidate",
+        "candidate_base"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 286,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "potential_branch_identity_signals": [
+        "branch",
+        "candidate",
+        "candidate_base"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config023_usb_index_validation",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+        "docs/runtime_config/gp_config023_usb_index_validation.md",
+        "include/core/config_button_validation.hpp",
+        "include/core/config_usb_default_validation.hpp",
+        "include/core/config_validation.hpp",
+        "src/config.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "tools/fixtures/gp_config012_button_host",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+        "tools/fixtures/gp_config023_usb_host",
+        "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+        "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "1a244387c306479d940284c0217085efd23c1416856a436737cc9224181889ea",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_config_007_transaction_stage_schema",
       "defines_main": true,
       "file_size_bytes": 13409,

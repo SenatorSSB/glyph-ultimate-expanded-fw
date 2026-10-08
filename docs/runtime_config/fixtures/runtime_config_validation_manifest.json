@@ -5918,6 +5918,45 @@
       "load_bearing": true,
       "historical": false,
       "reason": "Finite exact C022/E source transition, native accepted021 predecessor, protected checker bodies, current/index/live custody and pending genuineM/F/R/E/I chronology. Actual isolated negatives and separately labelled synthetic future lifecycle controls; no hardware acceptance."
+    },
+    {
+      "id": "gp_config023_usb_index_validation",
+      "path": "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "command": [
+        "python3",
+        "tools/check_glyph_gp_config023_usb_index_validation.py"
+      ],
+      "category": "candidate_safety",
+      "applicability": "current",
+      "branch_policy": "content_and_scope",
+      "required_arguments": [],
+      "mutation_risk": "temporary_file_only",
+      "source_dependencies": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "config/glyph/common/src/config.cpp",
+        "config/glyph/common/src/glyph_config_validation.cpp",
+        "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+        "docs/runtime_config/gp_config023_usb_index_validation.md",
+        "include/core/config_button_validation.hpp",
+        "include/core/config_usb_default_validation.hpp",
+        "include/core/config_validation.hpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+        "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+        "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp"
+      ],
+      "load_bearing": true,
+      "historical": false,
+      "reason": "Exact GP-CONFIG-023 required-index host proof: both enum ABIs, real generated decoder, source-extracted startup and persistence consumers, byte-retention and refusal-display checks. Host-only evidence; exact firmware build and hardware acceptance remain separate."
     }
   ],
   "strong_signal_exclusions": [
