@@ -1543,11 +1543,11 @@ const Config default_config = {
         },
 
         RgbConfig {
-          .button_colors_count = 20,
+          .button_colors_count = 11,
           .button_colors = {
                 {
                 BTN_LF1,
-                2282478
+                0
                 },
                 {
                 BTN_LF2,
