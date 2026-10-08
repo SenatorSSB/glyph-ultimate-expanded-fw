@@ -1,0 +1,197 @@
+{
+  "schema_name": "glyph_gp_val039_c022_transition",
+  "schema_version": 1,
+  "work_order": "GP-VAL-039",
+  "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+  "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+  "tree": "6f4e4610798c12e49b99b46a974d51c38e68b478",
+  "raw_inventory_sha256": "b5e8dbf5df3c3ec8fd5931a23606e3f192c7857c32634f10b126f1e1e0e15d38",
+  "entries": [
+    {
+      "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6f818818fe7a0f32270048d204d4b6e5493ebe9c",
+      "status": "A",
+      "new_sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+      "bytes": 485
+    },
+    {
+      "path": "config/glyph/common/include/glyph_config_validation.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+      "status": "A",
+      "new_sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+      "bytes": 133
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+      "new_blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+      "status": "M",
+      "new_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "bytes": 58387
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "old_mode": "100644",
+      "new_mode": "100644",
+      "old_blob": "d78359d1df10dc70cef8a03b487c2bbfcc80ada3",
+      "new_blob": "a4bf459c676235fc175a850249d075911b4e58f6",
+      "status": "M",
+      "new_sha256": "806271234be664c77dbe5c6540d540f9ef53b77cda21555ee1e78636597e81a9",
+      "bytes": 11999
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+      "status": "A",
+      "new_sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "bytes": 615
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "e600352083264fe7d398ec625e842e8349313fe4",
+      "status": "A",
+      "new_sha256": "5da5e4d4d1407416390d94b61c65a386b18c539b033ec8368cefe9f55ec9c832",
+      "bytes": 36835
+    },
+    {
+      "path": "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "3e9afc87650a7582e8ad6e8e363e46e5e964f77d",
+      "status": "A",
+      "new_sha256": "0dc80995e734dce9b55714ab374ec81112454e2e485d2c0b9416271b123122bf",
+      "bytes": 6912
+    },
+    {
+      "path": "docs/runtime_config/gp_config022_rgb_target_validation.md",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "102748e009ed0168a2c14267c3684911d7c6054b",
+      "status": "A",
+      "new_sha256": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41",
+      "bytes": 5029
+    },
+    {
+      "path": "include/core/config_rgb_target_validation.hpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "598ede641ce796813852e328866c4c1327de1d3b",
+      "status": "A",
+      "new_sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+      "bytes": 806
+    },
+    {
+      "path": "src/core/config_rgb_target_validation.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "a720ef3a2ee9ecc5db45fad8085b4b4de4b5f89d",
+      "status": "A",
+      "new_sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+      "bytes": 2631
+    },
+    {
+      "path": "tools/check_glyph_gp_config022_rgb_target_validation.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "62ff2c2e1ed5ebe219edc3c5a7816576126d9ca9",
+      "status": "A",
+      "new_sha256": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+      "bytes": 38848
+    },
+    {
+      "path": "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "f3e3dde4cd99d50d75f4f7082cde1d9e58154356",
+      "status": "A",
+      "new_sha256": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237",
+      "bytes": 2909
+    },
+    {
+      "path": "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "239b194ac90c621e1195f7da49bb1757d810f407",
+      "status": "A",
+      "new_sha256": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc",
+      "bytes": 5982
+    },
+    {
+      "path": "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "cb8417b5b3ce02c47e6007e8d30480e06ddd2e2a",
+      "status": "A",
+      "new_sha256": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a",
+      "bytes": 29084
+    },
+    {
+      "path": "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "9773d379c4683bfb0999d601c8e41623f7a7a821",
+      "status": "A",
+      "new_sha256": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b",
+      "bytes": 20166
+    },
+    {
+      "path": "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "58fdd7cc6cdfca666e7e3e40af3ad2d65f496bd4",
+      "status": "A",
+      "new_sha256": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130",
+      "bytes": 9647
+    },
+    {
+      "path": "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "009c346dc919069a8e197598698ad4a2e258235e",
+      "status": "A",
+      "new_sha256": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97",
+      "bytes": 5170
+    },
+    {
+      "path": "tools/prepare_glyph_gp_config022_compatibility.py",
+      "old_mode": "000000",
+      "new_mode": "100644",
+      "old_blob": "0000000000000000000000000000000000000000",
+      "new_blob": "66a6e37130d69def0d51940bde825b5bb4fb4d85",
+      "status": "A",
+      "new_sha256": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8",
+      "bytes": 13606
+    }
+  ],
+  "handoff": "4326e82aa1d5346c71db9af2b778041f2a64eb8b",
+  "ready": "3d4e592b9882f6ad57b883292e1fd1d5cafbcd62",
+  "review_sha256": "2e06f25802f9140825468bbf3188811308ab1acae31b357ce457683c0462f3d6",
+  "source_proof_sha256": "87650c6b508e6149f077bba3863b50a548f683de1c5d4fe626c4d3785a90fd47",
+  "conformance_sha256": "fb8d59ccda9022a9627babc79b54e424de8cf1bbcac50461a03dbb971fcc98ff",
+  "source_build_role_conformance_sha256": "e0ba625b13b0300bf50795c8ff9598cf75c50d4269764908b0149918c3676905"
+}

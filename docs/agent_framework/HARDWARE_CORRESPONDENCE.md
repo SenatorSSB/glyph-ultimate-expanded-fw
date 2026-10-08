@@ -494,3 +494,43 @@ proof pins all34 inputs to accepted F020, retains the original32-source and
 8 valid and12 decoded-invalid controls using the real validator and decoder.
 Historical host PASS cannot substitute for current-source proof. No naming
 policy, firmware repair or controller acceptance follows from characterization.
+
+## GP-VAL-039 exact C022 RGB transition
+
+The finite C022 candidate is `b4e03566ceaa0815df7ba0eef975cf0ac0583622`,
+with sole parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree
+`6f4e4610798c12e49b99b46a974d51c38e68b478` and recursive raw inventory
+SHA-256 `b5e8dbf5df3c3ec8fd5931a23606e3f192c7857c32634f10b126f1e1e0e15d38`.
+Its eighteen regular changed paths contain exactly seven critical production
+paths and eleven separately reviewed host/tool/document paths. Native critical
+inventory grows from 238 to 243, with 236 baseline entries unchanged. All five
+existing executable critical inputs retain their exact 100755 modes and blobs.
+
+The original committed C022 checker CLI failed because it required every
+critical entry to have mode 100644 and omitted one exact critical tool literal.
+That failure remains evidence. The separate 039 replay admits the immutable
+checker and its complete source closure only after native critical precedence,
+exact modes/blobs, the seven production changes, clean index/worktree and finite
+metadata scope have been proved. Its actual C022 suites are separate from
+unchanged C021 and earlier consumer observations at authenticated object roots.
+Neither a historical observation nor a source-free governance result certifies
+the new firmware on a controller.
+
+The five original protected checker files retain their full bytes. Shared
+context removes only exact entries authenticated by the finite C022 phase
+proof. New active helpers, adapter, wrapper and the approved two-line default
+repair remain critical. Host C++ harnesses are outside unchanged target source
+filters and include roots; no prefix or basename exemption applies.
+
+Only the literal C022 protocol, result and evidence paths are reserved:
+`docs/agent_framework/GP_CONFIG_022_HARDWARE_PROTOCOL.md`,
+`docs/calibration/gp_config_022_hardware_result.md`, and
+`docs/calibration/fixtures/gp_config_022_hardware_evidence.json`.
+The accepted C022 catalog starts empty. A genuine composition merge preserves
+strict 039 DONE and C022 as its two parents. Its empty committed child F is the
+build identity, with every critical mode/blob equal to C022. Later source-free
+review R and processor E require that exact F and artifact, complete human HEP
+PASS, original Config recovery and the grouped eleven-target appearance matrix.
+Only then may a genuine integration and accepted catalog admit the firmware.
+No device or Config write, automatic migration or flashing follows from this
+contract. Nunchuk remains NOT_TESTED and root cause remains UNPROVEN.

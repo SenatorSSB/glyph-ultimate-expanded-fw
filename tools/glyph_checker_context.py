@@ -270,6 +270,8 @@ def authenticated_campaign_context(context: CheckerContext) -> CheckerContext:
     from glyph_campaign_transition import ADOPTION, authenticate
     # Historical checkers and small unit repositories retain their original context.
     repair_markers = (
+        "docs/runtime_config/fixtures/gp_val039_c022_transition.json",
+        "docs/runtime_config/fixtures/gp_val039_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val038_c021_transition.json",
         "docs/runtime_config/fixtures/gp_val038_accepted_transitions.json",
         "docs/runtime_config/fixtures/gp_val043_c020_abi_repair.json",

@@ -1248,6 +1248,123 @@ def gp_val037_current_argument_cases(module: Any) -> list[str]:
             "AGG-24-reserved-mode-stage-dependency-and-dirty-negatives",
             "ISO-20-exact-current-argument-dispatch-and-failure-proofs"]
 
+def gp_val039_runner_cases(module: Any) -> list[str]:
+    """Inert039 command/catalog probes; these never establish C022 acceptance."""
+    from copy import deepcopy
+    import glyph_campaign_transition as campaign
+    import glyph_c022_campaign_transition as rgb_targets
+    from glyph_hardware_correspondence import CorrespondenceError
+    with tempfile.TemporaryDirectory(prefix='glyph-val039-runner-') as directory:
+        root = fresh_root(Path(directory))
+        selected = entry('gp_config022_rgb_target_validation', category='candidate_safety',
+                         mutation_risk='temporary_file_only')
+        path = 'tools/check_glyph_c022_proof_replay.py'
+        selected.update(path=path, command=['python3', path], branch_policy='content_and_scope')
+        write_checker(root, selected, 0)
+        (root / path).write_text("print('SYNTHETIC039 ONLY: inert command dispatch')\n")
+        run_git(root, 'add', path)
+        manifest = write_manifest(root, [selected], ['baseline', 'candidate_safety', 'historical_evidence'])
+        identity = module.git_value('rev-parse', 'HEAD', cwd=root)
+        proof = dict(contract='c022_rgb_targets', object_roots=frozenset({identity}),
+                     synthetic_runner_probe=True)
+        with mock.patch.object(module, 'ROOT', root), mock.patch.object(campaign, 'ROOTS', frozenset()), mock.patch.object(rgb_targets, 'replay_covered_checker_paths', return_value=frozenset()):
+            if not module.c022_replay_arguments(selected):
+                raise AssertionError('exact039 default command was not admitted')
+            for key, values in {
+                'id': ['unknown039', 1],
+                'path': ['tools/./check_glyph_c022_proof_replay.py', 'tools/check_glyph_c022_proof_replay_alias.py'],
+                'command': [['python3', path, '--extra'], ['python', path], ['python3', path, '--consumer', 'recovery021']],
+                'required_arguments': [['--extra'], ['--consumer', 'recovery021'], None],
+                'category': ['baseline', None],
+                'applicability': ['historical_only', None],
+                'branch_policy': ['content_only', None],
+                'load_bearing': [False, 1, None],
+                'historical': [True, 0, None],
+                'mutation_risk': ['none', 'temporary_repository_only', None],
+            }.items():
+                for value in values:
+                    bad = {**deepcopy(selected), key: value}
+                    try:
+                        admitted = module.c022_replay_arguments(bad)
+                    except (ValueError, TypeError):
+                        continue
+                    if admitted:
+                        raise AssertionError('039 command tuple mutation accepted: ' + key + '=' + repr(value))
+            for executable in (True, False):
+                (root / path).chmod(0o755 if executable else 0o644)
+                if executable:
+                    try: module.c022_replay_arguments(selected)
+                    except ValueError: pass
+                    else: raise AssertionError('039 executable metadata accepted')
+                else:
+                    if not module.c022_replay_arguments(selected):
+                        raise AssertionError('restored039 mode rejected')
+            with mock.patch.object(campaign, 'authenticate', return_value=proof) as actual:
+                if module.required_catalog([selected]) != ({}, {identity}):
+                    raise AssertionError('039 selected roots differ from authenticated proof')
+                actual.assert_called_once_with(root)
+            consumers = {
+                'current_config_persistence_recovery_research': 'persistence',
+                'getconfig_raw_load_characterization': 'raw_get',
+                'configurator_setconfig_transaction': 'transaction005',
+                'setconfig_runtime_rebinding_characterization': 'rebind008',
+                'config_menu_invalid_state_characterization': 'menu009',
+                'gp_config_012_button_mask_characterization': 'button012',
+                'gp_config_013_usb_default_characterization': 'usb013',
+                'gp_config020_button_validation': 'button020',
+                'gp_kbd_001_keyboard_pipeline': 'kbd001',
+                'gp_config019_usb_name_selection': 'usb019',
+                'neopixel_null_sendreport_characterization': 'neopixel016_017',
+                'gp_config017_neopixel_repaired_current': 'neopixel016_017',
+                'custom_modifier_cache_characterization': 'modifier011',
+                'gp_config014_modifier_capacity': 'modifier014',
+                'gp_val035_c017_transition': 'transition035',
+                'gp_config021_persisted_recovery': 'recovery021',
+                'gp_val038_c021_transition': 'transition038',
+            }
+            commands = [(key, ['python3', path, '--consumer', lane]) for key, lane in consumers.items()]
+            commands.append(('gp_val039_c022_transition', ['python3', 'tools/test_glyph_c022_campaign_transition.py']))
+            for key, command in commands:
+                probe = {**selected, 'id': key, 'path': command[1], 'command': command}
+                with mock.patch.object(campaign, 'authenticate', return_value=proof) as actual:
+                    if module.required_catalog([probe]) != ({}, {identity}):
+                        raise AssertionError('039 exact consumer root selection: ' + key)
+                    actual.assert_called_once_with(root)
+                for near in ({**probe, 'id': key + '_alias'},
+                             {**probe, 'command': command + ['--extra']},
+                             {**probe, 'applicability': 'historical_only'}):
+                    with mock.patch.object(campaign, 'authenticate', side_effect=AssertionError('near039 selection')):
+                        if module.required_catalog([near]) != ({}, set()):
+                            raise AssertionError('039 near consumer granted roots')
+            for bad in (None, {identity}, frozenset(), frozenset({'A' * 40}), frozenset({'0' * 39}), frozenset({1})):
+                with mock.patch.object(campaign, 'authenticate', return_value=dict(proof, object_roots=bad)):
+                    try: module.required_catalog([selected])
+                    except ValueError: pass
+                    else: raise AssertionError('039 malformed authenticated roots accepted')
+            catalog = root / 'docs/runtime_config/fixtures/gp_val039_accepted_transitions.json'
+            catalog.write_text('{"accepted_transitions":[{"build":"' + 'b' * 40 + '"}]}\n')
+            with mock.patch.object(campaign, 'authenticate', return_value=proof):
+                if module.required_catalog([selected]) != ({}, {identity}):
+                    raise AssertionError('mutable039 catalog granted runner authority')
+            catalog.unlink()
+            with mock.patch.object(campaign, 'authenticate', return_value=proof):
+                code, text = invoke(module, root, manifest, '--json')
+            report = payload(text)
+            if (code or report['canonical_proof'] != 'MATCH' or len(report['results']) != 1
+                    or report['results'][0]['command'] != selected['command']
+                    or report['results'][0]['isolated_proof'] != 'MATCH'
+                    or report['results'][0]['status'] != 'PASS'):
+                raise AssertionError('039 inert exact dispatch failed: ' + text)
+            with mock.patch.object(campaign, 'authenticate', side_effect=CorrespondenceError('039 authority unavailable')):
+                code, text = invoke(module, root, manifest, '--json')
+            report = payload(text)
+            if code != 1 or report['failure_kind'] != 'SETUP_FAILURE' or report['results']:
+                raise AssertionError('039 authentication failure bypassed setup')
+    return ['AGG-25-039-exact-command-typed-tuple-and-mode-controls',
+            'ISO-26-039-all-exact-consumer-roots-and-near-miss-rejection',
+            'ISO-27-039-malformed-roots-catalog-self-authority-and-inert-dispatch']
+
+
 def main() -> int:
     module = load_runner()
     passed: list[str] = []
@@ -1637,6 +1754,7 @@ def main() -> int:
     passed.extend(gp_val037_current_argument_cases(module))
     passed.extend(gp_val043_runner_proof_cases(module))
     passed.extend(gp_val034_catalog_cases(module))
+    passed.extend(gp_val039_runner_cases(module))
     passed.extend(isolation_contract_cases(module))
     # The old synthetic repositories exercise only the pre-campaign catalog.
     # They contain no adopted campaign authority and must not impersonate it.

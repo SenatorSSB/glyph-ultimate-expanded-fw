@@ -133,6 +133,60 @@ def c017_replay_arguments(entry: dict[str, object]) -> bool:
     return True
 
 
+def c022_replay_arguments(entry: dict[str, object]) -> bool:
+    """Only the exact039 replay commands can replace an existing current lane."""
+    path = 'tools/check_glyph_c022_proof_replay.py'
+    if entry['path'] != path and entry['id'] != 'gp_config022_rgb_target_validation':
+        return False
+    lanes = {
+        'current_config_persistence_recovery_research': 'persistence',
+        'getconfig_raw_load_characterization': 'raw_get',
+        'configurator_setconfig_transaction': 'transaction005',
+        'setconfig_runtime_rebinding_characterization': 'rebind008',
+        'config_menu_invalid_state_characterization': 'menu009',
+        'gp_config_012_button_mask_characterization': 'button012',
+        'gp_config_013_usb_default_characterization': 'usb013',
+        'gp_config020_button_validation': 'button020',
+        'gp_kbd_001_keyboard_pipeline': 'kbd001',
+        'gp_config019_usb_name_selection': 'usb019',
+        'neopixel_null_sendreport_characterization': 'neopixel016_017',
+        'gp_config017_neopixel_repaired_current': 'neopixel016_017',
+        'custom_modifier_cache_characterization': 'modifier011',
+        'gp_config014_modifier_capacity': 'modifier014',
+        'gp_val035_c017_transition': 'transition035',
+        'gp_config021_persisted_recovery': 'recovery021',
+        'gp_val038_c021_transition': 'transition038',
+    }
+    if entry['id'] == 'gp_config022_rgb_target_validation':
+        arguments = []
+        expected = {'category': 'candidate_safety', 'applicability': 'current',
+                    'branch_policy': 'content_and_scope', 'load_bearing': True, 'historical': False}
+    elif entry['id'] in lanes:
+        from glyph_c022_campaign_transition import B
+        document = git('show', B + ':docs/runtime_config/fixtures/runtime_config_validation_manifest.json')
+        if document.returncode:
+            raise ValueError('039 replay lacks exact accepted predecessor manifest')
+        rows = [row for row in json.loads(document.stdout, object_pairs_hook=pairs)['entries']
+                if row['id'] == entry['id']]
+        if len(rows) != 1:
+            raise ValueError('039 replay lacks unique immutable predecessor lane')
+        expected = {key: rows[0][key] for key in
+                    ('category', 'applicability', 'branch_policy', 'load_bearing', 'historical')}
+        arguments = ['--consumer', lanes[entry['id']]]
+    else:
+        raise ValueError('unknown reserved039 replay identity')
+    expected.update(path=path, command=['python3', path, *arguments],
+                    required_arguments=arguments, mutation_risk='temporary_file_only')
+    if (any(entry[key] != value for key, value in expected.items())
+            or type(entry['load_bearing']) is not bool or type(entry['historical']) is not bool):
+        raise ValueError('invalid reserved039 replay command/phase contract')
+    if (not tracked_regular_stage_zero(path) or (ROOT / path).stat().st_mode & 0o111
+            or any((ROOT / parent).is_symlink() for parent in PurePosixPath(path).parents)
+            or git('ls-files', '-v', '-z', '--', path).stdout != 'H ' + path + '\0'):
+        raise ValueError('039 replay requires tracked regular100644 input without index flags')
+    return True
+
+
 def c021_replay_arguments(entry: dict[str, object]) -> bool:
     """Exact038 current/replay commands; the old main bodies remain immutable."""
     path = 'tools/check_glyph_c021_proof_replay.py'
@@ -233,7 +287,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if not isinstance(checker_id, str) or checker_id in ids:
             raise ValueError(f"duplicate checker ID: {checker_id}")
         ids.add(checker_id)
-        campaign_arguments = c021_replay_arguments(entry) or campaign_guard_arguments(entry) or c017_replay_arguments(entry)
+        campaign_arguments = c022_replay_arguments(entry) or c021_replay_arguments(entry) or campaign_guard_arguments(entry) or c017_replay_arguments(entry)
         if entry["category"] not in categories:
             raise ValueError(f"invalid category: {entry['category']}")
         if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
@@ -257,7 +311,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         for identity in ('neopixel_null_sendreport_characterization',
                          'gp_config017_neopixel_repaired_current'):
             rows = [entry for entry in entries if entry['id'] == identity]
-            if len(rows) != 1 or not (c021_replay_arguments(rows[0]) or c017_replay_arguments(rows[0])):
+            if len(rows) != 1 or not (c022_replay_arguments(rows[0]) or c021_replay_arguments(rows[0]) or c017_replay_arguments(rows[0])):
                 raise ValueError('missing required035 current load-bearing proof: ' + identity)
     c021_markers = ('docs/runtime_config/fixtures/gp_val038_c021_transition.json',
                     'docs/runtime_config/fixtures/gp_val038_accepted_transitions.json',
@@ -266,8 +320,27 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         required038 = ('config_menu_invalid_state_characterization', 'configurator_setconfig_transaction', 'current_config_persistence_recovery_research', 'custom_modifier_cache_characterization', 'getconfig_raw_load_characterization', 'gp_config014_modifier_capacity', 'gp_config017_neopixel_repaired_current', 'gp_config019_usb_name_selection', 'gp_config020_button_validation', 'gp_config_012_button_mask_characterization', 'gp_config_013_usb_default_characterization', 'gp_kbd_001_keyboard_pipeline', 'neopixel_null_sendreport_characterization', 'setconfig_runtime_rebinding_characterization') + ('gp_config021_persisted_recovery',)
         for identity in required038:
             rows = [entry for entry in entries if entry['id'] == identity]
-            if len(rows) != 1 or not c021_replay_arguments(rows[0]):
+            if len(rows) != 1 or not (c022_replay_arguments(rows[0]) or c021_replay_arguments(rows[0])):
                 raise ValueError('missing required038 current historical/source replay: ' + identity)
+    c022_markers = ('docs/runtime_config/fixtures/gp_val039_c022_transition.json',
+                    'docs/runtime_config/fixtures/gp_val039_accepted_transitions.json',
+                    'tools/glyph_c022_campaign_transition.py')
+    if any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c022_markers):
+        required039 = (
+            'config_menu_invalid_state_characterization', 'configurator_setconfig_transaction',
+            'current_config_persistence_recovery_research', 'custom_modifier_cache_characterization',
+            'getconfig_raw_load_characterization', 'gp_config014_modifier_capacity',
+            'gp_config017_neopixel_repaired_current', 'gp_config019_usb_name_selection',
+            'gp_config020_button_validation', 'gp_config_012_button_mask_characterization',
+            'gp_config_013_usb_default_characterization', 'gp_kbd_001_keyboard_pipeline',
+            'neopixel_null_sendreport_characterization', 'setconfig_runtime_rebinding_characterization',
+            'gp_config021_persisted_recovery', 'gp_val035_c017_transition',
+            'gp_val038_c021_transition', 'gp_config022_rgb_target_validation',
+        )
+        for identity in required039:
+            rows = [entry for entry in entries if entry['id'] == identity]
+            if len(rows) != 1 or not c022_replay_arguments(rows[0]):
+                raise ValueError('missing required039 current immutable/current proof: ' + identity)
     exclusions: list[dict[str, object]] = []
     exclusion_ids: set[str] = set()
     exclusion_paths: set[str] = set()
@@ -305,7 +378,11 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if signals:
             strong_paths.add(census_entry["path"])
     replay_paths = frozenset()
-    if any(entry['id'] == 'gp_config021_persisted_recovery' and c021_replay_arguments(entry)
+    if any(entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
+           for entry in entries):
+        from glyph_c022_campaign_transition import replay_covered_checker_paths
+        replay_paths = replay_covered_checker_paths(ROOT)
+    elif any(entry['id'] == 'gp_config021_persisted_recovery' and c021_replay_arguments(entry)
            for entry in entries):
         from glyph_c021_campaign_transition import replay_covered_checker_paths
         replay_paths = replay_covered_checker_paths(ROOT)
@@ -676,13 +753,37 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
                                ('gp_val038_c021_transition', ['python3', 'tools/test_glyph_c021_campaign_transition.py'])])
     campaign_consumers.extend((identity, ['python3', 'tools/check_glyph_c021_proof_replay.py', '--consumer', lane])
                               for identity, lane in {'current_config_persistence_recovery_research': 'persistence', 'getconfig_raw_load_characterization': 'raw_get', 'configurator_setconfig_transaction': 'transaction005', 'setconfig_runtime_rebinding_characterization': 'rebind008', 'config_menu_invalid_state_characterization': 'menu009', 'gp_config_012_button_mask_characterization': 'button012', 'gp_config_013_usb_default_characterization': 'usb013', 'gp_config020_button_validation': 'button020', 'gp_kbd_001_keyboard_pipeline': 'kbd001', 'gp_config019_usb_name_selection': 'usb019', 'neopixel_null_sendreport_characterization': 'neopixel016_017', 'gp_config017_neopixel_repaired_current': 'neopixel016_017', 'custom_modifier_cache_characterization': 'modifier011', 'gp_config014_modifier_capacity': 'modifier014', 'gp_val035_c017_transition':'transition035'}.items())
+    campaign_consumers.extend((identity, ['python3', 'tools/check_glyph_c022_proof_replay.py', '--consumer', lane])
+        for identity, lane in {
+            'current_config_persistence_recovery_research': 'persistence',
+            'getconfig_raw_load_characterization': 'raw_get',
+            'configurator_setconfig_transaction': 'transaction005',
+            'setconfig_runtime_rebinding_characterization': 'rebind008',
+            'config_menu_invalid_state_characterization': 'menu009',
+            'gp_config_012_button_mask_characterization': 'button012',
+            'gp_config_013_usb_default_characterization': 'usb013',
+            'gp_config020_button_validation': 'button020',
+            'gp_kbd_001_keyboard_pipeline': 'kbd001',
+            'gp_config019_usb_name_selection': 'usb019',
+            'neopixel_null_sendreport_characterization': 'neopixel016_017',
+            'gp_config017_neopixel_repaired_current': 'neopixel016_017',
+            'custom_modifier_cache_characterization': 'modifier011',
+            'gp_config014_modifier_capacity': 'modifier014',
+            'gp_val035_c017_transition': 'transition035',
+            'gp_config021_persisted_recovery': 'recovery021',
+            'gp_val038_c021_transition': 'transition038',
+        }.items())
+    campaign_consumers.extend((
+        ('gp_config022_rgb_target_validation', ['python3', 'tools/check_glyph_c022_proof_replay.py']),
+        ('gp_val039_c022_transition', ['python3', 'tools/test_glyph_c022_campaign_transition.py']),
+    ))
     if any(entry['applicability'] == 'current'
            and entry['id'] == identity and entry['command'] == command
            for entry in selected for identity, command in campaign_consumers):
         from glyph_campaign_transition import ROOTS, TRANSITIONS, authenticate
         proof = authenticate(ROOT)
         roots.update(ROOTS)
-        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity', 'c017_neopixel', 'c021_persisted_recovery'}:
+        if proof.get('contract') in {'c020_abi_repair', 'c014_capacity', 'c017_neopixel', 'c021_persisted_recovery', 'c022_rgb_targets'}:
             # GP-VAL-043 exports only roots whose finite candidate, authority and
             # accepted-transition contracts passed the actual phase proof. The
             # mutable mapping/catalog never supplies runner authority by itself.
