@@ -2,7 +2,7 @@
 
 ## Current GP-CONFIG-022 exact hardware evidence
 
-GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN. GP-CONFIG-023 has exact reviewed candidate C `03bbf5da14a7d450f2986b12ad69ec6b3f704bad` from B `b224227a76cb8edb73e5f4b2ad5de874d1e61ad1` (tree `da886ff6d9b2d545bd93ce50745ae353129d8e7c`, raw inventory SHA-256 `0bd5c9cfc481bb4e7fc3b595f59efa7c415695a7b01df3b55a84ebfd66a6a4b4`), with focused host PASS; it remains unbuilt, unmerged, and awaiting GP-VAL-042. GP-VAL-042 now meets its objective activation conditions; the source-free handoff mapping is `b4121c3bc6bbf57ba3c0ef28bcb3acc953ddffcc2f23a638a87fb875cf9f25ea`. No firmware build, hardware result, or acceptance is claimed.
+GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN. GP-CONFIG-023 exact candidate C `03bbf5da14a7d450f2986b12ad69ec6b3f704bad` remains unbuilt and unmerged; its source-free GP-VAL-042 successor is DONE through reviewed integration `c2b604b1edf5bfa0551fe73a568a1f50a48ea30d`. The objective activation conditions are met and GP-CONFIG-023 is now READY for immediate exact-source resumption. H1 made no firmware build, artifact, hardware result, or acceptance claim.
 
 ## Current GP-CONFIG-021 exact hardware evidence
 
@@ -207,12 +207,12 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 4,
-    "mechanically_activatable_preauthorized": 2,
+    "immediate_ready": 1,
+    "recorded_preauthorized": 2,
+    "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 2,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
     "primary_liveness": "RUNWAY_LOW"
@@ -7776,7 +7776,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-023",
       "title": "Required USB-default index validation and checked startup",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-config-023-release-safety",
       "objective": "GLYPH-UD-026 resolves required index validity only. Exact completed 013 source/decoder proof establishes the gap; shared 021/022 producer validation and synchronized refusal permit this bounded repair without fallback, type policy, wire/schema or callback ABI changes.",
       "why_this_matters": "Close the completed 013 safety finding within the already adopted Mk6 GC/ordinary USB beta envelope, preserving existing campaign and exact acceptance gates.",
@@ -7796,11 +7796,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Candidate creation precedes GP-VAL-042; preserve committed C023 unbuilt/unmerged until042 source-free governance strict DONE, then exact descendant F023 build/review/custody/hardware PASS."
       ],
       "substantive_authorization_rationale": "GLYPH-UD-026 resolves required index validity only. Exact completed 013 source/decoder proof establishes the gap; shared 021/022 producer validation and synchronized refusal permit this bounded repair without fallback, type policy, wire/schema or callback ABI changes.",
-      "mechanical_activation_conditions": [
-        "022/039 strict DONE and processor-accepted exact F022/artifact PASS, no gaps or pending hardware FAIL; accepted 020/014/017/021 chain intact.",
-        "Fresh live clean canonical B023; sensitive dependencies equal1701 annex or named accepted transitions; existing shared 021 validator, 022 wrapper and synchronized refusal meet adopted contracts; only finite named source-free deltas.",
-        "Create fresh direct-child C023 under exact six-path source scope, with tree/raw NUL old/new paths/modes/blobs and independent production/build-role conformance. C023 identity is activation output. Commit and preserve C023;042 strict DONE precedes build/integration."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Unexpected semantic/source/schema/default/decoder/domain/build drift or additional architecture/backend-type decision; unexpected getter/API/consumer change requires bounded curation.",
         "Unknown extra path/mode, unavailable exact object closure, failed inventory/conformance, historical/current proof weakened or resealed, controlled initializer/save/report on failure, unsafe/unavailable mandatory operator recovery.",
@@ -7827,7 +7823,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve C023 without replay; source-free GP-VAL-042 integrates independently; F023 descendant C023 with entirecriticaltree equal C-to-F; no H3 merge before exact build/custody/review/physical PASS.",
         "Do not route around rejected C020/037handoff or infer safehardwarefixtures; stop on unavailable mandatorymanual recovery."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
       "candidate_git_sha": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
@@ -7844,7 +7840,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-042",
       "title": "Exact C023 candidate governance and accepted-transition proof",
-      "status": "PREAUTHORIZED",
+      "status": "DONE",
       "branch": "codex/gp-val-042-release-safety",
       "objective": "Fully specified finite eight-step algorithm extends only exact 023 B/C/F transition. Future SHA/path inventory is mechanical evidence; historical proof, all five protected scopes and exact new hardware acceptance remain mandatory.",
       "why_this_matters": "Close the completed 013 safety finding within the already adopted Mk6 GC/ordinary USB beta envelope, preserving existing campaign and exact acceptance gates.",
@@ -7886,17 +7882,47 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Separate source-free canonical candidate/handoff/result/completion publications by authorized roles; preserve exact C023;042 strict DONE mechanically resumes023. FutureREL requires023 DONE/new PASS/acceptedcorrespondence; no public publication authority.",
-      "done_evidence": "Exact reviewed B023/C023 source/mode/path conformance and exact source-free governance diff; full affected proofs/aggregate, fresh independent review, reviewed live source-free integration and later strict DONE correspondence. Governance-only, composed-candidate and post-PASS validation simulations use explicitly synthetic test evidence and do not require or claim actual F023/build/custody/physical PASS. Those actual facts belong to GP-CONFIG-023 resumption after GP-VAL-042 strict DONE; no candidate firmware enters this H1 integration.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
+        "reviewed_implementation_sha": "c2b604b1edf5bfa0551fe73a568a1f50a48ea30d",
+        "prior_canonical_integration_sha": "c2b604b1edf5bfa0551fe73a568a1f50a48ea30d",
+        "reviewed_changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_val042_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val042_c023_transition.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_c023_proof_replay.py",
+          "tools/check_glyph_runtime_config_validation_health.py",
+          "tools/glyph_c022_campaign_transition.py",
+          "tools/glyph_c023_campaign_transition.py",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_c023_campaign_transition.py"
+        ],
+        "independent_review_provenance": "Fresh independent review approved exact GP-VAL-042 implementation c2b604b1edf5bfa0551fe73a568a1f50a48ea30d, direct child of B=b224227a76cb8edb73e5f4b2ad5de874d1e61ad1. Review confirmed 19 source-free governance/proof paths only; exact C023 replay dispatch now authenticates SOURCE_FREE_PROCESSOR and includes C, while C022-only selection remains baseline and excludes C. The reviewed candidate was live-published to codex/gp-val-042-release-safety and fast-forwarded to configurator from B.",
+        "validation_provenance": "Focused exact C023 host proof replay PASS (both ABIs/ASan/UBSan); source-free admission and catalog-dispatch tests PASS (6); health PASS (census 222/manifest 63); census PASS; manifest PASS (63 entries/43 exclusions); framework docs PASS; git diff check PASS. The aggregate adversarial runner was executed on the earlier pre-fix candidate 709f96e74e83e18c6a9b1a5e6c17e9a60ae9b756 and failed in gp_val037_campaign_catalog_cases: stale synthetic expected roots 20 versus the exact C022 authenticator closure 77, with no expected root missing. The bounded C023 source-free root-dispatch fix was then applied and focused-tested on c2; the aggregate was not rerun after that fix. Independent review traced the 57 additional roots to authenticated C022 accepted predecessor/build/evidence closure; retain the stale expectation as FRAMEWORK_VALIDATION_DEBT and do not claim aggregate PASS. No build, firmware artifact, hardware result, or acceptance is claimed. Exact source-free integration c2b604b1edf5bfa0551fe73a568a1f50a48ea30d was live-verified and pushed to configurator after ordinary sandbox DNS failure was resolved by the permitted network-enabled retry."
+      },
       "stop_conditions": [
         "Missing objective prerequisite WAITING; contradiction or substantive new judgment CURATION_REQUIRED. One new order per invocation; at most one dependent H3 artifact awaiting test.",
         "Preserve C023 without replay; source-free GP-VAL-042 integrates independently; F023 descendant C023 with entirecriticaltree equal C-to-F; no H3 merge before exact build/custody/review/physical PASS.",
         "Do not route around rejected C020/037handoff or infer safehardwarefixtures; stop on unavailable mandatorymanual recovery."
       ],
-      "activation_state": "ACTIVATABLE",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
-      "candidate_base_configurator_sha": "b224227a76cb8edb73e5f4b2ad5de874d1e61ad1",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -8377,11 +8403,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":2,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":2,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-023"],"immediate_ready":1,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 2; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 2; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-CONFIG-023; Immediate Ready: 1; Recorded Preauthorized: 2; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

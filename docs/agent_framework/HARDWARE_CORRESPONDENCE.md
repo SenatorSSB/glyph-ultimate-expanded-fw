@@ -27,7 +27,8 @@ approved that scope. Its host proof passes both enum ABIs with ASan/UBSan;
 decoder packets, persistence I/O, startup display behavior, firmware build,
 artifact custody, and hardware acceptance are not established by that proof.
 
-GP-VAL-042 must integrate source-free and reach strict DONE before C023 resumes.
+GP-VAL-042 reached strict DONE through reviewed source-free integration
+`c2b604b1edf5bfa0551fe73a568a1f50a48ea30d`; GP-CONFIG-023 is now READY and resumes.
 The later exact F023 must descend from C023 and preserve the candidate's entire
 critical tree. Only the exact F023 build, preserved artifact, independent review,
 and owner hardware PASS can authorize firmware integration. This candidate
