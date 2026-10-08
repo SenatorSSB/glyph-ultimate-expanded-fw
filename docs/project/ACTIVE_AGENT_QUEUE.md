@@ -1115,7 +1115,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "firmware runtime",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS. C022 source-attribution erratum: platformio.ini:39 -fshort-enums belongs to avr_base and is not Mk6 flag authority. The original e0a08e72 source witness remains unchanged and this explicit erratum supersedes only that citation. Fresh actual generated-header host probes in both supported enum layouts prove Button-1 promotes to int, zero clamps to slot0 and the black-preserving correction leaves all60 static slots equal. Git-preserved independently reviewed C020 object-only target evidence authenticates Button size/alignment1/1 and82 matched C/C++ layout values; current target ABI was not freshly executed. Source-inferred appearance and all original safety/physical gates remain unchanged; no contradictory source fact was found.",
       "dependencies_prerequisites": [
         "Mechanical predecessors: GP-CONFIG-021, GP-VAL-038.",
         "The predictable successor is GP-VAL-039; no new Planner/Curator loop for missing future candidate identity."
@@ -1178,7 +1178,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "validation infrastructure",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS. C022 source-attribution erratum: platformio.ini:39 -fshort-enums belongs to avr_base and is not Mk6 flag authority. The original e0a08e72 source witness remains unchanged and this explicit erratum supersedes only that citation. Fresh actual generated-header host probes in both supported enum layouts prove Button-1 promotes to int, zero clamps to slot0 and the black-preserving correction leaves all60 static slots equal. Git-preserved independently reviewed C020 object-only target evidence authenticates Button size/alignment1/1 and82 matched C/C++ layout values; current target ABI was not freshly executed. Source-inferred appearance and all original safety/physical gates remain unchanged; no contradictory source fact was found.",
       "dependencies_prerequisites": [
         "Preserve the exact committed GP-CONFIG-022 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
@@ -29822,3 +29822,156 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config022-activation:end -->
+
+
+## Current C022 ABI attribution correction
+
+<!-- gp-config022-abi-attribution-erratum:start -->
+```json
+{
+  "schema_name": "glyph_gp_config022_abi_attribution_erratum",
+  "schema_version": 1,
+  "recorded_utc": "2026-10-08T11:55:43.204740+00:00",
+  "source_free": true,
+  "corrects": {
+    "report": "/private/tmp/glyph-config022/022-owner-approved-source-witness.json",
+    "unchanged_sha256": "e0a08e72f68f4b7d1d0bd5d2a8e2d6a533cc9d8a380d5eb810c96daf41224be6",
+    "incorrect_attribution": "The explicit -fshort-enums at platformio.ini:39 was cited as selected Mk6 flag authority.",
+    "correction": "That flag is inside [avr_base]. [arduino_pico_base] inherits env flags and does not inherit avr_base. env:glyph_mk6 extends glyph_base. That line is not Mk6 ABI evidence.",
+    "disposition": "Original witness retained byte-for-byte. This separate erratum replaces only that source attribution; it does not silently reseal the witness."
+  },
+  "full_erratum_sha256": "ba0dbd688a980d6780e2700ea2adb6299cb15003abbd8083d43f65a557e63fe7",
+  "new_host_proof": {
+    "scope": "Tiny actual generated-header arithmetic probe only; not decoder execution, complete consumer execution, target compilation or physical proof.",
+    "generated_header_sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+    "nanopb_pb_h_sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+    "probe_source_sha256": "354df4e9f6a3387b3ac25a3802a4fb00a3be94dd3d83400865adbeed3e3479f0",
+    "execution_report_sha256": "1e6badacc6ff55fcade82ceb32b294fe96ae17fe156acee1003f504c75f1319d",
+    "compiler_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "assertions": [
+      "Generated Button is an unscoped enum. decltype(+Button{}) is int.",
+      "decltype(Button{} - 1) is int under both explicit ABI flags.",
+      "Zero minus one equals -1; max(0,zero-1) equals0. LF1 minus one equals0.",
+      "Explicit ABI widths1 and4 verified separately; all diagnostics and sanitizer stderr empty.",
+      "Source-authenticated retained11 target/color model plus nine zeros matches corrected LF1black/count11 across all60 static slots. This is arithmetic/model proof, not actual NeoPixel consumer execution."
+    ],
+    "results": [
+      {
+        "abi": "short",
+        "command": [
+          "c++",
+          "-std=gnu++17",
+          "-fshort-enums",
+          "-O0",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fsanitize=address,undefined,enum,shift",
+          "-fno-sanitize-recover=all",
+          "-fno-omit-frame-pointer",
+          "-DEXPECTED_BUTTON_SIZE=1",
+          "-I",
+          "/private/tmp/glyph-config022/abi-preflight",
+          "/private/tmp/glyph-config022/abi-preflight/probe.cpp",
+          "-o",
+          "/private/tmp/glyph-config022/abi-preflight/probe-short"
+        ],
+        "compile_exit": 0,
+        "compile_stdout": "",
+        "compile_stderr": "",
+        "run_exit": 0,
+        "stdout": "button_size=1 button_align=1 storage_digits=8 promotion=int subtraction=int zero_minus_one=-1 clamp_zero=0 lf1_black=0 static_slots_equal=60 PASS\n",
+        "stderr": "",
+        "binary_sha256": "049976529bad17e1ece7a31618d6170880e46417b60fd22042dd0e775387c6b8"
+      },
+      {
+        "abi": "ordinary",
+        "command": [
+          "c++",
+          "-std=gnu++17",
+          "-fno-short-enums",
+          "-O0",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-fsanitize=address,undefined,enum,shift",
+          "-fno-sanitize-recover=all",
+          "-fno-omit-frame-pointer",
+          "-DEXPECTED_BUTTON_SIZE=4",
+          "-I",
+          "/private/tmp/glyph-config022/abi-preflight",
+          "/private/tmp/glyph-config022/abi-preflight/probe.cpp",
+          "-o",
+          "/private/tmp/glyph-config022/abi-preflight/probe-ordinary"
+        ],
+        "compile_exit": 0,
+        "compile_stdout": "",
+        "compile_stderr": "",
+        "run_exit": 0,
+        "stdout": "button_size=4 button_align=4 storage_digits=32 promotion=int subtraction=int zero_minus_one=-1 clamp_zero=0 lf1_black=0 static_slots_equal=60 PASS\n",
+        "stderr": "",
+        "binary_sha256": "0bcadd7aac95b9a67ba59163d860ee7848b792dcf19692f498ac587f5a0ad7f9"
+      }
+    ]
+  },
+  "historical_target_evidence": {
+    "status": "AUTHENTICATED_GIT_PRESERVED_OBJECT_ONLY_RECORD",
+    "git_commit": "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+    "git_path": "docs/project/ACTIVE_AGENT_QUEUE.md",
+    "git_blob_sha": "ae0f2e70bf6eb0d284d9c3616984c823e5f6a6b7",
+    "git_file_sha256": "e8e4370cb555c359c5955035eeee220a4f1fb326ab11e4f5ad9248ea36b8c797",
+    "target_record_sha256": "56fb8ad66c51ea4725a35f4fe9401085a71d3f64650006036282b683660a4259",
+    "authentication": "json.dumps(record, indent=2) plus newline reproduces the preserved56fb8ad... hash exactly; immutable D GP-VAL-043 fixture carries the same hash. Independent-review text SHA also reproduces its recorded hash.",
+    "independent_review_sha256": "237fec421bf9c278499525b7e2b6b575f45a05f83e4808e8ca60c256cf38a0b6",
+    "candidate_sha": "3138ade526cabde23a0abedcb94acae8512579d1",
+    "candidate_tree": "67a4edd29bcd4c0adfd3ea52790d9a31293f6036",
+    "compiler_version": "arm-none-eabi-g++ (GCC) 12.3.0",
+    "status_at_time": "PASS_OBJECT_ONLY",
+    "button_size_align": [
+      1,
+      1
+    ],
+    "matched_c_cpp_layout_tuple_count": 82,
+    "source_inputs_equal_D": {
+      "platformio.ini": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+      "config/glyph/env.ini": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+      "tools/fixtures/gp_config012_button_host/generated/config.pb.h": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+      "tools/fixtures/gp_config012_button_host/generated/config.pb.c": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+      "tools/fixtures/gp_config012_button_host/nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "src/core/config_button_validation.cpp": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "tools/fixtures/gp_config020_button_validation/abi_probe.cpp": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac"
+    },
+    "limit": "Historical selected Mk6 object compilation/layout proof. No original target objects, compiler files, build environment or current target ABI were freshly executed/reverified. Paths inside the archived record were treated as literal strings only."
+  },
+  "before_patch_source_facts": {
+    "status": "VALID_WITH_CORRECTED_AUTHORITY",
+    "source_sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+    "source_lines": "glyph_overrides.hpp1545-1593; block11 declared20, eleven explicit named entries eachcolor2282478, nine aggregate-zero populated entries.",
+    "targets_in_order": [
+      "BTN_LF1",
+      "BTN_LF2",
+      "BTN_LF3",
+      "BTN_LT1",
+      "BTN_RF1",
+      "BTN_RF2",
+      "BTN_RF5",
+      "BTN_RF6",
+      "BTN_RT1",
+      "BTN_MB1",
+      "BTN_LF5"
+    ],
+    "consumer_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+    "consumer_expression": "NeoPixelBackend.hpp64-69: _button_colors[max(0, mapping.button - 1)] = mapping.color.",
+    "conclusion": "Under both supported representations zero promotes to int, subtracts to -1 and selects slot0, overwriting LF1 with black. Count20 to11 plus explicit LF1color0 preserves the inferred static-slot values. Count-only correction changes LF1 to cyan. Prior source-derived table, zero absence from selected pixel map, archived-owner minimal repair and unrelated-default invariants remain valid; no contradictory source fact found.",
+    "claim_level": "Source-inferred rendering conclusion, strengthened by dual-ABI host arithmetic and historical target-layout evidence; physical behavior remains separately gated."
+  },
+  "scope": "C022 source-attribution erratum: platformio.ini:39 -fshort-enums belongs to avr_base and is not Mk6 flag authority. The original e0a08e72 source witness remains unchanged and this explicit erratum supersedes only that citation. Fresh actual generated-header host probes in both supported enum layouts prove Button-1 promotes to int, zero clamps to slot0 and the black-preserving correction leaves all60 static slots equal. Git-preserved independently reviewed C020 object-only target evidence authenticates Button size/alignment1/1 and82 matched C/C++ layout values; current target ABI was not freshly executed. Source-inferred appearance and all original safety/physical gates remain unchanged; no contradictory source fact was found.",
+  "other97_orders_unchanged": true,
+  "no_source_patch_in_canonical": true,
+  "device_Config_write_authorized": false
+}
+```
+<!-- gp-config022-abi-attribution-erratum:end -->
