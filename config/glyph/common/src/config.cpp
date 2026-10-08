@@ -16,6 +16,7 @@
 #include "display/Font4x7Fixed.h"
 #include "icons/splashscreen.hpp"
 #include "glyph_overrides.hpp"
+#include "glyph_config_validation.hpp"
 #include "glyph_pinout.hpp"
 #include "matrix_definition.hpp"
 #include "reboot.hpp"
@@ -155,7 +156,7 @@ void setup() {
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.
     ConfigValidationError validation_error;
-    if (!persistence.SetValidator(validate_config_semantics) ||
+    if (!persistence.SetValidator(validate_glyph_config) ||
         !persistence.ValidateConfig(config, validation_error)) {
         refuse_boot(BootOutcome::DefaultsRejected, display_ready);
         return;
