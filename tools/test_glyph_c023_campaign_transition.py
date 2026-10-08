@@ -113,7 +113,7 @@ class C023HardwarePendingTests(unittest.TestCase):
 
 
 class C023CatalogDispatchTests(unittest.TestCase):
-    """The exact replay receives C023 roots before source integration."""
+    """The selected replay gets roots for the current authenticated phase."""
 
     def test_source_free_c023_replay_uses_c023_roots_and_c022_lane_stays_separate(self) -> None:
         runner.ROOT = ROOT
@@ -147,7 +147,15 @@ class C023CatalogDispatchTests(unittest.TestCase):
         with patch.object(general_campaign, "authenticate", wraps=general_campaign.authenticate) as authenticate_c022:
             _, c022_roots = runner.required_catalog([c022])
             authenticate_c022.assert_called_once_with(ROOT)
-        self.assertNotIn(campaign.C, c022_roots)
+        if campaign.has_source_overlay(ROOT):
+            # Once accepted C023 source is integrated, the general current-source
+            # guard must carry its exact roots even when a C022 consumer is
+            # selected. Before integration, the C022-only lane stays isolated.
+            self.assertIn(campaign.C, c022_roots)
+            self.assertIn(campaign.F, c022_roots)
+        else:
+            self.assertNotIn(campaign.C, c022_roots)
+            self.assertNotIn(campaign.F, c022_roots)
 
 
 class C023HardwareAcceptanceControls(unittest.TestCase):
