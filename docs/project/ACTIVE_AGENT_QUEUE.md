@@ -2,7 +2,7 @@
 
 ## Current GP-CONFIG-022 owner-resolved activation
 
-GP-CONFIG-022 has completed mechanical READY activation after strict 021/038 DONE and exact predecessor acceptance. The verified owner directive approves block 11 count 20 to 11 and explicit LF1 black (color 0). Independent source inspection confirms that this removes nine uninitialized counted records and preserves source-inferred appearance; physical appearance remains to be tested. Zero, unnamed and nonphysical populated targets remain invalid. Existing GP-VAL-039 incorporates this exact additional default path. All 238 critical inputs still equal accepted F021; this activation changes documentation only. Preserve exact C022 through 039 strict DONE, then exact committed build, custody, independent review and normal hardware handoff. Prepare the bounded offline compatibility and restoration plan; fresh owner Config is required at the hardware stage. No device or Config write is authorized. One grouped block-11 appearance matrix, including LF1 black, accompanies normal gameplay testing. Other 97 orders, prior acceptance and historical failures remain unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN.
+GP-CONFIG-022 exact C `b4e03566ceaa0815df7ba0eef975cf0ac0583622` is preserved for REVIEW, direct parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478`, with eighteen regular changed paths and seven critical production changes. GP-VAL-039 is READY by its recorded objective conditions and continues in the same UD029 executor. Both enum-layout host suites and archived minimal-repair/restoration proof passed. The immutable C checker CLI failed on an incorrect blanket non-executable mode assumption; preserve this actual FAIL. Ordinary039 must authenticate unchanged baseline executable modes, the complete238-to243 critical inventory, exact seven-path delta and immutable host replay before strictDONE. All238 canonical critical inputs remain equal acceptedF021. No C replay/rebase, target build or device/Config write; build waits for strict039DONE and behavior merge waits for exactF/artifact humanHEPPASS. Fresh ownerConfig and one grouped eleven-target appearance matrix remain in the normal hardware gate. Other97orders and prior evidence remain unchanged; Nunchuk NOT_TESTED, root cause UNPROVEN.
 
 ## Current GP-CONFIG-021 exact hardware evidence
 
@@ -166,7 +166,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "runway": {
     "immediate_ready": 1,
-    "recorded_preauthorized": 5,
+    "recorded_preauthorized": 4,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -1103,7 +1103,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-022",
       "title": "Validate physical RGB targets at both acceptance seams",
-      "status": "READY",
+      "status": "REVIEW",
       "branch": "codex/gp-config-022-release-safety",
       "objective": "Owner GLYPH-UD-024 resolves physical RGB semantics. Exact 76-pixel map has 36 named targets, independent of gameplay state. 021 stable callback/private acceptance permits both producer seams with refusal on persisted rejection.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1152,8 +1152,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": true,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
+      "candidate_git_sha": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+      "candidate_base_configurator_sha": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
       "firmware_artifact_build_path": null,
       "preserved_firmware_artifact_locator": null,
       "firmware_artifact_sha256": null,
@@ -1166,7 +1166,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-039",
       "title": "C022 RGB candidate governance",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-val-039-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1183,12 +1183,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve the exact committed GP-CONFIG-022 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
       "substantive_authorization_rationale": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
-      "mechanical_activation_conditions": [
-        "Strict DONE correspondence for GP-CONFIG-021, GP-VAL-038; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
-        "GP-CONFIG-022 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-022 scope; expected full-aggregate failure does not bar candidate creation.",
-        "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
-        "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
@@ -1215,9 +1210,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -8285,11 +8280,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-CONFIG-022"],"immediate_ready":1,"recorded_preauthorized":5,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":["GP-VAL-039"],"immediate_ready":1,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-CONFIG-022; Immediate Ready: 1; Recorded Preauthorized: 5; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: GP-VAL-039; Immediate Ready: 1; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -29975,3 +29970,1051 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config022-abi-attribution-erratum:end -->
+
+
+## 2026-10-08 exact C022 handoff and GP-VAL-039 activation
+
+<!-- gp-config022-handoff-val039-activation:start -->
+```json
+{
+  "schema_name": "glyph_gp_config022_candidate_handoff_val039_activation",
+  "schema_version": 1,
+  "recorded_utc": "2026-10-08T12:16:24.978470+00:00",
+  "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+  "canonical_base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+  "candidate_tree": "6f4e4610798c12e49b99b46a974d51c38e68b478",
+  "candidate_direct_parent": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+  "source_free_canonical": true,
+  "gate_waivers": false,
+  "original_conditions": [
+    "Strict DONE correspondence for GP-CONFIG-021, GP-VAL-038; hardware-bearing predecessor exact built F/artifact PASS with empty gaps and accepted critical chain. Missing completion stays WAITING.",
+    "GP-CONFIG-022 has clean committed C, exact canonical direct parent B live-verified at C creation (later canonical may contain only the named permitted metadata progression), tree and complete git diff-tree --no-renames --raw -z B C old/new path/blob/mode inventory. Focused independent source/build-role conformance receipt proves the already adopted GP-CONFIG-022 scope; expected full-aggregate failure does not bar candidate creation.",
+    "Every changed production path is exactly the predecessor order source scope; all other critical source/build modes and bytes equal B. Candidate source/default/schema/decoder dependencies equal annex or named authenticated accepted predecessor. Only regular non-executable Git 100644 source-free paths outside firmware source filters/include roots/extra script may enter the finite inventory.",
+    "No product/policy/architecture/source-authority expansion; no forbidden capability, dirty/staged/untracked/ignored critical inputs, failed hardware or invalid accepted-source transition. Object closure and conformance evidence recorded."
+  ],
+  "conditions_result": "SATISFIED_EXACT_C_AND_INDEPENDENT_SCOPE_CONFORMANCE",
+  "conformance": {
+    "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "created_utc": "2026-10-08T12:09:53.418875+00:00",
+    "live_remote_at_creation": "14400b3ff75b5d017a9e7cf8e6d8be785c342187\trefs/heads/codex/gp-config-022-owner-resolved-activation\n14400b3ff75b5d017a9e7cf8e6d8be785c342187\trefs/heads/configurator\n",
+    "expected_paths": {
+      "include/core/config_rgb_target_validation.hpp": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+      "src/core/config_rgb_target_validation.cpp": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+      "config/glyph/common/include/config_rgb_target_domain.hpp": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+      "config/glyph/common/include/glyph_config_validation.hpp": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+      "config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "config/glyph/common/src/config.cpp": "806271234be664c77dbe5c6540d540f9ef53b77cda21555ee1e78636597e81a9",
+      "config/glyph/common/include/glyph_overrides.hpp": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "tools/check_glyph_gp_config022_rgb_target_validation.py": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+      "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json": "5da5e4d4d1407416390d94b61c65a386b18c539b033ec8368cefe9f55ec9c832",
+      "docs/runtime_config/gp_config022_rgb_target_validation.md": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41",
+      "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97",
+      "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc",
+      "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a",
+      "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b",
+      "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130",
+      "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237",
+      "tools/prepare_glyph_gp_config022_compatibility.py": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8",
+      "docs/runtime_config/gp_config022_owner_config_compatibility.md": "0dc80995e734dce9b55714ab374ec81112454e2e485d2c0b9416271b123122bf"
+    },
+    "source_scope_review_sha256": "0b9b7286a40922b7f30b536e657853b0a283c8e3bf9c6bf6c95e45a4f0a0245a",
+    "offline_scope_review_sha256": "e3430d225bc7afcaedd06ae604bfd042dd82b4795a79e50a31d4c15260804389",
+    "host_execution_sha256": "c7bfe76a2aa8240333ae0180efcfb05345728e358de6d8ce1e9e8220fabef913",
+    "offline_preparatory_sha256": "7610a3f3e83ed5f063eca77bde182a33f04e2f89e7d61c80d0ec5cf26e9afde8",
+    "git_index_flags": "ordinary_H_only",
+    "ignored_critical": [],
+    "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+    "candidate_tree": "6f4e4610798c12e49b99b46a974d51c38e68b478",
+    "candidate_direct_parent": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "raw_inventory_sha256": "b5e8dbf5df3c3ec8fd5931a23606e3f192c7857c32634f10b126f1e1e0e15d38",
+    "raw_inventory_base64": "OjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA2ZjgxODgxOGZlN2EwZjMyMjcwMDQ4ZDIwNGQ0YjZlNTQ5M2ViZTljIEEAY29uZmlnL2dseXBoL2NvbW1vbi9pbmNsdWRlL2NvbmZpZ19yZ2JfdGFyZ2V0X2RvbWFpbi5ocHAAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA2YjdjZGU1YWZjOTY4NzBjMjZkNDMxMDA4YjBjZGJkMWY4OWY4ZTkxIEEAY29uZmlnL2dseXBoL2NvbW1vbi9pbmNsdWRlL2dseXBoX2NvbmZpZ192YWxpZGF0aW9uLmhwcAA6MTAwNjQ0IDEwMDY0NCA5MGNjMzkzNzU5ZTkxYzhhY2FjZDZlZGVmOWVjYjA1Yjg2ZDdmZGM4IGEwODM2YTA5NDc3ZWE1M2Q3YmEyYWFlOTAyODcxOTY4MzFhOTg2YmIgTQBjb25maWcvZ2x5cGgvY29tbW9uL2luY2x1ZGUvZ2x5cGhfb3ZlcnJpZGVzLmhwcAA6MTAwNjQ0IDEwMDY0NCBkNzgzNTlkMWRmMTBkYzcwY2VmOGEwM2I0ODdjMmJiZmNjODBhZGEzIGE0YmY0NTljNjc2MjM1ZmMxNzVhODUwMjQ5ZDA3NTkxMWI0ZTU4ZjYgTQBjb25maWcvZ2x5cGgvY29tbW9uL3NyYy9jb25maWcuY3BwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgMWRiY2Q3NzJjNDc4MDI3YTVhZGFmNDdmMjlhYmY2M2RkNDRjZmRhMSBBAGNvbmZpZy9nbHlwaC9jb21tb24vc3JjL2dseXBoX2NvbmZpZ192YWxpZGF0aW9uLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIGU2MDAzNTIwODMyNjRmZTdkMzk4ZWM2MjVlODQyZTgzNDkzMTNmZTQgQQBkb2NzL3J1bnRpbWVfY29uZmlnL2ZpeHR1cmVzL2dwX2NvbmZpZzAyMl9yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24uanNvbgA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDNlOWFmYzg3NjUwYTc1ODJlOGFkNmU4ZTM2M2U0NmU1ZTk2NGY3N2QgQQBkb2NzL3J1bnRpbWVfY29uZmlnL2dwX2NvbmZpZzAyMl9vd25lcl9jb25maWdfY29tcGF0aWJpbGl0eS5tZAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDEwMjc0OGUwMDllZDAxNjhhMmMxNDI2N2MzNjg0OTExZDdjNjA1NGIgQQBkb2NzL3J1bnRpbWVfY29uZmlnL2dwX2NvbmZpZzAyMl9yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24ubWQAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA1OThlZGU2NDFjZTc5NjgxMzg1MmUzMjg4NjZjNGMxMzI3ZGUxZDNiIEEAaW5jbHVkZS9jb3JlL2NvbmZpZ19yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24uaHBwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgYTcyMGVmM2EyZWU5ZWNjNWRiNDVmYWQ4MDg1YjRiNGRlNGI1Zjg5ZCBBAHNyYy9jb3JlL2NvbmZpZ19yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24uY3BwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgNjJmZjJjMmUxZWQ1ZWJlMjE5ZWRjM2M1YTc4MTY1NzYxMjZkOWNhOSBBAHRvb2xzL2NoZWNrX2dseXBoX2dwX2NvbmZpZzAyMl9yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24ucHkAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCBmM2UzZGRlNGNkOTlkNTBkNzVmNGY3MDgyY2RlMWQ5ZTU4MTU0MzU2IEEAdG9vbHMvZml4dHVyZXMvZ3BfY29uZmlnMDIyX3JnYl90YXJnZXRfdmFsaWRhdGlvbi9jb25zdW1lcl9oYXJuZXNzLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDIzOWIxOTRhYzkwYzYyMWUxMTk1ZjdkYTQ5YmIxNzU3ZDgxMGY0MDcgQQB0b29scy9maXh0dXJlcy9ncF9jb25maWcwMjJfcmdiX3RhcmdldF92YWxpZGF0aW9uL2RlY29kZXJfaGFybmVzcy5jcHAAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCBjYjg0MTdiNWIzY2UwMmM0N2U2MDA3ZThkMzA0ODBlMDZkZGQyZTJhIEEAdG9vbHMvZml4dHVyZXMvZ3BfY29uZmlnMDIyX3JnYl90YXJnZXRfdmFsaWRhdGlvbi9wZXJzaXN0ZW5jZV9oYXJuZXNzLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDk3NzNkMzc5YzQ2ODNiZmIwOTk5ZDYwMWM4ZTQxNjIzZjdhN2E4MjEgQQB0b29scy9maXh0dXJlcy9ncF9jb25maWcwMjJfcmdiX3RhcmdldF92YWxpZGF0aW9uL3NldGNvbmZpZ19oYXJuZXNzLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDU4ZmRkN2NjNmNkZmNhNjY2ZTdlM2U0MGFmM2FkMmQ2NWY0OTZiZDQgQQB0b29scy9maXh0dXJlcy9ncF9jb25maWcwMjJfcmdiX3RhcmdldF92YWxpZGF0aW9uL3N0YXJ0dXBfaGFybmVzcy5jcHAAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCAwMDljMzQ2ZGM5MTkwNjlhOGUxOTc1OTg2OThhZDRhMmUyNTgyMzVlIEEAdG9vbHMvZml4dHVyZXMvZ3BfY29uZmlnMDIyX3JnYl90YXJnZXRfdmFsaWRhdGlvbi92YWxpZGF0aW9uX2hhcm5lc3MuY3BwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgNjZhNmUzNzEzMGQ2OWRlZjBkNTE5NDBiZGU4MjViNWJiNGZiNGQ4NSBBAHRvb2xzL3ByZXBhcmVfZ2x5cGhfZ3BfY29uZmlnMDIyX2NvbXBhdGliaWxpdHkucHkA",
+    "inventory": [
+      {
+        "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6f818818fe7a0f32270048d204d4b6e5493ebe9c",
+        "status": "A",
+        "new_sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+        "bytes": 485
+      },
+      {
+        "path": "config/glyph/common/include/glyph_config_validation.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+        "status": "A",
+        "new_sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+        "bytes": 133
+      },
+      {
+        "path": "config/glyph/common/include/glyph_overrides.hpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+        "new_blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+        "status": "M",
+        "new_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+        "bytes": 58387
+      },
+      {
+        "path": "config/glyph/common/src/config.cpp",
+        "old_mode": "100644",
+        "new_mode": "100644",
+        "old_blob": "d78359d1df10dc70cef8a03b487c2bbfcc80ada3",
+        "new_blob": "a4bf459c676235fc175a850249d075911b4e58f6",
+        "status": "M",
+        "new_sha256": "806271234be664c77dbe5c6540d540f9ef53b77cda21555ee1e78636597e81a9",
+        "bytes": 11999
+      },
+      {
+        "path": "config/glyph/common/src/glyph_config_validation.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+        "status": "A",
+        "new_sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+        "bytes": 615
+      },
+      {
+        "path": "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "e600352083264fe7d398ec625e842e8349313fe4",
+        "status": "A",
+        "new_sha256": "5da5e4d4d1407416390d94b61c65a386b18c539b033ec8368cefe9f55ec9c832",
+        "bytes": 36835
+      },
+      {
+        "path": "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "3e9afc87650a7582e8ad6e8e363e46e5e964f77d",
+        "status": "A",
+        "new_sha256": "0dc80995e734dce9b55714ab374ec81112454e2e485d2c0b9416271b123122bf",
+        "bytes": 6912
+      },
+      {
+        "path": "docs/runtime_config/gp_config022_rgb_target_validation.md",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "102748e009ed0168a2c14267c3684911d7c6054b",
+        "status": "A",
+        "new_sha256": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41",
+        "bytes": 5029
+      },
+      {
+        "path": "include/core/config_rgb_target_validation.hpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "598ede641ce796813852e328866c4c1327de1d3b",
+        "status": "A",
+        "new_sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+        "bytes": 806
+      },
+      {
+        "path": "src/core/config_rgb_target_validation.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "a720ef3a2ee9ecc5db45fad8085b4b4de4b5f89d",
+        "status": "A",
+        "new_sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+        "bytes": 2631
+      },
+      {
+        "path": "tools/check_glyph_gp_config022_rgb_target_validation.py",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "62ff2c2e1ed5ebe219edc3c5a7816576126d9ca9",
+        "status": "A",
+        "new_sha256": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+        "bytes": 38848
+      },
+      {
+        "path": "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "f3e3dde4cd99d50d75f4f7082cde1d9e58154356",
+        "status": "A",
+        "new_sha256": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237",
+        "bytes": 2909
+      },
+      {
+        "path": "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "239b194ac90c621e1195f7da49bb1757d810f407",
+        "status": "A",
+        "new_sha256": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc",
+        "bytes": 5982
+      },
+      {
+        "path": "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "cb8417b5b3ce02c47e6007e8d30480e06ddd2e2a",
+        "status": "A",
+        "new_sha256": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a",
+        "bytes": 29084
+      },
+      {
+        "path": "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "9773d379c4683bfb0999d601c8e41623f7a7a821",
+        "status": "A",
+        "new_sha256": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b",
+        "bytes": 20166
+      },
+      {
+        "path": "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "58fdd7cc6cdfca666e7e3e40af3ad2d65f496bd4",
+        "status": "A",
+        "new_sha256": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130",
+        "bytes": 9647
+      },
+      {
+        "path": "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "009c346dc919069a8e197598698ad4a2e258235e",
+        "status": "A",
+        "new_sha256": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97",
+        "bytes": 5170
+      },
+      {
+        "path": "tools/prepare_glyph_gp_config022_compatibility.py",
+        "old_mode": "000000",
+        "new_mode": "100644",
+        "old_blob": "0000000000000000000000000000000000000000",
+        "new_blob": "66a6e37130d69def0d51940bde825b5bb4fb4d85",
+        "status": "A",
+        "new_sha256": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8",
+        "bytes": 13606
+      }
+    ],
+    "complete_inventory_count": 18,
+    "critical_before_count": 238,
+    "critical_after_count": 243,
+    "unchanged_critical_count": 236,
+    "other_critical_bytes_and_modes_equal_base": true,
+    "clean_exact_candidate": true,
+    "committed_utc": "2026-10-08T12:11:21.817671+00:00",
+    "receipt_repair": "Initial postcommit inventory attempted strict classification of unchanged .clang-format and stopped; no candidate changes/replay. Repaired only inventory enumeration to retain native CRITICAL paths; unknown paths remain unadmitted."
+  },
+  "conformance_sha256": "fb8d59ccda9022a9627babc79b54e424de8cf1bbcac50461a03dbb971fcc98ff",
+  "independent_review": {
+    "authority_and_transition": "Actualowner01a11b4c-0621-74d2-9651-0ea861c45e57 supplement and explicitABIerratum atE authorizeexactrepair. Zero/unnamed/nonphysicalrejection remainsmandatory; noAVRflagcitationused. ExistingC022READY/039PREAUTHORIZEDWAITING scope admitscleanexactCcheckpoint andordinary039affectedproofadaptation; no builduntil039strictDONE and no integrationbeforeexactF/artifacthumanHEPPASS.",
+    "content_identity": {
+      "all18_mode_and_byte_hashes_equal_committedC_and_worktree": true,
+      "clean_exact_C_and_diffcheck": "PASS",
+      "complete_paths": 18,
+      "critical_after": 243,
+      "critical_before": 238,
+      "exactcritical_delta": "Fiveaddedhelper/adapter/wrapperfiles plusconfig.cpp callback andapproveddefaultdelta; everyothercriticalmode/blob exactE.",
+      "host_proof": 9,
+      "independently_reproduced_raw_no_rename_inventory": true,
+      "offline_helper_doc": 2,
+      "path_manifest": {
+        "config/glyph/common/include/config_rgb_target_domain.hpp": {
+          "git_blob": "6f818818fe7a0f32270048d204d4b6e5493ebe9c",
+          "mode": "100644",
+          "sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb"
+        },
+        "config/glyph/common/include/glyph_config_validation.hpp": {
+          "git_blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+          "mode": "100644",
+          "sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229"
+        },
+        "config/glyph/common/include/glyph_overrides.hpp": {
+          "git_blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+          "mode": "100644",
+          "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+        },
+        "config/glyph/common/src/config.cpp": {
+          "git_blob": "a4bf459c676235fc175a850249d075911b4e58f6",
+          "mode": "100644",
+          "sha256": "806271234be664c77dbe5c6540d540f9ef53b77cda21555ee1e78636597e81a9"
+        },
+        "config/glyph/common/src/glyph_config_validation.cpp": {
+          "git_blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+          "mode": "100644",
+          "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+        },
+        "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json": {
+          "git_blob": "e600352083264fe7d398ec625e842e8349313fe4",
+          "mode": "100644",
+          "sha256": "5da5e4d4d1407416390d94b61c65a386b18c539b033ec8368cefe9f55ec9c832"
+        },
+        "docs/runtime_config/gp_config022_owner_config_compatibility.md": {
+          "git_blob": "3e9afc87650a7582e8ad6e8e363e46e5e964f77d",
+          "mode": "100644",
+          "sha256": "0dc80995e734dce9b55714ab374ec81112454e2e485d2c0b9416271b123122bf"
+        },
+        "docs/runtime_config/gp_config022_rgb_target_validation.md": {
+          "git_blob": "102748e009ed0168a2c14267c3684911d7c6054b",
+          "mode": "100644",
+          "sha256": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41"
+        },
+        "include/core/config_rgb_target_validation.hpp": {
+          "git_blob": "598ede641ce796813852e328866c4c1327de1d3b",
+          "mode": "100644",
+          "sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49"
+        },
+        "src/core/config_rgb_target_validation.cpp": {
+          "git_blob": "a720ef3a2ee9ecc5db45fad8085b4b4de4b5f89d",
+          "mode": "100644",
+          "sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8"
+        },
+        "tools/check_glyph_gp_config022_rgb_target_validation.py": {
+          "git_blob": "62ff2c2e1ed5ebe219edc3c5a7816576126d9ca9",
+          "mode": "100644",
+          "sha256": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529"
+        },
+        "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp": {
+          "git_blob": "f3e3dde4cd99d50d75f4f7082cde1d9e58154356",
+          "mode": "100644",
+          "sha256": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237"
+        },
+        "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp": {
+          "git_blob": "239b194ac90c621e1195f7da49bb1757d810f407",
+          "mode": "100644",
+          "sha256": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc"
+        },
+        "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp": {
+          "git_blob": "cb8417b5b3ce02c47e6007e8d30480e06ddd2e2a",
+          "mode": "100644",
+          "sha256": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a"
+        },
+        "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp": {
+          "git_blob": "9773d379c4683bfb0999d601c8e41623f7a7a821",
+          "mode": "100644",
+          "sha256": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b"
+        },
+        "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp": {
+          "git_blob": "58fdd7cc6cdfca666e7e3e40af3ad2d65f496bd4",
+          "mode": "100644",
+          "sha256": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130"
+        },
+        "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp": {
+          "git_blob": "009c346dc919069a8e197598698ad4a2e258235e",
+          "mode": "100644",
+          "sha256": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97"
+        },
+        "tools/prepare_glyph_gp_config022_compatibility.py": {
+          "git_blob": "66a6e37130d69def0d51940bde825b5bb4fb4d85",
+          "mode": "100644",
+          "sha256": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8"
+        }
+      },
+      "production": 7,
+      "queue_evidence_protocol_catalog_and_othertrackedpaths": "UnchangedE",
+      "raw_inventory_sha256": "b5e8dbf5df3c3ec8fd5931a23606e3f192c7857c32634f10b126f1e1e0e15d38",
+      "unchanged_prior_critical": 236
+    },
+    "evidence_sha256": {
+      "022-candidate-committed-inventory.json": "fb8d59ccda9022a9627babc79b54e424de8cf1bbcac50461a03dbb971fcc98ff",
+      "022-offline-compatibility-source-conformance.json": "e3430d225bc7afcaedd06ae604bfd042dd82b4795a79e50a31d4c15260804389",
+      "committed-host-proof.log": "68d1dc73a02431c79ffd5fd77135d6809420c16c57540079d72e964c9632a600",
+      "compatibility-study/preparatory-proof.json": "7610a3f3e83ed5f063eca77bde182a33f04e2f89e7d61c80d0ec5cf26e9afde8",
+      "host-implementation/final/execution.json": "c7bfe76a2aa8240333ae0180efcfb05345728e358de6d8ce1e9e8220fabef913",
+      "host-implementation/final/host-implementation-result.json": "87650c6b508e6149f077bba3863b50a548f683de1c5d4fe626c4d3785a90fd47"
+    },
+    "finite_host_proof": {
+      "actual_committed_C_CLI_status": "FAIL_REPOSITORY_AUTH_BEFORE_COMPILE",
+      "actual_preparatory_status": "PASS_PREPARATORY_HOST_ONLY atsourceidenticaldraft; allpins boundC now",
+      "actual_suite_logs_binaryhashes_startuprows_match_execution": true,
+      "all9_hostfiles_and209MMDdependency_pins_matchC": true,
+      "archive": "RealNanopbdecode/basepass, expectedRGBreject, minimalrepairaccept; twofieldundo entiredecodedConfigbyteequal. Historicalsampleonly.",
+      "both_abis": {
+        "ordinary": {
+          "SET": 1139,
+          "checked_load": 827,
+          "consumer": 11,
+          "decoder": 538,
+          "fresh_missing_callback": 1,
+          "pure": 539,
+          "startup": 68
+        },
+        "short": {
+          "SET": 1139,
+          "checked_load": 827,
+          "consumer": 11,
+          "decoder": 538,
+          "fresh_missing_callback": 1,
+          "pure": 534,
+          "startup": 68
+        }
+      },
+      "compiled_behavior_mutants": 16,
+      "consumer": "Actualstatic/SHIFT/XWAVEcomparison; all76pixels/60slotslegacy-correctedequal, count-onlycyan differs. SyntheticHSVstub notphysicalFastLEDevidence.",
+      "execution_matches_requested_hash": true,
+      "execution_sha256": "c7bfe76a2aa8240333ae0180efcfb05345728e358de6d8ce1e9e8220fabef913",
+      "identity_negatives": 215,
+      "independently_rerun_default_delta_check": "PASS",
+      "independently_rerun_identity_negatives": "PASS215",
+      "independently_rerun_input_authentication": "PASS209pins",
+      "preserved_failures": "Attempts1..7 compile/integration/controlfailures retained; later8/9 focusedproofPASS. Rootreceiptfinalizerclassification/importerrors preserved; reviewer reportpreparation racedrootcommit and stoppedonbaseassertbeforewriting. No sourcechange orfalsePASS.",
+      "raw_interface_controls": 6,
+      "total_negatives": 231
+    },
+    "implementation_review": {
+      "adapter": "ActualselectedMk6pixelmap76entries/36uniquephysicalnamedtargets, independentgameplay. GenericHAL has noGlyphpinheaderdependency.",
+      "defaults": "Exacttwo-line count20->11 plusLF1color2282478->0 only; sourceafterSHA7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c. Allother12RGBblocks/sourcebyteexact. Appearance source-inferred; normalphysicalmatrixpending.",
+      "generic_validator": "Allocation-free/immutable; completeouter andpopulatednestedextentguards precedetargetwalks. Objectrepresentationmemcmp avoids evaluating malformedenumvalues; zero alwaysrejects. Sourceownedphysicaldomain pointer/count trusted; null/countincoherence rejects. Compile-time unsigned/no-padding1/4-byteABIconstraints match verifiedhostlayouts.",
+      "refusal": "Existingbothcoreunconditionalrefusalgates, no-autoformat andprivatecheckedloadpublication unchanged. InvalidRGBstored/defaultvalues refuse before normalbackends/menu/RGB/transport/reports, preservebytes andperformnowrite; failed-displayhostcasescovered.",
+      "wrapper": "C021semantics/errors first, RGBmembership second, staticboundederrorwithNUL length. Onecallback installed beforedefaultvalidation/firstLoad; unchangedSET/checkedLoadcallbacks consume it."
+    },
+    "limits": [
+      "Reviewerread-onlyrepo/Git/queue/source; no targetcompiler/build/device/Configwrite/publication/fullaggregate. Pureinputauth/identity/defaultchecks executed; committedrepositorygate independentlyreproducedFAIL.",
+      "No frozen17/21build/session/ownerbackup access/traversal/polling. ImmutableGitHEParchive andallowedtmp022reports/artifacts only.",
+      "Hoststartupusesinput_source_count0; HSVpackingstub, COBS/devicetransport andphysicalbehavior outsidehostclaims.",
+      "Archivedsampleonly; nofreshownerbackup/currentstoredConfig/restoration/hardwareacceptance claim.",
+      "Allhistoricalaggregate/frameworkfailures remainhonest, butnewdirectCLIdefect isTier2 andmustresolvebeforebuild.",
+      "NunchukNOT_TESTED; rootcauseUNPROVEN."
+    ],
+    "live_base_verification": {
+      "canonical_at_review": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+      "default_read": "INCONCLUSIVE_DNS",
+      "same_minimal_read_permitted_network_retry": "PASS"
+    },
+    "offline_helper_and_archived_packet": {
+      "all8_packet_files_and21_committedvalidatorpins_andbinaryhash_match": true,
+      "candidate_bound_to_C": true,
+      "complete_proof_review_required": "Helperenforces sixmandatorypins plusallsuppliedcommitted/livepins; actualMMDvalidatorrecord has21matchingpins. Supplieddictionaryalone doesnotestablishbinarycompileprovenance; futurefreshcompletepacketindependentreview remainsmandatory.",
+      "complete_structural_diff": "Tenentries: LF1colorreplace andexactninetailremovals; original/restorationJSONbyteidentical; helperactualCLIoriginal/restorationrawroundtripPASS.",
+      "corrected_actual_validation": "Decoded/accepted",
+      "corrected_raw": "4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe",
+      "future_owner_stage": "Freshrawbackup/provenance, exactcandidate/schema/compileclosure, completediff/restorationpacket, independentreview and separateexplicitownerwriteauthorization. Normalgroupedblock11appearance plusordinaryC022hardwaregate remainsrequired.",
+      "helper_boundary": "Offlineartifactpreparation only; no device/serial/transport/newwriter/bootmigration. Sourcepins/schema/rawandJSONroundtrip/exactcandidate/binaryhashchecks; exacttwentyrecordsignature andnineemptytail, onlyLF1color0plusnine removals, allotherownercolors/fields preserved.",
+      "original_actual_validation": "Decoded/expectedRGBsemanticreject",
+      "original_raw": "4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480",
+      "packet": "compatibility-study/committed-C-archived-packet/packet.json",
+      "packet_sha256": "1441b013f1dd0d024a655adb7b4b8d799c83ca5a03f26cdef9c0c57ff3770608",
+      "preparatory_signature_negatives": 6,
+      "review_disposition": "APPROVED_AS_ARCHIVED_HOST_CHARACTERIZATION_ONLY; notfreshownerpacket ordeviceuseapproval. Packetrequiredindependentreviewflag remains and noConfigwriteauthorized."
+    },
+    "open_blocking_gates": [
+      {
+        "actual_result": "Root exactcleanC CLI FAIL before compile; independently reproduced authenticate_repository ContractError: critical object mode/type.",
+        "blocks": [
+          "Build",
+          "Hardware handoff",
+          "Integration",
+          "DONE validation acceptance"
+        ],
+        "cause": "tree(BASE) blanket-requires100644 for every critical entry, including unchanged accepted100755 scripts. scripts/build-glyph-mk6-quiet.sh has identical100755/blob e35164eeb512cec678a2f138b2b13f2b52263dc6 inE andC. Other existing executables similarly unchanged.",
+        "classification": "Concreteproofgate defect, notTier3debt and not firmwarebehaviorcontradiction. No cleanCLI PASS claimed or waiver.",
+        "id": "C022_REPOSITORY_AUTH_EXECUTABLE_BASELINE_MODE",
+        "line": 205,
+        "path": "tools/check_glyph_gp_config022_rgb_target_validation.py",
+        "permitted_route": "Existing ordinaryGP-VAL-039 scope expressly owns affectedvalidation/proof adaptation and exactC/mode/finiteinventory correspondence. PreserveC; repair and prove this gate through039 before039strictDONE/resume/build. No newowner/productdecision orsourcepolicychange exposed.",
+        "required_finite_proof": "Authenticate all baselinecritical bytes/modes, permit only exactunchanged baseline executable modes, require exactlyseven authorized changedproductionpaths regular100644, preservecriticalprecedence, reject unexpected source/path/mode drift; update only explicit039 proofinventory/authentication overlay with fresh negatives and independentreview. No blanketexecutableexception orsilentfixturehashreseal.",
+        "tier": "Tier2 directly affected"
+      }
+    ],
+    "product_source_findings": [],
+    "recorded_at_utc": "2026-10-08T12:14:18.409598+00:00",
+    "reviewed_candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+    "reviewed_tree": "6f4e4610798c12e49b99b46a974d51c38e68b478",
+    "schema_name": "glyph_c022_candidate_independent_review",
+    "schema_version": 1,
+    "scope": "Fresh independent product/source, finite host proof and offline helper review bound to exact committedC. Approval permits preserved candidate checkpoint and existing ordinary039 transition. It does not approve build, hardware handoff, integration orDONE; directly affectedTier2CLI gate remains open.",
+    "sole_parent_base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "status": "APPROVED_EXACT_C_CHECKPOINT_FOR_NAMED_039_ONLY"
+  },
+  "review_sha256": "2e06f25802f9140825468bbf3188811308ab1acae31b357ce457683c0462f3d6",
+  "source_build_role_conformance": {
+    "schema_name": "glyph_gp_config022_final_committed_source_build_conformance",
+    "schema_version": 1,
+    "status": "PASS_EXACT_COMMITTED_SOURCE_AND_BUILD_ROLE_CONFORMANCE",
+    "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+    "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "tree": "6f4e4610798c12e49b99b46a974d51c38e68b478",
+    "sole_direct_parent_verified": true,
+    "candidate_head_equals_C": true,
+    "clean_porcelain": "",
+    "raw_inventory": {
+      "command": [
+        "git",
+        "diff-tree",
+        "-r",
+        "--no-renames",
+        "--raw",
+        "-z",
+        "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+        "b4e03566ceaa0815df7ba0eef975cf0ac0583622"
+      ],
+      "sha256": "b5e8dbf5df3c3ec8fd5931a23606e3f192c7857c32634f10b126f1e1e0e15d38",
+      "size_bytes": 2844,
+      "base64": "OjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA2ZjgxODgxOGZlN2EwZjMyMjcwMDQ4ZDIwNGQ0YjZlNTQ5M2ViZTljIEEAY29uZmlnL2dseXBoL2NvbW1vbi9pbmNsdWRlL2NvbmZpZ19yZ2JfdGFyZ2V0X2RvbWFpbi5ocHAAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA2YjdjZGU1YWZjOTY4NzBjMjZkNDMxMDA4YjBjZGJkMWY4OWY4ZTkxIEEAY29uZmlnL2dseXBoL2NvbW1vbi9pbmNsdWRlL2dseXBoX2NvbmZpZ192YWxpZGF0aW9uLmhwcAA6MTAwNjQ0IDEwMDY0NCA5MGNjMzkzNzU5ZTkxYzhhY2FjZDZlZGVmOWVjYjA1Yjg2ZDdmZGM4IGEwODM2YTA5NDc3ZWE1M2Q3YmEyYWFlOTAyODcxOTY4MzFhOTg2YmIgTQBjb25maWcvZ2x5cGgvY29tbW9uL2luY2x1ZGUvZ2x5cGhfb3ZlcnJpZGVzLmhwcAA6MTAwNjQ0IDEwMDY0NCBkNzgzNTlkMWRmMTBkYzcwY2VmOGEwM2I0ODdjMmJiZmNjODBhZGEzIGE0YmY0NTljNjc2MjM1ZmMxNzVhODUwMjQ5ZDA3NTkxMWI0ZTU4ZjYgTQBjb25maWcvZ2x5cGgvY29tbW9uL3NyYy9jb25maWcuY3BwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgMWRiY2Q3NzJjNDc4MDI3YTVhZGFmNDdmMjlhYmY2M2RkNDRjZmRhMSBBAGNvbmZpZy9nbHlwaC9jb21tb24vc3JjL2dseXBoX2NvbmZpZ192YWxpZGF0aW9uLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIGU2MDAzNTIwODMyNjRmZTdkMzk4ZWM2MjVlODQyZTgzNDkzMTNmZTQgQQBkb2NzL3J1bnRpbWVfY29uZmlnL2ZpeHR1cmVzL2dwX2NvbmZpZzAyMl9yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24uanNvbgA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDNlOWFmYzg3NjUwYTc1ODJlOGFkNmU4ZTM2M2U0NmU1ZTk2NGY3N2QgQQBkb2NzL3J1bnRpbWVfY29uZmlnL2dwX2NvbmZpZzAyMl9vd25lcl9jb25maWdfY29tcGF0aWJpbGl0eS5tZAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDEwMjc0OGUwMDllZDAxNjhhMmMxNDI2N2MzNjg0OTExZDdjNjA1NGIgQQBkb2NzL3J1bnRpbWVfY29uZmlnL2dwX2NvbmZpZzAyMl9yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24ubWQAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCA1OThlZGU2NDFjZTc5NjgxMzg1MmUzMjg4NjZjNGMxMzI3ZGUxZDNiIEEAaW5jbHVkZS9jb3JlL2NvbmZpZ19yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24uaHBwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgYTcyMGVmM2EyZWU5ZWNjNWRiNDVmYWQ4MDg1YjRiNGRlNGI1Zjg5ZCBBAHNyYy9jb3JlL2NvbmZpZ19yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24uY3BwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgNjJmZjJjMmUxZWQ1ZWJlMjE5ZWRjM2M1YTc4MTY1NzYxMjZkOWNhOSBBAHRvb2xzL2NoZWNrX2dseXBoX2dwX2NvbmZpZzAyMl9yZ2JfdGFyZ2V0X3ZhbGlkYXRpb24ucHkAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCBmM2UzZGRlNGNkOTlkNTBkNzVmNGY3MDgyY2RlMWQ5ZTU4MTU0MzU2IEEAdG9vbHMvZml4dHVyZXMvZ3BfY29uZmlnMDIyX3JnYl90YXJnZXRfdmFsaWRhdGlvbi9jb25zdW1lcl9oYXJuZXNzLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDIzOWIxOTRhYzkwYzYyMWUxMTk1ZjdkYTQ5YmIxNzU3ZDgxMGY0MDcgQQB0b29scy9maXh0dXJlcy9ncF9jb25maWcwMjJfcmdiX3RhcmdldF92YWxpZGF0aW9uL2RlY29kZXJfaGFybmVzcy5jcHAAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCBjYjg0MTdiNWIzY2UwMmM0N2U2MDA3ZThkMzA0ODBlMDZkZGQyZTJhIEEAdG9vbHMvZml4dHVyZXMvZ3BfY29uZmlnMDIyX3JnYl90YXJnZXRfdmFsaWRhdGlvbi9wZXJzaXN0ZW5jZV9oYXJuZXNzLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDk3NzNkMzc5YzQ2ODNiZmIwOTk5ZDYwMWM4ZTQxNjIzZjdhN2E4MjEgQQB0b29scy9maXh0dXJlcy9ncF9jb25maWcwMjJfcmdiX3RhcmdldF92YWxpZGF0aW9uL3NldGNvbmZpZ19oYXJuZXNzLmNwcAA6MDAwMDAwIDEwMDY0NCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDU4ZmRkN2NjNmNkZmNhNjY2ZTdlM2U0MGFmM2FkMmQ2NWY0OTZiZDQgQQB0b29scy9maXh0dXJlcy9ncF9jb25maWcwMjJfcmdiX3RhcmdldF92YWxpZGF0aW9uL3N0YXJ0dXBfaGFybmVzcy5jcHAAOjAwMDAwMCAxMDA2NDQgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCAwMDljMzQ2ZGM5MTkwNjlhOGUxOTc1OTg2OThhZDRhMmUyNTgyMzVlIEEAdG9vbHMvZml4dHVyZXMvZ3BfY29uZmlnMDIyX3JnYl90YXJnZXRfdmFsaWRhdGlvbi92YWxpZGF0aW9uX2hhcm5lc3MuY3BwADowMDAwMDAgMTAwNjQ0IDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgNjZhNmUzNzEzMGQ2OWRlZjBkNTE5NDBiZGU4MjViNWJiNGZiNGQ4NSBBAHRvb2xzL3ByZXBhcmVfZ2x5cGhfZ3BfY29uZmlnMDIyX2NvbXBhdGliaWxpdHkucHkA",
+      "path_count": 18,
+      "entries": [
+        {
+          "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "6f818818fe7a0f32270048d204d4b6e5493ebe9c",
+          "status": "A",
+          "new_sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+          "bytes": 485,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "config/glyph/common/include/glyph_config_validation.hpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+          "status": "A",
+          "new_sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+          "bytes": 133,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "config/glyph/common/include/glyph_overrides.hpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+          "new_blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+          "status": "M",
+          "new_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+          "bytes": 58387,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "config/glyph/common/src/config.cpp",
+          "old_mode": "100644",
+          "new_mode": "100644",
+          "old_blob": "d78359d1df10dc70cef8a03b487c2bbfcc80ada3",
+          "new_blob": "a4bf459c676235fc175a850249d075911b4e58f6",
+          "status": "M",
+          "new_sha256": "806271234be664c77dbe5c6540d540f9ef53b77cda21555ee1e78636597e81a9",
+          "bytes": 11999,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "config/glyph/common/src/glyph_config_validation.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+          "status": "A",
+          "new_sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+          "bytes": 615,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "e600352083264fe7d398ec625e842e8349313fe4",
+          "status": "A",
+          "new_sha256": "5da5e4d4d1407416390d94b61c65a386b18c539b033ec8368cefe9f55ec9c832",
+          "bytes": 36835,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "3e9afc87650a7582e8ad6e8e363e46e5e964f77d",
+          "status": "A",
+          "new_sha256": "0dc80995e734dce9b55714ab374ec81112454e2e485d2c0b9416271b123122bf",
+          "bytes": 6912,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "docs/runtime_config/gp_config022_rgb_target_validation.md",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "102748e009ed0168a2c14267c3684911d7c6054b",
+          "status": "A",
+          "new_sha256": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41",
+          "bytes": 5029,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "include/core/config_rgb_target_validation.hpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "598ede641ce796813852e328866c4c1327de1d3b",
+          "status": "A",
+          "new_sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+          "bytes": 806,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "src/core/config_rgb_target_validation.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "a720ef3a2ee9ecc5db45fad8085b4b4de4b5f89d",
+          "status": "A",
+          "new_sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+          "bytes": 2631,
+          "role": "CRITICAL_ACTIVE_PRODUCTION"
+        },
+        {
+          "path": "tools/check_glyph_gp_config022_rgb_target_validation.py",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "62ff2c2e1ed5ebe219edc3c5a7816576126d9ca9",
+          "status": "A",
+          "new_sha256": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+          "bytes": 38848,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "f3e3dde4cd99d50d75f4f7082cde1d9e58154356",
+          "status": "A",
+          "new_sha256": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237",
+          "bytes": 2909,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "239b194ac90c621e1195f7da49bb1757d810f407",
+          "status": "A",
+          "new_sha256": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc",
+          "bytes": 5982,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "cb8417b5b3ce02c47e6007e8d30480e06ddd2e2a",
+          "status": "A",
+          "new_sha256": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a",
+          "bytes": 29084,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "9773d379c4683bfb0999d601c8e41623f7a7a821",
+          "status": "A",
+          "new_sha256": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b",
+          "bytes": 20166,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "58fdd7cc6cdfca666e7e3e40af3ad2d65f496bd4",
+          "status": "A",
+          "new_sha256": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130",
+          "bytes": 9647,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "009c346dc919069a8e197598698ad4a2e258235e",
+          "status": "A",
+          "new_sha256": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97",
+          "bytes": 5170,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        },
+        {
+          "path": "tools/prepare_glyph_gp_config022_compatibility.py",
+          "old_mode": "000000",
+          "new_mode": "100644",
+          "old_blob": "0000000000000000000000000000000000000000",
+          "new_blob": "66a6e37130d69def0d51940bde825b5bb4fb4d85",
+          "status": "A",
+          "new_sha256": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8",
+          "bytes": 13606,
+          "role": "NON_TARGET_HOST_METADATA_PENDING_039_LITERAL_ADMISSION"
+        }
+      ]
+    },
+    "approved_source_binding": {
+      "production_report_sha256": "0b9b7286a40922b7f30b536e657853b0a283c8e3bf9c6bf6c95e45a4f0a0245a",
+      "offline_report_sha256": "e3430d225bc7afcaedd06ae604bfd042dd82b4795a79e50a31d4c15260804389",
+      "all7_production_hashes_modes_equal_approved": true,
+      "both_offline_hashes_modes_equal_approved": true,
+      "earlier_witnesses_unchanged": true,
+      "ABI_erratum_sha256": "ba0dbd688a980d6780e2700ea2adb6299cb15003abbd8083d43f65a557e63fe7"
+    },
+    "critical_inventory": {
+      "native_baseline_count": 238,
+      "native_candidate_count": 243,
+      "unchanged_existing_count": 236,
+      "exact_changed_paths": [
+        "config/glyph/common/include/config_rgb_target_domain.hpp",
+        "config/glyph/common/include/glyph_config_validation.hpp",
+        "config/glyph/common/include/glyph_overrides.hpp",
+        "config/glyph/common/src/config.cpp",
+        "config/glyph/common/src/glyph_config_validation.cpp",
+        "include/core/config_rgb_target_validation.hpp",
+        "src/core/config_rgb_target_validation.cpp"
+      ],
+      "all_other_critical_modes_blobs_equal_E": true,
+      "all243_candidate_critical_working_bytes_modes_match_C": true,
+      "literal_extra_critical_path": [
+        "tools/check_glyph_profile_adapter_prewrite.py"
+      ],
+      "all18_and_critical_index_flags_H": true
+    },
+    "host_inventory": {
+      "paths": [
+        "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+        "docs/runtime_config/gp_config022_rgb_target_validation.md",
+        "tools/check_glyph_gp_config022_rgb_target_validation.py",
+        "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+        "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+        "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+        "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+        "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+        "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp"
+      ],
+      "count": 9,
+      "offline_paths": [
+        "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+        "tools/prepare_glyph_gp_config022_compatibility.py"
+      ],
+      "all11_regular100644": true,
+      "production_exclusion": "Existing target filters select src, HAL/pico/src, Glyph common/src and selected board; target include roots select production include directories. All nine host files and both offline files are in tools/docs, outside these selectors. Their C++ harnesses are compiled only by explicit host commands in the Python checker.",
+      "metadata_authority": "Source/build role is eligible NON_BEHAVIORAL host metadata; native finite literal admission belongs to039. No prefix classification or production exemption granted.",
+      "host_route": "New checker BASE equals exactE. Both new production cpp units appear exactly once in general and startup graphs. Startup replaces only old harness main. Actual schema/generated/Nanopb, common/selectedMk6 include roots and retained platform doubles feed the host graph. The checker uses host cc/c++ paths and inherited C021 timeout/dependency/instrumentation helpers; no target compiler/device route.",
+      "scope_limit": "Host proof adequacy/results belong to host specialist and fresh review. This read-only role did not compile or rerun those matrices."
+    },
+    "unchanged_target_selector_sha256": {
+      "platformio.ini": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+      "config/glyph/env.ini": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+      "builder_scripts/arduino_pico.py": "676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af"
+    },
+    "offline_route": "Existing approved offline helper/doc hashes equal exactC; pure codec/artifact preparation and host-validator subprocess only. No device transport, generalized migration or boot/persistence writer. Archived packet does not establish fresh backup or device acceptance.",
+    "review_conclusion": "Seven production source semantics and approved two-line default change remain exactly the reviewed versions. All11 metadata paths remain outside target selectors. No material source/build-role blocker found.",
+    "pending": [
+      "Actual exactC full host CLI FAIL is preserved. Ordinary039 reviewed current-authentication proof and fresh independent review must resolve the affected validation gate; preparatory PASS is separate.",
+      "039 objective READY activation and finite governance adaptation before target build.",
+      "Later exactF build/dependency/ABI/custody and human hardwarePASS; source role does not establish target compilation or physical acceptance.",
+      "Fresh owner backup and reviewed compatibility/restoration packet remain hardware-stage requirements."
+    ],
+    "not_performed": [
+      "No compiler, tests or target build.",
+      "No Git/repo/queue/publication mutation or device/Config writes.",
+      "No excluded frozen build/session traversal, read or polling; prior pathname incident retained.",
+      "Root finalizer repair now independently matched; no candidate mutation. Full host CLI log read after root reported completion/failure; no active-run polling or host execution."
+    ],
+    "root_committed_inventory_binding": {
+      "path": "/private/tmp/glyph-config022/022-candidate-committed-inventory.json",
+      "sha256": "fb8d59ccda9022a9627babc79b54e424de8cf1bbcac50461a03dbb971fcc98ff",
+      "raw_inventory_byte_exact_match": true,
+      "candidate_parent_tree_counts_match": true
+    },
+    "candidate_validation_state": {
+      "source_build_role_conformance": "PASS",
+      "actual_committed_full_host_CLI": "FAIL",
+      "cli_log": "/private/tmp/glyph-config022/committed-host-proof.log",
+      "cli_log_sha256": "68d1dc73a02431c79ffd5fd77135d6809420c16c57540079d72e964c9632a600",
+      "failure": "critical object mode/type",
+      "source_diagnosis": "Immutable C checker authenticate_repository tree at205 requires every root-critical object to be100644. Baseline already contains unchanged100755 executable source/build scripts. Its m.is_critical_path predicate also omits the exact correspondence-critical tool literal. Neither issue changes the authorized seven production files; required full CLI validation has not passed.",
+      "unchanged_baseline_100755_critical_entries": [
+        {
+          "path": "glyph_nuker",
+          "mode": "100755",
+          "blob": "d0524944a90503a8881281b6673b1f46e36f9383",
+          "same_at_E_and_C": true
+        },
+        {
+          "path": "scripts/build-glyph-mk6-quiet.sh",
+          "mode": "100755",
+          "blob": "e35164eeb512cec678a2f138b2b13f2b52263dc6",
+          "same_at_E_and_C": true
+        },
+        {
+          "path": "scripts/build-glyph-mk6-senscope-playtest-quiet.sh",
+          "mode": "100755",
+          "blob": "ff5f34f06be5218670c13098b7d5df17bf97c327",
+          "same_at_E_and_C": true
+        },
+        {
+          "path": "scripts/pio-local.sh",
+          "mode": "100755",
+          "blob": "deaabc271a8268dcd1f29c473f48beadf979cf7f",
+          "same_at_E_and_C": true
+        },
+        {
+          "path": "tools/check_glyph_profile_adapter_prewrite.py",
+          "mode": "100755",
+          "blob": "174df0825bc9cf5de65f647e6e379fb52826ef54",
+          "same_at_E_and_C": true
+        }
+      ],
+      "preparatory_host_proof": "Separately reported PASS by host role; not equivalent to full committed CLI PASS. No host result re-executed in this review.",
+      "ordinary039_disposition_proposal": "Preserve exact failed C CLI/source and failure evidence. Under039READY, a separately reviewed current source-free overlay may authenticate complete native238->243 critical modes/blobs/seven-path delta, materialize exactC, invoke its unchanged authenticate_inputs/run_host, and replace only the incorrect blanket mode/current repository predicate with exact committed native inventory proof. Add omission/mode/unknown-path negatives. No candidate source edits, 100755 mode normalization or general authentication bypass.",
+      "target_source_defect_found": false,
+      "gate_state": "Required committed candidate validation remains unresolved until exact ordinary039 current proof passes; no target build/merge authority from this source approval."
+    },
+    "executable_enumeration_correction": {
+      "original_report_preserved_path": "/private/tmp/glyph-config022/022-final-committed-source-build-conformance.pre-executable-enumeration-correction.json",
+      "original_report_sha256": "ac86d4bd5464d111a0317dba73a62d7280fcfbf5ca925969d01429b001dd8e74",
+      "correction": "Explicit list now includes top-level native-critical glyph_nuker100755. Earlier enumeration filtered critical roots and one tool literal but omitted this CRITICAL_FILES entry. The full native critical inventory already included it; counts238/243/236 and all source conformance findings remain unchanged.",
+      "verification": "Exact immutable E/C ls-tree rows equal100755 blobd0524944a90503a8881281b6673b1f46e36f9383.",
+      "complete_executable_count": 5,
+      "only_changes": "Executable enumeration plus this bounded correction receipt; no repository writes."
+    }
+  },
+  "source_build_role_conformance_sha256": "e0ba625b13b0300bf50795c8ff9598cf75c50d4269764908b0149918c3676905",
+  "source_proof": {
+    "result": "PASS_PREPARATORY_HOST_ONLY",
+    "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+    "classification": "EXACT_DRAFT_SOURCE_FROZEN_INPUTS; ROOT_COMMIT_AND_CLI_REPOSITORY_AUTH_PENDING",
+    "changed_paths": [
+      "tools/check_glyph_gp_config022_rgb_target_validation.py",
+      "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+      "docs/runtime_config/gp_config022_rgb_target_validation.md",
+      "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+      "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+      "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+      "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+      "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+      "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp"
+    ],
+    "path_sha256": {
+      "tools/check_glyph_gp_config022_rgb_target_validation.py": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+      "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json": "5da5e4d4d1407416390d94b61c65a386b18c539b033ec8368cefe9f55ec9c832",
+      "docs/runtime_config/gp_config022_rgb_target_validation.md": "24dad40a6ba77ffdccf77f532d6126fba83c0b51b1a4c3d4183b779d7366da41",
+      "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp": "ce456a07a71680af12e48c943fa16ce6d43ac33915180398e79a9cd04b617e97",
+      "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc",
+      "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp": "5677ab174cfb71b9c0905b6e61079d10d703ee43ace477c16f60514678aaae1a",
+      "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp": "9fdbea7a9043c51c730c361152fe9aa9633910813effcc9ff6b2b6751c86b13b",
+      "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp": "3eda487b752eac7e8aa1fdfeffd5bc1eee891e24e414c5518811e5d6c01cb130",
+      "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp": "0152abfc9052b8b3cebe2ab46f900437687dbaa873bbaf72489e9a300da02237"
+    },
+    "execution_report": "/private/tmp/glyph-config022/host-implementation/final/execution.json",
+    "execution_report_sha256": "c7bfe76a2aa8240333ae0180efcfb05345728e358de6d8ce1e9e8220fabef913",
+    "raw_validator": {
+      "path": "/private/tmp/glyph-config022/host-implementation/final/short/decoder",
+      "sha256": "5688ef5c9540c4ff6461de9cc129d007645eac864f2ac628f13f8628d9ae6207",
+      "source_pins": {
+        "config/glyph/common/include/config_rgb_target_domain.hpp": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+        "config/glyph/common/include/glyph_config_validation.hpp": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+        "config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+        "config/glyph/glyph_mk6/include/neopixel_definitions.hpp": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32",
+        "include/core/config_button_validation.hpp": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f",
+        "include/core/config_rgb_target_validation.hpp": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+        "include/core/config_validation.hpp": "b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5",
+        "src/core/config_button_validation.cpp": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+        "src/core/config_rgb_target_validation.cpp": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+        "src/core/config_validation.cpp": "d9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.c": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h": "6495a691aca68d6973f2274b5dd54b74fbb57f6b019c45fff255a857fe1abcfd",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h": "fcac5f7680fe6e870157e4bcf34d5162bdd4fff0d7db3cad1122f2ad24a6da87",
+        "tools/fixtures/gp_config020_button_validation/abi_probe.cpp": "74af7062c8b0b19a63ea6c7240292142e760c3adec43431053903c26caaeddac",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf",
+        "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp": "45fde12e8ffd95e08077c41104ea66246975c31351dc669107f7c3b06eb56adc"
+      },
+      "abi": "short",
+      "interface": "--config-raw JSON accepted/decoded/error; exit0 accepted,1 semantic rejection,2 decode failure"
+    },
+    "both_abis": {
+      "short": {
+        "validation": 534,
+        "decoder": 538,
+        "persistence": 827,
+        "setconfig": 1139,
+        "archived_owner": "PASS_EXPECTED_REJECT_MINIMAL_REPAIR",
+        "startup": 68,
+        "consumer": 11
+      },
+      "ordinary": {
+        "validation": 539,
+        "decoder": 538,
+        "persistence": 827,
+        "setconfig": 1139,
+        "archived_owner": "PASS_EXPECTED_REJECT_MINIMAL_REPAIR",
+        "startup": 68,
+        "consumer": 11
+      }
+    },
+    "dependency_count": 209,
+    "compiled_mutants": 16,
+    "identity_negatives": 215,
+    "total_negatives": 231,
+    "raw_interface_controls": 6,
+    "historical_C021_inputs_unchanged": [
+      "tools/check_glyph_gp_config021_persisted_recovery.py",
+      "tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+      "tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+      "tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+      "tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp"
+    ],
+    "all_failure_attempts_retained": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "first_full_dual_ABI_PASS": 8,
+    "expanded_archive_malformed_PASS": 9,
+    "new_target_builds": 0,
+    "hardware_claim": "NONE",
+    "frozen_paths_accessed": "NONE",
+    "device_or_owner_Config_write": "NONE",
+    "limitations": [
+      "Root must commit the exact source and run authenticated CLI on the clean C snapshot.",
+      "Host HSV packing is synthetic; physical FastLED conversion is untested.",
+      "Whole startup uses input_source_count0 host doubles; hardware grouped matrix remains required.",
+      "Archive is historical, not a fresh backup or restoration acceptance.",
+      "Actual COBS and device transport are not exercised.",
+      "Nunchuk NOT_TESTED; root cause UNPROVEN."
+    ],
+    "production_source_or_Git_mutation_by_host_agent": "NONE",
+    "host_repository_edits": "Exactly nine assigned checker/fixture/report/harness paths"
+  },
+  "source_proof_sha256": "87650c6b508e6149f077bba3863b50a548f683de1c5d4fe626c4d3785a90fd47",
+  "original_C_CLI_failure": {
+    "result": "FAIL",
+    "classification": "AFFECTED_TIER2_FINITE_HOST_AUTHENTICATION_DEFECT",
+    "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+    "log": "/private/tmp/glyph-config022/committed-host-proof.log",
+    "log_sha256": "68d1dc73a02431c79ffd5fd77135d6809420c16c57540079d72e964c9632a600",
+    "error": "critical object mode/type",
+    "cause": "immutable candidate checker asserts100644 for preexisting critical executable entries",
+    "product_source_changed": false,
+    "resolution": "Ordinary authorized039 source-free native full-critical mode/blob authentication and immutable-engine replay; preserve originalCLI failure",
+    "target_build": "NOT_RUN",
+    "hardware": "NOT_TESTED"
+  },
+  "offline_preparatory": {
+    "result": "PASS_OFFLINE_PREPARATORY",
+    "original_size": 4201,
+    "original_sha256": "f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480",
+    "corrected_size": 4178,
+    "corrected_sha256": "4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe",
+    "protobuf_version": "6.33.6",
+    "semantic_diff": [
+      {
+        "path": "/rgbConfigs/10/buttonColors/0/color",
+        "operation": "replace",
+        "before": 2282478,
+        "after": 0
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/11",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/12",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/13",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/14",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/15",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/16",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/17",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/18",
+        "operation": "remove",
+        "before": {}
+      },
+      {
+        "path": "/rgbConfigs/10/buttonColors/19",
+        "operation": "remove",
+        "before": {}
+      }
+    ],
+    "signature_negatives": [
+      "missing_block",
+      "count19",
+      "count21",
+      "wrong_first_target",
+      "wrong_tail_button",
+      "wrong_tail_color"
+    ],
+    "original_validator": {
+      "accepted": false,
+      "decoded": true,
+      "error": "Config contains an invalid RGB target"
+    },
+    "corrected_validator": {
+      "accepted": true,
+      "decoded": true,
+      "error": ""
+    },
+    "source_sha256": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8",
+    "archived_sample_only": true,
+    "device_access": false,
+    "exact_candidate_CLI_authentication": "PENDING_COMMITTED_C"
+  },
+  "ordinary039_repair_gate": "Native critical precedence/full238-to243 inventory; preserve existing100755 baseline and immutableC checker/fixture; exactly seven changed100644production paths; finite sourcefree replay authenticates inputs then actualrun_host. Reject all unexpected mode/path/blob/dirty/flag drift. Preserve originalCLI FAIL.",
+  "all238canonical_critical_equal_testedF021": "59033b0d9341c7568b77292f3035347f3853fb84",
+  "other97orders_unchanged": true,
+  "source_free": true,
+  "target_build_performed": false,
+  "device_Config_write_authorized": false
+}
+```
+<!-- gp-config022-handoff-val039-activation:end -->
