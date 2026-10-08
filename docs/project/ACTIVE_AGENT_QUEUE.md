@@ -1,8 +1,8 @@
 # Active Agent Queue
 
-## Current GP-CONFIG-022 owner-resolved activation
+## Current GP-VAL-039 DONE and preserved GP-CONFIG-022 continuation
 
-GP-CONFIG-022 exact C `b4e03566ceaa0815df7ba0eef975cf0ac0583622` is preserved for REVIEW, direct parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478`, with eighteen regular changed paths and seven critical production changes. GP-VAL-039 has completed mechanical READY activation through its recorded objective conditions and continues in the same UD029 executor. Both enum-layout host suites and archived minimal-repair/restoration proof passed. The immutable C checker CLI failed on an incorrect blanket non-executable mode assumption; preserve this actual FAIL. Ordinary039 must authenticate unchanged baseline executable modes, the complete238-to243 critical inventory, exact seven-path delta and immutable host replay before strictDONE. All238 canonical critical inputs remain equal acceptedF021. No C replay/rebase, target build or device/Config write; build waits for strict039DONE and behavior merge waits for exactF/artifact humanHEPPASS. Fresh ownerConfig and one grouped eleven-target appearance matrix remain in the normal hardware gate. Other97orders and prior evidence remain unchanged; Nunchuk NOT_TESTED, root cause UNPROVEN.
+GP-VAL-039 is DONE through independently reviewed live source-free integration `f4a466b1b5ca7ea008b66473d64951e84ef18f08` and separate strict DIRECT_ANCESTRY completion. Exact preserved C022 `b4e03566ceaa0815df7ba0eef975cf0ac0583622`, soleB `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478` and raw eighteen-path inventory remain unchanged. Native238-to243critical correspondence, seven production changes, five unchanged executable baseline modes, full protected five bodies, original209input host closure and accepted021 predecessor are authenticated. Actual complete authenticated immutableC host componentPASS149s: bothenumABIs,209inputclosure,231original+723newrejectors and6rawinterfacecontrols. Actual141native+13supplemental phase/identity rejectors and branch/detached positives in bothcontextsPASS. Allfive unchanged full protected mainsPASS in source-freeG and genuineprivate[G,C] composition; actual010 semantics/currentWebSerialguard/new3runner casesPASS. Native17ID command/root contracts and72finite authenticated roots are exact. Fresh representative historical dispatch and preserved unchanged acceptedE proof establish historical transport/observations; repeated native wrapper120TIMEOUTs remain actual and do not become all17PASS. Original clean-C CLI FAIL and all actual timeout/aggregate failures remain explicit; no full aggregate PASS or registered timeout PASS is claimed. All238 canonical critical inputs remain exact acceptedF021. The same UD029 executor now continues preserved022 through genuineM[039DONE,C], committed emptyF, exact Mk6 build/custody/review and hardware handoff. New READY runway is zero; this unfinished authorized product continuation requires no Planner, Curator, new order or full chat. One ordinary governance successor is used; exceptional repair count remains zero. Fresh owner Config compatibility preparation and one grouped eleven-target block11 appearance matrix, including LF1black, remain in the normal exactF/artifact human hardware gate. No device/Config write or firmware merge is authorized here. All98 other queue objects and earlier evidence remain unchanged. The initial2026-10-02 adoption recorded RUNWAY_OK; current marker records PLANNING_REQUIRED. Nunchuk NOT_TESTED; root cause UNPROVEN.
 
 ## Current GP-CONFIG-021 exact hardware evidence
 
@@ -165,17 +165,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 4,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -1166,7 +1167,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-VAL-039",
       "title": "C022 RGB candidate governance",
-      "status": "READY",
+      "status": "DONE",
       "branch": "codex/gp-val-039-release-safety",
       "objective": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
@@ -1204,7 +1205,45 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "NOT_APPLICABLE",
       "rollback_recovery": "Preserve accepted owner Config, exact accepted rollback UF2 and all failed/historical candidates/evidence. Existing approved manual recovery only; no write/flashing automation. Preserve rejected stored bytes; no automatic overwrite. Stop if safe required physical route is unavailable.",
       "status_documentation_updates": "Publish exact candidate phases and predicted gate; source-free canonical pending/result/DONE snapshots. Named successor DONE mechanically resumes preserved candidate. Strict completion follows reviewed live integration; keep hardware and host evidence separate.",
-      "done_evidence": "Exact candidate/base/path/mode/source conformance, required focused and clean aggregate proofs, fresh independent review, reviewed live integration and later strict completion correspondence. H3 additionally exact built F and preserved artifact processor-accepted hardware PASS, no evidence gaps.",
+      "done_evidence": {
+        "schema_name": "glyph_done_completion_evidence",
+        "schema_version": 1,
+        "mode": "DIRECT_ANCESTRY",
+        "implementation_base_sha": "3d4e592b9882f6ad57b883292e1fd1d5cafbcd62",
+        "reviewed_implementation_sha": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+        "prior_canonical_integration_sha": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+        "reviewed_changed_paths": [
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+          "docs/runtime_config/fixtures/gp_val039_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val039_c022_consumer_replay.json",
+          "docs/runtime_config/fixtures/gp_val039_c022_transition.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+          "docs/runtime_config/gp_config022_rgb_target_validation.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_c022_proof_replay.py",
+          "tools/check_glyph_gp_config022_rgb_target_validation.py",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+          "tools/glyph_c022_campaign_transition.py",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_checker_context.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/prepare_glyph_gp_config022_compatibility.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_c022_campaign_transition.py"
+        ],
+        "independent_review_provenance": "Fresh independent c021_integration_review APPROVED exact f4a466b1b5ca7ea008b66473d64951e84ef18f08; review SHA256 52d9c76ae5ad47826f90c8f6ab1dfd64a051c4ccf1e3059bf469c4b756553b93. Exact27source-free paths,238critical equality to acceptedF021, immutableC preservation, fullprotectedfive, native predecessor and finite closed roots verified. Separate strict completion reviewed before publication. Separate postsealed final-attempt classification SHA256 9d5135755e4b9423119f60e69bde868cc24346aa36b78f57e9fd0678f5b97bf8 leaves approval unchanged.",
+        "validation_provenance": "Actual complete authenticated immutableC host componentPASS149s: bothenumABIs,209inputclosure,231original+723newrejectors and6rawinterfacecontrols. Actual141native+13supplemental phase/identity rejectors and branch/detached positives in bothcontextsPASS. Allfive unchanged full protected mainsPASS in source-freeG and genuineprivate[G,C] composition; actual010 semantics/currentWebSerialguard/new3runner casesPASS. Native17ID command/root contracts and72finite authenticated roots are exact. Fresh representative historical dispatch and preserved unchanged acceptedE proof establish historical transport/observations; repeated native wrapper120TIMEOUTs remain actual and do not become all17PASS. Source-free focused12PASS/contextunitFAIL/wholeadversarial120TIMEOUT with nativeMATCH. Direct wholeadversarialFAIL235.852 in byte-exact legacy037 expected-root branch, already missing prior017/021 contracts; nativefullaggregateFAIL first035wrapperCHECKER_TIMEOUT120.009 with original/isolatedMATCH, unchanged300/120limits. Originalclean-C CLI modepredicateFAIL retained. All named concrete Tier1/Tier2 facts independently established; timing/synthetic/catalog-expectation debt remains explicit, no full aggregate/registeredTIMEOUT PASS. ExactC source remains unmerged;targetbuild/hardware pending. Fresh independent review must approve this bounded basis before canonical publication. Finalattemptindex SHA256 5c25db340558e67677a8e706070d2d31d2180687f27329cc0cf7f4c35f5e2aa2 preserves11nativeTIMEOUT/1old038syntheticcontextFAIL/6unavailablecleanupEPERM records, freshbutton012 andKBD001 componentPASS, button020TIMEOUT,13NOT_RUN afterfocusedstop; noall17PASS orcleanup/orphanabsence claim. Old038 exactE test incorrectly expectsBASELINE afteralreadyacceptedC021; nativeACCEPTED_TRANSITION is correct. Independent bounded classification finds no current safety contradiction; original sealed basis/index unchanged."
+      },
       "stop_conditions": [
         "Unexpected source/policy/architecture/validation dependence returns CURATION_REQUIRED; missing objective prerequisite stays WAITING; do not execute another new order in this invocation.",
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
@@ -8280,11 +8319,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-VAL-039"],"immediate_ready":1,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":4,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-VAL-039; Immediate Ready: 1; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
+Ready IDs: none; Immediate Ready: 0; Recorded Preauthorized: 4; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -31018,3 +31057,951 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config022-handoff-val039-activation:end -->
+
+
+## GP-VAL-039 source-free implementation and strict completion
+
+<!-- gp-val039-completion:start -->
+```json
+{
+  "schema_version": 1,
+  "work_order": "GP-VAL-039",
+  "reviewed_live_integration": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+  "implementation_base": "3d4e592b9882f6ad57b883292e1fd1d5cafbcd62",
+  "independent_review_sha256": "52d9c76ae5ad47826f90c8f6ab1dfd64a051c4ccf1e3059bf469c4b756553b93",
+  "independent_review": {
+    "schema_name": "glyph_gp_val039_independent_exact_G_review",
+    "schema_version": 1,
+    "reviewed_at_utc": "2026-10-08T13:00:45.412451+00:00",
+    "reviewed_sha": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+    "reviewed_tree": "3db1b1667f905c01f85343916f576c94b46a138d",
+    "direct_parent": "3d4e592b9882f6ad57b883292e1fd1d5cafbcd62",
+    "verdict": "APPROVED",
+    "approval_scope": "Exact source-free GP-VAL-039 implementation G and its canonical publication by the sole root publisher. Separate strict-DONE review follows reviewed live integration.",
+    "blocking_findings": [],
+    "conclusion": "No concrete Tier-1 or directly affected Tier-2 contradiction found. The bounded current source/validation facts are established independently of incomplete broad framework execution. Further repeated historical latency runs are not required for this source-free decision.",
+    "validation_basis": {
+      "path": "/private/tmp/glyph-config022/039-final-validation-basis.json",
+      "sha256": "dea382661ad2102062c932532ab01f7c8351d10b6dbce920ce6b6329dc5e264c",
+      "evidence": {
+        "frozen_G": {
+          "path": "/private/tmp/glyph-config022/039-G-frozen-inventory.json",
+          "sha256": "fee9d554573134efc646c679543a184b108180ea2a4fc4236a02a0b2a33e8eb8"
+        },
+        "source_and_phase_matrix": {
+          "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-source-matrix-conformance.json",
+          "sha256": "ba4982f537062cef34718688a5ef4a2520faa3ef5b0104e64f583b46f2998208"
+        },
+        "full141_controls": {
+          "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-transition-tests.json",
+          "sha256": "3cad365abbcd6137b393fb8252fedd12366d19899f410e9acecd5d58bf7899cd"
+        },
+        "supplemental13_controls": {
+          "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-supplemental-matrix.json",
+          "sha256": "2479b8b5a537cb09fd7816eb61f07ae0d8bc40bcb364a2835c19563023ea7375"
+        },
+        "candidate_identity_positives": {
+          "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-candidate-identity-positives.json",
+          "sha256": "b5d5d0a7ba8bd6b6d6d5070f7d1dd74b5c02cfd78414cbf0688306a4bc6480a5"
+        },
+        "authenticated_current_component": {
+          "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-current-component/authenticated-current-component.json",
+          "sha256": "964041bba655b5c0377dd8c97ed0bcdef3167bc53e95590196ad97cbe5e2bfea"
+        },
+        "source_free_focused": {
+          "path": "/private/tmp/glyph-config022/039-frozen-validation/result.json",
+          "sha256": "3e00dba18b965f91aa443074683cadcd9d1f449098f87ff1417b35f4ecc90e46"
+        },
+        "finite_runner_current_guard": {
+          "path": "/private/tmp/glyph-config022/039-frozen-validation/finite-runner-guard-result.json",
+          "sha256": "6c2fffb442015875aeb7865785ad8ac5b1d72e4fedc9bb8bdb63846b980847c5"
+        },
+        "genuine_composition": {
+          "path": "/private/tmp/glyph-config022/039-private-composition-inventory.json",
+          "sha256": "bfd3629fda863d591b5eb2fc9bc42db0547acfc3a8dee5e139e59b3826097bbb"
+        },
+        "composed_five_full_mains": {
+          "path": "/private/tmp/glyph-config022/039-composed-full-mains/result.json",
+          "sha256": "01cbf28ac9d75477002ec67db95b8135853c01645b989e90bdc41fa52961b817"
+        },
+        "full_native_aggregate": {
+          "path": "/private/tmp/glyph-config022/039-full-aggregate/record.json",
+          "sha256": "35bd1b091367d19f71eb087c366176822aa478a94d1cb2b4df133484adcaf3ff"
+        },
+        "direct_aggregate_unit_fail": {
+          "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-aggregate-adversarial-direct.json",
+          "sha256": "bc2c55647177dc77aa9b26a3bfa548cb64553ca3bcb2cb963daae34d568d5b60"
+        },
+        "historical_attempts_and_preserved_facts": {
+          "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-validation-status-index.json",
+          "sha256": "a1435a2849b8a7ff47aa510d6b5387339fb36b89cf2b5b283cda8d25180246d6"
+        },
+        "original_C_CLI_fail": {
+          "path": "/private/tmp/glyph-config022/022-committed-host-cli-failure.json",
+          "sha256": "eb6d24d623ce506b88b68d8838f28644474cac61f5e24790833a8f7416efcad3"
+        },
+        "prior_accepted_E_historical_facts": {
+          "path": "/private/tmp/glyph-config021/021-integration-focused-validation.json",
+          "sha256": "0371c75d09cdbb624e868c2417c1819aad05775dad0d38bf224a40958287245f"
+        }
+      }
+    },
+    "independent_observations": {
+      "inventory": {
+        "changed_paths": 27,
+        "all_changed_modes": "100644 blob",
+        "raw_inventory_sha256": "239b95bee6a1a636e49f71001d34c7bc43c61728851466ba375094b41cc9f8a6",
+        "clean_HEAD_index_worktree": true,
+        "source_free_critical_count": 238,
+        "critical_mode_blob_equal_tested_F021": "59033b0d9341c7568b77292f3035347f3853fb84",
+        "queue_byte_exact_H": true
+      },
+      "protected_whole_checker_sha256": {
+        "tools/check_glyph_generated_source_owned_generator_contract.py": "3635a92b16aa922fd295e6b7c8e2d71a909f8d6be76bcd7ee1f707caf82d8cd0",
+        "tools/check_glyph_generated_source_owned_artifact_install.py": "187cf3390f5f90679593e50b79d48ba0391e7f11e92c1aaecaac5cf95d32dd85",
+        "tools/check_glyph_coordinate_native_runtime_profile_contract.py": "02891b27f43e675c6291ee50c4ee4ffbd597e2bef3199fd6590190fabde9d8b0",
+        "tools/check_glyph_docs_agent_surface.py": "3982115c3f941be8867f1d1f9da81b2bed2188a857d79444c177ee77a8aac95b",
+        "tools/check_glyph_generated_source_owned_baseline_artifact.py": "6730f524e46e0399fc1ea2a33d860d2260097c4e142091a499b44c0accfe8f27"
+      },
+      "C_preservation": {
+        "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+        "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+        "tree": "6f4e4610798c12e49b99b46a974d51c38e68b478",
+        "raw_inventory_sha256": "b5e8dbf5df3c3ec8fd5931a23606e3f192c7857c32634f10b126f1e1e0e15d38",
+        "paths": 18,
+        "production_paths": 7,
+        "host_paths_exact_C_in_G": 11,
+        "critical_count": 243,
+        "baseline_critical_unchanged": 236,
+        "unchanged_executable_baseline_inputs": 5,
+        "original_C_standalone_CLI": "ACTUAL_FAIL_RETAINED; new native039 guard is a separate proof"
+      },
+      "prior_accepted_chain": "Accepted020/014/017/021 source, strict completion, hardware metadata/catalog and C021 module/test/replay remain authenticated and immutable. G has BASELINE phase with accepted021 predecessor; empty022 catalog grants no acceptance.",
+      "scope_and_integrity": "Critical precedence retained; exact finite metadata paths only. Stage/live/blob/mode, ignored critical, index flags, symlink/gitlink and dirty/unknown-path negatives fail closed. Five protected checker whole bodies remain exact.",
+      "object_closure": {
+        "actual_selected_current_C022_catalog": "PASS",
+        "authenticated_phase": "BASELINE",
+        "authenticated_root_count": 72,
+        "arbitrary_refs": {},
+        "independent_elapsed_seconds": 28.9189806249924,
+        "equality": "campaign.ROOTS union actual authenticated object_roots; includes exact C,E,H",
+        "routes": "17 exact historical checker IDs /16 unique lanes plus mandatory current C022/default and039 lifecycle; immutable original bodies and fixture roots authenticated"
+      },
+      "private_genuine_composition": {
+        "commit": "3c85bf78230489be9e17e73c578ee9f701368029",
+        "parents": [
+          "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+          "b4e03566ceaa0815df7ba0eef975cf0ac0583622"
+        ],
+        "tree": "e0fa4a977560cc2593558ac5e7021e7d7167a3ea",
+        "exact_changed_paths_from_G": 7,
+        "critical_243_equal_C": true,
+        "clean": true,
+        "actual_five_full_mains": "PASS; logs/hashes checked; same five full mains PASS in source-free G",
+        "strict039_DONE": "NOT_CLAIMED",
+        "build": "NOT_RUN"
+      },
+      "actual_current_component": {
+        "execution_sha256": "0a9b05600a67cd70450d8924836671b5e60ea7be03e4e6ca699eb5db587bffcd",
+        "complete_recorded_invariants_checked": true,
+        "MMD_original_pins": 209,
+        "original_C022_negatives": 231,
+        "new039_guard_negatives": 723,
+        "raw_interface_controls": 6,
+        "raw_binary_hashes": "BOTH_MATCH",
+        "ABIs": "short and ordinary",
+        "suites": "pure534/539; decoder538; checkedLoad827; SET1139+1; startup68; consumer11 each ABI",
+        "default_delta": "Only count20->11 and LF1color0; other12blocks/unrelated source byte-exact; all60 static slots/all76pixels retained in host proof. Physical appearance unclaimed.",
+        "native_before_after": "MATCH",
+        "full_authentication_before_after": "PASS",
+        "direct_component_duration_seconds": 148.3699977499782
+      },
+      "finite_negative_and_phase_matrix": {
+        "independent_original_fixture_and_723_guard_negatives": "PASS",
+        "full_native_transition_test": "141 rejection controls PASS;154.624s direct execution",
+        "supplemental": "13 additional named negative categories PASS, plus12 repeated native phase controls; real guard/processor/lifecycle functions on synthetic private graphs",
+        "identity_positives": "Renamed and detached actual public authentication PASS in source-free and candidate contexts",
+        "hardware_records": "Partial/mismatched/reordered/old010/C-for-F substitutions rejected; synthetic PASS fixtures do not establish physical acceptance"
+      },
+      "focused_runtime_interfaces": "Actual current WebSerial/device-write prohibition guard PASS; three new039 typed-command, exact-root, malformed-root/catalog-self-authority/inert-dispatch cases PASS;010 eight semantics and28-table/X1 correspondence PASS.",
+      "historical_transport": "Fresh immutable E button012 command exit0: original012 main replay plus actual accepted-C021 semantic1077/1173, Persistence326, SET868+1, startup40, MMD194, RAWGET11+2/name20/SETtransaction25/keyboard-custom2. Consumer-lane C021 negatives disabled and not claimed; original frozen negative proof remains separate. Preparatory E raw_get and preserved accepted E historical results remain separately attributed.",
+      "fresh_live_read_only_verification": {
+        "ordinary": "DNS failure, inconclusive",
+        "same_network_enabled_retry": "PASS",
+        "configurator": "3d4e592b9882f6ad57b883292e1fd1d5cafbcd62",
+        "codex/gp-config-022-release-safety": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+        "credentials_or_refs_mutated": false
+      }
+    },
+    "affected_Tier2_reasoning": [
+      "Only new pure validation paths, callback installation and the approved two-line default differ in production. Native critical inventory and original209 dependency pins bind the unchanged decoder/transaction/load/menu/KBD/USB/rebinding/mask/NeoPixel bodies.",
+      "Both-ABI current actual code separately proves new acceptance/refusal, prior valid behavior, save/publication ordering, checked load, startup and RGB/default equivalence. No old historical unsafe result is relabelled as repaired source.",
+      "Changed governance interfaces are exercised through both-context five full mains, actual current guard, actual finite root comparison, exact typed route/manifest controls and native phase/negative matrix.",
+      "Repeated execution of the same unchanged accepted-C021 matrix through all historical wrappers adds performance cost without establishing an additional named safety fact. Fresh representative transport plus immutable accepted historical evidence and source-backed unchanged-body proof suffice for this bounded Revision3 decision."
+    ],
+    "retained_failures_and_framework_debt": [
+      "Original exact C standalone CLI FAIL: blanket100644 critical predicate and omitted exact critical tool. Its bytes/results remain unchanged; no standalone CLI PASS claimed.",
+      "Native currentC022/default CHECKER_TIMEOUT120.008988 retained. Separate full authenticated component PASS148.369998 is not registered route PASS.",
+      "Full native lifecycle direct PASS154.624 exceeds unchanged checker120 limit; this is not a registered120 PASS.",
+      "Source-free focused overallFAIL:12PASS, contextunitFAIL and whole aggregate-adversarial INCOMPLETE_TIMEOUT120.005; native fingerprintMATCH.",
+      "Context synthetic constructedADOPTION copies current dispatcher without its C022 module; prior038 evidence records the same missingC021 closure defect. Actual current guards/context consumers pass; no whole-context PASS claimed.",
+      "Direct whole aggregate-adversarial actualFAIL235.852: byte-exact legacy037 expected-root branch recognizes only020/014 and excludes authenticated later roots; same mismatch structurally predates039. New finite039 cases and independent actual72-root comparison pass; no whole-unit PASS claimed.",
+      "Actual full native aggregateFAIL245.956, first035 wrapper CHECKER_TIMEOUT, one outcome, original/isolated/outer preservationMATCH; aggregate300/checker120 unchanged.",
+      "Frozen historical index a1435a28... records native TIMEOUT, attempted-no-completed-record, NOT_YET_RUN and incomplete batch honestly. No all17 registered consumers PASS claim.",
+      "Secondary historical raw_get runner process-group inspection raised PermissionError EPERM at os.killpg(pid,0). Its output and cleanup are unproven; not counted as completed proof or semantic failure. In-flight/unstarted historical work remains recorded, not fabricated.",
+      "Prior accepted-C021 combined011 TIMEOUTs and historical aggregate/synthetic debt remain unchanged. No aggregate/full framework repair or broad waiver follows."
+    ],
+    "remaining_separate_gates": [
+      "Publish source-free G under root sole-writer authority, verify live exact integration, then separately review strict039DONE with exact completion correspondence.",
+      "Only after strict039DONE may real composition M[D,C] and empty child F establish build identity; preserve exact C and C-to-F critical equality.",
+      "Exact target build/artifact/custody and fresh independent build review remain required. No target build performed by reviewer.",
+      "Normal C022 hardware gate requires fresh owner raw Config packet, byte-exact backup/roundtrip, bounded minimal compatibility artifact/full diff/independent review/restoration preparation, plus exact F/artifact human HEP PASS and grouped all11-target block11 appearance including LF1black. No device/Config write granted here.",
+      "Firmware source integration requires actual accepted exactF/artifact evidence, source-free reviewed R/processor E, genuine[E,F] merge and immutable accepted catalog; this review grants none of those later acceptances."
+    ],
+    "limits": {
+      "source_free_publication_only": true,
+      "strict_DONE_approval_inherited": false,
+      "all_registered_routes_PASS": false,
+      "full_aggregate_PASS": false,
+      "hardware": "NOT_CLAIMED",
+      "target_build": "NOT_RUN",
+      "device_or_Config_write": "NOT_RUN",
+      "Nunchuk": "NOT_TESTED",
+      "root_cause": "UNPROVEN",
+      "forbidden_paths_accessed": false,
+      "primary_or_repository_Git_mutation": false,
+      "external_messages_or_publication": false,
+      "review_only_outputs": [
+        "/private/tmp/glyph-config022/039-G-independent-review.json"
+      ]
+    }
+  },
+  "validation_basis": {
+    "schema_version": 1,
+    "kind": "GP_VAL039_FOCUSED_REVISION3_FINAL_BASIS",
+    "reviewed_sha": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+    "captured_at": "2026-10-08T12:58:40.090238+00:00",
+    "concrete_required_facts_complete": true,
+    "summary_validation": "Actual complete authenticated immutableC host componentPASS149s: bothenumABIs,209inputclosure,231original+723newrejectors and6rawinterfacecontrols. Actual141native+13supplemental phase/identity rejectors and branch/detached positives in bothcontextsPASS. Allfive unchanged full protected mainsPASS in source-freeG and genuineprivate[G,C] composition; actual010 semantics/currentWebSerialguard/new3runner casesPASS. Native17ID command/root contracts and72finite authenticated roots are exact. Fresh representative historical dispatch and preserved unchanged acceptedE proof establish historical transport/observations; repeated native wrapper120TIMEOUTs remain actual and do not become all17PASS.",
+    "completion_validation_provenance": "Actual complete authenticated immutableC host componentPASS149s: bothenumABIs,209inputclosure,231original+723newrejectors and6rawinterfacecontrols. Actual141native+13supplemental phase/identity rejectors and branch/detached positives in bothcontextsPASS. Allfive unchanged full protected mainsPASS in source-freeG and genuineprivate[G,C] composition; actual010 semantics/currentWebSerialguard/new3runner casesPASS. Native17ID command/root contracts and72finite authenticated roots are exact. Fresh representative historical dispatch and preserved unchanged acceptedE proof establish historical transport/observations; repeated native wrapper120TIMEOUTs remain actual and do not become all17PASS. Source-free focused12PASS/contextunitFAIL/wholeadversarial120TIMEOUT with nativeMATCH. Direct wholeadversarialFAIL235.852 in byte-exact legacy037 expected-root branch, already missing prior017/021 contracts; nativefullaggregateFAIL first035wrapperCHECKER_TIMEOUT120.009 with original/isolatedMATCH, unchanged300/120limits. Originalclean-C CLI modepredicateFAIL retained. All named concrete Tier1/Tier2 facts independently established; timing/synthetic/catalog-expectation debt remains explicit, no full aggregate/registeredTIMEOUT PASS. ExactC source remains unmerged;targetbuild/hardware pending. Fresh independent review must approve this bounded basis before canonical publication.",
+    "evidence": {
+      "frozen_G": {
+        "path": "/private/tmp/glyph-config022/039-G-frozen-inventory.json",
+        "sha256": "fee9d554573134efc646c679543a184b108180ea2a4fc4236a02a0b2a33e8eb8"
+      },
+      "source_and_phase_matrix": {
+        "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-source-matrix-conformance.json",
+        "sha256": "ba4982f537062cef34718688a5ef4a2520faa3ef5b0104e64f583b46f2998208"
+      },
+      "full141_controls": {
+        "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-transition-tests.json",
+        "sha256": "3cad365abbcd6137b393fb8252fedd12366d19899f410e9acecd5d58bf7899cd"
+      },
+      "supplemental13_controls": {
+        "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-supplemental-matrix.json",
+        "sha256": "2479b8b5a537cb09fd7816eb61f07ae0d8bc40bcb364a2835c19563023ea7375"
+      },
+      "candidate_identity_positives": {
+        "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-candidate-identity-positives.json",
+        "sha256": "b5d5d0a7ba8bd6b6d6d5070f7d1dd74b5c02cfd78414cbf0688306a4bc6480a5"
+      },
+      "authenticated_current_component": {
+        "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-current-component/authenticated-current-component.json",
+        "sha256": "964041bba655b5c0377dd8c97ed0bcdef3167bc53e95590196ad97cbe5e2bfea"
+      },
+      "source_free_focused": {
+        "path": "/private/tmp/glyph-config022/039-frozen-validation/result.json",
+        "sha256": "3e00dba18b965f91aa443074683cadcd9d1f449098f87ff1417b35f4ecc90e46"
+      },
+      "finite_runner_current_guard": {
+        "path": "/private/tmp/glyph-config022/039-frozen-validation/finite-runner-guard-result.json",
+        "sha256": "6c2fffb442015875aeb7865785ad8ac5b1d72e4fedc9bb8bdb63846b980847c5"
+      },
+      "genuine_composition": {
+        "path": "/private/tmp/glyph-config022/039-private-composition-inventory.json",
+        "sha256": "bfd3629fda863d591b5eb2fc9bc42db0547acfc3a8dee5e139e59b3826097bbb"
+      },
+      "composed_five_full_mains": {
+        "path": "/private/tmp/glyph-config022/039-composed-full-mains/result.json",
+        "sha256": "01cbf28ac9d75477002ec67db95b8135853c01645b989e90bdc41fa52961b817"
+      },
+      "full_native_aggregate": {
+        "path": "/private/tmp/glyph-config022/039-full-aggregate/record.json",
+        "sha256": "35bd1b091367d19f71eb087c366176822aa478a94d1cb2b4df133484adcaf3ff"
+      },
+      "direct_aggregate_unit_fail": {
+        "path": "/private/tmp/glyph-config022/039-source-implementation/committed-G-aggregate-adversarial-direct.json",
+        "sha256": "bc2c55647177dc77aa9b26a3bfa548cb64553ca3bcb2cb963daae34d568d5b60"
+      },
+      "historical_attempts_and_preserved_facts": {
+        "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-validation-status-index.json",
+        "sha256": "a1435a2849b8a7ff47aa510d6b5387339fb36b89cf2b5b283cda8d25180246d6"
+      },
+      "original_C_CLI_fail": {
+        "path": "/private/tmp/glyph-config022/022-committed-host-cli-failure.json",
+        "sha256": "eb6d24d623ce506b88b68d8838f28644474cac61f5e24790833a8f7416efcad3"
+      },
+      "prior_accepted_E_historical_facts": {
+        "path": "/private/tmp/glyph-config021/021-integration-focused-validation.json",
+        "sha256": "0371c75d09cdbb624e868c2417c1819aad05775dad0d38bf224a40958287245f"
+      }
+    },
+    "all_registered_routes_PASS": false,
+    "full_aggregate_PASS": false,
+    "source_free_only": true,
+    "target_build": "NOT_RUN",
+    "hardware": "NOT_CLAIMED",
+    "device_Config_write": "NOT_AUTHORIZED",
+    "review": "REQUIRES_FRESH_INDEPENDENT_APPROVAL"
+  },
+  "all98otherorders_unchanged": true,
+  "critical238_equal_tested_F021": true,
+  "preserved_C": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+  "ordinary_successors_used": 1,
+  "exceptional_repairs_used": 0,
+  "prior_summaries": {
+    "docs/AGENT_CONTEXT.md": "GP-CONFIG-022 exact C `b4e03566ceaa0815df7ba0eef975cf0ac0583622` is preserved for REVIEW, direct parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478`, with eighteen regular changed paths and seven critical production changes. GP-VAL-039 has completed mechanical READY activation through its recorded objective conditions and continues in the same UD029 executor. Both enum-layout host suites and archived minimal-repair/restoration proof passed. The immutable C checker CLI failed on an incorrect blanket non-executable mode assumption; preserve this actual FAIL. Ordinary039 must authenticate unchanged baseline executable modes, the complete238-to243 critical inventory, exact seven-path delta and immutable host replay before strictDONE. All238 canonical critical inputs remain equal acceptedF021. No C replay/rebase, target build or device/Config write; build waits for strict039DONE and behavior merge waits for exactF/artifact humanHEPPASS. Fresh ownerConfig and one grouped eleven-target appearance matrix remain in the normal hardware gate. Other97orders and prior evidence remain unchanged; Nunchuk NOT_TESTED, root cause UNPROVEN.\n",
+    "campaign": "GP-CONFIG-021 is DONE after independently reviewed and live-published exact tested-source integration `8e5049e5520ab469b435d7368312d644a6f32a51` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `55e2da3d264dcdb89c6d80fae8bab5629a5a662b` preserves source-free HEP E and tested F ancestry; native038 catalog, all238 critical inputs, immutable protocol/result/evidence and UF21d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/802304bytes correspond exactly. Six physical rowsPASS; display_failure_refusal remains HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE under verified owner directive, with no physical display PASS. 20 corrected actual checksPASS plus retained exactI passes; combinedmodifier011TIMEOUT100 twice remains actualFAIL, its frozen011eightPASS and separate actual014dual30PASS supply concrete component proof. Overall focusedFAIL retained. Seven raw legacy source diagnostics and repaired navigationFAIL retained; native ACCEPTED_TRANSITION and canonical fingerprint MATCH; fresh independent integration review APPROVED. Historical aggregate FAIL/TIMEOUT and HEP synthetic/context failures remain explicit framework debt; no full aggregate PASS, C021 rebuild/retest/device action. All98 other orders and earlier acceptance remain unchanged. Original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 restored exact immediate/postreboot; physical controller remains accepted017. Same persistent H3 executor evaluated existing022 source conditions and found a genuine CURATION_REQUIRED stop: RGB block11 declares20 populated entries but initializes11, leaving nine counted zero targets also present in owner Config. Required022 zero rejection would refuse source defaults before stored load; defaults are required unchanged. No022 activation or implementation. A default/count and stored-Config compatibility decision is required. Removing zeros makes LF1 cyan; an explicit LF1color0 alternative preserves source-inferred black. Both proposals remain unapplied. No new Planner/Curator/order/fullchat created. Owner test environment remains frozen. The initial2026-10-02 adoption recorded RUNWAY_OK; current machine-derived marker records PLANNING_REQUIRED. NunchukNOT_TESTED; rootcauseUNPROVEN.",
+    "docs/CURRENT_STATE.md": "**Current Agentic Operating State:** GP-CONFIG-021 remains DONE at `bbf70a120403dadbac66f218dc01e2a200812128`, with six physical PASS rows and display HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE. GP-CONFIG-022 exact C `b4e03566ceaa0815df7ba0eef975cf0ac0583622` is preserved for REVIEW, direct parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478`, with eighteen regular changed paths and seven critical production changes. GP-VAL-039 has completed mechanical READY activation through its recorded objective conditions and continues in the same UD029 executor. Both enum-layout host suites and archived minimal-repair/restoration proof passed. The immutable C checker CLI failed on an incorrect blanket non-executable mode assumption; preserve this actual FAIL. Ordinary039 must authenticate unchanged baseline executable modes, the complete238-to243 critical inventory, exact seven-path delta and immutable host replay before strictDONE. All238 canonical critical inputs remain equal acceptedF021. No C replay/rebase, target build or device/Config write; build waits for strict039DONE and behavior merge waits for exactF/artifact humanHEPPASS. Fresh ownerConfig and one grouped eleven-target appearance matrix remain in the normal hardware gate. Other97orders and prior evidence remain unchanged; Nunchuk NOT_TESTED, root cause UNPROVEN. The 2026-10-02 RUNWAY_OK label remains historical; current authorization is given by the current-runway summary.\n",
+    "docs/ROADMAP.md": "GP-CONFIG-022 exact C `b4e03566ceaa0815df7ba0eef975cf0ac0583622` is preserved for REVIEW, direct parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478`, with eighteen regular changed paths and seven critical production changes. GP-VAL-039 has completed mechanical READY activation through its recorded objective conditions and continues in the same UD029 executor. Both enum-layout host suites and archived minimal-repair/restoration proof passed. The immutable C checker CLI failed on an incorrect blanket non-executable mode assumption; preserve this actual FAIL. Ordinary039 must authenticate unchanged baseline executable modes, the complete238-to243 critical inventory, exact seven-path delta and immutable host replay before strictDONE. All238 canonical critical inputs remain equal acceptedF021. No C replay/rebase, target build or device/Config write; build waits for strict039DONE and behavior merge waits for exactF/artifact humanHEPPASS. Fresh ownerConfig and one grouped eleven-target appearance matrix remain in the normal hardware gate. Other97orders and prior evidence remain unchanged; Nunchuk NOT_TESTED, root cause UNPROVEN.\n",
+    "docs/project/ACTIVE_AGENT_QUEUE.md": "GP-CONFIG-022 exact C `b4e03566ceaa0815df7ba0eef975cf0ac0583622` is preserved for REVIEW, direct parent `14400b3ff75b5d017a9e7cf8e6d8be785c342187`, tree `6f4e4610798c12e49b99b46a974d51c38e68b478`, with eighteen regular changed paths and seven critical production changes. GP-VAL-039 has completed mechanical READY activation through its recorded objective conditions and continues in the same UD029 executor. Both enum-layout host suites and archived minimal-repair/restoration proof passed. The immutable C checker CLI failed on an incorrect blanket non-executable mode assumption; preserve this actual FAIL. Ordinary039 must authenticate unchanged baseline executable modes, the complete238-to243 critical inventory, exact seven-path delta and immutable host replay before strictDONE. All238 canonical critical inputs remain equal acceptedF021. No C replay/rebase, target build or device/Config write; build waits for strict039DONE and behavior merge waits for exactF/artifact humanHEPPASS. Fresh ownerConfig and one grouped eleven-target appearance matrix remain in the normal hardware gate. Other97orders and prior evidence remain unchanged; Nunchuk NOT_TESTED, root cause UNPROVEN.\n"
+  },
+  "build": "NOT_RUN",
+  "hardware": "PENDING",
+  "device_config_write": "NOT_AUTHORIZED",
+  "next_step": "Same executor genuineM[039DONE,C], emptyF committed before build, exact target build/custody/review and source-free hardware handoff.",
+  "postsealed_attempts": {
+    "final_index_sha256": "5c25db340558e67677a8e706070d2d31d2180687f27329cc0cf7f4c35f5e2aa2",
+    "final_index": {
+      "classification": "FINAL_FROZEN_G_ACTUAL_ATTEMPTS_INDEX",
+      "initial_frozen_index": {
+        "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-validation-status-index.json",
+        "sha256": "a1435a2849b8a7ff47aa510d6b5387339fb36b89cf2b5b283cda8d25180246d6"
+      },
+      "recorded_utc": "2026-10-08T13:00:50Z",
+      "governance_tested": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+      "current_head": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+      "native_batch": "ENDED_WITH_RUNNER_EPERM_INCOMPLETE_RECORDS",
+      "native_results": [
+        {
+          "id": "gp_val035_c017_transition",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "transition035"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_val035_c017_transition/result.json",
+          "sha256": "1e44f8e112af6f94873a944c59c7709a7b58da46a5f9c8597a010ccb12786394"
+        },
+        {
+          "id": "gp_config019_usb_name_selection",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "usb019"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_config019_usb_name_selection/result.json",
+          "sha256": "0fe62cf15daa666a939062772d7e8929f6e59588724b54a60113543647014b30"
+        },
+        {
+          "id": "gp_kbd_001_keyboard_pipeline",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "kbd001"
+          ],
+          "outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EXCEPTION"
+        },
+        {
+          "id": "gp_config014_modifier_capacity",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "modifier014"
+          ],
+          "outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EXCEPTION"
+        },
+        {
+          "id": "gp_config_012_button_mask_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "button012"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_config_012_button_mask_characterization/result.json",
+          "sha256": "7706e8f75cbf9b862630b0ff85bf033310bf3acb9c37c2d66072fc68c1c885db"
+        },
+        {
+          "id": "gp_config_013_usb_default_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "usb013"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_config_013_usb_default_characterization/result.json",
+          "sha256": "a7b3ee0e6305bd8a819a71a9f6c56166e2dcbbe101bf619f7450e4e0b1bdc007"
+        },
+        {
+          "id": "gp_config020_button_validation",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "button020"
+          ],
+          "outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EXCEPTION"
+        },
+        {
+          "id": "configurator_setconfig_transaction",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "transaction005"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/configurator_setconfig_transaction/result.json",
+          "sha256": "8998913effe1b9898a8dcc7b2fb78a6bafd740b0a9910cf406f468642b5c71c9"
+        },
+        {
+          "id": "current_config_persistence_recovery_research",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "persistence"
+          ],
+          "outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EXCEPTION"
+        },
+        {
+          "id": "getconfig_raw_load_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "raw_get"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/getconfig_raw_load_characterization/result.json",
+          "sha256": "df4062d8609c9ec6729cd771fbc533c43d845f6345edc50d7a9e0a41f44ef568"
+        },
+        {
+          "id": "neopixel_null_sendreport_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "neopixel016_017"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/neopixel_null_sendreport_characterization/result.json",
+          "sha256": "f409fdef857dc7a52aadcfccb0c5710cc088f5aad986f0eb1d06ab808c48611f"
+        },
+        {
+          "id": "setconfig_runtime_rebinding_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "rebind008"
+          ],
+          "outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EXCEPTION"
+        },
+        {
+          "id": "config_menu_invalid_state_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "menu009"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/config_menu_invalid_state_characterization/result.json",
+          "sha256": "0fae8ad42a7434aaa894e7dc96f59d2803d27c414110421e0d7b77f44fd8af47"
+        },
+        {
+          "id": "custom_modifier_cache_characterization",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "modifier011"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/custom_modifier_cache_characterization/result.json",
+          "sha256": "5f7c6a11f5967d380e2b31a5082fb2a74e10302487bf4d438660eed87825ecbf"
+        },
+        {
+          "id": "gp_config017_neopixel_repaired_current",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "neopixel016_017"
+          ],
+          "outcome": "TIMEOUT",
+          "identical_command_alias": "neopixel_null_sendreport_characterization",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/neopixel_null_sendreport_characterization/result.json"
+        },
+        {
+          "id": "gp_config021_persisted_recovery",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "recovery021"
+          ],
+          "outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EXCEPTION"
+        },
+        {
+          "id": "gp_val038_c021_transition",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py",
+            "--consumer",
+            "transition038"
+          ],
+          "outcome": "FAIL",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_val038_c021_transition/result.json",
+          "sha256": "b4e4174b6237760463e1373391b3e94e1240f8666dcf5878942a2dd35be75a87"
+        },
+        {
+          "id": "gp_config022_rgb_target_validation",
+          "command": [
+            "python3",
+            "tools/check_glyph_c022_proof_replay.py"
+          ],
+          "outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_config022_rgb_target_validation/result.json",
+          "sha256": "0874614089162f1bfae38a73db623a57f0d1d411db1223a5a9cfabe0a7b3f106"
+        }
+      ],
+      "native_before": {
+        "HEAD": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+        "tree": "3db1b1667f905c01f85343916f576c94b46a138d",
+        "status": "",
+        "canonical_fingerprint": "39f9160c67e5bb14312039e53faf79ad86534b4d8bb2b7589cc42ce2b6a8e9b0"
+      },
+      "native_after_fingerprint": "39f9160c67e5bb14312039e53faf79ad86534b4d8bb2b7589cc42ce2b6a8e9b0",
+      "native_fingerprint_unchanged": true,
+      "historical_components": [
+        {
+          "consumer": "button012",
+          "normalized_outcome": "PASS",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/button012/result.json",
+          "sha256": "377e0c6ec58d4577436e77bfea1d63467007109dce291171b7a856ad9885fd6a",
+          "normalization_reason": null
+        },
+        {
+          "consumer": "button020",
+          "normalized_outcome": "TIMEOUT",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/button020/result.json",
+          "sha256": "f9fca642ec55ff6cae919b1e70f378c8d52d1863038255247d8662bcf6c24d18",
+          "normalization_reason": null
+        },
+        {
+          "consumer": "kbd001",
+          "normalized_outcome": "PASS",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/kbd001/result.json",
+          "sha256": "42454f961a264b0d3cada04f360fb1c60202444f675e08740eb06e0eac11ebc8",
+          "normalization_reason": null
+        },
+        {
+          "consumer": "menu009",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/menu009/result.json",
+          "sha256": "0a513a17a1b53ce2dd0329993cb8f827a294af418b6d94f87d56e92646ea5bad",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "modifier011",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/modifier011/result.json",
+          "sha256": "6c3cc5a36a1d9dc54067c0e38caa6773e5d2a793bd80f94b19003b3e5bf04aa2",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "modifier014",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/modifier014/result.json",
+          "sha256": "199680c5b3fa078df7036d526e4f6d671cd191dc6d57c1ba1f86b171b0c5d94d",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "neopixel016_017",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/neopixel016_017/result.json",
+          "sha256": "634431ea8b68e0ef926d0c5ed225199c6493748b924a5a2f23d12522825f0adf",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "original011-eight",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/original011-eight/result.json",
+          "sha256": "d764bacbb6a25a685c5477cdf7ac3a2af94d4d21bfedd1ec48733dc3e0b991bf",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "original014-thirty",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/original014-thirty/result.json",
+          "sha256": "f98569be7fc15d8328451622d9b664da3bfb043ed71a0522ec8b1c9fa1ba40b5",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "persistence",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/persistence/result.json",
+          "sha256": "5ebdfcde09397ba0d6fa6c272ed43eb6158d0c6e412ff3aef408118026d55ce4",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "raw_get",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/raw_get/result.json",
+          "sha256": "96d11e6a57ec59f606b66841d2d984cb25fd981f0afe5bde883b6f8a703baf6b",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "rebind008",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/rebind008/result.json",
+          "sha256": "38bcc22bb22d08e9511344bbddea165eb835598aa14fccab6d4c91a7ec7a18d7",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "recovery021",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/recovery021/result.json",
+          "sha256": "28c6fa9454c2c6a091be0884ee24e7c74fe63337695a493b61b072d8e9d59f96",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "transaction005",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/transaction005/result.json",
+          "sha256": "42e93053e2c05b507c586bf0332ba74b960d53e12d2d7f17cab37f90399cf9c6",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "transition035",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/transition035/result.json",
+          "sha256": "ddd1dabe61afab41973f7415112a86eba4f5c1abc44f683c0c81be050fdf7f94",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "transition038",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/transition038/result.json",
+          "sha256": "603cda744e15d2bc53d814447ac12ea0ec798d5cd17d1b6cd853c7def3ed7875",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "usb013",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/usb013/result.json",
+          "sha256": "745cf0c1380a1dabc4807e5fe37029a044a8d8df976b4b47a5a1c3f385bc4e08",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "usb019",
+          "normalized_outcome": "NOT_RUN",
+          "actual_record": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-component/usb019/result.json",
+          "sha256": "ed54bf6b13eeaa453c2a226b8b0f25a1cfbb2bf16decb3095694471a95c8f16c",
+          "normalization_reason": "Explicit owner-authorized skip marker; no historical command executed"
+        },
+        {
+          "consumer": "raw_get",
+          "normalized_outcome": "ATTEMPTED_RESULT_UNAVAILABLE_RUNNER_EPERM",
+          "output_directory": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-historical-parallel/raw_get"
+        }
+      ],
+      "after_group_authentication": {
+        "phase": "BASELINE",
+        "contract": "c022_rgb_targets",
+        "candidate": "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+        "base": "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+        "predecessor_phase": "ACCEPTED_TRANSITION",
+        "target": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+        "critical_paths": [
+          "HAL/pico/include/comms/NeoPixelBackend.hpp",
+          "HAL/pico/include/core/Persistence.hpp",
+          "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+          "HAL/pico/src/core/Persistence.cpp",
+          "config/glyph/common/src/config.cpp",
+          "include/core/config_button_validation.hpp",
+          "include/core/config_validation.hpp",
+          "include/modes/CustomControllerMode.hpp",
+          "src/core/config_button_validation.cpp",
+          "src/core/config_validation.cpp",
+          "src/modes/CustomControllerMode.cpp"
+        ],
+        "accepted_metadata_paths": [
+          "docs/agent_framework/GP_CONFIG_014_HARDWARE_PROTOCOL.md",
+          "docs/agent_framework/GP_CONFIG_017_HARDWARE_PROTOCOL.md",
+          "docs/agent_framework/GP_CONFIG_020_HARDWARE_PROTOCOL.md",
+          "docs/agent_framework/GP_CONFIG_021_HARDWARE_PROTOCOL.md",
+          "docs/calibration/fixtures/gp_config_014_hardware_evidence.json",
+          "docs/calibration/fixtures/gp_config_017_hardware_evidence.json",
+          "docs/calibration/fixtures/gp_config_020_hardware_evidence.json",
+          "docs/calibration/fixtures/gp_config_021_hardware_evidence.json",
+          "docs/calibration/gp_config_014_hardware_result.md",
+          "docs/calibration/gp_config_017_hardware_result.md",
+          "docs/calibration/gp_config_020_hardware_result.md",
+          "docs/calibration/gp_config_021_hardware_result.md",
+          "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+          "docs/runtime_config/fixtures/gp_val039_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val039_c022_consumer_replay.json",
+          "docs/runtime_config/fixtures/gp_val039_c022_transition.json",
+          "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+          "docs/runtime_config/gp_config022_rgb_target_validation.md",
+          "tools/check_glyph_c022_proof_replay.py",
+          "tools/check_glyph_gp_config022_rgb_target_validation.py",
+          "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+          "tools/glyph_c022_campaign_transition.py",
+          "tools/prepare_glyph_gp_config022_compatibility.py",
+          "tools/test_glyph_c022_campaign_transition.py"
+        ],
+        "object_roots": [
+          "009abb76eda55aabcad22c340693071113c647d2",
+          "040735f6916c7a77924ef53f1b4a873281f2cb7f",
+          "043f29bbc1b5bb4d27e9a58ac7462659e1ee30e1",
+          "0a5dd751c391198140ed146853a69fc825d902c7",
+          "0da68bdab9bf0fed4ed595538bea9aba7d2f49f3",
+          "0eb7f23b9f6b765e717d5e7455faa615695f0ebb",
+          "0efef62a9d4a6254466325eeb0e33184a4848fab",
+          "0f7fe50b3b5f385397a9737bc4c0a50ddda683c8",
+          "12cad41ee8157010c512e4772ff62ffdb68771e6",
+          "14400b3ff75b5d017a9e7cf8e6d8be785c342187",
+          "1a4b9311c8f7ae6d7cbf0a8680cd976499112f03",
+          "1c0ff22646729d26d45eacb4b8322c5baea7de48",
+          "22c639c31ea7006c18a29ec2693c8b18ff688ed4",
+          "256bf44cea71f6d5c87aa1675c8dac9f6b79259f",
+          "3138ade526cabde23a0abedcb94acae8512579d1",
+          "3194fd86c5391f19e598acae7879d6898e3e2072",
+          "32280bc9eadfcd7fbcc19bd8df60576e3b0a49eb",
+          "328c6a1bfb09eb035c2065d0de080283307f34d6",
+          "3369819a34f82d579e21adff125a25de854f1b9b",
+          "38017600deb243b5e281edec6d0d378b997d9e40",
+          "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "3d4e592b9882f6ad57b883292e1fd1d5cafbcd62",
+          "3dac79dac4eefcf832510817e8cb5ecd6a27f219",
+          "3fb0af34ba945641ba8c8be432ea4533f3abee2a",
+          "41ba14202450860340e07bea161f7910c3af922c",
+          "4326e82aa1d5346c71db9af2b778041f2a64eb8b",
+          "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+          "47c087533db46cbde9d78108a6c9bdff34c33bcd",
+          "49528e32849069e87f2729c24be35a21b002b6df",
+          "4fb7c1e9507547774ff9f55cd7788355648d5d1e",
+          "5205ba518d1d5fa19e7584d6c6d5210932091b3e",
+          "55e2da3d264dcdb89c6d80fae8bab5629a5a662b",
+          "59033b0d9341c7568b77292f3035347f3853fb84",
+          "5994f1657e45e0883c6c75468a19be7e3b49a72c",
+          "5a82aa06e116cb8c8580cee87a55f1ea98f406cb",
+          "60614dae8150338160b3440aef6b275bf073fecf",
+          "6a10c02909ba27136a427c0360969770988a4684",
+          "6b36d99b0624047558ed8f9ede83dcaee78e72a9",
+          "6cb59e97ddfdb96830432923ac588a76383153b7",
+          "6eb288e61a0d148530474eef12bd0aa3243e8526",
+          "76cb953cd6bfe5398db11669f3d195175361700c",
+          "7911692afed3e68becefd8e3c90413d4e230ea82",
+          "793c04c333e86c7656b7c3142bbab8a7c4a78b08",
+          "7a2dba85332c90fa2bcc6c06e1205c4745facb92",
+          "7db4f447d5e796367071b7143fa6c9274c70ae5e",
+          "80a22333fd783bcd89ac46bab10c219b3cbaf8f6",
+          "85c1ec43abffb737d080f19190b393c591b862ef",
+          "8b8e45b17a5670bbf983360faf87bdf9d6b50ce2",
+          "8d4f7b9d2fd1ef8b3cb7fc1a324bf7e1cc7f7461",
+          "93b3c9ee8f702886f731714281ce143428724a17",
+          "9c40e734c4e78f9a00e9bd423cfe3021e0f5a5e0",
+          "9ce55e71eff2be6fee366b52434042985de263e6",
+          "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+          "a6b7750e271324972c51915563fe0dc22f941f95",
+          "a7b8758a4d9d353fcfeb0592cc155b4f50f4f358",
+          "a8e249eb210b7cd1e010e27dee8f4c61f8fcb537",
+          "b4e03566ceaa0815df7ba0eef975cf0ac0583622",
+          "b55ee1301733700b7187bd650ec33f09ca3db1c8",
+          "b741bec617478f22b9729e33aa622a60e74cc673",
+          "bce59d34bcb6b4158a5f755293f20102c7a0abb9",
+          "c1a9f0fb9e1d3461d813b31d1643344e3e34d223",
+          "c5635056a44726655e5b14b00f0edd48cb169d07",
+          "c6887115f2e44f0803eb0956ebb574633cec53be",
+          "c7bc3364b51959a47d1fa0ba7b11df2db2c46770",
+          "d2f78cd3a3fa38c60d04dab54236ee630ead379e",
+          "d9ad6132ca0912398839673cc0da24e54a924210",
+          "d9d1e72bb18a5e1dbdf05c829a1d11362893933f",
+          "de36d24422a67e8be7992217856c76e8420a71f6",
+          "e5c455637056ac535347c1176dd41c9a9d84d85a",
+          "f886864c44fd1047e670ae3ff35ebc8b1775b43b",
+          "fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d"
+        ],
+        "source_candidates": {
+          "include/core/config_button_validation.hpp": "3138ade526cabde23a0abedcb94acae8512579d1",
+          "src/core/config_button_validation.cpp": "3138ade526cabde23a0abedcb94acae8512579d1",
+          "HAL/pico/src/comms/ConfiguratorBackend.cpp": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "include/modes/CustomControllerMode.hpp": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+          "src/modes/CustomControllerMode.cpp": "a3664be5354ec4253122eb2e738e70e5dfdb9ccc",
+          "HAL/pico/include/comms/NeoPixelBackend.hpp": "478f438804275f3e0c23e6f36bfd26e34aa343bf",
+          "src/core/config_validation.cpp": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "HAL/pico/include/core/Persistence.hpp": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "HAL/pico/src/core/Persistence.cpp": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "config/glyph/common/src/config.cpp": "a170bd40a51741582913324bfecbc14ce9b3211d",
+          "include/core/config_validation.hpp": "a170bd40a51741582913324bfecbc14ce9b3211d"
+        },
+        "host_overlay_paths": [
+          "docs/runtime_config/fixtures/gp_val039_c022_consumer_replay.json",
+          "tools/check_glyph_c022_proof_replay.py"
+        ],
+        "kbd_host_paths": [
+          "docs/calibration/fixtures/gp_kbd_001_keyboard_pipeline_characterization.json",
+          "docs/calibration/gp_kbd_001_keyboard_pipeline_characterization.md",
+          "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
+          "tools/fixtures/gp_kbd_001_keyboard_pipeline/include/TUKeyboard.hpp",
+          "tools/fixtures/gp_kbd_001_keyboard_pipeline/main.cpp"
+        ],
+        "config019_host_paths": [
+          "docs/calibration/fixtures/gp_config_019_usb_name_selection_characterization.json",
+          "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
+          "tools/check_glyph_gp_config019_usb_name_selection.py",
+          "tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp",
+          "tools/fixtures/gp_config019_usb_name_selection/main.cpp"
+        ],
+        "evidence_commit": null,
+        "changed_paths": [
+          "docs/AGENT_CONTEXT.md",
+          "docs/CURRENT_STATE.md",
+          "docs/ROADMAP.md",
+          "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
+          "docs/project/ACTIVE_AGENT_QUEUE.md",
+          "docs/runtime_config/fixtures/glyph_checker_census.json",
+          "docs/runtime_config/fixtures/gp_config022_rgb_target_validation.json",
+          "docs/runtime_config/fixtures/gp_val039_accepted_transitions.json",
+          "docs/runtime_config/fixtures/gp_val039_c022_consumer_replay.json",
+          "docs/runtime_config/fixtures/gp_val039_c022_transition.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+          "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+          "docs/runtime_config/gp_config022_owner_config_compatibility.md",
+          "docs/runtime_config/gp_config022_rgb_target_validation.md",
+          "docs/runtime_config/runtime_config_validation_health.md",
+          "tools/check_glyph_c022_proof_replay.py",
+          "tools/check_glyph_gp_config022_rgb_target_validation.py",
+          "tools/check_glyph_runtime_config_validation_aggregate.py",
+          "tools/fixtures/gp_config022_rgb_target_validation/consumer_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/decoder_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/persistence_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/setconfig_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/startup_harness.cpp",
+          "tools/fixtures/gp_config022_rgb_target_validation/validation_harness.cpp",
+          "tools/glyph_c022_campaign_transition.py",
+          "tools/glyph_campaign_transition.py",
+          "tools/glyph_checker_context.py",
+          "tools/glyph_hardware_correspondence.py",
+          "tools/prepare_glyph_gp_config022_compatibility.py",
+          "tools/run_glyph_runtime_config_validation.py",
+          "tools/test_glyph_c022_campaign_transition.py"
+        ]
+      },
+      "group_after_authentication_history": "Original enclosing group executed auth-after/fingerprint but report serialization failed on frozenset; this fresh read-only finalization auth is durable. No consumer rerun.",
+      "full_current_component": {
+        "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-current-component/authenticated-current-component.json",
+        "sha256": "964041bba655b5c0377dd8c97ed0bcdef3167bc53e95590196ad97cbe5e2bfea",
+        "result": "PASS_EXTERNAL_COMPONENT_NATIVE_DEFAULT_TIMEOUT_RETAINED"
+      },
+      "all17_registered_consumers_PASS": "NOT_CLAIMED",
+      "retained_terminal_failures": [
+        {
+          "driver": "run-frozen-g-matrix.py",
+          "session": 77114,
+          "tool_chunk": "8abecc",
+          "error": "PermissionError EPERM at runner.group_exists/os.killpg(pid,0) during timeout cleanup; process-group cleanup proof unavailable"
+        },
+        {
+          "driver": "run-historical-parallel-second.py",
+          "session": 54489,
+          "tool_chunk": "14cc05",
+          "error": "PermissionError EPERM at runner.group_exists/os.killpg(pid,0) during raw_get timeout cleanup; no completed result/cleanup proof"
+        },
+        {
+          "driver": "run-authenticated-historical-group.py",
+          "session": 98484,
+          "tool_chunk": "e0a261",
+          "error": "TypeError frozenset critical_paths in JSON report serialization after final auth/fingerprint; raw outcomes preserved"
+        }
+      ],
+      "hardware": "NOT_CLAIMED",
+      "target_build": "NOT_RUN"
+    },
+    "classification_sha256": "9d5135755e4b9423119f60e69bde868cc24346aa36b78f57e9fd0678f5b97bf8",
+    "classification": {
+      "schema_name": "glyph_gp_val039_postsealed_transition038_independent_classification",
+      "schema_version": 1,
+      "reviewed_at_utc": "2026-10-08T13:02:58.961603+00:00",
+      "reviewed_sha": "f4a466b1b5ca7ea008b66473d64951e84ef18f08",
+      "verdict": "APPROVAL_UNCHANGED",
+      "blocking_findings": [],
+      "classification": "FRAMEWORK_VALIDATION_DEBT: immutable historical synthetic lifecycle fixture assumes pre-integration BASELINE while executed at already accepted E",
+      "evidence": {
+        "sealed_G_review": {
+          "path": "/private/tmp/glyph-config022/039-G-independent-review.json",
+          "sha256": "52d9c76ae5ad47826f90c8f6ab1dfd64a051c4ccf1e3059bf469c4b756553b93"
+        },
+        "initial_index": {
+          "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-validation-status-index.json",
+          "sha256": "a1435a2849b8a7ff47aa510d6b5387339fb36b89cf2b5b283cda8d25180246d6"
+        },
+        "separate_final_index": {
+          "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G-validation-status-index.final.json",
+          "sha256": "5c25db340558e67677a8e706070d2d31d2180687f27329cc0cf7f4c35f5e2aa2"
+        },
+        "actual_registered_transition038_result": {
+          "path": "/private/tmp/glyph-config022/039-host-implementation/frozen-G/gp_val038_c021_transition/result.json",
+          "sha256": "b4e4174b6237760463e1373391b3e94e1240f8666dcf5878942a2dd35be75a87",
+          "status": "FAIL",
+          "exit": 1,
+          "duration_seconds": 91.27913366700523,
+          "stdout_sha256": "afa38c64ffcf2ea94a9a806246fc1b63af1b605353c624e91064a107529bc62a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "independent_source_findings": [
+        "Original test tools/test_glyph_c021_campaign_transition.py is byte-exact E/G, SHA57e823da370af57e311d05c01921fd6d69ad624c1ba8a7480e409c83d07e1355.",
+        "At immutable E14400b3f, GP-CONFIG-021 is DONE/PASS, GP-VAL-038 DONE and accepted021 catalog has exactly one record.",
+        "Old main accepts ACCEPTED_TRANSITION as a valid actual current phase at lines283-295. It then snapshots that accepted HEAD into a synthetic phase graph.",
+        "phase_controls lines84-87 changes only GP-VAL-038 DONE evidence and commits; it does not reconstruct original critical source or remove accepted021 evidence/catalog/ancestry. The following unconditional assertion requires BASELINE.",
+        "The actual native lifecycle correctly returns ACCEPTED_TRANSITION, as the failure stdout explicitly records. That conflicts with the old synthetic pre-integration assumption, not with the accepted source/evidence contract.",
+        "The replay wrapper correctly returns FAIL and retains old output; it does not fabricate a historical PASS, erase acceptance or admit C022 source.",
+        "Current C022 phase/source/hardware-substitution facts are independently established by the complete direct039141-control matrix, supplemental13 categories, both-context public identities/fullprotected mains and complete authenticated current C022 host proof cited in the sealed review."
+      ],
+      "decision": "No concrete current Tier-1 or affected Tier-2 safety contradiction is exposed. Retain actual registered transition038 FAIL91.279s and final incomplete/EPERM limitations. Exact source-free G publication approval remains valid; no rerun, rewrite, checker relaxation or new governance successor is required for this bounded decision.",
+      "other_final_receipt_facts": "Final G native/authentication preservation MATCH; button012 and kbd001 external historical components PASS, button020 TIMEOUT,13 other historical lanes NOT_RUN. These are separately attributed, never all17 registered PASS. Runner EPERM/cleanup-unproven and report-serialization failure remain actual limitations.",
+      "limits": {
+        "original_sealed_review_and_initial_index_unchanged": true,
+        "strict_DONE_approval": false,
+        "build": "NOT_RUN",
+        "hardware": "NOT_CLAIMED",
+        "device_Config_write": "NOT_RUN",
+        "repository_mutation": false,
+        "excluded_path_access": false
+      }
+    }
+  }
+}
+```
+<!-- gp-val039-completion:end -->
