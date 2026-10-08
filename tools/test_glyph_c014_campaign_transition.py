@@ -73,7 +73,7 @@ def new_repository(directory):
     # below against independent literal pins, even when freshly committed.
     paths = set(git(ROOT, 'diff', '--name-only', proof.READY).splitlines())
     paths |= set(git(ROOT, 'ls-files', '--others', '--exclude-standard').splitlines())
-    assert paths <= proof.GOVERNANCE_PATHS | proof.CRITICAL
+    assert paths <= proof.GOVERNANCE_PATHS | proof.CRITICAL | proof.VAL045_PATHS
     critical = paths & proof.CRITICAL
     if critical:
         assert critical == proof.CRITICAL
