@@ -1,5 +1,9 @@
 # Active Agent Queue
 
+## Current GP-CONFIG-022 owner-resolved activation
+
+GP-CONFIG-022 is READY on live-verified canonical `bbf70a120403dadbac66f218dc01e2a200812128` after strict021/038 DONE and exact predecessor acceptance. Direct owner resolution approves only block11 count20->11 and explicit LF1color0/black, preserving source-inferred appearance; all11 retained targets and nine structuralzero entries independently inspected before patch. The original zero/unnamed/nonphysical rejection policy remains intact. Existing039 adopts the exact additional defaultpath in its finite critical scope. All238 currentcritical inputs remain equal acceptedF021; this source-free activation applies no firmware patch. Fresh C022 is an output; exactC/conformance precedes039activation, strict039DONE precedes exact committedF/build/custody/review/hardwarehandoff. Prepare bounded offline Config compatibility/recovery proof now; fresh ownerConfig and independent exact artifact review are required at hardwarestage. No device/Config write is authorized. Normal C022hardware includes one grouped all11-target block11appearance matrix with LF1black and ordinary gameplay. Other97orders, prioracceptance and historical failures/debt remain unchanged. No new fullchat/Planner/Curator/order. Nunchuk NOT_TESTED; root cause UNPROVEN.
+
 ## Current GP-CONFIG-021 exact hardware evidence
 
 GP-CONFIG-021 is DONE after independently reviewed and live-published exact tested-source integration `8e5049e5520ab469b435d7368312d644a6f32a51` and separate strict DIRECT_ANCESTRY completion. Genuine source merge `55e2da3d264dcdb89c6d80fae8bab5629a5a662b` preserves source-free HEP E and tested F ancestry; native038 catalog, all238 critical inputs, immutable protocol/result/evidence and UF21d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/802304bytes correspond exactly. Six physical rowsPASS; display_failure_refusal remains HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE under verified owner directive, with no physical display PASS. 20 corrected actual checksPASS plus retained exactI passes; combinedmodifier011TIMEOUT100 twice remains actualFAIL, its frozen011eightPASS and separate actual014dual30PASS supply concrete component proof. Overall focusedFAIL retained. Seven raw legacy source diagnostics and repaired navigationFAIL retained; native ACCEPTED_TRANSITION and canonical fingerprint MATCH; fresh independent integration review APPROVED. Historical aggregate FAIL/TIMEOUT and HEP synthetic/context failures remain explicit framework debt; no full aggregate PASS, C021 rebuild/retest/device action. All98 other orders and earlier acceptance remain unchanged. Original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 restored exact immediate/postreboot; physical controller remains accepted017. Same persistent H3 executor evaluated existing022 source conditions and found a genuine CURATION_REQUIRED stop: RGB block11 declares20 populated entries but initializes11, leaving nine counted zero targets also present in owner Config. Required022 zero rejection would refuse source defaults before stored load; defaults are required unchanged. No022 activation or implementation. A default/count and stored-Config compatibility decision is required. Removing zeros makes LF1 cyan; an explicit LF1color0 alternative preserves source-inferred black. Both proposals remain unapplied. No new Planner/Curator/order/fullchat created. Owner test environment remains frozen. The initial2026-10-02 adoption recorded RUNWAY_OK; current machine-derived marker records PLANNING_REQUIRED. NunchukNOT_TESTED; rootcauseUNPROVEN.
@@ -161,18 +165,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
-    "recorded_preauthorized": 6,
+    "immediate_ready": 1,
+    "recorded_preauthorized": 5,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota."
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -1100,39 +1103,36 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-CONFIG-022",
       "title": "Validate physical RGB targets at both acceptance seams",
-      "status": "PREAUTHORIZED",
+      "status": "READY",
       "branch": "codex/gp-config-022-release-safety",
       "objective": "Owner GLYPH-UD-024 resolves physical RGB semantics. Exact 76-pixel map has 36 named targets, independent of gameplay state. 021 stable callback/private acceptance permits both producer seams with refusal on persisted rejection.",
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H3",
       "behavioral_claim": "Owner GLYPH-UD-024 resolves physical RGB semantics. Exact 76-pixel map has 36 named targets, independent of gameplay state. 021 stable callback/private acceptance permits both producer seams with refusal on persisted rejection.",
-      "scope": "OVERRIDE: 021 recovery is the unconditional operation-refusal architecture in this adopted queue, not default-backed gameplay. Every inherited recovery phrase/row is read under that narrower contract. No display ACK authorizes gameplay.\n\n### GP-CONFIG-022 \u2014 Validate physical RGB targets at both acceptance seams\n\nAdopt only the bounded contract below. Activate after 021/038 DONE/PASS and stable\nsemantic callback/private-load boundary; exact Mk6 pixel/default/schema blobs\nunchanged, no pending failure. Complete policy resolved. Physical domain is\n**36 unique IDs** from 76 pixels in\n`config/glyph/glyph_mk6/include/neopixel_definitions.hpp:10`:\nLF1..LF8 (1..8), RF1..RF16 (17..32), LT1..LT6 (33..38), RT1..RT5 (41..45),\nMB1 (49). ButtonLocations.cpp animation tables use same set. MB2..MB7 are\nphysical matrix inputs without pixels; all other named input IDs are insufficient\nRGB targets. All 13 source RGB blocks use this domain (textual census).\n\nPure allocation-free helper in new\n`include/core/config_rgb_target_validation.hpp`,\n`src/core/config_rgb_target_validation.cpp` accepts explicit domain pointer/count;\nnew `config/glyph/common/include/config_rgb_target_domain.hpp` defines a\ncompile-selected adapter bound to actual pixel_to_button_mappings. New\n`config/glyph/common/include/glyph_config_validation.hpp` and\n`config/glyph/common/src/glyph_config_validation.cpp` wrap 021 base validator\nplus RGB validator; config.cpp installs this wrapper before first load. Both\nSetConfig and LoadConfig already consume that stable callback. Generic HAL\nmust not import a Glyph-only pin header. The adapter is proposed new code,\nnot an asserted existing injection API. Only Mk6 domain is release authority;\nno generalized other-board support/design. No pin map edits/build selectors.\n\nReuse 020's raw unsigned representation checks/count guards, not its 1..60\nallowlist. Validate every populated rgb_configs[].button_colors[].button before\nsave/publication; reject zero/unnamed/out-of-domain and named non-targetable IDs.\nEmpty lists/count zero are absence; unpopulated backing slots irrelevant.\nNo gameplay map lookup, no required active mode, no clamp/reorder/synthetic zero.\nKeep valid duplicates/order/count/color bytes and static/dynamic consumer code\nunchanged. Load rejection follows 021 preserving file/default recovery warning.\nPrior accepted live Config preserved; SetConfig rejection has no save.\n\nHost: all 36 positive IDs, all other named negatives, zero/raw invalid boundaries,\nmalformed decoder vectors, count boundaries/invalid last nested element, same\nphysical target with active/disabled/unassigned gameplay, all source defaults,\nstatic/dynamic control equality, both producer seams and bad-file hash. H3\nhardware REQUIRED: ordinary active-button RGB; lighting on a physical button\ndisabled/unassigned for gameplay; static/dynamic paths; safe invalid target\nrejection plus persisted recovery; reboot/reconnect; Ultimate/GC and each USB\nsanity; approved restoration. Candidate -> 039 -> resume -> build/custody/review/\nPASS -> DONE. No palette/animation/brightness/fallback change.\n\nLiteral hardware metadata: docs/agent_framework/GP_CONFIG_022_HARDWARE_PROTOCOL.md; docs/calibration/gp_config_022_hardware_result.md; docs/calibration/fixtures/gp_config_022_hardware_evidence.json. Only these regular 100644 literals are reserved, not a prefix.\n\n021 narrowed mount/absence refusal contract is mandatory: no-autoformat checked mount state, no writes/outputs on mount or ambiguous absence failure; valid stored behavior preserved. 038 and 039 explicit current persistence-research overlays include Persistence constructor/mount behavior, retaining old autoformat observations and separate no-autoformat/refusal proofs. No formatted-firstboot claim.",
+      "scope": "OVERRIDE: 021 recovery is the unconditional operation-refusal architecture in this adopted queue, not default-backed gameplay. Every inherited recovery phrase/row is read under that narrower contract. No display ACK authorizes gameplay.\n\n### GP-CONFIG-022 \u2014 Validate physical RGB targets at both acceptance seams\n\nAdopt only the bounded contract below. Activate after 021/038 DONE/PASS and stable\nsemantic callback/private-load boundary; exact Mk6 pixel/default/schema blobs\nunchanged, no pending failure. Complete policy resolved. Physical domain is\n**36 unique IDs** from 76 pixels in\n`config/glyph/glyph_mk6/include/neopixel_definitions.hpp:10`:\nLF1..LF8 (1..8), RF1..RF16 (17..32), LT1..LT6 (33..38), RT1..RT5 (41..45),\nMB1 (49). ButtonLocations.cpp animation tables use same set. MB2..MB7 are\nphysical matrix inputs without pixels; all other named input IDs are insufficient\nRGB targets. All 13 source RGB blocks use this domain (textual census).\n\nPure allocation-free helper in new\n`include/core/config_rgb_target_validation.hpp`,\n`src/core/config_rgb_target_validation.cpp` accepts explicit domain pointer/count;\nnew `config/glyph/common/include/config_rgb_target_domain.hpp` defines a\ncompile-selected adapter bound to actual pixel_to_button_mappings. New\n`config/glyph/common/include/glyph_config_validation.hpp` and\n`config/glyph/common/src/glyph_config_validation.cpp` wrap 021 base validator\nplus RGB validator; config.cpp installs this wrapper before first load. Both\nSetConfig and LoadConfig already consume that stable callback. Generic HAL\nmust not import a Glyph-only pin header. The adapter is proposed new code,\nnot an asserted existing injection API. Only Mk6 domain is release authority;\nno generalized other-board support/design. No pin map edits/build selectors.\n\nReuse 020's raw unsigned representation checks/count guards, not its 1..60\nallowlist. Validate every populated rgb_configs[].button_colors[].button before\nsave/publication; reject zero/unnamed/out-of-domain and named non-targetable IDs.\nEmpty lists/count zero are absence; unpopulated backing slots irrelevant.\nNo gameplay map lookup, no required active mode, no clamp/reorder/synthetic zero.\nKeep valid duplicates/order/count/color bytes and static/dynamic consumer code\nunchanged. Load rejection follows 021 preserving file/default recovery warning.\nPrior accepted live Config preserved; SetConfig rejection has no save.\n\nHost: all 36 positive IDs, all other named negatives, zero/raw invalid boundaries,\nmalformed decoder vectors, count boundaries/invalid last nested element, same\nphysical target with active/disabled/unassigned gameplay, all source defaults,\nstatic/dynamic control equality, both producer seams and bad-file hash. H3\nhardware REQUIRED: ordinary active-button RGB; lighting on a physical button\ndisabled/unassigned for gameplay; static/dynamic paths; safe invalid target\nrejection plus persisted recovery; reboot/reconnect; Ultimate/GC and each USB\nsanity; approved restoration. Candidate -> 039 -> resume -> build/custody/review/\nPASS -> DONE. No palette/animation/brightness/fallback change.\n\nLiteral hardware metadata: docs/agent_framework/GP_CONFIG_022_HARDWARE_PROTOCOL.md; docs/calibration/gp_config_022_hardware_result.md; docs/calibration/fixtures/gp_config_022_hardware_evidence.json. Only these regular 100644 literals are reserved, not a prefix.\n\n021 narrowed mount/absence refusal contract is mandatory: no-autoformat checked mount state, no writes/outputs on mount or ambiguous absence failure; valid stored behavior preserved. 038 and 039 explicit current persistence-research overlays include Persistence constructor/mount behavior, retaining old autoformat observations and separate no-autoformat/refusal proofs. No formatted-firstboot claim.\n\nSUPPLEMENTAL OWNER AUTHORITY (supersedes only conflicting unchanged-default/no-palette wording for this exact black-preserving structural repair): Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
       "explicit_excluded_scope": "No firmware/build/source changes under an H1 order. No scope beyond exact named H3 repair. No runtime-loaded profile/config, RuntimeConfigView/active publication change, new device/WebSerial/protobuf/backend writer, flashing automation, storage format/power-loss recovery redesign, Senscope/game semantics, official Configurator compatibility, Nunchuk or root-cause claim. No GP-VAL-011 reopening, blanket source exemption, branch-name authority, historical evidence rewrite, fallback/USB/naming/Keyboard/rebind policy invention.",
       "touched_planes": [
         "firmware runtime",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
       "dependencies_prerequisites": [
         "Mechanical predecessors: GP-CONFIG-021, GP-VAL-038.",
         "The predictable successor is GP-VAL-039; no new Planner/Curator loop for missing future candidate identity."
       ],
       "substantive_authorization_rationale": "Owner GLYPH-UD-024 resolves physical RGB semantics. Exact 76-pixel map has 36 named targets, independent of gameplay state. 021 stable callback/private acceptance permits both producer seams with refusal on persisted rejection.",
-      "mechanical_activation_conditions": [
-        "Strict DONE correspondence and exact physical F/artifact PASS with no gaps for hardware-bearing GP-CONFIG-021, GP-VAL-038; named governance predecessor DONE; no pending hardware failure.",
-        "Before creating fresh C on newly verified clean canonical B, source/default/schema/decoder dependencies equal immutable annex or named accepted transition. Only finite intervening deltas in adopted campaign contract; generated modifier extent 20, physical RGB domain 36 and relevant semantic invariants unchanged.",
-        "Create fresh current-base candidate under this exact source scope; candidate C identity is OUTPUT of this activation, not its prerequisite. Old 014 candidate/017 checkpoint are evidence only. Commit exact C and conformance inventory before the named successor governance activation; no build/integration until successor DONE."
-      ],
+      "mechanical_activation_conditions": [],
       "invalidation_conditions": [
         "Sensitive source/default/schema/domain/decoder/build dependencies differ outside named accepted transitions or exact candidate/base/path/blob/mode/conformance proof fails.",
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
         "Hardware FAIL, invalid predecessor acceptance, unsafe/unavailable required physical recovery/operator route, candidate replay/rebase or changed critical C-to-F bytes."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract. Independently retrieved actual human directive and source witness embedded in the 2026-10-08 C022 activation receipt; authority is not inferred from transport.",
       "automated_validation": [
         "Apply the exact local scope validation matrix plus adopted finite algorithm and all negative controls. Authenticate literal production bodies/schema/decoder, old versus current observations, omission/one-byte substitution and modes; retain historical 005/010/011/012/016 and accepted Ultimate/X1 table/source authority. No silent hash reseal.",
         "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate.",
-        "Exact F commit before canonical Mk6 build; RAM/flash and resolved dependency review; exact UF2 content-addressed custody/readback/pre-handoff hash; source-grounded safely executable protocol, owner physical observations and independent Hardware Evidence Processor exact PASS. New build/source invalidates affected acceptance. Nunchuk NOT_TESTED."
+        "Exact F commit before canonical Mk6 build; RAM/flash and resolved dependency review; exact UF2 content-addressed custody/readback/pre-handoff hash; source-grounded safely executable protocol, owner physical observations and independent Hardware Evidence Processor exact PASS. New build/source invalidates affected acceptance. Nunchuk NOT_TESTED.",
+        "Owner supplement: count11; all11 named physical targets nonzero; LF1explicit0; other12blocks/retainedcolors unchanged; defaults and minimally corrected archivedConfig pass; archivedcount20/ninezerosreject; unrelatedfieldsidentical; zero/outdomain/unnamedreject. Focused Revision3 Tier1/affectedTier2 only; historical aggregate failures retained."
       ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
@@ -1149,9 +1149,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Preserve exact C at predicted successor gate; do not integrate/build firmware until the required governance successor DONE.",
         "No H3 merge without exact committed built F, build/RAM/flash/custody/review and exact hardware PASS. Failed source stays out of configurator."
       ],
-      "activation_state": "WAITING",
+      "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
+      "hardware_evidence_dependency_satisfied": true,
       "candidate_git_sha": null,
       "candidate_base_configurator_sha": null,
       "firmware_artifact_build_path": null,
@@ -1172,13 +1172,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "why_this_matters": "Release-safety campaign within owner-approved Mk6 GC and ordinary source-supported USB envelope. Resolve this bounded source or proof gap without conflating evidence with acceptance.",
       "hardware_risk": "H1",
       "behavioral_claim": "The substantive finite governance algorithm and source/host transition are fully specified now. Authenticate only the named source contract; retain all five protected filters, historical evidence and separate candidate/accepted-source phases. Future identities are mechanical inputs, not new semantics.",
-      "scope": "OVERRIDE: 021 recovery is the unconditional operation-refusal architecture in this adopted queue, not default-backed gameplay. Every inherited recovery phrase/row is read under that narrower contract. No display ACK authorizes gameplay.\n\n### GP-VAL-039 \u2014 C022 RGB candidate governance\n\nAdopt only the bounded contract below. Exact C022/parent/clean raw inventory/scope\nreview, 038 and 021 DONE, unchanged 36-domain policy/callback architecture activate.\nApply incorporated eight-step algorithm/negatives; critical precedence never\nchanges. Chain exact accepted F021 -> F022 after new artifact/PASS. Reserve 022\ntriple; overlay only affected validation/default/startup/rebinding/persistence/\n012/013/null-RGB proof consumers identified above, proving old observed bodies\nor explicit changed acceptance separately. Finite new adapter/helper/test paths\nmust be reviewed by build role against source filters/include roots; active\nhelpers always CRITICAL, not metadata. No prefix exceptions. Additional unknown\nsource/test architecture returns CURATION_REQUIRED.\n\nShared adopted finite algorithm/consumer/negative matrix applies. Closed source chain is 020 -> 014 -> 017 -> 021 -> 022; each extension belongs only to its separate order. Reserve predecessor literal hardware triple if H3. Include exact transaction-proof consequence for 037/038/039 and KBD/019/menu proof overlays as named in 0151. Never silently reseal source hashes.\n\n021 narrowed mount/absence refusal contract is mandatory: no-autoformat checked mount state, no writes/outputs on mount or ambiguous absence failure; valid stored behavior preserved. 038 and 039 explicit current persistence-research overlays include Persistence constructor/mount behavior, retaining old autoformat observations and separate no-autoformat/refusal proofs. No formatted-firstboot claim.",
+      "scope": "OVERRIDE: 021 recovery is the unconditional operation-refusal architecture in this adopted queue, not default-backed gameplay. Every inherited recovery phrase/row is read under that narrower contract. No display ACK authorizes gameplay.\n\n### GP-VAL-039 \u2014 C022 RGB candidate governance\n\nAdopt only the bounded contract below. Exact C022/parent/clean raw inventory/scope\nreview, 038 and 021 DONE, unchanged 36-domain policy/callback architecture activate.\nApply incorporated eight-step algorithm/negatives; critical precedence never\nchanges. Chain exact accepted F021 -> F022 after new artifact/PASS. Reserve 022\ntriple; overlay only affected validation/default/startup/rebinding/persistence/\n012/013/null-RGB proof consumers identified above, proving old observed bodies\nor explicit changed acceptance separately. Finite new adapter/helper/test paths\nmust be reviewed by build role against source filters/include roots; active\nhelpers always CRITICAL, not metadata. No prefix exceptions. Additional unknown\nsource/test architecture returns CURATION_REQUIRED.\n\nShared adopted finite algorithm/consumer/negative matrix applies. Closed source chain is 020 -> 014 -> 017 -> 021 -> 022; each extension belongs only to its separate order. Reserve predecessor literal hardware triple if H3. Include exact transaction-proof consequence for 037/038/039 and KBD/019/menu proof overlays as named in 0151. Never silently reseal source hashes.\n\n021 narrowed mount/absence refusal contract is mandatory: no-autoformat checked mount state, no writes/outputs on mount or ambiguous absence failure; valid stored behavior preserved. 038 and 039 explicit current persistence-research overlays include Persistence constructor/mount behavior, retaining old autoformat observations and separate no-autoformat/refusal proofs. No formatted-firstboot claim.\n\nSUPPLEMENTAL OWNER AUTHORITY (supersedes only conflicting unchanged-default/no-palette wording for this exact black-preserving structural repair): Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
       "explicit_excluded_scope": "No firmware/build/source changes under an H1 order. No scope beyond exact named H3 repair. No runtime-loaded profile/config, RuntimeConfigView/active publication change, new device/WebSerial/protobuf/backend writer, flashing automation, storage format/power-loss recovery redesign, Senscope/game semantics, official Configurator compatibility, Nunchuk or root-cause claim. No GP-VAL-011 reopening, blanket source exemption, branch-name authority, historical evidence rewrite, fallback/USB/naming/Keyboard/rebind policy invention.",
       "touched_planes": [
         "validation infrastructure",
         "docs/checkers"
       ],
-      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance.",
+      "source_authority": "Live canonical d9ad6132ca0912398839673cc0da24e54a924210, tree d4d03b87d217d6d47da719d8e5690e97e92f9828; independently verified source annexes of 0151 49528e32849069e87f2729c24be35a21b002b6df and incorporated 0118 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a; current exact source plus completed evidence. GLYPH-UD-022\u2013025; source evidence only, no new hardware acceptance. Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
       "dependencies_prerequisites": [
         "Preserve the exact committed GP-CONFIG-022 without replay/rebase and authenticate the adopted finite algorithm; governance integration contains no candidate firmware."
       ],
@@ -1194,10 +1194,11 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "Additional product, architecture, source authority or semantic judgment is needed; protected/unknown rejection, historical proof or permitted finite scope cannot be preserved.",
         "Hardware FAIL, invalid predecessor acceptance, unsafe/unavailable required physical recovery/operator route, candidate replay/rebase or changed critical C-to-F bytes."
       ],
-      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract.",
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator; 2026-10-02 same-base immutable receipt 3194fd86c5391f19e598acae7879d6898e3e2072, packet 49528e32849069e87f2729c24be35a21b002b6df with 3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a incorporation; later adoption only activates recorded scope. 021/038/022/039 use narrowed unconditional refusal contract. Independently retrieved actual human directive and source witness embedded in the 2026-10-08 C022 activation receipt; authority is not inferred from transport.",
       "automated_validation": [
         "Apply the exact local scope validation matrix plus adopted finite algorithm and all negative controls. Authenticate literal production bodies/schema/decoder, old versus current observations, omission/one-byte substitution and modes; retain historical 005/010/011/012/016 and accepted Ultimate/X1 table/source authority. No silent hash reseal.",
-        "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate."
+        "Run focused proofs, all affected current/historical consumers, manifest/census/health, framework/authorization/runway/schema/packet correspondence, sequence, navigation, agent surface/integration, Python syntax, diff and clean isolated full aggregate; fresh independent review. Expected predicted candidate gate routes only to named successor; no waiver of any gate.",
+        "Owner supplement: count11; all11 named physical targets nonzero; LF1explicit0; other12blocks/retainedcolors unchanged; defaults and minimally corrected archivedConfig pass; archivedcount20/ninezerosreject; unrelatedfieldsidentical; zero/outdomain/unnamedreject. Focused Revision3 Tier1/affectedTier2 only; historical aggregate failures retained."
       ],
       "canonical_build": "NOT_REQUIRED: source-free H1 governance/characterization; stop on firmware/build change.",
       "expected_artifact": "NOT_APPLICABLE",
@@ -8284,11 +8285,11 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":6,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-CONFIG-022"],"immediate_ready":1,"recorded_preauthorized":5,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none); Immediate Ready: 0; Recorded Preauthorized: 6; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 0; Target effective authorized runway: 4; Primary liveness: PLANNING_REQUIRED
+Ready IDs: GP-CONFIG-022; Immediate Ready: 1; Recorded Preauthorized: 5; Mechanically activatable Preauthorized: 0; Invalidated Preauthorized: 0; Hardware-pending: 0; Effective authorized runway: 1; Target effective authorized runway: 4; Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
@@ -28583,3 +28584,1241 @@ GP-CONFIG-014 remains PREAUTHORIZED/WAITING: the 020/037 predecessor is satisfie
 }
 ```
 <!-- gp-config021-hardware-handoff:end -->
+
+
+## 2026-10-08 GP-CONFIG-022 owner resolution and mechanical activation
+
+<!-- gp-config022-activation:start -->
+```json
+{
+  "schema_name": "glyph_gp_config022_owner_resolved_mechanical_activation",
+  "schema_version": 1,
+  "base": "bbf70a120403dadbac66f218dc01e2a200812128",
+  "recorded_utc": "2026-10-08T11:43:04.841071+00:00",
+  "original_conditions": [
+    "Strict DONE correspondence and exact physical F/artifact PASS with no gaps for hardware-bearing GP-CONFIG-021, GP-VAL-038; named governance predecessor DONE; no pending hardware failure.",
+    "Before creating fresh C on newly verified clean canonical B, source/default/schema/decoder dependencies equal immutable annex or named accepted transition. Only finite intervening deltas in adopted campaign contract; generated modifier extent 20, physical RGB domain 36 and relevant semantic invariants unchanged.",
+    "Create fresh current-base candidate under this exact source scope; candidate C identity is OUTPUT of this activation, not its prerequisite. Old 014 candidate/017 checkpoint are evidence only. Commit exact C and conformance inventory before the named successor governance activation; no build/integration until successor DONE."
+  ],
+  "conditions_result": "SATISFIED; exactC is OUTPUT",
+  "strict_predecessors": {
+    "GP-CONFIG-021": {
+      "schema_name": "glyph_done_completion_evidence",
+      "schema_version": 1,
+      "mode": "DIRECT_ANCESTRY",
+      "implementation_base_sha": "009abb76eda55aabcad22c340693071113c647d2",
+      "reviewed_implementation_sha": "8e5049e5520ab469b435d7368312d644a6f32a51",
+      "prior_canonical_integration_sha": "8e5049e5520ab469b435d7368312d644a6f32a51",
+      "reviewed_changed_paths": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "config/glyph/common/src/config.cpp",
+        "docs/AGENT_CONTEXT.md",
+        "docs/CURRENT_STATE.md",
+        "docs/ROADMAP.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "docs/runtime_config/fixtures/gp_val038_accepted_transitions.json",
+        "include/core/config_validation.hpp",
+        "src/core/config_validation.cpp"
+      ],
+      "independent_review_provenance": "Fresh independent C021 integration reviewer APPROVED exact 8e5049e5520ab469b435d7368312d644a6f32a51; immutable report SHA256 f2403148fbb1c6d537a1fe06a51ed7063fafeafb65f8b019b3131b5c166de909. Genuine source merge parents[E,F], native038 first accepted catalog, exact238critical/testedF, preserved earliestR/E/protocol/result/evidence and exactUF2 custody verified. Separate strict completion independently reviewed before publication.",
+      "validation_provenance": "Focused Revision3 candidate-critical and affected regression validation at exact reviewed integration 8e5049e5520ab469b435d7368312d644a6f32a51; native021 ACCEPTED_TRANSITION; fresh current021 production replay both enum ABIs, all five protected bodies, affected persistence/GET/SET/menu/012 and original NeoPixel historical replay,010semantic correspondence,014capacity,019selection,KBDpipeline, exact native admission and metadata/manifest checks. Corrected focused result 20fresh PASS plus retained exact-source I passes; seven raw legacy diagnostics and initial navigationFAIL retained, navigation repaired in sole source-free child. Thirteen historical consumer lanes completed actual unchanged original mains at complete nativeB. Combinedmodifier011 timed out100 twice after frozen011eightcasePASS; its exact014 successor independently completed ordinary30/short30PASS at completeB. Two-component proof satisfies the concrete affected fact; combinedFAIL/secondPROCESS_GROUP_REMAINS retained as Tier3 historical wrapper latency. Overall corrected focused result remainsFAIL. Full current bothABI proof is shared by source-identical snapshots and actual registered persistence/raw_get. No claim of14 fresh fullwrapper executions; before/after canonical fingerprint MATCH. Exact testedF59033b0d9341c7568b77292f3035347f3853fb84 and UF21d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970/802304bytes preserved. Owner HEP six physical rowsPASS, displayfailure HOST_ONLY / PHYSICAL_NOT_SAFELY_TESTABLE under independently verified owner01a1188f directive; no physical display PASS. Literal stored256 rejection, refusal/nooutput/reboot/badbytes retention, accepted017 recovery and original Config4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 exact immediate/postreboot restoration preserved. Historical fullaggregate FAIL/TIMEOUT and HEP fullsynthetic/context actualFAIL remain Tier3 debt; no fullaggregate PASS/rebuild/retest/device operation. NunchukNOT_TESTED; rootcauseUNPROVEN."
+    },
+    "GP-CONFIG-021_hardware": {
+      "candidate_git_sha": "59033b0d9341c7568b77292f3035347f3853fb84",
+      "firmware_artifact_sha256": "1d39c0e2c2d675b31ae80962203d8cf2b89286b6370bc54241475861a1c64970",
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": []
+    },
+    "GP-VAL-038": {
+      "schema_name": "glyph_done_completion_evidence",
+      "schema_version": 1,
+      "mode": "DIRECT_ANCESTRY",
+      "implementation_base_sha": "80a22333fd783bcd89ac46bab10c219b3cbaf8f6",
+      "reviewed_implementation_sha": "a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604",
+      "prior_canonical_integration_sha": "a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604",
+      "reviewed_changed_paths": [
+        "docs/AGENT_CONTEXT.md",
+        "docs/CURRENT_STATE.md",
+        "docs/ROADMAP.md",
+        "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json",
+        "docs/runtime_config/fixtures/gp_val038_accepted_transitions.json",
+        "docs/runtime_config/fixtures/gp_val038_c021_consumer_replay.json",
+        "docs/runtime_config/fixtures/gp_val038_c021_transition.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/gp_config021_persisted_recovery.md",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "tools/check_glyph_c021_proof_replay.py",
+        "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+        "tools/check_glyph_gp_config021_persisted_recovery.py",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/LICENSE.CRC32.md",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/NOTICE.nanopb-arduino.txt",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/LICENSE",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/library.json",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/library.nanopb-arduino.json",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/LICENSE",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/library.json",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+        "tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Print.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Stream.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/Wire.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp",
+        "tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h",
+        "tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h",
+        "tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp",
+        "tools/fixtures/gp_val038_c021_current_consumers/current_consumer_harness.cpp",
+        "tools/fixtures/gp_val038_c021_current_consumers/getconfig_harness.cpp",
+        "tools/glyph_c021_campaign_transition.py",
+        "tools/glyph_campaign_transition.py",
+        "tools/glyph_checker_context.py",
+        "tools/glyph_hardware_correspondence.py",
+        "tools/run_glyph_runtime_config_validation.py",
+        "tools/test_glyph_c021_campaign_transition.py"
+      ],
+      "independent_review_provenance": "Fresh independent val034_review APPROVED exact a0a99f3cfc7e6dccaf78b76c9aa087933ab8e604; review SHA256 404bffbe54df9de656b960a8d909ef37151a808d5b4ee77edef28dfd3f6dd9c9. Verified newer owner product-boundary user message01a11767-b407-74e0-969e-df163870b79c. Source-free governance only; exactC21 is preserved, targetbuild/hardware remain pending.",
+      "validation_provenance": "Actual exactC bothABI69controls194MMD plus36currentbridgeMMD, full-width256 pure/realSET/Load/startup,15protected full-body positives across feature/detached/genuineCcomposition,76native admission rejections,236/238exactsource custody, original13Bfullmains and unchanged-body correspondence,7finalmetadata and actual currentadmissionPASS. Native aggregate actualFAIL:035PASS72.956/019CHECKER_TIMEOUT120.005, original+isolatedMATCH. FinalfullunitTIMEOUT120, prior301PASS117, old011TIMEOUT100 and oldsynthetic/context/setup failures preserved as FRAMEWORK_VALIDATION_DEBT; no fullaggregatePASS. Registration repair onlyone derivedcensusrow+one directmanifestdependency. Separate strictcompletion, no firmwarebehavior/build/device/hardwareacceptance."
+    }
+  },
+  "all238critical_equal_testedF021": "59033b0d9341c7568b77292f3035347f3853fb84",
+  "owner_directive": {
+    "thread_id": "01a0fcbd-2b4c-7d31-9088-42a22e260b57",
+    "turn_id": "01a11b4c-04af-7c52-b510-4618c3b8cc03",
+    "owner_message_id": "01a11b4c-0621-74d2-9651-0ea861c45e57",
+    "turn_started_at": 1791459329,
+    "content": "Approved.\n\nFor GP-CONFIG-022, use the recommended bounded correction:\n\n1. correct RGB block 11's declared populated-entry count from 20 to 11;\n2. explicitly preserve LF1 as black / color 0 in the corrected 11-entry block;\n3. do NOT adopt the alternative implicit cyan `#22D3EE` LF1 appearance;\n4. prepare the manual owner-Config compatibility/recovery plan described below;\n5. this approval does NOT authorize any device/Config write.\n\n===============================================================================\nRATIONALE / PRODUCT INTENT\n===============================================================================\n\nCurrent source/default state is malformed:\n\n- RGB block 11 declares 20 populated entries;\n- only 11 entries are actually initialized;\n- the remaining nine counted entries therefore materialize as zero targets;\n- GP-CONFIG-022's required zero-target rejection would consequently reject the\n  existing source defaults;\n- the owner's currently saved Config also contains the corresponding state.\n\nThis is a genuine existing-default compatibility defect, not a reason to weaken\nthe zero-target validation rule.\n\nThe correction must repair the malformed count rather than teach validation to\naccept populated zero RGB targets.\n\nChanging the count to 11 alone would, according to current source analysis,\nmake LF1 cyan.\n\nThat appearance difference is not an intended product change.\n\nTherefore explicitly preserve LF1 as black / color 0.\n\nThe intended semantic result is:\n\n`VALID STRUCTURE + PRESERVED EXISTING SOURCE-INFERRED APPEARANCE`\n\nnot:\n\n`VALID STRUCTURE + NEW PALETTE BEHAVIOR`\n\nThe owner acknowledges that the LF1 current appearance is source-inferred and\nhas not been separately physically established.\n\nDo not promote that inference to historical physical evidence.\n\n===============================================================================\nEXACT AUTHORIZATION BOUNDARY\n===============================================================================\n\nThis authority applies only to the identified RGB block 11 malformed-default\ncondition.\n\nIt permits:\n\n- count correction 20 -> 11;\n- the minimum explicit LF1 color-0 representation needed to preserve the\n  source-inferred existing appearance;\n- directly required fixtures/defaults/tests;\n- compatibility tooling/artifacts needed to represent the same bounded repair\n  for an existing owner Config;\n- documentation of the migration/recovery plan.\n\nIt does NOT authorize:\n\n- changing other RGB block counts;\n- changing other palette values;\n- changing animation semantics;\n- changing brightness;\n- changing RGB target eligibility;\n- allowing zero/unnamed/out-of-domain populated RGB target IDs;\n- generalized Config migration;\n- automatic migration on firmware boot;\n- silent rewrite of persisted Config;\n- device writes;\n- Config writes;\n- new Configurator/device-write infrastructure.\n\nGLYPH-UD-024 remains authoritative:\n\npopulated RGB mappings must target valid physical RGB-targetable named nonzero\nbuttons.\n\nStructural absence is represented structurally, not by counted zero targets.\n\n===============================================================================\nSOURCE-DEFAULT CORRECTION REQUIREMENTS\n===============================================================================\n\nBefore applying the correction, independently inspect the exact source\nrepresentation and prove:\n\n1. RGB block 11 currently declares 20;\n2. exactly 11 intended entries are initialized;\n3. the remaining nine are structural/default zero entries rather than\n   independently intended mappings;\n4. reducing the count to 11 removes only those unintended counted empty entries;\n5. explicit LF1 color 0 preserves the current source-derived rendering behavior;\n6. no other physical-button color changes result.\n\nThen implement only the minimum source delta.\n\nRequire an explicit before/after logical table:\n\n| Physical target | Before effective/source-inferred appearance | After |\n|---|---|---|\n| each retained block-11 entry | ... | same |\n| LF1 | black/source-inferred | explicit black |\n| nine trailing zero targets | counted invalid empties | structurally absent |\n\nPopulate this from actual source.\n\nDo not invent entries.\n\n===============================================================================\nREQUIRED AUTOMATED PROOF\n===============================================================================\n\nFocused proof must establish:\n\n- corrected block-11 count = 11;\n- no populated target is zero;\n- all 11 retained targets are valid named RGB-targetable buttons;\n- LF1 remains explicitly color 0;\n- all other retained colors are unchanged;\n- all other RGB blocks are unchanged;\n- source defaults pass the new GP-CONFIG-022 validation;\n- owner's corresponding pre-migration Config fails only for the expected\n  malformed/default compatibility reason where applicable;\n- minimally corrected owner Config passes;\n- all unrelated owner Config fields remain semantically identical;\n- no implicit palette normalization changes LF1 to cyan.\n\nAdd adversarial tests proving:\n\n- count 20 + nine zero populated targets => reject;\n- count 11 + correct mappings + explicit LF1 black => accept;\n- zero target within declared populated count => reject;\n- out-of-domain target => reject;\n- unnamed target => reject.\n\nUse Revision-3 Tier-1/Tier-2 scope only.\n\nDo not reopen broad aggregate/framework work because of this correction.\n\n===============================================================================\nOWNER CONFIG COMPATIBILITY PLAN\n===============================================================================\n\nPrepare, but DO NOT WRITE, a compatibility artifact derived from a fresh owner\nConfig when the hardware stage is reached.\n\nThe plan must be:\n\n1. fresh raw Config backup;\n2. preserve exact raw bytes, size and SHA-256;\n3. decode/re-encode byte-exact proof;\n4. identify the exact affected RGB block 11;\n5. produce a MINIMAL compatibility artifact implementing only the approved\n   structural correction;\n6. preserve all unrelated profiles, bindings, RGB records, defaults, backend\n   settings and names;\n7. explicitly preserve LF1 black;\n8. validate the corrected artifact with exact candidate source/schema;\n9. generate a complete semantic/raw diff;\n10. independently review it;\n11. prepare exact original restoration artifact;\n12. prove restoration re-encodes to the original raw bytes.\n\nThe compatibility packet must show:\n\nORIGINAL:\n- raw path\n- size\n- SHA-256\n\nCORRECTED:\n- artifact path\n- artifact SHA-256\n- encoded raw size/hash\n- exact RGB-block-11 before/after table\n- complete structural diff\n\nRESTORATION:\n- original artifact path/hash\n- expected restored raw size/hash\n\nNo owner write command may be executed under this approval.\n\n===============================================================================\nPHYSICAL VALIDATION EXPECTATION\n===============================================================================\n\nBecause explicit LF1 black is source-inferred rather than historically\nphysically established, the later GP-CONFIG-022 hardware protocol should\ninclude a bounded actual RGB observation for block 11.\n\nIt should verify the complete corrected block-11 appearance in one grouped\nmatrix, including LF1.\n\nDo not demand historical proof of the pre-fix physical appearance.\n\nThe relevant physical acceptance question is:\n\n\"Does the corrected candidate produce the explicitly approved block-11\nappearance, including LF1 black, while ordinary gameplay remains correct?\"\n\nThis may be tested during the normal GP-CONFIG-022 hardware gate.\n\nNo separate preliminary hardware campaign is required.\n\n===============================================================================\nPROGRESSION\n===============================================================================\n\nThis is direct owner resolution of the C022 curation boundary.\n\nDo not create a new Planner/Curator work order solely to reinterpret it.\n\nProceed with the existing persistent GP-CONFIG-022 chain:\n\nbounded correction\n-> focused Tier-1/Tier-2 proof\n-> ordinary GP-VAL-039 successor as already authorized\n-> resume C022\n-> exact build/custody/review\n-> hardware handoff.\n\nIf implementation inspection contradicts the stated source facts \u2014 for example,\nif the nine trailing entries are shown to be intentional mappings rather than\nuninitialized structural empties \u2014 STOP and report that contradiction before\napplying this approval.\n",
+    "verification": "Direct actual userMessage read through read_thread; transport is not substitute authority"
+  },
+  "owner_readback_sha256": "0e87e9227dcc6818010f7611ca80c61369bb66efa8ba6088b96c861bc74130ca",
+  "independent_source_witness": {
+    "access_and_nonclaims": {
+      "Nunchuk": "NOT_TESTED",
+      "default_patch_applied": false,
+      "device_action": false,
+      "host_or_firmware_build": false,
+      "new_binary_or_Config_write": false,
+      "previous_inventory_incident_preserved": true,
+      "publication": false,
+      "repository_Git_queue_mutation": false,
+      "root_cause": "UNPROVEN",
+      "this_followup_frozen_build_or_owner_session_access": false,
+      "this_followup_recursive_inventory": false
+    },
+    "approved_hypothetical_delta": {
+      "LF1_literal_new": 0,
+      "LF1_literal_old": 2282478,
+      "after_sha256_in_memory_only": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "all12_other_RGB_blocks_byte_equal": true,
+      "all60_effective_static_color_slots_equal": true,
+      "applied": false,
+      "changed_lines": 2,
+      "count_new": 11,
+      "count_old": 20,
+      "exact_diff": "--- a/config/glyph/common/include/glyph_overrides.hpp\n+++ b/config/glyph/common/include/glyph_overrides.hpp\n@@ -1543,11 +1543,11 @@\n         },\n \n         RgbConfig {\n-          .button_colors_count = 20,\n+          .button_colors_count = 11,\n           .button_colors = {\n                 {\n                 BTN_LF1,\n-                2282478\n+                0\n                 },\n                 {\n                 BTN_LF2,\n",
+      "other10_retained_records_and_order_equal": true,
+      "path": "config/glyph/common/include/glyph_overrides.hpp"
+    },
+    "archived_owner_sample": {
+      "JSON_sha256": "c4088147d6d6c84497208db47458748f5343a61d281431ce8237ce517267c645",
+      "archive_sha256": "6fc87f24a12e2379a217131decffd1156cd0aa9f8224ae4008014d0a75656a36",
+      "block11_count": 20,
+      "first11_match_source": true,
+      "historical_not_fresh": true,
+      "last9_decoded_color": 0,
+      "last9_decoded_target": 0,
+      "last9_literal_JSON": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "locator": "git:009abb76eda55aabcad22c340693071113c647d2:docs/calibration/gp_config_021_hardware_result.md#c021-evidence-bundle/session/original-config.json",
+      "minimal_in_memory_repair": {
+        "after_count": 11,
+        "all_unrelated_fields_semantically_equal": true,
+        "other10_retained_records_equal": true,
+        "remove_only_records_zero_based": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "replace_only_retained_LF1_color": {
+          "new": 0,
+          "old": 2282478
+        }
+      },
+      "new_Config_or_binary_artifact_written": false,
+      "raw_bytes": 4201,
+      "raw_sha256": "f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480"
+    },
+    "boundaries": {
+      "all238_D_critical_modes_blobs_equal_testedF": true,
+      "annex_D_F_equal": true,
+      "annex_rows": [
+        {
+          "D_F_equal": true,
+          "D_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": false,
+          "historical_blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981",
+          "historical_sha256": "56d8c3281b54a6d8168a7e8d04d31c0c2b20d1c2223b21b77a9a1549460a669d",
+          "path": "HAL/pico/include/core/Persistence.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": false,
+          "historical_blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+          "historical_sha256": "941cc54f0fb762e6067db338601325d33cf7f980148a59caa1d61f226e140955",
+          "path": "HAL/pico/src/core/Persistence.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": false,
+          "historical_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+          "historical_sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5",
+          "path": "config/glyph/common/src/config.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "67263adc7fc9520594df39dc85eed8d8973b39ac",
+          "historical_sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e",
+          "path": "src/comms/IntegratedDisplay.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "743c5e184e5a9f14f17a8d00a534fe40279a3d52",
+          "historical_sha256": "8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae",
+          "path": "include/comms/IntegratedDisplay.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "6dfa4950dc2280df961de0198ea3a01c0a271b2f8fc3334374463793fa316a29",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "4121c4538517b89e6b9b4de93284f9dd0bded1e0",
+          "historical_sha256": "6dfa4950dc2280df961de0198ea3a01c0a271b2f8fc3334374463793fa316a29",
+          "path": "HAL/pico/include/display/DisplayMode.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "f0410e4d3771345d3b06054437ee10a9084b4a7d",
+          "historical_sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2",
+          "path": "config/glyph/common/src/display/OopsieMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "d4b29b14d2421b284b7a3d42f3c717ece9df2e9e45026190b10901f277c8df24",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "4e80bb3afa6fdd00da7e8fdc26808fb0db84efe6",
+          "historical_sha256": "d4b29b14d2421b284b7a3d42f3c717ece9df2e9e45026190b10901f277c8df24",
+          "path": "config/glyph/common/include/display/OopsieMenu.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "f1a5f978fadd90fdffd7af19966444fd0748936b",
+          "historical_sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be",
+          "path": "HAL/pico/src/display/ConfigMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+          "historical_sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+          "path": "HAL/pico/src/display/DefaultConfigMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+          "historical_sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+          "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+          "historical_sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea",
+          "path": "HAL/pico/src/comms/backend_init.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "3c2e4b29d06e85e17ba0f63ac7160589ec0b5661874406a9e3a576446b2cf227",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "783cb54e5d01d33e931136e9cbb15f696a510029",
+          "historical_sha256": "3c2e4b29d06e85e17ba0f63ac7160589ec0b5661874406a9e3a576446b2cf227",
+          "path": "HAL/pico/include/comms/backend_init.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "93a82ab7af00b967fd8c7f63844cfecbcc71dd70",
+          "historical_sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c",
+          "path": "HAL/pico/src/comms/console_detection.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "1699e06253a93cb5f492282b5d43ce26fe8cfd0e",
+          "historical_sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+          "path": "HAL/pico/src/comms/XInputBackend.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "e1941c5548cc8761e025b691f619be0faf8b1165",
+          "historical_sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea",
+          "path": "HAL/pico/src/comms/DInputBackend.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "4b388ecca60b1eedaef5fcd8656d71d2f2be97c6",
+          "historical_sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+          "path": "HAL/pico/src/comms/NintendoSwitchBackend.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+          "historical_sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+          "path": "HAL/pico/src/core/KeyboardMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+          "historical_sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+          "path": "src/modes/CustomKeyboardMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+          "historical_sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+          "path": "src/core/mode_selection.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+          "historical_sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+          "path": "src/core/InputMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "81a0d53fae96305c07d5943f4785b33b02ca1949",
+          "historical_sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+          "path": "src/core/socd.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+          "historical_sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+          "path": "config/glyph/common/include/glyph_overrides.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "252c624733f2aee65be51b363f46957658957a78",
+          "historical_sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32",
+          "path": "config/glyph/glyph_mk6/include/neopixel_definitions.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "870532bef36d7e28e8decf6ff152b131a6db5ef7",
+          "historical_sha256": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1",
+          "path": "config/glyph/glyph_mk6/include/matrix_definition.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f",
+          "annex_commit": "49528e32849069e87f2729c24be35a21b002b6df",
+          "equals_historical_bytes": true,
+          "historical_blob": "d59b490890477b359c98c9a8c09e7f3f42e8a883",
+          "historical_sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f",
+          "path": "HAL/pico/src/rgb/ButtonLocations.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "40b8aeb9c4db3268696c49f20b3278efabc7688c",
+          "historical_sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81",
+          "path": "HAL/pico/include/util/state_util.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+          "historical_sha256": "a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6",
+          "path": "src/modes/CustomControllerMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+          "historical_sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44",
+          "path": "src/core/mode_selection.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "beeb1202f67f61ce717e0e020cb3dd339dfa6206",
+          "historical_sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab",
+          "path": "src/core/config_utils.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "3e934f2f5aae13a36310a35d273727da60723abe",
+          "historical_sha256": "28ef942416d0ec4b92588304fcf72f219a0c6b1e2a582f20e2dc7e0e07d1b876",
+          "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+          "historical_sha256": "941cc54f0fb762e6067db338601325d33cf7f980148a59caa1d61f226e140955",
+          "path": "HAL/pico/src/core/Persistence.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "f1a5f978fadd90fdffd7af19966444fd0748936b",
+          "historical_sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be",
+          "path": "HAL/pico/src/display/ConfigMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+          "historical_sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20",
+          "path": "HAL/pico/src/display/DefaultConfigMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+          "historical_sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0",
+          "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+          "historical_sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5",
+          "path": "config/glyph/common/src/config.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+          "historical_sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d",
+          "path": "config/glyph/common/include/glyph_overrides.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "4d56f8630c1b12e84cd12f40ce05a4dc71b9362e",
+          "historical_sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9",
+          "path": "platformio.ini"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "fac4e20461ad632ca1d65826241a4a9c73630f04",
+          "historical_sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf",
+          "path": "config/glyph/env.ini"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "7c073b2e91f3950c2f1a785940b39539dda433b5",
+          "historical_sha256": "0d4c8a7dbfd53d84745e2931739730bfeb760a47b20a5cba1b1c0531775e5744",
+          "path": "include/modes/CustomControllerMode.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "843eb9b937ccebc616679b0ced24b805d8a6290d",
+          "historical_sha256": "a3a83278a2f13464f6fa15de7f611ec4189f40fcf14f0ce44ce0b8e6cc890dbc",
+          "path": "HAL/pico/include/comms/NeoPixelBackend.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+          "historical_sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea",
+          "path": "HAL/pico/src/comms/backend_init.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+          "historical_sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+          "path": "src/core/InputMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "81a0d53fae96305c07d5943f4785b33b02ca1949",
+          "historical_sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+          "path": "src/core/socd.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+          "historical_sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+          "path": "src/modes/CustomKeyboardMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+          "historical_sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+          "path": "HAL/pico/src/core/KeyboardMode.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a40d24db990f0f59ab20ba76257596210e9ccca459415e78235374c2996b2dfd",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "37b9bad7d8a1cab66d0073b8314987df0329dddb",
+          "historical_sha256": "a40d24db990f0f59ab20ba76257596210e9ccca459415e78235374c2996b2dfd",
+          "path": "src/modes/Ultimate.cpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "1249b2f8b702eca1522a915e08ae9bd442a74d78",
+          "historical_sha256": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb",
+          "path": "src/modes/UltimateIdentityRuntimeTables.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "29a30df2c45e3ae4ce90af47775f0b8f94b8cc83",
+          "historical_sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108",
+          "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "40a0b4703b3cbc5800acca5f2fdc3229bd82844a",
+          "historical_sha256": "e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d",
+          "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "a58a2bf4dd827ad92482f1ac30c3d56bbea93c05",
+          "historical_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b",
+          "path": "tools/fixtures/gp_config012_button_host/schema/config.proto"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "7175d8463ade5b0cd45f1a5f8f99be44f5719c3c",
+          "historical_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805",
+          "path": "tools/fixtures/gp_config012_button_host/schema/config.options"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "01d0dda2ae768dd0f18c0f338a74c55e613bb199",
+          "historical_sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323",
+          "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.h"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "c59855ecb19be7f5193833d94fe41cc1828ffb14",
+          "historical_sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626",
+          "path": "tools/fixtures/gp_config012_button_host/generated/config.pb.c"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "ca2da3a4d6dd53bd980734cfb59594d4f121daa7cfff0e1202c288304f0ada54",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "85bc20e74404f62fcbd67b6be4f18968a35d3482",
+          "historical_sha256": "ca2da3a4d6dd53bd980734cfb59594d4f121daa7cfff0e1202c288304f0ada54",
+          "path": "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "25d32a1fc1cc9c39626eadd4dca4835103579d80",
+          "historical_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+          "path": "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "92d9f40b6b548037532bc2974dd2eeaa1699f8696c9637f273e9e7d54cdf016b",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "6646c82f303cbc9d89c91a44bd8fe6d1494f00fe",
+          "historical_sha256": "92d9f40b6b548037532bc2974dd2eeaa1699f8696c9637f273e9e7d54cdf016b",
+          "path": "docs/runtime_config/fixtures/neopixel_null_sendreport_characterization.json"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "173bfc10a2ba34dc65db86b4aeafb7a359af4c44ad30881c6eb06e27b07ff7f4",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "a73fb4a058b8ee5704533bcd11a00c495c5f55dc",
+          "historical_sha256": "fe66f28bbbe39583d576cdddc6fcc57ec14239b6326ad36c7ae5245f9b4c4168",
+          "path": "tools/glyph_checker_context.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "2d5acf9e902150a35e2930524021f73ef1279790d83475359ec7a91849bb7793",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "40f784846a8929ba64ab20296a13a1b3b112754b",
+          "historical_sha256": "c2efd5b8a5771f09d9563cf13b63d9631701ef60bcff5f9785dc028c99df0df1",
+          "path": "tools/glyph_hardware_correspondence.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "cae243130ec33d6b743d50d54cede3b8ed75c37261ea91433eca72d9daa1faae",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "004158bc9bb278258f49369323b7d7d259e32aed",
+          "historical_sha256": "9b2eaa86148ba615d84f37bcf0a9176a45444dd4117fb59f86a2e6cfede58b56",
+          "path": "tools/check_glyph_config_010_integration_semantic_correspondence.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "3635a92b16aa922fd295e6b7c8e2d71a909f8d6be76bcd7ee1f707caf82d8cd0",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "674004964ec77196df1a8f04abc8c90780f8252b",
+          "historical_sha256": "23e01cb6131f4f0a0fd59ee70ed2bb41e21b13ad2281ed0472ab3e0d72d83bd2",
+          "path": "tools/check_glyph_generated_source_owned_generator_contract.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "6730f524e46e0399fc1ea2a33d860d2260097c4e142091a499b44c0accfe8f27",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "30a50d97ea4e6421031b163b197cc187d838a110",
+          "historical_sha256": "a0dbaef516467f3490469bebb28bc5d02b5faa40af5b8e4c1889d88d19e4a7bc",
+          "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "187cf3390f5f90679593e50b79d48ba0391e7f11e92c1aaecaac5cf95d32dd85",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "bf143f2dfff195263489f202fa3f39b9ec03bec0",
+          "historical_sha256": "5e2953e7aca33e045af945ee5e4446135f76c629e5852e0ebcf27cc6864c9d6b",
+          "path": "tools/check_glyph_generated_source_owned_artifact_install.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "02891b27f43e675c6291ee50c4ee4ffbd597e2bef3199fd6590190fabde9d8b0",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "0d010f5cddcb5bda89699626697eef54f4d1329a",
+          "historical_sha256": "f5782b407dd735189cdd221171158a763142f25cd520e5f2f8858ff3b5d40bb2",
+          "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "3982115c3f941be8867f1d1f9da81b2bed2188a857d79444c177ee77a8aac95b",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "d13cc649f43ff89059120a0a72f6c0dce3888483",
+          "historical_sha256": "9a5ec8a4cec0682117ab90ca8319a65e8f56d279fb089b4aab15cd6ce1cc9811",
+          "path": "tools/check_glyph_docs_agent_surface.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "a213d4cc704fc7aaca9f06b7a9cf14df08879c714d45ac3bab5801866f5b55a0",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": false,
+          "historical_blob": "ffd910f865fd7483e6544a1b11c203b879c5138a",
+          "historical_sha256": "a28d4a21fc88fb36248bca36a3e8da5da980122ac2c9253ff0f0e530e6841b52",
+          "path": "tools/run_glyph_runtime_config_validation.py"
+        },
+        {
+          "D_F_equal": true,
+          "D_sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5",
+          "annex_commit": "3c1ad47cb5e7e268a8a5fd6852135649c8b60f0a",
+          "equals_historical_bytes": true,
+          "historical_blob": "00fa03b585fb34ae70201504da45f4fded36ffb3",
+          "historical_sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5",
+          "path": ".github/workflows/build.yml"
+        }
+      ],
+      "annex_rows_count": 67,
+      "callback": "Current stable nonnull callback is installed before default validation and first load. ValidateConfig bounds extents then callback. Both private LoadConfigChecked and SetConfig candidates use it. The future022 Glyph wrapper is new active source; no existing implementation claimed.",
+      "generated_modifier_extent": 20,
+      "selected_pins": {
+        "HAL/pico/include/comms/NeoPixelBackend.hpp": {
+          "D_F_equal": true,
+          "D_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b"
+        },
+        "HAL/pico/include/core/Persistence.hpp": {
+          "D_F_equal": true,
+          "D_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8"
+        },
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+          "D_F_equal": true,
+          "D_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121"
+        },
+        "HAL/pico/src/core/Persistence.cpp": {
+          "D_F_equal": true,
+          "D_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f"
+        },
+        "config/glyph/common/include/glyph_overrides.hpp": {
+          "D_F_equal": true,
+          "D_sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d"
+        },
+        "config/glyph/common/src/config.cpp": {
+          "D_F_equal": true,
+          "D_sha256": "a5fe03b570d058644d13285b895648110196b8cffbe4a4a053b92d2bead19558"
+        },
+        "config/glyph/env.ini": {
+          "D_F_equal": true,
+          "D_sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf"
+        },
+        "config/glyph/glyph_mk6/include/neopixel_definitions.hpp": {
+          "D_F_equal": true,
+          "D_sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32"
+        },
+        "docs/runtime_config/fixtures/gp_config021_persisted_recovery.json": {
+          "D_F_equal": true,
+          "D_sha256": "1950bf1e0de54275e14755d1cbde42964c64731770a58958eb2c2106358c424c"
+        },
+        "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json": {
+          "D_F_equal": true,
+          "D_sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f"
+        },
+        "include/core/config_validation.hpp": {
+          "D_F_equal": true,
+          "D_sha256": "b4d9c4937402406dc0cbd25ec83f27ea859f49258e4219272aa9dee75c52c4d5"
+        },
+        "platformio.ini": {
+          "D_F_equal": true,
+          "D_sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+        },
+        "src/core/config_validation.cpp": {
+          "D_F_equal": true,
+          "D_sha256": "d9536b639e8a36d834a8f7df1923789e559db59061255454767332a7f0c74b0e"
+        },
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.c": {
+          "D_F_equal": true,
+          "D_sha256": "d7041bfaf221cc747c7f2dc3fa8586352a1b8dc363fbdcfca181774562941626"
+        },
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h": {
+          "D_F_equal": true,
+          "D_sha256": "bdd72a220126911d7f6d2558ec5517be96189af92242979e3af43d1076550323"
+        },
+        "tools/fixtures/gp_config012_button_host/schema/config.options": {
+          "D_F_equal": true,
+          "D_sha256": "6a53dc93a79027669a3990c3a785e386e02e063c1f3438744aac49c3ad074805"
+        },
+        "tools/fixtures/gp_config012_button_host/schema/config.proto": {
+          "D_F_equal": true,
+          "D_sha256": "2844d8fc8c78c9fbed00a6954a13d9826f4634cac152f8a9a707666f47bb893b"
+        }
+      }
+    },
+    "codec_source_read_only": {
+      "archived_script_sha256": "472a9d76935ce1967aca61beea1b0184d204c6a057e1a837994b293ddc4fd97a",
+      "executed": false,
+      "existing_operations": [
+        "    raw = base64.b64decode(source['rawConfigPayloadBase64'], validate=True)",
+        "        spec = importlib.util.spec_from_file_location('config_pb2', Path(td) / 'config_pb2.py')",
+        "        config = module.Config(); config.ParseFromString(raw)",
+        "        encoded = config.SerializeToString(deterministic=True)",
+        "        artifact = json_format.MessageToDict(config, preserving_proto_field_name=False,"
+      ]
+    },
+    "future_required_proofs": [
+      "Run actual focused corrected-default validation in both supported enum ABIs. This source table does not replace execution.",
+      "Adversarial cases: count20+nine populated zeros rejects; count11+valid targets+LF1black accepts; populatedzero, named nontarget and unnamed target reject.",
+      "At hardware stage derive compatibility artifact from fresh owner raw backup, preserving exact path/size/SHA256 and decode/re-encode byte equality. Remove only identified empty tail and explicitly set LF1black; preserve every unrelated profile, name, binding, RGB block, backend and default.",
+      "Validate fresh corrected artifact with exact candidate/schema; provide complete semantic/raw diff, independent review and exact original restoration artifact with byte-identical original re-encoding.",
+      "Later corrected candidate hardware protocol includes grouped block11 matrix with LF1black and ordinary gameplay. No historical pre-fix physical proof or separate preliminary campaign required.",
+      "No Config/device write under current approval; any eventual owner write requires its separate authority and source-backed manual recovery route.",
+      "Existing022->039->022 chain proceeds under verified owner resolution; no new Planner/Curator order solely to reinterpret it."
+    ],
+    "owner_authority": {
+      "complete_content_sha256": "ce98e92b6b4c0dea4326bbe39fc931c7836044850572ae7edce41b5131cebf90",
+      "message_id": "01a11b4c-0621-74d2-9651-0ea861c45e57",
+      "no_device_or_Config_write_authority": true,
+      "readback_path": "/private/tmp/glyph-config022/022-owner-directive-readback.json",
+      "readback_sha256": "0e87e9227dcc6818010f7611ca80c61369bb66efa8ba6088b96c861bc74130ca",
+      "root_verified_direct_actual_user_readback": true,
+      "thread_id": "01a0fcbd-2b4c-7d31-9088-42a22e260b57",
+      "turn_id": "01a11b4c-04af-7c52-b510-4618c3b8cc03"
+    },
+    "physical_domain": {
+      "all11_retained_targets_in_domain": true,
+      "pixel_entries": 76,
+      "unique_target_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        41,
+        42,
+        43,
+        44,
+        45,
+        49
+      ],
+      "zero_in_pixel_map": false
+    },
+    "probe_corrections": [
+      "Initial scratch script syntax error and later whitespace-only diff assertion error were corrected before any output artifact. No failed probe was labeled PASS."
+    ],
+    "recorded_at_utc": "2026-10-08T11:42:13.898761+00:00",
+    "schema_name": "glyph_c022_owner_approved_source_witness",
+    "schema_version": 1,
+    "source_before": {
+      "LF1_color_line": 1550,
+      "contrary_intentional_zero_source_fact_found": false,
+      "count_line": 1546,
+      "declared_count": 20,
+      "explicit_records": 11,
+      "nine_remaining_records": "Implicit aggregate zero initialization, with no explicit mappings or independently specified target/color values. Owner identifies them as structural empties.",
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d"
+    },
+    "source_snapshot": "bbf70a120403dadbac66f218dc01e2a200812128",
+    "static_render_proof": {
+      "arithmetic": "On selected Mk6 one-byte unsigned Button ABI, Button promotes to int; max(0,0-1)=0. Trailing empty target0/color0 mappings overwrite LF1 slot0 with black. Count11 plus explicit LF1color0 preserves the combined effect.",
+      "claim_level": "Source-inferred; no historical physical pre-fix block11 appearance established.",
+      "consumer_path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "render_lines": [
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "selected_ABI_source": "platformio.ini:39 -fshort-enums; pinned generated Button enum0..60",
+      "setup_lines": [
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b"
+    },
+    "status": "PASS_SOURCE_FACTS_AND_APPROVED_MINIMAL_CONFORMANCE_BEFORE_APPLICATION",
+    "table_artifacts": {
+      "JSON": {
+        "path": "/private/tmp/glyph-config022/before-after-block11.json",
+        "sha256": "88db88482d3dc79dee47ae739b826934e3ede0926e018a523eab107252de16ee"
+      },
+      "Markdown": {
+        "path": "/private/tmp/glyph-config022/before-after-block11.md",
+        "sha256": "be996856dd5d305408632c29470af32359ec5ea42263894603a9fd8d4e24dbb2"
+      }
+    }
+  },
+  "source_witness_sha256": "e0a08e72f68f4b7d1d0bd5d2a8e2d6a533cc9d8a380d5eb810c96daf41224be6",
+  "before_after_table": {
+    "LF1_after_explicit_color": 0,
+    "after_declared_count": 11,
+    "all12_other_RGB_blocks_byte_equal": true,
+    "all60_effective_static_color_slots_equal": true,
+    "before_declared_count": 20,
+    "claim_level": "Source-inferred static appearance on selected Mk6 ABI; no historical physical proof",
+    "exact_two_line_diff_not_applied": "--- a/config/glyph/common/include/glyph_overrides.hpp\n+++ b/config/glyph/common/include/glyph_overrides.hpp\n@@ -1543,11 +1543,11 @@\n         },\n \n         RgbConfig {\n-          .button_colors_count = 20,\n+          .button_colors_count = 11,\n           .button_colors = {\n                 {\n                 BTN_LF1,\n-                2282478\n+                0\n                 },\n                 {\n                 BTN_LF2,\n",
+    "owner_message": "01a11b4c-0621-74d2-9651-0ea861c45e57",
+    "removed_implicit_zero_records": 9,
+    "retained_named_records": 11,
+    "rows": [
+      {
+        "after_effective_color_source_inferred": 0,
+        "after_literal_color": 0,
+        "before_effective_color_source_inferred": 0,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 1,
+        "physical_target": "BTN_LF1",
+        "source_record_zero_based": 0
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 2,
+        "physical_target": "BTN_LF2",
+        "source_record_zero_based": 1
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 3,
+        "physical_target": "BTN_LF3",
+        "source_record_zero_based": 2
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 33,
+        "physical_target": "BTN_LT1",
+        "source_record_zero_based": 3
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 17,
+        "physical_target": "BTN_RF1",
+        "source_record_zero_based": 4
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 18,
+        "physical_target": "BTN_RF2",
+        "source_record_zero_based": 5
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 21,
+        "physical_target": "BTN_RF5",
+        "source_record_zero_based": 6
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 22,
+        "physical_target": "BTN_RF6",
+        "source_record_zero_based": 7
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 41,
+        "physical_target": "BTN_RT1",
+        "source_record_zero_based": 8
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 49,
+        "physical_target": "BTN_MB1",
+        "source_record_zero_based": 9
+      },
+      {
+        "after_effective_color_source_inferred": 2282478,
+        "after_literal_color": 2282478,
+        "before_effective_color_source_inferred": 2282478,
+        "before_literal_color": 2282478,
+        "effective_appearance_preserved": true,
+        "numeric_target": 5,
+        "physical_target": "BTN_LF5",
+        "source_record_zero_based": 10
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 11
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 12
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 13
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 14
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 15
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 16
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 17
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 18
+      },
+      {
+        "after": "Structurally absent; explicit LF1 black preserves combined prior effect.",
+        "before": "Implicit empty zero target/color0 within count20; invalid RGB target; static clamp writes black to LF1.",
+        "numeric_target": 0,
+        "physical_target": null,
+        "source_record_zero_based": 19
+      }
+    ],
+    "schema_name": "glyph_c022_approved_block11_before_after",
+    "schema_version": 1,
+    "source_path": "config/glyph/common/include/glyph_overrides.hpp",
+    "source_snapshot": "bbf70a120403dadbac66f218dc01e2a200812128"
+  },
+  "before_after_table_sha256": "88db88482d3dc79dee47ae739b826934e3ede0926e018a523eab107252de16ee",
+  "root_source_preflight_acceptance": {
+    "approved": true,
+    "utc": "2026-10-08T11:43:04.628936+00:00",
+    "witness_sha256": "e0a08e72f68f4b7d1d0bd5d2a8e2d6a533cc9d8a380d5eb810c96daf41224be6",
+    "source_snapshot": "bbf70a120403dadbac66f218dc01e2a200812128",
+    "source_facts_reviewed": true,
+    "physical_appearance_claim": "SOURCE_INFERRED_ONLY",
+    "contradiction": null,
+    "allows": "Source-free owner-supplement adoption and mechanical READY activation only; product patch follows publishedREADY",
+    "device_Config_write_authorized": false
+  },
+  "supplemental_scope": "Directly verified owner message 01a11b4c-0621-74d2-9651-0ea861c45e57 in turn 01a11b4c-04af-7c52-b510-4618c3b8cc03 resolves only the identified block11 malformed default: config/glyph/common/include/glyph_overrides.hpp count20->11 plus explicit LF1color0/black. This is the sole approved default exception; all other retained colors, RGB blocks, palette/animation/brightness/eligibility and GLYPH-UD-024 zero/unnamed/nonphysical target rejection remain unchanged. Exactly11 initialized mappings plusnine uninitialized countedzero entries and source-inferred LF1black independently verified before patch; physical appearance is not established by inference. Directly required fixtures/tests, bounded offline compatibility artifacts/tooling and manual recovery documentation are approved. No generalized/boot/automatic migration, device/Config write or new writer infrastructure. At hardware stage obtain fresh raw ownerConfig through existing safe workflow, exact raw backup/hash/size and byte-exact decode/reencode, minimal block11 correction with LF1black, exactcandidate validation, full semantic/raw diff and independent review, original restoration artifact/roundtrip. Archived bytes are host characterization only. One grouped all11-target block11 appearance matrix including LF1black belongs to normal C022 gameplay hardwaregate; no preliminary campaign. Continue existing022->039->022 persistentchain underUD029; no new Planner/Curator/order. Ordinary039 finite criticalscope explicitly includes the seven productionpaths (five new helper/adapter/wrapper paths, config.cpp callback installation, glyph_overrides.hpp approvedtwo-line delta); all othercritical bytes/modes equalB. No build until039strictDONE; no behavior merge before exactF/artifact humanHEPPASS.",
+  "other97_orders_unchanged": true,
+  "source_free": true,
+  "firmware_patch_applied": false,
+  "device_Config_write_authorized": false,
+  "hardware": "NOT_TESTED"
+}
+```
+<!-- gp-config022-activation:end -->
