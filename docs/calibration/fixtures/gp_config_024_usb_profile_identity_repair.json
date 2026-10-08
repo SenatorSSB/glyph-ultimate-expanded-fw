@@ -1,0 +1,310 @@
+{
+  "schema_name": "glyph_gp_config024_usb_profile_identity_repair",
+  "schema_version": 1,
+  "work_order": "GP-CONFIG-024",
+  "base_configurator_sha": "b404453ef22cc994eec54338b8a23c3ba61df808",
+  "immutable_packet_commit": "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
+  "successor": "GP-VAL-045",
+  "packet_source_inventory": [
+    {
+      "path": "src/core/InputMode.cpp",
+      "blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    {
+      "path": "include/core/InputMode.hpp",
+      "blob": "02f3cfd54c47cf2b8f4587a2d519d0682240eec4",
+      "sha256": "dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee"
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+      "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44"
+    },
+    {
+      "path": "src/modes/CustomKeyboardMode.cpp",
+      "blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def"
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626",
+      "sha256": "a85d36b53fc17b3a7da46d835761558a97052432ac10226b94985263fa8468a6"
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+      "sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "blob": "f7726a0063dd05409d7464d947a47efc675bdbef",
+      "sha256": "8cbd355e6323a775ab88aacef2ca07d2cad88232790f9d8b8d3f2f686875e2ea"
+    },
+    {
+      "path": "HAL/pico/src/reboot.cpp",
+      "blob": "796c7f4b7337004b6f68a59c9e775e55f4578742",
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7",
+      "sha256": "941cc54f0fb762e6067db338601325d33cf7f980148a59caa1d61f226e140955"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "blob": "6ca93c96c944ee539a2d409e32889306c1eafac7",
+      "sha256": "68bc7756eacb63c6831709c803349d52206ed7a271dc49b0cd33d6c53f0c3c38"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726",
+      "sha256": "bde443c7eceb417494ae71191a2076c0ab251e987706f30a757b14aaf16ad0e5"
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0"
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8",
+      "sha256": "ab4074ed3cd6988abadaf9a79343be8fdd9751c3fb24ebc2d25f3111857cae1d"
+    },
+    {
+      "path": "docs/agent_framework/USER_DIRECTION.md",
+      "blob": "dd6a829ccaf31e58c8913f30f945a5a9a66d3291",
+      "sha256": "30a2d3b3836eb24dc674ba36a564a78892e099b9d36400665af8791176ae12bc"
+    },
+    {
+      "path": "docs/WORKFLOW.md",
+      "blob": "fdefa753cc7e61cb16e7db4e7291d6e57715de42",
+      "sha256": "3df0a02eb98644def438373eea1269fcd66ef461e74361691f5cd644dc698c3a"
+    },
+    {
+      "path": "docs/runtime_config/gp_val041_usb_name_current_acceptance.md",
+      "blob": "22c2aa6d49071e5ad2e3d9720fb19943cd959dd2",
+      "sha256": "9aa78efa0e35eb483281865e2e25f6611c9653beccb4757ba399959a0012eaab"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
+      "blob": "b7415fe877f2ac0023edd9ea62a443b2b22ec2ad",
+      "sha256": "c918594c260e8a4a675d84c0b808be1c87ac876ea8b2ca138316162de2863453"
+    },
+    {
+      "path": "tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp",
+      "blob": "897646b941b1c89a0d90dd95ba6eedb3f3ff9b33",
+      "sha256": "be0ace2b917ade71cde930e5e3293443bfe26f4713a4d40d82008a22e0615e1b"
+    },
+    {
+      "path": "tools/fixtures/gp_config019_usb_name_selection/main.cpp",
+      "blob": "1f91f2ad54bd7148c5089d0f4c9d211b9e0978e6",
+      "sha256": "aedd1cf767dc370451028a8bfc3a0f17e6859cc6c7cb79384874b67da1969d65"
+    }
+  ],
+  "base_source_inventory": [
+    {
+      "path": "src/core/InputMode.cpp",
+      "mode": "100644",
+      "blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    {
+      "path": "include/core/InputMode.hpp",
+      "mode": "100644",
+      "blob": "02f3cfd54c47cf2b8f4587a2d519d0682240eec4",
+      "sha256": "dc382c38eb2c30cf7f94727670ae5530a682daf6555db65ea5d5b5f0dc2f23ee"
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "mode": "100644",
+      "blob": "7d659d3133271c2ed956a16d8f5e3eda73040f81",
+      "sha256": "8df6ddf1ca626f7d840e68ea700654bcbc30f6473fe7383abc4bf6e99fc4fd44"
+    },
+    {
+      "path": "src/modes/CustomKeyboardMode.cpp",
+      "mode": "100644",
+      "blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def"
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "mode": "100644",
+      "blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31"
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "mode": "100644",
+      "blob": "bf855a584b3e859083d98a1aa49a38daee9204f5",
+      "sha256": "279b44fb4e55f73178591908f843f51a086c4e1c3c26d537aac18a26eae95b20"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "mode": "100644",
+      "blob": "4b8957496f6316a2aa64d9b33ee6bbc60132e612",
+      "sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c"
+    },
+    {
+      "path": "HAL/pico/src/reboot.cpp",
+      "mode": "100644",
+      "blob": "796c7f4b7337004b6f68a59c9e775e55f4578742",
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "mode": "100644",
+      "blob": "69e4f0c327b43e940e2e8cf4cf32b65e349f9a97",
+      "sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "mode": "100644",
+      "blob": "1c324fddfbf22879ad1c974ace2ec8ff1605f711",
+      "sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "mode": "100644",
+      "blob": "05295604484da47077a595c7b4f9b74a1ba6d49b",
+      "sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae"
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "mode": "100644",
+      "blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0"
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "mode": "100644",
+      "blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+    },
+    {
+      "path": "docs/agent_framework/USER_DIRECTION.md",
+      "mode": "100644",
+      "blob": "dd6a829ccaf31e58c8913f30f945a5a9a66d3291",
+      "sha256": "30a2d3b3836eb24dc674ba36a564a78892e099b9d36400665af8791176ae12bc"
+    },
+    {
+      "path": "docs/WORKFLOW.md",
+      "mode": "100644",
+      "blob": "fdefa753cc7e61cb16e7db4e7291d6e57715de42",
+      "sha256": "3df0a02eb98644def438373eea1269fcd66ef461e74361691f5cd644dc698c3a"
+    },
+    {
+      "path": "docs/runtime_config/gp_val041_usb_name_current_acceptance.md",
+      "mode": "100644",
+      "blob": "22c2aa6d49071e5ad2e3d9720fb19943cd959dd2",
+      "sha256": "9aa78efa0e35eb483281865e2e25f6611c9653beccb4757ba399959a0012eaab"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
+      "mode": "100644",
+      "blob": "b7415fe877f2ac0023edd9ea62a443b2b22ec2ad",
+      "sha256": "c918594c260e8a4a675d84c0b808be1c87ac876ea8b2ca138316162de2863453"
+    },
+    {
+      "path": "tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp",
+      "mode": "100644",
+      "blob": "897646b941b1c89a0d90dd95ba6eedb3f3ff9b33",
+      "sha256": "be0ace2b917ade71cde930e5e3293443bfe26f4713a4d40d82008a22e0615e1b"
+    },
+    {
+      "path": "tools/fixtures/gp_config019_usb_name_selection/main.cpp",
+      "mode": "100644",
+      "blob": "1f91f2ad54bd7148c5089d0f4c9d211b9e0978e6",
+      "sha256": "aedd1cf767dc370451028a8bfc3a0f17e6859cc6c7cb79384874b67da1969d65"
+    }
+  ],
+  "authorized_predecessor_deltas": [
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "fresh_B_sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+      "accepted_predecessor_commits": [
+        "d786c244183343f89287a040055b7eaeae1e41f3"
+      ]
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "fresh_B_sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c",
+      "accepted_predecessor_commits": [
+        "e44ec59c57c0db194381f8d2dddce08aab81b5f6",
+        "03bbf5da14a7d450f2986b12ad69ec6b3f704bad"
+      ]
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "fresh_B_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+      "accepted_predecessor_commits": [
+        "55e2da3d264dcdb89c6d80fae8bab5629a5a662b"
+      ]
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "fresh_B_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+      "accepted_predecessor_commits": [
+        "55e2da3d264dcdb89c6d80fae8bab5629a5a662b"
+      ]
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "fresh_B_sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae",
+      "accepted_predecessor_commits": [
+        "292f27cf88a9e814b1086bd544378b7e733e25e3",
+        "e44ec59c57c0db194381f8d2dddce08aab81b5f6"
+      ]
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "fresh_B_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "accepted_predecessor_commits": [
+        "292f27cf88a9e814b1086bd544378b7e733e25e3"
+      ]
+    }
+  ],
+  "candidate_file_hashes": [
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520"
+    },
+    {
+      "path": "docs/calibration/gp_config_024_usb_profile_identity_repair.md",
+      "sha256": "60af4f4f0661610551179f220a85832aeaac679291d58d284441fcf6f1929053"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/glyph_checker_census.json",
+      "sha256": "bec3d836ca5a9b2349f37cab85f9114e1a11d6447336ea7ad3f8d84bba47b450"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+      "sha256": "0b483de591bf55ffa954f42f9320d5beb643906e7fd9319b06d11db3bf892893"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+      "sha256": "702790292bdb0e5b8706c80c3eef5ee91bbcc04ec939bb15e709825fd09773fa"
+    },
+    {
+      "path": "docs/runtime_config/runtime_config_validation_health.md",
+      "sha256": "500f137d7e4212272695e2e4e5e01386a8bcb46bd72eb6fe4848eb38bb23a428"
+    },
+    {
+      "path": "tools/check_glyph_gp_config024_usb_profile_identity.py",
+      "sha256": "4d8f844e83ea8aaf6077aa9e660416b05fdc535275411fec85ea897492280366"
+    },
+    {
+      "path": "tools/fixtures/gp_config024_usb_profile_identity/include/host_stubs.hpp",
+      "sha256": "1e46c5d5a8d1640b082ba7dfd3a384eb20d473c1bc83e913aeacc12e5654379d"
+    },
+    {
+      "path": "tools/fixtures/gp_config024_usb_profile_identity/main.cpp",
+      "sha256": "c75040cfcfe9149c513ff53e0461282e1b6e054817356fb8418dc97bf50ea4a7"
+    }
+  ],
+  "expected_host_output": "C024 selector identity host proof: PASS; actual mode setup, row identity, no-effects refusals and reboot actions verified",
+  "firmware_build": "NOT_RUN",
+  "hardware_acceptance": "NOT_CLAIMED",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN"
+}

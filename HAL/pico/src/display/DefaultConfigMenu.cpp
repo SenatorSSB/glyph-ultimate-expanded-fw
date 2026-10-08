@@ -317,24 +317,41 @@ void DefaultConfigMenu::SetUsbBackend(
     Config &config,
     uint8_t backend_config_index
 ) {
-    if (backend_config_index < 0 ||
-        backend_config_index >= config.communication_backend_configs_count) {
+    const size_t backend_config_capacity =
+        sizeof(config.communication_backend_configs) /
+        sizeof(config.communication_backend_configs[0]);
+    const size_t game_mode_capacity =
+        sizeof(config.game_mode_configs) / sizeof(config.game_mode_configs[0]);
+    if (config.communication_backend_configs_count == 0 ||
+        config.communication_backend_configs_count > backend_config_capacity ||
+        backend_config_index >= config.communication_backend_configs_count ||
+        config.game_mode_configs_count == 0 ||
+        config.game_mode_configs_count > game_mode_capacity ||
+        display_backend == nullptr) {
         return;
     }
 
-    char* name = display_backend->CurrentGameMode()->GetConfig()->name;
+    InputMode *current_mode = display_backend->CurrentGameMode();
+    if (current_mode == nullptr) {
+        return;
+    }
+
+    GameModeConfig *current_config = current_mode->GetConfig();
+    if (current_config == nullptr) {
+        return;
+    }
 
     for(size_t i = 0; i < config.game_mode_configs_count; i++) {
-        if(sameName(name, config.game_mode_configs[i].name)) {
+        if(current_config == &config.game_mode_configs[i]) {
             tud_disconnect();
             delay(500);
             watchdog_hw->scratch[1] = i + 1;
             watchdog_hw->scratch[0] = backend_config_index + 1;
             delay(30);
             reboot_firmware();
+            return;
         }
     }
-
 }
 
 void DefaultConfigMenu::SetSocdType(
