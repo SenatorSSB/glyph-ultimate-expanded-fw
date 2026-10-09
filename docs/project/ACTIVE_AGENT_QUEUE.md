@@ -124,8 +124,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
 ## Current Queue State
 
 <!-- queue-state:start -->
-```json
-{
+```json{
   "schema_version": 3,
   "canonical_branch": "configurator",
   "audit_base_sha": "38017600deb243b5e281edec6d0d378b997d9e40",
@@ -208,7 +207,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "runway": {
     "immediate_ready": 0,
-    "recorded_preauthorized": 2,
+    "recorded_preauthorized": 1,
     "mechanically_activatable_preauthorized": 1,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
@@ -8284,8 +8283,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_gaps": []
     }
   ]
-}
-```
+}```
 <!-- queue-state:end -->
 
 ## GP-CONFIG-013 candidate handoff and GP-VAL-036 mechanical activation (2026-10-02)
