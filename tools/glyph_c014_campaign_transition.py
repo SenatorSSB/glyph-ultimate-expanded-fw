@@ -1036,6 +1036,7 @@ C024_ACCEPTED_PREDECESSOR_COMMITS = (
     '3fb0af34ba945641ba8c8be432ea4533f3abee2a', # C017
     '55e2da3d264dcdb89c6d80fae8bab5629a5a662b', # C021
     '292f27cf88a9e814b1086bd544378b7e733e25e3', # C022
+    '03bbf5da14a7d450f2986b12ad69ec6b3f704bad', # C023 source validation
     'e44ec59c57c0db194381f8d2dddce08aab81b5f6', # C023
 )
 
