@@ -485,7 +485,9 @@ inline PersistenceValidatorSetup persistence_validator_setup;
     support_paths = (
         'include/core/config_validation.hpp', 'include/core/config_usb_default_validation.hpp',
         'include/core/config_rgb_target_validation.hpp',
+        'config/glyph/common/include/config_rgb_target_domain.hpp',
         'config/glyph/common/include/glyph_config_validation.hpp',
+        'config/glyph/glyph_mk6/include/neopixel_definitions.hpp',
         'src/core/config_validation.cpp', 'src/core/config_usb_default_validation.cpp',
         'src/core/config_rgb_target_validation.cpp', 'config/glyph/common/src/glyph_config_validation.cpp')
     for path in support_paths:
@@ -518,6 +520,7 @@ inline PersistenceValidatorSetup persistence_validator_setup;
     includes = ['-I' + str(decoder / 'nanopb'), '-I' + str(decoder / 'generated'),
                 '-I' + str(temp / 'current/include'),
                 '-I' + str(temp / 'current/config/glyph/common/include'),
+                '-I' + str(temp / 'current/config/glyph/glyph_mk6/include'),
                 '-I' + str(crc_root), '-I' + str(temp)]
     flags = value['compiler_flags']
     require(flags == ['-O0', '-g', '-fshort-enums', '-fsanitize=address,undefined',
