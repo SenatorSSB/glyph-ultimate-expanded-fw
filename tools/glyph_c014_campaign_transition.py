@@ -1153,6 +1153,27 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
                 and hashlib.sha256(original.raw_bytes(root, C024_B, path)).hexdigest() == pin['sha256'],
                 'VAL045 immutable019/current overlay pin changed: ' + path)
     accepted_delta_paths = {row['path'] for row in source_fixture['authorized_predecessor_deltas']}
+    predecessor_commits = sorted({commit
+        for row in source_fixture['authorized_predecessor_deltas']
+        for commit in row['accepted_predecessor_commits']})
+    predecessor_commits = sorted(set(predecessor_commits) | {
+        pin['accepted_commit'] for pin in C024_C019_ACCEPTED_EXTRA.values()})
+    accepted_predecessor_sources = {}
+    accepted_B_tree = original.critical_tree(root, C024_B)
+    historical_tree = original._tree(root, CONFIG019_F020)
+    for path in sorted(set(accepted_B_tree) | set(historical_tree)):
+        if accepted_B_tree.get(path) == historical_tree.get(path):
+            continue
+        matches = []
+        for commit in predecessor_commits:
+            commit_tree = original._tree(root, commit)
+            if commit_tree.get(path) == accepted_B_tree.get(path):
+                matches.append(commit)
+        require(matches,
+                'VAL045 critical-source drift is not an exact accepted predecessor: ' + path +
+                ' F020=' + repr(historical_tree.get(path)) + ' B=' + repr(accepted_B_tree.get(path)))
+        accepted_predecessor_sources[path] = matches[0]
+        accepted_delta_paths.add(path)
     for path, pin in C024_C019_ACCEPTED_EXTRA.items():
         commit = pin['accepted_commit']
         parents = get(root, 'rev-list', '--parents', '-n', '1', commit).decode().split()
@@ -1191,13 +1212,13 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
     current = original.critical_tree(root, head)
     if current == source_base:
         phase = 'SOURCE_FREE_CANDIDATE'
-        critical = frozenset()
+        critical = frozenset(accepted_predecessor_sources)
         sources = {}
         require(not original.ancestor(root, C024_C, head),
                 'VAL045 source-free phase conceals C024 ancestry')
     elif current == source_candidate:
         phase = 'CANDIDATE_VALIDATION_ONLY'
-        critical = frozenset((C024_MENU,))
+        critical = frozenset(set(accepted_predecessor_sources) | {C024_MENU})
         sources = {C024_MENU: C024_C}
         require(original.ancestor(root, C024_C, head),
                 'VAL045 candidate phase replays C024 source without ancestry')
@@ -1215,9 +1236,11 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
                 and get(root, 'show', ':' + path) == original.current_bytes(root, path),
                 'VAL045 committed/index/live mismatch: ' + path)
     authorized_sources = accepted_delta_paths | {C024_MENU}
+    source_candidates = {path: commit for path, commit in accepted_predecessor_sources.items()}
+    source_candidates[C024_MENU] = C024_C
     return dict(phase=phase, contract='c024_selector_identity', candidate=C024_C,
                 base=C024_B, target=head, critical_paths=critical,
-                source_candidates=sources, accepted_metadata_paths=frozenset(),
+                source_candidates={**source_candidates, **sources}, accepted_metadata_paths=frozenset(),
                 authorized_source_paths=frozenset(authorized_sources),
                 changed_paths=frozenset(changed))
 
