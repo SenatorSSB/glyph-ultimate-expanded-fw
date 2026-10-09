@@ -1025,6 +1025,26 @@ VAL045_PATHS = frozenset((
     'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     'docs/runtime_config/runtime_config_validation_health.md',
 ))
+
+
+def validate_val045_handoff_state(current_c024, current_045):
+    """Gate preserved C024 activation on strict VAL045 completion."""
+    require(current_c024.get('candidate_git_sha') == C024_C
+            and current_c024.get('candidate_base_configurator_sha') == C024_B,
+            'VAL045 C024 handoff candidate identity changed')
+    require(current_c024.get('status') == 'PREAUTHORIZED'
+            and current_045.get('activation_requires_new_judgment') is False,
+            'VAL045 handoff authorization state changed')
+    if current_045.get('status') == 'DONE':
+        require(current_045.get('activation_state') == 'NOT_APPLICABLE'
+                and current_c024.get('activation_state') == 'ACTIVATABLE',
+                'strict VAL045 DONE must mechanically activate preserved C024')
+    else:
+        require(current_045.get('status') == 'PREAUTHORIZED'
+                and current_045.get('activation_state') == 'ACTIVATABLE'
+                and current_c024.get('activation_state') == 'WAITING',
+                'C024 cannot activate before strict VAL045 DONE')
+
 C024_HANDOFF_FIXTURE = 'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json'
 C024_C019_ACCEPTED_EXTRA = {
     'HAL/pico/include/core/Persistence.hpp': {
@@ -1139,12 +1159,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
             'VAL045 exact accepted C023/042 predecessor state changed')
     current_c024 = original.item(root, head, 'GP-CONFIG-024')
     current_045 = original.item(root, head, 'GP-VAL-045')
-    require(current_c024['candidate_git_sha'] == C024_C
-            and current_c024['candidate_base_configurator_sha'] == C024_B
-            and current_c024['activation_state'] == 'WAITING'
-            and current_045['status'] in {'PREAUTHORIZED', 'DONE'}
-            and current_045['activation_state'] in {'ACTIVATABLE', 'NOT_APPLICABLE'},
-            'VAL045 current queue handoff phase changed')
+    validate_val045_handoff_state(current_c024, current_045)
 
     # Keep the original019 observations and041 current-admission record exact.
     # The six named accepted predecessor deltas are validated below against B;

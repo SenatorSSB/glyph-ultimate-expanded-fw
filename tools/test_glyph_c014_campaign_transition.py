@@ -484,6 +484,38 @@ def original034_historical(root):
     print('PASS original034 historical committed baseline without future019 overlay')
 
 
+def val045_handoff_state():
+    candidate = {
+        'candidate_git_sha': proof.C024_C,
+        'candidate_base_configurator_sha': proof.C024_B,
+        'status': 'PREAUTHORIZED',
+        'activation_state': 'WAITING',
+    }
+    waiting = {
+        'status': 'PREAUTHORIZED',
+        'activation_state': 'ACTIVATABLE',
+        'activation_requires_new_judgment': False,
+    }
+    proof.validate_val045_handoff_state(candidate, waiting)
+
+    def reject(c024, val045, label):
+        try:
+            proof.validate_val045_handoff_state(c024, val045)
+        except Exception:
+            return
+        raise AssertionError('false acceptance: ' + label)
+
+    prematurely_activated = dict(candidate, activation_state='ACTIVATABLE')
+    reject(prematurely_activated, waiting, 'C024 activated before VAL045 DONE')
+    completed = dict(waiting, status='DONE', activation_state='NOT_APPLICABLE')
+    activated = dict(candidate, activation_state='ACTIVATABLE')
+    proof.validate_val045_handoff_state(activated, completed)
+    reject(candidate, completed, 'C024 stayed waiting after strict VAL045 DONE')
+    wrong_candidate = dict(activated, candidate_git_sha='0' * 40)
+    reject(wrong_candidate, completed, 'candidate identity substituted at resume')
+    print('PASS VAL045 strict DONE gates exact preserved C024 activation')
+
+
 def run_group(group):
     began = time.monotonic()
     with tempfile.TemporaryDirectory(prefix='glyph-c014-transition-tests-') as directory:
@@ -504,6 +536,9 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     groups = ('original', 'hosts', 'overlays', 'authority', 'history', 'critical')
-    parser.add_argument('--group', choices=('all', *groups, 'original-phases', 'original-negatives', 'original-kbd'), default='all')
+    parser.add_argument('--group', choices=('all', *groups, 'original-phases', 'original-negatives', 'original-kbd', 'val045-handoff-state'), default='all')
     selected = parser.parse_args().group
-    for group in groups if selected == 'all' else (selected,): run_group(group)
+    if selected == 'val045-handoff-state':
+        val045_handoff_state()
+    else:
+        for group in groups if selected == 'all' else (selected,): run_group(group)
