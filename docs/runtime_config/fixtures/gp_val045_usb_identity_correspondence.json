@@ -19,6 +19,11 @@
     "result": "PASS",
     "reviewer": "abi_source_build"
   },
+  "current_exact_scope_review": {
+    "result": "REJECTED",
+    "reviewer": "fresh independent review",
+    "detail": "C012 checker path is absent from the active VAL045_PATHS finite envelope; its checker edit was removed. Minimum delta: explicit scope amendment adding exactly tools/check_glyph_gp_config012_button_mask_characterization.py for a current-context-only adapter."
+  },
   "focused_candidate_proof": {
     "result": "PASS",
     "enum_modes": [
@@ -264,8 +269,8 @@
   "current_consumer_results": [
     {
       "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
-      "result": "PASS",
-      "detail": "Frozen historical direct-decode proof retained; current authenticated candidate decode, semantic validation, save/publish order and checked-load rejection-before-publish pass; H1 host-only"
+      "result": "BLOCKED_SCOPE",
+      "detail": "Current source anchor is absent from accepted C023 source. A bounded adapter was tested but removed because this checker path is outside active VAL045_PATHS."
     },
     {
       "checker": "tools/check_glyph_config_menu_invalid_state_characterization.py",
@@ -288,13 +293,13 @@
       "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
       "initial_result": "FAIL",
       "initial_detail": "current source anchor missing: pb_decode(&istream, Config_fields, &config)",
-      "resolution": "Current-context adapter added within the recorded host_overlay_paths; frozen historical source and fixture preserved"
+      "resolution": "Current-context adapter tested successfully, then removed after the active VAL045_PATHS classifier rejected this checker path; frozen historical source and fixture preserved"
     },
     {
       "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
       "initial_result": "FAIL",
       "initial_detail": "current host proof did not include accepted C021 checked-load interfaces",
-      "resolution": "Current host route adapted within config019_host_paths and now exercises accepted checked-load, validator, CRC32 and reader source"
+      "resolution": "Current host route adapted within the allowed C019 checker path and exercises accepted checked-load, validator, CRC32 and reader source; rerun after restoration of C012 path is pending"
     }
   ],
   "campaign_test_result": {
