@@ -1160,7 +1160,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         pin['accepted_commit'] for pin in C024_C019_ACCEPTED_EXTRA.values()})
     accepted_predecessor_sources = {}
     accepted_B_tree = original.critical_tree(root, C024_B)
-    historical_tree = original._tree(root, CONFIG019_F020)
+    historical_tree = original.critical_tree(root, CONFIG019_F020)
     for path in sorted(set(accepted_B_tree) | set(historical_tree)):
         if accepted_B_tree.get(path) == historical_tree.get(path):
             continue
