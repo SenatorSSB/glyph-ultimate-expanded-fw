@@ -332,7 +332,7 @@ def authenticate_current():
             require(campaign.get('contract') == 'c024_selector_identity'
                     and pin['path'] in campaign['authorized_source_paths'],
                     'committed current source drift: ' + pin['path'])
-            require(git_read(head + ':' + pin['path']) == git_read(campaign['target'] + ':' + pin['path']),
+            require(git_read('show', head + ':' + pin['path']) == git_read('show', campaign['target'] + ':' + pin['path']),
                     'accepted C024 current source object mismatch: ' + pin['path'])
         require(git_read('ls-files', '-v', '--', pin['path']) == ('H ' + pin['path'] + '\n').encode(),
                 'current source index flag trap: ' + pin['path'])
@@ -340,7 +340,7 @@ def authenticate_current():
         expected_index = live_record['mode'] + ' ' + live_record['blob'] + ' 0\t' + pin['path'] + '\0'
         require(index == expected_index.encode(),
                 'staged current source substitution: ' + pin['path'])
-        source_bytes = git_read(head + ':' + pin['path'])
+        source_bytes = git_read('show', head + ':' + pin['path'])
         require(live_file(pin['path'], digest(source_bytes)) == source_bytes,
                 'live current source differs from committed bytes: ' + pin['path'])
         current[pin['path']] = source_bytes
