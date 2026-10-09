@@ -42,7 +42,7 @@
   "steps": [
     {"id": "valid_startup", "result": "NOT_TESTED", "observed": null},
     {"id": "duplicate_or_empty_profile_selection", "result": "NOT_TESTED", "observed": null},
-    {"id": "keyboard_dinput", "result": "NOT_TESTED", "observed": null},
+    {"id": "keyboard_dinput", "result": "NOT_TESTED", "disposition": "DEFERRED_POST_FIRST_PUBLIC_BETA", "blocking": false, "observed": null},
     {"id": "reconnect_reboot", "result": "NOT_TESTED", "observed": null},
     {"id": "restoration", "result": "NOT_TESTED", "observed": null},
     {"id": "rollback", "result": "NOT_TESTED", "observed": null},

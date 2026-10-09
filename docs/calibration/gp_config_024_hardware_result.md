@@ -23,10 +23,14 @@ performed. The protocol remains gated on those setup facts and owner direction.
 | --- | --- |
 | Valid startup | `NOT_TESTED` |
 | Duplicate/empty profile selection and row identity | `NOT_TESTED` |
-| Keyboard on DInput, when supported by the existing setup | `NOT_TESTED` |
+| Keyboard on DInput | `NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA` (nonblocking; outside the current first-beta physical scope) |
 | Reconnect and reboot | `NOT_TESTED` |
 | Restoration and rollback | `NOT_TESTED` |
 | Safe stop and anomalies | `NOT_TESTED` |
 
 Nunchuk remains `NOT_TESTED`; root cause remains `UNPROVEN`; no hardware PASS
 or public release is claimed.
+
+The Keyboard DInput deferral preserves raw Keyboard semantics. It authorizes
+no behavior removal, disabling, or output transformation and requests no
+Keyboard physical work now.
