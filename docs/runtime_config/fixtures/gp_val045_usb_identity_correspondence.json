@@ -291,7 +291,7 @@
   "current_context_c012_proof": {
     "result": "PASS",
     "phase": "SOURCE_FREE_CANDIDATE",
-    "authenticated_target": "a5ed3dfe7dd598f5936612d7ed33bfe5ebdba7f1",
+    "authenticated_target": "5564f4cc22f75ce5b782a88d4bbb3f451fd17b0f",
     "wrong_source_controls": 3,
     "source_sha256": {
       "HAL/pico/src/comms/ConfiguratorBackend.cpp": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
