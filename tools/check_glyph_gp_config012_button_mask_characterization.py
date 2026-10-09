@@ -206,9 +206,55 @@ def validate_source(value: dict[str, object]) -> tuple[str, dict[str, str]]:
         # are compiled from the current checkout.
         text = verify_current_source(ROOT, item["path"], item["sha256"]).decode("utf-8")
         for anchor in item["anchors"]:
-            require(anchor in path.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"production source anchor missing: {item['path']}: {anchor}")
+            current_text = path.read_text(encoding="utf-8")
+            if anchor not in current_text:
+                require(item["path"] == "HAL/pico/src/core/Persistence.cpp" and
+                        anchor == "pb_decode(&istream, Config_fields, &config)",
+                        f"current source anchor missing: {anchor}")
         texts[item["path"]] = text
+    # The frozen GP-CONFIG-012 source used a direct decode into the destination.
+    # Accepted C021/C023 source now decodes into a candidate and validates it
+    # before publishing. Keep the historical source assertions above, then
+    # prove the current transaction against the exact authenticated worktree
+    # bytes instead of requiring the obsolete decode spelling.
+    current_configurator = regular(ROOT, SOURCE_PATHS[4]).read_text(encoding="utf-8")
+    current_persistence = regular(ROOT, SOURCE_PATHS[5]).read_text(encoding="utf-8")
+    current_validator = regular(ROOT, "src/core/config_validation.cpp").read_text(encoding="utf-8")
+    current_glyph_validator = regular(ROOT, "config/glyph/common/src/glyph_config_validation.cpp").read_text(encoding="utf-8")
+    current_transaction = section(current_configurator, "bool ConfiguratorBackend::HandleSetConfig()",
+                                  "bool ConfiguratorBackend::HandleUnknownCommand(")
+    current_load = section(current_persistence, "Persistence::LoadResult Persistence::LoadConfigChecked(",
+                           "bool Persistence::CheckSavedConfig()")
+    require("pb_decode(&istream, Config_fields, &candidate)" in current_transaction,
+            "current Configurator candidate decode missing")
+    decode_at = current_transaction.find("pb_decode(&istream, Config_fields, &candidate)")
+    validate_at = current_transaction.find("persistence.ValidateConfig(candidate, validation_error)")
+    save_at = current_transaction.find("persistence.SaveConfig(candidate)")
+    publish_at = current_transaction.find("_config = candidate;")
+    require(0 <= decode_at < validate_at < save_at < publish_at,
+            "current Configurator decode/validate/save/publish order drift")
+    require("return false;" in current_transaction[validate_at:save_at] and
+            "_config = candidate;" not in current_transaction[validate_at:save_at],
+            "invalid current SetConfig candidate can publish")
+    require("pb_decode(&istream, Config_fields, &candidate)" in current_load,
+            "current checked-load candidate decode missing")
+    load_decode_at = current_load.find("pb_decode(&istream, Config_fields, &candidate)")
+    load_validate_at = current_load.find("ValidateConfig(candidate, error)")
+    load_publish_at = current_load.find("config = candidate;")
+    require(0 <= load_decode_at < load_validate_at < load_publish_at,
+            "current persisted-load decode/validate/publish order drift")
+    require("return reader.io_failed ? LoadResult::StorageFailure : LoadResult::Rejected;" in current_load and
+            "return LoadResult::Rejected;" in current_load[load_validate_at:load_publish_at],
+            "current checked-load rejection outcomes drift")
+    semantics = section(current_validator, "bool validate_config_semantics(", None)
+    glyph_semantics = section(current_glyph_validator, "bool validate_glyph_config(", None)
+    require("!validate_config_extents(config) || !validate_config_button_bindings(config)" in semantics,
+            "current shared semantic validator no longer checks extents before button bindings")
+    require("validate_config_semantics(config, error)" in glyph_semantics,
+            "current Glyph validator no longer delegates to shared config semantics")
+    require("Button" not in current_transaction and "make_button_mask" not in current_transaction,
+            "current producer transaction gained consumer mask semantics")
     helper = texts[SOURCE_PATHS[0]]
     require("button_mask |= (1ULL << (buttons[j] - 1));" in helper, "helper shift body drift")
     require("nanopb/Nanopb@^0.4.8" in texts["platformio.ini"], "Nanopb compatible-range selector drift")
@@ -217,13 +263,13 @@ def validate_source(value: dict[str, object]) -> tuple[str, dict[str, str]]:
     require("pb_decode(&istream, Config_fields, &candidate)" in texts[SOURCE_PATHS[4]],
             "Configurator decode path drift")
     require("pb_decode(&istream, Config_fields, &config)" in texts[SOURCE_PATHS[5]],
-            "Persistence decode path drift")
+            "historical Persistence decode path drift")
     configurator_body = section(texts[SOURCE_PATHS[4]], "bool ConfiguratorBackend::HandleSetConfig()", "bool ConfiguratorBackend::HandleUnknownCommand(")
     persistence_body = section(texts[SOURCE_PATHS[5]], "bool Persistence::LoadConfig(Config &config)", "bool Persistence::CheckSavedConfig()")
     require("pb_decode(&istream, Config_fields, &candidate)" in configurator_body,
             "Configurator transaction decode path drift")
     require("pb_decode(&istream, Config_fields, &config)" in persistence_body,
-            "Persistence load decode path drift")
+            "historical Persistence load decode path drift")
     for name, body in (("Configurator", configurator_body), ("Persistence", persistence_body)):
         require("Button" not in body and "BTN_" not in body and "make_button_mask" not in body,
                 f"{name} producer path gained Button validation or mask semantics")

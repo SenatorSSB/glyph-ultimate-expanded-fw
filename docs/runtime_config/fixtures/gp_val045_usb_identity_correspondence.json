@@ -264,8 +264,8 @@
   "current_consumer_results": [
     {
       "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
-      "result": "FAIL",
-      "detail": "current source anchor missing: pb_decode(&istream, Config_fields, &config)"
+      "result": "PASS",
+      "detail": "Frozen historical direct-decode proof retained; current authenticated candidate decode, semantic validation, save/publish order and checked-load rejection-before-publish pass; H1 host-only"
     },
     {
       "checker": "tools/check_glyph_config_menu_invalid_state_characterization.py",
@@ -274,13 +274,27 @@
     },
     {
       "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
-      "result": "FAIL",
-      "detail": "historical 18 observations and 160 identity negatives PASS; current host compilation lacks exact accepted C021 persistence APIs"
+      "result": "PASS",
+      "detail": "Historical 18 observations and 160 identity negatives retained; current host route uses accepted checked-load, validation, CRC32 and reader sources; 8 valid controls, 12 decoded-invalid controls, ASan/UBSan; H1 host-only"
     },
     {
       "checker": "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
       "result": "PASS",
       "detail": "103 original input observations; lifecycle; 118 identity negatives; 5 mutants rejected; ASan/UBSan; host-only"
+    }
+  ],
+  "current_consumer_attempt_history": [
+    {
+      "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
+      "initial_result": "FAIL",
+      "initial_detail": "current source anchor missing: pb_decode(&istream, Config_fields, &config)",
+      "resolution": "Current-context adapter added within the recorded host_overlay_paths; frozen historical source and fixture preserved"
+    },
+    {
+      "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
+      "initial_result": "FAIL",
+      "initial_detail": "current host proof did not include accepted C021 checked-load interfaces",
+      "resolution": "Current host route adapted within config019_host_paths and now exercises accepted checked-load, validator, CRC32 and reader source"
     }
   ],
   "campaign_test_result": {
