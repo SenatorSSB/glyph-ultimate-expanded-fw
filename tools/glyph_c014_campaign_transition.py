@@ -1031,6 +1031,13 @@ C024_C019_ACCEPTED_EXTRA = {
         'accepted_commit': '55e2da3d264dcdb89c6d80fae8bab5629a5a662b',
     },
 }
+C024_ACCEPTED_PREDECESSOR_COMMITS = (
+    'd786c244183343f89287a040055b7eaeae1e41f3', # C014
+    '3fb0af34ba945641ba8c8be432ea4533f3abee2a', # C017
+    '55e2da3d264dcdb89c6d80fae8bab5629a5a662b', # C021
+    '292f27cf88a9e814b1086bd544378b7e733e25e3', # C022
+    'e44ec59c57c0db194381f8d2dddce08aab81b5f6', # C023
+)
 
 
 def has_c024_campaign(root: Path) -> bool:
@@ -1153,11 +1160,12 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
                 and hashlib.sha256(original.raw_bytes(root, C024_B, path)).hexdigest() == pin['sha256'],
                 'VAL045 immutable019/current overlay pin changed: ' + path)
     accepted_delta_paths = {row['path'] for row in source_fixture['authorized_predecessor_deltas']}
-    predecessor_commits = sorted({commit
-        for row in source_fixture['authorized_predecessor_deltas']
-        for commit in row['accepted_predecessor_commits']})
-    predecessor_commits = sorted(set(predecessor_commits) | {
-        pin['accepted_commit'] for pin in C024_C019_ACCEPTED_EXTRA.values()})
+    predecessor_commits = C024_ACCEPTED_PREDECESSOR_COMMITS
+    fixture_commits = {commit for row in source_fixture['authorized_predecessor_deltas']
+                       for commit in row['accepted_predecessor_commits']}
+    fixture_commits.update(pin['accepted_commit'] for pin in C024_C019_ACCEPTED_EXTRA.values())
+    require(fixture_commits <= set(predecessor_commits),
+            'VAL045 predecessor fixture names an unadopted integration commit')
     accepted_predecessor_sources = {}
     accepted_B_tree = original.critical_tree(root, C024_B)
     historical_tree = original.critical_tree(root, CONFIG019_F020)
@@ -1167,7 +1175,12 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         matches = []
         for commit in predecessor_commits:
             commit_tree = original._tree(root, commit)
-            if commit_tree.get(path) == accepted_B_tree.get(path):
+            parents = get(root, 'rev-list', '--parents', '-n', '1', commit).decode().split()
+            require(len(parents) >= 2 and original.ancestor(root, commit, C024_B),
+                    'VAL045 accepted predecessor commit ancestry changed: ' + commit)
+            first_parent_tree = original._tree(root, parents[1])
+            if (commit_tree.get(path) == accepted_B_tree.get(path)
+                    and first_parent_tree.get(path) != commit_tree.get(path)):
                 matches.append(commit)
         require(matches,
                 'VAL045 critical-source drift is not an exact accepted predecessor: ' + path +
