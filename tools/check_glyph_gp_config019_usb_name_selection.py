@@ -399,17 +399,8 @@ def current_route(temp, value, current):
     if VAL045_CURRENT_FRAGMENTS is None:
         require(parts['acceptance'].replace(ACCEPTED_GUARD, '', 1) ==
                 fragment_from_snapshot(temp / 'historical', 'acceptance'), 'acceptance body equivalence exceeds exact guard')
-    pieces = []
-    for key, body in parts.items():
-        if VAL045_CURRENT_FRAGMENTS is not None and key in {'load', 'watchdog_consumer'}:
-            # These accepted predecessor fragments are authenticated above but
-            # outside the USB-name selector path. Their current implementations
-            # require the new persistence/watchdog host APIs, which the immutable
-            # 019 harness does not model. Keep this harness focused on the actual
-            # selector/menu/acceptance fragments it can execute.
-            body = fragment_from_snapshot(temp / 'historical', key)
-        pieces.append(('void DefaultConfigMenu::BuildUsbPage(Config &config) {\n' + body + '}\n')
-                      if key == 'usb_menu' else body)
+    pieces = [('void DefaultConfigMenu::BuildUsbPage(Config &config) {\n' + body + '}\n')
+              if key == 'usb_menu' else body for key, body in parts.items()]
     (temp / 'production_fragments.inc').write_text('\n'.join(pieces))
     source = temp / 'current_acceptance.cpp'
     source.write_bytes(live_file(CURRENT_HARNESS, CURRENT_FILE_SHA256[CURRENT_HARNESS]))
