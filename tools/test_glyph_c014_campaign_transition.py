@@ -485,6 +485,14 @@ def original034_historical(root):
 
 
 def val045_handoff_state():
+    expected_hardware_paths = frozenset((
+        'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md',
+        'docs/calibration/gp_config_024_hardware_result.md',
+        'docs/calibration/fixtures/gp_config_024_hardware_evidence.json',
+    ))
+    assert proof.C024_HARDWARE_HANDOFF_PATHS == expected_hardware_paths
+    assert proof.C024_HARDWARE_HANDOFF_PATHS.isdisjoint(proof.C024_CANDIDATE_PATHS)
+    assert proof.C024_HARDWARE_HANDOFF_PATHS.isdisjoint(proof.VAL045_PATHS)
     candidate = {
         'candidate_git_sha': proof.C024_C,
         'candidate_base_configurator_sha': proof.C024_B,

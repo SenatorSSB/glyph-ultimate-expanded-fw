@@ -1009,6 +1009,11 @@ C024_CANDIDATE_PATHS = frozenset((
     'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     'docs/runtime_config/runtime_config_validation_health.md',
 ))
+C024_HARDWARE_HANDOFF_PATHS = frozenset((
+    'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md',
+    'docs/calibration/gp_config_024_hardware_result.md',
+    'docs/calibration/fixtures/gp_config_024_hardware_evidence.json',
+))
 VAL045_PATHS = frozenset((
     'tools/glyph_c014_campaign_transition.py',
     'tools/glyph_campaign_transition.py',
@@ -1292,8 +1297,9 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    require(changed <= C024_CANDIDATE_PATHS | VAL045_PATHS,
-            'VAL045 target exceeds exact candidate/governance envelope: ' + repr(sorted(changed - C024_CANDIDATE_PATHS - VAL045_PATHS)))
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS
+    require(changed <= allowed_target_paths,
+            'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
         entry = tree.get(path)
         require(entry is not None and entry[:2] == ('100644', 'blob'),
