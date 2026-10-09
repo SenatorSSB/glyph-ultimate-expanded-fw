@@ -350,7 +350,10 @@ def authenticate_current():
                 'current source differences exceed accepted C024 predecessor lineage')
         phase_record = json.loads(live_file(VAL045_FIXTURE, digest((REPOSITORY_ROOT / VAL045_FIXTURE).read_bytes())), object_pairs_hook=unique)
         actual_fragments = fragments()
-        VAL045_CURRENT_FRAGMENTS = phase_record['candidate_current_fragments']
+        VAL045_CURRENT_FRAGMENTS = (
+            phase_record['candidate_current_fragments']
+            if campaign['phase'] == 'CANDIDATE_VALIDATION_ONLY'
+            else phase_record['base_current_fragments'])
         require({key: digest(value.encode()) for key, value in actual_fragments.items()} == VAL045_CURRENT_FRAGMENTS,
                 'current C024 source fragments differ from finite VAL045 pins')
     else:
