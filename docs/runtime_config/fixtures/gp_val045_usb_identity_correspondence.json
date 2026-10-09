@@ -63,8 +63,8 @@
   ],
   "firmware_build": "NOT_RUN",
   "hardware_acceptance": "NOT_CLAIMED",
-  "val045_activation": "ACTIVATABLE",
-  "c024_resumption": "WAITING_FOR_STRICT_VAL045_DONE",
+  "val045_activation": "DONE",
+  "c024_resumption": "ACTIVATABLE_AFTER_VAL045_DONE",
   "nunchuk": "NOT_TESTED",
   "root_cause": "UNPROVEN",
   "accepted_c019_source_lineage": [
