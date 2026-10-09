@@ -521,7 +521,9 @@ inline PersistenceValidatorSetup persistence_validator_setup;
                 '-I' + str(temp / 'current/include'),
                 '-I' + str(temp / 'current/config/glyph/common/include'),
                 '-I' + str(temp / 'current/config/glyph/glyph_mk6/include'),
-                '-I' + str(crc_root), '-I' + str(temp)]
+                '-I' + str(crc_root),
+                '-I' + str(REPOSITORY_ROOT / 'tools/fixtures/gp_config021_persisted_recovery/include'),
+                '-I' + str(temp)]
     flags = value['compiler_flags']
     require(flags == ['-O0', '-g', '-fshort-enums', '-fsanitize=address,undefined',
                       '-fno-sanitize-recover=all', '-fno-omit-frame-pointer'], 'current compiler protection flags')
