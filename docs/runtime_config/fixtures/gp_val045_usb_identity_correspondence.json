@@ -20,9 +20,9 @@
     "reviewer": "abi_source_build"
   },
   "current_exact_scope_review": {
-    "result": "REJECTED",
-    "reviewer": "fresh independent review",
-    "detail": "C012 checker path is absent from the active VAL045_PATHS finite envelope; its checker edit was removed. Minimum delta: explicit scope amendment adding exactly tools/check_glyph_gp_config012_button_mask_characterization.py for a current-context-only adapter."
+    "result": "OWNER_AMENDED",
+    "date": "2026-10-09",
+    "detail": "Owner-authorized exactly one additional editable path: tools/check_glyph_gp_config012_button_mask_characterization.py, current-context adapter only; historical proof and C024 firmware behavior remain unchanged."
   },
   "focused_candidate_proof": {
     "result": "PASS",
@@ -269,8 +269,8 @@
   "current_consumer_results": [
     {
       "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
-      "result": "BLOCKED_SCOPE",
-      "detail": "Current source anchor is absent from accepted C023 source. A bounded adapter was tested but removed because this checker path is outside active VAL045_PATHS."
+      "result": "PASS",
+      "detail": "Frozen historical direct-decode proof and outputs retained; exact authenticated current transaction/load/validation route passes; 3 wrong-source controls reject; H1 host-only"
     },
     {
       "checker": "tools/check_glyph_config_menu_invalid_state_characterization.py",
@@ -288,18 +288,32 @@
       "detail": "103 original input observations; lifecycle; 118 identity negatives; 5 mutants rejected; ASan/UBSan; host-only"
     }
   ],
+  "current_context_c012_proof": {
+    "result": "PASS",
+    "phase": "SOURCE_FREE_CANDIDATE",
+    "authenticated_target": "a5ed3dfe7dd598f5936612d7ed33bfe5ebdba7f1",
+    "wrong_source_controls": 3,
+    "source_sha256": {
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+      "HAL/pico/src/core/Persistence.cpp": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+      "src/core/config_validation.cpp": "5e3a262be086a981de9832117398be690be52fd1cfc881f88473f9638d32cf8b",
+      "config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "src/core/config_button_validation.cpp": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    "hardware": "NOT_CLAIMED"
+  },
   "current_consumer_attempt_history": [
     {
       "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
       "initial_result": "FAIL",
       "initial_detail": "current source anchor missing: pb_decode(&istream, Config_fields, &config)",
-      "resolution": "Current-context adapter tested successfully, then removed after the active VAL045_PATHS classifier rejected this checker path; frozen historical source and fixture preserved"
+      "resolution": "Owner authorized this exact extra path; separate current-source adapter passes while immutable historical source and fixture remain unchanged"
     },
     {
       "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
       "initial_result": "FAIL",
       "initial_detail": "current host proof did not include accepted C021 checked-load interfaces",
-      "resolution": "Current host route adapted within the allowed C019 checker path and exercises accepted checked-load, validator, CRC32 and reader source; rerun after restoration of C012 path is pending"
+      "resolution": "Current host route adapted within the allowed C019 checker path and exercises accepted checked-load, validator, CRC32 and reader source; PASS rerun on exact amended scope"
     }
   ],
   "campaign_test_result": {
