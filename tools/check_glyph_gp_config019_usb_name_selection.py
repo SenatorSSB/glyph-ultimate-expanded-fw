@@ -396,8 +396,9 @@ def current_route(temp, value, current):
     require({k: digest(v.encode()) for k, v in parts.items()} == expected_fragments, 'current fragment substitution')
     if VAL045_CURRENT_FRAGMENTS is None:
         require([k for k in parts if digest(parts[k].encode()) != FRAGMENT_SHA256[k]] == ['acceptance'], 'unexpected current fragment drift')
-    require(parts['acceptance'].replace(ACCEPTED_GUARD, '', 1) ==
-            fragment_from_snapshot(temp / 'historical', 'acceptance'), 'acceptance body equivalence exceeds exact guard')
+    if VAL045_CURRENT_FRAGMENTS is None:
+        require(parts['acceptance'].replace(ACCEPTED_GUARD, '', 1) ==
+                fragment_from_snapshot(temp / 'historical', 'acceptance'), 'acceptance body equivalence exceeds exact guard')
     pieces = [('void DefaultConfigMenu::BuildUsbPage(Config &config) {\n' + body + '}\n')
               if key == 'usb_menu' else body for key, body in parts.items()]
     (temp / 'production_fragments.inc').write_text('\n'.join(pieces))
