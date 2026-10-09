@@ -96,5 +96,196 @@
     "backend_selector": "de38f52b6d0362985a4107407dc6ed12deb41ac6c5cf522e3ebf38cc43aa322d",
     "usb_getter": "807d98db9948beabf51edee14d6cfaa6326ce5f33039dbb458adfd178318311b",
     "watchdog_consumer": "cb5eca0652f2555a6ace87037fe1ce66aed3c2a13801aa7723c22e8b4c7837d9"
+  },
+  "accepted_predecessor_source_correspondence": [
+    {
+      "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "accepted_commit": "3fb0af34ba945641ba8c8be432ea4533f3abee2a",
+      "accepted_blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "accepted_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+      "fresh_B_blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "fresh_B_sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+      "historical_F020_blob": "843eb9b937ccebc616679b0ced24b805d8a6290d"
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "accepted_commit": "55e2da3d264dcdb89c6d80fae8bab5629a5a662b",
+      "accepted_blob": "a73d15f088a63cab63100c22f177026ca3436901",
+      "accepted_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+      "fresh_B_blob": "a73d15f088a63cab63100c22f177026ca3436901",
+      "fresh_B_sha256": "eb842dd491ccb8620e76a90d664e296824b84a6294927fc87b136916fc8070e8",
+      "historical_F020_blob": "43cbd3f39b4c9a09ecc855b0f2704b2081a45981"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "accepted_commit": "55e2da3d264dcdb89c6d80fae8bab5629a5a662b",
+      "accepted_blob": "1c324fddfbf22879ad1c974ace2ec8ff1605f711",
+      "accepted_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+      "fresh_B_blob": "1c324fddfbf22879ad1c974ace2ec8ff1605f711",
+      "fresh_B_sha256": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
+      "historical_F020_blob": "6ca93c96c944ee539a2d409e32889306c1eafac7"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "accepted_commit": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "accepted_blob": "4b8957496f6316a2aa64d9b33ee6bbc60132e612",
+      "accepted_sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c",
+      "fresh_B_blob": "4b8957496f6316a2aa64d9b33ee6bbc60132e612",
+      "fresh_B_sha256": "913d6c3e96ecb6670097d4faebbdbbd34c706e4bfab4f76a5b3b8f692d7f6b2c",
+      "historical_F020_blob": "f7726a0063dd05409d7464d947a47efc675bdbef"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "accepted_commit": "55e2da3d264dcdb89c6d80fae8bab5629a5a662b",
+      "accepted_blob": "69e4f0c327b43e940e2e8cf4cf32b65e349f9a97",
+      "accepted_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+      "fresh_B_blob": "69e4f0c327b43e940e2e8cf4cf32b65e349f9a97",
+      "fresh_B_sha256": "07589fff75f0663465bfa6b8bf5d268591934c785cc18956d06d209ddf40f23f",
+      "historical_F020_blob": "907e6ca3d84fc414aa67dadfcbf4f60d1e1200a7"
+    },
+    {
+      "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+      "accepted_commit": "292f27cf88a9e814b1086bd544378b7e733e25e3",
+      "accepted_blob": "6f818818fe7a0f32270048d204d4b6e5493ebe9c",
+      "accepted_sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+      "fresh_B_blob": "6f818818fe7a0f32270048d204d4b6e5493ebe9c",
+      "fresh_B_sha256": "e550a9359a88b0cc8e2c9e043e154a389c4f868d605faefe71021cf2845ac1fb",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "config/glyph/common/include/glyph_config_validation.hpp",
+      "accepted_commit": "292f27cf88a9e814b1086bd544378b7e733e25e3",
+      "accepted_blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+      "accepted_sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+      "fresh_B_blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+      "fresh_B_sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "accepted_commit": "292f27cf88a9e814b1086bd544378b7e733e25e3",
+      "accepted_blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+      "accepted_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "fresh_B_blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+      "fresh_B_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "historical_F020_blob": "90cc393759e91c8acacd6edef9ecb05b86d7fdc8"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "accepted_commit": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "accepted_blob": "05295604484da47077a595c7b4f9b74a1ba6d49b",
+      "accepted_sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae",
+      "fresh_B_blob": "05295604484da47077a595c7b4f9b74a1ba6d49b",
+      "fresh_B_sha256": "af19d625ac562e7404293ddb181870c2279393c7c7fb4710530572900aed44ae",
+      "historical_F020_blob": "701e4ac8c0a635b77ef4282f29109f7bb0bea726"
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "accepted_commit": "292f27cf88a9e814b1086bd544378b7e733e25e3",
+      "accepted_blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+      "accepted_sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "fresh_B_blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+      "fresh_B_sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "include/core/config_rgb_target_validation.hpp",
+      "accepted_commit": "292f27cf88a9e814b1086bd544378b7e733e25e3",
+      "accepted_blob": "598ede641ce796813852e328866c4c1327de1d3b",
+      "accepted_sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+      "fresh_B_blob": "598ede641ce796813852e328866c4c1327de1d3b",
+      "fresh_B_sha256": "24520abcb5119b1b4db7d1c9f799e99018f888d8a5eeb23bfcf21e563a72fc49",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "accepted_commit": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "accepted_blob": "b91148336567287b17cc0b73cae0fddc5f39aadb",
+      "accepted_sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11",
+      "fresh_B_blob": "b91148336567287b17cc0b73cae0fddc5f39aadb",
+      "fresh_B_sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "accepted_commit": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "accepted_blob": "b7b180a7edae77f426c64cd740638f83d2df02a6",
+      "accepted_sha256": "a45124019b1e24ee6b44a09b0c5d88e121113e1eb9e8ff1b7f6f8fb90ce4d0d4",
+      "fresh_B_blob": "b7b180a7edae77f426c64cd740638f83d2df02a6",
+      "fresh_B_sha256": "a45124019b1e24ee6b44a09b0c5d88e121113e1eb9e8ff1b7f6f8fb90ce4d0d4",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "include/modes/CustomControllerMode.hpp",
+      "accepted_commit": "d786c244183343f89287a040055b7eaeae1e41f3",
+      "accepted_blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+      "accepted_sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414",
+      "fresh_B_blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+      "fresh_B_sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414",
+      "historical_F020_blob": "7c073b2e91f3950c2f1a785940b39539dda433b5"
+    },
+    {
+      "path": "src/core/config_rgb_target_validation.cpp",
+      "accepted_commit": "292f27cf88a9e814b1086bd544378b7e733e25e3",
+      "accepted_blob": "a720ef3a2ee9ecc5db45fad8085b4b4de4b5f89d",
+      "accepted_sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+      "fresh_B_blob": "a720ef3a2ee9ecc5db45fad8085b4b4de4b5f89d",
+      "fresh_B_sha256": "63029fdc126ebdc190ae56c28015bc1a43ed65cc1e5de929df9cf8de9bde19f8",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "accepted_commit": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "accepted_blob": "7a442014e0c5176e360ece8b64a8e88c02547716",
+      "accepted_sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+      "fresh_B_blob": "7a442014e0c5176e360ece8b64a8e88c02547716",
+      "fresh_B_sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "accepted_commit": "03bbf5da14a7d450f2986b12ad69ec6b3f704bad",
+      "accepted_blob": "70070045463fee42181b7c34e8eac9d1a34159ce",
+      "accepted_sha256": "5e3a262be086a981de9832117398be690be52fd1cfc881f88473f9638d32cf8b",
+      "fresh_B_blob": "70070045463fee42181b7c34e8eac9d1a34159ce",
+      "fresh_B_sha256": "5e3a262be086a981de9832117398be690be52fd1cfc881f88473f9638d32cf8b",
+      "historical_F020_blob": null
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "accepted_commit": "d786c244183343f89287a040055b7eaeae1e41f3",
+      "accepted_blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "accepted_sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+      "fresh_B_blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "fresh_B_sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+      "historical_F020_blob": "bdd8b398657758ae8adbacdf6e06d3e55f6b9626"
+    }
+  ],
+  "current_consumer_results": [
+    {
+      "checker": "tools/check_glyph_gp_config012_button_mask_characterization.py",
+      "result": "FAIL",
+      "detail": "current source anchor missing: pb_decode(&istream, Config_fields, &config)"
+    },
+    {
+      "checker": "tools/check_glyph_config_menu_invalid_state_characterization.py",
+      "result": "PASS",
+      "detail": "5 cases; H1 host-only; historical observations frozen"
+    },
+    {
+      "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
+      "result": "FAIL",
+      "detail": "historical 18 observations and 160 identity negatives PASS; current host compilation lacks exact accepted C021 persistence APIs"
+    },
+    {
+      "checker": "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
+      "result": "PASS",
+      "detail": "103 original input observations; lifecycle; 118 identity negatives; 5 mutants rejected; ASan/UBSan; host-only"
+    }
+  ],
+  "campaign_test_result": {
+    "result": "FAIL",
+    "classification": "FRAMEWORK_VALIDATION_DEBT",
+    "detail": "synthetic setup compares against older readiness commit and includes already accepted predecessor-chain paths"
   }
 }

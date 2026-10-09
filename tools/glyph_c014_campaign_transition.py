@@ -1039,6 +1039,7 @@ C024_ACCEPTED_PREDECESSOR_COMMITS = (
     '03bbf5da14a7d450f2986b12ad69ec6b3f704bad', # C023 source validation
     'e44ec59c57c0db194381f8d2dddce08aab81b5f6', # C023
 )
+VAL045_FIXTURE_PATH = 'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json'
 
 
 def has_c024_campaign(root: Path) -> bool:
@@ -1188,6 +1189,25 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
                 ' F020=' + repr(historical_tree.get(path)) + ' B=' + repr(accepted_B_tree.get(path)))
         accepted_predecessor_sources[path] = matches[0]
         accepted_delta_paths.add(path)
+    correspondence_rows = []
+    for path, commit in sorted(accepted_predecessor_sources.items()):
+        accepted_entry = original._tree(root, commit).get(path)
+        base_entry = accepted_B_tree.get(path)
+        historical_entry = historical_tree.get(path)
+        require(accepted_entry is not None and accepted_entry == base_entry,
+                'VAL045 accepted predecessor blob differs from fresh B: ' + path)
+        correspondence_rows.append({
+            'path': path,
+            'accepted_commit': commit,
+            'accepted_blob': accepted_entry[2],
+            'accepted_sha256': hashlib.sha256(original.raw_bytes(root, commit, path)).hexdigest(),
+            'fresh_B_blob': base_entry[2],
+            'fresh_B_sha256': hashlib.sha256(original.raw_bytes(root, C024_B, path)).hexdigest(),
+            'historical_F020_blob': historical_entry[2] if historical_entry else None,
+        })
+    val045_record = json.loads(original.current_bytes(root, VAL045_FIXTURE_PATH), object_pairs_hook=unique)
+    require(val045_record.get('accepted_predecessor_source_correspondence') == correspondence_rows,
+            'VAL045 persisted predecessor path/blob correspondence changed')
     for path, pin in C024_C019_ACCEPTED_EXTRA.items():
         commit = pin['accepted_commit']
         parents = get(root, 'rev-list', '--parents', '-n', '1', commit).decode().split()
