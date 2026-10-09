@@ -185,6 +185,7 @@ CURRENT_HARNESS = 'tools/fixtures/gp_config019_usb_name_selection/current_accept
 CURRENT_FILE_SHA256 = {'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp': 'be0ace2b917ade71cde930e5e3293443bfe26f4713a4d40d82008a22e0615e1b', 'docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json': 'c918594c260e8a4a675d84c0b808be1c87ac876ea8b2ca138316162de2863453', 'docs/runtime_config/gp_val041_usb_name_current_acceptance.md': '9aa78efa0e35eb483281865e2e25f6611c9653beccb4757ba399959a0012eaab'}
 VAL045_FIXTURE = 'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json'
 VAL045_CURRENT_FRAGMENTS = None
+VAL045_SOURCE_CAMPAIGN = None
 
 # GP-VAL-041 separately pinned current overlay. Historical definitions above are retained.
 import argparse
@@ -274,11 +275,12 @@ def guard_critical_inputs(head):
 
 
 def authenticate_current():
-    global VAL045_CURRENT_FRAGMENTS
+    global VAL045_CURRENT_FRAGMENTS, VAL045_SOURCE_CAMPAIGN
     # Identity-only catalogue authentication never calls this host proof.
     from glyph_c014_campaign_transition import authenticate_config019_coexistence
     head = git_read('rev-parse', 'HEAD').decode().strip()
     campaign = authenticate_config019_coexistence(REPOSITORY_ROOT, head)
+    VAL045_SOURCE_CAMPAIGN = campaign
     guard_critical_inputs(head)
     require(Path(git_read('rev-parse', '--show-toplevel').decode().strip()).resolve() == REPOSITORY_ROOT.resolve(),
             'checker repository root mismatch')
@@ -362,7 +364,7 @@ def authenticate_current():
         require(new.count(ACCEPTED_INCLUDE) == 1 and new.count(ACCEPTED_GUARD) == 1 and
                 new.replace(ACCEPTED_INCLUDE, '', 1).replace(ACCEPTED_GUARD, '', 1) == old,
                 'current source delta exceeds exact accepted guard')
-    return value, historical, current, head
+    return value, historical, current, head, campaign
 
 
 def write_snapshot(root, files):
@@ -388,7 +390,7 @@ def historical_route(root, value):
             'source_files': 32, 'production_fragments': 12, 'sanitizer_stderr': result.stderr}
 
 
-def current_route(temp, value, current):
+def current_route(temp, value, current, campaign):
     global ROOT
     saved = ROOT; ROOT = temp / 'current'
     try:
@@ -404,12 +406,119 @@ def current_route(temp, value, current):
                 fragment_from_snapshot(temp / 'historical', 'acceptance'), 'acceptance body equivalence exceeds exact guard')
     pieces = [('void DefaultConfigMenu::BuildUsbPage(Config &config) {\n' + body + '}\n')
               if key == 'usb_menu' else body for key, body in parts.items()]
-    (temp / 'production_fragments.inc').write_text('\n'.join(pieces))
+    persistence_source = current['HAL/pico/src/core/Persistence.cpp'].decode()
+    reader_start = persistence_source.index('namespace {')
+    reader_end = persistence_source.index('Persistence::Persistence()', reader_start)
+    reader_helpers = persistence_source[reader_start:reader_end]
+    validator_start = persistence_source.index('bool Persistence::SetValidator(')
+    validator_end = persistence_source.index('bool Persistence::SaveConfig(', validator_start)
+    validator_methods = persistence_source[validator_start:validator_end]
+    saved_check_start = persistence_source.index('bool Persistence::CheckSavedConfig(File &config_file')
+    saved_check_end = persistence_source.index('\nPersistence persistence;', saved_check_start)
+    saved_check = persistence_source[saved_check_start:saved_check_end]
+    host_stubs_path = temp / 'historical/tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp'
+    original_stubs = host_stubs_path.read_text()
+    stub_start = original_stubs.index('struct File {')
+    stub_end = original_stubs.index('// HID constants are inert compile placeholders', stub_start)
+    compatible_stubs = '''struct HostConfigHeader { size_t config_size = 0; uint32_t config_crc = 0; };
+struct File {
+    std::vector<uint8_t> bytes; size_t offset = 0; bool valid = true;
+    File() = default; explicit File(std::vector<uint8_t> input) : bytes(std::move(input)) {}
+    explicit operator bool() const { return valid; }
+    size_t size() const { return bytes.size(); }
+    size_t position() const { return offset; }
+    bool seek(size_t value) { if (value > bytes.size()) return false; offset = value; return true; }
+    int read(uint8_t *out, size_t count) {
+        if (offset > bytes.size()) return -1;
+        const size_t amount = std::min(count, bytes.size() - offset);
+        if (amount) std::memcpy(out, bytes.data() + offset, amount);
+        offset += amount; return static_cast<int>(amount);
+    }
+    int read() { return offset < bytes.size() ? bytes[offset++] : -1; }
+    void close() {}
+};
+inline pb_istream_t as_pb_istream(File &file, size_t) {
+    return pb_istream_from_buffer(file.bytes.data(), file.bytes.size());
+}
+inline struct LittleFsStub {
+    File open(const char *, const char *) {
+        HostConfigHeader header{}; header.config_size = wire.size();
+        CRC32 crc; for (uint8_t byte : wire) crc.update(byte); header.config_crc = crc.finalize();
+        std::vector<uint8_t> bytes(sizeof(header) + wire.size());
+        std::memcpy(bytes.data(), &header, sizeof(header));
+        std::copy(wire.begin(), wire.end(), bytes.begin() + sizeof(header));
+        return File(std::move(bytes));
+    }
+} LittleFS;
+class Persistence {
+  public:
+    using ConfigHeader = HostConfigHeader;
+    enum class LoadResult { Loaded, Absent, Rejected, StorageFailure };
+    unsigned saves = 0; Config saved = Config_init_zero;
+    bool available = true; ConfigSemanticValidator _validator = nullptr;
+    const char *config_filename = "host-memory-only";
+    size_t config_offset = sizeof(ConfigHeader);
+    bool IsAvailable() const { return available; }
+    bool SetValidator(ConfigSemanticValidator);
+    bool ValidateConfig(const Config &, ConfigValidationError &) const;
+    bool CheckSavedConfig(File &, LoadResult *failure = nullptr);
+    LoadResult LoadConfigChecked(Config &);
+    bool LoadConfig(Config &);
+    bool SaveConfig(Config &config) { ++saves; saved = config; return true; }
+};
+inline Persistence persistence;
+struct PersistenceValidatorSetup {
+    PersistenceValidatorSetup() { persistence.SetValidator(validate_glyph_config); }
+};
+inline PersistenceValidatorSetup persistence_validator_setup;
+'''
+    require(original_stubs.count('struct File {') == 1 and
+            original_stubs.count('class Persistence {') == 1,
+            'immutable C019 host adapter boundaries changed')
+    generated_stubs = (original_stubs[:stub_start] +
+        '#include <core/config_validation.hpp>\n#include <glyph_config_validation.hpp>\n#include <CRC32.h>\n' +
+        compatible_stubs + original_stubs[stub_end:])
+    host_stubs_path.write_text(generated_stubs)
+    (temp / 'production_fragments.inc').write_text(
+        reader_helpers + validator_methods + saved_check + '\n'.join(pieces))
+
+    support_paths = (
+        'include/core/config_validation.hpp', 'include/core/config_usb_default_validation.hpp',
+        'include/core/config_rgb_target_validation.hpp',
+        'config/glyph/common/include/glyph_config_validation.hpp',
+        'src/core/config_validation.cpp', 'src/core/config_usb_default_validation.cpp',
+        'src/core/config_rgb_target_validation.cpp', 'config/glyph/common/src/glyph_config_validation.cpp')
+    for path in support_paths:
+        raw = git_read('show', campaign['target'] + ':' + path)
+        predecessor = campaign['source_candidates'].get(path)
+        if predecessor is not None:
+            require(raw == git_read('show', predecessor + ':' + path),
+                    'current C019 checked-load support differs from accepted source: ' + path)
+        else:
+            require(raw == git_read('show', campaign['base'] + ':' + path),
+                    'current C019 checked-load support differs from fresh B: ' + path)
+        destination = temp / 'current' / path
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(raw)
+
+    crc_paths = (
+        'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h',
+        'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp',
+        'tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h')
+    crc_root = temp / 'c021-crc-host'
+    for path in crc_paths:
+        raw = git_read('show', '55e2da3d264dcdb89c6d80fae8bab5629a5a662b:' + path)
+        live_file(path, digest(raw))
+        destination = crc_root / Path(path).name if path.endswith(('CRC32.h', 'CRC32.cpp')) else crc_root / 'Arduino.h'
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(raw)
     source = temp / 'current_acceptance.cpp'
     source.write_bytes(live_file(CURRENT_HARNESS, CURRENT_FILE_SHA256[CURRENT_HARNESS]))
     decoder = temp / 'current' / DECODER
     includes = ['-I' + str(decoder / 'nanopb'), '-I' + str(decoder / 'generated'),
-                '-I' + str(temp / 'current/include'), '-I' + str(temp)]
+                '-I' + str(temp / 'current/include'),
+                '-I' + str(temp / 'current/config/glyph/common/include'),
+                '-I' + str(crc_root), '-I' + str(temp)]
     flags = value['compiler_flags']
     require(flags == ['-O0', '-g', '-fshort-enums', '-fsanitize=address,undefined',
                       '-fno-sanitize-recover=all', '-fno-omit-frame-pointer'], 'current compiler protection flags')
@@ -423,7 +532,15 @@ def current_route(temp, value, current):
         obj = temp / ('decoder' + str(index) + '.o')
         execute(['cc', '-std=c99', *flags, *includes, '-c', str(decoder / path), '-o', str(obj)])
         objects.append(str(obj))
-    for name, path in [('validator', temp / 'current/src/core/config_button_validation.cpp'), ('host', source)]:
+    current_cpp_sources = [
+        temp / 'current/src/core/config_button_validation.cpp',
+        temp / 'current/src/core/config_validation.cpp',
+        temp / 'current/src/core/config_usb_default_validation.cpp',
+        temp / 'current/src/core/config_rgb_target_validation.cpp',
+        temp / 'current/config/glyph/common/src/glyph_config_validation.cpp',
+        crc_root / 'CRC32.cpp', source]
+    for index, path in enumerate(current_cpp_sources):
+        name = 'host' if path == source else 'current' + str(index)
         obj = temp / (name + '.o')
         execute(['c++', '-std=gnu++20', *flags, *includes, '-c', str(path), '-o', str(obj)])
         objects.append(str(obj))
@@ -438,6 +555,7 @@ def current_route(temp, value, current):
             value['decoded_invalid_controls'] == 12, 'current false acceptance/control census')
     return {'status': 'PASS', 'original_observations': rows[:18], 'current_controls': rows[18:],
             'valid_controls': 8, 'real_decoded_invalid_controls': 12, 'source_files': 34,
+            'checked_load': 'actual accepted C021/C022/C023 methods and validators; exact CRC32 file adapter',
             'acceptance_sha256': value['current_fragments']['acceptance'], 'commands': commands,
             'binary_sha256': digest(binary.read_bytes()), 'sanitizer_stderr': result.stderr}
 
@@ -459,7 +577,7 @@ def overlay_main():
     os.environ['GIT_OPTIONAL_LOCKS'] = '0'
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
     try:
-        value, historical, current, head = authenticate_current()
+        value, historical, current, head, campaign = authenticate_current()
         if args.report:
             require(args.report.is_absolute() and not args.report.resolve().is_relative_to(REPOSITORY_ROOT.resolve()),
                     'actual execution report must be absolute and outside repository')
@@ -478,7 +596,7 @@ def overlay_main():
                 evidence['historical'] = historical_route(temp / 'historical', value)
                 print('gp_config019 historical: PASS observations=18 identity_negatives=160 sources=32 fragments=12 ASan_UBSan=PASS')
             if args.route in {'both', 'current'}:
-                evidence['current'] = current_route(temp, value, current)
+                evidence['current'] = current_route(temp, value, current, campaign)
                 print('gp_config019 current: PASS original_observations=18 valid_controls=8 decoded_invalid_controls=12 sources=34 ASan_UBSan=PASS')
         # Recheck live inputs after execution. No proof result is cached.
         authenticate_current()
