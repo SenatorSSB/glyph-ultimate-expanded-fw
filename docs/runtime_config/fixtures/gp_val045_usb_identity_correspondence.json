@@ -280,7 +280,7 @@
     {
       "checker": "tools/check_glyph_gp_config019_usb_name_selection.py",
       "result": "PASS",
-      "detail": "Historical 18 observations and 160 identity negatives retained; current host route uses accepted checked-load, validation, CRC32 and reader sources; 8 valid controls, 12 decoded-invalid controls, ASan/UBSan; H1 host-only"
+      "detail": "Historical 18 observations and 160 identity negatives retained; restored exact-scope current host route uses accepted checked-load, validation, CRC32 and reader sources; 8 valid controls, 12 decoded-invalid controls, ASan/UBSan; H1 host-only"
     },
     {
       "checker": "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
@@ -305,6 +305,6 @@
   "campaign_test_result": {
     "result": "FAIL",
     "classification": "FRAMEWORK_VALIDATION_DEBT",
-    "detail": "synthetic setup compares against older readiness commit and includes already accepted predecessor-chain paths"
+    "detail": "synthetic composition reaches its finite path-envelope assertion with broad inherited predecessor paths; transition mutation assertions do not run. Retained as Tier-3 framework debt, not a product result."
   }
 }
