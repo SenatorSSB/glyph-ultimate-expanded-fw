@@ -291,7 +291,7 @@
   "current_context_c012_proof": {
     "result": "PASS",
     "phase": "SOURCE_FREE_CANDIDATE",
-    "authenticated_target": "28149724e353bcc9b25e467347008b04a75a4963",
+    "authenticated_target": "6d1dfa8a4c77526891d11f701e338e3514590074",
     "wrong_source_controls": 3,
     "source_sha256": {
       "HAL/pico/src/comms/ConfiguratorBackend.cpp": "e3fd8f93300ef66a79f8877e6ed72628d95831f32f95c46c3f8c011a8bd1c121",
@@ -301,6 +301,17 @@
       "src/core/config_button_validation.cpp": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
     },
     "hardware": "NOT_CLAIMED"
+  },
+  "val045_c024_resume_gate": {
+    "result": "PASS",
+    "command": "python3 tools/test_glyph_c014_campaign_transition.py --group val045-handoff-state",
+    "cases": [
+      "waiting C024 is accepted before VAL045 DONE",
+      "early C024 activation is rejected",
+      "strict VAL045 DONE enables exact preserved C024",
+      "waiting C024 after strict DONE is rejected",
+      "candidate identity substitution is rejected"
+    ]
   },
   "current_consumer_attempt_history": [
     {
