@@ -513,7 +513,7 @@ inline PersistenceValidatorSetup persistence_validator_setup;
         destination = crc_root / Path(path).name
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(raw)
-    (crc_root / 'Arduino.h').write_text('#pragma once\n')
+    (crc_root / 'Arduino.h').write_text('#pragma once\n#include <cstddef>\n#include <cstdint>\n')
     source = temp / 'current_acceptance.cpp'
     source.write_bytes(live_file(CURRENT_HARNESS, CURRENT_FILE_SHA256[CURRENT_HARNESS]))
     decoder = temp / 'current' / DECODER
