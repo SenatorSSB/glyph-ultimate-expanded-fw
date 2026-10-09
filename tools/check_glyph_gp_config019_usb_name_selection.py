@@ -505,15 +505,15 @@ inline PersistenceValidatorSetup persistence_validator_setup;
 
     crc_paths = (
         'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h',
-        'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp',
-        'tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h')
+        'tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp')
     crc_root = temp / 'c021-crc-host'
     for path in crc_paths:
         raw = git_read('show', '55e2da3d264dcdb89c6d80fae8bab5629a5a662b:' + path)
         live_file(path, digest(raw))
-        destination = crc_root / Path(path).name if path.endswith(('CRC32.h', 'CRC32.cpp')) else crc_root / 'Arduino.h'
+        destination = crc_root / Path(path).name
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(raw)
+    (crc_root / 'Arduino.h').write_text('#pragma once\n')
     source = temp / 'current_acceptance.cpp'
     source.write_bytes(live_file(CURRENT_HARNESS, CURRENT_FILE_SHA256[CURRENT_HARNESS]))
     decoder = temp / 'current' / DECODER
@@ -522,7 +522,6 @@ inline PersistenceValidatorSetup persistence_validator_setup;
                 '-I' + str(temp / 'current/config/glyph/common/include'),
                 '-I' + str(temp / 'current/config/glyph/glyph_mk6/include'),
                 '-I' + str(crc_root),
-                '-I' + str(REPOSITORY_ROOT / 'tools/fixtures/gp_config021_persisted_recovery/include'),
                 '-I' + str(temp)]
     flags = value['compiler_flags']
     require(flags == ['-O0', '-g', '-fshort-enums', '-fsanitize=address,undefined',
