@@ -1013,6 +1013,7 @@ VAL045_PATHS = frozenset((
     'tools/glyph_c014_campaign_transition.py',
     'tools/glyph_campaign_transition.py',
     'tools/test_glyph_c014_campaign_transition.py',
+    'tools/check_glyph_gp_config012_button_mask_characterization.py',
     'tools/check_glyph_gp_config019_usb_name_selection.py',
     'tools/check_glyph_gp_kbd_001_keyboard_pipeline.py',
     'docs/runtime_config/gp_val045_usb_identity_correspondence.md',

@@ -206,8 +206,15 @@ def validate_source(value: dict[str, object]) -> tuple[str, dict[str, str]]:
         # are compiled from the current checkout.
         text = verify_current_source(ROOT, item["path"], item["sha256"]).decode("utf-8")
         for anchor in item["anchors"]:
-            require(anchor in path.read_text(encoding="utf-8"), f"current source anchor missing: {anchor}")
             require(anchor in text, f"production source anchor missing: {item['path']}: {anchor}")
+            live_text = path.read_text(encoding="utf-8")
+            if anchor not in live_text:
+                # The only accepted historical/current spelling change here is
+                # persistence decoding into the validated candidate. The
+                # separate current route below proves that replacement.
+                require(item["path"] == "HAL/pico/src/core/Persistence.cpp" and
+                        anchor == "pb_decode(&istream, Config_fields, &config)",
+                        f"current source anchor missing: {anchor}")
         texts[item["path"]] = text
     helper = texts[SOURCE_PATHS[0]]
     require("button_mask |= (1ULL << (buttons[j] - 1));" in helper, "helper shift body drift")
@@ -244,6 +251,108 @@ def validate_source(value: dict[str, object]) -> tuple[str, dict[str, str]]:
     require(value["default_activation_bindings"] == named_bindings,
             "source-supported default activation binding matrix drift")
     return production_fragments(texts["src/modes/CustomControllerMode.cpp"])
+
+
+CURRENT_CONTEXT_PATHS = (
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "HAL/pico/src/core/Persistence.cpp",
+    "src/core/config_validation.cpp",
+    "config/glyph/common/src/glyph_config_validation.cpp",
+    "src/core/config_button_validation.cpp",
+)
+
+
+def validate_current_context_shape(sources: dict[str, str]) -> dict[str, str]:
+    """Check the current accepted transaction without changing the frozen proof."""
+    configurator = sources[CURRENT_CONTEXT_PATHS[0]]
+    persistence = sources[CURRENT_CONTEXT_PATHS[1]]
+    shared = sources[CURRENT_CONTEXT_PATHS[2]]
+    glyph = sources[CURRENT_CONTEXT_PATHS[3]]
+    button = sources[CURRENT_CONTEXT_PATHS[4]]
+    transaction = section(configurator, "bool ConfiguratorBackend::HandleSetConfig()",
+                          "bool ConfiguratorBackend::HandleUnknownCommand(")
+    load = section(persistence, "Persistence::LoadResult Persistence::LoadConfigChecked(",
+                   "bool Persistence::CheckSavedConfig()")
+    decode = "pb_decode(&istream, Config_fields, &candidate)"
+    validate = "persistence.ValidateConfig(candidate, validation_error)"
+    save = "persistence.SaveConfig(candidate)"
+    publish = "_config = candidate;"
+    positions = [transaction.find(anchor) for anchor in (decode, validate, save, publish)]
+    require(all(position >= 0 for position in positions) and positions == sorted(positions) and
+            len(set(positions)) == len(positions),
+            "current SetConfig source shape/order is unknown")
+    require("return false;" in transaction[positions[1]:positions[2]] and
+            publish not in transaction[positions[1]:positions[2]],
+            "current invalid SetConfig candidate can publish")
+    load_decode = load.find(decode)
+    load_validate = load.find("ValidateConfig(candidate, error)")
+    load_publish = load.find("config = candidate;")
+    require(0 <= load_decode < load_validate < load_publish,
+            "current checked-load source shape/order is unknown")
+    require("return LoadResult::Rejected;" in load[load_validate:load_publish] and
+            "return reader.io_failed ? LoadResult::StorageFailure : LoadResult::Rejected;" in load,
+            "current checked-load rejection outcomes drift")
+    semantic = section(shared, "bool validate_config_semantics(", None)
+    require("!validate_config_extents(config) || !validate_config_button_bindings(config)" in semantic,
+            "current shared semantics no longer bounds extents before Button validation")
+    glyph_semantic = section(glyph, "bool validate_glyph_config(", None)
+    require("validate_config_semantics(config, error)" in glyph_semantic,
+            "current Glyph validator no longer calls shared config semantics")
+    require("std::memcmp(&button, &supported, sizeof(Button)) == 0" in button and
+            "for (const Button supported : kSupportedButtons)" in button,
+            "current Button validator no longer compares raw bytes to the named domain")
+    require("button_domain_is_exact()" in button and
+            "static_assert(button_domain_is_exact()" in button,
+            "current Button validator named-domain assertion missing")
+    return {"setconfig": hashlib.sha256(transaction.encode()).hexdigest(),
+            "checked_load": hashlib.sha256(load.encode()).hexdigest(),
+            "shared_semantics": hashlib.sha256(semantic.encode()).hexdigest(),
+            "glyph_semantics": hashlib.sha256(glyph_semantic.encode()).hexdigest(),
+            "button_representation": hashlib.sha256(button.encode()).hexdigest()}
+
+
+def validate_current_context_negative_controls(sources: dict[str, str]) -> None:
+    def rejects(changed: dict[str, str], label: str) -> None:
+        try:
+            validate_current_context_shape(changed)
+        except ContractError:
+            return
+        raise ContractError(f"current-context wrong-source control accepted: {label}")
+
+    configurator_path = CURRENT_CONTEXT_PATHS[0]
+    candidate_decode = "pb_decode(&istream, Config_fields, &candidate)"
+    altered = dict(sources)
+    altered[configurator_path] = altered[configurator_path].replace(
+        candidate_decode, "pb_decode(&istream, Config_fields, &config)", 1)
+    rejects(altered, "historical decode spelling substituted into current transaction")
+    altered = dict(sources)
+    altered[CURRENT_CONTEXT_PATHS[4]] = altered[CURRENT_CONTEXT_PATHS[4]].replace(
+        "std::memcmp(&button, &supported, sizeof(Button)) == 0", "static_cast<unsigned>(button) ==",
+        1)
+    rejects(altered, "raw enum representation comparison substituted")
+    altered = dict(sources)
+    altered[CURRENT_CONTEXT_PATHS[1]] = altered[CURRENT_CONTEXT_PATHS[1]].replace(
+        "Persistence::LoadResult Persistence::LoadConfigChecked(",
+        "Persistence::LoadResult Persistence::UnknownLoadShape(", 1)
+    rejects(altered, "unknown checked-load shape")
+
+
+def validate_current_source_route() -> dict[str, object]:
+    """Authenticate C024 composition, then inspect its exact live/current blobs."""
+    from glyph_c014_campaign_transition import authenticate_c024_phase
+    phase = authenticate_c024_phase(ROOT)
+    target = phase["target"]
+    sources: dict[str, str] = {}
+    for relative in CURRENT_CONTEXT_PATHS:
+        live = regular(ROOT, relative).read_bytes()
+        committed = subprocess.check_output(["git", "show", f"{target}:{relative}"], cwd=ROOT)
+        indexed = subprocess.check_output(["git", "show", f":{relative}"], cwd=ROOT)
+        require(live == committed == indexed,
+                f"authenticated current C012 source differs from exact target: {relative}")
+        sources[relative] = live.decode("utf-8")
+    hashes = validate_current_context_shape(sources)
+    validate_current_context_negative_controls(sources)
+    return {"phase": phase["phase"], "target": target, "source_hashes": hashes}
 
 
 def compile_variant(temp: Path, name: str, sanitizers: list[str]) -> Path:
@@ -416,6 +525,7 @@ def main() -> int:
                 raise ContractError("valid body/guard substitution negative accepted")
         validate_provenance(value)
         fragments, fragment_hashes = validate_source(value)
+        current_context = validate_current_source_route()
         require(value["production_fragment_sha256"] == fragment_hashes, "production function correspondence drift")
         harness = regular(ROOT, HARNESS.relative_to(ROOT).as_posix())
         require(sha256(harness) == value["harness_sha256"], "host harness drift")
@@ -432,6 +542,8 @@ def main() -> int:
         print("sanitizer enum-read and shift cases: PASS; caller reachability: 4/4")
         print("glyph_gp_config012_button_mask_characterization: PASS; exact 0.4.9.2 closure; H1 host only")
         print("historical_observations=FROZEN; current_source=authenticated; hardware_acceptance=NOT_CLAIMED")
+        print("current_context=PASS; phase={}; target={}; wrong_source_controls=3/3; hardware=NOT_CLAIMED".format(
+            current_context["phase"], current_context["target"]))
         return 0
     except (OSError, subprocess.SubprocessError, ContractError, KeyError, TypeError, ValueError) as exc:
         print(f"glyph_gp_config012_button_mask_characterization: FAIL: {exc}")
