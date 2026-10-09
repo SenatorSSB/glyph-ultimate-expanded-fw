@@ -64,7 +64,7 @@
   "firmware_build": "NOT_RUN",
   "hardware_acceptance": "NOT_CLAIMED",
   "val045_activation": "DONE",
-  "c024_resumption": "ACTIVATABLE_AFTER_VAL045_DONE",
+  "c024_resumption": "HARDWARE_PENDING_AFTER_BUILD_REVIEW",
   "nunchuk": "NOT_TESTED",
   "root_cause": "UNPROVEN",
   "accepted_c019_source_lineage": [
@@ -310,7 +310,9 @@
       "early C024 activation is rejected",
       "strict VAL045 DONE enables exact preserved C024",
       "waiting C024 after strict DONE is rejected",
-      "candidate identity substitution is rejected"
+      "candidate identity substitution is rejected",
+      "strict DONE permits exact C024 to advance to HARDWARE_PENDING with reviewed artifact identity",
+      "artifact substitution at hardware wait is rejected"
     ]
   },
   "current_consumer_attempt_history": [

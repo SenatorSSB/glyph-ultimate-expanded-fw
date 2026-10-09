@@ -508,12 +508,30 @@ def val045_handoff_state():
     prematurely_activated = dict(candidate, activation_state='ACTIVATABLE')
     reject(prematurely_activated, waiting, 'C024 activated before VAL045 DONE')
     completed = dict(waiting, status='DONE', activation_state='NOT_APPLICABLE')
-    activated = dict(candidate, activation_state='ACTIVATABLE')
+    activated = dict(
+        candidate,
+        activation_state='ACTIVATABLE',
+        hardware_evidence_dependency_satisfied=True,
+    )
     proof.validate_val045_handoff_state(activated, completed)
+    hardware_wait = dict(
+        activated,
+        activation_state='HARDWARE_PENDING',
+        hardware_evidence_dependency_satisfied=False,
+        firmware_artifact_build_path='.pio/build/glyph_mk6/firmware.uf2',
+        firmware_artifact_sha256='95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6',
+        preserved_firmware_artifact_locator=(
+            'local_backups/hardware-artifacts/' + proof.C024_C + '/'
+            '95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6/firmware.uf2'),
+        hardware_result=None,
+    )
+    proof.validate_val045_handoff_state(hardware_wait, completed)
     reject(candidate, completed, 'C024 stayed waiting after strict VAL045 DONE')
     wrong_candidate = dict(activated, candidate_git_sha='0' * 40)
     reject(wrong_candidate, completed, 'candidate identity substituted at resume')
-    print('PASS VAL045 strict DONE gates exact preserved C024 activation')
+    wrong_artifact = dict(hardware_wait, firmware_artifact_sha256='0' * 64)
+    reject(wrong_artifact, completed, 'C024 artifact substituted at hardware wait')
+    print('PASS VAL045 strict DONE gates exact preserved C024 activation and hardware wait')
 
 
 def run_group(group):

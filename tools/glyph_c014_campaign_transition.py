@@ -1036,9 +1036,25 @@ def validate_val045_handoff_state(current_c024, current_045):
             and current_045.get('activation_requires_new_judgment') is False,
             'VAL045 handoff authorization state changed')
     if current_045.get('status') == 'DONE':
-        require(current_045.get('activation_state') == 'NOT_APPLICABLE'
-                and current_c024.get('activation_state') == 'ACTIVATABLE',
-                'strict VAL045 DONE must mechanically activate preserved C024')
+        require(current_045.get('activation_state') == 'NOT_APPLICABLE',
+                'strict VAL045 DONE must be source-free and complete')
+        if current_c024.get('activation_state') == 'ACTIVATABLE':
+            require(current_c024.get('hardware_evidence_dependency_satisfied') is True,
+                    'newly activated C024 must have its dependencies satisfied')
+        elif current_c024.get('activation_state') == 'HARDWARE_PENDING':
+            expected_candidate = C024_C
+            expected_artifact = '95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6'
+            expected_locator = (
+                'local_backups/hardware-artifacts/' + expected_candidate + '/'
+                + expected_artifact + '/firmware.uf2')
+            require(current_c024.get('hardware_evidence_dependency_satisfied') is False
+                    and current_c024.get('firmware_artifact_build_path') == '.pio/build/glyph_mk6/firmware.uf2'
+                    and current_c024.get('firmware_artifact_sha256') == expected_artifact
+                    and current_c024.get('preserved_firmware_artifact_locator') == expected_locator
+                    and current_c024.get('hardware_result') is None,
+                    'C024 hardware wait must retain exact reviewed candidate and artifact')
+        else:
+            require(False, 'strict VAL045 DONE must activate or advance exact preserved C024')
     else:
         require(current_045.get('status') == 'PREAUTHORIZED'
                 and current_045.get('activation_state') == 'ACTIVATABLE'
