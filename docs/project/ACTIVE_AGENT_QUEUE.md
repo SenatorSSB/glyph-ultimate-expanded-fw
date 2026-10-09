@@ -124,7 +124,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
 ## Current Queue State
 
 <!-- queue-state:start -->
-```json{
+```json
+{
   "schema_version": 3,
   "canonical_branch": "configurator",
   "audit_base_sha": "38017600deb243b5e281edec6d0d378b997d9e40",
@@ -8449,13 +8450,13 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":2,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":1,"mechanically_activatable_preauthorized":1,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
 Ready IDs: (none)
 Immediate Ready: 0
-Recorded Preauthorized: 2
+Recorded Preauthorized: 1
 Mechanically activatable Preauthorized: 1
 Invalidated Preauthorized: 0
 Hardware-pending: 0
