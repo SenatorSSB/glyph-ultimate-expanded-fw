@@ -6709,14 +6709,16 @@
       },
       "checker_id": "gp_config019_usb_name_selection",
       "defines_main": true,
-      "file_size_bytes": 41760,
+      "file_size_bytes": 43938,
       "hard_coded_branch_like_strings": [
+        "C024_exact_candidate_proof",
         "candidate",
         "candidate_current_fragments",
         "candidate_successor",
         "configurator",
         "evidence",
         "original_candidate",
+        "selector_identity_candidate",
         "source_candidates"
       ],
       "imported_local_modules": [],
@@ -6724,16 +6726,18 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 618,
+      "line_count": 641,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config019_usb_name_selection.py",
       "potential_branch_identity_signals": [
+        "C024_exact_candidate_proof",
         "candidate",
         "candidate_current_fragments",
         "candidate_successor",
         "configurator",
         "evidence",
         "original_candidate",
+        "selector_identity_candidate",
         "source_candidates"
       ],
       "potential_mutation_signals": [
@@ -6800,7 +6804,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "0ab1e2796d13ff9bd8cf0005bcc7f9e45b514b8fbbea96e2912e4d2bec6e6e07",
+      "sha256": "5e2acf7c58a1d810719dbbf2f2f67f8705d0ea3c3964daf413c06012aba5c054",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
