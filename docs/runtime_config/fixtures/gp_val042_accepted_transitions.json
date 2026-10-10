@@ -20,6 +20,16 @@
       "review_commit": "0f1648fb9c17fbded5bc1265b2702c542e689ce0",
       "evidence_commit": "9fcd8ef94879f3959a1eea619b298fd2507111f2",
       "integration": "e44ec59c57c0db194381f8d2dddce08aab81b5f6"
+    },
+    {
+      "work_order": "GP-CONFIG-024",
+      "candidate": "8ab1173b0690f5ed3e994f95af797c9e9a265525",
+      "build": "8ab1173b0690f5ed3e994f95af797c9e9a265525",
+      "parent": "b404453ef22cc994eec54338b8a23c3ba61df808",
+      "tree": "15ed2d35d561d6b1709499fe42083ca4d789e920",
+      "review_commit": "36f91089ab60fb68248a2819aee5dd5082fd922c",
+      "evidence_commit": "25f39876c21fa429a47c93dc446205c37d72b8d3",
+      "integration": "5c5ba4e166c9b67654c0d1b9baa2b0c35677f3d4"
     }
   ]
 }
