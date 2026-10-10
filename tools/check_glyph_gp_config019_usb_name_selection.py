@@ -253,7 +253,7 @@ def guard_critical_inputs(head):
         require(differences <= proof['critical_paths'], 'critical drift outside authenticated campaign source')
         phase = (proof['phase'] in {'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'} or
                  (proof.get('contract') == 'c024_selector_identity' and
-                  proof['phase'] in {'SOURCE_FREE_CANDIDATE', 'SOURCE_FREE_PROCESSOR', 'CANDIDATE_VALIDATION_ONLY'}) or
+                  proof['phase'] in {'SOURCE_FREE_CANDIDATE', 'SOURCE_FREE_PROCESSOR', 'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'}) or
                  (proof.get('contract') == 'c017_neopixel' and
                   proof['phase'] in {'BASELINE', 'SOURCE_FREE_PROCESSOR'} and
                   proof.get('predecessor_phase') == 'ACCEPTED_TRANSITION'))
@@ -354,7 +354,7 @@ def authenticate_current():
         actual_fragments = fragments()
         VAL045_CURRENT_FRAGMENTS = (
             phase_record['candidate_current_fragments']
-            if campaign['phase'] == 'CANDIDATE_VALIDATION_ONLY'
+            if campaign['phase'] in {'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'}
             else phase_record['base_current_fragments'])
         require({key: digest(value.encode()) for key, value in actual_fragments.items()} == VAL045_CURRENT_FRAGMENTS,
                 'current C024 source fragments differ from finite VAL045 pins')

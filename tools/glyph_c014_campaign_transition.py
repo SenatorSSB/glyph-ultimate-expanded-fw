@@ -293,8 +293,8 @@ CONFIG019_FRAGMENT_PINS = {'defaults': '6bd7e0f7170aff3608106096b26b0b4e410aa6e0
  'watchdog_consumer': '158a3d028c42dc87fe236e64f85f9c619dfd6ca1316c30821e75ecba53715b1b'}
 CONFIG019_ACCEPTANCE_SHA256 = 'b7c17505e097612fb4b718fc385a0525b3713dc5e4187955364a58c5b8b8547a'
 CONFIG019_OVERLAY_PINS = {'tools/check_glyph_gp_config019_usb_name_selection.py': {'mode': '100644',
-                                                          'blob': 'c942ea5c5ff790728fb0f5af7848c8003ec378b0',
-                                                          'sha256': 'd48d819bab33fe84207ccb7d0d0efe8d1489523020b59918994742edc8997e03'},
+                                                          'blob': 'fca0697ccf5f98e3593421934b75dc658f4a8750',
+                                                          'sha256': 'efd7568fdda52e153bb7ea76fc3d827932a9bc228eb75d628de6404090eb7402'},
  'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp': {'mode': '100644',
                                                                            'blob': '897646b941b1c89a0d90dd95ba6eedb3f3ff9b33',
                                                                            'sha256': 'be0ace2b917ade71cde930e5e3293443bfe26f4713a4d40d82008a22e0615e1b'},
@@ -1194,16 +1194,88 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         post_integration = get(root, 'rev-list', '--first-parent', '--reverse', integration + '..' + head).decode().split()
         post_i_validation_paths = C024_PROCESSOR_PATHS | frozenset((
             'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',
-            'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp',))
+            'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp',
+            C024_TRANSITIONS))
         for revision in post_integration:
             changed_since_i = set(filter(None, get(root, 'diff', '--name-only', '--no-renames', '-z',
                                                     integration, revision).decode().split('\0')))
             require(changed_since_i <= post_i_validation_paths,
                     'C024 post-integration change outside validation/evidence paths')
         accepted = original.item(root, C024_P, 'GP-CONFIG-024')
+        integrated_expected = dict(original.critical_tree(root, C024_P))
+        integrated_expected[C024_MENU] = original.critical_tree(root, C024_F)[C024_MENU]
         processor = authenticate_c024_processor(root, C024_P, accepted,
                                                 original.item(root, C024_P, 'GP-VAL-045'), verify_live=False)
-        require(current_c024 == accepted, 'C024 integration changed accepted hardware state')
+        completion_fields = {'status', 'done_evidence'}
+        require({k:v for k,v in current_c024.items() if k not in completion_fields}
+                == {k:v for k,v in accepted.items() if k not in completion_fields}
+                and current_c024['status'] in {'HARDWARE_VALIDATED', 'DONE'},
+                'C024 integration changed exact accepted hardware tuple')
+        prior_catalog = json.loads(original.raw_bytes(root, C024_P, C024_TRANSITIONS), object_pairs_hook=unique)
+        require(set(prior_catalog) == {'schema_version', 'accepted_transitions'}
+                and prior_catalog['schema_version'] == 1,
+                'C024 predecessor accepted catalog schema changed')
+        prior_records = prior_catalog['accepted_transitions']
+        expected_record = {
+            'work_order': 'GP-CONFIG-024', 'candidate': C024_F, 'build': C024_F,
+            'parent': C024_B, 'tree': C024_TREE, 'review_commit': C024_R,
+            'evidence_commit': processor, 'integration': integration,
+        }
+        catalog_commit = None
+        done_commit = None
+        done_seen = False
+        from check_glyph_agent_framework_docs import validate_completion_evidence
+        for revision in post_integration:
+            revision_tree = original._tree(root, revision)
+            catalog = json.loads(original.raw_bytes(root, revision, C024_TRANSITIONS), object_pairs_hook=unique)
+            require(set(catalog) == {'schema_version', 'accepted_transitions'}
+                    and catalog['schema_version'] == 1
+                    and catalog['accepted_transitions'][:len(prior_records)] == prior_records
+                    and len(catalog['accepted_transitions']) in (len(prior_records), len(prior_records) + 1),
+                    'C024 accepted catalog lost/replaced a predecessor or added extra rows')
+            added = catalog['accepted_transitions'][len(prior_records):]
+            require(not added or added == [expected_record], 'C024 accepted catalog tuple substitution')
+            row = original.item(root, revision, 'GP-CONFIG-024')
+            if added and catalog_commit is None:
+                catalog_commit = revision
+                parent = get(root, 'rev-list', '--parents', '-n', '1', revision).decode().split()
+                changed_in_catalog = set(filter(None, get(root, 'diff', '--name-only', '--no-renames', '-z',
+                                                         parent[1], revision).decode().split('\0')))
+                require(changed_in_catalog == {C024_TRANSITIONS}
+                        and row['status'] == 'HARDWARE_VALIDATED',
+                        'C024 catalog must be a separate source-free-status publication')
+            elif catalog_commit is not None:
+                require(added == [expected_record],
+                        'C024 accepted catalog removed or changed after publication')
+            else:
+                require(not added, 'C024 catalog row appeared without publication transition')
+            if row['status'] == 'DONE':
+                require(catalog_commit is not None and not done_seen
+                        and revision != catalog_commit,
+                        'C024 strict DONE must follow a separate accepted catalog commit')
+                parents = get(root, 'rev-list', '--parents', '-n', '1', revision).decode().split()
+                require(len(parents) == 2 and parents[1] == catalog_commit,
+                        'C024 strict DONE must be a separate direct child of catalog publication')
+                queue = parsed_queue(original.raw_bytes(root, revision, QUEUE))
+                validate_completion_evidence(row, row['done_evidence'],
+                    policy=queue['completion_correspondence'], publication_sha=revision, repo_root=root)
+                done_commit = revision
+                done_seen = True
+            else:
+                require(not done_seen and row['status'] == 'HARDWARE_VALIDATED',
+                        'C024 status regressed or changed before strict DONE')
+            require(original.critical_tree(root, revision) == integrated_expected,
+                    'C024 accepted lifecycle changed integrated firmware source')
+            for path, payload in ((C024_EVIDENCE, processor_payload := original.raw_bytes(root, processor, C024_EVIDENCE)),
+                                  (C024_RESULT, original.raw_bytes(root, processor, C024_RESULT)),
+                                  (C024_ARCHIVE, original.raw_bytes(root, processor, C024_ARCHIVE)),
+                                  (C024_PROTOCOL, original.raw_bytes(root, processor, C024_PROTOCOL))):
+                require(original.raw_bytes(root, revision, path) == payload,
+                        'C024 accepted lifecycle replaced immutable HEP input: ' + path)
+        if catalog_commit:
+            require(original.ancestor(root, catalog_commit, head), 'C024 catalog commit missing from target ancestry')
+        require((current_c024['status'] == 'DONE') == (done_commit is not None),
+                'C024 current DONE status/history mismatch')
     elif current_c024.get('status') == 'HARDWARE_VALIDATED' or current_c024.get('hardware_result') is not None:
         processor = authenticate_c024_processor(root, head, current_c024, current_045)
     else:
@@ -1308,10 +1380,8 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
              if source_base.get(path) != source_candidate.get(path)}
     require(delta == {C024_MENU}, 'VAL045 exact sole C024 critical source delta changed')
     current = original.critical_tree(root, head)
-    integrated_expected = dict(original.critical_tree(root, C024_P))
-    integrated_expected[C024_MENU] = original.critical_tree(root, C024_F)[C024_MENU]
     if integrated and current == integrated_expected:
-        phase = 'CANDIDATE_VALIDATION_ONLY'
+        phase = 'ACCEPTED_TRANSITION' if catalog_commit else 'CANDIDATE_VALIDATION_ONLY'
         critical = frozenset(set(accepted_predecessor_sources) | {C024_MENU})
         sources = {C024_MENU: C024_C}
     elif current == source_base:
@@ -1330,7 +1400,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE}
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE, C024_TRANSITIONS}
     require(changed <= allowed_target_paths,
             'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
@@ -1381,6 +1451,7 @@ C024_F = '8ab1173b0690f5ed3e994f95af797c9e9a265525'
 C024_EVIDENCE = 'docs/calibration/fixtures/gp_config_024_hardware_evidence.json'
 C024_RESULT = 'docs/calibration/gp_config_024_hardware_result.md'
 C024_PROTOCOL = 'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md'
+C024_TRANSITIONS = 'docs/runtime_config/fixtures/gp_val042_accepted_transitions.json'
 C024_ARCHIVE = 'docs/calibration/fixtures/gp_config_024_human_session_archive.json'
 C024_ARCHIVE_SHA256 = '6b9979fe81876f37bbd00ff7b76c0a81bee940692aa73aeed52d7a2b9776312c'
 C024_PROCESSOR_PATHS = frozenset((
