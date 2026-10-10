@@ -106,7 +106,7 @@ const Config default_config = {
                 SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP },
                 SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP },
             },
-            .button_remapping_count = 5,
+            .button_remapping_count = 9,
             .button_remapping = {
                 ButtonRemap { .physical_button = BTN_MB1,  .activates = BTN_UNSPECIFIED }, // Menu
             
@@ -114,6 +114,12 @@ const Config default_config = {
                 ButtonRemap { .physical_button = BTN_LF7, .activates = BTN_UNSPECIFIED },
                 ButtonRemap { .physical_button = BTN_LF6, .activates = BTN_UNSPECIFIED },
                 ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_UNSPECIFIED },
+                // This private profile deliberately breaks physical/logical
+                // name parity: RF6 duplicates LT5 (Up).
+                ButtonRemap { .physical_button = BTN_RF6, .activates = BTN_LT5 },
+                ButtonRemap { .physical_button = BTN_RF9, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_RF14, .activates = BTN_UNSPECIFIED },
+                ButtonRemap { .physical_button = BTN_RF15, .activates = BTN_UNSPECIFIED },
             },
             .rgb_config = 3,
             .layout_plate = LAYOUT_PLATE_EVERYTHING,
@@ -618,11 +624,11 @@ const Config default_config = {
     .communication_backend_configs = {
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_XINPUT,
-            .default_mode_config = 1,
+            .default_mode_config = 3,
         },
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_DINPUT,
-            .default_mode_config = 1,
+            .default_mode_config = 3,
             .activation_binding_count = 1,
             .activation_binding = { BTN_RF3 },
         },
@@ -634,7 +640,7 @@ const Config default_config = {
         },
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_GAMECUBE,
-            .default_mode_config = 1,
+            .default_mode_config = 3,
         },
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_N64,
@@ -971,7 +977,8 @@ const Config default_config = {
 
 
         RgbConfig {
-          .button_colors_count = 16,
+          // Private Ultimate profile: no configured button colours (off).
+          .button_colors_count = 0,
           .button_colors = {
             {
               BTN_LF1,

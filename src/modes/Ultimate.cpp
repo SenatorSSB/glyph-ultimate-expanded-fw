@@ -315,15 +315,11 @@ LayerState ResolveLayerState(const InputState &inputs) {
 }
 
 EffectiveDirectionState ResolveEffectiveDirections(const InputState &inputs, const LayerState &layer) {
-    const bool y2_rf34_sublayer_anchor_active = inputs.lt3 && !inputs.lf4 && (inputs.rf3 || inputs.rf4);
-    const bool y2_rf2_force_up_active = y2_rf34_sublayer_anchor_active && inputs.rf2;
-    const bool lf4_submode_rf3_force_up_active = inputs.lf4 && inputs.rf3;
-
     EffectiveDirectionState state;
-    state.force_up_active = inputs.rf5 || y2_rf2_force_up_active || lf4_submode_rf3_force_up_active;
+    state.force_up_active = false;
     state.horizontal_axis = ResolveHorizontalAxis(inputs.lf3, inputs.lf1, layer.layer_left_active, layer.layer_right_active);
-    state.up = inputs.lf2 || state.force_up_active;
-    state.down = (inputs.lf5 || inputs.lt6) && !state.force_up_active;
+    state.up = inputs.lf5 || inputs.lt5;
+    state.down = inputs.lf2;
     state.left = state.horizontal_axis < 0;
     state.right = state.horizontal_axis > 0;
     return state;
@@ -349,11 +345,11 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     const bool rf3_x_restored_by_cstick = rf9_base_rf3_x_mode_active && layer.c_stick_any_active;
 
     RoleState state;
-    state.mode_active = inputs.rf8;
-    state.x1_active = inputs.lt5;
-    state.x2_active = inputs.lt4;
-    state.y1_active = inputs.lt2 && !inputs.lf4;
-    state.y2_active = inputs.lt3 && !inputs.lf4 && !y2_sublayer_active;
+    state.mode_active = inputs.rf5;
+    state.x1_active = inputs.lt4;
+    state.x2_active = false;
+    state.y1_active = inputs.lt3;
+    state.y2_active = inputs.lt6;
     state.layer_rf3_normal_x_active = y2_rf3_active;
     state.rf4_layer_flipper_active = y2_rf4_active;
     state.rt1_rf4_custom_active = rt1_rf4_custom_active;
@@ -364,15 +360,15 @@ RoleState ResolveRoleState(const InputState &inputs, const LayerState &layer, co
     state.rf4_suppressed_by_rf9_rf3_mode = rf4_suppressed_by_rf9_rf3_mode;
     state.rf3_x_suppressed_by_rf9 = rf3_x_suppressed_by_rf9;
     state.rf3_x_restored_by_cstick = rf3_x_restored_by_cstick;
-    state.tilt3_effective = rt1_rf4_custom_active;
-    state.tilt1_effective = tilt1_pressed;
-    state.tilt2_effective = tilt2_pressed;
-    state.z_airdodge_override_active = inputs.rf6;
-    state.null_modifier_active = inputs.rf9 && !state.rf9_base_rf3_x_mode_active && !state.rf4_behavior_available;
-    state.hard_up_b_active = inputs.rf7;
-    state.ls_to_dpad_active = inputs.rf13;
-    state.direction_plus_a_active = down_a_active || up_a_active;
-    state.direction_plus_a_force_up = state.direction_plus_a_active && (up_a_active || directions.force_up_active);
+    state.tilt3_effective = inputs.rf4 && inputs.rf3;
+    state.tilt1_effective = inputs.rf4;
+    state.tilt2_effective = inputs.rf3;
+    state.z_airdodge_override_active = false;
+    state.null_modifier_active = false;
+    state.hard_up_b_active = false;
+    state.ls_to_dpad_active = false;
+    state.direction_plus_a_active = inputs.lt2;
+    state.direction_plus_a_force_up = inputs.lt2;
     return state;
 }
 
@@ -383,15 +379,15 @@ void ApplyDigitalButtonOutputs(const InputState &inputs, const LayerState &layer
     const bool base_rf1_a_active = inputs.rf1 && !y2_sublayer_active;
     const bool base_rf2_b_active = inputs.rf2 && !inputs.lf4 && !y2_sublayer_active;
 
-    outputs.a = base_rf1_a_active || inputs.lt6 || inputs.rf5;
-    outputs.b = base_rf2_b_active || inputs.lf4 || inputs.rf7 || (inputs.lt3 && !inputs.lf4 && inputs.rf3);
-    outputs.x = (roles.base_rf3_x_active && !roles.rf3_x_suppressed_by_rf9) || y2_rf1_x_active || lf4_rf2_x_active;
-    outputs.y = inputs.rf10;
-    outputs.buttonL = inputs.lt1;
+    outputs.a = inputs.rt1 || inputs.rf10 || inputs.rf12 || inputs.lt2;
+    outputs.b = inputs.rf1 || inputs.rf12;
+    outputs.x = inputs.rf7;
+    outputs.y = inputs.rf2;
+    outputs.buttonL = inputs.lf4 || inputs.rf10;
     // GameCube/N64 backends serialize buttonR as Z; triggerRDigital as R.
-    outputs.buttonR = inputs.rf6;
-    outputs.triggerLDigital = inputs.lt1;
-    outputs.triggerRDigital = inputs.rf16;
+    outputs.buttonR = inputs.lt1;
+    outputs.triggerLDigital = inputs.lf4 || inputs.rf10;
+    outputs.triggerRDigital = inputs.lf8 || inputs.rf10 || (inputs.lf4 && inputs.lt3);
 
     outputs.start = inputs.mb7;
     outputs.select = inputs.mb6;
@@ -405,13 +401,10 @@ void ApplyDpadOutputs(const InputState &inputs, const EffectiveDirectionState &d
     outputs.dpadLeft = 0;
     outputs.dpadRight = 0;
 
-    // Preserve source-backed nunchuk C D-pad layer behavior.
-    if (inputs.nunchuk_c) {
-        outputs.dpadUp = inputs.rt5;
-        outputs.dpadDown = inputs.rt2;
-        outputs.dpadLeft = inputs.rt3;
-        outputs.dpadRight = inputs.rt4;
-    }
+    outputs.dpadUp = inputs.rf13;
+    outputs.dpadDown = inputs.rf11;
+    outputs.dpadLeft = inputs.lf7;
+    outputs.dpadRight = inputs.lf6;
 
     if (roles.ls_to_dpad_active) {
         outputs.dpadUp |= directions.up;
@@ -430,9 +423,9 @@ void ApplyDigitalDirectionOutputs(const EffectiveDirectionState &directions, con
 
 void ApplyRightStickDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     outputs.rightStickLeft = inputs.rt3;
-    outputs.rightStickRight = inputs.rt4;
+    outputs.rightStickRight = inputs.rt5;
     outputs.rightStickDown = inputs.rt2;
-    outputs.rightStickUp = inputs.rt5;
+    outputs.rightStickUp = inputs.rt4;
 
     outputs.modX = false;
     outputs.modY = false;
@@ -450,6 +443,17 @@ RuntimeTableId SelectRuntimeTableId(
     bool tilt2_effective,
     bool tilt3_effective
 ) {
+    // Private friend profile priority, supplied by the owner.  These roles are
+    // intentionally source-owned and do not change the canonical profile.
+    if (mode_active) return RuntimeTableId::ModeDefault;
+    if (tilt3_effective) return RuntimeTableId::Tilt3;
+    if (tilt1_effective) return RuntimeTableId::Tilt1;
+    if (tilt2_effective) return RuntimeTableId::Tilt2;
+    if (y1_active) return RuntimeTableId::Y1;
+    if (y2_active) return RuntimeTableId::Y2;
+    if (x1_active) return RuntimeTableId::X1;
+    return RuntimeTableId::Default;
+
     if (tilt1_effective && tilt2_effective) {
         return RuntimeTableId::RT1RF4Custom;
     }
@@ -749,13 +753,13 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     // Senscope Glyph Smash Box runtime end
 
     if (outputs.triggerLDigital) {
-        outputs.triggerLAnalog = 140;
+        outputs.triggerLAnalog = 108;
     } else {
         outputs.triggerLAnalog = 0;
     }
 
     if (outputs.triggerRDigital) {
-        outputs.triggerRAnalog = 140;
+        outputs.triggerRAnalog = 255;
     } else {
         outputs.triggerRAnalog = 0;
     }

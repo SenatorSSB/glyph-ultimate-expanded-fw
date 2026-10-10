@@ -125,6 +125,40 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
     publish_boot_state(outcome, display_ready);
 }
 
+// Private friend-package provisioning.  This marker is intentionally unique
+// to this source snapshot and must never be carried into canonical firmware.
+constexpr char kFriendProfileMarker[] = "/friend_ultimate_20261011_applied.flag";
+
+bool provision_friend_config_once(Config &defaults) {
+    if (LittleFS.exists(kFriendProfileMarker)) {
+        return true;
+    }
+    ConfigValidationError validation_error;
+    if (!persistence.ValidateConfig(defaults, validation_error) ||
+        !persistence.SaveConfig(defaults)) {
+        return false;
+    }
+    // Config is deliberately static: it is too large for the RP2040 core
+    // stack. Reset it on every attempted adoption so a prior successful
+    // readback can never satisfy a later failed attempt.
+    static Config readback;
+    readback = Config_init_default;
+    if (persistence.LoadConfigChecked(readback) != Persistence::LoadResult::Loaded) {
+        return false;
+    }
+    ConfigValidationError readback_validation_error;
+    if (!persistence.ValidateConfig(readback, readback_validation_error)) {
+        return false;
+    }
+    File marker = LittleFS.open(kFriendProfileMarker, "w");
+    if (!marker) {
+        return false;
+    }
+    const bool marker_written = marker.print("friend_ultimate_20261011\n") > 0;
+    marker.close();
+    return marker_written;
+}
+
 }  // namespace
 
 
@@ -169,6 +203,10 @@ void setup() {
     if (!persistence.SetValidator(validate_glyph_config) ||
         !persistence.ValidateConfig(config, validation_error)) {
         refuse_boot(BootOutcome::DefaultsRejected, display_ready);
+        return;
+    }
+    if (!provision_friend_config_once(config)) {
+        refuse_boot(BootOutcome::StorageFailure, display_ready);
         return;
     }
     const Persistence::LoadResult load_result = persistence.LoadConfigChecked(config);
