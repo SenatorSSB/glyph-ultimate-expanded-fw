@@ -1181,7 +1181,17 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
     current_c024 = original.item(root, head, 'GP-CONFIG-024')
     current_045 = original.item(root, head, 'GP-VAL-045')
     processor = None
-    if current_c024.get('status') == 'HARDWARE_VALIDATED' or current_c024.get('hardware_result') is not None:
+    integrated = original.ancestor(root, C024_F, head)
+    if integrated:
+        # Authenticate the source-free processor at P, then admit only the exact P/F merge.
+        parents = get(root, 'rev-list', '--parents', '-n', '1', head).decode().split()
+        require(len(parents) == 3 and parents[1:] == [C024_P, C024_F],
+                'C024 integration tip must be the exact P/F merge')
+        accepted = original.item(root, C024_P, 'GP-CONFIG-024')
+        processor = authenticate_c024_processor(root, C024_P, accepted,
+                                                original.item(root, C024_P, 'GP-VAL-045'), verify_live=False)
+        require(current_c024 == accepted, 'C024 integration changed accepted hardware state')
+    elif current_c024.get('status') == 'HARDWARE_VALIDATED' or current_c024.get('hardware_result') is not None:
         processor = authenticate_c024_processor(root, head, current_c024, current_045)
     else:
         validate_val045_handoff_state(current_c024, current_045)
@@ -1285,7 +1295,13 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
              if source_base.get(path) != source_candidate.get(path)}
     require(delta == {C024_MENU}, 'VAL045 exact sole C024 critical source delta changed')
     current = original.critical_tree(root, head)
-    if current == source_base:
+    integrated_expected = dict(original.critical_tree(root, C024_P))
+    integrated_expected[C024_MENU] = original.critical_tree(root, C024_F)[C024_MENU]
+    if integrated and current == integrated_expected:
+        phase = 'CANDIDATE_VALIDATION_ONLY'
+        critical = frozenset(set(accepted_predecessor_sources) | {C024_MENU})
+        sources = {C024_MENU: C024_C}
+    elif current == source_base:
         phase = 'SOURCE_FREE_PROCESSOR' if processor else 'SOURCE_FREE_CANDIDATE'
         critical = frozenset(accepted_predecessor_sources)
         sources = {}
@@ -1347,6 +1363,8 @@ def authenticate_config019_coexistence(root, head):
 # Owner-directed C024 source-free evidence admission. This authenticates E only;
 # a later tested-source I/catalog and strict DONE need their separate review.
 C024_R = '36f91089ab60fb68248a2819aee5dd5082fd922c'
+C024_P = '68cb0e8e7d6a0badcfaf894b188231c968d27c1d'
+C024_F = '8ab1173b0690f5ed3e994f95af797c9e9a265525'
 C024_EVIDENCE = 'docs/calibration/fixtures/gp_config_024_hardware_evidence.json'
 C024_RESULT = 'docs/calibration/gp_config_024_hardware_result.md'
 C024_PROTOCOL = 'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md'
@@ -1387,7 +1405,7 @@ def validate_c024_processor_rows(record):
             'C024 initial freeze or bounded repeat erased/misrepresented')
 
 
-def authenticate_c024_processor(root, head, state, val045):
+def authenticate_c024_processor(root, head, state, val045, verify_live=True):
     require(val045 == item(root, C024_R, 'GP-VAL-045') and val045['status'] == 'DONE',
             'C024 E lost strict VAL045 predecessor completion')
     require(original.ancestor(root, C024_R, head), 'C024 E must follow reviewed R')
@@ -1476,7 +1494,7 @@ def authenticate_c024_processor(root, head, state, val045):
     require(first is not None and state == latched_state,
             'C024 current acceptance lacks source-free processor E')
     for path in C024_PROCESSOR_PATHS:
-        if path in original._tree(root, head):
+        if verify_live and path in original._tree(root, head):
             require(original.current_bytes(root, path) == original.raw_bytes(root, head, path)
                     and original._git(root, 'show', ':' + path) == original.current_bytes(root, path),
                     'C024 E committed/index/live mismatch: ' + path)

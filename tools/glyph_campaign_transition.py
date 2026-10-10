@@ -396,7 +396,7 @@ def verify_current_source(root, path, historical_sha256):
     from glyph_c014_campaign_transition import has_c024_campaign, authenticate_c024_phase, C024_B, C024_C, CONFIG019_F020, KBD_C
     if has_c024_campaign(Path(root)):
         proof = authenticate_c024_phase(Path(root))
-        revision = C024_C if proof['phase'] == 'CANDIDATE_VALIDATION_ONLY' else C024_B
+        revision = proof['source_candidates'].get(path, C024_C if proof['phase'] == 'CANDIDATE_VALIDATION_ONLY' else C024_B)
         actual = _git(root, 'show', proof['target'] + ':' + path)
         expected = _git(root, 'show', revision + ':' + path)
         require(actual == expected and current_bytes(root, path) == actual
