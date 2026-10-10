@@ -418,6 +418,10 @@ def current_route(temp, value, current, campaign):
     saved_check = persistence_source[saved_check_start:saved_check_end]
     host_stubs_path = temp / 'historical/tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp'
     original_stubs = host_stubs_path.read_text()
+    # The accepted C024 selector now uses InputMode; model that production
+    # interface in this isolated C019 composition without changing its pinned fixture.
+    original_stubs = original_stubs.replace('struct IntegratedDisplay {',
+        'using InputMode = GameMode;\nstruct IntegratedDisplay {', 1)
     stub_start = original_stubs.index('struct File {')
     stub_end = original_stubs.index('// HID constants are inert compile placeholders', stub_start)
     compatible_stubs = '''struct HostConfigHeader { size_t config_size = 0; uint32_t config_crc = 0; };

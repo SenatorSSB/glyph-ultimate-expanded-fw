@@ -35,10 +35,9 @@ struct GameMode {
     GameModeConfig *config;
     GameModeConfig *GetConfig() { return config; }
 };
-using InputMode = GameMode; // Host alias for the production InputMode interface.
 struct IntegratedDisplay {
-    InputMode *mode;
-    InputMode *CurrentGameMode() { return mode; }
+    GameMode *mode;
+    GameMode *CurrentGameMode() { return mode; }
 };
 struct CommunicationBackend {
     GameMode *mode;

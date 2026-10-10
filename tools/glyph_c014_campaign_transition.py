@@ -1326,7 +1326,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE, 'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp'}
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE}
     require(changed <= allowed_target_paths,
             'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
@@ -1337,16 +1337,8 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
                 and get(root, 'show', ':' + path) == original.current_bytes(root, path),
                 'VAL045 committed/index/live mismatch: ' + path)
     authorized_sources = accepted_delta_paths | {C024_MENU}
-    if integrated and original.ancestor(root, C024_C019_HOST_STUB_COMMIT, head):
-        authorized_sources.add(C024_C019_HOST_STUB)
     source_candidates = {path: commit for path, commit in accepted_predecessor_sources.items()}
     source_candidates[C024_MENU] = C024_C
-    if integrated and original.ancestor(root, C024_C019_HOST_STUB_COMMIT, head):
-        require(C024_C019_HOST_STUB in original._tree(root, C024_C019_HOST_STUB_COMMIT)
-                and original.raw_bytes(root, head, C024_C019_HOST_STUB)
-                    == original.raw_bytes(root, C024_C019_HOST_STUB_COMMIT, C024_C019_HOST_STUB),
-                'C024 C019 host compatibility stub differs from its exact validation commit')
-        source_candidates[C024_C019_HOST_STUB] = C024_C019_HOST_STUB_COMMIT
     return dict(phase=phase, contract='c024_selector_identity', candidate=C024_C,
                 processor_evidence_commit=processor,
                 base=C024_B, target=head, critical_paths=critical,
@@ -1382,8 +1374,6 @@ def authenticate_config019_coexistence(root, head):
 C024_R = '36f91089ab60fb68248a2819aee5dd5082fd922c'
 C024_P = '68cb0e8e7d6a0badcfaf894b188231c968d27c1d'
 C024_F = '8ab1173b0690f5ed3e994f95af797c9e9a265525'
-C024_C019_HOST_STUB = 'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp'
-C024_C019_HOST_STUB_COMMIT = 'e2face2dd2673056c747c22ed33baf7a3fbb7878'
 C024_EVIDENCE = 'docs/calibration/fixtures/gp_config_024_hardware_evidence.json'
 C024_RESULT = 'docs/calibration/gp_config_024_hardware_result.md'
 C024_PROTOCOL = 'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md'
@@ -1397,7 +1387,6 @@ C024_PROCESSOR_PATHS = frozenset((
     'tools/glyph_c014_campaign_transition.py', 'tools/glyph_campaign_transition.py',
     'tools/test_glyph_c014_campaign_transition.py',
     'tools/check_glyph_gp_config019_usb_name_selection.py',
-    'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',
 ))
 C024_ROWS = ('valid_startup', 'duplicate_or_empty_profile_selection',
              'keyboard_dinput', 'reconnect_reboot', 'restoration', 'rollback',
