@@ -558,13 +558,84 @@ def run_group(group):
     print('PASS finite native034/041 group', group, 'seconds', round(time.monotonic() - began, 3))
 
 
+
+def c024_processor_evidence():
+    """Real committed E plus isolated malformed descendants; no physical tests."""
+    import copy
+    import os
+    os.environ['GIT_OPTIONAL_LOCKS'] = '0'
+    os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
+    current = proof.authenticate(ROOT)
+    assert current['phase'] == 'SOURCE_FREE_PROCESSOR'
+    evidence = json.loads(proof.original.raw_bytes(ROOT, current['target'], proof.C024_EVIDENCE))
+    proof.validate_c024_processor_rows(evidence)
+    count = 1
+    for label, mutate in (
+        ('erased freeze', lambda d: d.update(anomalies=[])),
+        ('invented freeze fix', lambda d: d.update(anomalies=['fixed'])),
+        ('required row omission', lambda d: d['steps'].pop(0)),
+        ('failed required row', lambda d: d['steps'][0].update(observed='FAIL')),
+        ('invented Keyboard PASS', lambda d: d['steps'][2].update(observed='PASS')),
+        ('rollback claimed without test', lambda d: d['steps'][5].update(observed='PASS')),
+        ('required evidence gap', lambda d: d.update(evidence_gaps=['missing physical witness'])),
+    ):
+        malformed = copy.deepcopy(evidence); mutate(malformed)
+        reject(lambda: proof.validate_c024_processor_rows(malformed), label); count += 1
+    with tempfile.TemporaryDirectory(prefix='glyph-c024-processor-negatives-') as directory:
+        root = Path(directory)
+        subprocess.run(['git', '-c', 'init.templateDir=', 'init', '-q', str(root)], check=True)
+        common = Path(git(ROOT, 'rev-parse', '--git-common-dir'))
+        if not common.is_absolute(): common = ROOT / common
+        (root / '.git/objects/info/alternates').write_text(str(common.resolve() / 'objects') + '\n')
+        git(root, 'config', 'user.name', 'Synthetic evidence test')
+        git(root, 'config', 'user.email', 'synthetic-evidence@example.invalid')
+        E = current['target']; checkout(root, E)
+        def bad(label, mutate):
+            nonlocal count
+            checkout(root, E); mutate(); commit(root, label)
+            reject(lambda: proof.authenticate(root), label); count += 1
+        def edit_json(path, mutate):
+            value=json.loads((root/path).read_text());mutate(value)
+            write(root,path,json.dumps(value,indent=2)+'\n')
+        def edit_order(**values): alter_queue(root, 'GP-CONFIG-024', **values)
+        bad('tested UF2 substitution', lambda: edit_order(firmware_artifact_sha256='0'*64))
+        bad('candidate substitution', lambda: edit_order(candidate_git_sha='0'*40))
+        bad('source-free early DONE', lambda: edit_order(status='DONE'))
+        bad('freeze erased in committed evidence', lambda: edit_json(proof.C024_EVIDENCE,lambda d:d.update(anomalies=[])))
+        bad('owner/session archive substitution', lambda: write(root,proof.C024_ARCHIVE,(root/proof.C024_ARCHIVE).read_bytes()+b' '))
+        bad('original protocol mutation', lambda: write(root,proof.C024_PROTOCOL,(root/proof.C024_PROTOCOL).read_bytes()+b' '))
+        bad('candidate source copied at E',lambda:write(root,proof.C024_MENU,proof.original.raw_bytes(ROOT,proof.C024_C,proof.C024_MENU)))
+        bad('early I catalog',lambda:write(root,'docs/runtime_config/fixtures/gp_val045_accepted_transitions.json','{}\n'))
+        bad('other order mutation',lambda:alter_queue(root,'GP-CONFIG-023',title='substituted'))
+        def mode(): (root/proof.C024_ARCHIVE).chmod(0o755)
+        bad('executable evidence archive',mode)
+        checkout(root,E)
+        write(root,proof.C024_EVIDENCE,(root/proof.C024_EVIDENCE).read_bytes()+b' ')
+        reject(lambda:proof.authenticate(root),'live evidence divergence');count+=1
+        git(root,'add',proof.C024_EVIDENCE)
+        write(root,proof.C024_EVIDENCE,proof.original.raw_bytes(ROOT,E,proof.C024_EVIDENCE))
+        reject(lambda:proof.authenticate(root),'index-only evidence divergence');count+=1
+        checkout(root,E)
+        edit_order(hardware_result='FAIL');invalid=commit(root,'historical invalid acceptance')
+        write(root,proof.QUEUE,proof.original.raw_bytes(ROOT,E,proof.QUEUE));commit(root,'later restoration cannot conceal invalid history')
+        reject(lambda:proof.authenticate(root),'hidden historical invalid acceptance');count+=1
+        checkout(root,E)
+        tree=git(root,'write-tree')
+        merged=subprocess.run(['git','-C',str(root),'commit-tree',tree,'-p',E,'-p',proof.C024_C],input=b'SYNTHETIC TEST early tested ancestry\n',capture_output=True,check=True).stdout.decode().strip()
+        checkout(root,merged)
+        reject(lambda:proof.authenticate(root),'tested ancestry hidden behind baseline critical tree');count+=1
+    print('PASS C024 processor real E and',count-1,'negative controls; unresolved anomaly retained; no I/DONE')
+
+
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     groups = ('original', 'hosts', 'overlays', 'authority', 'history', 'critical')
-    parser.add_argument('--group', choices=('all', *groups, 'original-phases', 'original-negatives', 'original-kbd', 'val045-handoff-state'), default='all')
+    parser.add_argument('--group', choices=('all', *groups, 'original-phases', 'original-negatives', 'original-kbd', 'val045-handoff-state', 'c024-processor-evidence'), default='all')
     selected = parser.parse_args().group
-    if selected == 'val045-handoff-state':
+    if selected == 'c024-processor-evidence':
+        c024_processor_evidence()
+    elif selected == 'val045-handoff-state':
         val045_handoff_state()
     else:
         for group in groups if selected == 'all' else (selected,): run_group(group)

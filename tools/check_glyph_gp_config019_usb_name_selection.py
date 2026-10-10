@@ -253,7 +253,7 @@ def guard_critical_inputs(head):
         require(differences <= proof['critical_paths'], 'critical drift outside authenticated campaign source')
         phase = (proof['phase'] in {'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'} or
                  (proof.get('contract') == 'c024_selector_identity' and
-                  proof['phase'] in {'SOURCE_FREE_CANDIDATE', 'CANDIDATE_VALIDATION_ONLY'}) or
+                  proof['phase'] in {'SOURCE_FREE_CANDIDATE', 'SOURCE_FREE_PROCESSOR', 'CANDIDATE_VALIDATION_ONLY'}) or
                  (proof.get('contract') == 'c017_neopixel' and
                   proof['phase'] in {'BASELINE', 'SOURCE_FREE_PROCESSOR'} and
                   proof.get('predecessor_phase') == 'ACCEPTED_TRANSITION'))

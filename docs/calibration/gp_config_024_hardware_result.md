@@ -1,36 +1,25 @@
 # GP-CONFIG-024 hardware result
 
-Status: `HARDWARE_TEST_REQUIRED`; all physical rows are `NOT_TESTED`.
+GP-CONFIG-024 is HARDWARE_VALIDATED / hardware_result PASS for exact F `8ab1173b0690f5ed3e994f95af797c9e9a265525`, tree `15ed2d35d561d6b1709499fe42083ca4d789e920`, preserved UF2 `95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6` /803840bytes; required evidence gaps are empty. Source-free HEP E follows reviewed R `36f91089ab60fb68248a2819aee5dd5082fd922c` with all245critical entries unchanged from B; F remains unintegrated, no C024 DONE. Actual owner bundle f6bbd1b7986315147359d6fb09a92fd6e418031afd35e3be830da56889469d2c and92sessionfiles/24source-boundrawroundtrips are preserved. XInput/DInput exact duplicate-row physical A/B witnesses, directSwitchUSB, separateGCadapter/UltimateX1 sanity, ordinaryselection/reboot/reconnect and finalrestoration accepted. Initialfreeze remains unresolved nonblocking nondeterministic anomaly: restartrecovery, exactlyonesuccessfulcontrolledrepeat, rootcauseUNPROVEN; nofix/generalstabilityclaim. Owner-amended fixture/restoration authority is separate from immutableoriginalprotocol. FinalC024About8ab1173, correctedbase4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe, oneUltimate3/XInputA/Bcleanrelease; noC017rollbackneeded. Keyboard NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA, PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT and existing deferred POST_BETA_KEYBOARD_PHYSICAL_VALIDATION preserved; SNESNOT_APPLICABLE, NunchukNOT_TESTED. Separate Implementation Supervisor owns fresh source/custody/gates, exacttestedsourceintegrationreview and strictDONE. No HEPbuild/device/write/test/integration/publicrelease; timerPAUSED.
 
-The exact C024 candidate `8ab1173b0690f5ed3e994f95af797c9e9a265525` (tree
-`15ed2d35d561d6b1709499fe42083ca4d789e920`, base
-`b404453ef22cc994eec54338b8a23c3ba61df808`) built successfully for
-`glyph_mk6`. RAM use was 105784/262144 bytes; flash use was 389808/1568768
-bytes. The 803840-byte UF2 SHA-256 is
-`95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6`,
-preserved at
-`local_backups/hardware-artifacts/8ab1173b0690f5ed3e994f95af797c9e9a265525/95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6/firmware.uf2`.
-The custody tool confirmed existing bytes and passed a pre-handoff rehash.
-Fresh independent source/build/artifact review approved the exact candidate
-and artifact. These are build and custody results, not controller acceptance.
+Canonical structured evidence: `repo-json:docs/calibration/fixtures/gp_config_024_hardware_evidence.json`.
 
-No physical action was run. The owner has not provided a current raw Config
-hash, safe-to-distinguish existing profile pair, or confirmed manual update
-and restoration route. No Config write, device write, or flash action was
-performed. The protocol remains gated on those setup facts and owner direction.
+Original protocol is unchanged at reviewed R; separately verified owner amendments and exact bundle are archived in `docs/calibration/fixtures/gp_config_024_human_session_archive.json` (SHA-256 `6b9979fe81876f37bbd00ff7b76c0a81bee940692aa73aeed52d7a2b9776312c`). The actual owner attests the tested tuple; an individual historical pre-update rehash event timestamp is UNKNOWN, and the schema flag is INFERRED from that protocol/tuple attestation. `tested_at` is the terminal final-postreboot capture timestamp; individual physical event times are UNKNOWN.
 
-| Evidence row | Result |
+| Required row | Disposition |
 | --- | --- |
-| Valid startup | `NOT_TESTED` |
-| Duplicate/empty profile selection and row identity | `NOT_TESTED` |
-| Keyboard on DInput | `NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA` (nonblocking; outside the current first-beta physical scope) |
-| Reconnect and reboot | `NOT_TESTED` |
-| Restoration and rollback | `NOT_TESTED` |
-| Safe stop and anomalies | `NOT_TESTED` |
+| valid_startup | PASS: XInput and DInput original/duplicate witnesses; direct Switch USB recognition/directions/RF1=A/RF2=B/neutral/release; distinct GC-adapter Switch route directions/A/B/release, LT5+right established X1-modified behavior and clean release. No coordinates inferred. |
+| duplicate_or_empty_profile_selection | PASS: XInput original3=A/B and duplicate14=B/A before/after ordinary selection/reboot, reverse14->3=A/B. DInput14=B/A,14->3=A/B,3->14=B/A. Both rows named Ultimate; menu text is not the witness. Exact readback mutations only USB/default-profile refs; remaps/RGB unchanged. |
+| keyboard_dinput | NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA: nonblocking existing owner disposition; GP-KBD-001 and PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT retained; POST_BETA_KEYBOARD_PHYSICAL_VALIDATION remains nonexecuting. |
+| reconnect_reboot | PASS: Mac duplicate14 B/A clean release; pre/post reconnect4499/df4d6e9fbe71311f1253f7671fce28f79bf6ab39d40501061ef6935a9c1da3cb equal. GC physical reconnect and ordinary profile/reboot exact corrected4178 base. Switch direct no-menu reconnect4178/4efb5c77ab26cf19b4f630092aca4b981f4188b150dc63a0926eede632376c36 equal. No new reconnect anomaly. |
+| restoration | PASS: final Switch-stage guarded SET success; independent immediate/post-normal-reboot GET exact correctedbase bytes. One Ultimate ref3, identity RF1/RF2 remaps, USB XInput1/defaultprofile3; owner physicalA/B/cleanrelease. Final About8ab1173. Legacy4201 original is historical intentionally rejectedRGB, not final restoration target. |
+| rollback | NOT_REQUIRED: initial freeze recovered by restart; no C017 rollback needed in latest finalC024 state. Accepted C0175994f1657e45e0883c6c75468a19be7e3b49a72c/UF2e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672 available under original handoff. |
+| safe_stop_and_anomalies | PASS for completed reporting/recovery scope only; initial attempt remains FREEZE/FAIL and is not relabeled PASS. NONBLOCKING_RETAINED_UNRESOLVED_NONDETERMINISTIC_ANOMALY: One initial XInput Ultimate14 -> DInput -> Ultimate3 freeze (failed attempt), restart recovery, exactly one authorized controlled repeat PASS / NOT_REPRODUCED_ON_SINGLE_CONTROLLED_REPEAT; root cause UNPROVEN. No fix, disproval, general stability or further reproduction claim. No wrong-row output, Config loss, identity mismatch or unsafe recovery was established; required distinguishing outputs and persistence/recovery checks completed. Current contract records anomalies separately from required evidence gaps. GC3->1 separately OWNER_INDUCED_EXPECTED_PROFILE_PERSISTENCE under actual owner report and exact SetDefaultMode/initialize_backends/SaveConfig source; no unrelated raw delta. |
 
-Nunchuk remains `NOT_TESTED`; root cause remains `UNPROVEN`; no hardware PASS
-or public release is claimed.
+Freeze adjudication: NONBLOCKING_RETAINED_UNRESOLVED_NONDETERMINISTIC_ANOMALY: One initial XInput Ultimate14 -> DInput -> Ultimate3 freeze (failed attempt), restart recovery, exactly one authorized controlled repeat PASS / NOT_REPRODUCED_ON_SINGLE_CONTROLLED_REPEAT; root cause UNPROVEN. No fix, disproval, general stability or further reproduction claim. No wrong-row output, Config loss, identity mismatch or unsafe recovery was established; required distinguishing outputs and persistence/recovery checks completed. Current contract records anomalies separately from required evidence gaps.
 
-The Keyboard DInput deferral preserves raw Keyboard semantics. It authorizes
-no behavior removal, disabling, or output transformation and requests no
-Keyboard physical work now.
+The initial failing attempt stays recorded; safe_stop_and_anomalies PASS denotes completion of required reporting/recovery evidence, not a PASS for the initial attempt. Generic HARDWARE_EVIDENCE and native v2 schema require no evidence gaps for PASS and permit a separate nonempty anomalies list. The protocol requires stop for identity mismatch or unsafe/unavailable recovery; neither is established here. The controlled repeat supplies bounded positive observations, not a fix or a statistical reliability result. No additional physical loop is required by that contract.
+
+Source correspondence: all245critical entries R equal B; F changes only DefaultConfigMenu.cpp. Branch divergence is accounted for through exact frozen tuple and source-free E, never source copying. Config/persistence is source-backed at SetDefaultMode, initialize_backends and SaveConfig; no freeze cause is inferred. Full aggregate PASS is not claimed; inherited synthetic campaign setup failure remains Tier3 FRAMEWORK_VALIDATION_DEBT unless a concrete safety contradiction appears. Original build/review receipts and final focused validation/review are recorded in the durable HEP result.
+
+Original final build receipt recovered without rebuild: exec-b81577c5-8ed4-4ec1-9457-55ac6589c9e9, 2026-10-09T09:19:25.676Z, exit0 (105.708s); original hash/HEAD exec-cea2f0b6-dc53-476c-ac18-31c56d8a4a9a and custody exec-64cf0d5a-1bb1-454d-8fdd-aa0cbecad63e independently matched verbatim retained runtime JSONL events. Original reviewer01a101f1-f2c3-7cd3-84a7-8ee06af8bf08 source/build/artifact final message msg_0fedd77c297d9a0d016ac8b29efc7c81918eda128314b79e54 APPROVED, finalhandoff msg_0fedd77c297d9a0d016ac8b4af96508191b781680761c28a69 APPROVED; reviewer01a11fdf-97c8-7d40-a29f-dc338209ad2e exactR msg_056f46e155f9ac97016ac8ba7d93e88191a8af46ffd0f9a1ac APPROVED. Actual original reviews independently retrieved; preserved separately inside sessionarchive, not replacement reviews.

@@ -1180,7 +1180,11 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
             'VAL045 exact accepted C023/042 predecessor state changed')
     current_c024 = original.item(root, head, 'GP-CONFIG-024')
     current_045 = original.item(root, head, 'GP-VAL-045')
-    validate_val045_handoff_state(current_c024, current_045)
+    processor = None
+    if current_c024.get('status') == 'HARDWARE_VALIDATED' or current_c024.get('hardware_result') is not None:
+        processor = authenticate_c024_processor(root, head, current_c024, current_045)
+    else:
+        validate_val045_handoff_state(current_c024, current_045)
 
     # Keep the original019 observations and041 current-admission record exact.
     # The six named accepted predecessor deltas are validated below against B;
@@ -1282,7 +1286,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
     require(delta == {C024_MENU}, 'VAL045 exact sole C024 critical source delta changed')
     current = original.critical_tree(root, head)
     if current == source_base:
-        phase = 'SOURCE_FREE_CANDIDATE'
+        phase = 'SOURCE_FREE_PROCESSOR' if processor else 'SOURCE_FREE_CANDIDATE'
         critical = frozenset(accepted_predecessor_sources)
         sources = {}
         require(not original.ancestor(root, C024_C, head),
@@ -1297,7 +1301,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE}
     require(changed <= allowed_target_paths,
             'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
@@ -1311,6 +1315,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
     source_candidates = {path: commit for path, commit in accepted_predecessor_sources.items()}
     source_candidates[C024_MENU] = C024_C
     return dict(phase=phase, contract='c024_selector_identity', candidate=C024_C,
+                processor_evidence_commit=processor,
                 base=C024_B, target=head, critical_paths=critical,
                 source_candidates={**source_candidates, **sources}, accepted_metadata_paths=frozenset(),
                 authorized_source_paths=frozenset(authorized_sources),
@@ -1335,3 +1340,141 @@ def authenticate_config019_coexistence(root, head):
         from glyph_c017_campaign_transition import verify019_overlay
         return verify019_overlay(root, head)
     return authenticate_config019_coexistence_014_original(root, head)
+
+
+# Owner-directed C024 source-free evidence admission. This authenticates E only;
+# a later tested-source I/catalog and strict DONE need their separate review.
+C024_R = '36f91089ab60fb68248a2819aee5dd5082fd922c'
+C024_EVIDENCE = 'docs/calibration/fixtures/gp_config_024_hardware_evidence.json'
+C024_RESULT = 'docs/calibration/gp_config_024_hardware_result.md'
+C024_PROTOCOL = 'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md'
+C024_ARCHIVE = 'docs/calibration/fixtures/gp_config_024_human_session_archive.json'
+C024_ARCHIVE_SHA256 = '6b9979fe81876f37bbd00ff7b76c0a81bee940692aa73aeed52d7a2b9776312c'
+C024_PROCESSOR_PATHS = frozenset((
+    C024_EVIDENCE, C024_RESULT, C024_ARCHIVE,
+    'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md', QUEUE,
+    'tools/glyph_c014_campaign_transition.py', 'tools/glyph_campaign_transition.py',
+    'tools/test_glyph_c014_campaign_transition.py',
+    'tools/check_glyph_gp_config019_usb_name_selection.py',
+))
+C024_ROWS = ('valid_startup', 'duplicate_or_empty_profile_selection',
+             'keyboard_dinput', 'reconnect_reboot', 'restoration', 'rollback',
+             'safe_stop_and_anomalies')
+
+
+def validate_c024_processor_rows(record):
+    require(record['result'] == 'PASS' and record['evidence_gaps'] == [],
+            'C024 processor requires exact complete PASS with no gaps')
+    require([row['id'] for row in record['steps']] == list(C024_ROWS),
+            'C024 physical row missing/reordered')
+    rows = {row['id']: row for row in record['steps']}
+    require(all(rows[name]['observed'].startswith('PASS') for name in C024_ROWS
+                if name not in ('keyboard_dinput', 'rollback')),
+            'C024 required physical observation incomplete/failing')
+    require(rows['keyboard_dinput']['observed'].startswith('NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA')
+            and rows['rollback']['observed'].startswith('NOT_REQUIRED'),
+            'C024 deferred Keyboard or unneeded rollback misrepresented')
+    require(len(record['anomalies']) == 1
+            and record['anomalies'][0].startswith('NONBLOCKING_RETAINED_UNRESOLVED_NONDETERMINISTIC_ANOMALY:')
+            and all(token in record['anomalies'][0] for token in (
+                'failed attempt', 'exactly one authorized controlled repeat PASS',
+                'NOT_REPRODUCED_ON_SINGLE_CONTROLLED_REPEAT', 'root cause UNPROVEN',
+                'No fix, disproval, general stability')),
+            'C024 initial freeze or bounded repeat erased/misrepresented')
+
+
+def authenticate_c024_processor(root, head, state, val045):
+    require(val045 == item(root, C024_R, 'GP-VAL-045') and val045['status'] == 'DONE',
+            'C024 E lost strict VAL045 predecessor completion')
+    require(original.ancestor(root, C024_R, head), 'C024 E must follow reviewed R')
+    baseline = original.critical_tree(root, C024_R)
+    require(baseline == original.critical_tree(root, C024_B), 'C024 R critical baseline changed')
+    pending = item(root, C024_R, 'GP-CONFIG-024')
+    require(pending['status'] == 'PREAUTHORIZED' and pending['activation_state'] == 'HARDWARE_PENDING',
+            'C024 R is not exact reviewed hardware wait')
+    acceptance = {'status', 'activation_state', 'hardware_result',
+                  'hardware_evidence_dependency_satisfied', 'hardware_evidence_gaps',
+                  'hardware_evidence_record'}
+    queue_R = parsed_queue(original.raw_bytes(root, C024_R, QUEUE))
+    protocol = original.raw_bytes(root, C024_R, C024_PROTOCOL)
+    catalogs = {p: entry for p, entry in original._tree(root, C024_R).items()
+                if p.endswith('_accepted_transitions.json')}
+    revisions = original._git(root, 'rev-list', '--reverse', '--topo-order', C024_R + '..' + head).decode().split()
+    first = None
+    latched = None
+    latched_state = None
+    for revision in revisions:
+        tree = original._tree(root, revision)
+        require(not original.ancestor(root, C024_C, revision)
+                and original.critical_tree(root, revision) == baseline,
+                'C024 source-free E/history conceals tested source or critical drift')
+        changed = set(filter(None, original._git(root, 'diff', '--name-only', '--no-renames', '-z',
+                                                C024_R, revision).decode().split('\0')))
+        require(changed <= C024_PROCESSOR_PATHS, 'C024 E exceeds finite source-free envelope')
+        require(all(tree.get(p, ())[:2] == ('100644', 'blob') for p in changed),
+                'C024 E contains deletion or nonregular mode')
+        require(original.raw_bytes(root, revision, C024_PROTOCOL) == protocol,
+                'C024 immutable protocol replaced')
+        require({p:entry for p,entry in tree.items() if p.endswith('_accepted_transitions.json')} == catalogs,
+                'C024 E changed accepted catalog or added early I')
+        queue = parsed_queue(original.raw_bytes(root, revision, QUEUE))
+        require([x for x in queue['items'] if x['id'] != 'GP-CONFIG-024']
+                == [x for x in queue_R['items'] if x['id'] != 'GP-CONFIG-024'],
+                'C024 E changed another work order')
+        current = item(root, revision, 'GP-CONFIG-024')
+        if current == pending and first is None:
+            continue
+        require(current['status'] == 'HARDWARE_VALIDATED'
+                and current['activation_state'] == 'NOT_APPLICABLE'
+                and current['hardware_result'] == 'PASS'
+                and current['hardware_evidence_dependency_satisfied'] is True
+                and current['hardware_evidence_gaps'] == [],
+                'C024 E status/acceptance missing, substituted, or regressed')
+        require({k:v for k,v in current.items() if k not in acceptance}
+                == {k:v for k,v in pending.items() if k not in acceptance},
+                'C024 E changed non-acceptance authority or exact tuple')
+        reference = current['hardware_evidence_record']
+        if reference == 'repo-json:' + C024_EVIDENCE:
+            evidence_root = revision
+        else:
+            import re
+            match = re.fullmatch('git-json:([0-9a-f]{40}):' + re.escape(C024_EVIDENCE), str(reference))
+            require(match is not None, 'C024 E evidence reference is not immutable supported JSON')
+            evidence_root = match.group(1)
+        require(original.ancestor(root, C024_R, evidence_root)
+                and original.ancestor(root, evidence_root, revision),
+                'C024 E evidence root outside reviewed chronology')
+        from check_glyph_agent_framework_docs import validate_work_order, validate_evidence_record
+        validated = dict(current, hardware_evidence_record='git-json:' + evidence_root + ':' + C024_EVIDENCE)
+        validate_work_order(validated, evidence_repo_root=root)
+        validate_evidence_record(validated, evidence_repo_root=root)
+        payload = original.raw_bytes(root, evidence_root, C024_EVIDENCE)
+        require(tree.get(C024_EVIDENCE, ())[:2] == ('100644', 'blob')
+                and original.raw_bytes(root, revision, C024_EVIDENCE) == payload,
+                'C024 E current evidence differs from accepted reference')
+        validate_c024_processor_rows(json.loads(payload, object_pairs_hook=unique))
+        archive = original.raw_bytes(root, revision, C024_ARCHIVE)
+        require(hashlib.sha256(archive).hexdigest() == C024_ARCHIVE_SHA256,
+                'C024 E owner/session provenance replaced')
+        result = original.raw_bytes(root, revision, C024_RESULT)
+        require(all(token in result.decode() for token in (
+            'NONBLOCKING_RETAINED_UNRESOLVED_NONDETERMINISTIC_ANOMALY',
+            'DEFERRED_POST_FIRST_PUBLIC_BETA', 'PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT',
+            'POST_BETA_KEYBOARD_PHYSICAL_VALIDATION', 'rootcauseUNPROVEN')),
+            'C024 E result loses anomaly or owner scope')
+        if first is None:
+            first = revision
+            latched = (payload, result, archive)
+            latched_state = current
+        else:
+            require((payload, result, archive) == latched and current == latched_state,
+                    'C024 E immutable accepted evidence/status replaced')
+    require(first is not None and state == latched_state,
+            'C024 current acceptance lacks source-free processor E')
+    for path in C024_PROCESSOR_PATHS:
+        if path in original._tree(root, head):
+            require(original.current_bytes(root, path) == original.raw_bytes(root, head, path)
+                    and original._git(root, 'show', ':' + path) == original.current_bytes(root, path),
+                    'C024 E committed/index/live mismatch: ' + path)
+    return first
+

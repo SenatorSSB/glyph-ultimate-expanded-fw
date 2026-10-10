@@ -1,59 +1,89 @@
 {
-  "schema_name": "glyph_gp_config024_hardware_evidence",
-  "schema_version": 1,
-  "work_order": "GP-CONFIG-024",
-  "protocol": "docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md",
-  "protocol_version": "GP_CONFIG_024_HW_V1",
-  "result": "NOT_TESTED",
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-CONFIG-024",
+  "candidate_branch": "codex/gp-config-024-usb-profile-identity",
   "candidate_git_sha": "8ab1173b0690f5ed3e994f95af797c9e9a265525",
-  "candidate_tree": "15ed2d35d561d6b1709499fe42083ca4d789e920",
   "candidate_base_configurator_sha": "b404453ef22cc994eec54338b8a23c3ba61df808",
-  "firmware_build": {
-    "environment": "glyph_mk6",
-    "status": "PASS",
-    "command": "pio run -e glyph_mk6",
-    "platformio_core": "6.1.19",
-    "framework": "ArduinoPico 1.30603.0+sha.32e74d0",
-    "ram_used_bytes": 105784,
-    "ram_total_bytes": 262144,
-    "flash_used_bytes": 389808,
-    "flash_total_bytes": 1568768,
-    "uf2_size_bytes": 803840,
-    "uf2_sha256": "95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6",
-    "artifact_locator": "local_backups/hardware-artifacts/8ab1173b0690f5ed3e994f95af797c9e9a265525/95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6/firmware.uf2",
-    "custody": "ALREADY_PRESENT_VERIFIED",
-    "pre_handoff_rehash": "PASS",
-    "independent_source_build_artifact_review": "APPROVED"
-  },
-  "rollback_artifact": {
-    "candidate_git_sha": "5994f1657e45e0883c6c75468a19be7e3b49a72c",
-    "uf2_sha256": "e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5",
-    "size_bytes": 796672,
-    "locator": "local_backups/hardware-artifacts/5994f1657e45e0883c6c75468a19be7e3b49a72c/e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/firmware.uf2",
-    "source_readback": "PASS"
-  },
-  "setup_prerequisites": {
-    "current_config_raw_hash": null,
-    "distinguishable_existing_profile_pair": null,
-    "manual_update_recovery_and_restore_route_confirmed": false,
-    "ready_for_owner_action": false,
-    "blocker": "Owner must identify the current Config, an existing safe-to-distinguish profile pair, and the established manual update/recovery/restoration route. No Config edits are authorized by this protocol."
-  },
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/8ab1173b0690f5ed3e994f95af797c9e9a265525/95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6 / HayBox; USB serial E4651C128B364739 (owner reported)",
+  "firmware_profile_state": "Tested About8ab1173; original Ultimate ref3 RF1=A/RF2=B; temporary duplicate ref14 RF1=B/RF2=A. Final correctedbase4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe, oneUltimate3, XInput1/defaultprofile3.",
+  "update_method": "Owner established manual update/guarded Configurator route; completed exact testedtuple owner-attested. pre_update_sha256_verified is INFERRED from owner exacttuple/protocol attestation, individual pre-update hash-event timing UNKNOWN; later HEP custody rehash verifies retained bytes, not that historical event. No HEP update/write/flash/build.",
+  "host_platform_adapter": "MacBook Pro macOS27.0.1 XInput/DInput; direct Nintendo Switch USB; separate owner established CG Adapter GameCube-to-Switch route, exact adapter model UNKNOWN. SNES NOT_APPLICABLE/DO NOT TEST; Nunchuk NOT_TESTED.",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_CONFIG_024_HW_V1",
+  "preconditions": [
+    "Actual bundle8047 SHA256f6bbd1b7986315147359d6fb09a92fd6e418031afd35e3be830da56889469d2c verified; complete owner direction actual userMessage01a1256d-2bd4-7152-b5d0-6c1aec08695d in daemon turn01a1256d-296c-7b53-a967-ebc610ad8854 independently retrieved.",
+    "Original protocol at R36f91089ab60fb68248a2819aee5dd5082fd922c immutable; later owner authorized C022compatibility base correction, temporary duplicate Ultimate14 differing only RF1/RF2 replacement targets, narrow opt-in guarded writer and ordinary selection persistence. Amendments test authority only. Actual full owner text and92sessionfiles preserved separately in repo-json:docs/calibration/fixtures/gp_config_024_human_session_archive.json, SHA2566b9979fe81876f37bbd00ff7b76c0a81bee940692aa73aeed52d7a2b9776312c.",
+    "Exact F/tree15ed2d35d561d6b1709499fe42083ca4d789e920/directB verified; UF295de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6/803840 rehashed regular nonsymlink0444,1570validRP2040UF2blocks. LiveF exact; Rcritical245==B, Fsole selector delta. Build and final artifact approval source-bound to reviewed R; original detailed receipts tracked separately if available.",
+    "Independent source-bound protobuf roundtrips24snapshots and exactLayerA/LayerB transformations PASS. Legacycapture metadata GP_CONFIG_010_HW_RECOVERY_V1 and staleC010templateidentity fields are retained raw capture-tool labels, not C024protocol/firmware authority. Explicitzero JSON omission is protobuf presentation only.",
+    "Owner historical original4201/f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480 remains custody and expectedRGBrejection; validC022base4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe; fixture4499/ce06b62a5a1722360241ffdf680f2a0a792eb9aa4f0e7150cac1fc143e2b55a1."
+  ],
   "steps": [
-    {"id": "valid_startup", "result": "NOT_TESTED", "observed": null},
-    {"id": "duplicate_or_empty_profile_selection", "result": "NOT_TESTED", "observed": null},
-    {"id": "keyboard_dinput", "result": "NOT_TESTED", "disposition": "DEFERRED_POST_FIRST_PUBLIC_BETA", "blocking": false, "observed": null},
-    {"id": "reconnect_reboot", "result": "NOT_TESTED", "observed": null},
-    {"id": "restoration", "result": "NOT_TESTED", "observed": null},
-    {"id": "rollback", "result": "NOT_TESTED", "observed": null},
-    {"id": "safe_stop_and_anomalies", "result": "NOT_TESTED", "observed": null}
+    {
+      "id": "valid_startup",
+      "instruction": "Observe each supported first-beta controller route and bounded GC sanity.",
+      "expected": "Normal startup/input, A/B outputs, clean release.",
+      "observed": "PASS: XInput and DInput original/duplicate witnesses; direct Switch USB recognition/directions/RF1=A/RF2=B/neutral/release; distinct GC-adapter Switch route directions/A/B/release, LT5+right established X1-modified behavior and clean release. No coordinates inferred."
+    },
+    {
+      "id": "duplicate_or_empty_profile_selection",
+      "instruction": "Select original Ultimate3 and duplicate Ultimate14 then ordinary USB backend/reboot in both directions.",
+      "expected": "Exact intended current Config row survives ordinary selection/reboot; physically distinguish RF1/RF2 outputs.",
+      "observed": "PASS: XInput original3=A/B and duplicate14=B/A before/after ordinary selection/reboot, reverse14->3=A/B. DInput14=B/A,14->3=A/B,3->14=B/A. Both rows named Ultimate; menu text is not the witness. Exact readback mutations only USB/default-profile refs; remaps/RGB unchanged."
+    },
+    {
+      "id": "keyboard_dinput",
+      "instruction": "Apply existing verified owner first-beta scope disposition.",
+      "expected": "No Keyboard physical acceptance or semantic change.",
+      "observed": "NOT_TESTED / DEFERRED_POST_FIRST_PUBLIC_BETA: nonblocking existing owner disposition; GP-KBD-001 and PRESERVE_ORIGINAL_RAW_KEYBOARD_OUTPUT retained; POST_BETA_KEYBOARD_PHYSICAL_VALIDATION remains nonexecuting."
+    },
+    {
+      "id": "reconnect_reboot",
+      "instruction": "Compare complete persisted Config before and after owner reconnect/reboot.",
+      "expected": "Exact expected Config/output and clean release.",
+      "observed": "PASS: Mac duplicate14 B/A clean release; pre/post reconnect4499/df4d6e9fbe71311f1253f7671fce28f79bf6ab39d40501061ef6935a9c1da3cb equal. GC physical reconnect and ordinary profile/reboot exact corrected4178 base. Switch direct no-menu reconnect4178/4efb5c77ab26cf19b4f630092aca4b981f4188b150dc63a0926eede632376c36 equal. No new reconnect anomaly."
+    },
+    {
+      "id": "restoration",
+      "instruction": "Restore separately authorized reviewed corrected base and independently GET immediately and after normal reboot.",
+      "expected": "Exact corrected base4178/4f9f89ca36acf4140b35f9a7da1ce722cf4f1f11a6d58558b11cc5a613e2d0fe.",
+      "observed": "PASS: final Switch-stage guarded SET success; independent immediate/post-normal-reboot GET exact correctedbase bytes. One Ultimate ref3, identity RF1/RF2 remaps, USB XInput1/defaultprofile3; owner physicalA/B/cleanrelease. Final About8ab1173. Legacy4201 original is historical intentionally rejectedRGB, not final restoration target."
+    },
+    {
+      "id": "rollback",
+      "instruction": "Retain exact accepted C017 recovery bytes if needed.",
+      "expected": "Safe accepted recovery route; do not claim a rollback if none occurred.",
+      "observed": "NOT_REQUIRED: initial freeze recovered by restart; no C017 rollback needed in latest finalC024 state. Accepted C0175994f1657e45e0883c6c75468a19be7e3b49a72c/UF2e68105ff1fa033308ec9761d87260908a1cd145068e73eb2df516e34ee2e0fe5/796672 available under original handoff."
+    },
+    {
+      "id": "safe_stop_and_anomalies",
+      "instruction": "Preserve initial failed attempt, recovery and single authorized repeat separately; check required stop conditions.",
+      "expected": "Truthful anomaly, safe recovery and no required identity/Config gap.",
+      "observed": "PASS for completed reporting/recovery scope only; initial attempt remains FREEZE/FAIL and is not relabeled PASS. NONBLOCKING_RETAINED_UNRESOLVED_NONDETERMINISTIC_ANOMALY: One initial XInput Ultimate14 -> DInput -> Ultimate3 freeze (failed attempt), restart recovery, exactly one authorized controlled repeat PASS / NOT_REPRODUCED_ON_SINGLE_CONTROLLED_REPEAT; root cause UNPROVEN. No fix, disproval, general stability or further reproduction claim. No wrong-row output, Config loss, identity mismatch or unsafe recovery was established; required distinguishing outputs and persistence/recovery checks completed. Current contract records anomalies separately from required evidence gaps. GC3->1 separately OWNER_INDUCED_EXPECTED_PROFILE_PERSISTENCE under actual owner report and exact SetDefaultMode/initialize_backends/SaveConfig source; no unrelated raw delta."
+    }
   ],
-  "evidence_gaps": [
-    "Current exact Config bytes, size, and hash are not recorded.",
-    "No owner-confirmed existing duplicate-name or empty-name profile pair with a safe distinguishing output is recorded.",
-    "The owner's established manual update, recovery, and restoration route has not been confirmed for this candidate."
+  "negative_regression_checks": [
+    "ExactRF1/RF2 original versus duplicate output discriminates currentrow; bothdirections XInput/DInput ownerPASS, no sameName witness substitution.",
+    "All24raw snapshots deterministic decode/reencode/JSONraw equality; only authorizedUSB/defaultprofilerefs, RGB/rows/remaps unchanged. GC3->1 owner-induced expectedpersistence; SwitchsoleUSB1->3. OriginallegacyRGB expectedreject previouslyresolvedC022.",
+    "KeyboardNOT_TESTED/DEFERRED_POST_FIRST_PUBLIC_BETA, nonblocking; SNESNOT_APPLICABLE/DO NOT TEST; NunchukNOT_TESTED. Empty names not physically tested; duplicate-name witness satisfies protocol disjunction. Host proof not physical acceptance."
   ],
-  "nunchuk": "NOT_TESTED",
-  "root_cause": "UNPROVEN",
-  "public_release": "NOT_CLAIMED"
+  "power_cycle_reconnect_checks": [
+    "Macduplicate pre/post rawbyte equality and B/Acleanrelease; GCreboot/profile+separatephysicalreconnect correctedbaseexact; directSwitchUSB no-menu reconnect postselectionexact.",
+    "Final correctedbase immediate and normal-reboot GET exact; finalMacXInputA/Bcleanrelease ownerconfirmed; About8ab1173."
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "NONBLOCKING_RETAINED_UNRESOLVED_NONDETERMINISTIC_ANOMALY: One initial XInput Ultimate14 -> DInput -> Ultimate3 freeze (failed attempt), restart recovery, exactly one authorized controlled repeat PASS / NOT_REPRODUCED_ON_SINGLE_CONTROLLED_REPEAT; root cause UNPROVEN. No fix, disproval, general stability or further reproduction claim. No wrong-row output, Config loss, identity mismatch or unsafe recovery was established; required distinguishing outputs and persistence/recovery checks completed. Current contract records anomalies separately from required evidence gaps."
+  ],
+  "rollback_recovery": "Initial freeze restart recovered; single authorized controlledrepeat passed. Temporaryfixture removed, exact reviewedC022correctedbase restored immediate/postnormalreboot. NoC017rollback needed. NoHEPphysicaloperation.",
+  "tester": "Human owner Rasmus Pekkarinen; independently processed/reviewed by HEP; terminal byte checks are source/custody proof only.",
+  "tested_at": "2026-10-10T10:37:15.415855+00:00",
+  "evidence_gaps": []
 }
