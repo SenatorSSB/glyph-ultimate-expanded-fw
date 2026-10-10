@@ -1184,9 +1184,18 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
     integrated = original.ancestor(root, C024_F, head)
     if integrated:
         # Authenticate the source-free processor at P, then admit only the exact P/F merge.
-        parents = get(root, 'rev-list', '--parents', '-n', '1', head).decode().split()
-        require(len(parents) == 3 and parents[1:] == [C024_P, C024_F],
-                'C024 integration tip must be the exact P/F merge')
+        revisions = get(root, 'rev-list', '--reverse', '--topo-order', C024_P + '..' + head).decode().split()
+        merges = [revision for revision in revisions
+                  if get(root, 'rev-list', '--parents', '-n', '1', revision).decode().split()[1:]
+                  == [C024_P, C024_F]]
+        require(len(merges) == 1, 'C024 history must contain one exact P/F integration')
+        integration = merges[0]
+        require(original.ancestor(root, integration, head), 'C024 exact integration is not in target ancestry')
+        for revision in revisions[revisions.index(integration) + 1:]:
+            changed_since_i = set(filter(None, get(root, 'diff', '--name-only', '--no-renames', '-z',
+                                                    integration, revision).decode().split('\0')))
+            require(changed_since_i <= C024_PROCESSOR_PATHS,
+                    'C024 post-integration change outside validation/evidence paths')
         accepted = original.item(root, C024_P, 'GP-CONFIG-024')
         processor = authenticate_c024_processor(root, C024_P, accepted,
                                                 original.item(root, C024_P, 'GP-VAL-045'), verify_live=False)
