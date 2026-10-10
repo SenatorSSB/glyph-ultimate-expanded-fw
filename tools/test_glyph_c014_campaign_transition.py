@@ -590,6 +590,12 @@ def c024_processor_evidence():
         git(root, 'config', 'user.name', 'Synthetic evidence test')
         git(root, 'config', 'user.email', 'synthetic-evidence@example.invalid')
         E = current['target']; checkout(root, E)
+        write(root,'docs/AGENT_CONTEXT.md',(root/'docs/AGENT_CONTEXT.md').read_bytes()+b'\n')
+        commit(root,'source-free evidence descendant')
+        descendant = proof.authenticate(root)
+        assert descendant['phase'] == 'SOURCE_FREE_PROCESSOR'
+        assert descendant['processor_evidence_commit'] == current['processor_evidence_commit']
+        checkout(root,E)
         def bad(label, mutate):
             nonlocal count
             checkout(root, E); mutate(); commit(root, label)
@@ -615,6 +621,8 @@ def c024_processor_evidence():
         git(root,'add',proof.C024_EVIDENCE)
         write(root,proof.C024_EVIDENCE,proof.original.raw_bytes(ROOT,E,proof.C024_EVIDENCE))
         reject(lambda:proof.authenticate(root),'index-only evidence divergence');count+=1
+        git(root,'add',proof.C024_EVIDENCE)
+        assert git(root,'status','--porcelain') == ''
         checkout(root,E)
         edit_order(hardware_result='FAIL');invalid=commit(root,'historical invalid acceptance')
         write(root,proof.QUEUE,proof.original.raw_bytes(ROOT,E,proof.QUEUE));commit(root,'later restoration cannot conceal invalid history')

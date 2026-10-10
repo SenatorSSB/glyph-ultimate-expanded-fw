@@ -1477,4 +1477,3 @@ def authenticate_c024_processor(root, head, state, val045):
                     and original._git(root, 'show', ':' + path) == original.current_bytes(root, path),
                     'C024 E committed/index/live mismatch: ' + path)
     return first
-
