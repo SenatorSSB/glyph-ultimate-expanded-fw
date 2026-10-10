@@ -1193,7 +1193,8 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         require(original.ancestor(root, integration, head), 'C024 exact integration is not in target ancestry')
         post_integration = get(root, 'rev-list', '--first-parent', '--reverse', integration + '..' + head).decode().split()
         post_i_validation_paths = C024_PROCESSOR_PATHS | frozenset((
-            'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',))
+            'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',
+            'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp',))
         for revision in post_integration:
             changed_since_i = set(filter(None, get(root, 'diff', '--name-only', '--no-renames', '-z',
                                                     integration, revision).decode().split('\0')))
@@ -1329,7 +1330,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE}
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE, 'tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp'}
     require(changed <= allowed_target_paths,
             'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
