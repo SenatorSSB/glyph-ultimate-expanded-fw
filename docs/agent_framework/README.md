@@ -8,8 +8,10 @@ only. It does not implement a runner, daemon, scheduled automation, browser or
 device write path, runtime-loaded profile, or active firmware routing change.
 Current operations are Codex/OpenAI-only, and the supervisor is expected to
 execute the bounded workflow itself rather than merely report shell commands
-for a human to run. The selected mode is a Minimal Supervisor with on-demand
-consultative Planner/Curator roles and a hard manual H2/H3 hardware lane.
+for a human to run. The selected mode is one fresh chapter daemon with event-driven bounded
+workers/gates and a hard manual H2/H3 hardware lane. Fresh daemons must read
+[FUTURE_DAEMON_BOOTSTRAP.md](FUTURE_DAEMON_BOOTSTRAP.md) on their first turn.
+No standing Implementation, Planner or Curator schedules are the default.
 
 ## Scope
 
@@ -33,8 +35,8 @@ Out of scope:
 
 - Custom-runner prompt or implementation.
 - `scripts/agent_runner.py`.
-- External schedule mutation; repository task configurations are documentation
-  only.
+- External schedule mutation without explicit owner authorization; repository
+  task configurations alone do not change external schedules.
 - Browser/device writes.
 - WebSerial/device write.
 - Protobuf binary write.
@@ -46,7 +48,20 @@ Out of scope:
 
 ## Topology
 
-Use separated generation, judgment, execution, and evidence roles:
+Use separated generation, judgment, execution, and evidence roles as needed.
+
+Role existence is not a quota. Instantiate Planner only for actual planning or
+candidate-supply need, Curator only for real authority/adjudication, independent
+reviewer only for a required mutation/evidence review, and HEP only after human
+physical observations exist. Specialists and executors require a useful bounded
+transition; do not create a role merely to report WAITING or restate known state.
+One clean executor may carry an already-authorized coherent chain to the next
+real hardware/domain/authority stop, within its recorded scope and successor
+limits; it may not self-reseed. One independent review layer is normally
+sufficient. Do not create reviewer-of-reviewer chains unless a concrete new
+defect found by the first review needs repair and distinct independent review.
+
+Available roles (not a permanent topology):
 
 - Portfolio Planner proposes non-authoritative candidate supply.
 - Work-Order Curator independently authorizes complete Ready or narrowly
@@ -57,11 +72,15 @@ Use separated generation, judgment, execution, and evidence roles:
 - The Hardware Evidence Processor validates and records human-supplied results
   for one exact candidate/artifact pair and never fabricates testing.
 - Subagents inspect or edit within explicit scope and return compact evidence.
-- The judge/watchdog reviews loop risk and merge readiness.
+- Independent review checks loop risk and merge readiness. No watchdog is
+  created by default; a future watchdog needs evidence of missed completion
+  events and may only detect missed callbacks, executable transitions or durable
+  owner waits. It must not plan, curate, implement or invent work.
 - Long work is many bounded cycles, not one unbounded monolithic conversation.
 
 ## Contracts
 
+- `FUTURE_DAEMON_BOOTSTRAP.md` - mandatory first-turn chapter operating contract.
 - `MODEL_ROUTING.md` - current recommended model and effort routing.
 - `AUTHORIZATION_AND_RUNWAY.md` - authority map, Ready/Preauthorized semantics,
   packet freshness, runway, liveness, and concurrency.
@@ -80,7 +99,7 @@ Use separated generation, judgment, execution, and evidence roles:
 - `GP_CONFIG_010_INTEGRATION_HARDWARE_PROTOCOL.md` - bounded exact-artifact
   combined regression for the current-canonical GP-CONFIG-010 integration.
 - `USER_DIRECTION.md` - actual human direction only.
-- `SCHEDULED_TASKS.md` - exact copy-paste scheduled/manual role configurations;
+- `SCHEDULED_TASKS.md` - current event-driven defaults and legacy/manual role templates;
   it does not create schedules.
 - `SUPERVISOR_CONTRACT.md` - supervisor ownership and cycle contract.
 - `SUBAGENT_CONTRACTS.md` - canonical native-delegation discovery,
@@ -127,6 +146,12 @@ The canonical executable queue is
 Planner packets, roadmap prose, and branch names never authorize work.
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

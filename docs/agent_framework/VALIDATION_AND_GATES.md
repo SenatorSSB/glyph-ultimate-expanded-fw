@@ -135,12 +135,16 @@ Stop and report.
 
 ## Glyph Gates
 
-- Fresh live-remote truth -> attempt ordinary/default read-only verification;
-  if restricted-sandbox DNS/network access fails, treat it as inconclusive and
-  retry through the permitted network-enabled/escalated path. Do not infer auth
-  failure, mutate credentials, request re-login, accept stale tracking refs, or
-  return `BLOCKED_EXTERNAL` until all permitted network-capable retries fail or
-  are unavailable.
+- Fresh live-remote truth -> follow the capability-aware policy in root
+  AGENTS.md and WORKFLOW.md. When restricted GitHub connectivity is known
+  unavailable, use the permitted network-enabled path directly; do not repeat
+  an expected-to-fail restricted probe. Persist the chapter capability fact.
+  Unknown connectivity permits one minimal ordinary read-only probe. Network
+  permission grants no other authority. Only diagnose authentication after
+  GitHub connectivity and an actual rejection; never mutate credentials or
+  accept stale tracking refs. Stop fail-closed only after all permitted
+  network-capable attempts fail or are unavailable.
+
 - Active behavior changed -> build proof plus hardware PASS before merge.
 - H2/H3 -> automated validation, canonical build, fresh independent review,
   exact candidate publication, full Git SHA plus exact artifact SHA-256, and

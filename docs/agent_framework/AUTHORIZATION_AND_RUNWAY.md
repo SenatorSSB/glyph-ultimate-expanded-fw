@@ -45,8 +45,9 @@ daemon readback without repeated retry, task abandonment or a new GP-VAL.
 ## Selected Operating Mode
 
 ```text
-MINIMAL SUPERVISOR
-+ on-demand consultative Planner and Curator
+FRESH CHAPTER DAEMON
++ event-driven bounded workers/gates only as needed
++ no standing Implementation / Planner / Curator schedules
 + durable Ready / Preauthorized authorization
 + hard manual H2/H3 hardware acceptance
 ```
@@ -56,6 +57,19 @@ generation inappropriate as the default. Planner and Curator remain usable so
 a stale or empty runway can be replenished without redesigning the workflow.
 They cannot decide game semantics, infer firmware capabilities, or bypass
 explicit approval boundaries.
+
+Read FUTURE_DAEMON_BOOTSTRAP.md before dispatch.
+
+Role existence is not a quota. Instantiate Planner only for actual planning or
+candidate-supply need, Curator only for real authority/adjudication, independent
+reviewer only for a required mutation/evidence review, and HEP only after human
+physical observations exist. Specialists and executors require a useful bounded
+transition; do not create a role merely to report WAITING or restate known state.
+One clean executor may carry an already-authorized coherent chain to the next
+real hardware/domain/authority stop, within its recorded scope and successor
+limits; it may not self-reseed. One independent review layer is normally
+sufficient. Do not create reviewer-of-reviewer chains unless a concrete new
+defect found by the first review needs repair and distinct independent review.
 
 ## Authority Map
 
@@ -394,21 +408,29 @@ publication. Legitimate concurrent publication yields
 `IMPLEMENTATION_DEFERRED_CONCURRENT_WRITER` or
 `CURATION_DEFERRED_CONCURRENT_WRITER`.
 
-Live verification uses an ordinary/default minimal read-only attempt followed,
-when the restricted sandbox cannot resolve or reach GitHub, by the same
-read-only attempt through the runtime's permitted network-enabled/escalated
-execution path. The first DNS/network failure is inconclusive, not
-authentication evidence and not sufficient for `BLOCKED_EXTERNAL`. The retry
-grants network access only. Authentication may be diagnosed only after GitHub
-connectivity is established and GitHub rejects credentials or permission;
-sandboxed `gh auth status` while GitHub is unreachable is not an auth oracle.
-Agents must not automatically run `gh auth login`/`gh auth logout`, rewrite
-tokens, delete credentials, change credential helpers, replace SSH keys,
-switch accounts, or request re-login from an unverified connectivity failure.
-Stale local remote-tracking refs never replace live truth. Only when all
-permitted network-capable retries fail or are unavailable may the role stop
-fail-closed, reporting that live remote is unverified because all permitted
-network-capable retries failed.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 Normal implementation uses a focused branch compared against live
 `configurator`. Hardware/result/evidence branches are compared against their
@@ -421,10 +443,16 @@ source. Push, live-verify the exact feature ref, refresh live
 `configurator`, reconcile drift, rerun invalidated gates, and never force-push
 ordinary work.
 
-Schedules are heartbeats, never quotas. Every scheduled role has a truthful
-no-op or deferral result.
+No standing schedules are the default. Legacy schedules are heartbeats, never
+quotas; every retained manual role has a truthful no-op or deferral result.
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

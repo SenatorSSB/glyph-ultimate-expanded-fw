@@ -1,105 +1,167 @@
 {
   "version": "0",
-  "status": "current capability-tier defaults; review when product capabilities or repo evidence change",
+  "status": "current task/lane capability-family policy; resolve available identifiers at every dispatch and resume",
   "roles": {
     "supervisor": {
       "role": "supervisor",
-      "default_model": "strong coding model",
-      "default_reasoning_effort": "moderate",
-      "escalation_model": "strongest appropriate current model",
-      "escalation_reasoning_effort": "high for a bounded question",
-      "escalation_triggers": "Ambiguous recovery, source authority, publication safety, or H2/H3 architecture.",
-      "deescalation_triggers": "Bounded H0/H1 implementation with stable contracts.",
+      "default_model": "Terra capability family; Luna medium acceptable for well-known patterns",
+      "default_reasoning_effort": "medium",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "One-work-order Implementation report with exact publication and runway state.",
-      "tool_permission_posture": "Owns integrated mutation, validation, Git, and publication."
+      "tool_permission_posture": "Owns integrated mutation, validation, Git, and publication.",
+      "default_lane": "established_implementation"
     },
     "planner": {
       "role": "planner",
-      "default_model": "strong broad-synthesis model",
-      "default_reasoning_effort": "high",
-      "escalation_model": "strongest appropriate current synthesis model",
-      "escalation_reasoning_effort": "high",
-      "escalation_triggers": "Broad candidate-supply scarcity or conflicting portfolio evidence.",
-      "deescalation_triggers": "Packet freshness scan or obvious no-op.",
+      "default_model": "Sol capability family",
+      "default_reasoning_effort": "medium",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "Non-authoritative current-configurator candidate packet or NO_MATERIAL_PORTFOLIO_UPDATE.",
-      "tool_permission_posture": "Read-heavy; material output only on planning/portfolio-*; never queue authority."
+      "tool_permission_posture": "Read-heavy; material output only on planning/portfolio-*; never queue authority.",
+      "default_lane": "coupled_technical"
     },
     "curator": {
       "role": "curator",
-      "default_model": "strong skeptical synthesis/review model",
-      "default_reasoning_effort": "high",
-      "escalation_model": "strongest appropriate current review model",
-      "escalation_reasoning_effort": "high",
-      "escalation_triggers": "Preauthorization invalidation, source authority, or global evidence wait is ambiguous.",
-      "deescalation_triggers": "Healthy runway and no material curation event.",
+      "default_model": "Sol capability family",
+      "default_reasoning_effort": "medium",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "Independent candidate dispositions and canonical Ready/Preauthorized runway update.",
-      "tool_permission_posture": "Control-plane writer only; narrow governance tests under anti-cheating rule."
+      "tool_permission_posture": "Control-plane writer only; narrow governance tests under anti-cheating rule.",
+      "default_lane": "coupled_technical"
     },
     "architecture_specialist": {
       "role": "architecture_specialist",
-      "default_model": "strong architecture/coding model",
-      "default_reasoning_effort": "high for a bounded question",
-      "escalation_model": "strongest appropriate current architecture model",
-      "escalation_reasoning_effort": "high",
-      "escalation_triggers": "Active firmware, runtime model, critical path, or source authority is involved.",
-      "deescalation_triggers": "Simple docs/checker architecture scan.",
+      "default_model": "Sol capability family",
+      "default_reasoning_effort": "medium",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "Architecture evidence map with facts, inferences, unknowns, and recommendation.",
-      "tool_permission_posture": "Read-oriented unless explicitly assigned bounded edits."
+      "tool_permission_posture": "Read-oriented unless explicitly assigned bounded edits.",
+      "default_lane": "coupled_technical"
     },
     "implementer": {
       "role": "implementer",
-      "default_model": "competent coding model",
-      "default_reasoning_effort": "low or moderate",
-      "escalation_model": "strong coding model",
-      "escalation_reasoning_effort": "moderate or high",
-      "escalation_triggers": "Firmware behavior risk or difficult compiler/generator logic.",
-      "deescalation_triggers": "Bounded docs/checker edit.",
+      "default_model": "Terra capability family; Luna medium acceptable for well-known patterns",
+      "default_reasoning_effort": "medium",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "Patch summary and focused verification.",
-      "tool_permission_posture": "Bounded editing only."
+      "tool_permission_posture": "Bounded editing only.",
+      "default_lane": "established_implementation"
     },
     "validator_reviewer": {
       "role": "validator_reviewer",
-      "default_model": "strong review model",
-      "default_reasoning_effort": "moderate or high proportional to risk",
-      "escalation_model": "strongest appropriate current review model",
-      "escalation_reasoning_effort": "high",
-      "escalation_triggers": "H2/H3 behavior, generated artifacts, or publication gate.",
-      "deescalation_triggers": "H0 docs/checker-only branch validates cleanly.",
+      "default_model": "Luna capability family",
+      "default_reasoning_effort": "low",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "DONE / CONTINUE / BLOCKED / NEEDS_HARDWARE / UNSAFE with findings first.",
-      "tool_permission_posture": "Independent read/check posture."
+      "tool_permission_posture": "Independent read/check posture.",
+      "default_lane": "mechanical"
     },
     "hardware_evidence_processor": {
       "role": "hardware_evidence_processor",
-      "default_model": "strong verification/review model",
-      "default_reasoning_effort": "moderate or high",
-      "escalation_model": "strongest appropriate current review model",
-      "escalation_reasoning_effort": "high",
-      "escalation_triggers": "H3, identity mismatch, source drift, or ambiguous scope.",
-      "deescalation_triggers": "Complete exact H2 protocol with unambiguous human result.",
+      "default_model": "Luna capability family",
+      "default_reasoning_effort": "low",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "HARDWARE_VALIDATED / HARDWARE_FAILED / HARDWARE_EVIDENCE_MISMATCH and exact disposition.",
-      "tool_permission_posture": "Evidence/control-plane only; never runtime source or fabricated testing."
+      "tool_permission_posture": "Evidence/control-plane only; never runtime source or fabricated testing.",
+      "default_lane": "mechanical"
     },
     "docs_status_clerk": {
       "role": "docs_status_clerk",
-      "default_model": "fast competent model",
+      "default_model": "Luna capability family",
       "default_reasoning_effort": "low",
-      "escalation_model": "strong coding/review model",
-      "escalation_reasoning_effort": "moderate",
-      "escalation_triggers": "Canonical docs contradict source or evidence.",
-      "deescalation_triggers": "Navigation or mechanically proven status change only.",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "Status delta and consistency checks.",
-      "tool_permission_posture": "Docs-only."
+      "tool_permission_posture": "Docs-only.",
+      "default_lane": "mechanical"
     },
     "judge_watchdog": {
       "role": "judge_watchdog",
-      "default_model": "fast competent model",
-      "default_reasoning_effort": "low or moderate",
-      "escalation_model": "strong review model",
-      "escalation_reasoning_effort": "moderate or high",
-      "escalation_triggers": "Loop, unsafe path, or hardware gate is ambiguous.",
-      "deescalation_triggers": "Branch is clearly done or externally blocked.",
+      "default_model": "Luna capability family",
+      "default_reasoning_effort": "low",
+      "escalation_model": "Sol capability family for technical coupling; Astra only under exceptional lane policy",
+      "escalation_reasoning_effort": "medium for technical coupling; high only for finite ambiguity",
+      "escalation_triggers": "A named unresolved technical contradiction or ambiguity; role title or hardware class alone is not a trigger.",
+      "deescalation_triggers": "Return to the smallest adequate task lane after the question is resolved.",
       "output_contract": "DONE / CONTINUE / BLOCKED / NEEDS_HARDWARE / UNSAFE / LOOPING.",
-      "tool_permission_posture": "Read-only."
+      "tool_permission_posture": "Read-only.",
+      "default_lane": "mechanical"
+    }
+  },
+  "dispatch_policy": {
+    "explicit_model_effort_on_dispatch_and_resume": true,
+    "record_requested_and_observed_execution": true,
+    "unknown_telemetry_is_not_zero": true,
+    "independence_separate_from_strength": true,
+    "no_silent_unavailable_model_substitution": true,
+    "chapter_daemon_unavailable_fallback": "Preserve Terra preference; require an explicit owner-approved available fallback; never fabricate an ID.",
+    "exceptional_session": "Finite high-leverage question with written reason; cheaper attempt inadequate OR genuinely novel risk justifies direct use; return a decision/counterexample and end; never persistent control-loop default."
+  },
+  "lanes": {
+    "chapter_daemon": {
+      "preferred_family": "Terra capability family",
+      "default_reasoning_effort": "low",
+      "escalation_reasoning_effort": "medium",
+      "escalation_triggers": "Several dependent chapter states genuinely require synthesis.",
+      "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
+    },
+    "mechanical": {
+      "preferred_family": "Luna capability family",
+      "default_reasoning_effort": "low",
+      "escalation_reasoning_effort": "medium",
+      "escalation_triggers": "Guarded multi-step mechanical work.",
+      "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
+    },
+    "established_implementation": {
+      "preferred_family": "Terra capability family; Luna medium acceptable for well-known patterns",
+      "default_reasoning_effort": "medium",
+      "escalation_reasoning_effort": "medium",
+      "escalation_triggers": "Technical coupling exceeds established patterns.",
+      "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
+    },
+    "coupled_technical": {
+      "preferred_family": "Sol capability family",
+      "default_reasoning_effort": "medium",
+      "escalation_reasoning_effort": "high",
+      "escalation_triggers": "Difficult finite architecture or conflicting evidence.",
+      "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
+    },
+    "ambiguous": {
+      "preferred_family": "Sol capability family",
+      "default_reasoning_effort": "high",
+      "escalation_reasoning_effort": "high",
+      "escalation_triggers": "A concrete unresolved high-leverage question survives focused investigation.",
+      "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
+    },
+    "exceptional": {
+      "preferred_family": "Astra capability family",
+      "default_reasoning_effort": "medium",
+      "escalation_reasoning_effort": "high",
+      "escalation_triggers": "Written reason and inadequate cheaper attempt OR justified genuinely novel risk; finite expected benefit.",
+      "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
     }
   }
 }

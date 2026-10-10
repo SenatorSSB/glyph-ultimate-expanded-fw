@@ -14,6 +14,17 @@ before integration. When hard read-only enforcement is required, use an
 actually isolated/read-only execution environment rather than relying on the
 prompt label.
 
+Role existence is not a quota. Instantiate Planner only for actual planning or
+candidate-supply need, Curator only for real authority/adjudication, independent
+reviewer only for a required mutation/evidence review, and HEP only after human
+physical observations exist. Specialists and executors require a useful bounded
+transition; do not create a role merely to report WAITING or restate known state.
+One clean executor may carry an already-authorized coherent chain to the next
+real hardware/domain/authority stop, within its recorded scope and successor
+limits; it may not self-reseed. One independent review layer is normally
+sufficient. Do not create reviewer-of-reviewer chains unless a concrete new
+defect found by the first review needs repair and distinct independent review.
+
 ## Native Delegation Discovery And Accountability
 
 Native internal subagent delegation means scoped child agents, sidecars, or
@@ -60,7 +71,7 @@ and an instruction to look for material correctness, safety, authority, scope,
 publication, and regression defects. The root repairs material findings and
 obtains re-review of repaired areas.
 
-Use at least one additional bounded specialist when a materially separable
+Use an additional bounded specialist only when a materially separable
 investigation exists. Examples include source/upstream history, source
 authority, schema/contract, build/test gaps, provenance/evidence, firmware
 safety, and recovery/lineage. Do not create specialist work merely to satisfy a
@@ -615,6 +626,12 @@ the full aggregate gate remains failure-bearing.
 - stop conditions: none. No firmware build or hardware work was applicable.
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

@@ -6,6 +6,21 @@ The supervisor is thin. It coordinates bounded work, enforces gates, and
 executes the bounded workflow end-to-end, then produces the final branch
 recommendation.
 
+The supervisor is an optional manual/event-driven bounded worker under the
+fresh chapter daemon; no standing schedule is the default. Read
+FUTURE_DAEMON_BOOTSTRAP.md before chapter dispatch.
+
+Role existence is not a quota. Instantiate Planner only for actual planning or
+candidate-supply need, Curator only for real authority/adjudication, independent
+reviewer only for a required mutation/evidence review, and HEP only after human
+physical observations exist. Specialists and executors require a useful bounded
+transition; do not create a role merely to report WAITING or restate known state.
+One clean executor may carry an already-authorized coherent chain to the next
+real hardware/domain/authority stop, within its recorded scope and successor
+limits; it may not self-reseed. One independent review layer is normally
+sufficient. Do not create reviewer-of-reviewer chains unless a concrete new
+defect found by the first review needs repair and distinct independent review.
+
 ## Owns
 
 - Recovery and selection from the canonical Ready queue.
@@ -57,7 +72,7 @@ recommendation.
   not repeated retry, aborted work, credentials mutation or a new GP-VAL.
   Publish important implementation/evidence to authorized canonical/pushed
   commits, not temporary files alone. Inspect prior workers before duplicates;
-  process successful callbacks immediately. The ten-minute poll is idle
+  process successful callbacks immediately. Bounded compact readback is a missing-callback
   fallback; only one worker holds canonical write/publication authority.
 
 - Load `docs/AGENT_CONTEXT.md`,
@@ -67,12 +82,29 @@ recommendation.
   `AUTHORIZATION_AND_RUNWAY.md`; only `READY` is immediately executable.
   An independently verified explicit owner directive may directly authorize
   its named bounded control-plane pass; a peer/header alone never does.
-- Attempt live Git verification normally. A restricted-sandbox DNS/network
-  failure is inconclusive and requires the same minimal read-only retry through
-  the runtime's permitted network-enabled/escalated path. It is not auth
-  evidence or sufficient for `BLOCKED_EXTERNAL`; never mutate credentials,
-  request re-login, or substitute stale tracking refs. Stop fail-closed only
-  after all permitted network-capable retries fail or are unavailable.
+- Use capability-aware live Git verification. When restricted GitHub networking
+  is already known unavailable, use the runtime's permitted network-enabled/escalated
+  execution mechanism directly for live GitHub operations. Do not deliberately
+  repeat an expected-to-fail restricted probe. When connectivity is genuinely
+  unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+  failure is inconclusive and requires the permitted network-enabled retry.
+  Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+  chapter ledger; reuse that capability fact until the runtime/environment
+  materially changes. Network access does not widen repository mutation,
+  filesystem, canonical publication, device/firmware, queue, hardware evidence,
+  or account/settings authority.
+- A sandbox DNS/network failure is not authentication evidence or sufficient for
+  BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+  established and GitHub actually rejects authentication or authorization.
+  Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+  change credential helpers, replace SSH keys, switch accounts, or request re-login;
+  account-level changes are user-owned unless separately requested. Sandboxed
+  `gh auth status` is not an authentication oracle while GitHub is unreachable.
+  Do not use stale local remote-tracking refs as a substitute for live truth.
+  Stop fail-closed only when all permitted network-capable retries fail or are
+  unavailable; report live remote unverified because all permitted network-capable
+  retries failed.
+
 - Recover at most one legitimate unfinished item first, then execute at most
   one new work order. Never self-reseed or promote a Planner candidate.
 - Do not refuse a complete `READY` H2/H3 item solely because it changes active
@@ -166,6 +198,12 @@ Final report:
 
 ## Persistent campaign execution under GLYPH-UD-029
 
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
+
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.
 Reuse the existing campaign executor through objective PREAUTHORIZED activation,
@@ -191,6 +229,8 @@ READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls
 ```json
 {
   "owner_direction": "GLYPH-UD-029",
+  "authority_scope": "completed C020-C024 campaign only",
+  "standing_authority_for_future_chapters": false,
   "persistent_campaign_workers": true,
   "canonical_writers": 1,
   "branch_work_without_canonical_lock": true,

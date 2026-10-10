@@ -6,6 +6,11 @@ semantics, datasets, and solver authority.
 
 ## Start Here
 
+Fresh chapter daemons must read
+`docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md` on their first turn before
+dispatching or implementing chapter work. One fresh daemon owns one coherent
+owner-approved chapter; no standing role schedules are the default.
+
 Read these files before using older calibration packets:
 
 - `docs/AGENT_CONTEXT.md` - first-read current agent state.
@@ -79,28 +84,28 @@ inferred, mark it as inferred. If behavior is unknown, say unknown.
 
 ## Live Git Verification And Sandbox Networking
 
-Every role that requires fresh GitHub truth must attempt the ordinary/default
-minimal read-only verification first. If the restricted sandbox cannot resolve
-or reach GitHub because of DNS, network, or sandbox policy, the result is
-inconclusive: retry the same read-only verification through the runtime's
-permitted network-enabled/escalated execution mechanism. That escalation grants
-network access only, not broader filesystem, repository-mutation, firmware,
-queue, evidence, or publication authority. A sandbox network failure is not
-authentication evidence and is not sufficient for `BLOCKED_EXTERNAL`.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
 
-Diagnose authentication or authorization only after GitHub connectivity is
-established and GitHub rejects credentials or permissions. Sandboxed
-`gh auth status` is not an authentication oracle while GitHub is unreachable;
-DNS/network failure takes precedence over apparent token messages from a tool
-that could not contact the service. Never automatically run `gh auth login` or
-`gh auth logout`, rewrite tokens, delete Git credentials, change credential
-helpers, replace SSH keys, switch GitHub accounts, or request re-login because
-of an unverified connectivity failure. Account-level mutation is user-owned.
-
-Stale local remote-tracking refs never substitute for successful live
-verification. Only after every permitted network-capable retry fails or is
-unavailable may a role stop fail-closed with `BLOCKED_EXTERNAL`, explicitly
-reporting that live remote is unverified because all permitted network-capable
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
 retries failed.
 
 ## Stop Conditions
@@ -121,6 +126,12 @@ requirements are satisfied. Do not use H2/H3 authorization to bypass those
 boundaries.
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

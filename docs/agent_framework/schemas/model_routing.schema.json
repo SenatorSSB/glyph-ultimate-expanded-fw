@@ -3,10 +3,22 @@
   "title": "Glyph Agent Model Routing",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "status", "roles"],
+  "required": [
+    "version",
+    "status",
+    "roles",
+    "dispatch_policy",
+    "lanes"
+  ],
   "properties": {
-    "version": { "type": "string", "minLength": 1 },
-    "status": { "type": "string", "minLength": 1 },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
     "roles": {
       "type": "object",
       "additionalProperties": {
@@ -21,18 +33,152 @@
           "escalation_triggers",
           "deescalation_triggers",
           "output_contract",
-          "tool_permission_posture"
+          "tool_permission_posture",
+          "default_lane"
         ],
         "properties": {
-          "role": { "type": "string" },
-          "default_model": { "type": "string" },
-          "default_reasoning_effort": { "type": "string" },
-          "escalation_model": { "type": "string" },
-          "escalation_reasoning_effort": { "type": "string" },
-          "escalation_triggers": { "type": "string" },
-          "deescalation_triggers": { "type": "string" },
-          "output_contract": { "type": "string" },
-          "tool_permission_posture": { "type": "string" }
+          "role": {
+            "type": "string"
+          },
+          "default_model": {
+            "type": "string"
+          },
+          "default_reasoning_effort": {
+            "type": "string"
+          },
+          "escalation_model": {
+            "type": "string"
+          },
+          "escalation_reasoning_effort": {
+            "type": "string"
+          },
+          "escalation_triggers": {
+            "type": "string"
+          },
+          "deescalation_triggers": {
+            "type": "string"
+          },
+          "output_contract": {
+            "type": "string"
+          },
+          "tool_permission_posture": {
+            "type": "string"
+          },
+          "default_lane": {
+            "enum": [
+              "chapter_daemon",
+              "mechanical",
+              "established_implementation",
+              "coupled_technical",
+              "ambiguous",
+              "exceptional"
+            ]
+          }
+        }
+      }
+    },
+    "dispatch_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explicit_model_effort_on_dispatch_and_resume",
+        "record_requested_and_observed_execution",
+        "unknown_telemetry_is_not_zero",
+        "independence_separate_from_strength",
+        "no_silent_unavailable_model_substitution",
+        "chapter_daemon_unavailable_fallback",
+        "exceptional_session"
+      ],
+      "properties": {
+        "explicit_model_effort_on_dispatch_and_resume": {
+          "const": true
+        },
+        "record_requested_and_observed_execution": {
+          "const": true
+        },
+        "unknown_telemetry_is_not_zero": {
+          "const": true
+        },
+        "independence_separate_from_strength": {
+          "const": true
+        },
+        "no_silent_unavailable_model_substitution": {
+          "const": true
+        },
+        "chapter_daemon_unavailable_fallback": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exceptional_session": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "lanes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter_daemon",
+        "mechanical",
+        "established_implementation",
+        "coupled_technical",
+        "ambiguous",
+        "exceptional"
+      ],
+      "properties": {
+        "chapter_daemon": {
+          "$ref": "#/$defs/task_lane"
+        },
+        "mechanical": {
+          "$ref": "#/$defs/task_lane"
+        },
+        "established_implementation": {
+          "$ref": "#/$defs/task_lane"
+        },
+        "coupled_technical": {
+          "$ref": "#/$defs/task_lane"
+        },
+        "ambiguous": {
+          "$ref": "#/$defs/task_lane"
+        },
+        "exceptional": {
+          "$ref": "#/$defs/task_lane"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "task_lane": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preferred_family",
+        "default_reasoning_effort",
+        "escalation_reasoning_effort",
+        "escalation_triggers",
+        "deescalation_triggers"
+      ],
+      "properties": {
+        "preferred_family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "default_reasoning_effort": {
+          "type": "string",
+          "minLength": 1
+        },
+        "escalation_reasoning_effort": {
+          "type": "string",
+          "minLength": 1
+        },
+        "escalation_triggers": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deescalation_triggers": {
+          "type": "string",
+          "minLength": 1
         }
       }
     }

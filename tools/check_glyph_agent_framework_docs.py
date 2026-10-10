@@ -64,6 +64,7 @@ REQUIRED_ROLES = (
 
 MODEL_ROUTING_FIELDS = (
     "role",
+    "default_lane",
     "default_model",
     "default_reasoning_effort",
     "escalation_model",
@@ -2256,7 +2257,93 @@ def check_model_routing() -> None:
         for forbidden_field in ("claude_default", "claude_effort", "anthropic_default"):
             if forbidden_field in role_entry:
                 fail(f"model_routing role {role} contains non-Codex field: {forbidden_field}")
-    pass_line("model routing includes all required Codex/OpenAI roles and fields")
+    validate_routing_schema(routing, load_json("docs/agent_framework/schemas/model_routing.schema.json"))
+    validate_task_lane_routing(routing)
+    for lane, field, bad in (("chapter_daemon", "preferred_family", "Luna capability family"),
+                             ("chapter_daemon", "default_reasoning_effort", "high"),
+                             ("mechanical", "default_reasoning_effort", "high"),
+                             ("coupled_technical", "default_reasoning_effort", "low")):
+        variant = json.loads(json.dumps(routing))
+        variant["lanes"][lane][field] = bad
+        try:
+            validate_task_lane_routing(variant)
+        except FrameworkDocsError:
+            continue
+        fail("unsafe task-lane substitution accepted: " + lane + "." + field)
+    for key, value in routing["dispatch_policy"].items():
+        if type(value) is not bool:
+            continue
+        variant = json.loads(json.dumps(routing))
+        variant["dispatch_policy"][key] = False
+        try:
+            validate_task_lane_routing(variant)
+        except FrameworkDocsError:
+            continue
+        fail("unsafe dispatch-policy substitution accepted: " + key)
+    pass_line("task/lane routing, requested/observed dispatch policy and negative controls validate")
+
+
+def validate_routing_schema(value: object, schema: dict, root_schema: dict | None = None, path: str = "routing") -> None:
+    """Validate the routing schema's small dependency-free JSON Schema subset."""
+    root_schema = schema if root_schema is None else root_schema
+    if "$ref" in schema:
+        ref = schema["$ref"]
+        if not isinstance(ref, str) or not ref.startswith("#/$defs/"):
+            fail("unsupported routing schema reference")
+        return validate_routing_schema(value, root_schema["$defs"][ref.split("/")[-1]], root_schema, path)
+    kind = schema.get("type")
+    if kind == "object":
+        if not isinstance(value, dict):
+            fail(path + " must be an object")
+        missing = set(schema.get("required", [])) - value.keys()
+        if missing:
+            fail(path + " missing required fields: " + repr(sorted(missing)))
+        properties = schema.get("properties", {})
+        extra = schema.get("additionalProperties", True)
+        for key, child in value.items():
+            if key in properties:
+                validate_routing_schema(child, properties[key], root_schema, path + "." + key)
+            elif extra is False:
+                fail(path + " unexpected field: " + key)
+            elif isinstance(extra, dict):
+                validate_routing_schema(child, extra, root_schema, path + "." + key)
+    elif kind == "string":
+        if not isinstance(value, str) or len(value) < schema.get("minLength", 0):
+            fail(path + " must be a nonempty string")
+    elif kind is not None:
+        fail("unsupported routing schema type: " + repr(kind))
+    if "const" in schema and (type(value) is not type(schema["const"]) or value != schema["const"]):
+        fail(path + " violates required constant")
+    if "enum" in schema and value not in schema["enum"]:
+        fail(path + " violates allowed lane set")
+
+
+def validate_task_lane_routing(routing: dict) -> None:
+    expected = {"chapter_daemon": ("Terra", "low"), "mechanical": ("Luna", "low"),
+                "established_implementation": ("Terra", "medium"),
+                "coupled_technical": ("Sol", "medium"), "ambiguous": ("Sol", "high"),
+                "exceptional": ("Astra", "medium")}
+    lanes = routing.get("lanes")
+    policy = routing.get("dispatch_policy")
+    if not isinstance(lanes, dict) or set(lanes) != set(expected) or not isinstance(policy, dict):
+        fail("routing must contain the six bounded task lanes and dispatch policy")
+    for name, (family, effort) in expected.items():
+        entry = lanes[name]
+        if not isinstance(entry, dict) or not entry.get("preferred_family", "").startswith(family + " capability family") or entry.get("default_reasoning_effort") != effort:
+            fail("wrong family/effort for task lane " + name)
+    for key in ("explicit_model_effort_on_dispatch_and_resume", "record_requested_and_observed_execution",
+                "unknown_telemetry_is_not_zero", "independence_separate_from_strength",
+                "no_silent_unavailable_model_substitution"):
+        if policy.get(key) is not True:
+            fail("routing must preserve " + key)
+    for key in ("chapter_daemon_unavailable_fallback", "exceptional_session"):
+        if not isinstance(policy.get(key), str) or not policy[key].strip():
+            fail("routing missing explicit fallback/exceptional boundary")
+    for name, entry in routing["roles"].items():
+        lane = lanes.get(entry.get("default_lane"))
+        if not lane or entry.get("default_model") != lane["preferred_family"] or entry.get("default_reasoning_effort") != lane["default_reasoning_effort"]:
+            fail("role defaults must mirror the task lane: " + name)
+
 
 
 def check_queue_contract() -> None:
@@ -3115,7 +3202,7 @@ def check_revision_three_self_test() -> None:
 
 
 
-PERSISTENT_BATCH_POLICY = {'owner_direction': 'GLYPH-UD-029', 'persistent_campaign_workers': True, 'canonical_writers': 1, 'branch_work_without_canonical_lock': True, 'mechanical_transition_requires_new_full_chat': False, 'mechanical_transition_requires_planner_or_curator': False, 'preauthorized_activation_requires_objective_conditions': True, 'exact_candidate_preserved': True, 'fresh_independent_review': True, 'H2_H3_merge_requires_exact_human_HEP_PASS': True, 'max_pending_H3': 1, 'new_GP_VAL_requires_UNPROVEN_SAFETY_FACT': True, 'historical_pause_requires_chronology_check': True, 'transport_grants_action_authority': False, 'ordinary_governance_successors_per_product': 1, 'exceptional_validation_repairs_per_product': 1, 'exceptional_repair_requires_concrete_Tier1_or_Tier2_defect': True, 'further_successors_require_direct_owner_approval': True}
+PERSISTENT_BATCH_POLICY = {'owner_direction': 'GLYPH-UD-029', 'authority_scope': 'completed C020-C024 campaign only', 'standing_authority_for_future_chapters': False, 'persistent_campaign_workers': True, 'canonical_writers': 1, 'branch_work_without_canonical_lock': True, 'mechanical_transition_requires_new_full_chat': False, 'mechanical_transition_requires_planner_or_curator': False, 'preauthorized_activation_requires_objective_conditions': True, 'exact_candidate_preserved': True, 'fresh_independent_review': True, 'H2_H3_merge_requires_exact_human_HEP_PASS': True, 'max_pending_H3': 1, 'new_GP_VAL_requires_UNPROVEN_SAFETY_FACT': True, 'historical_pause_requires_chronology_check': True, 'transport_grants_action_authority': False, 'ordinary_governance_successors_per_product': 1, 'exceptional_validation_repairs_per_product': 1, 'exceptional_repair_requires_concrete_Tier1_or_Tier2_defect': True, 'further_successors_require_direct_owner_approval': True}
 
 
 def validate_persistent_batch_policy(value: object) -> None:
@@ -3174,7 +3261,7 @@ def check_revision_three_surface() -> None:
             if normalize(phrase) not in normalize(section):
                 fail("scheduled role missing current Revision-3 policy adoption")
     for phrase in ("OWNER_AUTHORIZED_GLYPH_ORCHESTRATION", "CROSS_THREAD_MESSAGE_REJECTED",
-                   "WORKER_RESULT_PERSISTED_FOR_DAEMON_READBACK", "Ten-minute polling is idle fallback",
+                   "WORKER_RESULT_PERSISTED_FOR_DAEMON_READBACK", "Bounded compact status/readback is fallback",
                    "Transport grants no action authority", "Inspect the prior worker", "single canonical"):
         require_phrase("docs/agent_framework/SCHEDULED_TASKS.md", phrase)
     require_phrase("docs/agent_framework/USER_DIRECTION.md", "GLYPH-UD-028")
@@ -3193,7 +3280,7 @@ def check_revision_two_surface() -> None:
         "use PLANNING_REQUIRED",
         "use CURATION_REQUIRED",
         "GLOBAL_EVIDENCE_WAIT_SUPPORTED requires a fresh broad",
-        "Schedules are heartbeats, never quotas",
+        "No standing schedules are the default",
         "Canonical intended control-plane state changed from X to Y",
         "Curator may not edit firmware/configurator product code",
         "ordinary Curator test-edit surface is exactly",
@@ -3419,7 +3506,7 @@ def validate_delegation_sections(sections: dict[str, str]) -> None:
         "Glyph Implementation Supervisor",
         implementation,
         "materially separable specialist",
-        (("at least one additional bounded specialist",),
+        (("an additional bounded specialist only when",),
          ("materially separable investigation",), ("quota",)),
     )
     require_concept(
@@ -3593,7 +3680,7 @@ def check_task_configurations() -> None:
     text = read_required("docs/agent_framework/SCHEDULED_TASKS.md")
     role_requirements = {
         "Glyph Implementation Supervisor": (
-            "ACTIVE_SCHEDULE",
+            "NO STANDING SCHEDULE BY DEFAULT",
             "READY is the only immediately executable state",
             "Complete at most one new work order",
             "fresh independent post-implementation reviewer",
@@ -3610,7 +3697,7 @@ def check_task_configurations() -> None:
             "Implementation autonomy is not merge autonomy",
         ),
         "Glyph Work-Order Curator": (
-            "OPTIONAL_SCHEDULE",
+            "NO STANDING SCHEDULE BY DEFAULT",
             "Planner proposes; Curator judges and authorizes",
             "You may authorize zero",
             "target and its provenance",
@@ -3682,80 +3769,82 @@ def check_task_configurations() -> None:
         for phrase in phrases:
             if normalize(phrase) not in normalize(section):
                 fail(f"{heading} prompt missing required contract: {phrase}")
-        for phrase in (
-            "Attempt live Git verification normally",
-            "treat the result as inconclusive",
-            "permitted network-enabled/escalated execution mechanism",
-            "not authentication evidence",
-            "Authentication may be diagnosed only after connectivity is established and GitHub actually rejects authentication",
-            "Never automatically run gh auth login/logout",
-            "rewrite tokens, delete credentials, change credential helpers, replace SSH keys, switch accounts, or request re-login",
-            "account-level changes are user-owned unless separately requested",
-            "Do not use stale local remote-tracking refs as a substitute",
-            "all permitted network-capable retries failed",
-        ):
-            if normalize(phrase) not in normalize(section):
-                fail(f"{heading} prompt missing live-remote retry contract: {phrase}")
+        check_capability_network_text(section, heading)
+        metadata = section.split("Exact copy-paste task prompt:", 1)[0]
+        if "Not scheduled by default" not in metadata:
+            fail(f"{heading} must not recommend a standing schedule")
+        if heading != "Glyph Hardware Evidence Processor" and "NO STANDING SCHEDULE BY DEFAULT" not in metadata:
+            fail(f"{heading} must default to no standing schedule")
     pass_line("four exact scheduled/manual task configurations validate")
 
 
+def check_capability_network_text(text: str, label: str) -> None:
+    normalized = normalize(text)
+    for phrase in (
+        "When restricted GitHub networking is already known unavailable",
+        "network-enabled/escalated execution mechanism directly",
+        "Do not deliberately repeat an expected-to-fail restricted probe",
+        "When connectivity is genuinely unknown, one minimal ordinary read-only probe is acceptable",
+        "network_capabilities.live_github_requires_network_enabled: true",
+        "until the runtime/environment materially changes",
+        "Network access does not widen repository mutation, filesystem, canonical publication, device/firmware, queue, hardware evidence, or account/settings authority",
+        "not authentication evidence",
+        "Authentication may be diagnosed only after connectivity is established and GitHub actually rejects authentication or authorization",
+        "Never automatically run gh auth login/logout, rewrite tokens, delete credentials, change credential helpers, replace SSH keys, switch accounts, or request re-login",
+        "account-level changes are user-owned unless separately requested",
+        "Do not use stale local remote-tracking refs as a substitute",
+        "all permitted network-capable retries fail or are unavailable",
+    ):
+        if normalize(phrase) not in normalized:
+            fail(f"{label} missing capability-aware network contract: {phrase}")
+
+
 def check_live_remote_retry_contract() -> None:
-    required = {
-        "AGENTS.md": (
-            "ordinary/default minimal read-only verification",
-            "result is inconclusive",
-            "permitted network-enabled/escalated execution mechanism",
-            "not authentication evidence",
-            "Never automatically run `gh auth login` or `gh auth logout`",
-            "Stale local remote-tracking refs never substitute",
-            "all permitted network-capable retries failed",
-        ),
-        "docs/WORKFLOW.md": (
-            "ordinary/default minimal read-only live-remote operation",
-            "sandboxed `gh auth status` is not a reliable authentication oracle",
-            "Account-level mutation is user-owned",
-            "Stale local remote-tracking refs never substitute",
-        ),
-        "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md": (
-            "ordinary/default minimal read-only attempt",
-            "first DNS/network failure is inconclusive",
-            "Authentication may be diagnosed only after GitHub connectivity is established",
-            "all permitted network-capable retries failed",
-        ),
-        "docs/agent_framework/VALIDATION_AND_GATES.md": (
-            "attempt ordinary/default read-only verification",
-            "return `BLOCKED_EXTERNAL` until all permitted network-capable retries fail",
-        ),
-    }
-    for rel_path, phrases in required.items():
-        for phrase in phrases:
-            require_phrase(rel_path, phrase)
-    prompt_templates = read_required("docs/agent_framework/PROMPT_TEMPLATES.md")
-    template_headings = (
-        "## Supervisor Cycle Prompt",
-        "## Planner Handoff",
-        "## Curator Handoff",
-        "## Hardware Evidence Processor Handoff",
-        "## Architecture Specialist Handoff",
-    )
-    for index, heading in enumerate(template_headings[:-1]):
-        start = prompt_templates.index(heading)
-        end = prompt_templates.index(template_headings[index + 1], start)
-        section = normalize(prompt_templates[start:end])
-        for phrase in (
-            "Live Git verification: attempt it normally",
-            "restricted-sandbox GitHub/DNS/network failure is inconclusive",
-            "permitted network-enabled/escalated mechanism",
-            "not authentication evidence or sufficient for BLOCKED_EXTERNAL",
-            "Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication",
-            "Never automatically mutate credentials or request re-login",
-            "account-level changes are user-owned unless separately requested",
-            "Do not substitute stale tracking refs",
-            "all permitted network-capable retries fail or are unavailable",
-        ):
-            if normalize(phrase) not in section:
-                fail(f"{heading} missing live-remote retry contract: {phrase}")
-    pass_line("sandbox network/live-remote retry and authentication safety validate")
+    for path in ("AGENTS.md", "docs/WORKFLOW.md",
+                 "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md"):
+        check_capability_network_text(read_required(path), path)
+    # Bullet indentation must not change the shared operational meaning.
+    supervisor = read_required("docs/agent_framework/SUPERVISOR_CONTRACT.md")
+    check_capability_network_text(supervisor, "Supervisor")
+    templates = read_required("docs/agent_framework/PROMPT_TEMPLATES.md")
+    headings = ("## Supervisor Cycle Prompt", "## Planner Handoff", "## Curator Handoff",
+                "## Hardware Evidence Processor Handoff", "## Architecture Specialist Handoff")
+    for heading, next_heading in zip(headings, headings[1:]):
+        start = templates.index(heading)
+        end = templates.index(next_heading, start)
+        check_capability_network_text(templates[start:end], heading)
+    for phrase in ("capability-aware policy", "network-enabled path directly",
+                   "do not repeat an expected-to-fail restricted probe",
+                   "Network permission grants no other authority"):
+        require_phrase("docs/agent_framework/VALIDATION_AND_GATES.md", phrase)
+    pass_line("capability-aware live Git and authentication protections validate")
+
+
+def check_chapter_operating_contract() -> None:
+    bootstrap = "docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md"
+    for path in ("AGENTS.md", "docs/project/AGENTS.md", "docs/agent_framework/README.md"):
+        require_phrase(path, "FUTURE_DAEMON_BOOTSTRAP.md")
+    for phrase in ("Terra / low", "Terra / medium", "no silent substitute",
+                   "Set model/effort on every dispatch and resume", "Role existence is not a quota",
+                   "One independent review layer is normally sufficient", "human physical observations",
+                   "repeated substantive redispatch", "authorized bounded condition check",
+                   "known long-running build/test", "legitimate transient transport retry",
+                   "when H2/H3 hardware gating applies", "Docs-only/H0/H1",
+                   "passive telemetry", "additional agent calls solely to measure",
+                   "missing telemetry must not block", "Goal persists the outcome, not authority",
+                   "cannot create work orders", "reinterpret PREAUTHORIZED conditions",
+                   "Curator/HEP/review gates", "perform device writes", "broaden chapter scope",
+                   "continue into the next chapter", "Retire/close it with its chapter"):
+        require_phrase(bootstrap, phrase)
+    require_phrase("docs/agent_framework/SCHEDULED_TASKS.md", "LEGACY / NOT DEFAULT FOR NEW CHAPTERS")
+    require_phrase("docs/agent_framework/SCHEDULED_TASKS.md", "do NOT themselves disable external Codex schedules")
+    for path in ("AGENTS.md", "docs/WORKFLOW.md", "docs/agent_framework/README.md",
+                 "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md", "docs/agent_framework/SUPERVISOR_CONTRACT.md",
+                 "docs/agent_framework/SUBAGENT_CONTRACTS.md", "docs/agent_framework/SCHEDULED_TASKS.md",
+                 "docs/agent_framework/CYCLE_STATE_MACHINE.md", "docs/agent_framework/PROMPT_TEMPLATES.md"):
+        require_phrase(path, "Historical authority only")
+        require_phrase(path, "not standing authority for future chapters")
+    pass_line("post-C024 chapter entrypoint, bounded authority, roles and passive telemetry validate")
 
 
 def check_contract_phrases() -> None:
@@ -3835,6 +3924,7 @@ def main() -> int:
         check_live_remote_retry_contract()
         check_contract_phrases()
         check_navigation_pointers()
+        check_chapter_operating_contract()
         check_forbidden_claims()
         check_runner_boundary()
     except FrameworkDocsError as exc:

@@ -43,7 +43,29 @@ for materially separable investigation; for H2/H3 normally use a
 source-authority/firmware-safety specialist and a separate reviewer. Root
 retains mutation, validation, Git, publication, status, and final authority.
 
-Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 Scope:
 - ...
@@ -71,7 +93,7 @@ Verification:
 - GLYPH-UD-028 transport only: known Glyph targets, exact sender/receiver role,
   work order, canonical, scope and return destination; no action authority.
   Rejected ACK/result -> durable readback, no repeated retry or duplicate.
-  Successful callbacks chain immediately; ten-minute poll is idle fallback.
+  Successful callbacks chain immediately; bounded compact readback is a missing-callback fallback.
   One canonical-writing worker only.
 
 Final report:
@@ -104,7 +126,29 @@ absence is insufficient and non-exhaustive. Native internal subagents are
 distinct from user-owned task/thread/Automation creation. Use parallel
 read-heavy specialists when a broad audit partitions cleanly; avoid arbitrary
 parallelism for a tiny surface. Planner/helpers remain non-authoritative.
-Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 Excluded scope: product/queue edits, Ready or Preauthorized promotion, semantic decisions, runtime-loaded config approval.
 Allowed files: repository files for inspection; material output only on planning/portfolio-*.
 Forbidden files: all product/runtime files for mutation; source, include, lib,
@@ -137,7 +181,29 @@ absence is insufficient and non-exhaustive. Native internal subagents are
 distinct from user-owned task/thread/Automation creation. Use bounded
 verification specialists when source, evidence, validation, or hardware-risk
 verification is separable; Curator retains final authorization judgment.
-Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 Excluded scope: firmware/configurator product code, runtime/product tests, implementation of newly authorized work.
 Allowed files: canonical queue/status/portfolio/user-direction publication and narrowly coupled control-plane tests.
 Forbidden files: src/**, include/**, config/**, firmware/runtime/configurator product tests.
@@ -169,7 +235,29 @@ distinct from user-owned task/thread/Automation creation. Use a fresh reviewer
 for a result-bearing evidence mutation when native capability exists; review
 may validate identity/correspondence/schema but never invent physical
 observations.
-Live Git verification: attempt it normally; a restricted-sandbox GitHub/DNS/network failure is inconclusive, so retry the same minimal read-only check through the permitted network-enabled/escalated mechanism. It is not authentication evidence or sufficient for BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is established and GitHub rejects authentication. Never automatically mutate credentials or request re-login; account-level changes are user-owned unless separately requested. Do not substitute stale tracking refs. Stop fail-closed only after all permitted network-capable retries fail or are unavailable.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 Excluded scope: performing/fabricating tests, runtime source edits, source publication.
 Allowed files: evidence record and directly coupled control-plane status.
 Forbidden files: src/**, include/**, config/**, product/runtime tests.
@@ -277,6 +365,12 @@ Tool budget: small read-only.
 ```
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

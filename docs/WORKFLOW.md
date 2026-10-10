@@ -44,31 +44,29 @@ explicitly instructed.
 
 ## Live Remote Verification
 
-Separate local Git inspection from GitHub connectivity. Inspect the repository,
-remote URL, refs, status, branches, and worktrees locally, then attempt the
-ordinary/default minimal read-only live-remote operation. If the restricted
-sandbox cannot resolve or reach GitHub because of environment-level DNS,
-network, or sandbox policy, treat that attempt as inconclusive and retry the
-same minimal read-only verification through the runtime's permitted
-network-enabled/escalated path. The retry grants network access only and does
-not expand filesystem, mutation, product, queue, evidence, or publication
-authority.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
 
-A sandbox DNS/network failure is not authentication evidence and is not enough
-for `BLOCKED_EXTERNAL`. Diagnose authentication only after connectivity is
-established and GitHub actually rejects credentials or permissions. A failing
-sandboxed `gh auth status` is not a reliable authentication oracle when GitHub
-cannot be reached. Never automatically run `gh auth login`/`gh auth logout`,
-rewrite tokens, delete Git credentials, change credential helpers, replace SSH
-keys, switch accounts, or request re-login because of unverified connectivity.
-Account-level mutation is user-owned.
-
-If a network-enabled retry succeeds, use its live result as authoritative,
-continue normally, and report the restricted failure plus successful retry
-without calling it an authentication incident. If every permitted
-network-capable retry fails or is unavailable, stop fail-closed with live
-remote unverified because all permitted network-capable retries failed. Stale
-local remote-tracking refs never substitute for successful live verification.
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 ## Authorization Policy
 
@@ -234,6 +232,12 @@ Follow-ups:
 ```
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

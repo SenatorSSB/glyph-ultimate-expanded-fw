@@ -6,6 +6,22 @@ A long run is many bounded cycles, not one unbounded monolithic conversation.
 This document does not implement or define the runner prompt. Runner
 implementation is deferred.
 
+Fresh chapter daemons first read FUTURE_DAEMON_BOOTSTRAP.md. These are bounded
+worker cycles within current owner-approved chapter authority; no standing
+schedule or next chapter is implied. Use root AGENTS.md capability-aware live
+Git policy and persist the chapter network capability fact.
+
+Role existence is not a quota. Instantiate Planner only for actual planning or
+candidate-supply need, Curator only for real authority/adjudication, independent
+reviewer only for a required mutation/evidence review, and HEP only after human
+physical observations exist. Specialists and executors require a useful bounded
+transition; do not create a role merely to report WAITING or restate known state.
+One clean executor may carry an already-authorized coherent chain to the next
+real hardware/domain/authority stop, within its recorded scope and successor
+limits; it may not self-reseed. One independent review layer is normally
+sufficient. Do not create reviewer-of-reviewer chains unless a concrete new
+defect found by the first review needs repair and distinct independent review.
+
 ## States
 
 1. Load canonical docs
@@ -110,7 +126,7 @@ implementation is deferred.
     - Follow GLYPH-UD-028 transport-only known-Glyph ACK/WORKER_RESULT delivery.
       CROSS_THREAD_MESSAGE_REJECTED falls back to durable canonical/pushed
       result and readback, no repeated retry or duplicate worker. Successful
-      callbacks chain immediately; ten-minute polling is idle fallback.
+      callbacks chain immediately; bounded compact readback is a missing-callback fallback.
       Canonical write/publication authority remains single-writer.
     - Delegation guidance, capability discovery, native availability,
       specialists, reviewer, and exact no-use reason.
@@ -123,6 +139,12 @@ implementation is deferred.
     - Stop conditions and follow-ups.
 
 ## Persistent campaign execution under GLYPH-UD-029
+
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
 
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.

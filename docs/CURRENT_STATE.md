@@ -1,5 +1,7 @@
 # Glyph Current State
 
+C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). No new product chapter starts here.
+
 ## Current C024 completion
 
 GP-CONFIG-024 is DONE after exact source integration I `5c5ba4e166c9b67654c0d1b9baa2b0c35677f3d4` and a separate strict completion publication. The accepted candidate is F `8ab1173b0690f5ed3e994f95af797c9e9a265525`, direct child of B `b404453ef22cc994eec54338b8a23c3ba61df808`, tree `15ed2d35d561d6b1709499fe42083ca4d789e920`; the accepted catalog row binds review R `36f91089ab60fb68248a2819aee5dd5082fd922c` and source-free HEP evidence E `25f39876c21fa429a47c93dc446205c37d72b8d3`. Its preserved tested UF2 is SHA-256 `95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6` (803840 bytes), with no rebuild or device action after that exact artifact was accepted.
@@ -30,11 +32,8 @@ Use the current-runway summary above for current authorization and liveness;
 historical completion prose below does not authorize implementation.
 
 - The project owner reported all expected sole/non-mode X1 offset-41 outputs and no disconnects for the exact pair above, then confirmed the restored prior firmware worked; `docs/calibration/fixtures/x1_offset41_hardware_evidence_2026-09-02.json` records the accepted exact-snapshot evidence.
-- `configurator` contains the latest Y2 layout source-owned port after the
-  recorded source-owned Y2 layout HARDWARE_PASS.
-- Evidence is preserved in
-  `docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md`
-  and its fixture.
+- `configurator` contains the latest Y2 layout source-owned port after the recorded source-owned Y2 layout HARDWARE_PASS.
+- Evidence is preserved in `docs/calibration/latest_y2_layout_source_owned_port_hardware_result_2026-06-29.md` and its fixture.
 - Pre-Revision-2 reports remain historical acceptance only for already-merged source; missing candidate/artifact identity is `UNKNOWN` and cannot satisfy a new/rebuilt candidate's exact-snapshot gate.
 - The implementation lineage is
   `runtime-config-latest-y2-layout-source-owned-port`, with the recorded result

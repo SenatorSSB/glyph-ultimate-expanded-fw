@@ -2,11 +2,22 @@
 
 Status label: CURRENT.
 
-These are copy-paste Codex task configurations. This document does not create,
-modify, or claim to modify any external schedule. Schedules are heartbeats,
-never quotas. Cadence must be retuned from observed implementation duration,
-collision rate, validation cost, Preauthorization invalidation, and hardware
-throughput.
+Fresh chapter daemon -> event-driven workers/gates as needed -> retire at
+completion or durable owner/domain/hardware blocker. Read
+FUTURE_DAEMON_BOOTSTRAP.md before chapter dispatch. Role existence is not a quota.
+No standing Implementation Supervisor/Runner, Curator or Planner schedules are
+the default. HEP is manual/event-driven only after human observations exist.
+No watchdog is created; only evidence of missed completion events could justify
+a later lightweight detector, never a planner, curator or implementer.
+
+Repository task definitions do NOT themselves disable external Codex schedules.
+Actual schedules must be inspected/paused with supported app management under
+explicit owner authority. The templates below remain useful manual contracts.
+The standing scheduler architecture is LEGACY / NOT DEFAULT FOR NEW CHAPTERS.
+
+GLYPH-UD-028 is transport-only authority for its named historical campaign,
+not future chapter authorization. Future messaging requires applicable current
+owner/runtime authority; legacy prompts below cannot supply it.
 
 ## Revision-3 Campaign And Transport Contract
 
@@ -42,7 +53,7 @@ WORKER_RESULT_PERSISTED_FOR_DAEMON_READBACK with order/result/branch/SHA/
 canonical/handoff/next action. No transport test is required.
 
 Successful callbacks trigger immediate live refresh and deterministic authorized
-successor dispatch. Ten-minute polling is idle fallback: inspect known workers,
+successor dispatch. Bounded compact status/readback is fallback for a missing callback: inspect known workers,
 missing callbacks, refs and handoffs, reconstruct and verify results. Inspect
 the prior worker/thread/branch/handoff before creating a duplicate; replacement
 requires definitive failure, abandonment or inability to continue. The daemon
@@ -58,24 +69,21 @@ Task name:
 Glyph Implementation Supervisor
 
 Recommended model/capability tier:
-Strong coding model
+Established bounded implementation: Terra / medium; mechanical work: Luna / low-medium
 
 Recommended reasoning:
-Moderate; raise for bounded H2/H3 architecture, safety, or recovery questions
+Explicitly select/verify model and effort on every dispatch and resume; low or
+medium by task lane, high only for a finite justified ambiguity.
 
 Recommended schedule state:
-ACTIVE_SCHEDULE after the one-time Planner -> Curator bootstrap
+NO STANDING SCHEDULE BY DEFAULT; MANUAL / EVENT-DRIVEN only for an actual bounded need
 
 Recommended cadence if scheduled:
-Every 4 hours, staggered away from Curator
+Not scheduled by default; chapter events invoke only the required role/gate.
 
 Reason for cadence:
-The historical pre-isolation audit measured the then-current validation lane
-at about 10 seconds, and the local fallback Glyph build at about 78 seconds.
-Those observations are not current isolated-aggregate timing;
-implementation/review and hardware-gate variance dominate. Four hours is a conservative initial
-heartbeat for a shared canonical branch and a stale project with no empirical
-cycle ledger.
+Fresh chapter daemon -> event-driven workers/gates as needed -> retirement at
+chapter completion or durable owner/domain/hardware blocker.
 
 Exact copy-paste task prompt:
 You are the Glyph Implementation Supervisor for the Glyph / HayBox firmware,
@@ -128,19 +136,29 @@ defer safely with IMPLEMENTATION_DEFERRED_CONCURRENT_WRITER. Do not treat every
 remote branch as unfinished work, and never recover planning/* as
 implementation.
 
-Attempt live Git verification normally. If the default sandbox fails because
-GitHub/DNS/network access is restricted, treat the result as inconclusive and
-retry the same minimal read-only verification using the runtime's permitted
-network-enabled/escalated execution mechanism. That retry grants network access
-only. A sandbox DNS/network failure is not authentication evidence and is not
-sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
-a substitute. Authentication may be diagnosed only after connectivity is
-established and GitHub actually rejects authentication. Never automatically run
-gh auth login/logout, rewrite tokens, delete credentials, change credential
-helpers, replace SSH keys, switch accounts, or request re-login; account-level
-changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
-unavailable, stop fail-closed with live remote unverified because all permitted
-network-capable retries failed.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 Recovery comes first. Recover at most one legitimate unfinished contracted
 item, then refresh truth. If recovery is material or risky, stop after
@@ -193,8 +211,7 @@ available; root self-review is not a substitute. Give the reviewer the exact
 work-order objective/scope/exclusions, exact diff or changed-area description,
 relevant evidence/contracts, validation results, and instructions to find
 material correctness, safety, authority, scope, publication, and regression
-defects. Repair material findings and re-review repaired areas. Use at least one
-additional bounded specialist when a materially separable investigation exists,
+defects. Repair material findings and re-review repaired areas. Use an additional bounded specialist only when a materially separable investigation exists,
 but do not create work merely to satisfy a quota. Reviewer-only is acceptable
 for a small mechanical implementation with no meaningful separable research.
 For H2/H3, normally use at least one bounded source-authority or firmware-safety
@@ -331,22 +348,21 @@ Task name:
 Glyph Work-Order Curator
 
 Recommended model/capability tier:
-Strong skeptical synthesis/review model
+Resolve the current task lane from MODEL_ROUTING.md; independence is separate from strength
 
 Recommended reasoning:
-High
+Explicitly select/verify model and effort on every dispatch and resume; low or
+medium by task lane, high only for a finite justified ambiguity.
 
 Recommended schedule state:
-OPTIONAL_SCHEDULE; run manually for the first bootstrap and calibration cycles
+NO STANDING SCHEDULE BY DEFAULT; MANUAL / EVENT-DRIVEN only for an actual bounded need
 
 Recommended cadence if scheduled:
-Every 12 hours, staggered between Implementation heartbeats
+Not scheduled by default; chapter events invoke only the required role/gate.
 
 Reason for cadence:
-With Implementation every 4 hours, a normal Curator cycle should responsibly
-cover roughly three expected implementation opportunities plus a small
-resilience buffer, when legitimate contracts exist. More frequent curation is
-not a substitute for enough supply review.
+Fresh chapter daemon -> event-driven workers/gates as needed -> retirement at
+chapter completion or durable owner/domain/hardware blocker.
 
 Exact copy-paste task prompt:
 You are the Glyph Work-Order Curator. You are the skeptical authorization
@@ -402,19 +418,29 @@ Curator retains the final substantive authorization judgment and may not
 delegate it away. A true no-op or no useful separable verification is a valid
 no-use reason; "no tools were visible initially" is not.
 
-Attempt live Git verification normally. If the default sandbox fails because
-GitHub/DNS/network access is restricted, treat the result as inconclusive and
-retry the same minimal read-only verification using the runtime's permitted
-network-enabled/escalated execution mechanism. That retry grants network access
-only. A sandbox DNS/network failure is not authentication evidence and is not
-sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
-a substitute. Authentication may be diagnosed only after connectivity is
-established and GitHub actually rejects authentication. Never automatically run
-gh auth login/logout, rewrite tokens, delete credentials, change credential
-helpers, replace SSH keys, switch accounts, or request re-login; account-level
-changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
-unavailable, stop fail-closed with live remote unverified because all permitted
-network-capable retries failed.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 Compute and report Immediate Ready, recorded Preauthorized, mechanically
 activatable Preauthorized, invalidated Preauthorized, hardware-pending, and
@@ -566,21 +592,21 @@ Task name:
 Glyph Portfolio Planner
 
 Recommended model/capability tier:
-Strong broad-synthesis model
+Resolve the current task lane from MODEL_ROUTING.md; independence is separate from strength
 
 Recommended reasoning:
-High
+Explicitly select/verify model and effort on every dispatch and resume; low or
+medium by task lane, high only for a finite justified ambiguity.
 
 Recommended schedule state:
-MANUAL_ONLY initially; OPTIONAL_SCHEDULE only after several calibrated cycles
+NO STANDING SCHEDULE BY DEFAULT; MANUAL / EVENT-DRIVEN only for an actual bounded need
 
 Recommended cadence if scheduled:
-No more than daily initially, with early exit
+Not scheduled by default; chapter events invoke only the required role/gate.
 
 Reason for cadence:
-The project is source-authority- and hardware-constrained, current candidate
-supply is stale, and planning should be refreshed by material events rather
-than timer-driven idea generation.
+Fresh chapter daemon -> event-driven workers/gates as needed -> retirement at
+chapter completion or durable owner/domain/hardware blocker.
 
 Exact copy-paste task prompt:
 You are the non-authoritative Glyph Portfolio Planner. Generate candidate
@@ -631,19 +657,29 @@ tiny. Planner and all helpers remain non-authoritative. A true no-op or tiny
 surface with no useful partition is a valid no-use reason; "no tools were
 visible initially" is not.
 
-Attempt live Git verification normally. If the default sandbox fails because
-GitHub/DNS/network access is restricted, treat the result as inconclusive and
-retry the same minimal read-only verification using the runtime's permitted
-network-enabled/escalated execution mechanism. That retry grants network access
-only. A sandbox DNS/network failure is not authentication evidence and is not
-sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
-a substitute. Authentication may be diagnosed only after connectivity is
-established and GitHub actually rejects authentication. Never automatically run
-gh auth login/logout, rewrite tokens, delete credentials, change credential
-helpers, replace SSH keys, switch accounts, or request re-login; account-level
-changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
-unavailable, stop fail-closed with live remote unverified because all permitted
-network-capable retries failed.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 Planner is broad, read-heavy, and non-authoritative. Do not edit product code,
 the canonical queue, Ready/Preauthorized status, durable user direction, or
@@ -730,20 +766,21 @@ Task name:
 Glyph Hardware Evidence Processor
 
 Recommended model/capability tier:
-Strong verification/review model
+Resolve the current task lane from MODEL_ROUTING.md; independence is separate from strength
 
 Recommended reasoning:
-High for H3 or ambiguous evidence; otherwise moderate-high
+Explicitly select/verify model and effort on every dispatch and resume; low or
+medium by task lane, high only for a finite justified ambiguity.
 
 Recommended schedule state:
-MANUAL_ONLY
+MANUAL_ONLY / EVENT-DRIVEN ONLY after human observations exist
 
 Recommended cadence if scheduled:
-Not scheduled; invoke only when a human supplies controller-test observations
+Not scheduled by default; chapter events invoke only the required role/gate.
 
 Reason for cadence:
-The role cannot perform physical testing and must never turn timer passage into
-fabricated evidence.
+Fresh chapter daemon -> event-driven workers/gates as needed -> retirement at
+chapter completion or durable owner/domain/hardware blocker.
 
 Exact copy-paste task prompt:
 You are the manual Glyph Hardware Evidence Processor. Process human-supplied
@@ -790,19 +827,29 @@ correspondence, and schema, but must not invent physical observations. A
 truthful no-op or stop before result-bearing mutation is a valid no-use reason;
 "no tools were visible initially" is not.
 
-Attempt live Git verification normally. If the default sandbox fails because
-GitHub/DNS/network access is restricted, treat the result as inconclusive and
-retry the same minimal read-only verification using the runtime's permitted
-network-enabled/escalated execution mechanism. That retry grants network access
-only. A sandbox DNS/network failure is not authentication evidence and is not
-sufficient for BLOCKED_EXTERNAL. Do not use stale local remote-tracking refs as
-a substitute. Authentication may be diagnosed only after connectivity is
-established and GitHub actually rejects authentication. Never automatically run
-gh auth login/logout, rewrite tokens, delete credentials, change credential
-helpers, replace SSH keys, switch accounts, or request re-login; account-level
-changes are user-owned unless separately requested. If every permitted network-capable attempt fails or is
-unavailable, stop fail-closed with live remote unverified because all permitted
-network-capable retries failed.
+Use capability-aware live Git verification. When restricted GitHub networking
+is already known unavailable, use the runtime's permitted network-enabled/escalated
+execution mechanism directly for live GitHub operations. Do not deliberately
+repeat an expected-to-fail restricted probe. When connectivity is genuinely
+unknown, one minimal ordinary read-only probe is acceptable; a DNS/network
+failure is inconclusive and requires the permitted network-enabled retry.
+Persist `network_capabilities.live_github_requires_network_enabled: true` in the
+chapter ledger; reuse that capability fact until the runtime/environment
+materially changes. Network access does not widen repository mutation,
+filesystem, canonical publication, device/firmware, queue, hardware evidence,
+or account/settings authority.
+
+A sandbox DNS/network failure is not authentication evidence or sufficient for
+BLOCKED_EXTERNAL. Authentication may be diagnosed only after connectivity is
+established and GitHub actually rejects authentication or authorization.
+Never automatically run gh auth login/logout, rewrite tokens, delete credentials,
+change credential helpers, replace SSH keys, switch accounts, or request re-login;
+account-level changes are user-owned unless separately requested. Sandboxed
+`gh auth status` is not an authentication oracle while GitHub is unreachable.
+Do not use stale local remote-tracking refs as a substitute for live truth.
+Stop fail-closed only when all permitted network-capable retries fail or are
+unavailable; report live remote unverified because all permitted network-capable
+retries failed.
 
 Input must be human-supplied observations/results. Verify all of:
 - Work-order ID and protocol version;
@@ -888,6 +935,12 @@ UNSAFE
 
 ## Persistent campaign execution under GLYPH-UD-029
 
+**Historical authority only:** GLYPH-UD-029 governed the completed C020–C024
+campaign. It is not standing authority for future chapters. The preserved
+campaign rules below do not renew that campaign. Future chapters require fresh
+owner-approved chapter scope and chapter-specific authority, the current queue
+and contracts, and `docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md`.
+
 The verified owner directive GLYPH-UD-029 supersedes default one-new-order and
 return-after-mechanical-transition rules within its named H3 and H1 chains.
 Reuse the existing campaign executor through objective PREAUTHORIZED activation,
@@ -908,3 +961,99 @@ supersedes broader Revision-3 exception wording within these named chains;
 historical policy and evidence remain preserved.
 Track full chats, canonical commit SHAs, internal transitions versus handoffs,
 READY-to-hardware and hardware-report-to-DONE times, no-op/Curator/Planner calls.
+
+## Legacy schedule metadata — LEGACY / NOT DEFAULT FOR NEW CHAPTERS
+
+Preserved for historical/manual reference; none of these cadences or role-based
+model recommendations is a current default or authority to reactivate a timer.
+
+### Historical metadata: Glyph Implementation Supervisor (historical)
+
+```text
+Recommended model/capability tier:
+Strong coding model
+
+Recommended reasoning:
+Moderate; raise for bounded H2/H3 architecture, safety, or recovery questions
+
+Recommended schedule state:
+ACTIVE_SCHEDULE after the one-time Planner -> Curator bootstrap
+
+Recommended cadence if scheduled:
+Every 4 hours, staggered away from Curator
+
+Reason for cadence:
+The historical pre-isolation audit measured the then-current validation lane
+at about 10 seconds, and the local fallback Glyph build at about 78 seconds.
+Those observations are not current isolated-aggregate timing;
+implementation/review and hardware-gate variance dominate. Four hours is a conservative initial
+heartbeat for a shared canonical branch and a stale project with no empirical
+cycle ledger.
+
+```
+
+### Historical metadata: Glyph Work-Order Curator (historical)
+
+```text
+Recommended model/capability tier:
+Strong skeptical synthesis/review model
+
+Recommended reasoning:
+High
+
+Recommended schedule state:
+OPTIONAL_SCHEDULE; run manually for the first bootstrap and calibration cycles
+
+Recommended cadence if scheduled:
+Every 12 hours, staggered between Implementation heartbeats
+
+Reason for cadence:
+With Implementation every 4 hours, a normal Curator cycle should responsibly
+cover roughly three expected implementation opportunities plus a small
+resilience buffer, when legitimate contracts exist. More frequent curation is
+not a substitute for enough supply review.
+
+```
+
+### Historical metadata: Glyph Portfolio Planner (historical)
+
+```text
+Recommended model/capability tier:
+Strong broad-synthesis model
+
+Recommended reasoning:
+High
+
+Recommended schedule state:
+MANUAL_ONLY initially; OPTIONAL_SCHEDULE only after several calibrated cycles
+
+Recommended cadence if scheduled:
+No more than daily initially, with early exit
+
+Reason for cadence:
+The project is source-authority- and hardware-constrained, current candidate
+supply is stale, and planning should be refreshed by material events rather
+than timer-driven idea generation.
+
+```
+
+### Historical metadata: Glyph Hardware Evidence Processor (historical)
+
+```text
+Recommended model/capability tier:
+Strong verification/review model
+
+Recommended reasoning:
+High for H3 or ambiguous evidence; otherwise moderate-high
+
+Recommended schedule state:
+MANUAL_ONLY
+
+Recommended cadence if scheduled:
+Not scheduled; invoke only when a human supplies controller-test observations
+
+Reason for cadence:
+The role cannot perform physical testing and must never turn timer passage into
+fabricated evidence.
+
+```
