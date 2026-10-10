@@ -1191,7 +1191,8 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         require(len(merges) == 1, 'C024 history must contain one exact P/F integration')
         integration = merges[0]
         require(original.ancestor(root, integration, head), 'C024 exact integration is not in target ancestry')
-        for revision in revisions[revisions.index(integration) + 1:]:
+        post_integration = get(root, 'rev-list', '--first-parent', '--reverse', integration + '..' + head).decode().split()
+        for revision in post_integration:
             changed_since_i = set(filter(None, get(root, 'diff', '--name-only', '--no-renames', '-z',
                                                     integration, revision).decode().split('\0')))
             require(changed_since_i <= C024_PROCESSOR_PATHS,
