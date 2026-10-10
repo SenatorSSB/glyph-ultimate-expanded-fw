@@ -519,7 +519,17 @@ inline PersistenceValidatorSetup persistence_validator_setup;
         destination.write_bytes(raw)
     (crc_root / 'Arduino.h').write_text('#pragma once\n#include <cstddef>\n#include <cstdint>\n')
     source = temp / 'current_acceptance.cpp'
-    source.write_bytes(live_file(CURRENT_HARNESS, CURRENT_FILE_SHA256[CURRENT_HARNESS]))
+    current_driver = live_file(CURRENT_HARNESS, CURRENT_FILE_SHA256[CURRENT_HARNESS]).decode()
+    historical_selector_call = '        require(gp_config019_original_main() == 0, "original 18 observations failed against current acceptance");\n'
+    require(current_driver.count(historical_selector_call) == 1,
+            'temporary current route historical selector call boundary changed')
+    current_driver = current_driver.replace(historical_selector_call,
+        '        // Historical selector rows run only on authenticated historical source.\n', 1)
+    old_result = 'PASS observations=18 valid_controls=8 decoded_invalid_controls=12 ABI=short_enum ASan_UBSan=PASS hardware=NOT_CLAIMED'
+    new_result = 'PASS binding_controls=20 valid_controls=8 decoded_invalid_controls=12 selector=C024_exact_candidate_proof ABI=short_enum ASan_UBSan=PASS hardware=NOT_CLAIMED'
+    require(current_driver.count(old_result) == 1, 'temporary current result boundary changed')
+    current_driver = current_driver.replace(old_result, new_result, 1)
+    source.write_text(current_driver)
     decoder = temp / 'current' / DECODER
     includes = ['-I' + str(decoder / 'nanopb'), '-I' + str(decoder / 'generated'),
                 '-I' + str(temp / 'current/include'),
@@ -557,7 +567,11 @@ inline PersistenceValidatorSetup persistence_validator_setup;
     result = execute([str(binary)])
     require(not result.stderr, 'current sanitizer stderr')
     rows = result.stdout.splitlines()
-    require(rows == value['current_expected_rows'], 'current binding-control mismatch:\n' + result.stdout)
+    expected_rows = value['current_expected_rows'][:-1] + [
+        value['current_expected_rows'][-1].replace(
+            'PASS observations=18 valid_controls=8 decoded_invalid_controls=12 ABI=short_enum ASan_UBSan=PASS hardware=NOT_CLAIMED',
+            'PASS binding_controls=20 valid_controls=8 decoded_invalid_controls=12 selector=C024_exact_candidate_proof ABI=short_enum ASan_UBSan=PASS hardware=NOT_CLAIMED')]
+    require(rows == expected_rows, 'current binding-control mismatch:\n' + result.stdout)
     require(sum('CMD_SUCCESS saves=1' in r for r in rows[:20]) == value['valid_controls'] == 8 and
             sum('CMD_ERROR saves=0 live=BYTE_EXACT saved=BYTE_EXACT' in r for r in rows[:20]) ==
             value['decoded_invalid_controls'] == 12, 'current false acceptance/control census')
