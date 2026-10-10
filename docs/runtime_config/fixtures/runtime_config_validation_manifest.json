@@ -5708,6 +5708,35 @@
       "reason": "Replay the exact independently reviewed C023 candidate host proof in both ABI modes with sanitizers; authenticate the exact six-source/five-proof inventory and preserve the candidate unbuilt/unmerged until GP-VAL-042 strict DONE."
     },
     {
+      "id": "gp_config024_usb_profile_identity",
+      "path": "tools/check_glyph_gp_config024_usb_profile_identity.py",
+      "command": [
+        "python3",
+        "tools/check_glyph_gp_config024_usb_profile_identity.py"
+      ],
+      "category": "candidate_safety",
+      "applicability": "current",
+      "branch_policy": "content_and_scope",
+      "required_arguments": [],
+      "mutation_risk": "temporary_file_only",
+      "source_dependencies": [
+        "HAL/pico/include/display/ConfigMenu.hpp",
+        "HAL/pico/include/display/DefaultConfigMenu.hpp",
+        "HAL/pico/src/display/DefaultConfigMenu.cpp",
+        "docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json",
+        "docs/calibration/gp_config_024_usb_profile_identity_repair.md",
+        "include/core/InputMode.hpp",
+        "include/core/mode_selection.hpp",
+        "src/core/InputMode.cpp",
+        "src/core/mode_selection.cpp",
+        "tools/fixtures/gp_config024_usb_profile_identity/include/host_stubs.hpp",
+        "tools/fixtures/gp_config024_usb_profile_identity/main.cpp"
+      ],
+      "load_bearing": true,
+      "historical": false,
+      "reason": "Compile and run the exact SetUsbBackend body in both host enum modes with sanitizers; prove count/extent-safe refusal has no effects and matched Config row pointer identity selects exactly one row while preserving all other selector behavior."
+    },
+    {
       "id": "gp_val039_c022_transition",
       "path": "tools/test_glyph_c022_campaign_transition.py",
       "command": [

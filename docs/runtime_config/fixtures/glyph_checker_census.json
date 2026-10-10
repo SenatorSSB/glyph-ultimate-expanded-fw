@@ -7514,6 +7514,68 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_config024_usb_profile_identity",
+      "defines_main": true,
+      "file_size_bytes": 8999,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate_file_hashes",
+        "candidate_inventory"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 172,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config024_usb_profile_identity.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate_file_hashes",
+        "candidate_inventory"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config024_usb_profile_identity",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/display/DefaultConfigMenu.cpp",
+        "docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json",
+        "docs/calibration/gp_config_024_usb_profile_identity_repair.md",
+        "docs/planning/portfolio_20261005_0028.md",
+        "docs/runtime_config/fixtures/glyph_checker_census.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_health.json",
+        "docs/runtime_config/fixtures/runtime_config_validation_manifest.json",
+        "docs/runtime_config/runtime_config_validation_health.md",
+        "include/host_stubs.hpp",
+        "src/core/InputMode.cpp",
+        "src/core/mode_selection.cpp",
+        "tools/check_glyph_gp_config024_usb_profile_identity.py",
+        "tools/fixtures/gp_config024_usb_profile_identity"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "4d8f844e83ea8aaf6077aa9e660416b05fdc535275411fec85ea897492280366",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_config_007_transaction_stage_schema",
       "defines_main": true,
       "file_size_bytes": 13409,
