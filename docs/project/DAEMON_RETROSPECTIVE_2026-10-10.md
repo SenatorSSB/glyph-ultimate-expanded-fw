@@ -679,4 +679,3 @@ reasoning output and cumulative thread counters must not be added again.
 Many contexts used high reasoning even after routing left Astra; the next daemon
 must de-escalate effort as well as model family. High reuse/cache ratios also do
 not make stale context safe.
-

@@ -28,7 +28,8 @@ authority; retire it with its chapter under runtime lifecycle rules.
 The local runtime model catalog read on 2026-10-10 lists `gpt-5.6-terra`, low and
 medium supported. Availability must be resolved again at each dispatch/resume;
 there is no silent unavailable-model fallback. The historical
-[retrospective](DAEMON_RETROSPECTIVE_2026-10-10.md) is integrated byte-for-byte;
+[retrospective](DAEMON_RETROSPECTIVE_2026-10-10.md) preserves all audit content; the sole normalization removes one trailing blank
+line so the staged package passes the ordinary whitespace check;
 its earlier Luna recommendation is historical and superseded by the approved
 Terra bootstrap preference.
 
