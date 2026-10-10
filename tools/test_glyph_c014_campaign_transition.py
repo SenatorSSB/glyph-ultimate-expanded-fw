@@ -644,6 +644,13 @@ def c024_processor_evidence():
         merged=subprocess.run(['git','-C',str(root),'commit-tree',tree,'-p',E,'-p',proof.C024_C],input=b'SYNTHETIC TEST early tested ancestry\n',capture_output=True,check=True).stdout.decode().strip()
         checkout(root,merged)
         reject(lambda:proof.authenticate(root),'tested ancestry hidden behind baseline critical tree');count+=1
+        checkout(root,proof.C024_I)
+        write(root,proof.C024_EVIDENCE,(root/proof.C024_EVIDENCE).read_bytes()+b' ')
+        git(root,'add',proof.C024_EVIDENCE)
+        forged_tree=git(root,'write-tree')
+        forged=subprocess.run(['git','-C',str(root),'commit-tree',forged_tree,'-p',proof.C024_P,'-p',proof.C024_F],input=b'SYNTHETIC TEST substituted P/F integration\n',capture_output=True,check=True).stdout.decode().strip()
+        checkout(root,forged)
+        reject(lambda:proof.authenticate(root),'substituted P/F merge with altered HEP');count+=1
     print('PASS C024 processor real E and',count-1,'negative controls; unresolved anomaly retained; no I/DONE')
 
 

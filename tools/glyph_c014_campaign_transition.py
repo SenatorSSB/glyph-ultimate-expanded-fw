@@ -994,6 +994,7 @@ authenticate_config019_coexistence_014_original = authenticate_config019_coexist
 C024_C = '8ab1173b0690f5ed3e994f95af797c9e9a265525'
 C024_B = 'b404453ef22cc994eec54338b8a23c3ba61df808'
 C024_TREE = '15ed2d35d561d6b1709499fe42083ca4d789e920'
+C024_I = '5c5ba4e166c9b67654c0d1b9baa2b0c35677f3d4'
 C024_HANDOFF = '4bfb3777a4f484f091f0d8054230e3eb9ac3dee2'
 C024_PROOF = 'docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json'
 C024_MENU = 'HAL/pico/src/display/DefaultConfigMenu.cpp'
@@ -1192,6 +1193,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
                   == [C024_P, C024_F]]
         require(len(merges) == 1, 'C024 history must contain one exact P/F integration')
         integration = merges[0]
+        require(integration == C024_I, 'C024 integration commit is not the exact reviewed P/F merge')
         require(original.ancestor(root, integration, head), 'C024 exact integration is not in target ancestry')
         post_integration = get(root, 'rev-list', '--first-parent', '--reverse', integration + '..' + head).decode().split()
         post_i_validation_paths = C024_PROCESSOR_PATHS | frozenset((
@@ -1206,8 +1208,13 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         accepted = original.item(root, C024_P, 'GP-CONFIG-024')
         integrated_expected = dict(original.critical_tree(root, C024_P))
         integrated_expected[C024_MENU] = original.critical_tree(root, C024_F)[C024_MENU]
+        require(original.critical_tree(root, integration) == integrated_expected,
+                'C024 exact integration critical source differs from P/F')
         processor = authenticate_c024_processor(root, C024_P, accepted,
                                                 original.item(root, C024_P, 'GP-VAL-045'), verify_live=False)
+        for path in (C024_EVIDENCE, C024_RESULT, C024_ARCHIVE, C024_PROTOCOL):
+            require(original.raw_bytes(root, integration, path) == original.raw_bytes(root, processor, path),
+                    'C024 exact integration changed immutable HEP input: ' + path)
         completion_fields = {'status', 'done_evidence'}
         require({k:v for k,v in current_c024.items() if k not in completion_fields}
                 == {k:v for k,v in accepted.items() if k not in completion_fields}
