@@ -566,7 +566,8 @@ def c024_processor_evidence():
     os.environ['GIT_OPTIONAL_LOCKS'] = '0'
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
     current = proof.authenticate(ROOT)
-    assert current['phase'] == 'SOURCE_FREE_PROCESSOR'
+    assert current['phase'] in {'SOURCE_FREE_PROCESSOR', 'CANDIDATE_VALIDATION_ONLY'}
+    assert current['processor_evidence_commit']
     assert current['accepted_metadata_paths'] == frozenset((
         proof.C024_EVIDENCE, proof.C024_RESULT, proof.C024_ARCHIVE))
     from glyph_hardware_correspondence import classify_path
@@ -600,7 +601,7 @@ def c024_processor_evidence():
         checkout(root, proof.C024_R)
         pending = proof.authenticate(root)
         assert pending['phase'] == 'SOURCE_FREE_CANDIDATE' and pending['accepted_metadata_paths'] == frozenset()
-        E = current['target']; checkout(root, E)
+        E = current['processor_evidence_commit']; checkout(root, E)
         write(root,'docs/AGENT_CONTEXT.md',(root/'docs/AGENT_CONTEXT.md').read_bytes()+b'\n')
         commit(root,'source-free evidence descendant')
         descendant = proof.authenticate(root)
