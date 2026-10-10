@@ -1,0 +1,33 @@
+{
+  "profile": "Ultimate", "center": [128,128],
+  "direction_order": ["down-left","down","down-right","left","neutral","right","up-left","up","up-right"],
+  "offsets": {
+    "Default": [[-67,-77],[-77,0],[67,-77],[-67,0],[0,0],[67,0],[-67,67],[0,67],[67,67]],
+    "Tilt1": [[-59,-41],[0,-41],[59,-41],[-59,0],[0,0],[59,0],[-59,39],[0,39],[59,39]],
+    "Tilt2": [[59,-40],[0,-40],[-59,-40],[59,0],[0,0],[-59,0],[59,40],[0,40],[-59,40]],
+    "Tilt3": [[-36,-45],[0,-45],[36,-45],[-36,0],[0,0],[36,0],[-36,44],[0,44],[36,44]],
+    "Y1": [[-67,-28],[0,-28],[67,-28],[-67,0],[0,0],[67,0],[-67,28],[0,28],[67,28]],
+    "Y2": [[-47,-47],[0,-47],[47,-47],[-47,0],[0,0],[47,0],[-47,47],[0,47],[47,47]],
+    "X1": [[-30,-77],[0,-77],[30,-77],[-30,0],[0,0],[30,0],[-30,67],[0,67],[30,67]],
+    "Up-smash": [[0,67],[0,67],[0,67],[0,67],[0,67],[0,67],[0,67],[0,67],[0,67]],
+    "Mode": [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],
+    "C-stick": [[-89,-127],[0,-127],[89,-127],[-89,0],[0,0],[89,0],[-89,127],[0,127],[89,127]]
+  },
+  "buttons": {
+    "LF4":"L; while held LT3 also R", "LF3":"Left", "LF2":"Down", "LF1":"Right", "LF5":"Up", "LF6":"Dpad Right", "LF7":"Dpad Left", "LF8":"R",
+    "LT1":"Z", "LT2":"Up-smash + A", "LT3":"Y1", "LT4":"X1", "LT5":"Up", "LT6":"Y2",
+    "RT1":"A", "RT2":"C Down", "RT3":"C Left", "RT4":"C Up", "RT5":"C Right",
+    "RF1":"B", "RF2":"Y", "RF3":"Tilt2", "RF4":"Tilt1", "RF5":"Mode", "RF6":"Up", "RF7":"X", "RF8":"Left", "RF9":"Blank", "RF10":"L+R+A", "RF11":"Dpad Down", "RF12":"A+B", "RF13":"Dpad Up", "RF14":"Blank", "RF15":"Blank"
+  },
+  "priority": ["Up-smash","Mode","Tilt3","Tilt1","Tilt2","Y1","Y2","X1"],
+  "chord": "Tilt1 + Tilt2 = Tilt3",
+  "physical_to_logical_remaps": {"MB1":"UNSPECIFIED","LF5":"LT5","RF6":"LT5","RF8":"LF3","RF9":"UNSPECIFIED","RF14":"UNSPECIFIED","RF15":"UNSPECIFIED"},
+  "socd": "Existing SOCD_2IP: initially simultaneous opposition cancels; second input wins; held losing input reactivates when winner released",
+  "trigger_L": 108, "trigger_R": 255,
+  "rgb": "Ultimate RGB reference 3: STATIC, zero mappings; gameplay pixels cleared black",
+  "default_backends": ["XInput","DInput","Switch","GameCube"],
+  "marker_path": "/friend_ultimate_20261011_applied.flag",
+  "marker_payload": "friend_ultimate_20261011_applied_v1\n",
+  "installation_mode": "RPI_RP2_SINGLE_UF2", "separate_config_push_required": false,
+  "notes": ["Tilt2 X inversion intentional", "Default direction 2 offset (-77,0) intentional and retained", "Tilt2 '-59. 40', Tilt3 '7 - 36,44', and Y/X '9,' punctuation normalized only", "LF4 affects LT3, not LF3", "Config reference contains metadata/remaps, not the source-owned coordinate tables", "Other profiles retained; no runtime-loaded coordinate architecture"]
+}

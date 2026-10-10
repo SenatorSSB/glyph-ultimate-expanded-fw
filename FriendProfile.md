@@ -14,3 +14,34 @@ the baked profile adopts once using `/friend_ultimate_20261011_applied.flag`.
 - X1: `(98,51) (128,51) (158,51) (98,128) (128,128) (158,128) (98,195) (128,195) (158,195)`
 
 Priority: Up-smash, Mode, Tilt3, Tilt1, Tilt2, Y1, Y2, X1. RF6 maps to logical LT5; RF9/RF14/RF15 are blank. LF4 is L/light shield (108); LF4+LT3 is Y1 plus R (255). RGB is off.
+
+The complete owner-normalized specification is `friend/profile_spec.json`.
+Coordinates are source-owned, not runtime-loaded from Config. Default entry 2
+retains the explicitly supplied unusual (-77,0) offset; Tilt2 X inversion is
+intentional. Punctuation slips were normalized without changing those values.
+
+Physical C-stick: RT3 Left (39,128), RT5 Right (217,128), RT2 Down (128,1),
+RT4 Up (128,255); diagonals combine these components; neutral (128,128).
+RF8 maps to LF3 before the existing Left/Right SOCD pair. LF5 and RF6 both map
+to LT5 before the existing Down/Up pair. SOCD_2IP retains second-input priority
+with reactivation; initially simultaneous opposing directions cancel.
+
+Ultimate remains Config index 3 and is default on XInput, DInput, Switch and
+GameCube. Other profiles are retained. Ultimate references RGB Config 3, whose
+empty STATIC mapping leaves all gameplay pixels black. Boot/recovery screens
+and bootloader indicators are not gameplay RGB and remain source-default.
+
+The boot-only installer validates the full baked Config, saves it, loads and
+validates it, and compares every deterministic encoded byte (3,779 bytes in
+this snapshot). Only then does it write/flush/close/reopen the exact marker
+payload `friend_ultimate_20261011_applied_v1\n`. Mere existence, empty, old,
+truncated or trailing marker contents never count as applied. A valid marker
+skips provisioning; ordinary production stored-Config loading/validation still
+runs, preserving later legitimate user edits. Failures use existing safe boot
+refusal. This is a private one-shot full Config replacement, not a merge of an
+old device Config. No filesystem format or high-flash wipe is added.
+
+Both the readback Config and bounded expected-encoding buffer are static;
+readback resets before every attempt. The helper is called only by core0 setup
+before the normal boot gate releases core1. No heap allocation is introduced
+by the private helper. Host tests do not establish hardware acceptance.

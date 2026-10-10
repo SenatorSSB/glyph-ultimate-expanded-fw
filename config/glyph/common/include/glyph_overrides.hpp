@@ -102,21 +102,19 @@ const Config default_config = {
             .socd_pairs_count = 4,
             .socd_pairs = {
                 SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_2IP },
-                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_2IP },
+                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_LT5, .socd_type = SOCD_2IP },
                 SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP },
                 SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP },
             },
-            .button_remapping_count = 9,
+            .button_remapping_count = 7,
             .button_remapping = {
                 ButtonRemap { .physical_button = BTN_MB1,  .activates = BTN_UNSPECIFIED }, // Menu
             
-                ButtonRemap { .physical_button = BTN_LF8, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LF7, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LF6, .activates = BTN_UNSPECIFIED },
-                ButtonRemap { .physical_button = BTN_LT6, .activates = BTN_UNSPECIFIED },
                 // This private profile deliberately breaks physical/logical
-                // name parity: RF6 duplicates LT5 (Up).
+                // name parity. Duplicate directions enter the same SOCD pair.
+                ButtonRemap { .physical_button = BTN_LF5, .activates = BTN_LT5 },
                 ButtonRemap { .physical_button = BTN_RF6, .activates = BTN_LT5 },
+                ButtonRemap { .physical_button = BTN_RF8, .activates = BTN_LF3 },
                 ButtonRemap { .physical_button = BTN_RF9, .activates = BTN_UNSPECIFIED },
                 ButtonRemap { .physical_button = BTN_RF14, .activates = BTN_UNSPECIFIED },
                 ButtonRemap { .physical_button = BTN_RF15, .activates = BTN_UNSPECIFIED },
@@ -888,97 +886,11 @@ const Config default_config = {
           .animation = RGB_ANIM_STATIC
         },
 
-        RgbConfig {
-          .button_colors_count = 20,
-          .button_colors = {
-                {
-                BTN_LF1,
-                2282478
-                },
-                {
-                BTN_LF2,
-                2282478
-                },
-                {
-                BTN_LF3,
-                2282478
-                },
-                {
-                BTN_LF4,
-                2282478
-                },
-                {
-                BTN_LT1,
-                2282478
-                },
-                {
-                BTN_LT2,
-                2282478
-                },
-                {
-                BTN_RF1,
-                2282478
-                },
-                {
-                BTN_RF2,
-                2282478
-                },
-                {
-                BTN_RF3,
-                2282478
-                },
-                {
-                BTN_RF4,
-                2282478
-                },
-                {
-                BTN_RF5,
-                2282478
-                },
-                {
-                BTN_RF6,
-                2282478
-                },
-                {
-                BTN_RF7,
-                2282478
-                },
-                {
-                BTN_RF8,
-                2282478
-                },
-                {
-                BTN_RT1,
-                2282478
-                },
-                {
-                BTN_RT2,
-                2282478
-                },
-                {
-                BTN_RT3,
-                2282478
-                },
-                {
-                BTN_RT4,
-                2282478
-                },
-                {
-                BTN_RT5,
-                2282478
-                },
-                {
-                BTN_MB1,
-                2282478
-                }
-          },
-          .animation = RGB_ANIM_STATIC
-        },
-
+        // Ultimate: empty static mappings leave all pixels cleared/off.
+        RgbConfig { .button_colors_count = 0, .animation = RGB_ANIM_STATIC },
 
         RgbConfig {
-          // Private Ultimate profile: no configured button colours (off).
-          .button_colors_count = 0,
+          .button_colors_count = 16,
           .button_colors = {
             {
               BTN_LF1,

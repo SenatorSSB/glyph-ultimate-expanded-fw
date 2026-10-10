@@ -594,7 +594,7 @@ void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const 
         return;
     }
 
-    const RuntimeTableId direction_plus_a_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
+    const RuntimeTableId direction_plus_a_table_id = RuntimeTableId::Default;
     const size_t direction_plus_a_index = roles.direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
     const StickPoint direction_plus_a_point = LookupRuntimeStickPoint(runtime_config, direction_plus_a_table_id, direction_plus_a_index);
     outputs.leftStickX = direction_plus_a_point.x;
@@ -690,9 +690,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         effective_directions.down, // Down (LT6/LF5, suppressed by forced-Up)
         effective_directions.up, // Up (RF5, LT3/Y2+RF2, and LF4+RF3 forced-Up)
         inputs.rt3, // C-Left
-        inputs.rt4, // C-Right
+        inputs.rt5, // C-Right (physical RT5, identity profile mapping)
         inputs.rt2, // C-Down
-        inputs.rt5, // C-Up
+        inputs.rt4, // C-Up (physical RT4, identity profile mapping)
         ANALOG_STICK_MIN,
         ANALOG_STICK_NEUTRAL,
         ANALOG_STICK_MAX,
@@ -702,7 +702,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     // Senscope Glyph Smash Box runtime begin
     // Analog priority: table output, direction-plus-A, RF6 low magnitude,
     // RF7 hard Up+B, C-stick ASDI, RF9 null, then the pre-existing nunchuk override below.
-    const bool rf4_rf2_minus41_active = roles.rf4_behavior_available && inputs.rf2 && !inputs.lt3 && !inputs.lf4 && !roles.rt1_rf4_custom_active;
+    const bool rf4_rf2_minus41_active = false; // No legacy Y-button table override in this profile.
     RuntimeTableId active_table_id = SelectRuntimeTableId(
         roles.mode_active,
         roles.x1_active,
@@ -737,15 +737,9 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         }
     }
 
-    // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
-    // angled fsmash).
-    if (directions.cx != 0 && directions.cy != 0) {
-        // 5250 8500 = 42 68
-        outputs.rightStickX = 128 + (directions.cx * 42);
-        outputs.rightStickY = 128 + (directions.cy * 68);
-    }
-
-    ApplyRF3VerticalCStickDiagonalOverride(inputs, effective_directions, directions, outputs);
+    // Exact owner-supplied C-stick grid, including all four diagonals and neutral.
+    outputs.rightStickX = 128 + directions.cx * 89;
+    outputs.rightStickY = 128 + directions.cy * 127;
 
     if (roles.null_modifier_active) {
         ApplyNullOverride(outputs);
