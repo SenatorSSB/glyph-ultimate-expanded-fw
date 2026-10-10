@@ -567,6 +567,9 @@ def c024_processor_evidence():
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
     current = proof.authenticate(ROOT)
     assert current['phase'] == 'SOURCE_FREE_PROCESSOR'
+    assert current['accepted_metadata_paths'] == frozenset((
+        proof.C024_EVIDENCE, proof.C024_RESULT, proof.C024_ARCHIVE))
+    assert proof.authenticate_c024_phase(ROOT, proof.C024_R)['accepted_metadata_paths'] == frozenset()
     from glyph_hardware_correspondence import classify_path
     for path in (*proof.C024_HARDWARE_HANDOFF_PATHS, proof.C024_ARCHIVE):
         assert classify_path(path) == 'NON_BEHAVIORAL'

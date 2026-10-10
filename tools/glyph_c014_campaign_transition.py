@@ -1317,7 +1317,9 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
     return dict(phase=phase, contract='c024_selector_identity', candidate=C024_C,
                 processor_evidence_commit=processor,
                 base=C024_B, target=head, critical_paths=critical,
-                source_candidates={**source_candidates, **sources}, accepted_metadata_paths=frozenset(),
+                source_candidates={**source_candidates, **sources},
+                accepted_metadata_paths=(frozenset((C024_EVIDENCE, C024_RESULT, C024_ARCHIVE))
+                                         if processor else frozenset()),
                 authorized_source_paths=frozenset(authorized_sources),
                 changed_paths=frozenset(changed))
 
