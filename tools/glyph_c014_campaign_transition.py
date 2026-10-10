@@ -1387,6 +1387,7 @@ C024_PROCESSOR_PATHS = frozenset((
     'tools/glyph_c014_campaign_transition.py', 'tools/glyph_campaign_transition.py',
     'tools/test_glyph_c014_campaign_transition.py',
     'tools/check_glyph_gp_config019_usb_name_selection.py',
+    'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',
 ))
 C024_ROWS = ('valid_startup', 'duplicate_or_empty_profile_selection',
              'keyboard_dinput', 'reconnect_reboot', 'restoration', 'rollback',
