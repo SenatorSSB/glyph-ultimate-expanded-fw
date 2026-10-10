@@ -997,6 +997,7 @@ C024_TREE = '15ed2d35d561d6b1709499fe42083ca4d789e920'
 C024_HANDOFF = '4bfb3777a4f484f091f0d8054230e3eb9ac3dee2'
 C024_PROOF = 'docs/calibration/fixtures/gp_config_024_usb_profile_identity_repair.json'
 C024_MENU = 'HAL/pico/src/display/DefaultConfigMenu.cpp'
+C024_TRANSITIONS = 'docs/runtime_config/fixtures/gp_val042_accepted_transitions.json'
 C024_CANDIDATE_PATHS = frozenset((
     C024_MENU,
     'tools/check_glyph_gp_config024_usb_profile_identity.py',
@@ -1008,7 +1009,6 @@ C024_CANDIDATE_PATHS = frozenset((
     'docs/runtime_config/fixtures/glyph_checker_census.json',
     'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     'docs/runtime_config/runtime_config_validation_health.md',
-    C024_TRANSITIONS,
 ))
 C024_HARDWARE_HANDOFF_PATHS = frozenset((
     'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md',
@@ -1453,7 +1453,6 @@ C024_F = '8ab1173b0690f5ed3e994f95af797c9e9a265525'
 C024_EVIDENCE = 'docs/calibration/fixtures/gp_config_024_hardware_evidence.json'
 C024_RESULT = 'docs/calibration/gp_config_024_hardware_result.md'
 C024_PROTOCOL = 'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md'
-C024_TRANSITIONS = 'docs/runtime_config/fixtures/gp_val042_accepted_transitions.json'
 C024_ARCHIVE = 'docs/calibration/fixtures/gp_config_024_human_session_archive.json'
 C024_ARCHIVE_SHA256 = '6b9979fe81876f37bbd00ff7b76c0a81bee940692aa73aeed52d7a2b9776312c'
 C024_PROCESSOR_PATHS = frozenset((
