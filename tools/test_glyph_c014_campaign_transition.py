@@ -569,7 +569,6 @@ def c024_processor_evidence():
     assert current['phase'] == 'SOURCE_FREE_PROCESSOR'
     assert current['accepted_metadata_paths'] == frozenset((
         proof.C024_EVIDENCE, proof.C024_RESULT, proof.C024_ARCHIVE))
-    assert proof.authenticate_c024_phase(ROOT, proof.C024_R)['accepted_metadata_paths'] == frozenset()
     from glyph_hardware_correspondence import classify_path
     for path in (*proof.C024_HARDWARE_HANDOFF_PATHS, proof.C024_ARCHIVE):
         assert classify_path(path) == 'NON_BEHAVIORAL'
@@ -598,6 +597,9 @@ def c024_processor_evidence():
         (root / '.git/objects/info/alternates').write_text(str(common.resolve() / 'objects') + '\n')
         git(root, 'config', 'user.name', 'Synthetic evidence test')
         git(root, 'config', 'user.email', 'synthetic-evidence@example.invalid')
+        checkout(root, proof.C024_R)
+        pending = proof.authenticate(root)
+        assert pending['phase'] == 'SOURCE_FREE_CANDIDATE' and pending['accepted_metadata_paths'] == frozenset()
         E = current['target']; checkout(root, E)
         write(root,'docs/AGENT_CONTEXT.md',(root/'docs/AGENT_CONTEXT.md').read_bytes()+b'\n')
         commit(root,'source-free evidence descendant')
