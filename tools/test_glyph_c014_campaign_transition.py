@@ -566,7 +566,7 @@ def c024_processor_evidence():
     os.environ['GIT_OPTIONAL_LOCKS'] = '0'
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
     current = proof.authenticate(ROOT)
-    assert current['phase'] in {'SOURCE_FREE_PROCESSOR', 'CANDIDATE_VALIDATION_ONLY'}
+    assert current['phase'] in {'SOURCE_FREE_PROCESSOR', 'CANDIDATE_VALIDATION_ONLY', 'ACCEPTED_TRANSITION'}
     assert current['processor_evidence_commit']
     assert current['accepted_metadata_paths'] == frozenset((
         proof.C024_EVIDENCE, proof.C024_RESULT, proof.C024_ARCHIVE))

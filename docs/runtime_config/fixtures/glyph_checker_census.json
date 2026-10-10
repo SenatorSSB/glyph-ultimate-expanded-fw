@@ -6709,7 +6709,7 @@
       },
       "checker_id": "gp_config019_usb_name_selection",
       "defines_main": true,
-      "file_size_bytes": 43938,
+      "file_size_bytes": 43986,
       "hard_coded_branch_like_strings": [
         "C024_exact_candidate_proof",
         "candidate",
@@ -6804,7 +6804,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "5e2acf7c58a1d810719dbbf2f2f67f8705d0ea3c3964daf413c06012aba5c054",
+      "sha256": "efd7568fdda52e153bb7ea76fc3d827932a9bc228eb75d628de6404090eb7402",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

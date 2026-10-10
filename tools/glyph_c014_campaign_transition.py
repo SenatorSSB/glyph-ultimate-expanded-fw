@@ -1008,6 +1008,7 @@ C024_CANDIDATE_PATHS = frozenset((
     'docs/runtime_config/fixtures/glyph_checker_census.json',
     'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     'docs/runtime_config/runtime_config_validation_health.md',
+    C024_TRANSITIONS,
 ))
 C024_HARDWARE_HANDOFF_PATHS = frozenset((
     'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md',
@@ -1029,6 +1030,7 @@ VAL045_PATHS = frozenset((
     'docs/runtime_config/fixtures/glyph_checker_census.json',
     'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     'docs/runtime_config/runtime_config_validation_health.md',
+    C024_TRANSITIONS,
 ))
 
 
