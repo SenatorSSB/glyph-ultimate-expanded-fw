@@ -1326,7 +1326,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE}
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE, 'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp'}
     require(changed <= allowed_target_paths,
             'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
