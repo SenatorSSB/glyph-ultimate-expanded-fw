@@ -1192,10 +1192,12 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         integration = merges[0]
         require(original.ancestor(root, integration, head), 'C024 exact integration is not in target ancestry')
         post_integration = get(root, 'rev-list', '--first-parent', '--reverse', integration + '..' + head).decode().split()
+        post_i_validation_paths = C024_PROCESSOR_PATHS | frozenset((
+            'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',))
         for revision in post_integration:
             changed_since_i = set(filter(None, get(root, 'diff', '--name-only', '--no-renames', '-z',
                                                     integration, revision).decode().split('\0')))
-            require(changed_since_i <= C024_PROCESSOR_PATHS,
+            require(changed_since_i <= post_i_validation_paths,
                     'C024 post-integration change outside validation/evidence paths')
         accepted = original.item(root, C024_P, 'GP-CONFIG-024')
         processor = authenticate_c024_processor(root, C024_P, accepted,
@@ -1327,7 +1329,7 @@ def authenticate_c024_phase(root: Path, head: str | None = None) -> dict:
         raise CorrespondenceError('VAL045 current critical tree is outside exact B/C024')
 
     changed = set(filter(None, get(root, 'diff', '--no-renames', '--name-only', '-z', C024_B, head).decode().split('\0')))
-    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE, 'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp'}
+    allowed_target_paths = C024_CANDIDATE_PATHS | VAL045_PATHS | C024_HARDWARE_HANDOFF_PATHS | {C024_ARCHIVE}
     require(changed <= allowed_target_paths,
             'VAL045 target exceeds exact candidate/governance/hardware-handoff envelope: ' + repr(sorted(changed - allowed_target_paths)))
     for path in changed:
@@ -1388,7 +1390,6 @@ C024_PROCESSOR_PATHS = frozenset((
     'tools/glyph_c014_campaign_transition.py', 'tools/glyph_campaign_transition.py',
     'tools/test_glyph_c014_campaign_transition.py',
     'tools/check_glyph_gp_config019_usb_name_selection.py',
-    'tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp',
 ))
 C024_ROWS = ('valid_startup', 'duplicate_or_empty_profile_selection',
              'keyboard_dinput', 'reconnect_reboot', 'restoration', 'rollback',

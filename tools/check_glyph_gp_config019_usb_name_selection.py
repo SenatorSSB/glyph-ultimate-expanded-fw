@@ -557,11 +557,16 @@ inline PersistenceValidatorSetup persistence_validator_setup;
     result = execute([str(binary)])
     require(not result.stderr, 'current sanitizer stderr')
     rows = result.stdout.splitlines()
-    require(rows == value['historical_expected_rows'] + value['current_expected_rows'], 'current observation/control mismatch:\n' + result.stdout)
-    require(sum('CMD_SUCCESS saves=1' in r for r in rows[18:38]) == value['valid_controls'] == 8 and
-            sum('CMD_ERROR saves=0 live=BYTE_EXACT saved=BYTE_EXACT' in r for r in rows[18:38]) ==
+    require(rows == value['current_expected_rows'], 'current binding-control mismatch:\n' + result.stdout)
+    require(sum('CMD_SUCCESS saves=1' in r for r in rows[:20]) == value['valid_controls'] == 8 and
+            sum('CMD_ERROR saves=0 live=BYTE_EXACT saved=BYTE_EXACT' in r for r in rows[:20]) ==
             value['decoded_invalid_controls'] == 12, 'current false acceptance/control census')
-    return {'status': 'PASS', 'original_observations': rows[:18], 'current_controls': rows[18:],
+    require(campaign.get('contract') == 'c024_selector_identity'
+            and campaign.get('candidate') == '8ab1173b0690f5ed3e994f95af797c9e9a265525'
+            and campaign.get('source_candidates', {}).get('HAL/pico/src/display/DefaultConfigMenu.cpp')
+                == campaign.get('candidate'), 'current C024 selector route lacks exact authenticated candidate source')
+    return {'status': 'PASS', 'historical_selector_rows': 'executed only on authenticated historical source',
+            'current_controls': rows, 'selector_identity_candidate': campaign['candidate'],
             'valid_controls': 8, 'real_decoded_invalid_controls': 12, 'source_files': 34,
             'checked_load': 'actual accepted C021/C022/C023 methods and validators; exact CRC32 file adapter',
             'acceptance_sha256': value['current_fragments']['acceptance'], 'commands': commands,
@@ -605,7 +610,7 @@ def overlay_main():
                 print('gp_config019 historical: PASS observations=18 identity_negatives=160 sources=32 fragments=12 ASan_UBSan=PASS')
             if args.route in {'both', 'current'}:
                 evidence['current'] = current_route(temp, value, current, campaign)
-                print('gp_config019 current: PASS original_observations=18 valid_controls=8 decoded_invalid_controls=12 sources=34 ASan_UBSan=PASS')
+                print('gp_config019 current: PASS binding_controls=20 historical_selector=separate exact_C024_source=authenticated valid_controls=8 decoded_invalid_controls=12 ASan_UBSan=PASS')
         # Recheck live inputs after execution. No proof result is cached.
         authenticate_current()
         if args.report:

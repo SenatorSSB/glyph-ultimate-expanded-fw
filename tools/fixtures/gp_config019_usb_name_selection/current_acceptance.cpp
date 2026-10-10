@@ -80,12 +80,15 @@ static void binding_case(bool empty_name, bool backend_binding, unsigned button)
 
 int main() {
     try {
-        require(gp_config019_original_main() == 0, "original 18 observations failed against current acceptance");
+        // The selector rows in the historical C019 main are name-based and
+        // are executed only by historical_route(). C024 current selector
+        // behavior is checked by its exact candidate proof; this route keeps
+        // the current Configurator binding acceptance and rejection controls.
         for (bool empty_name : {false, true})
             for (bool backend_binding : {false, true})
                 for (unsigned button : {1u, 60u, 0u, 61u, 255u})
                     binding_case(empty_name, backend_binding, button);
-        row("current_result", "PASS observations=18 valid_controls=8 decoded_invalid_controls=12 ABI=short_enum ASan_UBSan=PASS hardware=NOT_CLAIMED");
+        row("current_result", "PASS binding_controls=20 valid_controls=8 decoded_invalid_controls=12 selector=C024_exact_candidate_proof ABI=short_enum ASan_UBSan=PASS hardware=NOT_CLAIMED");
         return 0;
     } catch (const std::exception &error) {
         std::cerr << error.what() << '\n';
