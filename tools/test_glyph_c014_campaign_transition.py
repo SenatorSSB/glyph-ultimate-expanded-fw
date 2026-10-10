@@ -567,6 +567,12 @@ def c024_processor_evidence():
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1'
     current = proof.authenticate(ROOT)
     assert current['phase'] == 'SOURCE_FREE_PROCESSOR'
+    from glyph_hardware_correspondence import classify_path
+    for path in (*proof.C024_HARDWARE_HANDOFF_PATHS, proof.C024_ARCHIVE):
+        assert classify_path(path) == 'NON_BEHAVIORAL'
+    assert classify_path(proof.C024_MENU) == 'CRITICAL'
+    reject(lambda: classify_path('docs/calibration/fixtures/gp_config_024_unreviewed_neighbor.json'),
+           'unreviewed neighboring evidence path')
     evidence = json.loads(proof.original.raw_bytes(ROOT, current['target'], proof.C024_EVIDENCE))
     proof.validate_c024_processor_rows(evidence)
     count = 1

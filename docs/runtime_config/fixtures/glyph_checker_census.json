@@ -6435,9 +6435,11 @@
       },
       "checker_id": "gp_config012_button_mask_characterization",
       "defines_main": true,
-      "file_size_bytes": 25483,
+      "file_size_bytes": 32007,
       "hard_coded_branch_like_strings": [
         "candidate",
+        "candidate.",
+        "candidate_decode",
         "configurator",
         "enum_evidence",
         "enum_evidence.append",
@@ -6449,11 +6451,13 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 442,
+      "line_count": 554,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config012_button_mask_characterization.py",
       "potential_branch_identity_signals": [
         "candidate",
+        "candidate.",
+        "candidate_decode",
         "configurator",
         "enum_evidence",
         "enum_evidence.append",
@@ -6478,9 +6482,12 @@
         "include/glyph_overrides.hpp",
         "include/modes/CustomControllerMode.hpp",
         "src/config.cpp",
+        "src/core/config_button_validation.cpp",
         "src/core/config_utils.cpp",
+        "src/core/config_validation.cpp",
         "src/core/mode_selection.cpp",
         "src/display/GlyphConfigMenu.cpp",
+        "src/glyph_config_validation.cpp",
         "src/modes/CustomControllerMode.cpp",
         "tools/fixtures/custom_modifier_cache_host/include",
         "tools/fixtures/gp_config012_button_host"
@@ -6489,7 +6496,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "f515c1c806494acaf60d38dc2d92aaef10e1d292998abe322161fda6ea0cfcd1",
+      "sha256": "81add926513a0e786ace99e932d9fc53ea2dece9f407251e09627319eb0d8774",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -6702,9 +6709,10 @@
       },
       "checker_id": "gp_config019_usb_name_selection",
       "defines_main": true,
-      "file_size_bytes": 32807,
+      "file_size_bytes": 41760,
       "hard_coded_branch_like_strings": [
         "candidate",
+        "candidate_current_fragments",
         "candidate_successor",
         "configurator",
         "evidence",
@@ -6716,11 +6724,12 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 467,
+      "line_count": 618,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config019_usb_name_selection.py",
       "potential_branch_identity_signals": [
         "candidate",
+        "candidate_current_fragments",
         "candidate_successor",
         "configurator",
         "evidence",
@@ -6748,15 +6757,26 @@
         "docs/calibration/gp_config_019_usb_name_selection_characterization.md",
         "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
         "docs/runtime_config/fixtures/gp_val041_usb_name_current_acceptance.json",
+        "docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json",
         "docs/runtime_config/gp_val041_usb_name_current_acceptance.md",
+        "include/config_rgb_target_domain.hpp",
+        "include/core/config_rgb_target_validation.hpp",
+        "include/core/config_usb_default_validation.hpp",
+        "include/core/config_validation.hpp",
         "include/display/GlyphConfigMenu.hpp",
+        "include/glyph_config_validation.hpp",
         "include/glyph_overrides.hpp",
+        "include/neopixel_definitions.hpp",
         "include/reboot.hpp",
         "src/config.cpp",
         "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
         "src/core/config_utils.cpp",
+        "src/core/config_validation.cpp",
         "src/core/mode_selection.cpp",
         "src/display/GlyphConfigMenu.cpp",
+        "src/glyph_config_validation.cpp",
         "tools/check_glyph_gp_config019_usb_name_selection.py",
         "tools/fixtures/gp_config012_button_host",
         "tools/fixtures/gp_config012_button_host/LICENSE.nanopb.txt",
@@ -6772,13 +6792,15 @@
         "tools/fixtures/gp_config019_usb_name_selection",
         "tools/fixtures/gp_config019_usb_name_selection/current_acceptance.cpp",
         "tools/fixtures/gp_config019_usb_name_selection/include/host_stubs.hpp",
-        "tools/fixtures/gp_config019_usb_name_selection/main.cpp"
+        "tools/fixtures/gp_config019_usb_name_selection/main.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h"
       ],
       "runtime_config_relevance_signals": [
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "27b0e5afa9cf1637a71dc00a60fd6702382d364824eedecebe09923e3e558d42",
+      "sha256": "0ab1e2796d13ff9bd8cf0005bcc7f9e45b514b8fbbea96e2912e4d2bec6e6e07",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -7419,6 +7441,79 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_config023_usb_index_validation",
+      "defines_main": true,
+      "file_size_bytes": 16786,
+      "hard_coded_branch_like_strings": [
+        "branch",
+        "candidate",
+        "candidate_base"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 286,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "potential_branch_identity_signals": [
+        "branch",
+        "candidate",
+        "candidate_base"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_config023_usb_index_validation",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "docs/runtime_config/fixtures/gp_config023_usb_index_validation.json",
+        "docs/runtime_config/gp_config023_usb_index_validation.md",
+        "include/core/config_button_validation.hpp",
+        "include/core/config_usb_default_validation.hpp",
+        "include/core/config_validation.hpp",
+        "src/config.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "tools/fixtures/gp_config012_button_host",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.c",
+        "tools/fixtures/gp_config012_button_host/generated/config.pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_common.h",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.c",
+        "tools/fixtures/gp_config012_button_host/nanopb/pb_decode.h",
+        "tools/fixtures/gp_config023_usb_host",
+        "tools/fixtures/gp_config023_usb_host/host_stubs.hpp",
+        "tools/fixtures/gp_config023_usb_host/usb_index_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "1a244387c306479d940284c0217085efd23c1416856a436737cc9224181889ea",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_config_007_transaction_stage_schema",
       "defines_main": true,
       "file_size_bytes": 13409,
@@ -7545,7 +7640,7 @@
       },
       "checker_id": "gp_kbd_001_keyboard_pipeline",
       "defines_main": true,
-      "file_size_bytes": 10210,
+      "file_size_bytes": 10826,
       "hard_coded_branch_like_strings": [
         "candidate"
       ],
@@ -7554,7 +7649,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 202,
+      "line_count": 212,
       "parse_error": null,
       "path": "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
       "potential_branch_identity_signals": [
@@ -7597,7 +7692,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "c15ccd4ddc7ae3a88913934afb574fbf647777dd53ceb6060695b938dafacdc8",
+      "sha256": "3372cac80ac5d6666f8013f4c524beb1cd0a09d4b09b326f49ea5967fdeeb2fc",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,

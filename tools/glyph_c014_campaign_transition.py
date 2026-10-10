@@ -1351,6 +1351,8 @@ C024_PROTOCOL = 'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md'
 C024_ARCHIVE = 'docs/calibration/fixtures/gp_config_024_human_session_archive.json'
 C024_ARCHIVE_SHA256 = '6b9979fe81876f37bbd00ff7b76c0a81bee940692aa73aeed52d7a2b9776312c'
 C024_PROCESSOR_PATHS = frozenset((
+    'docs/runtime_config/fixtures/glyph_checker_census.json',
+    'docs/runtime_config/fixtures/runtime_config_validation_health.json',
     C024_EVIDENCE, C024_RESULT, C024_ARCHIVE,
     'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md', QUEUE,
     'tools/glyph_c014_campaign_transition.py', 'tools/glyph_campaign_transition.py',

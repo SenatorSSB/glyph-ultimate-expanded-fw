@@ -13,6 +13,9 @@ from glyph_hardware_correspondence import CorrespondenceError, classify_path, ve
 # paths with the shared classifier when this campaign router is loaded; do not
 # infer a directory prefix or classify neighboring files.
 VAL045_EVIDENCE_PATHS = frozenset((
+    'docs/agent_framework/GP_CONFIG_024_HARDWARE_PROTOCOL.md',
+    'docs/calibration/gp_config_024_hardware_result.md',
+    'docs/calibration/fixtures/gp_config_024_hardware_evidence.json',
     'docs/calibration/fixtures/gp_config_024_human_session_archive.json',
     'docs/runtime_config/gp_val045_usb_identity_correspondence.md',
     'docs/runtime_config/fixtures/gp_val045_usb_identity_correspondence.json',
