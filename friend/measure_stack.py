@@ -4,7 +4,7 @@ Outputs go to private verification, never replace firmware build objects.
 """
 import json, pathlib, shlex, subprocess
 root=pathlib.Path(__file__).resolve().parents[1]
-out=root.parent/'verification'
+out=root.parent/'storage-recovery-v2'/'verification'
 path=root/'compile_commands.json'
 if not path.exists(): path=out/'compile_commands.json'
 database=json.loads(path.read_text())

@@ -1,7 +1,9 @@
 # Owner/friend first-boot protocol
 
 Status until a human reports the exact artifact test:
-NOT_TESTED / PRIVATE_BUILD_READY_FOR_OWNER_TEST.
+NOT_TESTED / PRIVATE_REPAIR_READY_FOR_OWNER_TEST.
+For storage-recovery-v2, first pass OWNER_STORAGE_RETEST.md; only then run this
+wider matrix against the NEW artifact identified by its repaired manifest.
 
 Record the private commit and complete firmware SHA-256 from BUILD_MANIFEST.md,
 controller revision, cable/adapter/console, backend and date. Test this exact

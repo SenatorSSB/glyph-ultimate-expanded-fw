@@ -37,6 +37,11 @@ class Persistence {
     bool SetValidator(ConfigSemanticValidator validator);
     bool ValidateConfig(const Config &config, ConfigValidationError &error) const;
     bool IsAvailable() const;
+#if defined(GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY)
+    // Owner-authorized private Mk6 installer only; never a canonical recovery API.
+    enum class PrivateFriendStorageResult { Available, Recovered, ConfigurationFailure, FormatFailure, RemountFailure };
+    PrivateFriendStorageResult PrivateFriendRecoverUnmountableStorage();
+#endif
     LoadResult LoadConfigChecked(Config &config);
 
     bool SaveConfig(Config &config);

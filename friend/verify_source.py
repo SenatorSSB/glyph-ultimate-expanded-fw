@@ -4,11 +4,23 @@ import json, pathlib, subprocess
 root=pathlib.Path(__file__).resolve().parents[1]
 base='28ba39da5f517baa40f3dee8d868c9bb583dde4a'
 def baseline(path): return subprocess.check_output(['git','show',base+':'+path],cwd=root).decode()
-untouched=['HAL/pico/src/core/Persistence.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp',
+untouched=['src/core/config_validation.cpp','src/core/config_button_validation.cpp',
            'src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp',
            'src/core/config_usb_default_validation.cpp','HAL/pico/src/comms/backend_init.cpp','HAL/pico/src/comms/ConfiguratorBackend.cpp',
            'src/core/InputMode.cpp','src/core/ControllerMode.cpp','src/core/socd.cpp']
 for path in untouched: assert (root/path).read_text()==baseline(path),path
+import re
+for path in ['HAL/pico/src/core/Persistence.cpp','HAL/pico/include/core/Persistence.hpp']:
+    private=(root/path).read_text()
+    stripped=re.sub(r'\n#if defined\(GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY\)\n.*?\n#endif\n','\n',private,flags=re.S)
+    assert ''.join(stripped.split())==''.join(baseline(path).split()),'canonical Persistence semantics changed: '+path
+failed='8b8d829d79810d5b4597255aabce036c6970d208'
+for path in ['src/modes/Ultimate.cpp','src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp','config/glyph/common/include/glyph_overrides.hpp']:
+    assert (root/path).read_bytes()==subprocess.check_output(['git','show',failed+':'+path],cwd=root),'friend gameplay changed: '+path
+env=(root/'config/glyph/env.ini').read_text()
+old=baseline('config/glyph/env.ini')
+addition='build_flags =\n    ${glyph_base.build_flags}\n    -D GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY=1\n'
+assert env.replace('[env:glyph_mk6]\nextends = glyph_base\n'+addition,'[env:glyph_mk6]\nextends = glyph_base\n')==old
 path='config/glyph/common/src/config.cpp'
 current=(root/path).read_text()
 stripped=current.replace('#include "friend_profile_provisioning.hpp"\n','').replace('    if (!friend_profile::provision_once(config)) {\n        refuse_boot(BootOutcome::StorageFailure, display_ready);\n        return;\n    }\n','')
@@ -19,6 +31,7 @@ assert 'static Config readback;' in helper and 'readback = Config_init_default;'
 assert 'static uint8_t encoded_expected[16384];' in helper
 assert helper.index('if (marker_valid()) return true;')<helper.index('static Config readback;')
 assert 'LittleFS.exists' not in helper and 'memcmp(&' not in helper
+assert helper.index('store.ValidateConfig(defaults, error)')<helper.index('store.PrivateFriendRecoverUnmountableStorage()')<helper.index('store.SaveConfig(defaults)')
 spec=json.loads((root/'friend/profile_spec.json').read_text())
 assert len(spec['buttons'])==34 and len(set(spec['buttons']))==34
 for name,points in spec['offsets'].items():
@@ -44,6 +57,7 @@ for start,key,end in [('.game_mode_configs = {','GameModeConfig {','.communicati
         import re
         clean=lambda s: re.sub(r'\s+','',re.sub(r'//[^\n]*','',s))
         assert clean(old[i])==clean(new[i]),('unrelated profile/RGB changed',i)
-print('SOURCE PASS: C021/C022/C023/C024-era validators, persistence, backend selection and refusal gates retained; only bounded boot hook added')
+print('SOURCE PASS: current validators/backend/refusal gates retained; Persistence canonical bodies unchanged after removing private macro block; recovery enabled only in private glyph_mk6')
+print('SOURCE PASS: all gameplay/routing/table/default/RGB source byte-identical to failed snapshot; defaults validate before format; mounted bypass; no generic autoformat')
 print('SOURCE PASS: static reset/readback/equality buffer; marker-present short path; no exists-only marker; no raw Config memcmp')
 print('SOURCE PASS: all 34 normalized bindings, all coordinate ranges; 12 unrelated profiles and RGB configs unchanged')

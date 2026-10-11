@@ -36,18 +36,29 @@ struct LittleFSHost {
     bool mounted = false, fail_config_write_open = false, fail_config_read_open = false;
     bool fail_marker_write_open = false, fail_marker_read_after_write = false;
     unsigned config_writes = 0, marker_writes = 0;
+    unsigned begin_calls = 0, format_calls = 0, end_calls = 0;
+    bool configuration_ok = true, initial_mount_ok = true, format_ok = true, remount_ok = true;
+    bool auto_format_seen = false;
     void (*before_config_read)() = nullptr;
-    bool setConfig(const LittleFSConfig &c) { return !c.auto_format; }
-    bool begin() { mounted = true; return true; }
-    void end() { mounted = false; }
+    bool setConfig(const LittleFSConfig &c) { auto_format_seen |= c.auto_format; return configuration_ok && !c.auto_format; }
+    bool begin() { ++begin_calls; mounted = format_calls ? remount_ok : initial_mount_ok; return mounted; }
+    void end() { ++end_calls; mounted = false; }
+    bool format() { ++format_calls; if (!format_ok) return false; files.clear(); return true; }
     void reset() {
         files.clear(); config_fault = {}; marker_fault = {};
         fail_config_write_open = fail_config_read_open = fail_marker_write_open = fail_marker_read_after_write = false;
         config_writes = marker_writes = 0; before_config_read = nullptr;
+        begin_calls = format_calls = end_calls = 0;
+        configuration_ok = initial_mount_ok = format_ok = remount_ok = true; auto_format_seen = false;
     }
     bool remove(const char *path) { return files.erase(path) != 0; }
     bool exists(const char *path) { return files.count(path) != 0; }
     File open(const char *path, const char *mode) {
+        // Enforce the exact target's path-component limit, missed by v1 tests.
+        std::string name(path); size_t start = 0;
+        for (size_t i=0;i<=name.size();++i) if(i==name.size() || name[i]=='/') {
+            if(i-start>=32) return {}; start=i+1;
+        }
         bool config = std::string(path) == "config.bin";
         if (!mounted) return {};
         if (mode[0] == 'w') {

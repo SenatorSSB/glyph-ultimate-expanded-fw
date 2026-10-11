@@ -3,6 +3,7 @@
 Run after final clean wrapper build and read-only inspection are complete.
 """
 import hashlib, json, pathlib, shutil, subprocess, sys
+raise SystemExit('The v1 package physically FAILED and is immutable evidence. Use friend/assemble_storage_recovery_package.py for the separately versioned repair.')
 root=pathlib.Path(__file__).resolve().parents[1]; task=root.parent
 package=task/'package'; verification=task/'verification'; profile=task/'profile'
 def git(*args): return subprocess.check_output(['git',*args],cwd=root).decode().strip()

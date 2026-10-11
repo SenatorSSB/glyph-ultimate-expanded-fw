@@ -189,6 +189,68 @@ static void provisioning() {
     LittleFS.reset(); changed=baked; LittleFS.config_fault.read_limit=1; fail("config short read");
     std::cout<<"PROVISION A-J; production validator; CRC + real nanopb roundtrip; stale-buffer repeated failure; marker readback/open/partial failures PASS\n";
 }
+static void storage_recovery() {
+    using namespace friend_profile;
+    auto install_validator=[](Persistence &store) { require(store.SetValidator(validate_glyph_config),"recovery validator installed"); };
+    auto boot=[](Persistence &store) { return provision_once(baked,store) && store.LoadConfigChecked(loaded)==Persistence::LoadResult::Loaded; };
+    // Actual constructor is exercised for each simulated boot, rather than
+    // toggling only the filesystem double while Persistence caches availability.
+    LittleFS.reset(); {
+        Persistence store; install_validator(store); changed=baked; changed.rgb_brightness=22;
+        require(store.SaveConfig(changed),"R1 old valid Config installed");
+        require(boot(store) && LittleFS.format_calls==0 && loaded.rgb_brightness==255,"R1 mounted adopts, never formats");
+        require(marker_valid(),"R1 exact marker");
+    }
+    { Persistence store; install_validator(store); unsigned writes=LittleFS.config_writes;
+        require(boot(store) && LittleFS.config_writes==writes && LittleFS.format_calls==0,"R2 mounted valid marker skips format/rewrite"); }
+    LittleFS.reset(); LittleFS.initial_mount_ok=false; {
+        Persistence store; install_validator(store);
+        require(!store.IsAvailable() && !store.SaveConfig(baked) && LittleFS.config_writes==0,"old cached mount failure makes SaveConfig fail immediately");
+        require(boot(store) && store.IsAvailable(),"R3 recover then ordinary checked-load boot continues");
+        size_t e=0,a=0; require(config_equal(baked,loaded,e,a) && e==3779 && a==3779,"R3 exact recovered full Config");
+        require(marker_valid() && LittleFS.format_calls==1 && LittleFS.begin_calls==2 && !LittleFS.auto_format_seen,"R3 one explicit format/remount, exact marker, no implicit autoformat");
+    }
+    LittleFS.initial_mount_ok=true; { Persistence store; install_validator(store); unsigned formats=LittleFS.format_calls,writes=LittleFS.config_writes;
+        require(boot(store) && LittleFS.format_calls==formats && LittleFS.config_writes==writes,"R9 actual second constructor boot no format/rewrite");
+        changed=baked; changed.rgb_brightness=51; require(store.SaveConfig(changed),"R10 user change after recovered install"); }
+    { Persistence store; install_validator(store); unsigned formats=LittleFS.format_calls,writes=LittleFS.config_writes;
+        require(boot(store) && loaded.rgb_brightness==51 && LittleFS.format_calls==formats && LittleFS.config_writes==writes,"R10 later boot preserves user change"); }
+    for (int fault=0;fault<7;++fault) {
+        LittleFS.reset(); LittleFS.initial_mount_ok=false;
+        if(fault==0)LittleFS.format_ok=false;
+        if(fault==1)LittleFS.remount_ok=false;
+        if(fault==2)LittleFS.fail_config_write_open=true;
+        if(fault==3)LittleFS.before_config_read=alter_readback;
+        if(fault==4)LittleFS.marker_fault.write_limit=7;
+        if(fault==5)LittleFS.fail_marker_read_after_write=true;
+        if(fault==6)LittleFS.fail_marker_write_open=true;
+        Persistence store; install_validator(store);
+        require(!boot(store) && !marker_valid(),"R4-R8 recovery fault safely refuses "+std::to_string(fault));
+        require(LittleFS.format_calls==1,"R4-R8 exactly one bounded format attempt");
+        if(fault<2)require(!store.IsAvailable() && LittleFS.config_writes==0,"failed format/remount cannot save");
+    }
+    LittleFS.reset(); LittleFS.configuration_ok=false; {
+        Persistence store; install_validator(store);
+        require(!boot(store) && LittleFS.begin_calls==0 && LittleFS.format_calls==0,"configuration failure not misclassified as mount failure; no format");
+    }
+    LittleFS.reset(); LittleFS.initial_mount_ok=false; {
+        Persistence store; install_validator(store); changed=baked; changed.game_mode_configs_count=255;
+        require(!provision_once(changed,store) && LittleFS.format_calls==0,"invalid baked Config cannot authorize destructive recovery");
+    }
+    // Failed-v1 plausible states: absent Config, partial Config, valid Config,
+    // empty/partial/old marker entries. v2 never recognizes a v1 marker.
+    for(int state=0;state<4;++state) {
+        LittleFS.reset(); Persistence store; install_validator(store);
+        if(state==1) LittleFS.files["config.bin"]=std::make_shared<std::vector<uint8_t>>(3,0x42);
+        if(state>=2) { changed=baked; changed.rgb_brightness=17; require(store.SaveConfig(changed),"old Config state"); }
+        if(state>=2) { std::string old=state==2?"":"friend_ultimate_20261011_applied_v1\n";
+            LittleFS.files["/friend_ultimate_20261011_applied.flag"]=std::make_shared<std::vector<uint8_t>>(old.begin(),old.end()); }
+        require(boot(store) && loaded.rgb_brightness==255 && marker_valid() && LittleFS.format_calls==0,"old failed states safely adopt v2 on mounted storage");
+    }
+    require(sizeof(kMarkerPath)-2<=32,"new marker basename bounded by actual target");
+    std::cout<<"STORAGE RECOVERY R1-R10 PASS: mounted never formats; constructor mount failure -> explicit format/remount -> exact adoption; format/remount/save/mismatch/marker faults refuse; actual second boot/user changes preserved\n";
+    std::cout<<"STORAGE EXTRA PASS: no implicit autoformat; configuration/invalid-baked failures never format; failed-v1 absent/partial/valid Config and old marker states re-adopt v2\n";
+}
 int main(int argc,char **argv) {
     require(argc==2,"output path"); baked=glyph_default_config();
     require(baked.game_mode_configs_count==13 && baked.game_mode_configs[2].mode_id==MODE_ULTIMATE,"counts/profile");
@@ -198,7 +260,7 @@ int main(int argc,char **argv) {
         } require(found,"backend present");
     }
     auto &rgb=baked.rgb_configs[baked.game_mode_configs[2].rgb_config-1]; require(rgb.button_colors_count==0 && rgb.animation==RGB_ANIM_STATIC,"Ultimate off RGB");
-    coordinates(); cstick(); buttons(); provisioning();
+    coordinates(); cstick(); buttons(); provisioning(); storage_recovery();
     auto bytes=encoded(baked); std::ofstream file(argv[1],std::ios::binary); file.write(reinterpret_cast<const char*>(bytes.data()),bytes.size()); require(bool(file),"reference blob");
     std::cout<<"TOTAL checks="<<checks<<" PASS; hardware NOT_TESTED\n";
 }

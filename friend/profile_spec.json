@@ -26,8 +26,8 @@
   "trigger_L": 108, "trigger_R": 255,
   "rgb": "Ultimate RGB reference 3: STATIC, zero mappings; gameplay pixels cleared black",
   "default_backends": ["XInput","DInput","Switch","GameCube"],
-  "marker_path": "/friend_ultimate_20261011_applied.flag",
-  "marker_payload": "friend_ultimate_20261011_applied_v1\n",
+  "marker_path": "/friend_ult_20261011_v2.flag",
+  "marker_payload": "friend_ultimate_20261011_applied_v2\n",
   "installation_mode": "RPI_RP2_SINGLE_UF2", "separate_config_push_required": false,
   "notes": ["Tilt2 X inversion intentional", "Default direction 2 offset (-77,0) intentional and retained", "Tilt2 '-59. 40', Tilt3 '7 - 36,44', and Y/X '9,' punctuation normalized only", "LF4 affects LT3, not LF3", "Config reference contains metadata/remaps, not the source-owned coordinate tables", "Other profiles retained; no runtime-loaded coordinate architecture"]
 }

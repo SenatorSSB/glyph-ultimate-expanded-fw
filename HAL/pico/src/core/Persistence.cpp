@@ -73,6 +73,23 @@ bool Persistence::IsAvailable() const {
     return _configuration_ok && _mounted;
 }
 
+#if defined(GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY)
+Persistence::PrivateFriendStorageResult Persistence::PrivateFriendRecoverUnmountableStorage() {
+    if (!_configuration_ok) return PrivateFriendStorageResult::ConfigurationFailure;
+    if (_mounted) return PrivateFriendStorageResult::Available;
+    // The constructor already attempted begin() with auto-format disabled.
+    // Only that mount failure authorizes this private partition-level format.
+    // No files are open here; core1 remains behind the existing boot gate.
+    LittleFS.end();
+    const bool formatted = LittleFS.format();
+    // format() may mount internally to set timestamps, even on a failed return.
+    LittleFS.end();
+    if (!formatted) return PrivateFriendStorageResult::FormatFailure;
+    _mounted = LittleFS.begin();
+    return _mounted ? PrivateFriendStorageResult::Recovered : PrivateFriendStorageResult::RemountFailure;
+}
+#endif
+
 bool Persistence::SetValidator(ConfigSemanticValidator validator) {
     if (validator == nullptr) {
         return false;

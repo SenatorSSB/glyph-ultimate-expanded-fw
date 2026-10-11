@@ -1,5 +1,9 @@
 # Private friend profile focused validation
 
+HISTORICAL HOST EVIDENCE ONLY: the artifact described below subsequently failed
+physical first boot with "Config storage failure". See PHYSICAL_FAILURE.md and
+STORAGE_RECOVERY_REPORT.md. This report does not accept the failed artifact.
+
 Baseline: configurator `28ba39da5f517baa40f3dee8d868c9bb583dde4a`.
 No hardware acceptance is claimed. No flashing or device interaction was used.
 

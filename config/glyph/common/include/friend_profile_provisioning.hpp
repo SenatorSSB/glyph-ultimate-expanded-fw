@@ -7,8 +7,11 @@
 #include <cstring>
 
 namespace friend_profile {
-constexpr char kMarkerPath[] = "/friend_ultimate_20261011_applied.flag";
-constexpr char kMarkerPayload[] = "friend_ultimate_20261011_applied_v1\n";
+// The selected Arduino-Pico LittleFS compiles LFS_NAME_MAX=32.
+// The failed v1 basename had 37 bytes and cannot be created by that library.
+constexpr char kMarkerPath[] = "/friend_ult_20261011_v2.flag";
+static_assert(sizeof(kMarkerPath) - 2 < 32, "private marker basename exceeds LittleFS wrapper limit");
+constexpr char kMarkerPayload[] = "friend_ultimate_20261011_applied_v2\n";
 constexpr size_t kMarkerLength = sizeof(kMarkerPayload) - 1;
 
 inline bool marker_valid() {
@@ -62,16 +65,25 @@ inline bool config_equal(const Config &expected, const Config &actual,
         actual_stream.bytes_written == actual_length && comparison.position == expected_length;
 }
 
-inline bool provision_once(Config &defaults) {
-    if (!persistence.IsAvailable()) return false;
-    if (marker_valid()) return true;
+inline bool provision_once(Config &defaults, Persistence &store = persistence) {
     ConfigValidationError error;
-    if (!persistence.ValidateConfig(defaults, error) || !persistence.SaveConfig(defaults)) return false;
+    // Validate before any private destructive recovery, not just before save.
+    if (!store.ValidateConfig(defaults, error)) return false;
+    if (!store.IsAvailable()) {
+#if defined(GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY)
+        const auto result = store.PrivateFriendRecoverUnmountableStorage();
+        if (result != Persistence::PrivateFriendStorageResult::Available &&
+            result != Persistence::PrivateFriendStorageResult::Recovered) return false;
+#endif
+        if (!store.IsAvailable()) return false;
+    }
+    if (marker_valid()) return true;
+    if (!store.SaveConfig(defaults)) return false;
     // Match LoadConfigChecked's established stack-safe boot candidate pattern.
     static Config readback;
     readback = Config_init_default;
-    if (persistence.LoadConfigChecked(readback) != Persistence::LoadResult::Loaded ||
-        !persistence.ValidateConfig(readback, error)) return false;
+    if (store.LoadConfigChecked(readback) != Persistence::LoadResult::Loaded ||
+        !store.ValidateConfig(readback, error)) return false;
     size_t expected_length = 0, actual_length = 0;
     if (!config_equal(defaults, readback, expected_length, actual_length)) return false;
     File marker = LittleFS.open(kMarkerPath, "w");

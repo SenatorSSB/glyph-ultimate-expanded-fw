@@ -25,5 +25,5 @@ report={'result':'PASS','canonical':str(main),'main_head':git('rev-parse','HEAD'
  'canonical_configurator_local_and_live':live,'dirty_and_authority_hashes_unchanged':actual,
  'queue_roadmap_current_state_unchanged':True,'no_main_product_order_created':True,
  'runtime_loaded_coordinate_architecture_started':False,'hardware_flashing_performed':False}
-(root.parent/'verification/ISOLATION_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
+(root.parent/'storage-recovery-v2/verification/ISOLATION_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
