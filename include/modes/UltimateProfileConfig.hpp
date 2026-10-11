@@ -7,6 +7,7 @@
 // actual table identifiers; these values bound the persisted representation.
 constexpr uint8_t kUltimateProfileSchemaVersionV1 = 1;
 constexpr uint8_t kUltimateProfileSchemaVersionV2 = 2;
+constexpr uint8_t kUltimateProfileSchemaVersionV3 = 3;
 // Kept as the legacy version for Stage-A callers and source compatibility.
 constexpr uint8_t kUltimateProfileSchemaVersion = kUltimateProfileSchemaVersionV1;
 constexpr size_t kUltimateProfileTableCount = 28;

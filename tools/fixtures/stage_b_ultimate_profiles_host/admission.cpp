@@ -100,6 +100,34 @@ bool evaluate_v1(const Config &config) {
               "v1 has no Stage-B routing state");
 }
 
+bool evaluate_v3(const Config &config) {
+    if (config.ultimate_profiles_count == 0) return false;
+    const UltimateProfile &profile = config.ultimate_profiles[0];
+    bool result = true;
+    // A/B/A routing isolation: the same physical RF6 press is evaluated
+    // through profile A, a finite B permutation, then A again.  This is the
+    // production evaluator used by Ultimate before every fixed output phase.
+    const uint64_t rf6 = uint64_t{1} << (22 - 1);
+    result &= check(UltimateProfileEvaluator::RouteLogicalInputs(&profile, rf6) == rf6,
+                    "v3 profile A preserves identity routed input");
+    UltimateProfile profile_b = profile;
+    for (size_t i = 0; i < profile_b.routing_slots_count; ++i) {
+        if (profile_b.routing_slots[i].slot_id == 22) profile_b.routing_slots[i].input_token = 23;
+        else if (profile_b.routing_slots[i].slot_id == 23) profile_b.routing_slots[i].input_token = 22;
+    }
+    result &= check(UltimateProfileEvaluator::RouteLogicalInputs(&profile_b, rf6) == (uint64_t{1} << (23 - 1)),
+                    "v3 profile B changes only its routed logical input");
+    result &= check(UltimateProfileEvaluator::RouteLogicalInputs(&profile, rf6) == rf6,
+                    "v3 profile A is unchanged after B");
+    UltimateProfile reordered = profile;
+    const UltimateProfileRoutingSlot first = reordered.routing_slots[0];
+    reordered.routing_slots[0] = reordered.routing_slots[31];
+    reordered.routing_slots[31] = first;
+    result &= check(UltimateProfileEvaluator::RouteLogicalInputs(&reordered, rf6) == rf6,
+                    "v3 routing storage order does not change logical input");
+    return result;
+}
+
 }  // namespace
 
 int main(int argc, char **argv) {
@@ -123,7 +151,8 @@ int main(int argc, char **argv) {
         return 1;
     }
     if (!admitted) return 0;
-    const bool evaluated = argv[3][0] == '2' ? evaluate_v2(config) : evaluate_v1(config);
+    const bool evaluated = argv[3][0] == '3' ? evaluate_v3(config) :
+        (argv[3][0] == '2' ? evaluate_v2(config) : evaluate_v1(config));
     if (evaluated) {
         std::printf("sizeof_config=%zu\n", sizeof(Config));
     }

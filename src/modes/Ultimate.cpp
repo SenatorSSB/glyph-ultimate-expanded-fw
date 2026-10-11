@@ -690,6 +690,90 @@ void ApplyNullOverride(OutputState &outputs) {
     outputs.rightStickY = 128;
 }
 
+struct OutputProgramContext {
+    const UltimateProfile *profile;
+    uint64_t inputs;
+    bool role_values[32] = {};
+
+    OutputProgramContext(const UltimateProfile *selected, uint64_t buttons) : profile(selected), inputs(buttons) {
+        if (profile != nullptr && profile->schema_version == kUltimateProfileSchemaVersionV3)
+            UltimateProfileEvaluator::EvaluateRoles(*profile, inputs, role_values);
+    }
+    const UltimateProfileOutputEffect *Active(UltimateProfileOutputPhase phase, UltimateProfileOutputTarget target) const {
+        const auto *effect = UltimateProfileEvaluator::FindEffect(profile, phase, target);
+        if (effect == nullptr || effect->suppress) return nullptr;
+        if (effect->gate_token != 0) {
+            const bool active = effect->gate_token <= kUltimateProfileButtonTokenMax
+                ? UltimateProfileEvaluator::IsPressedButtonToken(*profile, inputs, effect->gate_token)
+                : role_values[effect->gate_token - 65];
+            if (active == effect->gate_inverted) return nullptr;
+        }
+        return effect;
+    }
+};
+
+StickPoint EffectPoint(const UltimateProfile &profile, const UltimateProfileOutputEffect &effect,
+    RuntimeTableId selected_table, bool mode, int8_t x, int8_t y, int8_t cx, int8_t cy) {
+    switch (effect.direction_source) {
+        case ULTIMATE_DIRECTION_SOURCE_C_STICK: x = cx; y = cy; break;
+        case ULTIMATE_DIRECTION_SOURCE_CENTER: x = 0; y = 0; break;
+        case ULTIMATE_DIRECTION_SOURCE_EFFECTIVE_X_C_STICK_Y: y = cy; break;
+        default: break; // Validated EFFECTIVE direction source.
+    }
+    const size_t index = DirectionIndexFromAxes(x, y);
+    switch (effect.coordinate_mode) {
+        case ULTIMATE_COORDINATE_FIXED: return {effect.fixed_x, effect.fixed_y};
+        case ULTIMATE_COORDINATE_INLINE: return {effect.coordinates[index * 2], effect.coordinates[index * 2 + 1]};
+        case ULTIMATE_COORDINATE_TABLE: return LookupConfiguredStickPoint(&profile,
+            static_cast<RuntimeTableId>(mode ? effect.mode_table_id : effect.table_id), index);
+        default: return LookupConfiguredStickPoint(&profile, selected_table, index); // Validated SELECTED_TABLE.
+    }
+}
+
+void ApplyProfileAnalogProgram(const OutputProgramContext &program, const InputState &inputs,
+    const RoleState &roles, const EffectiveDirectionState &effective, const StickDirections &directions,
+    RuntimeTableId table, OutputState &outputs) {
+    const auto apply = [&](UltimateProfileOutputPhase phase, UltimateProfileOutputTarget target,
+                           int8_t x, int8_t y) {
+        const auto *effect = program.Active(phase, target);
+        if (effect == nullptr) return;
+        const StickPoint point = EffectPoint(*program.profile, *effect, table, roles.mode_active,
+            x, y, directions.cx, directions.cy);
+        if (target == ULTIMATE_OUTPUT_TARGET_RIGHT_STICK) {
+            outputs.rightStickX = point.x; outputs.rightStickY = point.y;
+        } else {
+            outputs.leftStickX = point.x; outputs.leftStickY = point.y;
+            if (target == ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL) {
+                outputs.rightStickX = point.x; outputs.rightStickY = point.y;
+            }
+        }
+    };
+    // Fixed code-owned precedence. No persisted array order is executable.
+    apply(ULTIMATE_OUTPUT_PHASE_BASE_TABLE, ULTIMATE_OUTPUT_TARGET_RIGHT_STICK, directions.x, directions.y);
+    const auto *dpad = program.Active(ULTIMATE_OUTPUT_PHASE_DPAD, ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK);
+    if (roles.ls_to_dpad_active && dpad != nullptr && (dpad->value & 2)) {
+        apply(ULTIMATE_OUTPUT_PHASE_DPAD, ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK, 0, 0);
+    } else {
+        apply(ULTIMATE_OUTPUT_PHASE_BASE_TABLE, ULTIMATE_OUTPUT_TARGET_LEFT_STICK, directions.x, directions.y);
+        if (roles.direction_plus_a_active) apply(ULTIMATE_OUTPUT_PHASE_DIRECTION_A,
+            ULTIMATE_OUTPUT_TARGET_LEFT_STICK, 0, roles.direction_plus_a_force_up ? 1 : -1);
+        if (roles.z_airdodge_override_active) apply(ULTIMATE_OUTPUT_PHASE_RF6,
+            ULTIMATE_OUTPUT_TARGET_LEFT_STICK, effective.left == effective.right ? 0 : (effective.left ? -1 : 1),
+            effective.down == effective.up ? 0 : (effective.down ? -1 : 1));
+        if (roles.hard_up_b_active) apply(ULTIMATE_OUTPUT_PHASE_RF7,
+            ULTIMATE_OUTPUT_TARGET_LEFT_STICK, effective.left == effective.right ? 0 : (effective.left ? -1 : 1), directions.y);
+    }
+    if (directions.cx != 0 && directions.cy != 0) apply(ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL,
+        ULTIMATE_OUTPUT_TARGET_RIGHT_STICK, directions.x, directions.y);
+    if (inputs.rf3 && !inputs.rt3 && !inputs.rt4 && directions.cy != 0 && effective.left != effective.right)
+        apply(ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL, ULTIMATE_OUTPUT_TARGET_RIGHT_STICK, effective.left ? -1 : 1, directions.y);
+    if (roles.null_modifier_active) apply(ULTIMATE_OUTPUT_PHASE_NULL, ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL, 0, 0);
+    const auto *left = program.Active(ULTIMATE_OUTPUT_PHASE_TRIGGERS, ULTIMATE_OUTPUT_TARGET_TRIGGER_L);
+    const auto *right = program.Active(ULTIMATE_OUTPUT_PHASE_TRIGGERS, ULTIMATE_OUTPUT_TARGET_TRIGGER_R);
+    outputs.triggerLAnalog = outputs.triggerLDigital && left != nullptr ? left->value : 0;
+    outputs.triggerRAnalog = outputs.triggerRDigital && right != nullptr ? right->value : 0;
+}
+
 } // namespace
 
 Ultimate::Ultimate() : ControllerMode() {}
@@ -700,23 +784,37 @@ void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile)
 }
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
+    InputState routed_inputs = inputs;
+    routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(_profile, inputs.buttons);
     // Digital priority: physical inputs, LF4 sub-mode,
     // forced-Up resolution, button carriers, then optional LS->DPad routing.
-    const LayerState layer = ResolveLayerState(inputs);
-    const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
-    const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
+    const LayerState layer = ResolveLayerState(routed_inputs);
+    const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(routed_inputs, layer);
+    const RoleState roles = ResolveRoleState(routed_inputs, layer, effective_directions);
 
-    ApplyDigitalButtonOutputs(inputs, layer, roles, outputs);
-    ApplyDpadOutputs(inputs, effective_directions, roles, outputs);
-    ApplyDigitalDirectionOutputs(effective_directions, roles, outputs);
-    ApplyRightStickDigitalOutputs(inputs, outputs);
+    ApplyDigitalButtonOutputs(routed_inputs, layer, roles, outputs);
+    const OutputProgramContext program(_profile, inputs.buttons);
+    RoleState dpad_roles = roles;
+    RoleState direction_roles = roles;
+    if (_profile != nullptr && _profile->schema_version == kUltimateProfileSchemaVersionV3) {
+        const auto *dpad = program.Active(ULTIMATE_OUTPUT_PHASE_DPAD, ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK);
+        dpad_roles.ls_to_dpad_active = roles.ls_to_dpad_active && dpad != nullptr && (dpad->value & 1);
+        direction_roles.ls_to_dpad_active = roles.ls_to_dpad_active && dpad != nullptr && (dpad->value & 4);
+        const auto *digital = program.Active(ULTIMATE_OUTPUT_PHASE_DIGITAL, ULTIMATE_OUTPUT_TARGET_DIGITAL);
+        if (digital != nullptr) outputs.buttons = (outputs.buttons & ~digital->digital_clear_mask) | digital->digital_set_mask;
+    }
+    ApplyDpadOutputs(routed_inputs, effective_directions, dpad_roles, outputs);
+    ApplyDigitalDirectionOutputs(effective_directions, direction_roles, outputs);
+    ApplyRightStickDigitalOutputs(routed_inputs, outputs);
 }
 
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
-    const LayerState layer = ResolveLayerState(inputs);
-    const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
-    const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
+    InputState routed_inputs = inputs;
+    routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(_profile, inputs.buttons);
+    const LayerState layer = ResolveLayerState(routed_inputs);
+    const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(routed_inputs, layer);
+    const RoleState roles = ResolveRoleState(routed_inputs, layer, effective_directions);
     const UltimateProfile *profile = _profile;
 
     // Coordinate calculations to make modifier handling simpler.
@@ -725,10 +823,10 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
         effective_directions.right, // Right (LF1 with cancellation)
         effective_directions.down, // Down (LT6/LF5, suppressed by forced-Up)
         effective_directions.up, // Up (RF5, LT3/Y2+RF2, and LF4+RF3 forced-Up)
-        inputs.rt3, // C-Left
-        inputs.rt4, // C-Right
-        inputs.rt2, // C-Down
-        inputs.rt5, // C-Up
+        routed_inputs.rt3, // C-Left
+        routed_inputs.rt4, // C-Right
+        routed_inputs.rt2, // C-Down
+        routed_inputs.rt5, // C-Up
         ANALOG_STICK_MIN,
         ANALOG_STICK_NEUTRAL,
         ANALOG_STICK_MAX,
@@ -738,7 +836,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     // Senscope Glyph Smash Box runtime begin
     // Analog priority: table output, direction-plus-A, RF6 low magnitude,
     // RF7 hard Up+B, C-stick ASDI, RF9 null, then the pre-existing nunchuk override below.
-    const bool rf4_rf2_minus41_active = roles.rf4_behavior_available && inputs.rf2 && !inputs.lt3 && !inputs.lf4 && !roles.rt1_rf4_custom_active;
+    const bool rf4_rf2_minus41_active = roles.rf4_behavior_available && routed_inputs.rf2 && !routed_inputs.lt3 && !routed_inputs.lf4 && !roles.rt1_rf4_custom_active;
     RuntimeTableId active_table_id = SelectRuntimeTableId(
         roles.mode_active,
         roles.x1_active,
@@ -754,54 +852,61 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     if (rf4_rf2_minus41_active) {
         active_table_id = RuntimeTableId::Tilt1Minus41;
     }
-    // Version-2 profiles may choose only an existing coordinate table. The
-    // profile evaluator has no routing/output-effect authority in Stage B.
+    // Stage-B/C profiles may choose only an existing coordinate table.  The
+    // evaluator receives the once-preprocessed physical snapshot and resolves
+    // its routing slots itself; do not feed it routed_inputs or a non-identity
+    // Stage-C route would be applied twice.
     active_table_id = static_cast<RuntimeTableId>(UltimateProfileEvaluator::SelectTable(
         profile, inputs.buttons, static_cast<uint8_t>(active_table_id)));
 
-    if (roles.ls_to_dpad_active) {
-        const RuntimeTableId center_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
-        const StickPoint center = LookupConfiguredStickPoint(profile, center_table_id, kDirectionFiveIndex);
-        outputs.leftStickX = center.x;
-        outputs.leftStickY = center.y;
+    if (profile != nullptr && profile->schema_version == kUltimateProfileSchemaVersionV3) {
+        const OutputProgramContext program(profile, inputs.buttons);
+        ApplyProfileAnalogProgram(program, routed_inputs, roles, effective_directions, directions, active_table_id, outputs);
     } else {
-        ApplyTableAnalogOutput(profile, active_table_id, directions.x, directions.y, outputs);
-        ApplyDirectionPlusAOverride(profile, roles, outputs);
+        if (roles.ls_to_dpad_active) {
+            const RuntimeTableId center_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
+            const StickPoint center = LookupConfiguredStickPoint(profile, center_table_id, kDirectionFiveIndex);
+            outputs.leftStickX = center.x;
+            outputs.leftStickY = center.y;
+        } else {
+            ApplyTableAnalogOutput(profile, active_table_id, directions.x, directions.y, outputs);
+            ApplyDirectionPlusAOverride(profile, roles, outputs);
 
-        if (roles.z_airdodge_override_active) {
-            ApplyZAirdodgeOverride(profile, effective_directions, outputs);
+            if (roles.z_airdodge_override_active) {
+                ApplyZAirdodgeOverride(profile, effective_directions, outputs);
+            }
+
+            if (roles.hard_up_b_active) {
+                ApplyHardUpBOverride(effective_directions, outputs);
+            }
         }
 
-        if (roles.hard_up_b_active) {
-            ApplyHardUpBOverride(effective_directions, outputs);
+        // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
+        // angled fsmash).
+        if (directions.cx != 0 && directions.cy != 0) {
+            // 5250 8500 = 42 68
+            outputs.rightStickX = 128 + (directions.cx * 42);
+            outputs.rightStickY = 128 + (directions.cy * 68);
         }
-    }
 
-    // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
-    // angled fsmash).
-    if (directions.cx != 0 && directions.cy != 0) {
-        // 5250 8500 = 42 68
-        outputs.rightStickX = 128 + (directions.cx * 42);
-        outputs.rightStickY = 128 + (directions.cy * 68);
-    }
+        ApplyRF3VerticalCStickDiagonalOverride(routed_inputs, effective_directions, directions, outputs);
 
-    ApplyRF3VerticalCStickDiagonalOverride(inputs, effective_directions, directions, outputs);
+        if (roles.null_modifier_active) {
+            ApplyNullOverride(outputs);
+        }
+        // Senscope Glyph Smash Box runtime end
 
-    if (roles.null_modifier_active) {
-        ApplyNullOverride(outputs);
-    }
-    // Senscope Glyph Smash Box runtime end
+        if (outputs.triggerLDigital) {
+            outputs.triggerLAnalog = 140;
+        } else {
+            outputs.triggerLAnalog = 0;
+        }
 
-    if (outputs.triggerLDigital) {
-        outputs.triggerLAnalog = 140;
-    } else {
-        outputs.triggerLAnalog = 0;
-    }
-
-    if (outputs.triggerRDigital) {
-        outputs.triggerRAnalog = 140;
-    } else {
-        outputs.triggerRAnalog = 0;
+        if (outputs.triggerRDigital) {
+            outputs.triggerRAnalog = 140;
+        } else {
+            outputs.triggerRAnalog = 0;
+        }
     }
 
     // Shut off C-stick when using D-Pad layer.

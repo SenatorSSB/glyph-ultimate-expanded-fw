@@ -86,11 +86,35 @@ UltimateProfile.table_rules max_count:19
 UltimateProfileCondition.all_tokens max_count:2
 UltimateProfileCondition.any_tokens max_count:4
 UltimateProfileCondition.none_tokens max_count:9
+# The admitted vocabulary is 1..60 and 65..96. Narrowing storage rejects
+# out-of-range encoded values before validation without changing valid v2 data.
+UltimateProfileCondition.all_tokens int_size:IS_8
+UltimateProfileCondition.any_tokens int_size:IS_8
+UltimateProfileCondition.none_tokens int_size:IS_8
 UltimateProfileRole.role_id int_size:IS_8
 UltimateProfileRoutingSlot.slot_id int_size:IS_8
 UltimateProfileRoutingSlot.input_token int_size:IS_8
 UltimateProfile.default_table_id int_size:IS_8
 UltimateProfileTableRule.priority int_size:IS_8
 UltimateProfileTableRule.table_id int_size:IS_8
+UltimateProfileOutputProgram.effects max_count:12
+UltimateProfileOutputEffect.coordinates max_count:18
+UltimateProfileOutputEffect.coordinates int_size:IS_8
+UltimateProfileOutputEffect.digital_set_mask int_size:IS_16
+UltimateProfileOutputEffect.digital_clear_mask int_size:IS_16
+UltimateProfileOutputEffect.coordinate_mode int_size:IS_8
+UltimateProfileOutputEffect.mode_table_id int_size:IS_8
+UltimateProfileOutputEffect.gate_token int_size:IS_8
+UltimateProfileOutputEffect.phase int_size:IS_8
+UltimateProfileOutputEffect.target int_size:IS_8
+UltimateProfileOutputEffect.direction_source int_size:IS_8
+UltimateProfileOutputEffect.table_id int_size:IS_8
+UltimateProfileOutputEffect.fixed_x int_size:IS_8
+UltimateProfileOutputEffect.fixed_y int_size:IS_8
+UltimateProfileOutputEffect.value int_size:IS_8
+UltimateProfileOutputPhase long_names:false
+UltimateProfileOutputTarget long_names:false
+UltimateProfileDirectionSource long_names:false
+UltimateProfileCoordinateMode long_names:false
 LayoutPlate long_names:false
 DashboardOption long_names:false

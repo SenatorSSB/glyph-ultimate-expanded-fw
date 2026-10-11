@@ -1,6 +1,7 @@
 #include "core/config_validation.hpp"
 #include "core/config_button_validation.hpp"
 #include "modes/UltimateProfileConfig.hpp"
+#include "modes/UltimateProfileEvaluator.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -60,7 +61,7 @@ bool validate_profile_condition(
     ConfigValidationError &error,
     uint8_t profile_id
 ) {
-    const uint32_t *lists[] = {condition.all_tokens, condition.any_tokens, condition.none_tokens};
+    const uint8_t *lists[] = {condition.all_tokens, condition.any_tokens, condition.none_tokens};
     const size_t counts[] = {
         condition.all_tokens_count,
         condition.any_tokens_count,
@@ -150,8 +151,13 @@ bool validate_config_extents(const Config &config) {
         if (!fits(profile.tables, profile.tables_count) ||
             !fits(profile.roles, profile.roles_count) ||
             !fits(profile.routing_slots, profile.routing_slots_count) ||
-            !fits(profile.table_rules, profile.table_rules_count)) {
+            !fits(profile.table_rules, profile.table_rules_count) ||
+            !fits(profile.output_program.effects, profile.output_program.effects_count)) {
             return false;
+        }
+        for (size_t j = 0; j < profile.output_program.effects_count; ++j) {
+            const auto &effect = profile.output_program.effects[j];
+            if (!fits(effect.coordinates, effect.coordinates_count)) return false;
         }
         for (size_t j = 0; j < profile.tables_count; ++j) {
             if (!fits(profile.tables[j].coordinates, profile.tables[j].coordinates_count)) {
@@ -219,7 +225,8 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
     for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
         const UltimateProfile &profile = config.ultimate_profiles[i];
         if ((profile.schema_version != kUltimateProfileSchemaVersionV1 &&
-             profile.schema_version != kUltimateProfileSchemaVersionV2) ||
+             profile.schema_version != kUltimateProfileSchemaVersionV2 &&
+             profile.schema_version != kUltimateProfileSchemaVersionV3) ||
             profile.tables_count != kUltimateProfileTableCount) {
             return reference_error(error, "Ultimate profile %d has an unsupported shape",
                 static_cast<uint8_t>(i) + 1);
@@ -228,8 +235,13 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
         const uint8_t profile_id = static_cast<uint8_t>(i) + 1;
         if (profile.schema_version == kUltimateProfileSchemaVersionV1 &&
             (profile.roles_count != 0 || profile.routing_slots_count != 0 ||
-             profile.default_table_id != 0 || profile.table_rules_count != 0)) {
+             profile.default_table_id != 0 || profile.table_rules_count != 0 ||
+             profile.has_output_program)) {
             return reference_error(error, "Ultimate profile %d adds fields to schema version 1", profile_id);
+        }
+
+        if (profile.schema_version == kUltimateProfileSchemaVersionV2 && profile.has_output_program) {
+            return reference_error(error, "Ultimate profile %d adds an output program to schema version 2", profile_id);
         }
 
         bool seen_table_ids[kUltimateProfileTableCount] = {};
@@ -248,7 +260,7 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
             }
         }
 
-        if (profile.schema_version != kUltimateProfileSchemaVersionV2) {
+        if (profile.schema_version == kUltimateProfileSchemaVersionV1) {
             continue;
         }
 
@@ -308,6 +320,37 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
                     32, error, profile_id)) {
                 return false;
             }
+        }
+
+        if (profile.schema_version == kUltimateProfileSchemaVersionV3 &&
+            (!profile.has_output_program || !profile.output_program.enabled ||
+             profile.routing_slots_count != kUltimateProfileRoutingSlotCount ||
+             profile.output_program.effects_count != UltimateProfileEvaluator::kOutputEffectCount)) {
+            return reference_error(error, "Ultimate profile %d has an incomplete version 3 output program", profile_id);
+        }
+        if (profile.schema_version == kUltimateProfileSchemaVersionV3) {
+            // Every source input consumed by the fixed Ultimate pipeline has
+            // an explicit routed slot; unrelated slots cannot stand in for it.
+            const uint8_t required[] = {1,2,3,4,5,17,18,19,20,21,22,23,24,25,26,29,32,
+                33,34,35,36,37,38,41,42,43,44,45,52,53,54,55};
+            for (uint8_t slot : required) if (!seen_routing_slots[slot])
+                return reference_error(error, "Ultimate profile %d is missing an output input slot", profile_id);
+            bool keys[UltimateProfileEvaluator::kOutputEffectCount] = {};
+            for (size_t effect_index = 0; effect_index < profile.output_program.effects_count; ++effect_index) {
+                const UltimateProfileOutputEffect &effect = profile.output_program.effects[effect_index];
+                const int key = UltimateProfileEvaluator::EffectKey(effect);
+                if (key < 0 || keys[key] || !UltimateProfileEvaluator::ValidEffectShape(effect)) {
+                    return reference_error(error, "Ultimate profile %d has an invalid output effect", profile_id);
+                }
+                keys[key] = true;
+                const uint32_t token = effect.gate_token;
+                if ((token == 0 && effect.gate_inverted) ||
+                    (token != 0 && !((is_button_token(token) && seen_routing_slots[token]) ||
+                        (is_role_token(token) && defined_roles[token - 65]))))
+                    return reference_error(error, "Ultimate profile %d has an invalid output gate", profile_id);
+            }
+            for (bool present : keys) if (!present)
+                return reference_error(error, "Ultimate profile %d is missing an output phase", profile_id);
         }
     }
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {

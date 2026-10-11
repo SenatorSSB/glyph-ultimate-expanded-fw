@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+"""Actual Ultimate output path versus frozen Stage-B source, plus strict admission."""
+from __future__ import annotations
+import hashlib
+import json
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v3_artifact, run, require
+
+HOST = ROOT / "tools/fixtures/stage_c_ultimate_profiles_host"
+ARTIFACT = ROOT / "tools/fixtures/stage_c_ultimate_profiles_dry_run.json"
+
+def main() -> int:
+    require(sys.argv[1:] in ([],["--default-enum"]),"usage: check_glyph_stage_c_ultimate_profiles.py [--default-enum]")
+    sys.path.insert(0, str(ROOT / "tools"))
+    import glyph_serial_config_tool as writer
+    pb, jf, _ = writer.load_runtime_proto_modules(ROOT)
+    artifact=json.loads(ARTIFACT.read_text(encoding="utf-8"))
+    require(artifact==make_v3_artifact(),"tracked complete two-v3 writer artifact drift from source fixture")
+    _, payload = writer.encode_artifact_payload(artifact, pb, jf)
+    valid_message = pb.Config(); valid_message.ParseFromString(payload)
+    # Fixed custody of the independent oracle: no extraction from changed
+    # production source at test time. Headers/tables are frozen alongside it.
+    oracle = HOST / "legacy_ultimate.cpp"
+    original = oracle.read_bytes().split(b"\n", 2)[2]
+    require(hashlib.sha256(original).hexdigest() == "a26c3e05dbc37a49b9cdb50d48a1b749849caa1912f3fa913499f4b456012f8e", "frozen oracle source drift")
+    frozen_hashes = {
+        "modes/UltimateIdentityRuntimeTables.hpp":"a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb",
+        "modes/UltimateRuntimeConfigInterpreter.hpp":"8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108",
+        "modes/UltimateProfileEvaluator.hpp":"f51c89fa57d33ad9da82f30cb795902fd9cdc262bd65334480fb9bb18f1f61e4",
+        "modes/UltimateProfileConfig.hpp":"878abcb38dfc94ce3aac7eca466147a4e177d3d6a85dc388640f5bca797daacc",
+        "modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp":"e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d",
+    }
+    for path, digest in frozen_hashes.items():
+        require(hashlib.sha256((HOST / "frozen" / path).read_bytes()).hexdigest()==digest,"frozen oracle dependency drift: "+path)
+    # Shared preprocessing/state definitions are independently checked against
+    # the frozen Stage-B baseline; changes need deliberate oracle review.
+    shared_hashes = {
+        "src/core/ControllerMode.cpp":"1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8",
+        "src/core/InputMode.cpp":"080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+        "src/core/socd.cpp":"5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+        "include/core/state.hpp":"c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3",
+    }
+    for path, digest in shared_hashes.items():
+        require(hashlib.sha256((ROOT / path).read_bytes()).hexdigest()==digest,"shared Stage-B preprocessing/state drift: "+path)
+    with tempfile.TemporaryDirectory(prefix="stage-c-ultimate-") as directory:
+        temp = Path(directory)
+        generated = temp / "generated"; generated.mkdir()
+        schema = ROOT / "schema/haybox"
+        run([sys.executable,str(NANOPB / "generator/nanopb_generator.py"),"-I",str(schema),"-f",str(schema / "config.options"),"--error-on-unmatched","--no-timestamp","-D",str(generated),str(schema / "config.proto")])
+        includes = ["-I",str(HOST / "include"),"-I",str(generated),"-I",str(NANOPB),"-I",str(ROOT / "include"),"-I",str(ROOT / "HAL/pico/include"),"-I",str(ROOT / "config/glyph/common/include"),"-I",str(ROOT / "config/glyph/glyph_mk6/include"),"-I",str(ROOT / "src")]
+        common = ["-O2","-Wall","-Wextra","-Werror","-Wno-unused-function",*includes]
+        if "--default-enum" not in sys.argv: common.append("-fshort-enums")
+        # Existing anonymous SOCD typedef carries C++ member initializers.
+        if sys.platform == "darwin": common.append("-Wno-non-c-typedef-for-linkage")
+        objects=[]
+        for source in (NANOPB / "pb_common.c",NANOPB / "pb_decode.c",generated / "config.pb.c"):
+            target=temp / (source.stem+".o")
+            run(["cc","-std=c11",*common,"-c",str(source),"-o",str(target)]); objects.append(str(target))
+        frozen=temp / "legacy.o"
+        run(["c++","-std=c++17","-DUltimate=LegacyUltimate","-I",str(HOST / "frozen"),*common,"-c",str(oracle),"-o",str(frozen)])
+        sources=[ROOT / path for path in ("src/modes/Ultimate.cpp","src/core/ControllerMode.cpp","src/core/InputMode.cpp","src/core/socd.cpp","src/core/config_validation.cpp","src/core/config_button_validation.cpp","src/core/config_usb_default_validation.cpp","src/core/config_rgb_target_validation.cpp","config/glyph/common/src/glyph_config_validation.cpp")]
+        executable=temp / "pipeline"
+        run(["c++","-std=c++17",*common,str(HOST / "pipeline.cpp"),*[str(p) for p in sources],str(frozen),*objects,"-o",str(executable)])
+        binary=temp / "v3.bin"; binary.write_bytes(payload)
+        print(run([str(executable),str(binary)]).strip())
+        admission=temp / "admission"
+        run(["c++","-std=c++17",*common,str(ROOT / "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp"),*[str(p) for p in sources],*objects,"-o",str(admission)])
+        decoder_negatives=0
+        decoder_required={"excess_effect","digital_wide_mask","table_wide_id","inline_excess","inline_wide_coordinate","fixed_wide_coordinate","trigger_wide_value","wide_gate","wide_condition_token"}
+        def reject(label, mutate):
+            nonlocal decoder_negatives
+            invalid=pb.Config(); invalid.CopyFrom(valid_message)
+            mutate(invalid.ultimate_profiles[0])
+            encoded=temp / (label+".bin"); encoded.write_bytes(invalid.SerializeToString())
+            result=subprocess.run([str(admission),str(encoded),"0","3"],capture_output=True,text=True,check=False)
+            require(result.returncode==0,f"negative accepted: {label}: {result.stdout} {result.stderr}")
+            decoded="nanopb_decode=" in result.stderr
+            if decoded: decoder_negatives+=1
+            if label in decoder_required: require(decoded,"expected decoder-stage refusal: "+label)
+        mutations = [
+            ("missing_program",lambda p:p.ClearField("output_program")),
+            ("disabled_program",lambda p:setattr(p.output_program,"enabled",False)),
+            ("v1_program",lambda p:(setattr(p,"schema_version",1),p.ClearField("roles"),p.ClearField("routing_slots"),p.ClearField("table_rules"),setattr(p,"default_table_id",0))),
+            ("v2_program",lambda p:setattr(p,"schema_version",2)),
+            ("unknown_version",lambda p:setattr(p,"schema_version",4)),
+            ("missing_effect",lambda p:p.output_program.effects.pop()),
+            ("excess_effect",lambda p:p.output_program.effects.add().CopyFrom(p.output_program.effects[0])),
+            ("duplicate_key",lambda p:p.output_program.effects[1].CopyFrom(p.output_program.effects[0])),
+            ("unknown_phase",lambda p:setattr(p.output_program.effects[0],"phase",11)),
+            ("wide_phase",lambda p:setattr(p.output_program.effects[0],"phase",256)),
+            ("unknown_target",lambda p:setattr(p.output_program.effects[0],"target",8)),
+            ("wide_target",lambda p:setattr(p.output_program.effects[0],"target",256)),
+            ("wrong_phase_target",lambda p:setattr(p.output_program.effects[1],"target",4)),
+            ("unknown_coordinate_mode",lambda p:setattr(p.output_program.effects[1],"coordinate_mode",5)),
+            ("missing_coordinate_mode",lambda p:setattr(p.output_program.effects[1],"coordinate_mode",0)),
+            ("selected_table_wrong_phase",lambda p:setattr(p.output_program.effects[2],"coordinate_mode",1)),
+            ("invalid_direction_source",lambda p:setattr(p.output_program.effects[1],"direction_source",5)),
+            ("missing_direction_source",lambda p:setattr(p.output_program.effects[1],"direction_source",0)),
+            ("digital_direction_payload",lambda p:setattr(p.output_program.effects[0],"direction_source",1)),
+            ("digital_analogue_payload",lambda p:setattr(p.output_program.effects[0],"fixed_x",128)),
+            ("digital_reserved_mask",lambda p:setattr(p.output_program.effects[0],"digital_set_mask",4096)),
+            ("digital_wide_mask",lambda p:setattr(p.output_program.effects[0],"digital_clear_mask",65536)),
+            ("digital_overlap",lambda p:(setattr(p.output_program.effects[0],"digital_set_mask",1),setattr(p.output_program.effects[0],"digital_clear_mask",1))),
+            ("digital_suppress",lambda p:setattr(p.output_program.effects[0],"suppress",True)),
+            ("table_unknown_id",lambda p:setattr(p.output_program.effects[3],"table_id",28)),
+            ("table_unknown_mode_id",lambda p:setattr(p.output_program.effects[3],"mode_table_id",28)),
+            ("table_wide_id",lambda p:setattr(p.output_program.effects[3],"table_id",256)),
+            ("table_fixed_payload",lambda p:setattr(p.output_program.effects[3],"fixed_y",128)),
+            ("selected_explicit_table",lambda p:setattr(p.output_program.effects[1],"table_id",1)),
+            ("inline_short",lambda p:p.output_program.effects[2].coordinates.pop()),
+            ("inline_excess",lambda p:p.output_program.effects[2].coordinates.append(128)),
+            ("inline_wide_coordinate",lambda p:p.output_program.effects[2].coordinates.__setitem__(0,256)),
+            ("inline_fixed_payload",lambda p:setattr(p.output_program.effects[2],"fixed_x",128)),
+            ("fixed_table_payload",lambda p:setattr(p.output_program.effects[8],"table_id",1)),
+            ("fixed_wide_coordinate",lambda p:setattr(p.output_program.effects[8],"fixed_x",256)),
+            ("trigger_coordinate_payload",lambda p:setattr(p.output_program.effects[9],"fixed_y",1)),
+            ("trigger_digital_payload",lambda p:setattr(p.output_program.effects[9],"digital_set_mask",1)),
+            ("trigger_wide_value",lambda p:setattr(p.output_program.effects[9],"value",256)),
+            ("dpad_unknown_flags",lambda p:setattr(p.output_program.effects[11],"value",8)),
+            ("dpad_noncenter",lambda p:setattr(p.output_program.effects[11],"direction_source",1)),
+            ("unrelated_value",lambda p:setattr(p.output_program.effects[4],"value",1)),
+            ("unrelated_digital_mask",lambda p:setattr(p.output_program.effects[4],"digital_clear_mask",1)),
+            ("unknown_gate",lambda p:setattr(p.output_program.effects[0],"gate_token",61)),
+            ("undefined_role_gate",lambda p:setattr(p.output_program.effects[0],"gate_token",96)),
+            ("unrouted_button_gate",lambda p:setattr(p.output_program.effects[0],"gate_token",60)),
+            ("wide_gate",lambda p:setattr(p.output_program.effects[0],"gate_token",256)),
+            ("inverted_unconditional_gate",lambda p:setattr(p.output_program.effects[0],"gate_inverted",True)),
+            ("missing_required_route",lambda p:setattr(p.routing_slots[-1],"slot_id",60)),
+            ("duplicate_route_input",lambda p:setattr(p.routing_slots[1],"input_token",1)),
+            ("wide_condition_token",lambda p:p.roles[0].condition.all_tokens.append(256)),
+        ]
+        for label,mutate in mutations: reject(label,mutate)
+        print(f"production_decode_validation_negatives={len(mutations)} decoder_refusals={decoder_negatives} semantic_refusals={len(mutations)-decoder_negatives}")
+    print(f"writer_fixture_profiles=2 schema_versions=3,3 explicit_refs=0,1,2 payload_bytes={len(payload)} payload_sha256={hashlib.sha256(payload).hexdigest()}")
+    print(f"fixture_sha256={hashlib.sha256(ARTIFACT.read_bytes()).hexdigest()} serial_port_opened=false")
+    print("glyph_stage_c_ultimate_profiles: PASS")
+    return 0
+
+if __name__ == "__main__":
+    try: raise SystemExit(main())
+    except (AssertionError,OSError,ValueError,KeyError,TypeError) as error:
+        print(f"glyph_stage_c_ultimate_profiles: FAIL: {error}"); raise SystemExit(1)

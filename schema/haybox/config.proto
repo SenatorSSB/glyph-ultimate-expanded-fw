@@ -446,6 +446,82 @@ message UltimateProfileTableRule {
 }
 
 /**
+ * The bounded Stage-C output-program declaration.  The phase order and the
+ * output targets are deliberately code-owned. Twelve uniquely keyed records
+ * supply each phase's values, coordinates, gates and suppression. It is not a
+ * script, macro, timing facility, or general expression language.
+ */
+message UltimateProfileOutputProgram {
+  bool enabled = 1;
+  repeated UltimateProfileOutputEffect effects = 2;
+}
+
+// Closed Stage-C vocabulary. Numeric values are deliberately stable persisted
+// IDs; firmware owns phase ordering and rejects every unknown combination.
+enum UltimateProfileOutputPhase {
+  ULTIMATE_OUTPUT_PHASE_UNSPECIFIED = 0;
+  ULTIMATE_OUTPUT_PHASE_DIGITAL = 1;
+  ULTIMATE_OUTPUT_PHASE_BASE_TABLE = 2;
+  ULTIMATE_OUTPUT_PHASE_DIRECTION_A = 3;
+  ULTIMATE_OUTPUT_PHASE_RF6 = 4;
+  ULTIMATE_OUTPUT_PHASE_RF7 = 5;
+  ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL = 6;
+  ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL = 7;
+  ULTIMATE_OUTPUT_PHASE_NULL = 8;
+  ULTIMATE_OUTPUT_PHASE_TRIGGERS = 9;
+  ULTIMATE_OUTPUT_PHASE_DPAD = 10;
+}
+enum UltimateProfileOutputTarget {
+  ULTIMATE_OUTPUT_TARGET_UNSPECIFIED = 0;
+  ULTIMATE_OUTPUT_TARGET_DIGITAL = 1;
+  ULTIMATE_OUTPUT_TARGET_LEFT_STICK = 2;
+  ULTIMATE_OUTPUT_TARGET_RIGHT_STICK = 3;
+  ULTIMATE_OUTPUT_TARGET_TRIGGER_L = 4;
+  ULTIMATE_OUTPUT_TARGET_TRIGGER_R = 5;
+  ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK = 6;
+  ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL = 7;
+}
+enum UltimateProfileDirectionSource {
+  ULTIMATE_DIRECTION_SOURCE_UNSPECIFIED = 0;
+  ULTIMATE_DIRECTION_SOURCE_EFFECTIVE = 1;
+  ULTIMATE_DIRECTION_SOURCE_C_STICK = 2;
+  ULTIMATE_DIRECTION_SOURCE_CENTER = 3;
+  ULTIMATE_DIRECTION_SOURCE_EFFECTIVE_X_C_STICK_Y = 4;
+}
+enum UltimateProfileCoordinateMode {
+  ULTIMATE_COORDINATE_UNSPECIFIED = 0;
+  ULTIMATE_COORDINATE_SELECTED_TABLE = 1;
+  ULTIMATE_COORDINATE_TABLE = 2;
+  ULTIMATE_COORDINATE_FIXED = 3;
+  ULTIMATE_COORDINATE_INLINE = 4;
+}
+message UltimateProfileOutputEffect {
+  UltimateProfileOutputPhase phase = 1;
+  UltimateProfileOutputTarget target = 2;
+  UltimateProfileDirectionSource direction_source = 3;
+  uint32 table_id = 4;
+  uint32 fixed_x = 5;
+  uint32 fixed_y = 6;
+  // Trigger byte; for DPAD only, flags 1=route directions, 2=center LS and
+  // bypass LS analogue overrides, 4=suppress LS digital directions.
+  uint32 value = 7;
+  bool suppress = 8;
+  UltimateProfileCoordinateMode coordinate_mode = 9;
+  uint32 mode_table_id = 10;
+  // Exactly eighteen byte coordinates for INLINE: x,y pairs in the existing
+  // nine-direction order. All other modes require an empty list.
+  repeated uint32 coordinates = 11;
+  // Digital masks cover the twelve button carriers only (OutputState bits
+  // 0..11). Clear precedes set; overlapping masks are rejected.
+  uint32 digital_set_mask = 12;
+  uint32 digital_clear_mask = 13;
+  // Optional single existing routed token or role gate. Role definitions own
+  // bounded compound conditions; effects introduce no second expression DAG.
+  uint32 gate_token = 14;
+  bool gate_inverted = 15;
+}
+
+/**
  * Persistable coordinate data for one Ultimate runtime profile.
  *
  * Stage A supports the current 28 RuntimeTableId values only. The schema version
@@ -459,6 +535,9 @@ message UltimateProfile {
   repeated UltimateProfileRoutingSlot routing_slots = 4;
   uint32 default_table_id = 5;
   repeated UltimateProfileTableRule table_rules = 6;
+  // Version 3 opts into the fixed Stage-C output pipeline.  Its absence is
+  // significant: v1 and v2 retain their byte-for-byte legacy behavior.
+  UltimateProfileOutputProgram output_program = 7;
 }
 /**
  * Button to HID keyboard keycode mapping.
