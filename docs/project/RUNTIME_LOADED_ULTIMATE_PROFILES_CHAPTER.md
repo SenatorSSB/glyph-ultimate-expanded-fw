@@ -42,7 +42,7 @@ Status: `STAGE_0_SOURCE_AND_RESOURCE_ANALYSIS`.
 | Stage | State | Evidence / next permissible action |
 | --- | --- | --- |
 | 0 — schema, resource, source authority | source design complete; build pending | Tracked schema source and bounded Stage-A representation are in place. Canonical build/codegen proof remains pending. |
-| A — persisted coordinates | blocked on Stage 0 | Implement only after the source/resource design is validated; prepare one discriminating hardware packet before Stage B. |
+| A — persisted coordinates | `HARDWARE_GATE_A_REQUIRED` | Source, host proof, fresh reviews, build and custody are complete. Await the owner's bounded write/reboot observation before any Stage-B routing work. |
 | B — roles, sublayers, priorities | blocked on Gate A PASS | No implementation before exact Stage-A owner hardware PASS. |
 | C — bounded output effects | blocked on Gate A PASS | No implementation before Stage-A proof and Stage-B source/host proof. |
 
@@ -78,6 +78,40 @@ Status: `STAGE_0_SOURCE_AND_RESOURCE_ANALYSIS`.
 
 ## Current stop condition
 
-None. Stage-0 investigation is authorized by the owner direction. A concrete
+Stage A is waiting for owner hardware evidence. Do not start Stage B or C until
+the exact Gate-A candidate passes its bounded physical matrix. A concrete
 schema reproducibility, resource, source-authority, or architecture
 contradiction must be recorded here before requesting an owner decision.
+
+## Stage-A candidate and proof
+
+- Firmware candidate source: `45e0b89dea86fefba631350bc80afae7b28af645`
+- Candidate tree: `c2c6dfaa8b99efa99f037733de55656d4247e106`
+- Mk6 UF2: 805,888 bytes, SHA-256
+  `b13ad448fe989f84265e97babc5b650968eb75d787fc58791d814f478ea8bcf1`
+- Custody path:
+  `local_backups/hardware-artifacts/45e0b89dea86fefba631350bc80afae7b28af645/b13ad448fe989f84265e97babc5b650968eb75d787fc58791d814f478ea8bcf1/firmware.uf2`
+- Build: `./scripts/build-glyph-mk6-quiet.sh` — PASS; RAM 109,520 / 262,144
+  bytes (41.8%), flash 390,752 / 1,568,768 bytes (24.9%).
+- Host proof: `python3 tools/test_ultimate_profile_host.py` — PASS (504
+  profile table/direction lookups plus validation negatives).
+- Artifact proof:
+  `python3 tools/check_glyph_stage_a_ultimate_profiles_dry_run.py` — PASS;
+  profiles 2, table count 28, coordinate count 9, explicit refs `0,1,2`, no
+  serial port opened. Artifact
+  `tools/fixtures/stage_a_ultimate_profiles_dry_run.json` SHA-256:
+  `2ebf57e035be8cedb1b517ae4ae77c3951843b70325fe8826abf0b12c30dbaa0`.
+- Fresh reviews: production implementation APPROVED; final artifact/adapter
+  review APPROVED after the non-Ultimate-reference and row-cardinality guards.
+
+## Workers
+
+| Task | Context | Requested | Observed |
+| --- | --- | --- | --- |
+| Schema research | inherited; read-only | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Schema implementation | inherited; sole schema writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-A firmware | fresh; sole production writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-A production review | fresh | Luna / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-A host proof | fresh; sole tooling writer | Luna / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-A artifact adapter | fresh; sole artifact/tool writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Artifact review and re-review | fresh | Luna / medium | model UNKNOWN; effort UNKNOWN |
