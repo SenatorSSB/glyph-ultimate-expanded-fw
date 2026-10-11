@@ -1,6 +1,6 @@
 # Runtime-Loaded Ultimate Profiles Chapter Ledger
 
-Status: `STAGE_0_SOURCE_AND_RESOURCE_ANALYSIS`.
+Status: `HARDWARE_GATE_A_REQUIRED`.
 
 ## Authority and scope
 
@@ -98,9 +98,14 @@ contradiction must be recorded here before requesting an owner decision.
 - Artifact proof:
   `python3 tools/check_glyph_stage_a_ultimate_profiles_dry_run.py` — PASS;
   profiles 2, table count 28, coordinate count 9, explicit refs `0,1,2`, no
-  serial port opened. Artifact
+  serial port opened. The exact writer-produced protobuf is regenerated from
+  the tracked schema/options, decoded by Nanopb, and accepted by the complete
+  production `validate_glyph_config` chain; six semantic and one overlong-name
+  decoder negative also reject. Artifact
   `tools/fixtures/stage_a_ultimate_profiles_dry_run.json` SHA-256:
-  `2ebf57e035be8cedb1b517ae4ae77c3951843b70325fe8826abf0b12c30dbaa0`.
+  `fc86614108390f46ede813d5655a73aca34ed9a193258126c9fb6e593b353143`.
+  Its encoded payload is 4,064 bytes, SHA-256
+  `5ce69327af7039db5c3f203bba29d66ab80c653f01bee47f8ddba0baa7b737d2`.
 - Fresh reviews: production implementation APPROVED; final artifact/adapter
   review APPROVED after the non-Ultimate-reference and row-cardinality guards.
 
@@ -115,3 +120,5 @@ contradiction must be recorded here before requesting an owner decision.
 | Stage-A host proof | fresh; sole tooling writer | Luna / medium | model UNKNOWN; effort UNKNOWN |
 | Stage-A artifact adapter | fresh; sole artifact/tool writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
 | Artifact review and re-review | fresh | Luna / medium | model UNKNOWN; effort UNKNOWN |
+| Artifact admission diagnosis | fresh; sole artifact-admission writer | Sol / medium | model UNKNOWN; effort UNKNOWN |
+| Artifact admission review | fresh; independent review | Luna / medium | model UNKNOWN; effort UNKNOWN |

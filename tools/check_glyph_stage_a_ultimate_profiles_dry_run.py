@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -77,6 +78,86 @@ def verify_artifact_shape() -> None:
             "profile B must contain the one declared distinguishable coordinate change")
 
 
+def verify_production_admission(message, encoded: bytes, config_pb2) -> None:
+    """Decode the actual wire artifact and call the complete production Glyph validator.
+
+    Regenerate Nanopb from tracked schema/options; cached generated config bindings
+    and Python writer validation are deliberately not admission evidence.
+    """
+    nanopb = ROOT / ".pio/libdeps/glyph_mk6/Nanopb"
+    generator = nanopb / "generator/nanopb_generator.py"
+    require(generator.is_file(), "Nanopb dependency unavailable; prepare PlatformIO dependencies")
+
+    def run(command: list[str]) -> str:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, check=False)
+        require(result.returncode == 0,
+                f"production admission command failed: {' '.join(command)}\n"
+                f"{result.stdout}\n{result.stderr}")
+        return result.stdout
+
+    with tempfile.TemporaryDirectory(prefix="stage-a-admission-") as temporary:
+        temp = Path(temporary)
+        schema = ROOT / "schema/haybox"
+        run([sys.executable, str(generator), "-I", str(schema), "-f",
+             str(schema / "config.options"), "--error-on-unmatched", "--no-timestamp",
+             "-D", str(temp), str(schema / "config.proto")])
+        # Compile decoder and descriptors as C, matching firmware language selection.
+        objects = []
+        for source in (nanopb / "pb_common.c", nanopb / "pb_decode.c", temp / "config.pb.c"):
+            target = temp / (source.stem + ".o")
+            run(["cc", "-std=c11", "-fshort-enums", "-I", str(temp), "-I", str(nanopb),
+                 "-c", str(source), "-o", str(target)])
+            objects.append(str(target))
+        executable = temp / "admission"
+        run(["c++", "-std=c++17", "-fshort-enums", "-Wall", "-Wextra", "-Werror",
+             "-I", str(temp), "-I", str(nanopb), "-I", str(ROOT / "include"),
+             "-I", str(ROOT / "config/glyph/common/include"),
+             "-I", str(ROOT / "config/glyph/glyph_mk6/include"),
+             str(ROOT / "tools/fixtures/stage_a_ultimate_profiles_host/admission.cpp"),
+             str(ROOT / "src/core/config_validation.cpp"),
+             str(ROOT / "src/core/config_button_validation.cpp"),
+             str(ROOT / "src/core/config_usb_default_validation.cpp"),
+             str(ROOT / "src/core/config_rgb_target_validation.cpp"),
+             str(ROOT / "config/glyph/common/src/glyph_config_validation.cpp"),
+             *objects, "-o", str(executable)])
+
+        def check_payload(label: str, payload: bytes, expected: bool) -> None:
+            path = temp / (label + ".bin")
+            path.write_bytes(payload)
+            run([str(executable), str(path), "1" if expected else "0"])
+
+        check_payload("fixture", encoded, True)
+        # Reproduce the original omission and exercise actual reference/table rejection.
+        mutations = (
+            ("missing_backend_envelope", lambda m: (
+                m.ClearField("communication_backend_configs"),
+                m.ClearField("default_backend_config"), m.ClearField("default_usb_backend_config"))),
+            ("zero_usb_default", lambda m: setattr(m, "default_usb_backend_config", 0)),
+            ("out_of_range_usb_default", lambda m: setattr(m, "default_usb_backend_config", 2)),
+            ("invalid_backend_mode", lambda m: setattr(m.communication_backend_configs[0], "default_mode_config", 4)),
+            ("invalid_profile_reference", lambda m: setattr(m.game_mode_configs[2], "ultimate_profile_config", 3)),
+            ("incomplete_profile_table", lambda m: m.ultimate_profiles[0].tables[0].coordinates.pop()),
+        )
+        for label, mutate in mutations:
+            invalid = config_pb2.Config()
+            invalid.CopyFrom(message)
+            mutate(invalid)
+            check_payload(label, invalid.SerializeToString(), False)
+        renamed = config_pb2.Config()
+        renamed.CopyFrom(message)
+        for index, mode in enumerate(renamed.game_mode_configs):
+            mode.name = f"Display {index}"
+        check_payload("name_agnostic", renamed.SerializeToString(), True)
+        overlong = config_pb2.Config()
+        overlong.CopyFrom(message)
+        overlong.game_mode_configs[0].name = "Ultimate Runtime Profile"
+        path = temp / "overlong_name.bin"
+        path.write_bytes(overlong.SerializeToString())
+        require("string overflow" in run([str(executable), str(path), "2"]),
+                "original overlong name must be rejected by the actual Nanopb decoder")
+    print("production_nanopb_decode=true production_glyph_validation=PASS admission_negatives=6 decoder_negatives=1 name_agnostic=PASS")
+
+
 def verify_encoded_fields() -> None:
     sys.path.insert(0, str(ROOT / "tools"))
     import glyph_serial_config_tool as writer  # pylint: disable=import-outside-toplevel
@@ -100,6 +181,7 @@ def verify_encoded_fields() -> None:
             "encoded profile-B distinguishing coordinate changed")
     require(not writer.verify_required_bindings(message, config_pb2),
             "writer rejected the encoded Stage-A fixture")
+    verify_production_admission(message, encoded, config_pb2)
 
     non_ultimate_reference = config_pb2.Config()
     non_ultimate_reference.CopyFrom(message)
