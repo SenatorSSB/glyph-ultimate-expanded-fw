@@ -7,7 +7,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v3_artifact, run, require
+from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v2_artifact, make_v3_artifact, run, require
 
 HOST = ROOT / "tools/fixtures/stage_c_ultimate_profiles_host"
 ARTIFACT = ROOT / "tools/fixtures/stage_c_ultimate_profiles_dry_run.json"
@@ -17,10 +17,58 @@ def main() -> int:
     sys.path.insert(0, str(ROOT / "tools"))
     import glyph_serial_config_tool as writer
     pb, jf, _ = writer.load_runtime_proto_modules(ROOT)
+    stage_a = json.loads((ROOT / "tools/fixtures/stage_a_ultimate_profiles_dry_run.json").read_text(encoding="utf-8"))
+    stage_a_message, _ = writer.encode_artifact_payload(stage_a, pb, jf)
+    stage_b_message, _ = writer.encode_artifact_payload(make_v2_artifact(), pb, jf)
+    require(not writer.verify_required_bindings(stage_a_message, pb),
+            "writer rejected the supported schema-v1 artifact")
+    require(not writer.verify_required_bindings(stage_b_message, pb),
+            "writer rejected the supported schema-v2 artifact")
     artifact=json.loads(ARTIFACT.read_text(encoding="utf-8"))
     require(artifact==make_v3_artifact(),"tracked complete two-v3 writer artifact drift from source fixture")
     _, payload = writer.encode_artifact_payload(artifact, pb, jf)
     valid_message = pb.Config(); valid_message.ParseFromString(payload)
+    require(not writer.verify_required_bindings(valid_message, pb),
+            "writer rejected the complete schema-v3 artifact")
+    require([mode.ultimate_profile_config for mode in valid_message.game_mode_configs] == [0, 1, 2],
+            "schema-v3 artifact must retain explicit Ultimate profile references [0, 1, 2]")
+    dry_run = subprocess.run(
+        [sys.executable, str(ROOT / "tools/glyph_serial_config_tool.py"), "--dry-run", "--artifact", str(ARTIFACT)],
+        cwd=ROOT, capture_output=True, text=True, check=False,
+    )
+    require(dry_run.returncode == 0, f"schema-v3 dry-run failed: {dry_run.stdout} {dry_run.stderr}")
+    require("dry_run_serial_opened=false" in dry_run.stdout and "live_device_access=false" in dry_run.stdout,
+            "schema-v3 dry-run attempted serial access")
+
+    def writer_rejects(label, mutate):
+        invalid = pb.Config(); invalid.CopyFrom(valid_message)
+        mutate(invalid)
+        require(writer.verify_required_bindings(invalid, pb),
+                f"writer accepted malformed schema-v3 artifact: {label}")
+
+    writer_rejects("unsupported_version", lambda value: setattr(value.ultimate_profiles[0], "schema_version", 4))
+    writer_rejects("missing_output_program", lambda value: value.ultimate_profiles[0].ClearField("output_program"))
+    writer_rejects("incomplete_routing_slots", lambda value: value.ultimate_profiles[0].routing_slots.pop())
+    writer_rejects("duplicate_routing_slot", lambda value: setattr(
+        value.ultimate_profiles[0].routing_slots[-1], "slot_id",
+        value.ultimate_profiles[0].routing_slots[0].slot_id))
+    writer_rejects("zero_role_id", lambda value: setattr(value.ultimate_profiles[0].roles[0], "role_id", 0))
+    writer_rejects("duplicate_role_id", lambda value: setattr(
+        value.ultimate_profiles[0].roles[1], "role_id", value.ultimate_profiles[0].roles[0].role_id))
+    writer_rejects("unrouted_role_condition", lambda value: value.ultimate_profiles[0].roles[0].condition.all_tokens.append(60))
+    writer_rejects("duplicate_rule_priority", lambda value: setattr(
+        value.ultimate_profiles[0].table_rules[1], "priority", value.ultimate_profiles[0].table_rules[0].priority))
+    writer_rejects("out_of_range_rule_table", lambda value: setattr(
+        value.ultimate_profiles[0].table_rules[0], "table_id", 28))
+    writer_rejects("incomplete_output_effects", lambda value: value.ultimate_profiles[0].output_program.effects.pop())
+    writer_rejects("duplicate_output_effect_key", lambda value: value.ultimate_profiles[0].output_program.effects[1].CopyFrom(
+        value.ultimate_profiles[0].output_program.effects[0]))
+    writer_rejects("invalid_output_gate", lambda value: setattr(
+        value.ultimate_profiles[0].output_program.effects[0], "gate_token", 61))
+    writer_rejects("non_ultimate_reference", lambda value: (
+        setattr(value.game_mode_configs[0], "mode_id", pb.MODE_FGC),
+        setattr(value.game_mode_configs[0], "ultimate_profile_config", 1),
+    ))
     # Fixed custody of the independent oracle: no extraction from changed
     # production source at test time. Headers/tables are frozen alongside it.
     oracle = HOST / "legacy_ultimate.cpp"

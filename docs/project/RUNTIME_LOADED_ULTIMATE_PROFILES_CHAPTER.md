@@ -119,6 +119,10 @@ canonical integration occurs before that exact PASS.
   `2a8ef6929956ec983938aad734a2a9e66fa8532e04ae2287c20d07e51f3fa2ec`;
   encoded writer payload 6,233 bytes, SHA-256
   `d8f248b1a89099ea2a610697308ea299f9345bf7dd9b4627856014683e51eb8c`.
+- The tracked serial adapter accepts only the same bounded v1/v2/v3 structural
+  shapes required by production validation. The final v3 dry run passes with
+  no serial port opened; malformed role, route, rule, effect, gate, and
+  non-Ultimate-reference cases reject before serial access.
 
 ## Stage-A candidate and proof
 
@@ -171,3 +175,5 @@ canonical integration occurs before that exact PASS.
 | Stage-C initial implementation | fresh, then resumed; superseded partial implementation | Terra / medium | model UNKNOWN; effort UNKNOWN |
 | Stage-C full integration | fresh; sole accepted Stage-C writer | Sol / high | model UNKNOWN; effort UNKNOWN |
 | Final B+C independent review | fresh | Luna / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-C artifact adapter | fresh, then resumed; sole adapter writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-C adapter review | fresh, then fresh repair re-review | Luna / medium | model UNKNOWN; effort UNKNOWN |
