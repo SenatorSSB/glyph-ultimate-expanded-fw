@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the minimal common-wire Config bridge without a write or serial path.
+"""Check the minimal common-wire Config bridge without a write path.
 
 The Clean 1.0.7 side of this bridge is historical source proof only: its
 shared field numbers and validator shape were inspected, but this checker does
@@ -24,7 +24,7 @@ FIXTURE = ROOT / "tools/fixtures/final_bc_cross_version_bridge_config.json"
 SCHEMA = ROOT / "schema/haybox"
 NANOPB = ROOT / ".pio/libdeps/glyph_mk6/Nanopb"
 ADMISSION = ROOT / "tools/fixtures/stage_a_ultimate_profiles_host/admission.cpp"
-EXPECTED_PAYLOAD = bytes.fromhex("0a020803120408021001120508081a012a30013801")
+EXPECTED_PAYLOAD = bytes.fromhex("0a140803220408131013220408141014220408231023120408021001120508081a012a30013801")
 
 
 def require(condition: bool, message: str) -> None:
@@ -65,8 +65,14 @@ def assert_bridge_envelope(value: dict) -> None:
             "bridge must contain only common Config fields")
     modes = value["gameModeConfigs"]
     backends = value["communicationBackendConfigs"]
-    require(modes == [{"modeId": "MODE_ULTIMATE"}],
-            "bridge requires exactly one data-free Ultimate mode")
+    require(modes == [{
+        "modeId": "MODE_ULTIMATE",
+        "buttonRemapping": [
+            {"physicalButton": "BTN_RF3", "activates": "BTN_RF3"},
+            {"physicalButton": "BTN_RF4", "activates": "BTN_RF4"},
+            {"physicalButton": "BTN_LT3", "activates": "BTN_LT3"},
+        ],
+    }], "bridge requires one Ultimate mode with only adapter-required identity remaps")
     require(len(backends) == 2, "bridge requires exactly two backends")
     require(backends[0] == {"backendId": "COMMS_BACKEND_XINPUT", "defaultModeConfig": 1},
             "bridge XInput backend drift")
@@ -84,6 +90,8 @@ def assert_current_wire_contract() -> None:
     for declaration in (
             "GameModeId mode_id = 1;",
             "string name = 2;",
+            "Button physical_button = 1;",
+            "Button activates = 2;",
             "CommunicationBackendId backend_id = 1;",
             "uint32 default_mode_config = 2;",
             "repeated Button activation_binding = 3;",
@@ -93,7 +101,8 @@ def assert_current_wire_contract() -> None:
             "uint32 default_usb_backend_config = 7;"):
         require(declaration in schema, f"current shared wire declaration drift: {declaration}")
     for declaration in ("MODE_ULTIMATE = 3;", "COMMS_BACKEND_XINPUT = 2;",
-                        "COMMS_BACKEND_CONFIGURATOR = 8;", "BTN_RT2 = 42;"):
+                        "COMMS_BACKEND_CONFIGURATOR = 8;", "BTN_RF3 = 19;",
+                        "BTN_RF4 = 20;", "BTN_LT3 = 35;", "BTN_RT2 = 42;"):
         require(declaration in schema, f"current shared enum declaration drift: {declaration}")
 
 
@@ -146,6 +155,16 @@ def main() -> int:
             decoded, preserving_proto_field_name=False, use_integers_for_enums=False)
         require(round_tripped == source, "JSON/protobuf round-trip drift")
 
+        dry_run = subprocess.run(
+            [sys.executable, str(ROOT / "tools/glyph_serial_config_tool.py"), "--dry-run",
+             "--artifact", str(FIXTURE)], cwd=ROOT, capture_output=True, text=True, check=False)
+        require(dry_run.returncode == 0,
+                f"bridge serial-tool dry-run failed: {dry_run.stdout}{dry_run.stderr}")
+        require("dry_run_serial_opened=false" in dry_run.stdout,
+                "bridge dry-run did not prove no serial port was opened")
+        require("live_device_access=false" in dry_run.stdout,
+                "bridge dry-run did not prove no live device access")
+
         # Envelope-only negatives make omissions explicit; they do not claim that
         # every old source validator rejected fields introduced later.
         envelope_negatives = {
@@ -192,7 +211,7 @@ def main() -> int:
 
     print("glyph_final_bc_bridge_config: PASS")
     print("bridge_envelope=common_fields_only clean_1_0_7_proof=HISTORICAL_FIELD_AND_VALIDATOR_ONLY final_candidate=16fb02a5 device_proof=NOT_CLAIMED")
-    print("current_wire_fields=1,2,6,7 current_nanopb_decode_validate=PASS negatives=backend_refs:3 envelope:5 serial_dry_run=NOT_RUN")
+    print("current_wire_fields=1,2,6,7 current_nanopb_decode_validate=PASS negatives=backend_refs:3 envelope:5 serial_dry_run=PASS serial_opened=false live_device_access=false")
     print(f"fixture_sha256={hashlib.sha256(raw).hexdigest()} payload_bytes={len(payload)} payload_sha256={hashlib.sha256(payload).hexdigest()}")
     return 0
 

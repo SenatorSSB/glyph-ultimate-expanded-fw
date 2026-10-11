@@ -1,7 +1,21 @@
 {
   "gameModeConfigs": [
     {
-      "modeId": "MODE_ULTIMATE"
+      "modeId": "MODE_ULTIMATE",
+      "buttonRemapping": [
+        {
+          "physicalButton": "BTN_RF3",
+          "activates": "BTN_RF3"
+        },
+        {
+          "physicalButton": "BTN_RF4",
+          "activates": "BTN_RF4"
+        },
+        {
+          "physicalButton": "BTN_LT3",
+          "activates": "BTN_LT3"
+        }
+      ]
     }
   ],
   "communicationBackendConfigs": [

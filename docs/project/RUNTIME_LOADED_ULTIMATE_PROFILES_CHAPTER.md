@@ -234,16 +234,17 @@ canonical integration occurs before that exact PASS.
 ### Reviewed cross-version bridge artifact
 
 - Tracked bridge: `tools/fixtures/final_bc_cross_version_bridge_config.json`.
-  It is not a final runtime-profile Config: it has one empty `MODE_ULTIMATE`
-  row, XInput with default mode 1, one Configurator backend with exactly
-  `BTN_RT2`, defaults `defaultBackendConfig=1` and
+  It is not a final runtime-profile Config: it has one `MODE_ULTIMATE`
+  row with only the serial-adapter-required identity remaps RF3/RF4/LT3,
+  XInput with default mode 1, one Configurator backend with exactly `BTN_RT2`,
+  defaults `defaultBackendConfig=1` and
   `defaultUsbBackendConfig=1`, and no RGB, custom, keyboard, or Ultimate
   profile data. It intentionally omits Configurator default mode, matching the
   official default's zero/unspecified form.
-- Its encoded protobuf is 21 bytes, SHA-256
-  `0bd75eee8efb2687833ee982df65699c6bdbe940736ac79d9ff966d88b94be69`;
+- Its encoded protobuf is 39 bytes, SHA-256
+  `c7a2cb264ffd37b6ec6a0b0c59853815d507671b2ce1f8208d9dbcd8d0310c74`;
   fixture SHA-256
-  `084957c9ccb779e56e6708b93474b8e40c4b7cbaca80d52b41bc085668847229`.
+  `5ef3e66474e37675452bae7fae9ba77c099a153796d03277513f1d4eda8adf8b`.
 - Source-level Clean compatibility: official tag `9a78c7ee` pins
   HayBox-proto `5b2bb5d2c2a212647d5aaef7d5dc794be5197ecb`; the bridge uses
   only matching legacy field numbers/types and enum values (Ultimate=3,
