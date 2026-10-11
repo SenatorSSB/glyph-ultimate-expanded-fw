@@ -405,6 +405,47 @@ message UltimateProfileTable {
 }
 
 /**
+ * A bounded declarative condition used by Ultimate profile version 2.
+ *
+ * Tokens 1..60 name physical Button inputs. Tokens 65..96 name previously
+ * declared profile roles (role id + 64). No other token vocabulary exists.
+ */
+message UltimateProfileCondition {
+  repeated uint32 all_tokens = 1;
+  repeated uint32 any_tokens = 2;
+  repeated uint32 none_tokens = 3;
+}
+
+/**
+ * A named finite role. Role ids are 1..32 and may only depend on lower role
+ * ids, which makes the persisted role graph acyclic without an evaluator
+ * ordering convention.
+ */
+message UltimateProfileRole {
+  uint32 role_id = 1;
+  UltimateProfileCondition condition = 2;
+}
+
+/**
+ * A fixed routing slot. Stage B validates and evaluates these input bindings,
+ * but does not apply routing/output effects; those remain a later stage.
+ */
+message UltimateProfileRoutingSlot {
+  uint32 slot_id = 1;
+  uint32 input_token = 2;
+}
+
+/**
+ * A profile-driven table choice. Matching rules are resolved by their unique
+ * numeric priority; list order is never a tie-breaker.
+ */
+message UltimateProfileTableRule {
+  uint32 priority = 1;
+  uint32 table_id = 2;
+  UltimateProfileCondition condition = 3;
+}
+
+/**
  * Persistable coordinate data for one Ultimate runtime profile.
  *
  * Stage A supports the current 28 RuntimeTableId values only. The schema version
@@ -413,6 +454,11 @@ message UltimateProfileTable {
 message UltimateProfile {
   uint32 schema_version = 1;
   repeated UltimateProfileTable tables = 2;
+  // Version 2 adds finite roles, fixed routing bindings, and table selection.
+  repeated UltimateProfileRole roles = 3;
+  repeated UltimateProfileRoutingSlot routing_slots = 4;
+  uint32 default_table_id = 5;
+  repeated UltimateProfileTableRule table_rules = 6;
 }
 /**
  * Button to HID keyboard keycode mapping.

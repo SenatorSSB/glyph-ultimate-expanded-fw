@@ -80,5 +80,17 @@ GameModeConfig.menu_button_icon fixed_length:true
 GameModeConfig.ultimate_profile_config int_size:IS_8
 Config.default_dashboard_option int_size:IS_8
 Config.ultimate_profiles max_count:2
+UltimateProfile.roles max_count:22
+UltimateProfile.routing_slots max_count:32
+UltimateProfile.table_rules max_count:19
+UltimateProfileCondition.all_tokens max_count:2
+UltimateProfileCondition.any_tokens max_count:4
+UltimateProfileCondition.none_tokens max_count:9
+UltimateProfileRole.role_id int_size:IS_8
+UltimateProfileRoutingSlot.slot_id int_size:IS_8
+UltimateProfileRoutingSlot.input_token int_size:IS_8
+UltimateProfile.default_table_id int_size:IS_8
+UltimateProfileTableRule.priority int_size:IS_8
+UltimateProfileTableRule.table_id int_size:IS_8
 LayoutPlate long_names:false
 DashboardOption long_names:false

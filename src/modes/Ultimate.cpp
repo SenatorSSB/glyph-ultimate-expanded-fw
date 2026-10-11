@@ -1,6 +1,7 @@
 /* Ultimate profile by Taker */
 #include "modes/Ultimate.hpp"
 #include "modes/UltimateProfileConfig.hpp"
+#include "modes/UltimateProfileEvaluator.hpp"
 #include <config.pb.h>
 
 #define ANALOG_STICK_MIN 28
@@ -753,6 +754,10 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     if (rf4_rf2_minus41_active) {
         active_table_id = RuntimeTableId::Tilt1Minus41;
     }
+    // Version-2 profiles may choose only an existing coordinate table. The
+    // profile evaluator has no routing/output-effect authority in Stage B.
+    active_table_id = static_cast<RuntimeTableId>(UltimateProfileEvaluator::SelectTable(
+        profile, inputs.buttons, static_cast<uint8_t>(active_table_id)));
 
     if (roles.ls_to_dpad_active) {
         const RuntimeTableId center_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;

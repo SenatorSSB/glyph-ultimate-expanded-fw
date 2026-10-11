@@ -1,6 +1,6 @@
 # Runtime-Loaded Ultimate Profiles Chapter Ledger
 
-Status: `STAGE_B_ACTIVE`.
+Status: `STAGE_C_ACTIVE`.
 
 ## Authority and scope
 
@@ -43,8 +43,8 @@ Status: `STAGE_B_ACTIVE`.
 | --- | --- | --- |
 | 0 — schema, resource, source authority | complete | Tracked schema, reproducible code generation, target build, and measured resource report are complete. |
 | A — persisted coordinates | `HARDWARE_PASS` | Exact owner H1–H15 evidence passed for the candidate/artifact/fixture tuple. |
-| B — roles, sublayers, priorities | `AUTHORIZED / ACTIVE` | Implement bounded profile-driven roles, conditions, and deterministic priority with source/host proof and fresh review. |
-| C — bounded output effects | authorized after Stage-B proof | Activate without an intermediate hardware gate after Stage-B schema/resource, production-validation, host, and review gates pass. |
+| B — roles, sublayers, priorities | source/host proof PASS | Version-2 bounded roles, routed input slots, and explicit numeric-priority table rules passed production admission and fresh review. |
+| C — bounded output effects | `AUTHORIZED / ACTIVE` | Implement only the finite profile-varying effects needed by the accepted Ultimate behavior. No intermediate hardware gate is required. |
 
 ## Controls and measurements
 
@@ -75,6 +75,10 @@ Status: `STAGE_B_ACTIVE`.
   for Stage A only.
 - The generated host ABI measurement is `sizeof(Config) = 28,160` bytes,
   versus the 26,912-byte baseline: +1,248 bytes per fixed Config instance.
+- Stage-B generated host ABI measurement is `sizeof(Config) = 34,544` bytes,
+  +6,384 bytes from Stage A. The finite current-selector profile uses 22
+  roles, 15 required routed source inputs, and 19 table rules; the 32,768
+  combinations of those source inputs match the frozen legacy table selector.
 
 ## Current stop condition
 
@@ -82,6 +86,11 @@ Stage B is active under the direct owner authorization. Do not request an
 intermediate hardware test between B and C unless a concrete hardware-only
 uncertainty makes it unsafe to continue. The next owner gate is the grouped
 final B+C candidate; no canonical integration occurs before that exact PASS.
+
+Stage B source/host validation and fresh independent review now pass, so Stage
+C is active. Final B+C validation still requires target resource/build proof,
+an exact artifact and fixture, remote publication/verification, and the
+grouped owner hardware gate.
 
 ## Stage-A candidate and proof
 
@@ -126,3 +135,7 @@ final B+C candidate; no canonical integration occurs before that exact PASS.
 | Artifact review and re-review | fresh | Luna / medium | model UNKNOWN; effort UNKNOWN |
 | Artifact admission diagnosis | fresh; sole artifact-admission writer | Sol / medium | model UNKNOWN; effort UNKNOWN |
 | Artifact admission review | fresh; independent review | Luna / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-B behavior inventory | fresh; read-only | Sol / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-B/C schema design | fresh; read-only | Sol / high | model UNKNOWN; effort UNKNOWN |
+| Stage-B implementation | fresh, then resumed; sole schema/runtime writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Stage-B independent review | fresh | Terra / medium | model UNKNOWN; effort UNKNOWN |
