@@ -277,19 +277,12 @@ def ensure_dependency(module_name: str, blocker_hint: str) -> None:
 
 
 def find_config_proto(repo_root: Path) -> Path:
-    preferred_paths = [
-        repo_root / ".pio" / "libdeps" / "glyph_mk6" / "HayBox-proto" / "config.proto",
-    ]
-    for candidate in preferred_paths:
-        if candidate.exists():
-            return candidate
-
-    fallback_matches = sorted(repo_root.glob(".pio/libdeps/**/config.proto"))
-    haybox_matches = [path for path in fallback_matches if "HayBox-proto" in str(path)]
-    if haybox_matches:
-        return haybox_matches[0]
+    """Return the reviewed, tracked schema; never derive wire shape from .pio cache."""
+    candidate = repo_root / "schema" / "haybox" / "config.proto"
+    if candidate.is_file():
+        return candidate
     raise ToolError(
-        "could not locate source-traceable config.proto under .pio/libdeps/*/HayBox-proto/",
+        "could not locate tracked schema/haybox/config.proto; refusing mutable .pio cache schema",
         blocker=True,
     )
 
@@ -393,19 +386,8 @@ def encode_artifact_payload(
     return config_message, payload
 
 
-def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> list[str]:
+def verify_ultimate_mode_bindings(ultimate_mode: Any, config_pb2: ModuleType, label: str) -> list[str]:
     failures: list[str] = []
-    ultimate_modes = [
-        mode for mode in config_message.game_mode_configs if mode.mode_id == config_pb2.MODE_ULTIMATE
-    ]
-    if len(ultimate_modes) != 1:
-        failures.append(
-            "expected exactly one MODE_ULTIMATE game mode config, "
-            f"found {len(ultimate_modes)}"
-        )
-        return failures
-
-    ultimate_mode = ultimate_modes[0]
     remaps = list(ultimate_mode.button_remapping)
 
     rf3_entries = [
@@ -457,27 +439,27 @@ def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> lis
 
     if duplicates:
         failures.append(
-            "duplicate physical remap entries in MODE_ULTIMATE: "
+            f"duplicate physical remap entries in {label}: "
             + ", ".join(str(button) for button in duplicates)
         )
 
     if len(rf3_entries) != 1:
         failures.append(
-            "expected exactly one BTN_RF3 physical remap entry, "
+            f"expected exactly one BTN_RF3 physical remap entry in {label}, "
             f"found {len(rf3_entries)}"
         )
     if len(rf4_entries) != 1:
         failures.append(
-            "expected exactly one BTN_RF4 physical remap entry, "
+            f"expected exactly one BTN_RF4 physical remap entry in {label}, "
             f"found {len(rf4_entries)}"
         )
     if len(lt3_entries) != 1:
         failures.append(
-            "expected exactly one BTN_LT3 physical remap entry, "
+            f"expected exactly one BTN_LT3 physical remap entry in {label}, "
             f"found {len(lt3_entries)}"
         )
     if lt3_to_lf4:
-        failures.append("unexpected BTN_LT3 -> BTN_LF4 mapping present")
+        failures.append(f"unexpected BTN_LT3 -> BTN_LF4 mapping present in {label}")
 
     if not historical_mode and not identity_mode:
         failures.append(
@@ -508,6 +490,81 @@ def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> lis
             f"found {len(lt3_to_lt3)}"
         )
 
+    return failures
+
+
+def verify_stage_a_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> list[str]:
+    """Validate the bounded Stage-A wire representation before serial access.
+
+    This deliberately checks only the schema-backed persisted coordinates and
+    one-based mode references. It does not claim that firmware has consumed a
+    runtime-loaded profile or that any device write is safe.
+    """
+    failures: list[str] = []
+    profiles = list(config_message.ultimate_profiles)
+    if len(profiles) > 2:
+        failures.append(f"Stage-A supports at most two ultimate_profiles, found {len(profiles)}")
+
+    for profile_index, profile in enumerate(profiles, start=1):
+        label = f"ultimate_profiles[{profile_index}]"
+        if profile.schema_version != 1:
+            failures.append(f"{label}.schema_version must be 1, got {profile.schema_version}")
+        if len(profile.tables) != 28:
+            failures.append(f"{label}.tables must contain 28 entries, found {len(profile.tables)}")
+            continue
+        seen_table_ids: set[int] = set()
+        for table_index, table in enumerate(profile.tables):
+            table_label = f"{label}.tables[{table_index}]"
+            if table.table_id >= 28:
+                failures.append(f"{table_label}.table_id must be in [0,27], got {table.table_id}")
+            elif table.table_id in seen_table_ids:
+                failures.append(f"{label} has duplicate table_id {table.table_id}")
+            else:
+                seen_table_ids.add(table.table_id)
+            if len(table.coordinates) != 9:
+                failures.append(f"{table_label}.coordinates must contain 9 entries, found {len(table.coordinates)}")
+        missing_table_ids = sorted(set(range(28)) - seen_table_ids)
+        if missing_table_ids:
+            failures.append(f"{label} is missing table IDs: {missing_table_ids}")
+    return failures
+
+
+def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> list[str]:
+    failures: list[str] = []
+    ultimate_modes = [
+        mode for mode in config_message.game_mode_configs if mode.mode_id == config_pb2.MODE_ULTIMATE
+    ]
+    for mode_index, mode in enumerate(config_message.game_mode_configs, start=1):
+        if mode.mode_id != config_pb2.MODE_ULTIMATE and mode.ultimate_profile_config != 0:
+            failures.append(
+                f"game_mode_configs[{mode_index}].ultimate_profile_config is set for a non-Ultimate mode"
+            )
+
+    profiles = list(config_message.ultimate_profiles)
+    if profiles:
+        if len(ultimate_modes) != 3:
+            failures.append(
+                "Stage-A artifact with runtime profiles requires exactly three MODE_ULTIMATE "
+                "rows (legacy, profile 1, profile 2)"
+            )
+        elif sorted(mode.ultimate_profile_config for mode in ultimate_modes) != [0, 1, 2]:
+            failures.append(
+                "Stage-A artifact requires explicit MODE_ULTIMATE profile references [0, 1, 2]"
+            )
+    elif len(ultimate_modes) != 1:
+        failures.append(
+            f"legacy artifact requires exactly one MODE_ULTIMATE game mode config, found {len(ultimate_modes)}"
+        )
+
+    for mode_index, ultimate_mode in enumerate(ultimate_modes, start=1):
+        label = f"MODE_ULTIMATE[{mode_index}]"
+        failures.extend(verify_ultimate_mode_bindings(ultimate_mode, config_pb2, label))
+        if ultimate_mode.ultimate_profile_config > len(config_message.ultimate_profiles):
+            failures.append(
+                f"{label}.ultimate_profile_config={ultimate_mode.ultimate_profile_config} "
+                f"exceeds ultimate_profiles count {len(config_message.ultimate_profiles)}"
+            )
+    failures.extend(verify_stage_a_ultimate_profiles(config_message, config_pb2))
     return failures
 
 
