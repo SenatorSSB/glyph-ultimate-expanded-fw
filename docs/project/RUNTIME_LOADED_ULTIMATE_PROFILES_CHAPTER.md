@@ -41,7 +41,7 @@ Status: `HARDWARE_GATE_A_REQUIRED`.
 
 | Stage | State | Evidence / next permissible action |
 | --- | --- | --- |
-| 0 — schema, resource, source authority | source design complete; build pending | Tracked schema source and bounded Stage-A representation are in place. Canonical build/codegen proof remains pending. |
+| 0 — schema, resource, source authority | complete | Tracked schema, reproducible code generation, target build, and measured resource report are complete. |
 | A — persisted coordinates | `HARDWARE_GATE_A_REQUIRED` | Source, host proof, fresh reviews, build and custody are complete. Await the owner's bounded write/reboot observation before any Stage-B routing work. |
 | B — roles, sublayers, priorities | blocked on Gate A PASS | No implementation before exact Stage-A owner hardware PASS. |
 | C — bounded output effects | blocked on Gate A PASS | No implementation before Stage-A proof and Stage-B source/host proof. |
@@ -71,10 +71,10 @@ Status: `HARDWARE_GATE_A_REQUIRED`.
 - Stage-A schema uses `Config.ultimate_profiles` (tag 201; capacity two), a
   one-based `GameModeConfig.ultimate_profile_config` reference (tag 203), and
   profiles made of 28 explicitly identified tables with exactly nine `Coords`
-  each. Validation and firmware consumption have not yet been added.
-- Existing target-ABI evidence measured `sizeof(Config)` at 26,912 bytes.
-  The Stage-A schema is estimated to add roughly 1.3 KiB per fixed Config
-  instance; final acceptance requires target-generated measurements.
+  each. Extent/semantic validation and firmware consumption are implemented
+  for Stage A only.
+- The generated host ABI measurement is `sizeof(Config) = 28,160` bytes,
+  versus the 26,912-byte baseline: +1,248 bytes per fixed Config instance.
 
 ## Current stop condition
 
