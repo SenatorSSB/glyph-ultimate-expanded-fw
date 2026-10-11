@@ -12,6 +12,35 @@ from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v2_artifact
 HOST = ROOT / "tools/fixtures/stage_c_ultimate_profiles_host"
 ARTIFACT = ROOT / "tools/fixtures/stage_c_ultimate_profiles_dry_run.json"
 
+# This gate belongs to the Stage-C fixture handoff only. Generic Config
+# validation intentionally continues to accept source-valid Configs that do
+# not provide a Configurator recovery binding.
+FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED = True
+
+
+def verify_stage_c_recovery_envelope(config, pb) -> None:
+    require(FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED,
+            "Stage-C handoff must require the Configurator recovery envelope")
+    backend_count = len(config.communication_backend_configs)
+    mode_count = len(config.game_mode_configs)
+    require(backend_count >= 2, "Stage-C fixture requires XInput plus Configurator backends")
+    require(1 <= config.default_backend_config <= backend_count,
+            "Stage-C default backend index is outside the fixture backend configs")
+    require(1 <= config.default_usb_backend_config <= backend_count,
+            "Stage-C default USB backend index is outside the fixture backend configs")
+    for index, backend in enumerate(config.communication_backend_configs, start=1):
+        require(1 <= backend.default_mode_config <= mode_count,
+                f"Stage-C backend {index} default mode index is outside fixture game modes")
+    require(any(backend.backend_id == pb.COMMS_BACKEND_XINPUT
+                for backend in config.communication_backend_configs),
+            "Stage-C fixture requires an XInput backend")
+    configurators = [backend for backend in config.communication_backend_configs
+                     if backend.backend_id == pb.COMMS_BACKEND_CONFIGURATOR]
+    require(len(configurators) == 1,
+            "Stage-C fixture requires exactly one Configurator recovery backend")
+    require(list(configurators[0].activation_binding) == [pb.BTN_RT2],
+            "Stage-C Configurator recovery backend must bind exactly BTN_RT2")
+
 def main() -> int:
     require(sys.argv[1:] in ([],["--default-enum"]),"usage: check_glyph_stage_c_ultimate_profiles.py [--default-enum]")
     sys.path.insert(0, str(ROOT / "tools"))
@@ -28,6 +57,15 @@ def main() -> int:
     require(artifact==make_v3_artifact(),"tracked complete two-v3 writer artifact drift from source fixture")
     _, payload = writer.encode_artifact_payload(artifact, pb, jf)
     valid_message = pb.Config(); valid_message.ParseFromString(payload)
+    require(valid_message.SerializeToString() == payload,
+            "Stage-C encoded payload did not round-trip exactly through protobuf")
+    converted_json = jf.MessageToDict(
+        valid_message, preserving_proto_field_name=False, use_integers_for_enums=False)
+    converted_message = pb.Config()
+    jf.ParseDict(converted_json, converted_message, ignore_unknown_fields=False)
+    require(converted_message.SerializeToString() == payload,
+            "Stage-C JSON conversion did not preserve the encoded payload")
+    verify_stage_c_recovery_envelope(valid_message, pb)
     require(not writer.verify_required_bindings(valid_message, pb),
             "writer rejected the complete schema-v3 artifact")
     require([mode.ultimate_profile_config for mode in valid_message.game_mode_configs] == [0, 1, 2],
@@ -116,6 +154,26 @@ def main() -> int:
         print(run([str(executable),str(binary)]).strip())
         admission=temp / "admission"
         run(["c++","-std=c++17",*common,str(ROOT / "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp"),*[str(p) for p in sources],*objects,"-o",str(admission)])
+        def reject_config_reference(label, mutate):
+            invalid = pb.Config(); invalid.CopyFrom(valid_message)
+            mutate(invalid)
+            encoded = temp / (label + ".bin"); encoded.write_bytes(invalid.SerializeToString())
+            result = subprocess.run([str(admission), str(encoded), "0", "3"],
+                                    capture_output=True, text=True, check=False)
+            require(result.returncode == 0,
+                    f"production validation accepted malformed backend/default reference: {label}: "
+                    f"{result.stdout} {result.stderr}")
+
+        reject_config_reference("default_backend_out_of_range",
+                                lambda value: setattr(value, "default_backend_config",
+                                                      len(value.communication_backend_configs) + 1))
+        reject_config_reference("default_usb_backend_out_of_range",
+                                lambda value: setattr(value, "default_usb_backend_config",
+                                                      len(value.communication_backend_configs) + 1))
+        reject_config_reference("backend_default_mode_out_of_range",
+                                lambda value: setattr(value.communication_backend_configs[0],
+                                                      "default_mode_config",
+                                                      len(value.game_mode_configs) + 1))
         decoder_negatives=0
         decoder_required={"excess_effect","digital_wide_mask","table_wide_id","inline_excess","inline_wide_coordinate","fixed_wide_coordinate","trigger_wide_value","wide_gate","wide_condition_token"}
         def reject(label, mutate):
@@ -183,6 +241,7 @@ def main() -> int:
         for label,mutate in mutations: reject(label,mutate)
         print(f"production_decode_validation_negatives={len(mutations)} decoder_refusals={decoder_negatives} semantic_refusals={len(mutations)-decoder_negatives}")
     print(f"writer_fixture_profiles=2 schema_versions=3,3 explicit_refs=0,1,2 payload_bytes={len(payload)} payload_sha256={hashlib.sha256(payload).hexdigest()}")
+    print("FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED=true configurator_backends=1 activation_binding=BTN_RT2 backend_reference_negatives=3")
     print(f"fixture_sha256={hashlib.sha256(ARTIFACT.read_bytes()).hexdigest()} serial_port_opened=false")
     print("glyph_stage_c_ultimate_profiles: PASS")
     return 0

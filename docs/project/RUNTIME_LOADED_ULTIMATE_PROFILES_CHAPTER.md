@@ -1,6 +1,6 @@
 # Runtime-Loaded Ultimate Profiles Chapter Ledger
 
-Status: `FINAL_HARDWARE_GATE_REQUIRED`.
+Status: `FINAL_HARDWARE_GATE_REQUIRED` — corrected full-Config envelope published before the owner-only final gate.
 
 ## Authority and scope
 
@@ -84,10 +84,11 @@ Status: `FINAL_HARDWARE_GATE_REQUIRED`.
   and 2,344 bytes respectively. Production-path host correspondence passed
   1,222,420 complete final-output comparisons per ABI plus 50 strict decoder/
   semantic negatives. Encoded Config sizes are legacy 130, one v3 profile
-  3,182, and two/max profiles 6,233 bytes. The two-profile fixture SHA-256 is
-  `2a8ef6929956ec983938aad734a2a9e66fa8532e04ae2287c20d07e51f3fa2ec`;
+  3,182, and two/max profiles 6,242 bytes after the explicit recovery envelope.
+  The two-profile final-gate fixture SHA-256 is
+  `c91f2bb04a1ec70fe68acf8e54be8ed7687a4dd427823a1f943780d13bd786d3`;
   its writer payload SHA-256 is
-  `d8f248b1a89099ea2a610697308ea299f9345bf7dd9b4627856014683e51eb8c`.
+  `898f0efd71282862e8e567b6bd9633e6577c05cca5cd65bc562ca83256386b6a`.
 
 ## Current stop condition
 
@@ -114,15 +115,77 @@ canonical integration occurs before that exact PASS.
   403,968 / 1,568,768 bytes (25.8%). The known existing build warnings are
   unused historical runtime-config helpers and a 1,240-byte Senscope prototype
   self-test stack warning; no new Stage-C warning was reported.
-- Final runtime-profile fixture:
+- Final runtime-profile fixture (corrected full-Config envelope):
   `tools/fixtures/stage_c_ultimate_profiles_dry_run.json`, SHA-256
-  `2a8ef6929956ec983938aad734a2a9e66fa8532e04ae2287c20d07e51f3fa2ec`;
-  encoded writer payload 6,233 bytes, SHA-256
-  `d8f248b1a89099ea2a610697308ea299f9345bf7dd9b4627856014683e51eb8c`.
+  `c91f2bb04a1ec70fe68acf8e54be8ed7687a4dd427823a1f943780d13bd786d3`;
+  encoded writer payload 6,242 bytes, SHA-256
+  `898f0efd71282862e8e567b6bd9633e6577c05cca5cd65bc562ca83256386b6a`.
 - The tracked serial adapter accepts only the same bounded v1/v2/v3 structural
   shapes required by production validation. The final v3 dry run passes with
   no serial port opened; malformed role, route, rule, effect, gate, and
   non-Ultimate-reference cases reject before serial access.
+
+## Proven Config-envelope replacement defect and repair
+
+- Classification: `PROVEN_CONFIG_ENVELOPE_REPLACEMENT_DEFECT`. This is an
+  artifact/envelope defect, not a firmware, USB, or runtime-profile
+  architecture failure.
+- Source proof: `HAL/pico/src/comms/ConfiguratorBackend.cpp` initializes a
+  `Config_init_default` candidate, decodes the submitted complete Config into
+  it, validates it, and saves/publishes it; the Configurator SET path is full
+  replacement rather than a merge. `HAL/pico/src/display/DefaultConfigMenu.cpp`
+  enters Configurator only after finding `COMMS_BACKEND_CONFIGURATOR` in the
+  persisted backend rows. `HAL/pico/include/config_defaults.hpp` provides that
+  row with `BTN_RT2` activation in the canonical default Config.
+- The old Stage-A and Stage-C hardware fixtures supplied only
+  `COMMS_BACKEND_XINPUT`. After the Stage-A Config replacement, the menu had no
+  Configurator row to select and RT2 had no Configurator activation binding.
+- The source-free Stage-A record now preserves the original H1-H15 result and
+  explicitly records `POST_STAGE_A_CONFIG_CONFIGURATOR_ACCESS: FAIL` and
+  `POST_STAGE_A_CONFIG_RT2_CONFIGURATOR_ACTIVATION: FAIL`. H2's original PASS
+  applies after firmware flashing and before the Stage-A Config replacement;
+  Stage-A coordinate loading, explicit row/reference selection, duplicate-name
+  independence, A/B/A isolation, reboot, and power-cycle persistence remain
+  physically proven.
+- Final-gate artifact rule: `FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED = true`.
+  This applies only to this hardware fixture/handoff, not generic Config
+  validity. The fixture explicitly supplies XInput plus exactly one
+  Configurator backend with `activationBinding: BTN_RT2`; its backend/default
+  mode references are checked against its three actual game-mode rows.
+- Future runtime-profile exporters must explicitly supply or preserve the
+  ordinary complete Config envelope they intend to retain. They must not
+  silently emit an XInput-only full Config merely because their owned data is
+  Ultimate-specific. Intentionally Configurator-less Configs remain permitted
+  by generic Config validation.
+- Focused repair proof: JSON/protobuf exact round-trip, Nanopb production
+  decode, production `validate_glyph_config`, serial-free tool dry-run,
+  Configurator/RT2 presence checks, and invalid backend/default-reference
+  negatives pass under both host enum ABIs. The direct Stage-C correspondence
+  proof also passes. Fresh independent artifact review: APPROVED.
+- Production source candidate `16fb02a5eaaa95e63870d14593376c9d1f15aed2`
+  and tree `13ad3a19e4cb1ae19fd866ad48cb55a96897e630` are unchanged. The
+  exact 832,000-byte UF2 `c178cc2e39a6d2eceee27c16b9aae1364a04d628f1ca20bd28fc78a798c04830`
+  remains the valid final firmware artifact; it was not rebuilt.
+
+## Owner-only final recovery and grouped hardware packet
+
+- Current-controller recovery proposal: with explicit owner authorization,
+  manually copy the repository-archived user-provided official Fresh Install /
+  Clean image to RPI-RP2:
+  `docs/sources/raw/glyph_firmware_uf2/1.0.7/GlyphFirmware-1.0.7-Clean.uf2`.
+  Verified identity: 1,818,112 bytes, SHA-256
+  `22fd7f8f29fb33d9cb601187e9503411e5330e72c7297fbce0df710eec8ff200`.
+  The recorded official procedure says Fresh Install wipes profiles and restores
+  factory defaults, so this action is destructive and requires a separate
+  explicit owner approval immediately before device action. No device action
+  was performed by this chapter.
+- After recovery: confirm menu Configurator entry and RT2 Configurator boot;
+  flash the unchanged final UF2; confirm Configurator before Config write;
+  write this corrected fixture; reboot; then record PASS for
+  `POST_WRITE_MENU_CONFIGURATOR_ACCESS`,
+  `POST_WRITE_RT2_CONFIGURATOR_ACCESS`, and
+  `POST_POWERCYCLE_MENU_CONFIGURATOR_ACCESS`, alongside the grouped B+C
+  behavior matrix and persistence check.
 
 ## Stage-A candidate and proof
 
@@ -177,3 +240,5 @@ canonical integration occurs before that exact PASS.
 | Final B+C independent review | fresh | Luna / medium | model UNKNOWN; effort UNKNOWN |
 | Stage-C artifact adapter | fresh, then resumed; sole adapter writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
 | Stage-C adapter review | fresh, then fresh repair re-review | Luna / medium | model UNKNOWN; effort UNKNOWN |
+| Final Config-envelope repair | fresh; sole fixture/checker writer | Terra / medium | model UNKNOWN; effort UNKNOWN |
+| Final Config-envelope artifact review | fresh; independent review | Luna / medium | model UNKNOWN; effort UNKNOWN |

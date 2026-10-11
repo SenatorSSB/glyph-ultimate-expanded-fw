@@ -44,6 +44,15 @@
     {"id":"H14","expected":"Duplicate display names do not control profile identity.","observed":"PASS — all three same-name entries were selectable by list row; A/B/A produced profile-specific output."},
     {"id":"H15","expected":"Profile state persists across power cycle.","observed":"PASS — normal identical boot without storage error; profile A remained -39,-39."}
   ],
+  "post_evidence_correction": {
+    "recorded_at": "2026-10-11",
+    "scope": "This supplements the immutable H1-H15 observations; it does not reinterpret the coordinate, reference-selection, isolation, reboot, or power-cycle observations.",
+    "H2_scope_clarification": "H2 PASS established Configurator availability after flashing the Stage-A firmware and before the Stage-A Config replacement. It did not establish Configurator availability after that Config replacement.",
+    "POST_STAGE_A_CONFIG_CONFIGURATOR_ACCESS": "FAIL — owner reported that selecting Connect to Configurator returned the menu to its initial selection instead of entering Configurator mode.",
+    "POST_STAGE_A_CONFIG_RT2_CONFIGURATOR_ACTIVATION": "FAIL — owner reported that holding RT2 while connecting started normal default gameplay rather than Configurator mode.",
+    "serial_probe": "No Configurator protocol was received from a detected Pico port after the Stage-A Config replacement.",
+    "interpretation_boundary": "These are source-free owner-reported physical observations. The separate source-backed root-cause classification is recorded in the chapter ledger."
+  },
   "negative_regression_checks": [
     "Immediate post-flash and post-Config reboot had no Config refusal, recovery state, or unresponsive buttons.",
     "All three same-name rows were distinguishable by persisted row/reference rather than display-name identity.",

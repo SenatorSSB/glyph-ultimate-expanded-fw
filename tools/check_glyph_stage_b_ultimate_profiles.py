@@ -43,6 +43,13 @@ def make_v3_artifact() -> dict:
     artifact = make_v2_artifact()
     stage_c = json.loads(STAGE_C.read_text(encoding="utf-8"))
     version_2 = json.loads(SPEC.read_text(encoding="utf-8"))["version_2"]
+    # Stage-C's handoff fixture reserves a deterministic Configurator recovery
+    # envelope without changing the generic Config writer or validator.
+    artifact["communicationBackendConfigs"].append({
+        "backendId": "COMMS_BACKEND_CONFIGURATOR",
+        "defaultModeConfig": 1,
+        "activationBinding": ["BTN_RT2"],
+    })
     for index, profile in enumerate(artifact["ultimateProfiles"]):
         profile.update(copy.deepcopy(version_2))
         profile["schemaVersion"] = stage_c["schema_version"]
