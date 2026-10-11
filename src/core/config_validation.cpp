@@ -1,5 +1,6 @@
 #include "core/config_validation.hpp"
 #include "core/config_button_validation.hpp"
+#include "modes/UltimateProfileConfig.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -27,7 +28,8 @@ bool validate_config_extents(const Config &config) {
         !fits(config.communication_backend_configs, config.communication_backend_configs_count) ||
         !fits(config.custom_modes, config.custom_modes_count) ||
         !fits(config.keyboard_modes, config.keyboard_modes_count) ||
-        !fits(config.rgb_configs, config.rgb_configs_count)) {
+        !fits(config.rgb_configs, config.rgb_configs_count) ||
+        !fits(config.ultimate_profiles, config.ultimate_profiles_count)) {
         return false;
     }
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
@@ -78,6 +80,17 @@ bool validate_config_extents(const Config &config) {
             return false;
         }
     }
+    for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
+        const UltimateProfile &profile = config.ultimate_profiles[i];
+        if (!fits(profile.tables, profile.tables_count)) {
+            return false;
+        }
+        for (size_t j = 0; j < profile.tables_count; ++j) {
+            if (!fits(profile.tables[j].coordinates, profile.tables[j].coordinates_count)) {
+                return false;
+            }
+        }
+    }
     return true;
 }
 
@@ -117,10 +130,37 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
 
     static_assert(std::is_same<decltype(GameModeConfig::custom_mode_config), uint32_t>::value,
                   "custom reference must retain its authoritative decoded width");
+    for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
+        const UltimateProfile &profile = config.ultimate_profiles[i];
+        if (profile.schema_version != kUltimateProfileSchemaVersion ||
+            profile.tables_count != kUltimateProfileTableCount) {
+            return reference_error(error, "Ultimate profile %d has an unsupported shape",
+                static_cast<uint8_t>(i) + 1);
+        }
+
+        bool seen_table_ids[kUltimateProfileTableCount] = {};
+        for (size_t j = 0; j < profile.tables_count; ++j) {
+            const UltimateProfileTable &table = profile.tables[j];
+            if (table.table_id >= kUltimateProfileTableCount ||
+                table.coordinates_count != kUltimateProfileCoordinateCount ||
+                seen_table_ids[table.table_id]) {
+                return reference_error(error, "Ultimate profile %d has an invalid table",
+                    static_cast<uint8_t>(i) + 1);
+            }
+            seen_table_ids[table.table_id] = true;
+        }
+        for (size_t table_id = 0; table_id < kUltimateProfileTableCount; ++table_id) {
+            if (!seen_table_ids[table_id]) {
+                return reference_error(error, "Ultimate profile %d is missing a table",
+                    static_cast<uint8_t>(i) + 1);
+            }
+        }
+    }
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const GameModeConfig &mode = config.game_mode_configs[i];
         const uint8_t keyboard_mode_id = mode.keyboard_mode_config;
         const uint32_t custom_mode_id = mode.custom_mode_config;
+        const uint8_t ultimate_profile_id = mode.ultimate_profile_config;
         if (keyboard_mode_id > 0 && mode.mode_id != MODE_KEYBOARD) {
             return reference_error(error,
                 "keyboard_mode_id is set for game mode %d but mode_id is not MODE_KEYBOARD",
@@ -129,6 +169,11 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
         if (custom_mode_id > 0 && mode.mode_id != MODE_CUSTOM) {
             return reference_error(error,
                 "custom_mode_id is set for game mode %d but mode_id is not MODE_CUSTOM",
+                static_cast<uint8_t>(i) + 1);
+        }
+        if (ultimate_profile_id > 0 && mode.mode_id != MODE_ULTIMATE) {
+            return reference_error(error,
+                "ultimate_profile_id is set for game mode %d but mode_id is not MODE_ULTIMATE",
                 static_cast<uint8_t>(i) + 1);
         }
         if (keyboard_mode_id > config.keyboard_modes_count) {
@@ -142,6 +187,12 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
                 "Custom mode ID %lu is for game mode config %d but only %d custom modes are defined",
                 static_cast<unsigned long>(custom_mode_id), static_cast<uint8_t>(i) + 1,
                 static_cast<uint8_t>(config.custom_modes_count));
+        }
+        if (ultimate_profile_id > config.ultimate_profiles_count) {
+            return reference_error(error,
+                "Ultimate profile ID %d is for game mode %d but only %d Ultimate profiles are defined",
+                ultimate_profile_id, static_cast<uint8_t>(i) + 1,
+                static_cast<uint8_t>(config.ultimate_profiles_count));
         }
     }
     return true;

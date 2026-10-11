@@ -1,5 +1,6 @@
 /* Ultimate profile by Taker */
 #include "modes/Ultimate.hpp"
+#include "modes/UltimateProfileConfig.hpp"
 #include <config.pb.h>
 
 #define ANALOG_STICK_MIN 28
@@ -572,27 +573,59 @@ size_t DirectionIndexFromAxes(int8_t x_axis, int8_t y_axis) {
     return static_cast<size_t>(index);
 }
 
+const RuntimeConfigView& ResolveActiveRuntimeConfig();
+
+StickPoint LookupConfiguredStickPoint(
+    const UltimateProfile *profile,
+    RuntimeTableId table_id,
+    size_t direction_index
+) {
+    static_assert(kUltimateProfileTableCount == kRuntimeTableCount,
+                  "persisted profiles must cover every RuntimeTableId");
+    if (profile == nullptr) {
+        return LookupRuntimeStickPoint(
+            ResolveActiveRuntimeConfig(), table_id, direction_index);
+    }
+
+    const size_t clamped_direction_index = direction_index < kUltimateProfileCoordinateCount
+        ? direction_index
+        : kRuntimeTableCenterIndex;
+    const uint8_t requested_table_id = static_cast<uint8_t>(table_id);
+    for (size_t table_index = 0; table_index < profile->tables_count; ++table_index) {
+        const UltimateProfileTable &table = profile->tables[table_index];
+        if (table.table_id == requested_table_id) {
+            const Coords &coordinate = table.coordinates[clamped_direction_index];
+            return {coordinate.x, coordinate.y};
+        }
+    }
+
+    // Config validation rejects an explicitly selected profile without every
+    // RuntimeTableId. This return is only a defensive non-persisted state.
+    return {ANALOG_STICK_NEUTRAL, ANALOG_STICK_NEUTRAL};
+}
+
 void ApplyTableAnalogOutput(
-    const RuntimeConfigView &runtime_config,
+    const UltimateProfile *profile,
     RuntimeTableId active_table_id,
     int8_t x_axis,
     int8_t y_axis,
     OutputState &outputs
 ) {
     const size_t direction_index = DirectionIndexFromAxes(x_axis, y_axis);
-    const StickPoint *active_table = LookupRuntimeTable(runtime_config, active_table_id);
-    outputs.leftStickX = active_table[direction_index].x;
-    outputs.leftStickY = active_table[direction_index].y;
+    const StickPoint active_point = LookupConfiguredStickPoint(profile, active_table_id, direction_index);
+    outputs.leftStickX = active_point.x;
+    outputs.leftStickY = active_point.y;
 }
 
-void ApplyDirectionPlusAOverride(const RuntimeConfigView &runtime_config, const RoleState &roles, OutputState &outputs) {
+void ApplyDirectionPlusAOverride(const UltimateProfile *profile, const RoleState &roles, OutputState &outputs) {
     if (!roles.direction_plus_a_active) {
         return;
     }
 
     const RuntimeTableId direction_plus_a_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
     const size_t direction_plus_a_index = roles.direction_plus_a_force_up ? kDirectionEightIndex : kDirectionTwoIndex;
-    const StickPoint direction_plus_a_point = LookupRuntimeStickPoint(runtime_config, direction_plus_a_table_id, direction_plus_a_index);
+    const StickPoint direction_plus_a_point = LookupConfiguredStickPoint(
+        profile, direction_plus_a_table_id, direction_plus_a_index);
     outputs.leftStickX = direction_plus_a_point.x;
     outputs.leftStickY = direction_plus_a_point.y;
 }
@@ -614,11 +647,12 @@ const RuntimeConfigView& ResolveActiveRuntimeConfig() {
     return *GetActiveRuntimeConfigState().active_view;
 }
 
-void ApplyZAirdodgeOverride(const RuntimeConfigView &runtime_config, const EffectiveDirectionState &directions, OutputState &outputs) {
+void ApplyZAirdodgeOverride(const UltimateProfile *profile, const EffectiveDirectionState &directions, OutputState &outputs) {
     const int8_t lt1_x = directions.left == directions.right ? 0 : (directions.left ? -1 : 1);
     const int8_t lt1_y = directions.down == directions.up ? 0 : (directions.down ? -1 : 1);
     const size_t lt1_direction_index = DirectionIndexFromAxes(lt1_x, lt1_y);
-    const StickPoint lt1_point = LookupRuntimeStickPoint(runtime_config, RuntimeTableId::Lt1LowMagnitude, lt1_direction_index);
+    const StickPoint lt1_point = LookupConfiguredStickPoint(
+        profile, RuntimeTableId::Lt1LowMagnitude, lt1_direction_index);
     outputs.leftStickX = lt1_point.x;
     outputs.leftStickY = lt1_point.y;
 }
@@ -659,6 +693,11 @@ void ApplyNullOverride(OutputState &outputs) {
 
 Ultimate::Ultimate() : ControllerMode() {}
 
+void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile) {
+    InputMode::SetConfig(config);
+    _profile = profile;
+}
+
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     // Digital priority: physical inputs, LF4 sub-mode,
     // forced-Up resolution, button carriers, then optional LS->DPad routing.
@@ -677,7 +716,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     const LayerState layer = ResolveLayerState(inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(inputs, layer);
     const RoleState roles = ResolveRoleState(inputs, layer, effective_directions);
-    const RuntimeConfigView &runtime_config = ResolveActiveRuntimeConfig();
+    const UltimateProfile *profile = _profile;
 
     // Coordinate calculations to make modifier handling simpler.
     UpdateDirections(
@@ -717,15 +756,15 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
 
     if (roles.ls_to_dpad_active) {
         const RuntimeTableId center_table_id = roles.mode_active ? RuntimeTableId::ModeDefault : RuntimeTableId::Default;
-        const StickPoint center = LookupRuntimeStickPoint(runtime_config, center_table_id, kDirectionFiveIndex);
+        const StickPoint center = LookupConfiguredStickPoint(profile, center_table_id, kDirectionFiveIndex);
         outputs.leftStickX = center.x;
         outputs.leftStickY = center.y;
     } else {
-        ApplyTableAnalogOutput(runtime_config, active_table_id, directions.x, directions.y, outputs);
-        ApplyDirectionPlusAOverride(runtime_config, roles, outputs);
+        ApplyTableAnalogOutput(profile, active_table_id, directions.x, directions.y, outputs);
+        ApplyDirectionPlusAOverride(profile, roles, outputs);
 
         if (roles.z_airdodge_override_active) {
-            ApplyZAirdodgeOverride(runtime_config, effective_directions, outputs);
+            ApplyZAirdodgeOverride(profile, effective_directions, outputs);
         }
 
         if (roles.hard_up_b_active) {
