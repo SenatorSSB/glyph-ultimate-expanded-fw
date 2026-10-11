@@ -1,0 +1,21 @@
+{
+  "gameModeConfigs": [
+    {
+      "modeId": "MODE_ULTIMATE"
+    }
+  ],
+  "communicationBackendConfigs": [
+    {
+      "backendId": "COMMS_BACKEND_XINPUT",
+      "defaultModeConfig": 1
+    },
+    {
+      "backendId": "COMMS_BACKEND_CONFIGURATOR",
+      "activationBinding": [
+        "BTN_RT2"
+      ]
+    }
+  ],
+  "defaultBackendConfig": 1,
+  "defaultUsbBackendConfig": 1
+}
