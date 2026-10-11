@@ -41,7 +41,7 @@ Status: `STAGE_0_SOURCE_AND_RESOURCE_ANALYSIS`.
 
 | Stage | State | Evidence / next permissible action |
 | --- | --- | --- |
-| 0 — schema, resource, source authority | active | Inspect actual proto/codegen, Config limits, persistence and routing; establish a reproducible schema approach and bounded representation. |
+| 0 — schema, resource, source authority | source design complete; build pending | Tracked schema source and bounded Stage-A representation are in place. Canonical build/codegen proof remains pending. |
 | A — persisted coordinates | blocked on Stage 0 | Implement only after the source/resource design is validated; prepare one discriminating hardware packet before Stage B. |
 | B — roles, sublayers, priorities | blocked on Gate A PASS | No implementation before exact Stage-A owner hardware PASS. |
 | C — bounded output effects | blocked on Gate A PASS | No implementation before Stage-A proof and Stage-B source/host proof. |
@@ -65,6 +65,16 @@ Status: `STAGE_0_SOURCE_AND_RESOURCE_ANALYSIS`.
 - The current firmware persists its one `Config` protobuf via LittleFS and
   validates decoded candidates before publication. The current source-owned
   Ultimate runtime tables are legacy behavior, not runtime-loaded profiles.
+- The selected dependency schema was cached at HayBox-proto
+  `db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8`; it is now vendored under
+  `schema/haybox/` so Nanopb code generation has tracked, reproducible inputs.
+- Stage-A schema uses `Config.ultimate_profiles` (tag 201; capacity two), a
+  one-based `GameModeConfig.ultimate_profile_config` reference (tag 203), and
+  profiles made of 28 explicitly identified tables with exactly nine `Coords`
+  each. Validation and firmware consumption have not yet been added.
+- Existing target-ABI evidence measured `sizeof(Config)` at 26,912 bytes.
+  The Stage-A schema is estimated to add roughly 1.3 KiB per fixed Config
+  instance; final acceptance requires target-generated measurements.
 
 ## Current stop condition
 
