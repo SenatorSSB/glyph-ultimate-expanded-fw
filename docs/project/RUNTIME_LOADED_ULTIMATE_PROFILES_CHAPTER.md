@@ -1,6 +1,6 @@
 # Runtime-Loaded Ultimate Profiles Chapter Ledger
 
-Status: `HARDWARE_GATE_A_REQUIRED`.
+Status: `STAGE_B_ACTIVE`.
 
 ## Authority and scope
 
@@ -23,8 +23,8 @@ Status: `HARDWARE_GATE_A_REQUIRED`.
 - An explicit but invalid or unsupported runtime extension is rejected; it
   never silently falls back to unrelated source-owned modifier values.
 - Stage A owns only persisted, validated 9-way coordinate tables while legacy
-  role/routing remains in firmware. Stages B and C are gated on Stage-A human
-  hardware evidence.
+  role/routing remains in firmware. Stage A is hardware-validated; Stage B is
+  active and Stage C may activate after its required Stage-B proof.
 - The runtime vocabulary is finite and declarative: no scripts, macros, turbo,
   timing, loops, or arbitrary expressions.
 
@@ -42,9 +42,9 @@ Status: `HARDWARE_GATE_A_REQUIRED`.
 | Stage | State | Evidence / next permissible action |
 | --- | --- | --- |
 | 0 — schema, resource, source authority | complete | Tracked schema, reproducible code generation, target build, and measured resource report are complete. |
-| A — persisted coordinates | `HARDWARE_GATE_A_REQUIRED` | Source, host proof, fresh reviews, build and custody are complete. Await the owner's bounded write/reboot observation before any Stage-B routing work. |
-| B — roles, sublayers, priorities | blocked on Gate A PASS | No implementation before exact Stage-A owner hardware PASS. |
-| C — bounded output effects | blocked on Gate A PASS | No implementation before Stage-A proof and Stage-B source/host proof. |
+| A — persisted coordinates | `HARDWARE_PASS` | Exact owner H1–H15 evidence passed for the candidate/artifact/fixture tuple. |
+| B — roles, sublayers, priorities | `AUTHORIZED / ACTIVE` | Implement bounded profile-driven roles, conditions, and deterministic priority with source/host proof and fresh review. |
+| C — bounded output effects | authorized after Stage-B proof | Activate without an intermediate hardware gate after Stage-B schema/resource, production-validation, host, and review gates pass. |
 
 ## Controls and measurements
 
@@ -78,10 +78,10 @@ Status: `HARDWARE_GATE_A_REQUIRED`.
 
 ## Current stop condition
 
-Stage A is waiting for owner hardware evidence. Do not start Stage B or C until
-the exact Gate-A candidate passes its bounded physical matrix. A concrete
-schema reproducibility, resource, source-authority, or architecture
-contradiction must be recorded here before requesting an owner decision.
+Stage B is active under the direct owner authorization. Do not request an
+intermediate hardware test between B and C unless a concrete hardware-only
+uncertainty makes it unsafe to continue. The next owner gate is the grouped
+final B+C candidate; no canonical integration occurs before that exact PASS.
 
 ## Stage-A candidate and proof
 
@@ -108,6 +108,10 @@ contradiction must be recorded here before requesting an owner decision.
   `5ce69327af7039db5c3f203bba29d66ab80c653f01bee47f8ddba0baa7b737d2`.
 - Fresh reviews: production implementation APPROVED; final artifact/adapter
   review APPROVED after the non-Ultimate-reference and row-cardinality guards.
+- Source-free human evidence: `repo-json:docs/calibration/fixtures/runtime_loaded_ultimate_profiles_stage_a_hardware_evidence_2026-10-11.json`.
+  The owner reported complete H1–H15 PASS, exact A/B/A coordinate isolation,
+  duplicate-name row selection, reboot/power-cycle persistence, and no
+  evidence gaps for the recorded candidate/artifact/fixture tuple.
 
 ## Workers
 
