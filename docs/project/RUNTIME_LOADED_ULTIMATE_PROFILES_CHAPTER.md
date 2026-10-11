@@ -1,6 +1,6 @@
 # Runtime-Loaded Ultimate Profiles Chapter Ledger
 
-Status: `FINAL_CANDIDATE_PREPARATION`.
+Status: `FINAL_HARDWARE_GATE_REQUIRED`.
 
 ## Authority and scope
 
@@ -44,7 +44,7 @@ Status: `FINAL_CANDIDATE_PREPARATION`.
 | 0 — schema, resource, source authority | complete | Tracked schema, reproducible code generation, target build, and measured resource report are complete. |
 | A — persisted coordinates | `HARDWARE_PASS` | Exact owner H1–H15 evidence passed for the candidate/artifact/fixture tuple. |
 | B — roles, sublayers, priorities | source/host proof PASS | Version-2 bounded roles, routed input slots, and explicit numeric-priority table rules passed production admission and fresh review. |
-| C — bounded output effects | source/host proof PASS | Bounded v3 typed effects, two complete profiles, production admission, and fresh review pass. Prepare the exact grouped final candidate. |
+| C — bounded output effects | source/host proof PASS | Bounded v3 typed effects, two complete profiles, production admission, fresh review, exact build, and custody pass. Await remote publication verification and the grouped final owner gate. |
 
 ## Controls and measurements
 
@@ -97,9 +97,28 @@ uncertainty makes it unsafe to continue. The next owner gate is the grouped
 final B+C candidate; no canonical integration occurs before that exact PASS.
 
 Stage B and C source/host validation and fresh independent reviews now pass.
-Final B+C validation still requires target resource/build proof, an exact
-artifact and fixture, remote publication/verification, and the grouped owner
-hardware gate. No canonical integration occurs before that exact PASS.
+The exact final source/artifact tuple is built and under local custody. Publish
+and live-verify the feature branch before the grouped owner hardware gate. No
+canonical integration occurs before that exact PASS.
+
+## Final B+C candidate and custody
+
+- Firmware source candidate: `16fb02a5eaaa95e63870d14593376c9d1f15aed2`
+- Candidate tree: `13ad3a19e4cb1ae19fd866ad48cb55a96897e630`
+- Build: `./scripts/build-glyph-mk6-quiet.sh` — PASS.
+- Mk6 UF2: 832,000 bytes, SHA-256
+  `c178cc2e39a6d2eceee27c16b9aae1364a04d628f1ca20bd28fc78a798c04830`
+- Custody path:
+  `local_backups/hardware-artifacts/16fb02a5eaaa95e63870d14593376c9d1f15aed2/c178cc2e39a6d2eceee27c16b9aae1364a04d628f1ca20bd28fc78a798c04830/firmware.uf2`
+- Target build resource report: RAM 118,744 / 262,144 bytes (45.3%); flash
+  403,968 / 1,568,768 bytes (25.8%). The known existing build warnings are
+  unused historical runtime-config helpers and a 1,240-byte Senscope prototype
+  self-test stack warning; no new Stage-C warning was reported.
+- Final runtime-profile fixture:
+  `tools/fixtures/stage_c_ultimate_profiles_dry_run.json`, SHA-256
+  `2a8ef6929956ec983938aad734a2a9e66fa8532e04ae2287c20d07e51f3fa2ec`;
+  encoded writer payload 6,233 bytes, SHA-256
+  `d8f248b1a89099ea2a610697308ea299f9345bf7dd9b4627856014683e51eb8c`.
 
 ## Stage-A candidate and proof
 
