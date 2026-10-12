@@ -47,7 +47,11 @@ class Persistence {
     static constexpr size_t config_offset = sizeof(ConfigHeader);
 
   private:
-    static constexpr char config_filename[] = "config.bin";
+    // config.bin is immutable migration input once a compact Config exists.
+    // New writes use a separate name so an interrupted migration cannot erase
+    // the only legacy source record.
+    static constexpr char config_filename[] = "config-v2.bin";
+    static constexpr char legacy_config_filename[] = "config.bin";
 
     bool _configuration_ok = false;
     bool _mounted = false;

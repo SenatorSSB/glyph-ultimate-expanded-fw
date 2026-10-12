@@ -4,6 +4,7 @@
 #include "core/config_usb_default_validation.hpp"
 #include "core/KeyboardMode.hpp"
 #include "core/Persistence.hpp"
+#include "core/ProfileStore.hpp"
 #include "core/mode_selection.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -177,6 +178,42 @@ void setup() {
                         ? BootOutcome::StoredConfigRejected : BootOutcome::StorageFailure,
                     display_ready);
         return;
+    }
+    if (!profile_store.Begin() ||
+        (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
+         profile_store.Incarnation() != config.ultimate_profile_store_incarnation)) {
+        refuse_boot(BootOutcome::StorageFailure, display_ready);
+        return;
+    }
+    if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
+        profile_store.MigrationPending() &&
+        profile_store.CompleteMigration(config) != ProfileStore::Status::Ok) {
+        refuse_boot(BootOutcome::StorageFailure, display_ready);
+        return;
+    }
+    if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0) {
+        uint32_t legacy_ids[2] = {};
+        const ProfileStore::Status migration = profile_store.ImportLegacy(config, legacy_ids, 2);
+        if (migration != ProfileStore::Status::Ok && migration != ProfileStore::Status::MigrationFenced) {
+            refuse_boot(BootOutcome::StorageFailure, display_ready);
+            return;
+        }
+        Config compact = config;
+        compact.ultimate_profiles_count = 0;
+        compact.ultimate_profile_store_format = ProfileStore::kCompactConfigFormat;
+        compact.ultimate_profile_store_incarnation = profile_store.Incarnation();
+        for (size_t i = 0; i < compact.game_mode_configs_count; ++i) {
+            GameModeConfig &mode = compact.game_mode_configs[i];
+            if (mode.mode_id == MODE_ULTIMATE && mode.ultimate_profile_config != 0) {
+                mode.ultimate_profile_id = legacy_ids[mode.ultimate_profile_config - 1];
+                mode.ultimate_profile_config = 0;
+            }
+        }
+        if (!persistence.SaveConfig(compact) || profile_store.CompleteMigration(compact) != ProfileStore::Status::Ok) {
+            refuse_boot(BootOutcome::StorageFailure, display_ready);
+            return;
+        }
+        config = compact;
     }
 
     // Create array of input sources to be used.

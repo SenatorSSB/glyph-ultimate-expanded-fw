@@ -113,15 +113,23 @@ bool Persistence::SaveConfig(Config &config) {
         return false;
     }
 
-    // Open file to store config data in.
-    File config_file = LittleFS.open(config_filename, "w+");
+    // The legacy config.bin is never a write target.  Stage the compact
+    // replacement, close it, validate it by reopening, then rotate the former
+    // compact file only after the staged bytes are known readable.
+    static constexpr char temporary_filename[] = "config-v2.tmp";
+    static constexpr char backup_filename[] = "config-v2.prev";
+    LittleFS.remove(temporary_filename);
+    File config_file = LittleFS.open(temporary_filename, "w+");
     if (!config_file) {
         return false;
     }
 
     // Write empty header to start with.
     ConfigHeader header = { .config_size = 0, .config_crc = 0 };
-    config_file.write((uint8_t *)&header, sizeof(ConfigHeader));
+    if (config_file.write((uint8_t *)&header, sizeof(ConfigHeader)) != sizeof(ConfigHeader)) {
+        config_file.close();
+        return false;
+    }
 
     // Encode Protobuf data directly into file body.
     pb_ostream_t ostream = as_pb_ostream(config_file);
@@ -141,12 +149,31 @@ bool Persistence::SaveConfig(Config &config) {
     // Update header.
     header.config_size = ostream.bytes_written;
     header.config_crc = crc.finalize();
-    config_file.seek(0);
-    config_file.write((uint8_t *)&header, sizeof(ConfigHeader));
+    if (!config_file.seek(0) ||
+        config_file.write((uint8_t *)&header, sizeof(ConfigHeader)) != sizeof(ConfigHeader)) {
+        config_file.close();
+        return false;
+    }
 
     // Persist changes.
     config_file.close();
 
+    File staged = LittleFS.open(temporary_filename, "r");
+    const bool staged_ok = staged && CheckSavedConfig(staged);
+    if (staged) staged.close();
+    if (!staged_ok) return false;
+
+    LittleFS.remove(backup_filename);
+    const bool had_current = LittleFS.exists(config_filename);
+    if (had_current && !LittleFS.rename(config_filename, backup_filename)) return false;
+    if (!LittleFS.rename(temporary_filename, config_filename)) {
+        if (had_current) LittleFS.rename(backup_filename, config_filename);
+        return false;
+    }
+    File published = LittleFS.open(config_filename, "r");
+    const bool published_ok = published && CheckSavedConfig(published);
+    if (published) published.close();
+    if (!published_ok) return false;
     return true;
 }
 
@@ -164,7 +191,9 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
     static Config candidate;
     candidate = Config_init_default;
 
-    File config_file = LittleFS.open(config_filename, "r");
+    const char *selected_filename = LittleFS.exists(config_filename)
+        ? config_filename : legacy_config_filename;
+    File config_file = LittleFS.open(selected_filename, "r");
     if (!config_file) {
         // The selected Boolean FS API cannot distinguish absence from I/O failure.
         // Absent remains reserved for positively proved absence; it is not inferred.
@@ -213,7 +242,9 @@ bool Persistence::CheckSavedConfig() {
         return false;
     }
     // Open file to load config data from.
-    File config_file = LittleFS.open(config_filename, "r");
+    const char *selected_filename = LittleFS.exists(config_filename)
+        ? config_filename : legacy_config_filename;
+    File config_file = LittleFS.open(selected_filename, "r");
     if (!config_file) {
         return false;
     }
@@ -228,7 +259,9 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
         return false;
     }
     // Open file to load config data from.
-    File config_file = LittleFS.open(config_filename, "r");
+    const char *selected_filename = LittleFS.exists(config_filename)
+        ? config_filename : legacy_config_filename;
+    File config_file = LittleFS.open(selected_filename, "r");
     if (!config_file) {
         return false;
     }

@@ -1,6 +1,7 @@
 #include "core/mode_selection.hpp"
 
 #include "core/state.hpp"
+#include "core/ProfileStore.hpp"
 #include "modes/CustomControllerMode.hpp"
 #include "modes/CustomKeyboardMode.hpp"
 #include "modes/FgcMode.hpp"
@@ -110,6 +111,17 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
             set_mode(backend, &projectm_mode);
             break;
         case MODE_ULTIMATE:
+            if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
+                ProfileStore::Status status;
+                const UltimateProfile *profile = profile_store.Activate(mode_config.ultimate_profile_id, &status);
+                // A failed selected record remains diagnostic in the store; the
+                // runtime uses only the established source-owned fallback.
+                if (mode_config.ultimate_profile_id != 0 && status != ProfileStore::Status::Ok &&
+                    status != ProfileStore::Status::RecoveredPrevious) profile = nullptr;
+                ultimate_mode.SetConfig(mode_config, profile);
+                set_mode(backend, &ultimate_mode);
+                break;
+            }
             if (mode_config.ultimate_profile_config > config.ultimate_profiles_count) {
                 break;
             }

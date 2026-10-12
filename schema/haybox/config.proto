@@ -25,6 +25,9 @@ enum Command {
   CMD_REBOOT_FIRMWARE = 7;
   // Request for device to reboot into bootloader.
   CMD_REBOOT_BOOTLOADER = 8;
+  // Versioned profile-store request or response envelope.  Legacy Config
+  // clients must negotiate this command before attempting store mutation.
+  CMD_PROFILE_STORE = 9;
 }
 /**
  * Button identifiers for all 60 supported button inputs.
@@ -635,6 +638,10 @@ message GameModeConfig {
   repeated OutputOption menu_button_icon = 202;
   // One-based index into Config.ultimate_profiles. Valid only when mode_id = MODE_ULTIMATE.
   uint32 ultimate_profile_config = 203;
+  // Stable ProfileStore ID.  This is deliberately distinct from the legacy
+  // one-based ultimate_profile_config array index, which remains migration
+  // input only.
+  uint32 ultimate_profile_id = 204;
 }
 /**
  * A communication backend config.
@@ -736,6 +743,11 @@ message Config {
   DashboardOption default_dashboard_option = 200;
   // Ultimate runtime profile definitions. Stage A supports at most two profiles.
   repeated UltimateProfile ultimate_profiles = 201;
+  // Compact ProfileStore marker and identity.  A nonzero format marker means
+  // Ultimate mode references use GameModeConfig.ultimate_profile_id and no
+  // embedded Ultimate profile body is authoritative.
+  uint32 ultimate_profile_store_format = 202;
+  uint32 ultimate_profile_store_incarnation = 203;
 }
 /**
  * Device info message.

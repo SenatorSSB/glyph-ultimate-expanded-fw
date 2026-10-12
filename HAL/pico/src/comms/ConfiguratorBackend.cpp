@@ -19,6 +19,7 @@
 
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
+#include "core/ProfileStore.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
@@ -176,6 +177,17 @@ bool ConfiguratorBackend::HandleSetConfig() {
             snprintf(errmsg, sizeof(errmsg), "Failed to decode config: %s", istream.errmsg);
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
 
+        return false;
+    }
+
+    // Whole-Config SET is the legacy protocol.  Once a compact profile-store
+    // Config is active, accepting an older client's decoded default marker
+    // would silently sever stable per-mode references.  Store mutations must
+    // use the negotiated profile-store protocol instead.
+    if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
+        candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat) {
+        static const char errmsg[] = "Profile store requires negotiated protocol";
+        WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
         return false;
     }
 

@@ -2,6 +2,7 @@
 #include "core/config_button_validation.hpp"
 #include "modes/UltimateProfileConfig.hpp"
 #include "modes/UltimateProfileEvaluator.hpp"
+#include "core/ProfileStore.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -222,6 +223,13 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
 
     static_assert(std::is_same<decltype(GameModeConfig::custom_mode_config), uint32_t>::value,
                   "custom reference must retain its authoritative decoded width");
+    if (config.ultimate_profile_store_format > ProfileStore::kCompactConfigFormat) {
+        return reference_error(error, "%s", "Ultimate profile store format is unsupported");
+    }
+    if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
+        (config.ultimate_profile_store_incarnation == 0 || config.ultimate_profiles_count != 0)) {
+        return reference_error(error, "%s", "Compact Ultimate profile store config is invalid");
+    }
     for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
         const UltimateProfile &profile = config.ultimate_profiles[i];
         if ((profile.schema_version != kUltimateProfileSchemaVersionV1 &&
@@ -373,6 +381,14 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
                 "ultimate_profile_id is set for game mode %d but mode_id is not MODE_ULTIMATE",
                 static_cast<uint8_t>(i) + 1);
         }
+        if (mode.ultimate_profile_id > 0 && mode.mode_id != MODE_ULTIMATE) {
+            return reference_error(error,
+                "stable Ultimate profile ID is set for game mode %d but mode_id is not MODE_ULTIMATE",
+                static_cast<uint8_t>(i) + 1);
+        }
+        if (config.ultimate_profile_store_format == 0 && mode.ultimate_profile_id != 0) {
+            return reference_error(error, "%s", "Legacy Ultimate profile config contains a stable profile ID");
+        }
         if (keyboard_mode_id > config.keyboard_modes_count) {
             return reference_error(error,
                 "Keyboard mode ID %d is for game mode %d but only %d keyboard modes are defined",
@@ -390,6 +406,10 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
                 "Ultimate profile ID %d is for game mode %d but only %d Ultimate profiles are defined",
                 ultimate_profile_id, static_cast<uint8_t>(i) + 1,
                 static_cast<uint8_t>(config.ultimate_profiles_count));
+        }
+        if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
+            mode.mode_id == MODE_ULTIMATE && ultimate_profile_id != 0) {
+            return reference_error(error, "%s", "Compact Ultimate profile config retains legacy index");
         }
     }
     return true;
