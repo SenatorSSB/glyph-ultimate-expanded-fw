@@ -58,6 +58,7 @@ Status: `DISCOVERY_IN_PROGRESS`.
 | corrected dispatch | Worker 4 - LUNA Investigator | repository resource/storage audit | complete | `/private/tmp/glyph-w4-mechanical-resource-audit.md`; D0 spot-verified source claims |
 | owner-authorized preflight | Worker 2 - TERRA Implementer | read-only source-surface readiness inventory | complete | direct source-cited surface/test inventory; no implementation |
 | implementation dispatch | Worker 2 - TERRA Implementer | frozen multi-profile store architecture | dispatched | implementation branch/candidate pending |
+| implementation checkpoint | Worker 2 - TERRA Implementer | persistent-store partial implementation | incomplete | `7e4b2db264a3f06e565570f8c43a09f7edc434bd`; focused completion repair dispatched |
 | owner-authorized preflight | Worker 3 - SOL Reviewer | read-only future-review rubric/inventory | complete | direct report; D0 spot-verified persistence, validation, selection, and Configurator claims |
 | independent design review | Worker 3 - SOL Reviewer | proposed design after W1 repairs | complete | one migration-lifetime/fence repair incorporated; no review-of-review |
 
@@ -132,3 +133,9 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   legacy migration start, staged compact-Config replacement, and an old
   whole-Config SET guard. Negotiated CRUD, recovery, fault tests, and resource
   evidence remain incomplete; no candidate SHA is claimed.
+- W2 checkpoint `7e4b2db264a3f06e565570f8c43a09f7edc434bd` (parent
+  `c3d453450e147f72816fcd59f6dbfcf7c04377a0`) has a passing Mk6 build and
+  unchanged Stage A/B/C checkers, but does not satisfy the frozen design:
+  Configurator CRUD, independent recovery servicing, fault/interruption tests,
+  and capacity/reserve admission evidence are absent. It is not a candidate,
+  has not been sent to W3, and cannot proceed to hardware.
