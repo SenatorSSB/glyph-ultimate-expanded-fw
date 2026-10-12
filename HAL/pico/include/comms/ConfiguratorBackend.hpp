@@ -45,6 +45,7 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleGetDeviceInfo();
     bool HandleGetConfig();
     bool HandleSetConfig();
+    bool HandleProfileStore();
 
     packetio::COBSStream _in;
     packetio::COBSPrint _out;

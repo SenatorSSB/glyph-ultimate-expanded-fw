@@ -542,6 +542,68 @@ message UltimateProfile {
   // significant: v1 and v2 retain their byte-for-byte legacy behavior.
   UltimateProfileOutputProgram output_program = 7;
 }
+enum ProfileStoreOperation {
+  PROFILE_STORE_OPERATION_UNSPECIFIED = 0;
+  PROFILE_STORE_STATUS = 1;
+  PROFILE_STORE_LIST = 2;
+  PROFILE_STORE_READ = 3;
+  PROFILE_STORE_CREATE = 4;
+  PROFILE_STORE_UPDATE = 5;
+  PROFILE_STORE_DUPLICATE = 6;
+  PROFILE_STORE_RENAME = 7;
+  PROFILE_STORE_REORDER = 8;
+  PROFILE_STORE_DELETE = 9;
+  PROFILE_STORE_SET_MODE_REFERENCE = 10;
+  PROFILE_STORE_QUERY_TRANSACTION = 11;
+}
+enum ProfileStoreStatus {
+  PROFILE_STORE_STATUS_UNSPECIFIED = 0;
+  PROFILE_STORE_OK = 1;
+  PROFILE_STORE_INVALID = 2;
+  PROFILE_STORE_UNSUPPORTED = 3;
+  PROFILE_STORE_NOT_FOUND = 4;
+  PROFILE_STORE_REFERENCED = 5;
+  PROFILE_STORE_CONFLICT = 6;
+  PROFILE_STORE_FULL = 7;
+  PROFILE_STORE_IO_FAILURE = 8;
+  PROFILE_STORE_COMMIT_UNKNOWN = 9;
+}
+message ProfileStoreEntry {
+  uint32 profile_id = 1;
+  uint64 revision = 2;
+  string name = 3;
+  uint32 display_rank = 4;
+  uint32 payload_version = 5;
+  uint32 health = 6;
+}
+message ProfileStoreRequest {
+  uint32 protocol_version = 1;
+  uint64 request_token = 2;
+  ProfileStoreOperation operation = 3;
+  uint64 expected_store_generation = 4;
+  uint32 profile_id = 5;
+  uint64 expected_profile_revision = 6;
+  uint32 page_cursor = 7;
+  uint32 page_size = 8;
+  string name = 9;
+  uint32 display_rank = 10;
+  UltimateProfile profile = 11;
+  uint32 mode_config_index = 12;
+  uint64 expected_config_generation = 13;
+}
+message ProfileStoreResponse {
+  uint32 protocol_version = 1;
+  uint64 request_token = 2;
+  ProfileStoreStatus status = 3;
+  uint64 store_generation = 4;
+  uint32 profile_id = 5;
+  uint64 profile_revision = 6;
+  uint32 next_page_cursor = 7;
+  repeated ProfileStoreEntry entries = 8;
+  UltimateProfile profile = 9;
+  uint64 config_generation = 10;
+  string diagnostic = 11;
+}
 /**
  * Button to HID keyboard keycode mapping.
  *
