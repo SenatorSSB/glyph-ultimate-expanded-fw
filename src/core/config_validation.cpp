@@ -1,5 +1,7 @@
 #include "core/config_validation.hpp"
 #include "core/config_button_validation.hpp"
+#include "modes/UltimateProfileConfig.hpp"
+#include "modes/UltimateProfileEvaluator.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -20,6 +22,71 @@ bool reference_error(ConfigValidationError &error, const char *format, Args... a
     return false;
 }
 
+bool is_button_token(uint32_t token) {
+    return token >= kUltimateProfileButtonTokenMin && token <= kUltimateProfileButtonTokenMax;
+}
+
+bool is_role_token(uint32_t token) {
+    return token >= kUltimateProfileRoleTokenMin && token <= kUltimateProfileRoleTokenMax;
+}
+
+bool is_required_routing_slot(uint32_t token) {
+    switch (token) {
+        case BTN_LF4:
+        case BTN_RF2:
+        case BTN_RF3:
+        case BTN_RF4:
+        case BTN_RF8:
+        case BTN_RF9:
+        case BTN_LT2:
+        case BTN_LT3:
+        case BTN_LT4:
+        case BTN_LT5:
+        case BTN_RT1:
+        case BTN_RT2:
+        case BTN_RT3:
+        case BTN_RT4:
+        case BTN_RT5:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool validate_profile_condition(
+    const UltimateProfileCondition &condition,
+    const bool defined_roles[32],
+    const bool routed_buttons[61],
+    uint8_t maximum_role_id,
+    ConfigValidationError &error,
+    uint8_t profile_id
+) {
+    const uint8_t *lists[] = {condition.all_tokens, condition.any_tokens, condition.none_tokens};
+    const size_t counts[] = {
+        condition.all_tokens_count,
+        condition.any_tokens_count,
+        condition.none_tokens_count,
+    };
+    bool seen_tokens[97] = {};
+    for (size_t list = 0; list < 3; ++list) {
+        for (size_t index = 0; index < counts[list]; ++index) {
+            const uint32_t token = lists[list][index];
+            if ((!is_button_token(token) && !is_role_token(token)) || seen_tokens[token] ||
+                (is_button_token(token) && !routed_buttons[token])) {
+                return reference_error(error, "Ultimate profile %d has an invalid condition token", profile_id);
+            }
+            seen_tokens[token] = true;
+            if (is_role_token(token)) {
+                const uint8_t role_id = static_cast<uint8_t>(token - 64);
+                if (role_id > maximum_role_id || !defined_roles[role_id - 1]) {
+                    return reference_error(error, "Ultimate profile %d has an unresolved role token", profile_id);
+                }
+            }
+        }
+    }
+    return true;
+}
+
 }  // namespace
 
 bool validate_config_extents(const Config &config) {
@@ -27,7 +94,8 @@ bool validate_config_extents(const Config &config) {
         !fits(config.communication_backend_configs, config.communication_backend_configs_count) ||
         !fits(config.custom_modes, config.custom_modes_count) ||
         !fits(config.keyboard_modes, config.keyboard_modes_count) ||
-        !fits(config.rgb_configs, config.rgb_configs_count)) {
+        !fits(config.rgb_configs, config.rgb_configs_count) ||
+        !fits(config.ultimate_profiles, config.ultimate_profiles_count)) {
         return false;
     }
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
@@ -78,6 +146,43 @@ bool validate_config_extents(const Config &config) {
             return false;
         }
     }
+    for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
+        const UltimateProfile &profile = config.ultimate_profiles[i];
+        if (!fits(profile.tables, profile.tables_count) ||
+            !fits(profile.roles, profile.roles_count) ||
+            !fits(profile.routing_slots, profile.routing_slots_count) ||
+            !fits(profile.table_rules, profile.table_rules_count) ||
+            !fits(profile.output_program.effects, profile.output_program.effects_count)) {
+            return false;
+        }
+        for (size_t j = 0; j < profile.output_program.effects_count; ++j) {
+            const auto &effect = profile.output_program.effects[j];
+            if (!fits(effect.coordinates, effect.coordinates_count)) return false;
+        }
+        for (size_t j = 0; j < profile.tables_count; ++j) {
+            if (!fits(profile.tables[j].coordinates, profile.tables[j].coordinates_count)) {
+                return false;
+            }
+        }
+        for (size_t j = 0; j < profile.roles_count; ++j) {
+            const UltimateProfileRole &role = profile.roles[j];
+            if (!role.has_condition ||
+                !fits(role.condition.all_tokens, role.condition.all_tokens_count) ||
+                !fits(role.condition.any_tokens, role.condition.any_tokens_count) ||
+                !fits(role.condition.none_tokens, role.condition.none_tokens_count)) {
+                return false;
+            }
+        }
+        for (size_t j = 0; j < profile.table_rules_count; ++j) {
+            const UltimateProfileTableRule &rule = profile.table_rules[j];
+            if (!rule.has_condition ||
+                !fits(rule.condition.all_tokens, rule.condition.all_tokens_count) ||
+                !fits(rule.condition.any_tokens, rule.condition.any_tokens_count) ||
+                !fits(rule.condition.none_tokens, rule.condition.none_tokens_count)) {
+                return false;
+            }
+        }
+    }
     return true;
 }
 
@@ -110,10 +215,142 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
 
     static_assert(std::is_same<decltype(GameModeConfig::custom_mode_config), uint32_t>::value,
                   "custom reference must retain its authoritative decoded width");
+    for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
+        const UltimateProfile &profile = config.ultimate_profiles[i];
+        if ((profile.schema_version != kUltimateProfileSchemaVersionV1 &&
+             profile.schema_version != kUltimateProfileSchemaVersionV2 &&
+             profile.schema_version != kUltimateProfileSchemaVersionV3) ||
+            profile.tables_count != kUltimateProfileTableCount) {
+            return reference_error(error, "Ultimate profile %d has an unsupported shape",
+                static_cast<uint8_t>(i) + 1);
+        }
+
+        const uint8_t profile_id = static_cast<uint8_t>(i) + 1;
+        if (profile.schema_version == kUltimateProfileSchemaVersionV1 &&
+            (profile.roles_count != 0 || profile.routing_slots_count != 0 ||
+             profile.default_table_id != 0 || profile.table_rules_count != 0 ||
+             profile.has_output_program)) {
+            return reference_error(error, "Ultimate profile %d adds fields to schema version 1", profile_id);
+        }
+
+        if (profile.schema_version == kUltimateProfileSchemaVersionV2 && profile.has_output_program) {
+            return reference_error(error, "Ultimate profile %d adds an output program to schema version 2", profile_id);
+        }
+
+        bool seen_table_ids[kUltimateProfileTableCount] = {};
+        for (size_t j = 0; j < profile.tables_count; ++j) {
+            const UltimateProfileTable &table = profile.tables[j];
+            if (table.table_id >= kUltimateProfileTableCount ||
+                table.coordinates_count != kUltimateProfileCoordinateCount ||
+                seen_table_ids[table.table_id]) {
+                return reference_error(error, "Ultimate profile %d has an invalid table", profile_id);
+            }
+            seen_table_ids[table.table_id] = true;
+        }
+        for (size_t table_id = 0; table_id < kUltimateProfileTableCount; ++table_id) {
+            if (!seen_table_ids[table_id]) {
+                return reference_error(error, "Ultimate profile %d is missing a table", profile_id);
+            }
+        }
+
+        if (profile.schema_version == kUltimateProfileSchemaVersionV1) {
+            continue;
+        }
+
+        if (profile.roles_count == 0 ||
+            profile.routing_slots_count < kUltimateProfileRequiredRoutingSlotCount ||
+            profile.table_rules_count == 0 ||
+            profile.default_table_id >= kUltimateProfileTableCount) {
+            return reference_error(error, "Ultimate profile %d has an incomplete version 2 shape", profile_id);
+        }
+
+        bool defined_roles[32] = {};
+        for (size_t role_index = 0; role_index < profile.roles_count; ++role_index) {
+            const UltimateProfileRole &role = profile.roles[role_index];
+            if (role.role_id == 0 || role.role_id > 32 || defined_roles[role.role_id - 1]) {
+                return reference_error(error, "Ultimate profile %d has an invalid role", profile_id);
+            }
+            defined_roles[role.role_id - 1] = true;
+        }
+
+        bool seen_routing_slots[kUltimateProfileButtonTokenMax + 1] = {};
+        bool seen_routing_inputs[kUltimateProfileButtonTokenMax + 1] = {};
+        for (size_t slot_index = 0; slot_index < profile.routing_slots_count; ++slot_index) {
+            const UltimateProfileRoutingSlot &slot = profile.routing_slots[slot_index];
+            if (!is_button_token(slot.slot_id) || !is_button_token(slot.input_token) ||
+                seen_routing_slots[slot.slot_id] ||
+                seen_routing_inputs[slot.input_token]) {
+                return reference_error(error, "Ultimate profile %d has an invalid routing slot", profile_id);
+            }
+            seen_routing_slots[slot.slot_id] = true;
+            seen_routing_inputs[slot.input_token] = true;
+        }
+        for (uint32_t token = kUltimateProfileButtonTokenMin;
+             token <= kUltimateProfileButtonTokenMax; ++token) {
+            if (is_required_routing_slot(token) && !seen_routing_slots[token]) {
+                return reference_error(error, "Ultimate profile %d is missing a required routing slot", profile_id);
+            }
+        }
+
+        for (size_t role_index = 0; role_index < profile.roles_count; ++role_index) {
+            const UltimateProfileRole &role = profile.roles[role_index];
+            // Lower numeric ids, rather than persisted storage order, define the role DAG.
+            if (!validate_profile_condition(role.condition, defined_roles, seen_routing_slots,
+                    static_cast<uint8_t>(role.role_id - 1), error, profile_id)) {
+                return false;
+            }
+        }
+
+        bool seen_priorities[256] = {};
+        for (size_t rule_index = 0; rule_index < profile.table_rules_count; ++rule_index) {
+            const UltimateProfileTableRule &rule = profile.table_rules[rule_index];
+            if (rule.priority == 0 || rule.table_id >= kUltimateProfileTableCount ||
+                seen_priorities[rule.priority]) {
+                return reference_error(error, "Ultimate profile %d has an invalid table priority", profile_id);
+            }
+            seen_priorities[rule.priority] = true;
+            if (!validate_profile_condition(rule.condition, defined_roles, seen_routing_slots,
+                    32, error, profile_id)) {
+                return false;
+            }
+        }
+
+        if (profile.schema_version == kUltimateProfileSchemaVersionV3 &&
+            (!profile.has_output_program || !profile.output_program.enabled ||
+             profile.routing_slots_count != kUltimateProfileRoutingSlotCount ||
+             profile.output_program.effects_count != UltimateProfileEvaluator::kOutputEffectCount)) {
+            return reference_error(error, "Ultimate profile %d has an incomplete version 3 output program", profile_id);
+        }
+        if (profile.schema_version == kUltimateProfileSchemaVersionV3) {
+            // Every source input consumed by the fixed Ultimate pipeline has
+            // an explicit routed slot; unrelated slots cannot stand in for it.
+            const uint8_t required[] = {1,2,3,4,5,17,18,19,20,21,22,23,24,25,26,29,32,
+                33,34,35,36,37,38,41,42,43,44,45,52,53,54,55};
+            for (uint8_t slot : required) if (!seen_routing_slots[slot])
+                return reference_error(error, "Ultimate profile %d is missing an output input slot", profile_id);
+            bool keys[UltimateProfileEvaluator::kOutputEffectCount] = {};
+            for (size_t effect_index = 0; effect_index < profile.output_program.effects_count; ++effect_index) {
+                const UltimateProfileOutputEffect &effect = profile.output_program.effects[effect_index];
+                const int key = UltimateProfileEvaluator::EffectKey(effect);
+                if (key < 0 || keys[key] || !UltimateProfileEvaluator::ValidEffectShape(effect)) {
+                    return reference_error(error, "Ultimate profile %d has an invalid output effect", profile_id);
+                }
+                keys[key] = true;
+                const uint32_t token = effect.gate_token;
+                if ((token == 0 && effect.gate_inverted) ||
+                    (token != 0 && !((is_button_token(token) && seen_routing_slots[token]) ||
+                        (is_role_token(token) && defined_roles[token - 65]))))
+                    return reference_error(error, "Ultimate profile %d has an invalid output gate", profile_id);
+            }
+            for (bool present : keys) if (!present)
+                return reference_error(error, "Ultimate profile %d is missing an output phase", profile_id);
+        }
+    }
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const GameModeConfig &mode = config.game_mode_configs[i];
         const uint8_t keyboard_mode_id = mode.keyboard_mode_config;
         const uint32_t custom_mode_id = mode.custom_mode_config;
+        const uint8_t ultimate_profile_id = mode.ultimate_profile_config;
         if (keyboard_mode_id > 0 && mode.mode_id != MODE_KEYBOARD) {
             return reference_error(error,
                 "keyboard_mode_id is set for game mode %d but mode_id is not MODE_KEYBOARD",
@@ -122,6 +359,11 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
         if (custom_mode_id > 0 && mode.mode_id != MODE_CUSTOM) {
             return reference_error(error,
                 "custom_mode_id is set for game mode %d but mode_id is not MODE_CUSTOM",
+                static_cast<uint8_t>(i) + 1);
+        }
+        if (ultimate_profile_id > 0 && mode.mode_id != MODE_ULTIMATE) {
+            return reference_error(error,
+                "ultimate_profile_id is set for game mode %d but mode_id is not MODE_ULTIMATE",
                 static_cast<uint8_t>(i) + 1);
         }
         if (keyboard_mode_id > config.keyboard_modes_count) {
@@ -135,6 +377,12 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
                 "Custom mode ID %lu is for game mode config %d but only %d custom modes are defined",
                 static_cast<unsigned long>(custom_mode_id), static_cast<uint8_t>(i) + 1,
                 static_cast<uint8_t>(config.custom_modes_count));
+        }
+        if (ultimate_profile_id > config.ultimate_profiles_count) {
+            return reference_error(error,
+                "Ultimate profile ID %d is for game mode %d but only %d Ultimate profiles are defined",
+                ultimate_profile_id, static_cast<uint8_t>(i) + 1,
+                static_cast<uint8_t>(config.ultimate_profiles_count));
         }
     }
     return true;

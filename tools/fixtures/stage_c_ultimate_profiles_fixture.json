@@ -1,0 +1,463 @@
+{
+  "schema_version": 3,
+  "source_fixture": "tools/fixtures/stage_b_ultimate_profiles_fixture.json",
+  "description": "Complete finite current Ultimate output program. Keys identify code-owned phases and targets; every payload controls its phase. Storage order has no precedence.",
+  "outputProgram": {
+    "enabled": true,
+    "effects": [
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_DIGITAL",
+        "target": "ULTIMATE_OUTPUT_TARGET_DIGITAL"
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_SELECTED_TABLE"
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+        "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          28,
+          28,
+          128,
+          28,
+          228,
+          28,
+          28,
+          128,
+          128,
+          128,
+          228,
+          128,
+          28,
+          228,
+          128,
+          228,
+          228,
+          228
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_DIRECTION_A",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+        "tableId": 0,
+        "modeTableId": 1
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RF6",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+        "tableId": 27,
+        "modeTableId": 27
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RF7",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          77,
+          172,
+          128,
+          172,
+          179,
+          172,
+          77,
+          172,
+          128,
+          172,
+          179,
+          172,
+          77,
+          172,
+          128,
+          172,
+          179,
+          172
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL",
+        "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          86,
+          60,
+          128,
+          60,
+          170,
+          60,
+          86,
+          128,
+          128,
+          128,
+          170,
+          128,
+          86,
+          196,
+          128,
+          196,
+          170,
+          196
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL",
+        "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE_X_C_STICK_Y",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          95,
+          91,
+          128,
+          91,
+          161,
+          91,
+          95,
+          91,
+          128,
+          91,
+          161,
+          91,
+          95,
+          165,
+          128,
+          165,
+          161,
+          165
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_NULL",
+        "target": "ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+        "coordinateMode": "ULTIMATE_COORDINATE_FIXED",
+        "fixedX": 128,
+        "fixedY": 128
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+        "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_L",
+        "value": 140
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+        "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_R",
+        "value": 140
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_DPAD",
+        "target": "ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+        "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+        "tableId": 0,
+        "modeTableId": 1,
+        "value": 7
+      }
+    ]
+  },
+  "routingSlots": [
+    {
+      "slotId": 1,
+      "inputToken": 1
+    },
+    {
+      "slotId": 2,
+      "inputToken": 2
+    },
+    {
+      "slotId": 3,
+      "inputToken": 3
+    },
+    {
+      "slotId": 4,
+      "inputToken": 4
+    },
+    {
+      "slotId": 5,
+      "inputToken": 5
+    },
+    {
+      "slotId": 17,
+      "inputToken": 17
+    },
+    {
+      "slotId": 18,
+      "inputToken": 18
+    },
+    {
+      "slotId": 19,
+      "inputToken": 19
+    },
+    {
+      "slotId": 20,
+      "inputToken": 20
+    },
+    {
+      "slotId": 21,
+      "inputToken": 21
+    },
+    {
+      "slotId": 22,
+      "inputToken": 22
+    },
+    {
+      "slotId": 23,
+      "inputToken": 23
+    },
+    {
+      "slotId": 24,
+      "inputToken": 24
+    },
+    {
+      "slotId": 25,
+      "inputToken": 25
+    },
+    {
+      "slotId": 26,
+      "inputToken": 26
+    },
+    {
+      "slotId": 29,
+      "inputToken": 29
+    },
+    {
+      "slotId": 32,
+      "inputToken": 32
+    },
+    {
+      "slotId": 33,
+      "inputToken": 33
+    },
+    {
+      "slotId": 34,
+      "inputToken": 34
+    },
+    {
+      "slotId": 35,
+      "inputToken": 35
+    },
+    {
+      "slotId": 36,
+      "inputToken": 36
+    },
+    {
+      "slotId": 37,
+      "inputToken": 37
+    },
+    {
+      "slotId": 38,
+      "inputToken": 38
+    },
+    {
+      "slotId": 41,
+      "inputToken": 41
+    },
+    {
+      "slotId": 42,
+      "inputToken": 42
+    },
+    {
+      "slotId": 43,
+      "inputToken": 43
+    },
+    {
+      "slotId": 44,
+      "inputToken": 44
+    },
+    {
+      "slotId": 45,
+      "inputToken": 45
+    },
+    {
+      "slotId": 52,
+      "inputToken": 52
+    },
+    {
+      "slotId": 53,
+      "inputToken": 53
+    },
+    {
+      "slotId": 54,
+      "inputToken": 54
+    },
+    {
+      "slotId": 55,
+      "inputToken": 55
+    }
+  ],
+  "profileBDescription": "Deliberate two-profile proof variant: RF1 A carrier becomes Y, trigger bytes are 100/180, RF7 inline coordinates are x=128 +/-38,y=160, and C-stick diagonals are x=128 +/-50,y=128 +/-60. A is the unchanged current legacy behavior; B also retains the Stage-A table-27 first-point coordinate difference.",
+  "profileBOutputProgram": {
+    "enabled": true,
+    "effects": [
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_DIGITAL",
+        "target": "ULTIMATE_OUTPUT_TARGET_DIGITAL",
+        "digitalClearMask": 1,
+        "digitalSetMask": 8,
+        "gateToken": 17
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_SELECTED_TABLE"
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+        "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          28,
+          28,
+          128,
+          28,
+          228,
+          28,
+          28,
+          128,
+          128,
+          128,
+          228,
+          128,
+          28,
+          228,
+          128,
+          228,
+          228,
+          228
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_DIRECTION_A",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+        "tableId": 0,
+        "modeTableId": 1
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RF6",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+        "tableId": 27,
+        "modeTableId": 27
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RF7",
+        "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          90,
+          160,
+          128,
+          160,
+          166,
+          160,
+          90,
+          160,
+          128,
+          160,
+          166,
+          160,
+          90,
+          160,
+          128,
+          160,
+          166,
+          160
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL",
+        "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          78,
+          68,
+          128,
+          68,
+          178,
+          68,
+          78,
+          128,
+          128,
+          128,
+          178,
+          128,
+          78,
+          188,
+          128,
+          188,
+          178,
+          188
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL",
+        "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE_X_C_STICK_Y",
+        "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+        "coordinates": [
+          95,
+          91,
+          128,
+          91,
+          161,
+          91,
+          95,
+          91,
+          128,
+          91,
+          161,
+          91,
+          95,
+          165,
+          128,
+          165,
+          161,
+          165
+        ]
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_NULL",
+        "target": "ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+        "coordinateMode": "ULTIMATE_COORDINATE_FIXED",
+        "fixedX": 128,
+        "fixedY": 128
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+        "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_L",
+        "value": 100
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+        "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_R",
+        "value": 180
+      },
+      {
+        "phase": "ULTIMATE_OUTPUT_PHASE_DPAD",
+        "target": "ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK",
+        "directionSource": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+        "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+        "tableId": 0,
+        "modeTableId": 1,
+        "value": 7
+      }
+    ]
+  }
+}

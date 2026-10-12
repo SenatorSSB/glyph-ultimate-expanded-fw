@@ -1,0 +1,18 @@
+{
+  "schema_name":"glyph_hardware_evidence_record",
+  "schema_version":2,
+  "work_order_id":"RUNTIME_LOADED_ULTIMATE_PROFILES_FINAL_BC",
+  "result":"PASS_WITH_HOST_ONLY_CAVEAT",
+  "candidate_git_sha":"16fb02a5eaaa95e63870d14593376c9d1f15aed2",
+  "candidate_tree":"13ad3a19e4cb1ae19fd866ad48cb55a96897e630",
+  "canonical_base":"28ba39da5f517baa40f3dee8d868c9bb583dde4a",
+  "firmware":{"size_bytes":832000,"sha256":"c178cc2e39a6d2eceee27c16b9aae1364a04d628f1ca20bd28fc78a798c04830"},
+  "final_fixture":{"path":"tools/fixtures/stage_c_ultimate_profiles_dry_run.json","sha256":"e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb","payload_bytes":6248,"payload_sha256":"0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7"},
+  "observations":{"bridge":"PASS","final_boot":"PASS","stage_c_write_readback":"PASS","configurator_menu_and_rt2":"PASS","xinput_b_c_matrix":"PASS except LS_TO_DPAD host-only limitation","gamecube_repaired_envelope":"PASS including legacy default, Runtime B selection/output, and power-cycle persistence"},
+  "host_only_caveat":{"row":"LS_TO_DPAD","status":"HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER","physical_pass_claimed":false,"basis":"Owner acceptance boundary; source and host correspondence show separate D-pad/stick domains and no material contradictory physical observation."},
+  "historical_results":["FINAL_BC_PRE_STAGE_C_BOOT FAIL is preserved separately in runtime_loaded_ultimate_profiles_final_bc_pre_stage_c_boot_failure_2026-10-12.json.","The prior 6242-byte fixture is preserved for earlier XInput observations only.","The old no-GameCube fixture failure is preserved; corrected envelope retest supplies final GameCube evidence."],
+  "hep":"Fresh independent HEP found no concrete Tier-1/Tier-2 contradiction and accepted this bounded caveat.",
+  "tester":"Project owner / user observations; source-free record and independent HEP disposition recorded by Codex",
+  "tested_at":"2026-10-12",
+  "device_actions_by_daemon":"none"
+}
