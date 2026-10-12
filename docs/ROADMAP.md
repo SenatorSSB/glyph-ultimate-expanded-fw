@@ -100,6 +100,108 @@ scripting/macros/turbo/timing, a broad Stage A/B/C redesign, Senscope UI,
 public/cloud sharing, Nunchuk validation, or reopening the LS-to-D-pad physical
 observability limitation.
 
+## Future Chapter — Profile-Defined Controller Function Bindings
+
+Status: `FUTURE_ARCHITECTURE`, sequenced after the Multi-Profile Persistent
+Ultimate Profile Store and not authorized for implementation by this roadmap
+entry. The store must not unnecessarily freeze assumptions that prevent this
+later profile evolution.
+
+Current Ultimate profile routing can select which physical Glyph input feeds a
+named logical slot, while substantial Ultimate controller behavior remains
+source-owned in `Ultimate.cpp`: logical-slot identities still carry meanings
+such as modifier/table selection, digital output, stick behavior, layers, and
+compound output behavior. This is the remaining semantic coupling to remove.
+
+### Intended boundary
+
+```text
+physical Glyph input
+-> profile-defined binding / condition
+-> firmware-defined bounded controller-function class
+-> profile-defined parameters / bounded priority
+-> virtual controller output
+```
+
+Firmware owns the finite legal controller-function vocabulary, validation,
+condition semantics, deterministic evaluation order, and conflict-domain
+resolution. Profiles own which physical inputs activate function instances,
+role/sublayer gates, virtual controller outputs, table/coordinate selections,
+bounded parameters, and permitted priority within a relevant domain. A
+physical or logical Glyph ID must not intrinsically mean X1, A, B, a modifier,
+or a layer.
+
+This boundary has three distinct domains:
+
+- **Physical controller input** identifies Glyph controls, for example
+  `BTN_LF1`, `BTN_RF7`, `BTN_LT5`, or `BTN_RT3`.
+- **Virtual controller output** expresses controller semantics: GameCube `A`,
+  `B`, `X`, `Y`, `Z`, `L`, `R`, Start, left/C-stick coordinates, analogue
+  triggers, and D-pad.
+- **Game semantics** such as attack, special, jump, shield, Up-B, airdodge,
+  tilt, smash, tech, and dash remain Senscope-owned. They must not become
+  persisted firmware/profile vocabulary.
+
+Thus a bounded compound function may mechanically emit virtual `B` plus a
+left-stick output using effective horizontal direction and bounded precedence;
+Senscope may label that combination for a game separately. It is not a macro.
+
+### Function classes, instances, and bindings
+
+The exact typed vocabulary must follow a systematic inventory and
+factorization of current `Ultimate.cpp`, not a guessed final enum. Likely
+categories include `DIGITAL_OUTPUT`, `DIRECTION_INPUT`,
+`RIGHT_STICK_DIRECTION`/`C_STICK_DIRECTION`, `STICK_TABLE_MODIFIER`,
+`STICK_OVERRIDE`, `DIGITAL_PLUS_STICK_OUTPUT`, `ANALOG_TRIGGER_OUTPUT`,
+`ROLE`/`LAYER_CONDITION`, `DPAD_ROUTING`, and `ANALOGUE_NULL`.
+
+Firmware owns **function classes**. Profiles own **function instances** and
+physical bindings. For example, X1, X2, Y1, Y2, Tilt1–3, and layer-specific
+tables can become `STICK_TABLE_MODIFIER` instances when they differ only in
+activation, table, role/sublayer, priority, or bounded parameters. Likewise a
+`DIGITAL_OUTPUT` instance can target virtual `A`, `B`, `X`, `Y`, or `Z` without
+tying any physical Glyph button to that output.
+
+Function declaration and physical binding are conceptually separate: a
+`DIGITAL_OUTPUT` instance targeting `A` may bind to `BTN_RF1` in one profile
+and `BTN_RF4` in another; an X1 table-modifier instance may bind to `BTN_LT5`
+or another input. The persisted schema need not use these names or this exact
+shape.
+
+Existing bounded roles/conditions point in the intended direction. Where a
+source-owned sublayer represents profile-specific behavior, migrate it to
+profile-declared boolean conditions composed from physical/routed input tokens,
+lower-numbered role tokens, `ALL`, `ANY`, and `NONE`. Firmware retains bounds,
+validation, and deterministic evaluation; profiles declare participating
+inputs and structural roles.
+
+### Conflict model, scope, and proof
+
+There is no unrestricted global execution priority and persisted array order
+must not be executable. Firmware defines deterministic conflict domains—such
+as left-stick table selection/overrides, right-stick overrides, digital
+outputs, analogue triggers, and D-pad routing—while profiles may provide
+bounded priority where ordering is necessary. Existing `tableRules.priority`
+is the model. Stage-C hard-coded precedence must be inventoried and factored
+into explicit controller-function conflict semantics where appropriate.
+
+Future phases are: (1) exhaustive current-behavior inventory; (2) function-
+class factorization; (3) typed profile bindings; (4) safe role/condition
+migration; (5) deterministic output/priority domains; (6) exact
+correspondence proof against accepted Ultimate behavior before retiring legacy
+paths; and (7) exact-candidate, boundary-focused hardware validation.
+
+Invariants: no arbitrary executable code, timing, delays, sequences, loops,
+turbo, or macros; raw stick coordinates remain distinct from effective/game-
+semantic outputs; vendor physical layout remains separate from virtual
+GameCube outputs; and accepted Stage A/B/C behavior must be reproducible before
+legacy hard-coded semantic coupling is removed.
+
+This architecture enables Senscope to present a physical button assigned to a
+typed controller function and parameters—for example an X1-table modifier or a
+bounded `B` plus left-stick compound—without firmware or profile data calling
+the result a game action.
+
 
 ## Current C024 completion
 

@@ -77,6 +77,11 @@ storage, backend config write paths, or flashing automation.
 - The future multi-profile persistent Ultimate profile store is not
   implemented. The accepted bounded Ultimate-profile persistence representation
   is distinct and remains documented in `docs/CURRENT_STATE.md`.
+- The subsequent profile-defined controller-function binding architecture is
+  not implemented. Current `Ultimate.cpp` logical-slot interpretation remains
+  source-owned; a future implementation must retain finite deterministic
+  controller semantics and must not introduce game semantics, scripting,
+  macros, turbo, timing, or arbitrary expressions.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.

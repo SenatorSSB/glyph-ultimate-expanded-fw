@@ -34,6 +34,18 @@ profiles in RAM; see the `Multi-Profile Persistent Ultimate Profile Store`
 roadmap chapter. This is a future architecture only and does not implement the
 store, protocol, or migration.
 
+### Subsequent function-binding direction
+
+Current profiles make tables, routing, bounded roles, table-rule priorities,
+and bounded output-effect parameters profile-driven, but `Ultimate.cpp` still
+assigns controller behavior to named logical Glyph slots. The later
+`Profile-Defined Controller Function Bindings` chapter follows the multi-profile
+store: it will replace that coupling with profile bindings to finite
+firmware-defined controller-function classes. The profile/firmware layer ends
+at deterministic virtual controller outputs; Smash/game concepts remain
+Senscope-owned. This is documentation-only future architecture, not an
+implemented binding schema or behavior change.
+
 ## Current C024 completion
 
 GP-CONFIG-024 is DONE after exact source integration I `5c5ba4e166c9b67654c0d1b9baa2b0c35677f3d4` and a separate strict completion publication. The accepted candidate is F `8ab1173b0690f5ed3e994f95af797c9e9a265525`, direct child of B `b404453ef22cc994eec54338b8a23c3ba61df808`, tree `15ed2d35d561d6b1709499fe42083ca4d789e920`; the accepted catalog row binds review R `36f91089ab60fb68248a2819aee5dd5082fd922c` and source-free HEP evidence E `25f39876c21fa429a47c93dc446205c37d72b8d3`. Its preserved tested UF2 is SHA-256 `95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6` (803840 bytes), with no rebuild or device action after that exact artifact was accepted.
@@ -150,9 +162,9 @@ historical completion prose below does not authorize implementation.
 - Candidate-generation diff diagnosis is executable and remains `TABLE_CONTENT_DIFFERENT`; it is hardware-candidate material, not a canonicalization-only branch.
 - Active behavior remains gated on an implemented activation strategy and exact hardware review. This docs/checker cleanup needs no hardware test; future behavior-changing firmware deltas need exact hardware PASS before merge.
 - Product approval is required before a new generic runtime-loaded config path,
-  multi-profile store implementation, device write, protobuf binary write,
-  flashing automation, external adapter output, or neutral profile schema
-  changes.
+  multi-profile store implementation, profile-defined controller-function
+  bindings, device write, protobuf binary write, flashing automation, external
+  adapter output, or neutral profile schema changes.
 ## Non-Claims
 - No push-to-device behavior is implemented or claimed.
 - No universal official configurator compatibility claim is made.
