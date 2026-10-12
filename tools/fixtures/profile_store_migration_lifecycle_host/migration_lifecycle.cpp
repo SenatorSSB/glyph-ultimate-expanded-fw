@@ -182,6 +182,51 @@ int main(int argc, char **argv) {
                      "enumerate and read every independently stored profile")) return 1;
     }
 
+    const uint32_t identity_id = ids[9];
+    const uint32_t identity_generation = retry_boot.Generation();
+    if (!require(retry_boot.Rename(identity_id, "Renamed", identity_generation, 301, 401).status ==
+                     ProfileStore::Status::Ok &&
+                 retry_boot.Reorder(identity_id, 77, retry_boot.Generation(), 302, 402).status ==
+                     ProfileStore::Status::Ok,
+                 "rename and reorder commit metadata without changing stable identity")) return 1;
+    const ProfileStore::Entry *identity_entry = retry_boot.EntryAt(9);
+    if (!require(identity_entry != nullptr && identity_entry->id == identity_id &&
+                 identity_entry->revision == 1 && identity_entry->rank == 77 &&
+                 std::strcmp(identity_entry->name, "Renamed") == 0,
+                 "renamed/reordered entry retains its payload identity")) return 1;
+
+    Config compact_persisted = legacy;
+    compact_persisted.ultimate_profiles_count = 0;
+    compact_persisted.ultimate_profile_store_format = ProfileStore::kCompactConfigFormat;
+    compact_persisted.ultimate_profile_store_incarnation = retry_boot.Incarnation();
+    for (size_t mode = 0; mode < compact_persisted.game_mode_configs_count; ++mode) {
+        GameModeConfig &row = compact_persisted.game_mode_configs[mode];
+        if (row.mode_id == MODE_ULTIMATE) {
+            row.ultimate_profile_id = (mode & 1u) == 0 ? ids[0] : ids[19];
+            row.ultimate_profile_config = 0;
+        }
+    }
+    size_t compact_size = 0;
+    std::vector<uint8_t> compact_wire;
+    ConfigValidationError compact_error{};
+    if (!require(validate_config_semantics(compact_persisted, compact_error) &&
+                 pb_get_encoded_size(&compact_size, Config_fields, &compact_persisted),
+                 "compact Config accepts stable per-mode references")) return 1;
+    compact_wire.resize(compact_size);
+    pb_ostream_t compact_stream = pb_ostream_from_buffer(compact_wire.data(), compact_wire.size());
+    Config compact_reboot = Config_init_default;
+    if (!require(pb_encode(&compact_stream, Config_fields, &compact_persisted) &&
+                 DecodeConfig(compact_wire, &compact_reboot) &&
+                 compact_reboot.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
+                 compact_reboot.ultimate_profile_store_incarnation == retry_boot.Incarnation(),
+                 "generated Config schema preserves compact store identity")) return 1;
+    for (size_t mode = 0; mode < compact_reboot.game_mode_configs_count; ++mode) {
+        const GameModeConfig &row = compact_reboot.game_mode_configs[mode];
+        if (row.mode_id == MODE_ULTIMATE && !require(row.ultimate_profile_config == 0 &&
+                (row.ultimate_profile_id == ids[0] || row.ultimate_profile_id == ids[19]),
+                "compact Config reboot retains per-mode stable reference")) return 1;
+    }
+
     ProfileStore selection_reboot(&storage);
     if (!require(selection_reboot.Begin(), "reboot reloads twenty-profile directory")) return 1;
     ProfileStore::Status activation = ProfileStore::Status::Invalid;
@@ -195,6 +240,11 @@ int main(int argc, char **argv) {
                  selection_reboot.ActiveId() == ids[ProfileStore::kMinimumAdmissionProfiles - 1] &&
                  EncodeProfile(*active, &active_wire) && active_wire == second_wire,
                  "switch to a distant stable ID after reboot")) return 1;
+    if (!require(selection_reboot.Delete(ids[0], selection_reboot.Generation(), ids[0], 501, 601).status ==
+                     ProfileStore::Status::Referenced &&
+                 selection_reboot.Delete(ids[ProfileStore::kMinimumAdmissionProfiles - 1], selection_reboot.Generation(),
+                     0, 502, 602).status == ProfileStore::Status::Referenced,
+                 "delete refuses referenced and actively selected stable IDs")) return 1;
 
     char corrupt_path[64] = {};
     std::snprintf(corrupt_path, sizeof(corrupt_path), "/ultimate-%08lx-%08lx.bin",
@@ -217,6 +267,6 @@ int main(int argc, char **argv) {
                  EncodeProfile(*active, &active_wire) && active_wire == second_wire,
                  "corrupt selected record does not poison another profile")) return 1;
 
-    std::puts("profile_store_migration_lifecycle stage_b_v3_two_profiles=PASS legacy_bytes_preserved=PASS mode_mapping=PASS retry_stable_ids=PASS migration_fence=PASS profiles_20=PASS reboot_switch=PASS corrupt_record_isolation=PASS");
+    std::puts("profile_store_migration_lifecycle stage_b_v3_two_profiles=PASS legacy_bytes_preserved=PASS mode_mapping=PASS retry_stable_ids=PASS migration_fence=PASS profiles_20=PASS compact_mode_refs=PASS reboot_switch=PASS delete_refusal=PASS corrupt_record_isolation=PASS");
     return 0;
 }
