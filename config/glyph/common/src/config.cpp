@@ -129,6 +129,15 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
     publish_boot_state(outcome, display_ready);
 }
 
+// Recovery deliberately reuses the single source-owned Configurator transport
+// and runs without gameplay, menu, display, or core1 initialization.
+void enter_recovery_configurator() {
+    Serial.begin(115200);
+    recovery_configurator = new ConfiguratorBackend(
+        inputs, input_sources, input_source_count, config, Serial);
+    publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+}
+
 }  // namespace
 
 
@@ -139,10 +148,7 @@ void setup() {
     // Amendment A recovery route: after MB1 priority (evaluated below only
     // when MB1 is held) and before display/config/backend initialization.
     if (inputs.rt2 && !inputs.mb1) {
-        Serial.begin(115200);
-        recovery_configurator = new ConfiguratorBackend(
-            inputs, input_sources, input_source_count, config, Serial);
-        publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+        enter_recovery_configurator();
         return;
     }
 
@@ -195,13 +201,17 @@ void setup() {
     if (!profile_store.Begin() ||
         (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
          profile_store.Incarnation() != config.ultimate_profile_store_incarnation)) {
+        if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
+            enter_recovery_configurator();
+            return;
+        }
         refuse_boot(BootOutcome::StorageFailure, display_ready);
         return;
     }
     if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
         profile_store.MigrationPending() &&
         profile_store.CompleteMigration(config) != ProfileStore::Status::Ok) {
-        refuse_boot(BootOutcome::StorageFailure, display_ready);
+        enter_recovery_configurator();
         return;
     }
     if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0) {
