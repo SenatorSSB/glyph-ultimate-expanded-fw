@@ -57,6 +57,7 @@ Status: `DISCOVERY_IN_PROGRESS`.
 | corrected dispatch | Worker 1 - SOL Designer | architecture and adversarial-design proposal | complete | proposal plus required challenge complete; five concrete design repairs incorporated |
 | corrected dispatch | Worker 4 - LUNA Investigator | repository resource/storage audit | complete | `/private/tmp/glyph-w4-mechanical-resource-audit.md`; D0 spot-verified source claims |
 | owner-authorized preflight | Worker 2 - TERRA Implementer | read-only source-surface readiness inventory | complete | direct source-cited surface/test inventory; no implementation |
+| implementation dispatch | Worker 2 - TERRA Implementer | frozen multi-profile store architecture | dispatched | implementation branch/candidate pending |
 | owner-authorized preflight | Worker 3 - SOL Reviewer | read-only future-review rubric/inventory | complete | direct report; D0 spot-verified persistence, validation, selection, and Configurator claims |
 | independent design review | Worker 3 - SOL Reviewer | proposed design after W1 repairs | complete | one migration-lifetime/fence repair incorporated; no review-of-review |
 
@@ -80,8 +81,8 @@ or candidate review.
 
 ## Current next permissible action
 
-Commit the ledger and frozen design on an isolated docs/control-plane branch,
-then dispatch the coherent implementation packet to the existing Worker 2 chat.
+Await W2's coherent candidate and exact evidence, then dispatch the bounded
+independent implementation review to the existing Worker 3 chat.
 
 ## Anomalies and carried debt
 
