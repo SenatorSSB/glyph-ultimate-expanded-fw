@@ -1,5 +1,6 @@
 #include "core/ProfileStore.hpp"
 #include "core/ProfileStoreAtomicCommit.hpp"
+#include "core/ProfileStoreCapacity.hpp"
 
 #include "core/config_validation.hpp"
 
@@ -18,7 +19,11 @@ constexpr uint16_t kEnvelopeVersion = 1;
 constexpr uint16_t kPayloadUltimateProfile = 1;
 constexpr size_t kRecordHeaderSize = 32;
 constexpr size_t kMaxProfileWireBytes = 4096;
+constexpr size_t kMaxRecordWireBytes = kRecordHeaderSize + kMaxProfileWireBytes;
 constexpr size_t kDirectoryWireBytes = 32 + ProfileStore::kMaxEntries * 40 + 28;
+static_assert(ProfileStoreCapacity::FitsRepresentativeSet(ProfileStore::kMinimumAdmissionProfiles,
+              kMaxRecordWireBytes, kDirectoryWireBytes),
+              "the frozen 512KiB/16KiB-reserve capacity must admit twenty profiles");
 
 uint32_t Crc32(const uint8_t *data, size_t length) {
     uint32_t crc = 0xffffffffu;
@@ -38,9 +43,6 @@ bool WriteAll(File &file, const uint8_t *bytes, size_t length) {
 }
 bool ReadAll(File &file, uint8_t *bytes, size_t length) {
     return file.read(bytes, length) == static_cast<int>(length) && file.available() == 0;
-}
-bool FileEncode(pb_ostream_t *stream, const pb_byte_t *buf, size_t count) {
-    return WriteAll(*static_cast<File *>(stream->state), buf, count);
 }
 void DirectoryPath(char *out, size_t length, uint8_t slot) { std::snprintf(out, length, "/ultimate-dir-%u.bin", slot); }
 void RecordPath(char *out, size_t length, uint32_t id, uint32_t revision) {
@@ -143,6 +145,23 @@ bool DecodeDirectoryCommit(void *context, const uint8_t *bytes, size_t length) {
     return DecodeDirectory(wire, directory);
 }
 
+struct RecordCommitContext {
+    uint32_t incarnation;
+    uint32_t id;
+    uint32_t revision;
+};
+
+bool VerifyRecordCommit(void *context, const uint8_t *bytes, size_t length) {
+    const auto *expected = static_cast<const RecordCommitContext *>(context);
+    if (length < kRecordHeaderSize || Get32(bytes) != kRecordMagic ||
+        Get16(bytes + 4) != kEnvelopeVersion || Get16(bytes + 6) != kPayloadUltimateProfile ||
+        Get32(bytes + 8) != expected->incarnation || Get32(bytes + 12) != expected->id ||
+        Get32(bytes + 16) != expected->revision || Get32(bytes + 20) != length - kRecordHeaderSize ||
+        Get32(bytes + 20) > kMaxProfileWireBytes || Get32(bytes + 24) != Crc32(bytes, 24) ||
+        Get32(bytes + 28) != Crc32(bytes + kRecordHeaderSize, length - kRecordHeaderSize)) return false;
+    return true;
+}
+
 } // namespace
 
 bool ProfileStore::Begin() {
@@ -193,16 +212,18 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
     if (!ValidateProfile(profile)) return false;
     size_t length = 0;
     if (!pb_get_encoded_size(&length, UltimateProfile_fields, &profile) || length > kMaxProfileWireBytes) return false;
-    char path[64]; RecordPath(path, sizeof(path), id, revision); File file = LittleFS.open(path, "w+"); if (!file) return false;
-    uint8_t header[kRecordHeaderSize] = {}; Put32(header, kRecordMagic); Put16(header + 4, kEnvelopeVersion); Put16(header + 6, kPayloadUltimateProfile); Put32(header + 8, Incarnation()); Put32(header + 12, id); Put32(header + 16, revision); Put32(header + 20, static_cast<uint32_t>(length));
-    if (!WriteAll(file, header, sizeof(header))) { file.close(); return false; }
-    pb_ostream_t stream{}; stream.callback = FileEncode; stream.state = &file; stream.max_size = length; if (!pb_encode(&stream, UltimateProfile_fields, &profile) || stream.bytes_written != length) { file.close(); return false; }
-    static uint8_t body[kMaxProfileWireBytes]; file.close(); File verify = LittleFS.open(path, "r"); const bool read_ok = verify && verify.size() == sizeof(header) + length && verify.read(header, sizeof(header)) == static_cast<int>(sizeof(header)) && verify.read(body, length) == static_cast<int>(length); if (verify) verify.close();
-    if (!read_ok) return false;
-    Put32(header + 24, Crc32(header, 24)); Put32(header + 28, Crc32(body, length));
-    File seal = LittleFS.open(path, "r+"); if (!seal || !seal.seek(0) || !WriteAll(seal, header, sizeof(header))) { if (seal) seal.close(); return false; } seal.close();
-    File sealed = LittleFS.open(path, "r"); const bool sealed_ok = sealed && sealed.size() == sizeof(header) + length && sealed.read(header, sizeof(header)) == static_cast<int>(sizeof(header)) && sealed.read(body, length) == static_cast<int>(length) && Get32(header + 24) == Crc32(header, 24) && Get32(header + 28) == Crc32(body, length); if (sealed) sealed.close();
-    return sealed_ok;
+    static uint8_t record[kMaxRecordWireBytes];
+    std::memset(record, 0, sizeof(record));
+    Put32(record, kRecordMagic); Put16(record + 4, kEnvelopeVersion); Put16(record + 6, kPayloadUltimateProfile);
+    Put32(record + 8, Incarnation()); Put32(record + 12, id); Put32(record + 16, revision); Put32(record + 20, static_cast<uint32_t>(length));
+    pb_ostream_t stream = pb_ostream_from_buffer(record + kRecordHeaderSize, length);
+    if (!pb_encode(&stream, UltimateProfile_fields, &profile) || stream.bytes_written != length) return false;
+    Put32(record + 24, Crc32(record, 24)); Put32(record + 28, Crc32(record + kRecordHeaderSize, length));
+    char path[64], temporary[72]; RecordPath(path, sizeof(path), id, revision); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
+    const RecordCommitContext expected{Incarnation(), id, revision};
+    LittleFsDirectoryStorage storage;
+    return ProfileStoreAtomicCommit::ReplaceVerifiedFile(storage, temporary, path, record,
+            kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected));
 }
 bool ProfileStore::ReadProfile(uint32_t id, uint32_t revision, UltimateProfile &into) const {
     char path[64]; RecordPath(path, sizeof(path), id, revision); File file = LittleFS.open(path, "r"); uint8_t header[kRecordHeaderSize] = {};

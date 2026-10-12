@@ -18,9 +18,10 @@ class ProfileStoreAtomicCommit {
 
     using Validator = bool (*)(void *context, const uint8_t *bytes, size_t length);
 
-    // The caller selects the inactive redundant root as destination.  A failed
-    // temporary write/read/validation/rename never changes the active root.
-    static bool ReplaceInactiveRoot(Storage &storage, const char *temporary,
+    // A failed temporary write/read/validation/rename never publishes the
+    // destination.  ProfileStore uses this for both immutable profile records
+    // and the inactive redundant directory root.
+    static bool ReplaceVerifiedFile(Storage &storage, const char *temporary,
                                     const char *destination, const uint8_t *bytes,
                                     size_t length, Validator validator, void *context) {
         if (!storage.Write(temporary, bytes, length)) return false;
@@ -31,6 +32,14 @@ class ProfileStoreAtomicCommit {
         // before a failed rename leaves the current root intact for boot recovery.
         if (!storage.Remove(destination)) return false;
         return storage.Rename(temporary, destination);
+    }
+
+    // The caller selects the inactive redundant root as destination.  Losing
+    // that slot before a failed rename leaves the active root intact.
+    static bool ReplaceInactiveRoot(Storage &storage, const char *temporary,
+                                    const char *destination, const uint8_t *bytes,
+                                    size_t length, Validator validator, void *context) {
+        return ReplaceVerifiedFile(storage, temporary, destination, bytes, length, validator, context);
     }
 };
 

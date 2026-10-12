@@ -1,4 +1,5 @@
 #include "core/ProfileStoreAtomicCommit.hpp"
+#include "core/ProfileStoreCapacity.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -48,6 +49,29 @@ int main() {
                  "previous root must survive interrupted inactive-root update")) return 1;
     if (!require(storage.files.find("/ultimate-dir-1.bin") == storage.files.end(),
                  "failed root publication must not publish destination")) return 1;
-    std::puts("profile_store_atomic_commit interrupted_root_update_recovery=PASS");
+
+    // Profile revisions are immutable files.  If staging a replacement revision
+    // is interrupted, the current directory still resolves the known-good r1.
+    MemoryStorage record_storage;
+    const uint8_t record_r1[] = {0x5a, 1};
+    const uint8_t record_r2[] = {0x5a, 2};
+    record_storage.files["/ultimate-00000001-00000001.bin"] = {record_r1, record_r1 + sizeof(record_r1)};
+    record_storage.fail_rename = true;
+    if (!require(!ProfileStoreAtomicCommit::ReplaceVerifiedFile(record_storage,
+            "/ultimate-00000001-00000002.bin.tmp", "/ultimate-00000001-00000002.bin",
+            record_r2, sizeof(record_r2), nonempty, nullptr), "interrupted record publication must fail")) return 1;
+    const auto active = record_storage.files.find("/ultimate-00000001-00000001.bin");
+    if (!require(active != record_storage.files.end() && active->second == std::vector<uint8_t>(record_r1, record_r1 + sizeof(record_r1)),
+                 "interrupted replacement must retain known-good active revision")) return 1;
+    if (!require(record_storage.files.find("/ultimate-00000001-00000002.bin") == record_storage.files.end(),
+                 "interrupted replacement must not publish new revision")) return 1;
+    constexpr size_t max_record_bytes = 32 + 4096;
+    constexpr size_t max_directory_bytes = 32 + 64 * 40 + 28;
+    static_assert(ProfileStoreCapacity::FitsRepresentativeSet(20, max_record_bytes, max_directory_bytes));
+    if (!require(ProfileStoreCapacity::FitsRepresentativeSet(20, max_record_bytes, max_directory_bytes),
+                 "512KiB capacity with 16KiB reserve must admit twenty max-size records")) return 1;
+    if (!require(!ProfileStoreCapacity::FitsRepresentativeSet(200, max_record_bytes, max_directory_bytes),
+                 "capacity proof must reject an oversized representative set")) return 1;
+    std::puts("profile_store_atomic_commit interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS");
     return 0;
 }
