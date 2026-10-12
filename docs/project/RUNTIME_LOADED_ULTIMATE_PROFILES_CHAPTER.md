@@ -2,6 +2,10 @@
 
 Status: `FINAL_BC_PRE_STAGE_C_BOOT_FAILED` — exact source/artifact preserved; bounded cross-version recovery bridge in preparation.
 
+> Current update: owner-authorized GameCube envelope repair is reviewed and
+> awaits the narrow final hardware supplement; the unchanged firmware candidate
+> remains frozen.
+
 ## Authority and scope
 
 - Authority: direct owner chapter, “Runtime-Loaded Ultimate Profiles — Persisted
@@ -282,6 +286,36 @@ canonical integration occurs before that exact PASS.
    readback, post-write menu/RT2 Configurator PASS, the grouped B+C matrix,
    power-cycle persistence, and post-power-cycle menu Configurator PASS.
    Stop at the first unexpected result; no automatic retry or firmware patch.
+
+## GameCube envelope repair and remaining HEP gaps
+
+- The prior Stage-C fixture had no GameCube backend. On detected GameCube,
+  source synthesizes a zero-default-mode backend; no current mode is installed
+  and startup subsequently dereferences that missing mode. This is the
+  source-backed cause of the fixture's GameCube startup defect.
+- Owner direction selects the legacy Ultimate row (reference 0), so the final
+  fixture now adds only `COMMS_BACKEND_GAMECUBE` with one-based
+  `defaultModeConfig=1`. XInput/default mode 1, Configurator/BTN_RT2, all
+  modes/profiles/effects, and empty `applicableBackends` are unchanged.
+  Empty applicability remains unrestricted; it is not the startup cause.
+- Revised fixture SHA-256:
+  `e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb`.
+  Revised payload: 6,248 bytes, SHA-256
+  `0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7`.
+  The prior 6,242-byte payload remains the identity of the completed XInput
+  observations only, not the current final Config artifact.
+- Production decode/validation, exact JSON/protobuf round-trip, backend
+  negatives, serial-free dry run, and unchanged Stage-C correspondence pass.
+  Focused host proof shows explicit GameCube mode 1 installs nonnull legacy
+  Ultimate mode whereas omitted GameCube preserves the zero-mode fallback.
+  Fresh independent artifact review: APPROVED.
+- Independent HEP conclusion: no final PASS yet. Preserve the prior pre-bridge
+  boot FAIL separately, all valid later PASS rows, LS-to-D-pad INCONCLUSIVE,
+  and old-fixture GameCube FAIL. The narrow follow-up must write/read back this
+  revised Config, confirm final boot and Configurator access, exercise
+  GameCube startup plus representative legacy/runtime-profile behavior and
+  persistence, and obtain direct LS-to-D-pad evidence. It must not repeat the
+  already valid non-GameCube matrix or perform any flash.
 
 ## Stage-A candidate and proof
 

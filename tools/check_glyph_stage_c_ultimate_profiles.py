@@ -23,7 +23,7 @@ def verify_stage_c_recovery_envelope(config, pb) -> None:
             "Stage-C handoff must require the Configurator recovery envelope")
     backend_count = len(config.communication_backend_configs)
     mode_count = len(config.game_mode_configs)
-    require(backend_count >= 2, "Stage-C fixture requires XInput plus Configurator backends")
+    require(backend_count == 3, "Stage-C fixture requires exactly XInput, GameCube, and Configurator backends")
     require(1 <= config.default_backend_config <= backend_count,
             "Stage-C default backend index is outside the fixture backend configs")
     require(1 <= config.default_usb_backend_config <= backend_count,
@@ -31,9 +31,16 @@ def verify_stage_c_recovery_envelope(config, pb) -> None:
     for index, backend in enumerate(config.communication_backend_configs, start=1):
         require(1 <= backend.default_mode_config <= mode_count,
                 f"Stage-C backend {index} default mode index is outside fixture game modes")
-    require(any(backend.backend_id == pb.COMMS_BACKEND_XINPUT
-                for backend in config.communication_backend_configs),
-            "Stage-C fixture requires an XInput backend")
+    backends = list(config.communication_backend_configs)
+    require([backend.backend_id for backend in backends] == [
+                pb.COMMS_BACKEND_XINPUT,
+                pb.COMMS_BACKEND_GAMECUBE,
+                pb.COMMS_BACKEND_CONFIGURATOR,
+            ], "Stage-C backend envelope drifted from XInput/GameCube/Configurator")
+    require(backends[0].default_mode_config == 1,
+            "Stage-C XInput default mode must retain legacy Ultimate row 1")
+    require(backends[1].default_mode_config == 1,
+            "Stage-C GameCube default mode must select legacy Ultimate row 1")
     configurators = [backend for backend in config.communication_backend_configs
                      if backend.backend_id == pb.COMMS_BACKEND_CONFIGURATOR]
     require(len(configurators) == 1,
@@ -151,6 +158,11 @@ def main() -> int:
         executable=temp / "pipeline"
         run(["c++","-std=c++17",*common,str(HOST / "pipeline.cpp"),*[str(p) for p in sources],str(frozen),*objects,"-o",str(executable)])
         binary=temp / "v3.bin"; binary.write_bytes(payload)
+        gamecube_default=temp / "gamecube-default"
+        run(["c++","-std=c++17",*common,
+             str(HOST / "gamecube_default.cpp"), str(ROOT / "src/core/config_utils.cpp"),
+             *objects,"-o",str(gamecube_default)])
+        print(run([str(gamecube_default), str(binary)]).strip())
         print(run([str(executable),str(binary)]).strip())
         admission=temp / "admission"
         run(["c++","-std=c++17",*common,str(ROOT / "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp"),*[str(p) for p in sources],*objects,"-o",str(admission)])
@@ -241,7 +253,7 @@ def main() -> int:
         for label,mutate in mutations: reject(label,mutate)
         print(f"production_decode_validation_negatives={len(mutations)} decoder_refusals={decoder_negatives} semantic_refusals={len(mutations)-decoder_negatives}")
     print(f"writer_fixture_profiles=2 schema_versions=3,3 explicit_refs=0,1,2 payload_bytes={len(payload)} payload_sha256={hashlib.sha256(payload).hexdigest()}")
-    print("FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED=true configurator_backends=1 activation_binding=BTN_RT2 backend_reference_negatives=3")
+    print("FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED=true backend_envelope=XInput,GameCube,Configurator gamecube_default_mode=1 configurator_backends=1 activation_binding=BTN_RT2 backend_reference_negatives=3")
     print(f"fixture_sha256={hashlib.sha256(ARTIFACT.read_bytes()).hexdigest()} serial_port_opened=false")
     print("glyph_stage_c_ultimate_profiles: PASS")
     return 0

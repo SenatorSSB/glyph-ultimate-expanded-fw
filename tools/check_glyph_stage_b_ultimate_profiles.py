@@ -45,6 +45,13 @@ def make_v3_artifact() -> dict:
     version_2 = json.loads(SPEC.read_text(encoding="utf-8"))["version_2"]
     # Stage-C's handoff fixture reserves a deterministic Configurator recovery
     # envelope without changing the generic Config writer or validator.
+    # Preserve the legacy Ultimate first-row default for the detected GameCube
+    # path.  Omitting this row makes backend_config_from_id fall back to its
+    # zero-mode sentinel instead of selecting the legacy Ultimate mode.
+    artifact["communicationBackendConfigs"].append({
+        "backendId": "COMMS_BACKEND_GAMECUBE",
+        "defaultModeConfig": 1,
+    })
     artifact["communicationBackendConfigs"].append({
         "backendId": "COMMS_BACKEND_CONFIGURATOR",
         "defaultModeConfig": 1,
