@@ -119,3 +119,11 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   gap. The freeze retains the authenticated receipt/dependencies through every
   directory root, fences unrelated CRUD/GC/root rotation until compact-Config
   publication, and adds the required interruption/interleaving evidence.
+- W2 reported one restricted-sandbox dependency-fetch attempt despite the
+  explicit no-restricted-DNS instruction. D0 immediately directed no repeat;
+  only the permitted network-enabled build path may be used. The restricted
+  failure is not authentication or a chapter blocker.
+- W2 implementation worktree/branch: `/private/tmp/glyph-w2-multi-profile-store`
+  / `codex/multi-profile-store-w2`. Permitted network-enabled dependency
+  provisioning is in progress; compilation has not yet started and no build
+  conclusion is recorded.
