@@ -51,6 +51,7 @@ class ConfiguratorBackend : public CommunicationBackend {
     packetio::COBSPrint _out;
     Stream &_base_stream;
     Config &_config;
+    bool _packet_timed_out = false;
 };
 
 #endif

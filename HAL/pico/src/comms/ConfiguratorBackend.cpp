@@ -88,14 +88,23 @@ void ConfiguratorBackend::SendReport() {
 
 size_t ConfiguratorBackend::ReadPacket(uint8_t *buffer, size_t max_len) {
     size_t bytes_read = 0;
-    while (!_in.available()) {
-        delay(1);
-    }
+    _packet_timed_out = false;
+    uint32_t last_progress = millis();
     while (true) {
+        if (!_in.available()) {
+            if (static_cast<uint32_t>(millis() - last_progress) >= 5000u) {
+                _packet_timed_out = true;
+                _in.next();
+                return 0;
+            }
+            delay(1);
+            continue;
+        }
         int result = _in.read();
         if (result == _in.EOF) {
             continue;
         }
+        last_progress = millis();
         if (result == _in.EOP) {
             break;
         }
@@ -218,6 +227,10 @@ bool ConfiguratorBackend::HandleProfileStore() {
     static ProfileStoreResponse response;
     static uint8_t frame[kFrameLimit];
     const size_t length = ReadPacket(frame, sizeof(frame));
+    if (_packet_timed_out) {
+        static constexpr char timeout[] = "Profile store frame timeout";
+        return WritePacket(CMD_ERROR, (uint8_t *)timeout, sizeof(timeout) - 1);
+    }
     if (length == sizeof(frame)) return WritePacket(CMD_ERROR, (uint8_t *)"Profile store frame too large", 29);
     request = ProfileStoreRequest_init_default;
     pb_istream_t input = pb_istream_from_buffer(frame, length);
