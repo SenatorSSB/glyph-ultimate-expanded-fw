@@ -9,9 +9,9 @@
 namespace friend_profile {
 // The selected Arduino-Pico LittleFS compiles LFS_NAME_MAX=32.
 // The failed v1 basename had 37 bytes and cannot be created by that library.
-constexpr char kMarkerPath[] = "/friend_ult_20261011_v2.flag";
+constexpr char kMarkerPath[] = "/friend_ult_20261012_v3.flag";
 static_assert(sizeof(kMarkerPath) - 2 < 32, "private marker basename exceeds LittleFS wrapper limit");
-constexpr char kMarkerPayload[] = "friend_ultimate_20261011_applied_v2\n";
+constexpr char kMarkerPayload[] = "friend_ultimate_20261012_applied_v3\n";
 constexpr size_t kMarkerLength = sizeof(kMarkerPayload) - 1;
 
 inline bool marker_valid() {

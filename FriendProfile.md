@@ -1,7 +1,7 @@
 # Friend Ultimate profile
 
 Private source-owned Glyph Ultimate profile. Install by flashing its single UF2;
-the baked profile adopts once using `/friend_ult_20261011_v2.flag`.
+the baked profile adopts once using `/friend_ult_20261012_v3.flag`.
 
 ## Tables (raw absolute coordinates)
 
@@ -18,12 +18,13 @@ Priority: Up-smash, Mode, Tilt3, Tilt1, Tilt2, Y1, Y2, X1. RF6 maps to logical L
 The complete owner-normalized specification is `friend/profile_spec.json`.
 Coordinates are source-owned, not runtime-loaded from Config. The owner's
 2026-10-12 correction changes Default entry 2 from (-77,0) to (0,-77), raw
-(128,51). This is the only runtime delta from storage-recovery-v2. Tilt2 X
+(128,51). This is the only coordinate delta from storage-recovery-v2. Tilt2 X
 inversion remains intentional. All other coordinates are unchanged.
 
-Existing storage-recovery-v2 users only need to flash the updated UF2. The
-complete baked Config and v2 marker remain unchanged: the correction is compiled
-into the coordinate table, so no Config push or repeated adoption is needed.
+The v3 refresh intentionally reinstalls the complete baked friend Config once,
+even on a device with the old valid v2 marker. The owner explicitly approved
+replacing later saved settings after the friend's stored-Config refusal. No
+Config push is needed. After verified v3 adoption, later user edits are preserved.
 
 Physical C-stick: RT3 Left (39,128), RT5 Right (217,128), RT2 Down (128,1),
 RT4 Up (128,255); diagonals combine these components; neutral (128,128).
@@ -39,21 +40,21 @@ and bootloader indicators are not gameplay RGB and remain source-default.
 The boot-only installer validates the full baked Config, saves it, loads and
 validates it, and compares every deterministic encoded byte (3,779 bytes in
 this snapshot). Only then does it write/flush/close/reopen the exact marker
-payload `friend_ultimate_20261011_applied_v2\n`. Mere existence, empty, old,
+payload `friend_ultimate_20261012_applied_v3\n`. Mere existence, empty, old,
 truncated or trailing marker contents never count as applied. A valid marker
 skips provisioning; ordinary production stored-Config loading/validation still
 runs, preserving later legitimate user edits. Failures use existing safe boot
 refusal. This is a private one-shot full Config replacement, not a merge of an
 old device Config. No flashing-time high-flash/filesystem wipe is added.
-The private recovery-v2 build first attempts canonical no-autoformat mounting.
+The private v3 refresh retains canonical no-autoformat mounting first.
 If that mount fails (but setConfig succeeded), validated baked defaults authorize
 an explicit format/remount of the linked LittleFS partition. Mounted storage is
 never formatted. This private recovery also applies to a future unmountable
 filesystem and can erase all persisted settings; first install and later
 corruption cannot be distinguished when the only marker is inside that FS.
 The original failed build used an overlong 37-byte marker basename; v2 uses a
-27-byte basename accepted by the selected wrapper's <32-byte limit. Old v1
-markers do not suppress v2 adoption; a valid v2 marker preserves later edits.
+27-byte basename accepted by the selected wrapper's <32-byte limit. Old v1/v2
+markers do not suppress v3 adoption; a valid v3 marker preserves later edits.
 
 Both the readback Config and bounded expected-encoding buffer are static;
 readback resets before every attempt. The helper is called only by core0 setup

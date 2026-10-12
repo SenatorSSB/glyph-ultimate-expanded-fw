@@ -19,7 +19,6 @@ table_path='src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConf
 old_table=subprocess.check_output(['git','show',previous+':'+table_path],cwd=root).decode()
 assert (root/table_path).read_text()==old_table.replace('        {51u, 128u},','        {128u, 51u},',1),'only Default direction 2 may change'
 for path in ['src/modes/Ultimate.cpp','config/glyph/common/include/glyph_overrides.hpp',
-             'config/glyph/common/include/friend_profile_provisioning.hpp',
              'HAL/pico/src/core/Persistence.cpp','HAL/pico/include/core/Persistence.hpp',
              'config/glyph/common/src/config.cpp','config/glyph/env.ini']:
     assert (root/path).read_bytes()==subprocess.check_output(['git','show',previous+':'+path],cwd=root),'unrelated runtime source changed: '+path
@@ -33,6 +32,9 @@ stripped=current.replace('#include "friend_profile_provisioning.hpp"\n','').repl
 assert stripped==baseline(path),'only bounded provisioning hook allowed in boot path'
 assert current.index('persistence.SetValidator(')<current.index('friend_profile::provision_once(config)')<current.index('persistence.LoadConfigChecked(config)')<current.index('publish_boot_state(BootOutcome::Normal')
 helper=(root/'config/glyph/common/include/friend_profile_provisioning.hpp').read_text()
+old_helper=subprocess.check_output(['git','show','375c486de48ddb39814914754952b18be46cafe2:config/glyph/common/include/friend_profile_provisioning.hpp'],cwd=root).decode()
+expected_helper=old_helper.replace('/friend_ult_20261011_v2.flag','/friend_ult_20261012_v3.flag').replace('friend_ultimate_20261011_applied_v2','friend_ultimate_20261012_applied_v3')
+assert helper==expected_helper,'only the versioned marker constants may change on the provisioning path'
 assert 'static Config readback;' in helper and 'readback = Config_init_default;' in helper
 assert 'static uint8_t encoded_expected[16384];' in helper
 assert helper.index('if (marker_valid()) return true;')<helper.index('static Config readback;')
@@ -41,6 +43,8 @@ assert helper.index('store.ValidateConfig(defaults, error)')<helper.index('store
 spec=json.loads((root/'friend/profile_spec.json').read_text())
 old_spec=json.loads(subprocess.check_output(['git','show',previous+':friend/profile_spec.json'],cwd=root))
 old_spec['offsets']['Default'][1]=[0,-77]
+old_spec['marker_path']='/friend_ult_20261012_v3.flag'
+old_spec['marker_payload']='friend_ultimate_20261012_applied_v3\n'
 old_spec['notes']=spec['notes']
 assert spec==old_spec,'normalized behavior changed beyond Default direction 2'
 assert len(spec['buttons'])==34 and len(set(spec['buttons']))==34
@@ -68,6 +72,6 @@ for start,key,end in [('.game_mode_configs = {','GameModeConfig {','.communicati
         clean=lambda s: re.sub(r'\s+','',re.sub(r'//[^\n]*','',s))
         assert clean(old[i])==clean(new[i]),('unrelated profile/RGB changed',i)
 print('SOURCE PASS: current validators/backend/refusal gates retained; Persistence canonical bodies unchanged after removing private macro block; recovery enabled only in private glyph_mk6')
-print('SOURCE PASS: sole runtime change versus c247985d is Default direction 2 raw (51,128) -> (128,51); all remaining tables/routing/Config/marker/recovery source byte-identical; defaults validate before format')
+print('SOURCE PASS: versus 375c486d sole runtime change is the marker path/payload v2 -> v3; corrected Default2 raw (128,51) retained; all tables/routing/Config/recovery source unchanged; defaults validate before format')
 print('SOURCE PASS: static reset/readback/equality buffer; marker-present short path; no exists-only marker; no raw Config memcmp')
 print('SOURCE PASS: all 34 normalized bindings, all coordinate ranges; 12 unrelated profiles and RGB configs unchanged')

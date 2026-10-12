@@ -2,8 +2,9 @@
 
 Status until a human reports the exact artifact test:
 NOT_TESTED / PRIVATE_REPAIR_READY_FOR_OWNER_TEST.
-For storage-recovery-v2, first pass OWNER_STORAGE_RETEST.md; only then run this
-wider matrix against the NEW artifact identified by its repaired manifest.
+For this full-Config refresh v3, first pass CONFIG_REFRESH_V3.md on the owner's
+Glyph; only then run this wider matrix against the NEW artifact in its manifest.
+The first v3 adoption replaces the complete saved Config, as owner-authorized.
 
 Record the private commit and complete firmware SHA-256 from BUILD_MANIFEST.md,
 controller revision, cable/adapter/console, backend and date. Test this exact
@@ -19,8 +20,8 @@ firmware only. No assistant-controlled flash has been performed.
 3. Check neutral and eight directions for Default, X1, Y1, Y2, Tilt1, Tilt2,
    Tilt1+Tilt2 (Tilt3), Mode and LT2 Up-smash+A. Where a trusted raw report
    viewer is available, compare exact numbers in the normalized JSON. Tilt2's
-   horizontal flip and Default direction 2's unusual (-77,0) offset are
-   intentional, not errors. LT2 forces (128,195)+A even without direction and
+   horizontal flip is intentional. Default direction 2 was owner-corrected to
+   (0,-77), raw (128,51), straight Down. LT2 forces (128,195)+A even without direction and
    wins over Mode; Mode otherwise centers only the left stick.
 4. Check physical C-stick: RT3=(39,128), RT5=(217,128), RT2=(128,1),
    RT4=(128,255); diagonals combine these values, neutral=(128,128).

@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <CRC32.h>
 
 static Config baked, loaded, changed, injected;
 static unsigned checks = 0;
@@ -238,43 +239,113 @@ static void storage_recovery() {
         require(!provision_once(changed,store) && LittleFS.format_calls==0,"invalid baked Config cannot authorize destructive recovery");
     }
     // Failed-v1 plausible states: absent Config, partial Config, valid Config,
-    // empty/partial/old marker entries. v2 never recognizes a v1 marker.
+    // empty/partial/old marker entries. v3 never recognizes a v1 marker.
     for(int state=0;state<4;++state) {
         LittleFS.reset(); Persistence store; install_validator(store);
         if(state==1) LittleFS.files["config.bin"]=std::make_shared<std::vector<uint8_t>>(3,0x42);
         if(state>=2) { changed=baked; changed.rgb_brightness=17; require(store.SaveConfig(changed),"old Config state"); }
         if(state>=2) { std::string old=state==2?"":"friend_ultimate_20261011_applied_v1\n";
             LittleFS.files["/friend_ultimate_20261011_applied.flag"]=std::make_shared<std::vector<uint8_t>>(old.begin(),old.end()); }
-        require(boot(store) && loaded.rgb_brightness==255 && marker_valid() && LittleFS.format_calls==0,"old failed states safely adopt v2 on mounted storage");
+        require(boot(store) && loaded.rgb_brightness==255 && marker_valid() && LittleFS.format_calls==0,"old failed states safely adopt v3 on mounted storage");
     }
     require(sizeof(kMarkerPath)-2<=32,"new marker basename bounded by actual target");
     std::cout<<"STORAGE RECOVERY R1-R10 PASS: mounted never formats; constructor mount failure -> explicit format/remount -> exact adoption; format/remount/save/mismatch/marker faults refuse; actual second boot/user changes preserved\n";
-    std::cout<<"STORAGE EXTRA PASS: no implicit autoformat; configuration/invalid-baked failures never format; failed-v1 absent/partial/valid Config and old marker states re-adopt v2\n";
+    std::cout<<"STORAGE EXTRA PASS: no implicit autoformat; configuration/invalid-baked failures never format; failed-v1 absent/partial/valid Config and old marker states re-adopt v3\n";
+}
+static void config_refresh_v3() {
+    constexpr char old_path[]="/friend_ult_20261011_v2.flag";
+    constexpr char old_payload[]="friend_ultimate_20261011_applied_v2\n";
+    auto seed_old_marker=[&]() {
+        File marker=LittleFS.open(old_path,"w");
+        require(bool(marker),"old v2 marker opens");
+        require(marker.write(reinterpret_cast<const uint8_t*>(old_payload),sizeof(old_payload)-1)==sizeof(old_payload)-1,"old v2 marker exact write");
+        marker.flush(); marker.close();
+    };
+    // Preserve the old valid marker but vary config.bin: valid user edits,
+    // semantic errors, bad CRC and a truncated file. v3 must reinstall each once.
+    for(int state=0;state<7;++state) {
+        LittleFS.reset();
+        {
+            Persistence store; require(store.SetValidator(validate_glyph_config),"v3 initial validator");
+            changed=baked; changed.rgb_brightness=37;
+            if(state==1)changed.default_usb_backend_config=255;
+            if(state==2)changed.rgb_configs[0].button_colors[0].button=BTN_UNSPECIFIED;
+            require(store.SaveConfig(changed),"old Config saved before refresh"); seed_old_marker();
+            if(state==3)LittleFS.files["config.bin"]->back()^=0x80;
+            if(state==4)LittleFS.files["config.bin"]->resize(3);
+            if(state==5) {
+                // Complete malformed protobuf with a CORRECT header and CRC.
+                const uint8_t bad_tag=0x0f; CRC32 crc; crc.update(bad_tag);
+                Persistence::ConfigHeader header{}; header.config_size=1; header.config_crc=crc.finalize();
+                auto &file=*LittleFS.files["config.bin"]; file.resize(Persistence::config_offset+1);
+                std::memcpy(file.data(),&header,sizeof(header)); file.back()=bad_tag;
+            }
+            if(state==6) {
+                auto &file=*LittleFS.files["config.bin"]; Persistence::ConfigHeader header{};
+                std::memcpy(&header,file.data(),sizeof(header)); ++header.config_size;
+                std::memcpy(file.data(),&header,sizeof(header));
+            }
+            const auto old_result=store.LoadConfigChecked(loaded);
+            require(old_result==(state==0?Persistence::LoadResult::Loaded:Persistence::LoadResult::Rejected),"old marker can coexist with rejected Config");
+        }
+        Persistence store; require(store.SetValidator(validate_glyph_config),"v3 refresh validator");
+        const unsigned writes=LittleFS.config_writes;
+        require(!friend_profile::marker_valid(),"old v2 marker does not satisfy v3");
+        require(friend_profile::provision_once(baked,store),"v3 authorized full refresh");
+        require(LittleFS.config_writes==writes+1 && LittleFS.format_calls==0,"one full Config save, never format mounted storage");
+        require(store.LoadConfigChecked(loaded)==Persistence::LoadResult::Loaded,"v3 normal stored load after refresh");
+        size_t e=0,a=0;
+        require(friend_profile::config_equal(baked,loaded,e,a) && e==3779 && a==3779,"v3 exact entire baked Config adopted");
+        require(friend_profile::marker_valid() && LittleFS.exists(old_path),"v3 marker verified; old evidence not deleted");
+        const unsigned after=LittleFS.config_writes;
+        require(friend_profile::provision_once(baked,store) && LittleFS.config_writes==after,"v3 second call no repeated adoption");
+    }
+    // The old valid marker must not bypass new install failures or accept v3.
+    for(int fault=0;fault<5;++fault) {
+        LittleFS.reset(); Persistence store;
+        require(store.SetValidator(validate_glyph_config),"v3 fault validator");
+        require(store.SaveConfig(baked),"v3 fault old Config"); seed_old_marker();
+        if(fault==0)LittleFS.fail_config_write_open=true;
+        if(fault==1)LittleFS.fail_config_read_open=true;
+        if(fault==2)LittleFS.before_config_read=alter_readback;
+        if(fault==3)LittleFS.marker_fault.write_limit=7;
+        if(fault==4)LittleFS.fail_marker_read_after_write=true;
+        require(!friend_profile::provision_once(baked,store),"old v2 marker cannot suppress v3 fault");
+        require(!friend_profile::marker_valid() && LittleFS.format_calls==0,"v3 failure no valid marker or mounted format");
+    }
+    // After successful v3, even later corruption must not silently repeat reset.
+    LittleFS.reset(); Persistence store;
+    require(store.SetValidator(validate_glyph_config) && friend_profile::provision_once(baked,store),"v3 installed before later corruption");
+    LittleFS.files["config.bin"]->back()^=0x80;
+    const unsigned writes=LittleFS.config_writes;
+    require(friend_profile::provision_once(baked,store) && LittleFS.config_writes==writes,"valid v3 marker never repeatedly resets Config");
+    require(store.LoadConfigChecked(loaded)==Persistence::LoadResult::Rejected,"later invalid Config still safely rejected, no validator weakening");
+    std::cout<<"V3 REFRESH PASS: valid old v2 marker + valid user-edited/invalid USB/invalid RGB/bad CRC/truncated/malformed protobuf/header-size mismatch Config -> exactly one full baked adoption; exact Config and v3 marker; no mounted format; five install faults refuse; later corruption still refused\n";
 }
 static void coordinate_upgrade() {
-    // Simulate an installed v2 marker and a later legitimate user edit.
+    // Simulate an installed v3 marker and a later legitimate user edit.
     // The new coordinate table must apply without replacing the stored Config.
     LittleFS.reset();
     {
         Persistence store; require(store.SetValidator(validate_glyph_config),"upgrade validator");
-        require(friend_profile::provision_once(baked,store),"existing v2 installation");
+        require(friend_profile::provision_once(baked,store),"existing v3 installation");
         changed=baked; changed.rgb_brightness=37;
-        require(store.SaveConfig(changed),"existing v2 user setting");
+        require(store.SaveConfig(changed),"existing v3 user setting");
     }
     const auto before=encoded(changed);
     const unsigned writes=LittleFS.config_writes, formats=LittleFS.format_calls;
     Persistence updated; require(updated.SetValidator(validate_glyph_config),"updated boot validator");
-    require(friend_profile::marker_valid(),"unchanged v2 marker recognized");
+    require(friend_profile::marker_valid(),"current v3 marker recognized");
     require(friend_profile::provision_once(baked,updated),"updated boot skips adoption");
-    require(LittleFS.config_writes==writes && LittleFS.format_calls==formats,"coordinate-only update never rewrites/formats mounted v2 storage");
+    require(LittleFS.config_writes==writes && LittleFS.format_calls==formats,"later v3 boot never rewrites/formats mounted storage");
     require(updated.LoadConfigChecked(loaded)==Persistence::LoadResult::Loaded,"updated boot stored Config loaded");
     require(encoded(loaded)==before && loaded.rgb_brightness==37,"updated boot exact user Config preserved");
     for(auto backend:{COMMS_BACKEND_XINPUT,COMMS_BACKEND_DINPUT,COMMS_BACKEND_NINTENDO_SWITCH,COMMS_BACKEND_GAMECUBE}) {
         Ultimate mode; mode.SetConfig(loaded.game_mode_configs[2]);
-        left_point(frame(mode,mask({BTN_LF2}),backend),{128,51},"owner corrected physical LF2 Down with existing v2 marker");
+        left_point(frame(mode,mask({BTN_LF2}),backend),{128,51},"owner corrected physical LF2 Down with current v3 marker");
         left_point(frame(mode,0,backend),{128,128},"updated Down releases to neutral");
     }
-    std::cout<<"DEFAULT2 UPGRADE PASS: LF2 Down=(128,51) on four backends using existing v2 marker; full user Config byte-identical; zero rewrite/format; neutral release PASS\n";
+    std::cout<<"DEFAULT2 UPGRADE PASS: LF2 Down=(128,51) on four backends using current v3 marker; later full user Config byte-identical; zero rewrite/format; neutral release PASS\n";
 }
 int main(int argc,char **argv) {
     require(argc==2,"output path"); baked=glyph_default_config();
@@ -285,7 +356,7 @@ int main(int argc,char **argv) {
         } require(found,"backend present");
     }
     auto &rgb=baked.rgb_configs[baked.game_mode_configs[2].rgb_config-1]; require(rgb.button_colors_count==0 && rgb.animation==RGB_ANIM_STATIC,"Ultimate off RGB");
-    coordinates(); cstick(); buttons(); provisioning(); storage_recovery(); coordinate_upgrade();
+    coordinates(); cstick(); buttons(); provisioning(); storage_recovery(); config_refresh_v3(); coordinate_upgrade();
     auto bytes=encoded(baked); std::ofstream file(argv[1],std::ios::binary); file.write(reinterpret_cast<const char*>(bytes.data()),bytes.size()); require(bool(file),"reference blob");
     std::cout<<"TOTAL checks="<<checks<<" PASS; hardware NOT_TESTED\n";
 }

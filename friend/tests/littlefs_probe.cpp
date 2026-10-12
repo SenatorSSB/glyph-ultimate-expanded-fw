@@ -48,9 +48,9 @@ int main(int argc,char **argv) {
     require(lfs_file_open(&fs,&config_file,"config.bin",LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"real Config file open");
     require(lfs_file_write(&fs,&config_file,config.data(),config.size())==int(config.size()),"real Config write");
     require(lfs_file_close(&fs,&config_file)==0,"real Config close/sync");
-    constexpr char payload[]="friend_ultimate_20261011_applied_v2\n";
-    require(lfs_file_open(&fs,&marker,current,LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"real v2 marker create");
-    require(lfs_file_write(&fs,&marker,payload,sizeof(payload)-1)==sizeof(payload)-1,"real v2 marker write");
+    constexpr char payload[]="friend_ultimate_20261012_applied_v3\n";
+    require(lfs_file_open(&fs,&marker,current,LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"real v3 marker create");
+    require(lfs_file_write(&fs,&marker,payload,sizeof(payload)-1)==sizeof(payload)-1,"real v3 marker write");
     require(lfs_file_sync(&fs,&marker)==0 && lfs_file_close(&fs,&marker)==0,"real marker sync/close");
     require(lfs_unmount(&fs)==0 && lfs_mount(&fs,&cfg)==0,"real later remount, no format");
     require(lfs_file_open(&fs,&marker,current,LFS_O_RDONLY)==0,"real marker reopen");
