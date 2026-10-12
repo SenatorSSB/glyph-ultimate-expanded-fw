@@ -1,0 +1,118 @@
+# Multi-Profile Persistent Ultimate Profile Store — Chapter Ledger
+
+Status: `DISCOVERY_IN_PROGRESS`.
+
+## Authority and scope
+
+- Chapter: **Multi-Profile Persistent Ultimate Profile Store**.
+- Owner direction: direct owner instruction received 2026-10-12 (local chat).
+- Authorized outcome: evolve the embedded two-profile Ultimate persistence
+  representation to a persistent multi-profile store, with an initial product
+  target of at least 20 profiles and the stated atomicity, recovery, migration,
+  Configurator, and future-function-binding compatibility constraints.
+- Explicit exclusions: profile-defined controller-function bindings, arbitrary
+  scripting, hot switching, cloud sharing, Senscope UI, public release,
+  Nunchuk, and LS-to-D-pad observability work.
+- The owner direction is the chapter-specific approval for this bounded storage
+  work. Existing pre-chapter runtime-config boundary text is historical policy;
+  no implementation proceeds until the frozen architecture reconciles it and
+  the authorized chapter lifecycle requirements.
+
+## Exact base and local state
+
+- Live canonical verification: `git ls-remote origin refs/heads/configurator`
+  succeeded through the permitted network-enabled retry after the restricted
+  sandbox could not resolve `github.com`.
+- Live `origin/configurator`: `6b73a7c507f35c111745c6bdd341618b490cbdcd`.
+- Base tree: `cd14b8f1e688dcc8b1ff561779376531ea47e1b1`.
+- Clean chapter worktree: `/private/tmp/glyph-chapter-worker-roster`, branch
+  `codex/chapter-worker-roster`, at the exact live base.
+- The invoking worktree was intentionally not used for chapter edits: it has
+  unrelated user changes in `tools/glyph_serial_config_tool.py` and untracked
+  bootstrap/retrospective docs.
+
+## Worker roster and provenance
+
+| Role | Requested / owner-selected | Runtime-observed |
+| --- | --- | --- |
+| D0 daemon | Terra / medium | unknown (no telemetry asserted) |
+| W1 architecture | Sol / high | unknown |
+| W2 implementation | Terra / medium | unknown |
+| W3 review | Sol / medium | unknown |
+| W4 resource audit | Luna / medium | unknown |
+
+- Worker-roster framework: present at the exact base (`FUTURE_DAEMON_BOOTSTRAP`,
+  `MODEL_ROUTING`, `SUBAGENT_CONTRACTS`, and roster-supporting docs/checker).
+- `direct_return_capability`: `VERIFIED` by the direct W4 return on 2026-10-12.
+- 2026-10-12 owner correction: do not perform restricted-DNS attempts. The
+  owner explicitly directs D0 to use the already-created user-visible roster
+  chats, rather than native internal subagents. The initial internal W1/W4
+  attempts were interrupted; no result from them is used.
+
+## Dispatches and results
+
+| Time / phase | Worker | Packet | State | Result |
+| --- | --- | --- | --- | --- |
+| bootstrap | internal W1/W4 attempts | architecture/resource packets | interrupted | no result used |
+| corrected dispatch | Worker 1 - SOL Designer | architecture and adversarial-design proposal | complete | proposal plus required challenge complete; five concrete design repairs incorporated |
+| corrected dispatch | Worker 4 - LUNA Investigator | repository resource/storage audit | complete | `/private/tmp/glyph-w4-mechanical-resource-audit.md`; D0 spot-verified source claims |
+| owner-authorized preflight | Worker 2 - TERRA Implementer | read-only source-surface readiness inventory | complete | direct source-cited surface/test inventory; no implementation |
+| owner-authorized preflight | Worker 3 - SOL Reviewer | read-only future-review rubric/inventory | complete | direct report; D0 spot-verified persistence, validation, selection, and Configurator claims |
+| independent design review | Worker 3 - SOL Reviewer | proposed design after W1 repairs | complete | one migration-lifetime/fence repair incorporated; no review-of-review |
+
+Only the existing owner-created roster chats may be used for this chapter; do
+not create replacement worker chats. W2 and W3 currently have read-only
+preflight packets only; neither authorizes implementation, architecture choice,
+or candidate review.
+
+## Design freeze / candidate / evidence
+
+- Frozen design: `docs/runtime_config/multi_profile_persistent_ultimate_profile_store_design.md`.
+  It permits only its bounded implementation and does not clear candidate,
+  build, custody, review, or hardware gates.
+- Design freeze: complete, pending durable commit identity below.
+- Firmware candidate: none.
+- Build/resource report: none for this chapter.
+- Hardware/HEP state: not applicable until a behavior-changing exact candidate
+  has passed source validation and independent review.
+
+## Current next permissible action
+
+Commit the ledger and frozen design on an isolated docs/control-plane branch,
+then dispatch the coherent implementation packet to the existing Worker 2 chat.
+
+## Anomalies and carried debt
+
+- Existing framework/aggregate debt remains historical unless it exposes a
+  concrete Tier-1 or directly affected Tier-2 contradiction.
+- Nunchuk remains `NOT_TESTED`; root cause remains `UNPROVEN`.
+- No current claim is made about runtime-observed worker model or effort.
+- A restricted `git ls-remote` DNS attempt was made before the owner correction
+  and failed to resolve `github.com`; it will not be repeated. A subsequently
+  permitted network-enabled read-only verification had already returned the
+  live canonical SHA recorded above.
+- W4's attempted exact-base build could not download the pinned PlatformIO
+  platform because DNS failed. No retry was requested or used; build-resource
+  deltas remain unknown.
+- W3 records atomic-persistence/recovery, failure isolation, migration identity,
+  active/candidate publication, Stage A/B/C correspondence, and Configurator
+  protocol boundaries as prospective Tier-1/direct Tier-2 review obligations;
+  it neither freezes an architecture nor clears a gate.
+- W1 proposes dual checksummed directory roots and immutable per-profile
+  revisions, store-incarnation plus nonreused stable IDs, compact Config with
+  per-mode IDs, active-plus-scratch RAM, reboot-bound activation, and a
+  recovery route. This remains a proposed design, pending reconciliation,
+  adversarial challenge, and explicit freeze.
+- W2 identifies schema/generated Nanopb, Config validation/reference rules,
+  persistence, mode-selection pointer lifetime, Configurator SET/GET, backend
+  initialization, and Stage A/B/C fixtures as the directly coupled surfaces.
+- W1 challenge repaired directory rollback/ID reuse, migration receipt
+atomicity, reboot destination persistence, transaction reconciliation, recovery
+service entry, GC-union resource accounting, raw-versus-semantic migration
+claims, and Senscope game-semantics wording. W1 also corrected W4's erroneous
+host-schema mismatch claim: the pinned host tool already uses tracked
+`schema/haybox/config.proto`; no resolver rewrite is part of this chapter.
+- W3's independent design review found one additional migration phase-lifetime
+  gap. The freeze retains the authenticated receipt/dependencies through every
+  directory root, fences unrelated CRUD/GC/root rotation until compact-Config
+  publication, and adds the required interruption/interleaving evidence.
