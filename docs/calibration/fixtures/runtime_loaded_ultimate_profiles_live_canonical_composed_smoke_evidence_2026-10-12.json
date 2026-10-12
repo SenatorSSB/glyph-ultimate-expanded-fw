@@ -1,0 +1,64 @@
+{
+  "record_type": "SOURCE_FREE_HARDWARE_EVIDENCE",
+  "chapter": "Runtime-Loaded Ultimate Profiles — Persisted Coordinates, Routing, Sublayers, Priorities, and Bounded Output Effects",
+  "classification": "PASS_WITH_HOST_ONLY_CAVEAT",
+  "candidate": {
+    "sha": "e086b72a4eaa2e8585a81375a0866ac05fe78d66",
+    "tree": "13aed0c66de6175047ba352e4eeffde7da506080",
+    "parent_and_merge_base": "28ba39da5f517baa40f3dee8d868c9bb583dde4a"
+  },
+  "artifact": {
+    "bytes": 832000,
+    "sha256": "b277a121cb8ac4f1c2b15113fafd2b4077318905a997dd94d3e9190df94d4932",
+    "custody": "local_backups/hardware-artifacts/e086b72a4eaa2e8585a81375a0866ac05fe78d66/b277a121cb8ac4f1c2b15113fafd2b4077318905a997dd94d3e9190df94d4932/firmware.uf2"
+  },
+  "final_config": {
+    "fixture_sha256": "e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb",
+    "payload_bytes": 6248,
+    "payload_sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+    "envelope": ["XInput defaultModeConfig=1", "GameCube defaultModeConfig=1", "Configurator activationBinding=BTN_RT2"]
+  },
+  "human_smoke": {
+    "operator_report": "FINAL_LIVE_CANONICAL_COMPOSED_SMOKE_PASS",
+    "evidence_locator": "local_backups/hardware-tests/runtime-loaded-final-bc-20261012/composed-smoke-result.txt",
+    "preflash_mutable_state": "SAFE_EXPECTED_MUTABLE_STATE_ONLY: XInput default_mode_config 1 -> 3; pristine payload was restored and exact readback passed before flash.",
+    "rows": {
+      "exact_uf2_flash": "PASS",
+      "normal_boot": "PASS",
+      "menu_configurator_access": "PASS",
+      "rt2_configurator_access": "PASS",
+      "gamecube_startup": "PASS",
+      "legacy_controls": "PASS",
+      "runtime_b_discriminator": "PASS: Z down-left = (-38,-39)"
+    }
+  },
+  "correspondence": {
+    "historical_runtime_candidate": "16fb02a5eaaa95e63870d14593376c9d1f15aed2",
+    "historical_runtime_tree": "13ad3a19e4cb1ae19fd866ad48cb55a96897e630",
+    "basis": "The exact runtime-profile production/schema/build blobs in this candidate equal the previously accepted implementation; the direct parent preserves current canonical C023/C024 behavior.",
+    "prior_evidence_preserved": [
+      "Stage-A coordinate/profile evidence",
+      "full-Config Configurator-envelope regression",
+      "pre-Stage-C Clean-config boot failure",
+      "PROVEN_CAPTURED_CLEAN_BODY_CURRENT_RGB_VALIDATION_INCOMPATIBILITY",
+      "cross-version bridge proof",
+      "broad B+C matrix and GameCube-envelope affected retest",
+      "prior exact-F HEP evidence"
+    ]
+  },
+  "limitations": {
+    "ls_to_dpad": "HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER; no physical PASS is claimed.",
+    "nunchuk": "NOT_TESTED",
+    "stale_candidate": "2fb789c60d41a7e2fee7ce649cf6b8b88be27cf0 and its artifact are invalid preparation history only."
+  },
+  "hep": {
+    "classification": "ACCEPT",
+    "result": "No concrete Tier-1 or Tier-2 contradiction or required evidence gap.",
+    "requested_model": "Luna",
+    "requested_effort": "medium",
+    "observed_model": "UNKNOWN",
+    "observed_effort": "UNKNOWN"
+  },
+  "source_free": true,
+  "candidate_production_source_included": false
+}
