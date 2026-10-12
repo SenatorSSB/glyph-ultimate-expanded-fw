@@ -151,6 +151,72 @@ int main(int argc, char **argv) {
     if (!require(legacy_bytes == preserved_legacy_bytes,
                  "migration leaves the legacy Config source bytes untouched")) return 1;
 
-    std::puts("profile_store_migration_lifecycle stage_b_v3_two_profiles=PASS legacy_bytes_preserved=PASS mode_mapping=PASS retry_stable_ids=PASS migration_fence=PASS");
+    Config compact = Config_init_default;
+    compact.ultimate_profile_store_format = ProfileStore::kCompactConfigFormat;
+    compact.ultimate_profile_store_incarnation = retry_boot.Incarnation();
+    if (!require(retry_boot.CompleteMigration(compact) == ProfileStore::Status::Ok &&
+                 !retry_boot.MigrationPending(),
+                 "authenticated compact Config releases the migration fence")) return 1;
+
+    uint32_t ids[ProfileStore::kMinimumAdmissionProfiles] = {first_mapping[0], first_mapping[1]};
+    for (size_t index = 2; index < ProfileStore::kMinimumAdmissionProfiles; ++index) {
+        char name[ProfileStore::kNameCapacity] = {};
+        std::snprintf(name, sizeof(name), "Stage-B %u", static_cast<unsigned>(index + 1));
+        const ProfileStore::TransactionResult created = retry_boot.Create(
+            legacy.ultimate_profiles[index & 1u], name, static_cast<uint32_t>(index),
+            static_cast<uint32_t>(100 + index), static_cast<uint32_t>(200 + index));
+        if (!require(created.status == ProfileStore::Status::Ok && created.id == index + 1 &&
+                     created.revision == 1, "create a distinct stable profile record")) return 1;
+        ids[index] = created.id;
+    }
+    if (!require(retry_boot.Count() == ProfileStore::kMinimumAdmissionProfiles,
+                 "store admits twenty independently addressable profiles")) return 1;
+    for (size_t index = 0; index < ProfileStore::kMinimumAdmissionProfiles; ++index) {
+        const ProfileStore::Entry *entry = retry_boot.EntryAt(index);
+        UltimateProfile read = UltimateProfile_init_default;
+        std::vector<uint8_t> read_wire;
+        const std::vector<uint8_t> &expected = (index & 1u) == 0 ? first_wire : second_wire;
+        if (!require(entry != nullptr && entry->id == ids[index] && entry->revision == 1 &&
+                     retry_boot.Read(ids[index], read) == ProfileStore::Status::Ok &&
+                     EncodeProfile(read, &read_wire) && read_wire == expected,
+                     "enumerate and read every independently stored profile")) return 1;
+    }
+
+    ProfileStore selection_reboot(&storage);
+    if (!require(selection_reboot.Begin(), "reboot reloads twenty-profile directory")) return 1;
+    ProfileStore::Status activation = ProfileStore::Status::Invalid;
+    const UltimateProfile *active = selection_reboot.Activate(ids[0], &activation);
+    std::vector<uint8_t> active_wire;
+    if (!require(active != nullptr && activation == ProfileStore::Status::Ok &&
+                 selection_reboot.ActiveId() == ids[0] && EncodeProfile(*active, &active_wire) &&
+                 active_wire == first_wire, "activate an early stable ID after reboot")) return 1;
+    active = selection_reboot.Activate(ids[ProfileStore::kMinimumAdmissionProfiles - 1], &activation);
+    if (!require(active != nullptr && activation == ProfileStore::Status::Ok &&
+                 selection_reboot.ActiveId() == ids[ProfileStore::kMinimumAdmissionProfiles - 1] &&
+                 EncodeProfile(*active, &active_wire) && active_wire == second_wire,
+                 "switch to a distant stable ID after reboot")) return 1;
+
+    char corrupt_path[64] = {};
+    std::snprintf(corrupt_path, sizeof(corrupt_path), "/ultimate-%08lx-%08lx.bin",
+                  static_cast<unsigned long>(ids[0]), 1ul);
+    auto corrupt = storage.files.find(corrupt_path);
+    if (!require(corrupt != storage.files.end() && !corrupt->second.empty(),
+                 "locate selected profile record for corruption isolation")) return 1;
+    corrupt->second.back() ^= 0x01u;
+
+    ProfileStore corrupt_reboot(&storage);
+    if (!require(corrupt_reboot.Begin() && corrupt_reboot.Count() == ProfileStore::kMinimumAdmissionProfiles &&
+                 (storage.files.find("/ultimate-dir-0.bin") != storage.files.end() ||
+                  storage.files.find("/ultimate-dir-1.bin") != storage.files.end()),
+                 "corrupt record leaves the committed directory usable")) return 1;
+    if (!require(corrupt_reboot.Activate(ids[0], &activation) == nullptr &&
+                 activation == ProfileStore::Status::Invalid,
+                 "corrupt selected profile returns the source-fallback signal")) return 1;
+    active = corrupt_reboot.Activate(ids[ProfileStore::kMinimumAdmissionProfiles - 1], &activation);
+    if (!require(active != nullptr && activation == ProfileStore::Status::Ok &&
+                 EncodeProfile(*active, &active_wire) && active_wire == second_wire,
+                 "corrupt selected record does not poison another profile")) return 1;
+
+    std::puts("profile_store_migration_lifecycle stage_b_v3_two_profiles=PASS legacy_bytes_preserved=PASS mode_mapping=PASS retry_stable_ids=PASS migration_fence=PASS profiles_20=PASS reboot_switch=PASS corrupt_record_isolation=PASS");
     return 0;
 }
