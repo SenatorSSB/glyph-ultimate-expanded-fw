@@ -1,5 +1,6 @@
 #include "core/ProfileStoreAtomicCommit.hpp"
 #include "core/ProfileStoreCapacity.hpp"
+#include "core/CompactConfigRecovery.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -72,6 +73,10 @@ int main() {
                  "512KiB capacity with 16KiB reserve must admit twenty max-size records")) return 1;
     if (!require(!ProfileStoreCapacity::FitsRepresentativeSet(200, max_record_bytes, max_directory_bytes),
                  "capacity proof must reject an oversized representative set")) return 1;
-    std::puts("profile_store_atomic_commit interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS");
+    if (!require(CompactConfigRecovery::Select(false, true) == CompactConfigRecovery::Source::PriorCompact,
+                 "after old compact rename before new publish, boot must choose retained compact prior")) return 1;
+    if (!require(CompactConfigRecovery::Select(false, false) == CompactConfigRecovery::Source::Legacy,
+                 "legacy is selected only with no compact generation to recover")) return 1;
+    std::puts("profile_store_atomic_commit interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS");
     return 0;
 }

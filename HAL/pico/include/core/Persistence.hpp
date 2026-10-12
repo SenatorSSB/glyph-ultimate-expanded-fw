@@ -54,6 +54,7 @@ class Persistence {
     // New writes use a separate name so an interrupted migration cannot erase
     // the only legacy source record.
     static constexpr char config_filename[] = "config-v2.bin";
+    static constexpr char prior_compact_filename[] = "config-v2.prev";
     static constexpr char legacy_config_filename[] = "config.bin";
 
     bool _configuration_ok = false;

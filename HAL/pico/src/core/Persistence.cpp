@@ -16,6 +16,7 @@
  */
 
 #include "core/Persistence.hpp"
+#include "core/CompactConfigRecovery.hpp"
 
 #include "stdlib.hpp"
 
@@ -122,7 +123,6 @@ bool Persistence::SaveConfig(Config &config) {
     // replacement, close it, validate it by reopening, then rotate the former
     // compact file only after the staged bytes are known readable.
     static constexpr char temporary_filename[] = "config-v2.tmp";
-    static constexpr char backup_filename[] = "config-v2.prev";
     LittleFS.remove(temporary_filename);
     File config_file = LittleFS.open(temporary_filename, "w+");
     if (!config_file) {
@@ -168,11 +168,11 @@ bool Persistence::SaveConfig(Config &config) {
     if (staged) staged.close();
     if (!staged_ok) return false;
 
-    LittleFS.remove(backup_filename);
+    LittleFS.remove(prior_compact_filename);
     const bool had_current = LittleFS.exists(config_filename);
-    if (had_current && !LittleFS.rename(config_filename, backup_filename)) return false;
+    if (had_current && !LittleFS.rename(config_filename, prior_compact_filename)) return false;
     if (!LittleFS.rename(temporary_filename, config_filename)) {
-        if (had_current) LittleFS.rename(backup_filename, config_filename);
+        if (had_current) LittleFS.rename(prior_compact_filename, config_filename);
         return false;
     }
     File published = LittleFS.open(config_filename, "r");
@@ -197,8 +197,10 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
     static Config candidate;
     candidate = Config_init_default;
 
-    const char *selected_filename = LittleFS.exists(config_filename)
-        ? config_filename : legacy_config_filename;
+    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
+        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
+    const char *selected_filename = source == CompactConfigRecovery::Source::Current ? config_filename :
+        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
     File config_file = LittleFS.open(selected_filename, "r");
     if (!config_file) {
         // The selected Boolean FS API cannot distinguish absence from I/O failure.
@@ -245,6 +247,10 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
         return LoadResult::StorageFailure;
     }
     config_file.close();
+    if (source == CompactConfigRecovery::Source::PriorCompact &&
+        (!LittleFS.rename(prior_compact_filename, config_filename))) {
+        return LoadResult::StorageFailure;
+    }
     config = candidate;
     _config_generation = header.config_crc;
     return LoadResult::Loaded;
@@ -255,8 +261,10 @@ bool Persistence::CheckSavedConfig() {
         return false;
     }
     // Open file to load config data from.
-    const char *selected_filename = LittleFS.exists(config_filename)
-        ? config_filename : legacy_config_filename;
+    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
+        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
+    const char *selected_filename = source == CompactConfigRecovery::Source::Current ? config_filename :
+        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
     File config_file = LittleFS.open(selected_filename, "r");
     if (!config_file) {
         return false;
@@ -272,8 +280,10 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
         return false;
     }
     // Open file to load config data from.
-    const char *selected_filename = LittleFS.exists(config_filename)
-        ? config_filename : legacy_config_filename;
+    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
+        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
+    const char *selected_filename = source == CompactConfigRecovery::Source::Current ? config_filename :
+        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
     File config_file = LittleFS.open(selected_filename, "r");
     if (!config_file) {
         return false;
