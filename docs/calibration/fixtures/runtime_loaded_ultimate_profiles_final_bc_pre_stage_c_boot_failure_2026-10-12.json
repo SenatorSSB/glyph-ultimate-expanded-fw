@@ -1,0 +1,40 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "RUNTIME_LOADED_ULTIMATE_PROFILES_FINAL_BC",
+  "result_scope": "FINAL_BC_PRE_STAGE_C_BOOT",
+  "result": "FAIL",
+  "candidate_branch": "codex/runtime-loaded-ultimate-profiles",
+  "feature_head_before_hardware": "6724c9bcc9c618c4dc302e4ee9677f79ef22362b",
+  "canonical_configurator_sha": "28ba39da5f517baa40f3dee8d868c9bb583dde4a",
+  "production_candidate_sha": "16fb02a5eaaa95e63870d14593376c9d1f15aed2",
+  "production_candidate_tree": "13ad3a19e4cb1ae19fd866ad48cb55a96897e630",
+  "final_firmware": {
+    "size_bytes": 832000,
+    "sha256": "c178cc2e39a6d2eceee27c16b9aae1364a04d628f1ca20bd28fc78a798c04830"
+  },
+  "clean_recovery_firmware": {
+    "size_bytes": 1818112,
+    "sha256": "22fd7f8f29fb33d9cb601187e9503411e5330e72c7297fbce0df710eec8ff200"
+  },
+  "corrected_stage_c_fixture_sha256": "c91f2bb04a1ec70fe68acf8e54be8ed7687a4dd427823a1f943780d13bd786d3",
+  "corrected_stage_c_payload": {
+    "size_bytes": 6242,
+    "sha256": "898f0efd71282862e8e567b6bd9633e6577c05cca5cd65bc562ca83256386b6a"
+  },
+  "owner_authorization": "The owner explicitly approved the first destructive official Clean recovery.",
+  "observations": [
+    "Official 1.0.7 Clean UF2 flashed successfully and RPI-RP2 disappeared normally.",
+    "Clean-firmware menu Configurator access: PASS.",
+    "Clean-firmware RT2 Configurator activation: PASS.",
+    "The final B+C UF2 was re-hashed successfully, copied to RPI-RP2, and the device re-enumerated as /dev/cu.usbmodem101.",
+    "The final candidate displayed: Stored Config rejected / Recovery required / Operation refused.",
+    "No Stage-C Config write, Config backup after final flash, retry, rollback, source change, fixture change, rebuild, merge, or subsequent device write occurred."
+  ],
+  "copy_warning": "The macOS copy command returned nonzero because extended attributes could not be copied to the FAT RPI-RP2 volume. The observed device disappearance, re-enumeration, and exact candidate recovery screen establish only that this warning is not classified as the root cause.",
+  "classification": "Exact physical final-gate FAIL. Cause is not classified by this source-free record.",
+  "evidence_locator": "local_backups/hardware-tests/runtime-loaded-final-bc-20261011/final-bc-stop-20261012.txt",
+  "tester": "Project owner / user (direct owner-reported physical observation), recorded source-free by Codex",
+  "tested_at": "2026-10-12",
+  "device_actions_by_daemon": "none"
+}

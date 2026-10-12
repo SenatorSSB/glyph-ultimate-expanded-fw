@@ -1,0 +1,77 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "RUNTIME_LOADED_ULTIMATE_PROFILES_STAGE_A",
+  "candidate_branch": "codex/runtime-loaded-ultimate-profiles",
+  "candidate_git_sha": "45e0b89dea86fefba631350bc80afae7b28af645",
+  "candidate_tree": "c2c6dfaa8b99efa99f037733de55656d4247e106",
+  "candidate_base_configurator_sha": "28ba39da5f517baa40f3dee8d868c9bb583dde4a",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_size_bytes": 805888,
+  "firmware_artifact_sha256": "b13ad448fe989f84265e97babc5b650968eb75d787fc58791d814f478ea8bcf1",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/45e0b89dea86fefba631350bc80afae7b28af645/b13ad448fe989f84265e97babc5b650968eb75d787fc58791d814f478ea8bcf1/firmware.uf2",
+  "stage_a_fixture_path": "tools/fixtures/stage_a_ultimate_profiles_dry_run.json",
+  "stage_a_fixture_sha256": "fc86614108390f46ede813d5655a73aca34ed9a193258126c9fb6e593b353143",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph MK6; board revision not separately reported",
+  "firmware_profile_state": "Stage-A fixture with three same-name Ultimate rows: legacy reference 0, runtime profile A reference 1, and runtime profile B reference 2.",
+  "update_method": "Manual owner-controlled UF2 update and Config write/readback using /dev/cu.usbmodem2101; no agent device action or flashing automation.",
+  "host_platform_adapter": "macOS USB CDC Configurator port /dev/cu.usbmodem2101; other host and adapter details not separately reported",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_version": "RUNTIME_LOADED_ULTIMATE_PROFILES_STAGE_A_HW_V1",
+  "preconditions": [
+    "The owner identified the exact remote feature head as 0d6722bd94b5335872be1f4179270e7222a02068 and the exact tested source candidate/tree/artifact tuple recorded here.",
+    "The preserved UF2 had the recorded 805888-byte size and SHA-256 before the manual update.",
+    "The owner captured pre-firmware, pre-Stage-A, and writer pre-write Config backups. Their reported SHA-256 prefixes were respectively 4c68ce0c…053f4dad, 1d8ea49c…44e6651, and 7508f773…e323f6eb.",
+    "The evidence transcript is owner-held at local_backups/hardware-tests/runtime-loaded-stage-a-20261011/final-human-observation-transcript.txt."
+  ],
+  "steps": [
+    {"id":"H1","expected":"Exact firmware boots.","observed":"PASS — normal Ultimate/XInput boot; owner verified firmware version 45e0b89d."},
+    {"id":"H2","expected":"Configurator mode remains usable after Stage-A firmware.","observed":"PASS."},
+    {"id":"H3","expected":"Existing Config backup/read succeeds.","observed":"PASS."},
+    {"id":"H4","expected":"Stage-A Config write succeeds.","observed":"PASS."},
+    {"id":"H5","expected":"Stage-A Config readback succeeds.","observed":"PASS."},
+    {"id":"H6","expected":"Config survives reboot without refusal or recovery.","observed":"PASS — normal XInput gameplay, responsive buttons, no Config refusal/recovery."},
+    {"id":"H7","expected":"Legacy Ultimate row (reference 0) is selectable.","observed":"PASS."},
+    {"id":"H8","expected":"Runtime profile-A row (reference 1) is selectable.","observed":"PASS."},
+    {"id":"H9","expected":"Runtime profile-B row (reference 2) is selectable.","observed":"PASS."},
+    {"id":"H10","expected":"Legacy/basic output remains correct.","observed":"PASS — neutral 0,0; right 67,0; down-left -67,-77; RF1 face input confirmed."},
+    {"id":"H11","expected":"Profile A supplies its source-equivalent coordinate.","observed":"PASS — display -39,-39; raw (89,89)."},
+    {"id":"H12","expected":"Profile B supplies its discriminator coordinate.","observed":"PASS — display -38,-39; raw (90,89)."},
+    {"id":"H13","expected":"A/B/A switching has no leakage.","observed":"PASS — A -39,-39; B -38,-39; A -39,-39."},
+    {"id":"H14","expected":"Duplicate display names do not control profile identity.","observed":"PASS — all three same-name entries were selectable by list row; A/B/A produced profile-specific output."},
+    {"id":"H15","expected":"Profile state persists across power cycle.","observed":"PASS — normal identical boot without storage error; profile A remained -39,-39."}
+  ],
+  "post_evidence_correction": {
+    "recorded_at": "2026-10-11",
+    "scope": "This supplements the immutable H1-H15 observations; it does not reinterpret the coordinate, reference-selection, isolation, reboot, or power-cycle observations.",
+    "H2_scope_clarification": "H2 PASS established Configurator availability after flashing the Stage-A firmware and before the Stage-A Config replacement. It did not establish Configurator availability after that Config replacement.",
+    "POST_STAGE_A_CONFIG_CONFIGURATOR_ACCESS": "FAIL — owner reported that selecting Connect to Configurator returned the menu to its initial selection instead of entering Configurator mode.",
+    "POST_STAGE_A_CONFIG_RT2_CONFIGURATOR_ACTIVATION": "FAIL — owner reported that holding RT2 while connecting started normal default gameplay rather than Configurator mode.",
+    "serial_probe": "No Configurator protocol was received from a detected Pico port after the Stage-A Config replacement.",
+    "interpretation_boundary": "These are source-free owner-reported physical observations. The separate source-backed root-cause classification is recorded in the chapter ledger."
+  },
+  "negative_regression_checks": [
+    "Immediate post-flash and post-Config reboot had no Config refusal, recovery state, or unresponsive buttons.",
+    "All three same-name rows were distinguishable by persisted row/reference rather than display-name identity.",
+    "A/B/A output isolation passed with the exact one-unit profile discriminator."
+  ],
+  "power_cycle_reconnect_checks": [
+    "Post-Config reboot passed normal XInput gameplay and responsive buttons.",
+    "Post-power-cycle boot was identical and had no Config storage error, recovery, or refusal.",
+    "Profile A's discriminator remained -39,-39 after power cycle."
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "An earlier inconclusive preflight resolved the relative UF2 custody path against the wrong repository root. No device interaction occurred during that preflight.",
+    "The fixture left layout unspecified, so the UI displayed Unknown Plate. This is expected fixture/UI behavior, not a Stage-A runtime-loading failure.",
+    "Ultimate Runtime overlaps or truncates on the miniscreen. This is cosmetic fixture behavior.",
+    "The UF2-copy shell wrapper emitted a zsh variable-name error after the file copy. The copy was not retried; normal device disappearance, normal boot, verified firmware 45e0b89d, and exact Stage-A behavior establish that the intended UF2 executed."
+  ],
+  "rollback_recovery": "No rollback was needed or performed. The exact tested UF2 remained installed; the owner retained all three reported Config backups.",
+  "tester": "Project owner / user (direct owner-reported physical observations), recorded source-free by Codex",
+  "tested_at": "2026-10-11",
+  "evidence_gaps": []
+}
