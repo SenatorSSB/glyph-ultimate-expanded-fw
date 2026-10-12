@@ -2,6 +2,19 @@
 
 C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). No new product chapter starts here.
 
+## Runtime-Loaded Ultimate Profiles completion
+
+The owner-authorized Runtime-Loaded Ultimate Profiles chapter is DONE. Source-free
+HEP evidence `af2bbefdf9cfc447918a74a4ff07541d24da320c` accepts exact tested
+source `e086b72a4eaa2e8585a81375a0866ac05fe78d66` (tree
+`13aed0c66de6175047ba352e4eeffde7da506080`) and its 832,000-byte UF2
+`b277a121cb8ac4f1c2b15113fafd2b4077318905a997dd94d3e9190df94d4932`.
+The final Config fixture is `e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb`;
+its 6,248-byte payload is `0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7`.
+The chapter accepts the bounded runtime-profile behavior, Configurator recovery,
+and GameCube startup/default selection. LS-to-D-pad remains HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER,
+not a physical PASS; Nunchuk remains NOT_TESTED. Public release is a separate owner decision.
+
 ## Current C024 completion
 
 GP-CONFIG-024 is DONE after exact source integration I `5c5ba4e166c9b67654c0d1b9baa2b0c35677f3d4` and a separate strict completion publication. The accepted candidate is F `8ab1173b0690f5ed3e994f95af797c9e9a265525`, direct child of B `b404453ef22cc994eec54338b8a23c3ba61df808`, tree `15ed2d35d561d6b1709499fe42083ca4d789e920`; the accepted catalog row binds review R `36f91089ab60fb68248a2819aee5dd5082fd922c` and source-free HEP evidence E `25f39876c21fa429a47c93dc446205c37d72b8d3`. Its preserved tested UF2 is SHA-256 `95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6` (803840 bytes), with no rebuild or device action after that exact artifact was accepted.

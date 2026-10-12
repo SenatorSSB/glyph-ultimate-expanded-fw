@@ -1,6 +1,32 @@
 # Runtime-Loaded Ultimate Profiles Chapter Ledger
 
-Status: `FINAL_BC_PRE_STAGE_C_BOOT_FAILED` — exact source/artifact preserved; bounded cross-version recovery bridge in preparation.
+Status: `DONE` — exact live-canonical tested-source integration and strict completion publication follow the accepted composed smoke evidence.
+
+## Strict completion — 2026-10-12
+
+- Source-free HEP evidence E: `af2bbefdf9cfc447918a74a4ff07541d24da320c`.
+- Exact smoke-tested source F: `e086b72a4eaa2e8585a81375a0866ac05fe78d66`, tree
+  `13aed0c66de6175047ba352e4eeffde7da506080`, based directly on
+  `28ba39da5f517baa40f3dee8d868c9bb583dde4a`.
+- Tested-source integration I: `2f925ae4e727f64e403dbb2d40d166ae120961bc`, with
+  genuine parents E and F. Its production/schema blobs equal F exactly.
+- Exact hardware artifact: 832,000 bytes, SHA-256
+  `b277a121cb8ac4f1c2b15113fafd2b4077318905a997dd94d3e9190df94d4932`.
+- Final Config: fixture SHA-256
+  `e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb`;
+  encoded payload 6,248 bytes, SHA-256
+  `0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7`.
+- Accepted scope: persisted coordinate profiles; explicit references; bounded
+  roles, sublayers, priorities, and output effects; Configurator recovery;
+  GameCube startup/default row; persisted runtime-profile selection.
+- Exact composed smoke PASS: normal boot, menu and RT2 Configurator access,
+  GameCube startup, legacy controls, and Runtime-B discriminator
+  `Z down-left = (-38,-39)`.
+- LS-to-D-pad remains `HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER`;
+  no physical PASS is claimed. Nunchuk remains `NOT_TESTED`.
+- Historical envelope defects, Clean-body RGB validation incompatibility,
+  bridge proof, prior intermediate Config identities, and stale `2fb789c...`
+  remain preserved as history. No public-release authority is conferred.
 
 > Superseding final-gate disposition: `PASS_WITH_HOST_ONLY_CAVEAT`, bound to
 > the corrected 6,248-byte GameCube-envelope fixture. LS-to-D-pad is explicitly

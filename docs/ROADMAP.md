@@ -11,6 +11,14 @@ Use a fresh Terra-preferred chapter daemon with event-driven roles as needed,
 no standing Implementation/Planner/Curator timers and manual/event-driven HEP.
 This process cleanup starts no product, multi-profile or public-release chapter.
 
+## Runtime-Loaded Ultimate Profiles chapter
+
+This owner-authorized chapter is complete through source-free evidence,
+tested-source integration, focused validation, independent review, and exact
+hardware smoke. It does not authorize a public release, Senscope expansion, or
+a successor firmware chapter. LS-to-D-pad remains a bounded host-only physical
+observation limitation; Nunchuk remains NOT_TESTED.
+
 
 ## Current C024 completion
 
