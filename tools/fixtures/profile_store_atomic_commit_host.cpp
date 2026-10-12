@@ -20,6 +20,10 @@ struct MemoryStorage final : ProfileStoreAtomicCommit::Storage {
         if (found == files.end() || found->second.size() != length) return false;
         std::memcpy(bytes, found->second.data(), length); return true;
     }
+    size_t Size(const char *path) override {
+        const auto found = files.find(path);
+        return found == files.end() ? 0 : found->second.size();
+    }
     bool Remove(const char *path) override { files.erase(path); return true; }
     bool Rename(const char *from, const char *to) override {
         if (fail_rename) return false;

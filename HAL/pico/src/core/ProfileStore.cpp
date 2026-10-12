@@ -126,6 +126,12 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
         if (file) file.close();
         return ok;
     }
+    size_t Size(const char *path) override {
+        File file = LittleFS.open(path, "r");
+        const size_t size = file ? file.size() : 0;
+        if (file) file.close();
+        return size;
+    }
     bool Remove(const char *path) override { return LittleFS.remove(path); }
     bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
 };
@@ -235,10 +241,15 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
             kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected));
 }
 bool ProfileStore::ReadProfile(uint32_t id, uint32_t revision, UltimateProfile &into) const {
-    char path[64]; RecordPath(path, sizeof(path), id, revision); File file = LittleFS.open(path, "r"); uint8_t header[kRecordHeaderSize] = {};
-    if (!file || file.read(header, sizeof(header)) != static_cast<int>(sizeof(header)) || Get32(header) != kRecordMagic || Get16(header + 4) != kEnvelopeVersion || Get16(header + 6) != kPayloadUltimateProfile || Get32(header + 8) != Incarnation() || Get32(header + 12) != id || Get32(header + 16) != revision || Get32(header + 20) > kMaxProfileWireBytes || Get32(header + 24) != Crc32(header, 24)) { if (file) file.close(); return false; }
-    const size_t length = Get32(header + 20); if (file.size() != sizeof(header) + length) { file.close(); return false; } static uint8_t body[kMaxProfileWireBytes]; if (file.read(body, length) != static_cast<int>(length) || Get32(header + 28) != Crc32(body, length)) { file.close(); return false; } file.close();
-    into = UltimateProfile_init_default; pb_istream_t stream{}; stream.callback = [](pb_istream_t *s, pb_byte_t *buffer, size_t count) { const auto *state = static_cast<const uint8_t *>(s->state); if (count > s->bytes_left) return false; std::memcpy(buffer, state, count); s->state = const_cast<uint8_t *>(state + count); return true; }; stream.state = body; stream.bytes_left = length;
+    char path[64]; RecordPath(path, sizeof(path), id, revision);
+    LittleFsDirectoryStorage storage;
+    const size_t wire_size = storage.Size(path);
+    static uint8_t wire[kMaxRecordWireBytes];
+    if (wire_size < kRecordHeaderSize || wire_size > sizeof(wire) || !storage.Read(path, wire, wire_size)) return false;
+    uint8_t *header = wire;
+    if (Get32(header) != kRecordMagic || Get16(header + 4) != kEnvelopeVersion || Get16(header + 6) != kPayloadUltimateProfile || Get32(header + 8) != Incarnation() || Get32(header + 12) != id || Get32(header + 16) != revision || Get32(header + 20) > kMaxProfileWireBytes || Get32(header + 24) != Crc32(header, 24)) return false;
+    const size_t length = Get32(header + 20); if (wire_size != kRecordHeaderSize + length || Get32(header + 28) != Crc32(wire + kRecordHeaderSize, length)) return false;
+    into = UltimateProfile_init_default; pb_istream_t stream{}; stream.callback = [](pb_istream_t *s, pb_byte_t *buffer, size_t count) { const auto *state = static_cast<const uint8_t *>(s->state); if (count > s->bytes_left) return false; std::memcpy(buffer, state, count); s->state = const_cast<uint8_t *>(state + count); return true; }; stream.state = wire + kRecordHeaderSize; stream.bytes_left = length;
     return pb_decode(&stream, UltimateProfile_fields, &into) && stream.bytes_left == 0 && ValidateProfile(into);
 }
 
