@@ -127,3 +127,8 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   / `codex/multi-profile-store-w2`. Permitted network-enabled dependency
   provisioning is in progress; compilation has not yet started and no build
   conclusion is recorded.
+- W2 reports partial non-reviewable scaffolding only: stable IDs, alternating
+  directory metadata, active/candidate materialization, compact references,
+  legacy migration start, staged compact-Config replacement, and an old
+  whole-Config SET guard. Negotiated CRUD, recovery, fault tests, and resource
+  evidence remain incomplete; no candidate SHA is claimed.
