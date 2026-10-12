@@ -154,12 +154,28 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   the observed build reported RAM `181636 / 262144` (69.3%) and flash
   `457340 / 1568768` (29.2%). These are continuation measurements, not final
   exact-candidate custody measurements.
-- A bounded host investigation of the LIST response found decoded bytes
+- A bounded host-double investigation of the LIST response found decoded bytes
   `09 08 01 10 82 80 80 80 10 18 01 20 17 28 01 30 0b 40 02` after asking the
   real Configurator backend to enumerate two doubled entries. Field 8 is
   emitted with varint wire type (`40 02`) although the tracked schema declares
   `repeated ProfileStoreEntry entries = 8`, which requires a length-delimited
-  wire type. The observation reproduces with and without `PB_FIELD_32BIT` in
-  the host compiler. Root cause and target-device impact remain UNPROVEN; no
-  speculative protocol/source change has been made. This is a Tier-1 protocol
-  characterization gap before REVIEW_READY.
+  wire type. The observation reproduced with and without `PB_FIELD_32BIT` in
+  that double. Direct Nanopb and `pb_arduino`/PacketIO encodes of the same
+  response shape emit the correct length-delimited field, so this double is
+  not adequate evidence of a production protocol defect. Root cause and
+  target-device impact remain UNPROVEN; no speculative protocol/source change
+  has been made, and Configurator CRUD coverage remains incomplete.
+- The same W5 build's target ELF section report records `.data = 40260` and
+  `.bss = 141376` bytes; PlatformIO reports total RAM `181636 / 262144` and
+  program flash `457340 / 1568768`. The compiler warns of `2632` bytes stack
+  use in `DecodeDirectoryCommit`, `2384` in `HandleProfileStore`, `2216` in
+  `ProfileStore::Duplicate`, `1240` in the Senscope self-test, and a larger
+  existing `31464` estimate in `setup`; target stack acceptance remains a
+  review/hardware concern, not resolved by this measurement.
+- Frozen filesystem accounting uses 4128-byte maximum record envelopes,
+  2620-byte directory roots, and a 16384-byte reserve in the nominal 524288
+  byte partition. The conservative accounting leaves 420104, 370568, and
+  238472 bytes after 20, 32, and 64 records respectively; its uncapped
+  arithmetic bound is 121 records, while the frozen directory maximum remains
+  64. These calculations exclude target allocator geometry and are not a
+  target-device capacity claim.
