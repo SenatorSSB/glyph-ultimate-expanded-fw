@@ -2,6 +2,11 @@
 
 Status: `FINAL_BC_PRE_STAGE_C_BOOT_FAILED` — exact source/artifact preserved; bounded cross-version recovery bridge in preparation.
 
+> Superseding final-gate disposition: `PASS_WITH_HOST_ONLY_CAVEAT`, bound to
+> the corrected 6,248-byte GameCube-envelope fixture. LS-to-D-pad is explicitly
+> `HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER`, not a
+> physical PASS; fresh HEP found no concrete Tier-1/Tier-2 contradiction.
+
 > Current update: owner-authorized GameCube envelope repair is reviewed and
 > awaits the narrow final hardware supplement; the unchanged firmware candidate
 > remains frozen.
