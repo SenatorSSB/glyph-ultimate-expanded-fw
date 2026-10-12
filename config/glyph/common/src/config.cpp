@@ -1,5 +1,6 @@
 #include "button_positions.hpp"
 #include "comms/backend_init.hpp"
+#include "comms/ConfiguratorBackend.hpp"
 #include "core/CommunicationBackend.hpp"
 #include "core/config_usb_default_validation.hpp"
 #include "core/KeyboardMode.hpp"
@@ -68,13 +69,15 @@ enum class BootOutcome {
     StoredConfigRejected,
     StorageFailure,
     DefaultsRejected,
-    StartupConfigRejected
+    StartupConfigRejected,
+    RecoveryConfigurator
 };
 struct BootSnapshot {
     BootOutcome outcome = BootOutcome::Pending;
     bool display_ready = false;
 };
 BootSnapshot boot_state;
+ConfiguratorBackend *recovery_configurator = nullptr;
 
 BootSnapshot read_boot_state() {
     mutex_enter_blocking(&boot_state_mutex);
@@ -132,6 +135,16 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
 void setup() {
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
+
+    // Amendment A recovery route: after MB1 priority (evaluated below only
+    // when MB1 is held) and before display/config/backend initialization.
+    if (inputs.rt2 && !inputs.mb1) {
+        Serial.begin(115200);
+        recovery_configurator = new ConfiguratorBackend(
+            inputs, input_sources, input_source_count, config, Serial);
+        publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+        return;
+    }
 
     //start screen early
     Wire1.setSDA(OLED_SDA);
@@ -248,6 +261,10 @@ void setup() {
 }
 
 void loop() {
+    if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator) {
+        if (recovery_configurator != nullptr) recovery_configurator->SendReport();
+        return;
+    }
     if (read_boot_state().outcome != BootOutcome::Normal) return;
     if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
     select_mode(backends, backend_count, config);
