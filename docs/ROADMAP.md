@@ -9,7 +9,9 @@ the current queue/contracts and the mandatory first-turn
 [future daemon bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md).
 Use a fresh Terra-preferred chapter daemon with event-driven roles as needed,
 no standing Implementation/Planner/Curator timers and manual/event-driven HEP.
-This process cleanup starts no product, multi-profile or public-release chapter.
+This process cleanup does not itself start a product, multi-profile, or public-
+release implementation chapter. The future chapter below records owner-directed
+product direction only; it is not an executable work order.
 
 ## Runtime-Loaded Ultimate Profiles chapter
 
@@ -18,6 +20,85 @@ tested-source integration, focused validation, independent review, and exact
 hardware smoke. It does not authorize a public release, Senscope expansion, or
 a successor firmware chapter. LS-to-D-pad remains a bounded host-only physical
 observation limitation; Nunchuk remains NOT_TESTED.
+
+## Future Chapter — Multi-Profile Persistent Ultimate Profile Store
+
+Status: `FUTURE_ARCHITECTURE`, not authorized for implementation by this
+roadmap entry.
+
+The completed Runtime-Loaded Ultimate Profiles chapter is retired. Its accepted
+v3 `UltimateProfile` semantics and evaluator are the starting point for a
+future persistence/loading/selection and Configurator-protocol evolution, not
+a redesign of Stage A/B/C behavior. The initial product target is **at least
+20 stored Ultimate profiles**, with a storage- and resource-defined upper
+bound rather than a fundamental architectural maximum of 20.
+
+### Intended architecture
+
+- Store Ultimate profiles independently in persistent flash/LittleFS instead
+  of embedding every profile body in the main `Config`.
+- Materialize only the selected active profile in RAM, plus one bounded
+  candidate/staging buffer while loading, validating, or updating.
+- Keep the existing validated v3 profile vocabulary and bounded evaluator where
+  practical: 28 `RuntimeTableId` tables with nine coordinates each,
+  profile-owned routing, bounded roles/sublayers, numeric-priority table rules,
+  and the fixed Stage-C output-effect model.
+- Treat stable persistent `profile_id` as identity, separate from a user-visible
+  `name` and optional display `order`. Rename/reorder must not invalidate
+  references; a menu slot is not permanent identity.
+- Profile selection may retain the current reboot/reset boundary. A switch is:
+  select ID -> persist selected ID -> reboot/reset -> load requested profile ->
+  decode candidate -> fully validate -> publish active profile -> enter
+  Ultimate mode. Gameplay hot swapping is not required.
+- A corrupt or invalid individual profile must not invalidate the main
+  controller Config or unrelated stored profiles. Recovery must retain
+  Configurator access and allow fallback to a known-valid/default Ultimate
+  mode.
+
+### Persistence and protocol direction
+
+An update must not overwrite the only known-good active profile in place. The
+intended safety sequence is: receive/decode candidate -> structural validation
+-> semantic validation -> write new/temporary record -> verify persisted record
+-> atomically publish directory/reference -> retire the previous record when
+appropriate. Interrupted writes or power loss must not destroy the active
+known-good profile.
+
+This store is the intended firmware persistence boundary for later
+Senscope-driven profile management. Expected future operations are enumerate,
+create, duplicate, rename, update, delete, reorder display, set active,
+import/export, and inspect validation errors. Senscope may use a higher-level
+sparse or human-readable format, but firmware must consume a fully
+materialized, bounded, validated profile representation. This roadmap does not
+approve firmware inheritance or sparse-profile semantics.
+
+Firmware continues to own the finite legal vocabulary: `RuntimeTableId`,
+routing semantics, condition/token vocabulary, role evaluation, table-rule
+priority semantics, Stage-C phases/targets, and code-owned effect ordering.
+Profile data owns coordinates, routing assignments, role and table-selection
+conditions/priorities, and bounded effect parameters/gates. The format must not
+become a scripting, macro, turbo, timing, or arbitrary-expression system.
+
+### Future scope and gates
+
+Future design must cover stable IDs; directory/index and record formats;
+active-profile reference; versioning/migration; capacity measurement; boot
+loading and fallback; atomic recovery; deletion/reordering; replacement of the
+embedded `Config.ultimate_profiles` body with lightweight references where
+appropriate; Configurator record operations; RAM, flash/LittleFS, encoded-size
+and boot-latency budgets; and migration from accepted embedded-profile Configs.
+
+Required future tests include 20 stored profiles, switch/reboot persistence,
+one-profile corruption isolation, interrupted writes, deleted/invalid selected
+profiles, embedded-Config migration, and identity preservation through
+rename/reorder. Hardware scope follows exact-candidate review and should cover
+representative switch/reboot and recovery paths without unnecessarily repeating
+the accepted Stage A/B/C matrix.
+
+Explicitly deferred: no-reset hot swapping, dynamic modifier definitions,
+scripting/macros/turbo/timing, a broad Stage A/B/C redesign, Senscope UI,
+public/cloud sharing, Nunchuk validation, or reopening the LS-to-D-pad physical
+observability limitation.
 
 
 ## Current C024 completion
@@ -425,7 +506,9 @@ is now documented and checker-enforced.
 
 ## Phase 3 - Future Browser/Protobuf/Persistence Backend
 
-Status: `FUTURE_PHASE`.
+Status: `FUTURE_PHASE` for the legacy generic coordinate-native lane. Its
+Ultimate-profile persistence direction is superseded by **Future Chapter —
+Multi-Profile Persistent Ultimate Profile Store** above.
 
 Goal: after the runtime model exists, design browser/protobuf/persistence
 backend infrastructure for moving a bounded runtime profile safely.

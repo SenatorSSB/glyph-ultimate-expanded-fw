@@ -1,6 +1,6 @@
 # Glyph Current State
 
-C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). No new product chapter starts here.
+C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). The Multi-Profile Persistent Ultimate Profile Store is recorded as future architecture, not started or authorized by this documentation update.
 
 ## Runtime-Loaded Ultimate Profiles completion
 
@@ -14,6 +14,25 @@ its 6,248-byte payload is `0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6
 The chapter accepts the bounded runtime-profile behavior, Configurator recovery,
 and GameCube startup/default selection. LS-to-D-pad remains HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER,
 not a physical PASS; Nunchuk remains NOT_TESTED. Public release is a separate owner decision.
+
+### Current persistence representation and its limit
+
+Current accepted persistence embeds complete Ultimate profile objects directly
+in the main Nanopb `Config`, with `Config.ultimate_profiles max_count: 2`.
+That is a transitional representation, not a semantic limit of Ultimate
+profile behavior. A complete v3 profile has bounded storage for 28 coordinate
+tables of nine coordinates, up to 22 roles, 32 routing slots, up to 19 table
+rules, and exactly 12 Stage-C output-effect slots. The measured representation
+is `sizeof(UltimateProfile) = 2,152 bytes` and `sizeof(Config) = 31,224 bytes`.
+
+The repository holds multiple full `Config` instances/buffers, including the
+active Config, boot/load candidate, and Configurator `SET_CONFIG` candidate.
+Naively increasing the embedded fixed profile array therefore scales RAM across
+each of those instances. The planned store direction is to persist many
+profiles independently while materializing only active plus candidate/staging
+profiles in RAM; see the `Multi-Profile Persistent Ultimate Profile Store`
+roadmap chapter. This is a future architecture only and does not implement the
+store, protocol, or migration.
 
 ## Current C024 completion
 
@@ -102,7 +121,13 @@ historical completion prose below does not authorize implementation.
 - Nunchuk `NOT_TESTED`.
 - Forbidden current active-publication paths are documented in
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
-- Runtime-loaded config is not implemented; runtime-config storage is not implemented; firmware binary/protobuf parser integration is not implemented; WebSerial/device write is not implemented; Protobuf binary write is not implemented; Firmware flashing automation is not implemented; external adapter output is not implemented.
+- The legacy generic coordinate-native runtime-config lane is not implemented;
+  the accepted bounded Ultimate-profile runtime/persistence capability above is
+  distinct. The future multi-profile store, its migration, and its Configurator
+  protocol are not implemented. For that legacy generic lane, Runtime-loaded
+  config is not implemented. WebSerial/device write is not implemented.
+  Protobuf binary write is not implemented. Firmware flashing automation is not
+  implemented. External adapter output is not implemented.
 
 ## Forward Direction
 
@@ -124,7 +149,10 @@ historical completion prose below does not authorize implementation.
 - Ready for docs/tools, coordinate-native validator/corpus work, and source-owned generator/evaluator design when source-backed and outside active firmware behavior.
 - Candidate-generation diff diagnosis is executable and remains `TABLE_CONTENT_DIFFERENT`; it is hardware-candidate material, not a canonicalization-only branch.
 - Active behavior remains gated on an implemented activation strategy and exact hardware review. This docs/checker cleanup needs no hardware test; future behavior-changing firmware deltas need exact hardware PASS before merge.
-- Product approval is required before runtime-loaded config, storage, device write, protobuf binary write, flashing automation, external adapter output, or neutral profile schema changes.
+- Product approval is required before a new generic runtime-loaded config path,
+  multi-profile store implementation, device write, protobuf binary write,
+  flashing automation, external adapter output, or neutral profile schema
+  changes.
 ## Non-Claims
 - No push-to-device behavior is implemented or claimed.
 - No universal official configurator compatibility claim is made.

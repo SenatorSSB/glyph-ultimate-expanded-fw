@@ -25,8 +25,12 @@ contract scaffold.
 - Generated active RuntimeConfigView wrapper publication is forbidden.
 - RuntimeConfigView replacement as the customization mechanism is forbidden.
 - RAM-backed active table publication is forbidden.
-- Runtime-loaded profile claims are forbidden without separate design, source
-  authority, build proof, and hardware proof.
+- New generic runtime-loaded profile claims, and the future multi-profile store,
+  require separate design, source authority, build proof, and hardware proof.
+  This does not negate the accepted bounded Runtime-Loaded Ultimate Profiles
+  chapter recorded in `docs/CURRENT_STATE.md`.
+- For the legacy generic coordinate-native lane, Runtime-loaded profile claims
+  are forbidden without those separate proofs.
 
 ## Future Coordinate-Native Boundary
 
@@ -68,8 +72,11 @@ storage, backend config write paths, or flashing automation.
 
 - Nunchuk remains NOT_TESTED.
 - Root cause remains unproven.
-- Runtime-loaded config is not implemented.
-- Runtime-config storage is not implemented.
+- The legacy generic coordinate-native runtime-loaded config lane is not
+  implemented.
+- The future multi-profile persistent Ultimate profile store is not
+  implemented. The accepted bounded Ultimate-profile persistence representation
+  is distinct and remains documented in `docs/CURRENT_STATE.md`.
 - WebSerial/device write is not implemented.
 - Protobuf binary write is not implemented.
 - Firmware flashing automation is not implemented.
