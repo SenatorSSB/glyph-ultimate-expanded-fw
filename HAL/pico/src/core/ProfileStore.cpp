@@ -1,6 +1,7 @@
 #include "core/ProfileStore.hpp"
 #include "core/ProfileStoreAtomicCommit.hpp"
 #include "core/ProfileStoreCapacity.hpp"
+#include "core/ProfileStoreStorage.hpp"
 
 #include "core/config_validation.hpp"
 
@@ -111,15 +112,7 @@ bool DecodeDirectory(const uint8_t (&wire)[kDirectoryWireBytes], ProfileStore::D
     *directory = parsed; return true;
 }
 
-bool ReadDirectorySlot(uint8_t slot, ProfileStore::Directory *directory) {
-    char path[32]; DirectoryPath(path, sizeof(path), slot); File file = LittleFS.open(path, "r");
-    static uint8_t wire[kDirectoryWireBytes];
-    const bool ok = file && file.size() == sizeof(wire) && ReadAll(file, wire, sizeof(wire)) && DecodeDirectory(wire, directory);
-    if (file) file.close();
-    return ok;
-}
-
-class LittleFsDirectoryStorage final : public ProfileStoreAtomicCommit::Storage {
+class LittleFsDirectoryStorage final : public ProfileStoreStorage {
   public:
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
         File file = LittleFS.open(path, "w+");
@@ -136,6 +129,13 @@ class LittleFsDirectoryStorage final : public ProfileStoreAtomicCommit::Storage 
     bool Remove(const char *path) override { return LittleFS.remove(path); }
     bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
 };
+
+bool ReadDirectorySlot(uint8_t slot, ProfileStore::Directory *directory) {
+    char path[32]; DirectoryPath(path, sizeof(path), slot);
+    static uint8_t wire[kDirectoryWireBytes];
+    LittleFsDirectoryStorage storage;
+    return storage.Read(path, wire, sizeof(wire)) && DecodeDirectory(wire, directory);
+}
 
 bool DecodeDirectoryCommit(void *context, const uint8_t *bytes, size_t length) {
     if (length != kDirectoryWireBytes) return false;

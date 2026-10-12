@@ -5,16 +5,11 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "core/ProfileStoreStorage.hpp"
+
 class ProfileStoreAtomicCommit {
   public:
-    class Storage {
-      public:
-        virtual ~Storage() = default;
-        virtual bool Write(const char *path, const uint8_t *bytes, size_t length) = 0;
-        virtual bool Read(const char *path, uint8_t *bytes, size_t length) = 0;
-        virtual bool Remove(const char *path) = 0;
-        virtual bool Rename(const char *from, const char *to) = 0;
-    };
+    using Storage = ProfileStoreStorage;
 
     using Validator = bool (*)(void *context, const uint8_t *bytes, size_t length);
 
