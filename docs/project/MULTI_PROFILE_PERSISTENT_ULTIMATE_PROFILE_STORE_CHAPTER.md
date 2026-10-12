@@ -70,7 +70,9 @@ or candidate review.
 - Frozen design: `docs/runtime_config/multi_profile_persistent_ultimate_profile_store_design.md`.
   It permits only its bounded implementation and does not clear candidate,
   build, custody, review, or hardware gates.
-- Design freeze: complete, pending durable commit identity below.
+- Design freeze: `fb138480a92eb9489278fa5f5e0e9280a91b35ea` on
+  `codex/multi-profile-store-design-freeze`, based directly on live canonical
+  `6b73a7c507f35c111745c6bdd341618b490cbdcd`.
 - Firmware candidate: none.
 - Build/resource report: none for this chapter.
 - Hardware/HEP state: not applicable until a behavior-changing exact candidate
