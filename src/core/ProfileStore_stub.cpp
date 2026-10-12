@@ -3,6 +3,7 @@
 #if !defined(ARDUINO_ARCH_RP2040)
 #include "core/ProfileStore.hpp"
 
+ProfileStore::ProfileStore(ProfileStoreStorage *) {}
 bool ProfileStore::Begin() { return true; }
 bool ProfileStore::IsReady() const { return true; }
 bool ProfileStore::IsReadOnlyRecovery() const { return false; }

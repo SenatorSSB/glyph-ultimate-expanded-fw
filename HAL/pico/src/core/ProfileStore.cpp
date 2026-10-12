@@ -136,10 +136,9 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
     bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
 };
 
-bool ReadDirectorySlot(uint8_t slot, ProfileStore::Directory *directory) {
+bool ReadDirectorySlot(ProfileStoreStorage &storage, uint8_t slot, ProfileStore::Directory *directory) {
     char path[32]; DirectoryPath(path, sizeof(path), slot);
     static uint8_t wire[kDirectoryWireBytes];
-    LittleFsDirectoryStorage storage;
     return storage.Read(path, wire, sizeof(wire)) && DecodeDirectory(wire, directory);
 }
 
@@ -170,8 +169,11 @@ bool VerifyRecordCommit(void *context, const uint8_t *bytes, size_t length) {
 
 } // namespace
 
+ProfileStore::ProfileStore(ProfileStoreStorage *storage) : _storage(storage) {}
 bool ProfileStore::Begin() {
     static Directory directory{};
+    static LittleFsDirectoryStorage default_storage;
+    if (_storage == nullptr) _storage = &default_storage;
     _directory = &directory; _active_id = 0; _ready = false; _read_only_recovery = false;
     return LoadDirectory();
 }
@@ -197,7 +199,7 @@ uint32_t ProfileStore::ActiveId() const { return _active_id; }
 
 bool ProfileStore::LoadDirectory() {
     static Directory a{}, b{}; a = {}; b = {};
-    const bool a_ok = ReadDirectorySlot(0, &a), b_ok = ReadDirectorySlot(1, &b);
+    const bool a_ok = ReadDirectorySlot(*_storage, 0, &a), b_ok = ReadDirectorySlot(*_storage, 1, &b);
     if (!a_ok && !b_ok) { // Empty store is the only writable implicit state.
         _directory->incarnation = 1; _directory->generation = 0; _directory->high_water_id = 0; _ready = true; return true;
     }
@@ -213,8 +215,7 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
     const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[40]; DirectoryPath(path, sizeof(path), slot); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
     static Directory verified;
     verified = {};
-    LittleFsDirectoryStorage storage;
-    if (!ProfileStoreAtomicCommit::ReplaceInactiveRoot(storage, temporary, path, wire, sizeof(wire),
+    if (!ProfileStoreAtomicCommit::ReplaceInactiveRoot(*_storage, temporary, path, wire, sizeof(wire),
             DecodeDirectoryCommit, &verified) || verified.generation != next.generation) return false;
     *_directory = next; return true;
 }
@@ -236,16 +237,14 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
     Put32(record + 24, Crc32(record, 24)); Put32(record + 28, Crc32(record + kRecordHeaderSize, length));
     char path[64], temporary[72]; RecordPath(path, sizeof(path), id, revision); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
     const RecordCommitContext expected{Incarnation(), id, revision};
-    LittleFsDirectoryStorage storage;
-    return ProfileStoreAtomicCommit::ReplaceVerifiedFile(storage, temporary, path, record,
+    return ProfileStoreAtomicCommit::ReplaceVerifiedFile(*_storage, temporary, path, record,
             kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected));
 }
 bool ProfileStore::ReadProfile(uint32_t id, uint32_t revision, UltimateProfile &into) const {
     char path[64]; RecordPath(path, sizeof(path), id, revision);
-    LittleFsDirectoryStorage storage;
-    const size_t wire_size = storage.Size(path);
+    const size_t wire_size = _storage->Size(path);
     static uint8_t wire[kMaxRecordWireBytes];
-    if (wire_size < kRecordHeaderSize || wire_size > sizeof(wire) || !storage.Read(path, wire, wire_size)) return false;
+    if (wire_size < kRecordHeaderSize || wire_size > sizeof(wire) || !_storage->Read(path, wire, wire_size)) return false;
     uint8_t *header = wire;
     if (Get32(header) != kRecordMagic || Get16(header + 4) != kEnvelopeVersion || Get16(header + 6) != kPayloadUltimateProfile || Get32(header + 8) != Incarnation() || Get32(header + 12) != id || Get32(header + 16) != revision || Get32(header + 20) > kMaxProfileWireBytes || Get32(header + 24) != Crc32(header, 24)) return false;
     const size_t length = Get32(header + 20); if (wire_size != kRecordHeaderSize + length || Get32(header + 28) != Crc32(wire + kRecordHeaderSize, length)) return false;

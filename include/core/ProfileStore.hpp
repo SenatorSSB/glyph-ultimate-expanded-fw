@@ -7,6 +7,8 @@
 
 #include <config.pb.h>
 
+class ProfileStoreStorage;
+
 class ProfileStore {
   public:
     static constexpr uint8_t kCompactConfigFormat = 1;
@@ -41,6 +43,7 @@ class ProfileStore {
     // encoded in ProfileStore.cpp and never persisted as a native struct.
     struct Directory;
 
+    explicit ProfileStore(ProfileStoreStorage *storage = nullptr);
     bool Begin();
     bool IsReady() const;
     bool IsReadOnlyRecovery() const;
@@ -86,6 +89,7 @@ class ProfileStore {
     uint32_t _active_id = 0;
     bool _ready = false;
     bool _read_only_recovery = false;
+    ProfileStoreStorage *_storage = nullptr;
 };
 
 extern ProfileStore profile_store;
