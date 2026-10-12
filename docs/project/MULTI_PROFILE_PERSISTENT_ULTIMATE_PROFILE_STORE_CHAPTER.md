@@ -139,3 +139,27 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   Configurator CRUD, independent recovery servicing, fault/interruption tests,
   and capacity/reserve admission evidence are absent. It is not a candidate,
   has not been sent to W3, and cannot proceed to hardware.
+
+## Post-W5 continuation evidence (2026-10-13)
+
+- `bc5aac660ac30235c452991b16c2190088244114` adds the deterministic
+  Configurator partial-frame proof. It compiles the production
+  `ConfiguratorBackend.cpp` with the provisioned PacketIO COBS parser and
+  generated Nanopb schema, advances a virtual `millis()` clock past five
+  seconds, observes the explicit timeout error, proves no Config/ProfileStore
+  mutation through the host doubles, consumes the required delimiter, and
+  accepts a later v1 STATUS frame. The checker also source-binds the 8192-byte
+  frame cap. It is deterministic host evidence, not hardware acceptance.
+- The checked W5 head builds with `python3 -m platformio run -e glyph_mk6`;
+  the observed build reported RAM `181636 / 262144` (69.3%) and flash
+  `457340 / 1568768` (29.2%). These are continuation measurements, not final
+  exact-candidate custody measurements.
+- A bounded host investigation of the LIST response found decoded bytes
+  `09 08 01 10 82 80 80 80 10 18 01 20 17 28 01 30 0b 40 02` after asking the
+  real Configurator backend to enumerate two doubled entries. Field 8 is
+  emitted with varint wire type (`40 02`) although the tracked schema declares
+  `repeated ProfileStoreEntry entries = 8`, which requires a length-delimited
+  wire type. The observation reproduces with and without `PB_FIELD_32BIT` in
+  the host compiler. Root cause and target-device impact remain UNPROVEN; no
+  speculative protocol/source change has been made. This is a Tier-1 protocol
+  characterization gap before REVIEW_READY.
