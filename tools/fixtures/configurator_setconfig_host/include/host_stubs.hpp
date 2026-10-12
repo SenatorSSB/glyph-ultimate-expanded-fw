@@ -204,6 +204,7 @@ class CommunicationBackend {
 class Persistence {
   public:
     bool SaveConfig(Config &config);
+    uint32_t ConfigGeneration(const Config &) const { return 1; }
     bool LoadConfig(Config &) { return false; }
     bool CheckSavedConfig() { return host_getconfig_check_saved; }
     size_t LoadConfigRaw(Print &out, bool = true) {

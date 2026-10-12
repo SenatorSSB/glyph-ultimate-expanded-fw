@@ -73,6 +73,11 @@ bool Persistence::IsAvailable() const {
     return _configuration_ok && _mounted;
 }
 
+uint32_t Persistence::ConfigGeneration(const Config &config) const {
+    (void)config;
+    return _config_generation;
+}
+
 bool Persistence::SetValidator(ConfigSemanticValidator validator) {
     if (validator == nullptr) {
         return false;
@@ -174,6 +179,7 @@ bool Persistence::SaveConfig(Config &config) {
     const bool published_ok = published && CheckSavedConfig(published);
     if (published) published.close();
     if (!published_ok) return false;
+    _config_generation = header.config_crc;
     return true;
 }
 
@@ -232,8 +238,15 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
         return LoadResult::Rejected;
     }
 
+    ConfigHeader header;
+    if (!config_file.seek(0) ||
+        config_file.read(reinterpret_cast<uint8_t *>(&header), sizeof(header)) != static_cast<int>(sizeof(header))) {
+        config_file.close();
+        return LoadResult::StorageFailure;
+    }
     config_file.close();
     config = candidate;
+    _config_generation = header.config_crc;
     return LoadResult::Loaded;
 }
 

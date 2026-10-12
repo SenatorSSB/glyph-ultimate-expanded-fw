@@ -228,6 +228,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
     response.protocol_version = 1;
     response.request_token = request.request_token;
     response.store_generation = profile_store.Generation();
+    response.config_generation = persistence.ConfigGeneration(_config);
     response.status = PROFILE_STORE_UNSUPPORTED;
     if (request.operation == PROFILE_STORE_STATUS) {
         response.status = profile_store.IsReady() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
@@ -283,6 +284,42 @@ bool ConfiguratorBackend::HandleProfileStore() {
             }
             result = profile_store.Delete(request.profile_id,
                 static_cast<uint32_t>(request.expected_store_generation), referenced, token, digest);
+        } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
+            if (_config.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
+                request.expected_config_generation != persistence.ConfigGeneration(_config) ||
+                request.mode_config_index >= _config.game_mode_configs_count) {
+                result.status = ProfileStore::Status::Conflict;
+            } else {
+                const GameModeConfig &current = _config.game_mode_configs[request.mode_config_index];
+                if (current.mode_id != MODE_ULTIMATE) {
+                    result.status = ProfileStore::Status::Invalid;
+                } else {
+                    UltimateProfile selected = UltimateProfile_init_default;
+                    if (request.profile_id != 0 && profile_store.Read(request.profile_id, selected) != ProfileStore::Status::Ok) {
+                        result.status = ProfileStore::Status::NotFound;
+                    } else {
+                        // Do not publish a new runtime selection mid-report. The
+                        // checked persistence primitive encodes this bounded
+                        // temporary edit, then the in-RAM selection is restored;
+                        // explicit reboot is the activation boundary.
+                        GameModeConfig &mode = _config.game_mode_configs[request.mode_config_index];
+                        const uint32_t old_profile_id = mode.ultimate_profile_id;
+                        const uint32_t old_legacy_index = mode.ultimate_profile_config;
+                        mode.ultimate_profile_id = request.profile_id;
+                        mode.ultimate_profile_config = 0;
+                        ConfigValidationError validation_error;
+                        if (!persistence.ValidateConfig(_config, validation_error)) {
+                            result.status = ProfileStore::Status::Invalid;
+                        } else if (!persistence.SaveConfig(_config)) {
+                            result.status = ProfileStore::Status::IoFailure;
+                        } else {
+                            result = {ProfileStore::Status::Ok, request.profile_id, 0, profile_store.Generation()};
+                        }
+                        mode.ultimate_profile_id = old_profile_id;
+                        mode.ultimate_profile_config = old_legacy_index;
+                    }
+                }
+            }
         } else if (request.operation == PROFILE_STORE_QUERY_TRANSACTION) {
             result = profile_store.QueryTransaction(token, digest);
         } else {
@@ -292,6 +329,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.profile_id = result.id;
         response.profile_revision = result.revision;
         response.store_generation = profile_store.Generation();
+        response.config_generation = persistence.ConfigGeneration(_config);
         switch (result.status) {
             case ProfileStore::Status::Ok: response.status = PROFILE_STORE_OK; break;
             case ProfileStore::Status::NotFound: response.status = PROFILE_STORE_NOT_FOUND; break;

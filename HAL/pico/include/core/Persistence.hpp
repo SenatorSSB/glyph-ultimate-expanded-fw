@@ -37,6 +37,9 @@ class Persistence {
     bool SetValidator(ConfigSemanticValidator validator);
     bool ValidateConfig(const Config &config, ConfigValidationError &error) const;
     bool IsAvailable() const;
+    // Deterministic generation for compare-and-set callers. It is the checked
+    // persisted protobuf body CRC, not a new on-disk schema field.
+    uint32_t ConfigGeneration(const Config &config) const;
     LoadResult LoadConfigChecked(Config &config);
 
     bool SaveConfig(Config &config);
@@ -55,6 +58,7 @@ class Persistence {
 
     bool _configuration_ok = false;
     bool _mounted = false;
+    uint32_t _config_generation = 0;
     ConfigSemanticValidator _validator = nullptr;
 
     bool CheckSavedConfig(File &config_file, LoadResult *failure = nullptr);
