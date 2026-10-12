@@ -222,7 +222,8 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
 
 int ProfileStore::Find(uint32_t id) const { if (!_directory || id == 0) return -1; for (size_t i = 0; i < _directory->count; ++i) if (_directory->entries[i].id == id) return static_cast<int>(i); return -1; }
 bool ProfileStore::ValidateProfile(const UltimateProfile &profile) const {
-    static Config envelope; envelope = Config_init_default; envelope.ultimate_profiles_count = 1; envelope.ultimate_profiles[0] = profile; ConfigValidationError error; return validate_config_semantics(envelope, error);
+    ConfigValidationError error;
+    return validate_ultimate_profile_semantics(profile, error);
 }
 bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimateProfile &profile) {
     if (!ValidateProfile(profile)) return false;
