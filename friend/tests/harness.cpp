@@ -28,7 +28,7 @@ static OutputState output(uint64_t buttons, CommunicationBackendId backend = COM
 }
 struct Point { int x, y; };
 static const Point tables[9][9] = {
-    {{61,51},{51,128},{195,51},{61,128},{128,128},{195,128},{61,195},{128,195},{195,195}},
+    {{61,51},{128,51},{195,51},{61,128},{128,128},{195,128},{61,195},{128,195},{195,195}},
     {{98,51},{128,51},{158,51},{98,128},{128,128},{158,128},{98,195},{128,195},{158,195}},
     {{61,100},{128,100},{195,100},{61,128},{128,128},{195,128},{61,156},{128,156},{195,156}},
     {{81,81},{128,81},{175,81},{81,128},{128,128},{175,128},{81,175},{128,175},{175,175}},
@@ -251,6 +251,31 @@ static void storage_recovery() {
     std::cout<<"STORAGE RECOVERY R1-R10 PASS: mounted never formats; constructor mount failure -> explicit format/remount -> exact adoption; format/remount/save/mismatch/marker faults refuse; actual second boot/user changes preserved\n";
     std::cout<<"STORAGE EXTRA PASS: no implicit autoformat; configuration/invalid-baked failures never format; failed-v1 absent/partial/valid Config and old marker states re-adopt v2\n";
 }
+static void coordinate_upgrade() {
+    // Simulate an installed v2 marker and a later legitimate user edit.
+    // The new coordinate table must apply without replacing the stored Config.
+    LittleFS.reset();
+    {
+        Persistence store; require(store.SetValidator(validate_glyph_config),"upgrade validator");
+        require(friend_profile::provision_once(baked,store),"existing v2 installation");
+        changed=baked; changed.rgb_brightness=37;
+        require(store.SaveConfig(changed),"existing v2 user setting");
+    }
+    const auto before=encoded(changed);
+    const unsigned writes=LittleFS.config_writes, formats=LittleFS.format_calls;
+    Persistence updated; require(updated.SetValidator(validate_glyph_config),"updated boot validator");
+    require(friend_profile::marker_valid(),"unchanged v2 marker recognized");
+    require(friend_profile::provision_once(baked,updated),"updated boot skips adoption");
+    require(LittleFS.config_writes==writes && LittleFS.format_calls==formats,"coordinate-only update never rewrites/formats mounted v2 storage");
+    require(updated.LoadConfigChecked(loaded)==Persistence::LoadResult::Loaded,"updated boot stored Config loaded");
+    require(encoded(loaded)==before && loaded.rgb_brightness==37,"updated boot exact user Config preserved");
+    for(auto backend:{COMMS_BACKEND_XINPUT,COMMS_BACKEND_DINPUT,COMMS_BACKEND_NINTENDO_SWITCH,COMMS_BACKEND_GAMECUBE}) {
+        Ultimate mode; mode.SetConfig(loaded.game_mode_configs[2]);
+        left_point(frame(mode,mask({BTN_LF2}),backend),{128,51},"owner corrected physical LF2 Down with existing v2 marker");
+        left_point(frame(mode,0,backend),{128,128},"updated Down releases to neutral");
+    }
+    std::cout<<"DEFAULT2 UPGRADE PASS: LF2 Down=(128,51) on four backends using existing v2 marker; full user Config byte-identical; zero rewrite/format; neutral release PASS\n";
+}
 int main(int argc,char **argv) {
     require(argc==2,"output path"); baked=glyph_default_config();
     require(baked.game_mode_configs_count==13 && baked.game_mode_configs[2].mode_id==MODE_ULTIMATE,"counts/profile");
@@ -260,7 +285,7 @@ int main(int argc,char **argv) {
         } require(found,"backend present");
     }
     auto &rgb=baked.rgb_configs[baked.game_mode_configs[2].rgb_config-1]; require(rgb.button_colors_count==0 && rgb.animation==RGB_ANIM_STATIC,"Ultimate off RGB");
-    coordinates(); cstick(); buttons(); provisioning(); storage_recovery();
+    coordinates(); cstick(); buttons(); provisioning(); storage_recovery(); coordinate_upgrade();
     auto bytes=encoded(baked); std::ofstream file(argv[1],std::ios::binary); file.write(reinterpret_cast<const char*>(bytes.data()),bytes.size()); require(bool(file),"reference blob");
     std::cout<<"TOTAL checks="<<checks<<" PASS; hardware NOT_TESTED\n";
 }

@@ -5,7 +5,12 @@ INSTALLATION_MODE: RPI_RP2_SINGLE_UF2
 SEPARATE_CONFIG_PUSH_REQUIRED: NO
 
 Hardware status: NOT_TESTED / PRIVATE_REPAIR_READY_FOR_OWNER_TEST.
-This is the versioned storage-recovery-v2 repair, not the physically failed v1.
+This is the 2026-10-12 Default-position-2 correction, based on storage-recovery-v2.
+
+Only Default position 2 changes: offset (0,-77), raw (128,51), replacing
+(-77,0), raw (51,128). All other friend behavior is unchanged. Already-installed
+v2 users only need the new UF2: coordinates are compiled into firmware and the
+same valid v2 marker preserves their stored Config. No second adoption/push.
 
 1. Enter RPI-RP2 bootloader mode.
 2. Drag **firmware.uf2** to RPI-RP2.

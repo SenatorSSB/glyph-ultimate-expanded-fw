@@ -2,7 +2,7 @@
 """Private actual-source host checks. No device access, firmware writes or flashing."""
 import concurrent.futures, json, pathlib, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-OUT = ROOT.parent / 'storage-recovery-v2' / 'verification'
+OUT = ROOT.parent / 'default2-fix-20261012' / 'verification'
 OUT.mkdir(parents=True, exist_ok=True)
 FIX = 'tools/fixtures/gp_config021_persisted_recovery'
 GEN = '.pio/build/glyph_mk6/nanopb/generated-src'

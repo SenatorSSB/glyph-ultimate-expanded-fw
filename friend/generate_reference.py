@@ -5,7 +5,7 @@ This is host-only artifact generation, not a Config push/device writer.
 import json, pathlib, sys
 from google.protobuf import json_format
 root=pathlib.Path(__file__).resolve().parents[1]
-out=root.parent/'storage-recovery-v2'/'verification'; profile=root.parent/'storage-recovery-v2'/'profile'; profile.mkdir(parents=True,exist_ok=True)
+out=root.parent/'default2-fix-20261012'/'verification'; profile=root.parent/'default2-fix-20261012'/'profile'; profile.mkdir(parents=True,exist_ok=True)
 sys.path.insert(0,str(out/'protobuf'))
 import config_pb2
 raw=(out/'baked-short.pb').read_bytes()

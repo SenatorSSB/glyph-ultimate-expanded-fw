@@ -20,7 +20,7 @@ static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigAxesPerPoint = 2
 static constexpr std::uint8_t kGeneratedSourceOwnedRuntimeConfigTables[28][9][2] = {
     {  // 0 kDefaultTable
         {61u, 51u},
-        {51u, 128u},
+        {128u, 51u},
         {195u, 51u},
         {61u, 128u},
         {128u, 128u},

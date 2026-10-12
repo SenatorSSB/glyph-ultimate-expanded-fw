@@ -5,7 +5,7 @@ the baked profile adopts once using `/friend_ult_20261011_v2.flag`.
 
 ## Tables (raw absolute coordinates)
 
-- Default: `(61,51) (51,128) (195,51) (61,128) (128,128) (195,128) (61,195) (128,195) (195,195)`
+- Default: `(61,51) (128,51) (195,51) (61,128) (128,128) (195,128) (61,195) (128,195) (195,195)`
 - Tilt1: `(69,87) (128,87) (187,87) (69,128) (128,128) (187,128) (69,167) (128,167) (187,167)`
 - Tilt2: `(187,88) (128,88) (69,88) (187,128) (128,128) (69,128) (187,168) (128,168) (69,168)`
 - Tilt3: `(92,83) (128,83) (164,83) (92,128) (128,128) (164,128) (92,172) (128,172) (164,172)`
@@ -16,9 +16,14 @@ the baked profile adopts once using `/friend_ult_20261011_v2.flag`.
 Priority: Up-smash, Mode, Tilt3, Tilt1, Tilt2, Y1, Y2, X1. RF6 maps to logical LT5; RF9/RF14/RF15 are blank. LF4 is L/light shield (108); LF4+LT3 is Y1 plus R (255). RGB is off.
 
 The complete owner-normalized specification is `friend/profile_spec.json`.
-Coordinates are source-owned, not runtime-loaded from Config. Default entry 2
-retains the explicitly supplied unusual (-77,0) offset; Tilt2 X inversion is
-intentional. Punctuation slips were normalized without changing those values.
+Coordinates are source-owned, not runtime-loaded from Config. The owner's
+2026-10-12 correction changes Default entry 2 from (-77,0) to (0,-77), raw
+(128,51). This is the only runtime delta from storage-recovery-v2. Tilt2 X
+inversion remains intentional. All other coordinates are unchanged.
+
+Existing storage-recovery-v2 users only need to flash the updated UF2. The
+complete baked Config and v2 marker remain unchanged: the correction is compiled
+into the coordinate table, so no Config push or repeated adoption is needed.
 
 Physical C-stick: RT3 Left (39,128), RT5 Right (217,128), RT2 Down (128,1),
 RT4 Up (128,255); diagonals combine these components; neutral (128,128).

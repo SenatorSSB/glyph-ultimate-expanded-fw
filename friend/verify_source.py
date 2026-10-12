@@ -14,9 +14,15 @@ for path in ['HAL/pico/src/core/Persistence.cpp','HAL/pico/include/core/Persiste
     private=(root/path).read_text()
     stripped=re.sub(r'\n#if defined\(GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY\)\n.*?\n#endif\n','\n',private,flags=re.S)
     assert ''.join(stripped.split())==''.join(baseline(path).split()),'canonical Persistence semantics changed: '+path
-failed='8b8d829d79810d5b4597255aabce036c6970d208'
-for path in ['src/modes/Ultimate.cpp','src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp','config/glyph/common/include/glyph_overrides.hpp']:
-    assert (root/path).read_bytes()==subprocess.check_output(['git','show',failed+':'+path],cwd=root),'friend gameplay changed: '+path
+previous='c247985d3730812faf5c92ee59a51ce9122b31eb'
+table_path='src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp'
+old_table=subprocess.check_output(['git','show',previous+':'+table_path],cwd=root).decode()
+assert (root/table_path).read_text()==old_table.replace('        {51u, 128u},','        {128u, 51u},',1),'only Default direction 2 may change'
+for path in ['src/modes/Ultimate.cpp','config/glyph/common/include/glyph_overrides.hpp',
+             'config/glyph/common/include/friend_profile_provisioning.hpp',
+             'HAL/pico/src/core/Persistence.cpp','HAL/pico/include/core/Persistence.hpp',
+             'config/glyph/common/src/config.cpp','config/glyph/env.ini']:
+    assert (root/path).read_bytes()==subprocess.check_output(['git','show',previous+':'+path],cwd=root),'unrelated runtime source changed: '+path
 env=(root/'config/glyph/env.ini').read_text()
 old=baseline('config/glyph/env.ini')
 addition='build_flags =\n    ${glyph_base.build_flags}\n    -D GLYPH_PRIVATE_FRIEND_STORAGE_RECOVERY=1\n'
@@ -33,6 +39,10 @@ assert helper.index('if (marker_valid()) return true;')<helper.index('static Con
 assert 'LittleFS.exists' not in helper and 'memcmp(&' not in helper
 assert helper.index('store.ValidateConfig(defaults, error)')<helper.index('store.PrivateFriendRecoverUnmountableStorage()')<helper.index('store.SaveConfig(defaults)')
 spec=json.loads((root/'friend/profile_spec.json').read_text())
+old_spec=json.loads(subprocess.check_output(['git','show',previous+':friend/profile_spec.json'],cwd=root))
+old_spec['offsets']['Default'][1]=[0,-77]
+old_spec['notes']=spec['notes']
+assert spec==old_spec,'normalized behavior changed beyond Default direction 2'
 assert len(spec['buttons'])==34 and len(set(spec['buttons']))==34
 for name,points in spec['offsets'].items():
     assert len(points)==9
@@ -58,6 +68,6 @@ for start,key,end in [('.game_mode_configs = {','GameModeConfig {','.communicati
         clean=lambda s: re.sub(r'\s+','',re.sub(r'//[^\n]*','',s))
         assert clean(old[i])==clean(new[i]),('unrelated profile/RGB changed',i)
 print('SOURCE PASS: current validators/backend/refusal gates retained; Persistence canonical bodies unchanged after removing private macro block; recovery enabled only in private glyph_mk6')
-print('SOURCE PASS: all gameplay/routing/table/default/RGB source byte-identical to failed snapshot; defaults validate before format; mounted bypass; no generic autoformat')
+print('SOURCE PASS: sole runtime change versus c247985d is Default direction 2 raw (51,128) -> (128,51); all remaining tables/routing/Config/marker/recovery source byte-identical; defaults validate before format')
 print('SOURCE PASS: static reset/readback/equality buffer; marker-present short path; no exists-only marker; no raw Config memcmp')
 print('SOURCE PASS: all 34 normalized bindings, all coordinate ranges; 12 unrelated profiles and RGB configs unchanged')

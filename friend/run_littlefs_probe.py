@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Source-backed selected LittleFS + exact wrapper path validation host probe."""
 import hashlib, pathlib, re, subprocess
-root=pathlib.Path(__file__).resolve().parents[1]; out=root.parent/'storage-recovery-v2'/'verification'
+root=pathlib.Path(__file__).resolve().parents[1]; out=root.parent/'default2-fix-20261012'/'verification'
 library=root/'.platformio-home/packages/framework-arduinopico/libraries/LittleFS'
 header=(library/'src/LittleFS.h').read_text()
 start=header.index('    static bool pathValid('); end=header.index('\n    // The actual flash',start)
