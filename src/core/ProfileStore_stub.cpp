@@ -12,11 +12,13 @@ uint32_t ProfileStore::Incarnation() const { return 0; }
 uint32_t ProfileStore::Generation() const { return 0; }
 size_t ProfileStore::Count() const { return 0; }
 const ProfileStore::Entry *ProfileStore::EntryAt(size_t) const { return nullptr; }
+ProfileStore::Status ProfileStore::Read(uint32_t, UltimateProfile &, uint32_t *) const { return Status::NotFound; }
 const UltimateProfile *ProfileStore::Activate(uint32_t, Status *status) { if (status) *status = Status::NotFound; return nullptr; }
 const UltimateProfile *ProfileStore::ActiveProfile() const { return nullptr; }
 uint32_t ProfileStore::ActiveId() const { return 0; }
 ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile &, const char *, uint32_t, uint32_t, uint32_t) { return {Status::IoFailure}; }
 ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile &, uint32_t, uint32_t, uint32_t) { return {Status::IoFailure}; }
+ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char *, uint32_t, uint32_t, uint32_t) { return {Status::IoFailure}; }
 ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char *, uint32_t, uint32_t, uint32_t) { return {Status::IoFailure}; }
 ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t) { return {Status::IoFailure}; }
 ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t) { return {Status::IoFailure}; }

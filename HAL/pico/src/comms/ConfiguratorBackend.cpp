@@ -254,11 +254,19 @@ bool ConfiguratorBackend::HandleProfileStore() {
         const uint32_t token = static_cast<uint32_t>(request.request_token);
         const uint32_t digest = static_cast<uint32_t>(request.request_token >> 32);
         ProfileStore::TransactionResult result;
-        if (request.operation == PROFILE_STORE_CREATE) {
+        if (request.operation == PROFILE_STORE_READ) {
+            uint32_t revision = 0;
+            const ProfileStore::Status status = profile_store.Read(request.profile_id, response.profile, &revision);
+            result = {status, request.profile_id, revision, profile_store.Generation()};
+        } else if (request.operation == PROFILE_STORE_CREATE) {
             result = profile_store.Create(request.profile, request.name, request.display_rank, token, digest);
         } else if (request.operation == PROFILE_STORE_UPDATE) {
             result = profile_store.Update(request.profile_id, request.profile,
                 static_cast<uint32_t>(request.expected_profile_revision), token, digest);
+        } else if (request.operation == PROFILE_STORE_DUPLICATE) {
+            result = profile_store.Duplicate(request.profile_id,
+                static_cast<uint32_t>(request.expected_profile_revision), request.name,
+                request.display_rank, token, digest);
         } else if (request.operation == PROFILE_STORE_RENAME) {
             result = profile_store.Rename(request.profile_id, request.name,
                 static_cast<uint32_t>(request.expected_store_generation), token, digest);
@@ -287,6 +295,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         switch (result.status) {
             case ProfileStore::Status::Ok: response.status = PROFILE_STORE_OK; break;
             case ProfileStore::Status::NotFound: response.status = PROFILE_STORE_NOT_FOUND; break;
+            case ProfileStore::Status::Referenced: response.status = PROFILE_STORE_REFERENCED; break;
             case ProfileStore::Status::Conflict: response.status = PROFILE_STORE_CONFLICT; break;
             case ProfileStore::Status::Full: response.status = PROFILE_STORE_FULL; break;
             case ProfileStore::Status::IoFailure: response.status = PROFILE_STORE_IO_FAILURE; break;

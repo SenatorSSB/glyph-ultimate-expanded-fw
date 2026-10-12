@@ -18,7 +18,7 @@ class ProfileStore {
 
     enum class Status : uint8_t {
         Ok, RecoveredPrevious, NotFound, Invalid, Conflict, Full, IoFailure, UnknownOutcome,
-        MigrationRequired, MigrationFenced, ReadOnlyRecovery
+        MigrationRequired, MigrationFenced, ReadOnlyRecovery, Referenced
     };
 
     struct Entry {
@@ -50,6 +50,7 @@ class ProfileStore {
     uint32_t Generation() const;
     size_t Count() const;
     const Entry *EntryAt(size_t index) const;
+    Status Read(uint32_t id, UltimateProfile &into, uint32_t *revision = nullptr) const;
     const UltimateProfile *Activate(uint32_t id, Status *status = nullptr);
     const UltimateProfile *ActiveProfile() const;
     uint32_t ActiveId() const;
@@ -57,6 +58,8 @@ class ProfileStore {
                              uint32_t token, uint32_t request_digest);
     TransactionResult Update(uint32_t id, const UltimateProfile &profile, uint32_t expected_revision,
                              uint32_t token, uint32_t request_digest);
+    TransactionResult Duplicate(uint32_t id, uint32_t expected_revision, const char *name, uint32_t rank,
+                                uint32_t token, uint32_t request_digest);
     TransactionResult Rename(uint32_t id, const char *name, uint32_t expected_generation,
                              uint32_t token, uint32_t request_digest);
     TransactionResult Reorder(uint32_t id, uint32_t rank, uint32_t expected_generation,
