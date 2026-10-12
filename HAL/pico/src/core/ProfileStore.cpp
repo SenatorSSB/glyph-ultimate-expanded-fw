@@ -1,4 +1,5 @@
 #include "core/ProfileStore.hpp"
+#include "core/ProfileStoreAtomicCommit.hpp"
 
 #include "core/config_validation.hpp"
 
@@ -116,6 +117,32 @@ bool ReadDirectorySlot(uint8_t slot, ProfileStore::Directory *directory) {
     return ok;
 }
 
+class LittleFsDirectoryStorage final : public ProfileStoreAtomicCommit::Storage {
+  public:
+    bool Write(const char *path, const uint8_t *bytes, size_t length) override {
+        File file = LittleFS.open(path, "w+");
+        const bool ok = file && WriteAll(file, bytes, length);
+        if (file) file.close();
+        return ok;
+    }
+    bool Read(const char *path, uint8_t *bytes, size_t length) override {
+        File file = LittleFS.open(path, "r");
+        const bool ok = file && file.size() == length && ReadAll(file, bytes, length);
+        if (file) file.close();
+        return ok;
+    }
+    bool Remove(const char *path) override { return LittleFS.remove(path); }
+    bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
+};
+
+bool DecodeDirectoryCommit(void *context, const uint8_t *bytes, size_t length) {
+    if (length != kDirectoryWireBytes) return false;
+    auto *directory = static_cast<ProfileStore::Directory *>(context);
+    uint8_t wire[kDirectoryWireBytes];
+    std::memcpy(wire, bytes, sizeof(wire));
+    return DecodeDirectory(wire, directory);
+}
+
 } // namespace
 
 bool ProfileStore::Begin() {
@@ -150,15 +177,11 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
     static uint8_t wire[kDirectoryWireBytes];
     if (!EncodeDirectory(next, wire)) return false;
     const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[40]; DirectoryPath(path, sizeof(path), slot); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
-    File file = LittleFS.open(temporary, "w+"); if (!file || !WriteAll(file, wire, sizeof(wire))) { if (file) file.close(); return false; }
-    file.close();
     static Directory verified;
     verified = {};
-    File check = LittleFS.open(temporary, "r");
-    const bool valid = check && check.size() == sizeof(wire) && ReadAll(check, wire, sizeof(wire)) && DecodeDirectory(wire, &verified);
-    if (check) check.close();
-    if (!valid || verified.generation != next.generation) return false;
-    LittleFS.remove(path); if (!LittleFS.rename(temporary, path)) return false;
+    LittleFsDirectoryStorage storage;
+    if (!ProfileStoreAtomicCommit::ReplaceInactiveRoot(storage, temporary, path, wire, sizeof(wire),
+            DecodeDirectoryCommit, &verified) || verified.generation != next.generation) return false;
     *_directory = next; return true;
 }
 
