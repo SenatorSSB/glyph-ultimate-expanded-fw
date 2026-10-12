@@ -36,6 +36,14 @@ EXPECTED_COMMAND_IDS = {
     "CMD_SUCCESS": CMD_SUCCESS,
 }
 
+_V2_REQUIRED_ROUTING_SLOTS = {
+    4, 18, 19, 20, 24, 25, 34, 35, 36, 37, 41, 42, 43, 44, 45,
+}
+_V3_REQUIRED_ROUTING_SLOTS = {
+    1, 2, 3, 4, 5, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 29,
+    32, 33, 34, 35, 36, 37, 38, 41, 42, 43, 44, 45, 52, 53, 54, 55,
+}
+
 
 class ToolError(RuntimeError):
     """Known tool failure with optional blocker classification."""
@@ -277,19 +285,12 @@ def ensure_dependency(module_name: str, blocker_hint: str) -> None:
 
 
 def find_config_proto(repo_root: Path) -> Path:
-    preferred_paths = [
-        repo_root / ".pio" / "libdeps" / "glyph_mk6" / "HayBox-proto" / "config.proto",
-    ]
-    for candidate in preferred_paths:
-        if candidate.exists():
-            return candidate
-
-    fallback_matches = sorted(repo_root.glob(".pio/libdeps/**/config.proto"))
-    haybox_matches = [path for path in fallback_matches if "HayBox-proto" in str(path)]
-    if haybox_matches:
-        return haybox_matches[0]
+    """Return the reviewed, tracked schema; never derive wire shape from .pio cache."""
+    candidate = repo_root / "schema" / "haybox" / "config.proto"
+    if candidate.is_file():
+        return candidate
     raise ToolError(
-        "could not locate source-traceable config.proto under .pio/libdeps/*/HayBox-proto/",
+        "could not locate tracked schema/haybox/config.proto; refusing mutable .pio cache schema",
         blocker=True,
     )
 
@@ -393,19 +394,8 @@ def encode_artifact_payload(
     return config_message, payload
 
 
-def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> list[str]:
+def verify_ultimate_mode_bindings(ultimate_mode: Any, config_pb2: ModuleType, label: str) -> list[str]:
     failures: list[str] = []
-    ultimate_modes = [
-        mode for mode in config_message.game_mode_configs if mode.mode_id == config_pb2.MODE_ULTIMATE
-    ]
-    if len(ultimate_modes) != 1:
-        failures.append(
-            "expected exactly one MODE_ULTIMATE game mode config, "
-            f"found {len(ultimate_modes)}"
-        )
-        return failures
-
-    ultimate_mode = ultimate_modes[0]
     remaps = list(ultimate_mode.button_remapping)
 
     rf3_entries = [
@@ -457,27 +447,27 @@ def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> lis
 
     if duplicates:
         failures.append(
-            "duplicate physical remap entries in MODE_ULTIMATE: "
+            f"duplicate physical remap entries in {label}: "
             + ", ".join(str(button) for button in duplicates)
         )
 
     if len(rf3_entries) != 1:
         failures.append(
-            "expected exactly one BTN_RF3 physical remap entry, "
+            f"expected exactly one BTN_RF3 physical remap entry in {label}, "
             f"found {len(rf3_entries)}"
         )
     if len(rf4_entries) != 1:
         failures.append(
-            "expected exactly one BTN_RF4 physical remap entry, "
+            f"expected exactly one BTN_RF4 physical remap entry in {label}, "
             f"found {len(rf4_entries)}"
         )
     if len(lt3_entries) != 1:
         failures.append(
-            "expected exactly one BTN_LT3 physical remap entry, "
+            f"expected exactly one BTN_LT3 physical remap entry in {label}, "
             f"found {len(lt3_entries)}"
         )
     if lt3_to_lf4:
-        failures.append("unexpected BTN_LT3 -> BTN_LF4 mapping present")
+        failures.append(f"unexpected BTN_LT3 -> BTN_LF4 mapping present in {label}")
 
     if not historical_mode and not identity_mode:
         failures.append(
@@ -508,6 +498,230 @@ def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> lis
             f"found {len(lt3_to_lt3)}"
         )
 
+    return failures
+
+
+def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> list[str]:
+    """Validate the bounded schema-backed Ultimate profile wire shape.
+
+    This mirrors the finite versioned admission checks in production
+    validation. It does not claim that firmware has consumed a runtime-loaded
+    profile or that any device write is safe.
+    """
+    def invalid_condition(condition: Any, roles: set[int], routed: set[int], maximum_role_id: int) -> bool:
+        if not condition:
+            return True
+        seen: set[int] = set()
+        for tokens in (condition.all_tokens, condition.any_tokens, condition.none_tokens):
+            for token in tokens:
+                if token in seen or not (1 <= token <= 60 or 65 <= token <= 96):
+                    return True
+                seen.add(token)
+                if token <= 60:
+                    if token not in routed:
+                        return True
+                elif token - 64 > maximum_role_id or token - 64 not in roles:
+                    return True
+        return False
+
+    def effect_key(effect: Any) -> int | None:
+        pairs = {
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_DIGITAL, config_pb2.ULTIMATE_OUTPUT_TARGET_DIGITAL): 0,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_BASE_TABLE, config_pb2.ULTIMATE_OUTPUT_TARGET_LEFT_STICK): 1,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_BASE_TABLE, config_pb2.ULTIMATE_OUTPUT_TARGET_RIGHT_STICK): 2,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_DIRECTION_A, config_pb2.ULTIMATE_OUTPUT_TARGET_LEFT_STICK): 3,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_RF6, config_pb2.ULTIMATE_OUTPUT_TARGET_LEFT_STICK): 4,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_RF7, config_pb2.ULTIMATE_OUTPUT_TARGET_LEFT_STICK): 5,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL, config_pb2.ULTIMATE_OUTPUT_TARGET_RIGHT_STICK): 6,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL, config_pb2.ULTIMATE_OUTPUT_TARGET_RIGHT_STICK): 7,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_NULL, config_pb2.ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL): 8,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_TRIGGERS, config_pb2.ULTIMATE_OUTPUT_TARGET_TRIGGER_L): 9,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_TRIGGERS, config_pb2.ULTIMATE_OUTPUT_TARGET_TRIGGER_R): 10,
+            (config_pb2.ULTIMATE_OUTPUT_PHASE_DPAD, config_pb2.ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK): 11,
+        }
+        return pairs.get((effect.phase, effect.target))
+
+    def invalid_effect_shape(effect: Any, key: int) -> bool:
+        if key in (0, 9, 10):
+            shared = (
+                effect.direction_source != 0 or effect.coordinate_mode != 0 or
+                effect.table_id != 0 or effect.mode_table_id != 0 or
+                effect.fixed_x != 0 or effect.fixed_y != 0 or effect.coordinates
+            )
+            if shared:
+                return True
+            if key == 0:
+                return (
+                    effect.value != 0 or effect.suppress or
+                    ((effect.digital_set_mask | effect.digital_clear_mask) & ~0xFFF) != 0 or
+                    (effect.digital_set_mask & effect.digital_clear_mask) != 0
+                )
+            return effect.digital_set_mask != 0 or effect.digital_clear_mask != 0
+
+        if effect.digital_set_mask or effect.digital_clear_mask:
+            return True
+        if (key == 11 and effect.value > 7) or (key != 11 and effect.value != 0):
+            return True
+        if not 1 <= effect.direction_source <= 4:
+            return True
+        if key == 11 and effect.direction_source != config_pb2.ULTIMATE_DIRECTION_SOURCE_CENTER:
+            return True
+        if effect.coordinate_mode == config_pb2.ULTIMATE_COORDINATE_SELECTED_TABLE:
+            return not (key == 1 and effect.table_id == 0 and effect.mode_table_id == 0 and
+                        not effect.coordinates and effect.fixed_x == 0 and effect.fixed_y == 0)
+        if effect.coordinate_mode == config_pb2.ULTIMATE_COORDINATE_TABLE:
+            return not (effect.table_id < 28 and effect.mode_table_id < 28 and
+                        not effect.coordinates and effect.fixed_x == 0 and effect.fixed_y == 0)
+        if effect.coordinate_mode == config_pb2.ULTIMATE_COORDINATE_FIXED:
+            return not (effect.table_id == 0 and effect.mode_table_id == 0 and not effect.coordinates)
+        if effect.coordinate_mode == config_pb2.ULTIMATE_COORDINATE_INLINE:
+            return not (effect.table_id == 0 and effect.mode_table_id == 0 and
+                        len(effect.coordinates) == 18 and effect.fixed_x == 0 and effect.fixed_y == 0)
+        return True
+
+    failures: list[str] = []
+    profiles = list(config_message.ultimate_profiles)
+    if len(profiles) > 2:
+        failures.append(f"Stage-A supports at most two ultimate_profiles, found {len(profiles)}")
+
+    for profile_index, profile in enumerate(profiles, start=1):
+        label = f"ultimate_profiles[{profile_index}]"
+        if profile.schema_version not in (1, 2, 3):
+            failures.append(
+                f"{label}.schema_version must be one of [1, 2, 3], got {profile.schema_version}"
+            )
+        if len(profile.tables) != 28:
+            failures.append(f"{label}.tables must contain 28 entries, found {len(profile.tables)}")
+        else:
+            seen_table_ids: set[int] = set()
+            for table_index, table in enumerate(profile.tables):
+                table_label = f"{label}.tables[{table_index}]"
+                if table.table_id >= 28:
+                    failures.append(f"{table_label}.table_id must be in [0,27], got {table.table_id}")
+                elif table.table_id in seen_table_ids:
+                    failures.append(f"{label} has duplicate table_id {table.table_id}")
+                else:
+                    seen_table_ids.add(table.table_id)
+                if len(table.coordinates) != 9:
+                    failures.append(f"{table_label}.coordinates must contain 9 entries, found {len(table.coordinates)}")
+            missing_table_ids = sorted(set(range(28)) - seen_table_ids)
+            if missing_table_ids:
+                failures.append(f"{label} is missing table IDs: {missing_table_ids}")
+
+        has_output_program = profile.HasField("output_program")
+        if profile.schema_version == 1:
+            if (profile.roles or profile.routing_slots or profile.default_table_id != 0 or
+                    profile.table_rules or has_output_program):
+                failures.append(f"{label} adds fields to schema version 1")
+            continue
+
+        if has_output_program and profile.schema_version == 2:
+            failures.append(f"{label} adds an output program to schema version 2")
+        if (not profile.roles or len(profile.routing_slots) < 15 or
+                not profile.table_rules or profile.default_table_id >= 28):
+            failures.append(f"{label} has an incomplete version 2 shape")
+        roles = [role.role_id for role in profile.roles]
+        role_ids = set(roles)
+        if any(role_id < 1 or role_id > 32 for role_id in roles) or len(role_ids) != len(roles):
+            failures.append(f"{label} has an invalid role")
+
+        routing_slots = [slot.slot_id for slot in profile.routing_slots]
+        routing_inputs = [slot.input_token for slot in profile.routing_slots]
+        if (any(slot < 1 or slot > 60 for slot in routing_slots) or
+                any(token < 1 or token > 60 for token in routing_inputs) or
+                len(set(routing_slots)) != len(routing_slots) or
+                len(set(routing_inputs)) != len(routing_inputs)):
+            failures.append(f"{label} has an invalid routing slot")
+        elif not _V2_REQUIRED_ROUTING_SLOTS.issubset(routing_slots):
+            failures.append(f"{label} is missing a required routing slot")
+
+        routed_slot_ids = set(routing_slots)
+        for role in profile.roles:
+            if (not role.HasField("condition") or
+                    invalid_condition(role.condition, role_ids, routed_slot_ids, role.role_id - 1)):
+                failures.append(f"{label} has an invalid role condition")
+                break
+
+        priorities: set[int] = set()
+        for rule in profile.table_rules:
+            if (rule.priority == 0 or rule.priority > 255 or rule.table_id >= 28 or
+                    rule.priority in priorities):
+                failures.append(f"{label} has an invalid table priority")
+                break
+            priorities.add(rule.priority)
+            if (not rule.HasField("condition") or
+                    invalid_condition(rule.condition, role_ids, routed_slot_ids, 32)):
+                failures.append(f"{label} has an invalid table-rule condition")
+                break
+        if profile.schema_version == 3:
+            if not has_output_program or not profile.output_program.enabled:
+                failures.append(f"{label} has an incomplete version 3 output program")
+            elif len(profile.output_program.effects) != 12:
+                failures.append(
+                    f"{label}.output_program.effects must contain 12 entries, "
+                    f"found {len(profile.output_program.effects)}"
+                )
+            if len(profile.routing_slots) != 32:
+                failures.append(
+                    f"{label}.routing_slots must contain 32 entries for schema version 3, "
+                    f"found {len(profile.routing_slots)}"
+                )
+            elif set(routing_slots) != _V3_REQUIRED_ROUTING_SLOTS:
+                failures.append(f"{label} is missing an output input slot")
+            effect_keys: set[int] = set()
+            for effect in profile.output_program.effects:
+                key = effect_key(effect)
+                if key is None or key in effect_keys or invalid_effect_shape(effect, key):
+                    failures.append(f"{label} has an invalid output effect")
+                    break
+                effect_keys.add(key)
+                token = effect.gate_token
+                if ((token == 0 and effect.gate_inverted) or
+                        (token != 0 and not ((1 <= token <= 60 and token in routed_slot_ids) or
+                                             (65 <= token <= 96 and token - 64 in role_ids)))):
+                    failures.append(f"{label} has an invalid output gate")
+                    break
+            if len(effect_keys) != 12:
+                failures.append(f"{label} is missing an output phase")
+    return failures
+
+
+def verify_required_bindings(config_message: Any, config_pb2: ModuleType) -> list[str]:
+    failures: list[str] = []
+    ultimate_modes = [
+        mode for mode in config_message.game_mode_configs if mode.mode_id == config_pb2.MODE_ULTIMATE
+    ]
+    for mode_index, mode in enumerate(config_message.game_mode_configs, start=1):
+        if mode.mode_id != config_pb2.MODE_ULTIMATE and mode.ultimate_profile_config != 0:
+            failures.append(
+                f"game_mode_configs[{mode_index}].ultimate_profile_config is set for a non-Ultimate mode"
+            )
+
+    profiles = list(config_message.ultimate_profiles)
+    if profiles:
+        if len(ultimate_modes) != 3:
+            failures.append(
+                "Stage-A artifact with runtime profiles requires exactly three MODE_ULTIMATE "
+                "rows (legacy, profile 1, profile 2)"
+            )
+        elif sorted(mode.ultimate_profile_config for mode in ultimate_modes) != [0, 1, 2]:
+            failures.append(
+                "Stage-A artifact requires explicit MODE_ULTIMATE profile references [0, 1, 2]"
+            )
+    elif len(ultimate_modes) != 1:
+        failures.append(
+            f"legacy artifact requires exactly one MODE_ULTIMATE game mode config, found {len(ultimate_modes)}"
+        )
+
+    for mode_index, ultimate_mode in enumerate(ultimate_modes, start=1):
+        label = f"MODE_ULTIMATE[{mode_index}]"
+        failures.extend(verify_ultimate_mode_bindings(ultimate_mode, config_pb2, label))
+        if ultimate_mode.ultimate_profile_config > len(config_message.ultimate_profiles):
+            failures.append(
+                f"{label}.ultimate_profile_config={ultimate_mode.ultimate_profile_config} "
+                f"exceeds ultimate_profiles count {len(config_message.ultimate_profiles)}"
+            )
+    failures.extend(verify_ultimate_profiles(config_message, config_pb2))
     return failures
 
 

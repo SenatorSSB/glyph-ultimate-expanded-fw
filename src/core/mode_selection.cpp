@@ -110,7 +110,15 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
             set_mode(backend, &projectm_mode);
             break;
         case MODE_ULTIMATE:
-            ultimate_mode.SetConfig(mode_config);
+            if (mode_config.ultimate_profile_config > config.ultimate_profiles_count) {
+                break;
+            }
+            ultimate_mode.SetConfig(
+                mode_config,
+                mode_config.ultimate_profile_config == 0
+                    ? nullptr
+                    : &config.ultimate_profiles[mode_config.ultimate_profile_config - 1]
+            );
             set_mode(backend, &ultimate_mode);
             break;
         case MODE_FGC:
