@@ -12,6 +12,122 @@ WebSerial/device write, runtime-loaded profiles, daemon work, or scheduled
 automation. They assume the supervisor will execute the bounded workflow
 itself and report results only after the requested operations have completed.
 
+## Optional Chapter Worker Roster
+
+Copy only when the owner approves a finite roster for one chapter; omit it
+otherwise. This JSON is a template, not a live roster or runtime permission.
+Capability-family model values follow MODEL_ROUTING.md; record the resolved
+available identifier on dispatch when known. Owner-selected values have their
+own provenance; observed values require runtime telemetry. Native workers use
+`worker_class: native_internal` and UNKNOWN owner-selection fields. Record
+UNKNOWN capability/evidence until supported; VERIFIED requires evidence of the
+actual named path. Roster approval expires at chapter retirement. Retired chapter
+records retain every entry as `retired` for historical recovery.
+
+<!-- worker-roster-template:start -->
+```json
+{
+  "worker_roster": {
+    "chapter_id": "<owner-approved chapter>",
+    "chapter_lifecycle": "active",
+    "owner_approval_ref": "<direct owner message identity/reference>",
+    "direct_return_capability": "UNKNOWN",
+    "direct_return_evidence": "UNKNOWN",
+    "daemon": {
+      "id": "D0",
+      "chat_locator": "<named daemon>",
+      "requested_model": "Terra capability family",
+      "requested_effort": "low",
+      "observed_model": "UNKNOWN",
+      "observed_effort": "UNKNOWN",
+      "observed_telemetry_source": "UNKNOWN"
+    },
+    "workers": [
+      {
+        "id": "W1",
+        "chat_locator": "<owner-created chat>",
+        "lane": "architecture",
+        "worker_class": "owner_created_chat",
+        "requested_model": "Sol capability family",
+        "requested_effort": "high",
+        "owner_selected_model": "Sol capability family",
+        "owner_selected_effort": "high",
+        "owner_selection_source": "OWNER_SELECTED: <owner UI selection reference>",
+        "observed_model": "UNKNOWN",
+        "observed_effort": "UNKNOWN",
+        "observed_telemetry_source": "UNKNOWN",
+        "direct_return_authorized": true,
+        "allowed_task_classes": [
+          "bounded architecture challenge"
+        ],
+        "exclusions": [
+          "implementation",
+          "publication",
+          "device action",
+          "scope expansion"
+        ],
+        "may_resume": true,
+        "fresh_context_required_for_independence": true,
+        "lifecycle": "available"
+      }
+    ]
+  }
+}
+```
+<!-- worker-roster-template:end -->
+
+Include each approved worker; the single architecture entry above is only a
+shape example, not a mandatory role/model or permission to create a chat.
+`available` may receive work, `active` owns its current packet, `blocked` records
+an exact blocker and permitted resume event, and `retired` receives no dispatch.
+No automatic lifecycle transition creates authority. A retired worker may be
+replaced only under explicit replacement coverage or additional owner approval.
+
+## Worker First Message
+
+```text
+You are an authorized bounded worker for chapter <chapter_id>, roster <id>.
+Daemon/controller: <named daemon/chat locator>.
+Owner authorization: <verified direct owner reference covering this worker,
+chapter duration, receiving packets and direct return>.
+Lane: <lane>; allowed task classes: <classes>; exclusions: <exclusions>.
+Requested model/effort: <values>.
+Owner-selected configuration/source: <values or UNKNOWN>.
+Runtime-observed model/effort/telemetry source: <values or UNKNOWN>.
+
+You may receive bounded work packets from this named daemon, perform only
+packet-authorized work and return completed bounded results directly to it
+where runtime/system authorization permits. No scope expansion, invented
+successor work/chapter, canonical publication, owner/domain/hardware gate
+clearance, source-free evidence publication, device writes, flashing or
+additional user-visible workers unless separately authorized. You are not a
+peer daemon. Keep the existing source, safety, review and hardware gates.
+Persist substantial results in repository truth as instructed; chat is not
+the only durable record. If direct return is unavailable or rejected, persist
+the exact transport/authorization failure and result locator, then stop;
+do not create a timer or repeatedly retry. The daemon owns bounded recovery.
+```
+
+## Chapter Worker Dispatch / Return Envelope
+
+Apply this compact envelope to the existing lane-specific handoffs below.
+
+```text
+Chapter / verified authority reference:
+Roster worker ID / named daemon and worker locators (or native internal child):
+Current lifecycle / reuse allowed / fresh independence required:
+Objective / finite deliverable / exact base:
+Allowed task classes / allowed files / exclusions / forbidden files:
+Checks / budget / stop conditions / return format:
+Requested model/effort (resolve available identifier on dispatch/resume):
+Owner-selected model/effort/source (or UNKNOWN):
+Observed model/effort/runtime telemetry source (or UNKNOWN):
+Direct-return capability/evidence / chapter authorization reference:
+Return to named daemon immediately on completion if supported and authorized.
+Result: outcome / exact commit or durable result locator / tests / unknowns.
+Transport result: delivered or exact failure; never relabel as product failure.
+```
+
 ## Supervisor Cycle Prompt
 
 ```text

@@ -93,6 +93,71 @@ chain unless the first review identifies a concrete new defect whose repair
 genuinely needs distinct independent review. Independence does not require a
 stronger model: a reviewer may use Luna or Terra.
 
+### Optional chapter worker roster
+
+At bootstrap, read the owner-approved scope and optional `worker_roster` in the
+chapter ledger. A roster belongs to exactly one chapter, is not global
+execution authority, and expires with that chapter. Record the named daemon,
+owner approval reference, finite participants and their stable chapter-local
+IDs, chat locators, lanes, allowed task classes, exclusions, reuse/independence
+conditions and lifecycle (`available`, `active`, `blocked`, `retired`). The
+[roster and worker templates](PROMPT_TEMPLATES.md#optional-chapter-worker-roster)
+include requested, owner-selected and observed model/effort plus provenance.
+Chapters without a roster retain ordinary native delegation.
+
+Two worker classes serve different needs:
+
+- **Native/disposable internal subagents:** repository inventory, source
+  navigation, hashes, focused tests, file comparisons, resource extraction,
+  bounded docs edits and straightforward mechanical implementation. Their
+  mechanically verified result can be adequate with UNKNOWN model identity.
+  Do not create user-visible chats solely for provenance on mechanical work.
+- **Owner-created/model-selected user-visible chats:** difficult architecture,
+  high-coupling implementation, finite diagnosis, adversarial design analysis
+  and high-value independent review where model quality materially matters.
+  The owner creates/selects their model/effort and approves their chapter roster
+  entries. They are bounded workers, not autonomous peer daemons.
+
+Owner approval may permit dispatch/resume and direct return once per named
+worker for that chapter, subject to actual runtime/system authorization. Each
+packet must remain inside chapter scope and the worker's lane and exclusions.
+The daemon may not silently add user-visible contexts: a new or replacement
+context outside explicit roster approval returns
+`ADDITIONAL_WORKER_AUTHORIZATION_REQUIRED`. A replacement needs its own recorded
+locator and approval coverage; never inherit permission merely from an old ID.
+Native disposable internal children remain available under existing delegation
+rules without creating owner-visible chats or special permissions.
+
+Direct-return authorization permits only receiving bounded packets from the
+named daemon and returning completed bounded results to it. It grants no new
+product scope, chapter amendment, owner/domain/hardware gate clearance,
+canonical merge/publication, source-free evidence publication, device write,
+flashing, successor chapter or arbitrary worker creation authority. Preserve
+one publisher and every existing authority, evidence and independence gate.
+
+### Large coherent chapter pattern (nonbinding)
+
+A substantial chapter may use Terra/medium for coupled chapter-state synthesis:
+brief parallel architecture/design and mechanical/resource discovery, plus
+protocol/storage investigation only if independently useful; one reconciled
+design freeze; one primary executor for the coherent authorized implementation
+chain; one fresh independent review; then exact candidate/build/hardware gates
+when applicable and HEP -> source-free E -> tested-source I -> separate DONE.
+Avoid overlapping source editors without a strong isolation reason.
+
+Before implementation of high-leverage architecture, one bounded stronger
+worker may challenge the design: find a concrete corruption, migration,
+recovery, concurrency, future-architecture or evidence-boundary failure. If no
+concrete blocker is found, return to ordinary implementation routing; do not
+keep the stronger worker permanently attached.
+
+The owner's upcoming **Multi-Profile Persistent Ultimate Profile Store**
+preferences are D0 daemon Terra/medium, W1 architecture/adversarial Sol/high,
+W2 primary implementation Terra/medium, W3 fresh independent review Sol/medium,
+and W4 mechanical/resource Luna/medium. This is an illustrative future roster,
+not global policy, actual chat creation or authority to start that chapter.
+Its product direction remains in the owner-approved [roadmap](../ROADMAP.md).
+
 ## 4. Keep contexts clean
 
 Use a **fresh subagent context by default for a materially independent
@@ -100,8 +165,14 @@ investigation**. Resume only when the same bounded work requires its prior
 context, that context is relevant and clean, and role independence survives.
 Never reuse a chat just for its convenient model setting. A known mechanical
 transition inside the same clean product chain does not require a new chat.
-Use native subagents for internal subtasks; creating a user-visible chat requires
-the runtime's applicable user authorization.
+A roster worker may resume implementation -> focused repair -> directly related
+verification within the same clean lane. Use a fresh context for independent
+investigation, architecture challenge after implementation contamination,
+independent review or a substantially new problem. Retire contexts when these
+conditions fail. Model convenience alone never justifies reuse. A retired
+worker's replacement follows the roster/additional-worker authorization rule.
+Use native subagents for internal subtasks; user-visible contexts require
+recorded owner approval and the runtime's applicable user authorization.
 
 Bound each worker to one deliverable: exact base, files, exclusions, checks,
 budget, stop and return format. Split unrelated work. Fresh review receives
@@ -111,12 +182,37 @@ Retire contaminated contexts; never transfer the full chapter transcript.
 
 ## 5. Progress without loops
 
-Process completed-worker events immediately when authorized. No standing periodic role wakeups are the default. No watchdog is created.
-A future watchdog needs evidence of missed worker-completion events; it may
-only detect missed callbacks, an existing executable transition or durable owner
-wait, and must not plan, curate, implement or invent work. On callback failure, read the durable
-result once and poll compact status; do not repeatedly retry, nag a running
-worker, or require the owner to ferry messages.
+Normal path: daemon dispatches a bounded packet -> worker completes -> direct
+completion event or authorized worker return -> daemon processes it immediately.
+The owner should not routinely ferry results. At bootstrap establish
+`direct_return_capability: VERIFIED | UNAVAILABLE | UNKNOWN` once, with the
+runtime evidence/limitation and tested worker/daemon path in the chapter ledger.
+VERIFIED requires actual runtime support evidence; roster approval alone proves
+no persistent cross-chat permission. UNKNOWN is valid until exercised. Revisit
+only after a material capability/environment change, not by periodic probing.
+
+If transport rejects direct return despite chapter approval, record the exact
+transport/authorization failure and affected endpoints, stop retries, and mark
+`DIRECT_RETURN_TRANSPORT_FAILED`; this is not product/work failure. A worker
+persists the result/failure and stops; the daemon owns bounded recovery:
+
+1. Prefer the direct completion event / direct worker return.
+2. After demonstrated failure, make one bounded resume/status retrieval of the
+   known worker under existing authorization; do not broaden its task.
+3. Read its durable repository result if available: exact commit, report,
+   chapter ledger entry, evidence file or SHA/test result. For substantial work,
+   chat return must not be the sole durable record. A commit/test output may
+   suffice for trivial mechanical work; do not require unnecessary prose.
+4. Only if completion callbacks demonstrably failed and durable recovery cannot
+   adequately restore liveness may a narrowly bounded watchdog be considered
+   under [existing watchdog rules](JUDGE_WATCHDOG_CONTRACT.md). It may only
+   detect missed callbacks, an existing executable transition or durable owner
+   wait, and must not plan, curate, implement or invent work.
+
+No standing periodic role wakeups are the default. No watchdog is created.
+Do not poll all workers periodically or wake the daemon every N minutes as the
+default architecture. Possible communication failure alone permits no timer.
+Direct messaging is the fast control path; repository truth is durable recovery.
 
 [Revision 3](VALIDATION_AND_GATES.md): Tier 1 and affected Tier 2 block.
 Tier 3 is honest debt unless it prevents/contradicts a named product fact.
@@ -175,6 +271,10 @@ continue into the next chapter. Goal persists the outcome, not authority.
 Retire/close it with its chapter using permitted runtime lifecycle controls. Budget exhaustion is not success. Use runtime lifecycle controls only
 as authorized, and retain an honest incomplete/blocker state. See the templates
 and assessment in the retrospective. Do not activate a Goal from this document.
+
+At retirement, retire every roster entry and expire its chapter transport
+authorization; retain the ledger as historical evidence, never authority for a
+new chapter.
 
 At retirement, report verified completion or the precise durable blocker,
 artifact/decision locators and remaining owner action; release locks and stop.

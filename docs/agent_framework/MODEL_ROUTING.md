@@ -40,3 +40,30 @@ a lane and is overridden by the actual task's uncertainty, not role prestige.
 The schema and `tools/check_glyph_agent_framework_docs.py` validate the mirror.
 Use runtime-emitted telemetry passively; missing usage does not block work and
 placeholder zeros are not measurements. No calls or polls solely for metrics.
+
+## Model provenance and worker choice
+
+**Requested model is not proof of observed model.** Keep three concepts distinct:
+
+- `requested`: family/resolved identifier and effort sent or intended at dispatch.
+- `owner_selected`: owner-selected UI/model configuration, with `OWNER_SELECTED`
+  provenance and its source. This is owner configuration, not independent runtime
+  telemetry and not a guarantee of fixed execution identity.
+- `runtime_observed`: actual model/effort exposed by runtime telemetry, with its
+  exact source labeled `RUNTIME_OBSERVED:` in roster records. Without that evidence record `observed_model = UNKNOWN` and
+  `observed_effort = UNKNOWN`; partial telemetry may prove only one field.
+
+Worker or daemon prose, preference configuration, requested dispatch parameters
+and capability-family assumptions cannot prove actual execution identity.
+Matching requested and observed values are legal only with independent runtime
+telemetry; requested != observed means separate evidence concepts, not mandatory
+unequal strings. Missing telemetry does not block mechanically verifiable work.
+Owner-selected chats still require honest UNKNOWN runtime fields when unproved.
+
+Model spend follows **epistemic difficulty**, not worker title. A SHA/checker
+runner needs no Sol merely because it is called reviewer; a finite difficult
+architecture counterexample may justify Sol/high. Mechanical proof must remain
+mechanically verified regardless of model. Use native disposable workers for
+such mechanical tasks; owner-selected roster chats serve difficult judgment.
+See [bootstrap roster authority](FUTURE_DAEMON_BOOTSTRAP.md#optional-chapter-worker-roster)
+and [templates](PROMPT_TEMPLATES.md#optional-chapter-worker-roster).

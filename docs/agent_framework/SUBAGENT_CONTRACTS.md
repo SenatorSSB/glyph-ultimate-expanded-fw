@@ -25,6 +25,18 @@ limits; it may not self-reseed. One independent review layer is normally
 sufficient. Do not create reviewer-of-reviewer chains unless a concrete new
 defect found by the first review needs repair and distinct independent review.
 
+## Optional roster workers
+
+The [chapter bootstrap](FUTURE_DAEMON_BOOTSTRAP.md#optional-chapter-worker-roster)
+adds optional owner-created/model-selected workers alongside native internal
+children. A chapter-approved roster can cover ordinary bounded dispatch/resume
+and direct return to its named daemon without repeated owner handoff approval,
+where runtime authorization permits. It creates no peer daemon or publication,
+product, hardware or device authority. New user-visible contexts outside that
+approval require `ADDITIONAL_WORKER_AUTHORIZATION_REQUIRED`.
+Use the [worker first-message and packet templates](PROMPT_TEMPLATES.md#worker-first-message).
+Preserve fresh independent review and native discovery/accountability below.
+
 ## Native Delegation Discovery And Accountability
 
 Native internal subagent delegation means scoped child agents, sidecars, or

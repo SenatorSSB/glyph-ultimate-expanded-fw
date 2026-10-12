@@ -81,7 +81,10 @@ Available roles (not a permanent topology):
 ## Contracts
 
 - `FUTURE_DAEMON_BOOTSTRAP.md` - mandatory first-turn chapter operating contract.
-- `MODEL_ROUTING.md` - current recommended model and effort routing.
+- `MODEL_ROUTING.md` - current recommended model/effort routing and provenance.
+- `PROMPT_TEMPLATES.md#optional-chapter-worker-roster` - optional chapter-scoped
+  owner roster, worker bootstrap and direct-return packets; runtime support is
+  conditional and grants no product or publication authority.
 - `AUTHORIZATION_AND_RUNWAY.md` - authority map, Ready/Preauthorized semantics,
   packet freshness, runway, liveness, and concurrency.
 - `WORK_ORDER_TEMPLATE.md` - complete executable/Preauthorized contract shape.

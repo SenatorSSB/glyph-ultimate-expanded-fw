@@ -163,5 +163,30 @@
       "escalation_triggers": "Written reason and inadequate cheaper attempt OR justified genuinely novel risk; finite expected benefit.",
       "deescalation_triggers": "Return to the smallest adequate lane once the named uncertainty is resolved."
     }
+  },
+  "worker_roster_policy": {
+    "optional": true,
+    "chapter_scoped": true,
+    "expires_with_chapter": true,
+    "requested_is_observed_proof": false,
+    "owner_selected_is_runtime_observed": false,
+    "unknown_observed_execution_allowed": true,
+    "additional_visible_worker_requires_owner_authorization": true,
+    "direct_return_grants_action_authority": false,
+    "transport_failure_is_product_failure": false,
+    "standing_polling_default": false,
+    "watchdog_default": false,
+    "watchdog_requires_demonstrated_callback_failure_and_inadequate_durable_recovery": true,
+    "recovery_order": [
+      "direct_completion_or_return",
+      "one_bounded_resume_status",
+      "durable_repository_result",
+      "conditional_bounded_watchdog"
+    ],
+    "capability_states": [
+      "VERIFIED",
+      "UNAVAILABLE",
+      "UNKNOWN"
+    ]
   }
 }

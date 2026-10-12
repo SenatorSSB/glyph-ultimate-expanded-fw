@@ -2346,6 +2346,190 @@ def validate_task_lane_routing(routing: dict) -> None:
 
 
 
+def validate_worker_roster_policy(policy: object) -> None:
+    """Representation contract only; this does not implement runtime transport."""
+    expected = {
+        "optional": True, "chapter_scoped": True, "expires_with_chapter": True,
+        "requested_is_observed_proof": False, "owner_selected_is_runtime_observed": False,
+        "unknown_observed_execution_allowed": True,
+        "additional_visible_worker_requires_owner_authorization": True,
+        "direct_return_grants_action_authority": False,
+        "transport_failure_is_product_failure": False,
+        "standing_polling_default": False, "watchdog_default": False,
+        "watchdog_requires_demonstrated_callback_failure_and_inadequate_durable_recovery": True,
+        "recovery_order": ["direct_completion_or_return", "one_bounded_resume_status",
+                           "durable_repository_result", "conditional_bounded_watchdog"],
+        "capability_states": ["VERIFIED", "UNAVAILABLE", "UNKNOWN"],
+    }
+    if not isinstance(policy, dict) or set(policy) != set(expected):
+        fail("worker roster policy fields must preserve the bounded chapter contract")
+    for key, value in expected.items():
+        if type(policy[key]) is not type(value) or policy[key] != value:
+            fail("worker roster policy violates " + key)
+
+
+def validate_worker_roster(roster: object) -> None:
+    """Validate a ledger/template shape, not owner identity or runtime evidence."""
+    if roster is None:  # A chapter need not use a roster.
+        return
+    fields = {"chapter_id", "chapter_lifecycle", "owner_approval_ref",
+              "direct_return_capability", "direct_return_evidence", "daemon", "workers"}
+    if not isinstance(roster, dict) or set(roster) != fields:
+        fail("worker roster must contain exactly its chapter, authority, capability and participants")
+    for key in ("chapter_id", "owner_approval_ref", "direct_return_evidence"):
+        require_nonempty_string(roster[key], "worker_roster." + key)
+    if roster["chapter_lifecycle"] not in ("active", "retired"):
+        fail("worker roster chapter lifecycle must be active or retired")
+    if roster["direct_return_capability"] not in ("VERIFIED", "UNAVAILABLE", "UNKNOWN"):
+        fail("invalid direct-return capability")
+    if roster["direct_return_capability"] != "UNKNOWN" and roster["direct_return_evidence"] == "UNKNOWN":
+        fail("known direct-return capability requires runtime evidence or limitation")
+    telemetry = {"requested_model", "requested_effort", "observed_model",
+                 "observed_effort", "observed_telemetry_source"}
+    daemon_fields = {"id", "chat_locator"} | telemetry
+    worker_fields = daemon_fields | {
+        "lane", "worker_class", "owner_selected_model", "owner_selected_effort",
+        "owner_selection_source", "direct_return_authorized", "allowed_task_classes",
+        "exclusions", "may_resume", "fresh_context_required_for_independence", "lifecycle"}
+    workers = roster["workers"]
+    if not isinstance(workers, list):
+        fail("worker roster workers must be a finite list")
+    ids = set()
+    locators = set()
+    for participant, required, is_worker in [(roster["daemon"], daemon_fields, False)] + [
+            (worker, worker_fields, True) for worker in workers]:
+        if not isinstance(participant, dict) or set(participant) != required:
+            fail("worker roster participant fields mismatch")
+        for key in daemon_fields:
+            require_nonempty_string(participant[key], "worker roster participant." + key)
+        for key, seen in (("id", ids), ("chat_locator", locators)):
+            if participant[key] in seen:
+                fail("duplicate worker roster " + key)
+            seen.add(participant[key])
+        observed = any(participant[key] != "UNKNOWN" for key in ("observed_model", "observed_effort"))
+        source = participant["observed_telemetry_source"]
+        if source != "UNKNOWN" and not source.startswith("RUNTIME_OBSERVED:"):
+            fail("observed telemetry source requires separate RUNTIME_OBSERVED provenance")
+        if observed and source == "UNKNOWN":
+            fail("observed execution requires runtime telemetry, not requested or owner-selected values")
+        if not is_worker:
+            continue
+        for key in ("lane", "owner_selected_model", "owner_selected_effort", "owner_selection_source"):
+            require_nonempty_string(participant[key], "worker roster participant." + key)
+        if participant["worker_class"] not in ("native_internal", "owner_created_chat"):
+            fail("invalid worker class")
+        selected = any(participant[key] != "UNKNOWN" for key in ("owner_selected_model", "owner_selected_effort"))
+        if selected and not participant["owner_selection_source"].startswith("OWNER_SELECTED:"):
+            fail("owner-selected configuration requires separate OWNER_SELECTED provenance")
+        if participant["worker_class"] == "native_internal" and (
+                selected or participant["owner_selection_source"] != "UNKNOWN"):
+            fail("native worker must not invent owner-selected chat provenance")
+        for key in ("direct_return_authorized", "may_resume", "fresh_context_required_for_independence"):
+            if type(participant[key]) is not bool:
+                fail("worker roster " + key + " must be boolean")
+        if participant["fresh_context_required_for_independence"] is not True:
+            fail("worker roster must preserve fresh independent context")
+        for key in ("allowed_task_classes", "exclusions"):
+            if not isinstance(participant[key], list) or not participant[key]:
+                fail("worker roster requires bounded " + key)
+            for value in participant[key]:
+                require_nonempty_string(value, "worker roster " + key)
+        if participant["lifecycle"] not in ("available", "active", "blocked", "retired"):
+            fail("invalid roster worker lifecycle")
+        if roster["chapter_lifecycle"] == "retired" and participant["lifecycle"] != "retired":
+            fail("chapter retirement must retire its entire worker roster")
+
+
+def check_worker_roster_contract() -> None:
+    routing = load_json("docs/agent_framework/model_routing.v0.json")
+    policy = routing.get("worker_roster_policy")
+    schema = load_json("docs/agent_framework/schemas/model_routing.schema.json")
+    validate_worker_roster_policy(policy)
+    templates = read_required("docs/agent_framework/PROMPT_TEMPLATES.md")
+    match = re.search(r"<!-- worker-roster-template:start -->\s*```json\s*(.*?)\s*```\s*<!-- worker-roster-template:end -->",
+                      templates, re.DOTALL)
+    if not match or templates.count("<!-- worker-roster-template:start -->") != 1 or templates.count("<!-- worker-roster-template:end -->") != 1:
+        fail("missing single worker roster JSON template")
+    try:
+        payload = json.loads(match.group(1))
+    except ValueError as exc:
+        fail("invalid worker roster JSON template: " + str(exc))
+    if not isinstance(payload, dict) or set(payload) != {"worker_roster"}:
+        fail("worker roster template wrapper mismatch")
+    roster = payload["worker_roster"]
+    validate_worker_roster(None)
+    validate_worker_roster(roster)  # Owner-selected plus UNKNOWN observation is legal.
+    for lifecycle in ("available", "active", "blocked", "retired"):
+        variant = json.loads(json.dumps(roster))
+        variant["workers"][0]["lifecycle"] = lifecycle
+        validate_worker_roster(variant)
+    for partial in (False, True):
+        variant = json.loads(json.dumps(roster))
+        worker = variant["workers"][0]
+        worker["observed_model"] = worker["requested_model"]
+        worker["observed_effort"] = "UNKNOWN" if partial else worker["requested_effort"]
+        worker["observed_telemetry_source"] = "RUNTIME_OBSERVED: synthetic fixture receipt"
+        validate_worker_roster(variant)  # Equality requires separate evidence; partial telemetry is legal.
+    variant = json.loads(json.dumps(roster))
+    variant["workers"][0].update(worker_class="native_internal", owner_selected_model="UNKNOWN",
+                                  owner_selected_effort="UNKNOWN", owner_selection_source="UNKNOWN")
+    validate_worker_roster(variant)
+    variant["chapter_lifecycle"] = "retired"
+    variant["workers"][0]["lifecycle"] = "retired"
+    validate_worker_roster(variant)
+
+    def reject(label: str, validator, value: object) -> None:
+        try:
+            validator(value)
+        except FrameworkDocsError:
+            return
+        fail("worker roster negative control accepted: " + label)
+
+    for key, value in policy.items():
+        variant = json.loads(json.dumps(routing))
+        variant["worker_roster_policy"][key] = not value if type(value) is bool else list(reversed(value))
+        reject(key, lambda data: validate_worker_roster_policy(data["worker_roster_policy"]), variant)
+        reject("schema " + key, lambda data: validate_routing_schema(data, schema), variant)
+    for label, section, key, value in (
+            ("requested is not observed proof", "worker", "observed_model", "Sol capability family"),
+            ("owner-selected is not effort telemetry", "worker", "observed_effort", "high"),
+            ("daemon prose is not telemetry", "daemon", "observed_model", "Terra capability family"),
+            ("owner provenance is not runtime provenance", "worker", "observed_telemetry_source", "OWNER_SELECTED: UI"),
+            ("unknown capability enum", "roster", "direct_return_capability", "SUPPORTED"),
+            ("capability needs proof", "roster", "direct_return_capability", "VERIFIED"),
+            ("retirement expires roster", "roster", "chapter_lifecycle", "retired"),
+            ("owner provenance required", "worker", "owner_selection_source", "UNKNOWN"),
+            ("independence preserved", "worker", "fresh_context_required_for_independence", False),
+            ("closed lifecycle", "worker", "lifecycle", "forever"),
+            ("scope required", "worker", "allowed_task_classes", []),
+            ("exclusions required", "worker", "exclusions", []),
+            ("stable unique IDs", "worker", "id", "D0")):
+        variant = json.loads(json.dumps(roster))
+        target = variant if section == "roster" else variant["daemon"] if section == "daemon" else variant["workers"][0]
+        target[key] = value
+        reject(label, validate_worker_roster, variant)
+    for path, phrases in {
+        "docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md": (
+            "expires with that chapter", "ADDITIONAL_WORKER_AUTHORIZATION_REQUIRED",
+            "DIRECT_RETURN_TRANSPORT_FAILED", "not product/work failure",
+            "one bounded resume/status retrieval", "Do not poll all workers periodically",
+            "Possible communication failure alone permits no timer", "one publisher",
+            "chapter amendment", "device write", "source-free evidence publication",
+            "fresh context", "retire every roster entry"),
+        "docs/agent_framework/MODEL_ROUTING.md": (
+            "Requested model is not proof of observed model", "OWNER_SELECTED", "runtime_observed",
+            "observed_model = UNKNOWN", "observed_effort = UNKNOWN", "epistemic difficulty",
+            "Worker or daemon prose", "requested dispatch parameters"),
+        "docs/agent_framework/PROMPT_TEMPLATES.md": (
+            "Worker First Message", "daemon owns bounded recovery", "do not create a timer",
+            "No scope expansion", "canonical publication", "owner/domain/hardware gate",
+            "chapter retirement"),
+    }.items():
+        for phrase in phrases:
+            require_phrase(path, phrase)
+    pass_line("optional chapter roster, model provenance, transport/recovery boundaries and negative controls validate")
+
+
 def check_queue_contract() -> None:
     payload = load_queue_state()
     if payload.get("schema_version") != 3:
@@ -3913,6 +4097,7 @@ def main() -> int:
         check_required_paths()
         check_codex_only_surface()
         check_model_routing()
+        check_worker_roster_contract()
         check_queue_contract()
         check_completion_correspondence_self_test()
         check_revision_two_surface()

@@ -8,7 +8,8 @@
     "status",
     "roles",
     "dispatch_policy",
-    "lanes"
+    "lanes",
+    "worker_roster_policy"
   ],
   "properties": {
     "version": {
@@ -144,6 +145,79 @@
         },
         "exceptional": {
           "$ref": "#/$defs/task_lane"
+        }
+      }
+    },
+    "worker_roster_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "optional",
+        "chapter_scoped",
+        "expires_with_chapter",
+        "requested_is_observed_proof",
+        "owner_selected_is_runtime_observed",
+        "unknown_observed_execution_allowed",
+        "additional_visible_worker_requires_owner_authorization",
+        "direct_return_grants_action_authority",
+        "transport_failure_is_product_failure",
+        "standing_polling_default",
+        "watchdog_default",
+        "watchdog_requires_demonstrated_callback_failure_and_inadequate_durable_recovery",
+        "recovery_order",
+        "capability_states"
+      ],
+      "properties": {
+        "optional": {
+          "const": true
+        },
+        "chapter_scoped": {
+          "const": true
+        },
+        "expires_with_chapter": {
+          "const": true
+        },
+        "requested_is_observed_proof": {
+          "const": false
+        },
+        "owner_selected_is_runtime_observed": {
+          "const": false
+        },
+        "unknown_observed_execution_allowed": {
+          "const": true
+        },
+        "additional_visible_worker_requires_owner_authorization": {
+          "const": true
+        },
+        "direct_return_grants_action_authority": {
+          "const": false
+        },
+        "transport_failure_is_product_failure": {
+          "const": false
+        },
+        "standing_polling_default": {
+          "const": false
+        },
+        "watchdog_default": {
+          "const": false
+        },
+        "watchdog_requires_demonstrated_callback_failure_and_inadequate_durable_recovery": {
+          "const": true
+        },
+        "recovery_order": {
+          "const": [
+            "direct_completion_or_return",
+            "one_bounded_resume_status",
+            "durable_repository_result",
+            "conditional_bounded_watchdog"
+          ]
+        },
+        "capability_states": {
+          "const": [
+            "VERIFIED",
+            "UNAVAILABLE",
+            "UNKNOWN"
+          ]
         }
       }
     }
