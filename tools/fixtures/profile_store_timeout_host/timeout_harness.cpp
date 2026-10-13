@@ -60,6 +60,11 @@ ProfileStoreRequest list() { ProfileStoreRequest r=ProfileStoreRequest_init_defa
 ProfileStoreRequest status() { ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_STATUS;r.request_token=0x52;return r; }
 void expect_list(const DuplexStream& wire) { const auto r=response(wire);require(r.status==PROFILE_STORE_OK&&r.entries_count==2&&r.next_page_cursor==0,"LIST result");require(r.entries[0].profile_id&&r.entries[1].profile_id&&r.entries[0].profile_id!=r.entries[1].profile_id,"two listed profiles"); }
 void expect_status(const DuplexStream& wire) { require(response(wire).status==PROFILE_STORE_OK,"STATUS result"); }
+ProfileStoreResponse send(ConfiguratorBackend& b,DuplexStream& wire,const ProfileStoreRequest& r) { wire.clear();wire.append(frame(r));b.SendReport();require(wire.remaining()==0,"CRUD request tail");return response(wire); }
+void crud_probe(ConfiguratorBackend& b,DuplexStream& wire) {
+  UltimateProfile profile=UltimateProfile_init_default;require(profile_store.Read(profile_store.EntryAt(0)->id,profile)==ProfileStore::Status::Ok,"read seeded profile");
+  ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.expected_store_generation=profile_store.Generation();r.has_profile=true;r.profile=profile;std::strcpy(r.name,"Config create");r.display_rank=9;r.request_token=0x101;const auto made=send(b,wire,r);require(made.status==PROFILE_STORE_OK&&made.profile_id!=0,"CREATE");
+}
 void consecutive_lists(ConfiguratorBackend& b,DuplexStream& wire) {
   const auto request=frame(list());for(int i=0;i<3;++i){wire.clear();wire.append(request);b.SendReport();
 #ifdef EXPECT_DUPLICATE_NEXT_DROP
@@ -82,6 +87,7 @@ const Config baseline=config;
 #endif
 DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);consecutive_lists(backend,wire);
 #ifndef EXPECT_DUPLICATE_NEXT_DROP
+crud_probe(backend,wire);
 timeout_and_cap(backend,wire,baseline);
 #endif
 return 0;}catch(const std::exception&e){std::fprintf(stderr,"FAIL: %s\n",e.what());return 1;} }
