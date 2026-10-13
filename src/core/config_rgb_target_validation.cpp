@@ -25,11 +25,10 @@ static_assert(std::numeric_limits<ButtonStorage>::digits == sizeof(Button) * CHA
 static_assert(sizeof(Button) == 1 || sizeof(Button) == 4,
               "Button representation must match a verified one- or four-byte ABI");
 
-bool is_physical_target(const Button &button, const Button *targets, size_t count,
-                        bool allow_unspecified) {
+bool is_physical_target(const Button &button, const Button *targets, size_t count) {
     const Button absent = BTN_UNSPECIFIED;
     if (std::memcmp(&button, &absent, sizeof(Button)) == 0) {
-        return allow_unspecified;
+        return false;
     }
     for (size_t i = 0; i < count; ++i) {
         if (std::memcmp(&button, &targets[i], sizeof(Button)) == 0) {
@@ -62,8 +61,13 @@ bool validate_config_rgb_targets(const Config &config,
     for (size_t i = 0; i < config.rgb_configs_count; ++i) {
         const RgbConfig &rgb = config.rgb_configs[i];
         for (size_t j = 0; j < rgb.button_colors_count; ++j) {
-            if (!is_physical_target(rgb.button_colors[j].button,
-                                    physical_targets, physical_target_count, allow_unspecified)) {
+            const ButtonToColorMapping &mapping = rgb.button_colors[j];
+            const Button absent = BTN_UNSPECIFIED;
+            // Historical no-op slots encoded neither field.  A color-bearing
+            // unspecified target is not that predecessor representation.
+            if (allow_unspecified && mapping.color == 0 &&
+                std::memcmp(&mapping.button, &absent, sizeof(Button)) == 0) continue;
+            if (!is_physical_target(mapping.button, physical_targets, physical_target_count)) {
                 return false;
             }
         }

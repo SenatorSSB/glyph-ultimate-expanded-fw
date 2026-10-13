@@ -35,5 +35,11 @@ int main(int argc, char **argv) {
     error = {};
     const bool compact_rejected = !validate_glyph_config(compact_negative, error);
     std::printf("compact_unspecified_negative=%s\n", compact_rejected ? "PASS" : "FAIL");
-    return glyph && compact_rejected ? 0 : 1;
+    Config colored_unspecified = config;
+    colored_unspecified.rgb_configs[0].button_colors[0].button = BTN_UNSPECIFIED;
+    colored_unspecified.rgb_configs[0].button_colors[0].color = 1;
+    error = {};
+    const bool colored_rejected = !validate_glyph_config(colored_unspecified, error);
+    std::printf("legacy_colored_unspecified_negative=%s\n", colored_rejected ? "PASS" : "FAIL");
+    return glyph && compact_rejected && colored_rejected ? 0 : 1;
 }
