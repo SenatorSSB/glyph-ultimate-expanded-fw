@@ -29,5 +29,11 @@ int main(int argc, char **argv) {
     const bool glyph = validate_glyph_config(config, error);
     std::printf("glyph=%s error=%.*s\n", glyph ? "PASS" : "FAIL",
                 static_cast<int>(error.length), error.message);
-    return glyph ? 0 : 1;
+    Config compact_negative = config;
+    compact_negative.ultimate_profile_store_format = 1;
+    compact_negative.ultimate_profile_store_incarnation = 1;
+    error = {};
+    const bool compact_rejected = !validate_glyph_config(compact_negative, error);
+    std::printf("compact_unspecified_negative=%s\n", compact_rejected ? "PASS" : "FAIL");
+    return glyph && compact_rejected ? 0 : 1;
 }
