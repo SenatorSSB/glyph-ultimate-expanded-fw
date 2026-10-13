@@ -20,6 +20,7 @@
 #include "icons/splashscreen.hpp"
 #include "glyph_overrides.hpp"
 #include "glyph_config_validation.hpp"
+#include "config_rgb_target_domain.hpp"
 #include "glyph_pinout.hpp"
 #include "matrix_definition.hpp"
 #include "reboot.hpp"
