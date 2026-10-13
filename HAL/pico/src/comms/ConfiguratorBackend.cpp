@@ -277,6 +277,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         if (request.operation == PROFILE_STORE_READ) {
             uint32_t revision = 0;
             const ProfileStore::Status status = profile_store.Read(request.profile_id, response.profile, &revision);
+            response.has_profile = status == ProfileStore::Status::Ok;
             result = {status, request.profile_id, revision, profile_store.Generation()};
         } else if (request.operation == PROFILE_STORE_CREATE) {
             result = profile_store.Create(request.profile, request.name, request.display_rank, token, digest);
