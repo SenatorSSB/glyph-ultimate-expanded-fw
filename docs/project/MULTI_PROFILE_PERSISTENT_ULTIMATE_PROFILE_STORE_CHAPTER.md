@@ -184,3 +184,20 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   arithmetic bound is 121 records, while the frozen directory maximum remains
   64. These calculations exclude target allocator geometry and are not a
   target-device capacity claim.
+
+## Hardware handoff pending owner (2026-10-13)
+
+- The immutable reviewed firmware candidate is
+  `1a753e08f3c989a0743180183f18d6aa9e3859e0` (tree
+  `ebeb1faab97666d05f93f851d036f41fbb2469df`, parent
+  `e90b36e68c8156b6113220b3381ba0057e2e4144`) from canonical base and
+  merge-base `6b73a7c507f35c111745c6bdd341618b490cbdcd`.
+- Fresh independent review PASS found no blocking defect. The exact build used
+  `python3 -m platformio run -e glyph_mk6`, measured RAM `181636 / 262144`
+  (69.3%) and flash `457340 / 1568768` (29.2%), and produced a 939008-byte
+  UF2 with SHA-256
+  `536578e22de4be8652ff39d36c75bfd570bb55899f2a302b8c245c02e81672ff`.
+- Reviewed bytes are readable in primary custody at
+  `local_backups/hardware-artifacts/1a753e08f3c989a0743180183f18d6aa9e3859e0/536578e22de4be8652ff39d36c75bfd570bb55899f2a302b8c245c02e81672ff/firmware.uf2`.
+  No hardware action has occurred and no canonical merge has occurred. This
+  source-free handoff record does not redefine the tested firmware candidate.
