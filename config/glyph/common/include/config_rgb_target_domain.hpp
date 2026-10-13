@@ -24,7 +24,8 @@ inline void normalize_legacy_glyph_rgb_noops(Config &config) {
         RgbConfig &rgb = config.rgb_configs[i];
         size_t next = 0;
         for (size_t j = 0; j < rgb.button_colors_count; ++j) {
-            if (rgb.button_colors[j].button != BTN_UNSPECIFIED) {
+            if (rgb.button_colors[j].button != BTN_UNSPECIFIED ||
+                rgb.button_colors[j].color != 0) {
                 rgb.button_colors[next++] = rgb.button_colors[j];
             }
         }

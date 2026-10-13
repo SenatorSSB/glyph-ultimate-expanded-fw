@@ -57,7 +57,9 @@ def main() -> int:
                         encoding="utf-8")
                     label_includes = [base_include, *includes]
                 exe = temp / label
-                run(["c++", "-std=c++17", "-fshort-enums", "-Wall", "-Wextra", *sum((["-I", str(i)] for i in label_includes), []),
+                run(["c++", "-std=c++17", "-fshort-enums", "-Wall", "-Wextra",
+                     *( ["-DBASE_COMPARISON"] if label == "base" else []),
+                     *sum((["-I", str(i)] for i in label_includes), []),
                      str(HOST), str(validation), *map(str, common), *map(str, objects), "-o", str(exe)])
                 result = run([str(exe), str(fixture)], check=False)
                 expected = 0 if label == "candidate" else 1

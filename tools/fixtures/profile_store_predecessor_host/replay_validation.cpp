@@ -1,5 +1,6 @@
 #include "core/config_validation.hpp"
 #include "glyph_config_validation.hpp"
+#include "config_rgb_target_domain.hpp"
 
 #include <pb_decode.h>
 
@@ -41,5 +42,28 @@ int main(int argc, char **argv) {
     error = {};
     const bool colored_rejected = !validate_glyph_config(colored_unspecified, error);
     std::printf("legacy_colored_unspecified_negative=%s\n", colored_rejected ? "PASS" : "FAIL");
+    // The source-faithful base comparison intentionally uses its historical
+    // strict domain header, which predates this normalization helper.
+#ifndef BASE_COMPARISON
+    Config normalized = config;
+    normalize_legacy_glyph_rgb_noops(normalized);
+    bool noops_removed = true;
+    for (size_t i = 0; i < normalized.rgb_configs_count; ++i) {
+        for (size_t j = 0; j < normalized.rgb_configs[i].button_colors_count; ++j) {
+            const ButtonToColorMapping &mapping = normalized.rgb_configs[i].button_colors[j];
+            if (mapping.button == BTN_UNSPECIFIED && mapping.color == 0) noops_removed = false;
+        }
+    }
+    std::printf("legacy_noop_normalization=%s\n", noops_removed ? "PASS" : "FAIL");
+    Config colored_normalized = colored_unspecified;
+    normalize_legacy_glyph_rgb_noops(colored_normalized);
+    const bool colored_preserved = colored_normalized.rgb_configs[0].button_colors_count != 0 &&
+        colored_normalized.rgb_configs[0].button_colors[0].button == BTN_UNSPECIFIED &&
+        colored_normalized.rgb_configs[0].button_colors[0].color == 1;
+    std::printf("legacy_colored_unspecified_normalization_negative=%s\n",
+                colored_preserved ? "PASS" : "FAIL");
+    return glyph && compact_rejected && colored_rejected && noops_removed && colored_preserved ? 0 : 1;
+#else
     return glyph && compact_rejected && colored_rejected ? 0 : 1;
+#endif
 }
