@@ -55,41 +55,6 @@ class CommunicationBackend {
   virtual void SendReport() = 0;
 };
 
-struct ConfigValidationError { const char *message = "invalid"; size_t length = 7; };
-
-class Persistence {
- public:
-  bool CheckSavedConfig() { return true; }
-  size_t LoadConfigRaw(Print &, bool = true) { return 0; }
-  bool ValidateConfig(const Config &, ConfigValidationError &) const { return true; }
-  bool SaveConfig(Config &) { ++save_calls; return true; }
-  uint32_t ConfigGeneration(const Config &) const { return 17; }
-  unsigned save_calls = 0;
-};
-extern Persistence persistence;
-
-class ProfileStore {
- public:
-  static constexpr uint8_t kCompactConfigFormat = 1;
-  enum class Status : uint8_t { Ok, NotFound, Invalid, Conflict, Full, IoFailure, UnknownOutcome, Referenced };
-  struct Entry { uint32_t id; uint32_t revision; uint32_t payload_version; uint32_t rank; char name[18]; };
-  struct TransactionResult { Status status = Status::NotFound; uint32_t id = 0; uint32_t revision = 0; uint32_t generation = 0; };
-  bool IsReady() const { return true; }
-  uint32_t Generation() const { return 23; }
-  size_t Count() const { return 0; }
-  const Entry *EntryAt(size_t) const { return nullptr; }
-  Status Read(uint32_t, UltimateProfile &, uint32_t * = nullptr) const { return Status::NotFound; }
-  TransactionResult Create(const UltimateProfile &, const char *, uint32_t, uint32_t, uint32_t) { ++mutation_calls; return {}; }
-  TransactionResult Update(uint32_t, const UltimateProfile &, uint32_t, uint32_t, uint32_t) { ++mutation_calls; return {}; }
-  TransactionResult Duplicate(uint32_t, uint32_t, const char *, uint32_t, uint32_t, uint32_t) { ++mutation_calls; return {}; }
-  TransactionResult Rename(uint32_t, const char *, uint32_t, uint32_t, uint32_t) { ++mutation_calls; return {}; }
-  TransactionResult Reorder(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t) { ++mutation_calls; return {}; }
-  TransactionResult Delete(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t) { ++mutation_calls; return {}; }
-  TransactionResult QueryTransaction(uint32_t, uint32_t) const { return {}; }
-  unsigned mutation_calls = 0;
-};
-extern ProfileStore profile_store;
-
 struct TinyUSBDeviceStub { void setID(uint16_t, uint16_t) {} };
 inline TinyUSBDeviceStub TinyUSBDevice;
 inline void reboot_firmware() {}

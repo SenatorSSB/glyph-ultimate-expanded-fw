@@ -1,101 +1,87 @@
 #include "host_stubs.hpp"
-
-#include <stdexcept>
-
+#include "core/Persistence.hpp"
+#include "core/ProfileStore.hpp"
+#include "core/ProfileStoreStorage.hpp"
 #include <pb_decode.h>
 #include <pb_encode.h>
-
+#include <cstdio>
+#include <cstring>
+#include <fstream>
+#include <map>
+#include <stdexcept>
+#include <string>
+#include <vector>
 #define private public
 #include "comms/ConfiguratorBackend.hpp"
 #undef private
 
 uint32_t host_millis = 0;
 Persistence persistence;
-ProfileStore profile_store;
 
-class TestStream final : public Stream {
- public:
-  std::vector<uint8_t> input;
-  std::vector<uint8_t> output;
-  size_t cursor = 0;
-  int available() override { return static_cast<int>(input.size() - cursor); }
-  int read() override { return cursor < input.size() ? input[cursor++] : -1; }
-  int peek() override { return cursor < input.size() ? input[cursor] : -1; }
-  void flush() override {}
-  size_t write(uint8_t value) override { output.push_back(value); return 1; }
-  size_t write(const uint8_t *data, size_t length) override {
-    output.insert(output.end(), data, data + length); return length;
-  }
+namespace {
+struct MemoryStorage final : ProfileStoreStorage {
+  std::map<std::string, std::vector<uint8_t>> files;
+  bool Write(const char *p, const uint8_t *b, size_t n) override { files[p] = {b, b + n}; return true; }
+  bool Read(const char *p, uint8_t *b, size_t n) override { auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; std::memcpy(b,i->second.data(),n);return true; }
+  size_t Size(const char *p) override { auto i=files.find(p);return i==files.end()?0:i->second.size(); }
+  bool Remove(const char *p) override { files.erase(p);return true; }
+  bool Rename(const char *a,const char *b) override { auto i=files.find(a);if(i==files.end())return false;files[b]=i->second;files.erase(i);return true; }
 };
-
-static void require(bool value, const char *message) { if (!value) throw std::runtime_error(message); }
-
-static std::vector<uint8_t> decode(const std::vector<uint8_t> &encoded) {
-  require(!encoded.empty() && encoded.back() == 0, "missing COBS delimiter");
-  std::vector<uint8_t> decoded;
-  for (size_t offset = 0; offset + 1 < encoded.size();) {
-    const uint8_t count = encoded[offset++];
-    require(count != 0 && offset + count - 1 <= encoded.size(), "malformed COBS response");
-    decoded.insert(decoded.end(), encoded.begin() + offset, encoded.begin() + offset + count - 1);
-    offset += count - 1;
-    if (count != 0xff && offset + 1 < encoded.size()) decoded.push_back(0);
-  }
-  return decoded;
+MemoryStorage storage;
+void require(bool ok, const char *m) { if (!ok) throw std::runtime_error(m); }
+class DuplexStream final : public Stream {
+ public:
+  std::vector<uint8_t> rx, tx; size_t pos=0;
+  int available() override { return static_cast<int>(rx.size()-pos); }
+  int read() override { return pos<rx.size()?rx[pos++]:-1; }
+  int peek() override { return pos<rx.size()?rx[pos]:-1; }
+  void flush() override {}
+  size_t write(uint8_t b) override { tx.push_back(b);return 1; }
+  size_t write(const uint8_t *b,size_t n) override { tx.insert(tx.end(),b,b+n);return n; }
+  void append(const std::vector<uint8_t>& b){rx.insert(rx.end(),b.begin(),b.end());}
+  size_t remaining()const{return rx.size()-pos;} void clear(){tx.clear();}
+};
+std::vector<uint8_t> decode(const std::vector<uint8_t>& in) {
+  require(!in.empty()&&in.back()==0,"COBS delimiter");std::vector<uint8_t> out;
+  for(size_t o=0;o+1<in.size();) { uint8_t c=in[o++];require(c&&o+c-1<=in.size(),"COBS valid");out.insert(out.end(),in.begin()+o,in.begin()+o+c-1);o+=c-1;if(c!=0xff&&o+1<in.size())out.push_back(0); } return out;
 }
-
-static std::vector<uint8_t> status_packet() {
-  ProfileStoreRequest request = ProfileStoreRequest_init_default;
-  request.protocol_version = 1;
-  request.operation = PROFILE_STORE_STATUS;
-  size_t size = 0;
-  require(pb_get_encoded_size(&size, ProfileStoreRequest_fields, &request), "status size");
-  std::vector<uint8_t> raw(size);
-  pb_ostream_t output = pb_ostream_from_buffer(raw.data(), raw.size());
-  require(pb_encode(&output, ProfileStoreRequest_fields, &request), "status encode");
-  raw.resize(output.bytes_written);
-  TestStream wire;
-  packetio::COBSPrint encoder(wire);
-  encoder.write(static_cast<uint8_t>(CMD_PROFILE_STORE));
-  encoder.write(raw.data(), raw.size());
-  require(encoder.end(), "status frame end");
-  return wire.output;
+std::vector<uint8_t> frame(const ProfileStoreRequest& request) {
+  size_t n=0;require(pb_get_encoded_size(&n,ProfileStoreRequest_fields,&request),"request size");std::vector<uint8_t> data(n);pb_ostream_t pb=pb_ostream_from_buffer(data.data(),data.size());require(pb_encode(&pb,ProfileStoreRequest_fields,&request),"request encode");data.resize(pb.bytes_written);
+  DuplexStream wire;packetio::COBSPrint out(wire);out.write(static_cast<uint8_t>(CMD_PROFILE_STORE));out.write(data.data(),data.size());require(out.end(),"real COBS end");require(wire.tx.back()==0,"request delimiter");return wire.tx;
 }
-
-int main() {
-  try {
-    InputState inputs;
-    Config config = Config_init_default;
-    TestStream wire;
-    ConfiguratorBackend backend(inputs, nullptr, 0, config, wire);
-    const Config before = config;
-    const uint32_t generation_before = profile_store.Generation();
-
-    // Real COBS: code 3 decodes to command 9 plus the incomplete protobuf byte 0x08.
-    wire.input = {3, static_cast<uint8_t>(CMD_PROFILE_STORE), 0x08};
-    backend.SendReport();
-    const std::vector<uint8_t> timeout = decode(wire.output);
-    require(timeout.size() == 1 + std::strlen("Profile store frame timeout"), "timeout response shape");
-    require(timeout[0] == CMD_ERROR, "timeout command");
-    require(std::memcmp(timeout.data() + 1, "Profile store frame timeout", timeout.size() - 1) == 0, "timeout text");
-    require(std::memcmp(&before, &config, sizeof(Config)) == 0, "timeout mutated Config");
-    require(profile_store.Generation() == generation_before && profile_store.mutation_calls == 0, "timeout mutated ProfileStore");
-    require(host_millis >= 5000, "virtual clock did not cross timeout");
-
-    const std::vector<uint8_t> later = status_packet();
-    wire.input.insert(wire.input.end(), 0);  // required delimiter resynchronizes the aborted frame.
-    wire.input.insert(wire.input.end(), later.begin(), later.end());
-    wire.output.clear();
-    backend.SendReport();
-    const std::vector<uint8_t> accepted = decode(wire.output);
-    require(!accepted.empty() && accepted[0] == CMD_PROFILE_STORE, "later STATUS not accepted");
-    ProfileStoreResponse response = ProfileStoreResponse_init_default;
-    pb_istream_t input = pb_istream_from_buffer(accepted.data() + 1, accepted.size() - 1);
-    require(pb_decode(&input, ProfileStoreResponse_fields, &response), "STATUS response decode");
-    require(response.status == PROFILE_STORE_OK, "STATUS result");
-    require(std::memcmp(&before, &config, sizeof(Config)) == 0, "STATUS changed Config");
-    require(profile_store.mutation_calls == 0, "STATUS changed ProfileStore");
-    return 0;
-  } catch (const std::exception &error) {
-    return 1;
-  }
+ProfileStoreResponse response(const DuplexStream& wire) {
+  const auto data=decode(wire.tx);require(!data.empty()&&data[0]==CMD_PROFILE_STORE,"response command");ProfileStoreResponse r=ProfileStoreResponse_init_default;pb_istream_t pb=pb_istream_from_buffer(data.data()+1,data.size()-1);require(pb_decode(&pb,ProfileStoreResponse_fields,&r)&&pb.bytes_left==0,"response decode");return r;
 }
+void seed(const char* path,Config* config) {
+  std::ifstream f(path,std::ios::binary);require(bool(f),"fixture open");std::vector<uint8_t> bytes((std::istreambuf_iterator<char>(f)),{});pb_istream_t pb=pb_istream_from_buffer(bytes.data(),bytes.size());*config=Config_init_default;require(pb_decode(&pb,Config_fields,config)&&pb.bytes_left==0&&config->ultimate_profiles_count==2,"two real fixture profiles");
+  require(profile_store.Begin(),"ProfileStore begin");uint32_t ids[2]={};require(profile_store.ImportLegacy(*config,ids,2)==ProfileStore::Status::Ok&&ids[0]&&ids[1],"ProfileStore import");Config compact=Config_init_default;compact.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;compact.ultimate_profile_store_incarnation=profile_store.Incarnation();require(profile_store.CompleteMigration(compact)==ProfileStore::Status::Ok&&profile_store.Count()==2,"ProfileStore ready");*config=compact;
+}
+ProfileStoreRequest list() { ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_LIST;r.page_size=8;r.request_token=0x51;return r; }
+ProfileStoreRequest status() { ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_STATUS;r.request_token=0x52;return r; }
+void expect_list(const DuplexStream& wire) { const auto r=response(wire);require(r.status==PROFILE_STORE_OK&&r.entries_count==2&&r.next_page_cursor==0,"LIST result");require(r.entries[0].profile_id&&r.entries[1].profile_id&&r.entries[0].profile_id!=r.entries[1].profile_id,"two listed profiles"); }
+void expect_status(const DuplexStream& wire) { require(response(wire).status==PROFILE_STORE_OK,"STATUS result"); }
+void consecutive_lists(ConfiguratorBackend& b,DuplexStream& wire) {
+  const auto request=frame(list());for(int i=0;i<3;++i){wire.clear();wire.append(request);b.SendReport();
+#ifdef EXPECT_DUPLICATE_NEXT_DROP
+    if(i==1)require(wire.tx.empty(),"original duplicate-next drops second LIST");else expect_list(wire);
+#else
+    expect_list(wire);
+#endif
+    require(wire.remaining()==0,"no unexplained RX tail");}
+}
+void timeout_and_cap(ConfiguratorBackend& b,DuplexStream& wire,const Config& baseline) {
+  const uint32_t generation=profile_store.Generation();wire.clear();wire.append({3,static_cast<uint8_t>(CMD_PROFILE_STORE),0x08});b.SendReport();const auto timeout=decode(wire.tx);require(timeout.size()==1+std::strlen("Profile store frame timeout")&&timeout[0]==CMD_ERROR,"timeout error");require(host_millis>=5000&&std::memcmp(&baseline,&b._config,sizeof(Config))==0&&profile_store.Generation()==generation,"timeout state preserved");
+  const auto valid=frame(status());wire.clear();wire.append(valid);b.SendReport();require(wire.tx.empty(),"no delimiter rejects following STATUS");wire.clear();wire.append(valid);b.SendReport();expect_status(wire);
+  DuplexStream oversized;packetio::COBSPrint out(oversized);out.write(static_cast<uint8_t>(CMD_PROFILE_STORE));std::vector<uint8_t> body(8192,0x55);out.write(body.data(),body.size());require(out.end(),"oversized COBS end");wire.clear();wire.append(oversized.tx);b.SendReport();const auto cap=decode(wire.tx);require(cap.size()==30&&cap[0]==CMD_ERROR&&profile_store.Generation()==generation,"8192 cap bounded failure");wire.clear();wire.append(valid);b.SendReport();expect_status(wire);
+}
+} // namespace
+ProfileStore profile_store(&storage);
+int main(int argc,char**argv) { try { require(argc==2,"usage");InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
+#ifndef EXPECT_DUPLICATE_NEXT_DROP
+const Config baseline=config;
+#endif
+DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);consecutive_lists(backend,wire);
+#ifndef EXPECT_DUPLICATE_NEXT_DROP
+timeout_and_cap(backend,wire,baseline);
+#endif
+return 0;}catch(const std::exception&e){std::fprintf(stderr,"FAIL: %s\n",e.what());return 1;} }

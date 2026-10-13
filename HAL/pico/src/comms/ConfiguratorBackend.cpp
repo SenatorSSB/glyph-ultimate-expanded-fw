@@ -69,8 +69,14 @@ void ConfiguratorBackend::SendReport() {
             HandleSetConfig();
             break;
         case CMD_PROFILE_STORE:
+            // HandleProfileStore consumes the complete framed request through
+            // ReadPacket(), which advances the PacketIO reader after EOP (or
+            // starts its documented delimiter-based resynchronization).
+            // Returning here avoids advancing a second time and dropping the
+            // following valid request. Other configurator commands retain
+            // their existing packet-ownership lifecycle below.
             HandleProfileStore();
-            break;
+            return;
         case CMD_REBOOT_FIRMWARE:
             reboot_firmware();
             break;
