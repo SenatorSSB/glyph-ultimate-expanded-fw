@@ -161,7 +161,15 @@ host-schema mismatch claim: the pinned host tool already uses tracked
 - The earlier `40 02` field-8 observation remains unproven and is not evidence
   of a ProfileStore or Nanopb defect. The source-faithful full-stream proof
   supersedes it for this transport question; no protobuf repair was made on
-  that observation. Broader Configurator CRUD coverage remains incomplete.
+  that observation.
+- `3ca15f2f` corrects a separate v1 READ serialization defect discovered
+  by the same real-stream harness: successful reads populated `response.profile`
+  but omitted Nanopb's `has_profile`, so the encoded response lacked the
+  profile payload. The current matrix drives STATUS, LIST, CREATE, READ,
+  UPDATE, DUPLICATE, RENAME, REORDER, DELETE, SET_MODE_REFERENCE, and
+  QUERY_TRANSACTION through one retained backend; it also checks malformed
+  protocol rejection, missing-ID, stale-generation conflict, referenced-delete
+  refusal, and subsequent STATUS continuity.
 - The same W5 build's target ELF section report records `.data = 40260` and
   `.bss = 141376` bytes; PlatformIO reports total RAM `181636 / 262144` and
   program flash `457340 / 1568768`. The compiler warns of `2632` bytes stack
