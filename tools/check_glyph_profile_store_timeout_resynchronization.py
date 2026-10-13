@@ -89,7 +89,7 @@ def main() -> int:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true consecutive_list=3 duplicate_next_negative=true timeout_resync=true frame_cap=8192")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
     return 0
 
 
