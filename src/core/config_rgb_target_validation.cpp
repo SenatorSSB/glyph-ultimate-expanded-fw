@@ -25,10 +25,11 @@ static_assert(std::numeric_limits<ButtonStorage>::digits == sizeof(Button) * CHA
 static_assert(sizeof(Button) == 1 || sizeof(Button) == 4,
               "Button representation must match a verified one- or four-byte ABI");
 
-bool is_physical_target(const Button &button, const Button *targets, size_t count) {
+bool is_physical_target(const Button &button, const Button *targets, size_t count,
+                        bool allow_unspecified) {
     const Button absent = BTN_UNSPECIFIED;
     if (std::memcmp(&button, &absent, sizeof(Button)) == 0) {
-        return false;
+        return allow_unspecified;
     }
     for (size_t i = 0; i < count; ++i) {
         if (std::memcmp(&button, &targets[i], sizeof(Button)) == 0) {
@@ -41,7 +42,8 @@ bool is_physical_target(const Button &button, const Button *targets, size_t coun
 
 bool validate_config_rgb_targets(const Config &config,
                                  const Button *physical_targets,
-                                 size_t physical_target_count) {
+                                 size_t physical_target_count,
+                                 bool allow_unspecified) {
     if (physical_targets == nullptr && physical_target_count != 0) {
         return false;
     }
@@ -61,7 +63,7 @@ bool validate_config_rgb_targets(const Config &config,
         const RgbConfig &rgb = config.rgb_configs[i];
         for (size_t j = 0; j < rgb.button_colors_count; ++j) {
             if (!is_physical_target(rgb.button_colors[j].button,
-                                    physical_targets, physical_target_count)) {
+                                    physical_targets, physical_target_count, allow_unspecified)) {
                 return false;
             }
         }

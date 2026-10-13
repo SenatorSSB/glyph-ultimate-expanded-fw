@@ -222,6 +222,11 @@ void setup() {
             return;
         }
         Config compact = config;
+        // Historical persisted Configs can contain explicitly encoded RGB
+        // no-op slots. They were accepted before strict physical-target
+        // validation; remove only those no-ops while producing the compact
+        // successor so ordinary compact Config validation remains strict.
+        normalize_legacy_glyph_rgb_noops(compact);
         compact.ultimate_profiles_count = 0;
         compact.ultimate_profile_store_format = ProfileStore::kCompactConfigFormat;
         compact.ultimate_profile_store_incarnation = profile_store.Incarnation();

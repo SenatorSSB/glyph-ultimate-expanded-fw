@@ -18,4 +18,5 @@
 // This function does not mutate Config, allocate, or access persistence.
 bool validate_config_rgb_targets(const Config &config,
                                  const Button *physical_targets,
-                                 size_t physical_target_count);
+                                 size_t physical_target_count,
+                                 bool allow_unspecified = false);
