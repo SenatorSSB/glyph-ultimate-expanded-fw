@@ -142,29 +142,26 @@ host-schema mismatch claim: the pinned host tool already uses tracked
 
 ## Post-W5 continuation evidence (2026-10-13)
 
-- `bc5aac660ac30235c452991b16c2190088244114` adds the deterministic
-  Configurator partial-frame proof. It compiles the production
-  `ConfiguratorBackend.cpp` with the provisioned PacketIO COBS parser and
-  generated Nanopb schema, advances a virtual `millis()` clock past five
-  seconds, observes the explicit timeout error, proves no Config/ProfileStore
-  mutation through the host doubles, consumes the required delimiter, and
-  accepts a later v1 STATUS frame. The checker also source-binds the 8192-byte
-  frame cap. It is deterministic host evidence, not hardware acceptance.
+- `ed49c64ebdf9c4f13167126d726838b2de24fdd9` repairs a command-scoped
+  Configurator lifecycle defect: ProfileStore's `ReadPacket()` owns the
+  PacketIO advance after EOP, so `SendReport()` must return after that handler
+  rather than advance a second time. The upgraded deterministic host proof
+  compiles the real backend, production PacketIO COBS, generated Nanopb, and
+  real injected-storage ProfileStore. It proves three consecutive LIST frames
+  all receive valid two-entry responses, while a test-only reconstruction of
+  the original duplicate advance drops the second request. It also proves the
+  five-second partial-frame timeout, required delimiter resynchronization,
+  stable later STATUS recovery, and behavioral 8192-byte cap rejection with
+  no Config/ProfileStore mutation. This is host evidence, not hardware
+  acceptance.
 - The checked W5 head builds with `python3 -m platformio run -e glyph_mk6`;
   the observed build reported RAM `181636 / 262144` (69.3%) and flash
   `457340 / 1568768` (29.2%). These are continuation measurements, not final
   exact-candidate custody measurements.
-- A bounded host-double investigation of the LIST response found decoded bytes
-  `09 08 01 10 82 80 80 80 10 18 01 20 17 28 01 30 0b 40 02` after asking the
-  real Configurator backend to enumerate two doubled entries. Field 8 is
-  emitted with varint wire type (`40 02`) although the tracked schema declares
-  `repeated ProfileStoreEntry entries = 8`, which requires a length-delimited
-  wire type. The observation reproduced with and without `PB_FIELD_32BIT` in
-  that double. Direct Nanopb and `pb_arduino`/PacketIO encodes of the same
-  response shape emit the correct length-delimited field, so this double is
-  not adequate evidence of a production protocol defect. Root cause and
-  target-device impact remain UNPROVEN; no speculative protocol/source change
-  has been made, and Configurator CRUD coverage remains incomplete.
+- The earlier `40 02` field-8 observation remains unproven and is not evidence
+  of a ProfileStore or Nanopb defect. The source-faithful full-stream proof
+  supersedes it for this transport question; no protobuf repair was made on
+  that observation. Broader Configurator CRUD coverage remains incomplete.
 - The same W5 build's target ELF section report records `.data = 40260` and
   `.bss = 141376` bytes; PlatformIO reports total RAM `181636 / 262144` and
   program flash `457340 / 1568768`. The compiler warns of `2632` bytes stack
