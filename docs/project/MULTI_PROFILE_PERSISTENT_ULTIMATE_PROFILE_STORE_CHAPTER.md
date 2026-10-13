@@ -201,3 +201,28 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   `local_backups/hardware-artifacts/1a753e08f3c989a0743180183f18d6aa9e3859e0/536578e22de4be8652ff39d36c75bfd570bb55899f2a302b8c245c02e81672ff/firmware.uf2`.
   No hardware action has occurred and no canonical merge has occurred. This
   source-free handoff record does not redefine the tested firmware candidate.
+
+## Real-predecessor compatibility repair (2026-10-14)
+
+- Candidate `1a753e08f3c989a0743180183f18d6aa9e3859e0` and UF2
+  `536578e22de4be8652ff39d36c75bfd570bb55899f2a302b8c245c02e81672ff`
+  are permanently recorded as **HARDWARE_FAIL — REAL_PREDECESSOR_CONFIG_REJECTED
+  BEFORE_MIGRATION**. The owner observed `Stored Config rejected`, `Recovery
+  required`, and `Operation refused` immediately after flashing; no store
+  command, Config write, migration, or reset followed that observation.
+- The byte-exact physical predecessor fixture is
+  `local_backups/hardware-tests/multi-profile-store-20261013/preflash-config-backup.json`:
+  4201 bytes after base64 decoding, SHA-256
+  `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`.
+  The source-faithful host replay decodes it completely and passes extents and
+  generic semantics. Its first failure on the frozen base validation route is
+  Glyph RGB target validation: historical zero-color `BTN_UNSPECIFIED` entries
+  are not physical targets.
+- The repair admits only those exact zero-color legacy RGB no-op entries while
+  `ultimate_profile_store_format == 0`; normal compact Configs remain strict.
+  Color-bearing unspecified entries still reject, and the helper removes only
+  the admitted no-ops when a legacy Config is actually converted to compact
+  form. The captured Config contains zero embedded Ultimate profiles, so no
+  ProfileStore import or compact successor is applicable to that exact input;
+  the compatibility proof is normal legacy boot admission, not an invented
+  migration transition.
