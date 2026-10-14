@@ -247,3 +247,20 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   existing-destination remove failure, temporary write/read verification
   failures, and rename interruption. F2 is not reusable for another mutation
   attempt; its passing read-only observations remain valid evidence.
+
+## First CREATE diagnostic follow-up (2026-10-15)
+
+- Candidate `8e088b5d1c2629bb225f990128628bfa419e6c7d` and UF2
+  `7e18bd1cff7dfb8ff267c0a2b5bdecc99b10c84b21c3ee2a3cc5c8910f9c1827`
+  are permanently recorded as **HARDWARE_FAIL — FIRST_PROFILESTORE_CREATE_IO_FAILURE**.
+  Exact flash, normal boot, Menu Configurator, and empty ProfileStore
+  STATUS/LIST passed; the single first CREATE again returned
+  `PROFILE_STORE_IO_FAILURE`, with no retry or later mutation.
+- The absent-destination remove mismatch remains valid host-test fidelity and
+  storage-contract hardening, but F3 proves it was not the complete physical
+  root cause. The physical failure is now classified
+  **FIRST_CREATE_PHYSICAL_IO_FAILURE — EXACT_STAGE_UNRESOLVED**.
+- The next candidate is diagnostic-only: it reports an ephemeral exact record
+  I/O stage through existing `ProfileStoreResponse.diagnostic` on an I/O
+  failure. It changes neither persistent schema nor ProfileStore status
+  vocabulary or publication ordering.
