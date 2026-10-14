@@ -91,9 +91,19 @@ void timeout_and_cap(ConfiguratorBackend& b,DuplexStream& wire,const Config& bas
   const auto valid=frame(status());wire.clear();wire.append(valid);b.SendReport();require(wire.tx.empty(),"no delimiter rejects following STATUS");wire.clear();wire.append(valid);b.SendReport();expect_status(wire);
   DuplexStream oversized;packetio::COBSPrint out(oversized);out.write(static_cast<uint8_t>(CMD_PROFILE_STORE));std::vector<uint8_t> body(8192,0x55);out.write(body.data(),body.size());require(out.end(),"oversized COBS end");wire.clear();wire.append(oversized.tx);b.SendReport();const auto cap=decode(wire.tx);require(cap.size()==30&&cap[0]==CMD_ERROR&&profile_store.Generation()==generation,"8192 cap bounded failure");wire.clear();wire.append(valid);b.SendReport();expect_status(wire);
 }
+void first_create_from_empty(const char *path) {
+  std::ifstream f(path,std::ios::binary);require(bool(f),"fixture open");std::vector<uint8_t> bytes((std::istreambuf_iterator<char>(f)),{});pb_istream_t pb=pb_istream_from_buffer(bytes.data(),bytes.size());Config config=Config_init_default;require(pb_decode(&pb,Config_fields,&config)&&pb.bytes_left==0&&config.ultimate_profiles_count==2,"two real fixture profiles");
+  const UltimateProfile profile=config.ultimate_profiles[0];config.ultimate_profiles_count=0;config.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;config.ultimate_profile_store_incarnation=1;
+  require(profile_store.Begin()&&profile_store.Count()==0,"empty ProfileStore begin");
+  InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
+  ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.expected_store_generation=profile_store.Generation();r.has_profile=true;r.profile=profile;std::strcpy(r.name,"First create");r.display_rank=1;r.request_token=0x401;const auto made=send(backend,wire,r);require(made.status==PROFILE_STORE_OK&&made.profile_id==1&&made.profile_revision==1,"empty-store CREATE");
+  r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_LIST;r.expected_store_generation=profile_store.Generation();r.page_size=8;r.request_token=0x402;const auto listed=send(backend,wire,r);require(listed.status==PROFILE_STORE_OK&&listed.entries_count==1&&listed.entries[0].profile_id==made.profile_id,"empty-store LIST");
+  r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_READ;r.expected_store_generation=profile_store.Generation();r.profile_id=made.profile_id;r.request_token=0x403;const auto read=send(backend,wire,r);require(read.status==PROFILE_STORE_OK&&read.has_profile&&read.profile_id==made.profile_id,"empty-store READ");
+  std::puts("profile_store_full_stream_empty_create=PASS");
+}
 } // namespace
 ProfileStore profile_store(&storage);
-int main(int argc,char**argv) { try { require(argc==2,"usage");InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
+int main(int argc,char**argv) { try { require(argc==2||(argc==3&&std::strcmp(argv[2],"--empty-create")==0),"usage");if(argc==3){first_create_from_empty(argv[1]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
 #ifndef EXPECT_DUPLICATE_NEXT_DROP
 const Config baseline=config;
 #endif

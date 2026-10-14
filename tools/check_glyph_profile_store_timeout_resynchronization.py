@@ -65,6 +65,10 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool) ->
             *sum((["-I", str(item)] for item in includes), []), str(HOST / "timeout_harness.cpp"),
             *map(str, objects), "-o", str(exe)])
     invoke([str(exe), str(fixture)])
+    if not original:
+        empty_create = invoke([str(exe), str(fixture), "--empty-create"])
+        if "profile_store_full_stream_empty_create=PASS" not in empty_create:
+            raise AssertionError("full-stream empty CREATE evidence missing")
 
 
 def main() -> int:
@@ -89,7 +93,7 @@ def main() -> int:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
     return 0
 
 
