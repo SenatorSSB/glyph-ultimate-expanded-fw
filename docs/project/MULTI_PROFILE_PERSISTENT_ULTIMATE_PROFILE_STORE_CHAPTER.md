@@ -264,3 +264,23 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   I/O stage through existing `ProfileStoreResponse.diagnostic` on an I/O
   failure. It changes neither persistent schema nor ProfileStore status
   vocabulary or publication ordering.
+
+## First CREATE diagnostic instrumentation (2026-10-15)
+
+- The diagnostic candidate records an ephemeral `ProfileStoreIoStage` for the
+  first failed record-publication operation and maps it only on
+  `PROFILE_STORE_IO_FAILURE` to the existing response `diagnostic` field:
+  `record.encode_size`, `record.encode`, `record.temp_open_write`,
+  `record.temp_write`, `record.temp_read`, `record.temp_size`,
+  `record.verify`, `record.dest_remove`, or `record.rename`.
+  It neither persists the stage nor changes record/write ordering.
+- Diagnostics reset at the start of every decoded ProfileStore request. The
+  retained real-stream regression first injects `record.temp_write`, then
+  makes the separate `SET_MODE_REFERENCE` persistence save fail and requires
+  its `PROFILE_STORE_IO_FAILURE` response to have an empty diagnostic. This
+  prevents stale record-stage labels from crossing transaction boundaries.
+- Real COBS/PacketIO/Nanopb/Configurator/ProfileStore host coverage injects
+  each reported record failure and requires its exact diagnostic, while the
+  empty-store CREATE success path requires an empty diagnostic followed by
+  LIST and READ persistence. Fresh independent review passed the request-bound
+  reset and this regression at `36d5991f85373081940a0b474a845bc8d8fb06ed`.
