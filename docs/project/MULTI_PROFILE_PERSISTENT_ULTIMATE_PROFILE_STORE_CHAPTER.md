@@ -284,3 +284,31 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   empty-store CREATE success path requires an empty diagnostic followed by
   LIST and READ persistence. Fresh independent review passed the request-bound
   reset and this regression at `36d5991f85373081940a0b474a845bc8d8fb06ed`.
+
+## First CREATE physical root cause and filename-limit repair (2026-10-15)
+
+- F2 and F3 remain **HARDWARE_FAIL — FIRST_PROFILESTORE_CREATE_IO_FAILURE**:
+  their first CREATE failure stage was unknown at the time. F3's absent-record
+  removal hardening remains valid host/storage-contract work, but did not clear
+  the physical blocker.
+- F4 (`3e093348f9f4d7584375d60b293bb4b4c809919f`) is permanently recorded as
+  **HARDWARE_FAIL — FIRST_PROFILESTORE_CREATE_IO_FAILURE** with exact
+  diagnostic `record.temp_open_write`. The physical root cause is
+  **PROFILE_STORE_RECORD_TEMP_FILENAME_EXCEEDS_PINNED_LITTLEFS_COMPONENT_LIMIT**.
+  This repository pins Arduino-Pico 3.6.3. Its `LittleFS.h` defines
+  `LFS_NAME_MAX` as 32 and `LittleFSImpl::pathValid()` rejects a component with
+  length `>= LFS_NAME_MAX`; the older dismissal based on current framework
+  master did not apply to this deployed pin.
+- The immutable record path `/ultimate-%08lx-%08lx.bin` has a 30-character
+  basename. F4 constructed its temporary record by appending `.tmp`, producing
+  a 34-character `.bin.tmp` basename that the pinned wrapper rejects before
+  opening. The repair retains the destination and instead writes temporary
+  records as `/ultimate-%08lx-%08lx.tmp`, also 30 characters.
+- `ProfileStorePaths.hpp` now owns the deployed maximum component length (31),
+  compile-time checks for record and directory/root filenames, and the sole
+  production formatting functions. Real-stream host coverage models the
+  Arduino-Pico 3.6.3 component rule, reconstructs F4's old suffix in a
+  test-only mutation (requiring `record.temp_open_write`), and proves repaired
+  CREATE/reboot plus `ImportLegacy`/compact migration/reload with strict path
+  validation. IDs/revisions at `UINT32_MAX` and both directory slots are
+  asserted within the project bound.

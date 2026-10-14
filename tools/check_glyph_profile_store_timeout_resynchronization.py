@@ -25,7 +25,7 @@ def compile_object(source: Path, target: Path, includes: list[Path], extra: list
             *sum((["-I", str(item)] for item in includes), []), "-c", str(source), "-o", str(target)])
 
 
-def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool) -> None:
+def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, legacy_record_temp: bool = False) -> None:
     nanopb = Path(os.environ.get("GLYPH_PROFILE_STORE_NANOPB", str(NANOPB)))
     libs = ROOT / ".pio/libdeps/glyph_mk6"
     includes = [HOST / "include", ROOT / "HAL/pico/include", ROOT / "include", generated, nanopb,
@@ -39,8 +39,15 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool) ->
                 "-c", str(source), "-o", str(target)])
         objects.append(target)
     profile = temp / "profile.o"
-    compile_object(ROOT / "HAL/pico/src/core/ProfileStore.cpp", profile, includes,
-                   ["-Dprofile_store=production_profile_store"])
+    profile_source = ROOT / "HAL/pico/src/core/ProfileStore.cpp"
+    if legacy_record_temp:
+        profile_source = temp / "ProfileStore.legacy-temp.cpp"
+        text = (ROOT / "HAL/pico/src/core/ProfileStore.cpp").read_text(encoding="utf-8")
+        needle = "ProfileStorePaths::RecordTemporaryPath(temporary, sizeof(temporary), id, revision);"
+        if needle not in text:
+            raise AssertionError("record temporary path repair shape missing")
+        profile_source.write_text(text.replace(needle, 'std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);', 1), encoding="utf-8")
+    compile_object(profile_source, profile, includes, ["-Dprofile_store=production_profile_store"])
     objects.append(profile)
     for name, source in (("validation", ROOT / "src/core/config_validation.cpp"),
                          ("button", ROOT / "src/core/config_button_validation.cpp"),
@@ -60,7 +67,7 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool) ->
     backend = temp / ("backend-original.o" if original else "backend.o")
     compile_object(backend_source, backend, includes); objects.append(backend)
     exe = temp / ("original" if original else "repaired")
-    flags = ["-DEXPECT_DUPLICATE_NEXT_DROP"] if original else []
+    flags = (["-DEXPECT_DUPLICATE_NEXT_DROP"] if original else []) + (["-DEXPECT_LEGACY_RECORD_TEMP_PATH"] if legacy_record_temp else [])
     invoke(["c++", "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-error=inconsistent-missing-override", "-Wno-error=unused-function", *flags,
             *sum((["-I", str(item)] for item in includes), []), str(HOST / "timeout_harness.cpp"),
             *map(str, objects), "-o", str(exe)])
@@ -77,6 +84,16 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool) ->
         reset = invoke([str(exe), str(fixture), "--io-stale-reset"])
         if "profile_store_full_stream_diagnostic_reset=PASS" not in reset:
             raise AssertionError("request-bound diagnostic reset evidence missing")
+        path_limited_create = invoke([str(exe), str(fixture), "--path-limit-create"])
+        if legacy_record_temp:
+            if "profile_store_full_stream_legacy_path_rejected=PASS" not in path_limited_create:
+                raise AssertionError("legacy temporary-name rejection evidence missing")
+        else:
+            if "profile_store_full_stream_path_limited_create=PASS" not in path_limited_create:
+                raise AssertionError("strict LittleFS component-limit CREATE evidence missing")
+            path_limited_import = invoke([str(exe), str(fixture), "--path-limit-import"])
+            if "profile_store_strict_path_import=PASS" not in path_limited_import:
+                raise AssertionError("strict LittleFS component-limit ImportLegacy evidence missing")
 
 
 def main() -> int:
@@ -96,12 +113,13 @@ def main() -> int:
             _, payload = writer.encode_artifact_payload(make_v3_artifact(), config_pb2, json_format)
             fixture = temp / "stage-b-two-v3.pb"; fixture.write_bytes(payload)
             build_and_run(temp, generated, fixture, True)
+            legacy = build_and_run(temp, generated, fixture, False, True)
             build_and_run(temp, generated, fixture, False)
     except (AssertionError, OSError, RuntimeError, subprocess.CalledProcessError, ValueError, KeyError, TypeError) as error:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename diagnostic_reset=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
     return 0
 
 

@@ -1,6 +1,7 @@
 #include "core/ProfileStore.hpp"
 #include "core/ProfileStoreAtomicCommit.hpp"
 #include "core/ProfileStoreCapacity.hpp"
+#include "core/ProfileStorePaths.hpp"
 #include "core/ProfileStoreStorage.hpp"
 
 #include "core/config_validation.hpp"
@@ -45,11 +46,6 @@ bool WriteAll(File &file, const uint8_t *bytes, size_t length) {
 bool ReadAll(File &file, uint8_t *bytes, size_t length) {
     return file.read(bytes, length) == static_cast<int>(length) && file.available() == 0;
 }
-void DirectoryPath(char *out, size_t length, uint8_t slot) { std::snprintf(out, length, "/ultimate-dir-%u.bin", slot); }
-void RecordPath(char *out, size_t length, uint32_t id, uint32_t revision) {
-    std::snprintf(out, length, "/ultimate-%08lx-%08lx.bin", static_cast<unsigned long>(id), static_cast<unsigned long>(revision));
-}
-
 } // namespace
 
 struct ProfileStore::Directory {
@@ -150,7 +146,7 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
 };
 
 bool ReadDirectorySlot(ProfileStoreStorage &storage, uint8_t slot, ProfileStore::Directory *directory) {
-    char path[32]; DirectoryPath(path, sizeof(path), slot);
+    char path[32]; ProfileStorePaths::DirectoryPath(path, sizeof(path), slot);
     static uint8_t wire[kDirectoryWireBytes];
     return storage.Read(path, wire, sizeof(wire)) && DecodeDirectory(wire, directory);
 }
@@ -225,7 +221,7 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
     if (!_ready || _read_only_recovery) return false;
     static uint8_t wire[kDirectoryWireBytes];
     if (!EncodeDirectory(next, wire)) return false;
-    const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[40]; DirectoryPath(path, sizeof(path), slot); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
+    const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[32]; ProfileStorePaths::DirectoryPath(path, sizeof(path), slot); ProfileStorePaths::DirectoryTemporaryPath(temporary, sizeof(temporary), slot);
     static Directory verified;
     verified = {};
     if (!ProfileStoreAtomicCommit::ReplaceInactiveRoot(*_storage, temporary, path, wire, sizeof(wire),
@@ -256,7 +252,7 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
         return false;
     }
     Put32(record + 24, Crc32(record, 24)); Put32(record + 28, Crc32(record + kRecordHeaderSize, length));
-    char path[64], temporary[72]; RecordPath(path, sizeof(path), id, revision); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
+    char path[64], temporary[64]; ProfileStorePaths::RecordPath(path, sizeof(path), id, revision); ProfileStorePaths::RecordTemporaryPath(temporary, sizeof(temporary), id, revision);
     const RecordCommitContext expected{Incarnation(), id, revision};
     return ProfileStoreAtomicCommit::ReplaceVerifiedFile(*_storage, temporary, path, record,
             kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected),
@@ -265,7 +261,7 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
 void ProfileStore::ResetDiagnostic() { _last_io_stage = ProfileStoreIoStage::None; }
 const char *ProfileStore::LastDiagnostic() const { return ProfileStoreIoDiagnostic(_last_io_stage); }
 bool ProfileStore::ReadProfile(uint32_t id, uint32_t revision, UltimateProfile &into) const {
-    char path[64]; RecordPath(path, sizeof(path), id, revision);
+    char path[64]; ProfileStorePaths::RecordPath(path, sizeof(path), id, revision);
     const size_t wire_size = _storage->Size(path);
     static uint8_t wire[kMaxRecordWireBytes];
     if (wire_size < kRecordHeaderSize || wire_size > sizeof(wire) || !_storage->Read(path, wire, wire_size)) return false;
