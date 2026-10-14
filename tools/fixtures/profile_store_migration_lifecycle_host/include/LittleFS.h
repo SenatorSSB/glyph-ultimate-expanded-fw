@@ -19,6 +19,7 @@ class File {
 class HostLittleFS {
   public:
     File open(const char *, const char *) { return {}; }
+    bool exists(const char *) { return false; }
     bool remove(const char *) { return false; }
     bool rename(const char *, const char *) { return false; }
 };

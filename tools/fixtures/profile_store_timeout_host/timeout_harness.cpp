@@ -24,6 +24,7 @@ struct MemoryStorage final : ProfileStoreStorage {
   bool Write(const char *p, const uint8_t *b, size_t n) override { files[p] = {b, b + n}; return true; }
   bool Read(const char *p, uint8_t *b, size_t n) override { auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; std::memcpy(b,i->second.data(),n);return true; }
   size_t Size(const char *p) override { auto i=files.find(p);return i==files.end()?0:i->second.size(); }
+  bool Exists(const char *p) override { return files.find(p)!=files.end(); }
   bool Remove(const char *p) override { files.erase(p);return true; }
   bool Rename(const char *a,const char *b) override { auto i=files.find(a);if(i==files.end())return false;files[b]=i->second;files.erase(i);return true; }
 };

@@ -23,9 +23,11 @@ class ProfileStoreAtomicCommit {
         // Scratch ownership stays with the caller so firmware can avoid heap use.
         if (!storage.Read(temporary, const_cast<uint8_t *>(bytes), length) ||
             !validator(context, bytes, length)) return false;
-        // destination is deliberately the inactive redundant root.  Losing it
-        // before a failed rename leaves the current root intact for boot recovery.
-        if (!storage.Remove(destination)) return false;
+        // destination is deliberately the inactive redundant root.  A first
+        // publication has no destination, so do not require a strict
+        // filesystem remove of an absent file. Losing an existing inactive
+        // root before a failed rename leaves the current root intact.
+        if (storage.Exists(destination) && !storage.Remove(destination)) return false;
         return storage.Rename(temporary, destination);
     }
 

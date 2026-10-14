@@ -11,11 +11,17 @@
 namespace {
 struct MemoryStorage final : ProfileStoreAtomicCommit::Storage {
     std::map<std::string, std::vector<uint8_t>> files;
+    bool strict_absent_remove = false;
+    bool fail_write = false;
+    bool fail_read = false;
+    bool fail_remove = false;
     bool fail_rename = false;
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
+        if (fail_write) return false;
         files[path] = std::vector<uint8_t>(bytes, bytes + length); return true;
     }
     bool Read(const char *path, uint8_t *bytes, size_t length) override {
+        if (fail_read) return false;
         const auto found = files.find(path);
         if (found == files.end() || found->second.size() != length) return false;
         std::memcpy(bytes, found->second.data(), length); return true;
@@ -24,7 +30,14 @@ struct MemoryStorage final : ProfileStoreAtomicCommit::Storage {
         const auto found = files.find(path);
         return found == files.end() ? 0 : found->second.size();
     }
-    bool Remove(const char *path) override { files.erase(path); return true; }
+    bool Exists(const char *path) override { return files.find(path) != files.end(); }
+    bool Remove(const char *path) override {
+        const auto found = files.find(path);
+        if (found == files.end()) return !strict_absent_remove;
+        if (fail_remove) return false;
+        files.erase(found);
+        return true;
+    }
     bool Rename(const char *from, const char *to) override {
         if (fail_rename) return false;
         const auto found = files.find(from); if (found == files.end()) return false;
@@ -40,6 +53,51 @@ bool require(bool condition, const char *message) {
 }
 
 int main() {
+    const uint8_t record_r1[] = {0x5a, 1};
+    const uint8_t record_r2[] = {0x5a, 2};
+    // First record publication must not call a strict raw remove for an absent
+    // destination; it must still publish an exactly readable destination.
+    MemoryStorage strict_absent;
+    strict_absent.strict_absent_remove = true;
+    if (!require(ProfileStoreAtomicCommit::ReplaceVerifiedFile(strict_absent,
+            "/ultimate-00000001-00000001.bin.tmp", "/ultimate-00000001-00000001.bin",
+            record_r1, sizeof(record_r1), nonempty, nullptr),
+            "strict absent destination must publish first record")) return 1;
+    if (!require(strict_absent.files["/ultimate-00000001-00000001.bin"] ==
+                 std::vector<uint8_t>(record_r1, record_r1 + sizeof(record_r1)),
+                 "first record must be exactly readable")) return 1;
+
+    MemoryStorage replace_existing;
+    replace_existing.files["/ultimate-00000001-00000002.bin"] = {record_r1, record_r1 + sizeof(record_r1)};
+    if (!require(ProfileStoreAtomicCommit::ReplaceVerifiedFile(replace_existing,
+            "/ultimate-00000001-00000002.bin.tmp", "/ultimate-00000001-00000002.bin",
+            record_r2, sizeof(record_r2), nonempty, nullptr),
+            "existing destination remove and replacement must publish")) return 1;
+    if (!require(replace_existing.files["/ultimate-00000001-00000002.bin"] ==
+                 std::vector<uint8_t>(record_r2, record_r2 + sizeof(record_r2)),
+                 "existing destination must contain replacement bytes")) return 1;
+
+    // Existing destinations still propagate a genuine remove failure.
+    MemoryStorage failed_remove;
+    failed_remove.files["/ultimate-00000001-00000002.bin"] = {record_r1, record_r1 + sizeof(record_r1)};
+    failed_remove.fail_remove = true;
+    if (!require(!ProfileStoreAtomicCommit::ReplaceVerifiedFile(failed_remove,
+            "/ultimate-00000001-00000002.bin.tmp", "/ultimate-00000001-00000002.bin",
+            record_r2, sizeof(record_r2), nonempty, nullptr),
+            "existing destination remove failure must fail publication")) return 1;
+    if (!require(failed_remove.files["/ultimate-00000001-00000002.bin"] ==
+                 std::vector<uint8_t>(record_r1, record_r1 + sizeof(record_r1)),
+                 "failed remove must retain existing destination")) return 1;
+
+    MemoryStorage failed_write;
+    failed_write.fail_write = true;
+    if (!require(!ProfileStoreAtomicCommit::ReplaceVerifiedFile(failed_write, "/write.tmp", "/write.bin",
+            record_r1, sizeof(record_r1), nonempty, nullptr), "temporary write failure must not publish")) return 1;
+    MemoryStorage failed_read;
+    failed_read.fail_read = true;
+    if (!require(!ProfileStoreAtomicCommit::ReplaceVerifiedFile(failed_read, "/read.tmp", "/read.bin",
+            record_r1, sizeof(record_r1), nonempty, nullptr), "temporary verify read failure must not publish")) return 1;
+
     MemoryStorage storage;
     const uint8_t previous[] = {0x5a, 5};
     const uint8_t next[] = {0x5a, 6};
@@ -58,8 +116,6 @@ int main() {
     // Profile revisions are immutable files.  If staging a replacement revision
     // is interrupted, the current directory still resolves the known-good r1.
     MemoryStorage record_storage;
-    const uint8_t record_r1[] = {0x5a, 1};
-    const uint8_t record_r2[] = {0x5a, 2};
     record_storage.files["/ultimate-00000001-00000001.bin"] = {record_r1, record_r1 + sizeof(record_r1)};
     record_storage.fail_rename = true;
     if (!require(!ProfileStoreAtomicCommit::ReplaceVerifiedFile(record_storage,
@@ -81,6 +137,6 @@ int main() {
                  "after old compact rename before new publish, boot must choose retained compact prior")) return 1;
     if (!require(CompactConfigRecovery::Select(false, false) == CompactConfigRecovery::Source::Legacy,
                  "legacy is selected only with no compact generation to recover")) return 1;
-    std::puts("profile_store_atomic_commit interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS");
+    std::puts("profile_store_atomic_commit first_absent_record=PASS existing_replacement=PASS existing_remove_failure=PASS temp_write_verify_failures=PASS interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS");
     return 0;
 }

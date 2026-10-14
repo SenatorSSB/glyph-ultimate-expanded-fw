@@ -132,7 +132,10 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
         if (file) file.close();
         return size;
     }
-    bool Remove(const char *path) override { return LittleFS.remove(path); }
+    bool Exists(const char *path) override { return LittleFS.exists(path); }
+    bool Remove(const char *path) override {
+        return !LittleFS.exists(path) || LittleFS.remove(path);
+    }
     bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
 };
 
