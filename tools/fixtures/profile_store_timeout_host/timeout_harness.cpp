@@ -21,11 +21,12 @@ Persistence persistence;
 namespace {
 struct MemoryStorage final : ProfileStoreStorage {
   std::map<std::string, std::vector<uint8_t>> files;
+  bool strict_absent_remove = false;
   bool Write(const char *p, const uint8_t *b, size_t n) override { files[p] = {b, b + n}; return true; }
   bool Read(const char *p, uint8_t *b, size_t n) override { auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; std::memcpy(b,i->second.data(),n);return true; }
   size_t Size(const char *p) override { auto i=files.find(p);return i==files.end()?0:i->second.size(); }
   bool Exists(const char *p) override { return files.find(p)!=files.end(); }
-  bool Remove(const char *p) override { files.erase(p);return true; }
+  bool Remove(const char *p) override { auto i=files.find(p);if(i==files.end())return !strict_absent_remove;files.erase(i);return true; }
   bool Rename(const char *a,const char *b) override { auto i=files.find(a);if(i==files.end())return false;files[b]=i->second;files.erase(i);return true; }
 };
 MemoryStorage storage;
@@ -94,7 +95,7 @@ void timeout_and_cap(ConfiguratorBackend& b,DuplexStream& wire,const Config& bas
 void first_create_from_empty(const char *path) {
   std::ifstream f(path,std::ios::binary);require(bool(f),"fixture open");std::vector<uint8_t> bytes((std::istreambuf_iterator<char>(f)),{});pb_istream_t pb=pb_istream_from_buffer(bytes.data(),bytes.size());Config config=Config_init_default;require(pb_decode(&pb,Config_fields,&config)&&pb.bytes_left==0&&config.ultimate_profiles_count==2,"two real fixture profiles");
   const UltimateProfile profile=config.ultimate_profiles[0];config.ultimate_profiles_count=0;config.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;config.ultimate_profile_store_incarnation=1;
-  require(profile_store.Begin()&&profile_store.Count()==0,"empty ProfileStore begin");
+  storage.strict_absent_remove=true;require(profile_store.Begin()&&profile_store.Count()==0,"empty ProfileStore begin");
   InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
   ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.expected_store_generation=profile_store.Generation();r.has_profile=true;r.profile=profile;std::strcpy(r.name,"First create");r.display_rank=1;r.request_token=0x401;const auto made=send(backend,wire,r);require(made.status==PROFILE_STORE_OK&&made.profile_id==1&&made.profile_revision==1,"empty-store CREATE");
   r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_LIST;r.expected_store_generation=profile_store.Generation();r.page_size=8;r.request_token=0x402;const auto listed=send(backend,wire,r);require(listed.status==PROFILE_STORE_OK&&listed.entries_count==1&&listed.entries[0].profile_id==made.profile_id,"empty-store LIST");
