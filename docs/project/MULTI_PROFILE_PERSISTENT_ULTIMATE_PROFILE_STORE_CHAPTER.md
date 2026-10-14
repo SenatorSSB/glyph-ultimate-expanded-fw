@@ -312,3 +312,26 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   CREATE/reboot plus `ImportLegacy`/compact migration/reload with strict path
   validation. IDs/revisions at `UINT32_MAX` and both directory slots are
   asserted within the project bound.
+
+## Directory-root publication diagnostic follow-up (2026-10-15)
+
+- F5 (`0a32eb7696cbc5b084332c442bbf5868f15b4173`) is recorded as
+  **HARDWARE_FAIL — PROFILE_STORE_DIRECTORY_ROOT_PUBLICATION_FAILURE —
+  EXACT_STAGE_UNRESOLVED**. Its one CREATE returned `COMMIT_UNKNOWN` with ID
+  1/revision 1. After the single permitted reboot, STATUS was OK at generation
+  0, LIST was empty, and the original transaction token returned NOT_FOUND.
+  This physically clears immutable record publication and establishes that the
+  new directory root was not authoritative; the possible ID1 record is a
+  non-authoritative orphan and is not manually cleaned up.
+- Directory publication now uses the same atomic primitive with an explicit
+  publication kind. Low-level storage outcomes are generic and are mapped at
+  the caller to either `record.*` or `directory.*`, preventing a directory
+  failure from being mislabelled as a record failure. Directory diagnostics are
+  ephemeral and include encode, temporary open/write/read/size, verification,
+  inactive-root removal, rename, and decoded-generation mismatch. They are
+  reported for both IO_FAILURE and COMMIT_UNKNOWN while retaining the original
+  status vocabulary.
+- The strict real-stream harness injects each filesystem directory stage after
+  record publication succeeds. Every injected CREATE returns COMMIT_UNKNOWN
+  with ID1/revision1 and its exact `directory.*` diagnostic; reboot leaves the
+  authoritative store at generation 0 with empty LIST and no committed query.

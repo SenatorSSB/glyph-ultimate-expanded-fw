@@ -19,21 +19,20 @@ class ProfileStoreAtomicCommit {
     static bool ReplaceVerifiedFile(Storage &storage, const char *temporary,
                                     const char *destination, const uint8_t *bytes,
                                     size_t length, Validator validator, void *context,
-                                    ProfileStoreIoStage *failure_stage = nullptr) {
+                                    ProfileStoreIoStage *failure_stage = nullptr,
+                                    ProfileStorePublicationKind kind = ProfileStorePublicationKind::Record) {
         if (failure_stage) *failure_stage = ProfileStoreIoStage::None;
         if (!storage.Write(temporary, bytes, length)) {
-            if (failure_stage) *failure_stage = storage.LastFailureStage() == ProfileStoreIoStage::None
-                ? ProfileStoreIoStage::RecordTempWrite : storage.LastFailureStage();
+            if (failure_stage) { const auto stage = ProfileStoreStage(kind, storage.LastFailure()); *failure_stage = stage == ProfileStoreIoStage::None ? ProfileStoreStage(kind, ProfileStoreStorageFailure::TempWrite) : stage; }
             return false;
         }
         // Scratch ownership stays with the caller so firmware can avoid heap use.
         if (!storage.Read(temporary, const_cast<uint8_t *>(bytes), length)) {
-            if (failure_stage) *failure_stage = storage.LastFailureStage() == ProfileStoreIoStage::None
-                ? ProfileStoreIoStage::RecordTempRead : storage.LastFailureStage();
+            if (failure_stage) { const auto stage = ProfileStoreStage(kind, storage.LastFailure()); *failure_stage = stage == ProfileStoreIoStage::None ? ProfileStoreStage(kind, ProfileStoreStorageFailure::TempRead) : stage; }
             return false;
         }
         if (!validator(context, bytes, length)) {
-            if (failure_stage) *failure_stage = ProfileStoreIoStage::RecordVerify;
+            if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordVerify);
             return false;
         }
         // destination is deliberately the inactive redundant root.  A first
@@ -41,11 +40,11 @@ class ProfileStoreAtomicCommit {
         // filesystem remove of an absent file. Losing an existing inactive
         // root before a failed rename leaves the current root intact.
         if (storage.Exists(destination) && !storage.Remove(destination)) {
-            if (failure_stage) *failure_stage = ProfileStoreIoStage::RecordDestRemove;
+            if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordDestRemove);
             return false;
         }
         if (!storage.Rename(temporary, destination)) {
-            if (failure_stage) *failure_stage = ProfileStoreIoStage::RecordRename;
+            if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordRename);
             return false;
         }
         return true;
@@ -57,7 +56,8 @@ class ProfileStoreAtomicCommit {
                                     const char *destination, const uint8_t *bytes,
                                     size_t length, Validator validator, void *context,
                                     ProfileStoreIoStage *failure_stage = nullptr) {
-        return ReplaceVerifiedFile(storage, temporary, destination, bytes, length, validator, context, failure_stage);
+        return ReplaceVerifiedFile(storage, temporary, destination, bytes, length, validator, context, failure_stage,
+                                   ProfileStorePublicationKind::Directory);
     }
 };
 

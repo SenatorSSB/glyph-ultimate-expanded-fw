@@ -94,6 +94,12 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
             path_limited_import = invoke([str(exe), str(fixture), "--path-limit-import"])
             if "profile_store_strict_path_import=PASS" not in path_limited_import:
                 raise AssertionError("strict LittleFS component-limit ImportLegacy evidence missing")
+            for mode in ("--directory-temp-open", "--directory-temp-write", "--directory-temp-read",
+                         "--directory-temp-size", "--directory-verify", "--directory-dest-remove",
+                         "--directory-rename"):
+                directory = invoke([str(exe), str(fixture), mode])
+                if "profile_store_full_stream_directory_diagnostic=PASS" not in directory:
+                    raise AssertionError(f"directory diagnostic evidence missing for {mode}")
 
 
 def main() -> int:
@@ -119,7 +125,7 @@ def main() -> int:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
     return 0
 
 

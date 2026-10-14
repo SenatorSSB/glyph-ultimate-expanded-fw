@@ -111,21 +111,21 @@ bool DecodeDirectory(const uint8_t (&wire)[kDirectoryWireBytes], ProfileStore::D
 class LittleFsDirectoryStorage final : public ProfileStoreStorage {
   public:
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
-        _last_failure = ProfileStoreIoStage::None;
+        _last_failure = ProfileStoreStorageFailure::None;
         File file = LittleFS.open(path, "w+");
-        if (!file) { _last_failure = ProfileStoreIoStage::RecordTempOpenWrite; return false; }
+        if (!file) { _last_failure = ProfileStoreStorageFailure::TempOpenWrite; return false; }
         const bool ok = WriteAll(file, bytes, length);
-        if (!ok) _last_failure = ProfileStoreIoStage::RecordTempWrite;
+        if (!ok) _last_failure = ProfileStoreStorageFailure::TempWrite;
         if (file) file.close();
         return ok;
     }
     bool Read(const char *path, uint8_t *bytes, size_t length) override {
-        _last_failure = ProfileStoreIoStage::None;
+        _last_failure = ProfileStoreStorageFailure::None;
         File file = LittleFS.open(path, "r");
-        if (!file) { _last_failure = ProfileStoreIoStage::RecordTempRead; return false; }
-        if (file.size() != length) { _last_failure = ProfileStoreIoStage::RecordTempSize; file.close(); return false; }
+        if (!file) { _last_failure = ProfileStoreStorageFailure::TempRead; return false; }
+        if (file.size() != length) { _last_failure = ProfileStoreStorageFailure::TempSize; file.close(); return false; }
         const bool ok = ReadAll(file, bytes, length);
-        if (!ok) _last_failure = ProfileStoreIoStage::RecordTempRead;
+        if (!ok) _last_failure = ProfileStoreStorageFailure::TempRead;
         if (file) file.close();
         return ok;
     }
@@ -136,13 +136,13 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
         return size;
     }
     bool Exists(const char *path) override { return LittleFS.exists(path); }
-    ProfileStoreIoStage LastFailureStage() const override { return _last_failure; }
+    ProfileStoreStorageFailure LastFailure() const override { return _last_failure; }
     bool Remove(const char *path) override {
         return !LittleFS.exists(path) || LittleFS.remove(path);
     }
     bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
   private:
-    ProfileStoreIoStage _last_failure = ProfileStoreIoStage::None;
+    ProfileStoreStorageFailure _last_failure = ProfileStoreStorageFailure::None;
 };
 
 bool ReadDirectorySlot(ProfileStoreStorage &storage, uint8_t slot, ProfileStore::Directory *directory) {
@@ -220,12 +220,13 @@ bool ProfileStore::LoadDirectory() {
 bool ProfileStore::PublishDirectory(const Directory &next) {
     if (!_ready || _read_only_recovery) return false;
     static uint8_t wire[kDirectoryWireBytes];
-    if (!EncodeDirectory(next, wire)) return false;
+    if (!EncodeDirectory(next, wire)) { _last_io_stage = ProfileStoreIoStage::DirectoryEncode; return false; }
     const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[32]; ProfileStorePaths::DirectoryPath(path, sizeof(path), slot); ProfileStorePaths::DirectoryTemporaryPath(temporary, sizeof(temporary), slot);
     static Directory verified;
     verified = {};
     if (!ProfileStoreAtomicCommit::ReplaceInactiveRoot(*_storage, temporary, path, wire, sizeof(wire),
-            DecodeDirectoryCommit, &verified) || verified.generation != next.generation) return false;
+            DecodeDirectoryCommit, &verified, &_last_io_stage)) return false;
+    if (verified.generation != next.generation) { _last_io_stage = ProfileStoreIoStage::DirectoryGenerationMismatch; return false; }
     *_directory = next; return true;
 }
 

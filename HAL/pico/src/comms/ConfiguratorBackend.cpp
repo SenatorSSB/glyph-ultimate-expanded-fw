@@ -363,7 +363,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
             case ProfileStore::Status::UnknownOutcome: response.status = PROFILE_STORE_COMMIT_UNKNOWN; break;
             default: response.status = PROFILE_STORE_INVALID; break;
         }
-        if (response.status == PROFILE_STORE_IO_FAILURE) {
+        if (response.status == PROFILE_STORE_IO_FAILURE || response.status == PROFILE_STORE_COMMIT_UNKNOWN) {
             strlcpy(response.diagnostic, profile_store.LastDiagnostic(), sizeof(response.diagnostic));
         }
     }

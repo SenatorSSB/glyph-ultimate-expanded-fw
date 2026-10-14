@@ -21,20 +21,22 @@ Persistence persistence;
 
 namespace {
 struct MemoryStorage final : ProfileStoreStorage {
-  enum class Failure { None, TempOpenWrite, TempWrite, TempRead, Verify, DestRemove, Rename };
+  enum class Failure { None, TempOpenWrite, TempWrite, TempRead, TempSize, Verify, DestRemove, Rename };
   std::map<std::string, std::vector<uint8_t>> files;
   bool strict_absent_remove = false;
   bool enforce_littlefs_component_limit = false;
   Failure failure = Failure::None;
-  ProfileStoreIoStage last_failure = ProfileStoreIoStage::None;
+  Failure directory_failure = Failure::None;
+  ProfileStoreStorageFailure last_failure = ProfileStoreStorageFailure::None;
   bool PathValid(const char *path) const { for (const char *component=path; component; ) { if (*component=='/') ++component; const char *slash=std::strchr(component,'/'); const size_t length=slash?static_cast<size_t>(slash-component):std::strlen(component); if(length>=32)return false; if(!slash)break; component=slash; } return true; }
-  bool Write(const char *p, const uint8_t *b, size_t n) override { last_failure=ProfileStoreIoStage::None;if(enforce_littlefs_component_limit&&!PathValid(p)){last_failure=ProfileStoreIoStage::RecordTempOpenWrite;return false;}if(failure==Failure::TempOpenWrite){last_failure=ProfileStoreIoStage::RecordTempOpenWrite;return false;}if(failure==Failure::TempWrite){last_failure=ProfileStoreIoStage::RecordTempWrite;return false;}files[p] = {b, b + n}; return true; }
-  bool Read(const char *p, uint8_t *b, size_t n) override { last_failure=ProfileStoreIoStage::None;if(failure==Failure::TempRead){last_failure=ProfileStoreIoStage::RecordTempRead;return false;}auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; std::memcpy(b,i->second.data(),n);if(failure==Failure::Verify)b[0]^=1;return true; }
+  Failure For(const char *p) const { return std::strncmp(p,"/ultimate-dir-",14)==0?directory_failure:failure; }
+  bool Write(const char *p, const uint8_t *b, size_t n) override { const Failure active=For(p);last_failure=ProfileStoreStorageFailure::None;if(enforce_littlefs_component_limit&&!PathValid(p)){last_failure=ProfileStoreStorageFailure::TempOpenWrite;return false;}if(active==Failure::TempOpenWrite){last_failure=ProfileStoreStorageFailure::TempOpenWrite;return false;}if(active==Failure::TempWrite){last_failure=ProfileStoreStorageFailure::TempWrite;return false;}files[p] = {b, b + n}; return true; }
+  bool Read(const char *p, uint8_t *b, size_t n) override { const Failure active=For(p);last_failure=ProfileStoreStorageFailure::None;if(active==Failure::TempRead){last_failure=ProfileStoreStorageFailure::TempRead;return false;}if(active==Failure::TempSize){last_failure=ProfileStoreStorageFailure::TempSize;return false;}auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; std::memcpy(b,i->second.data(),n);if(active==Failure::Verify)b[0]^=1;return true; }
   size_t Size(const char *p) override { auto i=files.find(p);return i==files.end()?0:i->second.size(); }
   bool Exists(const char *p) override { return files.find(p)!=files.end(); }
-  ProfileStoreIoStage LastFailureStage() const override { return last_failure; }
-  bool Remove(const char *p) override { auto i=files.find(p);if(i==files.end())return !strict_absent_remove;if(failure==Failure::DestRemove)return false;files.erase(i);return true; }
-  bool Rename(const char *a,const char *b) override { if(enforce_littlefs_component_limit&&(!PathValid(a)||!PathValid(b)))return false;if(failure==Failure::Rename)return false;auto i=files.find(a);if(i==files.end())return false;files[b]=i->second;files.erase(i);return true; }
+  ProfileStoreStorageFailure LastFailure() const override { return last_failure; }
+  bool Remove(const char *p) override { auto i=files.find(p);if(i==files.end())return !strict_absent_remove;if(For(p)==Failure::DestRemove)return false;files.erase(i);return true; }
+  bool Rename(const char *a,const char *b) override { if(enforce_littlefs_component_limit&&(!PathValid(a)||!PathValid(b)))return false;if(For(a)==Failure::Rename)return false;auto i=files.find(a);if(i==files.end())return false;files[b]=i->second;files.erase(i);return true; }
 };
 MemoryStorage storage;
 void require(bool ok, const char *m) { if (!ok) throw std::runtime_error(m); }
@@ -152,9 +154,15 @@ void first_create_from_empty(const char *path, const char *mode) {
 void path_limited_import(const char *path) {
   storage.enforce_littlefs_component_limit=true;storage.strict_absent_remove=true;Config config=Config_init_default;seed(path,&config);require(profile_store.Count()==2,"path-limited import count");ProfileStore reboot(&storage);require(reboot.Begin()&&reboot.Count()==2,"path-limited import reboot");UltimateProfile profile=UltimateProfile_init_default;require(reboot.Read(reboot.EntryAt(0)->id,profile)==ProfileStore::Status::Ok,"path-limited imported record");std::puts("profile_store_strict_path_import=PASS");
 }
+void directory_failure_from_empty(const char *path, const char *mode) {
+  std::ifstream f(path,std::ios::binary);require(bool(f),"fixture open");std::vector<uint8_t> bytes((std::istreambuf_iterator<char>(f)),{});pb_istream_t pb=pb_istream_from_buffer(bytes.data(),bytes.size());Config config=Config_init_default;require(pb_decode(&pb,Config_fields,&config)&&pb.bytes_left==0,"fixture decode");UltimateProfile profile=config.ultimate_profiles[0];config.ultimate_profiles_count=0;config.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;config.ultimate_profile_store_incarnation=1;
+  storage.strict_absent_remove=true;storage.enforce_littlefs_component_limit=true;storage.failure=MemoryStorage::Failure::None;storage.directory_failure=MemoryStorage::Failure::None;const char *expected="";
+  if(std::strcmp(mode,"--directory-temp-open")==0){storage.directory_failure=MemoryStorage::Failure::TempOpenWrite;expected="directory.temp_open_write";}else if(std::strcmp(mode,"--directory-temp-write")==0){storage.directory_failure=MemoryStorage::Failure::TempWrite;expected="directory.temp_write";}else if(std::strcmp(mode,"--directory-temp-read")==0){storage.directory_failure=MemoryStorage::Failure::TempRead;expected="directory.temp_read";}else if(std::strcmp(mode,"--directory-temp-size")==0){storage.directory_failure=MemoryStorage::Failure::TempSize;expected="directory.temp_size";}else if(std::strcmp(mode,"--directory-verify")==0){storage.directory_failure=MemoryStorage::Failure::Verify;expected="directory.verify";}else if(std::strcmp(mode,"--directory-dest-remove")==0){storage.directory_failure=MemoryStorage::Failure::DestRemove;expected="directory.dest_remove";storage.files["/ultimate-dir-0.bin"]={0x5a};}else if(std::strcmp(mode,"--directory-rename")==0){storage.directory_failure=MemoryStorage::Failure::Rename;expected="directory.rename";}else require(false,"directory failure mode");
+  require(profile_store.Begin()&&profile_store.Generation()==0,"empty directory store");InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.expected_store_generation=0;r.has_profile=true;r.profile=profile;std::strcpy(r.name,"Directory failure");r.display_rank=1;r.request_token=0x501;const auto made=send(backend,wire,r);require(made.status==PROFILE_STORE_COMMIT_UNKNOWN&&made.profile_id==1&&made.profile_revision==1&&std::strcmp(made.diagnostic,expected)==0,"directory failure response");storage.directory_failure=MemoryStorage::Failure::None;require(profile_store.Begin()&&profile_store.Generation()==0&&profile_store.Count()==0,"directory failure reboot empty");r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_QUERY_TRANSACTION;r.expected_store_generation=0;r.request_token=0x501;require(send(backend,wire,r).status==PROFILE_STORE_NOT_FOUND,"directory failure query not committed");std::puts("profile_store_full_stream_directory_diagnostic=PASS");
+}
 } // namespace
 ProfileStore profile_store(&storage);
-int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");if(argc==3){if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
+int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");if(argc==3){if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
 #ifndef EXPECT_DUPLICATE_NEXT_DROP
 const Config baseline=config;
 #endif
