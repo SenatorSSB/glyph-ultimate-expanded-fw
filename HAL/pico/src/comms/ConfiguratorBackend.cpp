@@ -360,6 +360,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
             case ProfileStore::Status::UnknownOutcome: response.status = PROFILE_STORE_COMMIT_UNKNOWN; break;
             default: response.status = PROFILE_STORE_INVALID; break;
         }
+        if (response.status == PROFILE_STORE_IO_FAILURE) {
+            strlcpy(response.diagnostic, profile_store.LastDiagnostic(), sizeof(response.diagnostic));
+        }
     }
     _out.write(CMD_PROFILE_STORE);
     pb_ostream_t output = as_pb_ostream(_out);

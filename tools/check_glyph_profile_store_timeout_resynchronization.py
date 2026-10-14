@@ -69,6 +69,11 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool) ->
         empty_create = invoke([str(exe), str(fixture), "--empty-create"])
         if "profile_store_full_stream_empty_create=PASS" not in empty_create:
             raise AssertionError("full-stream empty CREATE evidence missing")
+        for mode in ("--io-temp-open-write", "--io-temp-write", "--io-temp-read", "--io-verify",
+                     "--io-dest-remove", "--io-rename"):
+            diagnostic = invoke([str(exe), str(fixture), mode])
+            if "profile_store_full_stream_create_diagnostic=PASS" not in diagnostic:
+                raise AssertionError(f"full-stream CREATE diagnostic evidence missing for {mode}")
 
 
 def main() -> int:
@@ -93,7 +98,7 @@ def main() -> int:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
     return 0
 
 

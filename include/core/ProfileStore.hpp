@@ -6,8 +6,7 @@
 #include <cstdint>
 
 #include <config.pb.h>
-
-class ProfileStoreStorage;
+#include "core/ProfileStoreStorage.hpp"
 
 class ProfileStore {
   public:
@@ -72,6 +71,7 @@ class ProfileStore {
     TransactionResult QueryTransaction(uint32_t token, uint32_t request_digest) const;
     Status ImportLegacy(const Config &legacy, uint32_t *old_index_to_id, size_t mapping_capacity);
     Status CompleteMigration(const Config &compact);
+    const char *LastDiagnostic() const;
 
   private:
     bool LoadDirectory();
@@ -90,6 +90,7 @@ class ProfileStore {
     bool _ready = false;
     bool _read_only_recovery = false;
     ProfileStoreStorage *_storage = nullptr;
+    ProfileStoreIoStage _last_io_stage = ProfileStoreIoStage::None;
 };
 
 extern ProfileStore profile_store;

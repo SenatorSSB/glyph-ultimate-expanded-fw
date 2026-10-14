@@ -115,14 +115,21 @@ bool DecodeDirectory(const uint8_t (&wire)[kDirectoryWireBytes], ProfileStore::D
 class LittleFsDirectoryStorage final : public ProfileStoreStorage {
   public:
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
+        _last_failure = ProfileStoreIoStage::None;
         File file = LittleFS.open(path, "w+");
-        const bool ok = file && WriteAll(file, bytes, length);
+        if (!file) { _last_failure = ProfileStoreIoStage::RecordTempOpenWrite; return false; }
+        const bool ok = WriteAll(file, bytes, length);
+        if (!ok) _last_failure = ProfileStoreIoStage::RecordTempWrite;
         if (file) file.close();
         return ok;
     }
     bool Read(const char *path, uint8_t *bytes, size_t length) override {
+        _last_failure = ProfileStoreIoStage::None;
         File file = LittleFS.open(path, "r");
-        const bool ok = file && file.size() == length && ReadAll(file, bytes, length);
+        if (!file) { _last_failure = ProfileStoreIoStage::RecordTempRead; return false; }
+        if (file.size() != length) { _last_failure = ProfileStoreIoStage::RecordTempSize; file.close(); return false; }
+        const bool ok = ReadAll(file, bytes, length);
+        if (!ok) _last_failure = ProfileStoreIoStage::RecordTempRead;
         if (file) file.close();
         return ok;
     }
@@ -133,10 +140,13 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
         return size;
     }
     bool Exists(const char *path) override { return LittleFS.exists(path); }
+    ProfileStoreIoStage LastFailureStage() const override { return _last_failure; }
     bool Remove(const char *path) override {
         return !LittleFS.exists(path) || LittleFS.remove(path);
     }
     bool Rename(const char *from, const char *to) override { return LittleFS.rename(from, to); }
+  private:
+    ProfileStoreIoStage _last_failure = ProfileStoreIoStage::None;
 };
 
 bool ReadDirectorySlot(ProfileStoreStorage &storage, uint8_t slot, ProfileStore::Directory *directory) {
@@ -229,21 +239,30 @@ bool ProfileStore::ValidateProfile(const UltimateProfile &profile) const {
     return validate_ultimate_profile_semantics(profile, error);
 }
 bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimateProfile &profile) {
+    _last_io_stage = ProfileStoreIoStage::None;
     if (!ValidateProfile(profile)) return false;
     size_t length = 0;
-    if (!pb_get_encoded_size(&length, UltimateProfile_fields, &profile) || length > kMaxProfileWireBytes) return false;
+    if (!pb_get_encoded_size(&length, UltimateProfile_fields, &profile) || length > kMaxProfileWireBytes) {
+        _last_io_stage = ProfileStoreIoStage::RecordEncodeSize;
+        return false;
+    }
     static uint8_t record[kMaxRecordWireBytes];
     std::memset(record, 0, sizeof(record));
     Put32(record, kRecordMagic); Put16(record + 4, kEnvelopeVersion); Put16(record + 6, kPayloadUltimateProfile);
     Put32(record + 8, Incarnation()); Put32(record + 12, id); Put32(record + 16, revision); Put32(record + 20, static_cast<uint32_t>(length));
     pb_ostream_t stream = pb_ostream_from_buffer(record + kRecordHeaderSize, length);
-    if (!pb_encode(&stream, UltimateProfile_fields, &profile) || stream.bytes_written != length) return false;
+    if (!pb_encode(&stream, UltimateProfile_fields, &profile) || stream.bytes_written != length) {
+        _last_io_stage = ProfileStoreIoStage::RecordEncode;
+        return false;
+    }
     Put32(record + 24, Crc32(record, 24)); Put32(record + 28, Crc32(record + kRecordHeaderSize, length));
     char path[64], temporary[72]; RecordPath(path, sizeof(path), id, revision); std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);
     const RecordCommitContext expected{Incarnation(), id, revision};
     return ProfileStoreAtomicCommit::ReplaceVerifiedFile(*_storage, temporary, path, record,
-            kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected));
+            kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected),
+            &_last_io_stage);
 }
+const char *ProfileStore::LastDiagnostic() const { return ProfileStoreIoDiagnostic(_last_io_stage); }
 bool ProfileStore::ReadProfile(uint32_t id, uint32_t revision, UltimateProfile &into) const {
     char path[64]; RecordPath(path, sizeof(path), id, revision);
     const size_t wire_size = _storage->Size(path);
