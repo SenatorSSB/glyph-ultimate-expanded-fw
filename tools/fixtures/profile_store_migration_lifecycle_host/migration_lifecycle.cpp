@@ -16,6 +16,8 @@ namespace {
 
 struct MemoryStorage final : ProfileStoreStorage {
     std::map<std::string, std::vector<uint8_t>> files;
+    bool strict_absent_remove = false;
+    bool fail_existing_remove = false;
 
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
         files[path] = std::vector<uint8_t>(bytes, bytes + length);
@@ -31,7 +33,13 @@ struct MemoryStorage final : ProfileStoreStorage {
         const auto found = files.find(path);
         return found == files.end() ? 0 : found->second.size();
     }
-    bool Remove(const char *path) override { files.erase(path); return true; }
+    bool Remove(const char *path) override {
+        const auto found = files.find(path);
+        if (found == files.end()) return !strict_absent_remove;
+        if (fail_existing_remove) return false;
+        files.erase(found);
+        return true;
+    }
     bool Rename(const char *from, const char *to) override {
         const auto found = files.find(from);
         if (found == files.end()) return false;
@@ -85,6 +93,21 @@ int main(int argc, char **argv) {
     if (!require(DecodeConfig(legacy_bytes, &legacy), "decode Stage-B fixture with generated schema")) return 1;
     if (!require(legacy.ultimate_profile_store_format == 0 && legacy.ultimate_profiles_count == 2,
                  "fixture is a two-profile legacy Config")) return 1;
+
+    // Reproduce F2's real-LittleFS first-create semantics: the destination
+    // record is absent and strict remove reports false.  The current atomic
+    // implementation propagates that failure through Create as IoFailure.
+    MemoryStorage strict_first_create_storage;
+    strict_first_create_storage.strict_absent_remove = true;
+    ProfileStore strict_first_create(&strict_first_create_storage);
+    if (!require(strict_first_create.Begin(), "start strict empty ProfileStore")) return 1;
+    const ProfileStore::TransactionResult strict_first_create_result = strict_first_create.Create(
+        legacy.ultimate_profiles[0], "strict-first", 0, 11, 12);
+    if (!require(strict_first_create_result.status == ProfileStore::Status::IoFailure &&
+                 strict_first_create.Count() == 0 &&
+                 strict_first_create_storage.files.find("/ultimate-00000001-00000001.bin") ==
+                     strict_first_create_storage.files.end(),
+                 "strict absent remove reproduces F2 first CREATE IoFailure")) return 1;
 
     std::vector<uint8_t> first_wire, second_wire;
     if (!require(EncodeProfile(legacy.ultimate_profiles[0], &first_wire) &&
