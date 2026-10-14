@@ -249,6 +249,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
     response.store_generation = profile_store.Generation();
     response.config_generation = persistence.ConfigGeneration(_config);
     response.status = PROFILE_STORE_UNSUPPORTED;
+    // Diagnostics describe this request only. In particular, a persistence
+    // error outside WriteProfile must never inherit a prior record stage.
+    profile_store.ResetDiagnostic();
     if (request.operation == PROFILE_STORE_STATUS) {
         response.status = profile_store.IsReady() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
     } else if (request.operation == PROFILE_STORE_LIST) {

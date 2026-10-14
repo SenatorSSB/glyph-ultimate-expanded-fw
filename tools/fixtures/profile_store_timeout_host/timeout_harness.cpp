@@ -107,11 +107,27 @@ void first_create_from_empty(const char *path, const char *mode) {
   else if(std::strcmp(mode,"--io-verify")==0){storage.failure=MemoryStorage::Failure::Verify;expected="record.verify";}
   else if(std::strcmp(mode,"--io-dest-remove")==0){storage.failure=MemoryStorage::Failure::DestRemove;expected="record.dest_remove";storage.files["/ultimate-00000001-00000001.bin"]={0x5a};}
   else if(std::strcmp(mode,"--io-rename")==0){storage.failure=MemoryStorage::Failure::Rename;expected="record.rename";}
-  else require(std::strcmp(mode,"--empty-create")==0,"empty create mode");
+  else require(std::strcmp(mode,"--empty-create")==0||std::strcmp(mode,"--io-stale-reset")==0,"empty create mode");
   require(profile_store.Begin()&&profile_store.Count()==0,"empty ProfileStore begin");
   InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
   ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.expected_store_generation=profile_store.Generation();r.has_profile=true;r.profile=profile;std::strcpy(r.name,"First create");r.display_rank=1;r.request_token=0x401;const auto made=send(backend,wire,r);
   if(expected[0]){require(made.status==PROFILE_STORE_IO_FAILURE&&std::strcmp(made.diagnostic,expected)==0,"empty-store CREATE diagnostic");std::puts("profile_store_full_stream_create_diagnostic=PASS");return;}
+  if(std::strcmp(mode,"--io-stale-reset")==0){
+    storage.failure=MemoryStorage::Failure::TempWrite;
+    r.expected_store_generation=profile_store.Generation();
+    r.request_token=0x404;
+    const auto record_failure=send(backend,wire,r);
+    require(record_failure.status==PROFILE_STORE_IO_FAILURE&&std::strcmp(record_failure.diagnostic,"record.temp_write")==0,"record diagnostic before reset");
+    storage.failure=MemoryStorage::Failure::None;
+    size_t ultimate=0;while(ultimate<backend._config.game_mode_configs_count&&backend._config.game_mode_configs[ultimate].mode_id!=MODE_ULTIMATE)++ultimate;
+    require(ultimate<backend._config.game_mode_configs_count,"Ultimate mode for stale diagnostic reset");
+    persistence.fail_save=true;
+    r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_SET_MODE_REFERENCE;r.expected_store_generation=profile_store.Generation();r.expected_config_generation=persistence.ConfigGeneration(backend._config);r.mode_config_index=ultimate;r.profile_id=0;r.request_token=0x405;
+    const auto persistence_failure=send(backend,wire,r);
+    persistence.fail_save=false;
+    require(persistence_failure.status==PROFILE_STORE_IO_FAILURE&&persistence_failure.diagnostic[0]==0,"request-bound diagnostic reset");
+    std::puts("profile_store_full_stream_diagnostic_reset=PASS");return;
+  }
   require(made.status==PROFILE_STORE_OK&&made.diagnostic[0]==0&&made.profile_id==1&&made.profile_revision==1,"empty-store CREATE");
   r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_LIST;r.expected_store_generation=profile_store.Generation();r.page_size=8;r.request_token=0x402;const auto listed=send(backend,wire,r);require(listed.status==PROFILE_STORE_OK&&listed.entries_count==1&&listed.entries[0].profile_id==made.profile_id,"empty-store LIST");
   r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_READ;r.expected_store_generation=profile_store.Generation();r.profile_id=made.profile_id;r.request_token=0x403;const auto read=send(backend,wire,r);require(read.status==PROFILE_STORE_OK&&read.has_profile&&read.profile_id==made.profile_id,"empty-store READ");

@@ -71,6 +71,7 @@ class ProfileStore {
     TransactionResult QueryTransaction(uint32_t token, uint32_t request_digest) const;
     Status ImportLegacy(const Config &legacy, uint32_t *old_index_to_id, size_t mapping_capacity);
     Status CompleteMigration(const Config &compact);
+    void ResetDiagnostic();
     const char *LastDiagnostic() const;
 
   private:

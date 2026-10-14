@@ -26,6 +26,7 @@ ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_
 ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint32_t, uint32_t) const { return {Status::NotFound}; }
 ProfileStore::Status ProfileStore::ImportLegacy(const Config &, uint32_t *, size_t) { return Status::IoFailure; }
 ProfileStore::Status ProfileStore::CompleteMigration(const Config &) { return Status::IoFailure; }
+void ProfileStore::ResetDiagnostic() {}
 const char *ProfileStore::LastDiagnostic() const { return ""; }
 ProfileStore profile_store;
 #endif

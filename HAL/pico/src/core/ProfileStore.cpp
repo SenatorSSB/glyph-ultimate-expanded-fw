@@ -262,6 +262,7 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
             kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected),
             &_last_io_stage);
 }
+void ProfileStore::ResetDiagnostic() { _last_io_stage = ProfileStoreIoStage::None; }
 const char *ProfileStore::LastDiagnostic() const { return ProfileStoreIoDiagnostic(_last_io_stage); }
 bool ProfileStore::ReadProfile(uint32_t id, uint32_t revision, UltimateProfile &into) const {
     char path[64]; RecordPath(path, sizeof(path), id, revision);

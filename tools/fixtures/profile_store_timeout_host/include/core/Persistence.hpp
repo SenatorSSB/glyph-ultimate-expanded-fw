@@ -9,9 +9,10 @@ class Persistence {
   bool CheckSavedConfig() { return true; }
   size_t LoadConfigRaw(Print &, bool = true) { return 0; }
   bool ValidateConfig(const Config &, ConfigValidationError &) const { return true; }
-  bool SaveConfig(Config &) { ++save_calls; return true; }
+  bool SaveConfig(Config &) { ++save_calls; return !fail_save; }
   uint32_t ConfigGeneration(const Config &) const { return 17; }
   unsigned save_calls = 0;
+  bool fail_save = false;
 };
 
 extern Persistence persistence;
