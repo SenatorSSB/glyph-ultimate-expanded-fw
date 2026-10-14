@@ -226,3 +226,24 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   ProfileStore import or compact successor is applicable to that exact input;
   the compatibility proof is normal legacy boot admission, not an invented
   migration transition.
+
+## First ProfileStore CREATE repair (2026-10-14)
+
+- Candidate `f76ece54478d7ce0364bd62cc8a0dc6406746e12` and UF2
+  `c67dae5646c294ed400fa4f517271c415e06ff445d420980c2cf57933a537350`
+  are permanently recorded as **HARDWARE_FAIL — FIRST_PROFILESTORE_CREATE_IO_FAILURE**.
+  On the same accepted 4201-byte predecessor state, normal boot, Menu and RT2
+  Configurator access, GET_DEVICE_INFO, GET_CONFIG, ProfileStore STATUS, and
+  ProfileStore LIST passed. The first valid CREATE returned
+  `PROFILE_STORE_IO_FAILURE`; no retry or later mutation occurred.
+- The failure is reproduced by real `ProfileStore::Create()` when a storage
+  double models LittleFS strict removal of the first, absent immutable-record
+  destination. The old atomic publication path treated that false return as an
+  I/O failure before directory publication. The adapter contract is now
+  explicit: `Remove` ensures a path is absent, succeeds when it was already
+  absent, and still reports an actual failure to remove an existing path.
+- The repaired atomic layer checks destination existence before removal. Its
+  tests cover a strict absent destination, successful replacement, real
+  existing-destination remove failure, temporary write/read verification
+  failures, and rename interruption. F2 is not reusable for another mutation
+  attempt; its passing read-only observations remain valid evidence.
