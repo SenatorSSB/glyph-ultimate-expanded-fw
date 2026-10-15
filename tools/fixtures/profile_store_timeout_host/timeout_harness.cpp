@@ -314,9 +314,17 @@ void deep_create_paths(const char *path, bool drop_response, unsigned scenario) 
         wire.tx.erase(wire.tx.begin());
         if(scenario%2==0){const auto info=decode(wire.tx);require(!info.empty()&&info[0]==CMD_SET_DEVICE_INFO,"legacy device-info response resynchronizes after partial CREATE TX");}
         else require(response(wire).status==PROFILE_STORE_OK,"profile response resynchronizes after partial CREATE TX");
-        require(send(backend,wire,status()).status==PROFILE_STORE_OK,"same-transport STATUS resynchronization");
+        const auto observed=send(backend,wire,status());
+        require(observed.status==PROFILE_STORE_OK&&observed.store_generation==before+1&&std::strcmp(observed.diagnostic,"create.last.stage=15")==0,"STATUS retains bounded TX failure stage and actual generation without reset");
+        require(!ProfileStoreCreateProbe::active&&ProfileStoreCreateProbe::last_stage==15,"bounded TX failure disarms probe and retains response stage");
         const auto repeated=send(backend,wire,query);
         require(repeated.status==PROFILE_STORE_OK&&repeated.profile_id==1&&profile_store.Count()==1,"same-transport QUERY_TRANSACTION recovers without duplicate commit");
+        require(ProfileStoreCreateProbe::last_stage==15,"transaction query preserves incomplete response stage");
+        r.expected_store_generation=profile_store.Generation();++r.request_token;
+        const auto next=send(backend,wire,r);
+        require(next.status==PROFILE_STORE_OK&&next.profile_id==2,"later CREATE completes after failed response");
+        const auto complete=send(backend,wire,status());
+        require(complete.status==PROFILE_STORE_OK&&complete.diagnostic[0]=='\0'&&!ProfileStoreCreateProbe::active&&ProfileStoreCreateProbe::last_stage==16,"completed CREATE response clears incomplete-stage STATUS diagnostic");
       }
     }
   }

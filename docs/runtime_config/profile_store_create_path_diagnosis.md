@@ -97,7 +97,7 @@ LittleFS program/erase callbacks, each with the documented pause/resume pair.
 | populate response |Handle240|response2840|bounded fields/diagnostic copy; no FS/Config writes|
 | Nanopb response encode |Handle240 + encoder|frame8192 reused after complete request decode|marker14→15; no TX during serialization; error exits and disarms probe|
 | WriteProfilePacket / COBS / CDC |336 + writer32/COBS24–32 + CDC|local COBS255; TinyUSB FIFO|2s whole-packet deadline; calls admitted to FIFO; USB task/mutex internals remain framework dependencies|
-| response end |same TX chain|queued host bytes|marker16 only if COBS end succeeds; not host acknowledgment; probe disarmed on every normal completion/failure|
+| response end |same TX chain|queued host bytes|marker16 only if COBS end succeeds; not host acknowledgment; incomplete14/15 retained in RAM for STATUS; probe disarmed on normal return|
 
 Pico flash callbacks themselves use24 bytes before SDK/ROM. Interrupt state,
 mutex/FIFO loops, core1 handler ownership, normal Config persistence comparison,
@@ -190,8 +190,8 @@ or indefinite-update guarantee.
 
 This is intentionally a **diagnostic** build. Only a decoded CREATE arms the
 watchdog. Stage IDs1–16 cover every requested high-level boundary;17–27 split
-record write/verify/destination and both files' open/data-write/close.28 indicates
-an ordinary failed encode/TX path before disarm. `ProfileStoreCreateProbe.hpp` is
+record write/verify/destination and both files' open/data-write/close. Stage28 is
+reserved and not emitted by current production paths. `ProfileStoreCreateProbe.hpp` is
 the authoritative numeric list. A marker is the last reached boundary, not proof
 of the next operation. Eight seconds is a diagnostic deadline, not measured FS WCET.
 
@@ -201,8 +201,10 @@ STATUS returns IO_FAILURE with `create.hang.stage=N`; generation0 in that respon
 is an uninitialized transport default, **not a disk observation**. CREATE and
 other mutations, GET_CONFIG and reboot commands are refused. Do not interpret
 recovery IO_FAILURE as an additional storage failure. Core1 does no display/RGB
-work in this recovery route. Normal successful responses disarm and clear the
-marker; power loss destroys evidence. Watchdog writes MMIO only and preserves
+work in this recovery route. Normal completed responses disarm and clear the
+watchdog marker; an incomplete encode/TX return keeps its14/15 RAM stage for
+ordinary STATUS as `create.last.stage=N`. A normal restart loses that RAM-only
+evidence. Power loss destroys all retained probe evidence. Watchdog writes MMIO only and preserves
 LittleFS flash IRQ/FIFO sequencing; it intentionally changes a stall to reset.
 Reset can interrupt an in-progress flash operation: no atomicity acceptance is
 claimed until hardware evidence is processed.
@@ -214,10 +216,12 @@ claimed until hardware evidence is processed.
 3. Send exactly one authorized CREATE with recorded token/profile bytes. Bound
    host wait to30 seconds. Record full response or disconnect/timeout and elapsed
    time. No retry and no GET_DEVICE_INFO liveness probing.
-4. If a watchdog reset re-enumerates USB, reconnect once and issue only STATUS
-   to retrieve `create.hang.stage=N`. Save response verbatim and stop. No LIST,
+4. After timeout/disconnect, reconnect once if needed and issue only one bounded
+   STATUS. Watchdog recovery reports `create.hang.stage=N`; an ordinary bounded
+   encode/TX failure without reset reports `create.last.stage=14` or15. Save the
+   response verbatim and stop. No LIST,
    READ, Config write, further CREATE, reboot or unplug before capturing stage.
-   If recovery fails to enumerate, stop and report that narrower failure; no
+   If the endpoint is unavailable or STATUS also times out, stop and report that narrower failure; no
    stage is invented. A failure before probe arm may still yield no retained marker.
 5. If CREATE returns success, record token/ID/revision/generation; the owner may
    perform the agreed read-only LIST/READ and one approved reboot/reconstruction

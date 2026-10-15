@@ -325,6 +325,13 @@ bool ConfiguratorBackend::HandleProfileStore() {
     profile_store.ResetDiagnostic();
     if (request.operation == PROFILE_STORE_STATUS) {
         response.status = profile_store.IsReady() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
+        // A bounded encode/TX failure returns without a watchdog reset. Keep
+        // its last reached boundary observable on the next read-only STATUS.
+        const uint32_t stage = ProfileStoreCreateProbe::last_stage;
+        if (stage != 0 && stage != static_cast<uint32_t>(ProfileStoreCreateProbe::Stage::ResponseEnded)) {
+            std::snprintf(response.diagnostic, sizeof(response.diagnostic), "create.last.stage=%lu",
+                static_cast<unsigned long>(stage));
+        }
     } else if (request.operation == PROFILE_STORE_LIST) {
         const size_t cursor = request.page_cursor;
         const size_t count = request.page_size == 0 ? 8 : request.page_size;
@@ -447,13 +454,12 @@ bool ConfiguratorBackend::HandleProfileStore() {
     ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEncodeEntered);
     pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));
     if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) {
-        ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::Failed);
         ProfileStoreCreateProbe::Finish();
         return false;
     }
     ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEncoded);
     const bool sent = WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
-    ProfileStoreCreateProbe::Mark(sent ? ProfileStoreCreateProbe::Stage::ResponseEnded : ProfileStoreCreateProbe::Stage::Failed);
+    if (sent) ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEnded);
     ProfileStoreCreateProbe::Finish();
     return sent;
 }
