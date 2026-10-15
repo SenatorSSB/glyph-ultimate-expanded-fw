@@ -54,8 +54,9 @@ class DuplexStream final : public Stream {
 };
 std::vector<uint8_t> decode(const std::vector<uint8_t>& in) {
   require(!in.empty()&&in.back()==0,"COBS delimiter");std::vector<uint8_t> out;
-  for(size_t o=0;o+1<in.size();) { uint8_t c=in[o++];require(c&&o+c-1<=in.size(),"COBS valid");out.insert(out.end(),in.begin()+o,in.begin()+o+c-1);o+=c-1;if(c!=0xff&&o+1<in.size())out.push_back(0); } return out;
+  for(size_t o=0;o+1<in.size();) { uint8_t c=in[o++];require(c&&o+c<=in.size(),"COBS valid");for(size_t i=0;i<c-1;++i)require(in[o+i]!=0,"COBS raw zero");out.insert(out.end(),in.begin()+o,in.begin()+o+c-1);o+=c-1;if(c!=0xff&&o+1<in.size())out.push_back(0); } return out;
 }
+void malformed_cobs_controls() { bool rejected=false;try{(void)decode({2,0});}catch(const std::exception&){rejected=true;}require(rejected,"COBS 02 00 rejected"); }
 std::vector<uint8_t> frame(const ProfileStoreRequest& request) {
   size_t n=0;require(pb_get_encoded_size(&n,ProfileStoreRequest_fields,&request),"request size");std::vector<uint8_t> data(n);pb_ostream_t pb=pb_ostream_from_buffer(data.data(),data.size());require(pb_encode(&pb,ProfileStoreRequest_fields,&request),"request encode");data.resize(pb.bytes_written);
   DuplexStream wire;packetio::COBSPrint out(wire);out.write(static_cast<uint8_t>(CMD_PROFILE_STORE));out.write(data.data(),data.size());require(out.end(),"real COBS end");require(wire.tx.back()==0,"request delimiter");return wire.tx;
@@ -162,7 +163,7 @@ void directory_failure_from_empty(const char *path, const char *mode) {
 }
 } // namespace
 ProfileStore profile_store(&storage);
-int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");if(argc==3){if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
+int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");malformed_cobs_controls();if(argc==3){if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
 #ifndef EXPECT_DUPLICATE_NEXT_DROP
 const Config baseline=config;
 #endif

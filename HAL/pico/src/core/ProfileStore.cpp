@@ -87,9 +87,9 @@ bool EncodeDirectory(const ProfileStore::Directory &directory, uint8_t (&wire)[k
     return true;
 }
 
-bool DecodeDirectory(const uint8_t (&wire)[kDirectoryWireBytes], ProfileStore::Directory *directory) {
+bool DecodeDirectory(const uint8_t *wire, size_t length, ProfileStore::Directory *directory) {
     const size_t trailer = 32 + ProfileStore::kMaxEntries * 40;
-    if (Get32(wire) != kDirectoryMagic || Get16(wire + 4) != kEnvelopeVersion ||
+    if (length != kDirectoryWireBytes || Get32(wire) != kDirectoryMagic || Get16(wire + 4) != kEnvelopeVersion ||
         Get16(wire + 6) > ProfileStore::kMaxEntries || Get32(wire + trailer + 24) != Crc32(wire, trailer + 24)) return false;
     static ProfileStore::Directory parsed;
     parsed = {};
@@ -148,15 +148,13 @@ class LittleFsDirectoryStorage final : public ProfileStoreStorage {
 bool ReadDirectorySlot(ProfileStoreStorage &storage, uint8_t slot, ProfileStore::Directory *directory) {
     char path[32]; ProfileStorePaths::DirectoryPath(path, sizeof(path), slot);
     static uint8_t wire[kDirectoryWireBytes];
-    return storage.Read(path, wire, sizeof(wire)) && DecodeDirectory(wire, directory);
+    return storage.Read(path, wire, sizeof(wire)) && DecodeDirectory(wire, sizeof(wire), directory);
 }
 
 bool DecodeDirectoryCommit(void *context, const uint8_t *bytes, size_t length) {
     if (length != kDirectoryWireBytes) return false;
     auto *directory = static_cast<ProfileStore::Directory *>(context);
-    uint8_t wire[kDirectoryWireBytes];
-    std::memcpy(wire, bytes, sizeof(wire));
-    return DecodeDirectory(wire, directory);
+    return DecodeDirectory(bytes, length, directory);
 }
 
 struct RecordCommitContext {
