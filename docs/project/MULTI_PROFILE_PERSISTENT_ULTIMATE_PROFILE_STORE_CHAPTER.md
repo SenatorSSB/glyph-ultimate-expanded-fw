@@ -335,3 +335,33 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   record publication succeeds. Every injected CREATE returns COMMIT_UNKNOWN
   with ID1/revision1 and its exact `directory.*` diagnostic; reboot leaves the
   authoritative store at generation 0 with empty LIST and no committed query.
+
+## Directory callback stack repair qualification (2026-10-15)
+
+- F6 (`da0618ef47242d049948187ea00e6fb961617ef5`) remains
+  **HARDWARE_FAIL — DIRECTORY_PUBLICATION_RUNTIME_HANG**. Its CREATE produced
+  no response, the endpoint remained enumerated but did not answer one bounded
+  `GET_DEVICE_INFO`, and a subsequent power cycle recovered an authoritative
+  generation-0 empty store. That is correlation evidence, not a claim of a
+  hardware-proven stack-overflow root cause.
+- The repaired callback passes the already-verified atomic-commit byte buffer
+  directly to `DecodeDirectory`; it no longer makes the old 2620-byte automatic
+  copy. The pinned Arduino-Pico 3.6.3 ARM compiler (`arm-none-eabi-g++`,
+  Cortex-M0+, O3) reports 2640 bytes for a source-reconstructed F6 callback
+  and 8 bytes for the direct-buffer callback. The checked target ELF contains
+  the framework's two default 0x800-byte stack reservations; its source has
+  `core1_separate_stack` weak-defaulted false and takes the ordinary multicore
+  launch path. The 128-byte callback gate therefore leaves 1920 bytes against
+  the observed 2048-byte reservation.
+- `check_glyph_profile_store_directory_stack.py` binds the production callback
+  shape to that compiler gate and fails if the F6-sized local copy returns.
+  `check_glyph_profile_store_directory_decoder.py` runs the current direct
+  decoder and a source-reconstructed old copy decoder through the same corpus:
+  valid normal and 64-entry roots, bad magic/version/count/CRC/incarnation,
+  high-water inconsistency, zero ID/revision, ID above high-water, and duplicate
+  IDs. No directory wire format or atomic publication ordering changed.
+- The real Configurator/ProfileStore harness additionally rejects delimiter
+  overrun and raw-zero COBS chunks (including `02 00`), establishes the
+  production 5000 ms inactivity boundary, asserts Config/storage/count/
+  generation/save-count nonmutation, then proves delimiter resynchronization,
+  STATUS recovery, the 8192-byte cap, and a 30-second external host timeout.

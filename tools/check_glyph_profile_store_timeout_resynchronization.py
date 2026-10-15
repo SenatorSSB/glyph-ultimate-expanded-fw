@@ -14,7 +14,7 @@ HOST = ROOT / "tools/fixtures/profile_store_timeout_host"
 
 
 def invoke(command: list[str]) -> str:
-    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
+    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False, timeout=30)
     if completed.returncode:
         raise RuntimeError("command failed:\n" + " ".join(command) + "\n" + completed.stdout + completed.stderr)
     return completed.stdout
@@ -121,11 +121,11 @@ def main() -> int:
             build_and_run(temp, generated, fixture, True)
             legacy = build_and_run(temp, generated, fixture, False, True)
             build_and_run(temp, generated, fixture, False)
-    except (AssertionError, OSError, RuntimeError, subprocess.CalledProcessError, ValueError, KeyError, TypeError) as error:
+    except (AssertionError, OSError, RuntimeError, subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError, KeyError, TypeError) as error:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_resync=true frame_cap=8192")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30")
     return 0
 
 
