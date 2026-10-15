@@ -111,18 +111,12 @@ bool DecodeDirectory(const uint8_t *wire, size_t length, ProfileStore::Directory
 class LittleFsDirectoryStorage final : public ProfileStoreStorage {
   public:
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
-        using Stage = ProfileStoreCreateProbe::Stage;
-        const bool directory = std::strncmp(path, "/ultimate-dir-", 14) == 0;
         _last_failure = ProfileStoreStorageFailure::None;
-        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryOpenEntered : Stage::RecordOpenEntered);
         File file = LittleFS.open(path, "w+");
         if (!file) { _last_failure = ProfileStoreStorageFailure::TempOpenWrite; return false; }
-        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryOpenComplete : Stage::RecordOpenComplete);
         const bool ok = WriteAll(file, bytes, length);
-        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryDataWritten : Stage::RecordDataWritten);
         if (!ok) _last_failure = ProfileStoreStorageFailure::TempWrite;
         if (file) file.close();
-        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryCloseComplete : Stage::RecordCloseComplete);
         return ok;
     }
     bool Read(const char *path, uint8_t *bytes, size_t length) override {
@@ -212,12 +206,29 @@ uint32_t ProfileStore::ActiveId() const { return _active_id; }
 
 bool ProfileStore::LoadDirectory() {
     static Directory a{}, b{}; a = {}; b = {};
-    const bool a_ok = ReadDirectorySlot(*_storage, 0, &a), b_ok = ReadDirectorySlot(*_storage, 1, &b);
-    if (!a_ok && !b_ok) { // Empty store is the only writable implicit state.
-        _directory->incarnation = 1; _directory->generation = 0; _directory->high_water_id = 0; _ready = true; return true;
+    *_directory = {};
+    char a_path[32], b_path[32];
+    ProfileStorePaths::DirectoryPath(a_path, sizeof(a_path), 0);
+    ProfileStorePaths::DirectoryPath(b_path, sizeof(b_path), 1);
+    const bool a_exists = _storage->Exists(a_path), b_exists = _storage->Exists(b_path);
+    const bool a_ok = a_exists && ReadDirectorySlot(*_storage, 0, &a) && a.generation != 0;
+    const bool b_ok = b_exists && ReadDirectorySlot(*_storage, 1, &b) && b.generation != 0;
+    if (!a_exists && !b_exists) {
+        // A genuinely empty namespace must not inherit stale in-RAM entries
+        // from an earlier Begin. Existing but unreadable roots are not empty.
+        _directory->incarnation = 1; _ready = true; return true;
     }
-    if (a_ok && b_ok && a.generation == b.generation && std::memcmp(&a, &b, sizeof(Directory)) != 0) { _read_only_recovery = true; return false; }
+    if ((!a_ok && !b_ok) ||
+        (a_ok && b_ok && (a.incarnation != b.incarnation ||
+         (a.generation == b.generation && std::memcmp(&a, &b, sizeof(Directory)) != 0)))) {
+        _read_only_recovery = true; return false;
+    }
     *_directory = (!b_ok || (a_ok && a.generation > b.generation)) ? a : b;
+    // A damaged other root may have held a newer high-water mark. A missing
+    // other root after generation1 is likewise ambiguous: never allocate from
+    // a possibly rolled-back directory. Inspection remains available.
+    _read_only_recovery = (a_exists && !a_ok) || (b_exists && !b_ok) ||
+        ((!a_exists || !b_exists) && _directory->generation > 1);
     _ready = true; return true;
 }
 
@@ -225,7 +236,6 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
     if (!_ready || _read_only_recovery) return false;
     static uint8_t wire[kDirectoryWireBytes];
     if (!EncodeDirectory(next, wire)) { _last_io_stage = ProfileStoreIoStage::DirectoryEncode; return false; }
-    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::DirectoryEncoded);
     const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[32]; ProfileStorePaths::DirectoryPath(path, sizeof(path), slot); ProfileStorePaths::DirectoryTemporaryPath(temporary, sizeof(temporary), slot);
     static Directory verified;
     verified = {};
@@ -233,7 +243,6 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
             DecodeDirectoryCommit, &verified, &_last_io_stage)) return false;
     if (verified.generation != next.generation) { _last_io_stage = ProfileStoreIoStage::DirectoryGenerationMismatch; return false; }
     *_directory = next;
-    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::DirectoryPublished);
     return true;
 }
 
@@ -243,7 +252,6 @@ bool ProfileStore::ValidateProfile(const UltimateProfile &profile) const {
     return validate_ultimate_profile_semantics(profile, error);
 }
 bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimateProfile &profile) {
-    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::RecordEntered);
     _last_io_stage = ProfileStoreIoStage::None;
     if (!ValidateProfile(profile)) return false;
     size_t length = 0;

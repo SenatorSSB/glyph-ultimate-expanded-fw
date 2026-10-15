@@ -8,7 +8,7 @@ C call chains from an UNKNOWN whole-target/IRQ/ROM bound.
 from __future__ import annotations
 import argparse, concurrent.futures, hashlib, json, pathlib, re, shlex, subprocess, tempfile
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PATTERNS = ['ConfiguratorBackend.cpp', 'ProfileStore.cpp', '/FS.cpp', 'LittleFS/src/',
+PATTERNS = ['ConfiguratorBackend.cpp', 'ProfileStore.cpp', 'Persistence.cpp', '/FS.cpp', 'LittleFS/src/',
  'RP2040Support.cpp', '/main.cpp', '/pb_encode.c', '/pb_decode.c', '/pb_common.c',
  'nanopb-arduino/src/', 'config/glyph/common/src/config.cpp', 'Adafruit_USBD_CDC.cpp',
  '/usbd.c', '/cdc_device.c', '/tusb.c', '/tusb_fifo.c', '/dcd_rp2040.c',
@@ -36,7 +36,9 @@ def measure(out):
   return max(found)
  limits={'ConfiguratorBackend::HandleProfileStore()':512,'ConfiguratorBackend::WriteProfilePacket(':512,
   'ProfileStore::Create(':256,'ProfileStore::WriteProfile(':512,'ProfileStore::PublishDirectory(':256,
-  'ProfileStore::Duplicate(':128,':void setup()':512}
+  'ProfileStore::Duplicate(':128,':void setup()':512,
+  'Persistence::LoadConfigChecked(':512,'Persistence::SaveConfigIfGenerationMatches(':512,
+  'Persistence::SaveConfig(':512}
  for name,limit in limits.items():
   if size(name)>limit:raise AssertionError(f'{name}: {size(name)} > {limit}')
  prefix=size(':int main()')+size(':void loop()')+size('ConfiguratorBackend::SendReport()')+size('ConfiguratorBackend::HandleProfileStore()')

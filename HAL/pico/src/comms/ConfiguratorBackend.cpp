@@ -20,7 +20,6 @@
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
-#include "core/ProfileStoreCreateProbe.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
@@ -31,6 +30,22 @@
 #include <cstdio>
 
 namespace {
+// Config is too large for the core stack. Whole-Config SET and reference SET
+// are synchronous core0 handlers and share one unpublished candidate. No live
+// runtime selection or ProfileStore payload aliases this scratch.
+Config &ConfigWriteCandidate() {
+    static Config candidate;
+    return candidate;
+}
+
+bool ReferencesProfile(const Config &config, uint32_t id) {
+    for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
+        const GameModeConfig &mode = config.game_mode_configs[i];
+        if (mode.mode_id == MODE_ULTIMATE && mode.ultimate_profile_id == id) return true;
+    }
+    return false;
+}
+
 // TinyUSB's ordinary write can wait forever while a connected host stops
 // draining TX. Only hand it bytes already admitted by its FIFO. The single
 // core0 producer owns this response; USB IRQs can only increase free space.
@@ -110,12 +125,6 @@ void ConfiguratorBackend::SendReport() {
             return;
         }
         _profile_tx_needs_sync = false;
-    }
-    if (ProfileStoreCreateProbe::Recovery() && command != CMD_GET_DEVICE_INFO && command != CMD_PROFILE_STORE) {
-        static constexpr char message[] = "CREATE probe recovery is read-only";
-        WriteProfilePacket(CMD_ERROR, reinterpret_cast<const uint8_t *>(message), sizeof(message) - 1);
-        SkipToNextPacket();
-        return;
     }
     switch (command) {
         case CMD_GET_DEVICE_INFO:
@@ -242,7 +251,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
     // decode, validation, and persistence sequence succeeds.  The candidate
     // is static because Config contains the fixed-size embedded arrays used
     // by the selected input modes and is too large for the call stack.
-    static Config candidate;
+    Config &candidate = ConfigWriteCandidate();
 
     // Reset config defaults first, so config is completely replaced rather than merged.
     candidate = Config_init_default;
@@ -302,18 +311,6 @@ bool ConfiguratorBackend::HandleProfileStore() {
     if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || request.protocol_version != 1) {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
-    if (ProfileStoreCreateProbe::Recovery()) {
-        response = ProfileStoreResponse_init_default;
-        response.protocol_version = 1;
-        response.request_token = request.request_token;
-        response.status = PROFILE_STORE_IO_FAILURE;
-        std::snprintf(response.diagnostic, sizeof(response.diagnostic), "create.hang.stage=%lu",
-            static_cast<unsigned long>(ProfileStoreCreateProbe::recovered_stage));
-        pb_ostream_t recovered = pb_ostream_from_buffer(frame, sizeof(frame));
-        return pb_encode(&recovered, ProfileStoreResponse_fields, &response) &&
-            WriteProfilePacket(CMD_PROFILE_STORE, frame, recovered.bytes_written);
-    }
-    if (request.operation == PROFILE_STORE_CREATE) ProfileStoreCreateProbe::Begin();
     response = ProfileStoreResponse_init_default;
     response.protocol_version = 1;
     response.request_token = request.request_token;
@@ -324,18 +321,16 @@ bool ConfiguratorBackend::HandleProfileStore() {
     // error outside WriteProfile must never inherit a prior record stage.
     profile_store.ResetDiagnostic();
     if (request.operation == PROFILE_STORE_STATUS) {
-        response.status = profile_store.IsReady() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
-        // A bounded encode/TX failure returns without a watchdog reset. Keep
-        // its last reached boundary observable on the next read-only STATUS.
-        const uint32_t stage = ProfileStoreCreateProbe::last_stage;
-        if (stage != 0 && stage != static_cast<uint32_t>(ProfileStoreCreateProbe::Stage::ResponseEnded)) {
-            std::snprintf(response.diagnostic, sizeof(response.diagnostic), "create.last.stage=%lu",
-                static_cast<unsigned long>(stage));
+        response.status = profile_store.IsReady() && !profile_store.IsReadOnlyRecovery()
+            ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
+        if (profile_store.IsReadOnlyRecovery()) {
+            strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));
         }
     } else if (request.operation == PROFILE_STORE_LIST) {
         const size_t cursor = request.page_cursor;
         const size_t count = request.page_size == 0 ? 8 : request.page_size;
-        if (count > 8 || cursor > profile_store.Count()) response.status = PROFILE_STORE_INVALID;
+        if (!profile_store.IsReady()) response.status = PROFILE_STORE_IO_FAILURE;
+        else if (count > 8 || cursor > profile_store.Count()) response.status = PROFILE_STORE_INVALID;
         else {
             const size_t end = cursor + count < profile_store.Count() ? cursor + count : profile_store.Count();
             response.entries_count = 0;
@@ -376,52 +371,55 @@ bool ConfiguratorBackend::HandleProfileStore() {
             result = profile_store.Reorder(request.profile_id, request.display_rank,
                 static_cast<uint32_t>(request.expected_store_generation), token, digest);
         } else if (request.operation == PROFILE_STORE_DELETE) {
-            uint32_t referenced = 0;
-            for (size_t i = 0; i < _config.game_mode_configs_count; ++i) {
-                const GameModeConfig &mode = _config.game_mode_configs[i];
-                if (mode.mode_id == MODE_ULTIMATE && mode.ultimate_profile_id == request.profile_id) {
-                    referenced = request.profile_id; break;
-                }
-            }
-            result = profile_store.Delete(request.profile_id,
-                static_cast<uint32_t>(request.expected_store_generation), referenced, token, digest);
-        } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
-            if (_config.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
-                request.expected_config_generation != persistence.ConfigGeneration(_config) ||
-                request.mode_config_index >= _config.game_mode_configs_count) {
-                result.status = ProfileStore::Status::Conflict;
+            // A reference save is reboot-bound. Protect both the currently
+            // active selection and the durable selection for the next boot.
+            Config &durable = ConfigWriteCandidate();
+            if (persistence.LoadConfigChecked(durable) != Persistence::LoadResult::Loaded) {
+                result.status = ProfileStore::Status::IoFailure;
             } else {
-                const GameModeConfig &current = _config.game_mode_configs[request.mode_config_index];
-                if (current.mode_id != MODE_ULTIMATE) {
-                    result.status = ProfileStore::Status::Invalid;
+                const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
+                    ReferencesProfile(durable, request.profile_id) ? request.profile_id : 0;
+                result = profile_store.Delete(request.profile_id,
+                    static_cast<uint32_t>(request.expected_store_generation), referenced, token, digest);
+            }
+        } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
+            Config &candidate = ConfigWriteCandidate();
+            if (!profile_store.IsReady() || profile_store.IsReadOnlyRecovery()) {
+                result.status = ProfileStore::Status::IoFailure;
+            } else if (request.expected_config_generation != persistence.ConfigGeneration(_config)) {
+                result.status = ProfileStore::Status::Conflict;
+            } else if (persistence.LoadConfigChecked(candidate) != Persistence::LoadResult::Loaded) {
+                result.status = ProfileStore::Status::IoFailure;
+            } else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
+                candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
+                request.mode_config_index >= candidate.game_mode_configs_count) {
+                // The checked load establishes which durable generation this
+                // candidate represents; the initial cached fence is not enough.
+                result.status = ProfileStore::Status::Conflict;
+            } else if (candidate.game_mode_configs[request.mode_config_index].mode_id != MODE_ULTIMATE) {
+                result.status = ProfileStore::Status::Invalid;
+            } else {
+                // Static, synchronous core0 scratch preserves CREATE's small
+                // frame even though this unrelated operation reads a profile.
+                static UltimateProfile selected;
+                if (request.profile_id != 0 && profile_store.Read(request.profile_id, selected) != ProfileStore::Status::Ok) {
+                    result.status = ProfileStore::Status::NotFound;
                 } else {
-                    // This handler is synchronous and core0-owned. Keeping the
-                    // read destination static avoids reserving a full profile
-                    // in every invocation, including CREATE's nested FS calls.
-                    static UltimateProfile selected;
-                    if (request.profile_id != 0 && profile_store.Read(request.profile_id, selected) != ProfileStore::Status::Ok) {
-                        result.status = ProfileStore::Status::NotFound;
+                    GameModeConfig &mode = candidate.game_mode_configs[request.mode_config_index];
+                    mode.ultimate_profile_id = request.profile_id;
+                    mode.ultimate_profile_config = 0;
+                    ConfigValidationError validation_error;
+                    if (!persistence.ValidateConfig(candidate, validation_error)) {
+                        result.status = ProfileStore::Status::Invalid;
                     } else {
-                        // Do not publish a new runtime selection mid-report. The
-                        // checked persistence primitive encodes this bounded
-                        // temporary edit, then the in-RAM selection is restored;
-                        // explicit reboot is the activation boundary.
-                        GameModeConfig &mode = _config.game_mode_configs[request.mode_config_index];
-                        const uint32_t old_profile_id = mode.ultimate_profile_id;
-                        const uint32_t old_legacy_index = mode.ultimate_profile_config;
-                        mode.ultimate_profile_id = request.profile_id;
-                        mode.ultimate_profile_config = 0;
-                        ConfigValidationError validation_error;
-                        if (!persistence.ValidateConfig(_config, validation_error)) {
-                            result.status = ProfileStore::Status::Invalid;
-                        } else if (!persistence.SaveConfig(_config)) {
-                            result.status = ProfileStore::Status::IoFailure;
-                        } else {
-                            result = {ProfileStore::Status::Ok, request.profile_id, 0, profile_store.Generation()};
-                        }
-                        mode.ultimate_profile_id = old_profile_id;
-                        mode.ultimate_profile_config = old_legacy_index;
+                        const Persistence::SaveResult saved = persistence.SaveConfigIfGenerationMatches(
+                            candidate, request.expected_config_generation);
+                        if (saved == Persistence::SaveResult::Conflict) result.status = ProfileStore::Status::Conflict;
+                        else if (saved != Persistence::SaveResult::Saved) result.status = ProfileStore::Status::IoFailure;
+                        else result = {ProfileStore::Status::Ok, request.profile_id, 0, profile_store.Generation()};
                     }
+                    // Never publish candidate into _config here. Runtime and
+                    // transient session selectors stay unchanged until reboot.
                 }
             }
         } else if (request.operation == PROFILE_STORE_QUERY_TRANSACTION) {
@@ -451,16 +449,11 @@ bool ConfiguratorBackend::HandleProfileStore() {
     // The request is decoded into owned static fields before reusing frame.
     // Encoding and transport are separate bounded stages, with no FS frames
     // alive during either stage.
-    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEncodeEntered);
     pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));
     if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) {
-        ProfileStoreCreateProbe::Finish();
         return false;
     }
-    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEncoded);
     const bool sent = WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
-    if (sent) ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEnded);
-    ProfileStoreCreateProbe::Finish();
     return sent;
 }
 

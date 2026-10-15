@@ -7,7 +7,6 @@
 #include <cstring>
 
 #include "core/ProfileStoreStorage.hpp"
-#include "core/ProfileStoreCreateProbe.hpp"
 
 class ProfileStoreAtomicCommit {
   public:
@@ -24,8 +23,6 @@ class ProfileStoreAtomicCommit {
                                     ProfileStoreIoStage *failure_stage = nullptr,
                                     ProfileStorePublicationKind kind = ProfileStorePublicationKind::Record) {
         if (failure_stage) *failure_stage = ProfileStoreIoStage::None;
-        using ProbeStage = ProfileStoreCreateProbe::Stage;
-        const bool directory = kind == ProfileStorePublicationKind::Directory;
         // One synchronous core0 transaction owns this bounded scratch through
         // validation. Never overwrite the expected bytes during readback: a
         // stale but internally valid record/root is not the requested commit.
@@ -34,22 +31,18 @@ class ProfileStoreAtomicCommit {
             if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordVerify);
             return false;
         }
-        ProfileStoreCreateProbe::Mark(directory ? ProbeStage::DirectoryWriteEntered : ProbeStage::RecordWriteEntered);
         if (!storage.Write(temporary, bytes, length)) {
             if (failure_stage) { const auto stage = ProfileStoreStage(kind, storage.LastFailure()); *failure_stage = stage == ProfileStoreIoStage::None ? ProfileStoreStage(kind, ProfileStoreStorageFailure::TempWrite) : stage; }
             return false;
         }
-        ProfileStoreCreateProbe::Mark(directory ? ProbeStage::DirectoryWritten : ProbeStage::RecordWritten);
         if (!storage.Read(temporary, readback, length)) {
             if (failure_stage) { const auto stage = ProfileStoreStage(kind, storage.LastFailure()); *failure_stage = stage == ProfileStoreIoStage::None ? ProfileStoreStage(kind, ProfileStoreStorageFailure::TempRead) : stage; }
             return false;
         }
-        ProfileStoreCreateProbe::Mark(directory ? ProbeStage::DirectoryRead : ProbeStage::RecordRead);
         if (std::memcmp(bytes, readback, length) != 0 || !validator(context, readback, length)) {
             if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordVerify);
             return false;
         }
-        ProfileStoreCreateProbe::Mark(directory ? ProbeStage::DirectoryVerified : ProbeStage::RecordVerified);
         // destination is deliberately the inactive redundant root.  A first
         // publication has no destination, so do not require a strict
         // filesystem remove of an absent file. Losing an existing inactive
@@ -58,12 +51,10 @@ class ProfileStoreAtomicCommit {
             if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordDestRemove);
             return false;
         }
-        ProfileStoreCreateProbe::Mark(directory ? ProbeStage::DirectoryDestinationHandled : ProbeStage::RecordDestinationHandled);
         if (!storage.Rename(temporary, destination)) {
             if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordRename);
             return false;
         }
-        ProfileStoreCreateProbe::Mark(directory ? ProbeStage::DirectoryRenamed : ProbeStage::RecordRenamed);
         return true;
     }
 

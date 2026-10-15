@@ -6,7 +6,6 @@
 #include "core/KeyboardMode.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
-#include "core/ProfileStoreCreateProbe.hpp"
 #include "core/mode_selection.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -144,10 +143,6 @@ void enter_recovery_configurator() {
 
 
 void setup() {
-    if (ProfileStoreCreateProbe::CaptureBoot()) {
-        enter_recovery_configurator();
-        return;
-    }
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
 
@@ -204,7 +199,7 @@ void setup() {
                     display_ready);
         return;
     }
-    if (!profile_store.Begin() ||
+    if (!profile_store.Begin() || profile_store.IsReadOnlyRecovery() ||
         (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat &&
          profile_store.Incarnation() != config.ultimate_profile_store_incarnation)) {
         if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {

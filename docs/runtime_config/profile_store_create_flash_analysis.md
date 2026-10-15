@@ -1,5 +1,8 @@
 # ProfileStore CREATE flash, multicore and stack analysis
 
+> Historical diagnostic evidence for candidate4ac255eb. The CREATE-only probe
+> is retired in the production successor; see [production finalization](profile_store_production_finalization.md).
+
 Status: source-backed diagnostic analysis; physical root cause UNPROVEN.
 Date: 2026-10-15. Baseline candidate: `83f526b843fbcc61ee7dac6da9df0bc79351c2bf`.
 This specialist inspected local source and existing compiler outputs only. No

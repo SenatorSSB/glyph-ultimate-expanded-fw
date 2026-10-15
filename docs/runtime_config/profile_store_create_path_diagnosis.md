@@ -1,5 +1,8 @@
 # Complete ProfileStore CREATE path diagnosis — 2026-10-15
 
+> Historical diagnostic evidence for candidate4ac255eb. The CREATE-only probe
+> is retired in the production successor; see [production finalization](profile_store_production_finalization.md).
+
 Disposition: diagnostic candidate with source-proven repairs; physical root cause
 UNPROVEN. No canonical merge, device operation, factory reset, or hardware PASS.
 The owner explicitly authorized the complete CREATE path repair on 2026-10-15.

@@ -42,6 +42,11 @@ class Persistence {
     uint32_t ConfigGeneration(const Config &config) const;
     LoadResult LoadConfigChecked(Config &config);
 
+    enum class SaveResult { Saved, Conflict, StorageFailure };
+    // Synchronous core0 compare-and-save. Checks both the loaded generation
+    // and freshly verified durable bytes before touching any staged file.
+    SaveResult SaveConfigIfGenerationMatches(Config &config, uint64_t expected_generation);
+
     bool SaveConfig(Config &config);
     bool LoadConfig(Config &config);
     bool CheckSavedConfig();

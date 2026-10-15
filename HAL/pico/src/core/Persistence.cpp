@@ -109,6 +109,26 @@ bool Persistence::ValidateConfig(const Config &config, ConfigValidationError &er
     return _validator(config, error);
 }
 
+Persistence::SaveResult Persistence::SaveConfigIfGenerationMatches(Config &config, uint64_t expected_generation) {
+    if (expected_generation != _config_generation) return SaveResult::Conflict;
+    if (!IsAvailable()) return SaveResult::StorageFailure;
+    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
+        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
+    const char *filename = source == CompactConfigRecovery::Source::Current ? config_filename :
+        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
+    File current = LittleFS.open(filename, "r");
+    if (!current) return SaveResult::StorageFailure;
+    ConfigHeader header;
+    const bool checked = CheckSavedConfig(current) && current.seek(0) &&
+        current.read(reinterpret_cast<uint8_t *>(&header), sizeof(header)) == static_cast<int>(sizeof(header));
+    current.close();
+    if (!checked) return SaveResult::StorageFailure;
+    if (expected_generation != header.config_crc) return SaveResult::Conflict;
+    // All Config writers execute synchronously on core0. No callback or yield
+    // runs a Config writer between this fence and SaveConfig's publication.
+    return SaveConfig(config) ? SaveResult::Saved : SaveResult::StorageFailure;
+}
+
 bool Persistence::SaveConfig(Config &config) {
     if (!IsAvailable()) {
         return false;
@@ -168,17 +188,19 @@ bool Persistence::SaveConfig(Config &config) {
     if (staged) staged.close();
     if (!staged_ok) return false;
 
-    LittleFS.remove(prior_compact_filename);
     const bool had_current = LittleFS.exists(config_filename);
+    // When only the prior compact file survives, it is the authoritative
+    // recovery anchor. Do not remove it before replacement publication.
+    if (had_current && LittleFS.exists(prior_compact_filename) &&
+        !LittleFS.remove(prior_compact_filename)) return false;
     if (had_current && !LittleFS.rename(config_filename, prior_compact_filename)) return false;
     if (!LittleFS.rename(temporary_filename, config_filename)) {
         if (had_current) LittleFS.rename(prior_compact_filename, config_filename);
         return false;
     }
-    File published = LittleFS.open(config_filename, "r");
-    const bool published_ok = published && CheckSavedConfig(published);
-    if (published) published.close();
-    if (!published_ok) return false;
+    // The staged bytes were verified before rotation. Successful rename is
+    // the publication point; a later read failure must not report an unchanged
+    // failed transaction after the replacement is already authoritative.
     _config_generation = header.config_crc;
     return true;
 }

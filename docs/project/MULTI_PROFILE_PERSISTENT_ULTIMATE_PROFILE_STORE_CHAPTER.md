@@ -393,3 +393,47 @@ ordinary DNS failed, permitted retry verified canonical6b73a7c and parent83f526b
 Native internal specialists used; fresh review separate. No full user chats,
 Planner or Curator calls, canonical commits, hardware operations or acceptance.
 Nunchuk remains NOT_TESTED. Full global stack bound and physical cause UNKNOWN.
+
+## Production finalization and accepted hardware lineage (2026-10-15)
+
+The direct owner production-finalization request authorizes the bounded repair
+of `SET_MODE_REFERENCE_PERSISTS_TRANSIENT_RUNTIME_SELECTION_STATE`, retirement
+of CREATE-only diagnostics, affected regressions, fresh independent review and
+exact committed production handoff. No canonical merge or strict DONE yet.
+
+Owner reports exact4ac255eb first CREATE/persistence/payload PASS, non-reference
+CRUD/reboot PASS, and migration/reference persistence PASS within the PARTIAL
+lifecycle result. Final store generation8 contains ID1 rev2 `CRUD Primary` rank20,
+ID3 rev1 `Migrated 1` rank0, ID4 rev1 `Migrated 2` rank1, and deleted ID2 absent.
+The6248-byte fixture migrated generation6→8 without ID2 reuse; compact Config
+format1 has zero embedded profiles, mode1→ID3 and mode2→ID4; payload equality,
+no migration replay, reference3→4 persistence, referenced-delete refusal and
+reference4→3 restore passed. Runtime-B physical discriminator remains
+`NOT_TESTED — PHYSICAL_RUNTIME_OBSERVER_UNAVAILABLE`; source activation is not
+physical-output evidence. PARTIAL does not mean migration failed.
+
+Reference SET now uses a checked durable candidate and fresh durable-generation
+fence, edits only target reference/legacy-index fields and leaves live Config
+unchanged. DELETE protects live and next-boot references. Compact save retains
+a sole prior recovery anchor and treats verified-file publication as success.
+The CREATE-only watchdog/stage/recovery probe is retired; normal RT2 recovery
+and all source-proven CREATE production fixes remain. Historical diagnostic
+reports/artifacts are preserved. See
+[production finalization](../runtime_config/profile_store_production_finalization.md)
+for the complete mutation audit, accepted hardware rows, gate assessment, test
+scope, failure boundaries and minimal new exact-candidate hardware packet.
+
+Live canonical6b73a7c was verified through permitted network-enabled reads;
+ordinary DNS remains unavailable. New source needs its own exact artifact
+hardware acceptance. Frozen target geometry/interruption requirements are not
+silently waived; no strict DONE or aggregate PASS is inferred. Nunchuk remains
+NOT_TESTED. Native source/test workers and fresh independent reviewer are used;
+no new user chats, Planner/Curator, device actions or canonical commits.
+
+Fresh production review also found a concrete frozen root-recovery violation:
+corrupting generation3 allowed writable generation2 fallback and ID3 reuse.
+The bounded finalization now fences damaged/missing-companion fallback, invalid
+roots and root conflicts, clears stale RAM on reload, and retains only safe
+read-only inspection. Exact source counterexamples and regressions prevent ID
+reuse; no automatic repair, orphan activation or format change. This is a
+blocking identity-safety fix, not historical framework debt.
