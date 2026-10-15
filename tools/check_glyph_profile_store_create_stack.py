@@ -39,8 +39,15 @@ def measure(out):
   'ProfileStore::Duplicate(':128,':void setup()':512,
   'Persistence::LoadConfigChecked(':512,'Persistence::SaveConfigIfGenerationMatches(':512,
   'Persistence::SaveConfig(':512}
+ # GCC may split a function into a public wrapper and a part.0 implementation
+ # whose .su name is only "0(Config&)". Both retain the same source coordinate.
+ # Include all such frames so a tiny wrapper cannot hide a large load body.
+ measured={}
  for name,limit in limits.items():
-  if size(name)>limit:raise AssertionError(f'{name}: {size(name)} > {limit}')
+  definitions={':'.join(r['function'].split(':',3)[:3]) for r in rows if name in r['function']}
+  if not definitions:raise AssertionError('missing production stack row: '+name)
+  measured[name]=sum(r['bytes'] for r in rows if ':'.join(r['function'].split(':',3)[:3]) in definitions)
+  if measured[name]>limit:raise AssertionError(f'{name}: {measured[name]} > {limit}')
  prefix=size(':int main()')+size(':void loop()')+size('ConfiguratorBackend::SendReport()')+size('ConfiguratorBackend::HandleProfileStore()')
  # Direct calls verified by relocations in the pinned O3 object; the traverse
  # callback is lfs_dir_commit_commit. Inlined bd_prog/flush are NOT added again.
@@ -57,7 +64,7 @@ def measure(out):
  compiler=pathlib.Path(shlex.split(selected[0]['command'])[0])
  report={'compiler':str(compiler),'compiler_sha256':hashlib.sha256(compiler.read_bytes()).hexdigest(),
   'optimization':'production compiledb flags, O3 project/LittleFS; no LTO',
-  'frames':rows,'critical_limits':limits,'prefix_bytes':prefix,
+  'frames':rows,'critical_limits':limits,'critical_measured_bytes':measured,'prefix_bytes':prefix,
   'record_open_reachable_chain_bytes':root_open,'littlefs_open_chain_bytes':leaf,
   'request_decode_enumerated_C_upper_bytes':decoder,
   'default_reservation_bytes':2048,'ordinary_scratch_bank_envelope_bytes':4096,
