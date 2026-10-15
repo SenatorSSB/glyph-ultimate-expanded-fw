@@ -346,3 +346,14 @@ that reserve. Firmware capabilities report measured total/free/reserved bytes
 and the derived admission count. Target-device filesystem geometry and
 interruption behavior remain required candidate/hardware evidence; the test
 adapter does not claim them.
+
+## Evidence disposition — 2026-10-15 (not a design amendment)
+
+The final production candidate `f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113`
+has owner-reported selector-purity and reference-safety hardware PASS. The
+[strict review](profile_store_strict_done_review.md) returns
+`MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED`: the frozen requirements above
+remain binding and are not reduced by successful ordinary hardware operations.
+The [receipt](profile_store_hardware_acceptance_receipt.json) preserves exact
+source/artifact identities and original hardware reports. No frozen wording,
+acceptance requirement, source, schema or build input was changed here.

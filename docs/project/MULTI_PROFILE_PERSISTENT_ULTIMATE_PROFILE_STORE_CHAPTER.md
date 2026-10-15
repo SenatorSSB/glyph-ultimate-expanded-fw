@@ -1,6 +1,10 @@
 # Multi-Profile Persistent Ultimate Profile Store — Chapter Ledger
 
-Status: `DISCOVERY_IN_PROGRESS`.
+Status: `MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED`.
+
+Latest evidence: exact final-production hardware PASS on `f7ba82d4`, with
+frozen chapter requirements still unmet. See the final reconciliation below.
+Sections preceding it retain their original chronological scope.
 
 ## Authority and scope
 
@@ -437,3 +441,49 @@ roots and root conflicts, clears stale RAM on reload, and retains only safe
 read-only inspection. Exact source counterexamples and regressions prevent ID
 reuse; no automatic repair, orphan activation or format change. This is a
 blocking identity-safety fix, not historical framework debt.
+
+## Hardware reconciliation and strict closure — 2026-10-15
+
+Current disposition: **MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED**.
+The owner's final-production hardware result is **PASS** for exact tested
+source `f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113`; it does not discharge every
+frozen chapter requirement. See the [strict requirement review](../runtime_config/profile_store_strict_done_review.md)
+and [hashed evidence receipt](../runtime_config/profile_store_hardware_acceptance_receipt.json).
+This current disposition supersedes earlier pending final-candidate hardware
+wording; earlier sections remain historical evidence, not renewed test requests.
+
+The tested tree is `fea1c14a5775b8f5db5ce85b2fed95ad6411d485`, parent
+`08296b0e72f440e6536cff45246c57bb17bc9868`, base/merge-base
+`6b73a7c507f35c111745c6bdd341618b490cbdcd`. Its preserved UF2 is 935424 bytes,
+SHA-256 `256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21`.
+The About/device revision was `f7ba82d4`. The artifact was rehashed during this
+reconciliation; no firmware was rebuilt, flashed, or newly tested.
+
+The final owner packet normalized inherited durable USB3 once to USB1, then
+proved menu Configurator entry was temporary. Reference mode1 ID3→ID4 changed
+only the requested durable reference; USB1 and all unrelated fields stayed
+unchanged. DELETE refused both live ID3 and saved ID4 before reboot. ID4 and
+USB1 survived reboot; restoration ID4→ID3 survived the final reboot. Store
+stayed generation8 with ID1 rev2 `CRUD Primary` rank20, ID3 rev1 `Migrated 1`
+rank0, ID4 rev1 `Migrated 2` rank1, and ID2 absent. Config remained compact1,
+zero embedded profiles, references index0 none/index1 ID3/index2 ID4. IDs3/4
+were readable and byte-serialized equal to Stage-C source profiles.
+
+The parent4ac255eb CREATE/CRUD and migration mechanics PASS remain valid in
+their observed scope. Migration PARTIAL does not mean failed migration: the
+missing Runtime-B physical output observation is separate from the repaired
+selector-state persistence defect. F1–F6 and intermediate failed candidates
+retain their original classifications. The original hang's precise physical
+root cause remains UNPROVEN.
+
+The owner authorizes documentation/evidence only in this reconciliation.
+Concrete frozen implementation/evidence gaps stop strict DONE; no source
+repair, architecture waiver, new candidate identity or canonical merge is
+performed. Canonical remains `6b73a7c507f35c111745c6bdd341618b490cbdcd`.
+
+Network capability: `live_github_requires_network_enabled: true`. Fresh live
+reads verified canonical and tested branch before reconciliation. One fresh
+native independent reviewer is separate from the reconciler; no new user chat,
+Planner, Curator, hardware action or canonical publication. No replacement
+implementation is authorized by this evidence receipt. The next permissible
+step is owner inspection of the strict blocker matrix.

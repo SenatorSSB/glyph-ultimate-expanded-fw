@@ -1,6 +1,20 @@
 # Glyph Current State
 
-C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). The Multi-Profile Persistent Ultimate Profile Store is recorded as future architecture, not started or authorized by this documentation update.
+C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). The multi-profile branch status below supersedes the earlier future-only description; canonical integration is still pending.
+
+## Multi-Profile Persistent Ultimate Profile Store branch status
+
+Exact tested source `f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113` has owner
+final-production hardware PASS for selector-state purity and reference safety.
+The UF2 is 935424 bytes, SHA-256
+`256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21`.
+Strict chapter completion is **BLOCKED** by unmet frozen requirements; see the
+[requirement review](runtime_config/profile_store_strict_done_review.md) and
+[chapter ledger](project/MULTI_PROFILE_PERSISTENT_ULTIMATE_PROFILE_STORE_CHAPTER.md).
+This branch implements independent storage and compact references; canonical
+`configurator` remains `6b73a7c507f35c111745c6bdd341618b490cbdcd` and retains the
+accepted embedded-profile representation described below. No source change,
+rebuild, device action, new candidate or merge belongs to this reconciliation.
 
 ## Runtime-Loaded Ultimate Profiles completion
 
@@ -31,8 +45,8 @@ Naively increasing the embedded fixed profile array therefore scales RAM across
 each of those instances. The planned store direction is to persist many
 profiles independently while materializing only active plus candidate/staging
 profiles in RAM; see the `Multi-Profile Persistent Ultimate Profile Store`
-roadmap chapter. This is a future architecture only and does not implement the
-store, protocol, or migration.
+roadmap chapter. This describes the canonical baseline; the unmerged
+multi-profile candidate and its incomplete strict acceptance are recorded above.
 
 ### Subsequent function-binding direction
 

@@ -21,10 +21,16 @@ hardware smoke. It does not authorize a public release, Senscope expansion, or
 a successor firmware chapter. LS-to-D-pad remains a bounded host-only physical
 observation limitation; Nunchuk remains NOT_TESTED.
 
-## Future Chapter — Multi-Profile Persistent Ultimate Profile Store
+## Multi-Profile Persistent Ultimate Profile Store
 
-Status: `FUTURE_ARCHITECTURE`, not authorized for implementation by this
-roadmap entry.
+Status: `MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED`. The independently
+owner-authorized branch has final-production hardware PASS on exact `f7ba82d4`,
+but frozen requirements remain unmet. See the
+[strict requirement review](runtime_config/profile_store_strict_done_review.md).
+No canonical integration or further firmware work is authorized by this
+roadmap entry. The architecture and intended gates below preserve the original
+product direction; their earlier future tense does not negate the implemented
+candidate or waive its remaining requirements.
 
 The completed Runtime-Loaded Ultimate Profiles chapter is retired. Its accepted
 v3 `UltimateProfile` semantics and evaluator are the starting point for a

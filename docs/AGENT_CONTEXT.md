@@ -1,5 +1,15 @@
 # Agent Context
 
+## Multi-profile evidence reconciliation — 2026-10-15
+
+Exact tested production `f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113` has owner
+hardware PASS for the final selector/reference repair. Strict chapter DONE is
+BLOCKED; [the requirement review](runtime_config/profile_store_strict_done_review.md)
+records remaining frozen implementation and evidence gaps. This evidence-only
+branch descendant does not authorize repair, rebuild, device actions or merge.
+Canonical remains `6b73a7c507f35c111745c6bdd341618b490cbdcd`; older chapter and
+campaign status below is historical within its original scope.
+
 ## Post-C024 orchestration boundary
 
 The C020–C024 campaign is complete. GLYPH-UD-029 is historical authority only;
