@@ -13,15 +13,18 @@ from check_glyph_stage_b_ultimate_profiles import NANOPB, ROOT, make_v3_artifact
 HOST = ROOT / "tools/fixtures/profile_store_timeout_host"
 
 
+SANITIZERS = ["-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-g"] if os.environ.get("GLYPH_PROFILE_STORE_SANITIZERS") == "1" else []
+
+
 def invoke(command: list[str]) -> str:
-    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False, timeout=30)
+    completed = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False, timeout=30, env={**os.environ, "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"})
     if completed.returncode:
         raise RuntimeError("command failed:\n" + " ".join(command) + "\n" + completed.stdout + completed.stderr)
     return completed.stdout
 
 
 def compile_object(source: Path, target: Path, includes: list[Path], extra: list[str] | None = None) -> None:
-    invoke(["c++", "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-error=missing-field-initializers", "-Wno-error=inconsistent-missing-override", *(extra or []),
+    invoke(["c++", *SANITIZERS, "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-error=missing-field-initializers", "-Wno-error=inconsistent-missing-override", *(extra or []),
             *sum((["-I", str(item)] for item in includes), []), "-c", str(source), "-o", str(target)])
 
 
@@ -35,7 +38,7 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
     for name, source in (("pb_common", nanopb / "pb_common.c"), ("pb_decode", nanopb / "pb_decode.c"),
                          ("pb_encode", nanopb / "pb_encode.c"), ("config", generated / "config.pb.c")):
         target = temp / f"{name}.o"
-        invoke(["cc", "-std=c11", "-fshort-enums", "-I", str(generated), "-I", str(nanopb),
+        invoke(["cc", *SANITIZERS, "-std=c11", "-fshort-enums", "-I", str(generated), "-I", str(nanopb),
                 "-c", str(source), "-o", str(target)])
         objects.append(target)
     profile = temp / "profile.o"
@@ -68,7 +71,7 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
     compile_object(backend_source, backend, includes); objects.append(backend)
     exe = temp / ("original" if original else "repaired")
     flags = (["-DEXPECT_DUPLICATE_NEXT_DROP"] if original else []) + (["-DEXPECT_LEGACY_RECORD_TEMP_PATH"] if legacy_record_temp else [])
-    invoke(["c++", "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-error=inconsistent-missing-override", "-Wno-error=unused-function", *flags,
+    invoke(["c++", *SANITIZERS, "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-error=inconsistent-missing-override", "-Wno-error=unused-function", *flags,
             *sum((["-I", str(item)] for item in includes), []), str(HOST / "timeout_harness.cpp"),
             *map(str, objects), "-o", str(exe)])
     invoke([str(exe), str(fixture)])
@@ -91,6 +94,15 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
         else:
             if "profile_store_full_stream_path_limited_create=PASS" not in path_limited_create:
                 raise AssertionError("strict LittleFS component-limit CREATE evidence missing")
+            for mode, marker in ([(f"--deep-create-{mask}", "profile_store_stale_files_root_rotation=PASS") for mask in range(16)] + [(f"--drop-create-response-{budget}", "profile_store_successful_commit_tx_failure=PASS") for budget in range(4)]):
+                if marker not in invoke([str(exe), str(fixture), mode]):
+                    raise AssertionError(f"deep CREATE evidence missing for {mode}")
+            for mode, marker in (("--probe-recovery", "profile_store_probe_recovery_transport=PASS"), ("--direct-create-replay", "profile_store_direct_create_replay=PASS")):
+                if marker not in invoke([str(exe), str(fixture), mode]):
+                    raise AssertionError(f"probe/replay evidence missing for {mode}")
+            for mode in ("--old-valid-record", "--old-valid-directory"):
+                if "profile_store_old_valid_readback_rejected=PASS" not in invoke([str(exe), str(fixture), mode]):
+                    raise AssertionError(f"old valid readback control missing for {mode}")
             path_limited_import = invoke([str(exe), str(fixture), "--path-limit-import"])
             if "profile_store_strict_path_import=PASS" not in path_limited_import:
                 raise AssertionError("strict LittleFS component-limit ImportLegacy evidence missing")
@@ -125,7 +137,8 @@ def main() -> int:
         print(f"glyph_profile_store_timeout_resynchronization: FAIL: {error}")
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30")
+    print(f"sanitizers={bool(SANITIZERS)}")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true stale_file_combinations=16 root_rotation_creates=512 rotating_directory_failure_stages=7 old_valid_record_and_root_rejected=true probe_recovery_status_and_mutation_refusal=true direct_create_replay_nonmutation=true tx_failure_budgets=0,1,7 tx_failure_transaction_recovery=true tx_no_space=true tx_short_write=true tx_deadline_ms=2000 retained_transport_resync=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30")
     return 0
 
 

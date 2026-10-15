@@ -111,12 +111,18 @@ bool DecodeDirectory(const uint8_t *wire, size_t length, ProfileStore::Directory
 class LittleFsDirectoryStorage final : public ProfileStoreStorage {
   public:
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
+        using Stage = ProfileStoreCreateProbe::Stage;
+        const bool directory = std::strncmp(path, "/ultimate-dir-", 14) == 0;
         _last_failure = ProfileStoreStorageFailure::None;
+        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryOpenEntered : Stage::RecordOpenEntered);
         File file = LittleFS.open(path, "w+");
         if (!file) { _last_failure = ProfileStoreStorageFailure::TempOpenWrite; return false; }
+        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryOpenComplete : Stage::RecordOpenComplete);
         const bool ok = WriteAll(file, bytes, length);
+        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryDataWritten : Stage::RecordDataWritten);
         if (!ok) _last_failure = ProfileStoreStorageFailure::TempWrite;
         if (file) file.close();
+        ProfileStoreCreateProbe::Mark(directory ? Stage::DirectoryCloseComplete : Stage::RecordCloseComplete);
         return ok;
     }
     bool Read(const char *path, uint8_t *bytes, size_t length) override {
@@ -219,13 +225,16 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
     if (!_ready || _read_only_recovery) return false;
     static uint8_t wire[kDirectoryWireBytes];
     if (!EncodeDirectory(next, wire)) { _last_io_stage = ProfileStoreIoStage::DirectoryEncode; return false; }
+    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::DirectoryEncoded);
     const uint8_t slot = static_cast<uint8_t>((next.generation + 1) & 1u); char path[32], temporary[32]; ProfileStorePaths::DirectoryPath(path, sizeof(path), slot); ProfileStorePaths::DirectoryTemporaryPath(temporary, sizeof(temporary), slot);
     static Directory verified;
     verified = {};
     if (!ProfileStoreAtomicCommit::ReplaceInactiveRoot(*_storage, temporary, path, wire, sizeof(wire),
             DecodeDirectoryCommit, &verified, &_last_io_stage)) return false;
     if (verified.generation != next.generation) { _last_io_stage = ProfileStoreIoStage::DirectoryGenerationMismatch; return false; }
-    *_directory = next; return true;
+    *_directory = next;
+    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::DirectoryPublished);
+    return true;
 }
 
 int ProfileStore::Find(uint32_t id) const { if (!_directory || id == 0) return -1; for (size_t i = 0; i < _directory->count; ++i) if (_directory->entries[i].id == id) return static_cast<int>(i); return -1; }
@@ -234,6 +243,7 @@ bool ProfileStore::ValidateProfile(const UltimateProfile &profile) const {
     return validate_ultimate_profile_semantics(profile, error);
 }
 bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimateProfile &profile) {
+    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::RecordEntered);
     _last_io_stage = ProfileStoreIoStage::None;
     if (!ValidateProfile(profile)) return false;
     size_t length = 0;
@@ -252,9 +262,9 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t revision, const UltimatePr
     }
     Put32(record + 24, Crc32(record, 24)); Put32(record + 28, Crc32(record + kRecordHeaderSize, length));
     char path[64], temporary[64]; ProfileStorePaths::RecordPath(path, sizeof(path), id, revision); ProfileStorePaths::RecordTemporaryPath(temporary, sizeof(temporary), id, revision);
-    const RecordCommitContext expected{Incarnation(), id, revision};
+    RecordCommitContext expected{Incarnation(), id, revision};
     return ProfileStoreAtomicCommit::ReplaceVerifiedFile(*_storage, temporary, path, record,
-            kRecordHeaderSize + length, VerifyRecordCommit, const_cast<RecordCommitContext *>(&expected),
+            kRecordHeaderSize + length, VerifyRecordCommit, &expected,
             &_last_io_stage);
 }
 void ProfileStore::ResetDiagnostic() { _last_io_stage = ProfileStoreIoStage::None; }
@@ -293,7 +303,7 @@ ProfileStore::TransactionResult ProfileStore::BeginMutation(uint32_t token, uint
 void ProfileStore::Finish(TransactionResult *result, uint32_t id, uint32_t revision) const { result->id = id; result->revision = revision; result->generation = _directory ? _directory->generation + 1 : 0; }
 
 ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile &profile, const char *name, uint32_t rank, uint32_t token, uint32_t digest) {
-    auto result = BeginMutation(token, digest); if (result.status != Status::Ok) return result; if (_directory->count == kMaxEntries || _directory->high_water_id == UINT32_MAX || !ValidateProfile(profile)) return { _directory->count == kMaxEntries ? Status::Full : Status::Invalid };
+    auto result = BeginMutation(token, digest); if (result.status != Status::Ok || (token != 0 && _directory->last_token == token)) return result; if (_directory->count == kMaxEntries || _directory->high_water_id == UINT32_MAX || !ValidateProfile(profile)) return { _directory->count == kMaxEntries ? Status::Full : Status::Invalid };
     const uint32_t id = _directory->high_water_id + 1, revision = 1; if (!WriteProfile(id, revision, profile)) return {Status::IoFailure}; static Directory next; next = *_directory; auto &entry = next.entries[next.count++]; entry.id = id; entry.revision = revision; entry.payload_version = kEnvelopeVersion; entry.rank = rank; if (name) std::strncpy(entry.name, name, sizeof(entry.name) - 1); next.high_water_id = id; next.generation++; next.last_token = token; next.last_digest = digest; Finish(&result, id, revision); next.last_result = result; return PublishDirectory(next) ? result : TransactionResult{Status::UnknownOutcome, id, revision, next.generation};
 }
 ProfileStore::TransactionResult ProfileStore::Update(uint32_t id, const UltimateProfile &profile, uint32_t expected_revision, uint32_t token, uint32_t digest) {
@@ -306,7 +316,9 @@ ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t id, uint32_t ex
     const int index = Find(id);
     if (index < 0) return {Status::NotFound};
     if (_directory->entries[index].revision != expected_revision) return {Status::Conflict};
-    UltimateProfile profile = UltimateProfile_init_default;
+    // Store mutations run synchronously on core0; no callback re-enters them.
+    // This scratch must not be the active or candidate activation storage.
+    static UltimateProfile profile;
     if (!ReadProfile(id, expected_revision, profile)) return {Status::Invalid};
     return Create(profile, name, rank, token, digest);
 }

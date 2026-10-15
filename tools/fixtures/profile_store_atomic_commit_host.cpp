@@ -12,6 +12,7 @@ namespace {
 struct MemoryStorage final : ProfileStoreAtomicCommit::Storage {
     std::map<std::string, std::vector<uint8_t>> files;
     bool strict_absent_remove = false;
+    std::vector<uint8_t> stale_readback;
     bool fail_write = false;
     bool fail_read = false;
     bool fail_remove = false;
@@ -24,7 +25,9 @@ struct MemoryStorage final : ProfileStoreAtomicCommit::Storage {
         if (fail_read) return false;
         const auto found = files.find(path);
         if (found == files.end() || found->second.size() != length) return false;
-        std::memcpy(bytes, found->second.data(), length); return true;
+        const auto &readback = stale_readback.empty() ? found->second : stale_readback;
+        if (readback.size() != length) return false;
+        std::memcpy(bytes, readback.data(), length); return true;
     }
     size_t Size(const char *path) override {
         const auto found = files.find(path);
@@ -126,6 +129,28 @@ int main() {
                  "interrupted replacement must retain known-good active revision")) return 1;
     if (!require(record_storage.files.find("/ultimate-00000001-00000002.bin") == record_storage.files.end(),
                  "interrupted replacement must not publish new revision")) return 1;
+    // Both images satisfy the supplied semantic validator (same marker and
+    // identity prefix), but their payloads differ. The readback must equal the
+    // exact intended image before either publication operation may run.
+    for (const bool directory : {false, true}) {
+        const size_t size = directory ? 2620 : 4128;
+        const char *temporary = directory ? "/ultimate-dir-1.tmp" : "/ultimate-00000001-00000001.tmp";
+        const char *destination = directory ? "/ultimate-dir-1.bin" : "/ultimate-00000001-00000001.bin";
+        std::vector<uint8_t> intended(size, 0x5a), old = intended;
+        old.back() ^= 1;
+        MemoryStorage stale;
+        stale.files[destination] = old;
+        stale.stale_readback = old;
+        const auto original = intended;
+        ProfileStoreIoStage stage = ProfileStoreIoStage::None;
+        const auto kind = directory ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record;
+        if (!require(!ProfileStoreAtomicCommit::ReplaceVerifiedFile(stale, temporary, destination,
+                intended.data(), intended.size(), nonempty, nullptr, &stage, kind),
+                "semantically acceptable old readback must fail exact verification")) return 1;
+        if (!require(stage == (directory ? ProfileStoreIoStage::DirectoryVerify : ProfileStoreIoStage::RecordVerify) &&
+                stale.files[destination] == old && intended == original,
+                "stale readback must retain destination and caller bytes")) return 1;
+    }
     constexpr size_t max_record_bytes = 32 + 4096;
     constexpr size_t max_directory_bytes = 32 + 64 * 40 + 28;
     static_assert(ProfileStoreCapacity::FitsRepresentativeSet(20, max_record_bytes, max_directory_bytes));
@@ -137,6 +162,6 @@ int main() {
                  "after old compact rename before new publish, boot must choose retained compact prior")) return 1;
     if (!require(CompactConfigRecovery::Select(false, false) == CompactConfigRecovery::Source::Legacy,
                  "legacy is selected only with no compact generation to recover")) return 1;
-    std::puts("profile_store_atomic_commit first_absent_record=PASS existing_replacement=PASS existing_remove_failure=PASS temp_write_verify_failures=PASS interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS");
+    std::puts("profile_store_atomic_commit first_absent_record=PASS existing_replacement=PASS existing_remove_failure=PASS temp_write_verify_failures=PASS interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS old_valid_shape_readback_rejected=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS");
     return 0;
 }

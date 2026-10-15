@@ -20,6 +20,7 @@
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
+#include "core/ProfileStoreCreateProbe.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
@@ -27,6 +28,48 @@
 #include <pb_arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
+#include <cstdio>
+
+namespace {
+// TinyUSB's ordinary write can wait forever while a connected host stops
+// draining TX. Only hand it bytes already admitted by its FIFO. The single
+// core0 producer owns this response; USB IRQs can only increase free space.
+class ProfilePacketWriter final : public Print {
+  public:
+    explicit ProfilePacketWriter(Stream &stream) : _stream(stream), _start(millis()) {}
+    size_t write(uint8_t byte) override { return write(&byte, 1); }
+    size_t write(const uint8_t *bytes, size_t length) override {
+        size_t sent = 0;
+        while (sent < length && static_cast<uint32_t>(millis() - _start) < 2000u) {
+            const int available = _stream.availableForWrite();
+            if (available > 0) {
+                const size_t count = length - sent < static_cast<size_t>(available)
+                    ? length - sent : static_cast<size_t>(available);
+                const size_t written = _stream.write(bytes + sent, count);
+                sent += written;
+                if (written != 0) continue;
+            }
+            delay(1);
+        }
+        return sent;
+    }
+  private:
+    Stream &_stream;
+    uint32_t _start;
+};
+}
+
+bool ConfiguratorBackend::WriteProfilePacket(Command command, const uint8_t *bytes, size_t length) {
+    ProfilePacketWriter writer(_base_stream);
+    // A failed packet may have left a prefix on the wire. Delimit it before
+    // starting a fresh COBS encoder; do not retain failed encoder state.
+    if (_profile_tx_needs_sync && writer.write(uint8_t{0}) != 1) return false;
+    packetio::COBSPrint packet(writer);
+    const bool ok = packet.write(static_cast<uint8_t>(command)) == 1 &&
+        packet.write(bytes, length) == length && packet.end();
+    _profile_tx_needs_sync = !ok;
+    return ok;
+}
 
 ConfiguratorBackend::ConfiguratorBackend(
     InputState &inputs,
@@ -58,6 +101,22 @@ void ConfiguratorBackend::SendReport() {
     }
 
     Command command = (Command)data;
+    if (_profile_tx_needs_sync && command != CMD_PROFILE_STORE) {
+        // Legacy command responses share the physical stream. They must also
+        // terminate a partial ProfileStore frame before using their encoder.
+        ProfilePacketWriter writer(_base_stream);
+        if (writer.write(uint8_t{0}) != 1) {
+            SkipToNextPacket();
+            return;
+        }
+        _profile_tx_needs_sync = false;
+    }
+    if (ProfileStoreCreateProbe::Recovery() && command != CMD_GET_DEVICE_INFO && command != CMD_PROFILE_STORE) {
+        static constexpr char message[] = "CREATE probe recovery is read-only";
+        WriteProfilePacket(CMD_ERROR, reinterpret_cast<const uint8_t *>(message), sizeof(message) - 1);
+        SkipToNextPacket();
+        return;
+    }
     switch (command) {
         case CMD_GET_DEVICE_INFO:
             HandleGetDeviceInfo();
@@ -235,14 +294,26 @@ bool ConfiguratorBackend::HandleProfileStore() {
     const size_t length = ReadPacket(frame, sizeof(frame));
     if (_packet_timed_out) {
         static constexpr char timeout[] = "Profile store frame timeout";
-        return WritePacket(CMD_ERROR, (uint8_t *)timeout, sizeof(timeout) - 1);
+        return WriteProfilePacket(CMD_ERROR, (const uint8_t *)timeout, sizeof(timeout) - 1);
     }
-    if (length == sizeof(frame)) return WritePacket(CMD_ERROR, (uint8_t *)"Profile store frame too large", 29);
+    if (length == sizeof(frame)) return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29);
     request = ProfileStoreRequest_init_default;
     pb_istream_t input = pb_istream_from_buffer(frame, length);
     if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || request.protocol_version != 1) {
-        return WritePacket(CMD_ERROR, (uint8_t *)"Invalid profile store request", 29);
+        return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
+    if (ProfileStoreCreateProbe::Recovery()) {
+        response = ProfileStoreResponse_init_default;
+        response.protocol_version = 1;
+        response.request_token = request.request_token;
+        response.status = PROFILE_STORE_IO_FAILURE;
+        std::snprintf(response.diagnostic, sizeof(response.diagnostic), "create.hang.stage=%lu",
+            static_cast<unsigned long>(ProfileStoreCreateProbe::recovered_stage));
+        pb_ostream_t recovered = pb_ostream_from_buffer(frame, sizeof(frame));
+        return pb_encode(&recovered, ProfileStoreResponse_fields, &response) &&
+            WriteProfilePacket(CMD_PROFILE_STORE, frame, recovered.bytes_written);
+    }
+    if (request.operation == PROFILE_STORE_CREATE) ProfileStoreCreateProbe::Begin();
     response = ProfileStoreResponse_init_default;
     response.protocol_version = 1;
     response.request_token = request.request_token;
@@ -317,7 +388,10 @@ bool ConfiguratorBackend::HandleProfileStore() {
                 if (current.mode_id != MODE_ULTIMATE) {
                     result.status = ProfileStore::Status::Invalid;
                 } else {
-                    UltimateProfile selected = UltimateProfile_init_default;
+                    // This handler is synchronous and core0-owned. Keeping the
+                    // read destination static avoids reserving a full profile
+                    // in every invocation, including CREATE's nested FS calls.
+                    static UltimateProfile selected;
                     if (request.profile_id != 0 && profile_store.Read(request.profile_id, selected) != ProfileStore::Status::Ok) {
                         result.status = ProfileStore::Status::NotFound;
                     } else {
@@ -367,10 +441,21 @@ bool ConfiguratorBackend::HandleProfileStore() {
             strlcpy(response.diagnostic, profile_store.LastDiagnostic(), sizeof(response.diagnostic));
         }
     }
-    _out.write(CMD_PROFILE_STORE);
-    pb_ostream_t output = as_pb_ostream(_out);
-    if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) return false;
-    return _out.end();
+    // The request is decoded into owned static fields before reusing frame.
+    // Encoding and transport are separate bounded stages, with no FS frames
+    // alive during either stage.
+    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEncodeEntered);
+    pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));
+    if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) {
+        ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::Failed);
+        ProfileStoreCreateProbe::Finish();
+        return false;
+    }
+    ProfileStoreCreateProbe::Mark(ProfileStoreCreateProbe::Stage::ResponseEncoded);
+    const bool sent = WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
+    ProfileStoreCreateProbe::Mark(sent ? ProfileStoreCreateProbe::Stage::ResponseEnded : ProfileStoreCreateProbe::Stage::Failed);
+    ProfileStoreCreateProbe::Finish();
+    return sent;
 }
 
 bool ConfiguratorBackend::HandleUnknownCommand(Command command) {

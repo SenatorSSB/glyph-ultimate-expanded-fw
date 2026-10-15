@@ -1,10 +1,12 @@
 #include "host_stubs.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
+#include "core/ProfileStoreCreateProbe.hpp"
 #include "core/ProfileStorePaths.hpp"
 #include "core/ProfileStoreStorage.hpp"
 #include <pb_decode.h>
 #include <pb_encode.h>
+#include <algorithm>
 #include <cstdio>
 #include <cstring>
 #include <fstream>
@@ -23,6 +25,7 @@ namespace {
 struct MemoryStorage final : ProfileStoreStorage {
   enum class Failure { None, TempOpenWrite, TempWrite, TempRead, TempSize, Verify, DestRemove, Rename };
   std::map<std::string, std::vector<uint8_t>> files;
+  std::map<std::string, std::vector<uint8_t>> read_overrides;
   bool strict_absent_remove = false;
   bool enforce_littlefs_component_limit = false;
   Failure failure = Failure::None;
@@ -31,7 +34,7 @@ struct MemoryStorage final : ProfileStoreStorage {
   bool PathValid(const char *path) const { for (const char *component=path; component; ) { if (*component=='/') ++component; const char *slash=std::strchr(component,'/'); const size_t length=slash?static_cast<size_t>(slash-component):std::strlen(component); if(length>=32)return false; if(!slash)break; component=slash; } return true; }
   Failure For(const char *p) const { return std::strncmp(p,"/ultimate-dir-",14)==0?directory_failure:failure; }
   bool Write(const char *p, const uint8_t *b, size_t n) override { const Failure active=For(p);last_failure=ProfileStoreStorageFailure::None;if(enforce_littlefs_component_limit&&!PathValid(p)){last_failure=ProfileStoreStorageFailure::TempOpenWrite;return false;}if(active==Failure::TempOpenWrite){last_failure=ProfileStoreStorageFailure::TempOpenWrite;return false;}if(active==Failure::TempWrite){last_failure=ProfileStoreStorageFailure::TempWrite;return false;}files[p] = {b, b + n}; return true; }
-  bool Read(const char *p, uint8_t *b, size_t n) override { const Failure active=For(p);last_failure=ProfileStoreStorageFailure::None;if(active==Failure::TempRead){last_failure=ProfileStoreStorageFailure::TempRead;return false;}if(active==Failure::TempSize){last_failure=ProfileStoreStorageFailure::TempSize;return false;}auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; std::memcpy(b,i->second.data(),n);if(active==Failure::Verify)b[0]^=1;return true; }
+  bool Read(const char *p, uint8_t *b, size_t n) override { const Failure active=For(p);last_failure=ProfileStoreStorageFailure::None;if(active==Failure::TempRead){last_failure=ProfileStoreStorageFailure::TempRead;return false;}if(active==Failure::TempSize){last_failure=ProfileStoreStorageFailure::TempSize;return false;}auto i=files.find(p); if(i==files.end()||i->second.size()!=n)return false; auto replacement=read_overrides.find(p);if(replacement!=read_overrides.end()){if(replacement->second.size()!=n)return false;std::memcpy(b,replacement->second.data(),n);}else std::memcpy(b,i->second.data(),n);if(active==Failure::Verify)b[0]^=1;return true; }
   size_t Size(const char *p) override { auto i=files.find(p);return i==files.end()?0:i->second.size(); }
   bool Exists(const char *p) override { return files.find(p)!=files.end(); }
   ProfileStoreStorageFailure LastFailure() const override { return last_failure; }
@@ -42,13 +45,14 @@ MemoryStorage storage;
 void require(bool ok, const char *m) { if (!ok) throw std::runtime_error(m); }
 class DuplexStream final : public Stream {
  public:
-  std::vector<uint8_t> rx, tx; size_t pos=0;
+  std::vector<uint8_t> rx, tx; size_t pos=0; size_t tx_budget=SIZE_MAX; bool advertise_full_fifo=false;
+  int availableForWrite() override { return advertise_full_fifo?64:static_cast<int>(std::min(size_t{64},tx_budget)); }
   int available() override { return static_cast<int>(rx.size()-pos); }
   int read() override { return pos<rx.size()?rx[pos++]:-1; }
   int peek() override { return pos<rx.size()?rx[pos]:-1; }
   void flush() override {}
-  size_t write(uint8_t b) override { tx.push_back(b);return 1; }
-  size_t write(const uint8_t *b,size_t n) override { tx.insert(tx.end(),b,b+n);return n; }
+  size_t write(uint8_t b) override { if(!tx_budget)return 0;--tx_budget;tx.push_back(b);return 1; }
+  size_t write(const uint8_t *b,size_t n) override { const size_t accepted=std::min(n,tx_budget);tx_budget-=accepted;tx.insert(tx.end(),b,b+accepted);return accepted; }
   void append(const std::vector<uint8_t>& b){rx.insert(rx.end(),b.begin(),b.end());}
   size_t remaining()const{return rx.size()-pos;} void clear(){tx.clear();}
 };
@@ -147,6 +151,7 @@ void first_create_from_empty(const char *path, const char *mode) {
     std::puts("profile_store_full_stream_diagnostic_reset=PASS");return;
   }
   require(made.status==PROFILE_STORE_OK&&made.diagnostic[0]==0&&made.profile_id==1&&made.profile_revision==1,"empty-store CREATE");
+  require(!ProfileStoreCreateProbe::active&&ProfileStoreCreateProbe::last_stage==static_cast<uint32_t>(ProfileStoreCreateProbe::Stage::ResponseEnded),"successful CREATE reaches response end and disarms probe");
   r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_LIST;r.expected_store_generation=profile_store.Generation();r.page_size=8;r.request_token=0x402;const auto listed=send(backend,wire,r);require(listed.status==PROFILE_STORE_OK&&listed.entries_count==1&&listed.entries[0].profile_id==made.profile_id,"empty-store LIST");
   r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_READ;r.expected_store_generation=profile_store.Generation();r.profile_id=made.profile_id;r.request_token=0x403;const auto read=send(backend,wire,r);require(read.status==PROFILE_STORE_OK&&read.has_profile&&read.profile_id==made.profile_id,"empty-store READ");
   if(std::strcmp(mode,"--path-limit-create")==0){ProfileStore reboot(&storage);require(reboot.Begin()&&reboot.Count()==1,"path-limited reboot");UltimateProfile restored=UltimateProfile_init_default;require(reboot.Read(made.profile_id,restored)==ProfileStore::Status::Ok&&std::memcmp(&restored,&profile,sizeof(profile))==0,"path-limited reboot record");std::puts("profile_store_full_stream_path_limited_create=PASS");return;}
@@ -161,9 +166,165 @@ void directory_failure_from_empty(const char *path, const char *mode) {
   if(std::strcmp(mode,"--directory-temp-open")==0){storage.directory_failure=MemoryStorage::Failure::TempOpenWrite;expected="directory.temp_open_write";}else if(std::strcmp(mode,"--directory-temp-write")==0){storage.directory_failure=MemoryStorage::Failure::TempWrite;expected="directory.temp_write";}else if(std::strcmp(mode,"--directory-temp-read")==0){storage.directory_failure=MemoryStorage::Failure::TempRead;expected="directory.temp_read";}else if(std::strcmp(mode,"--directory-temp-size")==0){storage.directory_failure=MemoryStorage::Failure::TempSize;expected="directory.temp_size";}else if(std::strcmp(mode,"--directory-verify")==0){storage.directory_failure=MemoryStorage::Failure::Verify;expected="directory.verify";}else if(std::strcmp(mode,"--directory-dest-remove")==0){storage.directory_failure=MemoryStorage::Failure::DestRemove;expected="directory.dest_remove";storage.files["/ultimate-dir-0.bin"]={0x5a};}else if(std::strcmp(mode,"--directory-rename")==0){storage.directory_failure=MemoryStorage::Failure::Rename;expected="directory.rename";}else require(false,"directory failure mode");
   require(profile_store.Begin()&&profile_store.Generation()==0,"empty directory store");InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.expected_store_generation=0;r.has_profile=true;r.profile=profile;std::strcpy(r.name,"Directory failure");r.display_rank=1;r.request_token=0x501;const auto made=send(backend,wire,r);require(made.status==PROFILE_STORE_COMMIT_UNKNOWN&&made.profile_id==1&&made.profile_revision==1&&std::strcmp(made.diagnostic,expected)==0,"directory failure response");storage.directory_failure=MemoryStorage::Failure::None;require(profile_store.Begin()&&profile_store.Generation()==0&&profile_store.Count()==0,"directory failure reboot empty");r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_QUERY_TRANSACTION;r.expected_store_generation=0;r.request_token=0x501;require(send(backend,wire,r).status==PROFILE_STORE_NOT_FOUND,"directory failure query not committed");std::puts("profile_store_full_stream_directory_diagnostic=PASS");
 }
+
+
+
+void direct_create_replay(const char *path) {
+  Config config=Config_init_default;seed(path,&config);UltimateProfile profile=UltimateProfile_init_default;
+  require(profile_store.Read(profile_store.EntryAt(0)->id,profile)==ProfileStore::Status::Ok,"direct replay source profile");
+  const auto made=profile_store.Create(profile,"Direct replay",7,0xabc,0xdef);
+  require(made.status==ProfileStore::Status::Ok,"direct CREATE committed");
+  const auto files=storage.files;const auto count=profile_store.Count();const auto generation=profile_store.Generation();
+  for(unsigned reboot=0;reboot<2;++reboot){
+    if(reboot)require(profile_store.Begin(),"direct replay boot");
+    const auto replay=profile_store.Create(profile,"Direct replay",7,0xabc,0xdef);
+    require(replay.status==made.status&&replay.id==made.id&&replay.revision==made.revision&&replay.generation==made.generation,"direct CREATE returns cached identity");
+    const auto conflict=profile_store.Create(profile,"Direct replay",7,0xabc,0xdf0);
+    require(conflict.status==ProfileStore::Status::Conflict,"direct CREATE token/digest collision refused");
+    require(storage.files==files&&profile_store.Count()==count&&profile_store.Generation()==generation,"direct CREATE replay and collision do not mutate");
+  }
+  std::puts("profile_store_direct_create_replay=PASS");
+}
+void recovered_probe_transport(const char *path) {
+  Config config=Config_init_default;seed(path,&config);UltimateProfile profile=UltimateProfile_init_default;
+  require(profile_store.Read(profile_store.EntryAt(0)->id,profile)==ProfileStore::Status::Ok,"recovery profile");
+  InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
+  const auto files=storage.files;const Config baseline=backend._config;const auto count=profile_store.Count();const auto generation=profile_store.Generation();const auto saves=persistence.save_calls;
+  ProfileStoreCreateProbe::active=false;ProfileStoreCreateProbe::last_stage=0xfeed;
+  for(const uint32_t stage:{static_cast<uint32_t>(ProfileStoreCreateProbe::Stage::DirectoryRead),UINT32_MAX}){
+    ProfileStoreCreateProbe::recovered_stage=stage;
+    char diagnostic[48];std::snprintf(diagnostic,sizeof(diagnostic),"create.hang.stage=%lu",static_cast<unsigned long>(stage));
+    auto r=status();const auto reported=send(backend,wire,r);require(reported.status==PROFILE_STORE_IO_FAILURE&&std::strcmp(reported.diagnostic,diagnostic)==0,"recovery STATUS identifies retained stage");
+    r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.has_profile=true;r.profile=profile;r.expected_store_generation=generation;r.request_token=0x999;std::strcpy(r.name,"Forbidden recovery create");
+    const auto refused=send(backend,wire,r);require(refused.status==PROFILE_STORE_IO_FAILURE&&std::strcmp(refused.diagnostic,diagnostic)==0,"recovery CREATE refused");
+    for(const auto command:{CMD_GET_CONFIG,CMD_SET_CONFIG}){
+      DuplexStream raw;packetio::COBSPrint encoded(raw);encoded.write(static_cast<uint8_t>(command));
+      if(command==CMD_SET_CONFIG){size_t n=0;require(pb_get_encoded_size(&n,Config_fields,&baseline),"SETCONFIG fixture size");std::vector<uint8_t> body(n);pb_ostream_t out=pb_ostream_from_buffer(body.data(),body.size());require(pb_encode(&out,Config_fields,&baseline),"SETCONFIG fixture encode");encoded.write(body.data(),body.size());}
+      require(encoded.end(),"recovery raw request frame");wire.clear();wire.append(raw.tx);backend.SendReport();
+      const auto error=decode(wire.tx);require(!error.empty()&&error[0]==CMD_ERROR,"recovery GETCONFIG/SETCONFIG rejected");
+      // PacketIO next() schedules a lazy drain; the subsequent poll consumes
+      // the rejected request through its delimiter before another command.
+      for(unsigned polls=0;wire.remaining()&&polls<3;++polls)backend.SendReport();
+      require(wire.remaining()==0,"recovery rejected request drained through delimiter");
+    }
+    require(storage.files==files&&profile_store.Count()==count&&profile_store.Generation()==generation&&persistence.save_calls==saves&&std::memcmp(&baseline,&backend._config,sizeof(Config))==0,"recovery requests preserve storage and Config");
+    require(!ProfileStoreCreateProbe::active&&ProfileStoreCreateProbe::recovered_stage==stage&&ProfileStoreCreateProbe::last_stage==0xfeed,"recovery requests cannot overwrite retained probe");
+  }
+  ProfileStoreCreateProbe::recovered_stage=0;std::puts("profile_store_probe_recovery_transport=PASS");
+}
+void stale_valid_readback(const char *path, bool directory) {
+  std::ifstream f(path,std::ios::binary);require(bool(f),"fixture open");std::vector<uint8_t> bytes((std::istreambuf_iterator<char>(f)),{});
+  pb_istream_t pb=pb_istream_from_buffer(bytes.data(),bytes.size());Config config=Config_init_default;
+  require(pb_decode(&pb,Config_fields,&config)&&pb.bytes_left==0,"fixture decode");
+  const UltimateProfile first=config.ultimate_profiles[0];
+  config.ultimate_profiles_count=0;config.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;config.ultimate_profile_store_incarnation=1;
+  storage.strict_absent_remove=true;storage.enforce_littlefs_component_limit=true;require(profile_store.Begin(),"stale proof begin");
+  InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
+  ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;r.has_profile=true;r.profile=first;r.request_token=0x901;std::strcpy(r.name,"Original payload");
+  // An interrupted root publication leaves a real internally valid record and
+  // root temporary, both for the exact same next identity/generation.
+  storage.directory_failure=MemoryStorage::Failure::Rename;
+  const auto interrupted=send(backend,wire,r);require(interrupted.status==PROFILE_STORE_COMMIT_UNKNOWN,"seed valid uncommitted envelopes");
+  storage.directory_failure=MemoryStorage::Failure::None;
+  const std::string record="/ultimate-00000001-00000001.bin", root="/ultimate-dir-0.tmp";
+  const auto old_record=storage.files.at(record),old_root=storage.files.at(root);
+  if(directory){storage.read_overrides[root]=old_root;std::strcpy(r.name,"Changed payload");}
+  else{
+    // Change one in-range coordinate without changing protobuf varint length.
+    bool changed=false;
+    for(size_t table=0;table<r.profile.tables_count&&!changed;++table)
+      for(size_t coordinate=0;coordinate<r.profile.tables[table].coordinates_count&&!changed;++coordinate){
+        auto &x=r.profile.tables[table].coordinates[coordinate].x;
+        if(x>1&&x<=255){x^=1;changed=true;}
+      }
+    require(changed,"profile coordinate available for same-size mutation");
+    storage.read_overrides["/ultimate-00000001-00000001.tmp"]=old_record;
+  }
+  r.request_token=0x902;const auto rejected=send(backend,wire,r);
+  require(rejected.status==(directory?PROFILE_STORE_COMMIT_UNKNOWN:PROFILE_STORE_IO_FAILURE)&&
+          std::strcmp(rejected.diagnostic,directory?"directory.verify":"record.verify")==0,"old valid envelope rejected as unintended bytes");
+  require(profile_store.Count()==0&&profile_store.Generation()==0,"old valid readback cannot publish logical state");
+  if(!directory)require(storage.files.at(record)==old_record,"old record destination preserved before verification");
+  storage.read_overrides.clear();require(profile_store.Begin()&&profile_store.Count()==0&&profile_store.Generation()==0,"old valid rejection reload remains empty");
+  const auto made=send(backend,wire,r);require(made.status==PROFILE_STORE_OK&&made.profile_id==1,"retry exact intended image succeeds");
+  UltimateProfile restored=UltimateProfile_init_default;require(profile_store.Read(1,restored)==ProfileStore::Status::Ok&&std::memcmp(&restored,&r.profile,sizeof(restored))==0,"retry committed payload is intended profile");
+  std::puts("profile_store_old_valid_readback_rejected=PASS");
+}
+void deep_create_paths(const char *path, bool drop_response, unsigned scenario) {
+  std::ifstream f(path,std::ios::binary);require(bool(f),"fixture open");
+  std::vector<uint8_t> bytes((std::istreambuf_iterator<char>(f)),{});
+  pb_istream_t pb=pb_istream_from_buffer(bytes.data(),bytes.size());
+  Config config=Config_init_default;require(pb_decode(&pb,Config_fields,&config)&&pb.bytes_left==0,"fixture decode");
+  const UltimateProfile profile=config.ultimate_profiles[0];config.ultimate_profiles_count=0;
+  config.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;config.ultimate_profile_store_incarnation=1;
+  storage.strict_absent_remove=true;storage.enforce_littlefs_component_limit=true;
+  // Cartesian stale-file controls: record temp, orphan destination, root temp,
+  // and an invalid inactive root, individually and in every combination.
+  for(unsigned mask=scenario;mask==scenario;++mask){
+    storage.files.clear();storage.failure=MemoryStorage::Failure::None;storage.directory_failure=MemoryStorage::Failure::None;
+    if(!drop_response){
+      if(mask&1)storage.files["/ultimate-00000001-00000001.tmp"]={0xde,0xad};
+      if(mask&2)storage.files["/ultimate-00000001-00000001.bin"]={0xba,0xd0};
+      if(mask&4)storage.files["/ultimate-dir-0.tmp"]={0xfa};
+      if(mask&8)storage.files["/ultimate-dir-0.bin"]={0xff};
+    }
+    require(profile_store.Begin()&&profile_store.Count()==0&&profile_store.Generation()==0,"stale files are not a committed root");
+    InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
+    const unsigned operations=drop_response?1:32;
+    for(unsigned step=0;step<operations;++step){
+      ProfileStoreRequest r=ProfileStoreRequest_init_default;r.protocol_version=1;r.operation=PROFILE_STORE_CREATE;
+      r.expected_store_generation=profile_store.Generation();r.has_profile=true;r.profile=profile;
+      std::snprintf(r.name,sizeof(r.name),"Create %u",step);r.display_rank=step;r.request_token=0x8000+step;
+      const uint32_t before=profile_store.Generation();
+      if(!drop_response&&mask==0&&step>1&&step<9){
+        const auto active_slot=std::string("/ultimate-dir-")+std::to_string((profile_store.Generation()+1)&1u)+".bin";
+        const auto active_bytes=storage.files.at(active_slot);
+        storage.directory_failure=static_cast<MemoryStorage::Failure>(step-1);
+        const auto failed=send(backend,wire,r);
+        require(failed.status==PROFILE_STORE_COMMIT_UNKNOWN&&failed.profile_id==step+1,"rotating inactive-root publication failure");
+        require(storage.files.at(active_slot)==active_bytes,"failed publication preserves exact active root");
+        storage.directory_failure=MemoryStorage::Failure::None;
+        require(profile_store.Begin()&&profile_store.Generation()==before&&profile_store.Count()==step,"failed inactive publication reloads active root");
+        UltimateProfile orphan=UltimateProfile_init_default;require(profile_store.Read(step+1,orphan)==ProfileStore::Status::NotFound,"orphan record is invisible");
+      }
+      if(drop_response){wire.tx_budget=mask==0?0:(mask==1?1:7);wire.advertise_full_fifo=mask==3;const uint32_t started=host_millis;wire.append(frame(r));backend.SendReport();require(wire.remaining()==0,"bounded TX request consumed");require(wire.tx.size()<=7,"bounded response sink");require(host_millis-started==2000,"TX deadline bounded at 2000 ms");}
+      else{const auto made=send(backend,wire,r);require(made.status==PROFILE_STORE_OK&&made.profile_id==step+1&&made.request_token==r.request_token&&made.store_generation==before+1,"successful CREATE response");}
+      require(profile_store.Count()==step+1&&profile_store.Generation()==before+1,"CREATE commits before response");
+      const std::string active=std::string("/ultimate-dir-")+std::to_string((profile_store.Generation()+1)&1u)+".bin";
+      require(storage.files.at(active).size()==2620,"complete root wire size");
+      // Begin rereads committed roots; it must select the newest alternating slot.
+      require(profile_store.Begin()&&profile_store.Count()==step+1&&profile_store.Generation()==before+1,"rotating roots survive reload");
+      UltimateProfile restored=UltimateProfile_init_default;
+      require(profile_store.Read(step+1,restored)==ProfileStore::Status::Ok&&std::memcmp(&restored,&profile,sizeof(profile))==0,"committed profile readback");
+      if(drop_response){
+        DuplexStream recovery;ConfiguratorBackend reboot(inputs,nullptr,0,config,recovery);
+        ProfileStoreRequest query=ProfileStoreRequest_init_default;query.protocol_version=1;query.operation=PROFILE_STORE_QUERY_TRANSACTION;
+        query.expected_store_generation=profile_store.Generation();query.request_token=r.request_token;
+        const auto result=send(reboot,recovery,query);require(result.status==PROFILE_STORE_OK&&result.profile_id==1&&result.profile_revision==1,"lost successful response recovered by transaction query");
+        wire.tx_budget=SIZE_MAX;wire.clear();
+        if(scenario%2==0){
+          DuplexStream command_wire;packetio::COBSPrint command_packet(command_wire);
+          command_packet.write(static_cast<uint8_t>(CMD_GET_DEVICE_INFO));require(command_packet.end(),"device info command frame");
+          wire.append(command_wire.tx);
+        }else wire.append(frame(status()));
+        backend.SendReport();
+        // Legacy GET_DEVICE_INFO retains its lazy EOP drain lifecycle.
+        if(scenario%2==0&&wire.remaining()!=0)backend.SendReport();
+        require(wire.remaining()==0&&!wire.tx.empty()&&wire.tx[0]==0,"same-transport recovery delimits failed response prefix");
+        wire.tx.erase(wire.tx.begin());
+        if(scenario%2==0){const auto info=decode(wire.tx);require(!info.empty()&&info[0]==CMD_SET_DEVICE_INFO,"legacy device-info response resynchronizes after partial CREATE TX");}
+        else require(response(wire).status==PROFILE_STORE_OK,"profile response resynchronizes after partial CREATE TX");
+        require(send(backend,wire,status()).status==PROFILE_STORE_OK,"same-transport STATUS resynchronization");
+        const auto repeated=send(backend,wire,query);
+        require(repeated.status==PROFILE_STORE_OK&&repeated.profile_id==1&&profile_store.Count()==1,"same-transport QUERY_TRANSACTION recovers without duplicate commit");
+      }
+    }
+  }
+  std::puts(drop_response?"profile_store_successful_commit_tx_failure=PASS":"profile_store_stale_files_root_rotation=PASS");
+}
 } // namespace
 ProfileStore profile_store(&storage);
-int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");malformed_cobs_controls();if(argc==3){if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
+int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");malformed_cobs_controls();if(argc==3){if(std::strcmp(argv[2],"--probe-recovery")==0){recovered_probe_transport(argv[1]);return 0;}if(std::strcmp(argv[2],"--direct-create-replay")==0){direct_create_replay(argv[1]);return 0;}if(std::strcmp(argv[2],"--old-valid-record")==0){stale_valid_readback(argv[1],false);return 0;}if(std::strcmp(argv[2],"--old-valid-directory")==0){stale_valid_readback(argv[1],true);return 0;}if(std::strncmp(argv[2],"--deep-create-",14)==0){deep_create_paths(argv[1],false,static_cast<unsigned>(std::stoul(argv[2]+14)));return 0;}if(std::strncmp(argv[2],"--drop-create-response-",22)==0){deep_create_paths(argv[1],true,static_cast<unsigned>(std::stoul(argv[2]+22)));return 0;}if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
 #ifndef EXPECT_DUPLICATE_NEXT_DROP
 const Config baseline=config;
 #endif

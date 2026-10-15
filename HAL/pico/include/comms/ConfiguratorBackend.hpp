@@ -46,12 +46,14 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleGetConfig();
     bool HandleSetConfig();
     bool HandleProfileStore();
+    bool WriteProfilePacket(Command command, const uint8_t *bytes, size_t length);
 
     packetio::COBSStream _in;
     packetio::COBSPrint _out;
     Stream &_base_stream;
     Config &_config;
     bool _packet_timed_out = false;
+    bool _profile_tx_needs_sync = false;
 };
 
 #endif

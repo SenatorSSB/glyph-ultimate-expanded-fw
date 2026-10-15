@@ -11,6 +11,7 @@ typedef struct _UltimateProfile UltimateProfile;
 
 class Print {
  public:
+  virtual int availableForWrite() { return 64; }
   virtual ~Print() = default;
   virtual size_t write(uint8_t value) = 0;
   virtual size_t write(const uint8_t *data, size_t size) = 0;

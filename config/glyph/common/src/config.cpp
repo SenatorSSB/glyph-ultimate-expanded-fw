@@ -6,6 +6,7 @@
 #include "core/KeyboardMode.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
+#include "core/ProfileStoreCreateProbe.hpp"
 #include "core/mode_selection.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -143,6 +144,10 @@ void enter_recovery_configurator() {
 
 
 void setup() {
+    if (ProfileStoreCreateProbe::CaptureBoot()) {
+        enter_recovery_configurator();
+        return;
+    }
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
 
@@ -222,7 +227,11 @@ void setup() {
             refuse_boot(BootOutcome::StorageFailure, display_ready);
             return;
         }
-        Config compact = config;
+        // setup() runs after core1 launches. A full automatic Config reserves
+        // ~31 KiB even on a non-migration boot, crossing both scratch banks.
+        // Migration is boot-only; keep its unpublished candidate in owned BSS.
+        static Config compact;
+        compact = config;
         // Historical persisted Configs can contain explicitly encoded RGB
         // no-op slots. They were accepted before strict physical-target
         // validation; remove only those no-ops while producing the compact

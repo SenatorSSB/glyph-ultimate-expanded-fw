@@ -6,7 +6,7 @@ The production Pico image uses setup1()/loop1().  On the pinned Arduino-Pico
 This checker deliberately compiles the old F6 callback reconstruction and the
 current direct-buffer callback with the same pinned ARM compiler, Cortex-M0+
 target and O3 optimisation used by glyph_mk6.  It reads GCC's -fstack-usage
-output: the old local 2620-byte copy must exceed the deployed 2048-byte stack,
+output: the old local 2620-byte copy must exceed the 2048-byte minimum reservation,
 while the repaired shape must remain at or below 128 bytes.
 """
 from __future__ import annotations
@@ -23,7 +23,7 @@ PLATFORMIO = ROOT / "platformio.ini"
 FRAMEWORK_MAIN = Path.home() / ".platformio/packages/framework-arduinopico/cores/rp2040/main.cpp"
 TOOLCHAIN = Path.home() / ".platformio/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++"
 DIRECT_LIMIT = 128
-DEPLOYED_STACK_BYTES = 2048
+RESERVED_STACK_BYTES = 2048
 
 
 def require(value: bool, message: str) -> None:
@@ -89,8 +89,8 @@ def main() -> int:
             directory = Path(raw)
             old = stack_usage(callback_source("old", True), "old", directory)
             repaired = stack_usage(callback_source("repaired", False), "repaired", directory)
-        require(old > DEPLOYED_STACK_BYTES,
-                f"old F6 reconstruction unexpectedly fits {DEPLOYED_STACK_BYTES} byte stack ({old})")
+        require(old > RESERVED_STACK_BYTES,
+                f"old F6 reconstruction unexpectedly fits {RESERVED_STACK_BYTES} byte stack ({old})")
         require(repaired <= DIRECT_LIMIT,
                 f"repaired callback consumes {repaired}, above {DIRECT_LIMIT} byte gate")
     except (AssertionError, OSError, subprocess.CalledProcessError) as error:
@@ -98,8 +98,8 @@ def main() -> int:
         return 1
     print("glyph_profile_store_directory_stack: PASS")
     print(f"toolchain=pinned-arm-none-eabi-g++ cortex_m0plus=true old_f6_bytes={old} repaired_bytes={repaired} "
-          f"deployed_stack_bytes={DEPLOYED_STACK_BYTES} repaired_limit={DIRECT_LIMIT} "
-          f"margin_bytes={DEPLOYED_STACK_BYTES - repaired} core1_separate_stack_default=false")
+          f"reserved_minimum_bytes={RESERVED_STACK_BYTES} repaired_limit={DIRECT_LIMIT} "
+          f"callback_only_reservation_margin_bytes={RESERVED_STACK_BYTES - repaired} core1_separate_stack_default=false")
     return 0
 
 

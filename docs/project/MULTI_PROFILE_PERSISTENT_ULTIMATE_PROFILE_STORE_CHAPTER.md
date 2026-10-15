@@ -365,3 +365,31 @@ host-schema mismatch claim: the pinned host tool already uses tracked
   production 5000 ms inactivity boundary, asserts Config/storage/count/
   generation/save-count nonmutation, then proves delimiter resynchronization,
   STATUS recovery, the 8192-byte cap, and a 30-second external host timeout.
+
+## Complete CREATE diagnosis and diagnostic qualification (2026-10-15)
+
+The owner's direct complete-path repair request supersedes the narrow callback
+investigation. Parent83f526b8's one CREATE timed out; no post-timeout probe,
+reboot or mutation occurred, so its later state remains UNKNOWN. The direct
+callback repair stays. Scope remains the existing store; canonical is not merged.
+
+Branch `codex/multi-profile-store-create-path-repair` repairs cumulative handler,
+DUPLICATE and startup automatic frames, exact temporary readback equality,
+bounded ProfileStore TX/recovery framing, and direct CREATE cached-token replay.
+The physical root cause remains UNPROVEN. The owner has no SWD probe; bounded
+watchdog stage retention therefore provides the next diagnostic information.
+After timeout reset, transport-only read-only recovery reports the stage before
+filesystem access. No flash logging or framework/core1 lockout bypass is added.
+
+See `docs/runtime_config/profile_store_create_path_diagnosis.md` and its linked
+independent flash analysis for source tables, falsification, stack limits,
+validation scope and the one-CREATE hardware packet. Source commit must receive
+fresh independent review and exact committed build/custody before hardware
+handoff. Final candidate SHA/build/UF2 receipt is stored beside the preserved UF2;
+this ledger does not fabricate those future identities or physical acceptance.
+
+Network capability: live GitHub requires permitted network-enabled execution;
+ordinary DNS failed, permitted retry verified canonical6b73a7c and parent83f526b8.
+Native internal specialists used; fresh review separate. No full user chats,
+Planner or Curator calls, canonical commits, hardware operations or acceptance.
+Nunchuk remains NOT_TESTED. Full global stack bound and physical cause UNKNOWN.
