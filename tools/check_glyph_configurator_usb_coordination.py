@@ -19,6 +19,8 @@ void delay(unsigned n){assert(!__usb_mutex.held);ticks+=n;}
 // Pinned task IRQ first tries __usb_mutex. Its DTR/reset handler then takes
 // the FIFO writer/reader locks. Deliver it precisely while main owns one.
 void irq(){++attempts;if(!mutex_try_enter(&__usb_mutex,nullptr)){++deferrals;return;}if(inner)++deadlocks;mutex_exit(&__usb_mutex);}
+extern "C" void TinyUSB_Device_Task() { assert(!__usb_mutex.held); }
+#define CFG_TUD_CDC_TX_BUFSIZE 64
 void access(){inner=true;irq();inner=false;}
 uint32_t tud_cdc_n_available(uint8_t){access();return 1;}
 bool tud_cdc_n_peek(uint8_t,uint8_t*b){access();*b=42;return true;}

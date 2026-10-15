@@ -1,3 +1,4 @@
+#include "core/ProfileStoreReadTrace.hpp"
 #include "core/CheckedStorage.hpp"
 #ifdef GLYPH_CHECKED_STORAGE_TEST_MOUNT
 #include <lfs.h>
@@ -175,8 +176,12 @@ Result ReadFile(const char *path, uint8_t *bytes, size_t length, Kind kind) {
     size_t size = 0; auto r = Stat(path, &size, kind); if (!r) return r;
     if (size != length) return {Outcome::Failed, LFS_ERR_INVAL, size};
     File file; r = Open(file, path, false, kind); if (!r) return r;
+    if (kind == Kind::Record) ProfileStoreReadTrace::Mark(13);
     r = Read(file, bytes, length); if (r && r.bytes != length) r.outcome = Outcome::Failed;
+    if (kind == Kind::Record) ProfileStoreReadTrace::Mark(14, r.bytes);
+    // Always close even if the USB observer failed while this file was open.
     auto closed = Close(file); if (!closed) r = closed;
+    if (kind == Kind::Record) ProfileStoreReadTrace::Mark(15, bool(closed));
     return r;
 }
 }

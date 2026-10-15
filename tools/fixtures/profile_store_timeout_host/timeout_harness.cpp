@@ -664,6 +664,22 @@ void liveness_protocol(const char *path) {
     if(part.liveness_stage)stages.push_back(part.liveness_stage);else{++finals;require(part.status==PROFILE_STORE_OK,"trace final");}
   }
   require(stages==std::vector<unsigned>({1,2,3,4,5,6,7,8,9})&&finals==1,"ordered bounded phase evidence");
+  traced.operation=PROFILE_STORE_READ;traced.profile_id=1;
+  wire.clear();wire.append(frame(traced));backend.SendReport();
+  stages.clear();begin=0;finals=0;unsigned encodedSize=0,finalSize=0,accepted=0;
+  for(size_t i=0;i<wire.tx.size();++i)if(wire.tx[i]==0){
+    auto bytes=decode(std::vector<uint8_t>(wire.tx.begin()+begin,wire.tx.begin()+i+1));begin=i+1;
+    require(bytes[0]==CMD_PROFILE_STORE,"READ trace command");ProfileStoreResponse part=ProfileStoreResponse_init_default;
+    auto in=pb_istream_from_buffer(bytes.data()+1,bytes.size()-1);require(pb_decode(&in,ProfileStoreResponse_fields,&part),"READ trace decode");
+    if(part.liveness_stage){
+      stages.push_back(part.liveness_stage);
+      if(part.liveness_stage==9)encodedSize=part.liveness_value;
+      if(part.liveness_stage==21)accepted=part.liveness_value;
+      if(part.liveness_stage==22||part.liveness_stage==23)require(part.liveness_value==1,"READ flush requested and submitted");
+    }else{++finals;finalSize=bytes.size()-1;require(part.has_profile&&part.profile_id==1,"full READ reconstructed");}
+  }
+  require(stages==std::vector<unsigned>({1,2,10,11,12,16,17,18,19,8,9,20,21,22,23,24}),"READ phases including terminal; memory storage omits native checked IO stages13-15");
+  require(finals==1&&encodedSize==finalSize&&accepted>finalSize,"READ exact encode and accepted-wire counts");
   const auto before=host_millis;wire.clear();wire.read_cost=1000;wire.append(frame(status()));backend.SendReport();wire.read_cost=0;
   require(host_millis-before<=7000,"whole-frame timeout bounds slow trickle");
   require(decode(wire.tx)[0]==CMD_ERROR,"slow trickle receives timeout");

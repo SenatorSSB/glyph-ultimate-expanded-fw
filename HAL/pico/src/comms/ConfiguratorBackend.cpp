@@ -31,6 +31,7 @@
 #include <pb_arduino.h>
 #include <pb_decode.h>
 #include <pb_encode.h>
+#include "core/ProfileStoreReadTrace.hpp"
 #include <cstdio>
 #include <cstring>
 
@@ -59,26 +60,42 @@ class ProfilePacketWriter final : public Print {
                     ? length - sent : static_cast<size_t>(available);
                 const size_t written = _stream.writeAvailable(bytes + sent, count);
                 sent += written;
+                _accepted += written;
+                _stream.serviceTx();
                 if (written != 0) continue;
             }
+            _stream.serviceTx();
             delay(1);
         }
         return sent;
     }
+    size_t accepted() const { return _accepted; }
+    bool finish() {
+        while (static_cast<uint32_t>(millis() - _start) < 2000u) {
+            _stream.serviceTx();
+            if (_stream.txSubmitted()) return true;
+            delay(1);
+        }
+        return false;
+    }
   private:
+    size_t _accepted = 0;
     CoordinatedCdcStream &_stream;
     uint32_t _start;
 };
 }
 
-bool ConfiguratorBackend::WriteProfilePacket(Command command, const uint8_t *bytes, size_t length) {
+bool ConfiguratorBackend::WriteProfilePacket(Command command, const uint8_t *bytes, size_t length, size_t *accepted, bool *flushRequested) {
     ProfilePacketWriter writer(_base_stream);
     // A failed packet may have left a prefix on the wire. Delimit it before
     // starting a fresh COBS encoder; do not retain failed encoder state.
     if (_profile_tx_needs_sync && writer.write(uint8_t{0}) != 1) return false;
     packetio::COBSPrint packet(writer);
-    const bool ok = packet.write(static_cast<uint8_t>(command)) == 1 &&
+    const bool encoded = packet.write(static_cast<uint8_t>(command)) == 1 &&
         packet.write(bytes, length) == length && packet.end();
+    if (accepted) *accepted = writer.accepted();
+    if (flushRequested) *flushRequested = encoded;
+    const bool ok = encoded && writer.finish();
     _profile_tx_needs_sync = !ok;
     return ok;
 }
@@ -86,7 +103,7 @@ bool ConfiguratorBackend::WriteProfilePacket(Command command, const uint8_t *byt
 // Small candidate-only frames are emitted before the suspected synchronous
 // phases. The host journals these before waiting for the final response. No
 // flash writes, watchdog, IRQ/core1 instrumentation, or stack-sized protobuf.
-bool ConfiguratorBackend::TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage) {
+bool ConfiguratorBackend::TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage, uint32_t value) {
     if (!kStrictHardeningCandidate || !request.liveness_trace) return true;
     uint8_t bytes[32]; size_t count = 0;
     auto varint = [&](uint64_t value) {
@@ -95,6 +112,7 @@ bool ConfiguratorBackend::TraceProfileStage(const ProfileStoreRequest &request, 
     varint(8); varint(request.protocol_version);
     varint(16); varint(request.request_token);
     varint(42u << 3); varint(stage);
+    varint(43u << 3); varint(value);
     return WriteProfilePacket(CMD_PROFILE_STORE, bytes, count);
 }
 
@@ -489,9 +507,16 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.status = PROFILE_STORE_OK;
         handled = true;
     } else if (request.operation == PROFILE_STORE_READ) {
+        struct TraceContext { ConfiguratorBackend *backend; const ProfileStoreRequest *request; } context{this, &request};
+        ProfileStoreReadTrace::Scope trace(kStrictHardeningCandidate && request.liveness_trace
+            ? +[](void *opaque, uint32_t stage, uint32_t value) {
+                auto &c = *static_cast<TraceContext *>(opaque);
+                return c.backend->TraceProfileStage(*c.request, stage, value);
+              } : nullptr, &context);
         uint32_t revision = 0;
         const auto status = profile_store.Read(request.profile_id, response.profile, &revision);
         response.has_profile = status == ProfileStore::Status::Ok || status == ProfileStore::Status::RecoveredPrevious;
+        if (ProfileStoreReadTrace::Failed() || !TraceProfileStage(request, 19, response.has_profile)) return false;
         result = {status, request.profile_id, revision, profile_store.Generation()};
     } else if (!mutation && !query) {
         response.status = PROFILE_STORE_UNSUPPORTED;
@@ -650,8 +675,20 @@ bool ConfiguratorBackend::HandleProfileStore() {
     if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) {
         return false;
     }
-    if (!TraceProfileStage(request, 9)) return false; // encoded; before final TX
-    const bool sent = WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
+    if (!TraceProfileStage(request, 9, output.bytes_written)) return false;
+    const bool traceRead = kStrictHardeningCandidate && request.liveness_trace && request.operation == PROFILE_STORE_READ;
+    if (traceRead && !TraceProfileStage(request, 20, output.bytes_written)) return false;
+    size_t accepted = 0; bool flushRequested = false;
+    const bool sent = WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written, &accepted, &flushRequested);
+    // Never interleave diagnostic frames inside a COBS response. These trailing
+    // observations describe that attempt; a failed prefix is delimited first.
+    if (traceRead) {
+        if (!TraceProfileStage(request, 21, accepted)) return false;
+        if (!TraceProfileStage(request, 22, flushRequested)) return false;
+        // Completed means FIFO submitted to endpoint, not host ACK observed.
+        if (!TraceProfileStage(request, 23, sent)) return false;
+        if (!TraceProfileStage(request, sent ? 24 : 25, accepted)) return false;
+    }
     return sent;
 }
 

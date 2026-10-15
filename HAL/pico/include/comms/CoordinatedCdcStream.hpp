@@ -4,6 +4,7 @@
 #include <pico/mutex.h>
 #include <tusb.h>
 extern mutex_t __usb_mutex;
+extern "C" void TinyUSB_Device_Task(void);
 #define GLYPH_COORDINATED_CDC 1
 #else
 #define GLYPH_COORDINATED_CDC 0
@@ -52,6 +53,25 @@ class CoordinatedCdcStream final : public Stream {
         _stream.flush();
 #endif
     }
+    // The pinned IRQ drops deferred work while our mutex is held. Its caller
+    // contract requires an explicit task pass afterwards; delay() does not do it.
+    // Do not use yield(): its separate FlushCDC call lacks this outer mutex.
+    void serviceTx() {
+#if GLYPH_COORDINATED_CDC
+        TinyUSB_Device_Task(); // owns its own try-lock; no Guard alive here
+        Guard guard;
+        if (guard.held) tud_cdc_n_write_flush(0);
+#endif
+    }
+    bool txSubmitted() {
+#if GLYPH_COORDINATED_CDC
+        Guard guard;
+        return guard.held && tud_cdc_n_connected(0) &&
+            tud_cdc_n_write_available(0) == CFG_TUD_CDC_TX_BUFSIZE;
+#else
+        return true;
+#endif
+    }
     // Single nonblocking attempt for the caller-owned whole-packet deadline.
     size_t writeAvailable(const uint8_t *bytes, size_t length) {
 #if GLYPH_COORDINATED_CDC
@@ -79,6 +99,7 @@ class CoordinatedCdcStream final : public Stream {
                     if (count) sent += tud_cdc_n_write(0, bytes + sent, count);
                 }
             }
+            serviceTx();
             if (sent < length) delay(1);
         }
         return sent;

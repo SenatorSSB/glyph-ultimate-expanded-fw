@@ -20,7 +20,8 @@ PATTERNS=('ProfileStore.cpp','CheckedStorage.cpp','Persistence.cpp','Configurato
  '/display/','/comms/','/main.cpp','/FS.cpp','LittleFS/src/','RP2040Support.cpp',
  'malloc-lock.cpp','/runtime.c','pb_encode.c','pb_decode.c','pb_common.c',
  'config_validation.cpp','/Print.cpp','/Stream.cpp','/usbd.c','/cdc_device.c',
- '/tusb.c','/tusb_fifo.c','/dcd_rp2040.c')
+ '/tusb.c','/tusb_fifo.c','/dcd_rp2040.c','/Adafruit_TinyUSB_API.cpp',
+ '/Adafruit_TinyUSB_rp2040.cpp','/Adafruit_USBD_CDC.cpp','/Adafruit_USBD_Device.cpp','/delay.cpp','/rp2040_usb.c','/usbd_control.c')
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def run(args,cwd=ROOT):
  p=subprocess.run(args,cwd=cwd,text=True,capture_output=True,timeout=120)

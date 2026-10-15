@@ -94,6 +94,37 @@ def main():
             with patch.object(candidate.select,'select',lambda *args:([-1],[],[])),patch.object(candidate.os,'read',lambda *args:b''.join(frames)),contextlib.redirect_stderr(io.StringIO()) as log:
                 require(candidate.request(TracePort(),pb,message,phase='status').status==pb.PROFILE_STORE_OK,'trace frames precede final response')
             require(log.getvalue().count('device_stage')==9,'all progress stages retained')
+        # Real host parser: chunked large READ, terminal trailer, and partial timeout.
+        args=candidate.parse_args(['--port','UNOPENED','read','--profile-id','1','--trace'])
+        message,_=candidate.build_message(args,pb,json_format)
+        require(message.liveness_trace,'READ opt-in trace serialized')
+        final=pb.ProfileStoreResponse()
+        retained=json.loads((ROOT/"tools/fixtures/profile_store_read_storage/physical_id1_response.json").read_text())
+        json_format.ParseDict(retained["response"],final)
+        final.request_token=message.request_token
+        require(len(final.SerializeToString())==1989,"actual retained full READ payload")
+        encoded=transport.cobs_encode(bytes([9])+final.SerializeToString())
+        terminal=transport.cobs_encode(bytes([9])+pb.ProfileStoreResponse(liveness_stage=24,liveness_value=len(encoded)).SerializeToString())
+        for mode in ('complete','partial','missing_trailer','failure','corrupt_then_failure'):
+            raw=encoded+terminal if mode=='complete' else encoded[:5] if mode=='partial' else encoded
+            if mode in ('failure','corrupt_then_failure'):
+                raw=(b'\xff\x01\0' if mode=='corrupt_then_failure' else b'')+transport.cobs_encode(bytes([9])+pb.ProfileStoreResponse(liveness_stage=25).SerializeToString())
+            chunks=([encoded[:1024],encoded[1024:-1],encoded[-1:],terminal] if mode=='complete' else [raw[i:i+1024] for i in range(0,len(raw),1024)]);clock=[0.0]
+            def tick():clock[0]+=0.01;return clock[0]
+            def ready(*args):return ([-1],[],[]) if chunks else ([],[],[])
+            log=io.StringIO()
+            with patch.object(candidate.time,'monotonic',tick),patch.object(candidate.select,'select',ready),patch.object(candidate.os,'read',lambda *args:chunks.pop(0)),contextlib.redirect_stderr(log):
+                try:result=candidate.request(TracePort(),pb,message,phase='read')
+                except transport.ToolError:require(mode!='complete','complete READ wrongly rejected')
+                else:require(mode=='complete' and result==final,'incomplete READ wrongly accepted')
+            rows=[json.loads(line) for line in log.getvalue().splitlines()]
+            require(any(row['event']=='receive_chunk' for row in rows),'received bytes journaled')
+            if mode=='complete':require(rows[-1]['event']=='read_complete','terminal observed after full response')
+            if mode=='partial':
+                last=rows[-1]
+                require(last['event']=='response_timeout' and last['received_bytes']==5 and last['partial_frame_hex']==raw.hex() and not last['last_byte_is_delimiter'],'exact partial-prefix evidence')
+            if mode=='missing_trailer':require(rows[-1]['final_response_received'],'timeout distinguishes complete response without completion trailer')
+            if mode=='corrupt_then_failure':require(any(row['event']=='invalid_frame' for row in rows),'partial frame retained before failure trailer')
         print('glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true')
         return 0
     except Exception as error:

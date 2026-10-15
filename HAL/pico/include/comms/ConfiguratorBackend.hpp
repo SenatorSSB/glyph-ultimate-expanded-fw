@@ -52,8 +52,8 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleGetConfig();
     bool HandleSetConfig();
     bool HandleProfileStore();
-    bool TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage);
-    bool WriteProfilePacket(Command command, const uint8_t *bytes, size_t length);
+    bool TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage, uint32_t value = 0);
+    bool WriteProfilePacket(Command command, const uint8_t *bytes, size_t length, size_t *accepted = nullptr, bool *flushRequested = nullptr);
 
     CoordinatedCdcStream _coordinated_stream;
     packetio::COBSStream _in;

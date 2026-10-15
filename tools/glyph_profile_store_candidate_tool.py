@@ -25,31 +25,59 @@ def event(phase, state, **fields):
 def request(port,pb,message,exact_payload=None,phase='request'):
     payload=exact_payload if exact_payload is not None else message.SerializeToString(deterministic=True)
     if len(payload)>8192: raise transport.ToolError('request exceeds frame bound')
-    event(phase,'transmit_attempt',operation=message.operation,request_sha256=hashlib.sha256(payload).hexdigest())
-    port.write_all(transport.cobs_encode(bytes([9])+payload))
+    wire=transport.cobs_encode(bytes([9])+payload)
+    event(phase,'transmit_attempt',operation=message.operation,request_sha256=hashlib.sha256(payload).hexdigest(),request_hex=payload.hex(),wire_sha256=hashlib.sha256(wire).hexdigest(),wire_bytes=len(wire))
+    port.write_all(wire)
     event(phase,'transmitted',operation=message.operation)
     deadline=time.monotonic()+port.timeout_sec
-    frame=bytearray()
+    frame=bytearray();received=0;delimiters=0;prefix=hashlib.sha256();last_delimiter=False
+    final_response=None
+    traced_read=message.operation==pb.PROFILE_STORE_READ and message.liveness_trace
+    def rx_state():
+        return dict(received_bytes=received,received_prefix_sha256=prefix.hexdigest(),delimiters=delimiters,
+                    last_byte_is_delimiter=last_delimiter,partial_frame_bytes=len(frame),partial_frame_hex=frame.hex())
     while time.monotonic()<deadline:
         remaining=deadline-time.monotonic()
-        if not select.select([port.fd],[],[],remaining)[0]:continue
-        for byte in os.read(port.fd,1024):
+        if not select.select([port.fd],[],[],max(0,remaining))[0]:continue
+        chunk=os.read(port.fd,1024)
+        if not chunk:
+            event(phase,'receive_eof',**rx_state())
+            raise transport.ToolError('serial stream closed before response completion')
+        received+=len(chunk);prefix.update(chunk);last_delimiter=chunk[-1]==0
+        event(phase,'receive_chunk',chunk_bytes=len(chunk),chunk_hex=chunk.hex(),received_bytes=received,received_prefix_sha256=prefix.hexdigest(),last_byte_is_delimiter=last_delimiter)
+        for byte in chunk:
             if byte:
                 frame.append(byte)
                 if len(frame)>8258:raise transport.ToolError('response exceeds bounded COBS frame')
                 continue
-            if not frame:continue  # Explicit transport resynchronization delimiter.
-            decoded=transport.cobs_decode(bytes(frame)+b'\0');frame.clear()
-            if not decoded or decoded[0]!=9:raise transport.ToolError('unexpected response command')
-            if len(decoded)-1>8192:raise transport.ToolError('response exceeds protobuf bound')
-            response=pb.ProfileStoreResponse();response.ParseFromString(decoded[1:])
+            delimiters+=1
+            if not frame:continue
+            raw=bytes(frame);frame.clear()
+            event(phase,'cobs_frame',frame_bytes=len(raw)+1,frame_sha256=hashlib.sha256(raw+b'\0').hexdigest())
+            try:
+                decoded=transport.cobs_decode(raw+b'\0')
+                if not decoded or decoded[0]!=9:raise transport.ToolError('unexpected response command')
+                if len(decoded)-1>8192:raise transport.ToolError('response exceeds protobuf bound')
+                response=pb.ProfileStoreResponse();response.ParseFromString(decoded[1:])
+            except Exception as error:
+                event(phase,'invalid_frame',frame_hex=raw.hex(),error=str(error))
+                if traced_read:continue # retain truncated response, await bounded diagnostic trailer
+                raise
             if response.request_token!=message.request_token:raise transport.ToolError('response token mismatch')
             if response.liveness_stage:
-                event(phase,'device_stage',stage=response.liveness_stage)
+                stage=response.liveness_stage
+                event(phase,'device_stage',stage=stage,value=response.liveness_value)
+                if traced_read and stage==25:raise transport.ToolError('device reported bounded READ TX failure')
+                if traced_read and stage==24:
+                    if final_response is None:raise transport.ToolError('READ completion without reconstructed response')
+                    event(phase,'read_complete',**rx_state())
+                    return final_response
                 continue
-            event(phase,'response',status=response.status)
-            return response
-    event(phase,'response_timeout',operation=message.operation)
+            event(phase,'response',status=response.status,protobuf_bytes=len(decoded)-1)
+            if not traced_read:return response
+            if final_response is not None:raise transport.ToolError('duplicate READ response')
+            final_response=response
+    event(phase,'response_timeout',operation=message.operation,final_response_received=final_response is not None,**rx_state())
     raise transport.ToolError(f'{phase}: bounded profile-store response timeout after transmission; inspect trace before retry')
 
 MUTATIONS={'create':4,'update':5,'duplicate':6,'rename':7,'reorder':8,'delete':9,'set-reference':10}
@@ -67,7 +95,7 @@ def parse_args(argv=None):
     parser.add_argument('--profile-json',type=Path);parser.add_argument('--profile-sha256')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--trace-out',type=Path,help='exclusive fsynced phase journal, including transmission and device progress')
-    parser.add_argument('--trace',action='store_true',help='candidate-only progress frames on STATUS/preflight')
+    parser.add_argument('--trace',action='store_true',help='candidate-only progress frames on READ/STATUS/preflight')
     parser.add_argument('--fault-ticket',type=number,default=0,help='explicit pending fault ticket for this mutation only')
     parser.add_argument('--request-out',type=Path,help='new receipt file written before first mutation; existing files are refused')
     parser.add_argument('--replay-request',type=Path,help='exact immutable request receipt to send once, explicitly')
@@ -141,7 +169,7 @@ def build_message(args,pb,json_format):
     else:
         message.operation={'pulse':pb.PROFILE_STORE_LIVENESS,'status':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ,'health':pb.PROFILE_STORE_INSPECT_HEALTH,'query':pb.PROFILE_STORE_QUERY_TRANSACTION}[args.action]
         message.profile_id=args.profile_id;message.page_cursor=args.page;message.page_size=args.page_size if args.action=='list' else 0
-    if args.trace and args.action in ('pulse','status','arm','clear'):message.liveness_trace=True
+    if args.trace and args.action in ('pulse','status','arm','clear','read'):message.liveness_trace=True
     payload=host.get('_exact_payload',message.SerializeToString(deterministic=True))
     if len(payload)>8192:raise transport.ToolError('request exceeds bounded 8192-byte body')
     host['transmitted_request_sha256']=hashlib.sha256(payload).hexdigest()

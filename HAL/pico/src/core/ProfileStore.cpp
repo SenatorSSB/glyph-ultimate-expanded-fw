@@ -1,3 +1,4 @@
+#include "core/ProfileStoreReadTrace.hpp"
 #include "core/ProfileStore.hpp"
 
 #include "config_rgb_target_domain.hpp"
@@ -966,13 +967,16 @@ bool ProfileStore::ReadProfile(
     ProfileStorePaths::RecordPath(path, sizeof(path), id, rev);
     size_t n = 0;
     static uint8_t wire[kMaxRecordWireBytes];
-    if (!_storage->Probe(path, &n) || n < 32 || n > sizeof(wire) ||
-        !_storage->CheckedRead(path, wire, n, Kind::Record))
+    if (!ProfileStoreReadTrace::Mark(10) || !_storage->Probe(path, &n) ||
+        !ProfileStoreReadTrace::Mark(11, n) || n < 32 || n > sizeof(wire) ||
+        !ProfileStoreReadTrace::Mark(12) || !_storage->CheckedRead(path, wire, n, Kind::Record) ||
+        ProfileStoreReadTrace::Failed())
         return false;
     if (Get32(wire) != kRecordMagic || Get32(wire + 8) != Incarnation() || Get32(wire + 12) != id ||
         Get32(wire + 16) != rev || Get32(wire + 20) != n - 32 ||
         Get32(wire + 24) != Crc32(wire, 24) || Get32(wire + 28) != Crc32(wire + 32, n - 32))
         return false;
+    if (!ProfileStoreReadTrace::Mark(16)) return false;
     if (Get16(wire + 4) != 1 || Get16(wire + 6) != 1) {
         if (unsupported)
             *unsupported = true;
@@ -982,12 +986,14 @@ bool ProfileStore::ReadProfile(
     pb_istream_t stream = pb_istream_from_buffer(wire + 32, n - 32);
     if (!pb_decode(&stream, UltimateProfile_fields, &out) || stream.bytes_left)
         return false;
+    if (!ProfileStoreReadTrace::Mark(17)) return false;
     if (out.schema_version < 1 || out.schema_version > 3) {
         if (unsupported)
             *unsupported = true;
         return false;
     }
-    return ValidateProfile(out);
+    const bool valid = ValidateProfile(out);
+    return ProfileStoreReadTrace::Mark(18, valid) && valid;
 }
 
 ProfileStore::Status ProfileStore::Read(uint32_t id, UltimateProfile &out, uint32_t *rev) const {
