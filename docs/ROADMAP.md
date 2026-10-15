@@ -633,3 +633,12 @@ automation is implemented or approved by this roadmap.
 Archived failed implementation diagnostics remain important evidence, but they
 are not current work. Start from `docs/archive/README.md` for the concise map,
 then open the original packets only when needed.
+
+### Strict-hardening source-to-hardware handoff (2026-10-16)
+
+Owner-authorized work resolves the old multi-profile strict review through a
+new reviewed candidate on `codex/multi-profile-store-strict-hardening`.
+The [chapter continuation](project/MULTI_PROFILE_PERSISTENT_ULTIMATE_PROFILE_STORE_CHAPTER.md#strict-hardening-implementation--2026-10-16)
+tracks implementation, independent B1–B10 review, exact committed build/custody
+and the bounded owner hardware packet. Canonical integration remains gated by
+new exact candidate acceptance; no prior hardware PASS is relabelled.

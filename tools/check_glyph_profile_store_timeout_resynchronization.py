@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -28,7 +29,7 @@ def compile_object(source: Path, target: Path, includes: list[Path], extra: list
             *sum((["-I", str(item)] for item in includes), []), "-c", str(source), "-o", str(target)])
 
 
-def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, legacy_record_temp: bool = False) -> None:
+def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, legacy_record_temp: bool = False, strict_only: bool = False, candidate_faults: bool = False) -> None:
     nanopb = Path(os.environ.get("GLYPH_PROFILE_STORE_NANOPB", str(NANOPB)))
     libs = ROOT / ".pio/libdeps/glyph_mk6"
     includes = [HOST / "include", ROOT / "HAL/pico/include", ROOT / "include", generated, nanopb,
@@ -46,13 +47,16 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
     if legacy_record_temp:
         profile_source = temp / "ProfileStore.legacy-temp.cpp"
         text = (ROOT / "HAL/pico/src/core/ProfileStore.cpp").read_text(encoding="utf-8")
-        needle = "ProfileStorePaths::RecordTemporaryPath(temporary, sizeof(temporary), id, revision);"
-        if needle not in text:
+        pattern = r"ProfileStorePaths::RecordTemporaryPath\(temp,\s*sizeof\(temp\),\s*id,\s*rev\);"
+        if not re.search(pattern,text):
             raise AssertionError("record temporary path repair shape missing")
-        profile_source.write_text(text.replace(needle, 'std::snprintf(temporary, sizeof(temporary), "%s.tmp", path);', 1), encoding="utf-8")
+        text=re.sub(r"char path\[32\],\s*temp\[32\];","char path[64],temp[64];",text,count=1)
+        text=re.sub(pattern,'std::snprintf(temp,sizeof(temp),"%s.tmp",path);',text,count=1)
+        profile_source.write_text(text,encoding="utf-8")
     compile_object(profile_source, profile, includes, ["-Dprofile_store=production_profile_store"])
     objects.append(profile)
-    for name, source in (("validation", ROOT / "src/core/config_validation.cpp"),
+    for name, source in (("checked_unavailable", HOST / "checked_storage_unavailable.cpp"),
+                         ("validation", ROOT / "src/core/config_validation.cpp"),
                          ("button", ROOT / "src/core/config_button_validation.cpp"),
                          ("usb", ROOT / "src/core/config_usb_default_validation.cpp"),
                          ("rgb", ROOT / "src/core/config_rgb_target_validation.cpp"),
@@ -68,12 +72,18 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
             raise AssertionError("repair shape missing for duplicate-next negative control")
         backend_source.write_text(text.replace(needle, "            HandleProfileStore();\n            break;", 1), encoding="utf-8")
     backend = temp / ("backend-original.o" if original else "backend.o")
-    compile_object(backend_source, backend, includes); objects.append(backend)
+    compile_object(backend_source, backend, includes, ["-DGLYPH_STRICT_HARDENING_CANDIDATE=1"] if candidate_faults else []); objects.append(backend)
     exe = temp / ("original" if original else "repaired")
-    flags = (["-DEXPECT_DUPLICATE_NEXT_DROP"] if original else []) + (["-DEXPECT_LEGACY_RECORD_TEMP_PATH"] if legacy_record_temp else [])
+    flags = (["-DEXPECT_DUPLICATE_NEXT_DROP"] if original else []) + (["-DEXPECT_LEGACY_RECORD_TEMP_PATH"] if legacy_record_temp else []) + (["-DGLYPH_STRICT_HARDENING_CANDIDATE=1"] if candidate_faults else [])
     invoke(["c++", *SANITIZERS, "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-error=inconsistent-missing-override", "-Wno-error=unused-function", *flags,
             *sum((["-I", str(item)] for item in includes), []), str(HOST / "timeout_harness.cpp"),
             *map(str, objects), "-o", str(exe)])
+    if strict_only:
+        result = invoke([str(exe), str(fixture), "--strict-protocol"])
+        if "profile_store_strict_protocol=PASS" not in result:
+            raise AssertionError("strict protocol evidence missing")
+        print(result.strip())
+        return
     invoke([str(exe), str(fixture)])
     if not original:
         empty_create = invoke([str(exe), str(fixture), "--empty-create"])
@@ -138,7 +148,7 @@ def main() -> int:
         return 1
     print("glyph_profile_store_timeout_resynchronization: PASS")
     print(f"sanitizers={bool(SANITIZERS)}")
-    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,dest_remove,rename directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,dest_remove,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true stale_file_combinations=16 root_rotation_creates=512 rotating_directory_failure_stages=7 old_valid_record_and_root_rejected=true root_corruption_fail_closed=true invalid_root_is_not_empty=true ambiguous_root_readonly=true reference_durable_live_separation=true reference_failure_atomicity=true reference_generation_races=true durable_and_live_delete_guards=true direct_create_replay_nonmutation=true tx_failure_budgets=0,1,7 tx_failure_transaction_recovery=true tx_no_space=true tx_short_write=true tx_deadline_ms=2000 retained_transport_resync=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30")
+    print("real_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,rename destination_remove_gap_absent=true directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true stale_file_combinations=16 root_rotation_creates=512 rotating_directory_failure_stages=6 old_valid_record_and_root_rejected=true root_corruption_fail_closed=true invalid_root_is_not_empty=true ambiguous_root_readonly=true reference_durable_live_separation=true reference_failure_atomicity=true reference_generation_races=true durable_and_live_delete_guards=true direct_create_replay_nonmutation=true tx_failure_budgets=0,1,7 tx_failure_transaction_recovery=true tx_no_space=true tx_short_write=true tx_deadline_ms=2000 retained_transport_resync=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30")
     return 0
 
 

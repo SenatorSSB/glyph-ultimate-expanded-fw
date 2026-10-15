@@ -38,19 +38,20 @@ def main() -> int:
             legacy = temp / "legacy-two-v3-profiles.pb"
             legacy.write_bytes(payload)
 
+            sanitize=["-fsanitize=address,undefined","-fno-omit-frame-pointer","-g"]
             objects: list[str] = []
             for source in (nanopb / "pb_common.c", nanopb / "pb_decode.c", nanopb / "pb_encode.c", generated / "config.pb.c"):
                 target = temp / f"{source.stem}.o"
-                run(["cc", "-std=c11", "-fshort-enums", "-I", str(generated), "-I", str(nanopb),
+                run(["cc", *sanitize, "-std=c11", "-fshort-enums", "-I", str(generated), "-I", str(nanopb),
                      "-c", str(source), "-o", str(target)])
                 objects.append(str(target))
 
             executable = temp / "migration-lifecycle"
-            run(["c++", "-std=c++17", "-fshort-enums", "-Wall", "-Wextra", "-Werror",
+            run(["c++", *sanitize, "-std=c++17", "-fshort-enums", "-Wall", "-Wextra", "-Werror",
                  "-I", str(HOST / "include"), "-I", str(generated), "-I", str(nanopb),
                  "-I", str(ROOT / "include"), "-I", str(ROOT / "HAL/pico/include"),
                  "-I", str(ROOT / "config/glyph/common/include"), "-I", str(ROOT / "config/glyph/glyph_mk6/include"),
-                 str(HOST / "migration_lifecycle.cpp"), str(ROOT / "HAL/pico/src/core/ProfileStore.cpp"),
+                 str(HOST / "migration_lifecycle.cpp"), str(HOST / "checked_storage_unavailable.cpp"), str(ROOT / "HAL/pico/src/core/ProfileStore.cpp"),
                  str(ROOT / "src/core/config_validation.cpp"), str(ROOT / "src/core/config_button_validation.cpp"),
                  str(ROOT / "src/core/config_usb_default_validation.cpp"), str(ROOT / "src/core/config_rgb_target_validation.cpp"),
                  str(ROOT / "config/glyph/common/src/glyph_config_validation.cpp"), *objects, "-o", str(executable)])

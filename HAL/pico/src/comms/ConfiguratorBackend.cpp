@@ -20,6 +20,10 @@
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
+#include "core/ConfigWriteCandidate.hpp"
+#include "core/ProfileStoreRequestIdentity.hpp"
+#include "core/ResourceDiagnostics.hpp"
+#include "core/ProfileStoreFaultControls.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
@@ -28,16 +32,9 @@
 #include <pb_decode.h>
 #include <pb_encode.h>
 #include <cstdio>
+#include <cstring>
 
 namespace {
-// Config is too large for the core stack. Whole-Config SET and reference SET
-// are synchronous core0 handlers and share one unpublished candidate. No live
-// runtime selection or ProfileStore payload aliases this scratch.
-Config &ConfigWriteCandidate() {
-    static Config candidate;
-    return candidate;
-}
-
 bool ReferencesProfile(const Config &config, uint32_t id) {
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const GameModeConfig &mode = config.game_mode_configs[i];
@@ -234,6 +231,10 @@ bool ConfiguratorBackend::HandleGetDeviceInfo() {
 }
 
 bool ConfiguratorBackend::HandleGetConfig() {
+    if (!_recovery_storage_available || _recovery_config_invalid) {
+        static const char error[] = "Config unavailable in recovery";
+        return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error));
+    }
     if (!persistence.CheckSavedConfig()) {
         char errmsg[] = "Config file is invalid";
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
@@ -247,11 +248,33 @@ bool ConfiguratorBackend::HandleGetConfig() {
 }
 
 bool ConfiguratorBackend::HandleSetConfig() {
+    if (_recovery_service || _recovery_config_invalid || !_recovery_storage_available ||
+        _reference_unknown || persistence.IsMutationFenced() || profile_store.IsTransactionUncertain() ||
+        profile_store.MigrationPending()) {
+        static const char error[] = "Recovery state is read-only";
+        return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error));
+    }
     // Keep the accepted live configuration untouched until the complete
     // decode, validation, and persistence sequence succeeds.  The candidate
     // is static because Config contains the fixed-size embedded arrays used
     // by the selected input modes and is too large for the call stack.
     Config &candidate = ConfigWriteCandidate();
+    uint64_t receipt_token = 0;
+    uint8_t receipt_digest[32] = {}, migration_receipt[32] = {};
+    uint32_t receipt_id = 0, receipt_generation = 0, receipt_mode = 0, root_format = 0;
+    if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
+        if (persistence.LoadConfigChecked(candidate) != Persistence::LoadResult::Loaded) {
+            static const char error[] = "Failed to load durable Config";
+            return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error));
+        }
+        receipt_token = candidate.profile_reference_token;
+        std::memcpy(receipt_digest, candidate.profile_reference_digest, 32);
+        receipt_id = candidate.profile_reference_result_id;
+        receipt_generation = candidate.profile_reference_result_store_generation;
+        receipt_mode = candidate.profile_reference_result_mode_index;
+        root_format = candidate.ultimate_profile_root_format;
+        std::memcpy(migration_receipt, candidate.ultimate_profile_migration_receipt, 32);
+    }
 
     // Reset config defaults first, so config is completely replaced rather than merged.
     candidate = Config_init_default;
@@ -277,6 +300,13 @@ bool ConfiguratorBackend::HandleSetConfig() {
         return false;
     }
 
+    candidate.ultimate_profile_root_format = root_format;
+    candidate.profile_reference_token = receipt_token;
+    std::memcpy(candidate.profile_reference_digest, receipt_digest, 32);
+    candidate.profile_reference_result_id = receipt_id;
+    candidate.profile_reference_result_store_generation = receipt_generation;
+    candidate.profile_reference_result_mode_index = receipt_mode;
+    std::memcpy(candidate.ultimate_profile_migration_receipt, migration_receipt, 32);
     ConfigValidationError validation_error;
     if (!persistence.ValidateConfig(candidate, validation_error)) {
         WritePacket(CMD_ERROR, (uint8_t *)validation_error.message, validation_error.length);
@@ -289,6 +319,8 @@ bool ConfiguratorBackend::HandleSetConfig() {
         return false;
     }
 
+    // Reference receipts are firmware-owned. A whole-Config client cannot
+    // forge a successful transaction receipt or erase its query evidence.
     _config = candidate;
 
     WritePacket(CMD_SUCCESS, nullptr, 0);
@@ -308,24 +340,95 @@ bool ConfiguratorBackend::HandleProfileStore() {
     if (length == sizeof(frame)) return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29);
     request = ProfileStoreRequest_init_default;
     pb_istream_t input = pb_istream_from_buffer(frame, length);
-    if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || request.protocol_version != 1) {
+    if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || (request.protocol_version != 1 && request.protocol_version != 2)) {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
     response = ProfileStoreResponse_init_default;
-    response.protocol_version = 1;
+    response.protocol_version = request.protocol_version;
+    response.mutation_protocol_version = 2;
+    response.store_incarnation = _recovery_storage_available ? profile_store.Incarnation() : 0;
     response.request_token = request.request_token;
     response.store_generation = profile_store.Generation();
     response.config_generation = persistence.ConfigGeneration(_config);
     response.status = PROFILE_STORE_UNSUPPORTED;
-    // Diagnostics describe this request only. In particular, a persistence
-    // error outside WriteProfile must never inherit a prior record stage.
     profile_store.ResetDiagnostic();
-    if (request.operation == PROFILE_STORE_STATUS) {
-        response.status = profile_store.IsReady() && !profile_store.IsReadOnlyRecovery()
-            ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
-        if (profile_store.IsReadOnlyRecovery()) {
-            strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));
+    const bool mutation = request.operation >= PROFILE_STORE_CREATE &&
+        request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
+    const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
+    ProfileStoreTransactionIdentity identity;
+    ProfileStore::TransactionResult result;
+    bool handled = false;
+
+    // Reconcile durable publications before using RAM for replay or admitting
+    // another mutation. A failed authoritative reread leaves the fence intact.
+    if (_recovery_storage_available && (mutation || query)) {
+        if (profile_store.IsTransactionUncertain()) profile_store.ReconcileTransaction();
+        if (_reference_unknown || persistence.IsMutationFenced()) {
+            Config &durable = ConfigWriteCandidate();
+            if (persistence.ReconcileConfig(durable) == Persistence::SaveResult::Saved)
+                _reference_unknown = false;
         }
+    }
+    if (mutation && request.protocol_version != 2) {
+        response.status = PROFILE_STORE_UNSUPPORTED;
+        handled = true;
+    } else if (request.operation == PROFILE_STORE_STATUS) {
+        response.status = _recovery_storage_available && profile_store.IsReady() &&
+            !profile_store.IsReadOnlyRecovery() && !_recovery_config_invalid &&
+            !persistence.IsMutationFenced() && !_reference_unknown &&
+            !profile_store.IsTransactionUncertain() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
+        if (!_recovery_storage_available) strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
+        else if (_recovery_config_invalid) strlcpy(response.diagnostic, "config.invalid", sizeof(response.diagnostic));
+        else if (persistence.IsMutationFenced() || _reference_unknown) strlcpy(response.diagnostic, "config.commit_unknown", sizeof(response.diagnostic));
+        else if (profile_store.IsTransactionUncertain()) strlcpy(response.diagnostic, "directory.commit_unknown", sizeof(response.diagnostic));
+        else if (profile_store.MigrationPending()) strlcpy(response.diagnostic, "migration.fenced", sizeof(response.diagnostic));
+        else if (profile_store.IsReadOnlyRecovery()) strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));
+        if (_recovery_storage_available) {
+            const auto capacity = profile_store.Capacity();
+            response.filesystem_total_bytes = capacity.total_bytes;
+            response.filesystem_used_bytes = capacity.used_bytes;
+            response.filesystem_free_bytes = capacity.free_bytes;
+            response.filesystem_block_bytes = capacity.block_size;
+            response.filesystem_program_bytes = capacity.page_size;
+            response.reserved_bytes = capacity.reserve_bytes;
+            response.protected_bytes = capacity.protected_bytes;
+            response.staging_bytes = capacity.staging_bytes;
+            response.admissible_profiles = capacity.admissible_profiles;
+            response.mutation_feasible = capacity.mutation_feasible && !_recovery_service && !_recovery_config_invalid &&
+                !_reference_unknown && !persistence.IsMutationFenced();
+        }
+        response.transaction_token_high_water = profile_store.LastTransactionToken();
+        if (_recovery_storage_available && !_recovery_config_invalid) {
+            Config &durable = ConfigWriteCandidate();
+            if (persistence.LoadConfigChecked(durable) == Persistence::LoadResult::Loaded) {
+                if (durable.profile_reference_token > response.transaction_token_high_water)
+                    response.transaction_token_high_water = durable.profile_reference_token;
+                if (durable.ultimate_profile_root_format != 2) {
+                    response.mutation_feasible = false;
+                    response.recovery_flags |= 1u << 20;
+                }
+            }
+        }
+        const auto resources = ReadResourceDiagnostics();
+        response.core0_stack_min_free_bytes = resources.core0_stack_min_free_bytes;
+        response.core1_stack_min_free_bytes = resources.core1_stack_min_free_bytes;
+        response.heap_arena_peak_bytes = resources.heap_arena_peak_bytes;
+        response.heap_arena_current_bytes = resources.heap_arena_current_bytes;
+        response.heap_arena_capacity_bytes = resources.heap_arena_capacity_bytes;
+        response.resource_diagnostics_enabled = resources.resource_diagnostics_enabled;
+        response.strict_hardening_candidate = kStrictHardeningCandidate;
+        handled = true;
+    } else if (!_recovery_storage_available) {
+        result.status = ProfileStore::Status::IoFailure;
+        strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
+    } else if (request.operation == PROFILE_STORE_ARM_STORAGE_FAULT) {
+        if (!kStrictHardeningCandidate || request.protocol_version != 2)
+            response.status = PROFILE_STORE_UNSUPPORTED;
+        else if (_recovery_service) response.status = PROFILE_STORE_IO_FAILURE;
+        else response.status = ProfileStoreFaultControls::Arm(request.fault_kind,request.fault_operation,
+            request.fault_phase,request.fault_result,request.fault_path_class,request.fault_skip,request.fault_clear)
+                ? PROFILE_STORE_OK : PROFILE_STORE_INVALID;
+        handled = true;
     } else if (request.operation == PROFILE_STORE_LIST) {
         const size_t cursor = request.page_cursor;
         const size_t count = request.page_size == 0 ? 8 : request.page_size;
@@ -333,119 +436,171 @@ bool ConfiguratorBackend::HandleProfileStore() {
         else if (count > 8 || cursor > profile_store.Count()) response.status = PROFILE_STORE_INVALID;
         else {
             const size_t end = cursor + count < profile_store.Count() ? cursor + count : profile_store.Count();
-            response.entries_count = 0;
             for (size_t i = cursor; i < end; ++i) {
                 const ProfileStore::Entry *entry = profile_store.EntryAt(i);
                 ProfileStoreEntry &out = response.entries[response.entries_count++];
                 out.profile_id = entry->id; out.revision = entry->revision; out.display_rank = entry->rank;
                 out.payload_version = entry->payload_version;
                 strlcpy(out.name, entry->name, sizeof(out.name));
+                // Zero means uninspected. Enumeration never reads payloads.
             }
             response.next_page_cursor = end < profile_store.Count() ? end : 0;
             response.status = PROFILE_STORE_OK;
         }
-    } else if (request.expected_store_generation != profile_store.Generation()) {
-        response.status = PROFILE_STORE_CONFLICT;
+        handled = true;
+    } else if (request.operation == PROFILE_STORE_INSPECT_HEALTH) {
+        response.profile_id = request.profile_id;
+        response.profile_health = static_cast<uint32_t>(profile_store.Health(request.profile_id)) + 1;
+        response.status = PROFILE_STORE_OK;
+        handled = true;
+    } else if (request.operation == PROFILE_STORE_READ) {
+        uint32_t revision = 0;
+        const auto status = profile_store.Read(request.profile_id, response.profile, &revision);
+        response.has_profile = status == ProfileStore::Status::Ok || status == ProfileStore::Status::RecoveredPrevious;
+        result = {status, request.profile_id, revision, profile_store.Generation()};
+    } else if (!mutation && !query) {
+        response.status = PROFILE_STORE_UNSUPPORTED;
+        handled = true;
+    } else if (!request.request_token || !ProfileStoreRequestIdentity(request, identity)) {
+        result.status = ProfileStore::Status::Invalid;
     } else {
-        const uint32_t token = static_cast<uint32_t>(request.request_token);
-        const uint32_t digest = static_cast<uint32_t>(request.request_token >> 32);
-        ProfileStore::TransactionResult result;
-        if (request.operation == PROFILE_STORE_READ) {
-            uint32_t revision = 0;
-            const ProfileStore::Status status = profile_store.Read(request.profile_id, response.profile, &revision);
-            response.has_profile = status == ProfileStore::Status::Ok;
-            result = {status, request.profile_id, revision, profile_store.Generation()};
+        // Both receipt domains share tokens. Look them up BEFORE checking any
+        // stale expectations: exact completed requests replay their result.
+        result = query ? profile_store.QueryTransaction(request.request_token)
+                       : profile_store.QueryTransaction(identity);
+        Config &candidate = ConfigWriteCandidate();
+        const auto loaded = persistence.LoadConfigChecked(candidate);
+        const uint64_t high_water = loaded == Persistence::LoadResult::Loaded &&
+            candidate.profile_reference_token > profile_store.LastTransactionToken() ?
+            candidate.profile_reference_token : profile_store.LastTransactionToken();
+        response.transaction_token_high_water = high_water;
+        if (loaded == Persistence::LoadResult::Loaded &&
+            candidate.profile_reference_token == request.request_token) {
+            if (!query && std::memcmp(candidate.profile_reference_digest, identity.digest, 32) != 0)
+                result.status = ProfileStore::Status::Conflict;
+            else {
+                result = {ProfileStore::Status::Ok, candidate.profile_reference_result_id, 0,
+                    candidate.profile_reference_result_store_generation};
+                response.transaction_operation = PROFILE_STORE_SET_MODE_REFERENCE;
+            }
+        }
+        if (result.status != ProfileStore::Status::NotFound) {
+            // Durable replay, conflict, or unresolved store result wins.
+        } else if (_reference_unknown || persistence.IsMutationFenced() || profile_store.IsTransactionUncertain()) {
+            result.status = ProfileStore::Status::UnknownOutcome;
+        } else if (query) {
+            if (loaded != Persistence::LoadResult::Loaded) result.status = ProfileStore::Status::IoFailure;
+            else if (request.request_token <= high_water) {
+                response.status = PROFILE_STORE_TRANSACTION_EXPIRED;
+                handled = true;
+            }
+        } else if (profile_store.MigrationPending()) {
+            result.status = ProfileStore::Status::MigrationFenced;
+        } else if (_recovery_service || _recovery_config_invalid || profile_store.IsReadOnlyRecovery()) {
+            result.status = ProfileStore::Status::ReadOnlyRecovery;
+        } else if (loaded != Persistence::LoadResult::Loaded) {
+            result.status = ProfileStore::Status::IoFailure;
+        } else if (candidate.ultimate_profile_root_format != 2) {
+            result.status = ProfileStore::Status::ReadOnlyRecovery;
+        } else if (request.request_token <= high_water) {
+            result.status = ProfileStore::Status::Conflict;
+        } else if ((request.expected_store_incarnation && request.expected_store_incarnation != profile_store.Incarnation()) ||
+                   request.expected_store_generation > UINT32_MAX ||
+                   request.expected_profile_revision > UINT32_MAX ||
+                   request.expected_store_generation != profile_store.Generation()) {
+            result.status = ProfileStore::Status::Conflict;
         } else if (request.operation == PROFILE_STORE_CREATE) {
-            result = profile_store.Create(request.profile, request.name, request.display_rank, token, digest);
+            result = request.has_profile ? profile_store.Create(request.profile, request.name,
+                request.display_rank, identity) : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
         } else if (request.operation == PROFILE_STORE_UPDATE) {
-            result = profile_store.Update(request.profile_id, request.profile,
-                static_cast<uint32_t>(request.expected_profile_revision), token, digest);
+            result = request.has_profile ? profile_store.Update(request.profile_id, request.profile,
+                static_cast<uint32_t>(request.expected_profile_revision), identity)
+                : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
         } else if (request.operation == PROFILE_STORE_DUPLICATE) {
             result = profile_store.Duplicate(request.profile_id,
-                static_cast<uint32_t>(request.expected_profile_revision), request.name,
-                request.display_rank, token, digest);
+                static_cast<uint32_t>(request.expected_profile_revision), request.name, request.display_rank, identity);
         } else if (request.operation == PROFILE_STORE_RENAME) {
             result = profile_store.Rename(request.profile_id, request.name,
-                static_cast<uint32_t>(request.expected_store_generation), token, digest);
+                static_cast<uint32_t>(request.expected_store_generation), identity);
         } else if (request.operation == PROFILE_STORE_REORDER) {
             result = profile_store.Reorder(request.profile_id, request.display_rank,
-                static_cast<uint32_t>(request.expected_store_generation), token, digest);
+                static_cast<uint32_t>(request.expected_store_generation), identity);
         } else if (request.operation == PROFILE_STORE_DELETE) {
-            // A reference save is reboot-bound. Protect both the currently
-            // active selection and the durable selection for the next boot.
-            Config &durable = ConfigWriteCandidate();
-            if (persistence.LoadConfigChecked(durable) != Persistence::LoadResult::Loaded) {
-                result.status = ProfileStore::Status::IoFailure;
-            } else {
-                const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
-                    ReferencesProfile(durable, request.profile_id) ? request.profile_id : 0;
-                result = profile_store.Delete(request.profile_id,
-                    static_cast<uint32_t>(request.expected_store_generation), referenced, token, digest);
-            }
+            const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
+                ReferencesProfile(candidate, request.profile_id) ? request.profile_id : 0;
+            result = profile_store.Delete(request.profile_id,
+                static_cast<uint32_t>(request.expected_store_generation), referenced, identity);
         } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
-            Config &candidate = ConfigWriteCandidate();
-            if (!profile_store.IsReady() || profile_store.IsReadOnlyRecovery()) {
-                result.status = ProfileStore::Status::IoFailure;
-            } else if (request.expected_config_generation != persistence.ConfigGeneration(_config)) {
+            if (!profile_store.IsReady()) result.status = ProfileStore::Status::IoFailure;
+            else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
+                     candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
+                     candidate.ultimate_profile_store_incarnation != profile_store.Incarnation() ||
+                     request.mode_config_index >= candidate.game_mode_configs_count)
                 result.status = ProfileStore::Status::Conflict;
-            } else if (persistence.LoadConfigChecked(candidate) != Persistence::LoadResult::Loaded) {
-                result.status = ProfileStore::Status::IoFailure;
-            } else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
-                candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
-                request.mode_config_index >= candidate.game_mode_configs_count) {
-                // The checked load establishes which durable generation this
-                // candidate represents; the initial cached fence is not enough.
-                result.status = ProfileStore::Status::Conflict;
-            } else if (candidate.game_mode_configs[request.mode_config_index].mode_id != MODE_ULTIMATE) {
+            else if (candidate.game_mode_configs[request.mode_config_index].mode_id != MODE_ULTIMATE)
                 result.status = ProfileStore::Status::Invalid;
-            } else {
-                // Static, synchronous core0 scratch preserves CREATE's small
-                // frame even though this unrelated operation reads a profile.
-                static UltimateProfile selected;
-                if (request.profile_id != 0 && profile_store.Read(request.profile_id, selected) != ProfileStore::Status::Ok) {
+            else {
+                // Reuse the response's unpublished profile slot for validation;
+                // reference responses keep has_profile false. No third payload.
+                const auto selected_status = request.profile_id == 0 ? ProfileStore::Status::Ok :
+                    profile_store.Read(request.profile_id, response.profile);
+                if (selected_status != ProfileStore::Status::Ok && selected_status != ProfileStore::Status::RecoveredPrevious)
                     result.status = ProfileStore::Status::NotFound;
-                } else {
+                else {
                     GameModeConfig &mode = candidate.game_mode_configs[request.mode_config_index];
                     mode.ultimate_profile_id = request.profile_id;
                     mode.ultimate_profile_config = 0;
-                    ConfigValidationError validation_error;
-                    if (!persistence.ValidateConfig(candidate, validation_error)) {
-                        result.status = ProfileStore::Status::Invalid;
-                    } else {
-                        const Persistence::SaveResult saved = persistence.SaveConfigIfGenerationMatches(
-                            candidate, request.expected_config_generation);
+                    candidate.profile_reference_token = identity.token;
+                    std::memcpy(candidate.profile_reference_digest, identity.digest, 32);
+                    candidate.profile_reference_result_id = request.profile_id;
+                    candidate.profile_reference_result_store_generation = profile_store.Generation();
+                    candidate.profile_reference_result_mode_index = request.mode_config_index;
+                    ConfigValidationError error;
+                    if (!persistence.ValidateConfig(candidate, error)) result.status = ProfileStore::Status::Invalid;
+                    else {
+                        const auto saved = persistence.SaveConfigIfGenerationMatches(candidate, request.expected_config_generation);
                         if (saved == Persistence::SaveResult::Conflict) result.status = ProfileStore::Status::Conflict;
-                        else if (saved != Persistence::SaveResult::Saved) result.status = ProfileStore::Status::IoFailure;
+                        else if (saved == Persistence::SaveResult::Uncertain) {
+                            _reference_unknown = true; result.status = ProfileStore::Status::UnknownOutcome;
+                        } else if (saved != Persistence::SaveResult::Saved) result.status = ProfileStore::Status::IoFailure;
                         else result = {ProfileStore::Status::Ok, request.profile_id, 0, profile_store.Generation()};
                     }
-                    // Never publish candidate into _config here. Runtime and
-                    // transient session selectors stay unchanged until reboot.
                 }
             }
-        } else if (request.operation == PROFILE_STORE_QUERY_TRANSACTION) {
-            result = profile_store.QueryTransaction(token, digest);
-        } else {
-            response.status = PROFILE_STORE_UNSUPPORTED;
-            result.status = ProfileStore::Status::Invalid;
         }
+    }
+    if (!handled) {
         response.profile_id = result.id;
         response.profile_revision = result.revision;
-        response.store_generation = profile_store.Generation();
+        response.store_generation = result.status == ProfileStore::Status::Ok ? result.generation : profile_store.Generation();
         response.config_generation = persistence.ConfigGeneration(_config);
         switch (result.status) {
-            case ProfileStore::Status::Ok: response.status = PROFILE_STORE_OK; break;
+            case ProfileStore::Status::Ok:
+            case ProfileStore::Status::RecoveredPrevious: response.status = PROFILE_STORE_OK; break;
             case ProfileStore::Status::NotFound: response.status = PROFILE_STORE_NOT_FOUND; break;
             case ProfileStore::Status::Referenced: response.status = PROFILE_STORE_REFERENCED; break;
             case ProfileStore::Status::Conflict: response.status = PROFILE_STORE_CONFLICT; break;
             case ProfileStore::Status::Full: response.status = PROFILE_STORE_FULL; break;
-            case ProfileStore::Status::IoFailure: response.status = PROFILE_STORE_IO_FAILURE; break;
+            case ProfileStore::Status::Aborted: response.status = PROFILE_STORE_TRANSACTION_ABORTED; break;
             case ProfileStore::Status::UnknownOutcome: response.status = PROFILE_STORE_COMMIT_UNKNOWN; break;
+            case ProfileStore::Status::IoFailure:
+            case ProfileStore::Status::ReadOnlyRecovery:
+            case ProfileStore::Status::MigrationFenced: response.status = PROFILE_STORE_IO_FAILURE; break;
             default: response.status = PROFILE_STORE_INVALID; break;
         }
-        if (response.status == PROFILE_STORE_IO_FAILURE || response.status == PROFILE_STORE_COMMIT_UNKNOWN) {
+        if (!response.diagnostic[0] && (response.status == PROFILE_STORE_IO_FAILURE || response.status == PROFILE_STORE_COMMIT_UNKNOWN))
             strlcpy(response.diagnostic, profile_store.LastDiagnostic(), sizeof(response.diagnostic));
-        }
     }
+    response.storage_fault_capable = kStrictHardeningCandidate;
+    response.storage_fault_armed = ProfileStoreFaultControls::Current().armed;
+    response.storage_fault_triggered = ProfileStoreFaultControls::Current().triggered;
+    response.storage_fault_operation = ProfileStoreFaultControls::Current().operation;
+    response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
+    // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.
+    if (_recovery_config_invalid) response.recovery_flags |= 1u << 16;
+    if (_recovery_service) response.recovery_flags |= 1u << 19;
+    if (!_recovery_storage_available) response.recovery_flags |= 1u << 17;
+    if (_reference_unknown || persistence.IsMutationFenced()) response.recovery_flags |= 1u << 18;
     // The request is decoded into owned static fields before reusing frame.
     // Encoding and transport are separate bounded stages, with no FS frames
     // alive during either stage.

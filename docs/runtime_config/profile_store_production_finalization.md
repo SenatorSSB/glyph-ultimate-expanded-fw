@@ -269,3 +269,16 @@ campaign, factory reset, physical runtime-discriminator substitution or automati
 flashing. Final controller-output acceptance and any outstanding frozen
 geometry/interruption evidence require their own real evidence; do not infer
 strict DONE from this packet alone.
+
+## Later strict-hardening candidate (2026-10-16)
+
+The explicit owner authorization following04d7521f permits the new B1–B10
+implementation on `codex/multi-profile-store-strict-hardening`. This is a new
+firmware candidate, not a docs-only descendant accepted by the f7ba82d4 receipt.
+See [design](profile_store_strict_hardening_design.md),
+[resource evidence](profile_store_strict_resource_diagnostics.md) and
+[owner hardware packet](profile_store_strict_hardening_hardware_packet.md).
+Old production receipts remain byte-for-byte historical evidence. Temporary
+candidate diagnostics/fault controls are visibly advertised and require a
+separate final production decision; no canonical merge or device action is
+part of this source-hardening run.

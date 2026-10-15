@@ -136,3 +136,10 @@ ProfileStoreEntry.revision int_size:IS_64
 ProfileStoreEntry.name max_length:32
 ProfileStoreOperation long_names:false
 ProfileStoreStatus long_names:false
+
+Config.profile_reference_token int_size:IS_64
+Config.profile_reference_digest max_size:32
+Config.profile_reference_digest fixed_length:true
+Config.ultimate_profile_migration_receipt max_size:32
+Config.ultimate_profile_migration_receipt fixed_length:true
+Config.ultimate_profile_root_format int_size:IS_8

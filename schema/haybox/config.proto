@@ -555,6 +555,8 @@ enum ProfileStoreOperation {
   PROFILE_STORE_DELETE = 9;
   PROFILE_STORE_SET_MODE_REFERENCE = 10;
   PROFILE_STORE_QUERY_TRANSACTION = 11;
+  PROFILE_STORE_INSPECT_HEALTH = 12;
+  PROFILE_STORE_ARM_STORAGE_FAULT = 13;
 }
 enum ProfileStoreStatus {
   PROFILE_STORE_STATUS_UNSPECIFIED = 0;
@@ -567,6 +569,8 @@ enum ProfileStoreStatus {
   PROFILE_STORE_FULL = 7;
   PROFILE_STORE_IO_FAILURE = 8;
   PROFILE_STORE_COMMIT_UNKNOWN = 9;
+  PROFILE_STORE_TRANSACTION_EXPIRED = 10;
+  PROFILE_STORE_TRANSACTION_ABORTED = 11;
 }
 message ProfileStoreEntry {
   uint32 profile_id = 1;
@@ -574,6 +578,8 @@ message ProfileStoreEntry {
   string name = 3;
   uint32 display_rank = 4;
   uint32 payload_version = 5;
+  // 0=uninspected; explicit health operation returns 1=healthy, 2=prior
+  // revision recovered, 3=missing, 4=corrupt, 5=unsupported.
   uint32 health = 6;
 }
 message ProfileStoreRequest {
@@ -590,6 +596,18 @@ message ProfileStoreRequest {
   UltimateProfile profile = 11;
   uint32 mode_config_index = 12;
   uint64 expected_config_generation = 13;
+  // Candidate-only volatile fault control: kind 1record/2root/3Config;
+  // operation maps checked OpenRead1/OpenWrite2/Read3/Write4/Seek5/Sync6/
+  // Close7/Stat8/Remove9/Rename10; phase1+result1=before failure,
+  // phase2+result2=after lost acknowledgement; path1record/2root/3control/4Config.
+  uint32 fault_kind = 14;
+  uint32 fault_operation = 15;
+  uint32 fault_phase = 16;
+  uint32 fault_result = 17;
+  uint32 fault_path_class = 18;
+  uint32 fault_skip = 19;
+  bool fault_clear = 20;
+  uint32 expected_store_incarnation = 21;
 }
 message ProfileStoreResponse {
   uint32 protocol_version = 1;
@@ -603,6 +621,35 @@ message ProfileStoreResponse {
   UltimateProfile profile = 9;
   uint64 config_generation = 10;
   string diagnostic = 11;
+  // Additive measured capability and recovery fields. LIST never reads bodies.
+  uint64 filesystem_total_bytes = 12;
+  uint64 filesystem_used_bytes = 13;
+  uint64 filesystem_free_bytes = 14;
+  uint32 filesystem_block_bytes = 15;
+  uint32 filesystem_program_bytes = 16;
+  uint64 reserved_bytes = 17;
+  uint64 protected_bytes = 18;
+  uint64 staging_bytes = 19;
+  uint32 admissible_profiles = 20;
+  bool mutation_feasible = 21;
+  uint32 recovery_flags = 22;
+  // Same health values as ProfileStoreEntry.health; inspected lazily.
+  uint32 profile_health = 23;
+  uint32 transaction_operation = 24;
+  uint32 core0_stack_min_free_bytes = 25;
+  uint32 core1_stack_min_free_bytes = 26;
+  uint32 heap_arena_peak_bytes = 27;
+  uint32 heap_arena_current_bytes = 28;
+  uint32 heap_arena_capacity_bytes = 29;
+  bool resource_diagnostics_enabled = 30;
+  uint64 transaction_token_high_water = 31;
+  uint32 mutation_protocol_version = 32;
+  bool strict_hardening_candidate = 33;
+  bool storage_fault_armed = 34;
+  bool storage_fault_triggered = 35;
+  uint32 storage_fault_operation = 36;
+  bool storage_fault_capable = 37;
+  uint32 store_incarnation = 38;
 }
 /**
  * Button to HID keyboard keycode mapping.
@@ -810,6 +857,15 @@ message Config {
   // embedded Ultimate profile body is authoritative.
   uint32 ultimate_profile_store_format = 202;
   uint32 ultimate_profile_store_incarnation = 203;
+  // Durable last reference-operation receipt, atomically encoded with Config.
+  // The SHA-256 digest is firmware-derived; clients never supply it.
+  uint64 profile_reference_token = 204;
+  bytes profile_reference_digest = 205;
+  uint32 profile_reference_result_id = 206;
+  uint32 profile_reference_result_store_generation = 207;
+  uint32 profile_reference_result_mode_index = 208;
+  bytes ultimate_profile_migration_receipt = 209;
+  uint32 ultimate_profile_root_format = 210;
 }
 /**
  * Device info message.

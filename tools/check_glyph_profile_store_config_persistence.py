@@ -32,7 +32,7 @@ def main():
             objects=[]
             for src in [nanopb/'pb_common.c',nanopb/'pb_decode.c',nanopb/'pb_encode.c',generated/'config.pb.c']:
                 obj=temp/(src.stem+'.o');run(['cc',*sanitize,'-std=c11','-fshort-enums',*flags,'-c',src,'-o',obj]);objects.append(obj)
-            sources=[HOST/'persistence_harness.cpp',ROOT/'HAL/pico/src/core/Persistence.cpp',DEPS/'dependencies/pb_arduino.cpp',DEPS/'dependencies/CRC32.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp']
+            sources=[HOST/'persistence_harness.cpp',HOST/'checked_storage_double.cpp',ROOT/'HAL/pico/src/core/Persistence.cpp',DEPS/'dependencies/pb_arduino.cpp',DEPS/'dependencies/CRC32.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp']
             exe=temp/'persistence';run(['c++',*sanitize,'-std=c++17','-DARDUINO=1','-fshort-enums','-Wall','-Wextra','-Werror','-Wno-error=missing-field-initializers',*flags,*sources,*objects,'-o',exe])
             print(run([exe]),end='')
         print('glyph_profile_store_config_persistence: PASS; current_source=true hardware=NOT_CLAIMED')

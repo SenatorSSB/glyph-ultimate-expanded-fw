@@ -5,7 +5,7 @@
 #include <functional>
 struct LittleFSConfig { explicit LittleFSConfig(bool value=true):auto_format(value){} bool auto_format; };
 struct HostFS;
-class File: public Stream {
+class File final: public Stream {
  public:
   std::shared_ptr<std::vector<uint8_t>> bytes; HostFS *fs=nullptr; std::string name; size_t pos=0;
   explicit operator bool()const{return bool(bytes);}

@@ -35,6 +35,11 @@ class ConfiguratorBackend : public CommunicationBackend {
     );
     CommunicationBackendId BackendId();
     void SendReport();
+    void SetRecoveryState(bool config_invalid, bool storage_available) {
+        _recovery_service = true;
+        _recovery_config_invalid = config_invalid;
+        _recovery_storage_available = storage_available;
+    }
 
   private:
     size_t ReadPacket(uint8_t *buffer, size_t max_len);
@@ -52,6 +57,10 @@ class ConfiguratorBackend : public CommunicationBackend {
     packetio::COBSPrint _out;
     Stream &_base_stream;
     Config &_config;
+    bool _recovery_service = false;
+    bool _recovery_config_invalid = false;
+    bool _recovery_storage_available = true;
+    bool _reference_unknown = false;
     bool _packet_timed_out = false;
     bool _profile_tx_needs_sync = false;
 };

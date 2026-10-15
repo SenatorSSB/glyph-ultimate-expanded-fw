@@ -6,20 +6,28 @@ Run pio run -e glyph_mk6 -t compiledb first. Extra compiler outputs go only to
 C call chains from an UNKNOWN whole-target/IRQ/ROM bound.
 """
 from __future__ import annotations
-import argparse, concurrent.futures, hashlib, json, pathlib, re, shlex, subprocess, tempfile
+import argparse, concurrent.futures, hashlib, json, pathlib, re, shlex, subprocess, tempfile, os, sys
+from check_glyph_stage_b_ultimate_profiles import NANOPB
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PATTERNS = ['ConfiguratorBackend.cpp', 'ProfileStore.cpp', 'Persistence.cpp', '/FS.cpp', 'LittleFS/src/',
+PATTERNS = ['ConfiguratorBackend.cpp', 'ProfileStore.cpp', 'CheckedStorage.cpp', 'Persistence.cpp', '/FS.cpp', 'LittleFS/src/',
  'RP2040Support.cpp', '/main.cpp', '/pb_encode.c', '/pb_decode.c', '/pb_common.c',
  'nanopb-arduino/src/', 'config/glyph/common/src/config.cpp', 'Adafruit_USBD_CDC.cpp',
  '/usbd.c', '/cdc_device.c', '/tusb.c', '/tusb_fifo.c', '/dcd_rp2040.c',
  'config_validation.cpp', '/Print.cpp', '/Stream.cpp']
 
 def measure(out):
+ # Regenerate current schema into isolated evidence output: a source-side
+ # frame check must not silently compile against a stale preliminary header.
+ generated=out/'generated';generated.mkdir(exist_ok=True)
+ nanopb=pathlib.Path(os.environ.get('GLYPH_PROFILE_STORE_NANOPB',str(NANOPB)))
+ schema=ROOT/'schema/haybox'
+ subprocess.run([sys.executable,str(nanopb/'generator/nanopb_generator.py'),'-I',str(schema),'-f',str(schema/'config.options'),'--error-on-unmatched','--no-timestamp','-D',str(generated),str(schema/'config.proto')],check=True,capture_output=True)
  entries=json.loads((ROOT/'compile_commands.json').read_text())
  selected=[e for e in entries if any(p in e['file'] for p in PATTERNS)]
  def compile_one(e):
   name=e['file'].replace('/','_').replace('.','_'); target=out/(name+'.o')
   args=shlex.split(e['command']);args[args.index('-o')+1]=str(target)
+  args[1:1]=['-I',str(generated)]
   args+=['-fstack-usage','-fdump-ipa-cgraph']
   result=subprocess.run(args,cwd=ROOT,text=True,capture_output=True,timeout=90)
   (out/(name+'.log')).write_text(result.stdout+result.stderr)
@@ -35,10 +43,12 @@ def measure(out):
   if not found:raise AssertionError('missing production stack row: '+needle)
   return max(found)
  limits={'ConfiguratorBackend::HandleProfileStore()':512,'ConfiguratorBackend::WriteProfilePacket(':512,
-  'ProfileStore::Create(':256,'ProfileStore::WriteProfile(':512,'ProfileStore::PublishDirectory(':256,
-  'ProfileStore::Duplicate(':128,':void setup()':512,
+  'ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)':256,'ProfileStore::WriteProfile(':512,'ProfileStore::PublishDirectory(':256,
+  'ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)':128,':void setup()':512,
   'Persistence::LoadConfigChecked(':512,'Persistence::SaveConfigIfGenerationMatches(':512,
-  'Persistence::SaveConfig(':512}
+  'Persistence::SaveConfig(':512,'ProfileStore::Bootstrap(':512,
+  'Persistence::CaptureLegacySource(':768,'CheckedStorage::Open(':128,
+  'CheckedStorage::WriteFile(':256,'CheckedStorage::ReadFile(':256}
  # GCC may split a function into a public wrapper and a part.0 implementation
  # whose .su name is only "0(Config&)". Both retain the same source coordinate.
  # Include all such frames so a tiny wrapper cannot hide a large load body.
@@ -55,7 +65,12 @@ def measure(out):
   ':lfs_dir_orphaningcommit',':lfs_dir_relocatingcommit',':lfs_dir_splittingcompact',
   ':lfs_dir_compact',':lfs_dir_traverse.constprop',':lfs_dir_commit_commit',':lfs_dir_commitprog']
  leaf=sum(size(x) for x in leaf_names)
- root_open=prefix+size('ProfileStore::Create(')+size('ProfileStore::WriteProfile(')+size('LittleFsDirectoryStorage::Write(')+size('fs::FS::open(const char*')+size('littlefs_impl::LittleFSImpl::open(')+leaf+size('LittleFSImpl::lfs_flash_prog(')
+ # Format-v2 production uses the repository-owned same-mount checked
+ # primitive, preserving Arduino core/flash safety while bypassing unchecked
+ # Arduino File handles. Publish is inlined into WriteProfile on this pin.
+ root_open=prefix+size('ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)')+size('ProfileStore::WriteProfile(')+size('MountedStorage::CheckedWrite(')+size('CheckedStorage::WriteFile(')+size('CheckedStorage::Open(')+leaf+size('LittleFSImpl::lfs_flash_prog(')
+ require_envelope=4096
+ if root_open>require_envelope:raise AssertionError(f'enumerated checked record-open chain {root_open} exceeds scratch bank {require_envelope}')
  # Schema maximum depth is four (Request/Profile/OutputProgram/Effect or
  # Request/Profile/Table/Coords). Parent and child frames coexist; arrays
  # iterate, not recurse. This intentionally overcounts mutually exclusive
@@ -66,6 +81,8 @@ def measure(out):
   'optimization':'production compiledb flags, O3 project/LittleFS; no LTO',
   'frames':rows,'critical_limits':limits,'critical_measured_bytes':measured,'prefix_bytes':prefix,
   'record_open_reachable_chain_bytes':root_open,'littlefs_open_chain_bytes':leaf,
+  'record_open_scratch_bank_margin_before_unmodeled_paths':4096-root_open,
+  'adapter':'repository-owned same-mounted CheckedStorage; Publish inlined into WriteProfile',
   'request_decode_enumerated_C_upper_bytes':decoder,
   'default_reservation_bytes':2048,'ordinary_scratch_bank_envelope_bytes':4096,
   'whole_target_upper_bound':'UNKNOWN: SDK/ROM, IRQ and unresolved indirect paths are not certified by this report',

@@ -9,7 +9,9 @@
 class Persistence {
  public:
   enum class LoadResult { Loaded, Absent, Rejected, StorageFailure };
-  enum class SaveResult { Saved, Conflict, StorageFailure };
+  enum class SaveResult { Saved, Conflict, StorageFailure, Uncertain };
+  bool IsMutationFenced() const { return uncertain; }
+  SaveResult ReconcileConfig(Config &config) { if(fail_load) return SaveResult::Uncertain; config=durable; uncertain=false; return SaveResult::Saved; }
   bool CheckSavedConfig() { return seeded; }
   size_t LoadConfigRaw(Print &, bool = true) { return 0; }
   bool ValidateConfig(const Config &config, ConfigValidationError &error) const {
@@ -52,6 +54,10 @@ class Persistence {
   SaveResult SaveConfigIfGenerationMatches(Config &config, uint64_t expected) {
     if (advance_before_save) { ++generation; advance_before_save = false; }
     if (expected != generation) return SaveResult::Conflict;
+    if (uncertain_after_save) {
+      Seed(config); ++save_calls; uncertain = true; uncertain_after_save = false;
+      return SaveResult::Uncertain;
+    }
     return SaveConfig(config) ? SaveResult::Saved : SaveResult::StorageFailure;
   }
   uint32_t ConfigGeneration(const Config &) const { return generation; }
@@ -59,6 +65,7 @@ class Persistence {
   uint32_t generation = 0;
   unsigned save_calls = 0, load_calls = 0;
   bool seeded = false, fail_save = false, fail_load = false;
+  bool uncertain = false, uncertain_after_save = false;
   bool fail_validation = false, advance_after_load = false, advance_before_save = false;
 };
 

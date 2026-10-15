@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -22,9 +23,13 @@ def require(value: bool, message: str) -> None:
 def compile_variant(temp: Path, generated: Path, name: str, old_copy: bool) -> None:
     source = PROFILE.read_text(encoding="utf-8")
     if old_copy:
-        needle = "return DecodeDirectory(bytes, length, directory);"
-        require(needle in source, "repaired callback shape missing")
-        source = source.replace(needle, "uint8_t wire[kDirectoryWireBytes]; std::memcpy(wire, bytes, sizeof(wire)); return DecodeDirectory(wire, length, directory);", 1)
+        # Retain the old F6 local-copy pattern as a semantic control around
+        # the actual v2 decoder. The separate ARM checker retains the exact
+        # historical 2620-byte F6 reservation failure proof.
+        source += "\nbool DecodeDirectoryF6Control(const uint8_t *bytes, size_t length, ProfileStore::Directory *directory) { uint8_t wire[kDirectoryWireBytes]; if(length != sizeof(wire)) return false; std::memcpy(wire, bytes, sizeof(wire)); return DecodeDirectory(wire, length, directory); }\n"
+        source += "#define DIRECTORY_DECODE_UNDER_TEST DecodeDirectoryF6Control\n"
+    else:
+        source += "\n#define DIRECTORY_DECODE_UNDER_TEST DecodeDirectory\n"
     # Directory is deliberately private in production. The host fixture includes
     # this source directly so its semantic corpus can call the internal decoder.
     source = source.replace('#include "core/ProfileStore.hpp"', '#define private public\n#include "core/ProfileStore.hpp"\n#undef private', 1)
@@ -38,18 +43,18 @@ def compile_variant(temp: Path, generated: Path, name: str, old_copy: bool) -> N
     objects: list[Path] = []
     for unit in (nanopb / "pb_common.c", nanopb / "pb_decode.c", nanopb / "pb_encode.c", generated / "config.pb.c"):
         obj = temp / f"{unit.stem}-{name}.o"
-        run(["cc", "-std=c11", "-fshort-enums", "-I", str(generated), "-I", str(nanopb), "-c", str(unit), "-o", str(obj)])
+        run(["cc", "-std=c11", "-fshort-enums", "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-I", str(generated), "-I", str(nanopb), "-c", str(unit), "-o", str(obj)])
         objects.append(obj)
     for unit in (ROOT / "src/core/config_validation.cpp", ROOT / "src/core/config_button_validation.cpp",
                  ROOT / "src/core/config_usb_default_validation.cpp", ROOT / "src/core/config_rgb_target_validation.cpp",
                  ROOT / "config/glyph/common/src/glyph_config_validation.cpp"):
         obj = temp / f"{unit.stem}-{name}.o"
-        run(["c++", "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror",
+        run(["c++", "-std=c++17", "-DARDUINO=1", "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-misleading-indentation", "-Wno-unused-function", "-ffunction-sections", "-fdata-sections",
              *sum((["-I", str(item)] for item in includes[1:]), []), "-c", str(unit), "-o", str(obj)])
         objects.append(obj)
     exe = temp / name
-    run(["c++", "-std=c++17", "-DARDUINO=1", "-fshort-enums", "-Wall", "-Wextra", "-Werror",
-         *sum((["-I", str(item)] for item in includes), []), str(FIXTURE), *map(str, objects), "-o", str(exe)])
+    run(["c++", "-std=c++17", "-DARDUINO=1", "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-fshort-enums", "-Wall", "-Wextra", "-Werror", "-Wno-misleading-indentation", "-Wno-unused-function", "-ffunction-sections", "-fdata-sections",
+         *sum((["-I", str(item)] for item in includes), []), str(FIXTURE), *map(str, objects), *( ["-Wl,-dead_strip"] if sys.platform == "darwin" else ["-Wl,--gc-sections"] ), "-o", str(exe)])
     result = run([str(exe)])
     require("profile_store_directory_decoder_semantics=PASS" in result, f"{name} semantic corpus failed")
 
@@ -70,7 +75,7 @@ def main() -> int:
         print(f"glyph_profile_store_directory_decoder: FAIL: {error}")
         return 1
     print("glyph_profile_store_directory_decoder: PASS")
-    print("variants=old_f6_copy,repaired_direct cases=valid,max,bad_magic,version,count,crc,incarnation,high_water,zero_id,zero_revision,id_above_high_water,duplicate_id")
+    print("variants=old_f6_copy,repaired_direct format=v2 deployed_v1_reader=true malformed_metadata=true full_names=true")
     return 0
 
 

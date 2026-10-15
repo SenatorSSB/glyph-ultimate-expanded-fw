@@ -17,6 +17,7 @@
 
 #include "core/Persistence.hpp"
 #include "core/CompactConfigRecovery.hpp"
+#include "core/Sha256.hpp"
 
 #include "stdlib.hpp"
 
@@ -31,7 +32,7 @@
 namespace {
 
 struct ConfigFileReader {
-    File *file;
+    CheckedStorageFile *file;
     bool io_failed = false;
 };
 
@@ -52,6 +53,64 @@ bool read_config_file(pb_istream_t *stream, pb_byte_t *buffer, size_t count) {
         count -= chunk;
         if (buffer != nullptr) buffer += chunk;
     }
+    return true;
+}
+
+bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t encoded_size) {
+    if (!file.seek(Persistence::config_offset)) return false;
+    pb_ostream_t compare{};
+    compare.callback = [](pb_ostream_t *out, const pb_byte_t *bytes, size_t count) {
+        auto &input = *static_cast<CheckedStorageFile *>(out->state);
+        uint8_t actual[32];
+        while (count) {
+            const size_t chunk = count > sizeof(actual) ? sizeof(actual) : count;
+            if (input.read(actual, chunk) != static_cast<int>(chunk) || std::memcmp(actual, bytes, chunk)) return false;
+            bytes += chunk; count -= chunk;
+        }
+        return true;
+    };
+    compare.state = &file; compare.max_size = encoded_size;
+    return pb_encode(&compare, Config_fields, &config) && compare.bytes_written == encoded_size;
+}
+
+bool copy_checked_file(const char *from, const char *to, size_t length, bool &uncertain) {
+    CheckedStorageFile input(from, "r"), output(to, "w+");
+    bool copied = input && output;
+    uint8_t scratch[64]; size_t remaining = length;
+    while (copied && remaining) {
+        const size_t count = remaining > sizeof(scratch) ? sizeof(scratch) : remaining;
+        copied = input.read(scratch, count) == static_cast<int>(count) && output.write(scratch, count) == count;
+        remaining -= count;
+    }
+    copied = copied && output.sync();
+    const bool input_closed = input.close(), output_closed = output.close();
+    uncertain = input.uncertain() || output.uncertain();
+    return copied && input_closed && output_closed;
+}
+
+bool hash_file(const char *path, uint8_t digest[32]) {
+    CheckedStorageFile file(path, "r");
+    if (!file) return false;
+    Sha256 hash; uint8_t scratch[128]; size_t remaining = file.size();
+    while (remaining) {
+        const size_t count = remaining > sizeof(scratch) ? sizeof(scratch) : remaining;
+        if (file.read(scratch, count) != static_cast<int>(count)) { file.close(); return false; }
+        hash.Update(scratch, count); remaining -= count;
+    }
+    if (!file.close()) return false;
+    hash.Final(digest); return true;
+}
+
+bool select_config_filename(const char *current, const char *prior, const char *legacy,
+                            const char *&filename, CompactConfigRecovery::Source &source) {
+    using namespace CheckedStorage;
+    const auto current_stat = Stat(current, nullptr, Kind::Config);
+    if (!current_stat && current_stat.outcome != Outcome::NotFound) return false;
+    const auto prior_stat = Stat(prior, nullptr, Kind::Config);
+    if (!prior_stat && prior_stat.outcome != Outcome::NotFound) return false;
+    source = CompactConfigRecovery::Select(bool(current_stat), bool(prior_stat));
+    filename = source == CompactConfigRecovery::Source::Current ? current :
+        (source == CompactConfigRecovery::Source::PriorCompact ? prior : legacy);
     return true;
 }
 
@@ -110,99 +169,195 @@ bool Persistence::ValidateConfig(const Config &config, ConfigValidationError &er
 }
 
 Persistence::SaveResult Persistence::SaveConfigIfGenerationMatches(Config &config, uint64_t expected_generation) {
+    if (_mutation_fenced) return SaveResult::Uncertain;
     if (expected_generation != _config_generation) return SaveResult::Conflict;
     if (!IsAvailable()) return SaveResult::StorageFailure;
-    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
-        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
-    const char *filename = source == CompactConfigRecovery::Source::Current ? config_filename :
-        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
-    File current = LittleFS.open(filename, "r");
+    CompactConfigRecovery::Source source;
+    const char *filename = nullptr;
+    if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, filename, source))
+        return SaveResult::StorageFailure;
+    CheckedStorageFile current(filename, "r");
     if (!current) return SaveResult::StorageFailure;
     ConfigHeader header;
     const bool checked = CheckSavedConfig(current) && current.seek(0) &&
         current.read(reinterpret_cast<uint8_t *>(&header), sizeof(header)) == static_cast<int>(sizeof(header));
-    current.close();
-    if (!checked) return SaveResult::StorageFailure;
+    const bool current_closed = current.close();
+    if (!checked || !current_closed) return SaveResult::StorageFailure;
     if (expected_generation != header.config_crc) return SaveResult::Conflict;
     // All Config writers execute synchronously on core0. No callback or yield
     // runs a Config writer between this fence and SaveConfig's publication.
-    return SaveConfig(config) ? SaveResult::Saved : SaveResult::StorageFailure;
+    if (SaveConfig(config)) return SaveResult::Saved;
+    return _mutation_fenced ? SaveResult::Uncertain : SaveResult::StorageFailure;
 }
 
 bool Persistence::SaveConfig(Config &config) {
-    if (!IsAvailable()) {
-        return false;
-    }
-    // Make sure config encodes correctly.
-    size_t encoded_size;
-    if (!pb_get_encoded_size(&encoded_size, Config_fields, &config)) {
-        return false;
-    }
-
-    // The legacy config.bin is never a write target.  Stage the compact
-    // replacement, close it, validate it by reopening, then rotate the former
-    // compact file only after the staged bytes are known readable.
+    using namespace CheckedStorage;
+    if (!IsAvailable() || _mutation_fenced) return false;
+    size_t encoded_size = 0;
+    if (!pb_get_encoded_size(&encoded_size, Config_fields, &config)) return false;
     static constexpr char temporary_filename[] = "config-v2.tmp";
-    LittleFS.remove(temporary_filename);
-    File config_file = LittleFS.open(temporary_filename, "w+");
-    if (!config_file) {
+    auto removed = Remove(temporary_filename, Kind::Config);
+    if (!removed) { _mutation_fenced = removed.outcome == Outcome::Uncertain; return false; }
+    ConfigHeader header{};
+    {
+        CheckedStorageFile file(temporary_filename, "w+");
+        auto staging_failed = [this, &file]() {
+            file.close();
+            if (file.uncertain()) _mutation_fenced = true;
+            return false;
+        };
+        if (!file) return staging_failed();
+        if (file.write(reinterpret_cast<const uint8_t *>(&header), sizeof(header)) != sizeof(header))
+            return staging_failed();
+        pb_ostream_t stream = as_pb_ostream(file);
+        if (!pb_encode(&stream, Config_fields, &config) || stream.bytes_written != encoded_size || !file.seek(config_offset))
+            return staging_failed();
+        CRC32 crc;
+        for (size_t i = 0; i < encoded_size; ++i) {
+            int value = file.read();
+            if (value < 0) return staging_failed();
+            crc.update(static_cast<uint8_t>(value));
+        }
+        header.config_size = encoded_size; header.config_crc = crc.finalize();
+        if (!file.seek(0) || file.write(reinterpret_cast<const uint8_t *>(&header), sizeof(header)) != sizeof(header) || !file.sync())
+            return staging_failed();
+        if (!file.close()) { _mutation_fenced = file.uncertain(); return false; }
+    }
+    {
+        CheckedStorageFile staged(temporary_filename, "r");
+        bool verified = staged && CheckSavedConfig(staged) && staged.seek(config_offset);
+        // Compare independently reopened bytes with a second deterministic encode.
+        verified = verified && compare_config_bytes(staged, config, encoded_size);
+        if (!staged.close() || !verified) { _mutation_fenced = staged.uncertain(); return false; }
+    }
+
+    auto current = Stat(config_filename, nullptr, Kind::Config);
+    if (!current && current.outcome != Outcome::NotFound) return false;
+    if (current) {
+        auto prior_removed = Remove(prior_compact_filename, Kind::Config);
+        if (!prior_removed) { _mutation_fenced = prior_removed.outcome == Outcome::Uncertain; return false; }
+        auto rotated = Rename(config_filename, prior_compact_filename, Kind::Config);
+        if (!rotated) { _mutation_fenced = rotated.outcome == Outcome::Uncertain; return false; }
+    }
+    _pending_crc = header.config_crc; _pending_size = encoded_size;
+    auto publication = Rename(temporary_filename, config_filename, Kind::Config);
+    if (!publication) {
+        if (publication.outcome == Outcome::Uncertain) {
+            _mutation_fenced = true;
+            // Exact authenticated readback can resolve a lost acknowledgement.
+            CheckedStorageFile published(config_filename, "r");
+            ConfigHeader actual{};
+            bool match = published && CheckSavedConfig(published) && published.seek(0) &&
+                published.read(reinterpret_cast<uint8_t *>(&actual), sizeof(actual)) == static_cast<int>(sizeof(actual)) &&
+                actual.config_crc == _pending_crc && actual.config_size == _pending_size &&
+                compare_config_bytes(published, config, encoded_size);
+            if (published.close() && match) {
+                _config_generation = header.config_crc; _mutation_fenced = false; return true;
+            }
+            return false;
+        }
+        if (current) {
+            auto rollback = Rename(prior_compact_filename, config_filename, Kind::Config);
+            if (!rollback) _mutation_fenced = true;
+        }
         return false;
     }
-
-    // Write empty header to start with.
-    ConfigHeader header = { .config_size = 0, .config_crc = 0 };
-    if (config_file.write((uint8_t *)&header, sizeof(ConfigHeader)) != sizeof(ConfigHeader)) {
-        config_file.close();
-        return false;
-    }
-
-    // Encode Protobuf data directly into file body.
-    pb_ostream_t ostream = as_pb_ostream(config_file);
-    if (!pb_encode(&ostream, Config_fields, &config)) {
-        config_file.close();
-        return false;
-    }
-
-    // Calculate checksum.
-    config_file.seek(config_offset);
-    CRC32 crc;
-    int value;
-    while ((value = config_file.read()) != -1) {
-        crc.update((uint8_t)value);
-    }
-
-    // Update header.
-    header.config_size = ostream.bytes_written;
-    header.config_crc = crc.finalize();
-    if (!config_file.seek(0) ||
-        config_file.write((uint8_t *)&header, sizeof(ConfigHeader)) != sizeof(ConfigHeader)) {
-        config_file.close();
-        return false;
-    }
-
-    // Persist changes.
-    config_file.close();
-
-    File staged = LittleFS.open(temporary_filename, "r");
-    const bool staged_ok = staged && CheckSavedConfig(staged);
-    if (staged) staged.close();
-    if (!staged_ok) return false;
-
-    const bool had_current = LittleFS.exists(config_filename);
-    // When only the prior compact file survives, it is the authoritative
-    // recovery anchor. Do not remove it before replacement publication.
-    if (had_current && LittleFS.exists(prior_compact_filename) &&
-        !LittleFS.remove(prior_compact_filename)) return false;
-    if (had_current && !LittleFS.rename(config_filename, prior_compact_filename)) return false;
-    if (!LittleFS.rename(temporary_filename, config_filename)) {
-        if (had_current) LittleFS.rename(prior_compact_filename, config_filename);
-        return false;
-    }
-    // The staged bytes were verified before rotation. Successful rename is
-    // the publication point; a later read failure must not report an unchanged
-    // failed transaction after the replacement is already authoritative.
     _config_generation = header.config_crc;
     return true;
+}
+
+Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
+    if (!IsAvailable()) return SaveResult::Uncertain;
+    // Reload the actually selected current/prior publication, never stale RAM.
+    const auto loaded = LoadConfigChecked(authoritative);
+    if (loaded != LoadResult::Loaded) return SaveResult::Uncertain;
+    _mutation_fenced = false;
+    return SaveResult::Saved;
+}
+
+bool Persistence::LegacySourceIdentity(uint8_t digest[32]) {
+    if (!IsAvailable()) return false;
+    CheckedStorageFile source("/ultimate-migration.src", "r");
+    if (!source) return false;
+    const bool valid = CheckSavedConfig(source);
+    if (!source.close() || !valid) return false;
+    return hash_file("/ultimate-migration.src", digest);
+}
+
+bool Persistence::CaptureLegacySource(uint8_t digest[32]) {
+    using namespace CheckedStorage;
+    if (!IsAvailable() || _mutation_fenced) return false;
+    CompactConfigRecovery::Source selected;
+    const char *filename = nullptr;
+    if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, filename, selected)) return false;
+    size_t length = 0;
+    {
+        CheckedStorageFile source(filename, "r");
+        if (!source) return false;
+        const bool valid = CheckSavedConfig(source);
+        length = source.size();
+        if (!source.close() || !valid) return false;
+    }
+    if (length > 65536 || !hash_file(filename, digest)) return false;
+    auto snapshot = Stat("/ultimate-migration.src", nullptr, Kind::Config);
+    if (snapshot) {
+        uint8_t previous[32];
+        return LegacySourceIdentity(previous) && std::memcmp(previous, digest, sizeof(previous)) == 0;
+    }
+    if (snapshot.outcome != Outcome::NotFound) return false;
+    Geometry geometry{};
+    if (!Capacity(geometry) || !geometry.erase_bytes) return false;
+    // Snapshot must not consume the project reserve or copy-on-write metadata
+    // reserve even before ProfileStore performs its complete import admission.
+    const uint64_t blocks = (uint64_t(length) + geometry.erase_bytes - 1) / geometry.erase_bytes;
+    const uint64_t charged = uint64_t(length) + 4 * (blocks + 1);
+    const uint64_t staged = ((charged + geometry.erase_bytes - 1) / geometry.erase_bytes) * geometry.erase_bytes;
+    if (geometry.free_bytes < staged + 16384 + uint64_t(4) * geometry.erase_bytes) return false;
+    auto removed = Remove("/ultimate-migration.tmp", Kind::Config);
+    if (!removed) { _mutation_fenced = removed.outcome == Outcome::Uncertain; return false; }
+    bool uncertain = false;
+    if (!copy_checked_file(filename, "/ultimate-migration.tmp", length, uncertain)) {
+        _mutation_fenced = uncertain; return false;
+    }
+    uint8_t actual[32];
+    if (!hash_file("/ultimate-migration.tmp", actual) || std::memcmp(actual, digest, sizeof(actual))) return false;
+    auto published = Rename("/ultimate-migration.tmp", "/ultimate-migration.src", Kind::Config);
+    if (!published && published.outcome != Outcome::Uncertain) return false;
+    if (!LegacySourceIdentity(actual) || std::memcmp(actual, digest, sizeof(actual))) {
+        _mutation_fenced = published.outcome == Outcome::Uncertain; return false;
+    }
+    return true;
+}
+
+Persistence::LoadResult Persistence::ReadLegacyProfile(size_t index, UltimateProfile &profile) {
+    if (!IsAvailable() || index >= 2) return LoadResult::StorageFailure;
+    CheckedStorageFile source("/ultimate-migration.src", "r");
+    if (!source) return LoadResult::StorageFailure;
+    LoadResult failure = LoadResult::Rejected;
+    if (!CheckSavedConfig(source, &failure) || !source.seek(config_offset)) { source.close(); return failure; }
+    ConfigFileReader reader{&source};
+    pb_istream_t stream{}; stream.callback = read_config_file; stream.state = &reader;
+    stream.bytes_left = source.size() - config_offset;
+    size_t found = 0; bool decoded = false;
+    while (stream.bytes_left) {
+        pb_wire_type_t wire; uint32_t tag; bool eof;
+        if (!pb_decode_tag(&stream, &wire, &tag, &eof)) break;
+        if (tag == Config_ultimate_profiles_tag) {
+            if (wire != PB_WT_STRING) break;
+            if (found++ == index) {
+                pb_istream_t substream;
+                if (!pb_make_string_substream(&stream, &substream)) break;
+                profile = UltimateProfile_init_default;
+                decoded = pb_decode(&substream, UltimateProfile_fields, &profile) && substream.bytes_left == 0;
+                if (!pb_close_string_substream(&stream, &substream)) decoded = false;
+                break;
+            }
+        }
+        if (!pb_skip_field(&stream, wire)) break;
+    }
+    const bool closed = source.close();
+    if (!closed || reader.io_failed) return LoadResult::StorageFailure;
+    return decoded ? LoadResult::Loaded : LoadResult::Rejected;
 }
 
 bool Persistence::LoadConfig(Config &config) {
@@ -219,11 +374,11 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
     static Config candidate;
     candidate = Config_init_default;
 
-    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
-        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
-    const char *selected_filename = source == CompactConfigRecovery::Source::Current ? config_filename :
-        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
-    File config_file = LittleFS.open(selected_filename, "r");
+    CompactConfigRecovery::Source source;
+    const char *selected_filename = nullptr;
+    if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, selected_filename, source))
+        return LoadResult::StorageFailure;
+    CheckedStorageFile config_file(selected_filename, "r");
     if (!config_file) {
         // The selected Boolean FS API cannot distinguish absence from I/O failure.
         // Absent remains reserved for positively proved absence; it is not inferred.
@@ -268,10 +423,13 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
         config_file.close();
         return LoadResult::StorageFailure;
     }
-    config_file.close();
-    if (source == CompactConfigRecovery::Source::PriorCompact &&
-        (!LittleFS.rename(prior_compact_filename, config_filename))) {
-        return LoadResult::StorageFailure;
+    if (!config_file.close()) return LoadResult::StorageFailure;
+    if (source == CompactConfigRecovery::Source::PriorCompact) {
+        auto restored = CheckedStorage::Rename(prior_compact_filename, config_filename, CheckedStorage::Kind::Config);
+        if (!restored) {
+            if (restored.outcome == CheckedStorage::Outcome::Uncertain) _mutation_fenced = true;
+            return LoadResult::StorageFailure;
+        }
     }
     config = candidate;
     _config_generation = header.config_crc;
@@ -283,18 +441,17 @@ bool Persistence::CheckSavedConfig() {
         return false;
     }
     // Open file to load config data from.
-    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
-        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
-    const char *selected_filename = source == CompactConfigRecovery::Source::Current ? config_filename :
-        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
-    File config_file = LittleFS.open(selected_filename, "r");
+    CompactConfigRecovery::Source source;
+    const char *selected_filename = nullptr;
+    if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, selected_filename, source))
+        return false;
+    CheckedStorageFile config_file(selected_filename, "r");
     if (!config_file) {
         return false;
     }
 
     bool is_valid = CheckSavedConfig(config_file);
-    config_file.close();
-    return is_valid;
+    return config_file.close() && is_valid;
 }
 
 size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
@@ -302,11 +459,11 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
         return false;
     }
     // Open file to load config data from.
-    const CompactConfigRecovery::Source source = CompactConfigRecovery::Select(
-        LittleFS.exists(config_filename), LittleFS.exists(prior_compact_filename));
-    const char *selected_filename = source == CompactConfigRecovery::Source::Current ? config_filename :
-        (source == CompactConfigRecovery::Source::PriorCompact ? prior_compact_filename : legacy_config_filename);
-    File config_file = LittleFS.open(selected_filename, "r");
+    CompactConfigRecovery::Source source;
+    const char *selected_filename = nullptr;
+    if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, selected_filename, source))
+        return false;
+    CheckedStorageFile config_file(selected_filename, "r");
     if (!config_file) {
         return false;
     }
@@ -329,11 +486,10 @@ size_t Persistence::LoadConfigRaw(Print &out, bool validate) {
         out.write((uint8_t)value);
     }
 
-    config_file.close();
-    return true;
+    return config_file.close();
 }
 
-bool Persistence::CheckSavedConfig(File &config_file, LoadResult *failure) {
+bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure) {
     if (failure != nullptr) {
         *failure = LoadResult::Rejected;
     }

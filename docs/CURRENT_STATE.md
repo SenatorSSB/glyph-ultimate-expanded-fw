@@ -185,3 +185,13 @@ historical completion prose below does not authorize implementation.
 - No nunchuk validation is claimed.
 - No root-cause claim is made.
 - Older failed diagnostics are archived evidence, not current work.
+
+### Owner-authorized strict-hardening candidate (2026-10-16)
+
+The separate `codex/multi-profile-store-strict-hardening` branch implements the
+old strict review's B1–B10 source repairs from exact reconciliation04d7521f.
+See the [chapter continuation](project/MULTI_PROFILE_PERSISTENT_ULTIMATE_PROFILE_STORE_CHAPTER.md#strict-hardening-implementation--2026-10-16)
+and [new hardware packet](runtime_config/profile_store_strict_hardening_hardware_packet.md).
+This changes candidate source, not canonical acceptance: new physical tests,
+resource observations and exact artifact binding remain required. Historical
+f7ba82d4 receipts and non-blocking Runtime-B observer debt are unchanged.

@@ -19,7 +19,24 @@ struct MemoryStorage final : ProfileStoreStorage {
     bool strict_absent_remove = false;
     bool fail_existing_remove = false;
 
+    static uint64_t Charge(size_t bytes) { return ((bytes + 4*((bytes+4095)/4096+1) + 4095)/4096)*4096; }
+    uint64_t Used() const { uint64_t used=8192; for(const auto &file:files) used+=Charge(file.second.size()); return used; }
+    bool Geometry(CheckedStorage::Geometry &g) override {
+        g.total_bytes=524288;g.used_bytes=Used();g.free_bytes=g.used_bytes<g.total_bytes?g.total_bytes-g.used_bytes:0;
+        g.erase_bytes=4096;g.program_bytes=g.read_bytes=256;g.block_count=128;g.cache_bytes=256;g.name_max=31;return true;
+    }
+    bool Enumerate(CheckedStorage::Visitor visitor,void *context) override {
+        for(const auto &file:files){CheckedStorage::Entry entry{};const char *name=file.first.c_str();if(*name=='/')++name;
+            if(std::strlen(name)>=sizeof(entry.name))return false;std::strcpy(entry.name,name);entry.bytes=file.second.size();if(!visitor(context,entry))return false;}
+        return true;
+    }
+    bool ReadRange(const char *path,size_t offset,uint8_t *bytes,size_t length) override {
+        auto file=files.find(path);if(file==files.end()||offset>file->second.size()||length>file->second.size()-offset)return false;
+        std::memcpy(bytes,file->second.data()+offset,length);return true;
+    }
     bool Write(const char *path, const uint8_t *bytes, size_t length) override {
+        const uint64_t previous=files.count(path)?Charge(files.at(path).size()):0;
+        if(Used()-previous+Charge(length)>524288)return false;
         files[path] = std::vector<uint8_t>(bytes, bytes + length);
         return true;
     }
@@ -180,9 +197,8 @@ int main(int argc, char **argv) {
     if (!require(legacy_bytes == preserved_legacy_bytes,
                  "migration leaves the legacy Config source bytes untouched")) return 1;
 
-    Config compact = Config_init_default;
-    compact.ultimate_profile_store_format = ProfileStore::kCompactConfigFormat;
-    compact.ultimate_profile_store_incarnation = retry_boot.Incarnation();
+    Config compact = legacy;
+    if (!require(retry_boot.PrepareCompact(compact), "prepare authenticated compact migration receipt")) return 1;
     if (!require(retry_boot.CompleteMigration(compact) == ProfileStore::Status::Ok &&
                  !retry_boot.MigrationPending(),
                  "authenticated compact Config releases the migration fence")) return 1;
@@ -285,8 +301,8 @@ int main(int argc, char **argv) {
 
     ProfileStore corrupt_reboot(&storage);
     if (!require(corrupt_reboot.Begin() && corrupt_reboot.Count() == ProfileStore::kMinimumAdmissionProfiles &&
-                 (storage.files.find("/ultimate-dir-0.bin") != storage.files.end() ||
-                  storage.files.find("/ultimate-dir-1.bin") != storage.files.end()),
+                 storage.Exists("/ultimate-v2-0.bin") && storage.Exists("/ultimate-v2-1.bin") &&
+                 storage.Exists("/ultimate-v2.ctrl"),
                  "corrupt record leaves the committed directory usable")) return 1;
     if (!require(corrupt_reboot.Activate(ids[0], &activation) == nullptr &&
                  activation == ProfileStore::Status::Invalid,

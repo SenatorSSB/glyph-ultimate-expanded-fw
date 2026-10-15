@@ -487,3 +487,37 @@ native independent reviewer is separate from the reconciler; no new user chat,
 Planner, Curator, hardware action or canonical publication. No replacement
 implementation is authorized by this evidence receipt. The next permissible
 step is owner inspection of the strict blocker matrix.
+
+## Strict-hardening implementation — 2026-10-16
+
+The later explicit owner request authorizes B1–B8 repairs, B9/B10 source/tests,
+and interruption-safe format evolution from the exact f7ba82d4 logical device
+state. Work is on `codex/multi-profile-store-strict-hardening`, based on
+`04d7521fbdaeb313c1fe768a992a6c35847b68bf`; it does not modify canonical or
+rewrite tested/reconciliation ancestry. The original strict BLOCKED review
+remains an accurate review of the old source, not a prohibition overriding the
+new owner authorization.
+
+The implementation uses a checked same-mount LittleFS adapter, v2 redundant
+roots plus a format-owned intent/checkpoint, independent Config root-format
+acceptance marker, full firmware-derived transaction identity, authenticated
+streamed migration, measured admission/protected GC, reboot-bound selection,
+and initialized headless recovery. New source has no inherited hardware PASS.
+Candidate-only resource/fault instrumentation is explicit and must be removed
+or explicitly accepted in a separately reviewed final production snapshot.
+
+See the [implementation design](../runtime_config/profile_store_strict_hardening_design.md),
+[checked storage proof](../runtime_config/profile_store_checked_storage_source_proof.md),
+[protocol contract](../runtime_config/profile_store_protocol_hardening.md),
+[resource evidence](../runtime_config/profile_store_strict_resource_diagnostics.md)
+and [bounded owner hardware packet](../runtime_config/profile_store_strict_hardening_hardware_packet.md).
+The fresh independent review records original B1–B10 source dispositions;
+exact candidate identity, final build/resource output and immutable primary UF2
+custody are recorded in the final external handoff manifest after source freeze.
+
+Runtime-B remains NOT_TESTED — PHYSICAL_RUNTIME_OBSERVER_UNAVAILABLE and
+non-blocking observer debt. F1–F6 and all previous receipts are unchanged.
+Nunchuk remains NOT_TESTED. The historical SetConfig aggregate scope guard still
+fails with `C024 post-integration change outside validation/evidence paths`;
+it is not an aggregate PASS. Direct affected production-unit suites are reported
+separately. No canonical merge, factory reset or device action occurred.

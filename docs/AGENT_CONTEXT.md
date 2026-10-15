@@ -258,3 +258,12 @@ GP-VAL-028 is DONE: an authenticated tracked Nanopb 0.4.9.2 generated header mak
 - Executable queue: `docs/project/ACTIVE_AGENT_QUEUE.md`.
 - Archive index: `docs/archive/README.md`.
 - Calibration evidence index: `docs/calibration/INDEX.md`.
+
+### Strict-hardening branch continuation (2026-10-16)
+
+The later owner-authorized strict-hardening implementation is recorded in the
+[multi-profile chapter](project/MULTI_PROFILE_PERSISTENT_ULTIMATE_PROFILE_STORE_CHAPTER.md#strict-hardening-implementation--2026-10-16).
+It supersedes the old review's no-repair scope only for the named B1–B10 work.
+New firmware requires its own exact candidate hardware receipt; old PASS does
+not transfer. The candidate includes explicitly marked temporary resource and
+fault diagnostics. Canonical merge and device actions remain unauthorized.
