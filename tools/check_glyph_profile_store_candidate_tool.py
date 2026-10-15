@@ -5,6 +5,8 @@ import io
 import json
 from pathlib import Path
 import tempfile
+from unittest.mock import patch
+import sys
 import glyph_profile_store_candidate_tool as candidate
 import glyph_serial_config_tool as transport
 
@@ -23,6 +25,8 @@ def main():
         with tempfile.TemporaryDirectory(prefix='glyph-candidate-cli-') as directory:
             profile=Path(directory)/'profile.json';profile.write_text(json.dumps({'response':{'profile':{'schemaVersion':1}}}))
             base=['--port','UNOPENED','create','--token','0x100000009','--store-generation','8','--incarnation','1','--name','ä'*16,'--rank','0','--profile-json',str(profile),'--request-out',str(Path(directory)/'request.json')]
+            require(rejected([*base,'--trace-out',str(profile)]),'trace cannot alias profile')
+            require(rejected([*base,'--trace-out',str(profile)+'.out','--output',str(profile)+'.out']),'trace cannot alias response output')
             args=candidate.parse_args(base);request,host=candidate.build_message(args,pb,json_format)
             require(request.protocol_version==2 and request.request_token==0x100000009 and request.expected_store_generation==8 and request.expected_store_incarnation==1,'explicit mutation fences/full token')
             require(request.HasField('profile') and request.profile.schema_version==1 and len(request.name.encode('utf-8'))==32,'READ export profile and byte bound')
@@ -51,6 +55,45 @@ def main():
             for action in ('update','duplicate'):
                 require(rejected(['--port','UNOPENED',action,'--profile-id','1','--token','9','--store-generation','8','--incarnation','1']),'revision/source guards')
             require(rejected(['--port','UNOPENED','query','--token','0']),'zero query token refused')
+        # Exercise the real CLI orchestration with an offline port. Retained
+        # journal distinguishes the two formerly identical timeout points.
+        with tempfile.TemporaryDirectory(prefix='glyph-cli-phase-') as directory:
+            for succeeds in (False,True):
+                journal=Path(directory)/f'{succeeds}.jsonl'
+                clock=[0.0]
+                class Port:
+                    def __init__(self,*args):self.fd=-1;self.timeout_sec=5;self.writes=[];self.replies=[];ports.append(self)
+                    def open(self):pass
+                    def close(self):pass
+                    def flush_input(self):pass
+                    def write_all(self,data):
+                        self.writes.append(data)
+                        if succeeds and len(self.writes)==1:
+                            reply=pb.ProfileStoreResponse(protocol_version=2,status=pb.PROFILE_STORE_OK,strict_hardening_candidate=True,storage_fault_capable=True,fault_control_version=2)
+                            self.replies.append(transport.cobs_encode(bytes([9])+reply.SerializeToString()))
+                ports=[]
+                def tick():clock[0]+=0.25;return clock[0]
+                def ready(*args):return ([ports[-1].fd],[],[]) if ports[-1].replies else ([],[],[])
+                argv=['candidate','--port','UNOPENED','arm','--path-class','record','--operation','write','--result','fail-before','--trace-out',str(journal)]
+                with patch.object(sys,'argv',argv),patch.object(candidate.transport,'load_runtime_proto_modules',lambda root:(pb,json_format,None)),patch.object(candidate.transport,'PosixSerialPort',Port),patch.object(candidate.time,'monotonic',tick),patch.object(candidate.select,'select',ready),patch.object(candidate.os,'read',lambda *args:ports[-1].replies.pop(0)),contextlib.redirect_stdout(io.StringIO()) as output,contextlib.redirect_stderr(io.StringIO()):
+                    require(candidate.main()==1,'offline bounded timeout exit')
+                events=[json.loads(line) for line in journal.read_text().splitlines()]
+                transmitted=[e['phase'] for e in events if e['event']=='transmitted']
+                require(transmitted==(['status_preflight','arm'] if succeeds else ['status_preflight']),f'journal proves ARM transmitted vs not transmitted: {succeeds} {events} {output.getvalue()}')
+                require(events[-1]['phase']==('arm' if succeeds else 'status_preflight') and events[-1]['event']=='response_timeout','exact timeout stage durable')
+            # Multiple progress frames must be consumed without mistaking a
+            # stage acknowledgement for the final STATUS result.
+            class TracePort:
+                fd=-1;timeout_sec=5
+                def write_all(self,data):pass
+            message=pb.ProfileStoreRequest(protocol_version=2,operation=pb.PROFILE_STORE_STATUS,request_token=123,liveness_trace=True)
+            frames=[]
+            for stage in (1,2,3,4,5,6,7,8,9,0):
+                reply=pb.ProfileStoreResponse(protocol_version=2,request_token=123,liveness_stage=stage,status=0 if stage else pb.PROFILE_STORE_OK)
+                frames.append(transport.cobs_encode(bytes([9])+reply.SerializeToString()))
+            with patch.object(candidate.select,'select',lambda *args:([-1],[],[])),patch.object(candidate.os,'read',lambda *args:b''.join(frames)),contextlib.redirect_stderr(io.StringIO()) as log:
+                require(candidate.request(TracePort(),pb,message,phase='status').status==pb.PROFILE_STORE_OK,'trace frames precede final response')
+            require(log.getvalue().count('device_stage')==9,'all progress stages retained')
         print('glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true')
         return 0
     except Exception as error:

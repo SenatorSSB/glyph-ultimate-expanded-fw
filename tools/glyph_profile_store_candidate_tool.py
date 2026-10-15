@@ -7,16 +7,27 @@ import hashlib
 import os
 import select
 import time
+import sys
 import glyph_serial_config_tool as transport
 
 ROOT=Path(__file__).resolve().parents[1]
 OPERATIONS={'open-read':1,'open-write':2,'read':3,'write':4,'seek':5,'sync':6,'close':7,'stat':8,'remove':9,'rename':10}
 PATHS={'record':(1,1),'root':(2,2),'control':(2,3),'config':(3,4)}
 
-def request(port,pb,message,exact_payload=None):
+TRACE_SINK=None
+def event(phase, state, **fields):
+    row={'monotonic_ns':time.monotonic_ns(),'utc_ns':time.time_ns(),'phase':phase,'event':state,**fields}
+    line=json.dumps(row,sort_keys=True)+'\n'
+    print(line,end='',file=sys.stderr,flush=True)
+    if TRACE_SINK is not None:
+        TRACE_SINK.write(line);TRACE_SINK.flush();os.fsync(TRACE_SINK.fileno())
+
+def request(port,pb,message,exact_payload=None,phase='request'):
     payload=exact_payload if exact_payload is not None else message.SerializeToString(deterministic=True)
     if len(payload)>8192: raise transport.ToolError('request exceeds frame bound')
+    event(phase,'transmit_attempt',operation=message.operation,request_sha256=hashlib.sha256(payload).hexdigest())
     port.write_all(transport.cobs_encode(bytes([9])+payload))
+    event(phase,'transmitted',operation=message.operation)
     deadline=time.monotonic()+port.timeout_sec
     frame=bytearray()
     while time.monotonic()<deadline:
@@ -33,8 +44,13 @@ def request(port,pb,message,exact_payload=None):
             if len(decoded)-1>8192:raise transport.ToolError('response exceeds protobuf bound')
             response=pb.ProfileStoreResponse();response.ParseFromString(decoded[1:])
             if response.request_token!=message.request_token:raise transport.ToolError('response token mismatch')
+            if response.liveness_stage:
+                event(phase,'device_stage',stage=response.liveness_stage)
+                continue
+            event(phase,'response',status=response.status)
             return response
-    raise transport.ToolError('bounded profile-store response timeout; inspect status/query before retry')
+    event(phase,'response_timeout',operation=message.operation)
+    raise transport.ToolError(f'{phase}: bounded profile-store response timeout after transmission; inspect trace before retry')
 
 MUTATIONS={'create':4,'update':5,'duplicate':6,'rename':7,'reorder':8,'delete':9,'set-reference':10}
 
@@ -42,7 +58,7 @@ def parse_args(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     number=lambda text:int(text,0)
     parser.add_argument('--port',required=True);parser.add_argument('--timeout',type=float,default=5)
-    parser.add_argument('action',choices=['status','list','read','health','query','arm','clear','replay',*MUTATIONS])
+    parser.add_argument('action',choices=['pulse','status','list','read','health','query','arm','clear','replay',*MUTATIONS])
     parser.add_argument('--profile-id',type=number,default=0);parser.add_argument('--token',type=number,default=0)
     parser.add_argument('--page',type=number,default=0);parser.add_argument('--page-size',type=int,default=8)
     parser.add_argument('--store-generation',type=number);parser.add_argument('--profile-revision',type=number)
@@ -50,6 +66,9 @@ def parse_args(argv=None):
     parser.add_argument('--mode-index',type=number);parser.add_argument('--name');parser.add_argument('--rank',type=number)
     parser.add_argument('--profile-json',type=Path);parser.add_argument('--profile-sha256')
     parser.add_argument('--output',type=Path)
+    parser.add_argument('--trace-out',type=Path,help='exclusive fsynced phase journal, including transmission and device progress')
+    parser.add_argument('--trace',action='store_true',help='candidate-only progress frames on STATUS/preflight')
+    parser.add_argument('--fault-ticket',type=number,default=0,help='explicit pending fault ticket for this mutation only')
     parser.add_argument('--request-out',type=Path,help='new receipt file written before first mutation; existing files are refused')
     parser.add_argument('--replay-request',type=Path,help='exact immutable request receipt to send once, explicitly')
     parser.add_argument('--path-class',choices=PATHS);parser.add_argument('--operation',choices=OPERATIONS)
@@ -57,6 +76,8 @@ def parse_args(argv=None):
     args=parser.parse_args(argv)
     if args.output and any(item and args.output.resolve()==item.resolve() for item in (args.request_out,args.replay_request,args.profile_json)):
         parser.error('output must not overwrite source profile or immutable request receipt')
+    if args.fault_ticket and (args.action not in MUTATIONS or not 0<args.fault_ticket<=0xffffffff):parser.error('fault-ticket requires mutation and uint32')
+    if args.trace_out and any(item and args.trace_out.resolve()==item.resolve() for item in (args.output,args.request_out,args.replay_request,args.profile_json)):parser.error('trace journal must be distinct from output, receipt and source paths')
     if not 0<args.timeout<=10:parser.error('timeout must be within (0,10] seconds')
     if not 0<=args.skip<=8:parser.error('skip must be 0..8')
     if not 0<=args.page<=64 or not 1<=args.page_size<=8:parser.error('page must be 0..64 and page-size 1..8')
@@ -101,6 +122,7 @@ def build_message(args,pb,json_format):
             message.fault_skip=args.skip
     elif args.action in MUTATIONS:
         message.operation=MUTATIONS[args.action]
+        message.fault_ticket=args.fault_ticket
         message.expected_store_generation=args.store_generation
         message.expected_store_incarnation=args.incarnation
         message.profile_id=args.profile_id
@@ -117,8 +139,9 @@ def build_message(args,pb,json_format):
             if 'profile' in artifact:artifact=artifact['profile']
             json_format.ParseDict(artifact,message.profile,ignore_unknown_fields=False)
     else:
-        message.operation={'status':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ,'health':pb.PROFILE_STORE_INSPECT_HEALTH,'query':pb.PROFILE_STORE_QUERY_TRANSACTION}[args.action]
+        message.operation={'pulse':pb.PROFILE_STORE_LIVENESS,'status':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ,'health':pb.PROFILE_STORE_INSPECT_HEALTH,'query':pb.PROFILE_STORE_QUERY_TRANSACTION}[args.action]
         message.profile_id=args.profile_id;message.page_cursor=args.page;message.page_size=args.page_size if args.action=='list' else 0
+    if args.trace and args.action in ('pulse','status','arm','clear'):message.liveness_trace=True
     payload=host.get('_exact_payload',message.SerializeToString(deterministic=True))
     if len(payload)>8192:raise transport.ToolError('request exceeds bounded 8192-byte body')
     host['transmitted_request_sha256']=hashlib.sha256(payload).hexdigest()
@@ -126,7 +149,7 @@ def build_message(args,pb,json_format):
 
 def verify_preflight(args,status,message):
     if args.action in ('arm','clear'):
-        if not status.strict_hardening_candidate or not status.storage_fault_capable:raise transport.ToolError('target does not advertise candidate fault capability')
+        if not status.strict_hardening_candidate or not status.storage_fault_capable or status.fault_control_version!=2:raise transport.ToolError('target does not advertise candidate fault capability')
     elif args.action=='replay':
         if not status.strict_hardening_candidate or status.mutation_protocol_version!=2 or status.store_incarnation!=message.expected_store_incarnation:raise transport.ToolError('replay requires same candidate store incarnation/protocol; no request sent')
         # Exact old expectations/token are intentional. No current
@@ -136,16 +159,19 @@ def verify_preflight(args,status,message):
         if status.mutation_protocol_version!=2:raise transport.ToolError('target does not advertise mutation protocol 2')
         if status.store_incarnation!=args.incarnation or status.store_generation!=args.store_generation:raise transport.ToolError('explicit incarnation/generation differs from target; no mutation sent')
         if args.token<=status.transaction_token_high_water:raise transport.ToolError('token is not above durable high water; use QUERY for lost response, never auto-retry')
+        if args.fault_ticket and (status.fault_control_version!=2 or not status.storage_fault_pending or status.storage_fault_ticket!=args.fault_ticket):raise transport.ToolError('pending fault ticket differs; no mutation sent')
         if args.action=='set-reference' and status.config_generation!=args.config_generation:raise transport.ToolError('explicit Config generation differs from target; no mutation sent')
 
 def main():
+    global TRACE_SINK
     args=parse_args();port=transport.PosixSerialPort(args.port,115200,args.timeout)
     try:
+        if args.trace_out:TRACE_SINK=args.trace_out.open('x',encoding='utf-8')
         pb,json_format,_=transport.load_runtime_proto_modules(ROOT)
         message,host=build_message(args,pb,json_format)
         port.open();port.flush_input()
         if args.action in ('arm','clear','replay') or args.action in MUTATIONS:
-            status=request(port,pb,pb.ProfileStoreRequest(protocol_version=2,operation=pb.PROFILE_STORE_STATUS))
+            status=request(port,pb,pb.ProfileStoreRequest(protocol_version=2,operation=pb.PROFILE_STORE_STATUS,liveness_trace=args.trace),phase='status_preflight')
             verify_preflight(args,status,message)
         exact_payload=host.pop('_exact_payload',None)
         if args.action in MUTATIONS:
@@ -158,7 +184,7 @@ def main():
             directory_fd=os.open(str(args.request_out.parent),os.O_RDONLY)
             try:os.fsync(directory_fd)
             finally:os.close(directory_fd)
-        response=request(port,pb,message,exact_payload)
+        response=request(port,pb,message,exact_payload,phase=args.action)
         result={'response':json_format.MessageToDict(response,preserving_proto_field_name=True),'host':host}
         text=json.dumps(result,sort_keys=True,indent=2)+'\n'
         if args.output:args.output.write_text(text,encoding='utf-8')
@@ -166,5 +192,7 @@ def main():
         return 0 if response.status in (pb.PROFILE_STORE_OK,pb.PROFILE_STORE_TRANSACTION_EXPIRED,pb.PROFILE_STORE_NOT_FOUND,pb.PROFILE_STORE_TRANSACTION_ABORTED) else 1
     except Exception as error:
         print(f'candidate tool: {error}');return 1
-    finally:port.close()
+    finally:
+        port.close()
+        if TRACE_SINK is not None:TRACE_SINK.close();TRACE_SINK=None
 if __name__=='__main__':raise SystemExit(main())

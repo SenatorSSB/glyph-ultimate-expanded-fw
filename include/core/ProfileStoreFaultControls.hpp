@@ -6,7 +6,8 @@
 // Volatile, single-shot controls in the conspicuously marked acceptance
 // candidate only. No arbitrary path, persisted arming, reset or device action.
 namespace ProfileStoreFaultControls {
-struct State { bool armed=false,triggered=false;unsigned kind=0,operation=0,phase=0,result=0,path_class=0,skip=0; };
+struct State { bool armed=false,triggered=false,pending=false;uint32_t ticket=0;unsigned kind=0,operation=0,phase=0,result=0,path_class=0,skip=0; };
+inline uint32_t &NextTicket(){static uint32_t ticket=0;return ticket;}
 inline State &Current(){static State state;return state;}
 inline bool PathMatches(unsigned path_class,const char *path){
     if(!path)return false;if(*path=='/')++path;
@@ -32,11 +33,19 @@ inline bool Arm(unsigned kind,unsigned operation,unsigned phase,unsigned result,
     static_assert(static_cast<unsigned>(CheckedStorage::Operation::Rename)==10,"fault operation wire mapping changed");
     if(!kStrictHardeningCandidate)return false;
     if(clear){Current()={};CheckedStorage::SetFaultHook(nullptr);return true;}
-    if(Current().armed||kind<1||kind>3||operation<1||operation>10||skip>8||
+    if(Current().armed||Current().pending||NextTicket()==UINT32_MAX||kind<1||kind>3||operation<1||operation>10||skip>8||
        !((phase==1&&result==1)||(phase==2&&result==2))||path_class<1||path_class>4)return false;
     if((path_class==1&&kind!=1)||((path_class==2||path_class==3)&&kind!=2)||(path_class==4&&kind!=3))return false;
     if(operation==static_cast<unsigned>(CheckedStorage::Operation::Remove)&&path_class!=1)return false;
-    Current()={true,false,kind,operation,phase,result,path_class,skip};
-    CheckedStorage::SetFaultHook(Hook);return true;
+    Current()={false,false,true,++NextTicket(),kind,operation,phase,result,path_class,skip};
+    CheckedStorage::SetFaultHook(nullptr);return true;
 }
+// A prepared rule is inert until a mutation explicitly presents its ticket.
+// Core0 owns this state and all checked filesystem calls. No IRQ/core1 writer.
+inline bool BeginMutation(uint32_t ticket){
+    auto &s=Current();
+    if(!kStrictHardeningCandidate||!ticket||!s.pending||ticket!=s.ticket)return false;
+    s.pending=false;s.armed=true;CheckedStorage::SetFaultHook(Hook);return true;
+}
+inline void EndMutation(){Current().armed=false;CheckedStorage::SetFaultHook(nullptr);}
 }

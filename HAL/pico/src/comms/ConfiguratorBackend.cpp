@@ -48,7 +48,7 @@ bool ReferencesProfile(const Config &config, uint32_t id) {
 // core0 producer owns this response; USB IRQs can only increase free space.
 class ProfilePacketWriter final : public Print {
   public:
-    explicit ProfilePacketWriter(Stream &stream) : _stream(stream), _start(millis()) {}
+    explicit ProfilePacketWriter(CoordinatedCdcStream &stream) : _stream(stream), _start(millis()) {}
     size_t write(uint8_t byte) override { return write(&byte, 1); }
     size_t write(const uint8_t *bytes, size_t length) override {
         size_t sent = 0;
@@ -57,7 +57,7 @@ class ProfilePacketWriter final : public Print {
             if (available > 0) {
                 const size_t count = length - sent < static_cast<size_t>(available)
                     ? length - sent : static_cast<size_t>(available);
-                const size_t written = _stream.write(bytes + sent, count);
+                const size_t written = _stream.writeAvailable(bytes + sent, count);
                 sent += written;
                 if (written != 0) continue;
             }
@@ -66,7 +66,7 @@ class ProfilePacketWriter final : public Print {
         return sent;
     }
   private:
-    Stream &_stream;
+    CoordinatedCdcStream &_stream;
     uint32_t _start;
 };
 }
@@ -83,6 +83,21 @@ bool ConfiguratorBackend::WriteProfilePacket(Command command, const uint8_t *byt
     return ok;
 }
 
+// Small candidate-only frames are emitted before the suspected synchronous
+// phases. The host journals these before waiting for the final response. No
+// flash writes, watchdog, IRQ/core1 instrumentation, or stack-sized protobuf.
+bool ConfiguratorBackend::TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage) {
+    if (!kStrictHardeningCandidate || !request.liveness_trace) return true;
+    uint8_t bytes[32]; size_t count = 0;
+    auto varint = [&](uint64_t value) {
+        do { bytes[count++] = uint8_t(value & 127u) | (value > 127u ? 128u : 0u); value >>= 7; } while(value);
+    };
+    varint(8); varint(request.protocol_version);
+    varint(16); varint(request.request_token);
+    varint(42u << 3); varint(stage);
+    return WriteProfilePacket(CMD_PROFILE_STORE, bytes, count);
+}
+
 ConfiguratorBackend::ConfiguratorBackend(
     InputState &inputs,
     InputSource **input_sources,
@@ -91,9 +106,10 @@ ConfiguratorBackend::ConfiguratorBackend(
     Stream &stream
 )
     : CommunicationBackend(inputs, input_sources, input_source_count),
-      _in(stream),
-      _out(stream),
-      _base_stream(stream),
+      _coordinated_stream(stream),
+      _in(_coordinated_stream),
+      _out(_coordinated_stream),
+      _base_stream(_coordinated_stream),
       _config(config) {
 
     TinyUSBDevice.setID(0x2E8A, 0x1092);
@@ -160,14 +176,14 @@ void ConfiguratorBackend::SendReport() {
 size_t ConfiguratorBackend::ReadPacket(uint8_t *buffer, size_t max_len) {
     size_t bytes_read = 0;
     _packet_timed_out = false;
-    uint32_t last_progress = millis();
+    const uint32_t started = millis();
     while (true) {
+        if (static_cast<uint32_t>(millis() - started) >= 5000u) {
+            _packet_timed_out = true;
+            _in.next();
+            return 0;
+        }
         if (!_in.available()) {
-            if (static_cast<uint32_t>(millis() - last_progress) >= 5000u) {
-                _packet_timed_out = true;
-                _in.next();
-                return 0;
-            }
             delay(1);
             continue;
         }
@@ -175,7 +191,6 @@ size_t ConfiguratorBackend::ReadPacket(uint8_t *buffer, size_t max_len) {
         if (result == _in.EOF) {
             continue;
         }
-        last_progress = millis();
         if (result == _in.EOP) {
             break;
         }
@@ -343,13 +358,15 @@ bool ConfiguratorBackend::HandleProfileStore() {
     if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || (request.protocol_version != 1 && request.protocol_version != 2)) {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
+    if (!TraceProfileStage(request, 1)) return false; // decoded; before Config CRC
     response = ProfileStoreResponse_init_default;
     response.protocol_version = request.protocol_version;
     response.mutation_protocol_version = 2;
     response.store_incarnation = _recovery_storage_available ? profile_store.Incarnation() : 0;
     response.request_token = request.request_token;
     response.store_generation = profile_store.Generation();
-    response.config_generation = persistence.ConfigGeneration(_config);
+    const bool pulse = request.operation == PROFILE_STORE_LIVENESS;
+    response.config_generation = pulse ? 0 : persistence.ConfigGeneration(_config);
     response.status = PROFILE_STORE_UNSUPPORTED;
     profile_store.ResetDiagnostic();
     const bool mutation = request.operation >= PROFILE_STORE_CREATE &&
@@ -358,10 +375,16 @@ bool ConfiguratorBackend::HandleProfileStore() {
     ProfileStoreTransactionIdentity identity;
     ProfileStore::TransactionResult result;
     bool handled = false;
+    const bool ticket_invalid = request.fault_ticket &&
+        (!mutation || request.protocol_version != 2 || !kStrictHardeningCandidate);
+    // Scope ends before encoding/TX, including failed/unused rules. Pending
+    // rules never affect STATUS, QUERY, replay without ticket, or legacy SET.
+    struct FaultScope { ~FaultScope(){ProfileStoreFaultControls::EndMutation();} } fault_scope;
+    if (!TraceProfileStage(request, 2)) return false; // CRC complete; before reconciliation
 
     // Reconcile durable publications before using RAM for replay or admitting
     // another mutation. A failed authoritative reread leaves the fence intact.
-    if (_recovery_storage_available && (mutation || query)) {
+    if (!ticket_invalid && _recovery_storage_available && (mutation || query)) {
         if (profile_store.IsTransactionUncertain()) profile_store.ReconcileTransaction();
         if (_reference_unknown || persistence.IsMutationFenced()) {
             Config &durable = ConfigWriteCandidate();
@@ -369,7 +392,14 @@ bool ConfiguratorBackend::HandleProfileStore() {
                 _reference_unknown = false;
         }
     }
-    if (mutation && request.protocol_version != 2) {
+    if (ticket_invalid) {
+        response.status = PROFILE_STORE_INVALID;
+        handled = true;
+    } else if (pulse) {
+        response.status = kStrictHardeningCandidate && request.protocol_version == 2 ? PROFILE_STORE_OK : PROFILE_STORE_UNSUPPORTED;
+        response.strict_hardening_candidate = kStrictHardeningCandidate;
+        handled = true;
+    } else if (mutation && request.protocol_version != 2) {
         response.status = PROFILE_STORE_UNSUPPORTED;
         handled = true;
     } else if (request.operation == PROFILE_STORE_STATUS) {
@@ -384,7 +414,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
         else if (profile_store.MigrationPending()) strlcpy(response.diagnostic, "migration.fenced", sizeof(response.diagnostic));
         else if (profile_store.IsReadOnlyRecovery()) strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));
         if (_recovery_storage_available) {
+            if (!TraceProfileStage(request, 3)) return false; // before filesystem capacity
             const auto capacity = profile_store.Capacity();
+            if (!TraceProfileStage(request, 4)) return false; // capacity complete
             response.filesystem_total_bytes = capacity.total_bytes;
             response.filesystem_used_bytes = capacity.used_bytes;
             response.filesystem_free_bytes = capacity.free_bytes;
@@ -399,6 +431,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         }
         response.transaction_token_high_water = profile_store.LastTransactionToken();
         if (_recovery_storage_available && !_recovery_config_invalid) {
+            if (!TraceProfileStage(request, 5)) return false; // before durable Config read
             Config &durable = ConfigWriteCandidate();
             if (persistence.LoadConfigChecked(durable) == Persistence::LoadResult::Loaded) {
                 if (durable.profile_reference_token > response.transaction_token_high_water)
@@ -409,7 +442,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
                 }
             }
         }
+        if (!TraceProfileStage(request, 6)) return false; // Config complete; before diagnostics
         const auto resources = ReadResourceDiagnostics();
+        if (!TraceProfileStage(request, 7)) return false; // diagnostics complete
         response.core0_stack_min_free_bytes = resources.core0_stack_min_free_bytes;
         response.core1_stack_min_free_bytes = resources.core1_stack_min_free_bytes;
         response.heap_arena_peak_bytes = resources.heap_arena_peak_bytes;
@@ -509,6 +544,8 @@ bool ConfiguratorBackend::HandleProfileStore() {
                    request.expected_profile_revision > UINT32_MAX ||
                    request.expected_store_generation != profile_store.Generation()) {
             result.status = ProfileStore::Status::Conflict;
+        } else if (request.fault_ticket && !ProfileStoreFaultControls::BeginMutation(request.fault_ticket)) {
+            result.status = ProfileStore::Status::Invalid;
         } else if (request.operation == PROFILE_STORE_CREATE) {
             result = request.has_profile ? profile_store.Create(request.profile, request.name,
                 request.display_rank, identity) : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
@@ -591,6 +628,10 @@ bool ConfiguratorBackend::HandleProfileStore() {
         if (!response.diagnostic[0] && (response.status == PROFILE_STORE_IO_FAILURE || response.status == PROFILE_STORE_COMMIT_UNKNOWN))
             strlcpy(response.diagnostic, profile_store.LastDiagnostic(), sizeof(response.diagnostic));
     }
+    ProfileStoreFaultControls::EndMutation();
+    response.storage_fault_ticket = ProfileStoreFaultControls::Current().ticket;
+    response.storage_fault_pending = ProfileStoreFaultControls::Current().pending;
+    response.fault_control_version = kStrictHardeningCandidate ? 2 : 0;
     response.storage_fault_capable = kStrictHardeningCandidate;
     response.storage_fault_armed = ProfileStoreFaultControls::Current().armed;
     response.storage_fault_triggered = ProfileStoreFaultControls::Current().triggered;
@@ -604,10 +645,12 @@ bool ConfiguratorBackend::HandleProfileStore() {
     // The request is decoded into owned static fields before reusing frame.
     // Encoding and transport are separate bounded stages, with no FS frames
     // alive during either stage.
+    if (!TraceProfileStage(request, 8)) return false; // before bounded protobuf encode
     pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));
     if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) {
         return false;
     }
+    if (!TraceProfileStage(request, 9)) return false; // encoded; before final TX
     const bool sent = WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
     return sent;
 }

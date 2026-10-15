@@ -64,10 +64,10 @@ MemoryStorage storage;
 void require(bool ok, const char *m) { if (!ok) throw std::runtime_error(m); }
 class DuplexStream final : public Stream {
  public:
-  std::vector<uint8_t> rx, tx; size_t pos=0; size_t tx_budget=SIZE_MAX; bool advertise_full_fifo=false;
+  std::vector<uint8_t> rx, tx; size_t pos=0; size_t tx_budget=SIZE_MAX; bool advertise_full_fifo=false; uint32_t read_cost=0;
   int availableForWrite() override { return advertise_full_fifo?64:static_cast<int>(std::min(size_t{64},tx_budget)); }
   int available() override { return static_cast<int>(rx.size()-pos); }
-  int read() override { return pos<rx.size()?rx[pos++]:-1; }
+  int read() override { host_millis+=read_cost;return pos<rx.size()?rx[pos++]:-1; }
   int peek() override { return pos<rx.size()?rx[pos]:-1; }
   void flush() override {}
   size_t write(uint8_t b) override { if(!tx_budget)return 0;--tx_budget;tx.push_back(b);return 1; }
@@ -511,7 +511,9 @@ void strict_protocol(const char *path) {
   fault.fault_kind=1;fault.fault_operation=4;fault.fault_phase=1;fault.fault_result=1;fault.fault_path_class=1;fault.fault_skip=1;
   const auto armed=send(backend,wire,fault);
   if(kStrictHardeningCandidate){
-    require(armed.status==PROFILE_STORE_OK&&armed.storage_fault_armed&&armed.storage_fault_capable,"candidate fault armed visibly");
+    require(armed.status==PROFILE_STORE_OK&&!armed.storage_fault_armed&&armed.storage_fault_pending&&armed.storage_fault_ticket&&armed.fault_control_version==2,"candidate fault pending visibly");
+    require(ProfileStoreFaultControls::Hook(CheckedStorage::Kind::Record,CheckedStorage::Operation::Write,CheckedStorage::Phase::Before,"/ultimate-00000001-00000001.tmp")==CheckedStorage::Fault::None,"pending hook inert");
+    require(ProfileStoreFaultControls::BeginMutation(armed.storage_fault_ticket),"explicit ticket activates mutation scope");
     require(ProfileStoreFaultControls::Hook(CheckedStorage::Kind::Root,CheckedStorage::Operation::Write,CheckedStorage::Phase::Before,"/ultimate-v2-0.tmp")==CheckedStorage::Fault::None,"fault unrelated boundaries unaffected");
     require(ProfileStoreFaultControls::Hook(CheckedStorage::Kind::Record,CheckedStorage::Operation::Write,CheckedStorage::Phase::Before,"/ultimate-00000001-00000001.tmp")==CheckedStorage::Fault::None,"bounded skip preserved");
     require(ProfileStoreFaultControls::Hook(CheckedStorage::Kind::Record,CheckedStorage::Operation::Write,CheckedStorage::Phase::Before,"/ultimate-00000001-00000001.tmp")==CheckedStorage::Fault::Fail,"exact installed callback triggers once");
@@ -611,7 +613,66 @@ void strict_protocol(const char *path) {
 }
 } // namespace
 ProfileStore profile_store(&storage);
-int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");malformed_cobs_controls();if(argc==3){if(std::strcmp(argv[2],"--strict-protocol")==0){strict_protocol(argv[1]);return 0;}if(std::strcmp(argv[2],"--root-faults")==0){root_fault_recovery(argv[1]);return 0;}if(std::strcmp(argv[2],"--reference-purity")==0){reference_purity(argv[1]);return 0;}if(std::strcmp(argv[2],"--direct-create-replay")==0){direct_create_replay(argv[1]);return 0;}if(std::strcmp(argv[2],"--old-valid-record")==0){stale_valid_readback(argv[1],false);return 0;}if(std::strcmp(argv[2],"--old-valid-directory")==0){stale_valid_readback(argv[1],true);return 0;}if(std::strncmp(argv[2],"--deep-create-",14)==0){deep_create_paths(argv[1],false,static_cast<unsigned>(std::stoul(argv[2]+14)));return 0;}if(std::strncmp(argv[2],"--drop-create-response-",22)==0){deep_create_paths(argv[1],true,static_cast<unsigned>(std::stoul(argv[2]+22)));return 0;}if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
+void liveness_protocol(const char *path) {
+  Config config=Config_init_default;seed(path,&config);
+  UltimateProfile payload=UltimateProfile_init_default;
+  require(profile_store.Read(1,payload)==ProfileStore::Status::Ok,"liveness profile");
+  InputState inputs;DuplexStream wire;ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
+  uint64_t token=0x800000000ull;
+  for(unsigned i=2;i<20;++i) require(profile_store.Create(payload,"Live",i,++token,1).status==ProfileStore::Status::Ok,"twenty profiles");
+  for(unsigned i=0;i<128;++i) {
+    ProfileStoreRequest update=ProfileStoreRequest_init_default;update.protocol_version=2;
+    update.operation=PROFILE_STORE_UPDATE;update.request_token=++token;update.profile_id=20;
+    update.expected_store_generation=profile_store.Generation();update.expected_profile_revision=i+1;
+    update.has_profile=true;update.profile=payload;
+    wire.clear();wire.tx_budget=i%4;wire.append(frame(update));backend.SendReport();
+    require(profile_store.Generation()==update.expected_store_generation+1,"dropped response committed update");
+    wire.tx_budget=SIZE_MAX;
+    ProfileStoreRequest q=ProfileStoreRequest_init_default;q.protocol_version=2;q.operation=PROFILE_STORE_QUERY_TRANSACTION;q.request_token=token;
+    require(send(backend,wire,q).status==PROFILE_STORE_OK,"query after response loss");
+    require(send(backend,wire,update).status==PROFILE_STORE_OK,"exact replay after response loss");
+    require(send(backend,wire,status()).status==PROFILE_STORE_OK,"STATUS after update/query/replay");
+  }
+  ProfileStoreRequest arm=ProfileStoreRequest_init_default;arm.protocol_version=2;arm.operation=PROFILE_STORE_ARM_STORAGE_FAULT;
+  arm.fault_kind=1;arm.fault_operation=4;arm.fault_phase=1;arm.fault_result=1;arm.fault_path_class=1;
+  ProfileStoreRequest pulse=status();pulse.operation=PROFILE_STORE_LIVENESS;
+  for(unsigned cycle=0;cycle<1024;++cycle) {
+    wire.clear();wire.tx_budget=cycle%4;wire.append(frame(arm));backend.SendReport();wire.tx_budget=SIZE_MAX;
+    auto p=send(backend,wire,pulse);
+    require(p.status==PROFILE_STORE_OK&&p.storage_fault_pending&&!p.storage_fault_armed&&p.storage_fault_ticket,"lost ARM acknowledgement leaves inert recoverable pending rule");
+    auto st=send(backend,wire,status());require(st.status==PROFILE_STORE_OK&&!st.storage_fault_armed,"preflight while pending");
+    require(ProfileStoreFaultControls::Hook(CheckedStorage::Kind::Record,CheckedStorage::Operation::Write,CheckedStorage::Phase::Before,"/ultimate-00000014-00000081.tmp")==CheckedStorage::Fault::None,"ordinary writes cannot inject");
+    ProfileStoreRequest rename=ProfileStoreRequest_init_default;rename.protocol_version=2;rename.operation=PROFILE_STORE_RENAME;
+    rename.profile_id=20;rename.request_token=++token;rename.expected_store_generation=profile_store.Generation();rename.fault_ticket=p.storage_fault_ticket;
+    std::strcpy(rename.name,"Scoped");
+    require(send(backend,wire,rename).status==PROFILE_STORE_OK,"ticket authorizes exactly one mutation");
+    require(!ProfileStoreFaultControls::Current().armed&&!ProfileStoreFaultControls::Current().pending,"unused rule disarmed at request boundary");
+    require(send(backend,wire,rename).status==PROFILE_STORE_OK,"consumed ticket does not break exact durable replay");
+    require(send(backend,wire,pulse).status==PROFILE_STORE_OK,"later pulse");
+    require(send(backend,wire,status()).status==PROFILE_STORE_OK,"later status");
+    if(cycle%64==0) { // new host process flushes its RX; firmware parser persists
+      require(wire.remaining()==0,"host close has no request residue");wire.rx.clear();wire.pos=0;wire.tx.clear();
+    }
+  }
+  auto traced=status();traced.liveness_trace=true;wire.clear();wire.append(frame(traced));backend.SendReport();
+  std::vector<unsigned> stages;size_t begin=0;unsigned finals=0;
+  for(size_t i=0;i<wire.tx.size();++i)if(wire.tx[i]==0){
+    auto bytes=decode(std::vector<uint8_t>(wire.tx.begin()+begin,wire.tx.begin()+i+1));begin=i+1;
+    require(bytes[0]==CMD_PROFILE_STORE,"trace command");ProfileStoreResponse part=ProfileStoreResponse_init_default;
+    auto in=pb_istream_from_buffer(bytes.data()+1,bytes.size()-1);require(pb_decode(&in,ProfileStoreResponse_fields,&part),"trace decode");
+    require(part.request_token==traced.request_token,"trace token");
+    if(part.liveness_stage)stages.push_back(part.liveness_stage);else{++finals;require(part.status==PROFILE_STORE_OK,"trace final");}
+  }
+  require(stages==std::vector<unsigned>({1,2,3,4,5,6,7,8,9})&&finals==1,"ordered bounded phase evidence");
+  const auto before=host_millis;wire.clear();wire.read_cost=1000;wire.append(frame(status()));backend.SendReport();wire.read_cost=0;
+  require(host_millis-before<=7000,"whole-frame timeout bounds slow trickle");
+  require(decode(wire.tx)[0]==CMD_ERROR,"slow trickle receives timeout");
+  for(unsigned i=0;i<20&&wire.remaining();++i)backend.SendReport();
+  require(send(backend,wire,status()).status==PROFILE_STORE_OK,"trickle timeout recovers");
+  std::puts("profile_store_liveness_protocol=PASS profiles=20 updates=128 arm_loss_cycles=1024 mixed_frames=7680 trace_stages=9 slow_trickle=bounded");
+}
+
+int main(int argc,char**argv) { try { require(argc==2||argc==3,"usage");malformed_cobs_controls();if(argc==3){if(std::strcmp(argv[2],"--liveness-protocol")==0){liveness_protocol(argv[1]);return 0;}if(std::strcmp(argv[2],"--strict-protocol")==0){strict_protocol(argv[1]);return 0;}if(std::strcmp(argv[2],"--root-faults")==0){root_fault_recovery(argv[1]);return 0;}if(std::strcmp(argv[2],"--reference-purity")==0){reference_purity(argv[1]);return 0;}if(std::strcmp(argv[2],"--direct-create-replay")==0){direct_create_replay(argv[1]);return 0;}if(std::strcmp(argv[2],"--old-valid-record")==0){stale_valid_readback(argv[1],false);return 0;}if(std::strcmp(argv[2],"--old-valid-directory")==0){stale_valid_readback(argv[1],true);return 0;}if(std::strncmp(argv[2],"--deep-create-",14)==0){deep_create_paths(argv[1],false,static_cast<unsigned>(std::stoul(argv[2]+14)));return 0;}if(std::strncmp(argv[2],"--drop-create-response-",22)==0){deep_create_paths(argv[1],true,static_cast<unsigned>(std::stoul(argv[2]+22)));return 0;}if(std::strcmp(argv[2],"--path-limit-import")==0)path_limited_import(argv[1]);else if(std::strncmp(argv[2],"--directory-",12)==0)directory_failure_from_empty(argv[1],argv[2]);else first_create_from_empty(argv[1],argv[2]);return 0;}InputState inputs;Config config=Config_init_default;seed(argv[1],&config);
 #ifndef EXPECT_DUPLICATE_NEXT_DROP
 const Config baseline=config;
 #endif

@@ -557,6 +557,7 @@ enum ProfileStoreOperation {
   PROFILE_STORE_QUERY_TRANSACTION = 11;
   PROFILE_STORE_INSPECT_HEALTH = 12;
   PROFILE_STORE_ARM_STORAGE_FAULT = 13;
+  PROFILE_STORE_LIVENESS = 14; // Candidate RAM-only pulse; no capacity/Config reads.
 }
 enum ProfileStoreStatus {
   PROFILE_STORE_STATUS_UNSPECIFIED = 0;
@@ -608,6 +609,10 @@ message ProfileStoreRequest {
   uint32 fault_skip = 19;
   bool fault_clear = 20;
   uint32 expected_store_incarnation = 21;
+  // Candidate rule is inert unless this exact mutation presents its ticket.
+  uint32 fault_ticket = 22;
+  // Candidate-only progress frames; stage zero is the final response.
+  bool liveness_trace = 23;
 }
 message ProfileStoreResponse {
   uint32 protocol_version = 1;
@@ -650,6 +655,10 @@ message ProfileStoreResponse {
   uint32 storage_fault_operation = 36;
   bool storage_fault_capable = 37;
   uint32 store_incarnation = 38;
+  uint32 storage_fault_ticket = 39;
+  bool storage_fault_pending = 40;
+  uint32 fault_control_version = 41;
+  uint32 liveness_stage = 42;
 }
 /**
  * Button to HID keyboard keycode mapping.

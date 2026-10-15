@@ -83,6 +83,8 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
         if "profile_store_strict_protocol=PASS" not in result:
             raise AssertionError("strict protocol evidence missing")
         print(result.strip())
+        if candidate_faults:
+            print(invoke([str(exe), str(fixture), "--liveness-protocol"]).strip())
         return
     invoke([str(exe), str(fixture)])
     if not original:

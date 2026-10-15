@@ -1,0 +1,57 @@
+{
+  "classification": "ARM_TRANSMISSION_UNPROVEN",
+  "failed_sha": "594066d9bb65b9f93c14e0e24e9d2002c3f83924",
+  "hardware_result": "HARDWARE_FAIL — CONFIGURATOR_LIVENESS_FAILURE_DURING_FAULT_CAMPAIGN",
+  "reason": "The arm command has a STATUS preflight and then ARM request. Both use the same generic timeout. Its 5100 ms execution cannot distinguish a 5 s preflight timeout from a fast preflight followed by a 5 s ARM timeout. No per-request/raw serial capture is retained. No subsequent UPDATE was sent. Independent STATUS timed out in 10089 ms. USB path presence does not establish CPU or USB service liveness.",
+  "source_thread": "01a13717-88f8-7a21-9041-6a999568181e",
+  "retained_transcript": [
+    {
+      "type": "commandExecution",
+      "id": "exec-9fd9f623-9f82-4ed5-bccd-1599c1fae698",
+      "command": "/bin/zsh -lc \"set -e\nbase='local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016'\npython3 /private/tmp/glyph-strict-hardening.NmzHRs/tools/glyph_profile_store_candidate_tool.py --port /dev/cu.usbmodem1101 arm --path-class record --operation write --result fail-before --output \\\"\"'$base/responses/fault-record-write-fail-arm.json\" >/private/tmp/fwfa.log\npython3 /private/tmp/glyph-strict-hardening.NmzHRs/tools/glyph_profile_store_candidate_tool.py --port /dev/cu.usbmodem1101 update --token 0xf0000000000000f3 --incarnation 1 --store-generation 160 --profile-id 22 --profile-revision 130 --profile-json \"$base/responses/first-read-id3.json\" --request-out \"$base/receipts/fault-record-write-fail.request.json\" --output \"$base/responses/fault-record-write-fail.json\" >/private/tmp/fwfu.log || true\npython3 /private/tmp/glyph-strict-hardening.NmzHRs/tools/glyph_profile_store_candidate_tool.py --port /dev/cu.usbmodem1101 query --token 0xf0000000000000f3 --output \"$base/responses/fault-record-write-fail-query.json\" >/private/tmp/fwfq.log\npython3 /private/tmp/glyph-strict-hardening.NmzHRs/tools/glyph_profile_store_candidate_tool.py --port /dev/cu.usbmodem1101 clear --output \"$base/responses/fault-record-write-fail-clear.json\" >/private/tmp/fwfc.log\npython3 /private/tmp/glyph-strict-hardening.NmzHRs/tools/glyph_profile_store_candidate_tool.py --port /dev/cu.usbmodem1101 status --output \"$base/responses/fault-record-write-fail-status.json\" >/private/tmp/fwfs.log\njq -r '\"'[.response.status,.response.diagnostic,.response.storage_fault_triggered,.response.store_generation] | @json' \\\"\"'$base/responses/fault-record-write-fail.json\" \"$base/responses/fault-record-write-fail-query.json\" \"$base/responses/fault-record-write-fail-status.json\"'",
+      "cwd": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw",
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 5100
+    },
+    {
+      "type": "commandExecution",
+      "id": "exec-b9f3f9f2-fed5-4ec9-a24c-dfb7bb6fff37",
+      "command": "/bin/zsh -lc \"jq '.response | {status,diagnostic,storage_fault_triggered,store_generation,profile_revision,request_token}' local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-fail.json local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-fail-query.json local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-fail-status.json\"",
+      "cwd": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw",
+      "status": "failed",
+      "exitCode": 2,
+      "durationMs": 0,
+      "output": {
+        "text": "jq: error: Could not open file local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-fail.json: No such file or directory\njq: error: Could not open file local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-fail-query.json: No such file or directory\njq: error: Could not open file local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-fail-status.json: No such file or directory\n",
+        "truncated": false
+      }
+    },
+    {
+      "type": "commandExecution",
+      "id": "exec-89f5300e-e124-4a29-b804-e020bb64f6ed",
+      "command": "/bin/zsh -lc 'cat /private/tmp/fwfa.log /private/tmp/fwfu.log /private/tmp/fwfq.log 2>/dev/null || true && ls -l /dev/cu.usbmodem1101'",
+      "cwd": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw",
+      "status": "completed",
+      "exitCode": 0,
+      "durationMs": 0,
+      "output": {
+        "text": "candidate tool: bounded profile-store response timeout; inspect status/query before retry\ncrw-rw-rw-  1 root  wheel  0x9000005 Oct 16 01:14 /dev/cu.usbmodem1101\n",
+        "truncated": false
+      }
+    },
+    {
+      "type": "commandExecution",
+      "id": "exec-4f7bdcb5-4476-4b1c-bdbc-af41817be4f7",
+      "command": "/bin/zsh -lc \"python3 /private/tmp/glyph-strict-hardening.NmzHRs/tools/glyph_profile_store_candidate_tool.py --port /dev/cu.usbmodem1101 status --timeout 10 --output 'local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/fault-record-write-arm-timeout-status.json'\"",
+      "cwd": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw",
+      "status": "failed",
+      "exitCode": 1,
+      "durationMs": 10089,
+      "output": {
+        "text": "candidate tool: bounded profile-store response timeout; inspect status/query before retry\n",
+        "truncated": false
+      }
+    }
+  ]
+}

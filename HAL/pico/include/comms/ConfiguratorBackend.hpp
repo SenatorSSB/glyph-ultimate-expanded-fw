@@ -18,6 +18,7 @@
 #ifndef _COMMS_CONFIGURATORBACKEND_HPP
 #define _COMMS_CONFIGURATORBACKEND_HPP
 
+#include "comms/CoordinatedCdcStream.hpp"
 #include "cobs/Print.h"
 #include "cobs/Stream.h"
 #include "core/CommunicationBackend.hpp"
@@ -51,11 +52,13 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleGetConfig();
     bool HandleSetConfig();
     bool HandleProfileStore();
+    bool TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage);
     bool WriteProfilePacket(Command command, const uint8_t *bytes, size_t length);
 
+    CoordinatedCdcStream _coordinated_stream;
     packetio::COBSStream _in;
     packetio::COBSPrint _out;
-    Stream &_base_stream;
+    CoordinatedCdcStream &_base_stream;
     Config &_config;
     bool _recovery_service = false;
     bool _recovery_config_invalid = false;

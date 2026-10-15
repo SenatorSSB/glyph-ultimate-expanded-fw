@@ -65,3 +65,12 @@ Candidate-only diagnostics/fault controls are conspicuous and must be removed
 or explicitly accepted in a separately reviewed final production snapshot.
 Existing hardware receipts, F1–F6, Nunchuk NOT_TESTED and non-blocking Runtime-B
 physical observer debt remain unchanged.
+
+## Later physical adjudication — 2026-10-16
+
+Exact594066d9 / UF2fb8f005995b6feef33a196f1c3d8dbc6985350ca3d4bc40d22a03cf1724c4413
+is permanently HARDWARE_FAIL — CONFIGURATOR_LIVENESS_FAILURE_DURING_FAULT_CAMPAIGN.
+Earlier PASS rows remain scoped evidence; record/write injection was not executed.
+See [liveness diagnosis](profile_store_fault_liveness_result.md) for retained
+ARM_TRANSMISSION_UNPROVEN adjudication and the separately reviewed next candidate.
+The source/build handoff above is historical and does not claim hardware acceptance.
