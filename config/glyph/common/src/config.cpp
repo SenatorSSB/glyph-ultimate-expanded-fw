@@ -10,6 +10,7 @@
 #include "core/ModeSelectionTransaction.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/RecoveryInitialization.hpp"
+#include "core/RecoveryStartupDiagnostics.hpp"
 #include "core/ResourceDiagnostics.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -148,16 +149,26 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
 // Recovery deliberately reuses the single source-owned Configurator transport
 // and runs without gameplay, menu, display, or core1 initialization.
 void enter_recovery_configurator() {
+    using RecoveryStartupDiagnostics::Phase;
+    RecoveryStartupDiagnostics::Mark(Phase::RouteEntry);
     watchdog_hw->scratch[0] = 0;
     watchdog_hw->scratch[1] = 0;
     watchdog_hw->scratch[2] = 0;
+    RecoveryStartupDiagnostics::Mark(Phase::InspectionEntered);
     const RecoveryInitialization recovery = initialize_recovery(
         persistence, profile_store, config, ConfigWriteCandidate(), validate_glyph_config);
+    RecoveryStartupDiagnostics::Mark(Phase::InspectionReturned);
+    RecoveryStartupDiagnostics::Mark(Phase::SerialBeginEntered);
     Serial.begin(115200);
+    RecoveryStartupDiagnostics::Mark(Phase::SerialBeginReturned);
+    RecoveryStartupDiagnostics::Mark(Phase::BackendNewEntered);
     recovery_configurator = new ConfiguratorBackend(
         inputs, input_sources, input_source_count, config, Serial);
+    RecoveryStartupDiagnostics::Mark(Phase::BackendNewReturned);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
+    RecoveryStartupDiagnostics::Mark(Phase::ReadOnlyInstalled);
     publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+    RecoveryStartupDiagnostics::Mark(Phase::Published);
 }
 
 }  // namespace
@@ -165,6 +176,7 @@ void enter_recovery_configurator() {
 
 void setup() {
     InitializeResourceDiagnosticsCore();
+    RecoveryStartupDiagnostics::CapturePrevious();
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
 
@@ -319,7 +331,11 @@ void setup() {
 void loop() {
     SampleResourceDiagnostics();
     if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator) {
+        using RecoveryStartupDiagnostics::Phase;
+        RecoveryStartupDiagnostics::Mark(Phase::LoopEntered);
         if (recovery_configurator != nullptr) recovery_configurator->SendReport();
+        RecoveryStartupDiagnostics::Mark(Phase::ReportReturned);
+        if (RecoveryStartupDiagnostics::Current() & 32u) RecoveryStartupDiagnostics::Mark(Phase::UsbConfigured);
         return;
     }
     if (read_boot_state().outcome != BootOutcome::Normal) return;

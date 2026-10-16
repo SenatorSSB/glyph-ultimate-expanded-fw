@@ -23,6 +23,7 @@
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/ProfileStoreRequestIdentity.hpp"
 #include "core/ResourceDiagnostics.hpp"
+#include "core/RecoveryStartupDiagnostics.hpp"
 #include "core/ProfileStoreFaultControls.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
@@ -139,6 +140,7 @@ CommunicationBackendId ConfiguratorBackend::BackendId() {
 
 void ConfiguratorBackend::SendReport() {
     int data = ReadByte();
+    if (_recovery_service && data >= 0) RecoveryStartupDiagnostics::Mark(RecoveryStartupDiagnostics::Phase::RequestByteSeen);
     if (data < 0) {
         if (data == _in.EOP) {
             SkipToNextPacket();
@@ -766,6 +768,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.storage_fault_path_class = fault.path_class;
         response.storage_fault_skip = fault.skip;
         response.root_reconcile_fault_capable = true;
+        response.recovery_startup_current = RecoveryStartupDiagnostics::Current();
+        response.recovery_startup_previous = RecoveryStartupDiagnostics::Previous();
+        response.recovery_startup_diagnostics_version = 1;
     }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.

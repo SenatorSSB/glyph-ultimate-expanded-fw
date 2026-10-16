@@ -677,6 +677,10 @@ message ProfileStoreResponse {
   uint32 storage_fault_path_class = 55;
   uint32 storage_fault_skip = 56;
   bool root_reconcile_fault_capable = 57;
+  // Candidate-only volatile RT2 diagnostics:0x5254/phase8/flags8. No storage.
+  uint32 recovery_startup_current = 58;
+  uint32 recovery_startup_previous = 59;
+  uint32 recovery_startup_diagnostics_version = 60;
 }
 /**
  * Button to HID keyboard keycode mapping.

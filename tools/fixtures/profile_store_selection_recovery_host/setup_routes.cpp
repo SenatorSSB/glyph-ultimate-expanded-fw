@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include "core/ModeSelectionTransaction.hpp"
 #include "core/RecoveryInitialization.hpp"
+#include "core/RecoveryStartupDiagnostics.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/ResourceDiagnostics.hpp"
 static void require(bool b,const char *m){if(!b)throw std::runtime_error(m);}
