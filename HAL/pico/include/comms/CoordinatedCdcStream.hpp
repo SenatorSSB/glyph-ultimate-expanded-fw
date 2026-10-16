@@ -19,24 +19,36 @@ class CoordinatedCdcStream final : public Stream {
     explicit CoordinatedCdcStream(Stream &stream) : _stream(stream) {}
     int available() override {
 #if GLYPH_COORDINATED_CDC
-        Guard guard; return guard.held ? tud_cdc_n_available(0) : 0;
+        fillRx(); return _rx_end - _rx_pos;
 #else
         return _stream.available();
 #endif
     }
     int peek() override {
 #if GLYPH_COORDINATED_CDC
-        Guard guard; uint8_t byte;
-        return guard.held && tud_cdc_n_peek(0, &byte) ? byte : -1;
+        fillRx(); return _rx_pos < _rx_end ? _rx_buffer[_rx_pos] : -1;
 #else
         return _stream.peek();
 #endif
     }
     int read() override {
 #if GLYPH_COORDINATED_CDC
-        Guard guard; return guard.held ? tud_cdc_n_read_char(0) : -1;
+        fillRx();
+        if (_rx_pos == _rx_end) return -1;
+        ++_rx_consumed; return _rx_buffer[_rx_pos++];
 #else
-        return _stream.read();
+        const int byte = _stream.read();
+        if (byte >= 0) { ++_rx_consumed; ++_rx_fetched; }
+        return byte;
+#endif
+    }
+    uint32_t RxConsumed() const { return _rx_consumed; }
+    uint32_t RxFetched() const { return _rx_fetched; }
+    uint32_t RxTaskPasses() const { return _rx_task_passes; }
+    void serviceRx() {
+#if GLYPH_COORDINATED_CDC
+        ++_rx_task_passes;
+        TinyUSB_Device_Task(); // owns its own try-lock; no foreground Guard
 #endif
     }
     int availableForWrite() override {
@@ -115,5 +127,27 @@ class CoordinatedCdcStream final : public Stream {
         ~Guard() { if (held) mutex_exit(&__usb_mutex); }
     };
 #endif
+    // Keep PacketIO's byte/peek contract while amortizing native FIFO locking.
+    // Cache ownership survives COBS next(): only PacketIO consumes delimiters.
+    void fillRx() {
+#if GLYPH_COORDINATED_CDC
+        if (_rx_pos != _rx_end) return;
+        serviceRx();
+        {
+            Guard guard;
+            if (!guard.held) return;
+            _rx_pos = 0;
+            _rx_end = tud_cdc_n_read(0, _rx_buffer, sizeof(_rx_buffer));
+            _rx_fetched += _rx_end;
+        }
+        // read() may arm OUT; its completion can defer while Guard was alive.
+        serviceRx();
+#endif
+    }
+#if GLYPH_COORDINATED_CDC
+    uint8_t _rx_buffer[64]{};
+    uint8_t _rx_pos = 0, _rx_end = 0;
+#endif
+    uint32_t _rx_consumed = 0, _rx_fetched = 0, _rx_task_passes = 0;
     Stream &_stream;
 };

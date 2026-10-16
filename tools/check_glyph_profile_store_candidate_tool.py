@@ -2,6 +2,7 @@
 """Offline request/bound/guard proof. Does not open a serial port."""
 import contextlib
 import io
+import hashlib
 import json
 from pathlib import Path
 import tempfile
@@ -55,6 +56,27 @@ def main():
             for action in ('update','duplicate'):
                 require(rejected(['--port','UNOPENED',action,'--profile-id','1','--token','9','--store-generation','8','--incarnation','1']),'revision/source guards')
             require(rejected(['--port','UNOPENED','query','--token','0']),'zero query token refused')
+            # Every newly traceable mutation must serialize the opt-in; ordinary
+            # requests keep it absent. This is CLI parsing + actual protobuf,
+            # including profile-bearing UPDATE rather than a constructed stub.
+            common=['--port','UNOPENED','--token','0x100000009','--store-generation','8','--incarnation','1','--request-out',str(Path(directory)/'trace-request.json')]
+            mutation_options={
+                'create':['--name','trace','--rank','0','--profile-json',str(profile)],
+                'update':['--profile-id','22','--profile-revision','130','--profile-json',str(profile)],
+                'duplicate':['--profile-id','22','--profile-revision','130','--name','trace','--rank','0'],
+                'rename':['--profile-id','22','--name','trace'],
+                'reorder':['--profile-id','22','--rank','0'],
+                'delete':['--profile-id','22'],
+                'set-reference':['--profile-id','22','--mode-index','0','--config-generation','1'],
+            }
+            for action,options in mutation_options.items():
+                for traced in (False,True):
+                    parsed=candidate.parse_args([*common,action,*options,*(['--trace'] if traced else [])])
+                    outgoing,_=candidate.build_message(parsed,pb,json_format)
+                    decoded=pb.ProfileStoreRequest.FromString(outgoing.SerializeToString(deterministic=True))
+                    require(decoded.operation==candidate.MUTATIONS[action] and decoded.liveness_trace==traced,f'{action} trace opt-in survives actual protobuf serialization')
+            replay_traced,_=candidate.build_message(candidate.parse_args(['--port','UNOPENED','replay','--replay-request',str(receipt),'--trace']),pb,json_format)
+            require(replay_traced.SerializeToString(deterministic=True)==payload,'trace flag must not alter exact replay identity')
         # Exercise the real CLI orchestration with an offline port. Retained
         # journal distinguishes the two formerly identical timeout points.
         with tempfile.TemporaryDirectory(prefix='glyph-cli-phase-') as directory:
@@ -125,7 +147,33 @@ def main():
                 require(last['event']=='response_timeout' and last['received_bytes']==5 and last['partial_frame_hex']==raw.hex() and not last['last_byte_is_delimiter'],'exact partial-prefix evidence')
             if mode=='missing_trailer':require(rows[-1]['final_response_received'],'timeout distinguishes complete response without completion trailer')
             if mode=='corrupt_then_failure':require(any(row['event']=='invalid_frame' for row in rows),'partial frame retained before failure trailer')
-        print('glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true')
+        # A valid CMD_ERROR is terminal diagnostic evidence, including during
+        # traced READ where malformed partial frames may otherwise be skipped.
+        diagnostics=(
+            'Profile store frame timeout',
+            'Profile store frame timeout phase=2 raw=256 decoded=253 elapsed_ms=5000 tasks=4972 last_ms=1 fetched=256 eop=0',
+        )
+        with tempfile.TemporaryDirectory(prefix='glyph-cli-rx-error-') as directory:
+            for operation,traced in ((pb.PROFILE_STORE_UPDATE,False),(pb.PROFILE_STORE_UPDATE,True),(pb.PROFILE_STORE_READ,True)):
+                for index,diagnostic in enumerate(diagnostics):
+                    message=pb.ProfileStoreRequest(protocol_version=2,operation=operation,request_token=123,liveness_trace=traced)
+                    wire=transport.cobs_encode(bytes([transport.CMD_ERROR])+diagnostic.encode())
+                    chunks=[wire[:10],wire[10:-1],wire[-1:]]
+                    journal=Path(directory)/f'{operation}-{traced}-{index}.jsonl'
+                    with journal.open('x',encoding='utf-8') as sink,patch.object(candidate,'TRACE_SINK',sink),patch.object(candidate.select,'select',lambda *args:([-1],[],[])),patch.object(candidate.os,'read',lambda *args:chunks.pop(0)),contextlib.redirect_stderr(io.StringIO()):
+                        try:candidate.request(TracePort(),pb,message,phase='update' if operation==pb.PROFILE_STORE_UPDATE else 'read')
+                        except transport.ToolError as error:require(str(error)=='device CMD_ERROR: '+diagnostic,'exact timeout diagnostic rethrown')
+                        else:raise AssertionError('CMD_ERROR accepted as a successful response')
+                    events=[json.loads(line) for line in journal.read_text().splitlines()]
+                    errors=[row for row in events if row['event']=='device_error']
+                    require(len(errors)==1 and errors[0]['command']==transport.CMD_ERROR and errors[0]['diagnostic']==diagnostic,'valid device error retained durably')
+                    require(not any(row['event'] in ('invalid_frame','response','response_timeout') for row in events),'valid error must not become invalid frame, success or host timeout')
+                    last=events[-1]
+                    require(last['event']=='device_error' and last['received_bytes']==len(wire) and last['delimiters']==1 and last['last_byte_is_delimiter'] and last['partial_frame_bytes']==0,'bounded receive evidence accompanies device error')
+                    require(last['received_prefix_sha256']==hashlib.sha256(wire).hexdigest(),'exact error wire hash retained')
+                    require(b''.join(bytes.fromhex(row['chunk_hex']) for row in events if row['event']=='receive_chunk')==wire,'fragmented raw diagnostic bytes retained')
+                    require(not chunks,'delimiter received before terminal diagnostic')
+        print('glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true mutation_trace=true device_error_journal=true')
         return 0
     except Exception as error:
         print(f'glyph_profile_store_candidate_tool: FAIL: {error}');return 1

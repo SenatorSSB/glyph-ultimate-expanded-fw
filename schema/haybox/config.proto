@@ -661,6 +661,15 @@ message ProfileStoreResponse {
   uint32 liveness_stage = 42;
   // Candidate-only stage value: byte count or boolean, defined by stage.
   uint32 liveness_value = 43;
+  // Candidate PULSE: last non-PULSE receive snapshot (not this PULSE).
+  uint32 rx_phase = 44;
+  uint32 rx_raw_bytes = 45;
+  uint32 rx_decoded_bytes = 46;
+  uint32 rx_elapsed_ms = 47;
+  uint32 rx_task_passes = 48;
+  uint32 rx_last_progress_ms = 49;
+  uint32 rx_fetched_bytes = 50;
+  uint32 rx_flags = 51;
 }
 /**
  * Button to HID keyboard keycode mapping.

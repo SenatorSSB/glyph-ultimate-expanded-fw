@@ -1,0 +1,74 @@
+[
+  {
+    "file": "receipt.json",
+    "source_relative_to_physical_campaign": "receipts/A-record-open-write-fail.request.json",
+    "bytes": 45624,
+    "sha256": "fdb1a4d236231444839c3c4d0d7a0b93c2748680ddfb2a21c4be4b10be32fdde"
+  },
+  {
+    "file": "mutation.trace.jsonl",
+    "source_relative_to_physical_campaign": "faults/A-record-open-write-fail/mutation.trace.json",
+    "bytes": 8794,
+    "sha256": "c83e9e468ff7e771f58c20dc7d072a45929f1b1e875947edda829d4c55b49757"
+  },
+  {
+    "file": "arm.trace.jsonl",
+    "source_relative_to_physical_campaign": "faults/A-record-open-write-fail/arm.trace.json",
+    "bytes": 14127,
+    "sha256": "b4db26d956422ad7658c7bdcd876e24250272233135a5d4788c4ca69f620e65b"
+  },
+  {
+    "file": "pending-status.trace.jsonl",
+    "source_relative_to_physical_campaign": "faults/A-record-open-write-fail/pending-status.trace.json",
+    "bytes": 9377,
+    "sha256": "feec641248a10345a3c861fc7a3f6a5e5d13e526a2d8e01209a7ec2257b89066"
+  },
+  {
+    "file": "arm.json",
+    "source_relative_to_physical_campaign": "faults/A-record-open-write-fail/arm.json",
+    "bytes": 503,
+    "sha256": "d822b134c0c47fef0ec13331e79c2bb742ac78ad9e43a510bca0c4dce7b8ddbe"
+  },
+  {
+    "file": "pending-status.json",
+    "source_relative_to_physical_campaign": "faults/A-record-open-write-fail/pending-status.json",
+    "bytes": 1185,
+    "sha256": "2f77d652b2f46d63b384b0a3163026224018b66cd0f26e5d55e0f9d1a983c2ed"
+  },
+  {
+    "file": "pre-status.json",
+    "source_relative_to_physical_campaign": "faults/A-record-open-write-fail/pre-status.json",
+    "bytes": 1085,
+    "sha256": "aa8426ae78afa8204929a039ab7c07931b3b325ff2c68e4d15d2fc550d4078cf"
+  },
+  {
+    "file": "operator.stderr.log",
+    "source_relative_to_physical_campaign": "faults/operator.stderr.log",
+    "bytes": 44,
+    "sha256": "fd9b38c231c1b25ccba7948c7f326f6ab934e70d68a288b30d6a952315bcdfe6"
+  },
+  {
+    "file": "write_all_895.py",
+    "source": "895109eb662a8ad6b6c99889cb37a254dce49998:tools/glyph_serial_config_tool.py:PosixSerialPort.write_all",
+    "bytes": 500,
+    "sha256": "54445e5d6b44b91a3a21ce986109f2f42998cdd31f878dd941d05941e6cb4bc4"
+  },
+  {
+    "file": "physical-update.pb",
+    "source": "deterministically reconstructed from receipt and production cobs_encode",
+    "bytes": 3074,
+    "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063"
+  },
+  {
+    "file": "physical-update.cobs",
+    "source": "deterministically reconstructed from receipt and production cobs_encode",
+    "bytes": 3089,
+    "sha256": "9ac14ee426193d4ba07dac9484165007705f86e48f55d756da28e26fa4c11b20"
+  },
+  {
+    "file": "895-read-gate-RESULT.md",
+    "source_relative_to_physical_responses": "895-read-gate/RESULT.md",
+    "bytes": 1582,
+    "sha256": "c02445a06af4f95ec89d54f5f63e68e74ea7585900e68763854cacd36420898a"
+  }
+]

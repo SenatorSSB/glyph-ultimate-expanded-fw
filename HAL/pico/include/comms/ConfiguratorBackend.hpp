@@ -19,6 +19,7 @@
 #define _COMMS_CONFIGURATORBACKEND_HPP
 
 #include "comms/CoordinatedCdcStream.hpp"
+#include "core/ProfileStoreRxDiagnostics.hpp"
 #include "cobs/Print.h"
 #include "cobs/Stream.h"
 #include "core/CommunicationBackend.hpp"
@@ -52,6 +53,8 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleGetConfig();
     bool HandleSetConfig();
     bool HandleProfileStore();
+    bool PrepareProfileMutation(const ProfileStoreRequest &request);
+    bool TraceProfileDispatch(const ProfileStoreRequest &request);
     bool TraceProfileStage(const ProfileStoreRequest &request, uint32_t stage, uint32_t value = 0);
     bool WriteProfilePacket(Command command, const uint8_t *bytes, size_t length, size_t *accepted = nullptr, bool *flushRequested = nullptr);
 
@@ -64,6 +67,7 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool _recovery_config_invalid = false;
     bool _recovery_storage_available = true;
     bool _reference_unknown = false;
+    ProfileStoreRxDiagnostics _rx, _last_profile_rx;
     bool _packet_timed_out = false;
     bool _profile_tx_needs_sync = false;
 };

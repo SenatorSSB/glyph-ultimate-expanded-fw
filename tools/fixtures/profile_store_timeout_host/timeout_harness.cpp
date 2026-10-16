@@ -64,16 +64,16 @@ MemoryStorage storage;
 void require(bool ok, const char *m) { if (!ok) throw std::runtime_error(m); }
 class DuplexStream final : public Stream {
  public:
-  std::vector<uint8_t> rx, tx; size_t pos=0; size_t tx_budget=SIZE_MAX; bool advertise_full_fifo=false; uint32_t read_cost=0;
+  std::vector<uint8_t> rx, tx; size_t pos=0; size_t tx_budget=SIZE_MAX; bool advertise_full_fifo=false; uint32_t read_cost=0; size_t first_tx_rx_pos=SIZE_MAX;
   int availableForWrite() override { return advertise_full_fifo?64:static_cast<int>(std::min(size_t{64},tx_budget)); }
   int available() override { return static_cast<int>(rx.size()-pos); }
   int read() override { host_millis+=read_cost;return pos<rx.size()?rx[pos++]:-1; }
   int peek() override { return pos<rx.size()?rx[pos]:-1; }
   void flush() override {}
-  size_t write(uint8_t b) override { if(!tx_budget)return 0;--tx_budget;tx.push_back(b);return 1; }
-  size_t write(const uint8_t *b,size_t n) override { const size_t accepted=std::min(n,tx_budget);tx_budget-=accepted;tx.insert(tx.end(),b,b+accepted);return accepted; }
+  size_t write(uint8_t b) override { if(!tx_budget)return 0;if(first_tx_rx_pos==SIZE_MAX)first_tx_rx_pos=pos;--tx_budget;tx.push_back(b);return 1; }
+  size_t write(const uint8_t *b,size_t n) override { const size_t accepted=std::min(n,tx_budget);if(accepted&&first_tx_rx_pos==SIZE_MAX)first_tx_rx_pos=pos;tx_budget-=accepted;tx.insert(tx.end(),b,b+accepted);return accepted; }
   void append(const std::vector<uint8_t>& b){rx.insert(rx.end(),b.begin(),b.end());}
-  size_t remaining()const{return rx.size()-pos;} void clear(){tx.clear();}
+  size_t remaining()const{return rx.size()-pos;} void clear(){tx.clear();first_tx_rx_pos=SIZE_MAX;}
 };
 std::vector<uint8_t> decode(const std::vector<uint8_t>& in) {
   require(!in.empty()&&in.back()==0,"COBS delimiter");std::vector<uint8_t> out;
@@ -680,6 +680,65 @@ void liveness_protocol(const char *path) {
   }
   require(stages==std::vector<unsigned>({1,2,10,11,12,16,17,18,19,8,9,20,21,22,23,24}),"READ phases including terminal; memory storage omits native checked IO stages13-15");
   require(finals==1&&encodedSize==finalSize&&accepted>finalSize,"READ exact encode and accepted-wire counts");
+  // Partial ticketed body: no protobuf decode, ticket activation or storage.
+  auto pending=send(backend,wire,arm);
+  require(pending.storage_fault_pending&&!pending.storage_fault_armed,"RX pending control");
+  ProfileStoreRequest update=ProfileStoreRequest_init_default;update.protocol_version=2;
+  update.operation=PROFILE_STORE_UPDATE;update.profile_id=20;update.request_token=++token;
+  update.expected_store_incarnation=profile_store.Incarnation();update.expected_store_generation=profile_store.Generation();
+  uint32_t revision=0;require(profile_store.Read(20,payload,&revision)==ProfileStore::Status::Ok,"RX revision");
+  update.expected_profile_revision=revision;update.has_profile=true;update.profile=payload;
+  update.fault_ticket=pending.storage_fault_ticket;update.liveness_trace=true;
+  const auto large=frame(update);require(large.size()>1000,"RX profile-bearing request");
+  const auto rx_files=storage.files;const auto rx_generation=profile_store.Generation();
+  wire.clear();wire.append(std::vector<uint8_t>(large.begin(),large.begin()+1000));
+  backend.SendReport();
+  const auto error=decode(wire.tx);require(error[0]==CMD_ERROR,"partial mutation timeout error");
+  const std::string text(error.begin()+1,error.end());
+  require(text.find("Profile store frame timeout phase=10 raw=")==0&&text.find(" eop=0")!=std::string::npos&&text.size()<192,"bounded RX metadata");
+  const auto snapshot=backend._last_profile_rx;
+  require(snapshot.phase==10&&(snapshot.flags&2)&&!(snapshot.flags&1)&&snapshot.elapsed==5000&&snapshot.raw>900&&snapshot.decoded>900,"partial RX counters");
+  require(storage.files==rx_files&&profile_store.Generation()==rx_generation,"partial RX cannot mutate storage");
+  require(ProfileStoreFaultControls::Current().pending&&!ProfileStoreFaultControls::Current().armed&&!ProfileStoreFaultControls::Current().triggered,"ticket inert throughout partial RX");
+  // A truly abandoned frame must first reach its delimiter; PULSE cannot jump
+  // over PacketIO's deliberate skip-to-end state. Do not invent auto recovery.
+  wire.append({0});backend.SendReport();
+  auto rx_pulse=send(backend,wire,pulse);
+  require(rx_pulse.rx_phase==10&&rx_pulse.rx_raw_bytes==snapshot.raw&&rx_pulse.rx_decoded_bytes==snapshot.decoded&&rx_pulse.rx_elapsed_ms==5000&&rx_pulse.rx_flags==snapshot.flags,"PULSE exposes retained timeout after resync");
+  require(std::memcmp(&snapshot,&backend._last_profile_rx,sizeof(snapshot))==0,"PULSE does not replace failed RX snapshot");
+  // Common admission rejection must leave the prepared rule inert.
+  --update.expected_store_generation;update.liveness_trace=false;
+  require(send(backend,wire,update).status==PROFILE_STORE_CONFLICT,"stale mutation refused before activation");
+  require(ProfileStoreFaultControls::Current().pending&&!ProfileStoreFaultControls::Current().armed,"admission precedes activation");
+  ++update.expected_store_generation;update.liveness_trace=true;
+  wire.clear();wire.append(frame(update));backend.SendReport();
+  require(wire.first_tx_rx_pos==wire.rx.size(),"retrospective RX trace starts only after complete request ingestion");
+  stages.clear();begin=0;finals=0;size_t through39=0;
+  size_t update_body=0;require(pb_get_encoded_size(&update_body,ProfileStoreRequest_fields,&update),"traced UPDATE size");
+  for(size_t i=0;i<wire.tx.size();++i)if(wire.tx[i]==0){
+    auto bytes=decode(std::vector<uint8_t>(wire.tx.begin()+begin,wire.tx.begin()+i+1));begin=i+1;
+    require(bytes[0]==CMD_PROFILE_STORE,"mutation trace command");ProfileStoreResponse part=ProfileStoreResponse_init_default;
+    auto in=pb_istream_from_buffer(bytes.data()+1,bytes.size()-1);require(pb_decode(&in,ProfileStoreResponse_fields,&part),"mutation trace decode");
+    if(part.liveness_stage){stages.push_back(part.liveness_stage);
+      if(part.liveness_stage==33)require(part.liveness_value==update_body,"exact decoded body trace");
+      if(part.liveness_stage==35)require(part.liveness_value==1,"EOP trace");
+      if(part.liveness_stage==39)through39=i+1;
+      if(part.liveness_stage==40)require(part.liveness_value==update.fault_ticket,"ticket accepted trace");
+      if(part.liveness_stage==41)require(part.liveness_value==PROFILE_STORE_UPDATE,"operation branch trace");
+    }else{++finals;require(part.status==PROFILE_STORE_OK,"traced mutation final; MemoryStorage has no checked fault hooks");}
+  }
+  require(stages==std::vector<unsigned>({30,31,32,33,34,35,36,37,38,1,2,39,40,41,8,9})&&finals==1,"ordered mutation receive/admission/activation/dispatch evidence");
+  require(backend._last_profile_rx.phase==9&&!ProfileStoreFaultControls::Current().armed&&!ProfileStoreFaultControls::Current().pending,"mutation scope cleanup");
+  ProfileStoreRequest query=status();query.operation=PROFILE_STORE_QUERY_TRANSACTION;query.request_token=update.request_token;
+  require(send(backend,wire,query).status==PROFILE_STORE_OK,"QUERY reconciles traced complete mutation");
+  pending=send(backend,wire,arm);update.fault_ticket=pending.storage_fault_ticket;
+  update.request_token=++token;update.expected_store_generation=profile_store.Generation();++update.expected_profile_revision;
+  const auto trace_failure_files=storage.files;
+  wire.clear();wire.tx_budget=through39;wire.append(frame(update));backend.SendReport();wire.tx_budget=SIZE_MAX;
+  require(!ProfileStoreFaultControls::Current().pending&&!ProfileStoreFaultControls::Current().armed&&!ProfileStoreFaultControls::Current().triggered,"failed trace after ticket activation cleans hook");
+  require(storage.files==trace_failure_files,"failed stage40 cannot dispatch mutation");
+  require(send(backend,wire,status()).status==PROFILE_STORE_OK,"STATUS after trace failure");
+  std::puts("profile_store_rx_backend=PASS partial_ticket_inert=true pulse_retains_timeout=true trace_after_eop=true admission_before_activation=true ordered_stages=true query=true failed_trace_disarms=true");
   const auto before=host_millis;wire.clear();wire.read_cost=1000;wire.append(frame(status()));backend.SendReport();wire.read_cost=0;
   require(host_millis-before<=7000,"whole-frame timeout bounds slow trickle");
   require(decode(wire.tx)[0]==CMD_ERROR,"slow trickle receives timeout");

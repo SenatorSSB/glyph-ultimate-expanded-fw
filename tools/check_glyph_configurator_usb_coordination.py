@@ -13,16 +13,17 @@ struct mutex_t { bool held=false; };
 mutex_t __usb_mutex;
 bool mutex_try_enter(mutex_t*m,void*){if(m->held)return false;m->held=true;return true;}
 void mutex_exit(mutex_t*m){assert(m->held);m->held=false;}
-unsigned ticks=0,attempts=0,deferrals=0,deadlocks=0;bool inner=false,connected=true;unsigned free_bytes=64;
+unsigned ticks=0,attempts=0,deferrals=0,deadlocks=0;bool inner=false,connected=true,external_owner=false;unsigned free_bytes=64;
 uint32_t millis(){return ticks;}
 void delay(unsigned n){assert(!__usb_mutex.held);ticks+=n;}
 // Pinned task IRQ first tries __usb_mutex. Its DTR/reset handler then takes
 // the FIFO writer/reader locks. Deliver it precisely while main owns one.
 void irq(){++attempts;if(!mutex_try_enter(&__usb_mutex,nullptr)){++deferrals;return;}if(inner)++deadlocks;mutex_exit(&__usb_mutex);}
-extern "C" void TinyUSB_Device_Task() { assert(!__usb_mutex.held); }
+extern "C" void TinyUSB_Device_Task() { assert(!__usb_mutex.held || external_owner); }
 #define CFG_TUD_CDC_TX_BUFSIZE 64
 void access(){inner=true;irq();inner=false;}
-uint32_t tud_cdc_n_available(uint8_t){access();return 1;}
+uint32_t tud_cdc_n_available(uint8_t){access();return 64;}
+uint32_t tud_cdc_n_read(uint8_t,void*b,uint32_t n){access();for(uint32_t i=0;i<n;++i)static_cast<uint8_t*>(b)[i]=42;return n;}
 bool tud_cdc_n_peek(uint8_t,uint8_t*b){access();*b=42;return true;}
 int tud_cdc_n_read_char(uint8_t){access();return 42;}
 uint32_t tud_cdc_n_write_available(uint8_t){access();return free_bytes;}
@@ -32,12 +33,13 @@ uint32_t tud_cdc_n_write_flush(uint8_t){access();return 1;}
 class Stream {public:virtual ~Stream()=default;virtual int available(){return 0;}virtual int peek(){return -1;}virtual int read(){return -1;}virtual int availableForWrite(){return 0;}virtual void flush(){}virtual size_t write(uint8_t){return 0;}virtual size_t write(const uint8_t*,size_t){return 0;}};
 #include "CoordinatedCdcStream.hpp"
 int main(){Stream unused;CoordinatedCdcStream s(unused);uint8_t bytes[128]={};
-for(unsigned i=0;i<10000;++i){assert(s.available()==1);assert(s.peek()==42);assert(s.read()==42);assert(s.availableForWrite()==64);s.flush();assert(s.writeAvailable(bytes,128)==64);assert(s.write(bytes,128)==128);}
+for(unsigned i=0;i<10000;++i){assert(s.available()>0);assert(s.peek()==42);assert(s.read()==42);assert(s.availableForWrite()==64);s.flush();assert(s.writeAvailable(bytes,128)==64);assert(s.write(bytes,128)==128);}
 #ifdef EXPECT_OLD_RACE
 assert(deadlocks>0); // model observes wait inversion; deliberately does not sleep49.7days
 #else
 assert(deadlocks==0&&attempts==deferrals);
-__usb_mutex.held=true;assert(s.available()==0&&s.peek()==-1&&s.read()==-1&&s.availableForWrite()==0);s.flush();auto busy_start=ticks;assert(s.writeAvailable(bytes,128)==0&&ticks==busy_start);__usb_mutex.held=false;
+while(s.RxConsumed()%64) s.read();
+external_owner=true;__usb_mutex.held=true;assert(s.available()==0&&s.peek()==-1&&s.read()==-1&&s.availableForWrite()==0);s.flush();auto busy_start=ticks;assert(s.writeAvailable(bytes,128)==0&&ticks==busy_start);__usb_mutex.held=false;external_owner=false;
 free_bytes=0;auto attempt=ticks;assert(s.writeAvailable(bytes,128)==0&&ticks==attempt);auto start=ticks;assert(s.write(bytes,128)==0&&ticks-start==2000);
 free_bytes=64;connected=false;assert(s.write(bytes,1)==0);connected=true;assert(s.write(bytes,1)==1);
 #endif

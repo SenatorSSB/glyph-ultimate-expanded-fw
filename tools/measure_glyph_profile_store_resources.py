@@ -28,11 +28,12 @@ def run(args,cwd=ROOT):
  if p.returncode:raise RuntimeError(' '.join(map(str,args))+'\n'+p.stdout+p.stderr)
  return p.stdout
 
-def measure(db:Path,elf:Path,out:Path):
+def measure(db:Path,elf:Path,out:Path,baseline_ref=None):
  entries=json.loads(db.read_text());selected=[e for e in entries if any(p in e['file'] for p in PATTERNS)]
  assert selected,'No resource-relevant compilation database entries'
  out.mkdir(parents=True,exist_ok=True)
  elf_hash=sha(elf)
+ backend_headers={str(path):sha(path) for path in (ROOT/'HAL/pico/include/comms/ConfiguratorBackend.hpp',ROOT/'HAL/pico/include/comms/CoordinatedCdcStream.hpp',ROOT/'include/core/ProfileStoreRxDiagnostics.hpp',ROOT/'include/core/CommunicationBackend.hpp')}
  def compile_one(pair):
   index,e=pair;source=Path(e['file']);source=source if source.is_absolute() else Path(e.get('directory',ROOT))/source
   source_hash=sha(source)
@@ -55,6 +56,15 @@ char glyph_layout_TransactionIdentity[sizeof(ProfileStore::TransactionIdentity)]
 }\n''')
    source_arg=next(i for i,a in enumerate(args) if a==e['file'] or Path(a)==source)
    args[source_arg]=str(copy)
+  elif source.name=='ConfiguratorBackend.cpp':
+   copy=out/'ConfiguratorBackend.layout.cpp'
+   copy.write_text(source.read_text()+'''\nextern "C" {
+char glyph_layout_CoordinatedCdcStream[sizeof(CoordinatedCdcStream)];
+char glyph_layout_ConfiguratorBackend[sizeof(ConfiguratorBackend)];
+char glyph_layout_ProfileStoreRxDiagnostics[sizeof(ProfileStoreRxDiagnostics)];
+}\n''')
+   source_arg=next(i for i,a in enumerate(args) if a==e['file'] or Path(a)==source)
+   args[source_arg]=str(copy)
   result=subprocess.run(args,cwd=e.get('directory',ROOT),text=True,capture_output=True,timeout=120)
   (target.with_suffix('.log')).write_text(result.stdout+result.stderr)
   if result.returncode:raise RuntimeError(source.name+' resource compile failed\n'+result.stderr)
@@ -64,10 +74,41 @@ char glyph_layout_TransactionIdentity[sizeof(ProfileStore::TransactionIdentity)]
  compiler=Path(compiled[0]['compiler']);nm=compiler.with_name('arm-none-eabi-nm');size=compiler.with_name('arm-none-eabi-size')
  layouts={}
  for obj in compiled:
-  if Path(obj['file']).name=='ProfileStore.cpp':
+  if Path(obj['file']).name in ('ProfileStore.cpp','ConfiguratorBackend.cpp'):
    for line in run([str(nm),'-S',obj['object']]).splitlines():
     m=re.match(r'\w+ (\w+) \w glyph_layout_(\w+)$',line)
     if m:layouts[m[2]]=int(m[1],16)
+ baseline=None
+ if baseline_ref:
+  baseline_dir=out/'baseline-backend-abi';overlay=baseline_dir/'include/comms';overlay.mkdir(parents=True,exist_ok=True)
+  frozen={}
+  for relative in ('HAL/pico/include/comms/ConfiguratorBackend.hpp','HAL/pico/include/comms/CoordinatedCdcStream.hpp','HAL/pico/src/comms/ConfiguratorBackend.cpp'):
+   text=run(['git','show',baseline_ref+':'+relative]);frozen[relative]=hashlib.sha256(text.encode()).hexdigest()
+   destination=(overlay/Path(relative).name) if relative.endswith('.hpp') else baseline_dir/'ConfiguratorBackend.layout.cpp'
+   destination.write_text(text)
+  source=baseline_dir/'ConfiguratorBackend.layout.cpp'
+  source.write_text(source.read_text()+'''\nextern "C" {
+char glyph_layout_CoordinatedCdcStream[sizeof(CoordinatedCdcStream)];
+char glyph_layout_ConfiguratorBackend[sizeof(ConfiguratorBackend)];
+}\n''')
+  entry=next(e for e in selected if Path(e['file']).name=='ConfiguratorBackend.cpp')
+  args=list(entry.get('arguments') or shlex.split(entry['command']))
+  original=Path(entry['file']);original=original if original.is_absolute() else Path(entry.get('directory',ROOT))/original
+  index=next(i for i,value in enumerate(args) if value==entry['file'] or Path(value)==original)
+  args[index]=str(source);obj=baseline_dir/'backend.o';args[args.index('-o')+1]=str(obj)
+  args[1:1]=['-I'+str(baseline_dir/'include')]
+  result=subprocess.run(args,cwd=entry.get('directory',ROOT),text=True,capture_output=True,timeout=120)
+  (baseline_dir/'compile.log').write_text(result.stdout+result.stderr)
+  if result.returncode:raise RuntimeError('Frozen backend ABI compile failed\n'+result.stderr)
+  old_layouts={}
+  for line in run([str(nm),'-S',str(obj)]).splitlines():
+   match=re.match(r'\w+ (\w+) \w glyph_layout_(\w+)$',line)
+   if match:old_layouts[match[2]]=int(match[1],16)
+  assert set(old_layouts)=={'CoordinatedCdcStream','ConfiguratorBackend'}
+  baseline={'ref':baseline_ref,'frozen_sources':frozen,'abi_sizes':old_layouts,
+   'delta_current_bytes':{name:layouts[name]-amount for name,amount in old_layouts.items()},
+   'object':str(obj),'compile_command':args,
+   'scope':'Frozen backend/stream headers and TU; same target compiler and current common dependencies. Backend does not embed protocol response/request structs. Not a frozen firmware rebuild or frozen stack measurement.'}
  frames=[]
  for file in out.glob('*.su'):
   for line in file.read_text().splitlines():
@@ -79,9 +120,10 @@ char glyph_layout_TransactionIdentity[sizeof(ProfileStore::TransactionIdentity)]
   m=re.match(r'(\w+) \w (__Stack(?:Limit|Top|Bottom|OneTop|OneBottom)|__bss_end__|__end__)$',line)
   if m:bounds[m[2]]=int(m[1],16)
  assert sha(elf)==elf_hash,'Candidate ELF changed during collection'
+ assert all(sha(Path(path))==digest for path,digest in backend_headers.items()),'Backend ABI header changed during collection'
  report={'candidate_elf':str(elf),'candidate_elf_sha256':elf_hash,'compile_database_sha256':sha(db),
   'compiler':str(compiler),'compiler_sha256':sha(compiler),'sources':compiled,
-  'abi_sizes':layouts,'stack_heap_linker_symbols':bounds,'frames':sorted(frames,key=lambda r:r['bytes'],reverse=True),
+  'abi_sizes':layouts,'backend_layout_headers':backend_headers,'baseline_backend_abi':baseline,'stack_heap_linker_symbols':bounds,'frames':sorted(frames,key=lambda r:r['bytes'],reverse=True),
   'static_sections':sections,'protocol_frame_bytes':8192,
   'active_profile_bytes':layouts.get('UltimateProfile'),'candidate_profile_bytes':layouts.get('UltimateProfile'),
   'whole_target_stack_bound':'NOT CLAIMED: per-function frames omit composed IRQ/ROM/indirect/runtime paths',
@@ -92,5 +134,5 @@ char glyph_layout_TransactionIdentity[sizeof(ProfileStore::TransactionIdentity)]
  print(json.dumps({k:v for k,v in report.items() if k not in ('sources','frames','static_sections')},indent=2))
  print('glyph_profile_store_resources=COLLECTED; candidate identity and hardware sufficiency remain integration/owner gates')
 def main():
- p=argparse.ArgumentParser();p.add_argument('--compile-db',type=Path,default=ROOT/'compile_commands.json');p.add_argument('--elf',type=Path,required=True);p.add_argument('--output-dir',type=Path,required=True);a=p.parse_args();measure(a.compile_db.resolve(),a.elf.resolve(),a.output_dir.resolve())
+ p=argparse.ArgumentParser();p.add_argument('--compile-db',type=Path,default=ROOT/'compile_commands.json');p.add_argument('--elf',type=Path,required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--baseline-ref',help='Optional Git revision for isolated frozen backend/stream target ABI probes');a=p.parse_args();measure(a.compile_db.resolve(),a.elf.resolve(),a.output_dir.resolve(),a.baseline_ref)
 if __name__=='__main__':main()

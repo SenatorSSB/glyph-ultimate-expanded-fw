@@ -54,14 +54,20 @@ def request(port,pb,message,exact_payload=None,phase='request'):
             if not frame:continue
             raw=bytes(frame);frame.clear()
             event(phase,'cobs_frame',frame_bytes=len(raw)+1,frame_sha256=hashlib.sha256(raw+b'\0').hexdigest())
+            decoded=b''
             try:
                 decoded=transport.cobs_decode(raw+b'\0')
+                if decoded and decoded[0]==5:
+                    diagnostic=decoded[1:].decode('utf-8',errors='replace')
+                    event(phase,'device_error',command=5,diagnostic=diagnostic,**rx_state())
+                    raise transport.ToolError('device CMD_ERROR: '+diagnostic)
                 if not decoded or decoded[0]!=9:raise transport.ToolError('unexpected response command')
                 if len(decoded)-1>8192:raise transport.ToolError('response exceeds protobuf bound')
                 response=pb.ProfileStoreResponse();response.ParseFromString(decoded[1:])
             except Exception as error:
+                if decoded and decoded[0]==5:raise
                 event(phase,'invalid_frame',frame_hex=raw.hex(),error=str(error))
-                if traced_read:continue # retain truncated response, await bounded diagnostic trailer
+                if traced_read and not (decoded and decoded[0]==5):continue # retain truncated response, await bounded diagnostic trailer
                 raise
             if response.request_token!=message.request_token:raise transport.ToolError('response token mismatch')
             if response.liveness_stage:
@@ -95,7 +101,7 @@ def parse_args(argv=None):
     parser.add_argument('--profile-json',type=Path);parser.add_argument('--profile-sha256')
     parser.add_argument('--output',type=Path)
     parser.add_argument('--trace-out',type=Path,help='exclusive fsynced phase journal, including transmission and device progress')
-    parser.add_argument('--trace',action='store_true',help='candidate-only progress frames on READ/STATUS/preflight')
+    parser.add_argument('--trace',action='store_true',help='candidate-only progress frames on READ/mutations/STATUS/preflight')
     parser.add_argument('--fault-ticket',type=number,default=0,help='explicit pending fault ticket for this mutation only')
     parser.add_argument('--request-out',type=Path,help='new receipt file written before first mutation; existing files are refused')
     parser.add_argument('--replay-request',type=Path,help='exact immutable request receipt to send once, explicitly')
@@ -169,7 +175,7 @@ def build_message(args,pb,json_format):
     else:
         message.operation={'pulse':pb.PROFILE_STORE_LIVENESS,'status':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ,'health':pb.PROFILE_STORE_INSPECT_HEALTH,'query':pb.PROFILE_STORE_QUERY_TRANSACTION}[args.action]
         message.profile_id=args.profile_id;message.page_cursor=args.page;message.page_size=args.page_size if args.action=='list' else 0
-    if args.trace and args.action in ('pulse','status','arm','clear','read'):message.liveness_trace=True
+    if args.trace and (args.action in ('pulse','status','arm','clear','read') or args.action in MUTATIONS):message.liveness_trace=True
     payload=host.get('_exact_payload',message.SerializeToString(deterministic=True))
     if len(payload)>8192:raise transport.ToolError('request exceeds bounded 8192-byte body')
     host['transmitted_request_sha256']=hashlib.sha256(payload).hexdigest()

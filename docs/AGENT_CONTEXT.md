@@ -1,5 +1,17 @@
 # Agent Context
 
+## Owner-scoped RX repair candidate — 2026-10-16
+
+The latest explicit owner request authorizes the bounded large-request RX repair
+and exact candidate handoff described in the
+[RX result](runtime_config/profile_store_rx_liveness_result.md). This unmerged
+branch preserves895's84/84 READ hardware PASS separately from its permanent
+large ticketed UPDATE RX hardware FAIL. The new candidate requires hardware;
+current failed-device state is UNKNOWN. No device operation or canonical merge
+is authorized in source diagnosis. Older reconciliation-only restrictions below
+are historical for their earlier scope, not a veto of this newer owner request.
+
+
 ## Multi-profile evidence reconciliation — 2026-10-15
 
 Exact tested production `f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113` has owner

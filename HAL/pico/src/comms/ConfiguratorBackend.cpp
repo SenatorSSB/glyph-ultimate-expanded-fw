@@ -195,9 +195,24 @@ size_t ConfiguratorBackend::ReadPacket(uint8_t *buffer, size_t max_len) {
     size_t bytes_read = 0;
     _packet_timed_out = false;
     const uint32_t started = millis();
+    const uint32_t raw_start = _base_stream.RxConsumed();
+    const uint32_t fetched_start = _base_stream.RxFetched();
+    const uint32_t tasks_start = _base_stream.RxTaskPasses();
+    _rx = {}; _rx.phase = 1; // caller recognized command
+    auto sample = [&]() {
+        const uint32_t raw = _base_stream.RxConsumed() - raw_start;
+        _rx.elapsed = millis() - started;
+        if (raw != _rx.raw) _rx.last_progress = _rx.elapsed;
+        _rx.raw = raw; _rx.decoded = bytes_read;
+        _rx.fetched = _base_stream.RxFetched() - fetched_start;
+        _rx.task_passes = _base_stream.RxTaskPasses() - tasks_start;
+    };
+    _rx.phase = 2;
     while (true) {
+        sample();
         if (static_cast<uint32_t>(millis() - started) >= 5000u) {
             _packet_timed_out = true;
+            _rx.phase = 10; _rx.flags |= 2;
             _in.next();
             return 0;
         }
@@ -210,10 +225,12 @@ size_t ConfiguratorBackend::ReadPacket(uint8_t *buffer, size_t max_len) {
             continue;
         }
         if (result == _in.EOP) {
+            sample(); _rx.phase = 4; _rx.flags |= 1;
             break;
         }
         buffer[bytes_read++] = result;
         if (bytes_read >= max_len) {
+            sample(); _rx.phase = 11; _rx.flags |= 4;
             _in.next();
             return bytes_read;
         }
@@ -360,6 +377,20 @@ bool ConfiguratorBackend::HandleSetConfig() {
     return true;
 }
 
+bool ConfiguratorBackend::PrepareProfileMutation(const ProfileStoreRequest &request) {
+    _last_profile_rx.phase = 7;
+    if (!TraceProfileStage(request, 39, request.fault_ticket)) return false;
+    if (request.fault_ticket && !ProfileStoreFaultControls::BeginMutation(request.fault_ticket)) return false;
+    _last_profile_rx.phase = 8;
+    return TraceProfileStage(request, 40, request.fault_ticket);
+}
+
+bool ConfiguratorBackend::TraceProfileDispatch(const ProfileStoreRequest &request) {
+    // Entered this operation branch; this does not prove a storage call ran.
+    _last_profile_rx.phase = 9;
+    return TraceProfileStage(request, 41, request.operation);
+}
+
 bool ConfiguratorBackend::HandleProfileStore() {
     static constexpr size_t kFrameLimit = 8192;
     static ProfileStoreRequest request;
@@ -367,15 +398,42 @@ bool ConfiguratorBackend::HandleProfileStore() {
     static uint8_t frame[kFrameLimit];
     const size_t length = ReadPacket(frame, sizeof(frame));
     if (_packet_timed_out) {
+        _last_profile_rx = _rx;
+        if (kStrictHardeningCandidate) {
+            // Reuse the abandoned frame storage; bounded metadata only.
+            const int count = snprintf(reinterpret_cast<char *>(frame), 192,
+                "Profile store frame timeout phase=%lu raw=%lu decoded=%lu elapsed_ms=%lu tasks=%lu last_ms=%lu fetched=%lu eop=0",
+                (unsigned long)_rx.phase, (unsigned long)_rx.raw, (unsigned long)_rx.decoded,
+                (unsigned long)_rx.elapsed, (unsigned long)_rx.task_passes,
+                (unsigned long)_rx.last_progress, (unsigned long)_rx.fetched);
+            return count > 0 && count < 192 && WriteProfilePacket(CMD_ERROR, frame, count);
+        }
         static constexpr char timeout[] = "Profile store frame timeout";
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)timeout, sizeof(timeout) - 1);
     }
-    if (length == sizeof(frame)) return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29);
+    if (length == sizeof(frame)) { _last_profile_rx = _rx; return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29); }
     request = ProfileStoreRequest_init_default;
+    _rx.phase = 5; // record before decode, with no competing USB trace traffic
     pb_istream_t input = pb_istream_from_buffer(frame, length);
     if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || (request.protocol_version != 1 && request.protocol_version != 2)) {
+        _rx.phase = 12; _rx.flags |= 8; _last_profile_rx = _rx;
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
+    _rx.phase = 6;
+    const bool mutationTrace = request.operation >= PROFILE_STORE_CREATE &&
+        request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
+    if (request.operation != PROFILE_STORE_LIVENESS) _last_profile_rx = _rx;
+    // Retrospective receive evidence, emitted only AFTER EOP and decode.
+    // No diagnostic TX competes with a still-arriving mutation body.
+    if (mutationTrace && (!TraceProfileStage(request, 30, 1) ||
+        !TraceProfileStage(request, 31, 1) ||
+        !TraceProfileStage(request, 32, _rx.raw) ||
+        !TraceProfileStage(request, 33, _rx.decoded) ||
+        !TraceProfileStage(request, 34, _rx.task_passes) ||
+        !TraceProfileStage(request, 35, _rx.flags & 1) ||
+        !TraceProfileStage(request, 36, _rx.elapsed) ||
+        !TraceProfileStage(request, 37, _rx.last_progress) ||
+        !TraceProfileStage(request, 38, 1))) return false;
     if (!TraceProfileStage(request, 1)) return false; // decoded; before Config CRC
     response = ProfileStoreResponse_init_default;
     response.protocol_version = request.protocol_version;
@@ -416,6 +474,16 @@ bool ConfiguratorBackend::HandleProfileStore() {
     } else if (pulse) {
         response.status = kStrictHardeningCandidate && request.protocol_version == 2 ? PROFILE_STORE_OK : PROFILE_STORE_UNSUPPORTED;
         response.strict_hardening_candidate = kStrictHardeningCandidate;
+        if (kStrictHardeningCandidate) {
+            response.rx_phase = _last_profile_rx.phase;
+            response.rx_raw_bytes = _last_profile_rx.raw;
+            response.rx_decoded_bytes = _last_profile_rx.decoded;
+            response.rx_elapsed_ms = _last_profile_rx.elapsed;
+            response.rx_task_passes = _last_profile_rx.task_passes;
+            response.rx_last_progress_ms = _last_profile_rx.last_progress;
+            response.rx_fetched_bytes = _last_profile_rx.fetched;
+            response.rx_flags = _last_profile_rx.flags;
+        }
         handled = true;
     } else if (mutation && request.protocol_version != 2) {
         response.status = PROFILE_STORE_UNSUPPORTED;
@@ -569,30 +637,37 @@ bool ConfiguratorBackend::HandleProfileStore() {
                    request.expected_profile_revision > UINT32_MAX ||
                    request.expected_store_generation != profile_store.Generation()) {
             result.status = ProfileStore::Status::Conflict;
-        } else if (request.fault_ticket && !ProfileStoreFaultControls::BeginMutation(request.fault_ticket)) {
+        } else if (!PrepareProfileMutation(request)) {
             result.status = ProfileStore::Status::Invalid;
         } else if (request.operation == PROFILE_STORE_CREATE) {
+            if (!TraceProfileDispatch(request)) return false;
             result = request.has_profile ? profile_store.Create(request.profile, request.name,
                 request.display_rank, identity) : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
         } else if (request.operation == PROFILE_STORE_UPDATE) {
+            if (!TraceProfileDispatch(request)) return false;
             result = request.has_profile ? profile_store.Update(request.profile_id, request.profile,
                 static_cast<uint32_t>(request.expected_profile_revision), identity)
                 : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
         } else if (request.operation == PROFILE_STORE_DUPLICATE) {
+            if (!TraceProfileDispatch(request)) return false;
             result = profile_store.Duplicate(request.profile_id,
                 static_cast<uint32_t>(request.expected_profile_revision), request.name, request.display_rank, identity);
         } else if (request.operation == PROFILE_STORE_RENAME) {
+            if (!TraceProfileDispatch(request)) return false;
             result = profile_store.Rename(request.profile_id, request.name,
                 static_cast<uint32_t>(request.expected_store_generation), identity);
         } else if (request.operation == PROFILE_STORE_REORDER) {
+            if (!TraceProfileDispatch(request)) return false;
             result = profile_store.Reorder(request.profile_id, request.display_rank,
                 static_cast<uint32_t>(request.expected_store_generation), identity);
         } else if (request.operation == PROFILE_STORE_DELETE) {
+            if (!TraceProfileDispatch(request)) return false;
             const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
                 ReferencesProfile(candidate, request.profile_id) ? request.profile_id : 0;
             result = profile_store.Delete(request.profile_id,
                 static_cast<uint32_t>(request.expected_store_generation), referenced, identity);
         } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
+            if (!TraceProfileDispatch(request)) return false;
             if (!profile_store.IsReady()) result.status = ProfileStore::Status::IoFailure;
             else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
                      candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||

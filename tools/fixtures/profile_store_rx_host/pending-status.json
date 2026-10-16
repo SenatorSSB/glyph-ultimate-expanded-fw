@@ -1,0 +1,36 @@
+{
+  "host": {
+    "transmitted_request_sha256": "5f8123825df0c89a31cc4fab9f06ff999ec9bb1aa360e0a3781e1b8a04ab4e18"
+  },
+  "response": {
+    "admissible_profiles": 30,
+    "config_generation": "3130536755",
+    "core0_stack_min_free_bytes": 1936,
+    "core1_stack_min_free_bytes": 3716,
+    "fault_control_version": 2,
+    "filesystem_block_bytes": 4096,
+    "filesystem_free_bytes": "372736",
+    "filesystem_program_bytes": 256,
+    "filesystem_total_bytes": "524288",
+    "filesystem_used_bytes": "151552",
+    "heap_arena_capacity_bytes": 74584,
+    "heap_arena_current_bytes": 9048,
+    "heap_arena_peak_bytes": 9048,
+    "mutation_feasible": true,
+    "mutation_protocol_version": 2,
+    "protected_bytes": "184320",
+    "protocol_version": 2,
+    "reserved_bytes": "16384",
+    "resource_diagnostics_enabled": true,
+    "staging_bytes": "45056",
+    "status": "PROFILE_STORE_OK",
+    "storage_fault_capable": true,
+    "storage_fault_operation": 2,
+    "storage_fault_pending": true,
+    "storage_fault_ticket": 1,
+    "store_generation": "160",
+    "store_incarnation": 1,
+    "strict_hardening_candidate": true,
+    "transaction_token_high_water": "17293822569102704864"
+  }
+}

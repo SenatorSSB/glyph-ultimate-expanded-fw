@@ -1,0 +1,18 @@
+{
+  "host": {
+    "transmitted_request_sha256": "9138979ea738b83236820af535c67131d4806175f9da0914318cc69e11bc4d46"
+  },
+  "response": {
+    "config_generation": "3130536755",
+    "fault_control_version": 2,
+    "mutation_protocol_version": 2,
+    "protocol_version": 2,
+    "status": "PROFILE_STORE_OK",
+    "storage_fault_capable": true,
+    "storage_fault_operation": 2,
+    "storage_fault_pending": true,
+    "storage_fault_ticket": 1,
+    "store_generation": "160",
+    "store_incarnation": 1
+  }
+}
