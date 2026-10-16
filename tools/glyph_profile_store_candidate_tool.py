@@ -102,6 +102,7 @@ def parse_args(argv=None):
     parser.add_argument('--output',type=Path)
     parser.add_argument('--trace-out',type=Path,help='exclusive fsynced phase journal, including transmission and device progress')
     parser.add_argument('--trace',action='store_true',help='candidate-only progress frames on READ/mutations/STATUS/preflight')
+    parser.add_argument('--reconcile-fault-ticket',type=number,default=0,help='candidate-only QUERY: first root OpenRead fail-before, exactly once')
     parser.add_argument('--fault-ticket',type=number,default=0,help='explicit pending fault ticket for this mutation only')
     parser.add_argument('--request-out',type=Path,help='new receipt file written before first mutation; existing files are refused')
     parser.add_argument('--replay-request',type=Path,help='exact immutable request receipt to send once, explicitly')
@@ -110,6 +111,8 @@ def parse_args(argv=None):
     args=parser.parse_args(argv)
     if args.output and any(item and args.output.resolve()==item.resolve() for item in (args.request_out,args.replay_request,args.profile_json)):
         parser.error('output must not overwrite source profile or immutable request receipt')
+    if args.reconcile_fault_ticket and (args.action!='query' or not 0<args.reconcile_fault_ticket<=0xffffffff):parser.error('reconcile-fault-ticket requires query and uint32')
+    if args.reconcile_fault_ticket and (not args.request_out or not args.trace_out):parser.error('reconciliation fault QUERY requires exclusive --request-out and --trace-out custody')
     if args.fault_ticket and (args.action not in MUTATIONS or not 0<args.fault_ticket<=0xffffffff):parser.error('fault-ticket requires mutation and uint32')
     if args.trace_out and any(item and args.trace_out.resolve()==item.resolve() for item in (args.output,args.request_out,args.replay_request,args.profile_json)):parser.error('trace journal must be distinct from output, receipt and source paths')
     if not 0<args.timeout<=10:parser.error('timeout must be within (0,10] seconds')
@@ -175,6 +178,7 @@ def build_message(args,pb,json_format):
     else:
         message.operation={'pulse':pb.PROFILE_STORE_LIVENESS,'status':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ,'health':pb.PROFILE_STORE_INSPECT_HEALTH,'query':pb.PROFILE_STORE_QUERY_TRANSACTION}[args.action]
         message.profile_id=args.profile_id;message.page_cursor=args.page;message.page_size=args.page_size if args.action=='list' else 0
+    if args.reconcile_fault_ticket:message.fault_ticket=args.reconcile_fault_ticket;message.liveness_trace=True
     if args.trace and (args.action in ('pulse','status','arm','clear','read') or args.action in MUTATIONS):message.liveness_trace=True
     payload=host.get('_exact_payload',message.SerializeToString(deterministic=True))
     if len(payload)>8192:raise transport.ToolError('request exceeds bounded 8192-byte body')
@@ -182,7 +186,11 @@ def build_message(args,pb,json_format):
     return message,host
 
 def verify_preflight(args,status,message):
-    if args.action in ('arm','clear'):
+    if args.reconcile_fault_ticket:
+        if not (status.protocol_version==2 and status.strict_hardening_candidate and status.storage_fault_capable and status.root_reconcile_fault_capable and status.mutation_protocol_version==2 and status.fault_control_version==2):raise transport.ToolError('target lacks candidate protocol2 reconciliation fault capability')
+        if not (status.recovery_flags & 8) or not status.storage_fault_pending or status.storage_fault_armed or status.storage_fault_ticket!=args.reconcile_fault_ticket:raise transport.ToolError('uncertain transaction and exact pending inert ticket required; no QUERY sent')
+        if (status.storage_fault_kind,status.storage_fault_operation,status.storage_fault_phase,status.storage_fault_result,status.storage_fault_path_class,status.storage_fault_skip)!=(2,1,1,1,2,0):raise transport.ToolError('QUERY requires exact root/open-read/fail-before rule with skip0; no QUERY sent')
+    elif args.action in ('arm','clear'):
         if not status.strict_hardening_candidate or not status.storage_fault_capable or status.fault_control_version!=2:raise transport.ToolError('target does not advertise candidate fault capability')
     elif args.action=='replay':
         if not status.strict_hardening_candidate or status.mutation_protocol_version!=2 or status.store_incarnation!=message.expected_store_incarnation:raise transport.ToolError('replay requires same candidate store incarnation/protocol; no request sent')
@@ -204,11 +212,11 @@ def main():
         pb,json_format,_=transport.load_runtime_proto_modules(ROOT)
         message,host=build_message(args,pb,json_format)
         port.open();port.flush_input()
-        if args.action in ('arm','clear','replay') or args.action in MUTATIONS:
+        if args.reconcile_fault_ticket or args.action in ('arm','clear','replay') or args.action in MUTATIONS:
             status=request(port,pb,pb.ProfileStoreRequest(protocol_version=2,operation=pb.PROFILE_STORE_STATUS,liveness_trace=args.trace),phase='status_preflight')
             verify_preflight(args,status,message)
         exact_payload=host.pop('_exact_payload',None)
-        if args.action in MUTATIONS:
+        if args.reconcile_fault_ticket or args.action in MUTATIONS:
             payload=message.SerializeToString(deterministic=True)
             receipt={'receipt_format':1,'incarnation':message.expected_store_incarnation,
                 'request_hex':payload.hex(),'request_sha256':hashlib.sha256(payload).hexdigest(),

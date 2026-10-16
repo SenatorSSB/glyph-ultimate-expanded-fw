@@ -609,7 +609,7 @@ message ProfileStoreRequest {
   uint32 fault_skip = 19;
   bool fault_clear = 20;
   uint32 expected_store_incarnation = 21;
-  // Candidate rule is inert unless this exact mutation presents its ticket.
+  // Candidate rule is inert unless a mutation or the narrow root-reconcile QUERY presents its ticket.
   uint32 fault_ticket = 22;
   // Candidate-only progress frames; stage zero is the final response.
   bool liveness_trace = 23;
@@ -670,6 +670,13 @@ message ProfileStoreResponse {
   uint32 rx_last_progress_ms = 49;
   uint32 rx_fetched_bytes = 50;
   uint32 rx_flags = 51;
+  // Candidate-only exact pending/history shape for guarded QUERY preflight.
+  uint32 storage_fault_kind = 52;
+  uint32 storage_fault_phase = 53;
+  uint32 storage_fault_result = 54;
+  uint32 storage_fault_path_class = 55;
+  uint32 storage_fault_skip = 56;
+  bool root_reconcile_fault_capable = 57;
 }
 /**
  * Button to HID keyboard keycode mapping.

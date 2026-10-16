@@ -1,5 +1,17 @@
 # Glyph Roadmap
 
+## Owner-scoped root-reconciliation route — 2026-10-16
+
+The latest direct owner request authorizes only the candidate fault-route repair
+from exact4ee, with new host proofs, fresh review, exact committed build/custody
+and hardware handoff. See the [route result](runtime_config/profile_store_root_reconcile_result.md).
+Frozen4ee ordinary QUERY correctly returned ABORTED while root ticket8 stayed
+inert; that was an invalid test route, not a product failure. No controller
+action, production persistence redesign or canonical merge. Physical state
+awaits the separate read-only adjudication; new candidate hardware is NOT_TESTED.
+Earlier owner-scoped RX work remains preserved historical context.
+
+
 ## Owner-scoped RX repair candidate — 2026-10-16
 
 The latest explicit owner request authorizes the bounded large-request RX repair

@@ -163,7 +163,7 @@ matching-call count, never trial-and-error on useful state.
 | Root rename | Fail-before and lost-ack-after on one disposable mutation. | Old-or-new authority with durable high-water reservation; query/replay/reboot never execute twice. |
 | Ready checkpoint | Arm control rename with skip1, then one disposable mutation. | Lost final acknowledgement still reconciles the published root/result; no false NOT_FOUND. |
 | Config sync/close/rename | Use a reference change between already backed-up IDs3/4, never arbitrary whole Config. Inject before failure and after lost acknowledgement. | No live hot switch. Unresolved Config blocks later mutations. Query reports durable receipt when committed; clear/reboot and restore original reference through a new checked transaction. |
-| Root unreadability | First leave a pending control intent through control-rename lost acknowledgement. Arm root open-read fail-before, then QUERY. | Explicit unknown/read-only invalid-root state, no allocation. Clear rule and reboot; healthy physical roots reconcile without deleting any root. This models the production read-failure boundary, not physical bit corruption. |
+| Root unreadability | First leave a pending control intent through control-rename lost acknowledgement. On the new route-capable candidate only, ARM root/OpenRead/fail-before/skip0, then the explicit `query --reconcile-fault-ticket` route with exact token and exclusive receipt/trace custody. Ordinary QUERY cannot activate a v2 pending rule; see [corrected exact packet](profile_store_root_reconcile_hardware_packet.md). | Explicit unknown/read-only invalid-root state, no allocation. After preserving the one-shot result, ordinary manual reboot with no fault reconciles healthy roots without deleting any root; no CLEAR needed. This models the production read-failure boundary, not physical bit corruption. |
 | GC remove | Create/update/delete only disposable data to make unprotected garbage, arm record remove fail-before then after lost acknowledgement on a later disposable mutation. | No protected useful/current/previous revision disappears. Retry resumes bounded collection. Record any no-trigger case honestly. |
 
 Physical power-cut behavior remains a separate physical acceptance row if not
@@ -208,3 +208,15 @@ The result receipt must list each row PASS/FAIL/NOT_TESTED with actual evidence,
 not an aggregate inferred PASS. B10 and physical resource margins remain open
 until that exact-SHA/exact-UF2 receipt is reviewed. This packet itself grants no
 canonical merge and contains no newly claimed hardware evidence.
+
+## Root row correction — 2026-10-16
+
+The former instruction “ARM root/open-read fail-before, then ordinary QUERY”
+was impossible under fault-control v2. Preserve the failed4ee attempt as
+`ROOT_UNREADABILITY_TEST_ROUTE_INVALID_UNDER_FAULT_CONTROL_V2`. Its ordinary
+healthy reconciliation to ABORTED is valid behavior, not a product failure.
+Ticket8 remained pending/inert, generation164→165, intended receipt revision133;
+actual ID22 authority is not inferred from that receipt. Use the separate
+[failed-device adjudication](profile_store_root_reconcile_device_adjudication.md)
+and [new single-attempt candidate packet](profile_store_root_reconcile_hardware_packet.md).
+Older strict procedures remain historical; they do not accept the new candidate.

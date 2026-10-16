@@ -1,5 +1,13 @@
 # Glyph Current State
 
+Candidate-only root-reconciliation route work is bounded by the latest direct
+owner request. [Diagnosis and gates](runtime_config/profile_store_root_reconcile_result.md)
+preserve4ee's invalid root test route and correct healthy ABORTED result.
+New candidate source is unmerged; hardware NOT_TESTED; current device authority
+requires the separate prepared adjudication. No controller action or production
+persistence redesign is performed.
+
+
 ## Owner-scoped RX repair candidate — 2026-10-16
 
 The latest explicit owner request authorizes the bounded large-request RX repair

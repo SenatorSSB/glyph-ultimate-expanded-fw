@@ -40,12 +40,25 @@ inline bool Arm(unsigned kind,unsigned operation,unsigned phase,unsigned result,
     Current()={false,false,true,++NextTicket(),kind,operation,phase,result,path_class,skip};
     CheckedStorage::SetFaultHook(nullptr);return true;
 }
-// A prepared rule is inert until a mutation explicitly presents its ticket.
+// A prepared rule is inert until explicitly scoped ticket activation.
+// Mutation admission/replay behavior is unchanged by the narrow QUERY route.
 // Core0 owns this state and all checked filesystem calls. No IRQ/core1 writer.
 inline bool BeginMutation(uint32_t ticket){
     auto &s=Current();
     if(!kStrictHardeningCandidate||!ticket||!s.pending||ticket!=s.ticket)return false;
     s.pending=false;s.armed=true;CheckedStorage::SetFaultHook(Hook);return true;
+}
+// Only the first actual directory-root OpenRead is approved for QUERY.
+// Control is Kind::Root too, but path class 2 excludes .ctrl/.ctmp.
+inline bool CanBeginReconcileQuery(uint32_t ticket){
+    const auto &s=Current();
+    return kStrictHardeningCandidate&&ticket&&s.pending&&!s.armed&&ticket==s.ticket&&
+        s.kind==static_cast<unsigned>(CheckedStorage::Kind::Root)+1&&s.path_class==2&&
+        s.operation==static_cast<unsigned>(CheckedStorage::Operation::OpenRead)&&
+        s.phase==1&&s.result==1&&s.skip==0;
+}
+inline bool BeginReconcileQuery(uint32_t ticket){
+    return CanBeginReconcileQuery(ticket)&&BeginMutation(ticket);
 }
 inline void EndMutation(){Current().armed=false;CheckedStorage::SetFaultHook(nullptr);}
 }

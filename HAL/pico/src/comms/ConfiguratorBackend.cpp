@@ -451,16 +451,21 @@ bool ConfiguratorBackend::HandleProfileStore() {
     ProfileStoreTransactionIdentity identity;
     ProfileStore::TransactionResult result;
     bool handled = false;
-    const bool ticket_invalid = request.fault_ticket &&
+    const bool reconcile_fault = query && request.fault_ticket &&
+        request.protocol_version == 2 && kStrictHardeningCandidate &&
+        _recovery_storage_available && profile_store.IsTransactionUncertain() &&
+        ProfileStoreFaultControls::CanBeginReconcileQuery(request.fault_ticket);
+    const bool ticket_invalid = request.fault_ticket && !reconcile_fault &&
         (!mutation || request.protocol_version != 2 || !kStrictHardeningCandidate);
     // Scope ends before encoding/TX, including failed/unused rules. Pending
-    // rules never affect STATUS, QUERY, replay without ticket, or legacy SET.
+    // rules never affect STATUS, ordinary QUERY, replay, or legacy SET.
+    // The explicit candidate reconciliation QUERY has its own immediate scope.
     struct FaultScope { ~FaultScope(){ProfileStoreFaultControls::EndMutation();} } fault_scope;
     if (!TraceProfileStage(request, 2)) return false; // CRC complete; before reconciliation
 
     // Reconcile durable publications before using RAM for replay or admitting
     // another mutation. A failed authoritative reread leaves the fence intact.
-    if (!ticket_invalid && _recovery_storage_available && (mutation || query)) {
+    if (!ticket_invalid && !reconcile_fault && _recovery_storage_available && (mutation || query)) {
         if (profile_store.IsTransactionUncertain()) profile_store.ReconcileTransaction();
         if (_reference_unknown || persistence.IsMutationFenced()) {
             Config &durable = ConfigWriteCandidate();
@@ -594,8 +599,25 @@ bool ConfiguratorBackend::HandleProfileStore() {
     } else {
         // Both receipt domains share tokens. Look them up BEFORE checking any
         // stale expectations: exact completed requests replay their result.
-        result = query ? profile_store.QueryTransaction(request.request_token)
-                       : profile_store.QueryTransaction(identity);
+        if (reconcile_fault) {
+            if (!TraceProfileStage(request, 42, request.fault_ticket)) return false;
+            {
+                FaultScope reconcile_scope;
+                if (!ProfileStoreFaultControls::BeginReconcileQuery(request.fault_ticket)) {
+                    result.status = ProfileStore::Status::Invalid;
+                } else {
+                    if (!TraceProfileStage(request, 43, ProfileStoreFaultControls::Current().armed)) return false;
+                    // Exactly one attempt: QueryTransaction owns reconciliation.
+                    result = profile_store.QueryTransaction(request.request_token);
+                }
+            } // Remove the hook before diagnostics, Config reads and encoding.
+            if (!TraceProfileStage(request, 44, ProfileStoreFaultControls::Current().triggered) ||
+                !TraceProfileStage(request, 45, profile_store.IsTransactionUncertain()) ||
+                !TraceProfileStage(request, 46, ProfileStoreFaultControls::Current().armed)) return false;
+        } else {
+            result = query ? profile_store.QueryTransaction(request.request_token)
+                           : profile_store.QueryTransaction(identity);
+        }
         Config &candidate = ConfigWriteCandidate();
         const auto loaded = persistence.LoadConfigChecked(candidate);
         const uint64_t high_water = loaded == Persistence::LoadResult::Loaded &&
@@ -736,6 +758,15 @@ bool ConfiguratorBackend::HandleProfileStore() {
     response.storage_fault_armed = ProfileStoreFaultControls::Current().armed;
     response.storage_fault_triggered = ProfileStoreFaultControls::Current().triggered;
     response.storage_fault_operation = ProfileStoreFaultControls::Current().operation;
+    if (kStrictHardeningCandidate) {
+        const auto &fault = ProfileStoreFaultControls::Current();
+        response.storage_fault_kind = fault.kind;
+        response.storage_fault_phase = fault.phase;
+        response.storage_fault_result = fault.result;
+        response.storage_fault_path_class = fault.path_class;
+        response.storage_fault_skip = fault.skip;
+        response.root_reconcile_fault_capable = true;
+    }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.
     if (_recovery_config_invalid) response.recovery_flags |= 1u << 16;
