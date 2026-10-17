@@ -1,0 +1,114 @@
+{
+  "classification": "MULTI_PROFILE_STORE_88AB_RT2_RAW_SETUP_DIAGNOSTIC_TRANSPORT_UNAVAILABLE",
+  "supported_rt2_boundary": "REPEATED_RECOVERY_LOOP_OBSERVATION_NOT_ESTABLISHED",
+  "candidate": "88ab0029d464175865e1ce3e9a19b462579ffed4",
+  "tree": "097dd278c8ebccdd9bdf188c38a36410b0d61e4d",
+  "parent": "b07502866c56a1c7e1e217132aea30366e234461",
+  "canonical_base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "uf2_bytes": 994304,
+  "uf2_sha256": "f13556e392ec017b1101a8bc608ae2ea568295bae1643c98e383e7967035a627",
+  "normal_control": "PASS owner report and retained complete responses",
+  "silicon": {
+    "chip_version": 2,
+    "rom_version": 3,
+    "revision": "B2",
+    "e5_flags": 0,
+    "e5_flags_encoding": "Omitted zero-valued proto3 scalar in retained generic JSON; exact schema/default and owner report establish0.",
+    "disposition": "RP2040_E5_PHYSICALLY_INAPPLICABLE_ON_THIS_CONTROLLER",
+    "durable_alias": "E5_PHYSICALLY_INAPPLICABLE_ON_TEST_CONTROLLER"
+  },
+  "physical_rt2_attempts": 1,
+  "settled_mb1": "RED operator observation",
+  "display": "black operator observation",
+  "serial_endpoint": "absent after10seconds ownerreport and retainedserialnodes",
+  "matching_controller_usb_identity": "absent ownerreport corroborated by retained fullioreg; broad root-metadata matches notcontrolleridentity",
+  "rt2_bus_reset": "UNKNOWN; do not import b075 reset observation",
+  "first_foreground_task_entered": "UNKNOWN",
+  "first_foreground_task_returned": "UNKNOWN",
+  "root_cause": "UNPROVEN",
+  "post_attempt_device_actions": "NONE ownerreport",
+  "current_device_state": "stopped failed88ab RT2; persistedauthorityrequiresseparate normalbootreadback",
+  "normal_baseline": {
+    "store_generation": 166,
+    "incarnation": 1,
+    "config_generation": 1182731055,
+    "config_payload_bytes": 252,
+    "config_payload_sha256": "cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0",
+    "core0_min_free": 1856,
+    "core1_min_free": 3716,
+    "heap_peak": 8688,
+    "heap_capacity": 74224,
+    "profiles": {
+      "1": {
+        "revision": "2",
+        "response_file_sha256": "ae9d4923ae2958eab2de74881e814ff61b4564ab051d16f22cb90a5f5f451e27",
+        "normalized_profile_json_sha256": "8a195a04745fd5729b26e37a78e7ecf3b43fab2ae94c68010bea052d7bad77c2"
+      },
+      "3": {
+        "revision": "1",
+        "response_file_sha256": "fcd2ae7079e4ea16442209279c5cf5eeface28d641299d3e5b055e50e280378d",
+        "normalized_profile_json_sha256": "3d26c57665be91228a30b4577687cfe0d1d5328575d19b6d6461b6c92beb9e49"
+      },
+      "4": {
+        "revision": "1",
+        "response_file_sha256": "5e1ea58abc62d4d30526e8ada3a1aa9af0061a26ae6a3f6a3dcc875c157fea0f",
+        "normalized_profile_json_sha256": "4aab71e55e92954d96c2fb877c749d6e0ec11004d8a49293c7a88626b96a7f02"
+      },
+      "22": {
+        "revision": "132",
+        "response_file_sha256": "b1f7a9bca2a6fd1e2634155c074f95a487bcf0835d38f85e93f2039c0d982155",
+        "normalized_profile_json_sha256": "3d26c57665be91228a30b4577687cfe0d1d5328575d19b6d6461b6c92beb9e49"
+      }
+    },
+    "profile_hash_definition": "UTF-8 sorted compact JSON(profile), notprotobufhash"
+  },
+  "metadata_caveat": "capture candidate_expected_after_test_flash/artifact fields retain f4771/9be templates and are not88ab binding. Actualdeviceinfo88ab, explicitownerexactreport and preservedUF2 bind this run. GET_CONFIG only proves persistedConfig bytes.",
+  "separate_historical_b075": {
+    "candidate": "b07502866c56a1c7e1e217132aea30366e234461",
+    "boundary": "RT2_DCD_BUS_RESET_RECEIVED_NO_SETUP_OBSERVED",
+    "color": "purple/violet consistentMAGENTA",
+    "pullup": "MAGENTAalone doesnotprove sampledON",
+    "same_boot_as_88ab": false
+  },
+  "preserved_findings": [
+    "466 applicationphase11",
+    "lateCDCsourceelimination",
+    "5913identitycontrolphysicallyinsufficient",
+    "root/GC V/W separatePASS",
+    "selection NOT_TESTED \u2014 FIXTURE_NOT_SAFELY_CONSTRUCTIBLE",
+    "Nunchuk NOT_TESTED"
+  ],
+  "evidence_root": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/88ab-rt2-e5",
+  "evidence_sha256": {
+    "normal-control-port101/config-capture/identity-status-snapshot.json": "96b098d13c30724c8523af9520104e625a9e92a843f94c0972089bceac4a5dfd",
+    "normal-control-port101/config-capture/operator-log.json": "e1bd9c335493a7ccf81211072f0f8a7dabf7f4b6deb07b29b1b9c338fb41f208",
+    "normal-control-port101/config-capture/owner-original-config.base64": "8cb9ed8ec133e05bf962907c9d216f8dbffed8ebd9bb94e837bd7000101525bb",
+    "normal-control-port101/config-capture/owner-original-config.bin": "cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0",
+    "normal-control-port101/config-capture/owner-original-config.json": "9f77a939856330eaaa22dbca3aacf8e6bb802ba887d97763aaf22540a2558b9f",
+    "normal-control-port101/list-p0.json": "8c737bda5fc08bbf2aee959dbd772fb05fce4da2b8d10f6ab1a6a91e0d254a36",
+    "normal-control-port101/list-p16.json": "6d8e6c7bfd5df65f75587e2b0710de4588d331a8c6a1a12aaf4d1bdae67a631d",
+    "normal-control-port101/list-p8.json": "4f9da6b58ea76bc7a373c22bed00c13700e5e515ceb2f5d835144cc5828b5ff1",
+    "normal-control-port101/pulse.json": "2a23ef988ad626f71cb52a4c724558638300f63969ae2cc8614ad7b836c70789",
+    "normal-control-port101/read-id1.json": "ae9d4923ae2958eab2de74881e814ff61b4564ab051d16f22cb90a5f5f451e27",
+    "normal-control-port101/read-id22.json": "b1f7a9bca2a6fd1e2634155c074f95a487bcf0835d38f85e93f2039c0d982155",
+    "normal-control-port101/read-id3.json": "fcd2ae7079e4ea16442209279c5cf5eeface28d641299d3e5b055e50e280378d",
+    "normal-control-port101/read-id4.json": "5e1ea58abc62d4d30526e8ada3a1aa9af0061a26ae6a3f6a3dcc875c157fea0f",
+    "normal-control-port101/status.json": "57d9b776fa52618c711959fa1696957afddbbd85ac199b8c320c4ccc2d259b7a",
+    "normal-control-port101/status.trace.json": "4f1bf61e4bbd9d5c8f73a35a76aaaa749b97b7e566626c35fa8bee67bece5649",
+    "pre-rt2-host-observation-20261017/SHA256SUMS": "96772bca13c5d01d2d0eb948ba9269d0a4414969ca8b2569c6723388e0af31c5",
+    "pre-rt2-host-observation-20261017/ioreg-controller-matches.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pre-rt2-host-observation-20261017/ioreg-usb.txt": "0ee0c3ae20f8cb3f048503349f6dbb35f65fb76b873da286f0058aabeb1cf95b",
+    "pre-rt2-host-observation-20261017/observation-time.utc": "25bbd5d1155c16af5f24cb781860e82803ab7a7548e4e0c2cae7db3a2741a86b",
+    "pre-rt2-host-observation-20261017/serial-nodes.txt": "0275ee67c8ee9a7952f2150f9de7dd4961455d7c6c5e1a71e7a75506c5897fa5",
+    "pre-rt2-host-observation-20261017/usb-tree.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rt2-single-attempt-20261017/SHA256SUMS": "8a26090edf37312d2bcb4791c9d466cc28d47569e21945cf1ac078cf6f120803",
+    "rt2-single-attempt-20261017/host-inventory-sizes.txt": "22846c4c7cfd94f219916811001c684f7a106a7b17300660e3393371dd319642",
+    "rt2-single-attempt-20261017/host-observation-time.utc": "bb55d12fc0defe51e667016135df3e220cfc3bde49354af6deb7009ee8b99ab1",
+    "rt2-single-attempt-20261017/ioreg-controller-matches.txt": "0a454ce5608aeef8bb69c42ba2a2c276e1fec9ab9b3cd7cdf2115cb5f4371606",
+    "rt2-single-attempt-20261017/ioreg-usb.txt": "c35f5ebe16eabe1499845a58782de6713417a1dec63889373d812c2dee8b21e3",
+    "rt2-single-attempt-20261017/operator-observation.txt": "2e120f7849026cdeb339536f85488bda87669c2829158354b5e79b1f655f58e2",
+    "rt2-single-attempt-20261017/serial-nodes.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rt2-single-attempt-20261017/usb-tree.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "no_controller_actions_by_source_agent": true
+}

@@ -9,12 +9,14 @@ enum class Phase : uint8_t {
     BackendNewReturned, ReadOnlyInstalled, Published, LoopEntered,
     ReportReturned, UsbConfigured, RequestByteSeen
 };
+constexpr uint32_t kTaskPairMagic = 0x52580000u; // v5: task4/progress4/indicator8
 constexpr uint32_t kMagic = 0x52570000u; // v4 raw/event/task: milestone4/phase4/flags8
 constexpr uint32_t kDcdV3Magic = 0x52560000u;
 constexpr uint32_t kLegacyMagic = 0x52540000u;
 constexpr uint32_t kMagicMask = 0xffff0000u;
 inline bool Valid(uint32_t value) {
     const unsigned magic=value&kMagicMask;
+    if(magic==kTaskPairMagic)return ((value>>12)&15u)<=4&&((value>>8)&15u)<=4;
     if(magic==kLegacyMagic){const unsigned phase=(value>>8)&255u;return phase>=1&&phase<=13;}
     const unsigned phase=(value>>8)&15u,state=(value>>12)&15u;
     return (magic==kMagic||magic==kDcdV3Magic)&&phase>=1&&phase<=13&&state<=7;
@@ -26,12 +28,16 @@ inline uint32_t TakePrevious(volatile uint32_t *scratch) {
 // Flags: initialized1, CDC instance2, CDC descriptor4, pull-up8,
 // bus-connected16, configured32, CDC DTR64, indicator available128.
 #if defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE && (defined(ARDUINO_ARCH_RP2040) || defined(GLYPH_RECOVERY_DIAGNOSTICS_HOST))
+void HandOffIndicator();
+void PublishIndependent();
 void CapturePrevious();
 void Mark(Phase phase);
 void ValidInspectionCommandReceived();
 uint32_t Current();
 uint32_t Previous();
 #else
+inline void HandOffIndicator(){}
+inline void PublishIndependent(){}
 inline void CapturePrevious(){}
 inline void Mark(Phase){}
 inline void ValidInspectionCommandReceived(){}

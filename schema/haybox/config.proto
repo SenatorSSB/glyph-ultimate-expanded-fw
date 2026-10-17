@@ -712,6 +712,21 @@ message ProfileStoreResponse {
   uint32 recovery_usb_e5_flags = 87;
   uint32 recovery_usb_observation_valid = 88;
   uint32 recovery_usb_task_reset_count = 89;
+  // Candidate v5 independent task/pair observer; no write/config semantics.
+  uint32 recovery_task_version = 90;
+  uint32 recovery_task_valid = 91;
+  uint32 recovery_task_entered = 92;
+  uint32 recovery_task_returned = 93;
+  uint32 recovery_task_active = 94;
+  uint32 recovery_task_first_returned = 95;
+  uint32 recovery_task_active_resets = 96;
+  uint32 recovery_task_first_resets = 97;
+  uint32 recovery_task_reset_completed = 98;
+  uint32 recovery_task_event_flags = 99;
+  uint32 recovery_task_task_flags = 100;
+  uint32 recovery_task_pair = 101;
+  uint32 recovery_task_first_reset_completed = 102;
+
 }
 /**
  * Button to HID keyboard keycode mapping.

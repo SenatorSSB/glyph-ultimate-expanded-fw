@@ -1,0 +1,174 @@
+{
+  "status": "PASS",
+  "negative_controls": [
+    "removed-reset",
+    "removed-completion",
+    "removed-independent-publication",
+    "removed-first-anchor"
+  ],
+  "publication_boundary_cases": "PASS",
+  "cases": [
+    {
+      "case": "before-entry",
+      "output": "task_observer_before-entry=PASS first_resets=0 first_completed=0 active=0 pair=0/0 async=1 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "no-events",
+      "output": "task_observer_no-events=PASS first_resets=0 first_completed=0 active=0 pair=4/0 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "one-reset",
+      "output": "task_observer_one-reset=PASS first_resets=1 first_completed=1 active=0 pair=4/1 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "two-resets",
+      "output": "task_observer_two-resets=PASS first_resets=2 first_completed=2 active=0 pair=4/1 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "continuous-reset",
+      "output": "task_observer_continuous-reset=PASS first_resets=129 first_completed=127 active=1 pair=3/1 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "queue-full",
+      "output": "task_observer_queue-full=PASS first_resets=26 first_completed=16 active=0 pair=4/1 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-setup",
+      "output": "task_observer_reset-setup=PASS first_resets=1 first_completed=1 active=0 pair=4/3 async=4 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "setup-active",
+      "output": "task_observer_setup-active=PASS first_resets=0 first_completed=0 active=1 pair=1/2 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "soft-irq-locked",
+      "output": "task_observer_soft-irq-locked=PASS first_resets=0 first_completed=0 active=0 pair=4/0 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "hardware-irq-locked",
+      "output": "task_observer_hardware-irq-locked=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "configured",
+      "output": "task_observer_configured=PASS first_resets=0 first_completed=0 active=0 pair=4/4 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "inspection",
+      "output": "task_observer_inspection=PASS first_resets=0 first_completed=0 active=0 pair=4/4 async=4 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "pre-first-reset",
+      "output": "task_observer_pre-first-reset=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1004 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "later-active",
+      "output": "task_observer_later-active=PASS first_resets=0 first_completed=0 active=1003 pair=4/0 async=2004 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "unplug",
+      "output": "task_observer_unplug=PASS first_resets=0 first_completed=1 active=0 pair=4/1 async=2 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "suspend-filter",
+      "output": "task_observer_suspend-filter=PASS first_resets=1 first_completed=1 active=0 pair=4/1 async=3 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-configuration-enter",
+      "output": "task_observer_stall-configuration-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-configuration-return",
+      "output": "task_observer_stall-configuration-return=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-control-enter",
+      "output": "task_observer_stall-control-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-control-return",
+      "output": "task_observer_stall-control-return=PASS first_resets=1 first_completed=1 active=1 pair=2/1 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-0-enter",
+      "output": "task_observer_stall-class-0-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-0-return",
+      "output": "task_observer_stall-class-0-return=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-1-enter",
+      "output": "task_observer_stall-class-1-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-1-return",
+      "output": "task_observer_stall-class-1-return=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-2-enter",
+      "output": "task_observer_stall-class-2-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-2-return",
+      "output": "task_observer_stall-class-2-return=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-3-enter",
+      "output": "task_observer_stall-class-3-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-3-return",
+      "output": "task_observer_stall-class-3-return=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-4-enter",
+      "output": "task_observer_stall-class-4-enter=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "stall-class-4-return",
+      "output": "task_observer_stall-class-4-return=PASS first_resets=1 first_completed=0 active=1 pair=2/0 async=1003 physical_macOS=NOT_MODELED"
+    }
+  ],
+  "physical_macOS": "NOT_MODELED",
+  "source_hashes": {
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.h": "5f215d092223581d9de4dd0542aa4cc587d280b7cc85978571621cfb54125524",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h": "d3be15d7d34446ff1fab640daeab4d548efeba3d280f0177dc324a3e03d13061",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/usb.h": "8e292ab4eb7ae6c5177f59a7cadcc03605685355b2c789a0cbf262d4968ec313",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": "09cf10b942463242445594f7fe937631a222ec5c8ae136476bcd691f3ac9d18e",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/HAL/pico/src/core/RecoveryStartupDiagnostics.cpp": "e5cdeb0420067e51d18b94b82ba0cb81f75634cdc63f895321381a9c75cb652f",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/HAL/pico/src/comms/ConfiguratorBackend.cpp": "dd0806646e419ea2c15a4c770b09eb01ac7dba85f8d1e1746dcca6fc1d03a507",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/schema/haybox/config.proto": "3edb82afd12eda95e1983f1029fff098573f37d561435a87576a997941aaa640",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/include/core/RecoveryTaskDiagnostics.hpp": "25e87b0af9e40895ee9148c1dc0ccc911d034396e2c2266aba1afee31a7f25b6",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/config/glyph/common/src/config.cpp": "823e97174425ab76ef079cd8c6490487d808954011a0d5968ed2e3c2876863a4",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/main.cpp": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "/private/tmp/glyph-profile-store-rt2-task-drain/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f"
+  },
+  "extracted_function_hashes": {
+    "TU_ATTR_ALWAYS_INLINE static inline struct hw_endpoint *hw_endpoint_get_by_num": "27a3c3ce46ba35cde4bf393837fffbddb5a66695da35df7327b88a9d682be755",
+    "static struct hw_endpoint *hw_endpoint_get_by_addr": "976b1713f49ffbff5d66d9ed96b3f3fb6a3513c5b61fb72de996f767b427a203",
+    "static void _hw_endpoint_alloc": "0b840c788d7183ac2d3a6e2ae6e0511c22c27665a512f96d585f4fe265de0601",
+    "static void hw_endpoint_init": "851e6f5c2038a0bff78bcf7faac8cabc0357679a7716a7bfb69ac8b1eabaf08b",
+    "static void hw_endpoint_xfer": "31366cfe0455a5a7d36a89859049c1fd0f4104a5530f0a9f31514ac54a408a33",
+    "static void __tusb_irq_path_func(hw_handle_buff_status)": "1e4cc016c29d56b0dcccd41a83c5ab7ecf42506dc7ceefeeb3ba83b9cbad0540",
+    "TU_ATTR_ALWAYS_INLINE static inline void reset_ep0_pid": "1fa1a8e7fe8c80c007f5922501dfc1116a7185c19a8d33d6d7f3210003d5211d",
+    "static void __tusb_irq_path_func(reset_non_control_endpoints)": "5d13f94bbdd20b22150ec10f729a855276cc07d5e8fde84f4b912ae9d1db0fbf",
+    "static void __tusb_irq_path_func(dcd_rp2040_irq)": "e7639ca52fbb893cbc7512dab6e6ae2950d8c3e8ab52aab8c75d92c9463048b0",
+    "void dcd_init": "388b16e3791b1e82312b7acdb02e65dba2cb7786e78098c0bd38b3d28b3adcb7",
+    "void dcd_int_enable": "ea7839f385fbe4eb66975b96ad8b1f05e1d51caeb593c99d6b04605796c788c9",
+    "void dcd_int_disable": "327f29923c278b841864b24fd2f783a112c7088f52f206b4cafcb760d5aff47f",
+    "void dcd_set_address": "20a4c80529258e4a4fd43114706795dff2284f2b51b9719ca6b9dc218da4692a",
+    "void dcd_connect": "ba69c3c49b6f45f19461fd576678bb5f07a9f8a9531eba030107ac03f11d49a2",
+    "void dcd_disconnect": "3ea0896845a69480272196d53c5bca7874633510dbbed092b31bbb8c5d9627e7",
+    "void dcd_edpt0_status_complete": "05f6459ac874581954ec6c76aeb94a16bb413d3e7087564e07f1dbe3e577dd0a",
+    "bool dcd_edpt_open": "9eca664ab453b6e60f9c5c81e4c73f39930745df44872d321a77c4a7e4387dfa",
+    "void __tusb_irq_path_func(dcd_int_handler)": "818a055cce666844b0c69b9db6daabb5b008d98df61241185903be8e59f249ab",
+    "void rp2040_usb_init": "b2cc286fede0d580d6ed48579b5fc0fba2e25ebb567a4311bca27225b6a84cca",
+    "void __tusb_irq_path_func(hw_endpoint_reset_transfer)": "8a6ac9c8485133767c9a488f9ecc1ba236ac8cbee838a975c837122653a428ca"
+  },
+  "model_boundary": "ASan/UBSan actual pinned USBD/CDC/HID/MSC/MIDI task/reset source and extracted XInput init/reset. Host-only event/replenishment/stall hooks; independent std::thread publisher while foreground paused. MMIO/NVIC/locks/host USB electrical completion remain models, not physical causal proof."
+}

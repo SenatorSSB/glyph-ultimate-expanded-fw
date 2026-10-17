@@ -1,5 +1,22 @@
 # Agent Context
 
+## Owner-scoped first USB task / repeated-reset investigation — 2026-10-17
+
+Exact88ab normal control is physical PASS; chip2/ROM3 establishes B2 and
+`E5_PHYSICALLY_INAPPLICABLE_ON_TEST_CONTROLLER`. Do not continue E5 fix work.
+Its separate single RT2 attempt ended RED/black/no endpoint; the supported
+boundary is only `REPEATED_RECOVERY_LOOP_OBSERVATION_NOT_ESTABLISHED`. No88ab
+bus-reset/task-entry/non-return claim is supported. Historical b075 MAGENTA
+remains a separate boot, including its pull-up caveat. See the
+[physical adjudication](runtime_config/profile_store_rt2_task_physical_adjudication.json).
+The latest direct owner request authorizes a bounded88ab descendant with an
+asynchronous observer for task invocation/reset-processing/count evidence,
+source/host tests, fresh review, exact build/custody and prepared hardware
+packets. No task-drain behavior change, device operation, persistence change or
+canonical merge. Root cause UNPROVEN; prior V/W PASS and selection/Nunchuk
+NOT_TESTED remain separate. Older scoped notices below are historical.
+
+
 ## Owner-scoped RT2 reset/SETUP investigation — 2026-10-17
 
 The latest direct owner request authorizes a bounded descendant of exact b075

@@ -151,6 +151,7 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
 // and runs without gameplay, menu, display, or core1 initialization.
 void enter_recovery_configurator() {
     using RecoveryStartupDiagnostics::Phase;
+    RecoveryUsbDiagnostics::BeginRecovery();
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Rt2Route);
     RecoveryStartupDiagnostics::Mark(Phase::RouteEntry);
     watchdog_hw->scratch[0] = 0;
@@ -169,6 +170,7 @@ void enter_recovery_configurator() {
     RecoveryStartupDiagnostics::Mark(Phase::BackendNewReturned);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
     RecoveryStartupDiagnostics::Mark(Phase::ReadOnlyInstalled);
+    RecoveryStartupDiagnostics::HandOffIndicator();
     publish_boot_state(BootOutcome::RecoveryConfigurator, false);
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Published);
     RecoveryStartupDiagnostics::Mark(Phase::Published);
@@ -455,7 +457,13 @@ void dummyloop() {
 
 void loop1() {
     SampleResourceDiagnostics();
+    // Independent recovery observer: no display/gameplay/USB work on core1.
+    // The boot-state publication is already the existing synchronized handoff.
     const BootSnapshot snapshot = read_boot_state();
+    if (snapshot.outcome == BootOutcome::RecoveryConfigurator) {
+        RecoveryStartupDiagnostics::PublishIndependent();
+        return;
+    }
     if (refused(snapshot.outcome)) {
         if (snapshot.display_ready) {
             draw_recovery_page(snapshot.outcome);

@@ -775,7 +775,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.root_reconcile_fault_capable = true;
         response.recovery_startup_current = RecoveryStartupDiagnostics::Current();
         response.recovery_startup_previous = RecoveryStartupDiagnostics::Previous();
-        response.recovery_startup_diagnostics_version = 4;
+        response.recovery_startup_diagnostics_version = 5;
         const auto usb=RecoveryUsbDiagnostics::Read();
         response.recovery_usb_milestones=usb.milestones;
         response.recovery_usb_irq_state=usb.irq_state;
@@ -804,6 +804,20 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.recovery_usb_e5_flags=usb.e5_flags;
         response.recovery_usb_observation_valid=usb.observation_valid;
         response.recovery_usb_task_reset_count=usb.task_reset_count;
+        const auto task=RecoveryUsbDiagnostics::TaskRead();
+        response.recovery_task_version=5;
+        response.recovery_task_valid=task.valid;
+        response.recovery_task_entered=task.entered;
+        response.recovery_task_returned=task.returned;
+        response.recovery_task_active=task.active;
+        response.recovery_task_first_returned=task.first_returned;
+        response.recovery_task_active_resets=task.active_resets;
+        response.recovery_task_first_resets=task.first_resets;
+        response.recovery_task_reset_completed=task.reset_completed;
+        response.recovery_task_first_reset_completed=task.first_reset_completed;
+        response.recovery_task_event_flags=task.event_flags;
+        response.recovery_task_task_flags=task.task_flags;
+        response.recovery_task_pair=(task.task_pixel<<4)|task.progress_pixel;
     }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.

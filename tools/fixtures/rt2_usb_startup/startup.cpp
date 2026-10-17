@@ -184,11 +184,19 @@ int main(int argc,char**argv){try{
  const auto desc=tud_descriptor_configuration_cb(0);require(desc[4]==2&&desc[2]==75,"idempotent Serial.begin retains CDC descriptors");
  for(unsigned i=0;i<8;++i)if(i!=0&&i!=1&&i!=2&&i!=3)require(watchdog_registers.scratch[i]==0x100+i,"SDK scratch preserved");
  require(watchdog_registers.scratch[0]==0&&watchdog_registers.scratch[1]==0&&watchdog_registers.scratch[2]==0,"recovery selector clearing retained");
- require(storage.files==before&&boot.outcome==BootOutcome::RecoveryConfigurator,"source recovery inspection and publication");inspect();
+ require(storage.files==before&&boot.outcome==BootOutcome::RecoveryConfigurator,"source recovery inspection and publication");
+#if EXPECT_DIAGNOSTICS
+ const auto handed_off_marker=RecoveryStartupDiagnostics::Current();
+ const auto handed_off_led_updates=led_updates;
+ require(((handed_off_marker>>8)&15u)==8&&(handed_off_marker&15u)==15u,
+         "read-only installation observes initialized CDC and pull-up before handoff");
+#endif
+ inspect();
  require(tasks>0&&tud_mounted(),"real USB device task progressed");
 #if EXPECT_DIAGNOSTICS
  if(timing=="pio1-fallback")require(used_pio==pio1,"second PIO fallback");
- const auto marker=RecoveryStartupDiagnostics::Current();require(((marker>>8)&15u)==13&&(marker&127u)==127u,"all USB/route observations and request byte seen");require(watchdog_registers.scratch[3]==marker,"stable flags remain in scratch");require(bool(marker&128u)==(pio_available&&timing!="pio-no-sm"),"indicator availability is honest");require(pio_available&&timing!="pio-no-sm"&&timing!="pio-fifo-busy"?(led_updates>0&&max_led_interval==200):led_updates==0,"bounded indicator or graceful unavailable");
+ const auto marker=RecoveryStartupDiagnostics::Current();require(marker==handed_off_marker&&led_updates==handed_off_led_updates,
+         "core0 inspection cannot publish markers or LED frames after core1 handoff");require(watchdog_registers.scratch[3]==marker,"stable flags remain in scratch");require(bool(marker&128u)==(pio_available&&timing!="pio-no-sm"),"indicator availability is honest");require(pio_available&&timing!="pio-no-sm"&&timing!="pio-fifo-busy"?(led_updates>0&&max_led_interval==200):led_updates==0,"bounded indicator or graceful unavailable");
 #else
  require(RecoveryStartupDiagnostics::Current()==0,"frozen source has no diagnostic marker");
 #endif

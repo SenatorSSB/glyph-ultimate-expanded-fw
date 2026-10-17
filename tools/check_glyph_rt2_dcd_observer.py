@@ -50,7 +50,9 @@ def main():
    obj=temp/(src.stem+'.o');run(['cc','-std=c11',*san,*defs,*flags,*inc,'-c',src,'-o',obj]);objects.append(obj)
   obj=temp/'ProfileStore.o';run(['c++','-std=c++17',*san,*defs,*inc,'-Dprofile_store=production_profile_store','-c',ROOT/'HAL/pico/src/core/ProfileStore.cpp','-o',obj]);objects.append(obj)
   (temp/'retained_timeout_harness.inc').write_text((LEGACY/'timeout_harness.cpp').read_text())
-  app=(ROOT/'config/glyph/common/src/config.cpp').read_text();(temp/'recovery_route.inc').write_text(base.function(app,'void enter_recovery_configurator()'))
+  # Legacy v4 predicate regression deliberately excludes the v5 handoff.
+  # The new task observer harness executes the exact current recovery route.
+  app=(ROOT/'config/glyph/common/src/config.cpp').read_text().replace('    RecoveryUsbDiagnostics::BeginRecovery();\n','').replace('    RecoveryStartupDiagnostics::HandOffIndicator();\n','');(temp/'recovery_route.inc').write_text(base.function(app,'void enter_recovery_configurator()'))
   loop=base.function(app,'void loop()');i=loop.index('    if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator)');body=base.function(loop[i:],'    if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator)');(temp/'recovery_loop.inc').write_text('void recovery_loop(){'+body+'}\n')
   # Source-faithful extraction. Alias-register assignments adapt to host W1C/SET.
   def mmio(s):

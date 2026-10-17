@@ -13,6 +13,7 @@
 namespace RecoveryStartupDiagnostics {
 namespace {
 uint32_t current=0,previous=0;
+std::atomic<uint32_t> handed_off{0},published_pair{0};
 PIO indicator=nullptr;
 int indicator_sm=-1;
 bool indicator_attempted=false;
@@ -51,17 +52,20 @@ void InitializeIndicator() {
     }
 }
 
-bool Show(unsigned state) {
+bool Show(unsigned state, unsigned progress=255) {
     if(!indicator||!pio_sm_is_tx_fifo_empty(indicator,indicator_sm))return false;
     // Only MB1 top-left menu pair. Sticky furthest progress; LF4 is dark.
     const uint32_t colors[]={0x001800u,0x061800u,0x181800u,0x001818u,
                              0x000018u,0x180018u,0x180000u,0x181818u};
-    const uint32_t mb1=colors[state];
+    const uint32_t task_colors[]={0x001800u,0x061800u,0x001818u,0x000018u,0x180000u};
+    const uint32_t progress_colors[]={0,0x181800u,0x180018u,0x180000u,0x181818u};
+    const uint32_t mb1=progress==255?colors[state]:task_colors[state];
+    const uint32_t second=progress==255?mb1:progress_colors[progress];
     // Preload while only our SM is disabled. USB IRQs remain enabled, but
     // cannot split this frame into separate latches between CPU FIFO puts.
     pio_sm_set_enabled(indicator,indicator_sm,false);
     // The empty4-word FIFO admits all4 words; no blocking put/wait-for-DMA.
-    pio_sm_put(indicator,indicator_sm,mb1<<8);pio_sm_put(indicator,indicator_sm,mb1<<8);
+    pio_sm_put(indicator,indicator_sm,mb1<<8);pio_sm_put(indicator,indicator_sm,second<<8);
     pio_sm_put(indicator,indicator_sm,0);pio_sm_put(indicator,indicator_sm,0);
     pio_sm_set_enabled(indicator,indicator_sm,true);
     // 96bits/800kHz=120us +80us low latch. IRQs remain enabled. This bounded
@@ -91,9 +95,26 @@ unsigned Flags() {
     return flags;
 }
 }
+void HandOffIndicator(){
+    // Core0 completes initialization and its final frame before publishing.
+    // After this release, only core1 touches the SM/FIFO and scratch3.
+    InitializeIndicator();shown_state=255;handed_off.store(1,std::memory_order_release);
+}
+void PublishIndependent(){
+    if(!handed_off.load(std::memory_order_acquire))return;
+    const auto s=RecoveryUsbDiagnostics::TaskRead();
+    if(!s.valid)return; // bounded retry on the next independent loop1 pass
+    const uint8_t pair=uint8_t((s.task_pixel<<4)|s.progress_pixel);
+    const uint32_t word=kTaskPairMagic|(s.task_pixel<<12)|(s.progress_pixel<<8)|(indicator?128u:0u);
+    if(published_pair.load(std::memory_order_relaxed)!=word){
+        published_pair.store(word,std::memory_order_release);watchdog_hw->scratch[3]=word;
+    }
+    if(shown_state!=pair&&Show(s.task_pixel,s.progress_pixel))shown_state=pair;
+}
 void CapturePrevious(){previous=TakePrevious(watchdog_hw->scratch);current=0;}
 void Mark(Phase phase) {
     if(phase==Phase::LoopEntered)RecoveryUsbDiagnostics::LoopEntered();
+    if(handed_off.load(std::memory_order_acquire))return;
     const unsigned old=(current>>8)&15u;
     const unsigned next=unsigned(phase)>old?unsigned(phase):old;
     // Record entry before any indicator allocation/claim or USB observation.
@@ -110,7 +131,7 @@ void Mark(Phase phase) {
 void ValidInspectionCommandReceived(){
     RecoveryUsbDiagnostics::InspectionDecoded();Mark(Phase::RequestByteSeen);
 }
-uint32_t Current(){return current;}
+uint32_t Current(){const uint32_t pair=published_pair.load(std::memory_order_acquire);return pair?pair:current;}
 uint32_t Previous(){return previous;}
 }
 #endif

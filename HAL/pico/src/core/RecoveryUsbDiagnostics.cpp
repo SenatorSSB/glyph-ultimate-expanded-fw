@@ -16,6 +16,7 @@
 uint32_t GlyphHostPrimask();
 #endif
 namespace {
+RecoveryTaskDiagnostics::State task_observer;
 // Milestones are sticky within the latest DCD BUS_RESET epoch.
 volatile bool reset_seen=false,setup_seen=false,descriptor_seen=false;
 volatile bool address_requested=false,address_applied=false,configured=false;
@@ -68,9 +69,11 @@ void observe(Observations &o){
 }
 }
 namespace RecoveryUsbDiagnostics {
+void BeginRecovery(){task_observer.Enable();}
+RecoveryTaskDiagnostics::Snapshot TaskRead(){return task_observer.Read();}
 void Stage(BootStage stage){boot_stage=stage;}
-void LoopEntered(){if(loops<2)++loops;}
-void InspectionDecoded(){inspection_epoch=reset_count;inspection_seen=true;}
+void LoopEntered(){task_observer.Arm();if(loops<2)++loops;}
+void InspectionDecoded(){task_observer.Inspection();inspection_epoch=reset_count;inspection_seen=true;}
 Snapshot Read(){
     Snapshot s;
     // This API is called only by core0 application diagnostics, never by core1.
@@ -145,12 +148,13 @@ unsigned Furthest(){return furthest;}
 // Existing optional pin callback was undefined in the target. No task/LED/IO here.
 extern "C" void tud_event_hook_cb(uint8_t port,uint32_t event,bool){
     if(port!=0||get_core_num()!=0)return;
-    if(event==DCD_EVENT_UNPLUGGED)unplug_seen=true;
+    if(event==DCD_EVENT_UNPLUGGED){unplug_seen=true;task_observer.UnplugEvent();}
     if(__get_current_exception()!=16+USBCTRL_IRQ)return;
     if(event!=DCD_EVENT_BUS_RESET&&event!=DCD_EVENT_SETUP_RECEIVED)return;
     // Pinned queue_event calls this before DCD clears SIE status, even if enqueue
     // failed. No IRQ/task/queue acknowledgement or MMIO write is added here.
     if(event==DCD_EVENT_BUS_RESET){
+        task_observer.ResetEvent();
         // SETUP is handled before RESET in the same IRQ; never carry it over.
         clear(event_observed);setup_seen=false;descriptor_seen=false;
         address_requested=false;address_applied=false;configured=false;inspection_seen=false;
@@ -159,20 +163,20 @@ extern "C" void tud_event_hook_cb(uint8_t port,uint32_t event,bool){
         ++reset_count; // boot-lifetime epoch; wraps only after 2^32 resets
     }
     observe(event_observed);
-    if(event==DCD_EVENT_SETUP_RECEIVED){setup_seen=true;if(setup_count!=UINT32_MAX)++setup_count;}
+    if(event==DCD_EVENT_SETUP_RECEIVED){task_observer.SetupEvent();setup_seen=true;if(setup_count!=UINT32_MAX)++setup_count;}
 }
 extern "C" bool __real_tud_control_xfer(uint8_t,const tusb_control_request_t*,void*,uint16_t);
 extern "C" bool __wrap_tud_control_xfer(uint8_t port,const tusb_control_request_t*r,void*b,uint16_t n){
     const uint32_t epoch=reset_count;
     const bool result=__real_tud_control_xfer(port,r,b,n);
     if(!unplug_seen&&task_reset_count==epoch&&epoch==reset_count&&port==0&&result&&standard_device(r)&&r->bmRequestType_bit.direction==TUSB_DIR_IN&&
-       r->bRequest==TUSB_REQ_GET_DESCRIPTOR&&uint8_t(r->wValue>>8)==TUSB_DESC_DEVICE){descriptor_epoch=epoch;descriptor_seen=true;}
+       r->bRequest==TUSB_REQ_GET_DESCRIPTOR&&uint8_t(r->wValue>>8)==TUSB_DESC_DEVICE){descriptor_epoch=epoch;descriptor_seen=true;task_observer.Control();}
     return result;
 }
 extern "C" void __real_dcd_set_address(uint8_t,uint8_t);
 extern "C" void __wrap_dcd_set_address(uint8_t port,uint8_t value){
     const uint32_t epoch=reset_count;
-    __real_dcd_set_address(port,value);if(!unplug_seen&&task_reset_count==epoch&&epoch==reset_count&&port==0){address_requested_epoch=epoch;address_requested=true;}
+    __real_dcd_set_address(port,value);if(!unplug_seen&&task_reset_count==epoch&&epoch==reset_count&&port==0){address_requested_epoch=epoch;address_requested=true;task_observer.Control();}
 }
 extern "C" void __real_dcd_edpt0_status_complete(uint8_t,const tusb_control_request_t*);
 extern "C" void __wrap_dcd_edpt0_status_complete(uint8_t port,const tusb_control_request_t*r){
@@ -180,21 +184,24 @@ extern "C" void __wrap_dcd_edpt0_status_complete(uint8_t port,const tusb_control
     __real_dcd_edpt0_status_complete(port,r);
     if(unplug_seen||task_reset_count!=epoch||epoch!=reset_count||port!=0||!standard_device(r)||r->bmRequestType_bit.direction!=TUSB_DIR_OUT)return;
     if(r->bRequest==TUSB_REQ_SET_ADDRESS){address_applied_epoch=epoch;address_applied=true;}
-    if(r->bRequest==TUSB_REQ_SET_CONFIGURATION&&uint8_t(r->wValue)!=0){configured_epoch=epoch;configured=true;}
+    if(r->bRequest==TUSB_REQ_SET_CONFIGURATION&&uint8_t(r->wValue)!=0){configured_epoch=epoch;configured=true;task_observer.Configured();}
 }
 // Pinned usbd.c calls this only while consuming RESET/UNPLUGGED. A missing
 // queue entry leaves counts unmatched, conservatively withholding task progress.
 extern "C" void __real_usbd_control_reset(void);
 extern "C" void __wrap_usbd_control_reset(void){
-    __real_usbd_control_reset();++task_reset_count;
+    __real_usbd_control_reset();++task_reset_count;task_observer.ResetCompleted();
 }
 extern "C" void __real_tud_task_ext(uint32_t,bool);
 extern "C" void __wrap_tud_task_ext(uint32_t timeout,bool in_isr){
     const bool core0=get_core_num()==0;
     const bool irq=__get_current_exception()!=0;
+    const bool foreground=core0&&!irq&&task_observer.ForegroundEnabled();
+    if(foreground)task_observer.Enter();
     if(core0){++task_entered;if(irq)irq_task_entered=true;}
     __real_tud_task_ext(timeout,in_isr);
     if(core0){++task_returned;if(irq)irq_task_returned=true;}
+    if(foreground)task_observer.Return();
 }
 extern "C" int __real_user_irq_claim_unused(bool);
 extern "C" int __wrap_user_irq_claim_unused(bool required){
