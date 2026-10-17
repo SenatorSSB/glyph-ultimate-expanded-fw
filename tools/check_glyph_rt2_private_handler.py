@@ -17,6 +17,11 @@ HOST=ROOT/'tools/fixtures/rt2_dcd_host';LEGACY=ROOT/'tools/fixtures/profile_stor
 USB=FRAMEWORK/'libraries/Adafruit_TinyUSB_Arduino/src';SDK=FRAMEWORK/'pico-sdk'
 def run(args):return base.run(args)
 def main():
+ # Current minimal candidate supersedes the historical H2-H8 suite below.
+ # Retained external cases and new S0/S1 cases execute the new actual-source harness.
+ if private_dcd.MARKERS == ("STATUS", "RETURN"):
+  from check_glyph_rt2_late_setup import main as late_main
+  return late_main()
  import argparse
  ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--output-dir',type=Path);args=ap.parse_args()
  sources=[USB/'portable/raspberrypi/rp2040/dcd_rp2040.c',USB/'portable/raspberrypi/rp2040/rp2040_usb.c',USB/'portable/raspberrypi/rp2040/rp2040_usb.h',USB/'arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp',USB/'device/usbd.c',USB/'device/usbd_control.c',SDK/'src/rp2040/hardware_structs/include/hardware/structs/usb.h',SDK/'src/rp2040/hardware_regs/include/hardware/regs/usb.h',ROOT/'HAL/pico/src/core/RecoveryUsbDiagnostics.cpp',ROOT/'HAL/pico/src/core/RecoveryStartupDiagnostics.cpp',ROOT/'HAL/pico/src/comms/ConfiguratorBackend.cpp',ROOT/'schema/haybox/config.proto',ROOT/'include/core/RecoveryTaskDiagnostics.hpp',ROOT/'config/glyph/common/src/config.cpp',FRAMEWORK/'cores/rp2040/main.cpp',ROOT/'.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp']

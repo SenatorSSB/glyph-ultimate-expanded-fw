@@ -11,10 +11,12 @@ PINNED_SHA256 = "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b1
 PRISTINE_RELATIVE = "vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c"
 INSTALLED_RELATIVE = "libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c"
 GENERATED_RELATIVE = ".pio/rt2-private-dcd/dcd_rp2040.c"
-MARKERS = ("STATUS", "SOF_DONE", "BUFF_DONE", "SETUP_TEST",
-           "SETUP_ENTERED", "SETUP_POINTER_ACQUIRED", "PID_DONE", "BEFORE_EVENT",
-           "AFTER_EVENT", "BEFORE_CLEAR", "AFTER_CLEAR", "RETURN")
+MARKERS = ("STATUS", "RETURN")
 HEADER = '#include "core/RecoveryPrivateDcdMarkers.h"\r\n'
+INITIAL_READ = "  uint32_t const status = usb_hw->ints;\r\n"
+INITIAL_CALL = "  GlyphDcdPrivateStatus(status);\r\n"
+LATE_READ = "  uint32_t const late_status = usb_hw->ints;\r\n"
+RETURN_CALL = "  GlyphDcdPrivateReturn(status, late_status);\r\n"
 
 
 def verify_pin(data, label="source"):
@@ -30,12 +32,6 @@ def _once(data, old, new):
     return data.replace(old, new, 1)
 
 
-def marker(name, value="0", indent="  "):
-    if name == "STATUS":
-        return f"{indent}GlyphDcdPrivateStatus({value});\r\n"
-    return f"{indent}GlyphDcdPrivateMarker(GLYPH_DCD_PRIVATE_{name}, {value});\r\n"
-
-
 def handler_text(source):
     text = source.decode()
     begin = text.index("static void __tusb_irq_path_func(dcd_rp2040_irq)(void)")
@@ -47,29 +43,9 @@ def _transform_source(pristine):
     verify_pin(pristine, "pristine source")
     data = _once(pristine, '#include "device/dcd.h"\r\n',
                  '#include "device/dcd.h"\r\n' + HEADER)
-    anchor = "  uint32_t const status = usb_hw->ints;\r\n"
-    data = _once(data, anchor, anchor + marker("STATUS", "status"))
-    anchor = "    dcd_event_sof(0, usb_hw->sof_rd & USB_SOF_RD_BITS, true);\r\n"
-    data = _once(data, anchor, anchor + marker("SOF_DONE", indent="    "))
-    anchor = "    hw_handle_buff_status();\r\n"
-    data = _once(data, anchor, anchor + marker("BUFF_DONE", indent="    "))
-    anchor = "  if ( status & USB_INTS_SETUP_REQ_BITS )\r\n  {\r\n"
-    data = _once(data, anchor,
-                 marker("SETUP_TEST", "(status & USB_INTS_SETUP_REQ_BITS) != 0") +
-                 anchor + marker("SETUP_ENTERED", indent="    "))
-    anchor = "    uint8_t const * setup = remove_volatile_cast(uint8_t const*, &usb_dpram->setup_packet);\r\n"
-    data = _once(data, anchor, anchor + marker("SETUP_POINTER_ACQUIRED", indent="    "))
-    anchor = "    reset_ep0_pid();\r\n"
-    data = _once(data, anchor, anchor + marker("PID_DONE", indent="    "))
-    anchor = "    dcd_event_setup_received(0, setup, true);\r\n"
-    data = _once(data, anchor, marker("BEFORE_EVENT", indent="    ") + anchor +
-                 marker("AFTER_EVENT", indent="    "))
-    anchor = "    usb_hw_clear->sie_status = USB_SIE_STATUS_SETUP_REC_BITS;\r\n"
-    data = _once(data, anchor, marker("BEFORE_CLEAR", indent="    ") + anchor +
-                 marker("AFTER_CLEAR", indent="    "))
+    data = _once(data, INITIAL_READ, INITIAL_READ + INITIAL_CALL)
     anchor = '    panic("Unhandled IRQ 0x%x\\n", (uint) (status ^ handled));\r\n  }\r\n'
-    data = _once(data, anchor, anchor + marker("RETURN"))
-    return data
+    return _once(data, anchor, anchor + LATE_READ + RETURN_CALL)
 
 
 def patch_source(pristine):
@@ -79,32 +55,24 @@ def patch_source(pristine):
 
 
 def validate_patched(data):
-    """Fail closed for every missing/reordered/modified marker or source byte."""
+    """Exact inverse pin and transform reject all changed USB behavior/placement."""
     body = handler_text(data)
-    # Hard entry boundary: even a helper, barrier, atomic or marker before this
-    # exact original read is forbidden. Do not infer safety from marker order.
     first = ("static void __tusb_irq_path_func(dcd_rp2040_irq)(void)\r\n{\r\n"
-             "  uint32_t const status = usb_hw->ints;\r\n" + marker("STATUS", "status"))
+             + INITIAL_READ + INITIAL_CALL)
     if not body.startswith(first):
-        raise ValueError("private handler must begin with original INTS load then local STATUS marker")
-    expected = list(MARKERS)
-    found = re.findall(r"GlyphDcdPrivate(?:Status\((?=status\))|Marker\(GLYPH_DCD_PRIVATE_(\w+),)", body)
-    found = [name or "STATUS" for name in found]
-    if found != expected:
-        raise ValueError(f"private marker order/count mismatch: {found}")
-    stripped = re.sub(rb"^ *GlyphDcdPrivateStatus\(status\);\r\n", b"", data, flags=re.M)
-    stripped = re.sub(rb"^ *GlyphDcdPrivateMarker\(GLYPH_DCD_PRIVATE_\w+, [^\r\n]*\);\r\n",
-                      b"", stripped, flags=re.M)
-    if stripped.count(HEADER.encode()) != 1:
-        raise ValueError("private marker include missing or duplicate")
-    stripped = stripped.replace(HEADER.encode(), b"", 1)
+        raise ValueError("private handler must begin with original S0 then exact local publication")
+    if not body.endswith(LATE_READ + RETURN_CALL + "}\r\n"):
+        raise ValueError("S1 read and return publication must be final normal-return statements")
+    if body.count("usb_hw->ints") != 2:
+        raise ValueError("private handler requires exactly original S0 and diagnostic S1 reads")
+    stripped = data
+    for statement in (INITIAL_CALL, LATE_READ, RETURN_CALL, HEADER):
+        if stripped.count(statement.encode()) != 1:
+            raise ValueError("missing, modified or duplicate diagnostic statement: " + statement.strip())
+        stripped = stripped.replace(statement.encode(), b"", 1)
     verify_pin(stripped, "source after removing diagnostic lines")
-    if marker("STATUS", "status") not in body or marker("SETUP_TEST", "(status & USB_INTS_SETUP_REQ_BITS) != 0") not in body:
-        raise ValueError("marker must consume the actual private local status")
-    if body.count("usb_hw->ints") != 1:
-        raise ValueError("private handler must retain exactly one original status read")
     if _transform_source(stripped) != data:
-        raise ValueError("private marker placement/arguments differ from exact insertion-only transform")
+        raise ValueError("private diagnostic differs from exact insertion-only S0/S1 transform")
 
 
 def prepare(root, installed):

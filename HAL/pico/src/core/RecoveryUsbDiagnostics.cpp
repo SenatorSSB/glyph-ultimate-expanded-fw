@@ -51,7 +51,7 @@ uint32_t primask(){
 #ifdef GLYPH_RT2_DCD_HOST
     return GlyphHostPrimask();
 #else
-    uint32_t value;asm volatile("mrs %0, primask":"=r"(value));return value;
+    uint32_t value;asm volatile("mrs %0, primask":"=r"(value)::"memory");return value;
 #endif
 }
 uint32_t irq_observation(){
@@ -98,12 +98,20 @@ void observe(Observations &o){
 }
 // Called only by the exact private USBCTRL TU, including before recovery.
 // Enable gates valid publication only; boot-lifetime history never resets.
-extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateStatus(uint32_t status){
-    // Compile one fixed STATUS path, including invocation/entry publication.
-    private_dcd_observer.Marker(GLYPH_DCD_PRIVATE_STATUS,status);
+extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateStatus(uint32_t s0){
+    private_dcd_observer.Initial(s0);
 }
-extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateMarker(uint32_t marker,uint32_t value){
-    private_dcd_observer.Marker(marker,value);
+extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateReturn(uint32_t s0,uint32_t s1){
+    // The private TU already read S1. These are sequential core0 samples,
+    // not an atomic snapshot and not proof that EXC_RETURN completed.
+    const uint32_t mask=1u<<USBCTRL_IRQ;
+    const uint32_t enabled=nvic_hw->iser;
+    const uint32_t pending=nvic_hw->ispr;
+    const uint32_t masked=primask();
+    using namespace RecoveryPrivateDcdDiagnostics;
+    const uint32_t gates=(enabled&mask?NvicEnabled:0u)|
+        (pending&mask?NvicPending:0u)|(masked&1u?PrimaskSet:0u);
+    private_dcd_observer.Return(s0,s1,gates);
 }
 namespace RecoveryUsbDiagnostics {
 void BeginRecovery(){task_observer.Enable();setup_observer.Enable();pre_setup_observer.Enable();private_dcd_observer.Enable();}

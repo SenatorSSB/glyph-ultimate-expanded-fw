@@ -13,7 +13,8 @@ enum class Phase : uint8_t {
     BackendNewReturned, ReadOnlyInstalled, Published, LoopEntered,
     ReportReturned, UsbConfigured, RequestByteSeen
 };
-constexpr uint32_t kDashboardMagic=0x525c0000u; // v9 private-handler panel
+constexpr uint32_t kDashboardMagic=0x525d0000u; // v10 S0/S1 late-SETUP panel
+constexpr uint32_t kPrivateDcdV9Magic=0x525c0000u; // retained historical private-handler panel
 constexpr uint32_t kPreSetupMagic=0x525b0000u; // v8 whole main-button pre-SETUP/IRQ/event
 constexpr uint32_t kSetupIrqMagic=0x525a0000u; // v7 historical SETUP/IRQ/event
 constexpr uint32_t kComprehensiveMagic=0x52590000u; // v6 retained historical dashboard
@@ -24,7 +25,7 @@ constexpr uint32_t kLegacyMagic = 0x52540000u;
 constexpr uint32_t kMagicMask = 0xffff0000u;
 inline bool Valid(uint32_t value) {
     const unsigned magic=value&kMagicMask;
-    if(magic==kDashboardMagic||magic==kPreSetupMagic||magic==kSetupIrqMagic||magic==kComprehensiveMagic)return ((value>>12)&15u)<=8&&((value>>8)&15u)<=8&&((value>>4)&15u)<=8&&(value&15u)<=8;
+    if(magic==kDashboardMagic||magic==kPrivateDcdV9Magic||magic==kPreSetupMagic||magic==kSetupIrqMagic||magic==kComprehensiveMagic)return ((value>>12)&15u)<=8&&((value>>8)&15u)<=8&&((value>>4)&15u)<=8&&(value&15u)<=8;
     if(magic==kTaskPairMagic)return ((value>>12)&15u)<=4&&((value>>8)&15u)<=4;
     if(magic==kLegacyMagic){const unsigned phase=(value>>8)&255u;return phase>=1&&phase<=13;}
     const unsigned phase=(value>>8)&15u,state=(value>>12)&15u;

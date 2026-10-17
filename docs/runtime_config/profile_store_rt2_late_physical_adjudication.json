@@ -1,0 +1,50 @@
+{
+  "classification": "MULTI_PROFILE_STORE_RT2_SETUP_NOT_SNAPSHOTTED_BY_DCD",
+  "authority": "Direct owner attachment94b72102-c0d6-4424-9671-468508d9de49/Pasted text.txt",
+  "candidate": "d30e5250ef2e5e425cc0f217fd37247b484ca988",
+  "tree": "259a311fe5f2ea5bee3fff9bb74600edcd883399",
+  "known_handoff_UF2": {
+    "sha256": "b4cda73fd4637b90b1ba7420b01a854d07ec1515e0ccd495bc846ec56b54e4f1",
+    "bytes": 1026560,
+    "scope": "Known sealed candidate custody; owner identifies exactd30e and does not restate UF2 hash in latest physical report"
+  },
+  "normal_control": {
+    "status": "OWNER_REPORTED_PASS",
+    "core0_min_free": 1864,
+    "core1_min_free": 3716,
+    "heap_reported": 10224,
+    "heap_capacity": 71664,
+    "filesystem_used": 147456,
+    "filesystem_free": 376832,
+    "silicon_revision": 2,
+    "ROM": 3,
+    "E5": "disabled/inapplicable",
+    "raw_transcripts": "NOT_PROVIDED_IN_LATEST_ATTACHMENT"
+  },
+  "RT2": {
+    "attempts": 1,
+    "LF4": "CYAN",
+    "LF3": "OFF",
+    "LF5": "OFF",
+    "display": "black/off",
+    "matching_USB_identity": false,
+    "serial_endpoint": false,
+    "supported": "Private initial snapshots occurred; none contained SETUP; historical RAW SETUP positive; no local SETUP record or external/queue/task/control progression",
+    "S0_S1_relation": "NOT_OBSERVED_BY_d30e",
+    "device_state": "STOPPED_AFTER_THIS_ATTEMPT"
+  },
+  "non_claims": [
+    "Not SETUP-branch failure",
+    "No order of RAW versus entry/return established",
+    "RAW positives not necessarily simultaneous",
+    "No NVIC/silicon diagnosis",
+    "Root cause UNPROVEN"
+  ],
+  "previous_boots_separate": {
+    "88a36e": "GREEN/OFF/OFF; latest observed handler returned; RAW reproduction UNKNOWN",
+    "0f22": "historical sequential SIE/INTR/INTS positive, no DCD SETUP event; no simultaneity",
+    "3761": "RAW SETUP positive/no event; reset emitted/completed/nextqueue read"
+  },
+  "new_source_task_device_actions": 0,
+  "new_source_task_RT2_attempts": 0
+}

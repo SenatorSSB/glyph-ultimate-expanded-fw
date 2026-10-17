@@ -836,6 +836,16 @@ message ProfileStoreResponse {
   uint32 recovery_private_dcd_first_enabled_setup_id = 206;
   uint32 recovery_private_dcd_first_enabled_setup_status = 207;
   uint32 recovery_private_dcd_first_enabled_setup_markers = 208;
+  // v3 minimal S0/S1 response-only observations; no persisted messages change.
+  uint32 recovery_private_dcd_latest_s1 = 209;
+  uint32 recovery_private_dcd_latest_gates = 210;
+  uint32 recovery_private_dcd_late_count = 211;
+  uint32 recovery_private_dcd_first_late_id = 212;
+  uint32 recovery_private_dcd_first_late_s0 = 213;
+  uint32 recovery_private_dcd_first_late_s1 = 214;
+  uint32 recovery_private_dcd_first_late_gates = 215;
+  uint32 recovery_private_dcd_first_post_late_setup_id = 216;
+  uint32 recovery_private_dcd_overflow_flags = 217;
 
 
 }

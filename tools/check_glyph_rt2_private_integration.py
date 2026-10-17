@@ -28,20 +28,22 @@ def main():
     patched = patch_source(pristine)
     validate_patched(patched)
     assert patch_source(pristine) == patched
-    # Removing ANY boundary must fail: count and exact order are contractual.
-    for name in MARKERS:
-        if name == "STATUS":
-            changed, count = re.subn(rb"^ *GlyphDcdPrivateStatus\(status\);\r\n", b"", patched, flags=re.M)
-        else:
-            changed, count = re.subn(
-                rb"^ *GlyphDcdPrivateMarker\(GLYPH_DCD_PRIVATE_" + name.encode() + rb", [^\r\n]*\);\r\n",
-                b"", patched, flags=re.M)
-        assert count == 1
-        rejects(lambda: validate_patched(changed))
+    source_negatives = {
+        "S0_hook_removed": patched.replace(b"  GlyphDcdPrivateStatus(status);\r\n", b""),
+        "S1_hook_removed": patched.replace(b"  GlyphDcdPrivateReturn(status, late_status);\r\n", b""),
+        "S1_read_removed": patched.replace(b"  uint32_t const late_status = usb_hw->ints;\r\n", b""),
+        "S0_marker_reread": patched.replace(b"GlyphDcdPrivateStatus(status)", b"GlyphDcdPrivateStatus(usb_hw->ints)"),
+        "S1_marker_reread": patched.replace(b"GlyphDcdPrivateReturn(status, late_status)", b"GlyphDcdPrivateReturn(status, usb_hw->ints)"),
+        "S0_replaced_by_late": patched.replace(b"GlyphDcdPrivateReturn(status, late_status)", b"GlyphDcdPrivateReturn(late_status, late_status)"),
+        "PID_removed": patched.replace(b"reset_ep0_pid();", b"/* removed */"),
+        "S1_changes_USB_branch": patched.replace(b"  GlyphDcdPrivateReturn", b"  if (late_status & USB_INTS_SETUP_REQ_BITS) usb_hw_clear->sie_status = USB_SIE_STATUS_SETUP_REC_BITS;\r\n  GlyphDcdPrivateReturn"),
+        "SETUP_clear_added": patched.replace(b"  GlyphDcdPrivateReturn", b"  usb_hw_clear->sie_status = USB_SIE_STATUS_SETUP_REC_BITS;\r\n  GlyphDcdPrivateReturn"),
+        "forced_IRQ": patched.replace(b"  GlyphDcdPrivateReturn", b"  irq_set_pending(USBCTRL_IRQ);\r\n  GlyphDcdPrivateReturn"),
+        "retry_added": patched.replace(b"  GlyphDcdPrivateReturn", b"  dcd_rp2040_irq();\r\n  GlyphDcdPrivateReturn"),
+        "branch_order_changed": patched.replace(b"    hw_handle_buff_status();", b"    dcd_event_sof(0, 0, true);\r\n    hw_handle_buff_status();"),
+    }
+    for changed in source_negatives.values():rejects(lambda changed=changed: validate_patched(changed))
     rejects(lambda: patch_source(pristine + b" "))
-    rejects(lambda: validate_patched(patched.replace(b"GlyphDcdPrivateStatus(status)", b"GlyphDcdPrivateStatus(usb_hw->ints)")))
-    rejects(lambda: validate_patched(patched.replace(b"reset_ep0_pid();", b"/* removed */")))
-    rejects(lambda: validate_patched(patched.replace(b"(status & USB_INTS_SETUP_REQ_BITS) != 0", b"1")))
     status_read = b"  uint32_t const status = usb_hw->ints;\r\n"
     status_marker = b"  GlyphDcdPrivateStatus(status);\r\n"
     pre_read_negatives = {
@@ -49,11 +51,10 @@ def main():
         "DMB": b"  __asm volatile(\"dmb\" ::: \"memory\");\r\n",
         "helper_call": b"  diagnostic_helper();\r\n",
         "atomic_store": b"  __atomic_store_n(&diagnostic_count, 1, __ATOMIC_RELAXED);\r\n",
-        "H0_reinsertion": b"  GlyphDcdPrivateMarker(GLYPH_DCD_PRIVATE_ENTRY, 0);\r\n",
+        "extra_pre_S0_INTS_read": b"  uint32_t extra = usb_hw->ints;\r\n",
     }
     for statement in pre_read_negatives.values():
         rejects(lambda statement=statement: validate_patched(patched.replace(status_read, statement + status_read)))
-    rejects(lambda: validate_patched(patched.replace(status_read, status_read + b"  uint32_t second = usb_hw->ints;\r\n")))
     rejects(lambda: validate_patched(patched.replace(status_read + status_marker, status_marker + status_read)))
     # Registration must deliver the original callback directly; an unarmed
     # Enabled() load in a per-IRQ trampoline would already violate the boundary.
@@ -84,21 +85,26 @@ def main():
     # Synthetic disassembly controls exercise the assembly hard gate itself;
     # actual build disassembly/replay remains required for hardware handoff.
     assembly = """00000000 <dcd_rp2040_irq>:
-   0: 2398       movs r3, #152
-   2: 4a07       ldr r2, [pc, #28] @ (20 <dcd_rp2040_irq+0x20>)
-   4: b510       push {r4, lr}
-   6: 58d3       ldr r3, [r2, r3]
-   8: 0018       movs r0, r3
-   a: f7ff fffe  bl 0 <GlyphDcdPrivateStatus>
-              a: R_ARM_THM_CALL GlyphDcdPrivateStatus
-  20: 50110000   .word 0x50110000
+   0: 2398 movs r3, #152
+   2: 4a0f ldr r2, [pc, #60] @ (40 <dcd_rp2040_irq+0x40>)
+   4: b510 push {r4, lr}
+   6: 58d3 ldr r3, [r2, r3]
+   8: 001c movs r4, r3
+   a: 0018 movs r0, r3
+   c: f7ff fffe bl 0 <GlyphDcdPrivateStatus>
+             c: R_ARM_THM_CALL GlyphDcdPrivateStatus
+  10: 2398 movs r3, #152
+  12: 4a0b ldr r2, [pc, #44] @ (40 <dcd_rp2040_irq+0x40>)
+  14: 58d1 ldr r1, [r2, r3]
+  16: 0020 movs r0, r4
+  18: f7ff fffe bl 0 <GlyphDcdPrivateReturn>
+            18: R_ARM_THM_CALL GlyphDcdPrivateReturn
+  40: 50110000 .word 0x50110000
 """
     assert entry_status_audit(assembly)["diagnostic_instructions_before_status"] == 0
     def assembly_rejects(changed):
-        try:
-            entry_status_audit(changed)
-        except AssertionError:
-            return
+        try:entry_status_audit(changed)
+        except AssertionError:return
         raise AssertionError("assembly negative control was unexpectedly accepted")
     assembly_negatives = {
         "DMB": "   5: f3bf 8f5f dmb sy\n",
@@ -106,14 +112,36 @@ def main():
         "store": "   5: 6018 str r0, [r3, #0]\n",
         "atomic_store": "   5: f7ff fffe bl 0 <__atomic_store_4>\n",
         "observer_load": "   5: 6818 ldr r0, [r3, #0]\n",
-        "marker_argument_preparation": "   5: 2001 movs r0, #1\n",
+        "argument_preparation": "   5: 2001 movs r0, #1\n",
         "H0_reinsertion": "   5: f7ff fffe bl 0 <GlyphDcdPrivateMarker>\n",
     }
-    for insertion in assembly_negatives.values():
-        assembly_rejects(assembly.replace("   6:", insertion + "   6:"))
+    for insertion in assembly_negatives.values():assembly_rejects(assembly.replace("   6:", insertion + "   6:"))
     assembly_rejects(assembly.replace("   8:", "   7: 2398 movs r3, #152\n   7: 58d3 ldr r3, [r2, r3]\n   8:"))
     assembly_rejects(assembly.replace("movs r0, r3", "movs r0, #0"))
-    assembly_rejects(assembly.replace("GlyphDcdPrivateStatus", "GlyphDcdPrivateMarker"))
+    assembly_rejects(assembly.replace("movs r0, r4", "movs r0, #0"))
+    assembly_rejects(assembly.replace("14: 58d1 ldr r1, [r2, r3]", "14: 2100 movs r1, #0"))
+    assembly_rejects(assembly.replace("GlyphDcdPrivateReturn", "other_return"))
+    # Optimizer equality is accepted only when the original panic guard
+    # dominates the entire normal-return block. Arbitrary CMP is insufficient.
+    equality_assembly=assembly[:assembly.index("  10:")]+"""  10: 42a5 cmp r5, r4
+  12: d000 beq.n 16 <dcd_rp2040_irq+0x16>
+  14: e00c b.n 30 <dcd_rp2040_irq+0x30>
+  16: 2398 movs r3, #152
+  18: 4a09 ldr r2, [pc, #36] @ (40 <dcd_rp2040_irq+0x40>)
+  1a: 0028 movs r0, r5
+  1c: 58d1 ldr r1, [r2, r3]
+  1e: f7ff fffe bl 0 <GlyphDcdPrivateReturn>
+            1e: R_ARM_THM_CALL GlyphDcdPrivateReturn
+  22: bd10 pop {r4, pc}
+  30: f7ff fffe bl 0 <panic>
+            30: R_ARM_THM_CALL panic
+  40: 50110000 .word 0x50110000
+"""
+    assert entry_status_audit(equality_assembly)["normal_return_status_equality_proof"]
+    assembly_rejects(equality_assembly.replace('beq.n 16','bne.n 16'))
+    assembly_rejects(equality_assembly.replace('30: R_ARM_THM_CALL panic','30: R_ARM_THM_CALL ordinary_return').replace('<panic>','<ordinary_return>'))
+    assembly_rejects(equality_assembly.replace('  10:','   f: e000 b.n 16 <dcd_rp2040_irq+0x16>\n  10:'))
+    assembly_rejects(equality_assembly.replace('  10:','   f: e000 b.n 12 <dcd_rp2040_irq+0x12>\n  10:'))
     with tempfile.TemporaryDirectory(prefix="glyph-private-compiledb-") as temp:
         root = Path(temp)
         private_source = root / ".pio/rt2-private-dcd/dcd_rp2040.c"
@@ -187,11 +215,12 @@ def main():
     rejects(lambda: env["middleware"](env, original_node))
     print(json.dumps({"result": "PASS", "pristine_sha256": PINNED_SHA256,
                       "patched_sha256": sha256(patched).hexdigest(),
-                      "marker_removal_negative_controls": len(MARKERS),
+                      "hook_removal_negative_controls": len(MARKERS),
+                      "source_negative_controls": list(source_negatives),
                       "pre_status_negative_controls": list(pre_read_negatives),
                       "direct_original_handler_registration": "PASS",
-                      "other_negative_controls": 21,
-                      "assembly_negative_controls": len(assembly_negatives) + 3,
+                      "source_and_placement_negative_controls": len(source_negatives)+len(pre_read_negatives)+3,
+                      "assembly_negative_controls": len(assembly_negatives) + 9,
                       "compile_database_negative_controls": 3,
                       "actual_middleware_substitution": "PASS"}, indent=2))
 

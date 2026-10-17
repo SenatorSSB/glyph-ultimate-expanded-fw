@@ -58,10 +58,51 @@ def entry_status_audit(disassembly, require_marker=True):
     instructions, literals, relocations = parse_function(disassembly)
     registers, dependencies, prefix, loads = {}, {}, [], []
     first_marker = None
+    return_marker = None
+    # GCC may coalesce original status with handled after the original
+    # mismatch check: cmp handled,status; beq normal; b noreturn-panic.
+    # Recognize only this dominated equality edge, never arbitrary CMP facts.
+    def branch_target(ins):
+        match=re.match(r"([0-9a-f]+)\s+<",ins["operands"])
+        return int(match[1],16) if match else None
+    by_address={ins["address"]:i for i,ins in enumerate(instructions)}
+    guards_at={}
+    equality_proof=[]
+    for index in range(len(instructions)-3):
+        cmp_ins,equal,otherwise=instructions[index:index+3]
+        if cmp_ins["opcode"]!="cmp" or equal["opcode"].split(".")[0]!="beq" or otherwise["opcode"].split(".")[0]!="b":continue
+        normal=branch_target(equal);panic=branch_target(otherwise)
+        if normal!=instructions[index+3]["address"] or panic not in by_address:continue
+        # A branch into BEQ/else could reuse unrelated condition flags and
+        # bypass CMP. Only entry at CMP (which reestablishes equality flags)
+        # is allowed; the normal block also has its own incoming-edge gate.
+        if any(x["opcode"].split(".")[0].startswith("b") and x["opcode"] not in ("bl","blx") and branch_target(x) is not None and cmp_ins["address"]<branch_target(x)<normal for x in instructions):continue
+        tail=instructions[index+3:]
+        return_index=next((j for j,x in enumerate(tail) if x["opcode"] in ("bl","blx") and "GlyphDcdPrivateReturn" in relocations.get(x["address"],x["operands"])),None)
+        if return_index is None:continue
+        block=tail[:return_index+1]
+        if any(x["opcode"].split(".")[0].startswith("b") for x in block[:-1]):continue
+        incoming=[x for x in instructions if x["opcode"].split(".")[0].startswith("b") and x["opcode"] not in ("bl","blx") and branch_target(x) is not None and normal<=branch_target(x)<=block[-1]["address"]]
+        if [x["address"] for x in incoming]!=[equal["address"]]:continue
+        panic_call=None
+        for x in instructions[by_address[panic]:]:
+            op=x["opcode"].split(".")[0]
+            if op in ("bl","blx"):
+                target=relocations.get(x["address"],x["operands"])
+                if re.search(r"(?:^|<)(?:__wrap_)?panic(?:>|$)",target):panic_call=x
+                break
+            if op.startswith("b") or op=="pop":break
+        regs=[v.strip() for v in cmp_ins["operands"].split(",")]
+        if panic_call and len(regs)==2:guards_at[normal]=(regs,cmp_ins,equal,panic_call)
     # Literal/address propagation follows the actual instruction stream. The
     # exact insertion-only source gate separately forbids any hidden reread.
     for ins in instructions:
         addr, op = ins["address"], ins["opcode"].split(".")[0]
+        if addr in guards_at:
+            regs,cmp_ins,equal,panic_call=guards_at[addr]
+            if any(registers.get(reg)=="local_status" for reg in regs):
+                for reg in regs:registers[reg]="local_status"
+                equality_proof.append({"compare":cmp_ins["text"],"equal_only_normal_edge":equal["text"],"noreturn_other_edge":panic_call["text"]})
         raw = ins["operands"]
         args = raw.split("@", 1)[0].strip()
         parts = [part.strip() for part in args.split(",")]
@@ -70,11 +111,16 @@ def entry_status_audit(disassembly, require_marker=True):
             prefix.append(ins)
         if op in ("bl", "blx"):
             target = relocations.get(addr, raw)
-            if ("GlyphDcdPrivateStatus" in target or "GlyphDcdPrivateMarker" in target) and first_marker is None:
+            if ("GlyphDcdPrivateStatus" in target or "GlyphDcdPrivateReturn" in target) and first_marker is None:
                 assert loads, "diagnostic call precedes private INTS load"
                 assert "GlyphDcdPrivateStatus" in target, "first diagnostic is not dedicated STATUS publication"
                 assert registers.get("r0") == "local_status", "STATUS argument is not exact loaded local value"
                 first_marker = ins
+            if "GlyphDcdPrivateReturn" in target:
+                assert len(loads) == 2, "S1 must precede the normal-return publication"
+                assert registers.get("r0") == "local_status", "return S0 argument must retain original local word"
+                assert registers.get("r1") == "late_status", "return S1 argument must use exact late loaded word"
+                return_marker = ins
             for reg in ("r0", "r1", "r2", "r3", "ip", "lr"):
                 registers.pop(reg, None)
                 dependencies.pop(reg, None)
@@ -105,7 +151,7 @@ def entry_status_audit(disassembly, require_marker=True):
                         value = base_value + offset_value
                 if value == 0x50110098:
                     loads.append({"instruction": ins, "address_materialization": sorted(used)})
-                    registers[destination] = "local_status"
+                    registers[destination] = "local_status" if len(loads)==1 else "late_status"
                     dependencies[destination] = {addr}
                 else:
                     registers.pop(destination, None)
@@ -125,7 +171,8 @@ def entry_status_audit(disassembly, require_marker=True):
             # Unknown result cannot inherit a stale address/local-status fact.
             registers.pop(destination, None)
             dependencies.pop(destination, None)
-    assert len(loads) == 1, f"exactly one resolved original INTS load required: {loads}"
+    expected_reads = 2 if require_marker else 1
+    assert len(loads) == expected_reads, f"exactly {expected_reads} resolved S0/S1 INTS loads required: {loads}"
     load = loads[0]
     allowed_address = set(load["address_materialization"])
     before = prefix[:-1]
@@ -145,8 +192,14 @@ def entry_status_audit(disassembly, require_marker=True):
         prologue.append(ins["text"])
     if require_marker:
         assert first_marker is not None, "first STATUS publication missing"
+        assert return_marker is not None, "normal-return S1 publication missing"
     return {"status_load": load["instruction"]["text"],
             "status_load_count": len(loads),
+            "initial_status_load_count": 1,
+            "late_status_load": loads[1]["instruction"]["text"] if len(loads)>1 else None,
+            "late_status_publication": return_marker["text"] if return_marker else None,
+            "return_publication_exact_s0_s1_values": bool(return_marker),
+            "normal_return_status_equality_proof": equality_proof,
             "diagnostic_instructions_before_status": 0,
             "diagnostic_barriers_before_status": 0,
             "compiler_prologue_before_status": prologue,
@@ -229,7 +282,7 @@ def main():
         (out / (label + ".disassembly.txt")).write_text(disassembly)
     audits = {label: entry_status_audit(assembly, label != "frozen-original") for label, assembly in disassemblies.items()}
     marker_audits = {}
-    for name in ("GlyphDcdPrivateStatus", "GlyphDcdPrivateMarker"):
+    for name in ("GlyphDcdPrivateStatus", "GlyphDcdPrivateReturn"):
         instructions, _, _ = parse_function(disassemblies["final-elf"], name)
         nested = [ins["text"] for ins in instructions if ins["opcode"] in ("bl", "blx")]
         assert not nested, f"{name} must inline observer publication, not call another hook layer: {nested}"

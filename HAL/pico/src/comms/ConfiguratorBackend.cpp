@@ -876,8 +876,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
         static RecoveryPrivateDcdDiagnostics::Snapshot private_dcd;
         if(captured)RecoveryStartupDiagnostics::CapturedPrivateInto(private_dcd);
         else RecoveryUsbDiagnostics::PrivateReadInto(private_dcd);
-        // Version2 merges entry/ID into the first post-status publication.
-        response.recovery_private_dcd_version=2;
+        // Version3 has two publications only: S0 and the late source-return S1.
+        // Unsupported v1/v2 branch-marker/window fields remain explicit zero.
+        response.recovery_private_dcd_version=3;
         response.recovery_private_dcd_valid=private_dcd.valid;
         response.recovery_private_dcd_captured=captured?1u:0u;
         response.recovery_private_dcd_entries=private_dcd.entries;
@@ -885,24 +886,34 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.recovery_private_dcd_setup_status_count=private_dcd.setup_status_count;
         response.recovery_private_dcd_reset_status_count=private_dcd.reset_status_count;
         response.recovery_private_dcd_buff_status_count=private_dcd.buff_status_count;
-        response.recovery_private_dcd_multi_status_count=private_dcd.multi_status_count;
-        response.recovery_private_dcd_ever_status=private_dcd.ever_status;
-        response.recovery_private_dcd_latest_id=private_dcd.latest_id;
-        response.recovery_private_dcd_latest_status=private_dcd.latest_status;
-        response.recovery_private_dcd_latest_markers=private_dcd.latest_markers;
-        response.recovery_private_dcd_active=private_dcd.active;
-        response.recovery_private_dcd_first_setup_id=private_dcd.first_setup_id;
-        response.recovery_private_dcd_first_setup_status=private_dcd.first_setup_status;
-        response.recovery_private_dcd_first_setup_markers=private_dcd.first_setup_markers;
-        response.recovery_private_dcd_latest_setup_id=private_dcd.latest_setup_id;
-        response.recovery_private_dcd_latest_setup_status=private_dcd.latest_setup_status;
-        response.recovery_private_dcd_latest_setup_markers=private_dcd.latest_setup_markers;
-        response.recovery_private_dcd_setup_test_false_count=private_dcd.setup_test_false_count;
-        response.recovery_private_dcd_marker_calls=private_dcd.marker_calls;
-        response.recovery_private_dcd_enabled_setup_count=private_dcd.enabled_setup_count;
-        response.recovery_private_dcd_first_enabled_setup_id=private_dcd.first_enabled_setup_id;
-        response.recovery_private_dcd_first_enabled_setup_status=private_dcd.first_enabled_setup_status;
-        response.recovery_private_dcd_first_enabled_setup_markers=private_dcd.first_enabled_setup_markers;
+        response.recovery_private_dcd_multi_status_count=0;
+        response.recovery_private_dcd_ever_status=0;
+        response.recovery_private_dcd_latest_id=private_dcd.entries;
+        response.recovery_private_dcd_latest_status=private_dcd.latest_s0;
+        response.recovery_private_dcd_latest_markers=0;
+        response.recovery_private_dcd_active=private_dcd.overflow_flags?0u:
+            (private_dcd.entries>private_dcd.returns?private_dcd.entries:0u);
+        response.recovery_private_dcd_first_setup_id=0;
+        response.recovery_private_dcd_first_setup_status=0;
+        response.recovery_private_dcd_first_setup_markers=0;
+        response.recovery_private_dcd_latest_setup_id=0;
+        response.recovery_private_dcd_latest_setup_status=0;
+        response.recovery_private_dcd_latest_setup_markers=0;
+        response.recovery_private_dcd_setup_test_false_count=0;
+        response.recovery_private_dcd_marker_calls=0;
+        response.recovery_private_dcd_enabled_setup_count=0;
+        response.recovery_private_dcd_first_enabled_setup_id=0;
+        response.recovery_private_dcd_first_enabled_setup_status=0;
+        response.recovery_private_dcd_first_enabled_setup_markers=0;
+        response.recovery_private_dcd_latest_s1=private_dcd.latest_s1;
+        response.recovery_private_dcd_latest_gates=private_dcd.latest_gates;
+        response.recovery_private_dcd_late_count=private_dcd.late_count;
+        response.recovery_private_dcd_first_late_id=private_dcd.first_late_id;
+        response.recovery_private_dcd_first_late_s0=private_dcd.first_late_s0;
+        response.recovery_private_dcd_first_late_s1=private_dcd.first_late_s1;
+        response.recovery_private_dcd_first_late_gates=private_dcd.first_late_gates;
+        response.recovery_private_dcd_first_post_late_setup_id=private_dcd.first_post_late_setup_id;
+        response.recovery_private_dcd_overflow_flags=private_dcd.overflow_flags;
         response.recovery_task_version=5;
         response.recovery_task_valid=task.valid;
         response.recovery_task_entered=task.entered;

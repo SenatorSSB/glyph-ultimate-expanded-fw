@@ -1,5 +1,21 @@
 # Agent Context
 
+## Minimal late-SETUP investigation — owner scope2026-10-17
+
+Exactd30e normalcontrol is owner-reported PASS (minfree1864/3716,heap10224/71664,
+FS147456used/376832free,B2/ROM3,E5disabled/inapplicable). Its ONE RT2 CYAN/OFF/OFF,
+black/noUSB/noendpoint means RAW positive, private S0 snapshots present, NONE with
+SETUP. Classification MULTI_PROFILE_STORE_RT2_SETUP_NOT_SNAPSHOTTED_BY_DCD; not
+SETUP-branch failure. Controller remains stopped there; no new source-agent action.
+Latest owner94b72102 authorizes a minimal two-hook S0/S1 diagnostic from exactd30e,
+removing branch markers. Source audit supports S1 with limits: RO INTS, levelIRQ
+expectation, pending0whileactive compatible repend; actualEXC_RETURN not observed.
+No repair/canonicalmerge. Separate d30e adjudication required before replacement;
+future owner one-attempt packet only. Root cause UNPROVEN, hardware NOT_TESTED.
+See [late contract](runtime_config/profile_store_rt2_late_contract.md). Older observer
+summaries/reviews remain historical and their runtime semantics are superseded here.
+
+
 ## Timing correction to private DCD observer — 2026-10-17
 
 Owner request52ec706f-e12c-4b47-9aa1-92678981065d rejects physical installation of
