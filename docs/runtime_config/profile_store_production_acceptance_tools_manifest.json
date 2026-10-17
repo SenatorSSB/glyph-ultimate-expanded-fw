@@ -1,0 +1,17 @@
+{
+  "manifest_format": 1,
+  "purpose": "host-only guarded production ProfileStore acceptance tooling",
+  "firmware_candidate_sha": "af69dd91e629db852f1d2371e8d8c2d6b624fc54",
+  "firmware_tree": "5c3ae998b94e444f7ab890ac51fcce8492944ceb",
+  "firmware_parent_and_merge_base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "firmware_uf2_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/af69dd91e629db852f1d2371e8d8c2d6b624fc54/5813756392a669b952982af9468ab3dbb34440bb98e3103ff76fd7faff743c35/firmware.uf2",
+  "firmware_uf2_bytes": 970752,
+  "firmware_uf2_sha256": "5813756392a669b952982af9468ab3dbb34440bb98e3103ff76fd7faff743c35",
+  "host_tooling_branch": "codex/profile-store-production-acceptance-tools",
+  "host_tooling_paths": [
+    "tools/glyph_profile_store_production_tool.py",
+    "tools/check_glyph_profile_store_production_tool.py",
+    "docs/runtime_config/profile_store_production_acceptance_hardware_packet.md"
+  ],
+  "excluded": ["firmware", "schema", "build configuration", "dependencies", "sealed artifact", "controller action", "canonical merge"]
+}
