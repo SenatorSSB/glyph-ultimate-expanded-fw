@@ -1,0 +1,406 @@
+{
+  "schema_name": "glyph_rt2_reinit_fresh_source_review",
+  "schema_version": 1,
+  "status": "PASS_WITH_LIMITS",
+  "reviewer": "fresh independent review agent; no production or test implementation edits",
+  "reviewed_at_utc": "2026-10-17T21:06:00.416626+00:00",
+  "parent": "60313cde63c7161921fdef7b2c3ebaddcb15173c",
+  "canonical": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "scope": "Frozen owner3833efe1 manual-only Option C coordinated warm USB state restart; source/test review. Exact committed target/resource/artifact review remains required before final candidate readiness.",
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "finding": "New manual_rt2 parameter was unused in non-RP2040 extracted-source -Werror builds.",
+      "resolution": "Behavior-neutral (void)manual_rt2 source annotation; affected selection/recovery regression rerun PASS. Initial failure retained."
+    },
+    {
+      "finding": "Legacy reset diagnostics assumed only queue-consumed reset paths call usbd_control_reset.",
+      "resolution": "Comment and contract now disclose direct warm reset reaches inherited ResetCompleted/task_reset_count; observer behavior unchanged, old epoch/panel relationships excluded as B discriminators."
+    },
+    {
+      "finding": "First-read AGENT_CONTEXT retained prior task as latest.",
+      "resolution": "Manual RT2 B owner-scope notice added to first-read/current/roadmap docs."
+    }
+  ],
+  "source_conclusions": [
+    "The only true argument is explicit rt2&&!mb1 setup branch; default false preserves automatic recovery lifecycle. Whole application inverse matches exact parent, and ordinary setup/loop function comparison passes.",
+    "Repository-owned exact pinned DCD/USBD/port generated copies append helpers. Removing helpers restores exact parent normal TU bases; no installed framework source change. Routing unit rejects omitted/duplicate/original objects. Final real link exclusion remains required.",
+    "Core0/thread/PRIMASK/one-shot/initialized descriptor+IRQ+queue+driver preflight; global interrupt mask and successful nonblocking USB mutex acquisition quiesce core0 USB execution. Core1 remains boot-state Pending before handoff and has no USB work.",
+    "Disable both existing USBCTRL and assigned task IRQ, disconnect, clear stale pending, existing SDK USBCTRL reset/DPRAM+register clear, EP0+noncontrol+allocator+SOF reset, original class/device/maps/control reset, empty existing event FIFO, clear pending, restore delivery, connect last. No new registration, IRQ claim, OSAL lock or queue allocation.",
+    "All built-in reset callbacks execute; CDC coding/wanted_char and initialized locks intentionally retained. Existing XInput reset is empty and no XInput backend is constructed on manual route.",
+    "75-byte existing CDC configuration, existing 2e8a:1092 Configurator identity and protocol retained; source descriptor builder allocation inspected. No descriptor/VID/PID redesign.",
+    "Existing recovery inspection and backend read-only state precede restart and new pullup exposure. New USB helpers have no persistent-store references. Existing mutation guards/read-only store semantics remain unchanged.",
+    "Preflight failure preserves old USB hardware; after reset failure remains detached/USB IRQs disabled, one-shot consumed and route permanently refuses backend service. No retry, new observer, forced SETUP, new manual IRQ pend, arbitrary delay, USB upgrade or root-cause claim."
+  ],
+  "validation": {
+    "independently_executed_host": {
+      "path": "local_backups/reinit/fresh-review-host-frozen/report.json",
+      "sha256": "099cd297583ec08fe34a67b72051396e4c14fcd02e34b1b8a848e8dc59c834bd",
+      "bytes": 30963,
+      "sanitizers": [
+        "ASan",
+        "UBSan"
+      ],
+      "runtime_cases": 92,
+      "fresh_constructions": 64,
+      "source_negative_controls": 44
+    },
+    "independent_whole_application_inverse_and_pin_routing_adversarial": {
+      "path": "local_backups/reinit/fresh-source-adversarial.json",
+      "sha256": "68eb669ed6f5b27fbec935e6c72c80b349217b548e8f071c46a494f370eabe7e",
+      "bytes": 806,
+      "additional_routing_controls": 15
+    },
+    "root_focused_regressions_inspected": {
+      "path": "local_backups/reinit/regressions/receipt.json",
+      "sha256": "d20ae0a88d7d88f3e4dfe28d814fd053ae4e444ce9fed7febce14e0aefbe9696",
+      "bytes": 2848,
+      "final_pass": 11,
+      "initial_failures_retained": "selection unused parameter; read-storage invocation missing required output-dir (not firmware failure)"
+    }
+  },
+  "limits": [
+    "No source/spec-backed host-recognized detach interval established. This is not alone a scope blocker: owner authorizes Option C A/B and excludes added timing delays. Actual host recognition/enumeration is the future hardware experiment.",
+    "No complete supported upstream deinit API exists. This is warm bus/runtime state reset retaining allocated infrastructure, not full cold-stack initialization.",
+    "SDK reset_done handshake retains its existing potentially unbounded hardware wait; no new retry or timeout introduced. Hardware hang acceptance not proven by host model.",
+    "Host MMIO/NVIC/mutex/scheduling/endpoint-register addresses are models; actual generated helper and four class/control/FIFO reset bodies execute. Application storage/backend edges are stubs, supplemented by unchanged source/11 focused regressions.",
+    "Existing reset observer counts/epochs may include software warm reset; no new diagnostic acceptance or cause proof.",
+    "Exact committed target build/resources/ELF object exclusion/emitted helper call order/artifact custody still pending separate final review.",
+    "Normal control and RT2 physical transport remain NOT_TESTED for new candidate. Underlying RT2 USB cause UNRESOLVED."
+  ],
+  "changed_paths_reviewed": [
+    "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+    "builder_scripts/rt2_recovery_reinit.py",
+    "config/glyph/common/src/config.cpp",
+    "config/glyph/env.ini",
+    "docs/AGENT_CONTEXT.md",
+    "docs/CURRENT_STATE.md",
+    "docs/ROADMAP.md",
+    "docs/runtime_config/profile_store_rt2_reinit_architecture_review.json",
+    "docs/runtime_config/profile_store_rt2_reinit_contract.md",
+    "docs/runtime_config/profile_store_rt2_reinit_device_adjudication.md",
+    "docs/runtime_config/profile_store_rt2_reinit_hardware_packet.md",
+    "docs/runtime_config/profile_store_rt2_reinit_route-audit-inputs.json",
+    "docs/runtime_config/profile_store_rt2_reinit_route-audit.md",
+    "docs/runtime_config/profile_store_rt2_reinit_stack-lifecycle-audit.md",
+    "docs/runtime_config/profile_store_rt2_reinit_stack-source-index.json",
+    "include/core/RecoveryUsbReinitialization.h",
+    "tools/check_glyph_rt2_recovery_reinit.py",
+    "tools/check_glyph_rt2_usb_startup.py",
+    "tools/fixtures/rt2_recovery_reinit_host/harness.cpp",
+    "tools/fixtures/rt2_recovery_reinit_host/include/hardware/sync.h",
+    "tools/fixtures/rt2_recovery_reinit_host/include/pico/critical_section.h",
+    "tools/fixtures/rt2_recovery_reinit_host/include/pico/mutex.h",
+    "tools/fixtures/rt2_recovery_reinit_host/include/pico/platform.h",
+    "tools/fixtures/rt2_recovery_reinit_host/route.inc",
+    "tools/fixtures/rt2_recovery_reinit_host/state.inc",
+    "tools/rt2_recovery_reinit.py",
+    "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+    "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+    "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c"
+  ],
+  "reviewed_hash_manifest": {
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp": {
+      "sha256": "80043c0248a30575d7c983647bfbb4099ad9ca8bccfcaf9273e7c73d6106e397",
+      "bytes": 2673
+    },
+    "HAL/pico/include/tusb_config_pico.h": {
+      "sha256": "ca059e0e8ff7f779e469b40ad67bea695e9d69abf092af7e119993963ba2238c",
+      "bytes": 3450
+    },
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "sha256": "a35797de46b06133276ea8108349be9789760ca9c15cce5a7a053d474be17a00",
+      "bytes": 56136
+    },
+    "HAL/pico/src/comms/XInputBackend.cpp": {
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+      "bytes": 2197
+    },
+    "HAL/pico/src/comms/backend_init.cpp": {
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0",
+      "bytes": 11708
+    },
+    "HAL/pico/src/core/Persistence.cpp": {
+      "sha256": "94b442b830f4a7a44c6bb0b56d50d3898d472b7ef94357b0a261f1c9e71871d0",
+      "bytes": 22287
+    },
+    "HAL/pico/src/core/ProfileStore.cpp": {
+      "sha256": "300d568a145baab2203a01906114244f6eed87443fa6241d6e14ad57e21b3c09",
+      "bytes": 67537
+    },
+    "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": {
+      "sha256": "05685d15e54ac74a9f31528c8fa7643f1a8e7b10485b7319bfd03cad08c817ba",
+      "bytes": 22930
+    },
+    "builder_scripts/rt2_dcd_observer.py": {
+      "sha256": "38de75c0db20c71105a5cf72fe7ffccd89b89177d76c7613df0506c28c37d0fb",
+      "bytes": 757
+    },
+    "builder_scripts/rt2_recovery_reinit.py": {
+      "sha256": "aff908837d4fb895815929d23b1cf555c241e285aaab812564ee4be56a624fec",
+      "bytes": 3772
+    },
+    "config/glyph/common/src/config.cpp": {
+      "sha256": "b8afadd3beece09f7c88f749ec79d775dd3e78ee18e25cb283c254a5451fd239",
+      "bytes": 20063
+    },
+    "config/glyph/env.ini": {
+      "sha256": "ab5b008dc12366d1f6dd147e4664ce434515ec8f69fdcd5ad902ce03dfc56881",
+      "bytes": 1789
+    },
+    "docs/AGENT_CONTEXT.md": {
+      "sha256": "72b41d61b7bce1d4968150ec85788a510bc08994fae931164ce0aa4a38bfd32f",
+      "bytes": 55381
+    },
+    "docs/CURRENT_STATE.md": {
+      "sha256": "307f40f271505e3608bdfe52e197e5c222a71a4b95e863ed0b5102a5eeaf4756",
+      "bytes": 39454
+    },
+    "docs/ROADMAP.md": {
+      "sha256": "ad41f066838e94d4d634c7728fb555432819fdc4f5dfb2c8a4789ae6562a72b6",
+      "bytes": 77443
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_architecture_review.json": {
+      "sha256": "b874a27e5bfb97f45a9a4c9aac0be21dc96ebb84701b5a6dfb69036e9571e710",
+      "bytes": 2059
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_contract.md": {
+      "sha256": "d65a6d5e5943deb84e421b74a452c65fe01dcebf0e4eced6fe825de6e943ae65",
+      "bytes": 6529
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_device_adjudication.md": {
+      "sha256": "eb300d3a8bf6b702f1c3ed4cb6ea9f7b3574b7e54ec3da95948c6eb7b9b56c75",
+      "bytes": 3019
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_hardware_packet.md": {
+      "sha256": "915cb36a53af2f6ba6e0f5a69726f5d71042834b62833390ed8f0f9935791cac",
+      "bytes": 3371
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_route-audit-inputs.json": {
+      "sha256": "e2e11b38ea9a9578a9829bafabd28496725e2d1cbeb517fe2c4ed09e811b6c39",
+      "bytes": 4264
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_route-audit.md": {
+      "sha256": "81b650f82c8793e42cd74b6d69f43cc9fd9ec0ea6bb1b65880bac6a7a37bf365",
+      "bytes": 7767
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_stack-lifecycle-audit.md": {
+      "sha256": "07369d8a2f89ebc2ba1b70be9fcaa7005b4000dee59ca6f9c96652ab87f4c6bc",
+      "bytes": 10752
+    },
+    "docs/runtime_config/profile_store_rt2_reinit_stack-source-index.json": {
+      "sha256": "3ff858628102bba280ae645c3b1b8b6ac03b10868a084db46d7418d64018bfb7",
+      "bytes": 6818
+    },
+    "include/core/RecoveryInitialization.hpp": {
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "bytes": 1446
+    },
+    "include/core/RecoveryPrivateDcdDiagnostics.hpp": {
+      "sha256": "437daf359e7dfdad6bf9249610ca379a86046b6ced58d2806cce45234d462888",
+      "bytes": 8331
+    },
+    "include/core/RecoveryStartupDiagnostics.hpp": {
+      "sha256": "e20773fcb89f7968a6ada132f123c4b7da67ae5e660ca470572b65987d2fd850",
+      "bytes": 3999
+    },
+    "include/core/RecoveryUsbReinitialization.h": {
+      "sha256": "c8ca7c4de4fbbe836f9f2bf359af52bb2478710b17ff9bfcebb7d2af76d32d60",
+      "bytes": 722
+    },
+    "platformio.ini": {
+      "sha256": "a545f2370abe3095aa63ffb9bcfcca9944ea5f8f2f0efb0976fb73317d2e9c78",
+      "bytes": 3321
+    },
+    "schema/haybox/config.options": {
+      "sha256": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0",
+      "bytes": 6339
+    },
+    "schema/haybox/config.proto": {
+      "sha256": "8462778e917c3a0896ce8501762ef1b6bc8eb8a8f4ca5a13ce31590505922224",
+      "bytes": 41659
+    },
+    "tools/check_glyph_rt2_recovery_reinit.py": {
+      "sha256": "dba45a30d42f458add557914cbc441924ce43cff999708684c9d9811af2a23e2",
+      "bytes": 13741
+    },
+    "tools/check_glyph_rt2_usb_startup.py": {
+      "sha256": "f4af2725dad00dde8ca6a0ecc613071ee1a8d9579bfc10cd7bddb055f09712fd",
+      "bytes": 10329
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/harness.cpp": {
+      "sha256": "df42a136ca8e632f76866de7366960a15308ace1e7cb432c7885ab8a05b1e891",
+      "bytes": 10752
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/include/hardware/sync.h": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/include/pico/critical_section.h": {
+      "sha256": "f515a90e0076a5c55e628bb76358543e70d5dec7ad036733f8429b564634795f",
+      "bytes": 342
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/include/pico/mutex.h": {
+      "sha256": "cc5d0659b30b7ef4708b6a8b07f7f0f13c8c7f0d364f95d28be19eece1fce5b3",
+      "bytes": 386
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/include/pico/platform.h": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/route.inc": {
+      "sha256": "d96f0caf3cc7ac72ae2ab0e5f884641d4fd142e952a6c70e21027498a3b0c672",
+      "bytes": 1588
+    },
+    "tools/fixtures/rt2_recovery_reinit_host/state.inc": {
+      "sha256": "737746323f990accece6a068304f4fc2c2a69af19bb33f793d80951386a6e391",
+      "bytes": 1064
+    },
+    "tools/rt2_private_dcd.py": {
+      "sha256": "6b8c1be2e0566b78ff9302be37499bcd58f8c84e05ca287ef3db02e2865dfae2",
+      "bytes": 4046
+    },
+    "tools/rt2_recovery_reinit.py": {
+      "sha256": "429e680dbb250ab53a4f19e4f8c7bf210768286372e3f68e263f758d2fee94b7",
+      "bytes": 8385
+    },
+    "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+      "bytes": 4652
+    },
+    "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": {
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+      "bytes": 46830
+    },
+    "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": {
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+      "bytes": 18095
+    }
+  },
+  "reviewed_external_inputs_verified": [
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/main.cpp",
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+      "bytes": 5490
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/library.properties",
+      "sha256": "5d2bb442f356ca002791a435be291be741ef5f1923c9c20dcec9a7a4371c45fe",
+      "bytes": 385
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb_option.h",
+      "sha256": "489bcf128baeb1a1297e118347a1a4f887ebcb1ae542636cb6df4e8e69d2d14a",
+      "bytes": 16757
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp",
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597",
+      "bytes": 17806
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp",
+      "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8",
+      "bytes": 7486
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+      "bytes": 4652
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+      "bytes": 46830
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.h",
+      "sha256": "34685f374c6f81866c8fcc2cc443e68ffd497be101288db17278e054cfcbdd75",
+      "bytes": 50749
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/dcd.h",
+      "sha256": "429bc790ad37e864ae0e0567e19f252edfe301988ac614239501d3569fdd050d",
+      "bytes": 8924
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c",
+      "sha256": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c",
+      "bytes": 7503
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+      "bytes": 18095
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c",
+      "sha256": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6",
+      "bytes": 14516
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h",
+      "sha256": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192",
+      "bytes": 6017
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal.h",
+      "sha256": "97b97028ace5926b6269418e09ba9715d5f24db5fe2525fb5e51f678cdf5c6ca",
+      "bytes": 3597
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c",
+      "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+      "bytes": 15750
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/msc/msc_device.c",
+      "sha256": "554d7541456e9c4fa84c02f8536fe84706d0f0f02e4b3efab6ca8239a01f837f",
+      "bytes": 32037
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/hid/hid_device.c",
+      "sha256": "b294a55c928a68b185889c909d1a63e81d20900595307638bfeef2198e03332d",
+      "bytes": 13705
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/midi/midi_device.c",
+      "sha256": "015f0e4711cf6f4da1a041196d3e011da99ade47b95c0f380358c932053927ec",
+      "bytes": 16886
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/critical_section.c",
+      "sha256": "fd3a65c6c6c1d6097092fa89ef4817d42d422430a8bd5e2f76ec7944a154139b",
+      "bytes": 700
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/mutex.c",
+      "sha256": "ffa89c16fcc806c3799a9bb06e170c7949c667b1bb84db7f8172f75d9376ee04",
+      "bytes": 6845
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/irq.c",
+      "sha256": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36",
+      "bytes": 19500
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h",
+      "sha256": "52f51e6a8793aa6328ed86aadc3929007eb48d1916190cba666b52b0a8c0cebe",
+      "bytes": 2134
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f",
+      "bytes": 11301
+    }
+  ],
+  "actions": {
+    "device": 0,
+    "builds_by_reviewer": 0,
+    "production_edits": 0,
+    "test_implementation_edits": 0,
+    "git_mutations": 0
+  },
+  "hardware": "NOT_TESTED",
+  "underlying_rt2_usb_cause": "UNRESOLVED"
+}

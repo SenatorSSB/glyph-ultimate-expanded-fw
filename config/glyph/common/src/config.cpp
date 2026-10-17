@@ -12,6 +12,7 @@
 #include "core/RecoveryInitialization.hpp"
 #include "core/RecoveryStartupDiagnostics.hpp"
 #include "core/RecoveryUsbDiagnostics.hpp"
+#include "core/RecoveryUsbReinitialization.h"
 #include "core/ResourceDiagnostics.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -77,7 +78,8 @@ enum class BootOutcome {
     StorageFailure,
     DefaultsRejected,
     StartupConfigRejected,
-    RecoveryConfigurator
+    RecoveryConfigurator,
+    RecoveryTransportFailure
 };
 struct BootSnapshot {
     BootOutcome outcome = BootOutcome::Pending;
@@ -149,7 +151,8 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
 
 // Recovery deliberately reuses the single source-owned Configurator transport
 // and runs without gameplay, menu, display, or core1 initialization.
-void enter_recovery_configurator() {
+void enter_recovery_configurator(bool manual_rt2 = false) {
+    (void)manual_rt2; // Non-RP2040 builds retain the existing recovery route.
     using RecoveryStartupDiagnostics::Phase;
     RecoveryUsbDiagnostics::BeginRecovery();
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Rt2Route);
@@ -170,6 +173,15 @@ void enter_recovery_configurator() {
     RecoveryStartupDiagnostics::Mark(Phase::BackendNewReturned);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
     RecoveryStartupDiagnostics::Mark(Phase::ReadOnlyInstalled);
+#if defined(ARDUINO_ARCH_RP2040) && defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE
+    // Only explicit manual RT2 restarts USB bus state. The existing CDC
+    // descriptor/identity and read-only backend are ready before pull-up.
+    // Ordinary boot and automatic recovery keep their existing USB lifecycle.
+    if (manual_rt2 && !GlyphRecoveryUsbReinitialize()) {
+        publish_boot_state(BootOutcome::RecoveryTransportFailure, false);
+        return;
+    }
+#endif
     RecoveryStartupDiagnostics::HandOffIndicator();
     publish_boot_state(BootOutcome::RecoveryConfigurator, false);
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Published);
@@ -191,7 +203,7 @@ void setup() {
     // Amendment A recovery route: after MB1 priority (evaluated below only
     // when MB1 is held) and before display/config/backend initialization.
     if (inputs.rt2 && !inputs.mb1) {
-        enter_recovery_configurator();
+        enter_recovery_configurator(true);
         return;
     }
 

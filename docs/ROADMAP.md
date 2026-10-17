@@ -1,3 +1,6 @@
+<!-- Manual RT2 recovery USB A/B branch notice -->
+Current owner request3833efe1 pivots to one manual-recovery-only USB warm-reset A/B from60313cde. Latest owner-reported single60313 RT2 CYAN/OFF/OFF reached software observability limit. Underlying cause UNRESOLVED. Source work only; no new controller action, polling observer, canonical merge or hardware acceptance. See runtime_config/profile_store_rt2_reinit_contract.md and separate stopped60313 adjudication/future one-attempt packet. Candidate validation/custody is in its final handoff; these branch docs do not promote hardware PASS.
+
 # Glyph Roadmap
 
 ## Minimal late-SETUP investigation — owner scope2026-10-17

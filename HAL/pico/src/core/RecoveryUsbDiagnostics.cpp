@@ -289,8 +289,9 @@ extern "C" void __wrap_dcd_edpt0_status_complete(uint8_t port,const tusb_control
     if(r->bRequest==TUSB_REQ_SET_ADDRESS){address_applied_epoch=epoch;address_applied=true;}
     if(r->bRequest==TUSB_REQ_SET_CONFIGURATION&&uint8_t(r->wValue)!=0){configured_epoch=epoch;configured=true;}
 }
-// Pinned usbd.c calls this only while consuming RESET/UNPLUGGED. A missing
-// queue entry leaves counts unmatched, conservatively withholding task progress.
+// Ordinary pinned usbd.c reaches this while consuming RESET/UNPLUGGED. Manual
+// recovery's coordinated warm reset also calls it directly. Retained reset
+// counters/panel epochs therefore do not identify a dequeued bus event in B.
 extern "C" void __real_usbd_control_reset(void);
 extern "C" void __wrap_usbd_control_reset(void){
     __real_usbd_control_reset();++task_reset_count;task_observer.ResetCompleted();

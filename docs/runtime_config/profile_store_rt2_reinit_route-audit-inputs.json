@@ -1,0 +1,87 @@
+{
+  "role": "read-only route audit",
+  "base": "60313cde63c7161921fdef7b2c3ebaddcb15173c",
+  "inputs": [
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/config/glyph/common/src/config.cpp",
+      "sha256": "823e97174425ab76ef079cd8c6490487d808954011a0d5968ed2e3c2876863a4",
+      "size": 19380
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "a35797de46b06133276ea8108349be9789760ca9c15cce5a7a053d474be17a00",
+      "size": 56136
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0",
+      "size": 11708
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/include/core/RecoveryInitialization.hpp",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "size": 1446
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/src/core/ProfileStore.cpp",
+      "sha256": "300d568a145baab2203a01906114244f6eed87443fa6241d6e14ad57e21b3c09",
+      "size": 67537
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/src/core/Persistence.cpp",
+      "sha256": "94b442b830f4a7a44c6bb0b56d50d3898d472b7ef94357b0a261f1c9e71871d0",
+      "size": 22287
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "sha256": "80043c0248a30575d7c983647bfbb4099ad9ca8bccfcaf9273e7c73d6106e397",
+      "size": 2673
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/include/tusb_config_pico.h",
+      "sha256": "ca059e0e8ff7f779e469b40ad67bea695e9d69abf092af7e119993963ba2238c",
+      "size": 3450
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/main.cpp",
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+      "size": 5490
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp",
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597",
+      "size": 17806
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp",
+      "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8",
+      "size": 7486
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_TinyUSB_API.cpp",
+      "sha256": "d3ccfba32fe1eac05d86a471720368b0a5ebbda85ac8a36c55b9d34486a326d0",
+      "size": 2878
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+      "size": 4652
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+      "size": 46830
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+      "size": 18095
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c",
+      "sha256": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6",
+      "size": 14516
+    }
+  ],
+  "scope": "No implementation, controller, USB inventory, build or Git mutation. Exact prior compiledb confirms bundled Adafruit core rather than XInput library owns API/Device/CDC/Port translation units."
+}
