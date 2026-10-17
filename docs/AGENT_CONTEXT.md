@@ -1,5 +1,20 @@
 # Agent Context
 
+## Owner-scoped raw SETUP / USBCTRL IRQ boundary — 2026-10-17
+
+Exact3761 normal control is owner-reported PASS; its single RT2 yielded reliable
+main-button evidence `RAW_SETUP_OBSERVED_NO_DCD_SETUP_EVENT`, one reset completed
+and next queue-read reached, no queue loss, pull-up register ON and no host USB/serial.
+`MB1_PAIR_ROLE_DECODING = PHYSICALLY_UNRELIABLE`; no task-return inference from MB1.
+The latest direct owner request authorizes one narrow observer descendant with
+whole large-main-button colors, decomposed SETUP/IRQ evidence, exact tests/build/
+custody and fresh review. No controller action, USB repair or canonical merge.
+See [physical adjudication](runtime_config/profile_store_rt2_setup_irq_physical_adjudication.json)
+and [narrow contract](runtime_config/profile_store_rt2_setup_irq_contract.md).
+Root cause UNPROVEN; E5 physically inapplicable; historical boots remain separate.
+Older scoped summaries below are historical within their original scope.
+
+
 ## Owner-scoped first USB task / repeated-reset investigation — 2026-10-17
 
 Exact88ab normal control is physical PASS; chip2/ROM3 establishes B2 and

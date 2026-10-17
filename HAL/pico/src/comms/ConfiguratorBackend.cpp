@@ -809,6 +809,38 @@ bool ConfiguratorBackend::HandleProfileStore() {
         static RecoveryTaskDiagnostics::Snapshot task;
         const bool captured=RecoveryStartupDiagnostics::CapturedTaskInto(task);
         if(!captured)RecoveryUsbDiagnostics::TaskReadInto(task);
+        // Same frozen/live decision as task/dashboard; core1 publishes both copies
+        // before the single dashboard release. Static cache avoids stack growth.
+        static RecoverySetupIrqDiagnostics::Snapshot setup_irq;
+        if(captured)RecoveryStartupDiagnostics::CapturedSetupInto(setup_irq);
+        else RecoveryUsbDiagnostics::SetupReadInto(setup_irq);
+        response.recovery_setup_irq_version=1;
+        response.recovery_setup_irq_valid=setup_irq.valid;
+        response.recovery_setup_irq_captured=captured?1u:0u;
+        response.recovery_setup_irq_independent_seen=setup_irq.independent_seen;
+        response.recovery_setup_irq_independent_tuples=setup_irq.independent_tuples;
+        response.recovery_setup_irq_foreground_seen=setup_irq.foreground_seen;
+        response.recovery_setup_irq_foreground_tuples=setup_irq.foreground_tuples;
+        response.recovery_setup_irq_foreground_gates=setup_irq.foreground_gates;
+        response.recovery_setup_irq_foreground_conditions=setup_irq.foreground_conditions;
+        response.recovery_setup_irq_irq_entries=setup_irq.irq_entries;
+        response.recovery_setup_irq_irq_returns=setup_irq.irq_returns;
+        response.recovery_setup_irq_irq_seen=setup_irq.irq_seen;
+        response.recovery_setup_irq_irq_tuples=setup_irq.irq_tuples;
+        response.recovery_setup_irq_irq_gates=setup_irq.irq_gates;
+        response.recovery_setup_irq_irq_conditions=setup_irq.irq_conditions;
+        response.recovery_setup_irq_irq_setup_entries=setup_irq.irq_setup_entries;
+        response.recovery_setup_irq_irq_first_pre=setup_irq.irq_first_pre;
+        response.recovery_setup_irq_irq_latest_pre=setup_irq.irq_latest_pre;
+        response.recovery_setup_irq_irq_latest_post=setup_irq.irq_latest_post;
+        response.recovery_setup_irq_setup_emit_entered=setup_irq.setup_emit_entered;
+        response.recovery_setup_irq_setup_emit_returned=setup_irq.setup_emit_returned;
+        response.recovery_setup_irq_setup_hook=setup_irq.setup_hook;
+        response.recovery_setup_irq_setup_accepted=setup_irq.setup_accepted;
+        response.recovery_setup_irq_setup_dropped=setup_irq.setup_dropped;
+        response.recovery_setup_irq_registration_captured=setup_irq.registration_captured;
+        response.recovery_setup_irq_registration_duplicate=setup_irq.registration_duplicate;
+        response.recovery_setup_irq_external_flags=setup_irq.external_flags;
         response.recovery_task_version=5;
         response.recovery_task_valid=task.valid;
         response.recovery_task_entered=task.entered;

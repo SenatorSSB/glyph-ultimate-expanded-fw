@@ -753,6 +753,34 @@ message ProfileStoreResponse {
   uint32 recovery_dashboard_elapsed_us = 126;
   uint32 recovery_dashboard_active_age_us = 127;
   uint32 recovery_task_configured_current = 128;
+  // Narrow SETUP/IRQ observer response telemetry only; no storage/request delta.
+  uint32 recovery_setup_irq_version = 129;
+  uint32 recovery_setup_irq_valid = 130;
+  uint32 recovery_setup_irq_captured = 131;
+  uint32 recovery_setup_irq_independent_seen = 132;
+  uint32 recovery_setup_irq_independent_tuples = 133;
+  uint32 recovery_setup_irq_foreground_seen = 134;
+  uint32 recovery_setup_irq_foreground_tuples = 135;
+  uint32 recovery_setup_irq_foreground_gates = 136;
+  uint32 recovery_setup_irq_foreground_conditions = 137;
+  uint32 recovery_setup_irq_irq_entries = 138;
+  uint32 recovery_setup_irq_irq_returns = 139;
+  uint32 recovery_setup_irq_irq_seen = 140;
+  uint32 recovery_setup_irq_irq_tuples = 141;
+  uint32 recovery_setup_irq_irq_gates = 142;
+  uint32 recovery_setup_irq_irq_conditions = 143;
+  uint32 recovery_setup_irq_irq_setup_entries = 144;
+  uint32 recovery_setup_irq_irq_first_pre = 145;
+  uint32 recovery_setup_irq_irq_latest_pre = 146;
+  uint32 recovery_setup_irq_irq_latest_post = 147;
+  uint32 recovery_setup_irq_setup_emit_entered = 148;
+  uint32 recovery_setup_irq_setup_emit_returned = 149;
+  uint32 recovery_setup_irq_setup_hook = 150;
+  uint32 recovery_setup_irq_setup_accepted = 151;
+  uint32 recovery_setup_irq_setup_dropped = 152;
+  uint32 recovery_setup_irq_registration_captured = 153;
+  uint32 recovery_setup_irq_registration_duplicate = 154;
+  uint32 recovery_setup_irq_external_flags = 155;
 
 
 }

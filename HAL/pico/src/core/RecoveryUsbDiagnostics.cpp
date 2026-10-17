@@ -17,6 +17,7 @@ uint32_t GlyphHostPrimask();
 #endif
 namespace {
 RecoveryTaskDiagnostics::State task_observer;
+RecoverySetupIrqDiagnostics::State setup_observer;
 // Milestones are sticky within the latest DCD BUS_RESET epoch.
 volatile bool reset_seen=false,setup_seen=false,descriptor_seen=false;
 volatile bool address_requested=false,address_applied=false,configured=false;
@@ -35,6 +36,7 @@ struct Observations {
 Observations event_observed,foreground_observed;
 // Port capture precedes core1 launch; task calls serialize under __usb_mutex.
 int software_irq=-1;bool in_port=false,port_complete=false;
+irq_handler_t registered_dcd_handler=nullptr;
 uint8_t loops=0;bool pullup_seen=false;
 volatile bool inspection_seen=false;
 uint32_t foreground_epoch=0;
@@ -56,6 +58,39 @@ uint32_t irq_observation(){
         ((primask()&1u)?16u:32u)|
         ((resets_hw->reset_done&RESETS_RESET_DONE_USBCTRL_BITS)?64u:128u);
 }
+uint32_t setup_raw(){
+    using namespace RecoverySetupIrqDiagnostics;
+    // Read order is fixed and bounded. These registers are not snapshotted
+    // atomically; sticky tuples describe one sequential sampling pass.
+    const uint32_t sie=usb_hw->sie_status,intr=usb_hw->intr;
+    const uint32_t inte=usb_hw->inte,ints=usb_hw->ints,intf=usb_hw->intf;
+    return (sie&USB_SIE_STATUS_SETUP_REC_BITS?Sie:0u)|
+        (intr&USB_INTR_SETUP_REQ_BITS?Intr:0u)|(inte&USB_INTE_SETUP_REQ_BITS?Inte:0u)|
+        (ints&USB_INTS_SETUP_REQ_BITS?Ints:0u)|(intf&USB_INTF_SETUP_REQ_BITS?Force:0u);
+}
+uint32_t setup_gates(){
+    using namespace RecoverySetupIrqDiagnostics;
+    const uint32_t mask=1u<<USBCTRL_IRQ,exception=__get_current_exception();
+    return (nvic_hw->iser&mask?NvicOn:NvicOff)|(nvic_hw->ispr&mask?Pending:NotPending)|
+        (primask()&1u?Masked:Unmasked)|
+        (exception==16+USBCTRL_IRQ?UsbException:exception?OtherException:Thread)|
+        (resets_hw->reset_done&RESETS_RESET_DONE_USBCTRL_BITS?ResetDone:ResetNotDone)|
+        (port_complete?PortReturned:0u)|(tud_inited()?TinyUsbInitialized:0u);
+}
+void setup_foreground(){
+    if(!setup_observer.Enabled()||get_core_num()!=0||__get_current_exception()!=0)return;
+    const uint32_t raw=setup_raw();const uint32_t gates=setup_gates();
+    setup_observer.Foreground(raw,gates);
+}
+void __tusb_irq_path_func(observed_dcd_irq)(){
+    // This pre-read is not the DCD handler's subsequent local status read.
+    if(!setup_observer.Enabled()){registered_dcd_handler();return;}
+    const uint32_t pre_raw=setup_raw();const uint32_t pre_gates=setup_gates();
+    setup_observer.IrqEnter(pre_raw,pre_gates);
+    registered_dcd_handler(); // the sole captured callback, exactly once
+    const uint32_t post_raw=setup_raw();const uint32_t post_gates=setup_gates();
+    setup_observer.IrqReturn(post_raw,post_gates);
+}
 void clear(Observations &o){
     o.sie=0;o.intr=0;o.ints=0;o.inte=0;o.irq=0;o.ep_in=0;o.ep_out=0;o.raw=0;
 }
@@ -69,22 +104,25 @@ void observe(Observations &o){
 }
 }
 namespace RecoveryUsbDiagnostics {
-void BeginRecovery(){task_observer.Enable();}
+void BeginRecovery(){task_observer.Enable();setup_observer.Enable();}
+void SetupReadInto(RecoverySetupIrqDiagnostics::Snapshot &out){setup_observer.ReadInto(out);}
 RecoveryTaskDiagnostics::Snapshot TaskRead(){return task_observer.Read();}
 void TaskReadInto(RecoveryTaskDiagnostics::Snapshot &out){task_observer.ReadInto(out);}
 void ObserveIndependent(){
     // SIE/INTR/INTS are non-destructive reads; no TinyUSB, mutex or NVIC read
     // on core1 (NVIC would describe core1, not the core0 USB IRQ).
-    const uint32_t raw=(usb_hw->sie_status&USB_SIE_STATUS_SETUP_REC_BITS)|
-        (usb_hw->intr&USB_INTR_SETUP_REQ_BITS)|(usb_hw->ints&USB_INTS_SETUP_REQ_BITS);
-    task_observer.ObserveRaw(raw!=0,(usb_hw->sie_ctrl&USB_SIE_CTRL_PULLUP_EN_BITS)!=0);
+    const uint32_t raw=setup_raw();
+    setup_observer.Independent(raw);
+    task_observer.ObserveRaw((raw&(RecoverySetupIrqDiagnostics::Sie|RecoverySetupIrqDiagnostics::Intr|RecoverySetupIrqDiagnostics::Ints))!=0,
+        (usb_hw->sie_ctrl&USB_SIE_CTRL_PULLUP_EN_BITS)!=0);
 }
 void Stage(BootStage stage){boot_stage=stage;}
-void LoopEntered(){task_observer.Arm();if(loops<2)++loops;}
+void LoopEntered(){setup_foreground();task_observer.Arm();if(loops<2)++loops;}
 void InspectionDecoded(){task_observer.Inspection();inspection_epoch=reset_count;inspection_seen=true;}
 Snapshot Read(){
     Snapshot s;
     // This API is called only by core0 application diagnostics, never by core1.
+    setup_foreground();
     const uint32_t epoch=reset_count;
     if(foreground_epoch!=epoch){clear(foreground_observed);foreground_epoch=epoch;furthest=0;}
     observe(foreground_observed);
@@ -171,7 +209,7 @@ extern "C" void tud_event_hook_cb(uint8_t port,uint32_t event,bool){
         ++reset_count; // boot-lifetime epoch; wraps only after 2^32 resets
     }
     observe(event_observed);
-    if(event==DCD_EVENT_SETUP_RECEIVED){task_observer.SetupEvent();setup_seen=true;if(setup_count!=UINT32_MAX)++setup_count;}
+    if(event==DCD_EVENT_SETUP_RECEIVED){setup_observer.Hook();task_observer.SetupEvent();setup_seen=true;if(setup_count!=UINT32_MAX)++setup_count;}
 }
 extern "C" bool __real_tud_control_xfer(uint8_t,const tusb_control_request_t*,void*,uint16_t);
 extern "C" bool __wrap_tud_control_xfer(uint8_t port,const tusb_control_request_t*r,void*b,uint16_t n){
@@ -211,11 +249,34 @@ extern "C" void __wrap_tud_task_ext(uint32_t timeout,bool in_isr){
     const bool core0=get_core_num()==0;
     const bool irq=__get_current_exception()!=0;
     const bool foreground=core0&&!irq&&task_observer.ForegroundEnabled();
-    if(foreground)task_observer.Enter();
+    if(foreground){setup_foreground();task_observer.Enter();}
     if(core0){++task_entered;if(irq)irq_task_entered=true;}
     __real_tud_task_ext(timeout,in_isr);
     if(core0){++task_returned;if(irq)irq_task_returned=true;}
-    if(foreground)task_observer.Return();
+    if(foreground){task_observer.Return();setup_foreground();}
+}
+extern "C" void __real_irq_add_shared_handler(uint,irq_handler_t,uint8_t);
+extern "C" void __wrap_irq_add_shared_handler(uint irq,irq_handler_t handler,uint8_t priority){
+    // Pinned port also registers a lowest-order USB task trigger. Capture only
+    // the DCD highest-order registration, without adding a shared handler.
+    if(in_port&&get_core_num()==0&&irq==USBCTRL_IRQ&&priority==0xff){
+        if(!registered_dcd_handler){
+            registered_dcd_handler=handler;setup_observer.Registered();
+            __real_irq_add_shared_handler(irq,observed_dcd_irq,priority);return;
+        }
+        setup_observer.DuplicateRegistration(); // forward duplicate untouched
+    }
+    __real_irq_add_shared_handler(irq,handler,priority);
+}
+extern "C" void __real_dcd_event_handler(dcd_event_t const*,bool);
+extern "C" void __wrap_dcd_event_handler(dcd_event_t const *event,bool in_isr){
+    const bool external=event&&event->rhport==0&&event->event_id==DCD_EVENT_SETUP_RECEIVED;
+    const bool setup=external&&get_core_num()==0&&__get_current_exception()==16+USBCTRL_IRQ;
+    if(external)setup_observer.ExternalEnter(!setup);
+    if(setup)setup_observer.EmitEnter();
+    __real_dcd_event_handler(event,in_isr);
+    if(setup)setup_observer.EmitReturn();
+    if(external)setup_observer.ExternalReturn();
 }
 extern "C" int __real_user_irq_claim_unused(bool);
 extern "C" int __wrap_user_irq_claim_unused(bool required){
@@ -252,6 +313,7 @@ extern "C" bool __wrap_tu_fifo_write(tu_fifo_t *ff,const void *p){
     const bool result=__real_tu_fifo_write(ff,p);
     if(target_queue(ff)){
         const uint32_t exception=__get_current_exception();
+        if(exception==16+USBCTRL_IRQ&&event_kind(p)==3)setup_observer.Queue(result);
         task_observer.QueueSent(exception==0?0:exception==16+USBCTRL_IRQ?1:2,
             event_kind(p),result,tu_fifo_count(ff));
     }

@@ -23,6 +23,9 @@ bool capture_ready=false,panel_shown=false;
 std::atomic<uint32_t> dashboard{0},capture_active_age_us{0},capture_elapsed_us{0};
 unsigned captured_pixels[8]={};
 RecoveryTaskDiagnostics::Snapshot captured_task;
+RecoverySetupIrqDiagnostics::Snapshot captured_setup;
+RecoveryTaskDiagnostics::Snapshot task_sample;
+RecoverySetupIrqDiagnostics::Snapshot setup_sample;
 
 void InitializeIndicator() {
     if(indicator_attempted)return;
@@ -127,17 +130,16 @@ void PublishIndependent(){
         // Core1 performs only non-destructive USB MMIO sampling and bounded
         // atomic bank reads. No TinyUSB/Config/ProfileStore/shared USB locks.
         RecoveryUsbDiagnostics::ObserveIndependent();
-        const auto s=RecoveryUsbDiagnostics::TaskRead();
-        if(!s.valid)return; // one attempt per ordinary loop; never spin
+        RecoveryUsbDiagnostics::TaskReadInto(task_sample);
+        RecoveryUsbDiagnostics::SetupReadInto(setup_sample);
+        const auto &s=task_sample;
+        if(!s.valid||!setup_sample.valid)return; // one attempt per ordinary loop; never spin
         const uint64_t now=time_us_64();
         if(s.active!=last_active){last_active=s.active;active_since_us=now;}
         if(now-handoff_us<10000000u)return;
         const uint64_t age=s.active?now-active_since_us:0;
-        for(unsigned i=0;i<8;++i)captured_pixels[i]=s.pixels[i];
-        // A current later invocation may merely be a short healthy call.
-        // Yellow records that distinction; white requires the same ID observed
-        // active for at least1s. This is reporting only, never a USB task budget.
-        if(s.active>1&&age<1000000u)captured_pixels[0]=RecoveryTaskDiagnostics::Yellow;
+        RecoverySetupIrqDiagnostics::Panel(setup_sample,s,captured_pixels);
+        captured_setup=setup_sample;
         uint32_t packed=0;for(unsigned i=0;i<8;++i)packed|=uint32_t(captured_pixels[i])<<(4*i);
         captured_task=s;
         for(unsigned i=0;i<8;++i)captured_task.pixels[i]=captured_pixels[i];
@@ -152,13 +154,17 @@ void PublishIndependent(){
     }
     if(ShowPanel())panel_shown=true; // unchanged settled panel is never refreshed
 }
+bool CapturedSetupInto(RecoverySetupIrqDiagnostics::Snapshot &out){
+    if(!published_pair.load(std::memory_order_acquire)){out={};return false;}
+    out=captured_setup;return true;
+}
 RecoveryTaskDiagnostics::Snapshot CapturedTask(){
     // Immutable after the single release publication; no shared mutable copy.
-    if(!dashboard.load(std::memory_order_acquire))return {};
+    if(!published_pair.load(std::memory_order_acquire))return {};
     return captured_task;
 }
 bool CapturedTaskInto(RecoveryTaskDiagnostics::Snapshot &out){
-    if(!dashboard.load(std::memory_order_acquire)){out={};return false;}
+    if(!published_pair.load(std::memory_order_acquire)){out={};return false;}
     out=captured_task;return true;
 }
 uint32_t Dashboard(){return dashboard.load(std::memory_order_acquire);}

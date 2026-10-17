@@ -1,0 +1,89 @@
+{
+  "schema": "glyph_rt2_setup_irq_physical_adjudication_v1",
+  "authority": "Direct owner supplied physical result in attachment88c6e055; observations are user-reported, not source-agent measurements.",
+  "candidate": "3761b702ea09f50b9c98a55bea91caa337a3f62e",
+  "tree": "43f26381fd2b7b1f701c18aadc839d8f5143eedb",
+  "parent": "b1a50079d1e2b8bca5dc2848c84b4a3cabbb181a",
+  "canonical": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "uf2_sha256": "f7141356fcf1413a8c3d174028c07bc44887265dbe309cfbe56857592359cd74",
+  "uf2_size_bytes": 1010176,
+  "normal_control": {
+    "status": "PASS_OWNER_REPORTED",
+    "version": "3761b702",
+    "endpoint": "/dev/cu.usbmodem101",
+    "incarnation": 1,
+    "store_generation": 166,
+    "useful_authority": "UNCHANGED_OWNER_REPORTED",
+    "Config": "UNCHANGED_OWNER_REPORTED",
+    "core0_min_free": 1856,
+    "core1_min_free": 3716,
+    "heap": 7868,
+    "heap_capacity": 73404
+  },
+  "rt2": {
+    "attempts": 1,
+    "MB1": [
+      "GREEN",
+      "UNKNOWN"
+    ],
+    "MB1_PAIR_ROLE_DECODING": "PHYSICALLY_UNRELIABLE",
+    "MB1_causal_use": "FORBIDDEN; no task-entry/return/reset attribution may be inferred from this pair",
+    "LF4": [
+      "BLUE",
+      "BLUE"
+    ],
+    "LF3": [
+      "BLUE",
+      "OFF"
+    ],
+    "LF5": [
+      "OFF",
+      "ORANGE"
+    ],
+    "display": "BLACK",
+    "after_10s": {
+      "serial_endpoint": "ABSENT",
+      "matching_controller_usb_ioreg_identity": "ABSENT"
+    },
+    "classification": "RAW_SETUP_OBSERVED_NO_DCD_SETUP_EVENT",
+    "supported_facts": [
+      "Exactly one DCD reset emission after comprehensive enable through frozen capture",
+      "Consumed reset path completed CDC and MIDI reset and usbd_control_reset; next queue-read attempt reached",
+      "At least one aggregate raw RP2040 SETUP indicator SIE/INTR/INTS was sampled positive; exact layer not distinguished",
+      "No DCD SETUP event was established by the existing observer",
+      "No queue-full or event-loss boundary was observed",
+      "No descriptor/address/configuration progression established",
+      "PULLUP_EN register bit sampled ON; not electrical proof of host recognition"
+    ],
+    "not_supported": [
+      "Every foreground task invocation returned",
+      "Reset/event storm as explanation of this boot",
+      "Single reset-handler/class-reset non-return as explanation of this boot",
+      "TinyUSB SETUP queue drop as explanation of this boot",
+      "Host packet transmission or receipt",
+      "Root cause"
+    ],
+    "post_attempt_actions": "NONE_OWNER_REPORTED; no retry/reset/command/mutation/cleanup/GC/selection"
+  },
+  "silicon": {
+    "chip_version": 2,
+    "rom_version": 3,
+    "revision": "B2",
+    "e5_flags": 0,
+    "classification": "E5_PHYSICALLY_INAPPLICABLE_ON_TEST_CONTROLLER",
+    "authority": "Previously established exact88ab normal physical control, explicitly retained by owner"
+  },
+  "demoted_hypotheses": {
+    "late_cdc_registration": "REJECTED_PINNED_SOURCE",
+    "vid_pid_timing_sufficient": "REJECTED_5913_PHYSICAL_AB",
+    "E5": "PHYSICALLY_INAPPLICABLE",
+    "3761_reset_storm": "NOT_SUPPORTED",
+    "3761_reset_handler_hang": "NOT_SUPPORTED",
+    "3761_setup_queue_drop": "NOT_SUPPORTED"
+  },
+  "current_device": "STOPPED_IN_FAILED3761_RT2; source agents perform no device action",
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "selection": "NOT_TESTED",
+  "historical_evidence": "466/5913/b075/88ab remain separate boots with their original caveats; 3b5c hardware NOT_TESTED. Prior V/W PASS unchanged."
+}
