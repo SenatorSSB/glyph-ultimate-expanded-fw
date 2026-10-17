@@ -16,7 +16,7 @@ import shlex
 import subprocess
 ROOT=Path(__file__).resolve().parents[1]
 PATTERNS=('ProfileStore.cpp','CheckedStorage.cpp','Persistence.cpp','ConfiguratorBackend.cpp',
- 'ResourceDiagnostics.cpp','RecoveryStartupDiagnostics.cpp','mode_selection.cpp','config/glyph/common/src/config.cpp',
+ 'ResourceDiagnostics.cpp','RecoveryStartupDiagnostics.cpp','RecoveryUsbDiagnostics.cpp','mode_selection.cpp','config/glyph/common/src/config.cpp',
  '/display/','/comms/','/main.cpp','/FS.cpp','LittleFS/src/','RP2040Support.cpp',
  'malloc-lock.cpp','/runtime.c','pb_encode.c','pb_decode.c','pb_common.c',
  'config_validation.cpp','/Print.cpp','/Stream.cpp','/usbd.c','/cdc_device.c',

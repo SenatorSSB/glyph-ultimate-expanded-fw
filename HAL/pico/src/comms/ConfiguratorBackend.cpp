@@ -24,6 +24,7 @@
 #include "core/ProfileStoreRequestIdentity.hpp"
 #include "core/ResourceDiagnostics.hpp"
 #include "core/RecoveryStartupDiagnostics.hpp"
+#include "core/RecoveryUsbDiagnostics.hpp"
 #include "core/ProfileStoreFaultControls.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
@@ -422,6 +423,10 @@ bool ConfiguratorBackend::HandleProfileStore() {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
     _rx.phase = 6;
+    if (_recovery_service && (request.operation == PROFILE_STORE_STATUS ||
+        request.operation == PROFILE_STORE_LIST || request.operation == PROFILE_STORE_READ ||
+        request.operation == PROFILE_STORE_INSPECT_HEALTH || request.operation == PROFILE_STORE_LIVENESS))
+        RecoveryStartupDiagnostics::ValidInspectionCommandReceived();
     const bool mutationTrace = request.operation >= PROFILE_STORE_CREATE &&
         request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
     if (request.operation != PROFILE_STORE_LIVENESS) _last_profile_rx = _rx;
@@ -770,7 +775,16 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.root_reconcile_fault_capable = true;
         response.recovery_startup_current = RecoveryStartupDiagnostics::Current();
         response.recovery_startup_previous = RecoveryStartupDiagnostics::Previous();
-        response.recovery_startup_diagnostics_version = 1;
+        response.recovery_startup_diagnostics_version = 3;
+        const auto usb=RecoveryUsbDiagnostics::Read();
+        response.recovery_usb_milestones=usb.milestones;
+        response.recovery_usb_irq_state=usb.irq_state;
+        response.recovery_usb_sie_ctrl=usb.sie_ctrl;
+        response.recovery_usb_inte=usb.inte;response.recovery_usb_ints=usb.ints;
+        response.recovery_usb_intr=usb.intr;response.recovery_usb_dev_addr=usb.dev_addr;
+        response.recovery_usb_main_ctrl=usb.main_ctrl;
+        response.recovery_usb_task_entered=usb.task_entered;
+        response.recovery_usb_task_returned=usb.task_returned;
     }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.

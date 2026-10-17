@@ -187,7 +187,7 @@ int main(int argc,char**argv){try{
  require(tasks>0&&tud_mounted(),"real USB device task progressed");
 #if EXPECT_DIAGNOSTICS
  if(timing=="pio1-fallback")require(used_pio==pio1,"second PIO fallback");
- const auto marker=RecoveryStartupDiagnostics::Current();require(((marker>>8)&255u)==13&&(marker&127u)==127u,"all USB/route observations and request byte seen");require(watchdog_registers.scratch[3]==marker,"stable flags remain in scratch");require(bool(marker&128u)==(pio_available&&timing!="pio-no-sm"),"indicator availability is honest");require(pio_available&&timing!="pio-no-sm"&&timing!="pio-fifo-busy"?(led_updates>0&&max_led_interval==200):led_updates==0,"bounded indicator or graceful unavailable");
+ const auto marker=RecoveryStartupDiagnostics::Current();require(((marker>>8)&15u)==13&&(marker&127u)==127u,"all USB/route observations and request byte seen");require(watchdog_registers.scratch[3]==marker,"stable flags remain in scratch");require(bool(marker&128u)==(pio_available&&timing!="pio-no-sm"),"indicator availability is honest");require(pio_available&&timing!="pio-no-sm"&&timing!="pio-fifo-busy"?(led_updates>0&&max_led_interval==200):led_updates==0,"bounded indicator or graceful unavailable");
 #else
  require(RecoveryStartupDiagnostics::Current()==0,"frozen source has no diagnostic marker");
 #endif

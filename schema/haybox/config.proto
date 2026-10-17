@@ -681,6 +681,17 @@ message ProfileStoreResponse {
   uint32 recovery_startup_current = 58;
   uint32 recovery_startup_previous = 59;
   uint32 recovery_startup_diagnostics_version = 60;
+  // Candidate-only read-only USBCTRL/IRQ observations. No persistence.
+  uint32 recovery_usb_milestones = 61;
+  uint32 recovery_usb_irq_state = 62;
+  uint32 recovery_usb_sie_ctrl = 63;
+  uint32 recovery_usb_inte = 64;
+  uint32 recovery_usb_ints = 65;
+  uint32 recovery_usb_intr = 66;
+  uint32 recovery_usb_dev_addr = 67;
+  uint32 recovery_usb_main_ctrl = 68;
+  uint32 recovery_usb_task_entered = 69;
+  uint32 recovery_usb_task_returned = 70;
 }
 /**
  * Button to HID keyboard keycode mapping.
