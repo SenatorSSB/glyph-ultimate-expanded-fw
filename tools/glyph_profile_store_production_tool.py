@@ -64,7 +64,14 @@ def build_message(a, pb, json_format):
 def verify_production_status(a, pb, s):
     if s.status != pb.PROFILE_STORE_OK: raise transport.ToolError("STATUS was not OK; no mutation sent")
     if s.protocol_version != 2: raise transport.ToolError("STATUS protocol is not production protocol 2; no mutation sent")
-    if s.strict_hardening_candidate or s.storage_fault_capable or s.fault_control_version:
+    retired = (s.core0_stack_min_free_bytes, s.core1_stack_min_free_bytes, s.heap_arena_peak_bytes,
+               s.heap_arena_current_bytes, s.heap_arena_capacity_bytes, s.resource_diagnostics_enabled,
+               s.strict_hardening_candidate, s.storage_fault_armed, s.storage_fault_triggered,
+               s.storage_fault_operation, s.storage_fault_capable, s.storage_fault_ticket,
+               s.storage_fault_pending, s.fault_control_version, s.liveness_stage, s.liveness_value,
+               s.rx_phase, s.rx_raw_bytes, s.rx_decoded_bytes, s.rx_elapsed_ms, s.rx_task_passes,
+               s.rx_last_progress_ms, s.rx_fetched_bytes, s.rx_flags)
+    if any(retired):
         raise transport.ToolError("target advertises instrumented candidate controls; production admission refused")
     if s.mutation_protocol_version != 2: raise transport.ToolError("target does not advertise production mutation protocol 2")
     if a.action in MUTATIONS:

@@ -35,6 +35,11 @@ def main():
         try: tool.verify_production_status(a,pb,bad)
         except transport.ToolError: pass
         else: raise AssertionError('bad admission accepted '+field)
+      for field in ('resource_diagnostics_enabled','storage_fault_armed','storage_fault_triggered','storage_fault_operation','storage_fault_capable','storage_fault_ticket','storage_fault_pending','fault_control_version','liveness_stage','liveness_value','rx_phase','rx_raw_bytes','rx_decoded_bytes','rx_elapsed_ms','rx_task_passes','rx_last_progress_ms','rx_fetched_bytes','rx_flags'):
+        bad=pb.ProfileStoreResponse(); bad.CopyFrom(healthy); setattr(bad,field,True if field.endswith(('enabled','armed','triggered','capable','pending')) else 1)
+        try: tool.verify_production_status(a,pb,bad)
+        except transport.ToolError: pass
+        else: raise AssertionError('retired telemetry accepted '+field)
       for token in ('0','0xf000000000001d00','0xffffffffffffffff'):
         bad=base.copy(); bad[bad.index('--token')+1]=token; yes(rejected(bad) if token=='0' else (not _preflight(tool,pb,jf,bad)),'token gate '+token)
       yes(rejected([*base,'--output',str(d/'j.jsonl')]),'journal/output collision')
