@@ -1,6 +1,6 @@
 {
   "schema": "glyph_rt2_comprehensive_coverage_v1",
-  "parent": "c95695ef2062ec38de94a28ce66b5aba2ad8db6b",
+  "parent": "b1a50079d1e2b8bca5dc2848c84b4a3cabbb181a",
   "result": "READY_WITH_RESIDUALS",
   "branches": [
     {
@@ -131,7 +131,8 @@
     "queue_empty": "empty_reads and first/current return; next-read continuation independent reset completion",
     "software_irq_trylock": "actual port remains nonblocking; IRQ task count does not enter foreground identity",
     "configuration_retirement": "RESET/UNPLUG consume or SETCFG0 retires shadow, history MAGENTA",
-    "captured_vs_live": "task telemetry frozen once with photo; existing raw USB fields explicitly live"
+    "captured_vs_live": "task telemetry frozen once with photo; existing raw USB fields explicitly live",
+    "prior_to_enable_reset": "queued-before-enable RESET or genericUNPLUG can complete with after-enableDCDtotal0; panelstage7 groupedWHITE, exactstage7/continued remains telemetry, avoiding BLUE/OFF alias"
   },
   "no_root_cause_claim": true,
   "hardware": "NOT_EXECUTED",

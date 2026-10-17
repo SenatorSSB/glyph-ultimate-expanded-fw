@@ -45,7 +45,7 @@ A successful build or normal control is not RT2 hardware acceptance.
    LF4 stage: OFF no matching consumed reset; RED consumed/pre-CDC; ORANGE CDC
    entered; YELLOW CDC returned/pre-MIDI (MSC/HID grouping); CYAN MIDI entered;
    GREEN MIDI returned; WHITE usbd_control_reset returned; BLUE next queue-read
-   attempt. Its total count is OFF0/BLUE1/MAGENTA2+. Two BLUE pixels are possible.
+   attempt (when total0, completion/continuation both WHITE). Its total count is OFF0/BLUE1/MAGENTA2+. Two BLUE pixels are possible.
 
    LF3 pipeline: OFF none; BLUE raw indication only; CYAN DCD emitted; GREEN
    consumed; WHITE control began. Queue pixel: OFF no loss/full boundary;

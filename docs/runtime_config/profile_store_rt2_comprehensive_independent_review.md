@@ -89,3 +89,28 @@ Direct target O3 backend stack probe now records HandleProfileStore392B, below t
   "include/core/RecoveryTaskDiagnostics.hpp": "58fa4a076840fdc093ab6a6670ee7473c84e45e0aef859acd5e746c7b2743a7f"
 }
 ```
+
+## Unordered LF4 palette repair review
+
+Intermediate b1a50079d1e2b8bca5dc2848c84b4a3cabbb181a had a real reporting ambiguity: LF4 unordered BLUE/OFF could indicate stage7 with zero after-enable reset emissions (queued-before-enable RESET or generic UNPLUG processing), or no matching consumed reset with one after-enable emission. It must not be used for hardware handoff with the earlier unconditional decoder. This finding does not prove any observer caused a physical USB failure.
+
+Reviewed the bounded repair: when the matching reset stage is7 and after-enable total reset count is0, only its displayed stage color becomes WHITE. Exact stage7 and reset-continuation telemetry remain unchanged. Other stage7 displays retain BLUE only when total reset count is positive. Thus the zero-total panel intentionally groups reset-complete and reset-continued; the contract, coverage and hardware packet disclose that finite summary. No queue, USB task, event, reset, atomic-bank or persistent behavior is altered. Source/doc repair review **PASS_WITH_RESIDUALS**.
+
+Reviewer independently compiled/reran an ASan/UBSan exhaustive LF4 unordered decoder over all24 total-category0/1/2+ by stage0..7 combinations constructed with the actual State API. All23 intended distinct meanings decode uniquely; the sole shared meaning is the explicitly documented stage6/7-total0 group. A separately compiled removal mutant restoring unconditional stage7 BLUE fails this decoder: DETECTED. The other three button pairs use disjoint role palettes except OFF and have no analogous role alias. Actual optical component separation remains a physical unknown, never inferred from this color proof.
+
+Final integrated comprehensive edge cases/negative controls and another exact committed build, unchanged CREATE gate, both-core resources, ELF bindings and custody remain required. Retained c956 and b1a artifacts/reviews are intermediate only.
+
+```json
+{
+  "include/core/RecoveryTaskDiagnostics.hpp": "f3aca462dd1f10fde411d74d86c9b7f787f2b8ee00a0bdc24afa27f3ab6795b0",
+  "docs/runtime_config/profile_store_rt2_comprehensive_contract.md": "ae50c09fe69d40a8f535469f8c1fa2ef1351e0145f3efba536cf2486271b09e6",
+  "docs/runtime_config/profile_store_rt2_comprehensive_coverage.json": "09ba354ccf70c4a7ac36d963e33084830c1b104231f312b33a4a270c1e28042e",
+  "docs/runtime_config/profile_store_rt2_comprehensive_hardware_packet.md": "575814a009df1af84890e11cd9170de21c779baeff64a72b297a477409960a74"
+}
+```
+
+## Final integrated source approval after both bounded repairs
+
+Independently verified final comprehensive harness receipt SHA-256 `2b49fb305fb89bd4e67cc9786c02d68ba931080a92a180f7eb17a5b1389cfc52`: **58 scenarios,9 detected removal mutants,24 unordered LF4 decoder combinations/23 meanings, publication-boundary checks and frozen-source hash verification PASS**. Rehashed all29 recorded source bindings against current files with zero mismatches. New actual queued-before-enable RESET and generic UNPLUG cases establish the repaired zero-total continuation case. Negative controls separately detect the unordered-LF4 alias and frozen-capture response correspondence regressions.
+
+Final precommit integrated source/docs approval: **PASS_WITH_RESIDUALS**, with no open source/reporting blocker. This supersedes earlier pending source/harness notes. Source base remains3b5c; actual final parent is the retained b1a intermediate. Preserved c956 failed-frame and b1a ambiguous-panel candidates are not hardware handoffs. Queue-lock-entry, physical optical resolution, panel aggregation, raw SETUP sampling, finite active duration and host/PHY residuals remain explicit. Firmware remains an observer. Final candidate SHA/tree, canonical build, unchanged native CREATE frame gate, both-core resources/stack inventories, all14 ELF/table/queue bindings and exact immutable custody require the separate final artifact receipt. No device action, physical acceptance, canonical merge or root-cause conclusion is authorized by this review.

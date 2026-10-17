@@ -126,7 +126,7 @@ def main():
   cpp=[temp/'startup.cpp',vendor,USB/'arduino/Adafruit_USBD_CDC.cpp',LEGACY/'checked_storage_unavailable.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp',ROOT/'src/core/config_rgb_target_validation.cpp',ROOT/'config/glyph/common/src/glyph_config_validation.cpp',libs/'nanopb-arduino/src/pb_arduino.cpp',backend_copy,ROOT/'HAL/pico/src/core/RecoveryStartupDiagnostics.cpp',ROOT/'HAL/pico/src/core/RecoveryUsbDiagnostics.cpp']
   exe=temp/'dcd';run(['c++','-std=c++17',*san,*defs,'-DEXPECT_DIAGNOSTICS=1','-Dtud_task_ext=__wrap_tud_task_ext',*inc,*cpp,*objects,'-o',exe])
   results=[]
-  cases=['capture-during-response','descriptor-dropped-reset','configured-reset','deconfigured','before-entry','pullup-off','later-recent','no-events','queue-empty','task-active-zero','later-active','task-multiple','pre-first-reset','one-reset','two-resets','continuous-reset','post-first-reset','queue-partial','queue-full','queue-failed','drop-reset','drop-setup','raw-only','dcd-setup','setup-consumed','control-began','descriptor','address-request','address-applied','configured','inspection','hardware-irq-locked','soft-irq-locked','core1-active','core1-irqs','stall-continued','stall-empty-return']
+  cases=['pre-enable-reset','generic-unplug','capture-during-response','descriptor-dropped-reset','configured-reset','deconfigured','before-entry','pullup-off','later-recent','no-events','queue-empty','task-active-zero','later-active','task-multiple','pre-first-reset','one-reset','two-resets','continuous-reset','post-first-reset','queue-partial','queue-full','queue-failed','drop-reset','drop-setup','raw-only','dcd-setup','setup-consumed','control-began','descriptor','address-request','address-applied','configured','inspection','hardware-irq-locked','soft-irq-locked','core1-active','core1-irqs','stall-continued','stall-empty-return']
   cases += ['stall-'+boundary for boundary in ['configuration-enter','configuration-return','control-enter','control-return']]
   cases += ['stall-class-'+str(i)+'-'+side for i in range(5) for side in ['enter','body','return']]
   for case in cases:
@@ -141,6 +141,7 @@ def main():
    ('removed-raw-setup-marker','raw-only',header,'if(raw)raw_seen.store(1);','/* removed raw marker */'),
    ('removed-dcd-setup-marker','dcd-setup',firmware,'task_observer.SetupEvent();','/* removed DCD marker */'),
    ('removed-capture-correspondence','capture-during-response',backend_copy,'response.recovery_dashboard=captured?task.dashboard:0;','response.recovery_dashboard=RecoveryStartupDiagnostics::Dashboard();'),
+   ('restored-unordered-lf4-alias','pre-enable-reset',header,'((s.reset_stage==7&&s.total_resets==0)?White:stages[s.reset_stage])','stages[s.reset_stage]'),
    ('removed-later-task-tracking','later-active',header,'s.pixels[0]=s.active?(s.active==1?Orange:White):s.first_returned?Green:Red;','s.pixels[0]=s.first_returned?Green:s.active?Orange:Red;')]
   for label,case,path,old,new in mutants:
    body=path.read_text();assert old in body,(label,old)
@@ -156,8 +157,9 @@ def main():
   for old,new in substitutions:assert old in state_header;state_header=state_header.replace(old,new)
   (temp/'state.hpp').write_text(state_header)
   state_exe=temp/'publication';run(['c++','-std=c++17',*san,'-I',temp,TASK_HOST/'publication.cpp','-o',state_exe]);print(run([state_exe]),end='')
+  decoder=temp/'unordered-decoder';run(['c++','-std=c++17',*san,'-I',ROOT/'include',TASK_HOST/'unordered_decoder.cpp','-o',decoder]);print(run([decoder]),end='')
   source_end={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources};assert source_end==source_start,'source changed during harness run; rerun frozen inputs'
-  report={'status':'PASS','negative_controls':negatives,'publication_boundary_cases':'PASS','cases':results,'physical_macOS':'NOT_MODELED','source_hashes':source_end,'frozen_source_hashes_verified':True,'extracted_function_hashes':{k:hashlib.sha256(v.encode()).hexdigest() for k,v in extract.items()},'model_boundary':'ASan/UBSan actual pinned USBD/CDC/HID/MSC/MIDI task/reset source and extracted XInput init/reset. Host-only event/replenishment/stall hooks; independent std::thread publisher while foreground paused. MMIO/NVIC/locks/host USB electrical completion remain models, not physical causal proof.'}
+  report={'status':'PASS','negative_controls':negatives,'publication_boundary_cases':'PASS','unordered_lf4_decoder_combinations':24,'unordered_lf4_decoder_groups':23,'cases':results,'physical_macOS':'NOT_MODELED','source_hashes':source_end,'frozen_source_hashes_verified':True,'extracted_function_hashes':{k:hashlib.sha256(v.encode()).hexdigest() for k,v in extract.items()},'model_boundary':'ASan/UBSan actual pinned USBD/CDC/HID/MSC/MIDI task/reset source and extracted XInput init/reset. Host-only event/replenishment/stall hooks; independent std::thread publisher while foreground paused. MMIO/NVIC/locks/host USB electrical completion remain models, not physical causal proof.'}
   if args.output_dir:args.output_dir.mkdir(parents=True,exist_ok=True);(args.output_dir/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  return 0
 if __name__=='__main__':

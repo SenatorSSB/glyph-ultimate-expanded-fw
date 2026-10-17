@@ -47,3 +47,6 @@ if(scenario=="pullup-off")require(s.pullup==1&&s.pixels[7]==Red,"current pullup 
 
 if(scenario=="descriptor-dropped-reset")require(s.reset_dropped==1&&s.reset_completed==0&&s.setup_consumed&&s.control_began&&(s.task_flags&1u)&&s.pixels[6]==Yellow,"actual descriptor progress remains visible after dropped RESET despite legacy epoch mismatch");
 if(scenario=="configured-reset"||scenario=="deconfigured")require((s.task_flags&8u)&&!s.configured_current&&s.pixels[6]==Magenta,"retired configuration never masquerades as current configured device");
+
+if(scenario=="pre-enable-reset")require(s.total_resets==0&&s.reset_consumed==1&&s.reset_completed==1&&s.reset_continued==1&&s.reset_stage==7&&s.pixels[2]==White&&s.pixels[3]==Off,"RESET queued before observer enable completes without falsely claiming post-enable DCD receipt or aliasing emitted-only LF4 pair");
+if(scenario=="generic-unplug")require(s.total_resets==0&&s.reset_consumed==1&&s.reset_completed==1&&s.reset_continued==1&&s.reset_stage==7&&s.pixels[2]==White&&s.pixels[3]==Off,"generic UNPLUG reset processing remains distinct from observed DCD BUS_RESET emission");

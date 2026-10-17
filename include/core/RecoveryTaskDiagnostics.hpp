@@ -106,7 +106,11 @@ public:
         s.pixels[1]=s.active_resets>=2?Magenta:s.active_resets?Blue:Off;
         const unsigned stages[]={Off,Red,Orange,Yellow,Cyan,Green,White,Blue};
         const bool current=!s.active||s.processing_invocation==s.active;
-        s.pixels[2]=current&&s.reset_stage<8?stages[s.reset_stage]:Off;
+        // Without an after-enable DCD reset, BLUE/Off would alias
+        // unconsumed-one-reset Off/BLUE in an unordered physical pair.
+        // Keep exact stage7 in telemetry; group this display with completion.
+        s.pixels[2]=current&&s.reset_stage<8?
+            ((s.reset_stage==7&&s.total_resets==0)?White:stages[s.reset_stage]):Off;
         s.pixels[3]=s.total_resets>=2?Magenta:s.total_resets?Blue:Off;
         s.pixels[4]=s.control_began?White:s.setup_consumed?Green:(s.event_flags&2u)?Cyan:s.raw_setup_seen?Blue:Off;
         s.pixels[5]=s.reset_dropped&&s.setup_dropped?Yellow:s.reset_dropped?Red:s.setup_dropped?Orange:s.queue_failed?Yellow:s.max_occupancy>=16?Magenta:Off;

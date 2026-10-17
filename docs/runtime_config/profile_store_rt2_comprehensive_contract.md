@@ -14,6 +14,13 @@ build passed but CREATE frame gate failed568>512, so it is NOT the handoff.
 The final descendant adds a caller-owned static diagnostic output cache and
 output-reference copy/sample APIs. Direct O3 repair frame392; exact final
 measured frames/build/custody still required. Gate thresholds stay unchanged.
+Intermediateb1a50079d1e2b8bca5dc2848c84b4a3cabbb181a (tree
+8703ba0082586b9a5be4e061fa39e7890dab4d15) contains that stack repair. Its
+source review then found LF4 BLUE/OFF alias for reset consumed from before
+observer enable (or generic UNPLUG) versus one after-enable unconsumed reset.
+Final descendant groups stage7/total0 as WHITE complete on the panel only;
+exact stage7/continued count remains captured telemetry. Both intermediates
+and their receipts remain retained; neither is the hardware handoff.
 Canonical/base remains6b73a7c507f35c111745c6bdd341618b490cbdcd. Final candidate/tree/
 UF2 identities live in external exact-artifact handoff; no self-SHA cycle.
 
@@ -147,7 +154,10 @@ Exact source pixel_to_button_mappings at Mk6 neopixel_definitions.hpp:11-14:
 0/1 MB1,2/3 LF4,4/5 LF3,6/7 LF5; LED_PIN11,GRB. Button-association source-backed;
 left/right orientation inside a pair is unproven. Report the two colors in each
 pair in EITHER ORDER; role palettes decode unambiguously. LF4 shared BLUE is
-unambiguous because stage never MAGENTA. A pair may contain identical colors.
+unambiguous because stage never MAGENTA and stage7 with total0 is rendered
+WHITE (complete/continued grouping). Positive after-enable total is required
+for BLUE continuation rendering. Queued-before-enable resets are not silently
+added to the explicitly after-enable emission count. A pair may contain identical colors.
 Physical ability to resolve both component colors remains hardware observation.
 Other68 LEDs are outside dashboard and not evidence. Display-layout labels in
 button_positions.hpp locate LF4(6,29), LF3(15,23), LF5(24,32); these are rendered
@@ -158,7 +168,7 @@ of a physical pair is first in its wire chain.
 | --- | --- | --- |
 | MB1 pixel0 | foreground task | RED not entered; ORANGE first active; GREEN first returned/no current active; YELLOW later active<1s observed; WHITE later active>=1s observed |
 | MB1 pixel1 | resets in captured current invocation | OFF0; BLUE1; MAGENTA2+; OFF when no current invocation |
-| LF4 pixel2 | last reset-processing stage for current invocation (or latest if none active) | OFF no matching consume; RED consumed/pre-CDC; ORANGE CDC entered; YELLOW CDC returned/pre-MIDI; CYAN MIDI entered; GREEN MIDI returned; WHITE usbd_control_reset returned; BLUE next queue-read attempt |
+| LF4 pixel2 | last reset-processing stage for current invocation (or latest if none active) | OFF no matching consume; RED consumed/pre-CDC; ORANGE CDC entered; YELLOW CDC returned/pre-MIDI; CYAN MIDI entered; GREEN MIDI returned; WHITE usbd_control_reset returned; BLUE next queue-read attempt when total>0; WHITE groups complete/continued if total0 |
 | LF4 pixel3 | total DCD reset emissions after enable | OFF0; BLUE1; MAGENTA2+ |
 | LF3 pixel4 | SETUP pipeline, ever observed since enable | OFF none; BLUE raw only; CYAN DCD emitted; GREEN consumed; WHITE control processing began |
 | LF3 pixel5 | queue loss/pressure | OFF no loss/full boundary; MAGENTA max occupancy16; RED RESET drop; ORANGE SETUP drop; YELLOW both critical drops or other event loss |

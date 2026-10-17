@@ -82,10 +82,13 @@ extern "C" void GlyphTaskBoundary(const char* point,unsigned index){
 int main(int argc,char**argv){try{
     require(argc==3,"fixture/scenario");const std::string scenario=argv[2];
     selected_timing="dcd-model";seed(argv[1],&config);const auto files=storage.files;
-    RecoveryStartupDiagnostics::CapturePrevious();TinyUSBDevice.begin(0);enter_recovery_configurator();
+    RecoveryStartupDiagnostics::CapturePrevious();TinyUSBDevice.begin(0);
+    if(scenario=="pre-enable-reset"){defer_task=true;physical_reset();}
+    enter_recovery_configurator();
     TinyUSB_Device_Task();require(RecoveryUsbDiagnostics::TaskRead().entered==0,"pre-loop task excluded from foreground anchor");
     const auto initial_frames=led_updates;independent();require(led_updates==initial_frames,"core1 observes before deadline without publishing");
-    if(scenario=="before-entry"){}
+    if(scenario=="before-entry"||scenario=="pre-enable-reset"){}
+    else if(scenario=="generic-unplug"){defer_task=true;dcd_event_bus_signal(0,DCD_EVENT_UNPLUGGED,true);defer_task=false;recovery_loop();}
     else if(scenario=="pullup-off"){dcd_disconnect(0);independent();}
     else if(scenario=="raw-only"){
         defer_hardware=true;defer_task=true;setup_only();independent();
