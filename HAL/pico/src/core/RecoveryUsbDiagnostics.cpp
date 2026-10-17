@@ -71,6 +71,13 @@ void observe(Observations &o){
 namespace RecoveryUsbDiagnostics {
 void BeginRecovery(){task_observer.Enable();}
 RecoveryTaskDiagnostics::Snapshot TaskRead(){return task_observer.Read();}
+void ObserveIndependent(){
+    // SIE/INTR/INTS are non-destructive reads; no TinyUSB, mutex or NVIC read
+    // on core1 (NVIC would describe core1, not the core0 USB IRQ).
+    const uint32_t raw=(usb_hw->sie_status&USB_SIE_STATUS_SETUP_REC_BITS)|
+        (usb_hw->intr&USB_INTR_SETUP_REQ_BITS)|(usb_hw->ints&USB_INTS_SETUP_REQ_BITS);
+    task_observer.ObserveRaw(raw!=0,(usb_hw->sie_ctrl&USB_SIE_CTRL_PULLUP_EN_BITS)!=0);
+}
 void Stage(BootStage stage){boot_stage=stage;}
 void LoopEntered(){task_observer.Arm();if(loops<2)++loops;}
 void InspectionDecoded(){task_observer.Inspection();inspection_epoch=reset_count;inspection_seen=true;}
@@ -148,8 +155,8 @@ unsigned Furthest(){return furthest;}
 // Existing optional pin callback was undefined in the target. No task/LED/IO here.
 extern "C" void tud_event_hook_cb(uint8_t port,uint32_t event,bool){
     if(port!=0||get_core_num()!=0)return;
-    if(event==DCD_EVENT_UNPLUGGED){unplug_seen=true;task_observer.UnplugEvent();}
     if(__get_current_exception()!=16+USBCTRL_IRQ)return;
+    if(event==DCD_EVENT_UNPLUGGED){unplug_seen=true;task_observer.UnplugEvent();}
     if(event!=DCD_EVENT_BUS_RESET&&event!=DCD_EVENT_SETUP_RECEIVED)return;
     // Pinned queue_event calls this before DCD clears SIE status, even if enqueue
     // failed. No IRQ/task/queue acknowledgement or MMIO write is added here.
@@ -169,22 +176,28 @@ extern "C" bool __real_tud_control_xfer(uint8_t,const tusb_control_request_t*,vo
 extern "C" bool __wrap_tud_control_xfer(uint8_t port,const tusb_control_request_t*r,void*b,uint16_t n){
     const uint32_t epoch=reset_count;
     const bool result=__real_tud_control_xfer(port,r,b,n);
+    if(port==0&&result&&standard_device(r)&&r->bmRequestType_bit.direction==TUSB_DIR_IN&&
+       r->bRequest==TUSB_REQ_GET_DESCRIPTOR&&uint8_t(r->wValue>>8)==TUSB_DESC_DEVICE)task_observer.Control();
     if(!unplug_seen&&task_reset_count==epoch&&epoch==reset_count&&port==0&&result&&standard_device(r)&&r->bmRequestType_bit.direction==TUSB_DIR_IN&&
-       r->bRequest==TUSB_REQ_GET_DESCRIPTOR&&uint8_t(r->wValue>>8)==TUSB_DESC_DEVICE){descriptor_epoch=epoch;descriptor_seen=true;task_observer.Control();}
+       r->bRequest==TUSB_REQ_GET_DESCRIPTOR&&uint8_t(r->wValue>>8)==TUSB_DESC_DEVICE){descriptor_epoch=epoch;descriptor_seen=true;}
     return result;
 }
 extern "C" void __real_dcd_set_address(uint8_t,uint8_t);
 extern "C" void __wrap_dcd_set_address(uint8_t port,uint8_t value){
     const uint32_t epoch=reset_count;
-    __real_dcd_set_address(port,value);if(!unplug_seen&&task_reset_count==epoch&&epoch==reset_count&&port==0){address_requested_epoch=epoch;address_requested=true;task_observer.Control();}
+    __real_dcd_set_address(port,value);if(port==0)task_observer.AddressRequested();if(!unplug_seen&&task_reset_count==epoch&&epoch==reset_count&&port==0){address_requested_epoch=epoch;address_requested=true;}
 }
 extern "C" void __real_dcd_edpt0_status_complete(uint8_t,const tusb_control_request_t*);
 extern "C" void __wrap_dcd_edpt0_status_complete(uint8_t port,const tusb_control_request_t*r){
     const uint32_t epoch=reset_count;
     __real_dcd_edpt0_status_complete(port,r);
+    if(port==0&&standard_device(r)&&r->bmRequestType_bit.direction==TUSB_DIR_OUT){
+        if(r->bRequest==TUSB_REQ_SET_ADDRESS)task_observer.AddressApplied();
+        if(r->bRequest==TUSB_REQ_SET_CONFIGURATION)task_observer.Configuration(uint8_t(r->wValue)!=0);
+    }
     if(unplug_seen||task_reset_count!=epoch||epoch!=reset_count||port!=0||!standard_device(r)||r->bmRequestType_bit.direction!=TUSB_DIR_OUT)return;
     if(r->bRequest==TUSB_REQ_SET_ADDRESS){address_applied_epoch=epoch;address_applied=true;}
-    if(r->bRequest==TUSB_REQ_SET_CONFIGURATION&&uint8_t(r->wValue)!=0){configured_epoch=epoch;configured=true;task_observer.Configured();}
+    if(r->bRequest==TUSB_REQ_SET_CONFIGURATION&&uint8_t(r->wValue)!=0){configured_epoch=epoch;configured=true;}
 }
 // Pinned usbd.c calls this only while consuming RESET/UNPLUGGED. A missing
 // queue entry leaves counts unmatched, conservatively withholding task progress.
@@ -220,4 +233,55 @@ void GlyphWrapPortInit(uint8_t port){
     if(port!=0||get_core_num()!=0){GlyphRealPortInit(port);return;}
     in_port=true;GlyphRealPortInit(port);in_port=false;port_complete=true;
 }
+#endif
+
+#if defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE && (defined(ARDUINO_ARCH_RP2040) || defined(GLYPH_RT2_DCD_HOST))
+#include "device/usbd_pvt.h"
+#include "osal/osal.h"
+extern "C" osal_queue_def_t _usbd_qdef;
+namespace {
+unsigned event_kind(const void *p){
+    const auto *event=static_cast<const dcd_event_t*>(p);
+    return event->event_id==DCD_EVENT_BUS_RESET?1u:event->event_id==DCD_EVENT_UNPLUGGED?2u:event->event_id==DCD_EVENT_SETUP_RECEIVED?3u:0u;
+}
+bool target_queue(tu_fifo_t *ff){return ff==&_usbd_qdef.ff&&get_core_num()==0;}
+}
+extern "C" bool __real_tu_fifo_write(tu_fifo_t*,const void*);
+extern "C" bool __wrap_tu_fifo_write(tu_fifo_t *ff,const void *p){
+    const bool result=__real_tu_fifo_write(ff,p);
+    if(target_queue(ff)){
+        const uint32_t exception=__get_current_exception();
+        task_observer.QueueSent(exception==0?0:exception==16+USBCTRL_IRQ?1:2,
+            event_kind(p),result,tu_fifo_count(ff));
+    }
+    return result;
+}
+extern "C" bool __real_tu_fifo_read(tu_fifo_t*,void*);
+extern "C" bool __wrap_tu_fifo_read(tu_fifo_t *ff,void *p){
+    const bool tracked=target_queue(ff);
+    if(tracked)task_observer.QueueReadBegin();
+    const bool result=__real_tu_fifo_read(ff,p);
+    if(tracked)task_observer.QueueReadEnd(result?event_kind(p):0,result);
+    return result;
+}
+extern "C" void __real_usbd_control_set_complete_callback(usbd_control_xfer_cb_t);
+extern "C" void __wrap_usbd_control_set_complete_callback(usbd_control_xfer_cb_t callback){
+    if(!callback&&get_core_num()==0)task_observer.ControlBegin();
+    __real_usbd_control_set_complete_callback(callback);
+}
+// Builtin driver function-pointer relocations are wrapped by GNU ld; local
+// empty XInput reset has no external relocation and is deliberately untouched.
+#define GLYPH_RESET_WRAPPER(name,index,before,after) \
+extern "C" void __real_##name(uint8_t); \
+extern "C" void __wrap_##name(uint8_t port){ \
+    const bool track=port==0&&get_core_num()==0; \
+    if(track){task_observer.ClassBoundary(index,false);if(before)task_observer.ClassStage(before);} \
+    __real_##name(port); \
+    if(track){task_observer.ClassBoundary(index,true);if(after)task_observer.ClassStage(after);} \
+}
+GLYPH_RESET_WRAPPER(cdcd_reset,0,2,3)
+GLYPH_RESET_WRAPPER(mscd_reset,1,0,0)
+GLYPH_RESET_WRAPPER(hidd_reset,2,0,0)
+GLYPH_RESET_WRAPPER(midid_reset,3,4,5)
+#undef GLYPH_RESET_WRAPPER
 #endif

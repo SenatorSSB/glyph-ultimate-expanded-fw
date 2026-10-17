@@ -20,6 +20,7 @@ enum : uint32_t {
 // Boundary is the last completed source marker, not a timestamp.
 enum class BootStage : uint8_t { BeforeSetup, Setup, MatrixSampling, MatrixSampled, Rt2Route, Published };
 #if defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE && (defined(ARDUINO_ARCH_RP2040) || defined(GLYPH_RT2_DCD_HOST))
+void ObserveIndependent();
 void BeginRecovery();
 RecoveryTaskDiagnostics::Snapshot TaskRead();
 void Stage(BootStage stage);
@@ -28,6 +29,7 @@ void InspectionDecoded();
 Snapshot Read();
 unsigned Furthest();
 #else
+inline void ObserveIndependent(){}
 inline void BeginRecovery(){}
 inline RecoveryTaskDiagnostics::Snapshot TaskRead(){return {};}
 inline void Stage(BootStage){}

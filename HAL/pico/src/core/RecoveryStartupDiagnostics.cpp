@@ -18,6 +18,11 @@ PIO indicator=nullptr;
 int indicator_sm=-1;
 bool indicator_attempted=false;
 uint8_t shown_state=255;
+uint64_t handoff_us=0,active_since_us=0;uint32_t last_active=0;
+bool capture_ready=false,panel_shown=false;
+std::atomic<uint32_t> dashboard{0},capture_active_age_us{0},capture_elapsed_us{0};
+unsigned captured_pixels[8]={};
+RecoveryTaskDiagnostics::Snapshot captured_task;
 
 void InitializeIndicator() {
     if(indicator_attempted)return;
@@ -42,6 +47,7 @@ void InitializeIndicator() {
         sm_config_set_set_pins(&config,LED_PIN,1);
         sm_config_set_out_pins(&config,LED_PIN,1);
         sm_config_set_out_shift(&config,false,true,24);
+        sm_config_set_fifo_join(&config,PIO_FIFO_JOIN_TX);
         sm_config_set_clkdiv(&config,float(clock_get_hz(clk_sys))/8000000.0f);
         pio_gpio_init(pio,LED_PIN);
         pio_sm_set_consecutive_pindirs(pio,sm,LED_PIN,1,true);
@@ -74,6 +80,21 @@ bool Show(unsigned state, unsigned progress=255) {
     return true;
 }
 
+// Eight words fit the joined TX FIFO before enabling this dedicated SM. No
+// mid-frame CPU refill, blocking FIFO put, DMA, USB call, or clock change.
+bool ShowPanel(){
+    if(!indicator||!pio_sm_is_tx_fifo_empty(indicator,indicator_sm))return false;
+    const uint32_t colors[]={0,0x001800u,0x061800u,0x181800u,0x001818u,
+                             0x000018u,0x180018u,0x180000u,0x181818u};
+    pio_sm_set_enabled(indicator,indicator_sm,false);
+    for(unsigned color:captured_pixels)pio_sm_put(indicator,indicator_sm,colors[color]<<8);
+    pio_sm_set_enabled(indicator,indicator_sm,true);
+    // Inherited protocol interval, IRQs enabled. Eight pixels take240us;
+    // hardware finishes independently after this200us interval and latches low.
+    // No later frame is emitted, so no CPU wait for completion is needed.
+    busy_wait_us_32(200);return true;
+}
+
 unsigned Flags() {
     unsigned flags=tud_inited()?1u:0u;
     if(Adafruit_USBD_CDC::getInstanceCount()==1)flags|=2;
@@ -98,19 +119,48 @@ unsigned Flags() {
 void HandOffIndicator(){
     // Core0 completes initialization and its final frame before publishing.
     // After this release, only core1 touches the SM/FIFO and scratch3.
-    InitializeIndicator();shown_state=255;handed_off.store(1,std::memory_order_release);
+    InitializeIndicator();shown_state=255;handoff_us=time_us_64();handed_off.store(1,std::memory_order_release);
 }
 void PublishIndependent(){
-    if(!handed_off.load(std::memory_order_acquire))return;
-    const auto s=RecoveryUsbDiagnostics::TaskRead();
-    if(!s.valid)return; // bounded retry on the next independent loop1 pass
-    const uint8_t pair=uint8_t((s.task_pixel<<4)|s.progress_pixel);
-    const uint32_t word=kTaskPairMagic|(s.task_pixel<<12)|(s.progress_pixel<<8)|(indicator?128u:0u);
-    if(published_pair.load(std::memory_order_relaxed)!=word){
+    if(!handed_off.load(std::memory_order_acquire)||panel_shown)return;
+    if(!capture_ready){
+        // Core1 performs only non-destructive USB MMIO sampling and bounded
+        // atomic bank reads. No TinyUSB/Config/ProfileStore/shared USB locks.
+        RecoveryUsbDiagnostics::ObserveIndependent();
+        const auto s=RecoveryUsbDiagnostics::TaskRead();
+        if(!s.valid)return; // one attempt per ordinary loop; never spin
+        const uint64_t now=time_us_64();
+        if(s.active!=last_active){last_active=s.active;active_since_us=now;}
+        if(now-handoff_us<10000000u)return;
+        const uint64_t age=s.active?now-active_since_us:0;
+        for(unsigned i=0;i<8;++i)captured_pixels[i]=s.pixels[i];
+        // A current later invocation may merely be a short healthy call.
+        // Yellow records that distinction; white requires the same ID observed
+        // active for at least1s. This is reporting only, never a USB task budget.
+        if(s.active>1&&age<1000000u)captured_pixels[0]=RecoveryTaskDiagnostics::Yellow;
+        uint32_t packed=0;for(unsigned i=0;i<8;++i)packed|=uint32_t(captured_pixels[i])<<(4*i);
+        captured_task=s;
+        for(unsigned i=0;i<8;++i)captured_task.pixels[i]=captured_pixels[i];
+        captured_task.dashboard=packed;
+        capture_active_age_us.store(age>UINT32_MAX?UINT32_MAX:uint32_t(age));
+        capture_elapsed_us.store(now-handoff_us>UINT32_MAX?UINT32_MAX:uint32_t(now-handoff_us));
+        dashboard.store(packed,std::memory_order_release);
+        const uint32_t word=kDashboardMagic|(captured_pixels[0]<<12)|
+            (captured_pixels[1]<<8)|(captured_pixels[4]<<4)|captured_pixels[6];
         published_pair.store(word,std::memory_order_release);watchdog_hw->scratch[3]=word;
+        capture_ready=true;
     }
-    if(shown_state!=pair&&Show(s.task_pixel,s.progress_pixel))shown_state=pair;
+    if(ShowPanel())panel_shown=true; // unchanged settled panel is never refreshed
 }
+RecoveryTaskDiagnostics::Snapshot CapturedTask(){
+    // Immutable after the single release publication; no shared mutable copy.
+    if(!dashboard.load(std::memory_order_acquire))return {};
+    return captured_task;
+}
+uint32_t Dashboard(){return dashboard.load(std::memory_order_acquire);}
+uint32_t CaptureActiveAgeUs(){return capture_active_age_us.load();}
+uint32_t CaptureElapsedUs(){return capture_elapsed_us.load();}
+
 void CapturePrevious(){previous=TakePrevious(watchdog_hw->scratch);current=0;}
 void Mark(Phase phase) {
     if(phase==Phase::LoopEntered)RecoveryUsbDiagnostics::LoopEntered();

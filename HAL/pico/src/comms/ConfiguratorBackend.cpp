@@ -775,7 +775,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.root_reconcile_fault_capable = true;
         response.recovery_startup_current = RecoveryStartupDiagnostics::Current();
         response.recovery_startup_previous = RecoveryStartupDiagnostics::Previous();
-        response.recovery_startup_diagnostics_version = 5;
+        response.recovery_startup_diagnostics_version = 6;
         const auto usb=RecoveryUsbDiagnostics::Read();
         response.recovery_usb_milestones=usb.milestones;
         response.recovery_usb_irq_state=usb.irq_state;
@@ -804,7 +804,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.recovery_usb_e5_flags=usb.e5_flags;
         response.recovery_usb_observation_valid=usb.observation_valid;
         response.recovery_usb_task_reset_count=usb.task_reset_count;
-        const auto task=RecoveryUsbDiagnostics::TaskRead();
+        auto task=RecoveryStartupDiagnostics::CapturedTask();
+        const bool captured=task.valid!=0;
+        if(!task.valid)task=RecoveryUsbDiagnostics::TaskRead();
         response.recovery_task_version=5;
         response.recovery_task_valid=task.valid;
         response.recovery_task_entered=task.entered;
@@ -818,6 +820,32 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.recovery_task_event_flags=task.event_flags;
         response.recovery_task_task_flags=task.task_flags;
         response.recovery_task_pair=(task.task_pixel<<4)|task.progress_pixel;
+        response.recovery_task_first_id=task.first_id;
+        response.recovery_task_latest_returned=task.latest_returned;
+        response.recovery_task_total_resets=task.total_resets;
+        response.recovery_task_pre_first_resets=task.pre_first_resets;
+        response.recovery_task_post_first_resets=task.post_first_resets;
+        response.recovery_task_reset_consumed=task.reset_consumed;
+        response.recovery_task_reset_continued=task.reset_continued;
+        response.recovery_task_reset_stage=task.reset_stage;
+        response.recovery_task_processing_invocation=task.processing_invocation;
+        response.recovery_task_setup_consumed=task.setup_consumed;
+        response.recovery_task_control_began=task.control_began;
+        response.recovery_task_queue_attempted=task.queue_attempted;
+        response.recovery_task_queue_accepted=task.queue_accepted;
+        response.recovery_task_queue_failed=task.queue_failed;
+        response.recovery_task_reset_dropped=task.reset_dropped;
+        response.recovery_task_setup_dropped=task.setup_dropped;
+        response.recovery_task_max_occupancy=task.max_occupancy;
+        response.recovery_task_empty_reads=task.empty_reads;
+        response.recovery_task_class_entered=task.class_entered;
+        response.recovery_task_class_returned=task.class_returned;
+        response.recovery_task_raw_setup_seen=task.raw_setup_seen;
+        response.recovery_task_pullup=task.pullup;
+        response.recovery_task_configured_current=task.configured_current;
+        response.recovery_dashboard=captured?task.dashboard:0;
+        response.recovery_dashboard_elapsed_us=captured?RecoveryStartupDiagnostics::CaptureElapsedUs():0;
+        response.recovery_dashboard_active_age_us=captured?RecoveryStartupDiagnostics::CaptureActiveAgeUs():0;
     }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.

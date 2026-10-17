@@ -726,6 +726,34 @@ message ProfileStoreResponse {
   uint32 recovery_task_task_flags = 100;
   uint32 recovery_task_pair = 101;
   uint32 recovery_task_first_reset_completed = 102;
+  // Comprehensive candidate-only observer telemetry; no persistent schema delta.
+  uint32 recovery_task_first_id = 103;
+  uint32 recovery_task_latest_returned = 104;
+  uint32 recovery_task_total_resets = 105;
+  uint32 recovery_task_pre_first_resets = 106;
+  uint32 recovery_task_post_first_resets = 107;
+  uint32 recovery_task_reset_consumed = 108;
+  uint32 recovery_task_reset_continued = 109;
+  uint32 recovery_task_reset_stage = 110;
+  uint32 recovery_task_processing_invocation = 111;
+  uint32 recovery_task_setup_consumed = 112;
+  uint32 recovery_task_control_began = 113;
+  uint32 recovery_task_queue_attempted = 114;
+  uint32 recovery_task_queue_accepted = 115;
+  uint32 recovery_task_queue_failed = 116;
+  uint32 recovery_task_reset_dropped = 117;
+  uint32 recovery_task_setup_dropped = 118;
+  uint32 recovery_task_max_occupancy = 119;
+  uint32 recovery_task_empty_reads = 120;
+  uint32 recovery_task_class_entered = 121;
+  uint32 recovery_task_class_returned = 122;
+  uint32 recovery_task_raw_setup_seen = 123;
+  uint32 recovery_task_pullup = 124;
+  uint32 recovery_dashboard = 125;
+  uint32 recovery_dashboard_elapsed_us = 126;
+  uint32 recovery_dashboard_active_age_us = 127;
+  uint32 recovery_task_configured_current = 128;
+
 
 }
 /**

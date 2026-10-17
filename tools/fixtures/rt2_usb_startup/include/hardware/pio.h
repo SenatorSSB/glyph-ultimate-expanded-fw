@@ -6,6 +6,8 @@ struct PioHw {};using PIO=PioHw*;extern PioHw pios[2];
 #define pio1 (&pios[1])
 struct pio_program { const uint16_t *instructions;uint8_t length;int8_t origin; };
 struct pio_sm_config {};
+enum {PIO_FIFO_JOIN_TX=1};
+inline void sm_config_set_fifo_join(pio_sm_config*,unsigned){}
 enum { pio_x=1,pio_pins=0 };
 inline uint16_t pio_encode_out(unsigned d,unsigned n){return 0x6000|(d<<5)|n;}
 inline uint16_t pio_encode_set(unsigned d,unsigned n){return 0xe000|(d<<5)|n;}
