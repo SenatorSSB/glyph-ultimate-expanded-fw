@@ -1,3 +1,4 @@
+#include "core/RecoveryUsbDiagnostics.hpp"
 #include <Adafruit_TinyUSB.h>
 #include "hardware/structs/usb.h"
 #include "hardware/watchdog.h"

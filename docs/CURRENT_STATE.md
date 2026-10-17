@@ -1,5 +1,19 @@
 # Glyph Current State
 
+## Owner-scoped RT2 reset/SETUP investigation — 2026-10-17
+
+The latest direct owner request authorizes a bounded descendant of exact b075
+for silicon/E5 and raw USB reset-to-SETUP diagnosis, source tests, fresh review,
+exact committed build/custody and prepared hardware packets. See the
+[physical adjudication](runtime_config/profile_store_rt2_e5_physical_adjudication.json).
+The one physical b075 RT2 attempt reached the interpreted MAGENTA bus-reset
+milestone without later SETUP progression; normal Configurator was PASS.
+Actual silicon revision and root cause remain UNKNOWN/UNPROVEN. Source agents
+must not operate the controller, change persistence semantics or merge canonical.
+Prior V/W PASS, identity-control elimination and selection NOT_TESTED remain.
+Older scoped directives below preserve their historical authority and evidence.
+
+
 Candidate-only root-reconciliation route work is bounded by the latest direct
 owner request. [Diagnosis and gates](runtime_config/profile_store_root_reconcile_result.md)
 preserve4ee's invalid root test route and correct healthy ABORTED result.

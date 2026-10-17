@@ -775,7 +775,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.root_reconcile_fault_capable = true;
         response.recovery_startup_current = RecoveryStartupDiagnostics::Current();
         response.recovery_startup_previous = RecoveryStartupDiagnostics::Previous();
-        response.recovery_startup_diagnostics_version = 3;
+        response.recovery_startup_diagnostics_version = 4;
         const auto usb=RecoveryUsbDiagnostics::Read();
         response.recovery_usb_milestones=usb.milestones;
         response.recovery_usb_irq_state=usb.irq_state;
@@ -785,6 +785,25 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.recovery_usb_main_ctrl=usb.main_ctrl;
         response.recovery_usb_task_entered=usb.task_entered;
         response.recovery_usb_task_returned=usb.task_returned;
+        response.recovery_usb_sie_status=usb.sie_status;
+        response.recovery_usb_ep0_in=usb.ep0_in;
+        response.recovery_usb_ep0_out=usb.ep0_out;
+        response.recovery_usb_seen_sie_status=usb.seen_sie_status;
+        response.recovery_usb_seen_intr=usb.seen_intr;
+        response.recovery_usb_seen_ints=usb.seen_ints;
+        response.recovery_usb_seen_inte=usb.seen_inte;
+        response.recovery_usb_seen_irq=usb.seen_irq;
+        response.recovery_usb_seen_ep0_in=usb.seen_ep0_in;
+        response.recovery_usb_seen_ep0_out=usb.seen_ep0_out;
+        response.recovery_usb_bus_reset_count=usb.bus_reset_count;
+        response.recovery_usb_raw_setup_observations=usb.raw_setup_observations;
+        response.recovery_usb_setup_event_count=usb.setup_event_count;
+        response.recovery_usb_reset_order=usb.reset_order;
+        response.recovery_usb_chip_version=usb.chip_version;
+        response.recovery_usb_rom_version=usb.rom_version;
+        response.recovery_usb_e5_flags=usb.e5_flags;
+        response.recovery_usb_observation_valid=usb.observation_valid;
+        response.recovery_usb_task_reset_count=usb.task_reset_count;
     }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.

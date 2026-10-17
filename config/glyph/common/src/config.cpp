@@ -11,6 +11,7 @@
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RecoveryStartupDiagnostics.hpp"
+#include "core/RecoveryUsbDiagnostics.hpp"
 #include "core/ResourceDiagnostics.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -150,6 +151,7 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
 // and runs without gameplay, menu, display, or core1 initialization.
 void enter_recovery_configurator() {
     using RecoveryStartupDiagnostics::Phase;
+    RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Rt2Route);
     RecoveryStartupDiagnostics::Mark(Phase::RouteEntry);
     watchdog_hw->scratch[0] = 0;
     watchdog_hw->scratch[1] = 0;
@@ -168,6 +170,7 @@ void enter_recovery_configurator() {
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
     RecoveryStartupDiagnostics::Mark(Phase::ReadOnlyInstalled);
     publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+    RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Published);
     RecoveryStartupDiagnostics::Mark(Phase::Published);
 }
 
@@ -175,10 +178,13 @@ void enter_recovery_configurator() {
 
 
 void setup() {
+    RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Setup);
     InitializeResourceDiagnosticsCore();
     RecoveryStartupDiagnostics::CapturePrevious();
     // Create GPIO input source and use it to read button states for checking button holds.
+    RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::MatrixSampling);
     matrix_input.UpdateInputs(inputs);
+    RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::MatrixSampled);
 
     // Amendment A recovery route: after MB1 priority (evaluated below only
     // when MB1 is held) and before display/config/backend initialization.

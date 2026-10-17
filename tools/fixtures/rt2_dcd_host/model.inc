@@ -5,8 +5,12 @@
 #include <cstdarg>
 NvicHw nvic_registers;ResetsHw reset_registers;
 alignas(4096) usb_device_dpram_t usb_dpram_registers;
+unsigned host_chip_version=2;
 unsigned host_exception=0,host_core=0;uint32_t host_primask=0;
-uint32_t GlyphHostPrimask(){return host_primask;}
+namespace {void physical_reset();}
+bool reset_on_primask=false,reset_on_xfer=false;
+uint32_t GlyphHostPrimask(){if(reset_on_primask){reset_on_primask=false;physical_reset();}return host_primask;}
+void host_noop(void*){}
 namespace {
 struct SharedHandler{uint8_t priority;irq_handler_t fn;};
 std::vector<SharedHandler> shared_handlers;irq_handler_t soft_handler=nullptr;

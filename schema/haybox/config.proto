@@ -692,6 +692,26 @@ message ProfileStoreResponse {
   uint32 recovery_usb_main_ctrl = 68;
   uint32 recovery_usb_task_entered = 69;
   uint32 recovery_usb_task_returned = 70;
+  // Candidate v4 raw SETUP / reset ordering / read-only silicon diagnostics.
+  uint32 recovery_usb_sie_status = 71;
+  uint32 recovery_usb_ep0_in = 72;
+  uint32 recovery_usb_ep0_out = 73;
+  uint32 recovery_usb_seen_sie_status = 74;
+  uint32 recovery_usb_seen_intr = 75;
+  uint32 recovery_usb_seen_ints = 76;
+  uint32 recovery_usb_seen_inte = 77;
+  uint32 recovery_usb_seen_irq = 78;
+  uint32 recovery_usb_seen_ep0_in = 79;
+  uint32 recovery_usb_seen_ep0_out = 80;
+  uint32 recovery_usb_bus_reset_count = 81;
+  uint32 recovery_usb_raw_setup_observations = 82;
+  uint32 recovery_usb_setup_event_count = 83;
+  uint32 recovery_usb_reset_order = 84;
+  uint32 recovery_usb_chip_version = 85;
+  uint32 recovery_usb_rom_version = 86;
+  uint32 recovery_usb_e5_flags = 87;
+  uint32 recovery_usb_observation_valid = 88;
+  uint32 recovery_usb_task_reset_count = 89;
 }
 /**
  * Button to HID keyboard keycode mapping.

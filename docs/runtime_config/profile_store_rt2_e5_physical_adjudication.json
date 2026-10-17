@@ -1,0 +1,101 @@
+{
+  "classification": "RT2_DCD_BUS_RESET_RECEIVED_NO_SETUP_OBSERVED",
+  "candidate": "b07502866c56a1c7e1e217132aea30366e234461",
+  "tree": "f6274649de4a7e620b19be795d16f95e53550683",
+  "parent": "466f91ed867884640375627734d3473e9fb22c32",
+  "canonical_base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "uf2_bytes": 991232,
+  "uf2_sha256": "8f1a470b75588080640861a8e07915b7d11ddf541fb185f372e5b91f86ee138a",
+  "normal_control": "PASS owner report corroborated by retained valid responses",
+  "physical_rt2_attempts": 1,
+  "observed_color": "purple_or_violet_operator_observation",
+  "interpreted_sticky_milestone": "BUS_RESET",
+  "interpretation_caveat": "Consistent with frozen b075 MAGENTA; not a calibrated color measurement. Conditional on that classification and successful indicator delivery. No later milestone was observed, not proof no later physical packet existed.",
+  "source_contract": "frozen b075 RecoveryUsbDiagnostics.cpp Furthest progress3 after repeated-loop gate with reset_seen and no higher milestone; RecoveryStartupDiagnostics.cpp state3 GRB0x001818 (MAGENTA)",
+  "display": "black owner report",
+  "host_endpoint_after_10_seconds": "absent owner report and retained empty serial-nodes",
+  "host_matching_usb_identity": "absent in retained full ioreg-usb.txt; broad matches-file contains unrelated root metadata and is not an identity match",
+  "root_cause": "UNPROVEN",
+  "actual_chip_revision": "UNKNOWN",
+  "post_attempt_device_action": "NONE owner report",
+  "current_device_state": "stopped failed b075 RT2; persistent state requires separate normal-boot readback",
+  "normal_baseline": {
+    "store_generation": 166,
+    "incarnation": 1,
+    "config_generation": 1182731055,
+    "config_payload_bytes": 252,
+    "config_payload_sha256": "cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0",
+    "core0_min_free": 1928,
+    "core1_min_free": 3716,
+    "heap_peak": 8864,
+    "heap_capacity": 74400,
+    "profiles": {
+      "1": {
+        "revision": 2,
+        "response_file_sha256": "b5b9197be72b51b79dfec19939787b842b0b4b76bf6e4845d3b50c5cc6a97f36",
+        "normalized_profile_json_sha256": "8a195a04745fd5729b26e37a78e7ecf3b43fab2ae94c68010bea052d7bad77c2",
+        "hash_definition": "UTF-8 json.dumps(profile,sort_keys=True,separators=(comma,colon),ensure_ascii=False); not protobuf hash"
+      },
+      "3": {
+        "revision": 1,
+        "response_file_sha256": "9fc0eb54314b9ae782f848f385ece14ec238b9d0de55718b97ebbd06cefea4f0",
+        "normalized_profile_json_sha256": "3d26c57665be91228a30b4577687cfe0d1d5328575d19b6d6461b6c92beb9e49",
+        "hash_definition": "UTF-8 json.dumps(profile,sort_keys=True,separators=(comma,colon),ensure_ascii=False); not protobuf hash"
+      },
+      "4": {
+        "revision": 1,
+        "response_file_sha256": "b682b11e7c18da690ab4dbf900d41a48cef0be69a78541f7ea539e4d0095ec52",
+        "normalized_profile_json_sha256": "4aab71e55e92954d96c2fb877c749d6e0ec11004d8a49293c7a88626b96a7f02",
+        "hash_definition": "UTF-8 json.dumps(profile,sort_keys=True,separators=(comma,colon),ensure_ascii=False); not protobuf hash"
+      },
+      "22": {
+        "revision": 132,
+        "response_file_sha256": "f2221700bc0cafdeb7ff4fb3cdb44592fd6a1c29581c355b20181df4e1effb13",
+        "normalized_profile_json_sha256": "3d26c57665be91228a30b4577687cfe0d1d5328575d19b6d6461b6c92beb9e49",
+        "hash_definition": "UTF-8 json.dumps(profile,sort_keys=True,separators=(comma,colon),ensure_ascii=False); not protobuf hash"
+      }
+    }
+  },
+  "capture_metadata_caveat": "identity-status-snapshot.json has stale template candidate_expected_after_test_flash=f4771... and artifact9be... fields. These are NOT b075 identity evidence. Actual device_info.firmware_version=b0750286, owner exact-SHA report and preserved b075 custody establish the bounded binding. GET_CONFIG is persisted bytes, not proof of live-RAM identity.",
+  "preserved_prior_findings": [
+    "466 reached application phase11",
+    "CDC auto-registers before setup",
+    "5913 bootstrapPID retention physically insufficient",
+    "root-reconciliation and GC V/W remain separate physical PASS",
+    "selection NOT_TESTED \u2014 FIXTURE_NOT_SAFELY_CONSTRUCTIBLE"
+  ],
+  "evidence_root": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/b075-rt2-dcd-diagnostics",
+  "evidence_sha256": {
+    "normal-control-port101/config-capture/identity-status-snapshot.json": "7e1c573722b8790093d171b8d761508b79741b9e26a5eef4f3268d51cb0bd554",
+    "normal-control-port101/config-capture/operator-log.json": "0b84f7c4e7d10ff4976a4b51fbd4b20ef4cff372db07514a34211394c3591b4e",
+    "normal-control-port101/config-capture/owner-original-config.base64": "8cb9ed8ec133e05bf962907c9d216f8dbffed8ebd9bb94e837bd7000101525bb",
+    "normal-control-port101/config-capture/owner-original-config.bin": "cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0",
+    "normal-control-port101/config-capture/owner-original-config.json": "9f77a939856330eaaa22dbca3aacf8e6bb802ba887d97763aaf22540a2558b9f",
+    "normal-control-port101/list-p0.json": "ad0ce5cf4ee522152c14cd766239db708d6af079b41d40cc1371a15bcb5ecd0f",
+    "normal-control-port101/list-p16.json": "b16e4ffcb0008b52c6ba76b3fbed593634c50b831c083bd68dca440c08e86395",
+    "normal-control-port101/list-p8.json": "c77cbafd90370f51a580d874889349defc62291bfb168b45e3287bb4317bb195",
+    "normal-control-port101/pulse.json": "3ffe0780b68e480e02dbbf1218a1f41b42636cfd312f550326dfd2b2ea445a42",
+    "normal-control-port101/read-id1.json": "b5b9197be72b51b79dfec19939787b842b0b4b76bf6e4845d3b50c5cc6a97f36",
+    "normal-control-port101/read-id22.json": "f2221700bc0cafdeb7ff4fb3cdb44592fd6a1c29581c355b20181df4e1effb13",
+    "normal-control-port101/read-id3.json": "9fc0eb54314b9ae782f848f385ece14ec238b9d0de55718b97ebbd06cefea4f0",
+    "normal-control-port101/read-id4.json": "b682b11e7c18da690ab4dbf900d41a48cef0be69a78541f7ea539e4d0095ec52",
+    "normal-control-port101/status.json": "205068979cf1eb0937063d2d394f19a70ede97eeabad404e1483f0693c7bfd5e",
+    "normal-control-port101/status.trace.json": "6e3b6d95f72e5ada92861974526915b728c9fa90b359e684b843ad65e946fdca",
+    "pre-rt2-host-observation-20261017/SHA256SUMS": "ec2f41d56d8cafaa806515764b59ed1817b3ef583114bd6238ffaa8127ceca7f",
+    "pre-rt2-host-observation-20261017/ioreg-controller-matches.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pre-rt2-host-observation-20261017/ioreg-usb.txt": "505541a896c8d7d46f30957433264f282bc7dd43f19fcc1365b7d94a657b0996",
+    "pre-rt2-host-observation-20261017/observation-time.utc": "7d19d58fca7b8c9c782775b67d01343dbb671ad3b95494a74b16963e7c5f8417",
+    "pre-rt2-host-observation-20261017/serial-nodes.txt": "0275ee67c8ee9a7952f2150f9de7dd4961455d7c6c5e1a71e7a75506c5897fa5",
+    "pre-rt2-host-observation-20261017/usb-tree.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rt2-single-attempt-20261017/SHA256SUMS": "0a4c72aa8641afbd0161f7edb4af58f3ae1c1c06ad8a8a92e346fe7b56bbdfbc",
+    "rt2-single-attempt-20261017/host-inventory-sizes.txt": "56a142e49825da28f3a2ee34e41284fd97ec8469e08fdfe25661bf980f514f9b",
+    "rt2-single-attempt-20261017/host-observation-time.utc": "45599ad12642c100b7bc7f3946caa371ec7a305645ea6bc119cfa74f4fe7e5ed",
+    "rt2-single-attempt-20261017/ioreg-controller-matches.txt": "4865f1cbed7099ab8f2e58a049f208ded9925eac5464c5addbf1791926f02864",
+    "rt2-single-attempt-20261017/ioreg-usb.txt": "609e686f60fb7b44c9570ebc0b6abde5c61ab0009d795a4e096ab7cf71a35e3d",
+    "rt2-single-attempt-20261017/operator-observation.txt": "e7119039427cd1a4fd8ab405e3de7cb14d7097cb46f2b58bb259071e6b8f5a14",
+    "rt2-single-attempt-20261017/serial-nodes.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rt2-single-attempt-20261017/usb-tree.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "no_controller_actions_by_source_agent": true,
+  "source_correction_to_owner_initial_contract": "Frozen b075 MAGENTA does not require pullup_seen: independent reset_seen condition overwrites progress to3 inside loops>=2. It proves repeated-loop and DCD reset milestones, not a prior pull-up-ON sample. Historical normal-control SIE_CTRL is separate evidence; RT2 pull-up sample/current state UNKNOWN."
+}
