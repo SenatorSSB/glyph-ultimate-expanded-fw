@@ -5,9 +5,15 @@ conditional on exact committed build, source/harness/ELF/custody proof and fresh
 independent review. Firmware-active diagnostic candidate only. Direct owner
 request2026-10-17 authorizes this extension; response-only schema additions
 explicitly approved in chat. No controller actions or canonical merge. Do not
-run the superseded3b5c hardware packet. New branch codex/profile-store-rt2-comprehensive
-is direct child of3b5c92b2200753c795315a166dc7bd501a93a9f6 (tree
+run the superseded3b5c hardware packet. Branch codex/profile-store-rt2-comprehensive descends from
+3b5c92b2200753c795315a166dc7bd501a93a9f6 (tree
 8637a3d0c1ae5be03c64628cca3fca56842803f9; its parent88ab0029d464175865e1ce3e9a19b462579ffed4).
+Intermediatec95695ef2062ec38de94a28ce66b5aba2ad8db6b (tree
+7cab22c8a0602d3ba06b4dc1576cc375d9e4e14d) is that direct child; its canonical
+build passed but CREATE frame gate failed568>512, so it is NOT the handoff.
+The final descendant adds a caller-owned static diagnostic output cache and
+output-reference copy/sample APIs. Direct O3 repair frame392; exact final
+measured frames/build/custody still required. Gate thresholds stay unchanged.
 Canonical/base remains6b73a7c507f35c111745c6bdd341618b490cbdcd. Final candidate/tree/
 UF2 identities live in external exact-artifact handoff; no self-SHA cycle.
 
@@ -176,6 +182,11 @@ can be lost on reset; no reset just to recover scratch evidence.
 Diagnostic response-only fields103..128 extend task version5/startup version6.
 Before frozen capture, task fields are a bounded live sample and Dashboard0;
 after capture, all task fields come from the immutable captured Snapshot.
+Backend uses the existing single-core0 nonreentrant ownership model of its
+static request/response/frame for a separate180-byte static diagnostic cache.
+Caller-owned output APIs avoid aggregate-return stack temporaries; invalid
+samples zero the destination before a bounded attempt. No heap or USB task
+behavior change. Core1 frozen snapshot is separate and immutable.
 Response chooses that mode once and only emits dashboard/age/elapsed for that
 same captured decision, preventing mixed live/frozen response. Existing USB raw
 fields remain asynchronous live observations, explicitly separate. Config,

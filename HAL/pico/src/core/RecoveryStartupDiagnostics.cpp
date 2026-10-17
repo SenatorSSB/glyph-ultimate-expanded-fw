@@ -157,6 +157,10 @@ RecoveryTaskDiagnostics::Snapshot CapturedTask(){
     if(!dashboard.load(std::memory_order_acquire))return {};
     return captured_task;
 }
+bool CapturedTaskInto(RecoveryTaskDiagnostics::Snapshot &out){
+    if(!dashboard.load(std::memory_order_acquire)){out={};return false;}
+    out=captured_task;return true;
+}
 uint32_t Dashboard(){return dashboard.load(std::memory_order_acquire);}
 uint32_t CaptureActiveAgeUs(){return capture_active_age_us.load();}
 uint32_t CaptureElapsedUs(){return capture_elapsed_us.load();}

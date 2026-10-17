@@ -121,7 +121,7 @@ def main():
   # Port API prototype uses C++ linkage, as in the pinned implementation.
   vendor.write_text('#include <cstdint>\nvoid GlyphWrapPortInit(uint8_t);\n'+vendor.read_text())
   backend_copy=temp/'ConfiguratorBackend.cpp';backend=(ROOT/'HAL/pico/src/comms/ConfiguratorBackend.cpp').read_text()
-  anchor='        const bool captured=task.valid!=0;';assert anchor in backend
+  anchor='        const bool captured=RecoveryStartupDiagnostics::CapturedTaskInto(task);';assert anchor in backend
   backend_copy.write_text('extern void GlyphCaptureResponseBoundary();\n'+backend.replace(anchor,anchor+'\n        GlyphCaptureResponseBoundary();'))
   cpp=[temp/'startup.cpp',vendor,USB/'arduino/Adafruit_USBD_CDC.cpp',LEGACY/'checked_storage_unavailable.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp',ROOT/'src/core/config_rgb_target_validation.cpp',ROOT/'config/glyph/common/src/glyph_config_validation.cpp',libs/'nanopb-arduino/src/pb_arduino.cpp',backend_copy,ROOT/'HAL/pico/src/core/RecoveryStartupDiagnostics.cpp',ROOT/'HAL/pico/src/core/RecoveryUsbDiagnostics.cpp']
   exe=temp/'dcd';run(['c++','-std=c++17',*san,*defs,'-DEXPECT_DIAGNOSTICS=1','-Dtud_task_ext=__wrap_tud_task_ext',*inc,*cpp,*objects,'-o',exe])

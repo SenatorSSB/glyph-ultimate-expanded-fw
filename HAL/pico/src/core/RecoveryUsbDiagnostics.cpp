@@ -71,6 +71,7 @@ void observe(Observations &o){
 namespace RecoveryUsbDiagnostics {
 void BeginRecovery(){task_observer.Enable();}
 RecoveryTaskDiagnostics::Snapshot TaskRead(){return task_observer.Read();}
+void TaskReadInto(RecoveryTaskDiagnostics::Snapshot &out){task_observer.ReadInto(out);}
 void ObserveIndependent(){
     // SIE/INTR/INTS are non-destructive reads; no TinyUSB, mutex or NVIC read
     // on core1 (NVIC would describe core1, not the core0 USB IRQ).

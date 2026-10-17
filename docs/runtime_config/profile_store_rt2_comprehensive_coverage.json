@@ -1,6 +1,6 @@
 {
   "schema": "glyph_rt2_comprehensive_coverage_v1",
-  "parent": "3b5c92b2200753c795315a166dc7bd501a93a9f6",
+  "parent": "c95695ef2062ec38de94a28ce66b5aba2ad8db6b",
   "result": "READY_WITH_RESIDUALS",
   "branches": [
     {
@@ -134,5 +134,7 @@
     "captured_vs_live": "task telemetry frozen once with photo; existing raw USB fields explicitly live"
   },
   "no_root_cause_claim": true,
-  "hardware": "NOT_EXECUTED"
+  "hardware": "NOT_EXECUTED",
+  "source_base": "3b5c92b2200753c795315a166dc7bd501a93a9f6",
+  "residuals_supplement": "QUEUE_LOCK_ENTRY_RESIDUAL: inline Pico critical-section acquisition precedes wrapped FIFO; active/no event does not pinpoint that internal lock or other pre-dequeue code."
 }

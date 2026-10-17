@@ -20,6 +20,8 @@ bool same_task(const RecoveryTaskDiagnostics::Snapshot&a,const RecoveryTaskDiagn
 void frame(bool recent=false){
     const auto before=led_updates;
     independent(); // establish current invocation age independently at time0
+    RecoveryTaskDiagnostics::Snapshot caller_owned;caller_owned.valid=123;caller_owned.active=123;
+    require(!RecoveryStartupDiagnostics::CapturedTaskInto(caller_owned)&&!caller_owned.valid&&!caller_owned.active,"caller-owned capture getter clears unavailable pre-deadline cache");
     host_clock_us=9999999;independent();require(led_updates==before&&!RecoveryStartupDiagnostics::CapturedTask().valid,"no dashboard frame or captured task before ten seconds");
     host_clock_us=10000000;independent();
     const auto snap=RecoveryUsbDiagnostics::TaskRead();require(snap.valid,"final snapshot coherent");
@@ -29,11 +31,14 @@ void frame(bool recent=false){
     for(unsigned i=0;i<8;++i)require(led_words[led_words.size()-8+i]==(grb[i==0&&recent?RecoveryTaskDiagnostics::Yellow:snap.pixels[i]]<<8),"all physical dashboard colors match atomic snapshot");
     auto expected=snap;if(recent){expected.pixels[0]=RecoveryTaskDiagnostics::Yellow;expected.dashboard=(expected.dashboard&~15u)|RecoveryTaskDiagnostics::Yellow;}
     const auto captured=RecoveryStartupDiagnostics::CapturedTask();
+    require(RecoveryStartupDiagnostics::CapturedTaskInto(caller_owned)&&same_task(caller_owned,captured),"caller-owned captured output equals return-value snapshot");
+    RecoveryTaskDiagnostics::Snapshot live_owned;RecoveryUsbDiagnostics::TaskReadInto(live_owned);require(same_task(live_owned,snap),"caller-owned live output equals return-value snapshot");
     require(captured.valid&&same_task(captured,expected)&&captured.dashboard==RecoveryStartupDiagnostics::Dashboard(),"captured task fields and physical dashboard describe the same ten-second instant");
     const auto words=led_words;const auto scratch=watchdog_hw->scratch[3];
     physical_reset(); // IRQ events after capture cannot refresh the frozen panel
     host_clock_us=20000000;for(unsigned i=0;i<1000;++i)independent();
     require(led_words==words&&led_updates==before+1&&watchdog_hw->scratch[3]==scratch,"settled dashboard remains frozen with no refresh");
+    caller_owned.entered=123;require(RecoveryStartupDiagnostics::CapturedTaskInto(caller_owned)&&same_task(caller_owned,captured),"caller-owned capture output retains immutable ten-second fields after IRQ");
     require(same_task(captured,RecoveryStartupDiagnostics::CapturedTask())&&captured.dashboard==RecoveryStartupDiagnostics::Dashboard(),"immutable captured task survives later IRQ events and a thousand observer loops");
 }
 }

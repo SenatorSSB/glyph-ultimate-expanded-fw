@@ -23,6 +23,7 @@ enum class BootStage : uint8_t { BeforeSetup, Setup, MatrixSampling, MatrixSampl
 void ObserveIndependent();
 void BeginRecovery();
 RecoveryTaskDiagnostics::Snapshot TaskRead();
+void TaskReadInto(RecoveryTaskDiagnostics::Snapshot &out);
 void Stage(BootStage stage);
 void LoopEntered();
 void InspectionDecoded();
@@ -32,6 +33,7 @@ unsigned Furthest();
 inline void ObserveIndependent(){}
 inline void BeginRecovery(){}
 inline RecoveryTaskDiagnostics::Snapshot TaskRead(){return {};}
+inline void TaskReadInto(RecoveryTaskDiagnostics::Snapshot &out){out={};}
 inline void Stage(BootStage){}
 inline void LoopEntered(){}
 inline void InspectionDecoded(){}

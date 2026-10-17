@@ -84,10 +84,11 @@ public:
     void Inspection(){if(Enabled())inspection.store(1);}
     // Core1 only; read-only hardware samples do not acknowledge/clear USB bits.
     void ObserveRaw(bool raw,bool on){if(raw)raw_seen.store(1);pullup.store(on?2u:1u);}
-    Snapshot Read() const{
-        Snapshot s;const uint32_t f=fg.seq.load(),q=irq.seq.load(),t=task.seq.load();
+    Snapshot Read() const{Snapshot s;ReadInto(s);return s;}
+    void ReadInto(Snapshot &s) const{
+        s={};const uint32_t f=fg.seq.load(),q=irq.seq.load(),t=task.seq.load();
         uint32_t pseq[3];for(unsigned i=0;i<3;++i)pseq[i]=producer[i].seq.load();
-        if((f|q|t|pseq[0]|pseq[1]|pseq[2])&1u)return s;
+        if((f|q|t|pseq[0]|pseq[1]|pseq[2])&1u)return;
         s.entered=fg.entered.load();s.returned=fg.returned.load();s.active=fg.active.load();s.first_id=s.entered?1u:0u;s.first_returned=fg.first_returned.load();s.latest_returned=fg.latest.load();
         const uint32_t event_id=irq.invocation.load(),count=irq.current.load();
         s.total_resets=irq.total.load();s.pre_first_resets=irq.pre.load();s.first_resets=irq.first.load();s.post_first_resets=irq.post.load();s.event_flags=irq.flags.load();
@@ -95,9 +96,9 @@ public:
         s.configured_current=task.configured_current.load();s.class_entered=task.class_entered.load();s.class_returned=task.class_returned.load();s.setup_consumed=task.setup.load();s.control_began=task.control.load();s.empty_reads=task.empty.load();s.task_flags=task.flags.load()|(inspection.load()?16u:0u);
         for(unsigned i=0;i<3;++i){const Producer &p=producer[i];s.queue_attempted=add(s.queue_attempted,p.attempted.load());s.queue_accepted=add(s.queue_accepted,p.accepted.load());s.queue_failed=add(s.queue_failed,p.failed.load());s.reset_dropped=add(s.reset_dropped,p.reset_drop.load());s.setup_dropped=add(s.setup_dropped,p.setup_drop.load());const uint32_t n=p.maximum.load();if(n>s.max_occupancy)s.max_occupancy=n;}
         s.raw_setup_seen=raw_seen.load();s.pullup=pullup.load();
-        if(f!=fg.seq.load()||q!=irq.seq.load()||t!=task.seq.load())return s;
-        for(unsigned i=0;i<3;++i)if(pseq[i]!=producer[i].seq.load())return s;
-        if(s.active==UINT32_MAX)return s; // never reuse saturated task identity
+        if(f!=fg.seq.load()||q!=irq.seq.load()||t!=task.seq.load())return;
+        for(unsigned i=0;i<3;++i)if(pseq[i]!=producer[i].seq.load())return;
+        if(s.active==UINT32_MAX)return; // never reuse saturated task identity
         s.valid=Enabled()?1u:0u;s.active_resets=s.active&&event_id==s.active?count:0;
         s.task_pixel=s.first_returned?4:s.entered?(s.first_resets>=2?3:s.first_resets?2:1):0;
         s.progress_pixel=s.first_reset_completed?1:0;if(s.event_flags&2u)s.progress_pixel=2;if(s.task_flags&1u)s.progress_pixel=3;if(s.task_flags&24u)s.progress_pixel=4;
@@ -112,7 +113,7 @@ public:
         s.pixels[6]=(s.task_flags&16u)?White:s.configured_current?Green:(s.task_flags&8u)?Magenta:(s.task_flags&4u)?Blue:(s.task_flags&2u)?Cyan:(s.task_flags&1u)?Yellow:Off;
         s.pixels[7]=s.pullup==2?Orange:s.pullup==1?Red:Off;
         for(unsigned i=0;i<8;++i)s.dashboard|=uint32_t(s.pixels[i])<<(4*i);
-        return s;
+        return;
     }
 };
 }

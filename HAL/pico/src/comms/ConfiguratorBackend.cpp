@@ -804,9 +804,11 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.recovery_usb_e5_flags=usb.e5_flags;
         response.recovery_usb_observation_valid=usb.observation_valid;
         response.recovery_usb_task_reset_count=usb.task_reset_count;
-        auto task=RecoveryStartupDiagnostics::CapturedTask();
-        const bool captured=task.valid!=0;
-        if(!task.valid)task=RecoveryUsbDiagnostics::TaskRead();
+        // Same single core0 owner as the request/response/frame storage above.
+        // Keep the expanded diagnostic snapshot off the bounded stack; no heap.
+        static RecoveryTaskDiagnostics::Snapshot task;
+        const bool captured=RecoveryStartupDiagnostics::CapturedTaskInto(task);
+        if(!captured)RecoveryUsbDiagnostics::TaskReadInto(task);
         response.recovery_task_version=5;
         response.recovery_task_valid=task.valid;
         response.recovery_task_entered=task.entered;

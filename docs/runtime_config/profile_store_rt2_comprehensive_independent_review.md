@@ -70,3 +70,22 @@ Read in full the new comprehensive contract, A-Q coverage JSON, separate stopped
 Precommit documentation approval: **PASS_WITH_RESIDUALS**, with one minor stale contract label identified to the author for correction before commit: comprehensive task diagnostic version is5, matching `response.recovery_task_version=5`; startup version6 is correct. This is a prose-version alignment, no source change requested. Final committed target build, all14 incoming call/table wrapper bindings, both-core stack/resources and immutable custody still need the separately requested artifact approval. No final artifact or hardware PASS is implied by this source review.
 
 Final harness report SHA-256: `dc01ae6b4af0f5c11075d1ac6249ca4aa347abe5dd70933cc98a76b3b5488f39`.
+
+## Bounded stack-gate repair review
+
+Intermediate committed c95695ef2062ec38de94a28ce66b5aba2ad8db6b built successfully but the actual CREATE stack checker rejected the expanded backend frame. It is retained as an intermediate and is not hardware-ready. No gate was relaxed. A simple static-assignment experiment still retained a large sret temporary and was rejected.
+
+Reviewed final repair: `State::ReadInto(Snapshot&)` initializes the complete output to zero before every bounded sequence read, preserving invalid-on-mixed/odd semantics and preventing stale valid state in a reused cache. Existing by-value `Read()` delegates to this same implementation. `TaskReadInto` forwards into the caller's storage. `CapturedTaskInto` acquires the one frozen publication, clears/returns false before it exists, or copies the immutable capture and returns true after it exists. The backend uses that returned decision once for captured/live selection and dashboard/time fields. Its static diagnostic cache shares the existing request/response/frame sole-core0, nonreentrant owner; no USB callback invokes this backend dispatcher. No new heap, USB lock, vendor edit or behavior policy is introduced. New BSS/heap-capacity cost must be reported in final target resources.
+
+Direct target O3 backend stack probe now records HandleProfileStore392B, below the unchanged512B gate; this is provisional until the exact final committed artifact reruns the native CREATE checker. Independently reran the ASan/UBSan bank exercise against these APIs, adding by-value/output equivalence and disabled-state stale-valid clearing: PASS. No source implementation blocker found in this repair. Required final comprehensive harness, exact descendant build/resources/custody and artifact approval remain pending. The earlier c956 binding/stack evidence is explicitly intermediate and must not be substituted for the final descendant.
+
+```json
+{
+  "HAL/pico/src/comms/ConfiguratorBackend.cpp": "2d3d701a64d45ed3218e5a05c5b0da17b7922d9bc7e21c878cafa49a701dd728",
+  "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp": "2f2097cdb11037ded66b8a7a127bec259f8356b4d04e531f7ff3ec7e84ff7914",
+  "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": "cacee36a83970d9c493ce5a829761401796a9e9a040057e443105eaec59487ec",
+  "include/core/RecoveryStartupDiagnostics.hpp": "58e00e63f520fdcfde368a07db51bcb9ada189eb9261179133d498419476f165",
+  "include/core/RecoveryUsbDiagnostics.hpp": "5e42f751ca213a9409dc8f90c1f3e140c4f6e8659a1e0be471c1c030e9b6d6c2",
+  "include/core/RecoveryTaskDiagnostics.hpp": "58fa4a076840fdc093ab6a6670ee7473c84e45e0aef859acd5e746c7b2743a7f"
+}
+```

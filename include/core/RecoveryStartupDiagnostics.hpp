@@ -32,6 +32,7 @@ inline uint32_t TakePrevious(volatile uint32_t *scratch) {
 // bus-connected16, configured32, CDC DTR64, indicator available128.
 #if defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE && (defined(ARDUINO_ARCH_RP2040) || defined(GLYPH_RECOVERY_DIAGNOSTICS_HOST))
 RecoveryTaskDiagnostics::Snapshot CapturedTask();
+bool CapturedTaskInto(RecoveryTaskDiagnostics::Snapshot &out);
 uint32_t Dashboard();
 uint32_t CaptureActiveAgeUs();
 uint32_t CaptureElapsedUs();
@@ -44,6 +45,7 @@ uint32_t Current();
 uint32_t Previous();
 #else
 inline RecoveryTaskDiagnostics::Snapshot CapturedTask(){return {};}
+inline bool CapturedTaskInto(RecoveryTaskDiagnostics::Snapshot &out){out={};return false;}
 inline uint32_t Dashboard(){return 0;}
 inline uint32_t CaptureActiveAgeUs(){return 0;}
 inline uint32_t CaptureElapsedUs(){return 0;}
