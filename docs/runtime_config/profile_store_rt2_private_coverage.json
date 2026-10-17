@@ -1,0 +1,117 @@
+{
+  "status": "PASS_HOST_SOURCE_HARDWARE_NOT_TESTED",
+  "base": "88a36e67bcdf4acc447707da42687501afcd4d13",
+  "host_report_sha256": "15170a898dc85252eb7d19f6f584dc994c5982315e0e0ce3a94a47fe36e0e5ea",
+  "host_cases": 134,
+  "private_cases": 45,
+  "negative_controls": 36,
+  "missing_private_marker_negatives": 13,
+  "integration_controls": "13 marker removal +16 other controls; corrected real build graph PASS",
+  "panic_Thumb_ABI_trials": 48,
+  "dependency_hashes": 768,
+  "owner18case_matrix": {
+    "1_no_setup": "private-none",
+    "2_setup_only": "private-setup",
+    "3_setup_reset": "private-setup-reset",
+    "4_setup_buff": "private-setup-buff",
+    "5_setup_sof": "private-setup-sof",
+    "6_normal": "private-normal",
+    "7_before_pid": "private-stop-6-after",
+    "8_after_pid": "private-stop-7-after",
+    "9_before_event": "private-stop-8-after",
+    "10_event_return": "private-stop-9-after",
+    "11_accept": "private-queue-accept",
+    "12_drop": "private-queue-drop",
+    "13_later": "private-later",
+    "14_raw_between": "private-raw-between",
+    "15_raw_active": "private-raw-active",
+    "16_no_raw": "private-no-raw",
+    "17_reset_setup": "private-reset-setup",
+    "18_frozen": "private-freeze"
+  },
+  "regressions": {
+    "result": "PASS_FOCUSED_REGRESSIONS",
+    "hardware": "NOT_TESTED",
+    "scope": "all11 commands exit0; explicit old/frozen negative failures retained inside expected controls",
+    "logs": {
+      "regression-cdc-rx.log": {
+        "sha256": "68ee27943ce2201d656f8387de44e0341cd50633fb0ce6667dcca989a4d82c99",
+        "bytes": 40740
+      },
+      "regression-cdc-tx.log": {
+        "sha256": "a4ca8cc83515a9df5579c8cdf42949b1ab9f3127c3c434b972e23df8ce619f8f",
+        "bytes": 2140
+      },
+      "regression-liveness.log": {
+        "sha256": "2d7f327032d0e57187b81e45a0e0896c02cbbc0da740f7e07e0cba088a80db2d",
+        "bytes": 2025
+      },
+      "regression-migration.log": {
+        "sha256": "202e9822fb9fe980cc4f1d84bec0ed7e55cf19a9199b1ab795c731ef5f8c8d38",
+        "bytes": 290
+      },
+      "regression-persistence.log": {
+        "sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84",
+        "bytes": 1391
+      },
+      "regression-read-storage.log": {
+        "sha256": "6ef65496f31db28a0c792043b3b4accf133114c12d8a664398cbe0e87129348a",
+        "bytes": 5241
+      },
+      "regression-root.log": {
+        "sha256": "f0ccbf7bc181c3206c252249badd8da9758db6f999d4a9e68e5276cd865ac21d",
+        "bytes": 2043
+      },
+      "regression-rx-host.log": {
+        "sha256": "0c5eb7a74e3fc3bd3903b665de5a3dc9f1555dec49fc34e1fb3cea5cf9ec1613",
+        "bytes": 3638
+      },
+      "regression-selection.log": {
+        "sha256": "ddb1db1539bb8f15c8381d287eaa528bd71019a02d5a1df2c2f3058ed061becc",
+        "bytes": 486
+      },
+      "regression-startup.log": {
+        "sha256": "7d2bb7f69e734c0509fde11e97ffcf6a47d79e7fe09a8055963900ff1182d7a9",
+        "bytes": 4184
+      },
+      "regression-strict.log": {
+        "sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb",
+        "bytes": 1931
+      }
+    },
+    "normal_Configurator": "Current startup/normal source-host control PASS: external observers and publication inactive; private boot-lifetime stores exercised separately in actual-patched-TU pre-enable cases, not claimed absent. Hardware normal acceptance NOT_TESTED.",
+    "framework_aggregate": "NOT_RUN_NOT_CLAIMED",
+    "read_storage_schema_max": 7851,
+    "protocol_frame": 8192,
+    "invariance": {
+      "base": "88a36e67bcdf4acc447707da42687501afcd4d13",
+      "checks": {
+        "HAL/pico/src/core/ProfileStore.cpp": "byte-identical",
+        "HAL/pico/src/core/Persistence.cpp": "byte-identical",
+        "include/core/ProfileStore.hpp": "byte-identical",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp": "byte-identical",
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp": "byte-identical",
+        "include/core/ProfileStoreFaultControls.hpp": "byte-identical",
+        "config/glyph/common/src/config.cpp": "byte-identical",
+        "ConfiguratorBackend::ConfiguratorBackend(": "function-identical",
+        "int ConfiguratorBackend::ReadByte(": "function-identical",
+        "size_t ConfiguratorBackend::ReadPacket(": "function-identical",
+        "void ConfiguratorBackend::SendReport(": "function-identical",
+        "bool ConfiguratorBackend::WriteProfilePacket(": "function-identical",
+        "message Config {": "message-identical",
+        "message UltimateProfile {": "message-identical",
+        "message ProfileStoreRequest {": "message-identical"
+      }
+    },
+    "affected_reruns": "Current24field read-storage andstartup PASS; remaining9 unchanged functionalregressions retained; no relevant runtime transport/storage changes"
+  },
+  "limits": [
+    "hardware NOT_TESTED",
+    "root cause UNPROVEN",
+    "target assembly/ELF/resource proof after exactcommitbuild",
+    "all same-boot milestones only; historical rawSETUPnotmerged",
+    "SDK/IRQ/ROM/indirect stack/cycle bounds UNKNOWN"
+  ],
+  "target_assertion_repair": "Overbroad generalRMW trait assertion removed; alignedLOAD/STORE actualtargetprobesPASS nohelpers. Final134case/36negative proof includes boot history/window discriminator; prior receipts preserved.",
+  "boot_lifetime_history": "all actualDCDcalls fromfirstentry; Enablegatesvalidityonly/noreset; separatefirst-enabledrecord permits exactexternalwindowassociation; LF4ORANGEpreonlyvsYELLOWenabled"
+}

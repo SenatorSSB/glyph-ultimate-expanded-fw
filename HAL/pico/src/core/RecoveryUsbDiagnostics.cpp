@@ -19,6 +19,7 @@ namespace {
 RecoveryTaskDiagnostics::State task_observer;
 RecoverySetupIrqDiagnostics::State setup_observer;
 RecoveryPreSetupDiagnostics::State pre_setup_observer;
+RecoveryPrivateDcdDiagnostics::State private_dcd_observer;
 // Milestones are sticky within the latest DCD BUS_RESET epoch.
 volatile bool reset_seen=false,setup_seen=false,descriptor_seen=false;
 volatile bool address_requested=false,address_applied=false,configured=false;
@@ -106,8 +107,14 @@ void observe(Observations &o){
        (ints&USB_INTS_SETUP_REQ_BITS)){if(o.raw!=UINT32_MAX)++o.raw;}
 }
 }
+// Called only by the exact private USBCTRL TU, including before recovery.
+// Enable gates valid publication only; boot-lifetime history never resets.
+extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateMarker(uint32_t marker,uint32_t value){
+    private_dcd_observer.Marker(marker,value);
+}
 namespace RecoveryUsbDiagnostics {
-void BeginRecovery(){task_observer.Enable();setup_observer.Enable();pre_setup_observer.Enable();}
+void BeginRecovery(){task_observer.Enable();setup_observer.Enable();pre_setup_observer.Enable();private_dcd_observer.Enable();}
+void PrivateReadInto(RecoveryPrivateDcdDiagnostics::Snapshot &out){private_dcd_observer.ReadInto(out);}
 void PreSetupReadInto(RecoveryPreSetupDiagnostics::Snapshot &out){pre_setup_observer.ReadInto(out);}
 void SetupReadInto(RecoverySetupIrqDiagnostics::Snapshot &out){setup_observer.ReadInto(out);}
 RecoveryTaskDiagnostics::Snapshot TaskRead(){return task_observer.Read();}

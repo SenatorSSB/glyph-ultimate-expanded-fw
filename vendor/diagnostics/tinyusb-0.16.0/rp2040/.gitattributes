@@ -1,0 +1,2 @@
+# Preserve the pinned pristine CRLF bytes independently of Git newline settings.
+dcd_rp2040.c -text

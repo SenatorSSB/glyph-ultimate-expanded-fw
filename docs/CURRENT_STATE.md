@@ -1,5 +1,24 @@
 # Glyph Current State
 
+## Owner-scoped exact private DCD observer — 2026-10-17
+
+Exact88a36e normal Configurator control is owner-reported PASS, generation166,
+accepted useful profiles/Config unchanged, core min-free1856/3716, heap10716/72156.
+Its ONE RT2 showed LF4GREEN/LF3OFF/LF5OFF, black/no matching USB or serial. Latest
+observed handler returned; no pre-SETUP/panic/downstream marker, raw SETUP in this
+boot UNKNOWN. Classification `MULTI_PROFILE_STORE_88A36E_RT2_PRE_SETUP_TRANSPORT_UNAVAILABLE`.
+Do not combine this boot with3761 raw-SETUP/no-event or0f22 historical sequential
+SIE/INTR/INTS-positive/no-event evidence. Root cause UNPROVEN.
+Latest direct owner scope authorizes one exact pinned candidate-owned private DCD
+copy/instrumentation, source/hash/exclusion/assembly proof, tests/review/build/custody
+and prepared hardware packets. No installed vendor edit, USB/endpoint repair,
+controller action or canonical merge. Separate stopped88a36e normal read-only
+adjudication must PASS before replacement. See
+[physical adjudication](runtime_config/profile_store_rt2_private_physical_adjudication.json)
+and [private observer contract](runtime_config/profile_store_rt2_private_contract.md).
+Older scoped summaries below remain historical within their original authority.
+
+
 ## Owner-scoped pre-SETUP handler / endpoint panic observer — 2026-10-17
 
 Exact0f22 normal control is owner-reported PASS. One RT2 produced LF4WHITE,

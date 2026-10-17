@@ -1,0 +1,170 @@
+{
+  "role": "fresh_private_dcd_review",
+  "review": "INDEPENDENT_SOURCE_PASS_BOOT_LIFETIME_AND_WINDOW_DISCRIMINATOR",
+  "created_utc": "2026-10-17T18:40:54.687748+00:00",
+  "base": "88a36e67bcdf4acc447707da42687501afcd4d13",
+  "base_tree": "b46588497bc5a75f5dd4a42ce750f6525fb767b0",
+  "canonical": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "material_findings": [
+    {
+      "finding": "Initial general atomic lockfree trait assertion did not compile for CortexM0 target",
+      "status": "REPAIRED_REVIEWED",
+      "repair": "Only broad is_always_lock_free assertion removed; aligned32load/store operations retained; actualtargetprobePASS; finalnohelpers gate retained."
+    },
+    {
+      "finding": "Recovery-only private history could omit earlyboot localSETUP; always-on history then needed cross-window external-event discriminator",
+      "status": "REPAIRED_REVIEWED",
+      "repair": "Allprivatecalls now record fromzeroBSS boot; Enablegatesvalidity and selects additional enabled-H1 record, nohistoryreset.100Bbank/96Bsnapshot and response205\u2013208; three actualpatchedTU preenable scenarios; panelORANGEexplicitpreenableonly prevents crosswindoweventclaim."
+    }
+  ],
+  "approval_scope": "Frozen30-path source/docs/test diagnostic candidate may proceed to exact clean commit/build; exact byte copy of this receipt into docs/runtime_config/profile_store_rt2_private_source_review.json is reviewed as the31st nonbehavioral provenance path and deliberately excluded from its own hash manifest. Final ELF/structural assembly/resources/custody review remains required; hardware NOT_TESTED, no canonical merge authority.",
+  "authority": "Direct owner attachment184ed11d-261c-45a3-8071-533f5d609012/Pasted text.txt independently read with current repository contracts. No peer message treated as owner scope.",
+  "independent_checks": {
+    "installed_pristine_reconstructed_exact_bytes": "PASS 18095B,578CRLF,0loneLF; only13hooks+include removed",
+    "pristine_sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "patched_sha256": "88e5af8b24e18895bceba246f7759b66bd7eaa6352b49fd03b02b43a9f9b1d77",
+    "sampler_concurrent_reader_ASan_UBSan": "independently compiled and executed updated100Bstate/96Bsnapshot sampler PASS",
+    "final_host_report_sha256": "15170a898dc85252eb7d19f6f584dc994c5982315e0e0ce3a94a47fe36e0e5ea",
+    "host_report_inputs": "all768 current input hashes independently recomputed MATCH",
+    "host_tests": "134cases (89retained+45private),36negative controls,48ABI trials; all768 input hashes independently recomputed MATCH",
+    "focused_regressions": "11log hashes independently recomputed MATCH. Current24-field read-storage and startup rerunsPASS; remaining9 retained where unchanged source/semantics; private bootlifetime/window seam covered fresh134/36 host tests",
+    "actual_compiledb": "exactly1 DCD source, candidategenerated input/privateobject output; inheritedoriginalparentinclude/targetflags inspected",
+    "schema_packet": "response-only183\u2013208, Snapshot96B/State100B; Config/UltimateProfile/Request invariant; worstschema7851<8192",
+    "physical_and_packets": "88a36e GREEN/OFF/OFF supports latestreturned/rawUNKNOWN;3761/0f22 separate; stopped88a36e one-normalboot readonly adjudication before replacement; one new RT2 and STOP boundaries intact",
+    "concurrency_and_history": "soleUSBIRQwriter aligned32 seq_cst bank closed per marker; bounded readers; globalfirst/latest retained fromfirstbootDCD call even before Enable; independent enabled first record keyed to exactH1id; same frozen releasepublication",
+    "latency_and_resources": "newcalls/seq_cstDMBperturbation acknowledged including normalboot; final instruction/DMB/stack/resource inventory pending artifact review",
+    "newline_custody": "vendorlocal -text attribute reviewed and hashed",
+    "target_header": "independently compiled Cortex-M0+ Thumb ARMv6-M gnu++17 -Og State::Marker/ReadInto PASS;100BzeroBSS state/no initializer/.init_array/noatomichelpers. Probe independent-boot-history-target-probe.txt",
+    "final_host_report_path": "local_backups/private-handler/boot-lifetime-host-proof/report.json",
+    "panel_windows": "LF4ORANGE solelypre-enableSETUP, YELLOWenabledSETUP; LF3firstenabledrecordelsefirstglobal; disabledexternalhistory never compared to preenableH6/H7. Exactenabledrecords needed for CASED/E; earlyonly event progression stays historical."
+  },
+  "changed_path_count": 30,
+  "changed_files": {
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "sha256": "0f85426a898359fde2c941aa89a582d61b0f8aada1f5ae7be34c6c164f3ecd4f",
+      "bytes": 55527
+    },
+    "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp": {
+      "sha256": "26940ad789b7a4c876c5fed66e2a13e89487017370542e119f4a093cc5dce631",
+      "bytes": 11212
+    },
+    "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": {
+      "sha256": "873af845aeb3514abd5b48760330c734a2c2f1d150376fbecc8aa3db5f7cce09",
+      "bytes": 22718
+    },
+    "builder_scripts/rt2_private_dcd.py": {
+      "sha256": "5271c1bb5926b33ad5e04cc472a2293152644bc4a45f3b3845ee9e4001eab806",
+      "bytes": 3612
+    },
+    "config/glyph/env.ini": {
+      "sha256": "60504420139f798106d6a5b4f80181b4e0c01c8fbbbe9a5a6d28a7f3b5dff2f9",
+      "bytes": 1785
+    },
+    "docs/AGENT_CONTEXT.md": {
+      "sha256": "6996533b6b52c578cb320d0cea75b4e71f24692e094e250a4311bb86c74ce01b",
+      "bytes": 52432
+    },
+    "docs/CURRENT_STATE.md": {
+      "sha256": "581b86c31a45d153fa2d6856028f3583a5f5507da00ba9f4663c6c6c5f70a783",
+      "bytes": 36506
+    },
+    "docs/ROADMAP.md": {
+      "sha256": "586b7fbc2226b8b08ef4bd5b2fab7bd409edb755bfa8f8a54cf7c8a9bf763fb1",
+      "bytes": 74495
+    },
+    "docs/runtime_config/profile_store_rt2_private_contract.md": {
+      "sha256": "588b88c0f6b155ffc44ce5a99d3f46914f89c82c035e09433ed32626c622e40a",
+      "bytes": 11919
+    },
+    "docs/runtime_config/profile_store_rt2_private_coverage.json": {
+      "sha256": "0c1fa8ff0a2c482aacd29ee43cbae0b04c95dfd4265b7f27442c4536f01a1136",
+      "bytes": 5485
+    },
+    "docs/runtime_config/profile_store_rt2_private_device_adjudication.md": {
+      "sha256": "62ae5cec0263ba751a71808db4efb94e32563391891d412ee0ca06314e139de7",
+      "bytes": 2766
+    },
+    "docs/runtime_config/profile_store_rt2_private_hardware_packet.md": {
+      "sha256": "605d8ab7678c131a05aad15ee5d621800426ec7ac47872b4365c1cc0280574f8",
+      "bytes": 5900
+    },
+    "docs/runtime_config/profile_store_rt2_private_physical_adjudication.json": {
+      "sha256": "0ea382a149b7dbb22adb5385c968b370323eaf5bf5351d36ac72abcea9c6d081",
+      "bytes": 1948
+    },
+    "docs/runtime_config/profile_store_rt2_private_source_audit.md": {
+      "sha256": "7fa51bed6da342b46cb660204774dfeb0e5b51cc82397310a2c8184826d32b60",
+      "bytes": 7994
+    },
+    "include/core/RecoveryPrivateDcdDiagnostics.hpp": {
+      "sha256": "87e70cc34f20637ffb957ec13bc1aa8589294e5508f006304d88239fbbdb9e9a",
+      "bytes": 6720
+    },
+    "include/core/RecoveryPrivateDcdMarkers.h": {
+      "sha256": "3b195332d9ac0272b1568f6d87f83dafb634666472dd7cddaa963171c305f42f",
+      "bytes": 721
+    },
+    "include/core/RecoveryStartupDiagnostics.hpp": {
+      "sha256": "00e4eb00ade5bf90af1c40c5c11ff4201cbe0e695c36e9db30094aabc81be5ca",
+      "bytes": 3874
+    },
+    "include/core/RecoveryUsbDiagnostics.hpp": {
+      "sha256": "a4c0f8703179cd779def80668baac6fbd32cb2b85184507b8893dfbf9fc303ee",
+      "bytes": 2484
+    },
+    "schema/haybox/config.proto": {
+      "sha256": "19d8d68231422b8bc566a8d03cbfa10e1fce900a54fb82424ea622fcdfeffd45",
+      "bytes": 41113
+    },
+    "tools/check_glyph_rt2_private_handler.py": {
+      "sha256": "2e9579557794ede8d6cf642c7663d40b21e9b195e0ee4f762a9d024403272231",
+      "bytes": 33331
+    },
+    "tools/check_glyph_rt2_private_integration.py": {
+      "sha256": "daf47a20e21709aa3713d81d4a8006ee287f3d049bdf365e9c9ae32ce7e3949b",
+      "bytes": 6009
+    },
+    "tools/fixtures/rt2_private_dcd_host/cases.inc": {
+      "sha256": "ab948d5b18c0f0a0a57108e2afa727db4774053479d17c9abf72e93c1cced02f",
+      "bytes": 23147
+    },
+    "tools/fixtures/rt2_private_dcd_host/focused.inc": {
+      "sha256": "ff4ec7aa549a26444cf357951a79a3c1c8d59e3e6c3ed0fe1a4bd2944d2db4d9",
+      "bytes": 8284
+    },
+    "tools/fixtures/rt2_private_dcd_host/private.inc": {
+      "sha256": "fac9445faaf73223aff46e42a79b61e328e64ca9431931faf8c18f495fd9505a",
+      "bytes": 14098
+    },
+    "tools/fixtures/rt2_private_dcd_host/sampler.cpp": {
+      "sha256": "c23eb725e3bb652908470bcb72b3fa596442f0841e30dee9795ee4fcd88a1289",
+      "bytes": 3247
+    },
+    "tools/fixtures/rt2_private_dcd_host/timing.inc": {
+      "sha256": "210165427bc49c7b111b7cb3624b7a5a8fa3cedd95c77f4915e713f348f3b78d",
+      "bytes": 1285
+    },
+    "tools/rt2_private_dcd.py": {
+      "sha256": "c425e3a3dd6727a69484944f70a1a309b6da71b0b75a9765a7aa280692cf73b2",
+      "bytes": 5578
+    },
+    "tools/rt2_private_dcd_assembly.py": {
+      "sha256": "49bf3f410a76ea26060be33a879fe4aa8149312c29339c6703fb7110eb2a1ed1",
+      "bytes": 4084
+    },
+    "vendor/diagnostics/tinyusb-0.16.0/rp2040/.gitattributes": {
+      "sha256": "5b5d98a8db01a8bf933f9ce8c75e91636398a1a80d8c8bebaff431cf4df3062e",
+      "bytes": 100
+    },
+    "vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c": {
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+      "bytes": 18095
+    }
+  },
+  "reviewer_mutation_scope": "Only this ignored independent receipt; temporary sampler executable auto-removed. No source/Git/device/network/build/publication action.",
+  "supersedes": "v1targettrait failure and v2recovery-only history limitation superseded; both repaired before final firmwarebuild"
+}

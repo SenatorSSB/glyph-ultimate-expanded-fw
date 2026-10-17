@@ -809,6 +809,33 @@ message ProfileStoreResponse {
   uint32 recovery_pre_setup_panic_irq = 180;
   uint32 recovery_pre_setup_ep_pointer = 181;
   uint32 recovery_pre_setup_capture_active_age_us = 182;
+  // Candidate-owned private DCD response-only telemetry; no persisted schema.
+  uint32 recovery_private_dcd_version = 183;
+  uint32 recovery_private_dcd_valid = 184;
+  uint32 recovery_private_dcd_captured = 185;
+  uint32 recovery_private_dcd_entries = 186;
+  uint32 recovery_private_dcd_returns = 187;
+  uint32 recovery_private_dcd_setup_status_count = 188;
+  uint32 recovery_private_dcd_reset_status_count = 189;
+  uint32 recovery_private_dcd_buff_status_count = 190;
+  uint32 recovery_private_dcd_multi_status_count = 191;
+  uint32 recovery_private_dcd_ever_status = 192;
+  uint32 recovery_private_dcd_latest_id = 193;
+  uint32 recovery_private_dcd_latest_status = 194;
+  uint32 recovery_private_dcd_latest_markers = 195;
+  uint32 recovery_private_dcd_active = 196;
+  uint32 recovery_private_dcd_first_setup_id = 197;
+  uint32 recovery_private_dcd_first_setup_status = 198;
+  uint32 recovery_private_dcd_first_setup_markers = 199;
+  uint32 recovery_private_dcd_latest_setup_id = 200;
+  uint32 recovery_private_dcd_latest_setup_status = 201;
+  uint32 recovery_private_dcd_latest_setup_markers = 202;
+  uint32 recovery_private_dcd_setup_test_false_count = 203;
+  uint32 recovery_private_dcd_marker_calls = 204;
+  uint32 recovery_private_dcd_enabled_setup_count = 205;
+  uint32 recovery_private_dcd_first_enabled_setup_id = 206;
+  uint32 recovery_private_dcd_first_enabled_setup_status = 207;
+  uint32 recovery_private_dcd_first_enabled_setup_markers = 208;
 
 
 }

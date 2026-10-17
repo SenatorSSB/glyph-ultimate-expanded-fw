@@ -1,0 +1,45 @@
+{
+  "classification": "MULTI_PROFILE_STORE_88A36E_RT2_PRE_SETUP_TRANSPORT_UNAVAILABLE",
+  "source": "direct owner attachment184ed11d-261c-45a3-8071-533f5d609012/Pasted text.txt",
+  "candidate": "88a36e67bcdf4acc447707da42687501afcd4d13",
+  "tree": "b46588497bc5a75f5dd4a42ce750f6525fb767b0",
+  "parent": "0f22b6d3b5d4a1a16fc7fd03866cfa44336de4ff",
+  "normal_control": {
+    "status": "OWNER_REPORTED_PASS",
+    "firmware": "88a36e67",
+    "endpoint": "/dev/cu.usbmodem101",
+    "store_generation": 166,
+    "accepted_useful_profiles_and_Config": "preserved",
+    "core0_min_free": 1856,
+    "core1_min_free": 3716,
+    "heap_reported": 10716,
+    "heap_capacity": 72156,
+    "expected_incarnation_for_adjudication": 1
+  },
+  "RT2": {
+    "attempts": 1,
+    "LF4": "GREEN",
+    "LF3": "OFF",
+    "LF5": "OFF",
+    "display": "black",
+    "matching_IORegistry_USB_identity": false,
+    "serial_endpoint": false,
+    "handler": "latest observed invocation returned",
+    "pre_setup": "no SOF/xfer/inactivepredicate/interceptedpanic marker",
+    "downstream": "no externalSETUP/queue/consume/control/descriptor/address/config progress",
+    "raw_SETUP_reproduction": "UNKNOWN",
+    "subsequent_actions": "NONE owner-reported"
+  },
+  "non_claims": [
+    "USBCTRL nonreturn not supported by this boot",
+    "inactive endpoint panic not supported",
+    "intercepted preSETUP panic not supported",
+    "rawSETUP in88a36e UNKNOWN",
+    "root cause UNPROVEN"
+  ],
+  "prior_boots_separate": {
+    "3761": "RAW_SETUP_OBSERVED_NO_DCD_SETUP_EVENT; one reset emitted/completed/next read reached, no drop, pullupON; no downstream",
+    "0f22": "SETUP_INTERRUPT_STATUS_OBSERVED_NO_DCD_SETUP_EVENT; SIE/INTR/INTS historic positives NOT necessarily simultaneous; no stronger sampled gate/trampoline condition; no downstream"
+  },
+  "retained": "variation relevant; MB1 role decoding physicallyunreliable; B2/E5 physicallyinapplicable; selection/Nunchuk NOT_TESTED"
+}

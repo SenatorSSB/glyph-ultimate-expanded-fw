@@ -26,6 +26,7 @@ unsigned captured_pixels[8]={};
 RecoveryTaskDiagnostics::Snapshot captured_task;
 RecoverySetupIrqDiagnostics::Snapshot captured_setup;
 RecoveryPreSetupDiagnostics::Snapshot captured_pre_setup,pre_setup_sample;
+RecoveryPrivateDcdDiagnostics::Snapshot captured_private,private_sample;
 RecoveryTaskDiagnostics::Snapshot task_sample;
 RecoverySetupIrqDiagnostics::Snapshot setup_sample;
 
@@ -135,15 +136,17 @@ void PublishIndependent(){
         RecoveryUsbDiagnostics::TaskReadInto(task_sample);
         RecoveryUsbDiagnostics::SetupReadInto(setup_sample);
         RecoveryUsbDiagnostics::PreSetupReadInto(pre_setup_sample);
+        RecoveryUsbDiagnostics::PrivateReadInto(private_sample);
         const auto &s=task_sample;
-        if(!s.valid||!setup_sample.valid||!pre_setup_sample.valid)return; // one attempt per ordinary loop; never spin
+        if(!s.valid||!setup_sample.valid||!pre_setup_sample.valid||!private_sample.valid)return; // one attempt per ordinary loop; never spin
         const uint64_t now=time_us_64();
         if(s.active!=last_active){last_active=s.active;active_since_us=now;}
         if(pre_setup_sample.irq_active!=last_irq_active){last_irq_active=pre_setup_sample.irq_active;irq_active_since_us=now;}
         if(now-handoff_us<10000000u)return;
         const uint64_t age=s.active?now-active_since_us:0;
         const uint64_t irq_age=pre_setup_sample.irq_active?now-irq_active_since_us:0;
-        RecoveryPreSetupDiagnostics::Panel(pre_setup_sample,setup_sample,s,irq_age>UINT32_MAX?UINT32_MAX:uint32_t(irq_age),captured_pixels);
+        RecoveryPrivateDcdDiagnostics::Panel(private_sample,pre_setup_sample,setup_sample,s,captured_pixels);
+        captured_private=private_sample;
         captured_pre_setup=pre_setup_sample;
         captured_setup=setup_sample;
         uint32_t packed=0;for(unsigned i=0;i<8;++i)packed|=uint32_t(captured_pixels[i])<<(4*i);
@@ -160,6 +163,10 @@ void PublishIndependent(){
         capture_ready=true;
     }
     if(ShowPanel())panel_shown=true; // unchanged settled panel is never refreshed
+}
+bool CapturedPrivateInto(RecoveryPrivateDcdDiagnostics::Snapshot &out){
+    if(!published_pair.load(std::memory_order_acquire)){out={};return false;}
+    out=captured_private;return true;
 }
 bool CapturedPreSetupInto(RecoveryPreSetupDiagnostics::Snapshot &out){
     if(!published_pair.load(std::memory_order_acquire)){out={};return false;}
