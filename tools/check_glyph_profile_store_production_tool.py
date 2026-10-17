@@ -24,13 +24,13 @@ def main():
       for x in ('arm','clear','pulse','replay','query','--trace','--fault-ticket','1'):
         yes(rejected([*base,x]),'retired control rejected '+x)
       a=tool.parse_args(base); m=tool.build_message(a,pb,jf)
-      healthy=pb.ProfileStoreResponse(status=pb.PROFILE_STORE_OK,mutation_protocol_version=2,store_incarnation=1,store_generation=166,transaction_token_high_water=0xf000000000001d00,mutation_feasible=True)
+      healthy=pb.ProfileStoreResponse(protocol_version=2,status=pb.PROFILE_STORE_OK,mutation_protocol_version=2,store_incarnation=1,store_generation=166,transaction_token_high_water=0xf000000000001d00,mutation_feasible=True)
       tool.verify_production_status(a,pb,healthy)
       # This is the old mismatch: production omits strict marker and candidate helper must still refuse it.
       try: candidate.verify_preflight(a,healthy,m)
       except transport.ToolError: pass
       else: raise AssertionError('candidate strict guard weakened')
-      for field,value in [('mutation_protocol_version',1),('store_incarnation',2),('store_generation',167),('recovery_flags',1),('mutation_feasible',False)]:
+      for field,value in [('protocol_version',1),('mutation_protocol_version',1),('store_incarnation',2),('store_generation',167),('recovery_flags',1),('mutation_feasible',False)]:
         bad=pb.ProfileStoreResponse(); bad.CopyFrom(healthy); setattr(bad,field,value)
         try: tool.verify_production_status(a,pb,bad)
         except transport.ToolError: pass
@@ -62,14 +62,17 @@ def main():
         sequence.append((kwargs.get('phase'), (d/'r.json').exists()))
         if kwargs.get('phase')=='status_preflight': return healthy
         raise transport.ToolError('malformed response after transmission; unresolved')
-      with patch.object(tool.transport,'PosixSerialPort',Port), patch.object(tool.candidate_transport,'request',request):
+      directory_sync=[]; original_fsync=tool.os.fsync
+      def tracked_fsync(fd): directory_sync.append(fd); return original_fsync(fd)
+      with patch.object(tool.transport,'PosixSerialPort',Port), patch.object(tool.candidate_transport,'request',request), patch.object(tool.os,'fsync',tracked_fsync):
         yes(tool.main(base)==1,'post-send malformed response fails')
       yes(sequence==[('status_preflight',False),('create',True)],'receipt precedes one mutation; no retry')
+      yes(len(directory_sync)>=3,'receipt file and parent directory are fsynced before mutation')
     print('glyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true')
     return 0
   except Exception as e: print('glyph_profile_store_production_tool: FAIL: '+str(e)); return 1
 def _preflight(module,pb,jf,argv):
     a=module.parse_args(argv); m=module.build_message(a,pb,jf)
-    try: module.verify_production_status(a,pb,pb.ProfileStoreResponse(status=pb.PROFILE_STORE_OK,mutation_protocol_version=2,store_incarnation=1,store_generation=166,transaction_token_high_water=0xf000000000001d00,mutation_feasible=True)); return True
+    try: module.verify_production_status(a,pb,pb.ProfileStoreResponse(protocol_version=2,status=pb.PROFILE_STORE_OK,mutation_protocol_version=2,store_incarnation=1,store_generation=166,transaction_token_high_water=0xf000000000001d00,mutation_feasible=True)); return True
     except transport.ToolError:return False
 if __name__=='__main__': raise SystemExit(main())

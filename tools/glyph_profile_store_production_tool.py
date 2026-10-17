@@ -63,6 +63,7 @@ def build_message(a, pb, json_format):
 
 def verify_production_status(a, pb, s):
     if s.status != pb.PROFILE_STORE_OK: raise transport.ToolError("STATUS was not OK; no mutation sent")
+    if s.protocol_version != 2: raise transport.ToolError("STATUS protocol is not production protocol 2; no mutation sent")
     if s.strict_hardening_candidate or s.storage_fault_capable or s.fault_control_version:
         raise transport.ToolError("target advertises instrumented candidate controls; production admission refused")
     if s.mutation_protocol_version != 2: raise transport.ToolError("target does not advertise production mutation protocol 2")
@@ -100,6 +101,9 @@ def main(argv=None):
                                    "decoded_request": jf.MessageToDict(message, preserving_proto_field_name=True)}
                         with a.request_out.open("x", encoding="utf-8") as out:
                             json.dump(receipt, out, sort_keys=True, indent=2); out.write("\n"); out.flush(); os.fsync(out.fileno())
+                        directory_fd = os.open(str(a.request_out.parent), os.O_RDONLY)
+                        try: os.fsync(directory_fd)
+                        finally: os.close(directory_fd)
                         emit(journal, a.action, "immutable_receipt_persisted", request_sha256=receipt["request_sha256"])
                     response = candidate_transport.request(port, pb, message, exact_payload=payload, phase=a.action)
                     if a.action in MUTATIONS: validate_result(a, pb, response)
