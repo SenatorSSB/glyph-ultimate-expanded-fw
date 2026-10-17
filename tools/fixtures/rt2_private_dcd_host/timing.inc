@@ -1,5 +1,6 @@
 #include "hardware/irq.h"
 extern "C" void GlyphHostPrivateMarker(uint32_t,uint32_t);
+extern "C" void GlyphHostPrivateStatus(uint32_t);
 // Host-only source-boundary hooks. Registers retain pinned SDK layouts. SIE
 // SETUP_REC is the single source of INTR.SETUP_REQ; INTS includes force state.
 extern "C" void __wrap_irq_add_shared_handler(uint,irq_handler_t,uint8_t);

@@ -1,6 +1,8 @@
 # One-attempt exact private DCD observer hardware packet
 
-PREPARED / NOT_EXECUTED. No source-agent controller action. First require separate
+PREPARED / NOT_EXECUTED. TIMING-CORRECTED candidate only; prior7e9e2e
+is rejected for physical installation. No RT2 attempt is authorized in this
+source-work turn; this is a future owner handoff packet. No source-agent controller action. First require separate
 profile_store_rt2_private_device_adjudication.md PASS on stopped88a36e. Any mismatch
 blocks replacement. Do not execute an older RT2 packet.
 
@@ -47,8 +49,11 @@ blocks replacement. Do not execute an older RT2 packet.
    single settled observation. Do not reset just to read watchdog scratch.
 6. Serial PRESENT: bounded read-only GET_DEVICE_INFO/PULSE/STATUS/allLIST/full
    READ1/3/4/22/GET_CONFIG once; HEALTH useful/current only if needed. Save raw
-   bytes/hashes, response183–208 privateversion1/valid/captured and exacthistory,
+   bytes/hashes, response183–208 privateversion2/valid/captured and exacthistory,
    retained rawSIE/INTR/INTS/task/reset/prebranch/setup fields, panel/resources.
+   setup_irq/pre_setup version2 legacy per-invocation trampoline fields/age are
+   unsupported zero, not physical negative evidence; private entries/active/return
+   are post-status/source-return facts. Bit0 is merged entry, never a pre-read hook.
    Require captured=1/valid=1 for frozen private data. Existing rawlive USB fields
    remain separate from frozen rawobserver history. Verify accepted persistent
    authority/Config/no uncertainty/unresolvedreceipt/pendingfault. Stop at first
@@ -71,7 +76,9 @@ Decide only after actual physical evidence:
 - No boot-lifetime privateSETUP and noRAW: MULTI_PROFILE_STORE_RT2_PRIVATE_HANDLER_ATTEMPT_NONDIAGNOSTIC;
   retain variability. Unknown/ambiguous panel remains UNKNOWN.
 
-No forced IRQ/service/rescan/retry/delay/endpoint/clear/reset/descriptor change.
+The corrected private read precedes all diagnostic work. Extra compiler register
+saves and post-read markers still perturb execution; no negligible-latency or
+root-cause claim follows. No forced IRQ/service/rescan/retry/delay/endpoint/clear/reset/descriptor change.
 HOST_PACKET_TRACE=NOT_AUTHORITATIVE. Root cause UNPROVEN; exact new hardware
 acceptance NOT_TESTED before owner executes this packet. Nunchuk/selection remain
 NOT_TESTED. No source agent operated the controller.

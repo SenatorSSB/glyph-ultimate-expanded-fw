@@ -1,0 +1,71 @@
+{
+  "review": "fresh independent source review",
+  "status": "SOURCE_PASS_NO_CONCRETE_TIER1_TIER2_FINDING",
+  "reviewed_parent": "7e9e2ea0e3ac8c018dfa3088ef65af6b6c8cc820",
+  "owner_attachment": "/Users/rasmus.pekkarinen/.codex/attachments/52ec706f-e12c-4b47-9aa1-92678981065d/Pasted text.txt",
+  "owner_sha256": "9edb904ca9b2ab77c64a7f40aae31839175c5481baaffe0248b588874d9695ae",
+  "requested_model_effort": "gpt-6.1-sol/high",
+  "actual_model_effort": "UNKNOWN/UNKNOWN",
+  "files": {
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "7bd0c1db76f58dc94e90a886a0c92e4cbb2ba9d313040120218c81aa9b1c6198",
+    "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": "c671f3627c2775201c7c1b23b96b80d106f5d6cfeba562c70cdcb50a82b413e5",
+    "docs/AGENT_CONTEXT.md": "16cc986fac5baaaec45a0d05b939c2522df4a98a7c44869c919a921d80a691f2",
+    "docs/CURRENT_STATE.md": "98701042f2031d33a0282f2d76c2074fee06e4757885aa90940a46424cc4cd28",
+    "docs/ROADMAP.md": "85346691eb423425dee7df3e3aa2996ea6da1becc12c29f7bf1a5436c29ca32f",
+    "docs/runtime_config/profile_store_rt2_private_contract.md": "206c8465de48210adef47d0495fbea927643ec8c814ee2caf4c7bed9d1dac865",
+    "docs/runtime_config/profile_store_rt2_private_device_adjudication.md": "29b5e04755421d94c1a2275ea0d5b498199a082fa380f23c8df427ff039461ec",
+    "docs/runtime_config/profile_store_rt2_private_hardware_packet.md": "22fff8c039bb8cdcba37be4729036fe2fc449902274c6b39a2ca3a46f55e6e7a",
+    "include/core/RecoveryPrivateDcdDiagnostics.hpp": "fcdbe674c6c475a0615e2b6bf4b3510513dca34da56f0b4058ea54e0dc7e9bcb",
+    "include/core/RecoveryPrivateDcdMarkers.h": "3240b5ac631342647afe68f5bcee0a13abc01096192c7454b5a7c4474375a537",
+    "tools/check_glyph_rt2_private_handler.py": "c486c682b1e55403fb13c28aee7972353165fd084396e0dc98b46f3df5d268f3",
+    "tools/check_glyph_rt2_private_integration.py": "12bbacaf0670a0d46472e3a4a2f88a284550ec9ab0ccbf5521dc01260174e164",
+    "tools/fixtures/rt2_private_dcd_host/cases.inc": "f20da6059e99a1031c694896d381acc66cada0bdf20e2e28e5a3a63efe286035",
+    "tools/fixtures/rt2_private_dcd_host/focused.inc": "eb2930d2dee000ee9f0fc04ebadbb68da1f92726a5c33e37649afd44219c9fb7",
+    "tools/fixtures/rt2_private_dcd_host/private.inc": "ab36c947573f73b3da8396c6a3ca9ff108560f70e1fae219b831e42093ed4c90",
+    "tools/fixtures/rt2_private_dcd_host/sampler.cpp": "aeded0bcf320ff19bb2868debf4befe7b1d17b2acbe16d10d58b3d0f3b7be20f",
+    "tools/fixtures/rt2_private_dcd_host/timing.inc": "a43a6b7d4fd4035addfe1735c4b9eb194ea7fbc23a047c5a773f8a812adaec7b",
+    "tools/rt2_private_dcd.py": "e1e5ad30cf87a250ae1176fd411f0f5059ee7588d1189915adb9bdd410df91d2",
+    "tools/rt2_private_dcd_assembly.py": "73997b017030ad71575c18e042ccec2919683d1d59664ce7c09872f857a278f5",
+    "docs/runtime_config/profile_store_rt2_private_timing_source_audit.md": "ce0d46895a619ff60f01bc369d45b3ffdb838ad2412d2aea03df77797efa4ce7",
+    "tools/check_glyph_rt2_private_memory_order.py": "c46c1f92801754fd7ee53e572f04b2841e89da23d4317cf40922bd2d2e232c48"
+  },
+  "checks_run": [
+    "check_glyph_rt2_private_integration.py PASS:12 marker removal controls;5 pre-status categories;10 assembly controls;3 compile database controls; routing/middleware controls",
+    "check_glyph_rt2_private_memory_order.py PASS:225 derived-axiom assignments;3 coherent accepted;0 incoherent;4 missing-edge witness controls"
+  ],
+  "findings": [],
+  "scope": [
+    "Read owner attachment directly",
+    "Dedicated first STATUS publication after original sole INTS read; obsolete ENTRY ignored",
+    "Direct original callback registration; no per-invocation trampoline",
+    "Atomic payload seqlock protocol and single-writer premise",
+    "Source inverse transform, fixed original source hash, deterministic placement",
+    "History, first/latest/enabled SETUP preservation; paired LED panel and boot/recovery distinction",
+    "Backend versions2 disclose retired IRQ trampoline telemetry; response layout unchanged"
+  ],
+  "pending": [
+    "final exact committed identity/build/ELF/map/disassembly/cost/resources/custody",
+    "final document packet consistency against exact artifact"
+  ],
+  "non_claims": [
+    "hardware NOT_TESTED",
+    "root cause UNPROVEN",
+    "no device action",
+    "no canonical merge",
+    "not authorization for old7e9e2e hardware installation"
+  ],
+  "reviewed_tracked_diff_sha256": "80273475a7b34cec4f1fb7ee6f08c0fa53f00480b4c281f146a247fc854b70dd",
+  "reviewed_changed_files_count": 21,
+  "source_pass_authorizes": "Root may copy this exact JSON into docs/runtime_config/profile_store_rt2_private_timing_source_review.json as the precommit source-review receipt. Review receipt insertion and unchanged source commit are mechanical; final committed build/assembly/custody remain separately pending.",
+  "full_diff_review": "All current tracked changes and new memory-order checker reviewed; source PASS includes final response version2 changes, contract, hardware/adjudication packets, three current-state notices, integration/assembly checker and all host fixture changes.",
+  "completed_host_suite": {
+    "path": "local_backups/timing-correction/private-handler/report.json",
+    "sha256": "0dbbffbefb464c1e0b36bceb0194e9044f0907527bbc504795d11af389f16b30",
+    "cases": 134,
+    "negative_controls": 34,
+    "hashed_files": 769,
+    "current_mismatches": [],
+    "status": "PASS"
+  },
+  "source_audit_document_review": "PASS; new timing source audit accurately states protocol, zero pre-read source work, version2 semantics, pending assembly/custody, and physical nonclaims"
+}

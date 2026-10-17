@@ -99,7 +99,7 @@ def main():
    return re.sub(r'usb_hw_(set|clear)->(\w+)\s*=\s*([^;]+);',lambda m:'GlyphHost'+('Set' if m[1]=='set' else 'Clear')+'(offsetof(usb_hw_t,'+m[2]+'),'+m[3]+');',s)
   parts=['static uint8_t *next_buffer_ptr;static hw_endpoint_t hw_endpoints[USB_MAX_ENDPOINTS][2];static bool _sof_enable=false;const char *ep_dir_string[]={\"out\",\"in\"};\n#define e15_is_critical_frame_period(ep) false']+[extract[sig] for sig in common_signatures]
   parts += [extract[sig] for sig in signatures]
-  generated=mmio('\n'.join(parts)).replace('GlyphDcdPrivateMarker(', 'GlyphHostPrivateMarker(').replace('void dcd_set_address','void __real_dcd_set_address').replace('void dcd_edpt0_status_complete','void __real_dcd_edpt0_status_complete').replace('    hw_endpoint_init(desc_edpt->bEndpointAddress','    ++opened;hw_endpoint_init(desc_edpt->bEndpointAddress')
+  generated=mmio('\n'.join(parts)).replace('GlyphDcdPrivateMarker(', 'GlyphHostPrivateMarker(').replace('GlyphDcdPrivateStatus(', 'GlyphHostPrivateStatus(').replace('void dcd_set_address','void __real_dcd_set_address').replace('void dcd_edpt0_status_complete','void __real_dcd_edpt0_status_complete').replace('    hw_endpoint_init(desc_edpt->bEndpointAddress','    ++opened;hw_endpoint_init(desc_edpt->bEndpointAddress')
   generated=generated.replace('bool __tusb_irq_path_func(hw_endpoint_xfer_continue)', 'bool __tusb_irq_path_func(__real_hw_endpoint_xfer_continue)').replace('hw_endpoint_xfer_continue(ep)', '__wrap_hw_endpoint_xfer_continue(ep)')
   # Host omits only RP2040 busy-cycle assembly; all transfer decisions/panics stay exact.
   generated=re.sub(r'__asm volatile \(.*?: : : \"memory\"\);', '/* target-only twelve-cycle delay */', generated, flags=re.S)
@@ -174,12 +174,11 @@ def main():
   cases += ['pre-'+x for x in ['never','empty','active','inactive','unhandled','other-panic','sof','active-stall','sof-stall','sof-queue-stall','later-irq','later-setup','no-false-inactive','queue-full','zeroed-ep','reset-only','unarmed','recent','restarted']]
   cases += ['private-'+x for x in ['none','setup','setup-reset','setup-buff','setup-sof','normal','later','raw-between','raw-active','no-raw','reset-setup','queue-accept','queue-drop','freeze','no-entry','no-entry-raw','pre-enable-setup','pre-enable-reset','pre-enable-then-enabled']]
   cases += ['private-stop-'+str(i)+'-'+side for i in range(13) for side in ['before','after']]
+  assert len(cases)==134,'retain every historical scenario; H0 schedules are merged post-read aliases'
   for case in cases:
    output=run([exe,fixture,case]);print(output,end='');results.append({'case':case,'output':output.strip()})
   negatives=[]
   for label,old,new,case in [
-   ('irq-enter','pre_setup_observer.IrqEnter(usb_hw->ints);','/* removed */;','pre-empty'),
-   ('irq-return','pre_setup_observer.IrqReturn(usb_hw->ints);','/* removed */;','pre-empty'),
    ('endpoint-enter','pre_setup_observer.EndpointEnter(ep->ep_addr,ep->active,usb_hw->buf_status,uint32_t(reinterpret_cast<uintptr_t>(ep)));','/* removed */;','pre-active'),
    ('endpoint-return','pre_setup_observer.EndpointReturn(result);','/* removed */;','pre-active'),
    ('panic','pre_setup_observer.PanicEntered(kind);','/* removed */;','pre-inactive'),
@@ -214,7 +213,7 @@ def main():
   # Every target marker is individually removed from the actual patched handler.
   original_generated=(temp/'dcd_generated.inc').read_text()
   for marker in private_dcd.MARKERS:
-   pattern=r'^[ \t]*GlyphHostPrivateMarker\(GLYPH_DCD_PRIVATE_'+marker+r',.*?;[ \t]*$'
+   pattern=(r'^[ \t]*GlyphHostPrivateStatus\(.*?;[ \t]*$' if marker=='STATUS' else r'^[ \t]*GlyphHostPrivateMarker\(GLYPH_DCD_PRIVATE_'+marker+r',.*?;[ \t]*$')
    mutant,n=re.subn(pattern,'/* negative: private marker removed */',original_generated,flags=re.M)
    assert n==1,(marker,n)
    (temp/'dcd_generated.inc').write_text(mutant)
@@ -223,9 +222,17 @@ def main():
    out=base.run([negative,fixture,'private-normal'],expected=1);assert 'FAIL:' in out
    negatives.append('private-'+marker);print('private-'+marker+'=DETECTED')
   (temp/'dcd_generated.inc').write_text(original_generated)
+  forbidden=original_generated.replace('  uint32_t const status = usb_hw->ints;', '  GlyphHostPrivateMarker(GLYPH_DCD_PRIVATE_ENTRY,0);\n  uint32_t const status = usb_hw->ints;')
+  assert forbidden!=original_generated
+  (temp/'dcd_generated.inc').write_text(forbidden);negative=temp/'private-negative-obsolete-entry'
+  link(negative,temp/'startup.cpp',temp/'startup.cpp')
+  out=base.run([negative,fixture,'private-normal'],expected=1);assert 'obsolete H0 marker never executes' in out
+  negatives.append('private-forbidden-ENTRY');print('private-forbidden-ENTRY=DETECTED')
+  (temp/'dcd_generated.inc').write_text(original_generated)
   private_sampler=temp/'private-sampler';run(['c++','-std=c++17',*san,'-I',ROOT/'include',SETUP_HOST/'sampler.cpp','-o',private_sampler]);print(run([private_sampler]),end='')
+  memory_order=json.loads(run([sys.executable,ROOT/'tools/check_glyph_rt2_private_memory_order.py']));print('private_memory_order_finite_RF_missing_publication_controls=PASS')
   source_end={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources};assert source_end==source_start,'source changed during harness run; rerun frozen inputs'
-  report={'status':'PASS','private_cases':45,'private_marker_negatives':13,'historical_panel_scope':'old89 scenarios validate retained event/queue/panic forwarding using current private panel; legacy panel sampler separately historical','panic_abi':abi,'negative_controls':negatives,'timing_matrix':'T0..T6 extracted handler with sequential MMIO adapters; conditional SOF and BUFF_STATUS nonreturn before later SETUP','cases':results,'owner_matrix':{'1_no_setup':'private-none','2_setup_only':'private-setup','3_setup_reset':'private-setup-reset','4_setup_buff':'private-setup-buff','5_setup_sof':'private-setup-sof','6_normal':'private-normal','7_before_pid':'private-stop-6-after','8_after_pid':'private-stop-7-after','9_before_event':'private-stop-8-after','10_event_return':'private-stop-9-after','11_accept':'private-queue-accept','12_drop':'private-queue-drop','13_later':'private-later','14_raw_between':'private-raw-between','15_raw_active':'private-raw-active','16_no_raw':'private-no-raw','17_reset_setup':'private-reset-setup','18_frozen':'private-freeze'},'physical_macOS':'NOT_MODELED','source_hashes':source_end,'frozen_source_hashes_verified':True,'extracted_function_hashes':{k:hashlib.sha256(v.encode()).hexdigest() for k,v in extract.items()},'model_boundary':'ASan/UBSan extracted pinned DCD plus actual endpoint continuation/sync/buffer functions. Host models BUFF_STATUS-derived INTR and alias-register writes; no claim BUS_RESET silicon behavior. Actual pinned USBD/CDC/HID/MSC/MIDI task/reset source and extracted XInput init/reset. Host-only event/replenishment/stall hooks; independent std::thread publisher while foreground paused. MMIO/NVIC/locks/host USB electrical completion remain models, not physical causal proof.'}
+  report={'status':'PASS','memory_order':memory_order,'private_cases':45,'private_marker_negatives':12,'retained_case_count':134,'legacy_h0_schedules':'before/after aliases at merged post-read STATUS; obsolete ENTRY never executes','legacy_irq_scope':'v2 IRQ trampoline counters/ID/age unavailable and zero; original handler invoked directly','historical_panel_scope':'old89 scenarios retained with private merged-status entry/return IDs replacing removed trampoline telemetry; event/queue/panic forwarding retained; old IRQ bank sampler separately historical','panic_abi':abi,'negative_controls':negatives,'timing_matrix':'T0..T6 extracted handler with sequential MMIO adapters; conditional SOF and BUFF_STATUS nonreturn before later SETUP','cases':results,'owner_matrix':{'1_no_setup':'private-none','2_setup_only':'private-setup','3_setup_reset':'private-setup-reset','4_setup_buff':'private-setup-buff','5_setup_sof':'private-setup-sof','6_normal':'private-normal','7_before_pid':'private-stop-6-after','8_after_pid':'private-stop-7-after','9_before_event':'private-stop-8-after','10_event_return':'private-stop-9-after','11_accept':'private-queue-accept','12_drop':'private-queue-drop','13_later':'private-later','14_raw_between':'private-raw-between','15_raw_active':'private-raw-active','16_no_raw':'private-no-raw','17_reset_setup':'private-reset-setup','18_frozen':'private-freeze'},'physical_macOS':'NOT_MODELED','source_hashes':source_end,'frozen_source_hashes_verified':True,'extracted_function_hashes':{k:hashlib.sha256(v.encode()).hexdigest() for k,v in extract.items()},'model_boundary':'ASan/UBSan extracted pinned DCD plus actual endpoint continuation/sync/buffer functions. Host models BUFF_STATUS-derived INTR and alias-register writes; no claim BUS_RESET silicon behavior. Actual pinned USBD/CDC/HID/MSC/MIDI task/reset source and extracted XInput init/reset. Host-only event/replenishment/stall hooks; independent std::thread publisher while foreground paused. MMIO/NVIC/locks/host USB electrical completion remain models, not physical causal proof.'}
   if args.output_dir:args.output_dir.mkdir(parents=True,exist_ok=True);(args.output_dir/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  return 0
 if __name__=='__main__':

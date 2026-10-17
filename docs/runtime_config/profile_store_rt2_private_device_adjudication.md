@@ -1,6 +1,7 @@
 # Stopped88a36e: one-normal-boot read-only adjudication
 
-PREPARED / NOT_EXECUTED. Separate from diagnostic source work. Controller remains
+PREPARED / NOT_EXECUTED. This88a36e prerequisite remains unchanged by
+the timing correction. Prior7e9e2e artifact installation is rejected. Separate from diagnostic source work. Controller remains
 stopped failed88a36e RT2. Installed88a36e67bcdf4acc447707da42687501afcd4d13,
 UF2 SHA256 bfab836254e5ae7943ece2f30071eab1107c17acb890cc96a425553b77c6cddb,
 1025024 bytes. No source-agent device action. Do not execute any older RT2 diagnostic packet.

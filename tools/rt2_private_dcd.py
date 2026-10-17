@@ -11,7 +11,7 @@ PINNED_SHA256 = "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b1
 PRISTINE_RELATIVE = "vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c"
 INSTALLED_RELATIVE = "libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c"
 GENERATED_RELATIVE = ".pio/rt2-private-dcd/dcd_rp2040.c"
-MARKERS = ("ENTRY", "STATUS", "SOF_DONE", "BUFF_DONE", "SETUP_TEST",
+MARKERS = ("STATUS", "SOF_DONE", "BUFF_DONE", "SETUP_TEST",
            "SETUP_ENTERED", "SETUP_POINTER_ACQUIRED", "PID_DONE", "BEFORE_EVENT",
            "AFTER_EVENT", "BEFORE_CLEAR", "AFTER_CLEAR", "RETURN")
 HEADER = '#include "core/RecoveryPrivateDcdMarkers.h"\r\n'
@@ -31,6 +31,8 @@ def _once(data, old, new):
 
 
 def marker(name, value="0", indent="  "):
+    if name == "STATUS":
+        return f"{indent}GlyphDcdPrivateStatus({value});\r\n"
     return f"{indent}GlyphDcdPrivateMarker(GLYPH_DCD_PRIVATE_{name}, {value});\r\n"
 
 
@@ -45,8 +47,6 @@ def _transform_source(pristine):
     verify_pin(pristine, "pristine source")
     data = _once(pristine, '#include "device/dcd.h"\r\n',
                  '#include "device/dcd.h"\r\n' + HEADER)
-    anchor = "static void __tusb_irq_path_func(dcd_rp2040_irq)(void)\r\n{\r\n"
-    data = _once(data, anchor, anchor + marker("ENTRY"))
     anchor = "  uint32_t const status = usb_hw->ints;\r\n"
     data = _once(data, anchor, anchor + marker("STATUS", "status"))
     anchor = "    dcd_event_sof(0, usb_hw->sof_rd & USB_SOF_RD_BITS, true);\r\n"
@@ -81,12 +81,20 @@ def patch_source(pristine):
 def validate_patched(data):
     """Fail closed for every missing/reordered/modified marker or source byte."""
     body = handler_text(data)
+    # Hard entry boundary: even a helper, barrier, atomic or marker before this
+    # exact original read is forbidden. Do not infer safety from marker order.
+    first = ("static void __tusb_irq_path_func(dcd_rp2040_irq)(void)\r\n{\r\n"
+             "  uint32_t const status = usb_hw->ints;\r\n" + marker("STATUS", "status"))
+    if not body.startswith(first):
+        raise ValueError("private handler must begin with original INTS load then local STATUS marker")
     expected = list(MARKERS)
-    found = re.findall(r"GlyphDcdPrivateMarker\(GLYPH_DCD_PRIVATE_(\w+),", body)
+    found = re.findall(r"GlyphDcdPrivate(?:Status\((?=status\))|Marker\(GLYPH_DCD_PRIVATE_(\w+),)", body)
+    found = [name or "STATUS" for name in found]
     if found != expected:
         raise ValueError(f"private marker order/count mismatch: {found}")
+    stripped = re.sub(rb"^ *GlyphDcdPrivateStatus\(status\);\r\n", b"", data, flags=re.M)
     stripped = re.sub(rb"^ *GlyphDcdPrivateMarker\(GLYPH_DCD_PRIVATE_\w+, [^\r\n]*\);\r\n",
-                      b"", data, flags=re.M)
+                      b"", stripped, flags=re.M)
     if stripped.count(HEADER.encode()) != 1:
         raise ValueError("private marker include missing or duplicate")
     stripped = stripped.replace(HEADER.encode(), b"", 1)

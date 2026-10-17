@@ -814,7 +814,8 @@ bool ConfiguratorBackend::HandleProfileStore() {
         static RecoverySetupIrqDiagnostics::Snapshot setup_irq;
         if(captured)RecoveryStartupDiagnostics::CapturedSetupInto(setup_irq);
         else RecoveryUsbDiagnostics::SetupReadInto(setup_irq);
-        response.recovery_setup_irq_version=1;
+        // Version2: direct SDK registration; legacy trampoline fields stay zero.
+        response.recovery_setup_irq_version=2;
         response.recovery_setup_irq_valid=setup_irq.valid;
         response.recovery_setup_irq_captured=captured?1u:0u;
         response.recovery_setup_irq_independent_seen=setup_irq.independent_seen;
@@ -845,7 +846,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         static RecoveryPreSetupDiagnostics::Snapshot pre_setup;
         if(captured)RecoveryStartupDiagnostics::CapturedPreSetupInto(pre_setup);
         else RecoveryUsbDiagnostics::PreSetupReadInto(pre_setup);
-        response.recovery_pre_setup_version=1;
+        response.recovery_pre_setup_version=2;
         response.recovery_pre_setup_valid=pre_setup.valid;
         response.recovery_pre_setup_captured=captured?1u:0u;
         response.recovery_pre_setup_irq_entered=pre_setup.irq_entered;
@@ -875,7 +876,8 @@ bool ConfiguratorBackend::HandleProfileStore() {
         static RecoveryPrivateDcdDiagnostics::Snapshot private_dcd;
         if(captured)RecoveryStartupDiagnostics::CapturedPrivateInto(private_dcd);
         else RecoveryUsbDiagnostics::PrivateReadInto(private_dcd);
-        response.recovery_private_dcd_version=1;
+        // Version2 merges entry/ID into the first post-status publication.
+        response.recovery_private_dcd_version=2;
         response.recovery_private_dcd_valid=private_dcd.valid;
         response.recovery_private_dcd_captured=captured?1u:0u;
         response.recovery_private_dcd_entries=private_dcd.entries;

@@ -1,5 +1,24 @@
 # Agent Context
 
+## Timing correction to private DCD observer — 2026-10-17
+
+Owner request52ec706f-e12c-4b47-9aa1-92678981065d rejects physical installation of
+7e9e2ea0e3ac8c018dfa3088ef65af6b6c8cc820 because its ENTRY/trampoline delays the
+original private INTS read. Architecture is retained; this direct-child correction
+removes H0 and the per-invocation trampoline. The original read is first, followed
+by one merged entry/ID/local-status publication. Final source/assembly gates must
+prove zero intentional diagnostic instructions/barriers before that read; compiler
+register saves and post-read cost are disclosed separately. The atomic bank uses
+an independently audited single-writer fence protocol. Response-only version2
+marks legacy trampoline fields unsupported zero; panel stays LF4/LF3/LF5 pairs,
+menu dark. No device action or new RT2 now. Controller still stopped88a36e; its
+separate read-only adjudication remains mandatory before any future replacement.
+Old source-review/coverage receipts describe the rejected prior artifact, not this
+correction. See [current contract](runtime_config/profile_store_rt2_private_contract.md).
+Exact correction identity, tests/review/resources and UF2 custody live in its sealed
+HANDOFF. Hardware NOT_TESTED; root cause UNPROVEN; canonical remains6b73a7c5.
+
+
 ## Owner-scoped exact private DCD observer — 2026-10-17
 
 Exact88a36e normal Configurator control is owner-reported PASS, generation166,

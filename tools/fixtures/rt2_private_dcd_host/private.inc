@@ -6,16 +6,21 @@ std::string private_case;int private_stop=-1;bool private_after=false;
 std::vector<unsigned> private_calls;bool private_armed=false;
 RecoveryPrivateDcdDiagnostics::Snapshot private_read(){RecoveryPrivateDcdDiagnostics::Snapshot s;RecoveryUsbDiagnostics::PrivateReadInto(s);require(s.valid,"closed private bank readable while later vendor execution paused");return s;}
 }
+namespace {
+void private_publish(uint32_t marker,uint32_t value){if(marker==GLYPH_DCD_PRIVATE_STATUS)GlyphDcdPrivateStatus(value);else GlyphDcdPrivateMarker(marker,value);}
+}
 extern "C" void GlyphHostPrivateMarker(uint32_t marker,uint32_t value){
-    if(!private_armed){GlyphDcdPrivateMarker(marker,value);return;}
+    if(!private_armed){private_publish(marker,value);return;}
     private_calls.push_back(marker);
+    require(marker!=GLYPH_DCD_PRIVATE_ENTRY,"obsolete H0 marker never executes");
     if(private_case=="private-raw-active"&&marker==GLYPH_DCD_PRIVATE_STATUS){
-        GlyphDcdPrivateMarker(marker,value);latch_setup();throw TaskPaused{};
+        private_publish(marker,value);latch_setup();throw TaskPaused{};
     }
     if(private_stop==int(marker)&&!private_after)throw TaskPaused{};
-    GlyphDcdPrivateMarker(marker,value);
+    private_publish(marker,value);
     if(private_stop==int(marker)&&private_after)throw TaskPaused{};
 }
+extern "C" void GlyphHostPrivateStatus(uint32_t value){GlyphHostPrivateMarker(GLYPH_DCD_PRIVATE_STATUS,value);}
 int private_main(int argc,char **argv){try{
     require(argc==3,"fixture/scenario");private_case=argv[2];selected_timing="dcd-model";
     seed(argv[1],&config);const auto files=storage.files;
@@ -51,7 +56,11 @@ int private_main(int argc,char **argv){try{
     static_assert(RecoveryPrivateDcdDiagnostics::BuffBit==USB_INTS_BUFF_STATUS_BITS,"pinned buffer mask");
     uint32_t status=USB_INTS_SETUP_REQ_BITS;
     if(private_case.rfind("private-stop-",0)==0){
-        private_stop=std::stoi(private_case.substr(13));private_after=private_case.find("-after")!=std::string::npos;
+        private_stop=std::stoi(private_case.substr(13));
+        // Historical H0 schedules now stop on the merged post-read entry/status
+        // transaction; no pre-read marker is inserted or claimed.
+        if(private_stop==0)private_stop=GLYPH_DCD_PRIVATE_STATUS;
+        private_after=private_case.find("-after")!=std::string::npos;
         status|=USB_INTS_DEV_SOF_BITS|USB_INTS_BUFF_STATUS_BITS;
     }
     if(private_case=="private-none"||private_case=="private-no-raw"||private_case=="private-raw-between"||private_case=="private-no-entry"||private_case=="private-no-entry-raw")status=0;
@@ -67,18 +76,18 @@ int private_main(int argc,char **argv){try{
     try{if(private_case!="private-no-entry"&&private_case!="private-no-entry-raw")direct_irq(status);}catch(const TaskPaused&){}
     host_exception=0;
     const auto s=private_read();
-    uint32_t expected_entries=(private_stop==0&&!private_after)?0u:1u;
+    uint32_t expected_entries=(private_stop==GLYPH_DCD_PRIVATE_STATUS&&!private_after)?0u:1u;
     if(private_case=="private-later"||private_case=="private-raw-between"||private_case=="private-reset-setup")++expected_entries;
     if(private_case=="private-no-entry"||private_case=="private-no-entry-raw")expected_entries=0;
     require(s.entries==expected_entries&&s.latest_id==expected_entries,"exact monotonic private invocation ID");
     if(private_stop>=0){
-        const unsigned completed=unsigned(private_stop)+(private_after?1u:0u);
-        uint32_t mask=completed?((1u<<completed)-1u):0;
-        if(completed>GLYPH_DCD_PRIVATE_SETUP_TEST)mask|=RecoveryPrivateDcdDiagnostics::SetupTestTrue;
+        const unsigned completed=unsigned(private_stop)-1u+(private_after?1u:0u);
+        uint32_t mask=completed?((1u<<(completed+1u))-1u):0;
+        if(completed>=GLYPH_DCD_PRIVATE_SETUP_TEST)mask|=RecoveryPrivateDcdDiagnostics::SetupTestTrue;
         require(s.marker_calls==completed&&s.latest_markers==mask,"each exact patched marker retained with BEFORE/AFTER ordering");
-        require(s.returns==(completed==13?1u:0u)&&s.active==(completed&&completed<13?1u:0u),"normal return distinguished from each artificial stop");
-        const bool loaded=completed>GLYPH_DCD_PRIVATE_STATUS;
-        require(s.latest_status==(loaded?status:0u)&&s.setup_status_count==(loaded?1u:0u),"actual private local status stored exactly once at H1");
+        require(s.returns==(completed==12?1u:0u)&&s.active==(completed&&completed<12?1u:0u),"normal return distinguished from each artificial stop");
+        const bool loaded=completed>=GLYPH_DCD_PRIVATE_STATUS;
+        require(s.latest_status==(loaded?status:0u)&&s.setup_status_count==(loaded?1u:0u),"actual private local status and entry merged after original load");
         if(loaded)require(s.first_setup_id==1&&s.first_setup_status==status&&s.first_setup_markers==mask,"first exact SETUP history remains readable at stop");
     }else{
         require(s.latest_status==status,"exact handler-local word preserved, no later hardware reread");
@@ -93,7 +102,7 @@ int private_main(int argc,char **argv){try{
             require(s.first_setup_status==status&&s.latest_setup_status==status&&s.latest_setup_id==expected_entries,"selected status records refer to exact invocation");
             require((s.first_setup_markers&0x1ff3u)==0x1ff3u&&(s.first_setup_markers&RecoveryPrivateDcdDiagnostics::SetupTestTrue),"normal exact private SETUP path includes all setup markers and TRUE predicate");
         }else if(private_case!="private-raw-active")require((!s.entries||(s.latest_markers&RecoveryPrivateDcdDiagnostics::SetupTestFalse))&&s.setup_test_false_count==s.entries,"actual false predicate explicitly retained");
-        if(private_case=="private-normal")require(s.marker_calls==13&&s.latest_markers==(0x1fffu|RecoveryPrivateDcdDiagnostics::SetupTestTrue),"all thirteen private source markers required individually");
+        if(private_case=="private-normal")require(s.marker_calls==12&&s.latest_markers==(0x1fffu|RecoveryPrivateDcdDiagnostics::SetupTestTrue),"all twelve post-status source markers required individually; bit0 is merged entry");
     }
     require(s.enabled_setup_count==s.setup_status_count&&s.first_enabled_setup_id==s.first_setup_id&&s.first_enabled_setup_status==s.first_setup_status&&s.first_enabled_setup_markers==s.first_setup_markers,"all post-enable-only scenarios bind separate enabled first record exactly");
     independent();host_clock_us=9999999;independent();
@@ -109,12 +118,12 @@ int private_main(int argc,char **argv){try{
     if(private_case=="private-raw-between"||private_case=="private-raw-active")require(expected[2]==RecoveryTaskDiagnostics::Cyan&&expected[4]==0,"no-serial RAW positive without any handler-local SETUP unambiguous");
     if(private_case=="private-no-raw"||private_case=="private-none")require(expected[2]==RecoveryTaskDiagnostics::Blue&&expected[4]==0,"no RAW reproduction and no local SETUP remain non-diagnostic");
     if(private_stop>=0){
-        const unsigned completed=unsigned(private_stop)+(private_after?1u:0u);
+        const unsigned completed=unsigned(private_stop)-1u+(private_after?1u:0u);
         using namespace RecoveryTaskDiagnostics;
-        unsigned branch=completed>1?Red:Off;
-        if(completed>5)branch=Orange;if(completed>7)branch=Yellow;if(completed>8)branch=Cyan;if(completed>9)branch=Green;if(completed>11)branch=White;
+        unsigned branch=completed?Red:Off;
+        if(completed>=5)branch=Orange;if(completed>=7)branch=Yellow;if(completed>=8)branch=Cyan;if(completed>=9)branch=Green;if(completed>=11)branch=White;
         require(expected[4]==branch,"independent physical branch color follows exact completed source marker, prebranch residual remains RED");
-        require(expected[2]==(completed>1?Yellow:completed?Cyan:Magenta),"independent physical local-status color at each artificial stop");
+        require(expected[2]==(completed?Yellow:Magenta),"independent physical local-status color at each artificial stop");
     }
     if(private_case=="private-no-entry")require(expected[2]==RecoveryTaskDiagnostics::Green&&expected[4]==0,"valid frozen noentry/noRAW distinct from all-dark unknown");
     if(private_case=="private-no-entry-raw")require(expected[2]==RecoveryTaskDiagnostics::Magenta&&expected[4]==0,"valid frozen noentry/RAW positive unambiguous");

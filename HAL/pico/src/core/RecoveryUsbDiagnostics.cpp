@@ -84,17 +84,6 @@ void setup_foreground(){
     const uint32_t raw=setup_raw();const uint32_t gates=setup_gates();
     setup_observer.Foreground(raw,gates);
 }
-void __tusb_irq_path_func(observed_dcd_irq)(){
-    // This pre-read is not the DCD handler's subsequent local status read.
-    if(!setup_observer.Enabled()){registered_dcd_handler();return;}
-    const uint32_t pre_raw=setup_raw();const uint32_t pre_gates=setup_gates();
-    setup_observer.IrqEnter(pre_raw,pre_gates);
-    pre_setup_observer.IrqEnter(usb_hw->ints);
-    registered_dcd_handler(); // the sole captured callback, exactly once
-    pre_setup_observer.IrqReturn(usb_hw->ints);
-    const uint32_t post_raw=setup_raw();const uint32_t post_gates=setup_gates();
-    setup_observer.IrqReturn(post_raw,post_gates);
-}
 void clear(Observations &o){
     o.sie=0;o.intr=0;o.ints=0;o.inte=0;o.irq=0;o.ep_in=0;o.ep_out=0;o.raw=0;
 }
@@ -109,6 +98,10 @@ void observe(Observations &o){
 }
 // Called only by the exact private USBCTRL TU, including before recovery.
 // Enable gates valid publication only; boot-lifetime history never resets.
+extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateStatus(uint32_t status){
+    // Compile one fixed STATUS path, including invocation/entry publication.
+    private_dcd_observer.Marker(GLYPH_DCD_PRIVATE_STATUS,status);
+}
 extern "C" __attribute__((noinline,used)) void GlyphDcdPrivateMarker(uint32_t marker,uint32_t value){
     private_dcd_observer.Marker(marker,value);
 }
@@ -312,7 +305,9 @@ extern "C" void __wrap_irq_add_shared_handler(uint irq,irq_handler_t handler,uin
     if(in_port&&get_core_num()==0&&irq==USBCTRL_IRQ&&priority==0xff){
         if(!registered_dcd_handler){
             registered_dcd_handler=handler;setup_observer.Registered();
-            __real_irq_add_shared_handler(irq,observed_dcd_irq,priority);return;
+            // Preserve the SDK's exact callback and priority. No IRQ trampoline
+            // may execute observer work before the private handler's INTS load.
+            __real_irq_add_shared_handler(irq,handler,priority);return;
         }
         setup_observer.DuplicateRegistration(); // forward duplicate untouched
     }

@@ -7,7 +7,7 @@
 // One serialized USBCTRL writer. A marker publishes and closes its bank before
 // vendor execution resumes; a later nonreturn cannot strand the bank open.
 // Counts/IDs saturate at UINT32_MAX; no allocation, IRQ logging, MMIO or LED I/O.
-// History starts with the first boot-lifetime private handler call. Enable gates
+// History starts with the first post-status private marker in this boot. Enable gates
 // valid publication only; it never resets history or suppresses normal-boot stores.
 namespace RecoveryPrivateDcdDiagnostics {
 // Marker mask bits13/14 retain the actual private false/true SETUP predicate.
@@ -23,6 +23,9 @@ struct Snapshot {
     uint32_t enabled_setup_count=0,first_enabled_setup_id=0,first_enabled_setup_status=0,first_enabled_setup_markers=0;
 };
 class State {
+#ifdef GLYPH_RECOVERY_DIAGNOSTICS_HOST
+    friend struct StateTestAccess; // host-only deterministic odd-bank check
+#endif
     using Word=std::atomic<uint32_t>;
     static_assert(sizeof(Word)==4 && alignof(Word)>=4,"aligned lock-free word bank required");
     // Cortex-M0 lacks general atomic RMW support. Only aligned load/store is
@@ -31,52 +34,65 @@ class State {
     Word ever{0},id{0},status{0},markers{0},active{0},first_id{0},first_status{0},first_markers{0};
     Word setup_id{0},setup_status{0},setup_markers{0},false_count{0},calls{0};
     Word enabled_setup_count{0},enabled_setup_id{0},enabled_setup_status{0},enabled_setup_markers{0};
-    static void bump(Word &v){const uint32_t n=v.load();v.store(n==UINT32_MAX?n:n+1);}
+    static __attribute__((always_inline)) inline void bump(Word &v){const uint32_t n=v.load(std::memory_order_relaxed);v.store(n==UINT32_MAX?n:n+1,std::memory_order_relaxed);}
 public:
-    void Enable(){enabled.store(1);}
-    bool Enabled()const{return enabled.load()!=0;}
-    void Marker(uint32_t marker,uint32_t value){
-        if(marker>GLYPH_DCD_PRIVATE_RETURN)return;
-        seq.store(seq.load()+1);bump(calls);
-        if(marker==GLYPH_DCD_PRIVATE_ENTRY){
-            bump(entries);id.store(entries.load());active.store(id.load());
-            status.store(0);markers.store(0);
+    void Enable(){enabled.store(1,std::memory_order_release);}
+    bool Enabled()const{return enabled.load(std::memory_order_acquire)!=0;}
+    // Inlined into the existing noinline C ABI hook: one post-read call only.
+    __attribute__((always_inline)) inline void Marker(uint32_t marker,uint32_t value){
+        // ENTRY=0 is an obsolete ABI value, never an executed target marker.
+        if(marker<GLYPH_DCD_PRIVATE_STATUS||marker>GLYPH_DCD_PRIVATE_RETURN)return;
+        const uint32_t sequence=seq.load(std::memory_order_relaxed);
+        seq.store(sequence+1u,std::memory_order_relaxed);
+        std::atomic_thread_fence(std::memory_order_release);
+        bump(calls);
+        // Entry/ID and the exact already-loaded local status are one closed
+        // transaction. Bit0 now means this merged post-read entry fact.
+        if(marker==GLYPH_DCD_PRIVATE_STATUS){
+            bump(entries);id.store(entries.load(std::memory_order_relaxed),std::memory_order_relaxed);active.store(id.load(std::memory_order_relaxed),std::memory_order_relaxed);
+            status.store(value,std::memory_order_relaxed);markers.store(1u<<GLYPH_DCD_PRIVATE_ENTRY,std::memory_order_relaxed);
         }
-        if(active.load()){
-            markers.store(markers.load()|(1u<<marker));
+        if(active.load(std::memory_order_relaxed)){
+            markers.store(markers.load(std::memory_order_relaxed)|(1u<<marker),std::memory_order_relaxed);
             if(marker==GLYPH_DCD_PRIVATE_STATUS){
-                status.store(value);ever.store(ever.load()|value);
+                ever.store(ever.load(std::memory_order_relaxed)|value,std::memory_order_relaxed);
                 if(value&SetupBit){
-                    bump(setup_count);setup_id.store(id.load());setup_status.store(value);
-                    if(!first_id.load()){first_id.store(id.load());first_status.store(value);}
+                    bump(setup_count);setup_id.store(id.load(std::memory_order_relaxed),std::memory_order_relaxed);setup_status.store(value,std::memory_order_relaxed);
+                    if(!first_id.load(std::memory_order_relaxed)){first_id.store(id.load(std::memory_order_relaxed),std::memory_order_relaxed);first_status.store(value,std::memory_order_relaxed);}
                     if(Enabled()){
                         bump(enabled_setup_count);
-                        if(!enabled_setup_id.load()){enabled_setup_id.store(id.load());enabled_setup_status.store(value);}
+                        if(!enabled_setup_id.load(std::memory_order_relaxed)){enabled_setup_id.store(id.load(std::memory_order_relaxed),std::memory_order_relaxed);enabled_setup_status.store(value,std::memory_order_relaxed);}
                     }
                 }
                 if(value&ResetBit)bump(reset_count);
                 if(value&BuffBit)bump(buff_count);
                 if(value&&(value&(value-1u)))bump(multi_count);
             }
-            if(marker==GLYPH_DCD_PRIVATE_SETUP_TEST){markers.store(markers.load()|(value?SetupTestTrue:SetupTestFalse));if(!value)bump(false_count);}
-            if(status.load()&SetupBit){
-                setup_markers.store(markers.load());
-                if(first_id.load()==id.load()){first_markers.store(markers.load());}
-                if(enabled_setup_id.load()==id.load())enabled_setup_markers.store(markers.load());
+            if(marker==GLYPH_DCD_PRIVATE_SETUP_TEST){markers.store(markers.load(std::memory_order_relaxed)|(value?SetupTestTrue:SetupTestFalse),std::memory_order_relaxed);if(!value)bump(false_count);}
+            if(status.load(std::memory_order_relaxed)&SetupBit){
+                setup_markers.store(markers.load(std::memory_order_relaxed),std::memory_order_relaxed);
+                if(first_id.load(std::memory_order_relaxed)==id.load(std::memory_order_relaxed)){first_markers.store(markers.load(std::memory_order_relaxed),std::memory_order_relaxed);}
+                if(enabled_setup_id.load(std::memory_order_relaxed)==id.load(std::memory_order_relaxed))enabled_setup_markers.store(markers.load(std::memory_order_relaxed),std::memory_order_relaxed);
             }
-            if(marker==GLYPH_DCD_PRIVATE_RETURN){bump(returns);active.store(0);}
+            if(marker==GLYPH_DCD_PRIVATE_RETURN){bump(returns);active.store(0,std::memory_order_relaxed);}
         }
-        seq.store(seq.load()+1);
+        seq.store(sequence+2u,std::memory_order_release);
     }
     void ReadInto(Snapshot &s)const{
-        s={};const uint32_t a=seq.load();if(a&1u)return;
-        s.entries=entries.load();s.returns=returns.load();s.setup_status_count=setup_count.load();s.reset_status_count=reset_count.load();s.buff_status_count=buff_count.load();s.multi_status_count=multi_count.load();
-        s.ever_status=ever.load();s.latest_id=id.load();s.latest_status=status.load();s.latest_markers=markers.load();s.active=active.load();
-        s.first_setup_id=first_id.load();s.first_setup_status=first_status.load();s.first_setup_markers=first_markers.load();
-        s.latest_setup_id=setup_id.load();s.latest_setup_status=setup_status.load();s.latest_setup_markers=setup_markers.load();
-        s.setup_test_false_count=false_count.load();s.marker_calls=calls.load();
-        s.enabled_setup_count=enabled_setup_count.load();s.first_enabled_setup_id=enabled_setup_id.load();s.first_enabled_setup_status=enabled_setup_status.load();s.first_enabled_setup_markers=enabled_setup_markers.load();
-        if(a!=seq.load())return;s.valid=Enabled()?1u:0u;
+        // If data from a later writer is read, its preceding release fence
+        // synchronizes with our acquire fence, forcing the ending seq load
+        // past that writer's odd store. The initial acquire also prevents
+        // reading data older than its closed publication. All data is atomic;
+        // one bounded read never waits. Requires no full seq wrap during read.
+        s={};const uint32_t a=seq.load(std::memory_order_acquire);if(a&1u)return;
+        s.entries=entries.load(std::memory_order_relaxed);s.returns=returns.load(std::memory_order_relaxed);s.setup_status_count=setup_count.load(std::memory_order_relaxed);s.reset_status_count=reset_count.load(std::memory_order_relaxed);s.buff_status_count=buff_count.load(std::memory_order_relaxed);s.multi_status_count=multi_count.load(std::memory_order_relaxed);
+        s.ever_status=ever.load(std::memory_order_relaxed);s.latest_id=id.load(std::memory_order_relaxed);s.latest_status=status.load(std::memory_order_relaxed);s.latest_markers=markers.load(std::memory_order_relaxed);s.active=active.load(std::memory_order_relaxed);
+        s.first_setup_id=first_id.load(std::memory_order_relaxed);s.first_setup_status=first_status.load(std::memory_order_relaxed);s.first_setup_markers=first_markers.load(std::memory_order_relaxed);
+        s.latest_setup_id=setup_id.load(std::memory_order_relaxed);s.latest_setup_status=setup_status.load(std::memory_order_relaxed);s.latest_setup_markers=setup_markers.load(std::memory_order_relaxed);
+        s.setup_test_false_count=false_count.load(std::memory_order_relaxed);s.marker_calls=calls.load(std::memory_order_relaxed);
+        s.enabled_setup_count=enabled_setup_count.load(std::memory_order_relaxed);s.first_enabled_setup_id=enabled_setup_id.load(std::memory_order_relaxed);s.first_enabled_setup_status=enabled_setup_status.load(std::memory_order_relaxed);s.first_enabled_setup_markers=enabled_setup_markers.load(std::memory_order_relaxed);
+        std::atomic_thread_fence(std::memory_order_acquire);
+        if(a!=seq.load(std::memory_order_relaxed))return;s.valid=Enabled()?1u:0u;
     }
 };
 inline void Panel(const Snapshot &s,const RecoveryPreSetupDiagnostics::Snapshot &pre,const RecoverySetupIrqDiagnostics::Snapshot &setup,const RecoveryTaskDiagnostics::Snapshot &task,unsigned *pixels){

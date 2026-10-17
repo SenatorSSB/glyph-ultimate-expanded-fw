@@ -1,8 +1,13 @@
 # Exact private RP2040 DCD RT2 diagnostic contract
 
-Latest direct owner request184ed11d-261c-45a3-8071-533f5d609012 authorizes one
-candidate-owned private handler observer from88a36e67bcdf4acc447707da42687501afcd4d13,
-treeb46588497bc5a75f5dd4a42ce750f6525fb767b0, parent0f22b6d3b5d4a1a16fc7fd03866cfa44336de4ff.
+Latest direct owner correction52ec706f-e12c-4b47-9aa1-92678981065d rejects hardware
+readiness of7e9e2ea0e3ac8c018dfa3088ef65af6b6c8cc820 (tree
+9749862621c12d6c6459cdf2441120f7385fcf98, parent
+88a36e67bcdf4acc447707da42687501afcd4d13). Its source/build/custody architecture
+is accepted; its90 intentional instructions/36DMB before local INTS read are not.
+This timing correction is a direct child of7e9e2e, with final identity in sealed
+HANDOFF. Original private-observer authority184ed11d remains bounded by this
+newer correction. Old7e9e2e UF2 is NOT authorized for installation.
 Canonical6b73a7c507f35c111745c6bdd341618b490cbdcd unchanged. This is observation only:
 no controller action, installed framework edit, TinyUSB upgrade, USB/endpoint repair,
 manual SETUP service, IRQ force/rescan/retry, gate/branch/clear/reset/descriptor
@@ -34,7 +39,7 @@ SHA25692a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12.
 Repository pristine vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c preserves
 exact18095 CRLF bytes, copyright/license and same hash. tools/rt2_private_dcd.py
 verifies installed and pristine hashes, creates .pio/rt2-private-dcd/dcd_rp2040.c
-with only one marker header include and13 call insertions. Removing those added
+with only one marker header include and12 post-read call insertions. Removing those added
 lines must recover exact pristine hash. Patched hash and compile provenance are
 recorded in final build/assembly receipts; no mutable installed-package patch.
 
@@ -44,7 +49,12 @@ parent. Original source is excluded, not compiled alongside it. Prelink requires
 one replacement. Final ELF/map/compile-command and original/patched disassembly
 prove single DCD implementation/candidate-owned source and actual status dataflow.
 No E5/E15/E16 option changes. All18 existing external wrappers retain real-call
-semantics and remain separately proved in final ELF. Private history records from the FIRST DCD call, including normal and early USB
+semantics and remain separately proved in final ELF. The registration wrapper
+forwards the ORIGINAL private callback exactly once, same priority; there is no
+per-invocation diagnostic trampoline or observer-enabled check before the private
+INTS read. Registration metadata is recorded only during registration. Legacy
+setup_irq/pre_setup IRQ pre/post/entry/return/age fields are unsupported zero in
+response version2. Do not substitute post-read evidence for those pre-read fields. Private history records from the FIRST DCD call, including normal and early USB
 initialization before BeginRecovery. Enable gates snapshot validity/publication
 only and does not reset history. All boot paths incur bounded diagnostic stores;
 old external observers still enable only in recovery. No disabled-hook fast-path
@@ -52,19 +62,31 @@ claim. Constant-initialized atomic BSS requires no dynamic bank constructor.
 
 ## Marker ABI and exact control flow
 
-C-safe RecoveryPrivateDcdMarkers.h declares GlyphDcdPrivateMarker(marker,value).
+C-safe RecoveryPrivateDcdMarkers.h declares dedicated
+GlyphDcdPrivateStatus(status), then GlyphDcdPrivateMarker(marker,value) for later
+boundaries. The original INTS read is the first private source statement. No H0
+callback, diagnostic statement, barrier, load, store or helper precedes it.
 Only actual private handler calls it. Status/test arguments use the private local
 variable, never an extra MMIO read. Each marker closes a single-writer aligned32
 atomic bank BEFORE original vendor work resumes, so later nonreturn does not strand
 an open sequence. No RMW/lock/alloc/log/Serial/TinyUSB/PIO/wait/recovery/MMIO writes
-from hooks. C++ sequential-consistent load/store barriers preserve coherent reads;
-added calls/stores/barriers perturb IRQ latency. Instruction/barrier inventories
+from hooks. The sole non-reentrant core0 USBCTRL writer uses aligned32 atomic payload
+words: relaxed odd sequence store, release fence, relaxed data operations, release
+even sequence store. One bounded core1 read uses initial acquire sequence, relaxed
+data, acquire fence, final relaxed sequence; only matching even values are valid.
+Initial acquire excludes older payload; reading any newer writer payload bridges
+the release/acquire fences, forcing the final sequence beyond the old even value
+by atomic coherence. Both fences and initial acquire/final release are required;
+a release odd store alone is insufficient. Enabled is separately release/acquire.
+No seq wrap during a bounded read is assumed; this is not an unbounded ABA proof.
+State::Marker is inlined into each noinline C ABI, with no nested hook layer.
+Added post-read calls/stores/barriers still perturb IRQ latency. Instruction/barrier inventories
 are not cycle bounds or a negligible-perturbation claim.
 
 | ID/bit | Boundary | Value |
 |---|---|---|
-|0 H0|first handler statement|0|
-|1 H1|immediately after original sole INTS read|actual local status|
+|0 obsolete|NO target callback; bit0 means merged post-read entry|not called|
+|1 H1|one dedicated publication after original sole INTS read; entry/ID/status/enable-window fact|actual local status|
 |2 H2 SOF|after dcd_event_sof returns, only when SOF branch ran|0|
 |3 H2 BUFF|after hw_handle_buff_status returns, only when branch ran|0|
 |4 H3|after prebranches, immediately before original SETUP if|actual boolean status&SETUP|
@@ -82,7 +104,8 @@ Pointer acquisition is only address formation; the inline event helper performs
 DPRAM request copy later. H6/H7 enclose that inline construction/copy/external call.
 H7 does not prove queue accepted. Marker11 proves original clear store was executed,
 not an electrical/latch-state guarantee. Marker12 means normal return boundary reached;
-existing external trampoline return is separate. Earlier SOF/BUFF may be nonreturning
+it is not proof of the completed machine return; the external trampoline was
+removed to protect read timing. Earlier SOF/BUFF may be nonreturning
 even if local SETUP was captured; H1 without H4 alone is not a surprising C-test
 failure. H3/H2 and final assembly are needed before that inference.
 
@@ -108,7 +131,7 @@ profile, input or display work. At>=10s valid bounded samples freeze under the S
 single release publication and static whole-panel frame. No spin on invalid sample;
 retry on next ordinary loop. Existing8word joined PIO FIFO emits one immutable
 frame, no refresh/refill/DMA. Task age127 and prebranch age182 remain their own
-meaning. Response-only183–208 version1 exposes private history via caller-owned
+meaning. Response-only183–208 version2 exposes private history via caller-owned
 static96B backend cache sharing existing captured/live decision. Retain old raw
 SIE/INTR/INTS sticky bits and individual response fields; never claim simultaneous.
 Scratch3 v9 namespace525c retains525b/525a/5259/older acceptance; selectors0–2/SDK4–7
@@ -168,5 +191,10 @@ Final source/harness/integration/assembly/resource/custody and fresh independent
 review receipts bind exact candidate SHA/tree/parent/UF2 in sealed HANDOFF.
 Host stop throws model nonreturn without hanging process and never change target
 panic. Marker-removal negatives and actual patched-source branches required.
-No whole-target stack/cycle bound or new physical acceptance claimed. Framework
+The source and assembly gates reject any pre-read diagnostic, DMB, helper,
+atomic store, second INTS read, reread argument, moved STATUS marker, reordered
+boundary, and wrong saved-value dataflow. Final disassembly separately reports
+compiler prologue differences and intentional post-read costs. Zero intentional
+pre-read instructions/barriers does not mean identical whole-handler timing or
+zero observer perturbation. No whole-target stack/cycle bound or new physical acceptance claimed. Framework
 aggregate NOT_RUN/NOT_CLAIMED; prior debt remains. Hardware NOT_TESTED.

@@ -94,7 +94,7 @@ int main(int argc,char**argv){if(argc==3&&std::string(argv[2]).rfind("private-",
     if(scenario=="pre-enable-reset"){defer_task=true;physical_reset();}
     enter_recovery_configurator();
     const unsigned pre_enable_handler_calls=actual_handler_calls;
-    if(scenario=="pre-enable-reset")require(pre_enable_handler_calls==1,"unarmed trampoline invokes original exactly once");
+    if(scenario=="pre-enable-reset")require(pre_enable_handler_calls==1,"unarmed direct callback invokes original exactly once");
     require(shared_handlers.size()==2&&shared_handlers[0].priority==0xff&&shared_handlers[1].priority==0,"same two pinned handler slots/order preserved");
     TinyUSB_Device_Task();require(RecoveryUsbDiagnostics::TaskRead().entered==0,"pre-loop task excluded from foreground anchor");
     const auto initial_frames=led_updates;independent();require(led_updates==initial_frames,"core1 observes before deadline without publishing");
@@ -159,9 +159,9 @@ int main(int argc,char**argv){if(argc==3&&std::string(argv[2]).rfind("private-",
                 auto pulse=status();pulse.operation=PROFILE_STORE_LIVENESS;capture_response=true;
                 const auto crossed=transact(pulse);require(crossed.status==PROFILE_STORE_OK&&crossed.recovery_dashboard==0&&crossed.recovery_dashboard_elapsed_us==0&&crossed.recovery_dashboard_active_age_us==0,"pre-capture response never mixes live fields with a later captured dashboard");
                 const auto captured=RecoveryStartupDiagnostics::CapturedTask();const auto frozen=transact(pulse);
-                require(crossed.recovery_private_dcd_version==1&&crossed.recovery_private_dcd_captured==0,"response selection never mixes a later private capture with earlier live task decision");
+                require(crossed.recovery_private_dcd_version==2&&crossed.recovery_private_dcd_captured==0,"response selection never mixes a later private capture with earlier live task decision");
                 RecoveryPrivateDcdDiagnostics::Snapshot frozen_private;require(RecoveryStartupDiagnostics::CapturedPrivateInto(frozen_private),"private capture getter available with frozen task");
-                require(frozen.recovery_private_dcd_version==1&&frozen.recovery_private_dcd_captured==1,"response selects private snapshot from same frozen publication");
+                require(frozen.recovery_private_dcd_version==2&&frozen.recovery_private_dcd_captured==1,"response selects private snapshot from same frozen publication");
                 require(frozen.recovery_private_dcd_valid==frozen_private.valid,"frozen private response field valid");
                 require(frozen.recovery_private_dcd_entries==frozen_private.entries,"frozen private response field entries");
                 require(frozen.recovery_private_dcd_returns==frozen_private.returns,"frozen private response field returns");
@@ -201,14 +201,16 @@ int main(int argc,char**argv){if(argc==3&&std::string(argv[2]).rfind("private-",
     }
     const auto s=RecoveryUsbDiagnostics::TaskRead();require(s.valid,"coherent source observer snapshot");
     RecoverySetupIrqDiagnostics::Snapshot setup;RecoveryUsbDiagnostics::SetupReadInto(setup);
-    require(actual_handler_calls==pre_enable_handler_calls+setup.irq_entries,"captured original callback executes exactly once per trampoline");
+    RecoveryPrivateDcdDiagnostics::Snapshot priv;RecoveryUsbDiagnostics::PrivateReadInto(priv);
+    require(actual_handler_calls==priv.entries,"original direct callback executes exactly once per merged post-read status publication");
+    require(!setup.irq_entries&&!setup.irq_returns&&!setup.irq_setup_entries,"v2 legacy trampoline IRQ counters intentionally unavailable and zero");
     require(setup.valid&&setup.registration_captured&&!setup.registration_duplicate,"sole exact DCD registration captured");
     if(scenario=="raw-only")require((setup.independent_seen&15u)==15u&&!setup.setup_emit_entered,"independent SIE INTR INTE INTS observed separately");
     if(scenario=="forced")require((setup.independent_seen&24u)==24u&&!(setup.independent_seen&3u),"INTF forced INTS never manufactures raw SIE/INTR");
     if(scenario=="external-context"){unsigned panel[8];RecoverySetupIrqDiagnostics::Panel(setup,s,panel);require(panel[6]==RecoveryTaskDiagnostics::Orange&&panel[7]==RecoveryTaskDiagnostics::Orange,"unfiltered external boundary is visible on whole LF5 button");}
     if(scenario=="external-context")require(setup.external_flags==7&&!setup.setup_emit_entered&&!setup.setup_hook&&!setup.setup_accepted,"unfiltered external SETUP boundary survives old hook context rejection");
     if(scenario=="dcd-setup")require(setup.external_flags==3,"expected IRQ context records independent external call/return");
-    if(scenario=="dcd-setup")require(setup.irq_entries==1&&setup.irq_returns==1&&setup.irq_setup_entries==1&&setup.setup_emit_entered==1&&setup.setup_emit_returned==1&&setup.setup_hook==1&&setup.setup_accepted==1&&setup.setup_dropped==0,"exact IRQ/event/queue boundaries remain separate");
+    if(scenario=="dcd-setup")require(priv.entries==1&&priv.returns==1&&priv.setup_status_count==1&&setup.setup_emit_entered==1&&setup.setup_emit_returned==1&&setup.setup_hook==1&&setup.setup_accepted==1&&setup.setup_dropped==0,"exact IRQ/event/queue boundaries remain separate");
     if(scenario=="drop-setup")require(setup.setup_emit_entered==1&&setup.setup_emit_returned==1&&setup.setup_hook==1&&setup.setup_dropped==1&&!setup.setup_accepted,"failed queue still proves DCD emission");
     if(scenario=="nvic-off")require(setup.foreground_conditions&RecoverySetupIrqDiagnostics::IntsNvicOff,"NVIC off paired with actual positive INTS sample");
     if(scenario=="global-mask")require(setup.foreground_conditions&RecoverySetupIrqDiagnostics::IntsGloballyMasked,"PRIMASK paired with actual positive INTS sample");
