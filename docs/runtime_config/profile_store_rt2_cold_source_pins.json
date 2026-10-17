@@ -1,0 +1,201 @@
+{
+  "status": "SOURCE_AUDIT_PASS_WITH_LIMITS_BEFORE_IMPLEMENTATION",
+  "parent": "e6de4b7a87296aacce291e504606790607eba8d1",
+  "scope": "read-only source audit; only these ignored audit receipts written; no controller, build, Git or implementation mutations",
+  "recommended_marker": {
+    "register": 2,
+    "magic_example": "0x43525432",
+    "allocation": "Exact-tagged shared slot; mode destination exacttag 0x4d445354 remains owner of all other interpretation",
+    "arm_preconditions": "ordinary Boot A; rt2 && !mb1; cold RAM flag false; scratch0==0 && scratch1==0 && scratch2==0",
+    "consume": "at strong TinyUSB_Device_Init original startup point: read exacttag, clear scratch2 BEFORE any validity check/preparation; accept only exacttag + scratch0/1 zero + watchdog REASON TIMER==1",
+    "normal": "unknown/mode tags and other scratch words untouched; ordinary TinyUSBDevice.begin(rhport) exactly once"
+  },
+  "primary_urls": [
+    "https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf#page=546",
+    "https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf#page=131",
+    "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/master/bootrom/bootrom_main.c"
+  ],
+  "pins": [
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/main.cpp",
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+      "bytes": 5490
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/RP2040Support.h",
+      "sha256": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412",
+      "bytes": 8789
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/RP2040Support.cpp",
+      "sha256": "e45de2528ef4467ff461cc54ec384254bd785c8eaf2d1adbe9598be411b3cb97",
+      "bytes": 1207
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_TinyUSB_API.cpp",
+      "sha256": "d3ccfba32fe1eac05d86a471720368b0a5ebbda85ac8a36c55b9d34486a326d0",
+      "bytes": 2878
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_TinyUSB_API.h",
+      "sha256": "848eca20e4232e82f914ca7733ced987f989dbdf5e3519fbb9e07364c47cff32",
+      "bytes": 2882
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp",
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597",
+      "bytes": 17806
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.h",
+      "sha256": "e472085b606a8867a2c33cec5d7f727bdec2d637e7c90c56491135e2719963d0",
+      "bytes": 3806
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp",
+      "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8",
+      "bytes": 7486
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.h",
+      "sha256": "77e34f2f25ba819da4903f9c405098043ca064de974952439320ef646f75fc73",
+      "bytes": 3099
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+      "bytes": 4652
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+      "bytes": 46830
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c",
+      "sha256": "199db806a6844a638ae505383083ce7942f8a7bfd746f218a7499e49999fd014",
+      "bytes": 3283
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_watchdog/include/hardware/watchdog.h",
+      "sha256": "4363699258a62fb9874c47c1ff55661067ee4e16b3000aa954ede3404605269f",
+      "bytes": 4875
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/watchdog.h",
+      "sha256": "d2020b6f62d175f3879151e7cafb39d8b5f40f83b67eec9bcad888c0b01b9900",
+      "bytes": 11068
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/include/pico_base/pico/version.h",
+      "sha256": "28f4397e73b20ee0e167958297da3e4433d77734a7d5a81c289e9e4c4eefda68",
+      "bytes": 439
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/package.json",
+      "sha256": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+      "bytes": 401
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/library.properties",
+      "sha256": "5d2bb442f356ca002791a435be291be741ef5f1923c9c20dcec9a7a4371c45fe",
+      "bytes": 385
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/include/core/ModeSelectionTransaction.hpp",
+      "sha256": "5ee7a5f854743127bb0344fefea938f477156405adae71abcce0c11aaf128ca1",
+      "bytes": 3666
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/include/core/RecoveryStartupDiagnostics.hpp",
+      "sha256": "e20773fcb89f7968a6ada132f123c4b7da67ae5e660ca470572b65987d2fd850",
+      "bytes": 3999
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+      "sha256": "26940ad789b7a4c876c5fed66e2a13e89487017370542e119f4a093cc5dce631",
+      "bytes": 11212
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/config/glyph/common/src/config.cpp",
+      "sha256": "b8afadd3beece09f7c88f749ec79d775dd3e78ee18e25cb283c254a5451fd239",
+      "bytes": 20063
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/reboot.cpp",
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e",
+      "bytes": 156
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "a35797de46b06133276ea8108349be9789760ca9c15cce5a7a053d474be17a00",
+      "bytes": 56136
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0",
+      "bytes": 11708
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/include/core/RecoveryInitialization.hpp",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "bytes": 1446
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c",
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+      "bytes": 18095
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520",
+      "bytes": 12909
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/display/RemapMenu.cpp",
+      "sha256": "3707564737f8e9f4652e1daddedb6f0e40c94a2cc741d89bc29760d94a39b7fb",
+      "bytes": 934
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/config/glyph/common/src/display/OopsieMenu.cpp",
+      "sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2",
+      "bytes": 3391
+    }
+  ],
+  "limits": [
+    "No hardware acceptance. Underlying RT2 USB cause unresolved.",
+    "An unexpected watchdog timer reset after marker arm but before early consumption is observationally indistinguishable from intended reboot; successful early consumption prevents later replay.",
+    "Bounded helper/port failure can publish refusal without retry; pinned panic/nonreturn is inherently nonreturning and cannot guarantee subsequent publication.",
+    "Pinned port returns void and ignores tud_init return; post-start checks cannot prove enumeration.",
+    "Normal startup preserves original call/body/order but incurs marker check instructions; timing is not byte/cycle-identical.",
+    "Official bootrom source is current upstream corroboration; exact silicon ROM bytes not audited."
+  ],
+  "preferred_seam": "Existing GNU-wrap TinyUSB_Port_InitDevice suppresses exactly one call during descriptor-only cold Preparing phase; original TinyUSBDevice.begin is unchanged. Separate Task/Flush GNU-wrap gates suppress calls while cold phase!=Started.",
+  "extra_preport_pins": [
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/delay.cpp",
+      "sha256": "1f12e590c041dea9231dd45b0f5c42b90ccb3000373f50570d2bdeccdf233454",
+      "bytes": 1647
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c",
+      "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+      "bytes": 15750
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp",
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+      "bytes": 8305
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+      "sha256": "dfaa8cbd5b1f656cb05642ae88f54d45f55cbaa863315b65a708e0f182459070",
+      "bytes": 5127
+    },
+    {
+      "path": "/private/tmp/glyph-profile-store-rt2-cold-recovery/HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+      "sha256": "05685d15e54ac74a9f31528c8fa7643f1a8e7b10485b7319bfd03cad08c817ba",
+      "bytes": 22930
+    }
+  ]
+}

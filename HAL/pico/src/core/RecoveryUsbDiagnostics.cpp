@@ -1,4 +1,5 @@
 #include "core/RecoveryUsbDiagnostics.hpp"
+#include "core/ColdRecoveryBoot.h"
 #if defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE && (defined(ARDUINO_ARCH_RP2040) || defined(GLYPH_RT2_DCD_HOST))
 #include <tusb.h>
 #include "device/dcd.h"
@@ -289,9 +290,8 @@ extern "C" void __wrap_dcd_edpt0_status_complete(uint8_t port,const tusb_control
     if(r->bRequest==TUSB_REQ_SET_ADDRESS){address_applied_epoch=epoch;address_applied=true;}
     if(r->bRequest==TUSB_REQ_SET_CONFIGURATION&&uint8_t(r->wValue)!=0){configured_epoch=epoch;configured=true;}
 }
-// Ordinary pinned usbd.c reaches this while consuming RESET/UNPLUGGED. Manual
-// recovery's coordinated warm reset also calls it directly. Retained reset
-// counters/panel epochs therefore do not identify a dequeued bus event in B.
+// Pinned usbd.c reaches this while consuming RESET/UNPLUGGED. The superseded
+// same-boot warm reset is not linked into the two-stage cold candidate.
 extern "C" void __real_usbd_control_reset(void);
 extern "C" void __wrap_usbd_control_reset(void){
     __real_usbd_control_reset();++task_reset_count;task_observer.ResetCompleted();
@@ -351,6 +351,7 @@ void GlyphRealPortInit(uint8_t);
 void GlyphWrapPortInit(uint8_t);
 #endif
 void GlyphWrapPortInit(uint8_t port){
+    if(GlyphColdRecoveryDeferPort(port))return;
     if(port!=0||get_core_num()!=0){GlyphRealPortInit(port);return;}
     in_port=true;GlyphRealPortInit(port);in_port=false;port_complete=true;
 }

@@ -91,16 +91,16 @@ def main() -> int:
                 boot = boot.replace(anchor, 'if (load_result != Persistence::LoadResult::Loaded) {\n        refuse_boot(BootOutcome::StorageFailure, display_ready);',1)
             (directory/'extracted_setup.inc').write_text(rec+'\n'+boot+'\n'+loop+'\n')
             exe = directory/'routes'
-            run(['c++','-std=c++17','-fshort-enums','-Wall','-Wextra','-Werror',
+            run(['c++','-std=c++17','-fshort-enums','-Wall','-Wextra','-Werror','-DGLYPH_RT2_COLD_RECOVERY_CANDIDATE=1',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',
                  *sum((['-I',str(p)] for p in [directory,generated,nanopb,ROOT/'include']),[]),
                  str(HOST/'setup_routes.cpp'),'-o',str(exe)])
             return exe
         routes = app_case('actual_routes')
-        for route in ('manual','automatic','filesystem','mb1'):
+        for route in ('manual','automatic','filesystem','mb1','cold','cold-mb1','arm-conflict','reboot-return','prepare-failure','start-failure'):
             print(run([str(routes),route]),end='')
         old_routes = app_case('old_manual_routes',old_manual=True)
-        failure = run([str(old_routes),'manual'],expected=1)
+        failure = run([str(old_routes),'cold'],expected=1)
         assert 'manual recovery installs validator' in failure
         old_routes = app_case('old_auto_routes',old_auto=True)
         failure = run([str(old_routes),'automatic'],expected=1)

@@ -12,7 +12,7 @@
 #include "core/RecoveryInitialization.hpp"
 #include "core/RecoveryStartupDiagnostics.hpp"
 #include "core/RecoveryUsbDiagnostics.hpp"
-#include "core/RecoveryUsbReinitialization.h"
+#include "core/ColdRecoveryBoot.h"
 #include "core/ResourceDiagnostics.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -151,8 +151,8 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
 
 // Recovery deliberately reuses the single source-owned Configurator transport
 // and runs without gameplay, menu, display, or core1 initialization.
-void enter_recovery_configurator(bool manual_rt2 = false) {
-    (void)manual_rt2; // Non-RP2040 builds retain the existing recovery route.
+void enter_recovery_configurator(bool cold_recovery = false) {
+    (void)cold_recovery;
     using RecoveryStartupDiagnostics::Phase;
     RecoveryUsbDiagnostics::BeginRecovery();
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Rt2Route);
@@ -165,7 +165,14 @@ void enter_recovery_configurator(bool manual_rt2 = false) {
         persistence, profile_store, config, ConfigWriteCandidate(), validate_glyph_config);
     RecoveryStartupDiagnostics::Mark(Phase::InspectionReturned);
     RecoveryStartupDiagnostics::Mark(Phase::SerialBeginEntered);
-    Serial.begin(115200);
+    if (cold_recovery) {
+        if (!GlyphColdRecoveryPrepare()) {
+            publish_boot_state(BootOutcome::RecoveryTransportFailure, false);
+            return;
+        }
+    } else {
+        Serial.begin(115200);
+    }
     RecoveryStartupDiagnostics::Mark(Phase::SerialBeginReturned);
     RecoveryStartupDiagnostics::Mark(Phase::BackendNewEntered);
     recovery_configurator = new ConfiguratorBackend(
@@ -173,15 +180,10 @@ void enter_recovery_configurator(bool manual_rt2 = false) {
     RecoveryStartupDiagnostics::Mark(Phase::BackendNewReturned);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
     RecoveryStartupDiagnostics::Mark(Phase::ReadOnlyInstalled);
-#if defined(ARDUINO_ARCH_RP2040) && defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE
-    // Only explicit manual RT2 restarts USB bus state. The existing CDC
-    // descriptor/identity and read-only backend are ready before pull-up.
-    // Ordinary boot and automatic recovery keep their existing USB lifecycle.
-    if (manual_rt2 && !GlyphRecoveryUsbReinitialize()) {
+    if (cold_recovery && !GlyphColdRecoveryStart()) {
         publish_boot_state(BootOutcome::RecoveryTransportFailure, false);
         return;
     }
-#endif
     RecoveryStartupDiagnostics::HandOffIndicator();
     publish_boot_state(BootOutcome::RecoveryConfigurator, false);
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Published);
@@ -192,6 +194,16 @@ void enter_recovery_configurator(bool manual_rt2 = false) {
 
 
 void setup() {
+#if defined(GLYPH_RT2_COLD_RECOVERY_CANDIDATE) && GLYPH_RT2_COLD_RECOVERY_CANDIDATE
+    // Boot B authorization was consumed before Arduino's ordinary USB init.
+    // Do not sample buttons, including MB1, again on this authorized boot.
+    if (GlyphColdRecoveryBoot()) {
+        InitializeResourceDiagnosticsCore();
+        RecoveryStartupDiagnostics::CapturePrevious();
+        enter_recovery_configurator(true);
+        return;
+    }
+#endif
     RecoveryUsbDiagnostics::Stage(RecoveryUsbDiagnostics::BootStage::Setup);
     InitializeResourceDiagnosticsCore();
     RecoveryStartupDiagnostics::CapturePrevious();
@@ -203,7 +215,14 @@ void setup() {
     // Amendment A recovery route: after MB1 priority (evaluated below only
     // when MB1 is held) and before display/config/backend initialization.
     if (inputs.rt2 && !inputs.mb1) {
-        enter_recovery_configurator(true);
+#if defined(GLYPH_RT2_COLD_RECOVERY_CANDIDATE) && GLYPH_RT2_COLD_RECOVERY_CANDIDATE
+        // Boot A only authorizes the next reset; it does not inspect storage.
+        if (GlyphColdRecoveryArm()) reboot_firmware();
+        // A conflict or an unexpectedly returning reboot is permanent refusal.
+        publish_boot_state(BootOutcome::RecoveryTransportFailure, false);
+#else
+        enter_recovery_configurator();
+#endif
         return;
     }
 

@@ -5,6 +5,7 @@
 #include "hardware/pio.h"
 #include "core/RecoveryStartupDiagnostics.hpp"
 #include "core/RecoveryInitialization.hpp"
+#include "core/ColdRecoveryBoot.h"
 #include "core/ConfigWriteCandidate.hpp"
 #define main retained_timeout_main
 #include "retained_timeout_harness.inc"
@@ -27,7 +28,7 @@ Config config=Config_init_default;UltimateProfile config_profile=UltimateProfile
 ProfileStoreTransactionIdentity identity(uint64_t token){ProfileStoreTransactionIdentity t;t.token=token;t.digest[0]=uint8_t(token);return t;}
 Bytes outgoing;size_t sent=0;
 ConfiguratorBackend *recovery_configurator=nullptr;
-enum class BootOutcome{Pending,Normal,RecoveryConfigurator};
+enum class BootOutcome{Pending,Normal,RecoveryConfigurator,RecoveryTransportFailure};
 struct BootSnapshot{BootOutcome outcome=BootOutcome::Pending;bool display_ready=false;}boot;
 void publish_boot_state(BootOutcome o,bool d){require(boot.outcome==BootOutcome::Pending,"single boot decision");boot={o,d};}
 BootSnapshot read_boot_state(){return boot;}

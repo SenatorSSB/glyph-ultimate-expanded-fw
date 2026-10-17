@@ -1,3 +1,6 @@
+<!-- Two-stage cold RT2 owner109eb969 branch notice -->
+Owner reports normal e6de control PASS and one e6de manualRT2 TRANSPORT_FAIL (black/off,noUSBidentity/noendpoint, ancillary LF4CYAN). The warm reset failed; source task now tests one two-stage cold recovery boot from exacte6de. BootA arms ephemeralintent/watchdogreset; BootB consumes before ordinaryUSBinit and starts CDC only after readonly backend/finalidentity. No newobserver/controlleraction/merge. UNDERLYING_RT2_USB_CAUSE=UNRESOLVED; hardware NOT_TESTED for this candidate. See runtime_config/profile_store_rt2_cold_contract.md and separate stopped-e6de/future-one-attempt packets; finalcandidate/artifact evidence is in its sealed handoff.
+
 <!-- Manual RT2 recovery USB A/B branch notice -->
 Current owner request3833efe1 pivots to one manual-recovery-only USB warm-reset A/B from60313cde. Latest owner-reported single60313 RT2 CYAN/OFF/OFF reached software observability limit. Underlying cause UNRESOLVED. Source work only; no new controller action, polling observer, canonical merge or hardware acceptance. See runtime_config/profile_store_rt2_reinit_contract.md and separate stopped60313 adjudication/future one-attempt packet. Candidate validation/custody is in its final handoff; these branch docs do not promote hardware PASS.
 

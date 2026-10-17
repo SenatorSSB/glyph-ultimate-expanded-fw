@@ -1,0 +1,27 @@
+{
+  "status": "PASS_WITH_LIMITS_ARCHITECTURE_ONLY",
+  "reviewer": "cold_fresh_review",
+  "source_readonly": true,
+  "device_actions": 0,
+  "owner_request": "109eb969-5b82-44f6-89be-16cbe3150fd5",
+  "source_parent": "e6de4b7a87296aacce291e504606790607eba8d1",
+  "verdict": "Strong early C TinyUSB_Device_Init override and external PortInit interposition can preserve original begin descriptor prefix and defer actual hardware start without replacing vendor TU. Implementation/ELF/tests/custody not yet reviewed.",
+  "required_checks": [
+    "Strong init TU must not inherit weak declaration attribute",
+    "Normal path original begin at same Arduino startup point exactly once; disclose added branch overhead",
+    "BootB consume intent before main core1 launch and original USB startup",
+    "Descriptor prefix original begin only once with PortInit suppressed only in Preparing phase",
+    "Task and FlushCDC calls blocked cold prestart and failed phases",
+    "Validate final 2E8A:1092 CDC-only composition before port start because begin returns unconditional true",
+    "No descriptor clear after identity finalization",
+    "Start port exactly once without second begin",
+    "No warm-reset helper route or persistent intent",
+    "Keep cold recovery gate failed/refused with no retry"
+  ],
+  "limits": [
+    "No silicon or host enumeration acceptance by source",
+    "Intent scratch/reset semantics require separate specialist audit",
+    "Watchdog failure before marker consumption remains residual unless exact boot source proves otherwise",
+    "Normal wrappers add bounded overhead although call order/count preserved"
+  ]
+}

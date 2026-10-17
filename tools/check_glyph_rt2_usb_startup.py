@@ -21,7 +21,8 @@ def function(text,signature):
  # The current route has one explicit manual-only argument; frozen routes keep
  # their original signature. Legacy consumers exercise the default false path.
  if signature == 'void enter_recovery_configurator()' and signature not in text:
-  signature = 'void enter_recovery_configurator(bool manual_rt2 = false)'
+  import re
+  signature = re.search(r'void enter_recovery_configurator\([^)]*\)',text)[0]
  start=text.index(signature);end=text.index('{',start);depth=1;end+=1
  while depth:depth+=(text[end]=='{')-(text[end]=='}');end+=1
  return text[start:end]
