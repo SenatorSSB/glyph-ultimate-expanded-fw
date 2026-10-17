@@ -18,6 +18,7 @@ uint32_t GlyphHostPrimask();
 namespace {
 RecoveryTaskDiagnostics::State task_observer;
 RecoverySetupIrqDiagnostics::State setup_observer;
+RecoveryPreSetupDiagnostics::State pre_setup_observer;
 // Milestones are sticky within the latest DCD BUS_RESET epoch.
 volatile bool reset_seen=false,setup_seen=false,descriptor_seen=false;
 volatile bool address_requested=false,address_applied=false,configured=false;
@@ -87,7 +88,9 @@ void __tusb_irq_path_func(observed_dcd_irq)(){
     if(!setup_observer.Enabled()){registered_dcd_handler();return;}
     const uint32_t pre_raw=setup_raw();const uint32_t pre_gates=setup_gates();
     setup_observer.IrqEnter(pre_raw,pre_gates);
+    pre_setup_observer.IrqEnter(usb_hw->ints);
     registered_dcd_handler(); // the sole captured callback, exactly once
+    pre_setup_observer.IrqReturn(usb_hw->ints);
     const uint32_t post_raw=setup_raw();const uint32_t post_gates=setup_gates();
     setup_observer.IrqReturn(post_raw,post_gates);
 }
@@ -104,7 +107,8 @@ void observe(Observations &o){
 }
 }
 namespace RecoveryUsbDiagnostics {
-void BeginRecovery(){task_observer.Enable();setup_observer.Enable();}
+void BeginRecovery(){task_observer.Enable();setup_observer.Enable();pre_setup_observer.Enable();}
+void PreSetupReadInto(RecoveryPreSetupDiagnostics::Snapshot &out){pre_setup_observer.ReadInto(out);}
 void SetupReadInto(RecoverySetupIrqDiagnostics::Snapshot &out){setup_observer.ReadInto(out);}
 RecoveryTaskDiagnostics::Snapshot TaskRead(){return task_observer.Read();}
 void TaskReadInto(RecoveryTaskDiagnostics::Snapshot &out){task_observer.ReadInto(out);}
@@ -211,6 +215,45 @@ extern "C" void tud_event_hook_cb(uint8_t port,uint32_t event,bool){
     observe(event_observed);
     if(event==DCD_EVENT_SETUP_RECEIVED){setup_observer.Hook();task_observer.SetupEvent();setup_seen=true;if(setup_count!=UINT32_MAX)++setup_count;}
 }
+namespace {
+bool pre_setup_context(){return pre_setup_observer.Enabled()&&get_core_num()==0&&__get_current_exception()==16+USBCTRL_IRQ;}
+bool bounded_prefix(const char *text,const char *prefix){
+    if(!text)return false;
+    for(unsigned i=0;i<48;++i){if(!prefix[i])return true;if(text[i]!=prefix[i])return false;}
+    return false;
+}
+}
+extern "C" bool __real_hw_endpoint_xfer_continue(struct hw_endpoint*);
+extern "C" bool __wrap_hw_endpoint_xfer_continue(struct hw_endpoint *ep){
+    const bool track=pre_setup_context();
+    if(track)pre_setup_observer.EndpointEnter(ep->ep_addr,ep->active,usb_hw->buf_status,uint32_t(reinterpret_cast<uintptr_t>(ep)));
+    const bool result=__real_hw_endpoint_xfer_continue(ep); // original once, including its real panic
+    if(track)pre_setup_observer.EndpointReturn(result);
+    return result;
+}
+extern "C" __attribute__((noinline,used)) void GlyphObserveUsbPanic(const char *format){
+    if(!pre_setup_context())return;
+    using namespace RecoveryPreSetupDiagnostics;
+    const uint32_t kind=bounded_prefix(format,"Can't continue xfer on inactive ep ")?InactiveEndpoint:
+        bounded_prefix(format,"Unhandled IRQ ")?UnhandledIrq:OtherUsb;
+    pre_setup_observer.PanicEntered(kind);
+}
+#ifdef ARDUINO_ARCH_RP2040
+// AAPCS32 transparent tail interposer. Save original register and stack varargs,
+// maintain 8-byte alignment across the observer call, restore original SP/LR,
+// and tail-branch exactly once. No C variadic forwarding or panic recovery.
+extern "C" __attribute__((naked,noreturn,noinline,used)) void __wrap_panic(const char*,...){
+    asm volatile("push {r0-r4, lr}\n"
+                 "bl GlyphObserveUsbPanic\n"
+                 "ldr r4, [sp, #20]\n"
+                 "mov lr, r4\n"
+                 "ldr r4, =__real_panic\n"
+                 "mov ip, r4\n"
+                 "pop {r0-r4}\n"
+                 "add sp, #4\n"
+                 "bx ip\n");
+}
+#endif
 extern "C" bool __real_tud_control_xfer(uint8_t,const tusb_control_request_t*,void*,uint16_t);
 extern "C" bool __wrap_tud_control_xfer(uint8_t port,const tusb_control_request_t*r,void*b,uint16_t n){
     const uint32_t epoch=reset_count;
@@ -273,8 +316,13 @@ extern "C" void __wrap_dcd_event_handler(dcd_event_t const *event,bool in_isr){
     const bool external=event&&event->rhport==0&&event->event_id==DCD_EVENT_SETUP_RECEIVED;
     const bool setup=external&&get_core_num()==0&&__get_current_exception()==16+USBCTRL_IRQ;
     if(external)setup_observer.ExternalEnter(!setup);
+    const bool branch=event&&event->rhport==0&&pre_setup_observer.Enabled()&&get_core_num()==0&&__get_current_exception()==16+USBCTRL_IRQ;
+    const bool sof=branch&&event->event_id==DCD_EVENT_SOF;
+    const bool xfer=branch&&event->event_id==DCD_EVENT_XFER_COMPLETE;
+    if(sof||xfer)pre_setup_observer.Event(sof,false);
     if(setup)setup_observer.EmitEnter();
     __real_dcd_event_handler(event,in_isr);
+    if(sof||xfer)pre_setup_observer.Event(sof,true);
     if(setup)setup_observer.EmitReturn();
     if(external)setup_observer.ExternalReturn();
 }
@@ -314,6 +362,7 @@ extern "C" bool __wrap_tu_fifo_write(tu_fifo_t *ff,const void *p){
     if(target_queue(ff)){
         const uint32_t exception=__get_current_exception();
         if(exception==16+USBCTRL_IRQ&&event_kind(p)==3)setup_observer.Queue(result);
+        if(exception==16+USBCTRL_IRQ&&pre_setup_observer.Enabled()&&static_cast<const dcd_event_t*>(p)->event_id==DCD_EVENT_XFER_COMPLETE)pre_setup_observer.Queue(result);
         task_observer.QueueSent(exception==0?0:exception==16+USBCTRL_IRQ?1:2,
             event_kind(p),result,tu_fifo_count(ff));
     }

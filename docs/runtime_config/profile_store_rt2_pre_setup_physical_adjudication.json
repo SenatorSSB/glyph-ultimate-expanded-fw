@@ -1,0 +1,55 @@
+{
+  "schema": "glyph_rt2_pre_setup_physical_adjudication_v1",
+  "authority": "Direct owner current message, operator-reported not source-agent device measurement",
+  "candidate": "0f22b6d3b5d4a1a16fc7fd03866cfa44336de4ff",
+  "tree": "4f5fb41553f98da3f11108685b2eaa0942583fc0",
+  "parent": "3761b702ea09f50b9c98a55bea91caa337a3f62e",
+  "canonical": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "uf2_sha256": "4212e0ff7681c08c8cff323deac86c071e9df71fb7fdaa20fe131807a9542e87",
+  "uf2_size": 1018880,
+  "normal": {
+    "status": "PASS_OWNER_REPORTED",
+    "firmware": "0f22b6d3",
+    "endpoint": "/dev/cu.usbmodem101",
+    "store_generation": 166,
+    "useful_authority": "PRESERVED",
+    "Config": "PRESERVED",
+    "core0_min_free": 1856,
+    "core1_min_free": 3716,
+    "heap": 11244,
+    "capacity": 72684
+  },
+  "rt2": {
+    "attempts": 1,
+    "LF4": "WHITE",
+    "LF3": "YELLOW",
+    "LF5": "OFF",
+    "display": "BLACK",
+    "matching_IORegistry_device": "ABSENT",
+    "serial": "ABSENT",
+    "classification": "SETUP_INTERRUPT_STATUS_OBSERVED_NO_DCD_SETUP_EVENT",
+    "supported": [
+      "SIE/INTR/INTS SETUP positive sticky observations; not proven simultaneous",
+      "No stronger sampled gate or raw-SETUP-correlated trampoline condition captured",
+      "No external SETUP event/hook/queue/consume/control/descriptor/address/configuration established"
+    ],
+    "not_established": [
+      "IRQ never executed",
+      "Handler returned before later SETUP",
+      "Masks/gates/pending were impossible between samples",
+      "Inactive endpoint or any panic physically occurred"
+    ],
+    "residuals": [
+      "DCD_HANDLER_STATUS_RESIDUAL",
+      "DCD_EARLY_SETUP_BRANCH_RESIDUAL",
+      "RAW_REGISTER_SAMPLING_RESIDUAL"
+    ],
+    "post_attempt_actions": "NONE, no retry/reset/command/mutation/cleanup/GC/selection/merge"
+  },
+  "current_device": "STOPPED_FAILED0f22_RT2",
+  "investigation": "Earlier IRQ may nonreturn in preSETUP SOF/BUFF_STATUS before laterSETUPlatch, source hypothesis only",
+  "historical": "3761/466/5913/b075/88ab remain separate; MB1_PAIR_ROLE_DECODING PHYSICALLY_UNRELIABLE; B2/E5 inapplicable; prior V/W PASS retained",
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "selection": "NOT_TESTED"
+}

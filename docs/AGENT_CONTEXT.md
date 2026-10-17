@@ -1,5 +1,22 @@
 # Agent Context
 
+## Owner-scoped pre-SETUP handler / endpoint panic observer — 2026-10-17
+
+Exact0f22 normal control is owner-reported PASS. One RT2 produced LF4WHITE,
+LF3YELLOW, LF5OFF, black/no USB or serial: `SETUP_INTERRUPT_STATUS_OBSERVED_NO_DCD_SETUP_EVENT`.
+SIE/INTR/INTS were sampled positive historically; simultaneity or IRQ non-entry
+is not established. An earlier handler non-return in SOF/BUFF_STATUS is now an
+explicit source hypothesis, not a physical cause. Latest direct owner scope
+authorizes one external-interposition observer, whole large-main-button panel,
+source tests, exact build/custody/review and prepared hardware packets. No USB/
+endpoint repair, panic suppression, controller action or canonical merge.
+Private-handler instrumentation is conditional; current external path is viable.
+See [physical adjudication](runtime_config/profile_store_rt2_pre_setup_physical_adjudication.json)
+and [external-observer contract](runtime_config/profile_store_rt2_pre_setup_contract.md).
+Root cause UNPROVEN; historical boots/MB1 unreliability/B2-E5 facts remain separate.
+Older scoped summaries below are historical within their original scope.
+
+
 ## Owner-scoped raw SETUP / USBCTRL IRQ boundary — 2026-10-17
 
 Exact3761 normal control is owner-reported PASS; its single RT2 yielded reliable

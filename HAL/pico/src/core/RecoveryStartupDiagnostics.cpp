@@ -19,11 +19,13 @@ int indicator_sm=-1;
 bool indicator_attempted=false;
 uint8_t shown_state=255;
 uint64_t handoff_us=0,active_since_us=0;uint32_t last_active=0;
+uint64_t irq_active_since_us=0;uint32_t last_irq_active=0;
 bool capture_ready=false,panel_shown=false;
-std::atomic<uint32_t> dashboard{0},capture_active_age_us{0},capture_elapsed_us{0};
+std::atomic<uint32_t> dashboard{0},capture_active_age_us{0},capture_elapsed_us{0},pre_setup_capture_age_us{0};
 unsigned captured_pixels[8]={};
 RecoveryTaskDiagnostics::Snapshot captured_task;
 RecoverySetupIrqDiagnostics::Snapshot captured_setup;
+RecoveryPreSetupDiagnostics::Snapshot captured_pre_setup,pre_setup_sample;
 RecoveryTaskDiagnostics::Snapshot task_sample;
 RecoverySetupIrqDiagnostics::Snapshot setup_sample;
 
@@ -132,27 +134,36 @@ void PublishIndependent(){
         RecoveryUsbDiagnostics::ObserveIndependent();
         RecoveryUsbDiagnostics::TaskReadInto(task_sample);
         RecoveryUsbDiagnostics::SetupReadInto(setup_sample);
+        RecoveryUsbDiagnostics::PreSetupReadInto(pre_setup_sample);
         const auto &s=task_sample;
-        if(!s.valid||!setup_sample.valid)return; // one attempt per ordinary loop; never spin
+        if(!s.valid||!setup_sample.valid||!pre_setup_sample.valid)return; // one attempt per ordinary loop; never spin
         const uint64_t now=time_us_64();
         if(s.active!=last_active){last_active=s.active;active_since_us=now;}
+        if(pre_setup_sample.irq_active!=last_irq_active){last_irq_active=pre_setup_sample.irq_active;irq_active_since_us=now;}
         if(now-handoff_us<10000000u)return;
         const uint64_t age=s.active?now-active_since_us:0;
-        RecoverySetupIrqDiagnostics::Panel(setup_sample,s,captured_pixels);
+        const uint64_t irq_age=pre_setup_sample.irq_active?now-irq_active_since_us:0;
+        RecoveryPreSetupDiagnostics::Panel(pre_setup_sample,setup_sample,s,irq_age>UINT32_MAX?UINT32_MAX:uint32_t(irq_age),captured_pixels);
+        captured_pre_setup=pre_setup_sample;
         captured_setup=setup_sample;
         uint32_t packed=0;for(unsigned i=0;i<8;++i)packed|=uint32_t(captured_pixels[i])<<(4*i);
         captured_task=s;
         for(unsigned i=0;i<8;++i)captured_task.pixels[i]=captured_pixels[i];
         captured_task.dashboard=packed;
+        pre_setup_capture_age_us.store(irq_age>UINT32_MAX?UINT32_MAX:uint32_t(irq_age));
         capture_active_age_us.store(age>UINT32_MAX?UINT32_MAX:uint32_t(age));
         capture_elapsed_us.store(now-handoff_us>UINT32_MAX?UINT32_MAX:uint32_t(now-handoff_us));
         dashboard.store(packed,std::memory_order_release);
-        const uint32_t word=kDashboardMagic|(captured_pixels[0]<<12)|
-            (captured_pixels[1]<<8)|(captured_pixels[4]<<4)|captured_pixels[6];
+        const uint32_t word=kDashboardMagic|(captured_pixels[2]<<12)|
+            (captured_pixels[4]<<8)|(captured_pixels[6]<<4)|captured_pixels[0];
         published_pair.store(word,std::memory_order_release);watchdog_hw->scratch[3]=word;
         capture_ready=true;
     }
     if(ShowPanel())panel_shown=true; // unchanged settled panel is never refreshed
+}
+bool CapturedPreSetupInto(RecoveryPreSetupDiagnostics::Snapshot &out){
+    if(!published_pair.load(std::memory_order_acquire)){out={};return false;}
+    out=captured_pre_setup;return true;
 }
 bool CapturedSetupInto(RecoverySetupIrqDiagnostics::Snapshot &out){
     if(!published_pair.load(std::memory_order_acquire)){out={};return false;}
@@ -168,6 +179,7 @@ bool CapturedTaskInto(RecoveryTaskDiagnostics::Snapshot &out){
     out=captured_task;return true;
 }
 uint32_t Dashboard(){return dashboard.load(std::memory_order_acquire);}
+uint32_t PreSetupCaptureAgeUs(){return pre_setup_capture_age_us.load();}
 uint32_t CaptureActiveAgeUs(){return capture_active_age_us.load();}
 uint32_t CaptureElapsedUs(){return capture_elapsed_us.load();}
 
