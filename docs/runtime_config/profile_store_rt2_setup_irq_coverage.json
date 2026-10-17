@@ -1,0 +1,107 @@
+{
+  "schema": "glyph_rt2_setup_irq_coverage_v1",
+  "source_base": "3761b702ea09f50b9c98a55bea91caa337a3f62e",
+  "canonical": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "branches": [
+    {
+      "id": "A",
+      "requested_family": "SIE raw indication without sampled INTR",
+      "supported_classification": "SIE_ONLY_SAMPLED",
+      "static_panel": "LF4 RED",
+      "telemetry": "individual seen/tuple words",
+      "residual": "Sequential read skew/missed windows cannot establish stable propagation defect; normal stable model R=S"
+    },
+    {
+      "id": "B",
+      "requested_family": "raw INTR with interrupt enable off",
+      "supported_classification": "SETUP_INTR_ENABLE_OFF_SAMPLED",
+      "static_panel": "LF3 RED unless stronger positive wins",
+      "telemetry": "tuple has Intr and noInte; conditions2",
+      "residual": "Same sequential pass only, not proved continuous historical mask or writer cause"
+    },
+    {
+      "id": "C",
+      "requested_family": "masked INTS and no established dispatcher evidence",
+      "supported_classification": "SETUP_INTS_OBSERVED_DISPATCH_NOT_ESTABLISHED",
+      "static_panel": "LF4 includes T, LF3 gate evidence belowGREEN",
+      "telemetry": "independent_tuples, core0foreground_conditions/gates, setup-positive IRQentries",
+      "residual": "Core1 cannot inspect core0 NVIC/PRIMASK; sampling may miss gates/entry, no claim never delivered"
+    },
+    {
+      "id": "D",
+      "requested_family": "IRQ dispatcher entered around SETUP",
+      "supported_classification": "DCD_DISPATCH_OBSERVED_HANDLER_STATUS_RESIDUAL",
+      "static_panel": "LF3 GREEN/WHITE",
+      "telemetry": "irq_setup_entries/pre/post tuples, entry/returncounts",
+      "residual": "Real static handler own status snapshot remains unobserved; pre/post sampling not its local status"
+    },
+    {
+      "id": "E",
+      "requested_family": "early SETUP branch versus no emission boundary",
+      "supported_classification": "DCD_EARLY_SETUP_BRANCH_RESIDUAL",
+      "static_panel": "LF3 dispatcher evidence plus LF5 OFF",
+      "telemetry": "INTS tuples and external_flags0/strictemit0",
+      "residual": "Inline PID reset/copy and earlierIRQbranches cannot safely interpose withoutvendorchange; neverclaimbranchenteredfrompre-read"
+    },
+    {
+      "id": "F",
+      "requested_family": "DCD external SETUP emitted or observer attribution gap",
+      "supported_classification": "DCD_EXTERNAL_SETUP_BOUNDARY_OBSERVED",
+      "static_panel": "LF5 ORANGE orlater",
+      "telemetry": "external_flags enter1/return2/unexpected4; strictemit, hook, accept/drop, taskconsume/control",
+      "residual": "Enteredonly mayblockbeforequeue; returnedwithoutoldhook isolatesattributiongap. Unexpectedcontextflags idempotent notpacketcounts"
+    },
+    {
+      "id": "G",
+      "requested_family": "host packet versus PHY/controller, or sample coherence limit",
+      "supported_classification": "HOST_PHY_SETUP_RESIDUAL",
+      "static_panel": "Any exhausted raw-only boundary, particularly LF4 RED",
+      "telemetry": "Official stablemodel+writer audit+physical positive samples",
+      "residual": "External USB analyzer/authoritativehosttrace required ifno new safe discriminator; builtinmacOSlogs notpacketproof"
+    }
+  ],
+  "register_model": {
+    "SIE_SETUP_REC": "W1C sourcebit17",
+    "INTR_SETUP_REQ": "RO sourcebit16derivedfromSETUP_REC",
+    "INTE_SETUP_REQ": "RWenablebit16",
+    "INTF_SETUP_REQ": "RWforcebit16",
+    "INTS_SETUP_REQ": "ROmasked/forcedbit16",
+    "normal_stable_model_inference": "R=S, M=(R&E)|F; notgatelevel/crossdomaincoherencyguarantee",
+    "synthetic_inconsistent_states": "Sampler robustness only; not hardwarefaithful stable states"
+  },
+  "safe_boundaries": [
+    "core1 non-destructive five-register sequential sampling",
+    "core0 foreground SETUP-positive gate samples",
+    "sole registered DCD slot forwarding trampoline, pre/post reads",
+    "external dcd_event_handler port0SETUP entry/return independent ofoldhookfilter viaidempotentflags",
+    "existing hook/queue acceptance/task/control/descriptor/address/configuration telemetry"
+  ],
+  "residuals": [
+    "RAW_REGISTER_SAMPLING_RESIDUAL",
+    "CORE0_GATE_SAMPLING_RESIDUAL",
+    "DCD_HANDLER_STATUS_RESIDUAL",
+    "DCD_EARLY_SETUP_BRANCH_RESIDUAL",
+    "QUEUE_LOCK_ENTRY_RESIDUAL",
+    "PANEL_HISTORY_PRIORITY_RESIDUAL",
+    "PANEL_RESET_HISTORY_RESIDUAL",
+    "HOST_PHY_SETUP_RESIDUAL",
+    "OBSERVER_UNAVAILABLE_RESIDUAL",
+    "OBSERVER_TIMING_PERTURBATION_UNQUANTIFIED"
+  ],
+  "timing_model": "T0..T6 pinnedhandler matrix in sourceaudit; acceptedSETUP latch S, derivedINTR/INTS, W1Caliasclear, mask/force, NVIClevelre-pend; packetsduringelectricalSE0notassumedaccepted",
+  "host_packet_trace": "NOT_AUTHORITATIVE",
+  "B2_errata": {
+    "E5": "PHYSICALLY_INAPPLICABLE",
+    "E16": "SOURCE_PATH_MITIGATED configured130MHz/48MHz",
+    "E15": "PRECONDITIONS_NOT_ESTABLISHED; no workaround authorized"
+  },
+  "panel": {
+    "MB1": "DARK; physicallyunreliableforperpixelroles",
+    "LF4": "samecolorpixels2/3; rawSITbitset",
+    "LF3": "samecolorpixels4/5; gate/dispatcherpositiveevidence",
+    "LF5": "samecolorpixels6/7; DCD/queue/downstream",
+    "publication": "one8wordPIOframeafterimmutable>=10scapture; nointernalLEDroles"
+  },
+  "hardware": "NOT_TESTED",
+  "root_cause": "UNPROVEN"
+}

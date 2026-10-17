@@ -13,6 +13,7 @@
 #include "core/config_utils.hpp"
 #include "core/config_usb_default_validation.hpp"
 #include "core/mode_selection.hpp"
+#include "core/ModeSelectionTransaction.hpp"
 #include "core/pinout.hpp"
 
 #include "core/Persistence.hpp"
@@ -47,7 +48,9 @@ size_t initialize_backends(
     }
 
     CommunicationBackendConfig backend_config = CommunicationBackendConfig_init_zero;
-    get_backend_config(backend_config, inputs, config);
+    const bool committed_destination = consume_committed_mode_destination(
+        watchdog_hw->scratch, watchdog_caused_reboot(), config, backend_config);
+    if (!committed_destination) get_backend_config(backend_config, inputs, config);
 
     // The named selector can apply watchdog scratch values to Config.
     if (!is_valid_usb_default_index(config)) {
@@ -58,10 +61,11 @@ size_t initialize_backends(
 
     bool failed_to_detect = false;
     bool has_watchdog_override =
-        watchdog_caused_reboot() && (watchdog_hw->scratch[0] > 0 || watchdog_hw->scratch[1] > 0);
+        committed_destination ||
+        (watchdog_caused_reboot() && (watchdog_hw->scratch[0] > 0 || watchdog_hw->scratch[1] > 0));
 
     /* If no match found for button hold, use console/USB detection to select backend instead. */
-    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED || has_watchdog_override) {
+    if (backend_config.backend_id == COMMS_BACKEND_UNSPECIFIED || (has_watchdog_override && !committed_destination)) {
         /* Must check default USB backend here and initialize it before console detection, so that
          * we can respond correctly to device descriptor requests from host. */
         CommunicationBackendConfig usb_backend_config = CommunicationBackendConfig_init_zero;
@@ -109,8 +113,10 @@ size_t initialize_backends(
         pinout
     );
 
-    //get backend config already happened so we just need to save that value
-    if (has_watchdog_override) {
+    // A checked chord transaction already saved its exact destination. The
+    // one-shot scratch target only defeats held startup backend chords and
+    // console autodetection; it is never an additional Config writer.
+    if (has_watchdog_override && !committed_destination) {
         // Check watchdog SCRATCH0 register for temporarily set backend config index.
         uint8_t temp_backend_index = watchdog_hw->scratch[0];
         uint8_t temp_gamemode_index = watchdog_hw->scratch[1];

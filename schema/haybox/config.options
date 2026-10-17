@@ -78,8 +78,11 @@ GameModeConfig.menu_button_icon max_count: 7
 GameModeConfig.menu_button_icon int_size:IS_8
 GameModeConfig.menu_button_icon fixed_length:true
 GameModeConfig.ultimate_profile_config int_size:IS_8
+GameModeConfig.ultimate_profile_id int_size:IS_32
 Config.default_dashboard_option int_size:IS_8
 Config.ultimate_profiles max_count:2
+Config.ultimate_profile_store_format int_size:IS_8
+Config.ultimate_profile_store_incarnation int_size:IS_32
 UltimateProfile.roles max_count:22
 UltimateProfile.routing_slots max_count:32
 UltimateProfile.table_rules max_count:19
@@ -118,3 +121,25 @@ UltimateProfileDirectionSource long_names:false
 UltimateProfileCoordinateMode long_names:false
 LayoutPlate long_names:false
 DashboardOption long_names:false
+ProfileStoreRequest.request_token int_size:IS_64
+ProfileStoreRequest.expected_store_generation int_size:IS_64
+ProfileStoreRequest.expected_profile_revision int_size:IS_64
+ProfileStoreRequest.name max_length:32
+ProfileStoreRequest.expected_config_generation int_size:IS_64
+ProfileStoreResponse.request_token int_size:IS_64
+ProfileStoreResponse.store_generation int_size:IS_64
+ProfileStoreResponse.profile_revision int_size:IS_64
+ProfileStoreResponse.entries max_count:8
+ProfileStoreResponse.config_generation int_size:IS_64
+ProfileStoreResponse.diagnostic max_length:96
+ProfileStoreEntry.revision int_size:IS_64
+ProfileStoreEntry.name max_length:32
+ProfileStoreOperation long_names:false
+ProfileStoreStatus long_names:false
+
+Config.profile_reference_token int_size:IS_64
+Config.profile_reference_digest max_size:32
+Config.profile_reference_digest fixed_length:true
+Config.ultimate_profile_migration_receipt max_size:32
+Config.ultimate_profile_migration_receipt fixed_length:true
+Config.ultimate_profile_root_format int_size:IS_8

@@ -1,5 +1,41 @@
 # Active Agent Queue
 
+## Current owner-directed ProfileStore production reconciliation — 2026-10-18
+
+Direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e` closes manual RT2 investigation as
+**DEFERRED BY OWNER**, never PASS. `UNDERLYING_RT2_USB_CAUSE = UNRESOLVED`.
+`GLYPH_MK6_ROM_BOOTSEL_RECOVERY_PHYSICALLY_VERIFIED` records the owner's recessed
+BOOTSEL/RPI-RP2 observation; a verified destructive factory artifact remains a
+separate nonexecuting follow-up. Ordinary UF2 does not establish filesystem erasure.
+See [closure](../runtime_config/profile_store_rt2_deferred_closure.md),
+[B1–B10](../runtime_config/profile_store_production_reconciliation_blockers.md),
+and [factory follow-up](../runtime_config/profile_store_factory_recovery_followup.md).
+
+This bounded pass reconstructs production on `codex/profile-store-production-reconciliation`
+directly from canonical `6b73a7c507f35c111745c6bdd341618b490cbdcd`, retaining semantically
+audited general hardening and USB fixes, excluding RT2 experiments and active
+acceptance-only hooks. Exact candidate/tests/build/resource/review results are bound
+by its final handoff; no inherited exact-artifact hardware PASS. Chapter NOT DONE.
+B7A automatic/normal recovery safety remains required; B7B manual RT2 is deferred.
+No controller action or canonical merge is authorized during this reconciliation.
+
+The next bounded production task, after source gates pass, is exact clean-candidate
+normal Configurator/persistence/affected-transport hardware acceptance, with preserved
+useful authority; any remaining concrete source defect takes priority as a bounded
+implementation issue. Supervisor routes that ordinary review/candidate/hardware/integration
+flow; no bespoke RT2 continuation. Reopen RT2 only by explicit owner direction or a
+genuinely new modality such as an external USB analyzer. Mere another software
+workaround is not a reopening condition. `FACTORY_RECOVERY_ARTIFACT_REQUIRED` does
+not authorize implementation and is a separate safety deliverable before public
+shipping, not a default blocker on ordinary implementation resume.
+
+Historical portfolio queue JSON, completed orders and earlier evidence below remain
+unchanged. They do not override this newer named direct owner scope or authorize
+reopening RT2. No new ordinary READY order, automatic schedule or old campaign
+resume is invented by this status overlay. Canonical integration remains separately
+authorized after review and required hardware acceptance.
+
+
 ## Current C024 completion
 
 GP-CONFIG-024 is DONE after exact source integration I `5c5ba4e166c9b67654c0d1b9baa2b0c35677f3d4` and a separate strict completion publication. The accepted candidate is F `8ab1173b0690f5ed3e994f95af797c9e9a265525`, direct child of B `b404453ef22cc994eec54338b8a23c3ba61df808`, tree `15ed2d35d561d6b1709499fe42083ca4d789e920`; the accepted catalog row binds review R `36f91089ab60fb68248a2819aee5dd5082fd922c` and source-free HEP evidence E `25f39876c21fa429a47c93dc446205c37d72b8d3`. Its preserved tested UF2 is SHA-256 `95de108f23b0d7219caa38a1f85c4dec1691f087061b29787d07b83dab0ba0e6` (803840 bytes), with no rebuild or device action after that exact artifact was accepted.

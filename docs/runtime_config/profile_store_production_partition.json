@@ -1,0 +1,3551 @@
+{
+  "authority": "Owner109 successor e1c7 production reconciliation; readonly independent semantic source audit",
+  "created_utc": "2026-10-17T22:50:37.304433+00:00",
+  "base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "tip": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+  "production_source_reference": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+  "base_decision": "New canonicalparent branch; selective source reconstruction from4ee with explicitly retired acceptancecontrols/manualRT2. Nevermerge/cherrypick RT2descendant.",
+  "file_partition": [
+    {
+      "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain coordinated streams, packet timeout/sync and read-only recovery/reference flags; retire trace helpers and RX diagnostic members.",
+      "tip_sha256": "80043c0248a30575d7c983647bfbb4099ad9ca8bccfcaf9273e7c73d6106e397"
+    },
+    {
+      "path": "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain outer mutex, nonblocking FIFO access, TX task/flush service,64-byte RX cache and task servicing. CountersRxConsumed/RxFetched/RxTaskPasses are acceptance observation only and may be compileexcluded with removed RXtelemetry.",
+      "tip_sha256": "dfaa8cbd5b1f656cb05642ae88f54d45f55cbaa863315b65a708e0f182459070"
+    },
+    {
+      "path": "HAL/pico/include/core/CheckedStorageFile.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c"
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "b2ffb00a4ae6a05d047c0c8d53bf1a481fa8d68fbaa991630a18e56c7843f553"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain functional profile protocol/admission/reconciliation, normal recovery refusals, coordinated transport, bounded packet lifecycle; remove trace emission/RX telemetry/fault scopes/arm operation and all recovery observer population. Reject nonzero fault controls and retire PULSE acceptance operation.",
+      "tip_sha256": "a35797de46b06133276ea8108349be9789760ca9c15cce5a7a053d474be17a00"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0"
+    },
+    {
+      "path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain same-mount checked operation/handle lifecycle and actual failures. Retire read-observer callbacks. FaultHook state/before-after injection should compile only under explicit host-test or acceptance flag absent production; real operation/error/uncertain handling retained.",
+      "tip_sha256": "1863da8a8892bc3089f006cbdd6bda492488536e90845bb783f058f184c2a51a"
+    },
+    {
+      "path": "HAL/pico/src/core/ColdRecoveryBoot.cpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "b3d98ebd587ad2fdf6ec607fa21b99e981312b610c6239b410122da2730e6e2b"
+    },
+    {
+      "path": "HAL/pico/src/core/ColdRecoveryUsbInit.c",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "6828e93cf336c37f0833cb47c525dd2d5161ea684220729fb6c9bfe2e3fa30a3"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "94b442b830f4a7a44c6bb0b56d50d3898d472b7ef94357b0a261f1c9e71871d0"
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStore.cpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain complete storage/format/identity/receipt/reconciliation/capacity/migration/health implementation from4ee; remove ProfileStoreReadTrace include/marks/failure predicates only; keep real CRC/extent/semantic checkedread failures.",
+      "tip_sha256": "300d568a145baab2203a01906114244f6eed87443fa6241d6e14ad57e21b3c09"
+    },
+    {
+      "path": "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "26940ad789b7a4c876c5fed66e2a13e89487017370542e119f4a093cc5dce631"
+    },
+    {
+      "path": "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "ce981958ab1e835278a7bff88c0c5822cbc2e0e235ccb24ca11ff818a2291e4c"
+    },
+    {
+      "path": "HAL/pico/src/core/ResourceDiagnostics.cpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Acceptance-only injection/trace/resource observation; retain for isolated host/hardware acceptance, exclude ordinary production behavior.",
+      "tip_sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da"
+    },
+    {
+      "path": "builder_scripts/rt2_cold_recovery.py",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "6a23efb518ae6e83a8b7a3936e3cccd7c518cf070e02a1e601304cd4b0c6d359"
+    },
+    {
+      "path": "builder_scripts/rt2_dcd_observer.py",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "38de75c0db20c71105a5cf72fe7ffccd89b89177d76c7613df0506c28c37d0fb"
+    },
+    {
+      "path": "builder_scripts/rt2_private_dcd.py",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "5271c1bb5926b33ad5e04cc472a2293152644bc4a45f3b3845ee9e4001eab806"
+    },
+    {
+      "path": "builder_scripts/rt2_recovery_reinit.py",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "aff908837d4fb895815929d23b1cf555c241e285aaab812564ee4be56a624fec"
+    },
+    {
+      "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "aaa1859f1964bcf99145fc6a0210f835c7f9f05ab64705f6700f40be618f682d"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain4ee automatic recovery initialization/read-only route and everyordinary setup/migration/reboot-bound selection behavior; delete manualrt2&&!mb1 earlyblock. Remove resourceobservercalls. All subsequent RT2phase/LED/panel/USBwarm/cold hooksC.",
+      "tip_sha256": "a4bbb29140c7afbdd7962acdffa221b4aba7b72532fc58ba1c9c68d6291823b1"
+    },
+    {
+      "path": "config/glyph/env.ini",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Productionglyph_mk6 extendsglyph_base withoutstrict/resource/cold flags, _sbrkwrap or RT2extra scripts. Original framework/DCD untouched. Independent map linkerflag acceptable review-onlybuild support.",
+      "tip_sha256": "c461e1ec9abcac1ff73b9561afd1f7859f7633bb822b373528a36b5c44fdc233"
+    },
+    {
+      "path": "docs/AGENT_CONTEXT.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "66e28782d8b84139a2b4ea1503e686dc51bf0aacd866676e3a0917d5d1f4800b"
+    },
+    {
+      "path": "docs/CURRENT_STATE.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "97c0a5c720eb240398b636442d2b19b29b241dc68f9f8596f60c7c58791d0dcb"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b0a131130670eb5b50c89ce1e3f9ed0494ad8b0d76bd199d69a8df3982ee9b6c"
+    },
+    {
+      "path": "docs/project/MULTI_PROFILE_PERSISTENT_ULTIMATE_PROFILE_STORE_CHAPTER.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c53fd20c97338d71e26bc425ea8281b9d64ee802d27b3a82ec66b76201770204"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/profile_store_rt2_e5_host_regression.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3f0f6d51e6602e535ce92b8d1c91995a2629ed1e599a116820ffdfc40f7d1f0a"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/profile_store_rt2_e5_source_audit.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a24ebb36a9cf68bcbc5ac7f807d650417ce830e8d842b5f8552a5e30a9cca388"
+    },
+    {
+      "path": "docs/runtime_config/fixtures/profile_store_rt2_task_host_regression.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c4ec23efc7e0bc8fa23ab04c8f2dadbaf69e522a62d13b8e8fb2e8fbbcdf2385"
+    },
+    {
+      "path": "docs/runtime_config/multi_profile_persistent_ultimate_profile_store_design.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "57edb2ca729dfb1e53a47dd19e7907a3c6464f218c43bd0f94ef41f60ae4fd42"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_checked_storage_source_proof.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4f002d8226f83f2cf015e9baf7a71405fce15ff393a776b8c3f129beecc3a9ad"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_create_flash_analysis.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ff5dbddf9107c773b81c9e7f2179b2afac6b752dfba29e49c984d25b292220d9"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_create_path_diagnosis.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "15872beb880351bf975d160a89f4605e371fc9824afb9fb8f17f70daf1dfabd2"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_fault_liveness_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "97cd30278d4637e8145df5e18a9f99f6bea3d2c22d02604471a3996bf7950876"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_hardware_acceptance_receipt.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "49a98e2b7bbc8233cef8e251d9f33708f8dfcffbdef8bed7bddb2b5a6b518c30"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f3b6b373b9eb6260043b9f245f41679b9f9691dd790cc8a6ac42ec9ad7fe83aa"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "763e080ba76293aa794d388001036bbf31b67914b48c8491390821a0a3cdd600"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e6a6f025370f26571b4f746d951a1a6767a0206b212a1480ea61aa0a8fdf8c96"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4071425b28f52b87e8efd5bf082a19439621ca7102a5111d164db504d69c8886"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_resource_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b3525175a21eebf2c691b471ad2b6c660404e13bffdae5bdfa97f2e73adebaef"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_resource_samples.csv",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b5ffedd67ef63e23e68c05de1a281b9f9a4087e36cdcda869c3440fb56fc235e"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_liveness_storage_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8206ff82912b4dc26f5c1d601d3540b9a3b71888ead1d085aa85cb5f9fae8650"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_production_finalization.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "95376e9d4627523d5fa91a015e6350d8754e890d0123b7c5a7c9b37771fd1864"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_protocol_hardening.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ec19109d25970c38cd6f71d1b5a6a1c41ae6f4c9cbc20653eba62f10db6a2186"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c944aaf071958c27d10d76264543838e4d813a3da5554e30b8dadf2eaa73dc79"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8dedcad728f6f6252b7cb6451057b18594f1ed7306ca2a0567988cd98866fa2c"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_liveness_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0f62ce0ffbbedc5e190db221c0a087b032ada6aa066b2edf5d29bec82a069c8b"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_liveness_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8203b5752bcaa86224325fdc70a6764b045eec53851852a738f025e20a270b99"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e04d89b342e91bf3a6f8756c0ca3637a7cfd6b785a2129b380f4e6e54e1f4af9"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_storage_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "50b272df595025ced99c17021ab8a1a4e7c41a402bb1277428272e3ea18742f6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_read_usb_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "848c0199f79ad5b2a78af0cdb884a5ffae37dc6b146bb65f6bced656cda339be"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_root_reconcile_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "23df98a42ecefc52aa34bc692de157d83721a77bd5b9a9c6b7b4311bb424f009"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_root_reconcile_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "45833413580a169f2a202ddec0f72fdcbe9045355e6555a9348204e295102757"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_root_reconcile_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c3d33a11258065a8954e985484f2f3b65be231e64257c46cd91f5a996f29f6d5"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_root_reconcile_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3c42881d951359f54cb8a283ccf3da609d6a0ca5fe7d8df59cf537b38251dedd"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_architecture_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "93141e8cea49d67ddce7c84351fd405ff2272c1ee94cf649591eb02d9ca64424"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a254f80bd730988adb03266e913e38d704d0625317a076a6c07483d7aab697fd"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b548509ba2c67c28e87f81d9514606c1e0b410a6a15190c9446a8c78cc52814b"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4f9f558379b799ee4083eb6b09fa83bb784d1135e2a4c700eb26e82c2db3c2b8"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "83c1e511248e217757ed546185f6ec63039c6bc5d6e7d100ee84d44c797ffc34"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_source_pins.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "49e8e099f01cd8f90a32e82d6d096c84aed0b309f3cc7e4556aec4f31e6d5d21"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_cold_source_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b6bf51ff045df5cd314978bd741ddaaff1450ecca5139da68181b42d63642b8e"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_comprehensive_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ae50c09fe69d40a8f535469f8c1fa2ef1351e0145f3efba536cf2486271b09e6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_comprehensive_coverage.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "09ba354ccf70c4a7ac36d963e33084830c1b104231f312b33a4a270c1e28042e"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_comprehensive_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "76c329f2def4bd4f1ac96d90ce0b84145d1576dcadc4aa026710da9f2ec5428c"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_comprehensive_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "575814a009df1af84890e11cd9170de21c779baeff64a72b297a477409960a74"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_comprehensive_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f425482d0ad6cad94c7efa4fd66e0ab9800d85af0f4177c44f9ea9089fdfc8ca"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_comprehensive_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "28b598479c09ddc3e1d397e8cf4615a4642f53cc496557d724af6a24e18f7622"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_dcd_diagnosis.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "292bf9156dff68552763a8e32aa12cc852f3c896c5d67effb9c3e2e62c8c4739"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_dcd_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "56e65706ba7fab0aff88ce9554a88cdc95993f71843470b19daf0176439d1fe2"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_dcd_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4155a91746dcee55124305481c874df87fe5246dfa6fc05d953a3b869a3e2cb9"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3b0f23feebd00c2f26fc5b462fdc8d1fbcf89d6ceb3163eb320f0965d8bc02f3"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_diagnostic_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e1ade117f7626c5fc64ff8e0af3b30390cfcbd940d326454bfdbc054f2a3151e"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "37eda3abeb8dd16fc207d17c45c48105248b2f23fdef9b4f59a3452cbfbcdc30"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3c2297e203e143163dd5acf051e88890be4de2262fc0b3d6b39b19747df01fb9"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "5a7ca33181a6b04453a436dfd1f9d8333664ba1ebcc75b3e3791e09af20faa8d"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "00191f1b4d7ab36651579babd5e4ce3386a18b11544ad600fa251fcd5db4fc33"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_e5_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "947ff4683a458f8769b2d8a8d2ee330325ee6150a0c7b089ea70c182ac893d29"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_late_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "804f2fb4fd1bb28c9b9eff08ec209b966fa0fe1baa8ed0d4e9bccc73c78fc73a"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_late_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b5680e5ee36402b6e23a9d47f34d5f19aad05b10271b16304691d30460992144"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_late_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4d543458524ea354e85857d1a0d8d317fc965151e7c53cb24a19c344aa50eee6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_late_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d7ec4054a4ff068e85eb0ca4daa96f16fdbc120b83191e4fe01742bfb5293329"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_late_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3eb8c88fa2d9cd8d7c3c1e6b2880c7b751e0192956a9b9476f95a591a60c1e26"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_late_source_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f5ba2f81d73631112eae69bfe7d98b79326b9043f4e4142c3af87bfdccbf8b39"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "34c7e28533db1f4b5564863b25e6e6c220b207b0299f8deb09525560aa5d24d8"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_coverage.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "1a069e13988bdf28d3c0cc6d4e34387b2b937d99a8f5624e7e94c37ccf4ec69c"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "7ea9b557aff536c0c45b78137f0c423d9fc7e9ba857ad02a37630cbc4883f837"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "133b2e4addaf503aaccbeda51d5d5e187f3a7b6729f95b0cc37f9fa63b62b96a"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "6036fce52f3f5777850016556240d31b23b5956fdf1422aa7e3a85785c806986"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_reset_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "723c39269000ac6d6a3114dbdc3d9a753e8c10fe9e09511dd3c23c3a418814f9"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4983228ac07864fe894a37befd32503e39b1bdc4f4adec2e16945286ee5a3f1d"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_pre_setup_source_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "bdc9edbf1092de3bb9565442eea2c616ddefa6438b66b1d68626c994b4326231"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "206c8465de48210adef47d0495fbea927643ec8c814ee2caf4c7bed9d1dac865"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_coverage.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0c1fa8ff0a2c482aacd29ee43cbae0b04c95dfd4265b7f27442c4536f01a1136"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "29b5e04755421d94c1a2275ea0d5b498199a082fa380f23c8df427ff039461ec"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "22fff8c039bb8cdcba37be4729036fe2fc449902274c6b39a2ca3a46f55e6e7a"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0ea382a149b7dbb22adb5385c968b370323eaf5bf5351d36ac72abcea9c6d081"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "7fa51bed6da342b46cb660204774dfeb0e5b51cc82397310a2c8184826d32b60"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_source_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "5b638fe045ea6d68219d37e54735c0c106585bb6eeaab8ffbae5f4669cc24cb6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_timing_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ce0d46895a619ff60f01bc369d45b3ffdb838ad2412d2aea03df77797efa4ce7"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_private_timing_source_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ca5f07582fac327666a38b8e1ca1c458d8fe8cae94a71653634608596eb3aa59"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_architecture_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b874a27e5bfb97f45a9a4c9aac0be21dc96ebb84701b5a6dfb69036e9571e710"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d65a6d5e5943deb84e421b74a452c65fe01dcebf0e4eced6fe825de6e943ae65"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "eb300d3a8bf6b702f1c3ed4cb6ea9f7b3574b7e54ec3da95948c6eb7b9b56c75"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "915cb36a53af2f6ba6e0f5a69726f5d71042834b62833390ed8f0f9935791cac"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_route-audit-inputs.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e2e11b38ea9a9578a9829bafabd28496725e2d1cbeb517fe2c4ed09e811b6c39"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_route-audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "81b650f82c8793e42cd74b6d69f43cc9fd9ec0ea6bb1b65880bac6a7a37bf365"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_source_review.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "41abb0028c4bc8d6b7350de2a79a98c831948f0e7b1621e2154c8aa997edd510"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_stack-lifecycle-audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "07369d8a2f89ebc2ba1b70be9fcaa7005b4000dee59ca6f9c96652ab87f4c6bc"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_reinit_stack-source-index.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3ff858628102bba280ae645c3b1b8b6ac03b10868a084db46d7418d64018bfb7"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_authority_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "7fe5d1913d5ca71dd907f8f6bcfb0cc5534d387ac518b8924dfc455cab06ae3c"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4ae50dce6124941ce8d2852623465eeecb77b11490cf41931c63c1753be251e6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_coverage.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0b602cd009a60516b3b010ce4f46f4917ddcaed1dd396398365db19f348211d6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "6222ad65edbc7dad27f3358974f0873967a384963ebecb6e12b797a5f65fb9f4"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "36d86ead75f4b6109a02d65956bb2fd4fd51f3c1b9056eefc3879c755c1bf6e0"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "67dfacc6f69085d061c8b45ae9adb240563d6f262c42957019ee884a101dd08b"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "341dba60df226d888e712807f2d9ceb80e894851a27ac2002fdeb7e62fae20b6"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_setup_irq_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a15459fd3606525f67aa132133b63b70a727d7d634d61921152eaa39c9377745"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8f809acc66a67418a604d8137dfb87a06cd05f896f291f17b724d49e51db64dd"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_diagnostic_contract.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "6eb9d6833726c79887aff0e25d2e269c822b9e1f75b2cd187759ab4eb8fa3564"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "cce32e3f9993f68626bd19f8b730607e51b554052df1b376a458200c4c7d9fec"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "68b381e5fb63915a61e60d6b79109a48d492908e642d0b97e9286b958ee4a313"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "2e52296fb966734138f39261ff80265874c281502a708a71ffe922273e134671"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "25b1cb439a8b5cda024acbc00f6ea5d46f66202ccf614502264f75b23cec3342"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_task_source_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "388c727e536ce552a080396a8666d0751c20e35ca34d4b30db5b9b53c3e9cebc"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_usb_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d55a8fa48d2fea06eda87a2e4fea89d13f458427d47e34388ce1f9bbc0a11652"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_usb_diagnosis.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b1755339b21568a8c6723e49787cff0693a3785f35c70fde57be3391b071f9e1"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_usb_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8a3039446660d8e7dbeff41a133c8740e42655643e5aef01c4923072bb63ab62"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rt2_usb_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8a84f6e5e1b16d0ceac0bc331eff7aebc1f986f24c055ad50e4fe222bcd4cf6e"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_device_adjudication.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0f0835384af8fae31be0c8addeca25412605d40aa48d53ddbd0f9bee9079c796"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "272a1a78b77e4f68ba08b03ff7a37df8d3fc3f8624909707fd32b62bddb809ba"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_host_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "79dee809fe91527761f851bb57f48a0009e1a53f3b8965223b3d859df1512d1f"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "5b89f278e7acf047872a6b23c31dbe8df86950d0cd6ba60f431969bb98ed7d3b"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_liveness_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "680f47fcf240e55159cb926c7d4cb2a60f3b0320c483a8f4d32fb8aec77498bd"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_physical_adjudication.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "87307788dce95f21d22d8d59b59f950e514b45ca03c28c4b14f31bb4a9aaff03"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_resource_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d16d16ccb23890ef54d0a6af395ba7d270596d62b4fa38bab5f1999968cede2c"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_rx_usb_audit.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "392f0dfc3c8efcd972a89188ac6146fd06f2e11676cf7b5e56a4e4cda2282673"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_strict_done_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3bba93220818cdbe5782a3a5bfe8b9292a6833163c3c0f280804471d0fc24ef8"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_strict_hardening_design.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4a3a49c81bf8e623a119ce992fd9f9f279b463b85b122eccfeb378114b7e6ee5"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_strict_hardening_hardware_packet.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ab6f948a665b7d6300c4fbe0a614d87fca56191a54d25bf6f1379fc80a61a2bb"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_strict_hardening_independent_review.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "18224606314c2a1b8491a6b1c09d4d0fd9f4839aaa2c6bcc0a53d845b20a9b29"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_strict_hardening_result.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "1ff3ea6f8e2347373a28aead77f2365d32f7a6eb6993f77eb23e3b1feaef4600"
+    },
+    {
+      "path": "docs/runtime_config/profile_store_strict_resource_diagnostics.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "2b8ef90876dca3ab9411036ac0c009511d7a7ccd033042f23373124cf7fed46b"
+    },
+    {
+      "path": "include/core/CheckedStorage.hpp",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain checked operation/result/file/geometry API. Fault/Phase/SetFaultHook declarations are test seamB; compileexclude production setter or prove all activation unreachable.",
+      "tip_sha256": "a747f98fc0c072a1a13d259579520c6e4a601fdce98b50dbf987370b8adf915e"
+    },
+    {
+      "path": "include/core/ColdRecoveryBoot.h",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "c63d77039f220c76bf502cbea9e7b8b5e9dfc68fc1499e0aeee1a307e566de78"
+    },
+    {
+      "path": "include/core/ColdRecoveryIntent.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "13d81ddaf61d950a821c079d6660e27b34e4f1639fb654ba116c372528078eb7"
+    },
+    {
+      "path": "include/core/CompactConfigRecovery.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "d8ff4e60420c5964c5d6ab863a4e28cc737a4fc7491eaf26043007846ce3dfc4"
+    },
+    {
+      "path": "include/core/ConfigWriteCandidate.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "7f45aa7acbb8e3985a91af4bde26f4bd5aefcfb59154f7cc740775f93c56c24b"
+    },
+    {
+      "path": "include/core/ModeSelectionTransaction.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "5ee7a5f854743127bb0344fefea938f477156405adae71abcce0c11aaf128ca1"
+    },
+    {
+      "path": "include/core/ProfileStore.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "2fc0638819d5f3ae07b9c0e87ab1e2215479622058576c86f8b5afebbbda93d4"
+    },
+    {
+      "path": "include/core/ProfileStoreAtomicCommit.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Legacy testable/helper surface no current production invocation; preserve fixtures/history, do not mistake static test capacity for actual mountedFS guarantee.",
+      "tip_sha256": "2ff1ed344b3f79ea7798ca68665b90ba5d684de8fb818898441b441bf9f14cf9"
+    },
+    {
+      "path": "include/core/ProfileStoreCapacity.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Legacy testable/helper surface no current production invocation; preserve fixtures/history, do not mistake static test capacity for actual mountedFS guarantee.",
+      "tip_sha256": "7c63893a21efd5cf75926c83e107d4e3e36b456ffc6353e0cbe93f15879dcc9b"
+    },
+    {
+      "path": "include/core/ProfileStoreFaultControls.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Acceptance-only injection/trace/resource observation; retain for isolated host/hardware acceptance, exclude ordinary production behavior.",
+      "tip_sha256": "eacea9d84ccfc2ed9b0cf3b1b59f8e2f97aeb8ddc32ebda987b972fd71ce2161"
+    },
+    {
+      "path": "include/core/ProfileStoreName.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "3d1b30552c2e4eff0f515714d3b70cb346a5eefcd6fb67205e824c8d3775aeef"
+    },
+    {
+      "path": "include/core/ProfileStorePaths.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "e2919e14fd17f820eb604a20117dc0fd33ee104aa53960607dd5f8eeb6c412e0"
+    },
+    {
+      "path": "include/core/ProfileStoreReadTrace.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Acceptance-only injection/trace/resource observation; retain for isolated host/hardware acceptance, exclude ordinary production behavior.",
+      "tip_sha256": "967d1bdbbaf3cc130835a5adae118fc5cd6da2b08a2279fce1f4bf07b6307084"
+    },
+    {
+      "path": "include/core/ProfileStoreRequestIdentity.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "a0ee0e8d0d6d2c9f40404af3643a671ed405fd640a00b681b0664f8f663c3bd9"
+    },
+    {
+      "path": "include/core/ProfileStoreRxDiagnostics.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Acceptance-only injection/trace/resource observation; retain for isolated host/hardware acceptance, exclude ordinary production behavior.",
+      "tip_sha256": "123f0e55754d8ad9b3e91b8f0f29f8e4360f428765af88e545d74d3afde26624"
+    },
+    {
+      "path": "include/core/ProfileStoreStorage.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc"
+    },
+    {
+      "path": "include/core/ProfileStoreTransaction.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "af647f116534fac3f10c473d11c8c93347d25b541efa8924c13454e34686f5ab"
+    },
+    {
+      "path": "include/core/RecoveryInitialization.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a"
+    },
+    {
+      "path": "include/core/RecoveryPreSetupDiagnostics.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "371d75668d63b427e229f2f9f0fbbfc09958e4b34daec74487e80be8d3ab80e2"
+    },
+    {
+      "path": "include/core/RecoveryPrivateDcdDiagnostics.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "437daf359e7dfdad6bf9249610ca379a86046b6ced58d2806cce45234d462888"
+    },
+    {
+      "path": "include/core/RecoveryPrivateDcdMarkers.h",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "47a9433806d41c4ba59b8415ae0b47e9dd36b3e223c63ea2b319ed89b148394a"
+    },
+    {
+      "path": "include/core/RecoverySetupIrqDiagnostics.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "440ca8654eaf8a8995b24bba449c0ccbd19edf637c599ff06085b5b7a6cd3961"
+    },
+    {
+      "path": "include/core/RecoveryStartupDiagnostics.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "e20773fcb89f7968a6ada132f123c4b7da67ae5e660ca470572b65987d2fd850"
+    },
+    {
+      "path": "include/core/RecoveryTaskDiagnostics.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "f3aca462dd1f10fde411d74d86c9b7f787f2b8ee00a0bdc24afa27f3ab6795b0"
+    },
+    {
+      "path": "include/core/RecoveryUsbDiagnostics.hpp",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "a4c0f8703179cd779def80668baac6fbd32cb2b85184507b8893dfbf9fc303ee"
+    },
+    {
+      "path": "include/core/RecoveryUsbReinitialization.h",
+      "partition": "C",
+      "recommended_source": null,
+      "reason": "RT2-only observer/privateDCD/warm/cold experiment or build source replacement; exclude active production path; history remains in Git/docs/test fixtures.",
+      "tip_sha256": "c8ca7c4de4fbbe836f9f2bf359af52bb2478710b17ff9bfcebb7d2af76d32d60"
+    },
+    {
+      "path": "include/core/ResourceDiagnostics.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Acceptance-only injection/trace/resource observation; retain for isolated host/hardware acceptance, exclude ordinary production behavior.",
+      "tip_sha256": "00cddf0ce9bd9a34c0f3daa54fd3f909946ce9c17f0a9ce9dbe3dfa28e8715ad"
+    },
+    {
+      "path": "include/core/Sha256.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "ba6080472c663e99489e378382af6ff3718ef8f737f9e7aaf375b4f187fa9e83"
+    },
+    {
+      "path": "include/core/StackWatermark.hpp",
+      "partition": "B",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Acceptance-only injection/trace/resource observation; retain for isolated host/hardware acceptance, exclude ordinary production behavior.",
+      "tip_sha256": "7b87846fa11a0910ec0c4fc6c5fd5520c78dffd6bce1015c335983ab9845f236"
+    },
+    {
+      "path": "include/core/config_rgb_target_validation.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "f75b4229ec193c172f9bc8b1d38a44a29d34b039763542a9788bda2974c35a0f"
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "1c73c8b2ab2c0ded58f8023e1236cc28af8e3c8d76d946a904708074f9849fc2"
+    },
+    {
+      "path": "include/core/mode_selection.hpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "f3ee863138396ed70d4bf6a194dba0aa9a2a0335ec7373426df990b37cf9c059"
+    },
+    {
+      "path": "schema/haybox/config.options",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Retain profileentry/requestname33-byte allocation, list8entries, diagnosticbound and Configreceiptbytes; if retiringwirefields updateoptions only where applicable; no protocolrenumber.",
+      "tip_sha256": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0"
+    },
+    {
+      "path": "schema/haybox/config.proto",
+      "partition": "A+B+C",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "Production profile/Config/stableID fieldsA. Candidate-only request14-20,22,23; response25-30,33-37,39-217 areB/C (31,32,38A). Preserve wiretags inert/reserved, neverrenumber/reuse. Remove or leave inert candidatefields per compatibility decision, no persistentConfigschema redesign.",
+      "tip_sha256": "8462778e917c3a0896ce8501762ef1b6bc8eb8a8f4ca5a13ce31590505922224"
+    },
+    {
+      "path": "src/core/ProfileStore_stub.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "2c4021af6daf08d2f2dc312aa192e1c88524ac0a9f85fcaff837d78c4b0bea3f"
+    },
+    {
+      "path": "src/core/config_rgb_target_validation.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "655b69596d8d08b627517a80746f376891b47a8a2199c01a919bc0ccf542d6fc"
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "857d2a147ae45908a13cdf7dc7f3892dfdfc9322f23d692156a1508b70bcb872"
+    },
+    {
+      "path": "tools/check_glyph_checked_storage_host.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4f74553cb492761c8ec767a3e5f50fbb3aa9818d4122ec2409ddac9e5bf1d886"
+    },
+    {
+      "path": "tools/check_glyph_configurator_usb_coordination.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b3299f1ceb20dc9be5251dd21d1fb99c5f7bdafa8d6957dec387de2f3bfcd7fa"
+    },
+    {
+      "path": "tools/check_glyph_liveness_resource_safety.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e7992ca70d40884c9a7390f4892f4da0bb1edd885d2f39b9b4054a102941df70"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_atomic_commit.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f97804f0fdb0b095863559ea6e8964e9cbab93cb58a2208d9e371d97f5c0a650"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_candidate_tool.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "efb5d2e693d4b2ed7be36dcc9ce5279163842c77d5be410ca20b5182d792a1db"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_cdc_progress.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8f6fde8a815ec7ca97b501dcca859d0df177cc5409318f7586619820229b2a6e"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_cdc_rx_progress.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "9ec6a98ecc005fe9317827754856fa247541ed9867a746f6c8b0127c5570f700"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_config_persistence.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "11e5789499c4e7d21ab05d8492dab20867d8537bd364c154135321f09503eaf1"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_create_stack.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b8f2a4bcacfe575ae8d5d15c0507a04000973dfe91336c5f865efde49fb70360"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_directory_decoder.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "705a33cb18a616084b756824e561b5118d94f4e9618276b702e1e4518d3dbbf9"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_directory_stack.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "454e908a9ffbcc5ba8a4d61e7d7cfc216689abbc38939b76aa8463649fc5ff24"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_littlefs_host.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_liveness_host.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "60925e819cc53330a6f198888baf6b5387079887ae60d6851d9a70ab3e4c10ec"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_migration_lifecycle.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "2e377fea130c93b080e1d2e31f20ee03a2b470bc9318a9493532420276ffe376"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_read_stack.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8564cb4563321200fe36c3483e825023c1454d1c4a77eccebbc2cd23976d79aa"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_read_storage.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "07f4704a8e09d36edccae204b83135666ed72ccf338fb7d73c64f4b4a477506e"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_reconcile_cli.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0481a0d08b3f0e422cd98b440b8d07cf444ea0064dd32a9218cda78a39b1245f"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_request_identity.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "974d54054677de9170440443c207428074b9e76450d1651596ab30d1d8fd99d9"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_root_reconcile.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "dda2dc7b7a3f0ea755f0883369d21f932bdb1dca589b6ab59cb603f64e04afe3"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_rx_host.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d13b83d91df6e056a664a4e1d6cc3bc5f342ee9b759ba0ca66f586fb373584f4"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_rx_stack.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "958509b360a1e5ab9dd395aacaca409e53c979debda3f69c3964d13dade51d4d"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_selection_recovery.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3e30d7f96674ecc6a93a2dc247475766a402a4c54eec6069d5bd2d6d7597d653"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_strict_host.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3581290cda011c17c79acff0fef50c7f6c02327259047312d124abb2bee5dc77"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_strict_protocol.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "fe385469e02754833765bbe72d5e6cc8119e65da228a9e1804165e6beda58177"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_timeout_resynchronization.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "6168a6c4c6a5cd8cef7414cc95153351247320637c96454dc9ac82586fecea7c"
+    },
+    {
+      "path": "tools/check_glyph_real_predecessor_config.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "17604ad8b3b7e5ed2c88a1d868b6df2b9757058fbd7f955f675fa81641cf3ba7"
+    },
+    {
+      "path": "tools/check_glyph_resource_diagnostics.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3cfd6a8814bf0380d078dee300a86f6a37bc59b7134e58f7179399828f43d7e8"
+    },
+    {
+      "path": "tools/check_glyph_rt2_cold_recovery.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "79808eb154cb0362825292495529588bdbfe4b6b4cbf87e586522aef46c17bbe"
+    },
+    {
+      "path": "tools/check_glyph_rt2_comprehensive.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8b093b4806bda86622dcfca1e22cc1b4c0a4a33a64e10700bb1718206545a0a1"
+    },
+    {
+      "path": "tools/check_glyph_rt2_dcd_observer.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f416b13cdd0bd2a2a6de08a960745bedc255af8f5fa41d9f70c70121dc3bd2c6"
+    },
+    {
+      "path": "tools/check_glyph_rt2_late_setup.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ac760006da81bbff58592c1f92500a517393404a0e29fdc12d2ecb3eea569bfa"
+    },
+    {
+      "path": "tools/check_glyph_rt2_pre_setup.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b5091e1b362994f99daa4a7fbdb9c590a8889c11e800bb6d36f3c08c8d01017b"
+    },
+    {
+      "path": "tools/check_glyph_rt2_private_handler.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a95c12a44385ee371d53b19a7bf854e486c296491091760da4e9ec74fa3dc045"
+    },
+    {
+      "path": "tools/check_glyph_rt2_private_integration.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a14dc27e7f9e3a8daed8db6a4fdadcb8802014dc36ce6541b031343c497fb610"
+    },
+    {
+      "path": "tools/check_glyph_rt2_private_memory_order.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "69a0dbe19e375bbfac9ac47d786c3ff1858b5144659595a995ffcd9046d5578c"
+    },
+    {
+      "path": "tools/check_glyph_rt2_recovery_reinit.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "dba45a30d42f458add557914cbc441924ce43cff999708684c9d9811af2a23e2"
+    },
+    {
+      "path": "tools/check_glyph_rt2_setup_irq.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c652f42a02841ef562090f447bd7135630f27bc867fa24cb4bc2f09b8a374bb0"
+    },
+    {
+      "path": "tools/check_glyph_rt2_task_observer.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "fcbb05eddf0a39c826b97c9cf7c50e07053845a6d288e5cf1e3b872c061b5a13"
+    },
+    {
+      "path": "tools/check_glyph_rt2_usb_startup.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ac11c403c8acd1e2e5b5ea00087fbdc608c7b8ac3a27adb8b716273813acc325"
+    },
+    {
+      "path": "tools/fixtures/checked_storage_host/checked_storage_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "de6b29160694cbd76a4bb9eca55a891353de2ddbe047fae278dd5d4011d8ba3e"
+    },
+    {
+      "path": "tools/fixtures/configurator_setconfig_host/include/host_stubs.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c633c15fe4dfdadd61ad6851d42f73c9dffb36f04e6d36a50c87616bcb5d51b8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_atomic_commit_host.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "58bb6f3974adc3384ffe25a55877047a00e31c70d6d224ec32ec549526d85730"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/.gitattributes",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a93a393ff30e04cb20c2272c1c7f05d79a4cbcf427103266c9ef05eccecb72fc"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/cdc_fixture_tail.c",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ef3e56399d3b5e152ec9ba635f8baeb6e15a4b716073c54bb7141e28283e1938"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "152c1d14f5aa040abfbf2f0379576060c768eb32433860d046cc93d3688d3b98"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Adafruit_TinyUSB_API.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "1430a5d67fcc2b38f8eb3fe0b5d41d9015bdab0636e4a7a9361084d8c6b2e0a8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Arduino.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "488e16577b7fc0b181198649ada279b1eb49a8475c9d91c734ad8bf025200087"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Print.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Stream.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/fixture_tusb_config.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "1453db57ffa3a9a44da6676ad3466a8020a97ab8a25ac3bfebb7dd70f3ab3162"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/critical_section.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0369206df8930370d2d09040c3c1f29346d5dc13d62cfe358dccd7bed5f3948f"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/mutex.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "adbd6a0aec4d58dfb95510852cfa43960c338878af1e899317f235d51984ed65"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/sem.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "709e35879441ec825c49bb620dc1689c065e58261d9f46aa6092a84f115167ef"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/time.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ed400cffdada38dd46c412cd94ae4e871cbd491a6f277dd9a46301cacb709605"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/list.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "657ac6d8c161f256264c66e4149e927e0d418674e8700fa4f4fde0b7eed1b93c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/maximum-stage-c-response.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b638e45cd4b2e0f6b2537db35fe04a559190e266aa63ab7fbd750ec22e6eaf1a"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/payload_manifest.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "9920dd02db6dd5adbc69f3ec78c7d171f1abe8cd5991641c2033443cf8d5e95c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id1-response.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "74ed1ed9728c89bc988f80552326a6ddec1cce51e006e623ff0042a3dfb35342"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id22-response.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "9b40fc1411f7595d6851a2431c3c6df2060e5b772501c14f31b4d6b79a425840"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id3-response.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a9f5e851f9cb6c6ab60f8ab2940d9c590c6e19434319b8a65def690223b24b43"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id4-response.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e051fdb67aa1c0e270add82e11655fb201563ec7ea1caf2662b6e5bdc5792dc6"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/status.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "adafe848ca76e4f3315ac3299f75e10d543fd2073666c9670fcee9832178ab59"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/.gitattributes",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a93a393ff30e04cb20c2272c1c7f05d79a4cbcf427103266c9ef05eccecb72fc"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/cdc_fixture_tail.c",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d8566d80d1d7e8502068ab3e6a8e658eeebf8ef8d9968977c3e756f821c5b5c0"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "60991bfbede26529d784e86fd057a4c744daff6d0ad314abb17734634f74bf05"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Adafruit_TinyUSB_API.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "1430a5d67fcc2b38f8eb3fe0b5d41d9015bdab0636e4a7a9361084d8c6b2e0a8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Arduino.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "488e16577b7fc0b181198649ada279b1eb49a8475c9d91c734ad8bf025200087"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Print.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Stream.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/fixture_tusb_config.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "1453db57ffa3a9a44da6676ad3466a8020a97ab8a25ac3bfebb7dd70f3ab3162"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/critical_section.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0369206df8930370d2d09040c3c1f29346d5dc13d62cfe358dccd7bed5f3948f"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/mutex.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "adbd6a0aec4d58dfb95510852cfa43960c338878af1e899317f235d51984ed65"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/sem.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "709e35879441ec825c49bb620dc1689c065e58261d9f46aa6092a84f115167ef"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/time.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ed400cffdada38dd46c412cd94ae4e871cbd491a6f277dd9a46301cacb709605"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-arm.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "9138979ea738b83236820af535c67131d4806175f9da0914318cc69e11bc4d46"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-request-manifest.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "81a71880ae34e7da326c0fbe591feddb1b5f1387905b4e78fe456ba3e9183c04"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-status.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "5f8123825df0c89a31cc4fab9f06ff999ec9bb1aa360e0a3781e1b8a04ab4e18"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-ticketed-update.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/README.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a59ba14e727740b4518b67dc95412671f9a1171a1b905d5898c5e28ae0d63226"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/checked_storage_double.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "7a6146b2179b07f4a94ba7d5c96fe52834f6220c633c50fae8458b06b4baebf8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/Arduino.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/LittleFS.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "cf0d734e8f51899a178d278ddad5227e0c74dd1071c98935a9301211c026757a"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/Print.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8ba02480d466a2f5e4f9ae04bfe4f923fe685b3c813a9c2b7499128efb657cb0"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/Stream.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/persistence_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f79390708edf20b870bcd4d109d0aa9b6ad6bb448ae203445d4188932f8d7560"
+    },
+    {
+      "path": "tools/fixtures/profile_store_directory_decoder_host.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "2fef26e55415cd644c838eb2ae1f59987c4c281cecf21daea84b245c0a439018"
+    },
+    {
+      "path": "tools/fixtures/profile_store_littlefs_host/littlefs_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "384ad8f82f67bb1e2be35017a44b1a3226b49901e98276b84d2d1177a4912152"
+    },
+    {
+      "path": "tools/fixtures/profile_store_liveness_host/lfs_alloc.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "39f6e1ba919022a795eb0a3556f1fcbebec47ce32aa801f1f9ee435c48f6ef8a"
+    },
+    {
+      "path": "tools/fixtures/profile_store_liveness_host/liveness_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8bcffde2dc4cdf6ed79f142fcc938327d01d0013d57f8bcf290df73311571118"
+    },
+    {
+      "path": "tools/fixtures/profile_store_migration_lifecycle_host/checked_storage_unavailable.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a9fb4b1d005d773a1f62c7087b953d40c0baf7458a93b576afed8a7401f1fe2b"
+    },
+    {
+      "path": "tools/fixtures/profile_store_migration_lifecycle_host/include/LittleFS.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a80ee25105383a3e7e3be850be415f37df7f2daf3c5e4c081b35ce98581cc7d8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_migration_lifecycle_host/migration_lifecycle.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "65e0de36c4eecbb1c5a170559864a6d1cbd5a764dafa59e5428340846c2e1dec"
+    },
+    {
+      "path": "tools/fixtures/profile_store_predecessor_host/replay_validation.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d4bee879745764a5854e32e8d6e5e43590f69ae3e1c3ea8be993bd4ab81414f8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id1_response.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a7db2b980f826845d060041233696d10038f46baf3765b0baf7212a09fe52050"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id22_response.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b30b8275c9fcab96d4177ee96b9626c7fe1759b2a62f798d543c2239cc4b5aed"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id3_response.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "2429b2b10320a3d25655436868f58ecb1793b68b92ab4d045175e53cf63741e0"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id4_response.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e9e37bfff40a5a50239c260a651cc17d453dba78a0f5198914176b6a0f6d52b8"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/read_observer.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "5299fd985c7e968123ac9a1211b732cc10c69f4ccb59ac6dd0b3d4b0841a733f"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/read_tail.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "88ebd46920d11c4b5340e4c1208ecce8f8e2b2e95f016058e15ede1aa246e655"
+    },
+    {
+      "path": "tools/fixtures/profile_store_request_identity_host.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ba84ebfe89c8d56c26880eacaa236635a05dfcec2dd3c9e1e3fdf81c247e359e"
+    },
+    {
+      "path": "tools/fixtures/profile_store_root_reconcile_host/harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b455e16abc0173b8b23aa418b717d6607d989324df3a6b97f6aa137a09fd25d5"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/.gitattributes",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a93a393ff30e04cb20c2272c1c7f05d79a4cbcf427103266c9ef05eccecb72fc"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/895-read-gate-RESULT.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c02445a06af4f95ec89d54f5f63e68e74ea7585900e68763854cacd36420898a"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/arm.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d822b134c0c47fef0ec13331e79c2bb742ac78ad9e43a510bca0c4dce7b8ddbe"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/arm.trace.jsonl",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b4db26d956422ad7658c7bdcd876e24250272233135a5d4788c4ca69f620e65b"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/fault_pending.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c0c2b7ab677027944d2383223a11ede0c8ab5dff4aa558a87bd60cc1fd20f306"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/manifest.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "29a8bc75581b47dc379d69ee0408ecb571336f25452363c86fdc668fdb53edce"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/mutation.trace.jsonl",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c83e9e468ff7e771f58c20dc7d072a45929f1b1e875947edda829d4c55b49757"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/operator.stderr.log",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "fd9b38c231c1b25ccba7948c7f326f6ab934e70d68a288b30d6a952315bcdfe6"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/pending-status.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "2f77d652b2f46d63b384b0a3163026224018b66cd0f26e5d55e0f9d1a983c2ed"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/pending-status.trace.jsonl",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "feec641248a10345a3c861fc7a3f6a5e5d13e526a2d8e01209a7ec2257b89066"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/physical-update.cobs",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "9ac14ee426193d4ba07dac9484165007705f86e48f55d756da28e26fa4c11b20"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/physical-update.pb",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/pre-status.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "aa8426ae78afa8204929a039ab7c07931b3b325ff2c68e4d15d2fc550d4078cf"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/receipt.json",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "fdb1a4d236231444839c3c4d0d7a0b93c2748680ddfb2a21c4be4b10be32fdde"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/write_all_895.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "54445e5d6b44b91a3a21ce986109f2f42998cdd31f878dd941d05941e6cb4bc4"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/README.md",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c0e41e2c21cfda054c94269dd483fcbe7f7d7e76b153e4643b3f94ff64bc77fa"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/include/core/ProfileStore.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "abd6504e9477f6ded3a0e261adec076e4b5965aace6003b9af96526b559c8b1f"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/selection_recovery.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f6868e472997d82b3be85cf2b65ac36368bb8995424da684d68f36ee77065ec7"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/setup_routes.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b07ed97b30c651600a93980cfc233bd7085acac8bec2d77a6ad9dd204ffb51ee"
+    },
+    {
+      "path": "tools/fixtures/profile_store_strict_host/negative_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ab1e5ba3c1c8d6d9e147f46433907dd9357c25613695cf690e3af4b770557497"
+    },
+    {
+      "path": "tools/fixtures/profile_store_strict_host/strict_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f1f4c2698d996578efbb91d78ed8b461dd7b6775e061c71ffff20762f011bced"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/checked_storage_unavailable.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b283926c2b2cae06a4de47c3f431ae23e98d49e8d9860757fb2bad181a6bc9d2"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/Arduino.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/LittleFS.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e2c16945e2885ab45ef6533d83a2ba87d85fef6a926e0b9404ed838242723d4c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/Print.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/Stream.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/arduino/Adafruit_USBD_Device.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/CommunicationBackend.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/InputSource.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/Persistence.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "df832cf624544db67016e621636925c055caee4b3e673d9f700a4a1b8ad3e75f"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/ProfileStore.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "5ec21ff3a31fe9f7713e38fbb1e467e4d8f6c233af319af82cc3daa678dfcc42"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/config_validation.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "951dd4a5d6a65c0e112e0debd0698bcd117939db69560c8711a7d46356cc9be6"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/host_stubs.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "c44d2c03642ceab352dccfc221b44e70fb9a3c4a0ca650c4b0afd943f705ce4c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/reboot.hpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/timeout_harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ed41addcf4a24b9dab9d93beba49c1bf9f73f6a86c19ede57b7288e2f9e020c2"
+    },
+    {
+      "path": "tools/fixtures/rt2_cold_recovery_host/cold_startup.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "626c96213db15b1f384f2b40cae61820e95b10080ab20ea0cf43f48d4889a38d"
+    },
+    {
+      "path": "tools/fixtures/rt2_cold_recovery_host/intent.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "62f5b40fd89c0ead337824d9519b0852ba42bd271c7ca784cb463b2d2590f14d"
+    },
+    {
+      "path": "tools/fixtures/rt2_comprehensive_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "27904533fc3d9ddc7166f9c0b515b5f9555fbf81a96af5fdf838cc18b7cf79f3"
+    },
+    {
+      "path": "tools/fixtures/rt2_comprehensive_host/checks.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0f9189bff347e19358e4ef847e847c8b28755e40977c7409f569586280ede4d7"
+    },
+    {
+      "path": "tools/fixtures/rt2_comprehensive_host/include/hardware/pio.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ac1b69277cbca15c6c66dd393adec2dacf9c32915fa18087eb9b44746937397e"
+    },
+    {
+      "path": "tools/fixtures/rt2_comprehensive_host/include/pico/time.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "71371febaa1a18c6579a50f521129240144d510c73b0821eabf2e0d35463a7da"
+    },
+    {
+      "path": "tools/fixtures/rt2_comprehensive_host/publication.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "6be26c207b49cb3cd1f51c91dbfafae12868890e9682dc873b900a8eacea587a"
+    },
+    {
+      "path": "tools/fixtures/rt2_comprehensive_host/unordered_decoder.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "14c137e6c85be62a233535cc8fda4f2ad2f5e264ce1f308c2d7d392aa57a63ae"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ca5c302d44189e529cc02081bc515ccba36434f95e91435f812a6e6a766bffaf"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/address_mapped.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "af1f38b38af4b82977240b9166fd4bba77d8d69297d5a1cf7c9373deea8ace5d"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/irq.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "3710f9a9f52230fef7b518aa795a91978078dbd959c4dcc34fc76b9ddd71cc17"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/resets.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "114c6aa0b174430e729acc8f2d2b5af40abf01f58e666aa0c55206150aa137b3"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/structs/nvic.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4edb19f1356ec2e54924a4a3419236331156adac1d9ceb09e4e25af51029fdeb"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/structs/resets.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "8bd7ca7c87f0f7917db9618d23f4d5c496d045fcbeb4d8e356224ce48746d0f0"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/sync.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/hardware/timer.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/pico.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "202ab923f0f4c8254d6a09aac0f9306b6c3da5b4c8d0d45ef445200d55cb7d99"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/include/pico/platform.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "844c6db161b4c8bf824e3cf6fb4aab21f742dff35d5846799b7cdf41ebae3dd5"
+    },
+    {
+      "path": "tools/fixtures/rt2_dcd_host/model.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "897fa39dcc77a04e976ae6abf3cb1bdede92f1571df580571abb530cce2857de"
+    },
+    {
+      "path": "tools/fixtures/rt2_late_setup_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "34e833c6c6c3c424369e3045fc6c0e934f9e6ec7da2ad8096b5b0f02368c2097"
+    },
+    {
+      "path": "tools/fixtures/rt2_late_setup_host/focused.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a92325a051842d200766d78f18704175471f7de879f26789bd6b7531a4031840"
+    },
+    {
+      "path": "tools/fixtures/rt2_late_setup_host/late.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "77976449e6513ce9ab01ac98529a2e78bc3b457b620b31964235a42e4047015a"
+    },
+    {
+      "path": "tools/fixtures/rt2_late_setup_host/read_interleaving.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "02b3521d0b4c78c1976c74f7dad1b89f18d29df0935bc2b40151851d75e8703d"
+    },
+    {
+      "path": "tools/fixtures/rt2_late_setup_host/sampler.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "589ce7ccc4cf2a2d264cf6ccc65c7f168d2f10c0e691cea95c5e030b2689f89d"
+    },
+    {
+      "path": "tools/fixtures/rt2_late_setup_host/timing.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4caf618f9cd7aff3c61005544684d8aa0659480d43f85ab98284165ae04c1d35"
+    },
+    {
+      "path": "tools/fixtures/rt2_pre_setup_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ecf57ca3b452cac66f66ae7282fcb2b397c71b18763668f98d879223f6c1c056"
+    },
+    {
+      "path": "tools/fixtures/rt2_pre_setup_host/focused.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "cb2eb655c09a97dcb1706fd066dc52409a434bb6b0cbd4fc1c2382d0caaf843b"
+    },
+    {
+      "path": "tools/fixtures/rt2_pre_setup_host/panic_abi.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "fe47b34896b2048c6cebb36fd2f7a6311aaa96278d6caa1adfe603bbdd4cb717"
+    },
+    {
+      "path": "tools/fixtures/rt2_pre_setup_host/sampler.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "611693863d151736dc03e6e87ec5ad4e8729687747e6147315dc321f252fd5ed"
+    },
+    {
+      "path": "tools/fixtures/rt2_pre_setup_host/timing.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a44835624ad2710412906a6e39244069c8ffa2745ce85d449e1dbd29d27da021"
+    },
+    {
+      "path": "tools/fixtures/rt2_private_dcd_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f20da6059e99a1031c694896d381acc66cada0bdf20e2e28e5a3a63efe286035"
+    },
+    {
+      "path": "tools/fixtures/rt2_private_dcd_host/focused.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "eb2930d2dee000ee9f0fc04ebadbb68da1f92726a5c33e37649afd44219c9fb7"
+    },
+    {
+      "path": "tools/fixtures/rt2_private_dcd_host/private.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "ab36c947573f73b3da8396c6a3ca9ff108560f70e1fae219b831e42093ed4c90"
+    },
+    {
+      "path": "tools/fixtures/rt2_private_dcd_host/sampler.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "aeded0bcf320ff19bb2868debf4befe7b1d17b2acbe16d10d58b3d0f3b7be20f"
+    },
+    {
+      "path": "tools/fixtures/rt2_private_dcd_host/timing.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "a43a6b7d4fd4035addfe1735c4b9eb194ea7fbc23a047c5a773f8a812adaec7b"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/harness.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "df42a136ca8e632f76866de7366960a15308ace1e7cb432c7885ab8a05b1e891"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/include/hardware/sync.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/include/pico/critical_section.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f515a90e0076a5c55e628bb76358543e70d5dec7ad036733f8429b564634795f"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/include/pico/mutex.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "cc5d0659b30b7ef4708b6a8b07f7f0f13c8c7f0d364f95d28be19eece1fce5b3"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/include/pico/platform.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/route.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d96f0caf3cc7ac72ae2ab0e5f884641d4fd142e952a6c70e21027498a3b0c672"
+    },
+    {
+      "path": "tools/fixtures/rt2_recovery_reinit_host/state.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "737746323f990accece6a068304f4fc2c2a69af19bb33f793d80951386a6e391"
+    },
+    {
+      "path": "tools/fixtures/rt2_setup_irq_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f4ee27fe1c7bfd08f76f9dac29cdf4e971291a5341f840ba3777043034a94350"
+    },
+    {
+      "path": "tools/fixtures/rt2_setup_irq_host/sampler.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "aa44c84d2253bab9daef5bf6862d868c548df1d10d1a85a997d54c53271a9b2d"
+    },
+    {
+      "path": "tools/fixtures/rt2_setup_irq_host/timing.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d6c067a33e7b76a0118187b2c54e6c8fa42e00fa7061ea44c9aa895546cd21a8"
+    },
+    {
+      "path": "tools/fixtures/rt2_task_host/cases.inc",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "e149c7612a0378ec959e9d27d8553f46fd616e8a601b85886c6e18230c18dd3c"
+    },
+    {
+      "path": "tools/fixtures/rt2_task_host/publication.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "d8f8e7e4ea8dc992393c4c6cf162327613ab924f46ca886e4eac4f3ecbd772b5"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/Adafruit_TinyUSB.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "95084fe4dbb5cddba3ab96f4be1082b88929052bb42c0777dbe20d401ef2de96"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/fixture_tusb_config.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "87bea64fe8021d6d017bedd182820853e99846c44da7bdcfe7963019826eddbd"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/hardware/clocks.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "46c45ef5122c0112d5215547b52e0990c2308c2f4e3d2f2caf598b2b98d6339f"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/hardware/pio.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "cdb493e26e72657fecb286245bac890bba7ea3d095c576f6b8c850ffdf6ed11a"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/hardware/structs/usb.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "878cd310dc583d6eb221c1249a7f8b64bc19cfcb27d21b802538cfa3920041f3"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/hardware/watchdog.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "9befb66c1584de9ec457d8a18263cc56428e2319c5b67b5f281dece36125730d"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/include/pico/time.h",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "fb1940de2159090f4be674a9139c6459feef1c5b074be5dab1f7d081e5464ff7"
+    },
+    {
+      "path": "tools/fixtures/rt2_usb_startup/startup.cpp",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "4ef1edd7863ea127431b9c8f658dd933e2e35b5a7cdcb7be1fb72a3857be5ba2"
+    },
+    {
+      "path": "tools/glyph_profile_store_candidate_tool.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f3aaf51f6c31050888068fe6bb94beb4cc25d2816c99bc0fa03240ca4d53da2b"
+    },
+    {
+      "path": "tools/measure_glyph_profile_store_resources.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "450a5980d8cf0b91c0771b4cc9dee2209d22e8949f0671cf9c61296ed3920afc"
+    },
+    {
+      "path": "tools/rt2_cold_recovery.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "0808b82125559c124dfc92e93e42bb5432d7b9263f45b0095ae3597abfa68d98"
+    },
+    {
+      "path": "tools/rt2_private_dcd.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "6b8c1be2e0566b78ff9302be37499bcd58f8c84e05ca287ef3db02e2865dfae2"
+    },
+    {
+      "path": "tools/rt2_private_dcd_assembly.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "f18fe5faef9ccbd9c6084071997e65422082d991fef7f2fdd42dc7214808a348"
+    },
+    {
+      "path": "tools/rt2_recovery_reinit.py",
+      "partition": "B",
+      "recommended_source": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "reason": "Historical evidence, host/unit checker, fixture or operator tool; retain outside firmware production path.",
+      "tip_sha256": "429e680dbb250ab53a4f19e4f8c7bf210768286372e3f68e263f758d2fee94b7"
+    },
+    {
+      "path": "vendor/diagnostics/tinyusb-0.16.0/rp2040/.gitattributes",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "5b5d98a8db01a8bf933f9ce8c75e91636398a1a80d8c8bebaff431cf4df3062e"
+    },
+    {
+      "path": "vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+    },
+    {
+      "path": "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    {
+      "path": "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4"
+    },
+    {
+      "path": "vendor/recovery/arduino-pico-3.6.3/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+      "partition": "A",
+      "recommended_source": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "reason": "GeneralProfileStore/persistence/config/selection/validation production implementation; no RT2-specific dependency identified.",
+      "tip_sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+    }
+  ],
+  "ancestry_commits": [
+    {
+      "sha": "fb138480a92eb9489278fa5f5e0e9280a91b35ea",
+      "subject": "docs: freeze multi-profile Ultimate store design",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "c3d453450e147f72816fcd59f6dbfcf7c04377a0",
+      "subject": "docs: record profile store design freeze",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "302fa868c598d92ce7b639f8fd000cd3fd1c876f",
+      "subject": "docs: record profile store implementation dispatch",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "6a592f6fa38582015c683bac61bc6aaaf5a3ea4d",
+      "subject": "docs: record profile store build status",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "6cfd13d14fd9b4fff5017b6bdace3f0f7428ea55",
+      "subject": "docs: record partial profile store status",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "7e4b2db264a3f06e565570f8c43a09f7edc434bd",
+      "subject": "feat: add persistent Ultimate profile store",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "config/glyph/common/src/config.cpp",
+        "include/core/ProfileStore.hpp",
+        "schema/haybox/config.options",
+        "schema/haybox/config.proto",
+        "src/core/ProfileStore_stub.cpp",
+        "src/core/config_validation.cpp",
+        "src/core/mode_selection.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "0da440cd89c79ef7397ea6c24ebf4a22503cabcb",
+      "subject": "docs: record incomplete profile store checkpoint",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "f323bf2fec74ad49b9ea479315ba939ee360163c",
+      "subject": "docs: freeze profile store protocol amendment",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "a31ccb7f18501f99c54994910367dc084700a678",
+      "subject": "merge: apply profile store protocol amendment",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "fa5225cecfa034874b4ba31b9c86fa90eeab579e",
+      "subject": "feat: add profile store protocol v1",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "schema/haybox/config.options",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "51d46a155044fd082ce00aa911b204b71e961fa8",
+      "subject": "feat: add RT2 recovery configurator route",
+      "partition": "A+C",
+      "active_paths": [
+        "config/glyph/common/src/config.cpp"
+      ],
+      "reason": "RecoveryConfigurator helper/automaticservice reusedA; manualRT2entryC deferred. Do not promote wholecommit blindly."
+    },
+    {
+      "sha": "2c742fdc6a66d6a0cb961327da218848d4d21f4e",
+      "subject": "test: add profile store root recovery seam",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp"
+      ],
+      "reason": "Atomic inactive-root publication production mechanismA plus storage-failure harnessB; implementation later superseded by checked Publish in594."
+    },
+    {
+      "sha": "48ed606bed2aa04e18003f498c2fb8efe9c3742c",
+      "subject": "test: cover profile record publication recovery",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreCapacity.hpp"
+      ],
+      "reason": "Immutable record stagedverification/publicationA plus frozen capacity/test helperB; later checked implementation retained semantically."
+    },
+    {
+      "sha": "d496b426c6e6ff4fadd185cbb4c8d12f225761bc",
+      "subject": "feat: complete profile store read and duplicate",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp",
+        "src/core/ProfileStore_stub.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "f78281000c8379a75f23ddbb2b6abbd623c1f290",
+      "subject": "feat: route compact store failures to recovery",
+      "partition": "A",
+      "active_paths": [
+        "config/glyph/common/src/config.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "f7558bb5c64dc7baa11b49f6a4cff5c8044284b0",
+      "subject": "feat: persist compact mode profile references",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "44f8467b5810ce683cda0d04123147506c4967bb",
+      "subject": "fix: recover interrupted compact config rotation",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "include/core/CompactConfigRecovery.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "0f23be0139a6f9d572e03a20b83e59654bbfdfbc",
+      "subject": "refactor: introduce profile store storage adapter",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreStorage.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "85d5d3f6fc530ecb00fea43c5dc240c6492e0162",
+      "subject": "refactor: route profile record reads through storage",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreStorage.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "2fe6631e08e000adb9a2a09ff45bd0a805e535d7",
+      "subject": "refactor: inject profile store storage",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp",
+        "src/core/ProfileStore_stub.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "e4ab9bf3dae99a6734362ce91f63abf39f7b478a",
+      "subject": "test: expose legacy migration profile validation blocker",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "b9937c6f526675b77a8aae2a865971556d3e4bf4",
+      "subject": "fix: validate persistent profiles without config envelope",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/config_validation.hpp",
+        "src/core/config_validation.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "95ddd51537d284094ddf4efdb86e0729654757d9",
+      "subject": "refactor: share ultimate profile semantic validation",
+      "partition": "A",
+      "active_paths": [
+        "src/core/config_validation.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "c5a3aa40591e2df5b75285d3272dd0df48e08904",
+      "subject": "test: cover profile store admission and corruption isolation",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "563e2d9cbe0d32c71066fbb2e02089a5eb801ae4",
+      "subject": "test: cover compact profile references and delete refusal",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "bd4f8fa3f80a53b2ffc1c9ea03c811e58ca760ad",
+      "subject": "fix: bound configurator packet inactivity",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "bc5aac660ac30235c452991b16c2190088244114",
+      "subject": "test: cover profile store frame timeout resynchronization",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "c3f81715c6a26806166754ec59b3977186c553da",
+      "subject": "docs: record profile store continuation evidence",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "071961209fe7f038c344f017a320732f7593b68b",
+      "subject": "docs: measure profile store resource envelope",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "ed49c64ebdf9c4f13167126d726838b2de24fdd9",
+      "subject": "fix: preserve consecutive profile store packets",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "b61e93c551370ba2f0b8c8986bf4789a0b34909a",
+      "subject": "docs: record profile store packet lifecycle repair",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "ff588ee1e913fefe50f7f9d57f833fd427f7f0f4",
+      "subject": "test: exercise configurator profile store create",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "3ca15f2f70b8888ccca524ed773f3e3498c3ff06",
+      "subject": "fix: encode profile payload in store reads",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "e90b36e68c8156b6113220b3381ba0057e2e4144",
+      "subject": "test: report configurator profile store matrix",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "1a753e08f3c989a0743180183f18d6aa9e3859e0",
+      "subject": "docs: record configurator v1 matrix evidence",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "c9ccc4d888f3acf407be5131beb3f6a1c7df4d14",
+      "subject": "docs: record profile store hardware handoff",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "8ad9b62588d58df4cfd96739e2023f5ca1fe8429",
+      "subject": "fix: admit legacy glyph rgb no-op config",
+      "partition": "A",
+      "active_paths": [
+        "config/glyph/common/include/config_rgb_target_domain.hpp",
+        "config/glyph/common/src/config.cpp",
+        "include/core/config_rgb_target_validation.hpp",
+        "src/core/config_rgb_target_validation.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "0448185140b364fd436c4f0f6fd98c102827518f",
+      "subject": "test: keep compact rgb validation strict",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "278ffe7baa2aa7070e775f3be7704d2ac348e6eb",
+      "subject": "fix: restrict legacy rgb noop admission",
+      "partition": "A",
+      "active_paths": [
+        "src/core/config_rgb_target_validation.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "b3f08eab9980b7fc7c0c3665d480f15ee4e98101",
+      "subject": "fix: include legacy rgb migration normalization",
+      "partition": "A",
+      "active_paths": [
+        "config/glyph/common/src/config.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "1bd606a77ece2ce61c4e7037b3d9f90a7a8ae6bd",
+      "subject": "test: narrow legacy rgb predecessor admission",
+      "partition": "A+B",
+      "active_paths": [
+        "config/glyph/common/include/config_rgb_target_domain.hpp"
+      ],
+      "reason": "Actual normalization restricts only BTN_UNSPECIFIED ANDcolor0 no-op predecessor rowA; replayfixtureB."
+    },
+    {
+      "sha": "f76ece54478d7ce0364bd62cc8a0dc6406746e12",
+      "subject": "docs: record predecessor config hardware failure",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "7262f1bde497e2d714f017dbbcc087d94fd2367b",
+      "subject": "test: reproduce strict remove first create failure",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "ac1193758eafae79c0e85ba1b5418800c349713e",
+      "subject": "fix: publish first profile without strict remove",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreStorage.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "7cd57934b6afa4c49ea102f360305de1b0be0f95",
+      "subject": "test: cover configurator empty profile create",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "5c0eb56a37b06ce1d4149996927bbd84b20293b1",
+      "subject": "docs: record first profile create hardware failure",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "8e088b5d1c2629bb225f990128628bfa419e6c7d",
+      "subject": "test: make stream create remove semantics strict",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "e710be4eff597f81e0c1f80df05080cc5db71843",
+      "subject": "feat: diagnose profile store record io failures",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreStorage.hpp",
+        "src/core/ProfileStore_stub.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "39c8a343ae45a3ce03adf00a8dc461c574c64f49",
+      "subject": "docs: record unresolved F3 create failure",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "36d5991f85373081940a0b474a845bc8d8fb06ed",
+      "subject": "fix: reset profile store diagnostics per request",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp",
+        "src/core/ProfileStore_stub.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "3e093348f9f4d7584375d60b293bb4b4c809919f",
+      "subject": "docs: record first create diagnostics",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "0a32eb7696cbc5b084332c442bbf5868f15b4173",
+      "subject": "fix: bound profile store temporary filenames",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStorePaths.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "da0618ef47242d049948187ea00e6fb961617ef5",
+      "subject": "feat: diagnose directory root publication failures",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreStorage.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "585d0db1c311a28dc002c7749b98eb40924a1a71",
+      "subject": "fix: remove directory decoder stack copy",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/src/core/ProfileStore.cpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "83f526b843fbcc61ee7dac6da9df0bc79351c2bf",
+      "subject": "test: qualify profile store directory stack repair",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "81d4dcfd8fadd575b047a658c4eddcd861e10f77",
+      "subject": "Diagnose complete ProfileStore CREATE path and bound stack and response hazards",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "config/glyph/common/src/config.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreCreateProbe.hpp"
+      ],
+      "reason": "Bounded ProfilePacketWriter/static Config/profileworkspaces and readback equalityA; watchdog scratch CREATEprobeB later removed082."
+    },
+    {
+      "sha": "4ac255ebc6d2e416e0a7945614f3a3dcdbbd7922",
+      "subject": "Retain incomplete CREATE response stage for USB STATUS diagnosis",
+      "partition": "B",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+      ],
+      "reason": "CREATEprobe incomplete-response observation only, later fully removed082; do not resurrect probe orscratch behavior."
+    },
+    {
+      "sha": "08296b0e72f440e6536cff45246c57bb17bc9868",
+      "subject": "Finalize durable profile references and fail-closed store recovery",
+      "partition": "A",
+      "active_paths": [
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "config/glyph/common/src/config.cpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreCreateProbe.hpp"
+      ],
+      "reason": "Review by activepath hunk in filepartition; ordinarystore/config/protocol/validation fixes retainedA, hosttestadapter seamsB."
+    },
+    {
+      "sha": "f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113",
+      "subject": "Count split compiler frames in production persistence stack gate",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "04d7521fbdaeb313c1fe768a992a6c35847b68bf",
+      "subject": "docs: reconcile multi-profile store hardware acceptance",
+      "partition": "B",
+      "active_paths": [],
+      "reason": "No changed activefirmware/schema/build path; documentation or hostfixture/checker evidence."
+    },
+    {
+      "sha": "594066d9bb65b9f93c14e0e24e9d2002c3f83924",
+      "subject": "Harden ProfileStore persistence, identity recovery, and hardware acceptance",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/include/core/CheckedStorageFile.hpp",
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/comms/backend_init.cpp",
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "HAL/pico/src/core/ResourceDiagnostics.cpp",
+        "config/glyph/common/src/config.cpp",
+        "config/glyph/env.ini",
+        "include/core/CheckedStorage.hpp",
+        "include/core/ConfigWriteCandidate.hpp",
+        "include/core/ModeSelectionTransaction.hpp",
+        "include/core/ProfileStore.hpp",
+        "include/core/ProfileStoreFaultControls.hpp",
+        "include/core/ProfileStoreName.hpp",
+        "include/core/ProfileStoreRequestIdentity.hpp",
+        "include/core/ProfileStoreStorage.hpp",
+        "include/core/ProfileStoreTransaction.hpp",
+        "include/core/RecoveryInitialization.hpp",
+        "include/core/ResourceDiagnostics.hpp",
+        "include/core/Sha256.hpp",
+        "include/core/StackWatermark.hpp",
+        "include/core/mode_selection.hpp",
+        "schema/haybox/config.options",
+        "schema/haybox/config.proto",
+        "src/core/mode_selection.cpp"
+      ],
+      "reason": "Strict checkedstorage, v2identity, migration, receipts, Configatomicity, selection and staticresource hardeningA; candidatefaultcontrols/resourcewatermarksB."
+    },
+    {
+      "sha": "d59684b9368be61183881bdfc82adc774ad5f0ba",
+      "subject": "Coordinate Configurator USB access and diagnose fault campaign liveness",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "include/core/ProfileStoreFaultControls.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "OrdinaryUSBcoordination/TX/RXfunctional repairsA; candidatefault/trace/RXtelemetry andsourceacceptanceoperationsB."
+    },
+    {
+      "sha": "895109eb662a8ad6b6c99889cb37a254dce49998",
+      "subject": "Repair coordinated ProfileStore READ transmission progress",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStoreReadTrace.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "OrdinaryUSBcoordination/TX/RXfunctional repairsA; candidatefault/trace/RXtelemetry andsourceacceptanceoperationsB."
+    },
+    {
+      "sha": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+      "subject": "Repair deferred CDC receive progress for large ProfileStore requests",
+      "partition": "A+B",
+      "active_paths": [
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "include/core/ProfileStoreRxDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "OrdinaryUSBcoordination/TX/RXfunctional repairsA; candidatefault/trace/RXtelemetry andsourceacceptanceoperationsB."
+    },
+    {
+      "sha": "2e0a608622e8363ec7e2ef2aacc224e0810020ed",
+      "subject": "Add candidate-only single-attempt root reconciliation fault route",
+      "partition": "B",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "include/core/ProfileStoreFaultControls.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "NarrowcandidatefaultQUERYroute only; doesnotrepair generalreconciliation andmustnotship."
+    },
+    {
+      "sha": "466f91ed867884640375627734d3473e9fb22c32",
+      "subject": "Add candidate-only RT2 USB startup phase diagnostics",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "config/glyph/common/src/config.cpp",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "b07502866c56a1c7e1e217132aea30366e234461",
+      "subject": "Add candidate-only sticky RT2 DCD milestone observer",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_dcd_observer.py",
+        "config/glyph/env.ini",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "88ab0029d464175865e1ce3e9a19b462579ffed4",
+      "subject": "Add RT2 raw SETUP and silicon diagnostics with E5 safety audit",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_dcd_observer.py",
+        "config/glyph/common/src/config.cpp",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "3b5c92b2200753c795315a166dc7bd501a93a9f6",
+      "subject": "Add independent core1 observer for first recovery USB task",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "config/glyph/common/src/config.cpp",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryTaskDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "c95695ef2062ec38de94a28ce66b5aba2ad8db6b",
+      "subject": "Extend RT2 observer with frozen comprehensive USB dashboard",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_dcd_observer.py",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryTaskDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "b1a50079d1e2b8bca5dc2848c84b4a3cabbb181a",
+      "subject": "Keep comprehensive diagnostic snapshots off the backend stack",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryTaskDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "3761b702ea09f50b9c98a55bea91caa337a3f62e",
+      "subject": "Disambiguate LF4 reset history in the static RT2 panel",
+      "partition": "C",
+      "active_paths": [
+        "include/core/RecoveryTaskDiagnostics.hpp"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "0f22b6d3b5d4a1a16fc7fd03866cfa44336de4ff",
+      "subject": "Observe RT2 raw SETUP and USB IRQ dispatch on whole main buttons",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_dcd_observer.py",
+        "include/core/RecoverySetupIrqDiagnostics.hpp",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "88a36e67bcdf4acc447707da42687501afcd4d13",
+      "subject": "Observe RT2 pre-SETUP USBCTRL liveness and panic boundaries",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_dcd_observer.py",
+        "include/core/RecoveryPreSetupDiagnostics.hpp",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "7e9e2ea0e3ac8c018dfa3088ef65af6b6c8cc820",
+      "subject": "Observe exact private RP2040 DCD SETUP status and branch boundaries",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_private_dcd.py",
+        "config/glyph/env.ini",
+        "include/core/RecoveryPrivateDcdDiagnostics.hpp",
+        "include/core/RecoveryPrivateDcdMarkers.h",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "include/core/RecoveryUsbDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "d30e5250ef2e5e425cc0f217fd37247b484ca988",
+      "subject": "fix(diagnostics): preserve private DCD status read timing",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "include/core/RecoveryPrivateDcdDiagnostics.hpp",
+        "include/core/RecoveryPrivateDcdMarkers.h"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "60313cde63c7161921fdef7b2c3ebaddcb15173c",
+      "subject": "feat(diagnostics): sample late SETUP before DCD return",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "include/core/RecoveryPrivateDcdDiagnostics.hpp",
+        "include/core/RecoveryPrivateDcdMarkers.h",
+        "include/core/RecoveryStartupDiagnostics.hpp",
+        "schema/haybox/config.proto"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "e6de4b7a87296aacce291e504606790607eba8d1",
+      "subject": "feat(recovery): restart USB bus state on manual RT2 only",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_recovery_reinit.py",
+        "config/glyph/common/src/config.cpp",
+        "config/glyph/env.ini",
+        "include/core/RecoveryUsbReinitialization.h"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    },
+    {
+      "sha": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+      "subject": "Add two-stage cold manual RT2 recovery candidate",
+      "partition": "C",
+      "active_paths": [
+        "HAL/pico/src/core/ColdRecoveryBoot.cpp",
+        "HAL/pico/src/core/ColdRecoveryUsbInit.c",
+        "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp",
+        "builder_scripts/rt2_cold_recovery.py",
+        "config/glyph/common/src/config.cpp",
+        "config/glyph/env.ini",
+        "include/core/ColdRecoveryBoot.h",
+        "include/core/ColdRecoveryIntent.hpp"
+      ],
+      "reason": "RT2observer/workaround lineage; no independent generalproductionrepair identified."
+    }
+  ],
+  "limits": [
+    "Source audit only; no tests/build/controller/Gitmutation performed by this specialist.",
+    "Physical acceptance does not transfer to reconstructed exactcandidate.",
+    "Every diagnostic schema compatibility choice must be checked against generatedNanopb consumers and responsebounds."
+  ],
+  "historical_deleted_diagnostic_paths": [
+    "include/core/ProfileStoreCreateProbe.hpp",
+    "tools/check_glyph_profile_store_create_probe_host.py",
+    "tools/fixtures/profile_store_create_probe_host/"
+  ],
+  "schema_policy": "Keep strict acceptance wire fields through4ee inert for test compatibility; no RT2 response58+ inproduction descriptor. Neverrenumber persistentConfig or production profilefields.",
+  "implementation_contribution": {
+    "role_change": "Ownerroot expandedrole fromreadonlyaudit to boundedimplementation; this is not fresh independent review of candidate.",
+    "files": [
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+      "include/core/ProfileStoreFaultControls.hpp",
+      "include/core/ProfileStoreReadTrace.hpp",
+      "HAL/pico/src/core/CheckedStorage.cpp",
+      "include/core/CheckedStorage.hpp"
+    ],
+    "result": "Acceptance observation/injection state and population compileexcluded strictabsent; checkstoragehook compileallowed onlystrictorhost TEST_MOUNT; functionalUSB loops preserved. Rootowns productionenvflags/schema/config/ProfileStore/testadaptation.",
+    "verification": "No builds/tests/controller actions bythis specialist; root exactbuild/regressions/review required.",
+    "sha256": {
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "33ebb607e553ef5008a789fe0f2101fab41a37210ea1739dc41c63691c391a0f",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "f503a7b87a5fff0a3a851fadf19fc33ad104b2949997fe3b1b4687ae11be292b",
+      "HAL/pico/include/comms/CoordinatedCdcStream.hpp": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9",
+      "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "include/core/ProfileStoreReadTrace.hpp": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+      "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "include/core/CheckedStorage.hpp": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e"
+    }
+  }
+}

@@ -1,5 +1,41 @@
 # Glyph Roadmap
 
+## Current owner-directed ProfileStore production reconciliation — 2026-10-18
+
+Direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e` closes manual RT2 investigation as
+**DEFERRED BY OWNER**, never PASS. `UNDERLYING_RT2_USB_CAUSE = UNRESOLVED`.
+`GLYPH_MK6_ROM_BOOTSEL_RECOVERY_PHYSICALLY_VERIFIED` records the owner's recessed
+BOOTSEL/RPI-RP2 observation; a verified destructive factory artifact remains a
+separate nonexecuting follow-up. Ordinary UF2 does not establish filesystem erasure.
+See [closure](runtime_config/profile_store_rt2_deferred_closure.md),
+[B1–B10](runtime_config/profile_store_production_reconciliation_blockers.md),
+and [factory follow-up](runtime_config/profile_store_factory_recovery_followup.md).
+
+This bounded pass reconstructs production on `codex/profile-store-production-reconciliation`
+directly from canonical `6b73a7c507f35c111745c6bdd341618b490cbdcd`, retaining semantically
+audited general hardening and USB fixes, excluding RT2 experiments and active
+acceptance-only hooks. Exact candidate/tests/build/resource/review results are bound
+by its final handoff; no inherited exact-artifact hardware PASS. Chapter NOT DONE.
+B7A automatic/normal recovery safety remains required; B7B manual RT2 is deferred.
+No controller action or canonical merge is authorized during this reconciliation.
+
+The next bounded production task, after source gates pass, is exact clean-candidate
+normal Configurator/persistence/affected-transport hardware acceptance, with preserved
+useful authority; any remaining concrete source defect takes priority as a bounded
+implementation issue. Supervisor routes that ordinary review/candidate/hardware/integration
+flow; no bespoke RT2 continuation. Reopen RT2 only by explicit owner direction or a
+genuinely new modality such as an external USB analyzer. Mere another software
+workaround is not a reopening condition. `FACTORY_RECOVERY_ARTIFACT_REQUIRED` does
+not authorize implementation and is a separate safety deliverable before public
+shipping, not a default blocker on ordinary implementation resume.
+
+Historical portfolio queue JSON, completed orders and earlier evidence below remain
+unchanged. They do not override this newer named direct owner scope or authorize
+reopening RT2. No new ordinary READY order, automatic schedule or old campaign
+resume is invented by this status overlay. Canonical integration remains separately
+authorized after review and required hardware acceptance.
+
+
 ## Post-C024 orchestration boundary
 
 The C020–C024 campaign is complete. GLYPH-UD-029 is historical authority only;

@@ -1,0 +1,39 @@
+# Two-stage cold manual RT2 recovery contract
+
+Direct owner109eb969-5b82-44f6-89be-16cbe3150fd5 authorizes this bounded candidate from e6de4b7a87296aacce291e504606790607eba8d1/treeb54b4668d0cce1eac917c62dae787840ab72b0d5, canonical6b73a7c507f35c111745c6bdd341618b490cbdcd unchanged. No controller action, new RT2, canonical merge, USB polling/observer, same-boot warm-reset variant, stack upgrade or persistent intent.
+
+## Latest physical authority
+
+Owner reports normal e6de control PASS. One manualRT2 held10s: display black/off, no matching USB identity, no recovery endpoint, ancillary LF4 CYAN only. Classify MULTI_PROFILE_STORE_RT2_RECOVERY_USB_REINITIALIZATION_TRANSPORT_FAIL. The coordinated warm reset did not meet the product requirement. Ancillary panel colour is not promoted to a new low-level cause. UNDERLYING_RT2_USB_CAUSE = UNRESOLVED. No new hardware acceptance is claimed.
+
+## Marker authority
+
+Pinned RP2040/SDK/Arduino source and official datasheet authority are in profile_store_rt2_cold_source_audit.md/json. Scratch0/1 belong mode/menu selectors and bootloader parameters; scratch2 exact MDST0x4d445354 is committed mode destination; scratch3 belongs retained diagnostics; scratch4–7 are SDK/ROM watchdog routing. This candidate uses exact tagged scratch2 CRT2=0x43525432. Arm refuses any nonzero scratch0/1/2 and does not clear conflicting state. Intent functions never write0/1/3/4–7. Existing SDK reboot(0,0,10) independently writes ROM scratch4=0 as its original behaviour; do not claim the SDK touches none of4–7.
+
+At original early USB entry, consume only exactCRT2 and clear2 before checking validity or publishing cold RAM state. Require exact TIMER reason1 and zero0/1. Invalid exactCRT2 is consumed but does not authorize cold recovery; other values/tags untouched. RUN/power reset clears scratch. After consumption, later reset cannot replay intent. A different watchdog TIMER reset before consumption is inherently indistinguishable from the intended timer reset; the unique tag is collision avoidance, not authentication of arbitrary injected bits. No LittleFS/ProfileStore/Config intent state.
+
+## Boot A and Boot B
+
+Without a marker, normal TinyUSB startup remains at the same Arduino main point, before core1/setup, invoking original TinyUSBDevice.begin exactly once. Original main/Adafruit Device/API/CDC/port source bytes are pinned and unchanged. Extra bounded marker/function-gate instructions exist; cycle-identical normal timing is not claimed. Normal gameplay/Configurator/selection/backend source is unchanged outside the explicit boot-control boundaries.
+
+Boot A: original ordinary startup, existing setup matrix sample; MB1 wins RT2 via rt2&&!mb1. Manual RT2 attempts marker once and calls existing reboot_firmware/rp2040.reboot/watchdog_reboot(0,0,10). It does not enter the recovery service, load Config, Begin ProfileStore, migrate or construct gameplay to trigger reboot. Existing pre-main constructors/mounting are unchanged; zero filesystem operations for the entire ordinary boot is not claimed. Conflict or unexpectedly returned reboot publishes permanent RecoveryTransportFailure; no retry. Actual pinned reboot spins until reset.
+
+Boot B: a separate minimal C shim defines strong TinyUSB_Device_Init without inheriting the weak Adafruit declaration. It forwards to the source-owned early hook. Valid marker is consumed before ordinary begin/hardware startup; RAM cold flag is published and hardware/descriptor startup deferred. Setup first checks that RAM flag before matrix/display/ordinary storage/backend workflow. It does not resample RT2 or let MB1/other buttons redirect authorized Boot B.
+
+Existing initialize_recovery/BeginRecovery performs inspection only. For cold descriptor preparation, execute the exact original Adafruit begin descriptor prefix ONCE. Its existing external TinyUSB_Port_InitDevice reference is intercepted by the already-present GNU port wrapper and consumed only in phasePreparing. No hardware, mutex, queue or IRQ creation occurs during this deliberate descriptor-only call. Require one deferred boundary, !tud_inited, one valid CDC instance and exact75-byte/two-interface CDC composition/endpoints. There is no copied vendor TU or const-cast/private header alteration. Prepare is not full initialization and cannot be repeated.
+
+Construct the existing Configurator backend, which sets2E8A:1092, then SetRecoveryState before Start. Start verifies final identity and composition, consumes its one start permit, and invokes original TinyUSB_Port_InitDevice ONCE. Existing port/USBD/DCD create mutexes/queue/critical-section/classes/taskIRQ/DCDhandler/tasktrigger once. DCD exposes pull-up only after final application identity/readonly backend are ready. Pull-up occurs within the pinned port call before that call finishes software task IRQ/trigger registration; do not claim attach is literally the port's last instruction. Start does not call begin or clear descriptors again.
+
+Functional Task and FlushCDC wrappers gate yield calls while cold and notStarted, including Failed, because the USB mutex/FIFOs are not initialized before actual port start. Normal calls forward original once. The cold phase uses aligned atomic32 loads/stores and release/acquire publication, no atomic RMW; final assembly must show inline loads/stores/barriers and no runtime atomic helpers. No new telemetry, IRQ observer or polling sampler. Existing diagnostic instrumentation remains, not the hardware acceptance criterion.
+
+## Failure and safety
+
+No warm helper is linked/called on this route; e6de source/history remains evidence only. Failure of returned preparation/start checks publishes RecoveryTransportFailure, never reboot/retry/ordinary fallback or storage mutation. Failed phase keeps Task/Flush gated. Port API is void and ignores tud_init return in pinned source; postcheck cannot certify every allocation/IRQ success or roll back attachment. Internal assert/panic/reset-handshake nonreturn cannot promise refusal publication. No speculative recovery/rollback is added.
+
+Recovery policy remains inspection-only. Existing backend/BeginRecovery guards remain; no CREATE/UPDATE/DELETE/SET_CONFIG/GC/fault arm/selection/automatic repair. Existing QUERY may invoke lower reconciliation/RAM fence changes; operator packets forbid QUERY entirely. Same Config/ProfileStore data/generation/tokens/revisions/migration state; no protocol or persistent schema change. Read-only device info/PULSE/STATUS/LIST/READ/GET_CONFIG and already-authorized health only.
+
+## Validation and handoff
+
+Tests execute actual cold intent/control/C shim, actual descriptor/CDC/USBD/backend where applicable and actual extracted setup/port/DCD bodies; host reset/MMIO/NVIC scheduling boundaries are models. Required boot-control, lifecycle, application, source pin, failure and owner-listed negative controls plus focused normal/persistence regressions must pass. Final ELF must select one strong TinyUSB_Device_Init, bind originalmain to it, bind Device.begin to port gate and yield to Task/Flush gates, exclude warm helpers/duplicate original replacements, and prove original normal function source/sections or disclose any compiler changes. Exact committed build/resources/fresh independent review/immutable UF2 custody are mandatory. Hardware NOT_TESTED.
+
+Stopped e6de adjudication PASS precedes ANY replacement. Future owner installs exact artifact, proves normal control/authority, authorizes RT2 ONCE, expects one automatic BootA watchdog transition, releases buttons, then BootB recovery endpoint and bounded read-only transcript. Endpoint absent STOP IN PLACE; no second RT2/manual second reboot/retry/cleanup. Only exact normal and cold recovery hardware PASS supports MULTI_PROFILE_STORE_RT2_TWO_STAGE_COLD_RECOVERY_HARDWARE_PASS; underlying cause remains UNRESOLVED.

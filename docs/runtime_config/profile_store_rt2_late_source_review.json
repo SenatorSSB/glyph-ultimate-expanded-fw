@@ -1,0 +1,221 @@
+{
+  "status": "SOURCE_PASS_WITH_LIMITS",
+  "review_role": "fresh independent bounded source and adversarial review",
+  "observed_model": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "timestamp_utc": "2026-10-17T20:00:22.403284+00:00",
+  "owner_authority": {
+    "path": "/Users/rasmus.pekkarinen/.codex/attachments/94b72102-c0d6-4424-9671-468508d9de49/Pasted text.txt",
+    "sha256": "fc877b90e8e14718858edd47479ad7c06214ec0f40517f7c5c3bee2938b083f5",
+    "direct_original_read": true
+  },
+  "base_supplied": {
+    "parent": "d30e5250ef2e5e425cc0f217fd37247b484ca988",
+    "tree": "259a311fe5f2ea5bee3fff9bb74600edcd883399",
+    "canonical": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+    "live_Git_verification": "root responsibility; no fresh remote claims from this review"
+  },
+  "material_findings": [
+    {
+      "tier": 2,
+      "path": "tools/rt2_private_dcd_assembly.py",
+      "finding": "Equality alias proof accepted a direct branch to BEQ bypassing CMP and reusing unrelated condition flags.",
+      "status": "REPAIRED_AND_INDEPENDENTLY_RETESTED",
+      "repair": "Reject every direct branch target strictly between CMP and normal-block entry; preserve existing normal-block single incoming equality-edge gate.",
+      "independent_negative_controls": [
+        "bypass CMP to BEQ",
+        "bypass CMP to else branch",
+        "bypass CMP to normal block",
+        "BNE normal edge",
+        "ordinary returning other edge",
+        "overwrite aliased register before hook",
+        "use S1 as S0 hook argument"
+      ]
+    }
+  ],
+  "open_tier1_tier2_findings": [],
+  "source_judgment": [
+    "Exact insertion-only inverse pin retains original first S0 load and vendor body. Exactly two observational hooks; no branch markers or service/force/clear/retry based on S1.",
+    "Actual S0/S1 hook arguments, immutable first late tuple and strict post-N setup identity preserve the requested same-invocation and later-entry distinction.",
+    "Sole serialized atomic32 writer with separately closed transactions, bounded reader and no sequence wrap supports coherent publication without RMW, spin or allocation.",
+    "Quality flags prevent false absence/redispatch classifications at saturation/exhaustion. Captured pair semantics, sequential gates and source-return/EXC_RETURN distinction are documented.",
+    "Response-only v3 fields 209..217 and unsupported legacy zero behavior are consistent with the schema; no Config/Profile/Request persistent message change.",
+    "Source audit correctly keeps architectural repend expectation separate from RP2040 latch/reset arbitration UNKNOWN and actual physical observations.",
+    "Prepared future one-attempt packet reviewed: separate stopped-d30e read-only adjudication PASS prerequisite, exact preserved candidate custody and normal control before one RT2, serial-absent STOP IN PLACE, no retry/repair; final identity remains bound by sealed HANDOFF."
+  ],
+  "observer_creates_window": {
+    "answer": "YES_POSSIBLE_MATERIAL",
+    "reason": "Post-S0 instrumentation extends S0-to-S1 so a packet that would arrive after pristine return can be observed inside this instrumented invocation. S1 callback publication also delays real return. Five compiler save instructions moved before S0.",
+    "exploratory_only": true,
+    "noevent_whole_handler_original_instructions": 51,
+    "noevent_whole_handler_instrumented_instructions": 134,
+    "noevent_delta_instructions": 83,
+    "dmb_added": 4,
+    "actual_S0_to_first_vendor_branch_original": 14,
+    "actual_S0_to_first_vendor_branch_instrumented": 38,
+    "actual_S0_to_first_vendor_branch_delta": 24,
+    "pre_S0_compiler_save_instruction_delta": 5,
+    "pre_S0_intentional_diagnostic_instructions": 0,
+    "pre_S0_diagnostic_barriers": 0,
+    "current_direct_diagnostic_noevent_instructions": 83,
+    "d30e_reference_direct_diagnostic_noevent_instructions": 184,
+    "d30e_reference_dmb": 6,
+    "unnecessary_work_judgment": "No remaining unnecessary per-branch marker machinery. Required status counts, sequence safety, first-late/post-late facts and gate sampling explain the retained work; do not remove publication correctness for fewer barriers.",
+    "limits": "Instruction counts are not cycle/wall-time bounds; final exact ELF must confirm them. No zero/negligible perturbation claim."
+  },
+  "independent_checks_executed": {
+    "memory_order_source_and_finite_RF": "PASS; 225 assignments; 3 coherent accepted; 0 incoherent; four missing-edge controls each expose 11 incoherent outcomes; five source-order mutants rejected",
+    "pure_in_memory_source_controls": "PASS; 12 source behavior/placement mutations and 5 pre-S0 mutations rejected",
+    "pure_in_memory_assembly_controls": "PASS; equality positive, seven independent adversarial controls rejected, retained patched/pristine probe assembly audit passes",
+    "retained_sampler_binary": "PASS; existing sampler-final executed, not independently rebuilt; source implementation separately read",
+    "full_host_harness": "Final actual-source harness PASS independently verified through exact report,113 case outputs/36 negatives/15 interleavings/225 RF and773 current source hashes; execution performed by root.",
+    "final_host_harness_verified": {
+      "report_path": "local_backups/late-setup/host-final/report.json",
+      "sha256": "769b82149fbb6bd9cdd1658a0f700771421e773845472bf3acf58a3de5417f18",
+      "status": "PASS",
+      "total_cases": 113,
+      "retained_external_cases": 89,
+      "new_late_cases": 24,
+      "negative_controls": 36,
+      "actual_reader_payload_interleavings": 15,
+      "source_hashes_checked_against_disk": 773,
+      "drift": [],
+      "memory_order_assignments": 225,
+      "scope": "Independently verified final report, scenario count/results and every recorded source hash against current files. Did not independently rerun entire harness."
+    },
+    "focused_regression_reports_verified": {
+      "receipt_path": "local_backups/late-setup/regressions/receipt.json",
+      "receipt_sha256": "43bbe63f1f10e1bf2683bb69e6eea5a6c87bb02fab12d22aae8ace2cbc18f7b4",
+      "cases": [
+        {
+          "name": "config-persistence",
+          "exit_code": 0,
+          "seconds": 2.62,
+          "log": "local_backups/late-setup/regressions/config-persistence.log"
+        },
+        {
+          "name": "root-reconcile",
+          "exit_code": 0,
+          "seconds": 10.99,
+          "log": "local_backups/late-setup/regressions/root-reconcile.log"
+        },
+        {
+          "name": "migration",
+          "exit_code": 0,
+          "seconds": 1.97,
+          "log": "local_backups/late-setup/regressions/migration.log"
+        },
+        {
+          "name": "strict-host",
+          "exit_code": 0,
+          "seconds": 4.42,
+          "log": "local_backups/late-setup/regressions/strict-host.log"
+        },
+        {
+          "name": "cdc-tx",
+          "exit_code": 0,
+          "seconds": 3.15,
+          "log": "local_backups/late-setup/regressions/cdc-tx.log"
+        },
+        {
+          "name": "cdc-rx",
+          "exit_code": 0,
+          "seconds": 4.03,
+          "log": "local_backups/late-setup/regressions/cdc-rx.log"
+        },
+        {
+          "name": "selection-recovery",
+          "exit_code": 0,
+          "seconds": 3.83,
+          "log": "local_backups/late-setup/regressions/selection-recovery.log"
+        },
+        {
+          "name": "liveness",
+          "exit_code": 0,
+          "seconds": 68.26,
+          "log": "local_backups/late-setup/regressions/liveness.log"
+        },
+        {
+          "name": "rx-host",
+          "exit_code": 0,
+          "seconds": 0.56,
+          "log": "local_backups/late-setup/regressions/rx-host.log"
+        },
+        {
+          "name": "read-storage",
+          "exit_code": 0,
+          "seconds": 25.02,
+          "log": "local_backups/late-setup/regressions/read-storage.log"
+        },
+        {
+          "name": "startup",
+          "exit_code": 0,
+          "seconds": 8.79,
+          "log": "local_backups/late-setup/regressions/startup.log"
+        }
+      ],
+      "log_sha256": {
+        "local_backups/late-setup/regressions/config-persistence.log": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84",
+        "local_backups/late-setup/regressions/root-reconcile.log": "f0ccbf7bc181c3206c252249badd8da9758db6f999d4a9e68e5276cd865ac21d",
+        "local_backups/late-setup/regressions/migration.log": "202e9822fb9fe980cc4f1d84bec0ed7e55cf19a9199b1ab795c731ef5f8c8d38",
+        "local_backups/late-setup/regressions/strict-host.log": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb",
+        "local_backups/late-setup/regressions/cdc-tx.log": "a4ca8cc83515a9df5579c8cdf42949b1ab9f3127c3c434b972e23df8ce619f8f",
+        "local_backups/late-setup/regressions/cdc-rx.log": "68ee27943ce2201d656f8387de44e0341cd50633fb0ce6667dcca989a4d82c99",
+        "local_backups/late-setup/regressions/selection-recovery.log": "ddb1db1539bb8f15c8381d287eaa528bd71019a02d5a1df2c2f3058ed061becc",
+        "local_backups/late-setup/regressions/liveness.log": "fe80d011405a86910129eb5a55a0c962ccf7d0cb78f630de14660cf1e792be23",
+        "local_backups/late-setup/regressions/rx-host.log": "0c5eb7a74e3fc3bd3903b665de5a3dc9f1555dec49fc34e1fb3cea5cf9ec1613",
+        "local_backups/late-setup/regressions/read-storage.log": "6c88742fc41db9a6d9d2a0fbe4585756eb831105136b9183d94c0efa24811f10",
+        "local_backups/late-setup/regressions/startup.log": "7d2bb7f69e734c0509fde11e97ffcf6a47d79e7fe09a8055963900ff1182d7a9"
+      },
+      "scope": "Independently read11 success exit receipts and actual log conclusions; root executed checks, not independently rerun."
+    }
+  },
+  "not_yet_reviewed": [
+    "final committed candidate identity",
+    "final exact ELF assembly/uniqueness and actual flag replay",
+    "final resources and UF2 custody"
+  ],
+  "hardware": "NOT_TESTED; no controller/package/device/publication action by reviewer; canonical merge forbidden",
+  "reviewed_source_hashes": {
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "a35797de46b06133276ea8108349be9789760ca9c15cce5a7a053d474be17a00",
+    "HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": "08a94ed225c757b9a775b001fe784bb40f838b3576b4589be5e61915204da8f6",
+    "include/core/RecoveryPrivateDcdDiagnostics.hpp": "437daf359e7dfdad6bf9249610ca379a86046b6ced58d2806cce45234d462888",
+    "include/core/RecoveryPrivateDcdMarkers.h": "47a9433806d41c4ba59b8415ae0b47e9dd36b3e223c63ea2b319ed89b148394a",
+    "include/core/RecoveryStartupDiagnostics.hpp": "e20773fcb89f7968a6ada132f123c4b7da67ae5e660ca470572b65987d2fd850",
+    "schema/haybox/config.proto": "8462778e917c3a0896ce8501762ef1b6bc8eb8a8f4ca5a13ce31590505922224",
+    "tools/check_glyph_rt2_private_handler.py": "a95c12a44385ee371d53b19a7bf854e486c296491091760da4e9ec74fa3dc045",
+    "tools/check_glyph_rt2_private_integration.py": "a14dc27e7f9e3a8daed8db6a4fdadcb8802014dc36ce6541b031343c497fb610",
+    "tools/check_glyph_rt2_private_memory_order.py": "69a0dbe19e375bbfac9ac47d786c3ff1858b5144659595a995ffcd9046d5578c",
+    "tools/rt2_private_dcd.py": "6b8c1be2e0566b78ff9302be37499bcd58f8c84e05ca287ef3db02e2865dfae2",
+    "tools/rt2_private_dcd_assembly.py": "f18fe5faef9ccbd9c6084071997e65422082d991fef7f2fdd42dc7214808a348",
+    "tools/check_glyph_rt2_late_setup.py": "ac760006da81bbff58592c1f92500a517393404a0e29fdc12d2ecb3eea569bfa",
+    "HAL/pico/src/core/RecoveryStartupDiagnostics.cpp": "26940ad789b7a4c876c5fed66e2a13e89487017370542e119f4a093cc5dce631",
+    "builder_scripts/rt2_private_dcd.py": "5271c1bb5926b33ad5e04cc472a2293152644bc4a45f3b3845ee9e4001eab806",
+    "builder_scripts/rt2_dcd_observer.py": "38de75c0db20c71105a5cf72fe7ffccd89b89177d76c7613df0506c28c37d0fb",
+    "vendor/diagnostics/tinyusb-0.16.0/rp2040/dcd_rp2040.c": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "docs/runtime_config/profile_store_rt2_late_contract.md": "804f2fb4fd1bb28c9b9eff08ec209b966fa0fe1baa8ed0d4e9bccc73c78fc73a",
+    "docs/runtime_config/profile_store_rt2_late_source_audit.md": "3eb8c88fa2d9cd8d7c3c1e6b2880c7b751e0192956a9b9476f95a591a60c1e26",
+    "docs/runtime_config/profile_store_rt2_late_physical_adjudication.json": "d7ec4054a4ff068e85eb0ca4daa96f16fdbc120b83191e4fe01742bfb5293329",
+    "docs/runtime_config/profile_store_rt2_late_device_adjudication.md": "b5680e5ee36402b6e23a9d47f34d5f19aad05b10271b16304691d30460992144",
+    "tools/fixtures/rt2_late_setup_host/cases.inc": "34e833c6c6c3c424369e3045fc6c0e934f9e6ec7da2ad8096b5b0f02368c2097",
+    "tools/fixtures/rt2_late_setup_host/focused.inc": "a92325a051842d200766d78f18704175471f7de879f26789bd6b7531a4031840",
+    "tools/fixtures/rt2_late_setup_host/late.inc": "77976449e6513ce9ab01ac98529a2e78bc3b457b620b31964235a42e4047015a",
+    "tools/fixtures/rt2_late_setup_host/read_interleaving.cpp": "02b3521d0b4c78c1976c74f7dad1b89f18d29df0935bc2b40151851d75e8703d",
+    "tools/fixtures/rt2_late_setup_host/sampler.cpp": "589ce7ccc4cf2a2d264cf6ccc65c7f168d2f10c0e691cea95c5e030b2689f89d",
+    "tools/fixtures/rt2_late_setup_host/timing.inc": "4caf618f9cd7aff3c61005544684d8aa0659480d43f85ab98284165ae04c1d35",
+    "docs/AGENT_CONTEXT.md": "17b9acb2491d6c6311be77f4167c68762e3631ea294f23fd53e971b67b3e17da",
+    "docs/CURRENT_STATE.md": "3e8c78a9aabc92542394f321cdb07bbb4496d054be3a0fa7f6f103e446dcb5ad",
+    "docs/ROADMAP.md": "36c6df5ff4594ebd1783f84944e7f9cd157ee7ef39e5da064ca07e16c9e5d3f8",
+    "docs/runtime_config/profile_store_rt2_late_hardware_packet.md": "4d543458524ea354e85857d1a0d8d317fc965151e7c53cb24a19c344aa50eee6"
+  },
+  "supporting_evidence_hashes": {
+    "local_backups/late-setup/source-audit.md": "3eb8c88fa2d9cd8d7c3c1e6b2880c7b751e0192956a9b9476f95a591a60c1e26",
+    "local_backups/late-setup/source-audit.json": "78533fb93c1dbc2c49b422e14c86f455fa3d942d084038178171b0251c57655d",
+    "local_backups/late-setup/probe/patched-dcd.disassembly.txt": "55fe53996f7c59ea5d00e3fb61f5bde9c7e88c1b12b0664071edcd13ac58fad8",
+    "local_backups/late-setup/probe/pristine-dcd.disassembly.txt": "4e115841fa71aaa575ffe660674785c9b02fcc9001b723a09425c5ccd1124119",
+    "local_backups/late-setup/probe/observer.disassembly.txt": "b4da8cd673f7548f3a3ecd2a00e06ca4edd6113a0f2a41e3cbb6ed2895f4c10e",
+    "local_backups/late-setup/probe/noevent-whole-handler-inventory.json": "06fe8db889d2a23bea0802cbd7ec46afc4c67e03a10d445e0dc1f54628e15c44",
+    "local_backups/late-setup/sampler-final": "373ba58fab08b15766bbcc6bbf8f8f3ce751258dad29988efb2af0d56c0a2fb2"
+  },
+  "exact_copy_attestation": "Root may copy this exact JSON into docs/runtime_config/profile_store_rt2_late_source_review.json before candidate commit. This receipt reviews the explicit source hashes and verified host/regression reports; it does not grant hardware acceptance or canonical merge. Changing reviewed source requires bounded re-review; final exact ELF/resources/custody are pending."
+}

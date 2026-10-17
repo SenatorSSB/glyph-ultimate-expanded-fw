@@ -1,0 +1,166 @@
+{
+  "receipt_type": "owner_reported_hardware_reconciliation_not_new_testing",
+  "recorded_utc": "2026-10-15T20:12:18.673737+00:00",
+  "owner_request": {
+    "path": "/Users/rasmus.pekkarinen/.codex/attachments/568f8fc8-da2c-4c49-8558-d1b7e21a669e/Pasted text.txt",
+    "sha256": "5013765ed6a5e55314a01393fdac03fa5260675245987fa47c5cd7b4b406e55c"
+  },
+  "tested_source": {
+    "sha": "f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113",
+    "tree": "fea1c14a5775b8f5db5ce85b2fed95ad6411d485",
+    "parent": "08296b0e72f440e6536cff45246c57bb17bc9868",
+    "base": "6b73a7c507f35c111745c6bdd341618b490cbdcd"
+  },
+  "uf2": {
+    "path": "local_backups/hardware-artifacts/f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113/256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21/firmware.uf2",
+    "bytes": 935424,
+    "sha256": "256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21"
+  },
+  "pre_hardware_custody": [
+    {
+      "path": "local_backups/hardware-artifacts/f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113/256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21/handoff.json",
+      "bytes": 8806,
+      "sha256": "7ddc8b0a3825830043adb88cfe70685327f70b4d4f6e7e236140a99bd7513b86"
+    },
+    {
+      "path": "local_backups/hardware-artifacts/f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113/256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21/review.txt",
+      "bytes": 4636,
+      "sha256": "d0fb8e2acac2de332e8c3bdae52cc6593965b98e9e8268f019cf963a6ca9bc16"
+    },
+    {
+      "path": "local_backups/hardware-artifacts/f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113/256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21/evidence/tests/results.json",
+      "bytes": 468,
+      "sha256": "d5603e2e150ab792c19bc1771a5466a123873a04bca6ccf06142c678a46bc379"
+    },
+    {
+      "path": "local_backups/hardware-artifacts/f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113/256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21/evidence/production-stack/report.json",
+      "bytes": 142283,
+      "sha256": "958e4ba91cd6267c63a17df5148d45cdb547052027aa60aaa3b978be87715448"
+    }
+  ],
+  "hardware_evidence": [
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F2_LEGACY_STATE_CRUD_RESULT.md",
+      "bytes": 1748,
+      "sha256": "ace5f12573ebb9dcfa98e5caae31494811383eaa97eee35d3c6d9bee9858bccc"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F2_PREDECESSOR_COMPATIBILITY_RESULT.md",
+      "bytes": 3285,
+      "sha256": "37388beec7fb8e67e9f6b771b27b92e4cfa14e54975770bfab50f45c895f3329"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F2_RT2_HEADLESS_RECOVERY_SUPPLEMENT.md",
+      "bytes": 1776,
+      "sha256": "55966d95d263793479613d5d39ba78618ea4e7242c61bc3f504910a76dc07b92"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F3_FIRST_CREATE_RESULT.md",
+      "bytes": 1158,
+      "sha256": "fc49ac399fa8f93a933521062cd89e9fc70257e5a883bd25ee9fd0dab3b796bd"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F4_FIRST_CREATE_STAGE_DIAGNOSIS.md",
+      "bytes": 1909,
+      "sha256": "dbcff41693fac7a60d859b59ef45973777f694cc57fdfa0ffd11c4ab91172e95"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F5_COMMIT_UNKNOWN_ADJUDICATION.md",
+      "bytes": 1072,
+      "sha256": "a43734585b63c208239adc77d6ed1799b10d42b09ed63c703f0a09b173d0bc5f"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F5_FIRST_CREATE_RESULT.md",
+      "bytes": 1290,
+      "sha256": "0ff04c14b103c02694cac0ef0c45c9a6b8aba4c75a407d7a778cd5b1e3fbe062"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F6_CREATE_TIMEOUT_ADJUDICATION.md",
+      "bytes": 1442,
+      "sha256": "c95edc8490ef23798106f5389534a1b18d62ccc89727fc8ef67355501cee58d6"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F6_DIRECTORY_PUBLICATION_RESULT.md",
+      "bytes": 1703,
+      "sha256": "afde22e31a6281a341ab3816742589c2d32a7c833eec868c5e1346a0c5c95eb1"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F7_CREATE_REQUEST_PRETRANSMISSION.md",
+      "bytes": 393,
+      "sha256": "285b25ab25b151c491a9b0949a2821c3d04ed891e10d0646ea2b22e64ba88242"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F7_MIGRATION_REFERENCE_RESULT.md",
+      "bytes": 3011,
+      "sha256": "f9d504ef86b320fb3df12ecedd6071c115e20df4170b1ab98d2c241e2c0ad9cb",
+      "verbatim_receipt": "# F7 migration and reference lifecycle hardware result\n\nCandidate: `4ac255ebc6d2e416e0a7945614f3a3dcdbbd7922`.\n\n## Migration\n\n- Pre-write Config: 4201 bytes, SHA-256\n  `f589317b59b3ab7543cad563e2e0877dc5f491227e6e35777bc732d402bb1480`.\n- Pre-migration ProfileStore: generation 6; authoritative ID 1, revision 2,\n  `CRUD Primary`, rank 20; Stage-A payload verified.\n- Source fixture: `tools/fixtures/stage_c_ultimate_profiles_dry_run.json` at\n  the exact candidate, SHA-256\n  `e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb`.\n- Authorized SET_CONFIG body: 6248 bytes, SHA-256\n  `0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7`;\n  transport returned CMD_SUCCESS.\n- After one ordinary reboot: ProfileStore generation 8, entries ID 1/rev2,\n  ID 3/rev1 `Migrated 1` rank 0, and ID 4/rev1 `Migrated 2` rank 1. ID 2\n  was absent, proving non-reuse of the deleted high-water identity.\n- Compact Config after migration: 157 bytes, SHA-256\n  `b733eda97bf7d7fab8356b4b1fd94f2bbd5679ab6acc7bc8b1c33c0710ae5033`;\n  format 1, incarnation 1, zero embedded profiles, mode references\n  none/3/4.\n- Generation-bound reads confirmed byte-serialized equality for retained\n  Stage-A ID 1 and the two Stage-C embedded profiles at IDs 3 and 4.\n- A second ordinary reboot retained generation 8, entries 1/3/4, compact\n  Config, and the 3/4 references: migration was not replayed.\n\n## Reference lifecycle\n\n- SET_MODE_REFERENCE mode index 1, ID 3 -> ID 4: OK; store generation stayed\n  8; Config generation `2121190564` -> `1912242589`.\n- After reboot, Config mode references were none/4/4 and ID 4 was the active\n  persisted index-1 reference.\n- DELETE ID 4 at generation 8 returned `PROFILE_STORE_REFERENCED`; generation\n  stayed 8. A generation-bound READ confirmed ID 4/revision 1 remained valid.\n- SET_MODE_REFERENCE mode index 1, ID 4 -> ID 3: OK; store generation stayed\n  8; Config generation became `3924942221`.\n- Final reboot: generation 8; IDs 1/3/4 only; ID 2 absent; compact Config\n  format 1/incarnation 1 and references none/3/4. Final generation-bound\n  reads of IDs 3 and 4 byte-serialized equal to their Stage-C fixture payloads.\n\n## Presentation observation\n\nAfter the ID4 activation reboot and final restoration reboot, the owner\nreported direct Configurator entry on Mac connection. The final persisted\nConfig has `default_usb_backend_config = 3`, whereas the written Stage-C\nfixture had value 1. This is preserved as an observed mutable backend-selection\nstate; no additional Config write was made to normalize it.\n\n## Scope disposition\n\nThe Runtime-B physical `Z + down-left -> (-38,-39)` discriminator was not\nperformed: the earlier accepted raw-output observer method was not available in\nthis terminal session, and no replacement procedure was invented. This is\n`NOT_TESTED`, not a regression claim. No firmware flash, rebuild, reset,\nLittleFS cleanup, or extra ProfileStore record mutation occurred.\n\nRaw COBS request/response transcript: `profile-store-transcript.jsonl`.\n"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/F7_NONREFERENCE_CRUD_RESULT.md",
+      "bytes": 1403,
+      "sha256": "b01ab9f63ec38f70adf6de5f8ddfa28b16aa74ed9712ecc86c29a2833500a3be",
+      "verbatim_receipt": "# F7 non-reference CRUD hardware result\n\nCandidate: `4ac255ebc6d2e416e0a7945614f3a3dcdbbd7922`.\n\nThe retained authoritative starting record was ID 1, revision 1, generation 1,\nrank 10, with the tracked Stage-A fixture payload.\n\n| Operation | Input generation / revision | Result | Output generation | Verification |\n|---|---:|---|---:|---|\n| RENAME | 1 / 1 | ID 1 / rev 1, `CRUD Primary` | 2 | LIST: name changed; rank 10 retained |\n| REORDER | 2 / 1 | ID 1 / rev 1, rank 20 | 3 | LIST: name retained; rank changed |\n| UPDATE | 3 / 1 | ID 1 / rev 2 | 4 | generation-bound READ matched Stage-A fixture; LIST metadata retained |\n| DUPLICATE | 4 / 2 | ID 2 / rev 1, `CRUD Copy`, rank 30 | 5 | LIST contains exactly IDs 1 and 2; READ ID 2 matched Stage-A fixture |\n| DELETE copy | 5 | ID 2 deleted | 6 | LIST contains only ID 1 |\n\nAfter one ordinary reboot, STATUS returned `PROFILE_STORE_OK`, generation 6.\nLIST returned only ID 1, revision 2, name `CRUD Primary`, rank 20. A\ngeneration-bound READ (expected generation 6) returned `PROFILE_STORE_OK` and\nthe payload byte-serialized equal to the Stage-A source fixture.\n\nNo Config operation was issued during this packet. No retry, reflash, build,\nreference mutation, or legacy-to-compact transition occurred. ID 1 remains\nintentionally retained for the next authorized continuation.\n\nRaw COBS request/response transcript: `profile-store-transcript.jsonl`.\n"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/FINAL_PRODUCTION_SELECTOR_REPAIR_RESULT.md",
+      "bytes": 3098,
+      "sha256": "d1cc3c0620ebbb9f79eabbdb61b0708a4ee644aeca6387c9a62c8d41f798229b",
+      "verbatim_receipt": "# Final production selector-repair hardware acceptance\n\n## Identity\n\n- Candidate: `f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113`\n- Tree: `fea1c14a5775b8f5db5ce85b2fed95ad6411d485`\n- UF2: `local_backups/hardware-artifacts/f7ba82d4cbe79d4353e8d87b7d1b24be3fc15113/256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21/firmware.uf2`\n- UF2 identity: 935424 bytes, SHA-256\n  `256d6e613750106e8c5f4938179331cc13db75b47e1a02a625de42277cef3a21`\n- Device information after flash reported firmware revision `f7ba82d4`.\n\n## Baseline and normalization\n\n- Inherited compact Config: 157 bytes, SHA-256\n  `47926ef4d6967fa6699679b5b7b61d3e7717e047aeb21eef5b6cef47654fad3a`;\n  durable USB default 3, mode references none/3/4, format 1, zero embedded\n  profiles.\n- Store baseline: generation 8; ID 1 revision 2 `CRUD Primary`, ID 3 revision\n  1 `Migrated 1`, ID 4 revision 1 `Migrated 2`; ID 2 absent.\n- Authorized normalization changed only `default_usb_backend_config` 3 -> 1.\n  Resulting durable baseline: 157 bytes, SHA-256\n  `b733eda97bf7d7fab8356b4b1fd94f2bbd5679ab6acc7bc8b1c33c0710ae5033`,\n  Config generation `2121190564`.\n- An ordinary reboot did not enter Configurator by default. The owner then used\n  the miniscreen **Connect to Configurator** route. Durable GET_CONFIG remained\n  byte-identical to the USB1 baseline before the reference write.\n\n## Selector-leak repair proof\n\n- SET_MODE_REFERENCE mode index 1: ID 3 -> ID 4, expected store/config\n  generations 8 / 2121190564: `PROFILE_STORE_OK`; store generation remained 8;\n  Config generation became `3865415860`.\n- Immediate semantic Config comparison against the USB1 baseline showed exactly\n  one difference: `game_mode_configs[1].ultimate_profile_id` 3 -> 4.\n  `default_usb_backend_config` remained 1 and every other decoded durable field\n  was equal.\n- DELETE ID 3 and DELETE ID 4 both returned `PROFILE_STORE_REFERENCED` at\n  generation 8.\n- After an ordinary reboot followed by the miniscreen menu Configurator route,\n  durable Config retained USB1 and mode references none/4/4; store generation\n  and entries were unchanged.\n- SET_MODE_REFERENCE restoration mode index 1: ID 4 -> ID 3, expected\n  generations 8 / 3865415860: `PROFILE_STORE_OK`; store generation remained 8;\n  Config generation returned to `2121190564`. Immediate Config readback was the\n  USB1 baseline.\n\n## Final state\n\nAfter a final ordinary reboot and menu Configurator entry:\n\n- Config: 157 bytes, SHA-256\n  `b733eda97bf7d7fab8356b4b1fd94f2bbd5679ab6acc7bc8b1c33c0710ae5033`;\n  USB default 1; compact format 1; zero embedded profiles; references none/3/4.\n- ProfileStore: generation 8; IDs 1/3/4 only; ID 2 absent.\n- Generation-bound reads of IDs 3 and 4 returned `PROFILE_STORE_OK`, revision\n  1, and byte-serialized equality to the two Stage-C fixture profiles.\n\nRuntime-B raw-output discriminator remains `NOT_TESTED —\nPHYSICAL_RUNTIME_OBSERVER_UNAVAILABLE`; no substitute observation was invented.\n\nNo canonical merge, rebuild, factory reset, or LittleFS cleanup occurred.\nRaw COBS request/response evidence is retained in `profile-store-transcript.jsonl`.\n"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/RESULT.md",
+      "bytes": 2281,
+      "sha256": "19c3e84bea41c51787fa96c6eb9d817d1511d70d75e9c74dba7b00885b92ceef"
+    },
+    {
+      "path": "local_backups/hardware-tests/multi-profile-store-20261013/profile-store-transcript.jsonl",
+      "bytes": 461580,
+      "sha256": "d37403118b77b5493f14f133aa9686dcc0ebd20d2cae656cf7fc6ec064cc4974"
+    }
+  ],
+  "final_hardware_result": "MULTI_PROFILE_STORE_FINAL_PRODUCTION_HARDWARE_PASS",
+  "strict_chapter_result": "MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED",
+  "runtime_b": "NOT_TESTED — PHYSICAL_RUNTIME_OBSERVER_UNAVAILABLE",
+  "build_resources": {
+    "ram_used": 221296,
+    "ram_total": 262144,
+    "flash_used": 455604,
+    "flash_total": 1568768,
+    "whole_target_maximum_stack": "NOT_FORMALLY_PROVEN",
+    "dynamic_heap_limit": "NOT_FORMALLY_PROVEN"
+  },
+  "no_firmware_build_or_hardware_actions_in_reconciliation": true,
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "transcript_readonly_crosscheck": {
+    "result": "PASS",
+    "rows": 119,
+    "row_indexing": "zero-based",
+    "final_production_rows": [
+      94,
+      118
+    ],
+    "semantic_config_comparison_rows": [
+      101,
+      103,
+      106,
+      109,
+      113,
+      114
+    ],
+    "reference_and_delete_rows": [
+      105,
+      107,
+      108,
+      112
+    ],
+    "final_store_rows": [
+      115,
+      116,
+      117,
+      118
+    ],
+    "scope": "Existing recorded decoded responses; physical reboot/menu observations remain owner-reported. No transport/device action."
+  }
+}

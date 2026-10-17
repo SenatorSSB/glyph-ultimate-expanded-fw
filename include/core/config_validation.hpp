@@ -15,6 +15,10 @@ struct ConfigValidationError {
 using ConfigSemanticValidator = bool (*)(const Config &, ConfigValidationError &);
 
 bool validate_config_extents(const Config &config);
+// Validates only an independently stored Ultimate profile.  Full Config
+// validation continues to own controller/backend/reference semantics.
+bool validate_ultimate_profile_semantics(const UltimateProfile &profile,
+                                         ConfigValidationError &error);
 bool validate_config_semantics(const Config &config, ConfigValidationError &error);
 
 #endif

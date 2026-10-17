@@ -1,10 +1,15 @@
 #include "button_positions.hpp"
 #include "comms/backend_init.hpp"
+#include "comms/ConfiguratorBackend.hpp"
 #include "core/CommunicationBackend.hpp"
 #include "core/config_usb_default_validation.hpp"
 #include "core/KeyboardMode.hpp"
 #include "core/Persistence.hpp"
+#include "core/ProfileStore.hpp"
 #include "core/mode_selection.hpp"
+#include "core/ModeSelectionTransaction.hpp"
+#include "core/ConfigWriteCandidate.hpp"
+#include "core/RecoveryInitialization.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
 #include "display/GlyphConfigMenu.hpp"
@@ -18,6 +23,7 @@
 #include "icons/splashscreen.hpp"
 #include "glyph_overrides.hpp"
 #include "glyph_config_validation.hpp"
+#include "config_rgb_target_domain.hpp"
 #include "glyph_pinout.hpp"
 #include "matrix_definition.hpp"
 #include "reboot.hpp"
@@ -67,13 +73,15 @@ enum class BootOutcome {
     StoredConfigRejected,
     StorageFailure,
     DefaultsRejected,
-    StartupConfigRejected
+    StartupConfigRejected,
+    RecoveryConfigurator
 };
 struct BootSnapshot {
     BootOutcome outcome = BootOutcome::Pending;
     bool display_ready = false;
 };
 BootSnapshot boot_state;
+ConfiguratorBackend *recovery_configurator = nullptr;
 
 BootSnapshot read_boot_state() {
     mutex_enter_blocking(&boot_state_mutex);
@@ -125,12 +133,41 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
     publish_boot_state(outcome, display_ready);
 }
 
+void request_mode_destination(CommunicationBackendId backend, size_t mode_index, const Config &) {
+    size_t backend_index = 0;
+    const ModeDestinationResult result = persist_mode_destination(
+        persistence, ConfigWriteCandidate(), backend, mode_index, backend_index);
+    if (result != ModeDestinationResult::Saved) return;
+    watchdog_hw->scratch[0] = backend_index + 1;
+    watchdog_hw->scratch[1] = mode_index + 1;
+    watchdog_hw->scratch[2] = kCommittedModeDestination;
+    reboot_firmware();
+}
+
+// Recovery deliberately reuses the single source-owned Configurator transport
+// and runs without gameplay, menu, display, or core1 initialization.
+void enter_recovery_configurator() {
+    watchdog_hw->scratch[0] = 0;
+    watchdog_hw->scratch[1] = 0;
+    watchdog_hw->scratch[2] = 0;
+    const RecoveryInitialization recovery = initialize_recovery(
+        persistence, profile_store, config, ConfigWriteCandidate(), validate_glyph_config);
+    Serial.begin(115200);
+    recovery_configurator = new ConfiguratorBackend(
+        inputs, input_sources, input_source_count, config, Serial);
+    recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
+    publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+}
+
 }  // namespace
 
 
 void setup() {
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
+
+    // Manual RT2 inspection is deferred by owner. Ordinary startup and MB1
+    // firmware bootloader routing remain independent of that retired route.
 
     //start screen early
     Wire1.setSDA(OLED_SDA);
@@ -168,15 +205,77 @@ void setup() {
     ConfigValidationError validation_error;
     if (!persistence.SetValidator(validate_glyph_config) ||
         !persistence.ValidateConfig(config, validation_error)) {
-        refuse_boot(BootOutcome::DefaultsRejected, display_ready);
+        enter_recovery_configurator();
         return;
     }
     const Persistence::LoadResult load_result = persistence.LoadConfigChecked(config);
     if (load_result != Persistence::LoadResult::Loaded) {
-        refuse_boot(load_result == Persistence::LoadResult::Rejected
-                        ? BootOutcome::StoredConfigRejected : BootOutcome::StorageFailure,
-                    display_ready);
+        enter_recovery_configurator();
         return;
+    }
+    const uint32_t expected_incarnation = config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat
+        ? config.ultimate_profile_store_incarnation : 0;
+    if (!profile_store.Begin(expected_incarnation, config.ultimate_profile_root_format) || profile_store.IsReadOnlyRecovery()) {
+        enter_recovery_configurator();
+        return;
+    }
+    if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
+        // A completed v1 store upgrade adds only the authenticated migration
+        // provenance field; stable references and all user Config fields remain.
+        if (!profile_store.ValidateCompactReceipt(config)) {
+            Config &compact = ConfigWriteCandidate();
+            compact = config;
+            if (profile_store.MigrationPending() || !profile_store.PrepareCompact(compact) ||
+                !persistence.SaveConfig(compact)) {
+                enter_recovery_configurator();
+                return;
+            }
+            config = compact;
+        }
+        if (profile_store.MigrationPending() &&
+            profile_store.CompleteMigration(config) != ProfileStore::Status::Ok) {
+            enter_recovery_configurator();
+            return;
+        }
+    }
+    if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0) {
+        uint32_t legacy_ids[2] = {};
+        uint8_t source_digest[32];
+        if (!persistence.CaptureLegacySource(source_digest)) {
+            enter_recovery_configurator();
+            return;
+        }
+        const ProfileStore::Status migration = profile_store.ImportLegacyStream(
+            config, source_digest,
+            [](void *, size_t index, UltimateProfile &profile) {
+                return persistence.ReadLegacyProfile(index, profile) == Persistence::LoadResult::Loaded;
+            }, nullptr, legacy_ids, 2);
+        if (migration != ProfileStore::Status::Ok && migration != ProfileStore::Status::MigrationFenced) {
+            enter_recovery_configurator();
+            return;
+        }
+        // Shared synchronous core0 scratch: no extra whole Config allocation or
+        // automatic migration frame; bodies are streamed one at a time above.
+        Config &compact = ConfigWriteCandidate();
+        compact = config;
+        if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact) ||
+            profile_store.CompleteMigration(compact) != ProfileStore::Status::Ok) {
+            enter_recovery_configurator();
+            return;
+        }
+        config = compact;
+    }
+
+    // Persist the independent v2 acceptance marker before any ordinary store
+    // mutation can be serviced, including a legacy Config with zero profiles.
+    if (config.ultimate_profile_root_format != 2) {
+        Config &compact = ConfigWriteCandidate();
+        compact = config;
+        if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact)) {
+            enter_recovery_configurator();
+            return;
+        }
+        config = compact;
     }
 
     // Create array of input sources to be used.
@@ -194,13 +293,14 @@ void setup() {
     );
 
     if (!is_valid_usb_default_index(config)) {
-        refuse_boot(BootOutcome::StartupConfigRejected, display_ready);
+        enter_recovery_configurator();
         return;
     }
 
     backend_count = initialized_backend_count;
 
-    setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count);
+    set_mode_destination_selector(request_mode_destination);
+    setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count, inputs.buttons);
 
     if(backend_count == 0) {
         failed_detection = true;
@@ -211,6 +311,10 @@ void setup() {
 }
 
 void loop() {
+    if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator) {
+        if (recovery_configurator != nullptr) recovery_configurator->SendReport();
+        return;
+    }
     if (read_boot_state().outcome != BootOutcome::Normal) return;
     if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
     select_mode(backends, backend_count, config);

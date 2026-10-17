@@ -1,0 +1,2028 @@
+{
+  "host": {
+    "transmitted_request_sha256": "98b21efae523d66c9e4151e9ece96e5df7fafd26df040e191206a2362f25c619"
+  },
+  "response": {
+    "config_generation": "3130536755",
+    "mutation_protocol_version": 2,
+    "profile": {
+      "output_program": {
+        "effects": [
+          {
+            "phase": "ULTIMATE_OUTPUT_PHASE_DIGITAL",
+            "target": "ULTIMATE_OUTPUT_TARGET_DIGITAL"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_SELECTED_TABLE",
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+            "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+            "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_INLINE",
+            "coordinates": [
+              28,
+              28,
+              128,
+              28,
+              228,
+              28,
+              28,
+              128,
+              128,
+              128,
+              228,
+              128,
+              28,
+              228,
+              128,
+              228,
+              228,
+              228
+            ],
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+            "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+            "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_TABLE",
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+            "mode_table_id": 1,
+            "phase": "ULTIMATE_OUTPUT_PHASE_DIRECTION_A",
+            "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_TABLE",
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+            "mode_table_id": 27,
+            "phase": "ULTIMATE_OUTPUT_PHASE_RF6",
+            "table_id": 27,
+            "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_INLINE",
+            "coordinates": [
+              77,
+              172,
+              128,
+              172,
+              179,
+              172,
+              77,
+              172,
+              128,
+              172,
+              179,
+              172,
+              77,
+              172,
+              128,
+              172,
+              179,
+              172
+            ],
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+            "phase": "ULTIMATE_OUTPUT_PHASE_RF7",
+            "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_INLINE",
+            "coordinates": [
+              86,
+              60,
+              128,
+              60,
+              170,
+              60,
+              86,
+              128,
+              128,
+              128,
+              170,
+              128,
+              86,
+              196,
+              128,
+              196,
+              170,
+              196
+            ],
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+            "phase": "ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL",
+            "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_INLINE",
+            "coordinates": [
+              95,
+              91,
+              128,
+              91,
+              161,
+              91,
+              95,
+              91,
+              128,
+              91,
+              161,
+              91,
+              95,
+              165,
+              128,
+              165,
+              161,
+              165
+            ],
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE_X_C_STICK_Y",
+            "phase": "ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL",
+            "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK"
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_FIXED",
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+            "fixed_x": 128,
+            "fixed_y": 128,
+            "phase": "ULTIMATE_OUTPUT_PHASE_NULL",
+            "target": "ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL"
+          },
+          {
+            "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+            "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_L",
+            "value": 140
+          },
+          {
+            "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+            "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_R",
+            "value": 140
+          },
+          {
+            "coordinate_mode": "ULTIMATE_COORDINATE_TABLE",
+            "direction_source": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+            "mode_table_id": 1,
+            "phase": "ULTIMATE_OUTPUT_PHASE_DPAD",
+            "target": "ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK",
+            "value": 7
+          }
+        ],
+        "enabled": true
+      },
+      "roles": [
+        {
+          "condition": {
+            "all_tokens": [
+              24
+            ]
+          },
+          "role_id": 1
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              37
+            ]
+          },
+          "role_id": 2
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              36
+            ]
+          },
+          "role_id": 3
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              34
+            ],
+            "none_tokens": [
+              4
+            ]
+          },
+          "role_id": 4
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              35
+            ],
+            "none_tokens": [
+              4,
+              19,
+              20
+            ]
+          },
+          "role_id": 5
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              35
+            ],
+            "any_tokens": [
+              19,
+              20
+            ],
+            "none_tokens": [
+              4
+            ]
+          },
+          "role_id": 6
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              19
+            ],
+            "none_tokens": [
+              35,
+              4
+            ]
+          },
+          "role_id": 7
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              25,
+              71
+            ]
+          },
+          "role_id": 8
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              72,
+              20
+            ]
+          },
+          "role_id": 9
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              41,
+              20
+            ],
+            "none_tokens": [
+              73
+            ]
+          },
+          "role_id": 10
+        },
+        {
+          "condition": {
+            "any_tokens": [
+              42,
+              43,
+              44,
+              45
+            ]
+          },
+          "role_id": 11
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              20,
+              75
+            ],
+            "none_tokens": [
+              74
+            ]
+          },
+          "role_id": 12
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              20
+            ],
+            "none_tokens": [
+              76,
+              73
+            ]
+          },
+          "role_id": 13
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              70,
+              19
+            ]
+          },
+          "role_id": 14
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              35,
+              77
+            ],
+            "none_tokens": [
+              4,
+              74
+            ]
+          },
+          "role_id": 15
+        },
+        {
+          "condition": {
+            "none_tokens": [
+              35
+            ]
+          },
+          "role_id": 16
+        },
+        {
+          "condition": {
+            "any_tokens": [
+              80,
+              4
+            ]
+          },
+          "role_id": 17
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              4,
+              18
+            ]
+          },
+          "role_id": 18
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              77,
+              81
+            ],
+            "none_tokens": [
+              41,
+              82
+            ]
+          },
+          "role_id": 19
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              41
+            ],
+            "none_tokens": [
+              20
+            ]
+          },
+          "role_id": 20
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              74
+            ]
+          },
+          "role_id": 21
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              77,
+              18
+            ],
+            "none_tokens": [
+              35,
+              4,
+              74
+            ]
+          },
+          "role_id": 22
+        }
+      ],
+      "routing_slots": [
+        {
+          "input_token": 1,
+          "slot_id": 1
+        },
+        {
+          "input_token": 2,
+          "slot_id": 2
+        },
+        {
+          "input_token": 3,
+          "slot_id": 3
+        },
+        {
+          "input_token": 4,
+          "slot_id": 4
+        },
+        {
+          "input_token": 5,
+          "slot_id": 5
+        },
+        {
+          "input_token": 17,
+          "slot_id": 17
+        },
+        {
+          "input_token": 18,
+          "slot_id": 18
+        },
+        {
+          "input_token": 19,
+          "slot_id": 19
+        },
+        {
+          "input_token": 20,
+          "slot_id": 20
+        },
+        {
+          "input_token": 21,
+          "slot_id": 21
+        },
+        {
+          "input_token": 22,
+          "slot_id": 22
+        },
+        {
+          "input_token": 23,
+          "slot_id": 23
+        },
+        {
+          "input_token": 24,
+          "slot_id": 24
+        },
+        {
+          "input_token": 25,
+          "slot_id": 25
+        },
+        {
+          "input_token": 26,
+          "slot_id": 26
+        },
+        {
+          "input_token": 29,
+          "slot_id": 29
+        },
+        {
+          "input_token": 32,
+          "slot_id": 32
+        },
+        {
+          "input_token": 33,
+          "slot_id": 33
+        },
+        {
+          "input_token": 34,
+          "slot_id": 34
+        },
+        {
+          "input_token": 35,
+          "slot_id": 35
+        },
+        {
+          "input_token": 36,
+          "slot_id": 36
+        },
+        {
+          "input_token": 37,
+          "slot_id": 37
+        },
+        {
+          "input_token": 38,
+          "slot_id": 38
+        },
+        {
+          "input_token": 41,
+          "slot_id": 41
+        },
+        {
+          "input_token": 42,
+          "slot_id": 42
+        },
+        {
+          "input_token": 43,
+          "slot_id": 43
+        },
+        {
+          "input_token": 44,
+          "slot_id": 44
+        },
+        {
+          "input_token": 45,
+          "slot_id": 45
+        },
+        {
+          "input_token": 52,
+          "slot_id": 52
+        },
+        {
+          "input_token": 53,
+          "slot_id": 53
+        },
+        {
+          "input_token": 54,
+          "slot_id": 54
+        },
+        {
+          "input_token": 55,
+          "slot_id": 55
+        }
+      ],
+      "schema_version": 3,
+      "table_rules": [
+        {
+          "condition": {
+            "all_tokens": [
+              86
+            ]
+          },
+          "priority": 1,
+          "table_id": 22
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              83,
+              84
+            ],
+            "none_tokens": [
+              86
+            ]
+          },
+          "priority": 2,
+          "table_id": 23
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              66
+            ],
+            "none_tokens": [
+              67,
+              68,
+              69,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 10,
+          "table_id": 4
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              66
+            ],
+            "none_tokens": [
+              65,
+              67,
+              68,
+              69,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 11,
+          "table_id": 2
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              67
+            ],
+            "none_tokens": [
+              66,
+              68,
+              69,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 12,
+          "table_id": 5
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              67
+            ],
+            "none_tokens": [
+              65,
+              66,
+              68,
+              69,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 13,
+          "table_id": 3
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              68
+            ],
+            "none_tokens": [
+              66,
+              67,
+              69,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 14,
+          "table_id": 8
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              68
+            ],
+            "none_tokens": [
+              65,
+              66,
+              67,
+              69,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 15,
+          "table_id": 6
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              69
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              78,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 16,
+          "table_id": 7
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              78
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 17,
+          "table_id": 10
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              78
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              79,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 18,
+          "table_id": 9
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              79
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 19,
+          "table_id": 12
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              79
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              83,
+              84,
+              85
+            ]
+          },
+          "priority": 20,
+          "table_id": 11
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              83
+            ],
+            "none_tokens": [
+              65,
+              66,
+              67,
+              68,
+              78,
+              79,
+              84,
+              85,
+              86
+            ]
+          },
+          "priority": 21,
+          "table_id": 19
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              84
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              78,
+              79,
+              83,
+              85
+            ]
+          },
+          "priority": 22,
+          "table_id": 25
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              84
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              78,
+              79,
+              83,
+              85
+            ]
+          },
+          "priority": 23,
+          "table_id": 20
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65,
+              85
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              78,
+              79
+            ]
+          },
+          "priority": 24,
+          "table_id": 26
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              85
+            ],
+            "none_tokens": [
+              66,
+              67,
+              68,
+              78,
+              79
+            ]
+          },
+          "priority": 25,
+          "table_id": 21
+        },
+        {
+          "condition": {
+            "all_tokens": [
+              65
+            ]
+          },
+          "priority": 250,
+          "table_id": 1
+        }
+      ],
+      "tables": [
+        {
+          "coordinates": [
+            {
+              "x": 61,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 195,
+              "y": 51
+            },
+            {
+              "x": 61,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 195,
+              "y": 128
+            },
+            {
+              "x": 61,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 195,
+              "y": 205
+            }
+          ]
+        },
+        {
+          "coordinates": [
+            {
+              "x": 14,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 242,
+              "y": 87
+            },
+            {
+              "x": 14,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 242,
+              "y": 169
+            },
+            {
+              "x": 14,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 242,
+              "y": 169
+            }
+          ],
+          "table_id": 1
+        },
+        {
+          "coordinates": [
+            {
+              "x": 93,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 163,
+              "y": 51
+            },
+            {
+              "x": 93,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 163,
+              "y": 128
+            },
+            {
+              "x": 93,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 163,
+              "y": 205
+            }
+          ],
+          "table_id": 2
+        },
+        {
+          "coordinates": [
+            {
+              "x": 82,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 174,
+              "y": 51
+            },
+            {
+              "x": 82,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 174,
+              "y": 128
+            },
+            {
+              "x": 82,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 174,
+              "y": 205
+            }
+          ],
+          "table_id": 3
+        },
+        {
+          "coordinates": [
+            {
+              "x": 78,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 178,
+              "y": 87
+            },
+            {
+              "x": 78,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 178,
+              "y": 169
+            },
+            {
+              "x": 78,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 178,
+              "y": 169
+            }
+          ],
+          "table_id": 4
+        },
+        {
+          "coordinates": [
+            {
+              "x": 65,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 191,
+              "y": 87
+            },
+            {
+              "x": 65,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 191,
+              "y": 169
+            },
+            {
+              "x": 65,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 191,
+              "y": 169
+            }
+          ],
+          "table_id": 5
+        },
+        {
+          "coordinates": [
+            {
+              "x": 61,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 195,
+              "y": 99
+            },
+            {
+              "x": 61,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 195,
+              "y": 128
+            },
+            {
+              "x": 61,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 195,
+              "y": 157
+            }
+          ],
+          "table_id": 6
+        },
+        {
+          "coordinates": [
+            {
+              "x": 69,
+              "y": 78
+            },
+            {
+              "x": 128,
+              "y": 78
+            },
+            {
+              "x": 187,
+              "y": 78
+            },
+            {
+              "x": 61,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 195,
+              "y": 128
+            },
+            {
+              "x": 61,
+              "y": 164
+            },
+            {
+              "x": 128,
+              "y": 174
+            },
+            {
+              "x": 195,
+              "y": 164
+            }
+          ],
+          "table_id": 7
+        },
+        {
+          "coordinates": [
+            {
+              "x": 14,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 242,
+              "y": 179
+            },
+            {
+              "x": 14,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 242,
+              "y": 169
+            },
+            {
+              "x": 14,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 242,
+              "y": 77
+            }
+          ],
+          "table_id": 8
+        },
+        {
+          "coordinates": [
+            {
+              "x": 87,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 169,
+              "y": 51
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 169,
+              "y": 205
+            }
+          ],
+          "table_id": 9
+        },
+        {
+          "coordinates": [
+            {
+              "x": 87,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 169,
+              "y": 87
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            }
+          ],
+          "table_id": 10
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 51
+            },
+            {
+              "x": 128,
+              "y": 51
+            },
+            {
+              "x": 87,
+              "y": 51
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 205
+            },
+            {
+              "x": 128,
+              "y": 205
+            },
+            {
+              "x": 87,
+              "y": 205
+            }
+          ],
+          "table_id": 11
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 87
+            },
+            {
+              "x": 128,
+              "y": 87
+            },
+            {
+              "x": 87,
+              "y": 87
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            }
+          ],
+          "table_id": 12
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 87,
+              "y": 99
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 87,
+              "y": 157
+            }
+          ],
+          "table_id": 13
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 87,
+              "y": 179
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 87,
+              "y": 77
+            }
+          ],
+          "table_id": 14
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 87,
+              "y": 99
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 87,
+              "y": 157
+            }
+          ],
+          "table_id": 15
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 87,
+              "y": 179
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 87,
+              "y": 77
+            }
+          ],
+          "table_id": 16
+        },
+        {
+          "coordinates": [
+            {
+              "x": 87,
+              "y": 99
+            },
+            {
+              "x": 128,
+              "y": 99
+            },
+            {
+              "x": 169,
+              "y": 99
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 157
+            },
+            {
+              "x": 128,
+              "y": 157
+            },
+            {
+              "x": 169,
+              "y": 157
+            }
+          ],
+          "table_id": 17
+        },
+        {
+          "coordinates": [
+            {
+              "x": 87,
+              "y": 179
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 169,
+              "y": 179
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 77
+            },
+            {
+              "x": 128,
+              "y": 77
+            },
+            {
+              "x": 169,
+              "y": 77
+            }
+          ],
+          "table_id": 18
+        },
+        {
+          "coordinates": [
+            {
+              "x": 187,
+              "y": 47
+            },
+            {
+              "x": 128,
+              "y": 47
+            },
+            {
+              "x": 69,
+              "y": 47
+            },
+            {
+              "x": 187,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 69,
+              "y": 128
+            },
+            {
+              "x": 187,
+              "y": 209
+            },
+            {
+              "x": 128,
+              "y": 209
+            },
+            {
+              "x": 69,
+              "y": 209
+            }
+          ],
+          "table_id": 19
+        },
+        {
+          "coordinates": [
+            {
+              "x": 88,
+              "y": 79
+            },
+            {
+              "x": 128,
+              "y": 79
+            },
+            {
+              "x": 168,
+              "y": 79
+            },
+            {
+              "x": 88,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 168,
+              "y": 128
+            },
+            {
+              "x": 88,
+              "y": 177
+            },
+            {
+              "x": 128,
+              "y": 177
+            },
+            {
+              "x": 168,
+              "y": 177
+            }
+          ],
+          "table_id": 20
+        },
+        {
+          "coordinates": [
+            {
+              "x": 69,
+              "y": 82
+            },
+            {
+              "x": 128,
+              "y": 83
+            },
+            {
+              "x": 187,
+              "y": 82
+            },
+            {
+              "x": 69,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 187,
+              "y": 128
+            },
+            {
+              "x": 76,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 180,
+              "y": 169
+            }
+          ],
+          "table_id": 21
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 47
+            },
+            {
+              "x": 128,
+              "y": 47
+            },
+            {
+              "x": 87,
+              "y": 47
+            },
+            {
+              "x": 169,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 87,
+              "y": 128
+            },
+            {
+              "x": 169,
+              "y": 209
+            },
+            {
+              "x": 128,
+              "y": 209
+            },
+            {
+              "x": 87,
+              "y": 209
+            }
+          ],
+          "table_id": 22
+        },
+        {
+          "coordinates": [
+            {
+              "x": 69,
+              "y": 78
+            },
+            {
+              "x": 128,
+              "y": 78
+            },
+            {
+              "x": 187,
+              "y": 78
+            },
+            {
+              "x": 69,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 187,
+              "y": 128
+            },
+            {
+              "x": 72,
+              "y": 172
+            },
+            {
+              "x": 128,
+              "y": 179
+            },
+            {
+              "x": 184,
+              "y": 172
+            }
+          ],
+          "table_id": 23
+        },
+        {
+          "coordinates": [
+            {
+              "x": 169,
+              "y": 88
+            },
+            {
+              "x": 128,
+              "y": 88
+            },
+            {
+              "x": 87,
+              "y": 88
+            },
+            {
+              "x": 169,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 87,
+              "y": 169
+            },
+            {
+              "x": 169,
+              "y": 168
+            },
+            {
+              "x": 128,
+              "y": 168
+            },
+            {
+              "x": 87,
+              "y": 168
+            }
+          ],
+          "table_id": 24
+        },
+        {
+          "coordinates": [
+            {
+              "x": 96,
+              "y": 82
+            },
+            {
+              "x": 128,
+              "y": 82
+            },
+            {
+              "x": 160,
+              "y": 82
+            },
+            {
+              "x": 96,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 160,
+              "y": 169
+            },
+            {
+              "x": 96,
+              "y": 174
+            },
+            {
+              "x": 128,
+              "y": 174
+            },
+            {
+              "x": 160,
+              "y": 174
+            }
+          ],
+          "table_id": 25
+        },
+        {
+          "coordinates": [
+            {
+              "x": 96,
+              "y": 86
+            },
+            {
+              "x": 128,
+              "y": 86
+            },
+            {
+              "x": 160,
+              "y": 86
+            },
+            {
+              "x": 96,
+              "y": 169
+            },
+            {
+              "x": 128,
+              "y": 169
+            },
+            {
+              "x": 160,
+              "y": 169
+            },
+            {
+              "x": 96,
+              "y": 170
+            },
+            {
+              "x": 128,
+              "y": 170
+            },
+            {
+              "x": 160,
+              "y": 170
+            }
+          ],
+          "table_id": 26
+        },
+        {
+          "coordinates": [
+            {
+              "x": 89,
+              "y": 89
+            },
+            {
+              "x": 128,
+              "y": 79
+            },
+            {
+              "x": 167,
+              "y": 89
+            },
+            {
+              "x": 79,
+              "y": 128
+            },
+            {
+              "x": 128,
+              "y": 128
+            },
+            {
+              "x": 177,
+              "y": 128
+            },
+            {
+              "x": 89,
+              "y": 167
+            },
+            {
+              "x": 128,
+              "y": 177
+            },
+            {
+              "x": 167,
+              "y": 167
+            }
+          ],
+          "table_id": 27
+        }
+      ]
+    },
+    "profile_id": 3,
+    "profile_revision": "1",
+    "protocol_version": 2,
+    "status": "PROFILE_STORE_OK",
+    "storage_fault_capable": true,
+    "store_generation": "160",
+    "store_incarnation": 1
+  }
+}

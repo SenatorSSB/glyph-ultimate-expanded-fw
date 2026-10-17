@@ -1,0 +1,34 @@
+{
+  "review_role": "fresh independent reviewer",
+  "phase": "architecture scope assessment before implementation freeze",
+  "status": "PASS_WITH_LIMITS_PENDING_FROZEN_IMPLEMENTATION_REVIEW",
+  "decision": "Host-recognized disconnect interval unknown is a hardware-validation limit, not by itself a blocker to owner-authorized Option C coordinated local hardware/software reset A/B candidate.",
+  "conditions": [
+    "No supported upstream deinit claim",
+    "No full cold-class-state reset claim: CDC coding and initialized lock infrastructure intentionally retained",
+    "No source proof or advance claim of host-recognized detach or dependable enumeration",
+    "Exact local quiesce/order/queue/class/control/DCD/IRQ ownership and read-only/manual-only invariants must pass independent frozen-source review",
+    "No timing delays, retry loops, new polling observer, descriptor or VID/PID redesign",
+    "Any unresolved local lifecycle safety invariant forces ARCHITECTURE_READY rather than CANDIDATE_READY"
+  ],
+  "rationale": "Owner expressly permits a source-grounded coordinated peripheral+software restart as the first A/B candidate, excludes combining timing delays, and reserves normal-control plus actual RT2 transport success to future hardware acceptance. Whether the host recognizes this one local restart is the experiment, not a precondition proven by host models.",
+  "inputs": [
+    {
+      "path": "/Users/rasmus.pekkarinen/.codex/attachments/3833efe1-0087-4d90-b5fc-a6075ec39f6c/Pasted text.txt",
+      "sha256": "e83bf09928c502cac8d8eb1e16f42d907cacce1c31a03506762cbf98a7d5b988"
+    },
+    {
+      "path": "local_backups/reinit/stack-lifecycle-audit.md",
+      "sha256": "07369d8a2f89ebc2ba1b70be9fcaa7005b4000dee59ca6f9c96652ab87f4c6bc"
+    },
+    {
+      "path": "local_backups/reinit/route-audit.md",
+      "sha256": "81b650f82c8793e42cd74b6d69f43cc9fd9ec0ea6bb1b65880bac6a7a37bf365"
+    }
+  ],
+  "device_actions": 0,
+  "implementation_edits": 0,
+  "builds": 0,
+  "hardware": "NOT_TESTED",
+  "underlying_rt2_usb_cause": "UNRESOLVED"
+}

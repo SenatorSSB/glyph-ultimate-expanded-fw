@@ -1,0 +1,100 @@
+{
+  "candidate": "895109eb662a8ad6b6c99889cb37a254dce49998",
+  "tree": "94d572cd23bd862a80d7891cd81c994a38f2c5a8",
+  "parent": "d59684b9368be61183881bdfc82adc774ad5f0ba",
+  "base_merge_base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "uf2_bytes": 980480,
+  "uf2_sha256": "62eef01798782459750cb300071564a45f366fe6da94116d21b6db29d861c6f5",
+  "permanent_full_campaign_classification": "HARDWARE_FAIL — LARGE_PROFILESTORE_REQUEST_RX_TIMEOUT_DURING_TICKETED_UPDATE",
+  "preserved_separate_read_gate": "MULTI_PROFILE_STORE_895_READ_GATE_HARDWARE_PASS",
+  "read_gate_scope": {
+    "physical_full_reads": 84,
+    "process_reconnect_cycles": 20,
+    "profile_ids": [
+      1,
+      3,
+      4,
+      22
+    ],
+    "partial_cobs_responses": 0,
+    "generation": 160,
+    "resource_min_free_stack_bytes": [
+      1936,
+      3716
+    ],
+    "heap_peak_bytes": 9048,
+    "heap_capacity_bytes": 74584,
+    "evidence": "tools/fixtures/profile_store_rx_host/895-read-gate-RESULT.md"
+  },
+  "physical_boundary": "LARGE_UPDATE_WIRE_TRANSMITTED_DEVICE_FRAME_READER_TIMED_OUT",
+  "failed_row": "A — record/open-write/fail-before",
+  "pre_row_state": {
+    "incarnation": 1,
+    "generation": 160,
+    "id22_revision": 130,
+    "pending": false,
+    "armed": false,
+    "useful_ids_1_3_4_hashes": "Matched, per explicit owner report; baseline ID1 and prior READ gate retained separately"
+  },
+  "pending_control": {
+    "arm_succeeded": true,
+    "pending": true,
+    "ticket": 1,
+    "armed": false,
+    "triggered": false,
+    "operation": 2,
+    "fault_control_version": 2,
+    "pending_status_succeeded": true
+  },
+  "actual_request": {
+    "protobuf_bytes": 3074,
+    "wire_bytes": 3089,
+    "protobuf_sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+    "wire_sha256": "9ac14ee426193d4ba07dac9484165007705f86e48f55d756da28e26fa4c11b20",
+    "fields_without_profile": {
+      "expected_profile_revision": "130",
+      "expected_store_generation": "160",
+      "expected_store_incarnation": 1,
+      "fault_ticket": 1,
+      "operation": "PROFILE_STORE_UPDATE",
+      "profile_id": 22,
+      "protocol_version": 2,
+      "request_token": "17293822569102704896"
+    },
+    "liveness_trace": false,
+    "receipt_and_transmit_journal_identical": true,
+    "host_os_write_completed": true,
+    "host_os_write_duration_ns": 449333
+  },
+  "received_after_update": {
+    "raw_chunk_count": 1,
+    "raw_bytes": 30,
+    "wire_hex": "1d0550726f66696c652073746f7265206672616d652074696d656f757400",
+    "wire_sha256": "768fe84df935a969f7150eb8308aad2017b949a5cf621888cf6aeb531cf1971f",
+    "command": 5,
+    "command_name": "CMD_ERROR",
+    "ascii_payload": "Profile store frame timeout",
+    "elapsed_after_os_write_ns": 5000585375,
+    "elapsed_after_transmit_attempt_ns": 5001034708,
+    "profile_store_response_frames": 0,
+    "liveness_stages": [],
+    "bytes_before_error_frame": 0,
+    "eop_seen_in_received_error": true
+  },
+  "boundary_reason": "Exact 895 HandleProfileStore emits this error only after ReadPacket sets _packet_timed_out; that branch returns before pb_decode, ticket activation and mutation dispatch. No liveness trace was requested, so absent stage 1 alone is not used as proof.",
+  "device_bytes_consumed": "UNKNOWN; failed candidate did not report RX counters",
+  "usb_physical_interrupt_schedule": "UNPROVEN by retained hardware trace; source-faithful deterministic reproduction is separate evidence",
+  "intended_record_open_write_fault_outcome": "UNTESTED",
+  "current_volatile_pending_armed_state": "UNKNOWN",
+  "persistent_post_row_state": "UNKNOWN",
+  "useful_profile_mutation_confirmed": false,
+  "post_failure_query_clear_retry_reboot_later_command": "NONE, per explicit owner report and retained operator stop",
+  "diagnosis_device_actions": "NONE",
+  "historical_classifications_preserved": [
+    "594066d9 HARDWARE_FAIL; subsequent reset adjudication PASS",
+    "d59684b9 HARDWARE_FAIL; physical blocked PC unproven",
+    "ARM_TRANSMISSION_UNPROVEN",
+    "USB_RACE_PHYSICAL_CAUSALITY_UNPROVEN"
+  ],
+  "fixture_manifest": "tools/fixtures/profile_store_rx_host/manifest.json"
+}

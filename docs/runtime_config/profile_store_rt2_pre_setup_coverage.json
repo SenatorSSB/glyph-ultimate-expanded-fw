@@ -1,0 +1,44 @@
+{
+  "status": "HOST_AND_SOURCE_PASS_HARDWARE_NOT_TESTED",
+  "base": "0f22b6d3b5d4a1a16fc7fd03866cfa44336de4ff",
+  "harness_receipt_sha256": "ae6460612cc086cf83c0d65a38376459554ea4769b7103c6586156b5b0ec61eb",
+  "runtime_cases": 89,
+  "negative_controls": 23,
+  "modeled_Thumb_ABI_trials": 48,
+  "dependencies": 756,
+  "focused_regressions": [
+    "persistence",
+    "root reconciliation",
+    "migration",
+    "strict hardening",
+    "CDC large TX895",
+    "CDC large RX4ee",
+    "selection",
+    "liveness d596",
+    "RX host",
+    "read storage",
+    "startup normal Configurator"
+  ],
+  "invariance": {
+    "HAL/pico/src/core/ProfileStore.cpp": "byte-identical to0f22",
+    "HAL/pico/src/core/Persistence.cpp": "byte-identical to0f22",
+    "include/core/ProfileStore.hpp": "byte-identical to0f22",
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp": "byte-identical to0f22",
+    "config/glyph/common/src/config.cpp": "byte-identical to0f22",
+    "ConfiguratorBackend::ConfiguratorBackend(": "function byte-identical to0f22",
+    "int ConfiguratorBackend::ReadByte(": "function byte-identical to0f22",
+    "size_t ConfiguratorBackend::ReadPacket(": "function byte-identical to0f22",
+    "void ConfiguratorBackend::SendReport(": "function byte-identical to0f22",
+    "bool ConfiguratorBackend::WriteProfilePacket(": "function byte-identical to0f22",
+    "message Config {": "message byte-identical to0f22",
+    "message UltimateProfile {": "message byte-identical to0f22",
+    "message ProfileStoreRequest {": "message byte-identical to0f22"
+  },
+  "limits": [
+    "source-faithful host models are not hardware acceptance",
+    "target ELF ABI/resources reviewed separately after exact commit/build",
+    "electrical BUS_RESET BUF_STATUS behavior UNKNOWN",
+    "root cause UNPROVEN",
+    "no global aggregate result claimed"
+  ]
+}

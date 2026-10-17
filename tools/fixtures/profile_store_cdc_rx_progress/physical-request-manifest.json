@@ -1,0 +1,18 @@
+{
+  "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/895-b9-b10/receipts/A-record-open-write-fail.request.json",
+  "receipt_sha256": "fdb1a4d236231444839c3c4d0d7a0b93c2748680ddfb2a21c4be4b10be32fdde",
+  "request_sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+  "request_size": 3074,
+  "controls": {
+    "physical-arm": {
+      "bytes": 20,
+      "sha256": "9138979ea738b83236820af535c67131d4806175f9da0914318cc69e11bc4d46",
+      "source": "tools/fixtures/profile_store_rx_host/arm.trace.jsonl"
+    },
+    "physical-status": {
+      "bytes": 7,
+      "sha256": "5f8123825df0c89a31cc4fab9f06ff999ec9bb1aa360e0a3781e1b8a04ab4e18",
+      "source": "tools/fixtures/profile_store_rx_host/pending-status.trace.jsonl"
+    }
+  }
+}

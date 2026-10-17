@@ -1,6 +1,7 @@
 #include "core/mode_selection.hpp"
 
 #include "core/state.hpp"
+#include "core/ProfileStore.hpp"
 #include "modes/CustomControllerMode.hpp"
 #include "modes/CustomKeyboardMode.hpp"
 #include "modes/FgcMode.hpp"
@@ -42,6 +43,13 @@ static_assert(kModeActivationMaskCapacity >= 13, "default mode set must fit acti
 uint64_t mode_activation_masks[kModeActivationMaskCapacity];
 
 size_t current_mode_index = SIZE_MAX;
+namespace {
+ModeDestinationSelector destination_selector = nullptr;
+bool mode_chord_consumed = false;
+}
+void set_mode_destination_selector(ModeDestinationSelector selector) {
+    destination_selector = selector;
+}
 
 namespace {
 
@@ -100,6 +108,11 @@ void set_mode(CommunicationBackend *backend, KeyboardMode *mode) {
 }
 
 void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config &config) {
+    // Called by backend initialization only. Remember the selected Config row
+    // without changing the persisted destination or resolving another profile.
+    for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
+        if (&config.game_mode_configs[i] == &mode_config) current_mode_index = i;
+    }
     switch (mode_config.mode_id) {
         case MODE_MELEE:
             melee_mode.SetConfig(mode_config, config.melee_options);
@@ -110,6 +123,17 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
             set_mode(backend, &projectm_mode);
             break;
         case MODE_ULTIMATE:
+            if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
+                ProfileStore::Status status;
+                const UltimateProfile *profile = profile_store.Activate(mode_config.ultimate_profile_id, &status);
+                // A failed selected record remains diagnostic in the store; the
+                // runtime uses only the established source-owned fallback.
+                if (mode_config.ultimate_profile_id != 0 && status != ProfileStore::Status::Ok &&
+                    status != ProfileStore::Status::RecoveredPrevious) profile = nullptr;
+                ultimate_mode.SetConfig(mode_config, profile);
+                set_mode(backend, &ultimate_mode);
+                break;
+            }
             if (mode_config.ultimate_profile_config > config.ultimate_profiles_count) {
                 break;
             }
@@ -184,7 +208,8 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
     // TODO: Use a counter variable to only run the contents of this function every x iterations
     // rather than on every single poll.
 
-    if (config.game_mode_configs_count > kModeActivationMaskCapacity) {
+    if (config.game_mode_configs_count > kModeActivationMaskCapacity ||
+        backends == nullptr || backends_count == 0 || backends[0] == nullptr) {
         return;
     }
 
@@ -196,19 +221,24 @@ void select_mode(CommunicationBackend **backends, size_t backends_count, Config 
         }
     }
 
-    for (size_t i = 0; i < config.game_mode_configs_count; i++) {
-        GameModeConfig &mode_config = config.game_mode_configs[i];
-        if (all_buttons_held(inputs.buttons, mode_activation_masks[i]) && i != current_mode_index) {
-            current_mode_index = i;
-            for (size_t i = 0; i < backends_count; i++) {
-                set_mode(backends[i], mode_config, config);
+    for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
+        if (all_buttons_held(inputs.buttons, mode_activation_masks[i])) {
+            if (!mode_chord_consumed) {
+                // Consume before I/O: a failed or uncertain publication cannot
+                // cause a tight save loop while this chord remains held.
+                mode_chord_consumed = true;
+                if (destination_selector != nullptr)
+                    destination_selector(backends[0]->BackendId(), i, config);
             }
             return;
         }
     }
+    mode_chord_consumed = false;
 }
 
-void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count) {
+void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count,
+                                    uint64_t boot_buttons) {
+    mode_chord_consumed = false;
     // Build bit masks for checking for matching button holds.
     if (mode_configs_count > kModeActivationMaskCapacity) {
         return;
@@ -219,5 +249,8 @@ void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t m
             mode_configs[i].activation_binding,
             mode_configs[i].activation_binding_count
         );
+        // A chord carried across reset is already consumed. It must be fully
+        // released before any destination can be requested again.
+        if (all_buttons_held(boot_buttons, mode_activation_masks[i])) mode_chord_consumed = true;
     }
 }

@@ -1,0 +1,1163 @@
+{
+  "base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "rejected_promotion": "cb9a5ab580da8d7aa0a6ab3d5aed9aa7195b82aa",
+  "selection_reference": "4ee63e26c912a0954ab9d7028a70a04ff80ced8d",
+  "semantics": "Reference is not automatically clean. Manifest follows explicit semantic partition and compile exclusion of acceptance-only source. Test fixtures may enable acceptance controls separately. RT2 historical source remains in original Git refs; not imported into active production.",
+  "files": [
+    {
+      "path": "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+      "sha256": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/include/core/CheckedStorageFile.hpp",
+      "sha256": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStore.cpp",
+      "sha256": "300d568a145baab2203a01906114244f6eed87443fa6241d6e14ad57e21b3c09",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/src/core/ResourceDiagnostics.cpp",
+      "sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/CheckedStorage.hpp",
+      "sha256": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/CompactConfigRecovery.hpp",
+      "sha256": "d8ff4e60420c5964c5d6ab863a4e28cc737a4fc7491eaf26043007846ce3dfc4",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ConfigWriteCandidate.hpp",
+      "sha256": "7f45aa7acbb8e3985a91af4bde26f4bd5aefcfb59154f7cc740775f93c56c24b",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ModeSelectionTransaction.hpp",
+      "sha256": "5ee7a5f854743127bb0344fefea938f477156405adae71abcce0c11aaf128ca1",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStore.hpp",
+      "sha256": "2fc0638819d5f3ae07b9c0e87ab1e2215479622058576c86f8b5afebbbda93d4",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreAtomicCommit.hpp",
+      "sha256": "2ff1ed344b3f79ea7798ca68665b90ba5d684de8fb818898441b441bf9f14cf9",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreCapacity.hpp",
+      "sha256": "7c63893a21efd5cf75926c83e107d4e3e36b456ffc6353e0cbe93f15879dcc9b",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreFaultControls.hpp",
+      "sha256": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreName.hpp",
+      "sha256": "3d1b30552c2e4eff0f515714d3b70cb346a5eefcd6fb67205e824c8d3775aeef",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStorePaths.hpp",
+      "sha256": "e2919e14fd17f820eb604a20117dc0fd33ee104aa53960607dd5f8eeb6c412e0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreReadTrace.hpp",
+      "sha256": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreRequestIdentity.hpp",
+      "sha256": "a0ee0e8d0d6d2c9f40404af3643a671ed405fd640a00b681b0664f8f663c3bd9",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreRxDiagnostics.hpp",
+      "sha256": "123f0e55754d8ad9b3e91b8f0f29f8e4360f428765af88e545d74d3afde26624",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreStorage.hpp",
+      "sha256": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ProfileStoreTransaction.hpp",
+      "sha256": "af647f116534fac3f10c473d11c8c93347d25b541efa8924c13454e34686f5ab",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/RecoveryInitialization.hpp",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/ResourceDiagnostics.hpp",
+      "sha256": "00cddf0ce9bd9a34c0f3daa54fd3f909946ce9c17f0a9ce9dbe3dfa28e8715ad",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/Sha256.hpp",
+      "sha256": "ba6080472c663e99489e378382af6ff3718ef8f737f9e7aaf375b4f187fa9e83",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/StackWatermark.hpp",
+      "sha256": "7b87846fa11a0910ec0c4fc6c5fd5520c78dffd6bce1015c335983ab9845f236",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "src/core/ProfileStore_stub.cpp",
+      "sha256": "2c4021af6daf08d2f2dc312aa192e1c88524ac0a9f85fcaff837d78c4b0bea3f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_checked_storage_host.py",
+      "sha256": "4f74553cb492761c8ec767a3e5f50fbb3aa9818d4122ec2409ddac9e5bf1d886",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_configurator_usb_coordination.py",
+      "sha256": "b3299f1ceb20dc9be5251dd21d1fb99c5f7bdafa8d6957dec387de2f3bfcd7fa",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_liveness_resource_safety.py",
+      "sha256": "e7992ca70d40884c9a7390f4892f4da0bb1edd885d2f39b9b4054a102941df70",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_atomic_commit.py",
+      "sha256": "f97804f0fdb0b095863559ea6e8964e9cbab93cb58a2208d9e371d97f5c0a650",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_candidate_tool.py",
+      "sha256": "efb5d2e693d4b2ed7be36dcc9ce5279163842c77d5be410ca20b5182d792a1db",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_cdc_progress.py",
+      "sha256": "8f6fde8a815ec7ca97b501dcca859d0df177cc5409318f7586619820229b2a6e",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_cdc_rx_progress.py",
+      "sha256": "9ec6a98ecc005fe9317827754856fa247541ed9867a746f6c8b0127c5570f700",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_config_persistence.py",
+      "sha256": "2523efed3d06f488f5113a414560ffa31aca2618d9962b0214f6432e1a11cfe5",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_create_stack.py",
+      "sha256": "b8f2a4bcacfe575ae8d5d15c0507a04000973dfe91336c5f865efde49fb70360",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_directory_decoder.py",
+      "sha256": "705a33cb18a616084b756824e561b5118d94f4e9618276b702e1e4518d3dbbf9",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_directory_stack.py",
+      "sha256": "454e908a9ffbcc5ba8a4d61e7d7cfc216689abbc38939b76aa8463649fc5ff24",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_littlefs_host.py",
+      "sha256": "d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_liveness_host.py",
+      "sha256": "60925e819cc53330a6f198888baf6b5387079887ae60d6851d9a70ab3e4c10ec",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_migration_lifecycle.py",
+      "sha256": "2e377fea130c93b080e1d2e31f20ee03a2b470bc9318a9493532420276ffe376",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_production.py",
+      "sha256": "008c8e07063ec544a4a557eeae478dbc794477dd04de3fb6be1c3308bd355308",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_read_stack.py",
+      "sha256": "9af7423f4b394312221c4fb3ef8abf09c4e0ef9f48dd4b31b87b22994cb9d15d",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_read_storage.py",
+      "sha256": "07f4704a8e09d36edccae204b83135666ed72ccf338fb7d73c64f4b4a477506e",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_request_identity.py",
+      "sha256": "974d54054677de9170440443c207428074b9e76450d1651596ab30d1d8fd99d9",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_rx_host.py",
+      "sha256": "d13b83d91df6e056a664a4e1d6cc3bc5f342ee9b759ba0ca66f586fb373584f4",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_rx_stack.py",
+      "sha256": "c0890a26b28d649dcab60d7881d6bb4145c53f009319a2887657f163fd5ba21d",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_selection_recovery.py",
+      "sha256": "09b9c4edb5baa754ff1df9fefb6b6cfc99c86f796ec153340ddeab81c98642fc",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_strict_host.py",
+      "sha256": "3581290cda011c17c79acff0fef50c7f6c02327259047312d124abb2bee5dc77",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_strict_protocol.py",
+      "sha256": "fe385469e02754833765bbe72d5e6cc8119e65da228a9e1804165e6beda58177",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_profile_store_timeout_resynchronization.py",
+      "sha256": "31d63d5135dae4b693aef1c056e23fcbf7f31e93d8cbdff17487faf037657e9b",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_real_predecessor_config.py",
+      "sha256": "17604ad8b3b7e5ed2c88a1d868b6df2b9757058fbd7f955f675fa81641cf3ba7",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/check_glyph_resource_diagnostics.py",
+      "sha256": "3cfd6a8814bf0380d078dee300a86f6a37bc59b7134e58f7179399828f43d7e8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/checked_storage_host/checked_storage_harness.cpp",
+      "sha256": "de6b29160694cbd76a4bb9eca55a891353de2ddbe047fae278dd5d4011d8ba3e",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_atomic_commit_host.cpp",
+      "sha256": "58bb6f3974adc3384ffe25a55877047a00e31c70d6d224ec32ec549526d85730",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/.gitattributes",
+      "sha256": "a93a393ff30e04cb20c2272c1c7f05d79a4cbcf427103266c9ef05eccecb72fc",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/cdc_fixture_tail.c",
+      "sha256": "ef3e56399d3b5e152ec9ba635f8baeb6e15a4b716073c54bb7141e28283e1938",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/harness.cpp",
+      "sha256": "152c1d14f5aa040abfbf2f0379576060c768eb32433860d046cc93d3688d3b98",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Adafruit_TinyUSB_API.h",
+      "sha256": "1430a5d67fcc2b38f8eb3fe0b5d41d9015bdab0636e4a7a9361084d8c6b2e0a8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Arduino.h",
+      "sha256": "488e16577b7fc0b181198649ada279b1eb49a8475c9d91c734ad8bf025200087",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Print.h",
+      "sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/Stream.h",
+      "sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/fixture_tusb_config.h",
+      "sha256": "1453db57ffa3a9a44da6676ad3466a8020a97ab8a25ac3bfebb7dd70f3ab3162",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/critical_section.h",
+      "sha256": "0369206df8930370d2d09040c3c1f29346d5dc13d62cfe358dccd7bed5f3948f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/mutex.h",
+      "sha256": "adbd6a0aec4d58dfb95510852cfa43960c338878af1e899317f235d51984ed65",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/sem.h",
+      "sha256": "709e35879441ec825c49bb620dc1689c065e58261d9f46aa6092a84f115167ef",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/include/pico/time.h",
+      "sha256": "ed400cffdada38dd46c412cd94ae4e871cbd491a6f277dd9a46301cacb709605",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/list.pb",
+      "sha256": "657ac6d8c161f256264c66e4149e927e0d418674e8700fa4f4fde0b7eed1b93c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/maximum-stage-c-response.pb",
+      "sha256": "b638e45cd4b2e0f6b2537db35fe04a559190e266aa63ab7fbd750ec22e6eaf1a",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/payload_manifest.json",
+      "sha256": "9920dd02db6dd5adbc69f3ec78c7d171f1abe8cd5991641c2033443cf8d5e95c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id1-response.pb",
+      "sha256": "74ed1ed9728c89bc988f80552326a6ddec1cce51e006e623ff0042a3dfb35342",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id22-response.pb",
+      "sha256": "9b40fc1411f7595d6851a2431c3c6df2060e5b772501c14f31b4d6b79a425840",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id3-response.pb",
+      "sha256": "a9f5e851f9cb6c6ab60f8ab2940d9c590c6e19434319b8a65def690223b24b43",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/physical-id4-response.pb",
+      "sha256": "e051fdb67aa1c0e270add82e11655fb201563ec7ea1caf2662b6e5bdc5792dc6",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_progress/status.pb",
+      "sha256": "adafe848ca76e4f3315ac3299f75e10d543fd2073666c9670fcee9832178ab59",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/.gitattributes",
+      "sha256": "a93a393ff30e04cb20c2272c1c7f05d79a4cbcf427103266c9ef05eccecb72fc",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/cdc_fixture_tail.c",
+      "sha256": "d8566d80d1d7e8502068ab3e6a8e658eeebf8ef8d9968977c3e756f821c5b5c0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/harness.cpp",
+      "sha256": "bd5082fc661e2ad89c8c4f8bfc932accd89dcb001efe531f71a2c5fcd8fbb1f7",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Adafruit_TinyUSB_API.h",
+      "sha256": "1430a5d67fcc2b38f8eb3fe0b5d41d9015bdab0636e4a7a9361084d8c6b2e0a8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Arduino.h",
+      "sha256": "488e16577b7fc0b181198649ada279b1eb49a8475c9d91c734ad8bf025200087",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Print.h",
+      "sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/Stream.h",
+      "sha256": "03dc557aeaebc60eaa27f58195ac98755593cee7c02dde89f7940fb6ead4e667",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/fixture_tusb_config.h",
+      "sha256": "1453db57ffa3a9a44da6676ad3466a8020a97ab8a25ac3bfebb7dd70f3ab3162",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/critical_section.h",
+      "sha256": "0369206df8930370d2d09040c3c1f29346d5dc13d62cfe358dccd7bed5f3948f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/mutex.h",
+      "sha256": "adbd6a0aec4d58dfb95510852cfa43960c338878af1e899317f235d51984ed65",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/sem.h",
+      "sha256": "709e35879441ec825c49bb620dc1689c065e58261d9f46aa6092a84f115167ef",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/include/pico/time.h",
+      "sha256": "ed400cffdada38dd46c412cd94ae4e871cbd491a6f277dd9a46301cacb709605",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-arm.pb",
+      "sha256": "9138979ea738b83236820af535c67131d4806175f9da0914318cc69e11bc4d46",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-request-manifest.json",
+      "sha256": "81a71880ae34e7da326c0fbe591feddb1b5f1387905b4e78fe456ba3e9183c04",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-status.pb",
+      "sha256": "5f8123825df0c89a31cc4fab9f06ff999ec9bb1aa360e0a3781e1b8a04ab4e18",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_cdc_rx_progress/physical-ticketed-update.pb",
+      "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/README.md",
+      "sha256": "a59ba14e727740b4518b67dc95412671f9a1171a1b905d5898c5e28ae0d63226",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/checked_storage_double.cpp",
+      "sha256": "7a6146b2179b07f4a94ba7d5c96fe52834f6220c633c50fae8458b06b4baebf8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/Arduino.h",
+      "sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/LittleFS.h",
+      "sha256": "cf0d734e8f51899a178d278ddad5227e0c74dd1071c98935a9301211c026757a",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/Print.h",
+      "sha256": "8ba02480d466a2f5e4f9ae04bfe4f923fe685b3c813a9c2b7499128efb657cb0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/include/Stream.h",
+      "sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_config_persistence_host/persistence_harness.cpp",
+      "sha256": "f79390708edf20b870bcd4d109d0aa9b6ad6bb448ae203445d4188932f8d7560",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_directory_decoder_host.cpp",
+      "sha256": "2fef26e55415cd644c838eb2ae1f59987c4c281cecf21daea84b245c0a439018",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_littlefs_host/littlefs_harness.cpp",
+      "sha256": "384ad8f82f67bb1e2be35017a44b1a3226b49901e98276b84d2d1177a4912152",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_liveness_host/lfs_alloc.h",
+      "sha256": "39f6e1ba919022a795eb0a3556f1fcbebec47ce32aa801f1f9ee435c48f6ef8a",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_liveness_host/liveness_harness.cpp",
+      "sha256": "8bcffde2dc4cdf6ed79f142fcc938327d01d0013d57f8bcf290df73311571118",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_migration_lifecycle_host/checked_storage_unavailable.cpp",
+      "sha256": "a9fb4b1d005d773a1f62c7087b953d40c0baf7458a93b576afed8a7401f1fe2b",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_migration_lifecycle_host/include/LittleFS.h",
+      "sha256": "a80ee25105383a3e7e3be850be415f37df7f2daf3c5e4c081b35ce98581cc7d8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_migration_lifecycle_host/migration_lifecycle.cpp",
+      "sha256": "65e0de36c4eecbb1c5a170559864a6d1cbd5a764dafa59e5428340846c2e1dec",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_predecessor_host/replay_validation.cpp",
+      "sha256": "d4bee879745764a5854e32e8d6e5e43590f69ae3e1c3ea8be993bd4ab81414f8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id1_response.json",
+      "sha256": "a7db2b980f826845d060041233696d10038f46baf3765b0baf7212a09fe52050",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id22_response.json",
+      "sha256": "b30b8275c9fcab96d4177ee96b9626c7fe1759b2a62f798d543c2239cc4b5aed",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id3_response.json",
+      "sha256": "2429b2b10320a3d25655436868f58ecb1793b68b92ab4d045175e53cf63741e0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/physical_id4_response.json",
+      "sha256": "e9e37bfff40a5a50239c260a651cc17d453dba78a0f5198914176b6a0f6d52b8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/read_observer.inc",
+      "sha256": "5299fd985c7e968123ac9a1211b732cc10c69f4ccb59ac6dd0b3d4b0841a733f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_read_storage/read_tail.inc",
+      "sha256": "88ebd46920d11c4b5340e4c1208ecce8f8e2b2e95f016058e15ede1aa246e655",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_request_identity_host.cpp",
+      "sha256": "ba84ebfe89c8d56c26880eacaa236635a05dfcec2dd3c9e1e3fdf81c247e359e",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/.gitattributes",
+      "sha256": "a93a393ff30e04cb20c2272c1c7f05d79a4cbcf427103266c9ef05eccecb72fc",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/895-read-gate-RESULT.md",
+      "sha256": "c02445a06af4f95ec89d54f5f63e68e74ea7585900e68763854cacd36420898a",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/arm.json",
+      "sha256": "d822b134c0c47fef0ec13331e79c2bb742ac78ad9e43a510bca0c4dce7b8ddbe",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/arm.trace.jsonl",
+      "sha256": "b4db26d956422ad7658c7bdcd876e24250272233135a5d4788c4ca69f620e65b",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/fault_pending.cpp",
+      "sha256": "c0c2b7ab677027944d2383223a11ede0c8ab5dff4aa558a87bd60cc1fd20f306",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/manifest.json",
+      "sha256": "29a8bc75581b47dc379d69ee0408ecb571336f25452363c86fdc668fdb53edce",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/mutation.trace.jsonl",
+      "sha256": "c83e9e468ff7e771f58c20dc7d072a45929f1b1e875947edda829d4c55b49757",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/operator.stderr.log",
+      "sha256": "fd9b38c231c1b25ccba7948c7f326f6ab934e70d68a288b30d6a952315bcdfe6",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/pending-status.json",
+      "sha256": "2f77d652b2f46d63b384b0a3163026224018b66cd0f26e5d55e0f9d1a983c2ed",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/pending-status.trace.jsonl",
+      "sha256": "feec641248a10345a3c861fc7a3f6a5e5d13e526a2d8e01209a7ec2257b89066",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/physical-update.cobs",
+      "sha256": "9ac14ee426193d4ba07dac9484165007705f86e48f55d756da28e26fa4c11b20",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/physical-update.pb",
+      "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/pre-status.json",
+      "sha256": "aa8426ae78afa8204929a039ab7c07931b3b325ff2c68e4d15d2fc550d4078cf",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/receipt.json",
+      "sha256": "fdb1a4d236231444839c3c4d0d7a0b93c2748680ddfb2a21c4be4b10be32fdde",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_rx_host/write_all_895.py",
+      "sha256": "54445e5d6b44b91a3a21ce986109f2f42998cdd31f878dd941d05941e6cb4bc4",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/README.md",
+      "sha256": "c0e41e2c21cfda054c94269dd483fcbe7f7d7e76b153e4643b3f94ff64bc77fa",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/include/core/ProfileStore.hpp",
+      "sha256": "abd6504e9477f6ded3a0e261adec076e4b5965aace6003b9af96526b559c8b1f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/selection_recovery.cpp",
+      "sha256": "f6868e472997d82b3be85cf2b65ac36368bb8995424da684d68f36ee77065ec7",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/setup_routes.cpp",
+      "sha256": "90f0cbefdcf29d07b372ba256000b273f9f6e104a8ebdac721f672e6dedb6000",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_strict_host/negative_harness.cpp",
+      "sha256": "ab1e5ba3c1c8d6d9e147f46433907dd9357c25613695cf690e3af4b770557497",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_strict_host/strict_harness.cpp",
+      "sha256": "f1f4c2698d996578efbb91d78ed8b461dd7b6775e061c71ffff20762f011bced",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/checked_storage_unavailable.cpp",
+      "sha256": "b283926c2b2cae06a4de47c3f431ae23e98d49e8d9860757fb2bad181a6bc9d2",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/Arduino.h",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/LittleFS.h",
+      "sha256": "e2c16945e2885ab45ef6533d83a2ba87d85fef6a926e0b9404ed838242723d4c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/Print.h",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/Stream.h",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/arduino/Adafruit_USBD_Device.h",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/CommunicationBackend.hpp",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/InputSource.hpp",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/Persistence.hpp",
+      "sha256": "df832cf624544db67016e621636925c055caee4b3e673d9f700a4a1b8ad3e75f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/ProfileStore.hpp",
+      "sha256": "5ec21ff3a31fe9f7713e38fbb1e467e4d8f6c233af319af82cc3daa678dfcc42",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/core/config_validation.hpp",
+      "sha256": "951dd4a5d6a65c0e112e0debd0698bcd117939db69560c8711a7d46356cc9be6",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/host_stubs.hpp",
+      "sha256": "c44d2c03642ceab352dccfc221b44e70fb9a3c4a0ca650c4b0afd943f705ce4c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/include/reboot.hpp",
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/profile_store_timeout_host/timeout_harness.cpp",
+      "sha256": "bca272e30551d44ce4c391d30c123112e091932d1d44dbaf1b9c9636df292ec1",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/glyph_profile_store_candidate_tool.py",
+      "sha256": "351b2d97c59e8037fe9ce921897a418c773d8de14bd49c8b45de3b20bd1a19e4",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/measure_glyph_profile_store_resources.py",
+      "sha256": "2a07bab4fdecca302bc4dc70f404aec04d8d653614221b9dded88000d8fc1a7f",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "sha256": "f503a7b87a5fff0a3a851fadf19fc33ad104b2949997fe3b1b4687ae11be292b",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "sha256": "b2ffb00a4ae6a05d047c0c8d53bf1a481fa8d68fbaa991630a18e56c7843f553",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "33ebb607e553ef5008a789fe0f2101fab41a37210ea1739dc41c63691c391a0f",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "94b442b830f4a7a44c6bb0b56d50d3898d472b7ef94357b0a261f1c9e71871d0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+      "sha256": "aaa1859f1964bcf99145fc6a0210f835c7f9f05ab64705f6700f40be618f682d",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "cd2c24cf77b393a902da7217566b8c332692c2fd179cb376e175e56f827b7914",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "config/glyph/env.ini",
+      "sha256": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/config_rgb_target_validation.hpp",
+      "sha256": "f75b4229ec193c172f9bc8b1d38a44a29d34b039763542a9788bda2974c35a0f",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "sha256": "1c73c8b2ab2c0ded58f8023e1236cc28af8e3c8d76d946a904708074f9849fc2",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "include/core/mode_selection.hpp",
+      "sha256": "f3ee863138396ed70d4bf6a194dba0aa9a2a0335ec7373426df990b37cf9c059",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "schema/haybox/config.options",
+      "sha256": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "schema/haybox/config.proto",
+      "sha256": "78410e553bdd624be62db7e80d9d64a8fee5700aa9190cd8a7b7fda1d26e42a5",
+      "selection": "reviewed production retirement/test adaptation",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "src/core/config_rgb_target_validation.cpp",
+      "sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "sha256": "655b69596d8d08b627517a80746f376891b47a8a2199c01a919bc0ccf542d6fc",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "sha256": "857d2a147ae45908a13cdf7dc7f3892dfdfc9322f23d692156a1508b70bcb872",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": true,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    },
+    {
+      "path": "tools/fixtures/configurator_setconfig_host/include/host_stubs.hpp",
+      "sha256": "c633c15fe4dfdadd61ad6851d42f73c9dffb36f04e6d36a50c87616bcb5d51b8",
+      "selection": "4ee63e26 exact bytes",
+      "production_path": false,
+      "source_authority": "profile_store_production_partition.json; source audit; latest owner e1c7a932"
+    }
+  ]
+}

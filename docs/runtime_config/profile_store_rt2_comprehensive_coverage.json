@@ -1,0 +1,141 @@
+{
+  "schema": "glyph_rt2_comprehensive_coverage_v1",
+  "parent": "b1a50079d1e2b8bca5dc2848c84b4a3cabbb181a",
+  "result": "READY_WITH_RESIDUALS",
+  "branches": [
+    {
+      "id": "A",
+      "family": "first foreground task never entered",
+      "captured_telemetry": "entered=0; active=0",
+      "single_photo": "MB1 RED; reset/setup independent",
+      "residual": "none beyond observer availability"
+    },
+    {
+      "id": "B",
+      "family": "first task returned normally",
+      "captured_telemetry": "first_returned/latest_returned/returned",
+      "single_photo": "MB1 GREEN unless later active",
+      "residual": "history remains captured telemetry"
+    },
+    {
+      "id": "C",
+      "family": "first active, zero resets",
+      "captured_telemetry": "active=first_id; active_resets=0",
+      "single_photo": "MB1 ORANGE + OFF",
+      "residual": "active age is observed duration, not infinite block"
+    },
+    {
+      "id": "D",
+      "family": "first active, one reset",
+      "captured_telemetry": "active_resets=1",
+      "single_photo": "MB1 ORANGE + BLUE; LF4 processing stage",
+      "residual": "one emission is not storm"
+    },
+    {
+      "id": "E",
+      "family": "first active, multiple resets",
+      "captured_telemetry": "active_resets>=2",
+      "single_photo": "MB1 ORANGE + MAGENTA",
+      "residual": "2+ not infinite/reset cause"
+    },
+    {
+      "id": "F",
+      "family": "reset processing stalled",
+      "captured_telemetry": "reset_consumed/stage/class masks",
+      "single_photo": "LF4 RED/ORANGE/YELLOW/CYAN/GREEN",
+      "residual": "XInput empty/local; MSC/HID refinement telemetry only"
+    },
+    {
+      "id": "G",
+      "family": "reset completed but task active",
+      "captured_telemetry": "reset_completed + active; continued/empty_reads",
+      "single_photo": "MB1 active + LF4 WHITE or BLUE",
+      "residual": "no whole task/block causality claim"
+    },
+    {
+      "id": "H",
+      "family": "later foreground active",
+      "captured_telemetry": "active>first_id; latest_returned; first_returned",
+      "single_photo": "MB1 YELLOW recent or WHITE>=1s observed",
+      "residual": "short healthy call can be caught; age qualifier"
+    },
+    {
+      "id": "I",
+      "family": "raw SETUP without DCD emission",
+      "captured_telemetry": "raw_setup_seen>0; !(event_flags&2)",
+      "single_photo": "LF3 BLUE",
+      "residual": "positive sampling only; physical no-SETUP residual"
+    },
+    {
+      "id": "J",
+      "family": "DCD SETUP not consumed/control",
+      "captured_telemetry": "event_flags&2; setup_consumed/control_began=0",
+      "single_photo": "LF3 CYAN, plus queue-loss pixel",
+      "residual": "queued versus deferred exact counters in telemetry"
+    },
+    {
+      "id": "K",
+      "family": "SETUP consumed/control began without descriptor",
+      "captured_telemetry": "setup_consumed/control_began; task_flags&1=0",
+      "single_photo": "LF3 GREEN/WHITE with LF5 OFF",
+      "residual": "exact static internal process_control_request cannot wrap beyond first external call"
+    },
+    {
+      "id": "L",
+      "family": "descriptor/address but no config",
+      "captured_telemetry": "task_flags descriptor/request/applied; configured_current=0",
+      "single_photo": "LF5 YELLOW/CYAN/BLUE",
+      "residual": "submission never host ACK"
+    },
+    {
+      "id": "M",
+      "family": "configured without host serial",
+      "captured_telemetry": "configured_current shadow; legacy current mounted if serial",
+      "single_photo": "LF5 GREEN + host serial absent",
+      "residual": "last software boundary, not physical host node proof"
+    },
+    {
+      "id": "N",
+      "family": "supported recovery protocol decoded",
+      "captured_telemetry": "task_flags&16; require actual read-only replies",
+      "single_photo": "LF5 WHITE",
+      "residual": "WHITE does not prove response success/full B7 acceptance"
+    },
+    {
+      "id": "O",
+      "family": "BUS_RESET but no raw SETUP observed",
+      "captured_telemetry": "total_resets>0; raw_setup_seen=0",
+      "single_photo": "LF4 count positive + LF3 no raw/DCDevent",
+      "residual": "HOST_PHY_SETUP_RESIDUAL + RAW_SETUP_SAMPLING_RESIDUAL"
+    },
+    {
+      "id": "P",
+      "family": "queue critical RESET/SETUP loss",
+      "captured_telemetry": "attempted/accepted/failed + reset_dropped/setup_dropped/max16",
+      "single_photo": "LF3 RED/ORANGE/YELLOW or MAGENTA full",
+      "residual": "occupancy at software boundaries only"
+    },
+    {
+      "id": "Q",
+      "family": "below software electrical/host behavior",
+      "captured_telemetry": "no safe direct observer",
+      "single_photo": "host tree/endpoint separate observations",
+      "residual": "HOST_PHY_SETUP_RESIDUAL"
+    }
+  ],
+  "critical_additional": {
+    "pre_vs_in_task": "pre_first_resets and invocation-tagged active_resets exact; first-active MB1+LF4 total/current distinguish pre-only vs current",
+    "pre_vs_post_after_first": "exact pre/first/post counters; PANEL_SUMMARY_RESIDUAL when endpoint absent",
+    "reset_after_first_return": "post_first_resets, first_returned and current identity; event never attributed to old invocation",
+    "classes": "CDC/MSC/HID/MIDI exact entry/return masks; XInput empty/local boundary residual; photo groups MSC/HID between CDC/MIDI",
+    "queue_empty": "empty_reads and first/current return; next-read continuation independent reset completion",
+    "software_irq_trylock": "actual port remains nonblocking; IRQ task count does not enter foreground identity",
+    "configuration_retirement": "RESET/UNPLUG consume or SETCFG0 retires shadow, history MAGENTA",
+    "captured_vs_live": "task telemetry frozen once with photo; existing raw USB fields explicitly live",
+    "prior_to_enable_reset": "queued-before-enable RESET or genericUNPLUG can complete with after-enableDCDtotal0; panelstage7 groupedWHITE, exactstage7/continued remains telemetry, avoiding BLUE/OFF alias"
+  },
+  "no_root_cause_claim": true,
+  "hardware": "NOT_EXECUTED",
+  "source_base": "3b5c92b2200753c795315a166dc7bd501a93a9f6",
+  "residuals_supplement": "QUEUE_LOCK_ENTRY_RESIDUAL: inline Pico critical-section acquisition precedes wrapped FIFO; active/no event does not pinpoint that internal lock or other pre-dequeue code."
+}

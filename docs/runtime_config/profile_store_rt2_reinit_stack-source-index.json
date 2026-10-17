@@ -1,0 +1,142 @@
+[
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/main.cpp",
+    "size": 5490,
+    "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/library.properties",
+    "size": 385,
+    "sha256": "5d2bb442f356ca002791a435be291be741ef5f1923c9c20dcec9a7a4371c45fe"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb_option.h",
+    "size": 16757,
+    "sha256": "489bcf128baeb1a1297e118347a1a4f887ebcb1ae542636cb6df4e8e69d2d14a"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp",
+    "size": 17806,
+    "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp",
+    "size": 7486,
+    "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+    "size": 4652,
+    "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+    "size": 46830,
+    "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.h",
+    "size": 50749,
+    "sha256": "34685f374c6f81866c8fcc2cc443e68ffd497be101288db17278e054cfcbdd75"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/dcd.h",
+    "size": 8924,
+    "sha256": "429bc790ad37e864ae0e0567e19f252edfe301988ac614239501d3569fdd050d"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c",
+    "size": 7503,
+    "sha256": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+    "size": 18095,
+    "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c",
+    "size": 14516,
+    "sha256": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h",
+    "size": 6017,
+    "sha256": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal.h",
+    "size": 3597,
+    "sha256": "97b97028ace5926b6269418e09ba9715d5f24db5fe2525fb5e51f678cdf5c6ca"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c",
+    "size": 15750,
+    "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/msc/msc_device.c",
+    "size": 32037,
+    "sha256": "554d7541456e9c4fa84c02f8536fe84706d0f0f02e4b3efab6ca8239a01f837f"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/hid/hid_device.c",
+    "size": 13705,
+    "sha256": "b294a55c928a68b185889c909d1a63e81d20900595307638bfeef2198e03332d"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/midi/midi_device.c",
+    "size": 16886,
+    "sha256": "015f0e4711cf6f4da1a041196d3e011da99ade47b95c0f380358c932053927ec"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/critical_section.c",
+    "size": 700,
+    "sha256": "fd3a65c6c6c1d6097092fa89ef4817d42d422430a8bd5e2f76ec7944a154139b"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/mutex.c",
+    "size": 6845,
+    "sha256": "ffa89c16fcc806c3799a9bb06e170c7949c667b1bb84db7f8172f75d9376ee04"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/irq.c",
+    "size": 19500,
+    "sha256": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_resets/include/hardware/resets.h",
+    "size": 2134,
+    "sha256": "52f51e6a8793aa6328ed86aadc3929007eb48d1916190cba666b52b0a8c0cebe"
+  },
+  {
+    "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/config/glyph/common/src/config.cpp",
+    "size": 19380,
+    "sha256": "823e97174425ab76ef079cd8c6490487d808954011a0d5968ed2e3c2876863a4"
+  },
+  {
+    "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "size": 56136,
+    "sha256": "a35797de46b06133276ea8108349be9789760ca9c15cce5a7a053d474be17a00"
+  },
+  {
+    "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/src/comms/XInputBackend.cpp",
+    "size": 2197,
+    "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+  },
+  {
+    "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/HAL/pico/include/tusb_config_pico.h",
+    "size": 3450,
+    "sha256": "ca059e0e8ff7f779e469b40ad67bea695e9d69abf092af7e119993963ba2238c"
+  },
+  {
+    "path": "/private/tmp/glyph-profile-store-rt2-recovery-reinit/platformio.ini",
+    "size": 3321,
+    "sha256": "a545f2370abe3095aa63ffb9bcfcca9944ea5f8f2f0efb0976fb73317d2e9c78"
+  },
+  {
+    "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+    "size": 11301,
+    "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f"
+  }
+]

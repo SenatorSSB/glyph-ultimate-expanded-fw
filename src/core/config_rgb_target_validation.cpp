@@ -41,7 +41,8 @@ bool is_physical_target(const Button &button, const Button *targets, size_t coun
 
 bool validate_config_rgb_targets(const Config &config,
                                  const Button *physical_targets,
-                                 size_t physical_target_count) {
+                                 size_t physical_target_count,
+                                 bool allow_unspecified) {
     if (physical_targets == nullptr && physical_target_count != 0) {
         return false;
     }
@@ -60,8 +61,13 @@ bool validate_config_rgb_targets(const Config &config,
     for (size_t i = 0; i < config.rgb_configs_count; ++i) {
         const RgbConfig &rgb = config.rgb_configs[i];
         for (size_t j = 0; j < rgb.button_colors_count; ++j) {
-            if (!is_physical_target(rgb.button_colors[j].button,
-                                    physical_targets, physical_target_count)) {
+            const ButtonToColorMapping &mapping = rgb.button_colors[j];
+            const Button absent = BTN_UNSPECIFIED;
+            // Historical no-op slots encoded neither field.  A color-bearing
+            // unspecified target is not that predecessor representation.
+            if (allow_unspecified && mapping.color == 0 &&
+                std::memcmp(&mapping.button, &absent, sizeof(Button)) == 0) continue;
+            if (!is_physical_target(mapping.button, physical_targets, physical_target_count)) {
                 return false;
             }
         }

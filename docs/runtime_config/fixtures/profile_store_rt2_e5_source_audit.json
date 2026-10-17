@@ -1,0 +1,35 @@
+{
+  "schema": "glyph_rt2_e5_source_audit_v1",
+  "baseline": "b07502866c56a1c7e1e217132aea30366e234461",
+  "physical_chip_version": "UNKNOWN",
+  "chip_version_semantics": {
+    "1": "B0/B1 affected by E5",
+    "2": "B2 fixed E5"
+  },
+  "decision": "E5_DEFERRED_GPIO15_TIMING_UNBOUNDED",
+  "framework_relative_sha256": {
+    "package.json": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+    "cores/rp2040/main.cpp": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "pico-sdk/pico_sdk_version.cmake": "adb8bc6ccbe9a2f14225658a251c194ef65488757aaf2b05a6d2340506ad07da",
+    "pico-sdk/src/rp2_common/pico_platform/platform.c": "cedb32044b12c86165a4733809dc89fe776e9e00e6f38c8b0740d2a1aae37f9d",
+    "pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h": "98bac1f14e0556e34e83d7a9954d6cd2e353a3dfa6f19d22e3dcbfa705124737",
+    "pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c": "0dd15a95e143036f5be8a372f608c478075446290d4d303840f9d11a8ff6fd8a",
+    "pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include/pico/fix/rp2040_usb_device_enumeration.h": "8f99329e027e5cf36e0392a5bec863ba68e5b871a342bc9d440d591448e8c162",
+    "pico-sdk/src/common/pico_time/time.c": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04",
+    "pico-sdk/src/common/pico_time/include/pico/time.h": "04ccda2a581b8b92323da7dfc75cf3dfe44dbf165cb3367ac87e0678d8c949ce",
+    "pico-sdk/src/rp2_common/pico_runtime/runtime.c": "c6b63ea7bebb1a0dc6b108664d048ed53ad61e9b04a4fae2439b6ba93891bb19",
+    "libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.h": "5f215d092223581d9de4dd0542aa4cc587d280b7cc85978571621cfb54125524",
+    "libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c"
+  },
+  "candidate_repo_relative_sha256": {
+    "include/input/SwitchMatrixInput.hpp": "9f7fa65db078877d53cc851c8a906ac6c37ddbbb615f28266fc35bcd301f88f6",
+    "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp": "45c3dfd010eebbcce79329df30f71f3d25a33759b30ecbe9fe2cc95fa1e5df30",
+    "HAL/pico/include/input/debounce.hpp": "75327d780827f78b87993fcb9dc584b67ec9847346112f19a3a8b3918e7503ae",
+    "HAL/pico/src/gpio.cpp": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c",
+    "config/glyph/glyph_mk6/include/matrix_definition.hpp": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1",
+    "config/glyph/common/src/config.cpp": "809bbb94ff9d27a7dafe0c049e08d5e1f7d9ced2c1d89887eda52972e8ad316d"
+  }
+}

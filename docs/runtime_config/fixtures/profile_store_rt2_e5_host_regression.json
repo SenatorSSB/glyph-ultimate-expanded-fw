@@ -1,0 +1,156 @@
+{
+  "negative_removed_event_hook": "DETECTED",
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "pullup-off",
+      "output": "dcd_observer_pullup-off=PASS state=1 milestones=1 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "silent",
+      "output": "dcd_observer_silent=PASS state=2 milestones=3 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset",
+      "output": "dcd_observer_reset=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=3 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "setup",
+      "output": "dcd_observer_setup=PASS state=6 milestones=7199 irq_state=520095565 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "address",
+      "output": "dcd_observer_address=PASS state=6 milestones=7295 irq_state=520095565 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "address-pending",
+      "output": "dcd_observer_address-pending=PASS state=6 milestones=7295 irq_state=520095565 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "configured",
+      "output": "dcd_observer_configured=PASS state=7 milestones=7679 irq_state=520097613 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "irq-deferred",
+      "output": "dcd_observer_irq-deferred=PASS state=7 milestones=7679 irq_state=520097613 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "irq-disabled",
+      "output": "dcd_observer_irq-disabled=PASS state=7 milestones=7679 irq_state=520097613 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "global-mask",
+      "output": "dcd_observer_global-mask=PASS state=7 milestones=7679 irq_state=520097613 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "task-deferred",
+      "output": "dcd_observer_task-deferred=PASS state=7 milestones=7679 irq_state=520097613 LED_frames=6 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "inspect",
+      "output": "dcd_observer_inspect=PASS state=7 milestones=8191 irq_state=520097613 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "replug",
+      "output": "dcd_observer_replug=PASS state=7 milestones=8175 irq_state=520097613 LED_frames=7 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "chip-b1",
+      "output": "dcd_observer_chip-b1=PASS state=2 milestones=3 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "raw-disabled",
+      "output": "dcd_observer_raw-disabled=PASS state=4 milestones=7175 irq_state=520094542 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "raw-global-mask",
+      "output": "dcd_observer_raw-global-mask=PASS state=4 milestones=7175 irq_state=520094575 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "raw-inte-disabled",
+      "output": "dcd_observer_raw-inte-disabled=PASS state=4 milestones=7175 irq_state=520094541 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "old-queued-setup",
+      "output": "dcd_observer_old-queued-setup=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "simultaneous-reset-setup",
+      "output": "dcd_observer_simultaneous-reset-setup=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=3 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-before-setup",
+      "output": "dcd_observer_reset-before-setup=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-before-sample",
+      "output": "dcd_observer_reset-before-sample=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-during-sample",
+      "output": "dcd_observer_reset-during-sample=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-after-sample",
+      "output": "dcd_observer_reset-after-sample=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-during-inspection",
+      "output": "dcd_observer_reset-during-inspection=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-after-publication",
+      "output": "dcd_observer_reset-after-publication=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=2 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "read-interrupted",
+      "output": "dcd_observer_read-interrupted=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=5 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "wrapper-interrupted",
+      "output": "dcd_observer_wrapper-interrupted=PASS state=3 milestones=3079 irq_state=520094541 LED_frames=3 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    },
+    {
+      "case": "reset-queue-full",
+      "output": "dcd_observer_reset-queue-full=PASS state=5 milestones=7183 irq_state=520095565 LED_frames=4 actual_rp2040_init_irq=true physical_macOS=NOT_MODELED"
+    }
+  ],
+  "physical_macOS": "NOT_MODELED",
+  "source_hashes": {
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.h": "5f215d092223581d9de4dd0542aa4cc587d280b7cc85978571621cfb54125524",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/usb.h": "d3be15d7d34446ff1fab640daeab4d548efeba3d280f0177dc324a3e03d13061",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/usb.h": "8e292ab4eb7ae6c5177f59a7cadcc03605685355b2c789a0cbf262d4968ec313",
+    "/private/tmp/glyph-profile-store-rt2-e5/HAL/pico/src/core/RecoveryUsbDiagnostics.cpp": "e7b56d15e4bb9bdbbae32cce51b4ff10d7e7d593ef2c3039ab3ef7324641a498",
+    "/private/tmp/glyph-profile-store-rt2-e5/HAL/pico/src/core/RecoveryStartupDiagnostics.cpp": "e84d926697b3de91b077a7cb7483f771442d417aab23e4a90351c888313889dd",
+    "/private/tmp/glyph-profile-store-rt2-e5/HAL/pico/src/comms/ConfiguratorBackend.cpp": "8379841ecd7770089679f2b355b422b99ae5da335850b87550dbda4f0448751f",
+    "/private/tmp/glyph-profile-store-rt2-e5/schema/haybox/config.proto": "ddefccfc99031e47133d3277b41372fd36d6a58d1d5bbe53379743f5936952d8"
+  },
+  "extracted_function_hashes": {
+    "TU_ATTR_ALWAYS_INLINE static inline struct hw_endpoint *hw_endpoint_get_by_num": "27a3c3ce46ba35cde4bf393837fffbddb5a66695da35df7327b88a9d682be755",
+    "static struct hw_endpoint *hw_endpoint_get_by_addr": "976b1713f49ffbff5d66d9ed96b3f3fb6a3513c5b61fb72de996f767b427a203",
+    "static void _hw_endpoint_alloc": "0b840c788d7183ac2d3a6e2ae6e0511c22c27665a512f96d585f4fe265de0601",
+    "static void hw_endpoint_init": "851e6f5c2038a0bff78bcf7faac8cabc0357679a7716a7bfb69ac8b1eabaf08b",
+    "static void hw_endpoint_xfer": "31366cfe0455a5a7d36a89859049c1fd0f4104a5530f0a9f31514ac54a408a33",
+    "static void __tusb_irq_path_func(hw_handle_buff_status)": "1e4cc016c29d56b0dcccd41a83c5ab7ecf42506dc7ceefeeb3ba83b9cbad0540",
+    "TU_ATTR_ALWAYS_INLINE static inline void reset_ep0_pid": "1fa1a8e7fe8c80c007f5922501dfc1116a7185c19a8d33d6d7f3210003d5211d",
+    "static void __tusb_irq_path_func(reset_non_control_endpoints)": "5d13f94bbdd20b22150ec10f729a855276cc07d5e8fde84f4b912ae9d1db0fbf",
+    "static void __tusb_irq_path_func(dcd_rp2040_irq)": "e7639ca52fbb893cbc7512dab6e6ae2950d8c3e8ab52aab8c75d92c9463048b0",
+    "void dcd_init": "388b16e3791b1e82312b7acdb02e65dba2cb7786e78098c0bd38b3d28b3adcb7",
+    "void dcd_int_enable": "ea7839f385fbe4eb66975b96ad8b1f05e1d51caeb593c99d6b04605796c788c9",
+    "void dcd_int_disable": "327f29923c278b841864b24fd2f783a112c7088f52f206b4cafcb760d5aff47f",
+    "void dcd_set_address": "20a4c80529258e4a4fd43114706795dff2284f2b51b9719ca6b9dc218da4692a",
+    "void dcd_connect": "ba69c3c49b6f45f19461fd576678bb5f07a9f8a9531eba030107ac03f11d49a2",
+    "void dcd_disconnect": "3ea0896845a69480272196d53c5bca7874633510dbbed092b31bbb8c5d9627e7",
+    "void dcd_edpt0_status_complete": "05f6459ac874581954ec6c76aeb94a16bb413d3e7087564e07f1dbe3e577dd0a",
+    "bool dcd_edpt_open": "9eca664ab453b6e60f9c5c81e4c73f39930745df44872d321a77c4a7e4387dfa",
+    "void __tusb_irq_path_func(dcd_int_handler)": "818a055cce666844b0c69b9db6daabb5b008d98df61241185903be8e59f249ab",
+    "void rp2040_usb_init": "b2cc286fede0d580d6ed48579b5fc0fba2e25ebb567a4311bca27225b6a84cca",
+    "void __tusb_irq_path_func(hw_endpoint_reset_transfer)": "8a6ac9c8485133767c9a488f9ecc1ba236ac8cbee838a975c837122653a428ca"
+  },
+  "model_boundary": "Real pinned init/IRQ/control/address/endpoint-open and USBD/CDC/backend. MMIO SET/CLEAR, NVIC scheduling, resets, electrical packets/DPRAM completion modeled; no full DMA continuation or physical host policy. Disabled RP2040 E5/E15 fixes match pin. Mach-O rename and 64-bit language pointer adaptations are host-only."
+}
