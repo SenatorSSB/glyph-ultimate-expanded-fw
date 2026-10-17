@@ -15,6 +15,8 @@ uint32_t current=0,previous=0;
 PIO indicator=nullptr;
 int indicator_sm=-1;
 bool indicator_attempted=false;
+bool valid_inspection_command=false;
+uint8_t shown_state=0;
 
 void InitializeIndicator() {
     if(indicator_attempted)return;
@@ -49,21 +51,28 @@ void InitializeIndicator() {
     }
 }
 
-void Show(unsigned phase,unsigned flags) {
-    if(!indicator||!pio_sm_is_tx_fifo_empty(indicator,indicator_sm))return;
-    // First two pixels are MB1, next two LF4 on Mk6. Low brightness, no array.
-    const uint32_t mb1=((phase&2u)?0x180000u:0)|((phase&1u)?0x001800u:0)|((phase&4u)?0x000018u:0);
-    const uint32_t lf4=((flags&32u)?0x180000u:0)|((phase&8u)?0x001800u:0)|((flags&16u)?0x000018u:0);
+unsigned CoarseState(unsigned phase,unsigned flags) {
+    if(phase<11)return 1; // red: application has not returned from SendReport
+    if(flags&32u)return valid_inspection_command?5u:4u; // white / green
+    return (flags&16u)?3u:2u; // blue: SETUP seen; yellow: not configured
+}
+
+bool Show(unsigned state) {
+    if(!indicator||!pio_sm_is_tx_fifo_empty(indicator,indicator_sm))return false;
+    // Sole physical signal: Mk6 MB1 top-left menu pair. LF4 pair stays dark.
+    const uint32_t colors[]={0,0x001800u,0x181800u,0x000018u,0x180000u,0x181818u};
+    const uint32_t mb1=colors[state];
     // Preload while only our SM is disabled. USB IRQs remain enabled, but
     // cannot split this frame into separate latches between CPU FIFO puts.
     pio_sm_set_enabled(indicator,indicator_sm,false);
     // The empty4-word FIFO admits all4 words; no blocking put/wait-for-DMA.
     pio_sm_put(indicator,indicator_sm,mb1<<8);pio_sm_put(indicator,indicator_sm,mb1<<8);
-    pio_sm_put(indicator,indicator_sm,lf4<<8);pio_sm_put(indicator,indicator_sm,lf4<<8);
+    pio_sm_put(indicator,indicator_sm,0);pio_sm_put(indicator,indicator_sm,0);
     pio_sm_set_enabled(indicator,indicator_sm,true);
     // 96bits/800kHz=120us +80us low latch. IRQs remain enabled. This bounded
     // LED protocol interval is diagnostic perturbation, never a USB timing fix.
     busy_wait_us_32(200);
+    return true;
 }
 
 unsigned Flags() {
@@ -87,7 +96,7 @@ unsigned Flags() {
     return flags;
 }
 }
-void CapturePrevious(){previous=TakePrevious(watchdog_hw->scratch);current=0;}
+void CapturePrevious(){previous=TakePrevious(watchdog_hw->scratch);current=0;valid_inspection_command=false;shown_state=0;}
 void Mark(Phase phase) {
     const unsigned old=(current>>8)&255u;
     const unsigned next=unsigned(phase)>old?unsigned(phase):old;
@@ -95,8 +104,15 @@ void Mark(Phase phase) {
     if(next>old||!current)watchdog_hw->scratch[3]=kMagic|(next<<8);
     InitializeIndicator();
     const unsigned flags=Flags();const uint32_t value=kMagic|(next<<8)|flags;
-    if(current==value)return;
-    current=value;watchdog_hw->scratch[3]=value;Show(next,flags);
+    const unsigned state=CoarseState(next,flags);
+    if(current==value&&shown_state==state)return;
+    current=value;watchdog_hw->scratch[3]=value;
+    // Keep existing changed-marker frame cadence; no startup waits added.
+    // Repeated early frames all show red, never 13 transient phase colors.
+    if(Show(state))shown_state=uint8_t(state);
+}
+void ValidInspectionCommandReceived(){
+    valid_inspection_command=true;Mark(Phase::RequestByteSeen);
 }
 uint32_t Current(){return current;}
 uint32_t Previous(){return previous;}

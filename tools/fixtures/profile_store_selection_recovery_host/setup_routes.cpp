@@ -60,7 +60,8 @@ struct ProfileStore {
  bool ValidateCompactReceipt(const Config &){return true;}
 }profile_store;
 struct ConfiguratorBackend {
- ConfiguratorBackend(InputState &,InputSource **,size_t,Config &,SerialStub &){++constructions;}
+ enum class UsbIdentityPolicy : uint8_t { Configurator, RetainAttachedForRecoveryDiagnostic };
+ ConfiguratorBackend(InputState &,InputSource **,size_t,Config &,SerialStub &,UsbIdentityPolicy=UsbIdentityPolicy::Configurator){++constructions;}
  void SetRecoveryState(bool invalid,bool available){config_invalid=invalid;storage_available=available;readonly=true;}
  void SendReport(){++serial_reports;}
  bool config_invalid=false,storage_available=false,readonly=false;static unsigned constructions;

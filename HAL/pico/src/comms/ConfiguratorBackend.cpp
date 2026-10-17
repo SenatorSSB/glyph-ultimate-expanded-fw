@@ -118,11 +118,18 @@ bool ConfiguratorBackend::TraceProfileStage(const ProfileStoreRequest &request, 
 }
 
 ConfiguratorBackend::ConfiguratorBackend(
+    InputState &inputs, InputSource **input_sources, size_t input_source_count,
+    Config &config, Stream &stream
+) : ConfiguratorBackend(inputs, input_sources, input_source_count, config, stream,
+      UsbIdentityPolicy::Configurator) {}
+
+ConfiguratorBackend::ConfiguratorBackend(
     InputState &inputs,
     InputSource **input_sources,
     size_t input_source_count,
     Config &config,
-    Stream &stream
+    Stream &stream,
+    UsbIdentityPolicy identity
 )
     : CommunicationBackend(inputs, input_sources, input_source_count),
       _coordinated_stream(stream),
@@ -131,7 +138,9 @@ ConfiguratorBackend::ConfiguratorBackend(
       _base_stream(_coordinated_stream),
       _config(config) {
 
-    TinyUSBDevice.setID(0x2E8A, 0x1092);
+    // Only the bounded candidate recovery A/B retains the already attached ID.
+    if (!kStrictHardeningCandidate || identity != UsbIdentityPolicy::RetainAttachedForRecoveryDiagnostic)
+        TinyUSBDevice.setID(0x2E8A, 0x1092);
 }
 
 CommunicationBackendId ConfiguratorBackend::BackendId() {
@@ -422,6 +431,13 @@ bool ConfiguratorBackend::HandleProfileStore() {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
     _rx.phase = 6;
+    // ReadPacket completed the frame and nanopb decoded the whole request.
+    // White means a valid inspection command, not merely its first byte.
+    if (_recovery_service && (request.protocol_version == 1 || request.protocol_version == 2) &&
+        (request.operation == PROFILE_STORE_STATUS || request.operation == PROFILE_STORE_LIST ||
+         request.operation == PROFILE_STORE_READ || request.operation == PROFILE_STORE_INSPECT_HEALTH ||
+         request.operation == PROFILE_STORE_LIVENESS))
+        RecoveryStartupDiagnostics::ValidInspectionCommandReceived();
     const bool mutationTrace = request.operation >= PROFILE_STORE_CREATE &&
         request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
     if (request.operation != PROFILE_STORE_LIVENESS) _last_profile_rx = _rx;
@@ -770,7 +786,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         response.root_reconcile_fault_capable = true;
         response.recovery_startup_current = RecoveryStartupDiagnostics::Current();
         response.recovery_startup_previous = RecoveryStartupDiagnostics::Previous();
-        response.recovery_startup_diagnostics_version = 1;
+        response.recovery_startup_diagnostics_version = 2;
     }
     response.recovery_flags |= _recovery_storage_available ? profile_store.HealthFlags() : 0;
     // Bits 16+ are the Configurator layer; store flags occupy the low 16 bits.

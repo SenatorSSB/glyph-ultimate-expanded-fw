@@ -19,7 +19,7 @@ namespace {
 bool attached=false,port_initialized=false,pio_available=true,sm_enabled=false;
 std::string selected_timing;unsigned boundary_calls=0;
 void HostBoundary(const char*);
-unsigned tasks=0,opened=0,pio_words=0,led_updates=0,pio_claims=0;bool before_cdc_pending=false;PIO used_pio=nullptr;uint32_t max_led_interval=0;
+unsigned tasks=0,opened=0,pio_words=0,led_updates=0,pio_claims=0,dcd_address=0,attach_calls=0,detach_calls=0;bool pre_attach_configurator=false;uint32_t last_led_words[4]={};std::vector<uint32_t> led_frames;bool before_cdc_pending=false;PIO used_pio=nullptr;uint32_t max_led_interval=0;
 struct Transfer {uint8_t *buffer=nullptr;uint16_t bytes=0;} endpoints[256];
 Bytes control_rx,host_rx;bool capturing=false;
 Config config=Config_init_default;UltimateProfile config_profile=UltimateProfile_init_default;InputState inputs;
@@ -82,11 +82,11 @@ uint8_t TinyUSB_Port_GetSerialNumber(uint8_t id[16]){std::memset(id,0x42,8);retu
 extern "C" {
 void TinyUSB_Device_Task(){if(mutex_try_enter(&__usb_mutex,nullptr)){task();mutex_exit(&__usb_mutex);}}
 void TinyUSB_Device_FlushCDC(){tud_cdc_n_write_flush(0);}
-void dcd_init(uint8_t){attached=true;usb_registers.sie_ctrl|=1;}
+void dcd_init(uint8_t){++attach_calls;attached=true;usb_registers.sie_ctrl|=1;}
 void dcd_int_enable(uint8_t){}void dcd_int_disable(uint8_t){}
-void dcd_connect(uint8_t){attached=true;usb_registers.sie_ctrl|=1;}
-void dcd_disconnect(uint8_t){attached=false;usb_registers.sie_ctrl&=~1u;}
-void dcd_set_address(uint8_t port,uint8_t){dcd_edpt_xfer(port,0x80,nullptr,0);}
+void dcd_connect(uint8_t){++attach_calls;attached=true;usb_registers.sie_ctrl|=1;}
+void dcd_disconnect(uint8_t){++detach_calls;attached=false;usb_registers.sie_ctrl&=~1u;}
+void dcd_set_address(uint8_t port,uint8_t address){dcd_address=address;dcd_edpt_xfer(port,0x80,nullptr,0);}
 void dcd_remote_wakeup(uint8_t){}
 void dcd_sof_enable(uint8_t,bool){}
 bool dcd_edpt_open(uint8_t,const tusb_desc_endpoint_t*){++opened;return true;}
@@ -139,7 +139,7 @@ uint16_t tud_hid_get_report_cb(uint8_t,uint8_t,hid_report_type_t,uint8_t*,uint16
 void tud_hid_set_report_cb(uint8_t,uint8_t,hid_report_type_t,const uint8_t*,uint16_t){}
 }
 bool USBTestAllowAutoCDC(){return selected_timing!="no-auto-cdc";}
-void USBTestCoreBeforeCDC(){if(selected_timing=="core-before-cdc"){require(!tud_inited()&&!attached&&Adafruit_USBD_CDC::getInstanceCount()==0,"before actual initial CDC registration is not enumerable");++boundary_calls;before_cdc_pending=true;}}
+void USBTestCoreBeforeCDC(){if(pre_attach_configurator){require(!tud_inited()&&!attached,"pre-attach identity control");TinyUSBDevice.setID(0x2e8a,0x1092);}if(selected_timing=="core-before-cdc"){require(!tud_inited()&&!attached&&Adafruit_USBD_CDC::getInstanceCount()==0,"before actual initial CDC registration is not enumerable");++boundary_calls;before_cdc_pending=true;}}
 void USBTestDuringInspection(){if(boot.outcome==BootOutcome::Pending)HostBoundary("during-inspection");}
 void yield(){TinyUSB_Device_Task();TinyUSB_Device_FlushCDC();}
 bool pio_can_add_program(PIO p,const pio_program*){return pio_available&&!(selected_timing=="pio1-fallback"&&p==pio0);}
@@ -154,8 +154,12 @@ void pio_gpio_init(PIO,unsigned p){require(p==11,"no other GPIO");}
 void pio_sm_set_consecutive_pindirs(PIO,int,unsigned,unsigned,bool){}
 void pio_sm_init(PIO,int,unsigned,const pio_sm_config*){}void pio_sm_set_pins(PIO,int,unsigned){}void pio_sm_set_enabled(PIO,int,bool value){sm_enabled=value;}
 bool pio_sm_is_tx_fifo_empty(PIO,int){return pio_words==0&&selected_timing!="pio-fifo-busy";}
-void pio_sm_put(PIO,int,uint32_t){require(!sm_enabled&&pio_words<4,"SM disabled throughout frame preload, USB IRQ may interleave");++pio_words;}
-void busy_wait_us_32(uint32_t n){require(n==200&&pio_words==4,"bounded LED protocol interval");max_led_interval=std::max(max_led_interval,n);++led_updates;pio_words=0;}
+void pio_sm_put(PIO,int,uint32_t word){require(!sm_enabled&&pio_words<4,"SM disabled throughout frame preload, USB IRQ may interleave");last_led_words[pio_words++]=word;}
+void busy_wait_us_32(uint32_t n){require(n==200&&pio_words==4,"bounded LED protocol interval");max_led_interval=std::max(max_led_interval,n);++led_updates;led_frames.push_back(last_led_words[0]);pio_words=0;}
+#ifdef GLYPH_IDENTITY_MATRIX
+#include "identity_matrix.inc"
+#define main retained_startup_main
+#endif
 int main(int argc,char**argv){try{
  require(argc==3,"fixture/timing args");std::string timing=argv[2];selected_timing=timing;pio_available=timing!="pio-unavailable";
  seed(argv[1],&config);require(profile_store.Read(1,config_profile)==ProfileStore::Status::Ok,"profile fixture");require(profile_store.Create(config_profile,"useful3",0,identity(0x60)).id==3&&profile_store.Create(config_profile,"useful4",0,identity(0x61)).id==4,"useful3/4");
@@ -169,8 +173,15 @@ int main(int argc,char**argv){try{
  TinyUSBDevice.begin(0);require(tud_inited()&&attached&&Adafruit_USBD_CDC::getInstanceCount()==1,"core USB initialized before recovery");
 
  const auto before=storage.files;
+#if !GLYPH_STRICT_HARDENING_CANDIDATE
+ if(timing=="production-retain-policy"){
+  auto *backend=new ConfiguratorBackend(inputs,input_sources,input_source_count,config,Serial,ConfiguratorBackend::UsbIdentityPolicy::RetainAttachedForRecoveryDiagnostic);
+  const auto descriptor=tud_descriptor_device_cb();require(descriptor[8]==0x8a&&descriptor[9]==0x2e&&descriptor[10]==0x92&&descriptor[11]==0x10,"noncandidate cannot opt into diagnostic identity");
+  require(RecoveryStartupDiagnostics::Current()==0&&pio_claims==0&&storage.files==before,"noncandidate diagnostics inactive");host_enumerate();delete backend;std::puts("production_identity_guard=PASS");return 0;
+ }
+#endif
  if(timing=="normal-configurator"){
-  Serial.begin(115200);recovery_configurator=new ConfiguratorBackend(inputs,input_sources,input_source_count,config,Serial);host_enumerate();
+  Serial.begin(115200);recovery_configurator=new ConfiguratorBackend(inputs,input_sources,input_source_count,config,Serial);const auto descriptor=tud_descriptor_device_cb();require(descriptor[8]==0x8a&&descriptor[9]==0x2e&&descriptor[10]==0x92&&descriptor[11]==0x10,"normal Configurator identity remains2e8a:1092");host_enumerate();
   auto h=transact(status());require(h.status==PROFILE_STORE_OK&&!(h.recovery_flags&(1u<<19)),"normal Configurator status is not recovery");
   simple(CMD_GET_DEVICE_INFO);require(!host_rx.empty()&&decode(host_rx)[0]==CMD_SET_DEVICE_INFO,"normal Configurator device info");
   require(RecoveryStartupDiagnostics::Current()==0&&pio_claims==0&&storage.files==before,"normal Configurator never claims diagnostic PIO/writes files");

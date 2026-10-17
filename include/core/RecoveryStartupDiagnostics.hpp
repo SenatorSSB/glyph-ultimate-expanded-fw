@@ -24,11 +24,13 @@ inline uint32_t TakePrevious(volatile uint32_t *scratch) {
 #if defined(GLYPH_STRICT_HARDENING_CANDIDATE) && GLYPH_STRICT_HARDENING_CANDIDATE && (defined(ARDUINO_ARCH_RP2040) || defined(GLYPH_RECOVERY_DIAGNOSTICS_HOST))
 void CapturePrevious();
 void Mark(Phase phase);
+void ValidInspectionCommandReceived();
 uint32_t Current();
 uint32_t Previous();
 #else
 inline void CapturePrevious(){}
 inline void Mark(Phase){}
+inline void ValidInspectionCommandReceived(){}
 inline uint32_t Current(){return 0;}
 inline uint32_t Previous(){return 0;}
 #endif

@@ -163,7 +163,8 @@ void enter_recovery_configurator() {
     RecoveryStartupDiagnostics::Mark(Phase::SerialBeginReturned);
     RecoveryStartupDiagnostics::Mark(Phase::BackendNewEntered);
     recovery_configurator = new ConfiguratorBackend(
-        inputs, input_sources, input_source_count, config, Serial);
+        inputs, input_sources, input_source_count, config, Serial,
+        ConfiguratorBackend::UsbIdentityPolicy::RetainAttachedForRecoveryDiagnostic);
     RecoveryStartupDiagnostics::Mark(Phase::BackendNewReturned);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
     RecoveryStartupDiagnostics::Mark(Phase::ReadOnlyInstalled);

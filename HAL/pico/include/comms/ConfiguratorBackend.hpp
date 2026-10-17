@@ -28,12 +28,17 @@
 
 class ConfiguratorBackend : public CommunicationBackend {
   public:
+    enum class UsbIdentityPolicy : uint8_t { Configurator, RetainAttachedForRecoveryDiagnostic };
     ConfiguratorBackend(
         InputState &inputs,
         InputSource **input_sources,
         size_t input_source_count,
         Config &config,
         Stream &stream
+    );
+    ConfiguratorBackend(
+        InputState &inputs, InputSource **input_sources, size_t input_source_count,
+        Config &config, Stream &stream, UsbIdentityPolicy identity
     );
     CommunicationBackendId BackendId();
     void SendReport();
