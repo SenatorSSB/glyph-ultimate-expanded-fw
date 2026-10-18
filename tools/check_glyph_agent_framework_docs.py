@@ -843,6 +843,9 @@ LEGACY_PLANNER_CURATION = (
     "3fb785749d8653e91bb8e4b3a73a01be03aaf9cb",
     "7b6601709b6f7780601ff68c0e8d9df1bf63ad8a",
 )
+LEGACY_INLINE_CURATION_COMMITS = {
+    "3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b",
+}
 CURATOR_RECEIPT_START = "<!-- curator-receipt:start -->"
 CURATOR_RECEIPT_END = "<!-- curator-receipt:end -->"
 WAIT_EVIDENCE_FIELDS = (
@@ -857,22 +860,20 @@ CURATOR_RECEIPT_FIELDS = {
 }
 
 
-def _curator_receipt(
-    planner_packet: dict[str, object], repo_root: Path = REPO_ROOT,
-    published_proposal: bool | None = None,
-) -> dict[str, object] | None:
-    # Only the exact already-accepted historical pair predates receipts.
-    if (planner_packet["planning_commit"], planner_packet["curation_commit"]) == LEGACY_PLANNER_CURATION:
-        return None
-    raw = _git(repo_root, "show", f"{planner_packet['curation_commit']}:docs/project/ACTIVE_AGENT_QUEUE.md")
-    if raw.count(CURATOR_RECEIPT_START) != 1 or raw.count(CURATOR_RECEIPT_END) != 1:
-        fail("new Planner packet requires exactly one immutable Curator receipt")
-    if raw.index(CURATOR_RECEIPT_START) > raw.index(CURATOR_RECEIPT_END):
-        fail("Curator receipt markers are reversed")
-    block = raw.split(CURATOR_RECEIPT_START, 1)[1].split(CURATOR_RECEIPT_END, 1)[0].strip()
-    if not block.startswith("```json\n") or not block.endswith("\n```"):
-        fail("Curator receipt must contain fenced JSON")
+def _curator_receipt_path(packet_id: object) -> str:
+    if not isinstance(packet_id, str) or not PLANNER_PACKET_ID_RE.fullmatch(packet_id):
+        fail("Curator receipt requires a canonical packet ID")
+    return f"docs/agent_framework/curation_receipts/{packet_id}.json"
 
+
+def _curator_receipt_locator(planner_packet: dict[str, object]) -> str:
+    curation_commit = planner_packet["curation_commit"]
+    if curation_commit in LEGACY_INLINE_CURATION_COMMITS:
+        return "docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+    return _curator_receipt_path(planner_packet["packet_id"])
+
+
+def _parse_curator_receipt(raw: str) -> dict[str, object]:
     def unique_pairs(pairs: list[tuple[str, object]]) -> dict[str, object]:
         value: dict[str, object] = {}
         for key, item in pairs:
@@ -880,13 +881,194 @@ def _curator_receipt(
                 fail("duplicate Curator receipt JSON key")
             value[key] = item
         return value
-
     try:
-        receipt = json.loads(block[len("```json\n"):-len("\n```")], object_pairs_hook=unique_pairs)
+        receipt = json.loads(raw, object_pairs_hook=unique_pairs)
     except json.JSONDecodeError as exc:
         fail(f"Curator receipt is invalid JSON: {exc}")
     if not isinstance(receipt, dict) or set(receipt) != CURATOR_RECEIPT_FIELDS:
         fail("Curator receipt fields do not match the closed contract")
+    return receipt
+
+
+def _legacy_inline_receipt_block(raw: str, label: str) -> tuple[str, str]:
+    if raw.count(CURATOR_RECEIPT_START) != 1 or raw.count(CURATOR_RECEIPT_END) != 1:
+        fail(f"{label} must contain exactly one immutable block")
+    block = raw.split(CURATOR_RECEIPT_START, 1)[1].split(CURATOR_RECEIPT_END, 1)[0].strip()
+    if not block.startswith("```json\n") or not block.endswith("\n```"):
+        fail(f"{label} must contain fenced JSON")
+    return block, CURATOR_RECEIPT_START + raw.split(CURATOR_RECEIPT_START, 1)[1].split(CURATOR_RECEIPT_END, 1)[0] + CURATOR_RECEIPT_END
+
+
+def _check_legacy_inline_receipts(
+    repo_root: Path = REPO_ROOT,
+    commits: set[str] = LEGACY_INLINE_CURATION_COMMITS,
+) -> None:
+    for commit in commits:
+        historical_raw = _git(repo_root, "show", f"{commit}:docs/project/ACTIVE_AGENT_QUEUE.md")
+        _, historical_block = _legacy_inline_receipt_block(historical_raw, "legacy Curator receipt")
+        current_raw = _git(repo_root, "show", "HEAD:docs/project/ACTIVE_AGENT_QUEUE.md")
+        _, current_block = _legacy_inline_receipt_block(current_raw, "current legacy Curator receipt")
+        if current_block != historical_block:
+            fail("legacy Curator receipt block must remain byte-for-byte immutable")
+
+
+def _check_curator_receipt_registry(repo_root: Path = REPO_ROOT) -> None:
+    root = "docs/agent_framework/curation_receipts"
+    paths = _git(repo_root, "ls-tree", "-r", "--name-only", "HEAD", "--", root).splitlines()
+    introduced_paths: set[str] = set()
+    introduced_packet_ids: set[str] = set()
+    for commit in _git(repo_root, "log", "--diff-filter=A", "--format=%H", "HEAD", "--", root).splitlines():
+        for path in _git(repo_root, "diff-tree", "--no-commit-id", "--diff-filter=A", "-r", "--name-only", commit, "--", root).splitlines():
+            try:
+                value = json.loads(_git(repo_root, "show", f"{commit}:{path}"))
+            except json.JSONDecodeError:
+                continue
+            if isinstance(value, dict) and value.get("schema_name") == "glyph_curator_packet_receipt":
+                introduced_paths.add(path)
+                introduced_packet_ids.add(_parse_curator_receipt(json.dumps(value))["packet_id"])
+    seen_packet_ids: set[str] = set()
+    for path in paths:
+        if not path.endswith(".json"):
+            continue
+        raw = _git(repo_root, "show", f"HEAD:{path}")
+        try:
+            value = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(value, dict) or value.get("schema_name") != "glyph_curator_packet_receipt":
+            continue
+        receipt = _parse_curator_receipt(raw)
+        if path not in introduced_paths:
+            fail("registry Curator receipt must have one recorded introduction")
+        packet_id = receipt["packet_id"]
+        if packet_id in seen_packet_ids or path != _curator_receipt_path(packet_id):
+            fail("registry Curator receipt packet identity/path must be unique and canonical")
+        seen_packet_ids.add(packet_id)
+        _git_tree_entry("HEAD", path, "registry Curator receipt", repo_root)
+        changes = _git(repo_root, "log", "--format=%H", "HEAD", "--", path).splitlines()
+        adds = _git(repo_root, "log", "--format=%H", "--diff-filter=A", "HEAD", "--", path).splitlines()
+        if len(adds) != 1 or changes != adds:
+            fail("registry Curator receipt must be append-only after its unique introduction")
+    if any(not _git(repo_root, "ls-tree", "HEAD", "--", path).strip() for path in introduced_paths):
+        fail("registry Curator receipt must remain present after its unique introduction")
+    if seen_packet_ids != introduced_packet_ids:
+        fail("registry Curator receipt must remain present after its unique introduction")
+
+
+def check_curator_receipt_registry_self_test() -> None:
+    """Exercise registry-wide immutability, not merely the current queue receipt."""
+    with tempfile.TemporaryDirectory(prefix="glyph-curator-receipt-registry-") as temp:
+        repo = Path(temp)
+
+        def git(*args: str) -> str:
+            return _git(repo, *args).strip()
+
+        def expect_failure(label: str, action: object) -> None:
+            try:
+                action()
+            except FrameworkDocsError:
+                return
+            fail(f"registry negative control accepted: {label}")
+
+        git("init", "-q", "-b", "base")
+        git("config", "user.email", "receipt@example.invalid")
+        git("config", "user.name", "Receipt fixture")
+        (repo / "README").write_text("base\n", encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "base")
+        packet_id = "glyph-portfolio-20260907-1800"
+        receipt_path = _curator_receipt_path(packet_id)
+        receipt = {
+            "schema_name": "glyph_curator_packet_receipt", "schema_version": 1,
+            "packet_id": packet_id, "planning_branch": "planning/portfolio-20260907-1800",
+            "planning_commit": "0" * 40, "packet_base_configurator_sha": "1" * 40,
+            "curation_branch": "curation/fixture", "review_date": "2026-09-07",
+            "initial_reviewed_dispositions": [],
+            "global_wait_proposed": False, "global_wait_accepted": False,
+            **{field: None for field in WAIT_EVIDENCE_FIELDS},
+        }
+        target = repo / receipt_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(receipt), encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "append receipt")
+        _check_curator_receipt_registry(repo)
+
+        target.write_text(json.dumps({**receipt, "review_date": "2026-09-08"}), encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "mutate receipt")
+        expect_failure("later receipt mutation", lambda: _check_curator_receipt_registry(repo))
+
+        git("checkout", "-q", "HEAD~1")
+        git("rm", "-q", receipt_path); git("commit", "-qm", "delete receipt")
+        expect_failure("later receipt deletion", lambda: _check_curator_receipt_registry(repo))
+
+        git("checkout", "-q", "HEAD~1")
+        alias = repo / "docs/agent_framework/curation_receipts/alias.json"
+        alias.write_text(json.dumps(receipt), encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "duplicate receipt identity")
+        expect_failure("duplicate packet identity", lambda: _check_curator_receipt_registry(repo))
+    pass_line("append-only Curator receipt registry adversarial cases validate")
+
+
+def check_legacy_inline_receipt_self_test() -> None:
+    """The frozen inline receipt remains immutable while surrounding queue state evolves."""
+    with tempfile.TemporaryDirectory(prefix="glyph-legacy-curator-receipt-") as temp:
+        repo = Path(temp)
+
+        def git(*args: str) -> str:
+            return _git(repo, *args).strip()
+
+        def expect_failure(label: str) -> None:
+            try:
+                _check_legacy_inline_receipts(repo, {historical})
+            except FrameworkDocsError:
+                return
+            fail(f"legacy receipt negative control accepted: {label}")
+
+        git("init", "-q", "-b", "base")
+        git("config", "user.email", "receipt@example.invalid")
+        git("config", "user.name", "Receipt fixture")
+        queue = "before\n<!-- curator-receipt:start -->\n```json\n{}\n```\n<!-- curator-receipt:end -->\nafter\n"
+        target = repo / "docs/project/ACTIVE_AGENT_QUEUE.md"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(queue, encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "historical receipt")
+        historical = git("rev-parse", "HEAD")
+        _check_legacy_inline_receipts(repo, {historical})
+
+        target.write_text(queue.replace("after\n", "after\nqueue update\n"), encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "queue update")
+        _check_legacy_inline_receipts(repo, {historical})
+        target.write_text(target.read_text(encoding="utf-8").replace("{}", '{"changed": true}'), encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "mutate receipt")
+        expect_failure("receipt mutation")
+
+        git("checkout", "-q", "HEAD~1")
+        target.write_text("before\nafter\n", encoding="utf-8")
+        git("add", "."); git("commit", "-qm", "delete receipt")
+        expect_failure("receipt deletion")
+    pass_line("legacy Curator receipt immutability adversarial cases validate")
+
+
+def _curator_receipt(
+    planner_packet: dict[str, object], repo_root: Path = REPO_ROOT,
+    published_proposal: bool | None = None,
+) -> dict[str, object] | None:
+    # Only the exact already-accepted historical pair predates receipts.
+    if (planner_packet["planning_commit"], planner_packet["curation_commit"]) == LEGACY_PLANNER_CURATION:
+        return None
+    locator = _curator_receipt_locator(planner_packet)
+    if locator.endswith("#curator-receipt"):
+        raw = _git(repo_root, "show", f"{planner_packet['curation_commit']}:docs/project/ACTIVE_AGENT_QUEUE.md")
+        block, _ = _legacy_inline_receipt_block(raw, "legacy Curator receipt")
+        receipt = _parse_curator_receipt(block[len("```json\n"):-len("\n```")])
+    else:
+        _git_tree_entry(planner_packet["curation_commit"], locator, "registry Curator receipt", repo_root)
+        base = planner_packet["base_configurator_sha"]
+        if _git(repo_root, "ls-tree", base, "--", locator).strip():
+            fail("registry Curator receipt path must be absent at the shared base")
+        touched = _git(repo_root, "log", "--format=%H", f"{planner_packet['curation_commit']}..HEAD", "--", locator).splitlines()
+        if touched:
+            fail("registry Curator receipt changed after its immutable receipt commit")
+        receipt = _parse_curator_receipt(_git(repo_root, "show", f"{planner_packet['curation_commit']}:{locator}"))
     if receipt["schema_name"] != "glyph_curator_packet_receipt" or type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1:
         fail("Curator receipt requires exact schema version 1")
     provenance = planner_packet["curator_review_provenance"]
@@ -946,7 +1128,8 @@ def _planner_packet_correspondence(
         fail("curation_commit must be a direct child of packet_base_configurator_sha")
     _is_ancestor(repo_root, curation_commit, _git(repo_root, "rev-parse", "HEAD").strip(), "curation_commit")
     _git_tree_entry(planning_commit, packet_path, "Planner packet document", repo_root)
-    _git_tree_entry(curation_commit, "docs/project/ACTIVE_AGENT_QUEUE.md", "Curator queue snapshot", repo_root)
+    if _curator_receipt_locator(planner_packet).endswith("#curator-receipt"):
+        _git_tree_entry(curation_commit, "docs/project/ACTIVE_AGENT_QUEUE.md", "legacy Curator queue snapshot", repo_root)
 
     packet_text = _git(repo_root, "show", f"{planning_commit}:{packet_path}")
     if packet_text.count("```yaml") != 1:
@@ -1127,9 +1310,9 @@ def check_planner_packet_correspondence_self_test() -> None:
             "global_wait_proposed": False, "global_wait_accepted": False,
             **{field: None for field in WAIT_EVIDENCE_FIELDS},
         }
-        (repo / "docs/project/ACTIVE_AGENT_QUEUE.md").write_text(
-            CURATOR_RECEIPT_START + "\n```json\n" + json.dumps(receipt) + "\n```\n" + CURATOR_RECEIPT_END + "\n", encoding="utf-8"
-        )
+        receipt_path = _curator_receipt_path(packet_id)
+        (repo / receipt_path).parent.mkdir(parents=True, exist_ok=True)
+        (repo / receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
         subprocess.run(["git", "add", "."], cwd=repo, check=True)
         subprocess.run(["git", "commit", "-qm", "curation"], cwd=repo, check=True)
         curation = _git(repo, "rev-parse", "HEAD").strip()
@@ -1268,8 +1451,8 @@ def check_new_planner_receipt_self_test() -> None:
                 **{field: "exact fixture " + field if proposed else None for field in WAIT_EVIDENCE_FIELDS},
             }
             def render(value: dict[str, object]) -> str:
-                return CURATOR_RECEIPT_START + "\n```json\n" + json.dumps(value) + "\n```\n" + CURATOR_RECEIPT_END + "\n"
-            curation = commit_file("curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(receipt))
+                return json.dumps(value)
+            curation = commit_file("curation", _curator_receipt_path(packet_id), render(receipt))
             info = {
                 "state": "FRESH", "branch": branch, "base_configurator_sha": base,
                 "packet_id": packet_id, "packet_path": path,
@@ -1321,8 +1504,8 @@ def check_new_planner_receipt_self_test() -> None:
             )
             # Every altered receipt is a real direct-base immutable commit, not a mocked parser.
             bad_receipts = [
-                ("missing receipt", "queue\n", "exactly one"),
-                ("duplicate receipt", render(receipt) + render(receipt), "exactly one"),
+                ("missing receipt", "queue\n", "invalid JSON"),
+                ("duplicate receipt", render(receipt) + render(receipt), "invalid JSON"),
                 ("duplicate JSON key", render(receipt).replace('"schema_version": 1', '"schema_version": 1, "schema_version": 1'), "duplicate Curator"),
                 ("unknown receipt field", render({**receipt, "extra": 1}), "closed contract"),
                 ("boolean schema", render({**receipt, "schema_version": True}), "exact schema"),
@@ -1336,11 +1519,11 @@ def check_new_planner_receipt_self_test() -> None:
                 altered = json.loads(json.dumps(receipt)); altered["initial_reviewed_dispositions"][0]["disposition"] = "READY"
                 bad_receipts.append(("altered judgment", render(altered), "disagrees with initial_reviewed_dispositions"))
             for label, raw, needle in bad_receipts:
-                bad_sha = commit_file("bad-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", raw)
+                bad_sha = commit_file("bad-curation", _curator_receipt_path(packet_id), raw)
                 variant = json.loads(json.dumps(info)); variant["curation_commit"] = bad_sha; variant["curator_review_provenance"]["curation_commit"] = bad_sha
                 expect_failure(label, lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), needle)
             rejected = {**receipt, "global_wait_accepted": False, **{field: None for field in WAIT_EVIDENCE_FIELDS}}
-            bad_sha = commit_file("rejected-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(rejected))
+            bad_sha = commit_file("rejected-curation", _curator_receipt_path(packet_id), render(rejected))
             variant = json.loads(json.dumps(info)); variant["curation_commit"] = bad_sha; variant["curator_review_provenance"]["curation_commit"] = bad_sha
             _planner_packet_correspondence(variant, "FRESH", [], repo)
             expect_failure("unaccepted receipt wait", lambda: _validate_global_wait(wait, variant, "FRESH", computed, signals, repo), "immutable Curator acceptance")
@@ -1349,7 +1532,7 @@ def check_new_planner_receipt_self_test() -> None:
                 text = packet_text.replace(f"candidate_count: {count}", f"candidate_count: {count_text}")
                 bad_planning = commit_file("bad-planning", path, text)
                 matching = {**receipt, "planning_commit": bad_planning}
-                bad_curation = commit_file("matching-curation", "docs/project/ACTIVE_AGENT_QUEUE.md", render(matching))
+                bad_curation = commit_file("matching-curation", _curator_receipt_path(packet_id), render(matching))
                 variant = json.loads(json.dumps(info)); variant["planning_commit"] = bad_planning; variant["curation_commit"] = bad_curation
                 variant["curator_review_provenance"].update(planning_commit=bad_planning, curation_commit=bad_curation)
                 expect_failure("invalid immutable count", lambda: _planner_packet_correspondence(variant, "FRESH", [], repo), "published")
@@ -2532,6 +2715,8 @@ def check_worker_roster_contract() -> None:
 
 def check_queue_contract() -> None:
     payload = load_queue_state()
+    _check_legacy_inline_receipts()
+    _check_curator_receipt_registry()
     if payload.get("schema_version") != 3:
         fail("queue schema_version must be 3")
     if payload.get("canonical_branch") != "configurator":
@@ -2656,6 +2841,8 @@ def check_queue_contract() -> None:
     items = [validate_work_order(item) for item in items_raw]
     check_completion_correspondence(payload, items)
     check_planner_packet_correspondence_self_test()
+    check_legacy_inline_receipt_self_test()
+    check_curator_receipt_registry_self_test()
     check_new_planner_receipt_self_test()
     check_event_curation_resolution_self_test()
     ids = [item["id"] for item in items]
@@ -2720,7 +2907,7 @@ def check_queue_contract() -> None:
             fail("Planner-opened curation obligation must reference the immutable Planner packet")
         expected_resolution_reference = (
             f"git-json:{planner_packet['curation_commit']}:"
-            "docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+            f"{_curator_receipt_locator(planner_packet)}"
         )
         receipt = _curator_receipt(planner_packet)
         if receipt is not None:

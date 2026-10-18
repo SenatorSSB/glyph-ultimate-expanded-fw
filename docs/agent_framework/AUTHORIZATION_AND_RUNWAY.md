@@ -215,12 +215,8 @@ This immutable initial inventory is distinct from the current queue's count,
 which equals its exact remaining `survivors` list. No fixed target count or
 Planner ranking grants authorization.
 
-Independent Curator judgment requires an immutable receipt in
-`docs/project/ACTIVE_AGENT_QUEUE.md` at the recorded `curation_commit`, outside
-the normal queue-state block. Use exactly one
-`<!-- curator-receipt:start -->` / `<!-- curator-receipt:end -->` pair containing
-one fenced `json` object. Duplicate keys are invalid. The closed receipt fields
-are:
+Independent Curator judgment requires one immutable receipt at the recorded
+`curation_commit`. Its closed content contract is:
 
 ```text
 schema_name: glyph_curator_packet_receipt
@@ -252,6 +248,27 @@ supply remains rejected provenance and must not be relabeled to enter this set;
 if a packet cannot be adopted within this contract, record the review outcome
 and return to curation/planning instead of inventing executable authority.
 Both wait fields are JSON booleans. The proposal matches the immutable packet.
+
+The legacy singleton format applies only to the closed historical allowlist:
+one fenced `json` object inside the exact
+`<!-- curator-receipt:start -->` / `<!-- curator-receipt:end -->` pair in
+`docs/project/ACTIVE_AGENT_QUEUE.md`, outside its normal queue-state block.
+Duplicate keys are invalid. It does not authorize new packet receipts.
+
+### Append-only packet receipt registry
+
+The singleton `curator-receipt` block above is legacy historical evidence and
+must not be replaced, removed, or rewritten. New Planner packets use one
+regular JSON receipt at the deterministic path
+`docs/agent_framework/curation_receipts/<packet_id>.json`, where `<packet_id>`
+is the complete canonical packet ID. Its closed schema is the same
+`glyph_curator_packet_receipt` version 1 object described above. The recorded
+`curation_commit` is the first receipt commit and remains a direct child of the
+same Planner base. The registry path must be absent at that base, regular
+`100644` at the receipt commit, unique to its embedded packet ID, and untouched
+in every receipt-to-adoption descendant. Queue references use the exact
+`git-json:<curation_commit>:<deterministic-path>` locator. Existing historical
+inline receipts retain only their original authority and format.
 Acceptance requires a true proposal and four nonblank provenance/evidence/
 resume strings; otherwise those four fields are null.
 
