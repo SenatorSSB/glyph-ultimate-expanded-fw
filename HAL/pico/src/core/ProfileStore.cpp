@@ -987,7 +987,7 @@ bool ProfileStore::ReadProfile(
     if (!pb_decode(&stream, UltimateProfile_fields, &out) || stream.bytes_left)
         return false;
     if (!ProfileStoreReadTrace::Mark(17)) return false;
-    if (out.schema_version < 1 || out.schema_version > 3) {
+    if (out.schema_version < 1 || out.schema_version > 4) {
         if (unsupported)
             *unsupported = true;
         return false;

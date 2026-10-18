@@ -8,7 +8,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from check_glyph_stage_b_ultimate_profiles import NANOPB, ROOT, make_v3_artifact, run
+from check_glyph_stage_b_ultimate_profiles import NANOPB, ROOT, make_v3_artifact, make_v4_artifact, run
 
 HOST = ROOT / "tools/fixtures/profile_store_migration_lifecycle_host"
 
@@ -37,6 +37,11 @@ def main() -> int:
                 raise AssertionError("Stage-B route did not produce two v3 profiles")
             legacy = temp / "legacy-two-v3-profiles.pb"
             legacy.write_bytes(payload)
+            v4_message, v4_payload = writer.encode_artifact_payload(make_v4_artifact(), config_pb2, json_format)
+            if len(v4_message.ultimate_profiles) != 2 or any(profile.schema_version != 4 for profile in v4_message.ultimate_profiles):
+                raise AssertionError("Stage-B route did not produce two v4 profiles")
+            v4 = temp / "v4-two-x1-binding-profiles.pb"
+            v4.write_bytes(v4_payload)
 
             sanitize=["-fsanitize=address,undefined","-fno-omit-frame-pointer","-g"]
             objects: list[str] = []
@@ -56,6 +61,7 @@ def main() -> int:
                  str(ROOT / "src/core/config_usb_default_validation.cpp"), str(ROOT / "src/core/config_rgb_target_validation.cpp"),
                  str(ROOT / "config/glyph/common/src/glyph_config_validation.cpp"), *objects, "-o", str(executable)])
             lifecycle = run([str(executable), str(legacy)])
+            v4_lifecycle = run([str(executable), str(v4)])
             strict_first_create = run([str(executable), str(legacy), "--strict-first-create"])
             for marker in ("profiles_20=PASS", "compact_mode_refs=PASS", "reboot_switch=PASS",
                            "delete_refusal=PASS", "corrupt_record_isolation=PASS"):
@@ -63,11 +69,13 @@ def main() -> int:
                     raise AssertionError(f"lifecycle evidence missing {marker}")
             if "profile_store_strict_first_create=PASS" not in strict_first_create:
                 raise AssertionError("strict first-create evidence missing")
+            if "reboot_switch=PASS" not in v4_lifecycle:
+                raise AssertionError("V4 ProfileStore reboot read/activation evidence missing")
     except (AssertionError, OSError, ValueError, KeyError, TypeError, subprocess.CalledProcessError) as error:
         print(f"glyph_profile_store_migration_lifecycle: FAIL: {error}")
         return 1
     print("glyph_profile_store_migration_lifecycle: PASS")
-    print("production_import=true injected_storage=true strict_absent_first_create=true generated_nanopb_stage_b=true profiles=20 compact_mode_refs=true retry_without_duplicate_ids=true reboot_switch=true delete_refusal=true corrupt_record_isolation=true")
+    print("production_import=true injected_storage=true strict_absent_first_create=true generated_nanopb_stage_b=true v4_persisted_reboot_activation=true profiles=20 compact_mode_refs=true retry_without_duplicate_ids=true reboot_switch=true delete_refusal=true corrupt_record_isolation=true")
     return 0
 
 
