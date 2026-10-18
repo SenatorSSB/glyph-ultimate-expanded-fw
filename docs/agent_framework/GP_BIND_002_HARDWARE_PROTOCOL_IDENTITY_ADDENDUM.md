@@ -1,6 +1,6 @@
 # GP-BIND-002 hardware protocol identity addendum
 
-Protocol version: `GP_BIND_002_HW_V2`  
+Protocol version: `GP_BIND_002_HW_V2`
 Status: `HARDWARE_TEST_REQUIRED`; source-free terminal-agent packet only.
 
 ## Purpose and immutable scope
