@@ -696,7 +696,8 @@ struct OutputProgramContext {
     bool role_values[32] = {};
 
     OutputProgramContext(const UltimateProfile *selected, uint64_t buttons) : profile(selected), inputs(buttons) {
-        if (profile != nullptr && profile->schema_version == kUltimateProfileSchemaVersionV3)
+        if (profile != nullptr && (profile->schema_version == kUltimateProfileSchemaVersionV3 ||
+                                   profile->schema_version == kUltimateProfileSchemaVersionV4))
             UltimateProfileEvaluator::EvaluateRoles(*profile, inputs, role_values);
     }
     const UltimateProfileOutputEffect *Active(UltimateProfileOutputPhase phase, UltimateProfileOutputTarget target) const {
@@ -796,7 +797,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const OutputProgramContext program(_profile, inputs.buttons);
     RoleState dpad_roles = roles;
     RoleState direction_roles = roles;
-    if (_profile != nullptr && _profile->schema_version == kUltimateProfileSchemaVersionV3) {
+    if (_profile != nullptr && (_profile->schema_version == kUltimateProfileSchemaVersionV3 ||
+                                _profile->schema_version == kUltimateProfileSchemaVersionV4)) {
         const auto *dpad = program.Active(ULTIMATE_OUTPUT_PHASE_DPAD, ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK);
         dpad_roles.ls_to_dpad_active = roles.ls_to_dpad_active && dpad != nullptr && (dpad->value & 1);
         direction_roles.ls_to_dpad_active = roles.ls_to_dpad_active && dpad != nullptr && (dpad->value & 4);
@@ -859,7 +861,8 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     active_table_id = static_cast<RuntimeTableId>(UltimateProfileEvaluator::SelectTable(
         profile, inputs.buttons, static_cast<uint8_t>(active_table_id)));
 
-    if (profile != nullptr && profile->schema_version == kUltimateProfileSchemaVersionV3) {
+    if (profile != nullptr && (profile->schema_version == kUltimateProfileSchemaVersionV3 ||
+                               profile->schema_version == kUltimateProfileSchemaVersionV4)) {
         const OutputProgramContext program(profile, inputs.buttons);
         ApplyProfileAnalogProgram(program, routed_inputs, roles, effective_directions, directions, active_table_id, outputs);
     } else {

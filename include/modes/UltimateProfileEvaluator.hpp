@@ -15,7 +15,8 @@ inline const UltimateProfileOutputEffect *FindEffect(
     const UltimateProfile *profile, UltimateProfileOutputPhase phase,
     UltimateProfileOutputTarget target
 ) {
-    if (profile == nullptr || profile->schema_version != kUltimateProfileSchemaVersionV3) return nullptr;
+    if (profile == nullptr || (profile->schema_version != kUltimateProfileSchemaVersionV3 &&
+        profile->schema_version != kUltimateProfileSchemaVersionV4)) return nullptr;
     for (size_t i = 0; i < profile->output_program.effects_count; ++i) {
         const auto &effect = profile->output_program.effects[i];
         if (effect.phase == phase && effect.target == target) return &effect;
@@ -100,15 +101,21 @@ inline bool EvaluateCondition(
     const UltimateProfile &profile,
     const UltimateProfileCondition &condition,
     uint64_t input_buttons,
-    const bool roles[32]
+    const bool roles[32],
+    const bool functions[1] = nullptr
 ) {
+    const auto active_token = [&](uint32_t token) {
+        if (token <= kUltimateProfileButtonTokenMax) {
+            return IsPressedButtonToken(profile, input_buttons, token);
+        }
+        if (token >= kUltimateProfileRoleTokenMin && token <= kUltimateProfileRoleTokenMax) {
+            return roles[token - 65];
+        }
+        return functions != nullptr && token == kUltimateProfileFunctionTokenX1 && functions[0];
+    };
     for (size_t index = 0; index < condition.all_tokens_count; ++index) {
         const uint32_t token = condition.all_tokens[index];
-        const bool active = token <= kUltimateProfileButtonTokenMax
-            ? IsPressedButtonToken(profile, input_buttons, token)
-            : token >= kUltimateProfileRoleTokenMin && token <= kUltimateProfileRoleTokenMax &&
-                roles[token - 65];
-        if (!active) {
+        if (!active_token(token)) {
             return false;
         }
     }
@@ -116,11 +123,7 @@ inline bool EvaluateCondition(
         bool any_active = false;
         for (size_t index = 0; index < condition.any_tokens_count; ++index) {
             const uint32_t token = condition.any_tokens[index];
-            const bool active = token <= kUltimateProfileButtonTokenMax
-                ? IsPressedButtonToken(profile, input_buttons, token)
-                : token >= kUltimateProfileRoleTokenMin && token <= kUltimateProfileRoleTokenMax &&
-                    roles[token - 65];
-            any_active = any_active || active;
+            any_active = any_active || active_token(token);
         }
         if (!any_active) {
             return false;
@@ -128,23 +131,21 @@ inline bool EvaluateCondition(
     }
     for (size_t index = 0; index < condition.none_tokens_count; ++index) {
         const uint32_t token = condition.none_tokens[index];
-        const bool active = token <= kUltimateProfileButtonTokenMax
-            ? IsPressedButtonToken(profile, input_buttons, token)
-            : token >= kUltimateProfileRoleTokenMin && token <= kUltimateProfileRoleTokenMax &&
-                roles[token - 65];
-        if (active) {
+        if (active_token(token)) {
             return false;
         }
     }
     return true;
 }
 
-inline void EvaluateRoles(const UltimateProfile &profile, uint64_t input_buttons, bool roles[32]) {
+inline void EvaluateRoles(const UltimateProfile &profile, uint64_t input_buttons, bool roles[32],
+                          const bool functions[1] = nullptr) {
     for (size_t role = 0; role < 32; ++role) {
         roles[role] = false;
     }
     if (profile.schema_version != kUltimateProfileSchemaVersionV2 &&
-        profile.schema_version != kUltimateProfileSchemaVersionV3) {
+        profile.schema_version != kUltimateProfileSchemaVersionV3 &&
+        profile.schema_version != kUltimateProfileSchemaVersionV4) {
         return;
     }
     // Evaluate by role id, not persisted array order. Validation constrains
@@ -153,7 +154,7 @@ inline void EvaluateRoles(const UltimateProfile &profile, uint64_t input_buttons
         for (size_t index = 0; index < profile.roles_count; ++index) {
             const UltimateProfileRole &role = profile.roles[index];
             if (role.role_id == role_id) {
-                roles[role_id - 1] = EvaluateCondition(profile, role.condition, input_buttons, roles);
+                roles[role_id - 1] = EvaluateCondition(profile, role.condition, input_buttons, roles, functions);
                 break;
             }
         }
@@ -163,7 +164,8 @@ inline void EvaluateRoles(const UltimateProfile &profile, uint64_t input_buttons
 inline RoutingState EvaluateRouting(const UltimateProfile &profile, uint64_t input_buttons) {
     RoutingState routing{};
     if (profile.schema_version != kUltimateProfileSchemaVersionV2 &&
-        profile.schema_version != kUltimateProfileSchemaVersionV3) {
+        profile.schema_version != kUltimateProfileSchemaVersionV3 &&
+        profile.schema_version != kUltimateProfileSchemaVersionV4) {
         return routing;
     }
     for (size_t index = 0; index < profile.routing_slots_count; ++index) {
@@ -180,7 +182,8 @@ inline RoutingState EvaluateRouting(const UltimateProfile &profile, uint64_t inp
 // Ultimate output pipeline, so no later phase can accidentally consult the
 // physical, pre-routing slot a second time.
 inline uint64_t RouteLogicalInputs(const UltimateProfile *profile, uint64_t input_buttons) {
-    if (profile == nullptr || profile->schema_version != kUltimateProfileSchemaVersionV3) {
+    if (profile == nullptr || (profile->schema_version != kUltimateProfileSchemaVersionV3 &&
+        profile->schema_version != kUltimateProfileSchemaVersionV4)) {
         return input_buttons;
     }
     uint64_t routed = 0;
@@ -193,25 +196,69 @@ inline uint64_t RouteLogicalInputs(const UltimateProfile *profile, uint64_t inpu
     return routed;
 }
 
+// Binding conditions deliberately bypass routing slots.  They see the same
+// remap/SOCD-processed physical snapshot Ultimate receives, before the V3/V4
+// logical-routing pass.  This prevents a logical slot from intrinsically
+// acquiring X1 meaning.
+inline bool EvaluatePhysicalBindingCondition(const UltimateProfileCondition &condition,
+                                             uint64_t input_buttons) {
+    const auto active = [&](uint32_t token) {
+        return token >= kUltimateProfileButtonTokenMin && token <= kUltimateProfileButtonTokenMax &&
+            (input_buttons & (uint64_t{1} << (token - 1))) != 0;
+    };
+    for (size_t i = 0; i < condition.all_tokens_count; ++i) if (!active(condition.all_tokens[i])) return false;
+    if (condition.any_tokens_count != 0) {
+        bool any = false;
+        for (size_t i = 0; i < condition.any_tokens_count; ++i) any = any || active(condition.any_tokens[i]);
+        if (!any) return false;
+    }
+    for (size_t i = 0; i < condition.none_tokens_count; ++i) if (active(condition.none_tokens[i])) return false;
+    return true;
+}
+
+inline void EvaluateFunctions(const UltimateProfile &profile, uint64_t input_buttons, bool functions[1]) {
+    functions[0] = false;
+    if (profile.schema_version != kUltimateProfileSchemaVersionV4 || profile.function_bindings_count != 1) return;
+    const UltimateProfileFunctionBinding &binding = profile.function_bindings[0];
+    functions[0] = EvaluatePhysicalBindingCondition(binding.activation_condition, input_buttons);
+}
+
 inline uint8_t SelectTable(
     const UltimateProfile *profile,
     uint64_t input_buttons,
     uint8_t legacy_table_id
 ) {
     if (profile == nullptr || (profile->schema_version != kUltimateProfileSchemaVersionV2 &&
-                               profile->schema_version != kUltimateProfileSchemaVersionV3)) {
+                               profile->schema_version != kUltimateProfileSchemaVersionV3 &&
+                               profile->schema_version != kUltimateProfileSchemaVersionV4)) {
         return legacy_table_id;
     }
 
+    bool functions[1] = {};
+    EvaluateFunctions(*profile, input_buttons, functions);
     bool roles[32] = {};
-    EvaluateRoles(*profile, input_buttons, roles);
+    EvaluateRoles(*profile, input_buttons, roles, functions);
     uint8_t selected_table = static_cast<uint8_t>(profile->default_table_id);
     uint32_t selected_priority = UINT32_MAX;
     for (size_t index = 0; index < profile->table_rules_count; ++index) {
         const UltimateProfileTableRule &rule = profile->table_rules[index];
-        if (rule.priority < selected_priority && EvaluateCondition(*profile, rule.condition, input_buttons, roles)) {
+        if (rule.priority < selected_priority && EvaluateCondition(*profile, rule.condition, input_buttons, roles, functions)) {
             selected_priority = rule.priority;
             selected_table = static_cast<uint8_t>(rule.table_id);
+        }
+    }
+    if (profile->schema_version == kUltimateProfileSchemaVersionV4 && functions[0]) {
+        const UltimateProfileFunctionBinding &binding = profile->function_bindings[0];
+        const uint8_t exclusions[] = {3, 4, 5, 14, 15, 19, 20, 21};
+        bool excluded = false;
+        for (uint8_t role_id : exclusions) excluded = excluded || roles[role_id - 1];
+        if (!excluded) {
+            const bool mode = roles[0];
+            const uint32_t priority = mode ? binding.mode_priority : binding.base_priority;
+            if (priority < selected_priority) {
+                selected_priority = priority;
+                selected_table = static_cast<uint8_t>(mode ? binding.mode_table_id : binding.base_table_id);
+            }
         }
     }
     return selected_table;

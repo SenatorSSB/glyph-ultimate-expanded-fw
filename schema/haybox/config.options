@@ -86,6 +86,7 @@ Config.ultimate_profile_store_incarnation int_size:IS_32
 UltimateProfile.roles max_count:22
 UltimateProfile.routing_slots max_count:32
 UltimateProfile.table_rules max_count:19
+UltimateProfile.function_bindings max_count:1
 UltimateProfileCondition.all_tokens max_count:2
 UltimateProfileCondition.any_tokens max_count:4
 UltimateProfileCondition.none_tokens max_count:9
@@ -100,6 +101,12 @@ UltimateProfileRoutingSlot.input_token int_size:IS_8
 UltimateProfile.default_table_id int_size:IS_8
 UltimateProfileTableRule.priority int_size:IS_8
 UltimateProfileTableRule.table_id int_size:IS_8
+UltimateProfileFunctionBinding.function_class int_size:IS_8
+UltimateProfileFunctionBinding.function_instance int_size:IS_8
+UltimateProfileFunctionBinding.base_table_id int_size:IS_8
+UltimateProfileFunctionBinding.mode_table_id int_size:IS_8
+UltimateProfileFunctionBinding.base_priority int_size:IS_8
+UltimateProfileFunctionBinding.mode_priority int_size:IS_8
 UltimateProfileOutputProgram.effects max_count:12
 UltimateProfileOutputEffect.coordinates max_count:18
 UltimateProfileOutputEffect.coordinates int_size:IS_8

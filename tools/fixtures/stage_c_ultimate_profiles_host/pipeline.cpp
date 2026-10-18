@@ -156,9 +156,9 @@ void profile_variations(Config &config, const UltimateProfile &a) {
     config.ultimate_profiles[0]=a;
 }
 
-void persisted_profile_isolation(Config &config) {
-    require(config.ultimate_profiles_count==2 && config.ultimate_profiles[0].schema_version==3 &&
-        config.ultimate_profiles[1].schema_version==3,"writer fixture decodes two simultaneous complete v3 profiles");
+void persisted_profile_isolation(Config &config, uint8_t expected_schema) {
+    require(config.ultimate_profiles_count==2 && config.ultimate_profiles[0].schema_version==expected_schema &&
+        config.ultimate_profiles[1].schema_version==expected_schema,"writer fixture decodes two simultaneous complete profiles");
     require(config.game_mode_configs_count==3 && config.game_mode_configs[0].ultimate_profile_config==0 &&
         config.game_mode_configs[1].ultimate_profile_config==1 && config.game_mode_configs[2].ultimate_profile_config==2,
         "writer fixture retains legacy row and explicit A/B profile references");
@@ -186,7 +186,8 @@ void persisted_profile_isolation(Config &config) {
 }
 
 int main(int argc,char **argv) {
-    require(argc==2,"usage pipeline CONFIG");
+    require(argc==3,"usage pipeline CONFIG SCHEMA_VERSION");
+    const uint8_t expected_schema=static_cast<uint8_t>(std::atoi(argv[2]));
     std::ifstream stream(argv[1],std::ios::binary);
     std::vector<uint8_t> payload((std::istreambuf_iterator<char>(stream)),{});
     static Config config{};
@@ -246,9 +247,10 @@ int main(int argc,char **argv) {
     }
     // v1/v2/absent use the exact frozen Stage-B production path. v1/v2
     // table payloads are supplied identically on both sides of the oracle.
-    for(int version=0;version<=2;++version) {
+    for(int version=0;expected_schema != 4 && version<=2;++version) {
         UltimateProfile legacy_profile=a; legacy_profile.schema_version=static_cast<uint8_t>(version);
         legacy_profile.has_output_program=false; legacy_profile.output_program={};
+        legacy_profile.function_bindings_count=0;
         if(version==1) {
             legacy_profile.roles_count=legacy_profile.routing_slots_count=legacy_profile.table_rules_count=0;
             legacy_profile.default_table_id=0;
@@ -263,7 +265,7 @@ int main(int argc,char **argv) {
     }
     config.ultimate_profiles[0]=a;
     profile_variations(config,a);
-    persisted_profile_isolation(config);
+    persisted_profile_isolation(config,expected_schema);
     std::printf("PASS production Ultimate final-output comparisons=%zu; frozen legacy oracle; A/B/A effects; storage-order; remap/SOCD; Nunchuk host invariants\n",checks);
     std::printf("sizeof_config=%zu sizeof_profile=%zu\n",sizeof(Config),sizeof(UltimateProfile));
 }

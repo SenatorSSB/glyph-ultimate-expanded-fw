@@ -524,6 +524,32 @@ message UltimateProfileOutputEffect {
   bool gate_inverted = 15;
 }
 
+// Firmware-owned, closed controller-function vocabulary.  A profile may bind
+// an admitted function instance to physical input, but cannot define a new
+// function class, instance, evaluation order, or output behavior.
+enum UltimateControllerFunctionClass {
+  ULTIMATE_CONTROLLER_FUNCTION_UNSPECIFIED = 0;
+  ULTIMATE_CONTROLLER_FUNCTION_STICK_TABLE_MODIFIER = 1;
+}
+enum UltimateControllerFunctionInstance {
+  ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_UNSPECIFIED = 0;
+  ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1 = 1;
+}
+
+// Version 4's fixed-capacity profile binding.  The activation condition is
+// evaluated against the physical pre-profile-routing button snapshot.  Table
+// selection priorities remain finite profile data; firmware supplies the
+// synthesized X1/MX1 candidates and their deterministic evaluation order.
+message UltimateProfileFunctionBinding {
+  UltimateControllerFunctionClass function_class = 1;
+  UltimateControllerFunctionInstance function_instance = 2;
+  UltimateProfileCondition activation_condition = 3;
+  uint32 base_table_id = 4;
+  uint32 mode_table_id = 5;
+  uint32 base_priority = 6;
+  uint32 mode_priority = 7;
+}
+
 /**
  * Persistable coordinate data for one Ultimate runtime profile.
  *
@@ -541,6 +567,8 @@ message UltimateProfile {
   // Version 3 opts into the fixed Stage-C output pipeline.  Its absence is
   // significant: v1 and v2 retain their byte-for-byte legacy behavior.
   UltimateProfileOutputProgram output_program = 7;
+  // Version 4 adds the bounded controller-function binding vocabulary.
+  repeated UltimateProfileFunctionBinding function_bindings = 8;
 }
 enum ProfileStoreOperation {
   PROFILE_STORE_OPERATION_UNSPECIFIED = 0;
