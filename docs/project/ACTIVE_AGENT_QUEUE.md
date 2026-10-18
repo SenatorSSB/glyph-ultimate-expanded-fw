@@ -8337,7 +8337,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-001",
       "title": "Profile-defined X1 controller-function binding vertical slice",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "LOCAL_ACCEPTANCE_PENDING",
       "branch": "codex/gp-bind-001-profile-defined-x1",
       "objective": "Implement the bounded V4 profile-defined binding abstraction for X1 while preserving accepted X1 controller behavior exactly.",
       "why_this_matters": "Proves the reusable profile-to-firmware bounded function path without assigning intrinsic X1 meaning to a physical or logical slot.",
