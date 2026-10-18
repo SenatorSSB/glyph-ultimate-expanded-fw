@@ -173,12 +173,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": true,
-    "trigger": "Reviewed source-free GP-BIND-002 active-runtime identity diagnosis at dab2b29f515142d022cf240cf6a87a8afd56f26e establishes that the H4a-time active selected Config row/profile snapshot is unreconstructible from preserved evidence. A bounded Curator decision is required before any terminal-held read-only observation can be requested; no repair implementation is pending.",
+    "trigger": "The reviewed GP-BIND-002 active-runtime identity diagnosis establishes that a future H4 observation needs bounded terminal-held read-only activation evidence. The queue retains two exact hardware-failed subjects, GP-BIND-001 and GP-BIND-002; Curator must preserve both failure tuples while deciding whether to narrow GP-BIND-002 only to that read-only diagnostic. No repair implementation is pending.",
     "resolution": null,
     "provenance": {
       "opened_by_role": "Glyph Implementation Supervisor",
       "opening_reference": "git-json:0000000000000000000000000000000000000000:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
+        "GP-BIND-001",
         "GP-BIND-002"
       ],
       "resolved_by_role": null,
