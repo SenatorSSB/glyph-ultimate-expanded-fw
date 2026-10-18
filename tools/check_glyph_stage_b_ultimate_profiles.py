@@ -119,6 +119,7 @@ def main() -> int:
             ("v4_writer_carrier_in_any", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.any_tokens.append(37)),
             ("v4_writer_carrier_in_none", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.none_tokens.append(37)),
             ("v4_writer_condition_out_of_range", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(61)),
+            ("v4_writer_missing_condition", lambda value: value.ultimate_profiles[0].function_bindings[0].ClearField("activation_condition")),
         )
         for label, mutate in writer_binding_negatives:
             invalid = config_pb2.Config(); invalid.CopyFrom(v4_message)
@@ -189,6 +190,7 @@ def main() -> int:
                 ("v4_carrier_any", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.any_tokens.append(37)),
                 ("v4_carrier_none", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.none_tokens.append(37)),
                 ("v4_condition_out_of_range", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(61)),
+                ("v4_missing_condition", lambda value: value.ultimate_profiles[0].function_bindings[0].ClearField("activation_condition")),
                 ("v4_colliding_priority", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "base_priority", 1)),
             )
             for label, mutate in mutations:
@@ -211,7 +213,7 @@ def main() -> int:
         return 1
 
     print("glyph_stage_b_ultimate_profiles: PASS")
-    print("generated_nanopb_decode=true production_validation=true v1_legacy=true v2_evaluator=true v3_stage_c_routing=true v4_x1_binding=true negatives=22")
+    print("generated_nanopb_decode=true production_validation=true v1_legacy=true v2_evaluator=true v3_stage_c_routing=true v4_x1_binding=true negatives=24")
     print(size_line)
     return 0
 

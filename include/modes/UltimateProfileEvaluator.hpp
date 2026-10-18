@@ -225,6 +225,7 @@ inline uint8_t ClaimedCarrierToken(const UltimateProfile *profile) {
     const UltimateProfileFunctionBinding &binding = profile->function_bindings[0];
     if (binding.function_class != UltimateControllerFunctionClass_ULTIMATE_CONTROLLER_FUNCTION_STICK_TABLE_MODIFIER ||
         binding.function_instance != UltimateControllerFunctionInstance_ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1 ||
+        !binding.has_activation_condition ||
         binding.carrier_token < kUltimateProfileButtonTokenMin ||
         binding.carrier_token > kUltimateProfileButtonTokenMax) return 0;
     const UltimateProfileCondition &condition = binding.activation_condition;

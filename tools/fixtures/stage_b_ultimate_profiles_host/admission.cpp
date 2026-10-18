@@ -169,6 +169,17 @@ bool evaluate_v4(const Config &config) {
     malformed.function_bindings[0].activation_condition.all_tokens_count = 2;
     result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&malformed) == 0,
                     "duplicate in-memory ownership condition fails closed without consumption");
+    malformed = profile;
+    // Nanopb storage may retain stale condition bytes after its presence bit is
+    // cleared.  Runtime ownership must match writer admission and fail closed:
+    // the carrier is neither consumed nor eligible to activate X1.
+    malformed.function_bindings[0].has_activation_condition = false;
+    bool functions[1] = {};
+    UltimateProfileEvaluator::EvaluateFunctions(malformed, uint64_t{1} << 36, functions);
+    result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&malformed) == 0 &&
+                    UltimateProfileEvaluator::ConsumeClaimedCarrier(&malformed, uint64_t{1} << 36) == (uint64_t{1} << 36) &&
+                    !functions[0],
+                    "absent ownership condition with stale storage fails closed without consumption or activation");
     return result;
 }
 
