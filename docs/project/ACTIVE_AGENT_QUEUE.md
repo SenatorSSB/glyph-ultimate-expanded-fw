@@ -238,18 +238,20 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "RUNWAY_LOW"
+    "primary_liveness": "PLANNING_REQUIRED"
   },
   "signals": [
-    "RUNWAY_LOW"
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "HARDWARE_TEST_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -8335,7 +8337,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-001",
       "title": "Profile-defined X1 controller-function binding vertical slice",
-      "status": "READY",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "codex/gp-bind-001-profile-defined-x1",
       "objective": "Implement the bounded V4 profile-defined binding abstraction for X1 while preserving accepted X1 controller behavior exactly.",
       "why_this_matters": "Proves the reusable profile-to-firmware bounded function path without assigning intrinsic X1 meaning to a physical or logical slot.",
@@ -8360,16 +8362,16 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Do not merge behavior-changing source before exact artifact custody and source-free HEP PASS. Preserve the accepted pre-candidate firmware/profile state and use only the documented manual recovery route.",
       "status_documentation_updates": "Record exact candidate, focused tests, independent reviews, Mk6 artifact custody and the eventual hardware handoff/result without changing historical evidence.",
-      "done_evidence": "NOT_RUN — newly adopted READY H3 work; no candidate, build, artifact, device action or hardware result exists.",
+      "done_evidence": "Candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071 independently source-reviewed and built; exact preserved UF2 awaits human-only acceptance under GP_BIND_001_HW_V1.",
       "stop_conditions": ["Missing source authority or substantive product decision", "Tier-1 or affected Tier-2 failure", "required hardware action before exact handoff", "attempted forbidden scope or runtime/device-write expansion"],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "32c1bd81910ec5bcea0104fe98b9b37fb267d071",
+      "candidate_base_configurator_sha": "83bd38ab7e7946562a6e952171d85acbfed7339b",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/32c1bd81910ec5bcea0104fe98b9b37fb267d071/ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed/firmware.uf2",
+      "firmware_artifact_sha256": "ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed",
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": []
@@ -8542,19 +8544,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-BIND-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-BIND-001
-Immediate Ready: 1
+Ready IDs: (none)
+Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 0
-Effective authorized runway: 1
+Hardware-pending: 1
+Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: RUNWAY_LOW
+Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
