@@ -1,0 +1,67 @@
+{
+  "schema_name": "glyph_gp_bind_active_runtime_identity_diagnosis",
+  "schema_version": 1,
+  "status": "DIAGNOSIS_ONLY",
+  "source_free": true,
+  "device_access": "NOT_PERFORMED",
+  "candidate": {
+    "git_sha": "b3d60feb48d637efa8612515d2351a470fe9df0e",
+    "tree": "3ab9366225591543da487f0b7d95c820614f70d4",
+    "uf2_sha256": "bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921",
+    "uf2_bytes": 988160
+  },
+  "historical_h4_claims": {
+    "alternate_profile_id": 3,
+    "schema_version": 4,
+    "sole_x1_carrier": "LT6",
+    "x1_activated": true,
+    "legacy_down_a_leaked": true,
+    "h4b_h4c_h5": "NOT_RUN"
+  },
+  "historical_recovery_claims": {
+    "profile_3_restored": true,
+    "config_byte_identical": true,
+    "store_generation": 172,
+    "profile_3_revision": 5,
+    "transaction_high_water": "17293822569102712070",
+    "is_hardware_acceptance": false,
+    "is_current_device_state": false
+  },
+  "h4_active_runtime_identity": "UNRECONSTRUCTIBLE_FROM_PRESERVED_REPOSITORY_EVIDENCE",
+  "missing_h4_time_facts": [
+    "active_backend_and_host",
+    "selected_game_mode_config_index_id_and_decoded_row",
+    "selected_ultimate_profile_id",
+    "profile_store_active_id_activation_status_and_active_revision",
+    "raw_and_decoded_config_with_hash",
+    "full_profile_3_record_routing_roles_output_program_with_hash",
+    "generated_nanopb_descriptor_or_exact_build_manifest_hash"
+  ],
+  "forbidden_inferences": [
+    "stored_profile_3_equals_active_runtime_profile",
+    "absent_h4_routing_or_output_program",
+    "hardware_cause_from_this_identity_gap",
+    "repair_authority"
+  ],
+  "evidence_objects": {
+    "failure_fixture": {
+      "commit": "cd0c805b805750182af7404f2b57c823494a95c4",
+      "path": "docs/calibration/fixtures/gp_bind_002_hardware_failure_2026-10-19.json",
+      "git_blob": "0b11664416e7428ea30ba40f103841f57c6c7d88",
+      "sha256": "ae9edf6e814478ad3da5ac6dd9945907832d8525ae1c2c3a820e73b49af19d41"
+    },
+    "protocol_v1": {
+      "commit": "111e5780632283cec6a690610c140f9464292348",
+      "path": "docs/agent_framework/GP_BIND_002_HARDWARE_PROTOCOL.md",
+      "git_blob": "49c5ede3c070331fd04c90d60be225c5033efe2c",
+      "sha256": "ba92ef30b1cfed98e2d8dde033c79b18bc7debcd0d1f5b1fbdf8ce9a20069c1c"
+    },
+    "diagnosis_receipt": {
+      "commit": "fae53744ed1a1c0a085a571841c69577adc8ae8b",
+      "path": "docs/agent_framework/curation_receipts/gp_bind_002_failure_diagnosis_20261019.json",
+      "git_blob": "e4b545d19e800a4ff62dd2f42303cfafdbb53e32",
+      "sha256": "cd5a41f142ab7e44fe7e0e2a1c6beff0beebc255d7da96e4f6a8dc40e37ff1f9"
+    }
+  },
+  "next_permissible_action": "SOURCE_FAITHFUL_DIAGNOSIS_AND_ADVERSARIAL_REVIEW_ONLY"
+}
