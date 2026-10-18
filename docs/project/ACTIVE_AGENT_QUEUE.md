@@ -172,18 +172,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": true,
-    "trigger": "The reviewed GP-BIND-002 active-runtime identity diagnosis establishes that a future H4 observation needs bounded terminal-held read-only activation evidence. The queue retains two exact hardware-failed subjects, GP-BIND-001 and GP-BIND-002; Curator must preserve both failure tuples while deciding whether to narrow GP-BIND-002 only to that read-only diagnostic. No repair implementation is pending.",
-    "resolution": null,
+    "pending": false,
+    "trigger": null,
+    "resolution": "Post-opening receipt c5415ab0348b9c1db9dce36eda73bf4a7e2f7478 preserves the exact GP-BIND-001 and GP-BIND-002 failures and narrows GP-BIND-002 only to GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1. The terminal agent may retain the specified read-only activation evidence before a future H4 row; no mutation, repair implementation, candidate, build, artifact, flash, acceptance, or merge is authorized.",
     "provenance": {
       "opened_by_role": "Glyph Implementation Supervisor",
-      "opening_reference": "git-json:0000000000000000000000000000000000000000:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opening_reference": "git-json:112a1ec21df37b4867b08145d9a9f7c11429afb4:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
         "GP-BIND-001",
         "GP-BIND-002"
       ],
-      "resolved_by_role": null,
-      "resolution_reference": null
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:c5415ab0348b9c1db9dce36eda73bf4a7e2f7478:docs/agent_framework/curation_receipts/gp_bind_activation_observation_20261019.json"
     }
   },
   "planner_packet": {
@@ -247,7 +247,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "CURATION_REQUIRED"
+    "primary_liveness": "PLANNING_REQUIRED"
   },
   "signals": [
     "PLANNING_REQUIRED",
@@ -8615,7 +8615,7 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
