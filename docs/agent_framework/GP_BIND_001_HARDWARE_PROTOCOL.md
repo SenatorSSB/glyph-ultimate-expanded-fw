@@ -1,6 +1,6 @@
 # GP-BIND-001 X1 Hardware Protocol
 
-Protocol version: `GP_BIND_001_HW_V1`  
+Protocol version: `GP_BIND_001_HW_V1`
 Status: `HARDWARE_TEST_REQUIRED`; no physical observation is recorded here.
 
 ## Exact identity
