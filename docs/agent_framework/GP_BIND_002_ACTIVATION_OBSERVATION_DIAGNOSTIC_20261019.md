@@ -1,6 +1,6 @@
 # GP-BIND-002 activation-observation diagnostic
 
-Protocol version: `GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1`  
+Protocol version: `GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1`
 Status: `READ_ONLY_DIAGNOSTIC_ONLY`; source-free terminal-agent packet.
 
 ## Purpose and authority
