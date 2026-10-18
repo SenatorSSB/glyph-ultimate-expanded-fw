@@ -172,17 +172,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": true,
-    "trigger": "GP-BIND-001 exact hardware failure: the LT6 alternate carrier selected X1 but also leaked legacy forced Down+A. Preserve the failed candidate and artifact; bounded ownership repair requires fresh Curator adjudication.",
-    "resolution": null,
+    "pending": false,
+    "trigger": null,
+    "resolution": "GP-BIND-001 HARDWARE_FAILED is preserved as immutable evidence; post-opening Curator receipt reauthorizes only GP-BIND-002's bounded generic carrier-ownership repair.",
     "provenance": {
       "opened_by_role": "Glyph Hardware Evidence Processor",
-      "opening_reference": "git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md",
+      "opening_reference": "git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
         "GP-BIND-001"
       ],
-      "resolved_by_role": null,
-      "resolution_reference": null
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:1bac22cca4db5439f61180e3f65e16e4979effa0:docs/agent_framework/curation_receipts/gp_bind_001_repair_20261018.json"
     }
   },
   "planner_packet": {
@@ -238,19 +238,19 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "CURATION_REQUIRED"
+    "primary_liveness": "RUNWAY_LOW"
   },
   "signals": [
-    "CURATION_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
+    "RUNWAY_LOW",
+    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "REPAIR_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -8375,6 +8375,74 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_001_hardware_failure_2026-10-18.json",
       "hardware_result": "FAIL",
       "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-BIND-002",
+      "title": "Generic carrier ownership repair for profile-defined X1 binding",
+      "status": "READY",
+      "branch": "codex/gp-bind-002-carrier-ownership",
+      "objective": "Repair the generic V4 controller-function binding path so its explicitly claimed physical carrier is consumed from legacy interpretation while function activation retains the original physical remap/SOCD snapshot.",
+      "why_this_matters": "The exact GP-BIND-001 H4 failure proves that binding activation alone is insufficient: a reusable binding abstraction must own its carrier without a slot-specific exception.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "A V4 binding names one unambiguous generic carrier; the closed X1 function observes the original physical remap/SOCD snapshot, while the claimed carrier contributes to neither legacy digital nor analogue interpretation. Unclaimed controls preserve legacy behavior.",
+      "scope": "X1 V4 carrier ownership only: explicit bounded ownership representation and validation, generic evaluation/consumption ordering, focused host fixtures, exact source review/build/custody, and a wholly fresh GP_BIND_001_HW_V1 H1-H5 acceptance run.",
+      "explicit_excluded_scope": "LT6 special-casing; another carrier selection; X2, Y1, Y2, Tilt, Smash/game semantics, scripting, macros, turbo, timing automation, Stage A/B/C redesign, ProfileStore redesign, schema/product changes, device/config write implementation, flashing automation, RT2, factory recovery, Senscope, Nunchuk, and merge before exact hardware PASS.",
+      "touched_planes": [
+        "Ultimate V4 bounded function-binding validation and evaluation",
+        "legacy digital and analogue input interpretation at the generic claimed-carrier boundary",
+        "focused host fixtures and both enum ABI regressions",
+        "source-free review, build custody, and candidate-specific hardware handoff"
+      ],
+      "source_authority": "Direct owner repair instruction dated 2026-10-18; exact source-free H4 evidence at repo-json:docs/calibration/fixtures/gp_bind_001_hardware_failure_2026-10-18.json; GP-BIND-001 repair curation packet at ce3aa57bdc568a74ccfd03ea7aa23477d721e4d5; and post-opening immutable Curator receipt 1bac22cca4db5439f61180e3f65e16e4979effa0. The defect is source-grounded by the V4 binding/evaluation path and exact observed LT6 Down+A leakage.",
+      "dependencies_prerequisites": [
+        "Exact opening event GP-BIND-001 HARDWARE_FAILED at git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+        "Immutable repair receipt git-json:1bac22cca4db5439f61180e3f65e16e4979effa0:docs/agent_framework/curation_receipts/gp_bind_001_repair_20261018.json",
+        "Fresh live canonical verification and a clean isolated candidate worktree",
+        "Preserve failed candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071 and its evidence without reusing its acceptance"
+      ],
+      "substantive_authorization_rationale": "The owner resolved the only material repair choice: carrier ownership must be explicit, generic, and complete across legacy digital/analogue interpretation, while activation uses the original snapshot. The observed H4 failure is direct Tier-1 hardware evidence and authorizes this one bounded repair successor under Revision-3's hardware-FAIL exception; no game semantic, carrier choice, Stage, ProfileStore, or product-schema judgment remains.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Any need for LT6-specific logic, a different carrier choice, multiple ambiguous carriers, arbitrary expressions, or a new function family",
+        "Any required Stage A/B/C, ProfileStore, persistence, schema/product, device-write, or flashing redesign",
+        "A Tier-1 or directly affected Tier-2 contradiction in original-snapshot activation or complete legacy consumption",
+        "Canonical source drift that changes the reviewed binding or legacy interpretation boundary before candidate creation"
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator, 2026-10-18; opening git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state; source-free failure packet ce3aa57bdc568a74ccfd03ea7aa23477d721e4d5; immutable resolution receipt git-json:1bac22cca4db5439f61180e3f65e16e4979effa0:docs/agent_framework/curation_receipts/gp_bind_001_repair_20261018.json.",
+      "automated_validation": [
+        "Focused negative ownership validation rejects absent, ambiguous, or invalid carrier ownership and proves claimed-carrier consumption",
+        "Default LT5 X1, Mode+LT5, and established X1 conflict preservation; V1-V3 unchanged; Stage-C and V4 ProfileStore persistence regression",
+        "Alternate LT6 X1 and Mode+LT6 prove no Down, A, or Down+A leakage; LT5-carrier / LT6-unclaimed proves legacy Down+A retention",
+        "Digital and analogue legacy-consumption coverage; original physical remap/SOCD snapshot activation coverage; both enum ABI and descriptor/size checks",
+        "Fresh adversarial reusable-architecture review, fresh independent source review, canonical Mk6 build/resource review, unique new UF2 custody, and final source-build-artifact correspondence review"
+      ],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_BIND_001_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_BIND_001_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "rollback_recovery": "Do not merge or flash. Preserve the failed GP-BIND-001 source/artifact/evidence unchanged. Before fresh hardware work, use only the approved recorded backup/readback route to establish ordinary controller state; any uncertain device mutation stops. The new artifact is unique and cannot reuse GP-BIND-001 custody or H1-H3 results.",
+      "status_documentation_updates": "Record exact candidate/base/tree, changed paths, focused validation, independent reviews, Mk6 RAM/flash results, unique artifact path/size/SHA-256, and the new candidate-specific H1-H5 evidence. Retain GP-BIND-001 H4 FAIL and recovery as historical failure evidence only.",
+      "done_evidence": "PENDING: a new exact candidate, new UF2, fresh reviews, and complete fresh GP_BIND_001_HW_V1 H1-H5 PASS are required. GP-BIND-001 H1-H3 PASS, H4 FAIL, H5 NOT_RUN, and its recovery do not transfer.",
+      "stop_conditions": [
+        "Missing source authority, owner/domain decision, or a scope expansion beyond generic carrier ownership",
+        "Any Tier-1 or directly affected Tier-2 validation/review/build/custody contradiction",
+        "Any firmware merge, flash, or controller retest attempt before exact candidate review, custody, and approved hardware packet",
+        "Any uncertain recovery/write outcome or mismatch between reviewed source, built source, sealed artifact, and hardware tuple"
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
     }
   ]
 }
@@ -8544,19 +8612,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-BIND-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none)
-Immediate Ready: 0
+Ready IDs: GP-BIND-002
+Immediate Ready: 1
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
 Hardware-pending: 0
-Effective authorized runway: 0
+Effective authorized runway: 1
 Target effective authorized runway: 4
-Primary liveness: CURATION_REQUIRED
+Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
