@@ -173,12 +173,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": true,
-    "trigger": "GP-BIND-002 exact hardware failure: verified V4 Profile 3 with LT6 as the claimed X1 carrier activated X1 while legacy Down+A leaked. Preserve this failed candidate and artifact; any further repair requires fresh Curator adjudication.",
+    "trigger": "GP-BIND-001 and GP-BIND-002 remain exact hardware failures. GP-BIND-001 is preserved under its earlier post-opening Curator resolution; GP-BIND-002 verified V4 Profile 3 with LT6 as the claimed X1 carrier activated X1 while legacy Down+A leaked. Preserve both failed candidates and artifacts; the new GP-BIND-002 repair requires fresh Curator adjudication.",
     "resolution": null,
     "provenance": {
       "opened_by_role": "Glyph Hardware Evidence Processor",
       "opening_reference": "git-json:0000000000000000000000000000000000000000:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
+        "GP-BIND-001",
         "GP-BIND-002"
       ],
       "resolved_by_role": null,
