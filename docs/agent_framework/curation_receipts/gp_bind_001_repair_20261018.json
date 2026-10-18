@@ -1,0 +1,15 @@
+{
+  "schema_name": "glyph_curation_resolution_receipt",
+  "schema_version": 1,
+  "resolver_role": "Glyph Work-Order Curator",
+  "resolved_at": "2026-10-18T06:30:00Z",
+  "opening_reference": "git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "subject_resolutions": [
+    {
+      "subject_id": "GP-BIND-001",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "REAUTHORIZED",
+      "resolution": "Preserve failed GP-BIND-001 and its exact artifact as failure evidence; authorize only the separately identified bounded GP-BIND-002 generic carrier-ownership repair with entirely new candidate, custody, review, and H1-H5 acceptance gates."
+    }
+  ]
+}
