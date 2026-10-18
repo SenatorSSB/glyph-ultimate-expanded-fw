@@ -169,61 +169,51 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "38017600deb243b5e281edec6d0d378b997d9e40",
+  "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
     "trigger": null,
-    "resolution": "GP-CONFIG-024 and GP-VAL-045 independently adopted PREAUTHORIZED/WAITING; GP-KBD-002 conditional owner policy consumed as preserved original raw output with remaining physical/RC evidence gate. No implementation/acceptance or unfinished Curator survivor.",
+    "resolution": "GP-BIND-001 independently adopted READY as the bounded X1 profile-defined binding vertical slice; no other function family or hardware acceptance is authorized.",
     "provenance": {
       "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:fbf2d1c99569ddee3e5432501ddc868bbdee4990:docs/planning/portfolio_20261005_0028.md",
+      "opening_reference": "git-json:8fd3eaee643f1751ac6bfc0aad8bba4adf689f24:docs/planning/portfolio_20261018_0600.md",
       "subject_ids": [
-        "GP-CONFIG-024",
-        "GP-KBD-002",
-        "GP-VAL-045"
+        "GP-BIND-001"
       ],
       "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b:docs/project/ACTIVE_AGENT_QUEUE.md#curator-receipt"
+      "resolution_reference": "git-json:6f7bfc815fba630ed77995a988e5f592ba153dc2:docs/agent_framework/curation_receipts/glyph-portfolio-20261018-0600.json"
     }
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20261005-0028",
-    "base_configurator_sha": "2c10ff7c19a5ea8a945339d94246218e2f16dcc2",
-    "packet_id": "glyph-portfolio-20261005-0028",
-    "packet_path": "docs/planning/portfolio_20261005_0028.md",
-    "planning_commit": "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
-    "curation_commit": "3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b",
+    "branch": "planning/portfolio-20261018-0600",
+    "base_configurator_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
+    "packet_id": "glyph-portfolio-20261018-0600",
+    "packet_path": "docs/planning/portfolio_20261018_0600.md",
+    "planning_commit": "8fd3eaee643f1751ac6bfc0aad8bba4adf689f24",
+    "curation_commit": "6f7bfc815fba630ed77995a988e5f592ba153dc2",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator consumes all three initial candidates:024/045 PREAUTHORIZED/WAITING; Keyboard002 policy condition resolved by direct human message and exact original Glyph/main HayBox bytes to preserve raw output, remaining physical/RC evidence EVIDENCE_GATED. No executable Keyboard repair or new survivor. All97priororders preserved."
+      "Independent Curator adopts GP-BIND-001 READY under the exact direct owner X1 vertical-slice scope; all other packet scope remains excluded."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20261005-0028",
-      "planning_commit": "fbf2d1c99569ddee3e5432501ddc868bbdee4990",
-      "packet_id": "glyph-portfolio-20261005-0028",
-      "packet_base_configurator_sha": "2c10ff7c19a5ea8a945339d94246218e2f16dcc2",
-      "curation_branch": "curation/portfolio-20261005-0028",
-      "review_date": "2026-10-05",
+      "planning_branch": "planning/portfolio-20261018-0600",
+      "planning_commit": "8fd3eaee643f1751ac6bfc0aad8bba4adf689f24",
+      "packet_id": "glyph-portfolio-20261018-0600",
+      "packet_base_configurator_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
+      "curation_branch": "curation/portfolio-20261018-0600",
+      "review_date": "2026-10-18",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-CONFIG-024",
-          "disposition": "PREAUTHORIZED"
-        },
-        {
-          "candidate_id": "GP-KBD-002",
-          "disposition": "EVIDENCE_GATED"
-        },
-        {
-          "candidate_id": "GP-VAL-045",
-          "disposition": "PREAUTHORIZED"
+          "candidate_id": "GP-BIND-001",
+          "disposition": "READY"
         }
       ],
-      "curation_commit": "3020f8bcf7d8e2bcf165b3d6dfefb569bc12397b"
+      "curation_commit": "6f7bfc815fba630ed77995a988e5f592ba153dc2"
     }
   },
   "completion_correspondence": {
@@ -248,19 +238,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "PLANNING_REQUIRED"
+    "primary_liveness": "RUNWAY_LOW"
   },
   "signals": [
-    "PLANNER_REFRESH_REQUIRED",
-    "PLANNING_REQUIRED"
+    "RUNWAY_LOW"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -8342,6 +8331,48 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-BIND-001",
+      "title": "Profile-defined X1 controller-function binding vertical slice",
+      "status": "READY",
+      "branch": "codex/gp-bind-001-profile-defined-x1",
+      "objective": "Implement the bounded V4 profile-defined binding abstraction for X1 while preserving accepted X1 controller behavior exactly.",
+      "why_this_matters": "Proves the reusable profile-to-firmware bounded function path without assigning intrinsic X1 meaning to a physical or logical slot.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "V4 derives closed F_X1 from a profile-defined physical binding and synthesizes the existing X1/MX1 table candidates with their accepted priorities and exclusions; V1-V3 remain unchanged.",
+      "scope": "X1 only: fixed-capacity generic binding record, closed STICK_TABLE_MODIFIER/X1 vocabulary, V4 validation/evaluation, focused tests, Mk6 proof, review, custody and exact hardware handoff.",
+      "explicit_excluded_scope": "X2, Y1, Y2, Tilt, Smash/game semantics, scripting, macros, turbo, timing automation, Stage A/B/C redesign, ProfileStore redesign, device/config writes, flashing, RT2, factory recovery, Senscope and Nunchuk.",
+      "touched_planes": ["Ultimate V4 profile validation and evaluation", "bounded ProfileStore V4 payload admission", "focused fixtures and host tests", "source-free evidence and hardware handoff"],
+      "source_authority": "Direct owner scope dated 2026-10-18; exact Planner packet glyph-portfolio-20261018-0600 at 8fd3eaee643f1751ac6bfc0aad8bba4adf689f24; independently reviewed Curator receipt 6f7bfc815fba630ed77995a988e5f592ba153dc2; source-grounded X1 role/table inventory.",
+      "dependencies_prerequisites": ["Live canonical base 3006646859d6db2ebbb5a7e9e4cc731623633dfc", "exact Planner/Curator same-base correspondence", "preserve accepted ProfileStore production path and hardware evidence"],
+      "substantive_authorization_rationale": "Direct owner explicitly authorized the first production X1 vertical slice and the independent Curator adopted its sole candidate READY under the bounded packet contract.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": ["Relevant canonical firmware or ProfileStore source changes before candidate creation", "Tier-1 or directly affected Tier-2 contradiction", "scope expansion beyond the closed X1 slice"],
+      "authorization_snapshot_provenance": "git-json:76154a7115e9b197bac3b6ae5df8436ff19d4cd1:docs/project/ACTIVE_AGENT_QUEUE.md; receipt git-json:6f7bfc815fba630ed77995a988e5f592ba153dc2:docs/agent_framework/curation_receipts/glyph-portfolio-20261018-0600.json",
+      "automated_validation": ["Focused V3-to-V4 X1 rule/token inventory and selector matrix", "V1-V3 and V4 Stage-C/ProfileStore regressions", "both enum ABIs, size/descriptor checks and canonical Mk6 build/resource review"],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_BIND_001_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_BIND_001_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "rollback_recovery": "Do not merge behavior-changing source before exact artifact custody and source-free HEP PASS. Preserve the accepted pre-candidate firmware/profile state and use only the documented manual recovery route.",
+      "status_documentation_updates": "Record exact candidate, focused tests, independent reviews, Mk6 artifact custody and the eventual hardware handoff/result without changing historical evidence.",
+      "done_evidence": "NOT_RUN — newly adopted READY H3 work; no candidate, build, artifact, device action or hardware result exists.",
+      "stop_conditions": ["Missing source authority or substantive product decision", "Tier-1 or affected Tier-2 failure", "required hardware action before exact handoff", "attempted forbidden scope or runtime/device-write expansion"],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null,
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": []
     }
   ]
 }
@@ -8511,19 +8542,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-BIND-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none)
-Immediate Ready: 0
+Ready IDs: GP-BIND-001
+Immediate Ready: 1
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
 Hardware-pending: 0
-Effective authorized runway: 0
+Effective authorized runway: 1
 Target effective authorized runway: 4
-Primary liveness: PLANNING_REQUIRED
+Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
