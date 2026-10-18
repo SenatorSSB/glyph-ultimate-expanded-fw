@@ -227,13 +227,24 @@ inline uint8_t ClaimedCarrierToken(const UltimateProfile *profile) {
         binding.function_instance != UltimateControllerFunctionInstance_ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1 ||
         binding.carrier_token < kUltimateProfileButtonTokenMin ||
         binding.carrier_token > kUltimateProfileButtonTokenMax) return 0;
+    const UltimateProfileCondition &condition = binding.activation_condition;
+    if (condition.all_tokens_count > sizeof(condition.all_tokens) / sizeof(condition.all_tokens[0]) ||
+        condition.any_tokens_count > sizeof(condition.any_tokens) / sizeof(condition.any_tokens[0]) ||
+        condition.none_tokens_count > sizeof(condition.none_tokens) / sizeof(condition.none_tokens[0]) ||
+        (condition.all_tokens_count == 0 && condition.any_tokens_count == 0)) return 0;
+    bool seen[kUltimateProfileButtonTokenMax + 1] = {};
     size_t all_matches = 0;
-    for (size_t i = 0; i < binding.activation_condition.all_tokens_count; ++i)
-        all_matches += binding.activation_condition.all_tokens[i] == binding.carrier_token;
-    for (size_t i = 0; i < binding.activation_condition.any_tokens_count; ++i)
-        if (binding.activation_condition.any_tokens[i] == binding.carrier_token) return 0;
-    for (size_t i = 0; i < binding.activation_condition.none_tokens_count; ++i)
-        if (binding.activation_condition.none_tokens[i] == binding.carrier_token) return 0;
+    const uint8_t *lists[] = {condition.all_tokens, condition.any_tokens, condition.none_tokens};
+    const size_t counts[] = {condition.all_tokens_count, condition.any_tokens_count, condition.none_tokens_count};
+    for (size_t list = 0; list < 3; ++list) {
+        for (size_t i = 0; i < counts[list]; ++i) {
+            const uint32_t token = lists[list][i];
+            if (token < kUltimateProfileButtonTokenMin || token > kUltimateProfileButtonTokenMax || seen[token]) return 0;
+            seen[token] = true;
+            if (list == 0) all_matches += token == binding.carrier_token;
+            else if (token == binding.carrier_token) return 0;
+        }
+    }
     return all_matches == 1 ? static_cast<uint8_t>(binding.carrier_token) : 0;
 }
 

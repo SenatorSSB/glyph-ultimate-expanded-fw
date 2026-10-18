@@ -696,6 +696,10 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
                 failures.append(f"{label} must contain exactly one X1 function binding")
             else:
                 binding = profile.function_bindings[0]
+                all_tokens = list(binding.activation_condition.all_tokens)
+                any_tokens = list(binding.activation_condition.any_tokens)
+                none_tokens = list(binding.activation_condition.none_tokens)
+                carrier_matches = sum(token == binding.carrier_token for token in all_tokens)
                 if (binding.function_class != config_pb2.ULTIMATE_CONTROLLER_FUNCTION_STICK_TABLE_MODIFIER or
                         binding.function_instance != config_pb2.ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1 or
                         binding.base_table_id >= 28 or binding.mode_table_id >= 28 or
@@ -703,7 +707,10 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
                         binding.base_priority == binding.mode_priority or
                         binding.base_priority in priorities or binding.mode_priority in priorities or
                         not binding.HasField("activation_condition") or
-                        (not binding.activation_condition.all_tokens and not binding.activation_condition.any_tokens) or
+                        not (1 <= binding.carrier_token <= 60) or
+                        carrier_matches != 1 or binding.carrier_token in any_tokens or
+                        binding.carrier_token in none_tokens or
+                        (not all_tokens and not any_tokens) or
                         invalid_condition(binding.activation_condition, role_ids, routed_slot_ids, 0,
                                           False, True)):
                     failures.append(f"{label} has an invalid X1 function binding")

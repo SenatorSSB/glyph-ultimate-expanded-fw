@@ -214,6 +214,39 @@ void carrier_ownership_checks(Config &config, const UltimateProfile &profile, ui
     require(UltimateProfileEvaluator::SelectTable(&alternate, buttons({24,38}), 0) == 4,
             "Mode plus alternate LT6 activates the bounded mode X1 table");
 
+    // A carrier may be one required physical token among a bounded condition.
+    // Stage-C output gates are legacy interpretation, so neither a raw carrier
+    // gate nor a role derived from the carrier may run in either output pass.
+    alternate.function_bindings[0].activation_condition.all_tokens[1] = 24;
+    alternate.function_bindings[0].activation_condition.all_tokens_count = 2;
+    const auto assert_consumed_gate = [&](uint32_t gate_token, bool role_gate, const char *label) {
+        UltimateProfile gated = alternate;
+        if (role_gate) {
+            for (size_t i = 0; i < gated.roles_count; ++i) if (gated.roles[i].role_id == 22) {
+                gated.roles[i].condition.all_tokens[0] = 38;
+                gated.roles[i].condition.all_tokens_count = 1;
+                gated.roles[i].condition.any_tokens_count = 0;
+                gated.roles[i].condition.none_tokens_count = 0;
+                break;
+            }
+        }
+        effect(gated, 0).gate_token = gate_token;
+        effect(gated, 0).digital_set_mask = 8;
+        fixed(effect(gated, 2), 7, 9);
+        effect(gated, 2).gate_token = gate_token;
+        config.ultimate_profiles[0] = gated; require_valid(config);
+        mode.SetConfig(mc, &gated);
+        const OutputState observed = output(mode, buttons({24,38}));
+        require(!observed.y && observed.rightStickX != 7 && observed.rightStickY != 9,
+                label);
+        bool functions[1] = {};
+        UltimateProfileEvaluator::EvaluateFunctions(gated, buttons({24,38}), functions);
+        require(functions[0], "partial physical activation retains the original X1 snapshot");
+    };
+    assert_consumed_gate(38, false, "raw carrier gate cannot activate digital or analogue effects");
+    assert_consumed_gate(86, true, "carrier-derived role gate cannot activate digital or analogue effects");
+    alternate.function_bindings[0].activation_condition.all_tokens_count = 1;
+
     // Consumption occurs before both the digital and analogue legacy paths,
     // but function selection intentionally retains the original snapshot.
     UltimateProfile rerouted = alternate;
@@ -227,7 +260,7 @@ void carrier_ownership_checks(Config &config, const UltimateProfile &profile, ui
     require(!original_snapshot.a && !original_snapshot.leftStickDown &&
             UltimateProfileEvaluator::SelectTable(&rerouted, buttons({38}), 0) == 2,
             "carrier activation uses original remap/SOCD snapshot before consumed routing");
-    checks += 9;
+    checks += 13;
     config.ultimate_profiles[0] = profile;
 }
 }

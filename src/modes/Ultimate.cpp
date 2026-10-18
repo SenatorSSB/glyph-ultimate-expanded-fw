@@ -786,8 +786,9 @@ void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile)
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     InputState routed_inputs = inputs;
+    const uint64_t legacy_buttons = UltimateProfileEvaluator::ConsumeClaimedCarrier(_profile, inputs.buttons);
     routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(
-        _profile, UltimateProfileEvaluator::ConsumeClaimedCarrier(_profile, inputs.buttons));
+        _profile, legacy_buttons);
     // Digital priority: physical inputs, LF4 sub-mode,
     // forced-Up resolution, button carriers, then optional LS->DPad routing.
     const LayerState layer = ResolveLayerState(routed_inputs);
@@ -795,7 +796,9 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     const RoleState roles = ResolveRoleState(routed_inputs, layer, effective_directions);
 
     ApplyDigitalButtonOutputs(routed_inputs, layer, roles, outputs);
-    const OutputProgramContext program(_profile, inputs.buttons);
+    // Function selection retains inputs.buttons; profile output gates and roles
+    // are legacy interpretation and must observe the carrier-consumed snapshot.
+    const OutputProgramContext program(_profile, legacy_buttons);
     RoleState dpad_roles = roles;
     RoleState direction_roles = roles;
     if (_profile != nullptr && (_profile->schema_version == kUltimateProfileSchemaVersionV3 ||
@@ -814,8 +817,9 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
     InputState routed_inputs = inputs;
+    const uint64_t legacy_buttons = UltimateProfileEvaluator::ConsumeClaimedCarrier(_profile, inputs.buttons);
     routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(
-        _profile, UltimateProfileEvaluator::ConsumeClaimedCarrier(_profile, inputs.buttons));
+        _profile, legacy_buttons);
     const LayerState layer = ResolveLayerState(routed_inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(routed_inputs, layer);
     const RoleState roles = ResolveRoleState(routed_inputs, layer, effective_directions);
@@ -865,7 +869,7 @@ void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
 
     if (profile != nullptr && (profile->schema_version == kUltimateProfileSchemaVersionV3 ||
                                profile->schema_version == kUltimateProfileSchemaVersionV4)) {
-        const OutputProgramContext program(profile, inputs.buttons);
+        const OutputProgramContext program(profile, legacy_buttons);
         ApplyProfileAnalogProgram(program, routed_inputs, roles, effective_directions, directions, active_table_id, outputs);
     } else {
         if (roles.ls_to_dpad_active) {

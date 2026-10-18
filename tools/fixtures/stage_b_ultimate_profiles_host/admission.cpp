@@ -158,6 +158,17 @@ bool evaluate_v4(const Config &config) {
     ambiguous.function_bindings[0].carrier_token = 38;
     result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&ambiguous) == 0,
                     "mismatched carrier fails closed at runtime");
+    UltimateProfile malformed = profile;
+    malformed.function_bindings[0].activation_condition.all_tokens[1] = 61;
+    malformed.function_bindings[0].activation_condition.all_tokens_count = 2;
+    result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&malformed) == 0 &&
+                    UltimateProfileEvaluator::ConsumeClaimedCarrier(&malformed, uint64_t{1} << 36) == (uint64_t{1} << 36),
+                    "out-of-range in-memory ownership condition fails closed without consumption");
+    malformed = profile;
+    malformed.function_bindings[0].activation_condition.all_tokens[1] = 37;
+    malformed.function_bindings[0].activation_condition.all_tokens_count = 2;
+    result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&malformed) == 0,
+                    "duplicate in-memory ownership condition fails closed without consumption");
     return result;
 }
 

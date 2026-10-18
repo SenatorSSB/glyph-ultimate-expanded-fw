@@ -111,6 +111,20 @@ def main() -> int:
         require(v3_message.ultimate_profiles[0].output_program.enabled, "v3 output program missing")
         require(len(v3_message.ultimate_profiles) == 2 and all(p.schema_version == 3 and len(p.output_program.effects) == 12 for p in v3_message.ultimate_profiles), "two complete v3 A/B profiles required")
         require(len(v4_message.ultimate_profiles) == 2 and all(p.schema_version == 4 and len(p.roles) == 21 and len(p.function_bindings) == 1 for p in v4_message.ultimate_profiles), "two complete v4 X1-binding profiles required")
+        # Host-side artifact admission must reject the same ownership shapes as
+        # production validation before an artifact can reach a device writer.
+        writer_binding_negatives = (
+            ("v4_writer_carrier_out_of_range", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 61)),
+            ("v4_writer_carrier_absent", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 38)),
+            ("v4_writer_carrier_in_any", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.any_tokens.append(37)),
+            ("v4_writer_carrier_in_none", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.none_tokens.append(37)),
+            ("v4_writer_condition_out_of_range", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(61)),
+        )
+        for label, mutate in writer_binding_negatives:
+            invalid = config_pb2.Config(); invalid.CopyFrom(v4_message)
+            mutate(invalid)
+            require(writer.verify_required_bindings(invalid, config_pb2),
+                    f"writer accepted malformed function-carrier ownership: {label}")
 
         generator = NANOPB / "generator/nanopb_generator.py"
         require(generator.is_file(), "Nanopb dependency unavailable")
@@ -169,10 +183,12 @@ def main() -> int:
                 ("v4_residual_role2", lambda value: value.ultimate_profiles[0].table_rules[0].condition.all_tokens.append(66)),
                 ("v4_nonphysical_binding", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(65)),
                 ("v4_missing_carrier", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 0)),
+                ("v4_carrier_out_of_range", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 61)),
                 ("v4_carrier_absent", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 38)),
                 ("v4_carrier_ambiguous", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(37)),
                 ("v4_carrier_any", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.any_tokens.append(37)),
                 ("v4_carrier_none", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.none_tokens.append(37)),
+                ("v4_condition_out_of_range", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(61)),
                 ("v4_colliding_priority", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "base_priority", 1)),
             )
             for label, mutate in mutations:
@@ -195,7 +211,7 @@ def main() -> int:
         return 1
 
     print("glyph_stage_b_ultimate_profiles: PASS")
-    print("generated_nanopb_decode=true production_validation=true v1_legacy=true v2_evaluator=true v3_stage_c_routing=true v4_x1_binding=true negatives=15")
+    print("generated_nanopb_decode=true production_validation=true v1_legacy=true v2_evaluator=true v3_stage_c_routing=true v4_x1_binding=true negatives=22")
     print(size_line)
     return 0
 
