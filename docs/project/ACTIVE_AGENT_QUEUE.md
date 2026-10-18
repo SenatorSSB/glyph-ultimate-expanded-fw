@@ -177,7 +177,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "resolution": null,
     "provenance": {
       "opened_by_role": "Glyph Hardware Evidence Processor",
-      "opening_reference": "git-json:0000000000000000000000000000000000000000:docs/project/ACTIVE_AGENT_QUEUE.md",
+      "opening_reference": "git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md",
       "subject_ids": [
         "GP-BIND-001"
       ],
