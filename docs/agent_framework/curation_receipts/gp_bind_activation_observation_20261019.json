@@ -1,0 +1,21 @@
+{
+  "schema_name": "glyph_curation_resolution_receipt",
+  "schema_version": 1,
+  "resolver_role": "Glyph Work-Order Curator",
+  "resolved_at": "2026-10-18T22:17:17Z",
+  "opening_reference": "git-json:112a1ec21df37b4867b08145d9a9f7c11429afb4:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "subject_resolutions": [
+    {
+      "subject_id": "GP-BIND-001",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "REPAIR_REQUIRED",
+      "resolution": "Preserve the exact GP-BIND-001 failed candidate, artifact, H1-H4 evidence, recovery-only record, and non-transfer rule without amendment. This resolution grants no additional diagnostic, implementation, build, device, acceptance, or merge authority for GP-BIND-001."
+    },
+    {
+      "subject_id": "GP-BIND-002",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "NARROWED",
+      "resolution": "Authorize only GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1: before any future H4 action, a terminal agent may use existing approved read-only Config/ProfileStore surfaces to retain raw Config bytes/hash, observable backend/host, selected GameModeConfig index/ID/decoded row/ultimate_profile_id, ProfileStore STATUS, selected-profile readback/revision/payload hash, and prepared alternate-payload hash; it must state whether ActiveId or the in-memory Ultimate profile pointer is unavailable. No writes, mutation, restoration, reset, flash, build, artifact custody, source edit, repair candidate, work-order allocation, H1-H5 acceptance, or merge is authorized. The exact GP-BIND-002 failure and every non-transfer rule remain preserved."
+    }
+  ]
+}
