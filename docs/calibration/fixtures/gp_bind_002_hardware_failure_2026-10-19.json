@@ -1,0 +1,95 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-BIND-002",
+  "candidate_branch": "codex/gp-bind-002-carrier-ownership-final-failclosed",
+  "candidate_git_sha": "b3d60feb48d637efa8612515d2351a470fe9df0e",
+  "candidate_base_configurator_sha": "897356709ea4425eeac0631ca77e44dc68ce780f",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/b3d60feb48d637efa8612515d2351a470fe9df0e/bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6, as identified in the approved protocol and owner-supplied terminal hardware report; this source-free evidence pass did not access the controller.",
+  "firmware_profile_state": "H1-H3 used the ordinary/default V4 LT5-carrier state. H4a used the exact prepared V4 Profile 3 whose sole claimed X1 carrier was LT6. Recovery restored the ordinary Profile 3 payload; it is recovery only, not H5 acceptance.",
+  "update_method": "Approved ordinary manual UF2 update route, as reported by the terminal hardware agent. This source-free pass did not flash, enumerate mounted media, or access the device.",
+  "host_platform_adapter": "Owner terminal hardware-agent environment, as reported; this source-free pass did not enumerate USB, serial, HID, Configurator, or ProfileStore state.",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_BIND_002_HARDWARE_PROTOCOL_IDENTITY_ADDENDUM.md",
+  "candidate_protocol_version": "GP_BIND_002_HW_V2",
+  "preconditions": [
+    "The sole operational input is the owner-supplied terminal hardware failure packet reported at /private/tmp/gp-bind-002-hardware-20261019T002500Z/terminal-hardware-failure-packet.md with reported SHA-256 f44d5f7fd160ecbf95bb98e62f6a8423adca494cf243239c10b5f7685aa961fa. This daemon did not read that Mac-local path.",
+    "The terminal packet identifies candidate b3d60feb48d637efa8612515d2351a470fe9df0e, tree 3ab9366225591543da487f0b7d95c820614f70d4, and the 988160-byte UF2 SHA-256 bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921.",
+    "The packet reports the corrected live candidate binding required by GP_BIND_002_HW_V2, with GP_BIND_002_HW_V1 otherwise controlling the acceptance rows. No prior GP-BIND-001 or GP-BIND-002 candidate result is transferred.",
+    "The terminal report states that no source change, rebuild, flash, or merge occurred after the H4a failure."
+  ],
+  "steps": [
+    {
+      "id": "H1",
+      "instruction": "In ordinary/default V4 state, exercise LT5/X1 alone through the required representative directions and releases.",
+      "expected": "Established ordinary X1 table behavior occurs without regression or unexpected legacy output.",
+      "observed": "PASS — owner-supplied terminal report: H1 passed for this exact candidate."
+    },
+    {
+      "id": "H2",
+      "instruction": "In ordinary/default V4 state, hold Mode plus LT5 and exercise the required representative directions and releases.",
+      "expected": "Established Mode+X1 behavior occurs unchanged.",
+      "observed": "PASS — owner-supplied terminal report: H2 passed for this exact candidate."
+    },
+    {
+      "id": "H3",
+      "instruction": "In ordinary/default V4 state, exercise the required conflict fixtures, including LT4/X2 and Mode+LT5+LT4.",
+      "expected": "Established X1 conflict and precedence behavior remains unchanged.",
+      "observed": "PASS — owner-supplied terminal report: H3 passed for this exact candidate."
+    },
+    {
+      "id": "H4a",
+      "instruction": "Load the exact V4 Profile 3 alternate binding with LT6 as the sole claimed X1 carrier, then exercise LT6 alone through the required representative directions and releases.",
+      "expected": "LT6 produces X1 behavior with no Down, A, Down+A, or other legacy digital/analogue carrier interpretation.",
+      "observed": "FAIL — the verified LT6-carrier V4 Profile 3 activated X1 but still leaked legacy Down+A."
+    },
+    {
+      "id": "H4b",
+      "instruction": "In the same alternate V4 profile, hold Mode plus LT6 and exercise the required representative directions and releases.",
+      "expected": "Mode+X1 behavior occurs with no legacy leakage.",
+      "observed": "NOT_RUN — protocol-required stop after H4a failure."
+    },
+    {
+      "id": "H4c",
+      "instruction": "Return to ordinary/default LT5-carrier state and exercise unclaimed LT6 alone through the required representative directions.",
+      "expected": "Unclaimed LT6 retains its established legacy Down+A behavior.",
+      "observed": "NOT_RUN — protocol-required stop after H4a failure."
+    },
+    {
+      "id": "H5",
+      "instruction": "Restore ordinary/default state by the approved recovery route and repeat H1.",
+      "expected": "The ordinary state is restored and H1 behavior is again correct.",
+      "observed": "NOT_RUN — protocol-required stop after H4a failure. Deterministic restoration below is not H5 PASS."
+    },
+    {
+      "id": "RECOVERY",
+      "instruction": "Use the approved deterministic ProfileStore restoration route and read back Profile 3 and Config.",
+      "expected": "Restore the preserved ordinary Profile 3 payload, preserve Config bytes, and advance transaction metadata monotonically.",
+      "observed": "PASS as recovery only — Profile 3 equals the ordinary backup and Config is byte-identical. Post-state: store generation 172, Profile 3 revision 5, transaction high-water 17293822569102712070."
+    }
+  ],
+  "negative_regression_checks": [
+    "H1-H3 PASS apply only to b3d60feb48d637efa8612515d2351a470fe9df0e and its exact UF2; they cannot transfer to a repair candidate.",
+    "H4a proves only that the claimed LT6 carrier remained visible to legacy interpretation after X1 activation. No conclusion about X2, Y1, Y2, Tilt, RT2, Stage A/B/C, ProfileStore design, or game semantics is made.",
+    "H4b, H4c, and H5 are NOT_RUN; recovery readback is not a substitute for any physical acceptance row."
+  ],
+  "power_cycle_reconnect_checks": [
+    "No H5 or post-recovery physical retest is claimed after the H4a failure.",
+    "The reported recovery establishes only Profile 3 and Config readback preservation; it establishes no hardware acceptance."
+  ],
+  "result": "FAIL",
+  "anomalies": [
+    "H4a alternate LT6 carrier activated X1 while legacy Down+A leaked.",
+    "H4b, H4c, and H5 were not run after the required stop."
+  ],
+  "rollback_recovery": "Deterministic Profile 3 restoration completed with no uncertainty. Its payload equals the preserved ordinary backup; Config bytes are byte-identical. Post-state is store generation 172, Profile 3 revision 5, and transaction high-water 17293822569102712070. This is recovery only, not H5 PASS or acceptance for any candidate.",
+  "tester": "Project owner and terminal hardware agent (human-supplied report); source-free Hardware Evidence Processor control-plane publication",
+  "tested_at": "2026-10-19T00:25:00Z",
+  "evidence_gaps": []
+}

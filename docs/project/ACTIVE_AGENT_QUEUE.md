@@ -172,17 +172,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "GP-BIND-001 HARDWARE_FAILED is preserved as immutable evidence; post-opening Curator receipt reauthorizes only GP-BIND-002's bounded generic carrier-ownership repair.",
+    "pending": true,
+    "trigger": "GP-BIND-002 exact hardware failure: verified V4 Profile 3 with LT6 as the claimed X1 carrier activated X1 while legacy Down+A leaked. Preserve this failed candidate and artifact; any further repair requires fresh Curator adjudication.",
+    "resolution": null,
     "provenance": {
       "opened_by_role": "Glyph Hardware Evidence Processor",
-      "opening_reference": "git-json:23e6a7c0f5f04afb71ebc9d405d4b08f56996327:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opening_reference": "git-json:0000000000000000000000000000000000000000:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
       "subject_ids": [
-        "GP-BIND-001"
+        "GP-BIND-002"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:1bac22cca4db5439f61180e3f65e16e4979effa0:docs/agent_framework/curation_receipts/gp_bind_001_repair_20261018.json"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -238,18 +238,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "RUNWAY_LOW"
+    "primary_liveness": "CURATION_REQUIRED"
   },
   "signals": [
-    "RUNWAY_LOW",
+    "CURATION_REQUIRED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "REPAIR_REQUIRED"
   ],
@@ -8379,13 +8379,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-002",
       "title": "Generic carrier ownership repair for profile-defined X1 binding",
-      "status": "READY",
-      "branch": "codex/gp-bind-002-carrier-ownership",
+      "status": "HARDWARE_FAILED",
+      "branch": "codex/gp-bind-002-carrier-ownership-final-failclosed",
       "objective": "Repair the generic V4 controller-function binding path so its explicitly claimed physical carrier is consumed from legacy interpretation while function activation retains the original physical remap/SOCD snapshot.",
       "why_this_matters": "The exact GP-BIND-001 H4 failure proves that binding activation alone is insufficient: a reusable binding abstraction must own its carrier without a slot-specific exception.",
       "hardware_risk": "H3",
       "behavioral_claim": "A V4 binding names one unambiguous generic carrier; the closed X1 function observes the original physical remap/SOCD snapshot, while the claimed carrier contributes to neither legacy digital nor analogue interpretation. Unclaimed controls preserve legacy behavior.",
-      "scope": "X1 V4 carrier ownership only: explicit bounded ownership representation and validation, generic evaluation/consumption ordering, focused host fixtures, exact source review/build/custody, and a wholly fresh GP_BIND_001_HW_V1 H1-H5 acceptance run.",
+      "scope": "X1 V4 carrier ownership only: explicit bounded ownership representation and validation, generic evaluation/consumption ordering, focused host fixtures, exact source review/build/custody, and a wholly fresh GP_BIND_002_HW_V1 plus GP_BIND_002_HW_V2 H1-H5 acceptance run. The exact built candidate is now failed and isolated.",
       "explicit_excluded_scope": "LT6 special-casing; another carrier selection; X2, Y1, Y2, Tilt, Smash/game semantics, scripting, macros, turbo, timing automation, Stage A/B/C redesign, ProfileStore redesign, schema/product changes, device/config write implementation, flashing automation, RT2, factory recovery, Senscope, Nunchuk, and merge before exact hardware PASS.",
       "touched_planes": [
         "Ultimate V4 bounded function-binding validation and evaluation",
@@ -8419,29 +8419,30 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
       "manual_acceptance": "REQUIRED",
-      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_BIND_001_HARDWARE_PROTOCOL.md",
-      "manual_acceptance_protocol_version": "GP_BIND_001_HW_V1",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_BIND_002_HARDWARE_PROTOCOL_IDENTITY_ADDENDUM.md",
+      "manual_acceptance_protocol_version": "GP_BIND_002_HW_V2",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Do not merge or flash. Preserve the failed GP-BIND-001 source/artifact/evidence unchanged. Before fresh hardware work, use only the approved recorded backup/readback route to establish ordinary controller state; any uncertain device mutation stops. The new artifact is unique and cannot reuse GP-BIND-001 custody or H1-H3 results.",
       "status_documentation_updates": "Record exact candidate/base/tree, changed paths, focused validation, independent reviews, Mk6 RAM/flash results, unique artifact path/size/SHA-256, and the new candidate-specific H1-H5 evidence. Retain GP-BIND-001 H4 FAIL and recovery as historical failure evidence only.",
-      "done_evidence": "PENDING: a new exact candidate, new UF2, fresh reviews, and complete fresh GP_BIND_001_HW_V1 H1-H5 PASS are required. GP-BIND-001 H1-H3 PASS, H4 FAIL, H5 NOT_RUN, and its recovery do not transfer.",
+      "done_evidence": "FAILED: exact candidate b3d60feb48d637efa8612515d2351a470fe9df0e and preserved UF2 bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921 are isolated by the source-free HEP FAIL record. H1-H3 do not transfer; H4a leaked legacy Down+A; H4b/H4c/H5 were not run.",
       "stop_conditions": [
         "Missing source authority, owner/domain decision, or a scope expansion beyond generic carrier ownership",
         "Any Tier-1 or directly affected Tier-2 validation/review/build/custody contradiction",
-        "Any firmware merge, flash, or controller retest attempt before exact candidate review, custody, and approved hardware packet",
+        "H4a FAIL isolates this candidate; no merge, source edit, rebuild, flash, or acceptance transfer",
+        "A future repair needs post-opening Curator authority, a new exact candidate/artifact tuple, and wholly fresh hardware acceptance",
         "Any uncertain recovery/write outcome or mismatch between reviewed source, built source, sealed artifact, and hardware tuple"
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null,
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
-      "hardware_evidence_record": null,
-      "hardware_result": null,
+      "hardware_evidence_dependency_satisfied": false,
+      "candidate_git_sha": "b3d60feb48d637efa8612515d2351a470fe9df0e",
+      "candidate_base_configurator_sha": "897356709ea4425eeac0631ca77e44dc68ce780f",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/b3d60feb48d637efa8612515d2351a470fe9df0e/bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921/firmware.uf2",
+      "firmware_artifact_sha256": "bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921",
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_002_hardware_failure_2026-10-19.json",
+      "hardware_result": "FAIL",
       "hardware_evidence_gaps": []
     }
   ]
@@ -8612,19 +8613,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-BIND-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-BIND-002
-Immediate Ready: 1
+Ready IDs: (none)
+Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
 Hardware-pending: 0
-Effective authorized runway: 1
+Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: RUNWAY_LOW
+Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
