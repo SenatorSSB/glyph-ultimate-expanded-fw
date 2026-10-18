@@ -508,19 +508,21 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
     validation. It does not claim that firmware has consumed a runtime-loaded
     profile or that any device write is safe.
     """
-    def invalid_condition(condition: Any, roles: set[int], routed: set[int], maximum_role_id: int) -> bool:
+    def invalid_condition(condition: Any, roles: set[int], routed: set[int], maximum_role_id: int,
+                          allow_function: bool = False, physical_only: bool = False) -> bool:
         if not condition:
             return True
         seen: set[int] = set()
         for tokens in (condition.all_tokens, condition.any_tokens, condition.none_tokens):
             for token in tokens:
-                if token in seen or not (1 <= token <= 60 or 65 <= token <= 96):
+                if token in seen or not (1 <= token <= 60 or 65 <= token <= 96 or
+                                         (allow_function and token == 97)):
                     return True
                 seen.add(token)
                 if token <= 60:
-                    if token not in routed:
+                    if not physical_only and token not in routed:
                         return True
-                elif token - 64 > maximum_role_id or token - 64 not in roles:
+                elif token != 97 and (physical_only or token - 64 > maximum_role_id or token - 64 not in roles):
                     return True
         return False
 
@@ -586,9 +588,9 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
 
     for profile_index, profile in enumerate(profiles, start=1):
         label = f"ultimate_profiles[{profile_index}]"
-        if profile.schema_version not in (1, 2, 3):
+        if profile.schema_version not in (1, 2, 3, 4):
             failures.append(
-                f"{label}.schema_version must be one of [1, 2, 3], got {profile.schema_version}"
+                f"{label}.schema_version must be one of [1, 2, 3, 4], got {profile.schema_version}"
             )
         if len(profile.tables) != 28:
             failures.append(f"{label}.tables must contain 28 entries, found {len(profile.tables)}")
@@ -611,12 +613,14 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
         has_output_program = profile.HasField("output_program")
         if profile.schema_version == 1:
             if (profile.roles or profile.routing_slots or profile.default_table_id != 0 or
-                    profile.table_rules or has_output_program):
+                    profile.table_rules or has_output_program or profile.function_bindings):
                 failures.append(f"{label} adds fields to schema version 1")
             continue
 
-        if has_output_program and profile.schema_version == 2:
+        if (has_output_program or profile.function_bindings) and profile.schema_version == 2:
             failures.append(f"{label} adds an output program to schema version 2")
+        if profile.schema_version == 3 and profile.function_bindings:
+            failures.append(f"{label} adds bindings to schema version 3")
         if (not profile.roles or len(profile.routing_slots) < 15 or
                 not profile.table_rules or profile.default_table_id >= 28):
             failures.append(f"{label} has an incomplete version 2 shape")
@@ -624,6 +628,8 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
         role_ids = set(roles)
         if any(role_id < 1 or role_id > 32 for role_id in roles) or len(role_ids) != len(roles):
             failures.append(f"{label} has an invalid role")
+        if profile.schema_version == 4 and (len(roles) != 21 or 2 in role_ids):
+            failures.append(f"{label} has an invalid version 4 role inventory")
 
         routing_slots = [slot.slot_id for slot in profile.routing_slots]
         routing_inputs = [slot.input_token for slot in profile.routing_slots]
@@ -638,7 +644,8 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
         routed_slot_ids = set(routing_slots)
         for role in profile.roles:
             if (not role.HasField("condition") or
-                    invalid_condition(role.condition, role_ids, routed_slot_ids, role.role_id - 1)):
+                    invalid_condition(role.condition, role_ids, routed_slot_ids, role.role_id - 1) or
+                    (profile.schema_version == 4 and 66 in (list(role.condition.all_tokens) + list(role.condition.any_tokens) + list(role.condition.none_tokens)))):
                 failures.append(f"{label} has an invalid role condition")
                 break
 
@@ -650,10 +657,11 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
                 break
             priorities.add(rule.priority)
             if (not rule.HasField("condition") or
-                    invalid_condition(rule.condition, role_ids, routed_slot_ids, 32)):
+                    invalid_condition(rule.condition, role_ids, routed_slot_ids, 32, profile.schema_version == 4) or
+                    (profile.schema_version == 4 and 66 in (list(rule.condition.all_tokens) + list(rule.condition.any_tokens) + list(rule.condition.none_tokens)))):
                 failures.append(f"{label} has an invalid table-rule condition")
                 break
-        if profile.schema_version == 3:
+        if profile.schema_version in (3, 4):
             if not has_output_program or not profile.output_program.enabled:
                 failures.append(f"{label} has an incomplete version 3 output program")
             elif len(profile.output_program.effects) != 12:
@@ -663,7 +671,7 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
                 )
             if len(profile.routing_slots) != 32:
                 failures.append(
-                    f"{label}.routing_slots must contain 32 entries for schema version 3, "
+                    f"{label}.routing_slots must contain 32 entries for schema version {profile.schema_version}, "
                     f"found {len(profile.routing_slots)}"
                 )
             elif set(routing_slots) != _V3_REQUIRED_ROUTING_SLOTS:
@@ -683,6 +691,22 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
                     break
             if len(effect_keys) != 12:
                 failures.append(f"{label} is missing an output phase")
+        if profile.schema_version == 4:
+            if len(profile.function_bindings) != 1:
+                failures.append(f"{label} must contain exactly one X1 function binding")
+            else:
+                binding = profile.function_bindings[0]
+                if (binding.function_class != config_pb2.ULTIMATE_CONTROLLER_FUNCTION_STICK_TABLE_MODIFIER or
+                        binding.function_instance != config_pb2.ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1 or
+                        binding.base_table_id >= 28 or binding.mode_table_id >= 28 or
+                        binding.base_priority == 0 or binding.mode_priority == 0 or
+                        binding.base_priority == binding.mode_priority or
+                        binding.base_priority in priorities or binding.mode_priority in priorities or
+                        not binding.HasField("activation_condition") or
+                        (not binding.activation_condition.all_tokens and not binding.activation_condition.any_tokens) or
+                        invalid_condition(binding.activation_condition, role_ids, routed_slot_ids, 0,
+                                          False, True)):
+                    failures.append(f"{label} has an invalid X1 function binding")
     return failures
 
 

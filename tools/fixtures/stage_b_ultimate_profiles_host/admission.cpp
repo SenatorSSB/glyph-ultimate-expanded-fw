@@ -128,6 +128,30 @@ bool evaluate_v3(const Config &config) {
     return result;
 }
 
+bool evaluate_v4(const Config &config) {
+    if (config.ultimate_profiles_count == 0) return false;
+    const UltimateProfile &profile = config.ultimate_profiles[0];
+    const uint8_t selector_tokens[] = {4,18,19,20,24,25,34,35,36,37,41,42,43,44,45};
+    bool result = true;
+    for (uint32_t mask = 0; mask < (1u << 15); ++mask) {
+        uint64_t input_buttons = 0;
+        for (size_t bit = 0; bit < 15; ++bit)
+            if (mask & (1u << bit)) input_buttons |= uint64_t{1} << (selector_tokens[bit] - 1);
+        result &= check(UltimateProfileEvaluator::SelectTable(&profile, input_buttons, 27) == legacy_selected_table(input_buttons),
+                        "v4 X1 binding matches frozen legacy selector");
+    }
+    UltimateProfile alternate = profile;
+    alternate.function_bindings[0].activation_condition.all_tokens[0] = 38;
+    result &= check(UltimateProfileEvaluator::SelectTable(&alternate, uint64_t{1} << (38 - 1), 27) == 2,
+                    "v4 binding changes only its physical X1 carrier");
+    UltimateProfile rerouted = profile;
+    for (size_t i = 0; i < rerouted.routing_slots_count; ++i)
+        if (rerouted.routing_slots[i].slot_id == 37) rerouted.routing_slots[i].input_token = 36;
+    result &= check(UltimateProfileEvaluator::SelectTable(&rerouted, uint64_t{1} << (37 - 1), 27) == 2,
+                    "v4 binding is evaluated before profile routing");
+    return result;
+}
+
 }  // namespace
 
 int main(int argc, char **argv) {
@@ -151,8 +175,9 @@ int main(int argc, char **argv) {
         return 1;
     }
     if (!admitted) return 0;
-    const bool evaluated = argv[3][0] == '3' ? evaluate_v3(config) :
-        (argv[3][0] == '2' ? evaluate_v2(config) : evaluate_v1(config));
+    const bool evaluated = argv[3][0] == '4' ? evaluate_v4(config) :
+        (argv[3][0] == '3' ? evaluate_v3(config) :
+        (argv[3][0] == '2' ? evaluate_v2(config) : evaluate_v1(config)));
     if (evaluated) {
         std::printf("sizeof_config=%zu\n", sizeof(Config));
     }

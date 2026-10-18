@@ -7,7 +7,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v2_artifact, make_v3_artifact, run, require
+from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v2_artifact, make_v3_artifact, make_v4_artifact, run, require
 
 HOST = ROOT / "tools/fixtures/stage_c_ultimate_profiles_host"
 ARTIFACT = ROOT / "tools/fixtures/stage_c_ultimate_profiles_dry_run.json"
@@ -63,6 +63,7 @@ def main() -> int:
     artifact=json.loads(ARTIFACT.read_text(encoding="utf-8"))
     require(artifact==make_v3_artifact(),"tracked complete two-v3 writer artifact drift from source fixture")
     _, payload = writer.encode_artifact_payload(artifact, pb, jf)
+    _, v4_payload = writer.encode_artifact_payload(make_v4_artifact(), pb, jf)
     valid_message = pb.Config(); valid_message.ParseFromString(payload)
     require(valid_message.SerializeToString() == payload,
             "Stage-C encoded payload did not round-trip exactly through protobuf")
@@ -75,6 +76,9 @@ def main() -> int:
     verify_stage_c_recovery_envelope(valid_message, pb)
     require(not writer.verify_required_bindings(valid_message, pb),
             "writer rejected the complete schema-v3 artifact")
+    v4_message = pb.Config(); v4_message.ParseFromString(v4_payload)
+    require(not writer.verify_required_bindings(v4_message, pb),
+            "writer rejected the complete schema-v4 artifact")
     require([mode.ultimate_profile_config for mode in valid_message.game_mode_configs] == [0, 1, 2],
             "schema-v3 artifact must retain explicit Ultimate profile references [0, 1, 2]")
     dry_run = subprocess.run(
@@ -163,7 +167,9 @@ def main() -> int:
              str(HOST / "gamecube_default.cpp"), str(ROOT / "src/core/config_utils.cpp"),
              *objects,"-o",str(gamecube_default)])
         print(run([str(gamecube_default), str(binary)]).strip())
-        print(run([str(executable),str(binary)]).strip())
+        print(run([str(executable),str(binary),"3"]).strip())
+        v4_binary=temp / "v4.bin"; v4_binary.write_bytes(v4_payload)
+        print(run([str(executable),str(v4_binary),"4"]).strip())
         admission=temp / "admission"
         run(["c++","-std=c++17",*common,str(ROOT / "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp"),*[str(p) for p in sources],*objects,"-o",str(admission)])
         def reject_config_reference(label, mutate):
