@@ -1,6 +1,6 @@
 # GP-BIND-002 carrier-ownership hardware protocol
 
-Protocol version: `GP_BIND_002_HW_V1`  
+Protocol version: `GP_BIND_002_HW_V1`
 Status: `HARDWARE_TEST_REQUIRED`; this is a source-free terminal-agent packet.
 It records no controller observation and authorizes neither a firmware merge nor
 an automatic update.
