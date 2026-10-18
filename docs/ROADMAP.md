@@ -1,5 +1,13 @@
 # Glyph Roadmap
 
+## ProfileStore production reconciliation — integration-ready
+
+The exact `af69dd91e629db852f1d2371e8d8c2d6b624fc54` production candidate has
+passed its bounded normal hardware gate. Ordinary implementation may resume and
+the candidate is integration-ready; RT2 remains deferred/unresolved, and this
+does not declare strict chapter completion or public-release readiness. See the
+[acceptance result](runtime_config/profile_store_production_hardware_acceptance_result.md).
+
 ## Current owner-directed ProfileStore production reconciliation — 2026-10-18
 
 Direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e` closes manual RT2 investigation as

@@ -1,5 +1,14 @@
 # Production reconciliation: current B1–B10 dispositions
 
+## Superseding exact-candidate hardware status — 2026-10-18
+
+The exact `af69dd91e629db852f1d2371e8d8c2d6b624fc54` clean-production hardware
+gate has passed. B9 and B10's exact-candidate hardware/correspondence clauses
+are closed; their explicitly named power/reserve evidence debt remains
+nonblocking and NOT_TESTED/NOT_REACHED as applicable. This does not convert
+B7A physical failure-entry cases to PASS or reopen B7B RT2. Details are in the
+[hardware acceptance result](profile_store_production_hardware_acceptance_result.md).
+
 Authority: direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e`, **2026-10-18**.
 The [RT2 closure](profile_store_rt2_deferred_closure.md) supersedes the old
 blocking manual-RT2 acceptance criterion. The chapter is **NOT DONE**.

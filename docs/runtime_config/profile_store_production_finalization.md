@@ -16,6 +16,14 @@
 
 # ProfileStore production finalization — 2026-10-15
 
+## Superseding clean-production hardware acceptance — 2026-10-18
+
+The later exact production candidate `af69dd91e629db852f1d2371e8d8c2d6b624fc54`
+has passed the normal hardware gate and is integration-ready. It does not make
+the chapter strict DONE, does not change historical `f7ba82d4` evidence, and
+does not promote RT2/factory/power/reserve/selection/Runtime-B/Nunchuk or
+runtime-watermark dispositions. See the [acceptance result](profile_store_production_hardware_acceptance_result.md).
+
 ## Hardware reconciliation and strict closure — 2026-10-15
 
 Current disposition: **MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED**.

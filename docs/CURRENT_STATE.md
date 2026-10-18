@@ -1,5 +1,13 @@
 # Glyph Current State
 
+## ProfileStore production acceptance — current disposition
+
+`MULTI_PROFILE_STORE_PRODUCTION_HARDWARE_ACCEPTANCE_PASS` is recorded for exact
+firmware `af69dd91e629db852f1d2371e8d8c2d6b624fc54` and its preserved UF2.
+`MULTI_PROFILE_STORE_PRODUCTION_INTEGRATION_READY` now supersedes the prior
+hardware-wait wording. This is not strict chapter DONE; deferred/nonblocking
+evidence remains explicit in the [acceptance result](runtime_config/profile_store_production_hardware_acceptance_result.md).
+
 ## Current owner-directed ProfileStore production reconciliation — 2026-10-18
 
 Direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e` closes manual RT2 investigation as

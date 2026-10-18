@@ -1,5 +1,13 @@
 # Clean production continuation
 
+## Superseding hardware acceptance — 2026-10-18
+
+Exact candidate `af69dd91e629db852f1d2371e8d8c2d6b624fc54` has now passed its
+bounded normal Configurator/persistence/transport hardware gate. B9/B10 exact
+candidate correspondence is closed. The retained power/reserve debt is not
+promoted to PASS or a new blocker; RT2 remains deferred/unresolved. See the
+[hardware acceptance result](profile_store_production_hardware_acceptance_result.md).
+
 Direct owner e1c7a932-d829-4a8a-ab7d-c42e6144cd0e (2026-10-18) authorizes this
 bounded reconciliation. RT2 non-destructive recovery is DEFERRED, not PASS;
 underlying USB cause remains UNRESOLVED. No controller action or canonical merge.

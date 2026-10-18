@@ -1,0 +1,17 @@
+{
+  "result": "MULTI_PROFILE_STORE_PRODUCTION_HARDWARE_ACCEPTANCE_PASS",
+  "integration_disposition": "MULTI_PROFILE_STORE_PRODUCTION_INTEGRATION_READY",
+  "firmware_sha": "af69dd91e629db852f1d2371e8d8c2d6b624fc54",
+  "firmware_tree": "5c3ae998b94e444f7ab890ac51fcce8492944ceb",
+  "firmware_base": "6b73a7c507f35c111745c6bdd341618b490cbdcd",
+  "uf2": {"path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/af69dd91e629db852f1d2371e8d8c2d6b624fc54/5813756392a669b952982af9468ab3dbb34440bb98e3103ff76fd7faff743c35/firmware.uf2", "bytes": 970752, "sha256": "5813756392a669b952982af9468ab3dbb34440bb98e3103ff76fd7faff743c35"},
+  "host_tooling_sha": "066149f0f36eea93f9243989101934ad13862df5",
+  "evidence_directory": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/production-acceptance-af69dd91-20261018T000806Z",
+  "checksum_manifest": {"path": "SHA256SUMS-final", "sha256": "b5421e04477f5b93024628342e2b758fd79b4259d6e215a19d5028fb02e9445e", "non_self_entries_valid": 339, "self_entry_stale": true},
+  "preflash_read_only_gate": "PASS",
+  "create": {"token": "0xf000000000001d01", "request_sha256": "05e34f0036cb6d05849a268df787507f0d054f7d908ce6de9d570c8358b70b72", "profile_id": 24, "profile_revision": 1, "store_generation": 167, "wire_bytes": 3117, "response_bytes": 46},
+  "update": {"token": "0xf000000000001d02", "request_sha256": "489fb92321d7fa6ad71aef686b52e07eebd04adab95bc5cffcb3275f57b5bf73", "profile_id": 24, "profile_revision": 2, "store_generation": 168, "wire_bytes": 3090, "response_bytes": 46},
+  "final_store": {"incarnation": 1, "generation": 168, "transaction_token_high_water": "0xf000000000001d02"},
+  "final_config": {"bytes": 252, "sha256": "cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0", "mode_references": {"1": 3, "2": 4}},
+  "non_pass": {"rt2": "DEFERRED_BY_OWNER_UNRESOLVED", "automatic_recovery_failure_entry": "NOT_TESTED", "factory_recovery": "NOT_TESTED", "uncontrolled_power_cut": "NOT_TESTED", "physical_reserve_refusal": "NOT_TESTED_NOT_REACHED", "selection_chord": "NOT_TESTED", "runtime_b": "NOT_TESTED_PHYSICAL_RUNTIME_OBSERVER_UNAVAILABLE", "nunchuk": "NOT_TESTED", "runtime_stack_heap_peaks": "NOT_MEASURED"}
+}

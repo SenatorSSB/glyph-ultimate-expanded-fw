@@ -1,5 +1,14 @@
 # Agent Context
 
+## ProfileStore production acceptance published — 2026-10-18
+
+Exact production candidate `af69dd91e629db852f1d2371e8d8c2d6b624fc54` and
+UF2 `5813756392a669b952982af9468ab3dbb34440bb98e3103ff76fd7faff743c35`
+received the bounded normal hardware acceptance PASS. The production path is
+integration-ready; it is not strict chapter DONE. See the [acceptance result](runtime_config/profile_store_production_hardware_acceptance_result.md).
+RT2 remains deferred/unresolved and all retained NOT_TESTED/NOT_MEASURED
+boundaries remain unchanged. No canonical merge is recorded here.
+
 ## Current owner-directed ProfileStore production reconciliation — 2026-10-18
 
 Direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e` closes manual RT2 investigation as

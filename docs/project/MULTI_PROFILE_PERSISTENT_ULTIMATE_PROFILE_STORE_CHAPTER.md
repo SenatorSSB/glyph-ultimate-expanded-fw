@@ -16,10 +16,14 @@
 
 # Multi-Profile Persistent Ultimate Profile Store — Chapter Ledger
 
-Status: `MULTI_PROFILE_STORE_STRICT_DONE_REVIEW_BLOCKED`.
+Status: `MULTI_PROFILE_STORE_PRODUCTION_INTEGRATION_READY`; strict chapter
+completion remains open only for the explicitly retained deferred/nonblocking
+dispositions. Exact clean production hardware acceptance is recorded in
+[`profile_store_production_hardware_acceptance_result.md`](../runtime_config/profile_store_production_hardware_acceptance_result.md).
 
-Latest evidence: exact final-production hardware PASS on `f7ba82d4`, with
-frozen chapter requirements still unmet. See the final reconciliation below.
+Historical final-production hardware PASS on `f7ba82d4` remains preserved below.
+The later exact `af69dd91` acceptance is the current production-path evidence;
+frozen chapter requirements not covered by either record remain explicitly open.
 Sections preceding it retain their original chronological scope.
 
 ## Authority and scope
