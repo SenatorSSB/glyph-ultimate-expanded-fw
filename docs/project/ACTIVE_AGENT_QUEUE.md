@@ -172,17 +172,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "GP-BIND-001 independently adopted READY as the bounded X1 profile-defined binding vertical slice; no other function family or hardware acceptance is authorized.",
+    "pending": true,
+    "trigger": "GP-BIND-001 exact hardware failure: the LT6 alternate carrier selected X1 but also leaked legacy forced Down+A. Preserve the failed candidate and artifact; bounded ownership repair requires fresh Curator adjudication.",
+    "resolution": null,
     "provenance": {
-      "opened_by_role": "Glyph Portfolio Planner",
-      "opening_reference": "git-json:8fd3eaee643f1751ac6bfc0aad8bba4adf689f24:docs/planning/portfolio_20261018_0600.md",
+      "opened_by_role": "Glyph Hardware Evidence Processor",
+      "opening_reference": "git-json:0000000000000000000000000000000000000000:docs/project/ACTIVE_AGENT_QUEUE.md",
       "subject_ids": [
         "GP-BIND-001"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:6f7bfc815fba630ed77995a988e5f592ba153dc2:docs/agent_framework/curation_receipts/glyph-portfolio-20261018-0600.json"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -242,16 +242,16 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
+    "hardware_pending": 0,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "PLANNING_REQUIRED"
+    "primary_liveness": "CURATION_REQUIRED"
   },
   "signals": [
-    "PLANNING_REQUIRED",
+    "CURATION_REQUIRED",
     "PLANNER_REFRESH_REQUIRED",
-    "HARDWARE_TEST_REQUIRED"
+    "REPAIR_REQUIRED"
   ],
   "global_evidence_wait": {
     "supported": false,
@@ -8337,7 +8337,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-001",
       "title": "Profile-defined X1 controller-function binding vertical slice",
-      "status": "LOCAL_ACCEPTANCE_PENDING",
+      "status": "HARDWARE_FAILED",
       "branch": "codex/gp-bind-001-profile-defined-x1",
       "objective": "Implement the bounded V4 profile-defined binding abstraction for X1 while preserving accepted X1 controller behavior exactly.",
       "why_this_matters": "Proves the reusable profile-to-firmware bounded function path without assigning intrinsic X1 meaning to a physical or logical slot.",
@@ -8362,8 +8362,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "rollback_recovery": "Do not merge behavior-changing source before exact artifact custody and source-free HEP PASS. Preserve the accepted pre-candidate firmware/profile state and use only the documented manual recovery route.",
       "status_documentation_updates": "Record exact candidate, focused tests, independent reviews, Mk6 artifact custody and the eventual hardware handoff/result without changing historical evidence.",
-      "done_evidence": "Candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071 independently source-reviewed and built; exact preserved UF2 awaits human-only acceptance under GP_BIND_001_HW_V1.",
-      "stop_conditions": ["Missing source authority or substantive product decision", "Tier-1 or affected Tier-2 failure", "required hardware action before exact handoff", "attempted forbidden scope or runtime/device-write expansion"],
+      "done_evidence": "FAILED: exact candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071 and preserved UF2 ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed are isolated by the source-free HEP FAIL record. H1-H3 do not transfer to any repair candidate; H5 was not run.",
+      "stop_conditions": ["Missing source authority or substantive product decision", "Tier-1 or affected Tier-2 failure", "H4 FAIL isolates this candidate; no merge, source edit, rebuild, flash, or acceptance transfer", "A fresh repair candidate requires post-opening Curator authority, exact candidate/artifact custody, and complete new hardware acceptance", "attempted forbidden scope or runtime/device-write expansion"],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": false,
@@ -8372,8 +8372,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
       "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/32c1bd81910ec5bcea0104fe98b9b37fb267d071/ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed/firmware.uf2",
       "firmware_artifact_sha256": "ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_001_hardware_failure_2026-10-18.json",
+      "hardware_result": "FAIL",
       "hardware_evidence_gaps": []
     }
   ]

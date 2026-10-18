@@ -1,0 +1,82 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-BIND-001",
+  "candidate_branch": "codex/gp-bind-001-profile-defined-x1",
+  "candidate_git_sha": "32c1bd81910ec5bcea0104fe98b9b37fb267d071",
+  "candidate_base_configurator_sha": "83bd38ab7e7946562a6e952171d85acbfed7339b",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/32c1bd81910ec5bcea0104fe98b9b37fb267d071/ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Glyph Mk6; identity supplied in the owner hardware-session report and not re-accessed during this governance-only processing pass.",
+  "firmware_profile_state": "H4 used Profile 3 carrying the exact alternate V4 LT6 X1 payload. Deterministic recovery then restored the preserved ordinary Profile 3 payload; this restoration is not H5 acceptance.",
+  "update_method": "Existing state-preserving ordinary UF2 update path, as reported by the owner terminal evidence; this source-free governance pass performed no device, mounted-media, or firmware operation.",
+  "host_platform_adapter": "macOS host context from the owner hardware-session report; this governance-only pass did not enumerate USB, serial, HID, Configurator, or controller hardware.",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_BIND_001_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_BIND_001_HW_V1",
+  "preconditions": [
+    "Owner-supplied terminal report is the sole operational evidence used here. It identifies failed candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071, tree a9d2fb6dbde1c3853121e111ed2b5025d0280855, direct parent ec384b6139e821358fcb919efcc678ce940222dc, and the 986624-byte UF2 with SHA-256 ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed. Queue candidate-base identity remains adopted authority base 83bd38ab7e7946562a6e952171d85acbfed7339b.",
+    "The owner report states the exact preserved UF2 was rehashed immediately before the update. No rebuild, substitute artifact, firmware copy, controller access, serial/USB inspection, or ProfileStore/Configurator operation occurred during this HEP publication pass.",
+    "Protocol GP_BIND_001_HW_V1 is read from the later source-free control-plane lineage; its absence from the candidate tree is expected and is not an identity or protocol mismatch."
+  ],
+  "steps": [
+    {
+      "id": "H1",
+      "instruction": "Ordinary/default X1 carrier LT5: exercise X1 alone and the protocol representative directions.",
+      "expected": "Established ordinary/default X1 table behavior remains unchanged.",
+      "observed": "PASS — owner-supplied terminal report: ordinary LT5/X1 passed."
+    },
+    {
+      "id": "H2",
+      "instruction": "With the ordinary/default profile active, hold Mode plus LT5 and repeat the required representative directions.",
+      "expected": "Established Mode+X1 behavior remains unchanged.",
+      "observed": "PASS — owner-supplied terminal report: Mode+LT5 passed."
+    },
+    {
+      "id": "H3",
+      "instruction": "With the ordinary/default profile active, exercise the required X1 conflict/exclusion rows, including X1+LT4/X2 and Mode+X1+LT4.",
+      "expected": "No unexpected X1/MX1 selection override of the established competing/default result.",
+      "observed": "PASS — owner-supplied terminal report: required conflicts passed."
+    },
+    {
+      "id": "H4",
+      "instruction": "Activate the alternate V4 profile whose X1 STICK_TABLE_MODIFIER carrier is LT6, alone and with Mode across the protocol representative directions.",
+      "expected": "LT6 selects X1 and Mode+X1 behavior without legacy LT6 Down, A, or Down+A output.",
+      "observed": "FAIL — owner-supplied terminal report: X1 activated, but legacy forced Down+A also occurred."
+    },
+    {
+      "id": "H5",
+      "instruction": "Restore ordinary/default state and repeat H1 using LT5.",
+      "expected": "Ordinary/default X1 remains correct after the alternate-binding test.",
+      "observed": "NOT_RUN because H4 failed. Deterministic Profile 3 recovery restored ordinary bytes but does not constitute H5 PASS or transfer controller acceptance."
+    },
+    {
+      "id": "RECOVERY",
+      "instruction": "Deterministically restore Profile 3 only after the recorded H4 state is read and matched.",
+      "expected": "Restore the preserved ordinary payload without Config change; preserve monotonic store/transaction metadata.",
+      "observed": "PASS as recovery only: preflight matched incarnation 1, generation 169, Profile 3 revision 2, high-water 17293822569102712067, Config generation 1182731055, and the LT6 V4 payload. Token 17293822569102712068 returned PROFILE_STORE_OK. Post-state: Profile 3 revision 3, store generation 170, high-water 17293822569102712068, unchanged Config generation; restored deterministic protobuf equals the ordinary backup; Config is byte-identical at 252 bytes, SHA-256 cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0."
+    }
+  ],
+  "negative_regression_checks": [
+    "H1-H3 PASS are facts only about exact failed candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071 and its exact UF2; they cannot transfer to a repair candidate.",
+    "H4 establishes the bounded failure: alternate LT6 activated X1 while legacy forced Down+A leaked. No broader function-family, Stage, or ProfileStore conclusion is claimed.",
+    "H5 is NOT_RUN. Recovery byte equality is state restoration evidence only and is not post-repair behavior acceptance."
+  ],
+  "power_cycle_reconnect_checks": [
+    "No H5 or post-recovery controller retest is claimed in this failure record.",
+    "The recovery report establishes persisted Profile 3 and Config readback identities only; it does not establish any new firmware candidate or hardware PASS."
+  ],
+  "result": "FAIL",
+  "anomalies": [
+    "H4 alternate LT6 carrier leaked legacy forced Down+A while X1 activated.",
+    "H5 was not run after H4 failure; no acceptance transfer is permitted."
+  ],
+  "rollback_recovery": "Deterministic Profile 3 recovery completed without uncertainty and restored the preserved ordinary Profile 3 payload. It advanced Profile 3 revision/store generation/transaction high-water normally, left Config generation unchanged, and preserved byte-identical 252-byte Config SHA-256 cbff16ff67c0b0301d188267255322a5abf4453f207858cc716646726dc46dd0. This is restoration only, not H5 PASS and not controller acceptance for any candidate.",
+  "tester": "Project owner (human-supplied terminal observations and recovery report); source-free Hardware Evidence Processor control-plane publication",
+  "tested_at": "2026-10-18T00:00:00Z",
+  "evidence_gaps": []
+}
