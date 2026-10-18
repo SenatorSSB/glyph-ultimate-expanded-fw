@@ -1,0 +1,21 @@
+{
+  "schema_name": "glyph_curation_resolution_receipt",
+  "schema_version": 1,
+  "resolver_role": "Glyph Work-Order Curator",
+  "resolved_at": "2026-10-18T22:08:19Z",
+  "opening_reference": "git-json:1c5a448af5a7df7c294b05417a25a284b07d84ab:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "subject_resolutions": [
+    {
+      "subject_id": "GP-BIND-001",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "REPAIR_REQUIRED",
+      "resolution": "Preserve the exact GP-BIND-001 failure tuple, its earlier immutable post-opening receipt, and all non-transfer rules without amendment. This receipt neither reauthorizes GP-BIND-001 nor grants implementation, build, artifact, device, hardware, or merge authority. Its only purpose for this subject is to close the combined later opening without dropping that historical failure from the exact event set."
+    },
+    {
+      "subject_id": "GP-BIND-002",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "NARROWED",
+      "resolution": "Authorize diagnosis only for the exact GP-BIND-002 H4a hardware failure: trace the source-faithful physical-input through remap/SOCD, InputState representations, V4 carrier encoding, ConsumeClaimedCarrier, logical routing, effective direction, role/direction_plus_a, Stage-C, and digital/analogue output paths; compare the exact alternate-profile fixture with the host fixtures; and extract terminal-held evidence read-only. The work may create a durable diagnosis and source-faithful fixtures/tests only if they do not modify production firmware behavior. No repair implementation, candidate creation, build, artifact custody, flashing, USB/serial/ProfileStore transaction, hardware retest, acceptance, successor work-order allocation, or merge is authorized. The diagnosis must preserve V1-V3 and both failed tuples, establish the exact domain/path cause of the false host PASS, and receive adversarial architecture review before any later Curator decision. H1-H3 apply only to failed candidate b3d60feb48d637efa8612515d2351a470fe9df0e and UF2 bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921; they do not transfer."
+    }
+  ]
+}
