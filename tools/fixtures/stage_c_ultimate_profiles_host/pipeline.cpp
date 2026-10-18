@@ -183,6 +183,53 @@ void persisted_profile_isolation(Config &config, uint8_t expected_schema) {
     }
     select(0); require(output(mode,buttons({17})).a,"absent-reference legacy row survives two v3 profiles");
 }
+
+void carrier_ownership_checks(Config &config, const UltimateProfile &profile, uint8_t expected_schema) {
+    if (expected_schema != 4) return;
+    GameModeConfig mc{}; mc.mode_id = MODE_ULTIMATE;
+    Ultimate mode; mode.SetConfig(mc, &profile);
+
+    // The approved default carrier is LT5 (37): it owns no legacy LT6
+    // meaning, while ordinary LT6 remains its source-backed Down+A path.
+    const OutputState default_x1 = output(mode, buttons({37}));
+    require(!default_x1.a && !default_x1.leftStickDown,
+            "default LT5 carrier has no legacy Down+A leakage");
+    const OutputState unclaimed_lt6 = output(mode, buttons({38}));
+    require(unclaimed_lt6.a && unclaimed_lt6.leftStickDown,
+            "LT6 retains legacy Down+A when LT5 is the carrier");
+
+    UltimateProfile alternate = profile;
+    alternate.function_bindings[0].activation_condition.all_tokens[0] = 38;
+    alternate.function_bindings[0].carrier_token = 38;
+    config.ultimate_profiles[0] = alternate; require_valid(config);
+    mode.SetConfig(mc, &alternate);
+    const OutputState alternate_x1 = output(mode, buttons({38}));
+    require(!alternate_x1.a && !alternate_x1.leftStickDown && !alternate_x1.dpadDown,
+            "alternate LT6 carrier is absent from digital legacy Down+A output");
+    require(UltimateProfileEvaluator::SelectTable(&alternate, buttons({38}), 0) == 2,
+            "alternate LT6 carrier activates X1 from original physical snapshot");
+    const OutputState alternate_mode_x1 = output(mode, buttons({24,38}));
+    require(!alternate_mode_x1.a && !alternate_mode_x1.leftStickDown && !alternate_mode_x1.dpadDown,
+            "Mode plus alternate LT6 has no legacy Down+A leakage");
+    require(UltimateProfileEvaluator::SelectTable(&alternate, buttons({24,38}), 0) == 4,
+            "Mode plus alternate LT6 activates the bounded mode X1 table");
+
+    // Consumption occurs before both the digital and analogue legacy paths,
+    // but function selection intentionally retains the original snapshot.
+    UltimateProfile rerouted = alternate;
+    for (size_t i=0; i<rerouted.routing_slots_count; ++i) {
+        if (rerouted.routing_slots[i].slot_id == 37) rerouted.routing_slots[i].input_token = 38;
+        else if (rerouted.routing_slots[i].slot_id == 38) rerouted.routing_slots[i].input_token = 37;
+    }
+    config.ultimate_profiles[0] = rerouted; require_valid(config);
+    mode.SetConfig(mc, &rerouted);
+    const OutputState original_snapshot = output(mode, buttons({38}));
+    require(!original_snapshot.a && !original_snapshot.leftStickDown &&
+            UltimateProfileEvaluator::SelectTable(&rerouted, buttons({38}), 0) == 2,
+            "carrier activation uses original remap/SOCD snapshot before consumed routing");
+    checks += 9;
+    config.ultimate_profiles[0] = profile;
+}
 }
 
 int main(int argc,char **argv) {
@@ -266,6 +313,7 @@ int main(int argc,char **argv) {
     config.ultimate_profiles[0]=a;
     profile_variations(config,a);
     persisted_profile_isolation(config,expected_schema);
+    carrier_ownership_checks(config,a,expected_schema);
     std::printf("PASS production Ultimate final-output comparisons=%zu; frozen legacy oracle; A/B/A effects; storage-order; remap/SOCD; Nunchuk host invariants\n",checks);
     std::printf("sizeof_config=%zu sizeof_profile=%zu\n",sizeof(Config),sizeof(UltimateProfile));
 }

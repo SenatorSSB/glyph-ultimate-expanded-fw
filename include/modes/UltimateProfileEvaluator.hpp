@@ -216,11 +216,38 @@ inline bool EvaluatePhysicalBindingCondition(const UltimateProfileCondition &con
     return true;
 }
 
+// A profile-declared function owns exactly one physical carrier.  This helper
+// deliberately rechecks the bounded representation at runtime, so malformed
+// in-memory state fails closed and cannot suppress an unrelated legacy input.
+inline uint8_t ClaimedCarrierToken(const UltimateProfile *profile) {
+    if (profile == nullptr || profile->schema_version != kUltimateProfileSchemaVersionV4 ||
+        profile->function_bindings_count != 1) return 0;
+    const UltimateProfileFunctionBinding &binding = profile->function_bindings[0];
+    if (binding.function_class != UltimateControllerFunctionClass_ULTIMATE_CONTROLLER_FUNCTION_STICK_TABLE_MODIFIER ||
+        binding.function_instance != UltimateControllerFunctionInstance_ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1 ||
+        binding.carrier_token < kUltimateProfileButtonTokenMin ||
+        binding.carrier_token > kUltimateProfileButtonTokenMax) return 0;
+    size_t all_matches = 0;
+    for (size_t i = 0; i < binding.activation_condition.all_tokens_count; ++i)
+        all_matches += binding.activation_condition.all_tokens[i] == binding.carrier_token;
+    for (size_t i = 0; i < binding.activation_condition.any_tokens_count; ++i)
+        if (binding.activation_condition.any_tokens[i] == binding.carrier_token) return 0;
+    for (size_t i = 0; i < binding.activation_condition.none_tokens_count; ++i)
+        if (binding.activation_condition.none_tokens[i] == binding.carrier_token) return 0;
+    return all_matches == 1 ? static_cast<uint8_t>(binding.carrier_token) : 0;
+}
+
+inline uint64_t ConsumeClaimedCarrier(const UltimateProfile *profile, uint64_t input_buttons) {
+    const uint8_t carrier = ClaimedCarrierToken(profile);
+    return carrier == 0 ? input_buttons : input_buttons & ~(uint64_t{1} << (carrier - 1));
+}
+
 inline void EvaluateFunctions(const UltimateProfile &profile, uint64_t input_buttons, bool functions[1]) {
     functions[0] = false;
     if (profile.schema_version != kUltimateProfileSchemaVersionV4 || profile.function_bindings_count != 1) return;
     const UltimateProfileFunctionBinding &binding = profile.function_bindings[0];
-    functions[0] = EvaluatePhysicalBindingCondition(binding.activation_condition, input_buttons);
+    functions[0] = ClaimedCarrierToken(&profile) != 0 &&
+        EvaluatePhysicalBindingCondition(binding.activation_condition, input_buttons);
 }
 
 inline uint8_t SelectTable(

@@ -142,6 +142,7 @@ bool evaluate_v4(const Config &config) {
     }
     UltimateProfile alternate = profile;
     alternate.function_bindings[0].activation_condition.all_tokens[0] = 38;
+    alternate.function_bindings[0].carrier_token = 38;
     result &= check(UltimateProfileEvaluator::SelectTable(&alternate, uint64_t{1} << (38 - 1), 27) == 2,
                     "v4 binding changes only its physical X1 carrier");
     UltimateProfile rerouted = profile;
@@ -149,6 +150,14 @@ bool evaluate_v4(const Config &config) {
         if (rerouted.routing_slots[i].slot_id == 37) rerouted.routing_slots[i].input_token = 36;
     result &= check(UltimateProfileEvaluator::SelectTable(&rerouted, uint64_t{1} << (37 - 1), 27) == 2,
                     "v4 binding is evaluated before profile routing");
+    result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&profile) == 37,
+                    "v4 binding exposes its explicit carrier");
+    result &= check((UltimateProfileEvaluator::ConsumeClaimedCarrier(&profile, uint64_t{1} << 36)) == 0,
+                    "v4 binding consumes its claimed physical carrier");
+    UltimateProfile ambiguous = profile;
+    ambiguous.function_bindings[0].carrier_token = 38;
+    result &= check(UltimateProfileEvaluator::ClaimedCarrierToken(&ambiguous) == 0,
+                    "mismatched carrier fails closed at runtime");
     return result;
 }
 

@@ -107,6 +107,7 @@ UltimateProfileFunctionBinding.base_table_id int_size:IS_8
 UltimateProfileFunctionBinding.mode_table_id int_size:IS_8
 UltimateProfileFunctionBinding.base_priority int_size:IS_8
 UltimateProfileFunctionBinding.mode_priority int_size:IS_8
+UltimateProfileFunctionBinding.carrier_token int_size:IS_8
 UltimateProfileOutputProgram.effects max_count:12
 UltimateProfileOutputEffect.coordinates max_count:18
 UltimateProfileOutputEffect.coordinates int_size:IS_8

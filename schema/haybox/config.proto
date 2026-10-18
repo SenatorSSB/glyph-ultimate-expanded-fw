@@ -548,6 +548,10 @@ message UltimateProfileFunctionBinding {
   uint32 mode_table_id = 5;
   uint32 base_priority = 6;
   uint32 mode_priority = 7;
+  // One physical input token owned by this binding. Firmware validates that
+  // it appears exactly once in activation_condition.all_tokens and nowhere
+  // else, then removes that physical carrier from legacy interpretation.
+  uint32 carrier_token = 8;
 }
 
 /**

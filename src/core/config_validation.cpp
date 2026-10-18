@@ -101,6 +101,19 @@ bool contains_legacy_x1_role_token(const UltimateProfileCondition &condition) {
     return false;
 }
 
+bool has_unambiguous_function_carrier(const UltimateProfileFunctionBinding &binding) {
+    const uint32_t carrier = binding.carrier_token;
+    if (!is_button_token(carrier)) return false;
+    size_t all_matches = 0;
+    for (size_t i = 0; i < binding.activation_condition.all_tokens_count; ++i)
+        all_matches += binding.activation_condition.all_tokens[i] == carrier;
+    for (size_t i = 0; i < binding.activation_condition.any_tokens_count; ++i)
+        if (binding.activation_condition.any_tokens[i] == carrier) return false;
+    for (size_t i = 0; i < binding.activation_condition.none_tokens_count; ++i)
+        if (binding.activation_condition.none_tokens[i] == carrier) return false;
+    return all_matches == 1;
+}
+
 bool validate_ultimate_profile_extents(const UltimateProfile &profile) {
     if (!fits(profile.tables, profile.tables_count) ||
         !fits(profile.roles, profile.roles_count) ||
@@ -242,6 +255,7 @@ bool validate_ultimate_profile_semantics_impl(const UltimateProfile &profile,
         binding.base_priority == 0 || binding.mode_priority == 0 ||
         binding.base_priority == binding.mode_priority ||
         (binding.activation_condition.all_tokens_count == 0 && binding.activation_condition.any_tokens_count == 0) ||
+        !has_unambiguous_function_carrier(binding) ||
         !validate_profile_condition(binding.activation_condition, defined_roles, seen_routing_slots, 0,
             false, true, error, profile_id))
         return reference_error(error, "Ultimate profile %d has an invalid function binding", profile_id);

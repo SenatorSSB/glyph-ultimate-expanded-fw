@@ -786,7 +786,8 @@ void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile)
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {
     InputState routed_inputs = inputs;
-    routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(_profile, inputs.buttons);
+    routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(
+        _profile, UltimateProfileEvaluator::ConsumeClaimedCarrier(_profile, inputs.buttons));
     // Digital priority: physical inputs, LF4 sub-mode,
     // forced-Up resolution, button carriers, then optional LS->DPad routing.
     const LayerState layer = ResolveLayerState(routed_inputs);
@@ -813,7 +814,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
 void Ultimate::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
     (void)backend_id;
     InputState routed_inputs = inputs;
-    routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(_profile, inputs.buttons);
+    routed_inputs.buttons = UltimateProfileEvaluator::RouteLogicalInputs(
+        _profile, UltimateProfileEvaluator::ConsumeClaimedCarrier(_profile, inputs.buttons));
     const LayerState layer = ResolveLayerState(routed_inputs);
     const EffectiveDirectionState effective_directions = ResolveEffectiveDirections(routed_inputs, layer);
     const RoleState roles = ResolveRoleState(routed_inputs, layer, effective_directions);

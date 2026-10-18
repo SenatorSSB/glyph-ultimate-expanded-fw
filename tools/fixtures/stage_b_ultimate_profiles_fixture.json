@@ -18,6 +18,7 @@
       "functionClass": "ULTIMATE_CONTROLLER_FUNCTION_STICK_TABLE_MODIFIER",
       "functionInstance": "ULTIMATE_CONTROLLER_FUNCTION_INSTANCE_X1",
       "activationCondition": {"allTokens": [37]},
+      "carrierToken": 37,
       "baseTableId": 2,
       "modeTableId": 4,
       "basePriority": 11,

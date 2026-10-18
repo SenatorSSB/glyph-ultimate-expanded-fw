@@ -168,6 +168,11 @@ def main() -> int:
                 ("v4_unknown_function", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "function_class", 2)),
                 ("v4_residual_role2", lambda value: value.ultimate_profiles[0].table_rules[0].condition.all_tokens.append(66)),
                 ("v4_nonphysical_binding", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(65)),
+                ("v4_missing_carrier", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 0)),
+                ("v4_carrier_absent", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "carrier_token", 38)),
+                ("v4_carrier_ambiguous", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.all_tokens.append(37)),
+                ("v4_carrier_any", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.any_tokens.append(37)),
+                ("v4_carrier_none", lambda value: value.ultimate_profiles[0].function_bindings[0].activation_condition.none_tokens.append(37)),
                 ("v4_colliding_priority", lambda value: setattr(value.ultimate_profiles[0].function_bindings[0], "base_priority", 1)),
             )
             for label, mutate in mutations:
