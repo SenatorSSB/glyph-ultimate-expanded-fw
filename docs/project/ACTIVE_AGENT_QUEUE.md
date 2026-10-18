@@ -172,9 +172,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": true,
-    "trigger": "GP-BIND-001 and GP-BIND-002 remain exact hardware failures. GP-BIND-001 is preserved under its earlier post-opening Curator resolution; GP-BIND-002 verified V4 Profile 3 with LT6 as the claimed X1 carrier activated X1 while legacy Down+A leaked. Preserve both failed candidates and artifacts; the new GP-BIND-002 repair requires fresh Curator adjudication.",
-    "resolution": null,
+    "pending": false,
+    "trigger": null,
+    "resolution": "Post-opening receipt 0ac8c3c86878d420cce9815ff09c4c8e574b4711 preserves the exact GP-BIND-001 and GP-BIND-002 failures and narrows GP-BIND-002 only to source/fixture diagnosis and terminal read-only evidence extraction. It grants no implementation or successor work order; any source repair remains subject to a later Curator decision after a reviewed source-faithful diagnosis.",
     "provenance": {
       "opened_by_role": "Glyph Hardware Evidence Processor",
       "opening_reference": "git-json:1c5a448af5a7df7c294b05417a25a284b07d84ab:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
@@ -182,8 +182,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
         "GP-BIND-001",
         "GP-BIND-002"
       ],
-      "resolved_by_role": null,
-      "resolution_reference": null
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:0ac8c3c86878d420cce9815ff09c4c8e574b4711:docs/agent_framework/curation_receipts/gp_bind_002_failure_diagnosis_20261019.json"
     }
   },
   "planner_packet": {
@@ -247,10 +247,11 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "CURATION_REQUIRED"
+    "primary_liveness": "PLANNING_REQUIRED"
   },
   "signals": [
-    "CURATION_REQUIRED",
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "REPAIR_REQUIRED"
   ],
@@ -8614,7 +8615,7 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
@@ -8626,7 +8627,7 @@ Invalidated Preauthorized: 0
 Hardware-pending: 0
 Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: CURATION_REQUIRED
+Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
