@@ -33,5 +33,5 @@
   "evidence_gaps": ["A5 requires a separately approved normal reboot/reconnect observation with post-boot persisted identity capture. Historical pre-handoff matrix omission remains an immutable procedural limitation."],
   "rollback_recovery": "None performed.",
   "tester": "Owner physical observations and daemon host capture; independent HEP adjudication.",
-  "tested_at": "2026-10-19"
+  "tested_at": "2026-10-19T16:03:00+03:00"
 }
