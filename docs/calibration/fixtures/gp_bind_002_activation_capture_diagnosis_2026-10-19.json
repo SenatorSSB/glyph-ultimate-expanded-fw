@@ -1,0 +1,45 @@
+{
+  "schema_name": "glyph_gp_bind_activation_capture_diagnosis",
+  "schema_version": 1,
+  "status": "DIAGNOSIS_ONLY",
+  "source_free": true,
+  "device_access_by_record_author": "NOT_PERFORMED",
+  "failed_candidate": {
+    "git_sha": "b3d60feb48d637efa8612515d2351a470fe9df0e",
+    "tree": "3ab9366225591543da487f0b7d95c820614f70d4",
+    "uf2_sha256": "bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921",
+    "uf2_bytes": 988160,
+    "hardware": {
+      "h1_h2_h3": "PASS_FOR_FAILED_TUPLE_ONLY",
+      "h4a": "FAIL",
+      "h4b_h4c_h5": "NOT_RUN"
+    }
+  },
+  "terminal_read_only_capture": {
+    "packet_sha256": "9d9c959130edaec5b14d8a827d9fa7bf122d3d139d927e30b67a55db121fe51a",
+    "endpoint_used": "usbmodem1101",
+    "pre_open_endpoint": "usbmodem1102",
+    "profile_store_generation": 172,
+    "transaction_high_water": "17293822569102712070",
+    "xinput_default_selected_profile_id": 4,
+    "selected_profile_revision": 1,
+    "alternate_profile_id": 3,
+    "alternate_profile_schema_version": 4,
+    "alternate_profile_carrier": "LT6",
+    "capture_operations": "READ_ONLY",
+    "not_a_current_device_claim": true
+  },
+  "source_facts": {
+    "selection_boundary": "set_mode selects GameModeConfig, calls ProfileStore::Activate(ultimate_profile_id), and supplies that pointer to Ultimate::SetConfig",
+    "activation_storage": "ProfileStore tracks in-process active ID/revision/profile; Ultimate stores the supplied profile pointer",
+    "approved_read_only_api_active_runtime_identity": "UNAVAILABLE_WITH_CURRENT_APPROVED_READ_ONLY_SURFACES"
+  },
+  "false_pass_fixture_gap": "existing carrier host fixture directly selected the profile under test and skipped the Config/GameModeConfig/ProfileStore activation boundary",
+  "smallest_allowed_host_fixture": "host-only compact-store Config with distinct Profile 3/Profile 4, exact selected Ultimate row, set_mode/ProfileStore::Activate boundary, and assertions on the selected profile before exercising Ultimate",
+  "live_attestation": {
+    "requires_separate_authorization": true,
+    "implemented": false,
+    "forbidden_inference": "stored record or selected Config row proves the live active profile"
+  },
+  "next_permissible_action": "SOURCE_FAITHFUL_DIAGNOSIS_AND_ADVERSARIAL_REVIEW_ONLY"
+}
