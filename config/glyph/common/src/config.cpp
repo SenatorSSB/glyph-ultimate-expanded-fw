@@ -10,6 +10,7 @@
 #include "core/ModeSelectionTransaction.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/RecoveryInitialization.hpp"
+#include "core/RuntimeIdentityService.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
 #include "display/GlyphConfigMenu.hpp"
@@ -52,6 +53,9 @@ DebouncedSwitchMatrixInput<num_rows, num_cols> matrix_input(
 CommunicationBackend **backends = nullptr;
 size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
+extern Ultimate ultimate_mode;
+// Single core0 CDC reader in XInput; Configurator owns its separate session.
+static runtime_identity::Service runtime_identity_service;
 
 InputState inputs;
 
@@ -322,6 +326,9 @@ void loop() {
     for (size_t i = 0; i < backend_count; i++) {
         backends[i]->SendReport();
     }
+
+    // Complete viewer records precede identity writes; output generation is finished.
+    runtime_identity_service.Poll(Serial, backends[0], config, profile_store, ultimate_mode, millis());
 
     if (current_kb_mode != nullptr) {
         current_kb_mode->SendReport(backends[0]->GetInputs());

@@ -8,6 +8,7 @@ class Ultimate : public ControllerMode {
   public:
     Ultimate();
     void SetConfig(GameModeConfig &config, const UltimateProfile *profile);
+    const UltimateProfile *SelectedProfile() const { return _profile; }
 
   private:
     // Config owns both this mode configuration and the selected profile.

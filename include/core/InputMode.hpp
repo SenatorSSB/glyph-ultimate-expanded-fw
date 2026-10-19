@@ -10,6 +10,7 @@ class InputMode {
   public:
     InputMode();
     GameModeConfig *GetConfig();
+    const GameModeConfig *ConfigPointer() const { return _config; }
     void SetConfig(GameModeConfig &config);
     virtual void UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) = 0;
 

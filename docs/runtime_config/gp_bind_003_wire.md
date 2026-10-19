@@ -11,8 +11,8 @@ the same magic, version `01`, kind `02`, length `48 00`, echoed token,
 status u8, primary backend u8, current Config row u16 (zero means unavailable;
 otherwise one based), requested persistent reference u32 (context only),
 incarnation u32, active ID u32, latched active revision u32, schema u32,
-and 32 digest bytes. Only status 0 carries persistent identity; all five
-persistent fields and digest are zero for any other status.
+and 32 digest bytes. Only status 0 carries persistent identity; all four
+persistent integers and digest are zero for any other status.
 
 Statuses: 0 persisted, 1 no primary, 2 Configurator, 3 recovery, 4 no mode,
 5 non-Ultimate, 6 source fallback, 7 embedded legacy, 8 store unavailable,

@@ -23,6 +23,7 @@ class CommunicationBackend {
     virtual CommunicationBackendId BackendId();
     virtual void SetGameMode(InputMode *gamemode);
     virtual InputMode *CurrentGameMode();
+    const InputMode *ObservedGameMode() const { return _gamemode; }
 
     virtual void SendReport() = 0;
 

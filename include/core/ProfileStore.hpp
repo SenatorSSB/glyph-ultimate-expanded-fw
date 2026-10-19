@@ -104,6 +104,7 @@ class ProfileStore {
     const UltimateProfile *Activate(uint32_t id, Status *status = nullptr);
     const UltimateProfile *ActiveProfile() const;
     uint32_t ActiveId() const;
+    uint32_t ActiveRevision() const { return _active_revision; }
     TransactionResult Create(
         const UltimateProfile &profile,
         const char *name,

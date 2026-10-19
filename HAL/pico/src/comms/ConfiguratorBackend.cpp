@@ -24,6 +24,7 @@
 #include "core/ProfileStoreRequestIdentity.hpp"
 #include "core/ResourceDiagnostics.hpp"
 #include "core/ProfileStoreFaultControls.hpp"
+#include "core/RuntimeIdentityWire.hpp"
 #include "core/config_validation.hpp"
 #include "reboot.hpp"
 #include "arduino/Adafruit_USBD_Device.h"
@@ -179,6 +180,9 @@ void ConfiguratorBackend::SendReport() {
             // their existing packet-ownership lifecycle below.
             HandleProfileStore();
             return;
+        case CMD_RUNTIME_IDENTITY:
+            HandleRuntimeIdentity();
+            return;
         case CMD_REBOOT_FIRMWARE:
             reboot_firmware();
             break;
@@ -192,6 +196,20 @@ void ConfiguratorBackend::SendReport() {
     }
 
     SkipToNextPacket();
+}
+
+bool ConfiguratorBackend::HandleRuntimeIdentity() {
+    uint8_t request[runtime_identity::kRequestBytes + 1];
+    const size_t length = ReadPacket(request, sizeof(request));
+    uint64_t token = 0;
+    if (_packet_timed_out || !runtime_identity::DecodeRequest(request, length, token)) return false;
+    runtime_identity::Snapshot snapshot;
+    snapshot.status = _recovery_service ? runtime_identity::Status::Recovery
+                                        : runtime_identity::Status::Configurator;
+    snapshot.backend = static_cast<uint8_t>(COMMS_BACKEND_CONFIGURATOR);
+    uint8_t response[runtime_identity::kResponseBytes];
+    runtime_identity::EncodeResponse(token, snapshot, response);
+    return WriteProfilePacket(CMD_RUNTIME_IDENTITY, response, sizeof(response));
 }
 
 size_t ConfiguratorBackend::ReadPacket(uint8_t *buffer, size_t max_len) {

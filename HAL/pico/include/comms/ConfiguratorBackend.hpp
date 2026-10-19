@@ -56,6 +56,7 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleGetConfig();
     bool HandleSetConfig();
     bool HandleProfileStore();
+    bool HandleRuntimeIdentity();
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     bool PrepareProfileMutation(const ProfileStoreRequest &request);
     bool TraceProfileDispatch(const ProfileStoreRequest &request);
