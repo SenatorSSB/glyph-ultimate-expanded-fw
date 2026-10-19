@@ -30,7 +30,7 @@
   "anomalies": ["No firmware or persistent-state anomaly was observed."],
   "negative_regression_checks": ["No X1 repair, V4 acceptance, ProfileStore redesign, RT2 work, merge, rebuild, rollback, or persistent device mutation is claimed."],
   "power_cycle_reconnect_checks": ["A recorded unplug/replug is retained but is insufficient for A5; an approved normal reboot/reconnect plus new-session identity observation remains required."],
-  "evidence_gaps": ["A5 requires a separately approved normal reboot/reconnect observation with post-boot persisted identity capture. Historical pre-handoff matrix omission remains an immutable procedural limitation."],
+  "evidence_gaps": ["A5 only: a separately approved normal reboot/reconnect through the existing production selection path, followed by a new boot/session persisted-identity capture. The earlier pre-handoff candidate-matrix omission remains historical and is not retroactively cured."],
   "rollback_recovery": "None performed.",
   "tester": "Owner physical observations and daemon host capture; independent HEP adjudication.",
   "tested_at": "2026-10-19T16:03:00+03:00"
