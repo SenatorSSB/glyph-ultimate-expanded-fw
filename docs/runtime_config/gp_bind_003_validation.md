@@ -29,10 +29,16 @@ wait, retry queue, flush, USB descriptor or scheduling change was introduced.
 Existing XInput and B0XX viewer source, viewer payload/clock, selection,
 activation, persistence and Ultimate evaluator code remain byte-exact to base.
 
-The host tool is read-only identity capture/strict decoding. It requires an
-explicit port or retained capture and an external session label. It rejects
-partial, ambiguous, unknown, duplicate and wrong-token data. No device was
-opened during this implementation. Historical H4 remains UNKNOWN.
+The host tool is read-only identity capture/strict decoding. Its explicit
+`--context xinput` uses fixed records; `--context configurator` wraps only
+identity command 10 in COBS. It exposes no generic command argument. Configurator
+decoding admits only a complete command-10 neutral Configurator/recovery response,
+never a gameplay attestation. It requires an explicit port or retained capture
+and an external session label, and rejects partial, ambiguous, unknown, oversized,
+duplicate, wrong-context and wrong-token data. CLI round trips/negative controls
+and every COBS frame split are tested. The host decoder also consumes the actual
+production Configurator COBS response from each ABI harness. No device was opened.
+Historical H4 remains UNKNOWN.
 
 ## Actual checks
 

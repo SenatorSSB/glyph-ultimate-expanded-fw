@@ -19,6 +19,7 @@ int main(int argc, char **argv) {
             const auto frame = wire.tx; wire.tx.clear(); wire.append(frame); backend.SendReport();
         };
         submit(sizeof(query)); auto result = decode(wire.tx);
+        std::printf("configurator_frame=");for(auto byte:wire.tx)std::printf("%02x",byte);std::puts("");
         require(result.size() == 73 && result[0] == CMD_RUNTIME_IDENTITY && result[17] == 2 && result[9] == 42,
                 "Configurator identity is neutral in current context");
         require(std::all_of(result.begin()+25, result.end(), [](uint8_t b){return b==0;}), "neutral has no persistent claim");

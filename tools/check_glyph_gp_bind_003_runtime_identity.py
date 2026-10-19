@@ -46,6 +46,42 @@ def decoder_tests():
             raise AssertionError('ambiguous/partial/wrong token accepted')
     print('runtime_identity_host_split_ambiguous_timeout_token=PASS')
 
+def configurator_cli_tests(temp):
+    import struct
+    response=identity.MAGIC+struct.pack('<BBHQBBHIIIII',1,2,72,42,2,8,0,0,0,0,0,0)+bytes(32)
+    wire=identity.cobs_encode(bytes([identity.IDENTITY_COMMAND])+response)
+    query=identity.wire_request(42,'configurator')
+    assert identity.cobs_decode(query[:-1])==b'\x0a'+identity.request(42)
+    assert identity.wire_request(42,'xinput')==identity.request(42)
+    for split in range(len(wire)+1):
+        decoder=identity.ConfiguratorDecoder(42);decoder.feed(wire[:split]);decoder.feed(wire[split:])
+        assert decoder.finish()['status']=='configurator'
+    corrupt_context=bytearray(response);corrupt_context[16]=4
+    wrong_backend=bytearray(response);wrong_backend[17]=2
+    wrong_row=bytearray(response);wrong_row[18]=1
+    bad_frames=[wire[:-1],wire+wire,b'\0',b'\x02\0',bytes([255])*76+b'\0',
+                identity.cobs_encode(b'\x04'+response),identity.cobs_encode(b'\x07'+response),
+                identity.cobs_encode(b'\x09'+response),identity.cobs_encode(b'\x0a'+response[:-1]),
+                identity.cobs_encode(b'\x0a'+corrupt_context),identity.cobs_encode(b'\x0a'+wrong_backend),
+                identity.cobs_encode(b'\x0a'+wrong_row)]
+    for bad in bad_frames:
+        try:
+            decoder=identity.ConfiguratorDecoder(42);decoder.feed(bad);decoder.finish()
+        except ValueError:pass
+        else:raise AssertionError('Configurator CLI accepted malformed/generic/wrong-context packet')
+    capture=temp/'configurator-capture.bin';capture.write_bytes(wire)
+    tool=ROOT/'tools/glyph_runtime_identity_tool.py'
+    result=run([sys.executable,tool,'--context','configurator','--capture',capture,'--token','42','--session','host-fixture'])
+    parsed=json.loads(result);assert parsed['status']=='configurator' and parsed['context']=='configurator' and parsed['active_id']==0
+    for arguments in [ ['--context','write','--capture',capture,'--token','42','--session','x'],
+                       ['--context','configurator','--capture',capture,'--token','43','--session','x'],
+                       ['--context','configurator','--capture',capture,'--session','x'],
+                       ['--context','configurator','--capture',capture,'--token','0','--session','x'],
+                       ['--context','configurator','--capture',capture,'--token','42','--session','x','--command','7'] ]:
+        result=subprocess.run([sys.executable,str(tool),*map(str,arguments)],cwd=ROOT,capture_output=True,text=True,timeout=10)
+        assert result.returncode!=0,'CLI accepted invalid context/token or missing correlation'
+    print('runtime_identity_configurator_cobs_cli_roundtrip_negatives=PASS')
+
 def descriptor_checks(temp, nanopb, generated, objects, abi, profile):
     # Compile the exact production digest independently of mode/store access.
     inc=['-I',generated,'-I',nanopb,'-I',ROOT/'include']
@@ -135,6 +171,7 @@ def main():
     nanopb=Path(os.environ.get('GLYPH_PROFILE_STORE_NANOPB',str(NANOPB)))
     with tempfile.TemporaryDirectory(prefix='gp-bind003-proof-') as directory:
         temp=Path(directory);generated=temp/'generated';generated.mkdir()
+        configurator_cli_tests(temp)
         schema=ROOT/'schema/haybox'
         run([sys.executable,nanopb/'generator/nanopb_generator.py','-I',schema,'-f',schema/'config.options','--error-on-unmatched','--no-timestamp','-D',generated,schema/'config.proto'])
         # Inert unrelated-mode declarations only; production Ultimate and all
@@ -178,7 +215,11 @@ def main():
             dispatch_sources=['HAL/pico/src/comms/ConfiguratorBackend.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp']
             exe=temp/('dispatch'+suffix)
             run(['c++','-std=c++17',*dc,HOST/'configurator.cpp',*[ROOT/s for s in dispatch_sources],legacy/'checked_storage_unavailable.cpp',libs/'nanopb-arduino/src/pb_arduino.cpp',*dispatch_objects,'-o',exe])
-            print(run([exe,temp/'v3.pb']),end='')
+            result=run([exe,temp/'v3.pb'])
+            framed=next(line.removeprefix('configurator_frame=') for line in result.splitlines() if line.startswith('configurator_frame='))
+            decoder=identity.ConfiguratorDecoder(42);decoder.feed(bytes.fromhex(framed))
+            assert decoder.finish()['status']=='configurator','host rejected actual production Configurator COBS response'
+            print(result,end='')
         print('descriptor_pins='+json.dumps({str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [schema/'config.proto',schema/'config.options',generated/'config.pb.h',generated/'config.pb.c',nanopb/'pb.h',nanopb/'pb_encode.c']},sort_keys=True))
     print('glyph_gp_bind_003_runtime_identity=PASS')
     return 0
