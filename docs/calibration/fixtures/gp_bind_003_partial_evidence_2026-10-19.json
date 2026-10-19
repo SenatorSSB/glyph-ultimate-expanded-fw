@@ -1,0 +1,29 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-BIND-003",
+  "candidate_branch": "codex/gp-bind-003-runtime-attestation",
+  "candidate_git_sha": "307d72347653c079ec8ec6e9b6ecae3c30ae536c",
+  "candidate_base_configurator_sha": "bd548dacf453c932b1a88a0684e6e1155080a309",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_sha256": "83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/307d72347653c079ec8ec6e9b6ecae3c30ae536c/83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/agent_framework/GP_BIND_003_HARDWARE_PROTOCOL.md",
+  "candidate_protocol_version": "GP_BIND_RUNTIME_ATTESTATION_HW_V1",
+  "result": "PARTIAL",
+  "steps": [
+    {"id":"A1","observed":"Exact candidate/tree/UF2 custody and retained backup match. Historical pre-handoff candidate-matrix omission remains recorded and is not cured."},
+    {"id":"A2","observed":"PASS: Configurator reports only neutral backend 8 with zero identity/reference fields; Config retained exact bytes."},
+    {"id":"A3","observed":"PASS: persisted runtime identity matches post-update Profile 4 READ revision 1 and byte-identical deterministic payload/digest; STATUS unchanged."},
+    {"id":"A4","observed":"PASS: reviewed 90-second single-owner capture has two exact persisted responses and 295 complete viewer records, without malformed/unframed traffic; final Config/STATUS unchanged."},
+    {"id":"A5","observed":"NOT_TESTED: recorded unplug/replug is not a normal reboot/reconnect through the production selection path with a new boot/session identity capture."}
+  ],
+  "anomalies": ["No firmware or persistent-state anomaly was observed."],
+  "evidence_gaps": ["A5 requires a separately approved normal reboot/reconnect observation with post-boot persisted identity capture. Historical pre-handoff matrix omission remains an immutable procedural limitation."],
+  "rollback_recovery": "None performed.",
+  "tester": "Owner physical observations and daemon host capture; independent HEP adjudication.",
+  "tested_at": "2026-10-19"
+}

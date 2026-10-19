@@ -8470,7 +8470,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-003",
       "title": "Read-only persisted Ultimate runtime identity attestation",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "LOCAL_ACCEPTANCE_PENDING",
       "branch": "codex/gp-bind-003-runtime-attestation",
       "objective": "Expose which persisted Ultimate profile identity/revision/payload the actual current primary-backend evaluator uses in the same XInput boot/session; return explicit neutral/unavailable status whenever correspondence is unproven.",
       "why_this_matters": "Distinguish stored, selected, requested, readback and actual runtime objects before renewed X1 diagnosis; Configurator cannot reconstruct the historical H4 gameplay session.",
@@ -8522,10 +8522,10 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "manual_acceptance_protocol_version": "GP_BIND_RUNTIME_ATTESTATION_HW_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
+      "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_003_partial_evidence_2026-10-19.json",
+      "hardware_result": "PARTIAL",
       "hardware_evidence_gaps": [
-        "All physical rows NOT_TESTED. Candidate tuple and UF2 custody are recorded, but no device is presently available and no physical action is authorized until a separate concrete preparation packet and safe manual recovery route are approved. Required observations remain Configurator neutral/recovery truth where safely available; active persisted identity/digest in the same XInput session; repeated queries with controls/viewer intact; and normal manual reboot/reconnect identity. Unsafe stored-update/corruption/previous-recovery cases remain host-only unless separately approved and explicitly adjudicated."
+        "A5 only: a separately approved normal reboot/reconnect through the existing production selection path, followed by a new boot/session persisted-identity capture. The earlier pre-handoff candidate-matrix omission remains historical and is not retroactively cured."
       ],
       "rollback_recovery": "Retain original Config/profile bytes/hashes and approved known-good firmware/custody. Query tests authorize no write/flash/reset/selection. Before any physical preparation, require its separately approved exact packet and safe manual recovery route. Stop on output/transport/mutation/correspondence anomaly. Never merge H3 before exact human HEP PASS; preserve source-free R -> E -> I, tested source/catalog and separate strict DONE.",
       "status_documentation_updates": "Record exact source/base/direct parent/tree, changed paths, observer/digest/wire definition, focused/affected results and honest debt, fresh independent reviews, Mk6 static resource prologue facts, candidate-specific tuple/unique custody and every physical gap. Target query timing and peak stack remain NOT_MEASURED. Record capability PARTIAL and network-enabled Git requirement in chapter ledger. Preserve prior failures and historical H4 UNKNOWN.",
