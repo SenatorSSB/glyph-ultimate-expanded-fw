@@ -10,6 +10,9 @@ import sys
 import tempfile
 import ast
 import copy
+import contextlib
+import io
+import types
 
 from check_glyph_stage_b_ultimate_profiles import ROOT, NANOPB, make_v2_artifact, make_v3_artifact
 import glyph_runtime_identity_tool as identity
@@ -81,6 +84,71 @@ def configurator_cli_tests(temp):
         result=subprocess.run([sys.executable,str(tool),*map(str,arguments)],cwd=ROOT,capture_output=True,text=True,timeout=10)
         assert result.returncode!=0,'CLI accepted invalid context/token or missing correlation'
     print('runtime_identity_configurator_cobs_cli_roundtrip_negatives=PASS')
+
+def serial_open_tests(temp):
+    # Bind the executable regression to the exact deployed framework sources.
+    framework=Path(os.environ.get('GLYPH_PROFILE_STORE_FRAMEWORK',str(Path.home()/'.platformio/packages/framework-arduinopico')))
+    assert json.loads((framework/'package.json').read_text())['version']=='1.30603.0','unexpected CDC framework'
+    library=framework/'libraries/Adafruit_TinyUSB_Arduino/src'
+    pins={'class/cdc/cdc_device.c':'adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f',
+          'arduino/Adafruit_USBD_CDC.cpp':'497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8'}
+    sources={}
+    for path,expected in pins.items():
+        raw=(library/path).read_bytes();assert hashlib.sha256(raw).hexdigest()==expected,'pinned serial source changed: '+path
+        sources[path]=raw.decode()
+    def body(source,signature):
+        start=source.index(signature);cursor=source.index('{',start);depth=1;end=cursor+1
+        while depth:
+            depth+=(source[end]=='{')-(source[end]=='}');end+=1
+        return source[start:end]
+    extracted='\n'.join([body(sources['class/cdc/cdc_device.c'],'bool tud_cdc_n_connected(uint8_t itf)'),
+                          body(sources['arduino/Adafruit_USBD_CDC.cpp'],'size_t Adafruit_USBD_CDC::write(const uint8_t *buffer, size_t size)'),
+                          body(sources['arduino/Adafruit_USBD_CDC.cpp'],'void tud_cdc_line_state_cb(uint8_t instance, bool dtr, bool rts)')])
+    (temp/'pinned_serial_bodies.inc').write_text(extracted)
+    exe=temp/'serial-open';run(['c++','-std=c++17',*FLAGS,'-Wall','-Wextra','-Werror','-I',temp,HOST/'serial_open.cpp','-o',exe])
+    print(run([exe]),end='')
+    # Exercise the actual CLI single-open branch with an in-memory serial seam.
+    # DTR must be set before open; no 1200 baud, reset, reconnect or control API.
+    original_serial=sys.modules.get('serial');original_argv=sys.argv
+    for context,status,backend in [('xinput',4,2),('configurator',2,8)]:
+        events=[]
+        class Serial:
+            def __init__(self,**options):
+                assert options==dict(port=None,baudrate=115200,timeout=0.05,write_timeout=0.1)
+                self._dtr=None;self._rts=None;self.port=None;self.reply=bytearray();self.opened=False
+            def __enter__(self):return self
+            def __exit__(self,*args):events.append('close');self.opened=False
+            @property
+            def dtr(self):return self._dtr
+            @dtr.setter
+            def dtr(self,value):assert not self.opened;self._dtr=value;events.append(('dtr',value))
+            @property
+            def rts(self):return self._rts
+            @rts.setter
+            def rts(self,value):assert not self.opened;self._rts=value;events.append(('rts',value))
+            def open(self):
+                assert self.port=='host-fixture-never-opened' and self.dtr is True and self.rts is False
+                self.opened=True;events.append('open')
+            def write(self,data):
+                import struct
+                assert self.opened and data==identity.wire_request(42,context);events.append('identity-write')
+                response=identity.MAGIC+struct.pack('<BBHQBBHIIIII',1,2,72,42,status,backend,0,0,0,0,0,0)+bytes(32)
+                self.reply.extend(response if context=='xinput' else identity.cobs_encode(b'\x0a'+response));return len(data)
+            @property
+            def in_waiting(self):return len(self.reply)
+            def read(self,length):out=bytes(self.reply[:length]);del self.reply[:length];return out
+        try:
+            sys.modules['serial']=types.SimpleNamespace(Serial=Serial)
+            sys.argv=['identity','--port','host-fixture-never-opened','--context',context,'--token','42','--session','host-model']
+            output=io.StringIO()
+            with contextlib.redirect_stdout(output):assert identity.main()==0
+            assert json.loads(output.getvalue())['primary_backend']==backend
+            assert events==[('dtr',True),('rts',False),'open','identity-write','close']
+        finally:
+            sys.argv=original_argv
+            if original_serial is None:sys.modules.pop('serial',None)
+            else:sys.modules['serial']=original_serial
+    print('runtime_identity_actual_cli_single_open_dtr_asserted_115200=PASS pinned_sources='+json.dumps(pins,sort_keys=True))
 
 def descriptor_checks(temp, nanopb, generated, objects, abi, profile):
     # Compile the exact production digest independently of mode/store access.
@@ -172,6 +240,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix='gp-bind003-proof-') as directory:
         temp=Path(directory);generated=temp/'generated';generated.mkdir()
         configurator_cli_tests(temp)
+        serial_open_tests(temp)
         schema=ROOT/'schema/haybox'
         run([sys.executable,nanopb/'generator/nanopb_generator.py','-I',schema,'-f',schema/'config.options','--error-on-unmatched','--no-timestamp','-D',generated,schema/'config.proto'])
         # Inert unrelated-mode declarations only; production Ultimate and all

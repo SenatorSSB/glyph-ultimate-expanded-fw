@@ -40,6 +40,19 @@ and every COBS frame split are tested. The host decoder also consumes the actual
 production Configurator COBS response from each ABI harness. No device was opened.
 Historical H4 remains UNKNOWN.
 
+Independent review caught the initial host-only `dtr=False` open defect. The
+descendant correction asserts DTR before its single 115200-baud open and leaves
+RTS deasserted. Pinned Adafruit CDC writes loop only while TinyUSB reports
+connected; its connected predicate requires DTR bit 0. The pinned DFU callback
+requires falling DTR at 1200 baud, which this observation path never selects.
+The source-backed regression executes the exact pinned connected/write/line-state
+function bodies with hardware seams: DTR false sends zero bytes, DTR true sends
+the complete 72-byte response, and 115200 open/close does not enter DFU; a 1200
+negative control proves the DFU seam is live. It also executes the actual CLI
+live-open branch for XInput/Configurator through an in-memory serial seam and
+requires DTR asserted before one open, identity-only write and one close. This
+is host/source proof, not a physical connection or general no-reset claim.
+
 ## Actual checks
 
 Commands below ran in the candidate worktree using the existing local Nanopb,

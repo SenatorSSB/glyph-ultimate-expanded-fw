@@ -153,10 +153,11 @@ def main() -> int:
         decoder.feed(a.capture.read_bytes())
     else:
         import serial
-        # An explicit open with control lines deasserted avoids tool-owned reset
-        # or selection behavior. No reconnect, retries or state restoration.
+        # The pinned TinyUSB CDC write path requires DTR asserted. At 115200,
+        # opening/closing this observation stream does not use its 1200-baud
+        # falling-DTR DFU reset path. Set control lines before the single open.
         with serial.Serial(port=None, baudrate=115200, timeout=0.05, write_timeout=0.1) as wire:
-            wire.dtr = False; wire.rts = False; wire.port = a.port; wire.open()
+            wire.dtr = True; wire.rts = False; wire.port = a.port; wire.open()
             query = wire_request(token, a.context)
             if wire.write(query) != len(query): raise ValueError('partial request write')
             deadline = time.monotonic() + a.timeout
