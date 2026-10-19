@@ -4,7 +4,12 @@
 
 The queue's GP-BIND-003 authorization covers the H3 current-primary Ultimate/ProfileStore
 identity observer and a finite identity-only adapter on existing XInput CDC,
-preserving viewer traffic. The owner-selected capability is not implemented yet.
+preserving viewer traffic. Exact candidate
+`307d72347653c079ec8ec6e9b6ecae3c30ae536c` has a PASS build and preserved
+UF2; it is unmerged and awaits hardware acceptance. No device is presently
+available, and physical action requires a separate concrete preparation packet
+and safe manual recovery route. Target query timing and peak stack remain
+NOT_MEASURED.
 Configurator cannot attest a prior gameplay session. GP-BIND-001/002 FAIL and
 the completed activation diagnostic remain historical; root cause UNPROVEN,
 Nunchuk NOT_TESTED. No X1 repair, failed-source import, profile-schema/store
@@ -254,19 +259,20 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "RUNWAY_LOW"
+    "primary_liveness": "PLANNING_REQUIRED"
   },
   "signals": [
-    "RUNWAY_LOW",
-    "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "HARDWARE_TEST_REQUIRED",
     "REPAIR_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -8464,7 +8470,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-003",
       "title": "Read-only persisted Ultimate runtime identity attestation",
-      "status": "READY",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "codex/gp-bind-003-runtime-attestation",
       "objective": "Expose which persisted Ultimate profile identity/revision/payload the actual current primary-backend evaluator uses in the same XInput boot/session; return explicit neutral/unavailable status whenever correspondence is unproven.",
       "why_this_matters": "Distinguish stored, selected, requested, readback and actual runtime objects before renewed X1 diagnosis; Configurator cannot reconstruct the historical H4 gameplay session.",
@@ -8506,11 +8512,11 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "candidate_git_sha": "307d72347653c079ec8ec6e9b6ecae3c30ae536c",
+      "candidate_base_configurator_sha": "bd548dacf453c932b1a88a0684e6e1155080a309",
+      "firmware_artifact_build_path": ".pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/307d72347653c079ec8ec6e9b6ecae3c30ae536c/83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b/firmware.uf2",
+      "firmware_artifact_sha256": "83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b",
       "manual_acceptance": "REQUIRED",
       "manual_acceptance_protocol_reference": "docs/agent_framework/GP_BIND_003_HARDWARE_PROTOCOL.md",
       "manual_acceptance_protocol_version": "GP_BIND_RUNTIME_ATTESTATION_HW_V1",
@@ -8519,10 +8525,10 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "All physical rows NOT_TESTED: exact tuple/custody/original backup; Configurator neutral/recovery truth where safely available; active persisted identity/digest in same XInput session; repeated queries with controls/viewer intact; normal manual reboot/reconnect identity. Unsafe stored-update/corruption/previous-recovery cases remain host-only unless separately approved and explicitly adjudicated."
+        "All physical rows NOT_TESTED. Candidate tuple and UF2 custody are recorded, but no device is presently available and no physical action is authorized until a separate concrete preparation packet and safe manual recovery route are approved. Required observations remain Configurator neutral/recovery truth where safely available; active persisted identity/digest in the same XInput session; repeated queries with controls/viewer intact; and normal manual reboot/reconnect identity. Unsafe stored-update/corruption/previous-recovery cases remain host-only unless separately approved and explicitly adjudicated."
       ],
       "rollback_recovery": "Retain original Config/profile bytes/hashes and approved known-good firmware/custody. Query tests authorize no write/flash/reset/selection. Before any physical preparation, require its separately approved exact packet and safe manual recovery route. Stop on output/transport/mutation/correspondence anomaly. Never merge H3 before exact human HEP PASS; preserve source-free R -> E -> I, tested source/catalog and separate strict DONE.",
-      "status_documentation_updates": "Record exact source/base/tree, changed paths, observer/digest/wire definition, focused/affected results and honest debt, fresh independent reviews, Mk6 resources/latency/stack, candidate-specific tuple/unique custody and every physical gap. Record capability PARTIAL and network-enabled Git requirement in chapter ledger. Preserve prior failures and historical H4 UNKNOWN.",
+      "status_documentation_updates": "Record exact source/base/direct parent/tree, changed paths, observer/digest/wire definition, focused/affected results and honest debt, fresh independent reviews, Mk6 static resource prologue facts, candidate-specific tuple/unique custody and every physical gap. Target query timing and peak stack remain NOT_MEASURED. Record capability PARTIAL and network-enabled Git requirement in chapter ledger. Preserve prior failures and historical H4 UNKNOWN.",
       "done_evidence": "Required: truthful current-session observer with all applicable Tier-1/Tier-2 proof; exact reviewed committed Mk6 candidate/artifact/custody; minimum protocol exact human observations and source-free HEP PASS; fresh reviewed exact tested-source integration with genuine catalog/correspondence, then separate strict DONE. Renewed X1 diagnosis uses full Config/mode/reference/store/runtime/firmware tuple; no X1 repair or prior H4 reconstruction is part of this order.",
       "stop_conditions": [
         "False or unproven runtime identity, digest error, stale requested/readback substitution, inconsistent snapshot or uncertain ownership",
@@ -8533,7 +8539,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null
+      "hardware_evidence_dependency_satisfied": false
     }
   ]
 }
@@ -8703,19 +8709,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-BIND-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-BIND-003
-Immediate Ready: 1
+Ready IDs: (none)
+Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 0
-Effective authorized runway: 1
+Hardware-pending: 1
+Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: RUNWAY_LOW
+Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
