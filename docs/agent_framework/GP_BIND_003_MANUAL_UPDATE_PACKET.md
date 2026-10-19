@@ -4,13 +4,14 @@ Protocol: `GP_BIND_RUNTIME_ATTESTATION_HW_V1`
 Classification: `SOURCE_FREE_MANUAL_UPDATE_PACKET`  
 Status: `OWNER_AUTHORIZED_EXACT_CANDIDATE_UPDATE_PENDING`
 
-This packet covers one exact-candidate manual update and bounded read-only
-verification afterward. Direct owner authority in this thread permits reading
-and writing the controller in normal, Configurator, and RPI-RP2 states. The
-controller is currently in Configurator. This packet does not authorize
-Config/ProfileStore writes, profile selection, reset/retry after an uncertain
-operation, source edits, merge, unrelated flashing, or any acceptance claim.
-It is not HEP PASS. The candidate remains unmerged.
+This packet covers one exact-candidate manual update ending after the
+bootloader's expected automatic return to ordinary controller state. Direct
+owner authority in this thread permits the physical action of entering
+RPI-RP2; the controller is currently in Configurator. This packet does not
+authorize Config/ProfileStore writes, profile selection, reset/retry after an
+uncertain operation, a later physical transition into Configurator, source
+edits, merge, unrelated flashing, or any acceptance claim. It is not HEP
+PASS. The candidate remains unmerged.
 
 ## Frozen subject
 
@@ -44,26 +45,13 @@ mounted bootloader volume, identify the unique target mount, and copy only the
 exact candidate UF2 listed above, after rehashing and size-checking it. Do not
 write any other file. Preserve the host copy, operation log, observed mount
 result, and copy result. Do not include personal USB identifiers in the
-record.
+record. The packet ends after the bootloader volume returns/ejects and the
+controller automatically returns to its ordinary controller state as expected.
+Do not initiate another physical action to reach Configurator. Any later
+Configurator transition and its read-only verification require a separate
+action-specific packet that states the authorized physical method.
 
-After the copy completes and the bootloader volume has returned/ejected as
-expected, the human must physically return the controller to Configurator.
-This is the sole required follow-up physical state transition. Do not make a
-second attempt if the mount, copy, completion, or return is uncertain; stop
-and preserve the evidence for owner review.
-
-## Bounded read-only verification
-
-Once Configurator is visibly restored, first capture fresh read-only
-`GET_CONFIG` and ProfileStore `STATUS` using the already approved production
-read paths. Compare the raw Config bytes with the preserved pre-update capture
-and compare store incarnation, generation, high-water, and recovery flags with
-the pre-update capture. Then capture profile status/profile inventory using
-only the bounded read-only queries in
-[`GP_BIND_003_HARDWARE_PROTOCOL.md`](GP_BIND_003_HARDWARE_PROTOCOL.md), if the
-baseline comparisons are exact and the responses are unambiguous. Record the
-actual reported firmware identity separately; do not infer it from the mount
-name or successful copy.
+## Bound pre-update evidence
 
 Fresh pre-update evidence is bound here:
 
@@ -73,24 +61,22 @@ Fresh pre-update evidence is bound here:
 - Raw Config: 252 bytes; SHA-256 `54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460`
 - ProfileStore: incarnation `1`, generation `172`, transaction-token high-water `17293822569102712070`; full 22-profile ID capture is in the manifest.
 
-Preserve all pre/post journals and outputs in a new owner-held evidence
-location. Do not overwrite the evidence session or copy. Do not issue Config or
-ProfileStore mutations, select a profile, reset/retry an uncertain request, or
-perform any query if the fresh GET_CONFIG or STATUS comparison is changed,
-missing, malformed, or ambiguous. Stop immediately on any unexpected state.
+Preserve the pre-update evidence and its verified second copy unchanged. This
+packet performs no post-update Configurator query and makes no claim about
+post-update Config/ProfileStore state.
 
 ## Stop and recovery conditions
 
 Stop before copying if the expected bootloader volume is absent or ambiguous,
 candidate custody fails rehash/size verification, or the destination cannot be
-uniquely identified. Stop after copying if the operation result is uncertain,
-if Configurator does not return, or if read-only verification differs from
-the preserved baseline. Never retry automatically and never flash rollback
+uniquely identified. Stop after copying if the operation result is uncertain
+or the bootloader volume/controller does not return to ordinary controller
+state as expected. Never retry automatically and never flash rollback
 automatically. Preserve exact logs and partial evidence; request a separate
 owner-directed recovery decision. Only that separate response may authorize
 the verified rollback artifact above.
 
-This packet performs no physical action and records no hardware result. A
-successful update or read-only verification alone is not HEP PASS, does not
-accept any hardware row, and does not permit candidate merge. Exact-snapshot
-human evidence and independent HEP review remain required by the protocol.
+This packet records no completed physical action or hardware result. A
+successful update alone is not HEP PASS, does not accept any hardware row, and
+does not permit candidate merge. Exact-snapshot human evidence and independent
+HEP review remain required by the protocol.
