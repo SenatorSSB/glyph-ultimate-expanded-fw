@@ -1,7 +1,7 @@
 # GP-BIND-003 hardware preparation and recovery packet
 
-Protocol: `GP_BIND_RUNTIME_ATTESTATION_HW_V1`  
-Classification: `DOCS_CHECKER_ONLY`; source-free preparation.  
+Protocol: `GP_BIND_RUNTIME_ATTESTATION_HW_V1`
+Classification: `DOCS_CHECKER_ONLY`; source-free preparation.
 Status: `READ_ONLY_PREPARATION_READY`; no controller observations are recorded.
 
 This packet binds read-only enumeration, preservation of the current Config
