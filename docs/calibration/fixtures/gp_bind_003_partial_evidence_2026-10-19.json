@@ -21,11 +21,11 @@
   "preconditions": ["Exact candidate/artifact custody, fresh backup, and reviewed read-only packets are retained in the local evidence bundle."],
   "result": "PARTIAL",
   "steps": [
-    {"id":"A1","observed":"Exact candidate/tree/UF2 custody and retained backup match. Historical pre-handoff candidate-matrix omission remains recorded and is not cured."},
-    {"id":"A2","observed":"PASS: Configurator reports only neutral backend 8 with zero identity/reference fields; Config retained exact bytes."},
-    {"id":"A3","observed":"PASS: persisted runtime identity matches post-update Profile 4 READ revision 1 and byte-identical deterministic payload/digest; STATUS unchanged."},
-    {"id":"A4","observed":"PASS: reviewed 90-second single-owner capture has two exact persisted responses and 295 complete viewer records, without malformed/unframed traffic; final Config/STATUS unchanged."},
-    {"id":"A5","observed":"NOT_TESTED: recorded unplug/replug is not a normal reboot/reconnect through the production selection path with a new boot/session identity capture."}
+    {"id":"A1","instruction":"Verify custody/context.","expected":"Exact tuple and backup.","observed":"Exact candidate/tree/UF2 custody and retained backup match. Historical pre-handoff candidate-matrix omission remains recorded and is not cured."},
+    {"id":"A2","instruction":"Query Configurator identity.","expected":"Neutral context only.","observed":"PASS: Configurator reports only neutral backend 8 with zero identity/reference fields; Config retained exact bytes."},
+    {"id":"A3","instruction":"Query XInput identity and read Profile 4.","expected":"Persisted ID 4/revision 1/digest correspondence.","observed":"PASS: persisted runtime identity matches post-update Profile 4 READ revision 1 and byte-identical deterministic payload/digest; STATUS unchanged."},
+    {"id":"A4","instruction":"Run bounded normal CDC capture.","expected":"Two exact responses and complete viewer framing.","observed":"PASS: reviewed 90-second single-owner capture has two exact persisted responses and 295 complete viewer records, without malformed/unframed traffic; final Config/STATUS unchanged."},
+    {"id":"A5","instruction":"Normal reboot/reconnect then query identity.","expected":"New boot/session retains persisted identity.","observed":"NOT_TESTED: recorded unplug/replug is not a normal reboot/reconnect through the production selection path with a new boot/session identity capture."}
   ],
   "anomalies": ["No firmware or persistent-state anomaly was observed."],
   "negative_regression_checks": ["No X1 repair, V4 acceptance, ProfileStore redesign, RT2 work, merge, rebuild, rollback, or persistent device mutation is claimed."],
