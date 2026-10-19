@@ -1,0 +1,70 @@
+{
+  "schema_name": "glyph_planner_runtime_attestation_capability_input",
+  "schema_version": 1,
+  "observed_date": "2026-10-19",
+  "observer": "independent Planner, /root/attestation_planner",
+  "working_directory": "/private/tmp/gp-bind-003-planning",
+  "base_configurator_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
+  "controller_access_capability": "PARTIAL",
+  "owner_authority": {
+    "path": "/Users/rasmus.pekkarinen/.codex/attachments/b012f2b7-9d61-4161-9bd3-70368eac2329/goal-objective.md",
+    "sha256": "57683824763eebf0939bea1c19fdfec1ce2065649d5632bd90ffa86ede775eec",
+    "inspected_original": true,
+    "scope": "Owner selects narrowly bounded read-only runtime attestation; normal Planner/Curator/READY, build, custody, physical and source-free evidence gates remain."
+  },
+  "observations": [
+    {
+      "command": "ls /dev/cu.usb*",
+      "exit_code": 1,
+      "result": "zsh: no matches found: /dev/cu.usb*",
+      "meaning": "No matching serial device at observation time; not proof no controller exists elsewhere."
+    },
+    {
+      "command": "ioreg -p IOUSB -l | rg -i 'glyph|haybox|rp.?pico|raspberry|2e8a'",
+      "exit_code": 1,
+      "result": "No matching output.",
+      "meaning": "No matching USB identity from this filtered inventory; arbitrary XInput VID/PID presence was not exhaustively classified."
+    },
+    {
+      "command": "test -r tools/glyph_serial_config_tool.py",
+      "exit_code": 0,
+      "result": "Readable repository tool; device request execution not attempted."
+    },
+    {
+      "command": "test -x .venv/bin/python",
+      "exit_code": 1,
+      "result": "No executable at this worktree-local path; no claim about every Python installation."
+    },
+    {
+      "command": "command -v pio",
+      "exit_code": 1,
+      "result": "pio not on this process PATH; no build attempted."
+    },
+    {
+      "command": "test -r /private/tmp",
+      "exit_code": 0,
+      "result": "Temporary directory readable; Planner uses its clean worktree there."
+    },
+    {
+      "command": "test -f local_backups/hardware-artifacts/b3d60feb48d637efa8612515d2351a470fe9df0e/bc82db6f7e334c598ef8eca4f7bcb4aa53964cfc1dfdba202e90b1fbecf1d921/firmware.uf2",
+      "exit_code": 1,
+      "result": "Known failed candidate artifact absent at the expected relative path in this clean worktree; no substitute artifact searched for, copied or built. The daemon separately reported no matching local_backups artifact."
+    }
+  ],
+  "live_git_verification": {
+    "command": "git ls-remote origin refs/heads/configurator",
+    "default_result": "exit 128: Could not resolve host: github.com; inconclusive connectivity, not authentication evidence",
+    "network_enabled_retry_exit_code": 0,
+    "network_enabled_retry_result": "941affbdbb7e54563e4c58a3830c49f39ea0f449 refs/heads/configurator",
+    "network_capabilities": {
+      "live_github_requires_network_enabled": true
+    }
+  },
+  "not_performed": [
+    "opening a serial connection or issuing a device request",
+    "write, profile mutation, flash, reset, reboot or reconnect",
+    "build or firmware artifact creation",
+    "hardware acceptance or reconstruction of historical H4 runtime state"
+  ],
+  "continuation": "Reuse this capability result until a material connection/environment change. Use an external terminal packet only for an operation unavailable here; no artificial separate agent boundary for readable repository work. Device access and build preparation remain unverified/unavailable as observed, not hardware failure."
+}

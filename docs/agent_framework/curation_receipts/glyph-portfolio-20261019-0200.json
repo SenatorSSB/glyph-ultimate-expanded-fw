@@ -1,0 +1,17 @@
+{
+  "schema_name": "glyph_curator_packet_receipt",
+  "schema_version": 1,
+  "packet_id": "glyph-portfolio-20261019-0200",
+  "planning_branch": "planning/portfolio-20261019-0200",
+  "planning_commit": "9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad",
+  "packet_base_configurator_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
+  "curation_branch": "curation/portfolio-20261019-0200",
+  "review_date": "2026-10-19",
+  "initial_reviewed_dispositions": [{"candidate_id": "GP-BIND-003", "disposition": "READY"}],
+  "global_wait_proposed": false,
+  "global_wait_accepted": false,
+  "planner_broad_audit_provenance": null,
+  "curator_acceptance_provenance": null,
+  "required_external_evidence": null,
+  "resume_event": null
+}

@@ -563,3 +563,40 @@ hypotheses are evidence inputs, not automatic work authorization.
   Prior instructions/evidence stay preserved; substantive authority, live queue
   scope, independent review, exact source/build/custody and human hardware gates
   remain required. This directive creates no new product work order.
+
+## Bounded runtime-attestation direction — observed 2026-10-19
+
+- Type: `Directive`; source: original project-owner attachment
+  `/Users/rasmus.pekkarinen/.codex/attachments/b012f2b7-9d61-4161-9bd3-70368eac2329/goal-objective.md`,
+  independently read and SHA-256 verified as
+  `57683824763eebf0939bea1c19fdfec1ce2065649d5632bd90ffa86ede775eec`.
+  Its text has no embedded original message ID/timestamp; the observation date
+  and daemon-supplied provenance are not substituted for one.
+- Owner selects a narrowly bounded read-only runtime attestation of the actual
+  persisted Ultimate object being evaluated, with ID/revision/schema and exact
+  payload correspondence where needed. Stored/selected/readback/requested state
+  must remain distinct from runtime; historical H4 identity stays UNKNOWN.
+- Determine local controller capability once without mutation and record
+  VERIFIED/PARTIAL/UNAVAILABLE with exact interfaces. Use local operations when
+  verified, external terminal packets only for unavailable operations, and the
+  human only for physical actions/observations. No write/flash/reset probe.
+- Attestation must be deterministic, bounded, versioned, neutral outside proven
+  applicable state, production-safe, independent of game semantics and useful
+  beyond X1. No profile selection/reload, Config/ProfileStore mutation, evaluator
+  repair, generic debug/write channel, raw pointers, ProfileStore redesign or RT2.
+- Required sequence: repository Planner/Curator/complete READY authority, actual
+  source-chain proof, adversarial tests, fresh independent review, exact Mk6
+  build/resource/custody, bounded attestation hardware proof, then renewed X1
+  diagnosis. Source integration still requires exact human hardware PASS/HEP.
+  Do not stop for mechanical branch/order creation; stop for physical need,
+  larger architecture/substantive choice, affected blocking contradiction or
+  unavailable local operation requiring a concrete external packet.
+- Later X1 repair must follow evidence, distinguishing actual alternate V4
+  activation from an older/different running object. Do not choose a cause now.
+  Before future H4, bind Config/mode/reference, store profile/revision/digest,
+  runtime attestation and firmware/artifact tuple; unexpected mismatch stops H4.
+- This direction supersedes the prior diagnostic's prohibition on *newly
+  authorized bounded attestation implementation* after READY adoption; it does
+  not erase GP-BIND-001/002 FAIL or authorize failed-source import, a generic
+  transport redesign or an unadjudicated X1 repair. The independent
+  [Curator decision](PORTFOLIO_20261019_0200_CURATOR.md) bounds GP-BIND-003.
