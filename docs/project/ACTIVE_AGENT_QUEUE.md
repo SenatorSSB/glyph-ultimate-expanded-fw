@@ -1,5 +1,20 @@
 # Active Agent Queue
 
+## Current bounded runtime-attestation authorization — 2026-10-19
+
+The queue's GP-BIND-003 authorization covers the H3 current-primary Ultimate/ProfileStore
+identity observer and a finite identity-only adapter on existing XInput CDC,
+preserving viewer traffic. The owner-selected capability is not implemented yet.
+Configurator cannot attest a prior gameplay session. GP-BIND-001/002 FAIL and
+the completed activation diagnostic remain historical; root cause UNPROVEN,
+Nunchuk NOT_TESTED. No X1 repair, failed-source import, profile-schema/store
+redesign, generic debug/write/reboot channel or wider transport is authorized.
+Exact candidate review/build/custody, minimum human hardware PASS/HEP and
+source-free R -> E -> I precede tested-source merge and separate strict DONE.
+See [Curator decision](../agent_framework/PORTFOLIO_20261019_0200_CURATOR.md) and the executable queue; these current
+requirements supersede older chapter-state prose only within this named scope.
+
+
 ## Current owner-directed ProfileStore production reconciliation — 2026-10-18
 
 Direct owner `e1c7a932-d829-4a8a-ab7d-c42e6144cd0e` closes manual RT2 investigation as
@@ -169,7 +184,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
+  "audit_base_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -188,33 +203,33 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20261018-0600",
-    "base_configurator_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
-    "packet_id": "glyph-portfolio-20261018-0600",
-    "packet_path": "docs/planning/portfolio_20261018_0600.md",
-    "planning_commit": "8fd3eaee643f1751ac6bfc0aad8bba4adf689f24",
-    "curation_commit": "6f7bfc815fba630ed77995a988e5f592ba153dc2",
+    "branch": "planning/portfolio-20261019-0200",
+    "base_configurator_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
+    "packet_id": "glyph-portfolio-20261019-0200",
+    "packet_path": "docs/planning/portfolio_20261019_0200.md",
+    "planning_commit": "9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad",
+    "curation_commit": "9a822a5afc4709d35ed9919814e5088a3c8c555e",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator adopts GP-BIND-001 READY under the exact direct owner X1 vertical-slice scope; all other packet scope remains excluded."
+      "Independent Curator adopts sole GP-BIND-003 READY for bounded current-session runtime identity observation; failed GP-BIND-001/002 and diagnostic remain unchanged, no X1 repair authorized."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20261018-0600",
-      "planning_commit": "8fd3eaee643f1751ac6bfc0aad8bba4adf689f24",
-      "packet_id": "glyph-portfolio-20261018-0600",
-      "packet_base_configurator_sha": "3006646859d6db2ebbb5a7e9e4cc731623633dfc",
-      "curation_branch": "curation/portfolio-20261018-0600",
-      "review_date": "2026-10-18",
+      "planning_branch": "planning/portfolio-20261019-0200",
+      "planning_commit": "9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad",
+      "packet_id": "glyph-portfolio-20261019-0200",
+      "packet_base_configurator_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
+      "curation_branch": "curation/portfolio-20261019-0200",
+      "review_date": "2026-10-19",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-BIND-001",
+          "candidate_id": "GP-BIND-003",
           "disposition": "READY"
         }
       ],
-      "curation_commit": "6f7bfc815fba630ed77995a988e5f592ba153dc2"
+      "curation_commit": "9a822a5afc4709d35ed9919814e5088a3c8c555e"
     }
   },
   "completion_correspondence": {
@@ -239,19 +254,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "PLANNING_REQUIRED"
+    "primary_liveness": "RUNWAY_LOW"
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
+    "RUNWAY_LOW",
     "RUNWAY_SHORTFALL_CANDIDATE_SUPPLY",
     "REPAIR_REQUIRED"
   ],
@@ -8446,6 +8460,80 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_002_hardware_failure_2026-10-19.json",
       "hardware_result": "FAIL",
       "hardware_evidence_gaps": []
+    },
+    {
+      "id": "GP-BIND-003",
+      "title": "Read-only persisted Ultimate runtime identity attestation",
+      "status": "READY",
+      "branch": "codex/gp-bind-003-runtime-attestation",
+      "objective": "Expose which persisted Ultimate profile identity/revision/payload the actual current primary-backend evaluator uses in the same XInput boot/session; return explicit neutral/unavailable status whenever correspondence is unproven.",
+      "why_this_matters": "Distinguish stored, selected, requested, readback and actual runtime objects before renewed X1 diagnosis; Configurator cannot reconstruct the historical H4 gameplay session.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "A bounded const observer proves actual primary Ultimate object correspondence to the active ProfileStore copy and reports its incarnation, active ID, latched revision, schema and deterministic active-payload SHA-256. A finite identity-only CDC adapter preserves existing XInput viewer records and controller output; requests never activate, reload, reconcile, save or reset.",
+      "scope": "Only const runtime/profile identity accessors and observer helper; additive versioned identity query/response schema and dedicated Configurator read command; finite identity-only existing-XInput CDC adapter on the existing core0 loop/viewer ownership boundary; host read/decode/capture; actual-source proof, candidate build/resources/custody and exact hardware protocol. Freeze bounded frame/version/length/token and digest descriptor/domain before handler coding. Detailed binding contract: docs/agent_framework/PORTFOLIO_20261019_0200_CURATOR.md and immutable Planner packet 9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad.",
+      "explicit_excluded_scope": "No X1/carrier/activation/evaluator repair or failed GP-BIND-001/002 source import; no V4 admission or profile-binding schema change; no Config/ProfileStore mutation, write/control/reboot/recovery dispatcher, generic Configurator bridge/debug RPC/memory/pointers, USB interface/descriptor, scheduler/background worker, backend selection, ProfileStore redesign, reload/persistence change, RT2, flash automation, game semantics, Stage redesign, other modifiers or Nunchuk. Any actual device mutation needs its separately approved concrete preparation packet.",
+      "touched_planes": [
+        "Const active runtime/ProfileStore object correspondence and bounded streaming digest",
+        "Additive identity query wire shape and dedicated Configurator read command",
+        "Existing primary-XInput CDC/core0 viewer stream ownership with unchanged complete 25-byte records/pacing",
+        "Read-only host capture/decoder, actual-source tests, candidate protocol and source-free status/evidence"
+      ],
+      "source_authority": "Original owner attachment /Users/rasmus.pekkarinen/.codex/attachments/b012f2b7-9d61-4161-9bd3-70368eac2329/goal-objective.md SHA-256 57683824763eebf0939bea1c19fdfec1ce2065649d5632bd90ffa86ede775eec, independently read/rehashed 2026-10-19; exact live canonical 941affbdbb7e54563e4c58a3830c49f39ea0f449; Planner 9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad; receipt 9a822a5afc4709d35ed9919814e5088a3c8c555e. Source chain: config.proto requested reference -> backend_init/mode_selection activation -> ProfileStore::Activate/ActiveProfile/latched _active_revision -> Ultimate::SetConfig/_profile -> actual digital/analog paths. backend_init/XInputBackend/B0XXInputViewer define current CDC ownership.",
+      "dependencies_prerequisites": [
+        "Integrated descendant queue adoption of same-base immutable Planner/Curator receipt; fresh live canonical/source drift verification and clean isolated candidate",
+        "Document authoritative state-change/lifetime chain and prove snapshot stable on existing core0 service path outside output generation; freeze versioned bounded wire and pinned descriptor/domain digest definition before handler coding",
+        "Preserve failed GP-BIND-001/002 source/artifact/evidence and activation diagnostic unchanged; no acceptance transfer",
+        "Reuse recorded PARTIAL controller capability until material environment change; verify only unavailable operations non-mutatively; establish actual host/build dependencies before build",
+        "Freeze exact candidate-specific hardware handoff tuple, required observations, safe original backup and separately approved concrete manual preparation/recovery packet before physical work"
+      ],
+      "substantive_authorization_rationale": "Owner explicitly chose bounded truthful runtime attestation. Independent Curator verified source: stale ActiveId is insufficient because failed selected activation can leave old store metadata while Ultimate receives null. This fresh H3 product order authorizes the smallest current-object observer plus finite identity-only existing XInput CDC adapter needed for same-session proof; additive query encoding choices are engineering details within fixed scope. No architecture or product choice remains for this bounded observer; needing wider transport/ownership changes stops for owner direction. Later X1 repair requires fresh source-grounded Curator adjudication. No generic runtime/config/write authority is created.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Relevant canonical selection/object/storage/descriptor/CDC ownership drift without revalidation",
+        "Any false stored-but-not-running active claim, unstable snapshot or unavailable exact digest correspondence",
+        "Need for wider USB/transport/scheduler design, state mutation, failed-source import, V4 admission or X1 repair",
+        "Tier-1 or directly affected Tier-2 contradiction"
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator 2026-10-19. git-json:9a822a5afc4709d35ed9919814e5088a3c8c555e:docs/agent_framework/curation_receipts/glyph-portfolio-20261019-0200.json; same-base Planner git:9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad:docs/planning/portfolio_20261019_0200.md; original owner hash above; binding judgment docs/agent_framework/PORTFOLIO_20261019_0200_CURATOR.md. Receipt does not itself activate work; descendant canonical adoption does.",
+      "automated_validation": [
+        "Actual production selection/ProfileStore/Ultimate/dispatch tests, both enum ABIs and supported sanitizers: ordinary persisted activation; stored selection versus real required activation/reboot; stored r+1 while active copy remains r; invalid/missing selection with stale ActiveId; recovered previous exact revision; no-mode/non-Ultimate/legacy/fallback/recovery/mismatch neutral statuses",
+        "ID/incarnation/latched revision/schema/full deterministic active-payload digest correspondence; wrong requested/stored revision, pointer mismatch, readback hash substitution, stale row and omitted schema/routing/binding/output payload mutants must fail",
+        "V1-V3 actual canonical admission. V4 descriptor compatibility only in disposable host fixture using exact isolated failed GP-BIND-002 source, never import or acceptance; real composed V4 path/digest tests mandatory before any later V4 hardware candidate",
+        "Count persistent calls and compare pre/post Config/store bytes, generations, active object and transaction/recovery state: zero writes, reconciliation, selection, activation, reload, remap/SOCD or output updates from queries",
+        "Interleaved complete viewer/attestation records; unknown/malformed/oversized/partial/version/token requests; unavailable/full TX/repeated queries; bounded loop/stack/latency, production diagnostics disabled, no generic write/reboot dispatcher; identical-input output/report noninterference; timeout/partial data never success",
+        "Run new observer proof plus directly affected actual check_glyph_profile_store_selection_recovery.py, check_glyph_profile_store_production.py, check_glyph_profile_store_strict_protocol.py, check_glyph_profile_store_config_persistence.py, check_glyph_setconfig_runtime_rebinding_characterization.py, check_glyph_stage_b_ultimate_profiles.py, check_glyph_stage_c_ultimate_profiles.py and descriptor/size/build-input consumers with source-backed applicability. Preserve FAIL/incomplete; Tier 1 and affected Tier 2 block",
+        "Fresh independent review attempts false stored-but-not-running identity and challenges primary-session scope, snapshot lifetime, full digest meaning, stream ownership, boundedness and output noninterference; exact committed canonical Mk6 build/resource review and unique artifact custody/correspondence before handoff"
+      ],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/agent_framework/GP_BIND_003_HARDWARE_PROTOCOL.md",
+      "manual_acceptance_protocol_version": "GP_BIND_RUNTIME_ATTESTATION_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [
+        "All physical rows NOT_TESTED: exact tuple/custody/original backup; Configurator neutral/recovery truth where safely available; active persisted identity/digest in same XInput session; repeated queries with controls/viewer intact; normal manual reboot/reconnect identity. Unsafe stored-update/corruption/previous-recovery cases remain host-only unless separately approved and explicitly adjudicated."
+      ],
+      "rollback_recovery": "Retain original Config/profile bytes/hashes and approved known-good firmware/custody. Query tests authorize no write/flash/reset/selection. Before any physical preparation, require its separately approved exact packet and safe manual recovery route. Stop on output/transport/mutation/correspondence anomaly. Never merge H3 before exact human HEP PASS; preserve source-free R -> E -> I, tested source/catalog and separate strict DONE.",
+      "status_documentation_updates": "Record exact source/base/tree, changed paths, observer/digest/wire definition, focused/affected results and honest debt, fresh independent reviews, Mk6 resources/latency/stack, candidate-specific tuple/unique custody and every physical gap. Record capability PARTIAL and network-enabled Git requirement in chapter ledger. Preserve prior failures and historical H4 UNKNOWN.",
+      "done_evidence": "Required: truthful current-session observer with all applicable Tier-1/Tier-2 proof; exact reviewed committed Mk6 candidate/artifact/custody; minimum protocol exact human observations and source-free HEP PASS; fresh reviewed exact tested-source integration with genuine catalog/correspondence, then separate strict DONE. Renewed X1 diagnosis uses full Config/mode/reference/store/runtime/firmware tuple; no X1 repair or prior H4 reconstruction is part of this order.",
+      "stop_conditions": [
+        "False or unproven runtime identity, digest error, stale requested/readback substitution, inconsistent snapshot or uncertain ownership",
+        "Need for wider transport/USB/scheduler/profile-schema/ProfileStore architecture, generic debug/write/control surface, X1 repair or other excluded scope",
+        "Any Tier-1 or directly affected Tier-2 failure; preserve unrelated aggregate FAIL/incomplete as framework debt, never PASS",
+        "Missing exact candidate/build-input/artifact/custody/review, required physical evidence or safe separately approved preparation/recovery",
+        "Unexpected stored/selected/runtime disagreement stops future H4; preserve failures and obtain bounded source-grounded repair adjudication"
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null
     }
   ]
 }
@@ -8615,19 +8703,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-BIND-003"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none)
-Immediate Ready: 0
+Ready IDs: GP-BIND-003
+Immediate Ready: 1
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
 Hardware-pending: 0
-Effective authorized runway: 0
+Effective authorized runway: 1
 Target effective authorized runway: 4
-Primary liveness: PLANNING_REQUIRED
+Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
