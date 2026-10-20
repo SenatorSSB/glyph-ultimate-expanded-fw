@@ -1,0 +1,6 @@
+PASS actual retained metrics/demux/statistics/finite scans/atomic mailbox rejection/clock invalidation; host observations only
+PASS metric source mutation unbounded_scan_chunk
+PASS metric source mutation odd_mailbox_accepted
+PASS metric source mutation incoherent_timer_accepted
+PASS actual pinned CDC/FIFO observer: try-only guard, TX preemption defers, busy/no-response/rate-drop RX progresses via existing post-loop task; raw Serial never called
+glyph_native_target_metrics: PASS offline components/ARM layout; final ELF/stack/hardware incomplete

@@ -1,0 +1,3779 @@
+[
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 0
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6
+    ],
+    "original_inputs": [
+      "BTN_LF6"
+    ],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 1
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      24
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_RF8"
+    ],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 2
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      5
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF5"
+    ],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 3
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00100001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF2"
+    ],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 4
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 10665,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 75,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 169,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      24
+    ],
+    "original_inputs": [
+      "BTN_RF8"
+    ],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 5
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "forced_wins",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 6
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 0
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6
+    ],
+    "original_inputs": [
+      "BTN_LF6"
+    ],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 1
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 10665,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 75,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 169,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 128,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      24
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_RF8"
+    ],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 2
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      5
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF5"
+    ],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 3
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00100001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF2"
+    ],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 4
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 10665,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 75,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 169,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      24
+    ],
+    "original_inputs": [
+      "BTN_RF8"
+    ],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 5
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "forced_loses",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 6
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 0
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6
+    ],
+    "original_inputs": [
+      "BTN_LF6"
+    ],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 1
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 10665,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 75,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 169,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      24
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_RF8"
+    ],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 2
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      5
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF5"
+    ],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 3
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -11951,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 185,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 81,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00100001",
+      "leftStickX": 79,
+      "leftStickY": 81,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF2"
+    ],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 4
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 10665,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 75,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 169,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      24
+    ],
+    "original_inputs": [
+      "BTN_RF8"
+    ],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 5
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "forced_filter",
+    "result": "NOT_TESTED",
+    "row": "H5",
+    "sequence_step": 6
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 0
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 255,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 255,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 1,
+          "zr": 1
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 1,
+          "l_analog": 140,
+          "r": 1,
+          "r_analog": 140,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "000000c1",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 140,
+      "triggerRAnalog": 140
+    },
+    "observed": null,
+    "original_input_ids": [
+      8
+    ],
+    "original_inputs": [
+      "BTN_LF8"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 1
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": -19661,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 223,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 51,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 128,
+      "leftStickY": 51,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6
+    ],
+    "original_inputs": [
+      "BTN_LF6"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 2
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF2"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 3
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12722,
+          "ly": -11180,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 65,
+          "ly": 182,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 78,
+          "stick_y": 84,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 78,
+      "leftStickY": 84,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      7
+    ],
+    "original_inputs": [
+      "BTN_LF7"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 4
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12722,
+          "ly": -11180,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 65,
+          "ly": 182,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 78,
+          "stick_y": 84,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 78,
+      "leftStickY": 84,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      7
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF7"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 5
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 255,
+          "lx": -12722,
+          "ly": -11180,
+          "rb": 0,
+          "rs": 0,
+          "rt": 255,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 65,
+          "ly": 182,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 1,
+          "zr": 1
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 1,
+          "l_analog": 140,
+          "r": 1,
+          "r_analog": 140,
+          "start": 0,
+          "stick_x": 78,
+          "stick_y": 84,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "002000c1",
+      "leftStickX": 78,
+      "leftStickY": 84,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 140,
+      "triggerRAnalog": 140
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      7,
+      8
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF7",
+      "BTN_LF8"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 6
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 19917,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 30,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 205,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00100000",
+      "leftStickX": 128,
+      "leftStickY": 205,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF2"
+    ],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 7
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "complete_sample_1",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 8
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 0
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 255,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 255,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 1,
+          "zr": 1
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 1,
+          "l_analog": 140,
+          "r": 1,
+          "r_analog": 140,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "000000c1",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 140,
+      "triggerRAnalog": 140
+    },
+    "observed": null,
+    "original_input_ids": [
+      8
+    ],
+    "original_inputs": [
+      "BTN_LF8"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 1
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": -19661,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 223,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 51,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 128,
+      "leftStickY": 51,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6
+    ],
+    "original_inputs": [
+      "BTN_LF6"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 2
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF2"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 3
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -10923,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 180,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 85,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000001",
+      "leftStickX": 79,
+      "leftStickY": 85,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      7
+    ],
+    "original_inputs": [
+      "BTN_LF7"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 4
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": -12465,
+          "ly": -10923,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 180,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 85,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00200001",
+      "leftStickX": 79,
+      "leftStickY": 85,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      7
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF7"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 5
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 255,
+          "lx": -12465,
+          "ly": -10923,
+          "rb": 0,
+          "rs": 0,
+          "rt": 255,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 66,
+          "ly": 180,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 1,
+          "zr": 1
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 1,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 1,
+          "l_analog": 140,
+          "r": 1,
+          "r_analog": 140,
+          "start": 0,
+          "stick_x": 79,
+          "stick_y": 85,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "002000c1",
+      "leftStickX": 79,
+      "leftStickY": 85,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 140,
+      "triggerRAnalog": 140
+    },
+    "observed": null,
+    "original_input_ids": [
+      6,
+      7,
+      8
+    ],
+    "original_inputs": [
+      "BTN_LF6",
+      "BTN_LF7",
+      "BTN_LF8"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 6
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 19917,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 30,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 205,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00100000",
+      "leftStickX": 128,
+      "leftStickY": 205,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [
+      2
+    ],
+    "original_inputs": [
+      "BTN_LF2"
+    ],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 7
+  },
+  {
+    "expected_backend_assignment_fields": [
+      {
+        "backend": "XInput",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "back": 0,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "home": 0,
+          "lb": 0,
+          "ls": 0,
+          "lt": 0,
+          "lx": 128,
+          "ly": 128,
+          "rb": 0,
+          "rs": 0,
+          "rt": 0,
+          "rx": 128,
+          "ry": 128,
+          "start": 0,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "backend": "Switch",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "capture": 0,
+          "hat": 8,
+          "home": 0,
+          "l": 0,
+          "l3": 0,
+          "lx": 128,
+          "ly": 127,
+          "minus": 0,
+          "plus": 0,
+          "r": 0,
+          "r3": 0,
+          "rx": 128,
+          "ry": 127,
+          "x": 0,
+          "y": 0,
+          "zl": 0,
+          "zr": 0
+        }
+      },
+      {
+        "backend": "Gamecube",
+        "fields": {
+          "a": 0,
+          "b": 0,
+          "cstick_x": 128,
+          "cstick_y": 128,
+          "dpad_down": 0,
+          "dpad_left": 0,
+          "dpad_right": 0,
+          "dpad_up": 0,
+          "l": 0,
+          "l_analog": 0,
+          "r": 0,
+          "r_analog": 0,
+          "start": 0,
+          "stick_x": 128,
+          "stick_y": 128,
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "expected_output_state": {
+      "buttons_hex": "00000000",
+      "leftStickX": 128,
+      "leftStickY": 128,
+      "rightStickX": 128,
+      "rightStickY": 128,
+      "triggerLAnalog": 0,
+      "triggerRAnalog": 0
+    },
+    "observed": null,
+    "original_input_ids": [],
+    "original_inputs": [],
+    "package": "complete_sample_2",
+    "result": "NOT_TESTED",
+    "row": "H6/H9",
+    "sequence_step": 8
+  }
+]

@@ -1,0 +1,24 @@
+src/modes/UltimateNativeProfile.cpp:23:6:bool ultimate_native::{anonymous}::Token(uint16_t, uint8_t, bool, bool)	16	static
+src/modes/UltimateNativeProfile.cpp:254:6:bool ultimate_native::RejectPayload(pb_istream_t*, const pb_field_t*, void**)	0	static
+src/modes/UltimateNativeProfile.cpp:108:39:bool ultimate_native::PrepareStructure(const uint8_t*, size_t, uint32_t, PreparedView&)	144	static
+src/modes/UltimateNativeProfile.cpp:37:6:bool ultimate_native::{anonymous}::Encode(pb_ostream_t*, const pb_field_t*, void* const*)	16	static
+src/modes/UltimateNativeProfile.cpp:42:6:bool ultimate_native::{anonymous}::Decode(pb_istream_t*, const pb_field_t*, void**)	56	static
+src/modes/UltimateNativeProfile.cpp:90:6:bool ultimate_native::{anonymous}::ScanProfile(const uint8_t*, size_t, ultimate_native::PayloadLease&)	64	static
+src/modes/UltimateNativeProfile.cpp:20:32:void ultimate_native::{anonymous}::BodyDigest(const uint8_t*, size_t, uint8_t*)	192	static
+include/core/Sha256.hpp:20:10:void Sha256::Final(uint8_t*)	216	static
+src/modes/UltimateNativeProfile.cpp:9:10:uint16_t ultimate_native::Read16(const uint8_t*)	0	static
+src/modes/UltimateNativeProfile.cpp:182:6:bool ultimate_native::Prepare(const uint8_t*, size_t, uint32_t, PreparedView&)	24	static
+src/modes/UltimateNativeProfile.cpp:188:6:bool ultimate_native::CopyProgram(const PreparedView&, OwnedProgram&, uint32_t, bool)	32	static
+src/modes/UltimateNativeProfile.cpp:193:6:bool ultimate_native::ContextDigest(const GameModeConfig&, uint8_t*)	216	static
+src/modes/UltimateNativeProfile.cpp:211:6:bool ultimate_native::IsOwnedView(const PreparedView&)	0	static
+src/modes/UltimateNativeProfile.cpp:214:6:bool ultimate_native::ContextMatches(const PreparedView&, const GameModeConfig&)	40	static
+src/modes/UltimateNativeProfile.cpp:215:21:const ultimate_native::PayloadLease* ultimate_native::Lease(const UltimateProfile&)	0	static
+src/modes/UltimateNativeProfile.cpp:216:6:void ultimate_native::Bind(UltimateProfile&, PayloadLease&)	0	static
+src/modes/UltimateNativeProfile.cpp:217:6:bool ultimate_native::BindOwned(UltimateProfile&, const OwnedProgram&, PayloadLease&)	8	static
+src/modes/UltimateNativeProfile.cpp:221:6:bool ultimate_native::ValidProfile(const UltimateProfile&)	24	static
+src/modes/UltimateNativeProfile.cpp:227:21:const ultimate_native::PreparedView& ultimate_native::CandidateView()	0	static
+src/modes/UltimateNativeProfile.cpp:228:6:bool ultimate_native::PreserveProfile(UltimateProfile&)	40	static
+src/modes/UltimateNativeProfile.cpp:232:6:bool ultimate_native::DecodeProfile(const uint8_t*, size_t, UltimateProfile&, PayloadLease&)	40	static
+src/modes/UltimateNativeProfile.cpp:241:6:bool ultimate_native::PrepareRequest(const uint8_t*, size_t, ProfileStoreRequest&, PayloadLease&)	48	static
+src/modes/UltimateNativeProfile.cpp:255:6:void ultimate_native::RejectEmbedded(Config&)	0	static
+src/modes/UltimateNativeProfile.cpp:256:6:void ultimate_native::ClearEmbeddedCallbacks(Config&)	8	static

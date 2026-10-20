@@ -1,0 +1,59 @@
+{
+  "kind": "EXACT_COMMITTED_NATIVE_BUILD_ONLY_NO_HARDWARE_ACCEPTANCE",
+  "base_source_free_authorization_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "baseline_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "source_free_authority_chain": [
+    "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "e4bf626c71d0494a138721eff54ac563ef2877cb",
+    "262e51f2740789458be81fbd49c51c099c7f5a65"
+  ],
+  "wrapper_provenance": {
+    "bytes": 4900,
+    "sha256": "2ca2f509d839f73ed5a7c202477761041b18b6932a658467a0ccc18df918cb34"
+  },
+  "instrumentation_requirement": "Final handed-off hardware candidate must retain the owner-authorized diagnostic facility; source/ELF review separately required.",
+  "before": {
+    "head": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+    "tree": "9000056d2584f65a7ae8b40032c480d5a2250d28",
+    "tracked_status": "",
+    "full_status": ""
+  },
+  "command": [
+    "./scripts/build-glyph-mk6-quiet.sh"
+  ],
+  "canonical_command_unavailable": true,
+  "started_utc": "2026-10-20T13:38:59.700532+00:00",
+  "exit_code": 1,
+  "elapsed_seconds": 87.32564241602086,
+  "finished_utc": "2026-10-20T13:40:27.033647+00:00",
+  "after": {
+    "head": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+    "tree": "9000056d2584f65a7ae8b40032c480d5a2250d28",
+    "tracked_status": "",
+    "full_status": ""
+  },
+  "ram": null,
+  "flash": null,
+  "source_stable": true,
+  "artifacts": {},
+  "descriptors": {},
+  "logs": {
+    "wrapper.log": {
+      "bytes": 1785,
+      "sha256": "6ecefef06ef8cef42cac85bd4679fd656ad2c0142695780c2853ad821d7feb8c"
+    },
+    "glyph_mk6_build.log": {
+      "bytes": 1742,
+      "sha256": "687614f029175e66e2ef01af7f82b24073744633bb7f9d90857773370fc2668c"
+    }
+  },
+  "hardware_status": "NOT_TESTED",
+  "target_timing": "NOT_MEASURED",
+  "whole_target_stack": "NOT_MEASURED",
+  "accepted_resource_caps": {
+    "static_ram_max": 199632,
+    "added_static_ram_max": 12288,
+    "core0_stack": 2048,
+    "core1_stack": 2048
+  }
+}

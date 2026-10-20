@@ -1,0 +1,47 @@
+[
+  {
+    "body_sha256": "8e3cd2028bc6894c0145502c24a1f8ac0f3383e65b5656a2470220b1ba576005",
+    "complete_sample": null,
+    "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+    "name": "forced_wins",
+    "policy": "forced_table_down_a",
+    "profile_sha256": "70029461c4c2f34b54af3a3e0ba5186e1cf5bdc58dd1ae903076573d1015cd6b",
+    "wrapper_bytes": 1995
+  },
+  {
+    "body_sha256": "d052183a16f373dd2a1cafdc5c233e2b3cd0af639335fdee60081c2a908cfd13",
+    "complete_sample": null,
+    "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+    "name": "forced_loses",
+    "policy": "forced_table_down_a",
+    "profile_sha256": "30f35f2c2e1a7809cac0e691456380e36bc08e4f9ec49ef90f57eb79e6e5623b",
+    "wrapper_bytes": 1995
+  },
+  {
+    "body_sha256": "a926797c689e5b7760f255723f18d978dca8376fb6025c68a161e404ead506fa",
+    "complete_sample": null,
+    "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+    "name": "forced_filter",
+    "policy": "forced_table_down_a",
+    "profile_sha256": "a247db7e1994c04c412595da6f85a7b7999e7d18d89b3a67ca2291da6d15d8e9",
+    "wrapper_bytes": 1995
+  },
+  {
+    "body_sha256": "32d178490712de2a10c0727b934405b21291bf5bcaa2472500cf38568617ab0f",
+    "complete_sample": 1,
+    "context_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+    "name": "complete_sample_1",
+    "policy": "historical_compatibility",
+    "profile_sha256": "c3bc3614423dbc07c8cf9a31df3335e7bb12158ad69d5657b28139c1a7ca3a62",
+    "wrapper_bytes": 2014
+  },
+  {
+    "body_sha256": "238d0c062917e5223584358ef03e323a98fa974cc2b7c40f65ab1d01adc90cc3",
+    "complete_sample": 2,
+    "context_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+    "name": "complete_sample_2",
+    "policy": "historical_compatibility",
+    "profile_sha256": "cf9242df366920dfaa269df4cc0ffac5948d1d6d7956a4a8fe50f1057400ae2a",
+    "wrapper_bytes": 2014
+  }
+]

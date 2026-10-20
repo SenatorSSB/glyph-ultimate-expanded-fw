@@ -1,0 +1,63 @@
+
+/private/tmp/glyph-native-metrics-final-guard-bracket/NativeTargetMetrics.cpp.o:
+00000000 00000044 T _ZN14native_metrics10CanRespondEm
+00000000 000000cc T _ZN14native_metrics11RecordFrameEmmmm
+00000000 00000194 T _ZN14native_metrics11ServiceCoreEj
+00000000 00000004 b _ZN14native_metrics12_GLOBAL__N_110last_tx_msE
+00000000 0000003c b _ZN14native_metrics12_GLOBAL__N_110statisticsE
+00000000 00000094 t _ZN14native_metrics12_GLOBAL__N_111ReadMailboxEjPh
+00000000 00000004 b _ZN14native_metrics12_GLOBAL__N_116capture_sequenceE
+00000000 00000004 b _ZN14native_metrics12_GLOBAL__N_117native_generationE
+00000000 00000018 b _ZN14native_metrics12_GLOBAL__N_12rxE
+00000000 000000b8 t _ZN14native_metrics12_GLOBAL__N_17PublishEjR21NativeMetricScanState
+00000000 0000000c b _ZN14native_metrics12_GLOBAL__N_18overheadE
+00000000 000000a0 b _ZN14native_metrics12_GLOBAL__N_18responseE
+00000000 00000028 b _ZN14native_metrics12_GLOBAL__N_19mailboxesE
+00000000 00000004 b _ZN14native_metrics12_GLOBAL__N_19run_flagsE
+00000000 0000001c T _ZN14native_metrics13ExpireRequestEm
+00000000 00000100 T _ZN14native_metrics14ConsumeRequestEhmRb
+00000000 0000000c T _ZN14native_metrics14DiscardRequestEv
+00000000 0000001c T _ZN14native_metrics14RecordObserverEm
+00000000 000000cc T _ZN14native_metrics16RecordActivationEmmmbb
+00000000 00000038 T _ZN14native_metrics16ResponseAdmittedEm
+00000000 0000000c T _ZN14native_metrics3NowEv
+00000000 000002f4 T _ZN14native_metrics8SnapshotEmm
+00000000 00000120 T _ZN14native_metrics9CalibrateEv
+00000000 00000004 r _ZN14native_metricsL6kMagicE
+         U __aeabi_uldivmod
+00000000 00000060 B glyph_native_metric_scans
+         U memset
+
+/private/tmp/glyph-native-metrics-final-guard-bracket/NativeTargetMetricsEntry.S.o:
+00000000 0000006a T GlyphNativeMetricCore1Entry
+         U __StackBottom
+         U __StackOneBottom
+         U __StackOneTop
+         U __StackTop
+         U __real_main
+         U __real_multicore_launch_core1
+00000000 0000006a T __wrap_main
+00000000 00000016 T __wrap_multicore_launch_core1
+         U glyph_native_metric_scans
+         U main1
+
+/private/tmp/glyph-native-metrics-final-guard-bracket/ControllerMode.cpp.o:
+00000000 00000124 T _ZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendId
+00000000 0000000e T _ZN14ControllerMode15ResetDirectionsEv
+00000000 00000122 T _ZN14ControllerMode16UpdateDirectionsEbbbbbbbbhhhR12_OutputState
+00000000 00000022 T _ZN14ControllerMode25UpdatePreprocessedOutputsERK20ResolvedInputContextR12_OutputState23_CommunicationBackendId
+00000000 00000020 T _ZN14ControllerModeC1Ev
+00000000 00000020 T _ZN14ControllerModeC2Ev
+         U _ZN14native_metrics11RecordFrameEmmmm
+         U _ZN14native_metrics3NowEv
+         U _ZN9InputMode10HandleSocdER11_InputState
+         U _ZN9InputMode11HandleRemapERK11_InputStateRS0_
+         U _ZN9InputModeC2Ev
+00000000 00000004 W _ZNK14ControllerMode26DiagnosticNativeGenerationEv
+00000000 00000028 R _ZTV14ControllerMode
+00000000 00000004 b _ZZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendIdE13native_before
+00000000 00000004 b _ZZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendIdE3end
+00000000 00000004 b _ZZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendIdE5begin
+         w __cxa_pure_virtual
+         U memcpy
+         U memset

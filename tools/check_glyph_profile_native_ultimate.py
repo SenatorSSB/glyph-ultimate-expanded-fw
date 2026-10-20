@@ -147,9 +147,11 @@ def composition_tests(temp,exe,pb,legacy):
     print('PASS original/pre/post composition;6SOCD policies/history; clean/forced table winner/loser/filter;18family witnesses×60carrier rebindings')
 
 
-def complete_profile(native,pb,variant):
+def complete_profile(native,pb,variant,carriers=(49,50,51)):
     # Keep every converted source family and add original-domain A+post-SOCD
     # Down, an ordinary forced table, and one-input A+L+R to each body.
+    clean,forced,digital=carriers
+    require(len(set(carriers))==3 and all(1<=x<=60 for x in carriers),"explicit distinct complete profile carriers")
     body=native.native_payload;header=bytearray(body[:96]);count,early,sources,rules,bindings,effects=header[10:16]
     tokens=struct.unpack_from('<H',header,92)[0];offset=600
     conditions=bytearray(body[offset:offset+count*3]);offset+=count*3
@@ -159,14 +161,16 @@ def complete_profile(native,pb,variant):
     binding_data=bytearray(body[offset:offset+bindings*6]);offset+=bindings*6
     effect_data=body[offset:offset+effects*32];offset+=effects*32;mask=body[offset:]
     old_down=struct.unpack_from('<H',direction_sources,5)[0]
-    conditions+=struct.pack('<BH',count+1,2<<2);pool+=struct.pack('<HH',old_down,0x2000+49)
+    conditions+=struct.pack('<BH',count+1,2<<2);pool+=struct.pack('<HH',old_down,0x2000+clean)
     struct.pack_into('<H',direction_sources,5,0x3000+count+1)
-    rule_data+=struct.pack('<BBH',3,19,50)
-    binding_data+=struct.pack('<HHBB',49,1,255,0)+struct.pack('<HHBB',50,1,255,0)+struct.pack('<HHBB',51,193,255,0)
+    rule_data+=struct.pack('<BBH',3,19,forced)
+    binding_data+=struct.pack('<HHBB',clean,1,255,0)+struct.pack('<HHBB',forced,1,255,0)+struct.pack('<HHBB',digital,193,255,0)
     tables=bytearray(body[96:600]);tables[19*18:20*18]=bytes([77+variant,83+variant])*9
     header[10]=count+1;header[11]=early+1;header[13]=rules+1;header[14]=bindings+3
     struct.pack_into('<H',header,92,tokens+2)
-    header[60:92]=hashlib.sha256(b'Glyph.Native.Complete20.v1\0'+bytes([variant])+body).digest()
+    derivation=b'Glyph.Native.Complete20.v1\0'+bytes([variant])+body
+    if carriers!=(49,50,51):derivation+=b'Glyph.Native.PacketCarriers.v1\0'+bytes(carriers)
+    header[60:92]=hashlib.sha256(derivation).digest()
     result=header+tables+conditions+pool+direction_sources+rule_data+binding_data+effect_data+mask
     struct.pack_into('<H',result,8,len(result))
     from convert_glyph_native_ultimate_profile import validate_native_body

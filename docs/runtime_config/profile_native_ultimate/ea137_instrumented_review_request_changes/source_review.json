@@ -1,0 +1,37 @@
+{
+  "verdict": "REQUEST_CHANGES",
+  "commit": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+  "tree": "9000056d2584f65a7ae8b40032c480d5a2250d28",
+  "elf_sha256": "eb041f1c8fb39718bb03d07f5a4ab5177106a9a313b8b8e43424a73dc62bd863",
+  "p1": "OPEN",
+  "hardware": "NOT_FOR_HARDWARE_HANDOFF",
+  "findings": [
+    {
+      "priority": 1,
+      "id": "duplicate_first_record_repair_stack",
+      "known_bytes": 2100,
+      "limit": 2048,
+      "alignment_rom_added": false,
+      "source": "HAL/pico/src/core/ProfileStore.cpp:1454"
+    },
+    {
+      "priority": 1,
+      "id": "raw_serial_diagnostic_irq_mutex_and_yield",
+      "source": "include/core/RuntimeIdentityService.hpp:42"
+    },
+    {
+      "priority": 2,
+      "id": "xinput_two_backend_boot_generation_latch",
+      "source": "HAL/pico/src/core/NativeTargetMetrics.cpp:138"
+    }
+  ],
+  "independent_host_metrics_and_three_mutants": "PASS",
+  "independent_boot_fanout_reproducer": "REPRODUCED_INVALID_LATCH",
+  "entry_link_interception": "VERIFIED",
+  "atomic_method_inline_seqcst": "VERIFIED",
+  "static_data_bss_bytes": 197312,
+  "conservative_diagnostic_subcap_charge": 444,
+  "whole_stack_upper": "NOT_ESTABLISHED",
+  "target_observations": "NOT_MEASURED",
+  "report_sha256": "ec6ef849726c6efde5a25c1d7bb542b8f9721f441692e0129ee69dad45462383"
+}

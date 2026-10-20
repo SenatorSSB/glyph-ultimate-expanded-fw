@@ -26,6 +26,28 @@ namespace {
     constexpr const char *kControl = "/ultimate-v2.ctrl", *kControlTemp = "/ultimate-v2.ctmp";
     constexpr uint64_t kReserve = 16384;
 
+    bool duplicate_prepared = false;
+
+    // One synchronous Create call owns these borrowed inputs. They are reset
+    // at entry and cleared on every exit; no callback/reentrant store exists.
+    struct PreparedCreate {
+        const UltimateProfile *profile;
+        const char *input_name;
+        uint32_t id, rank, schema;
+        size_t bytes;
+        char name[ProfileStore::kNameCapacity];
+        ProfileStore::TransactionIdentity identity;
+        ProfileStore::TransactionResult result;
+        bool ready;
+    };
+    PreparedCreate prepared_create{};
+
+    struct PreparedRecordWrite {
+        uint8_t record[kMaxRecordWireBytes]; size_t n; pb_ostream_t stream;
+        char path[32], temp[32];
+    };
+    PreparedRecordWrite prepared_record{};
+
     uint32_t Crc32(const uint8_t *p, size_t n) {
         uint32_t c = ~0u;
         while (n--) {
@@ -227,6 +249,15 @@ namespace {
     // Keep checked publication in its caller: a retained adapter frame would
     // consume stack throughout LittleFS metadata compaction. Semantics stay
     // in this single shared implementation.
+    struct PreparedPublication {
+        ProfileStoreStorage *storage;
+        const char *tmp, *dest;
+        const uint8_t *bytes;
+        size_t length;
+        Kind kind;
+        ProfileStoreIoStage *stage;
+    };
+    PreparedPublication publishing{};
     __attribute__((always_inline)) inline Result Publish(
         ProfileStoreStorage &s,
         const char *tmp,
@@ -236,50 +267,56 @@ namespace {
         Kind k,
         ProfileStoreIoStage *stage
     ) {
+        publishing = {&s, tmp, dest, b, n, k, stage};
         static uint8_t readback[kMaxRecordWireBytes];
-        if (stage)
-            *stage = ProfileStoreIoStage::None;
-        if (n > sizeof(readback))
+        if (publishing.stage)
+            *publishing.stage = ProfileStoreIoStage::None;
+        if (publishing.length > sizeof(readback)) {
+            std::memset(&publishing, 0, sizeof(publishing));
             return { Outcome::Failed, 0, 0 };
-        const auto publication = k == Kind::Root ? ProfileStorePublicationKind::Directory
+        }
+        const auto publication = publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory
                                                  : ProfileStorePublicationKind::Record;
-        // C++17 constructs each returned POD directly in fixed scratch, without
-        // an ABI return temporary on the nested filesystem stack. Placement
-        // construction allocates nothing and resets it on every stage/call.
-        // This scratch is distinct from MountedStorage's result/handle.
+        // C++17 constructs returned PODs directly in fixed scratch. Publication
+        // inputs are reset each call and cleared on every exit. No callback
+        // recursively enters the synchronous core0 store/publication path.
         static Result r;
-        ::new (&r) Result(s.CheckedWrite(tmp, b, n, k));
+        ::new (&r) Result(publishing.storage->CheckedWrite(publishing.tmp, publishing.bytes, publishing.length, publishing.kind));
         if (!r) {
-            if (stage) {
-                *stage = ProfileStoreStage(publication, s.LastFailure());
-                if (*stage == ProfileStoreIoStage::None)
-                    *stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordTempWrite);
+            if (publishing.stage) {
+                *publishing.stage = ProfileStoreStage(publication, publishing.storage->LastFailure());
+                if (*publishing.stage == ProfileStoreIoStage::None)
+                    *publishing.stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordTempWrite);
             }
+            std::memset(&publishing, 0, sizeof(publishing));
             return r;
         }
-        ::new (&r) Result(s.CheckedRead(tmp, readback, n, k));
+        ::new (&r) Result(publishing.storage->CheckedRead(publishing.tmp, readback, publishing.length, publishing.kind));
         if (!r) {
-            if (stage) {
-                *stage = ProfileStoreStage(publication, s.LastFailure());
-                if (*stage == ProfileStoreIoStage::None)
-                    *stage = publication == ProfileStorePublicationKind::Directory
+            if (publishing.stage) {
+                *publishing.stage = ProfileStoreStage(publication, publishing.storage->LastFailure());
+                if (*publishing.stage == ProfileStoreIoStage::None)
+                    *publishing.stage = publication == ProfileStorePublicationKind::Directory
                                  ? ProfileStoreIoStage::DirectoryTempRead
                                  : ProfileStoreIoStage::RecordTempRead;
             }
+            std::memset(&publishing, 0, sizeof(publishing));
             return r;
         }
-        if (std::memcmp(b, readback, n) != 0) {
-            if (stage)
-                *stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordVerify);
+        if (std::memcmp(publishing.bytes, readback, publishing.length) != 0) {
+            if (publishing.stage)
+                *publishing.stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordVerify);
+            std::memset(&publishing, 0, sizeof(publishing));
             return { Outcome::Failed, 0, 0 };
         }
-        ::new (&r) Result(s.CheckedRename(tmp, dest, k));
-        if (!r && stage)
-            *stage = ProfileStoreStage(
-                k == Kind::Root ? ProfileStorePublicationKind::Directory
+        ::new (&r) Result(publishing.storage->CheckedRename(publishing.tmp, publishing.dest, publishing.kind));
+        if (!r && publishing.stage)
+            *publishing.stage = ProfileStoreStage(
+                publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory
                                 : ProfileStorePublicationKind::Record,
                 ProfileStoreIoStage::RecordRename
             );
+        std::memset(&publishing, 0, sizeof(publishing));
         return r;
     }
 }
@@ -948,18 +985,18 @@ uint32_t ProfileStore::HealthFlags() const {
            (_uncertain ? TransactionUncertain : 0u);
 }
 
-bool ProfileStore::WriteProfile(uint32_t id, uint32_t rev, const UltimateProfile &p) {
+bool ProfileStore::PrepareProfileWrite(uint32_t id, uint32_t rev, const UltimateProfile &p) {
     if (!ValidateProfile(p))
         return false;
-    static uint8_t record[kMaxRecordWireBytes];
-    static size_t n; n=0;
+    auto &record = prepared_record.record;
+    auto &n = prepared_record.n; n=0;
     if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > kMaxProfileWireBytes) {
         _last_io_stage = ProfileStoreIoStage::RecordEncodeSize;
         return false;
     }
     // Encoding is complete before Publish; this fixed workspace is distinct
     // from the immutable record bytes and READ/candidate/active owners.
-    static pb_ostream_t s; s = pb_ostream_from_buffer(record + 32, kMaxProfileWireBytes);
+    auto &s = prepared_record.stream; s = pb_ostream_from_buffer(record + 32, kMaxProfileWireBytes);
     if (!pb_encode(&s, UltimateProfile_fields, &p)) {
         _last_io_stage = ProfileStoreIoStage::RecordEncode;
         return false;
@@ -974,9 +1011,16 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t rev, const UltimateProfile
     Put32(record + 20, n);
     Put32(record + 24, Crc32(record, 24));
     Put32(record + 28, Crc32(record + 32, n));
-    static char path[32], temp[32];
+    auto &path = prepared_record.path; auto &temp = prepared_record.temp;
     ProfileStorePaths::RecordPath(path, sizeof(path), id, rev);
     ProfileStorePaths::RecordTemporaryPath(temp, sizeof(temp), id, rev);
+    return true;
+}
+
+bool ProfileStore::PublishPreparedProfile() {
+    auto &record = prepared_record.record;
+    auto &n = prepared_record.n;
+    auto &path = prepared_record.path; auto &temp = prepared_record.temp;
     static Result result; ::new (&result) Result(Publish(*_storage, temp, path, record, n + 32, Kind::Record, &_last_io_stage));
     if (result.outcome == Outcome::Uncertain)
         _uncertain = true;
@@ -1330,7 +1374,7 @@ ProfileStore::TransactionResult ProfileStore::QueryTransaction(const Transaction
     return r;
 }
 
-ProfileStore::TransactionResult ProfileStore::Start(const TransactionIdentity &t) const {
+__attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::Start(const TransactionIdentity &t) const {
     if (_uncertain)
         return { Status::UnknownOutcome };
     if (!_ready)
@@ -1368,37 +1412,64 @@ __attribute__((always_inline)) inline ProfileStore::TransactionResult ProfileSto
     return result;
 }
 
-ProfileStore::TransactionResult ProfileStore::Create(
-    const UltimateProfile &p,
-    const char *name,
-    uint32_t rank,
-    const TransactionIdentity &t
-) {
-    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
-    if (r.status != Status::NotFound)
-        return r;
-    if (Count() >= 64 || _directory->high_water_id == UINT32_MAX)
-        return { Status::Full };
-    if (!ValidName(name) || !ValidateProfile(p))
-        return { Status::Invalid };
-    static size_t n; n = 0;
-    if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > 4096)
-        return { Status::Full };
-    if (!Admit(n + 32))
-        return { Status::Full };
-    uint32_t id = _directory->high_water_id + 1;
-    if (!WriteProfile(id, 1, p))
-        return { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
+__attribute__((noinline)) void ProfileStore::PrepareCreate() {
+    prepared_create.ready = false;
+    if (Count() >= 64 || _directory->high_water_id == UINT32_MAX) {
+        prepared_create.result = { Status::Full }; return;
+    }
+    if (!ValidName(prepared_create.input_name) || !ValidateProfile(*prepared_create.profile)) {
+        prepared_create.result = { Status::Invalid }; return;
+    }
+    prepared_create.bytes = 0;
+    if (!pb_get_encoded_size(&prepared_create.bytes, UltimateProfile_fields, prepared_create.profile) || prepared_create.bytes > 4096) {
+        prepared_create.result = { Status::Full }; return;
+    }
+    prepared_create.id = _directory->high_water_id + 1;
+    prepared_create.schema = prepared_create.profile->schema_version;
+    std::memcpy(prepared_create.name, prepared_create.input_name, std::strlen(prepared_create.input_name) + 1);
+    prepared_create.ready = true;
+}
+
+__attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::FinalizePreparedCreate() {
     *_next = *_directory;
     auto &e = _next->entries[_next->count++];
     e = {};
-    e.id = id;
+    e.id = prepared_create.id;
     e.revision = 1;
-    e.payload_version = p.schema_version;
-    e.rank = rank;
-    std::memcpy(e.name, name, std::strlen(name) + 1);
-    _next->high_water_id = id;
-    return Commit(*_next, id, 1, t);
+    e.payload_version = prepared_create.schema;
+    e.rank = prepared_create.rank;
+    std::memcpy(e.name, prepared_create.name, std::strlen(prepared_create.name) + 1);
+    _next->high_water_id = prepared_create.id;
+    return Commit(*_next, prepared_create.id, 1, prepared_create.identity);
+}
+
+ProfileStore::TransactionResult ProfileStore::Create(
+    const UltimateProfile &p, const char *name, uint32_t rank, const TransactionIdentity &t
+) {
+    prepared_create.ready = false;
+    prepared_create.profile = &p;
+    prepared_create.input_name = name;
+    prepared_create.rank = rank;
+    prepared_create.identity = t;
+    ::new (&prepared_create.result) TransactionResult(Start(prepared_create.identity));
+    if (prepared_create.result.status == Status::NotFound) {
+        PrepareCreate();
+        prepared_create.input_name = nullptr;
+        if (prepared_create.ready) {
+            if (!Admit(prepared_create.bytes + 32)) prepared_create.result = { Status::Full };
+            else {
+                const bool encoded = PrepareProfileWrite(prepared_create.id, 1, *prepared_create.profile);
+                prepared_create.profile = nullptr;
+                if (!encoded || !PublishPreparedProfile())
+                    prepared_create.result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
+                else ::new (&prepared_create.result) TransactionResult(FinalizePreparedCreate());
+            }
+        }
+    }
+    prepared_create.profile = nullptr;
+    prepared_create.input_name = nullptr;
+    prepared_create.ready = false;
+    return prepared_create.result;
 }
 
 ProfileStore::TransactionResult ProfileStore::Update(
@@ -1407,7 +1478,7 @@ ProfileStore::TransactionResult ProfileStore::Update(
     uint32_t rev,
     const TransactionIdentity &t
 ) {
-    auto r = Start(t);
+    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
     if (r.status != Status::NotFound)
         return r;
     int i = Find(id);
@@ -1424,7 +1495,7 @@ ProfileStore::TransactionResult ProfileStore::Update(
     size_t n = 0;
     if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > 4096 || !Admit(n + 32))
         return { Status::Full };
-    if (!WriteProfile(id, rev + 1, p))
+    if (!PrepareProfileWrite(id, rev + 1, p) || !PublishPreparedProfile())
         return { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
     *_next = *_directory;
     _next->entries[i].previous_revision = rev;
@@ -1433,12 +1504,8 @@ ProfileStore::TransactionResult ProfileStore::Update(
     return Commit(*_next, id, rev + 1, t);
 }
 
-ProfileStore::TransactionResult ProfileStore::Duplicate(
-    uint32_t id,
-    uint32_t rev,
-    const char *name,
-    uint32_t rank,
-    const TransactionIdentity &t
+__attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::PrepareDuplicate(
+    uint32_t id, uint32_t rev, const TransactionIdentity &t
 ) {
     auto r = Start(t);
     if (r.status != Status::NotFound)
@@ -1451,6 +1518,20 @@ ProfileStore::TransactionResult ProfileStore::Duplicate(
     if (!ReadProfile(id, rev, _candidate_profile))
         return { Status::Invalid };
     if (!ultimate_native::PreserveProfile(_candidate_profile)) return { Status::Invalid };
+    duplicate_prepared = true;
+    return { Status::NotFound };
+}
+
+ProfileStore::TransactionResult ProfileStore::Duplicate(
+    uint32_t id,
+    uint32_t rev,
+    const char *name,
+    uint32_t rank,
+    const TransactionIdentity &t
+) {
+    duplicate_prepared = false;
+    static TransactionResult r; ::new (&r) TransactionResult(PrepareDuplicate(id, rev, t));
+    if (!duplicate_prepared) return r;
     return Create(_candidate_profile, name, rank, t);
 }
 
@@ -1460,7 +1541,7 @@ ProfileStore::TransactionResult ProfileStore::Rename(
     uint32_t generation,
     const TransactionIdentity &t
 ) {
-    auto r = Start(t);
+    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
     if (r.status != Status::NotFound)
         return r;
     int i = Find(id);
@@ -1484,7 +1565,7 @@ ProfileStore::TransactionResult ProfileStore::Reorder(
     uint32_t generation,
     const TransactionIdentity &t
 ) {
-    auto r = Start(t);
+    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
     if (r.status != Status::NotFound)
         return r;
     int i = Find(id);
@@ -1505,7 +1586,7 @@ ProfileStore::TransactionResult ProfileStore::Delete(
     uint32_t referenced,
     const TransactionIdentity &t
 ) {
-    auto r = Start(t);
+    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
     if (r.status != Status::NotFound)
         return r;
     int i = Find(id);
@@ -1690,7 +1771,7 @@ ProfileStore::Status ProfileStore::ImportLegacyStream(
         if (!reader(context, i, _candidate_profile) || !ValidateProfile(_candidate_profile))
             return Status::Invalid;
         uint32_t id = _next->high_water_id + 1;
-        if (!WriteProfile(id, 1, _candidate_profile))
+        if (!PrepareProfileWrite(id, 1, _candidate_profile) || !PublishPreparedProfile())
             return _uncertain ? Status::UnknownOutcome : Status::IoFailure;
         auto &e = _next->entries[_next->count++];
         e = {};

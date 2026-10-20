@@ -58,6 +58,9 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleProfileStore();
     bool ReceiveProfileStore();
     bool DispatchProfileStore();
+    unsigned PrepareStoreMutation();
+    void PerformCheckedReference();
+    bool ReadStoreProfile();
     bool RespondProfileStore();
     bool HandleRuntimeIdentity();
 #if GLYPH_STRICT_HARDENING_CANDIDATE

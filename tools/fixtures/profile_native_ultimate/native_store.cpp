@@ -100,7 +100,10 @@ int main(int argc,char **argv) {
     require(store.Update(1,legacy.ultimate_profiles[0],3,identity(token++)).status==Status::Invalid,"cross-kind native to legacy update rejects");
     auto legacy_id=store.Create(legacy.ultimate_profiles[0],"legacy",21,identity(token++));require(legacy_id.status==Status::Ok,"legacy create unchanged");
     require(store.Update(legacy_id.id,load_native(std::string(argv[1])+"/1.pb"),1,identity(token++)).status==Status::Invalid,"cross-kind legacy to native update rejects");incoming_lease.Release();
+    require(store.Duplicate(999,3,"missing duplicate",22,identity(token++)).status==Status::NotFound&&store.Count()==21,"missing duplicate must not publish candidate scratch");
+    require(store.Duplicate(2,2,"stale duplicate",22,identity(token++)).status==Status::Conflict&&store.Count()==21,"stale duplicate must not publish candidate scratch");
     auto duplicated=store.Duplicate(2,3,"native duplicate",22,identity(token++));require(duplicated.status==Status::Ok,"native duplicate preserves borrowed record across nested admission reads");
+    require(store.Duplicate(999,3,"missing after success",22,identity(token++)).status==Status::NotFound&&store.Count()==22,"duplicate readiness reset after successful prior call");
     UltimateProfile readback{};require(store.Read(duplicated.id,readback)==Status::Ok&&readback.schema_version==5,"duplicate native kind");
     require(store.Health(1)==ProfileStore::RecordHealth::Healthy&&store.ActiveRevision()==1&&sizeof(store)==store_bytes,"health doesn't mutate active; inactive count doesn't change state allocation");
     Config persisted=Config_init_default;persisted.ultimate_profile_store_format=1;persisted.ultimate_profile_store_incarnation=store.Incarnation();persisted.game_mode_configs_count=1;persisted.game_mode_configs[0]=mc;

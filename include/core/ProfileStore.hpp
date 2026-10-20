@@ -225,7 +225,11 @@ class ProfileStore {
         UltimateProfile &into,
         bool *unsupported = nullptr
     ) const;
-    bool WriteProfile(uint32_t id, uint32_t revision, const UltimateProfile &profile);
+    TransactionResult FinalizePreparedCreate();
+    void PrepareCreate();
+    TransactionResult PrepareDuplicate(uint32_t id, uint32_t rev, const TransactionIdentity &t);
+    bool PublishPreparedProfile();
+    bool PrepareProfileWrite(uint32_t id, uint32_t revision, const UltimateProfile &profile);
     bool ValidateProfile(const UltimateProfile &profile) const;
     int Find(uint32_t id) const;
     TransactionResult BeginMutation(uint32_t token, uint32_t digest) const;

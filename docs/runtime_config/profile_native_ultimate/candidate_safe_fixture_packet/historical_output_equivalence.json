@@ -1,0 +1,11 @@
+{
+  "historical_files_unchanged": true,
+  "mapping": {
+    "49": 6,
+    "50": 7,
+    "51": 8
+  },
+  "original_catalog_sha256": "e2cf3540b28519c06dc66a9f11a17a19fb08536cecfc4808e1dd2d3d533481bd",
+  "rows": 39,
+  "state": "PASS_HOST_PRODUCTION_EVALUATOR_AND_LITERAL_SERIALIZER_ONLY"
+}

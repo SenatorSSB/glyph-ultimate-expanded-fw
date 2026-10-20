@@ -1,0 +1,5 @@
+src/modes/UltimateNativeEvaluator.cpp:5:6:0(uint16_t, const ResolvedInputContext&, const ultimate_native::FrameState&)	8	static
+src/modes/UltimateNativeEvaluator.cpp:19:6:void ultimate_native::{anonymous}::Conditions(uint8_t, uint8_t, const ResolvedInputContext&, ultimate_native::FrameState&)	72	static
+src/modes/UltimateNativeEvaluator.cpp:30:6:void ultimate_native::{anonymous}::Source(uint8_t, const ResolvedInputContext&, const ultimate_native::FrameState&, bool*)	32	static
+src/modes/UltimateNativeEvaluator.cpp:40:6:void ultimate_native::Neutral(OutputState&)	0	static
+src/modes/UltimateNativeEvaluator.cpp:41:6:bool ultimate_native::Evaluate(const PreparedView&, const ResolvedInputContext&, ControllerMode&, OutputState&)	232	static

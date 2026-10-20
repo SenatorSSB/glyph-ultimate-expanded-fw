@@ -1,0 +1,9 @@
+src/modes/Ultimate.cpp:335:11:{anonymous}::RoleState {anonymous}::ResolveRoleState(const InputState&, const LayerState&, const EffectiveDirectionState&)	88	static
+include/modes/Ultimate.hpp:14:14:virtual uint32_t Ultimate::DiagnosticNativeGeneration() const	8	static
+src/modes/Ultimate.cpp:320:25:{anonymous}::EffectiveDirectionState {anonymous}::ResolveEffectiveDirections(const InputState&, const LayerState&)	20	static
+src/modes/Ultimate.cpp:580:12:{anonymous}::StickPoint {anonymous}::LookupConfiguredStickPoint(const UltimateProfile*, RuntimeTableId, size_t)	24	static
+src/modes/Ultimate.cpp:804:6:virtual void Ultimate::UpdateDigitalOutputs(const InputState&, OutputState&)	184	static
+src/modes/Ultimate.cpp:829:6:virtual void Ultimate::UpdateAnalogOutputs(const InputState&, OutputState&, CommunicationBackendId)	288	static
+src/modes/Ultimate.cpp:780:1:Ultimate::Ultimate()	8	static
+src/modes/Ultimate.cpp:782:6:void Ultimate::SetConfig(GameModeConfig&, const UltimateProfile*, const ultimate_native::PreparedView*)	24	static
+src/modes/Ultimate.cpp:795:6:virtual void Ultimate::UpdatePreprocessedOutputs(const ResolvedInputContext&, OutputState&, CommunicationBackendId)	16	static

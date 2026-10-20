@@ -1,0 +1,1 @@
+REPRODUCED exact production metrics: two actual boot generations leave latch1 and sticky INVALID for actual2; source boot fanout supplies this sequence

@@ -1,0 +1,6 @@
+include/core/ControllerMode.hpp:16:22:virtual uint32_t ControllerMode::DiagnosticNativeGeneration() const	0	static
+src/core/ControllerMode.cpp:32:6:virtual void ControllerMode::UpdatePreprocessedOutputs(const ResolvedInputContext&, OutputState&, CommunicationBackendId)	24	static
+src/core/ControllerMode.cpp:49:6:virtual void ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, uint8_t, uint8_t, uint8_t, OutputState&)	64	static
+src/core/ControllerMode.cpp:9:6:virtual void ControllerMode::UpdateOutputs(const InputState&, OutputState&, CommunicationBackendId)	112	static
+src/core/ControllerMode.cpp:4:1:ControllerMode::ControllerMode()	8	static
+src/core/ControllerMode.cpp:37:6:void ControllerMode::ResetDirections()	8	static

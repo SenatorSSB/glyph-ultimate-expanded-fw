@@ -51,7 +51,7 @@ def measure(out, compiledb=None):
   if not found:raise AssertionError('missing production stack row: '+needle)
   return max(found)
  limits={'ConfiguratorBackend::HandleProfileStore()':512,'ConfiguratorBackend::WriteProfilePacket(':512,
-  'ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)':256,'ProfileStore::WriteProfile(':512,'ProfileStore::PublishDirectory(':256,
+  'ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)':256,'ProfileStore::PrepareProfileWrite(':256,'ProfileStore::PublishPreparedProfile(':128,'ProfileStore::PublishDirectory(':256,
   'ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)':128,':void setup()':512,
   'Persistence::LoadConfigChecked(':512,'Persistence::SaveConfigIfGenerationMatches(':512,
   'Persistence::SaveConfig(':512,'ProfileStore::Begin(':512,'ProfileStore::BeginRecovery(':512,
@@ -68,7 +68,11 @@ def measure(out, compiledb=None):
   if measured[name]>limit:raise AssertionError(f'{name}: {measured[name]} > {limit}')
  prefix_names=[':int main()',':void loop()','ConfiguratorBackend::SendReport()',
                'ConfiguratorBackend::HandleProfileStore()','ConfiguratorBackend::DispatchProfileStore()']
- prefix=sum(size(x) for x in prefix_names)
+ measured_main=size(':int main()')
+ # Exact ea137 linked main retained48. Charge at least that until the
+ # refreshed exact ELF confirms current main/loop/caller composition.
+ main_charge=max(48,measured_main)
+ prefix=sum(size(x) for x in prefix_names)+main_charge-measured_main
  # Actual ordinary file16 compaction witness: forceconsistency/deorphan are
  # separate conditional work, not frames retained in this ordinary branch.
  # Open is out-of-line in the new MountedStorage adapter; WriteFile is absent.
@@ -79,24 +83,38 @@ def measure(out, compiledb=None):
  leaf=sum(size(x) for x in leaf_names)
  adapter=size('MountedStorage::CheckedWrite(')+size('CheckedStorage::Open(')
  create=size('ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)')
- record=prefix+create+size('ProfileStore::WriteProfile(')+adapter+leaf
- directory=prefix+create+size('ProfileStore::PublishDirectory(')+adapter+leaf
- boot=size(':int main()')+size(':void setup()')+size('ProfileStore::Begin(')+adapter+leaf
+ record=prefix+create+size('ProfileStore::PublishPreparedProfile(')+adapter+leaf
+ directory=prefix+create+size('ProfileStore::FinalizePreparedCreate(')+size('ProfileStore::PublishDirectory(')+adapter+leaf
+ boot=main_charge+size(':void setup()')+size('ProfileStore::Begin(')+adapter+leaf
  conditional=sum(size(x) for x in [':lfs_fs_forceconsistency',':lfs_fs_deorphan'])
  # Independently reviewed exactfc source/ELF feasible lower-bound IRQ paths.
  # These are NOT a whole-IRQ upper certificate. Native final ELF must recheck.
  irq_known={'default_serial_plus_nested_SysTick':300,'direct_CDC_claim_plus_nested_SysTick':316,
             'pending_TX_flush_plus_nested_SysTick':340}
  reserve=2048; pre_mask_helper=16; exception_alignment_allowance=8
+ move=size(':lfs_fs_forceconsistency')
+ duplicate=size('ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)')
+ update=size('ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, const TransactionIdentity&)')
  branches={'record_new_entry_compaction':record,'directory_control_new_entry_compaction':directory,
+           'duplicate_record_pending_MOVE':record+duplicate+move,
+           'duplicate_directory_after_record_MOVE_cleared':directory+duplicate,
+           'update_record_pending_MOVE':prefix+update+size('ProfileStore::PublishPreparedProfile(')+adapter+leaf+move,
            'startup_new_entry_compaction':boot}
+ for name,signature in [('rename','ProfileStore::Rename(uint32_t, const char*, uint32_t, const TransactionIdentity&)'),
+                         ('reorder','ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)'),
+                         ('delete','ProfileStore::Delete(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)')]:
+  branches[name+'_directory_pending_MOVE']=prefix+size(signature)+size('ProfileStore::PublishDirectory(')+adapter+leaf+move
  known_composition={}
  for name,foreground in branches.items():
   irq=irq_known['default_serial_plus_nested_SysTick'] if name.startswith('startup') else max(irq_known.values())
+  # Endpoint-mutex contention is a separate source-conditional branch. Retain
+  # its44-byte allowance here unless final review proves it cannot coexist.
+  contention=0 if name.startswith('startup') else 44
   known_composition[name]={'foreground_bytes':foreground,'known_irq_increment_bytes':irq,
+   'conditional_endpoint_mutex_contention_bytes_charged':contention,
    'pre_mask_helper_bytes':pre_mask_helper,'exception_alignment_allowance_bytes':exception_alignment_allowance,
-   'known_composed_bytes':foreground+irq+pre_mask_helper+exception_alignment_allowance,
-   'remaining_reserved_bytes_before_unknown_paths':reserve-foreground-irq-pre_mask_helper-exception_alignment_allowance}
+   'known_composed_bytes':foreground+irq+contention+pre_mask_helper+exception_alignment_allowance,
+   'remaining_reserved_bytes_before_unknown_paths':reserve-foreground-irq-contention-pre_mask_helper-exception_alignment_allowance}
  known_fit=all(row['known_composed_bytes']<=reserve for row in known_composition.values())
  # Schema maximum depth is four (Request/Profile/OutputProgram/Effect or
  # Request/Profile/Table/Coords). Parent and child frames coexist; arrays
@@ -106,14 +124,16 @@ def measure(out, compiledb=None):
  compiler=pathlib.Path(shlex.split(selected[0]['command'])[0])
  report={'analysis_only_source_label_head':analysis_sha,'compiler':str(compiler),'compiler_sha256':hashlib.sha256(compiler.read_bytes()).hexdigest(),
   'optimization':'production compiledb flags, O3 project/LittleFS; no LTO',
-  'frames':rows,'critical_limits':limits,'critical_measured_bytes':measured,'prefix_bytes':prefix,
+  'frames':rows,'critical_limits':limits,'critical_measured_bytes':measured,'prefix_bytes':prefix,'preliminary_main_frame_bytes':measured_main,'main_charged_bytes':main_charge,'main_charge_basis':'max(preliminary object, exact ea137 ELF48); refresh against new exact ELF',
   'known_foreground_branches_bytes':branches,'known_compositions':known_composition,
   'known_compositions_within_reserved2048':known_fit,
-  'ordinary_compaction_retained_function_sequence':prefix_names+['ProfileStore::Create','ProfileStore::WriteProfile',
+  'ordinary_compaction_retained_function_sequence':prefix_names+['ProfileStore::Create','ProfileStore::PublishPreparedProfile',
    'MountedStorage::CheckedWrite','CheckedStorage::Open']+leaf_names,
   'littlefs_ordinary_open_chain_bytes':leaf,
   'conditional_forceconsistency_deorphan_inventory_bytes':conditional,
-  'conditional_inventory_classification':'NOT added as a proven co-live branch; final source/ELF adjudication required',
+  'conditional_inventory_classification':'MOVE64 charged in named feasible branches; deorphan176 remains CONDITIONAL_UNEXCLUDED for arbitrary accepted pre-existing FS; no whole-bound PASS',
+  'unexcluded_deorphan_inventory_bytes':size(':lfs_fs_deorphan'),
+  'unexcluded_deorphan_plus_worst_record_composition_bytes':known_composition['duplicate_record_pending_MOVE']['known_composed_bytes']+size(':lfs_fs_deorphan'),
   'physical_scratch_bank_bytes':4096,'physical_scratch_bank_is_stack_budget':False,
   'adapter':'fixed synchronous MountedStorage File; CheckedStorage::Open retained; WriteFile absent; Publish/control/Commit inlined as emitted',
   'request_decode_enumerated_C_upper_bytes':decoder,

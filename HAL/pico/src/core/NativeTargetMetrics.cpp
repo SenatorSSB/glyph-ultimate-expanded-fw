@@ -134,9 +134,21 @@ void RecordFrame(uint32_t begin,uint32_t end,uint32_t before,uint32_t after) {
     Maximum(overhead[0],Now()-end);
 }
 void RecordActivation(uint32_t begin,uint32_t end,uint32_t generation,bool accepted,bool recovered) {
-    if(!accepted||!generation)run_flags|=kActivationRefused;
-    else if(native_generation&&native_generation!=generation)run_flags|=kGenerationChanged;
-    else {native_generation=generation;Accumulate(statistics[1],end-begin,1);if(recovered)run_flags|=kRecovered;}
+    if(!statistics[0].count) {
+        // Backend initialization publishes primary then viewer using the same
+        // existing real activation path. Retain only the latest provisional
+        // boot interval; the first native frame latches that final generation.
+        // No activation is suppressed, replayed, or included twice in evidence.
+        statistics[1]={};
+        run_flags&=~(kActivationRefused|kRecovered);
+        native_generation=accepted?generation:0;
+        if(!accepted||!generation)run_flags|=kActivationRefused;
+        else {Accumulate(statistics[1],end-begin,1);if(recovered)run_flags|=kRecovered;}
+    } else {
+        // A later publication is outside the single boot-selected interval.
+        run_flags|=kActivationRefused;
+        if(generation!=native_generation)run_flags|=kGenerationChanged;
+    }
     Maximum(overhead[1],Now()-end);
 }
 void RecordObserver(uint32_t begin) {Maximum(overhead[2],Now()-begin);}

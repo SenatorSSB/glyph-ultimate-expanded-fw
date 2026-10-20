@@ -1,0 +1,1443 @@
+{
+  "backend_projection_limits": {
+    "GameCube": "Source assigns raw stick/analog trigger bytes, digitalL/R fromtriggerLDigital/triggerRDigital andZ frombuttonR. OLED is upstream and omits simultaneousbits; downstream adapter\u2192Switch transformation unknown.",
+    "Switch": "Report scales native axis by1.25, invertsY and uses bytefields; Dpad becomes hat. OLED prints upstream native values and one icon, neither finalaxes/hat nor actualreport. No analogue trigger report fields.",
+    "XInput": "OLED native axis rawbytes differ from report scaling (raw-128)*65535/255+128. OLED rawanalog trigger is not report lt/rt when digital trigger istrue(report255). No transmitted report display."
+  },
+  "concrete_remaining_facts": [
+    "Owner current dashboard mode and readable numeric fields are unverified. InputViewer circles and DashboardMenu6numbers have very different evidence capacity.",
+    "Specific GCsystem/game/view and explicitly visible controls/numbers/precision unknown; adapter model and translation unknown. No gameplay semantics inferred.",
+    "A source-supported actual full-output/backend observer is still needed for required simultaneous digital/trigger/report rows, especiallyH6. Do not silently add firmware/transport observer or weaken acceptance.",
+    "Separate candidate/UF2/custody, runtimeidentity/readbacks and approved recovery/restoration evidence remain required; no new physical action approved by owner observer preference.",
+    "Final writer source differs concurrently. Recheck source-pin correspondence against final exactF before using this report in packet."
+  ],
+  "digital_limits": [
+    "One first-return icon only; no numeric buttons word/bitset. A+B rendersA; A+digitalL+digitalR rendersA; digitalL+digitalR rendersL. Neither hidden bit presence nor absence can be inferred.",
+    "IconBackend may be last non-USB applicable_backend instead of primary; default Ultimate applicable list endsGameCube, so USB sessions can useGameCube-style Z/L/R labels. Printed backend text uses captured actual primary ID.",
+    "On actualGameCube withoutUSB/Switch flags, select/home/capture can be active without their own icon. buttonL can renderLB even though GameCube serializer has no assignment forbuttonL.",
+    "Bottom MB2-MB7 highlighted icons come from original input bits and Config menu_button_icon[], not evaluated native digital output bindings.",
+    "CurrentlyPressedButtonText and5ms text debounce are commented-out caller code; no hidden active multi-button text readout exists."
+  ],
+  "digital_priority_fields": [
+    "a",
+    "b",
+    "x",
+    "y",
+    "buttonL",
+    "buttonR",
+    "triggerLDigital",
+    "triggerRDigital",
+    "start",
+    "select",
+    "home",
+    "capture",
+    "dpadDown",
+    "dpadUp",
+    "dpadLeft",
+    "dpadRight",
+    "leftStickClick",
+    "rightStickClick",
+    "modX",
+    "modY",
+    "leftStickLeft",
+    "leftStickRight",
+    "leftStickUp",
+    "leftStickDown",
+    "rightStickLeft",
+    "rightStickRight",
+    "rightStickUp",
+    "rightStickDown"
+  ],
+  "hardware_rows": [
+    {
+      "OLED_supported_sub_observation": "Six native analog numbers and one unmasked icon can support bounded held-state checks; physical viewer can identify pressed physical controls.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Baseline ordinary controls, both sticks/neutral, digital buttons/triggers and reconnect",
+      "row": "H1",
+      "unsupported_or_missing": "Full digital mask, actual transmitted backend report and reconnect success require separate actual observations. Owner statement is general use, not candidate result."
+    },
+    {
+      "OLED_supported_sub_observation": "Output-distinguishing analog values and highest-priority icon can be observed.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Modifiers/sublayers and selected singleton/pair/higher conflicts",
+      "row": "H2",
+      "unsupported_or_missing": "Hidden digital side effects/absences and transmitted reports remain unobserved; identical projected outputs cannot distinguish alternative internal outcomes."
+    },
+    {
+      "OLED_supported_sub_observation": "All4 native stick bytes are recoverable exactly from signed numbers, so static representative table entries can be recorded.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Nine directions, asymmetric/noncenter neutral, winning/default behavior",
+      "row": "H3",
+      "unsupported_or_missing": "No selected-table/priority/default label; only distinguishable resulting coordinates. FullOutputState and backend report still unavailable."
+    },
+    {
+      "OLED_supported_sub_observation": "Numbers show analog direction cancellation and reappearance; A icon remains visible when A is set.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Clean remapped SOCD-aware Down plus independent A, Up conflict/history/duplicate inputs",
+      "row": "H4",
+      "unsupported_or_missing": "Cannot read hidden logical direction/digital bits. Core1 display is not a timestamped every-frame recorder, so capture ordered settled states and mark transitions unobserved where appropriate."
+    },
+    {
+      "OLED_supported_sub_observation": "Exact native analog coordinates and A highest-priority icon support bounded forced-table/A checks.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Forced table win/lose/filter with independent A",
+      "row": "H5",
+      "unsupported_or_missing": "No direct winner/priority identity and hidden digital direction bits; actual backend outputs unavailable."
+    },
+    {
+      "OLED_supported_sub_observation": "Both raw analog trigger numbers and4 stick numbers are displayed; A is visible.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "One-input digitalL+R; direction+A; OR outputs; actual backend bits/analog relationships",
+      "row": "H6",
+      "unsupported_or_missing": "A hides L/R; L hides R even without A. Analog140 does not directly prove digital trigger bits. Actual GameCube l/r/Z, Switch zl/zr, XInput lt/rt report fields are absent. Required full row cannot be established."
+    },
+    {
+      "OLED_supported_sub_observation": "Six analog values reveal LT6/RS/null outcomes; a lone unmasked Dpad or stick-direction icon may be visible.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Historical LT6/RF5/6/7, RS transforms/null/Dpad routing",
+      "row": "H7",
+      "unsupported_or_missing": "Simultaneous directions/Dpad flags and other digital interactions are hidden; Nunchuk remains NOT_TESTED. Many catalog aliases occur here."
+    },
+    {
+      "OLED_supported_sub_observation": "Use known physical presses and output-distinguishing analog values; isolated icons supply limited digital evidence.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Modifier rebindings; old intrinsic slots lose meanings",
+      "row": "H8",
+      "unsupported_or_missing": "Cannot prove all prior digital intrinsic effects absent or full mask/report correctness. Physical circles alone prove neither native mapping nor outputs."
+    },
+    {
+      "OLED_supported_sub_observation": "Sample-specific analog differences can be recorded after approved reboot. Complete sample table19 values(78,84)/(79,85) appear as(-50,-44)/(-49,-43).",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Complete profiles/reference reboot persistence and identity",
+      "row": "H9",
+      "unsupported_or_missing": "OLED mode name is Config row name, not active profileID/revision/hash/engine/context; persistence/store readbacks and active identity require separate supported evidence."
+    },
+    {
+      "OLED_supported_sub_observation": "No native identity fields are displayed by these OLED paths.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Current-session native runtime attestation and unchanged active program before reinit",
+      "row": "H10",
+      "unsupported_or_missing": "Unsupported by OLED or unspecified system/game; requires actual supported XInput identity capture. About labels are compile-time strings, not this attestation."
+    },
+    {
+      "OLED_supported_sub_observation": "A generic recovery/refusal page or loss of ordinary output could be a bounded symptom if actually observed.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Approved negative/recovery, no fallback",
+      "row": "H11",
+      "unsupported_or_missing": "No native rejection reason/status or proof of no legacy fallback. Need preflighted negative case and independently supported identity/status/readback; no ad hoc write authorized."
+    },
+    {
+      "OLED_supported_sub_observation": "Bounded analog/isolated-button ordinary behavior after reboot can be recorded.",
+      "full_row_from_stated_observers": "UNSUPPORTED_OR_INCOMPLETE",
+      "physical_result": "NOT_TESTED",
+      "required": "Restore Config/references/payloads/cleanup/readbacks/checksums/ordinary outputs",
+      "row": "H12",
+      "unsupported_or_missing": "No Config bytes/checksum/store payloads/references or monotonic metadata shown. Full restoration and full output/backend requirements need separate readbacks/observers."
+    }
+  ],
+  "numeric_fields": [
+    {
+      "cursor_xy": [
+        78,
+        10
+      ],
+      "decode": "raw=displayed+128",
+      "display_formula": "raw-128",
+      "field": "leftStickX",
+      "source": "MenuButtonHints.cpp:354-373"
+    },
+    {
+      "cursor_xy": [
+        78,
+        18
+      ],
+      "decode": "raw=displayed+128",
+      "display_formula": "raw-128",
+      "field": "leftStickY",
+      "source": "MenuButtonHints.cpp:354-373"
+    },
+    {
+      "cursor_xy": [
+        84,
+        26
+      ],
+      "decode": "raw=displayed+128",
+      "display_formula": "raw-128",
+      "field": "rightStickX",
+      "source": "MenuButtonHints.cpp:354-373"
+    },
+    {
+      "cursor_xy": [
+        84,
+        34
+      ],
+      "decode": "raw=displayed+128",
+      "display_formula": "raw-128",
+      "field": "rightStickY",
+      "source": "MenuButtonHints.cpp:354-373"
+    },
+    {
+      "cursor_xy": [
+        112,
+        26
+      ],
+      "decode": "raw=displayed",
+      "display_formula": "raw",
+      "field": "triggerRAnalog",
+      "source": "MenuButtonHints.cpp:354-373"
+    },
+    {
+      "cursor_xy": [
+        112,
+        34
+      ],
+      "decode": "raw=displayed",
+      "display_formula": "raw",
+      "field": "triggerLAnalog",
+      "source": "MenuButtonHints.cpp:354-373"
+    }
+  ],
+  "numeric_quantization": "No extra numeric quantization in rendering formulas:4 uint8 stick values are translated exactly to signed-128..127;2 rawuint8 triggers0..255. Picopixel font is small(2-3px digit width,5px glyph height), but source prints exact integer. Physical readability/correct dashboard unverified.",
+  "nunchuk": "NOT_TESTED",
+  "observed_model": "UNKNOWN_NOT_ATTESTED",
+  "original_catalog_projection": {
+    "alias_groups": [
+      {
+        "catalog_rows_in_group": 4,
+        "different_masks": [
+          "00040000",
+          "00140000"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "leftStickLeft"
+            ],
+            "buttons_hex": "00040000",
+            "original_catalog_index_zero_based": 73,
+            "package": "compatibility",
+            "physical_input_ids": [
+              24,
+              3
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "leftStickLeft",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00140000",
+            "original_catalog_index_zero_based": 78,
+            "package": "compatibility",
+            "physical_input_ids": [
+              24,
+              3,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": -114,
+          "leftStickY": 41,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "leftStickLeft"
+      },
+      {
+        "catalog_rows_in_group": 4,
+        "different_masks": [
+          "00080000",
+          "00180000"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "leftStickRight"
+            ],
+            "buttons_hex": "00080000",
+            "original_catalog_index_zero_based": 74,
+            "package": "compatibility",
+            "physical_input_ids": [
+              24,
+              1
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "leftStickRight",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00180000",
+            "original_catalog_index_zero_based": 80,
+            "package": "compatibility",
+            "physical_input_ids": [
+              24,
+              1,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 114,
+          "leftStickY": 41,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "leftStickRight"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00000002",
+          "00200002",
+          "00100002"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "b"
+            ],
+            "buttons_hex": "00000002",
+            "original_catalog_index_zero_based": 135,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00200002",
+            "original_catalog_index_zero_based": 138,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00100002",
+            "original_catalog_index_zero_based": 139,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": 44,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "b"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00040002",
+          "00240002",
+          "00140002"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickLeft"
+            ],
+            "buttons_hex": "00040002",
+            "original_catalog_index_zero_based": 136,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              3
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickLeft",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00240002",
+            "original_catalog_index_zero_based": 140,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              3,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickLeft",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00140002",
+            "original_catalog_index_zero_based": 141,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              3,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": -51,
+          "leftStickY": 44,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "b"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00080002",
+          "00280002",
+          "00180002"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickRight"
+            ],
+            "buttons_hex": "00080002",
+            "original_catalog_index_zero_based": 137,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              1
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickRight",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00280002",
+            "original_catalog_index_zero_based": 142,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              1,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "b",
+              "leftStickRight",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00180002",
+            "original_catalog_index_zero_based": 143,
+            "package": "compatibility",
+            "physical_input_ids": [
+              23,
+              1,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 51,
+          "leftStickY": 44,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "b"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00040000",
+          "00240000",
+          "00140000"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "leftStickLeft"
+            ],
+            "buttons_hex": "00040000",
+            "original_catalog_index_zero_based": 145,
+            "package": "compatibility",
+            "physical_input_ids": [
+              25,
+              3
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "leftStickLeft",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00240000",
+            "original_catalog_index_zero_based": 149,
+            "package": "compatibility",
+            "physical_input_ids": [
+              25,
+              3,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "leftStickLeft",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00140000",
+            "original_catalog_index_zero_based": 150,
+            "package": "compatibility",
+            "physical_input_ids": [
+              25,
+              3,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": 0,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "leftStickLeft"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00080000",
+          "00280000",
+          "00180000"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "leftStickRight"
+            ],
+            "buttons_hex": "00080000",
+            "original_catalog_index_zero_based": 146,
+            "package": "compatibility",
+            "physical_input_ids": [
+              25,
+              1
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "leftStickRight",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00280000",
+            "original_catalog_index_zero_based": 151,
+            "package": "compatibility",
+            "physical_input_ids": [
+              25,
+              1,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "leftStickRight",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00180000",
+            "original_catalog_index_zero_based": 152,
+            "package": "compatibility",
+            "physical_input_ids": [
+              25,
+              1,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": 0,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "leftStickRight"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00002000",
+          "00006000",
+          "0000a000"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "dpadDown"
+            ],
+            "buttons_hex": "00002000",
+            "original_catalog_index_zero_based": 156,
+            "package": "compatibility",
+            "physical_input_ids": [
+              29,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "dpadDown",
+              "dpadLeft"
+            ],
+            "buttons_hex": "00006000",
+            "original_catalog_index_zero_based": 158,
+            "package": "compatibility",
+            "physical_input_ids": [
+              29,
+              3,
+              5
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "dpadDown",
+              "dpadRight"
+            ],
+            "buttons_hex": "0000a000",
+            "original_catalog_index_zero_based": 160,
+            "package": "compatibility",
+            "physical_input_ids": [
+              29,
+              1,
+              5
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": 0,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "dpadDown"
+      },
+      {
+        "catalog_rows_in_group": 6,
+        "different_masks": [
+          "00001000",
+          "00005000",
+          "00009000"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "dpadUp"
+            ],
+            "buttons_hex": "00001000",
+            "original_catalog_index_zero_based": 157,
+            "package": "compatibility",
+            "physical_input_ids": [
+              29,
+              2
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "dpadUp",
+              "dpadLeft"
+            ],
+            "buttons_hex": "00005000",
+            "original_catalog_index_zero_based": 159,
+            "package": "compatibility",
+            "physical_input_ids": [
+              29,
+              3,
+              2
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "dpadUp",
+              "dpadRight"
+            ],
+            "buttons_hex": "00009000",
+            "original_catalog_index_zero_based": 161,
+            "package": "compatibility",
+            "physical_input_ids": [
+              29,
+              1,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": 0,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "dpadUp"
+      },
+      {
+        "catalog_rows_in_group": 46,
+        "different_masks": [
+          "00200001",
+          "00240001",
+          "00280001",
+          "00300001",
+          "00340001",
+          "00380001"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00200001",
+            "original_catalog_index_zero_based": 162,
+            "package": "compatibility",
+            "physical_input_ids": [
+              38
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickLeft",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00240001",
+            "original_catalog_index_zero_based": 163,
+            "package": "compatibility",
+            "physical_input_ids": [
+              38,
+              3
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickRight",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00280001",
+            "original_catalog_index_zero_based": 164,
+            "package": "compatibility",
+            "physical_input_ids": [
+              38,
+              1
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickUp",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00300001",
+            "original_catalog_index_zero_based": 166,
+            "package": "compatibility",
+            "physical_input_ids": [
+              38,
+              2
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickLeft",
+              "leftStickUp",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00340001",
+            "original_catalog_index_zero_based": 168,
+            "package": "compatibility",
+            "physical_input_ids": [
+              38,
+              3,
+              2
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickRight",
+              "leftStickUp",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00380001",
+            "original_catalog_index_zero_based": 170,
+            "package": "compatibility",
+            "physical_input_ids": [
+              38,
+              1,
+              2
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": -77,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "a"
+      },
+      {
+        "catalog_rows_in_group": 25,
+        "different_masks": [
+          "00100001",
+          "00140001",
+          "00180001"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00100001",
+            "original_catalog_index_zero_based": 171,
+            "package": "compatibility",
+            "physical_input_ids": [
+              21
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickLeft",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00140001",
+            "original_catalog_index_zero_based": 172,
+            "package": "compatibility",
+            "physical_input_ids": [
+              21,
+              3
+            ],
+            "sequence_step": 0
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickRight",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00180001",
+            "original_catalog_index_zero_based": 173,
+            "package": "compatibility",
+            "physical_input_ids": [
+              21,
+              1
+            ],
+            "sequence_step": 0
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": 0,
+          "leftStickY": 77,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "a"
+      },
+      {
+        "catalog_rows_in_group": 10,
+        "different_masks": [
+          "00000001",
+          "00200001",
+          "00100001"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "a"
+            ],
+            "buttons_hex": "00000001",
+            "original_catalog_index_zero_based": 457,
+            "package": "forced_wins",
+            "physical_input_ids": [
+              49
+            ],
+            "sequence_step": 1
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00200001",
+            "original_catalog_index_zero_based": 459,
+            "package": "forced_wins",
+            "physical_input_ids": [
+              49,
+              5
+            ],
+            "sequence_step": 3
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickUp"
+            ],
+            "buttons_hex": "00100001",
+            "original_catalog_index_zero_based": 460,
+            "package": "forced_wins",
+            "physical_input_ids": [
+              49,
+              2
+            ],
+            "sequence_step": 4
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": -49,
+          "leftStickY": -47,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "a"
+      },
+      {
+        "catalog_rows_in_group": 2,
+        "different_masks": [
+          "00000001",
+          "00200001"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "a"
+            ],
+            "buttons_hex": "00000001",
+            "original_catalog_index_zero_based": 481,
+            "package": "complete_sample_1",
+            "physical_input_ids": [
+              50
+            ],
+            "sequence_step": 4
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00200001",
+            "original_catalog_index_zero_based": 482,
+            "package": "complete_sample_1",
+            "physical_input_ids": [
+              49,
+              50
+            ],
+            "sequence_step": 5
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": -50,
+          "leftStickY": -44,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "a"
+      },
+      {
+        "catalog_rows_in_group": 2,
+        "different_masks": [
+          "00000001",
+          "00200001"
+        ],
+        "representative_rows": [
+          {
+            "active_digital_fields": [
+              "a"
+            ],
+            "buttons_hex": "00000001",
+            "original_catalog_index_zero_based": 490,
+            "package": "complete_sample_2",
+            "physical_input_ids": [
+              50
+            ],
+            "sequence_step": 4
+          },
+          {
+            "active_digital_fields": [
+              "a",
+              "leftStickDown"
+            ],
+            "buttons_hex": "00200001",
+            "original_catalog_index_zero_based": 491,
+            "package": "complete_sample_2",
+            "physical_input_ids": [
+              49,
+              50
+            ],
+            "sequence_step": 5
+          }
+        ],
+        "visible_numbers": {
+          "leftStickX": -49,
+          "leftStickY": -43,
+          "rightStickX": 0,
+          "rightStickY": 0,
+          "triggerLAnalog": 0,
+          "triggerRAnalog": 0
+        },
+        "visible_priority_field": "a"
+      }
+    ],
+    "different_full_output_same_OLED_signature_groups": 14,
+    "method": "Read-only projection of existing495 expected rows using exact6 numeric formulas and digital icon priority. No evaluator/generator/device execution. Icon-label mapping does not change these14 aliases; catalog has no select/home/capture active rows.",
+    "multi_active_digital_rows": 269,
+    "total_expected_rows": 495
+  },
+  "owner_statement": {
+    "new_action_authority": false,
+    "provenance": "Direct root relay of current owner reply in delegated follow-up,2026-10-20; not independently observed physical test evidence.",
+    "quote": "Usually the controller miniscreen, sometimes on Gamecube I use the system and game to see the results are actually what I want."
+  },
+  "physical_pass_claimed": false,
+  "requested_model": "UNKNOWN_NOT_ATTESTED",
+  "schema_name": "glyph_native_miniscreen_observability",
+  "schema_version": 1,
+  "source_commit": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+  "source_families": [
+    {
+      "family": 1,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Logical direction bits remain independently hidden under higher-priority icons or other directions.",
+      "name": "LS direction references",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Native LS numeric pair; lone logical LS direction icon"
+    },
+    {
+      "family": 2,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Simultaneous RS direction bits and combined outputs remain hidden.",
+      "name": "RS direction references",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Native RS numeric pair; lone RS/C-stick direction icon"
+    },
+    {
+      "family": 3,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Mode/default/table identity is not displayed; digital completeness/backend report absent.",
+      "name": "default and Mode nine-way tables",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Exact native LS/RS numeric values for representative nine-way entries"
+    },
+    {
+      "family": 4,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Cannot prove hidden digital interactions or identity from modifier names.",
+      "name": "X1 X2 Y1 Y2 modifiers",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Output-distinguishing native analog changes for X1/X2/Y1/Y2"
+    },
+    {
+      "family": 5,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Cannot prove full digital effects/absences or active table identity.",
+      "name": "Tilt1 Tilt2 Tilt3 and minus41",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Output-distinguishing Tilt native analog changes"
+    },
+    {
+      "family": 6,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Sublayer/role/winner state and complete digital mask are not displayed.",
+      "name": "Mode and normal/flipper/LF4 sublayers",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Output-distinguishing Mode/sublayer analog values and first icon"
+    },
+    {
+      "family": 7,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Winner table/priority is absent; equal coordinates are observationally indistinguishable.",
+      "name": "deterministic table selection",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Coordinates distinguish winners only where outputs differ"
+    },
+    {
+      "family": 8,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Other simultaneous digital terms/absence hidden. Z icon is icon-backend-dependent buttonR label.",
+      "name": "A B X Y Z digital terms",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "One priority A/B/X/Y/Z-style output icon"
+    },
+    {
+      "family": 9,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Cannot independently read both digital trigger bits, shoulders vs triggers or actual backend fields.",
+      "name": "L/R digital carriers and trigger effects",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Raw analog triggerL/R numbers; one unmasked digital trigger icon"
+    },
+    {
+      "family": 10,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Multiple-output/OR digital completeness cannot be established; A masks L/R.",
+      "name": "independent multiple-output and OR composition",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Highest-priority output and analogs"
+    },
+    {
+      "family": 11,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "A can be seen with analogneutral but logical digital direction mask/history frame details hidden.",
+      "name": "clean genuine Down+A",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Down numeric value/cancellation plus A icon"
+    },
+    {
+      "family": 12,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Table identity and hidden direction/digital flags are not visible.",
+      "name": "clean forced-table+A",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Forced coordinate numbers plus A/filter icon"
+    },
+    {
+      "family": 13,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Digital Down/simultaneous terms hidden by A; no proof all output bits match.",
+      "name": "historical LT6 post-table override",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "LT6 resulting analog value plus A icon"
+    },
+    {
+      "family": 14,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "RF7 B and RF5 A can mask differing direction bits; concrete catalog aliases exist.",
+      "name": "RF5 RF6 RF7 compounds",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "RF5/6/7 resulting analog values and first icon"
+    },
+    {
+      "family": 15,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Relevant activation/digital direction bits hidden; no report/frame correlation.",
+      "name": "RS diagonal and RF3 vertical transforms",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Four native stick numeric values for RS/vertical transforms"
+    },
+    {
+      "family": 16,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Dpad diagonals, bypass/flag state, LS-to-Dpad digital completeness and Nunchuk tail not fully observable. Nunchuk NOT_TESTED.",
+      "name": "Dpad route/bypass/digital flags and Nunchuk tail",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Dpad-induced analog center and one unmasked Dpad icon"
+    },
+    {
+      "family": 17,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Null coordinates alone do not establish hidden direction bits/other state; catalog aliases exist.",
+      "name": "both-stick null",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Four stick numbers at null coordinates"
+    },
+    {
+      "family": 18,
+      "full_output_from_stated_observers": "UNSUPPORTED",
+      "missing_for_full_output": "Cannot observe unexercised tables, winner identity, all digital fields or actual backend reports.",
+      "name": "all28 literal raw/asymmetric/noncenter tables",
+      "physical_result": "NOT_TESTED",
+      "supported_sub_observation": "Exact native analog numbers for selected raw/asymmetric/noncenter entries"
+    }
+  ],
+  "source_pins": {
+    "HAL/pico/src/comms/GamecubeBackend.cpp": {
+      "bytes": 2118,
+      "git_blob_oid": "8e7d839cbc5b77377aae8c08dfd550c45274d8a0",
+      "line_references": [
+        "26-71"
+      ],
+      "sha256": "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329"
+    },
+    "HAL/pico/src/comms/NintendoSwitchBackend.cpp": {
+      "bytes": 6691,
+      "git_blob_oid": "4b388ecca60b1eedaef5fcd8656d71d2f2be97c6",
+      "line_references": [
+        "114-152"
+      ],
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25"
+    },
+    "HAL/pico/src/comms/XInputBackend.cpp": {
+      "bytes": 2197,
+      "git_blob_oid": "1699e06253a93cb5f492282b5d43ce26fe8cfd0e",
+      "line_references": [
+        "27-74"
+      ],
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    "HAL/pico/src/comms/backend_init.cpp": {
+      "bytes": 11708,
+      "git_blob_oid": "dea3dcb52cfcd853268aca8d0009681815cd7f19",
+      "line_references": [
+        "241-264"
+      ],
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0"
+    },
+    "HAL/pico/src/display/ConfigMenu.cpp": {
+      "bytes": 9280,
+      "git_blob_oid": "f1a5f978fadd90fdffd7af19966444fd0748936b",
+      "line_references": [
+        "117-122"
+      ],
+      "sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be"
+    },
+    "HAL/pico/src/display/DefaultConfigMenu.cpp": {
+      "bytes": 12909,
+      "git_blob_oid": "424e1ae19c8af3cf24f590455700a9eaed12a4cb",
+      "line_references": [
+        "103-180"
+      ],
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520"
+    },
+    "HAL/pico/src/display/InputDisplay.cpp": {
+      "bytes": 2316,
+      "git_blob_oid": "c3ccd582bf95f7c5d6c1e0cfcf6e95df90659ea0",
+      "line_references": [
+        "20-27",
+        "30-62"
+      ],
+      "sha256": "761f3a5bb6357a278042356e25c691ef82bb45030ee6588cd6571a08e2e6480b"
+    },
+    "config/glyph/common/include/display/Picopixel.h": {
+      "bytes": 9089,
+      "git_blob_oid": "463b1b562ddc156efece7a432a031f701d4a287e",
+      "line_references": [
+        "37-49",
+        "120-121"
+      ],
+      "sha256": "035c01e6d48efdfef1e4de6152d0d03910210e449236506ec7c8f71799073363"
+    },
+    "config/glyph/common/include/glyph_overrides.hpp": {
+      "bytes": 58387,
+      "git_blob_oid": "a0836a09477ea53d7ba2aae90287196831a986bb",
+      "line_references": [
+        "99-135"
+      ],
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+    },
+    "config/glyph/common/src/config.cpp": {
+      "bytes": 17902,
+      "git_blob_oid": "cb23706c7a65da1de387cff37b8022a3c95dda73",
+      "line_references": [
+        "320-338",
+        "342-395",
+        "400-429",
+        "437-505"
+      ],
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "config/glyph/common/src/display/AboutMenu.cpp": {
+      "bytes": 1317,
+      "git_blob_oid": "e73bd0ad49d47b774573c71d781e31847904ed98",
+      "line_references": [
+        "24-43"
+      ],
+      "sha256": "d53f71f87cb407c477b588f28cbd4ebadb522326f560e1209b8a3bacb832beee"
+    },
+    "config/glyph/common/src/display/GlyphConfigMenu.cpp": {
+      "bytes": 4059,
+      "git_blob_oid": "819549dfdf2de34d5ceebed58fa30d278da4f4cb",
+      "line_references": [
+        "65-102",
+        "105-119"
+      ],
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0"
+    },
+    "config/glyph/common/src/display/MenuButtonHints.cpp": {
+      "bytes": 14926,
+      "git_blob_oid": "c6930cd7c7847acddf6085be6cdc1f1b2d05ae22",
+      "line_references": [
+        "92-204",
+        "208-225",
+        "252-257",
+        "269-315",
+        "321-373",
+        "375-392",
+        "405-416"
+      ],
+      "sha256": "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc"
+    },
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/conversion.json": {
+      "bytes": 91972,
+      "git_blob_oid": "a4f09305cb192cfad0bd0863de61d6308f50981b",
+      "line_references": [
+        "1266-2132"
+      ],
+      "sha256": "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d"
+    },
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/expected_observations.json": {
+      "bytes": 980931,
+      "git_blob_oid": "8c719fc226caba268436a5a76ebcf3b33b14d0ad",
+      "line_references": [
+        "all495 immutable expected observations"
+      ],
+      "sha256": "e2cf3540b28519c06dc66a9f11a17a19fb08536cecfc4808e1dd2d3d533481bd"
+    },
+    "docs/runtime_config/profile_native_ultimate/candidate_hardware_packet_current.md": {
+      "bytes": 3797,
+      "git_blob_oid": "b88b86bb2d4c63e25525ef1542e97f9e56aead56",
+      "line_references": [
+        "5-13"
+      ],
+      "sha256": "767889980f181f07cf1e6b9a6240c27cdd5edcfe3e68e9ed14b161990826824f"
+    },
+    "docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md": {
+      "bytes": 6954,
+      "git_blob_oid": "1abeb506ed6aae96e976dd9eced94fa39b18851d",
+      "line_references": [
+        "14-17",
+        "53-70"
+      ],
+      "sha256": "51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d"
+    },
+    "include/comms/IntegratedDisplay.hpp": {
+      "bytes": 2148,
+      "git_blob_oid": "743c5e184e5a9f14f17a8d00a534fe40279a3d52",
+      "line_references": [
+        "20-25",
+        "43-50"
+      ],
+      "sha256": "8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae"
+    },
+    "include/core/state.hpp": {
+      "bytes": 3723,
+      "git_blob_oid": "ff3aa94df61fd6a41448799fa1d6f508c41ecd0f",
+      "line_references": [
+        "105-155"
+      ],
+      "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3"
+    },
+    "src/comms/B0XXInputViewer.cpp": {
+      "bytes": 1743,
+      "git_blob_oid": "e9b3dfe4e11011dda0bb7b9faa436770fcafae44",
+      "line_references": [
+        "21-60"
+      ],
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e"
+    },
+    "src/comms/IntegratedDisplay.cpp": {
+      "bytes": 2909,
+      "git_blob_oid": "67263adc7fc9520594df39dc85eed8d8973b39ac",
+      "line_references": [
+        "11-26",
+        "36-48",
+        "57-85"
+      ],
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e"
+    },
+    "src/core/CommunicationBackend.cpp": {
+      "bytes": 1619,
+      "git_blob_oid": "9e4b8ca4fdca9512dbabe08cf291e7eb0ffe0a03",
+      "line_references": [
+        "20-25",
+        "49-53"
+      ],
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575"
+    }
+  },
+  "source_tree": "9000056d2584f65a7ae8b40032c480d5a2250d28",
+  "status": "READ_ONLY_SOURCE_INVENTORY_NO_PHYSICAL_RESULT",
+  "surfaces": {
+    "GC_SYSTEM_OR_GAME": "Owner reports occasional use only. Specific system/game/view/fields/precision/adapter transformation unknown. No rawreport/fullOutputState equivalence established.",
+    "OLED_ABOUT": "Compile-time firmware name/version/device strings, not active native program/context attestation.",
+    "OLED_CONFIG_MENU": "ConfigMenu::UpdateDisplay unsets primary game mode; do not treat menu displays or intervening old outputs as gameplay observations.",
+    "OLED_DASHBOARD_MENU": "MenuButtonHints reads live primary backend GetOutputs. Six numeric fields plus exactly one priority-selected output icon. Bottom MB2-MB7 indicators are physical states with configured static menu icons.",
+    "OLED_INPUT_VIEWER": "InputDisplay reads shared original InputState and draws layout-specific physical input circles. No OutputState fields, numeric axes, trigger values, report or identity.",
+    "PC_B0XX_INPUT_VIEWER": "Serial25-byte physical bit text for fixed20 inputs plus constants; no native outputs. It is different from both OLED modes."
+  },
+  "timing": {
+    "GameCube": "FASTscans while waitingpoll\u2192idleOtherCore\u2192UpdateOutputs/report assignments\u2192conditional send ifpollvalid\u2192resumeOtherCore. OLED core cannot render during this explicit idle section. Subsequent display still has no proof conditional send happened or which report frame it describes.",
+    "Switch": "Wait ready\u2192FASTscan\u2192UpdateOutputs\u2192report assignments\u2192send. Display does not inspect that report or delivery. While blocked before update, prior native values can persist.",
+    "XInput": "FASTscan\u2192UpdateOutputs\u2192report assignments\u2192return on timeout or send. OLED can show a native output even when timeout prevented send.",
+    "coherence_limit": "Live reads can combine observations from different output iterations; GC core-idling prevents simultaneous eval/render in its critical section but does not latch a complete OLED frame to one report. Settled-state evidence only; no cadence/latency guarantee measured.",
+    "core0": "loop calls select_mode then primary SendReport; backend updates native outputs before serialization/send.",
+    "core1": "loop1 separately renders OLED from live outputs; IntegratedDisplay clears, renders, flushes then handles controls. No numbered frame/report latch, timestamp, generation or copied6-field atomic tuple in these paths."
+  }
+}

@@ -1,0 +1,14 @@
+.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:333:17:static void RP2040::_SystickHandler()	12	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:133:17:static void _MFIFO::_irq()	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:59:10:void _MFIFO::registerCore()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:52:17:void main1()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:47:10:void _MFIFO::begin(int)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:46:6:void initVariant()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:64:13:void __loop()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:81:16:int main()	48	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:160:26:long unsigned int ulMainGetRunTimeCounterValue()	24	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:164:17:void __register_impure_ptr(_reent*)	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:173:27:_reent* __wrap___getreent()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:183:6:void hexdump(const void*, uint32_t, uint8_t)	56	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:206:30:cpp)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:206:30:cpp)	8	static

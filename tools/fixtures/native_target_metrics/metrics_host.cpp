@@ -90,6 +90,17 @@ int main(int argc,char **argv) {
     assert(runtime_identity::ReadLE(wire.tx.data()+108,2)>=32&&runtime_identity::ReadLE(wire.tx.data()+112,4)>=1);
     assert(native_metrics::statistics[2].count==16);
     if(argc==2) {std::ofstream output(argv[1],std::ios::binary);output.write(reinterpret_cast<const char *>(wire.tx.data()),wire.tx.size());}
+    reset();clock_now=100;native_metrics::RecordActivation(50,90,1,true,false);
+    clock_now=150;native_metrics::RecordActivation(120,140,2,true,false);
+    assert(native_metrics::statistics[1].count==1&&native_metrics::statistics[1].minimum==20&&native_metrics::native_generation==2&&!(native_metrics::run_flags&256));
+    clock_now=180;native_metrics::RecordFrame(160,170,2,2);
+    assert(native_metrics::statistics[0].count==1&&!(native_metrics::run_flags&256));
+    native_metrics::Calibrate();
+    for(unsigned core=0;core<2;++core) {own_core=core;for(unsigned i=0;i<32;++i)native_metrics::ServiceCore(core);}
+    const auto *fanout=native_metrics::Snapshot(0,2);
+    assert(fanout[16]==0&&runtime_identity::ReadLE(fanout+44,4)==2&&runtime_identity::ReadLE(fanout+68,4)==1);
+    native_metrics::RecordActivation(175,180,3,true,false);
+    assert((native_metrics::run_flags&256)&&native_metrics::statistics[1].count==1);
     native_metrics::Statistic saturated{UINT32_MAX,2,3,UINT32_MAX,UINT32_MAX};native_metrics::Accumulate(saturated,10,0);
     assert(saturated.count==UINT32_MAX&&saturated.sum_high==UINT32_MAX&&saturated.sum_low==UINT32_MAX&&(native_metrics::run_flags&3)==3);
     reset();complete_measurements();coherent=false;service={};wire={};wire.add(request(true));poll(service,wire);

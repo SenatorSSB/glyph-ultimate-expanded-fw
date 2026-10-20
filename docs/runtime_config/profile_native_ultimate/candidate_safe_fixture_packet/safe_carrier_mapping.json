@@ -1,0 +1,22 @@
+{
+  "historical_catalog": "candidate_fixture_packet unchanged",
+  "mapping": {
+    "49": 6,
+    "50": 7,
+    "51": 8
+  },
+  "menu_boot_inputs_excluded": [
+    49,
+    50,
+    51,
+    52
+  ],
+  "physical_preflight": "REQUIRED tentative Mk6 and actual Config chord subset check",
+  "source_pins": {
+    "config/glyph/glyph_mk6/include/matrix_definition.hpp": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1",
+    "src/core/ControllerMode.cpp": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+    "src/modes/UltimateNativeEvaluator.cpp": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+    "tools/check_glyph_profile_native_ultimate.py": "443e9e39437168ebc2496680e42d92934d0effd2d8265ede20c33fcdf9ba3bb7",
+    "tools/convert_glyph_native_ultimate_profile.py": "d6a84657308ee957172185de2393205cf849465416c2f7e250a91e27774d293f"
+  }
+}

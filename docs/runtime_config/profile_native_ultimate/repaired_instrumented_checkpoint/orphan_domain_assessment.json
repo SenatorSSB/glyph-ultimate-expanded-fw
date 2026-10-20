@@ -1,0 +1,13 @@
+{
+  "verdict": "CONDITIONAL_EXCLUSION_SUPPORTED_UNIVERSAL_DOMAIN_INCOMPLETE",
+  "p1": "OPEN",
+  "closed_history": "successful flat-file seed + named accepted regular-file transitions + LittleFS commit/powerloss recovery",
+  "closed_history_positive_orphan_source": "NONE_FOUND; source positive-site invariant supports exclusion",
+  "deorphan_function_reachable": true,
+  "deorphan_nested_compaction_in_closed_history": false,
+  "pending_move64": "STILL_REQUIRED",
+  "universal_admitted_state_exclusion": false,
+  "original_contract_explicit_initial_fs_domain": false,
+  "concrete_accepted_orphan_compaction_witness": "NOT_CLAIMED",
+  "report_sha256": "1ed5840f65857505d11b1bae31d3aa5417ffde75c3591011625afc605fa17b34"
+}

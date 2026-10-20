@@ -1,0 +1,23 @@
+glyph_mk6 build failed. Last 80 log lines:
+Processing glyph_mk6 (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5e87ae34ca025274df25b3303e9e9cb6c120123c; framework: arduino; board: pico)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+RuntimeError: native diagnostic tracked source differs from HEAD:
+  File "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/platformio/builder/main.py", line 167:
+    env.SConscript(env.GetExtraScripts("pre"), exports="env")
+  File "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/tool-scons/scons-local-4.11.1/SCons/Script/SConscript.py", line 625:
+    return _SConscript(self.fs, *files, **subst_kw)
+  File "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/tool-scons/scons-local-4.11.1/SCons/Script/SConscript.py", line 284:
+    exec(compile(scriptdata, scriptname, 'exec'), call_stack[-1].globals)
+  File "/private/tmp/glyph-profile-native-20261020/builder_scripts/native_target_metrics.py", line 42:
+    configure(env)
+  File "/private/tmp/glyph-profile-native-20261020/builder_scripts/native_target_metrics.py", line 27:
+    root=Path(env.subst('$PROJECT_DIR'));sha=source_identity(root)
+  File "/private/tmp/glyph-profile-native-20261020/builder_scripts/native_target_metrics.py", line 21:
+    if tracked_worktree_divergence(root):raise RuntimeError('native diagnostic tracked source differs from HEAD')
+========================= [FAILED] Took 82.40 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+glyph_mk6      FAILED    00:01:22.402
+==================== 1 failed, 0 succeeded in 00:01:22.402 ====================

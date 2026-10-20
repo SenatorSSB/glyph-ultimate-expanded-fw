@@ -16,6 +16,7 @@
  */
 
 #include "comms/ConfiguratorBackend.hpp"
+#include <new>
 
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
@@ -458,6 +459,8 @@ static ProfileStoreResponse response;
 static uint8_t frame[kFrameLimit];
 static ultimate_native::PayloadLease incoming_native;
 static bool profile_received;
+static ProfileStoreTransactionIdentity identity;
+static ProfileStore::TransactionResult result;
 }
 bool ConfiguratorBackend::HandleProfileStore() {
     incoming_native.Release();
@@ -528,6 +531,116 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
     profile_received = true;
     return true;
 }
+__attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
+    const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
+    // Both receipt domains share tokens. Look them up BEFORE checking any
+    // stale expectations: exact completed requests replay their result.
+    result = query ? profile_store.QueryTransaction(request.request_token)
+                   : profile_store.QueryTransaction(identity);
+    Config &candidate = ConfigWriteCandidate();
+    const auto loaded = persistence.LoadConfigChecked(candidate);
+    const uint64_t high_water = loaded == Persistence::LoadResult::Loaded &&
+        candidate.profile_reference_token > profile_store.LastTransactionToken() ?
+        candidate.profile_reference_token : profile_store.LastTransactionToken();
+    response.transaction_token_high_water = high_water;
+    if (loaded == Persistence::LoadResult::Loaded &&
+        candidate.profile_reference_token == request.request_token) {
+        if (!query && std::memcmp(candidate.profile_reference_digest, identity.digest, 32) != 0)
+            result.status = ProfileStore::Status::Conflict;
+        else {
+            result = {ProfileStore::Status::Ok, candidate.profile_reference_result_id, 0,
+                candidate.profile_reference_result_store_generation};
+            response.transaction_operation = PROFILE_STORE_SET_MODE_REFERENCE;
+        }
+    }
+    if (result.status != ProfileStore::Status::NotFound) {
+        // Durable replay, conflict, or unresolved store result wins.
+    } else if (_reference_unknown || persistence.IsMutationFenced() || profile_store.IsTransactionUncertain()) {
+        result.status = ProfileStore::Status::UnknownOutcome;
+    } else if (query) {
+        if (loaded != Persistence::LoadResult::Loaded) result.status = ProfileStore::Status::IoFailure;
+        else if (request.request_token <= high_water) {
+            response.status = PROFILE_STORE_TRANSACTION_EXPIRED;
+            return 2;
+        }
+    } else if (profile_store.MigrationPending()) {
+        result.status = ProfileStore::Status::MigrationFenced;
+    } else if (_recovery_service || _recovery_config_invalid || profile_store.IsReadOnlyRecovery()) {
+        result.status = ProfileStore::Status::ReadOnlyRecovery;
+    } else if (loaded != Persistence::LoadResult::Loaded) {
+        result.status = ProfileStore::Status::IoFailure;
+    } else if (candidate.ultimate_profile_root_format != 2) {
+        result.status = ProfileStore::Status::ReadOnlyRecovery;
+    } else if (request.request_token <= high_water) {
+        result.status = ProfileStore::Status::Conflict;
+    } else if ((request.expected_store_incarnation && request.expected_store_incarnation != profile_store.Incarnation()) ||
+               request.expected_store_generation > UINT32_MAX ||
+               request.expected_profile_revision > UINT32_MAX ||
+               request.expected_store_generation != profile_store.Generation()) {
+        result.status = ProfileStore::Status::Conflict;
+    } else if (!PrepareProfileMutation(request)) {
+        result.status = ProfileStore::Status::Invalid;
+    } else return 1;
+    return 0;
+}
+__attribute__((noinline)) void ConfiguratorBackend::PerformCheckedReference() {
+    Config &candidate = ConfigWriteCandidate();
+    if (!profile_store.IsReady()) result.status = ProfileStore::Status::IoFailure;
+    else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
+             candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
+             candidate.ultimate_profile_store_incarnation != profile_store.Incarnation() ||
+             request.mode_config_index >= candidate.game_mode_configs_count)
+        result.status = ProfileStore::Status::Conflict;
+    else if (candidate.game_mode_configs[request.mode_config_index].mode_id != MODE_ULTIMATE)
+        result.status = ProfileStore::Status::Invalid;
+    else {
+        // Reuse the response's unpublished profile slot for validation;
+        // reference responses keep has_profile false. No third payload.
+        const auto selected_status = request.profile_id == 0 ? ProfileStore::Status::Ok :
+            profile_store.Read(request.profile_id, response.profile);
+        if (selected_status != ProfileStore::Status::Ok && selected_status != ProfileStore::Status::RecoveredPrevious)
+            result.status = ProfileStore::Status::NotFound;
+        else {
+            GameModeConfig &mode = candidate.game_mode_configs[request.mode_config_index];
+            mode.ultimate_profile_id = request.profile_id;
+            mode.ultimate_profile_engine = request.profile_id && response.profile.schema_version == ultimate_native::kSchema ? 1 : 0;
+            mode.ultimate_profile_config = 0;
+            candidate.profile_reference_token = identity.token;
+            std::memcpy(candidate.profile_reference_digest, identity.digest, 32);
+            candidate.profile_reference_result_id = request.profile_id;
+            candidate.profile_reference_result_store_generation = profile_store.Generation();
+            candidate.profile_reference_result_mode_index = request.mode_config_index;
+            // Same synchronous workspace lifetime as the request/response; validation
+            // resets it before use, and no filesystem call retains a pointer.
+            static ConfigValidationError error; error = {};
+            if (!persistence.ValidateConfig(candidate, error)) result.status = ProfileStore::Status::Invalid;
+            else {
+                const auto saved = persistence.SaveConfigIfGenerationMatches(candidate, request.expected_config_generation);
+                if (saved == Persistence::SaveResult::Conflict) result.status = ProfileStore::Status::Conflict;
+                else if (saved == Persistence::SaveResult::Uncertain) {
+                    _reference_unknown = true; result.status = ProfileStore::Status::UnknownOutcome;
+                } else if (saved != Persistence::SaveResult::Saved) result.status = ProfileStore::Status::IoFailure;
+                else result = {ProfileStore::Status::Ok, request.profile_id, 0, profile_store.Generation()};
+            }
+        }
+    }
+}
+__attribute__((noinline)) bool ConfiguratorBackend::ReadStoreProfile() {
+#if GLYPH_STRICT_HARDENING_CANDIDATE
+    struct TraceContext { ConfiguratorBackend *backend; const ProfileStoreRequest *request; } context{this, &request};
+    ProfileStoreReadTrace::Scope trace(kStrictHardeningCandidate && request.liveness_trace
+        ? +[](void *opaque, uint32_t stage, uint32_t value) {
+            auto &c = *static_cast<TraceContext *>(opaque);
+            return c.backend->TraceProfileStage(*c.request, stage, value);
+          } : nullptr, &context);
+#endif
+    uint32_t revision = 0;
+    const auto status = profile_store.Read(request.profile_id, response.profile, &revision);
+    response.has_profile = status == ProfileStore::Status::Ok || status == ProfileStore::Status::RecoveredPrevious;
+    if (ProfileStoreReadTrace::Failed() || !TraceProfileStage(request, 19, response.has_profile)) return false;
+    result = {status, request.profile_id, revision, profile_store.Generation()};
+    return true;
+}
 __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     response = ProfileStoreResponse_init_default;
     response.protocol_version = request.protocol_version;
@@ -542,8 +655,8 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     const bool mutation = request.operation >= PROFILE_STORE_CREATE &&
         request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
     const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
-    static ProfileStoreTransactionIdentity identity; identity = {};
-    static ProfileStore::TransactionResult result; result = {};
+    identity = {};
+    result = {};
     bool handled = false;
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     const bool ticket_invalid = request.fault_ticket &&
@@ -693,139 +806,46 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
         response.status = PROFILE_STORE_OK;
         handled = true;
     } else if (request.operation == PROFILE_STORE_READ) {
-#if GLYPH_STRICT_HARDENING_CANDIDATE
-        struct TraceContext { ConfiguratorBackend *backend; const ProfileStoreRequest *request; } context{this, &request};
-        ProfileStoreReadTrace::Scope trace(kStrictHardeningCandidate && request.liveness_trace
-            ? +[](void *opaque, uint32_t stage, uint32_t value) {
-                auto &c = *static_cast<TraceContext *>(opaque);
-                return c.backend->TraceProfileStage(*c.request, stage, value);
-              } : nullptr, &context);
-#endif
-        uint32_t revision = 0;
-        const auto status = profile_store.Read(request.profile_id, response.profile, &revision);
-        response.has_profile = status == ProfileStore::Status::Ok || status == ProfileStore::Status::RecoveredPrevious;
-        if (ProfileStoreReadTrace::Failed() || !TraceProfileStage(request, 19, response.has_profile)) return false;
-        result = {status, request.profile_id, revision, profile_store.Generation()};
+        if (!ReadStoreProfile()) return false;
     } else if (!mutation && !query) {
         response.status = PROFILE_STORE_UNSUPPORTED;
         handled = true;
     } else if (!request.request_token || !PrepareStoreIdentity(request, identity)) {
         result.status = ProfileStore::Status::Invalid;
     } else {
-        // Both receipt domains share tokens. Look them up BEFORE checking any
-        // stale expectations: exact completed requests replay their result.
-        result = query ? profile_store.QueryTransaction(request.request_token)
-                       : profile_store.QueryTransaction(identity);
-        Config &candidate = ConfigWriteCandidate();
-        const auto loaded = persistence.LoadConfigChecked(candidate);
-        const uint64_t high_water = loaded == Persistence::LoadResult::Loaded &&
-            candidate.profile_reference_token > profile_store.LastTransactionToken() ?
-            candidate.profile_reference_token : profile_store.LastTransactionToken();
-        response.transaction_token_high_water = high_water;
-        if (loaded == Persistence::LoadResult::Loaded &&
-            candidate.profile_reference_token == request.request_token) {
-            if (!query && std::memcmp(candidate.profile_reference_digest, identity.digest, 32) != 0)
-                result.status = ProfileStore::Status::Conflict;
-            else {
-                result = {ProfileStore::Status::Ok, candidate.profile_reference_result_id, 0,
-                    candidate.profile_reference_result_store_generation};
-                response.transaction_operation = PROFILE_STORE_SET_MODE_REFERENCE;
-            }
-        }
-        if (result.status != ProfileStore::Status::NotFound) {
-            // Durable replay, conflict, or unresolved store result wins.
-        } else if (_reference_unknown || persistence.IsMutationFenced() || profile_store.IsTransactionUncertain()) {
-            result.status = ProfileStore::Status::UnknownOutcome;
-        } else if (query) {
-            if (loaded != Persistence::LoadResult::Loaded) result.status = ProfileStore::Status::IoFailure;
-            else if (request.request_token <= high_water) {
-                response.status = PROFILE_STORE_TRANSACTION_EXPIRED;
-                handled = true;
-            }
-        } else if (profile_store.MigrationPending()) {
-            result.status = ProfileStore::Status::MigrationFenced;
-        } else if (_recovery_service || _recovery_config_invalid || profile_store.IsReadOnlyRecovery()) {
-            result.status = ProfileStore::Status::ReadOnlyRecovery;
-        } else if (loaded != Persistence::LoadResult::Loaded) {
-            result.status = ProfileStore::Status::IoFailure;
-        } else if (candidate.ultimate_profile_root_format != 2) {
-            result.status = ProfileStore::Status::ReadOnlyRecovery;
-        } else if (request.request_token <= high_water) {
-            result.status = ProfileStore::Status::Conflict;
-        } else if ((request.expected_store_incarnation && request.expected_store_incarnation != profile_store.Incarnation()) ||
-                   request.expected_store_generation > UINT32_MAX ||
-                   request.expected_profile_revision > UINT32_MAX ||
-                   request.expected_store_generation != profile_store.Generation()) {
-            result.status = ProfileStore::Status::Conflict;
-        } else if (!PrepareProfileMutation(request)) {
-            result.status = ProfileStore::Status::Invalid;
-        } else if (request.operation == PROFILE_STORE_CREATE) {
-            if (!TraceProfileDispatch(request)) return false;
-            result = request.has_profile ? profile_store.Create(request.profile, request.name,
-                request.display_rank, identity) : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
-        } else if (request.operation == PROFILE_STORE_UPDATE) {
-            if (!TraceProfileDispatch(request)) return false;
-            result = request.has_profile ? profile_store.Update(request.profile_id, request.profile,
-                static_cast<uint32_t>(request.expected_profile_revision), identity)
-                : ProfileStore::TransactionResult{ProfileStore::Status::Invalid};
-        } else if (request.operation == PROFILE_STORE_DUPLICATE) {
-            if (!TraceProfileDispatch(request)) return false;
-            result = profile_store.Duplicate(request.profile_id,
-                static_cast<uint32_t>(request.expected_profile_revision), request.name, request.display_rank, identity);
-        } else if (request.operation == PROFILE_STORE_RENAME) {
-            if (!TraceProfileDispatch(request)) return false;
-            result = profile_store.Rename(request.profile_id, request.name,
-                static_cast<uint32_t>(request.expected_store_generation), identity);
-        } else if (request.operation == PROFILE_STORE_REORDER) {
-            if (!TraceProfileDispatch(request)) return false;
-            result = profile_store.Reorder(request.profile_id, request.display_rank,
-                static_cast<uint32_t>(request.expected_store_generation), identity);
-        } else if (request.operation == PROFILE_STORE_DELETE) {
-            if (!TraceProfileDispatch(request)) return false;
-            const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
-                ReferencesProfile(candidate, request.profile_id) ? request.profile_id : 0;
-            result = profile_store.Delete(request.profile_id,
-                static_cast<uint32_t>(request.expected_store_generation), referenced, identity);
-        } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
-            if (!TraceProfileDispatch(request)) return false;
-            if (!profile_store.IsReady()) result.status = ProfileStore::Status::IoFailure;
-            else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
-                     candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
-                     candidate.ultimate_profile_store_incarnation != profile_store.Incarnation() ||
-                     request.mode_config_index >= candidate.game_mode_configs_count)
-                result.status = ProfileStore::Status::Conflict;
-            else if (candidate.game_mode_configs[request.mode_config_index].mode_id != MODE_ULTIMATE)
-                result.status = ProfileStore::Status::Invalid;
-            else {
-                // Reuse the response's unpublished profile slot for validation;
-                // reference responses keep has_profile false. No third payload.
-                const auto selected_status = request.profile_id == 0 ? ProfileStore::Status::Ok :
-                    profile_store.Read(request.profile_id, response.profile);
-                if (selected_status != ProfileStore::Status::Ok && selected_status != ProfileStore::Status::RecoveredPrevious)
-                    result.status = ProfileStore::Status::NotFound;
-                else {
-                    GameModeConfig &mode = candidate.game_mode_configs[request.mode_config_index];
-                    mode.ultimate_profile_id = request.profile_id;
-                    mode.ultimate_profile_engine = request.profile_id && response.profile.schema_version == ultimate_native::kSchema ? 1 : 0;
-                    mode.ultimate_profile_config = 0;
-                    candidate.profile_reference_token = identity.token;
-                    std::memcpy(candidate.profile_reference_digest, identity.digest, 32);
-                    candidate.profile_reference_result_id = request.profile_id;
-                    candidate.profile_reference_result_store_generation = profile_store.Generation();
-                    candidate.profile_reference_result_mode_index = request.mode_config_index;
-                    // Same synchronous workspace lifetime as the request/response; validation
-                    // resets it before use, and no filesystem call retains a pointer.
-                    static ConfigValidationError error; error = {};
-                    if (!persistence.ValidateConfig(candidate, error)) result.status = ProfileStore::Status::Invalid;
-                    else {
-                        const auto saved = persistence.SaveConfigIfGenerationMatches(candidate, request.expected_config_generation);
-                        if (saved == Persistence::SaveResult::Conflict) result.status = ProfileStore::Status::Conflict;
-                        else if (saved == Persistence::SaveResult::Uncertain) {
-                            _reference_unknown = true; result.status = ProfileStore::Status::UnknownOutcome;
-                        } else if (saved != Persistence::SaveResult::Saved) result.status = ProfileStore::Status::IoFailure;
-                        else result = {ProfileStore::Status::Ok, request.profile_id, 0, profile_store.Generation()};
-                    }
-                }
+        const unsigned admission = PrepareStoreMutation();
+        if (admission == 2) handled = true;
+        else if (admission == 1) {
+            Config &candidate = ConfigWriteCandidate();
+            if (request.operation == PROFILE_STORE_CREATE) {
+                if (!TraceProfileDispatch(request)) return false;
+                if (request.has_profile) ::new (&result) ProfileStore::TransactionResult(profile_store.Create(request.profile, request.name,
+                    request.display_rank, identity)); else result = {ProfileStore::Status::Invalid};
+            } else if (request.operation == PROFILE_STORE_UPDATE) {
+                if (!TraceProfileDispatch(request)) return false;
+                if (request.has_profile) ::new (&result) ProfileStore::TransactionResult(profile_store.Update(request.profile_id, request.profile,
+                    static_cast<uint32_t>(request.expected_profile_revision), identity)); else result = {ProfileStore::Status::Invalid};
+            } else if (request.operation == PROFILE_STORE_DUPLICATE) {
+                if (!TraceProfileDispatch(request)) return false;
+                ::new (&result) ProfileStore::TransactionResult(profile_store.Duplicate(request.profile_id,
+                    static_cast<uint32_t>(request.expected_profile_revision), request.name, request.display_rank, identity));
+            } else if (request.operation == PROFILE_STORE_RENAME) {
+                if (!TraceProfileDispatch(request)) return false;
+                ::new (&result) ProfileStore::TransactionResult(profile_store.Rename(request.profile_id, request.name,
+                    static_cast<uint32_t>(request.expected_store_generation), identity));
+            } else if (request.operation == PROFILE_STORE_REORDER) {
+                if (!TraceProfileDispatch(request)) return false;
+                ::new (&result) ProfileStore::TransactionResult(profile_store.Reorder(request.profile_id, request.display_rank,
+                    static_cast<uint32_t>(request.expected_store_generation), identity));
+            } else if (request.operation == PROFILE_STORE_DELETE) {
+                if (!TraceProfileDispatch(request)) return false;
+                const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
+                    ReferencesProfile(candidate, request.profile_id) ? request.profile_id : 0;
+                ::new (&result) ProfileStore::TransactionResult(profile_store.Delete(request.profile_id,
+                    static_cast<uint32_t>(request.expected_store_generation), referenced, identity));
+            } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
+                if (!TraceProfileDispatch(request)) return false;
+                PerformCheckedReference();
             }
         }
     }

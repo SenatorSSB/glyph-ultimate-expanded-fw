@@ -1,0 +1,20 @@
+{
+  "README.md": "2b6a2bd33981cdc96aa146d616d10590225824fe5abaa627ad4acaf6f2207558",
+  "arm_layout_only/report.json": "593727cef5aeed6e7743cf041c326eed46213322946382584d7ebb53098a7eac",
+  "boot_fanout_reproducer.cpp": "3342b0ad5cbacb22273f736dfc57a892bb9dffd15b0652f20921ac9828265f04",
+  "boot_fanout_reproducer.log": "efff86befc00c37d8b15cacc9441a057a4cc9f509f68058483e6062bc34f0c4f",
+  "clean_build/build.json": "d444091a96d002ebaba2ff8140f880befead721b663d7eb6f2492be8b247a9a2",
+  "clean_build/build_dependency_pins.json": "308066cf2dd5e4dbed652513667b31a301827b1d235f4a26bf5977a134604361",
+  "clean_build/glyph_mk6_build.log": "80f8505cb2334d100dc6bbda6a0c153cccb32a60fbe74bd613e92063eb90fc31",
+  "clean_build/qualification.json": "d68e189a064d336925e9400047debc79667d793e467958b1536d465c2124525d",
+  "clean_build/wrapper.log": "fafdacadc7dbdcff73aa673e4ce16def4a095bf57dc3a3518d53b4ab2fd7c4a1",
+  "guard_rejected_attempt/build.json": "bca83103f443c51894664aa2316421b6a43b710b2fd6faf2068dfd096242e66e",
+  "guard_rejected_attempt/glyph_mk6_build.log": "687614f029175e66e2ef01af7f82b24073744633bb7f9d90857773370fc2668c",
+  "guard_rejected_attempt/wrapper.log": "6ecefef06ef8cef42cac85bd4679fd656ad2c0142695780c2853ad821d7feb8c",
+  "miniscreen_observability.json": "6cc2944c3823abfd4574b0886a7caad8ec93c7985492558bc55f57e1736f0934",
+  "miniscreen_observability.md": "fc15f66559453f991818b25f9c7629e43f0f930c73014bc5a8a2a6cf66c8e94d",
+  "safe_stimulus_inventory.json": "6a67fc508fb03c3e4f65d3903e4a3fb11fb71e3ab920bd2b17e6d3dbcf8c32bc",
+  "safe_stimulus_inventory.md": "5545a65a792ef544aaba703c99a01f51f8237d5417d3533313174e144898eedc",
+  "source_review.json": "7d4e8963d4425a5a08ac045fe8bb63d226a55999f0ced0d6bbe323186a89c715",
+  "source_review.md": "ec6ef849726c6efde5a25c1d7bb542b8f9721f441692e0129ee69dad45462383"
+}

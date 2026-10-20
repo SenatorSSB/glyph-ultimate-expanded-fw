@@ -1,0 +1,17 @@
+{
+  "candidate": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+  "uf2": {
+    "bytes": 1046016,
+    "sha256": "b37709edc15ee8c5fec119a0020503ae736d0cb3d723152ffb0c1bd94fedb574"
+  },
+  "elf": {
+    "bytes": 5589152,
+    "sha256": "eb041f1c8fb39718bb03d07f5a4ab5177106a9a313b8b8e43424a73dc62bd863"
+  },
+  "state": "BUILD_PASS_SOURCE_REVIEW_REQUEST_CHANGES_NOT_FOR_HARDWARE_HANDOFF",
+  "p1_stack": "OPEN; Duplicate retained caller plus pendingMOVE and actual IRQ/helper composition unresolved",
+  "diagnostic_transport": "OPEN; actual Serial path nonblocking/mutex and available/yield issues under independent review",
+  "hardware": "NOT_TESTED",
+  "instrumented": "RETAINED_IN_THIS_CHECKPOINT",
+  "bytecache_retry": "First attempt refused generated critical bytecache; preserved and moved, same source retry with PYTHONDONTWRITEBYTECODE=1 passed; source guard unchanged"
+}

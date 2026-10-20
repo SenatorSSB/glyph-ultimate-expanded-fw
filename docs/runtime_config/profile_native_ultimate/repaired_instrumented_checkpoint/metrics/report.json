@@ -1,0 +1,23 @@
+{
+  "state": "OFFLINE_COMPONENT_AND_ARM_OBJECT_PROOF_ONLY",
+  "mutable_static_bytes": 420,
+  "source_constant_bytes_charged": 20,
+  "diagnostic_static_subcap": 512,
+  "wrapper_declared_static_words_bytes": 16,
+  "wrapper_emitted_static_words_bytes": 12,
+  "conservative_all_new_static_charge_bytes": 444,
+  "analysis_source_label_head": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+  "source_sha256": {
+    "HAL/pico/src/core/NativeTargetMetrics.cpp": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c",
+    "HAL/pico/src/core/NativeTargetMetricsEntry.S": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a",
+    "include/core/RuntimeIdentityService.hpp": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7",
+    "include/core/RuntimeIdentityWire.hpp": "f613fcdcb244b00da2d99a24b784784936e0a44fc11c8668ed1da90ed15d1197"
+  },
+  "objects_sha256": {
+    "NativeTargetMetrics.cpp.o": "9b299818ec0196e473bfa1f6917de5739b4edd1029312390a2c2092a4a92a9df",
+    "NativeTargetMetricsEntry.S.o": "26b82ab1dbbeb7b2cf48cfe3f801c92b3b4c73f50552bbbb74a7caf7cc5b8b4e",
+    "ControllerMode.cpp.o": "1034b911feddab4e66b37b0828b82ce63be5182effa49929f879906706af8077"
+  },
+  "whole_stack_and_final_link_interception": "PENDING exact committed ELF/source review",
+  "target_observations": "NOT_MEASURED"
+}

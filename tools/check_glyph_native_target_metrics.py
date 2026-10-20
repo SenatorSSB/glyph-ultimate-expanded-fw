@@ -51,7 +51,10 @@ def check(out):
     prior=run(['git','show','9e16e1c36babdd5c655893b35ae92cd39725c37f:include/core/RuntimeIdentityWire.hpp'])
     current=(ROOT/'include/core/RuntimeIdentityWire.hpp').read_text().replace('    bool HasPartialFrame() const { return _used != 0; }\n','')
     require(current==prior,'identity parser/wire exact historical bytes apart from accessor')
-    spec=importlib.util.spec_from_file_location('native_builder',ROOT/'builder_scripts/native_target_metrics.py');builder=importlib.util.module_from_spec(spec);spec.loader.exec_module(builder)
+    spec=importlib.util.spec_from_file_location('native_builder',ROOT/'builder_scripts/native_target_metrics.py');builder=importlib.util.module_from_spec(spec);previous_bytecode=sys.dont_write_bytecode
+    try:
+        sys.dont_write_bytecode=True;spec.loader.exec_module(builder)
+    finally:sys.dont_write_bytecode=previous_bytecode
     class Result:
         returncode=0
         def __init__(self,text):self.stdout=text
@@ -76,6 +79,22 @@ def check(out):
         (out/(name+'.log')).write_text(result.stdout+result.stderr)
         require(result.returncode!=0,'metric negative control escaped '+name)
         print('PASS metric source mutation '+name)
+    # Compile the pinned production CDC and FIFO unchanged; only endpoints and
+    # IRQ arrival scheduling are host doubles. This exercises the target-only
+    # guarded Service path rather than the generic Wire used above.
+    framework=ROOT/'.platformio-home/packages/framework-arduinopico'
+    usb=framework/'libraries/Adafruit_TinyUSB_Arduino/src'
+    cdc=out/'observer-cdc.c'
+    cdc.write_text((usb/'class/cdc/cdc_device.c').read_text()+'\n'+(ROOT/'tools/fixtures/profile_store_cdc_rx_progress/cdc_fixture_tail.c').read_text()+'\nunsigned fixture_tx_pending(void) { return tu_fifo_count(&_cdcd_itf[0].tx_ff); }\n')
+    cdc_includes=['-DCFG_TUSB_CONFIG_FILE="fixture_tusb_config.h"','-I',FIX/'include','-I',ROOT/'tools/fixtures/profile_store_cdc_rx_progress/include','-I',usb,'-I',usb/'class/cdc','-I',ROOT/'include','-I',ROOT]
+    cdc_objects=[]
+    for source in [cdc,usb/'common/tusb_fifo.c']:
+        obj=out/(source.stem+'.o');run(['cc','-std=c11','-fsanitize=address,undefined','-fno-omit-frame-pointer',*cdc_includes,'-c',source,'-o',obj]);cdc_objects.append(obj)
+    observer=out/'cdc-observer'
+    run(['c++','-std=c++17','-DGLYPH_NATIVE_TARGET_METRICS=1','-DGLYPH_NATIVE_METRICS_HOST=1','-DGLYPH_CDC_COORDINATION_TEST=1','-fsanitize=address,undefined','-fno-omit-frame-pointer',*cdc_includes,FIX/'cdc_observer.cpp',*cdc_objects,'-o',observer])
+    print(run([observer]),end='')
+    for source,fragments in [(framework/'cores/rp2040/main.cpp',['loop();\n            __loop();','extern void __loop() {\n#ifdef USE_TINYUSB\n    yield();']), (framework/'cores/rp2040/delay.cpp',['TinyUSB_Device_Task();\n        TinyUSB_Device_FlushCDC();'])]:
+        require(all(fragment in source.read_text() for fragment in fragments),'existing post-loop deferred USB task progress')
     # Actual production recipe and target ABI; emitted objects are analysis only,
     # with a fixed test source constant, never a candidate firmware artifact.
     db=json.loads((ROOT/'docs/runtime_config/profile_native_ultimate/native_production_stack_final/compile_commands.json').read_text())

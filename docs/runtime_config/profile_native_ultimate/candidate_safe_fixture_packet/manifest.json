@@ -1,0 +1,55 @@
+{
+  "files": {
+    "backend_LR_Z_source_assertions.json": "b724c8710f314412a677e067320b3cea9e8583e541a46d4277f37408c9b63517",
+    "complete_sample_1/context.json": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7",
+    "complete_sample_1/context.pb": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+    "complete_sample_1/conversion.json": "9ff390173d85c06feda2db7d1d92451484d5868afc50d4da3d51712beba4ee62",
+    "complete_sample_1/profile.json": "e8c549e529820d44faf868a54c7ed24cffc27037be8e57fae39c83d518b30781",
+    "complete_sample_1/profile.pb": "c3bc3614423dbc07c8cf9a31df3335e7bb12158ad69d5657b28139c1a7ca3a62",
+    "complete_sample_2/context.json": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7",
+    "complete_sample_2/context.pb": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+    "complete_sample_2/conversion.json": "9ff390173d85c06feda2db7d1d92451484d5868afc50d4da3d51712beba4ee62",
+    "complete_sample_2/profile.json": "c560245105e13063ee969ac0e8230654ee3081ab24ed37c024dbac258f5bdada",
+    "complete_sample_2/profile.pb": "cf9242df366920dfaa269df4cc0ffac5948d1d6d7956a4a8fe50f1057400ae2a",
+    "expected_observations.json": "d4ba0d454bc3e038ff1665cc5debc5476869901fd4d4be293969d5c1503bd15c",
+    "forced_filter/context.json": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+    "forced_filter/context.pb": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+    "forced_filter/conversion.json": "b4b16ee5ad45f9bacc0f9650a7b5def132de26b4640647d40651f2a92bb19f94",
+    "forced_filter/profile.json": "4d306ff77ccb367e8c791af025d4a3be66d55136eff5b6430f7322a6452af670",
+    "forced_filter/profile.pb": "a247db7e1994c04c412595da6f85a7b7999e7d18d89b3a67ca2291da6d15d8e9",
+    "forced_loses/context.json": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+    "forced_loses/context.pb": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+    "forced_loses/conversion.json": "0974926a586c1c59819cd5fe96b622e9243be56c80458e0158c6d3d4c7346da3",
+    "forced_loses/profile.json": "1d2b8b9daf2362f0b3557f4375138bb3845fcd84fdb33ab4ad5baa196dbad4dc",
+    "forced_loses/profile.pb": "30f35f2c2e1a7809cac0e691456380e36bc08e4f9ec49ef90f57eb79e6e5623b",
+    "forced_wins/context.json": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+    "forced_wins/context.pb": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+    "forced_wins/conversion.json": "37fc79482d7592f9dd9e1a4f5b5881edac51ec072602ca3cea163918a7de4226",
+    "forced_wins/profile.json": "0a5e229ddb6f493f5bf08a4f57b16276785118c1442456e249d981d9a867ab70",
+    "forced_wins/profile.pb": "70029461c4c2f34b54af3a3e0ba5186e1cf5bdc58dd1ae903076573d1015cd6b",
+    "historical_output_equivalence.json": "209f14ee50bbaf361fd14bb9802bee4bc8df1e0d539f88cec310ed0453a50b6d",
+    "profiles.json": "6b7969f5f93c0741e1272eab5ed74401919c3bd79b8d4e0c9668fa40dc132ab2",
+    "safe_carrier_mapping.json": "b01abb1031024436460e6fb9ef08005a3b3cfee3605860af4f4d37d97b76c6bb"
+  },
+  "limitations": [
+    "Exact reviewed candidate/tree/UF2/custody and packet approval pending.",
+    "Expected rawoutputs use production native decoder/evaluator with initial buttons0; eachsequence starts from fresh mode history.",
+    "Backend fields are actual source assignments/types executed on host; USB/PIO timing and targetwirelayout are not hardware proof.",
+    "Nunchuk NOT_TESTED. Retained target diagnostics are implemented under A3; exact linked review/build and target observations pending.",
+    "H1/H10/H11/H12 need actual session/backup/reference/negative/restoration evidence; no unsafe corrupting fixture is proposed."
+  ],
+  "runtime_route_context": {
+    "adapter_details": "model/translation unknown",
+    "available_owner_report": [
+      "XInput",
+      "Switch",
+      "Gamecube"
+    ],
+    "controller_revision": "owner-reported tentative Mk6, unverified",
+    "host_details": "USB XInput/Switch; Gamecube adapter to Switch"
+  },
+  "source_checkpoint": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+  "state": "OFFLINE_PREPARATION_NOT_APPROVED_FOR_DEVICE",
+  "target_timing": "NOT_MEASURED",
+  "target_whole_stack_peak": "NOT_MEASURED"
+}
