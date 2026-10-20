@@ -16,6 +16,11 @@ struct InputSource {};InputSource **input_sources=nullptr;size_t input_source_co
 struct Watchdog {uint32_t scratch[8]={};} watchdog;Watchdog *watchdog_hw=&watchdog;
 static unsigned bootloader=0,normal_initializations=0,ordinary_reports=0,serial_reports=0,store_begins=0,recovery_begins=0;
 struct SerialStub {void begin(unsigned){}} Serial;
+// Startup-route proof does not model the identity service. Its actual observer,
+// RX/TX, viewer and output behavior are exercised by the GP-BIND-003 host proof.
+struct IdentityServiceStub {template<class... T>void Poll(T&&...) {}} runtime_identity_service;
+unsigned ultimate_mode=0;
+uint32_t millis(){return 0;}
 struct WireStub {void setSDA(unsigned){}void setSCL(unsigned){}void setClock(unsigned){}void begin(){}} Wire1;
 struct Display {bool begin(unsigned,unsigned,bool,bool){return false;}void clearDisplay(){}void drawBitmap(unsigned,unsigned,const uint8_t *,unsigned,unsigned,unsigned){}void display(){throw std::runtime_error("headless display use");}} display;
 struct Led {template<unsigned,unsigned>void addLeds(unsigned *,unsigned){}void setMaxPowerInVoltsAndMilliamps(unsigned,unsigned){}void setMaxRefreshRate(unsigned){}void setBrightness(unsigned){}void show(){}}FastLED;

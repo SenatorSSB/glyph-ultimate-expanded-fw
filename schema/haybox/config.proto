@@ -28,6 +28,9 @@ enum Command {
   // Versioned profile-store request or response envelope.  Legacy Config
   // clients must negotiate this command before attempting store mutation.
   CMD_PROFILE_STORE = 9;
+  // Read-only current-session identity. Body is the fixed v1 binary schema
+  // in docs/runtime_config/gp_bind_003_wire.md, inside the existing COBS frame.
+  CMD_RUNTIME_IDENTITY = 10;
 }
 /**
  * Button identifiers for all 60 supported button inputs.
