@@ -191,3 +191,12 @@ publication of the reviewed research package while preserving exact diagnostic
 limitations. The review grants no implementation, canonical queue, device, or
 hardware authority. Archive routing and factual status additions do not change
 the frozen reviewed architecture, protocol or binary specimen hashes.
+
+
+## M2–M6 executor checkpoint — 2026-10-20
+
+Canonical adoption A `753932c8fbec3e002d455f4cd2b9b1dbc0ed896f` was live verified by the parent at 10:51 UTC. Parent acquired sole canonical publication lock `/private/tmp/glyph-configurator-canonical-publication.lock` at 10:47:57 UTC. This isolated executor owns branch `codex/gp-native-001-profile-execution` in `/private/tmp/glyph-profile-native-20261020`, with no canonical publication/device authority. Internal M2–M6 milestones belong to GP-NATIVE-001 and are not new queue successors.
+
+Requested routing: gpt-6.1-sol/high, finite coupled codec/converter/callback/store/identity implementation. Runtime-observed model and effort: UNKNOWN. Native subagent direct return supported by runtime collaboration API; no additional source writer is spawned. Network capability inherited from parent: live GitHub requires network-enabled execution.
+
+The adopted READY order authorizes implementation; immutable M1 evidence and historical checkpoints above remain preserved. Initial authorization review is retained in `authorization_publication_review.md`. Native implementation, fresh source review/build/custody and human native acceptance remain incomplete. No controller action occurred.
