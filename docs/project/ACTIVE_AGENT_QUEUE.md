@@ -8537,7 +8537,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": false
+      "hardware_evidence_dependency_satisfied": true
     }
   ]
 }
