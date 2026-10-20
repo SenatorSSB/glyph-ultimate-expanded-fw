@@ -13,16 +13,16 @@ PATTERNS = ['UltimateNativeProfile.cpp', 'UltimateNativeEvaluator.cpp', '/Ultima
  'RP2040Support.cpp', '/main.cpp', '/pb_encode.c', '/pb_decode.c', '/pb_common.c',
  'nanopb-arduino/src/', 'config/glyph/common/src/config.cpp', 'Adafruit_USBD_CDC.cpp',
  '/usbd.c', '/cdc_device.c', '/tusb.c', '/tusb_fifo.c', '/dcd_rp2040.c',
- 'config_validation.cpp', '/Print.cpp', '/Stream.cpp']
+ 'config_validation.cpp', '/Print.cpp', '/Stream.cpp', 'Adafruit_TinyUSB_rp2040.cpp', 'Adafruit_USBD_Device.cpp', '/usbd_control.c']
 
-def measure(out):
+def measure(out, compiledb=None):
  # Regenerate current schema into isolated evidence output: a source-side
  # frame check must not silently compile against a stale preliminary header.
  generated=out/'generated';generated.mkdir(exist_ok=True)
  nanopb=pathlib.Path(os.environ.get('GLYPH_PROFILE_STORE_NANOPB',str(NANOPB)))
  schema=ROOT/'schema/haybox'
  subprocess.run([sys.executable,str(nanopb/'generator/nanopb_generator.py'),'-I',str(schema),'-f',str(schema/'config.options'),'--error-on-unmatched','--no-timestamp','-D',str(generated),str(schema/'config.proto')],check=True,capture_output=True)
- entries=json.loads((ROOT/'compile_commands.json').read_text())
+ entries=json.loads((compiledb or ROOT/'compile_commands.json').read_text())
  selected=[e for e in entries if any(p in e['file'] for p in PATTERNS)]
  def compile_one(e):
   name=e['file'].replace('/','_').replace('.','_'); target=out/(name+'.o')
@@ -92,8 +92,8 @@ def measure(out):
  print(json.dumps({k:v for k,v in report.items() if k not in ['frames','source_sha256','critical_limits']},indent=2))
 
 def main():
- parser=argparse.ArgumentParser();parser.add_argument('--output-dir',type=pathlib.Path);args=parser.parse_args()
- if args.output_dir:args.output_dir.mkdir(parents=True,exist_ok=True);measure(args.output_dir)
+ parser=argparse.ArgumentParser();parser.add_argument('--output-dir',type=pathlib.Path);parser.add_argument('--compiledb',type=pathlib.Path);args=parser.parse_args()
+ if args.output_dir:args.output_dir.mkdir(parents=True,exist_ok=True);measure(args.output_dir,args.compiledb)
  else:
-  with tempfile.TemporaryDirectory(prefix='glyph-create-stack-') as d:measure(pathlib.Path(d))
+  with tempfile.TemporaryDirectory(prefix='glyph-create-stack-') as d:measure(pathlib.Path(d),args.compiledb)
 if __name__=='__main__':main()

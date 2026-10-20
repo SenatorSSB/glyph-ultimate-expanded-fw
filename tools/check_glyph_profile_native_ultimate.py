@@ -367,7 +367,7 @@ def dispatch_tests(temp,pb,config):
     maximum=temp/'dispatch-maximum.pb';maximum.write_bytes(pb.UltimateProfile(schema_version=5,native_payload=(ROOT/'docs/runtime_config/profile_native_ultimate/design_evidence/maximum-native.body').read_bytes()).SerializeToString())
     print(run([str(exe),str(legacy),str(ordinary),str(maximum)]),end='')
     backend_source=(ROOT/sources[0]).read_text()
-    anchor='    pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));'
+    anchor='    static pb_ostream_t output; output = pb_ostream_from_buffer(frame, sizeof(frame));'
     require(backend_source.count(anchor)==1,'exact native response encode boundary')
     for label,injection,assertion in [
         ('overwritten_response_lease','if(response.has_profile && response.profile.schema_version==5) std::memset(const_cast<uint8_t *>(ultimate_native::Lease(response.profile)->bytes),0xcc,ultimate_native::Lease(response.profile)->size);','READ independent record lease survives shared response frame reuse'),

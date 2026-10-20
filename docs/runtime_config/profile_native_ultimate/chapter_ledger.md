@@ -314,3 +314,19 @@ The conditional WRONLY LittleFS forceconsistency/deorphan/orphan-repair/compacti
 inventory remains unresolved versus2048stackbudget;4096scratchbank is physical
 capacity only and is not an authorized stack budget. Full source/safety review,
 feasible call-chain adjudication and hardware acceptance remain pending.
+
+## P1 stack repair phase checkpoint
+
+Fresh independent review of9e/fc requested changes: actual ordinary new-file
+LittleFS compaction has a known retained frame sequence2536bytes including
+flash callback before IRQ allowance, above the unchanged2048 budget. Exact
+clean fc build succeeded but is NOT_FOR_HARDWARE_HANDOFF; it is preserved, not
+accepted. The active GP-NATIVE-001 continues bounded memory-lifetime correction
+within existing caps, without changing checked transaction/recovery semantics.
+Validation, hash/identity/capacity phases are isolated; fixed synchronous handler,
+record-encoding and checked-File workspaces end temporary stack lifetimes before
+nested storage. The sole publication helper is explicitly inlined and unknown-
+command formatting is out of line. Actual short native functional proofs passed
+the initial phase correction; later compiler/callsite fixes still need full
+focused revalidation, exact resources and fresh independent review. No safe
+whole-chain/IRQ disposition is claimed at this intermediate repair checkpoint.

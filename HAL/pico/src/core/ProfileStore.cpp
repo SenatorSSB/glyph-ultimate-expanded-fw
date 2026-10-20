@@ -133,7 +133,17 @@ namespace {
         }
 
         Result CheckedWrite(const char *p, const uint8_t *b, size_t n, Kind k) override {
-            auto r = CheckedStorage::WriteFile(p, b, n, k);
+            // Same checked WriteFile sequence, with one fixed handle instead
+            // of retaining its native lfs_file_t on every nested write frame.
+            // The existing store/record/publication workspaces are synchronous
+            // core0-only; no callback recursively enters a store operation.
+            static CheckedStorage::File file;
+            auto r = CheckedStorage::Open(file, p, true, k);
+            if (r) {
+                r = CheckedStorage::Write(file, b, n);
+                if (r) r = CheckedStorage::Sync(file);
+                auto close = CheckedStorage::Close(file); if (!close) r = close;
+            }
             Remember(r, true, n);
             return r;
         }
@@ -213,7 +223,10 @@ namespace {
 
     // A checked rename replaces an existing file atomically on this same mount.
     // There is deliberately no remove(destination) gap. All readback is independent.
-    Result Publish(
+    // Keep checked publication in its caller: a retained adapter frame would
+    // consume stack throughout LittleFS metadata compaction. Semantics stay
+    // in this single shared implementation.
+    __attribute__((always_inline)) inline Result Publish(
         ProfileStoreStorage &s,
         const char *tmp,
         const char *dest,
@@ -856,7 +869,8 @@ int ProfileStore::Find(uint32_t id) const {
     return -1;
 }
 
-bool ProfileStore::ValidateProfile(const UltimateProfile &p) const {
+// End validation-error scratch before record encoding/storage begins.
+__attribute__((noinline)) bool ProfileStore::ValidateProfile(const UltimateProfile &p) const {
     ConfigValidationError e;
     return validate_ultimate_profile_semantics(p, e);
 }
@@ -933,7 +947,9 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t rev, const UltimateProfile
         _last_io_stage = ProfileStoreIoStage::RecordEncodeSize;
         return false;
     }
-    pb_ostream_t s = pb_ostream_from_buffer(record + 32, kMaxProfileWireBytes);
+    // Encoding is complete before Publish; this fixed workspace is distinct
+    // from the immutable record bytes and READ/candidate/active owners.
+    static pb_ostream_t s; s = pb_ostream_from_buffer(record + 32, kMaxProfileWireBytes);
     if (!pb_encode(&s, UltimateProfile_fields, &p)) {
         _last_io_stage = ProfileStoreIoStage::RecordEncode;
         return false;
@@ -948,7 +964,7 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t rev, const UltimateProfile
     Put32(record + 20, n);
     Put32(record + 24, Crc32(record, 24));
     Put32(record + 28, Crc32(record + 32, n));
-    char path[32], temp[32];
+    static char path[32], temp[32];
     ProfileStorePaths::RecordPath(path, sizeof(path), id, rev);
     ProfileStorePaths::RecordTemporaryPath(temp, sizeof(temp), id, rev);
     auto result = Publish(*_storage, temp, path, record, n + 32, Kind::Record, &_last_io_stage);

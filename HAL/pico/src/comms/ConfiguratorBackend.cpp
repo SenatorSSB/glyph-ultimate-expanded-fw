@@ -439,6 +439,14 @@ bool ConfiguratorBackend::TraceProfileDispatch(const ProfileStoreRequest &reques
 
 #endif
 
+// Keep pure identity/capacity phases off the later filesystem call stack.
+// The existing handler is synchronous core0 and already owns static RX/TX state.
+static __attribute__((noinline)) bool PrepareStoreIdentity(ProfileStoreRequest &request, ProfileStoreTransactionIdentity &identity) {
+    return ProfileStoreRequestIdentity(request, identity);
+}
+static __attribute__((noinline)) void CaptureStoreCapacity(ProfileStore::CapacityInfo &capacity) {
+    capacity = profile_store.Capacity();
+}
 bool ConfiguratorBackend::HandleProfileStore() {
     static constexpr size_t kFrameLimit = 8192;
     static ProfileStoreRequest request;
@@ -476,7 +484,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     _rx.phase = 5; // record before decode, with no competing USB trace traffic
 #endif
-    pb_istream_t input = pb_istream_from_buffer(frame, length);
+    static pb_istream_t input; input = pb_istream_from_buffer(frame, length);
     if (!pb_decode(&input, ProfileStoreRequest_fields, &request) || (request.protocol_version != 1 && request.protocol_version != 2)) {
 #if GLYPH_STRICT_HARDENING_CANDIDATE
         _rx.phase = 12; _rx.flags |= 8; _last_profile_rx = _rx;
@@ -516,8 +524,8 @@ bool ConfiguratorBackend::HandleProfileStore() {
     const bool mutation = request.operation >= PROFILE_STORE_CREATE &&
         request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
     const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
-    ProfileStoreTransactionIdentity identity;
-    ProfileStore::TransactionResult result;
+    static ProfileStoreTransactionIdentity identity; identity = {};
+    static ProfileStore::TransactionResult result; result = {};
     bool handled = false;
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     const bool ticket_invalid = request.fault_ticket &&
@@ -587,7 +595,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
         else if (profile_store.IsReadOnlyRecovery()) strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));
         if (_recovery_storage_available) {
             if (!TraceProfileStage(request, 3)) return false; // before filesystem capacity
-            const auto capacity = profile_store.Capacity();
+            static ProfileStore::CapacityInfo capacity; CaptureStoreCapacity(capacity);
             if (!TraceProfileStage(request, 4)) return false; // capacity complete
             response.filesystem_total_bytes = capacity.total_bytes;
             response.filesystem_used_bytes = capacity.used_bytes;
@@ -683,7 +691,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
     } else if (!mutation && !query) {
         response.status = PROFILE_STORE_UNSUPPORTED;
         handled = true;
-    } else if (!request.request_token || !ProfileStoreRequestIdentity(request, identity)) {
+    } else if (!request.request_token || !PrepareStoreIdentity(request, identity)) {
         result.status = ProfileStore::Status::Invalid;
     } else {
         // Both receipt domains share tokens. Look them up BEFORE checking any
@@ -787,7 +795,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
                     candidate.profile_reference_result_id = request.profile_id;
                     candidate.profile_reference_result_store_generation = profile_store.Generation();
                     candidate.profile_reference_result_mode_index = request.mode_config_index;
-                    ConfigValidationError error;
+                    // Same synchronous workspace lifetime as the request/response; validation
+                    // resets it before use, and no filesystem call retains a pointer.
+                    static ConfigValidationError error; error = {};
                     if (!persistence.ValidateConfig(candidate, error)) result.status = ProfileStore::Status::Invalid;
                     else {
                         const auto saved = persistence.SaveConfigIfGenerationMatches(candidate, request.expected_config_generation);
@@ -848,7 +858,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
     // Encoding and transport are separate bounded stages, with no FS frames
     // alive during either stage.
     if (!TraceProfileStage(request, 8)) return false; // before bounded protobuf encode
-    pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));
+    static pb_ostream_t output; output = pb_ostream_from_buffer(frame, sizeof(frame));
     if (!pb_encode(&output, ProfileStoreResponse_fields, &response)) {
         return false;
     }
@@ -869,7 +879,8 @@ bool ConfiguratorBackend::HandleProfileStore() {
     return sent;
 }
 
-bool ConfiguratorBackend::HandleUnknownCommand(Command command) {
+// Error formatting scratch must not remain live during unrelated storage commands.
+__attribute__((noinline)) bool ConfiguratorBackend::HandleUnknownCommand(Command command) {
     char errmsg[50];
     size_t errmsg_len =
         snprintf(errmsg, sizeof(errmsg), "Unknown command ID: %d", (uint8_t)command);
