@@ -1,0 +1,11 @@
+{
+  "include/core/RuntimeIdentity.hpp": "eb4ebe8754cdc3bec55a532e56169f5d790bbf231f799aaeb0b696d64023dfe4",
+  "include/core/RuntimeIdentityService.hpp": "3494bfc774b54daa6155b68817b480aa2450cb88a8dcb5c7cea08e5bad593992",
+  "include/core/RuntimeIdentityWire.hpp": "1127e5913c06d85d0731ab7577debab5c04181570d64d40bfa19e001132efcdc",
+  "include/core/RuntimeProfileDigest.hpp": "1dacefd107ad76ed70668e44577768b68b8b1345b40c4228bae74e414dec2371",
+  "include/modes/Ultimate.hpp": "d21b54a33d35c1956df27cdccc8b5b2e9eb83386b64453226c7c988854c66e3e",
+  "include/core/ProfileStore.hpp": "93a749340a424bb7f6b85b017cb7ad7da3e400a3c25bceca1393594cac9832ad",
+  "HAL/pico/src/core/ProfileStore.cpp": "300d568a145baab2203a01906114244f6eed87443fa6241d6e14ad57e21b3c09",
+  "src/core/mode_selection.cpp": "857d2a147ae45908a13cdf7dc7f3892dfdfc9322f23d692156a1508b70bcb872",
+  "HAL/pico/src/comms/XInputBackend.cpp": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+}

@@ -1,0 +1,22 @@
+{
+  "short": {
+    "native_active_plus_candidate_bytes": 7792,
+    "native_candidate_bytes": 3900,
+    "native_context_bytes": 12,
+    "native_frame_bytes": 132,
+    "native_input_copy_bytes": 48,
+    "native_owned_bytes": 3892,
+    "native_validation_locals_bytes": 180,
+    "native_view_bytes": 556
+  },
+  "no-short": {
+    "native_active_plus_candidate_bytes": 7792,
+    "native_candidate_bytes": 3900,
+    "native_context_bytes": 12,
+    "native_frame_bytes": 132,
+    "native_input_copy_bytes": 48,
+    "native_owned_bytes": 3892,
+    "native_validation_locals_bytes": 180,
+    "native_view_bytes": 556
+  }
+}

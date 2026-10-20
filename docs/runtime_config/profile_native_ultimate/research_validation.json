@@ -1,0 +1,26 @@
+{
+  "classification": "INACTIVE_GENERATOR_OR_FIXTURE",
+  "active_firmware_behavior_changed": false,
+  "canonical_queue_changed": false,
+  "baseline_build": "INCOMPLETE_LOST_RUNTIME_PROCESS_EXTERNAL_TERMINAL_RESULT_PENDING",
+  "m1": "INCOMPLETE_EXACT_BASELINE_RESOURCE_RECONCILIATION_PENDING",
+  "frozen_legacy_source_hashes": {
+    "result": "MATCH",
+    "count": 17
+  },
+  "json_python_syntax": "PASS",
+  "docs_navigation": "PASS",
+  "docs_agent_surface": {
+    "result": "FAIL",
+    "reason": "historical C024 post-integration change outside validation/evidence paths",
+    "checker_changed": false
+  },
+  "diff_check": {
+    "result": "FAIL",
+    "reason": "preserved exact generated config.pb.c trailing blank line at line91",
+    "generated_bytes_normalized": false
+  },
+  "firmware_source_candidate": null,
+  "device_actions": false,
+  "hardware_acceptance": null
+}
