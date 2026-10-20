@@ -1,0 +1,26 @@
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:513:12:int strcpy_utf16(const char*, uint16_t*, int)	48	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:87:1:Adafruit_USBD_Device::Adafruit_USBD_Device()	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:89:6:void Adafruit_USBD_Device::setConfigurationBuffer(uint8_t*, uint32_t)	24	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:100:6:void Adafruit_USBD_Device::setID(uint16_t, uint16_t)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:105:6:void Adafruit_USBD_Device::setVersion(uint16_t)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:109:6:void Adafruit_USBD_Device::setDeviceVersion(uint16_t)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:113:6:void Adafruit_USBD_Device::setLanguageDescriptor(uint16_t)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:117:6:void Adafruit_USBD_Device::setManufacturerDescriptor(const char*)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:121:6:void Adafruit_USBD_Device::setProductDescriptor(const char*)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:125:6:void Adafruit_USBD_Device::setSerialDescriptor(const char*)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:131:9:uint8_t Adafruit_USBD_Device::addStringDescriptor(const char*)	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:141:6:void Adafruit_USBD_Device::task()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:143:6:bool Adafruit_USBD_Device::mounted()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:145:6:bool Adafruit_USBD_Device::suspended()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:147:6:bool Adafruit_USBD_Device::ready()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:149:6:bool Adafruit_USBD_Device::remoteWakeup()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:151:6:bool Adafruit_USBD_Device::detach()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:153:6:bool Adafruit_USBD_Device::attach()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:185:6:void Adafruit_USBD_Device::clearConfiguration()	56	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:234:6:bool Adafruit_USBD_Device::addInterface(Adafruit_USBD_Interface&)	40	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:286:6:bool Adafruit_USBD_Device::begin(uint8_t)	56	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:307:9:uint8_t Adafruit_USBD_Device::getSerialDescriptor(uint16_t*)	80	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:329:17:const uint16_t* Adafruit_USBD_Device::descriptor_string_cb(uint8_t, uint16_t)	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:369:16:const uint8_t* tud_descriptor_device_cb()	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:376:16:const uint8_t* tud_descriptor_configuration_cb(uint8_t)	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp:386:17:const uint16_t* tud_descriptor_string_cb(uint8_t, uint16_t)	8	static

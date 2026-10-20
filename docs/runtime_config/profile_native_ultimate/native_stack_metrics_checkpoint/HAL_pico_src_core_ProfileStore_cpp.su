@@ -1,0 +1,94 @@
+HAL/pico/src/core/ProfileStore.cpp:158:36:virtual ProfileStoreStorageFailure {anonymous}::MountedStorage::LastFailure() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:485:27:void __tcf_0()	0	static
+HAL/pico/src/core/ProfileStore.cpp:113:11:{anonymous}::MountedStorage::~MountedStorage()	0	static
+HAL/pico/src/core/ProfileStore.cpp:187:14:virtual bool {anonymous}::MountedStorage::Enumerate(CheckedStorage::Visitor, void*)	24	static
+HAL/pico/src/core/ProfileStore.cpp:183:14:virtual bool {anonymous}::MountedStorage::Geometry(CheckedStorage::Geometry&)	24	static
+HAL/pico/src/core/ProfileStore.cpp:170:14:virtual bool {anonymous}::MountedStorage::ReadRange(const char*, size_t, uint8_t*, size_t)	192	static
+HAL/pico/src/core/ProfileStore.cpp:168:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRemove(const char*)	8	static
+HAL/pico/src/core/ProfileStore.cpp:130:14:virtual bool {anonymous}::MountedStorage::Remove(const char*)	24	static
+HAL/pico/src/core/ProfileStore.cpp:164:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRename(const char*, const char*, {anonymous}::Kind)	8	static
+HAL/pico/src/core/ProfileStore.cpp:132:14:virtual bool {anonymous}::MountedStorage::Rename(const char*, const char*)	24	static
+HAL/pico/src/core/ProfileStore.cpp:160:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::Probe(const char*, size_t*)	8	static
+HAL/pico/src/core/ProfileStore.cpp:128:14:virtual bool {anonymous}::MountedStorage::Exists(const char*)	24	static
+HAL/pico/src/core/ProfileStore.cpp:123:16:virtual size_t {anonymous}::MountedStorage::Size(const char*)	32	static
+HAL/pico/src/core/ProfileStore.cpp:113:11:virtual {anonymous}::MountedStorage::~MountedStorage()	8	static
+HAL/pico/src/core/ProfileStore.cpp:1767:47:static constexpr bool ProfileStore::ImportLegacy(const Config&, uint32_t*, size_t)::<lambda(void*, size_t, UltimateProfile&)>::_FUN(void*, size_t, UltimateProfile&)	8	static
+HAL/pico/src/core/ProfileStore.cpp:336:10:0(const ProfileStore::Directory&, uint8_t*)	32	static
+HAL/pico/src/core/ProfileStore.cpp:136:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedWrite(const char*, const uint8_t*, size_t, {anonymous}::Kind)	40	static
+HAL/pico/src/core/ProfileStore.cpp:511:27:void __tcf_1()	0	static
+HAL/pico/src/core/ProfileStore.cpp:152:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRead(const char*, uint8_t*, size_t, {anonymous}::Kind)	24	static
+HAL/pico/src/core/ProfileStore.cpp:119:14:virtual bool {anonymous}::MountedStorage::Read(const char*, uint8_t*, size_t)	40	static
+HAL/pico/src/core/ProfileStore.cpp:115:14:virtual bool {anonymous}::MountedStorage::Write(const char*, const uint8_t*, size_t)	32	static
+HAL/pico/src/core/ProfileStore.cpp:314:10:bool {anonymous}::Structural(const ProfileStore::Directory&)	80	static
+HAL/pico/src/core/ProfileStore.cpp:336:10:bool {anonymous}::EncodeDirectory(const ProfileStore::Directory&, uint8_t*)	16	static
+HAL/pico/src/core/ProfileStore.cpp:377:10:bool {anonymous}::DecodeDirectory(const uint8_t*, size_t, ProfileStore::Directory*)	32	static
+HAL/pico/src/core/ProfileStore.cpp:83:27:static constexpr bool {anonymous}::HashMessage(const pb_msgdesc_t*, const void*, uint8_t*)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)	184	static
+include/core/Sha256.hpp:20:10:void Sha256::Final(uint8_t*)	216	static
+HAL/pico/src/core/ProfileStore.cpp:80:36:bool {anonymous}::HashMessage(const pb_msgdesc_t*, const void*, uint8_t*)	160	static
+HAL/pico/src/core/ProfileStore.cpp:464:10:bool {anonymous}::SameDirectory(const ProfileStore::Directory&, const ProfileStore::Directory&)	448	static
+HAL/pico/src/core/ProfileStore.cpp:1544:10:void {anonymous}::Receipt(ProfileStore::Directory&)	352	static
+HAL/pico/src/core/ProfileStore.cpp:1568:37:ProfileStoreTransactionIdentity {anonymous}::HistoricalIdentity(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, const UltimateProfile*, const char*, uint32_t)	376	static
+HAL/pico/src/core/ProfileStore.cpp:1528:10:bool {anonymous}::HashFile(ProfileStoreStorage&, const char*, uint8_t*)	456	static
+HAL/pico/src/core/ProfileStore.cpp:420:36:bool {anonymous}::DecodeLegacy(const uint8_t*, size_t, ProfileStore::Directory*)	296	static
+HAL/pico/src/core/ProfileStore.cpp:482:1:ProfileStore::ProfileStore(ProfileStoreStorage*)	24	static
+HAL/pico/src/core/ProfileStore.cpp:536:6:bool ProfileStore::ReadRoot(uint8_t, Directory&) const	80	static
+HAL/pico/src/core/ProfileStore.cpp:544:6:bool ProfileStore::LoadControl(Directory&, uint32_t&) const	56	static
+HAL/pico/src/core/ProfileStore.cpp:764:6:bool ProfileStore::LoadDirectory()	88	static
+HAL/pico/src/core/ProfileStore.cpp:801:6:bool ProfileStore::PublishDirectory(const Directory&)	88	static
+HAL/pico/src/core/ProfileStore.cpp:900:6:0()	120	static
+HAL/pico/src/core/ProfileStore.cpp:831:6:bool ProfileStore::IsReady() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:835:6:bool ProfileStore::IsReadOnlyRecovery() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:839:6:bool ProfileStore::MigrationPending() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:843:10:uint32_t ProfileStore::LegacyMigrationId(size_t) const	0	static
+HAL/pico/src/core/ProfileStore.cpp:847:10:uint32_t ProfileStore::Incarnation() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:510:6:bool ProfileStore::BeginRecovery(uint32_t, uint32_t)	88	static
+HAL/pico/src/core/ProfileStore.cpp:851:10:uint32_t ProfileStore::Generation() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:855:10:uint64_t ProfileStore::LastTransactionToken() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:859:8:size_t ProfileStore::Count() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:863:28:const ProfileStore::Entry* ProfileStore::EntryAt(size_t) const	0	static
+HAL/pico/src/core/ProfileStore.cpp:867:24:const UltimateProfile* ProfileStore::ActiveProfile() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:871:10:uint32_t ProfileStore::ActiveId() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:875:5:int ProfileStore::Find(uint32_t) const	8	static
+HAL/pico/src/core/ProfileStore.cpp:883:32:bool ProfileStore::ValidateProfile(const UltimateProfile&) const	152	static
+HAL/pico/src/core/ProfileStore.cpp:888:6:void ProfileStore::ResetDiagnostic()	0	static
+HAL/pico/src/core/ProfileStore.cpp:892:13:const char* ProfileStore::LastDiagnostic() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:896:6:bool ProfileStore::IsTransactionUncertain() const	0	static
+HAL/pico/src/core/ProfileStore.cpp:900:6:bool ProfileStore::ReconcileTransaction()	8	static
+HAL/pico/src/core/ProfileStore.cpp:944:10:uint32_t ProfileStore::HealthFlags() const	12	static
+HAL/pico/src/core/ProfileStore.cpp:951:6:bool ProfileStore::WriteProfile(uint32_t, uint32_t, const UltimateProfile&)	80	static
+HAL/pico/src/core/ProfileStore.cpp:986:6:bool ProfileStore::ReadProfile(uint32_t, uint32_t, UltimateProfile&, bool*) const	120	static
+HAL/pico/src/core/ProfileStore.cpp:484:6:bool ProfileStore::Begin(uint32_t, uint32_t)	136	static
+HAL/pico/src/core/ProfileStore.cpp:1028:22:ProfileStore::Status ProfileStore::Read(uint32_t, UltimateProfile&, uint32_t*) const	32	static
+HAL/pico/src/core/ProfileStore.cpp:1042:24:const UltimateProfile* ProfileStore::Activate(uint32_t, Status*)	56	static
+HAL/pico/src/core/ProfileStore.cpp:1088:28:ProfileStore::RecordHealth ProfileStore::Health(uint32_t) const	104	static
+HAL/pico/src/core/ProfileStore.cpp:1109:6:bool ProfileStore::LoadProtectedRoot() const	88	static
+HAL/pico/src/core/ProfileStore.cpp:1125:6:bool ProfileStore::Protected(uint32_t, uint32_t) const	32	static
+HAL/pico/src/core/ProfileStore.cpp:1273:47:static constexpr bool ProfileStore::CollectGarbage()::<lambda(void*, const CheckedStorage::Entry&)>::_FUN(void*, const CheckedStorage::Entry&)	40	static
+HAL/pico/src/core/ProfileStore.cpp:1141:28:ProfileStore::CapacityInfo ProfileStore::Capacity() const	320	static
+HAL/pico/src/core/ProfileStore.cpp:1255:22:ProfileStore::Status ProfileStore::CollectGarbage()	88	static
+HAL/pico/src/core/ProfileStore.cpp:1302:6:bool ProfileStore::Admit(size_t, size_t)	112	static
+HAL/pico/src/core/ProfileStore.cpp:1643:22:0(const Config&, const uint8_t*, LegacyReader, void*, uint32_t*, size_t)	112	static
+HAL/pico/src/core/ProfileStore.cpp:1315:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint64_t) const	24	static
+HAL/pico/src/core/ProfileStore.cpp:1325:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(const TransactionIdentity&) const	64	static
+HAL/pico/src/core/ProfileStore.cpp:1333:33:ProfileStore::TransactionResult ProfileStore::Start(const TransactionIdentity&) const	32	static
+HAL/pico/src/core/ProfileStore.cpp:1371:33:ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)	64	static
+HAL/pico/src/core/ProfileStore.cpp:1404:33:ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, const TransactionIdentity&)	64	static
+HAL/pico/src/core/ProfileStore.cpp:1436:33:ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)	72	static
+HAL/pico/src/core/ProfileStore.cpp:1457:33:ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char*, uint32_t, const TransactionIdentity&)	88	static
+HAL/pico/src/core/ProfileStore.cpp:1481:33:ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)	72	static
+HAL/pico/src/core/ProfileStore.cpp:1502:33:ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)	72	static
+HAL/pico/src/core/ProfileStore.cpp:1601:6:bool ProfileStore::PrepareCompact(Config&) const	40	static
+HAL/pico/src/core/ProfileStore.cpp:1626:6:bool ProfileStore::ValidateCompactReceipt(const Config&) const	48	static
+HAL/pico/src/core/ProfileStore.cpp:1643:22:ProfileStore::Status ProfileStore::ImportLegacyStream(const Config&, const uint8_t*, LegacyReader, void*, uint32_t*, size_t)	24	static
+HAL/pico/src/core/ProfileStore.cpp:1736:22:ProfileStore::Status ProfileStore::ImportLegacy(const Config&, uint32_t*, size_t)	392	static
+HAL/pico/src/core/ProfileStore.cpp:1776:22:ProfileStore::Status ProfileStore::CompleteMigration(const Config&)	72	static
+HAL/pico/src/core/ProfileStore.cpp:1810:33:ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, uint32_t, uint32_t)	136	static
+HAL/pico/src/core/ProfileStore.cpp:1820:33:ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, uint32_t, uint32_t)	136	static
+HAL/pico/src/core/ProfileStore.cpp:1830:33:ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, uint32_t, uint32_t)	128	static
+HAL/pico/src/core/ProfileStore.cpp:1841:33:ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char*, uint32_t, uint32_t, uint32_t)	152	static
+HAL/pico/src/core/ProfileStore.cpp:1851:33:ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)	136	static
+HAL/pico/src/core/ProfileStore.cpp:1861:33:ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)	136	static
+HAL/pico/src/core/ProfileStore.cpp:1871:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint32_t, uint32_t) const	24	static
+HAL/pico/src/core/ProfileStore.cpp:1875:33:ProfileStore::TransactionResult ProfileStore::BeginMutation(uint32_t, uint32_t) const	80	static
+HAL/pico/src/core/ProfileStore.cpp:1881:6:void ProfileStore::Finish(TransactionResult*, uint32_t, uint32_t) const	8	static
+HAL/pico/src/core/ProfileStore.cpp:1885:27:cpp)	8	static

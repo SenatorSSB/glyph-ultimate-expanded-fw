@@ -1,0 +1,1 @@
+Assertion failed: (wire.tx[16]==1&&runtime_identity::ReadLE(wire.tx.data()+124,8)==0&&runtime_identity::ReadLE(wire.tx.data()+132,4)==0&&(runtime_identity::ReadLE(wire.tx.data()+136,2)&128)), function main, file odd_mailbox_accepted-host.cpp, line 98.

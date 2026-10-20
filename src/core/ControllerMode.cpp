@@ -1,4 +1,5 @@
 #include "core/ControllerMode.hpp"
+#include "core/NativeTargetMetrics.hpp"
 
 ControllerMode::ControllerMode() : InputMode() {
     // Set up initial state.
@@ -6,6 +7,13 @@ ControllerMode::ControllerMode() : InputMode() {
 }
 
 void ControllerMode::UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id) {
+#if GLYPH_NATIVE_TARGET_METRICS
+    // One synchronous core0 output update owns these bounded diagnostic words.
+    // They add no live native-frame automatic workspace. Reset every call.
+    static uint32_t native_before, begin, end, native_after;
+    native_before = DiagnosticNativeGeneration();
+    begin = native_before ? native_metrics::Now() : 0;
+#endif
     // Create a copy of the input state here so remapping can be many-to-one (many physical buttons
     // to one activated button).
     InputState remapped_inputs = inputs;
@@ -14,6 +22,11 @@ void ControllerMode::UpdateOutputs(const InputState &inputs, OutputState &output
     HandleSocd(post_inputs);
     const ResolvedInputContext context{inputs, remapped_inputs, post_inputs};
     UpdatePreprocessedOutputs(context, outputs, backend_id);
+#if GLYPH_NATIVE_TARGET_METRICS
+    end = native_before ? native_metrics::Now() : 0;
+    native_after = DiagnosticNativeGeneration();
+    if (native_before || native_after) native_metrics::RecordFrame(begin, end, native_before, native_after);
+#endif
 }
 
 void ControllerMode::UpdatePreprocessedOutputs(const ResolvedInputContext &context, OutputState &outputs, CommunicationBackendId backend_id) {

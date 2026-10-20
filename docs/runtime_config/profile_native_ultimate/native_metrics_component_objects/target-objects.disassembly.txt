@@ -1,0 +1,1845 @@
+
+/private/tmp/glyph-native-metrics-component-final/NativeTargetMetrics.cpp.o:     file format elf32-littlearm
+
+
+Disassembly of section .text._ZN14native_metrics12_GLOBAL__N_17PublishEjR21NativeMetricScanState:
+
+00000000 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)>:
+   0:	6a8b      	ldr	r3, [r1, #40]	@ 0x28
+   2:	b5f0      	push	{r4, r5, r6, r7, lr}
+   4:	1cda      	adds	r2, r3, #3
+   6:	d84f      	bhi.n	a8 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0xa8>
+   8:	1d1a      	adds	r2, r3, #4
+   a:	d041      	beq.n	90 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x90>
+   c:	68cc      	ldr	r4, [r1, #12]
+   e:	694a      	ldr	r2, [r1, #20]
+  10:	688f      	ldr	r7, [r1, #8]
+  12:	1c9d      	adds	r5, r3, #2
+  14:	42a2      	cmp	r2, r4
+  16:	d839      	bhi.n	8c <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x8c>
+  18:	690c      	ldr	r4, [r1, #16]
+  1a:	1aba      	subs	r2, r7, r2
+  1c:	1b3f      	subs	r7, r7, r4
+  1e:	0084      	lsls	r4, r0, #2
+  20:	1820      	adds	r0, r4, r0
+  22:	4c24      	ldr	r4, [pc, #144]	@ (b4 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0xb4>)
+  24:	f3bf 8f5b 	dmb	ish
+  28:	0080      	lsls	r0, r0, #2
+  2a:	1906      	adds	r6, r0, r4
+  2c:	3301      	adds	r3, #1
+  2e:	6033      	str	r3, [r6, #0]
+  30:	f3bf 8f5b 	dmb	ish
+  34:	f3bf 8f5b 	dmb	ish
+  38:	0412      	lsls	r2, r2, #16
+  3a:	1d23      	adds	r3, r4, #4
+  3c:	0c12      	lsrs	r2, r2, #16
+  3e:	043f      	lsls	r7, r7, #16
+  40:	18c3      	adds	r3, r0, r3
+  42:	433a      	orrs	r2, r7
+  44:	601a      	str	r2, [r3, #0]
+  46:	f3bf 8f5b 	dmb	ish
+  4a:	0023      	movs	r3, r4
+  4c:	f3bf 8f5b 	dmb	ish
+  50:	3308      	adds	r3, #8
+  52:	69ca      	ldr	r2, [r1, #28]
+  54:	18c3      	adds	r3, r0, r3
+  56:	601a      	str	r2, [r3, #0]
+  58:	f3bf 8f5b 	dmb	ish
+  5c:	0023      	movs	r3, r4
+  5e:	f3bf 8f5b 	dmb	ish
+  62:	330c      	adds	r3, #12
+  64:	6a0a      	ldr	r2, [r1, #32]
+  66:	18c3      	adds	r3, r0, r3
+  68:	601a      	str	r2, [r3, #0]
+  6a:	f3bf 8f5b 	dmb	ish
+  6e:	8c8b      	ldrh	r3, [r1, #36]	@ 0x24
+  70:	f3bf 8f5b 	dmb	ish
+  74:	3410      	adds	r4, #16
+  76:	1900      	adds	r0, r0, r4
+  78:	6003      	str	r3, [r0, #0]
+  7a:	f3bf 8f5b 	dmb	ish
+  7e:	f3bf 8f5b 	dmb	ish
+  82:	6035      	str	r5, [r6, #0]
+  84:	f3bf 8f5b 	dmb	ish
+  88:	628d      	str	r5, [r1, #40]	@ 0x28
+  8a:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  8c:	0022      	movs	r2, r4
+  8e:	e7c3      	b.n	18 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x18>
+  90:	2280      	movs	r2, #128	@ 0x80
+  92:	6a4c      	ldr	r4, [r1, #36]	@ 0x24
+  94:	0052      	lsls	r2, r2, #1
+  96:	4322      	orrs	r2, r4
+  98:	624a      	str	r2, [r1, #36]	@ 0x24
+  9a:	68cc      	ldr	r4, [r1, #12]
+  9c:	694a      	ldr	r2, [r1, #20]
+  9e:	688f      	ldr	r7, [r1, #8]
+  a0:	1c9d      	adds	r5, r3, #2
+  a2:	42a2      	cmp	r2, r4
+  a4:	d9b8      	bls.n	18 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x18>
+  a6:	e7f1      	b.n	8c <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x8c>
+  a8:	2380      	movs	r3, #128	@ 0x80
+  aa:	6a4a      	ldr	r2, [r1, #36]	@ 0x24
+  ac:	005b      	lsls	r3, r3, #1
+  ae:	4313      	orrs	r3, r2
+  b0:	624b      	str	r3, [r1, #36]	@ 0x24
+  b2:	e7ea      	b.n	8a <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x8a>
+  b4:	00000000 	.word	0x00000000
+			b4: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19mailboxesE
+
+Disassembly of section .text._ZN14native_metrics12_GLOBAL__N_111ReadMailboxEjPh:
+
+00000000 <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	0083      	lsls	r3, r0, #2
+   4:	1818      	adds	r0, r3, r0
+   6:	4b22      	ldr	r3, [pc, #136]	@ (90 <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)+0x90>)
+   8:	f3bf 8f5b 	dmb	ish
+   c:	0080      	lsls	r0, r0, #2
+   e:	18c5      	adds	r5, r0, r3
+  10:	682c      	ldr	r4, [r5, #0]
+  12:	f3bf 8f5b 	dmb	ish
+  16:	f3bf 8f5b 	dmb	ish
+  1a:	1d1a      	adds	r2, r3, #4
+  1c:	1882      	adds	r2, r0, r2
+  1e:	6816      	ldr	r6, [r2, #0]
+  20:	f3bf 8f5b 	dmb	ish
+  24:	001a      	movs	r2, r3
+  26:	f3bf 8f5b 	dmb	ish
+  2a:	3208      	adds	r2, #8
+  2c:	1882      	adds	r2, r0, r2
+  2e:	6817      	ldr	r7, [r2, #0]
+  30:	f3bf 8f5b 	dmb	ish
+  34:	001a      	movs	r2, r3
+  36:	f3bf 8f5b 	dmb	ish
+  3a:	320c      	adds	r2, #12
+  3c:	1882      	adds	r2, r0, r2
+  3e:	6812      	ldr	r2, [r2, #0]
+  40:	f3bf 8f5b 	dmb	ish
+  44:	f3bf 8f5b 	dmb	ish
+  48:	3310      	adds	r3, #16
+  4a:	18c0      	adds	r0, r0, r3
+  4c:	6800      	ldr	r0, [r0, #0]
+  4e:	f3bf 8f5b 	dmb	ish
+  52:	f3bf 8f5b 	dmb	ish
+  56:	682b      	ldr	r3, [r5, #0]
+  58:	f3bf 8f5b 	dmb	ish
+  5c:	2c00      	cmp	r4, #0
+  5e:	d011      	beq.n	84 <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)+0x84>
+  60:	07e5      	lsls	r5, r4, #31
+  62:	d40f      	bmi.n	84 <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)+0x84>
+  64:	42a3      	cmp	r3, r4
+  66:	d10d      	bne.n	84 <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)+0x84>
+  68:	2480      	movs	r4, #128	@ 0x80
+  6a:	34ff      	adds	r4, #255	@ 0xff
+  6c:	0a03      	lsrs	r3, r0, #8
+  6e:	608a      	str	r2, [r1, #8]
+  70:	b2c2      	uxtb	r2, r0
+  72:	4020      	ands	r0, r4
+  74:	381b      	subs	r0, #27
+  76:	4244      	negs	r4, r0
+  78:	4160      	adcs	r0, r4
+  7a:	600e      	str	r6, [r1, #0]
+  7c:	604f      	str	r7, [r1, #4]
+  7e:	b2db      	uxtb	r3, r3
+  80:	b2c0      	uxtb	r0, r0
+  82:	e002      	b.n	8a <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)+0x8a>
+  84:	2280      	movs	r2, #128	@ 0x80
+  86:	2300      	movs	r3, #0
+  88:	2000      	movs	r0, #0
+  8a:	730a      	strb	r2, [r1, #12]
+  8c:	734b      	strb	r3, [r1, #13]
+  8e:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  90:	00000000 	.word	0x00000000
+			90: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19mailboxesE
+
+Disassembly of section .text._ZN14native_metrics3NowEv:
+
+00000000 <native_metrics::Now()>:
+   0:	4b01      	ldr	r3, [pc, #4]	@ (8 <native_metrics::Now()+0x8>)
+   2:	6a98      	ldr	r0, [r3, #40]	@ 0x28
+   4:	4770      	bx	lr
+   6:	46c0      	nop			@ (mov r8, r8)
+   8:	40054000 	.word	0x40054000
+
+Disassembly of section .text._ZN14native_metrics9CalibrateEv:
+
+00000000 <native_metrics::Calibrate()>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	46de      	mov	lr, fp
+   4:	4657      	mov	r7, sl
+   6:	464e      	mov	r6, r9
+   8:	4645      	mov	r5, r8
+   a:	b5e0      	push	{r5, r6, r7, lr}
+   c:	4941      	ldr	r1, [pc, #260]	@ (114 <native_metrics::Calibrate()+0x114>)
+   e:	b087      	sub	sp, #28
+  10:	6a8c      	ldr	r4, [r1, #40]	@ 0x28
+  12:	2c00      	cmp	r4, #0
+  14:	d16c      	bne.n	f0 <native_metrics::Calibrate()+0xf0>
+  16:	4b40      	ldr	r3, [pc, #256]	@ (118 <native_metrics::Calibrate()+0x118>)
+  18:	2010      	movs	r0, #16
+  1a:	681a      	ldr	r2, [r3, #0]
+  1c:	469a      	mov	sl, r3
+  1e:	9200      	str	r2, [sp, #0]
+  20:	6aca      	ldr	r2, [r1, #44]	@ 0x2c
+  22:	4694      	mov	ip, r2
+  24:	6b0a      	ldr	r2, [r1, #48]	@ 0x30
+  26:	9201      	str	r2, [sp, #4]
+  28:	2200      	movs	r2, #0
+  2a:	4691      	mov	r9, r2
+  2c:	9205      	str	r2, [sp, #20]
+  2e:	9203      	str	r2, [sp, #12]
+  30:	9204      	str	r2, [sp, #16]
+  32:	3a01      	subs	r2, #1
+  34:	4690      	mov	r8, r2
+  36:	4b39      	ldr	r3, [pc, #228]	@ (11c <native_metrics::Calibrate()+0x11c>)
+  38:	6a9a      	ldr	r2, [r3, #40]	@ 0x28
+  3a:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+  3c:	1a9b      	subs	r3, r3, r2
+  3e:	469b      	mov	fp, r3
+  40:	2c00      	cmp	r4, #0
+  42:	d127      	bne.n	94 <native_metrics::Calibrate()+0x94>
+  44:	9b01      	ldr	r3, [sp, #4]
+  46:	455b      	cmp	r3, fp
+  48:	d359      	bcc.n	fe <native_metrics::Calibrate()+0xfe>
+  4a:	2301      	movs	r3, #1
+  4c:	46dc      	mov	ip, fp
+  4e:	9303      	str	r3, [sp, #12]
+  50:	2301      	movs	r3, #1
+  52:	3401      	adds	r4, #1
+  54:	9304      	str	r3, [sp, #16]
+  56:	6b4a      	ldr	r2, [r1, #52]	@ 0x34
+  58:	6b8b      	ldr	r3, [r1, #56]	@ 0x38
+  5a:	43d5      	mvns	r5, r2
+  5c:	2700      	movs	r7, #0
+  5e:	9502      	str	r5, [sp, #8]
+  60:	43dd      	mvns	r5, r3
+  62:	465e      	mov	r6, fp
+  64:	42af      	cmp	r7, r5
+  66:	d12a      	bne.n	be <native_metrics::Calibrate()+0xbe>
+  68:	9d02      	ldr	r5, [sp, #8]
+  6a:	42ae      	cmp	r6, r5
+  6c:	d927      	bls.n	be <native_metrics::Calibrate()+0xbe>
+  6e:	2220      	movs	r2, #32
+  70:	9b00      	ldr	r3, [sp, #0]
+  72:	3801      	subs	r0, #1
+  74:	4313      	orrs	r3, r2
+  76:	9300      	str	r3, [sp, #0]
+  78:	4643      	mov	r3, r8
+  7a:	634b      	str	r3, [r1, #52]	@ 0x34
+  7c:	638b      	str	r3, [r1, #56]	@ 0x38
+  7e:	2800      	cmp	r0, #0
+  80:	d044      	beq.n	10c <native_metrics::Calibrate()+0x10c>
+  82:	2301      	movs	r3, #1
+  84:	4699      	mov	r9, r3
+  86:	4b25      	ldr	r3, [pc, #148]	@ (11c <native_metrics::Calibrate()+0x11c>)
+  88:	6a9a      	ldr	r2, [r3, #40]	@ 0x28
+  8a:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+  8c:	1a9b      	subs	r3, r3, r2
+  8e:	469b      	mov	fp, r3
+  90:	2c00      	cmp	r4, #0
+  92:	d0d7      	beq.n	44 <native_metrics::Calibrate()+0x44>
+  94:	459c      	cmp	ip, r3
+  96:	d902      	bls.n	9e <native_metrics::Calibrate()+0x9e>
+  98:	469c      	mov	ip, r3
+  9a:	2301      	movs	r3, #1
+  9c:	9303      	str	r3, [sp, #12]
+  9e:	9b01      	ldr	r3, [sp, #4]
+  a0:	455b      	cmp	r3, fp
+  a2:	d203      	bcs.n	ac <native_metrics::Calibrate()+0xac>
+  a4:	465b      	mov	r3, fp
+  a6:	9301      	str	r3, [sp, #4]
+  a8:	2301      	movs	r3, #1
+  aa:	9305      	str	r3, [sp, #20]
+  ac:	1c63      	adds	r3, r4, #1
+  ae:	d1cf      	bne.n	50 <native_metrics::Calibrate()+0x50>
+  b0:	2210      	movs	r2, #16
+  b2:	9b00      	ldr	r3, [sp, #0]
+  b4:	4313      	orrs	r3, r2
+  b6:	9300      	str	r3, [sp, #0]
+  b8:	2301      	movs	r3, #1
+  ba:	4699      	mov	r9, r3
+  bc:	e7cb      	b.n	56 <native_metrics::Calibrate()+0x56>
+  be:	1992      	adds	r2, r2, r6
+  c0:	417b      	adcs	r3, r7
+  c2:	3801      	subs	r0, #1
+  c4:	634a      	str	r2, [r1, #52]	@ 0x34
+  c6:	638b      	str	r3, [r1, #56]	@ 0x38
+  c8:	2800      	cmp	r0, #0
+  ca:	d1b4      	bne.n	36 <native_metrics::Calibrate()+0x36>
+  cc:	464a      	mov	r2, r9
+  ce:	4653      	mov	r3, sl
+  d0:	2a00      	cmp	r2, #0
+  d2:	d11c      	bne.n	10e <native_metrics::Calibrate()+0x10e>
+  d4:	9b05      	ldr	r3, [sp, #20]
+  d6:	2b00      	cmp	r3, #0
+  d8:	d001      	beq.n	de <native_metrics::Calibrate()+0xde>
+  da:	9b01      	ldr	r3, [sp, #4]
+  dc:	630b      	str	r3, [r1, #48]	@ 0x30
+  de:	9b03      	ldr	r3, [sp, #12]
+  e0:	2b00      	cmp	r3, #0
+  e2:	d001      	beq.n	e8 <native_metrics::Calibrate()+0xe8>
+  e4:	4663      	mov	r3, ip
+  e6:	62cb      	str	r3, [r1, #44]	@ 0x2c
+  e8:	9b04      	ldr	r3, [sp, #16]
+  ea:	2b00      	cmp	r3, #0
+  ec:	d000      	beq.n	f0 <native_metrics::Calibrate()+0xf0>
+  ee:	628c      	str	r4, [r1, #40]	@ 0x28
+  f0:	b007      	add	sp, #28
+  f2:	bcf0      	pop	{r4, r5, r6, r7}
+  f4:	46bb      	mov	fp, r7
+  f6:	46b2      	mov	sl, r6
+  f8:	46a9      	mov	r9, r5
+  fa:	46a0      	mov	r8, r4
+  fc:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  fe:	465b      	mov	r3, fp
+ 100:	9301      	str	r3, [sp, #4]
+ 102:	2301      	movs	r3, #1
+ 104:	46dc      	mov	ip, fp
+ 106:	9305      	str	r3, [sp, #20]
+ 108:	9303      	str	r3, [sp, #12]
+ 10a:	e7a1      	b.n	50 <native_metrics::Calibrate()+0x50>
+ 10c:	4653      	mov	r3, sl
+ 10e:	9a00      	ldr	r2, [sp, #0]
+ 110:	601a      	str	r2, [r3, #0]
+ 112:	e7df      	b.n	d4 <native_metrics::Calibrate()+0xd4>
+	...
+			114: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_110statisticsE
+			118: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19run_flagsE
+ 11c:	40054000 	.word	0x40054000
+
+Disassembly of section .text._ZN14native_metrics11RecordFrameEmmmm:
+
+00000000 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	429a      	cmp	r2, r3
+   4:	d010      	beq.n	28 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x28>
+   6:	2380      	movs	r3, #128	@ 0x80
+   8:	4a2b      	ldr	r2, [pc, #172]	@ (b8 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xb8>)
+   a:	005b      	lsls	r3, r3, #1
+   c:	6810      	ldr	r0, [r2, #0]
+   e:	4303      	orrs	r3, r0
+  10:	2080      	movs	r0, #128	@ 0x80
+  12:	4303      	orrs	r3, r0
+  14:	6013      	str	r3, [r2, #0]
+  16:	4b29      	ldr	r3, [pc, #164]	@ (bc <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xbc>)
+  18:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+  1a:	1a59      	subs	r1, r3, r1
+  1c:	4b28      	ldr	r3, [pc, #160]	@ (c0 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xc0>)
+  1e:	681a      	ldr	r2, [r3, #0]
+  20:	4291      	cmp	r1, r2
+  22:	d900      	bls.n	26 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x26>
+  24:	6019      	str	r1, [r3, #0]
+  26:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  28:	2a00      	cmp	r2, #0
+  2a:	d00c      	beq.n	46 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x46>
+  2c:	4c25      	ldr	r4, [pc, #148]	@ (c4 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xc4>)
+  2e:	6823      	ldr	r3, [r4, #0]
+  30:	2b00      	cmp	r3, #0
+  32:	d00b      	beq.n	4c <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x4c>
+  34:	4293      	cmp	r3, r2
+  36:	d009      	beq.n	4c <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x4c>
+  38:	2380      	movs	r3, #128	@ 0x80
+  3a:	4a1f      	ldr	r2, [pc, #124]	@ (b8 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xb8>)
+  3c:	005b      	lsls	r3, r3, #1
+  3e:	6810      	ldr	r0, [r2, #0]
+  40:	4303      	orrs	r3, r0
+  42:	6013      	str	r3, [r2, #0]
+  44:	e7e7      	b.n	16 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x16>
+  46:	4a1c      	ldr	r2, [pc, #112]	@ (b8 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xb8>)
+  48:	6813      	ldr	r3, [r2, #0]
+  4a:	e7e1      	b.n	10 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x10>
+  4c:	4e1e      	ldr	r6, [pc, #120]	@ (c8 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xc8>)
+  4e:	6022      	str	r2, [r4, #0]
+  50:	6833      	ldr	r3, [r6, #0]
+  52:	68b2      	ldr	r2, [r6, #8]
+  54:	1a08      	subs	r0, r1, r0
+  56:	2b00      	cmp	r3, #0
+  58:	d11a      	bne.n	90 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x90>
+  5a:	6070      	str	r0, [r6, #4]
+  5c:	4290      	cmp	r0, r2
+  5e:	d900      	bls.n	62 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x62>
+  60:	60b0      	str	r0, [r6, #8]
+  62:	3301      	adds	r3, #1
+  64:	6033      	str	r3, [r6, #0]
+  66:	6933      	ldr	r3, [r6, #16]
+  68:	0004      	movs	r4, r0
+  6a:	2500      	movs	r5, #0
+  6c:	43d8      	mvns	r0, r3
+  6e:	68f2      	ldr	r2, [r6, #12]
+  70:	43d7      	mvns	r7, r2
+  72:	4285      	cmp	r5, r0
+  74:	d11b      	bne.n	ae <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xae>
+  76:	42bc      	cmp	r4, r7
+  78:	d919      	bls.n	ae <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xae>
+  7a:	2002      	movs	r0, #2
+  7c:	4a0e      	ldr	r2, [pc, #56]	@ (b8 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xb8>)
+  7e:	6813      	ldr	r3, [r2, #0]
+  80:	4303      	orrs	r3, r0
+  82:	6013      	str	r3, [r2, #0]
+  84:	2301      	movs	r3, #1
+  86:	425b      	negs	r3, r3
+  88:	0018      	movs	r0, r3
+  8a:	60f0      	str	r0, [r6, #12]
+  8c:	6133      	str	r3, [r6, #16]
+  8e:	e7c2      	b.n	16 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x16>
+  90:	6874      	ldr	r4, [r6, #4]
+  92:	42a0      	cmp	r0, r4
+  94:	d200      	bcs.n	98 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x98>
+  96:	6070      	str	r0, [r6, #4]
+  98:	4290      	cmp	r0, r2
+  9a:	d900      	bls.n	9e <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x9e>
+  9c:	60b0      	str	r0, [r6, #8]
+  9e:	1c5a      	adds	r2, r3, #1
+  a0:	d1df      	bne.n	62 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x62>
+  a2:	2401      	movs	r4, #1
+  a4:	4a04      	ldr	r2, [pc, #16]	@ (b8 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0xb8>)
+  a6:	6813      	ldr	r3, [r2, #0]
+  a8:	4323      	orrs	r3, r4
+  aa:	6013      	str	r3, [r2, #0]
+  ac:	e7db      	b.n	66 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x66>
+  ae:	1912      	adds	r2, r2, r4
+  b0:	416b      	adcs	r3, r5
+  b2:	0010      	movs	r0, r2
+  b4:	e7e9      	b.n	8a <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)+0x8a>
+  b6:	46c0      	nop			@ (mov r8, r8)
+  b8:	00000000 	.word	0x00000000
+			b8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19run_flagsE
+  bc:	40054000 	.word	0x40054000
+	...
+			c0: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18overheadE
+			c4: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_117native_generationE
+			c8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_110statisticsE
+
+Disassembly of section .text._ZN14native_metrics16RecordActivationEmmmbb:
+
+00000000 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	ac05      	add	r4, sp, #20
+   4:	7827      	ldrb	r7, [r4, #0]
+   6:	2b00      	cmp	r3, #0
+   8:	d001      	beq.n	e <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xe>
+   a:	2a00      	cmp	r2, #0
+   c:	d10e      	bne.n	2c <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x2c>
+   e:	2380      	movs	r3, #128	@ 0x80
+  10:	4a2d      	ldr	r2, [pc, #180]	@ (c8 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xc8>)
+  12:	009b      	lsls	r3, r3, #2
+  14:	6810      	ldr	r0, [r2, #0]
+  16:	4303      	orrs	r3, r0
+  18:	6013      	str	r3, [r2, #0]
+  1a:	4b2c      	ldr	r3, [pc, #176]	@ (cc <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xcc>)
+  1c:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+  1e:	1a59      	subs	r1, r3, r1
+  20:	4b2b      	ldr	r3, [pc, #172]	@ (d0 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xd0>)
+  22:	685a      	ldr	r2, [r3, #4]
+  24:	4291      	cmp	r1, r2
+  26:	d900      	bls.n	2a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x2a>
+  28:	6059      	str	r1, [r3, #4]
+  2a:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  2c:	4c29      	ldr	r4, [pc, #164]	@ (d4 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xd4>)
+  2e:	6823      	ldr	r3, [r4, #0]
+  30:	2b00      	cmp	r3, #0
+  32:	d008      	beq.n	46 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x46>
+  34:	4293      	cmp	r3, r2
+  36:	d006      	beq.n	46 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x46>
+  38:	2380      	movs	r3, #128	@ 0x80
+  3a:	4a23      	ldr	r2, [pc, #140]	@ (c8 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xc8>)
+  3c:	005b      	lsls	r3, r3, #1
+  3e:	6810      	ldr	r0, [r2, #0]
+  40:	4303      	orrs	r3, r0
+  42:	6013      	str	r3, [r2, #0]
+  44:	e7e9      	b.n	1a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x1a>
+  46:	4e24      	ldr	r6, [pc, #144]	@ (d8 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xd8>)
+  48:	6022      	str	r2, [r4, #0]
+  4a:	6973      	ldr	r3, [r6, #20]
+  4c:	69f2      	ldr	r2, [r6, #28]
+  4e:	1a08      	subs	r0, r1, r0
+  50:	2b00      	cmp	r3, #0
+  52:	d126      	bne.n	a2 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xa2>
+  54:	61b0      	str	r0, [r6, #24]
+  56:	4290      	cmp	r0, r2
+  58:	d833      	bhi.n	c2 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xc2>
+  5a:	3301      	adds	r3, #1
+  5c:	6173      	str	r3, [r6, #20]
+  5e:	6a34      	ldr	r4, [r6, #32]
+  60:	0002      	movs	r2, r0
+  62:	43e0      	mvns	r0, r4
+  64:	6a75      	ldr	r5, [r6, #36]	@ 0x24
+  66:	4684      	mov	ip, r0
+  68:	2300      	movs	r3, #0
+  6a:	43e8      	mvns	r0, r5
+  6c:	4283      	cmp	r3, r0
+  6e:	d101      	bne.n	74 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x74>
+  70:	4562      	cmp	r2, ip
+  72:	d80d      	bhi.n	90 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x90>
+  74:	1912      	adds	r2, r2, r4
+  76:	416b      	adcs	r3, r5
+  78:	0010      	movs	r0, r2
+  7a:	6230      	str	r0, [r6, #32]
+  7c:	6273      	str	r3, [r6, #36]	@ 0x24
+  7e:	2f00      	cmp	r7, #0
+  80:	d0cb      	beq.n	1a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x1a>
+  82:	2380      	movs	r3, #128	@ 0x80
+  84:	4a10      	ldr	r2, [pc, #64]	@ (c8 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xc8>)
+  86:	00db      	lsls	r3, r3, #3
+  88:	6810      	ldr	r0, [r2, #0]
+  8a:	4303      	orrs	r3, r0
+  8c:	6013      	str	r3, [r2, #0]
+  8e:	e7c4      	b.n	1a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x1a>
+  90:	2008      	movs	r0, #8
+  92:	4a0d      	ldr	r2, [pc, #52]	@ (c8 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xc8>)
+  94:	6813      	ldr	r3, [r2, #0]
+  96:	4303      	orrs	r3, r0
+  98:	6013      	str	r3, [r2, #0]
+  9a:	2301      	movs	r3, #1
+  9c:	425b      	negs	r3, r3
+  9e:	0018      	movs	r0, r3
+  a0:	e7eb      	b.n	7a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x7a>
+  a2:	69b4      	ldr	r4, [r6, #24]
+  a4:	42a0      	cmp	r0, r4
+  a6:	d200      	bcs.n	aa <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xaa>
+  a8:	61b0      	str	r0, [r6, #24]
+  aa:	4290      	cmp	r0, r2
+  ac:	d807      	bhi.n	be <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xbe>
+  ae:	1c5a      	adds	r2, r3, #1
+  b0:	d1d3      	bne.n	5a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x5a>
+  b2:	2404      	movs	r4, #4
+  b4:	4a04      	ldr	r2, [pc, #16]	@ (c8 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xc8>)
+  b6:	6813      	ldr	r3, [r2, #0]
+  b8:	4323      	orrs	r3, r4
+  ba:	6013      	str	r3, [r2, #0]
+  bc:	e7cf      	b.n	5e <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x5e>
+  be:	61f0      	str	r0, [r6, #28]
+  c0:	e7f5      	b.n	ae <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xae>
+  c2:	61f0      	str	r0, [r6, #28]
+  c4:	e7c9      	b.n	5a <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0x5a>
+  c6:	46c0      	nop			@ (mov r8, r8)
+  c8:	00000000 	.word	0x00000000
+			c8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19run_flagsE
+  cc:	40054000 	.word	0x40054000
+	...
+			d0: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18overheadE
+			d4: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_117native_generationE
+			d8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_110statisticsE
+
+Disassembly of section .text._ZN14native_metrics14RecordObserverEm:
+
+00000000 <native_metrics::RecordObserver(unsigned long)>:
+   0:	4b04      	ldr	r3, [pc, #16]	@ (14 <native_metrics::RecordObserver(unsigned long)+0x14>)
+   2:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+   4:	1a18      	subs	r0, r3, r0
+   6:	4b04      	ldr	r3, [pc, #16]	@ (18 <native_metrics::RecordObserver(unsigned long)+0x18>)
+   8:	689a      	ldr	r2, [r3, #8]
+   a:	4290      	cmp	r0, r2
+   c:	d900      	bls.n	10 <native_metrics::RecordObserver(unsigned long)+0x10>
+   e:	6098      	str	r0, [r3, #8]
+  10:	4770      	bx	lr
+  12:	46c0      	nop			@ (mov r8, r8)
+  14:	40054000 	.word	0x40054000
+  18:	00000000 	.word	0x00000000
+			18: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18overheadE
+
+Disassembly of section .text._ZN14native_metrics11ServiceCoreEj:
+
+00000000 <native_metrics::ServiceCore(unsigned int)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	46de      	mov	lr, fp
+   4:	4657      	mov	r7, sl
+   6:	464e      	mov	r6, r9
+   8:	4645      	mov	r5, r8
+   a:	b5e0      	push	{r5, r6, r7, lr}
+   c:	0004      	movs	r4, r0
+   e:	b083      	sub	sp, #12
+  10:	2801      	cmp	r0, #1
+  12:	d838      	bhi.n	86 <native_metrics::ServiceCore(unsigned int)+0x86>
+  14:	2205      	movs	r2, #5
+  16:	0046      	lsls	r6, r0, #1
+  18:	4d5a      	ldr	r5, [pc, #360]	@ (184 <native_metrics::ServiceCore(unsigned int)+0x184>)
+  1a:	1831      	adds	r1, r6, r0
+  1c:	4b5a      	ldr	r3, [pc, #360]	@ (188 <native_metrics::ServiceCore(unsigned int)+0x188>)
+  1e:	0109      	lsls	r1, r1, #4
+  20:	1869      	adds	r1, r5, r1
+  22:	6a9f      	ldr	r7, [r3, #40]	@ 0x28
+  24:	6a4b      	ldr	r3, [r1, #36]	@ 0x24
+  26:	401a      	ands	r2, r3
+  28:	2a01      	cmp	r2, #1
+  2a:	d13e      	bne.n	aa <native_metrics::ServiceCore(unsigned int)+0xaa>
+  2c:	f3ef 8b10 	mrs	fp, PRIMASK
+  30:	b672      	cpsid	i
+  32:	466a      	mov	r2, sp
+  34:	0750      	lsls	r0, r2, #29
+  36:	d02d      	beq.n	94 <native_metrics::ServiceCore(unsigned int)+0x94>
+  38:	2020      	movs	r0, #32
+  3a:	1932      	adds	r2, r6, r4
+  3c:	0112      	lsls	r2, r2, #4
+  3e:	18aa      	adds	r2, r5, r2
+  40:	4303      	orrs	r3, r0
+  42:	6253      	str	r3, [r2, #36]	@ 0x24
+  44:	1933      	adds	r3, r6, r4
+  46:	011b      	lsls	r3, r3, #4
+  48:	58ea      	ldr	r2, [r5, r3]
+  4a:	2020      	movs	r0, #32
+  4c:	4694      	mov	ip, r2
+  4e:	18eb      	adds	r3, r5, r3
+  50:	685a      	ldr	r2, [r3, #4]
+  52:	4460      	add	r0, ip
+  54:	4290      	cmp	r0, r2
+  56:	d02e      	beq.n	b6 <native_metrics::ServiceCore(unsigned int)+0xb6>
+  58:	2004      	movs	r0, #4
+  5a:	1933      	adds	r3, r6, r4
+  5c:	011b      	lsls	r3, r3, #4
+  5e:	18eb      	adds	r3, r5, r3
+  60:	6a5a      	ldr	r2, [r3, #36]	@ 0x24
+  62:	4302      	orrs	r2, r0
+  64:	625a      	str	r2, [r3, #36]	@ 0x24
+  66:	f38b 8810 	msr	PRIMASK, fp
+  6a:	0020      	movs	r0, r4
+  6c:	f7ff fffe 	bl	0 <native_metrics::ServiceCore(unsigned int)>
+			6c: R_ARM_THM_CALL	native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)
+  70:	1936      	adds	r6, r6, r4
+  72:	4b45      	ldr	r3, [pc, #276]	@ (188 <native_metrics::ServiceCore(unsigned int)+0x188>)
+  74:	0136      	lsls	r6, r6, #4
+  76:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+  78:	19ad      	adds	r5, r5, r6
+  7a:	6a2a      	ldr	r2, [r5, #32]
+  7c:	1bdb      	subs	r3, r3, r7
+  7e:	62eb      	str	r3, [r5, #44]	@ 0x2c
+  80:	4293      	cmp	r3, r2
+  82:	d900      	bls.n	86 <native_metrics::ServiceCore(unsigned int)+0x86>
+  84:	622b      	str	r3, [r5, #32]
+  86:	b003      	add	sp, #12
+  88:	bcf0      	pop	{r4, r5, r6, r7}
+  8a:	46bb      	mov	fp, r7
+  8c:	46b2      	mov	sl, r6
+  8e:	46a9      	mov	r9, r5
+  90:	46a0      	mov	r8, r4
+  92:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  94:	6848      	ldr	r0, [r1, #4]
+  96:	4290      	cmp	r0, r2
+  98:	d8ce      	bhi.n	38 <native_metrics::ServiceCore(unsigned int)+0x38>
+  9a:	6888      	ldr	r0, [r1, #8]
+  9c:	4290      	cmp	r0, r2
+  9e:	d3cb      	bcc.n	38 <native_metrics::ServiceCore(unsigned int)+0x38>
+  a0:	690b      	ldr	r3, [r1, #16]
+  a2:	4293      	cmp	r3, r2
+  a4:	d9ce      	bls.n	44 <native_metrics::ServiceCore(unsigned int)+0x44>
+  a6:	610a      	str	r2, [r1, #16]
+  a8:	e7cc      	b.n	44 <native_metrics::ServiceCore(unsigned int)+0x44>
+  aa:	2204      	movs	r2, #4
+  ac:	4313      	orrs	r3, r2
+  ae:	624b      	str	r3, [r1, #36]	@ 0x24
+  b0:	f7ff fffe 	bl	0 <native_metrics::ServiceCore(unsigned int)>
+			b0: R_ARM_THM_CALL	native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)
+  b4:	e7e7      	b.n	86 <native_metrics::ServiceCore(unsigned int)+0x86>
+  b6:	6898      	ldr	r0, [r3, #8]
+  b8:	4680      	mov	r8, r0
+  ba:	4834      	ldr	r0, [pc, #208]	@ (18c <native_metrics::ServiceCore(unsigned int)+0x18c>)
+  bc:	4440      	add	r0, r8
+  be:	4560      	cmp	r0, ip
+  c0:	d1ca      	bne.n	58 <native_metrics::ServiceCore(unsigned int)+0x58>
+  c2:	6998      	ldr	r0, [r3, #24]
+  c4:	4684      	mov	ip, r0
+  c6:	0780      	lsls	r0, r0, #30
+  c8:	d1c6      	bne.n	58 <native_metrics::ServiceCore(unsigned int)+0x58>
+  ca:	4562      	cmp	r2, ip
+  cc:	d8c4      	bhi.n	58 <native_metrics::ServiceCore(unsigned int)+0x58>
+  ce:	45e0      	cmp	r8, ip
+  d0:	d3c2      	bcc.n	58 <native_metrics::ServiceCore(unsigned int)+0x58>
+  d2:	2040      	movs	r0, #64	@ 0x40
+  d4:	4460      	add	r0, ip
+  d6:	4682      	mov	sl, r0
+  d8:	482d      	ldr	r0, [pc, #180]	@ (190 <native_metrics::ServiceCore(unsigned int)+0x190>)
+  da:	9700      	str	r7, [sp, #0]
+  dc:	4681      	mov	r9, r0
+  de:	4658      	mov	r0, fp
+  e0:	0027      	movs	r7, r4
+  e2:	9001      	str	r0, [sp, #4]
+  e4:	46ab      	mov	fp, r5
+  e6:	0015      	movs	r5, r2
+  e8:	001a      	movs	r2, r3
+  ea:	4663      	mov	r3, ip
+  ec:	468c      	mov	ip, r1
+  ee:	9901      	ldr	r1, [sp, #4]
+  f0:	4640      	mov	r0, r8
+  f2:	4654      	mov	r4, sl
+  f4:	4688      	mov	r8, r1
+  f6:	46ba      	mov	sl, r7
+  f8:	4298      	cmp	r0, r3
+  fa:	d910      	bls.n	11e <native_metrics::ServiceCore(unsigned int)+0x11e>
+  fc:	6819      	ldr	r1, [r3, #0]
+  fe:	4549      	cmp	r1, r9
+ 100:	d009      	beq.n	116 <native_metrics::ServiceCore(unsigned int)+0x116>
+ 102:	6951      	ldr	r1, [r2, #20]
+ 104:	4299      	cmp	r1, r3
+ 106:	d900      	bls.n	10a <native_metrics::ServiceCore(unsigned int)+0x10a>
+ 108:	6153      	str	r3, [r2, #20]
+ 10a:	429d      	cmp	r5, r3
+ 10c:	d103      	bne.n	116 <native_metrics::ServiceCore(unsigned int)+0x116>
+ 10e:	2740      	movs	r7, #64	@ 0x40
+ 110:	6a51      	ldr	r1, [r2, #36]	@ 0x24
+ 112:	4339      	orrs	r1, r7
+ 114:	6251      	str	r1, [r2, #36]	@ 0x24
+ 116:	3304      	adds	r3, #4
+ 118:	6193      	str	r3, [r2, #24]
+ 11a:	42a3      	cmp	r3, r4
+ 11c:	d1ec      	bne.n	f8 <native_metrics::ServiceCore(unsigned int)+0xf8>
+ 11e:	4661      	mov	r1, ip
+ 120:	469c      	mov	ip, r3
+ 122:	002a      	movs	r2, r5
+ 124:	4654      	mov	r4, sl
+ 126:	465d      	mov	r5, fp
+ 128:	9f00      	ldr	r7, [sp, #0]
+ 12a:	46c3      	mov	fp, r8
+ 12c:	4560      	cmp	r0, ip
+ 12e:	d19a      	bne.n	66 <native_metrics::ServiceCore(unsigned int)+0x66>
+ 130:	1933      	adds	r3, r6, r4
+ 132:	011b      	lsls	r3, r3, #4
+ 134:	4699      	mov	r9, r3
+ 136:	44a9      	add	r9, r5
+ 138:	464b      	mov	r3, r9
+ 13a:	6a58      	ldr	r0, [r3, #36]	@ 0x24
+ 13c:	4680      	mov	r8, r0
+ 13e:	2002      	movs	r0, #2
+ 140:	4643      	mov	r3, r8
+ 142:	4318      	orrs	r0, r3
+ 144:	0003      	movs	r3, r0
+ 146:	4648      	mov	r0, r9
+ 148:	6243      	str	r3, [r0, #36]	@ 0x24
+ 14a:	69c3      	ldr	r3, [r0, #28]
+ 14c:	469c      	mov	ip, r3
+ 14e:	3301      	adds	r3, #1
+ 150:	d009      	beq.n	166 <native_metrics::ServiceCore(unsigned int)+0x166>
+ 152:	2301      	movs	r3, #1
+ 154:	4698      	mov	r8, r3
+ 156:	44c4      	add	ip, r8
+ 158:	4663      	mov	r3, ip
+ 15a:	61c3      	str	r3, [r0, #28]
+ 15c:	1933      	adds	r3, r6, r4
+ 15e:	011b      	lsls	r3, r3, #4
+ 160:	18eb      	adds	r3, r5, r3
+ 162:	619a      	str	r2, [r3, #24]
+ 164:	e77f      	b.n	66 <native_metrics::ServiceCore(unsigned int)+0x66>
+ 166:	2081      	movs	r0, #129	@ 0x81
+ 168:	2330      	movs	r3, #48	@ 0x30
+ 16a:	0040      	lsls	r0, r0, #1
+ 16c:	4684      	mov	ip, r0
+ 16e:	4363      	muls	r3, r4
+ 170:	4640      	mov	r0, r8
+ 172:	4699      	mov	r9, r3
+ 174:	4663      	mov	r3, ip
+ 176:	44a9      	add	r9, r5
+ 178:	4318      	orrs	r0, r3
+ 17a:	0003      	movs	r3, r0
+ 17c:	4648      	mov	r0, r9
+ 17e:	6243      	str	r3, [r0, #36]	@ 0x24
+ 180:	e7ec      	b.n	15c <native_metrics::ServiceCore(unsigned int)+0x15c>
+ 182:	46c0      	nop			@ (mov r8, r8)
+ 184:	00000000 	.word	0x00000000
+			184: R_ARM_ABS32	glyph_native_metric_scans
+ 188:	40054000 	.word	0x40054000
+ 18c:	fffff800 	.word	0xfffff800
+ 190:	ade175c3 	.word	0xade175c3
+
+Disassembly of section .text._ZN14native_metrics13ExpireRequestEm:
+
+00000000 <native_metrics::ExpireRequest(unsigned long)>:
+   0:	4b05      	ldr	r3, [pc, #20]	@ (18 <native_metrics::ExpireRequest(unsigned long)+0x18>)
+   2:	7d1a      	ldrb	r2, [r3, #20]
+   4:	2a00      	cmp	r2, #0
+   6:	d005      	beq.n	14 <native_metrics::ExpireRequest(unsigned long)+0x14>
+   8:	691a      	ldr	r2, [r3, #16]
+   a:	1a80      	subs	r0, r0, r2
+   c:	28f9      	cmp	r0, #249	@ 0xf9
+   e:	d901      	bls.n	14 <native_metrics::ExpireRequest(unsigned long)+0x14>
+  10:	2200      	movs	r2, #0
+  12:	829a      	strh	r2, [r3, #20]
+  14:	4770      	bx	lr
+  16:	46c0      	nop			@ (mov r8, r8)
+  18:	00000000 	.word	0x00000000
+			18: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_12rxE
+
+Disassembly of section .text._ZN14native_metrics14DiscardRequestEv:
+
+00000000 <native_metrics::DiscardRequest()>:
+   0:	2200      	movs	r2, #0
+   2:	4b01      	ldr	r3, [pc, #4]	@ (8 <native_metrics::DiscardRequest()+0x8>)
+   4:	829a      	strh	r2, [r3, #20]
+   6:	4770      	bx	lr
+   8:	00000000 	.word	0x00000000
+			8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_12rxE
+
+Disassembly of section .text._ZN14native_metrics14ConsumeRequestEhmRb:
+
+00000000 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)>:
+   0:	b530      	push	{r4, r5, lr}
+   2:	4d3d      	ldr	r5, [pc, #244]	@ (f8 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xf8>)
+   4:	7d2b      	ldrb	r3, [r5, #20]
+   6:	2b00      	cmp	r3, #0
+   8:	d00e      	beq.n	28 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x28>
+   a:	692c      	ldr	r4, [r5, #16]
+   c:	1b0c      	subs	r4, r1, r4
+   e:	2cf9      	cmp	r4, #249	@ 0xf9
+  10:	d917      	bls.n	42 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x42>
+  12:	2300      	movs	r3, #0
+  14:	756b      	strb	r3, [r5, #21]
+  16:	28d7      	cmp	r0, #215	@ 0xd7
+  18:	d056      	beq.n	c8 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xc8>
+  1a:	38d7      	subs	r0, #215	@ 0xd7
+  1c:	4243      	negs	r3, r0
+  1e:	4158      	adcs	r0, r3
+  20:	b2c0      	uxtb	r0, r0
+  22:	7528      	strb	r0, [r5, #20]
+  24:	6129      	str	r1, [r5, #16]
+  26:	bd30      	pop	{r4, r5, pc}
+  28:	7d6a      	ldrb	r2, [r5, #21]
+  2a:	2a02      	cmp	r2, #2
+  2c:	d1f3      	bne.n	16 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x16>
+  2e:	4a33      	ldr	r2, [pc, #204]	@ (fc <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xfc>)
+  30:	5cd2      	ldrb	r2, [r2, r3]
+  32:	4282      	cmp	r2, r0
+  34:	d044      	beq.n	c0 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xc0>
+  36:	38d7      	subs	r0, #215	@ 0xd7
+  38:	4243      	negs	r3, r0
+  3a:	4158      	adcs	r0, r3
+  3c:	b2c0      	uxtb	r0, r0
+  3e:	7528      	strb	r0, [r5, #20]
+  40:	e7f1      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  42:	7d6c      	ldrb	r4, [r5, #21]
+  44:	2c02      	cmp	r4, #2
+  46:	d009      	beq.n	5c <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x5c>
+  48:	2b03      	cmp	r3, #3
+  4a:	d943      	bls.n	d4 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xd4>
+  4c:	1c59      	adds	r1, r3, #1
+  4e:	b2c9      	uxtb	r1, r1
+  50:	7529      	strb	r1, [r5, #20]
+  52:	54e8      	strb	r0, [r5, r3]
+  54:	2910      	cmp	r1, #16
+  56:	d00d      	beq.n	74 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x74>
+  58:	2001      	movs	r0, #1
+  5a:	e7e4      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  5c:	2b03      	cmp	r3, #3
+  5e:	d9e6      	bls.n	2e <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x2e>
+  60:	3301      	adds	r3, #1
+  62:	b2db      	uxtb	r3, r3
+  64:	2b10      	cmp	r3, #16
+  66:	d143      	bne.n	f0 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xf0>
+  68:	2300      	movs	r3, #0
+  6a:	752b      	strb	r3, [r5, #20]
+  6c:	3301      	adds	r3, #1
+  6e:	2001      	movs	r0, #1
+  70:	7013      	strb	r3, [r2, #0]
+  72:	e7d8      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  74:	2300      	movs	r3, #0
+  76:	82ab      	strh	r3, [r5, #20]
+  78:	2302      	movs	r3, #2
+  7a:	88a9      	ldrh	r1, [r5, #4]
+  7c:	33ff      	adds	r3, #255	@ 0xff
+  7e:	4299      	cmp	r1, r3
+  80:	d1ea      	bne.n	58 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x58>
+  82:	88eb      	ldrh	r3, [r5, #6]
+  84:	2b10      	cmp	r3, #16
+  86:	d1e7      	bne.n	58 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x58>
+  88:	7a69      	ldrb	r1, [r5, #9]
+  8a:	7aab      	ldrb	r3, [r5, #10]
+  8c:	0209      	lsls	r1, r1, #8
+  8e:	041b      	lsls	r3, r3, #16
+  90:	4319      	orrs	r1, r3
+  92:	7a2b      	ldrb	r3, [r5, #8]
+  94:	7b28      	ldrb	r0, [r5, #12]
+  96:	4319      	orrs	r1, r3
+  98:	7aeb      	ldrb	r3, [r5, #11]
+  9a:	061b      	lsls	r3, r3, #24
+  9c:	430b      	orrs	r3, r1
+  9e:	7b69      	ldrb	r1, [r5, #13]
+  a0:	0209      	lsls	r1, r1, #8
+  a2:	4301      	orrs	r1, r0
+  a4:	7ba8      	ldrb	r0, [r5, #14]
+  a6:	0400      	lsls	r0, r0, #16
+  a8:	4308      	orrs	r0, r1
+  aa:	7be9      	ldrb	r1, [r5, #15]
+  ac:	0609      	lsls	r1, r1, #24
+  ae:	4301      	orrs	r1, r0
+  b0:	430b      	orrs	r3, r1
+  b2:	d0d1      	beq.n	58 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x58>
+  b4:	2302      	movs	r3, #2
+  b6:	756b      	strb	r3, [r5, #21]
+  b8:	3b01      	subs	r3, #1
+  ba:	2001      	movs	r0, #1
+  bc:	7013      	strb	r3, [r2, #0]
+  be:	e7b2      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  c0:	3301      	adds	r3, #1
+  c2:	2001      	movs	r0, #1
+  c4:	752b      	strb	r3, [r5, #20]
+  c6:	e7ae      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  c8:	2301      	movs	r3, #1
+  ca:	7028      	strb	r0, [r5, #0]
+  cc:	6129      	str	r1, [r5, #16]
+  ce:	2001      	movs	r0, #1
+  d0:	752b      	strb	r3, [r5, #20]
+  d2:	e7a8      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  d4:	4a09      	ldr	r2, [pc, #36]	@ (fc <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0xfc>)
+  d6:	5cd4      	ldrb	r4, [r2, r3]
+  d8:	4284      	cmp	r4, r0
+  da:	d19e      	bne.n	1a <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x1a>
+  dc:	1c5a      	adds	r2, r3, #1
+  de:	b2d2      	uxtb	r2, r2
+  e0:	752a      	strb	r2, [r5, #20]
+  e2:	54ec      	strb	r4, [r5, r3]
+  e4:	2a04      	cmp	r2, #4
+  e6:	d1b7      	bne.n	58 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x58>
+  e8:	2301      	movs	r3, #1
+  ea:	2001      	movs	r0, #1
+  ec:	756b      	strb	r3, [r5, #21]
+  ee:	e79a      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  f0:	2001      	movs	r0, #1
+  f2:	752b      	strb	r3, [r5, #20]
+  f4:	e797      	b.n	26 <native_metrics::ConsumeRequest(unsigned char, unsigned long, bool&)+0x26>
+  f6:	46c0      	nop			@ (mov r8, r8)
+	...
+			f8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_12rxE
+			fc: R_ARM_ABS32	.rodata._ZN14native_metricsL6kMagicE
+
+Disassembly of section .text._ZN14native_metrics10CanRespondEm:
+
+00000000 <native_metrics::CanRespond(unsigned long)>:
+   0:	2180      	movs	r1, #128	@ 0x80
+   2:	4b0d      	ldr	r3, [pc, #52]	@ (38 <native_metrics::CanRespond(unsigned long)+0x38>)
+   4:	0002      	movs	r2, r0
+   6:	8a9b      	ldrh	r3, [r3, #20]
+   8:	2000      	movs	r0, #0
+   a:	0089      	lsls	r1, r1, #2
+   c:	428b      	cmp	r3, r1
+   e:	d000      	beq.n	12 <native_metrics::CanRespond(unsigned long)+0x12>
+  10:	4770      	bx	lr
+  12:	4b0a      	ldr	r3, [pc, #40]	@ (3c <native_metrics::CanRespond(unsigned long)+0x3c>)
+  14:	3001      	adds	r0, #1
+  16:	681b      	ldr	r3, [r3, #0]
+  18:	2b00      	cmp	r3, #0
+  1a:	d0f9      	beq.n	10 <native_metrics::CanRespond(unsigned long)+0x10>
+  1c:	4908      	ldr	r1, [pc, #32]	@ (40 <native_metrics::CanRespond(unsigned long)+0x40>)
+  1e:	2000      	movs	r0, #0
+  20:	6809      	ldr	r1, [r1, #0]
+  22:	1a52      	subs	r2, r2, r1
+  24:	21fa      	movs	r1, #250	@ 0xfa
+  26:	0089      	lsls	r1, r1, #2
+  28:	428a      	cmp	r2, r1
+  2a:	d3f1      	bcc.n	10 <native_metrics::CanRespond(unsigned long)+0x10>
+  2c:	3301      	adds	r3, #1
+  2e:	1e5a      	subs	r2, r3, #1
+  30:	4193      	sbcs	r3, r2
+  32:	b2d8      	uxtb	r0, r3
+  34:	e7ec      	b.n	10 <native_metrics::CanRespond(unsigned long)+0x10>
+  36:	46c0      	nop			@ (mov r8, r8)
+	...
+			38: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_12rxE
+			3c: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_116capture_sequenceE
+			40: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_110last_tx_msE
+
+Disassembly of section .text._ZN14native_metrics8SnapshotEmm:
+
+00000000 <native_metrics::Snapshot(unsigned long, unsigned long)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	464e      	mov	r6, r9
+   4:	4657      	mov	r7, sl
+   6:	46de      	mov	lr, fp
+   8:	4645      	mov	r5, r8
+   a:	b5e0      	push	{r5, r6, r7, lr}
+   c:	4ba6      	ldr	r3, [pc, #664]	@ (2a8 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2a8>)
+   e:	b089      	sub	sp, #36	@ 0x24
+  10:	681a      	ldr	r2, [r3, #0]
+  12:	4ba6      	ldr	r3, [pc, #664]	@ (2ac <native_metrics::Snapshot(unsigned long, unsigned long)+0x2ac>)
+  14:	468a      	mov	sl, r1
+  16:	4699      	mov	r9, r3
+  18:	681e      	ldr	r6, [r3, #0]
+  1a:	9202      	str	r2, [sp, #8]
+  1c:	1c93      	adds	r3, r2, #2
+  1e:	d104      	bne.n	2a <native_metrics::Snapshot(unsigned long, unsigned long)+0x2a>
+  20:	2380      	movs	r3, #128	@ 0x80
+  22:	015b      	lsls	r3, r3, #5
+  24:	431e      	orrs	r6, r3
+  26:	464b      	mov	r3, r9
+  28:	601e      	str	r6, [r3, #0]
+  2a:	48a1      	ldr	r0, [pc, #644]	@ (2b0 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2b0>)
+  2c:	229a      	movs	r2, #154	@ 0x9a
+  2e:	0004      	movs	r4, r0
+  30:	2100      	movs	r1, #0
+  32:	f7ff fffe 	bl	0 <memset>
+			32: R_ARM_THM_CALL	memset
+  36:	4b9f      	ldr	r3, [pc, #636]	@ (2b4 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2b4>)
+  38:	1fa0      	subs	r0, r4, #6
+  3a:	6003      	str	r3, [r0, #0]
+  3c:	4b9e      	ldr	r3, [pc, #632]	@ (2b8 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2b8>)
+  3e:	4a9f      	ldr	r2, [pc, #636]	@ (2bc <native_metrics::Snapshot(unsigned long, unsigned long)+0x2bc>)
+  40:	8083      	strh	r3, [r0, #4]
+  42:	23a0      	movs	r3, #160	@ 0xa0
+  44:	7a91      	ldrb	r1, [r2, #10]
+  46:	7023      	strb	r3, [r4, #0]
+  48:	7a53      	ldrb	r3, [r2, #9]
+  4a:	0409      	lsls	r1, r1, #16
+  4c:	021b      	lsls	r3, r3, #8
+  4e:	430b      	orrs	r3, r1
+  50:	7a11      	ldrb	r1, [r2, #8]
+  52:	7b54      	ldrb	r4, [r2, #13]
+  54:	430b      	orrs	r3, r1
+  56:	7ad1      	ldrb	r1, [r2, #11]
+  58:	0224      	lsls	r4, r4, #8
+  5a:	0609      	lsls	r1, r1, #24
+  5c:	4319      	orrs	r1, r3
+  5e:	7b13      	ldrb	r3, [r2, #12]
+  60:	6081      	str	r1, [r0, #8]
+  62:	431c      	orrs	r4, r3
+  64:	7b93      	ldrb	r3, [r2, #14]
+  66:	21ff      	movs	r1, #255	@ 0xff
+  68:	041b      	lsls	r3, r3, #16
+  6a:	4323      	orrs	r3, r4
+  6c:	24ff      	movs	r4, #255	@ 0xff
+  6e:	7bd2      	ldrb	r2, [r2, #15]
+  70:	0224      	lsls	r4, r4, #8
+  72:	0612      	lsls	r2, r2, #24
+  74:	431a      	orrs	r2, r3
+  76:	4014      	ands	r4, r2
+  78:	b2db      	uxtb	r3, r3
+  7a:	0409      	lsls	r1, r1, #16
+  7c:	4011      	ands	r1, r2
+  7e:	4323      	orrs	r3, r4
+  80:	0e12      	lsrs	r2, r2, #24
+  82:	0612      	lsls	r2, r2, #24
+  84:	430b      	orrs	r3, r1
+  86:	4313      	orrs	r3, r2
+  88:	60c3      	str	r3, [r0, #12]
+  8a:	2302      	movs	r3, #2
+  8c:	4d8c      	ldr	r5, [pc, #560]	@ (2c0 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2c0>)
+  8e:	7443      	strb	r3, [r0, #17]
+  90:	682b      	ldr	r3, [r5, #0]
+  92:	2b00      	cmp	r3, #0
+  94:	d000      	beq.n	98 <native_metrics::Snapshot(unsigned long, unsigned long)+0x98>
+  96:	e0db      	b.n	250 <native_metrics::Snapshot(unsigned long, unsigned long)+0x250>
+  98:	3383      	adds	r3, #131	@ 0x83
+  9a:	22c0      	movs	r2, #192	@ 0xc0
+  9c:	33ff      	adds	r3, #255	@ 0xff
+  9e:	4698      	mov	r8, r3
+  a0:	0052      	lsls	r2, r2, #1
+  a2:	696b      	ldr	r3, [r5, #20]
+  a4:	2b00      	cmp	r3, #0
+  a6:	d100      	bne.n	aa <native_metrics::Snapshot(unsigned long, unsigned long)+0xaa>
+  a8:	4690      	mov	r8, r2
+  aa:	6aab      	ldr	r3, [r5, #40]	@ 0x28
+  ac:	2b10      	cmp	r3, #16
+  ae:	d100      	bne.n	b2 <native_metrics::Snapshot(unsigned long, unsigned long)+0xb2>
+  b0:	e0df      	b.n	272 <native_metrics::Snapshot(unsigned long, unsigned long)+0x272>
+  b2:	2380      	movs	r3, #128	@ 0x80
+  b4:	011b      	lsls	r3, r3, #4
+  b6:	431e      	orrs	r6, r3
+  b8:	464b      	mov	r3, r9
+  ba:	601e      	str	r6, [r3, #0]
+  bc:	2000      	movs	r0, #0
+  be:	4981      	ldr	r1, [pc, #516]	@ (2c4 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2c4>)
+  c0:	f7ff fffe 	bl	0 <native_metrics::Snapshot(unsigned long, unsigned long)>
+			c0: R_ARM_THM_CALL	native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)
+  c4:	2800      	cmp	r0, #0
+  c6:	d004      	beq.n	d2 <native_metrics::Snapshot(unsigned long, unsigned long)+0xd2>
+  c8:	2308      	movs	r3, #8
+  ca:	4642      	mov	r2, r8
+  cc:	431a      	orrs	r2, r3
+  ce:	b293      	uxth	r3, r2
+  d0:	4698      	mov	r8, r3
+  d2:	2001      	movs	r0, #1
+  d4:	497c      	ldr	r1, [pc, #496]	@ (2c8 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2c8>)
+  d6:	f7ff fffe 	bl	0 <native_metrics::Snapshot(unsigned long, unsigned long)>
+			d6: R_ARM_THM_CALL	native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)
+  da:	2800      	cmp	r0, #0
+  dc:	d004      	beq.n	e8 <native_metrics::Snapshot(unsigned long, unsigned long)+0xe8>
+  de:	2310      	movs	r3, #16
+  e0:	4642      	mov	r2, r8
+  e2:	431a      	orrs	r2, r3
+  e4:	b293      	uxth	r3, r2
+  e6:	4698      	mov	r8, r3
+  e8:	2379      	movs	r3, #121	@ 0x79
+  ea:	2278      	movs	r2, #120	@ 0x78
+  ec:	4c77      	ldr	r4, [pc, #476]	@ (2cc <native_metrics::Snapshot(unsigned long, unsigned long)+0x2cc>)
+  ee:	5ce3      	ldrb	r3, [r4, r3]
+  f0:	5ca2      	ldrb	r2, [r4, r2]
+  f2:	021b      	lsls	r3, r3, #8
+  f4:	4313      	orrs	r3, r2
+  f6:	22b2      	movs	r2, #178	@ 0xb2
+  f8:	0052      	lsls	r2, r2, #1
+  fa:	4013      	ands	r3, r2
+  fc:	1e59      	subs	r1, r3, #1
+  fe:	418b      	sbcs	r3, r1
+ 100:	b2db      	uxtb	r3, r3
+ 102:	9300      	str	r3, [sp, #0]
+ 104:	2389      	movs	r3, #137	@ 0x89
+ 106:	2188      	movs	r1, #136	@ 0x88
+ 108:	5ce3      	ldrb	r3, [r4, r3]
+ 10a:	5c61      	ldrb	r1, [r4, r1]
+ 10c:	021b      	lsls	r3, r3, #8
+ 10e:	430b      	orrs	r3, r1
+ 110:	4213      	tst	r3, r2
+ 112:	d001      	beq.n	118 <native_metrics::Snapshot(unsigned long, unsigned long)+0x118>
+ 114:	2301      	movs	r3, #1
+ 116:	9300      	str	r3, [sp, #0]
+ 118:	0022      	movs	r2, r4
+ 11a:	4b6d      	ldr	r3, [pc, #436]	@ (2d0 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2d0>)
+ 11c:	3214      	adds	r2, #20
+ 11e:	cb83      	ldmia	r3!, {r0, r1, r7}
+ 120:	c283      	stmia	r2!, {r0, r1, r7}
+ 122:	cb03      	ldmia	r3!, {r0, r1}
+ 124:	c203      	stmia	r2!, {r0, r1}
+ 126:	2398      	movs	r3, #152	@ 0x98
+ 128:	2203      	movs	r2, #3
+ 12a:	52e2      	strh	r2, [r4, r3]
+ 12c:	2320      	movs	r3, #32
+ 12e:	4642      	mov	r2, r8
+ 130:	4313      	orrs	r3, r2
+ 132:	b29b      	uxth	r3, r3
+ 134:	9301      	str	r3, [sp, #4]
+ 136:	4b67      	ldr	r3, [pc, #412]	@ (2d4 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2d4>)
+ 138:	681b      	ldr	r3, [r3, #0]
+ 13a:	469b      	mov	fp, r3
+ 13c:	2b00      	cmp	r3, #0
+ 13e:	d169      	bne.n	214 <native_metrics::Snapshot(unsigned long, unsigned long)+0x214>
+ 140:	4653      	mov	r3, sl
+ 142:	2b00      	cmp	r3, #0
+ 144:	d068      	beq.n	218 <native_metrics::Snapshot(unsigned long, unsigned long)+0x218>
+ 146:	4b64      	ldr	r3, [pc, #400]	@ (2d8 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2d8>)
+ 148:	6a59      	ldr	r1, [r3, #36]	@ 0x24
+ 14a:	6a98      	ldr	r0, [r3, #40]	@ 0x28
+ 14c:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+ 14e:	4299      	cmp	r1, r3
+ 150:	d100      	bne.n	154 <native_metrics::Snapshot(unsigned long, unsigned long)+0x154>
+ 152:	e06f      	b.n	234 <native_metrics::Snapshot(unsigned long, unsigned long)+0x234>
+ 154:	2340      	movs	r3, #64	@ 0x40
+ 156:	431e      	orrs	r6, r3
+ 158:	464b      	mov	r3, r9
+ 15a:	601e      	str	r6, [r3, #0]
+ 15c:	2301      	movs	r3, #1
+ 15e:	2000      	movs	r0, #0
+ 160:	9300      	str	r3, [sp, #0]
+ 162:	239c      	movs	r3, #156	@ 0x9c
+ 164:	9902      	ldr	r1, [sp, #8]
+ 166:	50e0      	str	r0, [r4, r3]
+ 168:	1c4b      	adds	r3, r1, #1
+ 16a:	1e5a      	subs	r2, r3, #1
+ 16c:	4193      	sbcs	r3, r2
+ 16e:	18cf      	adds	r7, r1, r3
+ 170:	682b      	ldr	r3, [r5, #0]
+ 172:	69aa      	ldr	r2, [r5, #24]
+ 174:	4698      	mov	r8, r3
+ 176:	686b      	ldr	r3, [r5, #4]
+ 178:	69e9      	ldr	r1, [r5, #28]
+ 17a:	469c      	mov	ip, r3
+ 17c:	692b      	ldr	r3, [r5, #16]
+ 17e:	9206      	str	r2, [sp, #24]
+ 180:	4699      	mov	r9, r3
+ 182:	696b      	ldr	r3, [r5, #20]
+ 184:	6aaa      	ldr	r2, [r5, #40]	@ 0x28
+ 186:	9307      	str	r3, [sp, #28]
+ 188:	6a2b      	ldr	r3, [r5, #32]
+ 18a:	68e8      	ldr	r0, [r5, #12]
+ 18c:	469a      	mov	sl, r3
+ 18e:	6a6b      	ldr	r3, [r5, #36]	@ 0x24
+ 190:	62a7      	str	r7, [r4, #40]	@ 0x28
+ 192:	68af      	ldr	r7, [r5, #8]
+ 194:	352c      	adds	r5, #44	@ 0x2c
+ 196:	9105      	str	r1, [sp, #20]
+ 198:	9304      	str	r3, [sp, #16]
+ 19a:	9203      	str	r2, [sp, #12]
+ 19c:	cd2e      	ldmia	r5, {r1, r2, r3, r5}
+ 19e:	9502      	str	r5, [sp, #8]
+ 1a0:	465d      	mov	r5, fp
+ 1a2:	62e5      	str	r5, [r4, #44]	@ 0x2c
+ 1a4:	4645      	mov	r5, r8
+ 1a6:	6325      	str	r5, [r4, #48]	@ 0x30
+ 1a8:	4665      	mov	r5, ip
+ 1aa:	6365      	str	r5, [r4, #52]	@ 0x34
+ 1ac:	464d      	mov	r5, r9
+ 1ae:	63e0      	str	r0, [r4, #60]	@ 0x3c
+ 1b0:	9807      	ldr	r0, [sp, #28]
+ 1b2:	6425      	str	r5, [r4, #64]	@ 0x40
+ 1b4:	63a7      	str	r7, [r4, #56]	@ 0x38
+ 1b6:	6460      	str	r0, [r4, #68]	@ 0x44
+ 1b8:	9806      	ldr	r0, [sp, #24]
+ 1ba:	6663      	str	r3, [r4, #100]	@ 0x64
+ 1bc:	64a0      	str	r0, [r4, #72]	@ 0x48
+ 1be:	9805      	ldr	r0, [sp, #20]
+ 1c0:	9b02      	ldr	r3, [sp, #8]
+ 1c2:	64e0      	str	r0, [r4, #76]	@ 0x4c
+ 1c4:	9804      	ldr	r0, [sp, #16]
+ 1c6:	66a3      	str	r3, [r4, #104]	@ 0x68
+ 1c8:	6560      	str	r0, [r4, #84]	@ 0x54
+ 1ca:	4b44      	ldr	r3, [pc, #272]	@ (2dc <native_metrics::Snapshot(unsigned long, unsigned long)+0x2dc>)
+ 1cc:	9803      	ldr	r0, [sp, #12]
+ 1ce:	65e1      	str	r1, [r4, #92]	@ 0x5c
+ 1d0:	65a0      	str	r0, [r4, #88]	@ 0x58
+ 1d2:	6622      	str	r2, [r4, #96]	@ 0x60
+ 1d4:	cb07      	ldmia	r3!, {r0, r1, r2}
+ 1d6:	238c      	movs	r3, #140	@ 0x8c
+ 1d8:	50e0      	str	r0, [r4, r3]
+ 1da:	3304      	adds	r3, #4
+ 1dc:	50e1      	str	r1, [r4, r3]
+ 1de:	3304      	adds	r3, #4
+ 1e0:	50e2      	str	r2, [r4, r3]
+ 1e2:	229e      	movs	r2, #158	@ 0x9e
+ 1e4:	4655      	mov	r5, sl
+ 1e6:	0152      	lsls	r2, r2, #5
+ 1e8:	6525      	str	r5, [r4, #80]	@ 0x50
+ 1ea:	3b92      	subs	r3, #146	@ 0x92
+ 1ec:	4216      	tst	r6, r2
+ 1ee:	d102      	bne.n	1f6 <native_metrics::Snapshot(unsigned long, unsigned long)+0x1f6>
+ 1f0:	9a00      	ldr	r2, [sp, #0]
+ 1f2:	2a00      	cmp	r2, #0
+ 1f4:	d032      	beq.n	25c <native_metrics::Snapshot(unsigned long, unsigned long)+0x25c>
+ 1f6:	7423      	strb	r3, [r4, #16]
+ 1f8:	9b01      	ldr	r3, [sp, #4]
+ 1fa:	0020      	movs	r0, r4
+ 1fc:	74a3      	strb	r3, [r4, #18]
+ 1fe:	2301      	movs	r3, #1
+ 200:	74e3      	strb	r3, [r4, #19]
+ 202:	3399      	adds	r3, #153	@ 0x99
+ 204:	52e6      	strh	r6, [r4, r3]
+ 206:	b009      	add	sp, #36	@ 0x24
+ 208:	bcf0      	pop	{r4, r5, r6, r7}
+ 20a:	46bb      	mov	fp, r7
+ 20c:	46b2      	mov	sl, r6
+ 20e:	46a9      	mov	r9, r5
+ 210:	46a0      	mov	r8, r4
+ 212:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 214:	4553      	cmp	r3, sl
+ 216:	d032      	beq.n	27e <native_metrics::Snapshot(unsigned long, unsigned long)+0x27e>
+ 218:	2380      	movs	r3, #128	@ 0x80
+ 21a:	005b      	lsls	r3, r3, #1
+ 21c:	431e      	orrs	r6, r3
+ 21e:	464b      	mov	r3, r9
+ 220:	601e      	str	r6, [r3, #0]
+ 222:	2301      	movs	r3, #1
+ 224:	9300      	str	r3, [sp, #0]
+ 226:	4b2c      	ldr	r3, [pc, #176]	@ (2d8 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2d8>)
+ 228:	6a59      	ldr	r1, [r3, #36]	@ 0x24
+ 22a:	6a98      	ldr	r0, [r3, #40]	@ 0x28
+ 22c:	6a5b      	ldr	r3, [r3, #36]	@ 0x24
+ 22e:	4299      	cmp	r1, r3
+ 230:	d000      	beq.n	234 <native_metrics::Snapshot(unsigned long, unsigned long)+0x234>
+ 232:	e78f      	b.n	154 <native_metrics::Snapshot(unsigned long, unsigned long)+0x154>
+ 234:	2900      	cmp	r1, #0
+ 236:	d02e      	beq.n	296 <native_metrics::Snapshot(unsigned long, unsigned long)+0x296>
+ 238:	2340      	movs	r3, #64	@ 0x40
+ 23a:	431e      	orrs	r6, r3
+ 23c:	464b      	mov	r3, r9
+ 23e:	601e      	str	r6, [r3, #0]
+ 240:	4b27      	ldr	r3, [pc, #156]	@ (2e0 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2e0>)
+ 242:	4299      	cmp	r1, r3
+ 244:	d920      	bls.n	288 <native_metrics::Snapshot(unsigned long, unsigned long)+0x288>
+ 246:	2301      	movs	r3, #1
+ 248:	2001      	movs	r0, #1
+ 24a:	9300      	str	r3, [sp, #0]
+ 24c:	4240      	negs	r0, r0
+ 24e:	e788      	b.n	162 <native_metrics::Snapshot(unsigned long, unsigned long)+0x162>
+ 250:	2384      	movs	r3, #132	@ 0x84
+ 252:	2282      	movs	r2, #130	@ 0x82
+ 254:	33ff      	adds	r3, #255	@ 0xff
+ 256:	4698      	mov	r8, r3
+ 258:	32ff      	adds	r2, #255	@ 0xff
+ 25a:	e722      	b.n	a2 <native_metrics::Snapshot(unsigned long, unsigned long)+0xa2>
+ 25c:	4a21      	ldr	r2, [pc, #132]	@ (2e4 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2e4>)
+ 25e:	9901      	ldr	r1, [sp, #4]
+ 260:	3b01      	subs	r3, #1
+ 262:	4291      	cmp	r1, r2
+ 264:	d1c7      	bne.n	1f6 <native_metrics::Snapshot(unsigned long, unsigned long)+0x1f6>
+ 266:	4b20      	ldr	r3, [pc, #128]	@ (2e8 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2e8>)
+ 268:	4033      	ands	r3, r6
+ 26a:	1e5a      	subs	r2, r3, #1
+ 26c:	4193      	sbcs	r3, r2
+ 26e:	b2db      	uxtb	r3, r3
+ 270:	e7c1      	b.n	1f6 <native_metrics::Snapshot(unsigned long, unsigned long)+0x1f6>
+ 272:	2304      	movs	r3, #4
+ 274:	4642      	mov	r2, r8
+ 276:	431a      	orrs	r2, r3
+ 278:	b293      	uxth	r3, r2
+ 27a:	4698      	mov	r8, r3
+ 27c:	e71e      	b.n	bc <native_metrics::Snapshot(unsigned long, unsigned long)+0xbc>
+ 27e:	2360      	movs	r3, #96	@ 0x60
+ 280:	431a      	orrs	r2, r3
+ 282:	b293      	uxth	r3, r2
+ 284:	9301      	str	r3, [sp, #4]
+ 286:	e75e      	b.n	146 <native_metrics::Snapshot(unsigned long, unsigned long)+0x146>
+ 288:	2300      	movs	r3, #0
+ 28a:	4a18      	ldr	r2, [pc, #96]	@ (2ec <native_metrics::Snapshot(unsigned long, unsigned long)+0x2ec>)
+ 28c:	f7ff fffe 	bl	0 <__aeabi_uldivmod>
+			28c: R_ARM_THM_CALL	__aeabi_uldivmod
+ 290:	2301      	movs	r3, #1
+ 292:	9300      	str	r3, [sp, #0]
+ 294:	e765      	b.n	162 <native_metrics::Snapshot(unsigned long, unsigned long)+0x162>
+ 296:	4b16      	ldr	r3, [pc, #88]	@ (2f0 <native_metrics::Snapshot(unsigned long, unsigned long)+0x2f0>)
+ 298:	4298      	cmp	r0, r3
+ 29a:	d8cd      	bhi.n	238 <native_metrics::Snapshot(unsigned long, unsigned long)+0x238>
+ 29c:	2300      	movs	r3, #0
+ 29e:	4a13      	ldr	r2, [pc, #76]	@ (2ec <native_metrics::Snapshot(unsigned long, unsigned long)+0x2ec>)
+ 2a0:	f7ff fffe 	bl	0 <__aeabi_uldivmod>
+			2a0: R_ARM_THM_CALL	__aeabi_uldivmod
+ 2a4:	e75d      	b.n	162 <native_metrics::Snapshot(unsigned long, unsigned long)+0x162>
+ 2a6:	46c0      	nop			@ (mov r8, r8)
+	...
+			2a8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_116capture_sequenceE
+			2ac: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19run_flagsE
+ 2b0:	00000006 	.word	0x00000006
+			2b0: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18responseE
+ 2b4:	4d4e47d7 	.word	0x4d4e47d7
+ 2b8:	ffff8101 	.word	0xffff8101
+	...
+			2bc: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_12rxE
+			2c0: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_110statisticsE
+ 2c4:	0000006c 	.word	0x0000006c
+			2c4: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18responseE
+ 2c8:	0000007c 	.word	0x0000007c
+			2c8: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18responseE
+	...
+			2cc: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18responseE
+			2d0: R_ARM_ABS32	.rodata._ZN14native_metrics8SnapshotEmm.str1.4
+			2d4: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_117native_generationE
+ 2d8:	40054000 	.word	0x40054000
+ 2dc:	00000000 	.word	0x00000000
+			2dc: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_18overheadE
+ 2e0:	000f423f 	.word	0x000f423f
+ 2e4:	000001ff 	.word	0x000001ff
+ 2e8:	fffffbff 	.word	0xfffffbff
+ 2ec:	000f4240 	.word	0x000f4240
+ 2f0:	d693a3ff 	.word	0xd693a3ff
+
+Disassembly of section .text._ZN14native_metrics16ResponseAdmittedEm:
+
+00000000 <native_metrics::ResponseAdmitted(unsigned long)>:
+   0:	4a09      	ldr	r2, [pc, #36]	@ (28 <native_metrics::ResponseAdmitted(unsigned long)+0x28>)
+   2:	6813      	ldr	r3, [r2, #0]
+   4:	1c59      	adds	r1, r3, #1
+   6:	d007      	beq.n	18 <native_metrics::ResponseAdmitted(unsigned long)+0x18>
+   8:	3301      	adds	r3, #1
+   a:	6013      	str	r3, [r2, #0]
+   c:	2200      	movs	r2, #0
+   e:	4b07      	ldr	r3, [pc, #28]	@ (2c <native_metrics::ResponseAdmitted(unsigned long)+0x2c>)
+  10:	6018      	str	r0, [r3, #0]
+  12:	4b07      	ldr	r3, [pc, #28]	@ (30 <native_metrics::ResponseAdmitted(unsigned long)+0x30>)
+  14:	829a      	strh	r2, [r3, #20]
+  16:	4770      	bx	lr
+  18:	2380      	movs	r3, #128	@ 0x80
+  1a:	4a06      	ldr	r2, [pc, #24]	@ (34 <native_metrics::ResponseAdmitted(unsigned long)+0x34>)
+  1c:	015b      	lsls	r3, r3, #5
+  1e:	6811      	ldr	r1, [r2, #0]
+  20:	430b      	orrs	r3, r1
+  22:	6013      	str	r3, [r2, #0]
+  24:	e7f2      	b.n	c <native_metrics::ResponseAdmitted(unsigned long)+0xc>
+  26:	46c0      	nop			@ (mov r8, r8)
+	...
+			28: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_116capture_sequenceE
+			2c: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_110last_tx_msE
+			30: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_12rxE
+			34: R_ARM_ABS32	.bss._ZN14native_metrics12_GLOBAL__N_19run_flagsE
+
+/private/tmp/glyph-native-metrics-component-final/NativeTargetMetricsEntry.S.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.__wrap_main:
+
+00000000 <__wrap_main>:
+   0:	481a      	ldr	r0, [pc, #104]	@ (6c <__wrap_main+0x6c>)
+   2:	491b      	ldr	r1, [pc, #108]	@ (70 <__wrap_main+0x70>)
+   4:	466a      	mov	r2, sp
+   6:	2307      	movs	r3, #7
+   8:	421a      	tst	r2, r3
+   a:	d129      	bne.n	60 <__wrap_main+0x60>
+   c:	4218      	tst	r0, r3
+   e:	d127      	bne.n	60 <__wrap_main+0x60>
+  10:	4219      	tst	r1, r3
+  12:	d125      	bne.n	60 <__wrap_main+0x60>
+  14:	1a0b      	subs	r3, r1, r0
+  16:	2180      	movs	r1, #128	@ 0x80
+  18:	0109      	lsls	r1, r1, #4
+  1a:	428b      	cmp	r3, r1
+  1c:	d120      	bne.n	60 <__wrap_main+0x60>
+  1e:	4914      	ldr	r1, [pc, #80]	@ (70 <__wrap_main+0x70>)
+  20:	1c03      	adds	r3, r0, #0
+  22:	3320      	adds	r3, #32
+  24:	429a      	cmp	r2, r3
+  26:	d31b      	bcc.n	60 <__wrap_main+0x60>
+  28:	428a      	cmp	r2, r1
+  2a:	d819      	bhi.n	60 <__wrap_main+0x60>
+  2c:	f3ef 8310 	mrs	r3, PRIMASK
+  30:	469c      	mov	ip, r3
+  32:	b672      	cpsid	i
+  34:	4b0f      	ldr	r3, [pc, #60]	@ (74 <__wrap_main+0x74>)
+  36:	6018      	str	r0, [r3, #0]
+  38:	3020      	adds	r0, #32
+  3a:	6058      	str	r0, [r3, #4]
+  3c:	6099      	str	r1, [r3, #8]
+  3e:	60da      	str	r2, [r3, #12]
+  40:	611a      	str	r2, [r3, #16]
+  42:	6159      	str	r1, [r3, #20]
+  44:	6198      	str	r0, [r3, #24]
+  46:	2119      	movs	r1, #25
+  48:	6259      	str	r1, [r3, #36]	@ 0x24
+  4a:	490b      	ldr	r1, [pc, #44]	@ (78 <__wrap_main+0x78>)
+  4c:	4290      	cmp	r0, r2
+  4e:	d202      	bcs.n	56 <__wrap_main+0x56>
+  50:	6001      	str	r1, [r0, #0]
+  52:	3004      	adds	r0, #4
+  54:	e7fa      	b.n	4c <__wrap_main+0x4c>
+  56:	4663      	mov	r3, ip
+  58:	f383 8810 	msr	PRIMASK, r3
+  5c:	4807      	ldr	r0, [pc, #28]	@ (7c <__wrap_main+0x7c>)
+  5e:	4700      	bx	r0
+  60:	4804      	ldr	r0, [pc, #16]	@ (74 <__wrap_main+0x74>)
+  62:	2114      	movs	r1, #20
+  64:	6241      	str	r1, [r0, #36]	@ 0x24
+  66:	4805      	ldr	r0, [pc, #20]	@ (7c <__wrap_main+0x7c>)
+  68:	4700      	bx	r0
+	...
+			6c: R_ARM_ABS32	__StackBottom
+			70: R_ARM_ABS32	__StackTop
+			74: R_ARM_ABS32	glyph_native_metric_scans
+  76:	0000      	.short	0x0000
+  78:	ade175c3 	.word	0xade175c3
+  7c:	00000000 	.word	0x00000000
+			7c: R_ARM_ABS32	__real_main
+
+Disassembly of section .text.GlyphNativeMetricCore1Entry:
+
+00000000 <GlyphNativeMetricCore1Entry>:
+   0:	481a      	ldr	r0, [pc, #104]	@ (6c <GlyphNativeMetricCore1Entry+0x6c>)
+   2:	491b      	ldr	r1, [pc, #108]	@ (70 <GlyphNativeMetricCore1Entry+0x70>)
+   4:	466a      	mov	r2, sp
+   6:	2307      	movs	r3, #7
+   8:	421a      	tst	r2, r3
+   a:	d129      	bne.n	60 <GlyphNativeMetricCore1Entry+0x60>
+   c:	4218      	tst	r0, r3
+   e:	d127      	bne.n	60 <GlyphNativeMetricCore1Entry+0x60>
+  10:	4219      	tst	r1, r3
+  12:	d125      	bne.n	60 <GlyphNativeMetricCore1Entry+0x60>
+  14:	1a0b      	subs	r3, r1, r0
+  16:	2180      	movs	r1, #128	@ 0x80
+  18:	0109      	lsls	r1, r1, #4
+  1a:	428b      	cmp	r3, r1
+  1c:	d120      	bne.n	60 <GlyphNativeMetricCore1Entry+0x60>
+  1e:	4914      	ldr	r1, [pc, #80]	@ (70 <GlyphNativeMetricCore1Entry+0x70>)
+  20:	1c03      	adds	r3, r0, #0
+  22:	3320      	adds	r3, #32
+  24:	429a      	cmp	r2, r3
+  26:	d31b      	bcc.n	60 <GlyphNativeMetricCore1Entry+0x60>
+  28:	428a      	cmp	r2, r1
+  2a:	d819      	bhi.n	60 <GlyphNativeMetricCore1Entry+0x60>
+  2c:	f3ef 8310 	mrs	r3, PRIMASK
+  30:	469c      	mov	ip, r3
+  32:	b672      	cpsid	i
+  34:	4b0f      	ldr	r3, [pc, #60]	@ (74 <GlyphNativeMetricCore1Entry+0x74>)
+  36:	6018      	str	r0, [r3, #0]
+  38:	3020      	adds	r0, #32
+  3a:	6058      	str	r0, [r3, #4]
+  3c:	6099      	str	r1, [r3, #8]
+  3e:	60da      	str	r2, [r3, #12]
+  40:	611a      	str	r2, [r3, #16]
+  42:	6159      	str	r1, [r3, #20]
+  44:	6198      	str	r0, [r3, #24]
+  46:	2119      	movs	r1, #25
+  48:	6259      	str	r1, [r3, #36]	@ 0x24
+  4a:	490b      	ldr	r1, [pc, #44]	@ (78 <GlyphNativeMetricCore1Entry+0x78>)
+  4c:	4290      	cmp	r0, r2
+  4e:	d202      	bcs.n	56 <GlyphNativeMetricCore1Entry+0x56>
+  50:	6001      	str	r1, [r0, #0]
+  52:	3004      	adds	r0, #4
+  54:	e7fa      	b.n	4c <GlyphNativeMetricCore1Entry+0x4c>
+  56:	4663      	mov	r3, ip
+  58:	f383 8810 	msr	PRIMASK, r3
+  5c:	4807      	ldr	r0, [pc, #28]	@ (7c <GlyphNativeMetricCore1Entry+0x7c>)
+  5e:	4700      	bx	r0
+  60:	4804      	ldr	r0, [pc, #16]	@ (74 <GlyphNativeMetricCore1Entry+0x74>)
+  62:	2114      	movs	r1, #20
+  64:	6241      	str	r1, [r0, #36]	@ 0x24
+  66:	4805      	ldr	r0, [pc, #20]	@ (7c <GlyphNativeMetricCore1Entry+0x7c>)
+  68:	4700      	bx	r0
+	...
+			6c: R_ARM_ABS32	__StackOneBottom
+			70: R_ARM_ABS32	__StackOneTop
+  72:	0000      	.short	0x0000
+  74:	00000030 	.word	0x00000030
+			74: R_ARM_ABS32	glyph_native_metric_scans
+  78:	ade175c3 	.word	0xade175c3
+  7c:	00000000 	.word	0x00000000
+			7c: R_ARM_ABS32	main1
+
+Disassembly of section .text.__wrap_multicore_launch_core1:
+
+00000000 <__wrap_multicore_launch_core1>:
+   0:	4905      	ldr	r1, [pc, #20]	@ (18 <__wrap_multicore_launch_core1+0x18>)
+   2:	4288      	cmp	r0, r1
+   4:	d102      	bne.n	c <__wrap_multicore_launch_core1+0xc>
+   6:	4805      	ldr	r0, [pc, #20]	@ (1c <__wrap_multicore_launch_core1+0x1c>)
+   8:	4905      	ldr	r1, [pc, #20]	@ (20 <__wrap_multicore_launch_core1+0x20>)
+   a:	4708      	bx	r1
+   c:	4905      	ldr	r1, [pc, #20]	@ (24 <__wrap_multicore_launch_core1+0x24>)
+   e:	2204      	movs	r2, #4
+  10:	624a      	str	r2, [r1, #36]	@ 0x24
+  12:	4903      	ldr	r1, [pc, #12]	@ (20 <__wrap_multicore_launch_core1+0x20>)
+  14:	4708      	bx	r1
+	...
+			18: R_ARM_ABS32	main1
+			1c: R_ARM_ABS32	GlyphNativeMetricCore1Entry
+			20: R_ARM_ABS32	__real_multicore_launch_core1
+  22:	0000      	.short	0x0000
+  24:	00000030 	.word	0x00000030
+			24: R_ARM_ABS32	glyph_native_metric_scans
+
+/private/tmp/glyph-native-metrics-component-final/ControllerMode.cpp.o:     file format elf32-littlearm
+
+
+Disassembly of section .text._ZNK14ControllerMode26DiagnosticNativeGenerationEv:
+
+00000000 <ControllerMode::DiagnosticNativeGeneration() const>:
+   0:	2000      	movs	r0, #0
+   2:	4770      	bx	lr
+
+Disassembly of section .text._ZN14ControllerMode25UpdatePreprocessedOutputsERK20ResolvedInputContextR12_OutputState23_CommunicationBackendId:
+
+00000000 <ControllerMode::UpdatePreprocessedOutputs(ResolvedInputContext const&, _OutputState&, _CommunicationBackendId)>:
+   0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+   2:	0004      	movs	r4, r0
+   4:	0015      	movs	r5, r2
+   6:	001f      	movs	r7, r3
+   8:	000e      	movs	r6, r1
+   a:	6803      	ldr	r3, [r0, #0]
+   c:	6889      	ldr	r1, [r1, #8]
+   e:	699b      	ldr	r3, [r3, #24]
+  10:	4798      	blx	r3
+  12:	6823      	ldr	r3, [r4, #0]
+  14:	002a      	movs	r2, r5
+  16:	68b1      	ldr	r1, [r6, #8]
+  18:	0020      	movs	r0, r4
+  1a:	69de      	ldr	r6, [r3, #28]
+  1c:	003b      	movs	r3, r7
+  1e:	47b0      	blx	r6
+  20:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+  22:	46c0      	nop			@ (mov r8, r8)
+
+Disassembly of section .text._ZN14ControllerMode16UpdateDirectionsEbbbbbbbbhhhR12_OutputState:
+
+00000000 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	46de      	mov	lr, fp
+   4:	4657      	mov	r7, sl
+   6:	464e      	mov	r6, r9
+   8:	4645      	mov	r5, r8
+   a:	4688      	mov	r8, r1
+   c:	b5e0      	push	{r5, r6, r7, lr}
+   e:	b087      	sub	sp, #28
+  10:	001f      	movs	r7, r3
+  12:	ab10      	add	r3, sp, #64	@ 0x40
+  14:	781b      	ldrb	r3, [r3, #0]
+  16:	2100      	movs	r1, #0
+  18:	9303      	str	r3, [sp, #12]
+  1a:	ab11      	add	r3, sp, #68	@ 0x44
+  1c:	781b      	ldrb	r3, [r3, #0]
+  1e:	9202      	str	r2, [sp, #8]
+  20:	469b      	mov	fp, r3
+  22:	ab12      	add	r3, sp, #72	@ 0x48
+  24:	781b      	ldrb	r3, [r3, #0]
+  26:	2207      	movs	r2, #7
+  28:	9304      	str	r3, [sp, #16]
+  2a:	ab13      	add	r3, sp, #76	@ 0x4c
+  2c:	781b      	ldrb	r3, [r3, #0]
+  2e:	0004      	movs	r4, r0
+  30:	469a      	mov	sl, r3
+  32:	ab14      	add	r3, sp, #80	@ 0x50
+  34:	781b      	ldrb	r3, [r3, #0]
+  36:	3030      	adds	r0, #48	@ 0x30
+  38:	9305      	str	r3, [sp, #20]
+  3a:	ab15      	add	r3, sp, #84	@ 0x54
+  3c:	781b      	ldrb	r3, [r3, #0]
+  3e:	9e18      	ldr	r6, [sp, #96]	@ 0x60
+  40:	4699      	mov	r9, r3
+  42:	ab16      	add	r3, sp, #88	@ 0x58
+  44:	781d      	ldrb	r5, [r3, #0]
+  46:	ab17      	add	r3, sp, #92	@ 0x5c
+  48:	781b      	ldrb	r3, [r3, #0]
+  4a:	9301      	str	r3, [sp, #4]
+  4c:	f7ff fffe 	bl	0 <memset>
+			4c: R_ARM_THM_CALL	memset
+  50:	022b      	lsls	r3, r5, #8
+  52:	0429      	lsls	r1, r5, #16
+  54:	432b      	orrs	r3, r5
+  56:	430b      	orrs	r3, r1
+  58:	062a      	lsls	r2, r5, #24
+  5a:	001d      	movs	r5, r3
+  5c:	4643      	mov	r3, r8
+  5e:	4315      	orrs	r5, r2
+  60:	6075      	str	r5, [r6, #4]
+  62:	2b00      	cmp	r3, #0
+  64:	d048      	beq.n	f8 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xf8>
+  66:	2330      	movs	r3, #48	@ 0x30
+  68:	2201      	movs	r2, #1
+  6a:	54e2      	strb	r2, [r4, r3]
+  6c:	3303      	adds	r3, #3
+  6e:	32fe      	adds	r2, #254	@ 0xfe
+  70:	54e2      	strb	r2, [r4, r3]
+  72:	464b      	mov	r3, r9
+  74:	7133      	strb	r3, [r6, #4]
+  76:	2f00      	cmp	r7, #0
+  78:	d033      	beq.n	e2 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xe2>
+  7a:	2331      	movs	r3, #49	@ 0x31
+  7c:	2201      	movs	r2, #1
+  7e:	54e2      	strb	r2, [r4, r3]
+  80:	3303      	adds	r3, #3
+  82:	32fe      	adds	r2, #254	@ 0xfe
+  84:	54e2      	strb	r2, [r4, r3]
+  86:	464b      	mov	r3, r9
+  88:	7173      	strb	r3, [r6, #5]
+  8a:	2330      	movs	r3, #48	@ 0x30
+  8c:	5ce3      	ldrb	r3, [r4, r3]
+  8e:	2b00      	cmp	r3, #0
+  90:	d003      	beq.n	9a <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x9a>
+  92:	2331      	movs	r3, #49	@ 0x31
+  94:	5ce3      	ldrb	r3, [r4, r3]
+  96:	2b00      	cmp	r3, #0
+  98:	d13f      	bne.n	11a <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x11a>
+  9a:	465b      	mov	r3, fp
+  9c:	2b00      	cmp	r3, #0
+  9e:	d11a      	bne.n	d6 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xd6>
+  a0:	9b04      	ldr	r3, [sp, #16]
+  a2:	2b00      	cmp	r3, #0
+  a4:	d133      	bne.n	10e <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x10e>
+  a6:	4653      	mov	r3, sl
+  a8:	2b00      	cmp	r3, #0
+  aa:	d10e      	bne.n	ca <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xca>
+  ac:	9b05      	ldr	r3, [sp, #20]
+  ae:	2b00      	cmp	r3, #0
+  b0:	d004      	beq.n	bc <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xbc>
+  b2:	2336      	movs	r3, #54	@ 0x36
+  b4:	2201      	movs	r2, #1
+  b6:	54e2      	strb	r2, [r4, r3]
+  b8:	9b01      	ldr	r3, [sp, #4]
+  ba:	71f3      	strb	r3, [r6, #7]
+  bc:	b007      	add	sp, #28
+  be:	bcf0      	pop	{r4, r5, r6, r7}
+  c0:	46bb      	mov	fp, r7
+  c2:	46b2      	mov	sl, r6
+  c4:	46a9      	mov	r9, r5
+  c6:	46a0      	mov	r8, r4
+  c8:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  ca:	2336      	movs	r3, #54	@ 0x36
+  cc:	22ff      	movs	r2, #255	@ 0xff
+  ce:	54e2      	strb	r2, [r4, r3]
+  d0:	464b      	mov	r3, r9
+  d2:	71f3      	strb	r3, [r6, #7]
+  d4:	e7f2      	b.n	bc <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xbc>
+  d6:	2335      	movs	r3, #53	@ 0x35
+  d8:	22ff      	movs	r2, #255	@ 0xff
+  da:	54e2      	strb	r2, [r4, r3]
+  dc:	464b      	mov	r3, r9
+  de:	71b3      	strb	r3, [r6, #6]
+  e0:	e7e1      	b.n	a6 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xa6>
+  e2:	9b03      	ldr	r3, [sp, #12]
+  e4:	2b00      	cmp	r3, #0
+  e6:	d0d0      	beq.n	8a <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x8a>
+  e8:	2301      	movs	r3, #1
+  ea:	2231      	movs	r2, #49	@ 0x31
+  ec:	54a3      	strb	r3, [r4, r2]
+  ee:	3203      	adds	r2, #3
+  f0:	54a3      	strb	r3, [r4, r2]
+  f2:	9b01      	ldr	r3, [sp, #4]
+  f4:	7173      	strb	r3, [r6, #5]
+  f6:	e7c8      	b.n	8a <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x8a>
+  f8:	9b02      	ldr	r3, [sp, #8]
+  fa:	2b00      	cmp	r3, #0
+  fc:	d0bb      	beq.n	76 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x76>
+  fe:	2301      	movs	r3, #1
+ 100:	2230      	movs	r2, #48	@ 0x30
+ 102:	54a3      	strb	r3, [r4, r2]
+ 104:	3203      	adds	r2, #3
+ 106:	54a3      	strb	r3, [r4, r2]
+ 108:	9b01      	ldr	r3, [sp, #4]
+ 10a:	7133      	strb	r3, [r6, #4]
+ 10c:	e7b3      	b.n	76 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x76>
+ 10e:	2335      	movs	r3, #53	@ 0x35
+ 110:	2201      	movs	r2, #1
+ 112:	54e2      	strb	r2, [r4, r3]
+ 114:	9b01      	ldr	r3, [sp, #4]
+ 116:	71b3      	strb	r3, [r6, #6]
+ 118:	e7c5      	b.n	a6 <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0xa6>
+ 11a:	2332      	movs	r3, #50	@ 0x32
+ 11c:	2201      	movs	r2, #1
+ 11e:	54e2      	strb	r2, [r4, r3]
+ 120:	e7bb      	b.n	9a <ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, unsigned char, unsigned char, unsigned char, _OutputState&)+0x9a>
+ 122:	46c0      	nop			@ (mov r8, r8)
+
+Disassembly of section .text._ZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendId:
+
+00000000 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	4657      	mov	r7, sl
+   4:	4645      	mov	r5, r8
+   6:	46de      	mov	lr, fp
+   8:	464e      	mov	r6, r9
+   a:	b5e0      	push	{r5, r6, r7, lr}
+   c:	b093      	sub	sp, #76	@ 0x4c
+   e:	9301      	str	r3, [sp, #4]
+  10:	6803      	ldr	r3, [r0, #0]
+  12:	0017      	movs	r7, r2
+  14:	4698      	mov	r8, r3
+  16:	4a3e      	ldr	r2, [pc, #248]	@ (110 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x110>)
+  18:	68db      	ldr	r3, [r3, #12]
+  1a:	0004      	movs	r4, r0
+  1c:	000d      	movs	r5, r1
+  1e:	4692      	mov	sl, r2
+  20:	4293      	cmp	r3, r2
+  22:	d16a      	bne.n	fa <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xfa>
+  24:	4b3b      	ldr	r3, [pc, #236]	@ (114 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x114>)
+  26:	2000      	movs	r0, #0
+  28:	4699      	mov	r9, r3
+  2a:	2300      	movs	r3, #0
+  2c:	464a      	mov	r2, r9
+  2e:	6013      	str	r3, [r2, #0]
+  30:	4b39      	ldr	r3, [pc, #228]	@ (118 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x118>)
+  32:	ae06      	add	r6, sp, #24
+  34:	0029      	movs	r1, r5
+  36:	6018      	str	r0, [r3, #0]
+  38:	2218      	movs	r2, #24
+  3a:	0030      	movs	r0, r6
+  3c:	469b      	mov	fp, r3
+  3e:	f7ff fffe 	bl	0 <memcpy>
+			3e: R_ARM_THM_CALL	memcpy
+  42:	4643      	mov	r3, r8
+  44:	0029      	movs	r1, r5
+  46:	0032      	movs	r2, r6
+  48:	0020      	movs	r0, r4
+  4a:	689b      	ldr	r3, [r3, #8]
+  4c:	4798      	blx	r3
+  4e:	ab0c      	add	r3, sp, #48	@ 0x30
+  50:	4698      	mov	r8, r3
+  52:	2218      	movs	r2, #24
+  54:	0031      	movs	r1, r6
+  56:	0018      	movs	r0, r3
+  58:	f7ff fffe 	bl	0 <memcpy>
+			58: R_ARM_THM_CALL	memcpy
+  5c:	6823      	ldr	r3, [r4, #0]
+  5e:	4641      	mov	r1, r8
+  60:	685b      	ldr	r3, [r3, #4]
+  62:	0020      	movs	r0, r4
+  64:	4798      	blx	r3
+  66:	4643      	mov	r3, r8
+  68:	9305      	str	r3, [sp, #20]
+  6a:	6823      	ldr	r3, [r4, #0]
+  6c:	9503      	str	r5, [sp, #12]
+  6e:	4a2b      	ldr	r2, [pc, #172]	@ (11c <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x11c>)
+  70:	695d      	ldr	r5, [r3, #20]
+  72:	9604      	str	r6, [sp, #16]
+  74:	4295      	cmp	r5, r2
+  76:	d13a      	bne.n	ee <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xee>
+  78:	003a      	movs	r2, r7
+  7a:	4641      	mov	r1, r8
+  7c:	0020      	movs	r0, r4
+  7e:	699b      	ldr	r3, [r3, #24]
+  80:	4798      	blx	r3
+  82:	6823      	ldr	r3, [r4, #0]
+  84:	003a      	movs	r2, r7
+  86:	69dd      	ldr	r5, [r3, #28]
+  88:	0020      	movs	r0, r4
+  8a:	9905      	ldr	r1, [sp, #20]
+  8c:	9b01      	ldr	r3, [sp, #4]
+  8e:	47a8      	blx	r5
+  90:	464b      	mov	r3, r9
+  92:	6819      	ldr	r1, [r3, #0]
+  94:	2900      	cmp	r1, #0
+  96:	d110      	bne.n	ba <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xba>
+  98:	6823      	ldr	r3, [r4, #0]
+  9a:	4d21      	ldr	r5, [pc, #132]	@ (120 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x120>)
+  9c:	68db      	ldr	r3, [r3, #12]
+  9e:	6029      	str	r1, [r5, #0]
+  a0:	4553      	cmp	r3, sl
+  a2:	d113      	bne.n	cc <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xcc>
+  a4:	464b      	mov	r3, r9
+  a6:	681a      	ldr	r2, [r3, #0]
+  a8:	2a00      	cmp	r2, #0
+  aa:	d11a      	bne.n	e2 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xe2>
+  ac:	b013      	add	sp, #76	@ 0x4c
+  ae:	bcf0      	pop	{r4, r5, r6, r7}
+  b0:	46bb      	mov	fp, r7
+  b2:	46b2      	mov	sl, r6
+  b4:	46a9      	mov	r9, r5
+  b6:	46a0      	mov	r8, r4
+  b8:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  ba:	f7ff fffe 	bl	0 <native_metrics::Now()>
+			ba: R_ARM_THM_CALL	native_metrics::Now()
+  be:	0001      	movs	r1, r0
+  c0:	6823      	ldr	r3, [r4, #0]
+  c2:	4d17      	ldr	r5, [pc, #92]	@ (120 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x120>)
+  c4:	68db      	ldr	r3, [r3, #12]
+  c6:	6029      	str	r1, [r5, #0]
+  c8:	4553      	cmp	r3, sl
+  ca:	d0eb      	beq.n	a4 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xa4>
+  cc:	0020      	movs	r0, r4
+  ce:	4798      	blx	r3
+  d0:	464a      	mov	r2, r9
+  d2:	6812      	ldr	r2, [r2, #0]
+  d4:	0003      	movs	r3, r0
+  d6:	2a00      	cmp	r2, #0
+  d8:	d101      	bne.n	de <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xde>
+  da:	2800      	cmp	r0, #0
+  dc:	d0e6      	beq.n	ac <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xac>
+  de:	6829      	ldr	r1, [r5, #0]
+  e0:	e000      	b.n	e4 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xe4>
+  e2:	2300      	movs	r3, #0
+  e4:	4658      	mov	r0, fp
+  e6:	6800      	ldr	r0, [r0, #0]
+  e8:	f7ff fffe 	bl	0 <native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)>
+			e8: R_ARM_THM_CALL	native_metrics::RecordFrame(unsigned long, unsigned long, unsigned long, unsigned long)
+  ec:	e7de      	b.n	ac <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0xac>
+  ee:	003a      	movs	r2, r7
+  f0:	0020      	movs	r0, r4
+  f2:	9b01      	ldr	r3, [sp, #4]
+  f4:	a903      	add	r1, sp, #12
+  f6:	47a8      	blx	r5
+  f8:	e7ca      	b.n	90 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x90>
+  fa:	4798      	blx	r3
+  fc:	4b05      	ldr	r3, [pc, #20]	@ (114 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x114>)
+  fe:	4699      	mov	r9, r3
+ 100:	6018      	str	r0, [r3, #0]
+ 102:	2800      	cmp	r0, #0
+ 104:	d001      	beq.n	10a <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x10a>
+ 106:	f7ff fffe 	bl	0 <native_metrics::Now()>
+			106: R_ARM_THM_CALL	native_metrics::Now()
+ 10a:	6823      	ldr	r3, [r4, #0]
+ 10c:	4698      	mov	r8, r3
+ 10e:	e78f      	b.n	30 <ControllerMode::UpdateOutputs(_InputState const&, _OutputState&, _CommunicationBackendId)+0x30>
+	...
+			110: R_ARM_ABS32	ControllerMode::DiagnosticNativeGeneration() const
+			114: R_ARM_ABS32	.bss._ZZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendIdE13native_before
+			118: R_ARM_ABS32	.bss._ZZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendIdE5begin
+			11c: R_ARM_ABS32	ControllerMode::UpdatePreprocessedOutputs(ResolvedInputContext const&, _OutputState&, _CommunicationBackendId)
+			120: R_ARM_ABS32	.bss._ZZN14ControllerMode13UpdateOutputsERK11_InputStateR12_OutputState23_CommunicationBackendIdE3end
+
+Disassembly of section .text._ZN14ControllerModeC2Ev:
+
+00000000 <ControllerMode::ControllerMode()>:
+   0:	b510      	push	{r4, lr}
+   2:	0004      	movs	r4, r0
+   4:	f7ff fffe 	bl	0 <InputMode::InputMode()>
+			4: R_ARM_THM_CALL	InputMode::InputMode()
+   8:	0020      	movs	r0, r4
+   a:	4b04      	ldr	r3, [pc, #16]	@ (1c <ControllerMode::ControllerMode()+0x1c>)
+   c:	2207      	movs	r2, #7
+   e:	2100      	movs	r1, #0
+  10:	6023      	str	r3, [r4, #0]
+  12:	3030      	adds	r0, #48	@ 0x30
+  14:	f7ff fffe 	bl	0 <memset>
+			14: R_ARM_THM_CALL	memset
+  18:	0020      	movs	r0, r4
+  1a:	bd10      	pop	{r4, pc}
+  1c:	00000008 	.word	0x00000008
+			1c: R_ARM_ABS32	vtable for ControllerMode
+
+Disassembly of section .text._ZN14ControllerMode15ResetDirectionsEv:
+
+00000000 <ControllerMode::ResetDirections()>:
+   0:	b510      	push	{r4, lr}
+   2:	2207      	movs	r2, #7
+   4:	2100      	movs	r1, #0
+   6:	3030      	adds	r0, #48	@ 0x30
+   8:	f7ff fffe 	bl	0 <memset>
+			8: R_ARM_THM_CALL	memset
+   c:	bd10      	pop	{r4, pc}
+   e:	46c0      	nop			@ (mov r8, r8)

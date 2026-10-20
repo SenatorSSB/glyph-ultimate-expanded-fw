@@ -1,0 +1,20 @@
+{
+  "order": "GP-NATIVE-001",
+  "authority_commit": "262e51f2740789458be81fbd49c51c099c7f5a65",
+  "parent": "e4bf626c71d0494a138721eff54ac563ef2877cb",
+  "canonical_ref": "refs/heads/configurator",
+  "live_readback": "262e51f2740789458be81fbd49c51c099c7f5a65",
+  "readback_utc": "2026-10-20T13:08:27.872813+00:00",
+  "source_free": true,
+  "status": "LIVE_AUTHORITY_VERIFIED",
+  "independent_design_review": "APPROVE_BOUNDED_DESIGN",
+  "design_review_sha256": "6bd240b201b14e9a701b296fac2c046fcc348f8aa783714c7d4def26503e9573",
+  "permission": "Named retained diagnostic implementation and bounded config.cpp error storage amendment may begin under the same order. All original resource limits remain unchanged.",
+  "exclusions": [
+    "No device mutation",
+    "No physical testing authorization",
+    "No hardware PASS",
+    "No firmware source merge before exact HEP PASS"
+  ],
+  "p1_stack": "OPEN"
+}

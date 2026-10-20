@@ -1,3 +1,4 @@
+#include "core/NativeTargetMetrics.hpp"
 #include "button_positions.hpp"
 #include "comms/backend_init.hpp"
 #include "comms/ConfiguratorBackend.hpp"
@@ -206,7 +207,8 @@ void setup() {
 
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.
-    ConfigValidationError validation_error;
+    // Single core0 startup workspace, reset before the existing validation.
+    static ConfigValidationError validation_error; validation_error = {};
     if (!persistence.SetValidator(validate_glyph_config) ||
         !persistence.ValidateConfig(config, validation_error)) {
         enter_recovery_configurator();
@@ -282,6 +284,7 @@ void setup() {
         config = compact;
     }
 
+    native_metrics::Calibrate();
     // Create array of input sources to be used.
     const size_t initialized_backend_count = initialize_backends(
         backends,
@@ -329,6 +332,7 @@ void loop() {
 
     // Complete viewer records precede identity writes; output generation is finished.
     runtime_identity_service.Poll(Serial, backends[0], config, profile_store, ultimate_mode, millis());
+    native_metrics::ServiceCore(0);
 
     if (current_kb_mode != nullptr) {
         current_kb_mode->SendReport(backends[0]->GetInputs());
@@ -431,6 +435,7 @@ void dummyloop() {
 }
 
 void loop1() {
+    native_metrics::ServiceCore(1);
     const BootSnapshot snapshot = read_boot_state();
     if (refused(snapshot.outcome)) {
         if (snapshot.display_ready) {

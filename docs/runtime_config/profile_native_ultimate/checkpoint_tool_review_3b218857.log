@@ -1,0 +1,26 @@
+{"checkpoint": "3b218857bd026eccc5fe7ca2c80195e0055a3684", "in_memory_modules": {"check_glyph_profile_store_production_tool": "bd01b023c92dab3796c8086959414ca06c82ae024a0cd157c06efd9d2ba1ba9d", "glyph_profile_store_production_tool": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef", "glyph_serial_config_tool": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"}, "serial": "mocked only", "unchanged_fixture_root": "/private/tmp/glyph-native-source-review-20261020"}
+{"checkpoint_fixture": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/context.json", "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"}
+{"checkpoint_fixture": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/profile.json", "sha256": "67cc890a8302ad98be49f086cee2872d7e633eccd7f1060a23930120c7fc18b1"}
+production ProfileStore tool: [Errno 17] File exists: '/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/tmpt6z7r74d/r.json'
+production ProfileStore tool: malformed response after transmission; unresolved
+{
+  "response": {
+    "profile_id": 99,
+    "request_token": "101",
+    "status": "PROFILE_STORE_OK"
+  }
+}
+{
+  "response": {
+    "profile_id": 99,
+    "request_token": "101",
+    "status": "PROFILE_STORE_OK"
+  }
+}
+{"dry_run": true, "native_packet": "apply_native_preprocessing_context", "payload_sha256": "1cc6e0af9ddf4dfd78526e8d63380a0c61333fa1105ca0f2ea4b178f156290c8", "serial_opened": false}
+native Config packet: execution requires explicit port and owner-exclusive Configurator session; SET_CONFIG has no atomic generation fence
+{"dry_run": false, "native_packet": "apply_native_preprocessing_context", "payload_sha256": "1cc6e0af9ddf4dfd78526e8d63380a0c61333fa1105ca0f2ea4b178f156290c8", "serial_opened": true}
+native Config packet: lost acknowledgement
+native Config packet: fresh GET_CONFIG differs from explicit current backup; no SET sent
+{"dry_run": true, "native_packet": "restore_original_user_config", "payload_sha256": "63d197c632439c678be46d2bf877699880c3caf5972da9130a0e1b73939cfa79", "serial_opened": false}
+glyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true

@@ -1,3 +1,4 @@
+#include "core/NativeTargetMetrics.hpp"
 #include "core/mode_selection.hpp"
 
 #include "core/state.hpp"
@@ -124,6 +125,10 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
             break;
         case MODE_ULTIMATE:
             if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
+#if GLYPH_NATIVE_TARGET_METRICS
+                const bool native_selected = mode_config.ultimate_profile_engine == 1;
+                const uint32_t activation_begin = native_selected ? native_metrics::Now() : 0;
+#endif
                 ProfileStore::Status status;
                 const UltimateProfile *profile = profile_store.Activate(mode_config.ultimate_profile_id, &status);
                 // A failed selected record remains diagnostic in the store; the
@@ -132,6 +137,15 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
                     status != ProfileStore::Status::RecoveredPrevious) profile = nullptr;
                 ultimate_mode.SetConfig(mode_config, profile, profile_store.ActiveNativeView());
                 set_mode(backend, &ultimate_mode);
+#if GLYPH_NATIVE_TARGET_METRICS
+                if (native_selected) {
+                    const uint32_t activation_end = native_metrics::Now();
+                    native_metrics::RecordActivation(activation_begin, activation_end,
+                        ultimate_mode.DiagnosticNativeGeneration(),
+                        status == ProfileStore::Status::Ok || status == ProfileStore::Status::RecoveredPrevious,
+                        status == ProfileStore::Status::RecoveredPrevious);
+                }
+#endif
                 break;
             }
             if (mode_config.ultimate_profile_config > config.ultimate_profiles_count) {

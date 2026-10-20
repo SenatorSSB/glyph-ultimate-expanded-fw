@@ -13,6 +13,7 @@ class ControllerMode : public InputMode {
     ControllerMode();
     void UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
     void ResetDirections();
+    virtual uint32_t DiagnosticNativeGeneration() const { return 0; }
     virtual void UpdateDirections(
         bool lsLeft,
         bool lsRight,

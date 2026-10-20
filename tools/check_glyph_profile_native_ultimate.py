@@ -8,12 +8,16 @@ from convert_glyph_native_ultimate_profile import convert
 HOST=ROOT/'tools/fixtures/profile_native_ultimate'
 
 
-def compile_runner(temp,default=False):
+def compile_runner(temp,default=False,metrics=False):
     gen=temp/'generated';gen.mkdir();schema=ROOT/'schema/haybox'
     run([sys.executable,str(NANOPB/'generator/nanopb_generator.py'),'-I',str(schema),'-f',str(schema/'config.options'),'--error-on-unmatched','--no-timestamp','-D',str(gen),str(schema/'config.proto')])
     flags=['-O2','-Wall','-Wextra','-Werror','-Wno-unused-function','-Wno-non-c-typedef-for-linkage']+([] if default else ['-fshort-enums'])
     for inc in [ROOT/'tools/fixtures/stage_c_ultimate_profiles_host/include',gen,NANOPB,ROOT/'include',ROOT/'HAL/pico/include',ROOT/'config/glyph/common/include',ROOT/'config/glyph/glyph_mk6/include',ROOT/'src',HOST]:flags+=['-I',str(inc)]
     objects=[]
+    if metrics:
+        flags+=['-DGLYPH_NATIVE_TARGET_METRICS=1','-DGLYPH_NATIVE_METRICS_HOST=1','-I',str(ROOT/'tools/fixtures/native_target_metrics/include')]
+        for relative in ['HAL/pico/src/core/NativeTargetMetrics.cpp','tools/fixtures/native_target_metrics/runner_clock.cpp']:
+            obj=temp/(Path(relative).stem+'.o');run(['c++','-std=c++17',*flags,'-c',str(ROOT/relative),'-o',str(obj)]);objects.append(str(obj))
     for source in [NANOPB/'pb_common.c',NANOPB/'pb_encode.c',NANOPB/'pb_decode.c',gen/'config.pb.c']:
         obj=temp/(source.stem+'.o');run(['cc','-std=c11',*flags,'-c',str(source),'-o',str(obj)]);objects.append(str(obj))
     oracle=temp/'legacy.o';run(['c++','-std=c++17','-DUltimate=LegacyUltimate','-I',str(HOST/'frozen'),'-I',str(ROOT/'tools/fixtures/stage_c_ultimate_profiles_host/frozen'),*flags,'-c',str(ROOT/'tools/fixtures/stage_c_ultimate_profiles_host/legacy_ultimate.cpp'),'-o',str(oracle)])
@@ -380,12 +384,12 @@ def dispatch_tests(temp,pb,config):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--default-enum',action='store_true');a=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--default-enum',action='store_true');parser.add_argument('--metrics-enabled',action='store_true');a=parser.parse_args()
     import glyph_serial_config_tool as writer
     pb,jf,_=writer.load_runtime_proto_modules(ROOT)
     context=pb.GameModeConfig(mode_id=pb.MODE_ULTIMATE)
     with tempfile.TemporaryDirectory(prefix='native-ultimate-') as directory:
-        temp=Path(directory);exe,negative,flags,objects=compile_runner(temp,a.default_enum)
+        temp=Path(directory);exe,negative,flags,objects=compile_runner(temp,a.default_enum,a.metrics_enabled)
         rows=[json.loads(x) for x in (HOST/'independent_legacy/short-expected.jsonl').read_text().splitlines()]
         for row in rows:
             config=pb.Config();config.ParseFromString((HOST/'independent_legacy/corpus'/(row['id']+'.pb')).read_bytes())

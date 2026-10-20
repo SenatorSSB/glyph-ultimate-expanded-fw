@@ -11,6 +11,11 @@ class Ultimate : public ControllerMode {
     void SetConfig(GameModeConfig &config, const UltimateProfile *profile, const ultimate_native::PreparedView *native = nullptr);
     enum class Engine : uint8_t { Legacy, NativeAbi1, NativeUnavailable };
     Engine ActiveEngine() const { return _engine; }
+    uint32_t DiagnosticNativeGeneration() const override {
+        return _engine == Engine::NativeAbi1 && _native && _native->valid && _native->published &&
+            ultimate_native::IsOwnedView(*_native) && _native_generation &&
+            _native->generation == _native_generation ? _native_generation : 0;
+    }
     uint32_t NativeGeneration() const { return _native_generation; }
     const ultimate_native::PreparedView *NativeView() const { return _native; }
     const UltimateProfile *SelectedProfile() const { return _profile; }

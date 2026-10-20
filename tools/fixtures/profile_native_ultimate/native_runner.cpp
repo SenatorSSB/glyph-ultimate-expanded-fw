@@ -1,4 +1,5 @@
 #include "modes/Ultimate.hpp"
+#include "core/NativeTargetMetrics.hpp"
 #include "modes/UltimateNativeEvaluator.hpp"
 #include "core/RuntimeProfileDigest.hpp"
 #include "core/config_button_validation.hpp"
@@ -30,6 +31,13 @@ void compare(Ultimate &native,LegacyUltimate &legacy,const InputState &in) {
             (unsigned long long)in.buttons,b.buttons,b.leftStickX,b.leftStickY,b.rightStickX,b.rightStickY,b.triggerLAnalog,b.triggerRAnalog,
             a.buttons,a.leftStickX,a.leftStickY,a.rightStickX,a.rightStickY,a.triggerLAnalog,a.triggerRAnalog);std::exit(1);
     }++checks;
+#if GLYPH_NATIVE_TARGET_METRICS
+    if(checks<=4) {
+        const auto *snapshot=native_metrics::Snapshot(0,native.DiagnosticNativeGeneration());
+        const uint32_t count=uint32_t(snapshot[48])|(uint32_t(snapshot[49])<<8)|(uint32_t(snapshot[50])<<16)|(uint32_t(snapshot[51])<<24);
+        require(count==checks,"actual native bracket records once; frozen legacy default predicate records none");
+    }
+#endif
 }
 }
 int main(int argc,char **argv) {

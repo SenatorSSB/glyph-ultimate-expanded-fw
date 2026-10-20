@@ -1,0 +1,255 @@
+{
+  "review_kind": "finite_independent_read_only_offline_native_packet_host_tool_review",
+  "result": "BOUNDED_PASS",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "requested_model": "UNKNOWN",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "inspected_commit": "3b218857bd026eccc5fe7ca2c80195e0055a3684",
+  "inspected_tree": "28b4cd03d9e236aa9bf82fe3b946d922c95783aa",
+  "source_extraction": "git archive exact commit into independent temporary directory; eleven files verified against git show",
+  "source_directory": "/private/tmp/glyph-native-packet-tool-probe.CI9Q1q",
+  "source_files": [
+    {
+      "path": "tools/glyph_serial_config_tool.py",
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+      "bytes": 46658,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "tools/glyph_profile_store_production_tool.py",
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef",
+      "bytes": 10878,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "tools/check_glyph_profile_store_production_tool.py",
+      "sha256": "bd01b023c92dab3796c8086959414ca06c82ae024a0cd157c06efd9d2ba1ba9d",
+      "bytes": 15380,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "tools/glyph_profile_store_candidate_tool.py",
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+      "bytes": 19077,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "tools/check_glyph_profile_store_candidate_tool.py",
+      "sha256": "efb5d2e693d4b2ed7be36dcc9ce5279163842c77d5be410ca20b5182d792a1db",
+      "bytes": 16320,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "tools/convert_glyph_native_ultimate_profile.py",
+      "sha256": "d6a84657308ee957172185de2393205cf849465416c2f7e250a91e27774d293f",
+      "bytes": 31370,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "schema/haybox/config.proto",
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "bytes": 33965,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "b36885a26bada2e1ea3d6983ac993f403c9e00dddae0b6ad933e27c879e9b1e1",
+      "bytes": 47215,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStore.cpp",
+      "sha256": "03da4b0a7157abc3d4b5a09c8533f238e72358660c0b377d010b352fd803ac42",
+      "bytes": 71297,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/implementation_contract.json",
+      "sha256": "eedf88b87dcd3485831bc74ba617d3f9986ef0f871d8dbc532efeb5946d70ee2",
+      "bytes": 42426,
+      "matches_exact_git_object": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/native_context_operator.md",
+      "sha256": "aa82cfd39ef3fe83f106c50e8174b96d475179deb77bf0a02099d46b66db06c6",
+      "bytes": 5892,
+      "matches_exact_git_object": true
+    }
+  ],
+  "parent_reported_canonical_context": "262e51f2740789458be81fbd49c51c099c7f5a65; not independently live-verified in expressly offline probe",
+  "implementation_contract_scope": "Exact allowed source paths name serial/production/candidate host tools; allowed tests name focused production checker. M0-M7 chapter excludes new transport commands, generic debug/write/reboot bridge and unapproved device action.",
+  "legacy_cli_entire_prefix_unchanged_from_parent": true,
+  "tests": [
+    {
+      "command": "python3 tools/check_glyph_profile_store_production_tool.py",
+      "exit_code": 0,
+      "outcome": "PASS",
+      "mock_only": true,
+      "scope": "focused existing production admission/receipt/native context/restore and strict/legacy guard checks"
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_candidate_tool.py",
+      "exit_code": 0,
+      "outcome": "PASS",
+      "mock_only": true,
+      "scope": "existing candidate CLI/transport parser, strict admission, source hash/replay/trace bounds"
+    },
+    {
+      "command": "python3 independent_counterexamples.py",
+      "exit_code": 0,
+      "outcome": "PASS",
+      "mock_only": true,
+      "case_groups": [
+        {
+          "name": "native_real_orchestration_receipt_and_directory_fsync_precede_single_mock_send",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "receipt_directory_journal_fsync_failure_each_prevents_send",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "existing_receipt_is_preserved_and_prevents_send",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "production_candidate_recovery_incarnation_admission_failures_prevent_get_and_send",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "fresh_raw_backup_mismatch_prevents_send",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "lost_ack_mismatched_and_malformed_readback_stop_after_one_send",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "backup_sha_mismatch_and_wrong_extent_refused",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "set_reference_and_delete_existing_commands_refuse_stale_fences",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "restoration_restores_original_all_user_fields_and_only_current_firmware_receipts",
+          "outcome": "PASS",
+          "mock_only": true
+        },
+        {
+          "name": "historical_binding_policy_positive_and_negative_preserved",
+          "outcome": "PASS",
+          "mock_only": true
+        }
+      ]
+    },
+    {
+      "command": "exact Git-object/archive byte comparison plus historical tool prefix comparison",
+      "exit_code": 0,
+      "outcome": "PASS",
+      "scope": "eleven exact supporting files and entire historical CLI body before native appended helper"
+    }
+  ],
+  "source_conclusions": [
+    {
+      "topic": "existing command fences",
+      "outcome": "PASS",
+      "source": [
+        "schema/haybox/config.proto:30,560-561",
+        "tools/glyph_profile_store_production_tool.py:35-46,80-101"
+      ],
+      "detail": "Existing ProfileStore command9 carries DELETE9 and SET_MODE_REFERENCE10. Explicit incarnation/store generation and positive unused nonexhausted uint64 token remain required; reference requires explicit mode/Config generation; no profile body for either."
+    },
+    {
+      "topic": "fresh backup and context",
+      "outcome": "PASS",
+      "source": [
+        "tools/glyph_serial_config_tool.py:893-945,1000-1006"
+      ],
+      "detail": "Exact raw SHA and current GET bytes, compact store/root/incarnation/row admission, one existing Ultimate row, validated schema5 and preprocessing digest. Only remap/SOCD arrays replaced; ID/engine preserved."
+    },
+    {
+      "topic": "receipt before one send",
+      "outcome": "PASS",
+      "source": [
+        "tools/glyph_serial_config_tool.py:1007-1019",
+        "tools/glyph_profile_store_production_tool.py:123-134"
+      ],
+      "detail": "Exclusive receipt creation, file fsync, parent-directory fsync and journal-event fsync precede one mutation. Lost ack, malformed/mismatched readback or exceptions stop without retry."
+    },
+    {
+      "topic": "whole Config no CAS",
+      "outcome": "EXPLICIT_LIMIT",
+      "source": [
+        "tools/glyph_serial_config_tool.py:974-977,993-995",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:334-435"
+      ],
+      "detail": "SET_CONFIG4 has no atomic generation fence; exclusive-configurator-session is an owner assertion, not a lock. PASS assumes actual approved exclusive session."
+    },
+    {
+      "topic": "restoration whitelist",
+      "outcome": "PASS",
+      "source": [
+        "tools/glyph_serial_config_tool.py:887-890,948-955",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:345-359,389-395"
+      ],
+      "detail": "Restores all original user fields/references and copies exactly seven current firmware-owned root/reference/migration receipt fields, matching firmware SET preservation. Another incarnation refuses. Store IDs/generations/revisions not falsely restored."
+    },
+    {
+      "topic": "live versus durable ordering",
+      "outcome": "PASS_WITH_ORDERING_LIMIT",
+      "source": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:315-330,539,783-827",
+        "docs/runtime_config/profile_native_ultimate/native_context_operator.md:18-46"
+      ],
+      "detail": "Checked reference saves durable candidate and engine while _config can remain old until reinitialize. GET_CONFIG reads durable raw; STATUS Config generation comes from _config. Neither proves native activation. Preserve context -> checked reference -> manual reboot/reinitialize -> fresh backup. Never derive follow-up SET from old in-memory/live state. DELETE checks live and durable references."
+    },
+    {
+      "topic": "legacy and strict admission",
+      "outcome": "PASS",
+      "source": [
+        "tools/glyph_profile_store_candidate_tool.py:195-211",
+        "tools/glyph_serial_config_tool.py:1-882"
+      ],
+      "detail": "Candidate strict production refusal retained. Historical serial tool body before appended native helper byte-identical to parent; historical positive fixture accepted and native empty context still rejected by old binding policy."
+    }
+  ],
+  "limitations": [
+    "No physical port/device opened or commands sent; no Config/profile mutation, flash, reboot, firmware build, SDK edit, canonical repository edit/publication or hardware acceptance.",
+    "Final firmware source/IRQ/stack/ELF/P1 review is separately assigned and outside this finite host-tool probe.",
+    "Exact local-object offline proof only; live GitHub truth was not requested or established.",
+    "No aggregate PASS claimed; current host, port/controller/adapter and runtime model/effort unknown.",
+    "Actually exclusive session, separate approved candidate device packet, backups, reinitialization ordering and exact HEP/hardware gates remain necessary."
+  ],
+  "setup_notes": [
+    "One auxiliary contract-listing read used canonical checkout where candidate-only file was absent (FileNotFoundError); exact contract subsequently read from archive/Git. No mutation/device access; not a checker failure."
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/glyph-native-packet-tool-probe.CI9Q1q/independent_counterexamples.py",
+      "sha256": "e0c918f11fc7f932a3e4fd8192ed21bc4a76dd71c53d859babfe59a5f1e13a32"
+    },
+    {
+      "path": "/private/tmp/glyph-native-packet-tool-probe.CI9Q1q/independent_counterexamples_results.json",
+      "sha256": "858c56ce4ea24706d573b3f4275f7104dd076d3debeaff1791b5534f0cb588e0"
+    },
+    {
+      "path": "/private/tmp/glyph-native-packet-tool-probe.CI9Q1q/sourcepins.json",
+      "sha256": "3882042b5933f47162c83331815fcfe7e69a4d706d9e16582e66ae5c36411f2e"
+    }
+  ],
+  "mock_only": true,
+  "serial_opened": false,
+  "device_commands_sent": false
+}

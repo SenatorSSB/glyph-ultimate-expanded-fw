@@ -1,0 +1,1 @@
+Assertion failed: (wire.tx[16]==2&&runtime_identity::ReadLE(wire.tx.data()+156,4)==0&&(runtime_identity::ReadLE(wire.tx.data()+154,2)&64)), function main, file incoherent_timer_accepted-host.cpp, line 96.
