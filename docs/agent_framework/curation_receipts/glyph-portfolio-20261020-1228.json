@@ -1,0 +1,22 @@
+{
+  "schema_name": "glyph_curator_packet_receipt",
+  "schema_version": 1,
+  "packet_id": "glyph-portfolio-20261020-1228",
+  "planning_branch": "planning/portfolio-20261020-1228",
+  "planning_commit": "14b1049bd421c5a202b2d99750f225a043660241",
+  "packet_base_configurator_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "curation_branch": "curation/portfolio-20261020-1228",
+  "review_date": "2026-10-20",
+  "initial_reviewed_dispositions": [
+    {
+      "candidate_id": "GP-NATIVE-001",
+      "disposition": "READY"
+    }
+  ],
+  "global_wait_proposed": false,
+  "global_wait_accepted": false,
+  "planner_broad_audit_provenance": null,
+  "curator_acceptance_provenance": null,
+  "required_external_evidence": null,
+  "resume_event": null
+}
