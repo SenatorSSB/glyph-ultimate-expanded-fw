@@ -1,0 +1,15 @@
+{
+  "verdict": "APPROVE_BOUNDED_DESIGN",
+  "material_must_fix_findings": [],
+  "p1_resource_status": "OPEN",
+  "implementation_authorized_by_this_review": false,
+  "device_authorized": false,
+  "freeze_md_sha256": "882309de503a521c5f29cbaf0a29f47cb62adba10ce5c4b960fa7628a20b9069",
+  "freeze_json_sha256": "fa315a9bc232c9c966eed5c5ff4ad236c360acfd9d0fbedaa84286f70ffc7adb",
+  "review_sha256": "6bd240b201b14e9a701b296fac2c046fcc348f8aa783714c7d4def26503e9573",
+  "fixed_layout_arithmetic": "PASS_16_REQUEST_160_RESPONSE_EXACT_COVERAGE_408_COMPONENTS",
+  "source_implementation_review": "REQUIRED",
+  "final_ELF_resource_entry_atomic_proof": "REQUIRED",
+  "hardware_acceptance": null,
+  "atomic_method_clarification": "compile-time sizeof/align/layout; actual method-only seqcst load/store no-helper/lock/RMW object+finalELF proof; full-type is_always_lock_free assertion not required"
+}
