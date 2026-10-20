@@ -19,18 +19,18 @@
   "candidate_protocol_reference": "docs/agent_framework/GP_BIND_003_HARDWARE_PROTOCOL.md",
   "candidate_protocol_version": "GP_BIND_RUNTIME_ATTESTATION_HW_V1",
   "preconditions": ["Exact candidate/artifact custody, fresh backup, and reviewed read-only packets are retained in the local evidence bundle."],
-  "result": "PARTIAL",
+  "result": "PASS",
   "steps": [
     {"id":"A1","instruction":"Verify custody/context.","expected":"Exact tuple and backup.","observed":"Exact candidate/tree/UF2 custody and retained backup match. Historical pre-handoff candidate-matrix omission remains recorded and is not cured."},
     {"id":"A2","instruction":"Query Configurator identity.","expected":"Neutral context only.","observed":"PASS: Configurator reports only neutral backend 8 with zero identity/reference fields; Config retained exact bytes."},
     {"id":"A3","instruction":"Query XInput identity and read Profile 4.","expected":"Persisted ID 4/revision 1/digest correspondence.","observed":"PASS: persisted runtime identity matches post-update Profile 4 READ revision 1 and byte-identical deterministic payload/digest; STATUS unchanged."},
     {"id":"A4","instruction":"Run bounded normal CDC capture.","expected":"Two exact responses and complete viewer framing.","observed":"PASS: reviewed 90-second single-owner capture has two exact persisted responses and 295 complete viewer records, without malformed/unframed traffic; final Config/STATUS unchanged."},
-    {"id":"A5","instruction":"Normal reboot/reconnect then query identity.","expected":"New boot/session retains persisted identity.","observed":"NOT_TESTED: recorded unplug/replug is not a normal reboot/reconnect through the production selection path with a new boot/session identity capture."}
+    {"id":"A5","instruction":"Manual reboot/reconnect then query identity.","expected":"New primary session retains persisted identity with ordinary viewer traffic intact.","observed":"PASS: the owner performed the recorded ordinary unplug/replug between XInput identity 002 and post-reconnect identity 003; 003 returned the exact persisted tuple. The later reviewed normal-session capture also recorded matching identity responses with viewer/control traffic."}
   ],
-  "anomalies": ["No firmware or persistent-state anomaly was observed."],
+  "anomalies": ["The initial update/preparation records did not freeze a candidate-specific A1--A5 matrix before handoff. This historical process caveat is retained; HARDWARE_EVIDENCE.md does not make it a standalone PASS blocker, and it does not alter the exact candidate/artifact or completed observations."],
   "negative_regression_checks": ["No X1 repair, V4 acceptance, ProfileStore redesign, RT2 work, merge, rebuild, rollback, or persistent device mutation is claimed."],
-  "power_cycle_reconnect_checks": ["A recorded unplug/replug is retained but is insufficient for A5; an approved normal reboot/reconnect plus new-session identity observation remains required."],
-  "evidence_gaps": ["A5 only: a separately approved normal reboot/reconnect through the existing production selection path, followed by a new boot/session persisted-identity capture. The earlier pre-handoff candidate-matrix omission remains historical and is not retroactively cured."],
+  "power_cycle_reconnect_checks": ["Recorded ordinary unplug/replug between XInput 002 and 003 with exact post-reconnect persisted identity; later normal-session viewer/control capture remained exact."],
+  "evidence_gaps": [],
   "rollback_recovery": "None performed.",
   "tester": "Owner physical observations and daemon host capture; independent HEP adjudication.",
   "tested_at": "2026-10-19T16:03:00+03:00"

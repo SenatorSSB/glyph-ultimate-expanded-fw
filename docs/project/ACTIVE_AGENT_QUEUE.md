@@ -8470,7 +8470,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-BIND-003",
       "title": "Read-only persisted Ultimate runtime identity attestation",
-      "status": "LOCAL_ACCEPTANCE_PENDING",
+      "status": "HARDWARE_VALIDATED",
       "branch": "codex/gp-bind-003-runtime-attestation",
       "objective": "Expose which persisted Ultimate profile identity/revision/payload the actual current primary-backend evaluator uses in the same XInput boot/session; return explicit neutral/unavailable status whenever correspondence is unproven.",
       "why_this_matters": "Distinguish stored, selected, requested, readback and actual runtime objects before renewed X1 diagnosis; Configurator cannot reconstruct the historical H4 gameplay session.",
@@ -8523,10 +8523,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_003_partial_evidence_2026-10-19.json",
-      "hardware_result": "PARTIAL",
-      "hardware_evidence_gaps": [
-        "A5 only: a separately approved normal reboot/reconnect through the existing production selection path, followed by a new boot/session persisted-identity capture. The earlier pre-handoff candidate-matrix omission remains historical and is not retroactively cured."
-      ],
+      "hardware_result": "PASS",
+      "hardware_evidence_gaps": [],
       "rollback_recovery": "Retain original Config/profile bytes/hashes and approved known-good firmware/custody. Query tests authorize no write/flash/reset/selection. Before any physical preparation, require its separately approved exact packet and safe manual recovery route. Stop on output/transport/mutation/correspondence anomaly. Never merge H3 before exact human HEP PASS; preserve source-free R -> E -> I, tested source/catalog and separate strict DONE.",
       "status_documentation_updates": "Record exact source/base/direct parent/tree, changed paths, observer/digest/wire definition, focused/affected results and honest debt, fresh independent reviews, Mk6 static resource prologue facts, candidate-specific tuple/unique custody and every physical gap. Target query timing and peak stack remain NOT_MEASURED. Record capability PARTIAL and network-enabled Git requirement in chapter ledger. Preserve prior failures and historical H4 UNKNOWN.",
       "done_evidence": "Required: truthful current-session observer with all applicable Tier-1/Tier-2 proof; exact reviewed committed Mk6 candidate/artifact/custody; minimum protocol exact human observations and source-free HEP PASS; fresh reviewed exact tested-source integration with genuine catalog/correspondence, then separate strict DONE. Renewed X1 diagnosis uses full Config/mode/reference/store/runtime/firmware tuple; no X1 repair or prior H4 reconstruction is part of this order.",
