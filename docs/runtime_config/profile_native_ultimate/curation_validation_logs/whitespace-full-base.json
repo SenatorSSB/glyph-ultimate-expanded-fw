@@ -1,0 +1,6 @@
+{
+  "command": "git diff --check 976ba2195b72046b32f7ecdd41063e7bad791ded HEAD",
+  "exit_code": 2,
+  "observed_head": "e3138f9fb26b6b3979e622223249d434d87ca700",
+  "raw_stdout": "docs/runtime_config/profile_native_ultimate/baseline_build_success.log:356: trailing whitespace.\n+PACKAGES: \ndocs/runtime_config/profile_native_ultimate/baseline_build_success.log:357: trailing whitespace.\n+ - framework-arduinopico @ 1.30603.0+sha.32e74d0 \ndocs/runtime_config/profile_native_ultimate/baseline_build_success.log:358: trailing whitespace.\n+ - tool-picotool-rp2040-earlephilhower @ 5.120300.240827 (12.3.0) \ndocs/runtime_config/profile_native_ultimate/production_abi_evidence/baseline/generated/config.pb.c:91: new blank line at EOF.\ndocs/runtime_config/profile_native_ultimate/production_abi_evidence/proposed/generated/config.pb.c:91: new blank line at EOF.\ndocs/runtime_config/profile_native_ultimate/proposed_abi_evidence/generated/config.pb.c:91: new blank line at EOF.\n"
+}

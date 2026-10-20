@@ -76,7 +76,7 @@
       "command": "git diff --check 976ba2195b72046b32f7ecdd41063e7bad791ded HEAD",
       "exit_code": 2,
       "result": "IMMUTABLE_RAW_EVIDENCE_WHITESPACE_WARNINGS",
-      "log": "curation_validation_logs/whitespace-full-base.log",
+      "log": "curation_validation_logs/whitespace-full-base.json",
       "scope": "Six warnings entirely in104 exact P replay paths: three trailing spaces in raw baseline build log and three generated config.pb.c EOF blank lines. Preserved byte-exact evidence; no whitespace normalization or false PASS. No firmware/product/control-plane semantic contradiction."
     },
     {
@@ -112,8 +112,9 @@
     "surface-final.log": "6fd0b7e477c7488728330b70c02bc7c5b31c8d3a1d0578ea96ad28f26d1544ed",
     "surface.log": "6fd0b7e477c7488728330b70c02bc7c5b31c8d3a1d0578ea96ad28f26d1544ed",
     "whitespace-authored.log": "ac5b0b021cc1ee1c2dedcd18b8b47b235ac099539b127d7e0784e9bf640946a8",
-    "whitespace-full-base.log": "993a766b5150080fd455c629d3b444cbf98a3c7228aec508a1d121fd9d101f58"
+    "whitespace-full-base.json": "1cff414e8d7891eb7d6286a2891ee90aa6da06f9f661015bd1e4ed02b876a639"
   },
   "final_validated_adoption_head": "e3138f9fb26b6b3979e622223249d434d87ca700",
-  "final_report_descendant_scope": "Only records completed final-context results and immutable raw-evidence whitespace observations; decision/queue/P/C/source scope unchanged."
+  "final_report_descendant_scope": "Only records completed final-context results and immutable raw-evidence whitespace observations; decision/queue/P/C/source scope unchanged.",
+  "whitespace_audit_encoding": "Exact raw whitespace diagnostic is JSON escaped to retain all bytes without introducing new trailing whitespace into the Curator-authored audit artifact."
 }
