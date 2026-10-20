@@ -1,0 +1,59 @@
+{
+  "base": "e4bf626c71d0494a138721eff54ac563ef2877cb",
+  "classification": "DOCS_CHECKER_ONLY",
+  "scope": "Single later owner-authorized bounded diagnostic exception under existing GP-NATIVE-001; no source or device action",
+  "owner_origin_attested_by_root": true,
+  "independent_design_review": "APPROVE_BOUNDED_DESIGN",
+  "original_numeric_caps_oracles_P_receipt_preserved": true,
+  "other102_orders_and_queue_metadata_unchanged": true,
+  "exact_source_authority_additions": 8,
+  "exact_test_authority_additions": 2,
+  "git_diff_check": "PASS",
+  "prior_local_comparison_error": "Initial assertion expected work_orders; actual queue field is items. Corrected parser independently verified sole item102 GP-NATIVE-001 and all other102 unchanged.",
+  "checks": {
+    "check_glyph_agent_framework_docs.py": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "ebf13b",
+        "wall_time_seconds": 0.000008625,
+        "exit_code": 0,
+        "original_token_count": 528,
+        "output": "PASS: required docs and JSON schemas exist and parse\nPASS: current framework surface is Codex/OpenAI-only\nPASS: task/lane routing, requested/observed dispatch policy and negative controls validate\nPASS: optional chapter roster, model provenance, transport/recovery boundaries and negative controls validate\nPASS: Planner/Curator packet object and survivor adversarial cases validate\nPASS: legacy Curator receipt immutability adversarial cases validate\nPASS: append-only Curator receipt registry adversarial cases validate\nPASS: new zero/nonzero Planner receipts and accepted-wait adversarial cases validate\nPASS: current queue/status mirrors match machine-derived runway state\nPASS: current human-readable runway summaries match machine state\nPASS: current prose contains no duplicated unguarded runway claims\nPASS: canonical queue, runway counts, and zero-runway liveness validate\nPASS: completion correspondence direct/replay and negative Git corpus validate\nPASS: Revision 2 authorization, evidence, and user-direction surfaces validate\nPASS: Revision-3 classification/safety/successor/transport-policy negative controls validate\nPASS: persistent campaign directive, safety and chronology controls validate\nPASS: current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved\nPASS: firmware implementation authority and hardware merge gate are reconciled\nPASS: legacy project-local control plane is explicitly superseded\nPASS: delegation discovery and accountability adversarial self-tests validate\nPASS: native delegation discovery, role boundaries, and reporting validate\nPASS: four exact scheduled/manual task configurations validate\nPASS: capability-aware live Git and authentication protections validate\nPASS: branch classifications and judge verdicts are documented\nPASS: AGENTS.md points to framework entrypoints\nPASS: post-C024 chapter entrypoint, bounded authority, roles and passive telemetry validate\nPASS: forbidden active claims absent and required non-claims preserved\nPASS: runner prompt and scripts/agent_runner.py are absent\nglyph_agent_framework_docs: PASS\n"
+      }
+    },
+    "check_glyph_agentic_sequence_protocol.py": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d2bee7",
+        "wall_time_seconds": 0.000006416,
+        "exit_code": 0,
+        "original_token_count": 29,
+        "output": "glyph_agentic_sequence_protocol; status=PASS; user_intervention_gates=8; hardware_status=not_new_hardware_result\n"
+      }
+    },
+    "check_glyph_docs_navigation.py": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "6868f8",
+        "wall_time_seconds": 0.002808334,
+        "exit_code": 0,
+        "original_token_count": 304,
+        "output": "glyph_docs_navigation: PASS\n- README.md\n- AGENTS.md\n- docs/AGENT_CONTEXT.md\n- docs/CURRENT_STATE.md\n- docs/ROADMAP.md\n- docs/WORKFLOW.md\n- docs/archive/README.md\n- docs/calibration/README.md\n- docs/calibration/INDEX.md\n- docs/calibration/archive_policy.md\n- docs/export/README.md\n- docs/runtime_config/README.md\n- docs/runtime_config/IMPLEMENTATION_BOUNDARY.md\n- docs/runtime_config/coordinate_native_runtime_profile_contract.md\n- docs/runtime_config/source_owned_table_symbol_map.md\n- docs/runtime_config/runtime_config_activation_alternatives_a_f.md\n- docs/runtime_config/source_authority_intake_workflow.md\n- docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json\n- docs/agent_framework/README.md\n- docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md\n- docs/agent_framework/WORK_ORDER_TEMPLATE.md\n- docs/agent_framework/HARDWARE_EVIDENCE.md\n- docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md\n- docs/agent_framework/USER_DIRECTION.md\n- docs/agent_framework/SCHEDULED_TASKS.md\n- docs/agent_framework/MODEL_ROUTING.md\n- docs/agent_framework/SUPERVISOR_CONTRACT.md\n- docs/agent_framework/SUBAGENT_CONTRACTS.md\n- docs/agent_framework/VALIDATION_AND_GATES.md\n- docs/project/ACTIVE_AGENT_QUEUE.md\n"
+      }
+    },
+    "check_glyph_docs_agent_surface.py": {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "7a22b4",
+        "wall_time_seconds": 0.000011042,
+        "exit_code": 1,
+        "original_token_count": 622,
+        "output": "Traceback (most recent call last):\n  File \"/private/tmp/glyph-native-curation-20261020/tools/glyph_checker_context.py\", line 288, in authenticated_campaign_context\n    proof = authenticate(context.repo_root)\n  File \"/private/tmp/glyph-native-curation-20261020/tools/glyph_campaign_transition.py\", line 84, in invoke\n    return function(*args, **kwargs)\n  File \"/private/tmp/glyph-native-curation-20261020/tools/glyph_campaign_transition.py\", line 466, in authenticate\n    return authenticate_c024_phase(root)\n  File \"/private/tmp/glyph-native-curation-20261020/tools/glyph_c014_campaign_transition.py\", line 1206, in authenticate_c024_phase\n    require(changed_since_i <= post_i_validation_paths,\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            'C024 post-integration change outside validation/evidence paths')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/glyph-native-curation-20261020/tools/glyph_campaign_transition.py\", line 104, in require\n    if not ok: raise CorrespondenceError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nglyph_hardware_correspondence.CorrespondenceError: C024 post-integration change outside validation/evidence paths\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-native-curation-20261020/tools/check_glyph_docs_agent_surface.py\", line 561, in main\n    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))\n  File \"/private/tmp/glyph-native-curation-20261020/tools/glyph_checker_context.py\", line 290, in authenticated_campaign_context\n    raise ScopeValidationError(str(exc)) from exc\nglyph_checker_context.ScopeValidationError: C024 post-integration change outside validation/evidence paths\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/private/tmp/glyph-native-curation-20261020/tools/check_glyph_docs_agent_surface.py\", line 576, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/private/tmp/glyph-native-curation-20261020/tools/check_glyph_docs_agent_surface.py\", line 564, in main\n    fail(str(exc))\n    ~~~~^^^^^^^^^^\n  File \"/private/tmp/glyph-native-curation-20261020/tools/check_glyph_docs_agent_surface.py\", line 120, in fail\n    raise AgentSurfaceError(message)\nAgentSurfaceError: C024 post-integration change outside validation/evidence paths\n"
+      }
+    }
+  },
+  "historical_surface_failure": "FAIL identical C024 campaign-context baseline restriction preserved, no context helper or global checker allowance changed",
+  "P1": "OPEN_CREATE_AND_BOOT_FILESYSTEM",
+  "target_observations": "NOT_MEASURED",
+  "device_approval": false
+}

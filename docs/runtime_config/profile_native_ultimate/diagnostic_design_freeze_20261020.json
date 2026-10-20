@@ -1,0 +1,499 @@
+{
+  "state": "DESIGN_FREEZE_FOR_REVIEW_AND_CANONICAL_AMENDMENT_ONLY",
+  "owner_authorized_diagnostics": true,
+  "device_authorized": false,
+  "canonical_sourcefree_poll_noinline_authority": "e4bf626c71d0494a138721eff54ac563ef2877cb",
+  "protocol": "Glyph.Native.TargetMetrics.v1",
+  "magic_hex": "d7474e4d",
+  "request": {
+    "bytes": 16,
+    "fields": [
+      {
+        "offset": 0,
+        "bytes": 4,
+        "name": "magic",
+        "value_hex": "d7474e4d"
+      },
+      {
+        "offset": 4,
+        "bytes": 1,
+        "name": "version",
+        "value": 1
+      },
+      {
+        "offset": 5,
+        "bytes": 1,
+        "name": "opcode",
+        "value": 1
+      },
+      {
+        "offset": 6,
+        "bytes": 2,
+        "name": "length",
+        "value": 16,
+        "encoding": "u16le"
+      },
+      {
+        "offset": 8,
+        "bytes": 8,
+        "name": "token",
+        "encoding": "u64le nonzero"
+      }
+    ]
+  },
+  "response": {
+    "bytes": 160,
+    "fields": [
+      {
+        "offset": 0,
+        "bytes": 4,
+        "name": "magic",
+        "encoding": "bytes d7 47 4e 4d"
+      },
+      {
+        "offset": 4,
+        "bytes": 1,
+        "name": "version",
+        "encoding": "u8 = 1"
+      },
+      {
+        "offset": 5,
+        "bytes": 1,
+        "name": "kind",
+        "encoding": "u8 = 0x81"
+      },
+      {
+        "offset": 6,
+        "bytes": 2,
+        "name": "length",
+        "encoding": "u16le = 160"
+      },
+      {
+        "offset": 8,
+        "bytes": 8,
+        "name": "request_token",
+        "encoding": "u64le nonzero echoed opaque token"
+      },
+      {
+        "offset": 16,
+        "bytes": 1,
+        "name": "status",
+        "encoding": "u8 COMPLETE=0 PARTIAL=1 INVALID=2"
+      },
+      {
+        "offset": 17,
+        "bytes": 1,
+        "name": "backend",
+        "encoding": "u8 = 2 XInput"
+      },
+      {
+        "offset": 18,
+        "bytes": 2,
+        "name": "validity_flags",
+        "encoding": "u16le bitset"
+      },
+      {
+        "offset": 20,
+        "bytes": 20,
+        "name": "source_git_sha",
+        "encoding": "20 binary bytes in Git hexadecimal order"
+      },
+      {
+        "offset": 40,
+        "bytes": 4,
+        "name": "capture_sequence",
+        "encoding": "u32le monotonic boot-local admitted response index starts1"
+      },
+      {
+        "offset": 44,
+        "bytes": 4,
+        "name": "native_generation",
+        "encoding": "u32le latched actual valid native generation or0"
+      },
+      {
+        "offset": 48,
+        "bytes": 4,
+        "name": "frame_count",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 52,
+        "bytes": 4,
+        "name": "frame_min_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 56,
+        "bytes": 4,
+        "name": "frame_max_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 60,
+        "bytes": 4,
+        "name": "frame_sum_us_low",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 64,
+        "bytes": 4,
+        "name": "frame_sum_us_high",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 68,
+        "bytes": 4,
+        "name": "activation_count",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 72,
+        "bytes": 4,
+        "name": "activation_min_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 76,
+        "bytes": 4,
+        "name": "activation_max_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 80,
+        "bytes": 4,
+        "name": "activation_sum_us_low",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 84,
+        "bytes": 4,
+        "name": "activation_sum_us_high",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 88,
+        "bytes": 4,
+        "name": "timer_read_calibration_count",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 92,
+        "bytes": 4,
+        "name": "timer_read_calibration_min_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 96,
+        "bytes": 4,
+        "name": "timer_read_calibration_max_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 100,
+        "bytes": 4,
+        "name": "timer_read_calibration_sum_us_low",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 104,
+        "bytes": 4,
+        "name": "timer_read_calibration_sum_us_high",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 108,
+        "bytes": 2,
+        "name": "core0_stack_used_observed_bytes",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 110,
+        "bytes": 2,
+        "name": "core0_sampled_sp_used_bytes",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 112,
+        "bytes": 4,
+        "name": "core0_completed_scan_generation",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 116,
+        "bytes": 4,
+        "name": "core0_scan_chunk_max_elapsed_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 120,
+        "bytes": 2,
+        "name": "core0_stack_flags",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 122,
+        "bytes": 2,
+        "name": "core0_reserved",
+        "encoding": "u16le zero"
+      },
+      {
+        "offset": 124,
+        "bytes": 2,
+        "name": "core1_stack_used_observed_bytes",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 126,
+        "bytes": 2,
+        "name": "core1_sampled_sp_used_bytes",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 128,
+        "bytes": 4,
+        "name": "core1_completed_scan_generation",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 132,
+        "bytes": 4,
+        "name": "core1_scan_chunk_max_elapsed_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 136,
+        "bytes": 2,
+        "name": "core1_stack_flags",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 138,
+        "bytes": 2,
+        "name": "core1_reserved",
+        "encoding": "u16le zero"
+      },
+      {
+        "offset": 140,
+        "bytes": 4,
+        "name": "frame_record_max_elapsed_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 144,
+        "bytes": 4,
+        "name": "activation_record_max_elapsed_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 148,
+        "bytes": 4,
+        "name": "xinput_observer_service_max_elapsed_us",
+        "encoding": "u32le"
+      },
+      {
+        "offset": 152,
+        "bytes": 2,
+        "name": "source_flags",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 154,
+        "bytes": 2,
+        "name": "timer_flags",
+        "encoding": "u16le"
+      },
+      {
+        "offset": 156,
+        "bytes": 4,
+        "name": "uptime_seconds",
+        "encoding": "u32le floor(time_us_64/1000000), saturating"
+      }
+    ]
+  },
+  "bitsets": {
+    "validity_flags": {
+      "0": "FRAME_SAMPLES_VALID",
+      "1": "ACTIVATION_SAMPLES_VALID",
+      "2": "CALIBRATION_VALID",
+      "3": "CORE0_SCAN_COMPLETE",
+      "4": "CORE1_SCAN_COMPLETE",
+      "5": "SOURCE_LABEL_VALID",
+      "6": "NATIVE_GENERATION_MATCH",
+      "7": "TIMER_UNIT_MICROSECONDS",
+      "8": "RETAINED_INSTRUMENTATION_PRESENT"
+    },
+    "source_flags": {
+      "0": "CLEAN_COMMITTED_SOURCE",
+      "1": "FULL_SOURCE_SHA_PRESENT"
+    },
+    "timer_flags": {
+      "0": "FRAME_COUNT_SATURATED",
+      "1": "FRAME_SUM_SATURATED",
+      "2": "ACTIVATION_COUNT_SATURATED",
+      "3": "ACTIVATION_SUM_SATURATED",
+      "4": "CALIBRATION_COUNT_SATURATED",
+      "5": "CALIBRATION_SUM_SATURATED",
+      "6": "SESSION_EXPIRED",
+      "7": "FRAME_REFUSED",
+      "8": "NATIVE_GENERATION_CHANGED",
+      "9": "ACTIVATION_REFUSED",
+      "10": "ACTIVATION_RECOVERED_PREVIOUS",
+      "11": "CALIBRATION_INCOMPLETE",
+      "12": "CAPTURE_SEQUENCE_EXHAUSTED"
+    },
+    "stack_flags": {
+      "0": "INITIALIZED",
+      "1": "SCAN_COMPLETE",
+      "2": "BAD_BOUNDS_OR_ALIGNMENT",
+      "3": "BOTTOM32_EXCLUDED",
+      "4": "ENTRY_ADAPTER_ENTERED",
+      "5": "SP_OUTSIDE_USABLE_RESERVE",
+      "6": "FIRST_USABLE_WORD_CHANGED",
+      "7": "MAILBOX_UNSTABLE",
+      "8": "SCAN_GENERATION_EXHAUSTED"
+    }
+  },
+  "unspecified_bits": "MUST be zero; host rejects unknown bits/version/kind/length",
+  "runtime_identity": "existing16/72 framing/status/bytes/Consume/Expire/decode/encode and parser field layout unchanged; one HasPartialFrame() const accessor only",
+  "static_layout": {
+    "planned_new_mutable_bytes": 408,
+    "source_sha_const_bytes": 20,
+    "if_source_sha_placed_in_RAM_total_bytes": 428,
+    "max_all_new_static_bytes": 512,
+    "alignment_assumption": "all state words/atomics4 bytes align4; compiler/linker proof mandatory",
+    "components": [
+      {
+        "name": "tx_response",
+        "bytes": 160
+      },
+      {
+        "name": "three_core0_stats_5xu32",
+        "bytes": 60
+      },
+      {
+        "name": "three_overhead_maxima_u32",
+        "bytes": 12
+      },
+      {
+        "name": "two_owner_scan_states_12xu32",
+        "bytes": 96
+      },
+      {
+        "name": "two_mailboxes_5xatomic_u32",
+        "bytes": 40
+      },
+      {
+        "name": "diagnostic_rx16_started4_used1_phase1_reserved2",
+        "bytes": 24
+      },
+      {
+        "name": "last_tx_ms_capture_seq_native_gen_run_flags_4xu32",
+        "bytes": 16
+      }
+    ],
+    "scan_state_words": [
+      "bottom",
+      "usable_bottom",
+      "top",
+      "initial_sp",
+      "minimum_sampled_sp",
+      "lowest_changed",
+      "cursor",
+      "scan_generation",
+      "max_chunk_us",
+      "flags",
+      "publish_version",
+      "last_chunk_us"
+    ],
+    "mailbox_words": [
+      "version",
+      "packed_used_and_sampled_sp",
+      "completed_scan_generation",
+      "max_chunk_us",
+      "packed_flags_and_reserved"
+    ]
+  },
+  "allowlist": [
+    "include/core/NativeTargetMetrics.hpp",
+    "HAL/pico/src/core/NativeTargetMetrics.cpp",
+    "HAL/pico/src/core/NativeTargetMetricsEntry.S",
+    "builder_scripts/native_target_metrics.py",
+    "platformio.ini",
+    "src/core/ControllerMode.cpp",
+    "include/core/ControllerMode.hpp",
+    "include/modes/Ultimate.hpp",
+    "src/core/mode_selection.cpp",
+    "config/glyph/common/src/config.cpp",
+    "include/core/RuntimeIdentityService.hpp",
+    "include/core/RuntimeIdentityWire.hpp",
+    "tools/glyph_native_target_metrics_tool.py",
+    "tools/check_glyph_native_target_metrics.py",
+    "tools/fixtures/native_target_metrics/",
+    "docs/runtime_config/profile_native_ultimate/"
+  ],
+  "accessor_only_path": "include/core/RuntimeIdentityWire.hpp",
+  "gating_interface": "public virtual uint32_t ControllerMode::DiagnosticNativeGeneration() const default0; Ultimate override returns nonzero current generation only for actual NativeAbi1 plus owned/published/valid/matching active view; no requested-engine shortcut",
+  "entry_hooks": [
+    "external undefined main -> stackless __wrap_main -> real Arduino main after SDK runtime_init",
+    "external undefined multicore_launch_core1 -> narrowly validated expected-main1 adapter -> original SDK default launcher with stackless own-core entry adapter -> real main1"
+  ],
+  "mandatory_gates": [
+    "canonical amendment/readback before diagnostic implementation",
+    "fresh independent review of exact implementation",
+    "exact ARM object/ELF linker interception and guard/ownership proof",
+    "actual compiler static/frame/callchain/IRQ proof within existing caps",
+    "final clean committed Mk6 build and exact ELF/UF2 custody",
+    "separate explicit candidate-specific device packet approval before any device action",
+    "same retained-instrumentation source HEP PASS before merge"
+  ],
+  "sourcepins": {
+    "/private/tmp/glyph-profile-native-20261020/include/core/RuntimeIdentityWire.hpp": {
+      "bytes": 2785,
+      "sha256": "1127e5913c06d85d0731ab7577debab5c04181570d64d40bfa19e001132efcdc"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/core/RuntimeIdentityService.hpp": {
+      "bytes": 1346,
+      "sha256": "4e4aefc2ee6c5d483afd534a198f758ce84cdda3e877000a43d8966dde3a4f2b"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/core/ControllerMode.hpp": {
+      "bytes": 1158,
+      "sha256": "bbeb7130313563e54806b0cb1920cbf77d1df0e8a5b554cdca53dec2774818ce"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/modes/Ultimate.hpp": {
+      "bytes": 1368,
+      "sha256": "45e83dbcaa1921eba34917b5c0296e3d9cf266ef7b4cfd3391e04d404d3753c2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/ControllerMode.cpp": {
+      "bytes": 2871,
+      "sha256": "5a8615740951ad8ab5b07104b38d5842d3a91537e4c1690d47a416f554dcd524"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/mode_selection.cpp": {
+      "bytes": 9269,
+      "sha256": "fb2342b66135b2af23d083372b80710ddc0be20b38034740df5cac0b08e6f4e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp": {
+      "bytes": 17650,
+      "sha256": "ea87e5e50bd30cef399f2f0db1f0c7b55fe2098e74d4022ebf4120f55fc56ea9"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/comms/B0XXInputViewer.cpp": {
+      "bytes": 1743,
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto": {
+      "bytes": 33965,
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c": {
+      "bytes": 10079,
+      "sha256": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28"
+    },
+    "/private/tmp/glyph-native-owner-diagnostic-authorization-20261020.md": {
+      "sha256": "cf7f60d61044ffea6d104bfdffe190f2d896b82683059d670c310847605226ed",
+      "bytes": 3691
+    }
+  }
+}

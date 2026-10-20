@@ -1,5 +1,22 @@
 # Glyph Roadmap
 
+## Owner-authorized native diagnostic exception — 2026-10-20
+
+The later direct owner reply authorizes retained bounded native timing and
+post-startup stack-write observations with exactly one read-only XInput snapshot
+within existing GP-NATIVE-001. The [bounded amendment](runtime_config/profile_native_ultimate/diagnostic_scope_amendment_20261020.json)
+and [exact diagnostic design](runtime_config/profile_native_ultimate/diagnostic_design_freeze_20261020.json)
+qualify only the earlier timing/new-command exclusions and named call-site scope.
+Original P/M1/architecture/oracle evidence remains immutable. Existing identity
+16/72-byte framing/status/behavior and all RAM/stack/storage/partition limits stay
+fixed; diagnostic static512 is inside existing totals. The same exact instrumented
+candidate requires source/resource proof, independent review, build and custody.
+NATIVE-REVIEW-P1-STACK remains OPEN for ordinary CREATE and boot filesystem paths;
+target values remain NOT_MEASURED until observed. No device, Config/ProfileStore,
+flashing or physical approval is granted; the concrete owner-approved candidate
+packet and exact HEP/integration/DONE gates remain mandatory. This is source-free
+authority work and creates no new implementation order or successor.
+
 ## Profile-native Ultimate chapter authorization — 2026-10-20
 
 The sole native product order GP-NATIVE-001 covers the complete reviewed M2–M7

@@ -2,6 +2,26 @@
 
 Status label: CURRENT.
 
+## Later bounded native diagnostic exception — 2026-10-20
+
+The direct owner diagnostic authorization adds only the exact retained timing,
+post-runtime/core-launch stack-write observation and one read-only XInput snapshot
+in the [separate bounded amendment](profile_native_ultimate/diagnostic_scope_amendment_20261020.json)
+and [frozen diagnostic design](profile_native_ultimate/diagnostic_design_freeze_20261020.json).
+This qualifies only conflicting timing/new-command prohibitions within GP-NATIVE-001;
+all generic runtime/transport/control/store prohibitions below remain in force.
+Original M1/architecture evidence stays exact. Preserve identity16/72 and its
+statuses/framing/behavior, all old numeric/resource limits and both2048-byte
+stacks; diagnostic512 is a subcap inside existing static totals. Only the named
+config.cpp static validation-error workspace repair and frozen measurement hooks
+are added. Required independent design assessment, source-free canonical adoption
+and live readback precede new facility source edits; actual source/ELF/ABI/guard/
+IRQ/protocol/resource/tests/build/custody proof precedes handoff. Stack P1 remains
+OPEN; observations do not replace structural proof or cover earlier startup/ROM.
+No GameCube/Switch timing claim, device mutation or physical approval is granted.
+The exact instrumented candidate still requires its concrete owner-approved
+packet and exact HEP PASS before integration and separate strict DONE.
+
 ## Named Profile-Native Ultimate implementation boundary — 2026-10-20
 
 The direct owner directive and independently adopted GP-NATIVE-001 permit only
