@@ -208,7 +208,8 @@
     "tools/convert_glyph_native_ultimate_profile.py",
     "tools/check_glyph_profile_native_ultimate.py",
     "tools/measure_glyph_native_ultimate_resources.py",
-    "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+    "include/core/RuntimeIdentityService.hpp"
   ],
   "allowed_test_paths": [
     "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py",
@@ -384,7 +385,8 @@
   "scope_clarifications": [
     "Additional Configurator header declarations are only for the named synchronous native callback/reject plumbing. Two directly affected observer fixtures may replace disappeared generated-size macros with explicit bounded adapters; frozen Stage-A/B/C oracle bodies/headers/hashes remain immutable.",
     "Named current mode-selection/custom-cache/button/capacity test adapters may consume actual changed interfaces while preserving their historical fixtures/pins and proofs. No checker context/campaign/global allowance or aggregate redesign is authorized.",
-    "Any further concrete call-site/test dependency must be documented as necessary to a named frozen interface, remain within the exact approved behavioral scope, and receive independent source review. It cannot authorize unrelated firmware, semantics, transport, storage or resource changes."
+    "Any further concrete call-site/test dependency must be documented as necessary to a named frozen interface, remain within the exact approved behavioral scope, and receive independent source review. It cannot authorize unrelated firmware, semantics, transport, storage or resource changes.",
+    "GP-NATIVE-001 bounded native-identity call-site clarification (2026-10-20): include/core/RuntimeIdentityService.hpp is authorized solely to add __attribute__((noinline)) to the existing runtime_identity::Service::Poll template method. This separates its existing response/Snapshot stack phase from the caller loop frame during the source-grounded NATIVE-REVIEW-P1-STACK repair. Preserve the exact method signature/body, parser, counters, scheduling order, XInput-only admission, 16-byte request/72-byte response, statuses and wire behavior. No new API, static workspace, resource-limit increase, timing facility, SDK edit or other header change is authorized. This path is an existing dependency of frozen native active-runtime identity correspondence, not general transport authority. Require fresh independent source review and exact final build/disassembly/call-chain/interrupt resource proof; this clarification does not establish stack PASS, target measurement, device approval or hardware acceptance. All other source/test paths, numeric caps, frozen architecture/oracles and hardware gates remain unchanged."
   ],
   "research_replay_modifications": [
     {
