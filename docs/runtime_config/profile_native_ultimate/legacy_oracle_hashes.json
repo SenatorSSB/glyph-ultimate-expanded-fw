@@ -1,0 +1,19 @@
+{
+  "src/modes/Ultimate.cpp": "4c8cd4c2f6fe69b0c5b7bd7f0242a32177695dc716fde40011e8c7aa064d0644",
+  "src/core/InputMode.cpp": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+  "src/core/ControllerMode.cpp": "1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8",
+  "src/core/socd.cpp": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+  "include/core/state.hpp": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3",
+  "include/modes/UltimateProfileEvaluator.hpp": "e7a68817e13a11ba7e9e88c112fc3ade46e40c5d75fa94060896be70f4f722fc",
+  "include/modes/UltimateProfileConfig.hpp": "2eba575ba8ace466426e94fb68614fba297730a3fd092e044d9dc83e48eb1bd3",
+  "tools/fixtures/stage_a_ultimate_profiles_dry_run.json": "fc86614108390f46ede813d5655a73aca34ed9a193258126c9fb6e593b353143",
+  "tools/fixtures/stage_b_ultimate_profiles_fixture.json": "9cebfa70d0dc379d60e04f1814921c92330540af68c6bc9d6dd3b2c73b09cb9b",
+  "tools/fixtures/stage_c_ultimate_profiles_fixture.json": "8cb2b68d4d99c162d543077e8f7b8f30f646401c7d9710c34fd92cdadd5d64d1",
+  "tools/fixtures/stage_c_ultimate_profiles_dry_run.json": "e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb",
+  "tools/fixtures/stage_c_ultimate_profiles_host/legacy_ultimate.cpp": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e",
+  "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py": "4d2d3dac29b2149a6da999cfaa5e3d5e98d89299edfedda94271a1f0c8cd8d9f",
+  "tools/check_glyph_stage_b_ultimate_profiles.py": "3fe474d5acaf3c41bf97585462d580daf2c0eb91f1576ba8e79683ef77c7132d",
+  "tools/check_glyph_stage_c_ultimate_profiles.py": "d2b89073f3877dc06b47e8445bc0dae866cb73c602420170ca9d4286cc7a9172",
+  "schema/haybox/config.proto": "81b0aad7568728ac465981b42c738154af8250e16426734d269e0abe7b9d3f49",
+  "schema/haybox/config.options": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0"
+}

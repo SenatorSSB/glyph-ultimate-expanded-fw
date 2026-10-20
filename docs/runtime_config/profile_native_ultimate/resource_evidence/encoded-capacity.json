@@ -1,0 +1,80 @@
+{
+  "v1": {
+    "config_encoded": 4064,
+    "profile_encoded": [
+      1960,
+      1960
+    ]
+  },
+  "v2": {
+    "config_encoded": 4781,
+    "profile_encoded": [
+      2677,
+      1960
+    ]
+  },
+  "v3": {
+    "config_encoded": 6248,
+    "profile_encoded": [
+      3042,
+      3047
+    ]
+  },
+  "capacity": [
+    {
+      "payload": 3006,
+      "record_charge": 4096,
+      "60_revisions": 245760,
+      "fixed_max_configs": 69632,
+      "metadata": 57344,
+      "staging": 45056,
+      "reserve": 16384,
+      "total": 434176,
+      "fits512KiB": true
+    },
+    {
+      "payload": 3047,
+      "record_charge": 4096,
+      "60_revisions": 245760,
+      "fixed_max_configs": 69632,
+      "metadata": 57344,
+      "staging": 45056,
+      "reserve": 16384,
+      "total": 434176,
+      "fits512KiB": true
+    },
+    {
+      "payload": 4056,
+      "record_charge": 4096,
+      "60_revisions": 245760,
+      "fixed_max_configs": 69632,
+      "metadata": 57344,
+      "staging": 45056,
+      "reserve": 16384,
+      "total": 434176,
+      "fits512KiB": true
+    },
+    {
+      "payload": 4064,
+      "record_charge": 8192,
+      "60_revisions": 491520,
+      "fixed_max_configs": 69632,
+      "metadata": 57344,
+      "staging": 45056,
+      "reserve": 16384,
+      "total": 679936,
+      "fits512KiB": false
+    },
+    {
+      "payload": 4096,
+      "record_charge": 8192,
+      "60_revisions": 491520,
+      "fixed_max_configs": 69632,
+      "metadata": 57344,
+      "staging": 45056,
+      "reserve": 16384,
+      "total": 679936,
+      "fits512KiB": false
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "ordinary": {
+    "body": 1980,
+    "conditions": 71,
+    "tokens": 280,
+    "sources": 7,
+    "rules": 19,
+    "bindings": 18,
+    "effects": 11
+  },
+  "maximum": {
+    "body": 3336,
+    "conditions": 96,
+    "tokens": 768,
+    "sources": 8,
+    "rules": 32,
+    "bindings": 32,
+    "effects": 16
+  },
+  "ordinary_profile_envelope": 1985,
+  "maximum_profile_envelope": 3341,
+  "maximum_record": 3373,
+  "sha256": "4f8f4ef068ba00d4c4f2034374cc075b75ce049fb04f25e5ecd9a5651c09171e",
+  "intrinsic_roles": 30,
+  "user_roles": 22,
+  "rule_conditions": 19,
+  "status": "layout and conversion-shape witness; NOT semantic differential/firmware acceptance"
+}

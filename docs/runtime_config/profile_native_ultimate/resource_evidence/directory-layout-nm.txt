@@ -1,0 +1,2 @@
+00000000 00000f08 B directory_size
+00000f08 00000038 B entry_size
