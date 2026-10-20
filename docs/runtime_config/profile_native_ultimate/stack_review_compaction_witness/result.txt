@@ -1,0 +1,1 @@
+PASS flat-root new-file creation reaches lfs_dir_compact; first_file=16 compact_entries=6

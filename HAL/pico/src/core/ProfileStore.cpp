@@ -12,6 +12,7 @@
 #include <climits>
 #include <cstdio>
 #include <cstring>
+#include <new>
 #include <initializer_list>
 #include <pb_decode.h>
 #include <pb_encode.h>
@@ -76,7 +77,7 @@ namespace {
         std::snprintf(p, n, "/ultimate-v2-%u.tmp", slot);
     }
 
-    bool HashMessage(const pb_msgdesc_t *fields, const void *message, uint8_t out[32]) {
+    __attribute__((noinline)) bool HashMessage(const pb_msgdesc_t *fields, const void *message, uint8_t out[32]) {
         Sha256 hash;
         pb_ostream_t stream{};
         stream.callback = [](pb_ostream_t *s, const pb_byte_t *b, size_t n) {
@@ -138,11 +139,11 @@ namespace {
             // The existing store/record/publication workspaces are synchronous
             // core0-only; no callback recursively enters a store operation.
             static CheckedStorage::File file;
-            auto r = CheckedStorage::Open(file, p, true, k);
+            static Result r; ::new (&r) Result(CheckedStorage::Open(file, p, true, k));
             if (r) {
-                r = CheckedStorage::Write(file, b, n);
-                if (r) r = CheckedStorage::Sync(file);
-                auto close = CheckedStorage::Close(file); if (!close) r = close;
+                ::new (&r) Result(CheckedStorage::Write(file, b, n));
+                if (r) ::new (&r) Result(CheckedStorage::Sync(file));
+                static Result close; ::new (&close) Result(CheckedStorage::Close(file)); if (!close) r = close;
             }
             Remember(r, true, n);
             return r;
@@ -242,7 +243,12 @@ namespace {
             return { Outcome::Failed, 0, 0 };
         const auto publication = k == Kind::Root ? ProfileStorePublicationKind::Directory
                                                  : ProfileStorePublicationKind::Record;
-        auto r = s.CheckedWrite(tmp, b, n, k);
+        // C++17 constructs each returned POD directly in fixed scratch, without
+        // an ABI return temporary on the nested filesystem stack. Placement
+        // construction allocates nothing and resets it on every stage/call.
+        // This scratch is distinct from MountedStorage's result/handle.
+        static Result r;
+        ::new (&r) Result(s.CheckedWrite(tmp, b, n, k));
         if (!r) {
             if (stage) {
                 *stage = ProfileStoreStage(publication, s.LastFailure());
@@ -251,7 +257,7 @@ namespace {
             }
             return r;
         }
-        r = s.CheckedRead(tmp, readback, n, k);
+        ::new (&r) Result(s.CheckedRead(tmp, readback, n, k));
         if (!r) {
             if (stage) {
                 *stage = ProfileStoreStage(publication, s.LastFailure());
@@ -267,7 +273,7 @@ namespace {
                 *stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordVerify);
             return { Outcome::Failed, 0, 0 };
         }
-        r = s.CheckedRename(tmp, dest, k);
+        ::new (&r) Result(s.CheckedRename(tmp, dest, k));
         if (!r && stage)
             *stage = ProfileStoreStage(
                 k == Kind::Root ? ProfileStorePublicationKind::Directory
@@ -411,7 +417,7 @@ namespace {
 
     // The deployed f7ba root reader remains explicit. Upgrade never reinterprets it
     // as v2 and never reconstructs identity from orphan filenames.
-    bool DecodeLegacy(const uint8_t *w, size_t n, ProfileStore::Directory *d) {
+    __attribute__((noinline)) bool DecodeLegacy(const uint8_t *w, size_t n, ProfileStore::Directory *d) {
         constexpr size_t trailer = 2592;
         if (n != kLegacyDirectoryBytes || Get32(w) != kDirectoryMagic || Get16(w + 4) != 1 ||
             Get16(w + 6) > 64 || Get32(w + trailer + 24) != Crc32(w, trailer + 24))
@@ -546,7 +552,9 @@ bool ProfileStore::LoadControl(Directory &seed, uint32_t &phase) const {
            DecodeDirectory(wire + 16, kDirectoryWireBytes, &seed);
 }
 
-bool ProfileStore::WriteControl(const Directory &seed, uint32_t phase) {
+// Share the control publication body while ending its preparation phases
+// inside each synchronous caller; no retained control adapter frame.
+__attribute__((always_inline)) inline bool ProfileStore::WriteControl(const Directory &seed, uint32_t phase) {
     static uint8_t wire[kDirectoryWireBytes + 16];
     if (!EncodeDirectory(seed, wire + 16))
         return false;
@@ -554,15 +562,17 @@ bool ProfileStore::WriteControl(const Directory &seed, uint32_t phase) {
     Put32(wire + 4, phase);
     Put32(wire + 8, kDirectoryWireBytes);
     Put32(wire + 12, Crc32(wire, 12) ^ Crc32(wire + 16, kDirectoryWireBytes));
-    auto r =
-        Publish(*_storage, kControlTemp, kControl, wire, sizeof(wire), Kind::Root, &_last_io_stage);
+    static Result r; ::new (&r) Result(
+        Publish(*_storage, kControlTemp, kControl, wire, sizeof(wire), Kind::Root, &_last_io_stage));
     if (r.outcome == Outcome::Uncertain)
         _uncertain = true;
     return bool(r);
 }
 
-bool ProfileStore::InitializeV2(const Directory &seed) {
-    CheckedStorage::Geometry geometry;
+// Keep bootstrap publication in its owning Begin frame; decode/hash helpers
+// above remain separate so their scratch ends before any filesystem write.
+__attribute__((always_inline)) inline bool ProfileStore::InitializeV2(const Directory &seed) {
+    static CheckedStorage::Geometry geometry; geometry = {};
     if (!_storage->Geometry(geometry) || !geometry.erase_bytes ||
         geometry.free_bytes < kReserve +
                                   3 * FileCharge(kDirectoryWireBytes + 16, geometry.erase_bytes) +
@@ -574,10 +584,10 @@ bool ProfileStore::InitializeV2(const Directory &seed) {
     if (!EncodeDirectory(seed, wire))
         return false;
     for (unsigned slot = 0; slot < 2; ++slot) {
-        char p[32], t[32];
+        static char p[32], t[32];
         RootPath(p, sizeof(p), slot);
         RootTemp(t, sizeof(t), slot);
-        auto r = Publish(*_storage, t, p, wire, sizeof(wire), Kind::Root, &_last_io_stage);
+        static Result r; ::new (&r) Result(Publish(*_storage, t, p, wire, sizeof(wire), Kind::Root, &_last_io_stage));
         if (!r) {
             _uncertain = r.outcome == Outcome::Uncertain;
             _read_only_recovery = true;
@@ -591,18 +601,18 @@ bool ProfileStore::InitializeV2(const Directory &seed) {
     return LoadDirectory();
 }
 
-bool ProfileStore::Bootstrap(bool recovery) {
+__attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery) {
     if (_required_root_format > 2) {
         _root_invalid = true;
         _read_only_recovery = true;
         return false;
     }
-    CheckedStorage::Geometry g;
+    static CheckedStorage::Geometry g; g = {};
     if (!_storage->Geometry(g) || !g.erase_bytes || g.total_bytes < kReserve) {
         _read_only_recovery = true;
         return false;
     }
-    auto ctrl = _storage->Probe(kControl);
+    static Result ctrl; ::new (&ctrl) Result(_storage->Probe(kControl));
     if (ctrl.outcome != Outcome::NotFound) {
         uint32_t phase = 0;
         if (!ctrl || !LoadControl(*_next, phase)) {
@@ -651,7 +661,7 @@ bool ProfileStore::Bootstrap(bool recovery) {
     }
     // A missing control with any v2 path is damaged, never permission to downgrade.
     for (unsigned i = 0; i < 2; ++i) {
-        char p[32];
+        static char p[32];
         RootPath(p, sizeof(p), i);
         if (_storage->Probe(p).outcome != Outcome::NotFound) {
             _read_only_recovery = true;
@@ -661,9 +671,9 @@ bool ProfileStore::Bootstrap(bool recovery) {
     bool exists[2]{}, valid[2]{};
     static uint8_t old[kLegacyDirectoryBytes];
     for (unsigned i = 0; i < 2; ++i) {
-        char p[32];
+        static char p[32];
         ProfileStorePaths::DirectoryPath(p, sizeof(p), i);
-        auto probe = _storage->Probe(p);
+        static Result probe; ::new (&probe) Result(_storage->Probe(p));
         exists[i] = probe.outcome != Outcome::NotFound;
         valid[i] = probe && _storage->CheckedRead(p, old, sizeof(old), Kind::Root) &&
                    DecodeLegacy(old, sizeof(old), i ? _other : _directory);
@@ -800,11 +810,11 @@ bool ProfileStore::PublishDirectory(const Directory &next) {
         _uncertain = true;
         return false;
     }
-    char p[32], t[32];
+    static char p[32], t[32];
     unsigned slot = next.generation & 1u;
     RootPath(p, sizeof(p), slot);
     RootTemp(t, sizeof(t), slot);
-    auto r = Publish(*_storage, t, p, wire, sizeof(wire), Kind::Root, &_last_io_stage);
+    static Result r; ::new (&r) Result(Publish(*_storage, t, p, wire, sizeof(wire), Kind::Root, &_last_io_stage));
     if (!r) {
         _uncertain = true;
         return false;
@@ -942,7 +952,7 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t rev, const UltimateProfile
     if (!ValidateProfile(p))
         return false;
     static uint8_t record[kMaxRecordWireBytes];
-    size_t n = 0;
+    static size_t n; n=0;
     if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > kMaxProfileWireBytes) {
         _last_io_stage = ProfileStoreIoStage::RecordEncodeSize;
         return false;
@@ -967,7 +977,7 @@ bool ProfileStore::WriteProfile(uint32_t id, uint32_t rev, const UltimateProfile
     static char path[32], temp[32];
     ProfileStorePaths::RecordPath(path, sizeof(path), id, rev);
     ProfileStorePaths::RecordTemporaryPath(temp, sizeof(temp), id, rev);
-    auto result = Publish(*_storage, temp, path, record, n + 32, Kind::Record, &_last_io_stage);
+    static Result result; ::new (&result) Result(Publish(*_storage, temp, path, record, n + 32, Kind::Record, &_last_io_stage));
     if (result.outcome == Outcome::Uncertain)
         _uncertain = true;
     return bool(result);
@@ -1341,7 +1351,9 @@ ProfileStore::TransactionResult ProfileStore::Start(const TransactionIdentity &t
     return { Status::NotFound };
 }
 
-ProfileStore::TransactionResult ProfileStore::Commit(
+// Receipt preparation and publication share the caller frame; transaction
+// ordering and the single authoritative directory publication stay unchanged.
+__attribute__((always_inline)) inline ProfileStore::TransactionResult ProfileStore::Commit(
     Directory &next,
     uint32_t id,
     uint32_t rev,
@@ -1350,13 +1362,10 @@ ProfileStore::TransactionResult ProfileStore::Commit(
     next.generation = Generation() + 1;
     next.last_identity = t;
     next.last_result = { Status::Ok, id, rev, next.generation };
-    const auto result = next.last_result;
-    return PublishDirectory(next)
-               ? result
-               : TransactionResult{ _uncertain ? Status::UnknownOutcome : Status::IoFailure,
-                                    id,
-                                    rev,
-                                    next.generation };
+    static TransactionResult result; result = next.last_result;
+    if (PublishDirectory(next)) return result;
+    result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure, id, rev, next.generation };
+    return result;
 }
 
 ProfileStore::TransactionResult ProfileStore::Create(
@@ -1365,14 +1374,14 @@ ProfileStore::TransactionResult ProfileStore::Create(
     uint32_t rank,
     const TransactionIdentity &t
 ) {
-    auto r = Start(t);
+    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
     if (r.status != Status::NotFound)
         return r;
     if (Count() >= 64 || _directory->high_water_id == UINT32_MAX)
         return { Status::Full };
     if (!ValidName(name) || !ValidateProfile(p))
         return { Status::Invalid };
-    size_t n = 0;
+    static size_t n; n = 0;
     if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > 4096)
         return { Status::Full };
     if (!Admit(n + 32))

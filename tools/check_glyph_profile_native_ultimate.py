@@ -199,7 +199,7 @@ def store_tests(temp,flags,objects,pb,config):
     for source in [library/'src/lfs.c',library/'src/lfs_util.c']:
         obj=temp/(source.stem+'.o');run(['cc','-std=c11',*current_flags,'-c',str(source),'-o',str(obj)]);lfs.append(str(obj))
     probe=temp/'mounted-native.cpp'
-    probe.write_text('#include '+json.dumps(str(ROOT/'HAL/pico/src/core/ProfileStore.cpp'))+'\n'+'bool GlyphMountedReadRangeProbe(const char *p,size_t o,uint8_t *b,size_t n){MountedStorage s;return s.ReadRange(p,o,b,n); }\n')
+    probe.write_text('#include '+json.dumps(str(ROOT/'HAL/pico/src/core/ProfileStore.cpp'))+'\n'+'bool GlyphMountedReadRangeProbe(const char *p,size_t o,uint8_t *b,size_t n){MountedStorage s;return s.ReadRange(p,o,b,n); }\n'+'CheckedStorage::Result GlyphMountedWriteProbe(const char *p,const uint8_t *b,size_t n){MountedStorage s;return s.CheckedWrite(p,b,n,CheckedStorage::Kind::Record); }\n')
     sources=['HAL/pico/src/core/CheckedStorage.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp','src/modes/UltimateNativeProfile.cpp','src/modes/UltimateNativeEvaluator.cpp','src/modes/Ultimate.cpp','src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/CommunicationBackend.cpp','src/core/socd.cpp']
     exe=temp/'native-store'
     run(['c++','-std=c++17',*current_flags,str(HOST/'native_store.cpp'),str(probe),*[str(ROOT/s) for s in sources],*objects,*lfs,'-o',str(exe)])

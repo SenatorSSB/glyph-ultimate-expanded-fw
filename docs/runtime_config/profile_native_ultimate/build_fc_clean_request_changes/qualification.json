@@ -1,0 +1,62 @@
+{
+  "state": "BUILD_PASS_SOURCE_REVIEW_REQUEST_CHANGES_NOT_FOR_HARDWARE_HANDOFF",
+  "source_sha": "fc563760c9488d7f5a95156d262b42b71a62ad18",
+  "tree": "389e14ce7b7ae6b14aec846584fe3e9ee8e5ada9",
+  "review_sha256": "68e6370ea4cfaa9c5c12a193b3ef695054c7bccaea8eb71bc15a4e02036fa5ac",
+  "blocking_finding": "NATIVE-REVIEW-P1-STACK",
+  "embedded_identity": "fc563760",
+  "stack_budget_bytes_per_core": 2048,
+  "whole_target_stack": "NOT_MEASURED",
+  "target_timing": "NOT_MEASURED",
+  "files": {
+    ".platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++": {
+      "bytes": 1589345,
+      "sha256": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c"
+    },
+    ".platformio-home/packages/framework-arduinopico/lib/libpico.a": {
+      "bytes": 1225846,
+      "sha256": "a77cbc886c8a263bc15e9d01af31f7f3f2df5e060b42b727f5c0a21a122f9e06"
+    },
+    ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    ".platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_runtime/runtime.c": {
+      "bytes": 10978,
+      "sha256": "c6b63ea7bebb1a0dc6b108664d048ed53ad61e9b04a4fae2439b6ba93891bb19"
+    },
+    ".pio/libdeps/glyph_mk6/Nanopb/pb.h": {
+      "bytes": 44315,
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2"
+    },
+    ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": {
+      "bytes": 117446,
+      "sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738"
+    },
+    ".pio/libdeps/glyph_mk6/joybus-pio/include/gamecube_definitions.h": {
+      "bytes": 1609,
+      "sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2"
+    },
+    ".pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/include/Adafruit_USBD_XInput.hpp": {
+      "bytes": 4555,
+      "sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c"
+    },
+    "platformio.ini": {
+      "bytes": 3321,
+      "sha256": "a545f2370abe3095aa63ffb9bcfcca9944ea5f8f2f0efb0976fb73317d2e9c78"
+    },
+    "builder_scripts/arduino_pico.py": {
+      "bytes": 2112,
+      "sha256": "676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af"
+    }
+  },
+  "stack_symbols": [
+    "20040000 B __StackLimit",
+    "20040800 A __StackOneBottom",
+    "20041000 B __StackOneTop",
+    "20041800 A __StackBottom",
+    "20042000 B __StackTop"
+  ],
+  "stack_guard_symbol_present": false,
+  "stack_guard_setting": "No linked runtime_install_stack_guard symbol; actual init disassembly still required before definite guard-state claim."
+}

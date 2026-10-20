@@ -1,0 +1,15 @@
+{
+  "state": "LIVE_SOURCE_FREE_BOUNDED_CALLSITE_AUTHORITY",
+  "canonical_base": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "canonical_adoption": "e4bf626c71d0494a138721eff54ac563ef2877cb",
+  "verified_utc": "2026-10-20T12:34:33.060853+00:00",
+  "sole_added_source_path": "include/core/RuntimeIdentityService.hpp",
+  "sole_edit": "__attribute__((noinline)) on existing runtime_identity::Service::Poll; exact body/interface/parser/wire preserved",
+  "new_order_or_successor": false,
+  "other_orders_unchanged": 102,
+  "no_firmware_source_published": true,
+  "hardware_approval": false,
+  "source_review_P1": "OPEN",
+  "owner_new_decision_required_for_this_annotation": false,
+  "authority": "Existing owner bounded memory-layout and native identity implementation direction; independent Curator clarification, root exact source-free review/governance PASS, canonical fast-forward + live readback"
+}

@@ -1,0 +1,39 @@
+{
+  "classification": "FINITE_READ_ONLY_IRQ_SOURCE_AND_LINKED_ELF_ASSESSMENT_NOT_WHOLE_TARGET_CERTIFICATE",
+  "source_candidate": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+  "source_identical_linked_candidate": "fc563760c9488d7f5a95156d262b42b71a62ad18",
+  "elf_sha256": "51dad8fed79c8e5726827d7702c86db2e578cff3b4663e8a7d808e23b9343b5d",
+  "default_serial_usb_exception_known_minimum_bytes": 256,
+  "systick_nested_increment_bytes": 44,
+  "default_serial_nested_known_minimum_bytes": 300,
+  "cdc_out_prep_nested_known_minimum_bytes": 316,
+  "cdc_tx_nonempty_flush_nested_known_minimum_bytes": 340,
+  "configured_serial_nested_known_minimum_bytes": 332,
+  "flash_noInterrupts_pre_mask_frame_bytes": 16,
+  "hardware_USB_shared_stub_bytes": 8,
+  "software_USB_exclusive_stub_bytes": 0,
+  "normal_C_peak1752_plus_default300": 2052,
+  "normal_C_peak1752_plus_cdc340": 2092,
+  "limits": {
+    "core0": 2048,
+    "core1": 2048
+  },
+  "ROM_memcpy_stack": "UNKNOWN",
+  "future_repaired_ELF_correspondence": "REQUIRED",
+  "target_highwater": "NOT_MEASURED",
+  "source_pins": {
+    "libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597",
+    "libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+    "libraries/Adafruit_TinyUSB_Arduino/src/tusb.c": "8ddbcab9ba5f8abe68b5af78eb471f67093076d9c8c0357acc1498e1185c200e",
+    "libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192",
+    "cores/rp2040/RP2040Support.h": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412",
+    "cores/rp2040/main.cpp": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "cores/rp2040/wiring_private.cpp": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "pico-sdk/src/rp2_common/hardware_irq/irq.c": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36",
+    "pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S": "ac608575377af5dd9587559b647dfa646094e7366ef29a658bba37ab3aa1653e",
+    "pico-sdk/src/rp2_common/hardware_exception/exception.c": "749662f739699b711bc46ff0c24ca237dec01f70468788e6dfcea2ff53521c55",
+    "pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h": "0695fb33d8d04ba4280f02e6a829514689528a505a75eba9d78a7ad97ea50518"
+  }
+}

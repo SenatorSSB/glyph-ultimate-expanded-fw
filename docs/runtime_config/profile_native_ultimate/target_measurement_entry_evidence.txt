@@ -1,0 +1,652 @@
+historical main object symbols
+00000000 W main
+00000000 T main1
+         U multicore_launch_core1
+         U multicore_launch_core1_with_stack
+
+historical main object relocations
+RELOCATION RECORDS FOR [.text.main1]:
+RELOCATION RECORDS FOR [.text.startup.main]:
+00000160 R_ARM_THM_CALL    multicore_launch_core1_with_stack
+00000222 R_ARM_THM_CALL    multicore_launch_core1
+00000290 R_ARM_ABS32       main1
+
+current framework archive selected symbols
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:multicore.c.obj:00000000 T multicore_launch_core1
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:multicore.c.obj:00000000 T multicore_launch_core1_raw
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:multicore.c.obj:00000000 T multicore_launch_core1_with_stack
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:runtime.c.obj:00000000 T runtime_init
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000800 a HeapSize
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000800 a StackSize
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __StackTop
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000000 T __VECTOR_TABLE
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __bss_end__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __bss_start__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __data_end__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __data_start__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc T __default_isrs_end
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000c0 T __default_isrs_start
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __etext
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __scratch_x_end__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __scratch_x_source__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __scratch_x_start__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __scratch_y_end__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __scratch_y_source__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U __scratch_y_start__
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc T __unhandled_user_irq
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000000 T __vectors
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000000 T _entry_point
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:0000000e t _reset_handler
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:0000002c t bss_fill_loop
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:0000002e t bss_fill_test
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000046 t data_cpy
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000042 t data_cpy_loop
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:0000004c t data_cpy_table
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U exit
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000076 t hold_non_core0_in_bootrom
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000c4 W isr_hardfault
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000c0 W isr_invalid
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq0
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq1
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq10
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq11
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq12
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq13
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq14
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq15
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq16
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq17
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq18
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq19
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq2
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq20
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq21
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq22
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq23
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq24
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq25
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq26
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq27
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq28
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq29
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq3
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq30
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq31
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq4
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq5
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq6
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq7
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq8
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000cc W isr_irq9
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000c2 W isr_nmi
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000c8 W isr_pendsv
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000c6 W isr_svcall
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000ca W isr_systick
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U main
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000032 t platform_entry
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:         U rom_func_lookup
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:00000074 W runtime_init
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a:crt0.S.obj:000000d2 T unhandled_user_irq_num_in_r0
+
+current framework crt0 member disassembly
+crt0.S.obj:     file format elf32-littlearm
+
+
+Disassembly of section .vectors:
+
+00000000 <__VECTOR_TABLE>:
+	...
+			0: R_ARM_ABS32	__StackTop
+			4: R_ARM_ABS32	_reset_handler
+			8: R_ARM_ABS32	isr_nmi
+			c: R_ARM_ABS32	isr_hardfault
+			10: R_ARM_ABS32	isr_invalid
+			14: R_ARM_ABS32	isr_invalid
+			18: R_ARM_ABS32	isr_invalid
+			1c: R_ARM_ABS32	isr_invalid
+			20: R_ARM_ABS32	isr_invalid
+			24: R_ARM_ABS32	isr_invalid
+			28: R_ARM_ABS32	isr_invalid
+			2c: R_ARM_ABS32	isr_svcall
+			30: R_ARM_ABS32	isr_invalid
+			34: R_ARM_ABS32	isr_invalid
+			38: R_ARM_ABS32	isr_pendsv
+			3c: R_ARM_ABS32	isr_systick
+			40: R_ARM_ABS32	isr_irq0
+			44: R_ARM_ABS32	isr_irq1
+			48: R_ARM_ABS32	isr_irq2
+			4c: R_ARM_ABS32	isr_irq3
+			50: R_ARM_ABS32	isr_irq4
+			54: R_ARM_ABS32	isr_irq5
+			58: R_ARM_ABS32	isr_irq6
+			5c: R_ARM_ABS32	isr_irq7
+			60: R_ARM_ABS32	isr_irq8
+			64: R_ARM_ABS32	isr_irq9
+			68: R_ARM_ABS32	isr_irq10
+			6c: R_ARM_ABS32	isr_irq11
+			70: R_ARM_ABS32	isr_irq12
+			74: R_ARM_ABS32	isr_irq13
+			78: R_ARM_ABS32	isr_irq14
+			7c: R_ARM_ABS32	isr_irq15
+			80: R_ARM_ABS32	isr_irq16
+			84: R_ARM_ABS32	isr_irq17
+			88: R_ARM_ABS32	isr_irq18
+			8c: R_ARM_ABS32	isr_irq19
+			90: R_ARM_ABS32	isr_irq20
+			94: R_ARM_ABS32	isr_irq21
+			98: R_ARM_ABS32	isr_irq22
+			9c: R_ARM_ABS32	isr_irq23
+			a0: R_ARM_ABS32	isr_irq24
+			a4: R_ARM_ABS32	isr_irq25
+			a8: R_ARM_ABS32	isr_irq26
+			ac: R_ARM_ABS32	isr_irq27
+			b0: R_ARM_ABS32	isr_irq28
+			b4: R_ARM_ABS32	isr_irq29
+			b8: R_ARM_ABS32	isr_irq30
+			bc: R_ARM_ABS32	isr_irq31
+
+000000c0 <isr_invalid>:
+  c0:	be00      	bkpt	0x0000
+
+000000c2 <isr_nmi>:
+  c2:	be00      	bkpt	0x0000
+
+000000c4 <isr_hardfault>:
+  c4:	be00      	bkpt	0x0000
+
+000000c6 <isr_svcall>:
+  c6:	be00      	bkpt	0x0000
+
+000000c8 <isr_pendsv>:
+  c8:	be00      	bkpt	0x0000
+
+000000ca <isr_systick>:
+  ca:	be00      	bkpt	0x0000
+
+000000cc <__unhandled_user_irq>:
+  cc:	f3ef 8005 	mrs	r0, IPSR
+  d0:	3810      	subs	r0, #16
+
+000000d2 <unhandled_user_irq_num_in_r0>:
+  d2:	be00      	bkpt	0x0000
+
+Disassembly of section .reset:
+
+00000000 <_entry_point>:
+   0:	2000      	movs	r0, #0
+   2:	491f      	ldr	r1, [pc, #124]	@ (80 <hold_non_core0_in_bootrom+0xa>)
+   4:	6008      	str	r0, [r1, #0]
+   6:	c806      	ldmia	r0!, {r1, r2}
+   8:	f381 8808 	msr	MSP, r1
+   c:	4710      	bx	r2
+
+0000000e <_reset_handler>:
+   e:	481d      	ldr	r0, [pc, #116]	@ (84 <hold_non_core0_in_bootrom+0xe>)
+  10:	6800      	ldr	r0, [r0, #0]
+  12:	2800      	cmp	r0, #0
+  14:	d12f      	bne.n	76 <hold_non_core0_in_bootrom>
+  16:	a40d      	add	r4, pc, #52	@ (adr r4, 4c <data_cpy_table>)
+  18:	cc0e      	ldmia	r4!, {r1, r2, r3}
+  1a:	2900      	cmp	r1, #0
+  1c:	d002      	beq.n	24 <_reset_handler+0x16>
+  1e:	f000 f812 	bl	46 <data_cpy>
+  22:	e7f9      	b.n	18 <_reset_handler+0xa>
+  24:	4918      	ldr	r1, [pc, #96]	@ (88 <hold_non_core0_in_bootrom+0x12>)
+  26:	4a19      	ldr	r2, [pc, #100]	@ (8c <hold_non_core0_in_bootrom+0x16>)
+  28:	2000      	movs	r0, #0
+  2a:	e000      	b.n	2e <bss_fill_test>
+
+0000002c <bss_fill_loop>:
+  2c:	c101      	stmia	r1!, {r0}
+
+0000002e <bss_fill_test>:
+  2e:	4291      	cmp	r1, r2
+  30:	d1fc      	bne.n	2c <bss_fill_loop>
+
+00000032 <platform_entry>:
+  32:	4917      	ldr	r1, [pc, #92]	@ (90 <hold_non_core0_in_bootrom+0x1a>)
+  34:	4788      	blx	r1
+  36:	4917      	ldr	r1, [pc, #92]	@ (94 <hold_non_core0_in_bootrom+0x1e>)
+  38:	4788      	blx	r1
+  3a:	4917      	ldr	r1, [pc, #92]	@ (98 <hold_non_core0_in_bootrom+0x22>)
+  3c:	4788      	blx	r1
+  3e:	be00      	bkpt	0x0000
+  40:	e7fd      	b.n	3e <platform_entry+0xc>
+
+00000042 <data_cpy_loop>:
+  42:	c901      	ldmia	r1!, {r0}
+  44:	c201      	stmia	r2!, {r0}
+
+00000046 <data_cpy>:
+  46:	429a      	cmp	r2, r3
+  48:	d3fb      	bcc.n	42 <data_cpy_loop>
+  4a:	4770      	bx	lr
+
+0000004c <data_cpy_table>:
+	...
+			4c: R_ARM_ABS32	__etext
+			50: R_ARM_ABS32	__data_start__
+			54: R_ARM_ABS32	__data_end__
+			58: R_ARM_ABS32	__scratch_x_source__
+			5c: R_ARM_ABS32	__scratch_x_start__
+			60: R_ARM_ABS32	__scratch_x_end__
+			64: R_ARM_ABS32	__scratch_y_source__
+			68: R_ARM_ABS32	__scratch_y_start__
+			6c: R_ARM_ABS32	__scratch_y_end__
+
+00000074 <runtime_init>:
+  74:	4770      	bx	lr
+
+00000076 <hold_non_core0_in_bootrom>:
+  76:	4809      	ldr	r0, [pc, #36]	@ (9c <hold_non_core0_in_bootrom+0x26>)
+  78:	f7ff fffe 	bl	0 <rom_func_lookup>
+			78: R_ARM_THM_CALL	rom_func_lookup
+  7c:	4700      	bx	r0
+  7e:	0000      	.short	0x0000
+  80:	e000ed08 	.word	0xe000ed08
+  84:	d0000000 	.word	0xd0000000
+	...
+			88: R_ARM_ABS32	__bss_start__
+			8c: R_ARM_ABS32	__bss_end__
+			90: R_ARM_ABS32	runtime_init
+			94: R_ARM_ABS32	main
+			98: R_ARM_ABS32	exit
+  9c:	00005657 	.word	0x00005657
+
+baseline ELF disassembly main
+
+/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/976ba2195b72046b32f7ecdd41063e7bad791ded/741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612/firmware.elf:     file format elf32-littlearm
+
+
+Disassembly of section .boot2:
+
+Disassembly of section .text:
+
+10039eb8 <main>:
+10039eb8:	b5f0      	push	{r4, r5, r6, r7, lr}
+10039eba:	46c6      	mov	lr, r8
+10039ebc:	b500      	push	{lr}
+10039ebe:	b086      	sub	sp, #24
+10039ec0:	4669      	mov	r1, sp
+10039ec2:	488d      	ldr	r0, [pc, #564]	@ (1003a0f8 <main+0x240>)
+10039ec4:	ab02      	add	r3, sp, #8
+10039ec6:	aa01      	add	r2, sp, #4
+10039ec8:	f003 fdae 	bl	1003da28 <check_sys_clock_khz>
+10039ecc:	2800      	cmp	r0, #0
+10039ece:	d103      	bne.n	10039ed8 <main+0x20>
+10039ed0:	488a      	ldr	r0, [pc, #552]	@ (1003a0fc <main+0x244>)
+10039ed2:	4989      	ldr	r1, [pc, #548]	@ (1003a0f8 <main+0x240>)
+10039ed4:	f003 fd3a 	bl	1003d94c <panic>
+10039ed8:	9a02      	ldr	r2, [sp, #8]
+10039eda:	9901      	ldr	r1, [sp, #4]
+10039edc:	9800      	ldr	r0, [sp, #0]
+10039ede:	f003 fd67 	bl	1003d9b0 <set_sys_clock_pll>
+10039ee2:	4b87      	ldr	r3, [pc, #540]	@ (1003a100 <main+0x248>)
+10039ee4:	2201      	movs	r2, #1
+10039ee6:	4c87      	ldr	r4, [pc, #540]	@ (1003a104 <main+0x24c>)
+10039ee8:	2b00      	cmp	r3, #0
+10039eea:	d100      	bne.n	10039eee <main+0x36>
+10039eec:	e071      	b.n	10039fd2 <main+0x11a>
+10039eee:	7022      	strb	r2, [r4, #0]
+10039ef0:	2b00      	cmp	r3, #0
+10039ef2:	d04e      	beq.n	10039f92 <main+0xda>
+10039ef4:	2200      	movs	r2, #0
+10039ef6:	2300      	movs	r3, #0
+10039ef8:	4d83      	ldr	r5, [pc, #524]	@ (1003a108 <main+0x250>)
+10039efa:	200c      	movs	r0, #12
+10039efc:	602a      	str	r2, [r5, #0]
+10039efe:	606b      	str	r3, [r5, #4]
+10039f00:	2300      	movs	r3, #0
+10039f02:	4698      	mov	r8, r3
+10039f04:	9301      	str	r3, [sp, #4]
+10039f06:	f003 fd3f 	bl	1003d988 <_Znwj>
+10039f0a:	0006      	movs	r6, r0
+10039f0c:	497f      	ldr	r1, [pc, #508]	@ (1003a10c <main+0x254>)
+10039f0e:	f000 fcdf 	bl	1003a8d0 <_ZN10PIOProgramC1EPK11pio_program>
+10039f12:	0030      	movs	r0, r6
+10039f14:	4a7e      	ldr	r2, [pc, #504]	@ (1003a110 <main+0x258>)
+10039f16:	497f      	ldr	r1, [pc, #508]	@ (1003a114 <main+0x25c>)
+10039f18:	ab01      	add	r3, sp, #4
+10039f1a:	63ee      	str	r6, [r5, #60]	@ 0x3c
+10039f1c:	f000 fcde 	bl	1003a8dc <_ZN10PIOProgram7prepareEPP8pio_hw_tPiS3_>
+10039f20:	4643      	mov	r3, r8
+10039f22:	9305      	str	r3, [sp, #20]
+10039f24:	2380      	movs	r3, #128	@ 0x80
+10039f26:	025b      	lsls	r3, r3, #9
+10039f28:	9302      	str	r3, [sp, #8]
+10039f2a:	23c0      	movs	r3, #192	@ 0xc0
+10039f2c:	9a01      	ldr	r2, [sp, #4]
+10039f2e:	031b      	lsls	r3, r3, #12
+10039f30:	9304      	str	r3, [sp, #16]
+10039f32:	1c53      	adds	r3, r2, #1
+10039f34:	01d1      	lsls	r1, r2, #7
+10039f36:	6b6e      	ldr	r6, [r5, #52]	@ 0x34
+10039f38:	6baf      	ldr	r7, [r5, #56]	@ 0x38
+10039f3a:	031b      	lsls	r3, r3, #12
+10039f3c:	430b      	orrs	r3, r1
+10039f3e:	0030      	movs	r0, r6
+10039f40:	0039      	movs	r1, r7
+10039f42:	9303      	str	r3, [sp, #12]
+10039f44:	ab02      	add	r3, sp, #8
+10039f46:	f002 fcef 	bl	1003c928 <pio_sm_init>
+10039f4a:	2118      	movs	r1, #24
+10039f4c:	4379      	muls	r1, r7
+10039f4e:	4b72      	ldr	r3, [pc, #456]	@ (1003a118 <main+0x260>)
+10039f50:	1876      	adds	r6, r6, r1
+10039f52:	36d8      	adds	r6, #216	@ 0xd8
+10039f54:	6033      	str	r3, [r6, #0]
+10039f56:	4b71      	ldr	r3, [pc, #452]	@ (1003a11c <main+0x264>)
+10039f58:	6ba8      	ldr	r0, [r5, #56]	@ 0x38
+10039f5a:	6033      	str	r3, [r6, #0]
+10039f5c:	2301      	movs	r3, #1
+10039f5e:	4083      	lsls	r3, r0
+10039f60:	6b6a      	ldr	r2, [r5, #52]	@ 0x34
+10039f62:	6811      	ldr	r1, [r2, #0]
+10039f64:	430b      	orrs	r3, r1
+10039f66:	6013      	str	r3, [r2, #0]
+10039f68:	f7ff ffa4 	bl	10039eb4 <initVariant>
+10039f6c:	7823      	ldrb	r3, [r4, #0]
+10039f6e:	2b00      	cmp	r3, #0
+10039f70:	d000      	beq.n	10039f74 <main+0xbc>
+10039f72:	e0aa      	b.n	1003a0ca <main+0x212>
+10039f74:	2000      	movs	r0, #0
+10039f76:	f7cc fd7f 	bl	10006a78 <TinyUSB_Device_Init>
+10039f7a:	7823      	ldrb	r3, [r4, #0]
+10039f7c:	2b00      	cmp	r3, #0
+10039f7e:	d02a      	beq.n	10039fd6 <main+0x11e>
+10039f80:	f7ff ff7a 	bl	10039e78 <_ZN6_MFIFO5beginEi.part.0.constprop.0>
+10039f84:	e000      	b.n	10039f88 <main+0xd0>
+10039f86:	bf00      	nop
+10039f88:	2000      	movs	r0, #0
+10039f8a:	b006      	add	sp, #24
+10039f8c:	bc80      	pop	{r7}
+10039f8e:	46b8      	mov	r8, r7
+10039f90:	bdf0      	pop	{r4, r5, r6, r7, pc}
+10039f92:	4b63      	ldr	r3, [pc, #396]	@ (1003a120 <main+0x268>)
+10039f94:	2b00      	cmp	r3, #0
+10039f96:	d100      	bne.n	10039f9a <main+0xe2>
+10039f98:	e0a2      	b.n	1003a0e0 <main+0x228>
+10039f9a:	2101      	movs	r1, #1
+10039f9c:	20f0      	movs	r0, #240	@ 0xf0
+10039f9e:	f000 f90d 	bl	1003a1bc <__wrap_calloc>
+10039fa2:	4b60      	ldr	r3, [pc, #384]	@ (1003a124 <main+0x26c>)
+10039fa4:	6018      	str	r0, [r3, #0]
+10039fa6:	4b60      	ldr	r3, [pc, #384]	@ (1003a128 <main+0x270>)
+10039fa8:	6043      	str	r3, [r0, #4]
+10039faa:	4b60      	ldr	r3, [pc, #384]	@ (1003a12c <main+0x274>)
+10039fac:	6083      	str	r3, [r0, #8]
+10039fae:	4b60      	ldr	r3, [pc, #384]	@ (1003a130 <main+0x278>)
+10039fb0:	60c3      	str	r3, [r0, #12]
+10039fb2:	2001      	movs	r0, #1
+10039fb4:	2200      	movs	r2, #0
+10039fb6:	2300      	movs	r3, #0
+10039fb8:	4d53      	ldr	r5, [pc, #332]	@ (1003a108 <main+0x250>)
+10039fba:	495e      	ldr	r1, [pc, #376]	@ (1003a134 <main+0x27c>)
+10039fbc:	4240      	negs	r0, r0
+10039fbe:	602a      	str	r2, [r5, #0]
+10039fc0:	606b      	str	r3, [r5, #4]
+10039fc2:	f002 f971 	bl	1003c2a8 <exception_set_exclusive_handler>
+10039fc6:	2207      	movs	r2, #7
+10039fc8:	4b5b      	ldr	r3, [pc, #364]	@ (1003a138 <main+0x280>)
+10039fca:	601a      	str	r2, [r3, #0]
+10039fcc:	4a5b      	ldr	r2, [pc, #364]	@ (1003a13c <main+0x284>)
+10039fce:	605a      	str	r2, [r3, #4]
+10039fd0:	e7ca      	b.n	10039f68 <main+0xb0>
+10039fd2:	1c1a      	adds	r2, r3, #0
+10039fd4:	e78b      	b.n	10039eee <main+0x36>
+10039fd6:	4e52      	ldr	r6, [pc, #328]	@ (1003a120 <main+0x268>)
+10039fd8:	2e00      	cmp	r6, #0
+10039fda:	d100      	bne.n	10039fde <main+0x126>
+10039fdc:	e085      	b.n	1003a0ea <main+0x232>
+10039fde:	f7ff ff4b 	bl	10039e78 <_ZN6_MFIFO5beginEi.part.0.constprop.0>
+10039fe2:	7823      	ldrb	r3, [r4, #0]
+10039fe4:	2b00      	cmp	r3, #0
+10039fe6:	d1cb      	bne.n	10039f80 <main+0xc8>
+10039fe8:	f7ff ff1a 	bl	10039e20 <_ZN6_MFIFO12registerCoreEv.part.0>
+10039fec:	7823      	ldrb	r3, [r4, #0]
+10039fee:	2b00      	cmp	r3, #0
+10039ff0:	d1c6      	bne.n	10039f80 <main+0xc8>
+10039ff2:	2e00      	cmp	r6, #0
+10039ff4:	d06c      	beq.n	1003a0d0 <main+0x218>
+10039ff6:	2001      	movs	r0, #1
+10039ff8:	f7ff fee4 	bl	10039dc4 <delay>
+10039ffc:	4b50      	ldr	r3, [pc, #320]	@ (1003a140 <main+0x288>)
+10039ffe:	781b      	ldrb	r3, [r3, #0]
+1003a000:	2b00      	cmp	r3, #0
+1003a002:	d069      	beq.n	1003a0d8 <main+0x220>
+1003a004:	2080      	movs	r0, #128	@ 0x80
+1003a006:	0180      	lsls	r0, r0, #6
+1003a008:	f000 f8cc 	bl	1003a1a4 <__wrap_malloc>
+1003a00c:	2280      	movs	r2, #128	@ 0x80
+1003a00e:	4b4d      	ldr	r3, [pc, #308]	@ (1003a144 <main+0x28c>)
+1003a010:	0001      	movs	r1, r0
+1003a012:	6018      	str	r0, [r3, #0]
+1003a014:	0192      	lsls	r2, r2, #6
+1003a016:	484c      	ldr	r0, [pc, #304]	@ (1003a148 <main+0x290>)
+1003a018:	f003 fbc0 	bl	1003d79c <multicore_launch_core1_with_stack>
+1003a01c:	f7f3 ff9e 	bl	1002df5c <setup>
+1003a020:	4d4a      	ldr	r5, [pc, #296]	@ (1003a14c <main+0x294>)
+1003a022:	4c4b      	ldr	r4, [pc, #300]	@ (1003a150 <main+0x298>)
+1003a024:	4e4b      	ldr	r6, [pc, #300]	@ (1003a154 <main+0x29c>)
+1003a026:	e00d      	b.n	1003a044 <main+0x18c>
+1003a028:	2c00      	cmp	r4, #0
+1003a02a:	d018      	beq.n	1003a05e <main+0x1a6>
+1003a02c:	2e00      	cmp	r6, #0
+1003a02e:	d02e      	beq.n	1003a08e <main+0x1d6>
+1003a030:	f7f3 feb6 	bl	1002dda0 <loop>
+1003a034:	f7ff fecc 	bl	10039dd0 <yield>
+1003a038:	e000      	b.n	1003a03c <main+0x184>
+1003a03a:	bf00      	nop
+1003a03c:	e000      	b.n	1003a040 <main+0x188>
+1003a03e:	bf00      	nop
+1003a040:	e000      	b.n	1003a044 <main+0x18c>
+1003a042:	bf00      	nop
+1003a044:	2d00      	cmp	r5, #0
+1003a046:	d1ef      	bne.n	1003a028 <main+0x170>
+1003a048:	2c00      	cmp	r4, #0
+1003a04a:	d027      	beq.n	1003a09c <main+0x1e4>
+1003a04c:	2e00      	cmp	r6, #0
+1003a04e:	d037      	beq.n	1003a0c0 <main+0x208>
+1003a050:	f7f3 fea6 	bl	1002dda0 <loop>
+1003a054:	f7ff febc 	bl	10039dd0 <yield>
+1003a058:	e000      	b.n	1003a05c <main+0x1a4>
+1003a05a:	bf00      	nop
+1003a05c:	e7f0      	b.n	1003a040 <main+0x188>
+1003a05e:	2e00      	cmp	r6, #0
+1003a060:	d008      	beq.n	1003a074 <main+0x1bc>
+1003a062:	f7f3 fe9d 	bl	1002dda0 <loop>
+1003a066:	f7ff feb3 	bl	10039dd0 <yield>
+1003a06a:	e000      	b.n	1003a06e <main+0x1b6>
+1003a06c:	bf00      	nop
+1003a06e:	e000      	b.n	1003a072 <main+0x1ba>
+1003a070:	bf00      	nop
+1003a072:	e7f6      	b.n	1003a062 <main+0x1aa>
+1003a074:	f7f3 fe94 	bl	1002dda0 <loop>
+1003a078:	f7ff feaa 	bl	10039dd0 <yield>
+1003a07c:	e000      	b.n	1003a080 <main+0x1c8>
+1003a07e:	bf00      	nop
+1003a080:	f7f3 fe8e 	bl	1002dda0 <loop>
+1003a084:	f7ff fea4 	bl	10039dd0 <yield>
+1003a088:	e000      	b.n	1003a08c <main+0x1d4>
+1003a08a:	bf00      	nop
+1003a08c:	e7f2      	b.n	1003a074 <main+0x1bc>
+1003a08e:	f7f3 fe87 	bl	1002dda0 <loop>
+1003a092:	f7ff fe9d 	bl	10039dd0 <yield>
+1003a096:	e000      	b.n	1003a09a <main+0x1e2>
+1003a098:	bf00      	nop
+1003a09a:	e7d1      	b.n	1003a040 <main+0x188>
+1003a09c:	2e00      	cmp	r6, #0
+1003a09e:	d006      	beq.n	1003a0ae <main+0x1f6>
+1003a0a0:	f7f3 fe7e 	bl	1002dda0 <loop>
+1003a0a4:	f7ff fe94 	bl	10039dd0 <yield>
+1003a0a8:	e000      	b.n	1003a0ac <main+0x1f4>
+1003a0aa:	bf00      	nop
+1003a0ac:	e7f8      	b.n	1003a0a0 <main+0x1e8>
+1003a0ae:	f7f3 fe77 	bl	1002dda0 <loop>
+1003a0b2:	f7ff fe8d 	bl	10039dd0 <yield>
+1003a0b6:	f7f3 fe73 	bl	1002dda0 <loop>
+1003a0ba:	f7ff fe89 	bl	10039dd0 <yield>
+1003a0be:	e7f6      	b.n	1003a0ae <main+0x1f6>
+1003a0c0:	f7f3 fe6e 	bl	1002dda0 <loop>
+1003a0c4:	f7ff fe84 	bl	10039dd0 <yield>
+1003a0c8:	e7ba      	b.n	1003a040 <main+0x188>
+1003a0ca:	e000      	b.n	1003a0ce <main+0x216>
+1003a0cc:	bf00      	nop
+1003a0ce:	e751      	b.n	10039f74 <main+0xbc>
+1003a0d0:	4b21      	ldr	r3, [pc, #132]	@ (1003a158 <main+0x2a0>)
+1003a0d2:	2b00      	cmp	r3, #0
+1003a0d4:	d18f      	bne.n	10039ff6 <main+0x13e>
+1003a0d6:	e7a1      	b.n	1003a01c <main+0x164>
+1003a0d8:	481b      	ldr	r0, [pc, #108]	@ (1003a148 <main+0x290>)
+1003a0da:	f003 fb79 	bl	1003d7d0 <multicore_launch_core1>
+1003a0de:	e79d      	b.n	1003a01c <main+0x164>
+1003a0e0:	4b1d      	ldr	r3, [pc, #116]	@ (1003a158 <main+0x2a0>)
+1003a0e2:	2b00      	cmp	r3, #0
+1003a0e4:	d000      	beq.n	1003a0e8 <main+0x230>
+1003a0e6:	e758      	b.n	10039f9a <main+0xe2>
+1003a0e8:	e763      	b.n	10039fb2 <main+0xfa>
+1003a0ea:	4b1b      	ldr	r3, [pc, #108]	@ (1003a158 <main+0x2a0>)
+1003a0ec:	2b00      	cmp	r3, #0
+1003a0ee:	d000      	beq.n	1003a0f2 <main+0x23a>
+1003a0f0:	e775      	b.n	10039fde <main+0x126>
+1003a0f2:	722e      	strb	r6, [r5, #8]
+1003a0f4:	e778      	b.n	10039fe8 <main+0x130>
+1003a0f6:	46c0      	nop			@ (mov r8, r8)
+1003a0f8:	0001fbd0 	.word	0x0001fbd0
+1003a0fc:	1006e6e4 	.word	0x1006e6e4
+1003a100:	00000000 	.word	0x00000000
+1003a104:	2002dc40 	.word	0x2002dc40
+1003a108:	2001dd08 	.word	0x2001dd08
+1003a10c:	1006e718 	.word	0x1006e718
+1003a110:	2001dd40 	.word	0x2001dd40
+1003a114:	2001dd3c 	.word	0x2001dd3c
+1003a118:	0000e020 	.word	0x0000e020
+1003a11c:	0000e040 	.word	0x0000e040
+1003a120:	1002cdad 	.word	0x1002cdad
+1003a124:	2001e3dc 	.word	0x2001e3dc
+1003a128:	10072074 	.word	0x10072074
+1003a12c:	10072054 	.word	0x10072054
+1003a130:	10072034 	.word	0x10072034
+1003a134:	10039e05 	.word	0x10039e05
+1003a138:	e000e010 	.word	0xe000e010
+1003a13c:	00ffffff 	.word	0x00ffffff
+1003a140:	2002dc47 	.word	0x2002dc47
+1003a144:	2002c25c 	.word	0x2002c25c
+1003a148:	10039e45 	.word	0x10039e45
+	...
+1003a158:	1002d15d 	.word	0x1002d15d
+
+Disassembly of section .data:
+
+baseline ELF disassembly main1
+
+/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/976ba2195b72046b32f7ecdd41063e7bad791ded/741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612/firmware.elf:     file format elf32-littlearm
+
+
+Disassembly of section .boot2:
+
+Disassembly of section .text:
+
+10039e44 <main1>:
+10039e44:	4b09      	ldr	r3, [pc, #36]	@ (10039e6c <main1+0x28>)
+10039e46:	b510      	push	{r4, lr}
+10039e48:	781b      	ldrb	r3, [r3, #0]
+10039e4a:	2b00      	cmp	r3, #0
+10039e4c:	d00b      	beq.n	10039e66 <main1+0x22>
+10039e4e:	4b08      	ldr	r3, [pc, #32]	@ (10039e70 <main1+0x2c>)
+10039e50:	2b00      	cmp	r3, #0
+10039e52:	d001      	beq.n	10039e58 <main1+0x14>
+10039e54:	f7f2 ffaa 	bl	1002cdac <setup1>
+10039e58:	4b06      	ldr	r3, [pc, #24]	@ (10039e74 <main1+0x30>)
+10039e5a:	2b00      	cmp	r3, #0
+10039e5c:	d002      	beq.n	10039e64 <main1+0x20>
+10039e5e:	f7f3 f97d 	bl	1002d15c <loop1>
+10039e62:	e7fc      	b.n	10039e5e <main1+0x1a>
+10039e64:	e7fe      	b.n	10039e64 <main1+0x20>
+10039e66:	f7ff ffdb 	bl	10039e20 <_ZN6_MFIFO12registerCoreEv.part.0>
+10039e6a:	e7f0      	b.n	10039e4e <main1+0xa>
+10039e6c:	2002dc40 	.word	0x2002dc40
+10039e70:	1002cdad 	.word	0x1002cdad
+10039e74:	1002d15d 	.word	0x1002d15d
+
+Disassembly of section .data:
+
+baseline ELF disassembly _reset_handler
+
+/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/976ba2195b72046b32f7ecdd41063e7bad791ded/741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612/firmware.elf:     file format elf32-littlearm
+
+
+Disassembly of section .boot2:
+
+Disassembly of section .text:
+
+100030e2 <_reset_handler>:
+100030e2:	481d      	ldr	r0, [pc, #116]	@ (10003158 <hold_non_core0_in_bootrom+0xe>)
+100030e4:	6800      	ldr	r0, [r0, #0]
+100030e6:	2800      	cmp	r0, #0
+100030e8:	d12f      	bne.n	1000314a <hold_non_core0_in_bootrom>
+100030ea:	a40d      	add	r4, pc, #52	@ (adr r4, 10003120 <data_cpy_table>)
+100030ec:	cc0e      	ldmia	r4!, {r1, r2, r3}
+100030ee:	2900      	cmp	r1, #0
+100030f0:	d002      	beq.n	100030f8 <_reset_handler+0x16>
+100030f2:	f000 f812 	bl	1000311a <data_cpy>
+100030f6:	e7f9      	b.n	100030ec <_reset_handler+0xa>
+100030f8:	4918      	ldr	r1, [pc, #96]	@ (1000315c <hold_non_core0_in_bootrom+0x12>)
+100030fa:	4a19      	ldr	r2, [pc, #100]	@ (10003160 <hold_non_core0_in_bootrom+0x16>)
+100030fc:	2000      	movs	r0, #0
+100030fe:	e000      	b.n	10003102 <bss_fill_test>
+
+10003100 <bss_fill_loop>:
+10003100:	c101      	stmia	r1!, {r0}
+
+10003102 <bss_fill_test>:
+10003102:	4291      	cmp	r1, r2
+10003104:	d1fc      	bne.n	10003100 <bss_fill_loop>
+
+10003106 <platform_entry>:
+10003106:	4917      	ldr	r1, [pc, #92]	@ (10003164 <hold_non_core0_in_bootrom+0x1a>)
+10003108:	4788      	blx	r1
+1000310a:	4917      	ldr	r1, [pc, #92]	@ (10003168 <hold_non_core0_in_bootrom+0x1e>)
+1000310c:	4788      	blx	r1
+1000310e:	4917      	ldr	r1, [pc, #92]	@ (1000316c <hold_non_core0_in_bootrom+0x22>)
+10003110:	4788      	blx	r1
+10003112:	be00      	bkpt	0x0000
+10003114:	e7fd      	b.n	10003112 <platform_entry+0xc>
+
+10003116 <data_cpy_loop>:
+10003116:	c901      	ldmia	r1!, {r0}
+10003118:	c201      	stmia	r2!, {r0}
+
+1000311a <data_cpy>:
+1000311a:	429a      	cmp	r2, r3
+1000311c:	d3fb      	bcc.n	10003116 <data_cpy_loop>
+1000311e:	4770      	bx	lr
+
+10003120 <data_cpy_table>:
+10003120:	10072848 	.word	0x10072848
+10003124:	200000c0 	.word	0x200000c0
+10003128:	20005084 	.word	0x20005084
+1000312c:	1007780c 	.word	0x1007780c
+10003130:	20040000 	.word	0x20040000
+10003134:	20040000 	.word	0x20040000
+10003138:	1007780c 	.word	0x1007780c
+1000313c:	20041000 	.word	0x20041000
+10003140:	20041000 	.word	0x20041000
+10003144:	00000000 	.word	0x00000000
+10003148:	4770      	bx	lr
+
+1000314a <hold_non_core0_in_bootrom>:
+1000314a:	4809      	ldr	r0, [pc, #36]	@ (10003170 <hold_non_core0_in_bootrom+0x26>)
+1000314c:	f039 f8f1 	bl	1003c332 <rom_func_lookup>
+10003150:	4700      	bx	r0
+10003152:	0000      	.short	0x0000
+10003154:	e000ed08 	.word	0xe000ed08
+10003158:	d0000000 	.word	0xd0000000
+1000315c:	20005088 	.word	0x20005088
+10003160:	2002dc94 	.word	0x2002dc94
+10003164:	1003d811 	.word	0x1003d811
+10003168:	10039eb9 	.word	0x10039eb9
+1000316c:	1003d911 	.word	0x1003d911
+10003170:	00005657 	.word	0x00005657
+
+Disassembly of section .data:

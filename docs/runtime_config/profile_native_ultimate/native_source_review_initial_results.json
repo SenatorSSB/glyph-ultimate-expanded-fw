@@ -1,0 +1,116 @@
+{
+  "verdict": "REQUEST_CHANGES",
+  "reviewed_candidate": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+  "authorization_base": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "original_baseline": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "docs_only_successor_verified": "fc563760c9488d7f5a95156d262b42b71a62ad18",
+  "production_drift_9e_to_fc": [],
+  "findings": [
+    {
+      "id": "NATIVE-REVIEW-P1-STACK",
+      "priority": 1,
+      "source": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "line": 738,
+      "title": "Ordinary CREATE compaction exceeds frozen core0 stack budget",
+      "budget_bytes": 2048,
+      "retained_frame_lower_bound_at_compact_entry_bytes": 2152,
+      "without_main_frame_bytes": 2104,
+      "chain": [
+        {
+          "function": "main",
+          "bytes": 48
+        },
+        {
+          "function": "loop",
+          "bytes": 192
+        },
+        {
+          "function": "ConfiguratorBackend::SendReport",
+          "bytes": 96
+        },
+        {
+          "function": "ConfiguratorBackend::HandleProfileStore",
+          "bytes": 312
+        },
+        {
+          "function": "ProfileStore::Create",
+          "bytes": 208
+        },
+        {
+          "function": "ProfileStore::WriteProfile",
+          "bytes": 256
+        },
+        {
+          "function": "Publish clone.part.0",
+          "bytes": 80
+        },
+        {
+          "function": "MountedStorage::CheckedWrite",
+          "bytes": 24
+        },
+        {
+          "function": "CheckedStorage::WriteFile",
+          "bytes": 216
+        },
+        {
+          "function": "lfs_file_open",
+          "bytes": 16
+        },
+        {
+          "function": "lfs_file_rawopencfg",
+          "bytes": 80
+        },
+        {
+          "function": "lfs_dir_orphaningcommit",
+          "bytes": 160
+        },
+        {
+          "function": "lfs_dir_relocatingcommit",
+          "bytes": 136
+        },
+        {
+          "function": "lfs_dir_splittingcompact.constprop.0",
+          "bytes": 192
+        },
+        {
+          "function": "lfs_dir_compact",
+          "bytes": 136
+        }
+      ],
+      "host_feasibility_witness": {
+        "path": "/private/tmp/glyph-native-stack-witness",
+        "result": "PASS flat-root new-file creation reaches lfs_dir_compact; first_file=16 compact_entries=6",
+        "source_sha256": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e"
+      },
+      "irq_rom_other_indirect_cost_included": false,
+      "disposition": "Bounded caller/workspace lifetime reduction and exact-build stack proof required; no stack limit increase"
+    }
+  ],
+  "checks": {
+    "native_checker_short_enum": "PASS_EXIT_0",
+    "native_checker_log": "/private/tmp/glyph-native-source-review-tests.log",
+    "native_checker_log_sha256": "ff0d4e2f3992ccd60027f9cf37e4f3bc5170791812e87c6767ec64d0f7821051",
+    "closed_path_allowlist": "PASS_NO_VIOLATION",
+    "production_45d_to_9e": "UNCHANGED",
+    "root_findings_forced_table": "CORRECTED",
+    "root_findings_mixed_legacy_native": "CORRECTED",
+    "root_findings_complete_correspondence": "CORRECTED",
+    "target_timing": "NOT_MEASURED",
+    "target_peak_stack": "NOT_MEASURED",
+    "hardware_acceptance": null,
+    "device_actions": false,
+    "tracked_files_edited": false
+  },
+  "exact_successor_elf": {
+    "sha256": "51dad8fed79c8e5726827d7702c86db2e578cff3b4663e8a7d808e23b9343b5d",
+    "disassembly": "/private/tmp/glyph-native-review-final-elf.txt",
+    "retained_frames_correspond": "MATCH"
+  },
+  "object_sha256": {
+    "/private/tmp/native-final-branches-HAL_pico_src_comms_ConfiguratorBackend.cpp.o": "a3c25637f88f85ae0a3901477865a2a90229725d09654108fda4d6dbb2122ad8",
+    "/private/tmp/native-final-branches-config_glyph_common_src_config.cpp.o": "f7e6f0e22fe6433af7091afa38dee06cc6336a09ac2587f9b9d9cb5e611c9a36",
+    "/private/tmp/native-final-branches-HAL_pico_src_core_ProfileStore.cpp.o": "e5daa616fc16f464de31be6cbdd4ab95a3ef6b6473e17fab87b8aa9ace298fce",
+    "/private/tmp/native-final-branches-.platformio-home_packages_framework-arduinopico_libraries_LittleFS_src_lfs.c.o": "bc9680c1f9c10a49185b35fff05f44fe005715331387bbb2e0b3101df2eb9987",
+    "/private/tmp/native-final-branches-HAL_pico_src_core_CheckedStorage.cpp.o": "8ac7f1c790c5e3352bbbbc2d72d264237ee4f026e3b8139ed0a1db7390daf93c"
+  }
+}

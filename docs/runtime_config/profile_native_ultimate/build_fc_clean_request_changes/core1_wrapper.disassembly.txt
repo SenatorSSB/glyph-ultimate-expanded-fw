@@ -1,0 +1,16 @@
+
+/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/firmware.elf:     file format elf32-littlearm
+
+
+Disassembly of section .boot2:
+
+Disassembly of section .text:
+
+10042902 <core1_wrapper>:
+10042902:	b510      	push	{r4, lr}
+10042904:	0004      	movs	r4, r0
+10042906:	f7fd fe69 	bl	100405dc <irq_init_priorities>
+1004290a:	47a0      	blx	r4
+1004290c:	bd10      	pop	{r4, pc}
+
+Disassembly of section .data:

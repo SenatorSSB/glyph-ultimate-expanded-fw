@@ -1,0 +1,7 @@
+{
+  "state": "NOT_FOR_HARDWARE_HANDOFF",
+  "reason": "An own generated untracked compile_commands.json caused the correct prebuild identity to be fc563760-DIRTY. Tracked source was exact and build succeeded, but this is not the clean final candidate artifact. File preserved outside checkout; clean rerun follows.",
+  "raw_build_manifest_preserved": true,
+  "source_sha": "fc563760c9488d7f5a95156d262b42b71a62ad18",
+  "uf2_sha256": "aee1b836aa86cf492ed977727dbf26e5f97d444e7f93a7b4d75c31a3cbbf1f25"
+}

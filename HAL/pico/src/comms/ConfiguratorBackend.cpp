@@ -142,6 +142,11 @@ CommunicationBackendId ConfiguratorBackend::BackendId() {
     return COMMS_BACKEND_CONFIGURATOR;
 }
 
+// Delimiter-writer scratch ends before command dispatch enters storage.
+static __attribute__((noinline)) bool SendProfileDelimiter(CoordinatedCdcStream &stream) {
+    ProfilePacketWriter writer(stream);
+    return writer.write(uint8_t{0}) == 1;
+}
 void ConfiguratorBackend::SendReport() {
     int data = ReadByte();
     if (data < 0) {
@@ -155,8 +160,7 @@ void ConfiguratorBackend::SendReport() {
     if (_profile_tx_needs_sync && command != CMD_PROFILE_STORE) {
         // Legacy command responses share the physical stream. They must also
         // terminate a partial ProfileStore frame before using their encoder.
-        ProfilePacketWriter writer(_base_stream);
-        if (writer.write(uint8_t{0}) != 1) {
+        if (!SendProfileDelimiter(_base_stream)) {
             SkipToNextPacket();
             return;
         }
@@ -447,11 +451,24 @@ static __attribute__((noinline)) bool PrepareStoreIdentity(ProfileStoreRequest &
 static __attribute__((noinline)) void CaptureStoreCapacity(ProfileStore::CapacityInfo &capacity) {
     capacity = profile_store.Capacity();
 }
+namespace {
+constexpr size_t kFrameLimit = 8192;
+static ProfileStoreRequest request;
+static ProfileStoreResponse response;
+static uint8_t frame[kFrameLimit];
+static ultimate_native::PayloadLease incoming_native;
+static bool profile_received;
+}
 bool ConfiguratorBackend::HandleProfileStore() {
-    static constexpr size_t kFrameLimit = 8192;
-    static ProfileStoreRequest request;
-    static ProfileStoreResponse response;
-    static uint8_t frame[kFrameLimit];
+    incoming_native.Release();
+    struct IncomingScope { ~IncomingScope() { incoming_native.Release(); } } incoming_scope;
+    profile_received = false;
+    const bool received = ReceiveProfileStore();
+    if (!profile_received) return received;
+    if (!DispatchProfileStore()) return false;
+    return RespondProfileStore();
+}
+__attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
     const size_t length = ReadPacket(frame, sizeof(frame));
     if (_packet_timed_out) {
 #if GLYPH_STRICT_HARDENING_CANDIDATE
@@ -476,9 +493,6 @@ bool ConfiguratorBackend::HandleProfileStore() {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29);
     }
     request = ProfileStoreRequest_init_default;
-    static ultimate_native::PayloadLease incoming_native;
-    incoming_native.Release();
-    struct IncomingScope { ultimate_native::PayloadLease &lease; ~IncomingScope() { lease.Release(); } } incoming_scope{incoming_native};
     if (!ultimate_native::PrepareRequest(frame, length, request, incoming_native))
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
 #if GLYPH_STRICT_HARDENING_CANDIDATE
@@ -511,6 +525,10 @@ bool ConfiguratorBackend::HandleProfileStore() {
         !TraceProfileStage(request, 38, 1))) return false;
 #endif
     if (!TraceProfileStage(request, 1)) return false; // decoded; before Config CRC
+    profile_received = true;
+    return true;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     response = ProfileStoreResponse_init_default;
     response.protocol_version = request.protocol_version;
     response.mutation_protocol_version = 2;
@@ -849,6 +867,9 @@ bool ConfiguratorBackend::HandleProfileStore() {
     if (_recovery_service) response.recovery_flags |= 1u << 19;
     if (!_recovery_storage_available) response.recovery_flags |= 1u << 17;
     if (_reference_unknown || persistence.IsMutationFenced()) response.recovery_flags |= 1u << 18;
+    return true;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::RespondProfileStore() {
     // Release the borrowed immutable RX bytes after all identity/transaction
     // work, before response encoding reuses that same frame. READ leases use
     // the separate record wire and remain synchronous through this encode.

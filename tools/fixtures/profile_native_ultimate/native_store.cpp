@@ -6,7 +6,36 @@
 #include "modes/UltimateNativeEvaluator.hpp"
 #include "core/RuntimeProfileDigest.hpp"
 #include "core/RuntimeIdentity.hpp"
+CheckedStorage::Result GlyphMountedWriteProbe(const char *,const uint8_t *,size_t);
 namespace {
+CheckedStorage::Operation mounted_fault_operation;
+CheckedStorage::Phase mounted_fault_phase;
+CheckedStorage::Fault mounted_fault;
+unsigned mounted_close_calls, mounted_fault_hits;
+CheckedStorage::Fault mounted_fault_hook(CheckedStorage::Kind kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char *) {
+    if (kind!=CheckedStorage::Kind::Record) return CheckedStorage::Fault::None;
+    if (op==CheckedStorage::Operation::Close&&phase==CheckedStorage::Phase::Before) ++mounted_close_calls;
+    if (op==mounted_fault_operation&&phase==mounted_fault_phase) { ++mounted_fault_hits;return mounted_fault; }
+    return CheckedStorage::Fault::None;
+}
+void actual_mounted_write_faults() {
+    using namespace CheckedStorage;
+    const uint8_t bytes[]={11,22,33};
+    for(auto op:{Operation::OpenWrite,Operation::Write,Operation::Sync,Operation::Close})
+      for(auto phase:{Phase::Before,Phase::After}) for(auto fault:{Fault::Fail,Fault::LostAcknowledgement}) {
+        mounted_fault_operation=op;mounted_fault_phase=phase;mounted_fault=fault;mounted_close_calls=mounted_fault_hits=0;
+        auto *prior=mounted_fs.mlist;SetFaultHook(mounted_fault_hook);
+        const auto failed=GlyphMountedWriteProbe("/native-adapter.tmp",bytes,sizeof(bytes));SetFaultHook(nullptr);
+        require(!failed&&mounted_fault_hits==1,"actual production mounted adapter injected stage exactly once");
+        require(failed.outcome==((phase==Phase::Before&&fault==Fault::Fail)?Outcome::Failed:Outcome::Uncertain),"mounted exact failed/uncertain acknowledgement");
+        require(mounted_close_calls==(op==Operation::OpenWrite?0u:1u),"mounted Close exactly once after acknowledged open");
+        require(mounted_fs.mlist==prior,"mounted native handle released including lost open/close acknowledgement");
+        require(bool(GlyphMountedWriteProbe("/native-adapter.tmp",bytes,sizeof(bytes)))&&mounted_fs.mlist==prior,"same static file resets for next successful operation");
+        uint8_t readback[3]{};require(bool(ReadFile("/native-adapter.tmp",readback,sizeof(readback),Kind::Record))&&!std::memcmp(bytes,readback,sizeof(bytes)),"actual mounted next write exact bytes");
+    }
+    require(bool(Remove("/native-adapter.tmp")),"mounted fault scratch cleanup");
+    std::puts("PASS actual production MountedStorage CheckedWrite16 fail-before/lost-ack stage cases; Close once/handles released/next write succeeds");
+}
 class NativeBackend : public CommunicationBackend {
  public:
     NativeBackend(InputState &i):CommunicationBackend(i,nullptr,0){}
@@ -31,7 +60,14 @@ int main(int argc,char **argv) {
     require(argc==4,"native_store PROFILE_DIRECTORY LEGACY_CONFIG CONTEXT");std::ifstream f(argv[2],std::ios::binary);Bytes raw((std::istreambuf_iterator<char>(f)),{});auto decoder=pb_istream_from_buffer(raw.data(),raw.size());require(pb_decode(&decoder,Config_fields,&legacy),"legacy source decode");
     mounted_cfg.read=ram_read;mounted_cfg.prog=ram_prog;mounted_cfg.erase=ram_erase;mounted_cfg.sync=ram_sync;mounted_cfg.read_size=256;mounted_cfg.prog_size=256;mounted_cfg.block_size=4096;mounted_cfg.block_count=128;mounted_cfg.block_cycles=16;mounted_cfg.cache_size=256;mounted_cfg.lookahead_size=256;
     require(lfs_format(&mounted_fs,&mounted_cfg)==0&&lfs_mount(&mounted_fs,&mounted_cfg)==0,"actual pinned LittleFS mount");
+    actual_mounted_write_faults();
     ProfileStore store;require(store.Begin(),"normal production bootstrap");uint64_t token=1;
+    mounted_fault_operation=CheckedStorage::Operation::Write;mounted_fault_phase=CheckedStorage::Phase::After;mounted_fault=CheckedStorage::Fault::LostAcknowledgement;mounted_close_calls=mounted_fault_hits=0;
+    CheckedStorage::SetFaultHook(mounted_fault_hook);
+    const auto uncertain=store.Create(load_native(std::string(argv[1])+"/1.pb"),"unknown",1,identity(token));
+    CheckedStorage::SetFaultHook(nullptr);incoming_lease.Release();
+    require(uncertain.status==Status::UnknownOutcome&&store.IsTransactionUncertain()&&store.Count()==0,"actual mounted uncertain record write preserves transaction fence");
+    require(store.ReconcileTransaction()&&!store.IsTransactionUncertain()&&store.Count()==0,"actual mounted failed record authoritative root reconciliation");
     for(unsigned i=1;i<=20;++i) {const auto &p=load_native(std::string(argv[1])+"/"+std::to_string(i)+".pb");auto result=store.Create(p,("native"+std::to_string(i)).c_str(),i,identity(token++));require(result.status==Status::Ok&&result.id==i&&result.revision==1,"twenty independent complete native creates");incoming_lease.Release();}
     require(store.Count()==20,"twenty directory records");const size_t store_bytes=sizeof(store);
     auto capacity=store.Capacity();require(capacity.admissible_profiles>=20&&capacity.free_bytes>=capacity.reserve_bytes+capacity.staging_bytes,"full reserve/staging and native representative admission");

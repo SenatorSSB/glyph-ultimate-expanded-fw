@@ -1,0 +1,3 @@
+production ProfileStore tool: [Errno 17] File exists: '/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/tmpahhy344m/r.json'
+production ProfileStore tool: malformed response after transmission; unresolved
+glyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true

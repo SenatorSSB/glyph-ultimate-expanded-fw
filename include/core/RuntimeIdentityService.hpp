@@ -5,7 +5,7 @@ namespace runtime_identity {
 class Service {
   public:
     template<class Wire>
-    void Poll(Wire &wire, CommunicationBackend *primary, const Config &config,
+    __attribute__((noinline)) void Poll(Wire &wire, CommunicationBackend *primary, const Config &config,
               const ProfileStore &store, const Ultimate &ultimate, uint32_t now) {
         // This reader exists only in the current primary XInput session.
         if (!primary || primary->BackendId() != COMMS_BACKEND_XINPUT) return;

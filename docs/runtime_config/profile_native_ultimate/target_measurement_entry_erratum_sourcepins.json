@@ -1,0 +1,43 @@
+{
+  "state": "READ_ONLY_BASELINE_AND_FRAMEWORK_FEASIBILITY_NOT_CANDIDATE_BUILD",
+  "sourcewriter_actual_object_unavailable": true,
+  "baseline_candidate": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "pins": {
+    "/private/tmp/gp-bind-003-runtime-attestation/.pio/build/glyph_mk6/FrameworkArduino/main.cpp.o": {
+      "bytes": 9848,
+      "sha256": "0b6c413ad5e57a793e55a84f952eb3e9af0719fc81c5aa2561d0ae38f0ce98bb"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/libpico.a": {
+      "bytes": 1225846,
+      "sha256": "a77cbc886c8a263bc15e9d01af31f7f3f2df5e060b42b727f5c0a21a122f9e06"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/976ba2195b72046b32f7ecdd41063e7bad791ded/741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612/firmware.elf": {
+      "bytes": 5574020,
+      "sha256": "83f2aa7d66ba511274981695ee97a65e86ca5b7fa812cc1a21967914eabaf7b8"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/gp-bind-003-runtime-attestation/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S": {
+      "bytes": 9107,
+      "sha256": "1329e3005bb9b2424ebeda04fc784e215926e57612eef8321f7df715797fcecd"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c": {
+      "bytes": 10079,
+      "sha256": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/share/info/ld.info": {
+      "bytes": 446934,
+      "sha256": "60c56dd8915c712864d14b38698ed47fa266b8b3d7d9ead13b4ae710e6acc815"
+    },
+    "/private/tmp/glyph-native-target-measurement-entry-evidence.txt": {
+      "bytes": 32080,
+      "sha256": "706ddc24db476b390b5dde4a9488438cf2bf37b74daeed47a0eacc6309ebad62"
+    }
+  }
+}
