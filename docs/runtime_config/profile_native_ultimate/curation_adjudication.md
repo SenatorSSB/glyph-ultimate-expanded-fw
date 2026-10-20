@@ -138,3 +138,15 @@ unrelated historical C024/global framework debt stays explicit. No full
 aggregate PASS is claimed. The primary publisher must independently review the
 final adoption and refresh live refs immediately before publication; Curator
 does not push canonical or merge Planner/source.
+
+Final committed-context validation at adoption `e3138f9fb26b6b3979e622223249d434d87ca700`
+passes the unchanged complete framework, sequence and navigation checkers, plus
+focused native receipt/queue/mirror controls and six unsafe mutations. Surface
+retains the same C024 rejection reproduced at exact base B. The full base-to-
+adoption whitespace command exits2 for six warnings solely in exact raw Planner
+evidence (three build-log trailing spaces, three generated descriptor EOF blank
+lines); it is not reported PASS. Curator-authored paths pass whitespace. Those
+raw evidence bytes remain exact rather than being cosmetically rewritten. This
+validation-report descendant changes no queue, source scope, P/C identity or
+substantive decision. Fresh reviewer receives its final immutable SHA from the
+primary publisher.

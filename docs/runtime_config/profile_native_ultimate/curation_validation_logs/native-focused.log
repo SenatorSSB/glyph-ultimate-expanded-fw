@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "verified_head": "e3138f9fb26b6b3979e622223249d434d87ca700",
+  "exact_P_replay_paths": 104,
+  "unchanged_prior_queue_items": 102,
+  "receipt_queue_exact_base": true,
+  "closed_scope": "PASS",
+  "native_work_order_and_P_C_correspondence": "PASS",
+  "four_machine_and_prose_mirrors": "PASS",
+  "unsafe_mutations_rejected": [
+    "hardware_evidence_dependency_satisfied",
+    "hardware_risk",
+    "manual_acceptance",
+    "planning_commit",
+    "curation_commit",
+    "candidate_count"
+  ],
+  "all_changed_paths_docs_only": true,
+  "firmware_and_product_checkers_changed": false
+}

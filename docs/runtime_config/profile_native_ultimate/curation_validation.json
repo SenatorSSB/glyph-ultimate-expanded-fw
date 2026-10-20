@@ -25,7 +25,7 @@
       "exit_code": 0,
       "result": "PASS",
       "tier": "1_AND_AFFECTED_2",
-      "log": "curation_validation_logs/framework-after-dependency.log",
+      "log": "curation_validation_logs/framework-final.log",
       "scope": "Complete unchanged framework checker including queue, receipt/provenance, strict existing completion, mirrors, control-plane negative self-tests, authorization and forbidden-claim contracts"
     },
     {
@@ -33,21 +33,21 @@
       "exit_code": 0,
       "result": "PASS",
       "tier": "AFFECTED_2",
-      "log": "curation_validation_logs/sequence.log"
+      "log": "curation_validation_logs/sequence-final.log"
     },
     {
       "command": "python3 tools/check_glyph_docs_navigation.py",
       "exit_code": 0,
       "result": "PASS",
       "tier": "AFFECTED_2",
-      "log": "curation_validation_logs/navigation.log"
+      "log": "curation_validation_logs/navigation-final.log"
     },
     {
       "command": "python3 tools/check_glyph_docs_agent_surface.py",
       "exit_code": 1,
       "result": "FRAMEWORK_VALIDATION_DEBT",
       "tier": "3",
-      "log": "curation_validation_logs/surface.log",
+      "log": "curation_validation_logs/surface-final.log",
       "reason": "Historical C024 post-integration change outside validation/evidence paths; authenticate_c024_phase rejects already integrated later chapters before reaching current docs scope. No source or helper edits permitted or performed."
     },
     {
@@ -62,13 +62,29 @@
       "command": "git diff --check",
       "exit_code": 0,
       "result": "PASS",
-      "tier": "AFFECTED_2"
+      "tier": "AFFECTED_2",
+      "context": "Initial unstaged Curator-authored diff only; replayed P paths were untracked at that time. Does not claim full base-to-adoption whitespace PASS."
     },
     {
       "command": "Direct native control-plane assertions using unchanged check_glyph_agent_framework_docs APIs",
       "result": "PASS",
       "tier": "1_AND_AFFECTED_2",
-      "scope": "validate_work_order; exact immutable Planner/Curator correspondence; four guarded machine+human mirrors and prose; all102 prior queue items, existing failure obligation and completion policy unchanged; C receipt queue byte-identical to B; all104 P paths replay exact; all changes under docs; native tuple absent and REQUIRED acceptance retained; six unsafe identity/risk/hardware mutations rejected"
+      "scope": "validate_work_order; exact immutable Planner/Curator correspondence; four guarded machine+human mirrors and prose; all102 prior queue items, existing failure obligation and completion policy unchanged; C receipt queue byte-identical to B; all104 P paths replay exact; all changes under docs; native tuple absent and REQUIRED acceptance retained; six unsafe identity/risk/hardware mutations rejected",
+      "log": "curation_validation_logs/native-focused.log"
+    },
+    {
+      "command": "git diff --check 976ba2195b72046b32f7ecdd41063e7bad791ded HEAD",
+      "exit_code": 2,
+      "result": "IMMUTABLE_RAW_EVIDENCE_WHITESPACE_WARNINGS",
+      "log": "curation_validation_logs/whitespace-full-base.log",
+      "scope": "Six warnings entirely in104 exact P replay paths: three trailing spaces in raw baseline build log and three generated config.pb.c EOF blank lines. Preserved byte-exact evidence; no whitespace normalization or false PASS. No firmware/product/control-plane semantic contradiction."
+    },
+    {
+      "command": "git diff --check 976ba2195b72046b32f7ecdd41063e7bad791ded HEAD -- <exact Curator-authored docs/receipt/report paths>",
+      "exit_code": 0,
+      "result": "PASS",
+      "tier": "AFFECTED_2",
+      "log": "curation_validation_logs/whitespace-authored.log"
     }
   ],
   "initial_failure_preserved": {
@@ -85,10 +101,19 @@
   "network_provenance": "Independent Curator network-enabled live read returned unchanged B/P before receipt. Owner subsequently reported internet interruption; root reports successful fresh readback unchanged B/P. This is recorded as root-reported live verification, not another Curator measurement.",
   "log_sha256": {
     "framework-after-dependency.log": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3",
+    "framework-final.log": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3",
     "framework.log": "e28a43e4484f86cab45ef4bbd828040c8712d272c3dd21eb153d1ee5ac251c64",
+    "native-focused.log": "b09c6b1396b73bc77a1c3781079fa157f75ce138cacbbc6b8fd4076857fbfede",
+    "navigation-final.log": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
     "navigation.log": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
+    "sequence-final.log": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b",
     "sequence.log": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b",
     "surface-baseline.log": "6ada61d3caee69202ad837d23c9e59eb7b2ff52d710a15604b4f2eb43f096a04",
-    "surface.log": "6fd0b7e477c7488728330b70c02bc7c5b31c8d3a1d0578ea96ad28f26d1544ed"
-  }
+    "surface-final.log": "6fd0b7e477c7488728330b70c02bc7c5b31c8d3a1d0578ea96ad28f26d1544ed",
+    "surface.log": "6fd0b7e477c7488728330b70c02bc7c5b31c8d3a1d0578ea96ad28f26d1544ed",
+    "whitespace-authored.log": "ac5b0b021cc1ee1c2dedcd18b8b47b235ac099539b127d7e0784e9bf640946a8",
+    "whitespace-full-base.log": "993a766b5150080fd455c629d3b444cbf98a3c7228aec508a1d121fd9d101f58"
+  },
+  "final_validated_adoption_head": "e3138f9fb26b6b3979e622223249d434d87ca700",
+  "final_report_descendant_scope": "Only records completed final-context results and immutable raw-evidence whitespace observations; decision/queue/P/C/source scope unchanged."
 }

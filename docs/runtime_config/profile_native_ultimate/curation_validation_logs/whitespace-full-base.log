@@ -1,0 +1,9 @@
+docs/runtime_config/profile_native_ultimate/baseline_build_success.log:356: trailing whitespace.
++PACKAGES: 
+docs/runtime_config/profile_native_ultimate/baseline_build_success.log:357: trailing whitespace.
++ - framework-arduinopico @ 1.30603.0+sha.32e74d0 
+docs/runtime_config/profile_native_ultimate/baseline_build_success.log:358: trailing whitespace.
++ - tool-picotool-rp2040-earlephilhower @ 5.120300.240827 (12.3.0) 
+docs/runtime_config/profile_native_ultimate/production_abi_evidence/baseline/generated/config.pb.c:91: new blank line at EOF.
+docs/runtime_config/profile_native_ultimate/production_abi_evidence/proposed/generated/config.pb.c:91: new blank line at EOF.
+docs/runtime_config/profile_native_ultimate/proposed_abi_evidence/generated/config.pb.c:91: new blank line at EOF.
