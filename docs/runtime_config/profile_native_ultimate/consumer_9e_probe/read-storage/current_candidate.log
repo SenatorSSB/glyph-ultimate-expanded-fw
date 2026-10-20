@@ -1,0 +1,14 @@
+history_checkpoint generation=160 count=20 disposable_id=22 revision=130 highwater=22 successful_updates=129 dropped_results=43 exact_replays=43 total=524288 used=147456 free=376832 protected=188416 staging=45056 admissible=29 erases=955
+response label=stress READ id=1 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=stress READ id=3 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=stress READ id=4 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=stress READ id=22 profile_bytes=3042 response_bytes=3055 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=stress READ id=5 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=stress READ id=20 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+read_stress=PASS reads=6000 ids=1,3,4,22,5,20 all_phases_completed=true max_block_reads=115 max_host_ms=0.233 native_handles=0 live_lfs_allocations=3 live_lfs_bytes=768 peak_lfs_bytes=1024 gc_enumerations=280 programs_during_reads=0 erases_during_reads=0 ASAN_UBSAN=true
+production_trace=PASS ordered_stages=10..18 failure_each_stage=true close_and_allocation_cleanup=true scope_restores_READ=true
+response label=maximum_accepted_stage_c id=1 profile_bytes=4025 response_bytes=4038 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=retained_physical_ID1 id=1 profile_bytes=1960 response_bytes=1989 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=retained_physical_ID3 id=3 profile_bytes=3042 response_bytes=3071 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=retained_physical_ID4 id=4 profile_bytes=3047 response_bytes=3076 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192
+response label=retained_physical_ID22 id=22 profile_bytes=3042 response_bytes=3072 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192

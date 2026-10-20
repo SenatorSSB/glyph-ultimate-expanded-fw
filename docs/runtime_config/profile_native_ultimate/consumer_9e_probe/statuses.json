@@ -1,0 +1,146 @@
+{
+  "kind": "NARROW_CORRECTED_CONSUMER_PROOF_NOT_FINAL_SOURCE_SAFETY_REVIEW",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "observed_model": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "snapshot": {
+    "head": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+    "tree": "fc71f5e6e5c7b31758b3389271dfd51dac97be63",
+    "status": "?? .platformio-home\n",
+    "source_sha256": {
+      "tools/check_glyph_profile_store_migration_lifecycle.py": "5e7fce667a11e5ed323102445cf26c829a48fc2e5653bb254a246937a380ba23",
+      "tools/check_glyph_profile_store_strict_protocol.py": "fe385469e02754833765bbe72d5e6cc8119e65da228a9e1804165e6beda58177",
+      "tools/check_glyph_profile_store_timeout_resynchronization.py": "c8309321bffbd9b194204dc23e953b4d31301231a0ab300a153e8f20233b1765",
+      "tools/check_glyph_profile_store_read_storage.py": "64cca35b581f395ffd5ca0ed084c2c2cbc44fabbdca3443e8dc96664e9f36110",
+      "tools/fixtures/profile_store_read_storage/read_observer.inc": "c643bfeb07803bd390380a4dbf8d8979db78d695d0ee6c2b8962b7574cb5ed0e",
+      "HAL/pico/src/core/ProfileStore.cpp": "2c6182593288a728f0cd6f2afc4a6f5704b3efe35700874e2ae2cd60e7cd414d",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "09d32bcf704624b9c47df3b2303f7872af4d61c757d512042bf1cbcb7da7a97a",
+      "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+      "include/core/ProfileStore.hpp": "6d1e3ea269a50a3973e512370e15dc1d7ac0836c50bedcd76f93bb8d3ea000ef",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "588520ee250a5c4dcbd904cb957bc8731b36c32531451224473dd354534bdea4",
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "5e6d1c47567763ad4e1e41a7c1f5d62bf7b5dd105246e88afd933a7a02e2b06b",
+      "tools/glyph_profile_store_candidate_tool.py": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+      "tools/glyph_profile_store_production_tool.py": "d54a3c0c5610a5aa0678145339113c762f6685b3700be9a409edfdec0c7fe917",
+      "tools/check_glyph_profile_store_candidate_tool.py": "efb5d2e693d4b2ed7be36dcc9ce5279163842c77d5be410ca20b5182d792a1db",
+      "tools/check_glyph_profile_store_production_tool.py": "07fdbea4b171eab7c4d0f8d259ed35f696b9953ae016c087de2dfdacbd59aa08"
+    },
+    "focused_adapter_paths_all_allowed": true,
+    "adapter_diffs_since3b": "diff --git a/tools/check_glyph_profile_store_migration_lifecycle.py b/tools/check_glyph_profile_store_migration_lifecycle.py\nindex 743b3130..8218e3db 100644\n--- a/tools/check_glyph_profile_store_migration_lifecycle.py\n+++ b/tools/check_glyph_profile_store_migration_lifecycle.py\n@@ -52,7 +52,7 @@ def main() -> int:\n                  \"-I\", str(ROOT / \"include\"), \"-I\", str(ROOT / \"HAL/pico/include\"),\n                  \"-I\", str(ROOT / \"config/glyph/common/include\"), \"-I\", str(ROOT / \"config/glyph/glyph_mk6/include\"),\n                  str(HOST / \"migration_lifecycle.cpp\"), str(HOST / \"checked_storage_unavailable.cpp\"), str(ROOT / \"HAL/pico/src/core/ProfileStore.cpp\"),\n-                 str(ROOT / \"src/modes/UltimateNativeProfile.cpp\", ROOT / \"src/core/config_validation.cpp\"), str(ROOT / \"src/core/config_button_validation.cpp\"),\n+                 str(ROOT / \"src/modes/UltimateNativeProfile.cpp\"), str(ROOT / \"src/core/config_validation.cpp\"), str(ROOT / \"src/core/config_button_validation.cpp\"),\n                  str(ROOT / \"src/core/config_usb_default_validation.cpp\"), str(ROOT / \"src/core/config_rgb_target_validation.cpp\"),\n                  str(ROOT / \"config/glyph/common/src/glyph_config_validation.cpp\"), *objects, \"-o\", str(executable)])\n             lifecycle = run([str(executable), str(legacy)])\ndiff --git a/tools/check_glyph_profile_store_read_storage.py b/tools/check_glyph_profile_store_read_storage.py\nindex 90efce28..98deb8d1 100644\n--- a/tools/check_glyph_profile_store_read_storage.py\n+++ b/tools/check_glyph_profile_store_read_storage.py\n@@ -57,6 +57,8 @@ def instrument(source):\n         ('    if (out.schema_version < 1', '    ReadStoragePhase(2);\\n    if (out.schema_version < 1'),\n         ('    return ValidateProfile(out);', '    const bool valid = ValidateProfile(out);\\n    if (valid) ReadStoragePhase(3);\\n    return valid;'),\n     ]\n+    if 'if ((out.schema_version < 1' in body:\n+        replacements[2] = ('    if ((out.schema_version < 1', '    ReadStoragePhase(2);\\n    if ((out.schema_version < 1')\n     if 'const bool valid = ValidateProfile(out);' in body:\n         replacements[-1] = ('    const bool valid = ValidateProfile(out);', '    const bool valid = ValidateProfile(out);\\n    if (valid) ReadStoragePhase(3);')\n     for old, new in replacements:\ndiff --git a/tools/check_glyph_profile_store_timeout_resynchronization.py b/tools/check_glyph_profile_store_timeout_resynchronization.py\nindex 490266d2..fe145491 100644\n--- a/tools/check_glyph_profile_store_timeout_resynchronization.py\n+++ b/tools/check_glyph_profile_store_timeout_resynchronization.py\n@@ -56,7 +56,8 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le\n     compile_object(profile_source, profile, includes, [\"-Dprofile_store=production_profile_store\"] + ([\"-DGLYPH_STRICT_HARDENING_CANDIDATE=1\"] if candidate_faults else []))\n     objects.append(profile)\n     for name, source in ((\"checked_unavailable\", HOST / \"checked_storage_unavailable.cpp\"),\n-                         (\"validation\", ROOT / \"src/modes/UltimateNativeProfile.cpp\", ROOT / \"src/core/config_validation.cpp\"),\n+                         (\"native_profile\", ROOT / \"src/modes/UltimateNativeProfile.cpp\"),\n+                         (\"validation\", ROOT / \"src/core/config_validation.cpp\"),\n                          (\"button\", ROOT / \"src/core/config_button_validation.cpp\"),\n                          (\"usb\", ROOT / \"src/core/config_usb_default_validation.cpp\"),\n                          (\"rgb\", ROOT / \"src/core/config_rgb_target_validation.cpp\"),\n"
+  },
+  "checks": {
+    "focused_checker_and_observer_paths_allowed": true,
+    "production_candidate_tools_source_paths_allowed": true,
+    "frozen_legacy_and_direct_consumer_fixtures_unchanged_since3b": true,
+    "frozen_fixture_diff": "",
+    "frame_bounds": "Observer retains local8192frame, production admitted standalone4096 cap; actual pb_get_encoded_size+pb_encode and exact full decode/profile roundtrip assertions preserved. Tautological static_assert4096<8192 alone is not whole-response maximum proof."
+  },
+  "totals": {
+    "runs": 6,
+    "pass": 6,
+    "fail": 0,
+    "timeout": 0
+  },
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_migration_lifecycle.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "glyph_profile_store_migration_lifecycle: PASS\nproduction_import=true injected_storage=true strict_absent_first_create=true generated_nanopb_stage_b=true profiles=20 compact_mode_refs=true retry_without_duplicate_ids=true reboot_switch=true delete_refusal=true corrupt_record_isolation=true\n",
+      "stderr": "",
+      "seconds": 2.27,
+      "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_migration_lifecycle.log",
+      "status": "PASS",
+      "snapshot": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+      "cwd": "/private/tmp/glyph-native-consumer-probe-20261020"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_strict_protocol.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "profile_store_strict_protocol=PASS\nprofile_store_strict_protocol=PASS\nprofile_store_rx_backend=PASS partial_ticket_inert=true pulse_retains_timeout=true trace_after_eop=true admission_before_activation=true ordered_stages=true query=true failed_trace_disarms=true\nprofile_store_liveness_protocol=PASS profiles=20 updates=128 arm_loss_cycles=1024 mixed_frames=7680 trace_stages=9 slow_trickle=bounded\nglyph_profile_store_strict_protocol: PASS\n",
+      "stderr": "",
+      "seconds": 4.99,
+      "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_strict_protocol.log",
+      "status": "PASS",
+      "snapshot": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+      "cwd": "/private/tmp/glyph-native-consumer-probe-20261020"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_timeout_resynchronization.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "glyph_profile_store_timeout_resynchronization: PASS\nsanitizers=False\nreal_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,rename destination_remove_gap_absent=true directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true stale_file_combinations=16 root_rotation_creates=512 rotating_directory_failure_stages=6 old_valid_record_and_root_rejected=true root_corruption_fail_closed=true invalid_root_is_not_empty=true ambiguous_root_readonly=true reference_durable_live_separation=true reference_failure_atomicity=true reference_generation_races=true durable_and_live_delete_guards=true direct_create_replay_nonmutation=true tx_failure_budgets=0,1,7 tx_failure_transaction_recovery=true tx_no_space=true tx_short_write=true tx_deadline_ms=2000 retained_transport_resync=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30\n",
+      "stderr": "",
+      "seconds": 7.3,
+      "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_timeout_resynchronization.log",
+      "status": "PASS",
+      "snapshot": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+      "cwd": "/private/tmp/glyph-native-consumer-probe-20261020"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_read_storage.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-consumer-probe-results-9e/read-storage"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "frozen_d596:\nhistory_checkpoint generation=160 count=20 disposable_id=22 revision=130 highwater=22 successful_updates=129 dropped_results=43 exact_replays=43 total=524288 used=147456 free=376832 protected=188416 staging=45056 admissible=29 erases=955\nresponse label=stress READ id=1 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=3 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=4 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=22 profile_bytes=3042 response_bytes=3055 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=5 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=20 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nread_stress=PASS reads=6000 ids=1,3,4,22,5,20 all_phases_completed=true max_block_reads=115 max_host_ms=0.236 native_handles=0 live_lfs_allocations=3 live_lfs_bytes=768 peak_lfs_bytes=1024 gc_enumerations=280 programs_during_reads=0 erases_during_reads=0 ASAN_UBSAN=true\nresponse label=maximum_accepted_stage_c id=1 profile_bytes=4025 response_bytes=4038 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID1 id=1 profile_bytes=1960 response_bytes=1989 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID3 id=3 profile_bytes=3042 response_bytes=3071 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID4 id=4 profile_bytes=3047 response_bytes=3076 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID22 id=22 profile_bytes=3042 response_bytes=3072 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\n\ncurrent_candidate:\nhistory_checkpoint generation=160 count=20 disposable_id=22 revision=130 highwater=22 successful_updates=129 dropped_results=43 exact_replays=43 total=524288 used=147456 free=376832 protected=188416 staging=45056 admissible=29 erases=955\nresponse label=stress READ id=1 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=3 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=4 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=22 profile_bytes=3042 response_bytes=3055 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=5 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=20 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nread_stress=PASS reads=6000 ids=1,3,4,22,5,20 all_phases_completed=true max_block_reads=115 max_host_ms=0.233 native_handles=0 live_lfs_allocations=3 live_lfs_bytes=768 peak_lfs_bytes=1024 gc_enumerations=280 programs_during_reads=0 erases_during_reads=0 ASAN_UBSAN=true\nproduction_trace=PASS ordered_stages=10..18 failure_each_stage=true close_and_allocation_cleanup=true scope_restores_READ=true\nresponse label=maximum_accepted_stage_c id=1 profile_bytes=4025 response_bytes=4038 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID1 id=1 profile_bytes=1960 response_bytes=1989 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID3 id=3 profile_bytes=3042 response_bytes=3071 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID4 id=4 profile_bytes=3047 response_bytes=3076 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID22 id=22 profile_bytes=3042 response_bytes=3072 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\n\nglyph_profile_store_read_storage: PASS; storage/encode controls only, no physical causality claim\n",
+      "stderr": "",
+      "seconds": 23.58,
+      "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_read_storage.log",
+      "status": "PASS",
+      "snapshot": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+      "cwd": "/private/tmp/glyph-native-consumer-probe-20261020"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_production_tool.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "production ProfileStore tool: [Errno 17] File exists: '/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/tmpi4mfhdfj/r.json'\nproduction ProfileStore tool: malformed response after transmission; unresolved\nglyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true\n",
+      "stderr": "",
+      "seconds": 0.53,
+      "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_production_tool.log",
+      "status": "PASS",
+      "snapshot": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+      "cwd": "/private/tmp/glyph-native-consumer-probe-20261020"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_candidate_tool.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true mutation_trace=true device_error_journal=true\n",
+      "stderr": "",
+      "seconds": 0.19,
+      "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_candidate_tool.log",
+      "status": "PASS",
+      "snapshot": "9e16e1c36babdd5c655893b35ae92cd39725c37f",
+      "cwd": "/private/tmp/glyph-native-consumer-probe-20261020"
+    }
+  ],
+  "historical_stock_4_still_fail_reference": "/private/tmp/glyph-native-consumer-probe-results-3b/statuses.json and REPORT.md; identical baselineA outputs retained there; not rerun or reclassified here",
+  "final_status": "?? .platformio-home\n",
+  "final_diff_stat": "",
+  "no_repo_edits": true,
+  "no_device_firmware_build": true,
+  "broad_native_or_required_suite_not_rerun": true
+}

@@ -1,0 +1,85 @@
+{
+  "frozen_candidate": "d59684b9368be61183881bdfc82adc774ad5f0ba",
+  "physical_device_actions": 0,
+  "runs": {
+    "frozen_d596": {
+      "result": "PASS",
+      "output": "history_checkpoint generation=160 count=20 disposable_id=22 revision=130 highwater=22 successful_updates=129 dropped_results=43 exact_replays=43 total=524288 used=147456 free=376832 protected=188416 staging=45056 admissible=29 erases=955\nresponse label=stress READ id=1 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=3 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=4 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=22 profile_bytes=3042 response_bytes=3055 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=5 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=20 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nread_stress=PASS reads=6000 ids=1,3,4,22,5,20 all_phases_completed=true max_block_reads=115 max_host_ms=0.236 native_handles=0 live_lfs_allocations=3 live_lfs_bytes=768 peak_lfs_bytes=1024 gc_enumerations=280 programs_during_reads=0 erases_during_reads=0 ASAN_UBSAN=true\nresponse label=maximum_accepted_stage_c id=1 profile_bytes=4025 response_bytes=4038 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID1 id=1 profile_bytes=1960 response_bytes=1989 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID3 id=3 profile_bytes=3042 response_bytes=3071 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID4 id=4 profile_bytes=3047 response_bytes=3076 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID22 id=22 profile_bytes=3042 response_bytes=3072 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\n",
+      "source_sha256": "55afd509856d2f68d96cfc4d292d2623696209ce9f7df5cf27853860541c69db"
+    },
+    "current_candidate": {
+      "result": "PASS",
+      "output": "history_checkpoint generation=160 count=20 disposable_id=22 revision=130 highwater=22 successful_updates=129 dropped_results=43 exact_replays=43 total=524288 used=147456 free=376832 protected=188416 staging=45056 admissible=29 erases=955\nresponse label=stress READ id=1 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=3 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=4 profile_bytes=1960 response_bytes=1972 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=22 profile_bytes=3042 response_bytes=3055 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=5 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=stress READ id=20 profile_bytes=3042 response_bytes=3054 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nread_stress=PASS reads=6000 ids=1,3,4,22,5,20 all_phases_completed=true max_block_reads=115 max_host_ms=0.233 native_handles=0 live_lfs_allocations=3 live_lfs_bytes=768 peak_lfs_bytes=1024 gc_enumerations=280 programs_during_reads=0 erases_during_reads=0 ASAN_UBSAN=true\nproduction_trace=PASS ordered_stages=10..18 failure_each_stage=true close_and_allocation_cleanup=true scope_restores_READ=true\nresponse label=maximum_accepted_stage_c id=1 profile_bytes=4025 response_bytes=4038 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID1 id=1 profile_bytes=1960 response_bytes=1989 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID3 id=3 profile_bytes=3042 response_bytes=3071 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID4 id=4 profile_bytes=3047 response_bytes=3076 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\nresponse label=retained_physical_ID22 id=22 profile_bytes=3042 response_bytes=3072 host_response_object=3040 response_frame_bound=8192 admitted_profile_bound=4096 frame=8192\n",
+      "source_sha256": "2c6182593288a728f0cd6f2afc4a6f5704b3efe35700874e2ae2cd60e7cd414d"
+    }
+  },
+  "source_sha256": {
+    "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb_common.c": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+    "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb_decode.c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+    "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb_encode.c": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+    "/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-_hypl47u/generated/config.pb.c": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/src/lfs_util.c": "b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1",
+    "tools/check_glyph_profile_store_read_storage.py": "64cca35b581f395ffd5ca0ed084c2c2cbc44fabbdca3443e8dc96664e9f36110",
+    "tools/fixtures/profile_store_liveness_host/liveness_harness.cpp": "8bcffde2dc4cdf6ed79f142fcc938327d01d0013d57f8bcf290df73311571118",
+    "tools/fixtures/profile_store_read_storage/read_tail.inc": "88ebd46920d11c4b5340e4c1208ecce8f8e2b2e95f016058e15ede1aa246e655",
+    "tools/fixtures/profile_store_read_storage/read_observer.inc": "c643bfeb07803bd390380a4dbf8d8979db78d695d0ee6c2b8962b7574cb5ed0e",
+    "tools/fixtures/profile_store_read_storage/physical_id1_response.json": "a7db2b980f826845d060041233696d10038f46baf3765b0baf7212a09fe52050",
+    "tools/fixtures/profile_store_read_storage/physical_id3_response.json": "2429b2b10320a3d25655436868f58ecb1793b68b92ab4d045175e53cf63741e0",
+    "tools/fixtures/profile_store_read_storage/physical_id22_response.json": "b30b8275c9fcab96d4177ee96b9626c7fe1759b2a62f798d543c2239cc4b5aed",
+    "tools/fixtures/profile_store_read_storage/physical_id4_response.json": "e9e37bfff40a5a50239c260a651cc17d453dba78a0f5198914176b6a0f6d52b8",
+    "include/core/ProfileStoreReadTrace.hpp": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+    "HAL/pico/src/core/ProfileStore.cpp": "2c6182593288a728f0cd6f2afc4a6f5704b3efe35700874e2ae2cd60e7cd414d",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "include/core/ProfileStore.hpp": "6d1e3ea269a50a3973e512370e15dc1d7ac0836c50bedcd76f93bb8d3ea000ef",
+    "include/core/ProfileStoreStorage.hpp": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc",
+    "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+    "include/core/CheckedStorage.hpp": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e",
+    "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+    "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+    "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+  },
+  "retained_additional_responses": [
+    {
+      "id": 3,
+      "evidence_path": "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/physical_id3_response.json",
+      "evidence_sha256": "2429b2b10320a3d25655436868f58ecb1793b68b92ab4d045175e53cf63741e0",
+      "profile_bytes": 3042,
+      "response_bytes": 3071,
+      "response_sha256": "a9f5e851f9cb6c6ab60f8ab2940d9c590c6e19434319b8a65def690223b24b43",
+      "generation": 160,
+      "revision": 1,
+      "provenance": "canonical protobuf reconstruction from retained physical decoded response JSON; not original raw USB bytes"
+    },
+    {
+      "id": 4,
+      "evidence_path": "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/physical_id4_response.json",
+      "evidence_sha256": "e9e37bfff40a5a50239c260a651cc17d453dba78a0f5198914176b6a0f6d52b8",
+      "profile_bytes": 3047,
+      "response_bytes": 3076,
+      "response_sha256": "e051fdb67aa1c0e270add82e11655fb201563ec7ea1caf2662b6e5bdc5792dc6",
+      "generation": 160,
+      "revision": 1,
+      "provenance": "canonical protobuf reconstruction from retained physical decoded response JSON; not original raw USB bytes"
+    },
+    {
+      "id": 22,
+      "evidence_path": "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/physical_id22_response.json",
+      "evidence_sha256": "b30b8275c9fcab96d4177ee96b9626c7fe1759b2a62f798d543c2239cc4b5aed",
+      "profile_bytes": 3042,
+      "response_bytes": 3072,
+      "response_sha256": "9b40fc1411f7595d6851a2431c3c6df2060e5b772501c14f31b4d6b79a425840",
+      "generation": 160,
+      "revision": 130,
+      "provenance": "canonical protobuf reconstruction from retained physical decoded response JSON; not original raw USB bytes"
+    }
+  ],
+  "retained_evidence": {
+    "path": "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/physical_id1_response.json",
+    "sha256": "a7db2b980f826845d060041233696d10038f46baf3765b0baf7212a09fe52050",
+    "profile_bytes": 1960,
+    "full_response_bytes": 1989
+  },
+  "maximum_stage_c_profile_bytes": 4025,
+  "result": "PASS"
+}

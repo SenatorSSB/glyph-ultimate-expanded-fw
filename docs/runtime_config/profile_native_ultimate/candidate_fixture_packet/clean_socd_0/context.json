@@ -1,0 +1,19 @@
+{
+  "button_remapping": [
+    {
+      "activates": "BTN_LF5",
+      "physical_button": "BTN_LT6"
+    },
+    {
+      "activates": "BTN_LF5",
+      "physical_button": "BTN_RF11"
+    }
+  ],
+  "mode_id": "MODE_ULTIMATE",
+  "socd_pairs": [
+    {
+      "button_dir1": "BTN_LF5",
+      "button_dir2": "BTN_LF2"
+    }
+  ]
+}

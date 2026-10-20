@@ -1,0 +1,83 @@
+{
+  "backend_source_hashes": {
+    "HAL/pico/src/comms/GamecubeBackend.cpp": "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329",
+    "HAL/pico/src/comms/NintendoSwitchBackend.cpp": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+    "HAL/pico/src/comms/XInputBackend.cpp": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+  },
+  "reports": [
+    {
+      "backend": "XInput",
+      "fields": {
+        "a": 0,
+        "b": 0,
+        "back": 0,
+        "dpad_down": 0,
+        "dpad_left": 0,
+        "dpad_right": 0,
+        "dpad_up": 0,
+        "home": 0,
+        "lb": 0,
+        "ls": 0,
+        "lt": 255,
+        "lx": -12465,
+        "ly": -11951,
+        "rb": 1,
+        "rs": 0,
+        "rt": 255,
+        "rx": 128,
+        "ry": 128,
+        "start": 0,
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "backend": "Switch",
+      "fields": {
+        "a": 0,
+        "b": 0,
+        "capture": 0,
+        "hat": 8,
+        "home": 0,
+        "l": 0,
+        "l3": 0,
+        "lx": 66,
+        "ly": 185,
+        "minus": 0,
+        "plus": 0,
+        "r": 1,
+        "r3": 0,
+        "rx": 128,
+        "ry": 127,
+        "x": 0,
+        "y": 0,
+        "zl": 1,
+        "zr": 1
+      }
+    },
+    {
+      "backend": "Gamecube",
+      "fields": {
+        "a": 0,
+        "b": 0,
+        "cstick_x": 128,
+        "cstick_y": 128,
+        "dpad_down": 0,
+        "dpad_left": 0,
+        "dpad_right": 0,
+        "dpad_up": 0,
+        "l": 1,
+        "l_analog": 17,
+        "r": 1,
+        "r_analog": 23,
+        "start": 0,
+        "stick_x": 79,
+        "stick_y": 81,
+        "x": 0,
+        "y": 0,
+        "z": 1
+      }
+    }
+  ],
+  "status": "PASS_HOST_SOURCE_ASSIGNMENTS_ONLY"
+}

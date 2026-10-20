@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_timeout_resynchronization.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "glyph_profile_store_timeout_resynchronization: PASS\nsanitizers=False\nreal_configurator=true real_packetio_cobs=true real_nanopb=true real_profile_store=true duplex_rx_tx=true empty_create=true io_stage_diagnostics=temp_open_write,temp_write,temp_read,verify,rename destination_remove_gap_absent=true directory_diagnostics=temp_open_write,temp_write,temp_read,temp_size,verify,rename diagnostic_reset=true pinned_littlefs_component_limit=31 legacy_temp_rejected=true path_limited_create=true path_limited_import=true stale_file_combinations=16 root_rotation_creates=512 rotating_directory_failure_stages=6 old_valid_record_and_root_rejected=true root_corruption_fail_closed=true invalid_root_is_not_empty=true ambiguous_root_readonly=true reference_durable_live_separation=true reference_failure_atomicity=true reference_generation_races=true durable_and_live_delete_guards=true direct_create_replay_nonmutation=true tx_failure_budgets=0,1,7 tx_failure_transaction_recovery=true tx_no_space=true tx_short_write=true tx_deadline_ms=2000 retained_transport_resync=true consecutive_list=3 duplicate_next_negative=true crud=create,read,update,rename,reorder,duplicate,set_reference,delete,query timeout_boundary_ms=5000 timeout_nonmutation=config,storage,count,generation,save_count timeout_resync=true frame_cap=8192 external_timeout_seconds=30\n",
+  "stderr": "",
+  "seconds": 7.3,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_timeout_resynchronization.log"
+}

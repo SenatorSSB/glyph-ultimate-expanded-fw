@@ -1,0 +1,115 @@
+{
+  "state": "READ_ONLY_OBSERVATION_NOT_FINAL_CANDIDATE",
+  "production_head_observed": "3b792fd7e38e6eda9b93d6cdec0a452b1c607817",
+  "production_worktree_dirty": true,
+  "sources": {
+    "/private/tmp/glyph-profile-native-20261020/platformio.ini": {
+      "bytes": 3321,
+      "sha256": "a545f2370abe3095aa63ffb9bcfcca9944ea5f8f2f0efb0976fb73317d2e9c78"
+    },
+    "/private/tmp/glyph-profile-native-20261020/builder_scripts/arduino_pico.py": {
+      "bytes": 2112,
+      "sha256": "676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp": {
+      "bytes": 17650,
+      "sha256": "ea87e5e50bd30cef399f2f0db1f0c7b55fe2098e74d4022ebf4120f55fc56ea9"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/ControllerMode.cpp": {
+      "bytes": 2871,
+      "sha256": "5a8615740951ad8ab5b07104b38d5842d3a91537e4c1690d47a416f554dcd524"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/CommunicationBackend.cpp": {
+      "bytes": 1619,
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/mode_selection.cpp": {
+      "bytes": 9269,
+      "sha256": "fb2342b66135b2af23d083372b80710ddc0be20b38034740df5cac0b08e6f4e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp": {
+      "bytes": 39202,
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/ProfileStore.cpp": {
+      "bytes": 68869,
+      "sha256": "2c6182593288a728f0cd6f2afc4a6f5704b3efe35700874e2ae2cd60e7cd414d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/XInputBackend.cpp": {
+      "bytes": 2197,
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/GamecubeBackend.cpp": {
+      "bytes": 2118,
+      "sha256": "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/NintendoSwitchBackend.cpp": {
+      "bytes": 6691,
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/core/RuntimeIdentityWire.hpp": {
+      "bytes": 2785,
+      "sha256": "1127e5913c06d85d0731ab7577debab5c04181570d64d40bfa19e001132efcdc"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/core/RuntimeIdentityService.hpp": {
+      "bytes": 1320,
+      "sha256": "3494bfc774b54daa6155b68817b480aa2450cb88a8dcb5c7cea08e5bad593992"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/package.json": {
+      "bytes": 401,
+      "sha256": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h": {
+      "bytes": 8789,
+      "sha256": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/lib/memmap_default.ld": {
+      "bytes": 7800,
+      "sha256": "b1ac28528b4353a94bc391ab2bc122e12f2992863e21f98b2915b87ac1ded2da"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S": {
+      "bytes": 9107,
+      "sha256": "1329e3005bb9b2424ebeda04fc784e215926e57612eef8321f7df715797fcecd"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c": {
+      "bytes": 10079,
+      "sha256": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_runtime/runtime.c": {
+      "bytes": 10978,
+      "sha256": "c6b63ea7bebb1a0dc6b108664d048ed53ad61e9b04a4fae2439b6ba93891bb19"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_timer/include/hardware/timer.h": {
+      "bytes": 7242,
+      "sha256": "91ca43eece065b59ca68f30e653a1ed35a59a6bbb7931668867bc4cabcb16de2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_timer/timer.c": {
+      "bytes": 8960,
+      "sha256": "b275a48c63d9e276cebb05b84cc37842146b08ba766dadcc243580f52b0b0e67"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_sync/include/hardware/sync.h": {
+      "bytes": 15337,
+      "sha256": "a6e36da3aa8a546c57bb1c5da86802717dcd7f080bc7c43b8f34910b8a691605"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/implementation_contract.json": {
+      "bytes": 41257,
+      "sha256": "5e6d1c47567763ad4e1e41a7c1f5d62bf7b5dd105246e88afd933a7a02e2b06b"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/architecture_proposal.md": {
+      "bytes": 33712,
+      "sha256": "fd83dec7e6fde6c811d2248c599bc8086cbb6951a11799f8001a14ea269eef44"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/owner_directive_20261020.md": {
+      "bytes": 27185,
+      "sha256": "05e0023d454d336be2d0a1762f434d5f808d36271c232cf790120ac497ce6d38"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/baseline_linker_symbols.txt": {
+      "bytes": 448,
+      "sha256": "0d5c286bc90965d9e6c35bac560e8b9dba2b407b4452384440a5ce91c509dbd0"
+    }
+  }
+}

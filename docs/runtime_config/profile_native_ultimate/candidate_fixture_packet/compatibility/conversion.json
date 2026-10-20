@@ -1,0 +1,4825 @@
+{
+  "body_sha256": "2184a9be01f1d538fa60a2095aaab1008a5a35f6320f7313db9b8c96ddd15891",
+  "conversion_source_sha256": "f09a210f9fc7400d52673f6455004185451d33575e88eb0fc54abfc73297dda0",
+  "correspondence": "Historical source compatibility including LT6 post-table override, V2 selection-only routing and V3 exactly-once routing; all 18 source families.",
+  "correspondence_report": {
+    "conditions": [
+      {
+        "all": [],
+        "any": [
+          8234,
+          8235,
+          8236,
+          8237
+        ],
+        "id": 1,
+        "none": []
+      },
+      {
+        "all": [
+          8227
+        ],
+        "any": [
+          8211,
+          8212
+        ],
+        "id": 2,
+        "none": [
+          8196
+        ]
+      },
+      {
+        "all": [
+          8211
+        ],
+        "any": [],
+        "id": 3,
+        "none": [
+          8227,
+          8196
+        ]
+      },
+      {
+        "all": [
+          8217,
+          12291
+        ],
+        "any": [],
+        "id": 4,
+        "none": []
+      },
+      {
+        "all": [
+          8233,
+          8212
+        ],
+        "any": [],
+        "id": 5,
+        "none": [
+          12292
+        ]
+      },
+      {
+        "all": [
+          8212,
+          12289
+        ],
+        "any": [],
+        "id": 6,
+        "none": [
+          12293
+        ]
+      },
+      {
+        "all": [
+          8212
+        ],
+        "any": [],
+        "id": 7,
+        "none": [
+          12294,
+          12292
+        ]
+      },
+      {
+        "all": [
+          12290,
+          8210
+        ],
+        "any": [],
+        "id": 8,
+        "none": []
+      },
+      {
+        "all": [
+          8196,
+          8211
+        ],
+        "any": [],
+        "id": 9,
+        "none": []
+      },
+      {
+        "all": [],
+        "any": [
+          8213,
+          12296,
+          12297
+        ],
+        "id": 10,
+        "none": []
+      },
+      {
+        "all": [],
+        "any": [
+          8194,
+          12298
+        ],
+        "id": 11,
+        "none": []
+      },
+      {
+        "all": [],
+        "any": [
+          8197,
+          8230
+        ],
+        "id": 12,
+        "none": [
+          12298
+        ]
+      },
+      {
+        "all": [
+          8195
+        ],
+        "any": [],
+        "id": 13,
+        "none": [
+          8193
+        ]
+      },
+      {
+        "all": [
+          8193
+        ],
+        "any": [],
+        "id": 14,
+        "none": [
+          8195
+        ]
+      },
+      {
+        "all": [],
+        "any": [
+          8230,
+          8213
+        ],
+        "id": 15,
+        "none": []
+      },
+      {
+        "all": [],
+        "any": [],
+        "id": 16,
+        "none": [
+          12298
+        ]
+      },
+      {
+        "all": [
+          12292
+        ],
+        "any": [],
+        "id": 17,
+        "none": [
+          12289
+        ]
+      },
+      {
+        "all": [
+          8209
+        ],
+        "any": [],
+        "id": 18,
+        "none": [
+          12290
+        ]
+      },
+      {
+        "all": [
+          8210
+        ],
+        "any": [],
+        "id": 19,
+        "none": [
+          8196,
+          12290
+        ]
+      },
+      {
+        "all": [
+          8227,
+          8211
+        ],
+        "any": [],
+        "id": 20,
+        "none": [
+          8196
+        ]
+      },
+      {
+        "all": [
+          12291
+        ],
+        "any": [],
+        "id": 21,
+        "none": [
+          12305
+        ]
+      },
+      {
+        "all": [
+          12290,
+          8209
+        ],
+        "any": [],
+        "id": 22,
+        "none": [
+          12289
+        ]
+      },
+      {
+        "all": [
+          8196,
+          8210
+        ],
+        "any": [],
+        "id": 23,
+        "none": [
+          12289
+        ]
+      },
+      {
+        "all": [
+          8217
+        ],
+        "any": [],
+        "id": 24,
+        "none": [
+          12292,
+          12295
+        ]
+      },
+      {
+        "all": [],
+        "any": [
+          8235,
+          8236
+        ],
+        "id": 25,
+        "none": []
+      },
+      {
+        "all": [],
+        "any": [
+          8234,
+          8237
+        ],
+        "id": 26,
+        "none": []
+      },
+      {
+        "all": [
+          12313,
+          12314
+        ],
+        "any": [],
+        "id": 27,
+        "none": []
+      },
+      {
+        "all": [
+          8211,
+          12314
+        ],
+        "any": [
+          12301,
+          12302
+        ],
+        "id": 28,
+        "none": [
+          8235,
+          8236
+        ]
+      },
+      {
+        "all": [
+          12300
+        ],
+        "any": [],
+        "id": 29,
+        "none": [
+          12299
+        ]
+      },
+      {
+        "all": [
+          12299
+        ],
+        "any": [],
+        "id": 30,
+        "none": [
+          12300
+        ]
+      },
+      {
+        "all": [
+          8216
+        ],
+        "any": [],
+        "id": 31,
+        "none": []
+      },
+      {
+        "all": [
+          8229
+        ],
+        "any": [],
+        "id": 32,
+        "none": []
+      },
+      {
+        "all": [
+          8228
+        ],
+        "any": [],
+        "id": 33,
+        "none": []
+      },
+      {
+        "all": [
+          8226
+        ],
+        "any": [],
+        "id": 34,
+        "none": [
+          8196
+        ]
+      },
+      {
+        "all": [
+          8227
+        ],
+        "any": [],
+        "id": 35,
+        "none": [
+          8196,
+          8211,
+          8212
+        ]
+      },
+      {
+        "all": [
+          8227
+        ],
+        "any": [
+          8211,
+          8212
+        ],
+        "id": 36,
+        "none": [
+          8196
+        ]
+      },
+      {
+        "all": [
+          8211
+        ],
+        "any": [],
+        "id": 37,
+        "none": [
+          8227,
+          8196
+        ]
+      },
+      {
+        "all": [
+          8217,
+          12325
+        ],
+        "any": [],
+        "id": 38,
+        "none": []
+      },
+      {
+        "all": [
+          12326,
+          8212
+        ],
+        "any": [],
+        "id": 39,
+        "none": []
+      },
+      {
+        "all": [
+          8233,
+          8212
+        ],
+        "any": [],
+        "id": 40,
+        "none": [
+          12327
+        ]
+      },
+      {
+        "all": [],
+        "any": [
+          8234,
+          8235,
+          8236,
+          8237
+        ],
+        "id": 41,
+        "none": []
+      },
+      {
+        "all": [
+          8212,
+          12329
+        ],
+        "any": [],
+        "id": 42,
+        "none": [
+          12328
+        ]
+      },
+      {
+        "all": [
+          8212
+        ],
+        "any": [],
+        "id": 43,
+        "none": [
+          12330,
+          12327
+        ]
+      },
+      {
+        "all": [
+          12324,
+          8211
+        ],
+        "any": [],
+        "id": 44,
+        "none": []
+      },
+      {
+        "all": [
+          8227,
+          12331
+        ],
+        "any": [],
+        "id": 45,
+        "none": [
+          8196,
+          12328
+        ]
+      },
+      {
+        "all": [],
+        "any": [],
+        "id": 46,
+        "none": [
+          8227
+        ]
+      },
+      {
+        "all": [],
+        "any": [
+          12334,
+          8196
+        ],
+        "id": 47,
+        "none": []
+      },
+      {
+        "all": [
+          8196,
+          8210
+        ],
+        "any": [],
+        "id": 48,
+        "none": []
+      },
+      {
+        "all": [
+          12331,
+          12335
+        ],
+        "any": [],
+        "id": 49,
+        "none": [
+          8233,
+          12336
+        ]
+      },
+      {
+        "all": [
+          8233
+        ],
+        "any": [],
+        "id": 50,
+        "none": [
+          8212
+        ]
+      },
+      {
+        "all": [
+          12328
+        ],
+        "any": [],
+        "id": 51,
+        "none": []
+      },
+      {
+        "all": [
+          12331,
+          8210
+        ],
+        "any": [],
+        "id": 52,
+        "none": [
+          8227,
+          8196,
+          12328
+        ]
+      },
+      {
+        "all": [
+          12340
+        ],
+        "any": [],
+        "id": 53,
+        "none": []
+      },
+      {
+        "all": [
+          12337,
+          12338
+        ],
+        "any": [],
+        "id": 54,
+        "none": [
+          12340
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12320
+        ],
+        "any": [],
+        "id": 55,
+        "none": [
+          12321,
+          12322,
+          12323,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12320
+        ],
+        "any": [],
+        "id": 56,
+        "none": [
+          12319,
+          12321,
+          12322,
+          12323,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12321
+        ],
+        "any": [],
+        "id": 57,
+        "none": [
+          12320,
+          12322,
+          12323,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12321
+        ],
+        "any": [],
+        "id": 58,
+        "none": [
+          12319,
+          12320,
+          12322,
+          12323,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12322
+        ],
+        "any": [],
+        "id": 59,
+        "none": [
+          12320,
+          12321,
+          12323,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12322
+        ],
+        "any": [],
+        "id": 60,
+        "none": [
+          12319,
+          12320,
+          12321,
+          12323,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12323
+        ],
+        "any": [],
+        "id": 61,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12332,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12332
+        ],
+        "any": [],
+        "id": 62,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12332
+        ],
+        "any": [],
+        "id": 63,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12333,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12333
+        ],
+        "any": [],
+        "id": 64,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12333
+        ],
+        "any": [],
+        "id": 65,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12337,
+          12338,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12337
+        ],
+        "any": [],
+        "id": 66,
+        "none": [
+          12319,
+          12320,
+          12321,
+          12322,
+          12332,
+          12333,
+          12338,
+          12339,
+          12340
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12338
+        ],
+        "any": [],
+        "id": 67,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12332,
+          12333,
+          12337,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12338
+        ],
+        "any": [],
+        "id": 68,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12332,
+          12333,
+          12337,
+          12339
+        ]
+      },
+      {
+        "all": [
+          12319,
+          12339
+        ],
+        "any": [],
+        "id": 69,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12332,
+          12333
+        ]
+      },
+      {
+        "all": [
+          12339
+        ],
+        "any": [],
+        "id": 70,
+        "none": [
+          12320,
+          12321,
+          12322,
+          12332,
+          12333
+        ]
+      },
+      {
+        "all": [
+          12319
+        ],
+        "any": [],
+        "id": 71,
+        "none": []
+      }
+    ],
+    "digital_bindings": [
+      {
+        "digital_mask": 1,
+        "flags": 0,
+        "gate": 12306,
+        "index": 0,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 1,
+        "flags": 0,
+        "gate": 8230,
+        "index": 1,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 1,
+        "flags": 0,
+        "gate": 8213,
+        "index": 2,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 2,
+        "flags": 0,
+        "gate": 12307,
+        "index": 3,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 2,
+        "flags": 0,
+        "gate": 8196,
+        "index": 4,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 2,
+        "flags": 0,
+        "gate": 8215,
+        "index": 5,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 2,
+        "flags": 0,
+        "gate": 12308,
+        "index": 6,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 4,
+        "flags": 0,
+        "gate": 12309,
+        "index": 7,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 4,
+        "flags": 0,
+        "gate": 12310,
+        "index": 8,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 4,
+        "flags": 0,
+        "gate": 12311,
+        "index": 9,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 8,
+        "flags": 0,
+        "gate": 8218,
+        "index": 10,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 80,
+        "flags": 0,
+        "gate": 8225,
+        "index": 11,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 32,
+        "flags": 0,
+        "gate": 8214,
+        "index": 12,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 128,
+        "flags": 0,
+        "gate": 8224,
+        "index": 13,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 256,
+        "flags": 0,
+        "gate": 8247,
+        "index": 14,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 512,
+        "flags": 0,
+        "gate": 8246,
+        "index": 15,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 1024,
+        "flags": 0,
+        "gate": 8245,
+        "index": 16,
+        "winner_table": 255
+      },
+      {
+        "digital_mask": 2048,
+        "flags": 0,
+        "gate": 8244,
+        "index": 17,
+        "winner_table": 255
+      }
+    ],
+    "digital_post_mask": {
+      "clear": 0,
+      "gate": 65535,
+      "inverted": 0,
+      "set": 0
+    },
+    "direction_sources": [
+      {
+        "down": 12300,
+        "id": 1,
+        "left": 12301,
+        "right": 12302,
+        "up": 12299
+      },
+      {
+        "down": 8234,
+        "id": 2,
+        "left": 8235,
+        "right": 8236,
+        "up": 8237
+      },
+      {
+        "down": 12304,
+        "id": 3,
+        "left": 0,
+        "right": 0,
+        "up": 12298
+      },
+      {
+        "down": 12317,
+        "id": 4,
+        "left": 12301,
+        "right": 12302,
+        "up": 12318
+      },
+      {
+        "down": 8234,
+        "id": 5,
+        "left": 12301,
+        "right": 12302,
+        "up": 8237
+      },
+      {
+        "down": 0,
+        "id": 6,
+        "left": 0,
+        "right": 0,
+        "up": 0
+      },
+      {
+        "down": 8234,
+        "id": 7,
+        "left": 0,
+        "right": 0,
+        "up": 8237
+      }
+    ],
+    "dpad": {
+      "flags": 7,
+      "gate": 8221
+    },
+    "effects": [
+      {
+        "legacy_index": 0,
+        "literal_legacy_effect": {
+          "phase": "ULTIMATE_OUTPUT_PHASE_DIGITAL",
+          "target": "ULTIMATE_OUTPUT_TARGET_DIGITAL"
+        },
+        "native_effect_index": null,
+        "native_section": "digital_post_mask",
+        "omission": null,
+        "phase": "DIGITAL",
+        "target": "DIGITAL"
+      },
+      {
+        "legacy_index": 1,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_SELECTED_TABLE",
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+          "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+          "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+        },
+        "native_effect_index": 0,
+        "omission": null,
+        "phase": "BASE_TABLE",
+        "target": "LEFT_STICK"
+      },
+      {
+        "legacy_index": 2,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+          "coordinates": [
+            28,
+            28,
+            128,
+            28,
+            228,
+            28,
+            28,
+            128,
+            128,
+            128,
+            228,
+            128,
+            28,
+            228,
+            128,
+            228,
+            228,
+            228
+          ],
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+          "phase": "ULTIMATE_OUTPUT_PHASE_BASE_TABLE",
+          "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK"
+        },
+        "native_effect_index": 1,
+        "omission": null,
+        "phase": "BASE_TABLE",
+        "target": "RIGHT_STICK"
+      },
+      {
+        "legacy_index": 3,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+          "modeTableId": 1,
+          "phase": "ULTIMATE_OUTPUT_PHASE_DIRECTION_A",
+          "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+        },
+        "native_effect_index": 2,
+        "omission": null,
+        "phase": "DIRECTION_A",
+        "target": "LEFT_STICK"
+      },
+      {
+        "legacy_index": 4,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+          "modeTableId": 27,
+          "phase": "ULTIMATE_OUTPUT_PHASE_RF6",
+          "tableId": 27,
+          "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+        },
+        "native_effect_index": 3,
+        "omission": null,
+        "phase": "RF6",
+        "target": "LEFT_STICK"
+      },
+      {
+        "legacy_index": 5,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+          "coordinates": [
+            77,
+            172,
+            128,
+            172,
+            179,
+            172,
+            77,
+            172,
+            128,
+            172,
+            179,
+            172,
+            77,
+            172,
+            128,
+            172,
+            179,
+            172
+          ],
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE",
+          "phase": "ULTIMATE_OUTPUT_PHASE_RF7",
+          "target": "ULTIMATE_OUTPUT_TARGET_LEFT_STICK"
+        },
+        "native_effect_index": 4,
+        "omission": null,
+        "phase": "RF7",
+        "target": "LEFT_STICK"
+      },
+      {
+        "legacy_index": 6,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+          "coordinates": [
+            86,
+            60,
+            128,
+            60,
+            170,
+            60,
+            86,
+            128,
+            128,
+            128,
+            170,
+            128,
+            86,
+            196,
+            128,
+            196,
+            170,
+            196
+          ],
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_C_STICK",
+          "phase": "ULTIMATE_OUTPUT_PHASE_RS_DIAGONAL",
+          "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK"
+        },
+        "native_effect_index": 5,
+        "omission": null,
+        "phase": "RS_DIAGONAL",
+        "target": "RIGHT_STICK"
+      },
+      {
+        "legacy_index": 7,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_INLINE",
+          "coordinates": [
+            95,
+            91,
+            128,
+            91,
+            161,
+            91,
+            95,
+            91,
+            128,
+            91,
+            161,
+            91,
+            95,
+            165,
+            128,
+            165,
+            161,
+            165
+          ],
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_EFFECTIVE_X_C_STICK_Y",
+          "phase": "ULTIMATE_OUTPUT_PHASE_RF3_VERTICAL",
+          "target": "ULTIMATE_OUTPUT_TARGET_RIGHT_STICK"
+        },
+        "native_effect_index": 6,
+        "omission": null,
+        "phase": "RF3_VERTICAL",
+        "target": "RIGHT_STICK"
+      },
+      {
+        "legacy_index": 8,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_FIXED",
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+          "fixedX": 128,
+          "fixedY": 128,
+          "phase": "ULTIMATE_OUTPUT_PHASE_NULL",
+          "target": "ULTIMATE_OUTPUT_TARGET_ANALOGUE_NULL"
+        },
+        "native_effect_index": 7,
+        "omission": null,
+        "phase": "NULL",
+        "target": "ANALOGUE_NULL"
+      },
+      {
+        "legacy_index": 9,
+        "literal_legacy_effect": {
+          "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+          "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_L",
+          "value": 140
+        },
+        "native_effect_index": 8,
+        "omission": null,
+        "phase": "TRIGGERS",
+        "target": "TRIGGER_L"
+      },
+      {
+        "legacy_index": 10,
+        "literal_legacy_effect": {
+          "phase": "ULTIMATE_OUTPUT_PHASE_TRIGGERS",
+          "target": "ULTIMATE_OUTPUT_TARGET_TRIGGER_R",
+          "value": 140
+        },
+        "native_effect_index": 9,
+        "omission": null,
+        "phase": "TRIGGERS",
+        "target": "TRIGGER_R"
+      },
+      {
+        "legacy_index": 11,
+        "literal_legacy_effect": {
+          "coordinateMode": "ULTIMATE_COORDINATE_TABLE",
+          "directionSource": "ULTIMATE_DIRECTION_SOURCE_CENTER",
+          "modeTableId": 1,
+          "phase": "ULTIMATE_OUTPUT_PHASE_DPAD",
+          "target": "ULTIMATE_OUTPUT_TARGET_DPAD_LEFT_STICK",
+          "value": 7
+        },
+        "native_effect_index": 10,
+        "omission": null,
+        "phase": "DPAD",
+        "target": "DPAD_LEFT_STICK"
+      }
+    ],
+    "families": [
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 1,
+        "name": "LS direction references",
+        "native_effect_indexes": [],
+        "native_source_ids": [
+          1
+        ],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 2,
+        "name": "RS direction references",
+        "native_effect_indexes": [],
+        "native_source_ids": [
+          2
+        ],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {},
+        "digital_binding_indexes": [],
+        "family": 3,
+        "name": "default and Mode nine-way tables",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 4,
+        "name": "X1 X2 Y1 Y2 modifiers",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 5,
+        "name": "Tilt1 Tilt2 Tilt3 and minus41",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 6,
+        "name": "Mode and normal/flipper/LF4 sublayers",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 7,
+        "name": "deterministic table selection",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 8,
+        "name": "A B X Y Z digital terms",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {},
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 9,
+        "name": "L/R digital carriers and trigger effects",
+        "native_effect_indexes": [
+          8,
+          9
+        ],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {},
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 10,
+        "name": "independent multiple-output and OR composition",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {},
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 11,
+        "name": "clean genuine Down+A",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "historical_compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {},
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 12,
+        "name": "clean forced-table+A",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "historical_compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 13,
+        "name": "historical LT6 post-table override",
+        "native_effect_indexes": [
+          2
+        ],
+        "native_source_ids": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "policy_state": "historical_compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "family": 14,
+        "name": "RF5 RF6 RF7 compounds",
+        "native_effect_indexes": [
+          3,
+          4
+        ],
+        "native_source_ids": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 15,
+        "name": "RS diagonal and RF3 vertical transforms",
+        "native_effect_indexes": [
+          5,
+          6
+        ],
+        "native_source_ids": [
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 16,
+        "name": "Dpad route/bypass/digital flags and Nunchuk tail",
+        "native_effect_indexes": [
+          10
+        ],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        },
+        "digital_binding_indexes": [],
+        "family": 17,
+        "name": "both-stick null",
+        "native_effect_indexes": [
+          7
+        ],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": []
+      },
+      {
+        "condition_tokens": {},
+        "digital_binding_indexes": [],
+        "family": 18,
+        "name": "all28 literal raw/asymmetric/noncenter tables",
+        "native_effect_indexes": [],
+        "native_source_ids": [],
+        "policy_state": "literal native data/source compatibility",
+        "table_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      }
+    ],
+    "intrinsic_input_tokens": {
+      "lf1": 8193,
+      "lf10": 0,
+      "lf11": 0,
+      "lf12": 0,
+      "lf13": 0,
+      "lf14": 0,
+      "lf15": 0,
+      "lf16": 0,
+      "lf2": 8194,
+      "lf3": 8195,
+      "lf4": 8196,
+      "lf5": 8197,
+      "lf6": 0,
+      "lf7": 0,
+      "lf8": 0,
+      "lf9": 0,
+      "lt1": 8225,
+      "lt2": 8226,
+      "lt3": 8227,
+      "lt4": 8228,
+      "lt5": 8229,
+      "lt6": 8230,
+      "lt7": 0,
+      "lt8": 0,
+      "mb1": 0,
+      "mb10": 0,
+      "mb11": 0,
+      "mb12": 0,
+      "mb2": 0,
+      "mb3": 0,
+      "mb4": 8244,
+      "mb5": 8245,
+      "mb6": 8246,
+      "mb7": 8247,
+      "mb8": 0,
+      "mb9": 0,
+      "rf1": 8209,
+      "rf10": 8218,
+      "rf11": 0,
+      "rf12": 0,
+      "rf13": 8221,
+      "rf14": 0,
+      "rf15": 0,
+      "rf16": 8224,
+      "rf2": 8210,
+      "rf3": 8211,
+      "rf4": 8212,
+      "rf5": 8213,
+      "rf6": 8214,
+      "rf7": 8215,
+      "rf8": 8216,
+      "rf9": 8217,
+      "rt1": 8233,
+      "rt2": 8234,
+      "rt3": 8235,
+      "rt4": 8236,
+      "rt5": 8237,
+      "rt6": 0,
+      "rt7": 0,
+      "rt8": 0
+    },
+    "legacy_role_mapping": [
+      {
+        "legacy_condition": {
+          "allTokens": [
+            24
+          ]
+        },
+        "legacy_role_id": 1,
+        "native_condition_token": 12319
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            37
+          ]
+        },
+        "legacy_role_id": 2,
+        "native_condition_token": 12320
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            36
+          ]
+        },
+        "legacy_role_id": 3,
+        "native_condition_token": 12321
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            34
+          ],
+          "noneTokens": [
+            4
+          ]
+        },
+        "legacy_role_id": 4,
+        "native_condition_token": 12322
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            35
+          ],
+          "noneTokens": [
+            4,
+            19,
+            20
+          ]
+        },
+        "legacy_role_id": 5,
+        "native_condition_token": 12323
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            35
+          ],
+          "anyTokens": [
+            19,
+            20
+          ],
+          "noneTokens": [
+            4
+          ]
+        },
+        "legacy_role_id": 6,
+        "native_condition_token": 12324
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            19
+          ],
+          "noneTokens": [
+            35,
+            4
+          ]
+        },
+        "legacy_role_id": 7,
+        "native_condition_token": 12325
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            25,
+            71
+          ]
+        },
+        "legacy_role_id": 8,
+        "native_condition_token": 12326
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            72,
+            20
+          ]
+        },
+        "legacy_role_id": 9,
+        "native_condition_token": 12327
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            41,
+            20
+          ],
+          "noneTokens": [
+            73
+          ]
+        },
+        "legacy_role_id": 10,
+        "native_condition_token": 12328
+      },
+      {
+        "legacy_condition": {
+          "anyTokens": [
+            42,
+            43,
+            44,
+            45
+          ]
+        },
+        "legacy_role_id": 11,
+        "native_condition_token": 12329
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            20,
+            75
+          ],
+          "noneTokens": [
+            74
+          ]
+        },
+        "legacy_role_id": 12,
+        "native_condition_token": 12330
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            20
+          ],
+          "noneTokens": [
+            76,
+            73
+          ]
+        },
+        "legacy_role_id": 13,
+        "native_condition_token": 12331
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            70,
+            19
+          ]
+        },
+        "legacy_role_id": 14,
+        "native_condition_token": 12332
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            35,
+            77
+          ],
+          "noneTokens": [
+            4,
+            74
+          ]
+        },
+        "legacy_role_id": 15,
+        "native_condition_token": 12333
+      },
+      {
+        "legacy_condition": {
+          "noneTokens": [
+            35
+          ]
+        },
+        "legacy_role_id": 16,
+        "native_condition_token": 12334
+      },
+      {
+        "legacy_condition": {
+          "anyTokens": [
+            80,
+            4
+          ]
+        },
+        "legacy_role_id": 17,
+        "native_condition_token": 12335
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            4,
+            18
+          ]
+        },
+        "legacy_role_id": 18,
+        "native_condition_token": 12336
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            77,
+            81
+          ],
+          "noneTokens": [
+            41,
+            82
+          ]
+        },
+        "legacy_role_id": 19,
+        "native_condition_token": 12337
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            41
+          ],
+          "noneTokens": [
+            20
+          ]
+        },
+        "legacy_role_id": 20,
+        "native_condition_token": 12338
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            74
+          ]
+        },
+        "legacy_role_id": 21,
+        "native_condition_token": 12339
+      },
+      {
+        "legacy_condition": {
+          "allTokens": [
+            77,
+            18
+          ],
+          "noneTokens": [
+            35,
+            4,
+            74
+          ]
+        },
+        "legacy_role_id": 22,
+        "native_condition_token": 12340
+      }
+    ],
+    "native_effect_records": [
+      {
+        "activation": 65535,
+        "coordinate_mode": 1,
+        "coordinate_union": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 2,
+        "index": 0,
+        "priority": 200,
+        "profile_gate": 65535,
+        "source": 1,
+        "table0": 0,
+        "table1": 0,
+        "target": 1,
+        "winner": 255
+      },
+      {
+        "activation": 65535,
+        "coordinate_mode": 4,
+        "coordinate_union": [
+          28,
+          28,
+          128,
+          28,
+          228,
+          28,
+          28,
+          128,
+          128,
+          128,
+          228,
+          128,
+          28,
+          228,
+          128,
+          228,
+          228,
+          228
+        ],
+        "flags": 0,
+        "index": 1,
+        "priority": 200,
+        "profile_gate": 65535,
+        "source": 2,
+        "table0": 0,
+        "table1": 0,
+        "target": 2,
+        "winner": 255
+      },
+      {
+        "activation": 12303,
+        "coordinate_mode": 2,
+        "coordinate_union": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 2,
+        "index": 2,
+        "priority": 80,
+        "profile_gate": 65535,
+        "source": 3,
+        "table0": 0,
+        "table1": 1,
+        "target": 1,
+        "winner": 255
+      },
+      {
+        "activation": 8214,
+        "coordinate_mode": 2,
+        "coordinate_union": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 2,
+        "index": 3,
+        "priority": 60,
+        "profile_gate": 65535,
+        "source": 4,
+        "table0": 27,
+        "table1": 27,
+        "target": 1,
+        "winner": 255
+      },
+      {
+        "activation": 8215,
+        "coordinate_mode": 4,
+        "coordinate_union": [
+          77,
+          172,
+          128,
+          172,
+          179,
+          172,
+          77,
+          172,
+          128,
+          172,
+          179,
+          172,
+          77,
+          172,
+          128,
+          172,
+          179,
+          172
+        ],
+        "flags": 2,
+        "index": 4,
+        "priority": 40,
+        "profile_gate": 65535,
+        "source": 1,
+        "table0": 0,
+        "table1": 0,
+        "target": 1,
+        "winner": 255
+      },
+      {
+        "activation": 12315,
+        "coordinate_mode": 4,
+        "coordinate_union": [
+          86,
+          60,
+          128,
+          60,
+          170,
+          60,
+          86,
+          128,
+          128,
+          128,
+          170,
+          128,
+          86,
+          196,
+          128,
+          196,
+          170,
+          196
+        ],
+        "flags": 0,
+        "index": 5,
+        "priority": 100,
+        "profile_gate": 65535,
+        "source": 2,
+        "table0": 0,
+        "table1": 0,
+        "target": 2,
+        "winner": 255
+      },
+      {
+        "activation": 12316,
+        "coordinate_mode": 4,
+        "coordinate_union": [
+          95,
+          91,
+          128,
+          91,
+          161,
+          91,
+          95,
+          91,
+          128,
+          91,
+          161,
+          91,
+          95,
+          165,
+          128,
+          165,
+          161,
+          165
+        ],
+        "flags": 0,
+        "index": 6,
+        "priority": 80,
+        "profile_gate": 65535,
+        "source": 5,
+        "table0": 0,
+        "table1": 0,
+        "target": 2,
+        "winner": 255
+      },
+      {
+        "activation": 12312,
+        "coordinate_mode": 3,
+        "coordinate_union": [
+          128,
+          128,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 0,
+        "index": 7,
+        "priority": 10,
+        "profile_gate": 65535,
+        "source": 6,
+        "table0": 0,
+        "table1": 0,
+        "target": 5,
+        "winner": 255
+      },
+      {
+        "activation": 20487,
+        "coordinate_mode": 0,
+        "coordinate_union": [
+          140,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 0,
+        "index": 8,
+        "priority": 200,
+        "profile_gate": 65535,
+        "source": 0,
+        "table0": 0,
+        "table1": 0,
+        "target": 3,
+        "winner": 255
+      },
+      {
+        "activation": 20488,
+        "coordinate_mode": 0,
+        "coordinate_union": [
+          140,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 0,
+        "index": 9,
+        "priority": 200,
+        "profile_gate": 65535,
+        "source": 0,
+        "table0": 0,
+        "table1": 0,
+        "target": 4,
+        "winner": 255
+      },
+      {
+        "activation": 8221,
+        "coordinate_mode": 2,
+        "coordinate_union": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": 0,
+        "index": 10,
+        "priority": 20,
+        "profile_gate": 65535,
+        "source": 6,
+        "table0": 0,
+        "table1": 1,
+        "target": 1,
+        "winner": 255
+      }
+    ],
+    "rules": [
+      {
+        "condition_token": 12341,
+        "legacy_index": 0,
+        "native_index": 0,
+        "priority": 1,
+        "table_id": 22
+      },
+      {
+        "condition_token": 12342,
+        "legacy_index": 1,
+        "native_index": 1,
+        "priority": 2,
+        "table_id": 23
+      },
+      {
+        "condition_token": 12343,
+        "legacy_index": 2,
+        "native_index": 2,
+        "priority": 10,
+        "table_id": 4
+      },
+      {
+        "condition_token": 12344,
+        "legacy_index": 3,
+        "native_index": 3,
+        "priority": 11,
+        "table_id": 2
+      },
+      {
+        "condition_token": 12345,
+        "legacy_index": 4,
+        "native_index": 4,
+        "priority": 12,
+        "table_id": 5
+      },
+      {
+        "condition_token": 12346,
+        "legacy_index": 5,
+        "native_index": 5,
+        "priority": 13,
+        "table_id": 3
+      },
+      {
+        "condition_token": 12347,
+        "legacy_index": 6,
+        "native_index": 6,
+        "priority": 14,
+        "table_id": 8
+      },
+      {
+        "condition_token": 12348,
+        "legacy_index": 7,
+        "native_index": 7,
+        "priority": 15,
+        "table_id": 6
+      },
+      {
+        "condition_token": 12349,
+        "legacy_index": 8,
+        "native_index": 8,
+        "priority": 16,
+        "table_id": 7
+      },
+      {
+        "condition_token": 12350,
+        "legacy_index": 9,
+        "native_index": 9,
+        "priority": 17,
+        "table_id": 10
+      },
+      {
+        "condition_token": 12351,
+        "legacy_index": 10,
+        "native_index": 10,
+        "priority": 18,
+        "table_id": 9
+      },
+      {
+        "condition_token": 12352,
+        "legacy_index": 11,
+        "native_index": 11,
+        "priority": 19,
+        "table_id": 12
+      },
+      {
+        "condition_token": 12353,
+        "legacy_index": 12,
+        "native_index": 12,
+        "priority": 20,
+        "table_id": 11
+      },
+      {
+        "condition_token": 12354,
+        "legacy_index": 13,
+        "native_index": 13,
+        "priority": 21,
+        "table_id": 19
+      },
+      {
+        "condition_token": 12355,
+        "legacy_index": 14,
+        "native_index": 14,
+        "priority": 22,
+        "table_id": 25
+      },
+      {
+        "condition_token": 12356,
+        "legacy_index": 15,
+        "native_index": 15,
+        "priority": 23,
+        "table_id": 20
+      },
+      {
+        "condition_token": 12357,
+        "legacy_index": 16,
+        "native_index": 16,
+        "priority": 24,
+        "table_id": 26
+      },
+      {
+        "condition_token": 12358,
+        "legacy_index": 17,
+        "native_index": 17,
+        "priority": 25,
+        "table_id": 21
+      },
+      {
+        "condition_token": 12359,
+        "legacy_index": 18,
+        "native_index": 18,
+        "priority": 250,
+        "table_id": 1
+      }
+    ],
+    "source_selector_basis": "actual legacy profile rules",
+    "source_selector_roles": [
+      {
+        "condition": {
+          "allTokens": [
+            24
+          ]
+        },
+        "roleId": 1
+      },
+      {
+        "condition": {
+          "allTokens": [
+            37
+          ]
+        },
+        "roleId": 2
+      },
+      {
+        "condition": {
+          "allTokens": [
+            36
+          ]
+        },
+        "roleId": 3
+      },
+      {
+        "condition": {
+          "allTokens": [
+            34
+          ],
+          "noneTokens": [
+            4
+          ]
+        },
+        "roleId": 4
+      },
+      {
+        "condition": {
+          "allTokens": [
+            35
+          ],
+          "noneTokens": [
+            4,
+            19,
+            20
+          ]
+        },
+        "roleId": 5
+      },
+      {
+        "condition": {
+          "allTokens": [
+            35
+          ],
+          "anyTokens": [
+            19,
+            20
+          ],
+          "noneTokens": [
+            4
+          ]
+        },
+        "roleId": 6
+      },
+      {
+        "condition": {
+          "allTokens": [
+            19
+          ],
+          "noneTokens": [
+            35,
+            4
+          ]
+        },
+        "roleId": 7
+      },
+      {
+        "condition": {
+          "allTokens": [
+            25,
+            71
+          ]
+        },
+        "roleId": 8
+      },
+      {
+        "condition": {
+          "allTokens": [
+            72,
+            20
+          ]
+        },
+        "roleId": 9
+      },
+      {
+        "condition": {
+          "allTokens": [
+            41,
+            20
+          ],
+          "noneTokens": [
+            73
+          ]
+        },
+        "roleId": 10
+      },
+      {
+        "condition": {
+          "anyTokens": [
+            42,
+            43,
+            44,
+            45
+          ]
+        },
+        "roleId": 11
+      },
+      {
+        "condition": {
+          "allTokens": [
+            20,
+            75
+          ],
+          "noneTokens": [
+            74
+          ]
+        },
+        "roleId": 12
+      },
+      {
+        "condition": {
+          "allTokens": [
+            20
+          ],
+          "noneTokens": [
+            76,
+            73
+          ]
+        },
+        "roleId": 13
+      },
+      {
+        "condition": {
+          "allTokens": [
+            70,
+            19
+          ]
+        },
+        "roleId": 14
+      },
+      {
+        "condition": {
+          "allTokens": [
+            35,
+            77
+          ],
+          "noneTokens": [
+            4,
+            74
+          ]
+        },
+        "roleId": 15
+      },
+      {
+        "condition": {
+          "noneTokens": [
+            35
+          ]
+        },
+        "roleId": 16
+      },
+      {
+        "condition": {
+          "anyTokens": [
+            80,
+            4
+          ]
+        },
+        "roleId": 17
+      },
+      {
+        "condition": {
+          "allTokens": [
+            4,
+            18
+          ]
+        },
+        "roleId": 18
+      },
+      {
+        "condition": {
+          "allTokens": [
+            77,
+            81
+          ],
+          "noneTokens": [
+            41,
+            82
+          ]
+        },
+        "roleId": 19
+      },
+      {
+        "condition": {
+          "allTokens": [
+            41
+          ],
+          "noneTokens": [
+            20
+          ]
+        },
+        "roleId": 20
+      },
+      {
+        "condition": {
+          "allTokens": [
+            74
+          ]
+        },
+        "roleId": 21
+      },
+      {
+        "condition": {
+          "allTokens": [
+            77,
+            18
+          ],
+          "noneTokens": [
+            35,
+            4,
+            74
+          ]
+        },
+        "roleId": 22
+      }
+    ],
+    "source_selector_rules": [
+      {
+        "condition": {
+          "allTokens": [
+            86
+          ]
+        },
+        "priority": 1,
+        "tableId": 22
+      },
+      {
+        "condition": {
+          "allTokens": [
+            83,
+            84
+          ],
+          "noneTokens": [
+            86
+          ]
+        },
+        "priority": 2,
+        "tableId": 23
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            66
+          ],
+          "noneTokens": [
+            67,
+            68,
+            69,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 10,
+        "tableId": 4
+      },
+      {
+        "condition": {
+          "allTokens": [
+            66
+          ],
+          "noneTokens": [
+            65,
+            67,
+            68,
+            69,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 11,
+        "tableId": 2
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            67
+          ],
+          "noneTokens": [
+            66,
+            68,
+            69,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 12,
+        "tableId": 5
+      },
+      {
+        "condition": {
+          "allTokens": [
+            67
+          ],
+          "noneTokens": [
+            65,
+            66,
+            68,
+            69,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 13,
+        "tableId": 3
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            68
+          ],
+          "noneTokens": [
+            66,
+            67,
+            69,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 14,
+        "tableId": 8
+      },
+      {
+        "condition": {
+          "allTokens": [
+            68
+          ],
+          "noneTokens": [
+            65,
+            66,
+            67,
+            69,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 15,
+        "tableId": 6
+      },
+      {
+        "condition": {
+          "allTokens": [
+            69
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            78,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 16,
+        "tableId": 7
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            78
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 17,
+        "tableId": 10
+      },
+      {
+        "condition": {
+          "allTokens": [
+            78
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            79,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 18,
+        "tableId": 9
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            79
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 19,
+        "tableId": 12
+      },
+      {
+        "condition": {
+          "allTokens": [
+            79
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            83,
+            84,
+            85
+          ]
+        },
+        "priority": 20,
+        "tableId": 11
+      },
+      {
+        "condition": {
+          "allTokens": [
+            83
+          ],
+          "noneTokens": [
+            65,
+            66,
+            67,
+            68,
+            78,
+            79,
+            84,
+            85,
+            86
+          ]
+        },
+        "priority": 21,
+        "tableId": 19
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            84
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            78,
+            79,
+            83,
+            85
+          ]
+        },
+        "priority": 22,
+        "tableId": 25
+      },
+      {
+        "condition": {
+          "allTokens": [
+            84
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            78,
+            79,
+            83,
+            85
+          ]
+        },
+        "priority": 23,
+        "tableId": 20
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65,
+            85
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            78,
+            79
+          ]
+        },
+        "priority": 24,
+        "tableId": 26
+      },
+      {
+        "condition": {
+          "allTokens": [
+            85
+          ],
+          "noneTokens": [
+            66,
+            67,
+            68,
+            78,
+            79
+          ]
+        },
+        "priority": 25,
+        "tableId": 21
+      },
+      {
+        "condition": {
+          "allTokens": [
+            65
+          ]
+        },
+        "priority": 250,
+        "tableId": 1
+      }
+    ],
+    "table_mapping": [
+      {
+        "body_offset": 96,
+        "legacy_table_id": 0,
+        "native_coordinates": [
+          {
+            "x": 61,
+            "y": 51
+          },
+          {
+            "x": 128,
+            "y": 51
+          },
+          {
+            "x": 195,
+            "y": 51
+          },
+          {
+            "x": 61,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 195,
+            "y": 128
+          },
+          {
+            "x": 61,
+            "y": 205
+          },
+          {
+            "x": 128,
+            "y": 205
+          },
+          {
+            "x": 195,
+            "y": 205
+          }
+        ],
+        "native_table_id": 0
+      },
+      {
+        "body_offset": 114,
+        "legacy_table_id": 1,
+        "native_coordinates": [
+          {
+            "x": 14,
+            "y": 87
+          },
+          {
+            "x": 128,
+            "y": 87
+          },
+          {
+            "x": 242,
+            "y": 87
+          },
+          {
+            "x": 14,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 242,
+            "y": 169
+          },
+          {
+            "x": 14,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 242,
+            "y": 169
+          }
+        ],
+        "native_table_id": 1
+      },
+      {
+        "body_offset": 132,
+        "legacy_table_id": 2,
+        "native_coordinates": [
+          {
+            "x": 93,
+            "y": 51
+          },
+          {
+            "x": 128,
+            "y": 51
+          },
+          {
+            "x": 163,
+            "y": 51
+          },
+          {
+            "x": 93,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 163,
+            "y": 128
+          },
+          {
+            "x": 93,
+            "y": 205
+          },
+          {
+            "x": 128,
+            "y": 205
+          },
+          {
+            "x": 163,
+            "y": 205
+          }
+        ],
+        "native_table_id": 2
+      },
+      {
+        "body_offset": 150,
+        "legacy_table_id": 3,
+        "native_coordinates": [
+          {
+            "x": 82,
+            "y": 51
+          },
+          {
+            "x": 128,
+            "y": 51
+          },
+          {
+            "x": 174,
+            "y": 51
+          },
+          {
+            "x": 82,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 174,
+            "y": 128
+          },
+          {
+            "x": 82,
+            "y": 205
+          },
+          {
+            "x": 128,
+            "y": 205
+          },
+          {
+            "x": 174,
+            "y": 205
+          }
+        ],
+        "native_table_id": 3
+      },
+      {
+        "body_offset": 168,
+        "legacy_table_id": 4,
+        "native_coordinates": [
+          {
+            "x": 78,
+            "y": 87
+          },
+          {
+            "x": 128,
+            "y": 87
+          },
+          {
+            "x": 178,
+            "y": 87
+          },
+          {
+            "x": 78,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 178,
+            "y": 169
+          },
+          {
+            "x": 78,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 178,
+            "y": 169
+          }
+        ],
+        "native_table_id": 4
+      },
+      {
+        "body_offset": 186,
+        "legacy_table_id": 5,
+        "native_coordinates": [
+          {
+            "x": 65,
+            "y": 87
+          },
+          {
+            "x": 128,
+            "y": 87
+          },
+          {
+            "x": 191,
+            "y": 87
+          },
+          {
+            "x": 65,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 191,
+            "y": 169
+          },
+          {
+            "x": 65,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 191,
+            "y": 169
+          }
+        ],
+        "native_table_id": 5
+      },
+      {
+        "body_offset": 204,
+        "legacy_table_id": 6,
+        "native_coordinates": [
+          {
+            "x": 61,
+            "y": 99
+          },
+          {
+            "x": 128,
+            "y": 99
+          },
+          {
+            "x": 195,
+            "y": 99
+          },
+          {
+            "x": 61,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 195,
+            "y": 128
+          },
+          {
+            "x": 61,
+            "y": 157
+          },
+          {
+            "x": 128,
+            "y": 157
+          },
+          {
+            "x": 195,
+            "y": 157
+          }
+        ],
+        "native_table_id": 6
+      },
+      {
+        "body_offset": 222,
+        "legacy_table_id": 7,
+        "native_coordinates": [
+          {
+            "x": 69,
+            "y": 78
+          },
+          {
+            "x": 128,
+            "y": 78
+          },
+          {
+            "x": 187,
+            "y": 78
+          },
+          {
+            "x": 61,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 195,
+            "y": 128
+          },
+          {
+            "x": 61,
+            "y": 164
+          },
+          {
+            "x": 128,
+            "y": 174
+          },
+          {
+            "x": 195,
+            "y": 164
+          }
+        ],
+        "native_table_id": 7
+      },
+      {
+        "body_offset": 240,
+        "legacy_table_id": 8,
+        "native_coordinates": [
+          {
+            "x": 14,
+            "y": 179
+          },
+          {
+            "x": 128,
+            "y": 179
+          },
+          {
+            "x": 242,
+            "y": 179
+          },
+          {
+            "x": 14,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 242,
+            "y": 169
+          },
+          {
+            "x": 14,
+            "y": 77
+          },
+          {
+            "x": 128,
+            "y": 77
+          },
+          {
+            "x": 242,
+            "y": 77
+          }
+        ],
+        "native_table_id": 8
+      },
+      {
+        "body_offset": 258,
+        "legacy_table_id": 9,
+        "native_coordinates": [
+          {
+            "x": 87,
+            "y": 51
+          },
+          {
+            "x": 128,
+            "y": 51
+          },
+          {
+            "x": 169,
+            "y": 51
+          },
+          {
+            "x": 87,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 169,
+            "y": 128
+          },
+          {
+            "x": 87,
+            "y": 205
+          },
+          {
+            "x": 128,
+            "y": 205
+          },
+          {
+            "x": 169,
+            "y": 205
+          }
+        ],
+        "native_table_id": 9
+      },
+      {
+        "body_offset": 276,
+        "legacy_table_id": 10,
+        "native_coordinates": [
+          {
+            "x": 87,
+            "y": 87
+          },
+          {
+            "x": 128,
+            "y": 87
+          },
+          {
+            "x": 169,
+            "y": 87
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 169
+          }
+        ],
+        "native_table_id": 10
+      },
+      {
+        "body_offset": 294,
+        "legacy_table_id": 11,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 51
+          },
+          {
+            "x": 128,
+            "y": 51
+          },
+          {
+            "x": 87,
+            "y": 51
+          },
+          {
+            "x": 169,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 87,
+            "y": 128
+          },
+          {
+            "x": 169,
+            "y": 205
+          },
+          {
+            "x": 128,
+            "y": 205
+          },
+          {
+            "x": 87,
+            "y": 205
+          }
+        ],
+        "native_table_id": 11
+      },
+      {
+        "body_offset": 312,
+        "legacy_table_id": 12,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 87
+          },
+          {
+            "x": 128,
+            "y": 87
+          },
+          {
+            "x": 87,
+            "y": 87
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 169
+          }
+        ],
+        "native_table_id": 12
+      },
+      {
+        "body_offset": 330,
+        "legacy_table_id": 13,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 99
+          },
+          {
+            "x": 128,
+            "y": 99
+          },
+          {
+            "x": 87,
+            "y": 99
+          },
+          {
+            "x": 169,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 87,
+            "y": 128
+          },
+          {
+            "x": 169,
+            "y": 157
+          },
+          {
+            "x": 128,
+            "y": 157
+          },
+          {
+            "x": 87,
+            "y": 157
+          }
+        ],
+        "native_table_id": 13
+      },
+      {
+        "body_offset": 348,
+        "legacy_table_id": 14,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 179
+          },
+          {
+            "x": 128,
+            "y": 179
+          },
+          {
+            "x": 87,
+            "y": 179
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 77
+          },
+          {
+            "x": 128,
+            "y": 77
+          },
+          {
+            "x": 87,
+            "y": 77
+          }
+        ],
+        "native_table_id": 14
+      },
+      {
+        "body_offset": 366,
+        "legacy_table_id": 15,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 99
+          },
+          {
+            "x": 128,
+            "y": 99
+          },
+          {
+            "x": 87,
+            "y": 99
+          },
+          {
+            "x": 169,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 87,
+            "y": 128
+          },
+          {
+            "x": 169,
+            "y": 157
+          },
+          {
+            "x": 128,
+            "y": 157
+          },
+          {
+            "x": 87,
+            "y": 157
+          }
+        ],
+        "native_table_id": 15
+      },
+      {
+        "body_offset": 384,
+        "legacy_table_id": 16,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 179
+          },
+          {
+            "x": 128,
+            "y": 179
+          },
+          {
+            "x": 87,
+            "y": 179
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 77
+          },
+          {
+            "x": 128,
+            "y": 77
+          },
+          {
+            "x": 87,
+            "y": 77
+          }
+        ],
+        "native_table_id": 16
+      },
+      {
+        "body_offset": 402,
+        "legacy_table_id": 17,
+        "native_coordinates": [
+          {
+            "x": 87,
+            "y": 99
+          },
+          {
+            "x": 128,
+            "y": 99
+          },
+          {
+            "x": 169,
+            "y": 99
+          },
+          {
+            "x": 87,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 169,
+            "y": 128
+          },
+          {
+            "x": 87,
+            "y": 157
+          },
+          {
+            "x": 128,
+            "y": 157
+          },
+          {
+            "x": 169,
+            "y": 157
+          }
+        ],
+        "native_table_id": 17
+      },
+      {
+        "body_offset": 420,
+        "legacy_table_id": 18,
+        "native_coordinates": [
+          {
+            "x": 87,
+            "y": 179
+          },
+          {
+            "x": 128,
+            "y": 179
+          },
+          {
+            "x": 169,
+            "y": 179
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 77
+          },
+          {
+            "x": 128,
+            "y": 77
+          },
+          {
+            "x": 169,
+            "y": 77
+          }
+        ],
+        "native_table_id": 18
+      },
+      {
+        "body_offset": 438,
+        "legacy_table_id": 19,
+        "native_coordinates": [
+          {
+            "x": 187,
+            "y": 47
+          },
+          {
+            "x": 128,
+            "y": 47
+          },
+          {
+            "x": 69,
+            "y": 47
+          },
+          {
+            "x": 187,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 69,
+            "y": 128
+          },
+          {
+            "x": 187,
+            "y": 209
+          },
+          {
+            "x": 128,
+            "y": 209
+          },
+          {
+            "x": 69,
+            "y": 209
+          }
+        ],
+        "native_table_id": 19
+      },
+      {
+        "body_offset": 456,
+        "legacy_table_id": 20,
+        "native_coordinates": [
+          {
+            "x": 88,
+            "y": 79
+          },
+          {
+            "x": 128,
+            "y": 79
+          },
+          {
+            "x": 168,
+            "y": 79
+          },
+          {
+            "x": 88,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 168,
+            "y": 128
+          },
+          {
+            "x": 88,
+            "y": 177
+          },
+          {
+            "x": 128,
+            "y": 177
+          },
+          {
+            "x": 168,
+            "y": 177
+          }
+        ],
+        "native_table_id": 20
+      },
+      {
+        "body_offset": 474,
+        "legacy_table_id": 21,
+        "native_coordinates": [
+          {
+            "x": 69,
+            "y": 82
+          },
+          {
+            "x": 128,
+            "y": 83
+          },
+          {
+            "x": 187,
+            "y": 82
+          },
+          {
+            "x": 69,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 187,
+            "y": 128
+          },
+          {
+            "x": 76,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 179
+          },
+          {
+            "x": 180,
+            "y": 169
+          }
+        ],
+        "native_table_id": 21
+      },
+      {
+        "body_offset": 492,
+        "legacy_table_id": 22,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 47
+          },
+          {
+            "x": 128,
+            "y": 47
+          },
+          {
+            "x": 87,
+            "y": 47
+          },
+          {
+            "x": 169,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 87,
+            "y": 128
+          },
+          {
+            "x": 169,
+            "y": 209
+          },
+          {
+            "x": 128,
+            "y": 209
+          },
+          {
+            "x": 87,
+            "y": 209
+          }
+        ],
+        "native_table_id": 22
+      },
+      {
+        "body_offset": 510,
+        "legacy_table_id": 23,
+        "native_coordinates": [
+          {
+            "x": 69,
+            "y": 78
+          },
+          {
+            "x": 128,
+            "y": 78
+          },
+          {
+            "x": 187,
+            "y": 78
+          },
+          {
+            "x": 69,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 187,
+            "y": 128
+          },
+          {
+            "x": 72,
+            "y": 172
+          },
+          {
+            "x": 128,
+            "y": 179
+          },
+          {
+            "x": 184,
+            "y": 172
+          }
+        ],
+        "native_table_id": 23
+      },
+      {
+        "body_offset": 528,
+        "legacy_table_id": 24,
+        "native_coordinates": [
+          {
+            "x": 169,
+            "y": 88
+          },
+          {
+            "x": 128,
+            "y": 88
+          },
+          {
+            "x": 87,
+            "y": 88
+          },
+          {
+            "x": 169,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 87,
+            "y": 169
+          },
+          {
+            "x": 169,
+            "y": 168
+          },
+          {
+            "x": 128,
+            "y": 168
+          },
+          {
+            "x": 87,
+            "y": 168
+          }
+        ],
+        "native_table_id": 24
+      },
+      {
+        "body_offset": 546,
+        "legacy_table_id": 25,
+        "native_coordinates": [
+          {
+            "x": 96,
+            "y": 82
+          },
+          {
+            "x": 128,
+            "y": 82
+          },
+          {
+            "x": 160,
+            "y": 82
+          },
+          {
+            "x": 96,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 160,
+            "y": 169
+          },
+          {
+            "x": 96,
+            "y": 174
+          },
+          {
+            "x": 128,
+            "y": 174
+          },
+          {
+            "x": 160,
+            "y": 174
+          }
+        ],
+        "native_table_id": 25
+      },
+      {
+        "body_offset": 564,
+        "legacy_table_id": 26,
+        "native_coordinates": [
+          {
+            "x": 96,
+            "y": 86
+          },
+          {
+            "x": 128,
+            "y": 86
+          },
+          {
+            "x": 160,
+            "y": 86
+          },
+          {
+            "x": 96,
+            "y": 169
+          },
+          {
+            "x": 128,
+            "y": 169
+          },
+          {
+            "x": 160,
+            "y": 169
+          },
+          {
+            "x": 96,
+            "y": 170
+          },
+          {
+            "x": 128,
+            "y": 170
+          },
+          {
+            "x": 160,
+            "y": 170
+          }
+        ],
+        "native_table_id": 26
+      },
+      {
+        "body_offset": 582,
+        "legacy_table_id": 27,
+        "native_coordinates": [
+          {
+            "x": 89,
+            "y": 89
+          },
+          {
+            "x": 128,
+            "y": 79
+          },
+          {
+            "x": 167,
+            "y": 89
+          },
+          {
+            "x": 79,
+            "y": 128
+          },
+          {
+            "x": 128,
+            "y": 128
+          },
+          {
+            "x": 177,
+            "y": 128
+          },
+          {
+            "x": 89,
+            "y": 167
+          },
+          {
+            "x": 128,
+            "y": 177
+          },
+          {
+            "x": 167,
+            "y": 167
+          }
+        ],
+        "native_table_id": 27
+      }
+    ]
+  },
+  "counts": {
+    "bindings": 18,
+    "conditions": 71,
+    "effects": 11,
+    "tables": 28,
+    "tokens": 280
+  },
+  "encoding": 1,
+  "engine_abi": 1,
+  "legacy_oracle_manifest_sha256": "c5532afd4810bc0e1a40169e80b9e0d46ea5c2430d68c3bf43ab549661aedda9",
+  "legacy_payload_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+  "limitations": [
+    "Raw controller outputs only; no gameplay semantics or hardware acceptance.",
+    "Nunchuk physical acceptance NOT_TESTED."
+  ],
+  "native_payload_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+  "old_role_id_to_native_token": {
+    "1": 12319,
+    "2": 12320,
+    "3": 12321,
+    "4": 12322,
+    "5": 12323,
+    "6": 12324,
+    "7": 12325,
+    "8": 12326,
+    "9": 12327,
+    "10": 12328,
+    "11": 12329,
+    "12": 12330,
+    "13": 12331,
+    "14": 12332,
+    "15": 12333,
+    "16": 12334,
+    "17": 12335,
+    "18": 12336,
+    "19": 12337,
+    "20": 12338,
+    "21": 12339,
+    "22": 12340
+  },
+  "policy": "historical_compatibility",
+  "policy_deviations": [],
+  "policy_options": {},
+  "preprocessing": {
+    "modeId": "MODE_ULTIMATE"
+  },
+  "preprocessing_canonical_hex": "476c7970682e4e61746976652e50726570726f636573732e76310003000000",
+  "preprocessing_sha256": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+  "primitive_inputs_sha256": {
+    ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+    ".pio/libdeps/glyph_mk6/Nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+    "tools/fixtures/stage_b_ultimate_profiles_fixture.json": "9cebfa70d0dc379d60e04f1814921c92330540af68c6bc9d6dd3b2c73b09cb9b",
+    "tools/fixtures/stage_c_ultimate_profiles_fixture.json": "8cb2b68d4d99c162d543077e8f7b8f30f646401c7d9710c34fd92cdadd5d64d1"
+  },
+  "protobuf_descriptor_sha256": "e4a27b34e52d03f8c8a85c30061bad702ef0aebbc215ca79c53fd282968f9249",
+  "schema": 5,
+  "source_files": {
+    "include/modes/UltimateProfileEvaluator.hpp": "e7a68817e13a11ba7e9e88c112fc3ade46e40c5d75fa94060896be70f4f722fc",
+    "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+    "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "src/modes/Ultimate.cpp": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+  },
+  "source_schema": 3
+}

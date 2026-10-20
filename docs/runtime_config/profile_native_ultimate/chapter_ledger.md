@@ -295,3 +295,22 @@ fixtures and production firmware source remain as45d713be; this checkpoint
 adds only the final mutation launcher correction, completed log and the already
 used ARM resource collector source. No native target timing/peak/hardware
 acceptance follows from these host results.
+
+## M6 software freeze for independent review/build
+
+Production firmware source remains identical to9e16e1c36babdd5c655893b35ae92cd39725c37f.
+The root independently reran both ARM ABI layouts: active+candidate7800,
+view560, FrameState132. consumer_9e_probe retains six corrected actual-consumer
+PASS commands, with earlier3b failures preserved. Offline packet preparation
+produced13complete packages/495expected full-output observations and literal
+three-backend assignment/LR/Z host assertions; all physical observations remain
+NOT_TESTED and exact candidate/build/custody/approval context remains pending.
+Target measurement proposal/sourcepins are preserved as PROPOSAL ONLY with a
+separate provenance erratum; no new metric facility or transport was implemented.
+Root requested exact committed firmware build for actual linked stack/tail-call
+review. stack_branch_evidence retains production O3 object/disassembly/source
+hashes from current compiledb, not a final linked-firmware safety certificate.
+The conditional WRONLY LittleFS forceconsistency/deorphan/orphan-repair/compaction
+inventory remains unresolved versus2048stackbudget;4096scratchbank is physical
+capacity only and is not an authorized stack budget. Full source/safety review,
+feasible call-chain adjudication and hardware acceptance remain pending.

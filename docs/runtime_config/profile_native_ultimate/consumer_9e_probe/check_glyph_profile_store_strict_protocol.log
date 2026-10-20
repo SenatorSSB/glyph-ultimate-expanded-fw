@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_strict_protocol.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "profile_store_strict_protocol=PASS\nprofile_store_strict_protocol=PASS\nprofile_store_rx_backend=PASS partial_ticket_inert=true pulse_retains_timeout=true trace_after_eop=true admission_before_activation=true ordered_stages=true query=true failed_trace_disarms=true\nprofile_store_liveness_protocol=PASS profiles=20 updates=128 arm_loss_cycles=1024 mixed_frames=7680 trace_stages=9 slow_trickle=bounded\nglyph_profile_store_strict_protocol: PASS\n",
+  "stderr": "",
+  "seconds": 4.99,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_strict_protocol.log"
+}

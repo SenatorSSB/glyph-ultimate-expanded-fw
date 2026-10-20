@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_migration_lifecycle.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "glyph_profile_store_migration_lifecycle: PASS\nproduction_import=true injected_storage=true strict_absent_first_create=true generated_nanopb_stage_b=true profiles=20 compact_mode_refs=true retry_without_duplicate_ids=true reboot_switch=true delete_refusal=true corrupt_record_isolation=true\n",
+  "stderr": "",
+  "seconds": 2.27,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_migration_lifecycle.log"
+}

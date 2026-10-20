@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_candidate_tool.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true mutation_trace=true device_error_journal=true\n",
+  "stderr": "",
+  "seconds": 0.19,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-9e/check_glyph_profile_store_candidate_tool.log"
+}
