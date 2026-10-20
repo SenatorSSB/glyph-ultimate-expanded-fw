@@ -200,3 +200,10 @@ Canonical adoption A `753932c8fbec3e002d455f4cd2b9b1dbc0ed896f` was live verifie
 Requested routing: gpt-6.1-sol/high, finite coupled codec/converter/callback/store/identity implementation. Runtime-observed model and effort: UNKNOWN. Native subagent direct return supported by runtime collaboration API; no additional source writer is spawned. Network capability inherited from parent: live GitHub requires network-enabled execution.
 
 The adopted READY order authorizes implementation; immutable M1 evidence and historical checkpoints above remain preserved. Initial authorization review is retained in `authorization_publication_review.md`. Native implementation, fresh source review/build/custody and human native acceptance remain incomplete. No controller action occurred.
+
+
+## Internal M2 source checkpoint — 2026-10-20
+
+Implemented finite native wire preparation/validation, canonical-byte view, owned-copy and synchronous lease adapters, preprocessing digest, generic finite evaluator and default-preserving original/remapped/post hook. Native evaluator has no Glyph slot/phase selector names; Nunchuk tail and legacy-unowned output bits are source-backed compatibility adapters. Began required store/callback/engine/identity integration in the same coherent chain. Individual native codec, evaluator, Ultimate and Config validator translation units compile with host short enums and warnings as errors. This is an intermediate source checkpoint, not M2–M6 completion, full proof, reviewed candidate, build or hardware acceptance. General converter/differential/store lifecycle/resource/build gates remain incomplete.
+
+Copied parent publication transcript to `authorized_execution_transition.json`. No device action or canonical mutation.

@@ -31,6 +31,7 @@
 
 #include <pb_arduino.h>
 #include <pb_decode.h>
+#include "modes/UltimateNativeProfile.hpp"
 #include <pb_encode.h>
 #include "core/ProfileStoreReadTrace.hpp"
 #include <cstdio>
@@ -357,6 +358,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
     // Reset config defaults first, so config is completely replaced rather than merged.
     candidate = Config_init_default;
 
+    ultimate_native::RejectEmbedded(candidate);
     pb_istream_t istream = as_pb_istream(_in);
     if (!pb_decode(&istream, Config_fields, &candidate)) {
         char errmsg[100];
@@ -366,6 +368,8 @@ bool ConfiguratorBackend::HandleSetConfig() {
 
         return false;
     }
+
+    ultimate_native::ClearEmbeddedCallbacks(candidate);
 
     // Whole-Config SET is the legacy protocol.  Once a compact profile-store
     // Config is active, accepting an older client's decoded default marker
@@ -391,6 +395,19 @@ bool ConfiguratorBackend::HandleSetConfig() {
         return false;
     }
 
+    // A whole-Config client cannot change the expected engine of a known
+    // selected record. Missing native records remain loadable but unavailable.
+    for (size_t i = 0; i < candidate.game_mode_configs_count; ++i) {
+        const auto &mode = candidate.game_mode_configs[i];
+        if (mode.mode_id != MODE_ULTIMATE || !mode.ultimate_profile_id) continue;
+        UltimateProfile &selected = candidate.ultimate_profiles[0];
+        if (profile_store.Read(mode.ultimate_profile_id, selected) == ProfileStore::Status::Ok &&
+            mode.ultimate_profile_engine != (selected.schema_version == ultimate_native::kSchema ? 1 : 0)) {
+            static const char message[] = "Selected Ultimate engine mismatch";
+            return WritePacket(CMD_ERROR, (uint8_t *)message, sizeof(message));
+        }
+    }
+    if (candidate.ultimate_profiles_count == 0) candidate.ultimate_profiles[0] = UltimateProfile_init_default;
     if (!persistence.SaveConfig(candidate)) {
         char errmsg[] = "Failed to save config to memory";
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
@@ -451,6 +468,11 @@ bool ConfiguratorBackend::HandleProfileStore() {
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29);
     }
     request = ProfileStoreRequest_init_default;
+    static ultimate_native::PayloadLease incoming_native;
+    incoming_native.Release();
+    struct IncomingScope { ultimate_native::PayloadLease &lease; ~IncomingScope() { lease.Release(); } } incoming_scope{incoming_native};
+    if (!ultimate_native::PrepareRequest(frame, length, request, incoming_native))
+        return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     _rx.phase = 5; // record before decode, with no competing USB trace traffic
 #endif
@@ -461,6 +483,8 @@ bool ConfiguratorBackend::HandleProfileStore() {
 #endif
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
     }
+    if (incoming_native.live) ultimate_native::Bind(request.profile, incoming_native);
+    else request.profile.native_payload = {};
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     _rx.phase = 6;
     const bool mutationTrace = request.operation >= PROFILE_STORE_CREATE &&
@@ -756,6 +780,7 @@ bool ConfiguratorBackend::HandleProfileStore() {
                 else {
                     GameModeConfig &mode = candidate.game_mode_configs[request.mode_config_index];
                     mode.ultimate_profile_id = request.profile_id;
+                    mode.ultimate_profile_engine = request.profile_id && response.profile.schema_version == ultimate_native::kSchema ? 1 : 0;
                     mode.ultimate_profile_config = 0;
                     candidate.profile_reference_token = identity.token;
                     std::memcpy(candidate.profile_reference_digest, identity.digest, 32);
@@ -814,6 +839,11 @@ bool ConfiguratorBackend::HandleProfileStore() {
     if (_recovery_service) response.recovery_flags |= 1u << 19;
     if (!_recovery_storage_available) response.recovery_flags |= 1u << 17;
     if (_reference_unknown || persistence.IsMutationFenced()) response.recovery_flags |= 1u << 18;
+    // Release the borrowed immutable RX bytes after all identity/transaction
+    // work, before response encoding reuses that same frame. READ leases use
+    // the separate record wire and remain synchronous through this encode.
+    incoming_native.Release();
+    request.profile.native_payload = {};
     // The request is decoded into owned static fields before reusing frame.
     // Encoding and transport are separate bounded stages, with no FS frames
     // alive during either stage.

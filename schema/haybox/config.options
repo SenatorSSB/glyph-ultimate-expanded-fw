@@ -143,3 +143,6 @@ Config.profile_reference_digest fixed_length:true
 Config.ultimate_profile_migration_receipt max_size:32
 Config.ultimate_profile_migration_receipt fixed_length:true
 Config.ultimate_profile_root_format int_size:IS_8
+
+UltimateProfile.native_payload type:FT_CALLBACK
+GameModeConfig.ultimate_profile_engine int_size:IS_8

@@ -10,9 +10,15 @@ void ControllerMode::UpdateOutputs(const InputState &inputs, OutputState &output
     // to one activated button).
     InputState remapped_inputs = inputs;
     HandleRemap(inputs, remapped_inputs);
-    HandleSocd(remapped_inputs);
-    UpdateDigitalOutputs(remapped_inputs, outputs);
-    UpdateAnalogOutputs(remapped_inputs, outputs, backend_id);
+    InputState post_inputs = remapped_inputs;
+    HandleSocd(post_inputs);
+    const ResolvedInputContext context{inputs, remapped_inputs, post_inputs};
+    UpdatePreprocessedOutputs(context, outputs, backend_id);
+}
+
+void ControllerMode::UpdatePreprocessedOutputs(const ResolvedInputContext &context, OutputState &outputs, CommunicationBackendId backend_id) {
+    UpdateDigitalOutputs(context.post, outputs);
+    UpdateAnalogOutputs(context.post, outputs, backend_id);
 }
 
 void ControllerMode::ResetDirections() {

@@ -1,0 +1,72 @@
+{
+  "schema_name": "glyph_native_authorized_execution_transition",
+  "schema_version": 1,
+  "recorded_utc": "2026-10-20T10:53:08.837001+00:00",
+  "base_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "planning_sha": "14b1049bd421c5a202b2d99750f225a043660241",
+  "receipt_sha": "8e30717ce5a64d3207e42aa4a7111dd3b492f800",
+  "canonical_ready_adoption_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "source_free_publication": {
+    "push_exit_code": 0,
+    "push_summary": "976ba219..753932c8 -> configurator",
+    "post_push_ls_remote_exit_code": 0,
+    "post_push_configurator_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "post_push_curation_branch_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "source_changed": false
+  },
+  "independent_publication_review": {
+    "verdict": "APPROVE",
+    "report_sha256": "1a9ad70d9404c6e9d2c14eb1930a23e7f3ef87e286926029a8b14f5fbed24de8",
+    "worker": "/root/authorization_review",
+    "requested_model": "gpt-6.1-sol",
+    "requested_effort": "high",
+    "observed_model": null,
+    "observed_effort": null
+  },
+  "root_final_context_checks": {
+    "framework": "PASS",
+    "sequence": "PASS",
+    "navigation": "PASS",
+    "surface": "HISTORICAL_FRAMEWORK_DEBT_PRESERVED",
+    "full_aggregate_pass_claimed": false
+  },
+  "publication_lock": {
+    "owner": "/root",
+    "chapter": "profile-native Ultimate M0-M7",
+    "work_order": "GP-NATIVE-001",
+    "thread_id": "01a15881-8096-7e13-8ca6-5b5bdc73bef1",
+    "acquired_utc": "2026-10-20T10:47:57.643004+00:00",
+    "base_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+    "adoption_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "scope": "sole canonical publication; isolated source writer later; no device authority"
+  },
+  "implementation": {
+    "work_order": "GP-NATIVE-001",
+    "worktree": "/private/tmp/glyph-profile-native-20261020",
+    "branch": "codex/gp-native-001-profile-execution",
+    "initial_clean_head": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "started_after_live_ready": true,
+    "writer": "/root/native_source_writer",
+    "requested_model": "gpt-6.1-sol",
+    "requested_effort": "high",
+    "observed_model": null,
+    "observed_effort": null
+  },
+  "parallel_readonly_specialist": {
+    "worker": "/root/native_oracle_probe",
+    "requested_model": "gpt-6.1-sol",
+    "requested_effort": "medium",
+    "observed_model": null,
+    "observed_effort": null,
+    "scope": "independent admitted legacy conversion oracle probes only"
+  },
+  "device_actions": false,
+  "hardware_acceptance": null,
+  "next_required_gates": [
+    "complete native source and all required production proof",
+    "fresh independent source review",
+    "exact committed build and artifact custody",
+    "concrete reviewed candidate packet and owner device approval",
+    "exact human evidence and independent HEP PASS before source merge"
+  ]
+}

@@ -25,6 +25,7 @@
 #include <LittleFS.h>
 #include <pb_arduino.h>
 #include <pb_decode.h>
+#include "modes/UltimateNativeProfile.hpp"
 #include <pb_encode.h>
 
 #include <cstring>
@@ -348,8 +349,10 @@ Persistence::LoadResult Persistence::ReadLegacyProfile(size_t index, UltimatePro
                 pb_istream_t substream;
                 if (!pb_make_string_substream(&stream, &substream)) break;
                 profile = UltimateProfile_init_default;
+                profile.native_payload.funcs.decode = ultimate_native::RejectPayload;
                 decoded = pb_decode(&substream, UltimateProfile_fields, &profile) && substream.bytes_left == 0;
                 if (!pb_close_string_substream(&stream, &substream)) decoded = false;
+                profile.native_payload = {};
                 break;
             }
         }
@@ -397,6 +400,7 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
     }
 
     ConfigFileReader reader{ &config_file };
+    ultimate_native::RejectEmbedded(candidate);
     pb_istream_t istream{};
     istream.callback = read_config_file;
     istream.state = &reader;
@@ -411,6 +415,7 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
         return LoadResult::StorageFailure;
     }
 
+    ultimate_native::ClearEmbeddedCallbacks(candidate);
     ConfigValidationError error;
     if (!ValidateConfig(candidate, error)) {
         config_file.close();

@@ -983,11 +983,12 @@ bool ProfileStore::ReadProfile(
         return false;
     }
     out = UltimateProfile_init_default;
-    pb_istream_t stream = pb_istream_from_buffer(wire + 32, n - 32);
-    if (!pb_decode(&stream, UltimateProfile_fields, &out) || stream.bytes_left)
+    static ultimate_native::PayloadLease read_lease;
+    read_lease.Release();
+    if (!ultimate_native::DecodeProfile(wire + 32, n - 32, out, read_lease))
         return false;
     if (!ProfileStoreReadTrace::Mark(17)) return false;
-    if (out.schema_version < 1 || out.schema_version > 3) {
+    if ((out.schema_version < 1 || out.schema_version > 3) && out.schema_version != ultimate_native::kSchema) {
         if (unsupported)
             *unsupported = true;
         return false;
@@ -1011,6 +1012,9 @@ ProfileStore::Status ProfileStore::Read(uint32_t id, UltimateProfile &out, uint3
 }
 
 const UltimateProfile *ProfileStore::Activate(uint32_t id, Status *status) {
+    _active_id = 0; _active_revision = 0;
+    _active_native.view.valid = false; _active_native_lease.Release();
+    ++_native_generation; if (!_native_generation) ++_native_generation;
     if (!id) {
         _active_id = 0;
         _active_revision = 0;
@@ -1035,6 +1039,13 @@ const UltimateProfile *ProfileStore::Activate(uint32_t id, Status *status) {
         previous = true;
     }
     _active_profile = _candidate_profile;
+    if (_active_profile.schema_version == ultimate_native::kSchema) {
+        if (!ultimate_native::CopyProgram(ultimate_native::CandidateView(), _active_native, _native_generation) ||
+            !ultimate_native::BindOwned(_active_profile, _active_native, _active_native_lease)) {
+            if (status) *status = Status::Invalid;
+            return nullptr;
+        }
+    }
     _active_id = id;
     _active_revision = previous ? e.previous_revision : e.revision;
     if (status)
@@ -1198,9 +1209,9 @@ ProfileStore::CapacityInfo ProfileStore::Capacity() const {
     c.mutation_feasible = _ready && !_read_only_recovery && !_uncertain && !MigrationPending() &&
                           c.free_bytes >= c.reserve_bytes + c.staging_bytes &&
                           c.total_bytes >= c.protected_bytes + c.reserve_bytes + c.staging_bytes;
-    // Representative complete v3 record envelope <=3079 bytes. Allow three
+    // Representative complete native record envelope <=3373 bytes. Allow three
     // revisions per profile (union of both roots) and two metadata entries each.
-    uint64_t per = 3 * FileCharge(3079, g.erase_bytes) + 256;
+    uint64_t per = 3 * FileCharge(ultimate_native::kRecordMax, g.erase_bytes) + 256;
     uint64_t overhead = fixed + metadata + c.reserve_bytes + c.staging_bytes;
     c.admissible_profiles =
         c.total_bytes > overhead ? static_cast<uint32_t>((c.total_bytes - overhead) / per) : 0;
@@ -1375,6 +1386,8 @@ ProfileStore::TransactionResult ProfileStore::Update(
         return { Status::Conflict };
     if (rev == UINT32_MAX)
         return { Status::Full };
+    if ((_directory->entries[i].payload_version == ultimate_native::kSchema) != (p.schema_version == ultimate_native::kSchema))
+        return { Status::Invalid };
     if (!ValidateProfile(p))
         return { Status::Invalid };
     size_t n = 0;
@@ -1406,6 +1419,7 @@ ProfileStore::TransactionResult ProfileStore::Duplicate(
         return { Status::Conflict };
     if (!ReadProfile(id, rev, _candidate_profile))
         return { Status::Invalid };
+    if (!ultimate_native::PreserveProfile(_candidate_profile)) return { Status::Invalid };
     return Create(_candidate_profile, name, rank, t);
 }
 

@@ -130,7 +130,7 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
                 // runtime uses only the established source-owned fallback.
                 if (mode_config.ultimate_profile_id != 0 && status != ProfileStore::Status::Ok &&
                     status != ProfileStore::Status::RecoveredPrevious) profile = nullptr;
-                ultimate_mode.SetConfig(mode_config, profile);
+                ultimate_mode.SetConfig(mode_config, profile, profile_store.ActiveNativeView());
                 set_mode(backend, &ultimate_mode);
                 break;
             }

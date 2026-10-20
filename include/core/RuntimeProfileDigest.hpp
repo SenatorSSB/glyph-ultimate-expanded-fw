@@ -15,7 +15,7 @@ inline bool PayloadDigest(const UltimateProfile &profile, uint8_t digest[32]) {
         return true;
     };
     stream.state = &hash;
-    stream.max_size = UltimateProfile_size;
+    stream.max_size = 4096; // Existing admitted standalone profile bound; callback removes generated size macro.
     if (!pb_encode(&stream, UltimateProfile_fields, &profile)) return false;
     hash.Final(digest);
     return true;

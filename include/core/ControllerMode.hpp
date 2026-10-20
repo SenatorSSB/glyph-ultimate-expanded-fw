@@ -4,6 +4,7 @@
 #include "core/InputMode.hpp"
 #include "core/socd.hpp"
 #include "core/state.hpp"
+#include "core/ResolvedInputContext.hpp"
 
 #include <config.pb.h>
 
@@ -29,6 +30,7 @@ class ControllerMode : public InputMode {
 
   protected:
     StickDirections directions;
+    virtual void UpdatePreprocessedOutputs(const ResolvedInputContext &, OutputState &, CommunicationBackendId);
 
   private:
     virtual void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) = 0;

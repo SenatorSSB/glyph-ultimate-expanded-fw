@@ -1,6 +1,7 @@
 /* Ultimate profile by Taker */
 #include "modes/Ultimate.hpp"
 #include "modes/UltimateProfileConfig.hpp"
+#include "modes/UltimateNativeEvaluator.hpp"
 #include "modes/UltimateProfileEvaluator.hpp"
 #include <config.pb.h>
 
@@ -778,9 +779,26 @@ void ApplyProfileAnalogProgram(const OutputProgramContext &program, const InputS
 
 Ultimate::Ultimate() : ControllerMode() {}
 
-void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile) {
+void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile, const ultimate_native::PreparedView *native) {
     InputMode::SetConfig(config);
-    _profile = profile;
+    _profile = nullptr; _native = nullptr;
+    _engine = config.ultimate_profile_engine == 1 || (profile && profile->schema_version == ultimate_native::kSchema)
+        ? Engine::NativeUnavailable : Engine::Legacy;
+    if (_engine == Engine::NativeUnavailable) {
+        if (config.ultimate_profile_engine == 1 && profile && profile->schema_version == ultimate_native::kSchema &&
+            native && native->valid && ultimate_native::ContextMatches(*native, config)) {
+            _profile = profile; _native = native; _engine = Engine::NativeAbi1;
+        }
+    } else _profile = profile;
+}
+
+void Ultimate::UpdatePreprocessedOutputs(const ResolvedInputContext &context, OutputState &outputs, CommunicationBackendId backend) {
+    if (_engine == Engine::NativeUnavailable) { ultimate_native::Neutral(outputs); return; }
+    if (_engine == Engine::NativeAbi1) {
+        if (!_native || !ultimate_native::Evaluate(*_native, context, *this, outputs)) ultimate_native::Neutral(outputs);
+        return;
+    }
+    ControllerMode::UpdatePreprocessedOutputs(context, outputs, backend);
 }
 
 void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) {

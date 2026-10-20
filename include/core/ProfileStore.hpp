@@ -4,6 +4,7 @@
 
 #include "core/ProfileStoreStorage.hpp"
 #include "core/ProfileStoreTransaction.hpp"
+#include "modes/UltimateNativeProfile.hpp"
 
 #include <config.pb.h>
 #include <cstddef>
@@ -103,6 +104,7 @@ class ProfileStore {
     Status Read(uint32_t id, UltimateProfile &into, uint32_t *revision = nullptr) const;
     const UltimateProfile *Activate(uint32_t id, Status *status = nullptr);
     const UltimateProfile *ActiveProfile() const;
+    const ultimate_native::PreparedView *ActiveNativeView() const { return _active_native.view.valid ? &_active_native.view : nullptr; }
     uint32_t ActiveId() const;
     uint32_t ActiveRevision() const { return _active_revision; }
     TransactionResult Create(
@@ -232,6 +234,9 @@ class ProfileStore {
     Directory *_directory = nullptr;
     UltimateProfile _active_profile = UltimateProfile_init_default;
     UltimateProfile _candidate_profile = UltimateProfile_init_default;
+    ultimate_native::OwnedProgram _active_native;
+    ultimate_native::PayloadLease _active_native_lease;
+    uint32_t _native_generation = 0;
     uint32_t _active_id = 0;
     uint32_t _active_revision = 0;
     bool _ready = false;
