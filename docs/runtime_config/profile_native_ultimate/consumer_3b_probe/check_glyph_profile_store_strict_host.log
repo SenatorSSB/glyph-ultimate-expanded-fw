@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_strict_host.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "all_mutation_unknown_query_replay_reset=PASS\nprevious_abort_discard_negative_control=DETECTED reserved_id3_preserved=true changed_token10_executes=true\ndiscarded_abort_receipt_negative_control=PASS\nmigration_abort_preserves_existing_success_receipt=PASS\ncompleted_older_token_cannot_execute_again=PASS\nmigration_each_record_and_root_publication_fault=PASS\nmigration_completion_publication_fault_and_replay=PASS\nunsupported_envelope_schema_and_prior_fallback=PASS\nbootstrap_near_reserve_refuses_without_writes=PASS\ncompact_format_marker_prevents_erased_v2_downgrade=PASS\nmeasured_model total=524288 used=102400 free=421888 protected=143360 staging=45056 admissible=32\ntwenty_block_charged_profiles=PASS\nnear_reserve_create_update_duplicate_refusal=PASS\nupdate_duplicate_staging_and_previous_union=PASS\ngc_protected_revisions_deletion_and_interruptions=PASS\nall_accepted_name_lengths_reboot_duplicate=PASS\nlazy_health_corruption_fallback_missing=PASS\nfirstuse_and_exact_lost_generation2_no_reuse=PASS\nroot_absence_invalid_conflict_and_compact_identity=PASS\nrollback_older_valid_pair_cannot_reissue=PASS\nexact_f7_compact_v1_upgrade=PASS\nupgrade_interruption_no_writable_downgrade=PASS\nfull_store_and_migration_count_highwater_preflight=PASS\nauthenticated_streamed_migration_retry_completion=PASS\nmigration_changedsource_corrupt_missing_capacity=PASS\nmounted_read_range_shortread=PASS previous_bool_result_negative_control=DETECTED\npinned_littlefs total=524288 used=110592 free=413696 protected=143360 staging=45056 admissible=32\npinned_littlefs_actual_twenty_admission=PASS\nstrict_profile_store_cases=24 failures=0 ASAN_UBSAN=true physical_hardware=NOT_CLAIMED\nfrozen_negative_count_only=DETECTED\nfrozen_negative_lone_generation1_reuse=DETECTED\nfrozen_negative_changed_migration_retry=DETECTED\nfrozen_negative_32byte_name_truncation=DETECTED\nfrozen_production_negative_controls=4 source=f7ba82d4\nglyph_profile_store_strict_host: PASS\n",
+  "stderr": "",
+  "seconds": 4.39,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_strict_host.log"
+}

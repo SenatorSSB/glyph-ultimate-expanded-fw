@@ -1,0 +1,45 @@
+.pio/libdeps/glyph_mk6/FastLED/src/controller.h:165:17:virtual int CLEDController::size()	0	static
+config/glyph/common/include/glyph_overrides.hpp:1829:8:size_t init_secondary_backends_glyph(CommunicationBackend**&, CommunicationBackend*&, CommunicationBackendId, InputState&, InputSource**, size_t, Config&, const Pinout&)	32	static
+config/glyph/common/src/config.cpp:356:56:void __tcf_0()	0	static
+.pio/libdeps/glyph_mk6/FastLED/src/controller.h:649:9:int CPixelLEDController<RGB_ORDER, LANES, MASK>::lanes() [with EOrder RGB_ORDER = GRB; int LANES = 1; long unsigned int MASK = 4294967295]	0	static
+.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:222:22:uint16_t ClocklessController<DATA_PIN, T1, T2, T3, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>::getMaxRefreshRate() const [with unsigned char DATA_PIN = 11; int T1 = 33; int T2 = 82; int T3 = 49; EOrder RGB_ORDER = GRB; int XTRA0 = 0; bool FLIP = false; int WAIT_TIME = 50]	0	static
+include/input/SwitchMatrixInput.hpp:59:20:InputScanSpeed SwitchMatrixInput<num_rows, num_cols>::ScanSpeed() [with unsigned int num_rows = 4; unsigned int num_cols = 11]	0	static
+config/glyph/common/src/config.cpp:401:9:static constexpr void setup1()::<lambda()>::_FUN()	8	static
+config/glyph/common/src/config.cpp:402:9:static constexpr void setup1()::<lambda()>::_FUN()	8	static
+config/glyph/common/src/config.cpp:140:6:void {anonymous}::request_mode_destination(CommunicationBackendId, size_t, const Config&)	168	static
+config/glyph/common/src/config.cpp:254:13:static constexpr bool setup()::<lambda(void*, size_t, UltimateProfile&)>::_FUN(void*, size_t, UltimateProfile&)	8	static
+include/input/SwitchMatrixInput.hpp:52:5:SwitchMatrixInput<num_rows, num_cols>::~SwitchMatrixInput() [with unsigned int num_rows = 4; unsigned int num_cols = 11]	16	static
+include/input/SwitchMatrixInput.hpp:61:10:void SwitchMatrixInput<num_rows, num_cols>::UpdateInputs(InputState&) [with unsigned int num_rows = 4; unsigned int num_cols = 11]	48	static
+.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:48:26:void clockless_dma_complete_handler()	8	static
+.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:117:18:void ClocklessController<DATA_PIN, T1, T2, T3, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>::init() [with unsigned char DATA_PIN = 11; int T1 = 33; int T2 = 82; int T3 = 49; EOrder RGB_ORDER = GRB; int XTRA0 = 0; bool FLIP = false; int WAIT_TIME = 50]	72	static
+HAL/pico/include/comms/NeoPixelBackend.hpp:120:18:void NeoPixelBackend<data_pin, led_count>::ManualSendReport(CRGB*, uint8_t) [with unsigned char data_pin = 11; int led_count = 76]	24	static
+config/glyph/common/src/config.cpp:379:71:void __tcf_5()	8	static
+HAL/pico/include/comms/NeoPixelBackend.hpp:33:5:NeoPixelBackend<data_pin, led_count>::~NeoPixelBackend() [with unsigned char data_pin = 11; int led_count = 76]	8	static
+HAL/pico/include/comms/NeoPixelBackend.hpp:33:5:NeoPixelBackend<data_pin, led_count>::~NeoPixelBackend() [with unsigned char data_pin = 11; int led_count = 76]	8	static
+HAL/pico/include/comms/NeoPixelBackend.hpp:128:18:void NeoPixelBackend<data_pin, led_count>::SendReport() [with unsigned char data_pin = 11; int led_count = 76]	32	static
+HAL/pico/include/comms/NeoPixelBackend.hpp:35:18:void NeoPixelBackend<data_pin, led_count>::SetGameMode(InputMode*) [with unsigned char data_pin = 11; int led_count = 76]	48	static
+.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:224:18:void ClocklessController<DATA_PIN, T1, T2, T3, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>::showPixels(PixelController<RGB_ORDER>&) [with unsigned char DATA_PIN = 11; int T1 = 33; int T2 = 82; int T3 = 49; EOrder RGB_ORDER = GRB; int XTRA0 = 0; bool FLIP = false; int WAIT_TIME = 50]	88	static
+HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp:25:10:void DebouncedSwitchMatrixInput<num_rows, num_cols>::UpdateButtonState(InputState&, size_t, size_t, bool) [with unsigned int num_rows = 4; unsigned int num_cols = 11]	48	static
+config/glyph/common/src/config.cpp:381:66:void __tcf_6()	0	static
+config/glyph/common/src/config.cpp:357:39:void __tcf_1()	0	static
+config/glyph/common/src/config.cpp:358:22:void __tcf_2()	0	static
+config/glyph/common/src/config.cpp:373:69:void __tcf_3()	0	static
+config/glyph/common/src/config.cpp:378:5:void __tcf_4()	0	static
+include/input/SwitchMatrixInput.hpp:91:18:void SwitchMatrixInput<num_rows, num_cols>::UpdateButtonState(InputState&, size_t, size_t, bool) [with unsigned int num_rows = 4; unsigned int num_cols = 11]	16	static
+config/glyph/common/src/config.cpp:153:6:void {anonymous}::enter_recovery_configurator()	40	static
+HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp:8:7:DebouncedSwitchMatrixInput<4, 11>::~DebouncedSwitchMatrixInput()	16	static
+include/input/SwitchMatrixInput.hpp:52:5:SwitchMatrixInput<num_rows, num_cols>::~SwitchMatrixInput() [with unsigned int num_rows = 4; unsigned int num_cols = 11]	16	static
+HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp:8:7:virtual DebouncedSwitchMatrixInput<4, 11>::~DebouncedSwitchMatrixInput()	16	static
+include/core/RuntimeProfileDigest.hpp:13:23:static constexpr bool runtime_identity::PayloadDigest(const UltimateProfile&, uint8_t*)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)	184	static
+.pio/libdeps/glyph_mk6/FastLED/src/controller.h:626:18:void CPixelLEDController<RGB_ORDER, LANES, MASK>::showColor(const CRGB&, int, CRGB) [with EOrder RGB_ORDER = GRB; int LANES = 1; long unsigned int MASK = 4294967295]	128	static
+.pio/libdeps/glyph_mk6/FastLED/src/controller.h:635:18:void CPixelLEDController<RGB_ORDER, LANES, MASK>::show(const CRGB*, int, CRGB) [with EOrder RGB_ORDER = GRB; int LANES = 1; long unsigned int MASK = 4294967295]	128	static
+.pio/libdeps/glyph_mk6/FastLED/src/controller.h:99:18:virtual void CLEDController::clearLeds(int)	120	static
+include/core/RuntimeProfileDigest.hpp:8:13:bool runtime_identity::PayloadDigest(const UltimateProfile&, uint8_t*)	344	static
+config/glyph/common/include/glyph_overrides.hpp:1789:8:Config glyph_default_config()	48	static
+config/glyph/common/src/config.cpp:346:6:void setup1()	56	static
+config/glyph/common/src/config.cpp:429:6:void dummyloop()	8	static
+config/glyph/common/src/config.cpp:433:6:void loop1()	72	static
+config/glyph/common/src/config.cpp:512:1:cpp)	32	static
+config/glyph/common/src/config.cpp:512:1:cpp)	8	static
+config/glyph/common/src/config.cpp:169:6:void setup()	272	static
+config/glyph/common/src/config.cpp:317:6:void loop()	192	static

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_gp_config012_button_mask_characterization.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "glyph_gp_config012_button_mask_characterization: FAIL: C024 post-integration change outside validation/evidence paths\n",
+  "stderr": "",
+  "seconds": 2.37,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_gp_config012_button_mask_characterization.log"
+}

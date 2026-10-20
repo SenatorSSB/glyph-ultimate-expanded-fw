@@ -1,0 +1,40 @@
+{
+  "schema_name": "glyph_native_root_implementation_findings",
+  "schema_version": 1,
+  "review_scope": "Primary coordinator spot checks; does not replace fresh independent final source review",
+  "snapshot": "3b792fd7e38e6eda9b93d6cdec0a452b1c607817",
+  "findings": [
+    {
+      "id": "ROOT-NATIVE-FORCED-TABLE",
+      "kind": "OWNER_D6_CONFORMANCE",
+      "state": "SENT_TO_WRITER_NOT_YET_REVERIFIED",
+      "source": "tools/convert_glyph_native_ultimate_profile.py",
+      "observation": "forced_table_down_a appends fixed-coordinate effect gated on winning table while chosen table coordinates remain unchanged; also requires genuine Down remap/SOCD options.",
+      "required_correction": "Use ordinary nine-way table coordinates and normal selection; independent A; forced policy must not require Down contribution. Add emitted-table inspection and empty-preprocessing wins/loses tests."
+    },
+    {
+      "id": "ROOT-NATIVE-MIXED-LEGACY-SOURCE",
+      "kind": "EXECUTED_CONVERTER_NEGATIVE",
+      "state": "FAIL_SENT_TO_WRITER",
+      "fixture": "make_v3_artifact actual generated protobuf; profile[0].native_payload=b'invalid-native-in-legacy'",
+      "call": "convert(profile, GameModeConfig(mode_id=MODE_ULTIMATE), pb, historical_compatibility)",
+      "raw_stdout": "INVALID_MIXED_SOURCE_ACCEPTED 1980 3",
+      "observation": "Firmware rejects mixed legacy/tag8; offline legacy host validator ignores new field and converter silently drops it.",
+      "required_correction": "Reject mixed legacy source and preserve negative proof. Raw protobuf presence must be addressed where exact admission is promised."
+    },
+    {
+      "id": "ROOT-NATIVE-CORRESPONDENCE-REPORT",
+      "kind": "OWNER_PACKAGE_COMPLETENESS",
+      "state": "SENT_TO_WRITER_NOT_YET_REVERIFIED",
+      "observation": "Generic correspondence string/counts insufficient for concrete profile-specific full correspondence/deviation review.",
+      "required_correction": "Emit all-family/role/table/rule/binding/effect correspondence and literal clean-policy deviations."
+    }
+  ],
+  "corrected_root_assumption": {
+    "observation": "Coordinator initially treated duplicate physical remap entries as a validation restriction.",
+    "correction": "Writer directly inspected config_button_validation.cpp and InputMode.cpp: duplicate entries are admitted; source first-source handling governs one-physical-to-one-target behavior. No invented uniqueness rejection. Use distinct-source positive fixture plus admitted duplicate characterization."
+  },
+  "source_edits_by_root": false,
+  "device_actions": false,
+  "hardware_acceptance": null
+}

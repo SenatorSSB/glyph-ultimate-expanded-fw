@@ -56,7 +56,8 @@ def build_and_run(temp: Path, generated: Path, fixture: Path, original: bool, le
     compile_object(profile_source, profile, includes, ["-Dprofile_store=production_profile_store"] + (["-DGLYPH_STRICT_HARDENING_CANDIDATE=1"] if candidate_faults else []))
     objects.append(profile)
     for name, source in (("checked_unavailable", HOST / "checked_storage_unavailable.cpp"),
-                         ("validation", ROOT / "src/modes/UltimateNativeProfile.cpp", ROOT / "src/core/config_validation.cpp"),
+                         ("native_profile", ROOT / "src/modes/UltimateNativeProfile.cpp"),
+                         ("validation", ROOT / "src/core/config_validation.cpp"),
                          ("button", ROOT / "src/core/config_button_validation.cpp"),
                          ("usb", ROOT / "src/core/config_usb_default_validation.cpp"),
                          ("rgb", ROOT / "src/core/config_rgb_target_validation.cpp"),

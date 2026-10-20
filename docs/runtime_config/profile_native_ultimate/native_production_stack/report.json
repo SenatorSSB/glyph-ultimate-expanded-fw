@@ -1,0 +1,4062 @@
+{
+  "compiler": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+  "compiler_sha256": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c",
+  "optimization": "production compiledb flags, O3 project/LittleFS; no LTO",
+  "frames": [
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:61:17:virtual int arduino::Print::availableForWrite()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:96:18:virtual void arduino::Print::flush()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:128:18:virtual void packetio::COBSStream::flush()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:143:18:virtual void packetio::COBSStream::next()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:151:12:virtual size_t packetio::COBSStream::write(uint8_t)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:152:12:virtual size_t packetio::COBSStream::write(const uint8_t*, size_t)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:141:24:virtual CommunicationBackendId ConfiguratorBackend::BackendId()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/ConfiguratorBackend.hpp:32:7:ConfiguratorBackend::~ConfiguratorBackend()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:68:9:virtual int CoordinatedCdcStream::availableForWrite()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:75:10:virtual void CoordinatedCdcStream::flush()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/ConfiguratorBackend.hpp:32:7:virtual ConfiguratorBackend::~ConfiguratorBackend()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:128:18:virtual void packetio::COBSPrint::abort()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:39:9:virtual int CoordinatedCdcStream::read()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:88:17:virtual int packetio::COBSStream::read()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:114:12:virtual size_t CoordinatedCdcStream::write(const uint8_t*, size_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:132:17:virtual int packetio::COBSStream::available()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:114:17:virtual int packetio::COBSStream::peek()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:25:9:virtual int CoordinatedCdcStream::available()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:32:9:virtual int CoordinatedCdcStream::peek()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:56:12:virtual size_t {anonymous}::ProfilePacketWriter::write(const uint8_t*, size_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:108:18:virtual bool packetio::COBSPrint::end()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:93:20:virtual size_t packetio::COBSPrint::write(const uint8_t*, size_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/CoordinatedCdcStream.hpp:113:12:virtual size_t CoordinatedCdcStream::write(uint8_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:55:12:virtual size_t {anonymous}::ProfilePacketWriter::write(uint8_t)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "include/core/ProfileStoreRequestIdentity.hpp:18:23:static constexpr bool ProfileStoreRequestIdentity(ProfileStoreRequest&, ProfileStoreTransactionIdentity&)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)",
+      "bytes": 184,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:82:20:virtual size_t packetio::COBSPrint::write(uint8_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "include/core/ProfileStoreRequestIdentity.hpp:12:13:bool ProfileStoreRequestIdentity(ProfileStoreRequest&, ProfileStoreTransactionIdentity&)",
+      "bytes": 344,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:90:6:bool ConfiguratorBackend::WriteProfilePacket(Command, const uint8_t*, size_t, size_t*, bool*)",
+      "bytes": 344,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:124:1:ConfiguratorBackend::ConfiguratorBackend(InputState&, InputSource**, size_t, Config&, arduino::Stream&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:216:8:size_t ConfiguratorBackend::ReadPacket(uint8_t*, size_t)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:202:6:bool ConfiguratorBackend::HandleRuntimeIdentity()",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:272:5:int ConfiguratorBackend::ReadByte()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:279:6:void ConfiguratorBackend::SkipToNextPacket()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:283:6:bool ConfiguratorBackend::WritePacket(Command, uint8_t*, size_t)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:329:6:0()",
+      "bytes": 304,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:291:6:bool ConfiguratorBackend::HandleGetDeviceInfo()",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:312:6:bool ConfiguratorBackend::HandleGetConfig()",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:329:6:bool ConfiguratorBackend::HandleSetConfig()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:442:6:bool ConfiguratorBackend::HandleProfileStore()",
+      "bytes": 312,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:145:6:virtual void ConfiguratorBackend::SendReport()",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/ConfiguratorBackend.cpp:872:6:bool ConfiguratorBackend::HandleUnknownCommand(Command)",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:104:1:NintendoSwitchBackend::~NintendoSwitchBackend()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:110:24:virtual CommunicationBackendId NintendoSwitchBackend::BackendId()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:104:1:virtual NintendoSwitchBackend::~NintendoSwitchBackend()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:114:6:virtual void NintendoSwitchBackend::SendReport()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:66:1:NintendoSwitchBackend::NintendoSwitchBackend(InputState&, InputSource**, size_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:106:6:static void NintendoSwitchBackend::RegisterDescriptor()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/NintendoSwitchBackend.cpp:155:22:static switch_gamepad_hat_t NintendoSwitchBackend::GetHatPosition(bool, bool, bool, bool)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/XInputBackend.cpp:23:24:virtual CommunicationBackendId XInputBackend::BackendId()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/XInputBackend.hpp:10:7:XInputBackend::~XInputBackend()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/XInputBackend.cpp:27:6:virtual void XInputBackend::SendReport()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/XInputBackend.hpp:10:7:virtual XInputBackend::~XInputBackend()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/comms/XInputBackend.cpp:9:1:XInputBackend::XInputBackend(InputState&, InputSource**, size_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:35:8:lfs_t* CheckedStorage::{anonymous}::mount()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:84:8:CheckedStorage::Result CheckedStorage::Open(File&, const char*, bool, Kind)",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:97:8:CheckedStorage::Result CheckedStorage::Read(File&, void*, size_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:102:8:CheckedStorage::Result CheckedStorage::Write(File&, const void*, size_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:109:8:CheckedStorage::Result CheckedStorage::Seek(File&, size_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:114:8:CheckedStorage::Result CheckedStorage::Sync(File&)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:119:8:CheckedStorage::Result CheckedStorage::Close(File&)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:128:8:CheckedStorage::Result CheckedStorage::Stat(const char*, size_t*, Kind)",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:136:8:CheckedStorage::Result CheckedStorage::Remove(const char*, Kind)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:144:8:CheckedStorage::Result CheckedStorage::Rename(const char*, const char*, Kind)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:150:8:CheckedStorage::Result CheckedStorage::Capacity(Geometry&)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:163:8:CheckedStorage::Result CheckedStorage::Enumerate(const char*, Visitor, void*)",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:180:8:CheckedStorage::Result CheckedStorage::WriteFile(const char*, const uint8_t*, size_t, Kind)",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/CheckedStorage.cpp:187:8:CheckedStorage::Result CheckedStorage::ReadFile(const char*, uint8_t*, size_t, Kind)",
+      "bytes": 208,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:61:17:virtual int arduino::Print::availableForWrite()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:16:9:virtual int CheckedStorageFile::available()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:25:12:virtual size_t CheckedStorageFile::write(const uint8_t*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:31:10:virtual void CheckedStorageFile::flush()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:63:24:static constexpr bool {anonymous}::compare_config_bytes(CheckedStorageFile&, const Config&, size_t)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:40:6:bool {anonymous}::read_config_file(pb_istream_t*, pb_byte_t*, size_t)",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:24:12:virtual size_t CheckedStorageFile::write(uint8_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:17:9:virtual int CheckedStorageFile::read()",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:60:6:bool {anonymous}::compare_config_bytes(CheckedStorageFile&, const Config&, size_t)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:23:9:virtual int CheckedStorageFile::peek()",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:92:6:bool {anonymous}::hash_file(const char*, uint8_t*)",
+      "bytes": 656,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:279:6:0(uint8_t*)",
+      "bytes": 280,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:9:5:CheckedStorageFile::CheckedStorageFile(const char*, const char*)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:18:9:int CheckedStorageFile::read(uint8_t*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:33:10:bool CheckedStorageFile::seek(size_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/core/CheckedStorageFile.hpp:36:10:bool CheckedStorageFile::close()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:120:1:Persistence::Persistence()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:127:1:Persistence::~Persistence()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:133:6:bool Persistence::IsAvailable() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:137:10:uint32_t Persistence::ConfigGeneration(const Config&) const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:142:6:bool Persistence::SetValidator(ConfigSemanticValidator)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:153:6:bool Persistence::ValidateConfig(const Config&, ConfigValidationError&) const",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:279:6:bool Persistence::LegacySourceIdentity(uint8_t*)",
+      "bytes": 280,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:288:6:bool Persistence::CaptureLegacySource(uint8_t*)",
+      "bytes": 608,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:333:25:Persistence::LoadResult Persistence::ReadLegacyProfile(size_t, UltimateProfile&)",
+      "bytes": 296,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:370:25:Persistence::LoadResult Persistence::LoadConfigChecked(Config&)",
+      "bytes": 456,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:270:25:Persistence::SaveResult Persistence::ReconcileConfig(Config&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:366:6:bool Persistence::LoadConfig(Config&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:444:6:bool Persistence::CheckSavedConfig()",
+      "bytes": 272,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:462:8:size_t Persistence::LoadConfigRaw(arduino::Print&, bool)",
+      "bytes": 280,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:497:6:bool Persistence::CheckSavedConfig(CheckedStorageFile&, LoadResult*)",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:194:6:bool Persistence::SaveConfig(Config&)",
+      "bytes": 336,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:172:25:Persistence::SaveResult Persistence::SaveConfigIfGenerationMatches(Config&, uint64_t)",
+      "bytes": 288,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:537:24:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/Persistence.cpp:537:24:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:147:36:virtual ProfileStoreStorageFailure {anonymous}::MountedStorage::LastFailure() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:466:27:void __tcf_0()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:112:11:{anonymous}::MountedStorage::~MountedStorage()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:176:14:virtual bool {anonymous}::MountedStorage::Enumerate(CheckedStorage::Visitor, void*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:172:14:virtual bool {anonymous}::MountedStorage::Geometry(CheckedStorage::Geometry&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:159:14:virtual bool {anonymous}::MountedStorage::ReadRange(const char*, size_t, uint8_t*, size_t)",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:157:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRemove(const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:129:14:virtual bool {anonymous}::MountedStorage::Remove(const char*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:153:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRename(const char*, const char*, {anonymous}::Kind)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:131:14:virtual bool {anonymous}::MountedStorage::Rename(const char*, const char*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:149:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::Probe(const char*, size_t*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:127:14:virtual bool {anonymous}::MountedStorage::Exists(const char*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:122:16:virtual size_t {anonymous}::MountedStorage::Size(const char*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:112:11:virtual {anonymous}::MountedStorage::~MountedStorage()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1742:47:static constexpr bool ProfileStore::ImportLegacy(const Config&, uint32_t*, size_t)::<lambda(void*, size_t, UltimateProfile&)>::_FUN(void*, size_t, UltimateProfile&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:216:12:0(ProfileStoreStorage&, const char*, const char*, const uint8_t*, size_t, Kind, ProfileStoreIoStage*)",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:317:10:0(const ProfileStore::Directory&, uint8_t*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:492:27:void __tcf_1()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:135:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedWrite(const char*, const uint8_t*, size_t, {anonymous}::Kind)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:114:14:virtual bool {anonymous}::MountedStorage::Write(const char*, const uint8_t*, size_t)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:141:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRead(const char*, uint8_t*, size_t, {anonymous}::Kind)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:118:14:virtual bool {anonymous}::MountedStorage::Read(const char*, uint8_t*, size_t)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:295:10:bool {anonymous}::Structural(const ProfileStore::Directory&)",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:358:10:bool {anonymous}::DecodeDirectory(const uint8_t*, size_t, ProfileStore::Directory*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:82:27:static constexpr bool {anonymous}::HashMessage(const pb_msgdesc_t*, const void*, uint8_t*)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)",
+      "bytes": 184,
+      "kind": "static"
+    },
+    {
+      "function": "include/core/Sha256.hpp:20:10:void Sha256::Final(uint8_t*)",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:445:10:bool {anonymous}::SameDirectory(const ProfileStore::Directory&, const ProfileStore::Directory&)",
+      "bytes": 448,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1519:10:void {anonymous}::Receipt(ProfileStore::Directory&)",
+      "bytes": 352,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1503:10:bool {anonymous}::HashFile(ProfileStoreStorage&, const char*, uint8_t*)",
+      "bytes": 456,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1543:37:ProfileStoreTransactionIdentity {anonymous}::HistoricalIdentity(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, const UltimateProfile*, const char*, uint32_t)",
+      "bytes": 448,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:463:1:ProfileStore::ProfileStore(ProfileStoreStorage*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:517:6:bool ProfileStore::ReadRoot(uint8_t, Directory&) const",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:525:6:bool ProfileStore::LoadControl(Directory&, uint32_t&) const",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:536:6:bool ProfileStore::WriteControl(const Directory&, uint32_t)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:741:6:bool ProfileStore::LoadDirectory()",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:551:6:bool ProfileStore::InitializeV2(const Directory&)",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:778:6:bool ProfileStore::PublishDirectory(const Directory&)",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:876:6:0()",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:808:6:bool ProfileStore::IsReady() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:812:6:bool ProfileStore::IsReadOnlyRecovery() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:816:6:bool ProfileStore::MigrationPending() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:820:10:uint32_t ProfileStore::LegacyMigrationId(size_t) const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:824:10:uint32_t ProfileStore::Incarnation() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:828:10:uint32_t ProfileStore::Generation() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:832:10:uint64_t ProfileStore::LastTransactionToken() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:836:8:size_t ProfileStore::Count() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:840:28:const ProfileStore::Entry* ProfileStore::EntryAt(size_t) const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:844:24:const UltimateProfile* ProfileStore::ActiveProfile() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:848:10:uint32_t ProfileStore::ActiveId() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:852:5:int ProfileStore::Find(uint32_t) const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:859:6:bool ProfileStore::ValidateProfile(const UltimateProfile&) const",
+      "bytes": 152,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:864:6:void ProfileStore::ResetDiagnostic()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:868:13:const char* ProfileStore::LastDiagnostic() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:872:6:bool ProfileStore::IsTransactionUncertain() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:876:6:bool ProfileStore::ReconcileTransaction()",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:920:10:uint32_t ProfileStore::HealthFlags() const",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:927:6:bool ProfileStore::WriteProfile(uint32_t, uint32_t, const UltimateProfile&)",
+      "bytes": 256,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:960:6:bool ProfileStore::ReadProfile(uint32_t, uint32_t, UltimateProfile&, bool*) const",
+      "bytes": 232,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:581:6:bool ProfileStore::Bootstrap(bool)",
+      "bytes": 480,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:465:6:bool ProfileStore::Begin(uint32_t, uint32_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:491:6:bool ProfileStore::BeginRecovery(uint32_t, uint32_t)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1002:22:ProfileStore::Status ProfileStore::Read(uint32_t, UltimateProfile&, uint32_t*) const",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1016:24:const UltimateProfile* ProfileStore::Activate(uint32_t, Status*)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1062:28:ProfileStore::RecordHealth ProfileStore::Health(uint32_t) const",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1083:6:bool ProfileStore::LoadProtectedRoot() const",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1099:6:bool ProfileStore::Protected(uint32_t, uint32_t) const",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1247:47:static constexpr bool ProfileStore::CollectGarbage()::<lambda(void*, const CheckedStorage::Entry&)>::_FUN(void*, const CheckedStorage::Entry&)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1115:28:ProfileStore::CapacityInfo ProfileStore::Capacity() const",
+      "bytes": 320,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1229:22:ProfileStore::Status ProfileStore::CollectGarbage()",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1276:6:bool ProfileStore::Admit(size_t, size_t)",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1618:22:0(const Config&, const uint8_t*, LegacyReader, void*, uint32_t*, size_t)",
+      "bytes": 272,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1289:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint64_t) const",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1299:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(const TransactionIdentity&) const",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1307:33:ProfileStore::TransactionResult ProfileStore::Start(const TransactionIdentity&) const",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1328:33:ProfileStore::TransactionResult ProfileStore::Commit(Directory&, uint32_t, uint32_t, const TransactionIdentity&)",
+      "bytes": 160,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1346:33:ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)",
+      "bytes": 208,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1379:33:ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, const TransactionIdentity&)",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1411:33:ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1432:33:ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char*, uint32_t, const TransactionIdentity&)",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1456:33:ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1477:33:ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1576:6:bool ProfileStore::PrepareCompact(Config&) const",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1601:6:bool ProfileStore::ValidateCompactReceipt(const Config&) const",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1618:22:ProfileStore::Status ProfileStore::ImportLegacyStream(const Config&, const uint8_t*, LegacyReader, void*, uint32_t*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1711:22:ProfileStore::Status ProfileStore::ImportLegacy(const Config&, uint32_t*, size_t)",
+      "bytes": 392,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1751:22:ProfileStore::Status ProfileStore::CompleteMigration(const Config&)",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1785:33:ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, uint32_t, uint32_t)",
+      "bytes": 264,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1795:33:ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, uint32_t, uint32_t)",
+      "bytes": 248,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1805:33:ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, uint32_t, uint32_t)",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1816:33:ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char*, uint32_t, uint32_t, uint32_t)",
+      "bytes": 152,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1826:33:ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1836:33:ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1846:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint32_t, uint32_t) const",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1850:33:ProfileStore::TransactionResult ProfileStore::BeginMutation(uint32_t, uint32_t) const",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1856:6:void ProfileStore::Finish(TransactionResult*, uint32_t, uint32_t) const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/src/core/ProfileStore.cpp:1860:27:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:8:13:load_descriptor_values",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:156:6:pb_field_iter_begin",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:166:6:pb_field_iter_begin_extension",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:188:6:pb_field_iter_next",
+      "bytes": 28,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:195:6:pb_field_iter_find",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:246:6:pb_field_iter_find_extension",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:290:6:pb_field_iter_begin_const",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:295:6:pb_field_iter_begin_extension_const",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c:300:6:pb_default_field_callback",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:69:25:buf_read",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:174:25:pb_decode_varint32_eof",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:82:18:pb_read",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:143:14:pb_istream_from_buffer",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:240:18:pb_decode_varint32",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:246:18:pb_decode_varint",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:294:18:pb_decode_tag",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:311:18:pb_skip_field",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1027:25:pb_decode_inner",
+      "bytes": 152,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:405:25:decode_basic_field",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:835:25:decode_field",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:988:13:pb_message_set_to_defaults",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:365:18:pb_make_string_substream",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:386:18:pb_close_string_substream",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1191:18:pb_decode_ex",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1219:18:pb_decode",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1373:6:pb_release",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1383:6:pb_decode_bool",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1393:6:pb_decode_svarint",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1407:6:pb_decode_fixed32",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c:1430:6:pb_decode_fixed64",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:53:25:buf_write",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:253:25:pb_check_proto3_default_value",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:72:14:pb_ostream_from_buffer",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:93:18:pb_write",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:616:18:pb_encode_varint",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:792:25:pb_enc_varint",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:634:18:pb_encode_svarint",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:646:18:pb_encode_fixed32",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:663:18:pb_encode_fixed64",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:684:18:pb_encode_tag",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:690:6:pb_encode_tag_for_field",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:725:18:pb_encode_string",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:733:18:pb_encode_submessage",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:371:25:encode_basic_field.part.0",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:427:25:encode_field",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:521:18:pb_encode",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:566:6:pb_get_encoded_size",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c:545:18:pb_encode_ex",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:6:13:bool pb_print_write(pb_ostream_t*, const pb_byte_t*, size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:16:13:bool pb_stream_read(pb_istream_t*, pb_byte_t*, size_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:12:14:pb_ostream_s as_pb_ostream(arduino::Print&)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:26:14:pb_istream_s as_pb_istream(arduino::Stream&, size_t)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:34:14:pb_istream_s as_pb_istream(arduino::Stream&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.h:77:21:virtual ssize_t fs::File::streamRemaining()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:38:17:virtual int fs::FileImpl::availableForWrite()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:51:18:virtual void fs::FileImpl::setTimeCallback(time_t (*)())",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:58:20:virtual time_t fs::FileImpl::getLastWrite()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:62:20:virtual time_t fs::FileImpl::getCreationTime()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:92:20:virtual time_t fs::DirImpl::fileTime()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:95:20:virtual time_t fs::DirImpl::fileCreationTime()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:106:18:virtual void fs::DirImpl::setTimeCallback(time_t (*)())",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:130:18:virtual bool fs::FSImpl::gc()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:133:18:virtual bool fs::FSImpl::check()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:136:20:virtual time_t fs::FSImpl::getCreationTime()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:143:18:virtual void fs::FSImpl::setTimeCallback(time_t (*)())",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:28:8:virtual size_t fs::File::write(uint8_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:36:8:virtual size_t fs::File::write(const uint8_t*, size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:44:5:virtual int fs::File::available()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:61:5:virtual int fs::File::read()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:93:6:virtual void fs::File::flush()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:631:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:618:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:52:5:virtual int fs::File::availableForWrite()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:611:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:82:5:virtual int fs::File::peek()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:74:5:int fs::File::read(uint8_t*, size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:101:6:bool fs::File::seek(uint32_t, fs::SeekMode)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:109:8:size_t fs::File::position() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:117:8:size_t fs::File::size() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:125:6:void fs::File::close()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:132:1:fs::File::operator bool() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:136:6:bool fs::File::truncate(uint32_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:144:13:const char* fs::File::name() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:152:13:const char* fs::File::fullName() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:160:6:bool fs::File::isFile() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:168:6:bool fs::File::isDirectory() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:192:8:arduino::String fs::File::readString()",
+      "bytes": 272,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:204:8:time_t fs::File::getLastWrite()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:212:8:time_t fs::File::getCreationTime()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:220:6:void fs::File::setTimeCallback(time_t (*)())",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:228:6:fs::File fs::Dir::openFile(const char*)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:245:8:arduino::String fs::Dir::fileName()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:253:8:time_t fs::Dir::fileTime()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:260:8:time_t fs::Dir::fileCreationTime()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:267:8:size_t fs::Dir::fileSize()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:275:6:bool fs::Dir::isFile() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:283:6:bool fs::Dir::isDirectory() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:291:6:bool fs::Dir::next()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:299:6:bool fs::Dir::rewind()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:307:6:void fs::Dir::setTimeCallback(time_t (*)())",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:316:6:bool fs::FS::setConfig(const fs::FSConfig&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:324:6:bool fs::FS::begin()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:335:6:void fs::FS::end()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:341:6:bool fs::FS::gc()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:348:6:bool fs::FS::check()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:355:6:bool fs::FS::format()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:362:6:bool fs::FS::info(fs::FSInfo&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:369:6:bool fs::FS::info64(fs::FSInfo64&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:376:6:fs::File fs::FS::open(const arduino::String&, const char*)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:380:6:fs::File fs::FS::open(const char*, const char*)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:396:6:bool fs::FS::exists(const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:403:6:bool fs::FS::exists(const arduino::String&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:407:5:fs::Dir fs::FS::openDir(const char*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:176:6:void fs::File::rewindDirectory()",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:184:6:fs::File fs::File::openNextFile()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:417:5:fs::Dir fs::FS::openDir(const arduino::String&)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:421:6:bool fs::FS::remove(const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:428:6:bool fs::FS::remove(const arduino::String&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:432:6:bool fs::FS::rmdir(const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:439:6:bool fs::FS::rmdir(const arduino::String&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:443:6:bool fs::FS::mkdir(const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:450:6:bool fs::FS::mkdir(const arduino::String&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:454:6:bool fs::FS::rename(const char*, const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:461:6:bool fs::FS::rename(const arduino::String&, const arduino::String&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:465:8:time_t fs::FS::getCreationTime()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:472:6:void fs::FS::setTimeCallback(time_t (*)())",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.cpp:29:6:static void RP2040::enableDoubleResetBootloader()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:61:17:virtual int arduino::Print::availableForWrite()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:96:18:virtual void arduino::Print::flush()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:32:8:virtual size_t arduino::Print::write(const uint8_t*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:331:8:0(long long unsigned int, uint8_t)",
+      "bytes": 120,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:42:8:size_t arduino::Print::print(const arduino::__FlashStringHelper*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:59:8:size_t arduino::Print::print(const arduino::String&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:64:8:size_t arduino::Print::print(const char*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:69:8:size_t arduino::Print::print(char)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:111:8:size_t arduino::Print::print(long long int, int)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:127:8:size_t arduino::Print::print(long long unsigned int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:138:8:size_t arduino::Print::println(const arduino::__FlashStringHelper*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:145:8:size_t arduino::Print::print(const arduino::Printable&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:150:8:size_t arduino::Print::println()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:155:8:size_t arduino::Print::println(const arduino::String&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:162:8:size_t arduino::Print::println(const char*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:169:8:size_t arduino::Print::println(char)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:211:8:size_t arduino::Print::println(long long int, int)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:218:8:size_t arduino::Print::println(long long unsigned int, int)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:232:8:size_t arduino::Print::println(const arduino::Printable&)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:239:8:)",
+      "bytes": 108,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:263:8:)",
+      "bytes": 108,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:288:8:size_t arduino::Print::printNumber(long unsigned int, uint8_t)",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:89:8:size_t arduino::Print::print(long int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:183:8:size_t arduino::Print::println(int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:197:8:size_t arduino::Print::println(long int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:105:8:size_t arduino::Print::print(long unsigned int, int)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:84:8:size_t arduino::Print::print(unsigned int, int)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:74:8:size_t arduino::Print::print(unsigned char, int)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:204:8:size_t arduino::Print::println(long unsigned int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:176:8:size_t arduino::Print::println(unsigned char, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:190:8:size_t arduino::Print::println(unsigned int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:79:8:size_t arduino::Print::print(int, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:331:8:size_t arduino::Print::printULLNumber(long long unsigned int, uint8_t)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:389:8:size_t arduino::Print::printFloat(double, int)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:133:8:size_t arduino::Print::print(double, int)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.cpp:225:8:size_t arduino::Print::println(double, int)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:33:5:int arduino::Stream::timedRead()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:45:5:int arduino::Stream::timedPeek()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:58:5:int arduino::Stream::peekNextDigit(arduino::LookaheadMode, bool)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:89:6:void arduino::Stream::setTimeout(long unsigned int)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:95:7:bool arduino::Stream::find(const char*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:102:6:bool arduino::Stream::find(const char*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:116:6:bool arduino::Stream::findUntil(const char*, size_t, const char*, size_t)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:108:7:bool arduino::Stream::findUntil(const char*, const char*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:132:6:long int arduino::Stream::parseInt(arduino::LookaheadMode, char)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:161:7:float arduino::Stream::parseFloat(arduino::LookaheadMode, char)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:205:8:size_t arduino::Stream::readBytes(char*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:222:8:size_t arduino::Stream::readBytesUntil(char, char*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:234:8:arduino::String arduino::Stream::readString()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:246:8:arduino::String arduino::Stream::readStringUntil(char)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Stream.cpp:258:5:int arduino::Stream::findMulti(MultiTarget*, int)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:333:17:static void RP2040::_SystickHandler()",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:133:17:static void _MFIFO::_irq()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:59:10:void _MFIFO::registerCore()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:52:17:void main1()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h:47:10:void _MFIFO::begin(int)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:46:6:void initVariant()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:64:13:void __loop()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:81:16:int main()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:160:26:long unsigned int ulMainGetRunTimeCounterValue()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:164:17:void __register_impure_ptr(_reent*)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:173:27:_reent* __wrap___getreent()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:183:6:void hexdump(const void*, uint32_t, uint8_t)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:206:30:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp:206:30:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:52:10:virtual uint16_t Adafruit_USBD_CDC::getInterfaceDescriptor(uint8_t, uint8_t*, uint16_t)",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:165:5:virtual int Adafruit_USBD_CDC::available()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:181:5:virtual int Adafruit_USBD_CDC::peek()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:190:5:virtual int Adafruit_USBD_CDC::read()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:207:6:virtual void Adafruit_USBD_CDC::flush()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:237:5:virtual int Adafruit_USBD_CDC::availableForWrite()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:217:8:virtual size_t Adafruit_USBD_CDC::write(const uint8_t*, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:215:8:virtual size_t Adafruit_USBD_CDC::write(uint8_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.h:49:20:virtual uint16_t Adafruit_USBD_CDC::_ZThn16_N17Adafruit_USBD_CDC22getInterfaceDescriptorEhPht(uint8_t, uint8_t*, uint16_t)",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:45:1:Adafruit_USBD_CDC::Adafruit_USBD_CDC()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:68:6:void Adafruit_USBD_CDC::begin(uint32_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:86:6:void Adafruit_USBD_CDC::begin(uint32_t, uint8_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:91:6:void Adafruit_USBD_CDC::end()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:98:10:uint32_t Adafruit_USBD_CDC::baud()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:109:9:uint8_t Adafruit_USBD_CDC::stopbits()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:120:9:uint8_t Adafruit_USBD_CDC::paritytype()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:131:9:uint8_t Adafruit_USBD_CDC::numbits()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:142:5:int Adafruit_USBD_CDC::dtr()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:150:1:Adafruit_USBD_CDC::operator bool()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:198:8:size_t Adafruit_USBD_CDC::read(uint8_t*, size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:248:6:void tud_cdc_line_state_cb(uint8_t, bool, bool)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:264:1:cpp)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:125:6:tud_cdc_n_connected",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:131:9:tud_cdc_n_get_line_state",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:136:6:tud_cdc_n_get_line_coding",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:141:6:tud_cdc_n_set_wanted_char",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:150:10:tud_cdc_n_available",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:155:10:tud_cdc_n_read",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:163:6:tud_cdc_n_peek",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:168:6:tud_cdc_n_read_flush",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:193:10:tud_cdc_n_write_flush",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:178:10:tud_cdc_n_write",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:224:10:tud_cdc_n_write_available",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:229:6:tud_cdc_n_write_clear",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:237:6:cdcd_init",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:266:6:cdcd_reset",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:281:10:cdcd_open",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:347:6:cdcd_control_xfer_cb",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c:429:6:cdcd_xfer_cb",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:68:6:tu_fifo_config",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:584:10:tu_fifo_count",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:602:6:tu_fifo_empty",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:620:6:tu_fifo_full",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:638:10:tu_fifo_remaining",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:664:6:tu_fifo_overflowed",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:670:6:tu_fifo_correct_read_pointer",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:693:6:tu_fifo_read",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:724:10:tu_fifo_read_n",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:729:10:tu_fifo_read_n_const_addr_full_words",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:747:6:tu_fifo_peek",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:770:10:tu_fifo_peek_n",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:794:6:tu_fifo_write",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:836:10:tu_fifo_write_n",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:856:10:tu_fifo_write_n_const_addr_full_words",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:869:6:tu_fifo_clear",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:892:6:tu_fifo_set_overwritable",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:921:6:tu_fifo_advance_write_pointer",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:942:6:tu_fifo_advance_read_pointer",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:962:6:tu_fifo_get_read_info",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c:1030:6:tu_fifo_get_write_info",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:358:14:tud_speed_get",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:363:6:tud_connected",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:368:6:tud_mounted",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:373:6:tud_suspended",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:378:6:tud_remote_wakeup",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:386:6:tud_disconnect",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:393:6:tud_connect",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:403:6:tud_inited",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:407:6:tud_init",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:473:6:tud_task_event_ready",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:499:6:tud_task_ext",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1105:24:dcd_event_handler",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1170:6:usbd_int_set",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1182:6:usbd_open_edpt_pair",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1206:6:usbd_defer_func",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1221:6:usbd_edpt_open",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1231:6:usbd_edpt_claim",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1245:6:usbd_edpt_release",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1256:6:usbd_edpt_xfer",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1293:6:usbd_edpt_xfer_fifo",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1324:6:usbd_edpt_busy",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1334:6:usbd_edpt_stall",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1351:6:usbd_edpt_clear_stall",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1368:6:usbd_edpt_stalled",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1384:6:usbd_edpt_close",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1402:6:usbd_sof_enable",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1411:6:usbd_edpt_iso_alloc",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c:1421:6:usbd_edpt_iso_activate",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:246:13:dcd_rp2040_irq",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:430:6:dcd_int_enable",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:436:6:dcd_int_disable",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:442:6:dcd_set_address",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:451:6:dcd_remote_wakeup",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:463:6:dcd_disconnect",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:470:6:dcd_connect",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:393:6:dcd_init",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:476:6:dcd_sof_enable",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:499:6:dcd_edpt0_status_complete",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:511:6:dcd_edpt_open",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:518:6:dcd_edpt_close_all",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:526:6:dcd_edpt_xfer",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:533:6:dcd_edpt_stall",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:550:6:dcd_edpt_clear_stall",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:564:6:dcd_edpt_close",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c:572:6:dcd_int_handler",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:46:6:tusb_init",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:61:6:tusb_inited",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:80:17:tu_desc_find",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:90:17:tu_desc_find2",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:100:17:tu_desc_find3",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:115:6:tu_edpt_claim",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:135:6:tu_edpt_release",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:153:6:tu_edpt_validate",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:192:6:tu_edpt_bind_driver",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:211:10:tu_desc_get_interface_total_len",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:245:6:tu_edpt_stream_init",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:320:6:tu_edpt_stream_write_zlp_if_needed",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:331:10:tu_edpt_stream_write_xfer",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:355:10:tu_edpt_stream_write",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:375:10:tu_edpt_stream_read_xfer",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c:408:10:tu_edpt_stream_read",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:38:17:virtual int fs::FileImpl::availableForWrite()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:51:18:virtual void fs::FileImpl::setTimeCallback(time_t (*)())",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:106:18:virtual void fs::DirImpl::setTimeCallback(time_t (*)())",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:130:18:virtual bool fs::FSImpl::gc()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:133:18:virtual bool fs::FSImpl::check()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:143:18:virtual void fs::FSImpl::setTimeCallback(time_t (*)())",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:167:10:virtual bool littlefs_impl::LittleFSImpl::setConfig(const fs::FSConfig&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:504:17:virtual const char* littlefs_impl::LittleFSFileImpl::fullName() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:571:17:virtual const char* littlefs_impl::LittleFSDirImpl::fileName()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:578:12:virtual size_t littlefs_impl::LittleFSDirImpl::fileSize()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:618:10:virtual bool littlefs_impl::LittleFSDirImpl::isFile() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:622:10:virtual bool littlefs_impl::LittleFSDirImpl::isDirectory() const",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:206:5:static int littlefs_impl::LittleFSImpl::lfs_flash_sync(const lfs_config*)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:419:11:std::_Sp_counted_ptr<littlefs_impl::LittleFSImpl*, __gnu_cxx::_S_single>::~_Sp_counted_ptr()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:435:7:void* std::_Sp_counted_ptr<_Ptr, _Lp>::_M_get_deleter(const std::type_info&) [with _Ptr = littlefs_impl::LittleFSImpl*; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = littlefs_impl::LittleFSDirImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = lfs_dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:611:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = lfs_dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = littlefs_impl::LittleFSFileImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = lfs_file; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:611:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = lfs_file; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:523:7:std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::~_Sp_counted_deleter() [with _Ptr = char*; _Deleter = std::default_delete<char []>; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:538:7:void* std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Ptr = char*; _Deleter = std::default_delete<char []>; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:155:10:virtual bool littlefs_impl::LittleFSImpl::mkdir(const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:389:10:virtual void littlefs_impl::LittleFSFileImpl::flush()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:631:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = lfs_file; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:631:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = littlefs_impl::LittleFSFileImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:631:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = lfs_dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:631:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = littlefs_impl::LittleFSDirImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = lfs_file; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:419:11:virtual std::_Sp_counted_ptr<littlefs_impl::LittleFSImpl*, __gnu_cxx::_S_single>::~_Sp_counted_ptr()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:431:7:void std::_Sp_counted_ptr<_Ptr, _Lp>::_M_destroy() [with _Ptr = littlefs_impl::LittleFSImpl*; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = littlefs_impl::LittleFSDirImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = lfs_dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = littlefs_impl::LittleFSFileImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:523:7:std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::~_Sp_counted_deleter() [with _Ptr = char*; _Deleter = std::default_delete<char []>; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:618:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = lfs_file; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:618:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = littlefs_impl::LittleFSDirImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:618:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = lfs_dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:618:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = littlefs_impl::LittleFSFileImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:530:7:void std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::_M_destroy() [with _Ptr = char*; _Deleter = std::default_delete<char []>; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:192:10:virtual void littlefs_impl::LittleFSImpl::end()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:75:5:littlefs_impl::LittleFSImpl::~LittleFSImpl()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:75:5:virtual littlefs_impl::LittleFSImpl::~LittleFSImpl()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:626:10:virtual bool littlefs_impl::LittleFSDirImpl::rewind()",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:636:10:virtual bool littlefs_impl::LittleFSDirImpl::next()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:246:12:virtual time_t littlefs_impl::LittleFSImpl::getCreationTime()",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:483:12:virtual time_t littlefs_impl::LittleFSFileImpl::getCreationTime()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:472:12:virtual time_t littlefs_impl::LittleFSFileImpl::getLastWrite()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:84:10:virtual bool littlefs_impl::LittleFSImpl::exists(const char*)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:494:17:virtual const char* littlefs_impl::LittleFSFileImpl::name() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:437:10:virtual bool littlefs_impl::LittleFSFileImpl::truncate(uint32_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:420:12:virtual size_t littlefs_impl::LittleFSFileImpl::position() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:376:9:virtual int littlefs_impl::LittleFSFileImpl::read(uint8_t*, size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:364:12:virtual size_t littlefs_impl::LittleFSFileImpl::write(const uint8_t*, size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:526:7:void std::_Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp>::_M_dispose() [with _Ptr = char*; _Deleter = std::default_delete<char []>; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:173:5:static int littlefs_impl::LittleFSImpl::lfs_flash_read(const lfs_config*, lfs_block_t, lfs_off_t, void*, lfs_size_t)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:132:10:virtual bool littlefs_impl::LittleFSImpl::remove(const char*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:93:10:virtual bool littlefs_impl::LittleFSImpl::rename(const char*, const char*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.h:242:19:static time_t fs::FS::_defaultTimeCB()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:181:5:static int littlefs_impl::LittleFSImpl::lfs_flash_prog(const lfs_config*, lfs_block_t, lfs_off_t, const void*, lfs_size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:105:10:virtual bool littlefs_impl::LittleFSImpl::info(fs::FSInfo&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:433:12:virtual size_t littlefs_impl::LittleFSFileImpl::size() const",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:449:10:virtual void littlefs_impl::LittleFSFileImpl::close()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:558:17:virtual fs::FileImplPtr littlefs_impl::LittleFSDirImpl::openFile(fs::OpenMode, fs::AccessMode)",
+      "bytes": 56,
+      "kind": "dynamic"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:508:10:virtual bool littlefs_impl::LittleFSFileImpl::isFile() const",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:517:10:virtual bool littlefs_impl::LittleFSFileImpl::isDirectory() const",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:118:18:virtual bool littlefs_impl::LittleFSImpl::info64(fs::FSInfo64&)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:427:7:void std::_Sp_counted_ptr<_Ptr, _Lp>::_M_dispose() [with _Ptr = littlefs_impl::LittleFSImpl*; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:194:5:static int littlefs_impl::LittleFSImpl::lfs_flash_erase(const lfs_config*, lfs_block_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:163:10:virtual bool littlefs_impl::LittleFSImpl::rmdir(const char*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:585:12:virtual time_t littlefs_impl::LittleFSDirImpl::fileTime()",
+      "bytes": 56,
+      "kind": "dynamic"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:200:10:virtual bool littlefs_impl::LittleFSImpl::format()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:552:5:littlefs_impl::LittleFSDirImpl::~LittleFSDirImpl()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:552:5:virtual littlefs_impl::LittleFSDirImpl::~LittleFSDirImpl()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:611:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = littlefs_impl::LittleFSDirImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:358:5:littlefs_impl::LittleFSFileImpl::~LittleFSFileImpl()",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:358:5:virtual littlefs_impl::LittleFSFileImpl::~LittleFSFileImpl()",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:611:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = littlefs_impl::LittleFSFileImpl; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:601:12:virtual time_t littlefs_impl::LittleFSDirImpl::fileCreationTime()",
+      "bytes": 56,
+      "kind": "dynamic"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:175:10:virtual bool littlefs_impl::LittleFSImpl::begin()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:105:12:virtual fs::DirImplPtr littlefs_impl::LittleFSImpl::openDir(const char*)",
+      "bytes": 152,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:44:13:virtual fs::FileImplPtr littlefs_impl::LittleFSImpl::open(const char*, fs::OpenMode, fs::AccessMode)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:399:10:virtual bool littlefs_impl::LittleFSFileImpl::seek(uint32_t, fs::SeekMode)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:1068:7:std::__shared_count<_Lp>::~__shared_count() [with __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:215:111:cpp)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:215:111:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:736:12:lfs_dir_traverse_filter",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1697:12:lfs_dir_commit_size",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4622:12:lfs_fs_size_count",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4013:12:lfs_deinit",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:44:12:lfs_bd_read.part.0.constprop",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:44:12:lfs_bd_read",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2786:12:lfs_ctz_traverse.part.0",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4377:12:lfs_fs_parent_match",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2786:12:lfs_ctz_traverse.part.0.constprop",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1295:12:lfs_dir_find_match",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2652:12:lfs_ctz_find.constprop",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:155:12:lfs_bd_flush",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:206:12:lfs_bd_prog.constprop",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:796:12:lfs_dir_traverse.constprop",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1431:12:lfs_dir_commitprog",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:991:19:lfs_dir_fetchmatch",
+      "bytes": 152,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4342:12:lfs_fs_pred",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1237:12:lfs_dir_getgstate",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:605:19:lfs_dir_getslice.constprop",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:605:19:lfs_dir_getslice.constprop",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4243:5:lfs_fs_rawtraverse.constprop",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1319:19:lfs_dir_find",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:605:19:lfs_dir_getslice.constprop",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:3243:20:lfs_file_flushedread",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1255:12:lfs_dir_getinfo",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1597:12:lfs_dir_alloc",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:557:12:lfs_alloc",
+      "bytes": 120,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:3026:12:lfs_file_relocate",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:3323:20:lfs_file_flushedwrite",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:3110:12:lfs_file_flush",
+      "bytes": 112,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:3455:19:lfs_file_rawseek",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1714:12:lfs_dir_commit_commit",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1495:12:lfs_dir_commitcrc",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1734:12:lfs_dir_compact",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:1907:12:lfs_dir_splittingcompact.constprop",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2003:12:lfs_dir_relocatingcommit",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2003:12:lfs_dir_relocatingcommit.constprop",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2174:12:lfs_dir_orphaningcommit",
+      "bytes": 160,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4480:12:lfs_fs_deorphan",
+      "bytes": 176,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:4607:12:lfs_fs_forceconsistency",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:2831:12:lfs_file_rawopencfg",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5301:5:lfs_format",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5331:5:lfs_mount",
+      "bytes": 120,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5360:5:lfs_unmount",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5375:5:lfs_remove",
+      "bytes": 136,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5391:5:lfs_rename",
+      "bytes": 240,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5406:5:lfs_stat",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5420:13:lfs_getattr",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5437:5:lfs_setattr",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5455:5:lfs_removeattr",
+      "bytes": 80,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5471:5:lfs_file_open",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5488:5:lfs_file_opencfg",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5508:5:lfs_file_close",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5524:5:lfs_file_sync",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5540:13:lfs_file_read",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5558:13:lfs_file_write",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5576:12:lfs_file_seek",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5594:5:lfs_file_truncate",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5611:12:lfs_file_tell",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5626:5:lfs_file_rewind",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5640:12:lfs_file_size",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5656:5:lfs_mkdir",
+      "bytes": 200,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5671:5:lfs_dir_open",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5686:5:lfs_dir_close",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5700:5:lfs_dir_read",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5715:5:lfs_dir_seek",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5730:12:lfs_dir_tell",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5744:5:lfs_dir_rewind",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5758:13:lfs_fs_size",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:5772:5:lfs_fs_traverse",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs_util.c:15:10:lfs_crc",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/controller.h:165:17:virtual int CLEDController::size()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/include/glyph_overrides.hpp:1829:8:size_t init_secondary_backends_glyph(CommunicationBackend**&, CommunicationBackend*&, CommunicationBackendId, InputState&, InputSource**, size_t, Config&, const Pinout&)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:356:56:void __tcf_0()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/controller.h:649:9:int CPixelLEDController<RGB_ORDER, LANES, MASK>::lanes() [with EOrder RGB_ORDER = GRB; int LANES = 1; long unsigned int MASK = 4294967295]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:222:22:uint16_t ClocklessController<DATA_PIN, T1, T2, T3, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>::getMaxRefreshRate() const [with unsigned char DATA_PIN = 11; int T1 = 33; int T2 = 82; int T3 = 49; EOrder RGB_ORDER = GRB; int XTRA0 = 0; bool FLIP = false; int WAIT_TIME = 50]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "include/input/SwitchMatrixInput.hpp:59:20:InputScanSpeed SwitchMatrixInput<num_rows, num_cols>::ScanSpeed() [with unsigned int num_rows = 4; unsigned int num_cols = 11]",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:401:9:static constexpr void setup1()::<lambda()>::_FUN()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:402:9:static constexpr void setup1()::<lambda()>::_FUN()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:140:6:void {anonymous}::request_mode_destination(CommunicationBackendId, size_t, const Config&)",
+      "bytes": 168,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:254:13:static constexpr bool setup()::<lambda(void*, size_t, UltimateProfile&)>::_FUN(void*, size_t, UltimateProfile&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "include/input/SwitchMatrixInput.hpp:52:5:SwitchMatrixInput<num_rows, num_cols>::~SwitchMatrixInput() [with unsigned int num_rows = 4; unsigned int num_cols = 11]",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "include/input/SwitchMatrixInput.hpp:61:10:void SwitchMatrixInput<num_rows, num_cols>::UpdateInputs(InputState&) [with unsigned int num_rows = 4; unsigned int num_cols = 11]",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:48:26:void clockless_dma_complete_handler()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:117:18:void ClocklessController<DATA_PIN, T1, T2, T3, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>::init() [with unsigned char DATA_PIN = 11; int T1 = 33; int T2 = 82; int T3 = 49; EOrder RGB_ORDER = GRB; int XTRA0 = 0; bool FLIP = false; int WAIT_TIME = 50]",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/NeoPixelBackend.hpp:120:18:void NeoPixelBackend<data_pin, led_count>::ManualSendReport(CRGB*, uint8_t) [with unsigned char data_pin = 11; int led_count = 76]",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:379:71:void __tcf_5()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/NeoPixelBackend.hpp:33:5:NeoPixelBackend<data_pin, led_count>::~NeoPixelBackend() [with unsigned char data_pin = 11; int led_count = 76]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/NeoPixelBackend.hpp:33:5:NeoPixelBackend<data_pin, led_count>::~NeoPixelBackend() [with unsigned char data_pin = 11; int led_count = 76]",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/NeoPixelBackend.hpp:128:18:void NeoPixelBackend<data_pin, led_count>::SendReport() [with unsigned char data_pin = 11; int led_count = 76]",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/comms/NeoPixelBackend.hpp:35:18:void NeoPixelBackend<data_pin, led_count>::SetGameMode(InputMode*) [with unsigned char data_pin = 11; int led_count = 76]",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h:224:18:void ClocklessController<DATA_PIN, T1, T2, T3, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>::showPixels(PixelController<RGB_ORDER>&) [with unsigned char DATA_PIN = 11; int T1 = 33; int T2 = 82; int T3 = 49; EOrder RGB_ORDER = GRB; int XTRA0 = 0; bool FLIP = false; int WAIT_TIME = 50]",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp:25:10:void DebouncedSwitchMatrixInput<num_rows, num_cols>::UpdateButtonState(InputState&, size_t, size_t, bool) [with unsigned int num_rows = 4; unsigned int num_cols = 11]",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:381:66:void __tcf_6()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:357:39:void __tcf_1()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:358:22:void __tcf_2()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:373:69:void __tcf_3()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:378:5:void __tcf_4()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "include/input/SwitchMatrixInput.hpp:91:18:void SwitchMatrixInput<num_rows, num_cols>::UpdateButtonState(InputState&, size_t, size_t, bool) [with unsigned int num_rows = 4; unsigned int num_cols = 11]",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:153:6:void {anonymous}::enter_recovery_configurator()",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp:8:7:DebouncedSwitchMatrixInput<4, 11>::~DebouncedSwitchMatrixInput()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "include/input/SwitchMatrixInput.hpp:52:5:SwitchMatrixInput<num_rows, num_cols>::~SwitchMatrixInput() [with unsigned int num_rows = 4; unsigned int num_cols = 11]",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp:8:7:virtual DebouncedSwitchMatrixInput<4, 11>::~DebouncedSwitchMatrixInput()",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "include/core/RuntimeProfileDigest.hpp:13:23:static constexpr bool runtime_identity::PayloadDigest(const UltimateProfile&, uint8_t*)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)",
+      "bytes": 184,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/controller.h:626:18:void CPixelLEDController<RGB_ORDER, LANES, MASK>::showColor(const CRGB&, int, CRGB) [with EOrder RGB_ORDER = GRB; int LANES = 1; long unsigned int MASK = 4294967295]",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/controller.h:635:18:void CPixelLEDController<RGB_ORDER, LANES, MASK>::show(const CRGB*, int, CRGB) [with EOrder RGB_ORDER = GRB; int LANES = 1; long unsigned int MASK = 4294967295]",
+      "bytes": 128,
+      "kind": "static"
+    },
+    {
+      "function": ".pio/libdeps/glyph_mk6/FastLED/src/controller.h:99:18:virtual void CLEDController::clearLeds(int)",
+      "bytes": 120,
+      "kind": "static"
+    },
+    {
+      "function": "include/core/RuntimeProfileDigest.hpp:8:13:bool runtime_identity::PayloadDigest(const UltimateProfile&, uint8_t*)",
+      "bytes": 344,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/include/glyph_overrides.hpp:1789:8:Config glyph_default_config()",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:346:6:void setup1()",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:429:6:void dummyloop()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:433:6:void loop1()",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:512:1:cpp)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:512:1:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:169:6:void setup()",
+      "bytes": 272,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/config.cpp:317:6:void loop()",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": "config/glyph/common/src/glyph_config_validation.cpp:6:6:bool validate_glyph_config(const Config&, ConfigValidationError&)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:56:24:virtual CommunicationBackendId CommunicationBackend::BackendId()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:60:6:virtual void CommunicationBackend::SetGameMode(InputMode*)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:64:12:virtual InputMode* CommunicationBackend::CurrentGameMode()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:49:6:virtual void CommunicationBackend::UpdateOutputs()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:9:1:CommunicationBackend::CommunicationBackend(InputState&, InputSource**, size_t)",
+      "bytes": 12,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:20:13:InputState& CommunicationBackend::GetInputs()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:24:14:OutputState& CommunicationBackend::GetOutputs()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:28:6:void CommunicationBackend::ScanInputs()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:35:6:void CommunicationBackend::ScanInputs(InputScanSpeed)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/CommunicationBackend.cpp:45:6:void CommunicationBackend::ResetOutputs()",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/ControllerMode.cpp:19:6:virtual void ControllerMode::UpdatePreprocessedOutputs(const ResolvedInputContext&, OutputState&, CommunicationBackendId)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/ControllerMode.cpp:36:6:virtual void ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, uint8_t, uint8_t, uint8_t, OutputState&)",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/ControllerMode.cpp:8:6:virtual void ControllerMode::UpdateOutputs(const InputState&, OutputState&, CommunicationBackendId)",
+      "bytes": 96,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/ControllerMode.cpp:3:1:ControllerMode::ControllerMode()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/ControllerMode.cpp:24:6:void ControllerMode::ResetDirections()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/InputMode.cpp:17:6:virtual void InputMode::HandleSocd(InputState&)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/InputMode.cpp:57:6:virtual void InputMode::HandleRemap(const InputState&, InputState&)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/InputMode.cpp:7:1:InputMode::InputMode()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/InputMode.cpp:9:17:GameModeConfig* InputMode::GetConfig()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/InputMode.cpp:13:6:void InputMode::SetConfig(GameModeConfig&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/config_validation.cpp:58:6:bool {anonymous}::validate_profile_condition(const UltimateProfileCondition&, const bool*, const bool*, uint8_t, ConfigValidationError&, uint8_t)",
+      "bytes": 176,
+      "kind": "static"
+    },
+    {
+      "function": "include/modes/UltimateProfileEvaluator.hpp:27:12:int UltimateProfileEvaluator::EffectKey(const UltimateProfileOutputEffect&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "include/modes/UltimateProfileEvaluator.hpp:47:13:bool UltimateProfileEvaluator::ValidEffectShape(const UltimateProfileOutputEffect&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/config_validation.cpp:115:6:bool {anonymous}::validate_ultimate_profile_semantics_impl(const UltimateProfile&, ConfigValidationError&, uint8_t)",
+      "bytes": 544,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/config_validation.cpp:209:6:bool validate_config_extents(const Config&)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/config_validation.cpp:306:6:bool validate_ultimate_profile_semantics(const UltimateProfile&, ConfigValidationError&)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/config_validation.cpp:317:6:bool validate_config_semantics(const Config&, ConfigValidationError&)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:50:6:void set_mode_destination_selector(ModeDestinationSelector)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:88:6:void set_mode(CommunicationBackend*, ControllerMode*)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:97:6:void set_mode(CommunicationBackend*, KeyboardMode*)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:110:6:void set_mode(CommunicationBackend*, GameModeConfig&, Config&)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:195:6:void set_mode(CommunicationBackend*, GameModeId, Config&)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:207:6:void select_mode(CommunicationBackend**, size_t, Config&)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:239:6:void setup_mode_activation_bindings(const GameModeConfig*, size_t, uint64_t)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:256:1:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/core/mode_selection.cpp:256:1:cpp)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/CustomControllerMode.cpp:68:6:virtual void CustomControllerMode::UpdateAnalogOutputs(const InputState&, OutputState&, CommunicationBackendId)",
+      "bytes": 104,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/CustomControllerMode.cpp:34:6:virtual void CustomControllerMode::UpdateDigitalOutputs(const InputState&, OutputState&)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/CustomControllerMode.cpp:8:1:CustomControllerMode::CustomControllerMode()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/CustomControllerMode.cpp:10:6:void CustomControllerMode::SetConfig(GameModeConfig&, const CustomModeConfig&)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/CustomControllerMode.cpp:152:8:Button CustomControllerMode::GetDirectionButton(const Button*, StickDirectionButton)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeEvaluator.cpp:5:6:0(uint16_t, const ResolvedInputContext&, const ultimate_native::FrameState&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeEvaluator.cpp:19:6:void ultimate_native::{anonymous}::Conditions(uint8_t, uint8_t, const ResolvedInputContext&, ultimate_native::FrameState&)",
+      "bytes": 72,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeEvaluator.cpp:30:6:void ultimate_native::{anonymous}::Source(uint8_t, const ResolvedInputContext&, const ultimate_native::FrameState&, bool*)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeEvaluator.cpp:40:6:void ultimate_native::Neutral(OutputState&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeEvaluator.cpp:41:6:bool ultimate_native::Evaluate(const PreparedView&, const ResolvedInputContext&, ControllerMode&, OutputState&)",
+      "bytes": 232,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:23:6:bool ultimate_native::{anonymous}::Token(uint16_t, uint8_t, bool, bool)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:250:6:bool ultimate_native::RejectPayload(pb_istream_t*, const pb_field_t*, void**)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:108:39:bool ultimate_native::PrepareStructure(const uint8_t*, size_t, uint32_t, PreparedView&)",
+      "bytes": 240,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:37:6:bool ultimate_native::{anonymous}::Encode(pb_ostream_t*, const pb_field_t*, void* const*)",
+      "bytes": 16,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:42:6:bool ultimate_native::{anonymous}::Decode(pb_istream_t*, const pb_field_t*, void**)",
+      "bytes": 56,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:90:6:bool ultimate_native::{anonymous}::ScanProfile(const uint8_t*, size_t, ultimate_native::PayloadLease&)",
+      "bytes": 64,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:20:32:void ultimate_native::{anonymous}::BodyDigest(const uint8_t*, size_t, uint8_t*)",
+      "bytes": 192,
+      "kind": "static"
+    },
+    {
+      "function": "include/core/Sha256.hpp:20:10:void Sha256::Final(uint8_t*)",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:9:10:uint16_t ultimate_native::Read16(const uint8_t*)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:178:6:bool ultimate_native::Prepare(const uint8_t*, size_t, uint32_t, PreparedView&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:184:6:bool ultimate_native::CopyProgram(const PreparedView&, OwnedProgram&, uint32_t, bool)",
+      "bytes": 32,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:189:6:bool ultimate_native::ContextDigest(const GameModeConfig&, uint8_t*)",
+      "bytes": 216,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:207:6:bool ultimate_native::IsOwnedView(const PreparedView&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:210:6:bool ultimate_native::ContextMatches(const PreparedView&, const GameModeConfig&)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:211:21:const ultimate_native::PayloadLease* ultimate_native::Lease(const UltimateProfile&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:212:6:void ultimate_native::Bind(UltimateProfile&, PayloadLease&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:213:6:bool ultimate_native::BindOwned(UltimateProfile&, const OwnedProgram&, PayloadLease&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:217:6:bool ultimate_native::ValidProfile(const UltimateProfile&)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:223:21:const ultimate_native::PreparedView& ultimate_native::CandidateView()",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:224:6:bool ultimate_native::PreserveProfile(UltimateProfile&)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:228:6:bool ultimate_native::DecodeProfile(const uint8_t*, size_t, UltimateProfile&, PayloadLease&)",
+      "bytes": 40,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:237:6:bool ultimate_native::PrepareRequest(const uint8_t*, size_t, ProfileStoreRequest&, PayloadLease&)",
+      "bytes": 48,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:251:6:void ultimate_native::RejectEmbedded(Config&)",
+      "bytes": 0,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/UltimateNativeProfile.cpp:252:6:void ultimate_native::ClearEmbeddedCallbacks(Config&)",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:335:11:{anonymous}::RoleState {anonymous}::ResolveRoleState(const InputState&, const LayerState&, const EffectiveDirectionState&)",
+      "bytes": 88,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:320:25:{anonymous}::EffectiveDirectionState {anonymous}::ResolveEffectiveDirections(const InputState&, const LayerState&)",
+      "bytes": 20,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:580:12:{anonymous}::StickPoint {anonymous}::LookupConfiguredStickPoint(const UltimateProfile*, RuntimeTableId, size_t)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:804:6:virtual void Ultimate::UpdateDigitalOutputs(const InputState&, OutputState&)",
+      "bytes": 184,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:829:6:virtual void Ultimate::UpdateAnalogOutputs(const InputState&, OutputState&, CommunicationBackendId)",
+      "bytes": 288,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:780:1:Ultimate::Ultimate()",
+      "bytes": 8,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:782:6:void Ultimate::SetConfig(GameModeConfig&, const UltimateProfile*, const ultimate_native::PreparedView*)",
+      "bytes": 24,
+      "kind": "static"
+    },
+    {
+      "function": "src/modes/Ultimate.cpp:795:6:virtual void Ultimate::UpdatePreprocessedOutputs(const ResolvedInputContext&, OutputState&, CommunicationBackendId)",
+      "bytes": 16,
+      "kind": "static"
+    }
+  ],
+  "critical_limits": {
+    "ConfiguratorBackend::HandleProfileStore()": 512,
+    "ConfiguratorBackend::WriteProfilePacket(": 512,
+    "ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)": 256,
+    "ProfileStore::WriteProfile(": 512,
+    "ProfileStore::PublishDirectory(": 256,
+    "ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)": 128,
+    ":void setup()": 512,
+    "Persistence::LoadConfigChecked(": 512,
+    "Persistence::SaveConfigIfGenerationMatches(": 512,
+    "Persistence::SaveConfig(": 512,
+    "ProfileStore::Bootstrap(": 512,
+    "Persistence::CaptureLegacySource(": 768,
+    "CheckedStorage::Open(": 128,
+    "CheckedStorage::WriteFile(": 256,
+    "CheckedStorage::ReadFile(": 256
+  },
+  "critical_measured_bytes": {
+    "ConfiguratorBackend::HandleProfileStore()": 312,
+    "ConfiguratorBackend::WriteProfilePacket(": 344,
+    "ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)": 208,
+    "ProfileStore::WriteProfile(": 256,
+    "ProfileStore::PublishDirectory(": 128,
+    "ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)": 72,
+    ":void setup()": 272,
+    "Persistence::LoadConfigChecked(": 456,
+    "Persistence::SaveConfigIfGenerationMatches(": 288,
+    "Persistence::SaveConfig(": 336,
+    "ProfileStore::Bootstrap(": 480,
+    "Persistence::CaptureLegacySource(": 608,
+    "CheckedStorage::Open(": 88,
+    "CheckedStorage::WriteFile(": 216,
+    "CheckedStorage::ReadFile(": 208
+  },
+  "prefix_bytes": 648,
+  "record_open_reachable_chain_bytes": 2784,
+  "littlefs_open_chain_bytes": 1320,
+  "record_open_scratch_bank_margin_before_unmodeled_paths": 1312,
+  "adapter": "repository-owned same-mounted CheckedStorage; Publish inlined into WriteProfile",
+  "request_decode_enumerated_C_upper_bytes": 2184,
+  "default_reservation_bytes": 2048,
+  "ordinary_scratch_bank_envelope_bytes": 4096,
+  "whole_target_upper_bound": "UNKNOWN: SDK/ROM, IRQ and unresolved indirect paths are not certified by this report",
+  "source_sha256": {
+    ".platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50",
+    ".platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.cpp": "e45de2528ef4467ff461cc54ec384254bd785c8eaf2d1adbe9598be411b3cb97",
+    ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/Print.cpp": "ba9801ef5e10d2ef358efa38d68793932f5156ef7fbbd332cf4aff84d02d8ffd",
+    ".platformio-home/packages/framework-arduinopico/cores/rp2040/api/Stream.cpp": "e161e1cfd36bb3b414d66e271f333b8f25af4791a4855a6010737af61a38a806",
+    ".platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    ".pio/libdeps/glyph_mk6/Nanopb/pb_common.c": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+    ".pio/libdeps/glyph_mk6/Nanopb/pb_decode.c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+    ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+    ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8",
+    ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+    ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5",
+    ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c": "8ddbcab9ba5f8abe68b5af78eb471f67093076d9c8c0357acc1498e1185c200e",
+    ".pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+    ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+    ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e",
+    ".platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs_util.c": "b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "09d32bcf704624b9c47df3b2303f7872af4d61c757d512042bf1cbcb7da7a97a",
+    "HAL/pico/src/comms/NintendoSwitchBackend.cpp": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+    "HAL/pico/src/comms/XInputBackend.cpp": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "HAL/pico/src/core/Persistence.cpp": "1eb642b02465e281d2fff969b2d805ec5a9e4d92985454272795b3f351e9af91",
+    "HAL/pico/src/core/ProfileStore.cpp": "2c6182593288a728f0cd6f2afc4a6f5704b3efe35700874e2ae2cd60e7cd414d",
+    "config/glyph/common/src/config.cpp": "ea87e5e50bd30cef399f2f0db1f0c7b55fe2098e74d4022ebf4120f55fc56ea9",
+    "config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+    "src/core/CommunicationBackend.cpp": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575",
+    "src/core/ControllerMode.cpp": "5a8615740951ad8ab5b07104b38d5842d3a91537e4c1690d47a416f554dcd524",
+    "src/core/InputMode.cpp": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+    "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+    "src/core/mode_selection.cpp": "fb2342b66135b2af23d083372b80710ddc0be20b38034740df5cac0b08e6f4e2",
+    "src/modes/CustomControllerMode.cpp": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+    "src/modes/Ultimate.cpp": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+    "src/modes/UltimateNativeEvaluator.cpp": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+    "src/modes/UltimateNativeProfile.cpp": "33d4c0daf0fa810a7b61e399c6d44bfaea7e88ceb134298a8b0373e507b1dbee"
+  }
+}

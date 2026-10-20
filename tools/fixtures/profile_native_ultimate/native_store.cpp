@@ -5,7 +5,14 @@
 #include "modes/Ultimate.hpp"
 #include "modes/UltimateNativeEvaluator.hpp"
 #include "core/RuntimeProfileDigest.hpp"
+#include "core/RuntimeIdentity.hpp"
 namespace {
+class NativeBackend : public CommunicationBackend {
+ public:
+    NativeBackend(InputState &i):CommunicationBackend(i,nullptr,0){}
+    CommunicationBackendId BackendId() override { return COMMS_BACKEND_XINPUT; }
+    void SendReport() override { UpdateOutputs(); }
+};
 Bytes incoming_wire;
 ultimate_native::PayloadLease incoming_lease;
 UltimateProfile incoming;
@@ -21,7 +28,7 @@ void neutral_unavailable(GameModeConfig &mc,const UltimateProfile *p,const ultim
 }
 int main(int argc,char **argv) {
  try {
-    require(argc==3,"native_store PROFILE_DIRECTORY LEGACY_CONFIG");std::ifstream f(argv[2],std::ios::binary);Bytes raw((std::istreambuf_iterator<char>(f)),{});auto decoder=pb_istream_from_buffer(raw.data(),raw.size());require(pb_decode(&decoder,Config_fields,&legacy),"legacy source decode");
+    require(argc==4,"native_store PROFILE_DIRECTORY LEGACY_CONFIG CONTEXT");std::ifstream f(argv[2],std::ios::binary);Bytes raw((std::istreambuf_iterator<char>(f)),{});auto decoder=pb_istream_from_buffer(raw.data(),raw.size());require(pb_decode(&decoder,Config_fields,&legacy),"legacy source decode");
     mounted_cfg.read=ram_read;mounted_cfg.prog=ram_prog;mounted_cfg.erase=ram_erase;mounted_cfg.sync=ram_sync;mounted_cfg.read_size=256;mounted_cfg.prog_size=256;mounted_cfg.block_size=4096;mounted_cfg.block_count=128;mounted_cfg.block_cycles=16;mounted_cfg.cache_size=256;mounted_cfg.lookahead_size=256;
     require(lfs_format(&mounted_fs,&mounted_cfg)==0&&lfs_mount(&mounted_fs,&mounted_cfg)==0,"actual pinned LittleFS mount");
     ProfileStore store;require(store.Begin(),"normal production bootstrap");uint64_t token=1;
@@ -30,10 +37,29 @@ int main(int argc,char **argv) {
     auto capacity=store.Capacity();require(capacity.admissible_profiles>=20&&capacity.free_bytes>=capacity.reserve_bytes+capacity.staging_bytes,"full reserve/staging and native representative admission");
     ProfileStore::Status status;const auto *active=store.Activate(1,&status);require(active&&status==Status::Ok&&store.ActiveNativeView()&&store.ActiveRevision()==1,"native boot publication");
     const auto *view=store.ActiveNativeView();const uint32_t generation=view->generation;uint8_t original[32],after[32];require(runtime_identity::PayloadDigest(*active,original),"actual active wrapper digest");
-    GameModeConfig mc{};mc.mode_id=MODE_ULTIMATE;mc.ultimate_profile_id=1;mc.ultimate_profile_engine=1;
+    static Config observed_config;observed_config=Config_init_default;
+    observed_config.ultimate_profile_store_format=1;observed_config.ultimate_profile_store_incarnation=store.Incarnation();
+    observed_config.game_mode_configs_count=1;auto &mc=observed_config.game_mode_configs[0];
+    std::ifstream context_file(argv[3],std::ios::binary);Bytes context_bytes((std::istreambuf_iterator<char>(context_file)),{});
+    auto context_decoder=pb_istream_from_buffer(context_bytes.data(),context_bytes.size());require(pb_decode(&context_decoder,GameModeConfig_fields,&mc),"complete profile exact preprocessing row");
+    mc.mode_id=MODE_ULTIMATE;mc.ultimate_profile_id=1;mc.ultimate_profile_engine=1;
     Ultimate mode;mode.SetConfig(mc,active,view);require(mode.ActiveEngine()==Ultimate::Engine::NativeAbi1,"actual active native mode");
+    InputState observed_inputs{};NativeBackend backend(observed_inputs);backend.SetGameMode(&mode);
+    auto observed=runtime_identity::Observe(&backend,observed_config,store,mode);
+    require(observed.status==runtime_identity::Status::Persisted&&observed.schema==5&&observed.id==1&&observed.revision==1&&std::memcmp(observed.digest,original,32)==0,"native actual primary/store/owner/view/context/generation identity");
+    auto forged=*view;Ultimate invalid_owner;invalid_owner.SetConfig(mc,active,&forged);
+    require(invalid_owner.ActiveEngine()==Ultimate::Engine::NativeUnavailable,"copied view cannot borrow published owner identity");
+    auto &mutable_view=const_cast<ultimate_native::PreparedView &>(*view);++mutable_view.generation;
+    observed=runtime_identity::Observe(&backend,observed_config,store,mode);
+    require(observed.status==runtime_identity::Status::SnapshotUnavailable,"changed active generation invalidates actual snapshot");
+    backend.SendReport();require(backend.GetOutputs().buttons==0&&backend.GetOutputs().leftStickX==128,"changed generation produces neutral output");
+    mutable_view.generation=generation;
     for(unsigned revision=2;revision<=3;++revision)for(unsigned i=1;i<=20;++i) {const auto &p=load_native(std::string(argv[1])+"/"+std::to_string((i%20)+1)+".pb");auto result=store.Update(i,p,revision-1,identity(token++));require(result.status==Status::Ok&&result.revision==revision,"native revision retention transaction");incoming_lease.Release();}
     require(store.ActiveRevision()==1&&store.ActiveNativeView()==view&&view->generation==generation&&runtime_identity::PayloadDigest(*active,after)&&!std::memcmp(original,after,32),"inactive updates preserve exact active revision/body/view/generation/digest");
+    observed=runtime_identity::Observe(&backend,observed_config,store,mode);
+    require(observed.status==runtime_identity::Status::Persisted&&observed.revision==1&&std::memcmp(observed.digest,original,32)==0,"native observer reports actual latched r1 after stored r3 update");
+    uint8_t response[72];runtime_identity::EncodeResponse(42,observed,response);
+    require(response[16]==0&&runtime_identity::ReadLE(response+36,4)==5&&!std::memcmp(response+40,original,32),"native identity unchanged72byte wire");
     require(CheckedStorage::Stat(record_path(1,1).c_str(),nullptr,Kind::Record).outcome==Outcome::Ok,"latched record retained through collection");
     require(store.Update(1,legacy.ultimate_profiles[0],3,identity(token++)).status==Status::Invalid,"cross-kind native to legacy update rejects");
     auto legacy_id=store.Create(legacy.ultimate_profiles[0],"legacy",21,identity(token++));require(legacy_id.status==Status::Ok,"legacy create unchanged");
@@ -54,7 +80,7 @@ int main(int argc,char **argv) {
     wrong=mc;wrong.ultimate_profile_engine=0;neutral_unavailable(wrong,active,store.ActiveNativeView());
     require(store.Activate(999,&status)==nullptr,"missing native reference");neutral_unavailable(mc,nullptr,nullptr);
     require(store.BeginRecovery(incarnation,2),"read-only recovery inspection");require(store.Activate(2,&status)==nullptr,"read-only native cannot publish");neutral_unavailable(mc,nullptr,nullptr);
-    capacity=store.Capacity();std::printf("PASS native actual LittleFS20complete profiles/revisions/staging/reserve/reboot/read/health/duplicate/cross-kind/context/unavailable; sizeof_store=%zu total=%llu used=%llu free=%llu protected=%llu staging=%llu\\n",store_bytes,(unsigned long long)capacity.total_bytes,(unsigned long long)capacity.used_bytes,(unsigned long long)capacity.free_bytes,(unsigned long long)capacity.protected_bytes,(unsigned long long)capacity.staging_bytes);
+    capacity=store.Capacity();std::printf("PASS native actual LittleFS20complete profiles/revisions/staging/reserve/reboot/read/health/duplicate/cross-kind/context/unavailable; sizeof_store=%zu total=%llu used=%llu free=%llu protected=%llu staging=%llu\n",store_bytes,(unsigned long long)capacity.total_bytes,(unsigned long long)capacity.used_bytes,(unsigned long long)capacity.free_bytes,(unsigned long long)capacity.protected_bytes,(unsigned long long)capacity.staging_bytes);
     require(lfs_unmount(&mounted_fs)==0,"native test unmount");return 0;
  } catch(const std::exception &e) {std::fprintf(stderr,"FAIL native store: %s\n",e.what());return 1;}
 }

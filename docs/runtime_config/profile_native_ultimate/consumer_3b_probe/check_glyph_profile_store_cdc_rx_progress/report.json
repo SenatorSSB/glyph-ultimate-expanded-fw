@@ -1,0 +1,619 @@
+{
+  "result": "PASS",
+  "frozen": "895109eb662a8ad6b6c99889cb37a254dce49998",
+  "framework_version": "1.30603.0",
+  "physical": {
+    "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-tests/multi-profile-store-strict-hardening-20261016/responses/895-b9-b10/receipts/A-record-open-write-fail.request.json",
+    "receipt_sha256": "fdb1a4d236231444839c3c4d0d7a0b93c2748680ddfb2a21c4be4b10be32fdde",
+    "request_sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+    "request_size": 3074,
+    "controls": {
+      "physical-arm": {
+        "bytes": 20,
+        "sha256": "9138979ea738b83236820af535c67131d4806175f9da0914318cc69e11bc4d46",
+        "source": "tools/fixtures/profile_store_rx_host/arm.trace.jsonl"
+      },
+      "physical-status": {
+        "bytes": 7,
+        "sha256": "5f8123825df0c89a31cc4fab9f06ff999ec9bb1aa360e0a3781e1b8a04ab4e18",
+        "source": "tools/fixtures/profile_store_rx_host/pending-status.trace.jsonl"
+      }
+    }
+  },
+  "payloads": {
+    "physical-update": {
+      "bytes": 3074,
+      "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+      "wire_bytes": 3089
+    },
+    "physical-arm": {
+      "bytes": 20,
+      "sha256": "9138979ea738b83236820af535c67131d4806175f9da0914318cc69e11bc4d46",
+      "wire_bytes": 23
+    },
+    "physical-status": {
+      "bytes": 7,
+      "sha256": "5f8123825df0c89a31cc4fab9f06ff999ec9bb1aa360e0a3781e1b8a04ab4e18",
+      "wire_bytes": 10
+    },
+    "arm": {
+      "bytes": 17,
+      "sha256": "2ceb017613ec85052732780c6d9ea1d1a54199946879868ecff18b2b0f20c56d",
+      "wire_bytes": 20
+    },
+    "status": {
+      "bytes": 4,
+      "sha256": "7a0377a22ba49df339c4c4d1abe2f20d1cf59b5262bb52fcfaaf08ee8a9d2ed6",
+      "wire_bytes": 7
+    },
+    "pulse": {
+      "bytes": 4,
+      "sha256": "00ea217b5b31ee0ed60e84036fb7050175a12394c9b9aa8d05378c72dcc712ea",
+      "wire_bytes": 7
+    },
+    "read": {
+      "bytes": 6,
+      "sha256": "8a88b40fc98df399920d8d6d9cb65c7dc17728130f9d6396b152b383fe81ec59",
+      "wire_bytes": 9
+    },
+    "query": {
+      "bytes": 15,
+      "sha256": "244c6f25c138a94be4cc602a1580dbbb2ec0ee319876b40c7068308e9bf605d0",
+      "wire_bytes": 18
+    },
+    "rename": {
+      "bytes": 41,
+      "sha256": "70b3ffe6257971fb0418443577c24b27419fba272cc5bbc63064e4ea43afaa05",
+      "wire_bytes": 44
+    },
+    "update-physical-id1-response": {
+      "bytes": 1992,
+      "sha256": "4ead78a45f7c2d74ce0b29a38226cc498933bc3560e1c334332e27525d8f7eb9",
+      "wire_bytes": 2002
+    },
+    "update-physical-id3-response": {
+      "bytes": 3074,
+      "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+      "wire_bytes": 3089
+    },
+    "update-physical-id4-response": {
+      "bytes": 3079,
+      "sha256": "be872fae20cee2060029f830bab7091925c591618c2a05e0c4f265a7cc541444",
+      "wire_bytes": 3094
+    },
+    "update-maximum-stage-c-response": {
+      "bytes": 4057,
+      "sha256": "edd9ba4fb82d2f3446bfeaf389df7df517f7eb9cabdc1352e0b7d3a8ce6fe100",
+      "wire_bytes": 4075
+    },
+    "update-stage-a": {
+      "bytes": 1992,
+      "sha256": "4ead78a45f7c2d74ce0b29a38226cc498933bc3560e1c334332e27525d8f7eb9",
+      "wire_bytes": 2002
+    },
+    "update-stage-b": {
+      "bytes": 2709,
+      "sha256": "2e90855f63641a0d8843b7d425e284d0ef91b69b5ea3a4ddddc4bb73f9a2ce0f",
+      "wire_bytes": 2722
+    },
+    "update-stage-c": {
+      "bytes": 3074,
+      "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+      "wire_bytes": 3089
+    },
+    "arm-record-open-read-1": {
+      "bytes": 17,
+      "sha256": "efe7f5f9d14bb03fc4eace93919ce0f40be0de52846a4d4c74a5eeee3c1181d9",
+      "wire_bytes": 20
+    },
+    "arm-record-open-read-2": {
+      "bytes": 17,
+      "sha256": "d32d819d33917c73b08005f32c44074174ceba7af80be6d39246d2938dbc444b",
+      "wire_bytes": 20
+    },
+    "arm-record-open-write-1": {
+      "bytes": 17,
+      "sha256": "2ceb017613ec85052732780c6d9ea1d1a54199946879868ecff18b2b0f20c56d",
+      "wire_bytes": 20
+    },
+    "arm-record-open-write-2": {
+      "bytes": 17,
+      "sha256": "065bd60bd4f1fc6bbc2fc5bded4735ae6ac7c34e5ce44ba13c30d065bb60ecf2",
+      "wire_bytes": 20
+    },
+    "arm-record-read-1": {
+      "bytes": 17,
+      "sha256": "ea20e78c488d0488e45fbc87490391271c4bae30044ebd324109e29d300d2fdd",
+      "wire_bytes": 20
+    },
+    "arm-record-read-2": {
+      "bytes": 17,
+      "sha256": "b306ca0413510c4ecfa1a585227d142131eb4eeac6dbd87b98ce6e9dfae0005e",
+      "wire_bytes": 20
+    },
+    "arm-record-write-1": {
+      "bytes": 17,
+      "sha256": "ac57509667b337ae2e5b554bda6d2ad0afed70b046da7fbf46e8f1458e4a5469",
+      "wire_bytes": 20
+    },
+    "arm-record-write-2": {
+      "bytes": 17,
+      "sha256": "8b151537b5ff142929bcc9b536c47186c1e8e5f9101c9a515411ac22322aa480",
+      "wire_bytes": 20
+    },
+    "arm-record-seek-1": {
+      "bytes": 17,
+      "sha256": "d0efe207d6ec383a492118fb065289c90b3d18f33b8668ccf4ee6c5bbfa7a2ed",
+      "wire_bytes": 20
+    },
+    "arm-record-seek-2": {
+      "bytes": 17,
+      "sha256": "d638c5bd0544c8a14b0c04aedfeb66d031b87503fa4cb8369cb3964c1b38b300",
+      "wire_bytes": 20
+    },
+    "arm-record-sync-1": {
+      "bytes": 17,
+      "sha256": "c0f3454c6dbe35a574ed3fb1a4e96cb6511d788059394b25ea00a60a0c7ded8f",
+      "wire_bytes": 20
+    },
+    "arm-record-sync-2": {
+      "bytes": 17,
+      "sha256": "05e668ffeefe30c1571d63db8d6dc2017dd4ee071185a63f85b3e43385b843c8",
+      "wire_bytes": 20
+    },
+    "arm-record-close-1": {
+      "bytes": 17,
+      "sha256": "619f780d9013f26ee0f646f5a3688f9df0cae5a2d4b51230be736caed89a778a",
+      "wire_bytes": 20
+    },
+    "arm-record-close-2": {
+      "bytes": 17,
+      "sha256": "ecd394490a8504381439c7c324b2487db479f0b4ed4ae9c8314e6351ae0122e3",
+      "wire_bytes": 20
+    },
+    "arm-record-stat-1": {
+      "bytes": 17,
+      "sha256": "518de3fbf3d3552d8760039d535b858cfa26d04bc4083556c8820cd6d4fd28e8",
+      "wire_bytes": 20
+    },
+    "arm-record-stat-2": {
+      "bytes": 17,
+      "sha256": "47d20a3fdab5cc40977e9a884acc611f88a81dc0cb21d5ad1e0c38de1da1afe4",
+      "wire_bytes": 20
+    },
+    "arm-record-remove-1": {
+      "bytes": 17,
+      "sha256": "b4b928729b9af8e6d7cea85b2d884aff7815cf2daf56b72d8dac161649e79fd4",
+      "wire_bytes": 20
+    },
+    "arm-record-remove-2": {
+      "bytes": 17,
+      "sha256": "ab0a9fdd86e5fd1fac5af2f778990e869159825bb7cbd6d7e83fd49f7f44395a",
+      "wire_bytes": 20
+    },
+    "arm-record-rename-1": {
+      "bytes": 17,
+      "sha256": "ea31c09f263f22de0803d579650d48664544cacf5116657d3d0d4b0fbb0b0be1",
+      "wire_bytes": 20
+    },
+    "arm-record-rename-2": {
+      "bytes": 17,
+      "sha256": "53f1f1fe7a843a426f5588afe47cb1bbc821d681cfee59bf9bc0efe68c071856",
+      "wire_bytes": 20
+    },
+    "arm-root-open-read-1": {
+      "bytes": 17,
+      "sha256": "e1e3177c8010de487f5f2d398be6a373ea8dd19013148658a74866142726f102",
+      "wire_bytes": 20
+    },
+    "arm-root-open-read-2": {
+      "bytes": 17,
+      "sha256": "1d11eca8dfb2922cda78acaa949bc8d7431a8b0e9615e57344f0339d843a5a3d",
+      "wire_bytes": 20
+    },
+    "arm-root-open-write-1": {
+      "bytes": 17,
+      "sha256": "dd286e266d14720292b23ad3cac59e3f4e1b0d99ee269154e8a3059b862d1099",
+      "wire_bytes": 20
+    },
+    "arm-root-open-write-2": {
+      "bytes": 17,
+      "sha256": "7172a4e8ed72145973aba53db9008fb038e6004cd5f06ac594683647cb40da8a",
+      "wire_bytes": 20
+    },
+    "arm-root-read-1": {
+      "bytes": 17,
+      "sha256": "67a66fe30230323ad9f9bf18498b372c12834ae3bddcf3f75acc8c1c1c6b22af",
+      "wire_bytes": 20
+    },
+    "arm-root-read-2": {
+      "bytes": 17,
+      "sha256": "2b106d70497a045f31d5fa71e3a9e6ffbaf0a20f845981b26dd947b4f1f82cdc",
+      "wire_bytes": 20
+    },
+    "arm-root-write-1": {
+      "bytes": 17,
+      "sha256": "1e07eeac7208225f87d96f0d7f56d94e374cc5bb5e94a94c7f39c9b824b2d73b",
+      "wire_bytes": 20
+    },
+    "arm-root-write-2": {
+      "bytes": 17,
+      "sha256": "3815b3ce19b7ebfabf509e2094f250a7125cc928065d292f8a73a7e02ae9408b",
+      "wire_bytes": 20
+    },
+    "arm-root-seek-1": {
+      "bytes": 17,
+      "sha256": "b59d10cb2af218ddfda4d48de7106c7242c43238cc1464067025a26b6ce1a00c",
+      "wire_bytes": 20
+    },
+    "arm-root-seek-2": {
+      "bytes": 17,
+      "sha256": "c8528a0aa466ed2e9d508d4f6947b6c527ed102a73a5dffb0be7d053c5833082",
+      "wire_bytes": 20
+    },
+    "arm-root-sync-1": {
+      "bytes": 17,
+      "sha256": "ac1cccbfecbcccbdb151009776798dd572d2af16aa90fc56ae80e7d9ea8da1f3",
+      "wire_bytes": 20
+    },
+    "arm-root-sync-2": {
+      "bytes": 17,
+      "sha256": "6c771481535670640c26ead380e19e20e15f36b1d4d2b2f8d2f9b4964e8ee01f",
+      "wire_bytes": 20
+    },
+    "arm-root-close-1": {
+      "bytes": 17,
+      "sha256": "2e87588413717af1bf1319509d01986865c1b78e00ce23acbbbf225b22a18d57",
+      "wire_bytes": 20
+    },
+    "arm-root-close-2": {
+      "bytes": 17,
+      "sha256": "369dd392d17550aa6e2653f5ce50749b3fc9140032cdffa4ee7167c501e11e81",
+      "wire_bytes": 20
+    },
+    "arm-root-stat-1": {
+      "bytes": 17,
+      "sha256": "37ffadbf2d6202ec0aa8fd89b4a5f8cd2488882aaf14be073f3a24ef8cc59eb4",
+      "wire_bytes": 20
+    },
+    "arm-root-stat-2": {
+      "bytes": 17,
+      "sha256": "28c16306ee00ace534e031836f65e8e5dd14890d8f0af9cdd9aed786da0f74d2",
+      "wire_bytes": 20
+    },
+    "arm-root-remove-1": {
+      "bytes": 17,
+      "sha256": "296df5029eeacc3ba95704f4e9ff4fe22ed3ddcadb531dfc31c12173051ade2a",
+      "wire_bytes": 20
+    },
+    "arm-root-remove-2": {
+      "bytes": 17,
+      "sha256": "de1bc5a7999d93cf939f3372a0310d7fae1ab37539c8921d78038c94c22641c8",
+      "wire_bytes": 20
+    },
+    "arm-root-rename-1": {
+      "bytes": 17,
+      "sha256": "7f5bec5514cd4148db913c510db5d4ab6ff9c55a807d28c8781ebe481146e098",
+      "wire_bytes": 20
+    },
+    "arm-root-rename-2": {
+      "bytes": 17,
+      "sha256": "9474f399937f140bd1a6117660a3f6c97efac542713fb1f998a1fa8115262070",
+      "wire_bytes": 20
+    },
+    "arm-control-open-read-1": {
+      "bytes": 17,
+      "sha256": "5c26c8cba82e6eb72a9c4e8bea67e5dfe58e0ea0e065bed74457f86094adabe8",
+      "wire_bytes": 20
+    },
+    "arm-control-open-read-2": {
+      "bytes": 17,
+      "sha256": "55ee7e133864d56dd41bfe53b4cd4c8532ae5e2b2868b306e64f69579fafa907",
+      "wire_bytes": 20
+    },
+    "arm-control-open-write-1": {
+      "bytes": 17,
+      "sha256": "069715fbf021b264f6f3908e0bfd26c55d20c88dbce7e50a94a784f4be3b3267",
+      "wire_bytes": 20
+    },
+    "arm-control-open-write-2": {
+      "bytes": 17,
+      "sha256": "0b1f7ca370590a3b86bc8ed26f6acbcefc41d70fed20633571b11ac6d7f5c7db",
+      "wire_bytes": 20
+    },
+    "arm-control-read-1": {
+      "bytes": 17,
+      "sha256": "c360cb057910cd980e9e7049ebc65c5addb5ac521791122a85bbafb53a9a1d4c",
+      "wire_bytes": 20
+    },
+    "arm-control-read-2": {
+      "bytes": 17,
+      "sha256": "6e6ca6ee590705cca571cae89a7675cbf9c37813dd8bb377815fad7ef4d1e093",
+      "wire_bytes": 20
+    },
+    "arm-control-write-1": {
+      "bytes": 17,
+      "sha256": "031400cf59f8ed9eeefd6b03e670a75762b6e09fc5cb27bb50dca340ca1eeb11",
+      "wire_bytes": 20
+    },
+    "arm-control-write-2": {
+      "bytes": 17,
+      "sha256": "766c0b196a84f73ab780c7e022cdb7e5a70a26ec87f562ec6dd2bbb83c8d94b5",
+      "wire_bytes": 20
+    },
+    "arm-control-seek-1": {
+      "bytes": 17,
+      "sha256": "c39d3c9e527e8292d238ab68a2138132f98a00cf3560cd2498fedcf2375f128c",
+      "wire_bytes": 20
+    },
+    "arm-control-seek-2": {
+      "bytes": 17,
+      "sha256": "3bdeaff493dd64f20984e208a0129acee8e62a6ce189124bd29ce62f14c294ad",
+      "wire_bytes": 20
+    },
+    "arm-control-sync-1": {
+      "bytes": 17,
+      "sha256": "3a11ebfc98bf2a9e0094bd65c7096ff2739751c9afd0ecc79e6115b1e4387b4a",
+      "wire_bytes": 20
+    },
+    "arm-control-sync-2": {
+      "bytes": 17,
+      "sha256": "de6cca6822b9270712882a5e4a7c3060bb6e4ae3ee513dc3a052da05430e0cf1",
+      "wire_bytes": 20
+    },
+    "arm-control-close-1": {
+      "bytes": 17,
+      "sha256": "a47494b39e773473948ba389490baf19fb65fcfe49b31eeb0c58fea96bdf1235",
+      "wire_bytes": 20
+    },
+    "arm-control-close-2": {
+      "bytes": 17,
+      "sha256": "6d5fa1666979cbb4acbea91cfefeb64457abba5f0d2cf01398efaae4ca2b19a0",
+      "wire_bytes": 20
+    },
+    "arm-control-stat-1": {
+      "bytes": 17,
+      "sha256": "f4565bf76f0c03602e505b624d5d2f8fd0b555fe5d23545ce15cec788453f901",
+      "wire_bytes": 20
+    },
+    "arm-control-stat-2": {
+      "bytes": 17,
+      "sha256": "3d866b7d24b38ff17e8e4c4c0a63189227b6024397843f23e7e736c82c40a45d",
+      "wire_bytes": 20
+    },
+    "arm-control-remove-1": {
+      "bytes": 17,
+      "sha256": "751394afffc14459a7ac6e00d2c174eff248bc061152e22bebe0d8576432af32",
+      "wire_bytes": 20
+    },
+    "arm-control-remove-2": {
+      "bytes": 17,
+      "sha256": "a2ff0700cf1b541df0faa33f65d888a138888bbbbaaef79744dbd8feeba05d76",
+      "wire_bytes": 20
+    },
+    "arm-control-rename-1": {
+      "bytes": 17,
+      "sha256": "ecf4b11126960c102df2dad92fbda591156ad69631a58559e1b05b1c3e080d14",
+      "wire_bytes": 20
+    },
+    "arm-control-rename-2": {
+      "bytes": 17,
+      "sha256": "097f0acdcc9b13ed8a7d9c85451e7c6624551c223abe69a3173eac9898688786",
+      "wire_bytes": 20
+    },
+    "arm-config-open-read-1": {
+      "bytes": 17,
+      "sha256": "0498010cc35d1eb8e524b6009aadfcdf578ba302229cb93e98c4635b056e6225",
+      "wire_bytes": 20
+    },
+    "arm-config-open-read-2": {
+      "bytes": 17,
+      "sha256": "cc398bb1da228313b022f68cd80b57b6957903f2646f524845f376abeb01eb98",
+      "wire_bytes": 20
+    },
+    "arm-config-open-write-1": {
+      "bytes": 17,
+      "sha256": "a4cedcf4ab421ccc87dbecd16647902468877d26aee2a302f6567831d92cb594",
+      "wire_bytes": 20
+    },
+    "arm-config-open-write-2": {
+      "bytes": 17,
+      "sha256": "426bf083054aa390bd25689acf55eebca3b93206925307ad093e8ea58b9211e0",
+      "wire_bytes": 20
+    },
+    "arm-config-read-1": {
+      "bytes": 17,
+      "sha256": "3c563b62718357f340e90f6c87e2a891aca4a3e3c14b621523314fcc047c4461",
+      "wire_bytes": 20
+    },
+    "arm-config-read-2": {
+      "bytes": 17,
+      "sha256": "8a82246ac936f3e32e96ddb2a3bbfeca318b0a7718d055d1564130d254fd7884",
+      "wire_bytes": 20
+    },
+    "arm-config-write-1": {
+      "bytes": 17,
+      "sha256": "4d6d3b636b6acb9aa23e4e9e826e3585c1c94c4cf36c0b3449eb325022006f88",
+      "wire_bytes": 20
+    },
+    "arm-config-write-2": {
+      "bytes": 17,
+      "sha256": "e5520d4d2c5acdf32c521fc585a965599b0e26702b7affe4fc0dc94df1480900",
+      "wire_bytes": 20
+    },
+    "arm-config-seek-1": {
+      "bytes": 17,
+      "sha256": "d4506feaf0a1e0fde56ef3447c3eb460c757f382b14f53a55d9f3c1c0bb243ee",
+      "wire_bytes": 20
+    },
+    "arm-config-seek-2": {
+      "bytes": 17,
+      "sha256": "8e603cce6e8f61d30b5f11c249b3665d86c6d104b4a814c81a0370aa21b18b7b",
+      "wire_bytes": 20
+    },
+    "arm-config-sync-1": {
+      "bytes": 17,
+      "sha256": "d205948a2c045879388407ae7fc7ad4764c8e6357ef0dbc714278ae683724e1d",
+      "wire_bytes": 20
+    },
+    "arm-config-sync-2": {
+      "bytes": 17,
+      "sha256": "69458019b5b8bea70b74f2cfa529c5ea1f35593ace8f86ec0db9770ffafb3e13",
+      "wire_bytes": 20
+    },
+    "arm-config-close-1": {
+      "bytes": 17,
+      "sha256": "7bf28ac2a4931f09d2396d2d16b7c5bfe707871f139ecf21b36fc0e93e12d0bf",
+      "wire_bytes": 20
+    },
+    "arm-config-close-2": {
+      "bytes": 17,
+      "sha256": "ddc54f4b1fe5f5d1db2c6f6faafc06798dee09d44830ef2668430f4bed6f7ca0",
+      "wire_bytes": 20
+    },
+    "arm-config-stat-1": {
+      "bytes": 17,
+      "sha256": "9981428385fe7ef7d9f6e8367c23487a68421e8df40a652f5d370c0465b21234",
+      "wire_bytes": 20
+    },
+    "arm-config-stat-2": {
+      "bytes": 17,
+      "sha256": "651676643cb4e7ad722df26b5703d97df28788ceaff8a7b9e9dc4353d611022c",
+      "wire_bytes": 20
+    },
+    "arm-config-remove-1": {
+      "bytes": 17,
+      "sha256": "f479d63cf9c23313bdeaadf0930ff821652bfd422fdaad118eb7f19ac8214da9",
+      "wire_bytes": 20
+    },
+    "arm-config-remove-2": {
+      "bytes": 17,
+      "sha256": "5440509ae4f985c5ba83e916105de0880239e01889afd7ec389870290c88e6ee",
+      "wire_bytes": 20
+    },
+    "arm-config-rename-1": {
+      "bytes": 17,
+      "sha256": "9e3afad912898520b9c0ac0257eb6e8f80ffc2753ced074ae902fc7986823dd5",
+      "wire_bytes": 20
+    },
+    "arm-config-rename-2": {
+      "bytes": 17,
+      "sha256": "1a4ada306b85818e99ddb70070f529d564728664bcbbbea624b16600696dcc1c",
+      "wire_bytes": 20
+    },
+    "ticketed-create": {
+      "bytes": 3074,
+      "sha256": "d3ff9146526eb4e2d3a2f57742a952b33eca6ab6381c0a48e9dc882c0e6aa966",
+      "wire_bytes": 3089
+    },
+    "ticketed-update": {
+      "bytes": 3074,
+      "sha256": "96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063",
+      "wire_bytes": 3089
+    },
+    "ticketed-duplicate": {
+      "bytes": 29,
+      "sha256": "cb1a888fd450a58e50a557000712dac0601649a52ae80e61a3671a8c79e17247",
+      "wire_bytes": 32
+    },
+    "ticketed-rename": {
+      "bytes": 29,
+      "sha256": "05657011e8bc582a2ca944ade7ca19970044f6513cc56c6c924a61c125c24c27",
+      "wire_bytes": 32
+    },
+    "ticketed-reorder": {
+      "bytes": 29,
+      "sha256": "e104397c44ecdfb68da4df1ce66bd204a1349a6f14e66ecda609861da3445423",
+      "wire_bytes": 32
+    },
+    "ticketed-delete": {
+      "bytes": 29,
+      "sha256": "2aa1917f9c2660c44a1c16c941c2b8216dcbddb659c26961c41f2684369cf170",
+      "wire_bytes": 32
+    },
+    "ticketed-set-reference": {
+      "bytes": 29,
+      "sha256": "cb2604fdc50587e14eef6d686a5b8a4ead0a7743970560d21933c18b09bea0ae",
+      "wire_bytes": 32
+    },
+    "near-ceiling-unknown-field": {
+      "bytes": 8191,
+      "sha256": "f4bfe5562fccd8157a07922da637524a1deb6e8124eb46af4563195ecdc983a0",
+      "wire_bytes": 8194
+    },
+    "protobuf-size-63": {
+      "bytes": 63,
+      "sha256": "6e715b39633aaf9a12918ffc63db49d0fc548e55f36385c788823cda4b5cc60e",
+      "wire_bytes": 66
+    },
+    "protobuf-size-64": {
+      "bytes": 64,
+      "sha256": "c091cccd0e05be109960e9834217760ffe9f74b5eda8dd5fdf97f7dbefc72403",
+      "wire_bytes": 67
+    },
+    "protobuf-size-65": {
+      "bytes": 65,
+      "sha256": "78fef163f56acddbfd3424c424e5986fd9d0cf7e17c62c1f69f720ffb130c779",
+      "wire_bytes": 68
+    },
+    "protobuf-size-127": {
+      "bytes": 127,
+      "sha256": "43573f96e020067b2a6914cc57707216ce41f843fed29d820086c664e5e518ba",
+      "wire_bytes": 130
+    },
+    "protobuf-size-128": {
+      "bytes": 128,
+      "sha256": "386f2d036e73765991dedb39359e647ac73376a1f7b2451018e6373dd528e872",
+      "wire_bytes": 131
+    },
+    "protobuf-size-255": {
+      "bytes": 255,
+      "sha256": "0bb86140c0f0d512978ab1ff5282429e37975b7d2dae499aa0110ab0a96720cb",
+      "wire_bytes": 258
+    },
+    "protobuf-size-256": {
+      "bytes": 256,
+      "sha256": "b2f075daa04d484b5dfd2d588a724f51676d904865ca1d6428443753a2100f60",
+      "wire_bytes": 259
+    },
+    "protobuf-size-257": {
+      "bytes": 257,
+      "sha256": "955486387b5bc276c966ad143d4de2375e3d06cb85f98df40d55e9be1e49b150",
+      "wire_bytes": 260
+    },
+    "protobuf-size-512": {
+      "bytes": 512,
+      "sha256": "ff4705cdc549997ec7df9654052e0696b1e2b56333eebd80efbe1955dff3fed7",
+      "wire_bytes": 515
+    }
+  },
+  "outputs": {
+    "old": "nonzero_sweep_first_failure_body=253 wire=257\nbody=1 wire=4 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=4 host_pending=0 raw_consumed=4 skipped_irq=0 task_passes=2\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=2\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=2\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=2\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=2\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=2\nbody=253 wire=257 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=1 host_sent=257 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=254 wire=258 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=255 wire=259 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=256 wire=260 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=257 wire=261 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=5 host_sent=261 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=512 wire=517 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=197 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=8191 wire=8226 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=7906 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=20 wire=23 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=23 host_sent=23 host_pending=0 raw_consumed=23 skipped_irq=0 task_passes=2\nbody=7 wire=10 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=10 host_sent=10 host_pending=0 raw_consumed=10 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=2\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=2\nbody=6 wire=9 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=9 host_sent=9 host_pending=0 raw_consumed=9 skipped_irq=0 task_passes=2\nbody=15 wire=18 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=18 host_pending=0 raw_consumed=18 skipped_irq=0 task_passes=2\nbody=41 wire=44 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=44 host_sent=44 host_pending=0 raw_consumed=44 skipped_irq=0 task_passes=2\nbody=1992 wire=2002 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=1682 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3079 wire=3094 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2774 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=4057 wire=4075 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=3755 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=1992 wire=2002 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=1682 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=2709 wire=2722 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2402 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=8191 wire=8194 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=7874 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=2\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=2\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=2\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=2\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=2\nbody=255 wire=258 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=256 wire=259 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=257 wire=260 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=512 wire=515 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=195 raw_consumed=256 skipped_irq=1 task_passes=2\nold_rx_negative=PASS ideal_receiver_control=PASS\n",
+    "current": "nonzero_sweep_first_failure_body=0 wire=0\nbody=1 wire=4 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=4 host_pending=0 raw_consumed=4 skipped_irq=0 task_passes=4\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=6\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=6\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=6\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=8\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=8\nbody=253 wire=257 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=257 host_pending=0 raw_consumed=257 skipped_irq=1 task_passes=12\nbody=254 wire=258 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=258 skipped_irq=1 task_passes=12\nbody=255 wire=259 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=259 skipped_irq=1 task_passes=12\nbody=256 wire=260 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=260 skipped_irq=1 task_passes=12\nbody=257 wire=261 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=5 host_sent=261 host_pending=0 raw_consumed=261 skipped_irq=1 task_passes=12\nbody=512 wire=517 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=5 host_sent=517 host_pending=0 raw_consumed=517 skipped_irq=5 task_passes=20\nbody=8191 wire=8226 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=34 host_sent=8226 host_pending=0 raw_consumed=8226 skipped_irq=125 task_passes=260\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=20 wire=23 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=23 host_sent=23 host_pending=0 raw_consumed=23 skipped_irq=0 task_passes=4\nbody=7 wire=10 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=10 host_sent=10 host_pending=0 raw_consumed=10 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=4\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=4\nbody=6 wire=9 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=9 host_sent=9 host_pending=0 raw_consumed=9 skipped_irq=0 task_passes=4\nbody=15 wire=18 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=18 host_pending=0 raw_consumed=18 skipped_irq=0 task_passes=4\nbody=41 wire=44 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=44 host_sent=44 host_pending=0 raw_consumed=44 skipped_irq=0 task_passes=4\nbody=1992 wire=2002 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=2002 host_pending=0 raw_consumed=2002 skipped_irq=28 task_passes=66\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=3079 wire=3094 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=22 host_sent=3094 host_pending=0 raw_consumed=3094 skipped_irq=45 task_passes=100\nbody=4057 wire=4075 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=43 host_sent=4075 host_pending=0 raw_consumed=4075 skipped_irq=60 task_passes=130\nbody=1992 wire=2002 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=2002 host_pending=0 raw_consumed=2002 skipped_irq=28 task_passes=66\nbody=2709 wire=2722 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=34 host_sent=2722 host_pending=0 raw_consumed=2722 skipped_irq=39 task_passes=88\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=8191 wire=8194 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=8194 host_pending=0 raw_consumed=8194 skipped_irq=125 task_passes=260\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=6\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=6\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=6\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=8\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=8\nbody=255 wire=258 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=258 skipped_irq=1 task_passes=12\nbody=256 wire=259 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=259 skipped_irq=1 task_passes=12\nbody=257 wire=260 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=260 skipped_irq=1 task_passes=12\nbody=512 wire=515 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=515 host_pending=0 raw_consumed=515 skipped_irq=5 task_passes=20\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=2896 task_passes=100\nbody=3074 wire=3089 ok=1 timeout=0 ms=3093 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=8253\nbody=3074 wire=3089 ok=1 timeout=0 ms=153 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=413\nbody=3074 wire=3089 ok=1 timeout=0 ms=150 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=405\nbody=3074 wire=3089 ok=1 timeout=0 ms=3089 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=12360\ncurrent_rx_progress=PASS mutation_receptions=1024 retained_session_dtr_cycles=20 additional_dtr_cycles=20 read_request_receptions=84 fragmented=1,3,63,64 delimiter_separate=true partial_timeout_resync=true adjacent_frame_cache_ownership=true no_frame_reader_allocations=true no_retained_allocation_growth=true total_deadline_with_continuous_progress=5000\n"
+  },
+  "extracted": {
+    "old": {
+      "reader_sha256": "4edbba870ad1f2d5c97a444ed15d2c27d82e41d7c09ad88a6740c36c90695478",
+      "stream_sha256": "f72bfbb8a2d68115c5ec0e025d9f017bb66f7f0b3d200c5fdde12a70fb944bb0"
+    },
+    "current": {
+      "reader_sha256": "a5fb7c2f32ef0d55dd72734bc606e1be03017c9988f44b5d628776e74a157f86",
+      "stream_sha256": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9"
+    }
+  },
+  "sources": {
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/delay.cpp": "1f12e590c041dea9231dd45b0f5c42b90ccb3000373f50570d2bdeccdf233454",
+    "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h": "a4deaedbf9fca8e9d5a0f8782ce4cb48194cfc5c2fb8cff40da4c2774098cdbf",
+    "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h": "428578a65d51255e4c64a940875f05ecd229a83934d6652706abb455e9138339",
+    "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_cdc_rx_progress/harness.cpp": "bd5082fc661e2ad89c8c4f8bfc932accd89dcb001efe531f71a2c5fcd8fbb1f7",
+    "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_cdc_rx_progress/cdc_fixture_tail.c": "d8566d80d1d7e8502068ab3e6a8e658eeebf8ef8d9968977c3e756f821c5b5c0",
+    "/private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include/comms/CoordinatedCdcStream.hpp": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9",
+    "/private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/src/comms/ConfiguratorBackend.cpp": "09d32bcf704624b9c47df3b2303f7872af4d61c757d512042bf1cbcb7da7a97a",
+    "/private/tmp/glyph-native-consumer-probe-20261020/include/core/ProfileStoreRxDiagnostics.hpp": "123f0e55754d8ad9b3e91b8f0f29f8e4360f428765af88e545d74d3afde26624"
+  }
+}

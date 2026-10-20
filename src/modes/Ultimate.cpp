@@ -781,13 +781,13 @@ Ultimate::Ultimate() : ControllerMode() {}
 
 void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile, const ultimate_native::PreparedView *native) {
     InputMode::SetConfig(config);
-    _profile = nullptr; _native = nullptr;
+    _profile = nullptr; _native = nullptr; _native_generation = 0;
     _engine = config.ultimate_profile_engine == 1 || (profile && profile->schema_version == ultimate_native::kSchema)
         ? Engine::NativeUnavailable : Engine::Legacy;
     if (_engine == Engine::NativeUnavailable) {
         if (config.ultimate_profile_engine == 1 && profile && profile->schema_version == ultimate_native::kSchema &&
-            native && native->valid && ultimate_native::ContextMatches(*native, config)) {
-            _profile = profile; _native = native; _engine = Engine::NativeAbi1;
+            native && native->published && ultimate_native::IsOwnedView(*native) && ultimate_native::ContextMatches(*native, config)) {
+            _profile = profile; _native = native; _native_generation = native->generation; _engine = Engine::NativeAbi1;
         }
     } else _profile = profile;
 }
@@ -795,7 +795,7 @@ void Ultimate::SetConfig(GameModeConfig &config, const UltimateProfile *profile,
 void Ultimate::UpdatePreprocessedOutputs(const ResolvedInputContext &context, OutputState &outputs, CommunicationBackendId backend) {
     if (_engine == Engine::NativeUnavailable) { ultimate_native::Neutral(outputs); return; }
     if (_engine == Engine::NativeAbi1) {
-        if (!_native || !ultimate_native::Evaluate(*_native, context, *this, outputs)) ultimate_native::Neutral(outputs);
+        if (!_native || _native->generation != _native_generation || !ultimate_native::Evaluate(*_native, context, *this, outputs)) ultimate_native::Neutral(outputs);
         return;
     }
     ControllerMode::UpdatePreprocessedOutputs(context, outputs, backend);

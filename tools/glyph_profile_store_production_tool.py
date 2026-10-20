@@ -59,6 +59,11 @@ def build_message(a, pb, json_format):
         source = a.profile_json.read_bytes(); data = json.loads(source)
         data = data.get("response", data); data = data.get("profile", data)
         json_format.ParseDict(data, m.profile, ignore_unknown_fields=False)
+        if m.profile.schema_version in (1,2,3) and ('nativePayload' in data or 'native_payload' in data):
+            raise transport.ToolError('native payload field is forbidden in legacy profile source')
+        from convert_glyph_native_ultimate_profile import validate_standalone_profile
+        try:validate_standalone_profile(m.profile,pb)
+        except ValueError as error:raise transport.ToolError(str(error)) from error
     return m
 
 def verify_production_status(a, pb, s):

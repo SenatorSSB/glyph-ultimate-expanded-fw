@@ -1,0 +1,75 @@
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.h:77:21:virtual ssize_t fs::File::streamRemaining()	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:38:17:virtual int fs::FileImpl::availableForWrite()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:51:18:virtual void fs::FileImpl::setTimeCallback(time_t (*)())	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:58:20:virtual time_t fs::FileImpl::getLastWrite()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:62:20:virtual time_t fs::FileImpl::getCreationTime()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:92:20:virtual time_t fs::DirImpl::fileTime()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:95:20:virtual time_t fs::DirImpl::fileCreationTime()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:106:18:virtual void fs::DirImpl::setTimeCallback(time_t (*)())	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:130:18:virtual bool fs::FSImpl::gc()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:133:18:virtual bool fs::FSImpl::check()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:136:20:virtual time_t fs::FSImpl::getCreationTime()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FSImpl.h:143:18:virtual void fs::FSImpl::setTimeCallback(time_t (*)())	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:28:8:virtual size_t fs::File::write(uint8_t)	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:36:8:virtual size_t fs::File::write(const uint8_t*, size_t)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:44:5:virtual int fs::File::available()	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:61:5:virtual int fs::File::read()	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:93:6:virtual void fs::File::flush()	8	static
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	0	static
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:631:7:void* std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_get_deleter(const std::type_info&) [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	8	static
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:608:7:std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::~_Sp_counted_ptr_inplace() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	8	static
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:618:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_destroy() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:52:5:virtual int fs::File::availableForWrite()	8	static
+/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/arm-none-eabi/include/c++/12.3.0/bits/shared_ptr_base.h:611:7:void std::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_M_dispose() [with _Tp = fs::Dir; _Alloc = std::allocator<void>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:82:5:virtual int fs::File::peek()	24	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:74:5:int fs::File::read(uint8_t*, size_t)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:101:6:bool fs::File::seek(uint32_t, fs::SeekMode)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:109:8:size_t fs::File::position() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:117:8:size_t fs::File::size() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:125:6:void fs::File::close()	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:132:1:fs::File::operator bool() const	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:136:6:bool fs::File::truncate(uint32_t)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:144:13:const char* fs::File::name() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:152:13:const char* fs::File::fullName() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:160:6:bool fs::File::isFile() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:168:6:bool fs::File::isDirectory() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:192:8:arduino::String fs::File::readString()	272	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:204:8:time_t fs::File::getLastWrite()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:212:8:time_t fs::File::getCreationTime()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:220:6:void fs::File::setTimeCallback(time_t (*)())	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:228:6:fs::File fs::Dir::openFile(const char*)	40	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:245:8:arduino::String fs::Dir::fileName()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:253:8:time_t fs::Dir::fileTime()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:260:8:time_t fs::Dir::fileCreationTime()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:267:8:size_t fs::Dir::fileSize()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:275:6:bool fs::Dir::isFile() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:283:6:bool fs::Dir::isDirectory() const	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:291:6:bool fs::Dir::next()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:299:6:bool fs::Dir::rewind()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:307:6:void fs::Dir::setTimeCallback(time_t (*)())	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:316:6:bool fs::FS::setConfig(const fs::FSConfig&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:324:6:bool fs::FS::begin()	16	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:335:6:void fs::FS::end()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:341:6:bool fs::FS::gc()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:348:6:bool fs::FS::check()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:355:6:bool fs::FS::format()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:362:6:bool fs::FS::info(fs::FSInfo&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:369:6:bool fs::FS::info64(fs::FSInfo64&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:376:6:fs::File fs::FS::open(const arduino::String&, const char*)	48	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:380:6:fs::File fs::FS::open(const char*, const char*)	48	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:396:6:bool fs::FS::exists(const char*)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:403:6:bool fs::FS::exists(const arduino::String&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:407:5:fs::Dir fs::FS::openDir(const char*)	32	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:176:6:void fs::File::rewindDirectory()	32	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:184:6:fs::File fs::File::openNextFile()	48	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:417:5:fs::Dir fs::FS::openDir(const arduino::String&)	32	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:421:6:bool fs::FS::remove(const char*)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:428:6:bool fs::FS::remove(const arduino::String&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:432:6:bool fs::FS::rmdir(const char*)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:439:6:bool fs::FS::rmdir(const arduino::String&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:443:6:bool fs::FS::mkdir(const char*)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:450:6:bool fs::FS::mkdir(const arduino::String&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:454:6:bool fs::FS::rename(const char*, const char*)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:461:6:bool fs::FS::rename(const arduino::String&, const arduino::String&)	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:465:8:time_t fs::FS::getCreationTime()	8	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp:472:6:void fs::FS::setTimeCallback(time_t (*)())	16	static

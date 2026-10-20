@@ -1,0 +1,9 @@
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from HAL/pico/src/core/Persistence.cpp:18:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~

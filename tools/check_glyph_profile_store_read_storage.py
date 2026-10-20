@@ -57,6 +57,8 @@ def instrument(source):
         ('    if (out.schema_version < 1', '    ReadStoragePhase(2);\n    if (out.schema_version < 1'),
         ('    return ValidateProfile(out);', '    const bool valid = ValidateProfile(out);\n    if (valid) ReadStoragePhase(3);\n    return valid;'),
     ]
+    if 'if ((out.schema_version < 1' in body:
+        replacements[2] = ('    if ((out.schema_version < 1', '    ReadStoragePhase(2);\n    if ((out.schema_version < 1')
     if 'const bool valid = ValidateProfile(out);' in body:
         replacements[-1] = ('    const bool valid = ValidateProfile(out);', '    const bool valid = ValidateProfile(out);\n    if (valid) ReadStoragePhase(3);')
     for old, new in replacements:

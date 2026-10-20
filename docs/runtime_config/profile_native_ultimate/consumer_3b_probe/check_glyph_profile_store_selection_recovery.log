@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_selection_recovery.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "selection_same_different_fail_unknown_held_nonultimate_compact=PASS\nrecovery_manual_automatic_unavailable_validator_readonly=PASS\ncommitted_boot_consume_validate_nonusb=PASS\nactual_setup_route_ordinary=PASS\nactual_setup_route_rt2_deferred=PASS\nactual_setup_route_automatic=PASS\nactual_setup_route_filesystem=PASS\nactual_setup_route_mb1=PASS\nnegative_controls_retired_manual_route_automatic_dead_refusal=PASS\nnegative_controls_old_immediate_activation_and_uninitialized_RT2=PASS\nglyph_profile_store_selection_recovery=PASS\n",
+  "stderr": "",
+  "seconds": 4.42,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_selection_recovery.log"
+}

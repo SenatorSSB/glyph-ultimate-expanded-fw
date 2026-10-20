@@ -1,0 +1,54 @@
+Processing glyph_mk6 (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5e87ae34ca025274df25b3303e9e9cb6c120123c; framework: arduino; board: pico)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/pico.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5e87ae3) > Raspberry Pi Pico
+HARDWARE: RP2040 130MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (cmsis-dap) External (blackmagic, cmsis-dap, jlink, pico-debug, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.30603.0+sha.32e74d0 
+ - tool-picotool-rp2040-earlephilhower @ 5.120300.240827 (12.3.0) 
+ - toolchain-rp2040-earlephilhower @ 5.120300.240127 (12.3.0)
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain+, Compatibility ~ soft
+[nanopb] Processing 'schema/haybox/config.proto' (config.options)
+os.chdir('/private/tmp/glyph-profile-native-20261020')
+/usr/local/bin/python3 /private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator/../generator/nanopb_generator.py --output-dir /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src --error-on-unmatched --proto-path /private/tmp/glyph-profile-native-20261020/schema/haybox config.proto
+Writing to /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h and /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.c
+os.chdir('/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator')
+Found 68 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- Nanopb @ 0.4.92
+|-- HayBox-proto @ 0.0.0+sha.5b2bb5d
+|-- joybus-pio @ 0.0.0+20261020122043.sha.f2f59c0
+|-- nes-pio @ 0.0.0+20240730101251.sha.422f16f
+|-- arduino-nunchuk @ 0.0.0+20261020122045
+|-- Adafruit_TinyUSB_XInput @ 0.0.0+20261020122046.sha.4b5617b
+|-- FastLED @ 3.6.0+sha.6daa7823c8
+|-- nanopb-arduino @ 1.1.0
+|-- Adafruit SSD1306 @ 2.5.17
+|-- Adafruit GFX Library @ 1.12.6
+|-- PacketIO @ 0.3.0
+|-- CRC32 @ 2.0.1
+|-- PCF8575 @ 0.2.5
+|-- TUCompositeHID
+|-- HayBox-proto @ 0.0.0+sha.db4e2f6
+|-- Adafruit TinyUSB Library
+|-- LittleFS @ 0.1.0
+|-- Adafruit BusIO @ 1.17.4
+|-- Wire @ 1.0
+|-- SPI @ 1.0
+|-- ESP8266SdFat @ 2.1.1
+Building in release mode
+Building compilation database compile_commands.json
+========================= [SUCCESS] Took 41.34 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+glyph_mk6      SUCCESS   00:00:41.339
+========================= 1 succeeded in 00:00:41.339 =========================

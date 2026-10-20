@@ -1,0 +1,5 @@
+src/core/InputMode.cpp:17:6:virtual void InputMode::HandleSocd(InputState&)	32	static
+src/core/InputMode.cpp:57:6:virtual void InputMode::HandleRemap(const InputState&, InputState&)	56	static
+src/core/InputMode.cpp:7:1:InputMode::InputMode()	8	static
+src/core/InputMode.cpp:9:17:GameModeConfig* InputMode::GetConfig()	0	static
+src/core/InputMode.cpp:13:6:void InputMode::SetConfig(GameModeConfig&)	0	static

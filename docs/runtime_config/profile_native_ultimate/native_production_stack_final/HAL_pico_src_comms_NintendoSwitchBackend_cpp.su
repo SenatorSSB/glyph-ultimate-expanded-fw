@@ -1,0 +1,7 @@
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:104:1:NintendoSwitchBackend::~NintendoSwitchBackend()	0	static
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:110:24:virtual CommunicationBackendId NintendoSwitchBackend::BackendId()	0	static
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:104:1:virtual NintendoSwitchBackend::~NintendoSwitchBackend()	8	static
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:114:6:virtual void NintendoSwitchBackend::SendReport()	16	static
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:66:1:NintendoSwitchBackend::NintendoSwitchBackend(InputState&, InputSource**, size_t)	16	static
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:106:6:static void NintendoSwitchBackend::RegisterDescriptor()	8	static
+HAL/pico/src/comms/NintendoSwitchBackend.cpp:155:22:static switch_gamepad_hat_t NintendoSwitchBackend::GetHatPosition(bool, bool, bool, bool)	0	static

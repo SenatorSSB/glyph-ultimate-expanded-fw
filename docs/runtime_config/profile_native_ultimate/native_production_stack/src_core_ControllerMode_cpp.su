@@ -1,0 +1,5 @@
+src/core/ControllerMode.cpp:19:6:virtual void ControllerMode::UpdatePreprocessedOutputs(const ResolvedInputContext&, OutputState&, CommunicationBackendId)	24	static
+src/core/ControllerMode.cpp:36:6:virtual void ControllerMode::UpdateDirections(bool, bool, bool, bool, bool, bool, bool, bool, uint8_t, uint8_t, uint8_t, OutputState&)	64	static
+src/core/ControllerMode.cpp:8:6:virtual void ControllerMode::UpdateOutputs(const InputState&, OutputState&, CommunicationBackendId)	96	static
+src/core/ControllerMode.cpp:3:1:ControllerMode::ControllerMode()	8	static
+src/core/ControllerMode.cpp:24:6:void ControllerMode::ResetDirections()	8	static

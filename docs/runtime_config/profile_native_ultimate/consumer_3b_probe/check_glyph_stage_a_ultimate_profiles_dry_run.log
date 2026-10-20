@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "production_nanopb_decode=true production_glyph_validation=PASS admission_negatives=6 decoder_negatives=1 name_agnostic=PASS\nglyph_stage_a_ultimate_profiles_dry_run: PASS\nprofiles=2 tables_per_profile=28 coordinates_per_table=9 refs=0,1,2\nserial_opened=false firmware_flashing=false\n",
+  "stderr": "",
+  "seconds": 1.6,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_stage_a_ultimate_profiles_dry_run.log"
+}

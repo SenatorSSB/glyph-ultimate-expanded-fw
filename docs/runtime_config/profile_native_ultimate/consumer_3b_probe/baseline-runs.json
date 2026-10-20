@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "python3",
+      "tools/check_glyph_config_010_mode_activation_capacity.py"
+    ],
+    "exit_code": 1,
+    "timeout": false,
+    "stdout": "glyph_config_010_mode_activation_capacity: FAIL: HayBox selector drift\n",
+    "stderr": "",
+    "cwd": "/private/tmp/glyph-native-curation-20261020",
+    "snapshot": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "seconds": 0.07,
+    "log": "/private/tmp/glyph-native-consumer-probe-results-3b/BASELINE-check_glyph_config_010_mode_activation_capacity.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_glyph_custom_modifier_cache_characterization.py"
+    ],
+    "exit_code": 1,
+    "timeout": false,
+    "stdout": "glyph_custom_modifier_cache_characterization: FAIL: C024 post-integration change outside validation/evidence paths\n",
+    "stderr": "",
+    "cwd": "/private/tmp/glyph-native-curation-20261020",
+    "snapshot": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "seconds": 2.42,
+    "log": "/private/tmp/glyph-native-consumer-probe-results-3b/BASELINE-check_glyph_custom_modifier_cache_characterization.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_glyph_gp_config012_button_mask_characterization.py"
+    ],
+    "exit_code": 1,
+    "timeout": false,
+    "stdout": "glyph_gp_config012_button_mask_characterization: FAIL: C024 post-integration change outside validation/evidence paths\n",
+    "stderr": "",
+    "cwd": "/private/tmp/glyph-native-curation-20261020",
+    "snapshot": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "seconds": 2.49,
+    "log": "/private/tmp/glyph-native-consumer-probe-results-3b/BASELINE-check_glyph_gp_config012_button_mask_characterization.log"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_glyph_gp_config014_modifier_capacity.py"
+    ],
+    "exit_code": 1,
+    "timeout": false,
+    "stdout": "glyph_gp_config014_modifier_capacity: FAIL: C024 post-integration change outside validation/evidence paths\n",
+    "stderr": "",
+    "cwd": "/private/tmp/glyph-native-curation-20261020",
+    "snapshot": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "seconds": 2.37,
+    "log": "/private/tmp/glyph-native-consumer-probe-results-3b/BASELINE-check_glyph_gp_config014_modifier_capacity.log"
+  }
+]

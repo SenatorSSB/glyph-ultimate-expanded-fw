@@ -1,0 +1,59 @@
+[
+  {
+    "label": "FRESH_CURRENT_SCHEMA",
+    "command": [
+      "/usr/local/bin/python3",
+      "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py",
+      "-I",
+      "/private/tmp/glyph-native-consumer-probe-20261020/schema/haybox",
+      "-f",
+      "/private/tmp/glyph-native-consumer-probe-20261020/schema/haybox/config.options",
+      "--error-on-unmatched",
+      "--no-timestamp",
+      "-D",
+      "/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/generated",
+      "/private/tmp/glyph-native-consumer-probe-20261020/schema/haybox/config.proto"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "Writing to /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/generated/config.pb.h and /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/generated/config.pb.c\n",
+    "hashes": {
+      "config.pb.h": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f",
+      "config.pb.c": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    }
+  },
+  {
+    "label": "CAPACITY014_CURRENT_DEFAULT",
+    "state": "HOST_COMPONENT_ONLY_PASS",
+    "value": {
+      "cases": 30,
+      "layout": "default",
+      "method": "existing compile_host/run and original main case assertions; current source/fresh schema"
+    },
+    "seconds": 1.45
+  },
+  {
+    "label": "CAPACITY014_CURRENT_SHORT",
+    "state": "HOST_COMPONENT_ONLY_PASS",
+    "value": {
+      "cases": 30,
+      "layout": "short",
+      "method": "existing compile_host/run and original main case assertions; current source/fresh schema"
+    },
+    "seconds": 1.33
+  },
+  {
+    "label": "BUTTON012_CURRENT_FRAGMENTS_HISTORICAL_DECODER",
+    "state": "HOST_COMPONENT_ONLY_FAIL",
+    "error": "decoder C++ source compile failed:\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config012_button_host/button_harness.cpp:58:\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/button/production_fragments.inc:28:5: error: use of undeclared identifier 'mode_chord_consumed'\n   28 |     mode_chord_consumed = false;\n      |     ^~~~~~~~~~~~~~~~~~~\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/button/production_fragments.inc:41:71: error: use of undeclared identifier 'mode_chord_consumed'\n   41 |         if (all_buttons_held(boot_buttons, mode_activation_masks[i])) mode_chord_consumed = true;\n      |                                                                       ^~~~~~~~~~~~~~~~~~~\n2 errors generated.\n",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in attempt\n  File \"<stdin>\", line 26, in button_components\n  File \"/private/tmp/glyph-native-consumer-probe-20261020/tools/check_glyph_gp_config012_button_mask_characterization.py\", line 378, in compile_variant\n    require(result.returncode == 0, f\"{name} C++ source compile failed:\\n{result.stdout}{result.stderr}\")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/private/tmp/glyph-native-consumer-probe-20261020/tools/check_glyph_gp_config012_button_mask_characterization.py\", line 61, in require\n    raise ContractError(message)\ncheck_glyph_gp_config012_button_mask_characterization.ContractError: decoder C++ source compile failed:\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config012_button_host/button_harness.cpp:58:\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/button/production_fragments.inc:28:5: error: use of undeclared identifier 'mode_chord_consumed'\n   28 |     mode_chord_consumed = false;\n      |     ^~~~~~~~~~~~~~~~~~~\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/button/production_fragments.inc:41:71: error: use of undeclared identifier 'mode_chord_consumed'\n   41 |         if (all_buttons_held(boot_buttons, mode_activation_masks[i])) mode_chord_consumed = true;\n      |                                                                       ^~~~~~~~~~~~~~~~~~~\n2 errors generated.\n\n",
+    "seconds": 0.52
+  },
+  {
+    "label": "MODE010_EXACT_UNADAPTED_COMPONENT",
+    "state": "HOST_COMPONENT_ONLY_FAIL",
+    "error": "In file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/mode_selection_harness.cpp:71:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/../../../src/core/mode_selection.cpp:4:10: fatal error: 'core/ProfileStore.hpp' file not found\n    4 | #include \"core/ProfileStore.hpp\"\n      |          ^~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in attempt\n  File \"<stdin>\", line 29, in mode_component\nAssertionError: In file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/mode_selection_harness.cpp:71:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/../../../src/core/mode_selection.cpp:4:10: fatal error: 'core/ProfileStore.hpp' file not found\n    4 | #include \"core/ProfileStore.hpp\"\n      |          ^~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n\n",
+    "seconds": 1.21
+  }
+]

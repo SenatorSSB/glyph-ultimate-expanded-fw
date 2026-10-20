@@ -12,6 +12,7 @@ constexpr uint16_t kEncoding = 1, kEngineAbi = 1;
 constexpr size_t kBodyMax = 3336, kProfileMax = 3341, kRecordMax = 3373;
 constexpr uint16_t kTrue = 0xffff;
 
+struct OwnedProgram;
 struct PreparedView {
     const uint8_t *body = nullptr;
     uint32_t generation = 0;
@@ -27,6 +28,8 @@ struct PreparedView {
     uint16_t engine_abi = 0;
     uint8_t body_digest[32] = {};
     bool valid = false;
+    bool published = false;
+    const OwnedProgram *owner = nullptr;
 };
 struct OwnedProgram { uint8_t body[kBodyMax] = {}; PreparedView view; };
 struct CandidateWorkspace { OwnedProgram program; uint32_t error_offset = 0; uint8_t error_code = 0; };
@@ -42,8 +45,9 @@ struct PayloadLease {
 };
 uint16_t Read16(const uint8_t *p);
 bool Prepare(const uint8_t *body, size_t size, uint32_t generation, PreparedView &view);
-bool CopyProgram(const PreparedView &source, OwnedProgram &destination, uint32_t generation);
+bool CopyProgram(const PreparedView &source, OwnedProgram &destination, uint32_t generation, bool publish = false);
 bool ContextDigest(const GameModeConfig &config, uint8_t digest[32]);
+bool IsOwnedView(const PreparedView &);
 bool ContextMatches(const PreparedView &, const GameModeConfig &);
 bool ValidProfile(const UltimateProfile &);
 const PreparedView &CandidateView();

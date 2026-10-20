@@ -1,0 +1,182 @@
+[
+  {
+    "case": "initial",
+    "exit_code": 0,
+    "stdout": "case=initial PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_0",
+    "exit_code": 0,
+    "stdout": "case=valid_0 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_1",
+    "exit_code": 0,
+    "stdout": "case=valid_1 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_2",
+    "exit_code": 0,
+    "stdout": "case=valid_2 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_3",
+    "exit_code": 0,
+    "stdout": "case=valid_3 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_4",
+    "exit_code": 0,
+    "stdout": "case=valid_4 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_5",
+    "exit_code": 0,
+    "stdout": "case=valid_5 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_6",
+    "exit_code": 0,
+    "stdout": "case=valid_6 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_7",
+    "exit_code": 0,
+    "stdout": "case=valid_7 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_8",
+    "exit_code": 0,
+    "stdout": "case=valid_8 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_9",
+    "exit_code": 0,
+    "stdout": "case=valid_9 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_10",
+    "exit_code": 0,
+    "stdout": "case=valid_10 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_11",
+    "exit_code": 0,
+    "stdout": "case=valid_11 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_12",
+    "exit_code": 0,
+    "stdout": "case=valid_12 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_13",
+    "exit_code": 0,
+    "stdout": "case=valid_13 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_14",
+    "exit_code": 0,
+    "stdout": "case=valid_14 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_15",
+    "exit_code": 0,
+    "stdout": "case=valid_15 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_16",
+    "exit_code": 0,
+    "stdout": "case=valid_16 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_17",
+    "exit_code": 0,
+    "stdout": "case=valid_17 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_18",
+    "exit_code": 0,
+    "stdout": "case=valid_18 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_19",
+    "exit_code": 0,
+    "stdout": "case=valid_19 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "valid_20",
+    "exit_code": 0,
+    "stdout": "case=valid_20 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "outputs",
+    "exit_code": 0,
+    "stdout": "case=outputs PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "direct_21_seeded",
+    "exit_code": 0,
+    "stdout": "case=direct_21_seeded PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "direct_max_seeded",
+    "exit_code": 0,
+    "stdout": "case=direct_max_seeded PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "direct_21_fresh",
+    "exit_code": 0,
+    "stdout": "case=direct_21_fresh PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "direct_max_fresh",
+    "exit_code": 0,
+    "stdout": "case=direct_max_fresh PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "live_21",
+    "exit_code": 0,
+    "stdout": "case=live_21 PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "live_max",
+    "exit_code": 0,
+    "stdout": "case=live_max PASS\n",
+    "stderr": ""
+  },
+  {
+    "case": "rebind",
+    "exit_code": 0,
+    "stdout": "case=rebind PASS\n",
+    "stderr": ""
+  }
+]

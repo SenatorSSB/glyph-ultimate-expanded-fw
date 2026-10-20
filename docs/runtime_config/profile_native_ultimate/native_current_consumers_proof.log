@@ -1,0 +1,19 @@
+PASS independent legacy/native full-output corpus=72
+PASS native validation negatives, canonical field-order rejection, legacy duplicate-schema compatibility, callback leases/copy poisoning/request identity/embedded rejection
+PASS host converter mixed/empty native presence refusal; finite body admission; concrete18family/role/table/rule/effect report
+PASS original/pre/post composition;6SOCD policies/history; clean/forced table winner/loser/filter;18family witnesses×60carrier rebindings
+PASS native actual LittleFS20complete profiles/revisions/staging/reserve/reboot/read/health/duplicate/cross-kind/context/unavailable; sizeof_store=8336 total=524288 used=212992 free=311296 protected=241664 staging=45056
+Traceback (most recent call last):
+  File "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_native_ultimate.py", line 255, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ~~~~^^
+  File "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_native_ultimate.py", line 243, in main
+    full_frozen_replay(temp,flags,objects,pb,config)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_native_ultimate.py", line 194, in full_frozen_replay
+    require(capture.returncode==0,'frozen vector/profile capture failed: '+capture.stdout+capture.stderr)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_stage_b_ultimate_profiles.py", line 23, in require
+    raise AssertionError(message)
+AssertionError: frozen vector/profile capture failed: v3 full selector/direction matrix input=0000000000000000 expected=a023007b/128,128,128,128,0,0 actual=a0030000/128,128,128,128,0,0
+

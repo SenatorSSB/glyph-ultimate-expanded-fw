@@ -1,0 +1,5 @@
+HAL/pico/src/comms/XInputBackend.cpp:23:24:virtual CommunicationBackendId XInputBackend::BackendId()	0	static
+HAL/pico/include/comms/XInputBackend.hpp:10:7:XInputBackend::~XInputBackend()	0	static
+HAL/pico/src/comms/XInputBackend.cpp:27:6:virtual void XInputBackend::SendReport()	24	static
+HAL/pico/include/comms/XInputBackend.hpp:10:7:virtual XInputBackend::~XInputBackend()	8	static
+HAL/pico/src/comms/XInputBackend.cpp:9:1:XInputBackend::XInputBackend(InputState&, InputSource**, size_t)	16	static

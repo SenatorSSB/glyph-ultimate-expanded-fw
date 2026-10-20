@@ -1,0 +1,18 @@
+{
+  "command": [
+    "c++",
+    "-std=c++20",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "-I/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/include",
+    "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/mode_selection_harness.cpp",
+    "-o",
+    "/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-current-component-3ewfe3og/mode"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "In file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/mode_selection_harness.cpp:71:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/../../../src/core/mode_selection.cpp:4:10: fatal error: 'core/ProfileStore.hpp' file not found\n    4 | #include \"core/ProfileStore.hpp\"\n      |          ^~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n"
+}

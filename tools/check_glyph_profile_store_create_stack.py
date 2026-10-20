@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse, concurrent.futures, hashlib, json, pathlib, re, shlex, subprocess, tempfile, os, sys
 from check_glyph_stage_b_ultimate_profiles import NANOPB
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PATTERNS = ['ConfiguratorBackend.cpp', 'ProfileStore.cpp', 'CheckedStorage.cpp', 'Persistence.cpp', '/FS.cpp', 'LittleFS/src/',
+PATTERNS = ['UltimateNativeProfile.cpp', 'UltimateNativeEvaluator.cpp', '/Ultimate.cpp', 'ControllerMode.cpp', 'InputMode.cpp', 'CommunicationBackend.cpp', 'mode_selection.cpp', 'XInputBackend.cpp', 'SwitchBackend.cpp', 'GameCubeBackend.cpp', 'ConfiguratorBackend.cpp', 'ProfileStore.cpp', 'CheckedStorage.cpp', 'Persistence.cpp', '/FS.cpp', 'LittleFS/src/',
  'RP2040Support.cpp', '/main.cpp', '/pb_encode.c', '/pb_decode.c', '/pb_common.c',
  'nanopb-arduino/src/', 'config/glyph/common/src/config.cpp', 'Adafruit_USBD_CDC.cpp',
  '/usbd.c', '/cdc_device.c', '/tusb.c', '/tusb_fifo.c', '/dcd_rp2040.c',

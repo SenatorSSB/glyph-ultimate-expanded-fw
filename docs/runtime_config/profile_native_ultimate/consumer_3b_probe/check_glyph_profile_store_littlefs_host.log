@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_littlefs_host.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "profile_store_pinned_littlefs_ram=PASS directory_bytes=2620 record_bytes=4128 replacements=128 negative_validations=128 remount_readback=true\nglyph_profile_store_littlefs_host: PASS asan=true ubsan=true framework=1.30603.0 ram_block_size=4096 ram_block_count=128 physical_multicore=NOT_TESTED\nsource_sha256 src/lfs.c 3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e\nsource_sha256 src/lfs_util.c b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1\nsource_sha256 lib/littlefs/lfs.c 8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5\nsource_sha256 lib/littlefs/lfs.h bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a\nsource_sha256 lib/littlefs/lfs_util.c 8e1376a90e923a2897388a54ebaa756ad3ea07a0e2a87e73c0045515c0a82685\nsource_sha256 lib/littlefs/lfs_util.h 825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33\n",
+  "stderr": "",
+  "seconds": 1.0,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_littlefs_host.log"
+}

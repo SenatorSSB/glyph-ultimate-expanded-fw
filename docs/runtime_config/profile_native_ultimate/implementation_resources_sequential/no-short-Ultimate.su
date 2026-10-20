@@ -1,0 +1,18 @@
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateRuntimeConfigInterpreter.hpp:256:35:constexpr const {anonymous}::RuntimeTableView* {anonymous}::FindRuntimeTableView(const RuntimeConfigView&, RuntimeTableId)	12	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:308:12:{anonymous}::LayerState {anonymous}::ResolveLayerState(const InputState&)	12	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:335:11:{anonymous}::RoleState {anonymous}::ResolveRoleState(const InputState&, const LayerState&, const EffectiveDirectionState&)	88	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:558:8:size_t {anonymous}::DirectionIndexFromAxes(int8_t, int8_t)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateRuntimeConfigInterpreter.hpp:235:16:constexpr bool {anonymous}::StringsEqual(const char*, const char*)	8	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:580:12:{anonymous}::StickPoint {anonymous}::LookupConfiguredStickPoint(const UltimateProfile*, RuntimeTableId, size_t)	80	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:320:25:{anonymous}::EffectiveDirectionState {anonymous}::ResolveEffectiveDirections(const InputState&, const LayerState&)	32	static
+/private/tmp/glyph-profile-native-20261020/include/modes/UltimateProfileEvaluator.hpp:82:13:bool UltimateProfileEvaluator::IsPressedButtonToken(const UltimateProfile&, uint64_t, uint32_t)	24	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:703:40:const UltimateProfileOutputEffect* {anonymous}::OutputProgramContext::Active(UltimateProfileOutputPhase, UltimateProfileOutputTarget) const	32	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:737:24:{anonymous}::ApplyProfileAnalogProgram(const OutputProgramContext&, const InputState&, const RoleState&, const EffectiveDirectionState&, const StickDirections&, RuntimeTableId, OutputState&)::<lambda(UltimateProfileOutputPhase, UltimateProfileOutputTarget, int8_t, int8_t)>	48	static
+/private/tmp/glyph-profile-native-20261020/include/modes/UltimateProfileEvaluator.hpp:99:13:bool UltimateProfileEvaluator::EvaluateCondition(const UltimateProfile&, const UltimateProfileCondition&, uint64_t, const bool*)	48	static
+/private/tmp/glyph-profile-native-20261020/include/modes/UltimateProfileEvaluator.hpp:142:13:void UltimateProfileEvaluator::EvaluateRoles(const UltimateProfile&, uint64_t, bool*)	40	static
+/private/tmp/glyph-profile-native-20261020/include/modes/UltimateProfileEvaluator.hpp:182:17:uint64_t UltimateProfileEvaluator::RouteLogicalInputs(const UltimateProfile*, uint64_t)	40	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:804:6:virtual void Ultimate::UpdateDigitalOutputs(const InputState&, OutputState&)	168	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:829:6:virtual void Ultimate::UpdateAnalogOutputs(const InputState&, OutputState&, CommunicationBackendId)	264	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:780:1:Ultimate::Ultimate()	8	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:782:6:void Ultimate::SetConfig(GameModeConfig&, const UltimateProfile*, const ultimate_native::PreparedView*)	32	static
+/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp:795:6:virtual void Ultimate::UpdatePreprocessedOutputs(const ResolvedInputContext&, OutputState&, CommunicationBackendId)	16	static

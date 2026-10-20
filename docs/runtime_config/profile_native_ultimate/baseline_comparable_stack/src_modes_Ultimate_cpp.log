@@ -1,0 +1,9 @@
+src/modes/Ultimate.cpp:190:6: warning: 'bool {anonymous}::MaterializeRuntimeConfigCandidateFromSourceView(const RuntimeConfigView&, RuntimeConfigCandidateState&)' defined but not used [-Wunused-function]
+  190 | bool MaterializeRuntimeConfigCandidateFromSourceView(
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/modes/Ultimate.cpp:152:6: warning: 'bool {anonymous}::CopyRuntimeConfigViewIntoActiveStorage(const RuntimeConfigView&, RuntimeConfigActiveStorage&)' defined but not used [-Wunused-function]
+  152 | bool CopyRuntimeConfigViewIntoActiveStorage(
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/modes/Ultimate.cpp:87:6: warning: 'bool {anonymous}::ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState&)' defined but not used [-Wunused-function]
+   87 | bool ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState &candidate) {
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

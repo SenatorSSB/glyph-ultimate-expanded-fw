@@ -1,0 +1,7 @@
+src/core/config_validation.cpp:57:6:bool {anonymous}::validate_profile_condition(const UltimateProfileCondition&, const bool*, const bool*, uint8_t, ConfigValidationError&, uint8_t)	176	static
+include/modes/UltimateProfileEvaluator.hpp:27:12:int UltimateProfileEvaluator::EffectKey(const UltimateProfileOutputEffect&)	0	static
+include/modes/UltimateProfileEvaluator.hpp:47:13:bool UltimateProfileEvaluator::ValidEffectShape(const UltimateProfileOutputEffect&)	8	static
+src/core/config_validation.cpp:114:6:bool {anonymous}::validate_ultimate_profile_semantics_impl(const UltimateProfile&, ConfigValidationError&, uint8_t)	544	static
+src/core/config_validation.cpp:204:6:bool validate_config_extents(const Config&)	48	static
+src/core/config_validation.cpp:301:6:bool validate_ultimate_profile_semantics(const UltimateProfile&, ConfigValidationError&)	32	static
+src/core/config_validation.cpp:312:6:bool validate_config_semantics(const Config&, ConfigValidationError&)	64	static

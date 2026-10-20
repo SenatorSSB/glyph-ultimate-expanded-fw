@@ -1,0 +1,16 @@
+{
+  "id": "GP-BIND-003",
+  "status": "HARDWARE_VALIDATED",
+  "candidate_git_sha": "307d72347653c079ec8ec6e9b6ecae3c30ae536c",
+  "firmware_artifact_sha256": "83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/307d72347653c079ec8ec6e9b6ecae3c30ae536c/83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b/firmware.uf2",
+  "hardware_result": "PASS",
+  "hardware_evidence_record": "repo-json:docs/calibration/fixtures/gp_bind_003_partial_evidence_2026-10-19.json",
+  "artifact_preflight": {
+    "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/307d72347653c079ec8ec6e9b6ecae3c30ae536c/83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b/firmware.uf2",
+    "exists": true,
+    "is_symlink": false,
+    "bytes": 979456,
+    "sha256": "83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b"
+  }
+}

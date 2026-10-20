@@ -1,0 +1,9 @@
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:8:13:load_descriptor_values	24	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:156:6:pb_field_iter_begin	32	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:166:6:pb_field_iter_begin_extension	32	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:188:6:pb_field_iter_next	28	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:195:6:pb_field_iter_find	56	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:246:6:pb_field_iter_find_extension	48	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:290:6:pb_field_iter_begin_const	32	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:295:6:pb_field_iter_begin_extension_const	32	static
+.pio/libdeps/glyph_mk6/Nanopb/pb_common.c:300:6:pb_default_field_callback	8	static

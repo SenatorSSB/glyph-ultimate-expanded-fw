@@ -1,0 +1,9 @@
+src/core/mode_selection.cpp:50:6:void set_mode_destination_selector(ModeDestinationSelector)	0	static
+src/core/mode_selection.cpp:88:6:void set_mode(CommunicationBackend*, ControllerMode*)	8	static
+src/core/mode_selection.cpp:97:6:void set_mode(CommunicationBackend*, KeyboardMode*)	16	static
+src/core/mode_selection.cpp:110:6:void set_mode(CommunicationBackend*, GameModeConfig&, Config&)	32	static
+src/core/mode_selection.cpp:195:6:void set_mode(CommunicationBackend*, GameModeId, Config&)	16	static
+src/core/mode_selection.cpp:207:6:void select_mode(CommunicationBackend**, size_t, Config&)	32	static
+src/core/mode_selection.cpp:239:6:void setup_mode_activation_bindings(const GameModeConfig*, size_t, uint64_t)	56	static
+src/core/mode_selection.cpp:256:1:cpp)	8	static
+src/core/mode_selection.cpp:256:1:cpp)	8	static

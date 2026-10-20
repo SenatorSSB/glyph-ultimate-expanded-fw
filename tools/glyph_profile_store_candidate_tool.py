@@ -145,6 +145,13 @@ def build_message(args,pb,json_format):
         message.ParseFromString(payload)
         if saved.get('receipt_format')!=1 or message.protocol_version!=2 or message.operation not in MUTATIONS.values() or not message.request_token or not message.expected_store_incarnation or message.expected_store_incarnation!=saved.get('incarnation'):raise transport.ToolError('invalid replay receipt identity')
         if saved.get('decoded_request')!=json_format.MessageToDict(message,preserving_proto_field_name=True):raise transport.ToolError('receipt decoded fields do not match exact bytes')
+        from convert_glyph_native_ultimate_profile import raw_fields,validate_profile_wire
+        try:
+            for tag,wire,value in raw_fields(payload):
+                if tag==pb.ProfileStoreRequest.DESCRIPTOR.fields_by_name['profile'].number:
+                    if wire!=2:raise ValueError('invalid profile field wire type')
+                    validate_profile_wire(value)
+        except ValueError as error:raise transport.ToolError(str(error)) from error
         host['_exact_payload']=payload
     elif args.action in ('arm','clear'):
         message.operation=pb.PROFILE_STORE_ARM_STORAGE_FAULT
@@ -172,6 +179,11 @@ def build_message(args,pb,json_format):
             if 'response' in artifact:artifact=artifact['response']
             if 'profile' in artifact:artifact=artifact['profile']
             json_format.ParseDict(artifact,message.profile,ignore_unknown_fields=False)
+            if message.profile.schema_version in (1,2,3) and ('nativePayload' in artifact or 'native_payload' in artifact):
+                raise transport.ToolError('native payload field is forbidden in legacy profile source')
+            from convert_glyph_native_ultimate_profile import validate_standalone_profile
+            try:validate_standalone_profile(message.profile,pb)
+            except ValueError as error:raise transport.ToolError(str(error)) from error
     else:
         message.operation={'pulse':pb.PROFILE_STORE_LIVENESS,'status':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ,'health':pb.PROFILE_STORE_INSPECT_HEALTH,'query':pb.PROFILE_STORE_QUERY_TRANSACTION}[args.action]
         message.profile_id=args.profile_id;message.page_cursor=args.page;message.page_size=args.page_size if args.action=='list' else 0

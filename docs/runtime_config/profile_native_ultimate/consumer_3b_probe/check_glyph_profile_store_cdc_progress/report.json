@@ -1,0 +1,69 @@
+{
+  "result": "PASS",
+  "frozen": "d59684b9368be61183881bdfc82adc774ad5f0ba",
+  "framework_version": "1.30603.0",
+  "payloads": {
+    "status": {
+      "source": "d596-status.json",
+      "source_sha256": "ff2c98519464fc2067bb7274df9b47e03321205d43ae6da8db8266802a68ea47",
+      "payload_sha256": "adafe848ca76e4f3315ac3299f75e10d543fd2073666c9670fcee9832178ab59",
+      "size": 104
+    },
+    "list": {
+      "source": "d596-postcycle-list-0.json",
+      "source_sha256": "ee54fa1463d8864a1e0bc764ac56cf1ae31e29643db02820c3f78615a2f8b1a1",
+      "payload_sha256": "657ac6d8c161f256264c66e4149e927e0d418674e8700fa4f4fde0b7eed1b93c",
+      "size": 276
+    },
+    "physical-id1-response": {
+      "source": "check_glyph_profile_store_read_storage.py output physical-id1-response.pb",
+      "payload_sha256": "74ed1ed9728c89bc988f80552326a6ddec1cce51e006e623ff0042a3dfb35342",
+      "size": 1989
+    },
+    "maximum-stage-c-response": {
+      "source": "check_glyph_profile_store_read_storage.py output maximum-stage-c-response.pb",
+      "payload_sha256": "b638e45cd4b2e0f6b2537db35fe04a559190e266aa63ab7fbd750ec22e6eaf1a",
+      "size": 4038
+    },
+    "physical-id3-response": {
+      "source": "tools/fixtures/profile_store_read_storage/physical_id3_response.json",
+      "source_sha256": "2429b2b10320a3d25655436868f58ecb1793b68b92ab4d045175e53cf63741e0",
+      "payload_sha256": "a9f5e851f9cb6c6ab60f8ab2940d9c590c6e19434319b8a65def690223b24b43",
+      "size": 3071,
+      "generation": 160
+    },
+    "physical-id4-response": {
+      "source": "tools/fixtures/profile_store_read_storage/physical_id4_response.json",
+      "source_sha256": "e9e37bfff40a5a50239c260a651cc17d453dba78a0f5198914176b6a0f6d52b8",
+      "payload_sha256": "e051fdb67aa1c0e270add82e11655fb201563ec7ea1caf2662b6e5bdc5792dc6",
+      "size": 3076,
+      "generation": 160
+    },
+    "physical-id22-response": {
+      "source": "tools/fixtures/profile_store_read_storage/physical_id22_response.json",
+      "source_sha256": "b30b8275c9fcab96d4177ee96b9626c7fe1759b2a62f798d543c2239cc4b5aed",
+      "payload_sha256": "9b40fc1411f7595d6851a2431c3c6df2060e5b772501c14f31b4d6b79a425840",
+      "size": 3072,
+      "generation": 160
+    }
+  },
+  "outputs": {
+    "old": "payload=1 ok=1 wire=4 skipped_irq=1 task_calls=2\npayload=63 ok=1 wire=66 skipped_irq=2 task_calls=2\npayload=64 ok=1 wire=67 skipped_irq=2 task_calls=2\npayload=65 ok=1 wire=68 skipped_irq=2 task_calls=2\npayload=255 ok=1 wire=258 skipped_irq=5 task_calls=5\npayload=256 ok=1 wire=259 skipped_irq=5 task_calls=5\npayload=257 ok=1 wire=260 skipped_irq=5 task_calls=5\npayload=512 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=3079 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=4096 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=8191 ok=0 wire=320 skipped_irq=6 task_calls=6\nall_nonzero_payload_sweep_1_to_600_first_failure=317\nactual_pb_payload=104 ok=1 wire=107\nactual_pb_payload=276 ok=1 wire=280\nactual_pb_payload=1989 ok=0 wire=320\nactual_pb_payload=4038 ok=0 wire=320\nactual_pb_payload=3071 ok=0 wire=320\nactual_pb_payload=3076 ok=0 wire=320\nactual_pb_payload=3072 ok=0 wire=320\nold_cdc_deferred_completion_negative=PASS first_tested_payload_failure=512\n",
+    "current": "payload=1 ok=1 wire=4 skipped_irq=2 task_calls=3\npayload=63 ok=1 wire=66 skipped_irq=3 task_calls=4\npayload=64 ok=1 wire=67 skipped_irq=3 task_calls=4\npayload=65 ok=1 wire=68 skipped_irq=3 task_calls=4\npayload=255 ok=1 wire=258 skipped_irq=5 task_calls=5\npayload=256 ok=1 wire=259 skipped_irq=5 task_calls=5\npayload=257 ok=1 wire=260 skipped_irq=5 task_calls=5\npayload=512 ok=1 wire=517 skipped_irq=9 task_calls=9\npayload=3079 ok=1 wire=3094 skipped_irq=49 task_calls=49\npayload=4096 ok=1 wire=4115 skipped_irq=65 task_calls=65\npayload=8191 ok=1 wire=8226 skipped_irq=129 task_calls=129\nall_nonzero_payload_sweep_1_to_600_first_failure=0\nactual_pb_payload=104 ok=1 wire=107\nactual_pb_payload=276 ok=1 wire=280\nactual_pb_payload=1989 ok=1 wire=1999\nactual_pb_payload=4038 ok=1 wire=4056\nactual_pb_payload=3071 ok=1 wire=3086\nactual_pb_payload=3076 ok=1 wire=3091\nactual_pb_payload=3072 ok=1 wire=3087\ncurrent_cdc_progress=PASS repeated_profile_reads=1024 mixed_rounds=147 dtr_reconnects=20 dropped_responses=9 stalled_host_recovery=8 slow_reader_ms_per_packet=3 disconnected_bound_ms=2000 no_tx_allocations=true no_retained_host_allocation_growth=true actual_nanopb_reencode=true\n"
+  },
+  "sources": {
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/cores/rp2040/delay.cpp": "1f12e590c041dea9231dd45b0f5c42b90ccb3000373f50570d2bdeccdf233454",
+    "/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h": "428578a65d51255e4c64a940875f05ecd229a83934d6652706abb455e9138339",
+    "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_cdc_progress/harness.cpp": "152c1d14f5aa040abfbf2f0379576060c768eb32433860d046cc93d3688d3b98",
+    "/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_cdc_progress/cdc_fixture_tail.c": "ef3e56399d3b5e152ec9ba635f8baeb6e15a4b716073c54bb7141e28283e1938",
+    "/private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include/tusb_config_pico.h": "ca059e0e8ff7f779e469b40ad67bea695e9d69abf092af7e119993963ba2238c",
+    "/private/tmp/glyph-native-consumer-probe-20261020/schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "/private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include/comms/CoordinatedCdcStream.hpp": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9",
+    "/private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/src/comms/ConfiguratorBackend.cpp": "09d32bcf704624b9c47df3b2303f7872af4d61c757d512042bf1cbcb7da7a97a"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_native_ultimate.py",
+    "--default-enum"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "PASS independent legacy/native full-output corpus=72\nPASS native validation negatives, canonical field-order rejection, legacy duplicate-schema compatibility, callback leases/copy poisoning/request identity/embedded rejection\nPASS original/pre/post composition;6SOCD policies/history; clean/forced table winner/loser/filter;18family witnesses\u00d760carrier rebindings\nPASS native actual LittleFS20complete profiles/revisions/staging/reserve/reboot/read/health/duplicate/cross-kind/context/unavailable; sizeof_store=8712 total=524288 used=212992 free=311296 protected=241664 staging=45056\\nv1: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk\nv2: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk\nv3: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk\n",
+  "stderr": "",
+  "seconds": 24.79,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_native_ultimate-default-enum.log"
+}

@@ -3,12 +3,23 @@
 #include <pb_decode.h>
 #include <pb_encode.h>
 #include <cstring>
+#include <new>
 
 namespace ultimate_native {
 uint16_t Read16(const uint8_t *p) { return uint16_t(p[0]) | uint16_t(p[1]) << 8; }
 namespace {
 CandidateWorkspace candidate;
 PayloadLease candidate_lease;
+// Admission, initialization and identity observation are synchronous core0
+// operations. This one bounded SHA context is reset in place, never nested or
+// used in polling/interrupts; the existing SHA primitive remains unchanged.
+Sha256 &ScratchHash() {
+    alignas(Sha256) static uint8_t storage[sizeof(Sha256)];
+    return *::new (storage) Sha256(); // placement construction; no allocation
+}
+__attribute__((noinline)) void BodyDigest(const uint8_t *b, size_t n, uint8_t digest[32]) {
+    Sha256 &hash=ScratchHash(); hash.Update(b,n); hash.Final(digest);
+}
 bool Token(uint16_t t, uint8_t roles, bool directions, bool digital) {
     if (t == 0 || t == kTrue) return true;
     const uint16_t kind = t & 0xf000, id = t & 0xfff;
@@ -94,8 +105,8 @@ bool ScanProfile(const uint8_t *bytes, size_t size, PayloadLease &lease) {
     lease.Release(); return !native;
 }
 }
-bool Prepare(const uint8_t *b, size_t n, uint32_t generation, PreparedView &v) {
-    v.valid=false;
+static __attribute__((noinline)) bool PrepareStructure(const uint8_t *b, size_t n, uint32_t generation, PreparedView &v) {
+    v.valid=false;v.published=false;v.owner=nullptr;
     if(!b || n<608 || n>kBodyMax || std::memcmp(b,"GNP5",4) || Read16(b+4)!=kEncoding ||
        Read16(b+6)!=kEngineAbi || Read16(b+8)!=n || Read16(b+94)) return false;
     const uint8_t count=b[10],early=b[11],sources=b[12],rules=b[13],bindings=b[14],effects=b[15];
@@ -123,12 +134,13 @@ bool Prepare(const uint8_t *b, size_t n, uint32_t generation, PreparedView &v) {
         const bool base=i+1==b[17] || i+1==b[18];
         for(uint8_t j=0;j<4;++j) if(!Token(Read16(p+1+j*2),base?early:count,!base,false)) return false;
     }
-    // Six compact priority bitsets; no large local matrices or recursion.
-    uint32_t priorities[5][8] = {};
+    // Table priorities need one compact bitset; effect priority domains use
+    // bounded pairwise comparisons (at most120 pairs) without local matrices.
+    uint32_t priorities[8] = {};
     v.rule_offset=offset;
     for(uint8_t i=0;i<rules;++i,offset+=4) {
         const uint8_t *p=b+offset;
-        if(!Priority(priorities[0],p[0]) || p[1]>=28 || !Token(Read16(p+2),count,true,false)) return false;
+        if(!Priority(priorities,p[0]) || p[1]>=28 || !Token(Read16(p+2),count,true,false)) return false;
     }
     v.binding_offset=offset;
     for(uint8_t i=0;i<bindings;++i,offset+=6) {
@@ -140,8 +152,13 @@ bool Prepare(const uint8_t *b, size_t n, uint32_t generation, PreparedView &v) {
         const uint8_t *p=b+offset; const uint8_t target=p[0],mode=p[7];
         if(target<1 || target>5 || !Token(Read16(p+2),count,true,true) || !Token(Read16(p+4),count,true,true) ||
            !Winner(p[28]) || (p[29]&~3) || Read16(p+30)) return false;
-        if(target==5) { if(!Priority(priorities[1],p[1]) || !Priority(priorities[2],p[1])) return false; }
-        else if(!Priority(priorities[target],p[1])) return false;
+        if(!p[1]) return false;
+        for(uint8_t j=0;j<i;++j) {
+            const uint8_t *previous=b+v.effect_offset+j*32;
+            const bool overlap=previous[0]==target ||
+                (target==5 && previous[0]<=2) || (previous[0]==5 && target<=2);
+            if(overlap && previous[1]==p[1]) return false;
+        }
         if(target==3 || target==4) {
             if(p[6] || mode || p[8] || p[9] || !Zero(p+11,17) || (p[29]&2)) return false;
         } else {
@@ -160,21 +177,27 @@ bool Prepare(const uint8_t *b, size_t n, uint32_t generation, PreparedView &v) {
     v.source_count=sources;v.rule_count=rules;v.binding_count=bindings;v.effect_count=effects;
     v.default_table=b[16];v.ls_source=b[17];v.rs_source=b[18];v.dpad_flags=b[19];
     v.mode_gate=Read16(b+20);v.ls_digital_gate=Read16(b+22);v.rs_digital_gate=Read16(b+24);v.dpad_gate=Read16(b+26);
-    v.engine_abi=kEngineAbi;Sha256 hash;hash.Update(b,n);hash.Final(v.body_digest);v.valid=true;return true;
+    v.engine_abi=kEngineAbi;return true;
 }
-bool CopyProgram(const PreparedView &source, OwnedProgram &out, uint32_t generation) {
+bool Prepare(const uint8_t *b, size_t n, uint32_t generation, PreparedView &v) {
+    // Structural-priority scratch is gone before SHA scratch is allocated.
+    // These sequential phases cannot retain overlapping local workspaces.
+    if (!PrepareStructure(b,n,generation,v)) return false;
+    BodyDigest(b,n,v.body_digest);v.valid=true;return true;
+}
+bool CopyProgram(const PreparedView &source, OwnedProgram &out, uint32_t generation, bool publish) {
     if(!source.valid || !source.body || source.body_length>kBodyMax) return false;
     std::memmove(out.body,source.body,source.body_length);out.view=source;
-    out.view.body=out.body;out.view.generation=generation;return true;
+    out.view.body=out.body;out.view.generation=generation;out.view.owner=&out;out.view.published=publish;return true;
 }
 bool ContextDigest(const GameModeConfig &c, uint8_t digest[32]) {
     if(c.mode_id!=MODE_ULTIMATE || c.button_remapping_count>sizeof(c.button_remapping)/sizeof(c.button_remapping[0]) ||
        c.socd_pairs_count>sizeof(c.socd_pairs)/sizeof(c.socd_pairs[0])) return false;
-    Sha256 h;static constexpr char domain[]="Glyph.Native.Preprocess.v1";h.Update(domain,sizeof(domain));
+    Sha256 &h=ScratchHash();static constexpr char domain[]="Glyph.Native.Preprocess.v1";h.Update(domain,sizeof(domain));
     uint8_t v[3]={uint8_t(c.mode_id),uint8_t(uint16_t(c.mode_id)>>8),uint8_t(c.button_remapping_count)};h.Update(v,3);
     for(size_t i=0;i<c.button_remapping_count;++i) {
         const auto &r=c.button_remapping[i];
-        if(r.physical_button<1 || r.physical_button>60 || r.activates<0 || r.activates>60) return false;
+        if(r.physical_button<1 || r.physical_button>60 || uint32_t(r.activates)>60) return false;
         v[0]=r.physical_button;v[1]=r.activates;h.Update(v,2);
     }
     v[0]=c.socd_pairs_count;h.Update(v,1);
@@ -184,6 +207,9 @@ bool ContextDigest(const GameModeConfig &c, uint8_t digest[32]) {
         v[0]=s.button_dir1;v[1]=s.button_dir2;v[2]=s.socd_type;h.Update(v,3);
     }
     h.Final(digest);return true;
+}
+bool IsOwnedView(const PreparedView &v) {
+    return v.valid && v.owner && &v.owner->view == &v && v.body == v.owner->body && v.generation;
 }
 bool ContextMatches(const PreparedView &v,const GameModeConfig &c) { uint8_t digest[32];return v.valid && ContextDigest(c,digest) && !std::memcmp(digest,v.body+28,32); }
 const PayloadLease *Lease(const UltimateProfile &p) { return p.native_payload.funcs.encode==Encode?static_cast<const PayloadLease *>(p.native_payload.arg):nullptr; }

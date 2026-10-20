@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_request_identity.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "sha256_vectors=PASS authenticated_request_identity=PASS caller_digest_negative_control=PASS old_protocol_fixture=PASS full_name_bound=PASS\nglyph_profile_store_request_identity: PASS\n",
+  "stderr": "",
+  "seconds": 0.74,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_request_identity.log"
+}

@@ -1,0 +1,5 @@
+src/modes/CustomControllerMode.cpp:68:6:virtual void CustomControllerMode::UpdateAnalogOutputs(const InputState&, OutputState&, CommunicationBackendId)	104	static
+src/modes/CustomControllerMode.cpp:34:6:virtual void CustomControllerMode::UpdateDigitalOutputs(const InputState&, OutputState&)	48	static
+src/modes/CustomControllerMode.cpp:8:1:CustomControllerMode::CustomControllerMode()	8	static
+src/modes/CustomControllerMode.cpp:10:6:void CustomControllerMode::SetConfig(GameModeConfig&, const CustomModeConfig&)	56	static
+src/modes/CustomControllerMode.cpp:152:8:Button CustomControllerMode::GetDirectionButton(const Button*, StickDirectionButton)	0	static

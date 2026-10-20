@@ -1,0 +1,5 @@
+.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:6:13:bool pb_print_write(pb_ostream_t*, const pb_byte_t*, size_t)	8	static
+.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:16:13:bool pb_stream_read(pb_istream_t*, pb_byte_t*, size_t)	16	static
+.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:12:14:pb_ostream_s as_pb_ostream(arduino::Print&)	16	static
+.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:26:14:pb_istream_s as_pb_istream(arduino::Stream&, size_t)	0	static
+.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp:34:14:pb_istream_s as_pb_istream(arduino::Stream&)	0	static

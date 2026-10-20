@@ -484,6 +484,7 @@ bool ProfileStore::Begin(uint32_t expected, uint32_t required_root_format) {
     _protected_ready = false;
     _active_id = 0;
     _active_revision = 0;
+    _active_native.view.valid = false; _active_native_lease.Release();
     return Bootstrap(false);
 }
 
@@ -509,6 +510,7 @@ bool ProfileStore::BeginRecovery(uint32_t expected, uint32_t required_root_forma
     _protected_ready = false;
     _active_id = 0;
     _active_revision = 0;
+    _active_native.view.valid = false; _active_native_lease.Release();
     return Bootstrap(true);
 }
 
@@ -967,6 +969,8 @@ bool ProfileStore::ReadProfile(
     ProfileStorePaths::RecordPath(path, sizeof(path), id, rev);
     size_t n = 0;
     static uint8_t wire[kMaxRecordWireBytes];
+    static ultimate_native::PayloadLease read_lease;
+    read_lease.Release(); // invalidate the prior read before reusing its wire
     if (!ProfileStoreReadTrace::Mark(10) || !_storage->Probe(path, &n) ||
         !ProfileStoreReadTrace::Mark(11, n) || n < 32 || n > sizeof(wire) ||
         !ProfileStoreReadTrace::Mark(12) || !_storage->CheckedRead(path, wire, n, Kind::Record) ||
@@ -983,8 +987,6 @@ bool ProfileStore::ReadProfile(
         return false;
     }
     out = UltimateProfile_init_default;
-    static ultimate_native::PayloadLease read_lease;
-    read_lease.Release();
     if (!ultimate_native::DecodeProfile(wire + 32, n - 32, out, read_lease))
         return false;
     if (!ProfileStoreReadTrace::Mark(17)) return false;
@@ -1044,7 +1046,7 @@ const UltimateProfile *ProfileStore::Activate(uint32_t id, Status *status) {
     }
     _active_profile = _candidate_profile;
     if (_active_profile.schema_version == ultimate_native::kSchema) {
-        if (!ultimate_native::CopyProgram(ultimate_native::CandidateView(), _active_native, _native_generation) ||
+        if (!ultimate_native::CopyProgram(ultimate_native::CandidateView(), _active_native, _native_generation, true) ||
             !ultimate_native::BindOwned(_active_profile, _active_native, _active_native_lease)) {
             if (status) *status = Status::Invalid;
             return nullptr;

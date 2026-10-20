@@ -56,6 +56,16 @@ def wire_request(token: int, context: str) -> bytes:
     if context == 'configurator': return cobs_encode(bytes([IDENTITY_COMMAND]) + payload)
     raise ValueError('unknown identity transport context')
 
+def native_engine(profile) -> dict:
+    """Name the native engine only with an independently available body header.
+
+    The72-byte wire alone supplies schema and payload digest, never a body,
+    generation or build hash; it cannot perform this body check.
+    """
+    from convert_glyph_native_ultimate_profile import validate_native_body
+    if profile.schema_version != 5:raise ValueError('profile is not native schema5')
+    return validate_native_body(profile.native_payload)
+
 def payload_digest(profile) -> str:
     return hashlib.sha256(DOMAIN + profile.SerializeToString(deterministic=True)).hexdigest()
 

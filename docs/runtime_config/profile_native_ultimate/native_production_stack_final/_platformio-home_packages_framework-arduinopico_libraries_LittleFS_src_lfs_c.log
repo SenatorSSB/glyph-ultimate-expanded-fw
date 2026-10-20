@@ -1,0 +1,4 @@
+In file included from .platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c:10:
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:450:13: warning: 'lfs_mlist_isopen' defined but not used [-Wunused-function]
+  450 | static bool lfs_mlist_isopen(struct lfs_mlist *head,
+      |             ^~~~~~~~~~~~~~~~

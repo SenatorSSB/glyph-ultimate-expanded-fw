@@ -1,0 +1,13 @@
+In file included from .platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:26:
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h: In member function 'virtual fs::FileImplPtr littlefs_impl::LittleFSDirImpl::openFile(fs::OpenMode, fs::AccessMode)':
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:558:17: warning: stack usage might be unbounded [-Wstack-usage=]
+  558 |     FileImplPtr openFile(OpenMode openMode, AccessMode accessMode) override {
+      |                 ^~~~~~~~
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h: In member function 'virtual time_t littlefs_impl::LittleFSDirImpl::fileTime()':
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:585:12: warning: stack usage might be unbounded [-Wstack-usage=]
+  585 |     time_t fileTime() override {
+      |            ^~~~~~~~
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h: In member function 'virtual time_t littlefs_impl::LittleFSDirImpl::fileCreationTime()':
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:601:12: warning: stack usage might be unbounded [-Wstack-usage=]
+  601 |     time_t fileCreationTime() override {
+      |            ^~~~~~~~~~~~~~~~

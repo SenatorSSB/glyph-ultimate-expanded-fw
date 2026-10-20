@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_timeout_resynchronization.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "glyph_profile_store_timeout_resynchronization: FAIL: too many values to unpack (expected 2, got 3)\n",
+  "stderr": "",
+  "seconds": 0.46,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_timeout_resynchronization.log"
+}

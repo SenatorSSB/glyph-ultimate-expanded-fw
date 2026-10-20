@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_stage_b_ultimate_profiles.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "encoded_config_sizes=legacy:130 one:3197 two:6248 max:6248\nglyph_stage_b_ultimate_profiles: PASS\ngenerated_nanopb_decode=true production_validation=true v1_legacy=true v2_evaluator=true v3_stage_c_routing=true negatives=10\nsizeof_config=31592\n",
+  "stderr": "",
+  "seconds": 1.52,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_stage_b_ultimate_profiles.log"
+}

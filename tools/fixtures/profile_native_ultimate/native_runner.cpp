@@ -38,7 +38,7 @@ int main(int argc,char **argv) {
     require(ultimate_native::DecodeProfile(raw.data(),raw.size(),p,lease),"native profile callback decode");
     require(ultimate_native::ValidProfile(p),"native prepare");
     static ultimate_native::OwnedProgram active;static ultimate_native::PayloadLease active_lease;
-    require(ultimate_native::CopyProgram(ultimate_native::CandidateView(),active,7),"owned publication");
+    require(ultimate_native::CopyProgram(ultimate_native::CandidateView(),active,7,true),"owned publication");
     require(ultimate_native::BindOwned(p,active,active_lease),"active wrapper rebind");
     std::fill(raw.begin(),raw.end(),0xa5);lease.Release();
     GameModeConfig mc{};mc.mode_id=MODE_ULTIMATE;mc.ultimate_profile_engine=1;
@@ -87,6 +87,7 @@ int main(int argc,char **argv) {
         uint8_t digest[32];require(ultimate_native::ContextDigest(transformed,digest),"all supported SOCD contexts");
         std::memcpy(active.body+28,digest,32);
         require(ultimate_native::Prepare(active.body,active.view.body_length,7,active.view),"transformed prepared test context");
+        require(ultimate_native::CopyProgram(active.view,active,7,true),"context fixture publication");
         require(ultimate_native::BindOwned(p,active,active_lease),"context fixture rebind");
         Ultimate fresh;LegacyUltimate old;old.SetConfig(transformed,&config.ultimate_profiles[0]);
         transformed.ultimate_profile_engine=1;fresh.SetConfig(transformed,&p,&active.view);

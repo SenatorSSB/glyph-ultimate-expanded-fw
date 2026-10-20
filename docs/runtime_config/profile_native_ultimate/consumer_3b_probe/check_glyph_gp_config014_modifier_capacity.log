@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_gp_config014_modifier_capacity.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "glyph_gp_config014_modifier_capacity: FAIL: C024 post-integration change outside validation/evidence paths\n",
+  "stderr": "",
+  "seconds": 2.36,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_gp_config014_modifier_capacity.log"
+}

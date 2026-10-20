@@ -585,6 +585,8 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
         failures.append(f"Stage-A supports at most two ultimate_profiles, found {len(profiles)}")
 
     for profile_index, profile in enumerate(profiles, start=1):
+        if profile.native_payload:
+            failures.append(f"ultimate_profiles[{profile_index}] contains forbidden embedded native payload")
         label = f"ultimate_profiles[{profile_index}]"
         if profile.schema_version not in (1, 2, 3):
             failures.append(

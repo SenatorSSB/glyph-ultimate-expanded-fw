@@ -229,3 +229,58 @@ Direct source correction: remap activates0 is admitted disable; SOCD enums0..5 a
 StageA, StageB and StageC both enumABIs PASS with narrowly adapted native link dependencies and preserved historical oracle bodies/fixtures/assertions. Shared ControllerMode historical pin is checked against immutable A, while current default hook is checked for exactly one remap/SOCD and unchanged delegation; archived baseline Ultimate header preserves frozen oracle class ABI. Selection/recovery PASS with scratch-only native-view compatibility for the immutable test double. GP-BIND003 source found initial failed-Activate ActiveId regression; fixed by invalidating native owner/view while retaining historical legacy metadata behavior. Its final adapter run remains pending at this checkpoint. Raw initial independent affected-consumer probe (21commands9PASS12FAIL) preserved under `consumer_initial_probe/`; not a final-suite PASS.
 
 Intermediate fallback build first failed tool-scons download under restricted networking (environment incomplete), then permitted network-enabled retry SUCCESS53.91s: RAM195664/262144, flash500892/1568768. Full log preserved. Build ran on intermediate committed6e plus evolving uncommitted source; exact consumed diff/source hash was not retained and is UNKNOWN. This is a resource observation only, not final committed candidate/build/custody. Required final exact build, source review, hardware handoff/HEP remain incomplete. No device action.
+
+## M5 corrected-policy, ownership and actual-host checkpoint (2026-10-20)
+
+The sole writer continued the authorized internal M2–M6 chain after3b792fd7.
+Root findings at3b are preserved in root_findings_3b.json, including the executed
+mixed-source converter admission defect; those historical failures are not
+relabeled PASS. Forced-table clean conversion now changes all nine literal
+points of the explicit ordinary table and adds an ordinary selection rule. It
+adds neither a fixed-coordinate force effect nor a hidden Down contribution;
+only genuine clean_down_a requires the supplied Down remap/SOCD context.
+Converter output includes profile-specific18-family/roles/tables/rules/bindings/
+source/effect correspondence and explicit policy changes. Raw CLI presence
+scanning rejects empty/nonempty legacy tag8 before proto3 loses presence.
+
+Owned views now authenticate their owner address and publication, and Ultimate
+latches the active generation. Read-wire leases invalidate before reuse;
+Begin/BeginRecovery clear native publication. Actual observer tests bind the
+immutable active r1 wrapper/digest while stored r3 exists, then reject copied
+views or changed generation. Actual LittleFS twenty-profile fixtures each have
+all28tables, complete converted source families and independent original A,
+SoCD-clean direction, ordinary forced-table and A+L+R bindings; each wrapper2014,
+record2046, one4096 charge. Actual used212992/free311296/protected241664/staging45056
+are distinct reported quantities; reserve/partition limits are unchanged.
+
+native_full_proof_short.log records independent72 native comparisons, exact
+frozen Stage-C1,222,420 replay (37 converted profile/context snapshots), all
+original assertions,3,372,096 broad comparisons (not unique inputs), actual
+98,304 Custom/default-hook full-output comparisons with all6SOCD histories,
+60rawIDs and modifier counts0/1/10/20, plus current mode/button HOST_COMPONENT_ONLY
+assertions. Historical C010/C011/C012/C014 stock context failures remain raw in
+consumer_3b_probe; the original fixtures/pins/assertions are unchanged. The
+separate historical_consumer_host_proof retains independently executed C014
+60original cases bothABIs. Named source mutation controls fail their intended
+slot/domain/once-SOCD/cancelled-A/priority/owner/generation/callback/wire/request/
+embedded-admission assertions. Actual Configurator COBS/native CREATE/100READ,
+checked-reference engine persistence and maximum3341 wrapper/3373 record run
+without device use. Final response-lease mutation/defaultABI replay is pending
+at this checkpoint and must be recorded separately.
+
+The actual production compiledb exposed larger O3 validation frames than the
+Os layout probe. Effect priority validation now uses bounded pair comparisons
+(at most120) and one32-byte table bitset. Actual new structural frames are
+PrepareStructure144+Token16+Prepare24=184, within256 new-local aggregate. Raw
+prior360/O3 observations remain in earlier resource directories. Existing SHA
+frames are separately composed; no whole-target/IRQ/ROM bound, target timing or
+peak measurement is claimed. Current compiledb record-open inventory2784 is a
+conservative enumerated chain versus2048 per-core reservation and4096 scratch
+bank, not a certified safe stack. Comparable exactA inventory is recorded
+separately for source review. No stack/storage/reserve limit changed. Final
+exact committed firmware build/custody, fresh independent source review,
+resource adjudication and native H1–H12 hardware acceptance remain required.
+Owner reports XInput, Switch and Gamecube routes available and no external SWD/
+timing equipment; controller revision/host/adapter details remain unspecified.
+No diagnostic facility, metric transport, controller action or hardware PASS
+has been added or inferred.

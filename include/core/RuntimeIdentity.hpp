@@ -56,7 +56,8 @@ inline Snapshot Observe(CommunicationBackend *primary, const Config &config,
     const uint32_t native_generation = native ? native->generation : 0;
     if (profile->schema_version == ultimate_native::kSchema &&
         (context->ultimate_profile_engine != 1 || ultimate.ActiveEngine() != Ultimate::Engine::NativeAbi1 ||
-         !native || native != store.ActiveNativeView() || !native->valid || !native_generation ||
+         !native || native != store.ActiveNativeView() || !ultimate_native::IsOwnedView(*native) || !native->published ||
+         !native_generation || ultimate.NativeGeneration() != native_generation ||
          !ultimate_native::ContextMatches(*native, *context) || !ultimate_native::Lease(*profile) ||
          ultimate_native::Lease(*profile)->bytes != native->body || !ultimate_native::Lease(*profile)->live)) {
         s.status = Status::SnapshotUnavailable; return s;

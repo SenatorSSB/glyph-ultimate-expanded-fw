@@ -1,0 +1,29 @@
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:15:6:bool ultimate_native::{anonymous}::Token(uint16_t, uint8_t, bool, bool)	12	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:23:6:bool ultimate_native::{anonymous}::Zero(const uint8_t*, size_t)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:25:6:bool ultimate_native::{anonymous}::Priority(uint32_t*, uint8_t)	12	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:49:10:bool ultimate_native::{anonymous}::Cursor::Var(uint32_t&)	16	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:60:10:bool ultimate_native::{anonymous}::Cursor::Field(uint32_t&, uint8_t&, const uint8_t*&, size_t&, uint32_t&)	40	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:82:6:bool ultimate_native::{anonymous}::ScanProfile(const uint8_t*, size_t, ultimate_native::PayloadLease&)	72	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:231:6:bool ultimate_native::RejectPayload(pb_istream_t*, const pb_field_t*, void**)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:29:6:bool ultimate_native::{anonymous}::Encode(pb_ostream_t*, const pb_field_t*, void* const*)	16	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:34:6:bool ultimate_native::{anonymous}::Decode(pb_istream_t*, const pb_field_t*, void**)	64	static
+/private/tmp/glyph-profile-native-20261020/include/core/Sha256.hpp:10:5:Sha256::Sha256()	16	static
+/private/tmp/glyph-profile-native-20261020/include/core/Sha256.hpp:33:10:void Sha256::Transform()	160	static
+/private/tmp/glyph-profile-native-20261020/include/core/Sha256.hpp:11:10:void Sha256::Update(const void*, size_t)	24	static
+/private/tmp/glyph-profile-native-20261020/include/core/Sha256.hpp:20:10:void Sha256::Final(uint8_t*)	48	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:12:32:void ultimate_native::{anonymous}::BodyDigest(const uint8_t*, size_t, uint8_t*)	128	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:8:10:uint16_t ultimate_native::Read16(const uint8_t*)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:100:6:bool ultimate_native::Prepare(const uint8_t*, size_t, uint32_t, PreparedView&)	248	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:168:6:bool ultimate_native::CopyProgram(const PreparedView&, OwnedProgram&, uint32_t)	32	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:173:6:bool ultimate_native::ContextDigest(const GameModeConfig&, uint8_t*)	152	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:191:6:bool ultimate_native::ContextMatches(const PreparedView&, const GameModeConfig&)	40	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:192:21:const ultimate_native::PayloadLease* ultimate_native::Lease(const UltimateProfile&)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:193:6:void ultimate_native::Bind(UltimateProfile&, PayloadLease&)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:194:6:bool ultimate_native::BindOwned(UltimateProfile&, const OwnedProgram&, PayloadLease&)	12	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:198:6:bool ultimate_native::ValidProfile(const UltimateProfile&)	8	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:204:21:const ultimate_native::PreparedView& ultimate_native::CandidateView()	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:205:6:bool ultimate_native::PreserveProfile(UltimateProfile&)	8	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:209:6:bool ultimate_native::DecodeProfile(const uint8_t*, size_t, UltimateProfile&, PayloadLease&)	48	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:218:6:bool ultimate_native::PrepareRequest(const uint8_t*, size_t, ProfileStoreRequest&, PayloadLease&)	64	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:232:6:void ultimate_native::RejectEmbedded(Config&)	0	static
+/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp:233:6:void ultimate_native::ClearEmbeddedCallbacks(Config&)	16	static

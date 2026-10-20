@@ -1,0 +1,63 @@
+{
+  "abis": {
+    "no-short": {
+      "config_bytes": 56288,
+      "context_bytes": 12,
+      "mode_bytes": 768,
+      "native_active_plus_candidate_bytes": 7800,
+      "native_candidate_bytes": 3904,
+      "native_frame_bytes": 132,
+      "native_owned_bytes": 3896,
+      "native_view_bytes": 560,
+      "preprocessing_copy_bytes": 48,
+      "profile_bytes": 2352,
+      "profile_store_bytes": 8664,
+      "request_bytes": 2504,
+      "response_bytes": 3224
+    },
+    "short": {
+      "config_bytes": 31456,
+      "context_bytes": 12,
+      "mode_bytes": 224,
+      "native_active_plus_candidate_bytes": 7800,
+      "native_candidate_bytes": 3904,
+      "native_frame_bytes": 132,
+      "native_owned_bytes": 3896,
+      "native_view_bytes": 560,
+      "preprocessing_copy_bytes": 48,
+      "profile_bytes": 2160,
+      "profile_store_bytes": 8280,
+      "request_bytes": 2312,
+      "response_bytes": 3032
+    }
+  },
+  "core0_stack_reservation_bytes": 2048,
+  "core1_stack_reservation_bytes": 2048,
+  "descriptor_hashes": {
+    "config.pb.c": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+    "config.pb.h": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f"
+  },
+  "limits_changed": false,
+  "operation_bounds": {
+    "condition_token_visits": 768,
+    "conditions": 96,
+    "digital_bindings": 32,
+    "effects": 16,
+    "preprocessing": "existing remap once and ordered SOCD once",
+    "rules": 32,
+    "sources": 8
+  },
+  "source_hashes": {
+    "include/modes/UltimateNativeEvaluator.hpp": "9c080b6444efac9f302a10975948c26b8d38c7d7c22caa4ba26baf5cb3bc3a52",
+    "include/modes/UltimateNativeProfile.hpp": "98983da977093dd226c4570dc0c9ae5ea48f794d65fab70d0dc9f652aa6b8f59",
+    "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+    "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "src/core/ControllerMode.cpp": "5a8615740951ad8ab5b07104b38d5842d3a91537e4c1690d47a416f554dcd524",
+    "src/modes/Ultimate.cpp": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+    "src/modes/UltimateNativeEvaluator.cpp": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+    "src/modes/UltimateNativeProfile.cpp": "f03c5aa9dc83d60e000ace62e4c3630a9c15043e40f6949a13cb241272da8ede"
+  },
+  "status": "PASS_ABI_LAYOUT",
+  "target_timing": "NOT_MEASURED",
+  "target_whole_stack": "NOT_MEASURED"
+}

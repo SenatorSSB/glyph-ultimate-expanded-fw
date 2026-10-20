@@ -1,0 +1,14 @@
+HAL/pico/src/core/CheckedStorage.cpp:35:8:lfs_t* CheckedStorage::{anonymous}::mount()	16	static
+HAL/pico/src/core/CheckedStorage.cpp:84:8:CheckedStorage::Result CheckedStorage::Open(File&, const char*, bool, Kind)	88	static
+HAL/pico/src/core/CheckedStorage.cpp:97:8:CheckedStorage::Result CheckedStorage::Read(File&, void*, size_t)	16	static
+HAL/pico/src/core/CheckedStorage.cpp:102:8:CheckedStorage::Result CheckedStorage::Write(File&, const void*, size_t)	16	static
+HAL/pico/src/core/CheckedStorage.cpp:109:8:CheckedStorage::Result CheckedStorage::Seek(File&, size_t)	16	static
+HAL/pico/src/core/CheckedStorage.cpp:114:8:CheckedStorage::Result CheckedStorage::Sync(File&)	16	static
+HAL/pico/src/core/CheckedStorage.cpp:119:8:CheckedStorage::Result CheckedStorage::Close(File&)	16	static
+HAL/pico/src/core/CheckedStorage.cpp:128:8:CheckedStorage::Result CheckedStorage::Stat(const char*, size_t*, Kind)	72	static
+HAL/pico/src/core/CheckedStorage.cpp:136:8:CheckedStorage::Result CheckedStorage::Remove(const char*, Kind)	48	static
+HAL/pico/src/core/CheckedStorage.cpp:144:8:CheckedStorage::Result CheckedStorage::Rename(const char*, const char*, Kind)	24	static
+HAL/pico/src/core/CheckedStorage.cpp:150:8:CheckedStorage::Result CheckedStorage::Capacity(Geometry&)	56	static
+HAL/pico/src/core/CheckedStorage.cpp:163:8:CheckedStorage::Result CheckedStorage::Enumerate(const char*, Visitor, void*)	216	static
+HAL/pico/src/core/CheckedStorage.cpp:180:8:CheckedStorage::Result CheckedStorage::WriteFile(const char*, const uint8_t*, size_t, Kind)	216	static
+HAL/pico/src/core/CheckedStorage.cpp:187:8:CheckedStorage::Result CheckedStorage::ReadFile(const char*, uint8_t*, size_t, Kind)	208	static

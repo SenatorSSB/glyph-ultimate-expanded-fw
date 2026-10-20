@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_directory_decoder.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "glyph_profile_store_directory_decoder: PASS\nvariants=old_f6_copy,repaired_direct format=v2 deployed_v1_reader=true malformed_metadata=true full_names=true\n",
+  "stderr": "",
+  "seconds": 1.75,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_directory_decoder.log"
+}

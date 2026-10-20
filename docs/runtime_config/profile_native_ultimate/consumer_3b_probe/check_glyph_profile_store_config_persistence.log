@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_config_persistence.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "stale_cache=PASS\nmissing_durable_load_and_save=PASS\ndurable_generation_changed=PASS\nopen:config-v2.bin=PASS\nread:config-v2.bin=PASS\nopen:config-v2.tmp=PASS\nwrite:config-v2.tmp=PASS\nread:config-v2.tmp=PASS\nrename:config-v2.bin=PASS\nrename:config-v2.tmp=PASS\nprior_remove_failure=PASS\npartial_write_call_2=PASS\npartial_write_call_3=PASS\ndurable_crc_mismatch=PASS\nmalformed_durable=PASS\nload_rejected_preserves_caller=PASS\nsuccessful_publish_no_postcommit_false=PASS\nprior_only_publish_success=PASS\nprior_only_publish_failure=PASS\ninterrupted_rotation_prior_recovery=PASS\nchecked_config_staging_sync_close=PASS\nchecked_config_staging_sync_close=PASS\nchecked_config_staging_sync_close=PASS\nchecked_config_staging_sync_close=PASS\nlost_ack_resolved_exact=PASS\nunknown_fence_and_reconcile=PASS\nbounded_immutable_legacy_source=PASS\nlegacy_snapshot_reserve_preflight=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nlegacy_snapshot_checked_fault_retry=PASS\nconfig_staging_open_write_read_unknown=PASS\nconfig_staging_open_write_read_unknown=PASS\nconfig_staging_open_write_read_unknown=PASS\ncurrent_persistence_cases=37 target_FS_power_loss=NOT_EMULATED\nglyph_profile_store_config_persistence: PASS; current_source=true hardware=NOT_CLAIMED\n",
+  "stderr": "",
+  "seconds": 2.84,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_config_persistence.log"
+}

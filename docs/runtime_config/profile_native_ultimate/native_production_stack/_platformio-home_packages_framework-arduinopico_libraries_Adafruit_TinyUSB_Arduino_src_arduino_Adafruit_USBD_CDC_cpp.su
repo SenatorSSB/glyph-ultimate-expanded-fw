@@ -1,0 +1,22 @@
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:52:10:virtual uint16_t Adafruit_USBD_CDC::getInterfaceDescriptor(uint8_t, uint8_t*, uint16_t)	96	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:165:5:virtual int Adafruit_USBD_CDC::available()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:181:5:virtual int Adafruit_USBD_CDC::peek()	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:190:5:virtual int Adafruit_USBD_CDC::read()	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:207:6:virtual void Adafruit_USBD_CDC::flush()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:237:5:virtual int Adafruit_USBD_CDC::availableForWrite()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:217:8:virtual size_t Adafruit_USBD_CDC::write(const uint8_t*, size_t)	24	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:215:8:virtual size_t Adafruit_USBD_CDC::write(uint8_t)	24	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.h:49:20:virtual uint16_t Adafruit_USBD_CDC::_ZThn16_N17Adafruit_USBD_CDC22getInterfaceDescriptorEhPht(uint8_t, uint8_t*, uint16_t)	96	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:45:1:Adafruit_USBD_CDC::Adafruit_USBD_CDC()	0	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:68:6:void Adafruit_USBD_CDC::begin(uint32_t)	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:86:6:void Adafruit_USBD_CDC::begin(uint32_t, uint8_t)	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:91:6:void Adafruit_USBD_CDC::end()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:98:10:uint32_t Adafruit_USBD_CDC::baud()	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:109:9:uint8_t Adafruit_USBD_CDC::stopbits()	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:120:9:uint8_t Adafruit_USBD_CDC::paritytype()	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:131:9:uint8_t Adafruit_USBD_CDC::numbits()	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:142:5:int Adafruit_USBD_CDC::dtr()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:150:1:Adafruit_USBD_CDC::operator bool()	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:198:8:size_t Adafruit_USBD_CDC::read(uint8_t*, size_t)	8	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:248:6:void tud_cdc_line_state_cb(uint8_t, bool, bool)	16	static
+.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp:264:1:cpp)	0	static

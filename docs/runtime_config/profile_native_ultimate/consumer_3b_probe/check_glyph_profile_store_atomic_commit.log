@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_atomic_commit.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "profile_store_atomic_commit first_absent_record=PASS existing_replacement=PASS existing_remove_failure=PASS temp_write_verify_failures=PASS interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS old_valid_shape_readback_rejected=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS\n",
+  "stderr": "",
+  "seconds": 0.61,
+  "log": "/private/tmp/glyph-native-consumer-probe-results-3b/check_glyph_profile_store_atomic_commit.log"
+}

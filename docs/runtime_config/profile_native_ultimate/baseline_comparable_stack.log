@@ -1,0 +1,32 @@
+glyph_profile_store_create_stack: PASS
+{
+  "compiler": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+  "compiler_sha256": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c",
+  "optimization": "production compiledb flags, O3 project/LittleFS; no LTO",
+  "critical_measured_bytes": {
+    "ConfiguratorBackend::HandleProfileStore()": 312,
+    "ConfiguratorBackend::WriteProfilePacket(": 344,
+    "ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)": 208,
+    "ProfileStore::WriteProfile(": 256,
+    "ProfileStore::PublishDirectory(": 128,
+    "ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)": 72,
+    ":void setup()": 272,
+    "Persistence::LoadConfigChecked(": 456,
+    "Persistence::SaveConfigIfGenerationMatches(": 288,
+    "Persistence::SaveConfig(": 336,
+    "ProfileStore::Bootstrap(": 480,
+    "Persistence::CaptureLegacySource(": 608,
+    "CheckedStorage::Open(": 88,
+    "CheckedStorage::WriteFile(": 216,
+    "CheckedStorage::ReadFile(": 208
+  },
+  "prefix_bytes": 496,
+  "record_open_reachable_chain_bytes": 2632,
+  "littlefs_open_chain_bytes": 1320,
+  "record_open_scratch_bank_margin_before_unmodeled_paths": 1464,
+  "adapter": "repository-owned same-mounted CheckedStorage; Publish inlined into WriteProfile",
+  "request_decode_enumerated_C_upper_bytes": 2032,
+  "default_reservation_bytes": 2048,
+  "ordinary_scratch_bank_envelope_bytes": 4096,
+  "whole_target_upper_bound": "UNKNOWN: SDK/ROM, IRQ and unresolved indirect paths are not certified by this report"
+}

@@ -355,25 +355,35 @@ def validate_current_source_route() -> dict[str, object]:
     return {"phase": phase["phase"], "target": target, "source_hashes": hashes}
 
 
-def compile_variant(temp: Path, name: str, sanitizers: list[str]) -> Path:
+def compile_variant(temp: Path, name: str, sanitizers: list[str], *, current_generated: Path | None = None, current_nanopb: Path | None = None) -> Path:
+    generated = current_generated or GENERATED
+    nanopb = current_nanopb or NANOPB
     cc, cxx = shutil.which("cc"), shutil.which("c++")
     require(cc is not None and cxx is not None, "host C/C++ compiler unavailable")
     flags = ["-O0", "-g", "-fshort-enums", *sanitizers]
     objects: list[Path] = []
-    for index, source in enumerate([NANOPB / "pb_decode.c", NANOPB / "pb_common.c", GENERATED / "config.pb.c"]):
+    for index, source in enumerate([nanopb / "pb_decode.c", nanopb / "pb_common.c", generated / "config.pb.c"]):
         obj = temp / f"{name}-{index}.o"
-        command = [cc, "-std=c99", *flags, f"-I{NANOPB}", f"-I{GENERATED}", "-c", str(source), "-o", str(obj)]
+        command = [cc, "-std=c99", *flags, f"-I{nanopb}", f"-I{generated}", "-c", str(source), "-o", str(obj)]
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         require(result.returncode == 0, f"{name} C source compile failed:\n{result.stdout}{result.stderr}")
         objects.append(obj)
     fragments, _ = production_fragments()
     (temp / "production_fragments.inc").write_text(fragments, encoding="utf-8")
+    harness=HARNESS
+    if current_generated is not None:
+        # Bounded scratch interface adapter; frozen fixture/assertions retained.
+        text=HARNESS.read_text()
+        declaration="void setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count);"
+        require(text.count(declaration)==1,"exact frozen setup declaration")
+        text=text.replace(declaration,"bool mode_chord_consumed=false;\nvoid setup_mode_activation_bindings(const GameModeConfig *mode_configs, size_t mode_configs_count, uint64_t boot_buttons=0);")
+        harness=temp/(name+"-current-harness.cpp");harness.write_text(text)
     harness_obj = temp / f"{name}-harness.o"
-    command = [cxx, "-std=gnu++17", *flags, f"-I{GENERATED}", f"-I{NANOPB}",
+    command = [cxx, "-std=gnu++17", *flags, f"-I{generated}", f"-I{nanopb}",
                f"-I{HOST / 'include'}",
                f"-I{ROOT / 'HAL/pico/include'}",
                f"-I{ROOT / 'tools/fixtures/custom_modifier_cache_host/include'}",
-               f"-I{temp}", "-c", str(HARNESS), "-o", str(harness_obj)]
+               f"-I{temp}", "-c", str(harness), "-o", str(harness_obj)]
     result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
     require(result.returncode == 0, f"{name} C++ source compile failed:\n{result.stdout}{result.stderr}")
     binary = temp / name

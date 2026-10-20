@@ -1,0 +1,35 @@
+.platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:61:17:virtual int arduino::Print::availableForWrite()	0	static
+HAL/pico/include/core/CheckedStorageFile.hpp:16:9:virtual int CheckedStorageFile::available()	0	static
+HAL/pico/include/core/CheckedStorageFile.hpp:25:12:virtual size_t CheckedStorageFile::write(const uint8_t*, size_t)	24	static
+HAL/pico/include/core/CheckedStorageFile.hpp:31:10:virtual void CheckedStorageFile::flush()	24	static
+HAL/pico/src/core/Persistence.cpp:63:24:static constexpr bool {anonymous}::compare_config_bytes(CheckedStorageFile&, const Config&, size_t)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)	88	static
+HAL/pico/src/core/Persistence.cpp:40:6:bool {anonymous}::read_config_file(pb_istream_t*, pb_byte_t*, size_t)	88	static
+HAL/pico/include/core/CheckedStorageFile.hpp:24:12:virtual size_t CheckedStorageFile::write(uint8_t)	32	static
+HAL/pico/include/core/CheckedStorageFile.hpp:17:9:virtual int CheckedStorageFile::read()	32	static
+HAL/pico/src/core/Persistence.cpp:60:6:bool {anonymous}::compare_config_bytes(CheckedStorageFile&, const Config&, size_t)	48	static
+HAL/pico/include/core/CheckedStorageFile.hpp:23:9:virtual int CheckedStorageFile::peek()	56	static
+HAL/pico/src/core/Persistence.cpp:92:6:bool {anonymous}::hash_file(const char*, uint8_t*)	656	static
+HAL/pico/src/core/Persistence.cpp:279:6:0(uint8_t*)	280	static
+HAL/pico/include/core/CheckedStorageFile.hpp:9:5:CheckedStorageFile::CheckedStorageFile(const char*, const char*)	56	static
+HAL/pico/include/core/CheckedStorageFile.hpp:18:9:int CheckedStorageFile::read(uint8_t*, size_t)	24	static
+HAL/pico/include/core/CheckedStorageFile.hpp:33:10:bool CheckedStorageFile::seek(size_t)	32	static
+HAL/pico/include/core/CheckedStorageFile.hpp:36:10:bool CheckedStorageFile::close()	24	static
+HAL/pico/src/core/Persistence.cpp:120:1:Persistence::Persistence()	24	static
+HAL/pico/src/core/Persistence.cpp:127:1:Persistence::~Persistence()	8	static
+HAL/pico/src/core/Persistence.cpp:133:6:bool Persistence::IsAvailable() const	0	static
+HAL/pico/src/core/Persistence.cpp:137:10:uint32_t Persistence::ConfigGeneration(const Config&) const	0	static
+HAL/pico/src/core/Persistence.cpp:142:6:bool Persistence::SetValidator(ConfigSemanticValidator)	0	static
+HAL/pico/src/core/Persistence.cpp:153:6:bool Persistence::ValidateConfig(const Config&, ConfigValidationError&) const	16	static
+HAL/pico/src/core/Persistence.cpp:279:6:bool Persistence::LegacySourceIdentity(uint8_t*)	280	static
+HAL/pico/src/core/Persistence.cpp:288:6:bool Persistence::CaptureLegacySource(uint8_t*)	608	static
+HAL/pico/src/core/Persistence.cpp:333:25:Persistence::LoadResult Persistence::ReadLegacyProfile(size_t, UltimateProfile&)	296	static
+HAL/pico/src/core/Persistence.cpp:370:25:Persistence::LoadResult Persistence::LoadConfigChecked(Config&)	456	static
+HAL/pico/src/core/Persistence.cpp:270:25:Persistence::SaveResult Persistence::ReconcileConfig(Config&)	8	static
+HAL/pico/src/core/Persistence.cpp:366:6:bool Persistence::LoadConfig(Config&)	8	static
+HAL/pico/src/core/Persistence.cpp:444:6:bool Persistence::CheckSavedConfig()	272	static
+HAL/pico/src/core/Persistence.cpp:462:8:size_t Persistence::LoadConfigRaw(arduino::Print&, bool)	280	static
+HAL/pico/src/core/Persistence.cpp:497:6:bool Persistence::CheckSavedConfig(CheckedStorageFile&, LoadResult*)	80	static
+HAL/pico/src/core/Persistence.cpp:194:6:bool Persistence::SaveConfig(Config&)	336	static
+HAL/pico/src/core/Persistence.cpp:172:25:Persistence::SaveResult Persistence::SaveConfigIfGenerationMatches(Config&, uint64_t)	288	static
+HAL/pico/src/core/Persistence.cpp:537:24:cpp)	8	static
+HAL/pico/src/core/Persistence.cpp:537:24:cpp)	8	static
