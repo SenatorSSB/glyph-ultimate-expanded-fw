@@ -6,10 +6,11 @@ The queue's GP-BIND-003 authorization covers the H3 current-primary Ultimate/Pro
 identity observer and a finite identity-only adapter on existing XInput CDC,
 preserving viewer traffic. Exact candidate
 `307d72347653c079ec8ec6e9b6ecae3c30ae536c` has a PASS build and preserved
-UF2; it is unmerged and awaits hardware acceptance. No device is presently
-available, and physical action requires a separate concrete preparation packet
-and safe manual recovery route. Target query timing and peak stack remain
-NOT_MEASURED.
+UF2. Exact A1--A5 human hardware evidence is `PASS` with no required gaps in
+`docs/calibration/fixtures/gp_bind_003_partial_evidence_2026-10-19.json`; its
+candidate/artifact tuple is unchanged. Tested-source integration remains
+pending independent review/publication. Target query timing and peak stack
+remain NOT_MEASURED.
 Configurator cannot attest a prior gameplay session. GP-BIND-001/002 FAIL and
 the completed activation diagnostic remain historical; root cause UNPROVEN,
 Nunchuk NOT_TESTED. No X1 repair, failed-source import, profile-schema/store

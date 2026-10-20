@@ -2,11 +2,19 @@
 
 Protocol version: `GP_BIND_RUNTIME_ATTESTATION_HW_V1`
 
-Status: `HARDWARE_TEST_REQUIRED`. No physical observation has been recorded.
-The exact candidate build and artifact custody are ready; no device update or
-other device action is authorized by this handoff. The query order is read-only.
-Any physical action, including a firmware update, requires its separately
-approved concrete preparation packet and safe manual recovery route.
+Initial handoff status: `HARDWARE_TEST_REQUIRED`. The immediately following
+no-observation and no-device-action statements record the pre-observation
+handoff state; they are not a later hardware result.
+
+Post-handoff status: `HARDWARE_VALIDATED` for the exact candidate and artifact
+tuple below. The immutable HEP evidence record
+`docs/calibration/fixtures/gp_bind_003_partial_evidence_2026-10-19.json`
+records `PASS`, A1--A5, and no evidence gaps for candidate
+`307d72347653c079ec8ec6e9b6ecae3c30ae536c` and UF2 SHA-256
+`83aa255a7843fbc96af37c679e92408808d9de0f004271315f968db73c37747b`.
+Tested-source integration remains pending its separate review/publication; this
+status clarification neither changes the protocol's requirements nor expands
+the observed hardware scope.
 
 ## Exact candidate handoff
 
@@ -54,17 +62,20 @@ approved concrete preparation packet and safe manual recovery route.
   facts. Target query timing and peak stack use are `NOT_MEASURED`; no target
   timing or peak-stack claim is made.
 
-## Capability and current gate
+## Capability and initial handoff gate
 
-The recorded controller capability is `PARTIAL`: repository/tool access is
-available, but no matching serial/filtered USB device is presently available.
-This is not a device test and says nothing about unprobed device capability.
-Do not probe through a write, reset, flash, reconnect-at-1200, or other
-state-changing operation. The hardware evidence result remains null and every
-physical row remains `NOT_TESTED`.
+At issuance, the recorded controller capability was `PARTIAL`: repository/tool
+access was available, but no matching serial/filtered USB device was then
+available. This initial probe was not a device test and said nothing about
+unprobed device capability. The initial evidence result was null and its rows
+were `NOT_TESTED`. Those initial-state facts are superseded only for the exact
+tuple above by the immutable PASS evidence record; they do not generalize to
+another candidate, artifact, profile, or controller state.
 
-The candidate remains unmerged. No flash, Config write, selection, profile
-update, reboot, recovery action, or merge occurred. H3 acceptance requires an
+At issuance, the candidate was unmerged and no flash, Config write, selection,
+profile update, reboot, recovery action, or merge had occurred. The later
+bounded update, queries, recovery checks, and human observations are recorded
+only in the immutable PASS evidence. H3 acceptance required (and received) an
 exact human report and independent Hardware Evidence Processor (`HEP`) PASS
 for this full candidate SHA and exact artifact SHA-256, with no required gaps.
 
@@ -95,6 +106,7 @@ identity from Configurator, stored IDs, or historical evidence.
 
 GP-BIND-001/002 failures and their diagnostic remain immutable. Historical H4
 runtime identity and X1 root cause remain `UNKNOWN`/`UNPROVEN`; Nunchuk remains
-`NOT_TESTED`. The exact candidate and this protocol stay frozen through the
-hardware gate. No source integration or strict DONE follows without exact
-human HEP PASS and the separate reviewed source-free `R -> E -> I` lifecycle.
+`NOT_TESTED`. The exact candidate and this protocol remained frozen through the
+hardware gate. Source integration and strict DONE still require the exact human
+HEP PASS (now recorded) and the separate reviewed source-free `R -> E -> I`
+lifecycle.
