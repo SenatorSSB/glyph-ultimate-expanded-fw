@@ -1,0 +1,4 @@
+encoded_config_sizes=legacy:130 one:3197 two:6248 max:6248
+glyph_stage_b_ultimate_profiles: PASS
+generated_nanopb_decode=true production_validation=true v1_legacy=true v2_evaluator=true v3_stage_c_routing=true negatives=10
+sizeof_config=31432

@@ -1,0 +1,49 @@
+{
+  "classification": "EXACT_CANONICAL_BASELINE_BUILD_ONLY",
+  "candidate_for_native_hardware": false,
+  "source_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "source_tree": "925992e5447655f69a0cc4b1d257a33f12205527",
+  "source_worktree_clean": true,
+  "command": "./scripts/build-glyph-mk6-quiet.sh",
+  "execution": "owner persistent terminal; full output log independently read by chapter daemon",
+  "status": "PASS",
+  "elapsed_seconds": 832.87,
+  "ram_bytes": 187344,
+  "ram_limit_bytes": 262144,
+  "flash_bytes": 477452,
+  "flash_limit_bytes": 1568768,
+  "uf2_bytes": 979456,
+  "uf2_sha256": "741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612",
+  "uf2_custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/976ba2195b72046b32f7ecdd41063e7bad791ded/741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612/firmware.uf2",
+  "custody_readback": "MATCH",
+  "nanopb_version": "0.4.92",
+  "build_files": {
+    "schema/haybox/config.proto": {
+      "bytes": 33745,
+      "sha256": "81b0aad7568728ac465981b42c738154af8250e16426734d269e0abe7b9d3f49"
+    },
+    "schema/haybox/config.options": {
+      "bytes": 6339,
+      "sha256": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0"
+    },
+    ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h": {
+      "bytes": 125209,
+      "sha256": "c2a289d304a74c2a875d3fb2413a9afc0880f758cb1f5d7781c450b7841f51a0"
+    },
+    ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.c": {
+      "bytes": 1774,
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    },
+    ".pio/libdeps/glyph_mk6/Nanopb/pb.h": {
+      "bytes": 44315,
+      "sha256": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2"
+    },
+    ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": {
+      "bytes": 117446,
+      "sha256": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738"
+    }
+  },
+  "hardware_acceptance": null,
+  "device_actions": false,
+  "observed_at_utc": "2026-10-20T09:26:47.430689+00:00"
+}

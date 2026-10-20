@@ -1,0 +1,7 @@
+{
+  "stage-a": "python3 tools/check_glyph_stage_a_ultimate_profiles_dry_run.py",
+  "stage-b": "python3 tools/check_glyph_stage_b_ultimate_profiles.py",
+  "stage-c-short": "python3 tools/check_glyph_stage_c_ultimate_profiles.py",
+  "stage-c-default": "python3 tools/check_glyph_stage_c_ultimate_profiles.py --default-enum",
+  "gp-bind-003": "python3 tools/check_glyph_gp_bind_003_runtime_identity.py"
+}

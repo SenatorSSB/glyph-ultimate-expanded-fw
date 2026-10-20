@@ -1,0 +1,43 @@
+{
+  "short": {
+    "Config": 31312,
+    "GameModeConfig": 220,
+    "ProfileStore": 4352,
+    "ProfileStoreRequest": 2304,
+    "ProfileStoreResponse": 3024,
+    "UltimateProfile": 2152,
+    "UltimateProfileCondition": 22,
+    "UltimateProfileOutputEffect": 36,
+    "UltimateProfileOutputProgram": 436,
+    "UltimateProfileRole": 24,
+    "UltimateProfileRoutingSlot": 2,
+    "UltimateProfileTable": 22,
+    "UltimateProfileTableRule": 26
+  },
+  "source_identity": {
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto": "81b0aad7568728ac465981b42c738154af8250e16426734d269e0abe7b9d3f49",
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.options": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0",
+    "/private/tmp/glyph-native-resource-probes/generated/config.pb.h": "013e43f98c43fa7977dce4b18957d010e83f713037a8f7885ce935bcd16aca64",
+    "/private/tmp/glyph-native-resource-probes/generated/config.pb.c": "e080e0b4feba05473ff5016167a31dbebbaa348ba974096465bc422f4e7641fc",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/pb.h": "a2ecdca9fdaeef5f4972ed983540c0d6fb0a5c402a2e0b0349d7e1bc5e188d29",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "9e6551f8a5c9332cb16c711364e3de93dd16ae69b4c390547cbdf0b8639710f3",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c"
+  },
+  "arm_compiler_default_is_short_enum": true,
+  "no-short": {
+    "Config": 56152,
+    "GameModeConfig": 764,
+    "ProfileStore": 4736,
+    "ProfileStoreRequest": 2496,
+    "ProfileStoreResponse": 3216,
+    "UltimateProfile": 2344,
+    "UltimateProfileCondition": 22,
+    "UltimateProfileOutputEffect": 52,
+    "UltimateProfileOutputProgram": 628,
+    "UltimateProfileRole": 24,
+    "UltimateProfileRoutingSlot": 2,
+    "UltimateProfileTable": 22,
+    "UltimateProfileTableRule": 26
+  },
+  "caution": "ARM compiler default is short enums; no-short explicitly uses-fno-short-enums. Host Config+120 from15 pointer-width callback fields; do not substitute host sizes for target."
+}

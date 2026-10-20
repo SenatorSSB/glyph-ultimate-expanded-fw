@@ -1,0 +1,455 @@
+{
+  "dependency_version": "0.4.92",
+  "commands": [
+    [
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+      "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py",
+      "-I",
+      "/private/tmp/glyph-native-production-abi/baseline/schema",
+      "-f",
+      "/private/tmp/glyph-native-production-abi/baseline/schema/config.options",
+      "--error-on-unmatched",
+      "--no-timestamp",
+      "-D",
+      "/private/tmp/glyph-native-production-abi/baseline/generated",
+      "/private/tmp/glyph-native-production-abi/baseline/schema/config.proto"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fshort-enums",
+      "-I/private/tmp/glyph-native-production-abi/baseline/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-I/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/baseline/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/baseline/short.o"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fno-short-enums",
+      "-I/private/tmp/glyph-native-production-abi/baseline/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-I/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/baseline/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/baseline/no-short.o"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-gcc",
+      "-std=c11",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fshort-enums",
+      "-I/private/tmp/glyph-native-production-abi/baseline/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/baseline/generated/config.pb.c",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/baseline/descriptor.o"
+    ],
+    [
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python",
+      "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py",
+      "-I",
+      "/private/tmp/glyph-native-production-abi/proposed/schema",
+      "-f",
+      "/private/tmp/glyph-native-production-abi/proposed/schema/config.options",
+      "--error-on-unmatched",
+      "--no-timestamp",
+      "-D",
+      "/private/tmp/glyph-native-production-abi/proposed/generated",
+      "/private/tmp/glyph-native-production-abi/proposed/schema/config.proto"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fshort-enums",
+      "-I/private/tmp/glyph-native-production-abi/proposed/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-I/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/proposed/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/proposed/short.o"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fno-short-enums",
+      "-I/private/tmp/glyph-native-production-abi/proposed/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-I/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/proposed/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/proposed/no-short.o"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-gcc",
+      "-std=c11",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fshort-enums",
+      "-I/private/tmp/glyph-native-production-abi/proposed/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/proposed/generated/config.pb.c",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/proposed/descriptor.o"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fshort-enums",
+      "-include",
+      "/private/tmp/glyph-native-production-abi/native-layout/stdlib.hpp",
+      "-I/private/tmp/glyph-native-production-abi/native-layout",
+      "-I/private/tmp/glyph-native-production-abi/proposed/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/native-layout/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/native-layout/short.o"
+    ],
+    [
+      "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fno-short-enums",
+      "-include",
+      "/private/tmp/glyph-native-production-abi/native-layout/stdlib.hpp",
+      "-I/private/tmp/glyph-native-production-abi/native-layout",
+      "-I/private/tmp/glyph-native-production-abi/proposed/generated",
+      "-I/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-c",
+      "/private/tmp/glyph-native-production-abi/native-layout/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-production-abi/native-layout/no-short.o"
+    ]
+  ],
+  "variants": {
+    "baseline": {
+      "short": {
+        "Config": 31312,
+        "GameModeConfig": 220,
+        "ProfileStore": 4352,
+        "ProfileStoreRequest": 2304,
+        "ProfileStoreResponse": 3024,
+        "UltimateProfile": 2152,
+        "UltimateProfileCondition": 22,
+        "UltimateProfileOutputEffect": 36,
+        "UltimateProfileOutputProgram": 436,
+        "UltimateProfileRole": 24,
+        "UltimateProfileRoutingSlot": 2,
+        "UltimateProfileTable": 22,
+        "UltimateProfileTableRule": 26
+      },
+      "no-short": {
+        "Config": 56152,
+        "GameModeConfig": 764,
+        "ProfileStore": 4736,
+        "ProfileStoreRequest": 2496,
+        "ProfileStoreResponse": 3216,
+        "UltimateProfile": 2344,
+        "UltimateProfileCondition": 22,
+        "UltimateProfileOutputEffect": 52,
+        "UltimateProfileOutputProgram": 628,
+        "UltimateProfileRole": 24,
+        "UltimateProfileRoutingSlot": 2,
+        "UltimateProfileTable": 22,
+        "UltimateProfileTableRule": 26
+      }
+    },
+    "proposed": {
+      "short": {
+        "Config": 31456,
+        "GameModeConfig": 224,
+        "ProfileStore": 4368,
+        "ProfileStoreRequest": 2312,
+        "ProfileStoreResponse": 3032,
+        "UltimateProfile": 2160,
+        "UltimateProfileCondition": 22,
+        "UltimateProfileOutputEffect": 36,
+        "UltimateProfileOutputProgram": 436,
+        "UltimateProfileRole": 24,
+        "UltimateProfileRoutingSlot": 2,
+        "UltimateProfileTable": 22,
+        "UltimateProfileTableRule": 26
+      },
+      "no-short": {
+        "Config": 56288,
+        "GameModeConfig": 768,
+        "ProfileStore": 4752,
+        "ProfileStoreRequest": 2504,
+        "ProfileStoreResponse": 3224,
+        "UltimateProfile": 2352,
+        "UltimateProfileCondition": 22,
+        "UltimateProfileOutputEffect": 52,
+        "UltimateProfileOutputProgram": 628,
+        "UltimateProfileRole": 24,
+        "UltimateProfileRoutingSlot": 2,
+        "UltimateProfileTable": 22,
+        "UltimateProfileTableRule": 26
+      }
+    }
+  },
+  "hashes": {
+    "/private/tmp/glyph-native-production-abi/proposed/schema/config.proto": "7d996a0b23ee2009b3ccfe31632410b4ea539b037cdc8aa40e7330a5be6f089e",
+    "/private/tmp/glyph-native-production-abi/baseline/schema/config.proto": "81b0aad7568728ac465981b42c738154af8250e16426734d269e0abe7b9d3f49",
+    "/private/tmp/glyph-native-production-abi/proposed/schema/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+    "/private/tmp/glyph-native-production-abi/baseline/schema/config.options": "612d23b268742d0cc8e4b871d33b3ccba7c6f912ca3352364e329b3fef0096c0",
+    "/private/tmp/glyph-native-production-abi/proposed/generated/config.pb.h": "a0a11a1e78df7d5bb47faf3f99945bb2fc4ae1fc444ac4db5d6867f91383bf3c",
+    "/private/tmp/glyph-native-production-abi/baseline/generated/config.pb.h": "c2a289d304a74c2a875d3fb2413a9afc0880f758cb1f5d7781c450b7841f51a0",
+    "/private/tmp/glyph-native-production-abi/proposed/generated/config.pb.c": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+    "/private/tmp/glyph-native-production-abi/baseline/generated/config.pb.c": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738",
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c"
+  },
+  "size_macros": {
+    "Config": {
+      "baseline": [
+        "/* Config_size depends on runtime parameters */"
+      ],
+      "proposed": [
+        "/* Config_size depends on runtime parameters */"
+      ]
+    },
+    "GameModeConfig": {
+      "baseline": [
+        "#define GameModeConfig_size                      561"
+      ],
+      "proposed": [
+        "#define GameModeConfig_size                      565"
+      ]
+    },
+    "UltimateProfile": {
+      "baseline": [
+        "#define UltimateProfile_size                     5740"
+      ],
+      "proposed": [
+        "/* UltimateProfile_size depends on runtime parameters */"
+      ]
+    },
+    "ProfileStoreRequest": {
+      "baseline": [
+        "#define ProfileStoreRequest_size                 5919"
+      ],
+      "proposed": [
+        "/* ProfileStoreRequest_size depends on runtime parameters */"
+      ]
+    },
+    "ProfileStoreResponse": {
+      "baseline": [
+        "#define ProfileStoreResponse_size                6756"
+      ],
+      "proposed": [
+        "/* ProfileStoreResponse_size depends on runtime parameters */"
+      ]
+    },
+    "UltimateProfileCondition": {
+      "baseline": [
+        "#define UltimateProfileCondition_size            45"
+      ],
+      "proposed": [
+        "#define UltimateProfileCondition_size            45"
+      ]
+    },
+    "UltimateProfileOutputEffect": {
+      "baseline": [
+        "#define UltimateProfileOutputEffect_size         92"
+      ],
+      "proposed": [
+        "#define UltimateProfileOutputEffect_size         92"
+      ]
+    }
+  },
+  "callback_fields": {
+    "baseline": [
+      "#define UltimateProfile_CALLBACK NULL"
+    ],
+    "proposed": [
+      "    pb_callback_t native_payload;",
+      "    uint8_t ultimate_profile_engine;",
+      "#define UltimateProfile_native_payload_tag       8",
+      "X(a, CALLBACK, SINGULAR, BYTES,    native_payload,    8)",
+      "#define UltimateProfile_CALLBACK pb_default_field_callback",
+      "X(a, STATIC,   SINGULAR, UINT32,   ultimate_profile_engine, 205)"
+    ]
+  },
+  "drift_vs_0.4.91": {
+    "short": {
+      "baseline": {
+        "Config": 0,
+        "GameModeConfig": 0,
+        "ProfileStore": 0,
+        "ProfileStoreRequest": 0,
+        "ProfileStoreResponse": 0,
+        "UltimateProfile": 0,
+        "UltimateProfileCondition": 0,
+        "UltimateProfileOutputEffect": 0,
+        "UltimateProfileOutputProgram": 0,
+        "UltimateProfileRole": 0,
+        "UltimateProfileRoutingSlot": 0,
+        "UltimateProfileTable": 0,
+        "UltimateProfileTableRule": 0
+      },
+      "proposed": {
+        "Config": 0,
+        "GameModeConfig": 0,
+        "ProfileStore": 0,
+        "ProfileStoreRequest": 0,
+        "ProfileStoreResponse": 0,
+        "UltimateProfile": 0,
+        "UltimateProfileCondition": 0,
+        "UltimateProfileOutputEffect": 0,
+        "UltimateProfileOutputProgram": 0,
+        "UltimateProfileRole": 0,
+        "UltimateProfileRoutingSlot": 0,
+        "UltimateProfileTable": 0,
+        "UltimateProfileTableRule": 0
+      }
+    },
+    "no-short": {
+      "baseline": {
+        "Config": 0,
+        "GameModeConfig": 0,
+        "ProfileStore": 0,
+        "ProfileStoreRequest": 0,
+        "ProfileStoreResponse": 0,
+        "UltimateProfile": 0,
+        "UltimateProfileCondition": 0,
+        "UltimateProfileOutputEffect": 0,
+        "UltimateProfileOutputProgram": 0,
+        "UltimateProfileRole": 0,
+        "UltimateProfileRoutingSlot": 0,
+        "UltimateProfileTable": 0,
+        "UltimateProfileTableRule": 0
+      },
+      "proposed": {
+        "Config": 0,
+        "GameModeConfig": 0,
+        "ProfileStore": 0,
+        "ProfileStoreRequest": 0,
+        "ProfileStoreResponse": 0,
+        "UltimateProfile": 0,
+        "UltimateProfileCondition": 0,
+        "UltimateProfileOutputEffect": 0,
+        "UltimateProfileOutputProgram": 0,
+        "UltimateProfileRole": 0,
+        "UltimateProfileRoutingSlot": 0,
+        "UltimateProfileTable": 0,
+        "UltimateProfileTableRule": 0
+      }
+    }
+  },
+  "proposed_deltas": {
+    "short": {
+      "Config": 144,
+      "GameModeConfig": 4,
+      "ProfileStore": 16,
+      "ProfileStoreRequest": 8,
+      "ProfileStoreResponse": 8,
+      "UltimateProfile": 8,
+      "UltimateProfileCondition": 0,
+      "UltimateProfileOutputEffect": 0,
+      "UltimateProfileOutputProgram": 0,
+      "UltimateProfileRole": 0,
+      "UltimateProfileRoutingSlot": 0,
+      "UltimateProfileTable": 0,
+      "UltimateProfileTableRule": 0
+    },
+    "no-short": {
+      "Config": 136,
+      "GameModeConfig": 4,
+      "ProfileStore": 16,
+      "ProfileStoreRequest": 8,
+      "ProfileStoreResponse": 8,
+      "UltimateProfile": 8,
+      "UltimateProfileCondition": 0,
+      "UltimateProfileOutputEffect": 0,
+      "UltimateProfileOutputProgram": 0,
+      "UltimateProfileRole": 0,
+      "UltimateProfileRoutingSlot": 0,
+      "UltimateProfileTable": 0,
+      "UltimateProfileTableRule": 0
+    }
+  },
+  "native_layout": {
+    "short": {
+      "native_active_plus_candidate_bytes": 7792,
+      "native_candidate_bytes": 3900,
+      "native_context_bytes": 12,
+      "native_frame_bytes": 132,
+      "native_input_copy_bytes": 48,
+      "native_owned_bytes": 3892,
+      "native_validation_locals_bytes": 180,
+      "native_view_bytes": 556
+    },
+    "no-short": {
+      "native_active_plus_candidate_bytes": 7792,
+      "native_candidate_bytes": 3900,
+      "native_context_bytes": 12,
+      "native_frame_bytes": 132,
+      "native_input_copy_bytes": 48,
+      "native_owned_bytes": 3892,
+      "native_validation_locals_bytes": 180,
+      "native_view_bytes": 556
+    }
+  },
+  "production_generated_comparison": {
+    "config.pb.h": {
+      "actual_sha256": "c2a289d304a74c2a875d3fb2413a9afc0880f758cb1f5d7781c450b7841f51a0",
+      "fresh_sha256": "c2a289d304a74c2a875d3fb2413a9afc0880f758cb1f5d7781c450b7841f51a0",
+      "byte_identical": true
+    },
+    "config.pb.c": {
+      "actual_sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "fresh_sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "byte_identical": true
+    }
+  },
+  "native_drift_vs_original": {
+    "short": {
+      "native_active_plus_candidate_bytes": 0,
+      "native_candidate_bytes": 0,
+      "native_context_bytes": 0,
+      "native_frame_bytes": 0,
+      "native_input_copy_bytes": 0,
+      "native_owned_bytes": 0,
+      "native_validation_locals_bytes": 0,
+      "native_view_bytes": 0
+    },
+    "no-short": {
+      "native_active_plus_candidate_bytes": 0,
+      "native_candidate_bytes": 0,
+      "native_context_bytes": 0,
+      "native_frame_bytes": 0,
+      "native_input_copy_bytes": 0,
+      "native_owned_bytes": 0,
+      "native_validation_locals_bytes": 0,
+      "native_view_bytes": 0
+    }
+  }
+}

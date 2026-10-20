@@ -1,0 +1,7 @@
+{
+  "python": "3.14.4 (v3.14.4:23116f998f6, Apr  7 2026, 09:45:22) [Clang 17.0.0 (clang-1700.6.4.2)]",
+  "executable": "/usr/local/bin/python3",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "nanopb": "0.4.92",
+  "baseline": "976ba2195b72046b32f7ecdd41063e7bad791ded"
+}

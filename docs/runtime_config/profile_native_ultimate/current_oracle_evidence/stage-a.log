@@ -1,0 +1,4 @@
+production_nanopb_decode=true production_glyph_validation=PASS admission_negatives=6 decoder_negatives=1 name_agnostic=PASS
+glyph_stage_a_ultimate_profiles_dry_run: PASS
+profiles=2 tables_per_profile=28 coordinates_per_table=9 refs=0,1,2
+serial_opened=false firmware_flashing=false

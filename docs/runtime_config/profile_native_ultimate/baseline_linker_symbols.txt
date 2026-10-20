@@ -1,0 +1,17 @@
+1007780c A __scratch_x_source__
+1007780c A __scratch_y_source__
+200000c0 T __data_start__
+20005084 T __data_end__
+20005088 B __bss_start__
+2002dc94 B __bss_end__
+2002e494 N __HeapLimit
+20040000 B __StackLimit
+20040000 ? __scratch_x_end__
+20040000 ? __scratch_x_start__
+20040800 A __StackOneBottom
+20041000 B __StackOneTop
+20041000 ? __scratch_y_end__
+20041000 ? __scratch_y_start__
+20041800 A __StackBottom
+20042000 B __StackTop
+20042000 A __stack

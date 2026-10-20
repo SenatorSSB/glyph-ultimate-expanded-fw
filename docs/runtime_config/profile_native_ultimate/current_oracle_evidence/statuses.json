@@ -1,0 +1,32 @@
+{
+  "stage-a": {
+    "command": "python3 tools/check_glyph_stage_a_ultimate_profiles_dry_run.py",
+    "exit_code": 0,
+    "result": "PASS",
+    "log": "/private/tmp/glyph-native-current-oracle-proof/stage-a.log"
+  },
+  "stage-b": {
+    "command": "python3 tools/check_glyph_stage_b_ultimate_profiles.py",
+    "exit_code": 0,
+    "result": "PASS",
+    "log": "/private/tmp/glyph-native-current-oracle-proof/stage-b.log"
+  },
+  "stage-c-short": {
+    "command": "python3 tools/check_glyph_stage_c_ultimate_profiles.py",
+    "exit_code": 0,
+    "result": "PASS",
+    "log": "/private/tmp/glyph-native-current-oracle-proof/stage-c-short.log"
+  },
+  "stage-c-default": {
+    "command": "python3 tools/check_glyph_stage_c_ultimate_profiles.py --default-enum",
+    "exit_code": 0,
+    "result": "PASS",
+    "log": "/private/tmp/glyph-native-current-oracle-proof/stage-c-default.log"
+  },
+  "gp-bind-003": {
+    "command": "python3 tools/check_glyph_gp_bind_003_runtime_identity.py",
+    "exit_code": 0,
+    "result": "PASS",
+    "log": "/private/tmp/glyph-native-current-oracle-proof/gp-bind-003.log"
+  }
+}

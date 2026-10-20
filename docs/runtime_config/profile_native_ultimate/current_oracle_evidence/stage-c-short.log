@@ -1,0 +1,8 @@
+gamecube_default_lookup=mode_1 legacy_ultimate_ref=0 missing_gamecube_zero_mode_path=observed
+PASS production Ultimate final-output comparisons=1222420; frozen legacy oracle; A/B/A effects; storage-order; remap/SOCD; Nunchuk host invariants
+sizeof_config=31432 sizeof_profile=2152
+production_decode_validation_negatives=50 decoder_refusals=11 semantic_refusals=39
+writer_fixture_profiles=2 schema_versions=3,3 explicit_refs=0,1,2 payload_bytes=6248 payload_sha256=0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7
+FINAL_GATE_CONFIGURATOR_RECOVERY_REQUIRED=true backend_envelope=XInput,GameCube,Configurator gamecube_default_mode=1 configurator_backends=1 activation_binding=BTN_RT2 backend_reference_negatives=3
+fixture_sha256=e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb serial_port_opened=false
+glyph_stage_c_ultimate_profiles: PASS

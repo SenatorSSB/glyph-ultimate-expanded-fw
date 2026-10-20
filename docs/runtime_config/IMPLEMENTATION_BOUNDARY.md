@@ -2,6 +2,26 @@
 
 Status label: CURRENT.
 
+## Named Profile-Native Ultimate implementation boundary — 2026-10-20
+
+The direct owner directive and independently adopted GP-NATIVE-001 permit only
+the complete frozen schema5/encoding1/engineABI1 Ultimate native profile lane
+within the [closed implementation contract](profile_native_ultimate/implementation_contract.json)
+and [M1 resource freeze](profile_native_ultimate/m1_freeze.json). This named
+exception covers necessary native payload callback/admission, finite evaluator,
+non-destructive converter, selected boot-bound activation and truthful existing
+runtime-identity correspondence. Implementation may begin only after verified
+live canonical READY adoption; the architecture is not implemented by this note.
+
+The generic RuntimeConfigView source-owned path and prohibitions below remain
+in force outside that exact named lane. No generic active wrapper/view
+publication, transport redesign, new device command, store/recovery/resource
+limit change, hot swapping, scripts or gameplay semantics are authorized.
+Native source still requires exact build/review/custody and physical HEP PASS
+before integration. Owner approval of the concrete candidate-specific packet
+is required before device writes or flashing; no device action occurs here.
+
+
 This document defines the current safe implementation boundary after the latest
 Y2 layout source-owned HARDWARE_PASS and the coordinate-native runtime profile
 contract scaffold.

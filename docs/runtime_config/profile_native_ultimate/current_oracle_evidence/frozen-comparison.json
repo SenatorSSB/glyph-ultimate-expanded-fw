@@ -1,0 +1,19 @@
+{
+  "src/modes/Ultimate.cpp": true,
+  "src/core/InputMode.cpp": true,
+  "src/core/ControllerMode.cpp": true,
+  "src/core/socd.cpp": true,
+  "include/core/state.hpp": true,
+  "include/modes/UltimateProfileEvaluator.hpp": true,
+  "include/modes/UltimateProfileConfig.hpp": true,
+  "tools/fixtures/stage_a_ultimate_profiles_dry_run.json": true,
+  "tools/fixtures/stage_b_ultimate_profiles_fixture.json": true,
+  "tools/fixtures/stage_c_ultimate_profiles_fixture.json": true,
+  "tools/fixtures/stage_c_ultimate_profiles_dry_run.json": true,
+  "tools/fixtures/stage_c_ultimate_profiles_host/legacy_ultimate.cpp": true,
+  "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py": true,
+  "tools/check_glyph_stage_b_ultimate_profiles.py": true,
+  "tools/check_glyph_stage_c_ultimate_profiles.py": true,
+  "schema/haybox/config.proto": true,
+  "schema/haybox/config.options": true
+}

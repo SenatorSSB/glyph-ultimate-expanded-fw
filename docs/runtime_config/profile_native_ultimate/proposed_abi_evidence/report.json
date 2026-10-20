@@ -1,0 +1,167 @@
+{
+  "abis": {
+    "short": {
+      "sizes": {
+        "Config": 31456,
+        "GameModeConfig": 224,
+        "ProfileStore": 4368,
+        "ProfileStoreRequest": 2312,
+        "ProfileStoreResponse": 3032,
+        "UltimateProfile": 2160,
+        "UltimateProfileCondition": 22,
+        "UltimateProfileOutputEffect": 36,
+        "UltimateProfileOutputProgram": 436,
+        "UltimateProfileRole": 24,
+        "UltimateProfileRoutingSlot": 2,
+        "UltimateProfileTable": 22,
+        "UltimateProfileTableRule": 26
+      },
+      "deltas": {
+        "Config": 144,
+        "GameModeConfig": 4,
+        "ProfileStore": 16,
+        "ProfileStoreRequest": 8,
+        "ProfileStoreResponse": 8,
+        "UltimateProfile": 8,
+        "UltimateProfileCondition": 0,
+        "UltimateProfileOutputEffect": 0,
+        "UltimateProfileOutputProgram": 0,
+        "UltimateProfileRole": 0,
+        "UltimateProfileRoutingSlot": 0,
+        "UltimateProfileTable": 0,
+        "UltimateProfileTableRule": 0
+      }
+    },
+    "no-short": {
+      "sizes": {
+        "Config": 56288,
+        "GameModeConfig": 768,
+        "ProfileStore": 4752,
+        "ProfileStoreRequest": 2504,
+        "ProfileStoreResponse": 3224,
+        "UltimateProfile": 2352,
+        "UltimateProfileCondition": 22,
+        "UltimateProfileOutputEffect": 52,
+        "UltimateProfileOutputProgram": 628,
+        "UltimateProfileRole": 24,
+        "UltimateProfileRoutingSlot": 2,
+        "UltimateProfileTable": 22,
+        "UltimateProfileTableRule": 26
+      },
+      "deltas": {
+        "Config": 136,
+        "GameModeConfig": 4,
+        "ProfileStore": 16,
+        "ProfileStoreRequest": 8,
+        "ProfileStoreResponse": 8,
+        "UltimateProfile": 8,
+        "UltimateProfileCondition": 0,
+        "UltimateProfileOutputEffect": 0,
+        "UltimateProfileOutputProgram": 0,
+        "UltimateProfileRole": 0,
+        "UltimateProfileRoutingSlot": 0,
+        "UltimateProfileTable": 0,
+        "UltimateProfileTableRule": 0
+      }
+    }
+  },
+  "commands": {
+    "short": [
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fshort-enums",
+      "-I/private/tmp/glyph-native-proposed-abi/generated",
+      "-I/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-I/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+      "-c",
+      "/private/tmp/glyph-native-proposed-abi/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-proposed-abi/short.o"
+    ],
+    "no-short": [
+      "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++",
+      "-std=c++17",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-fno-short-enums",
+      "-I/private/tmp/glyph-native-proposed-abi/generated",
+      "-I/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb",
+      "-I/private/tmp/glyph-profile-native-20261020/include",
+      "-I/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+      "-c",
+      "/private/tmp/glyph-native-proposed-abi/layout.cpp",
+      "-o",
+      "/private/tmp/glyph-native-proposed-abi/no-short.o"
+    ]
+  },
+  "hashes": {
+    "/private/tmp/glyph-native-proposed-abi/schema/config.proto": "7d996a0b23ee2009b3ccfe31632410b4ea539b037cdc8aa40e7330a5be6f089e",
+    "/private/tmp/glyph-native-proposed-abi/schema/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+    "/private/tmp/glyph-native-proposed-abi/generated/config.pb.h": "425d11a68e51fb35b4542fa9e1f88bd076c7a7dc6ae94e69711c35a6a1291289",
+    "/private/tmp/glyph-native-proposed-abi/generated/config.pb.c": "e080e0b4feba05473ff5016167a31dbebbaa348ba974096465bc422f4e7641fc",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/pb.h": "a2ecdca9fdaeef5f4972ed983540c0d6fb0a5c402a2e0b0349d7e1bc5e188d29",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "9e6551f8a5c9332cb16c711364e3de93dd16ae69b4c390547cbdf0b8639710f3",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c"
+  },
+  "size_macros": {
+    "Config": {
+      "baseline": [
+        "/* Config_size depends on runtime parameters */"
+      ],
+      "proposed": [
+        "/* Config_size depends on runtime parameters */"
+      ]
+    },
+    "GameModeConfig": {
+      "baseline": [
+        "#define GameModeConfig_size                      561"
+      ],
+      "proposed": [
+        "#define GameModeConfig_size                      565"
+      ]
+    },
+    "UltimateProfile": {
+      "baseline": [
+        "#define UltimateProfile_size                     5740"
+      ],
+      "proposed": [
+        "/* UltimateProfile_size depends on runtime parameters */"
+      ]
+    },
+    "ProfileStoreRequest": {
+      "baseline": [
+        "#define ProfileStoreRequest_size                 5919"
+      ],
+      "proposed": [
+        "/* ProfileStoreRequest_size depends on runtime parameters */"
+      ]
+    },
+    "ProfileStoreResponse": {
+      "baseline": [
+        "#define ProfileStoreResponse_size                6756"
+      ],
+      "proposed": [
+        "/* ProfileStoreResponse_size depends on runtime parameters */"
+      ]
+    },
+    "UltimateProfileCondition": {
+      "baseline": [
+        "#define UltimateProfileCondition_size            45"
+      ],
+      "proposed": [
+        "#define UltimateProfileCondition_size            45"
+      ]
+    },
+    "UltimateProfileOutputEffect": {
+      "baseline": [
+        "#define UltimateProfileOutputEffect_size         92"
+      ],
+      "proposed": [
+        "#define UltimateProfileOutputEffect_size         92"
+      ]
+    }
+  }
+}

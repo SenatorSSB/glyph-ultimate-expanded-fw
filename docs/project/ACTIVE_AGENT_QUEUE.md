@@ -1,6 +1,32 @@
 # Active Agent Queue
 
-## Current bounded runtime-attestation authorization — 2026-10-19
+## Profile-native Ultimate chapter authorization — 2026-10-20
+
+The sole native product order GP-NATIVE-001 covers the complete reviewed M2–M7
+chain. Its executable disposition and runway appear only in the authoritative
+queue and guarded mirrors below; this checkpoint is source-free control-plane
+work. See the [independent adjudication](../runtime_config/profile_native_ultimate/curation_adjudication.md),
+[immutable design freeze](../runtime_config/profile_native_ultimate/m1_freeze.json),
+and [exact implementation contract](../runtime_config/profile_native_ultimate/implementation_contract.json).
+Implementation starts only after verified live canonical adoption. Native source,
+converter semantics, build/resource proof and physical acceptance are not yet complete.
+
+The original owner directive explicitly covers the named native schema/evaluator/
+converter/boot activation integration, with the closed paths and numerical limits
+in the adopted order. It grants no broader RuntimeConfigView publication or
+transport redesign. Device writes/flashing still require approval of the concrete
+candidate-specific packet; exact native HEP PASS precedes tested-source integration
+and separate strict DONE. No firmware source or controller was changed by curation.
+
+GP-BIND-003 has exact bounded hardware PASS and source integrated at
+`b6f19836b9d38c3654803699f278d117a6eeb61f`; it remains HARDWARE_VALIDATED,
+with strict DONE outstanding. Its accepted integrated source can be used without
+transferring acceptance to native code. The older pending checkpoint below is
+historical. GP-BIND-001/002 FAIL, RT2 DEFERRED/underlying UNRESOLVED, Nunchuk
+NOT_TESTED and historical root cause UNPROVEN remain unchanged.
+
+
+## Historical runtime-attestation checkpoint — 2026-10-19 (superseded by the 2026-10-20 checkpoint)
 
 The queue's GP-BIND-003 authorization covers the H3 current-primary Ultimate/ProfileStore
 identity observer and a finite identity-only adapter on existing XInput CDC,
@@ -190,7 +216,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
+  "audit_base_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
     "pending": false,
@@ -209,33 +235,33 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
   },
   "planner_packet": {
     "state": "CONSUMED",
-    "branch": "planning/portfolio-20261019-0200",
-    "base_configurator_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
-    "packet_id": "glyph-portfolio-20261019-0200",
-    "packet_path": "docs/planning/portfolio_20261019_0200.md",
-    "planning_commit": "9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad",
-    "curation_commit": "9a822a5afc4709d35ed9919814e5088a3c8c555e",
+    "branch": "planning/portfolio-20261020-1228",
+    "base_configurator_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+    "packet_id": "glyph-portfolio-20261020-1228",
+    "packet_path": "docs/planning/portfolio_20261020_1228.md",
+    "planning_commit": "14b1049bd421c5a202b2d99750f225a043660241",
+    "curation_commit": "8e30717ce5a64d3207e42aa4a7111dd3b492f800",
     "candidate_count": 0,
     "survivors": [],
     "curator_review_required": false,
     "global_wait_proposed": false,
     "material_events_since_packet": [
-      "Independent Curator adopts sole GP-BIND-003 READY for bounded current-session runtime identity observation; failed GP-BIND-001/002 and diagnostic remain unchanged, no X1 repair authorized."
+      "Independent Curator adopts sole GP-NATIVE-001 READY for the complete frozen M2-M7 native Ultimate product chain; initial inventory consumed into the queue, no unadjudicated survivors or global wait. GP-BIND-001/002 FAIL and their resolved event provenance are unchanged; GP-BIND-003 remains HARDWARE_VALIDATED with accepted source integrated, no strict DONE invented."
     ],
     "curator_review_provenance": {
-      "planning_branch": "planning/portfolio-20261019-0200",
-      "planning_commit": "9af3ce8b6c6076ca96cc8c7ee60850537c8ddfad",
-      "packet_id": "glyph-portfolio-20261019-0200",
-      "packet_base_configurator_sha": "941affbdbb7e54563e4c58a3830c49f39ea0f449",
-      "curation_branch": "curation/portfolio-20261019-0200",
-      "review_date": "2026-10-19",
+      "planning_branch": "planning/portfolio-20261020-1228",
+      "planning_commit": "14b1049bd421c5a202b2d99750f225a043660241",
+      "packet_id": "glyph-portfolio-20261020-1228",
+      "packet_base_configurator_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+      "curation_branch": "curation/portfolio-20261020-1228",
+      "review_date": "2026-10-20",
       "initial_reviewed_dispositions": [
         {
-          "candidate_id": "GP-BIND-003",
+          "candidate_id": "GP-NATIVE-001",
           "disposition": "READY"
         }
       ],
-      "curation_commit": "9a822a5afc4709d35ed9919814e5088a3c8c555e"
+      "curation_commit": "8e30717ce5a64d3207e42aa4a7111dd3b492f800"
     }
   },
   "completion_correspondence": {
@@ -260,20 +286,18 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 0,
+    "immediate_ready": 1,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
     "hardware_pending": 0,
-    "effective_authorized_runway": 0,
+    "effective_authorized_runway": 1,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "PLANNING_REQUIRED"
+    "primary_liveness": "RUNWAY_LOW"
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
-    "HARDWARE_TEST_REQUIRED",
+    "RUNWAY_LOW",
     "REPAIR_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -8368,14 +8392,31 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "behavioral_claim": "V4 derives closed F_X1 from a profile-defined physical binding and synthesizes the existing X1/MX1 table candidates with their accepted priorities and exclusions; V1-V3 remain unchanged.",
       "scope": "X1 only: fixed-capacity generic binding record, closed STICK_TABLE_MODIFIER/X1 vocabulary, V4 validation/evaluation, focused tests, Mk6 proof, review, custody and exact hardware handoff.",
       "explicit_excluded_scope": "X2, Y1, Y2, Tilt, Smash/game semantics, scripting, macros, turbo, timing automation, Stage A/B/C redesign, ProfileStore redesign, device/config writes, flashing, RT2, factory recovery, Senscope and Nunchuk.",
-      "touched_planes": ["Ultimate V4 profile validation and evaluation", "bounded ProfileStore V4 payload admission", "focused fixtures and host tests", "source-free evidence and hardware handoff"],
+      "touched_planes": [
+        "Ultimate V4 profile validation and evaluation",
+        "bounded ProfileStore V4 payload admission",
+        "focused fixtures and host tests",
+        "source-free evidence and hardware handoff"
+      ],
       "source_authority": "Direct owner scope dated 2026-10-18; exact Planner packet glyph-portfolio-20261018-0600 at 8fd3eaee643f1751ac6bfc0aad8bba4adf689f24; independently reviewed Curator receipt 6f7bfc815fba630ed77995a988e5f592ba153dc2; source-grounded X1 role/table inventory.",
-      "dependencies_prerequisites": ["Live canonical base 3006646859d6db2ebbb5a7e9e4cc731623633dfc", "exact Planner/Curator same-base correspondence", "preserve accepted ProfileStore production path and hardware evidence"],
+      "dependencies_prerequisites": [
+        "Live canonical base 3006646859d6db2ebbb5a7e9e4cc731623633dfc",
+        "exact Planner/Curator same-base correspondence",
+        "preserve accepted ProfileStore production path and hardware evidence"
+      ],
       "substantive_authorization_rationale": "Direct owner explicitly authorized the first production X1 vertical slice and the independent Curator adopted its sole candidate READY under the bounded packet contract.",
       "mechanical_activation_conditions": [],
-      "invalidation_conditions": ["Relevant canonical firmware or ProfileStore source changes before candidate creation", "Tier-1 or directly affected Tier-2 contradiction", "scope expansion beyond the closed X1 slice"],
+      "invalidation_conditions": [
+        "Relevant canonical firmware or ProfileStore source changes before candidate creation",
+        "Tier-1 or directly affected Tier-2 contradiction",
+        "scope expansion beyond the closed X1 slice"
+      ],
       "authorization_snapshot_provenance": "git-json:76154a7115e9b197bac3b6ae5df8436ff19d4cd1:docs/project/ACTIVE_AGENT_QUEUE.md; receipt git-json:6f7bfc815fba630ed77995a988e5f592ba153dc2:docs/agent_framework/curation_receipts/glyph-portfolio-20261018-0600.json",
-      "automated_validation": ["Focused V3-to-V4 X1 rule/token inventory and selector matrix", "V1-V3 and V4 Stage-C/ProfileStore regressions", "both enum ABIs, size/descriptor checks and canonical Mk6 build/resource review"],
+      "automated_validation": [
+        "Focused V3-to-V4 X1 rule/token inventory and selector matrix",
+        "V1-V3 and V4 Stage-C/ProfileStore regressions",
+        "both enum ABIs, size/descriptor checks and canonical Mk6 build/resource review"
+      ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
       "manual_acceptance": "REQUIRED",
@@ -8386,7 +8427,13 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "rollback_recovery": "Do not merge behavior-changing source before exact artifact custody and source-free HEP PASS. Preserve the accepted pre-candidate firmware/profile state and use only the documented manual recovery route.",
       "status_documentation_updates": "Record exact candidate, focused tests, independent reviews, Mk6 artifact custody and the eventual hardware handoff/result without changing historical evidence.",
       "done_evidence": "FAILED: exact candidate 32c1bd81910ec5bcea0104fe98b9b37fb267d071 and preserved UF2 ea261256dc57a0974d4f23b232e8bd43d5cf50d7094661a4c0531f92aad9d1ed are isolated by the source-free HEP FAIL record. H1-H3 do not transfer to any repair candidate; H5 was not run.",
-      "stop_conditions": ["Missing source authority or substantive product decision", "Tier-1 or affected Tier-2 failure", "H4 FAIL isolates this candidate; no merge, source edit, rebuild, flash, or acceptance transfer", "A fresh repair candidate requires post-opening Curator authority, exact candidate/artifact custody, and complete new hardware acceptance", "attempted forbidden scope or runtime/device-write expansion"],
+      "stop_conditions": [
+        "Missing source authority or substantive product decision",
+        "Tier-1 or affected Tier-2 failure",
+        "H4 FAIL isolates this candidate; no merge, source edit, rebuild, flash, or acceptance transfer",
+        "A fresh repair candidate requires post-opening Curator authority, exact candidate/artifact custody, and complete new hardware acceptance",
+        "attempted forbidden scope or runtime/device-write expansion"
+      ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": false,
@@ -8539,6 +8586,93 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
       "hardware_evidence_dependency_satisfied": true
+    },
+    {
+      "id": "GP-NATIVE-001",
+      "title": "Complete reuse-first profile-native Ultimate execution",
+      "status": "READY",
+      "branch": "codex/gp-native-001-profile-execution",
+      "objective": "Implement and validate the entire reviewed schema5/encoding1/engineABI1 native Ultimate execution, converter, bounded multi-profile store activation and truthful runtime identity through coherent M2-M7 gates.",
+      "why_this_matters": "Replace intrinsic Glyph-slot controller-function meaning with deterministic profile data while retaining proven remapping, SOCD, coordinate primitives, backend reports and legacy V1-V3 behavior; X1 alone is not completion.",
+      "hardware_risk": "H3",
+      "behavioral_claim": "One coherent original/remapped/post-SOCD frame feeds finite profile-defined conditions/direction references/table selection/independent digital OR/analogue effects. Remap/SOCD runs once, native never executes old slot resolver, all18 source-supported families convert with explicit policy. Immutable bounded active native body/view matches selected boot-bound store identity and exact preprocessing; invalid native selection yields complete neutral/unavailable, never legacy fallback. Legacy V1-V3/default paths remain unchanged.",
+      "scope": "One primary source writer implements M2 native codec/view/evaluator and default-preserving snapshot hook, M3 complete general converter/ordinary profile and all18 families, M4 minimal native callback admission/lifetime/engine-discriminator/boot activation/identity integration, M5 full frozen proof, M6 fresh review/exact committed build/custody/concrete device packet, M7 owner-approved physical work, independent HEP and exact tested-source integration followed by separate strict completion. Exact reviewed architecture and numeric caps apply; paths are the final packet allowlist, no generic directory authority. Normative exact source/test allowlists, numeric caps and bounded call-site clarifications are in docs/runtime_config/profile_native_ultimate/implementation_contract.json. The exact allowed_source_paths and allowed_test_paths arrays are closed: scope_clarifications do not let implementation self-authorize additional paths. A concrete dependency outside those arrays returns for bounded authority before editing; within arrays, adapters preserve original assertions and frozen oracle hashes.",
+      "explicit_excluded_scope": "Smash/game semantics or Senscope; scripts/macros/turbo/delays/sequences/arbitrary expressions; failed GP-BIND-001/002 V4 source import/reinterpretation/acceptance transfer; second remapper/SOCD/coordinate solver/global input ownership; unrelated modes/UI/keyboard/Nunchuk algorithm/backend edits; transport commands/wire redesign or generic debug/write/reboot bridge; hot swapping/cache-all profiles; ProfileStore filesystem/root/transaction/recovery/reserve/ID redesign; memory/stack/partition/storage limit increases; generic RuntimeConfigView replacement; flashing automation, RT2/factory work, device action without concrete owner-approved packet, merge before exact native HEP PASS.",
+      "touched_planes": [
+        "native profile source/data/evaluation and input-frame hook",
+        "native schema/options and fresh generated descriptors",
+        "existing Config/ProfileStore validation/callback lifetime/selection boundary",
+        "read-only runtime identity of actual native owner",
+        "offline converter/source-faithful fixtures/focused affected tests",
+        "exact candidate build/custody and source-free hardware evidence/integration governance"
+      ],
+      "source_authority": "Original direct owner directive copied at docs/runtime_config/profile_native_ultimate/owner_directive_20261020.md SHA256 05e0023d454d336be2d0a1762f434d5f808d36271c232cf790120ac497ce6d38; canonical B 976ba2195b72046b32f7ecdd41063e7bad791ded; source-free research archive f0a763d0b7e99aceb144b968171f286c65b58868, reuse/architecture/review/protocol/layout/ABI/source-oracle hashes in immutable packet manifest. Architecture fd83dec7e6fde6c811d2248c599bc8086cbb6951a11799f8001a14ea269eef44; independent corrected design review327a5ef98329333993949c7d92ddfd2d797bec93b2aaf8d6f1f95a44c4cea9b9; protocol51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d. New chapter scope comes from this direct owner directive, never historical UD029. Exact fresh baseline PASS and current Nanopb0.4.92 ABI/oracle/identity reconciliation are complete; M1 freeze docs/runtime_config/profile_native_ultimate/m1_freeze.json SHA256 6164086fa575df35d7ac59735871e97414760c2555fd7f210e21ccb1176da53e. No layout drift or newly unresolved substantive decision remains. Independent Curator adjudication accepts this exact authority and frozen M1 for candidate implementation, with canonical publication required before execution; no native source or hardware acceptance is claimed.",
+      "dependencies_prerequisites": [
+        "Fresh live canonical source baseline 976ba2195b72046b32f7ecdd41063e7bad791ded and exact replay of reviewed research from f0a763d0b7e99aceb144b968171f286c65b58868; reconcile any material drift, verify actual remote URL and capability-aware network live truth.",
+        "Fresh exact976ba2 owner terminal baseline PASS, detailed log SUCCESS832.87s, clean source tree925992e5447655f69a0cc4b1d257a33f12205527; RAM187344/262144, flash477452/1568768. UF2 979456bytes SHA741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612; ELF5574020bytes SHA83f2aa7d66ba511274981695ee97a65e86ca5b7fa812cc1a21967914eabaf7b8. Final P carries durable exact build/dependency/generated/source/custody evidence and M1 reconciliation/freeze references.",
+        "Completed M1 freeze docs/runtime_config/profile_native_ultimate/m1_freeze.json SHA256 6164086fa575df35d7ac59735871e97414760c2555fd7f210e21ccb1176da53e under the independent review mechanical-closure allowance. Numeric caps and complete verification contract remain unchanged; native actual build/stack/interrupt/timing and hardware proof remain later gates.",
+        "Current actual Nanopb0.4.92 production ABI replay PASS/zero drift (4c815bcc0f0ca289042b63b634ca868ce931bb76a4c9a295dd55c9d0f1a065f1); stock Stage A/B/C both ABIs and full runtime identity PASS (debe16bc6baccb962f5198e19c0dab24cce945279c72a4636a2bdf2acb244b6e). All17 frozen identities match; old partial and0.4.91 evidence remains historical.",
+        "Final canonical-pattern Planner P direct child of live B with exact one-candidate contract and reviewed M0/M1 replay; fresh independent Curator same-base append-only receipt C and later descendant adoption A activate complete READY. Draft packet/time/build/provenance placeholders cannot reach READY.",
+        "One primary source writer, fresh independent source/safety reviewer, single canonical publisher with recorded shared absolute lock; at most one dependent H3 hardware candidate.",
+        "M6 exact candidate-specific fixtures/scripts/report expectations/custody/backups/restoration and separate owner approval before physical actions; native human acceptance remains separate from candidate implementation authority."
+      ],
+      "substantive_authorization_rationale": "The owner explicitly resolved reuse-first whole-native architecture direction including necessary native schema, converter, evaluator and bounded activation integration. M0 inventoried all18 families, accepted source/oracles/GP-BIND history. One finite independent strong architecture challenge closed concrete converter/routing/lease/Config-rejection/Nunchuk/specimen defects and found no remaining source-semantic architecture defect; the exact fresh baseline has now passed, with final mechanical current-dependency ABI/oracle/identity replay and immutable m1_freeze artifacts required to confirm unchanged reviewed caps (187344baseline+8256known=195600; baseline+12288cap=199632 RAM). The reviewer explicitly permits this reconciliation without another review loop; no future unknown architecture approval is hidden in PREAUTHORIZED. Independent Curator adjudicated exact P14b1049bd421c5a202b2d99750f225a043660241 and records sole READY in receipt 8e30717ce5a64d3207e42aa4a7111dd3b492f800. M2-M7 are one logical product chain and internal gates, not seven queue successors. No new GPVAL or global scarcity/wait is proposed.",
+      "mechanical_activation_conditions": [],
+      "invalidation_conditions": [
+        "Material canonical semantic/source/accepted-oracle drift without bounded reconciliation/review.",
+        "Any need to alter frozen schema5 semantics/bounds/engine identity, generic primitives, protected resource limits/store/transport/recovery or unresolved product/domain choice.",
+        "Tier1 or directly affectedTier2 contradiction, incomplete exact build/review/custody/native hardware evidence, callback ownership mismatch, stale active identity/generation, uncertain write/restore outcome.",
+        "Candidate/source/artifact change after review/build/hardware tuple requires affected revalidation and fresh exact acceptance; no transferred PASS."
+      ],
+      "authorization_snapshot_provenance": "Independent Glyph Work-Order Curator,2026-10-20; exact immutable Planner git-json:14b1049bd421c5a202b2d99750f225a043660241:docs/planning/portfolio_20261020_1228.md; same-base append-only receipt git-json:8e30717ce5a64d3207e42aa4a7111dd3b492f800:docs/agent_framework/curation_receipts/glyph-portfolio-20261020-1228.json. This descendant adoption becomes executable only after verified live canonical publication; receipt alone is not activation.",
+      "automated_validation": [
+        "Freeze original Stage-A/B/C source, fixtures and oracle manifest exactly; preserve four baseline variants, both enum ABIs and all 1,222,420 full-output Stage-C comparisons. Native differential uses actual production native decoder/view/evaluator and frozen independent legacy resolver, never a common rewritten semantic oracle.",
+        "All18 family coverage, every modifier singleton/pair/source-derived higher-order conflict x nine directions including5, Mode/sublayers/asymmetry. Compare complete OutputState including reserved legacy-unowned mask0xf0030000, triggers, Dpad and Nunchuk tail; physical Nunchuk remains NOT_TESTED.",
+        "General converter V1/source selection, V2 distinct intrinsic versus user routing scope, V3 routing exactly once; sparse role32/reordered IDs with explicit old-to-new map; arbitrary admitted gates/suppression/inversion/effect modes/direction transforms/Mode tables/digital masks/Dpad flags0..7; original input/profile/Config bytes immutable, policy/provenance/context digests complete.",
+        "Independent original/pre/post snapshot activation, one remap+SOCD execution/frame, preserved ordered history/release for every supported policy, duplicate physical direction sources, physical-to-logical remap. One physical input may feed direction+A or A+L+R; multiple inputs same output OR. Clean Down+A survives SOCD cancellation; forced-table coordinates apply only when winning and A remains independent except explicit winner filter.",
+        "All X/Y/Tilt families rebound across eligible carriers, no inherited original-slot actions; LT6 historical parity distinct from clean policies. Source-backed RF6 cancellation, RF7/RS axis transforms, null conflicts and Dpad analogue bypass; trigger effect after digital mask and actual backend serialization fields.",
+        "Production validation negatives: mixed schema5/legacy fields, duplicate tag8, unsupported4/encoding/engine, short/trailing/oversized body, reserved flags/padding, invalid domains/token/reference/stage/cyclic role, duplicate IDs/priority collision including overlapping both-stick targets, missing tables/sources, exhausted pool/owners/workspaces, bad preprocessing digest. Reject before write/publication; native unavailable never legacy fallback.",
+        "Mutation controls with named assertion: intrinsic slot leakage, wrong ID/domain/enum-bit alias, double SOCD, cancelled-Down gating A, losing table influence, serialized-array precedence, stale active program/generation, incoming/record callback alias poisoning, overwritten response lease, request identity or encode-size mismatch, silently skipped embedded native fields. Each mutant must fail, not merely be generated.",
+        "Native protobuf callback representation in fresh generated descriptors both ABIs; exact3341 envelope through existing4096 profile/8192 frame/request/response/COBS bounds. All Config/Persistence/migration/SET_CONFIG embedded profile decoders explicitly reject any native tag including schema1+tag8; no native callback pointer survives Config copies. Audit removed generated size macro consumers; bounded replacements use source-supported maxima.",
+        "Lease lifecycle: complete RX through decode/hash/validation/transaction then release before shared response frame reuse; READ uses separate record-wire/candidate owner; synchronous Create/Update/Read/Duplicate; nested reads first preserve live payload in the sole candidate owner. Failed decode/prepare/update/read cannot mutate active owner/view/digest/generation; no polling parse/heap/filesystem/write.",
+        "Store actual-host lifecycle preserves IDs/revisions/incarnations/roots/checked transaction and recovery semantics, native Create new ID, Duplicate same kind, cross-kind Update rejects, legacy V1-V3 updates/fallback unchanged, native expected engine commits with checked reference and persists through directory/root loss. Same-kind previous recovery only with matching context; missing/corrupt/recovery/context/prepare failure clears old native handle and emits buttons0/sticks128/triggers0, bypassing Nunchuk.",
+        "Twenty independently complete native profiles each with28 tables/all families/own bindings/conditions/effects and varied contents, actual LittleFS/capacity/revision retention/staging/reserve/latched/migration lifecycle proof, directory64. Maximum body3336/wrapper3341/record3373 fits existing single4096 charge; replace misleading3079 representative bound with3373 or directly shared truthful bound. No increased storage/reserve/limits. RAM independent of inactive profile count.",
+        "Checked reference commit -> reboot/reinitialize -> activate two different complete native programs; inactive update r+1 leaves actual active r until reboot. Exact owner pointer/view/generation/context and wrapper digest bound to actual evaluator. Preserve16-byte request/72-byte response/XInput-only service and existing status12 SnapshotUnavailable with zero fields; no transmitted generation/firmware hash or GameCube identity claim.",
+        "Fresh exact baseline reconciliation and final committed Mk6 build; both ABI layout, descriptor/input identity, static/flash/linker partition, active+candidate/views/fixed scratch against numeric caps, compiler -fstack-usage/interrupt assumptions and bounded operation cost96conditions/768tokens/8sources/32rules/32bindings/16effects. Actual polling/activation timing and target whole-stack observations stay NOT_MEASURED until measured; no invented guarantee or limit increase.",
+        "Run focused native checker and listed actual affected consumers with explicit base/context/applicability. CustomController/default hook and remap/SOCD algorithms/backends unchanged, meaningful serializer source-host proofs for actual L/R/Z mapping. Required Tier1/affectedTier2 FAIL/TIMEOUT/INCOMPLETE/UNAVAILABLE block; unrelated aggregate/synthetic/time-limit debt remains raw, never full aggregate PASS.",
+        "Fresh independent complete source/safety review after implementation; exact committed candidate/base/tree/generated descriptors/build/UF2size+SHA256/content-addressed custody. Fixed GP_NATIVE_001_HW_V1 reviewed protocol binds complete outputs at M6; candidate-specific device packet requires direct owner approval before flashing/profile mutation. Independent HEP exact observations, source-free R->E before tested-source I/catalog/correspondence review, then separate strict completion after live integration."
+      ],
+      "canonical_build": "pio run -e glyph_mk6",
+      "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+      "candidate_git_sha": null,
+      "candidate_base_configurator_sha": null,
+      "firmware_artifact_build_path": null,
+      "preserved_firmware_artifact_locator": null,
+      "firmware_artifact_sha256": null,
+      "manual_acceptance": "REQUIRED",
+      "manual_acceptance_protocol_reference": "docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md",
+      "manual_acceptance_protocol_version": "GP_NATIVE_001_HW_V1",
+      "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+      "hardware_evidence_record": null,
+      "hardware_result": null,
+      "hardware_evidence_gaps": [
+        "Native candidate/artifact/handoff not yet created.",
+        "All required GP_NATIVE_001_HW_V1 H1-H12 exact candidate-specific human observations, route-specific evidence, restoration and independent HEP pending."
+      ],
+      "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",
+      "status_documentation_updates": "Record exact reviewed source/resource/verification/rebinding/converter/identity facts in named chapter docs, candidate B/F/tree/build/descriptor/UF2size+SHA/custody, complete H1-H12 observations and limitations. Governance publishes source-free pending/result queue and mirrors, not candidate source. Preserve GP-BIND-001/002 FAIL,003 HARDWARE_VALIDATED/integrated but not strictDONE, historical H4 root cause UNPROVEN, RT2 DEFERRED/underlyingUNRESOLVED, NunchukNOT_TESTED, GameCube identity unsupported. Independent review and actual proof precede live publication; no aggregate PASS substitution.",
+      "done_evidence": "Required: all12 owner completion criteria/all18 families, full independent legacy-native correspondence/general converter/rebinding/domain/composition tests, actual20-profile capacity/constant RAM/store lifecycle and identity proof, numeric build/resource caps and fresh independent source review, final exact F/tree/build inputs/UF2/custody, approved concrete packet plus complete exact human observations independently HEP PASS. Source-free R->E while F unintegrated; then exact tested-source I with genuine critical-input/catalog correspondence and fresh integration review; only later separate strict glyph_done_completion_evidence after verified live I using full implementation_base_sha/reviewed_implementation_sha/prior_canonical_integration_sha/exact reviewed_changed_paths/review and validation provenance. No success claim from shape witness/build/selection/X1 alone.",
+      "stop_conditions": [
+        "Do not implement until this independently adjudicated complete READY order and exact immutable P/C provenance are verified live on canonical. A local adoption or receipt alone does not authorize source execution.",
+        "Stop on source/product/domain/architecture/protected resource contradiction, forbidden scope, missing exact validation/review/build/custody or Tier1/affectedTier2 failure.",
+        "Before flashing or profile mutation require concrete candidate-specific owner packet approval; no authorization by generic protocol or READY.",
+        "Stop at hardware wait until complete exact HEP PASS; FAIL isolates candidate and opens event-specific source-grounded Curator repair adjudication.",
+        "No concurrent canonical publisher, uncertain write/recovery, mismatched runtime/candidate/artifact tuple, missing backup or unsupported evidence inference."
+      ],
+      "activation_state": "NOT_APPLICABLE",
+      "activation_requires_new_judgment": false,
+      "hardware_evidence_dependency_satisfied": null
     }
   ]
 }
@@ -8708,19 +8842,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":["GP-NATIVE-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: (none)
-Immediate Ready: 0
+Ready IDs: GP-NATIVE-001
+Immediate Ready: 1
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
 Hardware-pending: 0
-Effective authorized runway: 0
+Effective authorized runway: 1
 Target effective authorized runway: 4
-Primary liveness: PLANNING_REQUIRED
+Primary liveness: RUNWAY_LOW
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

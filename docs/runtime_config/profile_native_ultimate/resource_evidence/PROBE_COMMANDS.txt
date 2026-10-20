@@ -1,0 +1,11 @@
+Working directory: /private/tmp/glyph-profile-native-20261020
+Generator executable: /Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.venv/bin/python
+Generator source: /Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py
+Arguments: -I schema/haybox -f schema/haybox/config.options --error-on-unmatched --no-timestamp -D /private/tmp/glyph-native-resource-probes/generated schema/haybox/config.proto
+Compiler: /Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++
+Arguments: -std=c++17 -mcpu=cortex-m0plus -mthumb { -fshort-enums | -fno-short-enums } -I/private/tmp/glyph-native-resource-probes/generated -I/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb -I/private/tmp/glyph-profile-native-20261020/include -I/private/tmp/glyph-profile-native-20261020/HAL/pico/include -c /private/tmp/glyph-native-resource-probes/layout.cpp -o /private/tmp/glyph-native-resource-probes/{short,no-short}.o
+Use argument arrays or shell quote arguments containing spaces.
+Read target symbol lengths: same compiler directory arm-none-eabi-nm -S object.o
+No-short is EXPLICIT -fno-short-enums; this ARM compiler defaults to short enums.
+Directory/compact probes: same flags and includes, replace layout.cpp with directory-layout.cpp/compact-layout.cpp.
+Encoded fixtures: Python imports exact tracked tools/glyph_serial_config_tool.py and check_glyph_stage_b_ultimate_profiles.py; load_runtime_proto_modules uses grpc_tools.protoc on exact tracked schema; make_v2_artifact()/make_v3_artifact() and Stage-A fixture encoded by encode_artifact_payload; SerializeToString each profile. Inputs/results preserved.
