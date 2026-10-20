@@ -284,3 +284,14 @@ Owner reports XInput, Switch and Gamecube routes available and no external SWD/
 timing equipment; controller revision/host/adapter details remain unspecified.
 No diagnostic facility, metric transport, controller action or hardware PASS
 has been added or inferred.
+
+The follow-up native_full_proof_default.log completed PASS with default enum
+ABI, including the same full frozen comparisons, all twenty actual profiles,
+actual current callers and every named mutation. Overwriting the live READ
+record bytes fails the independent exact-wrapper assertion; releasing that
+lease before encode fails the frozen COBS-delimiter assertion because no valid
+response can be encoded. The candidate control passes both. All input/output
+fixtures and production firmware source remain as45d713be; this checkpoint
+adds only the final mutation launcher correction, completed log and the already
+used ARM resource collector source. No native target timing/peak/hardware
+acceptance follows from these host results.

@@ -370,8 +370,8 @@ def dispatch_tests(temp,pb,config):
     anchor='    pb_ostream_t output = pb_ostream_from_buffer(frame, sizeof(frame));'
     require(backend_source.count(anchor)==1,'exact native response encode boundary')
     for label,injection,assertion in [
-        ('overwritten_response_lease','if(response.has_profile && response.profile.schema_version==5) const_cast<ultimate_native::PayloadLease *>(ultimate_native::Lease(response.profile))->bytes=frame;','READ independent record lease survives shared response frame reuse'),
-        ('released_response_lease','if(response.has_profile && response.profile.schema_version==5) const_cast<ultimate_native::PayloadLease *>(ultimate_native::Lease(response.profile))->Release();','native repeated READ dispatch')]:
+        ('overwritten_response_lease','if(response.has_profile && response.profile.schema_version==5) std::memset(const_cast<uint8_t *>(ultimate_native::Lease(response.profile)->bytes),0xcc,ultimate_native::Lease(response.profile)->size);','READ independent record lease survives shared response frame reuse'),
+        ('released_response_lease','if(response.has_profile && response.profile.schema_version==5) const_cast<ultimate_native::PayloadLease *>(ultimate_native::Lease(response.profile))->Release();','COBS delimiter')]:
         mutant=temp/(label+'.cpp');mutant.write_text(backend_source.replace(anchor,'    '+injection+'\n'+anchor));mutant_exe=temp/label
         run(['c++','-std=c++17',*flags,str(HOST/'native_dispatch.cpp'),str(mutant),*[str(ROOT/s) for s in sources[1:]],str(host/'checked_storage_unavailable.cpp'),str(libs/'nanopb-arduino/src/pb_arduino.cpp'),*objects,'-o',str(mutant_exe)])
         result=subprocess.run([str(mutant_exe),str(legacy),str(ordinary),str(maximum)],capture_output=True,text=True)
