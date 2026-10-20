@@ -1038,6 +1038,11 @@ const UltimateProfile *ProfileStore::Activate(uint32_t id, Status *status) {
         }
         previous = true;
     }
+    const bool native = _candidate_profile.schema_version == ultimate_native::kSchema;
+    if (native != (e.payload_version == ultimate_native::kSchema) || (native && _read_only_recovery)) {
+        if (status) *status = Status::Invalid;
+        return nullptr;
+    }
     _active_profile = _candidate_profile;
     if (_active_profile.schema_version == ultimate_native::kSchema) {
         if (!ultimate_native::CopyProgram(ultimate_native::CandidateView(), _active_native, _native_generation) ||

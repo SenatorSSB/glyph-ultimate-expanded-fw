@@ -77,20 +77,20 @@ struct Cursor {
     }
 };
 bool ScanProfile(const uint8_t *bytes, size_t size, PayloadLease &lease) {
-    lease.Release(); Cursor c{bytes,size}; uint32_t schema=0; bool seen_schema=false, native=false, legacy=false;
+    lease.Release(); Cursor c{bytes,size}; uint32_t schema=0; uint8_t schema_count=0; bool native=false, legacy=false, unknown=false;
     while(c.n) {
         uint32_t tag,v; uint8_t wire; const uint8_t *data; size_t n;
         if(!c.Field(tag,wire,data,n,v)) return false;
-        if(tag==1) { if(wire!=0 || seen_schema) return false; schema=v;seen_schema=true; }
+        if(tag==1) { if(wire!=0) return false; schema=v;if(schema_count<2) ++schema_count; }
         if(tag>=2 && tag<=7) legacy=true;
         if(tag==8) {
             if(wire!=2 || native || !n || n>kBodyMax) return false;
             lease.bytes=data;lease.size=n;native=true;
         }
         // Schema 5 is closed. Legacy unknown fields retain prior protobuf behavior.
-        if(tag>8 && schema==kSchema) return false;
+        if(tag>8) unknown=true;
     }
-    if(schema==kSchema) { if(!native || legacy) return false; lease.live=true; return true; }
+    if(schema==kSchema) { if(!native || legacy || unknown || schema_count!=1) return false; lease.live=true; return true; }
     lease.Release(); return !native;
 }
 }
@@ -180,7 +180,7 @@ bool ContextDigest(const GameModeConfig &c, uint8_t digest[32]) {
     v[0]=c.socd_pairs_count;h.Update(v,1);
     for(size_t i=0;i<c.socd_pairs_count;++i) {
         const auto &s=c.socd_pairs[i];
-        if(s.button_dir1<1 || s.button_dir1>60 || s.button_dir2<1 || s.button_dir2>60 || s.socd_type>4) return false;
+        if(s.button_dir1<1 || s.button_dir1>60 || s.button_dir2<1 || s.button_dir2>60 || s.socd_type>5) return false;
         v[0]=s.button_dir1;v[1]=s.button_dir2;v[2]=s.socd_type;h.Update(v,3);
     }
     h.Final(digest);return true;

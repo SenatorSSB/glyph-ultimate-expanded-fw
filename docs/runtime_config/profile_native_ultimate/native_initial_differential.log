@@ -1,0 +1,4 @@
+PASS independent legacy/native full-output corpus=72
+v1: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk
+v2: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk
+v3: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk
