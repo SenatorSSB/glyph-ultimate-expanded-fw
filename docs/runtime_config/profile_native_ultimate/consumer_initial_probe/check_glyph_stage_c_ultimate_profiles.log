@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_stage_c_ultimate_profiles.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "glyph_stage_c_ultimate_profiles: FAIL: shared Stage-B preprocessing/state drift: src/core/ControllerMode.cpp\n",
+  "stderr": ""
+}

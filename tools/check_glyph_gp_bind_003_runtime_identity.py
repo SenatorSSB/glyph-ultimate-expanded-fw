@@ -253,7 +253,7 @@ def main():
         path=shadows/'prototypes/senscope/SenscopePrototypeBuildFlags.hpp';path.parent.mkdir(parents=True,exist_ok=True);path.write_text('#pragma once\n')
         path=shadows/'stdlib.hpp';path.write_text('#pragma once\n#include <cstddef>\n#include <cstdint>\n#include <cstdlib>\nusing byte=uint8_t;\n')
         path=shadows/'serial.hpp';path.write_text('#pragma once\n#include "stdlib.hpp"\nnamespace serial {void init(unsigned long);void close();void print(const char*);void write(uint8_t);void write(uint8_t*,size_t);int available_for_write();}\n')
-        sources=['src/modes/Ultimate.cpp','src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/CommunicationBackend.cpp','src/core/socd.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp','src/comms/B0XXInputViewer.cpp']
+        sources=['src/modes/Ultimate.cpp','src/modes/UltimateNativeEvaluator.cpp','src/modes/UltimateNativeProfile.cpp','src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/CommunicationBackend.cpp','src/core/socd.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp','src/comms/B0XXInputViewer.cpp']
         includes=[shadows,generated,nanopb,ROOT/'include',ROOT/'HAL/pico/include',ROOT/'tools/fixtures/profile_store_migration_lifecycle_host/include',ROOT/'config/glyph/common/include',ROOT/'config/glyph/glyph_mk6/include',ROOT/'src',ROOT]
         for abi in ([],['-fshort-enums']):
             suffix='short' if abi else 'default';inc=[item for p in includes for item in ['-I',p]]
@@ -281,7 +281,7 @@ def main():
             dispatch_inc=[legacy/'include',ROOT/'HAL/pico/include',ROOT/'include',generated,nanopb,libs/'nanopb-arduino/src',libs/'PacketIO/src',ROOT/'config/glyph/common/include',ROOT/'config/glyph/glyph_mk6/include']
             dc=[*FLAGS,*abi,'-DARDUINO=1','-Wall','-Wextra','-Werror','-Wno-error=inconsistent-missing-override','-Wno-error=missing-field-initializers','-Wno-unused-function',*[item for p in dispatch_inc for item in ['-I',p]]]
             dispatch_objects=objects
-            dispatch_sources=['HAL/pico/src/comms/ConfiguratorBackend.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp']
+            dispatch_sources=['src/modes/UltimateNativeProfile.cpp','HAL/pico/src/comms/ConfiguratorBackend.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp']
             exe=temp/('dispatch'+suffix)
             run(['c++','-std=c++17',*dc,HOST/'configurator.cpp',*[ROOT/s for s in dispatch_sources],legacy/'checked_storage_unavailable.cpp',libs/'nanopb-arduino/src/pb_arduino.cpp',*dispatch_objects,'-o',exe])
             result=run([exe,temp/'v3.pb'])

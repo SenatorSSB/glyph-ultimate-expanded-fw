@@ -1,0 +1,6 @@
+glyph_mk6 build passed
+RAM:   [=======   ]  74.6% (used 195664 bytes from 262144 bytes)
+Flash: [===       ]  31.9% (used 500892 bytes from 1568768 bytes)
+========================= [SUCCESS] Took 53.91 seconds =========================
+glyph_mk6      SUCCESS   00:00:53.908
+Full log: /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T//glyph_mk6_build.log

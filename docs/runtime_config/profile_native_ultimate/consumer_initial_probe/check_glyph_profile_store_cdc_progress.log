@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_cdc_progress.py",
+    "--output-dir",
+    "/private/tmp/glyph-native-consumer-probe-results/cdc-progress"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "payload=1 ok=1 wire=4 skipped_irq=1 task_calls=2\npayload=63 ok=1 wire=66 skipped_irq=2 task_calls=2\npayload=64 ok=1 wire=67 skipped_irq=2 task_calls=2\npayload=65 ok=1 wire=68 skipped_irq=2 task_calls=2\npayload=255 ok=1 wire=258 skipped_irq=5 task_calls=5\npayload=256 ok=1 wire=259 skipped_irq=5 task_calls=5\npayload=257 ok=1 wire=260 skipped_irq=5 task_calls=5\npayload=512 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=3079 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=4096 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=8191 ok=0 wire=320 skipped_irq=6 task_calls=6\nall_nonzero_payload_sweep_1_to_600_first_failure=317\nactual_pb_payload=104 ok=1 wire=107\nactual_pb_payload=276 ok=1 wire=280\nactual_pb_payload=1989 ok=0 wire=320\nactual_pb_payload=4038 ok=0 wire=320\nactual_pb_payload=3071 ok=0 wire=320\nactual_pb_payload=3076 ok=0 wire=320\nactual_pb_payload=3072 ok=0 wire=320\nold_cdc_deferred_completion_negative=PASS first_tested_payload_failure=512\npayload=1 ok=1 wire=4 skipped_irq=2 task_calls=3\npayload=63 ok=1 wire=66 skipped_irq=3 task_calls=4\npayload=64 ok=1 wire=67 skipped_irq=3 task_calls=4\npayload=65 ok=1 wire=68 skipped_irq=3 task_calls=4\npayload=255 ok=1 wire=258 skipped_irq=5 task_calls=5\npayload=256 ok=1 wire=259 skipped_irq=5 task_calls=5\npayload=257 ok=1 wire=260 skipped_irq=5 task_calls=5\npayload=512 ok=1 wire=517 skipped_irq=9 task_calls=9\npayload=3079 ok=1 wire=3094 skipped_irq=49 task_calls=49\npayload=4096 ok=1 wire=4115 skipped_irq=65 task_calls=65\npayload=8191 ok=1 wire=8226 skipped_irq=129 task_calls=129\nall_nonzero_payload_sweep_1_to_600_first_failure=0\nactual_pb_payload=104 ok=1 wire=107\nactual_pb_payload=276 ok=1 wire=280\nactual_pb_payload=1989 ok=1 wire=1999\nactual_pb_payload=4038 ok=1 wire=4056\nactual_pb_payload=3071 ok=1 wire=3086\nactual_pb_payload=3076 ok=1 wire=3091\nactual_pb_payload=3072 ok=1 wire=3087\ncurrent_cdc_progress=PASS repeated_profile_reads=1024 mixed_rounds=147 dtr_reconnects=20 dropped_responses=9 stalled_host_recovery=8 slow_reader_ms_per_packet=3 disconnected_bound_ms=2000 no_tx_allocations=true no_retained_host_allocation_growth=true actual_nanopb_reencode=true\n",
+  "stderr": ""
+}

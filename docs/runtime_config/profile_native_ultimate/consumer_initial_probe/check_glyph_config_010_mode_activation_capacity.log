@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_config_010_mode_activation_capacity.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "glyph_config_010_mode_activation_capacity: FAIL: HayBox selector drift\n",
+  "stderr": ""
+}

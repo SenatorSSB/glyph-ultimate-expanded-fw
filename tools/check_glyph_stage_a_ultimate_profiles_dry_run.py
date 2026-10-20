@@ -103,7 +103,7 @@ def verify_production_admission(message, encoded: bytes, config_pb2) -> None:
              "-D", str(temp), str(schema / "config.proto")])
         # Compile decoder and descriptors as C, matching firmware language selection.
         objects = []
-        for source in (nanopb / "pb_common.c", nanopb / "pb_decode.c", temp / "config.pb.c"):
+        for source in (nanopb / "pb_common.c", nanopb / "pb_decode.c", nanopb / "pb_encode.c", temp / "config.pb.c"):
             target = temp / (source.stem + ".o")
             run(["cc", "-std=c11", "-fshort-enums", "-I", str(temp), "-I", str(nanopb),
                  "-c", str(source), "-o", str(target)])
@@ -114,7 +114,7 @@ def verify_production_admission(message, encoded: bytes, config_pb2) -> None:
              "-I", str(ROOT / "config/glyph/common/include"),
              "-I", str(ROOT / "config/glyph/glyph_mk6/include"),
              str(ROOT / "tools/fixtures/stage_a_ultimate_profiles_host/admission.cpp"),
-             str(ROOT / "src/core/config_validation.cpp"),
+             str(ROOT / "src/core/config_validation.cpp"), str(ROOT / "src/modes/UltimateNativeProfile.cpp"),
              str(ROOT / "src/core/config_button_validation.cpp"),
              str(ROOT / "src/core/config_usb_default_validation.cpp"),
              str(ROOT / "src/core/config_rgb_target_validation.cpp"),

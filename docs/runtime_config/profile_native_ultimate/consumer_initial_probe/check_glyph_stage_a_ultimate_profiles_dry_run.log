@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "glyph_stage_a_ultimate_profiles_dry_run: FAIL: production admission command failed: c++ -std=c++17 -fshort-enums -Wall -Wextra -Werror -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/glyph_mk6/include /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/stage_a_ultimate_profiles_host/admission.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_button_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_usb_default_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_rgb_target_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/src/glyph_config_validation.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/pb_common.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/pb_decode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/config.pb.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/admission\n\nUndefined symbols for architecture arm64:\n  \"ultimate_native::ValidProfile(_UltimateProfile const&)\", referenced from:\n      (anonymous namespace)::validate_ultimate_profile_semantics_impl(_UltimateProfile const&, ConfigValidationError&, unsigned char) in config_validation-a007aa.o\nld: symbol(s) not found for architecture arm64\nclang++: error: linker command failed with exit code 1 (use -v to see invocation)\n\n",
+  "stderr": ""
+}

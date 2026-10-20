@@ -1012,7 +1012,6 @@ ProfileStore::Status ProfileStore::Read(uint32_t id, UltimateProfile &out, uint3
 }
 
 const UltimateProfile *ProfileStore::Activate(uint32_t id, Status *status) {
-    _active_id = 0; _active_revision = 0;
     _active_native.view.valid = false; _active_native_lease.Release();
     ++_native_generation; if (!_native_generation) ++_native_generation;
     if (!id) {

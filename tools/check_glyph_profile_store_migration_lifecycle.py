@@ -52,7 +52,7 @@ def main() -> int:
                  "-I", str(ROOT / "include"), "-I", str(ROOT / "HAL/pico/include"),
                  "-I", str(ROOT / "config/glyph/common/include"), "-I", str(ROOT / "config/glyph/glyph_mk6/include"),
                  str(HOST / "migration_lifecycle.cpp"), str(HOST / "checked_storage_unavailable.cpp"), str(ROOT / "HAL/pico/src/core/ProfileStore.cpp"),
-                 str(ROOT / "src/core/config_validation.cpp"), str(ROOT / "src/core/config_button_validation.cpp"),
+                 str(ROOT / "src/modes/UltimateNativeProfile.cpp", ROOT / "src/core/config_validation.cpp"), str(ROOT / "src/core/config_button_validation.cpp"),
                  str(ROOT / "src/core/config_usb_default_validation.cpp"), str(ROOT / "src/core/config_rgb_target_validation.cpp"),
                  str(ROOT / "config/glyph/common/src/glyph_config_validation.cpp"), *objects, "-o", str(executable)])
             lifecycle = run([str(executable), str(legacy)])

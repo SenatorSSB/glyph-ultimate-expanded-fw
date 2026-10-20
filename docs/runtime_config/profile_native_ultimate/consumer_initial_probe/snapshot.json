@@ -1,0 +1,74 @@
+{
+  "head": "6e6ea894abdf699ea5761cbf5d3a62c072db8dfa",
+  "tree": "15152fd22b0ac4484cd60d7b5c96bda18afbd250",
+  "status": "?? .platformio-home\n",
+  "hashes": {
+    "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+    "src/core/ControllerMode.cpp": "5a8615740951ad8ab5b07104b38d5842d3a91537e4c1690d47a416f554dcd524",
+    "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+    "src/core/mode_selection.cpp": "fb2342b66135b2af23d083372b80710ddc0be20b38034740df5cac0b08e6f4e2",
+    "src/modes/Ultimate.cpp": "eb68be0002c1ccbb0aae285f542369a2404c662fac5067aa5b603acc78828687",
+    "src/modes/UltimateNativeProfile.cpp": "795992b89c568b94bec8c394532d8d7adcfe3bb610270b5d10521bef44b566fd",
+    "src/modes/UltimateNativeEvaluator.cpp": "1d5088951e686e89c757e24ea29dcc6db7aad0b182106ba5c825b870c162d820",
+    "include/modes/UltimateNativeProfile.hpp": "fa7b29690152d4ead0a8150f7a503df4e965daede7ebfffb1570016f28418717",
+    "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "5e6d1c47567763ad4e1e41a7c1f5d62bf7b5dd105246e88afd933a7a02e2b06b",
+    ".pio/libdeps/glyph_mk6/Nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+    ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+    ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738"
+  },
+  "dependency_versions": {
+    "protobuf": "7.36.2",
+    "grpcio-tools": "1.84.0"
+  },
+  "nanopb_library": {
+    "name": "Nanopb",
+    "version": "0.4.92",
+    "keywords": "protocol buffers, protobuf, google",
+    "description": "Nanopb is a plain-C implementation of Google's Protocol Buffers data format. It is targeted at 32 bit microcontrollers, but is also fit for other embedded systems with tight (<10 kB ROM, <1 kB RAM) memory constraints.",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/nanopb/nanopb.git"
+    },
+    "authors": [
+      {
+        "name": "Petteri Aimonen",
+        "email": "jpa@nanopb.mail.kapsi.fi",
+        "url": "http://koti.kapsi.fi/jpa/nanopb/"
+      }
+    ],
+    "export": {
+      "include": [
+        "*.c",
+        "*.cpp",
+        "*.h",
+        "examples",
+        "generator"
+      ],
+      "exclude": [
+        "generator/**/__pycache__",
+        "examples/platformio/.gitignore"
+      ]
+    },
+    "build": {
+      "extraScript": "generator/platformio_generator.py",
+      "includeDir": "",
+      "srcDir": "",
+      "srcFilter": [
+        "+<*.c>"
+      ]
+    },
+    "examples": [
+      "examples/platformio/platformio.ini",
+      "examples/platformio/src/*.c",
+      "examples/*/*.c"
+    ],
+    "frameworks": "*",
+    "platforms": "*"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "dependency_links": {
+    ".platformio-home": "/private/tmp/glyph-profile-native-20261020/.platformio-home",
+    ".pio/libdeps": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps"
+  }
+}

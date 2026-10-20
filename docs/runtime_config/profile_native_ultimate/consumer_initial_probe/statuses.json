@@ -1,0 +1,474 @@
+{
+  "kind": "FINITE_READ_ONLY_AFFECTED_CONSUMER_PROBE_NOT_FINAL_CANDIDATE_REVIEW",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "observed_model": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "snapshot": {
+    "head": "6e6ea894abdf699ea5761cbf5d3a62c072db8dfa",
+    "tree": "15152fd22b0ac4484cd60d7b5c96bda18afbd250",
+    "status": "?? .platformio-home\n",
+    "hashes": {
+      "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+      "src/core/ControllerMode.cpp": "5a8615740951ad8ab5b07104b38d5842d3a91537e4c1690d47a416f554dcd524",
+      "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+      "src/core/mode_selection.cpp": "fb2342b66135b2af23d083372b80710ddc0be20b38034740df5cac0b08e6f4e2",
+      "src/modes/Ultimate.cpp": "eb68be0002c1ccbb0aae285f542369a2404c662fac5067aa5b603acc78828687",
+      "src/modes/UltimateNativeProfile.cpp": "795992b89c568b94bec8c394532d8d7adcfe3bb610270b5d10521bef44b566fd",
+      "src/modes/UltimateNativeEvaluator.cpp": "1d5088951e686e89c757e24ea29dcc6db7aad0b182106ba5c825b870c162d820",
+      "include/modes/UltimateNativeProfile.hpp": "fa7b29690152d4ead0a8150f7a503df4e965daede7ebfffb1570016f28418717",
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "5e6d1c47567763ad4e1e41a7c1f5d62bf7b5dd105246e88afd933a7a02e2b06b",
+      ".pio/libdeps/glyph_mk6/Nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+      ".pio/libdeps/glyph_mk6/Nanopb/pb_encode.c": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      ".pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738"
+    },
+    "dependency_versions": {
+      "protobuf": "7.36.2",
+      "grpcio-tools": "1.84.0"
+    },
+    "nanopb_library": {
+      "name": "Nanopb",
+      "version": "0.4.92",
+      "keywords": "protocol buffers, protobuf, google",
+      "description": "Nanopb is a plain-C implementation of Google's Protocol Buffers data format. It is targeted at 32 bit microcontrollers, but is also fit for other embedded systems with tight (<10 kB ROM, <1 kB RAM) memory constraints.",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/nanopb/nanopb.git"
+      },
+      "authors": [
+        {
+          "name": "Petteri Aimonen",
+          "email": "jpa@nanopb.mail.kapsi.fi",
+          "url": "http://koti.kapsi.fi/jpa/nanopb/"
+        }
+      ],
+      "export": {
+        "include": [
+          "*.c",
+          "*.cpp",
+          "*.h",
+          "examples",
+          "generator"
+        ],
+        "exclude": [
+          "generator/**/__pycache__",
+          "examples/platformio/.gitignore"
+        ]
+      },
+      "build": {
+        "extraScript": "generator/platformio_generator.py",
+        "includeDir": "",
+        "srcDir": "",
+        "srcFilter": [
+          "+<*.c>"
+        ]
+      },
+      "examples": [
+        "examples/platformio/platformio.ini",
+        "examples/platformio/src/*.c",
+        "examples/*/*.c"
+      ],
+      "frameworks": "*",
+      "platforms": "*"
+    },
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "dependency_links": {
+      ".platformio-home": "/private/tmp/glyph-profile-native-20261020/.platformio-home",
+      ".pio/libdeps": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps"
+    }
+  },
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_stage_a_ultimate_profiles_dry_run: FAIL: production admission command failed: c++ -std=c++17 -fshort-enums -Wall -Wextra -Werror -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/glyph_mk6/include /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/stage_a_ultimate_profiles_host/admission.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_button_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_usb_default_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_rgb_target_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/src/glyph_config_validation.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/pb_common.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/pb_decode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/config.pb.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-a-admission-oqlfl8ik/admission\n\nUndefined symbols for architecture arm64:\n  \"ultimate_native::ValidProfile(_UltimateProfile const&)\", referenced from:\n      (anonymous namespace)::validate_ultimate_profile_semantics_impl(_UltimateProfile const&, ConfigValidationError&, unsigned char) in config_validation-a007aa.o\nld: symbol(s) not found for architecture arm64\nclang++: error: linker command failed with exit code 1 (use -v to see invocation)\n\n",
+      "stderr": "",
+      "seconds": 1.23,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_stage_a_ultimate_profiles_dry_run.log",
+      "status": "FAIL",
+      "cluster": "MISSING_NATIVE_PROFILE_TU",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_stage_b_ultimate_profiles.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_stage_b_ultimate_profiles: FAIL: command failed (1): c++ -std=c++17 -fshort-enums -Wall -Wextra -Werror -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-b-ultimate-oh9gus2i/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/glyph_mk6/include /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_button_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_usb_default_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_rgb_target_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/src/glyph_config_validation.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-b-ultimate-oh9gus2i/pb_common.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-b-ultimate-oh9gus2i/pb_decode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-b-ultimate-oh9gus2i/config.pb.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/stage-b-ultimate-oh9gus2i/admission\n\nUndefined symbols for architecture arm64:\n  \"ultimate_native::ValidProfile(_UltimateProfile const&)\", referenced from:\n      (anonymous namespace)::validate_ultimate_profile_semantics_impl(_UltimateProfile const&, ConfigValidationError&, unsigned char) in config_validation-636017.o\nld: symbol(s) not found for architecture arm64\nclang++: error: linker command failed with exit code 1 (use -v to see invocation)\n\n",
+      "stderr": "",
+      "seconds": 0.87,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_stage_b_ultimate_profiles.log",
+      "status": "FAIL",
+      "cluster": "MISSING_NATIVE_PROFILE_TU",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_stage_c_ultimate_profiles.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_stage_c_ultimate_profiles: FAIL: shared Stage-B preprocessing/state drift: src/core/ControllerMode.cpp\n",
+      "stderr": "",
+      "seconds": 0.24,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_stage_c_ultimate_profiles.log",
+      "status": "FAIL",
+      "cluster": "FROZEN_SHARED_SOURCE_PIN_ADAPTER",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_gp_bind_003_runtime_identity.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "runtime_identity_host_split_ambiguous_timeout_token=PASS\nruntime_identity_configurator_cobs_cli_roundtrip_negatives=PASS\nruntime_identity_pinned_dtr_write_115200_no_reset_1200_control=PASS\nruntime_identity_actual_cli_single_open_dtr_asserted_115200=PASS pinned_sources={\"arduino/Adafruit_USBD_CDC.cpp\": \"497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8\", \"class/cdc/cdc_device.c\": \"adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f\"}\n",
+      "stderr": "glyph_gp_bind_003_runtime_identity=FAIL: c++ -std=c++17 -O2 -fsanitize=address,undefined -fno-omit-frame-pointer -g -Wall -Wextra -Werror -Wno-unused-function -Wno-missing-field-initializers -Wno-non-c-typedef-for-linkage -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/shadows -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_migration_lifecycle_host/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/glyph_mk6/include -I /private/tmp/glyph-native-consumer-probe-20261020/src -I /private/tmp/glyph-native-consumer-probe-20261020 /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_bind_003_runtime_identity/observer.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-0default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-1default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-2default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-3default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-4default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-5default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-6default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-7default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-8default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-9default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-10default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/engine-11default.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/pb_commondefault.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/pb_decodedefault.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/pb_encodedefault.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/config.pbdefault.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/storedefault.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/observerdefault\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_bind_003_runtime_identity/observer.cpp:150:161: error: use of undeclared identifier 'UltimateProfile_size'; did you mean 'UltimateProfile_msg'?\n  150 |   std::printf(\"sizeof_service=%zu sizeof_snapshot=%zu encoded_profile_bound=%u\\n\",sizeof(runtime_identity::Service),sizeof(runtime_identity::Snapshot),unsigned(UltimateProfile_size));\n      |                                                                                                                                                                 ^~~~~~~~~~~~~~~~~~~~\n      |                                                                                                                                                                 UltimateProfile_msg\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/gp-bind003-proof-zfkebag9/generated/config.pb.h:1978:27: note: 'UltimateProfile_msg' declared here\n 1978 | extern const pb_msgdesc_t UltimateProfile_msg;\n      |                           ^\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_bind_003_runtime_identity/observer.cpp:150:152: error: cannot convert 'const pb_msgdesc_t' (aka 'const pb_msgdesc_s') to 'unsigned int' without a conversion operator\n  150 |   std::printf(\"sizeof_service=%zu sizeof_snapshot=%zu encoded_profile_bound=%u\\n\",sizeof(runtime_identity::Service),sizeof(runtime_identity::Snapshot),unsigned(UltimateProfile_size));\n      |                                                                                                                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated.\n\n",
+      "seconds": 4.12,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_gp_bind_003_runtime_identity.log",
+      "status": "FAIL",
+      "cluster": "REMOVED_GENERATED_SIZE_MACRO",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_production.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "{\n  \"status\": \"PASS_SOURCE_COMPOSITION\",\n  \"negative_controls\": 4,\n  \"source_sha256\": {\n    \"config/glyph/env.ini\": \"ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36\",\n    \"config/glyph/common/src/config.cpp\": \"ea87e5e50bd30cef399f2f0db1f0c7b55fe2098e74d4022ebf4120f55fc56ea9\",\n    \"HAL/pico/src/comms/ConfiguratorBackend.cpp\": \"09d32bcf704624b9c47df3b2303f7872af4d61c757d512042bf1cbcb7da7a97a\",\n    \"include/core/ProfileStoreFaultControls.hpp\": \"845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1\",\n    \"include/core/ProfileStoreReadTrace.hpp\": \"6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456\",\n    \"HAL/pico/src/core/CheckedStorage.cpp\": \"56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd\"\n  },\n  \"hardware\": \"NOT_TESTED\",\n  \"underlying_RT2_cause\": \"UNRESOLVED\"\n}\n",
+      "stderr": "",
+      "seconds": 0.07,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_production.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_config_persistence.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_profile_store_config_persistence: FAIL: c++ -std=c++17 -DARDUINO=1 -DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1 -fshort-enums -Wall -Wextra -Werror -Wno-error=missing-field-initializers -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_config_persistence_host/include -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config021_persisted_recovery/include -I /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/profile-config-persistence-qmjtwqpw/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_config_persistence_host/persistence_harness.cpp /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_config_persistence_host/checked_storage_double.cpp /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/src/core/Persistence.cpp /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_button_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_usb_default_validation.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/profile-config-persistence-qmjtwqpw/pb_common.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/profile-config-persistence-qmjtwqpw/pb_decode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/profile-config-persistence-qmjtwqpw/pb_encode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/profile-config-persistence-qmjtwqpw/config.pb.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/profile-config-persistence-qmjtwqpw/persistence\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp:13:46: warning: missing field 'errmsg' initializer [-Wmissing-field-initializers]\n   13 |     return { pb_print_write, &p, SIZE_MAX, 0 };\n      |                                              ^\n1 warning generated.\nUndefined symbols for architecture arm64:\n  \"ultimate_native::ValidProfile(_UltimateProfile const&)\", referenced from:\n      (anonymous namespace)::validate_ultimate_profile_semantics_impl(_UltimateProfile const&, ConfigValidationError&, unsigned char) in config_validation-627279.o\n  \"ultimate_native::RejectPayload(pb_istream_s*, pb_field_iter_s const*, void**)\", referenced from:\n      Persistence::ReadLegacyProfile(unsigned long, _UltimateProfile&) in Persistence-d8baba.o\n  \"ultimate_native::RejectEmbedded(_Config&)\", referenced from:\n      Persistence::LoadConfigChecked(_Config&) in Persistence-d8baba.o\n  \"ultimate_native::ClearEmbeddedCallbacks(_Config&)\", referenced from:\n      Persistence::LoadConfigChecked(_Config&) in Persistence-d8baba.o\nld: symbol(s) not found for architecture arm64\nclang++: error: linker command failed with exit code 1 (use -v to see invocation)\n\n",
+      "stderr": "",
+      "seconds": 2.33,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_config_persistence.log",
+      "status": "FAIL",
+      "cluster": "MISSING_NATIVE_PROFILE_TU",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_read_storage.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-consumer-probe-results/read-storage"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_profile_store_read_storage: FAIL: c++ -std=c++17 -fsanitize=address,undefined -fno-omit-frame-pointer -g -O1 -fshort-enums -Wall -Wextra -Werror -Wno-unused-function -Wno-unused-variable -DLFS_NAME_MAX=32 -DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1 -DGLYPH_STRICT_HARDENING_CANDIDATE=1 -DREAD_PRODUCTION_TRACE=0 -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/frozen/include -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/glyph_mk6/include -I /Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/read_harness.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/frozen_d596.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/frozen/HAL/pico/src/core/CheckedStorage.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_button_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_usb_default_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/src/core/config_rgb_target_validation.cpp /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/src/glyph_config_validation.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/pb_common.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/pb_decode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/pb_encode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/config.pb.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/lfs.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/lfs_util.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/frozen_d596\nIn file included from /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/read_harness.cpp:291:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/read_observer.inc:12:19: error: use of undeclared identifier 'ProfileStoreResponse_size'; did you mean 'ProfileStoreResponse_msg'?\n   12 |     static_assert(ProfileStoreResponse_size < 8192, \"all bounded protobuf response fields fit frame\");\n      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~\n      |                   ProfileStoreResponse_msg\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/generated/config.pb.h:1981:27: note: 'ProfileStoreResponse_msg' declared here\n 1981 | extern const pb_msgdesc_t ProfileStoreResponse_msg;\n      |                           ^\nIn file included from /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/read_harness.cpp:291:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/read_observer.inc:12:45: error: invalid operands to binary expression ('const pb_msgdesc_t' (aka 'const pb_msgdesc_s') and 'int')\n   12 |     static_assert(ProfileStoreResponse_size < 8192, \"all bounded protobuf response fields fit frame\");\n      |                   ~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/read_observer.inc:27:22: error: use of undeclared identifier 'ProfileStoreResponse_size'; did you mean 'ProfileStoreResponse_msg'?\n   27 |             unsigned(ProfileStoreResponse_size), unsigned(UltimateProfile_size));\n      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~\n      |                      ProfileStoreResponse_msg\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/generated/config.pb.h:1981:27: note: 'ProfileStoreResponse_msg' declared here\n 1981 | extern const pb_msgdesc_t ProfileStoreResponse_msg;\n      |                           ^\nIn file included from /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/read_harness.cpp:291:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/read_observer.inc:27:13: error: cannot convert 'const pb_msgdesc_t' (aka 'const pb_msgdesc_s') to 'unsigned int' without a conversion operator\n   27 |             unsigned(ProfileStoreResponse_size), unsigned(UltimateProfile_size));\n      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/read_observer.inc:27:59: error: use of undeclared identifier 'UltimateProfile_size'; did you mean 'UltimateProfile_msg'?\n   27 |             unsigned(ProfileStoreResponse_size), unsigned(UltimateProfile_size));\n      |                                                           ^~~~~~~~~~~~~~~~~~~~\n      |                                                           UltimateProfile_msg\n/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/generated/config.pb.h:1978:27: note: 'UltimateProfile_msg' declared here\n 1978 | extern const pb_msgdesc_t UltimateProfile_msg;\n      |                           ^\nIn file included from /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-read-storage-x3dq1rhb/read_harness.cpp:291:\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_read_storage/read_observer.inc:27:50: error: cannot convert 'const pb_msgdesc_t' (aka 'const pb_msgdesc_s') to 'unsigned int' without a conversion operator\n   27 |             unsigned(ProfileStoreResponse_size), unsigned(UltimateProfile_size));\n      |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n6 errors generated.\n\n",
+      "stderr": "",
+      "seconds": 3.05,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_read_storage.log",
+      "status": "FAIL",
+      "cluster": "REMOVED_GENERATED_SIZE_MACRO",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_config_010_mode_activation_capacity.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_config_010_mode_activation_capacity: FAIL: HayBox selector drift\n",
+      "stderr": "",
+      "seconds": 0.1,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_config_010_mode_activation_capacity.log",
+      "status": "FAIL",
+      "cluster": "OLD_SELECTOR_CONTEXT",
+      "classification": "OLD_CONTEXT_NO_PRODUCT_ASSERTIONS_REACHED"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_custom_modifier_cache_characterization.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_custom_modifier_cache_characterization: FAIL: C024 post-integration change outside validation/evidence paths\n",
+      "stderr": "",
+      "seconds": 2.49,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_custom_modifier_cache_characterization.log",
+      "status": "FAIL",
+      "cluster": "OLD_C024_APPLICABILITY_CONTEXT",
+      "classification": "OLD_CONTEXT_NO_PRODUCT_ASSERTIONS_REACHED"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_gp_config012_button_mask_characterization.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_gp_config012_button_mask_characterization: FAIL: C024 post-integration change outside validation/evidence paths\n",
+      "stderr": "",
+      "seconds": 2.73,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_gp_config012_button_mask_characterization.log",
+      "status": "FAIL",
+      "cluster": "OLD_C024_APPLICABILITY_CONTEXT",
+      "classification": "OLD_CONTEXT_NO_PRODUCT_ASSERTIONS_REACHED"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_gp_config014_modifier_capacity.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_gp_config014_modifier_capacity: FAIL: C024 post-integration change outside validation/evidence paths\n",
+      "stderr": "",
+      "seconds": 2.46,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_gp_config014_modifier_capacity.log",
+      "status": "FAIL",
+      "cluster": "OLD_C024_APPLICABILITY_CONTEXT",
+      "classification": "OLD_CONTEXT_NO_PRODUCT_ASSERTIONS_REACHED"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_production_tool.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "production ProfileStore tool: [Errno 17] File exists: '/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/tmprggn1p4i/r.json'\nproduction ProfileStore tool: malformed response after transmission; unresolved\nglyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true\n",
+      "stderr": "",
+      "seconds": 0.64,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_production_tool.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_candidate_tool.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "glyph_profile_store_candidate_tool: PASS offline=true serial_opened=false explicit_fences=true utf8_bound=true source_hash_guard=true paged_backup=true exact_replay_bypasses_fresh_fences=true mutation_trace=true device_error_journal=true\n",
+      "stderr": "",
+      "seconds": 0.21,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_candidate_tool.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_strict_protocol.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "glyph_profile_store_strict_protocol: FAIL: command failed:\nc++ -std=c++17 -DARDUINO=1 -fshort-enums -Wall -Wextra -Werror -Wno-error=inconsistent-missing-override -Wno-error=unused-function -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_timeout_host/include -I /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include -I /private/tmp/glyph-native-consumer-probe-20261020/include -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/nanopb-arduino/src -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/common/include -I /private/tmp/glyph-native-consumer-probe-20261020/config/glyph/glyph_mk6/include /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_timeout_host/timeout_harness.cpp /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/pb_common.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/pb_decode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/pb_encode.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/config.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/profile.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/checked_unavailable.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/validation.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/button.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/usb.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/rgb.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/glyph.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/arduino_pb.o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/backend.o -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-strict-protocol-k_xdutne/repaired\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_timeout_host/timeout_harness.cpp:19:\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include/comms/ConfiguratorBackend.hpp:26:\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:3:\n/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/packet_interfaces.h:91:17: warning: 'available' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]\n   91 |     virtual int available() = 0;\n      |                 ^\n/private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_timeout_host/include/host_stubs.hpp:22:15: note: overridden virtual function is here\n   22 |   virtual int available() = 0;\n      |               ^\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_timeout_host/timeout_harness.cpp:19:\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/HAL/pico/include/comms/ConfiguratorBackend.hpp:27:\n/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:143:18: warning: 'next' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]\n  143 |     virtual void next() {\n      |                  ^\n/private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/PacketIO/src/packet_interfaces.h:97:18: note: overridden virtual function is here\n   97 |     virtual void next() = 0;\n      |                  ^\n2 warnings generated.\nUndefined symbols for architecture arm64:\n  \"ultimate_native::CopyProgram(ultimate_native::PreparedView const&, ultimate_native::OwnedProgram&, unsigned int)\", referenced from:\n      ProfileStore::Activate(unsigned int, ProfileStore::Status*) in profile.o\n  \"ultimate_native::ValidProfile(_UltimateProfile const&)\", referenced from:\n      (anonymous namespace)::validate_ultimate_profile_semantics_impl(_UltimateProfile const&, ConfigValidationError&, unsigned char) in validation.o\n  \"ultimate_native::CandidateView()\", referenced from:\n      ProfileStore::Activate(unsigned int, ProfileStore::Status*) in profile.o\n  \"ultimate_native::DecodeProfile(unsigned char const*, unsigned long, _UltimateProfile&, ultimate_native::PayloadLease&)\", referenced from:\n      ProfileStore::ReadProfile(unsigned int, unsigned int, _UltimateProfile&, bool*) const in profile.o\n  \"ultimate_native::PrepareRequest(unsigned char const*, unsigned long, _ProfileStoreRequest&, ultimate_native::PayloadLease&)\", referenced from:\n      ConfiguratorBackend::HandleProfileStore() in backend.o\n  \"ultimate_native::RejectEmbedded(_Config&)\", referenced from:\n      ConfiguratorBackend::HandleSetConfig() in backend.o\n  \"ultimate_native::PreserveProfile(_UltimateProfile&)\", referenced from:\n      ProfileStore::Duplicate(unsigned int, unsigned int, char const*, unsigned int, ProfileStoreTransactionIdentity const&) in profile.o\n  \"ultimate_native::ClearEmbeddedCallbacks(_Config&)\", referenced from:\n      ConfiguratorBackend::HandleSetConfig() in backend.o\n  \"ultimate_native::Bind(_UltimateProfile&, ultimate_native::PayloadLease&)\", referenced from:\n      ConfiguratorBackend::HandleProfileStore() in backend.o\n  \"ultimate_native::BindOwned(_UltimateProfile&, ultimate_native::OwnedProgram const&, ultimate_native::PayloadLease&)\", referenced from:\n      ProfileStore::Activate(unsigned int, ProfileStore::Status*) in profile.o\nld: symbol(s) not found for architecture arm64\nclang++: error: linker command failed with exit code 1 (use -v to see invocation)\n\n",
+      "stderr": "",
+      "seconds": 4.96,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_strict_protocol.log",
+      "status": "FAIL",
+      "cluster": "MISSING_NATIVE_PROFILE_TU",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_request_identity.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "sha256_vectors=PASS authenticated_request_identity=PASS caller_digest_negative_control=PASS old_protocol_fixture=PASS full_name_bound=PASS\nglyph_profile_store_request_identity: PASS\n",
+      "stderr": "",
+      "seconds": 0.83,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_request_identity.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_selection_recovery.py"
+      ],
+      "exit_code": 1,
+      "timeout": false,
+      "stdout": "",
+      "stderr": "glyph_profile_store_selection_recovery=FAIL: c++ -std=c++17 -fshort-enums -Wall -Wextra -Werror -Wno-missing-field-initializers -Wno-unneeded-internal-declaration -fsanitize=address,undefined -fno-omit-frame-pointer -DMODE_SELECTION_SOURCE=\"/private/tmp/glyph-native-consumer-probe-20261020/src/core/mode_selection.cpp\" -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_selection_recovery_host/include -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-selection-recovery-xdr7o98n/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/include -I /private/tmp/glyph-native-consumer-probe-20261020/include /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_selection_recovery_host/selection_recovery.cpp -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-selection-recovery-xdr7o98n/production-bin\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_selection_recovery_host/selection_recovery.cpp:37:\n/private/tmp/glyph-native-consumer-probe-20261020/src/core/mode_selection.cpp:133:77: error: no member named 'ActiveNativeView' in 'ProfileStore'\n  133 |                 ultimate_mode.SetConfig(mode_config, profile, profile_store.ActiveNativeView());\n      |                                                               ~~~~~~~~~~~~~ ^\n1 error generated.\n\n",
+      "seconds": 0.53,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_selection_recovery.log",
+      "status": "FAIL",
+      "cluster": "HOST_DOUBLE_INTERFACE_ADAPTER",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_atomic_commit.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "profile_store_atomic_commit first_absent_record=PASS existing_replacement=PASS existing_remove_failure=PASS temp_write_verify_failures=PASS interrupted_root_update_recovery=PASS interrupted_record_replacement_recovery=PASS old_valid_shape_readback_rejected=PASS capacity_512KiB_reserve_16KiB_profiles_20=PASS compact_config_prior_recovery=PASS\n",
+      "stderr": "",
+      "seconds": 0.58,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_atomic_commit.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_littlefs_host.py"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "profile_store_pinned_littlefs_ram=PASS directory_bytes=2620 record_bytes=4128 replacements=128 negative_validations=128 remount_readback=true\nglyph_profile_store_littlefs_host: PASS asan=true ubsan=true framework=1.30603.0 ram_block_size=4096 ram_block_count=128 physical_multicore=NOT_TESTED\nsource_sha256 src/lfs.c 3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e\nsource_sha256 src/lfs_util.c b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1\nsource_sha256 lib/littlefs/lfs.c 8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5\nsource_sha256 lib/littlefs/lfs.h bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a\nsource_sha256 lib/littlefs/lfs_util.c 8e1376a90e923a2897388a54ebaa756ad3ea07a0e2a87e73c0045515c0a82685\nsource_sha256 lib/littlefs/lfs_util.h 825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33\n",
+      "stderr": "",
+      "seconds": 1.6,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_littlefs_host.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_rx_host.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-consumer-probe-results/rx-host"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"physical_boundary\": \"LARGE_UPDATE_WIRE_TRANSMITTED_DEVICE_FRAME_READER_TIMED_OUT\",\n  \"request_bytes\": 3074,\n  \"wire_bytes\": 3089,\n  \"request_sha256\": \"96c2d8ce408eb41c7e24230e106f2d1647c5cb8930a3f473ca7c9af2038d4063\",\n  \"wire_sha256\": \"9ac14ee426193d4ba07dac9484165007705f86e48f55d756da28e26fa4c11b20\",\n  \"received_bytes\": 30,\n  \"error_wire_sha256\": \"768fe84df935a969f7150eb8308aad2017b949a5cf621888cf6aeb531cf1971f\",\n  \"elapsed_after_os_write_ns\": 5000585375,\n  \"write_matrix\": [\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 1,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 63,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 64,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 65,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 127,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 128,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 255,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 256,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 257,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 512,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"frozen_895\",\n      \"maximum_os_write\": 3089,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 1,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 63,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 64,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 65,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 127,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 128,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 255,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 256,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 257,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 512,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    },\n    {\n      \"writer\": \"candidate\",\n      \"maximum_os_write\": 3089,\n      \"accepted\": 3089,\n      \"exact_frame_decode\": true\n    }\n  ],\n  \"exception_cases\": \"EINTR/EAGAIN propagate; no transmitted event; no zero-progress success\",\n  \"pending_fault_hook_attempts\": 10000,\n  \"device_actions\": \"NONE\",\n  \"scope\": \"Host OS acceptance and ideal exact receiver only; physical USB receipt is not inferred\"\n}\n",
+      "stderr": "",
+      "seconds": 0.75,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_rx_host.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_cdc_progress.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-consumer-probe-results/cdc-progress"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "payload=1 ok=1 wire=4 skipped_irq=1 task_calls=2\npayload=63 ok=1 wire=66 skipped_irq=2 task_calls=2\npayload=64 ok=1 wire=67 skipped_irq=2 task_calls=2\npayload=65 ok=1 wire=68 skipped_irq=2 task_calls=2\npayload=255 ok=1 wire=258 skipped_irq=5 task_calls=5\npayload=256 ok=1 wire=259 skipped_irq=5 task_calls=5\npayload=257 ok=1 wire=260 skipped_irq=5 task_calls=5\npayload=512 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=3079 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=4096 ok=0 wire=320 skipped_irq=6 task_calls=6\npayload=8191 ok=0 wire=320 skipped_irq=6 task_calls=6\nall_nonzero_payload_sweep_1_to_600_first_failure=317\nactual_pb_payload=104 ok=1 wire=107\nactual_pb_payload=276 ok=1 wire=280\nactual_pb_payload=1989 ok=0 wire=320\nactual_pb_payload=4038 ok=0 wire=320\nactual_pb_payload=3071 ok=0 wire=320\nactual_pb_payload=3076 ok=0 wire=320\nactual_pb_payload=3072 ok=0 wire=320\nold_cdc_deferred_completion_negative=PASS first_tested_payload_failure=512\npayload=1 ok=1 wire=4 skipped_irq=2 task_calls=3\npayload=63 ok=1 wire=66 skipped_irq=3 task_calls=4\npayload=64 ok=1 wire=67 skipped_irq=3 task_calls=4\npayload=65 ok=1 wire=68 skipped_irq=3 task_calls=4\npayload=255 ok=1 wire=258 skipped_irq=5 task_calls=5\npayload=256 ok=1 wire=259 skipped_irq=5 task_calls=5\npayload=257 ok=1 wire=260 skipped_irq=5 task_calls=5\npayload=512 ok=1 wire=517 skipped_irq=9 task_calls=9\npayload=3079 ok=1 wire=3094 skipped_irq=49 task_calls=49\npayload=4096 ok=1 wire=4115 skipped_irq=65 task_calls=65\npayload=8191 ok=1 wire=8226 skipped_irq=129 task_calls=129\nall_nonzero_payload_sweep_1_to_600_first_failure=0\nactual_pb_payload=104 ok=1 wire=107\nactual_pb_payload=276 ok=1 wire=280\nactual_pb_payload=1989 ok=1 wire=1999\nactual_pb_payload=4038 ok=1 wire=4056\nactual_pb_payload=3071 ok=1 wire=3086\nactual_pb_payload=3076 ok=1 wire=3091\nactual_pb_payload=3072 ok=1 wire=3087\ncurrent_cdc_progress=PASS repeated_profile_reads=1024 mixed_rounds=147 dtr_reconnects=20 dropped_responses=9 stalled_host_recovery=8 slow_reader_ms_per_packet=3 disconnected_bound_ms=2000 no_tx_allocations=true no_retained_host_allocation_growth=true actual_nanopb_reencode=true\n",
+      "stderr": "",
+      "seconds": 2.58,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_cdc_progress.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_glyph_profile_store_cdc_rx_progress.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-consumer-probe-results/cdc-rx-progress"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "stdout": "nonzero_sweep_first_failure_body=253 wire=257\nbody=1 wire=4 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=4 host_pending=0 raw_consumed=4 skipped_irq=0 task_passes=2\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=2\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=2\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=2\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=2\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=2\nbody=253 wire=257 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=1 host_sent=257 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=254 wire=258 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=255 wire=259 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=256 wire=260 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=257 wire=261 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=5 host_sent=261 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=512 wire=517 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=197 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=8191 wire=8226 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=7906 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=20 wire=23 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=23 host_sent=23 host_pending=0 raw_consumed=23 skipped_irq=0 task_passes=2\nbody=7 wire=10 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=10 host_sent=10 host_pending=0 raw_consumed=10 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=2\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=2\nbody=6 wire=9 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=9 host_sent=9 host_pending=0 raw_consumed=9 skipped_irq=0 task_passes=2\nbody=15 wire=18 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=18 host_pending=0 raw_consumed=18 skipped_irq=0 task_passes=2\nbody=41 wire=44 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=44 host_sent=44 host_pending=0 raw_consumed=44 skipped_irq=0 task_passes=2\nbody=1992 wire=2002 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=1682 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3079 wire=3094 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2774 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=4057 wire=4075 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=3755 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=1992 wire=2002 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=1682 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=2709 wire=2722 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2402 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=3074 wire=3089 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=2769 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=2\nbody=8191 wire=8194 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=7874 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=2\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=2\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=2\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=2\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=2\nbody=255 wire=258 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=256 wire=259 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=257 wire=260 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=256 skipped_irq=1 task_passes=2\nbody=512 wire=515 ok=0 timeout=1 ms=5000 fifo=0 endpoint_completion=1 endpoint_bytes=64 host_sent=320 host_pending=195 raw_consumed=256 skipped_irq=1 task_passes=2\nold_rx_negative=PASS ideal_receiver_control=PASS\n\nnonzero_sweep_first_failure_body=0 wire=0\nbody=1 wire=4 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=4 host_pending=0 raw_consumed=4 skipped_irq=0 task_passes=4\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=6\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=6\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=6\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=8\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=8\nbody=253 wire=257 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=257 host_pending=0 raw_consumed=257 skipped_irq=1 task_passes=12\nbody=254 wire=258 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=258 skipped_irq=1 task_passes=12\nbody=255 wire=259 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=259 skipped_irq=1 task_passes=12\nbody=256 wire=260 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=260 skipped_irq=1 task_passes=12\nbody=257 wire=261 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=5 host_sent=261 host_pending=0 raw_consumed=261 skipped_irq=1 task_passes=12\nbody=512 wire=517 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=5 host_sent=517 host_pending=0 raw_consumed=517 skipped_irq=5 task_passes=20\nbody=8191 wire=8226 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=34 host_sent=8226 host_pending=0 raw_consumed=8226 skipped_irq=125 task_passes=260\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=20 wire=23 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=23 host_sent=23 host_pending=0 raw_consumed=23 skipped_irq=0 task_passes=4\nbody=7 wire=10 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=10 host_sent=10 host_pending=0 raw_consumed=10 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=4\nbody=4 wire=7 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=7 host_sent=7 host_pending=0 raw_consumed=7 skipped_irq=0 task_passes=4\nbody=6 wire=9 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=9 host_sent=9 host_pending=0 raw_consumed=9 skipped_irq=0 task_passes=4\nbody=15 wire=18 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=18 host_pending=0 raw_consumed=18 skipped_irq=0 task_passes=4\nbody=41 wire=44 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=44 host_sent=44 host_pending=0 raw_consumed=44 skipped_irq=0 task_passes=4\nbody=1992 wire=2002 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=2002 host_pending=0 raw_consumed=2002 skipped_irq=28 task_passes=66\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=3079 wire=3094 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=22 host_sent=3094 host_pending=0 raw_consumed=3094 skipped_irq=45 task_passes=100\nbody=4057 wire=4075 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=43 host_sent=4075 host_pending=0 raw_consumed=4075 skipped_irq=60 task_passes=130\nbody=1992 wire=2002 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=18 host_sent=2002 host_pending=0 raw_consumed=2002 skipped_irq=28 task_passes=66\nbody=2709 wire=2722 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=34 host_sent=2722 host_pending=0 raw_consumed=2722 skipped_irq=39 task_passes=88\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=17 wire=20 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=20 host_sent=20 host_pending=0 raw_consumed=20 skipped_irq=0 task_passes=4\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=17 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=45 task_passes=100\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=29 wire=32 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=32 host_sent=32 host_pending=0 raw_consumed=32 skipped_irq=0 task_passes=4\nbody=8191 wire=8194 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=8194 host_pending=0 raw_consumed=8194 skipped_irq=125 task_passes=260\nbody=63 wire=66 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=66 host_pending=0 raw_consumed=66 skipped_irq=0 task_passes=6\nbody=64 wire=67 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=67 host_pending=0 raw_consumed=67 skipped_irq=0 task_passes=6\nbody=65 wire=68 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=68 host_pending=0 raw_consumed=68 skipped_irq=0 task_passes=6\nbody=127 wire=130 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=130 host_pending=0 raw_consumed=130 skipped_irq=0 task_passes=8\nbody=128 wire=131 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=131 host_pending=0 raw_consumed=131 skipped_irq=0 task_passes=8\nbody=255 wire=258 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=2 host_sent=258 host_pending=0 raw_consumed=258 skipped_irq=1 task_passes=12\nbody=256 wire=259 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=259 host_pending=0 raw_consumed=259 skipped_irq=1 task_passes=12\nbody=257 wire=260 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=4 host_sent=260 host_pending=0 raw_consumed=260 skipped_irq=1 task_passes=12\nbody=512 wire=515 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=3 host_sent=515 host_pending=0 raw_consumed=515 skipped_irq=5 task_passes=20\nbody=3074 wire=3089 ok=1 timeout=0 ms=0 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=2896 task_passes=100\nbody=3074 wire=3089 ok=1 timeout=0 ms=3093 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=8253\nbody=3074 wire=3089 ok=1 timeout=0 ms=153 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=413\nbody=3074 wire=3089 ok=1 timeout=0 ms=150 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=405\nbody=3074 wire=3089 ok=1 timeout=0 ms=3089 fifo=0 endpoint_completion=0 endpoint_bytes=1 host_sent=3089 host_pending=0 raw_consumed=3089 skipped_irq=0 task_passes=12360\ncurrent_rx_progress=PASS mutation_receptions=1024 retained_session_dtr_cycles=20 additional_dtr_cycles=20 read_request_receptions=84 fragmented=1,3,63,64 delimiter_separate=true partial_timeout_resync=true adjacent_frame_cache_ownership=true no_frame_reader_allocations=true no_retained_allocation_growth=true total_deadline_with_continuous_progress=5000\n\n",
+      "stderr": "",
+      "seconds": 3.58,
+      "log": "/private/tmp/glyph-native-consumer-probe-results/check_glyph_profile_store_cdc_rx_progress.log",
+      "status": "PASS",
+      "cluster": "PASS_BOUNDED_HOST_SCOPE",
+      "classification": "CURRENT_AFFECTED_CONSUMER_COMPATIBILITY"
+    }
+  ],
+  "not_run_required_checks": [
+    {
+      "command": "python3 tools/check_glyph_profile_store_strict_host.py",
+      "status": "STATIC_MAPPED_NOT_RUN",
+      "reason": "Links current ProfileStore/config_validation but omits UltimateNativeProfile.cpp; same missing-TU family as strict_protocol."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_migration_lifecycle.py",
+      "status": "STATIC_MAPPED_NOT_RUN",
+      "reason": "Links current ProfileStore/config_validation but omits UltimateNativeProfile.cpp; same missing-TU family as strict_protocol."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_directory_decoder.py",
+      "status": "STATIC_MAPPED_NOT_RUN",
+      "reason": "Current ProfileStore and validator object lists omit UltimateNativeProfile.cpp. Section garbage collection may discard unused references; no failure or PASS inferred."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_timeout_resynchronization.py",
+      "status": "STATIC_MAPPED_NOT_RUN",
+      "reason": "strict_protocol imports and executes its build_and_run; concrete same linker cluster obtained through strict_protocol."
+    },
+    {
+      "command": "python3 tools/check_glyph_stage_c_ultimate_profiles.py --default-enum",
+      "status": "STATIC_MAPPED_NOT_RUN",
+      "reason": "Same unconditional shared ControllerMode.cpp hash check before ABI-dependent compilation."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_directory_stack.py",
+      "status": "DEFERRED_TARGET_RESOURCE_CHECK",
+      "reason": "Compiles production TU with target ARM compiler; outside finite no-target-build probe."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_create_stack.py",
+      "status": "DEFERRED_TARGET_RESOURCE_CHECK",
+      "reason": "Needs actual compile_commands.json/ELF/build and invokes target compilers; do not reuse writer output or stale report."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_read_stack.py",
+      "status": "DEFERRED_EXACT_RESOURCE_INPUT",
+      "reason": "Requires --resources exact target resource JSON --output; final production needs --production. No exact resource input generated by this probe."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_store_rx_stack.py",
+      "status": "DEFERRED_EXACT_RESOURCE_INPUT",
+      "reason": "Requires --resources exact target resource JSON --output. No exact resource input generated by this probe."
+    },
+    {
+      "command": "python3 tools/check_glyph_profile_native_ultimate.py",
+      "status": "OUTSIDE_AFFECTED_LEGACY_PROBE",
+      "reason": "Native checker owned by writer; independent semantic review/final exact native proof remains required."
+    },
+    {
+      "command": "pio run -e glyph_mk6",
+      "status": "PROHIBITED_BY_PROBE_SCOPE",
+      "reason": "No firmware build/device/network actions authorized for this finite probe."
+    }
+  ],
+  "totals": {
+    "invoked": 21,
+    "pass": 9,
+    "fail": 12,
+    "timeout": 0
+  },
+  "tracked_tree_final_diff": "",
+  "final_status": "?? .platformio-home\n",
+  "no_final_suite_pass_claim": true,
+  "no_device_actions": true,
+  "no_source_edits": true
+}

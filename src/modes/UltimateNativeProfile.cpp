@@ -174,13 +174,13 @@ bool ContextDigest(const GameModeConfig &c, uint8_t digest[32]) {
     uint8_t v[3]={uint8_t(c.mode_id),uint8_t(uint16_t(c.mode_id)>>8),uint8_t(c.button_remapping_count)};h.Update(v,3);
     for(size_t i=0;i<c.button_remapping_count;++i) {
         const auto &r=c.button_remapping[i];
-        if(r.physical_button<1 || r.physical_button>60 || r.activates<1 || r.activates>60) return false;
+        if(r.physical_button<1 || r.physical_button>60 || r.activates<0 || r.activates>60) return false;
         v[0]=r.physical_button;v[1]=r.activates;h.Update(v,2);
     }
     v[0]=c.socd_pairs_count;h.Update(v,1);
     for(size_t i=0;i<c.socd_pairs_count;++i) {
         const auto &s=c.socd_pairs[i];
-        if(s.button_dir1<1 || s.button_dir1>60 || s.button_dir2<1 || s.button_dir2>60 || s.socd_type>5) return false;
+        if(s.button_dir1<1 || s.button_dir1>60 || s.button_dir2<1 || s.button_dir2>60 || uint32_t(s.socd_type)>5) return false;
         v[0]=s.button_dir1;v[1]=s.button_dir2;v[2]=s.socd_type;h.Update(v,3);
     }
     h.Final(digest);return true;

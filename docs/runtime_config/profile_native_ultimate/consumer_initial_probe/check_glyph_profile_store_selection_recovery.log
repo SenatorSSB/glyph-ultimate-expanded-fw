@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_selection_recovery.py"
+  ],
+  "exit_code": 1,
+  "timeout": false,
+  "stdout": "",
+  "stderr": "glyph_profile_store_selection_recovery=FAIL: c++ -std=c++17 -fshort-enums -Wall -Wextra -Werror -Wno-missing-field-initializers -Wno-unneeded-internal-declaration -fsanitize=address,undefined -fno-omit-frame-pointer -DMODE_SELECTION_SOURCE=\"/private/tmp/glyph-native-consumer-probe-20261020/src/core/mode_selection.cpp\" -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_selection_recovery_host/include -I /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-selection-recovery-xdr7o98n/generated -I /private/tmp/glyph-native-consumer-probe-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/mode_selection_host/include -I /private/tmp/glyph-native-consumer-probe-20261020/include /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_selection_recovery_host/selection_recovery.cpp -o /var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/glyph-selection-recovery-xdr7o98n/production-bin\nIn file included from /private/tmp/glyph-native-consumer-probe-20261020/tools/fixtures/profile_store_selection_recovery_host/selection_recovery.cpp:37:\n/private/tmp/glyph-native-consumer-probe-20261020/src/core/mode_selection.cpp:133:77: error: no member named 'ActiveNativeView' in 'ProfileStore'\n  133 |                 ultimate_mode.SetConfig(mode_config, profile, profile_store.ActiveNativeView());\n      |                                                               ~~~~~~~~~~~~~ ^\n1 error generated.\n\n"
+}

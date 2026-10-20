@@ -1,0 +1,6 @@
+PASS independent legacy/native full-output corpus=72
+PASS native validation negatives, canonical field-order rejection, legacy duplicate-schema compatibility, callback leases/copy poisoning/request identity/embedded rejection
+PASS original/pre/post composition;6SOCD policies/history; clean/forced table winner/loser/filter;18family witnesses×60carrier rebindings
+PASS native actual LittleFS20complete profiles/revisions/staging/reserve/reboot/read/health/duplicate/cross-kind/context/unavailable; sizeof_store=8328 total=524288 used=212992 free=311296 protected=241664 staging=45056\nv1: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk
+v2: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk
+v3: PASS native/full-output frozen legacy comparisons=1124032 including all6SOCD histories/many-to-one remap/Nunchuk

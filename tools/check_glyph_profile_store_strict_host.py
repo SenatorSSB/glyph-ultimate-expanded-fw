@@ -31,7 +31,7 @@ def main():
    probe=temp/'mounted_storage_probe.cpp'
    probe.write_text('#include '+json.dumps(str(ROOT/'HAL/pico/src/core/ProfileStore.cpp'))+'\n'
                     'bool GlyphMountedReadRangeProbe(const char *p,size_t offset,uint8_t *b,size_t n) { MountedStorage storage; return storage.ReadRange(p,offset,b,n); }\n')
-   sources=[HOST/'strict_harness.cpp',probe,ROOT/'HAL/pico/src/core/CheckedStorage.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp',ROOT/'src/core/config_rgb_target_validation.cpp',ROOT/'config/glyph/common/src/glyph_config_validation.cpp'];exe=temp/'strict-store'
+   sources=[HOST/'strict_harness.cpp',probe,ROOT/'HAL/pico/src/core/CheckedStorage.cpp',ROOT/'src/modes/UltimateNativeProfile.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp',ROOT/'src/core/config_rgb_target_validation.cpp',ROOT/'config/glyph/common/src/glyph_config_validation.cpp'];exe=temp/'strict-store'
    run(['c++','-std=c++17',*flags,'-fshort-enums','-Wall','-Wextra','-Werror','-DLFS_NAME_MAX=32','-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1',*inc,*sources,*objects,'-o',exe]);print(run([exe,fixture]),end='')
    # Genuine previous production negative controls, with its frozen headers.
    frozen=temp/'frozen';(frozen/'include/core').mkdir(parents=True)

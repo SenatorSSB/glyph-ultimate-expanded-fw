@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_production.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "{\n  \"status\": \"PASS_SOURCE_COMPOSITION\",\n  \"negative_controls\": 4,\n  \"source_sha256\": {\n    \"config/glyph/env.ini\": \"ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36\",\n    \"config/glyph/common/src/config.cpp\": \"ea87e5e50bd30cef399f2f0db1f0c7b55fe2098e74d4022ebf4120f55fc56ea9\",\n    \"HAL/pico/src/comms/ConfiguratorBackend.cpp\": \"09d32bcf704624b9c47df3b2303f7872af4d61c757d512042bf1cbcb7da7a97a\",\n    \"include/core/ProfileStoreFaultControls.hpp\": \"845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1\",\n    \"include/core/ProfileStoreReadTrace.hpp\": \"6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456\",\n    \"HAL/pico/src/core/CheckedStorage.cpp\": \"56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd\"\n  },\n  \"hardware\": \"NOT_TESTED\",\n  \"underlying_RT2_cause\": \"UNRESOLVED\"\n}\n",
+  "stderr": ""
+}

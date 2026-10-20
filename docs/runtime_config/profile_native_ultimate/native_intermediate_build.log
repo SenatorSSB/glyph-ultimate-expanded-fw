@@ -1,0 +1,5 @@
+glyph_mk6 build failed. Last 80 log lines:
+Processing glyph_mk6 (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5e87ae34ca025274df25b3303e9e9cb6c120123c; framework: arduino; board: pico)
+--------------------------------------------------------------------------------
+Tool Manager: Installing platformio/tool-scons @ ~4.41101.0
+HTTPClientError: 

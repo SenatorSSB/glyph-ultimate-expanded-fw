@@ -44,9 +44,15 @@ def main() -> int:
         header = (ROOT/'include/core/RecoveryInitialization.hpp').read_text()
         assert 'store.BeginRecovery(incarnation, required_root_format);' in header
         (recovery_control/'RecoveryInitialization.hpp').write_text(header.replace('store.BeginRecovery(incarnation, required_root_format);', '(void)store; (void)incarnation; (void)required_root_format; // historical RT2 skipped Begin'))
+        # The immutable selection double models only activation counts. Add
+        # the new read-only native-view query in scratch without editing it.
+        compat=temp/'native-interface/core';compat.mkdir(parents=True)
+        double=(HOST/'include/core/ProfileStore.hpp').read_text()
+        (compat/'ProfileStore.hpp').write_text(double.replace('  unsigned activations=',
+            '  const void *ActiveNativeView() const { return nullptr; }\n  unsigned activations='))
         def compile_case(name: str, mode_source: Path, old_recovery: bool=False) -> Path:
             exe = temp/(name+'-bin')
-            includes = ([temp/'old_recovery'] if old_recovery else []) + [HOST/'include', generated, nanopb,
+            includes = ([temp/'old_recovery'] if old_recovery else []) + [temp/'native-interface', HOST/'include', generated, nanopb,
                  ROOT/'tools/fixtures/mode_selection_host/include', ROOT/'include']
             # The existing mode-only fixture supplies inert hardware headers;
             # its Config stub is intentionally behind the freshly generated ABI.

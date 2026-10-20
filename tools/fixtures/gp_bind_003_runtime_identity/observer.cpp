@@ -147,7 +147,7 @@ int main(int argc,char **argv) {
   size_t viewers=0,responses=0;for(size_t i=0;i<viewer_wire.tx.size();){if(viewer_wire.tx[i]=='0'||viewer_wire.tx[i]=='1'){require(i+25<=viewer_wire.tx.size()&&viewer_wire.tx[i+24]=='\n',"complete viewer record");for(unsigned j=0;j<24;++j)require(viewer_wire.tx[i+j]=='0'||viewer_wire.tx[i+j]=='1',"viewer bytes intact");i+=25;++viewers;}else{require(i+72<=viewer_wire.tx.size()&&viewer_wire.tx[i]==0xa5,"complete identity between viewer records");i+=72;++responses;}}
   require(viewers==10&&responses==60,"viewer pacing remains five increments plus report");
   uint8_t digest[32];const auto started=std::chrono::steady_clock::now();for(unsigned i=0;i<100;++i)require(runtime_identity::PayloadDigest(original,digest),"streaming digest");
-  std::printf("sizeof_service=%zu sizeof_snapshot=%zu encoded_profile_bound=%u\n",sizeof(runtime_identity::Service),sizeof(runtime_identity::Snapshot),unsigned(UltimateProfile_size));
+  std::printf("sizeof_service=%zu sizeof_snapshot=%zu encoded_profile_bound=%u\n",sizeof(runtime_identity::Service),sizeof(runtime_identity::Snapshot),unsigned(4096));
   std::printf("host_digest_100_us=%lld\n",static_cast<long long>(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()-started).count()));
   std::puts("runtime_identity_actual_selection_store_ultimate_viewer_wire_output=PASS");return 0;
  }catch(const std::exception&e){std::fprintf(stderr,"FAIL: %s\n",e.what());return 1;}

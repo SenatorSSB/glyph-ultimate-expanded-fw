@@ -1,0 +1,496 @@
+Processing glyph_mk6 (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5e87ae34ca025274df25b3303e9e9cb6c120123c; framework: arduino; board: pico)
+--------------------------------------------------------------------------------
+Tool Manager: Installing platformio/tool-scons @ ~4.41101.0
+Downloading 0% 10% 20% 30% 40%
+Unpacking 0% 10% 20% 30% 40% 50% 60% 70% 80% 90% 100%
+Tool Manager: tool-scons@4.41101.0 has been installed!
+Tool Manager: Removing tool-scons @ 4.40801.0
+Tool Manager: tool-scons@4.40801.0 has been removed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/pico.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5e87ae3) > Raspberry Pi Pico
+HARDWARE: RP2040 130MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (cmsis-dap) External (blackmagic, cmsis-dap, jlink, pico-debug, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.30603.0+sha.32e74d0 
+ - tool-picotool-rp2040-earlephilhower @ 5.120300.240827 (12.3.0) 
+ - toolchain-rp2040-earlephilhower @ 5.120300.240127 (12.3.0)
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain+, Compatibility ~ soft
+[nanopb] Processing 'schema/haybox/config.proto' (config.options)
+os.chdir('/private/tmp/glyph-profile-native-20261020')
+/usr/local/bin/python3 /private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator/../generator/nanopb_generator.py --output-dir /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src --error-on-unmatched --proto-path /private/tmp/glyph-profile-native-20261020/schema/haybox config.proto
+Writing to /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h and /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.c
+os.chdir('/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/generator')
+Found 68 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- Nanopb @ 0.4.92
+|-- HayBox-proto @ 0.0.0+sha.5b2bb5d
+|-- joybus-pio @ 0.0.0+20261020122043.sha.f2f59c0
+|-- nes-pio @ 0.0.0+20240730101251.sha.422f16f
+|-- arduino-nunchuk @ 0.0.0+20261020122045
+|-- Adafruit_TinyUSB_XInput @ 0.0.0+20261020122046.sha.4b5617b
+|-- FastLED @ 3.6.0+sha.6daa7823c8
+|-- nanopb-arduino @ 1.1.0
+|-- Adafruit SSD1306 @ 2.5.17
+|-- Adafruit GFX Library @ 1.12.6
+|-- PacketIO @ 0.3.0
+|-- CRC32 @ 2.0.1
+|-- PCF8575 @ 0.2.5
+|-- TUCompositeHID
+|-- HayBox-proto @ 0.0.0+sha.db4e2f6
+|-- Adafruit TinyUSB Library
+|-- LittleFS @ 0.1.0
+|-- Adafruit BusIO @ 1.17.4
+|-- Wire @ 1.0
+|-- SPI @ 1.0
+|-- ESP8266SdFat @ 2.1.1
+Building in release mode
+Compiling .pio/build/glyph_mk6/FrameworkArduinoBootloader/boot2_w25q080_2_padded_checksum.S.o
+Compiling .pio/build/glyph_mk6/nanopb/generated-build/config.pb.c.o
+Compiling .pio/build/glyph_mk6/libd24/Nanopb/pb_common.c.o
+Compiling .pio/build/glyph_mk6/libd24/Nanopb/pb_decode.c.o
+Compiling .pio/build/glyph_mk6/libd24/Nanopb/pb_encode.c.o
+Compiling .pio/build/glyph_mk6/lib36d/joybus-pio/GamecubeConsole.cpp.o
+Compiling .pio/build/glyph_mk6/lib36d/joybus-pio/GamecubeController.cpp.o
+Compiling .pio/build/glyph_mk6/lib36d/joybus-pio/N64Console.cpp.o
+Compiling .pio/build/glyph_mk6/lib36d/joybus-pio/N64Controller.cpp.o
+Compiling .pio/build/glyph_mk6/lib36d/joybus-pio/joybus.c.o
+Compiling .pio/build/glyph_mk6/liba03/nes-pio/NesConsole.cpp.o
+Compiling .pio/build/glyph_mk6/liba03/nes-pio/SnesConsole.cpp.o
+Compiling .pio/build/glyph_mk6/liba03/nes-pio/nes.c.o
+Compiling .pio/build/glyph_mk6/lib4c9/SPI/SPI.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatDbg.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatFile.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatFilePrint.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatFileWrite.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatFormatter.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatName.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatPartition.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/ExFatLib/ExFatVolume.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatDbg.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatFile.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatFileLFN.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatFilePrint.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatFileSFN.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatFormatter.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatName.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatPartition.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FatLib/FatVolume.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FreeStack.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FsLib/FsFile.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FsLib/FsNew.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/FsLib/FsVolume.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/MinimumSerial.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SdCard/SdCardInfo.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SdCard/SdSpiCard.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SdCard/SdioTeensy.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiArtemis.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiChipSelect.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiDue.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiESP.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiParticle.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiSTM32.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiSTM32Core.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/SpiDriver/SdSpiTeensy3.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/FmtNumber.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/FsCache.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/FsDateTime.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/FsName.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/FsStructs.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/FsUtf.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/common/upcase.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/iostream/StdioStream.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/iostream/StreamBaseClass.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/iostream/istream.cpp.o
+Compiling .pio/build/glyph_mk6/liba4d/ESP8266SdFat/iostream/ostream.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/Adafruit_TinyUSB_API.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/Adafruit_USBD_CDC.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/Adafruit_USBD_Device.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/Adafruit_USBH_Host.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/cdc/Adafruit_USBH_CDC.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/hid/Adafruit_USBD_HID.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/midi/Adafruit_USBD_MIDI.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/msc/Adafruit_USBD_MSC.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/msc/Adafruit_USBH_MSC.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/ports/esp32/Adafruit_TinyUSB_esp32.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/ports/nrf/Adafruit_TinyUSB_nrf.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/ports/samd/Adafruit_TinyUSB_samd.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/arduino/webusb/Adafruit_USBD_WebUSB.cpp.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/audio/audio_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/bth/bth_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/cdc/cdc_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/cdc/cdc_host.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/dfu/dfu_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/dfu/dfu_rt_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/hid/hid_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/hid/hid_host.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/midi/midi_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/msc/msc_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/msc/msc_host.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/net/ecm_rndis_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/net/ncm_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/usbtmc/usbtmc_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/vendor/vendor_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/class/video/video_device.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/common/tusb_fifo.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/device/usbd.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/device/usbd_control.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/host/hub.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/host/usbh.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/analog/max3421/hcd_max3421.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/microchip/samd/dcd_samd.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/nordic/nrf5x/dcd_nrf5x.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/raspberrypi/pio_usb/dcd_pio_usb.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/raspberrypi/pio_usb/hcd_pio_usb.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/raspberrypi/rp2040/hcd_rp2040.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/portable/raspberrypi/rp2040/rp2040_usb.c.o
+Compiling .pio/build/glyph_mk6/lib496/Adafruit_TinyUSB_Arduino/tusb.c.o
+Compiling .pio/build/glyph_mk6/lib4b6/Wire/Wire.cpp.o
+Compiling .pio/build/glyph_mk6/lib636/arduino-nunchuk/ArduinoNunchuk.cpp.o
+Compiling .pio/build/glyph_mk6/libf0d/Adafruit_TinyUSB_XInput/Adafruit_USBD_XInput.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/FastLED.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/bitswap.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/colorpalettes.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/colorutils.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/five_bit_hd_gamma.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/hsv2rgb.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/lib8tion.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/noise.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/platforms.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/platforms/esp/32/clockless_rmt_esp32.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/power_mgt.cpp.o
+Compiling .pio/build/glyph_mk6/libdbc/FastLED/wiring.cpp.o
+Compiling .pio/build/glyph_mk6/lib8c0/nanopb-arduino/pb_arduino.cpp.o
+Compiling .pio/build/glyph_mk6/lib1cd/Adafruit BusIO/Adafruit_BusIO_Register.cpp.o
+Compiling .pio/build/glyph_mk6/lib1cd/Adafruit BusIO/Adafruit_GenericDevice.cpp.o
+Compiling .pio/build/glyph_mk6/lib1cd/Adafruit BusIO/Adafruit_I2CDevice.cpp.o
+Compiling .pio/build/glyph_mk6/lib1cd/Adafruit BusIO/Adafruit_SPIDevice.cpp.o
+Compiling .pio/build/glyph_mk6/liba58/Adafruit GFX Library/Adafruit_GFX.cpp.o
+Compiling .pio/build/glyph_mk6/liba58/Adafruit GFX Library/Adafruit_GrayOLED.cpp.o
+Compiling .pio/build/glyph_mk6/liba58/Adafruit GFX Library/Adafruit_SPITFT.cpp.o
+Compiling .pio/build/glyph_mk6/liba58/Adafruit GFX Library/glcdfont.c.o
+Compiling .pio/build/glyph_mk6/lib82c/Adafruit SSD1306/Adafruit_SSD1306.cpp.o
+Compiling .pio/build/glyph_mk6/libf4c/CRC32/CRC32.cpp.o
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from .pio/libdeps/glyph_mk6/FastLED/src/five_bit_hd_gamma.cpp:1:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/lib578/PCF8575/PCF8575.cpp.o
+Compiling .pio/build/glyph_mk6/lib71f/TUCompositeHID/TUCompositeHID.cpp.o
+Compiling .pio/build/glyph_mk6/lib71f/TUCompositeHID/TUGamepad.cpp.o
+Compiling .pio/build/glyph_mk6/lib71f/TUCompositeHID/TUKeyboard.cpp.o
+Compiling .pio/build/glyph_mk6/lib895/LittleFS/LittleFS.cpp.o
+Compiling .pio/build/glyph_mk6/lib895/LittleFS/lfs.c.o
+Compiling .pio/build/glyph_mk6/lib895/LittleFS/lfs_util.c.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/ConfiguratorBackend.cpp.o
+In file included from .platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c:10:
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/../lib/littlefs/lfs.c:450:13: warning: 'lfs_mlist_isopen' defined but not used [-Wunused-function]
+  450 | static bool lfs_mlist_isopen(struct lfs_mlist *head,
+      |             ^~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/DInputBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/GamecubeBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/N64Backend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/NesBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/NintendoSwitchBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/SnesBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/XInputBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/backend_init.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/comms/console_detection.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/core/CheckedStorage.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/core/KeyboardMode.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/core/Persistence.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/core/ProfileStore.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/core/ResourceDiagnostics.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/display/ConfigMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/display/DefaultConfigMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/display/InputDisplay.cpp.o
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from HAL/pico/src/comms/ConfiguratorBackend.cpp:21:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/display/RemapMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/display/RgbBrightnessMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/game_utils/Rivals2_adc.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/game_utils/Ult_adc.c.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/gpio.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/input/GamecubeControllerInput.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/input/NunchukInput.cpp.o
+In file included from .platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp:26:
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h: In member function 'virtual fs::FileImplPtr littlefs_impl::LittleFSDirImpl::openFile(fs::OpenMode, fs::AccessMode)':
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:558:17: warning: stack usage might be unbounded [-Wstack-usage=]
+  558 |     FileImplPtr openFile(OpenMode openMode, AccessMode accessMode) override {
+      |                 ^~~~~~~~
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/input/Pca9671Input.cpp.o
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from HAL/pico/src/core/Persistence.cpp:18:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h: In member function 'virtual time_t littlefs_impl::LittleFSDirImpl::fileTime()':
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:585:12: warning: stack usage might be unbounded [-Wstack-usage=]
+  585 |     time_t fileTime() override {
+      |            ^~~~~~~~
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from HAL/pico/src/comms/backend_init.cpp:19:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/reboot.cpp.o
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/rgb/ButtonLocations.cpp.o
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h: In member function 'virtual time_t littlefs_impl::LittleFSDirImpl::fileCreationTime()':
+.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h:601:12: warning: stack usage might be unbounded [-Wstack-usage=]
+  601 |     time_t fileCreationTime() override {
+      |            ^~~~~~~~~~~~~~~~
+HAL/pico/src/core/CheckedStorage.cpp: In function 'CheckedStorage::Result CheckedStorage::Enumerate(const char*, Visitor, void*)':
+HAL/pico/src/core/CheckedStorage.cpp:173:36: warning: 'char* strncpy(char*, const char*, size_t)' output may be truncated copying 32 bytes from a string of length 32 [-Wstringop-truncation]
+  173 |         Entry entry{}; std::strncpy(entry.name, info.name, sizeof(entry.name) - 1);
+      |                        ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/HAL/pico/src/serial.cpp.o
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from HAL/pico/src/display/ConfigMenu.cpp:6:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from HAL/pico/src/display/DefaultConfigMenu.cpp:3:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/LEDTemplates.cpp.o
+In file included from .platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Interrupts.h:8,
+                 from .platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/ArduinoAPI.h:29,
+                 from .platformio-home/packages/framework-arduinopico/cores/rp2040/api/ArduinoAPI.h:2,
+                 from .platformio-home/packages/framework-arduinopico/cores/rp2040/Arduino.h:28,
+                 from HAL/pico/include/stdlib.hpp:4,
+                 from include/core/state.hpp:4,
+                 from include/core/socd.hpp:4,
+                 from include/core/InputMode.hpp:4,
+                 from include/core/ControllerMode.hpp:4,
+                 from include/core/CommunicationBackend.hpp:4,
+                 from include/comms/IntegratedDisplay.hpp:4,
+                 from HAL/pico/include/display/ConfigMenu.hpp:4,
+                 from HAL/pico/src/display/ConfigMenu.cpp:1:
+.platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Common.h: In instantiation of 'decltype (((b < a) ? b :  a)) min(const T&, const L&) [with T = unsigned int; L = int; decltype (((b < a) ? b :  a)) = unsigned int]':
+HAL/pico/src/display/ConfigMenu.cpp:57:28:   required from here
+.platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Common.h:130:15: warning: comparison of integer expressions of different signedness: 'const int' and 'const unsigned int' [-Wsign-compare]
+  130 |     return (b < a) ? b : a;
+      |            ~~~^~~~
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/config.cpp.o
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from ./config/glyph/common/include/LEDTemplates.hpp:5,
+                 from HAL/pico/src/display/DefaultConfigMenu.cpp:7:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h: At global scope:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/display/AboutMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/display/GlyphConfigMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/display/MenuButtonHints.cpp.o
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/display/OopsieMenu.cpp.o
+Compiling .pio/build/glyph_mk6/src/config/glyph/common/src/glyph_config_validation.cpp.o
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from HAL/pico/include/rgb/ButtonLocations.hpp:7,
+                 from HAL/pico/src/rgb/ButtonLocations.cpp:1:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/comms/B0XXInputViewer.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/comms/IntegratedDisplay.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/CommunicationBackend.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/ControllerMode.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/InputMode.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/InputSource.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/ProfileStore_stub.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/config_button_validation.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/config_rgb_target_validation.cpp.o
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from config/glyph/common/include/LEDTemplates.hpp:5,
+                 from config/glyph/common/src/LEDTemplates.cpp:1:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/core/config_usb_default_validation.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/config_utils.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/config_validation.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/mode_selection.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/core/socd.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/input/GpioButtonInput.cpp.o
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from config/glyph/common/src/config.cpp:7:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/modes/64.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/CustomControllerMode.cpp.o
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from HAL/pico/include/rgb/ButtonLocations.hpp:7,
+                 from HAL/pico/include/comms/NeoPixelBackend.hpp:6,
+                 from config/glyph/common/include/glyph_overrides.hpp:6,
+                 from config/glyph/common/src/config.cpp:25:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h: At global scope:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/modes/CustomKeyboardMode.cpp.o
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from config/glyph/common/src/display/GlyphConfigMenu.cpp:3:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+config/glyph/common/src/config.cpp:130:6: warning: 'void {anonymous}::refuse_boot(BootOutcome, bool)' defined but not used [-Wunused-function]
+  130 | void refuse_boot(BootOutcome outcome, bool display_ready) {
+      |      ^~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/modes/DefaultKeyboardMode.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/FgcMode.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/Melee18Button.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/Melee20Button.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/ProjectM.cpp.o
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from src/comms/IntegratedDisplay.cpp:3:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/modes/Rivals2.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/RivalsOfAether.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/SenscopePrototype.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/Ultimate.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/UltimateNativeEvaluator.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/UltimateNativeProfile.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/DarkSouls.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/HollowKnight.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/MKWii.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/MultiVersus.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/RocketLeague.cpp.o
+src/modes/FgcMode.cpp: In member function 'virtual void FgcMode::UpdateAnalogOutputs(const InputState&, OutputState&, CommunicationBackendId)':
+src/modes/FgcMode.cpp:47:17: warning: variable 'outputBuffer' set but not used [-Wunused-but-set-variable]
+   47 |     OutputState outputBuffer = OutputState();
+      |                 ^~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/SaltAndSanctuary.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/ShovelKnight.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/ToughLoveArena.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/modes/extra/Ultimate2.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeDigital.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeDirection.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeForce.cpp.o
+src/modes/Ultimate.cpp:191:6: warning: 'bool {anonymous}::MaterializeRuntimeConfigCandidateFromSourceView(const RuntimeConfigView&, RuntimeConfigCandidateState&)' defined but not used [-Wunused-function]
+  191 | bool MaterializeRuntimeConfigCandidateFromSourceView(
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/modes/Ultimate.cpp:153:6: warning: 'bool {anonymous}::CopyRuntimeConfigViewIntoActiveStorage(const RuntimeConfigView&, RuntimeConfigActiveStorage&)' defined but not used [-Wunused-function]
+  153 | bool CopyRuntimeConfigViewIntoActiveStorage(
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/modes/Ultimate.cpp:88:6: warning: 'bool {anonymous}::ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState&)' defined but not used [-Wunused-function]
+   88 | bool ValidateRuntimeConfigCandidateState(const RuntimeConfigCandidateState &candidate) {
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeModifier.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeOutput.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeResolver.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeSelfTest.cpp.o
+Compiling .pio/build/glyph_mk6/src/src/prototypes/senscope/SenscopePrototypeValidation.cpp.o
+Generating linkerscript /private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/memmap_default.ld
+Compiling .pio/build/glyph_mk6/FrameworkArduino/BluetoothDebug.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/Bootsel.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/CoreMutex.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/FS.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/PIOProgram.cpp.o
+src/prototypes/senscope/SenscopePrototypeSelfTest.cpp: In function 'senscope::prototype::SenscopePrototypeSelfTestResult senscope::prototype::RunSenscopePrototypeSelfTest()':
+src/prototypes/senscope/SenscopePrototypeSelfTest.cpp:67:33: warning: stack usage is 1240 bytes [-Wstack-usage=]
+   67 | SenscopePrototypeSelfTestResult RunSenscopePrototypeSelfTest() noexcept {
+Compiling .pio/build/glyph_mk6/FrameworkArduino/RP2040Support.cpp.o
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/FrameworkArduino/RP2040USB.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/SerialPIO.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/SerialUART.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/SerialUSB.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/StackThunk.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/Tone.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/WMath.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/_freertos.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/api/Common.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/api/IPAddress.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/api/PluggableUSB.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/api/Print.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/api/Stream.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/api/String.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/cyw43_wrappers.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/delay.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/libb64/cdecode.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/libb64/cencode.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/lock.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/lwip_wrap.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/main.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/malloc-lock.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/posix.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/sdkoverride/att_db.c.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/sdkoverride/btstack_flash_bank.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/sdkoverride/hids_device.c.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/sdkoverride/pico_bootsel_via_double_reset.c.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/stdlib_noniso.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/wiring_analog.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/wiring_digital.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/wiring_private.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/wiring_pulse.cpp.o
+Compiling .pio/build/glyph_mk6/FrameworkArduino/wiring_shift.cpp.o
+Archiving .pio/build/glyph_mk6/libFrameworkArduino.a
+Indexing .pio/build/glyph_mk6/libFrameworkArduino.a
+Linking .pio/build/glyph_mk6/firmware.elf
+Generating UF2 image
+picotool uf2 convert -t elf ".pio/build/glyph_mk6/firmware.elf" ".pio/build/glyph_mk6/firmware.uf2"
+Retrieving maximum program size .pio/build/glyph_mk6/firmware.elf
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+Checking size .pio/build/glyph_mk6/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=======   ]  74.6% (used 195664 bytes from 262144 bytes)
+Flash: [===       ]  31.9% (used 500892 bytes from 1568768 bytes)
+Building .pio/build/glyph_mk6/firmware.bin
+Building .pio/build/glyph_mk6/firmware.bin.signed
+========================= [SUCCESS] Took 53.91 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+glyph_mk6      SUCCESS   00:00:53.908
+========================= 1 succeeded in 00:00:53.908 =========================

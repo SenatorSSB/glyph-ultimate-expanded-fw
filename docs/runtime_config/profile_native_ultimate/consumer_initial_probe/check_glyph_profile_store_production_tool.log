@@ -1,0 +1,10 @@
+{
+  "command": [
+    "python3",
+    "tools/check_glyph_profile_store_production_tool.py"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "stdout": "production ProfileStore tool: [Errno 17] File exists: '/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/tmprggn1p4i/r.json'\nproduction ProfileStore tool: malformed response after transmission; unresolved\nglyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true\n",
+  "stderr": ""
+}
