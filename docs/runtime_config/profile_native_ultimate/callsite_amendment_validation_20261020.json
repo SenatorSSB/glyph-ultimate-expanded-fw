@@ -1,0 +1,19 @@
+{
+  "state": "SOURCE_FREE_BOUNDED_AMENDMENT_VALIDATED_PENDING_PUBLICATION",
+  "base": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "checks": {
+    "exact_contract_change": "PASS one source path and one restriction only",
+    "queue_byte_comparison": "PASS only GP-NATIVE-001 scope sentence appended; other102 orders/fields unchanged",
+    "git_diff_check": "PASS",
+    "check_glyph_agent_framework_docs.py": "PASS",
+    "check_glyph_agentic_sequence_protocol.py": "PASS",
+    "check_glyph_docs_navigation.py": "PASS",
+    "check_glyph_docs_agent_surface.py": "FAIL historical C024 post-integration change outside validation/evidence paths; identical canonicalA/B baseline debt already preserved in authorization publication validation, no context helper mutation",
+    "mistyped_checker_entrypoint": "python3 tools/check_glyph_agent_framework.py failed file missing; corrected real check_glyph_agent_framework_docs.py PASS"
+  },
+  "classification": "DOCS_CHECKER_ONLY",
+  "source_review": "Existing fresh independent source review REQUEST_CHANGES P1 retained; this amends authority for sole annotation only, no safety PASS",
+  "publication_writer": "Root existing sole publisher lock",
+  "hardware_action": "NOT_AUTHORIZED",
+  "source_path_edit_before_live_readback": "FORBIDDEN"
+}

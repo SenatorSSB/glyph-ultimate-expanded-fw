@@ -1,0 +1,61 @@
+{
+  "record_kind": "GP_NATIVE_001_BOUNDED_CALLSITE_CURATION",
+  "record_status": "BOUNDED_CANONICAL_ADOPTION_INCLUDED_IN_THIS_COMMIT_PENDING_LIVE_READBACK",
+  "resolver_role": "Glyph Work-Order Curator",
+  "recorded_at": "2026-10-20T12:11:26Z",
+  "disposition": "NEED_CANONICAL_AMENDMENT",
+  "subject_id": "GP-NATIVE-001",
+  "canonical_base_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "owner_directive_sha256": "05e0023d454d336be2d0a1762f434d5f808d36271c232cf790120ac497ce6d38",
+  "implementation_contract_reference": "git-json:753932c8fbec3e002d455f4cd2b9b1dbc0ed896f:docs/runtime_config/profile_native_ultimate/implementation_contract.json",
+  "active_ready_reference": "git-json:753932c8fbec3e002d455f4cd2b9b1dbc0ed896f:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "existing_packet_receipt_reference": "git-json:8e30717ce5a64d3207e42aa4a7111dd3b492f800:docs/agent_framework/curation_receipts/glyph-portfolio-20261020-1228.json",
+  "new_source_path": "include/core/RuntimeIdentityService.hpp",
+  "permitted_edit": "Add __attribute__((noinline)) only to the existing runtime_identity::Service::Poll template method; preserve its signature and body.",
+  "resolution": "GP-NATIVE-001 bounded native-identity call-site clarification (2026-10-20): include/core/RuntimeIdentityService.hpp is authorized solely to add __attribute__((noinline)) to the existing runtime_identity::Service::Poll template method. This separates its existing response/Snapshot stack phase from the caller loop frame during the source-grounded NATIVE-REVIEW-P1-STACK repair. Preserve the exact method signature/body, parser, counters, scheduling order, XInput-only admission, 16-byte request/72-byte response, statuses and wire behavior. No new API, static workspace, resource-limit increase, timing facility, SDK edit or other header change is authorized. This path is an existing dependency of frozen native active-runtime identity correspondence, not general transport authority. Require fresh independent source review and exact final build/disassembly/call-chain/interrupt resource proof; this clarification does not establish stack PASS, target measurement, device approval or hardware acceptance. All other source/test paths, numeric caps, frozen architecture/oracles and hardware gates remain unchanged.",
+  "source_review_finding_reference": "/private/tmp/glyph-native-source-review.md#blocking-finding-native-review-p1-stack",
+  "published_scope_state": "SOURCE_FREE_AMENDMENT_PENDING_LIVE_READBACK",
+  "owner_decision_required": false,
+  "new_implementation_order_required": false,
+  "new_successor_order_required": false,
+  "canonical_publisher": "Root chapter daemon, single existing publisher/lock",
+  "required_before_source_edit": [
+    "Fresh independent review of exact source-free amendment",
+    "Relevant focused governance validation",
+    "Canonical adoption and fresh live readback"
+  ],
+  "preserved": {
+    "numeric_caps_sha256": "22f4b442b132f069945931f0e6479c8dcd2933c21e814861bac152eee9fd7209",
+    "allowed_test_paths_sha256": "bf9435fac33e7f00d8df67a5aa0f95c80d942cf77254cac00453ef041d9a87eb",
+    "all_other_contract_json_values_unchanged": true,
+    "all_other_work_order_fields_unchanged": true,
+    "existing_packet_receipt_immutable": true,
+    "core0_stack_bytes": 2048,
+    "core1_stack_bytes": 2048,
+    "target_whole_stack": "NOT_MEASURED",
+    "hardware_acceptance": "NOT_TESTED"
+  },
+  "network_verification": {
+    "default_readonly_probe": "DNS_FAILURE_INCONCLUSIVE",
+    "permitted_network_enabled_retry": "PASS",
+    "verified_ref": "refs/heads/configurator",
+    "verified_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "live_github_requires_network_enabled": true
+  },
+  "template_note": "Finite chapter evidence, not a glyph_curation_resolution_receipt or new Planner packet. Do not forge INVALIDATED_PREAUTHORIZED/HARDWARE_FAILED state to fit the closed event receipt schema. Publisher may preserve this evidence under a named chapter doc; adopt exact path/clarification in existing READY order without rewriting original receipt. No product source is included.",
+  "independent_technical_assessment": {
+    "reference": "/private/tmp/glyph-native-callsite-source-assessment.md",
+    "sha256": "b8e66fef571cf24b63576415e5c2b35966c9eb676c50c31cd013636018ea43c6",
+    "disposition": "Appropriate minimal existing phase isolation; does not close P1 or grant path authority"
+  },
+  "publisher_review": {
+    "reviewer": "Root publisher, independent of Curator proposal author and source writer",
+    "patch_sha256": "3d3c65a1ee6eac3a4973bb35b94e367fedcfc83a55a36bb4c8bf0c2a197329b4",
+    "only_source_path_added": "include/core/RuntimeIdentityService.hpp",
+    "only_permitted_source_edit": "Existing Poll noinline annotation; exact body/interface/wire preserved",
+    "all_other_contract_values_and_queue_bytes_unchanged": true,
+    "no_firmware_source_in_amendment": true,
+    "concrete_memory_fix_authority": "Existing consolidated owner directive bounded layout redesign within accepted caps",
+    "original_P_receipt_freeze_not_rewritten": true
+  }
+}

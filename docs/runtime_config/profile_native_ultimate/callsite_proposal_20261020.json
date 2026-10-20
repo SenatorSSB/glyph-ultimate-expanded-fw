@@ -1,0 +1,21 @@
+{
+  "based_on": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "disposition": "NEED_CANONICAL_AMENDMENT",
+  "subject_id": "GP-NATIVE-001",
+  "patch_path": "/private/tmp/glyph-native-callsite-amendment.patch",
+  "source_path_additions": [
+    "include/core/RuntimeIdentityService.hpp"
+  ],
+  "exact_edit": "__attribute__((noinline)) on existing Service::Poll only",
+  "scope_clarification": "GP-NATIVE-001 bounded native-identity call-site clarification (2026-10-20): include/core/RuntimeIdentityService.hpp is authorized solely to add __attribute__((noinline)) to the existing runtime_identity::Service::Poll template method. This separates its existing response/Snapshot stack phase from the caller loop frame during the source-grounded NATIVE-REVIEW-P1-STACK repair. Preserve the exact method signature/body, parser, counters, scheduling order, XInput-only admission, 16-byte request/72-byte response, statuses and wire behavior. No new API, static workspace, resource-limit increase, timing facility, SDK edit or other header change is authorized. This path is an existing dependency of frozen native active-runtime identity correspondence, not general transport authority. Require fresh independent source review and exact final build/disassembly/call-chain/interrupt resource proof; this clarification does not establish stack PASS, target measurement, device approval or hardware acceptance. All other source/test paths, numeric caps, frozen architecture/oracles and hardware gates remain unchanged.",
+  "queue_scope_append": "Bounded 2026-10-20 Curator path clarification adds only include/core/RuntimeIdentityService.hpp for __attribute__((noinline)) on existing runtime_identity::Service::Poll, under the exact restriction and mandatory affected source/resource proof recorded in implementation_contract.json; all other closed paths, caps, frozen architecture/oracles and hardware gates remain unchanged.",
+  "canonical_changes": [
+    "docs/runtime_config/profile_native_ultimate/implementation_contract.json",
+    "docs/project/ACTIVE_AGENT_QUEUE.md"
+  ],
+  "canonical_evidence_suggestion": "docs/runtime_config/profile_native_ultimate/callsite_curation_20261020.json",
+  "receipt_template": "/private/tmp/glyph-native-callsite-curation-receipt-template.json",
+  "fresh_independent_review_and_live_adoption_required": true,
+  "new_owner_decision": false,
+  "new_work_order": false
+}
