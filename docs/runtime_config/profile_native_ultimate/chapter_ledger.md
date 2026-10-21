@@ -1,5 +1,80 @@
 # Profile-native Ultimate execution chapter
 
+## Selected private ABC resource proposal — 2026-10-21
+
+The [sealed author proposal](legacy_set_resource_extension_20261021/ABC_sealed_author/README.md)
+preserves exactly five selected file deltas and all1651 immutable inputs. It
+reuses existing source-context, Save and SET receipt storage with explicit
+member lifetimes and full cleanup, returns staging phases, and outlines only
+the existing mutation executor. The same-member checked-write result placement
+is limited to the existing bulk write method. No limit, supported filesystem
+state, transaction, identity byte or diagnostic boundary changes. The earlier
+inadequate variants and the measured AC2056 gap remain preserved.
+
+The [independent expanded screen](legacy_set_resource_extension_20261021/ABC_independent_resource/README.md)
+covers140 equations per enum representation across all31 classes. Each
+conditional bound fits2048; first-record Import Open and conservative legacy
+SET staging have zero margin. The emitted selected SET path is2040 because
+its SET handler body is inlined. Independent object-section charge remains
+499/503 within512. All280 arithmetic rows were replayed. Both enum layouts
+match4209 across952 actual storage traces,1641 Save rows and51 receipt-reset
+rows; two receipt cleanup mutants and the source-context leak mutant are
+detected. These are component and limited semantic results, not a final
+linked resource certificate or hardware observation.
+
+The [same independent Curator approved the exact bounded amendment](legacy_set_owner_context_scope_amendment_20261021.json),
+including the frozen M1 distinction between canonical whole-image proof and
+both-representation component proof. Production remains4209 under clean
+test-only9ed. Implementation requires matching live source-free adoption
+readback; focused verification,
+fresh source review, exact clean final build/custody and complete linked
+stack/static proof remain before the candidate-specific hardware approval gate.
+No device operation, firmware integration or completion is authorized here.
+
+## Adopted source checkpoint and legacy SET stack finding — 2026-10-21
+
+The adopted lifetime implementation is frozen at
+`4209c03a5cd35416ab7fdd6d9a349c063e06106e`, tree
+`3d3efac98c93ac19736371fb4f0894191d714403`. The clean test/evidence-only
+checkpoint `9ed0f709894705acc508ccdfead15eb4f57fef22` preserves identical
+production blobs and the928 deep actual-NOR comparisons per enum ABI. The
+[finite independent source review](decoder_import_independent_source_review_20261021/README.md)
+found no bounded behavior defect. Its independent condition, read-result and
+decoder-callback comparisons passed both enum layouts with meaningful negative
+controls. The author’s complete deep and directly affected validation is archived in that checkpoint. The first compiler packet
+mislabelled five ARM short-enum objects as default; it is preserved, and a
+separate corrected packet uses explicit flags and actual generated-enum width
+assertions. No default-layout acceptance is inferred from the first packet.
+
+The independent current-source resource analysis found an omitted16-byte SET
+handler and a supported format0/root2/count0 Configurator history that can save
+an embedded legacy profile. That save encodes the deeper Config shape. Its
+source-feasible composition reaches at least2116 bytes including an eligible
+interrupt, above the unchanged2048-byte core stack. This is a source/compiler
+finding, not an observed device overflow. The separate
+[initial-lookahead/cache lemma](legacy_set_resource_extension_20261021/lookahead_source_lemma/README.md)
+preserves the allocator and paired-revision-read predicates. Earlier conditional
+91-row fits remain historical and do not close P1. The
+[current independent inventory](legacy_set_resource_extension_20261021/independent_current_source/README.md)
+records129 equations per ABI across all31 classes, including the stronger2132
+source-feasible composition. Other accepted-D4 Save siblings fit conditionally;
+final linked and remaining default-dependency correspondence stay OPEN.
+
+Production remains on HOLD while the same primary writer completes tests and
+prepares one materially different private caller/staging lifetime proposal.
+Independent Curator preflight permits that investigation under the existing
+owner direction; implementation of newly named methods still requires a sealed
+measured proposal, final bounded adjudication and live source-free adoption.
+The [first private variants](legacy_set_resource_extension_20261021/inadequate_first_proposal/README.md)
+remain INADEQUATE: the best2088 upper still exceeds2048 and retains an added
+Store caller. Their exact failed and incomplete inputs are preserved. The
+[prospective preflights](legacy_set_resource_extension_20261021/prospective_preflights/README.md)
+permit only a materially different private owner/context and returned-mutation
+measurement; no production authority is inferred from them.
+The broader filesystem domain and every original resource, identity and
+diagnostic constraint remain unchanged. No final build, controller action,
+hardware acceptance, firmware integration or completion is claimed.
+
 ## Corrected lifetime amendment — 2026-10-21
 
 The [independent bounded amendment](decoder_import_lifetime_scope_amendment_20261021.json)

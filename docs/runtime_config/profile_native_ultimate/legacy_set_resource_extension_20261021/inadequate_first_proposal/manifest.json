@@ -1,0 +1,680 @@
+{
+  "classification": "IMMUTABLE_ENGINEERING_EVIDENCE_NOT_ADOPTED_SOURCE_OR_RESOURCE_ACCEPTANCE",
+  "source_sha": "4209c03a5cd35416ab7fdd6d9a349c063e06106e",
+  "test_only_head": "9ed0f709894705acc508ccdfead15eb4f57fef22",
+  "note": "Three finite private variants remain INADEQUATE. Best stage upper2088 exceeds2048 and a retained Store wrapper regresses other paths. No variant was adopted; all failed compiles, recipes, objects and source inputs remain exact.",
+  "files": [
+    {
+      "original_path": "/private/tmp/glyph-native-decoder-adopted-O3-v3/manifest.json",
+      "bytes": 109937,
+      "sha256": "de7a6385fea37ced6997ad8bc85eba3df19a8b7a55d8f5afa4e00506d7ba01f5",
+      "object": "objects/de7a6385fea37ced6997ad8bc85eba3df19a8b7a55d8f5afa4e00506d7ba01f5.gz",
+      "gzip_sha256": "8ea3d9f8d1b36fdfc5b6d64204da9ae30e248608a08227e5d8942800f95f9f3d"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/REPORT.md",
+      "bytes": 3297,
+      "sha256": "760cedcc2a3cd2230569b156245ffbbdb0ab7243646beb51290cf76a1c718e0e",
+      "object": "objects/760cedcc2a3cd2230569b156245ffbbdb0ab7243646beb51290cf76a1c718e0e.gz",
+      "gzip_sha256": "f824cd52d73ec7418037b33403ad9229ba123f845586f913b38f840327772ce2"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/default-layout-argv.json",
+      "bytes": 4221,
+      "sha256": "4c2a0c57112c13646d991b421d63f020118006d68de5d3d2e95fdb69f9f30535",
+      "object": "objects/4c2a0c57112c13646d991b421d63f020118006d68de5d3d2e95fdb69f9f30535.gz",
+      "gzip_sha256": "473e94b42801cc8eab29d1a8911e0b195dabf32cddbd576570ae35f89a6e7148"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/default-layout.log",
+      "bytes": 4307,
+      "sha256": "06700eb854090565886a10774512f7916ffcf2efe43ff84ecc6da0eb0e95dc48",
+      "object": "objects/06700eb854090565886a10774512f7916ffcf2efe43ff84ecc6da0eb0e95dc48.gz",
+      "gzip_sha256": "7861d1f1095a9b93212f1b23beeed0be55268700b75e268fff0ffc22a7f0d328"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/default-layout.o",
+      "bytes": 39620,
+      "sha256": "78288bb6b952b2b7ae1e999921c438c53b8da6b9a4497f12ce11445be4fffa02",
+      "object": "objects/78288bb6b952b2b7ae1e999921c438c53b8da6b9a4497f12ce11445be4fffa02.gz",
+      "gzip_sha256": "ef2d3a2bd5ce18cdc34664fe15a0ef701cebdc9fd6bcabf94717d8bf7ba13076"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/default-layout.su",
+      "bytes": 11502,
+      "sha256": "464e3c39ffb64a134f83b0323e1987aab9f79e532cb7ebbbeda8297adb2193ab",
+      "object": "objects/464e3c39ffb64a134f83b0323e1987aab9f79e532cb7ebbbeda8297adb2193ab.gz",
+      "gzip_sha256": "b9f73b6ea66c37434e620556df0d2a0bf893bfde9bf9d6d84d8cc34dece2beca"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/manifest.json",
+      "bytes": 20581,
+      "sha256": "4bef3f32098d9364db27e589d51af1fb45252ea0a2eac4710397160052c158eb",
+      "object": "objects/4bef3f32098d9364db27e589d51af1fb45252ea0a2eac4710397160052c158eb.gz",
+      "gzip_sha256": "e9612e2a5c35beb443427aea29aea184be0b7f959c46d5eb6bd9f0841c79cfa9"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/short-layout-argv.json",
+      "bytes": 4216,
+      "sha256": "9605c70b2fb3cfdf033e117920c642d32f77c00c31ad73ef1729afdaa3d748b1",
+      "object": "objects/9605c70b2fb3cfdf033e117920c642d32f77c00c31ad73ef1729afdaa3d748b1.gz",
+      "gzip_sha256": "9bb089ff1ee4903a22a116358e58d756155de170e1f5301c76b0d1c8fbeb859a"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/short-layout.log",
+      "bytes": 4307,
+      "sha256": "06700eb854090565886a10774512f7916ffcf2efe43ff84ecc6da0eb0e95dc48",
+      "object": "objects/06700eb854090565886a10774512f7916ffcf2efe43ff84ecc6da0eb0e95dc48.gz",
+      "gzip_sha256": "7861d1f1095a9b93212f1b23beeed0be55268700b75e268fff0ffc22a7f0d328"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/short-layout.o",
+      "bytes": 39636,
+      "sha256": "47c962b8d6077a42f34a1f532f80de6afe113158422e3c085802157cdee6d91f",
+      "object": "objects/47c962b8d6077a42f34a1f532f80de6afe113158422e3c085802157cdee6d91f.gz",
+      "gzip_sha256": "c5af49691c773b57acb3877da37983cb3fb35959aeab3f2f77017edcca0b96d9"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-engineering-20261021/short-layout.su",
+      "bytes": 11502,
+      "sha256": "14327929defc670d93e74bc3cb487866cee523e7b12fac0520349beda33e52b2",
+      "object": "objects/14327929defc670d93e74bc3cb487866cee523e7b12fac0520349beda33e52b2.gz",
+      "gzip_sha256": "04fc65d9db07c3d9b6a85695cd399dc003157ef9bca0e848d2790ef6738c88f5"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-preflight-20261021.json",
+      "bytes": 6119,
+      "sha256": "e8bc65e2743c9293ca0927f10093b0b7d35daf30418066b1df644733983122c9",
+      "object": "objects/e8bc65e2743c9293ca0927f10093b0b7d35daf30418066b1df644733983122c9.gz",
+      "gzip_sha256": "6c4fc20b237414789b60294ac19dd131f147c697f68e01a125a0d7d073c900df"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-ConfiguratorBackend-disassembly.txt",
+      "bytes": 322599,
+      "sha256": "2eb1ea347df4c4b08920e4d5528f7b3cc12890881a8eddd63c3725b66b16eb65",
+      "object": "objects/2eb1ea347df4c4b08920e4d5528f7b3cc12890881a8eddd63c3725b66b16eb65.gz",
+      "gzip_sha256": "d2aa20c061b0519688add4fad220908298111a7d725be68ee1b8ebfc791723d1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-ConfiguratorBackend-symbols.txt",
+      "bytes": 10010,
+      "sha256": "bba9da4a41d55257513efcf787237ef1ee302f1d5aea6eeef431e8baecd748ed",
+      "object": "objects/bba9da4a41d55257513efcf787237ef1ee302f1d5aea6eeef431e8baecd748ed.gz",
+      "gzip_sha256": "422fa3db4a7f214ebde6c8c168b88e860a6425f6a31c4de69009e76a4647dc0f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-ConfiguratorBackend.log",
+      "bytes": 1338,
+      "sha256": "ba0b4a22f2558f01b8470a774358919786d7f7a75b32c6f299e8fe84cc933069",
+      "object": "objects/ba0b4a22f2558f01b8470a774358919786d7f7a75b32c6f299e8fe84cc933069.gz",
+      "gzip_sha256": "ba02ed558fddd501e62c753427e8128c175052fac33f7cbd79242b302a4a8bcd"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-ConfiguratorBackend.o",
+      "bytes": 48128,
+      "sha256": "beb63e72357e25dfe1681d2ba79bf95fa95aec0845ebb96fcc45e8ebcab4579c",
+      "object": "objects/beb63e72357e25dfe1681d2ba79bf95fa95aec0845ebb96fcc45e8ebcab4579c.gz",
+      "gzip_sha256": "75760f82c42069811daee9f78b07dcbe738425b3900597d8056c10522cca9ae9"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-ConfiguratorBackend.su",
+      "bytes": 10015,
+      "sha256": "213b5346a0408ad9d747cf3b3f8d4d51be6d9d232998cab2d52872d1b2ca1301",
+      "object": "objects/213b5346a0408ad9d747cf3b3f8d4d51be6d9d232998cab2d52872d1b2ca1301.gz",
+      "gzip_sha256": "7ace925eb428638cbb4237786b59402a7909d2698eee71672ca94835637767e8"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-Persistence-disassembly.txt",
+      "bytes": 315463,
+      "sha256": "7cbc18014bc79c4690592475851f85dadebe9a6d74df5c4f0cd5a96e1c5785cf",
+      "object": "objects/7cbc18014bc79c4690592475851f85dadebe9a6d74df5c4f0cd5a96e1c5785cf.gz",
+      "gzip_sha256": "3864aa1a26293b4f345b5024ca94cf8447c1deb19f3830e06341b8f0c7fe4e1e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-Persistence-symbols.txt",
+      "bytes": 7092,
+      "sha256": "711cdb41ad2cce7fd84727c21e2db2307a95cdc42ddcc198e35a1447d22a8a23",
+      "object": "objects/711cdb41ad2cce7fd84727c21e2db2307a95cdc42ddcc198e35a1447d22a8a23.gz",
+      "gzip_sha256": "2e2d81e1655f32ac0d44a63ba63904edfd1f9b8bf83b5f65a63afdf330683b6e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-Persistence.log",
+      "bytes": 4085,
+      "sha256": "af5196c96de47e02a06f429879ea42e4e9a316c60d405e8a5d2be3441aa29134",
+      "object": "objects/af5196c96de47e02a06f429879ea42e4e9a316c60d405e8a5d2be3441aa29134.gz",
+      "gzip_sha256": "ce00233173fcc66962be8ba5b96f73024cdad2dddcbef69fc154938e480ab6d2"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-Persistence.o",
+      "bytes": 39620,
+      "sha256": "a97830b4cc8f27d0c896e4bbf1d20feac0543994c11d2169de1e40ae8a321fad",
+      "object": "objects/a97830b4cc8f27d0c896e4bbf1d20feac0543994c11d2169de1e40ae8a321fad.gz",
+      "gzip_sha256": "8a8b8bb6ec098dd4f46c771e7d8dbdc8823929b7f3250b0d3b6615ae0dc69dd1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/default-Persistence.su",
+      "bytes": 11068,
+      "sha256": "15d78865ae3931e3d2d568b13f48872a6f8ea9aaa77a771bd7368479727280c6",
+      "object": "objects/15d78865ae3931e3d2d568b13f48872a6f8ea9aaa77a771bd7368479727280c6.gz",
+      "gzip_sha256": "ad71d2ec82b96ae12976cfabf47716da69ba9d73eea2c22e55529c56ac88ad1b"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/initial-compile-failure-Persistence.cpp",
+      "bytes": 31385,
+      "sha256": "63f5513c6256c3936e4665b582a867ce37f7af1015f6f47ef03fd92f4fe2fb35",
+      "object": "objects/63f5513c6256c3936e4665b582a867ce37f7af1015f6f47ef03fd92f4fe2fb35.gz",
+      "gzip_sha256": "92ff52379b98ce376301bc0ad77e0ff73d8129ac99bcaf941e3e0f427f073a87"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/initial-compile-failure.log",
+      "bytes": 5615,
+      "sha256": "7d6dc5e9497403db581e2faf33e3bcd31faabd192d0fc744a826109f10baa56b",
+      "object": "objects/7d6dc5e9497403db581e2faf33e3bcd31faabd192d0fc744a826109f10baa56b.gz",
+      "gzip_sha256": "de7df7e711965112f7326f469116133c32691e26f18a370f11fbded159bf7d92"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/manifest-initial.json",
+      "bytes": 20522,
+      "sha256": "eb712d3650c300f910ded2ef12d83daccadceb0bfa6efb959bea18862cf2e303",
+      "object": "objects/eb712d3650c300f910ded2ef12d83daccadceb0bfa6efb959bea18862cf2e303.gz",
+      "gzip_sha256": "795ce2219a9217f31cb283310c781a81c2c0744a1a544f1decfd38cd3468edae"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/selected/HAL/pico/include/core/CheckedStorageFile.hpp",
+      "bytes": 2857,
+      "sha256": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c",
+      "object": "objects/2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c.gz",
+      "gzip_sha256": "2b45fe8d07ff7d7ae14ce5126aaa492c2d97e88b9e760d796d54ad7293ba98bb"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/selected/HAL/pico/include/core/Persistence.hpp",
+      "bytes": 4713,
+      "sha256": "42939fd818783b09b58ff5583f718405be14125714d067269654edd6da99c4b0",
+      "object": "objects/42939fd818783b09b58ff5583f718405be14125714d067269654edd6da99c4b0.gz",
+      "gzip_sha256": "49e2051014cffc6890d791dc46eb2f136e0e319aa016a42c29d6e1fe73edc4d0"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/selected/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "bytes": 51103,
+      "sha256": "3a578b55da0f7d66d905d6e88e1396ec24a0c729d57c5bb851978934aa40b341",
+      "object": "objects/3a578b55da0f7d66d905d6e88e1396ec24a0c729d57c5bb851978934aa40b341.gz",
+      "gzip_sha256": "a92682852c1d6214aa85886f8b3a0b06040cd4f0f6d1e8f6123f35f92ecfdf7a"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/selected/HAL/pico/src/core/Persistence.cpp",
+      "bytes": 31387,
+      "sha256": "43559879f19b27eecf5ebf359129f984e6913f5291e9445eb5188136ba47d7fd",
+      "object": "objects/43559879f19b27eecf5ebf359129f984e6913f5291e9445eb5188136ba47d7fd.gz",
+      "gzip_sha256": "06ecc7e775b36aab068f3e4ffa2d895db3cc652eda5daa33dcb39ca1a6f559a5"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/selected-private.diff",
+      "bytes": 7572,
+      "sha256": "17ec8fa1685b6205c0dcbd964400555b4ebd34d78c605b913e8ce935463a292c",
+      "object": "objects/17ec8fa1685b6205c0dcbd964400555b4ebd34d78c605b913e8ce935463a292c.gz",
+      "gzip_sha256": "8cb87cc6350e0c1b13f4dcd0248ab1ca94119144894e526a52686c348c3b9b75"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-ConfiguratorBackend-disassembly.txt",
+      "bytes": 401816,
+      "sha256": "87da426506e673578befb85f908b3e6a013b46fbaad8800a2631f33bd8c26fbd",
+      "object": "objects/87da426506e673578befb85f908b3e6a013b46fbaad8800a2631f33bd8c26fbd.gz",
+      "gzip_sha256": "a786255fe700212ad123d1023a6788176869b8b552edb5108cbb4cbde690b0f7"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-ConfiguratorBackend-symbols.txt",
+      "bytes": 10010,
+      "sha256": "716efe5b4db6363dbd0f4e82df90b8ee53ae48b96b7f7e8fa28498be4d0e8457",
+      "object": "objects/716efe5b4db6363dbd0f4e82df90b8ee53ae48b96b7f7e8fa28498be4d0e8457.gz",
+      "gzip_sha256": "3965af0bc13e488def021d8e26518429e634c7d232e293ebabd79c59d5aacb70"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-ConfiguratorBackend.log",
+      "bytes": 1338,
+      "sha256": "ba0b4a22f2558f01b8470a774358919786d7f7a75b32c6f299e8fe84cc933069",
+      "object": "objects/ba0b4a22f2558f01b8470a774358919786d7f7a75b32c6f299e8fe84cc933069.gz",
+      "gzip_sha256": "ba02ed558fddd501e62c753427e8128c175052fac33f7cbd79242b302a4a8bcd"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-ConfiguratorBackend.o",
+      "bytes": 52336,
+      "sha256": "220ce3f7ae797d343e2bfc3f615d812c6c0a898c8d0414da6047d780bc622720",
+      "object": "objects/220ce3f7ae797d343e2bfc3f615d812c6c0a898c8d0414da6047d780bc622720.gz",
+      "gzip_sha256": "85a835be6fb5de393c7f4e7c5d9dab1770c16b533bbf64febdbe7eba83c4ef72"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-ConfiguratorBackend.su",
+      "bytes": 10016,
+      "sha256": "75ec9a01682e46e75e6c6c239aa86bfc176d8d89deb50a02016e9ab40a1c8057",
+      "object": "objects/75ec9a01682e46e75e6c6c239aa86bfc176d8d89deb50a02016e9ab40a1c8057.gz",
+      "gzip_sha256": "5cd6e196313e72b48ff01e81d8d2e909313b5dfc4bbc1b5b9decd83f2e6e626f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-Persistence-disassembly.txt",
+      "bytes": 315584,
+      "sha256": "50a5e9b6e35ce098048a8e98ff17fbb12e108d9e81905b4d6e74aea5b9d70bc1",
+      "object": "objects/50a5e9b6e35ce098048a8e98ff17fbb12e108d9e81905b4d6e74aea5b9d70bc1.gz",
+      "gzip_sha256": "cb101084fd020c76ce8d0c2008203ae17ef259a3e990ef82e31c52160de641f6"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-Persistence-symbols.txt",
+      "bytes": 7092,
+      "sha256": "12e160e8a9f55b5fc93e00a294b40cde658614ba3b9e2da264d8ec686493509e",
+      "object": "objects/12e160e8a9f55b5fc93e00a294b40cde658614ba3b9e2da264d8ec686493509e.gz",
+      "gzip_sha256": "81fafc6fdc8a0015432cf8a150c86943ec0327eb545447de6e2fdf236c4da418"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-Persistence.log",
+      "bytes": 4085,
+      "sha256": "af5196c96de47e02a06f429879ea42e4e9a316c60d405e8a5d2be3441aa29134",
+      "object": "objects/af5196c96de47e02a06f429879ea42e4e9a316c60d405e8a5d2be3441aa29134.gz",
+      "gzip_sha256": "ce00233173fcc66962be8ba5b96f73024cdad2dddcbef69fc154938e480ab6d2"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-Persistence.o",
+      "bytes": 39636,
+      "sha256": "ca9dd1a4e8e26655073bd97f4e0173f0149b895658e6c26eb1de3e1caaa8d298",
+      "object": "objects/ca9dd1a4e8e26655073bd97f4e0173f0149b895658e6c26eb1de3e1caaa8d298.gz",
+      "gzip_sha256": "b3a7924ee73fd0400d4ff7654b493d5d63d58c86f5aa9cd79e9533e45d21daad"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-20261021/short-Persistence.su",
+      "bytes": 11068,
+      "sha256": "2c6b3f7ea40a94a0387dd8b842f8a98c1bbc638f22756714fb3e15bfa5df6ddb",
+      "object": "objects/2c6b3f7ea40a94a0387dd8b842f8a98c1bbc638f22756714fb3e15bfa5df6ddb.gz",
+      "gzip_sha256": "669e096d43654763ea464f05b547cffad5e4236b42925a8a8b669b94ab50a797"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-ConfiguratorBackend-disassembly.txt",
+      "bytes": 318178,
+      "sha256": "5b6285b6ec81a7a592484b4715babb35fa6b8cfbd66aa65b9b65f96c9419a76c",
+      "object": "objects/5b6285b6ec81a7a592484b4715babb35fa6b8cfbd66aa65b9b65f96c9419a76c.gz",
+      "gzip_sha256": "4067691241d232cbf4486c3ea96a3c2833f8f5ba2edea5c8cccca375ad1e1226"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-ConfiguratorBackend-symbols.txt",
+      "bytes": 10010,
+      "sha256": "200b22efdb5b89c2341718d2d34c7a9cbf8c35b3f2a7bf82a01be19ad51c8bef",
+      "object": "objects/200b22efdb5b89c2341718d2d34c7a9cbf8c35b3f2a7bf82a01be19ad51c8bef.gz",
+      "gzip_sha256": "e8ed2ec037914a013d708819530779e9875ad09ac2b1a9b2f911552a3ba5fe60"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-ConfiguratorBackend.log",
+      "bytes": 1383,
+      "sha256": "e41e610ff3133704341b82f8831414c0dcee703b943bbc80185dc60fdfce6d89",
+      "object": "objects/e41e610ff3133704341b82f8831414c0dcee703b943bbc80185dc60fdfce6d89.gz",
+      "gzip_sha256": "8fb6af0f7c90c77a3bdd2b00a5da14ac94da8c929be76f094c341d7b6342894c"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-ConfiguratorBackend.o",
+      "bytes": 47896,
+      "sha256": "9ee1bc0d03502e180f62195337fd0d7f3840f8661e8a63de1d0d6fa687131fc5",
+      "object": "objects/9ee1bc0d03502e180f62195337fd0d7f3840f8661e8a63de1d0d6fa687131fc5.gz",
+      "gzip_sha256": "767eef2a2827e6d01f5d6576d2a0ff8cc5e88db7f5564a3bc2d77cb8cacbb323"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-ConfiguratorBackend.su",
+      "bytes": 10357,
+      "sha256": "9ae2d91ba4979a92832ab07c2a35cdd081ee34e38ab085ce53166e07c6880683",
+      "object": "objects/9ae2d91ba4979a92832ab07c2a35cdd081ee34e38ab085ce53166e07c6880683.gz",
+      "gzip_sha256": "97bf2d2bb4386d3bafb2f98c4aea61c5d3cd3fb12b60904872adb9d958fae268"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-Persistence-disassembly.txt",
+      "bytes": 315472,
+      "sha256": "269eef1b10c040769361d76deed2cef942302f2430ab82cc4893a26138d6056f",
+      "object": "objects/269eef1b10c040769361d76deed2cef942302f2430ab82cc4893a26138d6056f.gz",
+      "gzip_sha256": "4cc9a8993face0b78b6bb368dbfbfb7effddf884411932777822b98ca2a70e36"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-Persistence-symbols.txt",
+      "bytes": 7092,
+      "sha256": "711cdb41ad2cce7fd84727c21e2db2307a95cdc42ddcc198e35a1447d22a8a23",
+      "object": "objects/711cdb41ad2cce7fd84727c21e2db2307a95cdc42ddcc198e35a1447d22a8a23.gz",
+      "gzip_sha256": "2e2d81e1655f32ac0d44a63ba63904edfd1f9b8bf83b5f65a63afdf330683b6e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-Persistence.log",
+      "bytes": 4211,
+      "sha256": "467250bd93d2dca28a72c8f56a399aa6726accedb124b179424062eb6208baba",
+      "object": "objects/467250bd93d2dca28a72c8f56a399aa6726accedb124b179424062eb6208baba.gz",
+      "gzip_sha256": "170ed38aa466824ffc58e11545c6d7c9838cf503207308c34eb619916bb9f9f4"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-Persistence.o",
+      "bytes": 39620,
+      "sha256": "a97830b4cc8f27d0c896e4bbf1d20feac0543994c11d2169de1e40ae8a321fad",
+      "object": "objects/a97830b4cc8f27d0c896e4bbf1d20feac0543994c11d2169de1e40ae8a321fad.gz",
+      "gzip_sha256": "8a8b8bb6ec098dd4f46c771e7d8dbdc8823929b7f3250b0d3b6615ae0dc69dd1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/default-Persistence.su",
+      "bytes": 11617,
+      "sha256": "bf607031fb3ddd662497ce7bb6f30586fb611a22d119e84aee635a6bbbccd228",
+      "object": "objects/bf607031fb3ddd662497ce7bb6f30586fb611a22d119e84aee635a6bbbccd228.gz",
+      "gzip_sha256": "71e6705a0c02804077e1330d941e0d436fb5a42d72948dc3e95b3881cfd474d6"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/manifest-initial.json",
+      "bytes": 20630,
+      "sha256": "e3a4bc6f02ae14153dc518a8c5943e1c1c6cf3f763cb4855243a336530dcccc4",
+      "object": "objects/e3a4bc6f02ae14153dc518a8c5943e1c1c6cf3f763cb4855243a336530dcccc4.gz",
+      "gzip_sha256": "0ff6ae4864f8b0b24193e2ab8fb3c4638960ce1ad1ced9875069cc80883c4799"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/selected/HAL/pico/include/core/CheckedStorageFile.hpp",
+      "bytes": 2857,
+      "sha256": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c",
+      "object": "objects/2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c.gz",
+      "gzip_sha256": "2b45fe8d07ff7d7ae14ce5126aaa492c2d97e88b9e760d796d54ad7293ba98bb"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/selected/HAL/pico/include/core/Persistence.hpp",
+      "bytes": 4713,
+      "sha256": "42939fd818783b09b58ff5583f718405be14125714d067269654edd6da99c4b0",
+      "object": "objects/42939fd818783b09b58ff5583f718405be14125714d067269654edd6da99c4b0.gz",
+      "gzip_sha256": "49e2051014cffc6890d791dc46eb2f136e0e319aa016a42c29d6e1fe73edc4d0"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/selected/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "bytes": 51103,
+      "sha256": "64899e5d88bf170b4d9f853b81383b4fdebc1a8f6e6183b44e22de9ea6bbbb91",
+      "object": "objects/64899e5d88bf170b4d9f853b81383b4fdebc1a8f6e6183b44e22de9ea6bbbb91.gz",
+      "gzip_sha256": "e265ac6922642531b5fd88181f72d8700ee969a06fcaba482a91390c54767a01"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/selected/HAL/pico/src/core/Persistence.cpp",
+      "bytes": 31387,
+      "sha256": "43559879f19b27eecf5ebf359129f984e6913f5291e9445eb5188136ba47d7fd",
+      "object": "objects/43559879f19b27eecf5ebf359129f984e6913f5291e9445eb5188136ba47d7fd.gz",
+      "gzip_sha256": "06ecc7e775b36aab068f3e4ffa2d895db3cc652eda5daa33dcb39ca1a6f559a5"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/selected-private.diff",
+      "bytes": 7517,
+      "sha256": "ccf6aa9217f9573deea9c0751a14697affee7c71c4cbbd477fd4d7556038e1b5",
+      "object": "objects/ccf6aa9217f9573deea9c0751a14697affee7c71c4cbbd477fd4d7556038e1b5.gz",
+      "gzip_sha256": "63894440b92e1a8fe0129d797ad5fd74c71d3b8dff91b8211394c3a3aff78683"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-ConfiguratorBackend-disassembly.txt",
+      "bytes": 397021,
+      "sha256": "b5169fdb6b8bd74f9d8e46cf0b3dc0a5a18fea5556fc1db6d5d88186f9bf1d34",
+      "object": "objects/b5169fdb6b8bd74f9d8e46cf0b3dc0a5a18fea5556fc1db6d5d88186f9bf1d34.gz",
+      "gzip_sha256": "e72553e3eea1fdafd4ab4417424464fec0e38c9e21f7a76936449e5eb17e536f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-ConfiguratorBackend-symbols.txt",
+      "bytes": 10010,
+      "sha256": "eeeb9d1f61085cef96bfac5d0c3ae51d505442ad4a54e41881fd19bcb27c9db2",
+      "object": "objects/eeeb9d1f61085cef96bfac5d0c3ae51d505442ad4a54e41881fd19bcb27c9db2.gz",
+      "gzip_sha256": "72f8fd9cb4ace0523f1947df69d5534533410b78241ba59623b0afa0f6178924"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-ConfiguratorBackend.log",
+      "bytes": 1383,
+      "sha256": "e41e610ff3133704341b82f8831414c0dcee703b943bbc80185dc60fdfce6d89",
+      "object": "objects/e41e610ff3133704341b82f8831414c0dcee703b943bbc80185dc60fdfce6d89.gz",
+      "gzip_sha256": "8fb6af0f7c90c77a3bdd2b00a5da14ac94da8c929be76f094c341d7b6342894c"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-ConfiguratorBackend.o",
+      "bytes": 51976,
+      "sha256": "48c8ca1565dabc31d1aecc69733551ed2151e6d5dca5dc4c091153481219572c",
+      "object": "objects/48c8ca1565dabc31d1aecc69733551ed2151e6d5dca5dc4c091153481219572c.gz",
+      "gzip_sha256": "fba4b2dfe75b0f6bf7dcc93651e7878d75a64254377d0dacbf6a4dc4dd256472"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-ConfiguratorBackend.su",
+      "bytes": 10358,
+      "sha256": "74032129029b3267ceb47da41155869bf6da0735ba3b3082eb5385c9d8b0931d",
+      "object": "objects/74032129029b3267ceb47da41155869bf6da0735ba3b3082eb5385c9d8b0931d.gz",
+      "gzip_sha256": "f719f7b3d1d15cd483aee2a165b1e06ee402270a73d9d0a313051818c02af6be"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-Persistence-disassembly.txt",
+      "bytes": 315593,
+      "sha256": "acffbec2abdcdb740e0b467e476df70fc411698c4f0f6a527658add40b57227b",
+      "object": "objects/acffbec2abdcdb740e0b467e476df70fc411698c4f0f6a527658add40b57227b.gz",
+      "gzip_sha256": "9194552fd57d519acbbf2df4c7980764934fbcfa29f746c263f09d8246c88cd9"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-Persistence-symbols.txt",
+      "bytes": 7092,
+      "sha256": "12e160e8a9f55b5fc93e00a294b40cde658614ba3b9e2da264d8ec686493509e",
+      "object": "objects/12e160e8a9f55b5fc93e00a294b40cde658614ba3b9e2da264d8ec686493509e.gz",
+      "gzip_sha256": "81fafc6fdc8a0015432cf8a150c86943ec0327eb545447de6e2fdf236c4da418"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-Persistence.log",
+      "bytes": 4211,
+      "sha256": "467250bd93d2dca28a72c8f56a399aa6726accedb124b179424062eb6208baba",
+      "object": "objects/467250bd93d2dca28a72c8f56a399aa6726accedb124b179424062eb6208baba.gz",
+      "gzip_sha256": "170ed38aa466824ffc58e11545c6d7c9838cf503207308c34eb619916bb9f9f4"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-Persistence.o",
+      "bytes": 39636,
+      "sha256": "ca9dd1a4e8e26655073bd97f4e0173f0149b895658e6c26eb1de3e1caaa8d298",
+      "object": "objects/ca9dd1a4e8e26655073bd97f4e0173f0149b895658e6c26eb1de3e1caaa8d298.gz",
+      "gzip_sha256": "b3a7924ee73fd0400d4ff7654b493d5d63d58c86f5aa9cd79e9533e45d21daad"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly-20261021/short-Persistence.su",
+      "bytes": 11617,
+      "sha256": "da56881d213d10570e9e69b7b6c542dba6f49cb377a134be4f23e579df03de7f",
+      "object": "objects/da56881d213d10570e9e69b7b6c542dba6f49cb377a134be4f23e579df03de7f.gz",
+      "gzip_sha256": "05419e25ab89b9046ed6b9e2c268a66aa0fd08b5e1e7b185b42a0460ec9f92af"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-readonly.py",
+      "bytes": 4861,
+      "sha256": "0b400318355523e81204d5b3d4d22821c55adb698778560c3d97f7192e24e59f",
+      "object": "objects/0b400318355523e81204d5b3d4d22821c55adb698778560c3d97f7192e24e59f.gz",
+      "gzip_sha256": "5385deada23dfd50bd9ec6554f1909bb4751f7f0975d1697e756ff35f4af06d3"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-ConfiguratorBackend-disassembly.txt",
+      "bytes": 319255,
+      "sha256": "b17159e5d427332cab13645b6ba85218c9eab76741b5f4605266ab99bfdf0d42",
+      "object": "objects/b17159e5d427332cab13645b6ba85218c9eab76741b5f4605266ab99bfdf0d42.gz",
+      "gzip_sha256": "72a1896217e83773691e68ef8eba8cd090f8ce45278f0ca9362f9b4279a5972a"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-ConfiguratorBackend-symbols.txt",
+      "bytes": 10072,
+      "sha256": "266a13dce5f5f87c55f6a7f4ecb30bc10b60543db4983989a4d3628265bad165",
+      "object": "objects/266a13dce5f5f87c55f6a7f4ecb30bc10b60543db4983989a4d3628265bad165.gz",
+      "gzip_sha256": "5d21058937a5afb74e2aa6e991ec90d4c2a38a9b50201bd53770c380c4145281"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-ConfiguratorBackend.log",
+      "bytes": 1378,
+      "sha256": "11cd585261e99d1829413558982204ee16d66c1b1865e4c8a6af1c3b420d4e24",
+      "object": "objects/11cd585261e99d1829413558982204ee16d66c1b1865e4c8a6af1c3b420d4e24.gz",
+      "gzip_sha256": "5a7d0fc7705f9066737218c0c4f6f98a650b472572fb5b881ffb55f33e8ddead"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-ConfiguratorBackend.o",
+      "bytes": 48244,
+      "sha256": "d20939ecc808f92ad3e48f9439882335c7ab4bcdba7dcea27be9a7a452c7eeeb",
+      "object": "objects/d20939ecc808f92ad3e48f9439882335c7ab4bcdba7dcea27be9a7a452c7eeeb.gz",
+      "gzip_sha256": "1cba5dd1ae541975ed2e9beb7d3e4855e4ddea09e5fe82d6cc7fbd91722ed3bc"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-ConfiguratorBackend.su",
+      "bytes": 10503,
+      "sha256": "fb656af5fcaad6f7ca0734b833d4b7246c01bcc40c60272f87eae0473eec2837",
+      "object": "objects/fb656af5fcaad6f7ca0734b833d4b7246c01bcc40c60272f87eae0473eec2837.gz",
+      "gzip_sha256": "02ad55fd676248a29e3ee03caeb66a54a4a4fd3fa19c8fb1ec93c546eff93593"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-Persistence-disassembly.txt",
+      "bytes": 315471,
+      "sha256": "b85241dbb33550eae6b2f795278aa43d2c34d27f630081f4776e49e772c45e27",
+      "object": "objects/b85241dbb33550eae6b2f795278aa43d2c34d27f630081f4776e49e772c45e27.gz",
+      "gzip_sha256": "87cc002617d79b341db15a332e5a4a137733ff44db88324ae4e2a991d9d82d23"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-Persistence-symbols.txt",
+      "bytes": 7092,
+      "sha256": "711cdb41ad2cce7fd84727c21e2db2307a95cdc42ddcc198e35a1447d22a8a23",
+      "object": "objects/711cdb41ad2cce7fd84727c21e2db2307a95cdc42ddcc198e35a1447d22a8a23.gz",
+      "gzip_sha256": "2e2d81e1655f32ac0d44a63ba63904edfd1f9b8bf83b5f65a63afdf330683b6e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-Persistence.log",
+      "bytes": 4197,
+      "sha256": "3fd485c2892079520afc84f6b11d3bb891e32b1bbb16f6d02a09926180a56181",
+      "object": "objects/3fd485c2892079520afc84f6b11d3bb891e32b1bbb16f6d02a09926180a56181.gz",
+      "gzip_sha256": "9f2d35ef23627bdc74a007265d7cb5c98381cdca7ccf1880f483b3978ce88786"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-Persistence.o",
+      "bytes": 39620,
+      "sha256": "a97830b4cc8f27d0c896e4bbf1d20feac0543994c11d2169de1e40ae8a321fad",
+      "object": "objects/a97830b4cc8f27d0c896e4bbf1d20feac0543994c11d2169de1e40ae8a321fad.gz",
+      "gzip_sha256": "8a8b8bb6ec098dd4f46c771e7d8dbdc8823929b7f3250b0d3b6615ae0dc69dd1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/default-Persistence.su",
+      "bytes": 11556,
+      "sha256": "3c9f8d38a8e3a93d1ef996fbdb0e3d858689ad57d19f1f821318b63a6716d0e0",
+      "object": "objects/3c9f8d38a8e3a93d1ef996fbdb0e3d858689ad57d19f1f821318b63a6716d0e0.gz",
+      "gzip_sha256": "08bfa187332279da9a156d4c3ce59a58205a08df9882632782d3b4da676b33ba"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/layout-proof.cpp",
+      "bytes": 516,
+      "sha256": "0de7e8dd25528df154cc53796fbbe1321e855e91731a10de34235a68a33ddb64",
+      "object": "objects/0de7e8dd25528df154cc53796fbbe1321e855e91731a10de34235a68a33ddb64.gz",
+      "gzip_sha256": "42f686f87822ba154e836d1dd752e7e0831ac92ed270d7a7afe9e996dfceba69"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/manifest-initial.json",
+      "bytes": 20618,
+      "sha256": "579d3aaabb5050cf484a151a546008ca625f0c8f3518ff41e6c426fbd68941d7",
+      "object": "objects/579d3aaabb5050cf484a151a546008ca625f0c8f3518ff41e6c426fbd68941d7.gz",
+      "gzip_sha256": "96a92defcccd21436ca512cab20c0a76a46d15c70ea590afa4f97d9d76f6d907"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/selected/HAL/pico/include/core/CheckedStorageFile.hpp",
+      "bytes": 2857,
+      "sha256": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c",
+      "object": "objects/2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c.gz",
+      "gzip_sha256": "2b45fe8d07ff7d7ae14ce5126aaa492c2d97e88b9e760d796d54ad7293ba98bb"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/selected/HAL/pico/include/core/Persistence.hpp",
+      "bytes": 4713,
+      "sha256": "42939fd818783b09b58ff5583f718405be14125714d067269654edd6da99c4b0",
+      "object": "objects/42939fd818783b09b58ff5583f718405be14125714d067269654edd6da99c4b0.gz",
+      "gzip_sha256": "49e2051014cffc6890d791dc46eb2f136e0e319aa016a42c29d6e1fe73edc4d0"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/selected/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "bytes": 51091,
+      "sha256": "7b8f5c29c7ec15502ec8cffc203c1ec6131e2b77215f1ef5de5cfcd5ad18981d",
+      "object": "objects/7b8f5c29c7ec15502ec8cffc203c1ec6131e2b77215f1ef5de5cfcd5ad18981d.gz",
+      "gzip_sha256": "332dd379fe157558bf15a7bbefa02779832bf2d60e0dd58640495ef519bd4785"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/selected/HAL/pico/src/core/Persistence.cpp",
+      "bytes": 31387,
+      "sha256": "43559879f19b27eecf5ebf359129f984e6913f5291e9445eb5188136ba47d7fd",
+      "object": "objects/43559879f19b27eecf5ebf359129f984e6913f5291e9445eb5188136ba47d7fd.gz",
+      "gzip_sha256": "06ecc7e775b36aab068f3e4ffa2d895db3cc652eda5daa33dcb39ca1a6f559a5"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/selected-private.diff",
+      "bytes": 8105,
+      "sha256": "46dbd63b962a7cee3b48da93fbbd966c936ce8a4002bbf52fb27a771193eaa59",
+      "object": "objects/46dbd63b962a7cee3b48da93fbbd966c936ce8a4002bbf52fb27a771193eaa59.gz",
+      "gzip_sha256": "a6f809c3d411e72328dc091da9073ba9dc96d96a995568f4931c85958089809a"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-ConfiguratorBackend-disassembly.txt",
+      "bytes": 398562,
+      "sha256": "dd5c7bec7b79a0008fc09cc0371fb684e6541ed16a4b11c16af59c918d51b594",
+      "object": "objects/dd5c7bec7b79a0008fc09cc0371fb684e6541ed16a4b11c16af59c918d51b594.gz",
+      "gzip_sha256": "b9069e80f6ff679bf1928433fe17ff6d059980dc2f3bbe48a416b474d431383a"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-ConfiguratorBackend-symbols.txt",
+      "bytes": 10072,
+      "sha256": "a47dd56e45e96fcb9c87893c1adccb8fd24883b537a7c0d380a84e2d8aa830c8",
+      "object": "objects/a47dd56e45e96fcb9c87893c1adccb8fd24883b537a7c0d380a84e2d8aa830c8.gz",
+      "gzip_sha256": "8f4691b0d4f83bc08aaf7eb23fa8cc287a45b90910e2b9a29c63d1739595756f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-ConfiguratorBackend.log",
+      "bytes": 1378,
+      "sha256": "11cd585261e99d1829413558982204ee16d66c1b1865e4c8a6af1c3b420d4e24",
+      "object": "objects/11cd585261e99d1829413558982204ee16d66c1b1865e4c8a6af1c3b420d4e24.gz",
+      "gzip_sha256": "5a7d0fc7705f9066737218c0c4f6f98a650b472572fb5b881ffb55f33e8ddead"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-ConfiguratorBackend.o",
+      "bytes": 52444,
+      "sha256": "68702d3204a984c573d093e4f7d002b40ef582f44451629e8d7759e28aee4b36",
+      "object": "objects/68702d3204a984c573d093e4f7d002b40ef582f44451629e8d7759e28aee4b36.gz",
+      "gzip_sha256": "1db57ef8aecacb0cbbf8cc7c82ca5ba549c00f86a533e1b9678ce9b0513df4f7"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-ConfiguratorBackend.su",
+      "bytes": 10504,
+      "sha256": "08050945e414a32e944fddf637293826b023571ae4c0ec0597a07ddb39bbd1ca",
+      "object": "objects/08050945e414a32e944fddf637293826b023571ae4c0ec0597a07ddb39bbd1ca.gz",
+      "gzip_sha256": "cb714f7b61781f01b916477ddac969993ad12e59de0d246455ef87deee406c2d"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-Persistence-disassembly.txt",
+      "bytes": 315592,
+      "sha256": "8101dcfb0116bb547f2a44296b003716df1fcc6e54afdc9b6e670f6ccf6e08dd",
+      "object": "objects/8101dcfb0116bb547f2a44296b003716df1fcc6e54afdc9b6e670f6ccf6e08dd.gz",
+      "gzip_sha256": "7a395898aa2ab906d6dba48be6e1a455c899c37073fc4105ea81921991468a0e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-Persistence-symbols.txt",
+      "bytes": 7092,
+      "sha256": "12e160e8a9f55b5fc93e00a294b40cde658614ba3b9e2da264d8ec686493509e",
+      "object": "objects/12e160e8a9f55b5fc93e00a294b40cde658614ba3b9e2da264d8ec686493509e.gz",
+      "gzip_sha256": "81fafc6fdc8a0015432cf8a150c86943ec0327eb545447de6e2fdf236c4da418"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-Persistence.log",
+      "bytes": 4197,
+      "sha256": "3fd485c2892079520afc84f6b11d3bb891e32b1bbb16f6d02a09926180a56181",
+      "object": "objects/3fd485c2892079520afc84f6b11d3bb891e32b1bbb16f6d02a09926180a56181.gz",
+      "gzip_sha256": "9f2d35ef23627bdc74a007265d7cb5c98381cdca7ccf1880f483b3978ce88786"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-Persistence.o",
+      "bytes": 39636,
+      "sha256": "ca9dd1a4e8e26655073bd97f4e0173f0149b895658e6c26eb1de3e1caaa8d298",
+      "object": "objects/ca9dd1a4e8e26655073bd97f4e0173f0149b895658e6c26eb1de3e1caaa8d298.gz",
+      "gzip_sha256": "b3a7924ee73fd0400d4ff7654b493d5d63d58c86f5aa9cd79e9533e45d21daad"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined-20261021/short-Persistence.su",
+      "bytes": 11556,
+      "sha256": "ab1b3000a1baa9738a2dde5cf56fb74b434b0407f38f0b5f400cc0a2d37bd01d",
+      "object": "objects/ab1b3000a1baa9738a2dde5cf56fb74b434b0407f38f0b5f400cc0a2d37bd01d.gz",
+      "gzip_sha256": "e0af094990109e2533f3ebed07c4ffb54cb6c2b91357cd55716a877896b4ba99"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private-refined.py",
+      "bytes": 5035,
+      "sha256": "110dc86e95a18ae9bab51abd0743c0c855fa5147d3bc158478452e842bc159b5",
+      "object": "objects/110dc86e95a18ae9bab51abd0743c0c855fa5147d3bc158478452e842bc159b5.gz",
+      "gzip_sha256": "0ec7077d4065f419b57f13a1d910f321a19e6db4a3e810c3883dcde83eb4aca1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-private.py",
+      "bytes": 4876,
+      "sha256": "6be736a27635c1631099365ddb9c441345e394f5d75e5cd7bcd7c58b04967efc",
+      "object": "objects/6be736a27635c1631099365ddb9c441345e394f5d75e5cd7bcd7c58b04967efc.gz",
+      "gzip_sha256": "65d8ec57908f755d82a1c9a82cdc0299399671105ae760e6adc4a7357ba4bbbd"
+    }
+  ]
+}

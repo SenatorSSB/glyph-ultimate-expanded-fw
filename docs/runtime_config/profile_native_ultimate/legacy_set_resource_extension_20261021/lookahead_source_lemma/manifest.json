@@ -1,0 +1,40 @@
+{
+  "classification": "IMMUTABLE_COMPRESSED_EVIDENCE_NO_FIRMWARE_OR_HARDWARE_ACCEPTANCE",
+  "note": "Finite source existence/cache-miss lemma for empty-lookahead first outline. Not a target measurement, full image witness or complete resource proof. V1 and stronger V2 both preserved.",
+  "source_sha": "4209c03a5cd35416ab7fdd6d9a349c063e06106e",
+  "source_tree": "3d3efac98c93ac19736371fb4f0894191d714403",
+  "files": [
+    {
+      "original_path": "/private/tmp/glyph-native-lookahead-initial-state-20261021/PINS-V2.json",
+      "relative_path": "PINS-V2.json",
+      "bytes": 1780,
+      "sha256": "ab26b6c706be25d4e79cff7d485c63067ed04779c0a4c9b20e813182a33a8980",
+      "object": "objects/ab26b6c706be25d4e79cff7d485c63067ed04779c0a4c9b20e813182a33a8980.gz",
+      "gzip_sha256": "b331e0d3e44e2c6df4212aa21722e6d3f22ef7978f0532425aa4613245d60d44"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-lookahead-initial-state-20261021/PINS.json",
+      "relative_path": "PINS.json",
+      "bytes": 1532,
+      "sha256": "6847c7189821a1a3cd16ff32dfa70e6296ddb61fc84fba80d3c263f19374ddb6",
+      "object": "objects/6847c7189821a1a3cd16ff32dfa70e6296ddb61fc84fba80d3c263f19374ddb6.gz",
+      "gzip_sha256": "784f1c91d371a46e5a81072136057f6c1e091c0c7f464ab3c25010bab87686e2"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-lookahead-initial-state-20261021/REPORT-V2.md",
+      "relative_path": "REPORT-V2.md",
+      "bytes": 3689,
+      "sha256": "59c32b949a8f6a9dc3691a7e1ab98680d7ba8482aae160d01f7149eb00d85eaf",
+      "object": "objects/59c32b949a8f6a9dc3691a7e1ab98680d7ba8482aae160d01f7149eb00d85eaf.gz",
+      "gzip_sha256": "5eee108c0f3dcced31a994606a216567770477b31990ae932d5193342ac0b138"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-lookahead-initial-state-20261021/REPORT.md",
+      "relative_path": "REPORT.md",
+      "bytes": 2699,
+      "sha256": "ec011483035ad118daf219198301b2c9af6a866cb2369508c7de27a1a9a9e8ab",
+      "object": "objects/ec011483035ad118daf219198301b2c9af6a866cb2369508c7de27a1a9a9e8ab.gz",
+      "gzip_sha256": "e2cc8ac3fbc35066e58a05ddd3ef990f1308cd4c054c77fa1b488915e216ba15"
+    }
+  ]
+}

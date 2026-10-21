@@ -1,0 +1,201 @@
+{
+  "classification": "PRIVATE_OBJECT_LAYOUT_CHARGE_NOT_FINAL_LINKED_RAM",
+  "abis": {
+    "short": {
+      "objects": [
+        {
+          "unit": "Persistence",
+          "section": ".data._ZN12_GLOBAL__N_115phase_workspaceE",
+          "size": 32,
+          "alignment": 4,
+          "object_sha256": "147d6cec09128f4fad97377a39b5604faa5106d72d2835d963e76c8ba4449eab"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_113capture_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "147d6cec09128f4fad97377a39b5604faa5106d72d2835d963e76c8ba4449eab"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_112source_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "147d6cec09128f4fad97377a39b5604faa5106d72d2835d963e76c8ba4449eab"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_114save_file_slotE",
+          "size": 176,
+          "alignment": 8,
+          "object_sha256": "147d6cec09128f4fad97377a39b5604faa5106d72d2835d963e76c8ba4449eab"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_113import_inputsE",
+          "size": 24,
+          "alignment": 4,
+          "object_sha256": "b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore14CollectGarbageEvE6search",
+          "size": 40,
+          "alignment": 4,
+          "object_sha256": "b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore12InitializeV2ERKNS_9DirectoryEE4slot",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_120mounted_write_inputsE",
+          "size": 20,
+          "alignment": 4,
+          "object_sha256": "b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L15dispatch_loadedE",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "392c33e4ee111d746483fab3b5dc2ea2ae835c96783823fccacbaceaac46af37"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_pendingE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "392c33e4ee111d746483fab3b5dc2ea2ae835c96783823fccacbaceaac46af37"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_handledE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "392c33e4ee111d746483fab3b5dc2ea2ae835c96783823fccacbaceaac46af37"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_19set_phaseE",
+          "size": 88,
+          "alignment": 8,
+          "object_sha256": "392c33e4ee111d746483fab3b5dc2ea2ae835c96783823fccacbaceaac46af37"
+        },
+        {
+          "unit": "backend_init",
+          "section": ".bss._ZN12_GLOBAL__N_113backend_phaseE",
+          "size": 52,
+          "alignment": 4,
+          "object_sha256": "5e6c50bab3e3127df28123b93bab51329afd00554d4b718cc57c694a3d6440ee"
+        }
+      ],
+      "gross": 458,
+      "alignment_minus1": 41,
+      "conservative_charge": 499
+    },
+    "default": {
+      "objects": [
+        {
+          "unit": "Persistence",
+          "section": ".data._ZN12_GLOBAL__N_115phase_workspaceE",
+          "size": 32,
+          "alignment": 4,
+          "object_sha256": "d699deed834c74cae49af3b9d080555be3709c885bb956809b357b9f5d21ac14"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_113capture_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "d699deed834c74cae49af3b9d080555be3709c885bb956809b357b9f5d21ac14"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_112source_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "d699deed834c74cae49af3b9d080555be3709c885bb956809b357b9f5d21ac14"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_114save_file_slotE",
+          "size": 176,
+          "alignment": 8,
+          "object_sha256": "d699deed834c74cae49af3b9d080555be3709c885bb956809b357b9f5d21ac14"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_113import_inputsE",
+          "size": 24,
+          "alignment": 4,
+          "object_sha256": "2b36a3c059ac4cf9a9b7b34943cc4ab99eee71fcff47c8e2f27791c74154a44b"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore14CollectGarbageEvE6search",
+          "size": 40,
+          "alignment": 4,
+          "object_sha256": "2b36a3c059ac4cf9a9b7b34943cc4ab99eee71fcff47c8e2f27791c74154a44b"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore12InitializeV2ERKNS_9DirectoryEE4slot",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "2b36a3c059ac4cf9a9b7b34943cc4ab99eee71fcff47c8e2f27791c74154a44b"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_120mounted_write_inputsE",
+          "size": 20,
+          "alignment": 4,
+          "object_sha256": "2b36a3c059ac4cf9a9b7b34943cc4ab99eee71fcff47c8e2f27791c74154a44b"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L15dispatch_loadedE",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "4d7db494525053357f66273be3b69a3a27a0f8d29e3e31b654a0fe85e956eed2"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_pendingE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "4d7db494525053357f66273be3b69a3a27a0f8d29e3e31b654a0fe85e956eed2"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_handledE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "4d7db494525053357f66273be3b69a3a27a0f8d29e3e31b654a0fe85e956eed2"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_19set_phaseE",
+          "size": 88,
+          "alignment": 8,
+          "object_sha256": "4d7db494525053357f66273be3b69a3a27a0f8d29e3e31b654a0fe85e956eed2"
+        },
+        {
+          "unit": "backend_init",
+          "section": ".bss._ZN12_GLOBAL__N_113backend_phaseE",
+          "size": 56,
+          "alignment": 4,
+          "object_sha256": "ee6c9b21e8814178b59c7540cd74e008e13bcba80df62ccd6aab9cb0e85b8951"
+        }
+      ],
+      "gross": 462,
+      "alignment_minus1": 41,
+      "conservative_charge": 503
+    }
+  }
+}
