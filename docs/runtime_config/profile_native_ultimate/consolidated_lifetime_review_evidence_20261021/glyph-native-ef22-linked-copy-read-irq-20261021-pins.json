@@ -1,0 +1,77 @@
+{
+  "kind": "EXACT_EF22_APPENDIX_SOURCE_ELF_EVIDENCE_PINS",
+  "files": {
+    "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.md": {
+      "bytes": 11086,
+      "sha256": "cfc8ec2961922434901991cb70384a708abcae24f251eade3dddf87398fa984f"
+    },
+    "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.json": {
+      "bytes": 9512,
+      "sha256": "da1b2bc7068f02cc66f319d521a26a0ff574d526c2f966eaf6b39e78ef714486"
+    },
+    "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021-frames.json": {
+      "bytes": 79515,
+      "sha256": "eaa179275b9486eaf2654a73c372eb5e183b79f8153ce1a7f47cd1f16c2a5ed1"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf": {
+      "bytes": 5592128,
+      "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+    },
+    "/private/tmp/glyph-native-ef22-focused-extract.py": {
+      "bytes": 3940,
+      "sha256": "acaf92a1038e5553ca21cfc8ef6c5bf8d5b386b1e330c1fffefb7da2586c98c0"
+    },
+    "/private/tmp/glyph-native-ef22-focused-exact-functions.json": {
+      "bytes": 2814827,
+      "sha256": "53310849647be5db0fae6762a382e1f64694336532851d4b830503431abc1a2b"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/build.json": {
+      "bytes": 3458,
+      "sha256": "190d8fe938d691760318d23694fa531988c316a7a8768a467e78ca2fe7e7addf"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/disassembly.txt": {
+      "bytes": 11238382,
+      "sha256": "f0e6206eaa4a8e6129a90a3273e59fd54e8fd96ec0d830c43edf12f40111a0e1"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/symbols.txt": {
+      "bytes": 372827,
+      "sha256": "45d5aa7f12d78ff244a5e77be5540e160ac7c4798848dd06fcda5d0392e54602"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/elf_headers.txt": {
+      "bytes": 671035,
+      "sha256": "3cf498b5f62aee060ade44d51d17343ae9fb6219e5e587c66d6d691510a5dcfb"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/elf_inspection_pins.json": {
+      "bytes": 894,
+      "sha256": "1087aba2df2ac6e42ff4e49c3745228939cacc547cf2da613648df33282766c6"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/build_dependency_pins.json": {
+      "bytes": 10074734,
+      "sha256": "70a3b5ce750b59019946a3b0b80b09cb7ac1858fe9706316f2bda86e60ea95e7"
+    },
+    "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.md": {
+      "bytes": 14077,
+      "sha256": "0097e512a79245fdbcb4ef9bccbd3a9ae8dfb20e6a86e1c0761ee551cf35ff26"
+    },
+    "/private/tmp/glyph-native-legacy-copy-read-proof-20261021-pins.json": {
+      "bytes": 10201,
+      "sha256": "061fd8c433e93e63027213d0e505f421872b9299161086bd65cb378101a20d16"
+    },
+    "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.md": {
+      "bytes": 8007,
+      "sha256": "833960549a1546a68cf3283210d1c8dd50061b5cfd5818d5e93fb9df2e75a796"
+    },
+    "/private/tmp/glyph-native-configurator-cdc340-witness-20261021-pins.json": {
+      "bytes": 3975,
+      "sha256": "2e271ff46f0e1a71f57b2439f98dfb30348c6070aa487f417e99a5d8f8044f27"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021-manifest.json": {
+      "bytes": 15566,
+      "sha256": "f2da41a6c12f96f5db6e660af42b60d9d35cd7dfbeeb8d078b7d664b96cb4821"
+    },
+    "/private/tmp/glyph-bootrom-license-provenance-20261021.json": {
+      "bytes": 8096,
+      "sha256": "29e0aa7f2be22d4d22e9924367ba65ba4db722bf66ee89b8a5bf0ff64d1c8048"
+    }
+  }
+}

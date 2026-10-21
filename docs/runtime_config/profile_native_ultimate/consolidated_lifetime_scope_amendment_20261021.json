@@ -1,0 +1,215 @@
+{
+  "schema_name": "glyph_gp_native_001_consolidated_lifetime_curation",
+  "schema_version": 1,
+  "disposition": "ADOPT_BOUNDED",
+  "role": "Glyph Work-Order Curator",
+  "finite_role_complete": true,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "recorded_utc": "2026-10-21T11:22:42.707835+00:00",
+  "authority": "Same READY GP-NATIVE-001, existing exact bounded lifetime amendments and direct owner broader-filesystem support decision. One consolidated ordinary source-free engineering scope adjudication, not new product work/order/successor, standing role, domain reconsideration, semantic decision or device authority.",
+  "independence": "Curator read frozen primary proposal, actual committed source, independent all31/resource/IRQ/linked reports and rehashed exact custody ELF. This is independent review of this amendment, not post-implementation review or resource acceptance. Curator did not edit source, worktrees, Git, canonical queue or checkers. Root sole publisher; no reviewer-of-review chain required.",
+  "input_pins": {
+    "canonical_local_sha": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+    "live_verification": "Root supplied fresh live canonical/feature verification; local canonical clean and exact. Curator did not independently contact network. Root refreshes live truth before adoption/publication/execution.",
+    "canonical_sha256": {
+      "docs/project/ACTIVE_AGENT_QUEUE.md": "98183cb672e4a0c74d494626053cebcc0203945df58fc36c547eb2985b23f77d",
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "fca3ade4b7f54fb48ae3b188da8a59a74db08bc68ca0f992a938611750a93065",
+      "docs/runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json": "984439bd73d6e1099757f4b56cf0f55c4ec108f0935ebcd49c6ca8e53b245b2c",
+      "docs/runtime_config/profile_native_ultimate/boot_persistence_layout_scope_amendment_20261021.json": "f5ce38f7ec511be339ea6ec5537ef09c64ad998ae815dea308275c632bcc9011",
+      "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e"
+    },
+    "feature_sha": "35e8e5af99badf425fd832968040e8fd6a23441a",
+    "feature_tree": "bc53491c921c082bd43d72d9ad4cbbaf0eeb4546",
+    "primary_proposal_git_path": "docs/runtime_config/profile_native_ultimate/layout_phases_20261021/load_capture_differential/private_proof/next_lifetime_proposal_primary_identity.md",
+    "primary_proposal_sha256": "7550aafffb451851825b74aa02cc258dfc7437d2ababe1d322d6520a67acb514",
+    "frozen_build_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+    "frozen_build_tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+    "production_source_sha256": {
+      "HAL/pico/src/core/Persistence.cpp": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1",
+      "HAL/pico/include/core/Persistence.hpp": "cdf422671b6285047a6974f41c4cdd939b587293276c58a9928a4be755532566",
+      "HAL/pico/src/core/ProfileStore.cpp": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8",
+      "include/core/ProfileStore.hpp": "1a8c8fad3f4f926abafea2301a5e475c6cad4729225214d0389b2e1627ad21a7",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "5eef0996be603adc34f58c197ec94965762c5e160d72623df73a43ecd865fd35"
+    },
+    "feature_selected_source_equals_build": true,
+    "independent_reports_sha256": {
+      "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021.md": "51ca34f50cae1f014ba376972c10d4b9daf7c4651411df77f636439ba3b0084f",
+      "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021.json": "236155ddca2a3b68a13afe7630452dbbddeeddf8c196a355906f74ac04f95f68",
+      "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021-pins.json": "911101211faaef41c315633d22957afe4441a21baed2f206564237cddfbccbec",
+      "/private/tmp/glyph-native-9cff-source-resource-review-20261021.md": "37090b4c3233d4f75a085220526a180120fccb70fa6bdeaeb0fc634e2d03f9ec",
+      "/private/tmp/glyph-native-9cff-source-resource-review-20261021.json": "462fc3bc4101a947ad8ab2b65c231b42675ab401a0e59c209567e1cc0a990ae2",
+      "/private/tmp/glyph-native-9cff-source-resource-review-20261021-inputpins.json": "7a0dee142f7340aff5c7661ffbaafa5ea697a8feb4f243f1f6c706d30230c04e",
+      "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.md": "0097e512a79245fdbcb4ef9bccbd3a9ae8dfb20e6a86e1c0761ee551cf35ff26",
+      "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.md": "833960549a1546a68cf3283210d1c8dd50061b5cfd5818d5e93fb9df2e75a796",
+      "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.md": "cfc8ec2961922434901991cb70384a708abcae24f251eade3dddf87398fa984f",
+      "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.json": "da1b2bc7068f02cc66f319d521a26a0ff574d526c2f966eaf6b39e78ef714486",
+      "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021-frames.json": "eaa179275b9486eaf2654a73c372eb5e183b79f8153ce1a7f47cd1f16c2a5ed1",
+      "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021-pins.json": "218b13734c991eefe930dc3c00cf6a2db6823ed4287aeb3ac4aace149908b79e"
+    },
+    "ELF": {
+      "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf",
+      "bytes": 5592128,
+      "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+      "independently_rehashed_by_curator": true
+    }
+  },
+  "findings": {
+    "exact_linked_qualified_witness_totals_bytes": {
+      "boot_reconcile_control": 2140,
+      "boot_reconcile_abort": 2164,
+      "update_first_record": 2052,
+      "duplicate_first_record": 2052,
+      "legacy_set_first_remove": 2196,
+      "copy_output_open": 2308,
+      "identity_existing": 2168,
+      "identity_published": 2200
+    },
+    "usable_per_core_reserve_bytes": 2048,
+    "classification": "Source-feasible exact-ELF retained compositions under report predicates; not physical overflow observations or complete upper bounds. Loop32 supersedes preliminary40 only for corresponding linked route; historical reports preserved. LATER LIFECYCLE REFINEMENT supersedes two original service-reconcile initial-orphan rows2116/2140: not established source-feasible witnesses. Normal Begin must reconcile durable phase3 before backend service or enter permanent read-only recovery; failed pre-control3-write service mutation leaves phase2; durable phase3 requires previous successful consistency-bearing control3. Query initial-orphan nested retry AND nested-PriorCompact initial unchanged boot-state predicate are excluded by their lifecycle transition invariants, not by domain narrowing. See independently pinned35e8 joint-state erratum; service2116/2140 are CONDITIONAL_GENERATED_STATE_COMPOSITIONS, not established overflow witnesses. Service generated-state recovery and other ordinary-generated nested-PriorCompact histories remain unresolved final proof obligations; no fault-union invention.",
+    "minimality": "Direct hash entry inventory has exactly three calls; non-Identity Prepare1956/Execute1988 conservative rows fit2048, so no hash body change is needed. Existing Identity280 retained File/check frame is the minimal A target. For copy, idealizing two auto Files to352 and deleting all copy locals plus Execute96 still leaves2060 before ROM/padding under supplied feasible prefix, supporting reuse of precisely one existing input slot rather than scratch isolation alone.",
+    "prior_source_validation": "Independent37-case ASan/UBSan PASS found no material Load/Capture lifetime/order/transaction defect. Writer both-ABI differential and Store/Save traces/mutants remain separately attributed evidence; not this Curator test execution or blanket current candidate PASS."
+  },
+  "activation": "Publish this exact source-free amendment plus matching implementation contract and sole GP-NATIVE-001 scope append on fresh canonical and verify live readback BEFORE newly scoped source edits. Named independent findings and measured copy need satisfy this amendment; no further speculative automatic activation. All original source/H3 holds/gates remain.",
+  "allowed_source_paths": [
+    "HAL/pico/src/core/Persistence.cpp",
+    "HAL/pico/include/core/Persistence.hpp",
+    "HAL/pico/src/core/ProfileStore.cpp",
+    "include/core/ProfileStore.hpp",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+  ],
+  "permissions": [
+    {
+      "id": "A",
+      "disposition": "ADOPT_IDENTITY_VALIDATION_ONLY",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "Persistence::LegacySourceIdentity",
+        "one necessary private noinline source-validation helper/declaration"
+      ],
+      "authority": "Only retire the original availability/open/check/explicit-close/automatic-source-File phase by returning from a private helper before the SAME unchanged hash_file call. LegacySourceIdentity becomes a small synchronous driver. Keep the original source path, automatic File owner, and check then close/validity order; no slot conversion or new File/buffer/hash owner.",
+      "preserve": "Availability precedes construction; !source refusal preserves destructor fallback. CheckSavedConfig returns valid, explicit close executes even for invalid checksum, then close failure/invalid refuses. On success original close makes opened=false so earlier destructor has zero I/O. No digest side effect before the unchanged hash, and unchanged hash success/failure effects. Preserve all early/fallback close counts/order and statuses.",
+      "excluded": "hash_file BODY remains byte-identical. Historical constructor/payload hash proposal is NOT adopted, not contingent self-activation, and receives no edit authority. No new hash scratch/static state/buffer or read/retry/close."
+    },
+    {
+      "id": "B",
+      "disposition": "ADOPT_COPY_INPUT_SLOT_AND_RETURNED_CAPTURE_PHASES",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "existing copy_checked_file",
+        "minimal existing SaveFileScope/save_file_slot naming/access adjustment",
+        "one necessary private noinline copy_open_files helper",
+        "Persistence::ExecuteCaptureSource and necessary private returned copy/verification/publication helpers/declarations"
+      ],
+      "authority": "Reuse ONLY the ONE already-existing aligned sizeof(CheckedStorageFile) Save raw slot (exact current ARM176, each ABI actual size mandatory) for the ORIGINAL copy INPUT File. OUTPUT remains the original automatic File. No second raw File slot, additional File owner or buffer. Existing SaveFileScope may receive minimal name/access adjustment to accurately express this shared owner; its constructor/destructor semantics remain identical.",
+      "lifetime": "Input guard constructs first using original from/read path, then original automatic output constructs using original to/w+ path EVEN IF input failed. Only after both constructors evaluate copied=input&&output. Both handles remain simultaneously live throughout original transfer. A returned noinline copy_open_files may contain the original scratch64/remaining/read/write/output.sync/input.close/output.close/uncertain/result logic. Explicit input close precedes output close, both execute as before including failed input; uncertain is sampled at the original pre-destructor point. Output destructor precedes input guard destructor on every return, including constructor failure, preserving fallback closes exactly. Slot reset before placement construction and cleared after explicit destruction; no live-slot alias.",
+      "capture": "Keep first temp Remove and its exact uncertainty handling, THEN copy helper, THEN temp hash/compare, THEN SAME Rename and conditional final identity/compare/fencing/result. Separate original comparison digest/Result locals into returned verification/publication phases so they retire before copy; no new digest/scratch/path/body buffer. Existing local32 digest may remain local solely in its reached later phases. No operation reorder, skipped output open, serialization/reopen, extra read/write/retry or digest/fence/status correction.",
+      "ownership_condition": "Mandatory source proof before adoption execution: all slot-acquiring operations run synchronously on core0; Capture calls no Save, Save calls no Capture, no validator/storage/trace/fault callback or yield recursively acquires the slot and no IRQ/core1 writer can acquire it. Current production CheckedStorage compiles fault invocation out; acceptance Hook only classifies/consumes state, validator is semantic/RGB only, and native/USB callbacks must be audited for actual non-reentry. Preserve that property with exact source/call-graph and fault/observer tests. No new production reentry refusal/lock/heap/queue or broadened API. If actual overlap is found, stop; do not assume it away or add another slot.",
+      "supersession": "Precisely supersedes earlier Save-only/no-migration-slot restriction ONLY for original copy input. Identity, Load, hash, ReadLegacyProfile and copy OUTPUT remain automatic under existing permissions. Old adjudications stay immutable historical records."
+    },
+    {
+      "id": "C",
+      "disposition": "ADOPT_RECONCILE_RETURNED_DECISION",
+      "paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp"
+      ],
+      "methods": [
+        "ProfileStore::ReconcileTransaction",
+        "necessary private noinline read/decision helper and small synchronous action executor/declarations"
+      ],
+      "authority": "Read/control/root/directory/SameDirectory and phase decision preparation must RETURN before the SAME control2 write or aborted-checkpoint PublishDirectory. Use existing _next/_directory and bounded owned scalar decision metadata; preserve public bool signature. No new Directory/profile owner, body, read/retry or transaction algorithm.",
+      "preserve": "If !_uncertain preserve exact _ready&&!_read_only_recovery. Otherwise LoadControl then LoadDirectory then read-only refusal in exact short-circuit order. phase3 equal generation requires SameDirectory before original control2. phase3 next generation captures original reserved highwater/attempt identity/result and accepted_request token comparison, copies directory to _next, sets Aborted receipt ONLY for accepted request, preserves maintenance prior receipt, applies max reserved highwater, increments generation; _uncertain=false at original point before PublishDirectory and true on its failure. Other phase3/generation/phase2/SameDirectory failures and final _uncertain=false remain exact. Preparation may assemble existing _next at original reached point, not publish early. Record no-op/refused/action decision reset on every exit.",
+      "limits": "No QueryTransaction or retry policy body change. All callers use unchanged Reconcile semantics, including potential nested query retry; unresolved joint states stay in final proof. Preserve control/root write sequence, fences, read-only flags and LastDiagnostic/results."
+    },
+    {
+      "id": "D",
+      "disposition": "ADOPT_UPDATE_AND_SHARED_CREATE_DUPLICATE_PHASES",
+      "paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp"
+      ],
+      "methods": [
+        "ProfileStore::Update",
+        "ProfileStore::Create(const UltimateProfile&,const char*,uint32_t,const TransactionIdentity&)",
+        "ProfileStore::Duplicate(uint32_t,uint32_t,const char*,uint32_t,const TransactionIdentity&)",
+        "existing PrepareCreate/PrepareDuplicate/FinalizePreparedCreate and necessary private returned prep/execute/finalization helpers/declarations"
+      ],
+      "authority": "Real returned preparation, record publication, then metadata/commit finalization. Reuse existing nonoverlapping PreparedCreate scalar/result/identity/name storage where source-proven; no second body/name/path buffer, candidate, lease or directory owner. Duplicate and public Create may call the SAME shared returned Create phases so no public-Create adapter frame remains beneath first record publication. Do not repeat failed inline-Create-only probe.",
+      "update_order": "Keep Start(t) and its return first, then Find/notfound, exact revision conflict, UINT32_MAX Full, cross-kind Invalid, semantic ValidateProfile, encoded-size/max and Admit, PrepareProfileWrite (including its current repeated validation/encoding behavior) and only then SAME PublishPreparedProfile. Capture original id/rev/index/schema/identity into bounded owned metadata, release profile borrow after exact encoding before publication. On failure retain same UnknownOutcome/IoFailure precedence. Only successful record publication permits _next copy, previous_revision/revision/payload_version edits and SAME Commit.",
+      "duplicate_order": "Keep first PrepareDuplicate Start/Find/revision/ReadProfile/PreserveProfile, duplicate_prepared outcome and exact failure/status. Then SAME second Create Start, checks, ValidateProfile, size, admission, encoding, publication, _next/receipt/Commit in original order. NEVER remove or coalesce either Start, Query/replay, admission, validation or payload-preservation step. Keep _candidate_profile and native payload lease stable through original transaction/read/encode boundaries and no extra owner. All pointer/ready/action metadata reset on every return without changing results or clearing a still-live lease.",
+      "limits": "Historical overloads, ReadProfile/PreserveProfile/evaluator/Start/Query algorithms, filesystem operations and active revision semantics unchanged. Shared factoring may change only private declaration/call structure of this exact Create sequence, not other operation behavior. Existing control/directory commit order and unknown-outcome/receipt statuses remain exact."
+    },
+    {
+      "id": "E",
+      "disposition": "ADOPT_LEGACY_SET_PREPARATION_PHASE",
+      "paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+      ],
+      "methods": [
+        "ConfiguratorBackend::HandleSetConfig",
+        "necessary private noinline legacy-SET preparation helper/declaration and small existing save/publication driver"
+      ],
+      "authority": "Retire original legacy SET decode/receipt/validation preparation before SAME persistence.SaveConfig(candidate), then SAME _config=candidate and legacy response. Keep actual single ConfigWriteCandidate owner, public signature, bytes and synchronous input/response flow; no extra Config/receipt/digest buffer or changed storage API.",
+      "preserve": "Same recovery/read-only fence guards and WritePacket return behavior; same optional compact durable Load first and receipt token/digests/id/generation/mode/root/migration-receipt capture. SAME candidate reset to defaults, RejectEmbedded, pb_decode with current formatted decode error/write then false, ClearEmbeddedCallbacks, compact negotiated-format refusal, restore firmware-owned receipt fields, ValidateConfig/error packet then false, per-mode selected-record Read and engine mismatch with existing return WritePacket semantics, zero-profile backing default. Only then same SaveConfig; failed save emits original error and returns false; success copies to _config, writes CMD_SUCCESS and returns true regardless current success WritePacket result as before. Do not normalize differing error return behavior or add CAS.",
+      "limits": "No other legacy GET/response/packet transport/ProfileStore dispatch algorithm/body authority. Keep RX/fault scope/lease boundaries and status order for existing ProfileStore siblings unchanged; legacy SET phase cannot acquire/release their lease, interleave response encoding/TX with mutation or add another RX owner. Errors may be encoded exactly at original reached failure point within preparation."
+    }
+  ],
+  "slot_ownership_source_proof": {
+    "classification": "Source-grounded admissibility at frozen ef22/35e8; preserve and revalidate on implemented source, not a target concurrency measurement.",
+    "pins": {
+      "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "HAL/pico/include/core/CheckedStorageFile.hpp": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c",
+      "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "include/core/ProfileStoreReadTrace.hpp": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+      "config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+      "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "include/core/RecoveryInitialization.hpp": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a"
+    },
+    "facts": [
+      "The four Save slot scopes are VerifyExpectedConfigGeneration, StageSaveConfig (which calls WriteStagedConfig), VerifyStagedConfig and uncertain PublishStagedConfig readback; each returns/destroys before the next scope. Their source invokes no CaptureLegacySource or LegacySourceIdentity. Capture preparation/copy/verification/publication invokes no SaveConfig/SaveConfigIfGenerationMatches and contains no arbitrary writer callback.",
+      "CheckedStorageFile concrete Stream methods call CheckedStorage directly; production fault() compiles to Fault::None. Strict-candidate ProfileStoreFaultControls::Hook only checks/classifies/consumes single-shot fields, no writer call; production read trace compiles inert. Test observer hooks must remain observation/fault classification only, never recursive Save/Capture.",
+      "CheckSavedConfig performs seek/header/CRC/read only. Installed validate_glyph_config calls pure config semantics and RGB target checks; Capture/copy and Save slot-owned I/O phases do not call it. Native protobuf Encode/Decode callback source only validates lease then protobuf bytes/read/compare; stream callbacks are concrete File read/write, not application writer dispatch.",
+      "Source-documented synchronous core0 Config/store lane and independently pinned IRQ/core1 reports exclude concurrent filesystem writers; no slot acquisition is deferred to loop/IRQ/core1. No foreground yield/callback calls the slot-acquiring operations. Preserve this source property; new source/indirect consumer drift invalidates it."
+    ],
+    "required_validation": "Exact post-change call/indirect/constructor/destructor audit plus old/new fault/observer/bothABI/reset tests must confirm only one slot live. This authority adds no generic reentrancy support, guard, lock, retry or second owner."
+  },
+  "workspace_limits": "ONE existing File slot only. Combined new layout workspace remains <=512 TOTAL across every earlier and this amendment, including raw slot, alignment and all enum/scalar/result/action metadata. Current gross230 before alignment is attributed input, not a new cap or final measurement. Existing fixed buffer reuse requires real nonoverlap and owner/reset/all-exit audit; no active/candidate/view scratch reuse. Actual both-ABI aligned sizes, static initialization, constant profile-count memory and final linked static<=199632/added<=12288 mandatory. All original numeric_caps unchanged byte-for-byte.",
+  "mandatory_validation": [
+    "Fresh old/new production adapter differential at both enum ABIs for every new phase, exact operation/trace/results/errors/digest/Config bytes/generation/fence/token/receipt/raw-NOR correspondence. Pin bases and fault matrix; previous Load/Capture7488, Store1071 and Save1636 PASS reports remain attributed historical evidence and cannot substitute for new changes.",
+    "Identity available/unavailable, valid/invalid checksum, constructor/Open/Stat/check/read/explicit-close and destructor failures: no hash on refusal, unchanged hash/digest effect only after validation return. Confirm hash body byte-identical and its complete unchanged direct call inventory.",
+    "Copy input THEN output construction even input fails; exact two simultaneous handles, reads/writes/sync, both explicit-close results/order, reverse destructor fallback, original uncertainty observation, failed constructor cleanup, next-operation/Save/Capture slot reset and no overlap/reentry. Fail/LostAck before/after every relevant checked operation, no new state acceptance. Meaningful mutants must detect skipped output construction, close/destructor inversion/omission and stale/aliased slot.",
+    "Capture existing snapshot equality/mismatch, source/temp/final hashes, reserve/capacity refusal, first absent temp Remove and healthy metadata compaction, later relocation/recovery, publication uncertainty/fencing/reboot and actual broader unrelated-directory/orphan/PENDING_MOVE states. Never infer absent Remove normalized metadata or append capacity.",
+    "Reconcile phase2/3 current-published/aborted/maintenance/checksum/read-only/error/uncertain branches, attempted token conflict and reserved highwater, every control/root fault/lostack and same-request retry/reboot/query receipts. Preserve two-domain reconciliation and direct/nested caller coverage; unresolved joint states require proof, not silent exclusion.",
+    "Update/Create/Duplicate all success/refusal/replay/token/CAS/revision/UINTMAX/cross-kind/semantic/size/admission/record-fault/directory-fault/unknown/reboot/current+previous/active/migration/native/legacy cases, exact BOTH duplicate Start traces and native owner/lease poisoning/reset controls. Preserve no directory edit before record success.",
+    "Actual legacy SET production decode/recovery/compact receipt/native rejection/format/reference/engine/validation/save error and success ordering, exact response/return behavior, no live-config publish on any failed Save, generation/fence/receipt immutability and next-call reset. Existing RX/native/fault ticket scopes, GP-BIND identity16/72 and diagnostic protocol assertions stay exact.",
+    "Complete fresh final independent source and exact O3 linked ELF/map/disassembly/.su/callback/indirect/exception/PRIMASK/ROM/IRQ accounting of ALL31 classes and every sibling constructor/payload/destructor/publication path. New measured frames required; no promised savings or PASS. Feasible boot300/CDC340 differ from upper unions; mask/ROM alternatives are not blindly added. No double-counted forceconsistency/bd_prog/bd_flush/internal local branches or obsolete loop40.",
+    "Directly affected existing tests/negative controls/both ABIs and frozen native/legacy/oracle contracts; Tier1 and affectedTier2 FAIL/TIMEOUT/INCOMPLETE/UNAVAILABLE block honestly. Existing negative probes and incomplete evidence preserved, no global framework cleanup authority.",
+    "Final clean committed candidate/full inputs/generated/source identity, canonical Mk6 build, actual static/flash/resource limits, exact ELF/UF2 hashes/sizes/content-addressed custody and fresh independent final review precede hardware packet. Concrete reviewed candidate-specific owner device approval, human exact HEP PASS, source-free R/E then tested-source integration and separate strict DONE remain mandatory. No device action now."
+  ],
+  "preserved_invariants": [
+    "Original numeric_caps, all source/test closed paths outside exact methods, M1/frozen architecture/schema/engine/oracles, active+candidate7800/view560/frame144/validation256 ownership remain unchanged.",
+    "Both usable2048 core stacks, static199632/added12288, filesystem524288/recovery16384/capacity20 and partition/storage/API/root/recovery/ID/transaction semantics unchanged. No broader accepted-state refusal/erasure/quarantine/pristine history requirement.",
+    "Exact diagnostic design/wire/512 subordinate cap and original GP-BIND003 identity16/72 stay exact. No native algorithm/transport commands/SDK/IRQ/startup/optimization/config.cpp/caller changes, heap, queue, hot swap, new persistence, device authority or hardware acceptance.",
+    "Prior immutable adjudications/build/artifact/failed probe/test chronology unchanged. ef22 is build-only P1 OPEN, NOT hardware accepted or final repaired candidate. Watermark is supplementary, no static proof substitute; Nunchuk NOT_TESTED/root cause UNPROVEN."
+  ],
+  "publication": {
+    "canonical_record_path": "docs/runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json",
+    "sole_order_id": "GP-NATIVE-001",
+    "instructions": "Root sole publisher adds this JSON and optional narrative, appends the exact scope_append_text to implementation_contract.scope_clarifications and sole GP-NATIVE-001 scope, adds narrow exception reference in contract. Add no source path (all six already closed). Preserve every other order/status/field and all original keys; no rewrite of prior adjudications. Fresh canonical truth, source-free diff/checks/adoption then live readback before source execution. This is independent review of the amendment itself; no reviewer-of-review required.",
+    "scope_append_text": "GP-NATIVE-001 consolidated lifetime-only extension 2026-10-21: adopt ONLY docs/runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json A-E in existing six Persistence/ProfileStore/Configurator source/header paths. A ONLY LegacySourceIdentity original automatic File/check/explicit-close/destructor returned before SAME unchanged hash_file; historical hash-body alternative NOT adopted. B ONLY original copy INPUT may reuse the ONE existing Save File slot with original automatic OUTPUT, unconditional second construction, simultaneous handles, original explicit-close/uncertainty/reverse-destructor order and source-proven synchronous core0 nonreentry; returned copy/verification/publication phases keep SAME operations. This precisely supersedes old Save-only slot exclusion ONLY copy INPUT, no other migration conversion. C ReconcileTransaction original read/decision returns before SAME control2/aborted checkpoint, exact tokens/highwater/receipts/uncertainty preserved. D Update and shared original Create/Duplicate returned phases preserve BOTH duplicate Starts and all validation/admission/payload lease/record-before-directory behavior. E ONLY legacy HandleSetConfig original receipt/decode/validation prep returns before SAME Save and SAME live Config publication/legacy response, exact error returns/bytes. All original/frozen keys/caps, identity16/72, diagnostic design and TOTAL layout512 stay exact; no new slot/buffer/owner/path/config.cpp/SDK/IRQ/startup/optimization/semantic/domain/device authority. Exact current eight valid witnesses plus lifecycle correction motivate bounded repair; all31 fresh linked proof/tests/bothABI/review/build/custody/hardware gates remain. P1 OPEN."
+  },
+  "resource_gate": "NATIVE-REVIEW-P1-STACK OPEN; all31 complete bounds still OPEN. This finite authority question is adjudicated; no resource/physical PASS or completed implementation claimed."
+}

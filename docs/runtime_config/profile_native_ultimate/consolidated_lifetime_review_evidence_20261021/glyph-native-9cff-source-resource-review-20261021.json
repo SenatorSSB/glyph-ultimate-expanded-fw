@@ -1,0 +1,879 @@
+{
+  "kind": "FINITE_INDEPENDENT_9CFF_DELTA_AUDIT_AND_31_CLASS_SCREEN",
+  "checkpoint": "9cff6df7dac544f8d88237f37cd62c26276c690b",
+  "tree": "9a18bd179820c47bdc1a38f1a1afed7b28005f6f",
+  "delta_base": "a48190ca4b82d2274cd85b538dc35840139b5b7c",
+  "engineering_build": {
+    "head": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+    "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+    "tracked_status": "",
+    "full_status": ""
+  },
+  "elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "source_identical_9cff_to_ef22": true,
+  "source_delta_verdict": "NO_MATERIAL_LIFETIME_ORDER_OR_TRANSACTION_DEFECT_FOUND",
+  "whole_resource_verdict": "OPEN_SOURCE_FEASIBLE_OVER_RESERVATION_BRANCHES_IDENTIFIED",
+  "finite_screen_complete": true,
+  "final_all_path_certificate": false,
+  "observed_model": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "hardware": "NOT_TESTED_NO_DEVICE_ACTION",
+  "target_stack_measurement": "NOT_MEASURED",
+  "independent_test": {
+    "command": "GLYPH_PROFILE_STORE_SANITIZERS=1 python3 tools/check_glyph_profile_store_config_persistence.py",
+    "snapshot": "/private/tmp/glyph-9cff-source-review-20261021",
+    "result": "PASS_37_ASAN_UBSAN_CASES",
+    "limits": "Named-file doubles; targetFS powerloss not emulated; no full build or broader old oracle matrix rerun"
+  },
+  "source_audit": [
+    "Load440 read/validation/helper returns before PriorCompact Rename; destructor fallback and original return statuses retained; caller Config/generation publication only after same successful Rename. load_phase resets every exit and stores source/CRC, never stack addresses.",
+    "Capture CheckInput280 closes/destructs original source before returned hash/admission; static filename points to original static constants. Capacity/reserve formula and all branch order retained. Prepare returns before Execute initial Remove/copy/hash/memcmp/Rename/identity/fencing. ExistingExact returns same bool and digest semantics. Capture phase resets every exit.",
+    "Original Config candidate relocated into namespace, not duplicated. No extra wholeConfig/scratch/file slot. copy/hash/Identity bodies differ only noinline. ProfileStore delta only braces/formatting of existing prep phases.",
+    "Current tests37 independently PASS. Writer full P4 and Load/Capture differential remains separately attributed work; this review is not a blanket final PASS."
+  ],
+  "findings": [
+    {
+      "id": "BOOT-RECONCILE-CONTROL",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Begin",
+          24
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1824,
+      "premask": 16,
+      "feasible_irq": 300,
+      "total": 2140,
+      "reservation": 2048,
+      "predicate": "Normal phase3 already-published control with healthy root/current matching identity; no earlier filesystem writer; admitted applicable positive-orphan repair reaches nested compaction.",
+      "named_methods_for_bounded_scope": [
+        "ProfileStore::ReconcileTransaction"
+      ]
+    },
+    {
+      "id": "BOOT-RECONCILE-ABORT",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Begin",
+          24
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "PublishDirectory",
+          24
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1848,
+      "premask": 16,
+      "feasible_irq": 300,
+      "total": 2164,
+      "reservation": 2048,
+      "predicate": "Normal phase3 aborted-next-generation checkpoint; read decision completes but112 remains during original PublishDirectory first write.",
+      "named_methods_for_bounded_scope": [
+        "ProfileStore::ReconcileTransaction"
+      ]
+    },
+    {
+      "id": "CONFIGURATOR-RECONCILE-CONTROL",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Dispatch",
+          56
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1800,
+      "premask": 16,
+      "feasible_irq": 300,
+      "total": 2116,
+      "reservation": 2048,
+      "predicate": "Direct Dispatch reconciliation before ordinary request; admitted pending consistency; default serial/SysTick path suffices.",
+      "named_methods_for_bounded_scope": [
+        "ProfileStore::ReconcileTransaction"
+      ]
+    },
+    {
+      "id": "CONFIGURATOR-RECONCILE-ABORT",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Dispatch",
+          56
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "PublishDirectory",
+          24
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1824,
+      "premask": 16,
+      "feasible_irq": 300,
+      "total": 2140,
+      "reservation": 2048,
+      "predicate": "Same direct path, aborted checkpoint PublishDirectory retained.",
+      "named_methods_for_bounded_scope": [
+        "ProfileStore::ReconcileTransaction"
+      ]
+    },
+    {
+      "id": "UPDATE-FIRST-RECORD",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Update",
+          48
+        ],
+        [
+          "PublishPreparedProfile",
+          16
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1696,
+      "premask": 16,
+      "feasible_irq": 340,
+      "total": 2052,
+      "reservation": 2048,
+      "predicate": "Healthy v2 Config/store; all dependencies valid, all GC entries protected or unrelated, no eligible garbage so no earlier mutator clears applicable positive orphan. Independent prior legacy response tail leaves IN busy with queued delimiter; RX mutation liveness_trace=false; host completion plus SysTick during pre-mask FS yields CDC340.",
+      "named_methods_for_bounded_scope": [
+        "ProfileStore::Update",
+        "ProfileStore::PublishPreparedProfile",
+        "ProfileStore::Duplicate"
+      ]
+    },
+    {
+      "id": "DUPLICATE-FIRST-RECORD",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Duplicate",
+          32
+        ],
+        [
+          "Create",
+          32
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1696,
+      "premask": 16,
+      "feasible_irq": 340,
+      "total": 2052,
+      "reservation": 2048,
+      "predicate": "Healthy v2 Config/store; all dependencies valid, all GC entries protected or unrelated, no eligible garbage so no earlier mutator clears applicable positive orphan. Independent prior legacy response tail leaves IN busy with queued delimiter; RX mutation liveness_trace=false; host completion plus SysTick during pre-mask FS yields CDC340.",
+      "named_methods_for_bounded_scope": [
+        "ProfileStore::Update",
+        "ProfileStore::PublishPreparedProfile",
+        "ProfileStore::Duplicate"
+      ]
+    },
+    {
+      "id": "LEGACY-SET-FIRST-REMOVE",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "HandleSetConfig-public",
+          48
+        ],
+        [
+          "HandleSetConfig-part",
+          304
+        ],
+        [
+          "SaveConfig",
+          16
+        ],
+        [
+          "RemoveSaveTemporary",
+          16
+        ],
+        [
+          "CheckedRemove",
+          48
+        ],
+        [
+          "lfs_remove",
+          136
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1880,
+      "premask": 16,
+      "feasible_irq": 300,
+      "total": 2196,
+      "reservation": 2048,
+      "predicate": "Valid stored compact/rootformat2 Config and healthy store accepted via read-only boot; normal legacySET decode/validate/profile checks read-only, applicable positive orphan remains until Save first Remove. default serial callback is enabled in Configurator; no CDC queue assumption required.",
+      "named_methods_for_bounded_scope": [
+        "ConfiguratorBackend::HandleSetConfig"
+      ]
+    },
+    {
+      "id": "COPY-OUTPUT-OPEN",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Capture",
+          16
+        ],
+        [
+          "ExecuteCapture",
+          96
+        ],
+        [
+          "copy",
+          504
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "fileopen",
+          16
+        ],
+        [
+          "rawopen",
+          80
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "foreground": 1992,
+      "premask": 16,
+      "feasible_irq": 300,
+      "total": 2308,
+      "reservation": 2048,
+      "predicate": "Snapshot/temp absent; first temp Remove noentry, otherwise healthy root metadata log full enough to force ordinary newentry compaction. Two original simultaneous File objects, no initial orphan or MOVE needed.",
+      "named_methods_for_bounded_scope": [
+        "Persistence::ExecuteCaptureSource",
+        "copy_checked_file"
+      ]
+    },
+    {
+      "id": "IDENTITY-EXISTING",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Capture",
+          16
+        ],
+        [
+          "PrepareCapture",
+          64
+        ],
+        [
+          "LegacySourceIdentity",
+          280
+        ],
+        [
+          "hash_file",
+          656
+        ],
+        [
+          "definite_readOpen_prefix",
+          668
+        ]
+      ],
+      "foreground": 1868,
+      "premask": 0,
+      "feasible_irq": 300,
+      "total": 2168,
+      "reservation": 2048,
+      "predicate": "Identity validation/explicitclose finishes but automatic File/frame280 remains during hash656 lookup; existing nonempty migration.src NAME comparison reaches definite668 before cache/ROM. Published branch additionally requires successful publication/final identity reach.",
+      "named_methods_for_bounded_scope": [
+        "Persistence::LegacySourceIdentity",
+        "hash_file"
+      ]
+    },
+    {
+      "id": "IDENTITY-PUBLISHED",
+      "classification": "SOURCE_FEASIBLE_EXACT_ELF_FRAME_COMPOSITION_NOT_DEVICE_OBSERVATION",
+      "frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Capture",
+          16
+        ],
+        [
+          "ExecuteCapture",
+          96
+        ],
+        [
+          "LegacySourceIdentity",
+          280
+        ],
+        [
+          "hash_file",
+          656
+        ],
+        [
+          "definite_readOpen_prefix",
+          668
+        ]
+      ],
+      "foreground": 1900,
+      "premask": 0,
+      "feasible_irq": 300,
+      "total": 2200,
+      "reservation": 2048,
+      "predicate": "Identity validation/explicitclose finishes but automatic File/frame280 remains during hash656 lookup; existing nonempty migration.src NAME comparison reaches definite668 before cache/ROM. Published branch additionally requires successful publication/final identity reach.",
+      "named_methods_for_bounded_scope": [
+        "Persistence::LegacySourceIdentity",
+        "hash_file"
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": "STARTUP",
+      "phase": "reset, C++ constructors and ordinary SDK main",
+      "screen": "UNCHANGED_ROUTE_FINAL_BOUND_OPEN",
+      "finding_or_obligation": "Reset/constructors/main and mount/allocation/display startup are outside changed Load/Capture lifetimes. Exact main48; reset-to-main maximum and all libc startup routes still require final mapping.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "BOOT-PREFLIGHT",
+      "phase": "normal/recovery Begin common checks",
+      "screen": "RETURNED_PHASES_SOURCE_AUDITED",
+      "finding_or_obligation": "Begin24 calls PrepState40 and Bootstrap96 as completed siblings before mutation. Geometry/traverse, control/root decode and SameDirectory remain separate read-only maxima; no all-path PASS inferred.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "BOOT-PHASE1",
+      "phase": "control phase1 resume",
+      "screen": "FIRST_WRITE_BOUND_REQUIRED",
+      "finding_or_obligation": "Normal phase1 resumes initialized root0/root1/control2 siblings; recovery refuses. First writable-open source sum with Begin24 and no Reconcile is1712+16+300=2028. Other readback/close and newly generated relocation alternatives remain to be closed.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "BOOT-PHASE2",
+      "phase": "healthy or degraded phase2",
+      "screen": "READ_ONLY_MAY_RETAIN_PENDING_STATE",
+      "finding_or_obligation": "Healthy root/control loads and SameDirectory do not repair filesystem pending state; later first mutation may retain it. Recovery refusal semantics unchanged.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "BOOT-PHASE3",
+      "phase": "uncertain control phase3",
+      "screen": "SOURCE_FEASIBLE_OVER_RESERVATION",
+      "finding_or_obligation": "BOOT-RECONCILE-CONTROL2140 and BOOT-RECONCILE-ABORT2164; recovery stays read-only. Named Reconcile read/decision phase remains retained over writer.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "BOOT-FRESH-UPGRADE",
+      "phase": "no v2 control / fresh / v1 legacy upgrade",
+      "screen": "FIRST_WRITE_AND_LEGACY_READ_ALTERNATIVES_OPEN",
+      "finding_or_obligation": "Control1/root writes use Begin24/Execute32 siblings. DecodeLegacy296, Receipt352, read current/previous and hash alternatives must be maxima at actual Bootstrap96 prefixes; no write frame beneath returned prep.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CONFIG-LOAD",
+      "phase": "Config current/prior/legacy load, decode and validation",
+      "screen": "DELTA_NO_MATERIAL_DEFECT_TEST37_PASS",
+      "finding_or_obligation": "ReadConfigCandidate440 closes/destructs File and Error before Load40 publication. Native reject/callback cleanup, validator, header reread and exact statuses preserved. Maximum protobuf/stream/validator/destructor graph still final-gate work.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CONFIG-PRIOR-RESTORE",
+      "phase": "LoadConfigChecked PriorCompact Rename",
+      "screen": "KNOWN_SHALLOW_BOOT_ROUTE_AND_UNRESOLVED_CONFIGURATOR_ROUTE",
+      "finding_or_obligation": "Boot/recovery restore retires440 and Error/File before Rename. Nested PrepareStoreMutation72/Dispatch56 prior-restore with surviving positive orphan could exceed; ordinary boot already restores selected prior and successful Save clears initial pending state, so joint reachability is unresolved, not a proved overflow.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-GENERATION",
+      "phase": "SaveConfigIfGenerationMatches durable fence",
+      "screen": "P2_LIFETIME_AUDIT_RETAINED",
+      "finding_or_obligation": "VerifyExpected80 returns before Save16; slot constructor/destructor behavior reviewed at a2a5 and unchanged. No File remains across generation fence.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-STAGE",
+      "phase": "SaveConfig size, remove temp, open/write/encode/CRC/header/sync/close",
+      "screen": "CALLER_DEPENDENT_OVER_RESERVATION",
+      "finding_or_obligation": "Save16/Remove16 is small but legacySET48+304 retained caller gives2196. Save raw File176 unchanged; Stage24/Write104 separate; encoding/read/sync/close need exact alternatives, not whole stage sum.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-VERIFY",
+      "phase": "independent reopen and deterministic reencode compare",
+      "screen": "P2_INDEPENDENT_REOPEN_RETAINED",
+      "finding_or_obligation": "Verify72 and rawslot are sequential with stage/rotation/publication. Callback encode/read alternatives and constructor/destructor fallbacks still final graph obligations; targeted source tests PASS.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-PUBLISH",
+      "phase": "current stat/prior remove/rotation/publication/uncertainty/rollback",
+      "screen": "LATER_GENERATED_RECOVERY_STATE_OPEN",
+      "finding_or_obligation": "Rotate24 and Publish80 are completed siblings of staging/verify. Do not add initial pending orphans after successful initial Remove; failure/uncertainty/readback/rollback and relocation-created states remain explicit later-route proof obligations.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "MODE-DESTINATION",
+      "phase": "selected backend mode persistence",
+      "screen": "CONDITIONAL_HEADER_PHASE_REVIEW_RETAINED",
+      "finding_or_obligation": "Header Error132 retires via sole helper before Save; old1696 activation foreground no longer applies. Route-specific IRQ408 upper and NESserial360 feasible remain distinct. Exact new all-phase composition and all backend provenance remain final-gate work.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "MIGRATION-CAPTURE",
+      "phase": "legacy snapshot capture and source identity",
+      "screen": "SOURCE_FEASIBLE_OVER_RESERVATION",
+      "finding_or_obligation": "COPY ordinary2308; LegacyIdentity existing2168 and published2200, using actual ef22 frames and source-conditioned boot300. Scope permits only noinline helper annotations so body repairs need named authority.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "MIGRATION-IMPORT",
+      "phase": "ImportLegacyStream admission, two streamed records and directory",
+      "screen": "LINKED_STREAM_ROUTE_NOT_EXCLUDED",
+      "finding_or_obligation": "ImportLegacyStream wrapper24+part112 is linked; setup lambda reaches ReadLegacyProfile296 (not whole-Config load). Its Open668 prefix sums1284 foreground incl boot184/lambda0, plusboot300=1584. HashFile/store Range/read and profile publication/receipt/dir alternatives remain separate maxima. Portable full-Config overload absent from linked symbols; do not exclude linked streamed overload.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "MIGRATION-COMPLETE",
+      "phase": "compact receipt/Config save/CompleteMigration",
+      "screen": "SEQUENTIAL_SAVE_AND_DIRECTORY_MAXIMA_OPEN",
+      "finding_or_obligation": "PrepareCompact40, Save16 and CompleteMigration72 execute sequentially in setup; Complete validates receipt and publishes directory. Initial pending recovery cannot be charged again after successful Save; source-specific newly generated relocation/failure histories remain unresolved.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "DISPATCH-RX",
+      "phase": "Receive/identity/CAS/admission preparation",
+      "screen": "P4_RETURNED_SIBLINGS_RETAINED",
+      "finding_or_obligation": "Receive56, Dispatch56, true execute inside Send48 and Finalize24 are siblings; RX/fault scope covers exact original interval. Query retry reconciliation and Config reload beneath Dispatch/PrepareStoreMutation require joint-state proof.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "STORE-GC",
+      "phase": "GC protected-root/no-garbage/enumerate/remove/budget",
+      "screen": "NO_CAPACITY_FRAME_DURING_GC",
+      "finding_or_obligation": "CollectGarbage48 and Evaluate120 are returned siblings. Actual enumeration216 + callback40 + formatting/libc/protected read alternatives and removal48/LFS136/positive orphan tree need final maxima. GC no-garbage success leaves pending state intact.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "STORE-CAPACITY",
+      "phase": "post-GC EvaluateAdmission and STATUS Capacity",
+      "screen": "READ_ONLY_GRAPH_FINAL_BOUND_OPEN",
+      "finding_or_obligation": "Capacity320 + Evaluate120 or CaptureCapacity72 at distinct prefixes, not GC48 simultaneously. Root protection Stat/CTZ/traverse, 64-bit helpers and failure routes remain final graph obligations.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "STORE-FIRST-RECORD",
+      "phase": "CREATE/UPDATE/DUPLICATE and imported first record",
+      "screen": "SOURCE_FEASIBLE_OVER_RESERVATION",
+      "finding_or_obligation": "Update48+PublishPrepared16 and Duplicate32+Create32 each1696 foreground +premask16+confirmedCDC340=2052. PlainCreate1664+16+340=2020 on same specific path. All protected/noeligibleGC allows positive orphan to survive until first open. Imported record prefix differs and must not borrow Configurator IRQ340.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "STORE-DIRECTORY",
+      "phase": "first directory and later directory publication",
+      "screen": "TIGHT_UPPER_REQUIRES_ROUTE_DISCRIMINATION",
+      "finding_or_obligation": "Rename24+PublishDirectory24 first writable-open is1680+16+CDC340=2036, whereas conservative348 gives2044, both under2048 on this path; this corrects earlier loop40 estimates. Read/verify/sync/rename/relocation-generated recovery alternatives still separate obligations. Reconcile adds112 and is over.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "STORE-RECONCILE",
+      "phase": "uncertainty/query/replay/abort reconciliation",
+      "screen": "SOURCE_FEASIBLE_OVER_RESERVATION_AND_QUERY_UNKNOWN",
+      "finding_or_obligation": "Direct Dispatch Reconcile control2116/abort2140 using loop32, boot2140/2164. Query(identity)64 can directly retry clone112; token query24 is an alternative, not added beneath identity. Feasible transient-first-failure/second-write state not established; track as unresolved.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "STORE-READ-REFERENCE",
+      "phase": "READ/health/status dependency/reference SET",
+      "screen": "READ_AND_CHECKED_SAVE_ALTERNATIVES_OPEN",
+      "finding_or_obligation": "Read32/ReadProfile120/Activate56/Health104; current/previous Stat/Open/read/close/decode/native validation separate. Checked-reference SaveIf16/Save16 after PrepareStoreMutation returns. No filesystem write subtree beneath response-only encode.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "LEGACY-CONFIGURATOR",
+      "phase": "legacy GET/SET/device-info/unknown/reboot responses",
+      "screen": "SOURCE_FEASIBLE_OVER_RESERVATION",
+      "finding_or_obligation": "LegacySET public48 retains clone304 across Save16/Remove16 at10018ce8, giving2196 incl boot-independent default serial/SysTick300. Legacy GET/end can also produce independently proved queued CDC state; never infer ProfilePacketWriter.finish from ordinary _out.end.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "NATIVE-ACTIVATION",
+      "phase": "profile selection, native prepare/copy/bind/context digest",
+      "screen": "UNCHANGED_CORE_FINAL_LINKED_MAPPING_OPEN",
+      "finding_or_obligation": "Activate/read/native prepare/copy/context digest/SetConfig sources unchanged vs historical reviewed core; current PrepareStructure144, BodyDigest192, ContextDigest216, CopyProgram32. Full actual prefix/helper graph correspondence remains required; no FS frames remain during later frame evaluation.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "NATIVE-FRAME",
+      "phase": "real per-frame preprocess/evaluator",
+      "screen": "UNCHANGED_CORE_NO_ORACLE_RERUN_NEEDED",
+      "finding_or_obligation": "Evaluate232 current emitted frame; Conditions72/Source32 are callee alternatives, direction/helpers and backend ScanInputs prefixes still require final correspondence. Historical18-family oracles apply only to unchanged source; do not add later metrics sibling to Evaluate.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "IDENTITY-DIAGNOSTIC",
+      "phase": "XInput Poll, parser/digest/snapshot/TX",
+      "screen": "UNCHANGED_ROUTE_LOCK_PREDICATE_REQUIRED",
+      "finding_or_obligation": "Parser/Observe/SHA/mailbox/Snapshot72/TX are separate paths. Actual outer USB mutex suppresses deferred task on Poll route but not all IRQs; raw transport callers cannot inherit that suppression without proof.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "SCAN",
+      "phase": "post-main own-core stack-write scan/mailboxes",
+      "screen": "UNCHANGED_METRICS_FINAL_MAPPING_OPEN",
+      "finding_or_obligation": "ServiceCore48, Publish and mailbox helpers have deferred prologue allocation: prefix-only extraction20 is NOT whole-function bound. Preserve own-core entry/2048 regions/bottom32 exclusion; no measured watermark claim.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "CORE1",
+      "phase": "setup1/display/control/RGB/metrics",
+      "screen": "ATTRIBUTED1152_UPPER_CORRESPONDENCE_OPEN",
+      "finding_or_obligation": "Historical independently proved bcb1152 upper retained as attributed input only. Current final emitted setup1/loop1/display/RGB/SIO graph correspondence has not been independently closed in this finite delta screen.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "LFS-INTERNAL",
+      "phase": "all admitted mutable/read filesystem branches",
+      "screen": "SOURCE_CONDITIONED_BRANCH_SCREEN_NOT_ALL_PATH_PASS",
+      "finding_or_obligation": "Current common commit/program1008 and writableOpen88+16+80+force64+deor176 verified. Remove136 and Rename240 inline forceconsistency: do not add64. Ordinary compaction, append, split, relocation, allocator/CTZ/rawtraverse, erase/read/CRC/close alternatives remain at each actual caller, with no arbitrary simultaneous guard sum.",
+      "final_all_path_bound": "OPEN"
+    },
+    {
+      "id": "IRQ-ROM",
+      "phase": "unmasked/pre-mask/masked and backend alternatives",
+      "screen": "FEASIBLE_AND_UPPER_BOUNDS_DISTINGUISHED",
+      "finding_or_obligation": "Bootserial300 and ConfiguratorCDC340 are source-feasible before-ROM/no-padding paths.348 Configurator/boot and408 ordinary mode are safe upper alternatives, not feasible witnesses. noInterrupts16 retained at100406b4 before CPSID100406be. Masked flash SDK40+ROM88 is alternative and cannot receive whole maskable IRQ chain; B0/B1/B2 dependency remains final correspondence obligation.",
+      "final_all_path_bound": "OPEN"
+    }
+  ],
+  "unresolved_joint_states": [
+    "Query identity/token retry may run Reconcile below additional64/24 after a failed direct reconcile; independently establish actual transient/fault state before deriving an additional witness.",
+    "PrepareStoreMutation/legacySET reload of PriorCompact beneath retained caller could be deeper than boot restore, but normal boot restoration and prior Save mutations constrain pending state. No source-feasible joint state established here.",
+    "Later successful write/sync/close/readback/rename and CompleteMigration may generate relocation/repair states; do not recycle initial orphan after successful first mutation. Final bound must include source-specific generated state or exclude by exact guard proof.",
+    "All31 classes are screened for retained caller omissions. Remaining final graph obligations in each row remain OPEN; neither component frames nor unchanged-source history proves a whole-route bound."
+  ],
+  "bounded_scope_hypotheses": [
+    "ReconcileTransaction: return read/control/root/identity decision before unchanged control2 or aborted-checkpoint publication, preserving _next identity/highwater, uncertainty/fence and exact accepted/aborted results.",
+    "HandleSetConfig: return existing read/decode/validate/receipt preparation before same Save call; preserve all callback/validation/read/refusal and publication/legacy response ordering; no extra Config or I/O.",
+    "Update/PublishPreparedProfile and Duplicate/Create: remove retained caller overlap at the same reached first-record executor while preserving admission, immutable payload lease, Start/token/CAS, receipts and operation counts. Exact minimal method layout requires measured authorized implementation.",
+    "COPY/HASH/Identity body changes need explicit narrow adoption; worker report shows scratch-only copy isolation still insufficient with two automatic Files. Preserve both handle construction/close/destructor and I/O order; no migration reuse of Save slot inferred."
+  ],
+  "limits": [
+    "Exact engineering ELF is build-only P1 OPEN, not hardware or final accepted candidate.",
+    "No source/SDK/checker/Git/canonical/device edits; no new powerloss images; no network actions.",
+    "Historical 168/200 slot inference is superseded by exact rawFile176+SavePhase32; grossP4 metadata214 before alignment, newLoad/Capture phase8+8 gives230 before alignment. Static RAM exact197700; accepted199632.",
+    "Current loop32 supersedes object40; firstrecord2052 supersedes2060; legacySET2196 supersedes2204; directory same-path2036/2044 supersedes old2044/2052.",
+    "1008 subtree excludes separately emitted bd_prog/bd_flush already inline in commitprog. force64 is not added to inline lfs_remove136/rename240. No array-of-frames sum, sibling prep/check/close or unrelated IRQ union added."
+  ]
+}

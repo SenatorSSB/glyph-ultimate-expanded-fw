@@ -1,0 +1,203 @@
+{
+  "kind": "FINITE_FROZEN35E8_JOINT_STATE_REVIEW_AND_EXPLICIT_ERRATUM",
+  "checkpoint": "35e8e5af99badf425fd832968040e8fd6a23441a",
+  "tree": "bc53491c921c082bd43d72d9ad4cbbaf0eeb4546",
+  "source_content_snapshot": "/private/tmp/glyph-9cff-source-review-20261021",
+  "source_identical_9cff_ef22": true,
+  "exact_elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "historical_report_unchanged": "/private/tmp/glyph-native-9cff-source-resource-review-20261021.md",
+  "scope": "Only Query retry and nested PriorCompact joint states, with lifecycle correction; no production change/new fault images/device work",
+  "erratum": {
+    "affected_ids": [
+      "CONFIGURATOR-RECONCILE-CONTROL",
+      "CONFIGURATOR-RECONCILE-ABORT"
+    ],
+    "old_compositions": [
+      2116,
+      2140
+    ],
+    "corrected_classification": "CONDITIONAL_GENERATED_STATE_NOT_ESTABLISHED_INITIAL_ORPHAN_WITNESS",
+    "reason": "Initial phase3 must reconcile during normal Begin or recovery initialization sets permanent _recovery_only. Normal service-created durable phase3 requires an earlier consistency-performing write. These source lifecycle predicates were missing from the earlier direct service rows.",
+    "unchanged_supported_C_authority": [
+      "BOOT-RECONCILE-CONTROL2140",
+      "BOOT-RECONCILE-ABORT2164"
+    ],
+    "remaining_supported_original_compositions": [
+      2140,
+      2164,
+      2052,
+      2052,
+      2196,
+      2308,
+      2168,
+      2200
+    ]
+  },
+  "query_result": {
+    "initial_unchanged_boot_state": "EXCLUDED_AS_NESTED_FIRST_WRITER_WITH_SURVIVING_INITIAL_ORPHAN_BY_LIFECYCLE",
+    "general_generated_state": "OPEN_NOT_PROVEN_UNREACHABLE_NOT_PROVEN_FEASIBLE",
+    "guards_alone": "DO_NOT_EXCLUDE: Query tests uncertain before ready/recovery and LoadDirectory recalculates flags",
+    "source_transition_proof": [
+      "setup must successfully load Config then Begin before normal backend initialization. Bootstrap phase3 sets uncertain and invokes Reconcile. On failure setup calls enter_recovery_configurator, which calls initialize_recovery\u2192BeginRecovery. PrepareBeginState sets _recovery_only=true; every LoadDirectory sets _read_only_recovery = _recovery_only || !root0 || !root1. Later Reconcile stops before phase3 writes.",
+      "Normal successful phase3 Begin clears uncertain before normal service. Phase2 Begin leaves uncertainty false while initial unrelated positive-orphan may remain.",
+      "During service, failure of first PublishDirectory control3 before a filesystem operation may set uncertain=true without clearing initial orphan. However durable control remains the old phase2. A subsequent successful Reconcile compares phase2/current directory and clears uncertainty read-only; it does not enter control2/abort writer.",
+      "Producing durable phase3 in service requires successful control3 temp writable-open/consistency and rename. That already consumes initial pending recovery. Any positive-orphan at a later retry requires separately proved generated recovery provenance.",
+      "Query(token) can retry failed direct Reconcile because uncertain remains; identity overload inlines token logic and adds64, token-only24 is an alternative. If LoadControl/LoadDirectory failures recover, guards can admit second writer for service-generated phase3. No physical transition establishing all required state and second-success was found."
+    ]
+  },
+  "fault_source_analysis": [
+    "CheckedStorage hook is null until PrepareProfileMutation\u2192BeginMutation, reached only AFTER PrepareStoreMutation Query and Load. EndMutation clears hook on every original scope exit; prepared tickets alone are inert. A prior rule cannot generically inject an initial direct-Reconcile/Query read failure.",
+    "Pinned SDK lfs_flash_read memcpy returns0; sync is no-op return0; program/erase also return0 after actual operation. A random transient Read ERR_IO is not an evidenced production source, and a host-double failure is not target feasibility.",
+    "Persistent corrupt/invalid control/root does not become valid merely because another read is attempted. No concurrent IRQ/core1 filesystem writer exists. These facts do not by themselves prove every cache/allocator/badblock failure and generated-repair sequence unreachable.",
+    "Potential lfs allocation/CRC/program-verification/relocation failures require an exact recoverable source history and retained pending state; no arbitrary RAM corruption, disappearing mount, external concurrent filesystem mutation or generic synthetic fault is assumed."
+  ],
+  "nested_prior_result": {
+    "initial_unchanged_boot_state": "EXCLUDED_AS_SERVICE_FIRST_MUTATOR_WITH_SURVIVING_INITIAL_ORPHAN_BY_SELECTION_AND_BOOT_ORDER",
+    "general_generated_state": "OPEN_PARTIAL_REPAIR_OR_RETRY_PROGRESS_NOT_EXCLUDED",
+    "source_transition_proof": [
+      "select_config_filename selects current whenever Stat(current) succeeds. Current-but-invalid data is rejected; it does not fall back to prior. PriorCompact requires current absent and prior present.",
+      "Normal setup LoadConfigChecked restores selected valid prior before Begin/backends. A failure enters recovery; initialize_recovery again loads/restores before creating Configurator. A successfully restored prior is now current before nested service loads.",
+      "If recovery load remains invalid, legacySET refuses (_recovery_service/_recovery_config_invalid). STATUS load is guarded by !config_invalid, but PrepareStoreMutation still calls LoadConfigChecked before later recovery/fence refusal. Thus recovery guard alone is not a blanket proof that all nested prior loads are unreachable.",
+      "In normal service, only Save rotation makes existing current absent. Save publication failure with current=true attempts rollback; rollback failure or uncertain publication fences mutation. LegacySET rejects that fence. Dispatch attempts ReconcileConfig BEFORE PrepareStoreMutation, so ordinary successful prior restore occurs at shallower prefix first.",
+      "A failed earlier restore can partially change metadata/cache/repair state; a later PrepareStoreMutation Load might then succeed. Whether it can retain applicable generated positive-orphan and reach the deeper compaction path is unresolved. It is not excluded merely by the fence, since Prep load is unconditional before its fence-status branch."
+    ]
+  },
+  "legacy_set2196_confirmation": {
+    "status": "UNCHANGED_SOURCE_FEASIBLE_INITIAL_ORPHAN_WITNESS",
+    "predicate": "Already valid current compact/rootformat2 Config, healthy phase2 control/roots, valid compact receipt, no MigrationPending. setup Load/Begin/receipt check performs no marker Save, migration, or control3 publication. Existing pending orphan can survive all read-only validation and legacySET decode/validate/profile reads until Save first Remove.",
+    "source_sites": [
+      "config.cpp:217-225 normal Load/Begin",
+      "config.cpp:228-246 compact receipt and migration conditions",
+      "config.cpp:275-285 marker Save conditional on rootformat!=2",
+      "ConfiguratorBackend.cpp:337-425 legacySET guard/read/validation/Save",
+      "Persistence.cpp:343-348 Save ordered first Remove"
+    ]
+  },
+  "conditional_unproven_accounting": [
+    {
+      "id": "QUERY-TOKEN-CONTROL",
+      "foreground_if_joint_state_proven": 1896,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2252,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "ConfiguratorBackend::PrepareStoreMutation (query/admission phase separation)",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    },
+    {
+      "id": "QUERY-IDENTITY-CONTROL",
+      "foreground_if_joint_state_proven": 1936,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2292,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "ConfiguratorBackend::PrepareStoreMutation (query/admission phase separation)",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    },
+    {
+      "id": "QUERY-TOKEN-ABORT",
+      "foreground_if_joint_state_proven": 1920,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2276,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "ConfiguratorBackend::PrepareStoreMutation (query/admission phase separation)",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    },
+    {
+      "id": "QUERY-IDENTITY-ABORT",
+      "foreground_if_joint_state_proven": 1960,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2316,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "ConfiguratorBackend::PrepareStoreMutation (query/admission phase separation)",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    },
+    {
+      "id": "PREPARE-MUTATION-PRIOR",
+      "foreground_if_joint_state_proven": 1744,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2100,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "ConfiguratorBackend::PrepareStoreMutation (query/admission phase separation)",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    },
+    {
+      "id": "LEGACY-SET-PRIOR",
+      "foreground_if_joint_state_proven": 1968,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2324,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "ConfiguratorBackend::HandleSetConfig receipt-loading preparation",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    },
+    {
+      "id": "RECONCILE-CONFIG-PRIOR",
+      "foreground_if_joint_state_proven": 1712,
+      "premask": 16,
+      "feasible_CDC_IRQ_if_normal_route": 340,
+      "conditional_composition": 2068,
+      "classification": "ARITHMETIC_CONDITIONAL_ONLY_GENERATED_STATE_NOT_ESTABLISHED",
+      "minimal_named_lifetime_if_later_needed": "Persistence::ReconcileConfig returned result wrapper",
+      "qualification": "Existing scope changes invalidate these emitted prefixes; no repair authority or final post-repair over-limit claim."
+    }
+  ],
+  "finite_role_complete": true,
+  "additional_named_authority_requested": false,
+  "resource_gate": "OPEN_NO_GLOBAL_PASS",
+  "model_effort_observed": "UNKNOWN",
+  "hardware": "NO_ACTION_NOT_TESTED",
+  "source_pins": [
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/core/Persistence.cpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "HAL/pico/src/core/ProfileStore.cpp",
+      "sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/core/ProfileStore.cpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/core/CheckedStorage.cpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/comms/ConfiguratorBackend.cpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "include/core/RecoveryInitialization.hpp",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/include/core/RecoveryInitialization.hpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "include/core/CompactConfigRecovery.hpp",
+      "sha256": "d8ff4e60420c5964c5d6ab863a4e28cc737a4fc7491eaf26043007846ce3dfc4",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/include/core/CompactConfigRecovery.hpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "include/core/ProfileStoreFaultControls.hpp",
+      "sha256": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/include/core/ProfileStoreFaultControls.hpp"
+    },
+    {
+      "git_commit": "35e8e5af99badf425fd832968040e8fd6a23441a",
+      "relative_path": "config/glyph/common/src/config.cpp",
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "read_snapshot": "/private/tmp/glyph-9cff-source-review-20261021/config/glyph/common/src/config.cpp"
+    }
+  ]
+}

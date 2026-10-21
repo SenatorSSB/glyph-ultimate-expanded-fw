@@ -1,0 +1,3205 @@
+{
+  "main": {
+    "address": "0x1003ff08",
+    "end": "0x100401ac",
+    "symbol_size": 676,
+    "allocation_inventory": 48,
+    "calls": [
+      {
+        "at": "0x1003ff18",
+        "to": "0x10043a78",
+        "name": "check_sys_clock_khz"
+      },
+      {
+        "at": "0x1003ff24",
+        "to": "0x1004399c",
+        "name": "panic"
+      },
+      {
+        "at": "0x1003ff2e",
+        "to": "0x10043a00",
+        "name": "set_sys_clock_pll"
+      },
+      {
+        "at": "0x1003ff56",
+        "to": "0x100439d8",
+        "name": "operator new(unsigned int)"
+      },
+      {
+        "at": "0x1003ff5e",
+        "to": "0x10040920",
+        "name": "PIOProgram::PIOProgram(pio_program const*)"
+      },
+      {
+        "at": "0x1003ff6c",
+        "to": "0x1004092c",
+        "name": "PIOProgram::prepare(pio_hw_t**, int*, int*)"
+      },
+      {
+        "at": "0x1003ff96",
+        "to": "0x10042978",
+        "name": "pio_sm_init"
+      },
+      {
+        "at": "0x1003ffb8",
+        "to": "0x1003ff04",
+        "name": "initVariant"
+      },
+      {
+        "at": "0x1003ffc6",
+        "to": "0x10006a78",
+        "name": "TinyUSB_Device_Init"
+      },
+      {
+        "at": "0x1003ffd0",
+        "to": "0x1003fec8",
+        "name": "_MFIFO::begin(int) [clone .part.0] [clone .constprop.0]"
+      },
+      {
+        "at": "0x1003ffee",
+        "to": "0x1004020c",
+        "name": "__wrap_calloc"
+      },
+      {
+        "at": "0x10040012",
+        "to": "0x100422f8",
+        "name": "exception_set_exclusive_handler"
+      },
+      {
+        "at": "0x1004002e",
+        "to": "0x1003fec8",
+        "name": "_MFIFO::begin(int) [clone .part.0] [clone .constprop.0]"
+      },
+      {
+        "at": "0x10040038",
+        "to": "0x1003fe70",
+        "name": "_MFIFO::registerCore() [clone .part.0]"
+      },
+      {
+        "at": "0x10040048",
+        "to": "0x1003fe14",
+        "name": "delay"
+      },
+      {
+        "at": "0x10040058",
+        "to": "0x100401f4",
+        "name": "__wrap_malloc"
+      },
+      {
+        "at": "0x10040068",
+        "to": "0x100437ec",
+        "name": "multicore_launch_core1_with_stack"
+      },
+      {
+        "at": "0x1004006c",
+        "to": "0x1002f2f4",
+        "name": "setup"
+      },
+      {
+        "at": "0x10040080",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x10040084",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400a0",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x100400a4",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400b2",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x100400b6",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400c4",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x100400c8",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400d0",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x100400d4",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400de",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x100400e2",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400f0",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x100400f4",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x100400fe",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x10040102",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x10040106",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x1004010a",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x10040110",
+        "to": "0x1002e2a4",
+        "name": "loop"
+      },
+      {
+        "at": "0x10040114",
+        "to": "0x1003fe20",
+        "name": "yield"
+      },
+      {
+        "at": "0x1004012a",
+        "to": "0x1001db44",
+        "name": "__wrap_multicore_launch_core1"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1003ff08:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1003ff0c:\tb500      \tpush\t{lr}",
+      "1003ff0e:\tb086      \tsub\tsp, #24",
+      "1003ffda:\tb006      \tadd\tsp, #24"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 48
+  },
+  "setup": {
+    "address": "0x1002f2f4",
+    "end": "0x1002f8b0",
+    "symbol_size": 1468,
+    "allocation_inventory": 136,
+    "calls": [
+      {
+        "at": "0x1002f31e",
+        "to": "0x100295b8",
+        "name": "gpio::init_pin(unsigned int, gpio::GpioMode)"
+      },
+      {
+        "at": "0x1002f3be",
+        "to": "0x10041b6c",
+        "name": "time_us_64"
+      },
+      {
+        "at": "0x1002f3d0",
+        "to": "0x100436e0",
+        "name": "__wrap___aeabi_lmul"
+      },
+      {
+        "at": "0x1002f45e",
+        "to": "0x100295b8",
+        "name": "gpio::init_pin(unsigned int, gpio::GpioMode)"
+      },
+      {
+        "at": "0x1002f47a",
+        "to": "0x1000af44",
+        "name": "TwoWire::setSDA(unsigned char)"
+      },
+      {
+        "at": "0x1002f482",
+        "to": "0x1000afbc",
+        "name": "TwoWire::setSCL(unsigned char)"
+      },
+      {
+        "at": "0x1002f48a",
+        "to": "0x1000ae20",
+        "name": "TwoWire::setClock(unsigned long)"
+      },
+      {
+        "at": "0x1002f490",
+        "to": "0x1000ace8",
+        "name": "TwoWire::begin()"
+      },
+      {
+        "at": "0x1002f4a0",
+        "to": "0x1000dcc0",
+        "name": "Adafruit_SSD1306::begin(unsigned char, unsigned char, bool, bool)"
+      },
+      {
+        "at": "0x1002f4b6",
+        "to": "0x10043c30",
+        "name": "__cxa_guard_acquire"
+      },
+      {
+        "at": "0x1002f4ca",
+        "to": "0x1000bb9c",
+        "name": "CFastLED::addLeds(CLEDController*, CRGB*, int, int)"
+      },
+      {
+        "at": "0x1002f4e0",
+        "to": "0x1000bf28",
+        "name": "CFastLED::setMaxRefreshRate(unsigned short, bool)"
+      },
+      {
+        "at": "0x1002f4ec",
+        "to": "0x1000bbf4",
+        "name": "CFastLED::show(unsigned char)"
+      },
+      {
+        "at": "0x1002f4f0",
+        "to": "0x10029608",
+        "name": "reboot_bootloader()"
+      },
+      {
+        "at": "0x1002f4fc",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1002f506",
+        "to": "0x1001f0d8",
+        "name": "Persistence::SetValidator(bool (*)(_Config const&, ConfigValidationError&))"
+      },
+      {
+        "at": "0x1002f516",
+        "to": "0x1001f0f8",
+        "name": "Persistence::ValidateConfig(_Config const&, ConfigValidationError&) const"
+      },
+      {
+        "at": "0x1002f51e",
+        "to": "0x1002a5b8",
+        "name": "(anonymous namespace)::enter_recovery_configurator()"
+      },
+      {
+        "at": "0x1002f54a",
+        "to": "0x10020714",
+        "name": "Persistence::LoadConfigChecked(_Config&)"
+      },
+      {
+        "at": "0x1002f566",
+        "to": "0x10025960",
+        "name": "ProfileStore::Begin(unsigned long, unsigned long)"
+      },
+      {
+        "at": "0x1002f570",
+        "to": "0x10024c58",
+        "name": "ProfileStore::IsReadOnlyRecovery() const"
+      },
+      {
+        "at": "0x1002f5a6",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1002f5ae",
+        "to": "0x10028108",
+        "name": "ProfileStore::PrepareCompact(_Config&) const"
+      },
+      {
+        "at": "0x1002f5ba",
+        "to": "0x100215dc",
+        "name": "Persistence::SaveConfig(_Config&)"
+      },
+      {
+        "at": "0x1002f5c8",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1002f5cc",
+        "to": "0x1001d144",
+        "name": "native_metrics::Calibrate()"
+      },
+      {
+        "at": "0x1002f5fa",
+        "to": "0x1001be8c",
+        "name": "initialize_backends(CommunicationBackend**&, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&, void (*)(_CommunicationBackendConfig&, _InputState const&, _Config&), void (*)(_CommunicationBackendConfig&, _Config const&), _CommunicationBackendId (*)(Pinout const&), unsigned int (*)(CommunicationBackend**&, CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&), void (*)(CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&))"
+      },
+      {
+        "at": "0x1002f602",
+        "to": "0x10031b9c",
+        "name": "is_valid_usb_default_index(_Config const&)"
+      },
+      {
+        "at": "0x1002f612",
+        "to": "0x10033444",
+        "name": "set_mode_destination_selector(void (*)(_CommunicationBackendId, unsigned int, _Config const&))"
+      },
+      {
+        "at": "0x1002f620",
+        "to": "0x1003379c",
+        "name": "setup_mode_activation_bindings(_GameModeConfig const*, unsigned int, unsigned long long)"
+      },
+      {
+        "at": "0x1002f636",
+        "to": "0x1006a648",
+        "name": "__mutex_enter_blocking_veneer"
+      },
+      {
+        "at": "0x1002f64a",
+        "to": "0x1006a508",
+        "name": "__mutex_exit_veneer"
+      },
+      {
+        "at": "0x1002f6e2",
+        "to": "0x1000e038",
+        "name": "Adafruit_SSD1306::clearDisplay()"
+      },
+      {
+        "at": "0x1002f702",
+        "to": "0x1000cc84",
+        "name": "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)"
+      },
+      {
+        "at": "0x1002f708",
+        "to": "0x1000e05c",
+        "name": "Adafruit_SSD1306::display()"
+      },
+      {
+        "at": "0x1002f710",
+        "to": "0x10043c30",
+        "name": "__cxa_guard_acquire"
+      },
+      {
+        "at": "0x1002f756",
+        "to": "0x10043c4a",
+        "name": "__cxa_guard_release"
+      },
+      {
+        "at": "0x1002f770",
+        "to": "0x1000cc84",
+        "name": "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)"
+      },
+      {
+        "at": "0x1002f776",
+        "to": "0x1000e05c",
+        "name": "Adafruit_SSD1306::display()"
+      },
+      {
+        "at": "0x1002f794",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1002f79c",
+        "to": "0x1001fd34",
+        "name": "Persistence::CaptureLegacySource(unsigned char*)"
+      },
+      {
+        "at": "0x1002f7ba",
+        "to": "0x10028288",
+        "name": "ProfileStore::ImportLegacyStream(_Config const&, unsigned char const*, bool (*)(void*, unsigned int, _UltimateProfile&), void*, unsigned long*, unsigned int)"
+      },
+      {
+        "at": "0x1002f7d2",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1002f7da",
+        "to": "0x10028108",
+        "name": "ProfileStore::PrepareCompact(_Config&) const"
+      },
+      {
+        "at": "0x1002f7e8",
+        "to": "0x100215dc",
+        "name": "Persistence::SaveConfig(_Config&)"
+      },
+      {
+        "at": "0x1002f7f6",
+        "to": "0x100282bc",
+        "name": "ProfileStore::CompleteMigration(_Config const&)"
+      },
+      {
+        "at": "0x1002f806",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1002f814",
+        "to": "0x100281fc",
+        "name": "ProfileStore::ValidateCompactReceipt(_Config const&) const"
+      },
+      {
+        "at": "0x1002f826",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1002f82c",
+        "to": "0x10024c64",
+        "name": "ProfileStore::MigrationPending() const"
+      },
+      {
+        "at": "0x1002f83a",
+        "to": "0x10028108",
+        "name": "ProfileStore::PrepareCompact(_Config&) const"
+      },
+      {
+        "at": "0x1002f848",
+        "to": "0x100215dc",
+        "name": "Persistence::SaveConfig(_Config&)"
+      },
+      {
+        "at": "0x1002f858",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1002f85e",
+        "to": "0x10024c64",
+        "name": "ProfileStore::MigrationPending() const"
+      },
+      {
+        "at": "0x1002f872",
+        "to": "0x100282bc",
+        "name": "ProfileStore::CompleteMigration(_Config const&)"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1002f2f4:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1002f2fe:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1002f302:\tb099      \tsub\tsp, #100\t@ 0x64",
+      "1002f522:\tb019      \tadd\tsp, #100\t@ 0x64"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 136
+  },
+  "__wrap_main": {
+    "address": "0x1001da44",
+    "end": "0x1001daae",
+    "symbol_size": 106,
+    "allocation_inventory": 0,
+    "calls": [],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 0
+  },
+  "loop": {
+    "address": "0x1002e2a4",
+    "end": "0x1002e380",
+    "symbol_size": 220,
+    "allocation_inventory": 32,
+    "calls": [
+      {
+        "at": "0x1002e2ac",
+        "to": "0x1006a648",
+        "name": "__mutex_enter_blocking_veneer"
+      },
+      {
+        "at": "0x1002e2b6",
+        "to": "0x1006a508",
+        "name": "__mutex_exit_veneer"
+      },
+      {
+        "at": "0x1002e2c0",
+        "to": "0x1006a648",
+        "name": "__mutex_enter_blocking_veneer"
+      },
+      {
+        "at": "0x1002e2c8",
+        "to": "0x1006a508",
+        "name": "__mutex_exit_veneer"
+      },
+      {
+        "at": "0x1002e2ea",
+        "to": "0x10033708",
+        "name": "select_mode(CommunicationBackend**, unsigned int, _Config&)"
+      },
+      {
+        "at": "0x1002e30e",
+        "to": "0x1003fe2c",
+        "name": "millis"
+      },
+      {
+        "at": "0x1002e322",
+        "to": "0x1002be6c",
+        "name": "void runtime_identity::Service::Poll<Adafruit_USBD_CDC>(Adafruit_USBD_CDC&, CommunicationBackend*, _Config const&, ProfileStore const&, Ultimate const&, unsigned long) [clone .isra.0]"
+      },
+      {
+        "at": "0x1002e328",
+        "to": "0x1001d418",
+        "name": "native_metrics::ServiceCore(unsigned int)"
+      },
+      {
+        "at": "0x1002e338",
+        "to": "0x10030d94",
+        "name": "CommunicationBackend::GetInputs()"
+      },
+      {
+        "at": "0x1002e340",
+        "to": "0x1001cfa4",
+        "name": "KeyboardMode::SendReport(_InputState const&)"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x1002e302",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x1002e354",
+        "instruction": "blx\tr3"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "1002e2a4:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1002e2a8:\tb083      \tsub\tsp, #12",
+      "1002e344:\tb003      \tadd\tsp, #12"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 32
+  },
+  "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)": {
+    "address": "0x1001c5dc",
+    "end": "0x1001c73c",
+    "symbol_size": 352,
+    "allocation_inventory": 88,
+    "calls": [
+      {
+        "at": "0x1001c62a",
+        "to": "0x1001c584",
+        "name": "CheckedStorage::(anonymous namespace)::mount()"
+      },
+      {
+        "at": "0x1001c63a",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001c656",
+        "to": "0x100163c8",
+        "name": "lfs_file_open"
+      },
+      {
+        "at": "0x1001c684",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001c694",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001c69e",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001c6f4",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001c706",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001c710",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001c722",
+        "to": "0x100163dc",
+        "name": "lfs_file_close"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001c5dc:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001c5e6:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1001c5e8:\tb08d      \tsub\tsp, #52\t@ 0x34",
+      "1001c6bc:\tb00d      \tadd\tsp, #52\t@ 0x34"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 88
+  },
+  "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)": {
+    "address": "0x1001c73c",
+    "end": "0x1001c784",
+    "symbol_size": 72,
+    "allocation_inventory": 16,
+    "calls": [
+      {
+        "at": "0x1001c75a",
+        "to": "0x10016588",
+        "name": "lfs_file_read"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001c73c:\tb570      \tpush\t{r4, r5, r6, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 16
+  },
+  "CheckedStorage::Close(CheckedStorage::File&)": {
+    "address": "0x1001c870",
+    "end": "0x1001c8c0",
+    "symbol_size": 80,
+    "allocation_inventory": 16,
+    "calls": [
+      {
+        "at": "0x1001c890",
+        "to": "0x100163dc",
+        "name": "lfs_file_close"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001c872:\tb570      \tpush\t{r4, r5, r6, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 16
+  },
+  "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)": {
+    "address": "0x1001c8c0",
+    "end": "0x1001c970",
+    "symbol_size": 176,
+    "allocation_inventory": 72,
+    "calls": [
+      {
+        "at": "0x1001c8f8",
+        "to": "0x1001c584",
+        "name": "CheckedStorage::(anonymous namespace)::mount()"
+      },
+      {
+        "at": "0x1001c906",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001c910",
+        "to": "0x10016280",
+        "name": "lfs_stat"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001c8c0:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001c8c4:\tb500      \tpush\t{lr}",
+      "1001c8cc:\tb08c      \tsub\tsp, #48\t@ 0x30",
+      "1001c942:\tb00c      \tadd\tsp, #48\t@ 0x30"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 72
+  },
+  "lfs_file_open": {
+    "address": "0x100163c8",
+    "end": "0x100163dc",
+    "symbol_size": 20,
+    "allocation_inventory": 16,
+    "calls": [
+      {
+        "at": "0x100163d0",
+        "to": "0x1001544c",
+        "name": "lfs_file_rawopencfg"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "100163c8:\tb510      \tpush\t{r4, lr}",
+      "100163cc:\tb082      \tsub\tsp, #8",
+      "100163d4:\tb002      \tadd\tsp, #8"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 16
+  },
+  "lfs_file_read": {
+    "address": "0x10016588",
+    "end": "0x100165ae",
+    "symbol_size": 38,
+    "allocation_inventory": 24,
+    "calls": [
+      {
+        "at": "0x10016598",
+        "to": "0x1001332c",
+        "name": "lfs_file_flush"
+      },
+      {
+        "at": "0x100165a8",
+        "to": "0x10011d70",
+        "name": "lfs_file_flushedread"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10016588:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 24
+  },
+  "lfs_file_flushedread": {
+    "address": "0x10011d70",
+    "end": "0x10011f4c",
+    "symbol_size": 476,
+    "allocation_inventory": 96,
+    "calls": [
+      {
+        "at": "0x10011e20",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10011e38",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10011e58",
+        "to": "0x10011bd8",
+        "name": "lfs_dir_getslice.constprop.2"
+      },
+      {
+        "at": "0x10011eae",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10011eee",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x10011f24",
+        "to": "0x10010790",
+        "name": "lfs_ctz_find.constprop.0"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10011d70:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10011d7a:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10011d86:\tb08f      \tsub\tsp, #60\t@ 0x3c",
+      "10011e60:\tb00f      \tadd\tsp, #60\t@ 0x3c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 96
+  },
+  "lfs_file_close": {
+    "address": "0x100163dc",
+    "end": "0x100164d0",
+    "symbol_size": 244,
+    "allocation_inventory": 48,
+    "calls": [
+      {
+        "at": "0x10016416",
+        "to": "0x1001332c",
+        "name": "lfs_file_flush"
+      },
+      {
+        "at": "0x1001646e",
+        "to": "0x10014dc8",
+        "name": "lfs_dir_orphaningcommit"
+      },
+      {
+        "at": "0x10016496",
+        "to": "0x10040228",
+        "name": "__wrap_free"
+      },
+      {
+        "at": "0x100164ae",
+        "to": "0x100151cc",
+        "name": "lfs_fs_deorphan"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "100163dc:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "100163e8:\tb087      \tsub\tsp, #28",
+      "10016412:\tb007      \tadd\tsp, #28"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 48
+  },
+  "lfs_file_flush": {
+    "address": "0x1001332c",
+    "end": "0x1001342c",
+    "symbol_size": 256,
+    "allocation_inventory": 112,
+    "calls": [
+      {
+        "at": "0x10013366",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10013398",
+        "to": "0x10011d70",
+        "name": "lfs_file_flushedread"
+      },
+      {
+        "at": "0x100133aa",
+        "to": "0x10012f94",
+        "name": "lfs_file_flushedwrite"
+      },
+      {
+        "at": "0x100133d4",
+        "to": "0x10012ddc",
+        "name": "lfs_file_relocate"
+      },
+      {
+        "at": "0x100133e4",
+        "to": "0x100108a0",
+        "name": "lfs_bd_flush"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001332c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10013330:\tb500      \tpush\t{lr}",
+      "10013338:\tb096      \tsub\tsp, #88\t@ 0x58",
+      "1001334e:\tb016      \tadd\tsp, #88\t@ 0x58"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 112
+  },
+  "lfs_ctz_find.constprop.0": {
+    "address": "0x10010790",
+    "end": "0x1001089e",
+    "symbol_size": 270,
+    "allocation_inventory": 64,
+    "calls": [
+      {
+        "at": "0x100107b8",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x100107be",
+        "to": "0x10042b90",
+        "name": "__wrap___popcountsi2"
+      },
+      {
+        "at": "0x100107ca",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x100107da",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x100107e0",
+        "to": "0x10042b90",
+        "name": "__wrap___popcountsi2"
+      },
+      {
+        "at": "0x100107ee",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x100107f4",
+        "to": "0x10042b90",
+        "name": "__wrap___popcountsi2"
+      },
+      {
+        "at": "0x10010818",
+        "to": "0x10042b78",
+        "name": "__wrap___clz"
+      },
+      {
+        "at": "0x10010820",
+        "to": "0x10042b84",
+        "name": "__wrap___ctzsi2"
+      },
+      {
+        "at": "0x10010850",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10010790:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001079a:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1001079c:\tb087      \tsub\tsp, #28",
+      "10010870:\tb007      \tadd\tsp, #28"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 64
+  },
+  "lfs_stat": {
+    "address": "0x10016280",
+    "end": "0x100162aa",
+    "symbol_size": 42,
+    "allocation_inventory": 56,
+    "calls": [
+      {
+        "at": "0x10016290",
+        "to": "0x10011a3c",
+        "name": "lfs_dir_find"
+      },
+      {
+        "at": "0x100162a2",
+        "to": "0x10011f4c",
+        "name": "lfs_dir_getinfo"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10016280:\tb530      \tpush\t{r4, r5, lr}",
+      "10016282:\tb08b      \tsub\tsp, #44\t@ 0x2c",
+      "100162a6:\tb00b      \tadd\tsp, #44\t@ 0x2c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 56
+  },
+  "lfs_file_rawopencfg": {
+    "address": "0x1001544c",
+    "end": "0x10015748",
+    "symbol_size": 764,
+    "allocation_inventory": 80,
+    "calls": [
+      {
+        "at": "0x10015466",
+        "to": "0x100153cc",
+        "name": "lfs_fs_forceconsistency"
+      },
+      {
+        "at": "0x1001548e",
+        "to": "0x10011a3c",
+        "name": "lfs_dir_find"
+      },
+      {
+        "at": "0x10015542",
+        "to": "0x100115b0",
+        "name": "lfs_dir_getslice.constprop.0"
+      },
+      {
+        "at": "0x100155ce",
+        "to": "0x10063108",
+        "name": "strlen"
+      },
+      {
+        "at": "0x10015604",
+        "to": "0x10014dc8",
+        "name": "lfs_dir_orphaningcommit"
+      },
+      {
+        "at": "0x10015618",
+        "to": "0x10040228",
+        "name": "__wrap_free"
+      },
+      {
+        "at": "0x1001563e",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x100156bc",
+        "to": "0x10011748",
+        "name": "lfs_dir_getslice.constprop.1"
+      },
+      {
+        "at": "0x100156d0",
+        "to": "0x100151cc",
+        "name": "lfs_fs_deorphan"
+      },
+      {
+        "at": "0x10015700",
+        "to": "0x10011748",
+        "name": "lfs_dir_getslice.constprop.1"
+      },
+      {
+        "at": "0x10015718",
+        "to": "0x100401f4",
+        "name": "__wrap_malloc"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001544c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10015456:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1001545a:\tb08b      \tsub\tsp, #44\t@ 0x2c",
+      "10015576:\tb00b      \tadd\tsp, #44\t@ 0x2c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 80
+  },
+  "lfs_dir_orphaningcommit": {
+    "address": "0x10014dc8",
+    "end": "0x100151cc",
+    "symbol_size": 1028,
+    "allocation_inventory": 160,
+    "calls": [
+      {
+        "at": "0x10014e36",
+        "to": "0x10012ddc",
+        "name": "lfs_file_relocate"
+      },
+      {
+        "at": "0x10014e4e",
+        "to": "0x1001332c",
+        "name": "lfs_file_flush"
+      },
+      {
+        "at": "0x10014e88",
+        "to": "0x1001443c",
+        "name": "lfs_dir_relocatingcommit"
+      },
+      {
+        "at": "0x10014f74",
+        "to": "0x10010e64",
+        "name": "lfs_dir_fetchmatch"
+      },
+      {
+        "at": "0x10015002",
+        "to": "0x10011420",
+        "name": "lfs_fs_pred"
+      },
+      {
+        "at": "0x100150b0",
+        "to": "0x10014a44",
+        "name": "lfs_dir_relocatingcommit.constprop.0"
+      },
+      {
+        "at": "0x100150c2",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001510c",
+        "to": "0x10014a44",
+        "name": "lfs_dir_relocatingcommit.constprop.0"
+      },
+      {
+        "at": "0x1001513c",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x10015178",
+        "to": "0x10011494",
+        "name": "lfs_dir_getgstate"
+      },
+      {
+        "at": "0x100151b0",
+        "to": "0x1001443c",
+        "name": "lfs_dir_relocatingcommit"
+      },
+      {
+        "at": "0x100151c2",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10014dc8:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10014dd2:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10014de0:\tb09f      \tsub\tsp, #124\t@ 0x7c",
+      "10014fd6:\tb01f      \tadd\tsp, #124\t@ 0x7c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 160
+  },
+  "lfs_dir_relocatingcommit": {
+    "address": "0x1001443c",
+    "end": "0x10014a44",
+    "symbol_size": 1544,
+    "allocation_inventory": 136,
+    "calls": [
+      {
+        "at": "0x100145d0",
+        "to": "0x10010a6c",
+        "name": "lfs_dir_traverse.constprop.0"
+      },
+      {
+        "at": "0x10014606",
+        "to": "0x10013bbc",
+        "name": "lfs_dir_splittingcompact.constprop.0"
+      },
+      {
+        "at": "0x1001468c",
+        "to": "0x10013620",
+        "name": "lfs_dir_commitcrc"
+      },
+      {
+        "at": "0x100146b0",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10014706",
+        "to": "0x10010e64",
+        "name": "lfs_dir_fetchmatch"
+      },
+      {
+        "at": "0x10014808",
+        "to": "0x10011420",
+        "name": "lfs_fs_pred"
+      },
+      {
+        "at": "0x1001490c",
+        "to": "0x10011494",
+        "name": "lfs_dir_getgstate"
+      },
+      {
+        "at": "0x10014934",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x10014946",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001443c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10014446:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10014448:\tb099      \tsub\tsp, #100\t@ 0x64",
+      "100145e4:\tb019      \tadd\tsp, #100\t@ 0x64"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 136
+  },
+  "lfs_dir_splittingcompact.constprop.0": {
+    "address": "0x10013bbc",
+    "end": "0x1001443c",
+    "symbol_size": 2176,
+    "allocation_inventory": 192,
+    "calls": [
+      {
+        "at": "0x10013c16",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10013c60",
+        "to": "0x10010a6c",
+        "name": "lfs_dir_traverse.constprop.0"
+      },
+      {
+        "at": "0x10013c84",
+        "to": "0x10012174",
+        "name": "lfs_dir_alloc"
+      },
+      {
+        "at": "0x10013cc0",
+        "to": "0x10013914",
+        "name": "lfs_dir_compact"
+      },
+      {
+        "at": "0x10013d16",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10013d3a",
+        "to": "0x100118e0",
+        "name": "lfs_fs_rawtraverse.constprop.0"
+      },
+      {
+        "at": "0x10013db4",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10013dd2",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10013ddc",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10013e02",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10013e36",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10013e66",
+        "to": "0x10010e64",
+        "name": "lfs_dir_fetchmatch"
+      },
+      {
+        "at": "0x10013e92",
+        "to": "0x10011748",
+        "name": "lfs_dir_getslice.constprop.1"
+      },
+      {
+        "at": "0x10013f40",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x10013f46",
+        "to": "0x10042b90",
+        "name": "__wrap___popcountsi2"
+      },
+      {
+        "at": "0x10013f52",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x10013f78",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10013fbc",
+        "to": "0x10010408",
+        "name": "lfs_bd_read"
+      },
+      {
+        "at": "0x10013fd4",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x1001402e",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10014076",
+        "to": "0x10013914",
+        "name": "lfs_dir_compact"
+      },
+      {
+        "at": "0x100140c0",
+        "to": "0x10013914",
+        "name": "lfs_dir_compact"
+      },
+      {
+        "at": "0x100140e6",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10014156",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x100141ba",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x100141c0",
+        "to": "0x10042b90",
+        "name": "__wrap___popcountsi2"
+      },
+      {
+        "at": "0x100141cc",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x100141e8",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x1001422a",
+        "to": "0x10010408",
+        "name": "lfs_bd_read"
+      },
+      {
+        "at": "0x10014244",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x1001429c",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x100142d0",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10014346",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x1001434c",
+        "to": "0x10042b90",
+        "name": "__wrap___popcountsi2"
+      },
+      {
+        "at": "0x10014358",
+        "to": "0x1006a4d8",
+        "name": "____wrap___aeabi_uidiv_veneer"
+      },
+      {
+        "at": "0x1001437e",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x100143c0",
+        "to": "0x10010408",
+        "name": "lfs_bd_read"
+      },
+      {
+        "at": "0x100143d6",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10013bbc:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10013bc6:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10013bc8:\tb0a7      \tsub\tsp, #156\t@ 0x9c",
+      "10013c6c:\tb027      \tadd\tsp, #156\t@ 0x9c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 192
+  },
+  "lfs_dir_compact": {
+    "address": "0x10013914",
+    "end": "0x10013bbc",
+    "symbol_size": 680,
+    "allocation_inventory": 136,
+    "calls": [
+      {
+        "at": "0x10013952",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x100139d2",
+        "to": "0x100127ec",
+        "name": "lfs_alloc"
+      },
+      {
+        "at": "0x10013a10",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x10013a4c",
+        "to": "0x10010a6c",
+        "name": "lfs_dir_traverse.constprop.0"
+      },
+      {
+        "at": "0x10013a92",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x10013aa6",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x10013aba",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10013afe",
+        "to": "0x10011494",
+        "name": "lfs_dir_getgstate"
+      },
+      {
+        "at": "0x10013b18",
+        "to": "0x10013620",
+        "name": "lfs_dir_commitcrc"
+      },
+      {
+        "at": "0x10013b42",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10013b88",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x10013b9a",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x10013984",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10013a00",
+        "instruction": "blx\tr3"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "10013914:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10013920:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10013922:\tb099      \tsub\tsp, #100\t@ 0x64",
+      "10013990:\tb019      \tadd\tsp, #100\t@ 0x64"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 136
+  },
+  "lfs_dir_traverse.constprop.0": {
+    "address": "0x10010a6c",
+    "end": "0x10010d4c",
+    "symbol_size": 736,
+    "allocation_inventory": 216,
+    "calls": [
+      {
+        "at": "0x10010b4e",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10010c76",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x10010b18",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10010d2e",
+        "instruction": "blx\tr4"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "10010a6c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10010a76:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10010a78:\tb0ad      \tsub\tsp, #180\t@ 0xb4",
+      "10010c48:\tb02d      \tadd\tsp, #180\t@ 0xb4"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 216
+  },
+  "lfs_dir_commit_commit": {
+    "address": "0x10013520",
+    "end": "0x1001361e",
+    "symbol_size": 254,
+    "allocation_inventory": 72,
+    "calls": [
+      {
+        "at": "0x10013570",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x100135cc",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x100135dc",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      },
+      {
+        "at": "0x100135fe",
+        "to": "0x10010d4c",
+        "name": "lfs_dir_commitprog"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10013522:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001353e:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10013552:\tb089      \tsub\tsp, #36\t@ 0x24",
+      "100135e8:\tb009      \tadd\tsp, #36\t@ 0x24"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 72
+  },
+  "lfs_dir_commitprog": {
+    "address": "0x10010d4c",
+    "end": "0x10010e64",
+    "symbol_size": 280,
+    "allocation_inventory": 72,
+    "calls": [
+      {
+        "at": "0x10010d7e",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10010dae",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x10010e06",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x10010e2c",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10010e44",
+        "to": "0x10016c74",
+        "name": "lfs_crc"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x10010e1e",
+        "instruction": "blx\tr7"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "10010d4c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10010d56:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10010d58:\tb089      \tsub\tsp, #36\t@ 0x24",
+      "10010e56:\tb009      \tadd\tsp, #36\t@ 0x24"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 72
+  },
+  "lfs_dir_find": {
+    "address": "0x10011a3c",
+    "end": "0x10011bd8",
+    "symbol_size": 412,
+    "allocation_inventory": 96,
+    "calls": [
+      {
+        "at": "0x10011a80",
+        "to": "0x1006319c",
+        "name": "strspn"
+      },
+      {
+        "at": "0x10011a8c",
+        "to": "0x100625c0",
+        "name": "strcspn"
+      },
+      {
+        "at": "0x10011abc",
+        "to": "0x1006319c",
+        "name": "strspn"
+      },
+      {
+        "at": "0x10011ac6",
+        "to": "0x100625c0",
+        "name": "strcspn"
+      },
+      {
+        "at": "0x10011b22",
+        "to": "0x10011748",
+        "name": "lfs_dir_getslice.constprop.1"
+      },
+      {
+        "at": "0x10011b4e",
+        "to": "0x10062578",
+        "name": "strchr"
+      },
+      {
+        "at": "0x10011b76",
+        "to": "0x10010e64",
+        "name": "lfs_dir_fetchmatch"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10011a3c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10011a46:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10011a4c:\tb08f      \tsub\tsp, #60\t@ 0x3c",
+      "10011b82:\tb00f      \tadd\tsp, #60\t@ 0x3c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 96
+  },
+  "lfs_dir_fetchmatch": {
+    "address": "0x10010e64",
+    "end": "0x10011420",
+    "symbol_size": 1468,
+    "allocation_inventory": 152,
+    "calls": [
+      {
+        "at": "0x10010eaa",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10010ede",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10010f4a",
+        "to": "0x10016c74",
+        "name": "lfs_crc"
+      },
+      {
+        "at": "0x10010f90",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10010fa0",
+        "to": "0x10016c74",
+        "name": "lfs_crc"
+      },
+      {
+        "at": "0x10011038",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10011048",
+        "to": "0x10016c74",
+        "name": "lfs_crc"
+      },
+      {
+        "at": "0x10011132",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x100111be",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x10011258",
+        "to": "0x10016c74",
+        "name": "lfs_crc"
+      },
+      {
+        "at": "0x10011306",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x100110a6",
+        "instruction": "blx\tr3"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "10010e64:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10010e6e:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10010e70:\tb09d      \tsub\tsp, #116\t@ 0x74",
+      "100110f4:\tb01d      \tadd\tsp, #116\t@ 0x74"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 152
+  },
+  "lfs_dir_find_match": {
+    "address": "0x100106dc",
+    "end": "0x10010790",
+    "symbol_size": 180,
+    "allocation_inventory": 72,
+    "calls": [
+      {
+        "at": "0x1001074a",
+        "to": "0x100102c4",
+        "name": "lfs_bd_read.part.0.constprop.0"
+      },
+      {
+        "at": "0x1001075a",
+        "to": "0x1006a518",
+        "name": "__memcmp_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "100106dc:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "100106e6:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "100106f2:\tb089      \tsub\tsp, #36\t@ 0x24",
+      "10010768:\tb009      \tadd\tsp, #36\t@ 0x24"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 72
+  },
+  "lfs_bd_read.part.0.constprop.0": {
+    "address": "0x100102c4",
+    "end": "0x10010406",
+    "symbol_size": 322,
+    "allocation_inventory": 64,
+    "calls": [
+      {
+        "at": "0x10010300",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x1001031e",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x1001035c",
+        "to": "0x1006a638",
+        "name": "____wrap___aeabi_uidivmod_veneer"
+      },
+      {
+        "at": "0x100103ea",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x10010332",
+        "instruction": "blx\tr6"
+      },
+      {
+        "at": "0x10010386",
+        "instruction": "blx\tr4"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "100102c4:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "100102ce:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "100102d0:\tb087      \tsub\tsp, #28",
+      "10010338:\tb007      \tadd\tsp, #28"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 64
+  },
+  "noInterrupts": {
+    "address": "0x100406a8",
+    "end": "0x100406e4",
+    "symbol_size": 60,
+    "allocation_inventory": 16,
+    "calls": [
+      {
+        "at": "0x100406d4",
+        "to": "0x1004399c",
+        "name": "panic"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "100406b4:\tb570      \tpush\t{r4, r5, r6, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 16
+  },
+  "usb_task_irq()": {
+    "address": "0x10007770",
+    "end": "0x10007798",
+    "symbol_size": 40,
+    "allocation_inventory": 8,
+    "calls": [
+      {
+        "at": "0x10007778",
+        "to": "0x1006a578",
+        "name": "__mutex_try_enter_veneer"
+      },
+      {
+        "at": "0x10007788",
+        "to": "0x10009534",
+        "name": "tud_task_ext"
+      },
+      {
+        "at": "0x1000778e",
+        "to": "0x1006a508",
+        "name": "__mutex_exit_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10007770:\tb510      \tpush\t{r4, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 8
+  },
+  "tud_task_ext": {
+    "address": "0x10009534",
+    "end": "0x10009db0",
+    "symbol_size": 2172,
+    "allocation_inventory": 112,
+    "calls": [
+      {
+        "at": "0x10009580",
+        "to": "0x10008f8c",
+        "name": "tu_fifo_read"
+      },
+      {
+        "at": "0x10009636",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009664",
+        "to": "0x1000a6d8",
+        "name": "dcd_edpt_stall"
+      },
+      {
+        "at": "0x1000966c",
+        "to": "0x1000a6d8",
+        "name": "dcd_edpt_stall"
+      },
+      {
+        "at": "0x10009748",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009752",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1000975e",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009762",
+        "to": "0x1000a068",
+        "name": "usbd_control_reset"
+      },
+      {
+        "at": "0x1000977c",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009786",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009792",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009796",
+        "to": "0x1000a068",
+        "name": "usbd_control_reset"
+      },
+      {
+        "at": "0x100097ba",
+        "to": "0x1000a0a4",
+        "name": "usbd_control_xfer_cb"
+      },
+      {
+        "at": "0x100097cc",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x100097d6",
+        "to": "0x1000bb44",
+        "name": "tud_vendor_control_xfer_cb"
+      },
+      {
+        "at": "0x1000981a",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009846",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009856",
+        "to": "0x10009f90",
+        "name": "tud_control_status"
+      },
+      {
+        "at": "0x100098f4",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009930",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009990",
+        "to": "0x10009fbc",
+        "name": "tud_control_xfer"
+      },
+      {
+        "at": "0x100099d4",
+        "to": "0x1000a088",
+        "name": "usbd_control_set_request"
+      },
+      {
+        "at": "0x100099dc",
+        "to": "0x1000a404",
+        "name": "dcd_set_address"
+      },
+      {
+        "at": "0x100099fe",
+        "to": "0x10009f90",
+        "name": "tud_control_status"
+      },
+      {
+        "at": "0x10009a18",
+        "to": "0x10009f90",
+        "name": "tud_control_status"
+      },
+      {
+        "at": "0x10009a48",
+        "to": "0x10009f90",
+        "name": "tud_control_status"
+      },
+      {
+        "at": "0x10009a5c",
+        "to": "0x10009fbc",
+        "name": "tud_control_xfer"
+      },
+      {
+        "at": "0x10009a9c",
+        "to": "0x10009fbc",
+        "name": "tud_control_xfer"
+      },
+      {
+        "at": "0x10009ace",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009ae0",
+        "to": "0x1000a07c",
+        "name": "usbd_control_set_complete_callback"
+      },
+      {
+        "at": "0x10009b0c",
+        "to": "0x1000a70c",
+        "name": "dcd_edpt_clear_stall"
+      },
+      {
+        "at": "0x10009b26",
+        "to": "0x100072c0",
+        "name": "tud_descriptor_configuration_cb"
+      },
+      {
+        "at": "0x10009c0a",
+        "to": "0x1000a64c",
+        "name": "dcd_edpt_close_all"
+      },
+      {
+        "at": "0x10009c88",
+        "to": "0x10009fbc",
+        "name": "tud_control_xfer"
+      },
+      {
+        "at": "0x10009c96",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009ca0",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009cac",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x10009cb6",
+        "to": "0x1000a6d8",
+        "name": "dcd_edpt_stall"
+      },
+      {
+        "at": "0x10009cd4",
+        "to": "0x1000bb3c",
+        "name": "tud_descriptor_bos_cb"
+      },
+      {
+        "at": "0x10009cf8",
+        "to": "0x10009fbc",
+        "name": "tud_control_xfer"
+      },
+      {
+        "at": "0x10009d00",
+        "to": "0x100072cc",
+        "name": "tud_descriptor_string_cb"
+      },
+      {
+        "at": "0x10009d1c",
+        "to": "0x100072b8",
+        "name": "tud_descriptor_device_cb"
+      },
+      {
+        "at": "0x10009d28",
+        "to": "0x10009fbc",
+        "name": "tud_control_xfer"
+      },
+      {
+        "at": "0x10009d2e",
+        "to": "0x100072c0",
+        "name": "tud_descriptor_configuration_cb"
+      },
+      {
+        "at": "0x10009d6e",
+        "to": "0x1000ac20",
+        "name": "tu_edpt_bind_driver"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x100095b0",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009604",
+        "instruction": "blx\tr5"
+      },
+      {
+        "at": "0x100096b8",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009720",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009826",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009902",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x1000993c",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009adc",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009bd0",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x10009c56",
+        "instruction": "blx\tr3"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "10009534:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1000953e:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10009542:\tb093      \tsub\tsp, #76\t@ 0x4c",
+      "100097a6:\tb013      \tadd\tsp, #76\t@ 0x4c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 112
+  },
+  "cdcd_xfer_cb": {
+    "address": "0x10007c60",
+    "end": "0x10007d9c",
+    "symbol_size": 316,
+    "allocation_inventory": 40,
+    "calls": [
+      {
+        "at": "0x10007c96",
+        "to": "0x10008f50",
+        "name": "tu_fifo_empty"
+      },
+      {
+        "at": "0x10007ca0",
+        "to": "0x10008f60",
+        "name": "tu_fifo_remaining"
+      },
+      {
+        "at": "0x10007cb0",
+        "to": "0x10009e80",
+        "name": "usbd_edpt_claim"
+      },
+      {
+        "at": "0x10007cd0",
+        "to": "0x10007928",
+        "name": "tud_cdc_n_write_flush"
+      },
+      {
+        "at": "0x10007cdc",
+        "to": "0x10008f24",
+        "name": "tu_fifo_count"
+      },
+      {
+        "at": "0x10007cf2",
+        "to": "0x10009e80",
+        "name": "usbd_edpt_claim"
+      },
+      {
+        "at": "0x10007d02",
+        "to": "0x10009ed0",
+        "name": "usbd_edpt_xfer"
+      },
+      {
+        "at": "0x10007d1c",
+        "to": "0x10009218",
+        "name": "tu_fifo_write_n"
+      },
+      {
+        "at": "0x10007d48",
+        "to": "0x10008f50",
+        "name": "tu_fifo_empty"
+      },
+      {
+        "at": "0x10007d5e",
+        "to": "0x10008f60",
+        "name": "tu_fifo_remaining"
+      },
+      {
+        "at": "0x10007d72",
+        "to": "0x10009ed0",
+        "name": "usbd_edpt_xfer"
+      },
+      {
+        "at": "0x10007d82",
+        "to": "0x10009ea8",
+        "name": "usbd_edpt_release"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10007c60:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}",
+      "10007c6a:\tb5e0      \tpush\t{r5, r6, r7, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 40
+  },
+  "tud_cdc_n_write_flush": {
+    "address": "0x10007928",
+    "end": "0x100079a0",
+    "symbol_size": 120,
+    "allocation_inventory": 24,
+    "calls": [
+      {
+        "at": "0x1000792c",
+        "to": "0x10009418",
+        "name": "tud_mounted"
+      },
+      {
+        "at": "0x10007938",
+        "to": "0x10009428",
+        "name": "tud_suspended"
+      },
+      {
+        "at": "0x10007950",
+        "to": "0x10008f24",
+        "name": "tu_fifo_count"
+      },
+      {
+        "at": "0x1000795e",
+        "to": "0x10009e80",
+        "name": "usbd_edpt_claim"
+      },
+      {
+        "at": "0x10007976",
+        "to": "0x10009028",
+        "name": "tu_fifo_read_n"
+      },
+      {
+        "at": "0x10007986",
+        "to": "0x10009ed0",
+        "name": "usbd_edpt_xfer"
+      },
+      {
+        "at": "0x10007994",
+        "to": "0x10009ea8",
+        "name": "usbd_edpt_release"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10007928:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 24
+  },
+  "usbd_edpt_claim": {
+    "address": "0x10009e80",
+    "end": "0x10009ea8",
+    "symbol_size": 40,
+    "allocation_inventory": 8,
+    "calls": [
+      {
+        "at": "0x10009e98",
+        "to": "0x1000ab1c",
+        "name": "tu_edpt_claim"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10009e84:\tb510      \tpush\t{r4, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 8
+  },
+  "tu_edpt_claim": {
+    "address": "0x1000ab1c",
+    "end": "0x1000ab6a",
+    "symbol_size": 78,
+    "allocation_inventory": 16,
+    "calls": [
+      {
+        "at": "0x1000ab3c",
+        "to": "0x1006a598",
+        "name": "__mutex_enter_timeout_ms_veneer"
+      },
+      {
+        "at": "0x1000ab64",
+        "to": "0x1006a508",
+        "name": "__mutex_exit_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1000ab1e:\tb570      \tpush\t{r4, r5, r6, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 16
+  },
+  "mutex_enter_timeout_ms": {
+    "address": "0x20000b20",
+    "end": "0x20000b60",
+    "symbol_size": 64,
+    "allocation_inventory": 24,
+    "calls": [
+      {
+        "at": "0x20000b26",
+        "to": "0x20001540",
+        "name": "__time_us_64_veneer"
+      },
+      {
+        "at": "0x20000b38",
+        "to": "0x20001530",
+        "name": "____wrap___aeabi_lmul_veneer"
+      },
+      {
+        "at": "0x20000b54",
+        "to": "0x20000aca",
+        "name": "mutex_enter_block_until"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "20000b20:\tb5f8      \tpush\t{r3, r4, r5, r6, r7, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 24
+  },
+  "mutex_enter_block_until": {
+    "address": "0x20000aca",
+    "end": "0x20000b1e",
+    "symbol_size": 84,
+    "allocation_inventory": 32,
+    "calls": [
+      {
+        "at": "0x20000b12",
+        "to": "0x200014d0",
+        "name": "__best_effort_wfe_or_timeout_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "20000aca:\tb5f7      \tpush\t{r0, r1, r2, r4, r5, r6, r7, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 32
+  },
+  "RP2040::_SystickHandler()": {
+    "address": "0x1003fe54",
+    "end": "0x1003fe70",
+    "symbol_size": 28,
+    "allocation_inventory": 12,
+    "calls": [],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1003fe54:\tb530      \tpush\t{r4, r5, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 12
+  },
+  "tud_descriptor_string_cb": {
+    "address": "0x100072cc",
+    "end": "0x10007344",
+    "symbol_size": 120,
+    "allocation_inventory": 8,
+    "calls": [
+      {
+        "at": "0x100072ee",
+        "to": "0x10006e28",
+        "name": "strcpy_utf16(char const*, unsigned short*, int) [clone .constprop.0]"
+      },
+      {
+        "at": "0x10007326",
+        "to": "0x10007214",
+        "name": "Adafruit_USBD_Device::getSerialDescriptor(unsigned short*)"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "100072cc:\tb510      \tpush\t{r4, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 8
+  },
+  "Adafruit_USBD_Device::getSerialDescriptor(unsigned short*)": {
+    "address": "0x10007214",
+    "end": "0x100072b8",
+    "symbol_size": 164,
+    "allocation_inventory": 80,
+    "calls": [
+      {
+        "at": "0x10007230",
+        "to": "0x10006e28",
+        "name": "strcpy_utf16(char const*, unsigned short*, int) [clone .constprop.0]"
+      },
+      {
+        "at": "0x10007246",
+        "to": "0x100077f0",
+        "name": "TinyUSB_Port_GetSerialNumber(unsigned char*)"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10007214:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "10007220:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "10007228:\tb08b      \tsub\tsp, #44\t@ 0x2c",
+      "10007236:\tb00b      \tadd\tsp, #44\t@ 0x2c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 80
+  },
+  "TinyUSB_Port_GetSerialNumber(unsigned char*)": {
+    "address": "0x100077f0",
+    "end": "0x100077fa",
+    "symbol_size": 10,
+    "allocation_inventory": 8,
+    "calls": [
+      {
+        "at": "0x100077f2",
+        "to": "0x10043850",
+        "name": "pico_get_unique_board_id"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "100077f0:\tb510      \tpush\t{r4, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 8
+  },
+  "pico_get_unique_board_id": {
+    "address": "0x10043850",
+    "end": "0x10043860",
+    "symbol_size": 16,
+    "allocation_inventory": 8,
+    "calls": [
+      {
+        "at": "0x10043856",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "10043850:\tb510      \tpush\t{r4, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 8
+  },
+  "flash_range_program": {
+    "address": "0x20000ca0",
+    "end": "0x20000d14",
+    "symbol_size": 116,
+    "allocation_inventory": 40,
+    "calls": [
+      {
+        "at": "0x20000cb4",
+        "to": "0x20001460",
+        "name": "__hard_assertion_failure_veneer"
+      },
+      {
+        "at": "0x20000ce4",
+        "to": "0x20000bcc",
+        "name": "flash_init_boot2_copyout"
+      },
+      {
+        "at": "0x20000cfc",
+        "to": "0x20000bfc",
+        "name": "flash_enable_xip_via_boot2"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x20000cc2",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000ccc",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000cd6",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000ce0",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000cea",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000cee",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000cf8",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000cfa",
+        "instruction": "blx\tr5"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "20000ca2:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "20000ca6:\tb085      \tsub\tsp, #20",
+      "20000d00:\tb005      \tadd\tsp, #20"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 40
+  },
+  "flash_range_erase": {
+    "address": "0x20000c28",
+    "end": "0x20000ca0",
+    "symbol_size": 120,
+    "allocation_inventory": 40,
+    "calls": [
+      {
+        "at": "0x20000c3a",
+        "to": "0x20001460",
+        "name": "__hard_assertion_failure_veneer"
+      },
+      {
+        "at": "0x20000c6a",
+        "to": "0x20000bcc",
+        "name": "flash_init_boot2_copyout"
+      },
+      {
+        "at": "0x20000c86",
+        "to": "0x20000bfc",
+        "name": "flash_enable_xip_via_boot2"
+      }
+    ],
+    "indirect": [
+      {
+        "at": "0x20000c48",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000c52",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000c5c",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000c66",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000c70",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000c74",
+        "instruction": "blx\tr3"
+      },
+      {
+        "at": "0x20000c82",
+        "instruction": "blx\tr4"
+      },
+      {
+        "at": "0x20000c84",
+        "instruction": "blx\tr5"
+      }
+    ],
+    "tail": [],
+    "stack_instructions": [
+      "20000c2a:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "20000c32:\tb085      \tsub\tsp, #20",
+      "20000c8a:\tb005      \tadd\tsp, #20"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 40
+  },
+  "__wrap___aeabi_memcpy": {
+    "address": "0x10043730",
+    "end": "0x1004373c",
+    "symbol_size": 0,
+    "allocation_inventory": 0,
+    "calls": [],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 0
+  },
+  "__wrap_memset": {
+    "address": "0x10043724",
+    "end": "0x10043730",
+    "symbol_size": 0,
+    "allocation_inventory": 0,
+    "calls": [],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 0
+  },
+  "littlefs_impl::LittleFSImpl::lfs_flash_read(lfs_config const*, unsigned long, unsigned long, void*, unsigned long)": {
+    "address": "0x1000eae8",
+    "end": "0x1000eb06",
+    "symbol_size": 30,
+    "allocation_inventory": 8,
+    "calls": [
+      {
+        "at": "0x1000eafe",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1000eae8:\tb510      \tpush\t{r4, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 8
+  },
+  "littlefs_impl::LittleFSImpl::lfs_flash_prog(lfs_config const*, unsigned long, unsigned long, void const*, unsigned long)": {
+    "address": "0x1000eba8",
+    "end": "0x1000ec44",
+    "symbol_size": 156,
+    "allocation_inventory": 24,
+    "calls": [
+      {
+        "at": "0x1000ebc0",
+        "to": "0x100406a8",
+        "name": "noInterrupts"
+      },
+      {
+        "at": "0x1000ebda",
+        "to": "0x1006a648",
+        "name": "__mutex_enter_blocking_veneer"
+      },
+      {
+        "at": "0x1000ebe6",
+        "to": "0x10043770",
+        "name": "multicore_fifo_push_blocking"
+      },
+      {
+        "at": "0x1000ebfa",
+        "to": "0x1006a538",
+        "name": "__flash_range_program_veneer"
+      },
+      {
+        "at": "0x1000ec04",
+        "to": "0x10040678",
+        "name": "interrupts"
+      },
+      {
+        "at": "0x1000ec1a",
+        "to": "0x1006a508",
+        "name": "__mutex_exit_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1000eba8:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1000ebbc:\tb500      \tpush\t{lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 24
+  },
+  "(anonymous namespace)::copy_checked_file(char const*, char const*, unsigned int, bool&) [clone .constprop.0]": {
+    "address": "0x1001e104",
+    "end": "0x1001e400",
+    "symbol_size": 764,
+    "allocation_inventory": 504,
+    "calls": [
+      {
+        "at": "0x1001e12e",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001e170",
+        "to": "0x1001c5dc",
+        "name": "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001e17a",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e194",
+        "to": "0x1001c8c0",
+        "name": "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001e19e",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e1ca",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001e208",
+        "to": "0x1001c5dc",
+        "name": "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001e212",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e26c",
+        "to": "0x1001c784",
+        "name": "CheckedStorage::Write(CheckedStorage::File&, void const*, unsigned int)"
+      },
+      {
+        "at": "0x1001e276",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e2bc",
+        "to": "0x1001c73c",
+        "name": "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)"
+      },
+      {
+        "at": "0x1001e2c6",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e2ec",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001e2f6",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e30e",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001e318",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e3c4",
+        "to": "0x1001c828",
+        "name": "CheckedStorage::Sync(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001e3ce",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e3e6",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001e3f0",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001e104:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001e110:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1001e114:\tb0f5      \tsub\tsp, #468\t@ 0x1d4",
+      "1001e364:\tb075      \tadd\tsp, #468\t@ 0x1d4"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 504
+  },
+  "(anonymous namespace)::hash_file(char const*, unsigned char*)": {
+    "address": "0x1001e400",
+    "end": "0x1001f03c",
+    "symbol_size": 3132,
+    "allocation_inventory": 36,
+    "calls": [
+      {
+        "at": "0x1001e42a",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001e4a4",
+        "to": "0x1001c5dc",
+        "name": "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001e4ae",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e4cc",
+        "to": "0x1001c8c0",
+        "name": "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001e4d6",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e50a",
+        "to": "0x1001f02a",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      },
+      {
+        "at": "0x1001e52c",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001e546",
+        "to": "0x1001f022",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      },
+      {
+        "at": "0x1001e568",
+        "to": "0x1001c73c",
+        "name": "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)"
+      },
+      {
+        "at": "0x1001e572",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e5ec",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e810",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001e81a",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001e854",
+        "to": "0x1001f032",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      },
+      {
+        "at": "0x1001eae4",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001eb1c",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001eb26",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001edac",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f026",
+        "to": "0x1001e80c",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001e400:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001e40a:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1001e412:\t44a5      \tadd\tsp, r4",
+      "1001eaee:\t449d      \tadd\tsp, r3"
+    ],
+    "negative_literal_SP_allocations": [
+      {
+        "at": "0x1001e412",
+        "literal_delta": -620
+      }
+    ],
+    "resolved_frame_bytes": 656
+  },
+  "Persistence::LegacySourceIdentity(unsigned char*)": {
+    "address": "0x1001f594",
+    "end": "0x1001f838",
+    "symbol_size": 676,
+    "allocation_inventory": 280,
+    "calls": [
+      {
+        "at": "0x1001f5d4",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001f61a",
+        "to": "0x1001c5dc",
+        "name": "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001f624",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f63e",
+        "to": "0x1001c8c0",
+        "name": "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001f648",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f67c",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001f686",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f6ae",
+        "to": "0x1001e400",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      },
+      {
+        "at": "0x1001f6d4",
+        "to": "0x1001c870",
+        "name": "CheckedStorage::Close(CheckedStorage::File&)"
+      },
+      {
+        "at": "0x1001f6e0",
+        "to": "0x1001c7d8",
+        "name": "CheckedStorage::Seek(CheckedStorage::File&, unsigned int)"
+      },
+      {
+        "at": "0x1001f6ea",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f70c",
+        "to": "0x1001c73c",
+        "name": "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)"
+      },
+      {
+        "at": "0x1001f716",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f746",
+        "to": "0x1000e210",
+        "name": "CRC32::CRC32()"
+      },
+      {
+        "at": "0x1001f78c",
+        "to": "0x1000e218",
+        "name": "CRC32::update(unsigned char const&)"
+      },
+      {
+        "at": "0x1001f7a0",
+        "to": "0x1001c73c",
+        "name": "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)"
+      },
+      {
+        "at": "0x1001f7aa",
+        "to": "0x10043730",
+        "name": "__wrap___aeabi_memcpy"
+      },
+      {
+        "at": "0x1001f816",
+        "to": "0x1000e248",
+        "name": "CRC32::finalize() const"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001f594:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001f59e:\tb5e0      \tpush\t{r5, r6, r7, lr}",
+      "1001f5a4:\tb0bd      \tsub\tsp, #244\t@ 0xf4",
+      "1001f5b2:\tb03d      \tadd\tsp, #244\t@ 0xf4"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 280
+  },
+  "Persistence::PrepareCaptureSource(unsigned char*)": {
+    "address": "0x1001fc10",
+    "end": "0x1001fc8c",
+    "symbol_size": 124,
+    "allocation_inventory": 64,
+    "calls": [
+      {
+        "at": "0x1001fc18",
+        "to": "0x1001f838",
+        "name": "Persistence::CheckCaptureInput()"
+      },
+      {
+        "at": "0x1001fc38",
+        "to": "0x1001e400",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      },
+      {
+        "at": "0x1001fc48",
+        "to": "0x1001c8c0",
+        "name": "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001fc5a",
+        "to": "0x1001fb60",
+        "name": "Persistence::AdmitCaptureSource()"
+      },
+      {
+        "at": "0x1001fc68",
+        "to": "0x1001f594",
+        "name": "Persistence::LegacySourceIdentity(unsigned char*)"
+      },
+      {
+        "at": "0x1001fc76",
+        "to": "0x1006a518",
+        "name": "__memcmp_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001fc10:\tb570      \tpush\t{r4, r5, r6, lr}",
+      "1001fc12:\tb08c      \tsub\tsp, #48\t@ 0x30",
+      "1001fc32:\tb00c      \tadd\tsp, #48\t@ 0x30"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 64
+  },
+  "Persistence::ExecuteCaptureSource(unsigned char*)": {
+    "address": "0x1001fc8c",
+    "end": "0x1001fd34",
+    "symbol_size": 168,
+    "allocation_inventory": 96,
+    "calls": [
+      {
+        "at": "0x1001fc9e",
+        "to": "0x1001c970",
+        "name": "CheckedStorage::Remove(char const*, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001fcc2",
+        "to": "0x1001e104",
+        "name": "(anonymous namespace)::copy_checked_file(char const*, char const*, unsigned int, bool&) [clone .constprop.0]"
+      },
+      {
+        "at": "0x1001fcd6",
+        "to": "0x1001e400",
+        "name": "(anonymous namespace)::hash_file(char const*, unsigned char*)"
+      },
+      {
+        "at": "0x1001fce4",
+        "to": "0x1006a518",
+        "name": "__memcmp_veneer"
+      },
+      {
+        "at": "0x1001fcf6",
+        "to": "0x1001ca28",
+        "name": "CheckedStorage::Rename(char const*, char const*, CheckedStorage::Kind)"
+      },
+      {
+        "at": "0x1001fd08",
+        "to": "0x1001f594",
+        "name": "Persistence::LegacySourceIdentity(unsigned char*)"
+      },
+      {
+        "at": "0x1001fd16",
+        "to": "0x1006a518",
+        "name": "__memcmp_veneer"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001fc8c:\tb5f0      \tpush\t{r4, r5, r6, r7, lr}",
+      "1001fc90:\tb093      \tsub\tsp, #76\t@ 0x4c",
+      "1001fcb4:\tb013      \tadd\tsp, #76\t@ 0x4c"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 96
+  },
+  "Persistence::CaptureLegacySource(unsigned char*)": {
+    "address": "0x1001fd34",
+    "end": "0x1001fd78",
+    "symbol_size": 68,
+    "allocation_inventory": 16,
+    "calls": [
+      {
+        "at": "0x1001fd42",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001fd4a",
+        "to": "0x1001fc10",
+        "name": "Persistence::PrepareCaptureSource(unsigned char*)"
+      },
+      {
+        "at": "0x1001fd60",
+        "to": "0x10043724",
+        "name": "__wrap_memset"
+      },
+      {
+        "at": "0x1001fd6c",
+        "to": "0x1001fc8c",
+        "name": "Persistence::ExecuteCaptureSource(unsigned char*)"
+      }
+    ],
+    "indirect": [],
+    "tail": [],
+    "stack_instructions": [
+      "1001fd34:\tb570      \tpush\t{r4, r5, r6, lr}"
+    ],
+    "negative_literal_SP_allocations": [],
+    "resolved_frame_bytes": 16
+  }
+}

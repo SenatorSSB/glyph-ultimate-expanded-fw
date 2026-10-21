@@ -1,5 +1,18 @@
 # Glyph Current State
 
+## Consolidated lifetime repair authority — 2026-10-21
+
+The [independent bounded amendment](runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json)
+adds only Identity validation retirement, original copy-input reuse of the existing
+single File slot, reconciliation decisions, Update/Create/Duplicate phases and
+legacy SET preparation. Exact operation, ownership and result semantics remain
+required. Hash-body changes are excluded; total layout512 and every original cap
+stay unchanged. The [latest lifecycle correction](runtime_config/profile_native_ultimate/consolidated_lifetime_review_evidence_20261021/glyph-native-35e8-joint-state-erratum-20261021.md)
+qualifies earlier service-reconciliation witness claims; generated repair histories
+remain unresolved. Eight source/linked accounting witnesses motivate these
+repairs. Complete all31 proof, affected tests, fresh review/build/custody and
+hardware gates remain OPEN. No new order or device authority is created.
+
 ## Boot Persistence lifetime extension adopted — 2026-10-21
 
 The [independent bounded extension](runtime_config/profile_native_ultimate/boot_persistence_layout_scope_amendment_20261021.json)

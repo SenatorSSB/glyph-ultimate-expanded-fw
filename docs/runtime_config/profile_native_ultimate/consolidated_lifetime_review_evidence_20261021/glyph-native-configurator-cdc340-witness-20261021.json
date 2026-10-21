@@ -1,0 +1,30 @@
+{
+  "kind": "SOURCE_FEASIBLE_CONFIGURATOR_CDC340_IRQ_WITNESS",
+  "source_checks": {
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "same_9cff_ef22": true,
+      "sha256": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8"
+    },
+    "HAL/pico/include/comms/CoordinatedCdcStream.hpp": {
+      "same_9cff_ef22": true,
+      "sha256": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9"
+    }
+  },
+  "producer": "successful legacy GET_CONFIG final COBS chunk and delimiter accepted, INbusy and TXFIFO>0",
+  "final_COBS_chunk_max_bytes": 255,
+  "TX_FIFO_bytes": 256,
+  "bulk_packet_bytes": 64,
+  "next_request": "valid ProfileStore UPDATE/DUPLICATE, liveness_tracefalse, no early error response",
+  "IRQ_C_bytes": 264,
+  "outer_exception_bytes": 32,
+  "nested_SysTick_bytes": 44,
+  "feasible_IRQ_without_pads_bytes": 340,
+  "endpoint_contention_child44": "EXCLUDED_BY_SCOPED_RETURNED_PRODUCER_AND_CORE_CALLBACK_OWNERSHIP",
+  "reviewer_supplied_foreground_bytes": 1704,
+  "pre_mask_noInterrupts_bytes": 16,
+  "conditional_source_composition_bytes": 2060,
+  "foreground_independently_verified_by_this_note": false,
+  "final_engineering_ELF_correspondence": "PENDING",
+  "hardware_observations": false,
+  "implementation_changes": false
+}
