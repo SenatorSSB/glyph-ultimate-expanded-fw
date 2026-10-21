@@ -1,0 +1,26 @@
+# Adopted ABC production-source validation
+
+Root published and freshly verified canonical `c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351`. The writer's ordinary read-only Git verification failed DNS; the same permitted network-enabled read-only retry matched that SHA. Non-destructive source-free merge `6316f44c34123c168a3ecefd61acee91aec7c2a6` preceded application. Only the five exact selected blobs from sealed manifest `e7a9ec5d977499d9feb72c1d54aaea505af463d7e0dadf1685d9bda681a02c0e` were applied. `summary.json` records their SHA-256 values. No unselected annotation or body edit was retained.
+
+The implementation rematerializes the same live File from its existing slot, overlays the existing Load/Save context and publication/stream spans, returns staging phases before their siblings, borrows the existing SET receipt span only after successful decode, clears the complete spans after final use, and outlines only the original mutation executor. The checked Write result is constructed directly into its same existing trivial member. Original operation, constructor/explicit-close/destructor, error, wire, transaction and broad filesystem semantics remain the equivalence obligations.
+
+Fresh ASan/UBSan tests consumed the actual production worktree and matching real headers, with explicit short/no-short flags. Generated enum-width assertions establish one-byte/four-byte representations. Complete raw output is byte-identical to immutable4209 for every row in each representation:
+
+| Actual component matrix | Rows per representation | Evidence |
+| --- | ---: | --- |
+| Deep Config Load, ExistingExact streamed Import, direct Read/Write Results, Save and workspace alternation | 952 | Real pinned NOR/LittleFS/CheckedStorage; ten deep variants, selected Load/Import faults and24 direct Write Result cases |
+| Save and generation-checked Save | 1641 | Real NOR;1636 injected fault cases, full primitive/close/error/result/generation/fence/readback trace |
+| Load and CopyNeeded Capture | 8381 | Real NOR; source checks, copy, constructor/close/destructor faults and full raw output |
+| Legacy COBS SET | 51 | All17 original exits and following17 same-backend SETs, full88 reset observers; inherited functional Persistence boundary, separate real-NOR Save proof above |
+
+The deep fixture checks the complete Source union, Save workspace and File slot after returned operations. Target layout remains8/32/176 bytes; host observer lengths use actual host `sizeof`, including its wider pointers. Positive Source-context reset checks pass in both representations; an omitted final clear is detected. Both full88 omitted-reset and owner-only partial-reset mutants fail their named complete-span assertion in both representations. Expected negative results are archived verbatim.
+
+Actual native COBS dispatch passes both explicit representations:100 READ/max-body cases, identity/reference-engine checks, mixed-payload rejection, and the two overwritten/released response-lease mutants. This uses the production Configurator/ProfileStore/Nanopb/COBS path and the existing fixture's named Persistence boundary. It does not replace the independent NOR persistence matrices.
+
+Eight directly affected stock checkers pass: Config persistence, strict host, migration lifecycle, selection/recovery, strict protocol, timeout resynchronization, read storage, and retained native target metrics. Read storage includes the frozen/current6000-read suites and failure-stage controls. No immutable fixture assertion was removed. There was no unexpected FAIL or INCOMPLETE in this finite postadoption run. Earlier rejected variants, ABI/macro-input mistakes and raw failures remain preserved in canonical evidence.
+
+`manifest.json` maps complete original paths, lengths and SHA-256 values to deterministic gzip objects; every decoded object was independently rehashed. It includes each compared baseline/current raw output, producer command, generated descriptor, source observer, meaningful mutant and process log. Host executables/debug bundles are not target artifacts. Earlier source and immutable private fixtures are also archived in the adopted canonical evidence.
+
+The exact five production blobs correspond to the adopted metrics-enabled ten-TU component probes and independent140 equations per representation. Their component maximum2048 (actual emitted SET2040) and allocation charge499/503 are **not final linked resource acceptance**. Actual canonical production flags, source label, ELF/map/static totals, all31/final140 call/IRQ/ROM/PRIMASK/core1/startup correspondence and exact clean build/custody remain required. No complete alternate no-short firmware image is claimed or newly required. All original512/2048/199632/12288/storage/domain limits remain unchanged.
+
+This checkpoint is ready for independent committed-source correspondence and root's coordinated exact build. No firmware build, canonical firmware integration, controller operation, target timing/high-water observation or hardware acceptance occurred here. Timing/high-water remain NOT_MEASURED; Nunchuk and hardware remain NOT_TESTED. Requested routing was gpt-6.1-sol/medium per parent; observed runtime model/effort is UNKNOWN. The final source commit must remain immutable through the coordinated build; later build/review evidence is published separately by root.

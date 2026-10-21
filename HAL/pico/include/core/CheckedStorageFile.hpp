@@ -24,7 +24,7 @@ class CheckedStorageFile : public Stream {
     int peek() override { auto position = _position; int byte = read(); if (byte >= 0 && !seek(position)) return -1; return byte; }
     size_t write(uint8_t byte) override { return write(&byte, 1); }
     size_t write(const uint8_t *bytes, size_t size) override {
-        _result = CheckedStorage::Write(_file, bytes, size); remember_uncertainty();
+        ::new (&_result) CheckedStorage::Result(CheckedStorage::Write(_file, bytes, size)); remember_uncertainty();
         if (!_result) { _failed = true; return 0; }
         _position += _result.bytes; if (_position > _size) _size = _position;
         return _result.bytes;

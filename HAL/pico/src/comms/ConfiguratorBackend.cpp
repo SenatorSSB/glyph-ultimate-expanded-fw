@@ -333,8 +333,13 @@ bool ConfiguratorBackend::HandleGetConfig() {
 
 namespace {
 struct SetReceipt {uint64_t token;uint8_t digest[32],migration[32];uint32_t id,generation,mode,root;};
-SetReceipt set_receipt{};
-struct SetReceiptReset {~SetReceiptReset(){set_receipt={};}};
+using SetOwner=ConfiguratorBackend *;
+union SetPhase { SetReceipt receipt{}; SetOwner owner; } set_phase{};
+#define set_receipt set_phase.receipt
+__attribute__((noinline)) void ResetSetPhase() {
+    ::new (&set_phase.receipt) SetReceipt{};
+    std::memset(&set_phase,0,sizeof(set_phase));
+}
 }
 __attribute__((noinline)) void ConfiguratorBackend::CaptureSetReceipt() {
     set_receipt={};const auto &candidate=ConfigWriteCandidate();
@@ -419,17 +424,28 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReportDurableLoadError() {
     static const char error[]="Failed to load durable Config";
     return WritePacket(CMD_ERROR,(uint8_t*)error,sizeof(error));
 }
-bool ConfiguratorBackend::HandleSetConfig() {
-    SetReceiptReset receipt_reset;
-    const auto prepared = PrepareSetConfig();
-    if (prepared != SetConfigPreparation::Ready)
-        return prepared == SetConfigPreparation::ReturnedTrue;
-    if(_config.ultimate_profile_store_format==ProfileStore::kCompactConfigFormat&&persistence.LoadConfigChecked(ConfigWriteCandidate())!=Persistence::LoadResult::Loaded)return ReportDurableLoadError();
+__attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::PrepareDecodedSetConfig() {
+    ResetSetPhase();
+    const auto prepared=PrepareSetConfig();
+    if(prepared!=SetConfigPreparation::Ready)return prepared;
+    if(_config.ultimate_profile_store_format==ProfileStore::kCompactConfigFormat&&persistence.LoadConfigChecked(ConfigWriteCandidate())!=Persistence::LoadResult::Loaded)
+        return ReportDurableLoadError()?SetConfigPreparation::ReturnedTrue:SetConfigPreparation::ReturnedFalse;
     CaptureSetReceipt();
     const auto decoded=DecodeSetConfig();
-    if(decoded!=SetConfigPreparation::Ready)return decoded==SetConfigPreparation::ReturnedTrue;
-    const bool saved = persistence.SaveConfig(ConfigWriteCandidate());
-    return FinalizeSetConfig(saved);
+    if(decoded!=SetConfigPreparation::Ready)return decoded;
+    set_phase.receipt.~SetReceipt();
+    ::new (&set_phase.owner) SetOwner(this);
+    return SetConfigPreparation::Ready;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::FinishSetPhase(bool result) {
+    ResetSetPhase();
+    return result;
+}
+bool ConfiguratorBackend::HandleSetConfig() {
+    const auto prepared=PrepareDecodedSetConfig();
+    if(prepared!=SetConfigPreparation::Ready)return FinishSetPhase(prepared==SetConfigPreparation::ReturnedTrue);
+    const bool saved=persistence.SaveConfig(ConfigWriteCandidate());
+    return FinishSetPhase(set_phase.owner->FinalizeSetConfig(saved));
 }
 
 __attribute__((noinline)) bool ConfiguratorBackend::FinalizeSetConfig(bool saved) {
@@ -871,7 +887,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
 
 }
 
-__attribute__((always_inline)) inline bool ConfiguratorBackend::ExecuteProfileStoreMutation() {
+__attribute__((noinline)) bool ConfiguratorBackend::ExecuteProfileStoreMutation() {
     if (!dispatch_pending) return true;
     Config &candidate = ConfigWriteCandidate();
     if (request.operation == PROFILE_STORE_CREATE) {

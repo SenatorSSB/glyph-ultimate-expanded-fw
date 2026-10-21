@@ -64,6 +64,8 @@ class ConfiguratorBackend : public CommunicationBackend {
     SetConfigPreparation DecodeSetConfig();
     bool FinalizeSetConfig(bool saved);
     bool HandleSetConfig();
+    SetConfigPreparation PrepareDecodedSetConfig();
+    static bool FinishSetPhase(bool);
     bool HandleProfileStore();
     bool ReceiveProfileStore();
     bool DispatchProfileStore();

@@ -1,0 +1,623 @@
+{
+  "classification": "POSTADOPTION_ACTUAL_PRODUCTION_COMPONENT_PROOF_NOT_FINAL_LINKED_BUILD_OR_HARDWARE",
+  "canonical_authority": "c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351",
+  "sourcefree_merge": "6316f44c34123c168a3ecefd61acee91aec7c2a6",
+  "selected_manifest_sha256": "e7a9ec5d977499d9feb72c1d54aaea505af463d7e0dadf1685d9bda681a02c0e",
+  "selected_source_sha256": {
+    "HAL/pico/src/core/Persistence.cpp": "697903d9f3ee9573c34bcc58b069a41e07d886bc90d041a034d3aa1682c5b306",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561",
+    "HAL/pico/include/core/CheckedStorageFile.hpp": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c",
+    "HAL/pico/include/core/Persistence.hpp": "744adf3955947b18d2ef6e8c10fe31061e2b31c80769f0db6cae1eddf8e76277",
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp": "4b55d6269324d24958f40ea0c52e5bf740821efd8c9dad3e5e500e110a397d98"
+  },
+  "same_production_blobs_since_test_start": true,
+  "exact_both_abi_comparisons": [
+    {
+      "name": "deep",
+      "abi": "short",
+      "rows": 952,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-owner-context-ABC-write-result-tests/baseline4209-short/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/run.log",
+      "sha256": "61531990c28a247044d99e07c7072ac237a450d9ba7115d21c2cc20d3fea9a61"
+    },
+    {
+      "name": "save",
+      "abi": "short",
+      "rows": 1641,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-save-short/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/save-short/run.log",
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51"
+    },
+    {
+      "name": "load-capture",
+      "abi": "short",
+      "rows": 8381,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-load-capture-short/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/load-capture-short/run.log",
+      "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e"
+    },
+    {
+      "name": "set",
+      "abi": "short",
+      "rows": 51,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-owner-context-ABC-full88-tests/baseline4209-short/run/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/set-short/run.log",
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e"
+    },
+    {
+      "name": "deep",
+      "abi": "default",
+      "rows": 952,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-owner-context-ABC-write-result-tests/baseline4209-default/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/run.log",
+      "sha256": "181b2dcea1622b905c99e0794086e2eb7a1d974459d6933313d45536b94beb3b"
+    },
+    {
+      "name": "save",
+      "abi": "default",
+      "rows": 1641,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-save-default/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/save-default/run.log",
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51"
+    },
+    {
+      "name": "load-capture",
+      "abi": "default",
+      "rows": 8381,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-load-capture-default/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/load-capture-default/run.log",
+      "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e"
+    },
+    {
+      "name": "set",
+      "abi": "default",
+      "rows": 51,
+      "exact": true,
+      "baseline": "/private/tmp/glyph-native-owner-context-ABC-full88-tests/baseline4209-default/run/run.log",
+      "current": "/private/tmp/glyph-native-ABC-production-validation-20261021/set-default/run.log",
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e"
+    }
+  ],
+  "actual_matrix_jobs": [
+    {
+      "name": "deep-short",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-owner-context-ABC-write-result-tests/runner.py",
+        "--source-root",
+        "/private/tmp/glyph-profile-native-20261020",
+        "--fixture",
+        "/private/tmp/glyph-native-owner-context-ABC-write-result-tests/write-result-fixture.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short"
+      ],
+      "returncode": 0,
+      "seconds": 21.68746018409729
+    },
+    {
+      "name": "save-short",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_save.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/save-short"
+      ],
+      "returncode": 0,
+      "seconds": 12.890787124633789
+    },
+    {
+      "name": "load-capture-short",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_save.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/load-capture-short",
+        "--fixture",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate/load_capture_nor.cpp"
+      ],
+      "returncode": 0,
+      "seconds": 25.426380157470703
+    },
+    {
+      "name": "set-short",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_set.py",
+        "--backend-source",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/observed-backend.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/set-short"
+      ],
+      "returncode": 0,
+      "seconds": 6.58994197845459
+    },
+    {
+      "name": "deep-default",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-owner-context-ABC-write-result-tests/runner.py",
+        "--source-root",
+        "/private/tmp/glyph-profile-native-20261020",
+        "--fixture",
+        "/private/tmp/glyph-native-owner-context-ABC-write-result-tests/write-result-fixture.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default",
+        "--default-enum"
+      ],
+      "returncode": 0,
+      "seconds": 19.486095905303955
+    },
+    {
+      "name": "save-default",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_save.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/save-default",
+        "--default-enum"
+      ],
+      "returncode": 0,
+      "seconds": 10.592666149139404
+    },
+    {
+      "name": "load-capture-default",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_save.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/load-capture-default",
+        "--fixture",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate/load_capture_nor.cpp",
+        "--default-enum"
+      ],
+      "returncode": 0,
+      "seconds": 23.100383043289185
+    },
+    {
+      "name": "set-default",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_set.py",
+        "--backend-source",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/observed-backend.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/set-default",
+        "--default-enum"
+      ],
+      "returncode": 0,
+      "seconds": 3.7174179553985596
+    }
+  ],
+  "affected_checker_jobs": [
+    {
+      "name": "profile_store_config_persistence",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_config_persistence.py"
+      ],
+      "returncode": 0,
+      "seconds": 2.823509931564331
+    },
+    {
+      "name": "profile_store_strict_host",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_strict_host.py"
+      ],
+      "returncode": 0,
+      "seconds": 4.594415187835693
+    },
+    {
+      "name": "profile_store_migration_lifecycle",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_migration_lifecycle.py"
+      ],
+      "returncode": 0,
+      "seconds": 2.082724094390869
+    },
+    {
+      "name": "profile_store_selection_recovery",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_selection_recovery.py"
+      ],
+      "returncode": 0,
+      "seconds": 3.7755610942840576
+    },
+    {
+      "name": "profile_store_strict_protocol",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_strict_protocol.py"
+      ],
+      "returncode": 0,
+      "seconds": 5.393468856811523
+    },
+    {
+      "name": "profile_store_timeout_resynchronization",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_timeout_resynchronization.py"
+      ],
+      "returncode": 0,
+      "seconds": 7.503522157669067
+    },
+    {
+      "name": "profile_store_read_storage",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_profile_store_read_storage.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-affected-checks-20261021/read-storage"
+      ],
+      "returncode": 0,
+      "seconds": 24.74923324584961
+    },
+    {
+      "name": "native_target_metrics",
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-profile-native-20261020/tools/check_glyph_native_target_metrics.py"
+      ],
+      "returncode": 0,
+      "seconds": 5.472105979919434
+    }
+  ],
+  "cleanup_controls": [
+    {
+      "name": "positive-source-context-short",
+      "compile": [
+        "c++",
+        "-Wno-error=unused-function",
+        "-std=c++17",
+        "-O1",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-g",
+        "-DLFS_NAME_MAX=32",
+        "-fshort-enums",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-error=missing-field-initializers",
+        "-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_store_config_persistence_host/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/include",
+        "-I",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/source-reset-fixture.cpp",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/positive-source-context-short.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/mounted-store.cpp",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_rgb_target_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/pb_common.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/pb_decode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/pb_encode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/config.pb.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/lfs.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/lfs_util.o",
+        "-o",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/positive-source-context-short"
+      ],
+      "argv": [
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/positive-source-context-short",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/legacy.pb"
+      ],
+      "expected_negative": false,
+      "expected_message": "PASS actual Save/context reset control",
+      "returncode": 0,
+      "seconds": 5.470004081726074
+    },
+    {
+      "name": "mutant-source-context-finalclear-short",
+      "compile": [
+        "c++",
+        "-Wno-error=unused-function",
+        "-std=c++17",
+        "-O1",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-g",
+        "-DLFS_NAME_MAX=32",
+        "-fshort-enums",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-error=missing-field-initializers",
+        "-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_store_config_persistence_host/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/include",
+        "-I",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/source-reset-fixture.cpp",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-source-context-finalclear-short.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/mounted-store.cpp",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_rgb_target_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/pb_common.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/pb_decode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/pb_encode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/config.pb.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/lfs.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/lfs_util.o",
+        "-o",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-source-context-finalclear-short"
+      ],
+      "argv": [
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-source-context-finalclear-short",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-short/legacy.pb"
+      ],
+      "expected_negative": true,
+      "expected_message": "new read phase pointers/stream all clear",
+      "returncode": 1,
+      "seconds": 5.465843915939331
+    },
+    {
+      "name": "mutant-full88-noreset-short",
+      "compile": null,
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_set.py",
+        "--backend-source",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-noreset-short/observed-backend.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-noreset-short/run"
+      ],
+      "expected_negative": true,
+      "expected_message": "FULL88 reset after original SET exit",
+      "returncode": 1,
+      "seconds": 3.2756800651550293
+    },
+    {
+      "name": "mutant-full88-partial-short",
+      "compile": null,
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_set.py",
+        "--backend-source",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-partial-short/observed-backend.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-partial-short/run"
+      ],
+      "expected_negative": true,
+      "expected_message": "FULL88 reset after original SET exit",
+      "returncode": 1,
+      "seconds": 3.275585174560547
+    },
+    {
+      "name": "positive-source-context-default",
+      "compile": [
+        "c++",
+        "-Wno-error=unused-function",
+        "-std=c++17",
+        "-DGLYPH_TEST_DEFAULT_ENUM=1",
+        "-fno-short-enums",
+        "-O1",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-g",
+        "-DLFS_NAME_MAX=32",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-error=missing-field-initializers",
+        "-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_store_config_persistence_host/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/include",
+        "-I",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/source-reset-fixture.cpp",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/positive-source-context-default.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/mounted-store.cpp",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_rgb_target_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/pb_common.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/pb_decode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/pb_encode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/config.pb.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/lfs.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/lfs_util.o",
+        "-o",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/positive-source-context-default"
+      ],
+      "argv": [
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/positive-source-context-default",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/legacy.pb"
+      ],
+      "expected_negative": false,
+      "expected_message": "PASS actual Save/context reset control",
+      "returncode": 0,
+      "seconds": 5.235829830169678
+    },
+    {
+      "name": "mutant-source-context-finalclear-default",
+      "compile": [
+        "c++",
+        "-Wno-error=unused-function",
+        "-std=c++17",
+        "-DGLYPH_TEST_DEFAULT_ENUM=1",
+        "-fno-short-enums",
+        "-O1",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-g",
+        "-DLFS_NAME_MAX=32",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-error=missing-field-initializers",
+        "-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_store_config_persistence_host/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/include",
+        "-I",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/source-reset-fixture.cpp",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-source-context-finalclear-default.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/mounted-store.cpp",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_rgb_target_validation.cpp",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/pb_common.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/pb_decode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/pb_encode.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/config.pb.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/lfs.o",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/lfs_util.o",
+        "-o",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-source-context-finalclear-default"
+      ],
+      "argv": [
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-source-context-finalclear-default",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/deep-default/legacy.pb"
+      ],
+      "expected_negative": true,
+      "expected_message": "new read phase pointers/stream all clear",
+      "returncode": 1,
+      "seconds": 5.233926057815552
+    },
+    {
+      "name": "mutant-full88-noreset-default",
+      "compile": null,
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_set.py",
+        "--backend-source",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-noreset-default/observed-backend.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-noreset-default/run",
+        "--default-enum"
+      ],
+      "expected_negative": true,
+      "expected_message": "FULL88 reset after original SET exit",
+      "returncode": 1,
+      "seconds": 3.069535970687866
+    },
+    {
+      "name": "mutant-full88-partial-default",
+      "compile": null,
+      "argv": [
+        "python3",
+        "/private/tmp/glyph-native-ABC-production-validation-20261021/run_set.py",
+        "--backend-source",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-partial-default/observed-backend.cpp",
+        "--output-dir",
+        "/private/tmp/glyph-native-ABC-production-controls-20261021/mutant-full88-partial-default/run",
+        "--default-enum"
+      ],
+      "expected_negative": true,
+      "expected_message": "FULL88 reset after original SET exit",
+      "returncode": 1,
+      "seconds": 3.07000994682312
+    }
+  ],
+  "native_dispatch": "Actual100READ/maxbody/requestidentity/reference engine/mixed rejection and two lease controls BOTH explicitABIs PASS; commands+processoutputs in archive",
+  "postadoption_failures": "No unexpected FAIL/INCOMPLETE in this finite postadoption run. Expected source-mutant failures retained verbatim. Earlier failed probes/input errata remain immutable in adopted canonical evidence.",
+  "component_resource_correspondence": "Five production blobs EXACT sealed ABC; canonical archived wholeO3 metrics1 tenTUs/explicitABI and independent140rows/ABI are source-correspondence component facts only. Final actual production ELF/map/ABI/stack/IRQ/ROM/PRIMASK/core1/startup/static/build/custody gates remain OPEN. No complete alternate no-short image claim.",
+  "limits": "Original512layout/2048percore/199632static/12288delta/storage/schema/wire/flags/domain unchanged; component allocation charge499/503, final map required.",
+  "routing": {
+    "requested": "gpt-6.1-sol/medium per parent prospective routing",
+    "runtime_observed": "UNKNOWN"
+  },
+  "hardware": "NOT_TESTED",
+  "target_timing_and_highwater": "NOT_MEASURED",
+  "Nunchuk": "NOT_TESTED"
+}
