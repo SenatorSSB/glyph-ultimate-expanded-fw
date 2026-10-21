@@ -1,0 +1,4659 @@
+{
+  "classification": "FINITE_FROZEN783_ALL31_ENGINEERING_SCREEN_NOT_RESOURCE_PASS",
+  "source": "783dc8192ee98b2eb4f55a3e0df595213fef5528",
+  "tree": "347592792fc8713ba60607f69b082a9551e9c558",
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "budget": 2048,
+  "objects": "/private/tmp/glyph-native-AEF-final-O3/manifest.json",
+  "object_status": "SOURCE_HASH_MATCHED_PRODUCTION_O3_NOT_FINAL_ELF",
+  "SDK_ELF": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "SDK_ELF_SHA256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "routes": [
+    {
+      "id": "load.decode.D4.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead_RO",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 2252,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 2588,
+      "margin": -540,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Stored legacy Config or pre-validation rejected payload; generated schema depth4. RO handle excludes WRITING flush.",
+      "classes": [
+        "CONFIG-LOAD",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "load.decode.D4.recovery",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "enterRecovery",
+          "bytes": 40
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead_RO",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 2292,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 2628,
+      "margin": -580,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Stored legacy Config or pre-validation rejected payload; generated schema depth4. RO handle excludes WRITING flush.",
+      "classes": [
+        "CONFIG-LOAD",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "load.decode.D4.PrepareMutation",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "PrepareMutation",
+          "bytes": 72
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead_RO",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 2324,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2672,
+      "margin": -624,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Stored legacy Config or pre-validation rejected payload; generated schema depth4. RO handle excludes WRITING flush.",
+      "classes": [
+        "CONFIG-LOAD",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "load.decode.D4.ReconcileConfig",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "ReconcileConfig_inlines_Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead_RO",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 2252,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2600,
+      "margin": -552,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Stored legacy Config or pre-validation rejected payload; generated schema depth4. RO handle excludes WRITING flush.",
+      "classes": [
+        "CONFIG-LOAD",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "load.decode.D4.legacySETpreload",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PrepareSET",
+          "bytes": 48
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead_RO",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 2244,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2592,
+      "margin": -544,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Stored legacy Config or pre-validation rejected payload; generated schema depth4. RO handle excludes WRITING flush.",
+      "classes": [
+        "CONFIG-LOAD",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "load.decode.D4.modeDestination",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead_RO",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 2212,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 2620,
+      "margin": -572,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Stored legacy Config or pre-validation rejected payload; generated schema depth4. RO handle excludes WRITING flush.",
+      "classes": [
+        "CONFIG-LOAD",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "load.decode.D4.boot.feasible_prefix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead",
+          "bytes": 16
+        },
+        {
+          "name": "publicRead",
+          "bytes": 24
+        },
+        {
+          "name": "flushedRead",
+          "bytes": 96
+        }
+      ],
+      "foreground_unmasked": 2096,
+      "IRQ": 300,
+      "masked_total": null,
+      "total": 2396,
+      "margin": -348,
+      "status": "SOURCE_FEASIBLE_EXCESS_PREFIX",
+      "predicate": "Nonnull deepest UINT32/UENUM varint; complete held frames even on cache-hit. GET_STRING default serial and SysTick; no deeper LFS helper or alignment counted.",
+      "classes": [
+        "CONFIG-LOAD"
+      ]
+    },
+    {
+      "id": "load.decode.D3.boot.feasible_prefix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "PB_decoder_D3",
+          "bytes": 920
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead",
+          "bytes": 16
+        },
+        {
+          "name": "publicRead",
+          "bytes": 24
+        },
+        {
+          "name": "flushedRead",
+          "bytes": 96
+        }
+      ],
+      "foreground_unmasked": 1808,
+      "IRQ": 300,
+      "masked_total": null,
+      "total": 2108,
+      "margin": -60,
+      "status": "SOURCE_FEASIBLE_EXCESS_PREFIX",
+      "predicate": "Ordinary compact Config GameModeConfig\u2192SocdPair nonzero scalar, not dependent on legacy depth4.",
+      "classes": [
+        "CONFIG-LOAD"
+      ]
+    },
+    {
+      "id": "load.validation_error.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "glyphValidator",
+          "bytes": 16
+        },
+        {
+          "name": "configSemantics",
+          "bytes": 56
+        },
+        {
+          "name": "profileImpl",
+          "bytes": 544
+        },
+        {
+          "name": "condition",
+          "bytes": 176
+        },
+        {
+          "name": "fixed_integer_printf",
+          "bytes": 448
+        }
+      ],
+      "foreground_unmasked": 1904,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 2240,
+      "margin": -192,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Parsed schema-v2 profile reaches invalid/unresolved condition token error; ValidateConfig is inlined in ReadCandidate.",
+      "classes": [
+        "CONFIG-LOAD"
+      ]
+    },
+    {
+      "id": "load.validation_error.boot.feasible_prefix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "glyphValidator",
+          "bytes": 16
+        },
+        {
+          "name": "configSemantics",
+          "bytes": 56
+        },
+        {
+          "name": "profileImpl",
+          "bytes": 544
+        },
+        {
+          "name": "condition",
+          "bytes": 176
+        },
+        {
+          "name": "sniprintf",
+          "bytes": 144
+        },
+        {
+          "name": "svfiprintf",
+          "bytes": 152
+        },
+        {
+          "name": "printf_i",
+          "bytes": 72
+        },
+        {
+          "name": "ssputs",
+          "bytes": 40
+        }
+      ],
+      "foreground_unmasked": 1864,
+      "IRQ": 300,
+      "masked_total": null,
+      "total": 2164,
+      "margin": -116,
+      "status": "SOURCE_FEASIBLE_EXCESS_PREFIX",
+      "predicate": "Fixed %d error emission retains printf_i\u2192ssputs callback after condition rejection. Omits memcpy/veneer/common/alignment.",
+      "classes": [
+        "CONFIG-LOAD"
+      ]
+    },
+    {
+      "id": "load.open.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "ReadCandidate",
+          "bytes": 440
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 588
+        }
+      ],
+      "foreground_unmasked": 1252,
+      "IRQ": 336,
+      "masked_total": 984,
+      "total": 1588,
+      "margin": 460,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-LOAD"
+      ]
+    },
+    {
+      "id": "prior.restore.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1464
+        }
+      ],
+      "foreground_unmasked": 1688,
+      "IRQ": 336,
+      "masked_total": 1800,
+      "total": 2024,
+      "margin": 24,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-PRIOR-RESTORE"
+      ]
+    },
+    {
+      "id": "prior.restore.recovery.retry",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "enterRecovery",
+          "bytes": 40
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1464
+        }
+      ],
+      "foreground_unmasked": 1728,
+      "IRQ": 336,
+      "masked_total": 1840,
+      "total": 2064,
+      "margin": -16,
+      "status": "UPPER_EXCEEDS_PARTIAL_REPAIR_PREDICATE_OPEN",
+      "predicate": "Normal prior restore failed; recovery retries. Initial unchanged-state witness excluded by lifecycle erratum, generated repair not excluded.",
+      "classes": [
+        "CONFIG-PRIOR-RESTORE"
+      ]
+    },
+    {
+      "id": "prior.restore.PrepareMutation.generic",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "PrepareMutation",
+          "bytes": 72
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1464
+        }
+      ],
+      "foreground_unmasked": 1760,
+      "IRQ": 348,
+      "masked_total": 1872,
+      "total": 2108,
+      "margin": -60,
+      "status": "UPPER_EXCEEDS_ROOT_MOVE_REFINEMENT_AVAILABLE",
+      "predicate": "Current ABSENT during service implies prior completed rotation after first tempRemove; root MOVE may remain. DIRSTRUCT-orphan exclusion requires recorded service invariant.",
+      "classes": [
+        "CONFIG-PRIOR-RESTORE"
+      ]
+    },
+    {
+      "id": "prior.restore.PrepareMutation.rootMOVE",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "PrepareMutation",
+          "bytes": 72
+        },
+        {
+          "name": "Load",
+          "bytes": 40
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1584,
+      "IRQ": 348,
+      "masked_total": 1696,
+      "total": 1932,
+      "margin": 116,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Root-only service invariant; retains demove/force in rename own240.",
+      "classes": [
+        "CONFIG-PRIOR-RESTORE"
+      ]
+    },
+    {
+      "id": "prior.restore.ReconcileConfig.generic",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "ReconcileConfig_inlines_Load",
+          "bytes": 40
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1464
+        }
+      ],
+      "foreground_unmasked": 1688,
+      "IRQ": 348,
+      "masked_total": 1800,
+      "total": 2036,
+      "margin": 12,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-PRIOR-RESTORE"
+      ]
+    },
+    {
+      "id": "publication.open.Begin",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1448
+        }
+      ],
+      "foreground_unmasked": 1712,
+      "IRQ": 336,
+      "masked_total": 1824,
+      "total": 2048,
+      "margin": 0,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Nested phase3 service uses successful earlier root control publication consistency barrier; original boot supports generic force/deorphan.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-FIRST-RECORD",
+        "STORE-RECONCILE"
+      ]
+    },
+    {
+      "id": "publication.open.Begin.phase3",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1448
+        }
+      ],
+      "foreground_unmasked": 1712,
+      "IRQ": 336,
+      "masked_total": 1824,
+      "total": 2048,
+      "margin": 0,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Nested phase3 service uses successful earlier root control publication consistency barrier; original boot supports generic force/deorphan.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-FIRST-RECORD",
+        "STORE-RECONCILE"
+      ]
+    },
+    {
+      "id": "publication.open.directCreate",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Create",
+          "bytes": 24
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1448
+        }
+      ],
+      "foreground_unmasked": 1656,
+      "IRQ": 348,
+      "masked_total": 1768,
+      "total": 2004,
+      "margin": 44,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Nested phase3 service uses successful earlier root control publication consistency barrier; original boot supports generic force/deorphan.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-FIRST-RECORD",
+        "STORE-RECONCILE"
+      ]
+    },
+    {
+      "id": "publication.open.directDuplicate",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Duplicate",
+          "bytes": 32
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1448
+        }
+      ],
+      "foreground_unmasked": 1664,
+      "IRQ": 348,
+      "masked_total": 1776,
+      "total": 2012,
+      "margin": 36,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Nested phase3 service uses successful earlier root control publication consistency barrier; original boot supports generic force/deorphan.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-FIRST-RECORD",
+        "STORE-RECONCILE"
+      ]
+    },
+    {
+      "id": "publication.open.nestedIdentityQuery",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "PrepareMutation",
+          "bytes": 72
+        },
+        {
+          "name": "IdentityQuery",
+          "bytes": 64
+        },
+        {
+          "name": "Reconcile",
+          "bytes": 16
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1272
+        }
+      ],
+      "foreground_unmasked": 1664,
+      "IRQ": 348,
+      "masked_total": 1776,
+      "total": 2012,
+      "margin": 36,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Nested phase3 service uses successful earlier root control publication consistency barrier; original boot supports generic force/deorphan.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-FIRST-RECORD",
+        "STORE-RECONCILE"
+      ]
+    },
+    {
+      "id": "publication.rename.nestedIdentity",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "PrepareMutation",
+          "bytes": 72
+        },
+        {
+          "name": "IdentityQuery",
+          "bytes": 64
+        },
+        {
+          "name": "Reconcile",
+          "bytes": 16
+        },
+        {
+          "name": "FinishWritten",
+          "bytes": 32
+        },
+        {
+          "name": "MountedRename",
+          "bytes": 8
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1664,
+      "IRQ": 348,
+      "masked_total": 1776,
+      "total": 2012,
+      "margin": 36,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Same phase3 service root-only invariant; Finish siblings WritePrepared already returned.",
+      "classes": [
+        "STORE-RECONCILE"
+      ]
+    },
+    {
+      "id": "publication.cleanup.dirtySync",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "WriteOrFinish",
+          "bytes": 32
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "phaseHelper",
+          "bytes": 8
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1344,
+      "IRQ": 336,
+      "masked_total": 1456,
+      "total": 1680,
+      "margin": 368,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Readback RO only; sync/close only root regular file opened successfully, error handle has ERRED. Prefix overbounds actual Write24 with32.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-DIRECTORY"
+      ]
+    },
+    {
+      "id": "publication.cleanup.dirtyClose",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "WriteOrFinish",
+          "bytes": 32
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "phaseHelper",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1088
+        }
+      ],
+      "foreground_unmasked": 1360,
+      "IRQ": 336,
+      "masked_total": 1472,
+      "total": 1696,
+      "margin": 352,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Readback RO only; sync/close only root regular file opened successfully, error handle has ERRED. Prefix overbounds actual Write24 with32.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-DIRECTORY"
+      ]
+    },
+    {
+      "id": "publication.cleanup.errorClose",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "WriteOrFinish",
+          "bytes": 32
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "phaseHelper",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 88
+        }
+      ],
+      "foreground_unmasked": 360,
+      "IRQ": 336,
+      "masked_total": 472,
+      "total": 696,
+      "margin": 1352,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Readback RO only; sync/close only root regular file opened successfully, error handle has ERRED. Prefix overbounds actual Write24 with32.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-DIRECTORY"
+      ]
+    },
+    {
+      "id": "publication.cleanup.readback",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "WriteOrFinish",
+          "bytes": 32
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "phaseHelper",
+          "bytes": 24
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 796
+        }
+      ],
+      "foreground_unmasked": 1076,
+      "IRQ": 336,
+      "masked_total": 808,
+      "total": 1412,
+      "margin": 636,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Readback RO only; sync/close only root regular file opened successfully, error handle has ERRED. Prefix overbounds actual Write24 with32.",
+      "classes": [
+        "BOOT-PHASE1",
+        "BOOT-PHASE2",
+        "BOOT-PHASE3",
+        "STORE-DIRECTORY"
+      ]
+    },
+    {
+      "id": "store.GC.remove",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Duplicate",
+          "bytes": 32
+        },
+        {
+          "name": "PrepareCreateRecord",
+          "bytes": 32
+        },
+        {
+          "name": "GC",
+          "bytes": 48
+        },
+        {
+          "name": "MountedRemove",
+          "bytes": 8
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1632,
+      "IRQ": 348,
+      "masked_total": 1744,
+      "total": 1980,
+      "margin": 68,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "STORE-GC"
+      ]
+    },
+    {
+      "id": "store.GC.enumerate",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Duplicate",
+          "bytes": 32
+        },
+        {
+          "name": "PrepareCreateRecord",
+          "bytes": 32
+        },
+        {
+          "name": "GC",
+          "bytes": 48
+        },
+        {
+          "name": "MountedEnumerate",
+          "bytes": 24
+        },
+        {
+          "name": "Enumerate_including_sole_visitor",
+          "bytes": 1212
+        }
+      ],
+      "foreground_unmasked": 1476,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1824,
+      "margin": 224,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "STORE-GC"
+      ]
+    },
+    {
+      "id": "store.capacity",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Duplicate",
+          "bytes": 32
+        },
+        {
+          "name": "PrepareCreateRecord",
+          "bytes": 32
+        },
+        {
+          "name": "EvaluateAdmission",
+          "bytes": 120
+        },
+        {
+          "name": "Capacity",
+          "bytes": 320
+        },
+        {
+          "name": "LoadProtectedRoot",
+          "bytes": 88
+        },
+        {
+          "name": "MountedCheckedRead_and_ReadFile",
+          "bytes": 820
+        }
+      ],
+      "foreground_unmasked": 1540,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1888,
+      "margin": 160,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "STORE-CAPACITY"
+      ]
+    },
+    {
+      "id": "capture.copy.outputOpen",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Capture",
+          "bytes": 16
+        },
+        {
+          "name": "ExecuteCapture",
+          "bytes": 16
+        },
+        {
+          "name": "CopyCaptured",
+          "bytes": 16
+        },
+        {
+          "name": "copyWrapper",
+          "bytes": 256
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1208
+        }
+      ],
+      "foreground_unmasked": 1696,
+      "IRQ": 336,
+      "masked_total": 1808,
+      "total": 2032,
+      "margin": 16,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "First Remove returned success; no DIRSTRUCT parent for newly created regular root output.",
+      "classes": [
+        "MIGRATION-CAPTURE"
+      ]
+    },
+    {
+      "id": "capture.copy.sync",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Capture",
+          "bytes": 16
+        },
+        {
+          "name": "ExecuteCapture",
+          "bytes": 16
+        },
+        {
+          "name": "CopyCaptured",
+          "bytes": 16
+        },
+        {
+          "name": "copyWrapper",
+          "bytes": 256
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1568,
+      "IRQ": 336,
+      "masked_total": 1680,
+      "total": 1904,
+      "margin": 144,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "copy_open_files128 has returned before sync/close.",
+      "classes": [
+        "MIGRATION-CAPTURE"
+      ]
+    },
+    {
+      "id": "capture.hash.lookup",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Capture",
+          "bytes": 16
+        },
+        {
+          "name": "ExecuteCapture",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyPublish",
+          "bytes": 72
+        },
+        {
+          "name": "LegacyIdentity",
+          "bytes": 8
+        },
+        {
+          "name": "hashFile",
+          "bytes": 656
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 588
+        }
+      ],
+      "foreground_unmasked": 1540,
+      "IRQ": 336,
+      "masked_total": 1272,
+      "total": 1876,
+      "margin": 172,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "MIGRATION-CAPTURE"
+      ]
+    },
+    {
+      "id": "import.firstGC.remove",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "ImportWrapper",
+          "bytes": 24
+        },
+        {
+          "name": "ImportPart",
+          "bytes": 112
+        },
+        {
+          "name": "GC",
+          "bytes": 48
+        },
+        {
+          "name": "MountedRemove",
+          "bytes": 8
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1760,
+      "IRQ": 336,
+      "masked_total": 1872,
+      "total": 2096,
+      "margin": -48,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "ExistingExact .src; healthy phase2 store migration0; initial positive-orphan/PENDING_MOVE can survive read-only Capture.",
+      "classes": [
+        "MIGRATION-IMPORT"
+      ]
+    },
+    {
+      "id": "import.firstGC.remove.feasible_prefix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "ImportWrapper",
+          "bytes": 24
+        },
+        {
+          "name": "ImportPart",
+          "bytes": 112
+        },
+        {
+          "name": "GC",
+          "bytes": 48
+        },
+        {
+          "name": "MountedRemove",
+          "bytes": 8
+        },
+        {
+          "name": "CheckedRemove",
+          "bytes": 48
+        },
+        {
+          "name": "Remove_inlinesForce",
+          "bytes": 136
+        },
+        {
+          "name": "deorphan",
+          "bytes": 176
+        },
+        {
+          "name": "ordinaryCommitThroughCallback",
+          "bytes": 1008
+        },
+        {
+          "name": "preMask",
+          "bytes": 16
+        }
+      ],
+      "foreground_unmasked": 1760,
+      "IRQ": 300,
+      "masked_total": null,
+      "total": 2060,
+      "margin": -12,
+      "status": "SOURCE_FEASIBLE_EXCESS_PREFIX",
+      "predicate": "Initial positive orphan repair ordinary commit, no MOVE64 doublecount. Source composition; not device observation.",
+      "classes": [
+        "MIGRATION-IMPORT"
+      ]
+    },
+    {
+      "id": "import.firstRecord.open",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "ImportWrapper",
+          "bytes": 24
+        },
+        {
+          "name": "ImportPart",
+          "bytes": 112
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1448
+        }
+      ],
+      "foreground_unmasked": 1824,
+      "IRQ": 336,
+      "masked_total": 1936,
+      "total": 2160,
+      "margin": -112,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "No garbage selected; first writable root Open performs consistency, ExistingExact capture did not clear it.",
+      "classes": [
+        "MIGRATION-IMPORT"
+      ]
+    },
+    {
+      "id": "import.reader.decode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "ImportWrapper",
+          "bytes": 24
+        },
+        {
+          "name": "ImportPart",
+          "bytes": 112
+        },
+        {
+          "name": "setupReaderLambda",
+          "bytes": 8
+        },
+        {
+          "name": "ReadLegacyProfile",
+          "bytes": 296
+        },
+        {
+          "name": "PB_UP_D3",
+          "bytes": 920
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "RORead",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 1924,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 2260,
+      "margin": -212,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Scalar nested legacy profile admitted; reader called under import part. Import part admission/preparation sibling helpers returned.",
+      "classes": [
+        "MIGRATION-IMPORT"
+      ]
+    },
+    {
+      "id": "import.reader.decode.feasible_prefix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "ImportWrapper",
+          "bytes": 24
+        },
+        {
+          "name": "ImportPart",
+          "bytes": 112
+        },
+        {
+          "name": "setupReaderLambda",
+          "bytes": 8
+        },
+        {
+          "name": "ReadLegacyProfile",
+          "bytes": 296
+        },
+        {
+          "name": "PB_UP_D3",
+          "bytes": 920
+        },
+        {
+          "name": "read_config_file",
+          "bytes": 88
+        },
+        {
+          "name": "CheckedRead",
+          "bytes": 16
+        },
+        {
+          "name": "publicRead",
+          "bytes": 24
+        },
+        {
+          "name": "flushedRead",
+          "bytes": 96
+        }
+      ],
+      "foreground_unmasked": 1768,
+      "IRQ": 300,
+      "masked_total": null,
+      "total": 2068,
+      "margin": -20,
+      "status": "SOURCE_FEASIBLE_EXCESS_PREFIX",
+      "predicate": "Nonnull scalar byte and cache-hit frame prefix.",
+      "classes": [
+        "MIGRATION-IMPORT"
+      ]
+    },
+    {
+      "id": "save.firstRemove.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "RemoveSaveTemporary",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1600,
+      "IRQ": 336,
+      "masked_total": 1712,
+      "total": 1936,
+      "margin": 112,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "First temp Remove generic; never apply post-success root-file refinement to this first operation.",
+      "classes": [
+        "CONFIG-SAVE-STAGE",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "save.stageOpen.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "slotConstructor",
+          "bytes": 56
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1208
+        }
+      ],
+      "foreground_unmasked": 1488,
+      "IRQ": 336,
+      "masked_total": 1600,
+      "total": 1824,
+      "margin": 224,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "TempRemove succeeded before Stage; slot constructor returns before WriteStaged.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.stageEncode.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "pbPrint",
+          "bytes": 8
+        },
+        {
+          "name": "CheckedFileWriteVirtual",
+          "bytes": 24
+        },
+        {
+          "name": "contiguous_CheckedWrite_U",
+          "bytes": 596
+        }
+      ],
+      "foreground_unmasked": 1668,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 2004,
+      "margin": 44,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "All actual Config-save callers compact before write; ultimate_profiles_count0. Contiguous WRITING, no READING flush. This is an upper, not simultaneous-maximum witness.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.verifyCompare.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyStage",
+          "bytes": 72
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "compareCallback",
+          "bytes": 88
+        },
+        {
+          "name": "RORead",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 1364,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 1700,
+      "margin": 348,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-VERIFY"
+      ]
+    },
+    {
+      "id": "save.sync.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1408,
+      "IRQ": 336,
+      "masked_total": 1520,
+      "total": 1744,
+      "margin": 304,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.publish.boot",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "PublishStaged",
+          "bytes": 80
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1568,
+      "IRQ": 336,
+      "masked_total": 1680,
+      "total": 1904,
+      "margin": 144,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "After initial consistency barrier; may retain root-file MOVE, not DIRSTRUCT orphan.",
+      "classes": [
+        "CONFIG-SAVE-PUBLISH"
+      ]
+    },
+    {
+      "id": "save.firstRemove.mode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "RemoveSaveTemporary",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1576,
+      "IRQ": 408,
+      "masked_total": 1688,
+      "total": 1984,
+      "margin": 64,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "First temp Remove generic; never apply post-success root-file refinement to this first operation.",
+      "classes": [
+        "CONFIG-SAVE-STAGE",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "save.stageOpen.mode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "slotConstructor",
+          "bytes": 56
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1208
+        }
+      ],
+      "foreground_unmasked": 1464,
+      "IRQ": 408,
+      "masked_total": 1576,
+      "total": 1872,
+      "margin": 176,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "TempRemove succeeded before Stage; slot constructor returns before WriteStaged.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.stageEncode.mode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "pbPrint",
+          "bytes": 8
+        },
+        {
+          "name": "CheckedFileWriteVirtual",
+          "bytes": 24
+        },
+        {
+          "name": "contiguous_CheckedWrite_U",
+          "bytes": 596
+        }
+      ],
+      "foreground_unmasked": 1644,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 2052,
+      "margin": -4,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "All actual Config-save callers compact before write; ultimate_profiles_count0. Contiguous WRITING, no READING flush. This is an upper, not simultaneous-maximum witness.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.verifyCompare.mode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyStage",
+          "bytes": 72
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "compareCallback",
+          "bytes": 88
+        },
+        {
+          "name": "RORead",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 1340,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 1748,
+      "margin": 300,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-VERIFY"
+      ]
+    },
+    {
+      "id": "save.sync.mode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1384,
+      "IRQ": 408,
+      "masked_total": 1496,
+      "total": 1792,
+      "margin": 256,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.publish.mode",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "selectMode",
+          "bytes": 32
+        },
+        {
+          "name": "requestDestination",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "PublishStaged",
+          "bytes": 80
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1544,
+      "IRQ": 408,
+      "masked_total": 1656,
+      "total": 1952,
+      "margin": 96,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "After initial consistency barrier; may retain root-file MOVE, not DIRSTRUCT orphan.",
+      "classes": [
+        "CONFIG-SAVE-PUBLISH"
+      ]
+    },
+    {
+      "id": "save.firstRemove.reference",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "RemoveSaveTemporary",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1592,
+      "IRQ": 348,
+      "masked_total": 1704,
+      "total": 1940,
+      "margin": 108,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "First temp Remove generic; never apply post-success root-file refinement to this first operation.",
+      "classes": [
+        "CONFIG-SAVE-STAGE",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "save.stageOpen.reference",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "slotConstructor",
+          "bytes": 56
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1208
+        }
+      ],
+      "foreground_unmasked": 1480,
+      "IRQ": 348,
+      "masked_total": 1592,
+      "total": 1828,
+      "margin": 220,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "TempRemove succeeded before Stage; slot constructor returns before WriteStaged.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.stageEncode.reference",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "pbPrint",
+          "bytes": 8
+        },
+        {
+          "name": "CheckedFileWriteVirtual",
+          "bytes": 24
+        },
+        {
+          "name": "contiguous_CheckedWrite_U",
+          "bytes": 596
+        }
+      ],
+      "foreground_unmasked": 1660,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2008,
+      "margin": 40,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "All actual Config-save callers compact before write; ultimate_profiles_count0. Contiguous WRITING, no READING flush. This is an upper, not simultaneous-maximum witness.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.verifyCompare.reference",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyStage",
+          "bytes": 72
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "compareCallback",
+          "bytes": 88
+        },
+        {
+          "name": "RORead",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 1356,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1704,
+      "margin": 344,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-VERIFY"
+      ]
+    },
+    {
+      "id": "save.sync.reference",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1400,
+      "IRQ": 348,
+      "masked_total": 1512,
+      "total": 1748,
+      "margin": 300,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.publish.reference",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "PublishStaged",
+          "bytes": 80
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1560,
+      "IRQ": 348,
+      "masked_total": 1672,
+      "total": 1908,
+      "margin": 140,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "After initial consistency barrier; may retain root-file MOVE, not DIRSTRUCT orphan.",
+      "classes": [
+        "CONFIG-SAVE-PUBLISH"
+      ]
+    },
+    {
+      "id": "save.firstRemove.legacySET",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "RemoveSaveTemporary",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1544,
+      "IRQ": 348,
+      "masked_total": 1656,
+      "total": 1892,
+      "margin": 156,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "First temp Remove generic; never apply post-success root-file refinement to this first operation.",
+      "classes": [
+        "CONFIG-SAVE-STAGE",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "save.stageOpen.legacySET",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "slotConstructor",
+          "bytes": 56
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1208
+        }
+      ],
+      "foreground_unmasked": 1432,
+      "IRQ": 348,
+      "masked_total": 1544,
+      "total": 1780,
+      "margin": 268,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "TempRemove succeeded before Stage; slot constructor returns before WriteStaged.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.stageEncode.legacySET",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "pbPrint",
+          "bytes": 8
+        },
+        {
+          "name": "CheckedFileWriteVirtual",
+          "bytes": 24
+        },
+        {
+          "name": "contiguous_CheckedWrite_U",
+          "bytes": 596
+        }
+      ],
+      "foreground_unmasked": 1612,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1960,
+      "margin": 88,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "All actual Config-save callers compact before write; ultimate_profiles_count0. Contiguous WRITING, no READING flush. This is an upper, not simultaneous-maximum witness.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.verifyCompare.legacySET",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyStage",
+          "bytes": 72
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "compareCallback",
+          "bytes": 88
+        },
+        {
+          "name": "RORead",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 1308,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1656,
+      "margin": 392,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-VERIFY"
+      ]
+    },
+    {
+      "id": "save.sync.legacySET",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1352,
+      "IRQ": 348,
+      "masked_total": 1464,
+      "total": 1700,
+      "margin": 348,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.publish.legacySET",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "PublishStaged",
+          "bytes": 80
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1512,
+      "IRQ": 348,
+      "masked_total": 1624,
+      "total": 1860,
+      "margin": 188,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "After initial consistency barrier; may retain root-file MOVE, not DIRSTRUCT orphan.",
+      "classes": [
+        "CONFIG-SAVE-PUBLISH"
+      ]
+    },
+    {
+      "id": "save.firstRemove.watchdogBackendInit",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "RemoveSaveTemporary",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1384
+        }
+      ],
+      "foreground_unmasked": 1736,
+      "IRQ": 408,
+      "masked_total": 1848,
+      "total": 2144,
+      "margin": -96,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "First temp Remove generic; never apply post-success root-file refinement to this first operation.",
+      "classes": [
+        "CONFIG-SAVE-STAGE",
+        "MODE-DESTINATION",
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "save.stageOpen.watchdogBackendInit",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "slotConstructor",
+          "bytes": 56
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1208
+        }
+      ],
+      "foreground_unmasked": 1624,
+      "IRQ": 408,
+      "masked_total": 1736,
+      "total": 2032,
+      "margin": 16,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "TempRemove succeeded before Stage; slot constructor returns before WriteStaged.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.stageEncode.watchdogBackendInit",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "pbPrint",
+          "bytes": 8
+        },
+        {
+          "name": "CheckedFileWriteVirtual",
+          "bytes": 24
+        },
+        {
+          "name": "contiguous_CheckedWrite_U",
+          "bytes": 596
+        }
+      ],
+      "foreground_unmasked": 1804,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 2212,
+      "margin": -164,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "All actual Config-save callers compact before write; ultimate_profiles_count0. Contiguous WRITING, no READING flush. This is an upper, not simultaneous-maximum witness.",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.verifyCompare.watchdogBackendInit",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyStage",
+          "bytes": 72
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "compareCallback",
+          "bytes": 88
+        },
+        {
+          "name": "RORead",
+          "bytes": 292
+        }
+      ],
+      "foreground_unmasked": 1500,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 1908,
+      "margin": 140,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-VERIFY"
+      ]
+    },
+    {
+      "id": "save.sync.watchdogBackendInit",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "Stage",
+          "bytes": 24
+        },
+        {
+          "name": "WriteStaged",
+          "bytes": 104
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1080
+        }
+      ],
+      "foreground_unmasked": 1544,
+      "IRQ": 408,
+      "masked_total": 1656,
+      "total": 1952,
+      "margin": 96,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-STAGE"
+      ]
+    },
+    {
+      "id": "save.publish.watchdogBackendInit",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "PublishStaged",
+          "bytes": 80
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1288
+        }
+      ],
+      "foreground_unmasked": 1704,
+      "IRQ": 408,
+      "masked_total": 1816,
+      "total": 2112,
+      "margin": -64,
+      "status": "UPPER_EXCEEDS_REQUIRES_REFINEMENT",
+      "predicate": "After initial consistency barrier; may retain root-file MOVE, not DIRSTRUCT orphan.",
+      "classes": [
+        "CONFIG-SAVE-PUBLISH"
+      ]
+    },
+    {
+      "id": "watchdog.firstRemove.NES.feasible_composition",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "Save",
+          "bytes": 16
+        },
+        {
+          "name": "RemoveSave",
+          "bytes": 16
+        },
+        {
+          "name": "CheckedRemove",
+          "bytes": 48
+        },
+        {
+          "name": "Remove_inlinesForce",
+          "bytes": 136
+        },
+        {
+          "name": "deorphan",
+          "bytes": 176
+        },
+        {
+          "name": "ordinaryCommitThroughCallback",
+          "bytes": 1008
+        },
+        {
+          "name": "premask",
+          "bytes": 16
+        }
+      ],
+      "foreground_unmasked": 1736,
+      "IRQ": 360,
+      "masked_total": null,
+      "total": 2096,
+      "margin": -48,
+      "status": "SOURCE_FEASIBLE_COMPOSITION_STATE_DEPENDENT",
+      "predicate": "Supported watchdog override to NES after primary construction; healthy phase2 boot read-only, initial positive orphan survives. GET_STRING C224 excluding ROM12 + outer32 + rawNES104 =360. The omitted ROM12 and padding can only increase that prefix. Host transaction and NES latch source-feasible, not observation.",
+      "classes": [
+        "MODE-DESTINATION"
+      ]
+    },
+    {
+      "id": "protocol.receive.memoryD4",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Receive",
+          "bytes": 56
+        },
+        {
+          "name": "PB_request_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "bufRead",
+          "bytes": 8
+        },
+        {
+          "name": "ROMmemcpy",
+          "bytes": 12
+        }
+      ],
+      "foreground_unmasked": 1412,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1760,
+      "margin": 288,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "DISPATCH-RX"
+      ]
+    },
+    {
+      "id": "protocol.identity.encodeD4",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "PrepareIdentity",
+          "bytes": 344
+        },
+        {
+          "name": "PB_request_D4_encode",
+          "bytes": 944
+        },
+        {
+          "name": "hashCallback",
+          "bytes": 184
+        },
+        {
+          "name": "ROMmemcpy",
+          "bytes": 12
+        }
+      ],
+      "foreground_unmasked": 1668,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2016,
+      "margin": 32,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "DISPATCH-RX"
+      ]
+    },
+    {
+      "id": "protocol.response.encodeD4",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Respond",
+          "bytes": 64
+        },
+        {
+          "name": "PB_response_D4_encode",
+          "bytes": 944
+        },
+        {
+          "name": "bufWrite",
+          "bytes": 8
+        },
+        {
+          "name": "ROMmemcpy",
+          "bytes": 12
+        }
+      ],
+      "foreground_unmasked": 1156,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1504,
+      "margin": 544,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "DISPATCH-RX"
+      ]
+    },
+    {
+      "id": "legacySET.transport.decodeD4",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PrepareSET",
+          "bytes": 48
+        },
+        {
+          "name": "DecodeSET",
+          "bytes": 272
+        },
+        {
+          "name": "PB_Config_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "pbStreamRead",
+          "bytes": 16
+        },
+        {
+          "name": "StreamReadBytes",
+          "bytes": 24
+        },
+        {
+          "name": "COBSread",
+          "bytes": 16
+        },
+        {
+          "name": "CoordinatedRead",
+          "bytes": 24
+        },
+        {
+          "name": "foregroundTinyTask_and_callback",
+          "bytes": 264
+        }
+      ],
+      "foreground_unmasked": 2000,
+      "IRQ": 240,
+      "masked_total": null,
+      "total": 2240,
+      "margin": -192,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Foreground USB task under __usb_mutex; hardware USB remains enabled; deferred-task IRQ excluded while mutex held. HW240 already includes SysTick/alignment.",
+      "classes": [
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "legacySET.transport.decodeD4.feasible_prefix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PrepareSET",
+          "bytes": 48
+        },
+        {
+          "name": "DecodeSET",
+          "bytes": 272
+        },
+        {
+          "name": "PB_Config_D4",
+          "bytes": 1208
+        },
+        {
+          "name": "pbStreamRead",
+          "bytes": 16
+        },
+        {
+          "name": "StreamReadBytes",
+          "bytes": 24
+        },
+        {
+          "name": "COBSread",
+          "bytes": 16
+        },
+        {
+          "name": "CoordinatedRead",
+          "bytes": 24
+        },
+        {
+          "name": "foregroundTinyTask_and_CDC",
+          "bytes": 264
+        }
+      ],
+      "foreground_unmasked": 2000,
+      "IRQ": 176,
+      "masked_total": null,
+      "total": 2176,
+      "margin": -128,
+      "status": "SOURCE_FEASIBLE_EXCESS_PREFIX",
+      "predicate": "Prior GET_CONFIG can leave pending TXFIFO+busy IN. Next input decoder calls foreground task; old IN completion flush/claim reaches pre-CPSID helper. A new hardware USB queue event preempts thread (176 excludes ROM/SysTick/pads). Endpoint owner absent; no extra contention44.",
+      "classes": [
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "legacySET.validation_error",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PrepareSET",
+          "bytes": 48
+        },
+        {
+          "name": "DecodeSET",
+          "bytes": 272
+        },
+        {
+          "name": "ValidateConfig",
+          "bytes": 16
+        },
+        {
+          "name": "glyphValidator",
+          "bytes": 16
+        },
+        {
+          "name": "semantics",
+          "bytes": 56
+        },
+        {
+          "name": "profileImpl",
+          "bytes": 544
+        },
+        {
+          "name": "condition",
+          "bytes": 176
+        },
+        {
+          "name": "printfInteger",
+          "bytes": 448
+        }
+      ],
+      "foreground_unmasked": 1704,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2052,
+      "margin": -4,
+      "status": "UPPER_EXCEEDS",
+      "predicate": "Returned PB decode; rejection printf sibling. Four-byte over conservative limit does not establish feasible overflow.",
+      "classes": [
+        "LEGACY-CONFIGURATOR"
+      ]
+    },
+    {
+      "id": "record.valid.bootUpgrade",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "PrepareBootstrap",
+          "bytes": 96
+        },
+        {
+          "name": "completeValidProfileRead",
+          "bytes": 1076
+        }
+      ],
+      "foreground_unmasked": 1380,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 1716,
+      "margin": 332,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Semantic valid record branch; invalid branch below kept separate.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.rejection.bootUpgrade",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "Begin",
+          "bytes": 24
+        },
+        {
+          "name": "PrepareBootstrap",
+          "bytes": 96
+        },
+        {
+          "name": "completeProfileReadIncludingConditionPrintf",
+          "bytes": 1472
+        }
+      ],
+      "foreground_unmasked": 1776,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 2112,
+      "margin": -64,
+      "status": "UPPER_EXCEEDS_PERSISTED_SEMANTIC_REJECTION_DOMAIN_OPEN",
+      "predicate": "Malformed semantic payload with valid record framing/CRC; current successful publication validates, but earlier/admitted record domain needs explicit decision/source exclusion. No arbitrary-corruption premise introduced.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.valid.activation",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "setMode",
+          "bytes": 48
+        },
+        {
+          "name": "Activate",
+          "bytes": 56
+        },
+        {
+          "name": "completeValidProfileRead",
+          "bytes": 1076
+        }
+      ],
+      "foreground_unmasked": 1500,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 1908,
+      "margin": 140,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Semantic valid record branch; invalid branch below kept separate.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.rejection.activation",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "initializeBackends",
+          "bytes": 136
+        },
+        {
+          "name": "setMode",
+          "bytes": 48
+        },
+        {
+          "name": "Activate",
+          "bytes": 56
+        },
+        {
+          "name": "completeProfileReadIncludingConditionPrintf",
+          "bytes": 1472
+        }
+      ],
+      "foreground_unmasked": 1896,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 2304,
+      "margin": -256,
+      "status": "UPPER_EXCEEDS_PERSISTED_SEMANTIC_REJECTION_DOMAIN_OPEN",
+      "predicate": "Malformed semantic payload with valid record framing/CRC; current successful publication validates, but earlier/admitted record domain needs explicit decision/source exclusion. No arbitrary-corruption premise introduced.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.valid.directRead",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "ReadStore",
+          "bytes": 32
+        },
+        {
+          "name": "Read",
+          "bytes": 32
+        },
+        {
+          "name": "completeValidProfileRead",
+          "bytes": 1076
+        }
+      ],
+      "foreground_unmasked": 1324,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1672,
+      "margin": 376,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Semantic valid record branch; invalid branch below kept separate.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.rejection.directRead",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "ReadStore",
+          "bytes": 32
+        },
+        {
+          "name": "Read",
+          "bytes": 32
+        },
+        {
+          "name": "completeProfileReadIncludingConditionPrintf",
+          "bytes": 1472
+        }
+      ],
+      "foreground_unmasked": 1720,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2068,
+      "margin": -20,
+      "status": "UPPER_EXCEEDS_PERSISTED_SEMANTIC_REJECTION_DOMAIN_OPEN",
+      "predicate": "Malformed semantic payload with valid record framing/CRC; current successful publication validates, but earlier/admitted record domain needs explicit decision/source exclusion. No arbitrary-corruption premise introduced.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.valid.health",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "Health",
+          "bytes": 104
+        },
+        {
+          "name": "completeValidProfileRead",
+          "bytes": 1076
+        }
+      ],
+      "foreground_unmasked": 1364,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1712,
+      "margin": 336,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Semantic valid record branch; invalid branch below kept separate.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.rejection.health",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "Dispatch",
+          "bytes": 56
+        },
+        {
+          "name": "Health",
+          "bytes": 104
+        },
+        {
+          "name": "completeProfileReadIncludingConditionPrintf",
+          "bytes": 1472
+        }
+      ],
+      "foreground_unmasked": 1760,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2108,
+      "margin": -60,
+      "status": "UPPER_EXCEEDS_PERSISTED_SEMANTIC_REJECTION_DOMAIN_OPEN",
+      "predicate": "Malformed semantic payload with valid record framing/CRC; current successful publication validates, but earlier/admitted record domain needs explicit decision/source exclusion. No arbitrary-corruption premise introduced.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.valid.legacySETrecord",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PrepareSET",
+          "bytes": 48
+        },
+        {
+          "name": "DecodeSET",
+          "bytes": 272
+        },
+        {
+          "name": "Read",
+          "bytes": 32
+        },
+        {
+          "name": "completeValidProfileRead",
+          "bytes": 1076
+        }
+      ],
+      "foreground_unmasked": 1556,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1904,
+      "margin": 144,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Semantic valid record branch; invalid branch below kept separate.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "record.rejection.legacySETrecord",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PrepareSET",
+          "bytes": 48
+        },
+        {
+          "name": "DecodeSET",
+          "bytes": 272
+        },
+        {
+          "name": "Read",
+          "bytes": 32
+        },
+        {
+          "name": "completeProfileReadIncludingConditionPrintf",
+          "bytes": 1472
+        }
+      ],
+      "foreground_unmasked": 1952,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 2300,
+      "margin": -252,
+      "status": "UPPER_EXCEEDS_PERSISTED_SEMANTIC_REJECTION_DOMAIN_OPEN",
+      "predicate": "Malformed semantic payload with valid record framing/CRC; current successful publication validates, but earlier/admitted record domain needs explicit decision/source exclusion. No arbitrary-corruption premise introduced.",
+      "classes": [
+        "BOOT-FRESH-UPGRADE",
+        "NATIVE-ACTIVATION",
+        "STORE-READ-REFERENCE"
+      ]
+    },
+    {
+      "id": "native.frame",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "backendSendMax",
+          "bytes": 24
+        },
+        {
+          "name": "CommunicationUpdate",
+          "bytes": 24
+        },
+        {
+          "name": "ControllerUpdate",
+          "bytes": 112
+        },
+        {
+          "name": "UltimatePreprocessed",
+          "bytes": 16
+        },
+        {
+          "name": "Evaluate",
+          "bytes": 232
+        },
+        {
+          "name": "Conditions",
+          "bytes": 72
+        },
+        {
+          "name": "Value",
+          "bytes": 8
+        }
+      ],
+      "foreground_unmasked": 568,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 976,
+      "margin": 1072,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Only native Evaluate virtual target UpdateDirections64, smaller than Conditions72+Value8. Selected input-source/mode targets fixed.",
+      "classes": [
+        "NATIVE-FRAME"
+      ]
+    },
+    {
+      "id": "identity.poll.payload",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "Poll",
+          "bytes": 192
+        },
+        {
+          "name": "PayloadDigest",
+          "bytes": 344
+        },
+        {
+          "name": "PB_UP_D3_encode",
+          "bytes": 712
+        },
+        {
+          "name": "hashWriter",
+          "bytes": 184
+        },
+        {
+          "name": "ROMmemcpy",
+          "bytes": 12
+        }
+      ],
+      "foreground_unmasked": 1524,
+      "IRQ": 348,
+      "masked_total": null,
+      "total": 1872,
+      "margin": 176,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Poll observer guard excludes foreground USB task; no FS call. ContextMatches484 is a smaller sibling.",
+      "classes": [
+        "IDENTITY-DIAGNOSTIC"
+      ]
+    },
+    {
+      "id": "scan.matrix",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "backendSendMax",
+          "bytes": 24
+        },
+        {
+          "name": "ScanFiltered",
+          "bytes": 32
+        },
+        {
+          "name": "MatrixUpdate",
+          "bytes": 48
+        },
+        {
+          "name": "DebouncedState",
+          "bytes": 48
+        },
+        {
+          "name": "lmul",
+          "bytes": 4
+        }
+      ],
+      "foreground_unmasked": 236,
+      "IRQ": 408,
+      "masked_total": null,
+      "total": 644,
+      "margin": 1404,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Only input_sources[]={&matrix_input}; UpdateButtonState resolves Debounced specialization. time_us_64 stackless; gpio init16+8+8 smaller.",
+      "classes": [
+        "SCAN"
+      ]
+    },
+    {
+      "id": "generation.verify.ROopen",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "loop",
+          "bytes": 32
+        },
+        {
+          "name": "SendReport",
+          "bytes": 48
+        },
+        {
+          "name": "PerformReference",
+          "bytes": 32
+        },
+        {
+          "name": "SaveIf",
+          "bytes": 16
+        },
+        {
+          "name": "VerifyExpected",
+          "bytes": 80
+        },
+        {
+          "name": "slotCtor",
+          "bytes": 56
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 588
+        }
+      ],
+      "foreground_unmasked": 900,
+      "IRQ": 348,
+      "masked_total": 632,
+      "total": 1248,
+      "margin": 800,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "CONFIG-SAVE-GENERATION"
+      ]
+    },
+    {
+      "id": "migration.complete.read_or_hash",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "CompleteMigration",
+          "bytes": 72
+        },
+        {
+          "name": "ValidateCompact",
+          "bytes": 48
+        },
+        {
+          "name": "HashMessage",
+          "bytes": 160
+        },
+        {
+          "name": "PB_compact_Config_D3",
+          "bytes": 712
+        },
+        {
+          "name": "hashWriter",
+          "bytes": 184
+        },
+        {
+          "name": "ROMmemcpy",
+          "bytes": 12
+        }
+      ],
+      "foreground_unmasked": 1372,
+      "IRQ": 336,
+      "masked_total": null,
+      "total": 1708,
+      "margin": 340,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "",
+      "classes": [
+        "MIGRATION-COMPLETE"
+      ]
+    },
+    {
+      "id": "migration.complete.publication",
+      "components": [
+        {
+          "name": "main",
+          "bytes": 48
+        },
+        {
+          "name": "setup",
+          "bytes": 136
+        },
+        {
+          "name": "CompleteMigration",
+          "bytes": 72
+        },
+        {
+          "name": "WritePrepared",
+          "bytes": 24
+        },
+        {
+          "name": "MountedWrite",
+          "bytes": 16
+        },
+        {
+          "name": "OpenMounted",
+          "bytes": 16
+        },
+        {
+          "name": "primitive_U_includes_premask_when_applicable",
+          "bytes": 1272
+        }
+      ],
+      "foreground_unmasked": 1584,
+      "IRQ": 336,
+      "masked_total": 1696,
+      "total": 1920,
+      "margin": 128,
+      "status": "UPPER_FITS_CONTEXTUAL",
+      "predicate": "Earlier acknowledged migration/Config saves cleared initial consistency; root MOVE possible.",
+      "classes": [
+        "MIGRATION-COMPLETE"
+      ]
+    }
+  ],
+  "classes": [
+    {
+      "id": "STARTUP",
+      "status": "SEPARATE_CERTIFICATE",
+      "scope": "Early reset, constructors, launcher and named malloc80 NULL addendum; no new dynamic initializers in adapter. Final ELF correspondence required.",
+      "route_ids": []
+    },
+    {
+      "id": "BOOT-PREFLIGHT",
+      "status": "OPEN_CONFIG_DECODE",
+      "scope": "Initial Load and recovery retry decoded below; SetValidator/default Config static-error branch smaller.",
+      "route_ids": []
+    },
+    {
+      "id": "BOOT-PHASE1",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Generic first control/root publication exact264+1448+336=2048. Prepare and cleanup siblings separate.",
+      "route_ids": [
+        "publication.open.Begin",
+        "publication.open.Begin.phase3",
+        "publication.open.directCreate",
+        "publication.open.directDuplicate",
+        "publication.open.nestedIdentityQuery",
+        "publication.cleanup.dirtySync",
+        "publication.cleanup.dirtyClose",
+        "publication.cleanup.errorClose",
+        "publication.cleanup.readback"
+      ]
+    },
+    {
+      "id": "BOOT-PHASE2",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Healthy phase2 boot may be read-only: it does not establish a global initial-orphan barrier. BeginRecovery never chooses writable Initialize/Reconcile.",
+      "route_ids": [
+        "publication.open.Begin",
+        "publication.open.Begin.phase3",
+        "publication.open.directCreate",
+        "publication.open.directDuplicate",
+        "publication.open.nestedIdentityQuery",
+        "publication.cleanup.dirtySync",
+        "publication.cleanup.dirtyClose",
+        "publication.cleanup.errorClose",
+        "publication.cleanup.readback"
+      ]
+    },
+    {
+      "id": "BOOT-PHASE3",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Begin24 inlines reconciliation/publication; no old Reconcile112 added. Generic first Open budget2048. Prepare reads siblings.",
+      "route_ids": [
+        "publication.open.Begin",
+        "publication.open.Begin.phase3",
+        "publication.open.directCreate",
+        "publication.open.directDuplicate",
+        "publication.open.nestedIdentityQuery",
+        "publication.cleanup.dirtySync",
+        "publication.cleanup.dirtyClose",
+        "publication.cleanup.errorClose",
+        "publication.cleanup.readback"
+      ]
+    },
+    {
+      "id": "BOOT-FRESH-UPGRADE",
+      "status": "OPEN_REJECTION_DOMAIN",
+      "scope": "PrepareBootstrap96 ReadProfile valid bound fits; semantic-rejection printf upper2112 needs explicit persisted-record domain or phase remedy.",
+      "route_ids": [
+        "record.valid.bootUpgrade",
+        "record.rejection.bootUpgrade",
+        "record.valid.activation",
+        "record.rejection.activation",
+        "record.valid.directRead",
+        "record.rejection.directRead",
+        "record.valid.health",
+        "record.rejection.health",
+        "record.valid.legacySETrecord",
+        "record.rejection.legacySETrecord"
+      ]
+    },
+    {
+      "id": "CONFIG-LOAD",
+      "status": "SOURCE_FEASIBLE_EXCESS",
+      "scope": "D4 and ordinary D3 decode prefixes exceed2048 with feasible boot300; validation-error sibling also exceeds. Full filesystem upper in routes.",
+      "route_ids": [
+        "load.decode.D4.boot",
+        "load.decode.D4.recovery",
+        "load.decode.D4.PrepareMutation",
+        "load.decode.D4.ReconcileConfig",
+        "load.decode.D4.legacySETpreload",
+        "load.decode.D4.modeDestination",
+        "load.decode.D4.boot.feasible_prefix",
+        "load.decode.D3.boot.feasible_prefix",
+        "load.validation_error.boot",
+        "load.validation_error.boot.feasible_prefix",
+        "load.open.boot"
+      ]
+    },
+    {
+      "id": "CONFIG-PRIOR-RESTORE",
+      "status": "OPEN_GENERATED_REPAIR_RETRY",
+      "scope": "Recovery retry generic2064; nested service root-only MOVE refinement explained separately. No initial-orphan recycling.",
+      "route_ids": [
+        "prior.restore.boot",
+        "prior.restore.recovery.retry",
+        "prior.restore.PrepareMutation.generic",
+        "prior.restore.PrepareMutation.rootMOVE",
+        "prior.restore.ReconcileConfig.generic"
+      ]
+    },
+    {
+      "id": "CONFIG-SAVE-GENERATION",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Returned VerifyExpected80, RO scope and CheckSaved; no Load/decoder co-live. Fresh generation values32/header/CRC only.",
+      "route_ids": [
+        "generation.verify.ROopen"
+      ]
+    },
+    {
+      "id": "CONFIG-SAVE-STAGE",
+      "status": "OPEN_ENCODER_AND_LATE_INIT",
+      "scope": "PostRemove root Open/sync fits; compact D3 PB encoder mode2052, watchdog-init2212 conservative. FirstRemove late init2144 distinct sibling.",
+      "route_ids": [
+        "save.firstRemove.boot",
+        "save.stageOpen.boot",
+        "save.stageEncode.boot",
+        "save.sync.boot",
+        "save.firstRemove.mode",
+        "save.stageOpen.mode",
+        "save.stageEncode.mode",
+        "save.sync.mode",
+        "save.firstRemove.reference",
+        "save.stageOpen.reference",
+        "save.stageEncode.reference",
+        "save.sync.reference",
+        "save.firstRemove.legacySET",
+        "save.stageOpen.legacySET",
+        "save.stageEncode.legacySET",
+        "save.sync.legacySET",
+        "save.firstRemove.watchdogBackendInit",
+        "save.stageOpen.watchdogBackendInit",
+        "save.stageEncode.watchdogBackendInit",
+        "save.sync.watchdogBackendInit"
+      ]
+    },
+    {
+      "id": "CONFIG-SAVE-VERIFY",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "RO Verify72 and compare88 callback D3; write payload and ctor returned. Maximum modesafe route in table.",
+      "route_ids": [
+        "save.verifyCompare.boot",
+        "save.verifyCompare.mode",
+        "save.verifyCompare.reference",
+        "save.verifyCompare.legacySET",
+        "save.verifyCompare.watchdogBackendInit"
+      ]
+    },
+    {
+      "id": "CONFIG-SAVE-PUBLISH",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Rotate and Publish sibling returned phases; root regular moves retain MOVE force, exclude foreign DIRSTRUCT after barrier.",
+      "route_ids": [
+        "save.publish.boot",
+        "save.publish.mode",
+        "save.publish.reference",
+        "save.publish.legacySET",
+        "save.publish.watchdogBackendInit"
+      ]
+    },
+    {
+      "id": "MODE-DESTINATION",
+      "status": "OPEN_LOAD_AND_ENCODER",
+      "scope": "Full original Load/context plus408 and Save stage; late initialize_backends136 watchdog writer is included, not mistaken for chord request.",
+      "route_ids": [
+        "load.decode.D4.boot",
+        "load.decode.D4.recovery",
+        "load.decode.D4.PrepareMutation",
+        "load.decode.D4.ReconcileConfig",
+        "load.decode.D4.legacySETpreload",
+        "load.decode.D4.modeDestination",
+        "save.firstRemove.boot",
+        "save.firstRemove.mode",
+        "save.firstRemove.reference",
+        "save.firstRemove.legacySET",
+        "save.firstRemove.watchdogBackendInit",
+        "watchdog.firstRemove.NES.feasible_composition"
+      ]
+    },
+    {
+      "id": "MIGRATION-CAPTURE",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Capture16/Execute16/Copy16; input shared slot, automatic output; firstRemove barrier only copy-needed branch. copy scratch128 returned before sync.",
+      "route_ids": [
+        "capture.copy.outputOpen",
+        "capture.copy.sync",
+        "capture.hash.lookup"
+      ]
+    },
+    {
+      "id": "MIGRATION-IMPORT",
+      "status": "SOURCE_FEASIBLE_EXCESS",
+      "scope": "Import24\u2192part112 retains GC, first Open and streamed ReadLegacy296. ExistingExact Capture does not clear initial consistency; three distinct siblings.",
+      "route_ids": [
+        "import.firstGC.remove",
+        "import.firstGC.remove.feasible_prefix",
+        "import.firstRecord.open",
+        "import.reader.decode",
+        "import.reader.decode.feasible_prefix"
+      ]
+    },
+    {
+      "id": "MIGRATION-COMPLETE",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Read/hash, compact hash and publication sibling phases; already successful migration/Save barrier permits root-only MOVE refinement.",
+      "route_ids": [
+        "migration.complete.read_or_hash",
+        "migration.complete.publication"
+      ]
+    },
+    {
+      "id": "DISPATCH-RX",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Request memory D4, PrepareIdentity D4 hash2016, Response D4 separately. Receive/Dispatch/Respond not summed; Dispatch returned before mutation execution.",
+      "route_ids": [
+        "protocol.receive.memoryD4",
+        "protocol.identity.encodeD4",
+        "protocol.response.encodeD4"
+      ]
+    },
+    {
+      "id": "STORE-GC",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "GC48, sole visitor996, Enumerate1212; direct mutation PrepareRecord retained correctly. No reentry into FS in visitor; Remove sibling generic.",
+      "route_ids": [
+        "store.GC.remove",
+        "store.GC.enumerate"
+      ]
+    },
+    {
+      "id": "STORE-CAPACITY",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Evaluate120 after GC returned; Capacity320 includes all fixed division and root-read callbacks. ProtectedRoot88 inlines ReadRoot80.",
+      "route_ids": [
+        "store.capacity"
+      ]
+    },
+    {
+      "id": "STORE-FIRST-RECORD",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Direct CREATE/UPDATE24,DUP32 adapter firstOpen <=2012; generic initial orphan permitted. No legacy compatibility overload caller in selected graph.",
+      "route_ids": [
+        "publication.open.Begin",
+        "publication.open.Begin.phase3",
+        "publication.open.directCreate",
+        "publication.open.directDuplicate",
+        "publication.open.nestedIdentityQuery"
+      ]
+    },
+    {
+      "id": "STORE-DIRECTORY",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Finalize phases call shared publication after record success; root-only state, generic bound already below where safe. Finish32 read/rename siblings.",
+      "route_ids": [
+        "publication.cleanup.dirtySync",
+        "publication.cleanup.dirtyClose",
+        "publication.cleanup.errorClose",
+        "publication.cleanup.readback"
+      ]
+    },
+    {
+      "id": "STORE-RECONCILE",
+      "status": "OPEN_SOURCE_HISTORY_CORRESPONDENCE",
+      "scope": "Nested Identity64\u2192Reconcile16 under PrepareMutation72 has rootMOVE upper2012; phase3 barrier invariant detailed, no blind arbitrary generated-state exclusion.",
+      "route_ids": [
+        "publication.open.Begin",
+        "publication.open.Begin.phase3",
+        "publication.open.directCreate",
+        "publication.open.directDuplicate",
+        "publication.open.nestedIdentityQuery",
+        "publication.rename.nestedIdentity"
+      ]
+    },
+    {
+      "id": "STORE-READ-REFERENCE",
+      "status": "OPEN_REJECTION_DOMAIN_AND_LOAD",
+      "scope": "Valid record ReadProfile1076 fits; invalid-semantic record branch1472 exceeds selected deep caller uppers. Reference also calls Load and Save through returned phases.",
+      "route_ids": [
+        "record.valid.bootUpgrade",
+        "record.rejection.bootUpgrade",
+        "record.valid.activation",
+        "record.rejection.activation",
+        "record.valid.directRead",
+        "record.rejection.directRead",
+        "record.valid.health",
+        "record.rejection.health",
+        "record.valid.legacySETrecord",
+        "record.rejection.legacySETrecord"
+      ]
+    },
+    {
+      "id": "LEGACY-CONFIGURATOR",
+      "status": "SOURCE_FEASIBLE_EXCESS",
+      "scope": "Whole SET transport D4: foreground USB service plus hardware IRQ produces2176 retained prefix. Decode rejection printf upper2052, record-read and preload siblings explicit. GET_CONFIG raw bytes has no PB.",
+      "route_ids": [
+        "load.decode.D4.boot",
+        "load.decode.D4.recovery",
+        "load.decode.D4.PrepareMutation",
+        "load.decode.D4.ReconcileConfig",
+        "load.decode.D4.legacySETpreload",
+        "load.decode.D4.modeDestination",
+        "save.firstRemove.boot",
+        "save.firstRemove.mode",
+        "save.firstRemove.reference",
+        "save.firstRemove.legacySET",
+        "save.firstRemove.watchdogBackendInit",
+        "legacySET.transport.decodeD4",
+        "legacySET.transport.decodeD4.feasible_prefix",
+        "legacySET.validation_error"
+      ]
+    },
+    {
+      "id": "NATIVE-ACTIVATION",
+      "status": "OPEN_REJECTION_DOMAIN",
+      "scope": "Native/valid branch1908 upper incl408; malformed-semantic legacy record rejection2304 conditional. CopyProgram/Bind returned siblings; no FS decoder stack retained.",
+      "route_ids": [
+        "record.valid.bootUpgrade",
+        "record.rejection.bootUpgrade",
+        "record.valid.activation",
+        "record.rejection.activation",
+        "record.valid.directRead",
+        "record.rejection.directRead",
+        "record.valid.health",
+        "record.rejection.health",
+        "record.valid.legacySETrecord",
+        "record.rejection.legacySETrecord"
+      ]
+    },
+    {
+      "id": "NATIVE-FRAME",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Exact native path568 + mode408 =976; native Evaluate finite target set, no arbitrary mode virtual target.",
+      "route_ids": [
+        "native.frame"
+      ]
+    },
+    {
+      "id": "IDENTITY-DIAGNOSTIC",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Poll payload encode1872 bound. Readmetrics and ContextMatches are sequential smaller siblings; no Configurator Dispatch retained.",
+      "route_ids": [
+        "identity.poll.payload"
+      ]
+    },
+    {
+      "id": "SCAN",
+      "status": "CONDITIONAL_UPPER_FITS",
+      "scope": "Only Debounced matrix input in actual array. No Nunchuk input target installed; this is source reachability, Nunchuk NOT_TESTED still.",
+      "route_ids": [
+        "scan.matrix"
+      ]
+    },
+    {
+      "id": "CORE1",
+      "status": "SEPARATE_CERTIFICATE",
+      "scope": "Complete finite configured/Config-possible callback graph1152 and exact SDK/ROM/allocator certificate, later ELF comparison required.",
+      "route_ids": []
+    },
+    {
+      "id": "LFS-INTERNAL",
+      "status": "SEPARATE_CERTIFICATE",
+      "scope": "96 contextual roots E/U/M, no C cycle; all generic alternatives incl generated orphans closed as upper. Root-only refinement separately scoped.",
+      "route_ids": []
+    },
+    {
+      "id": "IRQ-ROM",
+      "status": "SEPARATE_CERTIFICATE",
+      "scope": "Boot336, Config348, mode408; B0/B1/B2 ROM, hardware/deferred/SysTick/alarm/SIO separate. No double premask or same-priority IRQ nesting.",
+      "route_ids": []
+    }
+  ],
+  "unexamined_classes": [],
+  "unresolved_frontiers": [
+    "Final exact clean ELF/source/header/SDK correspondence for all selected roots and compiler inlining",
+    "Recovery retry generated partial repair exact state / generic upper2064",
+    "Persisted semantic-invalid profile rejection domain and actual state history; valid profiles cannot justify silently deleting rejection code",
+    "Four-byte-over compact mode encoder upper2052 may admit alignment/phase refinement, not demonstrated failure",
+    "Legacy transport helper/assert/timeout variants require final graph correspondence; reported2176 is concrete selected retained prefix",
+    "Service phase3 / absent-current root-only state invariant must be independently checked against final source and all namespace mutators"
+  ],
+  "whole_P1": "OPEN",
+  "hardware": "NOT_MEASURED_NOT_APPROVED_NOT_EXECUTED"
+}

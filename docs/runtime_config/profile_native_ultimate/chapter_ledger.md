@@ -1,6 +1,91 @@
 # Profile-native Ultimate execution chapter
 
-## Latest checkpoint — M1 complete, awaiting independent READY adoption
+## Corrected lifetime amendment — 2026-10-21
+
+The [independent bounded amendment](decoder_import_lifetime_scope_amendment_20261021.json)
+adopts only the [corrected selected prototype](decoder_import_lifetime_evidence_20261021/corrected_selected/README.md)
+within the same READY GP-NATIVE-001. The [unadopted failed parent](decoder_import_lifetime_evidence_20261021/original_sealed_not_adopted/README.md)
+and all earlier failures remain preserved. This is source-free authority and
+evidence work; production is still783 under clean test/evidence checkpoint54fc.
+The pre-amendment canonical base is76b8bf94. The sole writer may implement the
+exact named changes only after matching live canonical adoption readback.
+
+The complete31-class screen and lifecycle refinement below informed one coherent
+lifetime proposal. Both enum-ABI component compilations, layout assertions,
+360 callback cases and3402 selector cases per ABI are limited engineering
+evidence. The defective selector is detected330 times per ABI. Independent
+object-section accounting is499/503 bytes within the unchanged512 limit;
+91 conditional route equations fit within2048, several with zero spare.
+These results do not close P1 or establish final linked or hardware acceptance.
+
+Next: exact adopted implementation, both-ABI actual NOR/fault/reset/transport/
+validation/backend regressions and meaningful mutants, fresh independent source
+review, complete final source/ELF/resource correspondence, clean committed build
+and artifact custody, then a concrete owner-approved hardware packet. Every
+original limit, broader filesystem support and identity/diagnostic contract
+remains fixed. No controller action, firmware integration or DONE is authorized.
+
+## Historical engineering preflight checkpoint — 2026-10-21
+
+The chapter remains ACTIVE under the existing sole READY GP-NATIVE-001. The
+current source-free canonical authority is `76b8bf943ee940c57b9a612556d76d2b3401cd76`;
+the clean isolated test/evidence checkpoint is
+`54fc8cfeb82500f94afea7beb2f816a36759c61e`, with production source frozen at
+`783dc8192ee98b2eb4f55a3e0df595213fef5528`. Firmware source has not been integrated
+into canonical. The historical M0/M1 entries below describe their original times.
+
+The [independent source reviews](independent_source_reviews_20261021/README.md)
+found no material defect in the A–E lifetime changes or MountedStorage adapter.
+Their exact reports and complete compressed pinned inputs are preserved. Those
+finite reviews do not close the structural resource gate or establish hardware
+acceptance. The [adopted adapter clarification](mounted_write_phase_scope_amendment_20261021.json),
+earlier lifetime amendments and every original resource limit remain authoritative.
+
+The [independent resource screen](all31_screen_20261021/README.md) covers all 31
+call classes and 90 routes against the frozen component objects. No class is
+wholly unexamined. New findings include supported nested legacy Config
+decoding and legacy import. The full conservative Config decode composition is
+2,588 bytes including the current boot interrupt allowance; its known cache-hit
+software prefix alone is 2,096 bytes. Removing only the file, validation-error
+and skipped-field locals is insufficient. Import and legacy SET transport also
+have unresolved or over-limit compositions; watchdog-triggered backend Config
+saving needs its own caller and interrupt accounting. No final resource PASS is
+claimed, and earlier failed/incomplete evidence remains unchanged.
+
+The [selected-Config lifecycle refinement](mode_config_lifecycle_20261021/README.md)
+proves the smaller descriptor depth for normal non-Configurator mode loads and
+preserves the exceptional Configurator callback that still loads the deeper
+shape before refusal. The proof includes stale legacy priors, failed rotations
+and pending MOVE. It changes no supported state or resource limit.
+
+The same sole source writer is preparing one consolidated private engineering
+proposal. One private compiler probe measured setup frame isolation at both enum
+ABIs: the original setup frame is 136 bytes; the proposed driver is 24 bytes,
+with separate early/display, migration and backend helpers. The saving depends
+on which helper is live. This is feasibility evidence only. Broader setup,
+decoder-file/workspace and import phase changes require a bounded ordinary
+Curator amendment before production implementation. No parser, SDK, schema,
+optimization, support-domain or resource-limit change is inferred.
+
+Root retains the single canonical publication lock. The resource worker completed
+the finite screen and lifecycle refinement; the source writer is active on the
+one private proposal, and the completed source reviewer is idle. No standing
+timer, new user-visible chat or device operation was created.
+Current requested execution settings are retained from their chapter lanes;
+runtime-observed model/effort remain UNKNOWN. Worker totals and current full-chat
+counts are not independently measured.
+
+The [owner filesystem decision](owner_filesystem_support_decision_20261021.md)
+continues to require the broader admitted filesystem domain. The
+[retained diagnostic authorization](owner_diagnostic_authorization_20261020.md)
+changes no existing identity bytes or resource limits. No final build is due
+until the known stack gaps are resolved and one clean exact candidate is frozen.
+Concrete candidate-specific owner device approval, exact hardware observations,
+independent HEP, tested-source integration and separate strict DONE remain
+required. Hardware is NOT_TESTED; target timings remain NOT_MEASURED. Nunchuk is
+NOT_TESTED, RT2 remains deferred/unresolved and root cause is UNPROVEN.
+
+## Historical M1 checkpoint — awaiting independent READY adoption
 
 [Exact freeze and baseline reconciliation](m1_freeze.md) supersedes historical
 pending-baseline checkpoints below. The owner-terminal build PASS and actual

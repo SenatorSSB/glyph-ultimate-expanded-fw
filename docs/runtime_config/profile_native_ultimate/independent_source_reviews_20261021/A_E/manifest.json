@@ -1,0 +1,1887 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/private/tmp/glyph-native-7f3e-AE-independent-source-review-20261021-inputpins.json",
+      "relative": "glyph-native-7f3e-AE-independent-source-review-20261021-inputpins.json",
+      "bytes": 47372,
+      "sha256": "52aa4cef3e804af79c9217513c646812b4d64ee875dbb36b2b499f881162d369"
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-AE-independent-source-review-20261021.md",
+      "relative": "glyph-native-7f3e-AE-independent-source-review-20261021.md",
+      "bytes": 10298,
+      "sha256": "3ca64093ed6c11e0d612efca7108caec0f64757a3164c94c02f93202d71bed05"
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-AE-independent-source-review-20261021.json",
+      "relative": "glyph-native-7f3e-AE-independent-source-review-20261021.json",
+      "bytes": 15349,
+      "sha256": "896784b38d973f9c4dd8101f2bf395aa79bf0b16913ce14a9da0b7ee0808fbf6"
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-review-archive-inputs-normalized-20261021.json",
+      "relative": "glyph-native-7f3e-review-archive-inputs-normalized-20261021.json",
+      "bytes": 44550,
+      "sha256": "dda99efd420bf39fd29f1badcee29bee44fcbd926efd1a01d309db3aba59a162"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "raw_sha256": "674146090637e66f19f9fdd166345b6eaf326aa0c8dc2090d7f98d71d2763f3c",
+      "raw_bytes": 3651,
+      "relative": "objects/674146090637e66f19f9fdd166345b6eaf326aa0c8dc2090d7f98d71d2763f3c.gz",
+      "compressed_sha256": "3087aa6b81137729b534c89da8f1a7d521a4838ac4596d2e9870bb81096fc1c0",
+      "compressed_bytes": 1367,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/include/core/CheckedStorageFile.hpp",
+      "raw_sha256": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c",
+      "raw_bytes": 2782,
+      "relative": "objects/7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c.gz",
+      "compressed_sha256": "7622df1a1d781a8ae6bcc54c8aa2bef307bac53bd2ee9cd50ea8e83908850a0a",
+      "compressed_bytes": 878,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/include/core/Persistence.hpp",
+      "raw_sha256": "97d9f4bb9ae7b314738915880da0fe4d83a69860a4776738fea0044f7882c8b3",
+      "raw_bytes": 4184,
+      "relative": "objects/97d9f4bb9ae7b314738915880da0fe4d83a69860a4776738fea0044f7882c8b3.gz",
+      "compressed_sha256": "ee29b49f15ad3d4d10298621a3b96d2ab3fd2e32e9af785863d2e9e21f434e70",
+      "compressed_bytes": 1692,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "raw_sha256": "cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98",
+      "raw_bytes": 49209,
+      "relative": "objects/cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98.gz",
+      "compressed_sha256": "15d3c7a7cf1fb960d5ab40b6e7ac080d2e6bcf4689f1946da754793f299c204d",
+      "compressed_bytes": 11096,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/src/core/CheckedStorage.cpp",
+      "raw_sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "raw_bytes": 10028,
+      "relative": "objects/56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd.gz",
+      "compressed_sha256": "c162b9c332ecdeac9e45c9bcceb2368791ebfdc124bc205b8f91d0c32fd2e164",
+      "compressed_bytes": 2828,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/src/core/Persistence.cpp",
+      "raw_sha256": "345a8880b6664860820accb04775096a05538ca53bc84fb59e951d1eeb5dc011",
+      "raw_bytes": 28955,
+      "relative": "objects/345a8880b6664860820accb04775096a05538ca53bc84fb59e951d1eeb5dc011.gz",
+      "compressed_sha256": "1512fddc503d64550f284577ababb846a165fe16cc5dcf3a6cfb316f909cd20f",
+      "compressed_bytes": 6637,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/src/core/ProfileStore.cpp",
+      "raw_sha256": "e0133de9f8ab87f6f876c21e00a47b201aad2f9522e9481378ea8845cc3bb6ae",
+      "raw_bytes": 83438,
+      "relative": "objects/e0133de9f8ab87f6f876c21e00a47b201aad2f9522e9481378ea8845cc3bb6ae.gz",
+      "compressed_sha256": "564e1813e53d9b5515f492525b267c73030782efce04be6332cd328da14ad4e3",
+      "compressed_bytes": 16073,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/config/glyph/common/src/config.cpp",
+      "raw_sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "raw_bytes": 17902,
+      "relative": "objects/5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc.gz",
+      "compressed_sha256": "7ad7b3228a87141e05ee42dabfcc59935ff988e0668b59a95f6a184f55e8a5cc",
+      "compressed_bytes": 4955,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/config/glyph/common/src/glyph_config_validation.cpp",
+      "raw_sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "raw_bytes": 615,
+      "relative": "objects/344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e.gz",
+      "compressed_sha256": "ebd88376892afd5dcfc4d6a2391ddf8246f3f0ed498e602f262f2ebe3d705f78",
+      "compressed_bytes": 326,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/include/core/ProfileStore.hpp",
+      "raw_sha256": "aca47eb03b8bc612ac83fb7c6db2fb8ae7acb684a55a295ada18f365044251f0",
+      "raw_bytes": 10008,
+      "relative": "objects/aca47eb03b8bc612ac83fb7c6db2fb8ae7acb684a55a295ada18f365044251f0.gz",
+      "compressed_sha256": "c9718bd6fc027ac873d7ffb0ef134c68132a8030572643c3c170cc0e6683bee5",
+      "compressed_bytes": 2438,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/include/core/ProfileStoreFaultControls.hpp",
+      "raw_sha256": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "raw_bytes": 3394,
+      "relative": "objects/845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1.gz",
+      "compressed_sha256": "55b6b6fd3f310a73df7edcfd9599fa1b8d6388d348c896aa33f042861354d96a",
+      "compressed_bytes": 1316,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/include/core/ProfileStoreReadTrace.hpp",
+      "raw_sha256": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+      "raw_bytes": 1113,
+      "relative": "objects/6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456.gz",
+      "compressed_sha256": "64d5fa2d4134894487e5947f21e8b9c5536a2cafd4be07a2fa04b800942ab21b",
+      "compressed_bytes": 556,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/include/core/ProfileStoreStorage.hpp",
+      "raw_sha256": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc",
+      "raw_bytes": 7657,
+      "relative": "objects/c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc.gz",
+      "compressed_sha256": "6eef0c767e80746676813ceb9bb4188ed366bb6e699a17f2e0868c451bb98c3a",
+      "compressed_bytes": 1448,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/include/core/RecoveryInitialization.hpp",
+      "raw_sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "raw_bytes": 1446,
+      "relative": "objects/af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a.gz",
+      "compressed_sha256": "e8b8badf9a246bb27efc7b30e4bcf1f3fb5f79dd1ba8789b8718f96fc967a520",
+      "compressed_bytes": 618,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/schema/haybox/config.options",
+      "raw_sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+      "raw_bytes": 6441,
+      "relative": "objects/d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1.gz",
+      "compressed_sha256": "481deef8dc2b49fa61eeb4df2a8a76a4dbe51233f768c3058ff64e7e2e0dd374",
+      "compressed_bytes": 1398,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/schema/haybox/config.proto",
+      "raw_sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "raw_bytes": 33965,
+      "relative": "objects/1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec.gz",
+      "compressed_sha256": "5944d4c8be9aefaef678bb1194393ea4096227226e0d24becc006326a0115635",
+      "compressed_bytes": 10147,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/src/core/config_button_validation.cpp",
+      "raw_sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "raw_bytes": 10362,
+      "relative": "objects/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.gz",
+      "compressed_sha256": "d64ecd51eff516b2ca150717a4c84527b92c8c8d9d0c350d5bcc05feed7a790b",
+      "compressed_bytes": 2234,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/src/core/config_rgb_target_validation.cpp",
+      "raw_sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7",
+      "raw_bytes": 3059,
+      "relative": "objects/be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7.gz",
+      "compressed_sha256": "7cb9b447b6436cb607e4786079995b4b8ef9c3a4aed026c6ae15fb2bd35591f0",
+      "compressed_bytes": 1082,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/src/core/config_usb_default_validation.cpp",
+      "raw_sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+      "raw_bytes": 448,
+      "relative": "objects/bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb.gz",
+      "compressed_sha256": "4e24da9c4a643c1f18108f438b7e79cfc98b9bebad3f416c2ee3ff32cbdf863e",
+      "compressed_bytes": 222,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/src/core/config_validation.cpp",
+      "raw_sha256": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+      "raw_bytes": 22491,
+      "relative": "objects/175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2.gz",
+      "compressed_sha256": "0174026b499bb64004c56acecf67ca89c82583a72ebe46f53f0d38e5e317bb2a",
+      "compressed_bytes": 3878,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/src/modes/UltimateNativeProfile.cpp",
+      "raw_sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "raw_bytes": 14135,
+      "relative": "objects/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.gz",
+      "compressed_sha256": "cd7509e5a16a733ec556b60938cee7497f50314f9e9489293a012998fb262e70",
+      "compressed_bytes": 4389,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/check_glyph_profile_native_ultimate.py",
+      "raw_sha256": "443e9e39437168ebc2496680e42d92934d0effd2d8265ede20c33fcdf9ba3bb7",
+      "raw_bytes": 37415,
+      "relative": "objects/443e9e39437168ebc2496680e42d92934d0effd2d8265ede20c33fcdf9ba3bb7.gz",
+      "compressed_sha256": "7dee40cfcf1876fa8eae0a31cee12a7d769ff04c5d6cbfe1f5337fcc6b81514d",
+      "compressed_bytes": 10491,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/check_glyph_profile_store_littlefs_host.py",
+      "raw_sha256": "d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1",
+      "raw_bytes": 2526,
+      "relative": "objects/d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1.gz",
+      "compressed_sha256": "7ade1bebac681533334861fd44095b56e89b2801c38c83926820ab26af476980",
+      "compressed_bytes": 1236,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/check_glyph_profile_store_strict_host.py",
+      "raw_sha256": "1fb76187ce242572967921ac18ed5f9f6e2a7ca5452976898671e04faabd011f",
+      "raw_bytes": 4584,
+      "relative": "objects/1fb76187ce242572967921ac18ed5f9f6e2a7ca5452976898671e04faabd011f.gz",
+      "compressed_sha256": "3c3e9caf8b554d74f76fcfd9cfdab0281d199418633d184310786eb33a7f77b9",
+      "compressed_bytes": 2035,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/check_glyph_stage_b_ultimate_profiles.py",
+      "raw_sha256": "b9c8d1afd6f84f075a496fad75d49ba7fc7f877fbec38049e343e00b11722769",
+      "raw_bytes": 10001,
+      "relative": "objects/b9c8d1afd6f84f075a496fad75d49ba7fc7f877fbec38049e343e00b11722769.gz",
+      "compressed_sha256": "055ab70d2e96d72380af92319a0f1da07448fcdc9ccaa8b570ab65f74121cf69",
+      "compressed_bytes": 3086,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp",
+      "raw_sha256": "d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918",
+      "raw_bytes": 1164,
+      "relative": "objects/d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918.gz",
+      "compressed_sha256": "988e4f9723c8d6241d1280360a115c94e1a69e728ae8a5223590a8cabc151088",
+      "compressed_bytes": 605,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.h",
+      "raw_sha256": "712027e87b9709c1aeb2b6094011c25455e6802fbf66010e8f6f780a92983b69",
+      "raw_bytes": 2007,
+      "relative": "objects/712027e87b9709c1aeb2b6094011c25455e6802fbf66010e8f6f780a92983b69.gz",
+      "compressed_sha256": "d4062cc2f5ecf5ac61fb0eefdb6c2fbb0a2ce4117bf4004068822b53f8a36834",
+      "compressed_bytes": 690,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/GamecubeConsole.hpp",
+      "raw_sha256": "d7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c",
+      "raw_bytes": 2892,
+      "relative": "objects/d7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c.gz",
+      "compressed_sha256": "479052cbb823018a7c09594cc952334778669c15e8b58b7bd52cad9b29405521",
+      "compressed_bytes": 1095,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/N64Console.hpp",
+      "raw_sha256": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+      "raw_bytes": 2331,
+      "relative": "objects/1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e.gz",
+      "compressed_sha256": "32766d1bbfafbc64f7e9a8e4db99543299a70f1b0ce0fa6027dac75811b541ba",
+      "compressed_bytes": 920,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/gamecube_definitions.h",
+      "raw_sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+      "raw_bytes": 1609,
+      "relative": "objects/acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2.gz",
+      "compressed_sha256": "72ffb0f4319d73c20033c1bd22f5c9cda6e72b5101a8e05becd369daf74882e5",
+      "compressed_bytes": 544,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/joybus.h",
+      "raw_sha256": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+      "raw_bytes": 3694,
+      "relative": "objects/0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce.gz",
+      "compressed_sha256": "ca0caeac0ea01d21927451772201b2c689bc11e8fbf84db0043b1ae82501ceb6",
+      "compressed_bytes": 1104,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/joybus/n64_definitions.h",
+      "raw_sha256": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+      "raw_bytes": 1233,
+      "relative": "objects/88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef.gz",
+      "compressed_sha256": "de86213d9d0ea76f1c9ed27ca08dd36a3c34f5f565854e61cc45cf1bd700b164",
+      "compressed_bytes": 462,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.cpp",
+      "raw_sha256": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b",
+      "raw_bytes": 1761,
+      "relative": "objects/f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b.gz",
+      "compressed_sha256": "8d8d49e3ec01936f1cf75397ea4574786ce85afdf6fc0119bf783156258d40b9",
+      "compressed_bytes": 768,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/NesConsole.hpp",
+      "raw_sha256": "cf1ca013c2f2e049bde4b410d6568384f8d0c1dcb44d82cd418cd71db8e136f3",
+      "raw_bytes": 1959,
+      "relative": "objects/cf1ca013c2f2e049bde4b410d6568384f8d0c1dcb44d82cd418cd71db8e136f3.gz",
+      "compressed_sha256": "3d057a4038c2cda4f80a10a6c53eba200c8c268325d3a6fc233ffb6dc007a96d",
+      "compressed_bytes": 744,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/SnesConsole.hpp",
+      "raw_sha256": "f98bb3a985033934e5c9aa312a0729e0d35ed0167e0eb01cc309a4480b575899",
+      "raw_bytes": 1976,
+      "relative": "objects/f98bb3a985033934e5c9aa312a0729e0d35ed0167e0eb01cc309a4480b575899.gz",
+      "compressed_sha256": "21092414e0f42464f13bb26cc3d006cf4cda5eb22281905b51acf1d701e85e5c",
+      "compressed_bytes": 752,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes.h",
+      "raw_sha256": "2fc037980c1841c55e4004adb4e87a1ae550173519896a710b78d48394bb24ed",
+      "raw_bytes": 3619,
+      "relative": "objects/2fc037980c1841c55e4004adb4e87a1ae550173519896a710b78d48394bb24ed.gz",
+      "compressed_sha256": "fc490e88cd718909f1a438fe1932c8618dcbe9b073cb7149dd66e9d14d5c7792",
+      "compressed_bytes": 961,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/nes_definitions.h",
+      "raw_sha256": "47c1d2a93fccf06237e00691dcd69036b5b7cfb54dd21416bcc97844d4132453",
+      "raw_bytes": 427,
+      "relative": "objects/47c1d2a93fccf06237e00691dcd69036b5b7cfb54dd21416bcc97844d4132453.gz",
+      "compressed_sha256": "d64b749e060b4cb42fec771e60afa211a82bd0065b0e7f2e1cfbdd0222895f6d",
+      "compressed_bytes": 230,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/nes/snes_definitions.h",
+      "raw_sha256": "3d39e2da342d981461094c69d73229d88a345549499b5069b6e430e76a704dac",
+      "raw_bytes": 552,
+      "relative": "objects/3d39e2da342d981461094c69d73229d88a345549499b5069b6e430e76a704dac.gz",
+      "compressed_sha256": "23aec33a588f30d871057dd0252f2b08166baf79e1ed4f00e8722a58d66ff10d",
+      "compressed_bytes": 257,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp",
+      "raw_sha256": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+      "raw_bytes": 946,
+      "relative": "objects/fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5.gz",
+      "compressed_sha256": "35009773c5bfc6322c8f14261e4ae6a4a1d41fc52e22e5fa782746497ab00e24",
+      "compressed_bytes": 385,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.h",
+      "raw_sha256": "678fd01f158f519d2fee8ffbf027937fb14d4b40d141c618d6c16ea4e4b38a1a",
+      "raw_bytes": 386,
+      "relative": "objects/678fd01f158f519d2fee8ffbf027937fb14d4b40d141c618d6c16ea4e4b38a1a.gz",
+      "compressed_sha256": "ed28cff0f4593eeab43c556559fb227b062f62a18f167d5066cee53b96b32429",
+      "compressed_bytes": 206,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.c",
+      "raw_sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "raw_bytes": 30784,
+      "relative": "objects/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.gz",
+      "compressed_sha256": "58e0cffad3cc7d7b630f86ac86a1015d1447f4cd7cb33ab6fc35ab5f58ba9612",
+      "compressed_bytes": 6749,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_encode.h",
+      "raw_sha256": "9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf",
+      "raw_bytes": 7176,
+      "relative": "objects/9aa00fee4ff08adf0da16e33a55be08810ea657800a648dc78f82e89c60c10cf.gz",
+      "compressed_sha256": "f4b838bdc3dcc441caed06d92dd9b755404da1466f6a4c11f8a0c7fef07e5f65",
+      "compressed_bytes": 2518,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/host_observation.hpp",
+      "raw_sha256": "0951794f79b39ac63535af69b580092212e4647066c200ce6df188482e09560d",
+      "raw_bytes": 802,
+      "relative": "objects/0951794f79b39ac63535af69b580092212e4647066c200ce6df188482e09560d.gz",
+      "compressed_sha256": "3cb5948a003c14d09e44eae42db364e32387983e30e2ebd31e5c5a669513e326",
+      "compressed_bytes": 332,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_GFX.h",
+      "raw_sha256": "854797409140abd8761a44625980a83b73dc62f973e9c8bef94d071cf447eb59",
+      "raw_bytes": 1148,
+      "relative": "objects/854797409140abd8761a44625980a83b73dc62f973e9c8bef94d071cf447eb59.gz",
+      "compressed_sha256": "f4a6422f6bae87296008725bd796f51f8077f12e33960219a4ec5a5eeb4b684b",
+      "compressed_bytes": 442,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_SSD1306.h",
+      "raw_sha256": "f1a8348ce2b2fed336e269b851bf1031789268802741e9c20a24f8e7d7f2ef57",
+      "raw_bytes": 783,
+      "relative": "objects/f1a8348ce2b2fed336e269b851bf1031789268802741e9c20a24f8e7d7f2ef57.gz",
+      "compressed_sha256": "98903ffc95b750ab26ee811f8a5dafad62aaa93d937b019e6cd1029269b2b370",
+      "compressed_bytes": 385,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_TinyUSB.h",
+      "raw_sha256": "02acc526601a3bc61fc434690198eae72da75869e43ad9e24ffc21ead9e72ce0",
+      "raw_bytes": 2205,
+      "relative": "objects/02acc526601a3bc61fc434690198eae72da75869e43ad9e24ffc21ead9e72ce0.gz",
+      "compressed_sha256": "978ceeb97eb29910da1ded1800b18e2286ea017e5537b971a910444b8e4ba5e3",
+      "compressed_bytes": 818,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Adafruit_USBD_XInput.hpp",
+      "raw_sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+      "raw_bytes": 4555,
+      "relative": "objects/0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c.gz",
+      "compressed_sha256": "252221e718bcf7ecbbbc9e49508636e1e52427b08cb6bbe7ffedb67f4c19eb9c",
+      "compressed_bytes": 1812,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Arduino.h",
+      "raw_sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab",
+      "raw_bytes": 2255,
+      "relative": "objects/7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab.gz",
+      "compressed_sha256": "d90d3091fe0b6c1ef370d8c471842ead9445749d07de59d60a5df6a5a4ad89d8",
+      "compressed_bytes": 926,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/FastLED.h",
+      "raw_sha256": "6fbf22c418b965c8b3bd1d20d8412d13950043b34ac61ed1f7b5b9bfa4f4ad5d",
+      "raw_bytes": 1207,
+      "relative": "objects/6fbf22c418b965c8b3bd1d20d8412d13950043b34ac61ed1f7b5b9bfa4f4ad5d.gz",
+      "compressed_sha256": "06833b772ac6961f86855dbcf1ead2783389f2a39f5bc1c0c421004eb9ea6f46",
+      "compressed_bytes": 519,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/LittleFS.h",
+      "raw_sha256": "f720ec13215f1adbc31ebe561651428c45dd05a3c0b3025d6cbd49be772d57a9",
+      "raw_bytes": 4989,
+      "relative": "objects/f720ec13215f1adbc31ebe561651428c45dd05a3c0b3025d6cbd49be772d57a9.gz",
+      "compressed_sha256": "88a9b3473b6cc5a7bdb35c9e84b57b74924d9514275bde56963a3647c02dac69",
+      "compressed_bytes": 1369,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Print.h",
+      "raw_sha256": "4950bf9f0a8ec926ce95c225ecf47c6401ae6df17c4353460e1378c4053c9d8a",
+      "raw_bytes": 221,
+      "relative": "objects/4950bf9f0a8ec926ce95c225ecf47c6401ae6df17c4353460e1378c4053c9d8a.gz",
+      "compressed_sha256": "1d4d002d3f2f7d7d1553450c0ddec51577a5c653b54ae28f5fae0ce1052df5c9",
+      "compressed_bytes": 156,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Stream.h",
+      "raw_sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0",
+      "raw_bytes": 457,
+      "relative": "objects/61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0.gz",
+      "compressed_sha256": "b3b2e7cd31d977a98d697c809b7af6e84e247c85414c7416a494282ac95735a4",
+      "compressed_bytes": 249,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/Wire.h",
+      "raw_sha256": "9e4b6a768ab81737df13372d053225d92c98bfd433de1af55b4bb54fa725321f",
+      "raw_bytes": 248,
+      "relative": "objects/9e4b6a768ab81737df13372d053225d92c98bfd433de1af55b4bb54fa725321f.gz",
+      "compressed_sha256": "c6ba232ba6160469c3dcf8914ab916ad76e422b42bb663af9aad5f6d8f46e1cf",
+      "compressed_bytes": 165,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/arduino/Adafruit_USBD_Device.h",
+      "raw_sha256": "5c29ced4a047d158ff1e929f9c1679c3eed08cf4f129fb555f7e67d8c981dce3",
+      "raw_bytes": 553,
+      "relative": "objects/5c29ced4a047d158ff1e929f9c1679c3eed08cf4f129fb555f7e67d8c981dce3.gz",
+      "compressed_sha256": "13807d26b9359285228a120425e6a1f19729e1aa20d39f14d417108ebda50028",
+      "compressed_bytes": 286,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/avr/pgmspace.h",
+      "raw_sha256": "3f2de365e7cc1c6e874e9735d4be23e871fe03333bc3328f34810cd670c15467",
+      "raw_bytes": 52,
+      "relative": "objects/3f2de365e7cc1c6e874e9735d4be23e871fe03333bc3328f34810cd670c15467.gz",
+      "compressed_sha256": "1a611404615026b49abd9333a861f942f139a39c4d413588defc1c09b03c4a40",
+      "compressed_bytes": 62,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/cobs/Print.h",
+      "raw_sha256": "47568bbfdd939867e0e0a78613f46a03e6277c4c16661a729ccdd09b988160ea",
+      "raw_bytes": 383,
+      "relative": "objects/47568bbfdd939867e0e0a78613f46a03e6277c4c16661a729ccdd09b988160ea.gz",
+      "compressed_sha256": "286e789a506bfb844e9fe4723cb0784fceb904a0aa3099b8dde386418e74d218",
+      "compressed_bytes": 232,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/cobs/Stream.h",
+      "raw_sha256": "f0221f7ab67c22e5ee206c7c8801bd5e09db61c76bf1f7d668495b92f958d5ab",
+      "raw_bytes": 665,
+      "relative": "objects/f0221f7ab67c22e5ee206c7c8801bd5e09db61c76bf1f7d668495b92f958d5ab.gz",
+      "compressed_sha256": "aedcd4233668b539b93b0c955d59a80050bac916ec38ce83c3bcc1a085da2075",
+      "compressed_bytes": 300,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/comms/backend_init.hpp",
+      "raw_sha256": "d87bf97b2ed727954698b931c70d1f0cd8ec9fff70d8bc5b76ed398476365f00",
+      "raw_bytes": 5307,
+      "relative": "objects/d87bf97b2ed727954698b931c70d1f0cd8ec9fff70d8bc5b76ed398476365f00.gz",
+      "compressed_sha256": "3071c7047243d609fdc363375c6a0225b2eeb7f3208a06aa52ded4e7de37cc5b",
+      "compressed_bytes": 1041,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/device/usbd_pvt.h",
+      "raw_sha256": "a2ff6f0ceb9a050416c56ba2d587348c77259a02dd0ba1fc9f81db3c58cc439c",
+      "raw_bytes": 174,
+      "relative": "objects/a2ff6f0ceb9a050416c56ba2d587348c77259a02dd0ba1fc9f81db3c58cc439c.gz",
+      "compressed_sha256": "4b99c010e173bc4886d5e231f343d53747eaaa720ef6bb7ace050403da48cb89",
+      "compressed_bytes": 147,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/hardware/pio.h",
+      "raw_sha256": "430c019c88bae951f854bc9fd98615ffc7ef419d6894f5d17edf30278392ba5b",
+      "raw_bytes": 180,
+      "relative": "objects/430c019c88bae951f854bc9fd98615ffc7ef419d6894f5d17edf30278392ba5b.gz",
+      "compressed_sha256": "63a3bf73455479721d221c8bb0acf498d176b2af9094e06a9d772779a7b6a20b",
+      "compressed_bytes": 145,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/hardware/structs/usb.h",
+      "raw_sha256": "0531eca33b73e7de9fa6db45f9b9bb5670e7760665a35b9450bdde264b5b4d8b",
+      "raw_bytes": 205,
+      "relative": "objects/0531eca33b73e7de9fa6db45f9b9bb5670e7760665a35b9450bdde264b5b4d8b.gz",
+      "compressed_sha256": "a99710c998b630f2a0dda3e776cb8e41682fdee8f84b1df72168f77d837f6f33",
+      "compressed_bytes": 163,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/hardware/sync.h",
+      "raw_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+      "raw_bytes": 13,
+      "relative": "objects/b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201.gz",
+      "compressed_sha256": "4a4681a7d01856c31bdafad6bb41410ef5b5a5daad004b0f2717c3ad6f231334",
+      "compressed_bytes": 33,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/hardware/timer.h",
+      "raw_sha256": "2213c23f05f2d03183470a64548b7cfddf78a57d80cb09fc74fe745f3df43408",
+      "raw_bytes": 38,
+      "relative": "objects/2213c23f05f2d03183470a64548b7cfddf78a57d80cb09fc74fe745f3df43408.gz",
+      "compressed_sha256": "ae4de14644128493fcb6e2a5307bd00e0457037a07ec71c4305e5f1252e391cd",
+      "compressed_bytes": 58,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/pico/lock_core.h",
+      "raw_sha256": "b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201",
+      "raw_bytes": 13,
+      "relative": "objects/b3adf106d95b8934f690943f2921308b90be5b766c4c8ba250c792de56400201.gz",
+      "compressed_sha256": "4a4681a7d01856c31bdafad6bb41410ef5b5a5daad004b0f2717c3ad6f231334",
+      "compressed_bytes": 33,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/pico/mutex.h",
+      "raw_sha256": "de247bcb527348f3a965565be09f0774eebf1203fed7be09e3a1a6e5ad825dc1",
+      "raw_bytes": 567,
+      "relative": "objects/de247bcb527348f3a965565be09f0774eebf1203fed7be09e3a1a6e5ad825dc1.gz",
+      "compressed_sha256": "7ce79df3d2289521ced8cb2d049a38718ee7943bca66d4b4b1f3db0725e2ebac",
+      "compressed_bytes": 302,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/include/pico/stdlib.h",
+      "raw_sha256": "7ee1334c6ec489ba911676c855833b1c1d516b4bd572a39801c526a1fd3c09c9",
+      "raw_bytes": 1033,
+      "relative": "objects/7ee1334c6ec489ba911676c855833b1c1d516b4bd572a39801c526a1fd3c09c9.gz",
+      "compressed_sha256": "941276b6e856f468740d9161d12c94e1a74ce504b85c6860c4995e19420cff4b",
+      "compressed_bytes": 434,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/persistence_harness.cpp",
+      "raw_sha256": "c576e52cfe594883fa0a78e96e9521a77c1a1633d0b098bedac4a28733b62e7b",
+      "raw_bytes": 27574,
+      "relative": "objects/c576e52cfe594883fa0a78e96e9521a77c1a1633d0b098bedac4a28733b62e7b.gz",
+      "compressed_sha256": "959b659d8903436e9ec48033fe87f155f474d24e39114b4723ee6cc1d8e37c10",
+      "compressed_bytes": 6685,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/platform_doubles.cpp",
+      "raw_sha256": "e744c7eeec31865b0a3dc954ca8c40982901c9c5ad94605941343f109db833cb",
+      "raw_bytes": 4312,
+      "relative": "objects/e744c7eeec31865b0a3dc954ca8c40982901c9c5ad94605941343f109db833cb.gz",
+      "compressed_sha256": "c8ee3aff6e2ff4826f80569ae53fe624be233e56632677391fb9d821af6e1841",
+      "compressed_bytes": 1399,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/semantic_harness.cpp",
+      "raw_sha256": "629ddf994e2a55a9f55bf568aeff09e56f89c68a22e4b27a3364eef77759ed1d",
+      "raw_bytes": 20649,
+      "relative": "objects/629ddf994e2a55a9f55bf568aeff09e56f89c68a22e4b27a3364eef77759ed1d.gz",
+      "compressed_sha256": "dca233fabb20fcc825ba82b324f46169bc585e8d294677d69dbf740cd3a58a10",
+      "compressed_bytes": 4334,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/setconfig_harness.cpp",
+      "raw_sha256": "71a2b7c65c2478f5ffb97127cb5ff5efeabba52290d2e40fd7552657e42b1e80",
+      "raw_bytes": 18396,
+      "relative": "objects/71a2b7c65c2478f5ffb97127cb5ff5efeabba52290d2e40fd7552657e42b1e80.gz",
+      "compressed_sha256": "cd1a18c00067995ea758c37fa815c53777dbfba4598c2ae8d8273608a9f9ccb0",
+      "compressed_bytes": 4735,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/gp_config021_persisted_recovery/startup_harness.cpp",
+      "raw_sha256": "78b9f36eff61d82999cce1f988ee011aaf947120faa2cdc34b81d6b78dd0cb5e",
+      "raw_bytes": 8447,
+      "relative": "objects/78b9f36eff61d82999cce1f988ee011aaf947120faa2cdc34b81d6b78dd0cb5e.gz",
+      "compressed_sha256": "83281329cfb5eca0b1f32a461da3973ab205605f7311e6833e73cc3e75448ccd",
+      "compressed_bytes": 2937,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/current_custom_hook.cpp",
+      "raw_sha256": "bdc319e3c71fd8d33590172ecb76126f088bca4018d5e732be3d2afc27f9e3e3",
+      "raw_bytes": 3519,
+      "relative": "objects/bdc319e3c71fd8d33590172ecb76126f088bca4018d5e732be3d2afc27f9e3e3.gz",
+      "compressed_sha256": "b8f3786648f1bac228ae25dfccef1aaf34e8811e810d2e184af84a9fcd8255cf",
+      "compressed_bytes": 1434,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/current_mode_capacity.cpp",
+      "raw_sha256": "3337cb4bab44870251343190df572c35ce105df7ab73d0dd74009ee49080320a",
+      "raw_bytes": 1888,
+      "relative": "objects/3337cb4bab44870251343190df572c35ce105df7ab73d0dd74009ee49080320a.gz",
+      "compressed_sha256": "c424fee5b442b2604520df4b36c8ccd9a9ceb335f51a5885f7a3cd074dd02669",
+      "compressed_bytes": 814,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/frozen/legacy_controller.cpp",
+      "raw_sha256": "1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8",
+      "raw_bytes": 2550,
+      "relative": "objects/1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8.gz",
+      "compressed_sha256": "033a0e5fa8ba9e41395c3e5d65712db2ff16b86caf312722102475bed2633e9d",
+      "compressed_bytes": 692,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/frozen/modes/Ultimate.hpp",
+      "raw_sha256": "d21b54a33d35c1956df27cdccc8b5b2e9eb83386b64453226c7c988854c66e3e",
+      "raw_bytes": 728,
+      "relative": "objects/d21b54a33d35c1956df27cdccc8b5b2e9eb83386b64453226c7c988854c66e3e.gz",
+      "compressed_sha256": "b72c8bf97388d500b55a2dadee8887479b68cadb2d36af05bbb8e3ea15785ef6",
+      "compressed_bytes": 368,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/frozen_custom/core/ControllerMode.hpp",
+      "raw_sha256": "bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47",
+      "raw_bytes": 1004,
+      "relative": "objects/bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47.gz",
+      "compressed_sha256": "a6d8cd2fe4776321968c72652a784b8db6834846eb05347108a50ade5349042b",
+      "compressed_bytes": 375,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/independent_legacy/probe.cpp",
+      "raw_sha256": "fec673ab698505d67b75a41d14cc762b2cc3b51acfac02a0ab52af8c22339ac9",
+      "raw_bytes": 7319,
+      "relative": "objects/fec673ab698505d67b75a41d14cc762b2cc3b51acfac02a0ab52af8c22339ac9.gz",
+      "compressed_sha256": "267d1bd4ea5892bfd63091158fa344bc43669a7e062b813184b33f7ef3c6b893",
+      "compressed_bytes": 2608,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/independent_legacy/run.py",
+      "raw_sha256": "515689aa17bd7735c09403e6c4c8cf0c61136d5c41370973f637ec961248e1f0",
+      "raw_bytes": 2248,
+      "relative": "objects/515689aa17bd7735c09403e6c4c8cf0c61136d5c41370973f637ec961248e1f0.gz",
+      "compressed_sha256": "0b0339ffcdabd96adf064635238804f93d91420bd4cf4d1e3b6fadd3c6eb52b4",
+      "compressed_bytes": 1036,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/legacy_set_phases.cpp",
+      "raw_sha256": "6e8242e910af36dd3ef4f91a9d32ce296cf0a5d27e04947a4779b262836c5cea",
+      "raw_bytes": 5284,
+      "relative": "objects/6e8242e910af36dd3ef4f91a9d32ce296cf0a5d27e04947a4779b262836c5cea.gz",
+      "compressed_sha256": "0b35fd696cd824d05f500d5913544d71799469391b86a9f35c0bd43e89fc6458",
+      "compressed_bytes": 2000,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/load_capture_nor.cpp",
+      "raw_sha256": "11b290a7095d56b5f05900c1c484ec63894e825a6645645176723dae48d2a13c",
+      "raw_bytes": 5063,
+      "relative": "objects/11b290a7095d56b5f05900c1c484ec63894e825a6645645176723dae48d2a13c.gz",
+      "compressed_sha256": "792161ab9c71aba11260201206268d130ebc20cb964cea86f1699b4b4a83659a",
+      "compressed_bytes": 1938,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_dispatch.cpp",
+      "raw_sha256": "6980d8b6c0a7cd97e8a0f47afe39e6e7e317cdcd52fade25eae50b7681d5c99a",
+      "raw_bytes": 6801,
+      "relative": "objects/6980d8b6c0a7cd97e8a0f47afe39e6e7e317cdcd52fade25eae50b7681d5c99a.gz",
+      "compressed_sha256": "b7daf6b41d413e52510a45e7a806fa00904fa490ddf1a05539d68614c6a899f2",
+      "compressed_bytes": 2293,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_gc_lifetime.cpp",
+      "raw_sha256": "d25401d477fc50ac8f9afd20b62348712739a20abd0c66ea012224f4eec242c1",
+      "raw_bytes": 11845,
+      "relative": "objects/d25401d477fc50ac8f9afd20b62348712739a20abd0c66ea012224f4eec242c1.gz",
+      "compressed_sha256": "a3c4a01f58124142037d61922b2c0d4af34a4faf9ab3cb73a7411ed448e982ac",
+      "compressed_bytes": 3878,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_legacy_adapter.hpp",
+      "raw_sha256": "9c86cf8e5e5ae0810522a5d4aa6049220175725be4efa9c6a879f246b75e57ec",
+      "raw_bytes": 3744,
+      "relative": "objects/9c86cf8e5e5ae0810522a5d4aa6049220175725be4efa9c6a879f246b75e57ec.gz",
+      "compressed_sha256": "ea392394b5c12251cc34f49ff63593133f8980bf0b8557a9a5f791a505f27a37",
+      "compressed_bytes": 1382,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_mutations.cpp",
+      "raw_sha256": "ed326527f896940108d06a9f4186180053fadf64b797d18ec668e6a8603d5301",
+      "raw_bytes": 2510,
+      "relative": "objects/ed326527f896940108d06a9f4186180053fadf64b797d18ec668e6a8603d5301.gz",
+      "compressed_sha256": "c2b86216f865be8c4d31a425bc6ae3e5426eda1e5cfbbab0cd04a8531b715ad6",
+      "compressed_bytes": 1155,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_negative.cpp",
+      "raw_sha256": "f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15",
+      "raw_bytes": 9074,
+      "relative": "objects/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.gz",
+      "compressed_sha256": "bbd418ff8b835750a3cb81074a3280712c13c55e065c9a6573827a2e1f769f77",
+      "compressed_bytes": 2790,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_runner.cpp",
+      "raw_sha256": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43",
+      "raw_bytes": 7613,
+      "relative": "objects/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.gz",
+      "compressed_sha256": "772995bd850a6971cccc2bec883cc13f3769e87ecb5cb5e477bb8b7de2436531",
+      "compressed_bytes": 2688,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/native_store.cpp",
+      "raw_sha256": "06c5bb0150909775928b8c5f91399fbcf4ab3f7e429671e1cbf4f271d44b9351",
+      "raw_bytes": 15438,
+      "relative": "objects/06c5bb0150909775928b8c5f91399fbcf4ab3f7e429671e1cbf4f271d44b9351.gz",
+      "compressed_sha256": "db540ef15d59f0432c6e4ba45a34a7d3d1c4c88c02e5f3e5aedbc5c34afd8d04",
+      "compressed_bytes": 4655,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/persistence_nor_lifetimes.cpp",
+      "raw_sha256": "49d1284dbf955a0a6ad38af8f170ea479eb41689c9779e5631c2c00626ec92a0",
+      "raw_bytes": 9113,
+      "relative": "objects/49d1284dbf955a0a6ad38af8f170ea479eb41689c9779e5631c2c00626ec92a0.gz",
+      "compressed_sha256": "230c82d6a7df5e32166a3fd20c0f9a7c64c6663757020343d0c832e42f0bf660",
+      "compressed_bytes": 3216,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/reconcile_nor_phases.cpp",
+      "raw_sha256": "4d5c3f127950694ca077acfb25f2834faf15bf919264345a960cfdfbdc8b5ff9",
+      "raw_bytes": 5684,
+      "relative": "objects/4d5c3f127950694ca077acfb25f2834faf15bf919264345a960cfdfbdc8b5ff9.gz",
+      "compressed_sha256": "c6a42c0159a0e24b824b76046332595ba01c9533f37ed92b650e46879f302c7e",
+      "compressed_bytes": 2172,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/run_gc_lifetime.py",
+      "raw_sha256": "f84df6d097a1101ce75189b42081a373cef610cf5e9b143bffe8c0297f06ad18",
+      "raw_bytes": 3795,
+      "relative": "objects/f84df6d097a1101ce75189b42081a373cef610cf5e9b143bffe8c0297f06ad18.gz",
+      "compressed_sha256": "c5fbc9144f75bc36eb1d37c0f3eab61dd2a5de3f519398329bae5d5ebbbe58c2",
+      "compressed_bytes": 1853,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/run_legacy_set_phases.py",
+      "raw_sha256": "f27053d6217f5009f05cdbe6ff0fdbfb224924b116ed7c8497e31e33eaab883e",
+      "raw_bytes": 4239,
+      "relative": "objects/f27053d6217f5009f05cdbe6ff0fdbfb224924b116ed7c8497e31e33eaab883e.gz",
+      "compressed_sha256": "5740046d2f76dc582d4854a48bfb46dc2800c2a2cdaab516316b4d3891678556",
+      "compressed_bytes": 1927,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/run_persistence_nor.py",
+      "raw_sha256": "e543de300557f6798e4fb8a704411e78c5523068bc032814e53e6d69ac3af542",
+      "raw_bytes": 4032,
+      "relative": "objects/e543de300557f6798e4fb8a704411e78c5523068bc032814e53e6d69ac3af542.gz",
+      "compressed_sha256": "6d2f59e5e75b0b63cca130a66bae414d332537f7209c8c2903aef4fb8a03d61d",
+      "compressed_bytes": 1840,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/run_store_publication_nor.py",
+      "raw_sha256": "9f14aed0ab902fead25089430b9221812efda757a69c2bbeb0a91848d3a09f9f",
+      "raw_bytes": 4431,
+      "relative": "objects/9f14aed0ab902fead25089430b9221812efda757a69c2bbeb0a91848d3a09f9f.gz",
+      "compressed_sha256": "893f27f86fd90f1011e20a5ed6f52c310906d0b129785a2aa4f54419e310ca55",
+      "compressed_bytes": 1999,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_native_ultimate/store_publication_nor.cpp",
+      "raw_sha256": "1961246d6d82eeb4f443a8eeb2c79121a79c938d916a500008ec89376d05bd7c",
+      "raw_bytes": 5671,
+      "relative": "objects/1961246d6d82eeb4f443a8eeb2c79121a79c938d916a500008ec89376d05bd7c.gz",
+      "compressed_sha256": "e7b2a6bd32d2bfa93f81a403695c9363d30406c7de68d44643a70f425d60fee4",
+      "compressed_bytes": 2229,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_config_persistence_host/checked_storage_double.cpp",
+      "raw_sha256": "7a6146b2179b07f4a94ba7d5c96fe52834f6220c633c50fae8458b06b4baebf8",
+      "raw_bytes": 2817,
+      "relative": "objects/7a6146b2179b07f4a94ba7d5c96fe52834f6220c633c50fae8458b06b4baebf8.gz",
+      "compressed_sha256": "1499deaad95c74e114b6b76ab66b19c0d3ab2dc14820b7b243508c50e997d4e2",
+      "compressed_bytes": 972,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_config_persistence_host/include/Arduino.h",
+      "raw_sha256": "7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab",
+      "raw_bytes": 2255,
+      "relative": "objects/7ab1c9a198e4d7a90c8a60a39f0a999b67ca5989b88adc8ad4ffc07f5c9c50ab.gz",
+      "compressed_sha256": "d90d3091fe0b6c1ef370d8c471842ead9445749d07de59d60a5df6a5a4ad89d8",
+      "compressed_bytes": 926,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_config_persistence_host/include/LittleFS.h",
+      "raw_sha256": "cf0d734e8f51899a178d278ddad5227e0c74dd1071c98935a9301211c026757a",
+      "raw_bytes": 2550,
+      "relative": "objects/cf0d734e8f51899a178d278ddad5227e0c74dd1071c98935a9301211c026757a.gz",
+      "compressed_sha256": "1b26be55b2e8489096f6acf7f901b1a351f26208941ab97058a22062f12091c1",
+      "compressed_bytes": 1021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_config_persistence_host/include/Print.h",
+      "raw_sha256": "8ba02480d466a2f5e4f9ae04bfe4f923fe685b3c813a9c2b7499128efb657cb0",
+      "raw_bytes": 213,
+      "relative": "objects/8ba02480d466a2f5e4f9ae04bfe4f923fe685b3c813a9c2b7499128efb657cb0.gz",
+      "compressed_sha256": "2303c563d6fe70283923c083a6af80457d0cf3cd013467026f2d16daaa19387a",
+      "compressed_bytes": 155,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_config_persistence_host/include/Stream.h",
+      "raw_sha256": "61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0",
+      "raw_bytes": 457,
+      "relative": "objects/61376e21fafe1eb6a0b7fbe8fdd170ca0c7632cab61243ca094a4d9913c341d0.gz",
+      "compressed_sha256": "b3b2e7cd31d977a98d697c809b7af6e84e247c85414c7416a494282ac95735a4",
+      "compressed_bytes": 249,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_config_persistence_host/persistence_harness.cpp",
+      "raw_sha256": "f79390708edf20b870bcd4d109d0aa9b6ad6bb448ae203445d4188932f8d7560",
+      "raw_bytes": 15453,
+      "relative": "objects/f79390708edf20b870bcd4d109d0aa9b6ad6bb448ae203445d4188932f8d7560.gz",
+      "compressed_sha256": "ca04202d4c82f04fbe9c8d223db1356af2327dee96eba453c5362c5e4bd98216",
+      "compressed_bytes": 3846,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_strict_host/negative_harness.cpp",
+      "raw_sha256": "ab1e5ba3c1c8d6d9e147f46433907dd9357c25613695cf690e3af4b770557497",
+      "raw_bytes": 3762,
+      "relative": "objects/ab1e5ba3c1c8d6d9e147f46433907dd9357c25613695cf690e3af4b770557497.gz",
+      "compressed_sha256": "8a6f6db180af23e2d6ddb1a783be59d10791d9d7794c016d050eb8ac323cc903",
+      "compressed_bytes": 1515,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_strict_host/strict_harness.cpp",
+      "raw_sha256": "f1f4c2698d996578efbb91d78ed8b461dd7b6775e061c71ffff20762f011bced",
+      "raw_bytes": 37340,
+      "relative": "objects/f1f4c2698d996578efbb91d78ed8b461dd7b6775e061c71ffff20762f011bced.gz",
+      "compressed_sha256": "d062ebaa03d87e10c5b67e87368d66ca6bcc5bb92a1475e553e7b574197f6a43",
+      "compressed_bytes": 9393,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/checked_storage_unavailable.cpp",
+      "raw_sha256": "b283926c2b2cae06a4de47c3f431ae23e98d49e8d9860757fb2bad181a6bc9d2",
+      "raw_bytes": 904,
+      "relative": "objects/b283926c2b2cae06a4de47c3f431ae23e98d49e8d9860757fb2bad181a6bc9d2.gz",
+      "compressed_sha256": "9f520edd7997fbdaaa826f6b97a6fab2ee6abb31efe56252cf96309fd7d6bebc",
+      "compressed_bytes": 362,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/Arduino.h",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/LittleFS.h",
+      "raw_sha256": "e2c16945e2885ab45ef6533d83a2ba87d85fef6a926e0b9404ed838242723d4c",
+      "raw_bytes": 785,
+      "relative": "objects/e2c16945e2885ab45ef6533d83a2ba87d85fef6a926e0b9404ed838242723d4c.gz",
+      "compressed_sha256": "c87bb6c0f4e831a75556c569908b3e7b0bc75797a508423aa866c38cf59a9d4d",
+      "compressed_bytes": 374,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/Print.h",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/Stream.h",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/arduino/Adafruit_USBD_Device.h",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/CommunicationBackend.hpp",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/InputSource.hpp",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/Persistence.hpp",
+      "raw_sha256": "df832cf624544db67016e621636925c055caee4b3e673d9f700a4a1b8ad3e75f",
+      "raw_bytes": 2964,
+      "relative": "objects/df832cf624544db67016e621636925c055caee4b3e673d9f700a4a1b8ad3e75f.gz",
+      "compressed_sha256": "5010aa44439dc74993a890f6d38cbcfafedc22ced34bd664b45bd46a39738822",
+      "compressed_bytes": 1087,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/ProfileStore.hpp",
+      "raw_sha256": "5ec21ff3a31fe9f7713e38fbb1e467e4d8f6c233af319af82cc3daa678dfcc42",
+      "raw_bytes": 51,
+      "relative": "objects/5ec21ff3a31fe9f7713e38fbb1e467e4d8f6c233af319af82cc3daa678dfcc42.gz",
+      "compressed_sha256": "1e939058bd1594f5d5b0997b608a9f163145d8a51faeba7af8f02016768be034",
+      "compressed_bytes": 69,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/config_validation.hpp",
+      "raw_sha256": "951dd4a5d6a65c0e112e0debd0698bcd117939db69560c8711a7d46356cc9be6",
+      "raw_bytes": 56,
+      "relative": "objects/951dd4a5d6a65c0e112e0debd0698bcd117939db69560c8711a7d46356cc9be6.gz",
+      "compressed_sha256": "f8c16fc2cb02fe5a9a66a1dfe72ba62cbb88e17cb88a49a8be17a756d9443185",
+      "compressed_bytes": 76,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/host_stubs.hpp",
+      "raw_sha256": "c44d2c03642ceab352dccfc221b44e70fb9a3c4a0ca650c4b0afd943f705ce4c",
+      "raw_bytes": 1784,
+      "relative": "objects/c44d2c03642ceab352dccfc221b44e70fb9a3c4a0ca650c4b0afd943f705ce4c.gz",
+      "compressed_sha256": "88f84ee8d71440b67584f9cbf65f1f1af47b370132beddd3e2d1f7eed738419f",
+      "compressed_bytes": 733,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/include/reboot.hpp",
+      "raw_sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "raw_bytes": 39,
+      "relative": "objects/b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c.gz",
+      "compressed_sha256": "fc8797620f8b8ff691f765cd60ba6e0f226ef8604663b9ad3cefca6cf10a8476",
+      "compressed_bytes": 59,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/fixtures/profile_store_timeout_host/timeout_harness.cpp",
+      "raw_sha256": "bca272e30551d44ce4c391d30c123112e091932d1d44dbaf1b9c9636df292ec1",
+      "raw_bytes": 86011,
+      "relative": "objects/bca272e30551d44ce4c391d30c123112e091932d1d44dbaf1b9c9636df292ec1.gz",
+      "compressed_sha256": "c5d504455c73ba46b5f7d2ca8778bbcae0de67b2da68d7682fec0358d3ec4210",
+      "compressed_bytes": 17999,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-7f3e-source-review-20261021/tools/glyph_serial_config_tool.py",
+      "raw_sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+      "raw_bytes": 46658,
+      "relative": "objects/0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c.gz",
+      "compressed_sha256": "912a750f90eed82f9f46dc09ea25941d19a634621cf9a0a54ff942c20169feeb",
+      "compressed_bytes": 11583,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "raw_sha256": "5eef0996be603adc34f58c197ec94965762c5e160d72623df73a43ecd865fd35",
+      "raw_bytes": 3436,
+      "relative": "objects/5eef0996be603adc34f58c197ec94965762c5e160d72623df73a43ecd865fd35.gz",
+      "compressed_sha256": "f405a62cc8062d1bd6588f49283a89460c64a1e0992ad1e5820a6f215a6d4003",
+      "compressed_bytes": 1308,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/include/core/Persistence.hpp",
+      "raw_sha256": "cdf422671b6285047a6974f41c4cdd939b587293276c58a9928a4be755532566",
+      "raw_bytes": 4027,
+      "relative": "objects/cdf422671b6285047a6974f41c4cdd939b587293276c58a9928a4be755532566.gz",
+      "compressed_sha256": "f90ef62cb4b7ad87617b2c73c525560193ba11c02f925f6580e6a1ee90f43b89",
+      "compressed_bytes": 1669,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "raw_sha256": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8",
+      "raw_bytes": 48085,
+      "relative": "objects/594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8.gz",
+      "compressed_sha256": "057e2346ca31a94253240f4996adf80aa06685427d68364cfa2a0efdcb44b5cd",
+      "compressed_bytes": 10954,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/core/Persistence.cpp",
+      "raw_sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1",
+      "raw_bytes": 27847,
+      "relative": "objects/007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1.gz",
+      "compressed_sha256": "8c30cc8795244d523885db5c168ef16ff91702f406e911c413144c8772bbba8e",
+      "compressed_bytes": 6440,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-9cff-source-review-20261021/HAL/pico/src/core/ProfileStore.cpp",
+      "raw_sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8",
+      "raw_bytes": 79972,
+      "relative": "objects/a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8.gz",
+      "compressed_sha256": "4a4dbb25b0b444da738003fa473b793135cdb97a25bd43e41c17f3050b314e4a",
+      "compressed_bytes": 15678,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-9cff-source-review-20261021/include/core/ProfileStore.hpp",
+      "raw_sha256": "1a8c8fad3f4f926abafea2301a5e475c6cad4729225214d0389b2e1627ad21a7",
+      "raw_bytes": 9561,
+      "relative": "objects/1a8c8fad3f4f926abafea2301a5e475c6cad4729225214d0389b2e1627ad21a7.gz",
+      "compressed_sha256": "49869004ae395eae9e93d1c3dfb3d3c8fd18d1ad8fab4bd944be1c67d5a29f65",
+      "compressed_bytes": 2351,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/authority/consolidated_lifetime_scope_amendment_20261021.json",
+      "raw_sha256": "7f906bf247f23d688748ba9f0696d0ae719764101527ecc8412fa7dc366eb6e1",
+      "raw_bytes": 31638,
+      "relative": "objects/7f906bf247f23d688748ba9f0696d0ae719764101527ecc8412fa7dc366eb6e1.gz",
+      "compressed_sha256": "afb851e83155d844d4ce340d944d927e77f20944f9755c93ae04d336a03819ee",
+      "compressed_bytes": 12420,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/authority/mounted_write_phase_scope_amendment_20261021.json",
+      "raw_sha256": "974c1cfbd08d09547a538ceb7afa6595799f97a8231fc44ceb558fa23c9266a8",
+      "raw_bytes": 14684,
+      "relative": "objects/974c1cfbd08d09547a538ceb7afa6595799f97a8231fc44ceb558fa23c9266a8.gz",
+      "compressed_sha256": "5ead5175caf8fafd0711d7d2ce870b915ba0517db0961b396195d4fe58ce1195",
+      "compressed_bytes": 6425,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-default.log",
+      "raw_sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "raw_bytes": 74,
+      "relative": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "compressed_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-default/commands.json",
+      "raw_sha256": "762ae19cc8eb3c63a24cbf347453b81a92f6ec232b0cdf25a3aca321fbc3a77f",
+      "raw_bytes": 12198,
+      "relative": "objects/762ae19cc8eb3c63a24cbf347453b81a92f6ec232b0cdf25a3aca321fbc3a77f.gz",
+      "compressed_sha256": "f280a59c9d9350f47303da37ad85d534dd288b542e8bbfe7790bb2cb827d2337",
+      "compressed_bytes": 905,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-default/report.json",
+      "raw_sha256": "5e65046eec48f7be52e7832e901f6c4663c6701c517fbc39cb112754596bcda1",
+      "raw_bytes": 2835,
+      "relative": "objects/5e65046eec48f7be52e7832e901f6c4663c6701c517fbc39cb112754596bcda1.gz",
+      "compressed_sha256": "ee90a10d8f775644181a400e6ddb93c9d2812d640527dc5e75d31b9dc3300a58",
+      "compressed_bytes": 1225,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-default/run.log",
+      "raw_sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "raw_bytes": 36381261,
+      "relative": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "compressed_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c",
+      "compressed_bytes": 184098,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-short.log",
+      "raw_sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "raw_bytes": 74,
+      "relative": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "compressed_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-short/commands.json",
+      "raw_sha256": "e7fc35900679942f65799fdfa45b24aa4f292dcc729c6cbd442086a4d1bcee90",
+      "raw_bytes": 12297,
+      "relative": "objects/e7fc35900679942f65799fdfa45b24aa4f292dcc729c6cbd442086a4d1bcee90.gz",
+      "compressed_sha256": "062b8505a44ba6c586bcb5d50f6af815dd9da4bdec937c3aefa53c0802b287b2",
+      "compressed_bytes": 915,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-short/report.json",
+      "raw_sha256": "87eb8003d8c60d895012f7506b8f78349b57b2d5bf28f4ac6df235ba0ee53192",
+      "raw_bytes": 2834,
+      "relative": "objects/87eb8003d8c60d895012f7506b8f78349b57b2d5bf28f4ac6df235ba0ee53192.gz",
+      "compressed_sha256": "854b9ae442771cd8c100134b5ed13b84a9b01ed7ce63c154591330092c56fded",
+      "compressed_bytes": 1227,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-new-short/run.log",
+      "raw_sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "raw_bytes": 36381261,
+      "relative": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "compressed_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c",
+      "compressed_bytes": 184098,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-default.log",
+      "raw_sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "raw_bytes": 74,
+      "relative": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "compressed_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-default/commands.json",
+      "raw_sha256": "611fff2692c55b949439fe9564d47b7a37984365fbc708712d1127a416d6d9c8",
+      "raw_bytes": 12198,
+      "relative": "objects/611fff2692c55b949439fe9564d47b7a37984365fbc708712d1127a416d6d9c8.gz",
+      "compressed_sha256": "66de16cd8116634d9690705747faa9671ef093b6aa3d5ce0b2eea3b65cbf583c",
+      "compressed_bytes": 916,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-default/report.json",
+      "raw_sha256": "aa28541a24f0b1715e9dd6d4e7f79ca6cc70257da7f0773bc0d53fd919a80b27",
+      "raw_bytes": 2835,
+      "relative": "objects/aa28541a24f0b1715e9dd6d4e7f79ca6cc70257da7f0773bc0d53fd919a80b27.gz",
+      "compressed_sha256": "35bc8bcd47ba6620ad514f0995256c63729914c8f8048a49d35503b81b637258",
+      "compressed_bytes": 1231,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-default/run.log",
+      "raw_sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "raw_bytes": 36381261,
+      "relative": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "compressed_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c",
+      "compressed_bytes": 184098,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-short.log",
+      "raw_sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "raw_bytes": 74,
+      "relative": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "compressed_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-short/commands.json",
+      "raw_sha256": "2eda35e9234072029ace8728a3e664127461012836b0a29e0fe6058a30dea248",
+      "raw_bytes": 12297,
+      "relative": "objects/2eda35e9234072029ace8728a3e664127461012836b0a29e0fe6058a30dea248.gz",
+      "compressed_sha256": "82bb213a6f07e0a43f98697a33b2659a81fa71152f55d98fd40693996ecf72d6",
+      "compressed_bytes": 926,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-short/report.json",
+      "raw_sha256": "983cfdf70a89d0b0d665b7e2de1dfe11910893cac44b5f5c8096c2ae47d83339",
+      "raw_bytes": 2834,
+      "relative": "objects/983cfdf70a89d0b0d665b7e2de1dfe11910893cac44b5f5c8096c2ae47d83339.gz",
+      "compressed_sha256": "9d7212a16d330cdf4c9e90a6466006c369adc9951e82038b9cd95ba9acb35107",
+      "compressed_bytes": 1233,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/capture-old-short/run.log",
+      "raw_sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "raw_bytes": 36381261,
+      "relative": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "compressed_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c",
+      "compressed_bytes": 184098,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/copy-close-inversion.cpp",
+      "raw_sha256": "1407bc9558468e8fd1423d86ab38c1d7dab9e643d99c918e86072ba5b2eeb80f",
+      "raw_bytes": 28955,
+      "relative": "objects/1407bc9558468e8fd1423d86ab38c1d7dab9e643d99c918e86072ba5b2eeb80f.gz",
+      "compressed_sha256": "671624ae97fe522e00df8bb47b05920d000f9fdd26e2f94c67c73bac97b06b97",
+      "compressed_bytes": 6640,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/copy-close-inversion.log",
+      "raw_sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "raw_bytes": 74,
+      "relative": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "compressed_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/copy-close-inversion/commands.json",
+      "raw_sha256": "5d09fddc4c1c5add8c9c4e75596efd0bd42495bec8f711a8fa228a0bc5847549",
+      "raw_bytes": 12362,
+      "relative": "objects/5d09fddc4c1c5add8c9c4e75596efd0bd42495bec8f711a8fa228a0bc5847549.gz",
+      "compressed_sha256": "3eef3db802822c2ef83dc6ad2cff1c60363c88c04683f60d9b9f6e34dd53e29f",
+      "compressed_bytes": 918,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/copy-close-inversion/report.json",
+      "raw_sha256": "5bf6ea703fff1ed3c94458493ba12ad708bf1eb9c229163015e909bef225089a",
+      "raw_bytes": 2830,
+      "relative": "objects/5bf6ea703fff1ed3c94458493ba12ad708bf1eb9c229163015e909bef225089a.gz",
+      "compressed_sha256": "6ce64a1a2e096a6a0239eb21572e29fc70a43002bbcdffca89bc2f520018880a",
+      "compressed_bytes": 1227,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/copy-close-inversion/run.log",
+      "raw_sha256": "932dac91b25372fceaf60ee0526974e1664cb2d1be0db3fae0ae44dbea8f593a",
+      "raw_bytes": 36381261,
+      "relative": "objects/932dac91b25372fceaf60ee0526974e1664cb2d1be0db3fae0ae44dbea8f593a.gz",
+      "compressed_sha256": "b7200002161ed32e48dcc818abcad1fabea1716a290dd14a6db3f23efc5a823e",
+      "compressed_bytes": 184098,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/differential-comparison.json",
+      "raw_sha256": "be50063d93123fb32c3d8499e1945e0783faa1d1237675a3fe8e945855c0d819",
+      "raw_bytes": 25848,
+      "relative": "objects/be50063d93123fb32c3d8499e1945e0783faa1d1237675a3fe8e945855c0d819.gz",
+      "compressed_sha256": "aeaa1d865a92b56e0862a43a317f0b1d70834e46ec0acc6d39a03fd3175ebab1",
+      "compressed_bytes": 1205,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-false-packet-return.cpp",
+      "raw_sha256": "4430c0a24b5b3401af6d0c97cd8267f84bfa7475feeb791513433e8e4e33d672",
+      "raw_bytes": 49168,
+      "relative": "objects/4430c0a24b5b3401af6d0c97cd8267f84bfa7475feeb791513433e8e4e33d672.gz",
+      "compressed_sha256": "9df3e9722d1e769f8ef76ef80c0a30c4e67deb8d4b405403ee855d1e5dd22e2b",
+      "compressed_bytes": 11091,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-false-packet-return.log",
+      "raw_sha256": "a666aec8fddfebd7a642626facb09f2e894dfe00bdbc7ed1b564241ada63a8d2",
+      "raw_bytes": 256,
+      "relative": "objects/a666aec8fddfebd7a642626facb09f2e894dfe00bdbc7ed1b564241ada63a8d2.gz",
+      "compressed_sha256": "c2ad18f9649594fb4ec4f6981cea077a33482f98615470e3517bde31c31f7bf3",
+      "compressed_bytes": 157,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-default.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-default/commands.json",
+      "raw_sha256": "2438e9f5b1cc7895bf2634182ef04741049e00e73f412b6440d30acafc20ed59",
+      "raw_bytes": 24179,
+      "relative": "objects/2438e9f5b1cc7895bf2634182ef04741049e00e73f412b6440d30acafc20ed59.gz",
+      "compressed_sha256": "098ddbcdea39bb56438e8575b9f44af4cad97ca20fe74635aafeda0c3ac7b930",
+      "compressed_bytes": 1031,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-default/report.json",
+      "raw_sha256": "f8bc82b17cca0b1fdc1aac23d11287ad312897150a54c290c5541e8f5f7b6963",
+      "raw_bytes": 2728,
+      "relative": "objects/f8bc82b17cca0b1fdc1aac23d11287ad312897150a54c290c5541e8f5f7b6963.gz",
+      "compressed_sha256": "6c368f9b6d178f17b162325fb579a8105861517d0c1dac5cce0366d7c1cc57a1",
+      "compressed_bytes": 1172,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-default/run.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-short.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-short/commands.json",
+      "raw_sha256": "56a608865802ef36ba8ec02f6ec1bdd2207e7172936cd7f8ebd882169f32c33b",
+      "raw_bytes": 24334,
+      "relative": "objects/56a608865802ef36ba8ec02f6ec1bdd2207e7172936cd7f8ebd882169f32c33b.gz",
+      "compressed_sha256": "2e37f00d5a38102682e10404e52890de2c48bf54afbf18bbfe63e5ebf3cf29bf",
+      "compressed_bytes": 1039,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-short/report.json",
+      "raw_sha256": "a53de1965f139a98e4a056132d2e3565355d1abb304ccb6db1b2cdb7e267d2bf",
+      "raw_bytes": 2729,
+      "relative": "objects/a53de1965f139a98e4a056132d2e3565355d1abb304ccb6db1b2cdb7e267d2bf.gz",
+      "compressed_sha256": "fe8281f4aa881f5f6709556478b7e29d3a6aa03b982215198aff71451a55dcdf",
+      "compressed_bytes": 1173,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-new-short/run.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-default.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-default/commands.json",
+      "raw_sha256": "e92e739c643396a5e4c93adf2ca5cae22879738394b65fa0e6ed9838925366c8",
+      "raw_bytes": 24179,
+      "relative": "objects/e92e739c643396a5e4c93adf2ca5cae22879738394b65fa0e6ed9838925366c8.gz",
+      "compressed_sha256": "f5449516dde1df6c43282af994db7f8daa72f0a788c74c5f8a8ecb26063a7e5d",
+      "compressed_bytes": 1039,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-default/report.json",
+      "raw_sha256": "78ec12272bc8d7f087dbbe1f069cb581e2e0f74ecdc61722ee8081fb1786c9df",
+      "raw_bytes": 2728,
+      "relative": "objects/78ec12272bc8d7f087dbbe1f069cb581e2e0f74ecdc61722ee8081fb1786c9df.gz",
+      "compressed_sha256": "ac90905b4d07e1382cba354fbf6c69e9e2f21c93f6e3ee7803e3467a4ac4145e",
+      "compressed_bytes": 1176,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-default/run.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-short.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-short/commands.json",
+      "raw_sha256": "2f8539755670a6362c3d5075ddc33b70cf5cc252223e5975374e17e8aedcb9ed",
+      "raw_bytes": 24334,
+      "relative": "objects/2f8539755670a6362c3d5075ddc33b70cf5cc252223e5975374e17e8aedcb9ed.gz",
+      "compressed_sha256": "51ee86642b444a13874754a81a27f11891cf58334efcb76233852a1253a58cb6",
+      "compressed_bytes": 1045,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-short/report.json",
+      "raw_sha256": "3af3fbd7c5cd6e0408953fec9a9adaf72ce90cc9d3b61579c2f2c36bdec80b36",
+      "raw_bytes": 2729,
+      "relative": "objects/3af3fbd7c5cd6e0408953fec9a9adaf72ce90cc9d3b61579c2f2c36bdec80b36.gz",
+      "compressed_sha256": "16f320ee3fb5907898c87f92f92d5b42081a77caa49d56c35b59c5a19e0d8a7b",
+      "compressed_bytes": 1176,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/legacy-old-short/run.log",
+      "raw_sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "raw_bytes": 6973,
+      "relative": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "compressed_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae",
+      "compressed_bytes": 821,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/matrix.json",
+      "raw_sha256": "0494193e4f741446b562ffdb8b535262933a0d3e23a39e90fc3b27ecc3c0f998",
+      "raw_bytes": 8045,
+      "relative": "objects/0494193e4f741446b562ffdb8b535262933a0d3e23a39e90fc3b27ecc3c0f998.gz",
+      "compressed_sha256": "a7ed80f4abba1a4b0f7cdc2e88907eaf3905ee290c9cbcf13da7c6dfe077e835",
+      "compressed_bytes": 780,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/mutants.json",
+      "raw_sha256": "a760d5e1e939e79dc9c23f30bae77e56e22f3a2fad894c29efcb703b9a8e2cf3",
+      "raw_bytes": 1439,
+      "relative": "objects/a760d5e1e939e79dc9c23f30bae77e56e22f3a2fad894c29efcb703b9a8e2cf3.gz",
+      "compressed_sha256": "5649c5858ae66291d46d278a06380043e914a433fbe7c832dc331951c2826197",
+      "compressed_bytes": 357,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/native-dispatch/run.log",
+      "raw_sha256": "2e63ca45cac79f05b83c8d34c5457987376af2f2343316d39936165e1b5af5fc",
+      "raw_bytes": 339,
+      "relative": "objects/2e63ca45cac79f05b83c8d34c5457987376af2f2343316d39936165e1b5af5fc.gz",
+      "compressed_sha256": "b60aef18199c06b8c991b922161084b24e333d63c7cf5aa203b87869518e21ad",
+      "compressed_bytes": 236,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/private-slot-alternation.cpp",
+      "raw_sha256": "ed4dfaf14440c89a77bcc8fa2851eaf7dc9227b7359166522775d46c000a46f3",
+      "raw_bytes": 5845,
+      "relative": "objects/ed4dfaf14440c89a77bcc8fa2851eaf7dc9227b7359166522775d46c000a46f3.gz",
+      "compressed_sha256": "b470ebe92d92cb28302693d7b0130931b98755725917e947254db7e0a156c428",
+      "compressed_bytes": 2185,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-late-clear.cpp",
+      "raw_sha256": "efc37c1ea1990099104678f1a4c960ecaa58ba08a1836c90756d5f28f2954d7b",
+      "raw_bytes": 83406,
+      "relative": "objects/efc37c1ea1990099104678f1a4c960ecaa58ba08a1836c90756d5f28f2954d7b.gz",
+      "compressed_sha256": "6c09de7a9e72a66ebb54bc6efff290831b81b1e4869d9323d3ce5590badbea2e",
+      "compressed_bytes": 16068,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-late-clear.log",
+      "raw_sha256": "e0faebf1b955cb831ef7850ffe6bcee1dea771c4ba93718a2e1d12b37bc831fc",
+      "raw_bytes": 220,
+      "relative": "objects/e0faebf1b955cb831ef7850ffe6bcee1dea771c4ba93718a2e1d12b37bc831fc.gz",
+      "compressed_sha256": "98252a499a838bfc9cfafdfa57bb06cb6d187c3d301c5bab9175561ebf714432",
+      "compressed_bytes": 143,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-new-default.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-new-default/report.json",
+      "raw_sha256": "0ded3dc554222f492975ecfe24a0d81283aa6c94992629edff6fc8a510e6dc3c",
+      "raw_bytes": 1816,
+      "relative": "objects/0ded3dc554222f492975ecfe24a0d81283aa6c94992629edff6fc8a510e6dc3c.gz",
+      "compressed_sha256": "3b31be1425d6e137efda631d57ed0a771e6c050aa56d35aea21f8f2b6fa29df5",
+      "compressed_bytes": 888,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-new-default/run.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-new-short.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-new-short/report.json",
+      "raw_sha256": "b49c55b3816329be1ce659bf0d43388c287253c5d5e0eb8c6574a87f81a5ca31",
+      "raw_bytes": 1817,
+      "relative": "objects/b49c55b3816329be1ce659bf0d43388c287253c5d5e0eb8c6574a87f81a5ca31.gz",
+      "compressed_sha256": "9c4013d57f12d557b3a862af969ba55ba8eb9dab1c846dc5018b4bec2c3f57f7",
+      "compressed_bytes": 888,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-new-short/run.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-old-default.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-old-default/report.json",
+      "raw_sha256": "081ac802b69d046a852af9a45d1193f19b2227447daa015c86ee2444f38a3759",
+      "raw_bytes": 1816,
+      "relative": "objects/081ac802b69d046a852af9a45d1193f19b2227447daa015c86ee2444f38a3759.gz",
+      "compressed_sha256": "7a6ae89b6e0f709ddb7614eec7000ddb363610c31bedd5f65df12403dd00823e",
+      "compressed_bytes": 892,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-old-default/run.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-old-short.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-old-short/report.json",
+      "raw_sha256": "158ae8cf8c36b04fb84204f1af0c0ff9efb28f450d648dad7373926545d02972",
+      "raw_bytes": 1817,
+      "relative": "objects/158ae8cf8c36b04fb84204f1af0c0ff9efb28f450d648dad7373926545d02972.gz",
+      "compressed_sha256": "8a852e6094ea7eb561e4977f4186185d9ebfa5a1b6bf0e9612f311d253fa1b24",
+      "compressed_bytes": 893,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/reconcile-old-short/run.log",
+      "raw_sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+      "raw_bytes": 557759,
+      "relative": "objects/3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c.gz",
+      "compressed_sha256": "333b1acf6a58dfc9230f27dcfb039ef8e95923faa7fca2f62cfd33c173381fcf",
+      "compressed_bytes": 7528,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-default.log",
+      "raw_sha256": "c7feacb268078ec9468e9b5bcf23ce0a73cae0c8b96af42f0bae637dba86737d",
+      "raw_bytes": 73,
+      "relative": "objects/c7feacb268078ec9468e9b5bcf23ce0a73cae0c8b96af42f0bae637dba86737d.gz",
+      "compressed_sha256": "61a05416a0f765c931a8ac11d82eda93b70a98f93e2534ff332c4ae38f3b44aa",
+      "compressed_bytes": 92,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-default/commands.json",
+      "raw_sha256": "ede6ba96ba6faecc690736a540379cd02ce53bbf8c4ffaf3b65059eb708ce97d",
+      "raw_bytes": 12289,
+      "relative": "objects/ede6ba96ba6faecc690736a540379cd02ce53bbf8c4ffaf3b65059eb708ce97d.gz",
+      "compressed_sha256": "3168aa62198f3545d1b48eb021dd0d87b0a77d8cec115e4a185b0b232f5cb3ae",
+      "compressed_bytes": 897,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-default/report.json",
+      "raw_sha256": "df2003c31540e4918f9393a5af1be2c4c5efe6eb9d7a31cd778ce6040e9f52af",
+      "raw_bytes": 2811,
+      "relative": "objects/df2003c31540e4918f9393a5af1be2c4c5efe6eb9d7a31cd778ce6040e9f52af.gz",
+      "compressed_sha256": "1439c137ded6053dd9b5c53a449683ae2cc791c5992e15ddd6f23bbfcc0a6db9",
+      "compressed_bytes": 1223,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-default/run.log",
+      "raw_sha256": "f3401b77c82c85f16b64abd657b60cece1a8885cd7f1dcc6306e31bf9d5f3106",
+      "raw_bytes": 1727810,
+      "relative": "objects/f3401b77c82c85f16b64abd657b60cece1a8885cd7f1dcc6306e31bf9d5f3106.gz",
+      "compressed_sha256": "cb7b7fd896660cce5425f41573443ad90dbf33b927c8681364745fe34d644b6f",
+      "compressed_bytes": 11754,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-matrix.json",
+      "raw_sha256": "42722c2ad8cf2b1e1074e9e7d94e69d98e8d03c00b1261eb268e0f385818b785",
+      "raw_bytes": 761,
+      "relative": "objects/42722c2ad8cf2b1e1074e9e7d94e69d98e8d03c00b1261eb268e0f385818b785.gz",
+      "compressed_sha256": "34eef9dbd2f734a01827dacc8558b143fccda341bd05644e86036d5a0d2b3ae6",
+      "compressed_bytes": 239,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-short.log",
+      "raw_sha256": "c7feacb268078ec9468e9b5bcf23ce0a73cae0c8b96af42f0bae637dba86737d",
+      "raw_bytes": 73,
+      "relative": "objects/c7feacb268078ec9468e9b5bcf23ce0a73cae0c8b96af42f0bae637dba86737d.gz",
+      "compressed_sha256": "61a05416a0f765c931a8ac11d82eda93b70a98f93e2534ff332c4ae38f3b44aa",
+      "compressed_bytes": 92,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-short/commands.json",
+      "raw_sha256": "d59f6cb9ca02b0e7ef9641915b439fc361a3b932f64d2051044cecf36cd8229a",
+      "raw_bytes": 12388,
+      "relative": "objects/d59f6cb9ca02b0e7ef9641915b439fc361a3b932f64d2051044cecf36cd8229a.gz",
+      "compressed_sha256": "452f5bcd63e1d0745fef1e71a0ae0853d03b8ed0ca32e0becf00b3d47448ee4d",
+      "compressed_bytes": 907,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-short/report.json",
+      "raw_sha256": "71853785995bcacfe01272c54320aa45458c2e9bd022c990bdae6da9bfc2e97b",
+      "raw_bytes": 2810,
+      "relative": "objects/71853785995bcacfe01272c54320aa45458c2e9bd022c990bdae6da9bfc2e97b.gz",
+      "compressed_sha256": "8907d591dd6559b508f3a3d8eae7f9b6a3e769e292af29add77f3aae389d636d",
+      "compressed_bytes": 1225,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/slot-alternation-short/run.log",
+      "raw_sha256": "f3401b77c82c85f16b64abd657b60cece1a8885cd7f1dcc6306e31bf9d5f3106",
+      "raw_bytes": 1727810,
+      "relative": "objects/f3401b77c82c85f16b64abd657b60cece1a8885cd7f1dcc6306e31bf9d5f3106.gz",
+      "compressed_sha256": "cb7b7fd896660cce5425f41573443ad90dbf33b927c8681364745fe34d644b6f",
+      "compressed_bytes": 11754,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-new-default.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-new-default/report.json",
+      "raw_sha256": "480e395320218db90f05765aab26219f7db50bd7e3208d70705ab7fd89c1035e",
+      "raw_bytes": 1630,
+      "relative": "objects/480e395320218db90f05765aab26219f7db50bd7e3208d70705ab7fd89c1035e.gz",
+      "compressed_sha256": "e4d69096784875a176b38f87d22fea679a4bdcde5dd5fb79cb873da1cf5c2c4f",
+      "compressed_bytes": 833,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-new-default/run.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-new-short.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-new-short/report.json",
+      "raw_sha256": "f7459ca25aa083254212e6b88772d704e928955354e5e588afce1ac85521f734",
+      "raw_bytes": 1631,
+      "relative": "objects/f7459ca25aa083254212e6b88772d704e928955354e5e588afce1ac85521f734.gz",
+      "compressed_sha256": "cdb777dff75473d3691a7ed19b20e30863f56d5e9ade7c78d3da27e549202e69",
+      "compressed_bytes": 834,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-new-short/run.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-old-default.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-old-default/report.json",
+      "raw_sha256": "920bb41c3d660d5296ccc6442ffd447832f484d5cf6f7dd2a1ab2653e3e75676",
+      "raw_bytes": 1630,
+      "relative": "objects/920bb41c3d660d5296ccc6442ffd447832f484d5cf6f7dd2a1ab2653e3e75676.gz",
+      "compressed_sha256": "ffc7767970d4d345c8f6724ed6da5eefe7c4ac0029b269814f309b5809848d09",
+      "compressed_bytes": 837,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-old-default/run.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-old-short.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-old-short/report.json",
+      "raw_sha256": "224dbd3ec84f9b7d3c722307d5cf29a84d82704acf9cb2348d50e610d4216977",
+      "raw_bytes": 1631,
+      "relative": "objects/224dbd3ec84f9b7d3c722307d5cf29a84d82704acf9cb2348d50e610d4216977.gz",
+      "compressed_sha256": "8aacce045580eccdbb036c8d80a6e56956a6a669ea8067a1bb560ea8a5dfb865",
+      "compressed_bytes": 837,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/store-old-short/run.log",
+      "raw_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "raw_bytes": 1755329,
+      "relative": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "compressed_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df",
+      "compressed_bytes": 22021,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-independent-tests/strict-store.log",
+      "raw_sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb",
+      "raw_bytes": 1931,
+      "relative": "objects/3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb.gz",
+      "compressed_sha256": "20c9f67aeefdacb994b2a585535430f67b878d02faab60b74d628f402eff30ea",
+      "compressed_bytes": 889,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-7f3e-review-archive-inputs-normalized-20261021.json",
+      "raw_sha256": "dda99efd420bf39fd29f1badcee29bee44fcbd926efd1a01d309db3aba59a162",
+      "raw_bytes": 44550,
+      "relative": "objects/dda99efd420bf39fd29f1badcee29bee44fcbd926efd1a01d309db3aba59a162.gz",
+      "compressed_sha256": "76d4db89a533f4de0909ff870eef681f786e5d9901010e6a6503d1f9d66cd975",
+      "compressed_bytes": 9633,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}

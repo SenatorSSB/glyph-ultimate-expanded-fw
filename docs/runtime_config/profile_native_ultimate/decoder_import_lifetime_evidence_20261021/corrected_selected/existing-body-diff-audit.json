@@ -1,0 +1,167 @@
+{
+  "classification": "CORRECTION_SOURCE_AUDIT_NOT_SEMANTIC_REVIEW",
+  "backend_outside_initializer_suffix": "BYTE_IDENTICAL",
+  "CompleteMigration": "BYTE_IDENTICAL",
+  "units": [
+    {
+      "original": "original-Persistence.cpp",
+      "private": "Persistence-private.cpp",
+      "same_exact_count": 32,
+      "changed_existing": [
+        {
+          "signature": "Persistence::LoadResult Persistence::ReadLegacyProfile(size_t index, UltimateProfile &profile)",
+          "name": "Persistence::ReadLegacyProfile"
+        },
+        {
+          "signature": "Persistence::LoadResult Persistence::ReadConfigCandidate()",
+          "name": "Persistence::ReadConfigCandidate"
+        },
+        {
+          "signature": "Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative)",
+          "name": "Persistence::ReconcileConfig"
+        },
+        {
+          "signature": "Persistence::LoadResult Persistence::LoadConfigChecked(Config &config)",
+          "name": "Persistence::LoadConfigChecked"
+        },
+        {
+          "signature": "bool Persistence::SaveConfig(Config &config)",
+          "name": "Persistence::SaveConfig"
+        }
+      ],
+      "removed_or_signature_changed": [
+        "bool Persistence::WriteStagedConfig(CheckedStorageFile &file, Config &config)",
+        "bool read_config_file(pb_istream_t *stream, pb_byte_t *buffer, size_t count)"
+      ],
+      "new_or_signature_changed": [
+        "Persistence::LoadResult Persistence::CompleteReadConfigCandidate(CheckedStorageFile &config_file)",
+        "Persistence::LoadResult Persistence::FinishConfigDecode(CheckedStorageFile &file,bool decoded)",
+        "Persistence::LoadResult Persistence::FinishLoadedConfig(Config &config)",
+        "Persistence::LoadResult Persistence::InitializeReadConfigCandidate(CheckedStorageFile &file)",
+        "Persistence::LoadResult Persistence::LoadConfigDriver(Config &config)",
+        "bool Persistence::CompleteStagedConfig(CheckedStorageFile &file)",
+        "bool Persistence::EncodeStagedConfig(CheckedStorageFile &file,Config &config)",
+        "bool Persistence::FailStagedConfig(CheckedStorageFile &file)",
+        "bool Persistence::InitializeStagedConfig(CheckedStorageFile &file)",
+        "bool Persistence::WriteStagedConfig(CheckedStorageFile &file,Config &config)",
+        "bool read_config_file(pb_istream_t *stream,pb_byte_t *buffer,size_t count)",
+        "bool skip_config_bytes(ConfigFileReader &reader, size_t count)",
+        "void ResetReadWorkspace()"
+      ]
+    },
+    {
+      "original": "original-ProfileStore.cpp",
+      "private": "ProfileStore-private.cpp",
+      "same_exact_count": 116,
+      "changed_existing": [
+        {
+          "signature": "ProfileStore::Status ProfileStore::ImportLegacyStream( const Config &legacy, const uint8_t source[32], LegacyReader reader, void *context, uint32_t *mapping, size_t capacity )",
+          "name": "ProfileStore::ImportLegacyStream"
+        }
+      ],
+      "removed_or_signature_changed": [],
+      "new_or_signature_changed": [
+        "ProfileStore::Status ProfileStore::ExecuteLegacyImport()",
+        "ProfileStore::Status ProfileStore::PrepareImportedLegacyRecord(LegacyReader reader,void *context,size_t i)",
+        "ProfileStore::Status ProfileStore::PrepareLegacyImport()",
+        "ProfileStore::Status ProfileStore::PublishImportedLegacyDirectory()",
+        "ProfileStore::Status ProfileStore::PublishImportedLegacyRecord()",
+        "bool ProfileStore::FinishImportedLegacyRecord(size_t i,uint32_t *mapping)",
+        "bool ProfileStore::PrepareImportedCompact(const Config &legacy,uint32_t *mapping,size_t count)"
+      ]
+    },
+    {
+      "original": "original-config_validation.cpp",
+      "private": "config_validation-private.cpp",
+      "same_exact_count": 10,
+      "changed_existing": [
+        {
+          "signature": "bool validate_profile_condition( const UltimateProfileCondition &condition, const bool defined_roles[32], const bool routed_buttons[61], uint8_t maximum_role_id, ConfigValidationError &error, uint8_t profile_id )",
+          "name": "validate_profile_condition"
+        }
+      ],
+      "removed_or_signature_changed": [],
+      "new_or_signature_changed": [
+        "ConditionResult check_profile_condition( const UltimateProfileCondition &condition, const bool defined_roles[32], const bool routed_buttons[61], uint8_t maximum_role_id, uint8_t /*profile_id*/ )"
+      ]
+    },
+    {
+      "original": "original-backend_init.cpp",
+      "private": "backend_init-private.cpp",
+      "same_exact_count": 2,
+      "changed_existing": [
+        {
+          "signature": "size_t initialize_backends( CommunicationBackend **&backends, InputState &inputs, InputSource **input_sources, size_t input_source_count, Config &config, const Pinout &pinout, backend_config_selector_t get_backend_config, usb_backend_getter_t get_usb_backend_config, detect_console_t detect_console, secondary_backend_initializer_t init_secondary_backends, primary_backend_initializer_t init_primary_backend )",
+          "name": "initialize_backends"
+        }
+      ],
+      "removed_or_signature_changed": [],
+      "new_or_signature_changed": [
+        "BackendAction PrepareBackendPhase()",
+        "size_t FinishBackendPhase()"
+      ]
+    },
+    {
+      "original": "config-original.cpp",
+      "private": "config-setup-phases.cpp",
+      "same_exact_count": 11,
+      "changed_existing": [
+        {
+          "signature": "void setup()",
+          "name": "setup"
+        }
+      ],
+      "removed_or_signature_changed": [],
+      "new_or_signature_changed": [
+        "bool InitializeBootBackends()",
+        "bool MigrateBootLegacyConfiguration()",
+        "bool PrepareBootDisplay()"
+      ]
+    },
+    {
+      "original": "original-ConfiguratorBackend.cpp",
+      "private": "ConfiguratorBackend-private.cpp",
+      "same_exact_count": 30,
+      "changed_existing": [
+        {
+          "signature": "unsigned ConfiguratorBackend::PrepareStoreMutation()",
+          "name": "ConfiguratorBackend::PrepareStoreMutation"
+        },
+        {
+          "signature": "bool ConfiguratorBackend::DispatchProfileStore()",
+          "name": "ConfiguratorBackend::DispatchProfileStore"
+        },
+        {
+          "signature": "bool ConfiguratorBackend::HandleProfileStore()",
+          "name": "ConfiguratorBackend::HandleProfileStore"
+        },
+        {
+          "signature": "ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::PrepareSetConfig()",
+          "name": "ConfiguratorBackend::PrepareSetConfig"
+        },
+        {
+          "signature": "ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::DecodeSetConfig()",
+          "name": "ConfiguratorBackend::DecodeSetConfig"
+        },
+        {
+          "signature": "bool ConfiguratorBackend::HandleSetConfig()",
+          "name": "ConfiguratorBackend::HandleSetConfig"
+        }
+      ],
+      "removed_or_signature_changed": [],
+      "new_or_signature_changed": [
+        "ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::DecodeIncomingSetConfig()",
+        "ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::ReportSetDecodeError(const char *message)",
+        "bool ConfiguratorBackend::CompleteStatusDispatch()",
+        "bool ConfiguratorBackend::PrepareProfileDispatch()",
+        "bool ConfiguratorBackend::ReconcileProfileDispatch()",
+        "bool ConfiguratorBackend::ReportDurableLoadError()",
+        "bool ConfiguratorBackend::ValidateSetCandidate()",
+        "static bool InvalidProfileTicket(const ProfileStoreRequest &request)",
+        "static void LoadStoreCandidate()",
+        "void ConfiguratorBackend::CaptureSetReceipt()",
+        "void ConfiguratorBackend::LookupStoreMutation()"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "kind": "FINITE_FROZEN_7F3E_AE_SOURCE_REVIEW",
+  "candidate": "7f3e5e8cf4f95d09b2f10d3b2d87ff207ce59b07",
+  "tree": "73147b61984539d5da6c3334fdbfdcd33e708dce",
+  "base": "35e8e5af99badf425fd832968040e8fd6a23441a",
+  "base_content_snapshot": "/private/tmp/glyph-9cff-source-review-20261021",
+  "base_source_matches_35e8_ef22": true,
+  "snapshot": "/private/tmp/glyph-7f3e-source-review-20261021",
+  "canonical_authority": "76b8bf943ee940c57b9a612556d76d2b3401cd76",
+  "authority_truth": "Root supplied fresh live authority; reviewer read pinnedGit docs, no independent live/network claim",
+  "source_delta_verdict": "NO_MATERIAL_OPERATION_LIFETIME_TRANSACTION_PACKET_LEASE_DEFECT_FOUND",
+  "source_paths": [
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+    "HAL/pico/include/core/Persistence.hpp",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "HAL/pico/src/core/Persistence.cpp",
+    "HAL/pico/src/core/ProfileStore.cpp",
+    "include/core/ProfileStore.hpp"
+  ],
+  "source_hashes": {
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp": "674146090637e66f19f9fdd166345b6eaf326aa0c8dc2090d7f98d71d2763f3c",
+    "HAL/pico/include/core/Persistence.hpp": "97d9f4bb9ae7b314738915880da0fe4d83a69860a4776738fea0044f7882c8b3",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98",
+    "HAL/pico/src/core/Persistence.cpp": "345a8880b6664860820accb04775096a05538ca53bc84fb59e951d1eeb5dc011",
+    "HAL/pico/src/core/ProfileStore.cpp": "e0133de9f8ab87f6f876c21e00a47b201aad2f9522e9481378ea8845cc3bb6ae",
+    "include/core/ProfileStore.hpp": "aca47eb03b8bc612ac83fb7c6db2fb8ae7acb684a55a295ada18f365044251f0"
+  },
+  "chapters": {
+    "A": {
+      "verdict": "NO_MATERIAL_DEFECT_FOUND",
+      "facts": [
+        "ValidateLegacySource retains original availability\u2192automatic source constructor\u2192CheckSavedConfig\u2192explicitclose-before-valid-refusal\u2192destructor fallback order. Refusal never hashes. On success explicit close retires native handle; returned helper destroys original automaticFile before SAME unchanged hash_file.",
+        "hash_file body independently byte-identical SHA256d16b5675bad922f7e1cb3a413e99b73fe315dec79e96c82b3a2a830961540c9c. Exactly3 direct calls remain: Identity/PrepareCapture/VerifyPublish. No hash-body or hash/File-slot conversion."
+      ]
+    },
+    "B": {
+      "verdict": "NO_MATERIAL_DEFECT_FOUND",
+      "facts": [
+        "One existing aligned raw File slot reused only for ORIGINAL copy input; all four prior Save uses retain identical constructor/destructor code apart from class name. No second slot/new File owner/buffer.",
+        "Input guard constructs first; automatic output constructs unconditionally even when input is false. Both live during original copy. copy_open_files has original input&&output, scratch64, remaining/read/write; it returns before original output.sync. Explicit input.close then output.close both occur; uncertainty sampled before destruction; reverse output destructor then input guard destructor retained on every exit.",
+        "Slot reset before placement ctor and after explicit destructor. Constructor partial-open/Stat failure and fallback-close semantics are preserved through original CheckedStorageFile implementation. Source storage/validator/native/IRQ/core1 callbacks cannot call Save/Capture recursively; five acquisition sites are synchronouscore0. No new reentry guard/lock/refusal.",
+        "Capture Remove\u2192Copy\u2192temp hash/compare\u2192Rename\u2192final Identity/compare/status/fence sequence is identical. Scalar capture_phase stores original static filename/length; all-exit reset unchanged; helper returns retire digest/result locals before copy.",
+        "Independent actualNOR bothABI before/after8368fault traces exact; private alternation324scenarios/ABI performs Copy/refused/faultedCopy\u2192Save\u2192Capture\u2192Save, including312 selected OpenRead/OpenWrite/Sync/Close fault cases, all handles cleared. Fenced p uses fresh already-existing next Persistence in privatefixture to test process-global slot release without changing production fence policy."
+      ]
+    },
+    "C": {
+      "verdict": "NO_MATERIAL_DEFECT_FOUND",
+      "facts": [
+        "PrepareReconciliation preserves !_uncertain exact ready&&!readonly, short-circuit LoadControl\u2192LoadDirectory\u2192readonly; equal-gen SameDirectory, next-gen attempted identity/result/highwater/accepted-token rules and maintenance receipt unchanged. Returned enum automatic has no persistent stale action.",
+        "Abort preparation copies existing _directory\u2192_next, preserves maxreserved, increments generation and clearsuncertain at exact original reached point before publication; Execute restoresuncertain on failure. WriteCompleted retains original WriteControl2 failure and success behavior; Complete clears at original finalpoint. No Query/retry algorithm changed.",
+        "ExecuteBootstrap uses same Prepare+Execute directly in owning Begin; publicReconcile uses same pair. No extra read, write or wholeDirectory owner.",
+        "ExecutePublication now inlines orchestration of completed PreparePublicationWrite\u2192WritePreparedPublication\u2192FinishWrittenPublication. Original readback array moved to namespace storage, not duplicated. Same oversize reset/result, CheckedWrite/LastFailure, CheckedRead/compare, Rename/status/clear order; no callback can interpose a publication.",
+        "PublishDirectory preserves prepare\u2192control3\u2192root\u2192RAM directory/protected flag\u2192control2 and exact uncertainty branches. PrepareDirectoryCompletion performs directory copy before SAME control2 encoding. Source calls remain sibling phases; resource savings require final emitted proof.",
+        "Independent phase3 published/aborted/maintenance actualNOR before/after468faults/ABI exact, token/query/highwater/reboot and foreigncontents preserved. Late-uncertain-clear mutant fails named normal exact reconciliation assertion."
+      ]
+    },
+    "D": {
+      "verdict": "NO_MATERIAL_DEFECT_FOUND",
+      "facts": [
+        "Existing PreparedCreate storage reused for Update id/rev/index/schema/ownedidentity/result. No extra body, path/name buffer, lease orDirectory; ready=false at each publicentry and every executeexit, input pointers cleared after exact original encoding/prep return.",
+        "Update preserves Start first then Find/revision/UINTMAX/cross-kind/semantic validation/encodedsize+Admit/PrepareProfileWrite repeatedvalidation+encoding\u2192record publish\u2192only then _next/edit/Commit. Index stored only afternonnegativeFind; schema/identity owned before profile borrow cleared. Same Full/Conflict/Invalid/UnknownOutcome/IoFailure and replay results.",
+        "Create SetInputs\u2192PrepareCreateRecord\u2192ExecutePreparedCreate follows original two-level checks and original Start/PrepareCreate/Admit/PrepareProfileWrite; ready is cleared on admission/encode failure so no new publication. Finalization unchanged except shared result destination.",
+        "Duplicate keeps PrepareDuplicate first Start/Find/revision/ReadProfile/PreserveProfile and failure result. Then same shared PrepareCreateRecord performs second Start; no Start/Query/validation/admission/preserve coalescing. _candidate_profile/native lease stable through encoding; callbacks do not reenter store or overwrite PreparedCreate.",
+        "Independent all6operation1064fault before/after actualNOR traces/results/generation/fence/receipt/reboot/reset match byte-for-byte at bothABIs. Strict24cases+4 historical negativecontrols PASS. Focused actualConfigurator native request/fullidentity/100READ/max3341+3373/reference/mixedrefusal plus2leasepoison/release mutants PASS."
+      ]
+    },
+    "E": {
+      "verdict": "NO_MATERIAL_DEFECT_FOUND",
+      "facts": [
+        "Private explicit uint8 tri-state distinguishes Ready, original error-returnfalse, and original returnWritePacket booleans. Recovery/load/engine errors preserve packet boolean; decode/format/validation/save errors retainfalse regardless packet result; success retainstrue even successpacket failure.",
+        "PrepareSetConfig does exact original guards and optional durableLoad before DecodeSetConfig captures receipt locals. Receipt token/digests/id/generation/mode/root/migration copy and default reset/rejectnative/decode/error/clearcallbacks/formatcheck/restorefields/validate/profileengine/zero-count backing reset all remain in original order. No extra Config or receipt buffer.",
+        "Prepare/decode returns before original SaveConfig(ConfigWriteCandidate); Finalize receives bool only, handles unchanged saveerror, and publishes live_config only after successful Save before CMD_SUCCESS. No packet input/lease/fault scope ownership changes and no extra response on any branch.",
+        "Actual legacy COBS/backend tests17cases perABI old/new byte-identical, including false/success packet writes, forgedreceipts, load/validation/save failure, native rejection, compactnegotiation, engine mismatch and missingselectedrecord. Functional Persistence boundary explicitly separate from realNOR tests. Changedpacket-return mutant fails named existing assertion."
+      ]
+    }
+  },
+  "independent_matrix": {
+    "ASAN_UBSAN": true,
+    "jobs": 16,
+    "enum_ABIs": [
+      "-fshort-enums",
+      "default enum ABI"
+    ],
+    "old_new_output_byte_equal": true,
+    "per_ABI": {
+      "legacy_functional_Persistence_boundary_cases": 17,
+      "Store_realNOR_faults": 1064,
+      "Reconcile_realNOR_faults": 468,
+      "LoadCapture_realNOR_faults": 8368
+    },
+    "comparison": [
+      {
+        "family": "legacy",
+        "abi": "short",
+        "byte_equal": true,
+        "bytes": 6973,
+        "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+        "last": "PASS actual legacy SET handler/COBS/validation/receipt/return/publication at named functional Persistence boundary; actual NOR Save differential separate; no device"
+      },
+      {
+        "family": "store",
+        "abi": "short",
+        "byte_equal": true,
+        "bytes": 1755329,
+        "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+        "last": "PASS actual portable Store publication traces/results/generations/fences/receipts/reboot/reset all6operations faults=1064 hardware=NOT_CLAIMED"
+      },
+      {
+        "family": "reconcile",
+        "abi": "short",
+        "byte_equal": true,
+        "bytes": 557759,
+        "sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+        "last": "PASS actual NOR phase3 aborted/published/maintenance reconciliation and all recovery faults=468; no device"
+      },
+      {
+        "family": "capture",
+        "abi": "short",
+        "byte_equal": true,
+        "bytes": 36381261,
+        "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+        "last": "PASS actual Load/Capture NOR differential faults=8368 target=NOT_MEASURED"
+      },
+      {
+        "family": "legacy",
+        "abi": "default",
+        "byte_equal": true,
+        "bytes": 6973,
+        "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+        "last": "PASS actual legacy SET handler/COBS/validation/receipt/return/publication at named functional Persistence boundary; actual NOR Save differential separate; no device"
+      },
+      {
+        "family": "store",
+        "abi": "default",
+        "byte_equal": true,
+        "bytes": 1755329,
+        "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+        "last": "PASS actual portable Store publication traces/results/generations/fences/receipts/reboot/reset all6operations faults=1064 hardware=NOT_CLAIMED"
+      },
+      {
+        "family": "reconcile",
+        "abi": "default",
+        "byte_equal": true,
+        "bytes": 557759,
+        "sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+        "last": "PASS actual NOR phase3 aborted/published/maintenance reconciliation and all recovery faults=468; no device"
+      },
+      {
+        "family": "capture",
+        "abi": "default",
+        "byte_equal": true,
+        "bytes": 36381261,
+        "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+        "last": "PASS actual Load/Capture NOR differential faults=8368 target=NOT_MEASURED"
+      }
+    ],
+    "private_slot_alternation": {
+      "abi_count": 2,
+      "per_ABI_success_variants": 12,
+      "per_ABI_selected_fault_cases": 312,
+      "result": "PASS_actualNOR_global_slot_reuse_no_stale_handles"
+    },
+    "strict": "PASS_24_current_cases_4_genuine_historical_negative_controls",
+    "focused_native_dispatch": "PASS_actualCOBS_CREATE_fullidentity_100READ_MAX3341_3373_reference_mixedrefusal_and2lease_mutants"
+  },
+  "new_negative_controls": {
+    "legacy_false_packet_return": "DETECTED_named_legacy_guard_reference_error_WritePacket_result",
+    "reconcile_late_uncertainty_clear": "DETECTED_named_normal_exact_reconciliation",
+    "copy_close_order_inversion": "DETECTED_by_exact_differential_1503_lines_differ_firstline1855_0based; standaloneinvariant_fixturepasses_thismutant_preserved_honestly"
+  },
+  "nonreentry_slot_acquisitions": [
+    "copy_checked_file input",
+    "VerifyExpectedConfigGeneration",
+    "StageSaveConfig",
+    "VerifyStagedConfig",
+    "PublishStagedConfig uncertain readback"
+  ],
+  "both_ABI_source_applicability": [
+    "No instance data added in any of3headers; only private helpers and explicitly uint8 action enums. Oldsource comparison compiled against new frozen headers (extra private declarations unused), class data layout unchanged by declarations.",
+    "PreparedCreate reuses size_t bytes for index only after i>=0, fixeduint32 id/rev/schema/identity. No new rawstructure wire serialization.",
+    "Target bothABI aligned sizes/static/accounting and linked source correspondence remain separate mandatory finalgate. Host bothABI equivalence is not ARM finalproof."
+  ],
+  "limits": [
+    "No material source defect found in finite7f3 delta; not wholeP1/resource/build/hardware PASS.",
+    "MountedStorage CheckedWrite adapter body is unchanged in7f3; upcoming adoptedadapter source and final clean ELF still need fresh review and compiled31path/callback/IRQ/ROM/accounting. No ef22 orO3probe frames applied to changed source as finalbound.",
+    "No production/SDK/Git/canonical/device edits, new powerloss images, network actions or targetbuild/measurement. Private snapshots/tests/mutants are scratch evidence only.",
+    "ActualNOR uses pinned host emulation plus checked failure/lostack observers; not target flash execution. No fresh broader positiveorphan/MOVE images generated; existing domain proof remains explicit prerequisite.",
+    "Historical lifecycle/read arithmetic/bootIRQ errata remain authoritative; old review reports unchanged.",
+    "Unchanged18family/nativecore oracle matrix was not rerun. Focused affectednativelease/identity tests ran. Author final bothABI/differential/static/build/custody/hardware gates remain separately attributed required work."
+  ],
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "finite_role_complete": true,
+  "whole_resource_PASS": false,
+  "hardware": "NOT_TESTED_NO_ACTION"
+}

@@ -1,0 +1,506 @@
+{
+  "schema_name": "glyph_gp_native_001_decoder_import_lifetime_curation",
+  "schema_version": 1,
+  "disposition": "ADOPT_BOUNDED_CORRECTED_SELECTED_ONLY",
+  "role": "Glyph Work-Order Curator",
+  "finite_role_complete": true,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "recorded_utc": "2026-10-21T14:13:39.222626+00:00",
+  "authority": "Same READY GP-NATIVE-001 and direct owner broader-filesystem engineering direction. One finite same-order bounded lifetime/frame-isolation/workspace-reuse adjudication; no new product/order/successor, owner/domain question, standing role, game/backend algorithm, schema/parser/storage capability or device authority. Curator owns this independent amendment review; root sole canonical publisher and source writer separate.",
+  "input_pins": {
+    "canonical_sha": "76b8bf943ee940c57b9a612556d76d2b3401cd76",
+    "canonical_read": "Normative contract/queue/direct owner authorizations read from frozen Git, ignoring root-owned dirty evidence/ledger docs. Root supplies live verification, Curator used local exact readback; refresh before publication.",
+    "feature_sha": "54fc8cfeb82500f94afea7beb2f816a36759c61e",
+    "feature_tree": "12ff1173aff15d2338a84a543a8e896593c04747",
+    "production_frozen_sha": "783dc8192ee98b2eb4f55a3e0df595213fef5528",
+    "production_tree": "347592792fc8713ba60607f69b082a9551e9c558",
+    "canonical_sha256": {
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "b4160120774767b5aff4bdf4823fc9997f22a31a0a7948ea15430c3e7c3c1270",
+      "docs/project/ACTIVE_AGENT_QUEUE.md": "4129c1d13c31896ef59d1132944028f6f030b4963943b532417563b25fd2f4c4",
+      "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e",
+      "docs/runtime_config/profile_native_ultimate/owner_diagnostic_authorization_20261020.md": "cf7f60d61044ffea6d104bfdffe190f2d896b82683059d670c310847605226ed"
+    },
+    "source_sha256": {
+      "config/glyph/common/src/config.cpp": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "HAL/pico/src/core/Persistence.cpp": "345a8880b6664860820accb04775096a05538ca53bc84fb59e951d1eeb5dc011",
+      "HAL/pico/include/core/Persistence.hpp": "97d9f4bb9ae7b314738915880da0fe4d83a69860a4776738fea0044f7882c8b3",
+      "HAL/pico/src/core/ProfileStore.cpp": "3258ef7844277dfac58439842a85e383443eecdd5c19a85a9c9eb35c775f3b3c",
+      "include/core/ProfileStore.hpp": "aca47eb03b8bc612ac83fb7c6db2fb8ae7acb684a55a295ada18f365044251f0",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "674146090637e66f19f9fdd166345b6eaf326aa0c8dc2090d7f98d71d2763f3c",
+      "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+      "HAL/pico/src/comms/backend_init.cpp": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0",
+      "HAL/pico/include/core/CheckedStorageFile.hpp": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c"
+    },
+    "corrected_directory": "/private/tmp/glyph-native-decode-import-proposal-corrected-20261021",
+    "corrected_selected_sha256": {
+      "PROPOSAL.md": "018b4ad8ce792d927a5c234b6d7195ebbcda3898d43b672ea42e94825325800d",
+      "SEALED_MANIFEST.json": "69595abf051f5de95cffe8138faf9d5a06af56a96a74369d10bba3b5f9bd9ce0",
+      "CORRECTION.md": "44ba5618bf89dab340bbb3ac387222f09b9c41865b8cdef00aeb3b3c37871bdb",
+      "CORRECTION.json": "b009c67f26e740e4ae98629f5004255b9b1e336d3818e19f36f84ea4d2b7bb7a",
+      "selected-private.diff": "05c153b10ac7591e3b5ca5e0828646e06efc63d5f59513a87514154cdd3d438e",
+      "existing-body-diff-audit.json": "e5ce7c9e52a283b7248ffcafbcb8474d7f0fd128c8e6e683677eb0e2687767f1",
+      "private-O3-report.json": "bcc91f1dcb5ca19d71e19eabf12ca8de459f90a6cbd0c38b05503db0e02612a6",
+      "proposal-bounds.json": "b0854c86c56d01f09739441e7a90ac45b2ffc8fb21e93bd3258252048bb8afac",
+      "layout-proof.json": "64a8a1b18a504bb7a41c9a13ff6fe3cd403532f02dbafb8c75ecfd509cd16db2",
+      "selector-correction-regression.json": "3407b2f5452b548f2ee13d87bdfe636cf269c9496c673a3bffd7f08da4b1c646",
+      "callback-exact-equivalence.json": "9ec060b70d0eead190343eb6ed7405b3a5fd97af6ce0c2b646fb3c14e01f6b21"
+    },
+    "corrected_manifest_all_files_checked": 283,
+    "original_parent_directory": "/private/tmp/glyph-native-decode-import-proposal-20261021",
+    "original_parent_manifest_sha256": "70badcc1ae3c538a2c4937885543140cf580ba89246ebce066743ca2db0ef68d",
+    "original_parent_all_files_rechecked_unchanged": 260,
+    "independent_evidence_sha256": {
+      "/private/tmp/glyph-native-next-consolidated-preflight-20261021.json": "81213cf9b8e7b87566530e89c1209aa2b0291276db2044b9cc747c9c0f3e9517",
+      "/private/tmp/glyph-native-all31-783dc8192/REPORT.md": "0351f828707f33947498782473c98a18f530299aa2db2d3d4863c6651465efe8",
+      "/private/tmp/glyph-native-all31-783dc8192/REPORT.json": "7bf0f2a48d8416cc3b0ac0763b44d3921cbc34180e5e97525be868d33ed38ab0",
+      "/private/tmp/glyph-native-all31-783dc8192/PINS.json": "99416bc1a53d546c08b48f025062a5daa8cb4e456af7f73ed626a9a8cb2906be",
+      "/private/tmp/glyph-native-mode-selected-config-depth3-lifecycle-20261021.md": "8a9514e2cf1b0ca146691c7f1d7edaf0dfdbbd961fb22ccbf6347c80816ae32f",
+      "/private/tmp/glyph-native-mode-selected-config-depth3-lifecycle-20261021.json": "c1a6193eaed15ba0f39af5ca80c0d00d1ff27fdb265384bed6d92d2d6560e5a6",
+      "/private/tmp/glyph-native-mode-selected-config-depth3-lifecycle-20261021.pins.json": "4423f2e22bc8f8ee471c5bf5f19e32eb8b4f206e1e992bc0315c136d20f2dd32",
+      "/private/tmp/glyph-native-corrected-curator-workspace-charge-20261021.json": "c0abb5752f317a1b89b1b5a7b067f3b1cd9000c7f3519897d3406ee92ce7c042"
+    }
+  },
+  "independent_findings": {
+    "original_parent": "NOT_ADOPTABLE. Independent Curator caught accidental replacement of default backend selector backend_config.backend_id with reset backend_phase.backend_id (watchdog USB destination may update wrong Config field), unrequested CompleteMigration publication callsite, and promised dispatch metadata reset missing. Parent packet preserved immutable; never used as authority.",
+    "corrected": "All283 sealed child file hashes/sizes independently verified. Entire backend suffix from init_primary_backend through selectors/pointer globals independently byte-identical feature54fc. CompleteMigration entire body independently byte-identical. dispatch_loaded resets at HandleProfileStore entry before Receive and existing DispatchReset on every post-dispatch exit. Corrected source and component selector regression remove the three findings; no source/semantic/resource acceptance is inferred.",
+    "evidence_level": "Writer both-ABI O3/eight layout compile PASS, exact callback360-vector sanitized comparison and corrected selector3402 vectors per ABI PASS with failed parent330 detections per ABI are component evidence, not independently executed by this Curator or full new-code NOR/semantic/final-ELF acceptance. Curator independently verified packet and object-section charge and code-summed91 arithmetic rows. Historical probe version3b792fd7-DIRTY is not a candidate label."
+  },
+  "allowed_source_paths": [
+    "config/glyph/common/src/config.cpp",
+    "HAL/pico/src/core/Persistence.cpp",
+    "HAL/pico/include/core/Persistence.hpp",
+    "HAL/pico/src/core/ProfileStore.cpp",
+    "include/core/ProfileStore.hpp",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+    "src/core/config_validation.cpp",
+    "HAL/pico/src/comms/backend_init.cpp",
+    "HAL/pico/include/core/CheckedStorageFile.hpp"
+  ],
+  "new_exact_source_paths": [
+    "HAL/pico/src/comms/backend_init.cpp",
+    "HAL/pico/include/core/CheckedStorageFile.hpp"
+  ],
+  "permissions": [
+    {
+      "id": "BOOT",
+      "paths": [
+        "config/glyph/common/src/config.cpp"
+      ],
+      "methods": [
+        "setup",
+        "PrepareBootDisplay",
+        "MigrateBootLegacyConfiguration",
+        "InitializeBootBackends"
+      ],
+      "permission": "ONLY returned early-display/migration/late-backend phases exactly selected. Keep display_ready automatic and setup signature; no request_mode_destination, loop, setup1, wrappers, metrics design or generic config.cpp edit.",
+      "invariants": "Preserve matrix\u2192Wire/display/MB1 splash+LEDs+bootloader\u2192default validator\u2192Load\u2192Begin\u2192compact receipt/migration/acceptance marker\u2192Calibrate\u2192initialize_backends\u2192post USB guard\u2192backend_count/bindings/failed-detection\u2192same Normal publication. Same arguments, all early recovery returns, live Config assignment only at original reached success, no earlier core1 release, new barrier/read/write/boot semantics."
+    },
+    {
+      "id": "READ_LOAD",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "LoadConfigChecked",
+        "ReadConfigCandidate",
+        "ReconcileConfig",
+        "ReadLegacyProfile",
+        "LoadConfigDriver",
+        "SelectReadConfigCandidate",
+        "InitializeReadConfigCandidate",
+        "FinishConfigDecode",
+        "CompleteReadConfigCandidate",
+        "FinishLoadedConfig",
+        "ResetReadWorkspace",
+        "read_config_file",
+        "skip_config_bytes",
+        "necessary private declarations/scope metadata"
+      ],
+      "permission": "Reuse ONLY the one existing aligned File slot for original Config Load and ReadLegacy File as well as prior permitted Save/copy INPUT lifetimes. No second slot/File owner/Config/profile/body buffer. Returned source selection/open-check/seek/decode/postcheck/validation/header/close/publication phases, exact selected helper structure; ReconcileConfig uses same inline driver at same reached load, not an extra load.",
+      "invariants": "Same availability/validator/index guards, candidate/default reset, Current/Prior/Legacy selection/no fallback after rejection, original constructor point, check/CRC/seek/size/position, RejectEmbedded/decode/ClearEmbeddedCallbacks, validation before header reread, explicit-close/error classification/destructor fallback. Keep File LIVE through original parser/validation/header/explicit-close scope; File destruction before read-workspace reset, before original Prior Rename and caller Config/generation publication. Preserve original checked close counts and result/fence/status on every failure. ReadLegacy retains exact field-tag walk/skip/substream/selected index/native rejection/callback clearing/final close/io_failed precedence, same original output mutation.",
+      "callback": "count0 has ZERO storage I/O and true; nonnull positivecount SAME one read(count), same result/error/io_failed. NULL buffer uses SAME local32 skipped buffer and chunk/read sequence in separate noinline phase. No new chunk strategy, parser/schema/callback API, hidden I/O or narrowing D4 legacy/rejected input. All read-state/pointers reset at reached entry/every exit."
+    },
+    {
+      "id": "SINGLE_WORKSPACE",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "same SavePhaseState/ReadWorkspace/SynchronousPhaseWorkspace and existing SynchronousFileScope owner"
+      ],
+      "permission": "Read28 overlays SAME existing Save32 in ONE32-byte aligned union. Start the intended trivial member lifetime explicitly before any member access; full32 bytes cleared at operation entry and cleanup. Save resets its active Save member; Read File scope destructs BEFORE Read reset. Original Load8/Capture8 and same candidate storage remain. No extra owner or borrowed pointer survives.",
+      "nonoverlap": "Slot-acquiring Save, Load, ReadLegacy and copy input are mutually exclusive synchronous core0 calls. Save encode/CRC/check never Loads or Captures; Load validators are pure semantics/RGB and cannot Save/Capture/reenter; Import reader finishes File/destructor before record publication; Copy slot returns before later Save; IRQ/core1/USB do not acquire them. Actual callback/fault/trace graph and post-change tests MUST verify, not assume. No new lock/refusal/retry/queue may hide a missing proof; overlap stops execution.",
+      "limits": "Precise later supersession of earlier Save-only/read/migration exclusion ONLY these two original File lifetimes and selected Save/Read metadata overlay. Identity/hash/copy OUTPUT/other Files unchanged. No new constructor/destructor close ordering beyond original reached lifetimes."
+    },
+    {
+      "id": "STAGED_ENCODER",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "StageSaveConfig",
+        "WriteStagedConfig",
+        "InitializeStagedConfig",
+        "EncodeStagedConfig",
+        "CompleteStagedConfig",
+        "FailStagedConfig",
+        "SaveConfig only for union active-member entry/reset"
+      ],
+      "permission": "Retire header/encoder/CRC/sync/close phases synchronously without changing original staging operation order or owner. Same existing slot, header and result state.",
+      "invariants": "Original initial !file/header write, pb_encode/bytes_written/seek, CRC/read/header update/rewrite/sync, explicit close and failed-stage cleanup exactly ordered. Preserve every close even failed constructor, uncertain/fenced publication outcome, pending fields/generation and later verify/rotate/readback/rollback. No native hash_file body edit or storage API/format change."
+    },
+    {
+      "id": "IMPORT",
+      "paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp"
+      ],
+      "methods": [
+        "ImportLegacyStream",
+        "PrepareLegacyImport",
+        "ExecuteLegacyImport",
+        "PrepareImportedLegacyRecord",
+        "PublishImportedLegacyRecord",
+        "FinishImportedLegacyRecord",
+        "PrepareImportedCompact",
+        "PublishImportedLegacyDirectory",
+        "necessary private declarations/borrowed ImportInputs"
+      ],
+      "permission": "ONLY returned same preflight/hash/replay, admission, ordered per-record read/validate/prepare/publish/finalize, compact preparation and directory publication; borrowed Import24 reset entry/all exits. CompleteMigration and portable ImportLegacy bodies remain BYTE-IDENTICAL.",
+      "invariants": "Preserve count/capacity/reader/mapping guards, source-hash conflict/replay/migration checks before same Admit, _next initialization, record IDs/revision1/schema/names/metadata/mapping/hash/receipt order and every return. ExistingExact Capture remains read-only; no invented pre-import consistency barrier. Record publication cannot change _next highwater or candidate; recomputing highwater+1 only after SAME successful publication must equal originally captured ID under source-proven nonreentry. No metadata/mapping increment before original success, no body/lease owner, replay/receipt/admission/retry change. Private NotFound-ready sentinel cannot escape as a new public result."
+    },
+    {
+      "id": "SET_DISPATCH",
+      "paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+      ],
+      "methods": [
+        "HandleSetConfig",
+        "PrepareSetConfig",
+        "DecodeSetConfig",
+        "DecodeIncomingSetConfig",
+        "CaptureSetReceipt",
+        "ReportSetDecodeError",
+        "ReportDurableLoadError",
+        "ValidateSetCandidate",
+        "FinalizeSetConfig unchanged semantics",
+        "HandleProfileStore",
+        "PrepareProfileDispatch",
+        "DispatchProfileStore",
+        "ReconcileProfileDispatch",
+        "CompleteStatusDispatch",
+        "LookupStoreMutation",
+        "PrepareStoreMutation",
+        "necessary private declarations/classifier/load sibling metadata"
+      ],
+      "permission": "Only selected returned legacy SET streaming/error/receipt/validation and ProfileStore classification/reconcile/query/Config-read/admission/execution/finalization siblings. Same same-call synchronous operation, no queued plan/transport/input/body buffer/reader/lock/refusal.",
+      "set_invariants": "SET owns original receipt fields as fixed88 metadata, reset all exits. Same recovery guard then optional durable Load then receipt capture then default reset/RejectEmbedded and SAME _in COBS streaming pb_decode, exact formatted decode error and differing WritePacket-derived/false returns. Clear callbacks/negotiated-format/firmware-owned receipt restore/validation/selected-record engine check/zero-profile backing remain exact. Same Save then live _config assignment/legacy response; no CAS or error cleanup semantics change.",
+      "dispatch_invariants": "Response snapshot/reset/Trace2 before reconciliation; Query receipt lookup BEFORE same durable Load/highwater/stale expectations; Trace5 BEFORE STATUS Load, Trace6 after, same diagnostics. new dispatch_loaded reset BEFORE Receive and existing inner DispatchReset on all post-dispatch exits, assigned before consumption. Original incoming RX lease/candidate/native slice remains live through identity/validation/transaction, released before response-frame encode; original fault ticket begin/end scope, Trace ordering and EndMutation before encode preserved. No skipped/repeated query/read/reconcile, changed statuses/fence/token/receipt/admission or wire bytes. Other handlers/transport/identity/diagnostic algorithms unchanged."
+    },
+    {
+      "id": "CONDITION",
+      "paths": [
+        "src/core/config_validation.cpp"
+      ],
+      "methods": [
+        "validate_profile_condition",
+        "private check_profile_condition/ConditionResult"
+      ],
+      "permission": "ONLY original pure condition predicate loop returns before SAME reference_error formatting. No other validator/body/field-domain/token/format algorithm change.",
+      "invariants": "Same list order/counts/cross-list duplicate table, safe invalid-token short circuit BEFORE indexing, routed buttons/defined roles/maximum role checks, first InvalidToken versus UnresolvedRole precedence. SAME text/profileID integer promotion/length/truncation and untouched Error on success. Preserve framed semantic-invalid record rejection; no support-domain deletion to eliminate printf."
+    },
+    {
+      "id": "BACKEND_CALLSITE",
+      "paths": [
+        "HAL/pico/src/comms/backend_init.cpp"
+      ],
+      "methods": [
+        "initialize_backends",
+        "private BackendInputs/BackendPhase/BackendAction/BackendPhaseReset",
+        "PrepareBackendPhase",
+        "FinishBackendPhase"
+      ],
+      "permission": "NEW exact source path ONLY existing initialize_backends lifetime split. Same public signature, no header/API/selector/init_primary/init_secondary/body change; entire existing suffix from init_primary_backend onward remains BYTE-IDENTICAL. Borrowed argument/state52 short/56 default reset entry/all exits; selected default_mode has EXACT original generated uint8 type/width, no truncating new cast.",
+      "invariants": "Original first USB-index guard before selector/construction/detection/Save; required function-null guard; committed scratch consume/selector; second USB guard; watchdog scratch volatile reads/truncation points; USB-first primary construction/detect/final primary; original watchdog Config/backend default mutation; SAME conditional noncommitted/nonConfigurator SaveConfig with IGNORED Boolean; then same secondary/viewer/mode fanout/failed-detect return. No descriptor/algorithm/new-delete/ownership/backend-ID change, no new persistent bytes or earlier core1 release."
+    },
+    {
+      "id": "RESULT_MEMBER",
+      "paths": [
+        "HAL/pico/include/core/CheckedStorageFile.hpp"
+      ],
+      "methods": [
+        "CheckedStorageFile::read(uint8_t*,size_t) only; necessary #include <new>"
+      ],
+      "permission": "NEW exact header dependency ONLY replace result assignment with ::new (&_result) CheckedStorage::Result(CheckedStorage::Read(_file,bytes,size)), constructing trivial returned Result directly into SAME member. Every other class method/field/layout/public signature remains byte-identical, no new storage/owner/API.",
+      "necessity": "Both ABI objects show hidden16-byte result temporary retirement needed by deepest2048 D4 rows; without it selected routes2064. No generic File/CheckedStorage redesign.",
+      "lifetime_proof": "Existing Result is nonconst same-type non-base member, no const/reference submembers, trivially copyable/destructible. New Result exactly overlays it; ordinary member names/references refer to replacement after initialization under C++17 lifetime rules. Storage reuse can precede initializer evaluation, so _result is NOT read/inspected while CheckedStorage::Read runs. _file is separate nonoverlapping live member; actual production destinations do not alias either _result or File storage. Current checked-storage/fault/trace callbacks never inspect/reenter this File or old Result and IRQ/core1 have no such access. Maintain these finite call/alias/reentry premises; no generic in-flight observer semantics added.",
+      "observable_invariants": "ONE SAME checked Read with SAME argument/trace order. After return SAME outcome/error/bytes/operation remembered, uncertainty sticky update, failed flag, -1/success byte count/position and last_result values. No extra seek/read/close, no stale-result fallback, no changed size/position on failure. Fresh bothABI exact post-call/fault/position/uncertainty/last_result tests and alias/call audit required.",
+      "language_reference": "C++17 working draft N4659 basic.life paragraphs8 and expr.new paragraph19: https://timsong-cpp.github.io/cppwp/n4659/basic.life and https://timsong-cpp.github.io/cppwp/n4659/expr.new . No verbatim quotation; final compiler/source proof remains required."
+    }
+  ],
+  "workspace_charge": {
+    "original_charged_base_bytes": 290,
+    "new_set_receipt_bytes": 88,
+    "new_backend_bytes_short_default": [
+      52,
+      56
+    ],
+    "new_dispatch_enum_bytes": 4,
+    "new_import_borrowed_bytes": 24,
+    "read28_overlay_save32_additional_bytes": 0,
+    "gross_short_default": [
+      458,
+      462
+    ],
+    "writer_reserved32_totals": [
+      490,
+      494
+    ],
+    "writer_reserved32_is_NOT_final_alignment_proof": true,
+    "independent_current_object_section_audit": {
+      "classification": "INDEPENDENT_CURRENT_OBJECT_SECTION_SIZE_ALIGNMENT_CHARGE_NOT_FINAL_LINKED_RAM_PASS",
+      "method": "Sum the 13 charged current layout objects sizes plus separately up to align-1 bytes per object. This deliberately exceeds reserve32 without assuming placement. It is a bounded object allocation charge; final linked wholeRAM/delta/map/custody remains required. Original base290 components retained; no additional current charged object may be omitted.",
+      "abis": {
+        "short": {
+          "objects": [
+            {
+              "unit": "Persistence",
+              "section": ".data._ZN12_GLOBAL__N_115phase_workspaceE",
+              "size": 32,
+              "alignment": 4,
+              "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+            },
+            {
+              "unit": "Persistence",
+              "section": ".bss._ZN12_GLOBAL__N_113capture_phaseE",
+              "size": 8,
+              "alignment": 4,
+              "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+            },
+            {
+              "unit": "Persistence",
+              "section": ".bss._ZN12_GLOBAL__N_110load_phaseE",
+              "size": 8,
+              "alignment": 4,
+              "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+            },
+            {
+              "unit": "Persistence",
+              "section": ".bss._ZN12_GLOBAL__N_114save_file_slotE",
+              "size": 176,
+              "alignment": 8,
+              "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZN12_GLOBAL__N_113import_inputsE",
+              "size": 24,
+              "alignment": 4,
+              "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZZN12ProfileStore14CollectGarbageEvE6search",
+              "size": 40,
+              "alignment": 4,
+              "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZZN12ProfileStore12InitializeV2ERKNS_9DirectoryEE4slot",
+              "size": 4,
+              "alignment": 4,
+              "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZN12_GLOBAL__N_120mounted_write_inputsE",
+              "size": 20,
+              "alignment": 4,
+              "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_1L15dispatch_loadedE",
+              "size": 4,
+              "alignment": 4,
+              "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_pendingE",
+              "size": 1,
+              "alignment": 1,
+              "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_handledE",
+              "size": 1,
+              "alignment": 1,
+              "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_111set_receiptE",
+              "size": 88,
+              "alignment": 8,
+              "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+            },
+            {
+              "unit": "backend_init",
+              "section": ".bss._ZN12_GLOBAL__N_113backend_phaseE",
+              "size": 52,
+              "alignment": 4,
+              "object_sha256": "35f2e84f39bfbc996f00f4b8cb0f6c73df63895efe004dbd5f81bd728abea85c"
+            }
+          ],
+          "gross": 458,
+          "independent_sum_alignment_minus1_reserve": 41,
+          "conservative_object_charge": 499,
+          "fits_512": true
+        },
+        "default": {
+          "objects": [
+            {
+              "unit": "Persistence",
+              "section": ".data._ZN12_GLOBAL__N_115phase_workspaceE",
+              "size": 32,
+              "alignment": 4,
+              "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+            },
+            {
+              "unit": "Persistence",
+              "section": ".bss._ZN12_GLOBAL__N_113capture_phaseE",
+              "size": 8,
+              "alignment": 4,
+              "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+            },
+            {
+              "unit": "Persistence",
+              "section": ".bss._ZN12_GLOBAL__N_110load_phaseE",
+              "size": 8,
+              "alignment": 4,
+              "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+            },
+            {
+              "unit": "Persistence",
+              "section": ".bss._ZN12_GLOBAL__N_114save_file_slotE",
+              "size": 176,
+              "alignment": 8,
+              "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZN12_GLOBAL__N_113import_inputsE",
+              "size": 24,
+              "alignment": 4,
+              "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZZN12ProfileStore14CollectGarbageEvE6search",
+              "size": 40,
+              "alignment": 4,
+              "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZZN12ProfileStore12InitializeV2ERKNS_9DirectoryEE4slot",
+              "size": 4,
+              "alignment": 4,
+              "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+            },
+            {
+              "unit": "ProfileStore",
+              "section": ".bss._ZN12_GLOBAL__N_120mounted_write_inputsE",
+              "size": 20,
+              "alignment": 4,
+              "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_1L15dispatch_loadedE",
+              "size": 4,
+              "alignment": 4,
+              "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_pendingE",
+              "size": 1,
+              "alignment": 1,
+              "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_handledE",
+              "size": 1,
+              "alignment": 1,
+              "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+            },
+            {
+              "unit": "ConfiguratorBackend",
+              "section": ".bss._ZN12_GLOBAL__N_111set_receiptE",
+              "size": 88,
+              "alignment": 8,
+              "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+            },
+            {
+              "unit": "backend_init",
+              "section": ".bss._ZN12_GLOBAL__N_113backend_phaseE",
+              "size": 56,
+              "alignment": 4,
+              "object_sha256": "ea2955939b70f4904709aef61b615eb04b2f0a9efa4d0669c01884fc707a0bc0"
+            }
+          ],
+          "gross": 462,
+          "independent_sum_alignment_minus1_reserve": 41,
+          "conservative_object_charge": 503,
+          "fits_512": true
+        }
+      }
+    },
+    "independent_conservative_short_default_charge": [
+      499,
+      503
+    ],
+    "rule": "Curator independently enumerated13 charged current object sections, sums exact sizes plus EACH section alignment-1=41, avoiding assumed old32. Both<=512 with default9 remaining. This bounds current charged object allocation, NOT final whole-firmware RAM/linker padding correspondence. Any extra symbol/owner/alignment/delta not in this audit must be charged, not hidden. Final exact bothABI linker symbols/addresses/padding/init owners/wholeRAM<=199632/added<=12288 mandatory. TOTAL512 is unchanged, no reserve increase."
+  },
+  "resource_screen": {
+    "source": "Frozen783 all31/90 plus ONE exact selected Config D3 lifecycle variant yields91 computed proposal rows; Curator code-summed ALL91 component equations including44 masked alternatives and count/max2048. Conditional engineering fit only, no independent final graph/ELF/P1 PASS.",
+    "tight": "Direct service D4 and exceptional rejected Configurator D4 have Load32+nonnull reader24 and conditional2048 incl IRQ348. First Import Open conditional2048 incl boot336. No unseen helper/cleanup/alignment can be silently added. Final actual source/ELF every branch/caller/callback/IRQ/ROM/PRIMASK proof mandatory.",
+    "lifecycle": "Normal nonConfigurator physical Config loads are selected D3/IRQ408 only under pinned ordered-writer/selection proof. Mixed normal Configurator format0/root2/count0 can later publish D4 and rejected mode request still Loads BEFORE backend rejection: use D4/348, not blanket D3 or NES408+D4. Supported rejected nested D4/semantic-invalid records stay included. Initial ExistingExact Capture does NOT clear pending recovery. Recovery/generated repair source-history predicates remain honest OPEN/final proof obligations.",
+    "historical": "All earlier failures/incomplete/probes/arithmetic/lifecycle errata preserved, no obsolete frame/lookup/IRQ sums transferred. No new fault images, source/device experiments or final build by Curator."
+  },
+  "mandatory_validation": [
+    "Before executing newly scoped edits: root independent inspection, source-free canonical contract/sole queue adoption, relevant doc/checker gates and fresh live readback. No source action authority from private packet alone.",
+    "Full bothABI actual production old/new NOR/LittleFS checked operation/return/digest/Config/hash/generation/fence/token/receipt/mapping/LastResult/uncertainty/position/diagnostic and rawNOR differential for Load/ReadLegacy/Import/Save plus all fault/reboot/recovery/next-call states, not only extracted callback/memory-double proof. Prior322/31/old matrices remain historical, rerun exact current affected cases.",
+    "Count0/non-null/NULLskip/unknown fields/malformed short nested D4/selected legacy/migration substream decode and callbacks, every read/check/header/seek/validate/close/destructor/error/publication failure/lostack. Alternate failed/successful Load\u2192Save\u2192ReadLegacy\u2192Copy\u2192Save with zero slot/read/union pointers after each; preserve file opened/failed/uncertain and exact fallback cleanup.",
+    "Same-member Read placement exact after-call result bytes/operation/flags/position tests, nonalias/in-flight result inspection audit, bothABI triviality/type/layout and actual compiler returned temporary proof. No copy/File/native header consumer skipped merely because only read body changed.",
+    "Legacy streaming SET actual COBS/Coordinated foreground USB plus hardware IRQ context, same receipt bytes/error text/length/first-error/differing return booleans/selected-record validation/live publication. ProfileStore Query-before-Load/Trace5-before-read/Trace6-after, exact replay/status/highwater/CAS/fault/RX lease/native mutant/reset tests. No memory stream substitution for actual transport.",
+    "Import replay/conflict/read/admission/record and directory failure/unknown/fence/mapping/receipt/compact semantics, original count/profile/index/native/legacy cases and preserved TWO Duplicate Starts in unaffected flows; raw source proof highwater cannot change under record publication before recomputation. ExistingExact versus copy-needed broad orphan/MOVE/unrelated-directory states independently applied.",
+    "Backend actual selector/USB/scratch/uint8 truncation/committed-versus-old watchdog/ignored Save/new-delete/secondary/viewer/mode/detection callback trace and all failures; old buggy parent must remain a meaningful negative control. ENTIRE outside-initialize suffix, CompleteMigration, request_mode_destination, hash_file bodies exact. Setup early/migration/late error/order/core1 Normal/Recovery release tests, no startup/MB1/diagnostic timing drift.",
+    "Condition valid/error first-failure/text/length/unchanged-success/Error/invalid index/cross-list/role-domain vectors with original semantic oracles, default and short enum ABIs; no framed semantic rejection excluded as corruption absent separate proof.",
+    "Fresh full91/all31 actual adopted source graph and final linked ELF/map/disassembly/.su/dependencies/generated/compiler/input/build flags correspondence, ALL success/error/NULLskip/constructor/destructor/read/encoding/format/callback/indirect/allocator/IRQ/ROM/PRIMASK paths; prior startup/core1/LFS/IRQ certificates remapped to final source. Tier1/affectedTier2 FAIL/TIMEOUT/INCOMPLETE/UNAVAILABLE block honestly, no aggregate substitution.",
+    "Final clean committed canonical Mk6 build, exact static/flash/layout caps, full candidateSHA/tree/ELF/UF2 hashes/sizes/content-addressed custody and fresh independent final source/resource review precede concrete candidate-specific reviewed hardware packet. Separate direct owner device approval, exact human HEP PASS then source-free R/E/tested-source integration/separate strict DONE. No timing/highwater/controller acceptance inferred."
+  ],
+  "protected_invariants": "Every original numeric_caps/frozen M1/architecture/legacy/native oracle/source semantics/schema/ABI/parser/transportbytes/flags/primitives/identity16-72/exact diagnostic design stays exact. Both2048 core reserves,199632 wholeRAM/12288 added, TOTAL layout512, partition/filesystem524288/reserve16384/capacity20 and active+candidate7800/view560/local aggregate limits unchanged. No new heap/queue/body/path/wire/directory/cache-all owner, SDK/IRQ/startup/optimization/ModeSelection caller/backend algorithm/store/recovery/ID/API/domain change. Other102 orders/status/evidence immutable. Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, root cause UNPROVEN.",
+  "activation": "ADOPT_BOUNDED of CORRECTED child ONLY after source-free canonical adoption and live readback. Original failed260 packet is NOT adopted. This grants finite bounded engineering implementation and required tests within named exact methods, never P1/resource acceptance, device action or merge before hardware.",
+  "publication": {
+    "record_path": "docs/runtime_config/profile_native_ultimate/decoder_import_lifetime_scope_amendment_20261021.json",
+    "sole_order_id": "GP-NATIVE-001",
+    "sourcefree_only": true,
+    "scope_append_text": "GP-NATIVE-001 corrected decoder/import lifetime-only amendment2026-10-21: adopt ONLY docs/runtime_config/profile_native_ultimate/decoder_import_lifetime_scope_amendment_20261021.json and corrected sealed manifest69595abf051f5de95cffe8138faf9d5a06af56a96a74369d10bba3b5f9bd9ce0 (failed parent70badcc NOT adopted). Exact setup early/migration/late phases; existing Persistence Load/ReadLegacy original File may reuse SAME single slot with read28 over Save32 explicit-lifetime/reset union, returned decode/validation/header/close and staged encoder phases; same count0/nonnull/NULLskip callback behavior. Only streamed ImportLegacyStream phases/Import24, legacy SET streaming/error/receipt88, ProfileStore returned classify/query/Load/admission/dispatch reset and condition pure-check-before-same-format. Add ONLY two closed source paths: HAL/pico/src/comms/backend_init.cpp initialize_backends returned phases/52-56 metadata with entire selector/initializer suffix unchanged; HAL/pico/include/core/CheckedStorageFile.hpp ONLY read(uint8_t*,size_t) direct same-trivial-_result return placement, same postcall status/bytes/flags/position, source-proven noalias/inflight-observer/reentry. No CompleteMigration/hash_file/request_mode_destination/other-method edits. New object gross458/462; independent13-section align-minus1 charge499/503<=unchanged TOTAL512, exact final linker/static still required. Preserve all original caps/frozenoracles/identity16-72/diagnostic and broad FS/transaction semantics; no new owner/buffer/API/parser/schema/transport/SDK/IRQ/startupalgorithm/flags/optimization/domain/device authority. Conditional91-row max2048 is NOT P1 PASS; full bothABI actual NOR/source/ELF/IRQ/ROM/PRIMASK/review/build/custody/hardware gates remain. Root source-free adoption/live readback before source edits."
+  },
+  "resource_gate": "NATIVE-REVIEW-P1-STACK OPEN. Finite independent scope adjudication complete; no standing role/reviewer-of-reviewer loop."
+}
