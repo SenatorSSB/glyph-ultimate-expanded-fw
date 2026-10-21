@@ -1,0 +1,372 @@
+{
+  "classification": "FINITE_EARLY_STARTUP_STATIC_UPPERS_WITH_EXPLICIT_PRECONDITIONS_NOT_WHOLE_FIRMWARE_PASS",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+  "control_snapshot": "543ab532918dcf71925940d0f7ff8c172209420a",
+  "observed_control_head_at_report": "7faa85fecbac4940a1a4c1d8310b85baaced460e",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "requested_model": "INHERIT_PARENT_NO_OVERRIDE",
+  "elf": {
+    "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf",
+    "bytes": 5592128,
+    "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+  },
+  "stack_budget_each_bytes": 2048,
+  "static_ram_contract_max_bytes": 199632,
+  "added_static_ram_contract_max_bytes": 12288,
+  "artifact_status": "BUILD_ONLY_P1_OPEN_NOT_FOR_HARDWARE",
+  "binary_boundary_words": {
+    "0x10000100": "0x20042000",
+    "0x10000104": "0x100001e3",
+    "0x10002ff0": "0x1017f000",
+    "0x10002ff4": "0x101ff000",
+    "0x10003000": "0x20042000",
+    "0x10003004": "0x100030e3",
+    "0x20005b64": "0x10065805",
+    "0x20005b68": "0x10060c25"
+  },
+  "baseline_correspondence": {
+    "baseline_elf": {
+      "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/976ba2195b72046b32f7ecdd41063e7bad791ded/741b550a3221e9cfa7447407c513ff38e94cc1983adf7c739e981d3d17b4a612/firmware.elf",
+      "bytes": 5574020,
+      "sha256": "83f2aa7d66ba511274981695ee97a65e86ca5b7fa812cc1a21967914eabaf7b8"
+    },
+    "sections": {
+      "0x10000000": {
+        "bytes": 256,
+        "sha256": "a1408dd2691089af701a1cad19530c539064608566633b9619d15b40d0357b1e"
+      },
+      "0x10000100": {
+        "bytes": 9444,
+        "sha256": "081b86358d0241a630cd274ceea3f083501d5e7a38661c067e29ca34101c5f31"
+      }
+    },
+    "candidate_sections": {
+      "0x10000000": {
+        "bytes": 256,
+        "sha256": "a1408dd2691089af701a1cad19530c539064608566633b9619d15b40d0357b1e"
+      },
+      "0x10000100": {
+        "bytes": 9444,
+        "sha256": "081b86358d0241a630cd274ceea3f083501d5e7a38661c067e29ca34101c5f31"
+      }
+    },
+    "boot2_and_OTA_exact_equal": true
+  },
+  "preinit_targets": [
+    {
+      "slot": "0x200060d8",
+      "value": "0x10043715",
+      "name": "__aeabi_mem_init"
+    },
+    {
+      "slot": "0x200060dc",
+      "value": "0x10042b69",
+      "name": "__aeabi_bits_init"
+    },
+    {
+      "slot": "0x200060e0",
+      "value": "0x10042e0d",
+      "name": "__aeabi_double_init"
+    },
+    {
+      "slot": "0x200060e4",
+      "value": "0x10043615",
+      "name": "__aeabi_float_init"
+    }
+  ],
+  "constructor_targets": [
+    {
+      "slot": "0x200060e8",
+      "value": "0x100031ed",
+      "name": "frame_dummy"
+    },
+    {
+      "slot": "0x200060ec",
+      "value": "0x10006a01",
+      "name": "_GLOBAL__sub_I__ZN14SPIClassRP2040C2EP8spi_insthhhh"
+    },
+    {
+      "slot": "0x200060f0",
+      "value": "0x10006e05",
+      "name": "_GLOBAL__sub_I_Serial"
+    },
+    {
+      "slot": "0x200060f4",
+      "value": "0x1000b889",
+      "name": "_GLOBAL__sub_I__ZN7TwoWireC2EP8i2c_insthh"
+    },
+    {
+      "slot": "0x200060f8",
+      "value": "0x1000bf65",
+      "name": "_GLOBAL__sub_I_pSmartMatrix"
+    },
+    {
+      "slot": "0x200060fc",
+      "value": "0x1000e2fd",
+      "name": "_GLOBAL__sub_I__ZN14TUCompositeHID16_hid_report_descE"
+    },
+    {
+      "slot": "0x20006100",
+      "value": "0x100100e5",
+      "name": "_GLOBAL__sub_I__ZN13littlefs_impl12LittleFSImpl4openEPKcN2fs8OpenModeENS3_10AccessModeE"
+    },
+    {
+      "slot": "0x20006104",
+      "value": "0x1002166d",
+      "name": "_GLOBAL__sub_I__ZN11PersistenceC2Ev"
+    },
+    {
+      "slot": "0x20006108",
+      "value": "0x100283f1",
+      "name": "_GLOBAL__sub_I__ZN12ProfileStoreC2EP19ProfileStoreStorage"
+    },
+    {
+      "slot": "0x2000610c",
+      "value": "0x1002961d",
+      "name": "_GLOBAL__sub_I_RGB_Wave_StarterHSV"
+    },
+    {
+      "slot": "0x20006110",
+      "value": "0x10029795",
+      "name": "_GLOBAL__sub_I_bootloaderRGB"
+    },
+    {
+      "slot": "0x20006114",
+      "value": "0x1002f219",
+      "name": "_GLOBAL__sub_I_full_layout_buttons"
+    },
+    {
+      "slot": "0x20006118",
+      "value": "0x100303a9",
+      "name": "_GLOBAL__sub_I__Z10switchIcon13_OutputOption"
+    },
+    {
+      "slot": "0x2000611c",
+      "value": "0x10033889",
+      "name": "_GLOBAL__sub_I_melee_mode"
+    },
+    {
+      "slot": "0x20006120",
+      "value": "0x100401cd",
+      "name": "_GLOBAL__sub_I_rp2040"
+    },
+    {
+      "slot": "0x20006124",
+      "value": "0x10040859",
+      "name": "_GLOBAL__sub_I_interrupts"
+    },
+    {
+      "slot": "0x20006128",
+      "value": "0x10040af5",
+      "name": "_GLOBAL__sub_I__ZN10PIOProgramC2EPK11pio_program"
+    },
+    {
+      "slot": "0x2000612c",
+      "value": "0x10043841",
+      "name": "_retrieve_unique_id_on_boot"
+    },
+    {
+      "slot": "0x20006130",
+      "value": "0x1004bec9",
+      "name": "_GLOBAL__sub_I__ZNSt12ctype_bynameIcEC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj"
+    },
+    {
+      "slot": "0x20006134",
+      "value": "0x100505d5",
+      "name": "_GLOBAL__sub_I__ZNSt12ctype_bynameIwEC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj"
+    },
+    {
+      "slot": "0x20006138",
+      "value": "0x10056ef1",
+      "name": "_GLOBAL__sub_I__ZNSt12ctype_bynameIcEC2ERKSsj"
+    },
+    {
+      "slot": "0x2000613c",
+      "value": "0x1005d9e5",
+      "name": "_GLOBAL__sub_I__ZNSt12ctype_bynameIwEC2ERKSsj"
+    },
+    {
+      "slot": "0x20006140",
+      "value": "0x1005f3e9",
+      "name": "_GLOBAL__sub_I__ZN9__gnu_cxx9__freeresEv"
+    }
+  ],
+  "bounds_bytes": {
+    "ordinary_published_ROM_flash_boot_below_ROM_reset_MSP": 88,
+    "ROM_main_retained_plus_firmware_boot2": 48,
+    "OTA_runtime_init": 128,
+    "OTA_main_including_command_gzip_read_write_branches": 872,
+    "application_runtime_init_including_registered_constructors": 496,
+    "early_Persistence_mount_including_runtime_outer": 468,
+    "application_main_before_setup_and_loop": 776,
+    "core0_pre_setup_with_retained_IRQ_upper348": 1124,
+    "default_core1_launch_below_main": 80,
+    "main_plus_default_core1_launch_plus_IRQ348": 476,
+    "core1_early_wrapper_adapter_main1_registerCore": 40,
+    "core1_early_prefix_plus_SIO68": 108
+  },
+  "OTA_cfg": {
+    "main_states": 76860,
+    "runtime_states": 858,
+    "unknown_indirect_or_unhandled_control": [],
+    "cycles": [],
+    "binary_payload": {
+      "bytes": 9444,
+      "sha256": "081b86358d0241a630cd274ceea3f083501d5e7a38661c067e29ca34101c5f31"
+    },
+    "memory_copies": [
+      [
+        "0x10000290",
+        "0x200000c0",
+        "0x20002148"
+      ],
+      [
+        "0x10002318",
+        "0x20002150",
+        "0x2000241c"
+      ]
+    ],
+    "source_installed_indirect_targets": {
+      "0x2000081c": "0x20000344 lfs_flash_read",
+      "0x2000087c": "0x20000344 lfs_flash_read",
+      "0x20000bcc": "0x20000d50 lfs_dir_find_match",
+      "0x200016b2": "0x20000374 uzlib_read_cb"
+    },
+    "main_upper_method": "Complete reachable emitted instruction CFG; all conditional branches admitted; fixed stack delta/returns tracked; memory/ROM/numeric helper uppers replace only named entries; main MSP handoff ends OTA phase."
+  },
+  "application_cfg": {
+    "concrete_nonaggregate_functions": 243,
+    "unknown": [],
+    "cycles": [],
+    "normal_execution_fault_exclusions": [
+      "__assert_func",
+      "__hard_assertion_failure_veneer",
+      "assert_failed",
+      "hard_assertion_failure",
+      "panic",
+      "std::__throw_runtime_error(char const*)"
+    ],
+    "target_graph": "/private/tmp/glyph-native-ef22-startup-bound.json"
+  },
+  "explicit_preconditions": [
+    "Published official RP2040 B0/B1/B2 ordinary successful flash boot; target revision NOT queried.",
+    "Expected executable bytes and source-initialized callback objects remain intact; arbitrary memory-corruption paths are not certified.",
+    "Application constructor graph is normal startup: fixed source-owned initialized objects, successful allocation, distinct first-install classic facets, immortal classic locale, initial ASCII converters. Assertion/panic/error-format paths are excluded explicitly, not silently given zero cost.",
+    "LittleFS automatic formatting is false at Persistence constructor; no command-file absence or flat/pristine filesystem predicate is imposed for OTA graph.",
+    "No preexisting NVIC/SysTick/DMA/GPIO/USB enable outside ordinary reset/launcher semantics. OTA does not enable interrupts; app constructors precede begin/USB/SysTick/FIFO setup."
+  ],
+  "remaining_limitations": [
+    "No actual target timing/highwater/earlier startup observation exists.",
+    "No claim that raw OTA command/data admission, writes, recovery policy or malformed-command memory safety is accepted; this is emitted stack accounting only.",
+    "Constructor allocation failure: btowc malloc80 NULL at1005f45e or wctob NULL at1006579e calls __assert_func24 then iprintf; assertion/panic/stdio subgraphs were not certified. Need finite startup heap census proving NULL infeasible or exact failure-path bound; no stack-limit change is needed/authorized.",
+    "No complete all31/P1 or final repaired-source correspondence claim. Future candidate must repeat affected exact source/ELF accounting.",
+    "No BOOTSEL USB bootloader, arbitrary watchdog/debug payload, unknown/modified ROM, hardfault or arbitrary-corruption whole-program certificate."
+  ],
+  "mutations": {
+    "repository": false,
+    "SDK": false,
+    "cache": false,
+    "git": false,
+    "build": false,
+    "network": false,
+    "device": false,
+    "tmp_evidence_only": true
+  },
+  "production_sources": {
+    "HAL/pico/src/core/NativeTargetMetrics.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "59f789cf9f98c536b840715ad8cffb83dd7b3115",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_NativeTargetMetrics.cpp",
+      "bytes": 12036,
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c"
+    },
+    "HAL/pico/src/core/NativeTargetMetricsEntry.S": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "f7fb11ef0c2990531027b7127273bc94e7f72b6a",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_NativeTargetMetricsEntry.S",
+      "bytes": 2154,
+      "sha256": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a"
+    },
+    "HAL/pico/src/core/Persistence.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "97af02dd974a84c1e4ff481fbf3166bc206b0170",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_Persistence.cpp",
+      "bytes": 27847,
+      "sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1"
+    },
+    "HAL/pico/src/core/ResourceDiagnostics.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "16b1c39e253b6687d880c3e633cec710b9f04409",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_ResourceDiagnostics.cpp",
+      "bytes": 3914,
+      "sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da"
+    },
+    "HAL/pico/src/core/ProfileStore.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "09cb21de1b1dceb2e285f42513f6b2cbe3c63f7f",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_ProfileStore.cpp",
+      "bytes": 79972,
+      "sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8"
+    },
+    "HAL/pico/src/gpio.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "39a8f859e1c9e3ac570adc5d06e711009cd86ae5",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_gpio.cpp",
+      "bytes": 475,
+      "sha256": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c"
+    },
+    "src/core/mode_selection.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "24a5978e850a697f722d660db3cdee773086517c",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-src_core_mode_selection.cpp",
+      "bytes": 10045,
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    "config/glyph/common/src/config.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "cb23706c7a65da1de387cff37b8022a3c95dda73",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-config_glyph_common_src_config.cpp",
+      "bytes": 17902,
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "config/glyph/glyph_mk6/include/glyph_pinout.hpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "3cde279fc38c08e58ddc4283f324c14222d299e8",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-config_glyph_glyph_mk6_include_glyph_pinout.hpp",
+      "bytes": 356,
+      "sha256": "1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6"
+    },
+    "config/glyph/glyph_mk6/include/button_positions.hpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "b5b908d9a25cb021d5b22fc238173455e8fde1db",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-config_glyph_glyph_mk6_include_button_positions.hpp",
+      "bytes": 4733,
+      "sha256": "73b84b62bec59650ed5a027b0d6100bb09109618c65611ca6bf37b8877736e2f"
+    },
+    "HAL/pico/src/core/KeyboardMode.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_KeyboardMode.cpp",
+      "bytes": 642,
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d"
+    },
+    "src/modes/CustomKeyboardMode.cpp": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-src_modes_CustomKeyboardMode.cpp",
+      "bytes": 868,
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def"
+    },
+    "platformio.ini": {
+      "git_sha": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+      "git_blob": "4b33898959f0aa944eb541ea0238e71b56261468",
+      "extracted_path": "/private/tmp/glyph-native-ef22-startup-source-platformio.ini",
+      "bytes": 3517,
+      "sha256": "7093257a6c85ef5a325ee49a86e97f56a12f2bfdac467edfde29ba56399fd405"
+    }
+  },
+  "sdk_inventory_mismatches": [],
+  "absent_optional_source_paths": []
+}

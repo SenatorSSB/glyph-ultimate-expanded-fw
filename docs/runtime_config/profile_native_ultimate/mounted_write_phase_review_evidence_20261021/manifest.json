@@ -1,0 +1,204 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.md",
+      "relative": "glyph-native-AE-mounted-phase-scope-proposal.md",
+      "bytes": 5601,
+      "sha256": "5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d"
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.json",
+      "relative": "glyph-native-AE-mounted-phase-scope-proposal.json",
+      "bytes": 747,
+      "sha256": "9c3c1748ac198fe27148bfd5d7f697e2a21d0513d7157d6ef4ec099aafe1eaf3"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mounted-curator-request-20261021.json",
+      "relative": "glyph-native-mounted-curator-request-20261021.json",
+      "bytes": 4061,
+      "sha256": "26a9755f4526a7674f11c0dc1f50fc2a3b9a6aba3741d1480a5ebe1399f52928"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mounted-curation-private-inputs-20261021.json",
+      "relative": "glyph-native-mounted-curation-private-inputs-20261021.json",
+      "bytes": 3487,
+      "sha256": "c9b55748bd68cb4d0ba7ac8895e61a66295c7aa0d5ce36902b442ee5e52c636f"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-owner-phases.cpp",
+      "raw_sha256": "73d9cb00a3387eb27e3de255c46912c14339fd9ea076dfb8fc5cb22ca8e9f341",
+      "raw_bytes": 84030,
+      "relative": "objects/73d9cb00a3387eb27e3de255c46912c14339fd9ea076dfb8fc5cb22ca8e9f341.gz",
+      "compressed_sha256": "b329a77a2d7c32db9e52673b192ffd70da03208647226ad61a676f1ad6c892bf",
+      "compressed_bytes": 16148,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.disassembly.txt",
+      "raw_sha256": "77189820e458ddc4ce222ec5fa9c067ba1669b5028eb9103ddd95450ca415ac2",
+      "raw_bytes": 759360,
+      "relative": "objects/77189820e458ddc4ce222ec5fa9c067ba1669b5028eb9103ddd95450ca415ac2.gz",
+      "compressed_sha256": "7edfaaf19fe10bcbafdc2bbec2762828f8b8e5961e58a590a6b7ea0804bb809a",
+      "compressed_bytes": 122162,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.o",
+      "raw_sha256": "090f362fd58d1a21378873055a702b0f845c43bd273a7219f18e1b6dffb3bfd0",
+      "raw_bytes": 96380,
+      "relative": "objects/090f362fd58d1a21378873055a702b0f845c43bd273a7219f18e1b6dffb3bfd0.gz",
+      "compressed_sha256": "4a932cd59eb7aa6af04f191dc67a54d3ae26757711d0f54ed4e3c67b1201cf57",
+      "compressed_bytes": 32775,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.su",
+      "raw_sha256": "b0b05c9f0924337ef9a142dc9abff7cfe31ea998957b243d77f564019e83c156",
+      "raw_bytes": 16774,
+      "relative": "objects/b0b05c9f0924337ef9a142dc9abff7cfe31ea998957b243d77f564019e83c156.gz",
+      "compressed_sha256": "ce85fffd837606aae91f6e947acdc3a108d841cf4ca6884a589c0b5567ec11ee",
+      "compressed_bytes": 2227,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-owner-probe/manifest.json",
+      "raw_sha256": "1a761373d5449ddc2ff20a84de6e4d5980408f8aab48aacbd5084478e8ddfa04",
+      "raw_bytes": 4828,
+      "relative": "objects/1a761373d5449ddc2ff20a84de6e4d5980408f8aab48aacbd5084478e8ddfa04.gz",
+      "compressed_sha256": "d5218fcbde42a00f1d6cdbde613ed243741b7eb1072bc9cce30c7ce92cfb9e59",
+      "compressed_bytes": 1496,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.json",
+      "raw_sha256": "9c3c1748ac198fe27148bfd5d7f697e2a21d0513d7157d6ef4ec099aafe1eaf3",
+      "raw_bytes": 747,
+      "relative": "objects/9c3c1748ac198fe27148bfd5d7f697e2a21d0513d7157d6ef4ec099aafe1eaf3.gz",
+      "compressed_sha256": "59bd4c52ba7fb1a0cbe88f858cc95a0ba7b6c6502a6c72790f52c3ad6158cbb6",
+      "compressed_bytes": 441,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.md",
+      "raw_sha256": "5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d",
+      "raw_bytes": 5601,
+      "relative": "objects/5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d.gz",
+      "compressed_sha256": "02febd1bac2914ed648be26dc5b2ab240d0025ae581e890d9bb290def78a99bc",
+      "compressed_bytes": 2760,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021-pins.json",
+      "raw_sha256": "1aa012f02089ea6a59e9974abe1c0448a48e729efd01284a2aa7df20f0f99b00",
+      "raw_bytes": 4435,
+      "relative": "objects/1aa012f02089ea6a59e9974abe1c0448a48e729efd01284a2aa7df20f0f99b00.gz",
+      "compressed_sha256": "68e6092ed0296c4b7cd6fe948faebb15529be8ad8a3fb296012ca23ef6b96c9b",
+      "compressed_bytes": 1490,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.json",
+      "raw_sha256": "e6d8818cdc50e397effd28ef345a926d08bf764788ccdfe601f32c97940cd234",
+      "raw_bytes": 2625,
+      "relative": "objects/e6d8818cdc50e397effd28ef345a926d08bf764788ccdfe601f32c97940cd234.gz",
+      "compressed_sha256": "795fc086539fceb2070317af0a2ccdde8bfbc058104d41b1649e10b8ce6934f8",
+      "compressed_bytes": 1469,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.md",
+      "raw_sha256": "809dfd03d8c488c941af5829385a9555b71cf8715ad08e8c82d8b3ff13d70adf",
+      "raw_bytes": 6618,
+      "relative": "objects/809dfd03d8c488c941af5829385a9555b71cf8715ad08e8c82d8b3ff13d70adf.gz",
+      "compressed_sha256": "25e90087701e007c9dd954a8db00c45e3eb6397467020878dcd32b6ea6186f40",
+      "compressed_bytes": 3282,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-lfs-inner-bound-graph-20261021.json",
+      "raw_sha256": "08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f",
+      "raw_bytes": 91210,
+      "relative": "objects/08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f.gz",
+      "compressed_sha256": "056c26377bb03803bc980c70081882a276c7f6109692849797d4cc1eef96f829",
+      "compressed_bytes": 5334,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-lfs-inner-root-replay-20261021.json",
+      "raw_sha256": "1f860a273bd43fde70690c919fa97a689ba059d3acff54b14bcf74c0ceb3b42f",
+      "raw_bytes": 68314,
+      "relative": "objects/1f860a273bd43fde70690c919fa97a689ba059d3acff54b14bcf74c0ceb3b42f.gz",
+      "compressed_sha256": "5089f2e02ea03a112833268a8cb2ecfa17482d10ca29407afab69ca46694091f",
+      "compressed_bytes": 4095,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.json",
+      "raw_sha256": "d3e4348f95202a64effffcc7b761a9f0e971bc9679a3d5b646c5a14146b10783",
+      "raw_bytes": 26143,
+      "relative": "objects/d3e4348f95202a64effffcc7b761a9f0e971bc9679a3d5b646c5a14146b10783.gz",
+      "compressed_sha256": "5b23f4433768a8820990628968e4061c1500dd6829b80029837eafbed352b87b",
+      "compressed_bytes": 2583,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.md",
+      "raw_sha256": "99ff7ae83a9ad6400c4f70c2258582cdbcd9a2360e9aacaddc0d3aa3eb143f11",
+      "raw_bytes": 15828,
+      "relative": "objects/99ff7ae83a9ad6400c4f70c2258582cdbcd9a2360e9aacaddc0d3aa3eb143f11.gz",
+      "compressed_sha256": "6848632abe89f43802851ff5fd46975823d0e52614c7389224b5d5b0843f034d",
+      "compressed_bytes": 6840,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mounted-curation-private-inputs-20261021.json",
+      "raw_sha256": "c9b55748bd68cb4d0ba7ac8895e61a66295c7aa0d5ce36902b442ee5e52c636f",
+      "raw_bytes": 3487,
+      "relative": "objects/c9b55748bd68cb4d0ba7ac8895e61a66295c7aa0d5ce36902b442ee5e52c636f.gz",
+      "compressed_sha256": "1c3927a6ab84d6bda20ed92f1a0150cc4d84633a800695bbaefadce8dcf89ecc",
+      "compressed_bytes": 1196,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mounted-curator-request-20261021.json",
+      "raw_sha256": "26a9755f4526a7674f11c0dc1f50fc2a3b9a6aba3741d1480a5ebe1399f52928",
+      "raw_bytes": 4061,
+      "relative": "objects/26a9755f4526a7674f11c0dc1f50fc2a3b9a6aba3741d1480a5ebe1399f52928.gz",
+      "compressed_sha256": "e3e34fa65155f2c31a71535c1688ba86d757aebc3bc9eff883625d644063d6c7",
+      "compressed_bytes": 1997,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-root-file-inner-refinement-20261021-pins.json",
+      "raw_sha256": "9ce41994ccf538d1309d7a6a9cd41ce5e8b1c6de9d9d4f33ac29c46387e377c9",
+      "raw_bytes": 2130,
+      "relative": "objects/9ce41994ccf538d1309d7a6a9cd41ce5e8b1c6de9d9d4f33ac29c46387e377c9.gz",
+      "compressed_sha256": "d5fc2ecbcaed853a37c704b3abc02dea33a9575305da2bf63a24a5c6c1aef45d",
+      "compressed_bytes": 932,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-root-file-inner-refinement-20261021.json",
+      "raw_sha256": "10683a6afb0a5ad1d0475f98f8609200e616a292a1ddc3547522dab0a4972740",
+      "raw_bytes": 7345,
+      "relative": "objects/10683a6afb0a5ad1d0475f98f8609200e616a292a1ddc3547522dab0a4972740.gz",
+      "compressed_sha256": "5c7884b6e94542181a85473763abf04d20990b7d9c9d0eb9acb9d378c59b1ca7",
+      "compressed_bytes": 1773,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-root-file-inner-refinement-20261021.md",
+      "raw_sha256": "106b000fae9023696cf02cdb8f6ea0b01a59a007fa72eb1ab10fb6ee7009f390",
+      "raw_bytes": 10058,
+      "relative": "objects/106b000fae9023696cf02cdb8f6ea0b01a59a007fa72eb1ab10fb6ee7009f390.gz",
+      "compressed_sha256": "cbcb81fec6729c09c670e5c962d1dfbd8046a7cc9c70dabfd689e2f34fd72aa7",
+      "compressed_bytes": 4449,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}

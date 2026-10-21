@@ -1,0 +1,22 @@
+{
+  "state": "PROPOSAL_ONLY_PRODUCTION_HOLD",
+  "report_sha256": "5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d",
+  "variant_sha256": "73d9cb00a3387eb27e3de255c46912c14339fd9ea076dfb8fc5cb22ca8e9f341",
+  "manifest": "/private/tmp/glyph-native-AE-mounted-owner-probe/manifest.json",
+  "frame_bytes": {
+    "existing_adapter": 40,
+    "new_adapter": 16,
+    "new_open_helper": 16,
+    "new_write_helper": 8,
+    "new_sync_helper": 8,
+    "new_close_helper": 16
+  },
+  "new_scalar_metadata_arm_bytes": 20,
+  "new_File_owners": 0,
+  "new_buffer_owners": 0,
+  "caller_before": 280,
+  "caller_after_authorized_publication": 272,
+  "caller_after_proposed_adapter": 264,
+  "conditional_total_with_336": 2048,
+  "total_with_348": 2060
+}

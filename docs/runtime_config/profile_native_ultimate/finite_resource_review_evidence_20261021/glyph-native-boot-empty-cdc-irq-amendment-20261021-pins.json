@@ -1,0 +1,83 @@
+{
+  "kind": "BOOT_EMPTY_CDC_SOURCE_ELF_AMENDMENT_PINS",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "files": {
+    "/private/tmp/glyph-native-boot-irq-ef22-config.cpp": {
+      "bytes": 17902,
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "/private/tmp/glyph-native-boot-irq-ef22-backend_init.cpp": {
+      "bytes": 11708,
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0"
+    },
+    "/private/tmp/glyph-native-boot-irq-ef22-NintendoSwitchBackend.cpp": {
+      "bytes": 6691,
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25"
+    },
+    "/private/tmp/glyph-native-boot-irq-ef22-ProfileStoreReadTrace.hpp": {
+      "bytes": 1113,
+      "sha256": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456"
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.md": {
+      "bytes": 6618,
+      "sha256": "809dfd03d8c488c941af5829385a9555b71cf8715ad08e8c82d8b3ff13d70adf"
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.json": {
+      "bytes": 2625,
+      "sha256": "e6d8818cdc50e397effd28ef345a926d08bf764788ccdfe601f32c97940cd234"
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021-frames.json": {
+      "bytes": 37263,
+      "sha256": "56db98fba51e7b390174c0476828988198f21b2dac17f59091a40fe6946eea28"
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021-pins.json": {
+      "bytes": 10586,
+      "sha256": "579fc49cd67457fcf52d3e3311c186ec6ecf5258c7c6a6d7da48d0358c90c376"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021.md": {
+      "bytes": 19948,
+      "sha256": "bd39d238f52c114fa97da3863006a3168041b4a5a59ca6c0246dce857b600923"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021-manifest.json": {
+      "bytes": 15566,
+      "sha256": "f2da41a6c12f96f5db6e660af42b60d9d35cd7dfbeeb8d078b7d664b96cb4821"
+    },
+    "/private/tmp/glyph-native-ef22-focused-exact-functions.json": {
+      "bytes": 2814827,
+      "sha256": "53310849647be5db0fae6762a382e1f64694336532851d4b830503431abc1a2b"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": {
+      "bytes": 15750,
+      "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c": {
+      "bytes": 7503,
+      "sha256": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp": {
+      "bytes": 7486,
+      "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp": {
+      "bytes": 17806,
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "bytes": 4652,
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/tusb_config_rp2040.h": {
+      "bytes": 4465,
+      "sha256": "ea34ac31fbcdfc005d96f8b2ac2fea8b17dde29c7ac98683f95649ea8511895f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/time.c": {
+      "bytes": 17699,
+      "sha256": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04"
+    }
+  }
+}

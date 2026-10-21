@@ -1,0 +1,94 @@
+{
+  "schema_name": "glyph_gp_native_001_mounted_write_phase_curation",
+  "schema_version": 1,
+  "disposition": "ADOPT_BOUNDED",
+  "role": "Glyph Work-Order Curator",
+  "finite_role_complete": true,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "recorded_utc": "2026-10-21T12:10:40.136257+00:00",
+  "authority": "Same READY GP-NATIVE-001, adopted lifetime amendments and direct owner broader-filesystem decision. Finite measured adapter layout clarification, no new product/order/successor/domain decision. Root sole canonical publisher. Independent review of this amendment is this Curator adjudication, not implementation review, resource PASS or hardware acceptance.",
+  "input_pins": {
+    "canonical_local_sha": "7faa85fecbac4940a1a4c1d8310b85baaced460e",
+    "canonical_status": "CLEAN",
+    "live_verification": "Root-supplied live readback; Curator checked exact local HEAD only. Publisher refreshes live truth before publication.",
+    "candidate_source_sha": "724bc6eba0715b9c796062ee9608d0c907697066",
+    "candidate_source_tree": "e399fbda2b384e1b65322ca519dc07a775cd636d",
+    "frozen_source_sha256": {
+      "HAL/pico/src/core/ProfileStore.cpp": "09fe9dc2f6d7588a92a15917297f8b5005a93e5580abe94880f1b54cf1db2f25",
+      "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "include/core/CheckedStorage.hpp": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e",
+      "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1"
+    },
+    "canonical_sha256": {
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "4f35c4566b58f9b7bc3cbe7796d34479d93a0f221191fb03acf473ab3f904b4b",
+      "docs/project/ACTIVE_AGENT_QUEUE.md": "4a080ab83d88772c1902338f676c9fb35af2e027a2e4997fcd8ffb3033eeccbe",
+      "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e"
+    },
+    "private_inputs_sha256": {
+      "/private/tmp/glyph-native-mounted-curator-request-20261021.json": "26a9755f4526a7674f11c0dc1f50fc2a3b9a6aba3741d1480a5ebe1399f52928",
+      "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.md": "5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d",
+      "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.json": "9c3c1748ac198fe27148bfd5d7f697e2a21d0513d7157d6ef4ec099aafe1eaf3",
+      "/private/tmp/glyph-native-AE-mounted-owner-phases.cpp": "73d9cb00a3387eb27e3de255c46912c14339fd9ea076dfb8fc5cb22ca8e9f341",
+      "/private/tmp/glyph-native-AE-mounted-owner-probe/manifest.json": "1a761373d5449ddc2ff20a84de6e4d5980408f8aab48aacbd5084478e8ddfa04",
+      "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.md": "99ff7ae83a9ad6400c4f70c2258582cdbcd9a2360e9aacaddc0d3aa3eb143f11",
+      "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.json": "d3e4348f95202a64effffcc7b761a9f0e971bc9679a3d5b646c5a14146b10783",
+      "/private/tmp/glyph-native-lfs-inner-bound-graph-20261021.json": "08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f",
+      "/private/tmp/glyph-native-lfs-inner-root-replay-20261021.json": "1f860a273bd43fde70690c919fa97a689ba059d3acff54b14bcf74c0ceb3b42f",
+      "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.md": "809dfd03d8c488c941af5829385a9555b71cf8715ad08e8c82d8b3ff13d70adf",
+      "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.json": "e6d8818cdc50e397effd28ef345a926d08bf764788ccdfe601f32c97940cd234",
+      "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021-pins.json": "1aa012f02089ea6a59e9974abe1c0448a48e729efd01284a2aa7df20f0f99b00",
+      "/private/tmp/glyph-native-root-file-inner-refinement-20261021.md": "106b000fae9023696cf02cdb8f6ea0b01a59a007fa72eb1ab10fb6ee7009f390",
+      "/private/tmp/glyph-native-root-file-inner-refinement-20261021.json": "10683a6afb0a5ad1d0475f98f8609200e616a292a1ddc3547522dab0a4972740",
+      "/private/tmp/glyph-native-root-file-inner-refinement-20261021-pins.json": "9ce41994ccf538d1309d7a6a9cd41ce5e8b1c6de9d9d4f33ac29c46387e377c9",
+      "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.o": "090f362fd58d1a21378873055a702b0f845c43bd273a7219f18e1b6dffb3bfd0",
+      "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.su": "b0b05c9f0924337ef9a142dc9abff7cfe31ea998957b243d77f564019e83c156",
+      "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.disassembly.txt": "77189820e458ddc4ce222ec5fa9c067ba1669b5028eb9103ddd95450ca415ac2"
+    }
+  },
+  "finding": "Current MountedStorage::CheckedWrite owns one static File and static r/close Results but retains method40 while calling Open. Private owner-relocated O3 variant measures wrapper16 + Open16, transfer8/sync8/close16 returned siblings. Prior args-only/owner-retaining probes are rejected history, not repeated unchanged. Probe source/object/argv pinned and object rehashed; not final target firmware or acceptance. Compiler manifest stale FIRMWARE_VERSION 3b792fd7-DIRTY is private probe metadata, not candidate identity.",
+  "exact_permission": {
+    "source_path": "HAL/pico/src/core/ProfileStore.cpp",
+    "methods": [
+      "MountedStorage::CheckedWrite",
+      "necessary translation-unit-private noinline OpenMountedWrite/TransferMountedWrite/SyncMountedWrite/CloseMountedWrite (or exact equivalent) helpers and metadata declarations"
+    ],
+    "public_signature_and_overrides_unchanged": true,
+    "no_header_or_other_method_expansion": true,
+    "owners": "Relocate the SAME one pre-existing static CheckedStorage::File and SAME static Result r/close scratch from the method to translation-unit fixed workspace, preserving counts/type/size/alignment/initialization and lifetime. No new File/Result owner, second slot, buffer/path/body/directory/wire owner or persistent format/API. The underlying CheckedStorage implementation and class unchanged.",
+    "metadata": "Only new borrowed scalar inputs {MountedStorage *owner,const char *path,const uint8_t *bytes,size_t length,Kind kind}, max20 bytes each supported ARM ABI plus measured <=4 bytes alignment overhead. Entire prior TOTAL512 includes these bytes and all previous layout fields; original199632/12288 and every other cap still applies. No string/data copy, escaping borrow, dynamic initialization/guard, queue/heap/lock/retry/reentry flag.",
+    "entry": "Assign inputs from SAME this,p,b,n,k at original synchronous call entry. Do NOT clear/reset/reinitialize existing File/native/path/mount/flags/result objects on entry or exit; preserve opened=false precondition and original native state after Close. No runtime guard or changed refusal behavior.",
+    "sequence": [
+      "Open phase placement-constructs SAME r from SAME CheckedStorage::Open(file,p,true,k). On !r do not call checked Write/Sync/Close; same CheckedStorage::Open lost-ack cleanup already releases native handle.",
+      "Only acknowledged bool(r) from Open reaches SAME Write(file,b,n). Only acknowledged bool(r) from Write reaches SAME Sync(file). Each phase returns before next starts; no retest using a different Result or added operation.",
+      "After successful acknowledged Open call SAME checked Close(file) EXACTLY ONCE regardless of Write/Sync result. Placement-construct SAME close Result. Only if !close overwrite r=close, preserving original failure precedence, bytes/operation/outcome/uncertainty fields. No extra destructor/close or suppressed cleanup.",
+      "Call SAME owner Remember(r,true,n) after all reached primitives, once on every original path including Open failure. Preserve diagnostics/short-write/fault classification exactly.",
+      "Clear ONLY new borrowed metadata on EVERY normal/error exit AFTER Remember and BEFORE returning SAME r by value. Preserve old retained r/close/File state and no borrowed pointer in new metadata after return. All owner/path/body lifetimes remain through exact synchronous operation."
+    ],
+    "nonreentry": "Same synchronous core0 store/publication lane; no IRQ/core1 filesystem writer or callback recursively enters store/publication/CheckedWrite. Production checked-storage fault invocation compiles inert; strict candidate Hook only classifies state and never calls writer. Storage/trace/fault test callbacks remain observation/classification, not mutating reentry. File/Result/inputs shared across exact synchronous adapters cannot overlap; no reentrant public API is added. Audit new actual call/indirect source and test every error/reset boundary; if real overlap appears, stop rather than creating another owner, runtime guard/refusal or inferred exclusion."
+  },
+  "resource_qualifications": {
+    "conditional_boot_equation": "264+1448+336=2048; generic348 instead gives2060. This is conditional upper arithmetic, not feasible overflow/target observation or whole-stack PASS. U1448 already includes pre-mask16, do not add16 again. Compare masked alternatives separately.",
+    "boot336": "Independent boot packet proves USB upper320 but retains alarm alternative complete336. Applies only actual first setup storage phases before backend/Configurator/TX producers, with default serial/empty TX and pinned priorities/callback lifecycle; not later service retries. Wholeboot308 is unproved. Generic Configurator348 unchanged.",
+    "root_file_refinement": "Independent root-file packet OpenU1208/M1320 and Sync/Close conditional uppers applies only root-prefix valid recoverable histories after acknowledged generic consistency-bearing temp Remove, read-only input and no other writer, with complete root-prefix predecessor closure. It does not narrow supported unrelated-dir/orphan/MOVE domain or apply to arbitrary mutation/firstRemove/failed barrier. Caller488 remains writer preliminary input pending final ELF.",
+    "prior_arithmetic_errata": "Prior read-lookup sum568/upper588 and Identity2068/2100 correction remains load-bearing; preserve old immutable report plus explicit erratum, not obsolete668/688 arithmetic. Scope of previous A-E remains unchanged.",
+    "whole_resource_gate": "NATIVE-REVIEW-P1-STACK OPEN. Final exact all31 source/linked ELF/IRQ/ROM/PRIMASK proof mandatory. No resource/hardware PASS or device authority."
+  },
+  "validation": [
+    "Actual DEFAULT production MountedStorage path over pinned CheckedStorage/NOR/LittleFS, not only injected ProfileStoreStorage override. Old/new exact primitive trace/result/operation/outcome/bytes/Remember LastFailure and rawNOR equality; both ABIs and current source pins.",
+    "Before/After Fail/LostAck at Open/Write/Sync/Close including failed Open native cleanup, short-write, Write/Sync failure still exactly-one Close, Close failure overriding prior failure, uncertainty fields, opened=false and next operation across different MountedStorage owners. New inputs clear on every exit, original File/result state preserved.",
+    "Full old/new six-operation publication differential1071rows/1064faults (or complete current expanded trace manifest) both ABIs/rawNOR/status/token/receipt/generation/fence/active/diagnostic/reboot/query/recovery; native20profile lifecycle and actual Mounted16 fault controls. Historical PASS stays attributed, rerun for changed source.",
+    "Meaningful mutants for omitted Close, bad failure precedence, Sync reordering, stale owner/path/data/length/reset, accidental new owner or recursive callback overlap. Preserve current strict fault scope/RX/native payload lease and publication order; no new test-framework scope.",
+    "Exact ARM both-ABI sizeof/alignof/symbol/static initialization and owner-count evidence for same File/Results, only20(+<=4 alignment) new metadata, aggregate TOTAL512 and all original caps. Private source/object probe is engineering evidence; final clean committed ELF must re-establish actual wrapper/helper/caller frames and every Open/Write/Sync/Close/readback/late-repair branch across all31 classes.",
+    "Final complete candidate source/linked ELF/map/disassembly/.su/dependency/generated/compiler/source identity, fresh independent implementation/resource review, canonical Mk6 build, exact ELF/UF2 hashes/size/content-addressed custody, concrete reviewed packet and separate owner device approval then exact human HEP PASS before integration/strictDONE. Watermark supplementary only; Tier1/affectedTier2 failure/incomplete block honestly."
+  ],
+  "protected": "Every original cap/source boundary/frozen architecture/M1/oracle/active-candidate-view/transaction/filesystem/partition/reserve/capacity/identity16-72/diagnostic design remains exact. No SDK/IRQ/startup/optimization/config.cpp/native algorithm/transport/domain/API/semantic/device authority. Historical records/probes/error/PASS chronology preserved, Nunchuk NOT_TESTED/root cause UNPROVEN.",
+  "activation": "Root publishes exact source-free record and matching implementation contract plus sole GP-NATIVE-001 scope append after independent inspection/focused doc checks/fresh canonical verification; LIVE readback BEFORE writer edits. No source implementation until then. No new path addition or other-order change.",
+  "publication": {
+    "record_path": "docs/runtime_config/profile_native_ultimate/mounted_write_phase_scope_amendment_20261021.json",
+    "sole_order_id": "GP-NATIVE-001",
+    "scope_append_text": "GP-NATIVE-001 narrow MountedStorage write-phase clarification2026-10-21: adopt ONLY docs/runtime_config/profile_native_ultimate/mounted_write_phase_scope_amendment_20261021.json. Existing HAL/pico/src/core/ProfileStore.cpp MountedStorage::CheckedWrite may relocate SAME one static File and SAME r/close Result owners to TU workspace and use private returning Open/Write/Sync/Close phases; preserve signature, exact conditional primitive sequence, one Close after successful Open even Write/Sync failure, Close-failure override and SAME Remember(r,true,n). Add ONLY <=20-byte borrowed owner/path/data/length/kind metadata plus measured<=4alignment, clear ONLY this metadata every exit after Remember, preserve old File/native/results state and synchronous core0 nonreentry. No new owner/slot/buffer/API/guard. Prior TOTAL512/all original caps/frozen contracts remain exact. Conditional boot264+1448+complete336=2048 is not resource PASS; generic348 and all31 final source/ELF/IRQ/ROM/tests/bothABI/review/build/custody/hardware gates remain. No source edit before canonical adoption/live readback or device authority."
+  }
+}

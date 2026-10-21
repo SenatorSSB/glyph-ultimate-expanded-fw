@@ -1,0 +1,34 @@
+{
+  "kind": "EXPLICIT_READ_SUM_ARITHMETIC_ERRATUM",
+  "exact_ef22_ELF_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "frame_terms": [
+    88,
+    16,
+    80,
+    96,
+    152,
+    72,
+    64
+  ],
+  "read_lookup_definite_bytes": 568,
+  "read_lookup_upper_bytes": 588,
+  "old_definite668_and_upper688": "INCORRECT_ARITHMETIC_100_BYTE_EXCESS; frames/edges themselves unchanged",
+  "corrected": {
+    "Identity_Prepare_feasible": 2068,
+    "Identity_Execute_feasible": 2100,
+    "Identity_Prepare_upper": 2136,
+    "Identity_Execute_upper": 2168,
+    "direct_Prepare_hash_upper": 1856,
+    "direct_Execute_hash_upper": 1888,
+    "hypothetical_Identity8_Execute_upper": 1896,
+    "CheckedStat_upper": 532
+  },
+  "unchanged": {
+    "copy_source_composition": 2308,
+    "boot_IRQ": 300,
+    "CDC_IRQ": 340
+  },
+  "historical_reports": "Preserved unchanged; this erratum supersedes their read-sum numbers only",
+  "observed_hardware_overflow": false,
+  "whole_resource_PASS": false
+}

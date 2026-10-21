@@ -1,0 +1,48 @@
+{
+  "kind": "BOOT_CDC_EMPTY_TX_USB320_WHOLE_IRQ336_UPPER_AMENDMENT",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+  "elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "scope": "first setup boot Load/Begin/BeginRecovery and subsequent pre-initialize_backends storage, before any Configurator service or normal loop",
+  "CDC_TX_empty": "source-proven within scope; initial cdcd_init/reset clear TX; all actual writes require later Configurator/viewer/runtime Poll; callbacks fill RX or control EP only",
+  "serial_descriptor": "default null in cleared configuration; sole actual setSerialDescriptor caller NintendoSwitch backend constructor is later than Begin",
+  "USB_upper_bytes": 320,
+  "whole_boot_IRQ_upper_bytes": 336,
+  "whole_boot_IRQ_reason": "separate masked default alarm bound336 retained; samepriority external IRQ alternatives do not nest",
+  "CDC_OUT_feasible_no_pad": {
+    "C_frames": [
+      8,
+      112,
+      40,
+      8,
+      16,
+      24,
+      32
+    ],
+    "C_sum": 240,
+    "exception": 32,
+    "SysTick": 44,
+    "sum": 316,
+    "predicate": "host configures CDC, sends first <=64-byte OUT; RX256 retains>=64space; endpoint rearm claim32 pre-CPSID can be interrupted by SysTick"
+  },
+  "alignment": "Hardware exception aligns MSP8. C240 deepest branch is8aligned => nested SysTick pad0, outerpad<=4. At C<=236 odd4 branch, at most8 padding gives<=320. Default serial C236+32+44+8=320.",
+  "source_exclusions": [
+    "CDC TX nonempty flush/claim child24 excluded while emptyTX",
+    "configured serial UTF16 child48 excluded before backend setters",
+    "control-completion wrapper16 cannot retain class SETUP transfer32 simultaneously: DATA/ACK branch guards",
+    "weak CDC RX/wanted/TXcomplete/sendbreak/linecoding callback targets0; line-state has only DFU path",
+    "core1 setup waits boot Pending and delay has no serial writer; no loop runs on core0 before setup returns",
+    "endpoint contention excluded only in scoped foreground FS interrupt by returned producers/core1 no writer invariant"
+  ],
+  "counterexample_to_308": true,
+  "alarm_refinement_not_claimed": "sleep_until does not cancel its alarm on return; no two-core/two-node occupancy assertion is used",
+  "example_upper": {
+    "caller": 280,
+    "Open_U": 1448,
+    "boot_IRQ": 336,
+    "sum": 2064,
+    "kind": "conservative upper; not physical overflow witness"
+  },
+  "generic_Configurator_IRQ348": "preserved unchanged; this boot source predicate does not apply after serial responses",
+  "whole_resource_PASS": false
+}

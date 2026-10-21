@@ -1,0 +1,221 @@
+{
+  "kind": "INDEPENDENT_ROOT_FILE_REPAIR_REFINEMENT_SOURCE_PROOF",
+  "disposition": "ACCEPTED_WITH_EXPLICIT_CURRENT_SOURCE_AND_VALID_NAMESPACE_PREDICATES",
+  "candidate_sdk_elf": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "new_application_callers": "writer-supplied preliminary O3 caller488, not a final linked candidate certificate",
+  "domain": "existing broad structurally valid recoverable LittleFS histories, including foreign directories, positive orphan, PENDING_MOVE; arbitrary malformed CRC-valid namespace aliases/cycles remain outside owner support, without claiming Begin validates them",
+  "invariants": [
+    "root metadata is parentless contiguous global tail prefix from reserved0,1 through root head/split tails",
+    "split inserts after its own source; mkdir inserts directory head after parent last split segment; valid DIRSTRUCT targets are nonroot directory heads",
+    "completed true consistency resolves actual move/full/half orphan records; phantom residual counter can scan but has no actual repair action",
+    "acknowledged first Remove includes final deletion/drop; failure or uncertainty stops before copy",
+    "no intervening parent-generating mutator: input is read only, then only same root regular output Open/Write/Sync/Close; no core1/IRQ filesystem writer",
+    "orphaningcommit ORPHANED flag is set only if a found DIRSTRUCT parent itself relocates; root prefix and all relocation predecessors cannot take that branch"
+  ],
+  "bounds": {
+    "ROOT_CHECKED_OPEN": {
+      "E": {
+        "bytes": 1192,
+        "chain": [
+          "ROOT_CHECKED_OPEN",
+          "ROOT_PUBLIC_OPEN",
+          "ROOT_RAWOPEN",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1208,
+        "chain": [
+          "ROOT_CHECKED_OPEN",
+          "ROOT_PUBLIC_OPEN",
+          "ROOT_RAWOPEN",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1320,
+        "chain": [
+          "ROOT_CHECKED_OPEN",
+          "ROOT_PUBLIC_OPEN",
+          "ROOT_RAWOPEN",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "ROOT_CHECKED_SYNC": {
+      "E": {
+        "bytes": 1064,
+        "chain": [
+          "ROOT_CHECKED_SYNC",
+          "ROOT_PUBLIC_SYNC",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1080,
+        "chain": [
+          "ROOT_CHECKED_SYNC",
+          "ROOT_PUBLIC_SYNC",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1192,
+        "chain": [
+          "ROOT_CHECKED_SYNC",
+          "ROOT_PUBLIC_SYNC",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "ROOT_CHECKED_CLOSE": {
+      "E": {
+        "bytes": 1072,
+        "chain": [
+          "ROOT_CHECKED_CLOSE",
+          "ROOT_PUBLIC_CLOSE",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1088,
+        "chain": [
+          "ROOT_CHECKED_CLOSE",
+          "ROOT_PUBLIC_CLOSE",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1200,
+        "chain": [
+          "ROOT_CHECKED_CLOSE",
+          "ROOT_PUBLIC_CLOSE",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "ROOT_FORCE_NO_REPAIR": {
+      "E": {
+        "bytes": 516,
+        "chain": [
+          "ROOT_FORCE_NO_REPAIR",
+          "ROOT_DEORPHAN_SCAN",
+          "FETCH_PARENT",
+          "lfs_fs_parent_match",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 516,
+        "chain": [
+          "ROOT_FORCE_NO_REPAIR",
+          "ROOT_DEORPHAN_SCAN",
+          "FETCH_PARENT",
+          "lfs_fs_parent_match",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "ROOT_FORCE_NO_REPAIR"
+        ]
+      }
+    }
+  },
+  "other_phase_bounds": {
+    "Write_U": 708,
+    "Write_M": 616,
+    "readOnly_Close_U": 176,
+    "readOnly_Close_M": 200,
+    "after_successful_Sync_Close_U": 176,
+    "after_successful_Sync_Close_M": 200,
+    "ERRED_Close_U": 88,
+    "ERRED_Close_M": 200
+  },
+  "example": {
+    "writer_caller": 488,
+    "root_Open_U": 1208,
+    "generic_IRQ": 348,
+    "sum": 2044,
+    "root_Open_M": 1320,
+    "masked_total": 1808,
+    "status": "conditional exact final caller/source/ELF correspondence required; no whole PASS"
+  },
+  "exclusions_not_generalized": [
+    "not generic mutable Open for an arbitrary caller",
+    "not first Remove; first Remove keeps generic1384/1496",
+    "not Rename/directory creation or moving/dropping foreign directories after first Remove",
+    "not a failed/uncertain true consistency",
+    "not arbitrary CRC-valid alias/cycle corruption",
+    "not armed fault callback side effects or concurrent external FS mutation"
+  ],
+  "whole_resource_PASS": false,
+  "physical_overflow_or_hardware_acceptance": false
+}

@@ -1,0 +1,732 @@
+{
+  "kind": "ROOT_INDEPENDENT_ARITHMETIC_REPLAY_NO_NEW_GRAPH_OR_AUTHORITY",
+  "utc": "2026-10-21T11:44:33.177832+00:00",
+  "inputs": {
+    "/private/tmp/glyph-native-read-sum-arithmetic-erratum-20261021.md": {
+      "sha256": "6466bdf7b0099ad98a2b24ae5e1f1989fcbddda7e438944f0418b9f88b5dcc28",
+      "bytes": 1457
+    },
+    "/private/tmp/glyph-native-read-sum-arithmetic-erratum-20261021.json": {
+      "sha256": "a90dd1e95684b5ce21b59548753213c5bd360c4157f2d1be0472e0dcb207a7be",
+      "bytes": 1007
+    },
+    "/private/tmp/glyph-native-9cff-source-resource-review-20261021.json": {
+      "sha256": "462fc3bc4101a947ad8ab2b65c231b42675ab401a0e59c209567e1cc0a990ae2",
+      "bytes": 33539
+    }
+  },
+  "computed_component_sums": {
+    "lookup_definite": {
+      "terms_bytes": [
+        88,
+        16,
+        80,
+        96,
+        152,
+        72,
+        64
+      ],
+      "sum_bytes": 568
+    },
+    "lookup_upper": {
+      "terms_bytes": [
+        88,
+        16,
+        80,
+        96,
+        152,
+        72,
+        64,
+        8,
+        12
+      ],
+      "sum_bytes": 588
+    },
+    "CheckedStat_upper": {
+      "terms_bytes": [
+        72,
+        56,
+        96,
+        152,
+        72,
+        64,
+        8,
+        12
+      ],
+      "sum_bytes": 532
+    },
+    "Identity_Prepare_feasible": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        64,
+        280,
+        656,
+        568,
+        300
+      ],
+      "sum_bytes": 2068
+    },
+    "Identity_Execute_feasible": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        96,
+        280,
+        656,
+        568,
+        300
+      ],
+      "sum_bytes": 2100
+    },
+    "Identity_Prepare_upper": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        64,
+        280,
+        656,
+        588,
+        348
+      ],
+      "sum_bytes": 2136
+    },
+    "Identity_Execute_upper": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        96,
+        280,
+        656,
+        588,
+        348
+      ],
+      "sum_bytes": 2168
+    },
+    "direct_Prepare_hash_upper": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        64,
+        656,
+        588,
+        348
+      ],
+      "sum_bytes": 1856
+    },
+    "direct_Execute_hash_upper": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        96,
+        656,
+        588,
+        348
+      ],
+      "sum_bytes": 1888
+    },
+    "hypothetical_Identity8_Execute_upper": {
+      "terms_bytes": [
+        48,
+        136,
+        16,
+        96,
+        8,
+        656,
+        588,
+        348
+      ],
+      "sum_bytes": 1896
+    }
+  },
+  "all_original_ten_witness_sums_replayed": [
+    {
+      "id": "BOOT-RECONCILE-CONTROL",
+      "historical_foreground_sum": 1824,
+      "historical_total_sum": 2140,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Begin",
+          24
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1824,
+      "premask": 16,
+      "feasible_irq": 300,
+      "corrected_total": 2140,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "BOOT-RECONCILE-ABORT",
+      "historical_foreground_sum": 1848,
+      "historical_total_sum": 2164,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Begin",
+          24
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "PublishDirectory",
+          24
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1848,
+      "premask": 16,
+      "feasible_irq": 300,
+      "corrected_total": 2164,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "CONFIGURATOR-RECONCILE-CONTROL",
+      "historical_foreground_sum": 1800,
+      "historical_total_sum": 2116,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Dispatch",
+          56
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1800,
+      "premask": 16,
+      "feasible_irq": 300,
+      "corrected_total": 2116,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "CONFIGURATOR-RECONCILE-ABORT",
+      "historical_foreground_sum": 1824,
+      "historical_total_sum": 2140,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Dispatch",
+          56
+        ],
+        [
+          "Reconcile",
+          112
+        ],
+        [
+          "PublishDirectory",
+          24
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1824,
+      "premask": 16,
+      "feasible_irq": 300,
+      "corrected_total": 2140,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "UPDATE-FIRST-RECORD",
+      "historical_foreground_sum": 1696,
+      "historical_total_sum": 2052,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Update",
+          48
+        ],
+        [
+          "PublishPreparedProfile",
+          16
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1696,
+      "premask": 16,
+      "feasible_irq": 340,
+      "corrected_total": 2052,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "DUPLICATE-FIRST-RECORD",
+      "historical_foreground_sum": 1696,
+      "historical_total_sum": 2052,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "Duplicate",
+          32
+        ],
+        [
+          "Create",
+          32
+        ],
+        [
+          "ExecutePublication",
+          32
+        ],
+        [
+          "MountedCheckedWrite",
+          40
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "forceconsistency",
+          64
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1696,
+      "premask": 16,
+      "feasible_irq": 340,
+      "corrected_total": 2052,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "LEGACY-SET-FIRST-REMOVE",
+      "historical_foreground_sum": 1880,
+      "historical_total_sum": 2196,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "SendReport",
+          48
+        ],
+        [
+          "HandleSetConfig-public",
+          48
+        ],
+        [
+          "HandleSetConfig-part",
+          304
+        ],
+        [
+          "SaveConfig",
+          16
+        ],
+        [
+          "RemoveSaveTemporary",
+          16
+        ],
+        [
+          "CheckedRemove",
+          48
+        ],
+        [
+          "lfs_remove",
+          136
+        ],
+        [
+          "deorphan",
+          176
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1880,
+      "premask": 16,
+      "feasible_irq": 300,
+      "corrected_total": 2196,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "COPY-OUTPUT-OPEN",
+      "historical_foreground_sum": 1992,
+      "historical_total_sum": 2308,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Capture",
+          16
+        ],
+        [
+          "ExecuteCapture",
+          96
+        ],
+        [
+          "copy",
+          504
+        ],
+        [
+          "CheckedOpen",
+          88
+        ],
+        [
+          "fileopen",
+          16
+        ],
+        [
+          "rawopen",
+          80
+        ],
+        [
+          "ordinary_commit_program",
+          1008
+        ]
+      ],
+      "corrected_foreground": 1992,
+      "premask": 16,
+      "feasible_irq": 300,
+      "corrected_total": 2308,
+      "arithmetic_changed": false,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "IDENTITY-EXISTING",
+      "historical_foreground_sum": 1868,
+      "historical_total_sum": 2168,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Capture",
+          16
+        ],
+        [
+          "PrepareCapture",
+          64
+        ],
+        [
+          "LegacySourceIdentity",
+          280
+        ],
+        [
+          "hash_file",
+          656
+        ],
+        [
+          "definite_readOpen_prefix",
+          568
+        ]
+      ],
+      "corrected_foreground": 1768,
+      "premask": 0,
+      "feasible_irq": 300,
+      "corrected_total": 2068,
+      "arithmetic_changed": true,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    },
+    {
+      "id": "IDENTITY-PUBLISHED",
+      "historical_foreground_sum": 1900,
+      "historical_total_sum": 2200,
+      "corrected_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Capture",
+          16
+        ],
+        [
+          "ExecuteCapture",
+          96
+        ],
+        [
+          "LegacySourceIdentity",
+          280
+        ],
+        [
+          "hash_file",
+          656
+        ],
+        [
+          "definite_readOpen_prefix",
+          568
+        ]
+      ],
+      "corrected_foreground": 1800,
+      "premask": 0,
+      "feasible_irq": 300,
+      "corrected_total": 2100,
+      "arithmetic_changed": true,
+      "reachability_classification": "Unchanged by this arithmetic replay; apply separate lifecycle erratum to service-reconciliation rows"
+    }
+  ],
+  "historical_files_modified": false,
+  "new_source_or_scope_authority": false,
+  "whole_resource_PASS": false,
+  "qualification": "Arithmetic-only replay of existing labeled components. No new call-edge, interrupt or joint-state reachability proof; separate lifecycle correction remains authoritative for withdrawn service witnesses. Exact final source/ELF proof remains OPEN."
+}

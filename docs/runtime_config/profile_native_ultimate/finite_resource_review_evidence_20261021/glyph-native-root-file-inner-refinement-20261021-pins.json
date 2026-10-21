@@ -1,0 +1,45 @@
+{
+  "kind": "INDEPENDENT_ROOT_FILE_CONTEXT_PROOF_PINS",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "files": {
+    "/private/tmp/glyph-native-root-file-inner-refinement-20261021.md": {
+      "bytes": 10058,
+      "sha256": "106b000fae9023696cf02cdb8f6ea0b01a59a007fa72eb1ab10fb6ee7009f390"
+    },
+    "/private/tmp/glyph-native-root-file-inner-refinement-20261021.json": {
+      "bytes": 7345,
+      "sha256": "10683a6afb0a5ad1d0475f98f8609200e616a292a1ddc3547522dab0a4972740"
+    },
+    "/private/tmp/glyph-native-root-file-inner-refinement-20261021-graph.json": {
+      "bytes": 59393,
+      "sha256": "96cf6c84fa7b04a54a1d4fa812173df903919973fd27f7baa01762cc55938370"
+    },
+    "/private/tmp/glyph-native-AE-root-file-repair-refinement.md": {
+      "bytes": 4448,
+      "sha256": "786de66a32ae83edae9d6f223ac7f275f7873217cd1d2977734dc3fd481b5252"
+    },
+    "/private/tmp/glyph-native-AE-root-file-repair-refinement-pins.json": {
+      "bytes": 400,
+      "sha256": "51bbefe0d00774b705db5a20b82dc4821d805a966f4f3252a1246af0cb82873a"
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021-pins.json": {
+      "bytes": 10586,
+      "sha256": "579fc49cd67457fcf52d3e3311c186ec6ecf5258c7c6a6d7da48d0358c90c376"
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.md": {
+      "bytes": 15828,
+      "sha256": "99ff7ae83a9ad6400c4f70c2258582cdbcd9a2360e9aacaddc0d3aa3eb143f11"
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021-pins.json": {
+      "bytes": 4435,
+      "sha256": "1aa012f02089ea6a59e9974abe1c0448a48e729efd01284a2aa7df20f0f99b00"
+    },
+    "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021.md": {
+      "bytes": 7849,
+      "sha256": "51ca34f50cae1f014ba376972c10d4b9daf7c4651411df77f636439ba3b0084f"
+    }
+  },
+  "SDK_and_ELF_sources": "transitively pinned by LFS inner pins; no dirty application source used for SDK claim",
+  "final_correspondence": "writer caller488 is preliminary; frozen/final source/ELF independent confirmation required"
+}

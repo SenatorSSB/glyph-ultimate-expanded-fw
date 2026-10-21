@@ -1,5 +1,26 @@
 # Glyph Current State
 
+## Bounded storage adapter phases — 2026-10-21
+
+The [independent clarification](runtime_config/profile_native_ultimate/mounted_write_phase_scope_amendment_20261021.json)
+authorizes only returned phases of the existing MountedStorage checked write,
+with the same file/result owners and at most 20 bytes of borrowed metadata plus
+measured alignment inside the unchanged layout budget of 512 bytes. The [finite
+resource packets](runtime_config/profile_native_ultimate/finite_resource_review_evidence_20261021/README.md)
+preserve generic storage, root-file, boot IRQ and startup proofs with their
+conditions. Conditional 2,048-byte arithmetic is not final resource acceptance. All 31
+final source/ELF proof, affected tests, fresh review/build/custody and hardware
+gates remain OPEN. No new order, limit increase or device authority is created.
+
+## Read-sum arithmetic correction — 2026-10-21
+
+The [independent correction](runtime_config/profile_native_ultimate/consolidated_lifetime_review_evidence_20261021/glyph-native-read-sum-arithmetic-erratum-20261021.md)
+and [component-sum replay](runtime_config/profile_native_ultimate/consolidated_lifetime_review_evidence_20261021/glyph-native-read-sum-root-replay-20261021.json)
+correct a100-byte addition error in earlier read-path totals. Identity witness
+totals are2068/2100 and remain above2048; copy2308 and other listed component
+compositions are unchanged. Historical evidence, bounded authority and limits
+remain intact. Final whole-stack proof remains OPEN; no device acceptance is claimed.
+
 ## Consolidated lifetime repair authority — 2026-10-21
 
 The [independent bounded amendment](runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json)

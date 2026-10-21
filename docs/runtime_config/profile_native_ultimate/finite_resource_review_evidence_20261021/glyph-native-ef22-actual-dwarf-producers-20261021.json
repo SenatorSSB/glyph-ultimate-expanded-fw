@@ -1,0 +1,1596 @@
+{
+  "kind": "EXACT_ELF_DWARF_PRODUCER_EXTRACTION",
+  "elf": {
+    "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf",
+    "bytes": 5592128,
+    "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+  },
+  "extractor_sha256": "2da33dc9be32de4f16bc77be6232692da79ae105b16315664df9b127381adc81",
+  "readelf_sha256": "0905e2e1610200a11bf219254386b65245147e6d8860cd61c76a09f95aed7e8e",
+  "command": [
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-readelf",
+    "--debug-dump=info",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf"
+  ],
+  "producer_counts": {
+    "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections": 30,
+    "(indirect string, offset: 0x3c10): GNU AS 2.39.50": 16,
+    "(indirect string, offset: 0x49d4): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu++17 -fno-exceptions -fno-rtti -fno-unwind-tables -fno-use-cxa-atexit -ffunction-sections -fdata-sections": 1,
+    "(indirect string, offset: 0x4def): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=guard.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0xb41d): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios_init.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0xe8ad): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x1168c): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale_init.lo -free -fno-exceptions -fipa-pta -fchar8_t": 1,
+    "(indirect string, offset: 0x1b06b): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=monetary_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x1c821): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=monetary_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates": 1,
+    "(indirect string, offset: 0x1f121): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=numeric_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x1f53d): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=numeric_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates": 1,
+    "(indirect string, offset: 0x1f82b): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=tree.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x2227d): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=codecvt.lo -free -fno-exceptions -fipa-pta -fchar8_t": 1,
+    "(indirect string, offset: 0x2579f): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-locale_init.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x26adb): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-shim_facets.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x2bc5d): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-string-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x2dee6): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-wstring-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x2f871): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ctype.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x2fc73): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ctype_configure_char.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x2fe2e): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ctype_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x332b8): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cxx11-locale-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x3661f): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cxx11-shim_facets.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x39f8f): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cxx11-wlocale-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x3a8dd): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ext11-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x3bb52): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=functexcept.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x3d3ba): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x3e118): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x40804): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=istream-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x44404): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x46697): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ostream-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x46fdd): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=shared_ptr.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x47244): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=streambuf-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x494ba): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=string-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x4e55b): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=wlocale-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x5097b): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=wstring-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x53606): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=class_type_info.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x53992): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=dyncast.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x53b47): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=eh_aux_runtime.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x53c99): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=new_handler.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x53dbb): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=new_opvnt.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x53eda): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=si_class_type_info.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x540ba): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=tinfo.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x545b3): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=vmi_class_type_info.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x55137): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=c++locale.lo -free -fno-exceptions -fipa-pta -fimplicit-templates": 1,
+    "(indirect string, offset: 0x557c1): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=codecvt.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x55b45): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=codecvt_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x55c3a): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=collate_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x55d21): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=collate_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates": 1,
+    "(indirect string, offset: 0x55e75): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=globals_io.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x5601b): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios_locale.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x56163): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale_facets.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x562f0): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=messages_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x5646d): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=messages_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates": 1,
+    "(indirect string, offset: 0x565df): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=misc-inst.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x567db): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=time_members.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x568e6): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=eh_alloc.lo -free -fno-exceptions -fipa-pta": 1,
+    "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta": 151,
+    "(indirect string, offset: 0x5865f): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fbuiltin -fno-math-errno -free -fipa-pta": 2
+  },
+  "units": [
+    {
+      "header": "Compilation Unit @ offset 0:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x43): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_sync/sync.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x524:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4de): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_gpio/gpio.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1c6d:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0xe27): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_irq/irq.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x3735:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x1065): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_sync/mutex.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x523b:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x12b6): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_sync/critical_section.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x54bc:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x16fc): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_time/time.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x8465:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x1b25): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_timer/timer.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x9724:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x1c45): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_util/pheap.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xa442:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x1dbe): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_util/queue.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xb579:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x2042): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_clocks/clocks.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xc4e0:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x21f1): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_pll/pll.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xc8cd:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x22e3): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xcdcb:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x23b5): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_xosc/xosc.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xcf92:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x2699): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_dma/dma.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xd8c2:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x2801): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_exception/exception.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xde26:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x2a29): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_flash/flash.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xef7e:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x2cbd): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xf295:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x2d4d): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_i2c/i2c.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x106d7:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x3870): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_pio/pio.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x124e8:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x3ab0): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_spi/spi.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13490:",
+      "name": "(indirect string, offset: 0x3bb2): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x134b3:",
+      "name": "(indirect string, offset: 0x3c1f): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_divider/divider.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x134d6:",
+      "name": "(indirect string, offset: 0x3c77): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_double/double_aeabi.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x134f9:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x3d39): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_double/double_init_rom.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1375e:",
+      "name": "(indirect string, offset: 0x3da7): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13781:",
+      "name": "(indirect string, offset: 0x3e09): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_float/float_aeabi.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x137a4:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x3e82): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_float/float_init_rom.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13a28:",
+      "name": "(indirect string, offset: 0x3efb): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13a4b:",
+      "name": "(indirect string, offset: 0x3f5b): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_int64_ops/pico_int64_ops_aeabi.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13a6f:",
+      "name": "(indirect string, offset: 0x3fc2): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13a92:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4040): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_multicore/multicore.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x151af:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x44b4): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1539f:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x46c3): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_runtime/runtime.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x16131:",
+      "name": "(indirect string, offset: 0x481d): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_standard_link/crt0.S",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x16154:",
+      "producer": "(indirect string, offset: 0x49d4): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu++17 -fno-exceptions -fno-rtti -fno-unwind-tables -fno-use-cxa-atexit -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x48f7): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x16844:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4b4a): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x16d2c:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4c2f): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/pico_platform/platform.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x16e76:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4cab): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/rp2_common/hardware_claim/claim.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x17420:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4d0d): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_sync/lock_core.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x17573:",
+      "producer": "(indirect string, offset: 0x14c): GNU C11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -O2 -Os -std=gnu11 -fno-exceptions -ffunction-sections -fdata-sections",
+      "name": "(indirect string, offset: 0x4d78): /home/earle/Arduino/hardware/pico/rp2040/pico-sdk/src/common/pico_time/timeout_helper.c",
+      "comp_dir": "(indirect string, offset: 0xe4): /home/earle/Arduino/hardware/pico/rp2040/tools/libpico/build"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x17bb1:",
+      "producer": "(indirect string, offset: 0x4def): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=guard.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x51a3): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/guard.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x180cc:",
+      "producer": "(indirect string, offset: 0xb41d): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios_init.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x9e89): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/ios_init.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1fc75:",
+      "producer": "(indirect string, offset: 0xe8ad): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x10ab9): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/locale.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x28642:",
+      "producer": "(indirect string, offset: 0x1168c): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale_init.lo -free -fno-exceptions -fipa-pta -fchar8_t",
+      "name": "(indirect string, offset: 0x14e1e): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/locale_init.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x38fec:",
+      "producer": "(indirect string, offset: 0x1b06b): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=monetary_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x1b13a): monetary_members.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x3fc82:",
+      "producer": "(indirect string, offset: 0x1c821): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=monetary_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates",
+      "name": "(indirect string, offset: 0x1db14): monetary_members_cow.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x470b9:",
+      "producer": "(indirect string, offset: 0x1f121): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=numeric_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x1f094): numeric_members.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x4d22c:",
+      "producer": "(indirect string, offset: 0x1f53d): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=numeric_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates",
+      "name": "(indirect string, offset: 0x1f300): numeric_members_cow.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x536f5:",
+      "producer": "(indirect string, offset: 0x1f82b): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=tree.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x1f701): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/tree.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x54113:",
+      "producer": "(indirect string, offset: 0x2227d): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=codecvt.lo -free -fno-exceptions -fipa-pta -fchar8_t",
+      "name": "(indirect string, offset: 0x20ae5): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/codecvt.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x64d93:",
+      "producer": "(indirect string, offset: 0x2579f): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-locale_init.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2431a): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cow-locale_init.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x725ec:",
+      "producer": "(indirect string, offset: 0x26adb): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-shim_facets.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2a898): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cow-shim_facets.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x8a507:",
+      "producer": "(indirect string, offset: 0x2bc5d): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-string-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2b448): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cow-string-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x9d377:",
+      "producer": "(indirect string, offset: 0x2dee6): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cow-wstring-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2eba1): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cow-wstring-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xaffdb:",
+      "producer": "(indirect string, offset: 0x2f871): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ctype.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2f747): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/ctype.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xb69ce:",
+      "producer": "(indirect string, offset: 0x2fc73): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ctype_configure_char.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2fd59): ctype_configure_char.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xbc595:",
+      "producer": "(indirect string, offset: 0x2fe2e): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ctype_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x2fdae): ctype_members.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xc297c:",
+      "producer": "(indirect string, offset: 0x332b8): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cxx11-locale-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x3133d): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cxx11-locale-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xe122b:",
+      "producer": "(indirect string, offset: 0x3661f): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cxx11-shim_facets.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x361c2): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cxx11-shim_facets.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0xfc1af:",
+      "producer": "(indirect string, offset: 0x39f8f): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=cxx11-wlocale-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x38286): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/cxx11-wlocale-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x11cf5b:",
+      "producer": "(indirect string, offset: 0x3a8dd): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ext11-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x3b257): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/ext11-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1267c0:",
+      "producer": "(indirect string, offset: 0x3bb52): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=functexcept.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x3bc91): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/functexcept.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x128baf:",
+      "producer": "(indirect string, offset: 0x3d3ba): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x3cfaa): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/ios-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x13222a:",
+      "producer": "(indirect string, offset: 0x3e118): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x3e358): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/ios.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x139121:",
+      "producer": "(indirect string, offset: 0x40804): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=istream-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x3ec76): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/istream-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1549da:",
+      "producer": "(indirect string, offset: 0x44404): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x435b9): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/locale-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x17bdaa:",
+      "producer": "(indirect string, offset: 0x46697): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ostream-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x44a5e): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/ostream-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1924e0:",
+      "producer": "(indirect string, offset: 0x46fdd): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=shared_ptr.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x4713e): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/shared_ptr.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x193ee6:",
+      "producer": "(indirect string, offset: 0x47244): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=streambuf-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x475b5): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/streambuf-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x19d996:",
+      "producer": "(indirect string, offset: 0x494ba): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=string-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x487e9): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/string-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1b266b:",
+      "producer": "(indirect string, offset: 0x4e55b): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=wlocale-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x4e935): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/wlocale-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1dc32f:",
+      "producer": "(indirect string, offset: 0x5097b): GNU C++11 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++11 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=wstring-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x521ed): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++11/wstring-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x216d7): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++11"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f0596:",
+      "producer": "(indirect string, offset: 0x53606): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=class_type_info.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x52e29): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/class_type_info.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f11ae:",
+      "producer": "(indirect string, offset: 0x53992): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=dyncast.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x53a63): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/dyncast.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f1878:",
+      "producer": "(indirect string, offset: 0x53b47): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=eh_aux_runtime.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x53b08): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/eh_aux_runtime.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f20f8:",
+      "producer": "(indirect string, offset: 0x53c99): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=new_handler.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x53d56): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/new_handler.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f290a:",
+      "producer": "(indirect string, offset: 0x53dbb): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=new_opvnt.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x53e76): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/new_opvnt.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f29f3:",
+      "producer": "(indirect string, offset: 0x53eda): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=si_class_type_info.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x53fcc): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/si_class_type_info.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f33e7:",
+      "producer": "(indirect string, offset: 0x540ba): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=tinfo.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x5420b): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/tinfo.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f3cf5:",
+      "producer": "(indirect string, offset: 0x545b3): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=vmi_class_type_info.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x5450c): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/vmi_class_type_info.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1f5301:",
+      "producer": "(indirect string, offset: 0x55137): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=c++locale.lo -free -fno-exceptions -fipa-pta -fimplicit-templates",
+      "name": "(indirect string, offset: 0x54710): c++locale.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1fa5da:",
+      "producer": "(indirect string, offset: 0x557c1): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=codecvt.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x55a66): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/codecvt.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x1ff2cc:",
+      "producer": "(indirect string, offset: 0x55b45): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=codecvt_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x55c13): codecvt_members.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2013e6:",
+      "producer": "(indirect string, offset: 0x55c3a): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=collate_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x55d08): collate_members.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x202c7b:",
+      "producer": "(indirect string, offset: 0x55d21): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=collate_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates",
+      "name": "(indirect string, offset: 0x55df0): collate_members_cow.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2044ff:",
+      "producer": "(indirect string, offset: 0x55e75): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=globals_io.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x55f3e): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/globals_io.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x205ea2:",
+      "producer": "(indirect string, offset: 0x5601b): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=ios_locale.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x55fe0): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/ios_locale.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x20a27d:",
+      "producer": "(indirect string, offset: 0x56163): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=locale_facets.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x560ee): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/locale_facets.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x20e2a3:",
+      "producer": "(indirect string, offset: 0x562f0): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=messages_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x5640e): messages_members.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x215178:",
+      "producer": "(indirect string, offset: 0x5646d): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -ffunction-sections -fdata-sections -frandom-seed=messages_members_cow.lo -free -fno-exceptions -fipa-pta -fimplicit-templates",
+      "name": "(indirect string, offset: 0x5653d): messages_members_cow.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x21b0fb:",
+      "producer": "(indirect string, offset: 0x565df): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=misc-inst.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x56555): /workdir/repo/gcc-gnu/libstdc++-v3/src/c++98/misc-inst.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2230ae:",
+      "producer": "(indirect string, offset: 0x567db): GNU C++98 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -std=gnu++98 -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=time_members.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x568a6): time_members.cc",
+      "comp_dir": "(indirect string, offset: 0x99b0): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/src/c++98"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x227a84:",
+      "producer": "(indirect string, offset: 0x568e6): GNU C++17 12.3.0 -mcpu=cortex-m0plus -mthumb -march=armv6s-m -g -Os -fno-implicit-templates -ffunction-sections -fdata-sections -frandom-seed=eh_alloc.lo -free -fno-exceptions -fipa-pta",
+      "name": "(indirect string, offset: 0x56a34): /workdir/repo/gcc-gnu/libstdc++-v3/libsupc++/eh_alloc.cc",
+      "comp_dir": "(indirect string, offset: 0x4eec): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/libstdc++-v3-nox/libsupc++"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x229294:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56d34): /workdir/repo/newlib/newlib/libc/stdlib/abort.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22936c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56e7b): /workdir/repo/newlib/newlib/libc/stdlib/btowc.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x229fb3:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56ec5): /workdir/repo/newlib/newlib/libc/stdlib/calloc.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22a858:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56f1f): /workdir/repo/newlib/newlib/libc/stdlib/mallocr.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22b243:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56f74): /workdir/repo/newlib/newlib/libc/ctype/ctype_.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22b2fc:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56fe9): /workdir/repo/newlib/newlib/libc/errno/errno.c",
+      "comp_dir": "(indirect string, offset: 0x57018): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/errno"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22bb41:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5710c): /workdir/repo/newlib/newlib/libc/stdio/fclose.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22c62e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x571d8): /workdir/repo/newlib/newlib/libc/stdio/fflush.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22d1e4:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5734f): /workdir/repo/newlib/newlib/libc/stdio/findfp.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22e2e8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57442): /workdir/repo/newlib/newlib/libc/stdio/fread.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22ee68:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56f1f): /workdir/repo/newlib/newlib/libc/stdlib/mallocr.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x22faa8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57577): /workdir/repo/newlib/newlib/libc/stdio/fseek.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23046a:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57696): /workdir/repo/newlib/newlib/libc/stdio/fseeko.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2313a7:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x576f1): /workdir/repo/newlib/newlib/libc/reent/fstatr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x231e54:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5777c): /workdir/repo/newlib/newlib/libc/stdio/ftell.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2327a8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x577b5): /workdir/repo/newlib/newlib/libc/stdio/ftello.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2331c4:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x577fb): /workdir/repo/newlib/newlib/libc/stdio/fwalk.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x233b42:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5785d): /workdir/repo/newlib/newlib/libc/stdio/fwrite.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2346c2:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x578ad): /workdir/repo/newlib/newlib/libc/stdio/getc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x235170:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57900): /workdir/repo/newlib/newlib/libc/stdio/getwc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x235a4f:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5792f): /workdir/repo/newlib/newlib/libc/reent/impure.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x236336:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5799d): /workdir/repo/newlib/newlib/libc/ctype/iswctype.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2365ef:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57a0f): /workdir/repo/newlib/newlib/libc/ctype/iswdigit.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x236692:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57a41): /workdir/repo/newlib/newlib/libc/ctype/iswgraph.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23677d:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57a89): /workdir/repo/newlib/newlib/libc/ctype/iswgraph_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2372b0:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57ac8): /workdir/repo/newlib/newlib/libc/ctype/iswlower.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23739b:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57b05): /workdir/repo/newlib/newlib/libc/ctype/iswlower_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x237e76:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57b39): /workdir/repo/newlib/newlib/libc/ctype/iswprint.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x237f61:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57b6b): /workdir/repo/newlib/newlib/libc/ctype/iswprint_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x238a3c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57baa): /workdir/repo/newlib/newlib/libc/ctype/iswpunct.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x238b27:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57bdc): /workdir/repo/newlib/newlib/libc/ctype/iswpunct_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x239602:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57c10): /workdir/repo/newlib/newlib/libc/ctype/iswspace.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2396ed:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57c42): /workdir/repo/newlib/newlib/libc/ctype/iswspace_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23a1c8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57c76): /workdir/repo/newlib/newlib/libc/ctype/iswupper.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23a2b3:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57cb3): /workdir/repo/newlib/newlib/libc/ctype/iswupper_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23ad8e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57ce7): /workdir/repo/newlib/newlib/libc/ctype/iswxdigit.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23ae31:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57d29): /workdir/repo/newlib/newlib/libc/locale/locale.c",
+      "comp_dir": "(indirect string, offset: 0x57d5a): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/locale"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23baad:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57ded): /workdir/repo/newlib/newlib/libc/stdio/makebuf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23c714:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57e2d): /workdir/repo/newlib/newlib/libc/stdlib/malloc.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23cff4:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56f1f): /workdir/repo/newlib/newlib/libc/stdlib/mallocr.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23dd7d:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57f38): /workdir/repo/newlib/newlib/libc/stdlib/mbrtowc.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23e963:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57f6a): /workdir/repo/newlib/newlib/libc/stdlib/mbtowc_r.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23f54e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x57ff8): /workdir/repo/newlib/newlib/libc/machine/arm/memchr-stub.c",
+      "comp_dir": "(indirect string, offset: 0x57fad): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/machine/arm"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23f65e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5803c): /workdir/repo/newlib/newlib/libc/string/memcmp.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23f762:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x580b3): /workdir/repo/newlib/newlib/libc/string/memmove.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x23f86b:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x580ee): /workdir/repo/newlib/newlib/libc/stdlib/mlock.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x240123:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5819c): /workdir/repo/newlib/newlib/libc/stdio/nano-vfprintf_float.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x241595:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x582c4): /workdir/repo/newlib/newlib/libc/stdio/nano-vfprintf_i.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2424cf:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x583a8): /workdir/repo/newlib/newlib/libc/stdio/nano-vfscanf_float.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2433cb:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x583fc): /workdir/repo/newlib/newlib/libc/stdio/printf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x243d8a:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58442): /workdir/repo/newlib/newlib/libc/stdio/putc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x244853:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5848c): /workdir/repo/newlib/newlib/libc/stdio/puts.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x245388:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x584d5): /workdir/repo/newlib/newlib/libc/stdio/putwc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x245cb0:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x56f1f): /workdir/repo/newlib/newlib/libc/stdlib/mallocr.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2469d3:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58574): /workdir/repo/newlib/newlib/libc/reent/reent.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2473f2:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x585c3): /workdir/repo/newlib/newlib/libc/stdio/refill.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x247ec5:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x585fa): /workdir/repo/newlib/newlib/libc/stdio/rget.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24887e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58630): /workdir/repo/newlib/newlib/libc/reent/sbrkr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x249136:",
+      "producer": "(indirect string, offset: 0x5865f): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fbuiltin -fno-math-errno -free -fipa-pta",
+      "name": "(indirect string, offset: 0x586d6): /workdir/repo/newlib/newlib/libm/common/sf_nan.c",
+      "comp_dir": "(indirect string, offset: 0x58707): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libm/common"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x249205:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58767): /workdir/repo/newlib/newlib/libc/signal/signal.c",
+      "comp_dir": "(indirect string, offset: 0x587ce): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/signal"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x249d52:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5882a): /workdir/repo/newlib/newlib/libc/reent/signalr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24a670:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58874): /workdir/repo/newlib/newlib/libc/stdio/snprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24b074:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x588a6): /workdir/repo/newlib/newlib/libc/stdio/sprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24ba31:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58905): /workdir/repo/newlib/newlib/libc/stdio/sscanf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24c45a:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58961): /workdir/repo/newlib/newlib/libc/stdio/stdio.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24cfee:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58997): /workdir/repo/newlib/newlib/libc/string/strchr.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24d0e2:",
+      "name": "(indirect string, offset: 0x589c8): /workdir/repo/newlib/newlib/libc/machine/arm/strcmp-armv4t.S",
+      "comp_dir": "(indirect string, offset: 0x57fad): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/machine/arm",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24d113:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58a05): /workdir/repo/newlib/newlib/libc/string/strcoll.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24d205:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58a3e): /workdir/repo/newlib/newlib/libc/machine/arm/strcpy.c",
+      "comp_dir": "(indirect string, offset: 0x57fad): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/machine/arm"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24d2c8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58a74): /workdir/repo/newlib/newlib/libc/string/strcspn.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24d3b1:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58aae): /workdir/repo/newlib/newlib/libc/string/strdup.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24dc2c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58af0): /workdir/repo/newlib/newlib/libc/string/strdup_r.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24e556:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58b67): /workdir/repo/newlib/newlib/libc/time/strftime.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24fed9:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58d46): /workdir/repo/newlib/newlib/libc/string/strlcpy.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x24ffed:",
+      "name": "(indirect string, offset: 0x58d80): /workdir/repo/newlib/newlib/libc/machine/arm/strlen-thumb1-Os.S",
+      "comp_dir": "(indirect string, offset: 0x57fad): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/machine/arm",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25001e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58dc0): /workdir/repo/newlib/newlib/libc/string/strncmp.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2500fc:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58dfa): /workdir/repo/newlib/newlib/libc/string/strncpy.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25020d:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58e52): /workdir/repo/newlib/newlib/libc/string/strnlen.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2502ee:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58e8c): /workdir/repo/newlib/newlib/libc/string/strrchr.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25040b:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x58ebe): /workdir/repo/newlib/newlib/libc/string/strspn.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2504f4:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x591e2): /workdir/repo/newlib/newlib/libc/stdlib/strtod.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25242c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59228): /workdir/repo/newlib/newlib/libc/stdlib/strtol.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2532cd:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59278): /workdir/repo/newlib/newlib/libc/stdlib/strtoul.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2540fe:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x592c0): /workdir/repo/newlib/newlib/libc/string/strxfrm.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2541fe:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59302): /workdir/repo/newlib/newlib/libc/time/time.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x254af5:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5934b): /workdir/repo/newlib/newlib/libc/locale/timelocal.c",
+      "comp_dir": "(indirect string, offset: 0x57d5a): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/locale"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25572e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5938c): /workdir/repo/newlib/newlib/libc/ctype/towlower.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25581e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x593be): /workdir/repo/newlib/newlib/libc/ctype/towupper.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25590e:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59402): /workdir/repo/newlib/newlib/libc/time/tzlock.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x255a28:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59461): /workdir/repo/newlib/newlib/libc/time/tzset.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2562c2:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x594b1): /workdir/repo/newlib/newlib/libc/time/tzset_r.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x257135:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59542): /workdir/repo/newlib/newlib/libc/time/tzvars.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x257200:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59571): /workdir/repo/newlib/newlib/libc/stdio/ungetc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x257d9b:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x595cb): /workdir/repo/newlib/newlib/libc/stdio/ungetwc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2588a6:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59607): /workdir/repo/newlib/newlib/libc/stdio/vprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x259251:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59645): /workdir/repo/newlib/newlib/libc/stdio/vsnprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x259c2a:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59684): /workdir/repo/newlib/newlib/libc/stdio/wbuf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25a66d:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x596ba): /workdir/repo/newlib/newlib/libc/stdlib/wcrtomb.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25b246:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x596ec): /workdir/repo/newlib/newlib/libc/string/wcscoll.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25b345:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59736): /workdir/repo/newlib/newlib/libc/time/wcsftime.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25cda3:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59778): /workdir/repo/newlib/newlib/libc/string/wcslen.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25ce81:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x597a9): /workdir/repo/newlib/newlib/libc/stdlib/wcstoul.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25dca9:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x597f1): /workdir/repo/newlib/newlib/libc/string/wcsxfrm.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25dddf:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5982b): /workdir/repo/newlib/newlib/libc/stdlib/wctob.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25ea05:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5985b): /workdir/repo/newlib/newlib/libc/stdlib/wctomb_r.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x25f5af:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x598a9): /workdir/repo/newlib/newlib/libc/ctype/wctype.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x260241:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x598d9): /workdir/repo/newlib/newlib/libc/string/wmemchr.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x260339:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5990b): /workdir/repo/newlib/newlib/libc/string/wmemcpy.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x260487:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5993d): /workdir/repo/newlib/newlib/libc/string/wmemmove.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2605c1:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59970): /workdir/repo/newlib/newlib/libc/string/wmemset.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2606b9:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x599a2): /workdir/repo/newlib/newlib/libc/reent/writer.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x260fa8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x599d2): /workdir/repo/newlib/newlib/libc/stdio/wsetup.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x261949:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59a02): /workdir/repo/newlib/newlib/libc/stdlib/abs.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2619ed:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59a30): /workdir/repo/newlib/newlib/libc/reent/closer.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x262280:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59a6f): /workdir/repo/newlib/newlib/libc/stdlib/dtoa.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x263c37:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59b5c): /workdir/repo/newlib/newlib/libc/stdio/fgetwc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2647a2:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59b9b): /workdir/repo/newlib/newlib/libc/stdio/fputwc.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2653bb:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59be2): /workdir/repo/newlib/newlib/libc/stdio/fvwrite.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26602c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59c2d): /workdir/repo/newlib/newlib/libc/stdlib/gdtoa-gethex.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2673ab:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59cec): /workdir/repo/newlib/newlib/libc/stdlib/gdtoa-hexnan.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x267748:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59d38): /workdir/repo/newlib/newlib/libc/stdlib/getenv_r.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x268112:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59d8d): /workdir/repo/newlib/newlib/libc/reent/gettimeofdayr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x268a22:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59dcd): /workdir/repo/newlib/newlib/libc/time/gettzinfo.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x268b92:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59e07): /workdir/repo/newlib/newlib/libc/reent/isattyr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x269425:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59e38): /workdir/repo/newlib/newlib/libc/ctype/iswalnum.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x269510:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59e75): /workdir/repo/newlib/newlib/libc/ctype/iswalnum_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x269feb:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59ea9): /workdir/repo/newlib/newlib/libc/ctype/iswalpha.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26a0d6:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59ee6): /workdir/repo/newlib/newlib/libc/ctype/iswalpha_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26abb1:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59f1a): /workdir/repo/newlib/newlib/libc/ctype/iswblank.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26ac9c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59f57): /workdir/repo/newlib/newlib/libc/ctype/iswblank_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26b791:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59f8b): /workdir/repo/newlib/newlib/libc/ctype/iswcntrl.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26b87c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59fc8): /workdir/repo/newlib/newlib/libc/ctype/iswcntrl_l.c",
+      "comp_dir": "(indirect string, offset: 0x56fa4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/ctype"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26c357:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x59ffc): /workdir/repo/newlib/newlib/libc/stdlib/labs.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26c3fb:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a02b): /workdir/repo/newlib/newlib/libc/locale/lnumeric.c",
+      "comp_dir": "(indirect string, offset: 0x57d5a): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/locale"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26cf60:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a08c): /workdir/repo/newlib/newlib/libc/locale/localeconv.c",
+      "comp_dir": "(indirect string, offset: 0x57d5a): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/locale"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26dab8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a0d7): /workdir/repo/newlib/newlib/libc/reent/lseekr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26e38a:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a10c): /workdir/repo/newlib/newlib/libc/stdlib/mbstowcs.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x26e49c:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a150): /workdir/repo/newlib/newlib/libc/stdlib/mprec.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x270365:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a1c4): /workdir/repo/newlib/newlib/libc/stdio/nano-vfprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x271577:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a272): /workdir/repo/newlib/newlib/libc/stdio/nano-vfscanf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2725bc:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a1c4): /workdir/repo/newlib/newlib/libc/stdio/nano-vfprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2738f7:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a306): /workdir/repo/newlib/newlib/libc/stdio/nano-vfscanf_i.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2747ee:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a356): /workdir/repo/newlib/newlib/libc/reent/readr.c",
+      "comp_dir": "(indirect string, offset: 0x5772e): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/reent"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2750d7:",
+      "producer": "(indirect string, offset: 0x5865f): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fbuiltin -fno-math-errno -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a385): /workdir/repo/newlib/newlib/libm/common/s_nan.c",
+      "comp_dir": "(indirect string, offset: 0x58707): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libm/common"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2751aa:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a3be): /workdir/repo/newlib/newlib/libc/stdio/sccl.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2752b8:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a3ec): /workdir/repo/newlib/newlib/libc/string/strcat.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x275399:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a41d): /workdir/repo/newlib/newlib/libc/stdio/swprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x275dc9:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a48f): /workdir/repo/newlib/newlib/libc/time/tzcalc_limits.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2760c4:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a4d5): /workdir/repo/newlib/newlib/libc/string/wcscmp.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x276196:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a506): /workdir/repo/newlib/newlib/libc/string/wcscpy.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x276294:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a537): /workdir/repo/newlib/newlib/libc/string/wcslcpy.c",
+      "comp_dir": "(indirect string, offset: 0x5806d): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/string"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2763b9:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a569): /workdir/repo/newlib/newlib/libc/stdlib/environ.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x276424:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a5c4): /workdir/repo/newlib/newlib/libc/stdlib/envlock.c",
+      "comp_dir": "(indirect string, offset: 0x56dd4): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdlib"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x276cdc:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a5f6): /workdir/repo/newlib/newlib/libc/time/month_lengths.c",
+      "comp_dir": "(indirect string, offset: 0x58c99): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/time"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x276d89:",
+      "producer": "(indirect string, offset: 0x56d64): GNU C17 12.3.0 -mthumb -mcpu=cortex-m0plus -march=armv6s-m -g -g -Os -Os -Os -fno-builtin -free -fipa-pta",
+      "name": "(indirect string, offset: 0x5a64d): /workdir/repo/newlib/newlib/libc/stdio/vfwprintf.c",
+      "comp_dir": "(indirect string, offset: 0x570a8): /workdir/arena.macosarm/newlib/arm-none-eabi/thumb/newlib/libc/stdio"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2786f7:",
+      "name": "(indirect string, offset: 0x5a6bd): /workdir/repo/gcc-gnu/libgcc/config/arm/lib1funcs.S",
+      "comp_dir": "(indirect string, offset: 0x5a6f1): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/thumb/libgcc",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x278728:",
+      "name": "(indirect string, offset: 0x5a6bd): /workdir/repo/gcc-gnu/libgcc/config/arm/lib1funcs.S",
+      "comp_dir": "(indirect string, offset: 0x5a6f1): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/thumb/libgcc",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x278759:",
+      "name": "(indirect string, offset: 0x5a6bd): /workdir/repo/gcc-gnu/libgcc/config/arm/lib1funcs.S",
+      "comp_dir": "(indirect string, offset: 0x5a6f1): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/thumb/libgcc",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x27878a:",
+      "name": "(indirect string, offset: 0x5a6bd): /workdir/repo/gcc-gnu/libgcc/config/arm/lib1funcs.S",
+      "comp_dir": "(indirect string, offset: 0x5a6f1): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/thumb/libgcc",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    },
+    {
+      "header": "Compilation Unit @ offset 0x2787c6:",
+      "name": "(indirect string, offset: 0x5a6bd): /workdir/repo/gcc-gnu/libgcc/config/arm/lib1funcs.S",
+      "comp_dir": "(indirect string, offset: 0x5a6f1): /workdir/arena.macosarm/gcc-gnu/arm-none-eabi/thumb/libgcc",
+      "producer": "(indirect string, offset: 0x3c10): GNU AS 2.39.50"
+    }
+  ],
+  "qualification": "Actual emitted DWARF compiler producer/option records. These do not contain a complete command argv, all preprocessor macros, include search paths, link flags or source/dependency archive. Use alongside exact build/dependency/script provenance, not as a substitute."
+}

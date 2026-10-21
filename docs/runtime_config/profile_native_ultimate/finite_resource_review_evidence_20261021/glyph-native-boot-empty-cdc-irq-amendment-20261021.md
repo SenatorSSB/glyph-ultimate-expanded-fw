@@ -1,0 +1,33 @@
+# Boot empty-CDC IRQ amendment (exact ef22)
+
+The first setup boot path has source-proven empty CDC TX and default serial descriptor state. Its **USB upper is320 bytes**, but its **complete conservative IRQ allowance is336 bytes**, retaining the separately proved masked alarm alternative. Proposed whole boot308 is not established. Generic Configurator348 remains unchanged.
+
+Candidate ef22f6107ec1fb26e8a25ab1f7345f301952b237, tree aea9a57e47d717eee9332aceda3cd6f50d44df92; exact ELF SHA2565d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f (independently rehashed in the adjoining LFS proof). No source/build/device mutation or new experiment. Final candidate must preserve the same lifecycle, callbacks, descriptors, compiled frames and priorities or repeat correspondence analysis.
+
+## Scope/empty TX proof
+
+This applies to the first call to setup's LoadConfigChecked, ProfileStore Begin/BeginRecovery and following boot storage phases before initialize_backends and before any Configurator service/core0 normal loop. It does not certify a later service retry using boot history.
+
+TinyUSB_Device_Init in main precedes setup. Adafruit_USBD_Device::begin clears configuration, resets STRID_SERIAL=nullptr, adds Serial as CDC and initializes the stack. cdcd_init clears the interface and configures its TX FIFO with initial equal read/write indices; cdcd_reset clears it again. USB host OUT writes only the RX FIFO. SET_LINE_CODING writes its line-coding buffer and control EP; line state only changes overwritable state and invokes the bounded DFU callback. None fills TX.
+
+The exact linked reverse call inventory for tud_cdc_n_write is Adafruit CDC write, CoordinatedCdcStream/ProfilePacketWriter, SendProfileDelimiter/WriteProfilePacket and runtime_identity Poll. CDC virtual write can also be reached by serial::write through B0XXInputViewer::SendReport. Configurator transport is constructed only after initialize_recovery returns or after ordinary backend initialization; no response method runs before loop/SendReport. Ordinary backend construction and viewer/Poll service occur after the boot Begin calls. main's intervening setup work is FIFO/register/delay/launch; initVariant is an exact empty leaf. setup's preceding work uses GPIO, Wire/concrete SSD1306, validation and Persistence reads. Those display Print virtual targets are concrete SSD1306/GFX, not Serial. ProfileStoreReadTrace production callbacks are compiled out in ef22; no boot observer writes TX. The linked libc _write at1006a420 is a four-byte return0 stub, so stdio is not an unseen CDC producer. Core1 setup polls Pending through delay until boot publication and contains no CDC writer. Constructors occur before the stack's later cdcd_init clear in any event; their actual global setup has no CDC producer after that clear. The weak CDC RX/wanted/TXcomplete/sendbreak/linecoding callbacks are null in this linked image.
+
+The only actual linked setSerialDescriptor caller is NintendoSwitchBackend's constructor, reached after initialize_backends, which is later than boot Begin/storage. Stored Config loading/validation does not apply USB descriptors. Thus the configured-serial UTF16 branch is excluded here. Manufacturer/product/interface strings use the smaller callback path already below the bound.
+
+## Remaining source-feasible CDC OUT path
+
+Host enumeration/configuration can occur before or during setup. A first <=64-byte OUT transfer is delivered to RX256; no application reader is needed. RX still has at least64space, so cdcd_xfer_cb10007c60 own40 executes its inlined _prep_out_transaction and calls endpoint claim. The full retained C chain is:
+
+`usb_task8 + tud_task112 + cdcd_xfer_cb40 + usbd_edpt_claim8 + tu_edpt_claim16 + mutex_enter_timeout_ms24 + mutex_enter_block_until32 =240`.
+
+The mutex32 exists on the uncontended path before CPSID. First exception32 plus higher-priority SysTick44 gives **316** without padding. Endpoint contention is source-excluded at these scoped foreground FS points using the already-returned producer/core1-no-endpoint-writer invariant. This is an actual feasible lower composition and refutes an assumed default-serial-only308 allowance; it is not a claim of hardware observation or an automatic additional24 flush frame. Empty TX makes tud_cdc_n_write_flush return before its claim child. No IN transfer is submitted without a producer, and hypothetical ZLP claim is no deeper than the same direct claim route.
+
+With hardware exception stack alignment, the outer exception starts the ISR on8alignment. The deepest C240 branch is8aligned; its nested SysTick has no padding, while the first exception has at most4. Partial/intermediate C frames at most236 may require both4-byte pads, also reaching at most320. Therefore this branch has a conservative320 upper, rather than the earlier deliberately uniform324. Default serial C236 + exception32 + SysTick44 + up to8padding is320. Other CDC OUT FIFO/memory children are smaller.
+
+CDC setup class control is task120+class24+control_xfer32+endpoint16+DCD8+hardware_start24+ROM12=236. The completed-control wrapper16 does not retain a class SETUP xfer32: callbacks receive DATA or ACK and the CDC source's SETUP guard excludes that child. ACK line-state's FIFO overwrite path is task120+completed16+class24+overwrite16+timeout24+block32=232. Its two FIFO locks occur sequentially; prior no-owner-at-FS predicates apply. The DFU branch, vendor setup transfer, CDC open, reset and hardware USB branches are smaller (existing pinned graph); equal-priority external handlers do not nest. The only larger boot alternative remaining is the alarm upper below.
+
+## Whole IRQ union remains336
+
+The prior default alarm proof has a masked peak332 plus first alignment4=336, based on its16-node heap. It is an alternative to USB and receives no SysTick at the masked peak. This packet does not replace that safe bound with a two-core/two-node occupancy guess: sleep_until's source does **not** cancel the installed alarm on return. A passed wall-clock deadline is not itself proof that core0 already serviced/freed that alarm. A tighter phase/occupancy proof would be a separate predicate investigation, and is not assumed here.
+
+Thus all named boot IRQ alternatives are conservatively covered by **336**. A caller280 plus generic CheckedOpen U1448 plus336 is2064 as an upper; that arithmetic is not a feasible physical overflow witness. Masked LFS/SDK flash and allocator peaks remain separate: apply caller+max(U+336,M), with pre-mask16 already present in U. Existing whole-resource OPEN and hardware NOT_TESTED status remain unchanged.

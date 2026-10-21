@@ -1,0 +1,166 @@
+{
+  "kind": "SEPARATE_BOUNDED_ORDINARY_STARTUP_ALLOCATION_CENSUS_ADDENDUM_PINS",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "elf_sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f",
+  "files": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf": {
+      "bytes": 5592128,
+      "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+    },
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021-pins.json": {
+      "bytes": 24740,
+      "sha256": "f1fd57e5ceb979a2d837e278da9d96db6616dd19207c86e74355f700d60be421"
+    },
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021.md": {
+      "bytes": 10534,
+      "sha256": "f7bf25fdfa0431d9d1ce1fa76627a2da1a2d244ed8ba4f20b4c0699487af51a0"
+    },
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021.json": {
+      "bytes": 15026,
+      "sha256": "79ad7ad1d4fe6af16db6432a4a3f4ebd54374ad7dc09d693ce0a8ba4ba96d7b7"
+    },
+    "/private/tmp/glyph-native-ef22-startup-functions.json": {
+      "bytes": 2591467,
+      "sha256": "db9cf2a9bb6098d6c634733d5c136c3baf4b7484f265a40f76044edf0e0fed17"
+    },
+    "/private/tmp/glyph-native-ef22-startup-initarrays.json": {
+      "bytes": 3455,
+      "sha256": "6c2ec249806878a59d7954724de73b97190a601fed7753e3a716fe1eec60efb4"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/symbols.txt": {
+      "bytes": 372827,
+      "sha256": "45d5aa7f12d78ff244a5e77be5540e160ac7c4798848dd06fcda5d0392e54602"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/disassembly.txt": {
+      "bytes": 11238382,
+      "sha256": "f0e6206eaa4a8e6129a90a3273e59fd54e8fd96ec0d830c43edf12f40111a0e1"
+    },
+    "/private/tmp/glyph-native-exact-build-ef22f6107ec1-engineering-p1-open/build_dependency_pins.json": {
+      "bytes": 10074734,
+      "sha256": "70a3b5ce750b59019946a3b0b80b09cb7ac1858fe9706316f2bda86e60ea95e7"
+    },
+    "/private/tmp/glyph-native-ef22-startup-failure-census-probe.py": {
+      "bytes": 2644,
+      "sha256": "6fdbda1fd2ceb55d7449a2d84286334692e6b55b7767d92be58d4f1ba2d4f4b3"
+    },
+    "/private/tmp/glyph-native-ef22-startup-failure-census-probe.json": {
+      "bytes": 1539,
+      "sha256": "c4b56165b89a8c7e6786e8c96b1b78ce4f5bf1e6089b365af851dad07b9713e9"
+    },
+    "/private/tmp/glyph-native-startup-alloc-null-addendum-20261021-linked-evidence.txt": {
+      "bytes": 185497,
+      "sha256": "5ca99cd2831980ff2801e3c8fd837c559fbf4b10ac4a1e4ad358535787cee8ba"
+    },
+    "/private/tmp/glyph-native-startup-alloc-null-addendum-20261021.md": {
+      "bytes": 6761,
+      "sha256": "253230c460c46a02490349c3599bacb81afac0a00f31b8a8df5b960b9bcaf38e"
+    },
+    "/private/tmp/glyph-native-startup-alloc-null-addendum-20261021.json": {
+      "bytes": 9159,
+      "sha256": "8cb79f09c0e866219ff5096bd019c128a76cfe8aafa0a4625b51521707e9e30a"
+    },
+    "/private/tmp/glyph-native-startup-alloc-null-addendum-write.py": {
+      "bytes": 16592,
+      "sha256": "ccb168e3d3374a83a71651f2469622f440400132d3e697cd5ac52749299a9250"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/malloc-lock.cpp": {
+      "bytes": 1650,
+      "sha256": "532acda747dc6700283599e5a7ecee2a12335d164388cef55b9002205950fb98"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_standard_link/crt0.S": {
+      "bytes": 9107,
+      "sha256": "1329e3005bb9b2424ebeda04fc784e215926e57612eef8321f7df715797fcecd"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_runtime/runtime.c": {
+      "bytes": 10978,
+      "sha256": "c6b63ea7bebb1a0dc6b108664d048ed53ad61e9b04a4fae2439b6ba93891bb19"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp": {
+      "bytes": 8305,
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h": {
+      "bytes": 20151,
+      "sha256": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": {
+      "bytes": 173893,
+      "sha256": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs_util.h": {
+      "bytes": 7198,
+      "sha256": "825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-platformio.ini": {
+      "bytes": 3517,
+      "sha256": "7093257a6c85ef5a325ee49a86e97f56a12f2bfdac467edfde29ba56399fd405"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_NativeTargetMetricsEntry.S": {
+      "bytes": 2154,
+      "sha256": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-config_glyph_glyph_mk6_include_glyph_pinout.hpp": {
+      "bytes": 356,
+      "sha256": "1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-src_core_mode_selection.cpp": {
+      "bytes": 10045,
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_ResourceDiagnostics.cpp": {
+      "bytes": 3914,
+      "sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_Persistence.cpp": {
+      "bytes": 27847,
+      "sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_NativeTargetMetrics.cpp": {
+      "bytes": 12036,
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-src_modes_CustomKeyboardMode.cpp": {
+      "bytes": 868,
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_KeyboardMode.cpp": {
+      "bytes": 642,
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-config_glyph_glyph_mk6_include_button_positions.hpp": {
+      "bytes": 4733,
+      "sha256": "73b84b62bec59650ed5a027b0d6100bb09109618c65611ca6bf37b8877736e2f"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-config_glyph_common_src_config.cpp": {
+      "bytes": 17902,
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_core_ProfileStore.cpp": {
+      "bytes": 79972,
+      "sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8"
+    },
+    "/private/tmp/glyph-native-ef22-startup-source-HAL_pico_src_gpio.cpp": {
+      "bytes": 475,
+      "sha256": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c"
+    }
+  },
+  "original_result_unchanged": {
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021.md": true,
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021.json": true,
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021-pins.json": true
+  },
+  "mutation_scope": {
+    "repository": false,
+    "SDK": false,
+    "cache": false,
+    "Git": false,
+    "network": false,
+    "build": false,
+    "device": false,
+    "tmp_evidence_only": true
+  }
+}
