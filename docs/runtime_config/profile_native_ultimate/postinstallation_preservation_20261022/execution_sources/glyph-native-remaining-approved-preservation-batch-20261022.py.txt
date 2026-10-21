@@ -1,0 +1,25 @@
+"""Only untouched already-approved LIST3/READ22; strict sequential child validation; no retries."""
+from pathlib import Path
+import datetime,hashlib,json,os,subprocess,sys
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077)
+D=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022');S=D/'session_state.json';child=Path('/private/tmp/glyph-native-approved-preservation-request-journal-child-20261022.py')
+def save(p,j,mode='x'):
+ with p.open(mode) as f:json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+assert sha(child)=='74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f'
+s=json.loads(S.read_text());assert not s['stop'] and s['normal_status_verified'] and s['STATUS_total']==1 and s['LIST_calls']==0 and s['original_profile_READs']==0 and s.get('host_journal_gate_adjudicated')
+ids=[1,3,4,*range(5,23),24]
+save(D/'remaining_read_batch_receipt.json',{'reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'child_SHA256':sha(child),'batch_SHA256':sha(Path(__file__)),'operations':[{'action':'list','cursor':i} for i in (0,8,16)]+[{'action':'read','original_id':i} for i in ids],'retries':0,'extra_STATUS':0,'STATUS_in_existing_preflights':25,'writes':0})
+try:
+ for action,value in [('list',x) for x in (0,8,16)]+[('read',x) for x in ids]:
+  result=subprocess.run([sys.executable,str(child),action,str(value)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=25)
+  assert result.returncode==0 and not result.stderr,('Child request or validation failed',action,value,result.returncode)
+  prefix=action+'_'+str(value);proof=json.loads((D/(prefix+'_adjudication.json')).read_text());s=json.loads(S.read_text());assert not s['stop']
+  print(json.dumps({'action':action,'cursor_or_original_ID':value,'result':'PASS','STATUS_total':s['STATUS_total'],'LIST_calls':s['LIST_calls'],'READ_calls':s['original_profile_READs']}),flush=True)
+ s=json.loads(S.read_text());assert s['STATUS_total']==26 and s['LIST_calls']==3 and s['original_profile_READs']==22 and s['profile_ids_preservation_verified']==s['listed_profile_ids']==ids and s['Config_preservation_verified'] and s['identity_normal_verified']
+ proofs=[json.loads((D/f'read_{i}_adjudication.json').read_text()) for i in ids]
+ save(D/'all22_postinstall_preservation_result.json',{'state':'PASS_API_ORIGINAL_CONFIG_AND_ALL22_DECODED_PROFILE_PRESERVATION','candidate':'334fbd06e4541c120b0db423e5be7e112eb1f6f6','UF2_SHA256':'41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982','Config_API_raw_payload_equal':True,'Config_payload_SHA256':'54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460','fresh_fences':s['fresh_fences'],'profiles':proofs,'original_IDs':ids,'all_directory_metadata_and_decoded_wrappers_equal':True,'legacy_directory_body_versions_preserved_separately':True,'counts':{k:s[k] for k in ['owner_Menu_Configurator_entries_confirmed','Configurator_CDC_metadata_lookups','Configurator_identity_requests','Config_backups','STATUS_total','LIST_calls','original_profile_READs','metadata_invocations','report_capture_attempts','firmware_copies','Config_profile_writes','target_metric_requests','Switch_WUP_actions']},'status_host_journal_false_positive_and_offline_adjudication_retained':True,'no_STATUS_retry':True,'no_raw_filesystem_or_history_export':True,'native_hardware_result':None,'target_timing_highwater':'NOT_MEASURED','end':'STOP_NO_NATIVE_MUTATION_OR_ACCEPTANCE_AUTHORITY'})
+ s['stage']='POSTINSTALL_CONFIG_AND_ALL22_ORIGINAL_PRESERVATION_PASS_STOP';s['stop']=True;s['original_preservation_complete']=True;save(S,s,'w');print(json.dumps({'complete':'PASS','Config_equal':True,'all22_profiles_equal':True,'STATUS_total':26,'LIST':3,'READ':22,'end':'STOP_NO_NATIVE_MUTATION'}),flush=True)
+except BaseException as e:
+ s=json.loads(S.read_text());s['stop']=True;s['stage']='STOP_REMAINING_PRESERVATION_BATCH_ERROR_NO_RETRY';save(D/'remaining_read_batch_stop.json',{'error':repr(e),'retry':False,'no_further_requests':True});save(S,s,'w');print(json.dumps({'result':'STOP','error':repr(e),'no_retry':True}),flush=True);raise

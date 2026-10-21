@@ -2,12 +2,13 @@
 
 Current: [exact334f source/build/resource closure](exact_candidate_334f_status_20261021.md)
 and [independently reviewed hardware preparation](hardware_334f_preparation_20261021/README.md).
-GP-NATIVE-001 remains at the hardware gate. Exact installation and current legacy
-identity passed; raw selection stopped with zero reports. The [approved metadata
-attempt](metadata_results_20261022/README.md) also stopped before Configurator,
-with exact anchor/inventory but original query0/invalid iterator. The [backup-only
-stop exception](backup_after_metadata_stop_20261022/BACKUP_PACKET.md) awaits new
-owner approval; no diagnostic/report retry or native mutation is included.
+GP-NATIVE-001 remains at the hardware gate. Exact installation/current legacy
+identity passed. [Approved postinstallation API preservation](postinstallation_preservation_20261022/README.md)
+now matches Config252B and all22 original decoded profiles/revisions exactly,
+with LIST3/READ22/STATUS26 and zero retry/mutation. Device access ended STOP in
+Configurator. Prior raw/metadata failures remain exact; next host observation
+preparation is offline and requires a separate exact live-access approval.
+No native activation, output acceptance or candidate source integration is claimed.
 Earlier research introduction below is historical.
 
 

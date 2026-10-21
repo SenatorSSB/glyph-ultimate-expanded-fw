@@ -1,0 +1,24 @@
+"""One approved same-unit Configurator metadata lookup after confirmed known menu entry."""
+from pathlib import Path
+import datetime,hashlib,json,os,re
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077)
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022';S=D/'session_state.json';OLD=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json'
+def save(p,j,mode='x'):
+ with p.open(mode) as f:json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+s=json.loads(S.read_text());assert not s['stop'] and s['owner_Menu_Configurator_entries_confirmed']==1 and s['Configurator_CDC_metadata_lookups']==0
+old=json.loads(OLD.read_text());assert old['match_count']==1;unit=old['matches'][0];assert unit['serial_number'] and unit['location']=='0-1'
+save(D/'configurator_metadata_attempt.json',{'operation':'ONE_STANDARD_METADATA_LOOKUP_NO_PORT_OPEN','reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'same_unit_reference_SHA256':hashlib.sha256(OLD.read_bytes()).hexdigest(),'wrapper_SHA256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'VID':0x2e8a,'PID':0x1092,'UID':os.getuid(),'effective_UID':os.geteuid(),'retry':False})
+s['Configurator_CDC_metadata_lookups']=1;s['stage']='CONFIGURATOR_METADATA_ATTEMPT_RESERVED_NO_RETRY';save(S,s,'w')
+try:
+ from serial.tools import list_ports
+ matches=[]
+ for p in list_ports.comports():
+  if p.vid==0x2e8a and p.pid==0x1092:matches.append(dict(device=p.device,vid=p.vid,pid=p.pid,serial_number=p.serial_number,location=p.location,product=p.product,interface=p.interface))
+ save(D/'configurator_port.json',{'match_count':len(matches),'matches':matches,'metadata_only_no_port_open':True})
+ assert len(matches)==1,'Ambiguous/missing Configurator CDC'
+ chosen=matches[0];assert chosen['serial_number']==unit['serial_number'] and chosen['location']==unit['location'],'Same-unit/location mismatch'
+ assert re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+',chosen['device']),'Unexpected CDC path'
+ s['Configurator_port']=chosen['device'];s['same_unit_CDC_verified']=True;s['boot_session']='GP_NATIVE_001_POSTINSTALL_CONFIGURATOR_BACKUP_20261022_01';s['stage']='CONFIGURATOR_CDC_VERIFIED_READY_IDENTITY';save(S,s,'w');print(json.dumps({'metadata':'PASS','same_private_unit_and_location':True,'matches':1,'port':chosen['device'],'ports_opened':0}))
+except BaseException as e:
+ s['stop']=True;s['stage']='STOP_CONFIGURATOR_METADATA_NO_RETRY';save(D/'metadata_stop.json',{'error':repr(e),'retry':False});save(S,s,'w');raise

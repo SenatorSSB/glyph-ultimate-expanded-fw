@@ -126,7 +126,7 @@
     "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED",
     "exact_installation_qualification": "DIRECT_OWNER_APPROVED_EXECUTED_UNTIL_RAW_GUARD_STOP",
     "agent_instead_of_manual_single_copy": "LATER_DIRECT_OWNER_I_WANT_YOU_TO_WRITE_MOVE_IT",
-    "current": "METADATA_INCOMPLETE_STOP_NO_CONFIGURATOR_UNTIL_NEW_B_ONLY_EXCEPTION"
+    "current": "STOP_POSTINSTALL_PRESERVATION_COMPLETE; NO_NEW_OBSERVER_OR_NATIVE_MUTATION_AUTHORITY"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -135,8 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit bounded backup-only exception to recorded metadata INCOMPLETE_STOP, then pending known-menu Configurator preservation reads; no metadata/report retry",
-    "Actual postinstall Config/all22 original decoded-profile preservation readback, plus source-grounded host raw-report access resolution and complete observer plan",
+    "Source-supported bounded Mac raw observer preparation, fresh review/offline verification/exact host-artifact custody and separate owner-approved live-access packet; previous failures/stops retained",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
@@ -234,11 +233,28 @@
     "file": "backup_after_metadata_stop_20261022/BACKUP_PACKET.md",
     "MD_SHA256": "80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229",
     "JSON_SHA256": "a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85",
-    "owner_approval": null,
-    "executed": false,
+    "owner_approval": "DIRECT_OWNER_APPROVED_BACKUP_ONLY_CONTINUATION",
+    "executed": true,
     "independent_ACK": "backup_after_metadata_stop_20261022/independent_review/REPORT.md",
     "independent_ACK_SHA256": "62a4022798c71e651c3abe203a811ebb101370537f3654b83448dba7080f10eb",
-    "independent_pins_SHA256": "2f0cd19b8733040dff7ef86d8a63805197357e52093d528453329b550eeee8a8"
+    "independent_pins_SHA256": "2f0cd19b8733040dff7ef86d8a63805197357e52093d528453329b550eeee8a8",
+    "execution_state": "API_CONFIG_AND_ALL22_ORIGINALS_PRESERVED_PASS_THEN_STOP"
   },
-  "latest_sourcefree_metadata_stop_validation": "metadata_stop_publication_validation_20261022/result.json"
+  "latest_sourcefree_metadata_stop_validation": "metadata_stop_publication_validation_20261022/result.json",
+  "postinstallation_preservation_result": "postinstallation_preservation_20261022/preservation_result.json",
+  "host_journal_gate_adjudication": {
+    "file": "postinstallation_preservation_20261022/independent_host_journal_adjudication/REPORT.md",
+    "SHA256": "9b62de7ae9ab37a059ebdb17c54447d87a0bc7003ffb3bd17db58401bafc76bf",
+    "PINS_SHA256": "9d26ac9b37443a59971687adba1cf95031c10d111c5283c4f1a2d780072082ee",
+    "STATUS_retry": false,
+    "new_owner_exception_needed": false
+  },
+  "latest_sourcefree_postinstallation_validation": "postinstallation_publication_validation_20261022/result.json",
+  "postinstallation_preservation_audit": {
+    "file": "postinstallation_preservation_20261022/independent_preservation_audit/REPORT.md",
+    "SHA256": "2c815364b9b147285a2513ec2a903bddf1a0b0c47f33be4a2c44a44eda67c944",
+    "PINS_SHA256": "71fb4f043895c0611892a9eadd4ba2ea6f370ffc8177a5ab49f4bcc2eb5c4013",
+    "reviewer_live_actions": 0,
+    "native_HEP": null
+  }
 }

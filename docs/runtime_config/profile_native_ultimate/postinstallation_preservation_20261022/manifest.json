@@ -1,0 +1,107 @@
+{
+  "kind": "PUBLIC_SAFE_POSTINSTALL_API_PRESERVATION_EXPLICIT_CONTENT_ONLY",
+  "files": {
+    "README.md": {
+      "bytes": 2951,
+      "sha256": "ac5aa66c9ef8e1a7b8ba6ed05e46702fe72c34dd0b315dfc6b5845750cdf6049"
+    },
+    "execution_sources/glyph-native-approved-preservation-request-20261022.py.txt": {
+      "bytes": 8402,
+      "sha256": "78ffb25a59d4d8eac0705a0a91fa337dfa617c3bb8cf099e2c1d9f42697cc5e7"
+    },
+    "execution_sources/glyph-native-approved-preservation-request-journal-child-20261022.py.txt": {
+      "bytes": 10792,
+      "sha256": "74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f"
+    },
+    "execution_sources/glyph-native-backup-continuation-metadata-20261022.py.txt": {
+      "bytes": 2678,
+      "sha256": "8aafaf0d8ec10b7543c6a8873352634461ec35080618cff4cc8bb4896422ad9d"
+    },
+    "execution_sources/glyph-native-preservation-journal-child-prefinding-361e2fac-20261022.py.txt": {
+      "bytes": 10727,
+      "sha256": "361e2facfce44eddbbe09a3b10cda2baa684d203f301ff605617194349893782"
+    },
+    "execution_sources/glyph-native-preservation-journal-validator-20261022.py.txt": {
+      "bytes": 4190,
+      "sha256": "670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264"
+    },
+    "execution_sources/glyph-native-preservation-journal-validator-prefragmentation-bound-20261022.py.txt": {
+      "bytes": 4169,
+      "sha256": "30b6e289689a91e0dad58be49f2464b26195374079084df04c7accbeccad400e"
+    },
+    "execution_sources/glyph-native-remaining-approved-preservation-batch-20261022.py.txt": {
+      "bytes": 4243,
+      "sha256": "78a162ef3f5ed49eaccde3293bdd5fd4bdd0128cf31a89215bdba9e4c4695253"
+    },
+    "host_only_stderr_gate_correction.json": {
+      "bytes": 1103,
+      "sha256": "78e342428efd34f813553aeca95caab74a4773936e073d5b06c15b0c8533bd41"
+    },
+    "independent_host_journal_adjudication/PINS.json": {
+      "bytes": 7915,
+      "sha256": "9d26ac9b37443a59971687adba1cf95031c10d111c5283c4f1a2d780072082ee"
+    },
+    "independent_host_journal_adjudication/REPORT.md": {
+      "bytes": 13028,
+      "sha256": "9b62de7ae9ab37a059ebdb17c54447d87a0bc7003ffb3bd17db58401bafc76bf"
+    },
+    "independent_host_journal_adjudication/result.json": {
+      "bytes": 1863,
+      "sha256": "30c1196cbae54da2a6fed5edbbd9c7f8a6a32c69c981301b9e964ffed75d540c"
+    },
+    "independent_preservation_audit/PINS.json": {
+      "bytes": 8167,
+      "sha256": "71fb4f043895c0611892a9eadd4ba2ea6f370ffc8177a5ab49f4bcc2eb5c4013"
+    },
+    "independent_preservation_audit/REPORT.md": {
+      "bytes": 8106,
+      "sha256": "2c815364b9b147285a2513ec2a903bddf1a0b0c47f33be4a2c44a44eda67c944"
+    },
+    "independent_preservation_audit/audit_actual_data.py.txt": {
+      "bytes": 12334,
+      "sha256": "57f25adb4f97a1db4cf8fffcda316770c115e0a5e6eba8fc6d934e4120e4a402"
+    },
+    "independent_preservation_audit/audit_actual_data_initial_wrong_manifest_root.py.txt": {
+      "bytes": 12258,
+      "sha256": "e3a614eb2638fb63252da83a07c9cd0b0653d13f02846ff3cdee60566450e4a7"
+    },
+    "independent_preservation_audit/audit_execution.json": {
+      "bytes": 430,
+      "sha256": "07167e2da9c23a06abca8a7ae3f842a905f11d58574ba52202ab54843ccc41bd"
+    },
+    "independent_preservation_audit/audit_facts.json": {
+      "bytes": 9988,
+      "sha256": "83ddef13e5dfb9a23105b414401af1f7f4037a159542f7be71a23d5ed311a30f"
+    },
+    "independent_preservation_audit/audit_initial_path_failure.json": {
+      "bytes": 573,
+      "sha256": "23ec088a97c60af8cf5ed66a270219a75567a7f00cacf962b50e31735525d505"
+    },
+    "independent_preservation_audit/result.json": {
+      "bytes": 1301,
+      "sha256": "9765bc5d37e82ce76e3d60b3a337e2147842c07eba30c1c0ae909601821a6198"
+    },
+    "owner_approval.json": {
+      "bytes": 673,
+      "sha256": "117b1d3701aede3f09398878940220dd26ffede9b690050e99bc07c78182821e"
+    },
+    "owner_configurator_display_confirmation.json": {
+      "bytes": 237,
+      "sha256": "3e5f1e713e6b70f9e4fa8d426d5d010e14f6503a4033685690d86c24a85dcfd2"
+    },
+    "preservation_result.json": {
+      "bytes": 32954,
+      "sha256": "039ce84ab390d33c72abc075ec362c699e93c6f73897db7242c94d2c2e25a3fa"
+    },
+    "private_hash_references.json": {
+      "bytes": 32747,
+      "sha256": "83c9dae88856082328602a22489127b78b302ee844239ff3477a4d37d6cbc5c3"
+    },
+    "status_offline_wire_adjudication.json": {
+      "bytes": 900,
+      "sha256": "cbd58f4020ee477173e79a346d64f0df7cf9fac6d7dc494d34ecb093ae85c9a0"
+    }
+  },
+  "private_original_payloads_or_READ_journals_or_serial_data_copied": false,
+  "native_hardware_result": null
+}

@@ -1,5 +1,11 @@
 # Profile-native Ultimate execution chapter
 
+## Postinstallation original-state preservation PASS — 2026-10-22
+
+The [owner-approved backup-only continuation](postinstallation_preservation_20261022/README.md) completed on installed F334f: known Menu→Configurator, unique same private unit, normal neutral identity, Config252 bytes exactly equal original54fda, all22 directory metadata/revisions/full decoded wrappers equal originals, stable inc1/store172/Config1156314366, LIST3/READ22/STATUS26. No Config/ProfileStore mutation, native activation, firmware copy, report retry or target metric was performed; the stage ended STOP in Configurator and227 private files are pinned.
+
+The first valid STATUS hit an overstrict empty-stderr host assertion; unchanged transport intentionally mirrors its normal journal there. Independent offline wire/source replay resolved that host check and caught a child variable collision before use. Exact original source/error/stopped snapshot/unused negative source remain preserved; only untouched already-approved LIST/READ continued, without STATUS retry or new device exception. This closes API preservation only; prior raw/metadata failures and all18/H1–H12/HEP/integration/DONE gates remain. Next raw host-observer preparation is offline, with a separate exact live-access approval required.
+
 ## Approved metadata attempt and backup-only stop gate — 2026-10-22
 
 The owner approved metadata plus backup. The [single exact snapshot](metadata_results_20261022/README.md) found the retained unique anchor/10 complete descendants, but original query status0/zero entries/invalid iterator yielded INCOMPLETE_STOP. No plug-in/QI/getter/report or Configurator operation followed; all prior stopped sessions stay immutable. Installed SDK permits NULL on successful no-match, but no handle was logged and the actual root cause remains UNPROVEN.

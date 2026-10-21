@@ -12,19 +12,20 @@ original cap remain unchanged. Historical failed/incomplete evidence stays exact
 
 The [exact installation/access result](runtime_config/profile_native_ultimate/installation_results_20261022/README.md)
 records one successful owner-delegated F/UF2 copy, owner “Works” and matching
-original-profile4 XInput identity, followed by raw-selection STOP/zero reports.
-The [owner-approved metadata attempt](runtime_config/profile_native_ultimate/metadata_results_20261022/README.md)
-found the exact retained anchor and10 complete descendants, then original query
-status0/entries0/invalid iterator produced INCOMPLETE_STOP. No plug-in/QI/getter/
-report call or Configurator continuation followed. Root cause remains UNPROVEN;
-the unlogged iterator cannot distinguish SDK-permitted NULL/no-match from
-invalidated nonnull. All preinstall backups remain private; postinstall Config/
-all22 preservation reads remain unexecuted and their contents unclaimed.
-The [backup-only stop exception](runtime_config/profile_native_ultimate/backup_after_metadata_stop_20261022/BACKUP_PACKET.md)
-awaits new explicit owner approval for the unchanged known-menu/read-only phase B.
-It permits no metadata/report retry, firmware copy, Config/ProfileStore/native
-write, target metrics, recovery, route change or acceptance waiver. F/source/
-build/resource/limits/protocol/oracles remain unchanged and source unmerged.
+original-profile4 XInput identity. Raw selection and the later approved metadata
+attempt retain their exact stops/zero reports, with root cause UNPROVEN.
+The [approved postinstallation preservation](runtime_config/profile_native_ultimate/postinstallation_preservation_20261022/README.md)
+now passes: one known-menu Configurator entry, same-unit lookup and normal
+identity; Config252 API bytes exactly equal original54fda; all22 directory entries,
+revisions and complete decoded profile wrappers match. LIST3/READ22/STATUS26,
+fresh inc1/store172/Config1156314366 fences, no retry or Config/profile mutation.
+A proven host-only empty-stderr assertion was corrected after independent offline
+wire/source review, preserving the valid STATUS/error/snapshot and unused child
+finding, without requery or new device authority. All227 session files are pinned
+privately. This is API preservation, not raw filesystem export or native acceptance.
+Device access ended STOP in Configurator. Next host observation preparation is
+offline only and requires a separate exact owner packet before any live access.
+F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
 remain. Nunchuk NOT_TESTED, target timing/highwater NOT_MEASURED, RT2 deferred.

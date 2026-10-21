@@ -1,0 +1,141 @@
+{
+  "kind": "FINITE_POSTINSTALL_PRESERVATION_ACTUAL_DATA_AUDIT_PUBLIC_SAFE_PINS",
+  "result": "PASS_API_PRESERVATION_CUSTODY_COUNTS_WIRE",
+  "no_device_actions": true,
+  "no_private_payload_inputs_in_archive": true,
+  "files": {
+    "/private/tmp/glyph-native-approved-preservation-request-20261022.py": {
+      "bytes": 8402,
+      "sha256": "78ffb25a59d4d8eac0705a0a91fa337dfa617c3bb8cf099e2c1d9f42697cc5e7"
+    },
+    "/private/tmp/glyph-native-approved-preservation-request-journal-child-20261022.py": {
+      "bytes": 10792,
+      "sha256": "74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f"
+    },
+    "/private/tmp/glyph-native-backup-host-journal-adjudication-20261022/PINS.json": {
+      "bytes": 7915,
+      "sha256": "9d26ac9b37443a59971687adba1cf95031c10d111c5283c4f1a2d780072082ee"
+    },
+    "/private/tmp/glyph-native-backup-host-journal-adjudication-20261022/REPORT.md": {
+      "bytes": 13028,
+      "sha256": "9b62de7ae9ab37a059ebdb17c54447d87a0bc7003ffb3bd17db58401bafc76bf"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/REPORT.md": {
+      "bytes": 8106,
+      "sha256": "2c815364b9b147285a2513ec2a903bddf1a0b0c47f33be4a2c44a44eda67c944"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/audit_actual_data.py": {
+      "bytes": 12334,
+      "sha256": "57f25adb4f97a1db4cf8fffcda316770c115e0a5e6eba8fc6d934e4120e4a402"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/audit_actual_data_initial_wrong_manifest_root.py": {
+      "bytes": 12258,
+      "sha256": "e3a614eb2638fb63252da83a07c9cd0b0653d13f02846ff3cdee60566450e4a7"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/audit_execution.json": {
+      "bytes": 430,
+      "sha256": "07167e2da9c23a06abca8a7ae3f842a905f11d58574ba52202ab54843ccc41bd"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/audit_facts.json": {
+      "bytes": 9988,
+      "sha256": "83ddef13e5dfb9a23105b414401af1f7f4037a159542f7be71a23d5ed311a30f"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/audit_initial_path_failure.json": {
+      "bytes": 573,
+      "sha256": "23ec088a97c60af8cf5ed66a270219a75567a7f00cacf962b50e31735525d505"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-audit-20261022/result.json": {
+      "bytes": 1301,
+      "sha256": "9765bc5d37e82ce76e3d60b3a337e2147842c07eba30c1c0ae909601821a6198"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-public-20261022/preservation_result.json": {
+      "bytes": 32954,
+      "sha256": "039ce84ab390d33c72abc075ec362c699e93c6f73897db7242c94d2c2e25a3fa"
+    },
+    "/private/tmp/glyph-native-postinstall-preservation-public-20261022/private_hash_references.json": {
+      "bytes": 32747,
+      "sha256": "83c9dae88856082328602a22489127b78b302ee844239ff3477a4d37d6cbc5c3"
+    },
+    "/private/tmp/glyph-native-preservation-journal-child-prefinding-361e2fac-20261022.py": {
+      "bytes": 10727,
+      "sha256": "361e2facfce44eddbbe09a3b10cda2baa684d203f301ff605617194349893782"
+    },
+    "/private/tmp/glyph-native-preservation-journal-validator-20261022.py": {
+      "bytes": 4190,
+      "sha256": "670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264"
+    },
+    "/private/tmp/glyph-native-remaining-approved-preservation-batch-20261022.py": {
+      "bytes": 4243,
+      "sha256": "78a162ef3f5ed49eaccde3293bdd5fd4bdd0128cf31a89215bdba9e4c4695253"
+    },
+    "/private/tmp/glyph-native-backup-after-metadata-stop-20261022/BACKUP_PACKET.md": {
+      "bytes": 3789,
+      "sha256": "80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229"
+    },
+    "/private/tmp/glyph-native-backup-after-metadata-stop-20261022/BACKUP_PACKET.json": {
+      "bytes": 3256,
+      "sha256": "a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85"
+    }
+  },
+  "unchanged_source_input_references": {
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto": {
+      "bytes": 33965,
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": {
+      "bytes": 46658,
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_candidate_tool.py": {
+      "bytes": 19077,
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_production_tool.py": {
+      "bytes": 10878,
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef"
+    }
+  },
+  "private_input_references": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/postinstall_preservation_custody_manifest.json": {
+      "bytes": 32774,
+      "sha256": "e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/private_backup_custody_manifest.json": {
+      "bytes": 43006,
+      "sha256": "f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/session_state.json": {
+      "bytes": 1902,
+      "sha256": "d420a0e3028593c6e0281eb6cc78fe193878f23afe261bea4d49ac9856476f93"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_stop.json": {
+      "bytes": 116,
+      "sha256": "b557c22bd15bc3261237dc0a47b57c2276c543780847bac2a68c50a216c917ce"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/session_before_host_journal_adjudication.json": {
+      "bytes": 917,
+      "sha256": "9adf5988757f241981a20891435ca94e1492489db5d28b69f2f84ca669766b47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/all22_postinstall_preservation_result.json": {
+      "bytes": 32542,
+      "sha256": "f83c545f526954858d6232b5edb3808111493042def1eb70a714097bee4b9aac"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/postinstall_config_payload.bin": {
+      "bytes": 252,
+      "sha256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_backup.json": {
+      "bytes": 2744,
+      "sha256": "f797540a7925fa4db28baa2302cf29fba984684641bc5424542153d900f6ee47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_directory_complete.json": {
+      "bytes": 3341,
+      "sha256": "c658e052820fb14be8a13291c9ad56c2d056b64f7ea97c147d2588f479d92e47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022/metadata_stage_custody_manifest.json": {
+      "bytes": 1116,
+      "sha256": "221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7"
+    }
+  },
+  "private_closure_note": "Exact227-file new closure and251-file original closure are bound through their immutable manifest hashes above and were fully rehashed by the pinned actual-data auditor. No private raw payload/journal/serial is an archive file."
+}

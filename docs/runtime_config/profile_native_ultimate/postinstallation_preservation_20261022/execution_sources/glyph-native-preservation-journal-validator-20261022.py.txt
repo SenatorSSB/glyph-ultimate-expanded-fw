@@ -1,0 +1,41 @@
+"""Offline replay only. No port discovery/open/request; strict held production journal correspondence."""
+from pathlib import Path
+import sys,json,hashlib
+sys.dont_write_bytecode=True
+F=Path('/private/tmp/glyph-profile-native-20261020');sys.path.insert(0,str(F/'tools'))
+import glyph_serial_config_tool as transport
+import glyph_profile_store_production_tool as production
+pb,jf,_=transport.load_runtime_proto_modules(F)
+def validate(D,prefix,action,expected_fences=None,ident=None,cursor=None):
+ D=Path(D);journal=(D/(prefix+'_journal.jsonl')).read_bytes();assert journal and journal.endswith(b'\n') and journal==(D/(prefix+'_stderr.txt')).read_bytes(),'stderr not exact expected mirrored host journal'
+ rows=[json.loads(x) for x in journal.splitlines()];phases=['status_preflight']+([] if action=='status' else [action]);assert {x['phase'] for x in rows}==set(phases)
+ result=json.loads((D/(prefix+'_result.json')).read_text());assert result['returncode']==0 and result['timeout'] is False
+ assert hashlib.sha256((D/(prefix+'_stdout.txt')).read_bytes()).hexdigest()==result['stdout_SHA256'] and hashlib.sha256(journal).hexdigest()==result['stderr_SHA256']
+ responses=[];wire_proofs=[]
+ for phase in phases:
+  ev=[x for x in rows if x['phase']==phase];assert 5<=len(ev)<=8264
+  assert [x['event'] for x in ev[:2]]==['transmit_attempt','transmitted'] and [x['event'] for x in ev[-2:]]==['cobs_frame','response']
+  chunks=ev[2:-2];assert chunks and all(x['event']=='receive_chunk' for x in chunks)
+  req=pb.ProfileStoreRequest(protocol_version=2,operation={'status_preflight':pb.PROFILE_STORE_STATUS,'list':pb.PROFILE_STORE_LIST,'read':pb.PROFILE_STORE_READ}[phase])
+  if phase=='list':req.page_cursor=cursor;req.page_size=8
+  if phase=='read':req.profile_id=ident
+  data=bytes.fromhex(ev[0]['request_hex']);assert data==req.SerializeToString(deterministic=True) and hashlib.sha256(data).hexdigest()==ev[0]['request_sha256']
+  wire=transport.cobs_encode(bytes([9])+data);assert len(wire)==ev[0]['wire_bytes'] and hashlib.sha256(wire).hexdigest()==ev[0]['wire_sha256']
+  assert ev[0]['operation']==ev[1]['operation']==req.operation
+  raw=b''
+  for chunk in chunks:
+   b=bytes.fromhex(chunk['chunk_hex']);assert len(b)==chunk['chunk_bytes'];raw+=b;assert len(raw)==chunk['received_bytes'] and hashlib.sha256(raw).hexdigest()==chunk['received_prefix_sha256'] and bool(b[-1]==0)==chunk['last_byte_is_delimiter']
+  assert len(raw)<=8259 and raw.endswith(b'\0') and raw.count(b'\0')==1 and len(raw)==ev[-2]['frame_bytes'] and hashlib.sha256(raw).hexdigest()==ev[-2]['frame_sha256']
+  decoded=transport.cobs_decode(raw);assert decoded[0]==9 and len(decoded)-1<=8192
+  response=pb.ProfileStoreResponse();assert response.ParseFromString(decoded[1:])==len(decoded)-1
+  assert response.protocol_version==response.mutation_protocol_version==2 and response.status==pb.PROFILE_STORE_OK and response.request_token==0 and not response.recovery_flags
+  assert ev[-1]['status']==response.status and ev[-1]['protobuf_bytes']==len(decoded)-1
+  fences={k:int(getattr(response,k)) for k in ('store_incarnation','store_generation','config_generation')};assert fences['store_incarnation']==1
+  if expected_fences is not None:assert fences==expected_fences,'Fresh fence changed'
+  else:expected_fences=fences
+  if phase=='status_preflight':
+   production.verify_production_status(type('ReadArgs',(),{'action':action})(),pb,response);assert response.mutation_feasible
+  responses.append(response);wire_proofs.append({'phase':phase,'operation':req.operation,'wire_request_SHA256':ev[0]['wire_sha256'],'wire_response_SHA256':hashlib.sha256(raw).hexdigest()})
+ final=responses[-1];from_json=pb.ProfileStoreResponse();jf.ParseDict(json.loads((D/(prefix+'_response.json')).read_text())['response'],from_json,ignore_unknown_fields=False);assert final.SerializeToString(deterministic=True)==from_json.SerializeToString(deterministic=True)
+ assert json.loads((D/(prefix+'_stdout.txt')).read_text())==json.loads((D/(prefix+'_response.json')).read_text())
+ return final,{'normal_mirrored_host_journal':'EXACT','wire_JSON_correspondence':'MATCH','fresh_fences':expected_fences,'journal_phases':phases,'wire_proofs':wire_proofs}

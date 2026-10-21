@@ -1,0 +1,136 @@
+{
+  "kind": "FINITE_OFFLINE_STATUS_HOST_GATE_CHILD_ACK_PUBLIC_SAFE_PINS",
+  "result": "PASS_VALID_STATUS_HOST_FALSE_POSITIVE_AND_CORRECTED_CHILD",
+  "no_device_actions": true,
+  "no_private_payload_inputs_in_archive": true,
+  "files": {
+    "/private/tmp/glyph-native-approved-preservation-request-20261022.py": {
+      "bytes": 8402,
+      "sha256": "78ffb25a59d4d8eac0705a0a91fa337dfa617c3bb8cf099e2c1d9f42697cc5e7"
+    },
+    "/private/tmp/glyph-native-approved-preservation-request-journal-child-20261022.py": {
+      "bytes": 10792,
+      "sha256": "74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f"
+    },
+    "/private/tmp/glyph-native-backup-after-metadata-stop-20261022/BACKUP_PACKET.json": {
+      "bytes": 3256,
+      "sha256": "a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85"
+    },
+    "/private/tmp/glyph-native-backup-after-metadata-stop-20261022/BACKUP_PACKET.md": {
+      "bytes": 3789,
+      "sha256": "80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229"
+    },
+    "/private/tmp/glyph-native-backup-host-journal-adjudication-20261022/REPORT.md": {
+      "bytes": 13028,
+      "sha256": "9b62de7ae9ab37a059ebdb17c54447d87a0bc7003ffb3bd17db58401bafc76bf"
+    },
+    "/private/tmp/glyph-native-backup-host-journal-adjudication-20261022/result.json": {
+      "bytes": 1863,
+      "sha256": "30c1196cbae54da2a6fed5edbbd9c7f8a6a32c69c981301b9e964ffed75d540c"
+    },
+    "/private/tmp/glyph-native-backup-host-journal-adjudication-20261022/status_replay_facts.json": {
+      "bytes": 2136,
+      "sha256": "2a921ffcab285279fba3e777afac4dbb281800bf3a77d2c5185205f36f5da23f"
+    },
+    "/private/tmp/glyph-native-metadata-stop-backup-review-20261022/PINS.json": {
+      "bytes": 6157,
+      "sha256": "2f0cd19b8733040dff7ef86d8a63805197357e52093d528453329b550eeee8a8"
+    },
+    "/private/tmp/glyph-native-metadata-stop-backup-review-20261022/REPORT.md": {
+      "bytes": 10631,
+      "sha256": "62a4022798c71e651c3abe203a811ebb101370537f3654b83448dba7080f10eb"
+    },
+    "/private/tmp/glyph-native-preservation-journal-child-prefinding-361e2fac-20261022.py": {
+      "bytes": 10727,
+      "sha256": "361e2facfce44eddbbe09a3b10cda2baa684d203f301ff605617194349893782"
+    },
+    "/private/tmp/glyph-native-preservation-journal-validator-20261022.py": {
+      "bytes": 4190,
+      "sha256": "670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264"
+    },
+    "/private/tmp/glyph-native-preservation-journal-validator-prefragmentation-bound-20261022.py": {
+      "bytes": 4169,
+      "sha256": "30b6e289689a91e0dad58be49f2464b26195374079084df04c7accbeccad400e"
+    },
+    "/private/tmp/glyph-native-remaining-approved-preservation-batch-20261022.py": {
+      "bytes": 4243,
+      "sha256": "78a162ef3f5ed49eaccde3293bdd5fd4bdd0128cf31a89215bdba9e4c4695253"
+    }
+  },
+  "unchanged_source_input_references": {
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto": {
+      "bytes": 33965,
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_candidate_tool.py": {
+      "bytes": 19077,
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_production_tool.py": {
+      "bytes": 10878,
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": {
+      "bytes": 46658,
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+    }
+  },
+  "private_input_references": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/config_adjudication.json": {
+      "bytes": 320,
+      "sha256": "317cec0802a1fabbb7db6655c61204dcb7323a4d04bb79b437d756d1c470a4cf"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/identity_adjudication.json": {
+      "bytes": 570,
+      "sha256": "dfcaf099f4a081d99dd96a69abda4eef78b08e498cb4271c00c4f46d6e78a91c"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/owner_approval.json": {
+      "bytes": 673,
+      "sha256": "117b1d3701aede3f09398878940220dd26ffede9b690050e99bc07c78182821e"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/postinstall_config_payload.bin": {
+      "bytes": 252,
+      "sha256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_command.json": {
+      "bytes": 1052,
+      "sha256": "1e1983d0c0d402eb78f82c63e889ef3c720e56b45a6502417b0a5e7bac487505"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_journal.jsonl": {
+      "bytes": 1308,
+      "sha256": "9f433be764c8ea1580378056a08ae0fa2b3ed12ac2b003f1e4a82a6bd55e1ea5"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_response.json": {
+      "bytes": 625,
+      "sha256": "f292ecb84617db279234a313c6905d46aa3fd1dc6fafe80149ad6eccb35343bd"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_result.json": {
+      "bytes": 256,
+      "sha256": "d2df97c867b6dee2211c8445ad98788acdfc6fc6bc9049d303a814c92fa8c33f"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_stderr.txt": {
+      "bytes": 1308,
+      "sha256": "9f433be764c8ea1580378056a08ae0fa2b3ed12ac2b003f1e4a82a6bd55e1ea5"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_stdout.txt": {
+      "bytes": 625,
+      "sha256": "f292ecb84617db279234a313c6905d46aa3fd1dc6fafe80149ad6eccb35343bd"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_stop.json": {
+      "bytes": 116,
+      "sha256": "b557c22bd15bc3261237dc0a47b57c2276c543780847bac2a68c50a216c917ce"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/status_response.json": {
+      "bytes": 625,
+      "sha256": "f292ecb84617db279234a313c6905d46aa3fd1dc6fafe80149ad6eccb35343bd"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/session_before_host_journal_adjudication.json": {
+      "bytes": 917,
+      "sha256": "9adf5988757f241981a20891435ca94e1492489db5d28b69f2f84ca669766b47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022/status_offline_wire_adjudication.json": {
+      "bytes": 900,
+      "sha256": "cbd58f4020ee477173e79a346d64f0df7cf9fac6d7dc494d34ecb093ae85c9a0"
+    }
+  }
+}

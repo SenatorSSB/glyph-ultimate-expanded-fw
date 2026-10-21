@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-21T23:12:05.170147+00:00",
+  "finding": "Overstrict empty-stderr host assertion; exact expected mirrored normal transport journal, recorded STATUS wire and JSON valid",
+  "ACK_report_SHA256": "9b62de7ae9ab37a059ebdb17c54447d87a0bc7003ffb3bd17db58401bafc76bf",
+  "ACK_PINS_SHA256": "9d26ac9b37443a59971687adba1cf95031c10d111c5283c4f1a2d780072082ee",
+  "immutable_prior_stopped_session_SHA256": "9adf5988757f241981a20891435ca94e1492489db5d28b69f2f84ca669766b47",
+  "original_status_stop_preserved_SHA256": "b557c22bd15bc3261237dc0a47b57c2276c543780847bac2a68c50a216c917ce",
+  "old_wrapper_unchanged_SHA256": "78ffb25a59d4d8eac0705a0a91fa337dfa617c3bb8cf099e2c1d9f42697cc5e7",
+  "child_SHA256": "74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f",
+  "validator_SHA256": "670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264",
+  "STATUS_extra_requests": 0,
+  "scope": "Only offline finalize recorded STATUS then untouched owner-approved LIST3/READ22; no new permission, no retry, no future-stop waiver",
+  "private_original_backups_unchanged": true
+}

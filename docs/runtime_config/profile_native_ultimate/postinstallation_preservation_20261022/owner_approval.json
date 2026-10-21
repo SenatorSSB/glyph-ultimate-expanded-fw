@@ -1,0 +1,10 @@
+{
+  "packet_id": "GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1",
+  "canonical": "fcbc22cbcb83a0422aaba7da4ad12eca675fa68c",
+  "MD_SHA256": "80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229",
+  "JSON_SHA256": "a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85",
+  "questionItemId": "[\"request_user_input_async\",\"call_5d9884e838c34d049250ab9130bcbf7f\",0]",
+  "owner_answer": "Approve backup-only continuation (Recommended)",
+  "recorded_utc": "2026-10-21T23:02:34.011155+00:00",
+  "scope": "Only unchanged phase B after metadata stop; one known owner Menu->Configurator restart and bounded read-only preservation; no retries or mutations"
+}

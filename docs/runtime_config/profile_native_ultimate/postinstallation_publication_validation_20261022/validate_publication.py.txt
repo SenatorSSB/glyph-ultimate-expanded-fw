@@ -1,0 +1,59 @@
+from pathlib import Path
+import json,hashlib,re,subprocess
+W=Path('/private/tmp/glyph-native-curation-20261020');R=W/'docs/runtime_config/profile_native_ultimate';A=R/'postinstallation_preservation_20261022';V=R/'postinstallation_publication_validation_20261022';O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');F=Path('/private/tmp/glyph-profile-native-20261020');BASE='fcbc22cbcb83a0422aaba7da4ad12eca675fa68c'
+def sh(*a,cwd=W):return subprocess.check_output(a,cwd=cwd,text=True)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def check(p,e):
+ p=Path(p);assert p.is_file() and not p.is_symlink() and p.stat().st_size==e['bytes'] and sha(p)==e['sha256'],str(p)
+def queue(s):
+ a=s.index('```json',s.index('<!-- queue-state:start -->'))+7;b=s.index('```',a);return json.loads(s[a:b])
+oldq=queue(sh('git','show',BASE+':docs/project/ACTIVE_AGENT_QUEUE.md'));newq=queue((W/'docs/project/ACTIVE_AGENT_QUEUE.md').read_text());q=json.loads(json.dumps(oldq));oldi=next(x for x in q['items'] if x['id']=='GP-NATIVE-001');i=next(x for x in newq['items'] if x['id']=='GP-NATIVE-001');oldi['hardware_evidence_gaps']=i['hardware_evidence_gaps'];assert q==newq
+assert i['status']=='HARDWARE_TEST_REQUIRED' and i['hardware_result'] is None and i['hardware_evidence_record'] is None and i['hardware_evidence_dependency_satisfied'] is False
+old=json.loads(sh('git','show',BASE+':docs/runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.json'));new=json.loads((R/'exact_candidate_334f_status_20261021.json').read_text())
+assert {k for k in set(old)|set(new) if old.get(k)!=new.get(k)}<={'next_backup_stop_packet','device_approval','postinstallation_preservation_result','host_journal_gate_adjudication','latest_sourcefree_postinstallation_validation','remaining','postinstallation_preservation_audit'}
+assert new['next_backup_stop_packet']['owner_approval']=='DIRECT_OWNER_APPROVED_BACKUP_ONLY_CONTINUATION' and new['next_backup_stop_packet']['executed'] is True
+D=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022';parent=O/'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022';metadata=O/'local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022';original=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021'
+for folder,rel,h,count in [(D,'postinstall_preservation_custody_manifest.json','e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40',227),(parent,'installation_stage_custody_manifest.json','228e41413f5a49137db80769a21bf1ffca86c0d2d9996706612e4ce14c8e70f2',34),(metadata,'metadata_stage_custody_manifest.json','221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7',7),(original,'configurator_entry_20261022/private_backup_custody_manifest.json','f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d',251)]:
+ p=folder/rel;assert sha(p)==h;m=json.loads(p.read_text());assert len(m['files'])==count
+ for n,e in m['files'].items():check(folder/n,e)
+s=json.loads((D/'session_state.json').read_text());assert s['stop'] and s['original_preservation_complete'] and s['stage']=='POSTINSTALL_CONFIG_AND_ALL22_ORIGINAL_PRESERVATION_PASS_STOP'
+expected={'owner_Menu_Configurator_entries_confirmed':1,'Configurator_CDC_metadata_lookups':1,'Configurator_identity_requests':1,'Config_backups':1,'STATUS_total':26,'LIST_calls':3,'original_profile_READs':22,'metadata_invocations':0,'report_capture_attempts':0,'firmware_copies':0,'Config_profile_writes':0,'target_metric_requests':0,'Switch_WUP_actions':0}
+assert all(s[k]==v for k,v in expected.items())
+r=json.loads((A/'preservation_result.json').read_text());assert r['Config_API_raw_payload_equal'] and r['all_directory_metadata_and_decoded_wrappers_equal'] and r['counts']==expected and len(r['profiles'])==22 and r['native_hardware_result'] is None
+assert (D/'postinstall_config_payload.bin').read_bytes()==(original/'configurator_entry_20261022/original_config_payload.bin').read_bytes()
+for ident in r['original_IDs']:assert (D/f'postinstall_profile_{ident}_canonical.bin').read_bytes()==(original/f'configurator_entry_20261022/original_profile_{ident}_canonical.bin').read_bytes()
+for n,e in json.loads((A/'manifest.json').read_text())['files'].items():check(A/n,e)
+review_count=0
+for rel in ['independent_host_journal_adjudication/PINS.json','independent_preservation_audit/PINS.json']:
+ for group in json.loads((A/rel).read_text()).values():
+  if isinstance(group,dict):
+   for p,e in group.items():
+    if isinstance(e,dict) and 'sha256' in e and 'bytes' in e:check(p,e);review_count+=1
+assert sh('git','rev-parse','HEAD',cwd=F).strip()==old['candidate']['git_sha'] and sh('git','rev-parse','HEAD^{tree}',cwd=F).strip()==old['candidate']['tree'] and not sh('git','status','--porcelain',cwd=F)
+fc=O/Path(old['artifacts']['preserved_firmware_artifact_locator']).parent
+for n,k in [('firmware.uf2','uf2'),('firmware.elf','elf'),('firmware.bin','bin')]:check(fc/n,old['artifacts'][k])
+tracked=set(sh('git','diff','--name-only',BASE).splitlines());untracked=set(sh('git','ls-files','--others','--exclude-standard').splitlines());changed=tracked|untracked
+assert tracked=={'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md','docs/project/ACTIVE_AGENT_QUEUE.md'}|{'docs/runtime_config/profile_native_ultimate/'+n for n in ['README.md','chapter_ledger.md','exact_candidate_334f_status_20261021.json','exact_candidate_334f_status_20261021.md']}
+assert all(p.startswith('docs/runtime_config/profile_native_ultimate/postinstallation_preservation_20261022/') or p.startswith('docs/runtime_config/profile_native_ultimate/postinstallation_publication_validation_20261022/') for p in untracked)
+serials=[]
+def walk(v):
+ if isinstance(v,dict):
+  for k,x in v.items():
+   if 'serial' in k.lower() and isinstance(x,str) and x and '/' not in x and len(x)>4:serials.append(x.encode())
+   walk(x)
+ elif isinstance(v,list):
+  for x in v:walk(x)
+walk(json.loads((D/'configurator_port.json').read_text()))
+links=0
+for rel in changed:
+ p=W/rel;assert p.is_file() and not p.is_symlink();b=p.read_bytes();assert b'\x00' not in b
+ for private in serials:assert private not in b,('private serial',rel)
+ if rel in untracked:assert not re.search(rb'[A-Za-z0-9+/]{300,}={0,2}',b),('unexpected encoded payload',rel)
+ if rel.endswith('.md'):
+  for t in re.findall(r'\[[^\]]*\]\(([^)]+)\)',b.decode()):
+   if re.match(r'^[a-z]+:',t) or t.startswith('#'):continue
+   assert (p.parent/t.split('#')[0]).exists(),(rel,t);links+=1
+subprocess.run(['git','diff','--check'],cwd=W,check=True)
+assert 'glyph_agent_framework_docs: PASS' in (V/'framework.log').read_text() and 'status=PASS' in (V/'sequence.log').read_text() and 'PASS' in (V/'navigation.log').read_text() and not (V/'diff.log').read_bytes()
+result={'state':'FOCUSED_SOURCEFREE_POSTINSTALL_PRESERVATION_PUBLICATION_PASS','framework_sequence_navigation_diff':'PASS','scope':'DOCS_ONLY','other_orders_unchanged':len(newq['items'])-1,'only_queue_field_changed':'GP-NATIVE-001.hardware_evidence_gaps','all_protected_candidate_build_resource_protocol_oracle_hardware_fields_unchanged':True,'private_postinstall_files_rehashed':227,'private_installation_files_rehashed':34,'private_metadata_files_rehashed':7,'private_original_files_rehashed':251,'all_prior_public_evidence_unchanged_by_diff_scope':True,'peer_input_files_rehashed':review_count,'all22_API_profile_wrappers_and_Config_equal_originals':True,'no_STATUS_retry':True,'no_native_mutation_or_activation':True,'hardware_result':None,'native_hardware':'NOT_TESTED','timing_highwater':'NOT_MEASURED','privacy':'PASS_no_raw_original_or_serial_publication','local_markdown_links':links,'changed_paths_at_check':len(changed),'full_surface':'NOT_RERUN; historical aggregate debt preserved; no global PASS'}
+(V/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

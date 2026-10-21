@@ -1,0 +1,90 @@
+"""Remaining approved LIST/READ only. Exact normal host journal/wire replay; no mutations or retries."""
+from pathlib import Path
+import datetime,hashlib,json,os,secrets,subprocess,sys,base64
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077);sys.dont_write_bytecode=True
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022';S=D/'session_state.json';F=Path('/private/tmp/glyph-profile-native-20261020');OLD=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022';P=Path('/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/backup_after_metadata_stop_20261022/BACKUP_PACKET.json')
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,j,mode='x'):
+ with p.open(mode) as f:json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+assert sha(P)=='a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85';packet=json.loads(P.read_text())
+assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=F,text=True).strip()==packet['candidate'] and not subprocess.check_output(['git','status','--porcelain'],cwd=F,text=True)
+for n,h in {'glyph_runtime_identity_tool.py':'bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead','glyph_serial_config_tool.py':'0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c','glyph_profile_store_production_tool.py':'4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef','glyph_profile_store_candidate_tool.py':'33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2'}.items():assert sha(F/'tools'/n)==h,n
+s=json.loads(S.read_text());assert not s['stop'] and s['same_unit_CDC_verified'] and s['owner_Menu_Configurator_entries_confirmed']==1
+port=s['Configurator_port'];action=sys.argv[1];assert action in ('list','read')
+if action!='identity':assert s.get('identity_normal_verified') is True
+if action in ('status','list','read'):assert s.get('Config_preservation_verified') is True
+if action in ('list','read'):assert s.get('normal_status_verified') is True
+prefix=action;ident=None;cursor=None
+if action=='identity':
+ assert s['Configurator_identity_requests']==0;s['Configurator_identity_requests']=1;token=secrets.randbits(64) or 1;tool=F/'tools/glyph_runtime_identity_tool.py';cmd=[sys.executable,str(tool),'--port',port,'--context','configurator','--token',hex(token),'--session',s['boot_session'],'--timeout','2']
+elif action=='config':
+ assert s['Config_backups']==0;s['Config_backups']=1;tool=F/'tools/glyph_serial_config_tool.py';cmd=[sys.executable,str(tool),'--read','--port',port,'--backup-out',str(D/'postinstall_config_backup.json'),'--baudrate','115200','--timeout-sec','5']
+else:
+ assert s['STATUS_total']<26;s['STATUS_total']+=1;tool=F/'tools/glyph_profile_store_production_tool.py'
+ if action=='status':assert not s.get('explicit_STATUS_attempted',False);s['explicit_STATUS_attempted']=True
+ elif action=='list':
+  assert s['LIST_calls']<3;cursor=int(sys.argv[2]);assert cursor in (0,8,16) and cursor not in s.get('list_cursors_attempted',[]);assert cursor==8*s['LIST_calls'];s.setdefault('list_cursors_attempted',[]).append(cursor);s['LIST_calls']+=1;prefix='list_'+str(cursor)
+ else:
+  assert s.get('directory_preservation_verified') is True;ident=int(sys.argv[2]);ids=packet['preservation_readback']['original_IDs'];assert s['original_profile_READs']<22 and ident==ids[s['original_profile_READs']];s.setdefault('read_ids_attempted',[]).append(ident);s['original_profile_READs']+=1;prefix='read_'+str(ident)
+ cmd=[sys.executable,str(tool),'--port',port,'--timeout','5','--journal-out',str(D/(prefix+'_journal.jsonl')),action,'--output',str(D/(prefix+'_response.json'))]
+ if action=='list':cmd+=['--page',str(cursor),'--page-size','8']
+ elif action=='read':cmd+=['--profile-id',str(ident)]
+for suffix in ['_command.json','_stdout.txt','_stderr.txt','_result.json','_adjudication.json']:assert not (D/(prefix+suffix)).exists()
+save(D/(prefix+'_command.json'),{'argv':cmd,'wrapper_SHA256':sha(Path(__file__)),'tool_SHA256':sha(tool),'reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'UID':os.getuid(),'effective_UID':os.geteuid(),'external_timeout_seconds':20,'requests':{'identity':int(action=='identity'),'GET_CONFIG':int(action=='config'),'STATUS':int(action in ('status','list','read')),'LIST':int(action=='list'),'READ':int(action=='read')},'retry':False})
+s['stage']='ATTEMPT_RESERVED_'+prefix.upper()+'_NO_RETRY';save(S,s,'w')
+with (D/(prefix+'_stdout.txt')).open('xb') as out,(D/(prefix+'_stderr.txt')).open('xb') as err:
+ try:r=subprocess.run(cmd,stdout=out,stderr=err,timeout=20);rc=r.returncode;timed=False
+ except subprocess.TimeoutExpired:rc=None;timed=True
+ except BaseException as e:rc=None;timed=False;save(D/(prefix+'_launch_error.json'),{'error':repr(e),'retry':False})
+ finally:out.flush();os.fsync(out.fileno());err.flush();os.fsync(err.fileno())
+save(D/(prefix+'_result.json'),{'action':action,'returncode':rc,'timeout':timed,'stdout_SHA256':sha(D/(prefix+'_stdout.txt')),'stderr_SHA256':sha(D/(prefix+'_stderr.txt')),'retry':False})
+try:
+ assert rc==0 and not timed,'CLI failure/timeout; no retry'
+ validator=Path('/private/tmp/glyph-native-preservation-journal-validator-20261022.py');assert sha(validator)=='30b6e289689a91e0dad58be49f2464b26195374079084df04c7accbeccad400e'
+ import importlib.util
+ spec=importlib.util.spec_from_file_location('preservation_journal',validator);v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
+ received,journal_proof=v.validate(D,prefix,action,s['fresh_fences'],ident,cursor)
+ if action=='identity':
+  j=json.loads((D/'identity_stdout.txt').read_text());assert j['session']==s['boot_session'] and int(j['token'])==token and j['observation']=='current_session_only'
+  for k,v in packet['preservation_readback']['identity_expected'].items():assert j[k]==v,('Unexpected Configurator identity',k)
+  s['identity_normal_verified']=True;proof={'match':'PASS_NORMAL_CONFIGURATOR','not_prior_gameplay_attestation':True,'identity':j}
+ elif action=='config':
+  sys.path.insert(0,str(F/'tools'));import glyph_serial_config_tool as t
+  pb,jf,_=t.load_runtime_proto_modules(F)
+  now=json.loads((D/'postinstall_config_backup.json').read_text());before=json.loads((OLD/'original_backup.json').read_text())
+  nr=base64.b64decode(now['rawConfigPayloadBase64'],validate=True);orr=base64.b64decode(before['rawConfigPayloadBase64'],validate=True);assert hashlib.sha256(orr).hexdigest()=='54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460'
+  nm=pb.Config();om=pb.Config();assert nm.ParseFromString(nr)==len(nr) and om.ParseFromString(orr)==len(orr)
+  nj=pb.Config();oj=pb.Config();jf.ParseDict(now['config'],nj,ignore_unknown_fields=False);jf.ParseDict(before['config'],oj,ignore_unknown_fields=False);assert nj==nm and oj==om
+  assert nm==om,'Config content differs; preserve both, stop unexplained difference'
+  with (D/'postinstall_config_payload.bin').open('xb') as f:f.write(nr);f.flush();os.fsync(f.fileno())
+  s['Config_preservation_verified']=True;proof={'match':'PASS_ALL_DECODED_CONFIG_FIELDS','raw_payload_bytes':len(nr),'raw_payload_SHA256':hashlib.sha256(nr).hexdigest(),'raw_API_payload_equal':nr==orr,'user_fields_and_references_equal':True,'firmware_bookkeeping_equal':True,'not_raw_filesystem_export':True}
+ else:
+  j=json.loads((D/(prefix+'_response.json')).read_text())['response'];assert j['status']=='PROFILE_STORE_OK' and j['protocol_version']==2 and j['mutation_protocol_version']==2
+  assert int(j['store_incarnation'])==1 and not int(j.get('recovery_flags',0))
+  if action=='status':
+   assert j.get('mutation_feasible') is True
+   s['fresh_fences']={k:int(j[k]) for k in ('store_incarnation','store_generation','config_generation')};s['normal_status_verified']=True;proof={'normal_STATUS':'PASS','fresh_fences':s['fresh_fences'],'not_target_timing_or_watermark':True}
+  else:
+   for k,v in s['fresh_fences'].items():assert int(j[k])==v,('Fresh fence changed',k)
+   proof={'response_and_fences':'PASS','action':action,'journal':journal_proof}
+   if action=='list':
+    old_page=v.pb.ProfileStoreResponse();v.jf.ParseDict(json.loads((OLD/(prefix+'_response.json')).read_text())['response'],old_page,ignore_unknown_fields=False)
+    assert list(received.entries)==list(old_page.entries),'Directory entry metadata/order differs from originals'
+    assert received.next_page_cursor==old_page.next_page_cursor=={0:8,8:16,16:0}[cursor],'Unexpected next cursor'
+    s.setdefault('listed_profile_ids',[]).extend(int(e.profile_id) for e in received.entries)
+    if cursor==16:
+     assert s['LIST_calls']==3 and s['listed_profile_ids']==packet['preservation_readback']['original_IDs'],'Original directory IDs differ'
+     s['directory_preservation_verified']=True
+    proof['directory_entries_original_match']=True;proof['listed_count_this_page']=len(received.entries)
+   else:
+    byid={int(e['profile_id']):e for e in json.loads((OLD/'original_directory_complete.json').read_text())['entries']};entry=byid[ident]
+    assert received.HasField('profile') and received.profile_id==ident and received.profile_revision==int(entry['revision'])
+    assert int(entry['payload_version']) in (1,2,3) and received.profile.schema_version in (1,2,3) and not received.profile.native_payload
+    raw=received.profile.SerializeToString(deterministic=True);assert raw==(OLD/f'original_profile_{ident}_canonical.bin').read_bytes(),'Original full decoded profile differs'
+    with (D/f'postinstall_profile_{ident}_canonical.bin').open('xb') as f:f.write(raw);f.flush();os.fsync(f.fileno())
+    proof.update({'profile_id':ident,'revision':received.profile_revision,'directory_payload_version':int(entry['payload_version']),'decoded_schema_version':received.profile.schema_version,'full_decoded_wrapper_original_match':True,'canonical_wrapper_bytes':len(raw),'canonical_wrapper_SHA256':hashlib.sha256(raw).hexdigest(),'no_legacy_metadata_normalization':True})
+    s.setdefault('profile_ids_preservation_verified',[]).append(ident)
+ s['stage']=prefix.upper()+'_RESULT_VERIFIED';save(D/(prefix+'_adjudication.json'),proof);save(S,s,'w');print(json.dumps({'action':prefix,'result':'PASS',**({k:v for k,v in proof.items() if k not in ['identity']} if action in ('identity','config','status') else {})},indent=2))
+except BaseException as e:
+ s['stop']=True;s['stage']='STOP_'+prefix.upper()+'_NO_RETRY';save(D/(prefix+'_stop.json'),{'error':repr(e),'all_further_actions_stopped':True,'retry':False});save(S,s,'w');print(json.dumps({'action':prefix,'result':'STOP','error':repr(e),'retry':False}));raise

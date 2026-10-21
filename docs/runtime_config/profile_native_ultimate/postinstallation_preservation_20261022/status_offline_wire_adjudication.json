@@ -1,0 +1,28 @@
+{
+  "source": "RECORDED_STATUS_ONLY_OFFLINE_NO_DEVICE_REQUEST",
+  "validator_SHA256": "670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264",
+  "proof": {
+    "normal_mirrored_host_journal": "EXACT",
+    "wire_JSON_correspondence": "MATCH",
+    "fresh_fences": {
+      "store_incarnation": 1,
+      "store_generation": 172,
+      "config_generation": 1156314366
+    },
+    "journal_phases": [
+      "status_preflight"
+    ],
+    "wire_proofs": [
+      {
+        "phase": "status_preflight",
+        "operation": 1,
+        "wire_request_SHA256": "6a805df782cd167e9dea64406148249577f171a8310d0802e0b0c484b749628e",
+        "wire_response_SHA256": "27b8a0c9cf8ab8ec3b9175feb37179ff133b4d097f9019d9486267a676b0fb6a"
+      }
+    ]
+  },
+  "expected_source_stderr_mirrors_journal": true,
+  "no_STATUS_retry": true,
+  "normal_status": "PASS",
+  "Config_and_original_STATUS_values_equal": true
+}

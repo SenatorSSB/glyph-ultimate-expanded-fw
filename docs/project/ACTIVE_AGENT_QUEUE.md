@@ -12,19 +12,20 @@ original cap remain unchanged. Historical failed/incomplete evidence stays exact
 
 The [exact installation/access result](../runtime_config/profile_native_ultimate/installation_results_20261022/README.md)
 records one successful owner-delegated F/UF2 copy, owner “Works” and matching
-original-profile4 XInput identity, followed by raw-selection STOP/zero reports.
-The [owner-approved metadata attempt](../runtime_config/profile_native_ultimate/metadata_results_20261022/README.md)
-found the exact retained anchor and10 complete descendants, then original query
-status0/entries0/invalid iterator produced INCOMPLETE_STOP. No plug-in/QI/getter/
-report call or Configurator continuation followed. Root cause remains UNPROVEN;
-the unlogged iterator cannot distinguish SDK-permitted NULL/no-match from
-invalidated nonnull. All preinstall backups remain private; postinstall Config/
-all22 preservation reads remain unexecuted and their contents unclaimed.
-The [backup-only stop exception](../runtime_config/profile_native_ultimate/backup_after_metadata_stop_20261022/BACKUP_PACKET.md)
-awaits new explicit owner approval for the unchanged known-menu/read-only phase B.
-It permits no metadata/report retry, firmware copy, Config/ProfileStore/native
-write, target metrics, recovery, route change or acceptance waiver. F/source/
-build/resource/limits/protocol/oracles remain unchanged and source unmerged.
+original-profile4 XInput identity. Raw selection and the later approved metadata
+attempt retain their exact stops/zero reports, with root cause UNPROVEN.
+The [approved postinstallation preservation](../runtime_config/profile_native_ultimate/postinstallation_preservation_20261022/README.md)
+now passes: one known-menu Configurator entry, same-unit lookup and normal
+identity; Config252 API bytes exactly equal original54fda; all22 directory entries,
+revisions and complete decoded profile wrappers match. LIST3/READ22/STATUS26,
+fresh inc1/store172/Config1156314366 fences, no retry or Config/profile mutation.
+A proven host-only empty-stderr assertion was corrected after independent offline
+wire/source review, preserving the valid STATUS/error/snapshot and unused child
+finding, without requery or new device authority. All227 session files are pinned
+privately. This is API preservation, not raw filesystem export or native acceptance.
+Device access ended STOP in Configurator. Next host observation preparation is
+offline only and requires a separate exact owner packet before any live access.
+F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
 remain. Nunchuk NOT_TESTED, target timing/highwater NOT_MEASURED, RT2 deferred.
@@ -8828,7 +8829,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact F/UF2 installed once; current legacy profile4 identity matches. Approved one metadata attempt found retained unique anchor/10 complete descendants but original query0/invalid iterator caused INCOMPLETE_STOP; no report/plugin/QI/getter or Configurator continuation/retry. Postinstall Config/all22 readback still pending under new bounded backup-only stop-exception approval. No native Config/ProfileStore writes or physical campaign approved; all18/H1-H12/complete fields/target measures/exact HEP/tested-source/DONE remain. Frozen source/build/resource/limits/custody unchanged."
+        "Exact F/UF2 installed once; original legacy4 runtime identity matches. Approved postinstall API preservation PASS: Config252B byte-equal54fda, all22 directory entries/revisions/full decoded canonical wrappers equal originals, LIST3/READ22/STATUS26 stable fresh inc1/store172/Config1156314366; no retry or mutation. Device ended STOP in Configurator.",
+        "Raw capture and approved metadata attempts retain exact stops/zero reports. Host-only STATUS stderr assertion independently corrected offline without requery; original error/source/snapshot and unused child finding retained. Separate exact live-observer/native mutation/physical packet approval remains required.",
+        "All18/H1-H12/complete required backend fields/target timing and runtime stack observations/exact human HEP/tested-source integration/strict DONE remain. F/source/build/resource/limits/custody/protocol unchanged; no native profile mutation or activation."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",
       "status_documentation_updates": "Record exact reviewed source/resource/verification/rebinding/converter/identity facts in named chapter docs, candidate B/F/tree/build/descriptor/UF2size+SHA/custody, complete H1-H12 observations and limitations. Governance publishes source-free pending/result queue and mirrors, not candidate source. Preserve GP-BIND-001/002 FAIL,003 HARDWARE_VALIDATED/integrated but not strictDONE, historical H4 root cause UNPROVEN, RT2 DEFERRED/underlyingUNRESOLVED, NunchukNOT_TESTED, GameCube identity unsupported. Independent review and actual proof precede live publication; no aggregate PASS substitution. Record diagnostic wire/source/build/custody/overhead/measurement-window provenance and raw target validity/gaps; NATIVE-REVIEW-P1-STACK remains OPEN until actual affected structural proof closes it. No target measurements or physical PASS inferred by this amendment.",

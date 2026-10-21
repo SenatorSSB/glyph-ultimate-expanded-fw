@@ -1,0 +1,34 @@
+{
+  "kind": "FINITE_ACTUAL_POSTINSTALL_PRESERVATION_DATA_AUDIT",
+  "result": "PASS_API_PRESERVATION_CUSTODY_COUNTS_WIRE",
+  "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "UF2_SHA256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+  "new_custody_files_verified": 227,
+  "original_files_rehashed": 251,
+  "Config_API_payload_bytes": 252,
+  "Config_API_payload_SHA256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+  "all22_complete_decoded_wrappers_exact_original": true,
+  "all3_directory_pages_metadata_order_revisions_exact_original": true,
+  "wire_journals_replayed": 26,
+  "ProfileStore_transmissions": {
+    "STATUS": 26,
+    "LIST": 3,
+    "READ": 22,
+    "total": 51
+  },
+  "standalone_STATUS_attempts": 1,
+  "no_STATUS_retry": true,
+  "fences": {
+    "store_incarnation": 1,
+    "store_generation": 172,
+    "config_generation": 1156314366
+  },
+  "prior_host_and_metadata_stop_preserved": true,
+  "unused_initial_child_negative_preserved": true,
+  "final_stop": true,
+  "final_stage": "POSTINSTALL_CONFIG_AND_ALL22_ORIGINAL_PRESERVATION_PASS_STOP",
+  "reviewer_live_actions": 0,
+  "native_engine_activation_or_output_or_metrics_or_HEP_PASS": "NOT_CLAIMED",
+  "sole_canonical_publisher": "ROOT",
+  "private_payload_publication": false
+}

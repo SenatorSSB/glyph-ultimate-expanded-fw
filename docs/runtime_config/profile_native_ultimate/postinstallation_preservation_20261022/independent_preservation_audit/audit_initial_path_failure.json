@@ -1,0 +1,9 @@
+{
+  "kind": "REVIEWER_OFFLINE_AUDIT_PATH_FIX_ONLY",
+  "audit_source_SHA256": "e3a614eb2638fb63252da83a07c9cd0b0653d13f02846ff3cdee60566450e4a7",
+  "exit_code": 1,
+  "error": "FileNotFoundError for entry-root/approval_receipt.json",
+  "cause": "Original251-file manifest paths are relative to parent preflight directory, not Configurator entry directory. No original missing-file or device failure claim.",
+  "device_actions": 0,
+  "correction": "Resolve original manifest entries relative to B.parent; retain relative-path safety checks and original-file hash equality."
+}

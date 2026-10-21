@@ -1,0 +1,273 @@
+{
+  "kind": "FINITE_ACTUAL_POSTINSTALL_PRESERVATION_DATA_AUDIT",
+  "result": "PASS_API_PRESERVATION_CUSTODY_COUNTS_WIRE",
+  "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "UF2_SHA256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+  "private_new_manifest_SHA256": "e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40",
+  "new_files_verified": 227,
+  "original_manifest_SHA256": "f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d",
+  "original_files_rehashed": 251,
+  "Config_bytes": 252,
+  "Config_raw_SHA256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+  "Config_raw_and_full_decoded_JSON_equal_original": true,
+  "identity_current_normal_configurator_only": true,
+  "fresh_fences": {
+    "store_incarnation": 1,
+    "store_generation": 172,
+    "config_generation": 1156314366
+  },
+  "counts": {
+    "owner_Menu_Configurator_entries_confirmed": 1,
+    "Configurator_CDC_metadata_lookups": 1,
+    "Configurator_identity_requests": 1,
+    "Config_backups": 1,
+    "STATUS_total": 26,
+    "LIST_calls": 3,
+    "original_profile_READs": 22,
+    "metadata_invocations": 0,
+    "report_capture_attempts": 0,
+    "firmware_copies": 0,
+    "Config_profile_writes": 0,
+    "target_metric_requests": 0,
+    "Switch_WUP_actions": 0
+  },
+  "wire_transmit_operation_counts": {
+    "STATUS": 26,
+    "LIST": 3,
+    "READ": 22
+  },
+  "ProfileStore_transmissions_total": 51,
+  "standalone_STATUS_attempts": 1,
+  "all_journals_wire_JSON_normal_mirror_valid": true,
+  "all_journals_ordered_sequentially": true,
+  "directory_pages": [
+    {
+      "cursor": 0,
+      "entries": 8,
+      "next_cursor": 8,
+      "all_entry_metadata_original_equal": true
+    },
+    {
+      "cursor": 8,
+      "entries": 8,
+      "next_cursor": 16,
+      "all_entry_metadata_original_equal": true
+    },
+    {
+      "cursor": 16,
+      "entries": 6,
+      "next_cursor": 0,
+      "all_entry_metadata_original_equal": true
+    }
+  ],
+  "profiles": [
+    {
+      "profile_id": 1,
+      "revision": 2,
+      "directory_payload_version": 1,
+      "decoded_schema_version": 1,
+      "canonical_wrapper_bytes": 1960,
+      "canonical_wrapper_SHA256": "b5b0f076b5f4bbad97f76ea722281018c3e9cf54355f66efaed54aa1b98dce4d",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 3,
+      "revision": 5,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 4,
+      "revision": 1,
+      "directory_payload_version": 1,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 5,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 6,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 7,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 8,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 9,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 10,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 11,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 12,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 13,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 14,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 15,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 16,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 17,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 18,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 19,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 20,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 21,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 22,
+      "revision": 132,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3042,
+      "canonical_wrapper_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    },
+    {
+      "profile_id": 24,
+      "revision": 2,
+      "directory_payload_version": 3,
+      "decoded_schema_version": 3,
+      "canonical_wrapper_bytes": 3047,
+      "canonical_wrapper_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "exact_original_and_wire_and_postread_wrapper_equal": true
+    }
+  ],
+  "metadata_prior_stop_all7files_unchanged": true,
+  "host_false_positive_and_initial_unexecuted_child_negative_retained": true,
+  "final_stop": true,
+  "final_stage": "POSTINSTALL_CONFIG_AND_ALL22_ORIGINAL_PRESERVATION_PASS_STOP",
+  "reviewer_live_actions": 0,
+  "port_constructions": 0,
+  "native_activation_or_output_or_metrics_or_HEP_PASS": "NOT_CLAIMED",
+  "no_raw_filesystem_or_unobserved_history_export": true,
+  "python_executable": "/usr/local/bin/python3",
+  "python_version": "3.14.4 (v3.14.4:23116f998f6, Apr  7 2026, 09:45:22) [Clang 17.0.0 (clang-1700.6.4.2)]"
+}

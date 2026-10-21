@@ -1,0 +1,109 @@
+"""Actual retained-data audit only. No serial/device operation or production CLI."""
+from pathlib import Path
+import sys, json, hashlib, base64, importlib.util
+sys.dont_write_bytecode = True
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+S=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022'
+B=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022'
+D=Path(__file__).resolve().parent
+F=Path('/private/tmp/glyph-profile-native-20261020')
+P=Path('/private/tmp/glyph-native-postinstall-preservation-public-20261022')
+H=lambda f:hashlib.sha256(Path(f).read_bytes()).hexdigest()
+HB=lambda b:hashlib.sha256(b).hexdigest()
+J=lambda f:json.loads(Path(f).read_text())
+assert H(S/'postinstall_preservation_custody_manifest.json')=='e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40'
+manifest=J(S/'postinstall_preservation_custody_manifest.json');assert len(manifest['files'])==227
+assert {p.name for p in S.iterdir() if p.is_file()}==set(manifest['files'])|{'postinstall_preservation_custody_manifest.json'}
+for name,entry in manifest['files'].items():
+ assert Path(name).name==name
+ assert (S/name).stat().st_size==entry['bytes'] and H(S/name)==entry['sha256'],name
+assert H(B/'private_backup_custody_manifest.json')=='f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d'
+original_manifest=J(B/'private_backup_custody_manifest.json');assert len(original_manifest['files'])==251
+for name,entry in original_manifest['files'].items():
+ assert Path(name).name==name
+ assert (B/name).stat().st_size==entry['bytes'] and H(B/name)==entry['sha256'],name
+assert H(P/'preservation_result.json')=='039ce84ab390d33c72abc075ec362c699e93c6f73897db7242c94d2c2e25a3fa'
+assert H(P/'private_hash_references.json')=='83c9dae88856082328602a22489127b78b302ee844239ff3477a4d37d6cbc5c3'
+public=J(P/'preservation_result.json');refs=J(P/'private_hash_references.json')
+assert refs['files']==manifest['files'] and refs['manifest_SHA256']==H(S/'postinstall_preservation_custody_manifest.json')
+expected_source={'glyph_serial_config_tool.py':'0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c','glyph_profile_store_production_tool.py':'4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef','glyph_profile_store_candidate_tool.py':'33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2'}
+for n,h in expected_source.items():assert H(F/'tools'/n)==h
+validator=Path('/private/tmp/glyph-native-preservation-journal-validator-20261022.py');assert H(validator)=='670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264'
+assert H(Path('/private/tmp/glyph-native-approved-preservation-request-journal-child-20261022.py'))=='74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f'
+assert H(Path('/private/tmp/glyph-native-remaining-approved-preservation-batch-20261022.py'))=='78a162ef3f5ed49eaccde3293bdd5fd4bdd0128cf31a89215bdba9e4c4695253'
+# The reviewed loader performs offline schema generation only. Make any accidental
+# serial-port instantiation impossible in this audit before importing the validator.
+sys.path.insert(0,str(F/'tools'))
+import glyph_serial_config_tool as transport
+port_constructions=0
+class ForbiddenPort:
+ def __init__(self,*a,**k):
+  global port_constructions
+  port_constructions+=1
+  raise AssertionError('device construction forbidden in offline audit')
+transport.PosixSerialPort=ForbiddenPort
+spec=importlib.util.spec_from_file_location('frozen_offline_journal_validator',validator)
+v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
+state=J(S/'session_state.json');fences={'store_incarnation':1,'store_generation':172,'config_generation':1156314366}
+assert state['stop'] is True and state['stage']=='POSTINSTALL_CONFIG_AND_ALL22_ORIGINAL_PRESERVATION_PASS_STOP' and state['original_preservation_complete'] is True
+assert state['fresh_fences']==fences
+ids=[1,3,4,*range(5,23),24]
+assert state['read_ids_attempted']==state['listed_profile_ids']==state['profile_ids_preservation_verified']==public['original_IDs']==ids
+expected_counts={'owner_Menu_Configurator_entries_confirmed':1,'Configurator_CDC_metadata_lookups':1,'Configurator_identity_requests':1,'Config_backups':1,'STATUS_total':26,'LIST_calls':3,'original_profile_READs':22,'metadata_invocations':0,'report_capture_attempts':0,'firmware_copies':0,'Config_profile_writes':0,'target_metric_requests':0,'Switch_WUP_actions':0}
+assert all(state[k]==value for k,value in expected_counts.items()) and public['counts']==expected_counts
+assert state['explicit_STATUS_attempted'] and state['host_journal_gate_adjudicated'] and state['normal_status_verified']
+# Preserve the original host stop and pre-correction negative; no STATUS retry.
+assert H(S/'status_stop.json')=='b557c22bd15bc3261237dc0a47b57c2276c543780847bac2a68c50a216c917ce'
+assert H(S/'session_before_host_journal_adjudication.json')=='9adf5988757f241981a20891435ca94e1492489db5d28b69f2f84ca669766b47'
+assert H(Path('/private/tmp/glyph-native-approved-preservation-request-20261022.py'))=='78ffb25a59d4d8eac0705a0a91fa337dfa617c3bb8cf099e2c1d9f42697cc5e7'
+assert H(Path('/private/tmp/glyph-native-preservation-journal-child-prefinding-361e2fac-20261022.py'))=='361e2facfce44eddbbe09a3b10cda2baa684d203f301ff605617194349893782'
+# Exact Config raw API bytes and independent full decode/JSON correspondence.
+now=J(S/'postinstall_config_backup.json');old=J(B/'original_backup.json')
+nr=base64.b64decode(now['rawConfigPayloadBase64'],validate=True);orr=base64.b64decode(old['rawConfigPayloadBase64'],validate=True)
+assert nr==orr==(S/'postinstall_config_payload.bin').read_bytes() and len(nr)==252 and HB(nr)=='54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460'
+nm=v.pb.Config();om=v.pb.Config();assert nm.ParseFromString(nr)==len(nr) and om.ParseFromString(orr)==len(orr)
+nj=v.pb.Config();oj=v.pb.Config();v.jf.ParseDict(now['config'],nj,ignore_unknown_fields=False);v.jf.ParseDict(old['config'],oj,ignore_unknown_fields=False);assert nm==om==nj==oj
+identity=J(S/'identity_stdout.txt');expected_identity=J(Path('/private/tmp/glyph-native-backup-after-metadata-stop-20261022/BACKUP_PACKET.json'))['preservation_readback']['identity_expected']
+assert all(identity[k]==val for k,val in expected_identity.items()) and identity['session']==state['boot_session']
+# New actual journals, replayed offline with the exact previously reviewed codec.
+responses={};proofs={};op_counts={1:0,2:0,3:0};tx_total=0;last_time=0
+sequence=[('status','status',None,None)]+[(f'list_{c}','list',None,c) for c in (0,8,16)]+[(f'read_{i}','read',i,None) for i in ids]
+for prefix,action,ident,cursor in sequence:
+ response,proof=v.validate(S,prefix,action,fences,ident,cursor);responses[prefix]=response;proofs[prefix]=proof
+ result=J(S/(prefix+'_result.json'));assert result['retry'] is False
+ command=J(S/(prefix+'_command.json'));assert command['retry'] is False and command['UID']==command['effective_UID']==502 and command['tool_SHA256']==expected_source['glyph_profile_store_production_tool.py']
+ assert command['wrapper_SHA256']==('78ffb25a59d4d8eac0705a0a91fa337dfa617c3bb8cf099e2c1d9f42697cc5e7' if action=='status' else '74fdcb1d9a8335f8f8f943da86ccc774337978dd72955211f3939f2fb4c00e3f')
+ rows=[json.loads(x) for x in (S/(prefix+'_journal.jsonl')).read_text().splitlines()]
+ phases=['status_preflight']+([] if action=='status' else [action]);assert [r['phase'] for r in rows]==[phase for phase in phases for r in rows if r['phase']==phase]
+ times=[r['monotonic_ns'] for r in rows];assert times==sorted(times) and times[0]>last_time;last_time=times[-1]
+ for row in rows:
+  if row['event']=='transmit_attempt':op_counts[row['operation']]+=1;tx_total+=1
+ if action!='status':assert J(S/(prefix+'_adjudication.json'))['journal']==proof
+assert op_counts=={1:26,2:3,3:22} and tx_total==51
+assert {p.name for p in S.glob('list_*_command.json')}=={f'list_{c}_command.json' for c in (0,8,16)}
+assert {p.name for p in S.glob('read_*_command.json')}=={f'read_{i}_command.json' for i in ids}
+assert {p.name for p in S.glob('status*_command.json')}=={'status_command.json'}
+entries=[];pages=[]
+for c in (0,8,16):
+ prefix=f'list_{c}';r=responses[prefix];o=v.pb.ProfileStoreResponse();v.jf.ParseDict(J(B/(prefix+'_response.json'))['response'],o,ignore_unknown_fields=False)
+ assert list(r.entries)==list(o.entries) and r.next_page_cursor==o.next_page_cursor=={0:8,8:16,16:0}[c]
+ entries.extend(list(r.entries));pages.append({'cursor':c,'entries':len(r.entries),'next_cursor':r.next_page_cursor,'all_entry_metadata_original_equal':True})
+assert [e.profile_id for e in entries]==ids
+original_entries={int(e['profile_id']):e for e in J(B/'original_directory_complete.json')['entries']};profile_facts=[]
+for ident in ids:
+ r=responses[f'read_{ident}'];e=original_entries[ident];assert r.HasField('profile') and r.profile_id==ident and r.profile_revision==int(e['revision'])
+ raw=r.profile.SerializeToString(deterministic=True);old_file=B/f'original_profile_{ident}_canonical.bin';new_file=S/f'postinstall_profile_{ident}_canonical.bin'
+ assert raw==old_file.read_bytes()==new_file.read_bytes() and old_file.name in original_manifest['files'] and new_file.name in manifest['files']
+ assert int(e['payload_version']) in (1,2,3) and r.profile.schema_version in (1,2,3) and not r.profile.native_payload
+ fact={'profile_id':ident,'revision':r.profile_revision,'directory_payload_version':int(e['payload_version']),'decoded_schema_version':r.profile.schema_version,'canonical_wrapper_bytes':len(raw),'canonical_wrapper_SHA256':HB(raw),'exact_original_and_wire_and_postread_wrapper_equal':True}
+ public_fact=next(p for p in public['profiles'] if p['profile_id']==ident)
+ assert all(public_fact[k]==fact[k] for k in ['revision','directory_payload_version','decoded_schema_version','canonical_wrapper_bytes','canonical_wrapper_SHA256'])
+ profile_facts.append(fact)
+assert next(f for f in profile_facts if f['profile_id']==4)['directory_payload_version']==1 and next(f for f in profile_facts if f['profile_id']==4)['decoded_schema_version']==3
+# Previous stopped metadata run remains immutable and was not retried here.
+M=O/'local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022';assert H(M/'metadata_stage_custody_manifest.json')=='221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7'
+for n,e in J(M/'metadata_stage_custody_manifest.json')['files'].items():assert (M/n).stat().st_size==e['bytes'] and H(M/n)==e['sha256']
+assert port_constructions==0
+facts={'kind':'FINITE_ACTUAL_POSTINSTALL_PRESERVATION_DATA_AUDIT','result':'PASS_API_PRESERVATION_CUSTODY_COUNTS_WIRE','candidate':public['candidate'],'UF2_SHA256':public['UF2_SHA256'],'private_new_manifest_SHA256':H(S/'postinstall_preservation_custody_manifest.json'),'new_files_verified':227,'original_manifest_SHA256':H(B/'private_backup_custody_manifest.json'),'original_files_rehashed':251,'Config_bytes':252,'Config_raw_SHA256':HB(nr),'Config_raw_and_full_decoded_JSON_equal_original':True,'identity_current_normal_configurator_only':True,'fresh_fences':fences,'counts':expected_counts,'wire_transmit_operation_counts':{'STATUS':26,'LIST':3,'READ':22},'ProfileStore_transmissions_total':51,'standalone_STATUS_attempts':1,'all_journals_wire_JSON_normal_mirror_valid':True,'all_journals_ordered_sequentially':True,'directory_pages':pages,'profiles':profile_facts,'metadata_prior_stop_all7files_unchanged':True,'host_false_positive_and_initial_unexecuted_child_negative_retained':True,'final_stop':True,'final_stage':state['stage'],'reviewer_live_actions':0,'port_constructions':port_constructions,'native_activation_or_output_or_metrics_or_HEP_PASS':'NOT_CLAIMED','no_raw_filesystem_or_unobserved_history_export':True,'python_executable':sys.executable,'python_version':sys.version}
+(D/'audit_facts.json').write_text(json.dumps(facts,indent=2)+'\n')
+print(json.dumps({'result':facts['result'],'new_files':227,'original_files':251,'Config_bytes':252,'profile_wrappers':len(profile_facts),'directory_pages':len(pages),'STATUS':26,'LIST':3,'READ':22,'transmissions':tx_total,'final_stop':True,'reviewer_live_actions':0,'audit_facts_SHA256':H(D/'audit_facts.json')},indent=2))
