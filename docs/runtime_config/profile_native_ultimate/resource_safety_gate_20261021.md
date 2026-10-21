@@ -1,5 +1,7 @@
 # Native Ultimate resource gate — 2026-10-21
 
+**Later owner resolution:** the [2026-10-21 direct decision](owner_filesystem_support_decision_20261021.md) selects the broader currently admitted support domain and directs engineering continuation within unchanged limits. The domain question below is historical; its unresolved structural resource proof remains OPEN. No pristine-history restriction or device authority is introduced.
+
 The GP-NATIVE-001 implementation is preserved on its isolated source branch. Execution has reached **RESOURCE_PROOF_INCOMPLETE / OWNER_DOMAIN_DECISION_REQUIRED**. This factual checkpoint changes no work-order disposition, path authority, resource limit or acceptance gate. The existing READY order's substantive-stop conditions apply; source implementation must not proceed by silently selecting a narrower filesystem support domain.
 
 Exact built instrumented firmware F is `bcb9824bc00c6210babdf00675952deeda7f7c88`, tree `dc8b97bae0d88caf89aeb0be2c091701cd69bd16`. The clean Mk6 fallback build passed with static RAM 197,528 bytes (delta 10,184, within the unchanged 12,288 added/199,632 total caps) and flash 511,172 bytes. UF2 is 1,046,528 bytes, SHA256 `f2c06c41b84aa57c47f44a4eaf53770187cc75287073620e6e6c7e6d0a529057`; ELF SHA256 `3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884`. Owner-held content-addressed custody is `local_backups/hardware-artifacts/<F>/<UF2 SHA256>/`. Build PASS is qualified **NOT_FOR_HARDWARE_HANDOFF**.
