@@ -1,0 +1,16 @@
+c++ -std=c++17 -fsanitize=address,undefined -fno-omit-frame-pointer -g -fshort-enums -DLFS_NAME_MAX=32 -Wall -Wextra -Werror -DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1 -I /private/tmp/glyph-native-store-publication-baseline/generated -I /private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb -I /private/tmp/glyph-profile-native-20261020/include -I /private/tmp/glyph-profile-native-20261020/HAL/pico/include -I /private/tmp/glyph-profile-native-20261020/config/glyph/common/include -I /private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include -I /Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs /private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate/store_publication_nor.cpp /private/tmp/glyph-native-store-publication-baseline/mounted-gc.cpp /private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp /private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp /private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp /private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp /private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp /private/tmp/glyph-profile-native-20261020/src/core/config_rgb_target_validation.cpp /private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp /private/tmp/glyph-native-store-publication-baseline/pb_common.o /private/tmp/glyph-native-store-publication-baseline/pb_decode.o /private/tmp/glyph-native-store-publication-baseline/pb_encode.o /private/tmp/glyph-native-store-publication-baseline/config.pb.o /private/tmp/glyph-native-store-publication-baseline/lfs.o /private/tmp/glyph-native-store-publication-baseline/lfs_util.o -o /private/tmp/glyph-native-store-publication-baseline/store-publication
+In file included from /private/tmp/glyph-native-store-publication-baseline/mounted-gc.cpp:1:
+/private/tmp/glyph-native-publication-baseline-a288.cpp:544:12: error: use of undeclared identifier 'Bootstrap'
+  544 |     return Bootstrap(false);
+      |            ^~~~~~~~~
+/private/tmp/glyph-native-publication-baseline-a288.cpp:570:12: error: use of undeclared identifier 'Bootstrap'
+  570 |     return Bootstrap(true);
+      |            ^~~~~~~~~
+/private/tmp/glyph-native-publication-baseline-a288.cpp:641:58: error: out-of-line definition of 'Bootstrap' does not match any declaration in 'ProfileStore'
+  641 | __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery) {
+      |                                                          ^~~~~~~~~
+/private/tmp/glyph-profile-native-20261020/include/core/ProfileStore.hpp:13:7: note: ProfileStore defined here
+   13 | class ProfileStore {
+      |       ^~~~~~~~~~~~
+3 errors generated.
+

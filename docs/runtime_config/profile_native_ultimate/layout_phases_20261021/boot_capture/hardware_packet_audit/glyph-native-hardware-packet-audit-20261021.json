@@ -1,0 +1,282 @@
+{
+  "status": "OFFLINE_PREPARATION_NOT_A_DEVICE_PACKET",
+  "audit_basis": {
+    "canonical": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+    "canonical_tree": "ced188907be2f317200e153a695eb77073d2683c",
+    "feature": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+    "feature_tree": "01005eeaf2a9c93abbf7bd47dcd861c4847cea9a",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "e4e80f93c6e091ba7211e262918bbceae39abbed51bb7589f7f1425a3c3a5cee",
+        "bytes": 8237
+      },
+      {
+        "path": "docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "bec04d907a94c1aa372cb4ed21d2c82811405e79028452267c352366054bd317",
+        "bytes": 17332
+      },
+      {
+        "path": "docs/AGENT_CONTEXT.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "4aa6ec95ccef078214f5b533eeadd558e502f90c0c9ca45ba1bb2032b0b112d5",
+        "bytes": 54682
+      },
+      {
+        "path": "docs/CURRENT_STATE.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "916f81b5f26b92fa09662113002836779c41bd8b1d3a6368268205978e4cdae4",
+        "bytes": 38527
+      },
+      {
+        "path": "docs/ROADMAP.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "0587ad9c62bd46b1bc208027c5b012d5b864bb1467938839f062fed343881ee9",
+        "bytes": 76792
+      },
+      {
+        "path": "docs/WORKFLOW.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "13579e2fe89034e89a6e71c596a0ecdd4a9e197e67618f314b135d7b60e7c43f",
+        "bytes": 13811
+      },
+      {
+        "path": "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "e66874fa0544fcfa7d65082578b660761ff4480e0657894159bb6ea679fd6567",
+        "bytes": 7198
+      },
+      {
+        "path": "docs/agent_framework/README.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "c45ab7a747260c413d18b4fc36495b80404312d35211703e15e353805dd9aee7",
+        "bytes": 10152
+      },
+      {
+        "path": "docs/project/ACTIVE_AGENT_QUEUE.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "98183cb672e4a0c74d494626053cebcc0203945df58fc36c547eb2985b23f77d",
+        "bytes": 2617576
+      },
+      {
+        "path": "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "1d653da1759838305eaf8b6f36196af842d19a84a3f3393bf4d471c2ce18fa09",
+        "bytes": 26732
+      },
+      {
+        "path": "docs/agent_framework/VALIDATION_AND_GATES.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "ba7b73b559e13f3bc81a58e26052b9ab6177df67469e303e22d6b4334251f28f",
+        "bytes": 9278
+      },
+      {
+        "path": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+        "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "sha256": "82dc0c9ec074207941821d583d9cf224688372128d4ccba935bf83e21fa1bd92",
+        "bytes": 8545
+      }
+    ]
+  },
+  "requested_model": "UNKNOWN",
+  "observed_model": "UNKNOWN",
+  "requested_effort": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "final_candidate_git_sha": null,
+  "final_candidate_tree": null,
+  "final_uf2_sha256": null,
+  "final_uf2_bytes": null,
+  "final_source_review": null,
+  "resource_gate": "P1_OPEN",
+  "all_physical_results": "NOT_TESTED",
+  "all_target_timing_results": "NOT_MEASURED",
+  "device_actions_performed": false,
+  "network_operations_performed": false,
+  "private_inputs": [
+    {
+      "path": "/Users/rasmus.pekkarinen/.codex/attachments/85b013f3-4d2b-4605-9e99-00561c84d96f/pasted-text-1.txt",
+      "sha256": "05e0023d454d336be2d0a1762f434d5f808d36271c232cf790120ac497ce6d38",
+      "bytes": 27185
+    },
+    {
+      "path": "/private/tmp/glyph-native-safe-stimulus-inventory.md",
+      "sha256": "5545a65a792ef544aaba703c99a01f51f8237d5417d3533313174e144898eedc",
+      "bytes": 12014
+    },
+    {
+      "path": "/private/tmp/glyph-native-miniscreen-observability.md",
+      "sha256": "fc15f66559453f991818b25f9c7629e43f0f930c73014bc5a8a2a6cf66c8e94d",
+      "bytes": 19307
+    }
+  ],
+  "feature_pins_file": "/private/tmp/glyph-native-hardware-packet-audit-20261021/feature-pins.json",
+  "feature_pins_sha256": "22511f2617c412f72e65fe0e0b1fd10a47b142c93a91568bda60be9ea0a4a165",
+  "host_tool_search_file": "/private/tmp/glyph-native-hardware-packet-audit-20261021/host-tool-inventory-search.json",
+  "host_tool_search_sha256": "7ec13948fed6cd84b53220eec55031be221ebbff208ce9cf530cd248a7263340",
+  "safe_expected_observer_mapping_file": "/private/tmp/glyph-native-hardware-packet-audit-20261021/safe_expected_observer_mapping.json",
+  "safe_expected_observer_mapping_sha256": "354c88f951699e8bf5d3e0fddfc2c5cb03a3521be273458c8ca18c03c268b217",
+  "catalog_consistency": {
+    "kind": "Read-only data/hash correspondence; production generator/evaluator not rerun",
+    "original_packages": 13,
+    "original_rows": 495,
+    "safe_packages": 5,
+    "safe_rows": 39,
+    "historical_mapping_49_50_51_to_6_7_8_correspondence": true,
+    "manifest_checks": {
+      "candidate_fixture_packet": {
+        "files": 69,
+        "all_hashes_match": true,
+        "manifest_sha256": "f58a0bd36b668a3b70408c48235bc06869a6b7c4e518530aff2a00d6978e7cf1"
+      },
+      "candidate_safe_fixture_packet": {
+        "files": 30,
+        "all_hashes_match": true,
+        "manifest_sha256": "b8cc4ad3262ad5ca147ab724387d49db96e2cff1b831cb7f6c7beb1d4da7fb1d"
+      }
+    },
+    "all_observations_null_and_NOT_TESTED": true
+  },
+  "prior_probe_feature_correspondence": [
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md",
+      "prior_probe_hashes": [
+        "51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d"
+      ],
+      "pinned_feature_sha256": "51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d",
+      "match": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_hardware_packet_current.md",
+      "prior_probe_hashes": [
+        "767889980f181f07cf1e6b9a6240c27cdd5edcfe3e68e9ed14b161990826824f"
+      ],
+      "pinned_feature_sha256": "35039d693ab4bda99fdf545f65ff949b9e7877435562f3c6cbacba78ee6f15b2",
+      "match": false
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/prepare_hardware_fixtures.py",
+      "prior_probe_hashes": [
+        "cc2746f83ae17da1841f4e940ec48956511cb0d852e359f5dab4280415c07551"
+      ],
+      "pinned_feature_sha256": "cc2746f83ae17da1841f4e940ec48956511cb0d852e359f5dab4280415c07551",
+      "match": true
+    },
+    {
+      "path": "HAL/pico/src/comms/XInputBackend.cpp",
+      "prior_probe_hashes": [
+        "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+      ],
+      "pinned_feature_sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+      "match": true
+    },
+    {
+      "path": "HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "prior_probe_hashes": [
+        "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25"
+      ],
+      "pinned_feature_sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+      "match": true
+    },
+    {
+      "path": "HAL/pico/src/comms/GamecubeBackend.cpp",
+      "prior_probe_hashes": [
+        "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329"
+      ],
+      "pinned_feature_sha256": "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329",
+      "match": true
+    },
+    {
+      "path": "include/core/state.hpp",
+      "prior_probe_hashes": [
+        "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3"
+      ],
+      "pinned_feature_sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3",
+      "match": true
+    },
+    {
+      "path": "src/comms/B0XXInputViewer.cpp",
+      "prior_probe_hashes": [
+        "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e"
+      ],
+      "pinned_feature_sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e",
+      "match": true
+    },
+    {
+      "path": "config/glyph/common/src/display/MenuButtonHints.cpp",
+      "prior_probe_hashes": [
+        "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc"
+      ],
+      "pinned_feature_sha256": "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc",
+      "match": true
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "prior_probe_hashes": [
+        "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+      ],
+      "pinned_feature_sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "match": true
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "prior_probe_hashes": [
+        "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+      ],
+      "pinned_feature_sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "match": true
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "prior_probe_hashes": [
+        "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+      ],
+      "pinned_feature_sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6",
+      "match": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/conversion.json",
+      "prior_probe_hashes": [
+        "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d"
+      ],
+      "pinned_feature_sha256": "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d",
+      "match": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/expected_observations.json",
+      "prior_probe_hashes": [
+        "e2cf3540b28519c06dc66a9f11a17a19fb08536cecfc4808e1dd2d3d533481bd"
+      ],
+      "pinned_feature_sha256": "e2cf3540b28519c06dc66a9f11a17a19fb08536cecfc4808e1dd2d3d533481bd",
+      "match": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/manifest.json",
+      "prior_probe_hashes": [
+        "f58a0bd36b668a3b70408c48235bc06869a6b7c4e518530aff2a00d6978e7cf1"
+      ],
+      "pinned_feature_sha256": "f58a0bd36b668a3b70408c48235bc06869a6b7c4e518530aff2a00d6978e7cf1",
+      "match": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/profiles.json",
+      "prior_probe_hashes": [
+        "5c62f51ff3c5dc2d61f25991384b0c777a4dcb10a1c0b1b1305a0855b55af163"
+      ],
+      "pinned_feature_sha256": "5c62f51ff3c5dc2d61f25991384b0c777a4dcb10a1c0b1b1305a0855b55af163",
+      "match": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/native_context_operator.md",
+      "prior_probe_hashes": [
+        "aa82cfd39ef3fe83f106c50e8174b96d475179deb77bf0a02099d46b66db06c6"
+      ],
+      "pinned_feature_sha256": "aa82cfd39ef3fe83f106c50e8174b96d475179deb77bf0a02099d46b66db06c6",
+      "match": true
+    }
+  ],
+  "feature_pin_count": 136,
+  "existing_tools_conclusion": "No tracked repository host controller-report reader identified; external tool availability is UNKNOWN. Existing serial observers do not expose native outputs or backend reports.",
+  "diagnostic_verified_source": "Pinned RuntimeIdentityService::Poll snapshots overhead before TX and records observer on scope destruction; CanRespond >=1000ms; Snapshot sticky one-hour/session validity; RecordActivation latest provisional interval until first native frame."
+}
