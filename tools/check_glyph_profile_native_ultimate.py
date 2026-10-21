@@ -207,7 +207,7 @@ def store_tests(temp,flags,objects,pb,config):
     for source in [library/'src/lfs.c',library/'src/lfs_util.c']:
         obj=temp/(source.stem+'.o');run(['cc','-std=c11',*current_flags,'-c',str(source),'-o',str(obj)]);lfs.append(str(obj))
     probe=temp/'mounted-native.cpp'
-    probe.write_text('#include '+json.dumps(str(ROOT/'HAL/pico/src/core/ProfileStore.cpp'))+'\n'+'bool GlyphMountedReadRangeProbe(const char *p,size_t o,uint8_t *b,size_t n){MountedStorage s;return s.ReadRange(p,o,b,n); }\n'+'CheckedStorage::Result GlyphMountedWriteProbe(const char *p,const uint8_t *b,size_t n){MountedStorage s;return s.CheckedWrite(p,b,n,CheckedStorage::Kind::Record); }\n')
+    probe.write_text('#include '+json.dumps(str(ROOT/'HAL/pico/src/core/ProfileStore.cpp'))+'\n'+'bool GlyphMountedReadRangeProbe(const char *p,size_t o,uint8_t *b,size_t n){MountedStorage s;return s.ReadRange(p,o,b,n); }\n'+'CheckedStorage::Result GlyphMountedWriteProbe(const char *p,const uint8_t *b,size_t n){static MountedStorage owners[2];static unsigned next=0;const unsigned current=(next++)%2;const auto other=owners[1-current].LastFailure();const auto result=owners[current].CheckedWrite(p,b,n,CheckedStorage::Kind::Record);if(owners[1-current].LastFailure()!=other)std::abort();return result; }\n'+'bool GlyphMountedWriteStateClean(){return !mounted_write_inputs.owner&&!mounted_write_inputs.path&&!mounted_write_inputs.bytes&&!mounted_write_inputs.length&&mounted_write_inputs.kind==Kind{}&&!mounted_write_file.opened; }\n')
     sources=['HAL/pico/src/core/CheckedStorage.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp','src/modes/UltimateNativeProfile.cpp','src/modes/UltimateNativeEvaluator.cpp','src/modes/Ultimate.cpp','src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/CommunicationBackend.cpp','src/core/socd.cpp']
     exe=temp/'native-store'
     run(['c++','-std=c++17',*current_flags,str(HOST/'native_store.cpp'),str(probe),*[str(ROOT/s) for s in sources],*objects,*lfs,'-o',str(exe)])
@@ -359,10 +359,11 @@ def mutation_controls(temp,flags,objects,pb):
     print('PASS source mutation omitted_request_payload: independent full native wire request identity')
 
 
-def dispatch_tests(temp,pb,config):
+def dispatch_tests(temp,pb,config,default=False):
     import check_glyph_profile_store_timeout_resynchronization as transport
     gen=temp/'generated';host=ROOT/'tools/fixtures/profile_store_timeout_host';libs=ROOT/'.pio/libdeps/glyph_mk6'
-    flags=['-O2','-fsanitize=address,undefined','-fno-omit-frame-pointer','-g','-DARDUINO=1','-fshort-enums','-Wall','-Wextra','-Werror','-Wno-error=missing-field-initializers','-Wno-error=inconsistent-missing-override','-Wno-unused-function']
+    flags=['-O2','-fsanitize=address,undefined','-fno-omit-frame-pointer','-g','-DARDUINO=1','-Wall','-Wextra','-Werror','-Wno-error=missing-field-initializers','-Wno-error=inconsistent-missing-override','-Wno-unused-function']
+    if not default:flags+=['-fshort-enums']
     for inc in [host/'include',ROOT/'HAL/pico/include',ROOT/'include',gen,NANOPB,libs/'nanopb-arduino/src',libs/'PacketIO/src',ROOT/'config/glyph/common/include',ROOT/'config/glyph/glyph_mk6/include']:flags+=['-I',str(inc)]
     objects=[]
     for source in [NANOPB/'pb_common.c',NANOPB/'pb_decode.c',NANOPB/'pb_encode.c',gen/'config.pb.c']:
@@ -411,7 +412,7 @@ def main():
         store_tests(temp,flags,objects,pb,config)
         full_frozen_replay(temp,flags,objects,pb,config)
         custom_hook_tests(temp,flags,objects)
-        dispatch_tests(temp,pb,config)
+        dispatch_tests(temp,pb,config,a.default_enum)
         mutation_controls(temp,flags,objects,pb)
         current_caller_tests(temp)
         for version in (1,2,3):

@@ -7,14 +7,17 @@
 #include "core/RuntimeProfileDigest.hpp"
 #include "core/RuntimeIdentity.hpp"
 CheckedStorage::Result GlyphMountedWriteProbe(const char *,const uint8_t *,size_t);
+bool GlyphMountedWriteStateClean();
 namespace {
 CheckedStorage::Operation mounted_fault_operation;
 CheckedStorage::Phase mounted_fault_phase;
 CheckedStorage::Fault mounted_fault;
 unsigned mounted_close_calls, mounted_fault_hits;
+bool mounted_dual_fault=false;
 CheckedStorage::Fault mounted_fault_hook(CheckedStorage::Kind kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char *) {
     if (kind!=CheckedStorage::Kind::Record) return CheckedStorage::Fault::None;
     if (op==CheckedStorage::Operation::Close&&phase==CheckedStorage::Phase::Before) ++mounted_close_calls;
+    if(mounted_dual_fault&&op==CheckedStorage::Operation::Close&&phase==CheckedStorage::Phase::After)return CheckedStorage::Fault::LostAcknowledgement;
     if (op==mounted_fault_operation&&phase==mounted_fault_phase) { ++mounted_fault_hits;return mounted_fault; }
     return CheckedStorage::Fault::None;
 }
@@ -26,12 +29,21 @@ void actual_mounted_write_faults() {
         mounted_fault_operation=op;mounted_fault_phase=phase;mounted_fault=fault;mounted_close_calls=mounted_fault_hits=0;
         auto *prior=mounted_fs.mlist;SetFaultHook(mounted_fault_hook);
         const auto failed=GlyphMountedWriteProbe("/native-adapter.tmp",bytes,sizeof(bytes));SetFaultHook(nullptr);
+        require(GlyphMountedWriteStateClean(),"mounted borrowed metadata cleared and original file closed on failure");
         require(!failed&&mounted_fault_hits==1,"actual production mounted adapter injected stage exactly once");
         require(failed.outcome==((phase==Phase::Before&&fault==Fault::Fail)?Outcome::Failed:Outcome::Uncertain),"mounted exact failed/uncertain acknowledgement");
         require(mounted_close_calls==(op==Operation::OpenWrite?0u:1u),"mounted Close exactly once after acknowledged open");
         require(mounted_fs.mlist==prior,"mounted native handle released including lost open/close acknowledgement");
         require(bool(GlyphMountedWriteProbe("/native-adapter.tmp",bytes,sizeof(bytes)))&&mounted_fs.mlist==prior,"same static file resets for next successful operation");
+        require(GlyphMountedWriteStateClean(),"mounted borrowed metadata cleared across alternating owners");
         uint8_t readback[3]{};require(bool(ReadFile("/native-adapter.tmp",readback,sizeof(readback),Kind::Record))&&!std::memcmp(bytes,readback,sizeof(bytes)),"actual mounted next write exact bytes");
+    }
+    for(auto op:{Operation::Write,Operation::Sync}) {
+        mounted_fault_operation=op;mounted_fault_phase=Phase::Before;mounted_fault=Fault::Fail;mounted_dual_fault=true;mounted_close_calls=mounted_fault_hits=0;SetFaultHook(mounted_fault_hook);
+        const auto failed=GlyphMountedWriteProbe("/native-adapter.tmp",bytes,sizeof(bytes));SetFaultHook(nullptr);mounted_dual_fault=false;
+        require(!failed&&failed.operation==Operation::Close&&failed.outcome==Outcome::Uncertain&&mounted_close_calls==1&&mounted_fault_hits==1,"mounted Close failure overrides earlier Write/Sync failure exactly once");
+        require(GlyphMountedWriteStateClean(),"mounted dual failure clears borrows and releases native handle");
+        require(bool(GlyphMountedWriteProbe("/native-adapter.tmp",bytes,sizeof(bytes))),"mounted next owner succeeds after dual failure");
     }
     require(bool(Remove("/native-adapter.tmp")),"mounted fault scratch cleanup");
     std::puts("PASS actual production MountedStorage CheckedWrite16 fail-before/lost-ack stage cases; Close once/handles released/next write succeeds");
