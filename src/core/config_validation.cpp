@@ -55,13 +55,13 @@ bool is_required_routing_slot(uint32_t token) {
     }
 }
 
-bool validate_profile_condition(
+enum class ConditionResult { Valid,InvalidToken,UnresolvedRole };
+__attribute__((noinline)) ConditionResult check_profile_condition(
     const UltimateProfileCondition &condition,
     const bool defined_roles[32],
     const bool routed_buttons[61],
     uint8_t maximum_role_id,
-    ConfigValidationError &error,
-    uint8_t profile_id
+    uint8_t /*profile_id*/
 ) {
     const uint8_t *lists[] = {condition.all_tokens, condition.any_tokens, condition.none_tokens};
     const size_t counts[] = {
@@ -75,17 +75,30 @@ bool validate_profile_condition(
             const uint32_t token = lists[list][index];
             if ((!is_button_token(token) && !is_role_token(token)) || seen_tokens[token] ||
                 (is_button_token(token) && !routed_buttons[token])) {
-                return reference_error(error, "Ultimate profile %d has an invalid condition token", profile_id);
+                return ConditionResult::InvalidToken;
             }
             seen_tokens[token] = true;
             if (is_role_token(token)) {
                 const uint8_t role_id = static_cast<uint8_t>(token - 64);
                 if (role_id > maximum_role_id || !defined_roles[role_id - 1]) {
-                    return reference_error(error, "Ultimate profile %d has an unresolved role token", profile_id);
+                    return ConditionResult::UnresolvedRole;
                 }
             }
         }
     }
+    return ConditionResult::Valid;
+}
+bool validate_profile_condition(
+    const UltimateProfileCondition &condition,
+    const bool defined_roles[32],
+    const bool routed_buttons[61],
+    uint8_t maximum_role_id,
+    ConfigValidationError &error,
+    uint8_t profile_id
+) {
+    const auto result=check_profile_condition(condition,defined_roles,routed_buttons,maximum_role_id,profile_id);
+    if(result==ConditionResult::InvalidToken)return reference_error(error,"Ultimate profile %d has an invalid condition token",profile_id);
+    if(result==ConditionResult::UnresolvedRole)return reference_error(error,"Ultimate profile %d has an unresolved role token",profile_id);
     return true;
 }
 

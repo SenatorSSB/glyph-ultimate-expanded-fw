@@ -331,6 +331,34 @@ bool ConfiguratorBackend::HandleGetConfig() {
     return _out.end();
 }
 
+namespace {
+struct SetReceipt {uint64_t token;uint8_t digest[32],migration[32];uint32_t id,generation,mode,root;};
+SetReceipt set_receipt{};
+struct SetReceiptReset {~SetReceiptReset(){set_receipt={};}};
+}
+__attribute__((noinline)) void ConfiguratorBackend::CaptureSetReceipt() {
+    set_receipt={};const auto &candidate=ConfigWriteCandidate();
+    if(_config.ultimate_profile_store_format==ProfileStore::kCompactConfigFormat){
+        set_receipt.token=candidate.profile_reference_token;std::memcpy(set_receipt.digest,candidate.profile_reference_digest,32);
+        set_receipt.id=candidate.profile_reference_result_id;set_receipt.generation=candidate.profile_reference_result_store_generation;
+        set_receipt.mode=candidate.profile_reference_result_mode_index;set_receipt.root=candidate.ultimate_profile_root_format;
+        std::memcpy(set_receipt.migration,candidate.ultimate_profile_migration_receipt,32);
+    }
+}
+__attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::ReportSetDecodeError(const char *message) {
+    char errmsg[100];size_t errmsg_len=snprintf(errmsg,sizeof(errmsg),"Failed to decode config: %s",message);
+    WritePacket(CMD_ERROR,(uint8_t*)errmsg,errmsg_len);return SetConfigPreparation::ReturnedFalse;
+}
+__attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::DecodeIncomingSetConfig() {
+    auto stream=as_pb_istream(_in);
+    if(!pb_decode(&stream,Config_fields,&ConfigWriteCandidate()))return ReportSetDecodeError(stream.errmsg);
+    return SetConfigPreparation::Ready;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::ValidateSetCandidate() {
+    ConfigValidationError error;
+    if(!persistence.ValidateConfig(ConfigWriteCandidate(),error)){WritePacket(CMD_ERROR,(uint8_t*)error.message,error.length);return false;}
+    return true;
+}
 __attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::PrepareSetConfig() {
     if (_recovery_service || _recovery_config_invalid || !_recovery_storage_available ||
         _reference_unknown || persistence.IsMutationFenced() || profile_store.IsTransactionUncertain() ||
@@ -338,48 +366,16 @@ __attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation Configurator
         static const char error[] = "Recovery state is read-only";
         return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error)) ? SetConfigPreparation::ReturnedTrue : SetConfigPreparation::ReturnedFalse;
     }
-    // Keep the accepted live configuration untouched until the complete
-    // decode, validation, and persistence sequence succeeds.  The candidate
-    // is static because Config contains the fixed-size embedded arrays used
-    // by the selected input modes and is too large for the call stack.
-    Config &candidate = ConfigWriteCandidate();
-    if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
-        if (persistence.LoadConfigChecked(candidate) != Persistence::LoadResult::Loaded) {
-            static const char error[] = "Failed to load durable Config";
-            return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error)) ? SetConfigPreparation::ReturnedTrue : SetConfigPreparation::ReturnedFalse;
-        }
-    }
-    return DecodeSetConfig();
+    return SetConfigPreparation::Ready;
 }
 
 __attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::DecodeSetConfig() {
     Config &candidate = ConfigWriteCandidate();
-    uint64_t receipt_token = 0;
-    uint8_t receipt_digest[32] = {}, migration_receipt[32] = {};
-    uint32_t receipt_id = 0, receipt_generation = 0, receipt_mode = 0, root_format = 0;
-    if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
-        receipt_token = candidate.profile_reference_token;
-        std::memcpy(receipt_digest, candidate.profile_reference_digest, 32);
-        receipt_id = candidate.profile_reference_result_id;
-        receipt_generation = candidate.profile_reference_result_store_generation;
-        receipt_mode = candidate.profile_reference_result_mode_index;
-        root_format = candidate.ultimate_profile_root_format;
-        std::memcpy(migration_receipt, candidate.ultimate_profile_migration_receipt, 32);
-    }
-
     // Reset config defaults first, so config is completely replaced rather than merged.
     candidate = Config_init_default;
 
     ultimate_native::RejectEmbedded(candidate);
-    pb_istream_t istream = as_pb_istream(_in);
-    if (!pb_decode(&istream, Config_fields, &candidate)) {
-        char errmsg[100];
-        size_t errmsg_len =
-            snprintf(errmsg, sizeof(errmsg), "Failed to decode config: %s", istream.errmsg);
-        WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
-
-        return SetConfigPreparation::ReturnedFalse;
-    }
+    const auto decoded=DecodeIncomingSetConfig();if(decoded!=SetConfigPreparation::Ready)return decoded;
 
     ultimate_native::ClearEmbeddedCallbacks(candidate);
 
@@ -394,18 +390,14 @@ __attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation Configurator
         return SetConfigPreparation::ReturnedFalse;
     }
 
-    candidate.ultimate_profile_root_format = root_format;
-    candidate.profile_reference_token = receipt_token;
-    std::memcpy(candidate.profile_reference_digest, receipt_digest, 32);
-    candidate.profile_reference_result_id = receipt_id;
-    candidate.profile_reference_result_store_generation = receipt_generation;
-    candidate.profile_reference_result_mode_index = receipt_mode;
-    std::memcpy(candidate.ultimate_profile_migration_receipt, migration_receipt, 32);
-    ConfigValidationError validation_error;
-    if (!persistence.ValidateConfig(candidate, validation_error)) {
-        WritePacket(CMD_ERROR, (uint8_t *)validation_error.message, validation_error.length);
-        return SetConfigPreparation::ReturnedFalse;
-    }
+    candidate.ultimate_profile_root_format = set_receipt.root;
+    candidate.profile_reference_token = set_receipt.token;
+    std::memcpy(candidate.profile_reference_digest, set_receipt.digest, 32);
+    candidate.profile_reference_result_id = set_receipt.id;
+    candidate.profile_reference_result_store_generation = set_receipt.generation;
+    candidate.profile_reference_result_mode_index = set_receipt.mode;
+    std::memcpy(candidate.ultimate_profile_migration_receipt, set_receipt.migration, 32);
+    if(!ValidateSetCandidate())return SetConfigPreparation::ReturnedFalse;
 
     // A whole-Config client cannot change the expected engine of a known
     // selected record. Missing native records remain loadable but unavailable.
@@ -423,10 +415,19 @@ __attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation Configurator
     return SetConfigPreparation::Ready;
 }
 
+__attribute__((noinline)) bool ConfiguratorBackend::ReportDurableLoadError() {
+    static const char error[]="Failed to load durable Config";
+    return WritePacket(CMD_ERROR,(uint8_t*)error,sizeof(error));
+}
 bool ConfiguratorBackend::HandleSetConfig() {
+    SetReceiptReset receipt_reset;
     const auto prepared = PrepareSetConfig();
     if (prepared != SetConfigPreparation::Ready)
         return prepared == SetConfigPreparation::ReturnedTrue;
+    if(_config.ultimate_profile_store_format==ProfileStore::kCompactConfigFormat&&persistence.LoadConfigChecked(ConfigWriteCandidate())!=Persistence::LoadResult::Loaded)return ReportDurableLoadError();
+    CaptureSetReceipt();
+    const auto decoded=DecodeSetConfig();
+    if(decoded!=SetConfigPreparation::Ready)return decoded==SetConfigPreparation::ReturnedTrue;
     const bool saved = persistence.SaveConfig(ConfigWriteCandidate());
     return FinalizeSetConfig(saved);
 }
@@ -482,8 +483,19 @@ static bool profile_received;
 static bool dispatch_handled, dispatch_pending;
 static ProfileStoreTransactionIdentity identity;
 static ProfileStore::TransactionResult result;
+static Persistence::LoadResult dispatch_loaded;
+}
+static __attribute__((always_inline)) inline void LoadStoreCandidate() {dispatch_loaded=persistence.LoadConfigChecked(ConfigWriteCandidate());}
+static __attribute__((noinline)) bool InvalidProfileTicket(const ProfileStoreRequest &request) {
+#if GLYPH_STRICT_HARDENING_CANDIDATE
+    const bool mutation=request.operation>=PROFILE_STORE_CREATE&&request.operation<=PROFILE_STORE_SET_MODE_REFERENCE;
+    return request.fault_ticket&&(!mutation||request.protocol_version!=2||!kStrictHardeningCandidate);
+#else
+    return request.fault_kind||request.fault_operation||request.fault_phase||request.fault_result||request.fault_path_class||request.fault_skip||request.fault_clear||request.fault_ticket||request.liveness_trace;
+#endif
 }
 __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileStore() {
+    dispatch_loaded=Persistence::LoadResult::Absent;
     incoming_native.Release();
     struct IncomingScope { ~IncomingScope() { incoming_native.Release(); } } incoming_scope;
     profile_received = false;
@@ -491,12 +503,23 @@ __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileSto
     if (!profile_received) return received;
     {
         struct DispatchReset {
-            ~DispatchReset() { dispatch_handled = dispatch_pending = false; }
+            ~DispatchReset() { dispatch_handled = dispatch_pending = false; dispatch_loaded=Persistence::LoadResult::Absent; }
         } dispatch_reset;
 #if GLYPH_STRICT_HARDENING_CANDIDATE
         struct FaultScope { ~FaultScope(){ProfileStoreFaultControls::EndMutation();} } fault_scope;
 #endif
+        if(!PrepareProfileDispatch())return false;
+        if(ReconcileProfileDispatch()&&persistence.ReconcileConfig(ConfigWriteCandidate())==Persistence::SaveResult::Saved)_reference_unknown=false;
         if (!DispatchProfileStore()) return false;
+        if(request.operation==PROFILE_STORE_STATUS&&!InvalidProfileTicket(request)) {
+            if(_recovery_storage_available&&!_recovery_config_invalid)LoadStoreCandidate();
+            if(!CompleteStatusDispatch())return false;
+        }
+        if(dispatch_pending) {
+            dispatch_pending=false;LookupStoreMutation();LoadStoreCandidate();
+            const unsigned admission=PrepareStoreMutation();
+            if(admission==2)dispatch_handled=true;else if(admission==1)dispatch_pending=true;
+        }
         if (!ExecuteProfileStoreMutation()) return false;
         if (!FinalizeProfileStore()) return false;
     } // original fault scope ends before response encoding/TX
@@ -562,14 +585,17 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
     profile_received = true;
     return true;
 }
-__attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
-    const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
+__attribute__((noinline)) void ConfiguratorBackend::LookupStoreMutation() {
+    const bool query=request.operation==PROFILE_STORE_QUERY_TRANSACTION;
     // Both receipt domains share tokens. Look them up BEFORE checking any
     // stale expectations: exact completed requests replay their result.
     result = query ? profile_store.QueryTransaction(request.request_token)
                    : profile_store.QueryTransaction(identity);
+}
+__attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
+    const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
     Config &candidate = ConfigWriteCandidate();
-    const auto loaded = persistence.LoadConfigChecked(candidate);
+    const auto loaded=dispatch_loaded;
     const uint64_t high_water = loaded == Persistence::LoadResult::Loaded &&
         candidate.profile_reference_token > profile_store.LastTransactionToken() ?
         candidate.profile_reference_token : profile_store.LastTransactionToken();
@@ -672,7 +698,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReadStoreProfile() {
     result = {status, request.profile_id, revision, profile_store.Generation()};
     return true;
 }
-__attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
+__attribute__((noinline)) bool ConfiguratorBackend::PrepareProfileDispatch() {
     response = ProfileStoreResponse_init_default;
     response.protocol_version = request.protocol_version;
     response.mutation_protocol_version = 2;
@@ -683,35 +709,57 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     response.config_generation = pulse ? 0 : persistence.ConfigGeneration(_config);
     response.status = PROFILE_STORE_UNSUPPORTED;
     profile_store.ResetDiagnostic();
-    const bool mutation = request.operation >= PROFILE_STORE_CREATE &&
-        request.operation <= PROFILE_STORE_SET_MODE_REFERENCE;
-    const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
     identity = {};
     result = {};
     dispatch_handled = dispatch_pending = false;
-#if GLYPH_STRICT_HARDENING_CANDIDATE
-    const bool ticket_invalid = request.fault_ticket &&
-        (!mutation || request.protocol_version != 2 || !kStrictHardeningCandidate);
-#else
-    // Retired acceptance controls must never silently request a real mutation
-    // or trigger reconciliation. Keep their wire tags inert and reject them
-    // before either receipt domain can perform storage work.
-    const bool ticket_invalid = request.fault_kind || request.fault_operation ||
-        request.fault_phase || request.fault_result || request.fault_path_class ||
-        request.fault_skip || request.fault_clear || request.fault_ticket || request.liveness_trace;
-#endif
     if (!TraceProfileStage(request, 2)) return false; // CRC complete; before reconciliation
 
+    return true;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::ReconcileProfileDispatch() {
+    const bool mutation=request.operation>=PROFILE_STORE_CREATE&&request.operation<=PROFILE_STORE_SET_MODE_REFERENCE;
+    const bool query=request.operation==PROFILE_STORE_QUERY_TRANSACTION;
+    const bool ticket_invalid=InvalidProfileTicket(request);
     // Reconcile durable publications before using RAM for replay or admitting
     // another mutation. A failed authoritative reread leaves the fence intact.
     if (!ticket_invalid && _recovery_storage_available && (mutation || query)) {
         if (profile_store.IsTransactionUncertain()) profile_store.ReconcileTransaction();
-        if (_reference_unknown || persistence.IsMutationFenced()) {
-            Config &durable = ConfigWriteCandidate();
-            if (persistence.ReconcileConfig(durable) == Persistence::SaveResult::Saved)
-                _reference_unknown = false;
-        }
+        return _reference_unknown||persistence.IsMutationFenced();
     }
+    return false;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::CompleteStatusDispatch() {
+        if (_recovery_storage_available && !_recovery_config_invalid) {
+            Config &durable = ConfigWriteCandidate();
+            if (dispatch_loaded == Persistence::LoadResult::Loaded) {
+                if (durable.profile_reference_token > response.transaction_token_high_water)
+                    response.transaction_token_high_water = durable.profile_reference_token;
+                if (durable.ultimate_profile_root_format != 2) {
+                    response.mutation_feasible = false;
+                    response.recovery_flags |= 1u << 20;
+                }
+            }
+        }
+        if (!TraceProfileStage(request, 6)) return false; // Config complete; before diagnostics
+#if GLYPH_STRICT_HARDENING_CANDIDATE
+        const auto resources = ReadResourceDiagnostics();
+        if (!TraceProfileStage(request, 7)) return false; // diagnostics complete
+        response.core0_stack_min_free_bytes = resources.core0_stack_min_free_bytes;
+        response.core1_stack_min_free_bytes = resources.core1_stack_min_free_bytes;
+        response.heap_arena_peak_bytes = resources.heap_arena_peak_bytes;
+        response.heap_arena_current_bytes = resources.heap_arena_current_bytes;
+        response.heap_arena_capacity_bytes = resources.heap_arena_capacity_bytes;
+        response.resource_diagnostics_enabled = resources.resource_diagnostics_enabled;
+        response.strict_hardening_candidate = kStrictHardeningCandidate;
+#endif
+        dispatch_handled = true;
+    return true;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
+    const bool pulse=request.operation==PROFILE_STORE_LIVENESS;
+    const bool mutation=request.operation>=PROFILE_STORE_CREATE&&request.operation<=PROFILE_STORE_SET_MODE_REFERENCE;
+    const bool query=request.operation==PROFILE_STORE_QUERY_TRANSACTION;
+    const bool ticket_invalid=InvalidProfileTicket(request);
     if (ticket_invalid) {
         response.status = PROFILE_STORE_INVALID;
         dispatch_handled = true;
@@ -767,31 +815,9 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
                 !_reference_unknown && !persistence.IsMutationFenced();
         }
         response.transaction_token_high_water = profile_store.LastTransactionToken();
-        if (_recovery_storage_available && !_recovery_config_invalid) {
-            if (!TraceProfileStage(request, 5)) return false; // before durable Config read
-            Config &durable = ConfigWriteCandidate();
-            if (persistence.LoadConfigChecked(durable) == Persistence::LoadResult::Loaded) {
-                if (durable.profile_reference_token > response.transaction_token_high_water)
-                    response.transaction_token_high_water = durable.profile_reference_token;
-                if (durable.ultimate_profile_root_format != 2) {
-                    response.mutation_feasible = false;
-                    response.recovery_flags |= 1u << 20;
-                }
-            }
-        }
-        if (!TraceProfileStage(request, 6)) return false; // Config complete; before diagnostics
-#if GLYPH_STRICT_HARDENING_CANDIDATE
-        const auto resources = ReadResourceDiagnostics();
-        if (!TraceProfileStage(request, 7)) return false; // diagnostics complete
-        response.core0_stack_min_free_bytes = resources.core0_stack_min_free_bytes;
-        response.core1_stack_min_free_bytes = resources.core1_stack_min_free_bytes;
-        response.heap_arena_peak_bytes = resources.heap_arena_peak_bytes;
-        response.heap_arena_current_bytes = resources.heap_arena_current_bytes;
-        response.heap_arena_capacity_bytes = resources.heap_arena_capacity_bytes;
-        response.resource_diagnostics_enabled = resources.resource_diagnostics_enabled;
-        response.strict_hardening_candidate = kStrictHardeningCandidate;
-#endif
-        dispatch_handled = true;
+        if(_recovery_storage_available&&!_recovery_config_invalid&&!TraceProfileStage(request,5))return false;
+        return true;
+
     } else if (!_recovery_storage_available) {
         result.status = ProfileStore::Status::IoFailure;
         strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
@@ -839,11 +865,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     } else if (!request.request_token || !PrepareStoreIdentity(request, identity)) {
         result.status = ProfileStore::Status::Invalid;
     } else {
-        const unsigned admission = PrepareStoreMutation();
-        if (admission == 2) dispatch_handled = true;
-        else if (admission == 1) dispatch_pending = true;
+        dispatch_pending=true;
     }
     return true;
+
 }
 
 __attribute__((always_inline)) inline bool ConfiguratorBackend::ExecuteProfileStoreMutation() {

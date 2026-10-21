@@ -1,6 +1,7 @@
 #ifndef GLYPH_CHECKED_STORAGE_FILE_HPP
 #define GLYPH_CHECKED_STORAGE_FILE_HPP
 #include <Arduino.h>
+#include <new>
 #include "core/CheckedStorage.hpp"
 // Bounded Stream bridge for existing Nanopb/CRC code. Every explicit close is
 // checked; no Arduino File wrapper owns or closes this native handle.
@@ -16,7 +17,7 @@ class CheckedStorageFile : public Stream {
     int available() override { return _size >= _position ? _size - _position : 0; }
     int read() override { uint8_t byte; return read(&byte, 1) == 1 ? byte : -1; }
     int read(uint8_t *bytes, size_t size) {
-        _result = CheckedStorage::Read(_file, bytes, size); remember_uncertainty();
+        ::new (&_result) CheckedStorage::Result(CheckedStorage::Read(_file,bytes,size)); remember_uncertainty();
         if (!_result) { _failed = true; return -1; }
         _position += _result.bytes; return _result.bytes;
     }

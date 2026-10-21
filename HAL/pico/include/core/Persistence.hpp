@@ -88,7 +88,17 @@ class Persistence {
     bool RemoveCaptureTemporary();
     bool CopyCapturedSource();
     bool VerifyPublishCapturedSource(uint8_t digest[32]);
+    const char *SelectReadConfigCandidate();
+    LoadResult InitializeReadConfigCandidate(CheckedStorageFile &);
+    LoadResult FinishConfigDecode(CheckedStorageFile &,bool);
+    bool InitializeStagedConfig(CheckedStorageFile &);
+    bool FailStagedConfig(CheckedStorageFile &);
     LoadResult ReadConfigCandidate();
+    LoadResult LoadConfigDriver(Config &);
+    LoadResult CompleteReadConfigCandidate(CheckedStorageFile &);
+    LoadResult FinishLoadedConfig(Config &);
+    bool EncodeStagedConfig(CheckedStorageFile &,Config &);
+    bool CompleteStagedConfig(CheckedStorageFile &);
     SaveResult VerifyExpectedConfigGeneration(uint64_t expected_generation);
     bool PrepareSaveConfig(const Config &config);
     bool RemoveSaveTemporary();

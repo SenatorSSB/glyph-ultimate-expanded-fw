@@ -251,6 +251,13 @@ class ProfileStore {
     void PrepareCreate();
     TransactionResult PrepareDuplicate(uint32_t id, uint32_t rev, const TransactionIdentity &t);
     bool PublishPreparedProfile();
+    Status ExecuteLegacyImport();
+    Status PublishImportedLegacyRecord();
+    Status PublishImportedLegacyDirectory();
+    bool PrepareImportedCompact(const Config &,uint32_t *,size_t);
+    Status PrepareLegacyImport();
+    Status PrepareImportedLegacyRecord(LegacyReader,void *,size_t);
+    bool FinishImportedLegacyRecord(size_t,uint32_t *);
     bool PrepareProfileWrite(uint32_t id, uint32_t revision, const UltimateProfile &profile);
     bool ValidateProfile(const UltimateProfile &profile) const;
     int Find(uint32_t id) const;

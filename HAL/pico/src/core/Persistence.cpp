@@ -60,7 +60,7 @@ struct SavePhaseState {
     bool current;
     CheckedStorage::Result operation;
 };
-SavePhaseState save_phase{};
+
 // Reuse the original single load candidate; only scalar phase facts survive
 // preparation. Filenames below refer solely to the existing static constants.
 Config loaded_candidate;
@@ -69,9 +69,6 @@ struct CapturePhaseState { const char *filename; size_t length; } capture_phase{
 struct LoadPhaseReset { ~LoadPhaseReset() { std::memset(&load_phase, 0, sizeof(load_phase)); } };
 struct CapturePhaseReset { ~CapturePhaseReset() { std::memset(&capture_phase, 0, sizeof(capture_phase)); } };
 
-struct SavePhaseReset {
-    ~SavePhaseReset() { std::memset(&save_phase, 0, sizeof(save_phase)); }
-};
 constexpr char save_temporary_filename[] = "config-v2.tmp";
 
 struct ConfigFileReader {
@@ -79,23 +76,33 @@ struct ConfigFileReader {
     bool io_failed = false;
 };
 
-bool read_config_file(pb_istream_t *stream, pb_byte_t *buffer, size_t count) {
-    ConfigFileReader &reader = *static_cast<ConfigFileReader *>(stream->state);
-    // Nanopb may request a skipped field with a null buffer. Keep that read
-    // bounded, and distinguish short/error I/O from a complete malformed payload.
+struct ReadWorkspace { ConfigFileReader reader; pb_istream_t stream; size_t file_size; };
+union SynchronousPhaseWorkspace { SavePhaseState save{}; ReadWorkspace read; } phase_workspace{};
+__attribute__((always_inline)) inline SavePhaseState &SavePhase(){return phase_workspace.save;}
+__attribute__((always_inline)) inline ReadWorkspace &ReadPhase(){return phase_workspace.read;}
+#define save_phase SavePhase()
+#define read_workspace ReadPhase()
+__attribute__((noinline)) void ResetReadWorkspace(){::new (&phase_workspace.read) ReadWorkspace;std::memset(&phase_workspace,0,sizeof(phase_workspace));}
+struct SavePhaseReset {
+    ~SavePhaseReset() { std::memset(&save_phase, 0, sizeof(save_phase)); }
+};
+struct ReadWorkspaceReset { ~ReadWorkspaceReset(){ResetReadWorkspace();} };
+__attribute__((noinline)) bool skip_config_bytes(ConfigFileReader &reader, size_t count) {
     uint8_t skipped[32];
-    while (count != 0) {
-        const size_t chunk = buffer == nullptr && count > sizeof(skipped)
-            ? sizeof(skipped) : count;
-        uint8_t *destination = buffer != nullptr ? buffer : skipped;
-        const int read = reader.file->read(destination, chunk);
-        if (read < 0 || static_cast<size_t>(read) != chunk) {
-            reader.io_failed = true;
-            return false;
-        }
-        count -= chunk;
-        if (buffer != nullptr) buffer += chunk;
+    while(count) {
+        const size_t chunk=count>sizeof(skipped)?sizeof(skipped):count;
+        const int n=reader.file->read(skipped,chunk);
+        if(n<0||static_cast<size_t>(n)!=chunk){reader.io_failed=true;return false;}
+        count-=chunk;
     }
+    return true;
+}
+bool read_config_file(pb_istream_t *stream,pb_byte_t *buffer,size_t count) {
+    auto &reader=*static_cast<ConfigFileReader *>(stream->state);
+    if(!buffer)return skip_config_bytes(reader,count);
+    if(!count)return true;
+    const int n=reader.file->read(buffer,count);
+    if(n<0||static_cast<size_t>(n)!=count){reader.io_failed=true;return false;}
     return true;
 }
 
@@ -264,19 +271,15 @@ __attribute__((noinline)) bool Persistence::StageSaveConfig(Config &config) {
     return WriteStagedConfig(scope.File(), config);
 }
 
-__attribute__((noinline)) bool Persistence::WriteStagedConfig(CheckedStorageFile &file, Config &config) {
-    auto &header = save_phase.header;
-    auto staging_failed = [this, &file]() {
-        file.close();
-        if (file.uncertain()) _mutation_fenced = true;
-        return false;
-    };
-    if (!file) return staging_failed();
-    if (file.write(reinterpret_cast<const uint8_t *>(&header), sizeof(header)) != sizeof(header))
-        return staging_failed();
+__attribute__((noinline)) bool Persistence::EncodeStagedConfig(CheckedStorageFile &file,Config &config) {
     pb_ostream_t stream = as_pb_ostream(file);
     if (!pb_encode(&stream, Config_fields, &config) || stream.bytes_written != save_phase.encoded_size || !file.seek(config_offset))
-        return staging_failed();
+        return false;
+    return true;
+}
+__attribute__((noinline)) bool Persistence::CompleteStagedConfig(CheckedStorageFile &file) {
+    auto &header=save_phase.header;
+    auto staging_failed=[this,&file](){file.close();if(file.uncertain())_mutation_fenced=true;return false;};
     CRC32 crc;
     for (size_t i = 0; i < save_phase.encoded_size; ++i) {
         int value = file.read();
@@ -288,6 +291,17 @@ __attribute__((noinline)) bool Persistence::WriteStagedConfig(CheckedStorageFile
         return staging_failed();
     if (!file.close()) { _mutation_fenced = file.uncertain(); return false; }
     return true;
+}
+__attribute__((noinline)) bool Persistence::FailStagedConfig(CheckedStorageFile &file) {
+    file.close();if(file.uncertain())_mutation_fenced=true;return false;
+}
+__attribute__((noinline)) bool Persistence::InitializeStagedConfig(CheckedStorageFile &file) {
+    if(!file)return false;
+    return file.write(reinterpret_cast<const uint8_t *>(&save_phase.header),sizeof(save_phase.header))==sizeof(save_phase.header);
+}
+__attribute__((noinline)) bool Persistence::WriteStagedConfig(CheckedStorageFile &file,Config &config) {
+    if(!InitializeStagedConfig(file)||!EncodeStagedConfig(file,config))return FailStagedConfig(file);
+    return CompleteStagedConfig(file);
 }
 
 __attribute__((noinline)) bool Persistence::VerifyStagedConfig(Config &config) {
@@ -350,6 +364,7 @@ __attribute__((noinline)) bool Persistence::PublishStagedConfig(Config &config) 
 }
 
 bool Persistence::SaveConfig(Config &config) {
+    ::new (&phase_workspace.save) SavePhaseState;
     std::memset(&save_phase, 0, sizeof(save_phase));
     SavePhaseReset reset;
     return PrepareSaveConfig(config) && RemoveSaveTemporary() && StageSaveConfig(config) &&
@@ -359,7 +374,7 @@ bool Persistence::SaveConfig(Config &config) {
 Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
     if (!IsAvailable()) return SaveResult::Uncertain;
     // Reload the actually selected current/prior publication, never stale RAM.
-    const auto loaded = LoadConfigChecked(authoritative);
+    const auto loaded = LoadConfigDriver(authoritative);
     if (loaded != LoadResult::Loaded) return SaveResult::Uncertain;
     _mutation_fenced = false;
     return SaveResult::Saved;
@@ -468,12 +483,14 @@ __attribute__((noinline)) bool Persistence::ExecuteCaptureSource(uint8_t digest[
 
 Persistence::LoadResult Persistence::ReadLegacyProfile(size_t index, UltimateProfile &profile) {
     if (!IsAvailable() || index >= 2) return LoadResult::StorageFailure;
-    CheckedStorageFile source("/ultimate-migration.src", "r");
+    ResetReadWorkspace(); ReadWorkspaceReset read_reset;
+    SynchronousFileScope<false> source_scope("/ultimate-migration.src");
+    auto &source=source_scope.File();
     if (!source) return LoadResult::StorageFailure;
     LoadResult failure = LoadResult::Rejected;
     if (!CheckSavedConfig(source, &failure) || !source.seek(config_offset)) { source.close(); return failure; }
-    ConfigFileReader reader{&source};
-    pb_istream_t stream{}; stream.callback = read_config_file; stream.state = &reader;
+    auto &reader=read_workspace.reader;reader={&source};
+    auto &stream=read_workspace.stream;stream={};stream.callback=read_config_file;stream.state=&reader;
     stream.bytes_left = source.size() - config_offset;
     size_t found = 0; bool decoded = false;
     while (stream.bytes_left) {
@@ -503,57 +520,11 @@ bool Persistence::LoadConfig(Config &config) {
     return LoadConfigChecked(config) == LoadResult::Loaded;
 }
 
-__attribute__((noinline)) Persistence::LoadResult Persistence::ReadConfigCandidate() {
-    if (!IsAvailable() || _validator == nullptr) {
-        return LoadResult::StorageFailure;
-    }
-
-    // Config is too large for the core stack. This boot-owned candidate never
-    // becomes active and is reset for every attempt, including partial decodes.
-    auto &candidate = loaded_candidate;
-    candidate = Config_init_default;
-
-    auto &source = load_phase.source;
-    const char *selected_filename = nullptr;
-    if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, selected_filename, source))
-        return LoadResult::StorageFailure;
-    CheckedStorageFile config_file(selected_filename, "r");
-    if (!config_file) {
-        // The selected Boolean FS API cannot distinguish absence from I/O failure.
-        // Absent remains reserved for positively proved absence; it is not inferred.
-        return LoadResult::StorageFailure;
-    }
-
-    LoadResult failure = LoadResult::Rejected;
-    if (!CheckSavedConfig(config_file, &failure)) {
-        config_file.close();
-        return failure;
-    }
-    const size_t file_size = config_file.size();
-    if (file_size < config_offset || !config_file.seek(config_offset)) {
-        config_file.close();
-        return LoadResult::StorageFailure;
-    }
-
-    ConfigFileReader reader{ &config_file };
-    ultimate_native::RejectEmbedded(candidate);
-    pb_istream_t istream{};
-    istream.callback = read_config_file;
-    istream.state = &reader;
-    istream.bytes_left = file_size - config_offset;
-    if (!pb_decode(&istream, Config_fields, &candidate)) {
-        config_file.close();
-        return reader.io_failed ? LoadResult::StorageFailure : LoadResult::Rejected;
-    }
-    if (istream.bytes_left != 0 || config_file.position() != file_size ||
-        config_file.size() != file_size) {
-        config_file.close();
-        return LoadResult::StorageFailure;
-    }
-
+__attribute__((noinline)) Persistence::LoadResult Persistence::CompleteReadConfigCandidate(CheckedStorageFile &config_file) {
+    auto &candidate=loaded_candidate;
     ultimate_native::ClearEmbeddedCallbacks(candidate);
     ConfigValidationError error;
-    if (!ValidateConfig(candidate, error)) {
+    if (!ValidateConfig(loaded_candidate, error)) {
         config_file.close();
         return LoadResult::Rejected;
     }
@@ -568,12 +539,41 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ReadConfigCandida
     load_phase.crc = header.config_crc;
     return LoadResult::Loaded;
 }
+__attribute__((noinline)) const char *Persistence::SelectReadConfigCandidate() {
+    if(!IsAvailable()||_validator==nullptr)return nullptr;
+    loaded_candidate=Config_init_default;
+    const char *selected=nullptr;
+    return select_config_filename(config_filename,prior_compact_filename,legacy_config_filename,selected,load_phase.source)?selected:nullptr;
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::InitializeReadConfigCandidate(CheckedStorageFile &file) {
+    if(!file)return LoadResult::StorageFailure;
+    LoadResult failure=LoadResult::Rejected;
+    if(!CheckSavedConfig(file,&failure)){file.close();return failure;}
+    read_workspace.file_size=file.size();
+    if(read_workspace.file_size<config_offset||!file.seek(config_offset)){file.close();return LoadResult::StorageFailure;}
+    read_workspace.reader={&file};
+    ultimate_native::RejectEmbedded(loaded_candidate);
+    read_workspace.stream={};read_workspace.stream.callback=read_config_file;
+    read_workspace.stream.state=&read_workspace.reader;
+    read_workspace.stream.bytes_left=read_workspace.file_size-config_offset;
+    return LoadResult::Loaded;
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::FinishConfigDecode(CheckedStorageFile &file,bool decoded) {
+    if(!decoded){file.close();return read_workspace.reader.io_failed?LoadResult::StorageFailure:LoadResult::Rejected;}
+    if(read_workspace.stream.bytes_left!=0||file.position()!=read_workspace.file_size||file.size()!=read_workspace.file_size){file.close();return LoadResult::StorageFailure;}
+    return CompleteReadConfigCandidate(file);
+}
+__attribute__((always_inline)) inline Persistence::LoadResult Persistence::ReadConfigCandidate() {
+    const char *selected=SelectReadConfigCandidate();
+    if(!selected)return LoadResult::StorageFailure;
+    ResetReadWorkspace();ReadWorkspaceReset reset;
+    SynchronousFileScope<false> scope(selected);
+    const auto initialized=InitializeReadConfigCandidate(scope.File());
+    if(initialized!=LoadResult::Loaded)return initialized;
+    return FinishConfigDecode(scope.File(),pb_decode(&read_workspace.stream,Config_fields,&loaded_candidate));
+}
 
-Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
-    std::memset(&load_phase, 0, sizeof(load_phase));
-    LoadPhaseReset reset;
-    const auto prepared = ReadConfigCandidate();
-    if (prepared != LoadResult::Loaded) return prepared;
+__attribute__((noinline)) Persistence::LoadResult Persistence::FinishLoadedConfig(Config &config) {
     if (load_phase.source == CompactConfigRecovery::Source::PriorCompact) {
         auto restored = CheckedStorage::Rename(prior_compact_filename, config_filename, CheckedStorage::Kind::Config);
         if (!restored) {
@@ -585,6 +585,14 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
     _config_generation = load_phase.crc;
     return LoadResult::Loaded;
 }
+__attribute__((always_inline)) inline Persistence::LoadResult Persistence::LoadConfigDriver(Config &config) {
+    std::memset(&load_phase,0,sizeof(load_phase));LoadPhaseReset reset;
+    const auto prepared=ReadConfigCandidate();
+    if(prepared!=LoadResult::Loaded)return prepared;
+    return FinishLoadedConfig(config);
+}
+Persistence::LoadResult Persistence::LoadConfigChecked(Config &config){return LoadConfigDriver(config);}
+
 
 bool Persistence::CheckSavedConfig() {
     if (!IsAvailable()) {

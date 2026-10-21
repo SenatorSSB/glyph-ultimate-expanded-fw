@@ -1905,14 +1905,12 @@ bool ProfileStore::ValidateCompactReceipt(const Config &c) const {
     return true;
 }
 
-ProfileStore::Status ProfileStore::ImportLegacyStream(
-    const Config &legacy,
-    const uint8_t source[32],
-    LegacyReader reader,
-    void *context,
-    uint32_t *mapping,
-    size_t capacity
-) {
+namespace {
+struct ImportInputs { const Config *legacy; const uint8_t *source; ProfileStore::LegacyReader reader; void *context; uint32_t *mapping; size_t capacity; } import_inputs{};
+struct ImportInputsReset { ~ImportInputsReset(){import_inputs={};} };
+}
+__attribute__((noinline)) ProfileStore::Status ProfileStore::PrepareLegacyImport() {
+    const auto &legacy=*import_inputs.legacy;const auto *source=import_inputs.source;const auto reader=import_inputs.reader;auto *context=import_inputs.context;auto *mapping=import_inputs.mapping;const auto capacity=import_inputs.capacity;
     if (!_ready || _read_only_recovery)
         return Status::ReadOnlyRecovery;
     if (_uncertain)
@@ -1920,6 +1918,7 @@ ProfileStore::Status ProfileStore::ImportLegacyStream(
     size_t count = legacy.ultimate_profiles_count;
     if (!count || count > 2 || count > capacity || !reader || !mapping)
         return Status::Invalid;
+    (void)context;
     uint8_t actual[32];
     if (!HashFile(*_storage, "/ultimate-migration.src", actual) ||
         std::memcmp(actual, source, 32) != 0)
@@ -1944,20 +1943,16 @@ ProfileStore::Status ProfileStore::ImportLegacyStream(
     if (count > kMaxEntries - Count() || _directory->high_water_id > UINT32_MAX - count ||
         Generation() == UINT32_MAX)
         return Status::Full;
-    if (!Admit(kMaxRecordWireBytes, count))
-        return Status::Full;
-    *_next = *_directory;
-    _next->migration_version = 2;
-    _next->migration_count = count;
-    _next->migration_state = 1;
-    std::memcpy(_next->migration_source, source, 32);
-    for (size_t i = 0; i < count; ++i) {
-        if (!reader(context, i, _candidate_profile) || !ValidateProfile(_candidate_profile))
-            return Status::Invalid;
-        uint32_t id = _next->high_water_id + 1;
-        if (!PrepareProfileWrite(id, 1, _candidate_profile) || !PublishPreparedProfile())
-            return _uncertain ? Status::UnknownOutcome : Status::IoFailure;
-        auto &e = _next->entries[_next->count++];
+    return Status::NotFound;
+}
+__attribute__((noinline)) ProfileStore::Status ProfileStore::PrepareImportedLegacyRecord(LegacyReader reader,void *context,size_t i) {
+        if (!reader(context,i,_candidate_profile)||!ValidateProfile(_candidate_profile))return Status::Invalid;
+        const uint32_t id=_next->high_water_id+1;
+        return PrepareProfileWrite(id,1,_candidate_profile)?Status::Ok:(_uncertain?Status::UnknownOutcome:Status::IoFailure);
+
+}
+__attribute__((noinline)) bool ProfileStore::FinishImportedLegacyRecord(size_t i,uint32_t *mapping) {
+        const uint32_t id=_next->high_water_id+1;        auto &e = _next->entries[_next->count++];
         e = {};
         e.id = id;
         e.revision = 1;
@@ -1969,8 +1964,16 @@ ProfileStore::Status ProfileStore::ImportLegacyStream(
         _next->migration_revisions[i] = 1;
         mapping[i] = id;
         if (!HashMessage(UltimateProfile_fields, &_candidate_profile, _next->migration_payloads[i]))
-            return Status::Invalid;
-    }
+            return false;
+        return true;
+}
+__attribute__((noinline)) ProfileStore::Status ProfileStore::PublishImportedLegacyRecord() {
+    return PublishPreparedProfile()?Status::Ok:(_uncertain?Status::UnknownOutcome:Status::IoFailure);
+}
+__attribute__((noinline)) ProfileStore::Status ProfileStore::PublishImportedLegacyDirectory() {
+    return PublishDirectory(*_next)?Status::Ok:(_uncertain?Status::UnknownOutcome:Status::IoFailure);
+}
+__attribute__((noinline)) bool ProfileStore::PrepareImportedCompact(const Config &legacy,uint32_t *mapping,size_t count) {
     Receipt(*_next);
     // The existing shared Config scratch is unpublished and never an automatic
     // whole-Config frame. Actual imported bodies came from the bounded reader.
@@ -1985,17 +1988,49 @@ ProfileStore::Status ProfileStore::ImportLegacyStream(
         auto &m = compact.game_mode_configs[i];
         if (m.mode_id == MODE_ULTIMATE && m.ultimate_profile_config) {
             if (m.ultimate_profile_config > count)
-                return Status::Invalid;
+                return false;
             m.ultimate_profile_id = mapping[m.ultimate_profile_config - 1];
             m.ultimate_profile_config = 0;
         }
     }
     std::memcpy(compact.ultimate_profile_migration_receipt, _next->migration_receipt, 32);
     if (!CompactHash(compact, _next->compact_digest))
-        return Status::Invalid;
+        return false;
     _next->generation = Generation() + 1;
-    return PublishDirectory(*_next) ? Status::Ok
-                                    : (_uncertain ? Status::UnknownOutcome : Status::IoFailure);
+    return true;
+}
+__attribute__((noinline)) ProfileStore::Status ProfileStore::ExecuteLegacyImport() {
+    const auto prepared=PrepareLegacyImport();
+    if(prepared!=Status::NotFound)return prepared;
+    const size_t count=import_inputs.legacy->ultimate_profiles_count;
+    if (!Admit(kMaxRecordWireBytes, count))
+        return Status::Full;
+    *_next = *_directory;
+    _next->migration_version = 2;
+    _next->migration_count = count;
+    _next->migration_state = 1;
+    std::memcpy(_next->migration_source, import_inputs.source, 32);
+    for(size_t i=0;i<count;++i) {
+        const auto selected=PrepareImportedLegacyRecord(import_inputs.reader,import_inputs.context,i);
+        if(selected!=Status::Ok)return selected;
+        const auto published=PublishImportedLegacyRecord();if(published!=Status::Ok)return published;
+        if(!FinishImportedLegacyRecord(i,import_inputs.mapping))return Status::Invalid;
+    }
+    if(!PrepareImportedCompact(*import_inputs.legacy,import_inputs.mapping,count))return Status::Invalid;
+    return PublishImportedLegacyDirectory();
+
+
+}
+ProfileStore::Status ProfileStore::ImportLegacyStream(
+    const Config &legacy,
+    const uint8_t source[32],
+    LegacyReader reader,
+    void *context,
+    uint32_t *mapping,
+    size_t capacity
+) {
+    import_inputs={&legacy,source,reader,context,mapping,capacity};ImportInputsReset reset;
+    return ExecuteLegacyImport();
 }
 
 ProfileStore::Status ProfileStore::ImportLegacy(

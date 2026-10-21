@@ -1,0 +1,607 @@
+{
+  "status": "SOURCE_CHECKPOINT_FOCUSED_DIFF_PASS_REMAINING_TESTS_OPEN",
+  "inputs": [
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-application.json",
+      "sha256": "061aa34d18c7f42a7bec44dc107e2ed9a315d99f6608fc42f5931332fab6f4b9",
+      "bytes": 2125,
+      "object": "objects/061aa34d18c7f42a7bec44dc107e2ed9a315d99f6608fc42f5931332fab6f4b9.gz",
+      "gzip_sha256": "813c9a96958190b651a9bb06631de4b79931ca5f6eee70833df495508562721b"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/first-matrix.json",
+      "sha256": "5bfddf19783f823d3cf30681d94ef53a11fa32c63771b7378b62200dd5615edf",
+      "bytes": 2137,
+      "object": "objects/5bfddf19783f823d3cf30681d94ef53a11fa32c63771b7378b62200dd5615edf.gz",
+      "gzip_sha256": "876bd6e3dd1bc97859e473838ce0543e3b4d77662c65cb6fba106563276ff243"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/differential-matrix.json",
+      "sha256": "0f84d8d42a7326daf842dc8d0618625e12a4527edd6eac48c5202991db44f0a9",
+      "bytes": 6867,
+      "object": "objects/0f84d8d42a7326daf842dc8d0618625e12a4527edd6eac48c5202991db44f0a9.gz",
+      "gzip_sha256": "dc116b6912c0ce9742641357671831b3aceaa14af64000771a88f86964681f15"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/initial-old783-comparison.json",
+      "sha256": "dff6da97ffa5993a69096e8b9a5c9a845c33d9cd44423933439156a4de7be746",
+      "bytes": 3815,
+      "object": "objects/dff6da97ffa5993a69096e8b9a5c9a845c33d9cd44423933439156a4de7be746.gz",
+      "gzip_sha256": "df175e6dc2524fae081de7b38a9adcc54fa6bac137b9f9002eca9bf1e6412474"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/manifest.json",
+      "sha256": "fd7a70e601dbbaae9bb4b3b83247b1c0265aa0e49bc96f908a0bb7e0e381a77d",
+      "bytes": 58866,
+      "object": "objects/fd7a70e601dbbaae9bb4b3b83247b1c0265aa0e49bc96f908a0bb7e0e381a77d.gz",
+      "gzip_sha256": "b1ae8dca712516add1f392027908343b30fc61b68cc6b9cbed17a49a86e6f17e"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-load-capture-default.log",
+      "sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "bytes": 74,
+      "object": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "gzip_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-legacy-set-default.log",
+      "sha256": "a09a9210604f6b76e64f0b481784373d0d194d0abe15c86447c767e9ff0a73b6",
+      "bytes": 3739,
+      "object": "objects/a09a9210604f6b76e64f0b481784373d0d194d0abe15c86447c767e9ff0a73b6.gz",
+      "gzip_sha256": "8751f6dec2fa44d3ac6f792bc1a874e7b1de3b83e9ec56ff0356dcf90b6e436f"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-load-capture-short.log",
+      "sha256": "f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326",
+      "bytes": 74,
+      "object": "objects/f326d0960b5d9e8d88777f79ddfb17f8d9af4f0d58b38656dec6dd9bf72a1326.gz",
+      "gzip_sha256": "efb2c1aac520aa1a78c37fa9bd09c2715aad86b1a9c9286e29cc60940be3e41f"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-legacy-set-short.log",
+      "sha256": "8b8f84e5d3255d989544031bdf33bcc9a9ff0985e076e732c334721715185837",
+      "bytes": 3749,
+      "object": "objects/8b8f84e5d3255d989544031bdf33bcc9a9ff0985e076e732c334721715185837.gz",
+      "gzip_sha256": "d4d864e582d226acdfeeaf0531333624be5978ebbde9f86e44df717551d87419"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-load-capture-short/run.log",
+      "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "bytes": 36381261,
+      "object": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "gzip_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-load-capture-short/run.log",
+      "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "bytes": 36381261,
+      "object": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "gzip_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-load-capture-default/run.log",
+      "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "bytes": 36381261,
+      "object": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "gzip_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new-load-capture-default/run.log",
+      "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+      "bytes": 36381261,
+      "object": "objects/e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e.gz",
+      "gzip_sha256": "3bc41e7214379c1334995b658fa655993dc14cfeac673db8c82f8941791e565c"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-save-short/run.log",
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093,
+      "object": "objects/e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51.gz",
+      "gzip_sha256": "d69e74e9be6da09a844e4fffaf2cc5bef23ea72706c02c9ae5d8eaf8496a1562"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-save-short/run.log",
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093,
+      "object": "objects/e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51.gz",
+      "gzip_sha256": "d69e74e9be6da09a844e4fffaf2cc5bef23ea72706c02c9ae5d8eaf8496a1562"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-save-default/run.log",
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093,
+      "object": "objects/e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51.gz",
+      "gzip_sha256": "d69e74e9be6da09a844e4fffaf2cc5bef23ea72706c02c9ae5d8eaf8496a1562"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-save-default/run.log",
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093,
+      "object": "objects/e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51.gz",
+      "gzip_sha256": "d69e74e9be6da09a844e4fffaf2cc5bef23ea72706c02c9ae5d8eaf8496a1562"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-legacy-set-short/run.log",
+      "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "bytes": 6973,
+      "object": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "gzip_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-legacy-set-short/run.log",
+      "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "bytes": 6973,
+      "object": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "gzip_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-legacy-set-default/run.log",
+      "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "bytes": 6973,
+      "object": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "gzip_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-legacy-set-default/run.log",
+      "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+      "bytes": 6973,
+      "object": "objects/5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49.gz",
+      "gzip_sha256": "9260eac9e1ff9edbd6e63dff9f3668daac62c141ec41c342cce5d0a18a505dae"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-store-publication-short/run.log",
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329,
+      "object": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "gzip_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-store-publication-short/run.log",
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329,
+      "object": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "gzip_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/old-store-publication-default/run.log",
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329,
+      "object": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "gzip_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-actual-tests-20261021/new2-store-publication-default/run.log",
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329,
+      "object": "objects/bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241.gz",
+      "gzip_sha256": "3ee1d84c9d2e18fb3dba0308c9f2466887e91cc0b1db07569b40205e7037c7df"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-Persistence.su",
+      "sha256": "55cc1e4d0c32ed8550200cd624dd0189d364a34388ae6cfecbd99d2bbcc8abbe",
+      "bytes": 9230,
+      "object": "objects/55cc1e4d0c32ed8550200cd624dd0189d364a34388ae6cfecbd99d2bbcc8abbe.gz",
+      "gzip_sha256": "1c1e2239f315261acab651bbe6a9e617da6a25f27a4da74b9c00c6f1b16e62f0"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-backend_init.su",
+      "sha256": "c0c64f8e5275c48f9b2400d34ba7258946fe6a924a2598603bb7116cae4d64d2",
+      "bytes": 1587,
+      "object": "objects/c0c64f8e5275c48f9b2400d34ba7258946fe6a924a2598603bb7116cae4d64d2.gz",
+      "gzip_sha256": "ed71e75b27b26ecb8adede446701cc9725752121ccd2c75add290446c8894e84"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config.su",
+      "sha256": "b92d470e5c2178ff70fc13e713d093701fcaa3db1db41e13f52585273418c626",
+      "bytes": 8560,
+      "object": "objects/b92d470e5c2178ff70fc13e713d093701fcaa3db1db41e13f52585273418c626.gz",
+      "gzip_sha256": "4f5590d10b45c563b1dc393c47366048bcad2b1cbbf5d4609ef995a8464f33e1"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config-symbols.txt",
+      "sha256": "ad5ed4054fd8cc61c785d92fd375a535aec017d03364ec6b1d0f0f4addce6679",
+      "bytes": 13974,
+      "object": "objects/ad5ed4054fd8cc61c785d92fd375a535aec017d03364ec6b1d0f0f4addce6679.gz",
+      "gzip_sha256": "d33dba9412775ca1afa29b68a6498318c3775bad49bbd2dd3b04c6dcec03ed85"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ConfiguratorBackend.o",
+      "sha256": "07bc7b50e9f29068acc3615d1576232b5ab8ca9af03f2347f1980f616fa8a67d",
+      "bytes": 52336,
+      "object": "objects/07bc7b50e9f29068acc3615d1576232b5ab8ca9af03f2347f1980f616fa8a67d.gz",
+      "gzip_sha256": "5f1bf812d84edbd5f30971b7cd7f5f38af67018a3856dd7441aa91f7e5edcfd1"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config_validation-symbols.txt",
+      "sha256": "6a22d118ad6aa2537f4e6377ea78c4e5362a74da93ec92f77b34624d053994f0",
+      "bytes": 1189,
+      "object": "objects/6a22d118ad6aa2537f4e6377ea78c4e5362a74da93ec92f77b34624d053994f0.gz",
+      "gzip_sha256": "f94ae5d9be72d443909b635ce2b8a62a5069f98baa88790a2988e9043985195b"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ConfiguratorBackend-disassembly.txt",
+      "sha256": "98a8cfc57492e65bd91ebcb7f52494e550b3ed2bf1478358d28e1f6b238b6741",
+      "bytes": 401803,
+      "object": "objects/98a8cfc57492e65bd91ebcb7f52494e550b3ed2bf1478358d28e1f6b238b6741.gz",
+      "gzip_sha256": "0b665cb956064357fb37194bed16aa6c6c68f02b28aaab13851434d23a4e7e5b"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-Persistence.su",
+      "sha256": "55cc1e4d0c32ed8550200cd624dd0189d364a34388ae6cfecbd99d2bbcc8abbe",
+      "bytes": 9230,
+      "object": "objects/55cc1e4d0c32ed8550200cd624dd0189d364a34388ae6cfecbd99d2bbcc8abbe.gz",
+      "gzip_sha256": "1c1e2239f315261acab651bbe6a9e617da6a25f27a4da74b9c00c6f1b16e62f0"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config_validation.o",
+      "sha256": "d737987b33645b21e06a2017891569c49f81df1313fb4b87a4dd2fdc81c840c7",
+      "bytes": 13948,
+      "object": "objects/d737987b33645b21e06a2017891569c49f81df1313fb4b87a4dd2fdc81c840c7.gz",
+      "gzip_sha256": "961cde5c630bccc62efc11e936bf21bb2811e516fac5664b729e3aa0f388f37b"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config-disassembly.txt",
+      "sha256": "4805b76037c57fdf9e7c6cd526f8415984d5786752f67ca68ea3ab737d1a3583",
+      "bytes": 555208,
+      "object": "objects/4805b76037c57fdf9e7c6cd526f8415984d5786752f67ca68ea3ab737d1a3583.gz",
+      "gzip_sha256": "076f2004c1cd269a280769a8c7704fdcfe9e792691ca823bfc00aae4e040af4f"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-backend_init-disassembly.txt",
+      "sha256": "e18d714d8d1a61d058151062f24938736356f0a77769c9e3e0dc0be8a859e0b7",
+      "bytes": 58717,
+      "object": "objects/e18d714d8d1a61d058151062f24938736356f0a77769c9e3e0dc0be8a859e0b7.gz",
+      "gzip_sha256": "3ad3a9fe4c4edec2651906483cce0c6b5892950f449201b1a6629b493fbaf7ae"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ConfiguratorBackend.log",
+      "sha256": "ad9ee446f5e5b1f8a35f371b6c824445746d0dfbde412a7205c51f637f81dc0e",
+      "bytes": 1191,
+      "object": "objects/ad9ee446f5e5b1f8a35f371b6c824445746d0dfbde412a7205c51f637f81dc0e.gz",
+      "gzip_sha256": "507ebc33d535f15799f9cb5936b264743830f6a3e151015d8b2ffc2fea1ab420"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config-disassembly.txt",
+      "sha256": "4b81f2899ba8020f8cfedf2868339295c803c5c8512cc7237161b1157dfdb028",
+      "bytes": 516150,
+      "object": "objects/4b81f2899ba8020f8cfedf2868339295c803c5c8512cc7237161b1157dfdb028.gz",
+      "gzip_sha256": "9a6125c853b5eed4f01099cbeb624f770d5f144046e00a6163871b5a8e990e2f"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config.log",
+      "sha256": "aa876f5487c2619db2a734bc2b3e7824deaa34036eba01f858b5727cc18bddbe",
+      "bytes": 2037,
+      "object": "objects/aa876f5487c2619db2a734bc2b3e7824deaa34036eba01f858b5727cc18bddbe.gz",
+      "gzip_sha256": "ee0eb132338836d80062307eb62f894685498578510d28ecd4516e956e465aad"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ProfileStore.su",
+      "sha256": "fd188742abc6dde1530c3b361f9145b8a8f5f14017adbe9356349ea3fd70ea4a",
+      "bytes": 20824,
+      "object": "objects/fd188742abc6dde1530c3b361f9145b8a8f5f14017adbe9356349ea3fd70ea4a.gz",
+      "gzip_sha256": "f38a52ba3f604edd8235408ae972e7b431641edb1ac5cf3adec96961f4f3097a"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config_validation.su",
+      "sha256": "4941d1e1663e847bbad6a62aa5fde9e1f23a4c1c80b91d611f596bfbf763c0a9",
+      "bytes": 1511,
+      "object": "objects/4941d1e1663e847bbad6a62aa5fde9e1f23a4c1c80b91d611f596bfbf763c0a9.gz",
+      "gzip_sha256": "bce4dd03fa1e8d02dee45c14c054bade03bf71ac325f6c5cf195c328ad4cd062"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config.su",
+      "sha256": "3be0807305761d4148f83c34d2d4f7199c23de7d132be7c8acc079ac00d1b95b",
+      "bytes": 8560,
+      "object": "objects/3be0807305761d4148f83c34d2d4f7199c23de7d132be7c8acc079ac00d1b95b.gz",
+      "gzip_sha256": "bed3e00b967de5bf0eef8e839b041d205eab25fb9ffb38cab7fc4ba2eece2e05"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-Persistence.o",
+      "sha256": "d0d3d5c6aa3a40148e241e802bb0903a21732bc5a79b2b943a25e8bdfcb3d196",
+      "bytes": 39728,
+      "object": "objects/d0d3d5c6aa3a40148e241e802bb0903a21732bc5a79b2b943a25e8bdfcb3d196.gz",
+      "gzip_sha256": "395afcc26cfaa97ea03a26fa95100fffd07c4315f9e6c5967cc13f1cfb6fc7e3"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-backend_init-disassembly.txt",
+      "sha256": "706c57f5b4faebe4674bafaff5f0d290e966e41fa053efa3e0bb310a475386c9",
+      "bytes": 58715,
+      "object": "objects/706c57f5b4faebe4674bafaff5f0d290e966e41fa053efa3e0bb310a475386c9.gz",
+      "gzip_sha256": "675b061a16d216bb8b8904ec80f9928404cc5cde5d5fa57e918445ba81c9cd9a"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-Persistence-disassembly.txt",
+      "sha256": "577a4035c3863e779646b22b16eae574efe4a79392569a9171ca94f99fd35088",
+      "bytes": 316525,
+      "object": "objects/577a4035c3863e779646b22b16eae574efe4a79392569a9171ca94f99fd35088.gz",
+      "gzip_sha256": "49bae0c2170c079fd7a42eaf47cc91a18d7bb4020561d768d0f468bd8588c824"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-backend_init.log",
+      "sha256": "df089d1ddc77f6390d709150ad97bf8ae3b6c40b3732cee8210efa441504bb0a",
+      "bytes": 1029,
+      "object": "objects/df089d1ddc77f6390d709150ad97bf8ae3b6c40b3732cee8210efa441504bb0a.gz",
+      "gzip_sha256": "ce45482ab75899dbe9d94e2c243a1b6f61e7044e1a6a49c5ae4b448594112abd"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-backend_init.log",
+      "sha256": "07896accfde0f3afb929a3c42bafa923f65be1e480d5df01577c1ebcebda18bf",
+      "bytes": 1184,
+      "object": "objects/07896accfde0f3afb929a3c42bafa923f65be1e480d5df01577c1ebcebda18bf.gz",
+      "gzip_sha256": "56e323b93476f6ff9865e2e7cf77b8b18bd7d2caeeabc0e254a393421ab98f55"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-backend_init.o",
+      "sha256": "5e6c50bab3e3127df28123b93bab51329afd00554d4b718cc57c694a3d6440ee",
+      "bytes": 8792,
+      "object": "objects/5e6c50bab3e3127df28123b93bab51329afd00554d4b718cc57c694a3d6440ee.gz",
+      "gzip_sha256": "e851c5b8b24e8d6172bc7f8538a4679f44abc6398d2c42710f8c48959e655692"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config.o",
+      "sha256": "22323ae47eceff310d04e1eccc2592a4901fb714192d0ac86af4ab24dd1b7244",
+      "bytes": 67076,
+      "object": "objects/22323ae47eceff310d04e1eccc2592a4901fb714192d0ac86af4ab24dd1b7244.gz",
+      "gzip_sha256": "480b42e03cde1a66eeed155f1fb654b350dca07c99e288065e1a4f400c443b53"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config_validation.su",
+      "sha256": "4941d1e1663e847bbad6a62aa5fde9e1f23a4c1c80b91d611f596bfbf763c0a9",
+      "bytes": 1511,
+      "object": "objects/4941d1e1663e847bbad6a62aa5fde9e1f23a4c1c80b91d611f596bfbf763c0a9.gz",
+      "gzip_sha256": "bce4dd03fa1e8d02dee45c14c054bade03bf71ac325f6c5cf195c328ad4cd062"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config_validation.o",
+      "sha256": "d737987b33645b21e06a2017891569c49f81df1313fb4b87a4dd2fdc81c840c7",
+      "bytes": 13948,
+      "object": "objects/d737987b33645b21e06a2017891569c49f81df1313fb4b87a4dd2fdc81c840c7.gz",
+      "gzip_sha256": "961cde5c630bccc62efc11e936bf21bb2811e516fac5664b729e3aa0f388f37b"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config_validation.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "object": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-backend_init.o",
+      "sha256": "5e6c50bab3e3127df28123b93bab51329afd00554d4b718cc57c694a3d6440ee",
+      "bytes": 8792,
+      "object": "objects/5e6c50bab3e3127df28123b93bab51329afd00554d4b718cc57c694a3d6440ee.gz",
+      "gzip_sha256": "e851c5b8b24e8d6172bc7f8538a4679f44abc6398d2c42710f8c48959e655692"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ConfiguratorBackend-symbols.txt",
+      "sha256": "716efe5b4db6363dbd0f4e82df90b8ee53ae48b96b7f7e8fa28498be4d0e8457",
+      "bytes": 10010,
+      "object": "objects/716efe5b4db6363dbd0f4e82df90b8ee53ae48b96b7f7e8fa28498be4d0e8457.gz",
+      "gzip_sha256": "3965af0bc13e488def021d8e26518429e634c7d232e293ebabd79c59d5aacb70"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-Persistence.log",
+      "sha256": "97c4e66c79e9a31fc7954551c4fe4caa435140f7e5403183e8d821a2caf33c36",
+      "bytes": 3549,
+      "object": "objects/97c4e66c79e9a31fc7954551c4fe4caa435140f7e5403183e8d821a2caf33c36.gz",
+      "gzip_sha256": "4ef22d6a65ba8573a6fe1121d0c509ca1297ad8c3af5d56f654ae8dea634739f"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ConfiguratorBackend.log",
+      "sha256": "86b0da2481b2dfb5b1f2a8f3f861f3d6ccdb58f53f3bc3aa2684481946cffd76",
+      "bytes": 1036,
+      "object": "objects/86b0da2481b2dfb5b1f2a8f3f861f3d6ccdb58f53f3bc3aa2684481946cffd76.gz",
+      "gzip_sha256": "de2bdf30ac94d8c8c0e0642b6fd2308fdc986aab8291cc128122a618ddb2b9ee"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ProfileStore-symbols.txt",
+      "sha256": "0817c6b5adf461417d9f2823fbb2e92d649fc5678f21575864ff211bbc793d20",
+      "bytes": 16780,
+      "object": "objects/0817c6b5adf461417d9f2823fbb2e92d649fc5678f21575864ff211bbc793d20.gz",
+      "gzip_sha256": "7f8f4c1893ae5ce4e4ee550e72c7184bb461926c1070162780531d30672e8bc9"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-backend_init.su",
+      "sha256": "c0c64f8e5275c48f9b2400d34ba7258946fe6a924a2598603bb7116cae4d64d2",
+      "bytes": 1587,
+      "object": "objects/c0c64f8e5275c48f9b2400d34ba7258946fe6a924a2598603bb7116cae4d64d2.gz",
+      "gzip_sha256": "ed71e75b27b26ecb8adede446701cc9725752121ccd2c75add290446c8894e84"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ConfiguratorBackend-symbols.txt",
+      "sha256": "716efe5b4db6363dbd0f4e82df90b8ee53ae48b96b7f7e8fa28498be4d0e8457",
+      "bytes": 10010,
+      "object": "objects/716efe5b4db6363dbd0f4e82df90b8ee53ae48b96b7f7e8fa28498be4d0e8457.gz",
+      "gzip_sha256": "3965af0bc13e488def021d8e26518429e634c7d232e293ebabd79c59d5aacb70"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ConfiguratorBackend-disassembly.txt",
+      "sha256": "42c17b101229dbcf27ee7daeab41431e80099358d037e4d05be3795170aee223",
+      "bytes": 401801,
+      "object": "objects/42c17b101229dbcf27ee7daeab41431e80099358d037e4d05be3795170aee223.gz",
+      "gzip_sha256": "cfe63524a63b28d6f9381de992b78510ed5460b122e579c754c3d59d779e397c"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ProfileStore-disassembly.txt",
+      "sha256": "4576f772f4a34876cef7835d4e485f23bdf8ab0772c387c6da98987e3f91b176",
+      "bytes": 781742,
+      "object": "objects/4576f772f4a34876cef7835d4e485f23bdf8ab0772c387c6da98987e3f91b176.gz",
+      "gzip_sha256": "47c0cb91fdcde611b02109509460d6cc617914a20f910f2de27c2bd7eb92ae54"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ConfiguratorBackend.su",
+      "sha256": "ea284f8de89f4aa531e47ccc351902dc8089b07a126d7d35e204368ecbd50b3e",
+      "bytes": 9027,
+      "object": "objects/ea284f8de89f4aa531e47ccc351902dc8089b07a126d7d35e204368ecbd50b3e.gz",
+      "gzip_sha256": "e45ed81d0331cfc6961686eb64d9db9fb46c5191dce28884a9fd040754f52146"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-backend_init-symbols.txt",
+      "sha256": "ab12ffca104890f7644896bf349d998732fe1bd27e9beaece6134e45ba55d755",
+      "bytes": 3422,
+      "object": "objects/ab12ffca104890f7644896bf349d998732fe1bd27e9beaece6134e45ba55d755.gz",
+      "gzip_sha256": "f529131c20a54b5f573ae1332926063f5708e0a69477ef5104c6ea1347397e88"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/manifest.json",
+      "sha256": "fd7a70e601dbbaae9bb4b3b83247b1c0265aa0e49bc96f908a0bb7e0e381a77d",
+      "bytes": 58866,
+      "object": "objects/fd7a70e601dbbaae9bb4b3b83247b1c0265aa0e49bc96f908a0bb7e0e381a77d.gz",
+      "gzip_sha256": "b1ae8dca712516add1f392027908343b30fc61b68cc6b9cbed17a49a86e6f17e"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config_validation.log",
+      "sha256": "b73bf1763f8b643cd521c8a09ddd09d22ca667b5a988c95a2deeef92e45f0d5c",
+      "bytes": 155,
+      "object": "objects/b73bf1763f8b643cd521c8a09ddd09d22ca667b5a988c95a2deeef92e45f0d5c.gz",
+      "gzip_sha256": "b890b26c1df827c47ae864406b7352487c2917cf5b7e64db851b69f058042db3"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-Persistence-symbols.txt",
+      "sha256": "79bc91128cf79479c1845366a1ee8c96893d3e99d11793126932266dbecc2298",
+      "bytes": 7099,
+      "object": "objects/79bc91128cf79479c1845366a1ee8c96893d3e99d11793126932266dbecc2298.gz",
+      "gzip_sha256": "fa937e8bedf710ffc9efd46a2aae7c5b4e2b58dd6cc79aad9c66378abb6222fa"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ProfileStore.su",
+      "sha256": "fd188742abc6dde1530c3b361f9145b8a8f5f14017adbe9356349ea3fd70ea4a",
+      "bytes": 20824,
+      "object": "objects/fd188742abc6dde1530c3b361f9145b8a8f5f14017adbe9356349ea3fd70ea4a.gz",
+      "gzip_sha256": "f38a52ba3f604edd8235408ae972e7b431641edb1ac5cf3adec96961f4f3097a"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config.log",
+      "sha256": "aa876f5487c2619db2a734bc2b3e7824deaa34036eba01f858b5727cc18bddbe",
+      "bytes": 2037,
+      "object": "objects/aa876f5487c2619db2a734bc2b3e7824deaa34036eba01f858b5727cc18bddbe.gz",
+      "gzip_sha256": "ee0eb132338836d80062307eb62f894685498578510d28ecd4516e956e465aad"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ConfiguratorBackend.su",
+      "sha256": "ea284f8de89f4aa531e47ccc351902dc8089b07a126d7d35e204368ecbd50b3e",
+      "bytes": 9027,
+      "object": "objects/ea284f8de89f4aa531e47ccc351902dc8089b07a126d7d35e204368ecbd50b3e.gz",
+      "gzip_sha256": "e45ed81d0331cfc6961686eb64d9db9fb46c5191dce28884a9fd040754f52146"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ConfiguratorBackend.o",
+      "sha256": "07bc7b50e9f29068acc3615d1576232b5ab8ca9af03f2347f1980f616fa8a67d",
+      "bytes": 52336,
+      "object": "objects/07bc7b50e9f29068acc3615d1576232b5ab8ca9af03f2347f1980f616fa8a67d.gz",
+      "gzip_sha256": "5f1bf812d84edbd5f30971b7cd7f5f38af67018a3856dd7441aa91f7e5edcfd1"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ProfileStore-symbols.txt",
+      "sha256": "0817c6b5adf461417d9f2823fbb2e92d649fc5678f21575864ff211bbc793d20",
+      "bytes": 16780,
+      "object": "objects/0817c6b5adf461417d9f2823fbb2e92d649fc5678f21575864ff211bbc793d20.gz",
+      "gzip_sha256": "7f8f4c1893ae5ce4e4ee550e72c7184bb461926c1070162780531d30672e8bc9"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ProfileStore-disassembly.txt",
+      "sha256": "da053c302f13c5fa0e158d67c84652804ec1ee67b8b222dedddcccf55d4e4002",
+      "bytes": 781744,
+      "object": "objects/da053c302f13c5fa0e158d67c84652804ec1ee67b8b222dedddcccf55d4e4002.gz",
+      "gzip_sha256": "c228ad58562471fcb288213b9e41614509474c34e01c47eab9a56db4bbfe5bcf"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config_validation-disassembly.txt",
+      "sha256": "2df474236a196117187a3443401615b8d0f40b52145cef5ce0729d602ebbc205",
+      "bytes": 168550,
+      "object": "objects/2df474236a196117187a3443401615b8d0f40b52145cef5ce0729d602ebbc205.gz",
+      "gzip_sha256": "0e226b687a765001c4f9fa2e49fc2046343a303926eea6f1a9f2b838aad7796e"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config_validation-disassembly.txt",
+      "sha256": "2abfdaf0d97a7aa0d50420184d545552025df1ab613e570f864fe71e24fec49d",
+      "bytes": 168552,
+      "object": "objects/2abfdaf0d97a7aa0d50420184d545552025df1ab613e570f864fe71e24fec49d.gz",
+      "gzip_sha256": "4069fbf768c7bd4da4d01bef0975da0464c982b5c0d94fba189fe8ef814b5250"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ProfileStore.o",
+      "sha256": "b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890",
+      "bytes": 100632,
+      "object": "objects/b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890.gz",
+      "gzip_sha256": "89de986514532cc4f9c6743bd5eaefd4075eb8296319139438a5c51c6c7f9080"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-Persistence.o",
+      "sha256": "d0d3d5c6aa3a40148e241e802bb0903a21732bc5a79b2b943a25e8bdfcb3d196",
+      "bytes": 39728,
+      "object": "objects/d0d3d5c6aa3a40148e241e802bb0903a21732bc5a79b2b943a25e8bdfcb3d196.gz",
+      "gzip_sha256": "395afcc26cfaa97ea03a26fa95100fffd07c4315f9e6c5967cc13f1cfb6fc7e3"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-backend_init-symbols.txt",
+      "sha256": "ab12ffca104890f7644896bf349d998732fe1bd27e9beaece6134e45ba55d755",
+      "bytes": 3422,
+      "object": "objects/ab12ffca104890f7644896bf349d998732fe1bd27e9beaece6134e45ba55d755.gz",
+      "gzip_sha256": "f529131c20a54b5f573ae1332926063f5708e0a69477ef5104c6ea1347397e88"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config.o",
+      "sha256": "671f6c955d2267b03bccf2566a71c0e7130cd6a900eaab4d9945fdda42f62792",
+      "bytes": 64124,
+      "object": "objects/671f6c955d2267b03bccf2566a71c0e7130cd6a900eaab4d9945fdda42f62792.gz",
+      "gzip_sha256": "1a26ed41802cf51c91f86b8a7b4abf67849207b5b974cfb5cb513cdf03b3ad85"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-config_validation-symbols.txt",
+      "sha256": "6a22d118ad6aa2537f4e6377ea78c4e5362a74da93ec92f77b34624d053994f0",
+      "bytes": 1189,
+      "object": "objects/6a22d118ad6aa2537f4e6377ea78c4e5362a74da93ec92f77b34624d053994f0.gz",
+      "gzip_sha256": "f94ae5d9be72d443909b635ce2b8a62a5069f98baa88790a2988e9043985195b"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-Persistence-disassembly.txt",
+      "sha256": "0f031c7a9de4c2a9b238134a29efaf8a825d6bf7d981b7a39dea761650d66de8",
+      "bytes": 316527,
+      "object": "objects/0f031c7a9de4c2a9b238134a29efaf8a825d6bf7d981b7a39dea761650d66de8.gz",
+      "gzip_sha256": "b33c3a12c4e2501abbdc654995b0d3fe1b1e4e8ef6a7f91a1e6e4dfa8481e060"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-Persistence.log",
+      "sha256": "bf1e94ed37e6c04f51711857952b607ba9a4d29161fb97e7161a85fcf3917da8",
+      "bytes": 3704,
+      "object": "objects/bf1e94ed37e6c04f51711857952b607ba9a4d29161fb97e7161a85fcf3917da8.gz",
+      "gzip_sha256": "ffcac4cb323ea6525bf07b124b0581577fc3e6e2316309cb79bdfe58e664e13d"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/default-ProfileStore.log",
+      "sha256": "b73bf1763f8b643cd521c8a09ddd09d22ca667b5a988c95a2deeef92e45f0d5c",
+      "bytes": 155,
+      "object": "objects/b73bf1763f8b643cd521c8a09ddd09d22ca667b5a988c95a2deeef92e45f0d5c.gz",
+      "gzip_sha256": "b890b26c1df827c47ae864406b7352487c2917cf5b7e64db851b69f058042db3"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ProfileStore.o",
+      "sha256": "b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890",
+      "bytes": 100632,
+      "object": "objects/b2ed4c3cc3535d50c49c02a534817840de7de205ae495c086117e6fde3f62890.gz",
+      "gzip_sha256": "89de986514532cc4f9c6743bd5eaefd4075eb8296319139438a5c51c6c7f9080"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-Persistence-symbols.txt",
+      "sha256": "79bc91128cf79479c1845366a1ee8c96893d3e99d11793126932266dbecc2298",
+      "bytes": 7099,
+      "object": "objects/79bc91128cf79479c1845366a1ee8c96893d3e99d11793126932266dbecc2298.gz",
+      "gzip_sha256": "fa937e8bedf710ffc9efd46a2aae7c5b4e2b58dd6cc79aad9c66378abb6222fa"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-config-symbols.txt",
+      "sha256": "f544e9b6bffe828f49f20b5a8a18987401a60db16ddfe0c1a71016a15d327660",
+      "bytes": 13974,
+      "object": "objects/f544e9b6bffe828f49f20b5a8a18987401a60db16ddfe0c1a71016a15d327660.gz",
+      "gzip_sha256": "0781cb6e51136203424ce7272d26529c862c21c60760b07078dc236daf11ac66"
+    },
+    {
+      "input": "/private/tmp/glyph-native-decoder-adopted-O3/short-ProfileStore.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "object": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    }
+  ]
+}

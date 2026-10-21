@@ -167,7 +167,7 @@ void enter_recovery_configurator() {
 }  // namespace
 
 
-void setup() {
+__attribute__((noinline)) bool PrepareBootDisplay() {
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
 
@@ -204,6 +204,75 @@ void setup() {
         display.drawBitmap(0, 0, Bitmap_Glyph_Splashscreen, 128, 64, 1);
         display.display();
     }
+
+    return display_ready;
+}
+
+__attribute__((noinline)) bool MigrateBootLegacyConfiguration() {
+        uint32_t legacy_ids[2] = {};
+        uint8_t source_digest[32];
+        if (!persistence.CaptureLegacySource(source_digest)) {
+            enter_recovery_configurator();
+            return false;
+        }
+        const ProfileStore::Status migration = profile_store.ImportLegacyStream(
+            config, source_digest,
+            [](void *, size_t index, UltimateProfile &profile) {
+                return persistence.ReadLegacyProfile(index, profile) == Persistence::LoadResult::Loaded;
+            }, nullptr, legacy_ids, 2);
+        if (migration != ProfileStore::Status::Ok && migration != ProfileStore::Status::MigrationFenced) {
+            enter_recovery_configurator();
+            return false;
+        }
+        // Shared synchronous core0 scratch: no extra whole Config allocation or
+        // automatic migration frame; bodies are streamed one at a time above.
+        Config &compact = ConfigWriteCandidate();
+        compact = config;
+        if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact) ||
+            profile_store.CompleteMigration(compact) != ProfileStore::Status::Ok) {
+            enter_recovery_configurator();
+            return false;
+        }
+        config = compact;
+        return true;
+}
+
+__attribute__((noinline)) bool InitializeBootBackends() {
+    native_metrics::Calibrate();
+    // Create array of input sources to be used.
+    const size_t initialized_backend_count = initialize_backends(
+        backends,
+        inputs,
+        input_sources,
+        input_source_count,
+        config,
+        pinout,
+        get_backend_config_default,
+        get_usb_backend_config_default,
+        &detect_console,
+        &init_secondary_backends_glyph
+    );
+
+    if (!is_valid_usb_default_index(config)) {
+        enter_recovery_configurator();
+        return false;
+    }
+
+    backend_count = initialized_backend_count;
+
+    set_mode_destination_selector(request_mode_destination);
+    setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count, inputs.buttons);
+
+    if(backend_count == 0) {
+        failed_detection = true;
+        backend_count = 1;
+    }
+
+    return true;
+}
+
+void setup() {
+    const bool display_ready = PrepareBootDisplay();
 
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.
@@ -244,33 +313,8 @@ void setup() {
             return;
         }
     }
-    if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0) {
-        uint32_t legacy_ids[2] = {};
-        uint8_t source_digest[32];
-        if (!persistence.CaptureLegacySource(source_digest)) {
-            enter_recovery_configurator();
-            return;
-        }
-        const ProfileStore::Status migration = profile_store.ImportLegacyStream(
-            config, source_digest,
-            [](void *, size_t index, UltimateProfile &profile) {
-                return persistence.ReadLegacyProfile(index, profile) == Persistence::LoadResult::Loaded;
-            }, nullptr, legacy_ids, 2);
-        if (migration != ProfileStore::Status::Ok && migration != ProfileStore::Status::MigrationFenced) {
-            enter_recovery_configurator();
-            return;
-        }
-        // Shared synchronous core0 scratch: no extra whole Config allocation or
-        // automatic migration frame; bodies are streamed one at a time above.
-        Config &compact = ConfigWriteCandidate();
-        compact = config;
-        if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact) ||
-            profile_store.CompleteMigration(compact) != ProfileStore::Status::Ok) {
-            enter_recovery_configurator();
-            return;
-        }
-        config = compact;
-    }
+    if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0 &&
+        !MigrateBootLegacyConfiguration()) return;
 
     // Persist the independent v2 acceptance marker before any ordinary store
     // mutation can be serviced, including a legacy Config with zero profiles.
@@ -284,35 +328,7 @@ void setup() {
         config = compact;
     }
 
-    native_metrics::Calibrate();
-    // Create array of input sources to be used.
-    const size_t initialized_backend_count = initialize_backends(
-        backends,
-        inputs,
-        input_sources,
-        input_source_count,
-        config,
-        pinout,
-        get_backend_config_default,
-        get_usb_backend_config_default,
-        &detect_console,
-        &init_secondary_backends_glyph
-    );
-
-    if (!is_valid_usb_default_index(config)) {
-        enter_recovery_configurator();
-        return;
-    }
-
-    backend_count = initialized_backend_count;
-
-    set_mode_destination_selector(request_mode_destination);
-    setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count, inputs.buttons);
-
-    if(backend_count == 0) {
-        failed_detection = true;
-        backend_count = 1;
-    } 
+    if (!InitializeBootBackends()) return;
 
     publish_boot_state(BootOutcome::Normal, display_ready);
 }
@@ -496,7 +512,7 @@ void loop1() {
                     );
                     break;
             }
-        } 
+        }
         if(!is_nes) {
             display_backend->SendReport();
         } else if(SCREEN_OK) {
