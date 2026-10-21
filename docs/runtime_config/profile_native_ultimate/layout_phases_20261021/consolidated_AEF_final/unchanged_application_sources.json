@@ -1,0 +1,18 @@
+{
+  "equal_to_exact_engineering_artifact": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "hash_file_body_sha256": "e855ecc10ea309fdbb893e9dd263eec25cee6908d668964fa9d062685e782bb7",
+  "source_sha256": {
+    "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+    "src/modes/UltimateNativeEvaluator.cpp": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+    "src/modes/Ultimate.cpp": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+    "src/core/ControllerMode.cpp": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+    "src/core/InputMode.cpp": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+    "src/core/socd.cpp": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+    "config/glyph/common/src/config.cpp": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+    "include/core/RuntimeIdentityService.hpp": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7",
+    "HAL/pico/src/core/NativeTargetMetrics.cpp": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "HAL/pico/include/core/CheckedStorageFile.hpp": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c"
+  },
+  "qualification": "Semantic/static-body correspondence only; final link and whole-stack not inferred."
+}

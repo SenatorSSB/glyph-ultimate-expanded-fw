@@ -1,0 +1,80 @@
+{
+  "AB_short": {
+    "equal": true,
+    "bytes": 36381261,
+    "rows": 8381,
+    "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+    "current": "/private/tmp/glyph-native-AEF-AB-short/run.log",
+    "baseline": "/private/tmp/glyph-native-AEF-AB-baseline-short/run.log"
+  },
+  "AB_default": {
+    "equal": true,
+    "bytes": 36381261,
+    "rows": 8381,
+    "sha256": "e46c4f9705a78d39516729cd222390721ccb2ce83a218b1f4de6464e92b2c72e",
+    "current": "/private/tmp/glyph-native-AEF-AB-default/run.log",
+    "baseline": "/private/tmp/glyph-native-AEF-AB-baseline-default/run.log"
+  },
+  "E_short": {
+    "equal": true,
+    "bytes": 6973,
+    "rows": 34,
+    "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+    "current": "/private/tmp/glyph-native-AE-E-final-short/run.log",
+    "baseline": "/private/tmp/glyph-native-AEF-E-baseline-short/run.log"
+  },
+  "E_default": {
+    "equal": true,
+    "bytes": 6973,
+    "rows": 34,
+    "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49",
+    "current": "/private/tmp/glyph-native-AEF-E-final-default/run.log",
+    "baseline": "/private/tmp/glyph-native-AEF-E-baseline-default/run.log"
+  },
+  "C_short": {
+    "equal": true,
+    "bytes": 557759,
+    "rows": 472,
+    "sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+    "current": "/private/tmp/glyph-native-AEF-C-reconcile-short/run.log",
+    "baseline": "/private/tmp/glyph-native-AE-reconcile-baseline-short/run.log"
+  },
+  "C_default": {
+    "equal": true,
+    "bytes": 557759,
+    "rows": 472,
+    "sha256": "3e2fd797f2dc36e8bb12855b88cf7f638cc6479835ee676e7a7f62a0aefc322c",
+    "current": "/private/tmp/glyph-native-AEF-C-reconcile-default/run.log",
+    "baseline": "/private/tmp/glyph-native-AE-reconcile-baseline-default/run.log"
+  },
+  "CD_short": {
+    "equal": true,
+    "bytes": 1755329,
+    "rows": 1071,
+    "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+    "current": "/private/tmp/glyph-native-AEF-CD-short/run.log",
+    "baseline": "/private/tmp/glyph-native-store-publication-baseline/run.log"
+  },
+  "CD_default": {
+    "equal": true,
+    "bytes": 1755329,
+    "rows": 1071,
+    "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+    "current": "/private/tmp/glyph-native-AEF-CD-default/run.log",
+    "baseline": "/private/tmp/glyph-native-store-publication-default-baseline/run.log"
+  },
+  "Mounted_short": {
+    "equal": true,
+    "current": "/private/tmp/glyph-native-AEF-Mounted-current-short/run.log",
+    "baseline": "/private/tmp/glyph-native-AEF-Mounted-baseline-short/run.log",
+    "cases": 19,
+    "sha256": "9c4feba1093ead861d576737750f9f9debcfeaf17b1af4bf2f829ca8c126223d"
+  },
+  "Mounted_default": {
+    "equal": true,
+    "current": "/private/tmp/glyph-native-AEF-Mounted-current-default/run.log",
+    "baseline": "/private/tmp/glyph-native-AEF-Mounted-baseline-default/run.log",
+    "cases": 19,
+    "sha256": "9c4feba1093ead861d576737750f9f9debcfeaf17b1af4bf2f829ca8c126223d"
+  }
+}
