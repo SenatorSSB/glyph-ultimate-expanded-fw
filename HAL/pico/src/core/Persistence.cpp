@@ -116,7 +116,7 @@ bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t
     return pb_encode(&compare, Config_fields, &config) && compare.bytes_written == encoded_size;
 }
 
-__attribute__((noinline)) bool copy_open_files(CheckedStorageFile &input, CheckedStorageFile &output, size_t length, bool &uncertain) {
+__attribute__((noinline)) bool copy_open_files(CheckedStorageFile &input, CheckedStorageFile &output, size_t length) {
     bool copied = input && output;
     uint8_t scratch[64]; size_t remaining = length;
     while (copied && remaining) {
@@ -124,16 +124,18 @@ __attribute__((noinline)) bool copy_open_files(CheckedStorageFile &input, Checke
         copied = input.read(scratch, count) == static_cast<int>(count) && output.write(scratch, count) == count;
         remaining -= count;
     }
-    copied = copied && output.sync();
-    const bool input_closed = input.close(), output_closed = output.close();
-    uncertain = input.uncertain() || output.uncertain();
-    return copied && input_closed && output_closed;
+    return copied;
 }
 
 __attribute__((noinline)) bool copy_checked_file(const char *from, const char *to, size_t length, bool &uncertain) {
     SynchronousFileScope<false> input_scope(from);
     CheckedStorageFile output(to, "w+"); // constructed even when input failed
-    return copy_open_files(input_scope.File(), output, length, uncertain);
+    auto &input = input_scope.File();
+    bool copied = copy_open_files(input, output, length);
+    copied = copied && output.sync();
+    const bool input_closed = input.close(), output_closed = output.close();
+    uncertain = input.uncertain() || output.uncertain();
+    return copied && input_closed && output_closed;
 }
 
 __attribute__((noinline)) bool hash_file(const char *path, uint8_t digest[32]) {

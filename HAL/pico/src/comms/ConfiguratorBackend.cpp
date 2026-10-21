@@ -343,14 +343,21 @@ __attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation Configurator
     // is static because Config contains the fixed-size embedded arrays used
     // by the selected input modes and is too large for the call stack.
     Config &candidate = ConfigWriteCandidate();
-    uint64_t receipt_token = 0;
-    uint8_t receipt_digest[32] = {}, migration_receipt[32] = {};
-    uint32_t receipt_id = 0, receipt_generation = 0, receipt_mode = 0, root_format = 0;
     if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
         if (persistence.LoadConfigChecked(candidate) != Persistence::LoadResult::Loaded) {
             static const char error[] = "Failed to load durable Config";
             return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error)) ? SetConfigPreparation::ReturnedTrue : SetConfigPreparation::ReturnedFalse;
         }
+    }
+    return DecodeSetConfig();
+}
+
+__attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::DecodeSetConfig() {
+    Config &candidate = ConfigWriteCandidate();
+    uint64_t receipt_token = 0;
+    uint8_t receipt_digest[32] = {}, migration_receipt[32] = {};
+    uint32_t receipt_id = 0, receipt_generation = 0, receipt_mode = 0, root_format = 0;
+    if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
         receipt_token = candidate.profile_reference_token;
         std::memcpy(receipt_digest, candidate.profile_reference_digest, 32);
         receipt_id = candidate.profile_reference_result_id;
@@ -420,8 +427,13 @@ bool ConfiguratorBackend::HandleSetConfig() {
     const auto prepared = PrepareSetConfig();
     if (prepared != SetConfigPreparation::Ready)
         return prepared == SetConfigPreparation::ReturnedTrue;
+    const bool saved = persistence.SaveConfig(ConfigWriteCandidate());
+    return FinalizeSetConfig(saved);
+}
+
+__attribute__((noinline)) bool ConfiguratorBackend::FinalizeSetConfig(bool saved) {
     Config &candidate = ConfigWriteCandidate();
-    if (!persistence.SaveConfig(candidate)) {
+    if (!saved) {
         char errmsg[] = "Failed to save config to memory";
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
         return false;

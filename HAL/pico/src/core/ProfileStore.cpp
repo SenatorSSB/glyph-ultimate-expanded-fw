@@ -265,20 +265,23 @@ namespace {
     uint8_t initialize_root_wire[kDirectoryWireBytes];
 
     Result publication_result;
-    __attribute__((noinline)) void ExecutePublication() {
-        static uint8_t readback[kMaxRecordWireBytes];
+    // The original readback owner is shared only by synchronous publication.
+    uint8_t publication_readback[kMaxRecordWireBytes];
+    __attribute__((noinline)) bool PreparePublicationWrite() {
         if (publishing.stage)
             *publishing.stage = ProfileStoreIoStage::None;
-        if (publishing.length > sizeof(readback)) {
+        if (publishing.length > sizeof(publication_readback)) {
             std::memset(&publishing, 0, sizeof(publishing));
             publication_result = { Outcome::Failed, 0, 0 };
-            return;
+            return false;
         }
-        // C++17 constructs returned PODs directly in fixed scratch. Publication
-        // inputs are reset each call and cleared on every exit. No callback
-        // recursively enters the synchronous core0 store/publication path.
+        return true;
+    }
+    __attribute__((noinline)) void WritePreparedPublication() {
+        ::new (&publication_result) Result(publishing.storage->CheckedWrite(publishing.tmp, publishing.bytes, publishing.length, publishing.kind));
+    }
+    __attribute__((noinline)) void FinishWrittenPublication() {
         auto &r = publication_result;
-        ::new (&r) Result(publishing.storage->CheckedWrite(publishing.tmp, publishing.bytes, publishing.length, publishing.kind));
         if (!r) {
             if (publishing.stage) {
                 *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publishing.storage->LastFailure());
@@ -288,7 +291,7 @@ namespace {
             std::memset(&publishing, 0, sizeof(publishing));
             return;
         }
-        ::new (&r) Result(publishing.storage->CheckedRead(publishing.tmp, readback, publishing.length, publishing.kind));
+        ::new (&r) Result(publishing.storage->CheckedRead(publishing.tmp, publication_readback, publishing.length, publishing.kind));
         if (!r) {
             if (publishing.stage) {
                 *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publishing.storage->LastFailure());
@@ -300,7 +303,7 @@ namespace {
             std::memset(&publishing, 0, sizeof(publishing));
             return;
         }
-        if (std::memcmp(publishing.bytes, readback, publishing.length) != 0) {
+        if (std::memcmp(publishing.bytes, publication_readback, publishing.length) != 0) {
             if (publishing.stage)
                 *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordVerify);
             std::memset(&publishing, 0, sizeof(publishing));
@@ -316,6 +319,11 @@ namespace {
             );
         std::memset(&publishing, 0, sizeof(publishing));
         return;
+    }
+    __attribute__((always_inline)) inline void ExecutePublication() {
+        if (!PreparePublicationWrite()) return;
+        WritePreparedPublication();
+        FinishWrittenPublication();
     }
     __attribute__((always_inline)) inline Result Publish(
         ProfileStoreStorage &s,
@@ -810,7 +818,7 @@ __attribute__((always_inline)) inline bool ProfileStore::ExecuteBootstrap(Bootst
     switch (action) {
         case BootstrapAction::Complete: return true;
         case BootstrapAction::Refused: return false;
-        case BootstrapAction::Reconcile: return ReconcileTransaction();
+        case BootstrapAction::Reconcile: return ExecuteReconciliation(PrepareReconciliation());
         case BootstrapAction::PublishAndInitialize:
             if (!WriteControl(*_next, 1)) {
                 _read_only_recovery = true;
@@ -869,26 +877,28 @@ __attribute__((noinline)) bool ProfileStore::PrepareDirectoryPublication(const D
     return true;
 }
 
-bool ProfileStore::PublishDirectory(const Directory &next) {
-    if (!PrepareDirectoryPublication(next)) return false;
-    // Persist intended authority before the root, then its completed control.
-    if (!WriteControl(next, 3)) {
-        _uncertain = true;
-        return false;
-    }
+__attribute__((noinline)) void ProfileStore::PrepareDirectoryRootPublication() {
     publishing = {_storage, directory_publication_temp, directory_publication_path,
         directory_publication_wire, sizeof(directory_publication_wire), Kind::Root, &_last_io_stage};
-    ExecutePublication();
-    if (!publication_result) {
-        _uncertain = true;
-        return false;
-    }
+}
+
+__attribute__((noinline)) bool ProfileStore::PrepareDirectoryCompletion(const Directory &next) {
     *_directory = next;
     _protected_ready = false;
-    if (!WriteControl(next, 2)) {
-        _uncertain = true;
-        return false;
-    }
+    return PrepareControlPublication(next, 2);
+}
+
+__attribute__((always_inline)) inline bool ProfileStore::PublishDirectory(const Directory &next) {
+    if (!PrepareDirectoryPublication(next)) return false;
+    if (!PrepareControlPublication(next, 3)) { _uncertain = true; return false; }
+    ExecutePublication();
+    if (!publication_result) { _uncertain = true; return false; }
+    PrepareDirectoryRootPublication();
+    ExecutePublication();
+    if (!publication_result) { _uncertain = true; return false; }
+    if (!PrepareDirectoryCompletion(next)) { _uncertain = true; return false; }
+    ExecutePublication();
+    if (!publication_result) { _uncertain = true; return false; }
     return true;
 }
 
@@ -1001,8 +1011,7 @@ __attribute__((noinline)) ProfileStore::ReconcileAction ProfileStore::PrepareRec
 }
 
 
-bool ProfileStore::ReconcileTransaction() {
-    const auto action = PrepareReconciliation();
+__attribute__((always_inline)) inline bool ProfileStore::ExecuteReconciliation(ReconcileAction action) {
     if (action == ReconcileAction::Refused) return false;
     if (action == ReconcileAction::WriteCompleted && !WriteControl(*_next, 2)) return false;
     if (action == ReconcileAction::PublishAborted && !PublishDirectory(*_next)) {
@@ -1011,6 +1020,10 @@ bool ProfileStore::ReconcileTransaction() {
     }
     _uncertain = false;
     return true;
+}
+
+bool ProfileStore::ReconcileTransaction() {
+    return ExecuteReconciliation(PrepareReconciliation());
 }
 
 uint32_t ProfileStore::HealthFlags() const {

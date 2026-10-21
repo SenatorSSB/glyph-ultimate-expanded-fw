@@ -232,6 +232,8 @@ class ProfileStore {
     Directory *_other = nullptr;
 
     bool PublishDirectory(const Directory &next);
+    void PrepareDirectoryRootPublication();
+    bool PrepareDirectoryCompletion(const Directory &next);
     bool ReadProfile(
         uint32_t id,
         uint32_t revision,
@@ -240,6 +242,7 @@ class ProfileStore {
     ) const;
     enum class ReconcileAction : uint8_t { Refused, Complete, WriteCompleted, PublishAborted };
     ReconcileAction PrepareReconciliation();
+    bool ExecuteReconciliation(ReconcileAction action);
     TransactionResult FinalizePreparedCreate();
     TransactionResult FinalizePreparedUpdate();
     void PrepareCreateRecord();

@@ -46,7 +46,11 @@ std::vector<std::string> publication_case(unsigned op,size_t index,CheckedStorag
     require(lfs_unmount(&mounted_fs)==0,"actual publication unmount");return observed;
 }
 }
+#ifdef GLYPH_STORE_PUBLICATION_NO_MAIN
+int unused_store_publication_main(int argc,char **argv) {
+#else
 int main(int argc,char **argv) {
+#endif
     try {
         require(argc>=2&&argc<=3,"publication fixture path and optional smoke");std::ifstream file(argv[1],std::ios::binary);Bytes b((std::istreambuf_iterator<char>(file)),{});auto input=pb_istream_from_buffer(b.data(),b.size());require(pb_decode(&input,Config_fields,&legacy)&&!input.bytes_left&&legacy.ultimate_profiles_count==2,"production-admitted fixture decode");
         unsigned count=0;for(unsigned op=0;op<6;++op) {
