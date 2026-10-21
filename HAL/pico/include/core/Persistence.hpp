@@ -79,6 +79,14 @@ class Persistence {
     uint32_t _config_generation = 0;
     ConfigSemanticValidator _validator = nullptr;
 
+    SaveResult VerifyExpectedConfigGeneration(uint64_t expected_generation);
+    bool PrepareSaveConfig(const Config &config);
+    bool RemoveSaveTemporary();
+    bool StageSaveConfig(Config &config);
+    bool WriteStagedConfig(CheckedStorageFile &file, Config &config);
+    bool VerifyStagedConfig(Config &config);
+    bool RotateSavedConfig();
+    bool PublishStagedConfig(Config &config);
     bool CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure = nullptr);
 };
 

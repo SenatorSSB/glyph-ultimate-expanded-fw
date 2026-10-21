@@ -541,7 +541,7 @@ bool ProfileStore::Begin(uint32_t expected, uint32_t required_root_format) {
     _active_id = 0;
     _active_revision = 0;
     _active_native.view.valid = false; _active_native_lease.Release();
-    return Bootstrap(false);
+    return ExecuteBootstrap(PrepareBootstrap(false));
 }
 
 bool ProfileStore::BeginRecovery(uint32_t expected, uint32_t required_root_format) {
@@ -567,7 +567,7 @@ bool ProfileStore::BeginRecovery(uint32_t expected, uint32_t required_root_forma
     _active_id = 0;
     _active_revision = 0;
     _active_native.view.valid = false; _active_native_lease.Release();
-    return Bootstrap(true);
+    return ExecuteBootstrap(PrepareBootstrap(true));
 }
 
 bool ProfileStore::ReadRoot(uint8_t slot, Directory &d) const {
@@ -638,63 +638,63 @@ __attribute__((always_inline)) inline bool ProfileStore::InitializeV2(const Dire
     return LoadDirectory();
 }
 
-__attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery) {
+__attribute__((noinline)) ProfileStore::BootstrapAction ProfileStore::PrepareBootstrap(bool recovery) {
     if (_required_root_format > 2) {
         _root_invalid = true;
         _read_only_recovery = true;
-        return false;
+        return BootstrapAction::Refused;
     }
     static CheckedStorage::Geometry g; g = {};
     if (!_storage->Geometry(g) || !g.erase_bytes || g.total_bytes < kReserve) {
         _read_only_recovery = true;
-        return false;
+        return BootstrapAction::Refused;
     }
     static Result ctrl; ::new (&ctrl) Result(_storage->Probe(kControl));
     if (ctrl.outcome != Outcome::NotFound) {
         uint32_t phase = 0;
         if (!ctrl || !LoadControl(*_next, phase)) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
         _v2 = true;
         if (_expected_incarnation && _next->incarnation != _expected_incarnation) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
         if (phase == 1) {
             if (recovery) {
                 _read_only_recovery = true;
-                return false;
+                return BootstrapAction::Refused;
             }
-            return InitializeV2(*_next);
+            return BootstrapAction::Initialize;
         }
         if (phase == 3) {
             _uncertain = true;
             if (recovery) {
                 LoadDirectory();
                 _read_only_recovery = true;
-                return _ready;
+                return _ready ? BootstrapAction::Complete : BootstrapAction::Refused;
             }
-            return ReconcileTransaction();
+            return BootstrapAction::Reconcile;
         }
         const uint32_t floor = _next->generation, high = _next->high_water_id,
                        inc = _next->incarnation;
         if (!LoadDirectory())
-            return false;
+            return BootstrapAction::Refused;
         if (Generation() != floor || _directory->high_water_id != high || Incarnation() != inc ||
             !SameDirectory(*_directory, *_next)) {
             _root_invalid = true;
             _read_only_recovery = true;
-            return _ready;
+            return _ready ? BootstrapAction::Complete : BootstrapAction::Refused;
         }
-        return true;
+        return BootstrapAction::Complete;
     }
     // Config independently records that v2 authority was accepted. Losing all
     // v2 files must not resurrect the retained pre-upgrade v1 roots.
     if (_required_root_format >= 2) {
         _root_invalid = true;
         _read_only_recovery = true;
-        return false;
+        return BootstrapAction::Refused;
     }
     // A missing control with any v2 path is damaged, never permission to downgrade.
     for (unsigned i = 0; i < 2; ++i) {
@@ -702,7 +702,7 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
         RootPath(p, sizeof(p), i);
         if (_storage->Probe(p).outcome != Outcome::NotFound) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
     }
     bool exists[2]{}, valid[2]{};
@@ -722,13 +722,13 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
                 *_directory = *_other;
             _ready = valid[0] || valid[1];
             _read_only_recovery = true;
-            return _ready;
+            return _ready ? BootstrapAction::Complete : BootstrapAction::Refused;
         }
         if (_directory->incarnation != _other->incarnation ||
             (_directory->generation == _other->generation &&
              !SameDirectory(*_directory, *_other))) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
         if (_other->generation > _directory->generation) {
             Directory *swap = _directory;
@@ -738,16 +738,16 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
         if (_directory->generation - _other->generation > 1 ||
             _directory->high_water_id < _other->high_water_id) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
         if (_expected_incarnation && Incarnation() != _expected_incarnation) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
         _ready = true;
         if (recovery || _directory->migration_state == 1) {
             _read_only_recovery = true;
-            return true;
+            return BootstrapAction::Complete;
         }
         // Preserve every existing payload; malformed dependencies stop upgrade.
         for (size_t i = 0; i < Count(); ++i) {
@@ -756,7 +756,7 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
                 (e.previous_revision &&
                  !ReadProfile(e.id, e.previous_revision, _candidate_profile))) {
                 _read_only_recovery = true;
-                return false;
+                return BootstrapAction::Refused;
             }
         }
         for (size_t i = 0; i < _directory->migration_count; ++i) {
@@ -771,7 +771,7 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
                     _directory->migration_payloads[i]
                 )) {
                 _read_only_recovery = true;
-                return false;
+                return BootstrapAction::Refused;
             }
         }
         if (_directory->migration_count)
@@ -779,7 +779,7 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
     } else {
         if (_expected_incarnation || recovery) {
             _read_only_recovery = true;
-            return false;
+            return BootstrapAction::Refused;
         }
         _directory->incarnation = 1;
     }
@@ -787,14 +787,26 @@ __attribute__((always_inline)) inline bool ProfileStore::Bootstrap(bool recovery
     if (g.free_bytes <
         kReserve + 4 * FileCharge(kDirectoryWireBytes + 16, g.erase_bytes) + 4ull * g.erase_bytes) {
         _read_only_recovery = true;
-        return false;
+        return BootstrapAction::Refused;
     }
     *_next = *_directory;
-    if (!WriteControl(*_next, 1)) {
-        _read_only_recovery = true;
-        return false;
+    return BootstrapAction::PublishAndInitialize;
+}
+
+__attribute__((noinline)) bool ProfileStore::ExecuteBootstrap(BootstrapAction action) {
+    switch (action) {
+        case BootstrapAction::Complete: return true;
+        case BootstrapAction::Refused: return false;
+        case BootstrapAction::Reconcile: return ReconcileTransaction();
+        case BootstrapAction::PublishAndInitialize:
+            if (!WriteControl(*_next, 1)) {
+                _read_only_recovery = true;
+                return false;
+            }
+            _v2 = true;
+            break;
+        case BootstrapAction::Initialize: break;
     }
-    _v2 = true;
     return InitializeV2(*_next);
 }
 

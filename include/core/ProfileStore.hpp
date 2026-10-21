@@ -193,7 +193,9 @@ class ProfileStore {
 
   private:
     bool LoadDirectory();
-    bool Bootstrap(bool recovery);
+    enum class BootstrapAction : uint8_t { Complete, Refused, Reconcile, Initialize, PublishAndInitialize };
+    BootstrapAction PrepareBootstrap(bool recovery);
+    bool ExecuteBootstrap(BootstrapAction action);
     bool ReadRoot(uint8_t slot, Directory &out) const;
     bool WriteControl(const Directory &, uint32_t phase);
     bool LoadControl(Directory &, uint32_t &phase) const;
