@@ -1,0 +1,47 @@
+# Independent P4 and conditional-mode committed delta review
+
+Candidate `a48190ca4b82d2274cd85b538dc35840139b5b7c`, tree `35068cae354eb0704e1b4afbb210cf403553f9d7`, compared only with `a2a5c94d0a0bef3638b1ead1071ff58faaa7528f`. **No material source, semantic, transaction or lifetime defect found in this delta.** Resource gate remains OPEN; this is not final source/ELF/build/hardware acceptance. Requested gpt-6.1-sol/high, observed UNKNOWN.
+
+Immutable archive: `/private/tmp/glyph-a481-source-review-20261021`. Production delta is five exact ProfileStore/Configurator/mode-header paths; additional test changes are the forced metrics-header include and existing NOR fixture/runner. No source implementation or canonical/Git/device/network mutation occurred. Conclusions below use archived source and source-matching object evidence. The earlier a2a5 review is preserved separately; later in-progress Load/Capture edits are not part of this verdict.
+
+**Dispatch siblings.** Dispatch performs original reconciliation/identity/replay/Config load/CAS/admission and returns. Only admission==1 sets pending; admission==2 marks handled. Inlined Execute performs the same operation/trace/profile-presence/referenced-Config checks, then returns before Finalize. No repeated admission/load or delayed main-loop action.
+
+**RX and response leases.** Original IncomingScope owns incoming_native from Receive through all siblings, releasing on every early return; Respond releases incoming RX at original pre-encode boundary and clears request callback. READ response still borrows the separate record wire through encode, with no new body copy or frame reuse during execution. Independent100READ and two intentional response-lease mutants passed/detected.
+
+**Fault/trace lifetime.** Outer FaultScope starts where old Dispatch scope started after complete RX, spans prep/operation/finalize, then ends before response encoding/TX. Same explicit EndMutation remains inside finalization before fault-ticket fields are captured; scope destructor calls EndMutation again at original effective boundary. Preparation/trace failure and execution/trace failure both unwind the owner. Production retired controls remain inert; candidate-fault strict protocol passed failed_trace_disarms/admission_before_activation/ordered_stages.
+
+**Reset/status.** dispatch_handled and dispatch_pending clear at Dispatch start and on owning block exit. Status/result/config-generation/recovery/fault/diagnostic finalization fragment is otherwise unchanged. Receive failure cannot use pending from a prior operation; completed old calls reset and the next Dispatch resets again. No response encode/TX runs with active fault scope.
+
+**Publication input lifetime.** PreparedPublication continues to contain only pointers to existing store-owned/static wires/paths plus scalars/stage pointer. ExecutePublication no-arg executor consumes it synchronously; write/read/verify/Rename are in original order, stage mapping and unknown outcome behavior preserved, metadata cleared on every return. Capacity guard failure and compare failure write exact old Failed result. Relocated control/directory/init wires replace original statics rather than add owners; readback remains distinct.
+
+**Directory authority.** PrepareDirectoryPublication retains old ready/recovery/uncertain/v2 check and EncodeDirectory. Root-path string formatting moves to pure prep; no storage operations move. Durable sequence remains control3 -> parity root -> RAM directory/protected invalidation -> control2, with same _uncertain policy on all failures. Same seed/wire kind/root bounds and no extra checked IO.
+
+**Receipt metadata.** PrepareCommit copies original next generation/identity/Ok receipt into same owned next directory and moved committing_result. PrepareRename/Reorder/Delete perform Start/find/CAS/name/reference checks and Admit before same edits, then return before publication. Start replay/refusal returns exact result without publication. Publish failure produces same unknown/IO status/id/revision/generation. Create/Update use same shared preparation/publication through Commit; no nested source-owned writer overwrites result.
+
+**Begin and initialized roots.** PrepareBeginState extracts the same field clears/active invalidation and recovery booleans. PrepareBootstrap still returns before inlined execution. Geometry+encode for init returns before root execution; each root path is prepared in existing static strings before same publication. Loop scalar resets before use, on root failure, and after loop before control2; no borrowed automatic survives. Phase1/2/3/fresh/legacy/refusal/recovery logic from reviewed P1 is preserved.
+
+**Conditional mode helper.** Only an allocation-free noinline templated helper containing original automatic ConfigValidationError and exact ValidateConfig call was added; persist replaces only that fragment before SAME SaveConfigIfGenerationMatches. consume function, selection/search/default/generation/field order/save/backend_index/config.cpp are unchanged. Existing Error remains automatic, no static Error or new mode semantics.
+
+**Conditional activation proof.** Record pins exact committed post-P2 a2a5/tree and old header SHA5ee7a5..., source-identical O3 recipes/relocations. Sum1696 foreground +16 pre-mask +360 source-feasible detected-NES/default-XInput serial IRQ =2072>2048, without ROM/padding. Existing request168 includes Error132 contributor. The1008 leaf is orphaning160+relocating136+splitting192+compact136+traverse216+callback72+commitprog72+LFSprog24; remove136 already inlines force, so no force64 double-count. This uses feasible360, not safe upper456/408. Record states completed_before_header_edit; proof content and sole-helper restriction independently match recorded mechanical condition. No target observation or final bound implied.
+
+**Checker delta.** Selection/recovery checker adds only forced inclusion of existing real disabled NativeTargetMetrics header needed by current setup extraction. Existing fixture/assertions/old-negative construction remain unchanged; independent run includes actual setup routes and all preserved negatives.
+
+**Resource distinction.** P4 component source hashes match archived ProfileStore/Configurator source; emitted preparation/finalization/execution frames remain component facts awaiting final ELF. Gross new layout recorded as corrected176+32+2+4=214 (old168/200 estimates superseded); final layout alignment and linked totals remain mandatory. No core native/schema/evaluator/transport wire or resource limit change.
+
+## Independently executed focused validation
+
+- **native dispatch:** PASS actual COBS CREATE/full request identity/100READ record leases/checked native reference/MAX3341+3373/mixed refusal plus overwritten/released response lease negatives. Log `/private/tmp/glyph-native-a481-independent-dispatch.log`.
+- **strict store/boot:** PASS24 current ASan/UBSan cases +4 frozen source negatives. Log `/private/tmp/glyph-native-a481-independent-strict.log`.
+- **selection/recovery:** PASS same/different/fail/unknown/held/nonultimate/compact destination, committed boot, manual/automatic/unavailable/validator/read-only, five actual setup routes and preserved negative controls. Log `/private/tmp/glyph-native-a481-independent-selection.log`.
+- **strict protocol/candidate faults:** PASS production and strict-candidate actual backend/protobuf/PacketIO/store; failed trace disarms, admission-before-activation, ordered stages, query and bounded liveness cases. Log `/private/tmp/glyph-native-a481-independent-strict-protocol.log`.
+- **actual broader namespace GC:** PASS actual pinned NOR/LittleFS ASan/UBSan foreign/nested/matching directories, protected bytes,16 before/after faults/reset/handles,128/129 budget and same-token retry. Log `/private/tmp/glyph-native-a481-independent-gc.log`.
+
+These checks directly invalidate/check changed dispatch/publication/mode/boot paths without repeating unchanged millions-of-input native oracles. They are host results, not target measurements. The production/candidate strict protocol additionally tests failed-trace disarming and the effective fault-scope boundary moved by this delta.
+
+## Remaining gates
+
+The planned full publication before/after checked-storage trace/status/generation/fence/receipt differential remains a final validation obligation; manual source ordering equivalence and successful invariant/fault suites must not be renamed that differential. Final clean authorized Load/Capture review, complete31-class source/linked-ELF/IRQ/ROM/indirect/PRIMASK proof within unchanged caps, measured both-ABI static layout/delta, exact build and artifact custody remain required.
+
+The new LegacySourceIdentity280 retaining a closed File while nested hash656/readOpen lead is preserved for the later frozen31-path screen; this review makes no concrete overflow claim from dirty code or a generic IRQ union. Conditional mode2072 is a qualified pre-repair source-feasible composition, not a target peak or new resource PASS. Any new final ELF must independently establish exact correspondence for all reused bcb facts and the new phase frames.
+
+No hardware action/acceptance/integration permission is granted. A reviewed concrete candidate packet still needs direct owner device approval and exact human HEP PASS. Nunchuk NOT_TESTED; target timing/highwater NOT_MEASURED; root cause UNPROVEN. This finite committed-delta review is complete.

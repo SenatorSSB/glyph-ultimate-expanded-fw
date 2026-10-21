@@ -1,0 +1,1725 @@
+{
+  "source_commit": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+  "extensions": [
+    ".py",
+    ".sh",
+    ".js",
+    ".ts",
+    ".cpp",
+    ".html"
+  ],
+  "roots": [
+    "tools",
+    "scripts"
+  ],
+  "excluded": "tools/fixtures test-only directory",
+  "pattern": "XInputGetState|hidapi|hidraw|pygame|evdev|jstest|SDL_Joystick|navigator\\.getGamepads|usb\\.core|IOHID|joy\\.cpl|Gamepad API|USBPcap|Wireshark",
+  "files": [
+    {
+      "path": "scripts/build-glyph-mk6-quiet.sh",
+      "sha256": "328ff73b9f1da1ccad5d7ee0431b664b9c33a70c35959e4a14f6677881844eeb",
+      "bytes": 349
+    },
+    {
+      "path": "scripts/build-glyph-mk6-senscope-playtest-quiet.sh",
+      "sha256": "ba43d4b4509f0b7096fd2adf4f6ad7da1a9f5871b6e7a2c2e4d648f36d0efd7c",
+      "bytes": 421
+    },
+    {
+      "path": "scripts/pio-local.sh",
+      "sha256": "3b81e400830b30db0a4a194cdb5ff35df61e4d15f13b8d3891e79f2716ee9714",
+      "bytes": 279
+    },
+    {
+      "path": "tools/analyze_glyph_offline_remapper_export_diff.py",
+      "sha256": "4e23e98ee193ddec420699b47c94c7f6d046156e73491fe2a9183af1ad1c6ab9",
+      "bytes": 7459
+    },
+    {
+      "path": "tools/check_glyph_active_profile_binding_path.py",
+      "sha256": "40281b7cea5f5efb5cc8b4e52772751a6d91fb8a32d4953da0de22c84940c400",
+      "bytes": 4557
+    },
+    {
+      "path": "tools/check_glyph_active_runtime_config_state_contract.py",
+      "sha256": "fd070e13c9a0236fae3f33ee07e11a9a6cc58ef290e9ce6b43ac1ca6ffc92b59",
+      "bytes": 12311
+    },
+    {
+      "path": "tools/check_glyph_active_runtime_config_state_source_owned_preselection.py",
+      "sha256": "f71e59a29edafb0c7069b008eb8728899adfe0a1fe5109b9e934fe2516309037",
+      "bytes": 38086
+    },
+    {
+      "path": "tools/check_glyph_active_storage_publication_model.py",
+      "sha256": "5a36755da1d72dbe15d1207c85cc4bc2a572d22cdf53f56aae0e973ebce9a86a",
+      "bytes": 23692
+    },
+    {
+      "path": "tools/check_glyph_active_ultimate_lt3_config_artifact.py",
+      "sha256": "0d14bd1e7c951fe13970ffdf5a5a104fc9cb842e3b7d3102313c94957e5fe04d",
+      "bytes": 8124
+    },
+    {
+      "path": "tools/check_glyph_adapter_prewrite_blocker_matrix.py",
+      "sha256": "844d6690a0151ac7d5b22ba164b63799c01f10503a63a7ac6503816fe89d5ba4",
+      "bytes": 14139
+    },
+    {
+      "path": "tools/check_glyph_adapter_prewrite_implementation_gate.py",
+      "sha256": "c7e04adbbd3c44659a4bd16c82db5f1e1ca15908c2b5b3ee7b4a7aa4d0d064d2",
+      "bytes": 14471
+    },
+    {
+      "path": "tools/check_glyph_agent_framework_docs.py",
+      "sha256": "6ce02487e60ef94d0906a8a77fe11d6c20fcfc953671184ff23c7f404c03aa35",
+      "bytes": 214334
+    },
+    {
+      "path": "tools/check_glyph_agentic_sequence_protocol.py",
+      "sha256": "78d0f1eb8849a82ad56928129621c6f88f86cf9acdf68acb20701e510e2be681",
+      "bytes": 7740
+    },
+    {
+      "path": "tools/check_glyph_artifact_postprocessor_provenance.py",
+      "sha256": "af617014ef54b76bb06cb95b365a61a12a87430c157ae41868c783f8490b732a",
+      "bytes": 17770
+    },
+    {
+      "path": "tools/check_glyph_artifact_postprocessor_workflow.py",
+      "sha256": "75b559050abc600d36ab0c8075a3cf93680819c75afa4611e0914a5bfccc6488",
+      "bytes": 16634
+    },
+    {
+      "path": "tools/check_glyph_build_input_non_selector_configuration.py",
+      "sha256": "c03945e0cccdcbe818cd26094786c547743061be3f47cd6860d8b897086188dc",
+      "bytes": 10136
+    },
+    {
+      "path": "tools/check_glyph_build_input_provenance_inventory.py",
+      "sha256": "0fe7e9555690b5e6c27c15dcedc0129665e0f506e5ab60ed6ea455e9b2bf5c0f",
+      "bytes": 40040
+    },
+    {
+      "path": "tools/check_glyph_build_input_resolution_observations.py",
+      "sha256": "86702aa1e5522136fe7299913aac6c67c1414aaec04bbb0ceaa55576eb491b14",
+      "bytes": 9161
+    },
+    {
+      "path": "tools/check_glyph_c021_proof_replay.py",
+      "sha256": "c1e9cc339471f2d0e80439ccab8159cc78d5c660b9136eefa86ad174ab12446f",
+      "bytes": 26985
+    },
+    {
+      "path": "tools/check_glyph_c022_proof_replay.py",
+      "sha256": "75cedba39849e2d3c3f0ed2dfdf6393f9c1b080ac9c596aa4e873bac3fff8459",
+      "bytes": 26481
+    },
+    {
+      "path": "tools/check_glyph_c023_proof_replay.py",
+      "sha256": "d865f5deeea9ba48ccaa003541ebdaa5b2ba6b8c33dd300b2ec9f5f247d55247",
+      "bytes": 2029
+    },
+    {
+      "path": "tools/check_glyph_calibration_fixtures.py",
+      "sha256": "8b52e70127cb02dc03038b6481d7ef1f777c2b406848fe4415c4c85d7bc2244d",
+      "bytes": 6029
+    },
+    {
+      "path": "tools/check_glyph_candidate_state_materialization_scaffold.py",
+      "sha256": "07c5f1fe24e45948c4a3b624ee7f0dafdc4e41e14e4f9f1e1978f52baee029cb",
+      "bytes": 19282
+    },
+    {
+      "path": "tools/check_glyph_checked_storage_host.py",
+      "sha256": "4f74553cb492761c8ec767a3e5f50fbb3aa9818d4122ec2409ddac9e5bf1d886",
+      "bytes": 1602
+    },
+    {
+      "path": "tools/check_glyph_checker_census.py",
+      "sha256": "e37e0242e6d07dd866901841545e329d713ce5bd017116062f0069f350426f9e",
+      "bytes": 2118
+    },
+    {
+      "path": "tools/check_glyph_checker_context.py",
+      "sha256": "a16983cb730064514510c6d8ae100b84f69e455dbc15f05a57e225a9cedab3e1",
+      "bytes": 37808
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_candidate_schema_contract.py",
+      "sha256": "2d8dddf316e78261846ff55080aec7b094b2cb9bf147cc6e2f2678b71da9d7c2",
+      "bytes": 21589
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_candidate_schema_validator.py",
+      "sha256": "7e05743da6a6c452dc1bd257bbf4abec47975f60f6b7ed47a88b7746175aefe6",
+      "bytes": 5993
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_invalid_corpus.py",
+      "sha256": "e2a429d078fae0c98c02d417d01a95aee8f144e613a7c508c3ffbb9fd1ffefa5",
+      "bytes": 20867
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_invalid_corpus_fixture.py",
+      "sha256": "4ad8e508211b9d4a4db37ed4e7324a8d61bbc5f3443da99bada80cbebe99ac1e",
+      "bytes": 22699
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_negative_corpus_contract.py",
+      "sha256": "978478ae9a5c3e61597cb99675b502e824ec3cec016eb47aad0fdbd933bbdd23",
+      "bytes": 23327
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_negative_corpus_gate.py",
+      "sha256": "14944897007ea8811595e0af29234ccbb45a6d992ce7cd266dedc023c49af78a",
+      "bytes": 17523
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_schema_readiness_gate.py",
+      "sha256": "c895bf19b7304e0c92ac178e7a3fb2ecdd48706da60f965feb7d6dd9c19152b4",
+      "bytes": 18745
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_sidecar_contract.py",
+      "sha256": "5fd995249e9487fc72e0b35fe356f8edafac90984ab3adf5dd4e64eaea7906a0",
+      "bytes": 13348
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_transform_decision_matrix.py",
+      "sha256": "0aa34fb79cd19cd0841ac65b86e748d3adae91a0d7fd73bce25c468d6197158c",
+      "bytes": 15483
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_transform_design_contract.py",
+      "sha256": "4a5a14eeb93a778cb96991cf003d606585edac5634d1f0b545c37a71b426052f",
+      "bytes": 22545
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_transform_design_gate.py",
+      "sha256": "93ce6e3091cebef98dbcda03403dd99145a50887ac8e8676835177d63317c1fb",
+      "bytes": 19526
+    },
+    {
+      "path": "tools/check_glyph_clean_room_adapter_transform_rule_matrix.py",
+      "sha256": "63f298959cb0f7fe3d85e100b88e3181a75a88bd513387fb3c2569a11f909904",
+      "bytes": 16237
+    },
+    {
+      "path": "tools/check_glyph_config_010_integration_semantic_correspondence.py",
+      "sha256": "cae243130ec33d6b743d50d54cede3b8ed75c37261ea91433eca72d9daa1faae",
+      "bytes": 16211
+    },
+    {
+      "path": "tools/check_glyph_config_010_mode_activation_capacity.py",
+      "sha256": "82e8376d5fc671da3c476eae64a1a59bca20cc60ec8787bb07265fe2cc95290d",
+      "bytes": 11735
+    },
+    {
+      "path": "tools/check_glyph_config_json_compatibility_fixtures.py",
+      "sha256": "c1fba94690e6cd0697e2d14ce3520d098e8bece2e5442a7f31674be6b88a6f7f",
+      "bytes": 11609
+    },
+    {
+      "path": "tools/check_glyph_config_menu_invalid_state_characterization.py",
+      "sha256": "fd756c19540d8cf43fec0f80b26ea39286aaed0cf5551207a784bbfda0542ae3",
+      "bytes": 5520
+    },
+    {
+      "path": "tools/check_glyph_configurator_compatibility_source_registry.py",
+      "sha256": "a2162ce657e74fd951af70015754ab1603eae14aa730069a982056783e1a65fb",
+      "bytes": 7762
+    },
+    {
+      "path": "tools/check_glyph_configurator_setconfig_transaction.py",
+      "sha256": "b93009cdbe301591db4563bda2cf0d82e60f344eba30ed3dd4f350db43c7f595",
+      "bytes": 12340
+    },
+    {
+      "path": "tools/check_glyph_configurator_usb_coordination.py",
+      "sha256": "b3299f1ceb20dc9be5251dd21d1fb99c5f7bdafa8d6957dec387de2f3bfcd7fa",
+      "bytes": 4883
+    },
+    {
+      "path": "tools/check_glyph_coordinate_native_runtime_plan.py",
+      "sha256": "c44e104dc45cf17fc4aba0ffcc99561f0a62bf774d7487431bda6fcf3741346e",
+      "bytes": 13092
+    },
+    {
+      "path": "tools/check_glyph_coordinate_native_runtime_profile_contract.py",
+      "sha256": "02891b27f43e675c6291ee50c4ee4ffbd597e2bef3199fd6590190fabde9d8b0",
+      "bytes": 82258
+    },
+    {
+      "path": "tools/check_glyph_current_config_persistence_recovery_research.py",
+      "sha256": "8bf5d42f403f0d68d7d3ebe37e6a8cbc8545b94734af79ad5d1cef9007561551",
+      "bytes": 67072
+    },
+    {
+      "path": "tools/check_glyph_current_x1_regression_subset.py",
+      "sha256": "bbfea14440bf647e866504d9ff36e750bb5718b016069ce5b6f077980633658c",
+      "bytes": 16855
+    },
+    {
+      "path": "tools/check_glyph_custom_modifier_cache_characterization.py",
+      "sha256": "fcc0a671a6ac5a1262f125567e84f2ffe0c56ee12c9533ad994ebd0b45701935",
+      "bytes": 18426
+    },
+    {
+      "path": "tools/check_glyph_diagnostic_active_storage_published.py",
+      "sha256": "fa635e501d5ceeed7c16c9f4c2ce02646ed87cd1c9713539d600593642f5861b",
+      "bytes": 42210
+    },
+    {
+      "path": "tools/check_glyph_diagnostic_generated_source_owned_baseline_active.py",
+      "sha256": "afc41fd1a7a1ce47ca6e71c8910e1539a999ab812e85b759affbac5f39324825",
+      "bytes": 35610
+    },
+    {
+      "path": "tools/check_glyph_diagnostic_parsed_candidate_present_source_owned_published.py",
+      "sha256": "501bf7989dcd3cde9ae4013ac94db8a09fd268589d191296a00472cef9bb6b82",
+      "bytes": 25363
+    },
+    {
+      "path": "tools/check_glyph_docs_agent_surface.py",
+      "sha256": "3982115c3f941be8867f1d1f9da81b2bed2188a857d79444c177ee77a8aac95b",
+      "bytes": 23120
+    },
+    {
+      "path": "tools/check_glyph_docs_navigation.py",
+      "sha256": "96d66234b327f0a1499a578f463d81c67b485e0a04b606082f1e1481e20e23e9",
+      "bytes": 9719
+    },
+    {
+      "path": "tools/check_glyph_export_artifact_compatibility_index.py",
+      "sha256": "48e902a82539ca677f4d9e728cd035883ef00833338714a02a0565407a811ada",
+      "bytes": 13163
+    },
+    {
+      "path": "tools/check_glyph_export_artifact_compatibility_invalid_corpus.py",
+      "sha256": "7c25f4d5d99e5778a8da15a23662d8843c6c743d5287a8d3a14238ded7e8c20e",
+      "bytes": 22041
+    },
+    {
+      "path": "tools/check_glyph_export_artifact_round_trip.py",
+      "sha256": "0f242faa1ed5964c19d35a820e00f5e6722f06ff0a6325570e84a826e9e0cb62",
+      "bytes": 14225
+    },
+    {
+      "path": "tools/check_glyph_export_artifact_snapshots.py",
+      "sha256": "69797a742433cfc8ef8c9b438f1383abe3477cef0270433cfac15a4973b72960",
+      "bytes": 6642
+    },
+    {
+      "path": "tools/check_glyph_export_corpus_final_blocker_status.py",
+      "sha256": "8a687a7dd59e504611403c4b304878e1d3d0c04cc5148f03ba28a83636db1900",
+      "bytes": 11696
+    },
+    {
+      "path": "tools/check_glyph_export_corpus_readiness_status.py",
+      "sha256": "d74190dfbf2a56671cce6d35b6e3c9e1084fb109568e7067af8c47d9d5e1b74b",
+      "bytes": 9665
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_adapter_boundary.py",
+      "sha256": "e30df9459700551cc057d2274faad1a8f8213c43bb38b3dfc26fb802221d58c4",
+      "bytes": 8148
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_adapter_feasibility.py",
+      "sha256": "41af1e286d4389c1c521ac4ea2a1988b4a7503c66c5c13c94ef5294ff0efb928",
+      "bytes": 6343
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_compatibility_experiment_plan.py",
+      "sha256": "bda075907a4ef3a0937190b0c72b109d5fab8ac0cfe6f6caaf05eb7507e66b5a",
+      "bytes": 5404
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_config_shape_matrix.py",
+      "sha256": "cdbc5876ccf5210531c0996c01aac4e495c63c8e71445be2ab25e762f9b940bc",
+      "bytes": 8401
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_import_export_audit_checklist.py",
+      "sha256": "f14a1c7e58ca803f545a4ec16d6552265cfaa073e532ee22940d51b136e2b9a3",
+      "bytes": 13287
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_import_export_audit_scope.py",
+      "sha256": "c5720ae4b7522692968cc876bd7deae09eed3813863128cdbf878e520b42fb8a",
+      "bytes": 7569
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_license_code_reuse_blocker.py",
+      "sha256": "360170a3b7850496d0fbed917a9b8a58bebd6c78b034d9795a2600dc8b5b57ae",
+      "bytes": 7439
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_misattribution_correction.py",
+      "sha256": "3cf1c57ee59a754e7cf9cb5d541c21331d469947fdbe588231222e56bbf22d5c",
+      "bytes": 7147
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_source_audit_readiness_gate.py",
+      "sha256": "d8d09a529f3b5625a80ff94968b775438cba3e1debc43804b797522798e2ee7c",
+      "bytes": 15539
+    },
+    {
+      "path": "tools/check_glyph_external_remapper_source_snapshot_index.py",
+      "sha256": "c45f1ae0f50827bcab6987b83f4ffe820c6af6adb36f01066f065e06bbf7936c",
+      "bytes": 9086
+    },
+    {
+      "path": "tools/check_glyph_firmware_workstream_roadmap.py",
+      "sha256": "a902603992e42bd732e7952bc8d4762131c3f373a19c33dc8da0c15553103c90",
+      "bytes": 51415
+    },
+    {
+      "path": "tools/check_glyph_future_tilt_patch_scope.py",
+      "sha256": "ee3be3c6e7399cdcc6ee68a2255a446f1c795d4b5e7ed3083d8c0f54b8391c1c",
+      "bytes": 5521
+    },
+    {
+      "path": "tools/check_glyph_generated_config_invalid_corpus.py",
+      "sha256": "308d25dd0bb303a8351d8d858278debf4126def43a023cff7d9f8bed0db71fdf",
+      "bytes": 7303
+    },
+    {
+      "path": "tools/check_glyph_generated_config_validator.py",
+      "sha256": "d774be5292a02f5c324b9b6610beda40e34e6eed1938bcf86009f78a4d5d7b6e",
+      "bytes": 10580
+    },
+    {
+      "path": "tools/check_glyph_generated_constants_phase3_integration_hardware_result.py",
+      "sha256": "c46baee9791ed8d28e1f6669fff0a0fdbcf2a5ccf9e4550b472fedeea0d7bc17",
+      "bytes": 8322
+    },
+    {
+      "path": "tools/check_glyph_generated_constants_refactor_execution_packet.py",
+      "sha256": "4e9ee6fc84b2e4a8d5a06cfe49d9ccdc3e1caa3eba6c5300dc1f973d03be8f8b",
+      "bytes": 10229
+    },
+    {
+      "path": "tools/check_glyph_generated_constants_refactor_hardware_result.py",
+      "sha256": "241cb654a766c93fae2c096400d344459aebf487a35fd0da437da237aa9f9316",
+      "bytes": 8259
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_artifact_install.py",
+      "sha256": "187cf3390f5f90679593e50b79d48ba0391e7f11e92c1aaecaac5cf95d32dd85",
+      "bytes": 27169
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_baseline_artifact.py",
+      "sha256": "6730f524e46e0399fc1ea2a33d860d2260097c4e142091a499b44c0accfe8f27",
+      "bytes": 21223
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_generator_contract.py",
+      "sha256": "3635a92b16aa922fd295e6b7c8e2d71a909f8d6be76bcd7ee1f707caf82d8cd0",
+      "bytes": 42049
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_realization_design.py",
+      "sha256": "77013a444cfb13cb62167ee5ee58234c65b7a6821cb78b063efdd2f8356cf93d",
+      "bytes": 19151
+    },
+    {
+      "path": "tools/check_glyph_generated_source_owned_schema_scaffold.py",
+      "sha256": "06dec1d0d3927d913066883b1fd2ecb9a05783d521d899b695a17a0bf3d6e402",
+      "bytes": 16096
+    },
+    {
+      "path": "tools/check_glyph_getconfig_raw_load_characterization.py",
+      "sha256": "0a0c5d9b68cf5a648bc1265847dd7c8c26edadef61e5e98408f6eddece5fb52a",
+      "bytes": 6696
+    },
+    {
+      "path": "tools/check_glyph_gfw3_runtime_remap_hardware_result.py",
+      "sha256": "3364395e6858cb41d4b539820ea0f0ef48aee65709b0eb2bec236e3dbb653e86",
+      "bytes": 8164
+    },
+    {
+      "path": "tools/check_glyph_gfw3_runtime_remap_hardware_test_plan.py",
+      "sha256": "ee7a764fa7fba50f6bc012028d84cfdf2947c7000fb6e2ca49dc23b25e72d697",
+      "bytes": 7676
+    },
+    {
+      "path": "tools/check_glyph_gfw3_runtime_remap_rework_spec.py",
+      "sha256": "e90f8b8086909705f25dfff7143b5e2235c204bdd408891da4a63879c7e5c681",
+      "bytes": 14973
+    },
+    {
+      "path": "tools/check_glyph_gp_bind_003_runtime_identity.py",
+      "sha256": "d30bf450f76d91a22dbe1cf982bc84b3ef497266d2f7e1c16bfcdf72fc20ae9e",
+      "bytes": 23586
+    },
+    {
+      "path": "tools/check_glyph_gp_config012_button_mask_characterization.py",
+      "sha256": "cfafed2378600752ec95e5a12c14700fbb563d39d50ee4757c6a53b0cef445c9",
+      "bytes": 32816
+    },
+    {
+      "path": "tools/check_glyph_gp_config013_usb_default_characterization.py",
+      "sha256": "f2c6c46f4d956457357a0dd731c5f0c46035daecabdeee81485905434a8260ea",
+      "bytes": 17961
+    },
+    {
+      "path": "tools/check_glyph_gp_config014_modifier_capacity.py",
+      "sha256": "b9296f5b33d73e7946e415645535e07ad364b5211803dfecfef2a6e764f85c46",
+      "bytes": 25617
+    },
+    {
+      "path": "tools/check_glyph_gp_config019_usb_name_selection.py",
+      "sha256": "efd7568fdda52e153bb7ea76fc3d827932a9bc228eb75d628de6404090eb7402",
+      "bytes": 43986
+    },
+    {
+      "path": "tools/check_glyph_gp_config020_button_validation.py",
+      "sha256": "0e1800984f49c705ed30a89cb8b6dda0e3dc9c4d1144446f98b121a347a16276",
+      "bytes": 16062
+    },
+    {
+      "path": "tools/check_glyph_gp_config021_persisted_recovery.py",
+      "sha256": "2dc78d118dd2936ad9544a297ef00a66a140f90dc58152c87c2abbe423ef556d",
+      "bytes": 83500
+    },
+    {
+      "path": "tools/check_glyph_gp_config022_rgb_target_validation.py",
+      "sha256": "3707dc5f5e318aaf44b0da4b9265eacff01dcc9b2aee8613a3bb24a6afcbd529",
+      "bytes": 38848
+    },
+    {
+      "path": "tools/check_glyph_gp_config023_usb_index_validation.py",
+      "sha256": "1a244387c306479d940284c0217085efd23c1416856a436737cc9224181889ea",
+      "bytes": 16786
+    },
+    {
+      "path": "tools/check_glyph_gp_config024_usb_profile_identity.py",
+      "sha256": "4d8f844e83ea8aaf6077aa9e660416b05fdc535275411fec85ea897492280366",
+      "bytes": 8999
+    },
+    {
+      "path": "tools/check_glyph_gp_config_007_transaction_stage_schema.py",
+      "sha256": "30d4585295c187863a6326df35dc918aea29f20d8f3105aaafb484a543203d89",
+      "bytes": 13409
+    },
+    {
+      "path": "tools/check_glyph_gp_config_017_neopixel_repaired_current.py",
+      "sha256": "28fd0fb0485a1483e0ec0beab4657ad4746ea11a0149e67eaa78ca62ff245a29",
+      "bytes": 25514
+    },
+    {
+      "path": "tools/check_glyph_gp_kbd_001_keyboard_pipeline.py",
+      "sha256": "3372cac80ac5d6666f8013f4c524beb1cd0a09d4b09b326f49ea5967fdeeb2fc",
+      "bytes": 10826
+    },
+    {
+      "path": "tools/check_glyph_gp_prov_014_decoder_closure.py",
+      "sha256": "89078c19bd35bd3c69402c388a2fcb66893ea2138831ed479664b6836b31f288",
+      "bytes": 26700
+    },
+    {
+      "path": "tools/check_glyph_gp_x1_002_candidate.py",
+      "sha256": "f174dda377b39f1b3c9edbd64501a5e8251311d48d94bf568ad2c9154ade0015",
+      "bytes": 6893
+    },
+    {
+      "path": "tools/check_glyph_hardware_artifact_custody.py",
+      "sha256": "ca5055a1c3058a8d001f3500c9e4c878c40552d2f4fdf2e29fc8c8a13a6e28c7",
+      "bytes": 8309
+    },
+    {
+      "path": "tools/check_glyph_hot_path_parse_status_guardrail.py",
+      "sha256": "39552069db93b8cb1fb9d3456efdf89530cd1a0a87a414b6f7f7a5114b284985",
+      "bytes": 11480
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_behavior_cases.py",
+      "sha256": "ca3cda406d96a0216bd6bcf309daadd82839839c9e5dffc2d35d425ea16efe60",
+      "bytes": 22751
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_behavior_evaluator.py",
+      "sha256": "a0c146270d91551ef235e54ced409e0c248aefa1c3baba937fbdeb08d186fcb3",
+      "bytes": 41412
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_config_contracts.py",
+      "sha256": "83f5ba01997df05b8bb9ce796b0663de3c0698a9205f17a8472f4056e73aeb6f",
+      "bytes": 11368
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_generated_config_evaluator_input.py",
+      "sha256": "abf26c00b5cc9ab3c4ce311822411b99c8a9730cf6286a263b5849b7136492fb",
+      "bytes": 9186
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_generated_config_prototype.py",
+      "sha256": "8afc35047eb4827a258ab2174952da9537836abaf3f1fe8c5480dcd1e42a1134",
+      "bytes": 7600
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_generated_cpp_diff_artifact.py",
+      "sha256": "555d5275568318f0f7d56775a34ec580c5e6bdf99552455ff90d8771167d2596",
+      "bytes": 9095
+    },
+    {
+      "path": "tools/check_glyph_identity_runtime_table_source_sync.py",
+      "sha256": "51b76db9881ba720469dcac6bf397bf9b17c4e781720dfe4342e5afb1ed64e01",
+      "bytes": 21499
+    },
+    {
+      "path": "tools/check_glyph_implementation_planning_packets.py",
+      "sha256": "49aca70af67f530edc692d022f129d7e48b450dd8983b5d6b1bc7e8ab767f033",
+      "bytes": 20191
+    },
+    {
+      "path": "tools/check_glyph_import_export_compatibility.py",
+      "sha256": "0dd9de9227d53d99ca625300b5059beb730176b19b2f235e89c6175da27c23d5",
+      "bytes": 17503
+    },
+    {
+      "path": "tools/check_glyph_latest_layout_y2_port_plan.py",
+      "sha256": "7befd6cfcb280c7b02d97535acd50557d9bf68ed743056c936d6f0db35eea2f1",
+      "bytes": 12395
+    },
+    {
+      "path": "tools/check_glyph_latest_y2_layout_source_owned_port.py",
+      "sha256": "a968b8e08ba7819902da77195ab54424609065e2f34b630a8e397d7f7b61239f",
+      "bytes": 33925
+    },
+    {
+      "path": "tools/check_glyph_liveness_resource_safety.py",
+      "sha256": "e7992ca70d40884c9a7390f4892f4da0bb1edd885d2f39b9b4054a102941df70",
+      "bytes": 8170
+    },
+    {
+      "path": "tools/check_glyph_manual_hardware_owner_checklist.py",
+      "sha256": "d3016d27c75f7c0d6b59761e3b52acfb5e7531b1352bd2d3aaab84d8d6fea16a",
+      "bytes": 3191
+    },
+    {
+      "path": "tools/check_glyph_merged_state_consistency.py",
+      "sha256": "f2b53dfe45ed5deebc8ea973ff7631037d8b49d897edc539ec685677a00181bf",
+      "bytes": 7505
+    },
+    {
+      "path": "tools/check_glyph_native_target_metrics.py",
+      "sha256": "3f980a4d832935464aa2ae5bef96e33f605b00bd89eb023c4657ec2b18ab684d",
+      "bytes": 11171
+    },
+    {
+      "path": "tools/check_glyph_native_ultimate_snapshot.py",
+      "sha256": "f0447d61d92494b5c5ff96aca712dfd8ff6a5ebc6dfaf47add44904664ec7df0",
+      "bytes": 1889
+    },
+    {
+      "path": "tools/check_glyph_native_ultimate_table_fixture.py",
+      "sha256": "e96d2e187d8e3960b20cf9eb2fde1ba1785e18e923e8a6da3016477c322a1505",
+      "bytes": 8523
+    },
+    {
+      "path": "tools/check_glyph_native_ultimate_table_runtime_scope.py",
+      "sha256": "188d45e7fcf962a69d8308fa812487b3a3b9886ec2baa19f2b7d62855e86d620",
+      "bytes": 21581
+    },
+    {
+      "path": "tools/check_glyph_neopixel_historical_replay.py",
+      "sha256": "2a9d3c8eef434d890dc1cf9eeec8fe3ca5f37235de68417a6146dcd6d621c9da",
+      "bytes": 15981
+    },
+    {
+      "path": "tools/check_glyph_neopixel_null_sendreport_characterization.py",
+      "sha256": "a6204924f1d94b4e87abc9535fe67af8e6387302f2aa98e2c48c9170c63712e8",
+      "bytes": 10892
+    },
+    {
+      "path": "tools/check_glyph_next_user_action_handoff.py",
+      "sha256": "277f5b00a085270c7cd1f3d26d44828901b3e9932debc53a6f6910d5c8024aa3",
+      "bytes": 11020
+    },
+    {
+      "path": "tools/check_glyph_no_forbidden_artifacts.py",
+      "sha256": "7fc7092f2cac4782f6d60934ed98d1c43c75d34606fde8470ace13f35378038b",
+      "bytes": 3971
+    },
+    {
+      "path": "tools/check_glyph_nuker_source_lineage.py",
+      "sha256": "4099d1e4fd4c24587423e44b35cdb64329aa70b877ae0ab3301095965ef0c3ca",
+      "bytes": 6013
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_corpus_diff.py",
+      "sha256": "e1d74c50c023fbb8ea00b53fc12335890da238806470cf8ba8b03cbf2478b26c",
+      "bytes": 2332
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_export_candidate_diff.py",
+      "sha256": "fc4760dd3eaa5566ba577d6a847062d908e72993bbae565ebb15b6b516428d22",
+      "bytes": 4395
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_export_candidate_dry_run.py",
+      "sha256": "6b68ff84f1f722a69b9c6d1442781ffd9cfb9c79448e445f33ae381e7d090030",
+      "bytes": 2759
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_export_corpus.py",
+      "sha256": "f41e36f9caeec59d5a85b16b6672b8229b36b91193e5def1f07dd1bd41f4de04",
+      "bytes": 6427
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_export_target_contract.py",
+      "sha256": "628657277e6752f0dfa50567cccc6004bf953b9a6d8c47ccc0617982ec6adc27",
+      "bytes": 20418
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_export_validation_report.py",
+      "sha256": "6a646d9a6769825d615be595d41e1af79695765ebe9dbbc6cceb68c85aeea44f",
+      "bytes": 12152
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_manual_capture_result.py",
+      "sha256": "559f9b22bd31f86270c7d228b5fae936719e639db3225b85413943218b5f7109",
+      "bytes": 55182
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_manual_import_export_test_plan.py",
+      "sha256": "bfaba95c15230e9b54574eec4d7789cdcf4da3d7b938b6e9d0d88f72795fcb96",
+      "bytes": 3860
+    },
+    {
+      "path": "tools/check_glyph_official_configurator_validation.py",
+      "sha256": "c4d500f6e3b73a1bfd1a5280b25d30277d2324859b7b355c92dfff785e6b1ade",
+      "bytes": 7801
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_adapter_blocker_escalation.py",
+      "sha256": "564b5970fdc3ba153e8308120e4246771de8480d77c6611f19284195ee1ccafa",
+      "bytes": 13175
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_adapter_gap_matrix.py",
+      "sha256": "ac396b52032bc28f5316a53551920df17d02f56b896cde020209fe277b05d8a7",
+      "bytes": 7889
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_adapter_mapping_plan.py",
+      "sha256": "9f9896b1ee719f2ecebd580021eb2523fa7d6ceaf6a579a341204b81eef4f7aa",
+      "bytes": 11921
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_adapter_target_contract.py",
+      "sha256": "9bf3b2b4d954b7302265a1914760e7d435fe4ce085c54cca08dda2c5d0cb24d7",
+      "bytes": 8914
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_binding_loss_classification.py",
+      "sha256": "0939936c1f54b917561d898090c8a7696209f032ec2d2517ffe72eeb2bb10501",
+      "bytes": 11678
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_experiment_input_manifest.py",
+      "sha256": "bbd14a972c1918830299c82bbb86b01c2b5288a851e4f5c1db11335ebee9c9c1",
+      "bytes": 8854
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_experiment_readiness_index.py",
+      "sha256": "ff13e36209700676a30bcdb1219371a335c97cc1a4d2b213bd07cdf4268540bc",
+      "bytes": 10292
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_experiment_result.py",
+      "sha256": "93701161f4df84f08ac3ae506dad769bcb216a87887dfb8d295e0dcf12b8e14c",
+      "bytes": 9824
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_export_diff_gate.py",
+      "sha256": "05deda0b1222ce3e46f2d675d4d9d1e40c585192a6d3a63445a3a964c85a54df",
+      "bytes": 12215
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_export_loss_gate.py",
+      "sha256": "19fcec869766c8e8fb5427b5edcb58056216e29f4cb5bb2b9057dbd59373fc2d",
+      "bytes": 20123
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_export_structural_diff.py",
+      "sha256": "a1a541fa7d38f8c6a4562f5684319bbcc8b32a703fbf0d9123b228e3ce8da37a",
+      "bytes": 3941
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_manual_experiment_packet.py",
+      "sha256": "9ec88d9a35b15d78f2e9b6b17e258ebeda170506364bde78b37c954479fb2a5f",
+      "bytes": 8028
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_manual_procedure.py",
+      "sha256": "7bc71c71fdfb310a806b877cb099e393ddeef9cee1ed5fe51edc7c6dd41a8232",
+      "bytes": 7466
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_metadata_diff_report.py",
+      "sha256": "c73a8ed3b17e89a741c0cf3bf6c0c1888cbbffbdfa9b43f2f963b7e8437dcae8",
+      "bytes": 18525
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_result_template.py",
+      "sha256": "abaf695f72072228084d8023c01a7e77a64e0405679889c2a6c3ca1d3360ecf0",
+      "bytes": 8550
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_socd_drift_classification.py",
+      "sha256": "f620e46ce3a0eaceb4fe415fd72febe63ca85e2d4fceef50d8662f46d0f186d9",
+      "bytes": 9768
+    },
+    {
+      "path": "tools/check_glyph_offline_remapper_ultimate_diff_report.py",
+      "sha256": "1383c5984d7b6d07ebbcc95cd2f6fb58e92524ac566376a92f0bfae00e5bc4f4",
+      "bytes": 13395
+    },
+    {
+      "path": "tools/check_glyph_parser_hotpath_postmortem_and_next_boundary.py",
+      "sha256": "62760a7da6badd64d62ce71966e949fb5bcd046357c12f02d31dce4d7b8657c6",
+      "bytes": 18328
+    },
+    {
+      "path": "tools/check_glyph_patch_script.py",
+      "sha256": "c18261b7a33462e66d55ab829d8650b2414b7a9e31cb8064530e0073a39cb378",
+      "bytes": 4154
+    },
+    {
+      "path": "tools/check_glyph_phase3_generated_constants_preview.py",
+      "sha256": "d6804c25d7cd2980a143233c404ee4dff7c8433056a0b67875b9899241bb9c82",
+      "bytes": 17605
+    },
+    {
+      "path": "tools/check_glyph_phase6_bounded_config_architecture.py",
+      "sha256": "9626cb33980fc6a6629c70f5eb577fe1467420cfdd9d3432d9b40057aa813997",
+      "bytes": 8308
+    },
+    {
+      "path": "tools/check_glyph_phase6_bounded_config_schema_candidate.py",
+      "sha256": "33b4c02e152f3f1526d2e8cb6d3db6217b8108aa3a824e4c31801769766aed6c",
+      "bytes": 9952
+    },
+    {
+      "path": "tools/check_glyph_phase7a_activation_failure_root_cause_analysis.py",
+      "sha256": "1f438b5987d5a714adb0cd331c28898ed9bfbb6d30cd646bb8defb0d0a920bbe",
+      "bytes": 11664
+    },
+    {
+      "path": "tools/check_glyph_phase7a_activation_repair_minimal.py",
+      "sha256": "7cf235640b51e8f5c446338d815097ab8e1e0c68a8b913932927c9253ee1a39b",
+      "bytes": 8537
+    },
+    {
+      "path": "tools/check_glyph_phase7a_build_size_and_map_baseline.py",
+      "sha256": "f6527df602aa5e6a6371389cb58f503b8556a926ddcdd2cadf0ba1bc6b323c49",
+      "bytes": 10135
+    },
+    {
+      "path": "tools/check_glyph_phase7a_compiled_activation_failure_analysis.py",
+      "sha256": "1103a09a929c92d75d669cb50e956cf0af68afe9ca8fa55fb9d5f2c55083166c",
+      "bytes": 12024
+    },
+    {
+      "path": "tools/check_glyph_physical_logical_rf5_gap_index.py",
+      "sha256": "7c344961bddd78c5e29dca37218c6d68c178d072915f6c62ed8a4a74dfdebbc6",
+      "bytes": 9453
+    },
+    {
+      "path": "tools/check_glyph_post_gfw3_configurator_baseline.py",
+      "sha256": "4dd44672483481e7a465e81636869f9d27335f8047ecf0700cdeb5fa1b73f518",
+      "bytes": 8361
+    },
+    {
+      "path": "tools/check_glyph_prebuild_git_identity.py",
+      "sha256": "154cea8bf6abbb666b42f518796b36188655d9eea7d23d5a36cb7fb60da3c619",
+      "bytes": 13675
+    },
+    {
+      "path": "tools/check_glyph_prehardware_rc_runbook.py",
+      "sha256": "e3e9ba12a2b7e64bc907804e6c8ca74e31c13989e10e5ef6026ca2ff15a02808",
+      "bytes": 3625
+    },
+    {
+      "path": "tools/check_glyph_preimplementation_blockers.py",
+      "sha256": "a77f84fb2626efa3a33e0e49b1e2f308baf1b6dbea4d854e735dd0acf7c77f6c",
+      "bytes": 5653
+    },
+    {
+      "path": "tools/check_glyph_preimplementation_go_nogo_index.py",
+      "sha256": "33d07991ad279d3fa68a3b88c153c1a79a6069825e7cc45a63436ca5ec310259",
+      "bytes": 12247
+    },
+    {
+      "path": "tools/check_glyph_preservation_execution_packet.py",
+      "sha256": "65382e8dac180024ad5a5bc6de0e77357a4fcdeb10cea4d4508595cc7247a040",
+      "bytes": 3114
+    },
+    {
+      "path": "tools/check_glyph_preservation_hardware_readiness_packet.py",
+      "sha256": "f245e9cc668bb08b638e99d0ad0a2a2b3f3bee7720b314d12cd430f2912106c0",
+      "bytes": 8276
+    },
+    {
+      "path": "tools/check_glyph_profile_adapter_prewrite.py",
+      "sha256": "4349ac4e455d8a0b6bb67d818b191e940a66fe14237fa3228a4ffe767ad4b3dd",
+      "bytes": 11360
+    },
+    {
+      "path": "tools/check_glyph_profile_config_export_corpus.py",
+      "sha256": "149a7e5306bdccfa5ec2091271361388c00bd15741adf43152fc8361f63855c7",
+      "bytes": 11963
+    },
+    {
+      "path": "tools/check_glyph_profile_config_semantics.py",
+      "sha256": "7c6324dfc636e8201b8422090453e4c6681f82b828ae9d08f220959a9363de75",
+      "bytes": 13393
+    },
+    {
+      "path": "tools/check_glyph_profile_native_ultimate.py",
+      "sha256": "443e9e39437168ebc2496680e42d92934d0effd2d8265ede20c33fcdf9ba3bb7",
+      "bytes": 37415
+    },
+    {
+      "path": "tools/check_glyph_profile_store_atomic_commit.py",
+      "sha256": "f97804f0fdb0b095863559ea6e8964e9cbab93cb58a2208d9e371d97f5c0a650",
+      "bytes": 960
+    },
+    {
+      "path": "tools/check_glyph_profile_store_candidate_tool.py",
+      "sha256": "efb5d2e693d4b2ed7be36dcc9ce5279163842c77d5be410ca20b5182d792a1db",
+      "bytes": 16320
+    },
+    {
+      "path": "tools/check_glyph_profile_store_cdc_progress.py",
+      "sha256": "8f6fde8a815ec7ca97b501dcca859d0df177cc5409318f7586619820229b2a6e",
+      "bytes": 5405
+    },
+    {
+      "path": "tools/check_glyph_profile_store_cdc_rx_progress.py",
+      "sha256": "9ec6a98ecc005fe9317827754856fa247541ed9867a746f6c8b0127c5570f700",
+      "bytes": 9084
+    },
+    {
+      "path": "tools/check_glyph_profile_store_config_persistence.py",
+      "sha256": "3d85544990a2e4e62457e3fe85891e5469505fea45fed78753d7e39b15d21566",
+      "bytes": 2964
+    },
+    {
+      "path": "tools/check_glyph_profile_store_create_stack.py",
+      "sha256": "511e1054b7cf0f3bbb03ab6faa554c8b1081f94c4b424b0153fe6fae95ab7fb1",
+      "bytes": 12943
+    },
+    {
+      "path": "tools/check_glyph_profile_store_directory_decoder.py",
+      "sha256": "bb7c3946524320707f7ec1804b79e79a5f89a7522b67661477e1a3edc6afd4d7",
+      "bytes": 5240
+    },
+    {
+      "path": "tools/check_glyph_profile_store_directory_stack.py",
+      "sha256": "454e908a9ffbcc5ba8a4d61e7d7cfc216689abbc38939b76aa8463649fc5ff24",
+      "bytes": 7830
+    },
+    {
+      "path": "tools/check_glyph_profile_store_littlefs_host.py",
+      "sha256": "d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1",
+      "bytes": 2526
+    },
+    {
+      "path": "tools/check_glyph_profile_store_liveness_host.py",
+      "sha256": "60925e819cc53330a6f198888baf6b5387079887ae60d6851d9a70ab3e4c10ec",
+      "bytes": 8689
+    },
+    {
+      "path": "tools/check_glyph_profile_store_migration_lifecycle.py",
+      "sha256": "34a6d582bd86c51d19cc01114b72dda0d58fb68b16f4db91a89f6f2d781862b1",
+      "bytes": 5317
+    },
+    {
+      "path": "tools/check_glyph_profile_store_production.py",
+      "sha256": "008c8e07063ec544a4a557eeae478dbc794477dd04de3fb6be1c3308bd355308",
+      "bytes": 4372
+    },
+    {
+      "path": "tools/check_glyph_profile_store_production_tool.py",
+      "sha256": "bd01b023c92dab3796c8086959414ca06c82ae024a0cd157c06efd9d2ba1ba9d",
+      "bytes": 15380
+    },
+    {
+      "path": "tools/check_glyph_profile_store_read_stack.py",
+      "sha256": "9af7423f4b394312221c4fb3ef8abf09c4e0ef9f48dd4b31b87b22994cb9d15d",
+      "bytes": 5102
+    },
+    {
+      "path": "tools/check_glyph_profile_store_read_storage.py",
+      "sha256": "64cca35b581f395ffd5ca0ed084c2c2cbc44fabbdca3443e8dc96664e9f36110",
+      "bytes": 12143
+    },
+    {
+      "path": "tools/check_glyph_profile_store_request_identity.py",
+      "sha256": "974d54054677de9170440443c207428074b9e76450d1651596ab30d1d8fd99d9",
+      "bytes": 1834
+    },
+    {
+      "path": "tools/check_glyph_profile_store_rx_host.py",
+      "sha256": "d13b83d91df6e056a664a4e1d6cc3bc5f342ee9b759ba0ca66f586fb373584f4",
+      "bytes": 9629
+    },
+    {
+      "path": "tools/check_glyph_profile_store_rx_stack.py",
+      "sha256": "c0890a26b28d649dcab60d7881d6bb4145c53f009319a2887657f163fd5ba21d",
+      "bytes": 3830
+    },
+    {
+      "path": "tools/check_glyph_profile_store_selection_recovery.py",
+      "sha256": "10237821974071ff1069d3b5637dca7df6e5f222170ac8cafcb5d669d520458e",
+      "bytes": 8048
+    },
+    {
+      "path": "tools/check_glyph_profile_store_strict_host.py",
+      "sha256": "1fb76187ce242572967921ac18ed5f9f6e2a7ca5452976898671e04faabd011f",
+      "bytes": 4584
+    },
+    {
+      "path": "tools/check_glyph_profile_store_strict_protocol.py",
+      "sha256": "fe385469e02754833765bbe72d5e6cc8119e65da228a9e1804165e6beda58177",
+      "bytes": 1381
+    },
+    {
+      "path": "tools/check_glyph_profile_store_timeout_resynchronization.py",
+      "sha256": "c8309321bffbd9b194204dc23e953b4d31301231a0ab300a153e8f20233b1765",
+      "bytes": 12290
+    },
+    {
+      "path": "tools/check_glyph_protobuf_config_schema_research_packet.py",
+      "sha256": "64730f6913598873a8e1d903ea8318e391b04e4cb23f659dbb8efef6963787e6",
+      "bytes": 9336
+    },
+    {
+      "path": "tools/check_glyph_public_manual_workflow_release_candidate.py",
+      "sha256": "b58a97d166c2b9c6f39c4d0568fdd3aad4542e52df3a3d159f1f37e200ed1ecd",
+      "bytes": 17783
+    },
+    {
+      "path": "tools/check_glyph_public_manual_workflow_release_candidate_hardware_result.py",
+      "sha256": "b74b9d55b8da6233d110d8a4254c390e92a93e85af09e46fbf5f2230af99f8e3",
+      "bytes": 14545
+    },
+    {
+      "path": "tools/check_glyph_real_predecessor_config.py",
+      "sha256": "17604ad8b3b7e5ed2c88a1d868b6df2b9757058fbd7f955f675fa81641cf3ba7",
+      "bytes": 4534
+    },
+    {
+      "path": "tools/check_glyph_reconstructed_source_authority_evidence.py",
+      "sha256": "e3dc89e8a624b76800f6b333537b42bcf373564973c9cad29c2a2dba62707884",
+      "bytes": 40756
+    },
+    {
+      "path": "tools/check_glyph_resource_diagnostics.py",
+      "sha256": "3cfd6a8814bf0380d078dee300a86f6a37bc59b7134e58f7179399828f43d7e8",
+      "bytes": 3698
+    },
+    {
+      "path": "tools/check_glyph_roadmap_next_work_index.py",
+      "sha256": "00786e87a6fbd3201d193f16de1e3bec80e565e7340b2156169f087edcafc97a",
+      "bytes": 14257
+    },
+    {
+      "path": "tools/check_glyph_roadmap_status_semantics.py",
+      "sha256": "e2ea738bbad6fe1c0b37db7f81c1505873049c0fad380543c567109a41838510",
+      "bytes": 6393
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_activation_alternatives.py",
+      "sha256": "96b622bd709a007358aa1a176d6117101a756c7b93ac943f62c9a1f48406a892",
+      "bytes": 6983
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_binary_offline_roundtrip.py",
+      "sha256": "b997c61dc24329eabb80c1a7635f7e8befb00ebbf17d50c94db596454d0a271f",
+      "bytes": 11896
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_candidate_invalid_corpus.py",
+      "sha256": "47b985be1644f4d124e4b58c6a5b2643ab41568790066097c937af186a29787e",
+      "bytes": 7820
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_candidate_validator.py",
+      "sha256": "f61adc3e9d868e33c861554190404c95ff6a6b36868fac60cfbb8bc283aa1d02",
+      "bytes": 9025
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_device_write_safety_plan.py",
+      "sha256": "eb04be0e22982605a689aa9a52ca666eece23f716c25a2464a06baf1c0c4dcb8",
+      "bytes": 7671
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_firmware_binary_parser_plan.py",
+      "sha256": "42d8cff166f0c0a40f1a0b09e314b1801fc99265242e5c6c5923b4b379d430c2",
+      "bytes": 11568
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_firmware_parser_scaffold.py",
+      "sha256": "f6c8062c9231d95628153d2e9ad3dc5d55b250a81027492c87340b9d68b4c628",
+      "bytes": 2745
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_flashing_automation_safety_boundary.py",
+      "sha256": "57fccdbe8498758c7d51edc2ef475462ef72a4723bf1706aea547adc06211c62",
+      "bytes": 12351
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_interpreter_source_baseline_hardware_result.py",
+      "sha256": "0c13258d9a1c6282a79bed3e7dbd37b735684be678b5ad92d42b973abb95aa05",
+      "bytes": 10481
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_manual_load_path_plan.py",
+      "sha256": "9d5340467c35d74555d19620fded3cde774ce42663bbb3556a0f86c6fac087ed",
+      "bytes": 7316
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_parser_equivalence.py",
+      "sha256": "1c94fd69d1b0a4a458afaa4c17d812e1813331174132f0e89b1296b71d2f3dc0",
+      "bytes": 4173
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_semantics_evaluator_bridge.py",
+      "sha256": "fc0283a40aaae53f593d049983890547f7506d9e58eb40c4cf23b2915fdcd7f4",
+      "bytes": 22253
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_source_sync.py",
+      "sha256": "be9e663a49ff71dd94bf1025cee5995e5501f183b7fa09b0a11dc8f33bb07c9b",
+      "bytes": 3301
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_storage_fallback.py",
+      "sha256": "7cfa1684e40c262daa96fc7d06eb150c3302a6db08ae0dcd7f1e15aa83383e19",
+      "bytes": 7469
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_storage_simulator.py",
+      "sha256": "e88fac1744f065227841aa670e16bdfb435120ab20f408d0209ad0bc10b09d8b",
+      "bytes": 2006
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
+      "sha256": "3fc31505ee1b9d312c99bffeecf0886c3cc15b529945ce224e2b7786364a957d",
+      "bytes": 108745
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_validation_health.py",
+      "sha256": "181708d72856a3c496cd2685164df0791ac55ff672b247c9e6cdacae7eefc818",
+      "bytes": 16234
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_validation_publication_workflow.py",
+      "sha256": "b86c10fe75a65fe7607327c5fb4f56d6bed4302bdca1a89d37ece85e426ced8c",
+      "bytes": 10189
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_validation_report.py",
+      "sha256": "9d50a341ab1ebf7ea5aac2c229e2d86882051f934ceeff6c0cccfc58772fe3eb",
+      "bytes": 2732
+    },
+    {
+      "path": "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
+      "sha256": "f0307bbbc176390b7979c3a734982d785b7c925e2c8da0c6a0382ab221e4fd9f",
+      "bytes": 9089
+    },
+    {
+      "path": "tools/check_glyph_runtime_loaded_config_design.py",
+      "sha256": "59f4bd488cd23de40f14a31f3e83dcc674a6adf810065741b51144adcd1da1ac",
+      "bytes": 12344
+    },
+    {
+      "path": "tools/check_glyph_runtime_storage_interpreter_blocker_packet.py",
+      "sha256": "5c31d94c5eee8a49618aa520fd2896adcebdc610ac768ee9c44c9a356b4f2242",
+      "bytes": 5798
+    },
+    {
+      "path": "tools/check_glyph_senscope_export_package_validator.py",
+      "sha256": "cc604cf30b792c3bc391cdb70f172c1df4453f0b05044120b20aae478886ed05",
+      "bytes": 24876
+    },
+    {
+      "path": "tools/check_glyph_senscope_workflow_plan.py",
+      "sha256": "ff416dfb2f7da7109731bd5e9961a483e75bfee86da516558b66fb712b1e2c52",
+      "bytes": 2322
+    },
+    {
+      "path": "tools/check_glyph_serial_config_writer.py",
+      "sha256": "ea174ad96d1663e80dec4fdda42accebf17ea95985c881d1b090b3a6a58fed15",
+      "bytes": 3465
+    },
+    {
+      "path": "tools/check_glyph_setconfig_runtime_rebinding_characterization.py",
+      "sha256": "54e93cb3a9c4d757eb2517772ddf86b44d03c6f55bfc1c032eede30381a6a437",
+      "bytes": 6353
+    },
+    {
+      "path": "tools/check_glyph_smashbox_identity_runtime_bindings.py",
+      "sha256": "b8f50e6305f566968bf3564df6c6b6eb6a6b680f2aecd3e3906e3adae29cab03",
+      "bytes": 5532
+    },
+    {
+      "path": "tools/check_glyph_smashbox_modifiers_runtime_source.py",
+      "sha256": "21f0cf343705c295fb2379342d71a3a88e4aebfed2ad6ba712e7d2766fed9061",
+      "bytes": 6435
+    },
+    {
+      "path": "tools/check_glyph_smashbox_profile_tables.py",
+      "sha256": "4b10b921f0f577c4a7f51bb728eb6476eb99ed9e88fdce72c301110a27c8986f",
+      "bytes": 6623
+    },
+    {
+      "path": "tools/check_glyph_source_owned_candidate_generation.py",
+      "sha256": "2e84b5115da692ff0671d0831e828445018950e8d015ab7c65dfc0129908d878",
+      "bytes": 17523
+    },
+    {
+      "path": "tools/check_glyph_source_owned_candidate_generation_diff.py",
+      "sha256": "d5221c616bbc5cbe4a3a5a1ee97548a440490395028c2cfdcad8401b1f14ce43",
+      "bytes": 18854
+    },
+    {
+      "path": "tools/check_glyph_source_owned_cpp_preview.py",
+      "sha256": "70836902497fb722a9fcafe7a4c3fd3c69bd5a3e7528e8ecadf81ecfa4ab988d",
+      "bytes": 5207
+    },
+    {
+      "path": "tools/check_glyph_source_owned_generator_modes.py",
+      "sha256": "394207f48a53341357fbc3b2238167f3b311841bbd65c84d8b15dc4ab78affd4",
+      "bytes": 9648
+    },
+    {
+      "path": "tools/check_glyph_source_owned_overlay_preserve.py",
+      "sha256": "35f6d82af107caca0f1a30d38c20cc7454fff0473e28dce81204cb89eee7e287",
+      "bytes": 6723
+    },
+    {
+      "path": "tools/check_glyph_source_owned_source_authority_intake.py",
+      "sha256": "b40276c58cf0c3d9c2d3e05d341dbb53c8dd36d55917dc7918cd0d1e361f6cff",
+      "bytes": 23719
+    },
+    {
+      "path": "tools/check_glyph_source_owned_table_replacement_design.py",
+      "sha256": "c4d5732c60a4b888ac70cae44fa91c2270b830c4abc2fad0ce0c5c1c55583b51",
+      "bytes": 10177
+    },
+    {
+      "path": "tools/check_glyph_source_owned_table_replacement_generator_contract.py",
+      "sha256": "5f48a4ee150b3ac82b0e6a4466caf6028a3c873489c31ccb1a27f3a09ba8f4c5",
+      "bytes": 14188
+    },
+    {
+      "path": "tools/check_glyph_source_owned_table_symbol_map.py",
+      "sha256": "cf23bd8e37969b9ed7199a19916044fcb32da846d2a16038c8439c07ff7313e5",
+      "bytes": 17397
+    },
+    {
+      "path": "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py",
+      "sha256": "69668d607c5b664bcdd629fb8345eaf851942c90f1d8954a86d84aa22c8545fe",
+      "bytes": 10946
+    },
+    {
+      "path": "tools/check_glyph_stage_b_ultimate_profiles.py",
+      "sha256": "b9c8d1afd6f84f075a496fad75d49ba7fc7f877fbec38049e343e00b11722769",
+      "bytes": 10001
+    },
+    {
+      "path": "tools/check_glyph_stage_c_ultimate_profiles.py",
+      "sha256": "7c371065c1e89ed592079ef593b8ccdd5488dbf12e0696fa7e1570a135d7431d",
+      "bytes": 21788
+    },
+    {
+      "path": "tools/check_glyph_storage_transport_research_index.py",
+      "sha256": "c14cb530c1ba4285bd6cefff6a03b100509c89612b3ced972a6e27999fc62960",
+      "bytes": 8227
+    },
+    {
+      "path": "tools/check_glyph_storage_transport_source_authority_registry.py",
+      "sha256": "2e5fde048bb35dc7029f0a562eda11f5293d6efb0a903be919aed88b901f14b9",
+      "bytes": 8067
+    },
+    {
+      "path": "tools/check_glyph_tilt_button_id_probe.py",
+      "sha256": "6141c550c313054b0799f20116677f4a72f0315f45277fe7ae67da4ed2302aa5",
+      "bytes": 4106
+    },
+    {
+      "path": "tools/check_glyph_ultimate_dpad_profile_mapping.py",
+      "sha256": "9000f11a73716cde94d73245f70906d23bfd78dac7d0d7ee050e638981a66a1c",
+      "bytes": 6982
+    },
+    {
+      "path": "tools/check_glyph_ultimate_identity_profile_baseline.py",
+      "sha256": "096b40fc72235aab64d1045054f41201b683a5553c41ce364b51d58873d02c60",
+      "bytes": 9362
+    },
+    {
+      "path": "tools/check_glyph_ultimate_lt3_profile_binding.py",
+      "sha256": "a2409fc2eebe4b1f9c4618f30dad573caf0726f2b40bbbe945b59b75c5dde4cb",
+      "bytes": 6028
+    },
+    {
+      "path": "tools/check_glyph_ultimate_preservation_hardware_result.py",
+      "sha256": "1929a7aae077d6818d150cf80fb22188bb1bff29676fa4190de1a2c493950ffe",
+      "bytes": 22718
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt3_runtime_source.py",
+      "sha256": "959aff4a230d535b05844d95f2c0f8074b778119d28a54e62d216571d4c75e04",
+      "bytes": 7924
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt_docs_consistency.py",
+      "sha256": "0c160713cd599b4cf6097b8609dca8015d8f64f9e5aa329e39b3a9bbb0ea73fd",
+      "bytes": 3849
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt_domain_spec.py",
+      "sha256": "e714e00ac6353522f31a8e5d1277cc20a6f498054893377ac0e8d08b09202c3a",
+      "bytes": 9274
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt_hardware_result.py",
+      "sha256": "34c7f62b87bbb1afe2a3632f28b282ff159affe5b65b70e35613450332b4123f",
+      "bytes": 4731
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt_rc_manifest.py",
+      "sha256": "d2aef586a2048e745ae7fbb44d55065c24743d6ab212fb2e1752b0aaf8f356df",
+      "bytes": 4194
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt_runtime_source.py",
+      "sha256": "201081f74f6bd63f8fd5a96f50086ff6dc9b2c1c8b48dc92cf4c9bbdc83bf440",
+      "bytes": 5174
+    },
+    {
+      "path": "tools/check_glyph_ultimate_tilt_tables.py",
+      "sha256": "0d4d74438e3f066c2df36aac0dfa5dd706a6bb7985f36ad8ad7a1c5a4c6e38ab",
+      "bytes": 9590
+    },
+    {
+      "path": "tools/check_glyph_user_requirements_packet.py",
+      "sha256": "e36a3e9c1dcfc2a327c2aa27ae23a5fa15f54b73bfe9ec43c48f5ee6412c43d4",
+      "bytes": 4334
+    },
+    {
+      "path": "tools/check_glyph_webserial_transport_blocker_packet.py",
+      "sha256": "d711216c92ed8323156f20de505a8ddd0a390686209442f63b9775a96ebe6d47",
+      "bytes": 7119
+    },
+    {
+      "path": "tools/compare_glyph_source_owned_overlay_preserve.py",
+      "sha256": "74b6b8e76547336f4b26bca417cdb2712a58c4af14a66e682d320d50c3d35451",
+      "bytes": 1662
+    },
+    {
+      "path": "tools/convert_coordinate_native_profile_to_source_owned_spec.py",
+      "sha256": "b86ffb54c5150be5b0a71f0375c9deb8e9995bfab33044947776171f3585b5bf",
+      "bytes": 30863
+    },
+    {
+      "path": "tools/convert_glyph_native_ultimate_profile.py",
+      "sha256": "d6a84657308ee957172185de2393205cf849465416c2f7e250a91e27774d293f",
+      "bytes": 31370
+    },
+    {
+      "path": "tools/dry_run_coordinate_native_runtime_profile.py",
+      "sha256": "5df715c219e3cdcd845e3c071d2ef9bef01eb0642da2c8df36b6350efb385365",
+      "bytes": 26529
+    },
+    {
+      "path": "tools/extract_glyph_identity_runtime_tables.py",
+      "sha256": "fb6b1eb017d66fa5a4d31204d56b1f9622f1303611fd3a709d5b88ae71428631",
+      "bytes": 21786
+    },
+    {
+      "path": "tools/generate_glyph_checker_census.py",
+      "sha256": "7779d63e4b24d1efa89d874de2e80b2cd7c57df788bf1da16b4ac72a57cda135",
+      "bytes": 9406
+    },
+    {
+      "path": "tools/generate_glyph_export_artifact_snapshots.py",
+      "sha256": "5737bea224706be7cf84a77039ab7b9c329206225703eabd7ca9166e44768861",
+      "bytes": 12848
+    },
+    {
+      "path": "tools/generate_glyph_identity_runtime_config_prototype.py",
+      "sha256": "952e3e436858f8cc0328f597cb059534f37a9a45c144e2f83a858fffd6968b52",
+      "bytes": 20615
+    },
+    {
+      "path": "tools/generate_glyph_runtime_config_validation_report.py",
+      "sha256": "93975010efe5bcabc43aaff04cfcc54af147374636b1c5484d4939006b669734",
+      "bytes": 8854
+    },
+    {
+      "path": "tools/generate_glyph_source_owned_overlay_preserve.py",
+      "sha256": "14f92f53a498f87b3f6a2050bf0ca244b4119bc420de3f143efdc181a00e3961",
+      "bytes": 1534
+    },
+    {
+      "path": "tools/generate_source_owned_generator_modes.py",
+      "sha256": "d1297a3e981199ae2288f0da30a63fdc51af187926bf94e847593b127935cdcf",
+      "bytes": 3724
+    },
+    {
+      "path": "tools/generate_source_owned_runtime_config.py",
+      "sha256": "efdeeb543213d7db4c78957efe2331800824e6d76f743e2369f6af27c910bba8",
+      "bytes": 28262
+    },
+    {
+      "path": "tools/generate_source_owned_table_replacement.py",
+      "sha256": "3bf7fe912ebc4960025776c92095bb9ae41ac9dab35664c118331f348a7409eb",
+      "bytes": 1752
+    },
+    {
+      "path": "tools/glyph_c014_campaign_transition.py",
+      "sha256": "993fe6a364131b1259e6361581f78aea4e956d8b4d4943814365cafce78c6a6b",
+      "bytes": 120188
+    },
+    {
+      "path": "tools/glyph_c017_campaign_transition.py",
+      "sha256": "01612c9a46097676e6089b0e8972b768b30cab1582084f2efb3bb732b584bb5a",
+      "bytes": 47778
+    },
+    {
+      "path": "tools/glyph_c020_abi_repair_transition.py",
+      "sha256": "377af2b08cba70e65947a70b3c24b4eafafff3b56dec212208f261b0f9c6f321",
+      "bytes": 64882
+    },
+    {
+      "path": "tools/glyph_c021_campaign_transition.py",
+      "sha256": "d689ae76cd105c65366393f5da96955b544a235c09e080ca623466fcd91ec36e",
+      "bytes": 71899
+    },
+    {
+      "path": "tools/glyph_c022_campaign_transition.py",
+      "sha256": "a7d04ffc2d0f633163fa89521167348f35457117e2bb79b1229f2d39cffd0763",
+      "bytes": 299540
+    },
+    {
+      "path": "tools/glyph_c023_campaign_transition.py",
+      "sha256": "e6e9d76538ab3505ca5a862b51756cabcf2a0ef4b6ba7b668d97d35f4d2f8285",
+      "bytes": 33584
+    },
+    {
+      "path": "tools/glyph_campaign_transition.py",
+      "sha256": "dd8cd84eec58d7c2d06bda4300ed5818ad640c80d18b7b4fb5d732d2c34596b9",
+      "bytes": 32801
+    },
+    {
+      "path": "tools/glyph_checker_context.py",
+      "sha256": "934ab97bd4d6adf02bab715d24d470282c2fef8a321fc6b72098ab397c3da94a",
+      "bytes": 11814
+    },
+    {
+      "path": "tools/glyph_config_model.py",
+      "sha256": "b8fa69c87dc3d3d39febb78ff6de17908c4ef1e964333b426b464b3830c18379",
+      "bytes": 7139
+    },
+    {
+      "path": "tools/glyph_generated_config_validator.py",
+      "sha256": "e3299edf3ee7e54399166966a0cbd73ef94a1a496e603805c80056a30494011c",
+      "bytes": 18566
+    },
+    {
+      "path": "tools/glyph_gp_bind_003_gap_capture.py",
+      "sha256": "627411ee267a47639b521fe77bea093a43203ac4cb22cdc4ea262c9d28ca597e",
+      "bytes": 7114
+    },
+    {
+      "path": "tools/glyph_hardware_artifact_custody.py",
+      "sha256": "a2c6a47296433a5aa2444173aaa11ce0fd8beab76e961988a40109345c1854bd",
+      "bytes": 11819
+    },
+    {
+      "path": "tools/glyph_hardware_correspondence.py",
+      "sha256": "c5dd0819400fc145585aae88daa4c4db3a3874dda5eae963b5907b452fce0d43",
+      "bytes": 33460
+    },
+    {
+      "path": "tools/glyph_native_target_metrics_tool.py",
+      "sha256": "91ff6d0e31b5e370c7a4c100f3d4fb477c264413ebe363b27da48fcb1b1d777f",
+      "bytes": 8362
+    },
+    {
+      "path": "tools/glyph_official_configurator_corpus.py",
+      "sha256": "39cad9ec2ff3aabcd24cedc069d5e3738974eb19fc9819db0500e41d7f7a6763",
+      "bytes": 10529
+    },
+    {
+      "path": "tools/glyph_official_configurator_export_candidate_diff.py",
+      "sha256": "63b6d5b4795699774c22859d0ff457b1c0ff06ddb23248c2ef0e1cb6db96ae6a",
+      "bytes": 6409
+    },
+    {
+      "path": "tools/glyph_official_configurator_export_candidate_dry_run.py",
+      "sha256": "ce843db84359bb30b0da511dbb16a3d71ec49afb39cae152470a43975d3670a4",
+      "bytes": 6286
+    },
+    {
+      "path": "tools/glyph_profile_store_candidate_tool.py",
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+      "bytes": 19077
+    },
+    {
+      "path": "tools/glyph_profile_store_production_tool.py",
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef",
+      "bytes": 10878
+    },
+    {
+      "path": "tools/glyph_runtime_config_binary_roundtrip.py",
+      "sha256": "f2209eb32e3ce942b18c7a7d37d1f4abea6cf360d471563109aec9cc055eb0c3",
+      "bytes": 15506
+    },
+    {
+      "path": "tools/glyph_runtime_config_candidate_generator.py",
+      "sha256": "4565ae893abf2c4d6ebb312e82c94005f55682671bbaa9c0e9b108425215e1d1",
+      "bytes": 10723
+    },
+    {
+      "path": "tools/glyph_runtime_config_candidate_validator.py",
+      "sha256": "cc21fc5999c5b05c7ae18dff85107653956c62db02d30ab7846928f18da3baf4",
+      "bytes": 18251
+    },
+    {
+      "path": "tools/glyph_runtime_config_parser_oracle.py",
+      "sha256": "efc51f32e87bd45e9efcac6e6314aa3900482ccf42104f79ea5b906edd9c307b",
+      "bytes": 5738
+    },
+    {
+      "path": "tools/glyph_runtime_config_storage_simulator.py",
+      "sha256": "e56f32b3717a2c6d17cebbfe387554859ddf22eed9961a03c10adcf7b557282f",
+      "bytes": 3472
+    },
+    {
+      "path": "tools/glyph_runtime_identity_tool.py",
+      "sha256": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+      "bytes": 9156
+    },
+    {
+      "path": "tools/glyph_serial_config_tool.py",
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+      "bytes": 46658
+    },
+    {
+      "path": "tools/glyph_source_owned_overlay.py",
+      "sha256": "6d06d45d9fbf30f45f5dd55834444de783496e3a2b592ec24fef62cd52511e47",
+      "bytes": 10348
+    },
+    {
+      "path": "tools/glyph_tracked_worktree_integrity.py",
+      "sha256": "604bea90c4b3cb2cbb0fdf023918da7ba45d1be7d128c2b40050e09e5a220fc7",
+      "bytes": 9284
+    },
+    {
+      "path": "tools/glyph_workflow_step_contract.py",
+      "sha256": "2d80c6033828ad7d78682aff02015b9c8d8da6e37cc489f00e5bc114e5141673",
+      "bytes": 10311
+    },
+    {
+      "path": "tools/gp_config_005_hw_test.py",
+      "sha256": "d32ec19727ca64a0394b9ccff408a17fd9d5c9c3d54747a7832fd4deb3ba39a3",
+      "bytes": 77375
+    },
+    {
+      "path": "tools/gp_config_010_recovery_operator.py",
+      "sha256": "fa4459c4592d30270a564f16e1ff0bcd2f68d050ff90a698b09c95a3484279f7",
+      "bytes": 27972
+    },
+    {
+      "path": "tools/inspect_glyph_mk6_build_artifact.py",
+      "sha256": "789f07fe0500a2b75671768ce73ace773e4ca3128cb620e16df7506157ea9bf7",
+      "bytes": 2031
+    },
+    {
+      "path": "tools/install_generated_source_owned_runtime_config.py",
+      "sha256": "e2a726c8e3ba92c50c276c2ad4ec9d336945385332f02b6c5da13c152090ee72",
+      "bytes": 4968
+    },
+    {
+      "path": "tools/list_glyph_button_symbols.py",
+      "sha256": "40c72df3d8634c39bc9b5a668cae0b223767c0a35fbb12e078e98ef2b446978c",
+      "bytes": 2019
+    },
+    {
+      "path": "tools/list_glyph_modifier_symbols.py",
+      "sha256": "2a20fe3c726b8492f8c88848cc3c5d34406d192bf0ff6a40fe3fd1892c86316e",
+      "bytes": 3858
+    },
+    {
+      "path": "tools/list_glyph_native_ultimate_analog_sources.py",
+      "sha256": "d095e90e45d1a0a1643aca47d0353e1ad8132a821b47103c43f73a55228ece16",
+      "bytes": 6931
+    },
+    {
+      "path": "tools/list_glyph_physical_logical_layout_sources.py",
+      "sha256": "4fd3a2268ecbe1d67bb11163d5372fe0a5c0d75d69f45478b98e7d643573662c",
+      "bytes": 3246
+    },
+    {
+      "path": "tools/list_glyph_tilt_button_id_candidates.py",
+      "sha256": "f93e20ea756d12e38349b9f033b5dc0203e7134db8ede6b4dcdd18a2bf9b1d2e",
+      "bytes": 2885
+    },
+    {
+      "path": "tools/list_glyph_tilt_runtime_gate_sources.py",
+      "sha256": "0d2ccc7a77682172c0903a1584b887640d73a8f5d6a08087c2e31799e955c8ce",
+      "bytes": 3476
+    },
+    {
+      "path": "tools/manage_source_owned_source_authority_intake.py",
+      "sha256": "fb5c52ea298ecb8959ccc59862b39c6b83b7cef1f1c4ccb33c6cb45076975f20",
+      "bytes": 2476
+    },
+    {
+      "path": "tools/measure_glyph_native_ultimate_resources.py",
+      "sha256": "9d731a8fc457457078bfbcb2532481f8120e6c442c7814f6f1eafca3f3c997d4",
+      "bytes": 4407
+    },
+    {
+      "path": "tools/measure_glyph_profile_store_resources.py",
+      "sha256": "2a07bab4fdecca302bc4dc70f404aec04d8d653614221b9dded88000d8fc1a7f",
+      "bytes": 10136
+    },
+    {
+      "path": "tools/patch_glyph_ultimate_profile.py",
+      "sha256": "6b76e3ed8f8ebb88911964a9eb6c5ecee457ed98fc3fa3075a07647af0617ce8",
+      "bytes": 8227
+    },
+    {
+      "path": "tools/prepare_glyph_gp_config022_compatibility.py",
+      "sha256": "a5bb01df174ee26614212c7a31049ff0d3cda4c76e21c5516545cea3334138a8",
+      "bytes": 13606
+    },
+    {
+      "path": "tools/prepare_source_owned_candidate_branch.py",
+      "sha256": "a4659b3a46558aea18e9e6115868eb8884a728a0ff698fdf67ea731beb45a8a9",
+      "bytes": 13566
+    },
+    {
+      "path": "tools/render_source_owned_cpp_preview.py",
+      "sha256": "c5fbe055b3fd8a9f1e316ad9e195397f6917977eeb8a0db96686746f12baa5d2",
+      "bytes": 1168
+    },
+    {
+      "path": "tools/run_glyph_next_runtime_change_readiness_checks.py",
+      "sha256": "166fa2f8b5221c9de5c22429100cc8858f84a649b15dbe58d8372b1df7c1bb04",
+      "bytes": 20918
+    },
+    {
+      "path": "tools/run_glyph_prehardware_dry_run_checks.py",
+      "sha256": "0d76c7321e8b8af13b2dabb6116bb6c61d2b9dc2b611ef875d074a044b8d99d9",
+      "bytes": 5766
+    },
+    {
+      "path": "tools/run_glyph_runtime_config_validation.py",
+      "sha256": "d8f1d8cb5afb0ed9f63ec8a4f1d429824cf08cf81ee338976a35aa8662f57722",
+      "bytes": 73139
+    },
+    {
+      "path": "tools/run_glyph_ultimate_tilt_prehardware_checks.py",
+      "sha256": "99fcd848ea1f2d506b1eb968217a06b48c26b8f0f07c9d40caf0fd5af73ffd5d",
+      "bytes": 6880
+    },
+    {
+      "path": "tools/source_owned_cpp_preview.py",
+      "sha256": "dd249389f8aec819743c27642ec883e68d875a371a7fe5eb72c68be240bc8edf",
+      "bytes": 10124
+    },
+    {
+      "path": "tools/source_owned_generator_modes.py",
+      "sha256": "c492702cae5befb993a43652a2528768f3a508085d0d3f6b1cf31005a943983a",
+      "bytes": 27639
+    },
+    {
+      "path": "tools/source_owned_source_authority_intake.py",
+      "sha256": "ef96c2caf496ab88fa2d676de76b13ebeab4ae8e3a33196d7fce49911e463b34",
+      "bytes": 27735
+    },
+    {
+      "path": "tools/test_glyph_c014_campaign_transition.py",
+      "sha256": "c9e413321639f2d86fd3ad20be2b5315331f0deb18adafb6daf988082aff31c2",
+      "bytes": 43406
+    },
+    {
+      "path": "tools/test_glyph_c017_campaign_transition.py",
+      "sha256": "9001cdd3aa88996c8dacf7785cc59e8e80d0c771af1921d392dbc1b7179df33e",
+      "bytes": 2704
+    },
+    {
+      "path": "tools/test_glyph_c021_campaign_transition.py",
+      "sha256": "57e823da370af57e311d05c01921fd6d69ad624c1ba8a7480e409c83d07e1355",
+      "bytes": 28361
+    },
+    {
+      "path": "tools/test_glyph_c022_campaign_transition.py",
+      "sha256": "738f22877def384b361b86397416e2293a13895c1be125eec372044c97411024",
+      "bytes": 27443
+    },
+    {
+      "path": "tools/test_glyph_c023_campaign_transition.py",
+      "sha256": "e514d178e0d32638e141daff70d95c1d5370149cf74e5fb481ac11890a729d34",
+      "bytes": 9499
+    },
+    {
+      "path": "tools/test_glyph_config_010_capacity_provenance.py",
+      "sha256": "c64c1fcf2612467ec00bf28cdddf6f9adf488d1fa1229f264f5cb682147ab291",
+      "bytes": 5622
+    },
+    {
+      "path": "tools/test_glyph_config_010_semantic_applicability.py",
+      "sha256": "05ded131d7149b822d80352ef847d4d5fcc19c9de5f0f926084b2a5a2eb1b8e4",
+      "bytes": 85683
+    },
+    {
+      "path": "tools/test_glyph_docs_agent_surface_integration.py",
+      "sha256": "89826497ac5385f6350e37f335e4c4bcc8bafcb9441a67de67a0b013fa3dd44a",
+      "bytes": 8611
+    },
+    {
+      "path": "tools/test_glyph_gp_prov_014_decoder_closure.py",
+      "sha256": "858db20eb782909d314b550ea46a1a4b0ee53b68e8f2163ef1aaf0b94aee704a",
+      "bytes": 21423
+    },
+    {
+      "path": "tools/test_glyph_hardware_correspondence.py",
+      "sha256": "994da75b5ef9b0f5f13e54732d1fb15c928ad7c0510cafd174bfe7ea12cf7c24",
+      "bytes": 60589
+    },
+    {
+      "path": "tools/test_gp_config_005_hw_test.py",
+      "sha256": "e68ada2a710fb3444c5e918b3d6d9ea3680a70e629f56dddfd7614e6997f38d1",
+      "bytes": 46272
+    },
+    {
+      "path": "tools/test_gp_config_010_recovery_operator.py",
+      "sha256": "dead37e31144988a840fc3a353b2ce2887538666bb24f387bf198f9f8483c56f",
+      "bytes": 14673
+    },
+    {
+      "path": "tools/uf2/inspect_uf2.py",
+      "sha256": "95dc60f8505c9592bb89277c063b944669364d013d2dc7ca7a0ed02b65dfa673",
+      "bytes": 7719
+    },
+    {
+      "path": "tools/write_glyph_ultimate_tilt_rc_manifest.py",
+      "sha256": "0e444e55418e8ac281b1aa13e3799c5721eb786f26fcb20c2666b9aa19152b54",
+      "bytes": 14739
+    }
+  ],
+  "matches": []
+}

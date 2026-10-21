@@ -1,0 +1,114 @@
+{
+  "schema_name": "glyph_independent_committed_delta_source_review",
+  "schema_version": 1,
+  "recorded_utc": "2026-10-21T10:39:35.147621+00:00",
+  "candidate": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+  "tree": "01005eeaf2a9c93abbf7bd47dcd861c4847cea9a",
+  "comparison": "a288908de83e75997cd7459b4abe607ee968bb60",
+  "source_verdict": "NO_MATERIAL_SOURCE_TRANSACTION_LIFETIME_DEFECT_FOUND_IN_P1_P2_DELTA",
+  "final_resource_gate": "OPEN_NOT_A_FINAL_SOURCE_ELF_ACCEPTANCE",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "frozen_snapshot": "/private/tmp/glyph-a2a5-source-review-20261021",
+  "production_delta": [
+    "HAL/pico/include/core/Persistence.hpp",
+    "HAL/pico/src/core/Persistence.cpp",
+    "HAL/pico/src/core/ProfileStore.cpp",
+    "include/core/ProfileStore.hpp"
+  ],
+  "authority": "Adopted df5 bounded layout proposals1/2; no conditional header, config.cpp, Load/Capture or P4 implementation at this checkpoint. 0a346975 later source-free Load/Capture authority does not enlarge this audited delta.",
+  "audit": [
+    {
+      "subject": "P1 lifetime",
+      "assessment": "PrepareBootstrap returns a byte action before ExecuteBootstrap. Its only continuation data is the existing owned _next seed and store fields, not borrowed automatic geometry/phase/legacy arrays. O3 relocations show separate Prepare then Execute calls in both Begin entries."
+    },
+    {
+      "subject": "P1 flags/results",
+      "assessment": "All original early refusal/readiness/root-invalid/read-only checks remain in their original order. Existing return _ready maps to Complete/Refused without changing flags. phase1 normal initializes and recovery refuses; phase3 recovery LoadDirectory stays read-only; ordinary phase3 reconciles after preceding checks return."
+    },
+    {
+      "subject": "P1 persistence order",
+      "assessment": "Fresh/v1 upgrade checks original geometry and reserve before first write, copies same _next, then control1, _v2=true, InitializeV2 own geometry at original point, root0/root1/control2/LoadDirectory. Existing current/previous/migration validation and hashing remain pre-write. No new read/write, admission reduction or backend semantics found."
+    },
+    {
+      "subject": "P2 constructor points",
+      "assessment": "Verify generation read file begins only after unchanged mutation/RAM/availability/file-selection checks; stage w+ begins only after size+temp Remove; verify read file begins only after stage scope ends; published readback read file exists only after Uncertain publication. Modes match original constructor tests."
+    },
+    {
+      "subject": "P2 file ownership",
+      "assessment": "One alignas(CheckedStorageFile) raw slot, placement-constructed unchanged class, exact qualified destructor and then full-slot zeroing on every scope exit. No live overlap: generation scope returns before Save, and stage/reopen/readback scopes never overlap. Stream/compare callbacks remain synchronous and cannot escape the file reference."
+    },
+    {
+      "subject": "P2 close/fallback",
+      "assessment": "All original explicit closes remain, including staging_failed close on failed constructor, unconditional staged close, generation checked close and readback short-circuit order. Open lost-ack cleanup and Close clearing opened are unchanged in CheckedStorage. Constructor-success/stat-failure in generation returns through destructor fallback; qualified destructor preserves it. Already-closed handles do not get a new close."
+    },
+    {
+      "subject": "P2 generation fence",
+      "assessment": "VerifyExpectedConfigGeneration returns before Save; same synchronous core0 no-yield/no-writer-callback invariant. Durable header CRC compared only after checked close; unchanged Conflict/StorageFailure/Uncertain and Save return mapping."
+    },
+    {
+      "subject": "P2 phase sequence",
+      "assessment": "Prepare(size), Remove, Stage/write/encode/CRC/header/seek/sync/close, independent reopen/check/reencode/close, Stat/prior removal/rotation, pending CRC+size then publication; ordinary error rollback and uncertain exact readback preserved. Short-circuit AND composition retires each helper before next."
+    },
+    {
+      "subject": "P2 metadata aliasing",
+      "assessment": "Original current Result is represented by bool save_phase.current before operation scratch is overwritten by remove/rotation; later rollback consumes that saved bool. Original uses of current needed only its truth value there. Header/encoded_size remain owned scalar metadata; uncertain readback keeps exact expected CRC/size and deterministic payload compare."
+    },
+    {
+      "subject": "P2 reset",
+      "assessment": "Save clears all phase bytes before prepare and on every normal/error exit through RAII; raw file slot clears after each file destructor. No heap, new format, payload/path/directory buffer or extra slot found. Existing load/migration methods unchanged at this checkpoint."
+    },
+    {
+      "subject": "Resource qualification",
+      "assessment": "Actual ARM slot176 plus SavePhase32 =208 bytes before final-link padding, both enum ABIs; old STATE168/200 estimates are superseded, not rewritten as proof. New later P4/boot scalar gross214 is outside this delta assessment. Component .su/relocations establish phase frames, not complete linked stack/static bounds."
+    }
+  ],
+  "independent_tests": [
+    {
+      "test": "Actual pinned NOR512KiB/LittleFS Persistence ASan/UBSan from immutable a2a5 source",
+      "state": "PASS",
+      "fault_cases": 1636,
+      "success_operation_events": 818,
+      "output_rows": 1641,
+      "path": "/private/tmp/glyph-native-a2a5-independent-persistence-nor",
+      "baseline_comparison": "All results/fences/generations/canonical root-file hashes/full traces equal a288 after excluding only raw nor= field; same result in independently compared writer both-ABI immutable logs. No trace fields normalized."
+    },
+    {
+      "test": "Strict host boot/store affected regression",
+      "state": "PASS_24_CURRENT_CASES_AND_4_FROZEN_NEGATIVE_CONTROLS",
+      "log": "/private/tmp/glyph-native-a2a5-independent-boot-strict-with-object-read.log",
+      "chronology": "First run reached24PASS then failed old immutable-source gitshow lookup because git archive has no.git; log retained. Same checker rerun with read-only GIT_DIR to object database solely for immutable Git show completed24+4PASS; no repository mutation."
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "stage-before-Remove",
+      "state": "DETECTED",
+      "finding": "Actual NOR fixture fails normal exact publication; mutant changes only AND phase ordering.",
+      "attribution": "Writer-run immutable source/log independently inspected"
+    },
+    {
+      "name": "omit raw-slot destructor",
+      "state": "DETECTED",
+      "finding": "Fails actual mounted handle closure on constructor-failure path; mutant removes only qualified destructor, preserving memset.",
+      "attribution": "Writer-run immutable source/log independently inspected"
+    }
+  ],
+  "evidence_limitations": [
+    "Raw host NOR equality did not pass and is not claimed. Host sizeof(ConfigHeader)=16 includes4 unspecified trailing padding bytes; only those canonicalized in file hash; target ARM header8 has no padding. Baseline/new complete traces and every other output field compare exactly.",
+    "Immutable packet includes a later ProfileStore mounted adapter, but Persistence fixture calls no ProfileStore operations. Independent rerun used archived a2a5 ProfileStore and matched baseline canonical outputs.",
+    "Full native oracle matrix not repeated: unchanged core native sources remain covered only by original evidence; this is meaningful P1/P2 focused validation.",
+    "Exact final firmware build/ELF/map/stack/static/custody, all31 path classes, post-P4/Load/Capture review, hardware packet and owner-approved exact human HEP remain required."
+  ],
+  "metadata_erratum": {
+    "historical_committed_STATE": "pre_mode_header/STATE.md incorrectly states raw slot168/P2static200",
+    "exact_ARM_evidence": "nm save_file_slot0xb0 and emitted destructor memset176; save_phase0x20; bothABI layout outputs agree",
+    "checkpoint_P2_charge_bytes": 208,
+    "old_estimate_superseded": true
+  },
+  "no_device_action": true,
+  "no_production_or_checker_edit": true,
+  "finite_delta_review_complete": true
+}

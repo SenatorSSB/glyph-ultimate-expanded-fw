@@ -1,0 +1,80 @@
+{
+  "canonical": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+  "canonical_tree": "ced188907be2f317200e153a695eb77073d2683c",
+  "feature": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+  "feature_tree": "01005eeaf2a9c93abbf7bd47dcd861c4847cea9a",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "e4e80f93c6e091ba7211e262918bbceae39abbed51bb7589f7f1425a3c3a5cee",
+      "bytes": 8237
+    },
+    {
+      "path": "docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "bec04d907a94c1aa372cb4ed21d2c82811405e79028452267c352366054bd317",
+      "bytes": 17332
+    },
+    {
+      "path": "docs/AGENT_CONTEXT.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "4aa6ec95ccef078214f5b533eeadd558e502f90c0c9ca45ba1bb2032b0b112d5",
+      "bytes": 54682
+    },
+    {
+      "path": "docs/CURRENT_STATE.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "916f81b5f26b92fa09662113002836779c41bd8b1d3a6368268205978e4cdae4",
+      "bytes": 38527
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "0587ad9c62bd46b1bc208027c5b012d5b864bb1467938839f062fed343881ee9",
+      "bytes": 76792
+    },
+    {
+      "path": "docs/WORKFLOW.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "13579e2fe89034e89a6e71c596a0ecdd4a9e197e67618f314b135d7b60e7c43f",
+      "bytes": 13811
+    },
+    {
+      "path": "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "e66874fa0544fcfa7d65082578b660761ff4480e0657894159bb6ea679fd6567",
+      "bytes": 7198
+    },
+    {
+      "path": "docs/agent_framework/README.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "c45ab7a747260c413d18b4fc36495b80404312d35211703e15e353805dd9aee7",
+      "bytes": 10152
+    },
+    {
+      "path": "docs/project/ACTIVE_AGENT_QUEUE.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "98183cb672e4a0c74d494626053cebcc0203945df58fc36c547eb2985b23f77d",
+      "bytes": 2617576
+    },
+    {
+      "path": "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "1d653da1759838305eaf8b6f36196af842d19a84a3f3393bf4d471c2ce18fa09",
+      "bytes": 26732
+    },
+    {
+      "path": "docs/agent_framework/VALIDATION_AND_GATES.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "ba7b73b559e13f3bc81a58e26052b9ab6177df67469e303e22d6b4334251f28f",
+      "bytes": 9278
+    },
+    {
+      "path": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+      "source_commit": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+      "sha256": "82dc0c9ec074207941821d583d9cf224688372128d4ccba935bf83e21fa1bd92",
+      "bytes": 8545
+    }
+  ]
+}

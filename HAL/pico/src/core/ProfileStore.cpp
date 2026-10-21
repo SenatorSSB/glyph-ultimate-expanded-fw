@@ -1589,14 +1589,22 @@ __attribute__((noinline)) bool ProfileStore::PrepareRename(uint32_t id, const ch
     if (r.status != Status::NotFound)
         return false;
     int i = Find(id);
-    if (i < 0)
-        { r = { Status::NotFound }; return false; }
-    if (generation != Generation())
-        { r = { Status::Conflict }; return false; }
-    if (!ValidName(name))
-        { r = { Status::Invalid }; return false; }
-    if (!Admit(0, 0))
-        { r = { Status::Full }; return false; }
+    if (i < 0) {
+        r = { Status::NotFound };
+        return false;
+    }
+    if (generation != Generation()) {
+        r = { Status::Conflict };
+        return false;
+    }
+    if (!ValidName(name)) {
+        r = { Status::Invalid };
+        return false;
+    }
+    if (!Admit(0, 0)) {
+        r = { Status::Full };
+        return false;
+    }
     *_next = *_directory;
     std::memset(_next->entries[i].name, 0, 33);
     std::memcpy(_next->entries[i].name, name, std::strlen(name));
@@ -1610,12 +1618,18 @@ __attribute__((noinline)) bool ProfileStore::PrepareReorder(uint32_t id, uint32_
     if (r.status != Status::NotFound)
         return false;
     int i = Find(id);
-    if (i < 0)
-        { r = { Status::NotFound }; return false; }
-    if (generation != Generation())
-        { r = { Status::Conflict }; return false; }
-    if (!Admit(0, 0))
-        { r = { Status::Full }; return false; }
+    if (i < 0) {
+        r = { Status::NotFound };
+        return false;
+    }
+    if (generation != Generation()) {
+        r = { Status::Conflict };
+        return false;
+    }
+    if (!Admit(0, 0)) {
+        r = { Status::Full };
+        return false;
+    }
     *_next = *_directory;
     _next->entries[i].rank = rank;
     PrepareCommit(*_next, id, _next->entries[i].revision, t);
@@ -1628,14 +1642,22 @@ __attribute__((noinline)) bool ProfileStore::PrepareDelete(uint32_t id, uint32_t
     if (r.status != Status::NotFound)
         return false;
     int i = Find(id);
-    if (i < 0)
-        { r = { Status::NotFound }; return false; }
-    if (generation != Generation())
-        { r = { Status::Conflict }; return false; }
-    if (id == referenced || id == _active_id)
-        { r = { Status::Referenced }; return false; }
-    if (!Admit(0, 0))
-        { r = { Status::Full }; return false; }
+    if (i < 0) {
+        r = { Status::NotFound };
+        return false;
+    }
+    if (generation != Generation()) {
+        r = { Status::Conflict };
+        return false;
+    }
+    if (id == referenced || id == _active_id) {
+        r = { Status::Referenced };
+        return false;
+    }
+    if (!Admit(0, 0)) {
+        r = { Status::Full };
+        return false;
+    }
     *_next = *_directory;
     for (size_t j = i + 1; j < _next->count; ++j)
         _next->entries[j - 1] = _next->entries[j];
@@ -1654,7 +1676,6 @@ ProfileStore::TransactionResult ProfileStore::Rename(
     return committing_result;
 }
 
-
 ProfileStore::TransactionResult ProfileStore::Reorder(
     uint32_t id,
     uint32_t rank,
@@ -1664,7 +1685,6 @@ ProfileStore::TransactionResult ProfileStore::Reorder(
     if (PrepareReorder(id, rank, generation, t)) PublishPreparedCommit(*_next);
     return committing_result;
 }
-
 
 ProfileStore::TransactionResult ProfileStore::Delete(
     uint32_t id,

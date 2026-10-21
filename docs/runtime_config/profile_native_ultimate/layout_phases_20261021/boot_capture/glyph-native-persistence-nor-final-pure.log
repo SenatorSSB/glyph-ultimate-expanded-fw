@@ -1,0 +1,1 @@
+PASS actual Persistence NOR/LittleFS trace/fault/reset/reconcile/reboot faults=1636 events=818 hardware=NOT_CLAIMED

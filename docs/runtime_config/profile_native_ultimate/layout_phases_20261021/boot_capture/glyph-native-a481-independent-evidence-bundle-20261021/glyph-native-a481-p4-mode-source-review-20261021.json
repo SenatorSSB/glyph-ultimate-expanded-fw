@@ -1,0 +1,113 @@
+{
+  "schema_name": "glyph_independent_committed_delta_source_review",
+  "schema_version": 1,
+  "recorded_utc": "2026-10-21T10:45:05.581902+00:00",
+  "candidate": "a48190ca4b82d2274cd85b538dc35840139b5b7c",
+  "tree": "35068cae354eb0704e1b4afbb210cf403553f9d7",
+  "comparison": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+  "frozen_snapshot": "/private/tmp/glyph-a481-source-review-20261021",
+  "verdict": "NO_MATERIAL_SOURCE_SEMANTIC_TRANSACTION_LIFETIME_DEFECT_FOUND_IN_P4_CONDITIONAL3_DELTA",
+  "resource_gate": "OPEN_FINAL_SOURCE_ELF_ALL31_PATH_PROOF_REQUIRED",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "production_delta": [
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "HAL/pico/src/core/ProfileStore.cpp",
+    "include/core/ModeSelectionTransaction.hpp",
+    "include/core/ProfileStore.hpp"
+  ],
+  "audit": [
+    {
+      "subject": "Dispatch siblings",
+      "assessment": "Dispatch performs original reconciliation/identity/replay/Config load/CAS/admission and returns. Only admission==1 sets pending; admission==2 marks handled. Inlined Execute performs the same operation/trace/profile-presence/referenced-Config checks, then returns before Finalize. No repeated admission/load or delayed main-loop action."
+    },
+    {
+      "subject": "RX and response leases",
+      "assessment": "Original IncomingScope owns incoming_native from Receive through all siblings, releasing on every early return; Respond releases incoming RX at original pre-encode boundary and clears request callback. READ response still borrows the separate record wire through encode, with no new body copy or frame reuse during execution. Independent100READ and two intentional response-lease mutants passed/detected."
+    },
+    {
+      "subject": "Fault/trace lifetime",
+      "assessment": "Outer FaultScope starts where old Dispatch scope started after complete RX, spans prep/operation/finalize, then ends before response encoding/TX. Same explicit EndMutation remains inside finalization before fault-ticket fields are captured; scope destructor calls EndMutation again at original effective boundary. Preparation/trace failure and execution/trace failure both unwind the owner. Production retired controls remain inert; candidate-fault strict protocol passed failed_trace_disarms/admission_before_activation/ordered_stages."
+    },
+    {
+      "subject": "Reset/status",
+      "assessment": "dispatch_handled and dispatch_pending clear at Dispatch start and on owning block exit. Status/result/config-generation/recovery/fault/diagnostic finalization fragment is otherwise unchanged. Receive failure cannot use pending from a prior operation; completed old calls reset and the next Dispatch resets again. No response encode/TX runs with active fault scope."
+    },
+    {
+      "subject": "Publication input lifetime",
+      "assessment": "PreparedPublication continues to contain only pointers to existing store-owned/static wires/paths plus scalars/stage pointer. ExecutePublication no-arg executor consumes it synchronously; write/read/verify/Rename are in original order, stage mapping and unknown outcome behavior preserved, metadata cleared on every return. Capacity guard failure and compare failure write exact old Failed result. Relocated control/directory/init wires replace original statics rather than add owners; readback remains distinct."
+    },
+    {
+      "subject": "Directory authority",
+      "assessment": "PrepareDirectoryPublication retains old ready/recovery/uncertain/v2 check and EncodeDirectory. Root-path string formatting moves to pure prep; no storage operations move. Durable sequence remains control3 -> parity root -> RAM directory/protected invalidation -> control2, with same _uncertain policy on all failures. Same seed/wire kind/root bounds and no extra checked IO."
+    },
+    {
+      "subject": "Receipt metadata",
+      "assessment": "PrepareCommit copies original next generation/identity/Ok receipt into same owned next directory and moved committing_result. PrepareRename/Reorder/Delete perform Start/find/CAS/name/reference checks and Admit before same edits, then return before publication. Start replay/refusal returns exact result without publication. Publish failure produces same unknown/IO status/id/revision/generation. Create/Update use same shared preparation/publication through Commit; no nested source-owned writer overwrites result."
+    },
+    {
+      "subject": "Begin and initialized roots",
+      "assessment": "PrepareBeginState extracts the same field clears/active invalidation and recovery booleans. PrepareBootstrap still returns before inlined execution. Geometry+encode for init returns before root execution; each root path is prepared in existing static strings before same publication. Loop scalar resets before use, on root failure, and after loop before control2; no borrowed automatic survives. Phase1/2/3/fresh/legacy/refusal/recovery logic from reviewed P1 is preserved."
+    },
+    {
+      "subject": "Conditional mode helper",
+      "assessment": "Only an allocation-free noinline templated helper containing original automatic ConfigValidationError and exact ValidateConfig call was added; persist replaces only that fragment before SAME SaveConfigIfGenerationMatches. consume function, selection/search/default/generation/field order/save/backend_index/config.cpp are unchanged. Existing Error remains automatic, no static Error or new mode semantics."
+    },
+    {
+      "subject": "Conditional activation proof",
+      "assessment": "Record pins exact committed post-P2 a2a5/tree and old header SHA5ee7a5..., source-identical O3 recipes/relocations. Sum1696 foreground +16 pre-mask +360 source-feasible detected-NES/default-XInput serial IRQ =2072>2048, without ROM/padding. Existing request168 includes Error132 contributor. The1008 leaf is orphaning160+relocating136+splitting192+compact136+traverse216+callback72+commitprog72+LFSprog24; remove136 already inlines force, so no force64 double-count. This uses feasible360, not safe upper456/408. Record states completed_before_header_edit; proof content and sole-helper restriction independently match recorded mechanical condition. No target observation or final bound implied."
+    },
+    {
+      "subject": "Checker delta",
+      "assessment": "Selection/recovery checker adds only forced inclusion of existing real disabled NativeTargetMetrics header needed by current setup extraction. Existing fixture/assertions/old-negative construction remain unchanged; independent run includes actual setup routes and all preserved negatives."
+    },
+    {
+      "subject": "Resource distinction",
+      "assessment": "P4 component source hashes match archived ProfileStore/Configurator source; emitted preparation/finalization/execution frames remain component facts awaiting final ELF. Gross new layout recorded as corrected176+32+2+4=214 (old168/200 estimates superseded); final layout alignment and linked totals remain mandatory. No core native/schema/evaluator/transport wire or resource limit change."
+    }
+  ],
+  "independent_host_tests": [
+    {
+      "test": "native dispatch",
+      "result": "PASS actual COBS CREATE/full request identity/100READ record leases/checked native reference/MAX3341+3373/mixed refusal plus overwritten/released response lease negatives",
+      "log": "/private/tmp/glyph-native-a481-independent-dispatch.log"
+    },
+    {
+      "test": "strict store/boot",
+      "result": "PASS24 current ASan/UBSan cases +4 frozen source negatives",
+      "log": "/private/tmp/glyph-native-a481-independent-strict.log"
+    },
+    {
+      "test": "selection/recovery",
+      "result": "PASS same/different/fail/unknown/held/nonultimate/compact destination, committed boot, manual/automatic/unavailable/validator/read-only, five actual setup routes and preserved negative controls",
+      "log": "/private/tmp/glyph-native-a481-independent-selection.log"
+    },
+    {
+      "test": "strict protocol/candidate faults",
+      "result": "PASS production and strict-candidate actual backend/protobuf/PacketIO/store; failed trace disarms, admission-before-activation, ordered stages, query and bounded liveness cases",
+      "log": "/private/tmp/glyph-native-a481-independent-strict-protocol.log"
+    },
+    {
+      "test": "actual broader namespace GC",
+      "result": "PASS actual pinned NOR/LittleFS ASan/UBSan foreign/nested/matching directories, protected bytes,16 before/after faults/reset/handles,128/129 budget and same-token retry",
+      "log": "/private/tmp/glyph-native-a481-independent-gc.log"
+    }
+  ],
+  "outstanding_final_gates": [
+    "Exact checked-storage before/after operation-trace/return/status/generation/fence/receipt equivalence for all publication success/refusal/fault/lost-ack branches; existing source order audit and strict/native invariant tests do not themselves replace the full planned trace differential.",
+    "Clean authorized Load/Capture checkpoint source review; later LegacySourceIdentity closed-File/hash656/readOpen lead is preserved for frozen all31-path analysis only, no dirty-source or genericunion overflow claim.",
+    "Final all31 source/ELF/caller/indirect/IRQ/ROM/PRIMASK co-liveness within unchanged2048/core; complete static/layout/partition/reserve/capacity bounds and bothABI measured alignment/delta.",
+    "Exact clean source SHA/tree, build flags/generated/dependency inputs, linked ELF/map/.su/disassembly, actual final build and content-addressed UF2/ELF custody.",
+    "Concrete reviewed candidate hardware packet and separate owner device approval; exact human HEP PASS before integration."
+  ],
+  "qualifications": [
+    "No full native oracle matrix rerun for unchanged engine core; no firmware build/device/network/canonical/source/checker mutation.",
+    "All source audit conclusions use immutable a481 archive. Initial repeated live-read command was not relied upon; frozen source/activation/Finalize fragments re-read and manifest source hashes independently matched.",
+    "LegacyIdentity/hash/copy source under later0a extension is not in this checkpoint or this delta verdict.",
+    "Nunchuk NOT_TESTED; target timing/highwater NOT_MEASURED; root cause UNPROVEN."
+  ],
+  "finite_delta_review_complete": true
+}

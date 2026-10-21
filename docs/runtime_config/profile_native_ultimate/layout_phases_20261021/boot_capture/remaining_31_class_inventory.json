@@ -1,0 +1,295 @@
+{
+  "state": "AUTHOR_CONSOLIDATED_31_CLASS_INVENTORY_NOT_INDEPENDENT_FINAL_BOUND",
+  "baseline_inventory": "unchanged canonical review inventory/source pins remain authoritative historical facts",
+  "current_object_evidence": "glyph-native-frozen-boot-capture-20261021/manifest.json.gz and actual .su/relocations",
+  "all_final_linked_bounds": "OPEN",
+  "classes": [
+    {
+      "id": "STARTUP",
+      "phase": "reset, C++ constructors and ordinary SDK main",
+      "prior_proof_obligation": "Retain reset/linker/main/constructor stack proof separately from post-main scan; account mount/allocation and display startup, actual 2048 regions and wrapper ABI. No startup or stack change is allowed.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "BOOT-PREFLIGHT",
+      "phase": "normal/recovery Begin common checks",
+      "prior_proof_obligation": "Measure both Begin entries and actual preparation/execution siblings after repair. Preparation must return before mutation; scalar plan must not borrow an expired automatic. Include geometry lfs_fs_size traversal and decode/hash alternatives.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned boot/state/control publication phases; existing buffers reused"
+    },
+    {
+      "id": "BOOT-PHASE1",
+      "phase": "control phase1 resume",
+      "prior_proof_obligation": "Separate root0/root1/control2 publication and readback/failure maxima, with first mutating operation allowed pending consistency. Preserve all operation order/flags/early returns.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned boot/state/control publication phases; existing buffers reused"
+    },
+    {
+      "id": "BOOT-PHASE2",
+      "phase": "healthy or degraded phase2",
+      "prior_proof_obligation": "Bound root reads/decode and SameDirectory SHA independently; retain pending state at first later mutation. Do not add subsequent write recovery merely because boot was read-only.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned boot/state/control publication phases; existing buffers reused"
+    },
+    {
+      "id": "BOOT-PHASE3",
+      "phase": "uncertain control phase3",
+      "prior_proof_obligation": "Include successful-already-published, aborted-next-generation, unmatched/failure branches. Phase3 reconciliation must remain after original prior checks and may be the first mutation.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned boot/state/control publication phases; existing buffers reused"
+    },
+    {
+      "id": "BOOT-FRESH-UPGRADE",
+      "phase": "no v2 control / fresh / v1 legacy upgrade",
+      "prior_proof_obligation": "Bound legacy DecodeLegacy, ReadProfile/current+previous, HashMessage and Receipt as separate pre-write paths; preserve initial admission then control1, _v2, root0/root1/control2/LoadDirectory.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned boot/state/control publication phases; existing buffers reused"
+    },
+    {
+      "id": "CONFIG-LOAD",
+      "phase": "Config current/prior/legacy load, decode and validation",
+      "prior_proof_obligation": "Include every boot/recovery/Configurator/query/mode caller prefix and protobuf Stream callbacks, validator/error, close/destructor error paths. Existing .su LoadConfigChecked456 is not a whole-route bound.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned read-candidate driver; prior restore only after helper returns"
+    },
+    {
+      "id": "CONFIG-PRIOR-RESTORE",
+      "phase": "LoadConfigChecked PriorCompact Rename",
+      "prior_proof_obligation": "Dedicated broad-FS forceconsistency/deorphan/MOVE + metadata-write and IRQ bound; do not assume Save lifetime repair removes this frame. Preserve existing uncertainty/generation/result behavior. No new edit scope is inferred.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned read-candidate driver; prior restore only after helper returns"
+    },
+    {
+      "id": "CONFIG-SAVE-GENERATION",
+      "phase": "SaveConfigIfGenerationMatches durable fence",
+      "prior_proof_obligation": "Verify file lifetime actually ends before Save in new source/ELF; exact constructor failure, explicit-close and destructor-fallback equivalence; generation/fence conflicts and no interposed callback/yield.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned generation/save phases with original single File slot; real NOR1636faults/ABI equivalence"
+    },
+    {
+      "id": "CONFIG-SAVE-STAGE",
+      "phase": "SaveConfig size, remove temp, open/write/encode/CRC/header/sync/close",
+      "prior_proof_obligation": "Measure size, initial remove, constructor/open, body encoder, CRC read, sync/close separately under new raw-slot owner and phase siblings. Check all before/after fault/lost-ack branches, failed constructor and fallback closes; no second live raw slot.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned generation/save phases with original single File slot; real NOR1636faults/ABI equivalence"
+    },
+    {
+      "id": "CONFIG-SAVE-VERIFY",
+      "phase": "independent reopen and deterministic reencode compare",
+      "prior_proof_obligation": "Bound nanopb compare callback -> checked read with actual File slot and caller phase. Check every return resets slot/metadata and compares unchanged bytes; sequential stages are maxima, not additions.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned generation/save phases with original single File slot; real NOR1636faults/ABI equivalence"
+    },
+    {
+      "id": "CONFIG-SAVE-PUBLISH",
+      "phase": "current stat/prior remove/rotation/publication/uncertainty/rollback",
+      "prior_proof_obligation": "Bound Remove, each Rename, readback/check/reencode, rollback and close/destructor alternatives. Preserve _config_generation/_mutation_fenced/_pending fields and statuses. Earlier successful mutation can clear boot pending state, but metadata relocation/repair generated later still needs source-specific treatment.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned generation/save phases with original single File slot; real NOR1636faults/ABI equivalence"
+    },
+    {
+      "id": "MODE-DESTINATION",
+      "phase": "selected backend mode persistence",
+      "prior_proof_obligation": "Use 456 safe all-backend IRQ union (512 rounding optional), or a proved tighter route. Conditional header permission requires exact post-Persistence feasible overflow with validation Error contributor; 456 alone is not a feasible lower witness. Existing NES+serial360 witness must be paired with simultaneously unmasked foreground>1688.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Exact measured conditional helper activated; no other mode/header/config semantics change"
+    },
+    {
+      "id": "MIGRATION-CAPTURE",
+      "phase": "legacy snapshot capture and source identity",
+      "prior_proof_obligation": "Include CaptureLegacySource608 and hash_file656 object frames only at their actual calls, copy input/output simultaneous handles, first-write consistency and all failure/uncertainty exits. No extra snapshot/format/erase is authorized.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned source-check/hash/admission and capture execution; unchanged hash/copy/LegacyIdentity bodies marked noinline only"
+    },
+    {
+      "id": "MIGRATION-IMPORT",
+      "phase": "ImportLegacyStream admission, two streamed records and directory",
+      "prior_proof_obligation": "Account boot setup/lambda/ReadLegacyProfile stream and all profile publication paths; source SHA/hash/receipt maxima separate from FS maxima. Determine final linked reachability of portable compatibility entry before inclusion/exclusion.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "MIGRATION-COMPLETE",
+      "phase": "compact receipt/Config save/CompleteMigration",
+      "prior_proof_obligation": "Separate compact hash/read validation, ordinary Save and CompleteMigration directory write prefixes; include receipt mismatch, migration fence, Config current/prior/recovery cases.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "DISPATCH-RX",
+      "phase": "Receive/identity/CAS/admission preparation",
+      "prior_proof_obligation": "Verify true returned siblings in final source/ELF rather than nested wrapper alone. RX decode/preparation/identity digest/load and operation execution cannot be blindly added; preserve FaultScope/tickets/trace/reset at effective original boundaries.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "STORE-GC",
+      "phase": "GC protected-root/no-garbage/enumerate/remove/budget",
+      "prior_proof_obligation": "Include enumeration callback sscanf/snprintf/libc and protected checks as separate read-only maximum; include remove/forceconsistency/deorphan/MOVE/compaction maximum with GC48. No Capacity frame during GC. No mutation after Full/failure. New independent host fixture PASS covers these invariants.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "STORE-CAPACITY",
+      "phase": "post-GC EvaluateAdmission and STATUS Capacity",
+      "prior_proof_obligation": "Account EvaluateAdmission120+Capacity320+actual child/caller, not GC+Evaluate frames together; all protected record Stat and filesystem/CTZ reads, uint64 helpers, LoadProtectedRoot and errors. Source pinning proves object correspondence only; final linked ELF required.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "STORE-FIRST-RECORD",
+      "phase": "CREATE/UPDATE/DUPLICATE and imported first record",
+      "prior_proof_obligation": "Bound Open(create/truncate), Write, Sync, Close, readback and Rename separately, with pending MOVE/orphan at first actual mutator. GC success alone does not prove pending state cleared when no deletion occurred. Preserve unknown outcome and exact immutable payload owners.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "STORE-DIRECTORY",
+      "phase": "first directory and later directory publication",
+      "prior_proof_obligation": "Cover each retained metadata caller, WriteControl/PublishDirectory/Publish final executor; preserve Start/name/CAS/refused semantics. Pending state cleared by a successful earlier mutation is not added again merely from boot; include relocation-created recovery separately.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "STORE-RECONCILE",
+      "phase": "uncertainty/query/replay/abort reconciliation",
+      "prior_proof_obligation": "Bound pre-dispatch ReconcileTransaction/LoadDirectory/SameDirectory/control write and ReconcileConfig->LoadConfigChecked; retain normal/recovery differences, token/high-water/receipt/fence order and error statuses.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "STORE-READ-REFERENCE",
+      "phase": "READ/health/status dependency/reference SET",
+      "prior_proof_obligation": "Bound record Stat/open/read/close, native scan/decode/validation and legacy alternatives, fallback prior revision, checked-reference Save and Config status load. Read/response encode does not carry FS write frames.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Returned admission/execution/finalization and metadata/publication phases; all legacy/native transaction/RX assertions preserved"
+    },
+    {
+      "id": "LEGACY-CONFIGURATOR",
+      "phase": "legacy GET/SET/device-info/unknown/reboot responses",
+      "prior_proof_obligation": "Include retained HandleSetConfig caller during new Save phases; PriorCompact load before SET and error formatting/TX need separate maxima. Include real transport/yield/USB guard scopes rather than transferring filesystem-specific mutex assumptions blindly.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "NATIVE-ACTIVATION",
+      "phase": "profile selection, native prepare/copy/bind/context digest",
+      "prior_proof_obligation": "Retain exact source/ELF read/decode/PrepareStructure/BodyDigest/CopyProgram/ContextDigest/SetConfig and activation metric paths with their actual callers/IRQ routes. No FS frames remain during later native frame evaluation; unchanged native oracles apply only to unchanged sources.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "NATIVE-FRAME",
+      "phase": "real per-frame preprocess/evaluator",
+      "prior_proof_obligation": "Bound actual backend SendReport/ControllerMode/Evaluate/direction/helper/IRQ prefix; separate sibling metrics RecordFrame. Preserve all18 frozen family/oracle semantics and no parser/load/status dependency in output hot path.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "IDENTITY-DIAGNOSTIC",
+      "phase": "XInput Poll, parser/digest/snapshot/TX",
+      "prior_proof_obligation": "Separate parser, Observe/body/context SHA, diagnostic mailbox/snapshot and write maxima; actual outer __usb_mutex suppresses deferred task here but does not mask all IRQs. Generic raw transport prefixes need actual lock/IRQ analysis. Preserve status/wire/parser counters and no new command.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "SCAN",
+      "phase": "post-main own-core stack-write scan/mailboxes",
+      "prior_proof_obligation": "Account ServiceCore/Publish/Now/atomic helper presence and own entry prefix; preserve bottom32 exclusion and 2048 bounds. Watermark/timing remain NOT_MEASURED and cannot close structural gap.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "CORE1",
+      "phase": "setup1/display/control/RGB/metrics",
+      "prior_proof_obligation": "Reuse attributed exact-bcb graph1152 upper only after unchanged source/dependency and final emitted-code correspondence; linker movement alone is not a changed stack. Final stack regions/SIO/DMA/core1 entry must still match.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "LFS-INTERNAL",
+      "phase": "all admitted mutable/read filesystem branches",
+      "prior_proof_obligation": "For every caller above bound append/compaction/split/relocation, allocator rawtraverse/CTZ, commit callback/prog/flush/CRC and read/erase alternatives at exact same prefix. Handle broad positive-orphan/PENDING_MOVE source predicates; do not add all alternatives or assume every guard simultaneously true. Existing witness proves nested repair compact/program, not deepest target callback/IRQ realization.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    },
+    {
+      "id": "IRQ-ROM",
+      "phase": "unmasked/pre-mask/masked and backend alternatives",
+      "prior_proof_obligation": "Carry exact source-selected priorities/handlers/class callbacks/endpoint-owner invariants and B0/B1/B2 ROM domain into final ELF. Alarm336, SIO116, hardwareUSB240 are alternatives; SysTick and priority0 GPIO do not mutually nest. Do not stack entire IRQ chains onto masked flash or blindly use a conservative union as feasible overflow witness.",
+      "current_disposition": "FINAL_ELF_CALLER_CALLEE_AND_ROUTE_BOUND_OPEN",
+      "scope_change": "Source behavior untouched; compose changed callers where reachable"
+    }
+  ],
+  "remaining_concrete_or_uncertain_rows": [
+    {
+      "id": "COPY-OUTPUT-OPEN",
+      "state": "SOURCE_FEASIBLE_ORDINARY_NEW_ROOT_ENTRY_COMPACTION_PENDING_INDEPENDENT_PREDICATE_ADJUDICATION",
+      "foreground_frames": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "CaptureLegacySource",
+          16
+        ],
+        [
+          "ExecuteCaptureSource",
+          96
+        ],
+        [
+          "copy_checked_file",
+          504
+        ],
+        [
+          "CheckedStorageOpen",
+          88
+        ],
+        [
+          "lfs_file_open",
+          16
+        ],
+        [
+          "lfs_file_rawopencfg",
+          80
+        ],
+        [
+          "orphaning_compact_traverse_callback_program_subtree",
+          1008
+        ]
+      ],
+      "foreground": 1992,
+      "premask": 16,
+      "known_default_USB_serial_SysTick_noROM_noPadding": 300,
+      "composed": 2308,
+      "reservation": 2048,
+      "predicate": "valid snapshot missing; temp absent; first Remove succeeds without deleting an entry, so an otherwise full root metadata log can remain full; copy input then output original concurrent handles; output create triggers ordinary compaction. No initial orphan or pending MOVE is added here. No physical overflow claimed."
+    },
+    {
+      "id": "HASH-LOOKUP",
+      "state": "UNRESOLVED_ACTUAL_COHERENT_LOOKUP_VS_CONSERVATIVE_688_INVENTORY",
+      "facts": "hash_file656; LegacySourceIdentity280 retains closed file at BL hash_file and destructor after; PrepareCapture64; Capture driver16. Read-only file open lookup688 is a conservative capacity inventory until source/ELF branch exactness is checked; do not promote it to an overflow witness merely by summation. hash data-read path is separate/shallower."
+    },
+    {
+      "id": "BOOT-STORE-CONTROL",
+      "state": "TIGHT_SOURCE_COMPOSITION_PENDING_FINAL_ELF_IRQ_CORRESPONDENCE",
+      "facts": "Begin24 + publication executor32 now replace old retained144, pure40/96 initialization/preparation retire. Relevant default serial/ROM/pad/masked alternatives must use actual boot phase predicates; no blanket Configurator348/Mode408 transfer."
+    },
+    {
+      "id": "P4-DIFFERENTIAL",
+      "state": "INCOMPLETE_FINAL_GATE",
+      "facts": "Independent invariant/transaction/native RX/fault suites PASS; full before/after store publication operation trace/status/gen/fence/receipt differential is still separate required work."
+    }
+  ],
+  "bounded_hypotheses_not_adopted": [
+    "First retire ExecuteCaptureSource96 actual-digest/result locals from its copy call via real returned mutation/copy/verification/publication siblings; do not assume this alone suffices.",
+    "hash_file may be repairable by original automatic File wrapper constructing/opening BEFORE a noinline hash-open-file helper owns original SHA/scratch loop; same original explicit close before Final and destructor order, no File conversion/new buffers. Current amendment forbids body edit, so hypothesis only.",
+    "copy has simultaneous two original Files; no serialization/reopen/extra I/O permitted. Pure loop isolation may end scratch lifetime at constructor, but full sync/close compaction paths still need bound; do not conjecturally reuse Save slot or add a second slot. Only after exact independent proof choose minimal bounded layout needing ordinary scope adoption."
+  ]
+}

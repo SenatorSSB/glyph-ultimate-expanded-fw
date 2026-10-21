@@ -1,0 +1,35 @@
+{
+  "scope": "Private finite read-only preparation; archive these exact outputs, source snapshots independently reproducible from pinned Git objects",
+  "files": [
+    {
+      "path": "/private/tmp/glyph-native-hardware-packet-audit-20261021.md",
+      "bytes": 13916,
+      "sha256": "4c9f7ecf4a5710706ee3aad3e345ba0940bafd69e224056f1787dbdb72656273"
+    },
+    {
+      "path": "/private/tmp/glyph-native-hardware-packet-audit-20261021.json",
+      "bytes": 11870,
+      "sha256": "5a1982fc2fea3f8d69d4b2ab17bcf79d6f7494a984622129b69dc9f91d5e5bf6"
+    },
+    {
+      "path": "/private/tmp/glyph-native-hardware-packet-audit-20261021/initial-pins.json",
+      "bytes": 3068,
+      "sha256": "43fb40bcc65051b7f65c8200d139c8a49dc8ad6e59977ea667236baca818e75a"
+    },
+    {
+      "path": "/private/tmp/glyph-native-hardware-packet-audit-20261021/feature-pins.json",
+      "bytes": 45230,
+      "sha256": "22511f2617c412f72e65fe0e0b1fd10a47b142c93a91568bda60be9ea0a4a165"
+    },
+    {
+      "path": "/private/tmp/glyph-native-hardware-packet-audit-20261021/host-tool-inventory-search.json",
+      "bytes": 64340,
+      "sha256": "7ec13948fed6cd84b53220eec55031be221ebbff208ce9cf530cd248a7263340"
+    },
+    {
+      "path": "/private/tmp/glyph-native-hardware-packet-audit-20261021/safe_expected_observer_mapping.json",
+      "bytes": 139734,
+      "sha256": "354c88f951699e8bf5d3e0fddfc2c5cb03a3521be273458c8ca18c03c268b217"
+    }
+  ]
+}

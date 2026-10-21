@@ -1,0 +1,7 @@
+/private/tmp/glyph-native-gc-repaired-orphan-witness/lfs-observer.c:4223:debug: Found pending gstate 0x800000000000000000000000
+after_first_loss orphan_count=1 gdisk=80000001
+/private/tmp/glyph-native-gc-repaired-orphan-witness/lfs-observer.c:4524:debug: Fixing orphan {0x11, 0x12}
+/private/tmp/glyph-native-gc-repaired-orphan-witness/lfs-observer.c:4223:debug: Found pending gstate 0x800000000000000000000000
+actual_checked_remove=/ultimate-00000100-00000001.tmp orphan_count=1
+/private/tmp/glyph-native-gc-repaired-orphan-witness/lfs-observer.c:4524:debug: Fixing orphan {0x11, 0x12}
+PASS actual Begin+Create Admit GC CheckedRemove positive-orphan nested compact=1 prog=1 orphan_after=0

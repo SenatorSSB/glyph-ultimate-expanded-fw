@@ -1,0 +1,77 @@
+{
+  "qualification": "Exact independent a481 delta evidence only; full publication differential +final31class/ELF/build/hardware remain OPEN. Immutable archived Git/SDK/author inputs hash-referenced unchanged.",
+  "files": [
+    {
+      "original_path": "/private/tmp/glyph-native-a481-independent-dispatch.log",
+      "raw_sha256": "2e63ca45cac79f05b83c8d34c5457987376af2f2343316d39936165e1b5af5fc",
+      "raw_bytes": 339,
+      "gzip_object": "objects/2e63ca45cac79f05b83c8d34c5457987376af2f2343316d39936165e1b5af5fc.gz",
+      "gzip_sha256": "b60aef18199c06b8c991b922161084b24e333d63c7cf5aa203b87869518e21ad",
+      "gzip_bytes": 236
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-independent-strict.log",
+      "raw_sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb",
+      "raw_bytes": 1931,
+      "gzip_object": "objects/3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb.gz",
+      "gzip_sha256": "20c9f67aeefdacb994b2a585535430f67b878d02faab60b74d628f402eff30ea",
+      "gzip_bytes": 889
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-independent-selection.log",
+      "raw_sha256": "5f76c524ac7562b7892ecf5559dee7efcff92874a514b34331df89d2bc7ef7fc",
+      "raw_bytes": 522,
+      "gzip_object": "objects/5f76c524ac7562b7892ecf5559dee7efcff92874a514b34331df89d2bc7ef7fc.gz",
+      "gzip_sha256": "b41f655c06c09d3f31ad8a7c1d080b90bf0098fc5353b73975d91c4985956f75",
+      "gzip_bytes": 264
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-independent-strict-protocol.log",
+      "raw_sha256": "2e7e0c3ebc57cb8ac72550440f6d8bbdd8a95bcc0787ddc2b11553bcdabd438d",
+      "raw_bytes": 442,
+      "gzip_object": "objects/2e7e0c3ebc57cb8ac72550440f6d8bbdd8a95bcc0787ddc2b11553bcdabd438d.gz",
+      "gzip_sha256": "0f7b885e9dad51ff5cc88fc9ac5dd082579a88e2483ada7478a97d82802694b9",
+      "gzip_bytes": 251
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-independent-gc.log",
+      "raw_sha256": "c92f4a0543625bf6336e75cbc621193d3e51b12ef6e1a423f7f3985ee27bdcd9",
+      "raw_bytes": 356,
+      "gzip_object": "objects/c92f4a0543625bf6336e75cbc621193d3e51b12ef6e1a423f7f3985ee27bdcd9.gz",
+      "gzip_sha256": "395092de55564c48e336928d1471f5e007eb3ef4d96d66be6e2aa4765ec75bc2",
+      "gzip_bytes": 263
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-run-focused.py",
+      "raw_sha256": "c7363b45a20eebf9d2e61c8ad111553b260408d3cc0954d851bc7f32d4329818",
+      "raw_bytes": 577,
+      "gzip_object": "objects/c7363b45a20eebf9d2e61c8ad111553b260408d3cc0954d851bc7f32d4329818.gz",
+      "gzip_sha256": "cf581c7352435564170b93b0019475edf32bb50b9a8c5bf6c9e8ce13082a881e",
+      "gzip_bytes": 349
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-independent-gc/report.json",
+      "raw_sha256": "b3af88e9d5edb0b8c6fed6c2dcb425c829333e0f6891a7a1e77b27da00c729b5",
+      "raw_bytes": 1612,
+      "gzip_object": "objects/b3af88e9d5edb0b8c6fed6c2dcb425c829333e0f6891a7a1e77b27da00c729b5.gz",
+      "gzip_sha256": "3625697f8fc60c249a2e006019990b0e007dd5e154747aebddf807d305c8514d",
+      "gzip_bytes": 821
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-p4-mode-source-review-20261021.md",
+      "raw_sha256": "e86d6e61954d2238ec5e715e763ac7b7bf8012775042f1340a0459c1559986ba",
+      "raw_bytes": 9464,
+      "gzip_object": "objects/e86d6e61954d2238ec5e715e763ac7b7bf8012775042f1340a0459c1559986ba.gz",
+      "gzip_sha256": "419e871bbe54eb04283fd6a1ec98d53639e2063e6c4c858d59b6c81dcf21d20e",
+      "gzip_bytes": 4283
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a481-p4-mode-source-review-20261021.json",
+      "raw_sha256": "89b76bf206bced34662a77edcef0e8c4c5fa619193a2b7fbe9b71bb84f1b4ca4",
+      "raw_bytes": 10386,
+      "gzip_object": "objects/89b76bf206bced34662a77edcef0e8c4c5fa619193a2b7fbe9b71bb84f1b4ca4.gz",
+      "gzip_sha256": "d8e8b09a61badf0899f7ca58ee77de89af64d67ccc1e883a983cab6341ec5f88",
+      "gzip_bytes": 4435
+    }
+  ]
+}

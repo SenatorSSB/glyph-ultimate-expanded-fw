@@ -1,0 +1,69 @@
+{
+  "qualification": "Exact independent a2a5 delta review evidence. Final whole resource/ELF/build/hardware proof pending. Immutable archived Git/SDK inputs hash-referenced in unchanged pins, not duplicated.",
+  "files": [
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-independent-persistence-nor/report.json",
+      "raw_sha256": "b33edaef71ec2e5b8d3d787cdd6a91a8ad41e9e8b557cf23b9805ac5a0696c4a",
+      "raw_bytes": 2644,
+      "gzip_object": "objects/b33edaef71ec2e5b8d3d787cdd6a91a8ad41e9e8b557cf23b9805ac5a0696c4a.gz",
+      "gzip_sha256": "858ac5f6045baedbf2bdd55be148f435ae48ca7f9ee1f239c34b133c554b7dbf",
+      "gzip_bytes": 1163
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-independent-persistence-nor/run.log",
+      "raw_sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "raw_bytes": 12488093,
+      "gzip_object": "objects/e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51.gz",
+      "gzip_sha256": "d69e74e9be6da09a844e4fffaf2cc5bef23ea72706c02c9ae5d8eaf8496a1562",
+      "gzip_bytes": 60320
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-independent-persistence-nor/commands.json",
+      "raw_sha256": "5343f561a0e28aff8ccd4b1ebd5ea463f77ce4bb63937a747ac150678455e250",
+      "raw_bytes": 12114,
+      "gzip_object": "objects/5343f561a0e28aff8ccd4b1ebd5ea463f77ce4bb63937a747ac150678455e250.gz",
+      "gzip_sha256": "29636a6de6289f4e01ba8dd7d27e658d25afe8a3bdbe177b3bc38086fa461ad5",
+      "gzip_bytes": 900
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-independent-log-comparison.json",
+      "raw_sha256": "e6fa3854f34112ad49ebb91bd48435aaeacedf6fd483c6d0ae1bd7d09ea3f7be",
+      "raw_bytes": 666,
+      "gzip_object": "objects/e6fa3854f34112ad49ebb91bd48435aaeacedf6fd483c6d0ae1bd7d09ea3f7be.gz",
+      "gzip_sha256": "65ff248dd5415bfcbf316e087ae69621298bc83a81395a88f25fe349d9690955",
+      "gzip_bytes": 256
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-independent-boot-strict.log",
+      "raw_sha256": "4b9426440ddb1c75224cf098c076af54178905fc72130027a888ca260a9b9e12",
+      "raw_bytes": 1758,
+      "gzip_object": "objects/4b9426440ddb1c75224cf098c076af54178905fc72130027a888ca260a9b9e12.gz",
+      "gzip_sha256": "dc5eb5e14d5d5d833abc7d51e27ce9735eb21540d76a5754fe0af4d89080b754",
+      "gzip_bytes": 862
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-independent-boot-strict-with-object-read.log",
+      "raw_sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb",
+      "raw_bytes": 1931,
+      "gzip_object": "objects/3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb.gz",
+      "gzip_sha256": "20c9f67aeefdacb994b2a585535430f67b878d02faab60b74d628f402eff30ea",
+      "gzip_bytes": 889
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-p1-p2-source-review-20261021.md",
+      "raw_sha256": "0058ecfe58bf551198317efb57415e16bd9907084e938f61fe9ed100bbcdaf10",
+      "raw_bytes": 7338,
+      "gzip_object": "objects/0058ecfe58bf551198317efb57415e16bd9907084e938f61fe9ed100bbcdaf10.gz",
+      "gzip_sha256": "d8fb0693d8be10335fd167e7998a2387769a1087596d05e9fc69d62d5b0b5589",
+      "gzip_bytes": 3481
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-a2a5-p1-p2-source-review-20261021.json",
+      "raw_sha256": "78f65ceb50463afacf7c96e746e0bf8f4b027825e0b4029ce74173fbba8739da",
+      "raw_bytes": 8475,
+      "gzip_object": "objects/78f65ceb50463afacf7c96e746e0bf8f4b027825e0b4029ce74173fbba8739da.gz",
+      "gzip_sha256": "8b1935f0b8f7d41b979733944e047b26997a5857bdd9c26957f1d3ca84643712",
+      "gzip_bytes": 3688
+    }
+  ]
+}

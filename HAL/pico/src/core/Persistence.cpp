@@ -59,6 +59,14 @@ struct SavePhaseState {
     CheckedStorage::Result operation;
 };
 SavePhaseState save_phase{};
+// Reuse the original single load candidate; only scalar phase facts survive
+// preparation. Filenames below refer solely to the existing static constants.
+Config loaded_candidate;
+struct LoadPhaseState { CompactConfigRecovery::Source source; uint32_t crc; } load_phase{};
+struct CapturePhaseState { const char *filename; size_t length; } capture_phase{};
+struct LoadPhaseReset { ~LoadPhaseReset() { std::memset(&load_phase, 0, sizeof(load_phase)); } };
+struct CapturePhaseReset { ~CapturePhaseReset() { std::memset(&capture_phase, 0, sizeof(capture_phase)); } };
+
 struct SavePhaseReset {
     ~SavePhaseReset() { std::memset(&save_phase, 0, sizeof(save_phase)); }
 };
@@ -106,7 +114,7 @@ bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t
     return pb_encode(&compare, Config_fields, &config) && compare.bytes_written == encoded_size;
 }
 
-bool copy_checked_file(const char *from, const char *to, size_t length, bool &uncertain) {
+__attribute__((noinline)) bool copy_checked_file(const char *from, const char *to, size_t length, bool &uncertain) {
     CheckedStorageFile input(from, "r"), output(to, "w+");
     bool copied = input && output;
     uint8_t scratch[64]; size_t remaining = length;
@@ -121,7 +129,7 @@ bool copy_checked_file(const char *from, const char *to, size_t length, bool &un
     return copied && input_closed && output_closed;
 }
 
-bool hash_file(const char *path, uint8_t digest[32]) {
+__attribute__((noinline)) bool hash_file(const char *path, uint8_t digest[32]) {
     CheckedStorageFile file(path, "r");
     if (!file) return false;
     Sha256 hash; uint8_t scratch[128]; size_t remaining = file.size();
@@ -348,7 +356,7 @@ Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
     return SaveResult::Saved;
 }
 
-bool Persistence::LegacySourceIdentity(uint8_t digest[32]) {
+__attribute__((noinline)) bool Persistence::LegacySourceIdentity(uint8_t digest[32]) {
     if (!IsAvailable()) return false;
     CheckedStorageFile source("/ultimate-migration.src", "r");
     if (!source) return false;
@@ -357,13 +365,13 @@ bool Persistence::LegacySourceIdentity(uint8_t digest[32]) {
     return hash_file("/ultimate-migration.src", digest);
 }
 
-bool Persistence::CaptureLegacySource(uint8_t digest[32]) {
+__attribute__((noinline)) bool Persistence::CheckCaptureInput() {
     using namespace CheckedStorage;
     if (!IsAvailable() || _mutation_fenced) return false;
     CompactConfigRecovery::Source selected;
-    const char *filename = nullptr;
+    auto &filename = capture_phase.filename;
     if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, filename, selected)) return false;
-    size_t length = 0;
+    auto &length = capture_phase.length;
     {
         CheckedStorageFile source(filename, "r");
         if (!source) return false;
@@ -371,13 +379,12 @@ bool Persistence::CaptureLegacySource(uint8_t digest[32]) {
         length = source.size();
         if (!source.close() || !valid) return false;
     }
-    if (length > 65536 || !hash_file(filename, digest)) return false;
-    auto snapshot = Stat("/ultimate-migration.src", nullptr, Kind::Config);
-    if (snapshot) {
-        uint8_t previous[32];
-        return LegacySourceIdentity(previous) && std::memcmp(previous, digest, sizeof(previous)) == 0;
-    }
-    if (snapshot.outcome != Outcome::NotFound) return false;
+    return true;
+}
+
+__attribute__((noinline)) bool Persistence::AdmitCaptureSource() {
+    using namespace CheckedStorage;
+    const auto length = capture_phase.length;
     Geometry geometry{};
     if (!Capacity(geometry) || !geometry.erase_bytes) return false;
     // Snapshot must not consume the project reserve or copy-on-write metadata
@@ -386,10 +393,39 @@ bool Persistence::CaptureLegacySource(uint8_t digest[32]) {
     const uint64_t charged = uint64_t(length) + 4 * (blocks + 1);
     const uint64_t staged = ((charged + geometry.erase_bytes - 1) / geometry.erase_bytes) * geometry.erase_bytes;
     if (geometry.free_bytes < staged + 16384 + uint64_t(4) * geometry.erase_bytes) return false;
+    return true;
+}
+
+__attribute__((noinline)) Persistence::CaptureAction Persistence::PrepareCaptureSource(uint8_t digest[32]) {
+    using namespace CheckedStorage;
+    if (!CheckCaptureInput()) return CaptureAction::Refused;
+    const auto length = capture_phase.length;
+    const char *filename = capture_phase.filename;
+    if (length > 65536 || !hash_file(filename, digest)) return CaptureAction::Refused;
+    auto snapshot = Stat("/ultimate-migration.src", nullptr, Kind::Config);
+    if (snapshot) {
+        uint8_t previous[32];
+        return LegacySourceIdentity(previous) && std::memcmp(previous, digest, sizeof(previous)) == 0 ? CaptureAction::ExistingExact : CaptureAction::Refused;
+    }
+    if (snapshot.outcome != Outcome::NotFound) return CaptureAction::Refused;
+    return AdmitCaptureSource() ? CaptureAction::NeedsCopy : CaptureAction::Refused;
+}
+
+bool Persistence::CaptureLegacySource(uint8_t digest[32]) {
+    using namespace CheckedStorage;
+    std::memset(&capture_phase, 0, sizeof(capture_phase));
+    CapturePhaseReset reset;
+    const auto action = PrepareCaptureSource(digest);
+    if (action != CaptureAction::NeedsCopy) return action == CaptureAction::ExistingExact;
+    return ExecuteCaptureSource(digest);
+}
+
+__attribute__((noinline)) bool Persistence::ExecuteCaptureSource(uint8_t digest[32]) {
+    using namespace CheckedStorage;
     auto removed = Remove("/ultimate-migration.tmp", Kind::Config);
     if (!removed) { _mutation_fenced = removed.outcome == Outcome::Uncertain; return false; }
     bool uncertain = false;
-    if (!copy_checked_file(filename, "/ultimate-migration.tmp", length, uncertain)) {
+    if (!copy_checked_file(capture_phase.filename, "/ultimate-migration.tmp", capture_phase.length, uncertain)) {
         _mutation_fenced = uncertain; return false;
     }
     uint8_t actual[32];
@@ -439,17 +475,17 @@ bool Persistence::LoadConfig(Config &config) {
     return LoadConfigChecked(config) == LoadResult::Loaded;
 }
 
-Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
+__attribute__((noinline)) Persistence::LoadResult Persistence::ReadConfigCandidate() {
     if (!IsAvailable() || _validator == nullptr) {
         return LoadResult::StorageFailure;
     }
 
     // Config is too large for the core stack. This boot-owned candidate never
     // becomes active and is reset for every attempt, including partial decodes.
-    static Config candidate;
+    auto &candidate = loaded_candidate;
     candidate = Config_init_default;
 
-    CompactConfigRecovery::Source source;
+    auto &source = load_phase.source;
     const char *selected_filename = nullptr;
     if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, selected_filename, source))
         return LoadResult::StorageFailure;
@@ -501,15 +537,24 @@ Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
         return LoadResult::StorageFailure;
     }
     if (!config_file.close()) return LoadResult::StorageFailure;
-    if (source == CompactConfigRecovery::Source::PriorCompact) {
+    load_phase.crc = header.config_crc;
+    return LoadResult::Loaded;
+}
+
+Persistence::LoadResult Persistence::LoadConfigChecked(Config &config) {
+    std::memset(&load_phase, 0, sizeof(load_phase));
+    LoadPhaseReset reset;
+    const auto prepared = ReadConfigCandidate();
+    if (prepared != LoadResult::Loaded) return prepared;
+    if (load_phase.source == CompactConfigRecovery::Source::PriorCompact) {
         auto restored = CheckedStorage::Rename(prior_compact_filename, config_filename, CheckedStorage::Kind::Config);
         if (!restored) {
             if (restored.outcome == CheckedStorage::Outcome::Uncertain) _mutation_fenced = true;
             return LoadResult::StorageFailure;
         }
     }
-    config = candidate;
-    _config_generation = header.config_crc;
+    config = loaded_candidate;
+    _config_generation = load_phase.crc;
     return LoadResult::Loaded;
 }
 
