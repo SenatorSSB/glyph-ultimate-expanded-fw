@@ -1,0 +1,41 @@
+{
+  "final_packet": {
+    "all_reviewed_resource_H10_H11_addendum_keys_preserved": true,
+    "only_outer_Switch_lx_fields_corrected": 11,
+    "path": "/private/tmp/glyph-native-mac-observer-preparation-20261021/reviewed_packet_exactF_wire_observer_draft.json",
+    "reviewed_base_sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+    "rows": 334,
+    "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+  },
+  "hardware": "NOT_TESTED",
+  "independent_new_tool_erratum_review": "PENDING_ROOT_DISPATCH",
+  "observer": {
+    "binary": "/private/tmp/glyph-native-mac-observer-preparation-20261021/mac_input_observer",
+    "binary_sha256": "1881a7a7291bd2561021c4788b957b420092a4948515f611a3edb59ee88bb8d2",
+    "device_inspect_capture_bodies_executed": false,
+    "pure_selftest": "PASS",
+    "runtime_access": "UNVERIFIED",
+    "source": "/private/tmp/glyph-native-mac-observer-preparation-20261021/mac_input_observer.cpp",
+    "source_sha256": "6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169"
+  },
+  "operations_requiring_separate_approval": [
+    "Exact VID/PID registry inspection",
+    "Normal selected interface/HID open and finite input reports",
+    "Only if explicitly included, one WUP adapter OUT13 start-polling byte",
+    "Existing reviewed backup/identity operations and separately specified verified raw cold entry; no runtime/watchdog switching or host Config/ProfileStore mutation in initial preflight"
+  ],
+  "physical_approval": null,
+  "plans": [
+    "session_plan.md",
+    "session_plan_addendum.md",
+    "MAC_OBSERVER_PROCEDURE.md"
+  ],
+  "state": "OFFLINE_PREPARED_FOR_FOCUSED_INDEPENDENT_REVIEW_NOT_DEVICE_APPROVED",
+  "validation": {
+    "complete_report_vectors": 1002,
+    "native_pure_offline_branches": 5,
+    "negative_boundary_vectors": 48,
+    "synthetic_capture_cases": 14,
+    "unsafe_float_assignments_executed_for_corrected_rows": false
+  }
+}

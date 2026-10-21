@@ -10,10 +10,11 @@ linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is115
 static RAM197872/delta10528, layout499/512. Broader filesystem support and every
 original cap remain unchanged. Historical failed/incomplete evidence stays exact.
 
-The [independently reviewed334-row hardware preparation](runtime_config/profile_native_ultimate/hardware_334f_preparation_20261021/README.md)
-includes the mandatory H10/H11/resource addendum. This Mac/WUP-028 observer
-preparation and actual approved-preflight eligibility remain. GP-NATIVE-001 is
-HARDWARE_TEST_REQUIRED for the exact retained UF2 SHA256
+The [corrected334-row packet and final Mac reader review](runtime_config/profile_native_ultimate/mac_observer_20261021/README.md)
+retain the mandatory H10/H11/resource addendum and exact linked-wire correction.
+The [bounded preflight packet](runtime_config/profile_native_ultimate/hardware_preflight_approval_20261021.md)
+awaits explicit owner approval. Actual Mac access is UNVERIFIED; no device call
+occurred. GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED for retained UF2 SHA256
 `41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
 No device action is approved; timing/highwater NOT_MEASURED, hardware/Nunchuk
 NOT_TESTED, RT2 DEFERRED/UNRESOLVED, root cause UNPROVEN. Exact human HEP PASS,

@@ -1,0 +1,183 @@
+{
+  "packet_id": "GP_NATIVE_001_MAC_PREFLIGHT_V1",
+  "classification": "CONCRETE_BOUNDED_PREFLIGHT_PROPOSAL_NOT_DEVICE_APPROVAL",
+  "approval_status": "PENDING_EXPLICIT_OWNER_REPLY",
+  "owner_approval": null,
+  "device_calls_executed": false,
+  "sourcefree_base": "a35e4436c0b75ca3b80c918fe8ba0be2e1cde581",
+  "future_candidate": {
+    "git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+    "uf2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+    "uf2_bytes": 1041408,
+    "elf_sha256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d",
+    "bin_sha256": "ce18487edc51cde3dd08e3e401ce2b4028e50ecd5a1eed82468cc6ef9843a6fb",
+    "installed_by_this_packet": false
+  },
+  "host": {
+    "owner_statement": "this Mac for XInput; same MOD. WUP-028 GC Adapter as earlier tests",
+    "os": "macOS27.0.1",
+    "build": "26A434",
+    "unit": "Owner-reported likely Mk6; exact unit/revision/location/adapter port unverified",
+    "observer_custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+    "binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+    "source_sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2",
+    "verifier_sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+    "physical_access": "UNVERIFIED"
+  },
+  "allowed_if_approved": [
+    "Owner identifies intended unit, available LF6/7/8 and actual adapter port. Normal connect/disconnect with every input released; ordinary boot bookkeeping/recovery/migration may occur under unknown current firmware.",
+    "At most one exact-target registry-only inspect per route xinput/switch/wup028; no USB/HID user-client open in inspect. No unrelated-device survey.",
+    "At most one 5-second/3-report purpose=preflight capture per already accessible, identified route; no runtime/backend chord or settings selection. Only raw input, normal nonseizing opens, one selected interface/location/port.",
+    "Only if separately selected by the explicit owner reply: one fixed WUP OUT byte0x13 in its one designated capture, no retry. This starts adapter polling/probe/origin traffic and is not read-only USB input.",
+    "On a positively identified already reachable ordinary Configurator CDC session: one existing GET_CONFIG backup, one explicit STATUS plus each LIST/READ tool call's fixed STATUS preflight, bounded complete LIST pagination and READ of every available original ID; existing fixed current-Configurator runtime-identity query. Serial115200; no1200-baud reset.",
+    "Host-only raw custody/rehash, original Config/store/context/chord/eligibility analysis and final route/equipment findings. No preflight-to-candidate evidence promotion."
+  ],
+  "bounds": {
+    "inspect_per_route": 1,
+    "capture_per_route": 1,
+    "capture_seconds": 5,
+    "capture_max_reports": 3,
+    "wup_init13_submissions_at_most": 1,
+    "wup_init13_requires_explicit_inclusion": true,
+    "list_page_size": 8,
+    "list_limit": "existing64-entry directory; follow actual cursor, no cycling or retry",
+    "read_ids_max": 64,
+    "configuration_backups": 1,
+    "configurator_identity_queries": 1,
+    "automatic_retries": 0,
+    "list_calls_max": 8,
+    "status_queries_max": 73
+  },
+  "entry_boundary": "Only already reachable, owner-identified routes are opened. Unknown Configurator/backend entry is a stop. No guessed cold-start chord, saved-backend selection, runtime/watchdog switch or recovery action is approved. A later exact physical-entry proposal may use verified original backup/source plus owner knowledge; it requires separate approval before that entry.",
+  "forbidden": [
+    "candidate installation/flashing",
+    "Config/SET_CONFIG/native-packet --execute",
+    "ProfileStore CREATE/UPDATE/set-reference/DELETE",
+    "controller reset/reboot commands",
+    "runtime mode/backend/watchdog chords",
+    "guessed startup/recovery chords",
+    "arbitrary USB control/output/feature requests",
+    "WUP rumble0x11",
+    "driver detach/seize/install/root or OS permission/settings workaround",
+    "automatic retry/reconnect/rollback/erase",
+    "target metrics request on unknown existing firmware",
+    "physical H1-H12 acceptance campaign"
+  ],
+  "stop_conditions": [
+    "ambiguous unit/registry match/port",
+    "unknown physical entry or actual source/binding mismatch",
+    "normal access refused or timeout/no complete report",
+    "wrong descriptor/header/length/connected-port status",
+    "pending/failed/unknown WUP completion or count not exactly1",
+    "non-normal STATUS/recovery/migration/uncertainty/unsupported source",
+    "backup or original payload preservation incomplete",
+    "any requested action outside approved choices"
+  ],
+  "evidence_limits": [
+    "current firmware UNKNOWN until separately bound; F is expected-wire source, not device attestation",
+    "preflight raw reports never establish exact-candidate or console PASS",
+    "WUP37 is adapter USB data, not electrical Joybus capture",
+    "OLED shows six values and one priority icon, not every simultaneous bit",
+    "runtime timing/highwater NOT_MEASURED; GameCube/Switch timing NOT_MEASURED; earlier startup unobserved",
+    "hardware/Nunchuk NOT_TESTED; RT2 DEFERRED/UNRESOLVED; root cause UNPROVEN",
+    "public backups omit raw filesystem/unrelated dirs/orphans/historical revisions/journal; no raw byte rollback promise"
+  ],
+  "exact_scripts_from_clean_F": {
+    "tools/glyph_serial_config_tool.py": {
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+      "bytes": 46658
+    },
+    "tools/glyph_profile_store_production_tool.py": {
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef",
+      "bytes": 10878
+    },
+    "tools/glyph_profile_store_candidate_tool.py": {
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+      "bytes": 19077
+    },
+    "tools/glyph_runtime_identity_tool.py": {
+      "sha256": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+      "bytes": 9156
+    },
+    "schema/haybox/config.proto": {
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "bytes": 33965
+    },
+    "schema/haybox/config.options": {
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+      "bytes": 6441
+    }
+  },
+  "bindings": {
+    "hardware_334f_preparation_20261021/current_packet_exactF.json": {
+      "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
+      "bytes": 2772067
+    },
+    "hardware_334f_preparation_20261021/reviewed_packet.json": {
+      "sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+      "bytes": 2772086
+    },
+    "hardware_334f_preparation_20261021/reviewed_coverage.json": {
+      "sha256": "ad14e6e3b2fc5b76286c81adc23d25bdacc0053d59f35a8e64d2f39433ebeae5",
+      "bytes": 26271
+    },
+    "hardware_334f_preparation_20261021/session_plan_original.md": {
+      "sha256": "fa4897e3993f76ea906ad67d026fd7345e00884d93be063320de8e7c107ace06",
+      "bytes": 15707
+    },
+    "hardware_334f_preparation_20261021/session_plan_addendum.md": {
+      "sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6",
+      "bytes": 10924
+    },
+    "mac_observer_20261021/corrected_child/REPORT.md": {
+      "sha256": "f9b75929452de32af72a47bcc3a7de0ba57ced22579d786b5c07573479c599f6",
+      "bytes": 7468
+    },
+    "mac_observer_20261021/corrected_child/PINS.json": {
+      "sha256": "cdf9fa613567d1041ad96946492f2c2a18ee2de87e0d7b32cb9ef03042527329",
+      "bytes": 22829
+    },
+    "mac_observer_20261021/corrected_child/TECHNICAL_HOLD.json": {
+      "sha256": "d6f369f35c28fd56d539be1d3c6f04b58a35ce5fc6534040d662f1ead07f5cdf",
+      "bytes": 5006
+    },
+    "mac_observer_20261021/corrected_child/MAC_OBSERVER_PROCEDURE.md": {
+      "sha256": "d708c9f3724e77c8e4021917a3963203912aaa00f0a2083d8374e897d253d66c",
+      "bytes": 17491
+    },
+    "mac_observer_20261021/independent_repair_ack/REPORT.md": {
+      "sha256": "dea715154d3e60b4ba2ba3fa70022ecfae74cf592255e2960c5a67a2ba8e9102",
+      "bytes": 6987
+    },
+    "mac_observer_20261021/independent_repair_ack/PINS.json": {
+      "sha256": "604ff494860dee8b595c8c01660dcca11f5735042c653d74d447b8d8d07e43bc",
+      "bytes": 25646
+    },
+    "mac_observer_20261021/host_artifact_custody.json": {
+      "sha256": "0ae9e800f1942735b02ae770a08a931b439ad38df0bd6262202054093912ee61",
+      "bytes": 2607
+    },
+    "mac_observer_20261021/host_artifact_review_binding.json": {
+      "sha256": "52ea67812eb45ada504081fb975608225c4f598c837131470241e954262a238a",
+      "bytes": 893
+    },
+    "switch_wire_erratum_20261021/REPORT.md": {
+      "sha256": "672d1e7ae3588fbfc565d58891838cc28494a1afc0a8491216930e0f0de6a6b3",
+      "bytes": 8892
+    },
+    "switch_wire_erratum_20261021/glyph-native-final334-switch-root-replay-20261021.json": {
+      "sha256": "a4897766b4b2fc863587eb3b9c42146af679ec552d1dd9069ed7f45178f45354",
+      "bytes": 710
+    },
+    "ABC_final_source_review_20261021/REPORT.md": {
+      "sha256": "548cd19dd36a85f35bd248813e0fcc80a35602a512699b88fc8923433feec3a1",
+      "bytes": 14500
+    },
+    "final_334f_resource_proof_20261021/REPORT.md": {
+      "sha256": "0c5faf5217e8a636206bb4ae6ed359f0d09ddd98ecbb571b2bd7512e79798355",
+      "bytes": 17428
+    }
+  },
+  "next_gate": "After actual eligible preflight, separate exact-candidate flash/profile/physical packet and explicit owner approval; then human HEP PASS, tested-source integration, fresh integration review and strict DONE."
+}

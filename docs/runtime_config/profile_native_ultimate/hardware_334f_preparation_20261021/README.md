@@ -1,8 +1,8 @@
 # Exact334f hardware preparation
 
-Status: independently reviewed offline packet; equipment-specific observer preparation pending. **NOT APPROVED FOR DEVICE.** Hardware/Nunchuk NOT_TESTED; timing/highwater NOT_MEASURED.
+Status: corrected exact-F offline packet and Mac observer independently reviewed; explicit [bounded preflight approval](../hardware_preflight_approval_20261021.md) pending. **NOT APPROVED FOR DEVICE.** Hardware/Nunchuk NOT_TESTED; timing/highwater NOT_MEASURED.
 
-- [Reviewed334-row packet](reviewed_packet.json) and [all18-family/H1-H12 coverage](reviewed_coverage.json) are the independent reviewer's exact derivatives. Original rows,17 contexts and all observation-null fields are unchanged.
+- [Current334-row packet](current_packet_exactF.json) is exact dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744; only11 Switch.lx fields differ from the [historical reviewed packet](reviewed_packet.json), under the [exact-F wire erratum](../switch_wire_erratum_20261021/README.md). The original review predates that discovery and remains historical. [Historical reviewed334-row packet](reviewed_packet.json) and [all18-family/H1-H12 coverage](reviewed_coverage.json) are the independent reviewer's exact derivatives. Original rows,17 contexts and all observation-null fields are unchanged.
 - [Original session plan](session_plan_original.md) plus the mandatory [session addendum](session_plan_addendum.md) define the procedure. The addendum supersedes only the stale resource attachment, pending offline H11 engineering and incomplete H10 identity procedure.
 - [Physical input index](physical_selection_index.md) and [owner equipment information](owner_equipment_context.json) identify the current concrete preparation and its observation gaps.
 - [Independent packet review](independent_review/REPORT.md) and [review archive manifest](independent_review/manifest.json) retain source/fixture checks, both actual enum-ABI H10/H11 host tests, meaningful negative controls and exact resource binding.
@@ -11,3 +11,5 @@ Status: independently reviewed offline packet; equipment-specific observer prepa
 The exact instrumented candidate is334fbd06e4541c120b0db423e5be7e112eb1f6f6; UF2 SHA25641305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982. [Current build/resource status](../exact_candidate_334f_status_20261021.md) closes structural P1 for those exact bytes. This is not target measurement or physical acceptance.
 
 Absolute private paths inside immutable reports/JSON remain provenance. The flat files above and content-addressed compressed objects preserve those exact inputs; archive manifests map original source paths to retained objects. Execute only explicitly approved operations using exact F scripts after preparation resolves the remaining observer/session conditions. Two disposable IDs, fresh fences, untouched original payloads, logical restoration, monotonic metadata caveats and stop-on-uncertainty remain mandatory. No raw-filesystem rollback, automatic flash/recovery, RT2 work, hot gameplay writer or route acceptance transfer is supplied.
+
+[Corrected Mac reader/current review and custody](../mac_observer_20261021/README.md) resolve offline tool preparation. Actual access, original-state/entry eligibility and hardware observations remain unverified. No device operation is approved by this preparation.

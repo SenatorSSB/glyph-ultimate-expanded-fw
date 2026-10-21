@@ -1,0 +1,133 @@
+{
+  "device_calls_executed": false,
+  "files": {
+    "F_Switch_HID_descriptor.bin": {
+      "bytes": 86,
+      "sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280"
+    },
+    "actual_callback_owner_guard": {
+      "bytes": 80184,
+      "sha256": "b5dc76043dd8974d8b8bce3a51e63451d6d54b1e112414a4f1e1ccac96bf938f"
+    },
+    "actual_callback_owner_guard.cpp": {
+      "bytes": 6300,
+      "sha256": "4b35007cedcbd0c968b67b9f3f75ce12e3f81f89b5555c1c0a8c25b0c5fa91b6"
+    },
+    "actual_callback_owner_guard_provenance.json": {
+      "bytes": 2400,
+      "sha256": "c9264ae14f26bbb1b0161674227ce5e56a09023e79d228d457b7a24264279b3a"
+    },
+    "actual_report_fixture_encoder": {
+      "bytes": 331136,
+      "sha256": "6629c8b89aced7176571011bac0fce846e3ad99a76405acd6f8ace299d8d3055"
+    },
+    "actual_report_fixture_encoder.cpp": {
+      "bytes": 308292,
+      "sha256": "1797586b75e23471f043c8d000dff4bb4c9b832a16481824be6c19187538f447"
+    },
+    "build_commands.json": {
+      "bytes": 1374,
+      "sha256": "b20db0bb0d8dfd0cad4edceae6ae6d0e5740204db0159b76d2bdec044057ab75"
+    },
+    "build_parser_fixtures.py": {
+      "bytes": 10704,
+      "sha256": "3c0e93725cc31f72da905f04f4e0bbbfe6dbead50c3d6c03dc59363a046c9d7e"
+    },
+    "capture_correspondence_tests.json": {
+      "bytes": 3185,
+      "sha256": "14f75be1a5d5ecf6a31257713d225df0e33b58610af4166e5adc2686c02e794e"
+    },
+    "count_verifier_tests.json": {
+      "bytes": 7973,
+      "sha256": "57744c18d4a63fa33093ffc8dcbd349d908873bbd5a428a1bd3d6532d4485b55"
+    },
+    "encoding_field_provenance.json": {
+      "bytes": 132641,
+      "sha256": "22afea0452302da618c630847ed6522293d3ef373f25b72163a471c699e500d7"
+    },
+    "expected_switch_descriptor.hpp": {
+      "bytes": 514,
+      "sha256": "8160f2f371dfdcec2fa30495a5b3e46362ec52cf7d51c49c37c305021d17db02"
+    },
+    "focused_repair_commands.json": {
+      "bytes": 3817,
+      "sha256": "af1b869291ef3651c6488a1783e1b2b8e82385e7136d69119293a1702fc4854a"
+    },
+    "focused_repair_validation.json": {
+      "bytes": 420,
+      "sha256": "c96da31bd818d4a1f14f6dd65863a12ea9672f7b8cc675251fc1902751b8c43f"
+    },
+    "mac_input_observer": {
+      "bytes": 79536,
+      "sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473"
+    },
+    "mac_input_observer.cpp": {
+      "bytes": 20672,
+      "sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2"
+    },
+    "native_offline_branch_tests.json": {
+      "bytes": 1407,
+      "sha256": "f457b10d1186b444d1d89c8f909d3907af683324d27b7e3e92b684aeb12bfdec"
+    },
+    "negative_and_boundary_fixtures.json": {
+      "bytes": 16577,
+      "sha256": "ef360a7e3baac25b1074c700efc3055ed007bd8b717a2f9ac82eec03654f1366"
+    },
+    "observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb"
+    },
+    "parent_count_negative": {
+      "bytes": 52376,
+      "sha256": "080a5d2bf80a33d77eb4eac409e0fa1fddd1702232ebeed1660d3fb1e66654cb"
+    },
+    "parent_lifetime_negative": {
+      "bytes": 54216,
+      "sha256": "c86da80055888c1f0d6d7730c8950b3be060a3cf0b5f02705c3e1b05e475b848"
+    },
+    "parser_cli": {
+      "bytes": 40328,
+      "sha256": "e48a53dbb310c1bc364b3c8465dca2b267b5fac6c07bb423a8a331d50679873e"
+    },
+    "parser_cli.cpp": {
+      "bytes": 479,
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7"
+    },
+    "report_parser_fixtures.json": {
+      "bytes": 873869,
+      "sha256": "2f7d90c067abfbf4bf6f045b814009e45168ad144c0b406e5f202c951fadc915"
+    },
+    "reviewed_packet_exactF_wire_observer_draft.json": {
+      "bytes": 2772067,
+      "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+    },
+    "test_capture_correspondence.py": {
+      "bytes": 4078,
+      "sha256": "f83e89162bbceae60bfedd459fd09313fed31e4e3e37bd23a8e6ac7a091f3464"
+    },
+    "test_focused_repair.py": {
+      "bytes": 12323,
+      "sha256": "78c5bca8dbf9dc715d05bff4a2c893a27e9f8d5a48abb1c812dc9ba094c925d1"
+    },
+    "validation.json": {
+      "bytes": 479,
+      "sha256": "b1c748ca89372db8c67da316afe3ed368f2d066b4d7696d7904ed3f9c9a6d724"
+    },
+    "verify_capture.py": {
+      "bytes": 5762,
+      "sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006"
+    }
+  },
+  "hardware": "NOT_TESTED",
+  "packet_unchanged": true,
+  "parent_PINS_sha256": "bea4a78d752c5234222c3eae8d49dbde8d7372393f38487eda0400f507e0f070",
+  "parent_root": "/private/tmp/glyph-native-mac-observer-preparation-20261021",
+  "parent_source_sha256": "6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169",
+  "repair_scope": [
+    "SDK actualcompletedcount1/status0 + verifier guard",
+    "pending-aware noexcept whole-reader retention/Capture detachment + null-tolerant late callbacks"
+  ],
+  "same_independent_repair_ACK": "PENDING",
+  "source_F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "state": "CORRECTED_HOST_CHILD_SOURCE_AND_PACKET_HOLD"
+}

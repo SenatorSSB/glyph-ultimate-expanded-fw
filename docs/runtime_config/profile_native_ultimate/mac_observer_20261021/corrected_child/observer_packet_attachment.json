@@ -1,0 +1,53 @@
+{
+  "final_packet": {
+    "all_reviewed_resource_H10_H11_addendum_keys_preserved": true,
+    "only_outer_Switch_lx_fields_corrected": 11,
+    "path": "/private/tmp/glyph-native-mac-observer-review-repair-20261021/reviewed_packet_exactF_wire_observer_draft.json",
+    "reviewed_base_sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+    "rows": 334,
+    "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+  },
+  "hardware": "NOT_TESTED",
+  "independent_new_tool_erratum_review": "Parent review HOLD preserved; author two-findings repair tested; SAME independent child ACK pending",
+  "observer": {
+    "binary": "/private/tmp/glyph-native-mac-observer-review-repair-20261021/mac_input_observer",
+    "binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+    "device_inspect_capture_bodies_executed": false,
+    "pure_selftest": "PASS",
+    "runtime_access": "UNVERIFIED",
+    "source": "/private/tmp/glyph-native-mac-observer-review-repair-20261021/mac_input_observer.cpp",
+    "source_sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2"
+  },
+  "operations_requiring_separate_approval": [
+    "Exact VID/PID registry inspection",
+    "Normal selected interface/HID open and finite input reports",
+    "Only if explicitly included, one WUP adapter OUT13 start-polling byte",
+    "Existing reviewed backup/identity operations and separately specified verified raw cold entry; no runtime/watchdog switching or host Config/ProfileStore mutation in initial preflight"
+  ],
+  "parent": {
+    "PINS_sha256": "bea4a78d752c5234222c3eae8d49dbde8d7372393f38487eda0400f507e0f070",
+    "independent_HOLD_report_sha256": "5fce9d5d69fb8c3ac51ac877cef51dd545673d9f387c3c0788bc09ab5b464d12",
+    "path": "/private/tmp/glyph-native-mac-observer-preparation-20261021"
+  },
+  "physical_approval": null,
+  "plans": [
+    "session_plan.md",
+    "session_plan_addendum.md",
+    "MAC_OBSERVER_PROCEDURE.md"
+  ],
+  "repair_findings": [
+    "known completedbytecount1/status0 +strict verifier +journal",
+    "noexcept pendingwholeowner retention +Capture detach +nullsafe late callbacks"
+  ],
+  "state": "FOCUSED_HOST_CORRECTED_CHILD_PENDING_SAME_REVIEWER_ACK",
+  "validation": {
+    "complete_report_vectors": 1002,
+    "focused_callback_guard_and_ownership": "PASS_ASAN_UBSAN_PURE_MOCK_ONLY",
+    "native_pure_offline_branches": 5,
+    "negative_boundary_vectors": 48,
+    "parent_runtime_negative_controls_reproduced": true,
+    "synthetic_capture_cases": 14,
+    "unsafe_float_assignments_executed_for_corrected_rows": false,
+    "verifier_count_cases": 15
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "EXACT_F_FINITE_SWITCH_MACHINE_CONVERSION_PROOF_NOT_PHYSICAL",
+  "F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "ELF_sha256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d",
+  "selected_rows": 334,
+  "selected_axis_values": 1336,
+  "changed_rows": 11,
+  "changed_axes": 11,
+  "raw_domain_checked": 256,
+  "orientations": 2,
+  "conversion_machine_paths": 3,
+  "conversion_replays": 1536,
+  "formula_X": "max(0,floor((5*x-128)/4)) & 255",
+  "formula_Y": "max(0,floor((1148-5*y)/4)) & 255",
+  "target_ROM_revision": "NOT_OBSERVED; official B0 shim/B1/B2 union yields same finite-domain bytes",
+  "portable_cpp": "Out-of-range floating-to-uint8 assignment is undefined by [conv.fpint]; exact F emitted machine semantics, not portable-source repair or acceptance.",
+  "physical": "NOT_TESTED",
+  "source_or_artifact_mutations": false,
+  "changed_ids": [
+    "O073",
+    "O074",
+    "O077",
+    "O078",
+    "O079",
+    "O080",
+    "O266",
+    "N013",
+    "N017",
+    "N106",
+    "N125"
+  ]
+}

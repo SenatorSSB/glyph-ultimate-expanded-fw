@@ -1,0 +1,14 @@
+{
+  "kind": "SEPARATE_FINAL_REVIEW_BINDING_ORIGINAL_CUSTODY_UNCHANGED",
+  "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+  "custody_sha256": "0ae9e800f1942735b02ae770a08a931b439ad38df0bd6262202054093912ee61",
+  "corrected_packet_sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
+  "independent_ack_report_sha256": "dea715154d3e60b4ba2ba3fa70022ecfae74cf592255e2960c5a67a2ba8e9102",
+  "independent_ack_pins_sha256": "604ff494860dee8b595c8c01660dcca11f5735042c653d74d447b8d8d07e43bc",
+  "independent_ack_archive_manifest_sha256": "632e457636bf1f01934722fc173dfe331f03cb30cbc36053421f3ad372f3626a",
+  "review_disposition": "PASS_TWO_P2_REPAIRS_NO_ADDITIONAL_BOUNDED_DEFECT",
+  "device_access": "UNVERIFIED",
+  "device_action": false,
+  "physical_approval": null
+}

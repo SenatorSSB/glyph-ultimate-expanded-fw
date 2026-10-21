@@ -1,0 +1,162 @@
+{
+  "classification": "FINITE_MAC_OBSERVER_WIRE_DERIVATIVE_REVIEW_TWO_CONCRETE_HOST_FINDINGS",
+  "disposition": "HOLD_TWO_P2_REPAIR_REQUIRED",
+  "parent_technical_hold_sha256": "7748af15a16f1126db2a5fa82fd654124a5a01aeb225c44130719c7d681f9480",
+  "source_F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "firmware_source_resource_reports": "UNCHANGED_IMMUTABLE",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "capture_inspect_enumeration_device_operations": false,
+  "files": {
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/F_Switch_HID_descriptor.bin": {
+      "bytes": 86,
+      "sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/REPORT.md": {
+      "bytes": 11092,
+      "sha256": "5fce9d5d69fb8c3ac51ac877cef51dd545673d9f387c3c0788bc09ab5b464d12"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/SDK-WritePipeAsync-callback-contract.txt": {
+      "bytes": 1281,
+      "sha256": "a24fc4389d46432d1ebe5bddf3f54f50c89fa1f28df6f8d87cad7a144a201604"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/actual_report_fixture_encoder-build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/actual_report_fixture_encoder.cpp": {
+      "bytes": 308292,
+      "sha256": "1797586b75e23471f043c8d000dff4bb4c9b832a16481824be6c19187538f447"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/capture_correspondence_tests.json": {
+      "bytes": 3130,
+      "sha256": "6f64b9436b3a36c4851cb5b88340d16be73f185b8913cedd093f9a997bbe0187"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/expected_switch_descriptor.hpp": {
+      "bytes": 514,
+      "sha256": "8160f2f371dfdcec2fa30495a5b3e46362ec52cf7d51c49c37c305021d17db02"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/final-preparer-delivery-binding.json": {
+      "bytes": 13420,
+      "sha256": "b3c68b741b8edea6757bc253bf76bef1907ded838ec855d89b7f7066e5f285b4"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/independent-encoded-report-output.txt": {
+      "bytes": 56446,
+      "sha256": "349857678739832696aa33d4544a68adb121b514732a2409b9b60658f585e9db"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/independent-parser-proof.json": {
+      "bytes": 121589,
+      "sha256": "c1fc62b7fd45315e0d59cfbb4a7a3d9fb81796dfbea550c3aa8570952e203243"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/mac_input_observer-build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/mac_input_observer.cpp": {
+      "bytes": 19070,
+      "sha256": "6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner-run.log": {
+      "bytes": 4344,
+      "sha256": "abf5db19e1e6a2c3ef33d73f235cc410aeb0a0a10d6b78e8f059f4d2c93f31ce"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner.cpp": {
+      "bytes": 1306,
+      "sha256": "7ba36bdd5b0b276ee1ac3ea09c25e620e65c8c4f5375beb3e9305a432854906f"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative_and_boundary_fixtures.json": {
+      "bytes": 16577,
+      "sha256": "ef360a7e3baac25b1074c700efc3055ed007bd8b717a2f9ac82eec03654f1366"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/offline-commands.json": {
+      "bytes": 480787,
+      "sha256": "fdd33660e9b48972ad8ff83d1ef2e7af8ed6e59aae104eb423c28e7f2a7108c1"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/offline_review.py": {
+      "bytes": 4255,
+      "sha256": "e0858282dfd10eff53a992278d3b331c871661d8085b194fe6580a0fcca34f76"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/parser_cli-build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/parser_cli.cpp": {
+      "bytes": 479,
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/pending-lifetime-finding.json": {
+      "bytes": 3267,
+      "sha256": "7757b6467a403911188aaa5784a3534a06f5d87e4d228f03e5155bb58f028b6c"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/pending_lifetime_witness.py": {
+      "bytes": 3546,
+      "sha256": "f85d22c43594814e17c916ac2c1bafa182d2760defa0ea88eba4ce56637e115c"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion-run.log": {
+      "bytes": 57,
+      "sha256": "9b4af730a94ffdb06f0e60f5ab95f813c6bfdf8b311fb2b060156f270ab62712"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion.cpp": {
+      "bytes": 1277,
+      "sha256": "d7213183791a15df05d2c624b3cf29ba8e1bd649facee9687594607d3c37d8ce"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/report_parser_fixtures.json": {
+      "bytes": 873869,
+      "sha256": "2f7d90c067abfbf4bf6f045b814009e45168ad144c0b406e5f202c951fadc915"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/reviewed_packet_exactF_wire_observer_draft.json": {
+      "bytes": 2772067,
+      "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-callback-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-callback-run.log": {
+      "bytes": 207,
+      "sha256": "96be96c0a08e9e5595dfd263ce946016ac7af9910c6e93f691aec0d9d12c77c4"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-callback-witness.cpp": {
+      "bytes": 640,
+      "sha256": "2c742f5bb4123caf612c45f65facf2fa6548e1b67ecce7f4f04f759f892d1dd3"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-finding.json": {
+      "bytes": 2906,
+      "sha256": "37b3f914d00232b158e375e2c5b4531598142abd60c8daa8c22cd38d6d97c0e5"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short_write_witness.py": {
+      "bytes": 3899,
+      "sha256": "b3e43941ed1d75f6703aa7646716ee07ec32949245be8b2a85b025181e8aa8fa"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/technical-input-checks.json": {
+      "bytes": 3332,
+      "sha256": "d7d788dd79eab95f741cf3e2275127885d73dbd9b2cc384ff735ce56a6dee8ff"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/test_capture_correspondence.py": {
+      "bytes": 4078,
+      "sha256": "f83e89162bbceae60bfedd459fd09313fed31e4e3e37bd23a8e6ac7a091f3464"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/verify_capture.py": {
+      "bytes": 5406,
+      "sha256": "6f3e436de45b1d1b6e6c0abe3b07e9510b1f0f1a7359f196a6907d64a4cc05eb"
+    },
+    "/private/tmp/glyph-native-mac-observer-independent-review-20261021/wire-derivative-and-binary-correspondence.json": {
+      "bytes": 2562,
+      "sha256": "a5522f18d493d1127f5f08caf8043d97d31a7e0c85ea78f1129a2491a77a39a0"
+    }
+  }
+}

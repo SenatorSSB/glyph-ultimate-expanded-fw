@@ -1,0 +1,64 @@
+from pathlib import Path
+import json,hashlib,gzip,re,subprocess
+
+W=Path('/private/tmp/glyph-native-curation-20261020');R=W/'docs/runtime_config/profile_native_ultimate';V=R/'observer_preflight_publication_validation_20261021';F=Path('/private/tmp/glyph-profile-native-20261020');BASE='a35e4436c0b75ca3b80c918fe8ba0be2e1cde581'
+def sh(*a,cwd=W):return subprocess.check_output(a,cwd=cwd,text=True)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def queue(text):
+ a=text.index('```json',text.index('<!-- queue-state:start -->'))+7;b=text.index('```',a);return json.loads(text[a:b])
+oldq=queue(sh('git','show',BASE+':docs/project/ACTIVE_AGENT_QUEUE.md'));newq=queue((W/'docs/project/ACTIVE_AGENT_QUEUE.md').read_text());q=json.loads(json.dumps(oldq));olditem=next(i for i in q['items'] if i['id']=='GP-NATIVE-001');item=next(i for i in newq['items'] if i['id']=='GP-NATIVE-001');olditem['hardware_evidence_gaps']=item['hardware_evidence_gaps'];assert q==newq
+assert item['status']=='HARDWARE_TEST_REQUIRED' and item['hardware_result'] is None and item['hardware_evidence_record'] is None and item['hardware_evidence_dependency_satisfied'] is False
+assert item['candidate_git_sha']=='334fbd06e4541c120b0db423e5be7e112eb1f6f6' and item['candidate_base_configurator_sha']=='c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351'
+status=json.loads((R/'exact_candidate_334f_status_20261021.json').read_text());archives=[]
+for rel,h in status['archive_manifests'].items():
+ p=R/rel;assert sha(p)==h,(p,h);m=json.loads(p.read_text());inputs=0
+ for e in m['inputs']:
+  if e['archived']:
+   z=p.parent/e['relative'];assert sha(z)==e['compressed_sha256'];raw=gzip.decompress(z.read_bytes());assert hashlib.sha256(raw).hexdigest()==e['raw_sha256'] and len(raw)==e['raw_bytes'];inputs+=1
+  else:
+   z=Path(e['custody_reference']);assert sha(z)==e['raw_sha256'] and z.stat().st_size==e['raw_bytes'];inputs+=1
+ for e in m['flat']:
+  z=p.parent/e['relative'];assert sha(z)==e['sha256'] and z.stat().st_size==e['bytes']
+ archives.append({'manifest':rel,'sha256':h,'inputs_rehashed':inputs})
+
+old=json.loads((R/'hardware_334f_preparation_20261021/reviewed_packet.json').read_text());new=json.loads((R/'hardware_334f_preparation_20261021/current_packet_exactF.json').read_text());diff=[]
+def compare(a,b,path=()):
+ if isinstance(a,dict):
+  assert isinstance(b,dict) and a.keys()==b.keys(),path
+  for k in a:compare(a[k],b[k],path+(k,))
+ elif isinstance(a,list):
+  assert isinstance(b,list) and len(a)==len(b),path
+  for k,(x,y) in enumerate(zip(a,b)):compare(x,y,path+(k,))
+ elif a!=b:diff.append({'path':list(path),'old':a,'new':b})
+compare(old,new);assert len(diff)==11
+expected={'O073':0,'O077':0,'O078':0,'O266':0,'N013':0,'N017':0,'N106':0,'N125':0,'O074':14,'O079':14,'O080':14}
+for d in diff:
+ path=d['path'];assert path[0]=='rows' and path[2:]==['expected_literal_backend_assignment_fields',1,'fields','lx'],path
+ row=new['rows'][path[1]];assert row['expected_literal_backend_assignment_fields'][1]['backend']=='Switch';assert expected.pop(row['selection_id'])==d['new']
+assert not expected and len(new['rows'])==334 and len(new['contexts'])==17
+assert all(row['observed'] is None and row['result']=='NOT_TESTED' for row in new['rows'])
+assert sha(R/'hardware_334f_preparation_20261021/current_packet_exactF.json')=='dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744'
+
+packet=json.loads((R/'hardware_preflight_approval_20261021.json').read_text());assert packet['owner_approval'] is None and packet['device_calls_executed'] is False and not packet['future_candidate']['installed_by_this_packet']
+for rel,e in packet['bindings'].items():assert sha(R/rel)==e['sha256'] and (R/rel).stat().st_size==e['bytes'],rel
+for rel,e in packet['exact_scripts_from_clean_F'].items():assert sha(F/rel)==e['sha256'] and (F/rel).stat().st_size==e['bytes'],rel
+C=Path(packet['host']['observer_custody']);cust=json.loads((C/'custody.json').read_text())
+for name,e in cust['files'].items():assert sha(C/name)==e['sha256'] and (C/name).stat().st_size==e['bytes'],name
+assert sha(C/'mac_input_observer')==packet['host']['binary_sha256'] and sha(C/'mac_input_observer.cpp')==packet['host']['source_sha256'] and sha(C/'verify_capture.py')==packet['host']['verifier_sha256']
+assert sha(R/'hardware_preflight_approval_20261021.json')==status['preflight']['scope_sha256']
+assert sh('git','rev-parse','HEAD',cwd=F).strip()==packet['future_candidate']['git_sha'] and sh('git','rev-parse','HEAD^{tree}',cwd=F).strip()==packet['future_candidate']['tree'] and sh('git','status','--porcelain',cwd=F)==''
+fc=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')/Path(status['artifacts']['preserved_firmware_artifact_locator']).parent
+for name,key in [('firmware.uf2','uf2'),('firmware.elf','elf'),('firmware.bin','bin')]:assert sha(fc/name)==status['artifacts'][key]['sha256'] and (fc/name).stat().st_size==status['artifacts'][key]['bytes']
+
+changed=set(sh('git','diff','--name-only',BASE).splitlines()+sh('git','ls-files','--others','--exclude-standard').splitlines());assert changed and all(p.startswith('docs/') for p in changed)
+assert all(not (W/p).is_symlink() for p in changed)
+newmd=[W/p for p in changed if p.endswith('.md') and p not in sh('git','diff','--name-only',BASE).splitlines()]
+link_count=0
+for p in newmd:
+ for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',p.read_text()):
+  if re.match(r'^[a-z]+:',target) or target.startswith('#'):continue
+  target=target.split('#')[0];assert (p.parent/target).exists(),(str(p),target);link_count+=1
+subprocess.run(['git','diff','--check'],cwd=W,check=True)
+result={'classification':'FOCUSED_SOURCEFREE_PREFLIGHT_PUBLICATION_NO_DEVICE_OR_GLOBAL_PASS','framework':'PASS','sequence':'PASS','navigation':'PASS','diff_scope':'PASS_DOCS_ONLY','diff_check':'PASS','other_orders_unchanged':102,'only_native_queue_field_changed':'hardware_evidence_gaps','candidate_tuple_caps_frozen_contract_protocol_and_all_behavior_unchanged':True,'hardware_result':None,'hardware_evidence_record':None,'device_approval':None,'device_calls_executed':False,'hardware':'NOT_TESTED','actual_Mac_access':'UNVERIFIED','target_timing_highwater':'NOT_MEASURED','archives':archives,'total_archive_inputs_rehashed':sum(x['inputs_rehashed'] for x in archives),'current_packet_diff':diff,'current_packet_other_content_unchanged':True,'host_custody_files_rehashed':len(cust['files']),'F_source_scripts_and_target_custody_match':True,'new_markdown_local_links_checked':link_count,'changed_doc_paths_at_check':len(changed),'full_docs_surface':'NOT_RERUN; prior historical C024 authentication/current-state-length/unchanged-boundary-phrase failures preserved in exact_334f_hardware_wait_validation_20261021; no full aggregate PASS','hardware_approval_packet_sha256':sha(R/'hardware_preflight_approval_20261021.json')}
+put=lambda p,j:p.write_text(json.dumps(j,indent=2)+'\n');put(V/'result.json',result)
+print(json.dumps({k:result[k] for k in ['classification','total_archive_inputs_rehashed','host_custody_files_rehashed','new_markdown_local_links_checked','changed_doc_paths_at_check','hardware_approval_packet_sha256']},indent=2))

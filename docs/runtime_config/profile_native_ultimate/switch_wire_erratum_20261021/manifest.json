@@ -1,0 +1,377 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/REPORT.md",
+      "relative": "REPORT.md",
+      "bytes": 8892,
+      "sha256": "672d1e7ae3588fbfc565d58891838cc28494a1afc0a8491216930e0f0de6a6b3"
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/PINS.json",
+      "relative": "PINS.json",
+      "bytes": 7170,
+      "sha256": "e158c36f280f8125fcb4487113c525aa70873477ca5a4321457a35f55b308aea"
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/result.json",
+      "relative": "result.json",
+      "bytes": 1022,
+      "sha256": "cc0b0791ec68f30ad8d3c8ab79fc7a870e1ff815bf680c3d3f5980c64822afb6"
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/changed11.json",
+      "relative": "changed11.json",
+      "bytes": 16613,
+      "sha256": "2e90270338fd75d1574e2ea3e429df4d8c82e1bc401564cebf0c53c516e48b19"
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-root-replay-20261021.json",
+      "relative": "glyph-native-final334-switch-root-replay-20261021.json",
+      "bytes": 710,
+      "sha256": "a4897766b4b2fc863587eb3b9c42146af679ec552d1dd9069ed7f45178f45354"
+    },
+    {
+      "source": "/private/tmp/glyph-native-switch-erratum-archive-pins-20261021.json",
+      "relative": "glyph-native-switch-erratum-archive-pins-20261021.json",
+      "bytes": 7326,
+      "sha256": "99145e5c78803918e61fe2a66b0147161d3101595c8eaaba70e415ac044310ce"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982/firmware.elf",
+      "raw_sha256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d",
+      "raw_bytes": 5597092,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982/firmware.elf",
+      "archived": false,
+      "reason": "Firmware artifact retained at exact immutable content-addressed custody; no substitute artifact embedded."
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b0.disassembly.txt",
+      "raw_sha256": "92c8bc69fcaef13ec5db0b21a1866300449db40fb2cdb21d6e19ee7072754481",
+      "raw_bytes": 262123,
+      "relative": "objects/92c8bc69fcaef13ec5db0b21a1866300449db40fb2cdb21d6e19ee7072754481.gz",
+      "compressed_sha256": "59b36bffa220b738663f7296fb846c8f6eee3239556bf747f5221e17c2ed20f0",
+      "compressed_bytes": 53707,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b0.elf",
+      "raw_sha256": "0a0415656d76479b46daefe7460df2576a18e79cfae29f54b625af178a9e9085",
+      "raw_bytes": 176164,
+      "relative": "objects/0a0415656d76479b46daefe7460df2576a18e79cfae29f54b625af178a9e9085.gz",
+      "compressed_sha256": "ba4cc2bbf10063785f8950615ebeae4b6c8e9c0ddbc6325654b6b9b9a94f2072",
+      "compressed_bytes": 52269,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b1-mufplib-double.S",
+      "raw_sha256": "6b99cfddf585a66c22d373cf961fc8b7a1af204d3711c1a65ff1657baa5a10ee",
+      "raw_bytes": 54383,
+      "relative": "objects/6b99cfddf585a66c22d373cf961fc8b7a1af204d3711c1a65ff1657baa5a10ee.gz",
+      "compressed_sha256": "bf37b5aff9e2f46ff85b11f92cd855cf0cd5945697a89d52039c1b6a7794e3c3",
+      "compressed_bytes": 15657,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b1.disassembly.txt",
+      "raw_sha256": "2ed5c16628bde9546bd4bed73263afe63e0060646dfe15d0bac233fa4d4fc350",
+      "raw_bytes": 297088,
+      "relative": "objects/2ed5c16628bde9546bd4bed73263afe63e0060646dfe15d0bac233fa4d4fc350.gz",
+      "compressed_sha256": "3b9a93ce9cec2bcdf492ca8d4bbc6ec6c9d7510296052a199bca28de4394bff2",
+      "compressed_bytes": 66494,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b1.elf",
+      "raw_sha256": "53b2723b590207c678c5a52c095e9150d2afa60e7f66a1c26d188ff59d29c778",
+      "raw_bytes": 233344,
+      "relative": "objects/53b2723b590207c678c5a52c095e9150d2afa60e7f66a1c26d188ff59d29c778.gz",
+      "compressed_sha256": "15d324ad5515ea1cc29f87c4cfb0a3756e608a72ea8491cbec371ea5c7bd3b80",
+      "compressed_bytes": 75913,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b2-mufplib-double.S",
+      "raw_sha256": "3101f080a4bdb176de7d19fb7637c669920dc322ca2cfc394e403ef89a4b6d23",
+      "raw_bytes": 54634,
+      "relative": "objects/3101f080a4bdb176de7d19fb7637c669920dc322ca2cfc394e403ef89a4b6d23.gz",
+      "compressed_sha256": "f961bbf969b88fba42067bd6979baa0df3e7e47b0c77b82cfaccd22201d07f34",
+      "compressed_bytes": 15704,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b2.disassembly.txt",
+      "raw_sha256": "cfb393705853472ab08e78ff93e24534842bc5a05763e78209cc50b42b471372",
+      "raw_bytes": 296727,
+      "relative": "objects/cfb393705853472ab08e78ff93e24534842bc5a05763e78209cc50b42b471372.gz",
+      "compressed_sha256": "f17c975a4f408d3bbf740ce42034b0bc45f8e3ac01fc14df31292cb97c18099a",
+      "compressed_bytes": 66536,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-b2.elf",
+      "raw_sha256": "3a3c4c617d83bc9b910a6fa7bfdffa11ce26ff89370271d861507be821cc49aa",
+      "raw_bytes": 231324,
+      "relative": "objects/3a3c4c617d83bc9b910a6fa7bfdffa11ce26ff89370271d861507be821cc49aa.gz",
+      "compressed_sha256": "80fc3cfaa79a42233602157570cfc3cf08a28d21aa0c8cafb8a5648a8f5b10ca",
+      "compressed_bytes": 75240,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-bootrom-bootrom-bootrom_rt0.S",
+      "raw_sha256": "d8df6ad4e3063c34eae9d8eb785c25716e4e23aa8463494cc07e0c64e7833ae1",
+      "raw_bytes": 15015,
+      "relative": "objects/d8df6ad4e3063c34eae9d8eb785c25716e4e23aa8463494cc07e0c64e7833ae1.gz",
+      "compressed_sha256": "02a234db6d61aea3a8ef03dd5c08b5893f805b25e3433a34eecd86ea0d86d5ac",
+      "compressed_bytes": 4996,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/candidate_packet_draft.json",
+      "raw_sha256": "1e2860513dea3a4ad98a848224e6bac23f246246a02e1fecc7d7ec25ad72e76a",
+      "raw_bytes": 2768787,
+      "relative": "objects/1e2860513dea3a4ad98a848224e6bac23f246246a02e1fecc7d7ec25ad72e76a.gz",
+      "compressed_sha256": "490b61fa9866a413e98094487dea9f22dd5d6c06ba516b273c537162a0c95889",
+      "compressed_bytes": 68839,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-resource-proof-20261021/disassembly.txt",
+      "raw_sha256": "e3f0d41cef91cc28f49f36f9d037cb114ffe6f468cda236171eeceedbe98a2ec",
+      "raw_bytes": 11162936,
+      "relative": "objects/e3f0d41cef91cc28f49f36f9d037cb114ffe6f468cda236171eeceedbe98a2ec.gz",
+      "compressed_sha256": "893942f0713c6c9a21571c495a8303e2da40fd62ab3df92a6e740b0524e17207",
+      "compressed_bytes": 1680139,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-root-replay-20261021.json",
+      "raw_sha256": "a4897766b4b2fc863587eb3b9c42146af679ec552d1dd9069ed7f45178f45354",
+      "raw_bytes": 710,
+      "relative": "objects/a4897766b4b2fc863587eb3b9c42146af679ec552d1dd9069ed7f45178f45354.gz",
+      "compressed_sha256": "686d6f428c18446ff986054ae167b965468413cb48dcb819e5c624e987ca5c22",
+      "compressed_bytes": 451,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/PINS.json",
+      "raw_sha256": "e158c36f280f8125fcb4487113c525aa70873477ca5a4321457a35f55b308aea",
+      "raw_bytes": 7170,
+      "relative": "objects/e158c36f280f8125fcb4487113c525aa70873477ca5a4321457a35f55b308aea.gz",
+      "compressed_sha256": "be9e0480963c25e6a4c66a3b83c5803371d920f3a7bf1ec90740696e1c9fa60a",
+      "compressed_bytes": 2383,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/REPORT.md",
+      "raw_sha256": "672d1e7ae3588fbfc565d58891838cc28494a1afc0a8491216930e0f0de6a6b3",
+      "raw_bytes": 8892,
+      "relative": "objects/672d1e7ae3588fbfc565d58891838cc28494a1afc0a8491216930e0f0de6a6b3.gz",
+      "compressed_sha256": "16afd8f5eba3658d3ea3edd3fe31a7d4db26cd5d43e5518dc770c19e7b3fece2",
+      "compressed_bytes": 4155,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/analyze.py",
+      "raw_sha256": "3bd80c00bda7d35b38f1a6fcbec08b496ff3fee2fd7208bc8ea5b27663566069",
+      "raw_bytes": 8608,
+      "relative": "objects/3bd80c00bda7d35b38f1a6fcbec08b496ff3fee2fd7208bc8ea5b27663566069.gz",
+      "compressed_sha256": "bd746e8d3bb651c46b6b4537be9d39be22f8d005b83c802b52a9c22ce4617197",
+      "compressed_bytes": 3836,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/b1-fresh.disassembly.txt",
+      "raw_sha256": "2ed5c16628bde9546bd4bed73263afe63e0060646dfe15d0bac233fa4d4fc350",
+      "raw_bytes": 297088,
+      "relative": "objects/2ed5c16628bde9546bd4bed73263afe63e0060646dfe15d0bac233fa4d4fc350.gz",
+      "compressed_sha256": "3b9a93ce9cec2bcdf492ca8d4bbc6ec6c9d7510296052a199bca28de4394bff2",
+      "compressed_bytes": 66494,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/b2-fresh.disassembly.txt",
+      "raw_sha256": "cfb393705853472ab08e78ff93e24534842bc5a05763e78209cc50b42b471372",
+      "raw_bytes": 296727,
+      "relative": "objects/cfb393705853472ab08e78ff93e24534842bc5a05763e78209cc50b42b471372.gz",
+      "compressed_sha256": "f17c975a4f408d3bbf740ce42034b0bc45f8e3ac01fc14df31292cb97c18099a",
+      "compressed_bytes": 66536,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/changed11.json",
+      "raw_sha256": "2e90270338fd75d1574e2ea3e429df4d8c82e1bc401564cebf0c53c516e48b19",
+      "raw_bytes": 16613,
+      "relative": "objects/2e90270338fd75d1574e2ea3e429df4d8c82e1bc401564cebf0c53c516e48b19.gz",
+      "compressed_sha256": "fd693c736d6892c91cb157802b8cdba9323d0cc4b7e45b17109555cb83a1b17f",
+      "compressed_bytes": 655,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/correspond.log",
+      "raw_sha256": "0b292e83e4f742538ed2815ad68554efe9c1d9d0c9b15c53858e8c4b186e4d4c",
+      "raw_bytes": 1025,
+      "relative": "objects/0b292e83e4f742538ed2815ad68554efe9c1d9d0c9b15c53858e8c4b186e4d4c.gz",
+      "compressed_sha256": "5221cc471b2f516de1418eacbb15266cab64a339f939789351360c0244649108",
+      "compressed_bytes": 211,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/correspond.py",
+      "raw_sha256": "04aa7841e76e765894a730d6a75b5469c45beb34958bc73f16f09a6538576e1a",
+      "raw_bytes": 5363,
+      "relative": "objects/04aa7841e76e765894a730d6a75b5469c45beb34958bc73f16f09a6538576e1a.gz",
+      "compressed_sha256": "7031055b97708dd628d4f0914582d5ea8feb1d3ce84d036610d586328fea30c7",
+      "compressed_bytes": 2270,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/correspondence.json",
+      "raw_sha256": "5578b41dd494020a41997a3ebb12873ab1462b06a2d78a7c0d52e6003164c87d",
+      "raw_bytes": 2258,
+      "relative": "objects/5578b41dd494020a41997a3ebb12873ab1462b06a2d78a7c0d52e6003164c87d.gz",
+      "compressed_sha256": "52e4db3de343d33398b12c318402e7a168399faa4a0f6b7ff98a5967be608370",
+      "compressed_bytes": 590,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/domain256.json",
+      "raw_sha256": "d225b6e4842062da1f991678732d3b1065c4a45b5958a5ca75dddf56742b91a8",
+      "raw_bytes": 1546743,
+      "relative": "objects/d225b6e4842062da1f991678732d3b1065c4a45b5958a5ca75dddf56742b91a8.gz",
+      "compressed_sha256": "a3c7d4cdeb34db20b734c8896f159ba62891e23d32ae1422cbd5743e18ec28c2",
+      "compressed_bytes": 20524,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/linked-double.disassembly.txt",
+      "raw_sha256": "3354580ebcfe6fcd97723b8e095488160d0f15754f9adbf06c8c6f0eca9ea0c2",
+      "raw_bytes": 46470,
+      "relative": "objects/3354580ebcfe6fcd97723b8e095488160d0f15754f9adbf06c8c6f0eca9ea0c2.gz",
+      "compressed_sha256": "29af63e9b82f5a9ad59e18e38f1418144b1a1d298824c90965689ef43ce4ed21",
+      "compressed_bytes": 10576,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/linked-switch.disassembly.txt",
+      "raw_sha256": "8f668c9c684f4a29cd97411caa5200d594a0027691d14b708def9e7190ab796e",
+      "raw_bytes": 8510,
+      "relative": "objects/8f668c9c684f4a29cd97411caa5200d594a0027691d14b708def9e7190ab796e.gz",
+      "compressed_sha256": "2d12c8734fb9d647aea938aefd635fd1df1a502ce4a1fa8ed649780451e625b0",
+      "compressed_bytes": 2065,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/result.json",
+      "raw_sha256": "cc0b0791ec68f30ad8d3c8ab79fc7a870e1ff815bf680c3d3f5980c64822afb6",
+      "raw_bytes": 1022,
+      "relative": "objects/cc0b0791ec68f30ad8d3c8ab79fc7a870e1ff815bf680c3d3f5980c64822afb6.gz",
+      "compressed_sha256": "ec13b8f384456dbf1fe8b882ebfcd59bdef347235d27531d8b98af169251e651",
+      "compressed_bytes": 622,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/selected334.json",
+      "raw_sha256": "8e21f40f24146a074084863c5a792aa6444600285d4aabd9c0ecf0627b650b80",
+      "raw_bytes": 477641,
+      "relative": "objects/8e21f40f24146a074084863c5a792aa6444600285d4aabd9c0ecf0627b650b80.gz",
+      "compressed_sha256": "265af286b45e64a61b07c05a4111e51b7478a25189064f8a804184e49ad58326",
+      "compressed_bytes": 7580,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021/switch-object.disassembly.txt",
+      "raw_sha256": "9761e3ce2d1f7ca002b12ba97bc0e3e906b7ffaeb80c51080678d466256472ae",
+      "raw_bytes": 14761,
+      "relative": "objects/9761e3ce2d1f7ca002b12ba97bc0e3e906b7ffaeb80c51080678d466256472ae.gz",
+      "compressed_sha256": "348c1c3bfead3f2a284b6613128512600073056bd324a813728c62dad3c6aff3",
+      "compressed_bytes": 3042,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-irq-rom-upper-proof-20261021-manifest.json",
+      "raw_sha256": "f2da41a6c12f96f5db6e660af42b60d9d35cd7dfbeeb8d078b7d664b96cb4821",
+      "raw_bytes": 15566,
+      "relative": "objects/f2da41a6c12f96f5db6e660af42b60d9d35cd7dfbeeb8d078b7d664b96cb4821.gz",
+      "compressed_sha256": "76d0406faada50110274436126a7aca0771984c5ec136ab90eca84318f159ac1",
+      "compressed_bytes": 4625,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-preparation-20261021/switch_out_of_range_oracle_findings.json",
+      "raw_sha256": "b7e4090da030680739af123def78c0f9abfc8314270b0d03c24f49bff36d99b5",
+      "raw_bytes": 11506,
+      "relative": "objects/b7e4090da030680739af123def78c0f9abfc8314270b0d03c24f49bff36d99b5.gz",
+      "compressed_sha256": "69db582d595ae0b980589f59c2838ade96615d781fd96351670255e60f3260b1",
+      "compressed_bytes": 782,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-switch-erratum-archive-pins-20261021.json",
+      "raw_sha256": "99145e5c78803918e61fe2a66b0147161d3101595c8eaaba70e415ac044310ce",
+      "raw_bytes": 7326,
+      "relative": "objects/99145e5c78803918e61fe2a66b0147161d3101595c8eaaba70e415ac044310ce.gz",
+      "compressed_sha256": "a1b58bc3e49d0ab60f7494063525f5013ef20e813e82136d65399ae2b31ae3eb",
+      "compressed_bytes": 2365,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/src/HAL/pico/src/comms/NintendoSwitchBackend.cpp.o",
+      "raw_sha256": "8a282ea67986f5c92817bac85d075868dc327cf9586b40d12681684735dc23eb",
+      "raw_bytes": 5100,
+      "relative": "objects/8a282ea67986f5c92817bac85d075868dc327cf9586b40d12681684735dc23eb.gz",
+      "compressed_sha256": "b305e719d3a21b1f6ef7f2609dcb3d8fefce2cc293a90c3f84d94a65f5891a0c",
+      "compressed_bytes": 1904,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_bootrom/include/pico/bootrom/sf_table.h",
+      "raw_sha256": "67b11468756b92372424e6c3d31374c5a691141a593805aca86c8f8c65ee5c75",
+      "raw_bytes": 1690,
+      "relative": "objects/67b11468756b92372424e6c3d31374c5a691141a593805aca86c8f8c65ee5c75.gz",
+      "compressed_sha256": "183430b3179c998469aef1f128104674d09619ceef6a23c9374247b09711f818",
+      "compressed_bytes": 489,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_double/double_aeabi.S",
+      "raw_sha256": "0b5e367f1a0f538115d7d4bd3023f955e7c777566f6a9f2ec1317a6122c60a18",
+      "raw_bytes": 19213,
+      "relative": "objects/0b5e367f1a0f538115d7d4bd3023f955e7c777566f6a9f2ec1317a6122c60a18.gz",
+      "compressed_sha256": "b68a29f2ae783454933630d54e37a09c1d13e5b7447df615c1b5c3287d46d14d",
+      "compressed_bytes": 4403,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S",
+      "raw_sha256": "53a91937064c2f6ad85839a4f1a66a11a05524c71a14d86619a8b5a9cd3f94cc",
+      "raw_bytes": 55700,
+      "relative": "objects/53a91937064c2f6ad85839a4f1a66a11a05524c71a14d86619a8b5a9cd3f94cc.gz",
+      "compressed_sha256": "1bf157d370c0c47ea94ec239eb9c54b480f723b6c10d445e1b50fd02a7c6e48a",
+      "compressed_bytes": 15575,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-profile-native-20261020/HAL/pico/include/comms/NintendoSwitchBackend.hpp",
+      "raw_sha256": "201faa4dbaaddb5badf274e350f17ab9d6b3e6e286de321094d590e0c031540c",
+      "raw_bytes": 1409,
+      "relative": "objects/201faa4dbaaddb5badf274e350f17ab9d6b3e6e286de321094d590e0c031540c.gz",
+      "compressed_sha256": "433e208a0b1a36b9e7a780f44a3ed7dfbcab59e28b4649c5bab673d16670c811",
+      "compressed_bytes": 539,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "raw_sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+      "raw_bytes": 6691,
+      "relative": "objects/c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25.gz",
+      "compressed_sha256": "700a46d69016c149ec634e5d8a4f469ae8653a096eaf9436ff8017b33bc36bb0",
+      "compressed_bytes": 1624,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}

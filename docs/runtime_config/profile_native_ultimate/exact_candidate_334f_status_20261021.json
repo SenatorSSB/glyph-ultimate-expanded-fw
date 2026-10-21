@@ -86,23 +86,32 @@
     "independent_source": "1009 frozen inputs/14 bodies; independent actual bothABI Write/SET/Save/context and meaningful mutants"
   },
   "packet": {
-    "state": "OFFLINE_CONTENT_REVIEW_PASS_ADDENDUM_INCORPORATED_OBSERVER_PREPARATION_PENDING",
-    "file": "hardware_334f_preparation_20261021/reviewed_packet.json",
-    "sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+    "state": "OFFLINE_REVIEWED_EXACT_F_WIRE_CORRECTED_MAC_REPAIR_ACK_PASS_PREFLIGHT_APPROVAL_PENDING",
+    "file": "hardware_334f_preparation_20261021/current_packet_exactF.json",
+    "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
     "source_families": 18,
     "selected_rows": 334,
     "profile_contexts": 17,
     "review_report_sha256": "ad29c6309212cb0f67ec7b0ebfa1960e91c8133b2e6f0c1ec6d71412ac325cc7",
     "addendum_sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6",
     "H11": "Actual extracted checked-reference body, actual NOR/Persistence/ProfileStore, activation, neutral refusal, A/B/A/logical restore/two-owned-ID cleanup PASS bothABIs; target startup/COBS separately attributed source/evidence",
-    "H10": "Actual Configurator identity handler+host decoder bothABIs; concrete before/after UPDATE current Configurator non-attestation and separate postboot gameplay captures; no physical same-gameplay-session writer/latch measurement claimed"
+    "H10": "Actual Configurator identity handler+host decoder bothABIs; concrete before/after UPDATE current Configurator non-attestation and separate postboot gameplay captures; no physical same-gameplay-session writer/latch measurement claimed",
+    "historical_reviewed_packet": "hardware_334f_preparation_20261021/reviewed_packet.json",
+    "historical_reviewed_packet_sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+    "wire_erratum": "switch_wire_erratum_20261021/README.md",
+    "wire_changes": 11
   },
   "archive_manifests": {
     "ABC_final_source_review_20261021/manifest.json": "096fb8751286ab588f60072390d821018c84b8cae81fc422ad18053fcdc810dc",
     "exact_334f_build_metadata_20261021/manifest.json": "9b1c97197cc7bb3ad1fbf690d5339fc51df22987efc177bbbb1624328276cd5b",
     "final_334f_resource_proof_20261021/manifest.json": "a29b6e9722d4ea33265aac6f6b61d511dc74af0054b87b6d29985e1bb8b3da9b",
     "hardware_334f_preparation_20261021/initial_draft/manifest.json": "f0713ec6d5075dd0b2a13594ece94b936fa8bf848b260b20d39d863bdf5697f4",
-    "hardware_334f_preparation_20261021/independent_review/manifest.json": "95ee2505c2979d39b1af0f8788029e661a6aef32fa9f46c0194cfe55518bbd22"
+    "hardware_334f_preparation_20261021/independent_review/manifest.json": "95ee2505c2979d39b1af0f8788029e661a6aef32fa9f46c0194cfe55518bbd22",
+    "switch_wire_erratum_20261021/manifest.json": "9048eaa2f89a00b289b012a0cb2932fa79dbd56586f6018bb7b67c7dd5a9b313",
+    "mac_observer_20261021/prefinding_parent/manifest.json": "a1edad4740a3ec0336111b2fb2c3224c034a839f9a7459822380434078d11149",
+    "mac_observer_20261021/independent_parent_findings/manifest.json": "3df2ed7f91f202dd6ed8b998c76acf75818b282fb37d34ba5eab487885759f8f",
+    "mac_observer_20261021/corrected_child/manifest.json": "3f74175d356cbb4df61264f2bf8ae2c4e7ef007ff02bdace92a5304bf00e3d2a",
+    "mac_observer_20261021/independent_repair_ack/manifest.json": "632e457636bf1f01934722fc173dfe331f03cb30cbc36053421f3ad372f3626a"
   },
   "owner_equipment": "hardware_334f_preparation_20261021/owner_equipment_context.json",
   "hardware_result": null,
@@ -114,11 +123,11 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Resolve Mac/WUP-028 full report observer path and bind any exact host-only tool/procedure with focused review before approval",
-    "Separate concrete exact-candidate owner-approved device/preflight packet",
-    "Actual eligible original Config/store/chord/startup/backup/preflight evidence",
-    "Exact physical H1-H12 outputs and instrumented target measurements with stated startup/backend limitations",
-    "Independent human HEP PASS; source-free result before exact tested-source integration; fresh integration review and separate strict DONE"
+    "Explicit owner approval of the exact bounded Mac/adapter/backup preflight, including separate yes/no for the one optional WUP0x13 operation",
+    "Actual approved preflight: intended unit/route/OS access, available original Config/store/payload backup, entry/chord eligibility and observation gaps; unknown physical entry remains a stop",
+    "Separate exact-candidate flash/profile/physical packet and explicit owner approval after eligible preflight",
+    "All required physical H1-H12 observations, retained instrumented target measurements with startup/backend limits and logical restoration",
+    "Independent human HEP PASS; source-free result, exact tested-source integration, fresh integration review and separate strict DONE"
   ],
   "historical_evidence": "All earlier failed/incomplete source/resource probes, arithmetic corrections, candidates and custody remain unchanged. Current exact-F proof supersedes their open-state disposition, not their historical facts.",
   "sourcefree_publication_validation": {
@@ -126,5 +135,30 @@
     "framework_sequence_navigation_scope_diff": "PASS",
     "archive_input_rehashes": 453,
     "full_surface": "FAIL historical C024 auth; current-state length and unchanged boundary phrase failures also reproduce on BASE c0cc; retained framework debt, no full aggregate PASS"
+  },
+  "mac_observer": {
+    "state": "CORRECTED_CHILD_SAME_REVIEWER_ACK_PASS_ACTUAL_ACCESS_UNVERIFIED",
+    "binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+    "source_sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2",
+    "verifier_sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+    "child_PINS_sha256": "cdf9fa613567d1041ad96946492f2c2a18ee2de87e0d7b32cb9ef03042527329",
+    "repair_ack_report_sha256": "dea715154d3e60b4ba2ba3fa70022ecfae74cf592255e2960c5a67a2ba8e9102",
+    "repair_ack_PINS_sha256": "604ff494860dee8b595c8c01660dcca11f5735042c653d74d447b8d8d07e43bc",
+    "custody": "mac_observer_20261021/host_artifact_custody.json",
+    "final_review_binding": "mac_observer_20261021/host_artifact_review_binding.json",
+    "device_calls_executed": false,
+    "device_approval": null
+  },
+  "preflight": {
+    "packet_id": "GP_NATIVE_001_MAC_PREFLIGHT_V1",
+    "file": "hardware_preflight_approval_20261021.md",
+    "scope_json": "hardware_preflight_approval_20261021.json",
+    "scope_sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e",
+    "owner_approval": null,
+    "includes_candidate_installation_or_profile_mutation": false
+  },
+  "sourcefree_observer_publication_validation": {
+    "record": "observer_preflight_publication_validation_20261021/result.json",
+    "state": "See final focused record; historical full-surface failures remain preserved without a global PASS"
   }
 }

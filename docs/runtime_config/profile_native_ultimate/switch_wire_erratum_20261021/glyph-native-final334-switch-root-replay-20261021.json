@@ -1,0 +1,27 @@
+{
+  "classification": "ROOT_REPLAY_EXACT_F_FINITE_SWITCH_WIRE_ERRATUM_NOT_PHYSICAL",
+  "F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "proof_report_sha256": "672d1e7ae3588fbfc565d58891838cc28494a1afc0a8491216930e0f0de6a6b3",
+  "pinned_files_rehashed": 34,
+  "domain_values": 256,
+  "orientations": 2,
+  "machine_path_results_compared": 1536,
+  "selected_rows": 334,
+  "selected_axes": 1336,
+  "changed_rows": [
+    "O073",
+    "O074",
+    "O077",
+    "O078",
+    "O079",
+    "O080",
+    "O266",
+    "N013",
+    "N017",
+    "N106",
+    "N125"
+  ],
+  "unchanged_axes": 1325,
+  "portable_cpp": "Undefined out-of-range source conversion remains; exactartifact machine proof only",
+  "hardware": "NOT_TESTED"
+}

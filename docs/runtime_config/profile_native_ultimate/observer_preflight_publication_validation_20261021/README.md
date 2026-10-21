@@ -1,0 +1,5 @@
+# Focused observer/preflight publication validation
+
+[Machine result](result.json) records framework/sequence/navigation PASS, source-free scope/diff PASS,967 explicit archive input rehashes,15 host custody files, exact clean F/script/target artifact correspondence, and only11 specified Switch.lx changes across the entire334-row packet. All other102 orders and native candidate/status/result/contract/protocol fields remain unchanged; only native hardware_evidence_gaps changes. [Root replay source](root_scope_and_custody_validation.py.txt) and three exact checker logs preserve executed checks. All29 new-Markdown local links resolve. Paths-at-check is recorded at execution time, before this provenance copy.
+
+Historical full-surface C024 authentication/current-state-length/unchanged-boundary-phrase failures remain in the prior validation archive and were not broadly rerun. No checker/policy change, new full aggregate or hardware PASS is claimed. Current hardware/device approval remain absent, access UNVERIFIED and measurements NOT_MEASURED.

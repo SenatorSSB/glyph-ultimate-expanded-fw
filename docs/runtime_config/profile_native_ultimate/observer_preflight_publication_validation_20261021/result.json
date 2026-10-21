@@ -1,0 +1,234 @@
+{
+  "classification": "FOCUSED_SOURCEFREE_PREFLIGHT_PUBLICATION_NO_DEVICE_OR_GLOBAL_PASS",
+  "framework": "PASS",
+  "sequence": "PASS",
+  "navigation": "PASS",
+  "diff_scope": "PASS_DOCS_ONLY",
+  "diff_check": "PASS",
+  "other_orders_unchanged": 102,
+  "only_native_queue_field_changed": "hardware_evidence_gaps",
+  "candidate_tuple_caps_frozen_contract_protocol_and_all_behavior_unchanged": true,
+  "hardware_result": null,
+  "hardware_evidence_record": null,
+  "device_approval": null,
+  "device_calls_executed": false,
+  "hardware": "NOT_TESTED",
+  "actual_Mac_access": "UNVERIFIED",
+  "target_timing_highwater": "NOT_MEASURED",
+  "archives": [
+    {
+      "manifest": "ABC_final_source_review_20261021/manifest.json",
+      "sha256": "096fb8751286ab588f60072390d821018c84b8cae81fc422ad18053fcdc810dc",
+      "inputs_rehashed": 91
+    },
+    {
+      "manifest": "exact_334f_build_metadata_20261021/manifest.json",
+      "sha256": "9b1c97197cc7bb3ad1fbf690d5339fc51df22987efc177bbbb1624328276cd5b",
+      "inputs_rehashed": 19
+    },
+    {
+      "manifest": "final_334f_resource_proof_20261021/manifest.json",
+      "sha256": "a29b6e9722d4ea33265aac6f6b61d511dc74af0054b87b6d29985e1bb8b3da9b",
+      "inputs_rehashed": 80
+    },
+    {
+      "manifest": "hardware_334f_preparation_20261021/initial_draft/manifest.json",
+      "sha256": "f0713ec6d5075dd0b2a13594ece94b936fa8bf848b260b20d39d863bdf5697f4",
+      "inputs_rehashed": 117
+    },
+    {
+      "manifest": "hardware_334f_preparation_20261021/independent_review/manifest.json",
+      "sha256": "95ee2505c2979d39b1af0f8788029e661a6aef32fa9f46c0194cfe55518bbd22",
+      "inputs_rehashed": 146
+    },
+    {
+      "manifest": "switch_wire_erratum_20261021/manifest.json",
+      "sha256": "9048eaa2f89a00b289b012a0cb2932fa79dbd56586f6018bb7b67c7dd5a9b313",
+      "inputs_rehashed": 37
+    },
+    {
+      "manifest": "mac_observer_20261021/prefinding_parent/manifest.json",
+      "sha256": "a1edad4740a3ec0336111b2fb2c3224c034a839f9a7459822380434078d11149",
+      "inputs_rehashed": 107
+    },
+    {
+      "manifest": "mac_observer_20261021/independent_parent_findings/manifest.json",
+      "sha256": "3df2ed7f91f202dd6ed8b998c76acf75818b282fb37d34ba5eab487885759f8f",
+      "inputs_rehashed": 38
+    },
+    {
+      "manifest": "mac_observer_20261021/corrected_child/manifest.json",
+      "sha256": "3f74175d356cbb4df61264f2bf8ae2c4e7ef007ff02bdace92a5304bf00e3d2a",
+      "inputs_rehashed": 171
+    },
+    {
+      "manifest": "mac_observer_20261021/independent_repair_ack/manifest.json",
+      "sha256": "632e457636bf1f01934722fc173dfe331f03cb30cbc36053421f3ad372f3626a",
+      "inputs_rehashed": 161
+    }
+  ],
+  "total_archive_inputs_rehashed": 967,
+  "current_packet_diff": [
+    {
+      "path": [
+        "rows",
+        17,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        18,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": 270,
+      "new": 14
+    },
+    {
+      "path": [
+        "rows",
+        21,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        22,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        23,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": 270,
+      "new": 14
+    },
+    {
+      "path": [
+        "rows",
+        24,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": 270,
+      "new": 14
+    },
+    {
+      "path": [
+        "rows",
+        60,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        203,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        207,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        296,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    },
+    {
+      "path": [
+        "rows",
+        315,
+        "expected_literal_backend_assignment_fields",
+        1,
+        "fields",
+        "lx"
+      ],
+      "old": -14,
+      "new": 0
+    }
+  ],
+  "current_packet_other_content_unchanged": true,
+  "host_custody_files_rehashed": 15,
+  "F_source_scripts_and_target_custody_match": true,
+  "new_markdown_local_links_checked": 29,
+  "changed_doc_paths_at_check": 499,
+  "full_docs_surface": "NOT_RERUN; prior historical C024 authentication/current-state-length/unchanged-boundary-phrase failures preserved in exact_334f_hardware_wait_validation_20261021; no full aggregate PASS",
+  "hardware_approval_packet_sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e",
+  "root_validation_script_sha256": "b275cc5c81f5027f65a490d2983e28b30c85f4ff7914d613aebad107602417be",
+  "executed_commands": [
+    "python3 tools/check_glyph_agent_framework_docs.py",
+    "python3 tools/check_glyph_agentic_sequence_protocol.py",
+    "python3 tools/check_glyph_docs_navigation.py",
+    "python3 /private/tmp/glyph-native-validate-preflight-publication-20261021.py"
+  ],
+  "logs": {
+    "framework.log": {
+      "sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3",
+      "bytes": 2112
+    },
+    "sequence.log": {
+      "sha256": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b",
+      "bytes": 113
+    },
+    "navigation.log": {
+      "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
+      "bytes": 1213
+    }
+  },
+  "initial_staged_diff_check": "FAIL one extra EOF blank line introduced while copying exact framework stdout; corrected to its original single terminating newline. No source/protocol/evidence disposition changed."
+}

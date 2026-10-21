@@ -2,9 +2,10 @@
 
 Current: [exact334f source/build/resource closure](exact_candidate_334f_status_20261021.md)
 and [independently reviewed hardware preparation](hardware_334f_preparation_20261021/README.md).
-GP-NATIVE-001 awaits exact hardware testing; equipment-specific observer preparation
-continues. No device action is approved and no firmware source is integrated by
-this source-free publication. Earlier research introduction below is historical.
+GP-NATIVE-001 awaits [explicit bounded preflight approval](hardware_preflight_approval_20261021.md).
+The [corrected Mac observer](mac_observer_20261021/README.md) has passed final focused review;
+actual access remains unverified. No device action is approved and no firmware
+source is integrated by this source-free publication. Earlier research introduction below is historical.
 
 
 This isolated chapter records the owner's consolidated 2026-10-20 directive.

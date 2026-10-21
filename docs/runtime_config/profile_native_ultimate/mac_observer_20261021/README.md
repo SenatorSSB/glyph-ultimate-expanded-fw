@@ -1,0 +1,9 @@
+# Reviewed Mac observer — preflight approval pending
+
+The [corrected child](corrected_child/README.md) and [same-reviewer focused ACK](independent_repair_ack/REPORT.md) are final for this bounded host tool. Binary SHA25624ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473 has regular [custody](host_artifact_custody.json) and a separate [final review binding](host_artifact_review_binding.json). Original custody/technical-hold pending-review labels record their creation time; the separate ACK/binding supplies the later disposition without editing held inputs.
+
+The [immutable pre-finding parent](prefinding_parent/README.md) and [original two findings](independent_parent_findings/REPORT.md) remain exact. The child fixes actual WUP completion-count checking and pending callback/Capture lifetime. Both runtime negative witnesses, focused sanitizer tests, actual journal-to-verifier checks and byte-identical independent rebuild are archived. Unaffected1002 report/48 boundary/14 synthetic capture fixtures remain pinned from the earlier review.
+
+[Current corrected334-row packet](../hardware_334f_preparation_20261021/current_packet_exactF.json) changes only the11 Switch.lx fields established by [exact-F machine proof](../switch_wire_erratum_20261021/README.md); H10/H11/resource/addendum and all observation-null fields remain unchanged.
+
+[Exact bounded preflight proposal](../hardware_preflight_approval_20261021.md) is the next owner gate. Actual interface access/report delivery/cancellation is UNVERIFIED; no device call occurred and no device permission or hardware acceptance is granted here. One optional WUP0x13 is an explicit adapter OUT operation requiring specific approval. Firmware remains exact F334f with unchanged resource proof; physical results, timing/highwater, final candidate mutation packet and HEP remain pending.

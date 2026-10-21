@@ -1,0 +1,98 @@
+{
+  "capture_paths_executed": false,
+  "files": {
+    "F_Switch_HID_descriptor.bin": {
+      "bytes": 86,
+      "sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280"
+    },
+    "actual_report_fixture_encoder": {
+      "bytes": 331136,
+      "sha256": "4eea7139d72b953c39f2aa7ca79cc1ed9a828ece5813514e3a427b4a865f2cf1"
+    },
+    "actual_report_fixture_encoder.cpp": {
+      "bytes": 308292,
+      "sha256": "1797586b75e23471f043c8d000dff4bb4c9b832a16481824be6c19187538f447"
+    },
+    "build_commands.json": {
+      "bytes": 1362,
+      "sha256": "91618de2f1134ee7b434059bb09305356fa85374a7b962f5c5523ab929df5d8a"
+    },
+    "build_parser_fixtures.py": {
+      "bytes": 10704,
+      "sha256": "3c0e93725cc31f72da905f04f4e0bbbfe6dbead50c3d6c03dc59363a046c9d7e"
+    },
+    "capture_correspondence_tests.json": {
+      "bytes": 3130,
+      "sha256": "6f64b9436b3a36c4851cb5b88340d16be73f185b8913cedd093f9a997bbe0187"
+    },
+    "encoding_field_provenance.json": {
+      "bytes": 132641,
+      "sha256": "22afea0452302da618c630847ed6522293d3ef373f25b72163a471c699e500d7"
+    },
+    "expected_switch_descriptor.hpp": {
+      "bytes": 514,
+      "sha256": "8160f2f371dfdcec2fa30495a5b3e46362ec52cf7d51c49c37c305021d17db02"
+    },
+    "mac_input_observer": {
+      "bytes": 79488,
+      "sha256": "1881a7a7291bd2561021c4788b957b420092a4948515f611a3edb59ee88bb8d2"
+    },
+    "mac_input_observer.cpp": {
+      "bytes": 19070,
+      "sha256": "6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169"
+    },
+    "native_offline_branch_tests.json": {
+      "bytes": 1462,
+      "sha256": "6563f97439ace35cb3b2be00bf933c89f52c89f75579179aa27ad3190835ffbb"
+    },
+    "negative_and_boundary_fixtures.json": {
+      "bytes": 16577,
+      "sha256": "ef360a7e3baac25b1074c700efc3055ed007bd8b717a2f9ac82eec03654f1366"
+    },
+    "observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb"
+    },
+    "parser_cli": {
+      "bytes": 40328,
+      "sha256": "e48a53dbb310c1bc364b3c8465dca2b267b5fac6c07bb423a8a331d50679873e"
+    },
+    "parser_cli.cpp": {
+      "bytes": 479,
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7"
+    },
+    "prepare_corrected_derivative.py": {
+      "bytes": 3569,
+      "sha256": "f1f2f448c24986262ffd15e97dcf2a955b8beefdfc4112cf0e458aee080d751c"
+    },
+    "report_parser_fixtures.json": {
+      "bytes": 873869,
+      "sha256": "2f7d90c067abfbf4bf6f045b814009e45168ad144c0b406e5f202c951fadc915"
+    },
+    "reviewed_packet_exactF_wire_observer_draft.json": {
+      "bytes": 2772067,
+      "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+    },
+    "reviewed_wire_erratum_old_to_new.json": {
+      "bytes": 4665,
+      "sha256": "dc19232f7ae813cd04827992d23a7c19d463cad0f8500e4e1f7daafe07dd6773"
+    },
+    "test_capture_correspondence.py": {
+      "bytes": 4078,
+      "sha256": "f83e89162bbceae60bfedd459fd09313fed31e4e3e37bd23a8e6ac7a091f3464"
+    },
+    "validation.json": {
+      "bytes": 479,
+      "sha256": "b1c748ca89372db8c67da316afe3ed368f2d066b4d7696d7904ed3f9c9a6d724"
+    },
+    "verify_capture.py": {
+      "bytes": 5406,
+      "sha256": "6f3e436de45b1d1b6e6c0abe3b07e9510b1f0f1a7359f196a6907d64a4cc05eb"
+    }
+  },
+  "hardware": "NOT_TESTED",
+  "private_code_packet_hold": true,
+  "root_worktrees": "ALL_HOLD",
+  "source_F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "state": "SOURCE_AND_PACKET_HOLD"
+}

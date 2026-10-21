@@ -1,0 +1,375 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/REPORT.md",
+      "relative": "REPORT.md",
+      "bytes": 11092,
+      "sha256": "5fce9d5d69fb8c3ac51ac877cef51dd545673d9f387c3c0788bc09ab5b464d12"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-finding.json",
+      "relative": "short-write-finding.json",
+      "bytes": 2906,
+      "sha256": "37b3f914d00232b158e375e2c5b4531598142abd60c8daa8c22cd38d6d97c0e5"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/pending-lifetime-finding.json",
+      "relative": "pending-lifetime-finding.json",
+      "bytes": 3267,
+      "sha256": "7757b6467a403911188aaa5784a3534a06f5d87e4d228f03e5155bb58f028b6c"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/PINS.json",
+      "relative": "PINS.json",
+      "bytes": 8629,
+      "sha256": "560b7e398f6b4b46266dad5ffc96cfd2f958313434d8857b419674e33a4644ac"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/F_Switch_HID_descriptor.bin",
+      "raw_sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280",
+      "raw_bytes": 86,
+      "relative": "objects/1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280.gz",
+      "compressed_sha256": "08b6b2ce3a687f58a1353e536fd6098b979601f9cf426c397855ae13f18d11da",
+      "compressed_bytes": 106,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/PINS.json",
+      "raw_sha256": "560b7e398f6b4b46266dad5ffc96cfd2f958313434d8857b419674e33a4644ac",
+      "raw_bytes": 8629,
+      "relative": "objects/560b7e398f6b4b46266dad5ffc96cfd2f958313434d8857b419674e33a4644ac.gz",
+      "compressed_sha256": "53cefd57fd913f1ccd67aaf044dd3ee6d66374c58835a26d06398a0c15ee7fb5",
+      "compressed_bytes": 2463,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/REPORT.md",
+      "raw_sha256": "5fce9d5d69fb8c3ac51ac877cef51dd545673d9f387c3c0788bc09ab5b464d12",
+      "raw_bytes": 11092,
+      "relative": "objects/5fce9d5d69fb8c3ac51ac877cef51dd545673d9f387c3c0788bc09ab5b464d12.gz",
+      "compressed_sha256": "231bcd11017edd7522395947925d2723e14175d1d5753b140fcfd2a1137ffb58",
+      "compressed_bytes": 5259,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/SDK-WritePipeAsync-callback-contract.txt",
+      "raw_sha256": "a24fc4389d46432d1ebe5bddf3f54f50c89fa1f28df6f8d87cad7a144a201604",
+      "raw_bytes": 1281,
+      "relative": "objects/a24fc4389d46432d1ebe5bddf3f54f50c89fa1f28df6f8d87cad7a144a201604.gz",
+      "compressed_sha256": "8f759fc510c023262908e415d898ccdfdfb6cfeb3576539a79852c988d5b36d1",
+      "compressed_bytes": 630,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/actual_report_fixture_encoder-build.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/actual_report_fixture_encoder.cpp",
+      "raw_sha256": "1797586b75e23471f043c8d000dff4bb4c9b832a16481824be6c19187538f447",
+      "raw_bytes": 308292,
+      "relative": "objects/1797586b75e23471f043c8d000dff4bb4c9b832a16481824be6c19187538f447.gz",
+      "compressed_sha256": "59d6a163bd4077800467d4eb6df497052ac41822549b0705f3ce70f84bac2cb6",
+      "compressed_bytes": 8023,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/capture_correspondence_tests.json",
+      "raw_sha256": "6f64b9436b3a36c4851cb5b88340d16be73f185b8913cedd093f9a997bbe0187",
+      "raw_bytes": 3130,
+      "relative": "objects/6f64b9436b3a36c4851cb5b88340d16be73f185b8913cedd093f9a997bbe0187.gz",
+      "compressed_sha256": "65a5d4c64e6be03d3f9ae63cd5d5443f3582bfe580d083fd05730234f19ec81a",
+      "compressed_bytes": 578,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/expected_switch_descriptor.hpp",
+      "raw_sha256": "8160f2f371dfdcec2fa30495a5b3e46362ec52cf7d51c49c37c305021d17db02",
+      "raw_bytes": 514,
+      "relative": "objects/8160f2f371dfdcec2fa30495a5b3e46362ec52cf7d51c49c37c305021d17db02.gz",
+      "compressed_sha256": "d33c9deefe846c91288422f67da6869d91ca1972e0bb5044013bb8f52bfdfef0",
+      "compressed_bytes": 234,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/final-preparer-delivery-binding.json",
+      "raw_sha256": "b3c68b741b8edea6757bc253bf76bef1907ded838ec855d89b7f7066e5f285b4",
+      "raw_bytes": 13420,
+      "relative": "objects/b3c68b741b8edea6757bc253bf76bef1907ded838ec855d89b7f7066e5f285b4.gz",
+      "compressed_sha256": "1c743e7d5082340fab82b1ffd2d1dfcf9366e803a2c9df24f12484085bb1f5de",
+      "compressed_bytes": 3766,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/independent-encoded-report-output.txt",
+      "raw_sha256": "349857678739832696aa33d4544a68adb121b514732a2409b9b60658f585e9db",
+      "raw_bytes": 56446,
+      "relative": "objects/349857678739832696aa33d4544a68adb121b514732a2409b9b60658f585e9db.gz",
+      "compressed_sha256": "890d62174550ba356c87d2b5f9415500d55ec340676b77f0674b44947d10b556",
+      "compressed_bytes": 4666,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/independent-parser-proof.json",
+      "raw_sha256": "c1fc62b7fd45315e0d59cfbb4a7a3d9fb81796dfbea550c3aa8570952e203243",
+      "raw_bytes": 121589,
+      "relative": "objects/c1fc62b7fd45315e0d59cfbb4a7a3d9fb81796dfbea550c3aa8570952e203243.gz",
+      "compressed_sha256": "b6c2ae8dde6f8188e9dd2147eabaa54b86ee601863862a11a1321d50f0407d3e",
+      "compressed_bytes": 3746,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/mac_input_observer-build.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/mac_input_observer.cpp",
+      "raw_sha256": "6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169",
+      "raw_bytes": 19070,
+      "relative": "objects/6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169.gz",
+      "compressed_sha256": "9fa8f2ba4878c7302430e0ed5a506b54e3ba6d98ca62b344181c5fc62faaa240",
+      "compressed_bytes": 6675,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner-compile.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner-run.log",
+      "raw_sha256": "abf5db19e1e6a2c3ef33d73f235cc410aeb0a0a10d6b78e8f059f4d2c93f31ce",
+      "raw_bytes": 4344,
+      "relative": "objects/abf5db19e1e6a2c3ef33d73f235cc410aeb0a0a10d6b78e8f059f4d2c93f31ce.gz",
+      "compressed_sha256": "5c9108b36891885d85de2ebf51871e6f2d1de589ab3e70de67895048f1791d96",
+      "compressed_bytes": 1040,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner.cpp",
+      "raw_sha256": "7ba36bdd5b0b276ee1ac3ea09c25e620e65c8c4f5375beb3e9305a432854906f",
+      "raw_bytes": 1306,
+      "relative": "objects/7ba36bdd5b0b276ee1ac3ea09c25e620e65c8c4f5375beb3e9305a432854906f.gz",
+      "compressed_sha256": "4096d40d78583d530fad634b9bd13b81aef1a5d9a9ffd85ff5a72010e2886d65",
+      "compressed_bytes": 689,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative_and_boundary_fixtures.json",
+      "raw_sha256": "ef360a7e3baac25b1074c700efc3055ed007bd8b717a2f9ac82eec03654f1366",
+      "raw_bytes": 16577,
+      "relative": "objects/ef360a7e3baac25b1074c700efc3055ed007bd8b717a2f9ac82eec03654f1366.gz",
+      "compressed_sha256": "f7b57e3fc33ab76ed996ec3a964a984afa323e9bbba10ae28060d18e605cd099",
+      "compressed_bytes": 1267,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/observer_parser.hpp",
+      "raw_sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "raw_bytes": 3670,
+      "relative": "objects/34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb.gz",
+      "compressed_sha256": "3e041bcd78113c8554921372e1c06f7d2ef0b8ffa7bb766d840dda357eac609a",
+      "compressed_bytes": 1580,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/offline-commands.json",
+      "raw_sha256": "fdd33660e9b48972ad8ff83d1ef2e7af8ed6e59aae104eb423c28e7f2a7108c1",
+      "raw_bytes": 480787,
+      "relative": "objects/fdd33660e9b48972ad8ff83d1ef2e7af8ed6e59aae104eb423c28e7f2a7108c1.gz",
+      "compressed_sha256": "34d3aa98ccb3e69f22782ae7cdd9713be11adbe155ee74b31ace776b0fa4028e",
+      "compressed_bytes": 9160,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/offline_review.py",
+      "raw_sha256": "e0858282dfd10eff53a992278d3b331c871661d8085b194fe6580a0fcca34f76",
+      "raw_bytes": 4255,
+      "relative": "objects/e0858282dfd10eff53a992278d3b331c871661d8085b194fe6580a0fcca34f76.gz",
+      "compressed_sha256": "dbb7e722a8c3a873c853e4ad49389f25d87105816bf70096bf703dbcb01b87b3",
+      "compressed_bytes": 1940,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/parser_cli-build.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/parser_cli.cpp",
+      "raw_sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7",
+      "raw_bytes": 479,
+      "relative": "objects/59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7.gz",
+      "compressed_sha256": "b5206c137b8a31817f5636068bf75dd7d4f8d4c07e9a69a4daa82a45e897abd0",
+      "compressed_bytes": 312,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/pending-lifetime-finding.json",
+      "raw_sha256": "7757b6467a403911188aaa5784a3534a06f5d87e4d228f03e5155bb58f028b6c",
+      "raw_bytes": 3267,
+      "relative": "objects/7757b6467a403911188aaa5784a3534a06f5d87e4d228f03e5155bb58f028b6c.gz",
+      "compressed_sha256": "948e6ab4f5714bf2506ee3df3d32e7182dc37b30f58445b8ad5888f774613c89",
+      "compressed_bytes": 1315,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/pending_lifetime_witness.py",
+      "raw_sha256": "f85d22c43594814e17c916ac2c1bafa182d2760defa0ea88eba4ce56637e115c",
+      "raw_bytes": 3546,
+      "relative": "objects/f85d22c43594814e17c916ac2c1bafa182d2760defa0ea88eba4ce56637e115c.gz",
+      "compressed_sha256": "9fbbe5c139c1a1080a8b9761517cbb64134888cf2dc438be5642920dc54ab6b1",
+      "compressed_bytes": 1748,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion-compile.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion-run.log",
+      "raw_sha256": "9b4af730a94ffdb06f0e60f5ab95f813c6bfdf8b311fb2b060156f270ab62712",
+      "raw_bytes": 57,
+      "relative": "objects/9b4af730a94ffdb06f0e60f5ab95f813c6bfdf8b311fb2b060156f270ab62712.gz",
+      "compressed_sha256": "3961cd03011336aee6fdfbb717fdffed6e32b7a37f4ae28239a1ae5108054d5c",
+      "compressed_bytes": 73,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion.cpp",
+      "raw_sha256": "d7213183791a15df05d2c624b3cf29ba8e1bd649facee9687594607d3c37d8ce",
+      "raw_bytes": 1277,
+      "relative": "objects/d7213183791a15df05d2c624b3cf29ba8e1bd649facee9687594607d3c37d8ce.gz",
+      "compressed_sha256": "4a191c32da1cfca5d42a8ed3030ed46d343c0c3a3ae18c3f87a12337f8658216",
+      "compressed_bytes": 671,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/report_parser_fixtures.json",
+      "raw_sha256": "2f7d90c067abfbf4bf6f045b814009e45168ad144c0b406e5f202c951fadc915",
+      "raw_bytes": 873869,
+      "relative": "objects/2f7d90c067abfbf4bf6f045b814009e45168ad144c0b406e5f202c951fadc915.gz",
+      "compressed_sha256": "074aeb137df941c6821b72d830e189282f6b19a71ee3a882e46e7a129643bae3",
+      "compressed_bytes": 14749,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/reviewed_packet_exactF_wire_observer_draft.json",
+      "raw_sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
+      "raw_bytes": 2772067,
+      "relative": "objects/dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744.gz",
+      "compressed_sha256": "4b2dc149d8ef4563a0b9322d7729f3edbb2cab8f3c1bcf0ec6597c76720a564c",
+      "compressed_bytes": 70351,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-callback-compile.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-callback-run.log",
+      "raw_sha256": "96be96c0a08e9e5595dfd263ce946016ac7af9910c6e93f691aec0d9d12c77c4",
+      "raw_bytes": 207,
+      "relative": "objects/96be96c0a08e9e5595dfd263ce946016ac7af9910c6e93f691aec0d9d12c77c4.gz",
+      "compressed_sha256": "2d51785b07e5f37596039ae89debf96eee8eb4c53eb06a92d57aaf2a6c2068b9",
+      "compressed_bytes": 96,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-callback-witness.cpp",
+      "raw_sha256": "2c742f5bb4123caf612c45f65facf2fa6548e1b67ecce7f4f04f759f892d1dd3",
+      "raw_bytes": 640,
+      "relative": "objects/2c742f5bb4123caf612c45f65facf2fa6548e1b67ecce7f4f04f759f892d1dd3.gz",
+      "compressed_sha256": "170d6ef36f1769c3a50633297a945c5ebd2b1373f5dca849f0e2ae3c35daf110",
+      "compressed_bytes": 364,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short-write-finding.json",
+      "raw_sha256": "37b3f914d00232b158e375e2c5b4531598142abd60c8daa8c22cd38d6d97c0e5",
+      "raw_bytes": 2906,
+      "relative": "objects/37b3f914d00232b158e375e2c5b4531598142abd60c8daa8c22cd38d6d97c0e5.gz",
+      "compressed_sha256": "196d2815d076bf25b96b2c60a034137178dd813d1c4c7ec7e4111f23b872d960",
+      "compressed_bytes": 1470,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/short_write_witness.py",
+      "raw_sha256": "b3e43941ed1d75f6703aa7646716ee07ec32949245be8b2a85b025181e8aa8fa",
+      "raw_bytes": 3899,
+      "relative": "objects/b3e43941ed1d75f6703aa7646716ee07ec32949245be8b2a85b025181e8aa8fa.gz",
+      "compressed_sha256": "7b56a99b8dc879c9b36b0701fe8bb6df14c0e73f33bc79ed0a4eeb5b0ea62e90",
+      "compressed_bytes": 1911,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/technical-input-checks.json",
+      "raw_sha256": "d7d788dd79eab95f741cf3e2275127885d73dbd9b2cc384ff735ce56a6dee8ff",
+      "raw_bytes": 3332,
+      "relative": "objects/d7d788dd79eab95f741cf3e2275127885d73dbd9b2cc384ff735ce56a6dee8ff.gz",
+      "compressed_sha256": "9e24dda6cf2f9646c32167a09cf7847ebee0bb9b2b78d4e409a5152617efc4f1",
+      "compressed_bytes": 1292,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/test_capture_correspondence.py",
+      "raw_sha256": "f83e89162bbceae60bfedd459fd09313fed31e4e3e37bd23a8e6ac7a091f3464",
+      "raw_bytes": 4078,
+      "relative": "objects/f83e89162bbceae60bfedd459fd09313fed31e4e3e37bd23a8e6ac7a091f3464.gz",
+      "compressed_sha256": "d532fb1be4aebabf69d25a9051e3a782c0632bc07bfdbbad20a58860c9762df3",
+      "compressed_bytes": 1650,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/verify_capture.py",
+      "raw_sha256": "6f3e436de45b1d1b6e6c0abe3b07e9510b1f0f1a7359f196a6907d64a4cc05eb",
+      "raw_bytes": 5406,
+      "relative": "objects/6f3e436de45b1d1b6e6c0abe3b07e9510b1f0f1a7359f196a6907d64a4cc05eb.gz",
+      "compressed_sha256": "fe0b1e05e5da4a272b880afa467b3b775956d7c5ed558e53ee1744cee13c246a",
+      "compressed_bytes": 2175,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-observer-independent-review-20261021/wire-derivative-and-binary-correspondence.json",
+      "raw_sha256": "a5522f18d493d1127f5f08caf8043d97d31a7e0c85ea78f1129a2491a77a39a0",
+      "raw_bytes": 2562,
+      "relative": "objects/a5522f18d493d1127f5f08caf8043d97d31a7e0c85ea78f1129a2491a77a39a0.gz",
+      "compressed_sha256": "bf7a1c078e88184b45c185a1a123764a817d6ed7ae0d5ff54af98bdcd0d6234f",
+      "compressed_bytes": 955,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}

@@ -1,0 +1,62 @@
+{
+  "finding": "PENDING_CALLBACK_CONTEXT_FREED_ON_CUSTODY_LOG_EXCEPTION",
+  "priority": "P2",
+  "source_sha256": "6056e7f5bd8f0663d24fcf2a0c86c9335a479b0b732ee643df416d40dc89f169",
+  "exact_owner_struct": "struct USBReader{IOUSBInterfaceInterface300**itf=nullptr;UInt8 in=0;std::array<uint8_t,64>bytes{};Capture*cap=nullptr;uint8_t init_byte=0x13;bool pending=false,done=false,opened=false;IOReturn result=kIOReturnError;CFRunLoopSourceRef source=nullptr;\n ~USBReader(){if(pending)return;if(source){CFRunLoopRemoveSource(CFRunLoopGetCurrent(),source,kCFRunLoopDefaultMode);CFRelease(source);}if(itf){if(opened)(*itf)->USBInterfaceClose(itf);(*itf)->Release(itf);}}\n};",
+  "exact_callback": "void usb_write_completed(void*context,IOReturn result,void*){auto*r=static_cast<USBReader*>(context);r->result=result;r->pending=false;r->done=true;}",
+  "source_owner_line": 32,
+  "source_pending_log_line": 59,
+  "witness_scope": "Only exact USBReader destructor and exact write completion callback execute, with pending=true, source/itf nullptr; no capture/inspect body, registry/device API or I/O transfer executes. Exception is injected for the source require(fflush/fsync) failure before state.release on pending adapter-init cancellation path.",
+  "required_fix": "Ensure every exceptional pending exit transfers/retains async state ownership before fallible status logging or settles/cancels before destruction; returning inside destructor cannot prevent unique_ptr deallocation. Preserve exactly-one submission/no retry/immediate exit when cancellation cannot drain.",
+  "production_or_held_source_repaired": false,
+  "results": [
+    {
+      "name": "negative-old-unique-owner",
+      "compile_argv": [
+        "clang++",
+        "-std=c++17",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Wno-deprecated-declarations",
+        "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner.cpp",
+        "-framework",
+        "IOKit",
+        "-framework",
+        "CoreFoundation",
+        "-o",
+        "/private/tmp/glyph-native-mac-observer-independent-review-20261021/negative-old-unique-owner"
+      ],
+      "returncode": -6,
+      "expected_failure": true,
+      "ASAN_heap_use_after_free": true,
+      "positive_only_fixture_retention": null,
+      "expected_observation_met": true
+    },
+    {
+      "name": "positive-retain-until-completion",
+      "compile_argv": [
+        "clang++",
+        "-std=c++17",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Wno-deprecated-declarations",
+        "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion.cpp",
+        "-framework",
+        "IOKit",
+        "-framework",
+        "CoreFoundation",
+        "-o",
+        "/private/tmp/glyph-native-mac-observer-independent-review-20261021/positive-retain-until-completion"
+      ],
+      "returncode": 0,
+      "expected_failure": false,
+      "ASAN_heap_use_after_free": false,
+      "positive_only_fixture_retention": "owner.release() before simulated throw then reclaim after exact completion",
+      "expected_observation_met": true
+    }
+  ]
+}

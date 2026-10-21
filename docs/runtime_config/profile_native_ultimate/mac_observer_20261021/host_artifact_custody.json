@@ -1,0 +1,71 @@
+{
+  "classification": "EXACT_HOST_OBSERVER_CUSTODY_NOT_DEVICE_APPROVAL",
+  "firmware_candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "host_binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+  "corrected_child_PINS_sha256": "cdf9fa613567d1041ad96946492f2c2a18ee2de87e0d7b32cb9ef03042527329",
+  "same_independent_repair_ACK": "PENDING_AT_CUSTODY_CREATION",
+  "device_approval": null,
+  "device_calls_executed": false,
+  "files": {
+    "mac_input_observer": {
+      "bytes": 79536,
+      "sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473"
+    },
+    "mac_input_observer.cpp": {
+      "bytes": 20672,
+      "sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2"
+    },
+    "observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb"
+    },
+    "expected_switch_descriptor.hpp": {
+      "bytes": 514,
+      "sha256": "8160f2f371dfdcec2fa30495a5b3e46362ec52cf7d51c49c37c305021d17db02"
+    },
+    "parser_cli": {
+      "bytes": 40328,
+      "sha256": "e48a53dbb310c1bc364b3c8465dca2b267b5fac6c07bb423a8a331d50679873e"
+    },
+    "parser_cli.cpp": {
+      "bytes": 479,
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7"
+    },
+    "verify_capture.py": {
+      "bytes": 5762,
+      "sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006"
+    },
+    "F_Switch_HID_descriptor.bin": {
+      "bytes": 86,
+      "sha256": "1250f91b7335817fdbb20fa13f16260946a0d540e88eb48f110a51c5178cb280"
+    },
+    "reviewed_packet_exactF_wire_observer_draft.json": {
+      "bytes": 2772067,
+      "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+    },
+    "build_commands.json": {
+      "bytes": 1374,
+      "sha256": "b20db0bb0d8dfd0cad4edceae6ae6d0e5740204db0159b76d2bdec044057ab75"
+    },
+    "host_build_environment.json": {
+      "bytes": 775,
+      "sha256": "5f785672d9a6f5af4c8ddc76ba17c8bd0d5b62cc0a21370667cc38e5f654ff27"
+    },
+    "TECHNICAL_HOLD.json": {
+      "bytes": 5006,
+      "sha256": "d6f369f35c28fd56d539be1d3c6f04b58a35ce5fc6534040d662f1ead07f5cdf"
+    },
+    "PINS.json": {
+      "bytes": 22829,
+      "sha256": "cdf9fa613567d1041ad96946492f2c2a18ee2de87e0d7b32cb9ef03042527329"
+    },
+    "REPORT.md": {
+      "bytes": 7468,
+      "sha256": "f9b75929452de32af72a47bcc3a7de0ba57ced22579d786b5c07573479c599f6"
+    },
+    "MAC_OBSERVER_PROCEDURE.md": {
+      "bytes": 17491,
+      "sha256": "d708c9f3724e77c8e4021917a3963203912aaa00f0a2083d8374e897d253d66c"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "all_other_row_and_packet_data_exact": true,
+  "approval": null,
+  "changed_field_count": 11,
+  "changed_rows": [
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O073"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 14,
+          "old": 270
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O074"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O077"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O078"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 14,
+          "old": 270
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O079"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 14,
+          "old": 270
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O080"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "O266"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "N013"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "N017"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "N106"
+    },
+    {
+      "XInput_and_Gamecube_fields_unchanged": true,
+      "fields": {
+        "lx": {
+          "new": 0,
+          "old": -14
+        }
+      },
+      "historical_catalog_record_preserved": true,
+      "native_outputs_unchanged": true,
+      "selection_id": "N125"
+    }
+  ],
+  "hardware": "NOT_TESTED",
+  "kind": "EXACT_F_SWITCH_WIRE_EXPECTATION_DERIVATIVE_NOT_SOURCE_REPAIR_OR_ACCEPTANCE",
+  "new_packet_path": "/private/tmp/glyph-native-mac-observer-preparation-20261021/reviewed_packet_exactF_wire_observer_draft.json",
+  "new_packet_sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
+  "old_packet_path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_334f_preparation_20261021/reviewed_packet.json",
+  "old_packet_sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+  "original_catalogs_and_review_immutable": true,
+  "out_of_range_source_assignment_executed_by_new_fixture_generator": false,
+  "proof_pins": {
+    "PINS.json": "e158c36f280f8125fcb4487113c525aa70873477ca5a4321457a35f55b308aea",
+    "REPORT.md": "672d1e7ae3588fbfc565d58891838cc28494a1afc0a8491216930e0f0de6a6b3",
+    "changed11.json": "2e90270338fd75d1574e2ea3e429df4d8c82e1bc401564cebf0c53c516e48b19",
+    "selected334.json": "8e21f40f24146a074084863c5a792aa6444600285d4aabd9c0ecf0627b650b80"
+  },
+  "proof_root": "/private/tmp/glyph-native-final334-switch-wire-erratum-20261021",
+  "qualification": "For these11 fields use exact linked F d2uiz+STRB proof across official B0shim/B1/B2 finite domain. Not portable-C++ semantics, clamping policy, new firmware behavior, source fix or hardware PASS. No row is dropped."
+}

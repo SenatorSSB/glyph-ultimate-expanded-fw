@@ -1,0 +1,915 @@
+[
+  {
+    "selection_id": "O073",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 169,
+        "preconversion": "303/4",
+        "returned_uint32": 75,
+        "stored_byte": 75
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "O074",
+    "native_analog": {
+      "leftStickX": 242,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 242,
+        "preconversion": "541/2",
+        "returned_uint32": 270,
+        "stored_byte": 14
+      },
+      "ly": {
+        "raw": 169,
+        "preconversion": "303/4",
+        "returned_uint32": 75,
+        "stored_byte": 75
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 270,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 14,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": 270,
+        "exact_F_wire_byte": 14
+      }
+    }
+  },
+  {
+    "selection_id": "O077",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 87,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 87,
+        "preconversion": "713/4",
+        "returned_uint32": 178,
+        "stored_byte": 178
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "O078",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 169,
+        "preconversion": "303/4",
+        "returned_uint32": 75,
+        "stored_byte": 75
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "O079",
+    "native_analog": {
+      "leftStickX": 242,
+      "leftStickY": 87,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 242,
+        "preconversion": "541/2",
+        "returned_uint32": 270,
+        "stored_byte": 14
+      },
+      "ly": {
+        "raw": 87,
+        "preconversion": "713/4",
+        "returned_uint32": 178,
+        "stored_byte": 178
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 270,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 14,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": 270,
+        "exact_F_wire_byte": 14
+      }
+    }
+  },
+  {
+    "selection_id": "O080",
+    "native_analog": {
+      "leftStickX": 242,
+      "leftStickY": 169,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 242,
+        "preconversion": "541/2",
+        "returned_uint32": 270,
+        "stored_byte": 14
+      },
+      "ly": {
+        "raw": 169,
+        "preconversion": "303/4",
+        "returned_uint32": 75,
+        "stored_byte": 75
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 270,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 14,
+      "ly": 75,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": 270,
+        "exact_F_wire_byte": 14
+      }
+    }
+  },
+  {
+    "selection_id": "O266",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 87,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 87,
+        "preconversion": "713/4",
+        "returned_uint32": 178,
+        "stored_byte": 178
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "N013",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 179,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 179,
+        "preconversion": "253/4",
+        "returned_uint32": 63,
+        "stored_byte": 63
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 63,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 63,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "N017",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 87,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 87,
+        "preconversion": "713/4",
+        "returned_uint32": 178,
+        "stored_byte": 178
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "N106",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 87,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 87,
+        "preconversion": "713/4",
+        "returned_uint32": 178,
+        "stored_byte": 178
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  },
+  {
+    "selection_id": "N125",
+    "native_analog": {
+      "leftStickX": 14,
+      "leftStickY": 87,
+      "rightStickX": 128,
+      "rightStickY": 128
+    },
+    "conversion": {
+      "lx": {
+        "raw": 14,
+        "preconversion": "-29/2",
+        "returned_uint32": 0,
+        "stored_byte": 0
+      },
+      "ly": {
+        "raw": 87,
+        "preconversion": "713/4",
+        "returned_uint32": 178,
+        "stored_byte": 178
+      },
+      "rx": {
+        "raw": 128,
+        "preconversion": "128",
+        "returned_uint32": 128,
+        "stored_byte": 128
+      },
+      "ry": {
+        "raw": 128,
+        "preconversion": "127",
+        "returned_uint32": 127,
+        "stored_byte": 127
+      }
+    },
+    "old_host_literal_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": -14,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "exact_F_wire_fields": {
+      "a": 0,
+      "b": 0,
+      "capture": 0,
+      "hat": 8,
+      "home": 0,
+      "l": 0,
+      "l3": 0,
+      "lx": 0,
+      "ly": 178,
+      "minus": 0,
+      "plus": 0,
+      "r": 0,
+      "r3": 0,
+      "rx": 128,
+      "ry": 127,
+      "x": 0,
+      "y": 0,
+      "zl": 0,
+      "zr": 0
+    },
+    "changed_fields": {
+      "lx": {
+        "old_literal": -14,
+        "exact_F_wire_byte": 0
+      }
+    }
+  }
+]

@@ -1,0 +1,29 @@
+PASS: required docs and JSON schemas exist and parse
+PASS: current framework surface is Codex/OpenAI-only
+PASS: task/lane routing, requested/observed dispatch policy and negative controls validate
+PASS: optional chapter roster, model provenance, transport/recovery boundaries and negative controls validate
+PASS: Planner/Curator packet object and survivor adversarial cases validate
+PASS: legacy Curator receipt immutability adversarial cases validate
+PASS: append-only Curator receipt registry adversarial cases validate
+PASS: new zero/nonzero Planner receipts and accepted-wait adversarial cases validate
+PASS: current queue/status mirrors match machine-derived runway state
+PASS: current human-readable runway summaries match machine state
+PASS: current prose contains no duplicated unguarded runway claims
+PASS: canonical queue, runway counts, and zero-runway liveness validate
+PASS: completion correspondence direct/replay and negative Git corpus validate
+PASS: Revision 2 authorization, evidence, and user-direction surfaces validate
+PASS: Revision-3 classification/safety/successor/transport-policy negative controls validate
+PASS: persistent campaign directive, safety and chronology controls validate
+PASS: current Revision-3 policy and prospective GP-VAL contracts validate; historical orders preserved
+PASS: firmware implementation authority and hardware merge gate are reconciled
+PASS: legacy project-local control plane is explicitly superseded
+PASS: delegation discovery and accountability adversarial self-tests validate
+PASS: native delegation discovery, role boundaries, and reporting validate
+PASS: four exact scheduled/manual task configurations validate
+PASS: capability-aware live Git and authentication protections validate
+PASS: branch classifications and judge verdicts are documented
+PASS: AGENTS.md points to framework entrypoints
+PASS: post-C024 chapter entrypoint, bounded authority, roles and passive telemetry validate
+PASS: forbidden active claims absent and required non-claims preserved
+PASS: runner prompt and scripts/agent_runner.py are absent
+glyph_agent_framework_docs: PASS
