@@ -3,6 +3,12 @@
 This source-free archive preserves independent reports and exact pins for the
 ef22 engineering build. It grants no device or implementation acceptance.
 
+Read the [read-sum arithmetic correction](glyph-native-read-sum-arithmetic-erratum-20261021.md)
+and [independent component-sum replay](glyph-native-read-sum-root-replay-20261021.json)
+with the historical appendices. Lookup568/588 supersedes668/688; Identity
+feasible totals2068/2100 still exceed2048. Historical evidence and authority
+remain unchanged; these are source-accounting results, not device observations.
+
 Read the [latest lifecycle correction](glyph-native-35e8-joint-state-erratum-20261021.md)
 before the [original all31 screen](glyph-native-9cff-source-resource-review-20261021.md).
 The correction withdraws the original direct Configurator reconciliation
