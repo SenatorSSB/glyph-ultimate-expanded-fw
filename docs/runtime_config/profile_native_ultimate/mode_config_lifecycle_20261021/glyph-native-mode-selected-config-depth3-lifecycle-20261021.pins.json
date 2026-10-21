@@ -1,0 +1,114 @@
+{
+  "source": "783dc8192ee98b2eb4f55a3e0df595213fef5528",
+  "tree": "347592792fc8713ba60607f69b082a9551e9c558",
+  "source_pins": [
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "345a8880b6664860820accb04775096a05538ca53bc84fb59e951d1eeb5dc011"
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "sha256": "97d9f4bb9ae7b314738915880da0fe4d83a69860a4776738fea0044f7882c8b3"
+    },
+    {
+      "path": "include/core/CompactConfigRecovery.hpp",
+      "sha256": "d8ff4e60420c5964c5d6ab863a4e28cc737a4fc7491eaf26043007846ce3dfc4"
+    },
+    {
+      "path": "include/core/ModeSelectionTransaction.hpp",
+      "sha256": "b2e90f0115cc8dc23f972c57e15f74822a95ed1776b8be820bb1909de5ade5ba"
+    },
+    {
+      "path": "include/core/RecoveryInitialization.hpp",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a"
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0"
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98"
+    },
+    {
+      "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "sha256": "674146090637e66f19f9fdd166345b6eaf326aa0c8dc2090d7f98d71d2763f3c"
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "sha256": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2"
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+    },
+    {
+      "path": "HAL/pico/include/util/state_util.hpp",
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81"
+    },
+    {
+      "path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd"
+    },
+    {
+      "path": "include/core/RuntimeIdentityService.hpp",
+      "sha256": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7"
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c",
+      "sha256": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/glyph-native-mode-selected-config-depth3-lifecycle-20261021.md",
+      "sha256": "8a9514e2cf1b0ca146691c7f1d7edaf0dfdbbd961fb22ccbf6347c80816ae32f",
+      "bytes": 10388
+    },
+    {
+      "path": "/private/tmp/glyph-native-mode-selected-config-depth3-lifecycle-20261021.json",
+      "sha256": "c1a6193eaed15ba0f39af5ca80c0d00d1ff27fdb265384bed6d92d2d6560e5a6",
+      "bytes": 9405
+    },
+    {
+      "path": "/private/tmp/glyph-native-mode-selected-config-depth3-lifecycle-20261021.py",
+      "sha256": "470f43e6aca863233aa66bc601cb219384b40305b948e1ca667590818d02995c",
+      "bytes": 17558
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/REPORT.json",
+      "sha256": "7bf0f2a48d8416cc3b0ac0763b44d3921cbc34180e5e97525be868d33ed38ab0",
+      "bytes": 110813
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/schema_parser_inventory.json",
+      "sha256": "cec867de41385c44cda1c4d7ce5f2d6829645351385d404b47cc9eb08050b67c",
+      "bytes": 6733
+    },
+    {
+      "path": "/private/tmp/glyph-native-root-file-inner-refinement-20261021.json",
+      "sha256": "10683a6afb0a5ad1d0475f98f8609200e616a292a1ddc3547522dab0a4972740",
+      "bytes": 7345
+    }
+  ]
+}

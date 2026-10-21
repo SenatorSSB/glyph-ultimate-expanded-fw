@@ -1,0 +1,13 @@
+{
+  "classification": "CORRECTED_SAME_PRIVATE_LIFETIME_VARIANT_NOT_ADOPTED",
+  "parent_manifest_sha256": "70badcc1ae3c538a2c4937885543140cf580ba89246ebce066743ca2db0ef68d",
+  "parent_all260_files": "MATCH_UNCHANGED",
+  "existing_outside_scope_restored": [
+    "backend suffix including both default selectors",
+    "ProfileStore::CompleteMigration entire body"
+  ],
+  "new_state_reset": "dispatch_loaded entry plus inner RAII all exits",
+  "production_unchanged": "54fc8cfeb82500f94afea7beb2f816a36759c61e",
+  "resource": "conditional91 arithmetic rows max2048; not final PASS",
+  "tests": "bothABI O3,8layout compilations,2x3402actualselector cases; failed parent detected330each"
+}

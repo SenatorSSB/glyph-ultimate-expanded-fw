@@ -1,0 +1,19 @@
+{
+  "kind": "SOURCE_FREE_BOUNDED_ADOPTION_INVARIANT_CHECK",
+  "base": "76b8bf943ee940c57b9a612556d76d2b3401cd76",
+  "other102_orders": "UNCHANGED",
+  "native_fields_except_scope": "UNCHANGED",
+  "queue_top_level_values_except_native_scope": "UNCHANGED",
+  "contract_original_values_except_exact_two_paths_and_scope_append": "UNCHANGED",
+  "numeric_caps_and_old_exceptions_and_frozen_arrays": "UNCHANGED",
+  "exact_new_source_paths": [
+    "HAL/pico/src/comms/backend_init.cpp",
+    "HAL/pico/include/core/CheckedStorageFile.hpp"
+  ],
+  "amendment_sha256": "0af9614d7668fdb0147ff9498dcce3ec5060642916b4b67c01604be7f51b28b2",
+  "curator_archive_manifest_sha256": "c230f20accff6a924bfe7874ad4c40a521f883054b8b0ff182befc8852cfc647",
+  "source_changes": false,
+  "device_changes": false,
+  "whole_resource": "OPEN",
+  "state": "Prepared locally; not committed/published/activated yet"
+}

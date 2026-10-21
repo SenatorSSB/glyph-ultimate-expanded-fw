@@ -1,0 +1,12 @@
+{
+  "unfiltered_git_diff_check": "FAIL exit2 preserved; all findings exclusively immutable raw unified-patch archive data; no normative/source path involved",
+  "finding_count": 81,
+  "raw_log": "/private/tmp/glyph-native-decoder-adoption-raw-diff-whitespace-20261021.log",
+  "raw_log_sha256": "9e5584e92918555d6a421d1e24ed9c4dbe51bde210b88c97f7507298e00eb1c7",
+  "focused_normative_and_all_other_documents": "PASS exit0; excludes ONLY the two exact archived rawpatch files, no check/config policy changes",
+  "excluded_exact_raw_patch_paths": [
+    "docs/runtime_config/profile_native_ultimate/decoder_import_lifetime_evidence_20261021/original_sealed_not_adopted/selected-private.diff",
+    "docs/runtime_config/profile_native_ultimate/decoder_import_lifetime_evidence_20261021/corrected_selected/selected-private.diff"
+  ],
+  "classification": "Raw patch context/addition whitespace is preserved byte-exact evidence, not a source/control-plane contradiction; no global whitespace PASS claimed."
+}

@@ -1,0 +1,15 @@
+{
+  "kind": "PRIVATE_SEALED_PROPOSAL_NOT_ADOPTED_CORRECTIONS_REQUIRED",
+  "utc": "2026-10-21T14:03:09.845449+00:00",
+  "manifest_sha256": "70badcc1ae3c538a2c4937885543140cf580ba89246ebce066743ca2db0ef68d",
+  "proposal_sha256": "f0beb53316d917d15ae22996ee320b5b59030966fa98d191414b520a9c597367",
+  "selected_diff_sha256": "f9c851bf7812debc8b139991d057fea5b187a8d7a717ee9b89ffa9aa77a0be77",
+  "reviewer": "/root/native_layout_curator, same independent finite scope adjudication",
+  "findings": [
+    "Out-of-scope get_backend_config_default watchdogguards/USBclassification globallysubstituted backend_config.backend_id with reset/UNSPECIFIED backend_phase.backend_id; canchoosewrongdefaultConfigtarget. Restoreentireselectororiginal.",
+    "Out-of-scope CompleteMigration finalPublishDirectory callchangedtoImporthelper. Restoreoriginalcallsite; noadditionalneedshown.",
+    "Newdispatch_loaded enum notclearedon everyexit despitepacketclaim; correctnewstatelifecycle andremeasureaffectedframes/91 beforeapproval."
+  ],
+  "disposition": "NO_ADOPTION. Samewriter correcting inSEPARATEselectedvariant; alloriginal260inputsremainimmutable. Corearithmetic/layout/callback-componentpasses arelimitedengineeringevidence, notsemantic/P1PASS.",
+  "production": "Clean54fc/production783unchanged; nofirmwarebuild/deviceactions."
+}

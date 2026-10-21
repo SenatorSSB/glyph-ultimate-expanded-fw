@@ -1,0 +1,803 @@
+{
+  "kind": "ARCHIVE_ONLY_NORMALIZATION_ORIGINAL_PIN_ARRAY_UNCHANGED",
+  "original_pins": "/private/tmp/glyph-native-783d-mounted-adapter-independent-source-review-20261021-inputpins.json",
+  "original_pins_sha256": "3d2c3156ab48d4d107939737b52cc21483c4948b2a0c491d2be1cb604617eb73",
+  "files": {
+    "/private/tmp/glyph-783d-source-review-20261021/HAL/pico/src/core/ProfileStore.cpp": {
+      "sha256": "3258ef7844277dfac58439842a85e383443eecdd5c19a85a9c9eb35c775f3b3c",
+      "bytes": 84374
+    },
+    "/private/tmp/glyph-7f3e-source-review-20261021/HAL/pico/src/core/ProfileStore.cpp": {
+      "sha256": "e0133de9f8ab87f6f876c21e00a47b201aad2f9522e9481378ea8845cc3bb6ae",
+      "bytes": 83438
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/HAL/pico/src/core/ProfileStore.cpp": {
+      "sha256": "3258ef7844277dfac58439842a85e383443eecdd5c19a85a9c9eb35c775f3b3c",
+      "bytes": 84374
+    },
+    "/private/tmp/glyph-native-7f3e-independent-tests/authority/mounted_write_phase_scope_amendment_20261021.json": {
+      "sha256": "974c1cfbd08d09547a538ceb7afa6595799f97a8231fc44ceb558fa23c9266a8",
+      "bytes": 14684
+    },
+    "/private/tmp/glyph-native-7f3e-AE-independent-source-review-20261021.md": {
+      "sha256": "3ca64093ed6c11e0d612efca7108caec0f64757a3164c94c02f93202d71bed05",
+      "bytes": 10298
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/HAL/pico/src/core/CheckedStorage.cpp": {
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "bytes": 10028
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/include/core/CheckedStorage.hpp": {
+      "sha256": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e",
+      "bytes": 2755
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/include/core/ProfileStoreStorage.hpp": {
+      "sha256": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc",
+      "bytes": 7657
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/include/core/ProfileStoreFaultControls.hpp": {
+      "sha256": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "bytes": 3394
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/include/core/ProfileStoreReadTrace.hpp": {
+      "sha256": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+      "bytes": 1113
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/check_glyph_profile_native_ultimate.py": {
+      "sha256": "6fb2f0a1a83342b9e341e7dc067f6a3e75505746dbf1fb194a2ad1505d4e2baf",
+      "bytes": 37914
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_store.cpp": {
+      "sha256": "765abe6db90493105454e348e7c1c7c18f3b0dbbfc9f9f7697cfeb0f9fa610ec",
+      "bytes": 16752
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_dispatch.cpp": {
+      "sha256": "6980d8b6c0a7cd97e8a0f47afe39e6e7e317cdcd52fade25eae50b7681d5c99a",
+      "bytes": 6801
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/store_publication_nor.cpp": {
+      "sha256": "1961246d6d82eeb4f443a8eeb2c79121a79c938d916a500008ec89376d05bd7c",
+      "bytes": 5671
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/run_store_publication_nor.py": {
+      "sha256": "9f14aed0ab902fead25089430b9221812efda757a69c2bbeb0a91848d3a09f9f",
+      "bytes": 4431
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/focused-frozen.py": {
+      "sha256": "fcb89141615afcf7f076e5646f0858a9173a43f08716b76f2b0758aea63c0a36",
+      "bytes": 771
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-matrix.json": {
+      "sha256": "2d0fc3fb75e651a9f4ae3ebf7a88230566a89978070cb819818082eac7d1e2ee",
+      "bytes": 1641
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default.log": {
+      "sha256": "512440a7db09301bd40697dadbedcf6c79c17bad991086dcc5ab554b48da39e6",
+      "bytes": 7501
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/mutants.json": {
+      "sha256": "9aeda636dceb707df60c4408fac8c19c29e6703fea9c1b480d6f280c755ea186",
+      "bytes": 13368
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-default.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-comparison.json": {
+      "sha256": "bd542da2d56d18493f87743ce5ac4677b3d2067c3929cfe8ebe78aa4a17384cc",
+      "bytes": 615
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/matrix.json": {
+      "sha256": "16bdf63c2641331bcb32b595293af4d9945240d0d982390db3b34da9819095fb",
+      "bytes": 511
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-short.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short.log": {
+      "sha256": "f63bb59b01c3487ed14328b64ac020a5af2afea38b9afb873748be146514c9ae",
+      "bytes": 7501
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-short.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-default.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/stale-owner/run.log": {
+      "sha256": "399b05cdf44befbeb825e2db1779b99ddd2568658315df33df0c914917ac9a0b",
+      "bytes": 89
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/stale-owner/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/stale-owner/ProfileStore.cpp": {
+      "sha256": "047e58cc0e727adf97bd3b79153302be75fd16d804e77d5f690c382630c9d2fd",
+      "bytes": 84384
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/stale-owner/mounted-native.cpp": {
+      "sha256": "cb966f31c3f634393f38b05f8364e14c56eb7e6ff82d9efa91fb3bef74113fcf",
+      "bytes": 824
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/bad-close-precedence/run.log": {
+      "sha256": "592d3a2bb0c8c7da56a9e5f87ece282d66a24ef79def5d75a8e5c3f5f8a9dd3a",
+      "bytes": 91
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/bad-close-precedence/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/bad-close-precedence/ProfileStore.cpp": {
+      "sha256": "3dde1990d2940bc4fc058ca8c841649f156c38bad2ea2773715d70e5dd9655af",
+      "bytes": 84398
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/bad-close-precedence/mounted-native.cpp": {
+      "sha256": "7840ba1a84f37226a585d675883d71cee1bc3cbc60a09da644d91e545938c60e",
+      "bytes": 833
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/omitted-close/run.log": {
+      "sha256": "da3df5f05084379a45156f4f9920aa71d318d77c44d0998a1d8db06cfae68046",
+      "bytes": 73
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/omitted-close/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/omitted-close/ProfileStore.cpp": {
+      "sha256": "7579408c1e20447d98b4b822b4fb82e3876ce6e05d95ea7e3e306de0ca92e4f7",
+      "bytes": 84362
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/omitted-close/mounted-native.cpp": {
+      "sha256": "e2ef7d0f126ca6e1e603e86fdfe6adcbc4465a10366b524b06ed80cfdd20e7b9",
+      "bytes": 826
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/commands.json": {
+      "sha256": "6e3f782be29800075e5bfa0edf30d2bf2ea81bfd136a0e1ed5a9a48b43862ee2",
+      "bytes": 39432
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/mounted-native.cpp": {
+      "sha256": "dde15d161b42cf7c1388b05273802953101c99f7a9ba30f9a97aa1d9ee0dbe5e",
+      "bytes": 827
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/commands.json": {
+      "sha256": "69b5ce89e5ca5c5fa909eda85c245d87a4c9c984f59a42022e5255364c33601a",
+      "bytes": 39192
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/mounted-native.cpp": {
+      "sha256": "dde15d161b42cf7c1388b05273802953101c99f7a9ba30f9a97aa1d9ee0dbe5e",
+      "bytes": 827
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-short/report.json": {
+      "sha256": "b2dfdaec8f2b369183ab235fbf5783bccb1e0257ed62bd0399aa8fc8b5f1d64e",
+      "bytes": 1659
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-short/run.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-short/report.json": {
+      "sha256": "e3cd52d223f69a9d685f3b9e385eea9258bd9edb18c17987f9e2d51540fa0522",
+      "bytes": 1666
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-short/run.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-default/report.json": {
+      "sha256": "a78bb607a27d40af556846075ebc1d1c1ffee0355514c850fb5347db0301ab27",
+      "bytes": 1658
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-default/run.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-default/report.json": {
+      "sha256": "6a9d437fa08806417f3f4bc135b3a5d886a55b4e00e3c2bb32c668478e505d4a",
+      "bytes": 1665
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-default/run.log": {
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "bytes": 1755329
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/manifest.json": {
+      "sha256": "5a15784696d076b3c6c22c153b23a41b5c349c8a6c952c41f50e91f8e1e98048",
+      "bytes": 8138
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/manifest.json": {
+      "sha256": "5a15784696d076b3c6c22c153b23a41b5c349c8a6c952c41f50e91f8e1e98048",
+      "bytes": 8138
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new-disassembly.txt": {
+      "sha256": "b93f296f8e5cd3cd2643707935ea2d8346643de1fdfda015fee6bc92945c362d",
+      "bytes": 794777
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old.su": {
+      "sha256": "007832d9710383bc437f9cb4ca5a286b28bb9fe291325f28509d8be025dc116f",
+      "bytes": 19758
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old.cpp": {
+      "sha256": "3a35949e2d1839c4d1e8469ebad2dae47f92db510a5f5ab9f1985a0abb2c8fbb",
+      "bytes": 186
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new.o": {
+      "sha256": "ef61aee193f43d2e9d6849d3c2560cade3b7eb6be4ca5ea42500f2e06171a694",
+      "bytes": 99280
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old-symbols.txt": {
+      "sha256": "024ea797de8f831999af31e896522fac282a11d0633d8419eedd92db9c631094",
+      "bytes": 16361
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/report.json": {
+      "sha256": "c622cc1f50b4ad1d611d21a3714a6028b820d9d26ea992a2f926ecf0df7bdbe3",
+      "bytes": 22067
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new.cpp": {
+      "sha256": "24c8e55c365c0bfcede360301d3d972357d688e29a096608fecacb64690651b4",
+      "bytes": 344
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old.su": {
+      "sha256": "b378a5139d2a9fde59ee8aef182fd9c9df59e074cb811cd02c86cad80f99d1bc",
+      "bytes": 19760
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new-disassembly.txt": {
+      "sha256": "c4e1a1174a59bf0eb51ecaf785bab02c0d12424c8e5572686595624ea636c152",
+      "bytes": 795278
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old.o": {
+      "sha256": "1e38ff1e720884efde42ddee550d197305ae31f5d4ca54da04bb72366fe5dc80",
+      "bytes": 98004
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new-symbols.txt": {
+      "sha256": "c5f4ed6745c3a991bc3d9c10b12b94143d503a5273649664490bf5efd8f7004d",
+      "bytes": 16507
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new.su": {
+      "sha256": "cd941ed9cc7cf49d1728b3736b023f36c315e3d1627329bb158103a030d56f38",
+      "bytes": 20305
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new-sections.txt": {
+      "sha256": "0e60fa6609f028dae8234da748c571fca52d45487692629dbeece242ab06c431",
+      "bytes": 37567
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new-sections.txt": {
+      "sha256": "05d102d6d87087ba1580b8b1ffddfe3e1657023bab14a0bffdafc6218008bc80",
+      "bytes": 37567
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old.o": {
+      "sha256": "daa0d435c9419e7e87c5d5b9ed98ca7124d9f0f044a31c0b2fa4e5b931e544de",
+      "bytes": 98032
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old-sections.txt": {
+      "sha256": "013a480be20b0b69a406b56bed0eda13c4b859ff086cf130c1003337b3b02ed1",
+      "bytes": 36516
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old-sections.txt": {
+      "sha256": "fa4891f5cca7bae84a3a3624754f71a12831497a0d517e9c517c2d17b386ef4d",
+      "bytes": 36516
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/result-constant-initializers.json": {
+      "sha256": "593d30d39ecf8fdc4dbff32646fd759949ab17cfd841ee9360e2db6c51e5ccb1",
+      "bytes": 535
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/owner-init-verification.json": {
+      "sha256": "970817d9b394d3026b54eb5716f609751eb5355f433dded0f562adef5c713961",
+      "bytes": 6451
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old-symbols.txt": {
+      "sha256": "f923dc377b6c3a82e1ce208a5faa5bc56cbed656b04d8b39419a91f2ccd89582",
+      "bytes": 16361
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new.su": {
+      "sha256": "55f1b5deca068b57a1e33d41d03a732f3ad29c55f6d0332c63f8d769736ac551",
+      "bytes": 20307
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-old-disassembly.txt": {
+      "sha256": "bd63a6b16cb9071625d7f457317d54b9f626d832bd12a587ecc62024f8d1ffce",
+      "bytes": 793378
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new.cpp": {
+      "sha256": "24c8e55c365c0bfcede360301d3d972357d688e29a096608fecacb64690651b4",
+      "bytes": 344
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-new-symbols.txt": {
+      "sha256": "1dc77cf8059afd623bfcfcf209b2ef1d6b53d082cc7c35c20f106415ecfe141b",
+      "bytes": 16507
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/short-new.o": {
+      "sha256": "c0d288106554522b52a0dcc6130693167cca43379bce7714115438854b805ac0",
+      "bytes": 99320
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old-disassembly.txt": {
+      "sha256": "7e8c2070ffa38efc07ed259a6a3f000365f4100e36f680e9c1a0d8adb9913119",
+      "bytes": 792877
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-static/default-old.cpp": {
+      "sha256": "3a35949e2d1839c4d1e8469ebad2dae47f92db510a5f5ab9f1985a0abb2c8fbb",
+      "bytes": 186
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/stage_c_ultimate_profiles_host/include/stdlib.hpp": {
+      "sha256": "6b0df86034e8ef7ff025107ce5209537c428dad7da0f90345ea1f891a18657be",
+      "bytes": 70
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/checked_storage_unavailable.cpp": {
+      "sha256": "b283926c2b2cae06a4de47c3f431ae23e98d49e8d9860757fb2bad181a6bc9d2",
+      "bytes": 904
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/timeout_harness.cpp": {
+      "sha256": "bca272e30551d44ce4c391d30c123112e091932d1d44dbaf1b9c9636df292ec1",
+      "bytes": 86011
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/reboot.hpp": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/Stream.h": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/LittleFS.h": {
+      "sha256": "e2c16945e2885ab45ef6533d83a2ba87d85fef6a926e0b9404ed838242723d4c",
+      "bytes": 785
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/Print.h": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/Arduino.h": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/host_stubs.hpp": {
+      "sha256": "c44d2c03642ceab352dccfc221b44e70fb9a3c4a0ca650c4b0afd943f705ce4c",
+      "bytes": 1784
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/InputSource.hpp": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/config_validation.hpp": {
+      "sha256": "951dd4a5d6a65c0e112e0debd0698bcd117939db69560c8711a7d46356cc9be6",
+      "bytes": 56
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/ProfileStore.hpp": {
+      "sha256": "5ec21ff3a31fe9f7713e38fbb1e467e4d8f6c233af319af82cc3daa678dfcc42",
+      "bytes": 51
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/Persistence.hpp": {
+      "sha256": "df832cf624544db67016e621636925c055caee4b3e673d9f700a4a1b8ad3e75f",
+      "bytes": 2964
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/core/CommunicationBackend.hpp": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_store_timeout_host/include/arduino/Adafruit_USBD_Device.h": {
+      "sha256": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+      "bytes": 39
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_legacy_adapter.hpp": {
+      "sha256": "9c86cf8e5e5ae0810522a5d4aa6049220175725be4efa9c6a879f246b75e57ec",
+      "bytes": 3744
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_negative.cpp": {
+      "sha256": "f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15",
+      "bytes": 9074
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/load_capture_nor.cpp": {
+      "sha256": "11b290a7095d56b5f05900c1c484ec63894e825a6645645176723dae48d2a13c",
+      "bytes": 5063
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_runner.cpp": {
+      "sha256": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43",
+      "bytes": 7613
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/duplicate_start_count.cpp": {
+      "sha256": "039aa138ddeecdc954ef69ab38ecef6820af2c7c6720a3d37dea37824e62708a",
+      "bytes": 1144
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_mutations.cpp": {
+      "sha256": "ed326527f896940108d06a9f4186180053fadf64b797d18ec668e6a8603d5301",
+      "bytes": 2510
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/current_custom_hook.cpp": {
+      "sha256": "bdc319e3c71fd8d33590172ecb76126f088bca4018d5e732be3d2afc27f9e3e3",
+      "bytes": 3519
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/current_mode_capacity.cpp": {
+      "sha256": "3337cb4bab44870251343190df572c35ce105df7ab73d0dd74009ee49080320a",
+      "bytes": 1888
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/native_gc_lifetime.cpp": {
+      "sha256": "d25401d477fc50ac8f9afd20b62348712739a20abd0c66ea012224f4eec242c1",
+      "bytes": 11845
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/legacy_set_phases.cpp": {
+      "sha256": "6e8242e910af36dd3ef4f91a9d32ce296cf0a5d27e04947a4779b262836c5cea",
+      "bytes": 5284
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/reconcile_nor_phases.cpp": {
+      "sha256": "4d5c3f127950694ca077acfb25f2834faf15bf919264345a960cfdfbdc8b5ff9",
+      "bytes": 5684
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/slot_alternation.cpp": {
+      "sha256": "638651fb0fb29613933d131ae926a3dbf80eb8d959c4046f546ed14ef21fbb6c",
+      "bytes": 2848
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/persistence_nor_lifetimes.cpp": {
+      "sha256": "49d1284dbf955a0a6ad38af8f170ea479eb41689c9779e5631c2c00626ec92a0",
+      "bytes": 9113
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/independent_legacy/probe.cpp": {
+      "sha256": "fec673ab698505d67b75a41d14cc762b2cc3b51acfac02a0ab52af8c22339ac9",
+      "bytes": 7319
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/frozen/legacy_controller.cpp": {
+      "sha256": "1278a7e38485458144dd06ecebc034f6694147fd44532da6457afd520b6ebfe8",
+      "bytes": 2550
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/frozen_custom/core/ControllerMode.hpp": {
+      "sha256": "bbac9de7fd0ad758bd7e8b47c40eb2315b377ef32c8ebc08e4e87be0482d3f47",
+      "bytes": 1004
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/profile_native_ultimate/frozen/modes/Ultimate.hpp": {
+      "sha256": "d21b54a33d35c1956df27cdccc8b5b2e9eb83386b64453226c7c988854c66e3e",
+      "bytes": 728
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/HAL/pico/src/core/NativeTargetMetrics.cpp": {
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c",
+      "bytes": 12036
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/native_target_metrics/runner_clock.cpp": {
+      "sha256": "7e406d8cf492bb944979bf1e51b5a4046b59dd3c307775ef8e3e5542fa6a6355",
+      "bytes": 561
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/.pio/libdeps/glyph_mk6/Nanopb/pb_common.c": {
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+      "bytes": 12141
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/.pio/libdeps/glyph_mk6/Nanopb/pb_encode.c": {
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "bytes": 30784
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/.pio/libdeps/glyph_mk6/Nanopb/pb_decode.c": {
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "bytes": 55177
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/generated/config.pb.c": {
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "bytes": 1774
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/tools/fixtures/stage_c_ultimate_profiles_host/legacy_ultimate.cpp": {
+      "sha256": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e",
+      "bytes": 30914
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/modes/Ultimate.cpp": {
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+      "bytes": 39202
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/modes/UltimateNativeProfile.cpp": {
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "bytes": 14135
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/modes/UltimateNativeEvaluator.cpp": {
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+      "bytes": 6242
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/ControllerMode.cpp": {
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+      "bytes": 3522
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/InputMode.cpp": {
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+      "bytes": 3220
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/socd.cpp": {
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+      "bytes": 3105
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/config_button_validation.cpp": {
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "bytes": 10362
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c": {
+      "sha256": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e",
+      "bytes": 340
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs_util.c": {
+      "sha256": "b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1",
+      "bytes": 125
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/config_validation.cpp": {
+      "sha256": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+      "bytes": 22491
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/config_usb_default_validation.cpp": {
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+      "bytes": 448
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/config_rgb_target_validation.cpp": {
+      "sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7",
+      "bytes": 3059
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/config/glyph/common/src/glyph_config_validation.cpp": {
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "bytes": 615
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/src/core/CommunicationBackend.cpp": {
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575",
+      "bytes": 1619
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/store-legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/context.pb": {
+      "sha256": "f9d94e9f8132be54564e147ff0dba0aaeaae025d4ef4ba2f384d291d9323e86b",
+      "bytes": 10
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "sha256": "cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98",
+      "bytes": 49209
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp": {
+      "sha256": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+      "bytes": 946
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/dispatch-legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/dispatch-native.pb": {
+      "sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+      "bytes": 1985
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/dispatch-maximum.pb": {
+      "sha256": "f10c4b52d871874e138ad5aa40d523ca03fe2c56511a44764984f5da275008df",
+      "bytes": 3341
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/overwritten_response_lease.cpp": {
+      "sha256": "b0599815505ed6e3e811e7bd4521f1f669a21dd128329724cc388cdad1bf6fd3",
+      "bytes": 49413
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/released_response_lease.cpp": {
+      "sha256": "681ecd08e45671f7d4bdcf1bdad58e7bddb2d16f2250ae40e69b3d5f20a8acb5",
+      "bytes": 49374
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/generated/config.pb.c": {
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "bytes": 1774
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/store-legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/context.pb": {
+      "sha256": "f9d94e9f8132be54564e147ff0dba0aaeaae025d4ef4ba2f384d291d9323e86b",
+      "bytes": 10
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/dispatch-legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/dispatch-native.pb": {
+      "sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+      "bytes": 1985
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/dispatch-maximum.pb": {
+      "sha256": "f10c4b52d871874e138ad5aa40d523ca03fe2c56511a44764984f5da275008df",
+      "bytes": 3341
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/overwritten_response_lease.cpp": {
+      "sha256": "b0599815505ed6e3e811e7bd4521f1f669a21dd128329724cc388cdad1bf6fd3",
+      "bytes": 49413
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/released_response_lease.cpp": {
+      "sha256": "681ecd08e45671f7d4bdcf1bdad58e7bddb2d16f2250ae40e69b3d5f20a8acb5",
+      "bytes": 49374
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-short/legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-short/legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-old-default/legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/publication-new-default/legacy.pb": {
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "bytes": 6248
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/15.pb": {
+      "sha256": "85fd7d6773860fe3a537190a27b2a518b5ecf2550ff924e21735cea07a0a46ae",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/11.pb": {
+      "sha256": "09c04dd98996d7f2f134c51dfb54f3a6dfbe1ad382aa26788add871af3d6e329",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/8.pb": {
+      "sha256": "bf12659439523b7b4b712806c7a894490d83415763564123f10f71e9ac938e39",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/10.pb": {
+      "sha256": "5126d33420ec24cdd3848a155414526eb0b0518c9d0a83d3fbb8a853c5b338c9",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/9.pb": {
+      "sha256": "3ecf836180a1933a5b27ebaf04da16c64782613ce1fa1e45346869dad7d5666a",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/20.pb": {
+      "sha256": "0360dab28be0017b90fe6d2762b82ff2e14822799ad81828f8720055d9b9d927",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/14.pb": {
+      "sha256": "df040baa61405220ce23e22268c6afb885d706d52664d441c4c18e0d08a7f498",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/6.pb": {
+      "sha256": "bb2c8836e506a3238748137ed83c905d2d01e19c9f65bacbf3faa44226c909ec",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/2.pb": {
+      "sha256": "0f0053552a153341719b6704d9465f291b7550e656c29b29af63d6cb84dcbd19",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/3.pb": {
+      "sha256": "dff77d0c47ab7ca8952033640ccd1ea14ab0e7fef16c71e1bb1f33cbd512d6b5",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/7.pb": {
+      "sha256": "4c70cd337d394c7ab552d3adc2e353a8d9963becd1b192ba4959b7a8f56e411a",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/19.pb": {
+      "sha256": "bb3c753cbd91885d378b7b730d391e41060800e75811216c5818bd6bc5730a4b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/4.pb": {
+      "sha256": "7099f5724e46691cf250f98f74a3af01ede12183001c54c3932a132a848dd5de",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/5.pb": {
+      "sha256": "1194db9b6fd23077c161a0395ee60519af425f14d4f4b206befd89faf0371e8b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/18.pb": {
+      "sha256": "0373f2c279356effcc38d7daa8a670d29faa3576444c81129724ec8bd6559a2e",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/1.pb": {
+      "sha256": "1e6065349d12de7c4fbda10351d14474fad5e232fef2779c8dee7217dbd099fc",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/13.pb": {
+      "sha256": "e7864c874dae746097ab1974d166d6516e87f99d422da2bda36338f613843e4b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/17.pb": {
+      "sha256": "d157b3040d4ef6814a584207b1cd34b7416c372458ec3c3556ed837111560486",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/16.pb": {
+      "sha256": "973aedadf046f8cd512e0c4aac460ed64148b24fb7ac8e8cd01bd77de37bf402",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/default/twenty-native/12.pb": {
+      "sha256": "f92b82a858bc383b4ff23c32081d8b43f0c4cad25a8fda49d83b11e73f0d007b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/15.pb": {
+      "sha256": "85fd7d6773860fe3a537190a27b2a518b5ecf2550ff924e21735cea07a0a46ae",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/11.pb": {
+      "sha256": "09c04dd98996d7f2f134c51dfb54f3a6dfbe1ad382aa26788add871af3d6e329",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/8.pb": {
+      "sha256": "bf12659439523b7b4b712806c7a894490d83415763564123f10f71e9ac938e39",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/10.pb": {
+      "sha256": "5126d33420ec24cdd3848a155414526eb0b0518c9d0a83d3fbb8a853c5b338c9",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/9.pb": {
+      "sha256": "3ecf836180a1933a5b27ebaf04da16c64782613ce1fa1e45346869dad7d5666a",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/20.pb": {
+      "sha256": "0360dab28be0017b90fe6d2762b82ff2e14822799ad81828f8720055d9b9d927",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/14.pb": {
+      "sha256": "df040baa61405220ce23e22268c6afb885d706d52664d441c4c18e0d08a7f498",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/6.pb": {
+      "sha256": "bb2c8836e506a3238748137ed83c905d2d01e19c9f65bacbf3faa44226c909ec",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/2.pb": {
+      "sha256": "0f0053552a153341719b6704d9465f291b7550e656c29b29af63d6cb84dcbd19",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/3.pb": {
+      "sha256": "dff77d0c47ab7ca8952033640ccd1ea14ab0e7fef16c71e1bb1f33cbd512d6b5",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/7.pb": {
+      "sha256": "4c70cd337d394c7ab552d3adc2e353a8d9963becd1b192ba4959b7a8f56e411a",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/19.pb": {
+      "sha256": "bb3c753cbd91885d378b7b730d391e41060800e75811216c5818bd6bc5730a4b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/4.pb": {
+      "sha256": "7099f5724e46691cf250f98f74a3af01ede12183001c54c3932a132a848dd5de",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/5.pb": {
+      "sha256": "1194db9b6fd23077c161a0395ee60519af425f14d4f4b206befd89faf0371e8b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/18.pb": {
+      "sha256": "0373f2c279356effcc38d7daa8a670d29faa3576444c81129724ec8bd6559a2e",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/1.pb": {
+      "sha256": "1e6065349d12de7c4fbda10351d14474fad5e232fef2779c8dee7217dbd099fc",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/13.pb": {
+      "sha256": "e7864c874dae746097ab1974d166d6516e87f99d422da2bda36338f613843e4b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/17.pb": {
+      "sha256": "d157b3040d4ef6814a584207b1cd34b7416c372458ec3c3556ed837111560486",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/16.pb": {
+      "sha256": "973aedadf046f8cd512e0c4aac460ed64148b24fb7ac8e8cd01bd77de37bf402",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-native-783d-adapter-independent-tests/short/twenty-native/12.pb": {
+      "sha256": "f92b82a858bc383b4ff23c32081d8b43f0c4cad25a8fda49d83b11e73f0d007b",
+      "bytes": 2014
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/schema/haybox/config.proto": {
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "bytes": 33965
+    },
+    "/private/tmp/glyph-9430-adapter-tests-review-20261021/schema/haybox/config.options": {
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+      "bytes": 6441
+    }
+  }
+}

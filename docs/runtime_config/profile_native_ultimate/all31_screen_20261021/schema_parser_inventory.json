@@ -1,0 +1,294 @@
+{
+  "generated_header": "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+  "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f",
+  "messages": {
+    "ButtonRemap": {
+      "edges": [],
+      "depth": 1
+    },
+    "SocdPair": {
+      "edges": [],
+      "depth": 1
+    },
+    "AnalogTriggerMapping": {
+      "edges": [],
+      "depth": 1
+    },
+    "AnalogModifier": {
+      "edges": [],
+      "depth": 1
+    },
+    "ButtonComboMapping": {
+      "edges": [],
+      "depth": 1
+    },
+    "Coords": {
+      "edges": [],
+      "depth": 1
+    },
+    "UltimateProfileTable": {
+      "edges": [
+        {
+          "field": "coordinates",
+          "message": "Coords"
+        }
+      ],
+      "depth": 2
+    },
+    "UltimateProfileCondition": {
+      "edges": [],
+      "depth": 1
+    },
+    "UltimateProfileRole": {
+      "edges": [
+        {
+          "field": "condition",
+          "message": "UltimateProfileCondition"
+        }
+      ],
+      "depth": 2
+    },
+    "UltimateProfileRoutingSlot": {
+      "edges": [],
+      "depth": 1
+    },
+    "UltimateProfileTableRule": {
+      "edges": [
+        {
+          "field": "condition",
+          "message": "UltimateProfileCondition"
+        }
+      ],
+      "depth": 2
+    },
+    "UltimateProfileOutputProgram": {
+      "edges": [
+        {
+          "field": "effects",
+          "message": "UltimateProfileOutputEffect"
+        }
+      ],
+      "depth": 2
+    },
+    "UltimateProfileOutputEffect": {
+      "edges": [],
+      "depth": 1
+    },
+    "UltimateProfile": {
+      "edges": [
+        {
+          "field": "tables",
+          "message": "UltimateProfileTable"
+        },
+        {
+          "field": "roles",
+          "message": "UltimateProfileRole"
+        },
+        {
+          "field": "routing_slots",
+          "message": "UltimateProfileRoutingSlot"
+        },
+        {
+          "field": "table_rules",
+          "message": "UltimateProfileTableRule"
+        },
+        {
+          "field": "output_program",
+          "message": "UltimateProfileOutputProgram"
+        }
+      ],
+      "depth": 3
+    },
+    "ProfileStoreEntry": {
+      "edges": [],
+      "depth": 1
+    },
+    "ProfileStoreRequest": {
+      "edges": [
+        {
+          "field": "profile",
+          "message": "UltimateProfile"
+        }
+      ],
+      "depth": 4
+    },
+    "ProfileStoreResponse": {
+      "edges": [
+        {
+          "field": "entries",
+          "message": "ProfileStoreEntry"
+        },
+        {
+          "field": "profile",
+          "message": "UltimateProfile"
+        }
+      ],
+      "depth": 4
+    },
+    "ButtonToKeycodeMapping": {
+      "edges": [],
+      "depth": 1
+    },
+    "ButtonToColorMapping": {
+      "edges": [],
+      "depth": 1
+    },
+    "CustomModeConfig": {
+      "edges": [
+        {
+          "field": "analog_trigger_mappings",
+          "message": "AnalogTriggerMapping"
+        },
+        {
+          "field": "modifiers",
+          "message": "AnalogModifier"
+        },
+        {
+          "field": "button_combo_mappings",
+          "message": "ButtonComboMapping"
+        }
+      ],
+      "depth": 2
+    },
+    "KeyboardModeConfig": {
+      "edges": [
+        {
+          "field": "buttons_to_keycodes",
+          "message": "ButtonToKeycodeMapping"
+        }
+      ],
+      "depth": 2
+    },
+    "GameModeConfig": {
+      "edges": [
+        {
+          "field": "socd_pairs",
+          "message": "SocdPair"
+        },
+        {
+          "field": "button_remapping",
+          "message": "ButtonRemap"
+        }
+      ],
+      "depth": 2
+    },
+    "CommunicationBackendConfig": {
+      "edges": [],
+      "depth": 1
+    },
+    "RgbConfig": {
+      "edges": [
+        {
+          "field": "button_colors",
+          "message": "ButtonToColorMapping"
+        }
+      ],
+      "depth": 2
+    },
+    "MeleeOptions": {
+      "edges": [
+        {
+          "field": "custom_airdodge",
+          "message": "Coords"
+        }
+      ],
+      "depth": 2
+    },
+    "ProjectMOptions": {
+      "edges": [
+        {
+          "field": "custom_airdodge",
+          "message": "Coords"
+        }
+      ],
+      "depth": 2
+    },
+    "Config": {
+      "edges": [
+        {
+          "field": "game_mode_configs",
+          "message": "GameModeConfig"
+        },
+        {
+          "field": "communication_backend_configs",
+          "message": "CommunicationBackendConfig"
+        },
+        {
+          "field": "custom_modes",
+          "message": "CustomModeConfig"
+        },
+        {
+          "field": "keyboard_modes",
+          "message": "KeyboardModeConfig"
+        },
+        {
+          "field": "rgb_configs",
+          "message": "RgbConfig"
+        },
+        {
+          "field": "melee_options",
+          "message": "MeleeOptions"
+        },
+        {
+          "field": "project_m_options",
+          "message": "ProjectMOptions"
+        },
+        {
+          "field": "ultimate_profiles",
+          "message": "UltimateProfile"
+        }
+      ],
+      "depth": 4
+    },
+    "DeviceInfo": {
+      "edges": [],
+      "depth": 1
+    }
+  },
+  "root_depths": {
+    "Config": 4,
+    "UltimateProfile": 3,
+    "ProfileStoreRequest": 4,
+    "ProfileStoreResponse": 4,
+    "DeviceInfo": 1
+  },
+  "compact_Config_depth": 3,
+  "decode_D4_base1208_components": [
+    8,
+    288,
+    288,
+    288,
+    336
+  ],
+  "encode_D4_base944_components": [
+    232,
+    232,
+    232,
+    248
+  ],
+  "decode_RO_callback380_components": [
+    88,
+    292
+  ],
+  "RORead292_components": [
+    16,
+    24,
+    96,
+    72,
+    64,
+    20
+  ],
+  "no_schema_cycles": true,
+  "callbacks": [
+    "UltimateProfile default8\u2192RejectPayload0 on embedded file/SET decode; Decode0 for scanned native-memory lease; Encode16\u2192max(tag40,string48) for native encode",
+    "CommunicationBackendConfig secondary_backends callbackNULL in actual initialized messages; no arbitrary callback",
+    "generated descriptor defaultsNULL; static fields only; extensionsNULL; native_payload source-bound lease only"
+  ],
+  "special_cases": [
+    "64-bit varint56 exists only at shallower message depths and does not exceed selected deepest32-bit scalar path",
+    "unknown skip pb_read32 can call itself once for nonbuffer skip with16byte local chunk; no input-length recursion",
+    "default initializer104 recursive by finite descriptor DAG, no default-byte stream callback; below selected nested decoder1208",
+    "submessage sizing pb_encode passes are sequential; no sum of sizing and data encode",
+    "nonzero fixed-field body reading, string/fixed32, packed arrays, default checks, tag encoding, callback and substream close bounded below scalar/nested branch at each actual depth"
+  ]
+}

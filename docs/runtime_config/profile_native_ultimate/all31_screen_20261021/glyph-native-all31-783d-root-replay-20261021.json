@@ -1,0 +1,29 @@
+{
+  "kind": "ROOT_NUMERIC_AND_PIN_REPLAY_NO_INDEPENDENT_EDGE_OR_CONTEXT_ACCEPTANCE",
+  "report_sha256": "7bf0f2a48d8416cc3b0ac0763b44d3921cbc34180e5e97525be868d33ed38ab0",
+  "pins_sha256": "99416bc1a53d546c08b48f025062a5daa8cb4e456af7f73ed626a9a8cb2906be",
+  "routes": 90,
+  "route_sum_total_margin_checks": "PASS",
+  "classes": 31,
+  "unexamined": [],
+  "tracked_source_and_artifact_hashes": "MATCH",
+  "generated_header_edges_and_depths": "MATCH using independent no-underscore message-name regex, with all actual names checked",
+  "schema_depths": {
+    "Config": 4,
+    "UltimateProfile": 3,
+    "ProfileStoreRequest": 4,
+    "ProfileStoreResponse": 4,
+    "DeviceInfo": 1
+  },
+  "route_status_counts": {
+    "UPPER_EXCEEDS": 15,
+    "SOURCE_FEASIBLE_EXCESS_PREFIX": 6,
+    "UPPER_FITS_CONTEXTUAL": 60,
+    "UPPER_EXCEEDS_PARTIAL_REPAIR_PREDICATE_OPEN": 1,
+    "UPPER_EXCEEDS_ROOT_MOVE_REFINEMENT_AVAILABLE": 1,
+    "UPPER_EXCEEDS_REQUIRES_REFINEMENT": 1,
+    "SOURCE_FEASIBLE_COMPOSITION_STATE_DEPENDENT": 1,
+    "UPPER_EXCEEDS_PERSISTED_SEMANTIC_REJECTION_DOMAIN_OPEN": 5
+  },
+  "qualification": "Arithmetic and explicitly pinned source/artifact/header-edge replay only; not graph completeness, feasible-state proof, final ELF correspondence, P1 or hardware acceptance. Original schema extractor failure and its three raw superseded inputs are preserved."
+}

@@ -1,0 +1,263 @@
+{
+  "source": "783dc8192ee98b2eb4f55a3e0df595213fef5528",
+  "tree": "347592792fc8713ba60607f69b082a9551e9c558",
+  "tracked": [
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "sha256": "345a8880b6664860820accb04775096a05538ca53bc84fb59e951d1eeb5dc011",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStore.cpp",
+      "sha256": "3258ef7844277dfac58439842a85e383443eecdd5c19a85a9c9eb35c775f3b3c",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "cdc6392759eaab6b481d0feae76fd26ccceb3c7052a7b6a06d54b603a96fff98",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "sha256": "97d9f4bb9ae7b314738915880da0fe4d83a69860a4776738fea0044f7882c8b3",
+      "working_file_matches": true
+    },
+    {
+      "path": "include/core/ProfileStore.hpp",
+      "sha256": "aca47eb03b8bc612ac83fb7c6db2fb8ae7acb684a55a295ada18f365044251f0",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "sha256": "674146090637e66f19f9fdd166345b6eaf326aa0c8dc2090d7f98d71d2763f3c",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/include/core/CheckedStorageFile.hpp",
+      "sha256": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "working_file_matches": true
+    },
+    {
+      "path": "include/core/CheckedStorage.hpp",
+      "sha256": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e",
+      "working_file_matches": true
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "sha256": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+      "working_file_matches": true
+    },
+    {
+      "path": "src/modes/UltimateNativeProfile.cpp",
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "working_file_matches": true
+    },
+    {
+      "path": "src/modes/UltimateNativeEvaluator.cpp",
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+      "working_file_matches": true
+    },
+    {
+      "path": "src/core/CommunicationBackend.cpp",
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575",
+      "working_file_matches": true
+    },
+    {
+      "path": "src/core/ControllerMode.cpp",
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+      "working_file_matches": true
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "working_file_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0",
+      "working_file_matches": true
+    },
+    {
+      "path": "include/core/RuntimeIdentity.hpp",
+      "sha256": "0450362343a148cc647272a7671ae536578caca8edf8ec075dec3db2d139090f",
+      "working_file_matches": true
+    },
+    {
+      "path": "include/core/RuntimeIdentityService.hpp",
+      "sha256": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7",
+      "working_file_matches": true
+    },
+    {
+      "path": "include/core/RuntimeIdentityWire.hpp",
+      "sha256": "f613fcdcb244b00da2d99a24b784784936e0a44fc11c8668ed1da90ed15d1197",
+      "working_file_matches": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/initial_pin_check.json",
+      "bytes": 2312,
+      "sha256": "9f631c2a8191c5987f82058acb0b92c0c3fca01739bda64c4981262a25227911"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/objects_functions.json",
+      "bytes": 215373,
+      "sha256": "1e9495cdcbfd284700eb2d811f468cbd71086b507044bc599e993e4d9e49201d"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/manifest.json",
+      "bytes": 13985,
+      "sha256": "03e41fa0c2064ef3a0d5086020f71cf049b2c6c15821d0f7a9481bdd1b5d76f1"
+    },
+    {
+      "path": "/private/tmp/glyph-native-ef22-focused-exact-functions.json",
+      "bytes": 2814827,
+      "sha256": "53310849647be5db0fae6762a382e1f64694336532851d4b830503431abc1a2b"
+    },
+    {
+      "path": "/private/tmp/glyph-native-lfs-inner-bound-graph-20261021.json",
+      "bytes": 91210,
+      "sha256": "08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h",
+      "bytes": 125759,
+      "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb_decode.c",
+      "bytes": 55177,
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb_encode.c",
+      "bytes": 30784,
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb/pb_common.c",
+      "bytes": 12141,
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    {
+      "path": "/private/tmp/glyph-native-core1-upper-proof-20261021.json",
+      "bytes": 14084,
+      "sha256": "b8c5e5afec1747e2ed140964d7f4e6ce155dc5f3562596b686992c0809782c19"
+    },
+    {
+      "path": "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.json",
+      "bytes": 2625,
+      "sha256": "e6d8818cdc50e397effd28ef345a926d08bf764788ccdfe601f32c97940cd234"
+    },
+    {
+      "path": "/private/tmp/glyph-native-mode-destination-irq-408-amendment-20261021.json",
+      "bytes": 1480,
+      "sha256": "4a667963a247e960b9e20c8d7cabd3310998111c854fe1c2d70e75541204817e"
+    },
+    {
+      "path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.md",
+      "bytes": 8007,
+      "sha256": "833960549a1546a68cf3283210d1c8dd50061b5cfd5818d5e93fb9df2e75a796"
+    },
+    {
+      "path": "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021.md",
+      "bytes": 7849,
+      "sha256": "51ca34f50cae1f014ba376972c10d4b9daf7c4651411df77f636439ba3b0084f"
+    },
+    {
+      "path": "/private/tmp/glyph-native-gc-visitor-libc-upper-proof-20261021.json",
+      "bytes": 7421,
+      "sha256": "0b6d5d9e7057c763f34a1647a215d15923421e02a0467c5fd50335611284ef93"
+    },
+    {
+      "path": "/private/tmp/glyph-native-early-startup-upper-proof-20261021.json",
+      "bytes": 15026,
+      "sha256": "79ad7ad1d4fe6af16db6432a4a3f4ebd54374ad7dc09d693ce0a8ba4ba96d7b7"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/Persistence.o",
+      "bytes": 38296,
+      "sha256": "575a53693c537ce292793f5420bfcbaba070995c3257909a656babdadbaa446b"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/Persistence.su",
+      "bytes": 7726,
+      "sha256": "cb7d900c0d4978f9014cdc5a7d162ac218a9a162305a582090b235cb64f41d33"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/Persistence.disassembly.txt",
+      "bytes": 329704,
+      "sha256": "58f0bcbf083f468f497f135430c4e55967bb2aaf5b85efb726288c52b859e8db"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/ProfileStore.o",
+      "bytes": 98792,
+      "sha256": "db7f6b52c7753cd3e37eb1fb1f4b04aea9a82f6bc2125b33e607e1547261cf47"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/ProfileStore.su",
+      "bytes": 19842,
+      "sha256": "45b1c0924f64054f7c488a5ee08a40c95e6bf2070236946d0384439992517aaf"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/ProfileStore.disassembly.txt",
+      "bytes": 795262,
+      "sha256": "359267c160fd105f0d830c4297f7bdd1c6b36e018d53419d8fb7ad495dd0cb3b"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/ConfiguratorBackend.o",
+      "bytes": 48148,
+      "sha256": "30c2ee400bda94cca08de2a112938a8cc5debab6df45fabd5d63e907e6aa7e92"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/ConfiguratorBackend.su",
+      "bytes": 7407,
+      "sha256": "4ce00f2197796aaa61a8290b712d4df0632863d9d59138998a314ffc467e24e1"
+    },
+    {
+      "path": "/private/tmp/glyph-native-AEF-final-O3/ConfiguratorBackend.disassembly.txt",
+      "bytes": 381351,
+      "sha256": "6de8e2c914c9b8189e7f4f634b04326982dc01a9e21bf9b095ea4813448ed0ae"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/REPORT.json",
+      "bytes": 110813,
+      "sha256": "7bf0f2a48d8416cc3b0ac0763b44d3921cbc34180e5e97525be868d33ed38ab0"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/schema_parser_inventory.json",
+      "bytes": 6733,
+      "sha256": "cec867de41385c44cda1c4d7ce5f2d6829645351385d404b47cc9eb08050b67c"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/seal_inventory.py",
+      "bytes": 30899,
+      "sha256": "808c7a19a3ab480fe513716ed00ea195eccaf99fa72c80518d129c8b824dcd25"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/REPORT.md",
+      "bytes": 24194,
+      "sha256": "0351f828707f33947498782473c98a18f530299aa2db2d3d4863c6651465efe8"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/write_report.py",
+      "bytes": 19287,
+      "sha256": "9d23eee91c7f998f099ead3e0b3913d49ebb7d185e1a826cfc46d3515703aadf"
+    },
+    {
+      "path": "/private/tmp/glyph-native-all31-783dc8192/replay.txt",
+      "bytes": 1306,
+      "sha256": "01ca20c733511406a5d75890025508caa002451d9b063ec00012885bfa3d9090"
+    }
+  ],
+  "qualifications": [
+    "Object manifest records older label/FIRMWARE_VERSION3b792fd7-DIRTY. Three source bytes match frozen783; this is not final source/header/linked ELF correspondence.",
+    "All current tracked reads pinned via gitshow, not writer dirty working tree. SDK/generated bytes separately hashed; their final dependency correspondence remains mandatory.",
+    "No repository/production/SDK/build/device/network changes in this screen. Private report generation only."
+  ]
+}

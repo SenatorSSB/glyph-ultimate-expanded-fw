@@ -1,0 +1,204 @@
+{
+  "classification": "INDEPENDENT_CURRENT_OBJECT_SECTION_SIZE_ALIGNMENT_CHARGE_NOT_FINAL_LINKED_RAM_PASS",
+  "method": "Sum the 13 charged current layout objects sizes plus separately up to align-1 bytes per object. This deliberately exceeds reserve32 without assuming placement. It is a bounded object allocation charge; final linked wholeRAM/delta/map/custody remains required. Original base290 components retained; no additional current charged object may be omitted.",
+  "abis": {
+    "short": {
+      "objects": [
+        {
+          "unit": "Persistence",
+          "section": ".data._ZN12_GLOBAL__N_115phase_workspaceE",
+          "size": 32,
+          "alignment": 4,
+          "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_113capture_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_110load_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_114save_file_slotE",
+          "size": 176,
+          "alignment": 8,
+          "object_sha256": "077e91ea4b1f0945e51f1d5f436dbe835939ed6d834bd7387c8c0e3bcbb38ce7"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_113import_inputsE",
+          "size": 24,
+          "alignment": 4,
+          "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore14CollectGarbageEvE6search",
+          "size": 40,
+          "alignment": 4,
+          "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore12InitializeV2ERKNS_9DirectoryEE4slot",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_120mounted_write_inputsE",
+          "size": 20,
+          "alignment": 4,
+          "object_sha256": "5c5e654b2e94c7b44f5d9d7e7b0a06511033e6103e4f1df15b870f765a42de01"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L15dispatch_loadedE",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_pendingE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_handledE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_111set_receiptE",
+          "size": 88,
+          "alignment": 8,
+          "object_sha256": "b5dc0b3d349dc18de329c371476d7d8473827d03b919483538875f78c318fb4c"
+        },
+        {
+          "unit": "backend_init",
+          "section": ".bss._ZN12_GLOBAL__N_113backend_phaseE",
+          "size": 52,
+          "alignment": 4,
+          "object_sha256": "35f2e84f39bfbc996f00f4b8cb0f6c73df63895efe004dbd5f81bd728abea85c"
+        }
+      ],
+      "gross": 458,
+      "independent_sum_alignment_minus1_reserve": 41,
+      "conservative_object_charge": 499,
+      "fits_512": true
+    },
+    "default": {
+      "objects": [
+        {
+          "unit": "Persistence",
+          "section": ".data._ZN12_GLOBAL__N_115phase_workspaceE",
+          "size": 32,
+          "alignment": 4,
+          "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_113capture_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_110load_phaseE",
+          "size": 8,
+          "alignment": 4,
+          "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+        },
+        {
+          "unit": "Persistence",
+          "section": ".bss._ZN12_GLOBAL__N_114save_file_slotE",
+          "size": 176,
+          "alignment": 8,
+          "object_sha256": "adc84aa736cb8d6f77eb730f0a4de02edb2ad04b99577fd6a06dbeda28e31bd8"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_113import_inputsE",
+          "size": 24,
+          "alignment": 4,
+          "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore14CollectGarbageEvE6search",
+          "size": 40,
+          "alignment": 4,
+          "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZZN12ProfileStore12InitializeV2ERKNS_9DirectoryEE4slot",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+        },
+        {
+          "unit": "ProfileStore",
+          "section": ".bss._ZN12_GLOBAL__N_120mounted_write_inputsE",
+          "size": 20,
+          "alignment": 4,
+          "object_sha256": "e0af09dfd4dfde3ec30dd3524771556bd74c48c0b2568d9ed1b3d774b0ce2674"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L15dispatch_loadedE",
+          "size": 4,
+          "alignment": 4,
+          "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_pendingE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_1L16dispatch_handledE",
+          "size": 1,
+          "alignment": 1,
+          "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+        },
+        {
+          "unit": "ConfiguratorBackend",
+          "section": ".bss._ZN12_GLOBAL__N_111set_receiptE",
+          "size": 88,
+          "alignment": 8,
+          "object_sha256": "0425e5f45589f400968024a8e29d98b509467dac9e61f1fa0a76b9a3eb7219f1"
+        },
+        {
+          "unit": "backend_init",
+          "section": ".bss._ZN12_GLOBAL__N_113backend_phaseE",
+          "size": 56,
+          "alignment": 4,
+          "object_sha256": "ea2955939b70f4904709aef61b615eb04b2f0a9efa4d0669c01884fc707a0bc0"
+        }
+      ],
+      "gross": 462,
+      "independent_sum_alignment_minus1_reserve": 41,
+      "conservative_object_charge": 503,
+      "fits_512": true
+    }
+  }
+}

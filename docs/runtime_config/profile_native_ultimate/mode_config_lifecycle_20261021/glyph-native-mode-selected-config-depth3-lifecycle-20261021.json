@@ -1,0 +1,388 @@
+{
+  "classification": "FINITE_SOURCE_LIFECYCLE_REFINEMENT_NOT_FINAL_ELF_OR_RESOURCE_PASS",
+  "source": "783dc8192ee98b2eb4f55a3e0df595213fef5528",
+  "tree": "347592792fc8713ba60607f69b082a9551e9c558",
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "verdict": {
+    "normal_nonConfigurator_physical_mode": "D3_SELECTED_FILE_PROVED",
+    "after_successful_compact_migration_includingConfigurator": "D3_SELECTED_FILE_PROVED",
+    "all_BootOutcomeNormal_request_callbacks": "BLANKET_D3_DISPROVED_BY_SOURCE_ADMITTED_MIXED_CONFIGURATOR_STATE",
+    "D4_with_mode408_same_route": "EXCLUDED_BY_BACKEND_AND_WRITER_LIFECYCLE"
+  },
+  "scope": [
+    "Logical admitted valid/recoverable LittleFS namespace, including foreign directories, positive orphans and pending MOVE",
+    "No arbitrary live corruption or outside file writer; reset terminates current Normal epoch",
+    "Loader error returns are included; no assumed fallback on invalid current",
+    "Initial/recovery/SET incoming decode remains D4; existing immutable all31 report unchanged"
+  ],
+  "states": [
+    [
+      "D3",
+      "D4",
+      "any"
+    ],
+    [
+      "D3",
+      "D3",
+      "any"
+    ],
+    [
+      "D3",
+      "absent",
+      "any"
+    ],
+    [
+      "absent",
+      "D3",
+      "any"
+    ],
+    [
+      "absent",
+      "absent",
+      "D3"
+    ]
+  ],
+  "state_meaning": [
+    "current",
+    "prior",
+    "legacy"
+  ],
+  "transitions": [
+    {
+      "from": [
+        "D3",
+        "D4",
+        "any"
+      ],
+      "operation": "Load error/rejection/statFailure",
+      "to": [
+        "D3",
+        "D4",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "D4",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "absent",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "absent",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "D3",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "rollback Rename D3 prior\u2192current",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "D3",
+        "any"
+      ],
+      "operation": "Load error/rejection/statFailure",
+      "to": [
+        "D3",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "D3",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "absent",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "absent",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "D3",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "rollback Rename D3 prior\u2192current",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "absent",
+        "any"
+      ],
+      "operation": "Load error/rejection/statFailure",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "absent",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "D3",
+        "absent",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "absent",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "RemovePrior \u2192 RotateD3Current \u2192 PublishD3Temp, failures stop before/after each stage",
+      "to": [
+        "D3",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "rollback Rename D3 prior\u2192current",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "Load error/rejection/statFailure",
+      "to": [
+        "absent",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "successful PriorRestore",
+      "to": [
+        "D3",
+        "absent",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "D3",
+        "any"
+      ],
+      "operation": "publish D3 candidate if caller reaches Save",
+      "to": [
+        "D3",
+        "D3",
+        "any"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "absent",
+        "D3"
+      ],
+      "operation": "Load error/rejection/statFailure",
+      "to": [
+        "absent",
+        "absent",
+        "D3"
+      ]
+    },
+    {
+      "from": [
+        "absent",
+        "absent",
+        "D3"
+      ],
+      "operation": "publish D3 candidate if caller reaches Save",
+      "to": [
+        "D3",
+        "absent",
+        "D3"
+      ]
+    }
+  ],
+  "computed_constraints": {
+    "ordinary_nonConfigurator_D3_fixed": {
+      "components": [
+        48,
+        32,
+        32,
+        32,
+        920,
+        292,
+        408
+      ],
+      "sum": 1764,
+      "remaining_for_load_and_reader": 284
+    },
+    "infeasible_nonConfigurator_D4_union_fixed": {
+      "components": [
+        48,
+        32,
+        32,
+        32,
+        1208,
+        292,
+        408
+      ],
+      "sum": 2052,
+      "remaining_for_load_and_reader": -4
+    },
+    "Configurator_rejected_callback_D4_fixed": {
+      "components": [
+        48,
+        32,
+        32,
+        32,
+        1208,
+        292,
+        348
+      ],
+      "sum": 1992,
+      "remaining_for_load_and_reader": 56
+    },
+    "migrated_Configurator_callback_D3_fixed": {
+      "components": [
+        48,
+        32,
+        32,
+        32,
+        920,
+        292,
+        348
+      ],
+      "sum": 1704,
+      "remaining_for_load_and_reader": 344
+    }
+  },
+  "counterexample": [
+    "Initial selected config: format0, root_format2, ultimate_profiles_count0, one game-mode row with nonzero binding B and a Configurator communication backend; healthy accepted v2 phase2 store. B held at boot, not MB1. Validator does not require format1 when root_format2.",
+    "Normal setup skips count>0 migration and skips final root!=2 compact save. Default Configurator primary installed; boot binding B is marked consumed. Configurator has no scan, so boot B state remains.",
+    "Successful legacy SET1 retains format0 and uses game_mode_configs_count0, backend default_mode0; no embedded profiles required. Next Normal loop has no matching row and resets mode_chord_consumed=false.",
+    "Successful legacy SET2 uses one game row plus a valid legacy schema-v1 profile with nested tables/Coords and nonzero scalar. _config format0 permits it; its root_format is rewritten0. Mode masks are not rebuilt by FinalizeSetConfig, so original nonzero B mask remains.",
+    "Next Normal loop sees row0 and original B mask, calls destination_selector with backendConfigurator. persist_mode_destination executes LoadConfigChecked before rejecting Configurator. It decodes selected D4 current before returning Refused.",
+    "The backend/descriptor route is Configurator CDC; no NES constructor existed in this epoch. Use Config348, not mode408. This does not refute the successfully migrated format1 case."
+  ],
+  "final_candidate_requirements": [
+    "Retain presence-only selection and failure return order; no validation fallback to prior/legacy",
+    "Retain prior-remove before current rotation and compact success before Normal",
+    "Retain sole core0 namespace writers and no Configurator command dispatcher on ordinary gameplay backend",
+    "If proposed early/late/migration split changes boot publication or callback order, recheck this predicate",
+    "If caller uses a blanket mode-request bound, explicitly handle rejected Configurator callback D4/348 or include a returned caller remedy; no implicit whole-request D3 assertion"
+  ],
+  "all31_immutable": {
+    "path": "/private/tmp/glyph-native-all31-783dc8192/REPORT.json",
+    "sha256": "7bf0f2a48d8416cc3b0ac0763b44d3921cbc34180e5e97525be868d33ed38ab0"
+  },
+  "repository_mutation": false,
+  "build_or_device_execution": false
+}
