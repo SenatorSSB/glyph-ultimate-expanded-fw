@@ -961,18 +961,17 @@ bool ProfileStore::IsTransactionUncertain() const {
     return _uncertain;
 }
 
-bool ProfileStore::ReconcileTransaction() {
+__attribute__((noinline)) ProfileStore::ReconcileAction ProfileStore::PrepareReconciliation() {
     if (!_uncertain)
-        return _ready && !_read_only_recovery;
+        return _ready && !_read_only_recovery ? ReconcileAction::Complete : ReconcileAction::Refused;
     uint32_t phase = 0;
     if (!LoadControl(*_next, phase) || !LoadDirectory() || _read_only_recovery)
-        return false;
+        return ReconcileAction::Refused;
     if (phase == 3) {
         if (Generation() == _next->generation) {
             if (!SameDirectory(*_directory, *_next))
-                return false;
-            if (!WriteControl(*_next, 2))
-                return false;
+                return ReconcileAction::Refused;
+            return ReconcileAction::WriteCompleted;
         } else if (Generation() + 1 == _next->generation) {
             // Both checked roots prove the intended mutation did not publish. Commit
             // an identity-only checkpoint retaining its reserved high-water and
@@ -993,14 +992,23 @@ bool ProfileStore::ReconcileTransaction() {
                 _next->high_water_id = reserved;
             ++_next->generation;
             _uncertain = false;
-            if (!PublishDirectory(*_next)) {
-                _uncertain = true;
-                return false;
-            }
+            return ReconcileAction::PublishAborted;
         } else
-            return false;
+            return ReconcileAction::Refused;
     } else if (phase != 2 || !SameDirectory(*_directory, *_next))
+        return ReconcileAction::Refused;
+    return ReconcileAction::Complete;
+}
+
+
+bool ProfileStore::ReconcileTransaction() {
+    const auto action = PrepareReconciliation();
+    if (action == ReconcileAction::Refused) return false;
+    if (action == ReconcileAction::WriteCompleted && !WriteControl(*_next, 2)) return false;
+    if (action == ReconcileAction::PublishAborted && !PublishDirectory(*_next)) {
+        _uncertain = true;
         return false;
+    }
     _uncertain = false;
     return true;
 }
@@ -1491,65 +1499,116 @@ __attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::Finalize
     return Commit(*_next, prepared_create.id, 1, prepared_create.identity);
 }
 
-ProfileStore::TransactionResult ProfileStore::Create(
-    const UltimateProfile &p, const char *name, uint32_t rank, const TransactionIdentity &t
-) {
-    prepared_create.ready = false;
-    prepared_create.profile = &p;
-    prepared_create.input_name = name;
-    prepared_create.rank = rank;
-    prepared_create.identity = t;
+namespace {
+    __attribute__((always_inline)) inline void SetCreateInputs(
+        const UltimateProfile &p, const char *name, uint32_t rank,
+        const ProfileStore::TransactionIdentity &t
+    ) {
+        prepared_create.ready = false;
+        prepared_create.profile = &p;
+        prepared_create.input_name = name;
+        prepared_create.rank = rank;
+        prepared_create.identity = t;
+    }
+}
+
+__attribute__((noinline)) void ProfileStore::PrepareCreateRecord() {
     ::new (&prepared_create.result) TransactionResult(Start(prepared_create.identity));
     if (prepared_create.result.status == Status::NotFound) {
         PrepareCreate();
         prepared_create.input_name = nullptr;
         if (prepared_create.ready) {
-            if (!Admit(prepared_create.bytes + 32)) prepared_create.result = { Status::Full };
-            else {
+            if (!Admit(prepared_create.bytes + 32)) {
+                prepared_create.result = { Status::Full };
+                prepared_create.ready = false;
+            } else {
                 const bool encoded = PrepareProfileWrite(prepared_create.id, 1, *prepared_create.profile);
                 prepared_create.profile = nullptr;
-                if (!encoded || !PublishPreparedProfile())
+                if (!encoded) {
                     prepared_create.result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
-                else ::new (&prepared_create.result) TransactionResult(FinalizePreparedCreate());
+                    prepared_create.ready = false;
+                }
             }
         }
     }
     prepared_create.profile = nullptr;
     prepared_create.input_name = nullptr;
+}
+
+__attribute__((always_inline)) inline void ProfileStore::ExecutePreparedCreate() {
+    if (prepared_create.ready) {
+        if (!PublishPreparedProfile())
+            prepared_create.result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
+        else ::new (&prepared_create.result) TransactionResult(FinalizePreparedCreate());
+    }
+    prepared_create.profile = nullptr;
+    prepared_create.input_name = nullptr;
     prepared_create.ready = false;
+}
+
+ProfileStore::TransactionResult ProfileStore::Create(
+    const UltimateProfile &p, const char *name, uint32_t rank, const TransactionIdentity &t
+) {
+    SetCreateInputs(p, name, rank, t);
+    PrepareCreateRecord();
+    ExecutePreparedCreate();
     return prepared_create.result;
 }
 
-ProfileStore::TransactionResult ProfileStore::Update(
-    uint32_t id,
-    const UltimateProfile &p,
-    uint32_t rev,
-    const TransactionIdentity &t
-) {
-    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
-    if (r.status != Status::NotFound)
-        return r;
+__attribute__((noinline)) void ProfileStore::PrepareUpdateRecord() {
+    auto &r = prepared_create.result;
+    ::new (&r) TransactionResult(Start(prepared_create.identity));
+    if (r.status != Status::NotFound) return;
+    const uint32_t id = prepared_create.id, rev = prepared_create.rank;
+    const UltimateProfile &p = *prepared_create.profile;
     int i = Find(id);
-    if (i < 0)
-        return { Status::NotFound };
-    if (_directory->entries[i].revision != rev)
-        return { Status::Conflict };
-    if (rev == UINT32_MAX)
-        return { Status::Full };
-    if ((_directory->entries[i].payload_version == ultimate_native::kSchema) != (p.schema_version == ultimate_native::kSchema))
-        return { Status::Invalid };
-    if (!ValidateProfile(p))
-        return { Status::Invalid };
+    if (i < 0) { r = { Status::NotFound }; return; }
+    if (_directory->entries[i].revision != rev) { r = { Status::Conflict }; return; }
+    if (rev == UINT32_MAX) { r = { Status::Full }; return; }
+    if ((_directory->entries[i].payload_version == ultimate_native::kSchema) != (p.schema_version == ultimate_native::kSchema)) {
+        r = { Status::Invalid }; return;
+    }
+    if (!ValidateProfile(p)) { r = { Status::Invalid }; return; }
     size_t n = 0;
-    if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > 4096 || !Admit(n + 32))
-        return { Status::Full };
-    if (!PrepareProfileWrite(id, rev + 1, p) || !PublishPreparedProfile())
-        return { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
+    if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > 4096 || !Admit(n + 32)) {
+        r = { Status::Full }; return;
+    }
+    if (!PrepareProfileWrite(id, rev + 1, p)) {
+        r = { _uncertain ? Status::UnknownOutcome : Status::IoFailure }; return;
+    }
+    prepared_create.bytes = static_cast<size_t>(i);
+    prepared_create.schema = p.schema_version;
+    prepared_create.ready = true;
+}
+
+__attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::FinalizePreparedUpdate() {
+    const auto id = prepared_create.id, rev = prepared_create.rank;
     *_next = *_directory;
-    _next->entries[i].previous_revision = rev;
-    _next->entries[i].revision = rev + 1;
-    _next->entries[i].payload_version = p.schema_version;
-    return Commit(*_next, id, rev + 1, t);
+    auto &entry = _next->entries[prepared_create.bytes];
+    entry.previous_revision = rev;
+    entry.revision = rev + 1;
+    entry.payload_version = prepared_create.schema;
+    return Commit(*_next, id, rev + 1, prepared_create.identity);
+}
+
+ProfileStore::TransactionResult ProfileStore::Update(
+    uint32_t id, const UltimateProfile &p, uint32_t rev, const TransactionIdentity &t
+) {
+    prepared_create.ready = false;
+    prepared_create.profile = &p;
+    prepared_create.input_name = nullptr;
+    prepared_create.id = id;
+    prepared_create.rank = rev;
+    prepared_create.identity = t;
+    PrepareUpdateRecord();
+    prepared_create.profile = nullptr;
+    if (prepared_create.ready) {
+        if (!PublishPreparedProfile())
+            prepared_create.result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure };
+        else ::new (&prepared_create.result) TransactionResult(FinalizePreparedUpdate());
+    }
+    prepared_create.ready = false;
+    return prepared_create.result;
 }
 
 __attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::PrepareDuplicate(
@@ -1580,7 +1639,10 @@ ProfileStore::TransactionResult ProfileStore::Duplicate(
     duplicate_prepared = false;
     static TransactionResult r; ::new (&r) TransactionResult(PrepareDuplicate(id, rev, t));
     if (!duplicate_prepared) return r;
-    return Create(_candidate_profile, name, rank, t);
+    SetCreateInputs(_candidate_profile, name, rank, t);
+    PrepareCreateRecord(); // preserve the original second Create Start
+    ExecutePreparedCreate();
+    return prepared_create.result;
 }
 
 __attribute__((noinline)) bool ProfileStore::PrepareRename(uint32_t id, const char *name, uint32_t generation, const TransactionIdentity &t) {

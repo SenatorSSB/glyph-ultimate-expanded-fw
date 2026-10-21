@@ -331,12 +331,12 @@ bool ConfiguratorBackend::HandleGetConfig() {
     return _out.end();
 }
 
-bool ConfiguratorBackend::HandleSetConfig() {
+__attribute__((noinline)) ConfiguratorBackend::SetConfigPreparation ConfiguratorBackend::PrepareSetConfig() {
     if (_recovery_service || _recovery_config_invalid || !_recovery_storage_available ||
         _reference_unknown || persistence.IsMutationFenced() || profile_store.IsTransactionUncertain() ||
         profile_store.MigrationPending()) {
         static const char error[] = "Recovery state is read-only";
-        return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error));
+        return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error)) ? SetConfigPreparation::ReturnedTrue : SetConfigPreparation::ReturnedFalse;
     }
     // Keep the accepted live configuration untouched until the complete
     // decode, validation, and persistence sequence succeeds.  The candidate
@@ -349,7 +349,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
     if (_config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
         if (persistence.LoadConfigChecked(candidate) != Persistence::LoadResult::Loaded) {
             static const char error[] = "Failed to load durable Config";
-            return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error));
+            return WritePacket(CMD_ERROR, (uint8_t *)error, sizeof(error)) ? SetConfigPreparation::ReturnedTrue : SetConfigPreparation::ReturnedFalse;
         }
         receipt_token = candidate.profile_reference_token;
         std::memcpy(receipt_digest, candidate.profile_reference_digest, 32);
@@ -371,7 +371,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
             snprintf(errmsg, sizeof(errmsg), "Failed to decode config: %s", istream.errmsg);
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, errmsg_len);
 
-        return false;
+        return SetConfigPreparation::ReturnedFalse;
     }
 
     ultimate_native::ClearEmbeddedCallbacks(candidate);
@@ -384,7 +384,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
         candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat) {
         static const char errmsg[] = "Profile store requires negotiated protocol";
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));
-        return false;
+        return SetConfigPreparation::ReturnedFalse;
     }
 
     candidate.ultimate_profile_root_format = root_format;
@@ -397,7 +397,7 @@ bool ConfiguratorBackend::HandleSetConfig() {
     ConfigValidationError validation_error;
     if (!persistence.ValidateConfig(candidate, validation_error)) {
         WritePacket(CMD_ERROR, (uint8_t *)validation_error.message, validation_error.length);
-        return false;
+        return SetConfigPreparation::ReturnedFalse;
     }
 
     // A whole-Config client cannot change the expected engine of a known
@@ -409,10 +409,18 @@ bool ConfiguratorBackend::HandleSetConfig() {
         if (profile_store.Read(mode.ultimate_profile_id, selected) == ProfileStore::Status::Ok &&
             mode.ultimate_profile_engine != (selected.schema_version == ultimate_native::kSchema ? 1 : 0)) {
             static const char message[] = "Selected Ultimate engine mismatch";
-            return WritePacket(CMD_ERROR, (uint8_t *)message, sizeof(message));
+            return WritePacket(CMD_ERROR, (uint8_t *)message, sizeof(message)) ? SetConfigPreparation::ReturnedTrue : SetConfigPreparation::ReturnedFalse;
         }
     }
     if (candidate.ultimate_profiles_count == 0) candidate.ultimate_profiles[0] = UltimateProfile_init_default;
+    return SetConfigPreparation::Ready;
+}
+
+bool ConfiguratorBackend::HandleSetConfig() {
+    const auto prepared = PrepareSetConfig();
+    if (prepared != SetConfigPreparation::Ready)
+        return prepared == SetConfigPreparation::ReturnedTrue;
+    Config &candidate = ConfigWriteCandidate();
     if (!persistence.SaveConfig(candidate)) {
         char errmsg[] = "Failed to save config to memory";
         WritePacket(CMD_ERROR, (uint8_t *)errmsg, sizeof(errmsg));

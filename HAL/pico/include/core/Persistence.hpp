@@ -80,10 +80,14 @@ class Persistence {
     ConfigSemanticValidator _validator = nullptr;
 
     enum class CaptureAction : uint8_t { Refused, ExistingExact, NeedsCopy };
+    bool ValidateLegacySource();
     bool CheckCaptureInput();
     bool AdmitCaptureSource();
     CaptureAction PrepareCaptureSource(uint8_t digest[32]);
     bool ExecuteCaptureSource(uint8_t digest[32]);
+    bool RemoveCaptureTemporary();
+    bool CopyCapturedSource();
+    bool VerifyPublishCapturedSource(uint8_t digest[32]);
     LoadResult ReadConfigCandidate();
     SaveResult VerifyExpectedConfigGeneration(uint64_t expected_generation);
     bool PrepareSaveConfig(const Config &config);

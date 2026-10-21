@@ -1,0 +1,14 @@
+{
+  "authority": "543ab532918dcf71925940d0f7ff8c172209420a",
+  "stage": "IMPLEMENTED_INITIAL_SCOPED_PROOF_NOT_FINAL",
+  "hash_file_body_unchanged_sha256": "e855ecc10ea309fdbb893e9dd263eec25cee6908d668964fa9d062685e782bb7",
+  "new_layout_static_bytes": 0,
+  "ownership": "existing PreparedCreate reused; enum decisions automatic; existing ONE File slot shared Save/copy input only",
+  "initial_o3": "/private/tmp/glyph-native-AE-initial-O3/manifest.json",
+  "states": [
+    "P1_OPEN",
+    "ALL31_OPEN",
+    "FINAL_BOTH_ABI_DIFFERENTIAL_PENDING",
+    "NO_HARDWARE"
+  ]
+}

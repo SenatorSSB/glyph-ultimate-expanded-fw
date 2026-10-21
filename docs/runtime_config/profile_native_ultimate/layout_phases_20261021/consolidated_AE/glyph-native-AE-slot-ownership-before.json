@@ -1,0 +1,24 @@
+{
+  "state": "SOURCE_NONREENTRY_PRECONDITION_VERIFIED_BEFORE_COPY_SLOT_EDIT",
+  "head": "a4e72d3fed92aa54e33e4e14340b019a9850d328",
+  "source_pins": {
+    "HAL/pico/src/core/Persistence.cpp": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1",
+    "HAL/pico/include/core/CheckedStorageFile.hpp": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "include/core/ProfileStoreReadTrace.hpp": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+    "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+    "config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+    "src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+    "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+    "include/core/RecoveryInitialization.hpp": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+    "config/glyph/common/src/config.cpp": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+  },
+  "facts": [
+    "Existing four Save scopes are synchronous sequential locals; no Save call invokes Capture and no Capture helper invokes Save. No coroutine/deferred filesystem writer.",
+    "Concrete CheckedStorageFile stream methods only invoke CheckedStorage. Production fault callback is compiled out; strict candidate Hook classifies single-shot state without writer calls. Read trace production inert; candidate callback only observer packet classification, no Save/Capture call.",
+    "CheckSavedConfig is seek/read/CRC only; validator pure semantic/RGB checks and never runs during owned copy I/O. Native encode callback validates lease and emits bytes, no persistence dispatch.",
+    "Core0 setup/Configurator/mode lane is sole Config/filesystem writer. Existing pinned IRQ/core1 resource reports show no Save/Capture/slot acquisition. USB callbacks service endpoint/FIFO only; no recursive foreground Configurator dispatch from file I/O.",
+    "Host fault hooks used by tests only observe/count/inject, no Save/Capture reentry. New slot use must preserve these invariants; no lock/refusal/extra slot permitted."
+  ],
+  "limits": "Source-grounded proof, not runtime concurrency measurement or generic reentrancy promise; recheck after implementation and fresh review."
+}

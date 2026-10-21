@@ -54,6 +54,8 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleUnknownCommand(Command command);
     bool HandleGetDeviceInfo();
     bool HandleGetConfig();
+    enum class SetConfigPreparation : uint8_t { Ready, ReturnedFalse, ReturnedTrue };
+    SetConfigPreparation PrepareSetConfig();
     bool HandleSetConfig();
     bool HandleProfileStore();
     bool ReceiveProfileStore();

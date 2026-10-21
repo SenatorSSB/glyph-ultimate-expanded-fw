@@ -33,22 +33,24 @@
 
 namespace {
 
-// Config writers are synchronous core0 operations. Each original file scope
-// ends before the next starts; this raw slot owns no live file between phases.
+// Config save and migration-copy writers are synchronous core0 operations.
+// Only the original copy input shares this slot; its output remains automatic.
+// No Save/Capture/callback/IRQ/core1 path recursively acquires a live slot.
+// Every scope explicitly destroys its File and clears the raw bytes on exit.
 alignas(CheckedStorageFile) uint8_t save_file_slot[sizeof(CheckedStorageFile)]{};
-template <bool Write> class SaveFileScope {
+template <bool Write> class SynchronousFileScope {
   public:
-    __attribute__((noinline)) SaveFileScope(const char *path) {
+    __attribute__((noinline)) SynchronousFileScope(const char *path) {
         std::memset(save_file_slot, 0, sizeof(save_file_slot));
         _file = ::new (save_file_slot) CheckedStorageFile(path, Write ? "w+" : "r");
     }
-    __attribute__((noinline)) ~SaveFileScope() {
+    __attribute__((noinline)) ~SynchronousFileScope() {
         _file->CheckedStorageFile::~CheckedStorageFile(); // preserve opened-handle destructor fallback
         std::memset(save_file_slot, 0, sizeof(save_file_slot));
     }
     CheckedStorageFile &File() { return *_file; }
-    SaveFileScope(const SaveFileScope &) = delete;
-    SaveFileScope &operator=(const SaveFileScope &) = delete;
+    SynchronousFileScope(const SynchronousFileScope &) = delete;
+    SynchronousFileScope &operator=(const SynchronousFileScope &) = delete;
   private:
     CheckedStorageFile *_file;
 };
@@ -114,8 +116,7 @@ bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t
     return pb_encode(&compare, Config_fields, &config) && compare.bytes_written == encoded_size;
 }
 
-__attribute__((noinline)) bool copy_checked_file(const char *from, const char *to, size_t length, bool &uncertain) {
-    CheckedStorageFile input(from, "r"), output(to, "w+");
+__attribute__((noinline)) bool copy_open_files(CheckedStorageFile &input, CheckedStorageFile &output, size_t length, bool &uncertain) {
     bool copied = input && output;
     uint8_t scratch[64]; size_t remaining = length;
     while (copied && remaining) {
@@ -127,6 +128,12 @@ __attribute__((noinline)) bool copy_checked_file(const char *from, const char *t
     const bool input_closed = input.close(), output_closed = output.close();
     uncertain = input.uncertain() || output.uncertain();
     return copied && input_closed && output_closed;
+}
+
+__attribute__((noinline)) bool copy_checked_file(const char *from, const char *to, size_t length, bool &uncertain) {
+    SynchronousFileScope<false> input_scope(from);
+    CheckedStorageFile output(to, "w+"); // constructed even when input failed
+    return copy_open_files(input_scope.File(), output, length, uncertain);
 }
 
 __attribute__((noinline)) bool hash_file(const char *path, uint8_t digest[32]) {
@@ -217,7 +224,7 @@ __attribute__((noinline)) Persistence::SaveResult Persistence::VerifyExpectedCon
     const char *filename = nullptr;
     if (!select_config_filename(config_filename, prior_compact_filename, legacy_config_filename, filename, source))
         return SaveResult::StorageFailure;
-    SaveFileScope<false> scope(filename);
+    SynchronousFileScope<false> scope(filename);
     auto &current = scope.File();
     if (!current) return SaveResult::StorageFailure;
     ConfigHeader header;
@@ -251,7 +258,7 @@ __attribute__((noinline)) bool Persistence::RemoveSaveTemporary() {
 }
 
 __attribute__((noinline)) bool Persistence::StageSaveConfig(Config &config) {
-    SaveFileScope<true> scope(save_temporary_filename);
+    SynchronousFileScope<true> scope(save_temporary_filename);
     return WriteStagedConfig(scope.File(), config);
 }
 
@@ -282,7 +289,7 @@ __attribute__((noinline)) bool Persistence::WriteStagedConfig(CheckedStorageFile
 }
 
 __attribute__((noinline)) bool Persistence::VerifyStagedConfig(Config &config) {
-    SaveFileScope<false> scope(save_temporary_filename);
+    SynchronousFileScope<false> scope(save_temporary_filename);
     auto &staged = scope.File();
     bool verified = staged && CheckSavedConfig(staged) && staged.seek(config_offset);
     // Compare independently reopened bytes with a second deterministic encode.
@@ -317,7 +324,7 @@ __attribute__((noinline)) bool Persistence::PublishStagedConfig(Config &config) 
         if (publication.outcome == Outcome::Uncertain) {
             _mutation_fenced = true;
             // Exact authenticated readback can resolve a lost acknowledgement.
-            SaveFileScope<false> scope(config_filename);
+            SynchronousFileScope<false> scope(config_filename);
             auto &published = scope.File();
             ConfigHeader actual{};
             bool match = published && CheckSavedConfig(published) && published.seek(0) &&
@@ -356,12 +363,17 @@ Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
     return SaveResult::Saved;
 }
 
-__attribute__((noinline)) bool Persistence::LegacySourceIdentity(uint8_t digest[32]) {
+__attribute__((noinline)) bool Persistence::ValidateLegacySource() {
     if (!IsAvailable()) return false;
     CheckedStorageFile source("/ultimate-migration.src", "r");
     if (!source) return false;
     const bool valid = CheckSavedConfig(source);
     if (!source.close() || !valid) return false;
+    return true;
+}
+
+__attribute__((noinline)) bool Persistence::LegacySourceIdentity(uint8_t digest[32]) {
+    if (!ValidateLegacySource()) return false;
     return hash_file("/ultimate-migration.src", digest);
 }
 
@@ -420,14 +432,23 @@ bool Persistence::CaptureLegacySource(uint8_t digest[32]) {
     return ExecuteCaptureSource(digest);
 }
 
-__attribute__((noinline)) bool Persistence::ExecuteCaptureSource(uint8_t digest[32]) {
+__attribute__((noinline)) bool Persistence::RemoveCaptureTemporary() {
     using namespace CheckedStorage;
     auto removed = Remove("/ultimate-migration.tmp", Kind::Config);
     if (!removed) { _mutation_fenced = removed.outcome == Outcome::Uncertain; return false; }
+    return true;
+}
+
+__attribute__((noinline)) bool Persistence::CopyCapturedSource() {
     bool uncertain = false;
     if (!copy_checked_file(capture_phase.filename, "/ultimate-migration.tmp", capture_phase.length, uncertain)) {
         _mutation_fenced = uncertain; return false;
     }
+    return true;
+}
+
+__attribute__((noinline)) bool Persistence::VerifyPublishCapturedSource(uint8_t digest[32]) {
+    using namespace CheckedStorage;
     uint8_t actual[32];
     if (!hash_file("/ultimate-migration.tmp", actual) || std::memcmp(actual, digest, sizeof(actual))) return false;
     auto published = Rename("/ultimate-migration.tmp", "/ultimate-migration.src", Kind::Config);
@@ -436,6 +457,11 @@ __attribute__((noinline)) bool Persistence::ExecuteCaptureSource(uint8_t digest[
         _mutation_fenced = published.outcome == Outcome::Uncertain; return false;
     }
     return true;
+}
+
+__attribute__((noinline)) bool Persistence::ExecuteCaptureSource(uint8_t digest[32]) {
+    if (!RemoveCaptureTemporary() || !CopyCapturedSource()) return false;
+    return VerifyPublishCapturedSource(digest);
 }
 
 Persistence::LoadResult Persistence::ReadLegacyProfile(size_t index, UltimateProfile &profile) {

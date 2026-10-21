@@ -238,7 +238,13 @@ class ProfileStore {
         UltimateProfile &into,
         bool *unsupported = nullptr
     ) const;
+    enum class ReconcileAction : uint8_t { Refused, Complete, WriteCompleted, PublishAborted };
+    ReconcileAction PrepareReconciliation();
     TransactionResult FinalizePreparedCreate();
+    TransactionResult FinalizePreparedUpdate();
+    void PrepareCreateRecord();
+    void ExecutePreparedCreate();
+    void PrepareUpdateRecord();
     void PrepareCreate();
     TransactionResult PrepareDuplicate(uint32_t id, uint32_t rev, const TransactionIdentity &t);
     bool PublishPreparedProfile();
