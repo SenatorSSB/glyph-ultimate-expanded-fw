@@ -1,0 +1,3781 @@
+{
+  "kind": "INDEPENDENT_ROOT_LFS_DAG_NUMERICAL_REPLAY_NO_NEW_CALL_GRAPH",
+  "utc": "2026-10-21T11:52:50.950469+00:00",
+  "input_path": "/private/tmp/glyph-native-lfs-inner-bound-graph-20261021.json",
+  "input_sha256": "08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f",
+  "definitions": 106,
+  "nodes_with_supplied_bounds": 96,
+  "checks": [
+    {
+      "node": "ALLOC_WRAPPER",
+      "profile": "E",
+      "recomputed_bytes": 136,
+      "reported_bytes": 136,
+      "selected_chain_terms": [
+        0,
+        136
+      ]
+    },
+    {
+      "node": "ALLOC_WRAPPER",
+      "profile": "U",
+      "recomputed_bytes": 24,
+      "reported_bytes": 24,
+      "selected_chain_terms": [
+        0,
+        24
+      ]
+    },
+    {
+      "node": "ALLOC_WRAPPER",
+      "profile": "M",
+      "recomputed_bytes": 136,
+      "reported_bytes": 136,
+      "selected_chain_terms": [
+        0,
+        136
+      ]
+    },
+    {
+      "node": "INTEGER_DIVIDE_NONZERO20",
+      "profile": "E",
+      "recomputed_bytes": 20,
+      "reported_bytes": 20,
+      "selected_chain_terms": [
+        0,
+        20
+      ]
+    },
+    {
+      "node": "INTEGER_DIVIDE_NONZERO20",
+      "profile": "U",
+      "recomputed_bytes": 20,
+      "reported_bytes": 20,
+      "selected_chain_terms": [
+        0,
+        20
+      ]
+    },
+    {
+      "node": "INTEGER_DIVIDE_NONZERO20",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "PINNED_READ_CALLBACK",
+      "profile": "E",
+      "recomputed_bytes": 20,
+      "reported_bytes": 20,
+      "selected_chain_terms": [
+        0,
+        20
+      ]
+    },
+    {
+      "node": "PINNED_READ_CALLBACK",
+      "profile": "U",
+      "recomputed_bytes": 20,
+      "reported_bytes": 20,
+      "selected_chain_terms": [
+        0,
+        20
+      ]
+    },
+    {
+      "node": "PINNED_READ_CALLBACK",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "ROM_MEMCPY_MAX12",
+      "profile": "E",
+      "recomputed_bytes": 12,
+      "reported_bytes": 12,
+      "selected_chain_terms": [
+        0,
+        12
+      ]
+    },
+    {
+      "node": "ROM_MEMCPY_MAX12",
+      "profile": "U",
+      "recomputed_bytes": 12,
+      "reported_bytes": 12,
+      "selected_chain_terms": [
+        0,
+        12
+      ]
+    },
+    {
+      "node": "ROM_MEMCPY_MAX12",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_bd_read.part.0.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 84,
+      "reported_bytes": 84,
+      "selected_chain_terms": [
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_read.part.0.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 84,
+      "reported_bytes": 84,
+      "selected_chain_terms": [
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_read.part.0.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_crc",
+      "profile": "E",
+      "recomputed_bytes": 16,
+      "reported_bytes": 16,
+      "selected_chain_terms": [
+        16
+      ]
+    },
+    {
+      "node": "lfs_crc",
+      "profile": "U",
+      "recomputed_bytes": 16,
+      "reported_bytes": 16,
+      "selected_chain_terms": [
+        16
+      ]
+    },
+    {
+      "node": "lfs_crc",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "FETCH_NULL",
+      "profile": "E",
+      "recomputed_bytes": 236,
+      "reported_bytes": 236,
+      "selected_chain_terms": [
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "FETCH_NULL",
+      "profile": "U",
+      "recomputed_bytes": 236,
+      "reported_bytes": 236,
+      "selected_chain_terms": [
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "FETCH_NULL",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "FREE_WRAPPER",
+      "profile": "E",
+      "recomputed_bytes": 136,
+      "reported_bytes": 136,
+      "selected_chain_terms": [
+        0,
+        136
+      ]
+    },
+    {
+      "node": "FREE_WRAPPER",
+      "profile": "U",
+      "recomputed_bytes": 24,
+      "reported_bytes": 24,
+      "selected_chain_terms": [
+        0,
+        24
+      ]
+    },
+    {
+      "node": "FREE_WRAPPER",
+      "profile": "M",
+      "recomputed_bytes": 136,
+      "reported_bytes": 136,
+      "selected_chain_terms": [
+        0,
+        136
+      ]
+    },
+    {
+      "node": "ROM_MEMSET_MAX8",
+      "profile": "E",
+      "recomputed_bytes": 8,
+      "reported_bytes": 8,
+      "selected_chain_terms": [
+        0,
+        8
+      ]
+    },
+    {
+      "node": "ROM_MEMSET_MAX8",
+      "profile": "U",
+      "recomputed_bytes": 8,
+      "reported_bytes": 8,
+      "selected_chain_terms": [
+        0,
+        8
+      ]
+    },
+    {
+      "node": "ROM_MEMSET_MAX8",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_deinit",
+      "profile": "E",
+      "recomputed_bytes": 144,
+      "reported_bytes": 144,
+      "selected_chain_terms": [
+        8,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "lfs_deinit",
+      "profile": "U",
+      "recomputed_bytes": 32,
+      "reported_bytes": 32,
+      "selected_chain_terms": [
+        8,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_deinit",
+      "profile": "M",
+      "recomputed_bytes": 144,
+      "reported_bytes": 144,
+      "selected_chain_terms": [
+        8,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "lfs_dir_getgstate",
+      "profile": "E",
+      "recomputed_bytes": 164,
+      "reported_bytes": 164,
+      "selected_chain_terms": [
+        80,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getgstate",
+      "profile": "U",
+      "recomputed_bytes": 164,
+      "reported_bytes": 164,
+      "selected_chain_terms": [
+        80,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getgstate",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_mount",
+      "profile": "E",
+      "recomputed_bytes": 356,
+      "reported_bytes": 356,
+      "selected_chain_terms": [
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_mount",
+      "profile": "U",
+      "recomputed_bytes": 356,
+      "reported_bytes": 356,
+      "selected_chain_terms": [
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_mount",
+      "profile": "M",
+      "recomputed_bytes": 264,
+      "reported_bytes": 264,
+      "selected_chain_terms": [
+        120,
+        8,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "STRING_HELPER_MAX12",
+      "profile": "E",
+      "recomputed_bytes": 12,
+      "reported_bytes": 12,
+      "selected_chain_terms": [
+        0,
+        12
+      ]
+    },
+    {
+      "node": "STRING_HELPER_MAX12",
+      "profile": "U",
+      "recomputed_bytes": 12,
+      "reported_bytes": 12,
+      "selected_chain_terms": [
+        0,
+        12
+      ]
+    },
+    {
+      "node": "STRING_HELPER_MAX12",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_find_match",
+      "profile": "E",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_find_match",
+      "profile": "U",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_find_match",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "FETCH_FIND",
+      "profile": "E",
+      "recomputed_bytes": 308,
+      "reported_bytes": 308,
+      "selected_chain_terms": [
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "FETCH_FIND",
+      "profile": "U",
+      "recomputed_bytes": 308,
+      "reported_bytes": 308,
+      "selected_chain_terms": [
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "FETCH_FIND",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.1",
+      "profile": "E",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.1",
+      "profile": "U",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.1",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_find",
+      "profile": "E",
+      "recomputed_bytes": 404,
+      "reported_bytes": 404,
+      "selected_chain_terms": [
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_find",
+      "profile": "U",
+      "recomputed_bytes": 404,
+      "reported_bytes": 404,
+      "selected_chain_terms": [
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_find",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_bd_read",
+      "profile": "E",
+      "recomputed_bytes": 84,
+      "reported_bytes": 84,
+      "selected_chain_terms": [
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_read",
+      "profile": "U",
+      "recomputed_bytes": 84,
+      "reported_bytes": 84,
+      "selected_chain_terms": [
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_read",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_fs_parent_match",
+      "profile": "E",
+      "recomputed_bytes": 124,
+      "reported_bytes": 124,
+      "selected_chain_terms": [
+        40,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_parent_match",
+      "profile": "U",
+      "recomputed_bytes": 124,
+      "reported_bytes": 124,
+      "selected_chain_terms": [
+        40,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_parent_match",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "FETCH_PARENT",
+      "profile": "E",
+      "recomputed_bytes": 276,
+      "reported_bytes": 276,
+      "selected_chain_terms": [
+        152,
+        40,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "FETCH_PARENT",
+      "profile": "U",
+      "recomputed_bytes": 276,
+      "reported_bytes": 276,
+      "selected_chain_terms": [
+        152,
+        40,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "FETCH_PARENT",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "PINNED_FLASH_CALLBACK",
+      "profile": "E",
+      "recomputed_bytes": 24,
+      "reported_bytes": 24,
+      "selected_chain_terms": [
+        0,
+        24
+      ]
+    },
+    {
+      "node": "PINNED_FLASH_CALLBACK",
+      "profile": "U",
+      "recomputed_bytes": 40,
+      "reported_bytes": 40,
+      "selected_chain_terms": [
+        0,
+        40
+      ]
+    },
+    {
+      "node": "PINNED_FLASH_CALLBACK",
+      "profile": "M",
+      "recomputed_bytes": 152,
+      "reported_bytes": 152,
+      "selected_chain_terms": [
+        0,
+        152
+      ]
+    },
+    {
+      "node": "PINNED_SYNC_CALLBACK",
+      "profile": "E",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0,
+        0
+      ]
+    },
+    {
+      "node": "PINNED_SYNC_CALLBACK",
+      "profile": "U",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0,
+        0
+      ]
+    },
+    {
+      "node": "PINNED_SYNC_CALLBACK",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_bd_flush",
+      "profile": "E",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_flush",
+      "profile": "U",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_flush",
+      "profile": "M",
+      "recomputed_bytes": 224,
+      "reported_bytes": 224,
+      "selected_chain_terms": [
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_commitcrc",
+      "profile": "E",
+      "recomputed_bytes": 260,
+      "reported_bytes": 260,
+      "selected_chain_terms": [
+        104,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_commitcrc",
+      "profile": "U",
+      "recomputed_bytes": 260,
+      "reported_bytes": 260,
+      "selected_chain_terms": [
+        104,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_commitcrc",
+      "profile": "M",
+      "recomputed_bytes": 328,
+      "reported_bytes": 328,
+      "selected_chain_terms": [
+        104,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_commitprog",
+      "profile": "E",
+      "recomputed_bytes": 96,
+      "reported_bytes": 96,
+      "selected_chain_terms": [
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_commitprog",
+      "profile": "U",
+      "recomputed_bytes": 112,
+      "reported_bytes": 112,
+      "selected_chain_terms": [
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_commitprog",
+      "profile": "M",
+      "recomputed_bytes": 224,
+      "reported_bytes": 224,
+      "selected_chain_terms": [
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "ROM_BITOPS_STACK0",
+      "profile": "E",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0,
+        0
+      ]
+    },
+    {
+      "node": "ROM_BITOPS_STACK0",
+      "profile": "U",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0,
+        0
+      ]
+    },
+    {
+      "node": "ROM_BITOPS_STACK0",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_alloc",
+      "profile": "E",
+      "recomputed_bytes": 372,
+      "reported_bytes": 372,
+      "selected_chain_terms": [
+        136,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_alloc",
+      "profile": "U",
+      "recomputed_bytes": 372,
+      "reported_bytes": 372,
+      "selected_chain_terms": [
+        136,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_alloc",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_alloc",
+      "profile": "E",
+      "recomputed_bytes": 356,
+      "reported_bytes": 356,
+      "selected_chain_terms": [
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_alloc",
+      "profile": "U",
+      "recomputed_bytes": 356,
+      "reported_bytes": 356,
+      "selected_chain_terms": [
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_alloc",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_commit_commit",
+      "profile": "E",
+      "recomputed_bytes": 168,
+      "reported_bytes": 168,
+      "selected_chain_terms": [
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_commit_commit",
+      "profile": "U",
+      "recomputed_bytes": 184,
+      "reported_bytes": 184,
+      "selected_chain_terms": [
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_commit_commit",
+      "profile": "M",
+      "recomputed_bytes": 296,
+      "reported_bytes": 296,
+      "selected_chain_terms": [
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_commit_size",
+      "profile": "E",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0
+      ]
+    },
+    {
+      "node": "lfs_dir_commit_size",
+      "profile": "U",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0
+      ]
+    },
+    {
+      "node": "lfs_dir_commit_size",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_traverse_filter",
+      "profile": "E",
+      "recomputed_bytes": 12,
+      "reported_bytes": 12,
+      "selected_chain_terms": [
+        12
+      ]
+    },
+    {
+      "node": "lfs_dir_traverse_filter",
+      "profile": "U",
+      "recomputed_bytes": 12,
+      "reported_bytes": 12,
+      "selected_chain_terms": [
+        12
+      ]
+    },
+    {
+      "node": "lfs_dir_traverse_filter",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_traverse.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 384,
+      "reported_bytes": 384,
+      "selected_chain_terms": [
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_traverse.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 400,
+      "reported_bytes": 400,
+      "selected_chain_terms": [
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_traverse.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": 512,
+      "reported_bytes": 512,
+      "selected_chain_terms": [
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_compact",
+      "profile": "E",
+      "recomputed_bytes": 520,
+      "reported_bytes": 520,
+      "selected_chain_terms": [
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_compact",
+      "profile": "U",
+      "recomputed_bytes": 536,
+      "reported_bytes": 536,
+      "selected_chain_terms": [
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_compact",
+      "profile": "M",
+      "recomputed_bytes": 648,
+      "reported_bytes": 648,
+      "selected_chain_terms": [
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_ctz_traverse.part.0.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_ctz_traverse.part.0.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_ctz_traverse.part.0.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_fs_rawtraverse.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 332,
+      "reported_bytes": 332,
+      "selected_chain_terms": [
+        96,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_rawtraverse.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 332,
+      "reported_bytes": 332,
+      "selected_chain_terms": [
+        96,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_rawtraverse.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_splittingcompact.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 712,
+      "reported_bytes": 712,
+      "selected_chain_terms": [
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_splittingcompact.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 728,
+      "reported_bytes": 728,
+      "selected_chain_terms": [
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_splittingcompact.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": 840,
+      "reported_bytes": 840,
+      "selected_chain_terms": [
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_fs_pred",
+      "profile": "E",
+      "recomputed_bytes": 276,
+      "reported_bytes": 276,
+      "selected_chain_terms": [
+        40,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_pred",
+      "profile": "U",
+      "recomputed_bytes": 276,
+      "reported_bytes": 276,
+      "selected_chain_terms": [
+        40,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_pred",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_relocatingcommit",
+      "profile": "E",
+      "recomputed_bytes": 848,
+      "reported_bytes": 848,
+      "selected_chain_terms": [
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_relocatingcommit",
+      "profile": "U",
+      "recomputed_bytes": 864,
+      "reported_bytes": 864,
+      "selected_chain_terms": [
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_relocatingcommit",
+      "profile": "M",
+      "recomputed_bytes": 976,
+      "reported_bytes": 976,
+      "selected_chain_terms": [
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_relocatingcommit.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 848,
+      "reported_bytes": 848,
+      "selected_chain_terms": [
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_relocatingcommit.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 864,
+      "reported_bytes": 864,
+      "selected_chain_terms": [
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_relocatingcommit.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": 976,
+      "reported_bytes": 976,
+      "selected_chain_terms": [
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_ctz_find.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 148,
+      "reported_bytes": 148,
+      "selected_chain_terms": [
+        64,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_ctz_find.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 148,
+      "reported_bytes": 148,
+      "selected_chain_terms": [
+        64,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_ctz_find.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.2",
+      "profile": "E",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.2",
+      "profile": "U",
+      "recomputed_bytes": 156,
+      "reported_bytes": 156,
+      "selected_chain_terms": [
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getslice.constprop.2",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_file_flushedread",
+      "profile": "E",
+      "recomputed_bytes": 252,
+      "reported_bytes": 252,
+      "selected_chain_terms": [
+        96,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_flushedread",
+      "profile": "U",
+      "recomputed_bytes": 252,
+      "reported_bytes": 252,
+      "selected_chain_terms": [
+        96,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_flushedread",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_bd_prog.constprop.0",
+      "profile": "E",
+      "recomputed_bytes": 196,
+      "reported_bytes": 196,
+      "selected_chain_terms": [
+        40,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_prog.constprop.0",
+      "profile": "U",
+      "recomputed_bytes": 196,
+      "reported_bytes": 196,
+      "selected_chain_terms": [
+        40,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_bd_prog.constprop.0",
+      "profile": "M",
+      "recomputed_bytes": 264,
+      "reported_bytes": 264,
+      "selected_chain_terms": [
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_relocate",
+      "profile": "E",
+      "recomputed_bytes": 436,
+      "reported_bytes": 436,
+      "selected_chain_terms": [
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_relocate",
+      "profile": "U",
+      "recomputed_bytes": 436,
+      "reported_bytes": 436,
+      "selected_chain_terms": [
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_relocate",
+      "profile": "M",
+      "recomputed_bytes": 344,
+      "reported_bytes": 344,
+      "selected_chain_terms": [
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_flushedwrite",
+      "profile": "E",
+      "recomputed_bytes": 540,
+      "reported_bytes": 540,
+      "selected_chain_terms": [
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_flushedwrite",
+      "profile": "U",
+      "recomputed_bytes": 540,
+      "reported_bytes": 540,
+      "selected_chain_terms": [
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_flushedwrite",
+      "profile": "M",
+      "recomputed_bytes": 448,
+      "reported_bytes": 448,
+      "selected_chain_terms": [
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_flush",
+      "profile": "E",
+      "recomputed_bytes": 652,
+      "reported_bytes": 652,
+      "selected_chain_terms": [
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_flush",
+      "profile": "U",
+      "recomputed_bytes": 652,
+      "reported_bytes": 652,
+      "selected_chain_terms": [
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_flush",
+      "profile": "M",
+      "recomputed_bytes": 560,
+      "reported_bytes": 560,
+      "selected_chain_terms": [
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_orphaningcommit",
+      "profile": "E",
+      "recomputed_bytes": 1008,
+      "reported_bytes": 1008,
+      "selected_chain_terms": [
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_dir_orphaningcommit",
+      "profile": "U",
+      "recomputed_bytes": 1024,
+      "reported_bytes": 1024,
+      "selected_chain_terms": [
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_dir_orphaningcommit",
+      "profile": "M",
+      "recomputed_bytes": 1136,
+      "reported_bytes": 1136,
+      "selected_chain_terms": [
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_fs_deorphan",
+      "profile": "E",
+      "recomputed_bytes": 1184,
+      "reported_bytes": 1184,
+      "selected_chain_terms": [
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_fs_deorphan",
+      "profile": "U",
+      "recomputed_bytes": 1200,
+      "reported_bytes": 1200,
+      "selected_chain_terms": [
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_fs_deorphan",
+      "profile": "M",
+      "recomputed_bytes": 1312,
+      "reported_bytes": 1312,
+      "selected_chain_terms": [
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_fs_forceconsistency",
+      "profile": "E",
+      "recomputed_bytes": 1248,
+      "reported_bytes": 1248,
+      "selected_chain_terms": [
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_fs_forceconsistency",
+      "profile": "U",
+      "recomputed_bytes": 1264,
+      "reported_bytes": 1264,
+      "selected_chain_terms": [
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_fs_forceconsistency",
+      "profile": "M",
+      "recomputed_bytes": 1376,
+      "reported_bytes": 1376,
+      "selected_chain_terms": [
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_rawopencfg",
+      "profile": "E",
+      "recomputed_bytes": 1328,
+      "reported_bytes": 1328,
+      "selected_chain_terms": [
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_file_rawopencfg",
+      "profile": "U",
+      "recomputed_bytes": 1344,
+      "reported_bytes": 1344,
+      "selected_chain_terms": [
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_file_rawopencfg",
+      "profile": "M",
+      "recomputed_bytes": 1456,
+      "reported_bytes": 1456,
+      "selected_chain_terms": [
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_open",
+      "profile": "E",
+      "recomputed_bytes": 1344,
+      "reported_bytes": 1344,
+      "selected_chain_terms": [
+        16,
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_file_open",
+      "profile": "U",
+      "recomputed_bytes": 1360,
+      "reported_bytes": 1360,
+      "selected_chain_terms": [
+        16,
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_file_open",
+      "profile": "M",
+      "recomputed_bytes": 1472,
+      "reported_bytes": 1472,
+      "selected_chain_terms": [
+        16,
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_close",
+      "profile": "E",
+      "recomputed_bytes": 1232,
+      "reported_bytes": 1232,
+      "selected_chain_terms": [
+        48,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_file_close",
+      "profile": "U",
+      "recomputed_bytes": 1248,
+      "reported_bytes": 1248,
+      "selected_chain_terms": [
+        48,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_file_close",
+      "profile": "M",
+      "recomputed_bytes": 1360,
+      "reported_bytes": 1360,
+      "selected_chain_terms": [
+        48,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_read",
+      "profile": "E",
+      "recomputed_bytes": 676,
+      "reported_bytes": 676,
+      "selected_chain_terms": [
+        24,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_read",
+      "profile": "U",
+      "recomputed_bytes": 676,
+      "reported_bytes": 676,
+      "selected_chain_terms": [
+        24,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_read",
+      "profile": "M",
+      "recomputed_bytes": 584,
+      "reported_bytes": 584,
+      "selected_chain_terms": [
+        24,
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_write",
+      "profile": "E",
+      "recomputed_bytes": 692,
+      "reported_bytes": 692,
+      "selected_chain_terms": [
+        40,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_write",
+      "profile": "U",
+      "recomputed_bytes": 692,
+      "reported_bytes": 692,
+      "selected_chain_terms": [
+        40,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_write",
+      "profile": "M",
+      "recomputed_bytes": 600,
+      "reported_bytes": 600,
+      "selected_chain_terms": [
+        40,
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_sync",
+      "profile": "E",
+      "recomputed_bytes": 1224,
+      "reported_bytes": 1224,
+      "selected_chain_terms": [
+        40,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_file_sync",
+      "profile": "U",
+      "recomputed_bytes": 1240,
+      "reported_bytes": 1240,
+      "selected_chain_terms": [
+        40,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_file_sync",
+      "profile": "M",
+      "recomputed_bytes": 1352,
+      "reported_bytes": 1352,
+      "selected_chain_terms": [
+        40,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_file_seek",
+      "profile": "E",
+      "recomputed_bytes": 684,
+      "reported_bytes": 684,
+      "selected_chain_terms": [
+        32,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_seek",
+      "profile": "U",
+      "recomputed_bytes": 684,
+      "reported_bytes": 684,
+      "selected_chain_terms": [
+        32,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_file_seek",
+      "profile": "M",
+      "recomputed_bytes": 592,
+      "reported_bytes": 592,
+      "selected_chain_terms": [
+        32,
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_remove",
+      "profile": "E",
+      "recomputed_bytes": 1320,
+      "reported_bytes": 1320,
+      "selected_chain_terms": [
+        136,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_remove",
+      "profile": "U",
+      "recomputed_bytes": 1336,
+      "reported_bytes": 1336,
+      "selected_chain_terms": [
+        136,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_remove",
+      "profile": "M",
+      "recomputed_bytes": 1448,
+      "reported_bytes": 1448,
+      "selected_chain_terms": [
+        136,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_rename",
+      "profile": "E",
+      "recomputed_bytes": 1424,
+      "reported_bytes": 1424,
+      "selected_chain_terms": [
+        240,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "lfs_rename",
+      "profile": "U",
+      "recomputed_bytes": 1440,
+      "reported_bytes": 1440,
+      "selected_chain_terms": [
+        240,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "lfs_rename",
+      "profile": "M",
+      "recomputed_bytes": 1552,
+      "reported_bytes": 1552,
+      "selected_chain_terms": [
+        240,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "lfs_dir_getinfo",
+      "profile": "E",
+      "recomputed_bytes": 236,
+      "reported_bytes": 236,
+      "selected_chain_terms": [
+        80,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getinfo",
+      "profile": "U",
+      "recomputed_bytes": 236,
+      "reported_bytes": 236,
+      "selected_chain_terms": [
+        80,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_getinfo",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_stat",
+      "profile": "E",
+      "recomputed_bytes": 460,
+      "reported_bytes": 460,
+      "selected_chain_terms": [
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_stat",
+      "profile": "U",
+      "recomputed_bytes": 460,
+      "reported_bytes": 460,
+      "selected_chain_terms": [
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_stat",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_open",
+      "profile": "E",
+      "recomputed_bytes": 460,
+      "reported_bytes": 460,
+      "selected_chain_terms": [
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_open",
+      "profile": "U",
+      "recomputed_bytes": 460,
+      "reported_bytes": 460,
+      "selected_chain_terms": [
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_open",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_read",
+      "profile": "E",
+      "recomputed_bytes": 284,
+      "reported_bytes": 284,
+      "selected_chain_terms": [
+        48,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_read",
+      "profile": "U",
+      "recomputed_bytes": 284,
+      "reported_bytes": 284,
+      "selected_chain_terms": [
+        48,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_read",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_close",
+      "profile": "E",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0
+      ]
+    },
+    {
+      "node": "lfs_dir_close",
+      "profile": "U",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0
+      ]
+    },
+    {
+      "node": "lfs_dir_close",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_dir_rewind",
+      "profile": "E",
+      "recomputed_bytes": 268,
+      "reported_bytes": 268,
+      "selected_chain_terms": [
+        32,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_rewind",
+      "profile": "U",
+      "recomputed_bytes": 268,
+      "reported_bytes": 268,
+      "selected_chain_terms": [
+        32,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_dir_rewind",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "lfs_fs_size",
+      "profile": "E",
+      "recomputed_bytes": 348,
+      "reported_bytes": 348,
+      "selected_chain_terms": [
+        16,
+        96,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_size",
+      "profile": "U",
+      "recomputed_bytes": 348,
+      "reported_bytes": 348,
+      "selected_chain_terms": [
+        16,
+        96,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "lfs_fs_size",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "MOUNT_SHARED_GLOBAL",
+      "profile": "E",
+      "recomputed_bytes": 16,
+      "reported_bytes": 16,
+      "selected_chain_terms": [
+        0,
+        16
+      ]
+    },
+    {
+      "node": "MOUNT_SHARED_GLOBAL",
+      "profile": "U",
+      "recomputed_bytes": 16,
+      "reported_bytes": 16,
+      "selected_chain_terms": [
+        0,
+        16
+      ]
+    },
+    {
+      "node": "MOUNT_SHARED_GLOBAL",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_Open",
+      "profile": "E",
+      "recomputed_bytes": 1432,
+      "reported_bytes": 1432,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_Open",
+      "profile": "U",
+      "recomputed_bytes": 1448,
+      "reported_bytes": 1448,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "CHECKED_Open",
+      "profile": "M",
+      "recomputed_bytes": 1560,
+      "reported_bytes": 1560,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        64,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Read",
+      "profile": "E",
+      "recomputed_bytes": 692,
+      "reported_bytes": 692,
+      "selected_chain_terms": [
+        16,
+        24,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Read",
+      "profile": "U",
+      "recomputed_bytes": 692,
+      "reported_bytes": 692,
+      "selected_chain_terms": [
+        16,
+        24,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Read",
+      "profile": "M",
+      "recomputed_bytes": 600,
+      "reported_bytes": 600,
+      "selected_chain_terms": [
+        16,
+        24,
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Write",
+      "profile": "E",
+      "recomputed_bytes": 708,
+      "reported_bytes": 708,
+      "selected_chain_terms": [
+        16,
+        40,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Write",
+      "profile": "U",
+      "recomputed_bytes": 708,
+      "reported_bytes": 708,
+      "selected_chain_terms": [
+        16,
+        40,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Write",
+      "profile": "M",
+      "recomputed_bytes": 616,
+      "reported_bytes": 616,
+      "selected_chain_terms": [
+        16,
+        40,
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Seek",
+      "profile": "E",
+      "recomputed_bytes": 700,
+      "reported_bytes": 700,
+      "selected_chain_terms": [
+        16,
+        32,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Seek",
+      "profile": "U",
+      "recomputed_bytes": 700,
+      "reported_bytes": 700,
+      "selected_chain_terms": [
+        16,
+        32,
+        112,
+        104,
+        80,
+        120,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Seek",
+      "profile": "M",
+      "recomputed_bytes": 608,
+      "reported_bytes": 608,
+      "selected_chain_terms": [
+        16,
+        32,
+        112,
+        104,
+        80,
+        40,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Sync",
+      "profile": "E",
+      "recomputed_bytes": 1240,
+      "reported_bytes": 1240,
+      "selected_chain_terms": [
+        16,
+        40,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_Sync",
+      "profile": "U",
+      "recomputed_bytes": 1256,
+      "reported_bytes": 1256,
+      "selected_chain_terms": [
+        16,
+        40,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "CHECKED_Sync",
+      "profile": "M",
+      "recomputed_bytes": 1368,
+      "reported_bytes": 1368,
+      "selected_chain_terms": [
+        16,
+        40,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Close",
+      "profile": "E",
+      "recomputed_bytes": 1248,
+      "reported_bytes": 1248,
+      "selected_chain_terms": [
+        16,
+        48,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_Close",
+      "profile": "U",
+      "recomputed_bytes": 1264,
+      "reported_bytes": 1264,
+      "selected_chain_terms": [
+        16,
+        48,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "CHECKED_Close",
+      "profile": "M",
+      "recomputed_bytes": 1376,
+      "reported_bytes": 1376,
+      "selected_chain_terms": [
+        16,
+        48,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Stat",
+      "profile": "E",
+      "recomputed_bytes": 532,
+      "reported_bytes": 532,
+      "selected_chain_terms": [
+        72,
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Stat",
+      "profile": "U",
+      "recomputed_bytes": 532,
+      "reported_bytes": 532,
+      "selected_chain_terms": [
+        72,
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Stat",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_Remove",
+      "profile": "E",
+      "recomputed_bytes": 1368,
+      "reported_bytes": 1368,
+      "selected_chain_terms": [
+        48,
+        136,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_Remove",
+      "profile": "U",
+      "recomputed_bytes": 1384,
+      "reported_bytes": 1384,
+      "selected_chain_terms": [
+        48,
+        136,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "CHECKED_Remove",
+      "profile": "M",
+      "recomputed_bytes": 1496,
+      "reported_bytes": 1496,
+      "selected_chain_terms": [
+        48,
+        136,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_Rename",
+      "profile": "E",
+      "recomputed_bytes": 1448,
+      "reported_bytes": 1448,
+      "selected_chain_terms": [
+        24,
+        240,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_Rename",
+      "profile": "U",
+      "recomputed_bytes": 1464,
+      "reported_bytes": 1464,
+      "selected_chain_terms": [
+        24,
+        240,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "CHECKED_Rename",
+      "profile": "M",
+      "recomputed_bytes": 1576,
+      "reported_bytes": 1576,
+      "selected_chain_terms": [
+        24,
+        240,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "INTEGER_LMUL4",
+      "profile": "E",
+      "recomputed_bytes": 4,
+      "reported_bytes": 4,
+      "selected_chain_terms": [
+        0,
+        4
+      ]
+    },
+    {
+      "node": "INTEGER_LMUL4",
+      "profile": "U",
+      "recomputed_bytes": 4,
+      "reported_bytes": 4,
+      "selected_chain_terms": [
+        0,
+        4
+      ]
+    },
+    {
+      "node": "INTEGER_LMUL4",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_Capacity",
+      "profile": "E",
+      "recomputed_bytes": 404,
+      "reported_bytes": 404,
+      "selected_chain_terms": [
+        56,
+        16,
+        96,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Capacity",
+      "profile": "U",
+      "recomputed_bytes": 404,
+      "reported_bytes": 404,
+      "selected_chain_terms": [
+        56,
+        16,
+        96,
+        152,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Capacity",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "ENUM_VISITOR_PARAMETER",
+      "profile": "E",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0,
+        0
+      ]
+    },
+    {
+      "node": "ENUM_VISITOR_PARAMETER",
+      "profile": "U",
+      "recomputed_bytes": 0,
+      "reported_bytes": 0,
+      "selected_chain_terms": [
+        0,
+        0
+      ]
+    },
+    {
+      "node": "ENUM_VISITOR_PARAMETER",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_Enumerate",
+      "profile": "E",
+      "recomputed_bytes": 676,
+      "reported_bytes": 676,
+      "selected_chain_terms": [
+        216,
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Enumerate",
+      "profile": "U",
+      "recomputed_bytes": 676,
+      "reported_bytes": 676,
+      "selected_chain_terms": [
+        216,
+        56,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_Enumerate",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "RAWOPEN_READONLY",
+      "profile": "E",
+      "recomputed_bytes": 484,
+      "reported_bytes": 484,
+      "selected_chain_terms": [
+        80,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "RAWOPEN_READONLY",
+      "profile": "U",
+      "recomputed_bytes": 484,
+      "reported_bytes": 484,
+      "selected_chain_terms": [
+        80,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "RAWOPEN_READONLY",
+      "profile": "M",
+      "recomputed_bytes": 216,
+      "reported_bytes": 216,
+      "selected_chain_terms": [
+        80,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "PUBLIC_OPEN_READONLY",
+      "profile": "E",
+      "recomputed_bytes": 500,
+      "reported_bytes": 500,
+      "selected_chain_terms": [
+        16,
+        80,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "PUBLIC_OPEN_READONLY",
+      "profile": "U",
+      "recomputed_bytes": 500,
+      "reported_bytes": 500,
+      "selected_chain_terms": [
+        16,
+        80,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "PUBLIC_OPEN_READONLY",
+      "profile": "M",
+      "recomputed_bytes": 232,
+      "reported_bytes": 232,
+      "selected_chain_terms": [
+        16,
+        80,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "FILE_FLUSH_READONLY",
+      "profile": "E",
+      "recomputed_bytes": 112,
+      "reported_bytes": 112,
+      "selected_chain_terms": [
+        112
+      ]
+    },
+    {
+      "node": "FILE_FLUSH_READONLY",
+      "profile": "U",
+      "recomputed_bytes": 112,
+      "reported_bytes": 112,
+      "selected_chain_terms": [
+        112
+      ]
+    },
+    {
+      "node": "FILE_FLUSH_READONLY",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "PUBLIC_CLOSE_READONLY",
+      "profile": "E",
+      "recomputed_bytes": 184,
+      "reported_bytes": 184,
+      "selected_chain_terms": [
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "PUBLIC_CLOSE_READONLY",
+      "profile": "U",
+      "recomputed_bytes": 160,
+      "reported_bytes": 160,
+      "selected_chain_terms": [
+        48,
+        112
+      ]
+    },
+    {
+      "node": "PUBLIC_CLOSE_READONLY",
+      "profile": "M",
+      "recomputed_bytes": 184,
+      "reported_bytes": 184,
+      "selected_chain_terms": [
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "CHECKED_OpenReadOnly",
+      "profile": "E",
+      "recomputed_bytes": 588,
+      "reported_bytes": 588,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_OpenReadOnly",
+      "profile": "U",
+      "recomputed_bytes": 588,
+      "reported_bytes": 588,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        96,
+        152,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_OpenReadOnly",
+      "profile": "M",
+      "recomputed_bytes": 320,
+      "reported_bytes": 320,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "PUBLIC_READ_READONLY",
+      "profile": "E",
+      "recomputed_bytes": 276,
+      "reported_bytes": 276,
+      "selected_chain_terms": [
+        24,
+        96,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "PUBLIC_READ_READONLY",
+      "profile": "U",
+      "recomputed_bytes": 276,
+      "reported_bytes": 276,
+      "selected_chain_terms": [
+        24,
+        96,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "PUBLIC_READ_READONLY",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_ReadReadOnly",
+      "profile": "E",
+      "recomputed_bytes": 292,
+      "reported_bytes": 292,
+      "selected_chain_terms": [
+        16,
+        24,
+        96,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_ReadReadOnly",
+      "profile": "U",
+      "recomputed_bytes": 292,
+      "reported_bytes": 292,
+      "selected_chain_terms": [
+        16,
+        24,
+        96,
+        72,
+        64,
+        0,
+        20
+      ]
+    },
+    {
+      "node": "CHECKED_ReadReadOnly",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_CloseReadOnly",
+      "profile": "E",
+      "recomputed_bytes": 200,
+      "reported_bytes": 200,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "CHECKED_CloseReadOnly",
+      "profile": "U",
+      "recomputed_bytes": 176,
+      "reported_bytes": 176,
+      "selected_chain_terms": [
+        16,
+        48,
+        112
+      ]
+    },
+    {
+      "node": "CHECKED_CloseReadOnly",
+      "profile": "M",
+      "recomputed_bytes": 200,
+      "reported_bytes": 200,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "PUBLIC_SYNC_CLEAN",
+      "profile": "E",
+      "recomputed_bytes": 152,
+      "reported_bytes": 152,
+      "selected_chain_terms": [
+        40,
+        112
+      ]
+    },
+    {
+      "node": "PUBLIC_SYNC_CLEAN",
+      "profile": "U",
+      "recomputed_bytes": 152,
+      "reported_bytes": 152,
+      "selected_chain_terms": [
+        40,
+        112
+      ]
+    },
+    {
+      "node": "PUBLIC_SYNC_CLEAN",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_SyncClean",
+      "profile": "E",
+      "recomputed_bytes": 168,
+      "reported_bytes": 168,
+      "selected_chain_terms": [
+        16,
+        40,
+        112
+      ]
+    },
+    {
+      "node": "CHECKED_SyncClean",
+      "profile": "U",
+      "recomputed_bytes": 168,
+      "reported_bytes": 168,
+      "selected_chain_terms": [
+        16,
+        40,
+        112
+      ]
+    },
+    {
+      "node": "CHECKED_SyncClean",
+      "profile": "M",
+      "recomputed_bytes": null,
+      "reported_bytes": null,
+      "selected_chain_terms": null
+    },
+    {
+      "node": "CHECKED_CloseAfterSuccessfulSync",
+      "profile": "E",
+      "recomputed_bytes": 200,
+      "reported_bytes": 200,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "CHECKED_CloseAfterSuccessfulSync",
+      "profile": "U",
+      "recomputed_bytes": 176,
+      "reported_bytes": 176,
+      "selected_chain_terms": [
+        16,
+        48,
+        112
+      ]
+    },
+    {
+      "node": "CHECKED_CloseAfterSuccessfulSync",
+      "profile": "M",
+      "recomputed_bytes": 200,
+      "reported_bytes": 200,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "RAWOPEN_POSTCONSISTENCY",
+      "profile": "E",
+      "recomputed_bytes": 1264,
+      "reported_bytes": 1264,
+      "selected_chain_terms": [
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "RAWOPEN_POSTCONSISTENCY",
+      "profile": "U",
+      "recomputed_bytes": 1280,
+      "reported_bytes": 1280,
+      "selected_chain_terms": [
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "RAWOPEN_POSTCONSISTENCY",
+      "profile": "M",
+      "recomputed_bytes": 1392,
+      "reported_bytes": 1392,
+      "selected_chain_terms": [
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "PUBLIC_OPEN_POSTCONSISTENCY",
+      "profile": "E",
+      "recomputed_bytes": 1280,
+      "reported_bytes": 1280,
+      "selected_chain_terms": [
+        16,
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "PUBLIC_OPEN_POSTCONSISTENCY",
+      "profile": "U",
+      "recomputed_bytes": 1296,
+      "reported_bytes": 1296,
+      "selected_chain_terms": [
+        16,
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "PUBLIC_OPEN_POSTCONSISTENCY",
+      "profile": "M",
+      "recomputed_bytes": 1408,
+      "reported_bytes": 1408,
+      "selected_chain_terms": [
+        16,
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "CHECKED_OpenPostConsistency",
+      "profile": "E",
+      "recomputed_bytes": 1368,
+      "reported_bytes": 1368,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_OpenPostConsistency",
+      "profile": "U",
+      "recomputed_bytes": 1384,
+      "reported_bytes": 1384,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        40
+      ]
+    },
+    {
+      "node": "CHECKED_OpenPostConsistency",
+      "profile": "M",
+      "recomputed_bytes": 1496,
+      "reported_bytes": 1496,
+      "selected_chain_terms": [
+        88,
+        16,
+        80,
+        176,
+        160,
+        136,
+        192,
+        136,
+        216,
+        72,
+        72,
+        0,
+        152
+      ]
+    },
+    {
+      "node": "PUBLIC_CLOSE_ERRED",
+      "profile": "E",
+      "recomputed_bytes": 184,
+      "reported_bytes": 184,
+      "selected_chain_terms": [
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "PUBLIC_CLOSE_ERRED",
+      "profile": "U",
+      "recomputed_bytes": 72,
+      "reported_bytes": 72,
+      "selected_chain_terms": [
+        48,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "PUBLIC_CLOSE_ERRED",
+      "profile": "M",
+      "recomputed_bytes": 184,
+      "reported_bytes": 184,
+      "selected_chain_terms": [
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "CHECKED_CloseErred",
+      "profile": "E",
+      "recomputed_bytes": 200,
+      "reported_bytes": 200,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        136
+      ]
+    },
+    {
+      "node": "CHECKED_CloseErred",
+      "profile": "U",
+      "recomputed_bytes": 88,
+      "reported_bytes": 88,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        24
+      ]
+    },
+    {
+      "node": "CHECKED_CloseErred",
+      "profile": "M",
+      "recomputed_bytes": 200,
+      "reported_bytes": 200,
+      "selected_chain_terms": [
+        16,
+        48,
+        0,
+        136
+      ]
+    }
+  ],
+  "cycle_count": 0,
+  "missing_edge_targets": 0,
+  "definitions_not_selected_as_contextual_bound_roots": [
+    "lfs_dir_fetchmatch",
+    "lfs_file_rawseek",
+    "lfs_file_size",
+    "lfs_file_tell",
+    "lfs_file_truncate",
+    "lfs_format",
+    "lfs_getattr",
+    "lfs_mkdir",
+    "lfs_setattr",
+    "lfs_unmount"
+  ],
+  "first_attempt": "Root erroneously assumed all106 definitions had supplied bound records; KeyError on unselected lfs_dir_fetchmatch. Corrected replay iterates96 supplied bound roots and all their descendant definitions. No numerical contradiction was found.",
+  "qualification": "Independently recomputed all three scalar maxima and selected-chain component sums for supplied96 bounds from supplied contextual DAG. Does not independently establish completeness or feasibility of supplied source edges, IRQ co-liveness or final source/ELF correspondence. No whole-resource PASS."
+}

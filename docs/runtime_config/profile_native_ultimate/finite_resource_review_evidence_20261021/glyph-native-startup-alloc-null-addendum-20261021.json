@@ -1,0 +1,254 @@
+{
+  "classification": "NAMED_ORDINARY_STARTUP_WCTOB_BTOWC_MALLOC_NULL_PREDICATE_INFEASIBLE_BY_EXACT_PREFIX_HEAP_CENSUS",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+  "elf": {
+    "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf",
+    "bytes": 5592128,
+    "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+  },
+  "requested_model": "INHERIT_PARENT_NO_OVERRIDE",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "original_result_unchanged": {
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021.md": {
+      "bytes": 10534,
+      "sha256": "f7bf25fdfa0431d9d1ce1fa76627a2da1a2d244ed8ba4f20b4c0699487af51a0"
+    },
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021.json": {
+      "bytes": 15026,
+      "sha256": "79ad7ad1d4fe6af16db6432a4a3f4ebd54374ad7dc09d693ce0a8ba4ba96d7b7"
+    },
+    "/private/tmp/glyph-native-early-startup-upper-proof-20261021-pins.json": {
+      "bytes": 24740,
+      "sha256": "f1fd57e5ceb979a2d837e278da9d96db6616dd19207c86e74355f700d60be421"
+    }
+  },
+  "method": "Explicitly allowed finite startup heap census alternative; no unconditional bound for arbitrary __assert_func or all stdio is claimed.",
+  "first_wctob_input": 0,
+  "conversion_misc_initial_pointer": "0x0",
+  "allocation_census": [
+    {
+      "purpose": "LittleFS concrete object",
+      "call": "0x100100f0",
+      "request_bytes": 236,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 240,
+      "proof": "global LittleFS constructor"
+    },
+    {
+      "purpose": "LittleFS shared-count control object",
+      "call": "0x10010196",
+      "request_bytes": 16,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 24,
+      "proof": "same constructor; temporary decrements count2 to1"
+    },
+    {
+      "purpose": "LFS read cache",
+      "call": "0x10015b2c",
+      "request_bytes": 256,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 264,
+      "proof": "one begin\u2192one mount; cfg.cache_size256"
+    },
+    {
+      "purpose": "LFS program cache",
+      "call": "0x10015b46",
+      "request_bytes": 256,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 264,
+      "proof": "same mount; cfg.cache_size256"
+    },
+    {
+      "purpose": "LFS lookahead buffer",
+      "call": "0x10015b56",
+      "request_bytes": 256,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 264,
+      "proof": "same mount; cfg.lookahead_size256"
+    },
+    {
+      "purpose": "classic new-ABI char numpunct cache",
+      "call": "0x10045350",
+      "request_bytes": 104,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 112,
+      "proof": "zeroed cache pointer, fixed allocation"
+    },
+    {
+      "purpose": "classic new-ABI char moneypunct false cache",
+      "call": "0x10044bcc",
+      "request_bytes": 68,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 72,
+      "proof": "zeroed cache pointer, fixed allocation"
+    },
+    {
+      "purpose": "classic new-ABI char moneypunct true cache",
+      "call": "0x10044b30",
+      "request_bytes": 68,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 72,
+      "proof": "zeroed cache pointer, fixed allocation"
+    },
+    {
+      "purpose": "classic char timepunct cache",
+      "call": "0x1005efb0",
+      "request_bytes": 200,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 208,
+      "proof": "zeroed cache pointer, fixed allocation"
+    },
+    {
+      "purpose": "newlib conversion-state misc block",
+      "call": "0x10065796",
+      "request_bytes": 80,
+      "max_executions_before_first_conversion_state": 1,
+      "chunk_bytes": 88,
+      "proof": "first wctob(0); shared with subsequent btowc"
+    }
+  ],
+  "maximum_allocator_calls_through_conversion_state": 10,
+  "request_sum_bytes": 1540,
+  "normalized_chunk_sum_bytes": 1608,
+  "emitted_allocator_state_words": {
+    "0x20005990": "0x20005994",
+    "0x10078284": "0x20005994",
+    "0x20005a7c": "0x0",
+    "0x20005bf0": "0xffffffff",
+    "0x20005bf4": "0x20000",
+    "0x20005bf8": "0x0",
+    "0x20005bfc": "0x0",
+    "0x20005c00": "0x20005bf8",
+    "0x2001f20c": "0x0",
+    "0x2002dc04": "0x0",
+    "0x200304b3": "0x0",
+    "0x10060bb0": "0x100f"
+  },
+  "heap_start": "0x20030508",
+  "existing_sbrk_limit": "0x20040000",
+  "existing_capacity_bytes": 64248,
+  "conservative_positive_growth_calls_max": 11,
+  "each_positive_growth_bound_bytes": 4096,
+  "conservative_break_growth_upper_bytes": 45056,
+  "headroom_below_existing_sbrk_limit_bytes": 19192,
+  "first_install_id_probe": {
+    "qualification": "Small straight-line constant argument probe up to first wchar ctype call; does not execute target code",
+    "first_M_install_calls_before_wchar": [
+      {
+        "call": "0x1004435a",
+        "id": "0x20026e78"
+      },
+      {
+        "call": "0x1004436e",
+        "id": "0x20026ee0"
+      },
+      {
+        "call": "0x100443b6",
+        "id": "0x20026eb0"
+      },
+      {
+        "call": "0x100443c6",
+        "id": "0x20026ef0"
+      },
+      {
+        "call": "0x100443d6",
+        "id": "0x20026ef8"
+      },
+      {
+        "call": "0x100443ee",
+        "id": "0x20026ea0"
+      },
+      {
+        "call": "0x1004443c",
+        "id": "0x20026e90"
+      },
+      {
+        "call": "0x1004448c",
+        "id": "0x20026e94"
+      },
+      {
+        "call": "0x1004449c",
+        "id": "0x20026ec0"
+      },
+      {
+        "call": "0x100444ac",
+        "id": "0x20026ec8"
+      },
+      {
+        "call": "0x10044576",
+        "id": "0x20026dc0"
+      },
+      {
+        "call": "0x10044586",
+        "id": "0x20026eb8"
+      },
+      {
+        "call": "0x10044596",
+        "id": "0x20026f1c"
+      },
+      {
+        "call": "0x100445aa",
+        "id": "0x20026ea8"
+      }
+    ],
+    "all_resolved": true,
+    "distinct_id_objects": 14,
+    "id_initial_words": {
+      "0x20026e78": 0,
+      "0x20026ee0": 0,
+      "0x20026eb0": 0,
+      "0x20026ef0": 0,
+      "0x20026ef8": 0,
+      "0x20026ea0": 0,
+      "0x20026e90": 0,
+      "0x20026e94": 0,
+      "0x20026ec0": 0,
+      "0x20026ec8": 0,
+      "0x20026dc0": 0,
+      "0x20026eb8": 0,
+      "0x20026f1c": 0,
+      "0x20026ea8": 0
+    },
+    "global_id_counter_initial": 0,
+    "heap_capacity_bytes": 64248
+  },
+  "resolved_claims": {
+    "wctob_malloc80_NULL_at_1006579e": "INFEASIBLE on ordinary reset startup before first conversion-state initialization",
+    "btowc_malloc80_NULL_at_1005f45e": "INFEASIBLE in this startup; wctob(0) precedes btowc and stores same _reent+232 block before returning",
+    "earlier_small_allocations_in_census": "Also succeed inductively under same exact fresh-allocator/break proof; not assumed to succeed."
+  },
+  "failure_route_inspection": {
+    "format_address": "0x10074a52",
+    "format": "assertion \"%s\" failed: file \"%s\", line %d%s%s\n",
+    "guard_label": "REENT malloc succeeded",
+    "btowc_source_literal": "/workdir/repo/newlib/newlib/libc/stdlib/btowc.c",
+    "wctob_source_literal": "/workdir/repo/newlib/newlib/libc/stdlib/wctob.c",
+    "write_target": "0x1006a420 stackless return0",
+    "formatting_float_alternative": "UNREACHABLE for immutable format",
+    "FILE_allocation": "__sinit\u2192__sfp\u2192__sfmoreglue requests464; NULL returns invalid FILE state, so no silent callback-validity assumption is used. This motivates the allowed census method."
+  },
+  "scope_preconditions": [
+    "Ordinary intact reset startup follows frozen CRT data copy/BSS clearing, source-initialized callback targets and source-valid allocator metadata.",
+    "No prior main/setup/core1 launch; no USB/SysTick/SIO/GPIO/DMA interrupt allocation before this constructor point.",
+    "One LittleFS begin with autoformatfalse; any admitted mounted filesystem content, recovery/global-state flags or read/mount errors do not increase its three allocation-site execution caps.",
+    "Existing bootstrap behavior/ROM helper state is covered only by original published B0/B1/B2 domain; arbitrary corruption or arbitrary direct entry is not added."
+  ],
+  "remaining_limits": [
+    "No timing/highwater/physical observation; no all31/P1 or final-candidate pass.",
+    "No generic failure-path, post-NULL-FILE, malformed OTA-data or arbitrary corrupted heap/object/callback safety certificate.",
+    "No full later-startup/main/setup heap census or allocation success assertion is made here; only the exact prefix needed to exclude the two named malloc80 NULL branches.",
+    "Final changed candidate requires fresh corresponding ELF/end/break/count/site verification."
+  ],
+  "mutations": {
+    "repository": false,
+    "SDK": false,
+    "cache": false,
+    "Git": false,
+    "network": false,
+    "build": false,
+    "device": false,
+    "tmp_evidence_only": true
+  }
+}

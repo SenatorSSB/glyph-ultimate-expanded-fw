@@ -1,0 +1,77 @@
+{
+  "kind": "EXACT_CURATOR_PRIVATE_INPUT_ARCHIVE_PINS",
+  "files": {
+    "/private/tmp/glyph-native-mounted-curator-request-20261021.json": {
+      "sha256": "26a9755f4526a7674f11c0dc1f50fc2a3b9a6aba3741d1480a5ebe1399f52928",
+      "bytes": 4061
+    },
+    "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.md": {
+      "sha256": "5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d",
+      "bytes": 5601
+    },
+    "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.json": {
+      "sha256": "9c3c1748ac198fe27148bfd5d7f697e2a21d0513d7157d6ef4ec099aafe1eaf3",
+      "bytes": 747
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-phases.cpp": {
+      "sha256": "73d9cb00a3387eb27e3de255c46912c14339fd9ea076dfb8fc5cb22ca8e9f341",
+      "bytes": 84030
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-probe/manifest.json": {
+      "sha256": "1a761373d5449ddc2ff20a84de6e4d5980408f8aab48aacbd5084478e8ddfa04",
+      "bytes": 4828
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.md": {
+      "sha256": "99ff7ae83a9ad6400c4f70c2258582cdbcd9a2360e9aacaddc0d3aa3eb143f11",
+      "bytes": 15828
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.json": {
+      "sha256": "d3e4348f95202a64effffcc7b761a9f0e971bc9679a3d5b646c5a14146b10783",
+      "bytes": 26143
+    },
+    "/private/tmp/glyph-native-lfs-inner-bound-graph-20261021.json": {
+      "sha256": "08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f",
+      "bytes": 91210
+    },
+    "/private/tmp/glyph-native-lfs-inner-root-replay-20261021.json": {
+      "sha256": "1f860a273bd43fde70690c919fa97a689ba059d3acff54b14bcf74c0ceb3b42f",
+      "bytes": 68314
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.md": {
+      "sha256": "809dfd03d8c488c941af5829385a9555b71cf8715ad08e8c82d8b3ff13d70adf",
+      "bytes": 6618
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021.json": {
+      "sha256": "e6d8818cdc50e397effd28ef345a926d08bf764788ccdfe601f32c97940cd234",
+      "bytes": 2625
+    },
+    "/private/tmp/glyph-native-boot-empty-cdc-irq-amendment-20261021-pins.json": {
+      "sha256": "1aa012f02089ea6a59e9974abe1c0448a48e729efd01284a2aa7df20f0f99b00",
+      "bytes": 4435
+    },
+    "/private/tmp/glyph-native-root-file-inner-refinement-20261021.md": {
+      "sha256": "106b000fae9023696cf02cdb8f6ea0b01a59a007fa72eb1ab10fb6ee7009f390",
+      "bytes": 10058
+    },
+    "/private/tmp/glyph-native-root-file-inner-refinement-20261021.json": {
+      "sha256": "10683a6afb0a5ad1d0475f98f8609200e616a292a1ddc3547522dab0a4972740",
+      "bytes": 7345
+    },
+    "/private/tmp/glyph-native-root-file-inner-refinement-20261021-pins.json": {
+      "sha256": "9ce41994ccf538d1309d7a6a9cd41ce5e8b1c6de9d9d4f33ac29c46387e377c9",
+      "bytes": 2130
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.o": {
+      "sha256": "090f362fd58d1a21378873055a702b0f845c43bd273a7219f18e1b6dffb3bfd0",
+      "bytes": 96380
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.su": {
+      "sha256": "b0b05c9f0924337ef9a142dc9abff7cfe31ea998957b243d77f564019e83c156",
+      "bytes": 16774
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-probe/glyph-native-AE-mounted-owner-phases.disassembly.txt": {
+      "sha256": "77189820e458ddc4ce222ec5fa9c067ba1669b5028eb9103ddd95450ca415ac2",
+      "bytes": 759360
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "kind": "ROOT_FINITE_ORDINARY_CURATOR_REQUEST_PROPOSAL_NOT_EXECUTION_AUTHORITY",
+  "utc": "2026-10-21T12:02:50.140015+00:00",
+  "canonical_worktree": "/private/tmp/glyph-native-curation-20261020",
+  "canonical_sha": "7faa85fecbac4940a1a4c1d8310b85baaced460e",
+  "canonical_live_readback": "MATCH earlier this turn; root will refresh before adoption",
+  "candidate_worktree": "/private/tmp/glyph-profile-native-20261020",
+  "candidate_checkpoint": "724bc6eba0715b9c796062ee9608d0c907697066",
+  "candidate_note": "Writer is finishing already-authorized C/publication phases and tests. MountedStorage::CheckedWrite production body remains unchanged and on HOLD. Private adapter probe only. Read frozen Git source for adjudication; do not treat dirty files as exact candidate.",
+  "request": "Independently adjudicate one narrow metadata/returned-phase layout clarification for MountedStorage::CheckedWrite in existing ProfileStore.cpp. Same GP-NATIVE-001; no new order/successor/owner decision, new file path, public API, store behavior, workspace limit or device authority. Preserve current broader valid FS domain.",
+  "proposal_summary": "Move SAME one existing static File and SAME result/close objects to TU fixed workspace; add only20-byte borrowed scalar metadata (plus measured alignment), return between SAME Open/Write/Sync/Close primitives, SAME Remember and failure precedence, clear borrowed metadata on every exit; no extra owner or runtime guard. Private O3 method40 becomes wrapper16+Open16, other phases8/8/16. Total512 and original caps unchanged.",
+  "conditional_resource_note": "Current generic348 allowance still does not close whole boot. Separate independent boot amendment is being finalized for complete336 based on empty TX/default serial and retained alarm336; no resource PASS presumed. Other root-file copy context proof also being independently adjudicated. Adapter permission, if adopted, is bounded engineering trial with required exact final all-path proof.",
+  "root_roles": "Root sole canonical publisher; same writer only source editor. Curator source-free independent scope adjudication; final fresh source/ELF reviewer separate. No standing timer or reviewer-of-reviewer cycle.",
+  "inputs": {
+    "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.md": {
+      "sha256": "5f60869309da061e6bd7f0c293eb905748936bff9572490156d22de0fcc78f7d",
+      "bytes": 5601
+    },
+    "/private/tmp/glyph-native-AE-mounted-phase-scope-proposal.json": {
+      "sha256": "9c3c1748ac198fe27148bfd5d7f697e2a21d0513d7157d6ef4ec099aafe1eaf3",
+      "bytes": 747
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-phases.cpp": {
+      "sha256": "73d9cb00a3387eb27e3de255c46912c14339fd9ea076dfb8fc5cb22ca8e9f341",
+      "bytes": 84030
+    },
+    "/private/tmp/glyph-native-AE-mounted-owner-probe/manifest.json": {
+      "sha256": "1a761373d5449ddc2ff20a84de6e4d5980408f8aab48aacbd5084478e8ddfa04",
+      "bytes": 4828
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.md": {
+      "sha256": "99ff7ae83a9ad6400c4f70c2258582cdbcd9a2360e9aacaddc0d3aa3eb143f11",
+      "bytes": 15828
+    },
+    "/private/tmp/glyph-native-lfs-inner-upper-proof-20261021.json": {
+      "sha256": "d3e4348f95202a64effffcc7b761a9f0e971bc9679a3d5b646c5a14146b10783",
+      "bytes": 26143
+    },
+    "/private/tmp/glyph-native-lfs-inner-bound-graph-20261021.json": {
+      "sha256": "08eea943c4c1cba88bd300ff1f5d875761009a7bbf52f82f9acc487745f5e81f",
+      "bytes": 91210
+    },
+    "/private/tmp/glyph-native-lfs-inner-root-replay-20261021.json": {
+      "sha256": "1f860a273bd43fde70690c919fa97a689ba059d3acff54b14bcf74c0ceb3b42f",
+      "bytes": 68314
+    }
+  },
+  "required_output": "Separate immutable MD/JSON adjudication and narrow contract/queue scope text; exact source/method/metadata bound/reset/nonreentry/I/O sequence requirements, independent amendment review built into adjudication; original history/caps/other orders intact. Root will publish source-free, run framework docs, verify live readback before writer edits."
+}

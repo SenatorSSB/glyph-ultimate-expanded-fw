@@ -1,0 +1,191 @@
+{
+  "algorithm": "ordinary node=frame+max(children), tail veneer=max(temporary veneer peak,target) because veneer restores stack before BX",
+  "nodes": {
+    "visitor": {
+      "frame": 40,
+      "children": [
+        "siscanf",
+        "sniprintf",
+        "Protected",
+        "strlen",
+        "strcmp"
+      ],
+      "U": 996
+    },
+    "siscanf": {
+      "frame": 144,
+      "children": [
+        "strlen",
+        "getreent",
+        "ssvfiscanf"
+      ],
+      "U": 956
+    },
+    "ssvfiscanf": {
+      "frame": 680,
+      "children": [
+        "scanf_i",
+        "scanf_chars",
+        "ssrefill",
+        "sungetc",
+        "memchr_veneer",
+        "case_veneer"
+      ],
+      "U": 812
+    },
+    "scanf_i": {
+      "frame": 64,
+      "children": [
+        "strtoul_r",
+        "sccl",
+        "ssrefill",
+        "sungetc",
+        "memchr_veneer"
+      ],
+      "U": 132
+    },
+    "scanf_chars": {
+      "frame": 32,
+      "children": [
+        "ssrefill"
+      ],
+      "U": 40
+    },
+    "strtoul_r": {
+      "frame": 8,
+      "children": [
+        "strtoul"
+      ],
+      "U": 68
+    },
+    "strtoul": {
+      "frame": 40,
+      "children": [
+        "divider_veneer"
+      ],
+      "U": 60
+    },
+    "divider_veneer": {
+      "frame": 4,
+      "tail": "divider_nonzero",
+      "U": 20
+    },
+    "divider_nonzero": {
+      "frame": 20,
+      "children": [],
+      "U": 20
+    },
+    "sccl": {
+      "frame": 16,
+      "children": [],
+      "U": 16
+    },
+    "ssrefill": {
+      "frame": 8,
+      "children": [],
+      "U": 8
+    },
+    "sungetc": {
+      "frame": 16,
+      "children": [],
+      "U": 16
+    },
+    "sniprintf": {
+      "frame": 144,
+      "children": [
+        "getreent",
+        "svfiprintf"
+      ],
+      "U": 448
+    },
+    "svfiprintf": {
+      "frame": 152,
+      "children": [
+        "printf_i",
+        "ssputs",
+        "memchr_veneer"
+      ],
+      "U": 304
+    },
+    "printf_i": {
+      "frame": 72,
+      "children": [
+        "printf_common",
+        "ssputs",
+        "memchr_veneer",
+        "case_veneer"
+      ],
+      "U": 152
+    },
+    "printf_common": {
+      "frame": 32,
+      "children": [
+        "ssputs"
+      ],
+      "U": 80
+    },
+    "ssputs": {
+      "frame": 40,
+      "children": [
+        "memmove_veneer"
+      ],
+      "U": 48
+    },
+    "memmove_veneer": {
+      "frame": 4,
+      "tail": "memmove",
+      "U": 8
+    },
+    "memmove": {
+      "frame": 8,
+      "children": [],
+      "U": 8
+    },
+    "memchr_veneer": {
+      "frame": 4,
+      "tail": "memchr",
+      "U": 4
+    },
+    "memchr": {
+      "frame": 0,
+      "children": [],
+      "U": 0
+    },
+    "case_veneer": {
+      "frame": 4,
+      "tail": "case_shi",
+      "U": 8
+    },
+    "case_shi": {
+      "frame": 8,
+      "children": [],
+      "U": 8
+    },
+    "Protected": {
+      "frame": 32,
+      "children": [],
+      "U": 32
+    },
+    "strlen": {
+      "frame": 0,
+      "children": [],
+      "U": 0
+    },
+    "strcmp": {
+      "frame": 0,
+      "children": [],
+      "U": 0
+    },
+    "getreent": {
+      "frame": 0,
+      "children": [],
+      "U": 0
+    }
+  },
+  "visitor_U": 996,
+  "visitor_M": null,
+  "CHECKED_Enumerate_internal_U": 676,
+  "CHECKED_Enumerate_retained": 216,
+  "CHECKED_Enumerate_actual_sole_visitor_U": 1212,
+  "CHECKED_Enumerate_actual_sole_visitor_M": null
+}

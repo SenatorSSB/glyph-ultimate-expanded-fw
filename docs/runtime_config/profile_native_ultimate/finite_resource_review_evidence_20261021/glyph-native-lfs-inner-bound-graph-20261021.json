@@ -1,0 +1,3946 @@
+{
+  "kind": "EXACT_EF22_CONTEXTUAL_LFS_INNER_STACK_DAG",
+  "profiles": {
+    "E": "C/ROM stack through flash callback entry, no pre-mask helper; not a universal feasible witness",
+    "U": "maximum stack at a potentially unmasked instruction, no IRQ activation added",
+    "M": "maximum stack inside known masked flash/allocator descendants; None means no masked descendant"
+  },
+  "nodes": {
+    "ROM_MEMCPY_MAX12": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 12,
+        "U": 12,
+        "M": null
+      }
+    },
+    "ROM_MEMSET_MAX8": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 8,
+        "U": 8,
+        "M": null
+      }
+    },
+    "INTEGER_DIVIDE_NONZERO20": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 20,
+        "U": 20,
+        "M": null
+      }
+    },
+    "ROM_BITOPS_STACK0": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 0,
+        "U": 0,
+        "M": null
+      }
+    },
+    "INTEGER_LMUL4": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 4,
+        "U": 4,
+        "M": null
+      }
+    },
+    "STRING_HELPER_MAX12": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 12,
+        "U": 12,
+        "M": null
+      }
+    },
+    "PINNED_FLASH_CALLBACK": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 24,
+        "U": 40,
+        "M": 152
+      }
+    },
+    "PINNED_READ_CALLBACK": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 20,
+        "U": 20,
+        "M": null
+      }
+    },
+    "PINNED_SYNC_CALLBACK": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 0,
+        "U": 0,
+        "M": null
+      }
+    },
+    "ALLOC_WRAPPER": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 136,
+        "U": 24,
+        "M": 136
+      }
+    },
+    "FREE_WRAPPER": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 136,
+        "U": 24,
+        "M": 136
+      }
+    },
+    "MOUNT_SHARED_GLOBAL": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 16,
+        "U": 16,
+        "M": null
+      }
+    },
+    "ENUM_VISITOR_PARAMETER": {
+      "frame": 0,
+      "edges": [],
+      "leaf": {
+        "E": 0,
+        "U": 0,
+        "M": null
+      }
+    },
+    "lfs_dir_traverse_filter": {
+      "frame": 12,
+      "address": "0x100101f0",
+      "edges": []
+    },
+    "lfs_dir_commit_size": {
+      "frame": 0,
+      "address": "0x10010268",
+      "edges": []
+    },
+    "lfs_deinit": {
+      "frame": 8,
+      "address": "0x10010284",
+      "edges": [
+        "FREE_WRAPPER"
+      ]
+    },
+    "lfs_bd_read.part.0.constprop.0": {
+      "frame": 64,
+      "address": "0x100102c4",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_READ_CALLBACK",
+        "ROM_MEMCPY_MAX12"
+      ]
+    },
+    "lfs_bd_read": {
+      "frame": 64,
+      "address": "0x10010408",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_READ_CALLBACK",
+        "ROM_MEMCPY_MAX12"
+      ]
+    },
+    "lfs_fs_parent_match": {
+      "frame": 40,
+      "address": "0x100105d0",
+      "edges": [
+        "lfs_bd_read"
+      ]
+    },
+    "lfs_ctz_traverse.part.0.constprop.0": {
+      "frame": 72,
+      "address": "0x10010618",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "lfs_bd_read"
+      ]
+    },
+    "lfs_dir_find_match": {
+      "frame": 72,
+      "address": "0x100106dc",
+      "edges": [
+        "STRING_HELPER_MAX12",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_ctz_find.constprop.0": {
+      "frame": 64,
+      "address": "0x10010790",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_bd_flush": {
+      "frame": 72,
+      "address": "0x100108a0",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_FLASH_CALLBACK",
+        "ROM_MEMSET_MAX8",
+        "STRING_HELPER_MAX12",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_bd_prog.constprop.0": {
+      "frame": 40,
+      "address": "0x1001099c",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_MEMCPY_MAX12",
+        "lfs_bd_flush"
+      ]
+    },
+    "lfs_dir_traverse.constprop.0": {
+      "frame": 216,
+      "address": "0x10010a6c",
+      "edges": [
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_dir_commit_commit",
+        "lfs_dir_commit_size",
+        "lfs_dir_traverse_filter"
+      ]
+    },
+    "lfs_dir_commitprog": {
+      "frame": 72,
+      "address": "0x10010d4c",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_FLASH_CALLBACK",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_crc"
+      ]
+    },
+    "lfs_dir_fetchmatch": {
+      "frame": 152,
+      "address": "0x10010e64",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_crc"
+      ]
+    },
+    "lfs_fs_pred": {
+      "frame": 40,
+      "address": "0x10011420",
+      "edges": [
+        "FETCH_NULL"
+      ]
+    },
+    "lfs_dir_getgstate": {
+      "frame": 80,
+      "address": "0x10011494",
+      "edges": [
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_dir_getslice.constprop.0": {
+      "frame": 72,
+      "address": "0x100115b0",
+      "edges": [
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_dir_getslice.constprop.1": {
+      "frame": 72,
+      "address": "0x10011748",
+      "edges": [
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_fs_rawtraverse.constprop.0": {
+      "frame": 96,
+      "address": "0x100118e0",
+      "edges": [
+        "FETCH_NULL",
+        "ROM_MEMSET_MAX8",
+        "lfs_ctz_traverse.part.0.constprop.0",
+        "lfs_dir_getslice.constprop.1"
+      ]
+    },
+    "lfs_dir_find": {
+      "frame": 96,
+      "address": "0x10011a3c",
+      "edges": [
+        "FETCH_FIND",
+        "STRING_HELPER_MAX12",
+        "lfs_dir_getslice.constprop.1"
+      ]
+    },
+    "lfs_dir_getslice.constprop.2": {
+      "frame": 72,
+      "address": "0x10011bd8",
+      "edges": [
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read.part.0.constprop.0"
+      ]
+    },
+    "lfs_file_flushedread": {
+      "frame": 96,
+      "address": "0x10011d70",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_MEMCPY_MAX12",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_ctz_find.constprop.0",
+        "lfs_dir_getslice.constprop.2"
+      ]
+    },
+    "lfs_dir_getinfo": {
+      "frame": 80,
+      "address": "0x10011f4c",
+      "edges": [
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_dir_getslice.constprop.1"
+      ]
+    },
+    "lfs_dir_alloc": {
+      "frame": 136,
+      "address": "0x10012174",
+      "edges": [
+        "FETCH_NULL",
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_dir_getslice.constprop.1"
+      ]
+    },
+    "lfs_alloc": {
+      "frame": 120,
+      "address": "0x100127ec",
+      "edges": [
+        "FETCH_NULL",
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read",
+        "lfs_dir_getslice.constprop.1"
+      ]
+    },
+    "lfs_file_relocate": {
+      "frame": 80,
+      "address": "0x10012ddc",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_FLASH_CALLBACK",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_alloc",
+        "lfs_bd_prog.constprop.0",
+        "lfs_bd_read",
+        "lfs_dir_getslice.constprop.2"
+      ]
+    },
+    "lfs_file_flushedwrite": {
+      "frame": 104,
+      "address": "0x10012f94",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_FLASH_CALLBACK",
+        "ROM_BITOPS_STACK0",
+        "ROM_MEMSET_MAX8",
+        "lfs_alloc",
+        "lfs_bd_prog.constprop.0",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_ctz_find.constprop.0",
+        "lfs_file_relocate"
+      ]
+    },
+    "lfs_file_flush": {
+      "frame": 112,
+      "address": "0x1001332c",
+      "edges": [
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_flush",
+        "lfs_file_flushedread",
+        "lfs_file_flushedwrite",
+        "lfs_file_relocate"
+      ]
+    },
+    "lfs_file_rawseek": {
+      "frame": 32,
+      "address": "0x1001342c",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "lfs_file_flush"
+      ]
+    },
+    "lfs_dir_commit_commit": {
+      "frame": 72,
+      "address": "0x10013520",
+      "edges": [
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_dir_commitprog"
+      ]
+    },
+    "lfs_dir_commitcrc": {
+      "frame": 104,
+      "address": "0x10013620",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_FLASH_CALLBACK",
+        "PINNED_SYNC_CALLBACK",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_flush",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_crc"
+      ]
+    },
+    "lfs_dir_compact": {
+      "frame": 136,
+      "address": "0x10013914",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "PINNED_FLASH_CALLBACK",
+        "ROM_MEMSET_MAX8",
+        "lfs_alloc",
+        "lfs_dir_commitcrc",
+        "lfs_dir_commitprog",
+        "lfs_dir_getgstate",
+        "lfs_dir_traverse.constprop.0"
+      ]
+    },
+    "lfs_dir_splittingcompact.constprop.0": {
+      "frame": 192,
+      "address": "0x10013bbc",
+      "edges": [
+        "FETCH_NULL",
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "ROM_MEMSET_MAX8",
+        "lfs_bd_read",
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_dir_alloc",
+        "lfs_dir_compact",
+        "lfs_dir_getslice.constprop.1",
+        "lfs_dir_traverse.constprop.0",
+        "lfs_fs_rawtraverse.constprop.0"
+      ]
+    },
+    "lfs_dir_relocatingcommit": {
+      "frame": 136,
+      "address": "0x1001443c",
+      "edges": [
+        "FETCH_NULL",
+        "ROM_MEMSET_MAX8",
+        "lfs_dir_commitcrc",
+        "lfs_dir_commitprog",
+        "lfs_dir_getgstate",
+        "lfs_dir_splittingcompact.constprop.0",
+        "lfs_dir_traverse.constprop.0",
+        "lfs_fs_pred"
+      ]
+    },
+    "lfs_dir_relocatingcommit.constprop.0": {
+      "frame": 136,
+      "address": "0x10014a44",
+      "edges": [
+        "FETCH_NULL",
+        "ROM_MEMSET_MAX8",
+        "lfs_dir_commitcrc",
+        "lfs_dir_commitprog",
+        "lfs_dir_getgstate",
+        "lfs_dir_splittingcompact.constprop.0",
+        "lfs_dir_traverse.constprop.0",
+        "lfs_fs_pred"
+      ]
+    },
+    "lfs_dir_orphaningcommit": {
+      "frame": 160,
+      "address": "0x10014dc8",
+      "edges": [
+        "FETCH_PARENT",
+        "ROM_MEMCPY_MAX12",
+        "lfs_dir_getgstate",
+        "lfs_dir_relocatingcommit",
+        "lfs_dir_relocatingcommit.constprop.0",
+        "lfs_file_flush",
+        "lfs_file_relocate",
+        "lfs_fs_pred"
+      ]
+    },
+    "lfs_fs_deorphan": {
+      "frame": 176,
+      "address": "0x100151cc",
+      "edges": [
+        "FETCH_NULL",
+        "FETCH_PARENT",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_dir_getgstate",
+        "lfs_dir_getslice.constprop.0",
+        "lfs_dir_orphaningcommit"
+      ]
+    },
+    "lfs_fs_forceconsistency": {
+      "frame": 64,
+      "address": "0x100153cc",
+      "edges": [
+        "FETCH_NULL",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan"
+      ]
+    },
+    "lfs_file_rawopencfg": {
+      "frame": 80,
+      "address": "0x1001544c",
+      "edges": [
+        "ALLOC_WRAPPER",
+        "FREE_WRAPPER",
+        "ROM_MEMSET_MAX8",
+        "STRING_HELPER_MAX12",
+        "lfs_dir_find",
+        "lfs_dir_getslice.constprop.0",
+        "lfs_dir_getslice.constprop.1",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan",
+        "lfs_fs_forceconsistency"
+      ]
+    },
+    "lfs_format": {
+      "frame": 128,
+      "address": "0x10015748",
+      "edges": [
+        "ALLOC_WRAPPER",
+        "FETCH_NULL",
+        "FREE_WRAPPER",
+        "ROM_MEMSET_MAX8",
+        "lfs_deinit",
+        "lfs_dir_alloc",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan"
+      ]
+    },
+    "lfs_mount": {
+      "frame": 120,
+      "address": "0x10015940",
+      "edges": [
+        "ALLOC_WRAPPER",
+        "FETCH_NULL",
+        "FREE_WRAPPER",
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_MEMSET_MAX8",
+        "lfs_deinit",
+        "lfs_dir_getgstate",
+        "lfs_dir_getslice.constprop.0"
+      ]
+    },
+    "lfs_unmount": {
+      "frame": 8,
+      "address": "0x10015bbc",
+      "edges": [
+        "FREE_WRAPPER"
+      ]
+    },
+    "lfs_remove": {
+      "frame": 136,
+      "address": "0x10015bfc",
+      "edges": [
+        "FETCH_NULL",
+        "lfs_dir_find",
+        "lfs_dir_getgstate",
+        "lfs_dir_getslice.constprop.1",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan",
+        "lfs_fs_pred"
+      ]
+    },
+    "lfs_rename": {
+      "frame": 240,
+      "address": "0x10015de4",
+      "edges": [
+        "FETCH_NULL",
+        "STRING_HELPER_MAX12",
+        "lfs_dir_find",
+        "lfs_dir_getgstate",
+        "lfs_dir_getslice.constprop.1",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan",
+        "lfs_fs_pred"
+      ]
+    },
+    "lfs_stat": {
+      "frame": 56,
+      "address": "0x10016280",
+      "edges": [
+        "lfs_dir_find",
+        "lfs_dir_getinfo"
+      ]
+    },
+    "lfs_getattr": {
+      "frame": 72,
+      "address": "0x100162ac",
+      "edges": [
+        "FETCH_NULL",
+        "lfs_dir_find",
+        "lfs_dir_getslice.constprop.0"
+      ]
+    },
+    "lfs_setattr": {
+      "frame": 80,
+      "address": "0x10016338",
+      "edges": [
+        "FETCH_NULL",
+        "lfs_dir_find",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan"
+      ]
+    },
+    "lfs_file_open": {
+      "frame": 16,
+      "address": "0x100163c8",
+      "edges": [
+        "lfs_file_rawopencfg"
+      ]
+    },
+    "lfs_file_close": {
+      "frame": 48,
+      "address": "0x100163dc",
+      "edges": [
+        "FREE_WRAPPER",
+        "lfs_dir_orphaningcommit",
+        "lfs_file_flush",
+        "lfs_fs_deorphan"
+      ]
+    },
+    "lfs_file_sync": {
+      "frame": 40,
+      "address": "0x100164d0",
+      "edges": [
+        "lfs_dir_orphaningcommit",
+        "lfs_file_flush",
+        "lfs_fs_deorphan"
+      ]
+    },
+    "lfs_file_read": {
+      "frame": 24,
+      "address": "0x10016588",
+      "edges": [
+        "lfs_file_flush",
+        "lfs_file_flushedread"
+      ]
+    },
+    "lfs_file_write": {
+      "frame": 40,
+      "address": "0x100165b0",
+      "edges": [
+        "lfs_file_flush",
+        "lfs_file_flushedwrite"
+      ]
+    },
+    "lfs_file_seek": {
+      "frame": 32,
+      "address": "0x10016650",
+      "edges": [
+        "INTEGER_DIVIDE_NONZERO20",
+        "ROM_BITOPS_STACK0",
+        "lfs_file_flush"
+      ]
+    },
+    "lfs_file_truncate": {
+      "frame": 72,
+      "address": "0x10016744",
+      "edges": [
+        "lfs_ctz_find.constprop.0",
+        "lfs_file_flush",
+        "lfs_file_flushedwrite",
+        "lfs_file_rawseek"
+      ]
+    },
+    "lfs_file_tell": {
+      "frame": 0,
+      "address": "0x100168b0",
+      "edges": []
+    },
+    "lfs_file_size": {
+      "frame": 0,
+      "address": "0x100168b4",
+      "edges": []
+    },
+    "lfs_mkdir": {
+      "frame": 200,
+      "address": "0x100168cc",
+      "edges": [
+        "FETCH_NULL",
+        "ROM_MEMCPY_MAX12",
+        "STRING_HELPER_MAX12",
+        "lfs_dir_alloc",
+        "lfs_dir_find",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan",
+        "lfs_fs_forceconsistency"
+      ]
+    },
+    "lfs_dir_open": {
+      "frame": 56,
+      "address": "0x10016aa4",
+      "edges": [
+        "FETCH_NULL",
+        "lfs_dir_find",
+        "lfs_dir_getslice.constprop.1"
+      ]
+    },
+    "lfs_dir_close": {
+      "frame": 0,
+      "address": "0x10016b3c",
+      "edges": []
+    },
+    "lfs_dir_read": {
+      "frame": 48,
+      "address": "0x10016b60",
+      "edges": [
+        "FETCH_NULL",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_dir_getinfo"
+      ]
+    },
+    "lfs_dir_rewind": {
+      "frame": 32,
+      "address": "0x10016c30",
+      "edges": [
+        "FETCH_NULL"
+      ]
+    },
+    "lfs_fs_size": {
+      "frame": 16,
+      "address": "0x10016c5c",
+      "edges": [
+        "lfs_fs_rawtraverse.constprop.0"
+      ]
+    },
+    "lfs_crc": {
+      "frame": 16,
+      "address": "0x10016c74",
+      "edges": []
+    },
+    "FETCH_NULL": {
+      "frame": 152,
+      "address": "0x10010e64",
+      "edges": [
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_crc",
+        "INTEGER_DIVIDE_NONZERO20"
+      ]
+    },
+    "FETCH_FIND": {
+      "frame": 152,
+      "address": "0x10010e64",
+      "edges": [
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_crc",
+        "INTEGER_DIVIDE_NONZERO20",
+        "lfs_dir_find_match"
+      ]
+    },
+    "FETCH_PARENT": {
+      "frame": 152,
+      "address": "0x10010e64",
+      "edges": [
+        "lfs_bd_read.part.0.constprop.0",
+        "lfs_crc",
+        "INTEGER_DIVIDE_NONZERO20",
+        "lfs_fs_parent_match"
+      ]
+    },
+    "CHECKED_Open": {
+      "frame": 88,
+      "address": "0x1001c5dc",
+      "edges": [
+        "MOUNT_SHARED_GLOBAL",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_file_close",
+        "lfs_file_open"
+      ]
+    },
+    "CHECKED_Read": {
+      "frame": 16,
+      "address": "0x1001c73c",
+      "edges": [
+        "lfs_file_read"
+      ]
+    },
+    "CHECKED_Write": {
+      "frame": 16,
+      "address": "0x1001c784",
+      "edges": [
+        "lfs_file_write"
+      ]
+    },
+    "CHECKED_Seek": {
+      "frame": 16,
+      "address": "0x1001c7d8",
+      "edges": [
+        "lfs_file_seek"
+      ]
+    },
+    "CHECKED_Sync": {
+      "frame": 16,
+      "address": "0x1001c828",
+      "edges": [
+        "lfs_file_sync"
+      ]
+    },
+    "CHECKED_Close": {
+      "frame": 16,
+      "address": "0x1001c870",
+      "edges": [
+        "lfs_file_close"
+      ]
+    },
+    "CHECKED_Stat": {
+      "frame": 72,
+      "address": "0x1001c8c0",
+      "edges": [
+        "MOUNT_SHARED_GLOBAL",
+        "ROM_MEMSET_MAX8",
+        "lfs_stat"
+      ]
+    },
+    "CHECKED_Remove": {
+      "frame": 48,
+      "address": "0x1001c970",
+      "edges": [
+        "MOUNT_SHARED_GLOBAL",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8",
+        "lfs_remove"
+      ]
+    },
+    "CHECKED_Rename": {
+      "frame": 24,
+      "address": "0x1001ca28",
+      "edges": [
+        "MOUNT_SHARED_GLOBAL",
+        "lfs_rename"
+      ]
+    },
+    "CHECKED_Capacity": {
+      "frame": 56,
+      "address": "0x1001cae4",
+      "edges": [
+        "INTEGER_LMUL4",
+        "MOUNT_SHARED_GLOBAL",
+        "ROM_MEMSET_MAX8",
+        "lfs_fs_size"
+      ]
+    },
+    "CHECKED_Enumerate": {
+      "frame": 216,
+      "address": "0x1001cc50",
+      "edges": [
+        "ENUM_VISITOR_PARAMETER",
+        "MOUNT_SHARED_GLOBAL",
+        "ROM_MEMSET_MAX8",
+        "STRING_HELPER_MAX12",
+        "lfs_dir_close",
+        "lfs_dir_open",
+        "lfs_dir_read"
+      ]
+    },
+    "RAWOPEN_READONLY": {
+      "frame": 80,
+      "edges": [
+        "lfs_dir_find",
+        "lfs_dir_getslice.constprop.0",
+        "lfs_dir_getslice.constprop.1",
+        "ALLOC_WRAPPER",
+        "FREE_WRAPPER",
+        "ROM_MEMSET_MAX8"
+      ]
+    },
+    "PUBLIC_OPEN_READONLY": {
+      "frame": 16,
+      "edges": [
+        "RAWOPEN_READONLY"
+      ]
+    },
+    "FILE_FLUSH_READONLY": {
+      "frame": 112,
+      "edges": []
+    },
+    "PUBLIC_CLOSE_READONLY": {
+      "frame": 48,
+      "edges": [
+        "FILE_FLUSH_READONLY",
+        "FREE_WRAPPER"
+      ]
+    },
+    "CHECKED_OpenReadOnly": {
+      "frame": 88,
+      "edges": [
+        "MOUNT_SHARED_GLOBAL",
+        "PUBLIC_OPEN_READONLY",
+        "PUBLIC_CLOSE_READONLY",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8"
+      ]
+    },
+    "CHECKED_ReadReadOnly": {
+      "frame": 16,
+      "edges": [
+        "PUBLIC_READ_READONLY"
+      ]
+    },
+    "PUBLIC_READ_READONLY": {
+      "frame": 24,
+      "edges": [
+        "lfs_file_flushedread"
+      ]
+    },
+    "CHECKED_CloseReadOnly": {
+      "frame": 16,
+      "edges": [
+        "PUBLIC_CLOSE_READONLY"
+      ]
+    },
+    "PUBLIC_SYNC_CLEAN": {
+      "frame": 40,
+      "edges": [
+        "FILE_FLUSH_READONLY"
+      ]
+    },
+    "CHECKED_SyncClean": {
+      "frame": 16,
+      "edges": [
+        "PUBLIC_SYNC_CLEAN"
+      ]
+    },
+    "CHECKED_CloseAfterSuccessfulSync": {
+      "frame": 16,
+      "edges": [
+        "PUBLIC_CLOSE_READONLY"
+      ]
+    },
+    "RAWOPEN_POSTCONSISTENCY": {
+      "frame": 80,
+      "edges": [
+        "lfs_dir_find",
+        "lfs_dir_orphaningcommit",
+        "lfs_fs_deorphan",
+        "ALLOC_WRAPPER",
+        "FREE_WRAPPER",
+        "lfs_dir_getslice.constprop.0",
+        "lfs_dir_getslice.constprop.1",
+        "ROM_MEMSET_MAX8"
+      ]
+    },
+    "PUBLIC_OPEN_POSTCONSISTENCY": {
+      "frame": 16,
+      "edges": [
+        "RAWOPEN_POSTCONSISTENCY"
+      ]
+    },
+    "CHECKED_OpenPostConsistency": {
+      "frame": 88,
+      "edges": [
+        "PUBLIC_OPEN_POSTCONSISTENCY",
+        "MOUNT_SHARED_GLOBAL",
+        "ROM_MEMCPY_MAX12",
+        "ROM_MEMSET_MAX8"
+      ]
+    },
+    "CHECKED_CloseErred": {
+      "frame": 16,
+      "edges": [
+        "PUBLIC_CLOSE_ERRED"
+      ]
+    },
+    "PUBLIC_CLOSE_ERRED": {
+      "frame": 48,
+      "edges": [
+        "FREE_WRAPPER"
+      ]
+    }
+  },
+  "bounds": {
+    "ALLOC_WRAPPER": {
+      "E": {
+        "bytes": 136,
+        "chain": [
+          "ALLOC_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 24,
+        "chain": [
+          "ALLOC_WRAPPER"
+        ]
+      },
+      "M": {
+        "bytes": 136,
+        "chain": [
+          "ALLOC_WRAPPER"
+        ]
+      }
+    },
+    "INTEGER_DIVIDE_NONZERO20": {
+      "E": {
+        "bytes": 20,
+        "chain": [
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 20,
+        "chain": [
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      }
+    },
+    "PINNED_READ_CALLBACK": {
+      "E": {
+        "bytes": 20,
+        "chain": [
+          "PINNED_READ_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 20,
+        "chain": [
+          "PINNED_READ_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "PINNED_READ_CALLBACK"
+        ]
+      }
+    },
+    "ROM_MEMCPY_MAX12": {
+      "E": {
+        "bytes": 12,
+        "chain": [
+          "ROM_MEMCPY_MAX12"
+        ]
+      },
+      "U": {
+        "bytes": 12,
+        "chain": [
+          "ROM_MEMCPY_MAX12"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "ROM_MEMCPY_MAX12"
+        ]
+      }
+    },
+    "lfs_bd_read.part.0.constprop.0": {
+      "E": {
+        "bytes": 84,
+        "chain": [
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 84,
+        "chain": [
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_bd_read.part.0.constprop.0"
+        ]
+      }
+    },
+    "lfs_crc": {
+      "E": {
+        "bytes": 16,
+        "chain": [
+          "lfs_crc"
+        ]
+      },
+      "U": {
+        "bytes": 16,
+        "chain": [
+          "lfs_crc"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_crc"
+        ]
+      }
+    },
+    "FETCH_NULL": {
+      "E": {
+        "bytes": 236,
+        "chain": [
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 236,
+        "chain": [
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "FETCH_NULL"
+        ]
+      }
+    },
+    "FREE_WRAPPER": {
+      "E": {
+        "bytes": 136,
+        "chain": [
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 24,
+        "chain": [
+          "FREE_WRAPPER"
+        ]
+      },
+      "M": {
+        "bytes": 136,
+        "chain": [
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "ROM_MEMSET_MAX8": {
+      "E": {
+        "bytes": 8,
+        "chain": [
+          "ROM_MEMSET_MAX8"
+        ]
+      },
+      "U": {
+        "bytes": 8,
+        "chain": [
+          "ROM_MEMSET_MAX8"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "ROM_MEMSET_MAX8"
+        ]
+      }
+    },
+    "lfs_deinit": {
+      "E": {
+        "bytes": 144,
+        "chain": [
+          "lfs_deinit",
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 32,
+        "chain": [
+          "lfs_deinit",
+          "FREE_WRAPPER"
+        ]
+      },
+      "M": {
+        "bytes": 144,
+        "chain": [
+          "lfs_deinit",
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "lfs_dir_getgstate": {
+      "E": {
+        "bytes": 164,
+        "chain": [
+          "lfs_dir_getgstate",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 164,
+        "chain": [
+          "lfs_dir_getgstate",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_getgstate"
+        ]
+      }
+    },
+    "lfs_dir_getslice.constprop.0": {
+      "E": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_getslice.constprop.0",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_getslice.constprop.0",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_getslice.constprop.0"
+        ]
+      }
+    },
+    "lfs_mount": {
+      "E": {
+        "bytes": 356,
+        "chain": [
+          "lfs_mount",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 356,
+        "chain": [
+          "lfs_mount",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 264,
+        "chain": [
+          "lfs_mount",
+          "lfs_deinit",
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "STRING_HELPER_MAX12": {
+      "E": {
+        "bytes": 12,
+        "chain": [
+          "STRING_HELPER_MAX12"
+        ]
+      },
+      "U": {
+        "bytes": 12,
+        "chain": [
+          "STRING_HELPER_MAX12"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "STRING_HELPER_MAX12"
+        ]
+      }
+    },
+    "lfs_dir_find_match": {
+      "E": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_find_match"
+        ]
+      }
+    },
+    "FETCH_FIND": {
+      "E": {
+        "bytes": 308,
+        "chain": [
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 308,
+        "chain": [
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "FETCH_FIND"
+        ]
+      }
+    },
+    "lfs_dir_getslice.constprop.1": {
+      "E": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_getslice.constprop.1",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_getslice.constprop.1",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_getslice.constprop.1"
+        ]
+      }
+    },
+    "lfs_dir_find": {
+      "E": {
+        "bytes": 404,
+        "chain": [
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 404,
+        "chain": [
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_find"
+        ]
+      }
+    },
+    "lfs_bd_read": {
+      "E": {
+        "bytes": 84,
+        "chain": [
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 84,
+        "chain": [
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_bd_read"
+        ]
+      }
+    },
+    "lfs_fs_parent_match": {
+      "E": {
+        "bytes": 124,
+        "chain": [
+          "lfs_fs_parent_match",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 124,
+        "chain": [
+          "lfs_fs_parent_match",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_fs_parent_match"
+        ]
+      }
+    },
+    "FETCH_PARENT": {
+      "E": {
+        "bytes": 276,
+        "chain": [
+          "FETCH_PARENT",
+          "lfs_fs_parent_match",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 276,
+        "chain": [
+          "FETCH_PARENT",
+          "lfs_fs_parent_match",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "FETCH_PARENT"
+        ]
+      }
+    },
+    "PINNED_FLASH_CALLBACK": {
+      "E": {
+        "bytes": 24,
+        "chain": [
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 40,
+        "chain": [
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 152,
+        "chain": [
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "PINNED_SYNC_CALLBACK": {
+      "E": {
+        "bytes": 0,
+        "chain": [
+          "PINNED_SYNC_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 0,
+        "chain": [
+          "PINNED_SYNC_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "PINNED_SYNC_CALLBACK"
+        ]
+      }
+    },
+    "lfs_bd_flush": {
+      "E": {
+        "bytes": 156,
+        "chain": [
+          "lfs_bd_flush",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 156,
+        "chain": [
+          "lfs_bd_flush",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 224,
+        "chain": [
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_commitcrc": {
+      "E": {
+        "bytes": 260,
+        "chain": [
+          "lfs_dir_commitcrc",
+          "lfs_bd_flush",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 260,
+        "chain": [
+          "lfs_dir_commitcrc",
+          "lfs_bd_flush",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 328,
+        "chain": [
+          "lfs_dir_commitcrc",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_commitprog": {
+      "E": {
+        "bytes": 96,
+        "chain": [
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 112,
+        "chain": [
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 224,
+        "chain": [
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "ROM_BITOPS_STACK0": {
+      "E": {
+        "bytes": 0,
+        "chain": [
+          "ROM_BITOPS_STACK0"
+        ]
+      },
+      "U": {
+        "bytes": 0,
+        "chain": [
+          "ROM_BITOPS_STACK0"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "ROM_BITOPS_STACK0"
+        ]
+      }
+    },
+    "lfs_dir_alloc": {
+      "E": {
+        "bytes": 372,
+        "chain": [
+          "lfs_dir_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 372,
+        "chain": [
+          "lfs_dir_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_alloc"
+        ]
+      }
+    },
+    "lfs_alloc": {
+      "E": {
+        "bytes": 356,
+        "chain": [
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 356,
+        "chain": [
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_alloc"
+        ]
+      }
+    },
+    "lfs_dir_commit_commit": {
+      "E": {
+        "bytes": 168,
+        "chain": [
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 184,
+        "chain": [
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 296,
+        "chain": [
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_commit_size": {
+      "E": {
+        "bytes": 0,
+        "chain": [
+          "lfs_dir_commit_size"
+        ]
+      },
+      "U": {
+        "bytes": 0,
+        "chain": [
+          "lfs_dir_commit_size"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_commit_size"
+        ]
+      }
+    },
+    "lfs_dir_traverse_filter": {
+      "E": {
+        "bytes": 12,
+        "chain": [
+          "lfs_dir_traverse_filter"
+        ]
+      },
+      "U": {
+        "bytes": 12,
+        "chain": [
+          "lfs_dir_traverse_filter"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_traverse_filter"
+        ]
+      }
+    },
+    "lfs_dir_traverse.constprop.0": {
+      "E": {
+        "bytes": 384,
+        "chain": [
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 400,
+        "chain": [
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 512,
+        "chain": [
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_compact": {
+      "E": {
+        "bytes": 520,
+        "chain": [
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 536,
+        "chain": [
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 648,
+        "chain": [
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_ctz_traverse.part.0.constprop.0": {
+      "E": {
+        "bytes": 156,
+        "chain": [
+          "lfs_ctz_traverse.part.0.constprop.0",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 156,
+        "chain": [
+          "lfs_ctz_traverse.part.0.constprop.0",
+          "lfs_bd_read",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_ctz_traverse.part.0.constprop.0"
+        ]
+      }
+    },
+    "lfs_fs_rawtraverse.constprop.0": {
+      "E": {
+        "bytes": 332,
+        "chain": [
+          "lfs_fs_rawtraverse.constprop.0",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 332,
+        "chain": [
+          "lfs_fs_rawtraverse.constprop.0",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_fs_rawtraverse.constprop.0"
+        ]
+      }
+    },
+    "lfs_dir_splittingcompact.constprop.0": {
+      "E": {
+        "bytes": 712,
+        "chain": [
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 728,
+        "chain": [
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 840,
+        "chain": [
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_fs_pred": {
+      "E": {
+        "bytes": 276,
+        "chain": [
+          "lfs_fs_pred",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 276,
+        "chain": [
+          "lfs_fs_pred",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_fs_pred"
+        ]
+      }
+    },
+    "lfs_dir_relocatingcommit": {
+      "E": {
+        "bytes": 848,
+        "chain": [
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 864,
+        "chain": [
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 976,
+        "chain": [
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_relocatingcommit.constprop.0": {
+      "E": {
+        "bytes": 848,
+        "chain": [
+          "lfs_dir_relocatingcommit.constprop.0",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 864,
+        "chain": [
+          "lfs_dir_relocatingcommit.constprop.0",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 976,
+        "chain": [
+          "lfs_dir_relocatingcommit.constprop.0",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_ctz_find.constprop.0": {
+      "E": {
+        "bytes": 148,
+        "chain": [
+          "lfs_ctz_find.constprop.0",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 148,
+        "chain": [
+          "lfs_ctz_find.constprop.0",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_ctz_find.constprop.0"
+        ]
+      }
+    },
+    "lfs_dir_getslice.constprop.2": {
+      "E": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 156,
+        "chain": [
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_getslice.constprop.2"
+        ]
+      }
+    },
+    "lfs_file_flushedread": {
+      "E": {
+        "bytes": 252,
+        "chain": [
+          "lfs_file_flushedread",
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 252,
+        "chain": [
+          "lfs_file_flushedread",
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_file_flushedread"
+        ]
+      }
+    },
+    "lfs_bd_prog.constprop.0": {
+      "E": {
+        "bytes": 196,
+        "chain": [
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 196,
+        "chain": [
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 264,
+        "chain": [
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_relocate": {
+      "E": {
+        "bytes": 436,
+        "chain": [
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 436,
+        "chain": [
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 344,
+        "chain": [
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_flushedwrite": {
+      "E": {
+        "bytes": 540,
+        "chain": [
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 540,
+        "chain": [
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 448,
+        "chain": [
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_flush": {
+      "E": {
+        "bytes": 652,
+        "chain": [
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 652,
+        "chain": [
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 560,
+        "chain": [
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_orphaningcommit": {
+      "E": {
+        "bytes": 1008,
+        "chain": [
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1024,
+        "chain": [
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1136,
+        "chain": [
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_fs_deorphan": {
+      "E": {
+        "bytes": 1184,
+        "chain": [
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1200,
+        "chain": [
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1312,
+        "chain": [
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_fs_forceconsistency": {
+      "E": {
+        "bytes": 1248,
+        "chain": [
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1264,
+        "chain": [
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1376,
+        "chain": [
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_rawopencfg": {
+      "E": {
+        "bytes": 1328,
+        "chain": [
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1344,
+        "chain": [
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1456,
+        "chain": [
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_open": {
+      "E": {
+        "bytes": 1344,
+        "chain": [
+          "lfs_file_open",
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1360,
+        "chain": [
+          "lfs_file_open",
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1472,
+        "chain": [
+          "lfs_file_open",
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_close": {
+      "E": {
+        "bytes": 1232,
+        "chain": [
+          "lfs_file_close",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1248,
+        "chain": [
+          "lfs_file_close",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1360,
+        "chain": [
+          "lfs_file_close",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_read": {
+      "E": {
+        "bytes": 676,
+        "chain": [
+          "lfs_file_read",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 676,
+        "chain": [
+          "lfs_file_read",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 584,
+        "chain": [
+          "lfs_file_read",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_write": {
+      "E": {
+        "bytes": 692,
+        "chain": [
+          "lfs_file_write",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 692,
+        "chain": [
+          "lfs_file_write",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 600,
+        "chain": [
+          "lfs_file_write",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_sync": {
+      "E": {
+        "bytes": 1224,
+        "chain": [
+          "lfs_file_sync",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1240,
+        "chain": [
+          "lfs_file_sync",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1352,
+        "chain": [
+          "lfs_file_sync",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_file_seek": {
+      "E": {
+        "bytes": 684,
+        "chain": [
+          "lfs_file_seek",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 684,
+        "chain": [
+          "lfs_file_seek",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 592,
+        "chain": [
+          "lfs_file_seek",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_remove": {
+      "E": {
+        "bytes": 1320,
+        "chain": [
+          "lfs_remove",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1336,
+        "chain": [
+          "lfs_remove",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1448,
+        "chain": [
+          "lfs_remove",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_rename": {
+      "E": {
+        "bytes": 1424,
+        "chain": [
+          "lfs_rename",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1440,
+        "chain": [
+          "lfs_rename",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1552,
+        "chain": [
+          "lfs_rename",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "lfs_dir_getinfo": {
+      "E": {
+        "bytes": 236,
+        "chain": [
+          "lfs_dir_getinfo",
+          "lfs_dir_getslice.constprop.1",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 236,
+        "chain": [
+          "lfs_dir_getinfo",
+          "lfs_dir_getslice.constprop.1",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_getinfo"
+        ]
+      }
+    },
+    "lfs_stat": {
+      "E": {
+        "bytes": 460,
+        "chain": [
+          "lfs_stat",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 460,
+        "chain": [
+          "lfs_stat",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_stat"
+        ]
+      }
+    },
+    "lfs_dir_open": {
+      "E": {
+        "bytes": 460,
+        "chain": [
+          "lfs_dir_open",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 460,
+        "chain": [
+          "lfs_dir_open",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_open"
+        ]
+      }
+    },
+    "lfs_dir_read": {
+      "E": {
+        "bytes": 284,
+        "chain": [
+          "lfs_dir_read",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 284,
+        "chain": [
+          "lfs_dir_read",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_read"
+        ]
+      }
+    },
+    "lfs_dir_close": {
+      "E": {
+        "bytes": 0,
+        "chain": [
+          "lfs_dir_close"
+        ]
+      },
+      "U": {
+        "bytes": 0,
+        "chain": [
+          "lfs_dir_close"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_close"
+        ]
+      }
+    },
+    "lfs_dir_rewind": {
+      "E": {
+        "bytes": 268,
+        "chain": [
+          "lfs_dir_rewind",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 268,
+        "chain": [
+          "lfs_dir_rewind",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_dir_rewind"
+        ]
+      }
+    },
+    "lfs_fs_size": {
+      "E": {
+        "bytes": 348,
+        "chain": [
+          "lfs_fs_size",
+          "lfs_fs_rawtraverse.constprop.0",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 348,
+        "chain": [
+          "lfs_fs_size",
+          "lfs_fs_rawtraverse.constprop.0",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "lfs_fs_size"
+        ]
+      }
+    },
+    "MOUNT_SHARED_GLOBAL": {
+      "E": {
+        "bytes": 16,
+        "chain": [
+          "MOUNT_SHARED_GLOBAL"
+        ]
+      },
+      "U": {
+        "bytes": 16,
+        "chain": [
+          "MOUNT_SHARED_GLOBAL"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "MOUNT_SHARED_GLOBAL"
+        ]
+      }
+    },
+    "CHECKED_Open": {
+      "E": {
+        "bytes": 1432,
+        "chain": [
+          "CHECKED_Open",
+          "lfs_file_open",
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1448,
+        "chain": [
+          "CHECKED_Open",
+          "lfs_file_open",
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1560,
+        "chain": [
+          "CHECKED_Open",
+          "lfs_file_open",
+          "lfs_file_rawopencfg",
+          "lfs_fs_forceconsistency",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Read": {
+      "E": {
+        "bytes": 692,
+        "chain": [
+          "CHECKED_Read",
+          "lfs_file_read",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 692,
+        "chain": [
+          "CHECKED_Read",
+          "lfs_file_read",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 600,
+        "chain": [
+          "CHECKED_Read",
+          "lfs_file_read",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Write": {
+      "E": {
+        "bytes": 708,
+        "chain": [
+          "CHECKED_Write",
+          "lfs_file_write",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 708,
+        "chain": [
+          "CHECKED_Write",
+          "lfs_file_write",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 616,
+        "chain": [
+          "CHECKED_Write",
+          "lfs_file_write",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Seek": {
+      "E": {
+        "bytes": 700,
+        "chain": [
+          "CHECKED_Seek",
+          "lfs_file_seek",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 700,
+        "chain": [
+          "CHECKED_Seek",
+          "lfs_file_seek",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_alloc",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 608,
+        "chain": [
+          "CHECKED_Seek",
+          "lfs_file_seek",
+          "lfs_file_flush",
+          "lfs_file_flushedwrite",
+          "lfs_file_relocate",
+          "lfs_bd_prog.constprop.0",
+          "lfs_bd_flush",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Sync": {
+      "E": {
+        "bytes": 1240,
+        "chain": [
+          "CHECKED_Sync",
+          "lfs_file_sync",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1256,
+        "chain": [
+          "CHECKED_Sync",
+          "lfs_file_sync",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1368,
+        "chain": [
+          "CHECKED_Sync",
+          "lfs_file_sync",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Close": {
+      "E": {
+        "bytes": 1248,
+        "chain": [
+          "CHECKED_Close",
+          "lfs_file_close",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1264,
+        "chain": [
+          "CHECKED_Close",
+          "lfs_file_close",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1376,
+        "chain": [
+          "CHECKED_Close",
+          "lfs_file_close",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Stat": {
+      "E": {
+        "bytes": 532,
+        "chain": [
+          "CHECKED_Stat",
+          "lfs_stat",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 532,
+        "chain": [
+          "CHECKED_Stat",
+          "lfs_stat",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "CHECKED_Stat"
+        ]
+      }
+    },
+    "CHECKED_Remove": {
+      "E": {
+        "bytes": 1368,
+        "chain": [
+          "CHECKED_Remove",
+          "lfs_remove",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1384,
+        "chain": [
+          "CHECKED_Remove",
+          "lfs_remove",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1496,
+        "chain": [
+          "CHECKED_Remove",
+          "lfs_remove",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_Rename": {
+      "E": {
+        "bytes": 1448,
+        "chain": [
+          "CHECKED_Rename",
+          "lfs_rename",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1464,
+        "chain": [
+          "CHECKED_Rename",
+          "lfs_rename",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1576,
+        "chain": [
+          "CHECKED_Rename",
+          "lfs_rename",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "INTEGER_LMUL4": {
+      "E": {
+        "bytes": 4,
+        "chain": [
+          "INTEGER_LMUL4"
+        ]
+      },
+      "U": {
+        "bytes": 4,
+        "chain": [
+          "INTEGER_LMUL4"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "INTEGER_LMUL4"
+        ]
+      }
+    },
+    "CHECKED_Capacity": {
+      "E": {
+        "bytes": 404,
+        "chain": [
+          "CHECKED_Capacity",
+          "lfs_fs_size",
+          "lfs_fs_rawtraverse.constprop.0",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 404,
+        "chain": [
+          "CHECKED_Capacity",
+          "lfs_fs_size",
+          "lfs_fs_rawtraverse.constprop.0",
+          "FETCH_NULL",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "CHECKED_Capacity"
+        ]
+      }
+    },
+    "ENUM_VISITOR_PARAMETER": {
+      "E": {
+        "bytes": 0,
+        "chain": [
+          "ENUM_VISITOR_PARAMETER"
+        ]
+      },
+      "U": {
+        "bytes": 0,
+        "chain": [
+          "ENUM_VISITOR_PARAMETER"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "ENUM_VISITOR_PARAMETER"
+        ]
+      }
+    },
+    "CHECKED_Enumerate": {
+      "E": {
+        "bytes": 676,
+        "chain": [
+          "CHECKED_Enumerate",
+          "lfs_dir_open",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 676,
+        "chain": [
+          "CHECKED_Enumerate",
+          "lfs_dir_open",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "CHECKED_Enumerate"
+        ]
+      }
+    },
+    "RAWOPEN_READONLY": {
+      "E": {
+        "bytes": 484,
+        "chain": [
+          "RAWOPEN_READONLY",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 484,
+        "chain": [
+          "RAWOPEN_READONLY",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 216,
+        "chain": [
+          "RAWOPEN_READONLY",
+          "ALLOC_WRAPPER"
+        ]
+      }
+    },
+    "PUBLIC_OPEN_READONLY": {
+      "E": {
+        "bytes": 500,
+        "chain": [
+          "PUBLIC_OPEN_READONLY",
+          "RAWOPEN_READONLY",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 500,
+        "chain": [
+          "PUBLIC_OPEN_READONLY",
+          "RAWOPEN_READONLY",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 232,
+        "chain": [
+          "PUBLIC_OPEN_READONLY",
+          "RAWOPEN_READONLY",
+          "ALLOC_WRAPPER"
+        ]
+      }
+    },
+    "FILE_FLUSH_READONLY": {
+      "E": {
+        "bytes": 112,
+        "chain": [
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "U": {
+        "bytes": 112,
+        "chain": [
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "FILE_FLUSH_READONLY"
+        ]
+      }
+    },
+    "PUBLIC_CLOSE_READONLY": {
+      "E": {
+        "bytes": 184,
+        "chain": [
+          "PUBLIC_CLOSE_READONLY",
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 160,
+        "chain": [
+          "PUBLIC_CLOSE_READONLY",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "M": {
+        "bytes": 184,
+        "chain": [
+          "PUBLIC_CLOSE_READONLY",
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "CHECKED_OpenReadOnly": {
+      "E": {
+        "bytes": 588,
+        "chain": [
+          "CHECKED_OpenReadOnly",
+          "PUBLIC_OPEN_READONLY",
+          "RAWOPEN_READONLY",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 588,
+        "chain": [
+          "CHECKED_OpenReadOnly",
+          "PUBLIC_OPEN_READONLY",
+          "RAWOPEN_READONLY",
+          "lfs_dir_find",
+          "FETCH_FIND",
+          "lfs_dir_find_match",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": 320,
+        "chain": [
+          "CHECKED_OpenReadOnly",
+          "PUBLIC_OPEN_READONLY",
+          "RAWOPEN_READONLY",
+          "ALLOC_WRAPPER"
+        ]
+      }
+    },
+    "PUBLIC_READ_READONLY": {
+      "E": {
+        "bytes": 276,
+        "chain": [
+          "PUBLIC_READ_READONLY",
+          "lfs_file_flushedread",
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 276,
+        "chain": [
+          "PUBLIC_READ_READONLY",
+          "lfs_file_flushedread",
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "PUBLIC_READ_READONLY"
+        ]
+      }
+    },
+    "CHECKED_ReadReadOnly": {
+      "E": {
+        "bytes": 292,
+        "chain": [
+          "CHECKED_ReadReadOnly",
+          "PUBLIC_READ_READONLY",
+          "lfs_file_flushedread",
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "U": {
+        "bytes": 292,
+        "chain": [
+          "CHECKED_ReadReadOnly",
+          "PUBLIC_READ_READONLY",
+          "lfs_file_flushedread",
+          "lfs_dir_getslice.constprop.2",
+          "lfs_bd_read.part.0.constprop.0",
+          "INTEGER_DIVIDE_NONZERO20"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "CHECKED_ReadReadOnly"
+        ]
+      }
+    },
+    "CHECKED_CloseReadOnly": {
+      "E": {
+        "bytes": 200,
+        "chain": [
+          "CHECKED_CloseReadOnly",
+          "PUBLIC_CLOSE_READONLY",
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 176,
+        "chain": [
+          "CHECKED_CloseReadOnly",
+          "PUBLIC_CLOSE_READONLY",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "M": {
+        "bytes": 200,
+        "chain": [
+          "CHECKED_CloseReadOnly",
+          "PUBLIC_CLOSE_READONLY",
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "PUBLIC_SYNC_CLEAN": {
+      "E": {
+        "bytes": 152,
+        "chain": [
+          "PUBLIC_SYNC_CLEAN",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "U": {
+        "bytes": 152,
+        "chain": [
+          "PUBLIC_SYNC_CLEAN",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "PUBLIC_SYNC_CLEAN"
+        ]
+      }
+    },
+    "CHECKED_SyncClean": {
+      "E": {
+        "bytes": 168,
+        "chain": [
+          "CHECKED_SyncClean",
+          "PUBLIC_SYNC_CLEAN",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "U": {
+        "bytes": 168,
+        "chain": [
+          "CHECKED_SyncClean",
+          "PUBLIC_SYNC_CLEAN",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "M": {
+        "bytes": null,
+        "chain": [
+          "CHECKED_SyncClean"
+        ]
+      }
+    },
+    "CHECKED_CloseAfterSuccessfulSync": {
+      "E": {
+        "bytes": 200,
+        "chain": [
+          "CHECKED_CloseAfterSuccessfulSync",
+          "PUBLIC_CLOSE_READONLY",
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 176,
+        "chain": [
+          "CHECKED_CloseAfterSuccessfulSync",
+          "PUBLIC_CLOSE_READONLY",
+          "FILE_FLUSH_READONLY"
+        ]
+      },
+      "M": {
+        "bytes": 200,
+        "chain": [
+          "CHECKED_CloseAfterSuccessfulSync",
+          "PUBLIC_CLOSE_READONLY",
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "RAWOPEN_POSTCONSISTENCY": {
+      "E": {
+        "bytes": 1264,
+        "chain": [
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1280,
+        "chain": [
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1392,
+        "chain": [
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "PUBLIC_OPEN_POSTCONSISTENCY": {
+      "E": {
+        "bytes": 1280,
+        "chain": [
+          "PUBLIC_OPEN_POSTCONSISTENCY",
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1296,
+        "chain": [
+          "PUBLIC_OPEN_POSTCONSISTENCY",
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1408,
+        "chain": [
+          "PUBLIC_OPEN_POSTCONSISTENCY",
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "CHECKED_OpenPostConsistency": {
+      "E": {
+        "bytes": 1368,
+        "chain": [
+          "CHECKED_OpenPostConsistency",
+          "PUBLIC_OPEN_POSTCONSISTENCY",
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "U": {
+        "bytes": 1384,
+        "chain": [
+          "CHECKED_OpenPostConsistency",
+          "PUBLIC_OPEN_POSTCONSISTENCY",
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      },
+      "M": {
+        "bytes": 1496,
+        "chain": [
+          "CHECKED_OpenPostConsistency",
+          "PUBLIC_OPEN_POSTCONSISTENCY",
+          "RAWOPEN_POSTCONSISTENCY",
+          "lfs_fs_deorphan",
+          "lfs_dir_orphaningcommit",
+          "lfs_dir_relocatingcommit",
+          "lfs_dir_splittingcompact.constprop.0",
+          "lfs_dir_compact",
+          "lfs_dir_traverse.constprop.0",
+          "lfs_dir_commit_commit",
+          "lfs_dir_commitprog",
+          "PINNED_FLASH_CALLBACK"
+        ]
+      }
+    },
+    "PUBLIC_CLOSE_ERRED": {
+      "E": {
+        "bytes": 184,
+        "chain": [
+          "PUBLIC_CLOSE_ERRED",
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 72,
+        "chain": [
+          "PUBLIC_CLOSE_ERRED",
+          "FREE_WRAPPER"
+        ]
+      },
+      "M": {
+        "bytes": 184,
+        "chain": [
+          "PUBLIC_CLOSE_ERRED",
+          "FREE_WRAPPER"
+        ]
+      }
+    },
+    "CHECKED_CloseErred": {
+      "E": {
+        "bytes": 200,
+        "chain": [
+          "CHECKED_CloseErred",
+          "PUBLIC_CLOSE_ERRED",
+          "FREE_WRAPPER"
+        ]
+      },
+      "U": {
+        "bytes": 88,
+        "chain": [
+          "CHECKED_CloseErred",
+          "PUBLIC_CLOSE_ERRED",
+          "FREE_WRAPPER"
+        ]
+      },
+      "M": {
+        "bytes": 200,
+        "chain": [
+          "CHECKED_CloseErred",
+          "PUBLIC_CLOSE_ERRED",
+          "FREE_WRAPPER"
+        ]
+      }
+    }
+  },
+  "cycles": [],
+  "enumeration_visitor": "separate supplied unmasked/masked bounds V_U,V_M: U=max(676,216+V_U), M=216+V_M if visitor has a masked descendant; sole actual GC visitor has no filesystem reentry",
+  "array_frames": "counted once by exact own frame, not per source loop/depth"
+}
