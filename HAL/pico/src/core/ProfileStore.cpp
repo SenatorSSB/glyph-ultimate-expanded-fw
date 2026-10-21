@@ -132,6 +132,27 @@ namespace {
     using Kind = CheckedStorage::Kind;
     using Result = CheckedStorage::Result;
 
+    // Same synchronous core0 File/result owners; only these borrowed inputs
+    // are cleared on return. No fault/trace callback or IRQ reenters this lane.
+    class MountedStorage;
+    struct MountedWriteInputs { MountedStorage *owner; const char *path; const uint8_t *bytes; size_t length; Kind kind; };
+    MountedWriteInputs mounted_write_inputs{};
+    CheckedStorage::File mounted_write_file;
+    Result mounted_write_result, mounted_close_result;
+    __attribute__((noinline)) void OpenMountedWrite() {
+        ::new (&mounted_write_result) Result(CheckedStorage::Open(mounted_write_file, mounted_write_inputs.path, true, mounted_write_inputs.kind));
+    }
+    __attribute__((noinline)) void TransferMountedWrite() {
+        ::new (&mounted_write_result) Result(CheckedStorage::Write(mounted_write_file, mounted_write_inputs.bytes, mounted_write_inputs.length));
+    }
+    __attribute__((noinline)) void SyncMountedWrite() {
+        ::new (&mounted_write_result) Result(CheckedStorage::Sync(mounted_write_file));
+    }
+    __attribute__((noinline)) void CloseMountedWrite() {
+        ::new (&mounted_close_result) Result(CheckedStorage::Close(mounted_write_file));
+        if (!mounted_close_result) mounted_write_result = mounted_close_result;
+    }
+
     class MountedStorage final : public ProfileStoreStorage {
       public:
         bool Write(const char *p, const uint8_t *b, size_t n) override {
@@ -156,19 +177,16 @@ namespace {
         }
 
         Result CheckedWrite(const char *p, const uint8_t *b, size_t n, Kind k) override {
-            // Same checked WriteFile sequence, with one fixed handle instead
-            // of retaining its native lfs_file_t on every nested write frame.
-            // The existing store/record/publication workspaces are synchronous
-            // core0-only; no callback recursively enters a store operation.
-            static CheckedStorage::File file;
-            static Result r; ::new (&r) Result(CheckedStorage::Open(file, p, true, k));
-            if (r) {
-                ::new (&r) Result(CheckedStorage::Write(file, b, n));
-                if (r) ::new (&r) Result(CheckedStorage::Sync(file));
-                static Result close; ::new (&close) Result(CheckedStorage::Close(file)); if (!close) r = close;
+            mounted_write_inputs = {this, p, b, n, k};
+            OpenMountedWrite();
+            if (mounted_write_result) {
+                TransferMountedWrite();
+                if (mounted_write_result) SyncMountedWrite();
+                CloseMountedWrite();
             }
-            Remember(r, true, n);
-            return r;
+            mounted_write_inputs.owner->Remember(mounted_write_result, true, mounted_write_inputs.length);
+            mounted_write_inputs = {};
+            return mounted_write_result;
         }
 
         Result CheckedRead(const char *p, uint8_t *b, size_t n, Kind k) override {
