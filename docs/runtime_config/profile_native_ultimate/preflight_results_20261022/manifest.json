@@ -1,0 +1,228 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/preflight_result.json",
+      "relative": "preflight_result.json",
+      "bytes": 2981,
+      "sha256": "cded885b2cdf847f73fad79bd3a1da068a0c4c7fdd6376f299794bb5a7fa3853"
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/approval_receipt.json",
+      "relative": "approval_receipt.json",
+      "bytes": 738,
+      "sha256": "1483dd8f72099e2c7d6355b58cd4c14bdf13aaf34561480a0c6917fd37ce4651"
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/owner_approval.txt",
+      "relative": "owner_approval.txt",
+      "bytes": 1816,
+      "sha256": "067fe33a6f8760f73e9a7619a12e2df5c7a173e81a3010e0b05e842ed5c76646"
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_registry.jsonl",
+      "relative": "xinput_registry.jsonl",
+      "bytes": 291,
+      "sha256": "2a4bbcb2d7162d0ff3dbf5bed312dd565a3905776b80a846c621a16021b10fbd"
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_preflight.jsonl",
+      "relative": "xinput_preflight.jsonl",
+      "bytes": 443,
+      "sha256": "2d158e3ea09ee6ca9a8735aaef4aaf351e1f322d90e3b10e5a325d82d2d5016a"
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_capture_stderr.txt",
+      "relative": "xinput_capture_stderr.txt",
+      "bytes": 73,
+      "sha256": "c5baf25af01d2db918e3a0fc754a59ddb7527a28709c0324de085722cdf42053"
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/owner_wup_unavailable_20261022.json",
+      "relative": "owner_wup_unavailable_20261022.json",
+      "bytes": 511,
+      "sha256": "abf2ae384e7e17b64185b895ff30e9e813bb63681ad63c3331c7a7c74da6ac2a"
+    },
+    {
+      "source": "/private/tmp/glyph-native-preflight-result-root-pins-20261022.json",
+      "relative": "glyph-native-preflight-result-root-pins-20261022.json",
+      "bytes": 5185,
+      "sha256": "a41f2a8de6f5426a64039c3b32bb15efe0e45d3fd1fd718b378697f6d76517c7"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/approval_receipt.json",
+      "raw_sha256": "1483dd8f72099e2c7d6355b58cd4c14bdf13aaf34561480a0c6917fd37ce4651",
+      "raw_bytes": 738,
+      "relative": "objects/1483dd8f72099e2c7d6355b58cd4c14bdf13aaf34561480a0c6917fd37ce4651.gz",
+      "compressed_sha256": "3ed677f8af9f2f50ee81c5881ee46ccbb16fcf6c178eb6011fe2ac0437aeb4df",
+      "compressed_bytes": 522,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/owner_approval.txt",
+      "raw_sha256": "067fe33a6f8760f73e9a7619a12e2df5c7a173e81a3010e0b05e842ed5c76646",
+      "raw_bytes": 1816,
+      "relative": "objects/067fe33a6f8760f73e9a7619a12e2df5c7a173e81a3010e0b05e842ed5c76646.gz",
+      "compressed_sha256": "cd39d291c73e43ac1cd71feee964a088e702e87d4c472c27dd5b482f795540b8",
+      "compressed_bytes": 981,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/owner_current_connection.json",
+      "raw_sha256": "9c578115fcf4dea4f1c78efa9cb351af447d59249dd3303c70c2caf64aca30a6",
+      "raw_bytes": 469,
+      "relative": "objects/9c578115fcf4dea4f1c78efa9cb351af447d59249dd3303c70c2caf64aca30a6.gz",
+      "compressed_sha256": "cb75448b42f6e2f97775d4fd800fb63c259d6cc462a79018b04b7cba5b770a76",
+      "compressed_bytes": 336,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/owner_wup_unavailable_20261022.json",
+      "raw_sha256": "abf2ae384e7e17b64185b895ff30e9e813bb63681ad63c3331c7a7c74da6ac2a",
+      "raw_bytes": 511,
+      "relative": "objects/abf2ae384e7e17b64185b895ff30e9e813bb63681ad63c3331c7a7c74da6ac2a.gz",
+      "compressed_sha256": "9c66b6d3a83ea335f13c03c111bc579d082e0da5853d0b922e5ed75cd0463284",
+      "compressed_bytes": 367,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/preflight_result.json",
+      "raw_sha256": "cded885b2cdf847f73fad79bd3a1da068a0c4c7fdd6376f299794bb5a7fa3853",
+      "raw_bytes": 2981,
+      "relative": "objects/cded885b2cdf847f73fad79bd3a1da068a0c4c7fdd6376f299794bb5a7fa3853.gz",
+      "compressed_sha256": "3b966eaf4a71b296226adb12ccab5c0ec3804ca60025e122817bac12e17b7ee2",
+      "compressed_bytes": 1513,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/session_state.json",
+      "raw_sha256": "ee69c27e3b5a6a15bcb8090dd3eb48569f874f2096d7c7fda6efc0eeca23712f",
+      "raw_bytes": 1093,
+      "relative": "objects/ee69c27e3b5a6a15bcb8090dd3eb48569f874f2096d7c7fda6efc0eeca23712f.gz",
+      "compressed_sha256": "f00608daae24ef546c86d592d53b684b0d7fad793903dab676c41dd867743537",
+      "compressed_bytes": 593,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_capture_command.json",
+      "raw_sha256": "6cccd1ca3a3da1503ba15f730313810cd5946b5ad81955483f8ae5c818e72fee",
+      "raw_bytes": 1197,
+      "relative": "objects/6cccd1ca3a3da1503ba15f730313810cd5946b5ad81955483f8ae5c818e72fee.gz",
+      "compressed_sha256": "e735e028d5c24922a763b47abb513f13a8591321e8dafaaf7d0e4815f66077dd",
+      "compressed_bytes": 616,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_capture_result.json",
+      "raw_sha256": "1d42568a9b7140a6c880208a69d9e8599fe03380035195c89d570556482c06c1",
+      "raw_bytes": 139,
+      "relative": "objects/1d42568a9b7140a6c880208a69d9e8599fe03380035195c89d570556482c06c1.gz",
+      "compressed_sha256": "67d2d1115f8eac0d1f76abb907869c43701a9b6eda24038ac855b87dcfef428b",
+      "compressed_bytes": 118,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_capture_stderr.txt",
+      "raw_sha256": "c5baf25af01d2db918e3a0fc754a59ddb7527a28709c0324de085722cdf42053",
+      "raw_bytes": 73,
+      "relative": "objects/c5baf25af01d2db918e3a0fc754a59ddb7527a28709c0324de085722cdf42053.gz",
+      "compressed_sha256": "cc74133b9fda6a99aa195eb8076f96dd25cdc0488450d3d904a22165cdbf648f",
+      "compressed_bytes": 84,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_capture_stdout.txt",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_evidence_manifest.json",
+      "raw_sha256": "d2e9a6e2e2d5f56f10efd8da42d38df12c82b528e68715d93247006464481474",
+      "raw_bytes": 2157,
+      "relative": "objects/d2e9a6e2e2d5f56f10efd8da42d38df12c82b528e68715d93247006464481474.gz",
+      "compressed_sha256": "180de7e9bdfdbb3657dc7dc1fd5d2e05dab1662d255be826ee9e9e9fd80695dd",
+      "compressed_bytes": 842,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_inspect_command.json",
+      "raw_sha256": "53de6cb9bf4286d95958defb543adb757a2465ec5c5bb732f8bf7eba5fee6175",
+      "raw_bytes": 695,
+      "relative": "objects/53de6cb9bf4286d95958defb543adb757a2465ec5c5bb732f8bf7eba5fee6175.gz",
+      "compressed_sha256": "06e99d96c4cf9ec0180ce7276d81dcb09c3d704e1a5a4ae51b4ed64f8ddbff94",
+      "compressed_bytes": 422,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_inspect_result.json",
+      "raw_sha256": "03838084f7fd3827bc6d231d2d0079fcdfe2ebe6b35cfeb3e8cfd90a534179e7",
+      "raw_bytes": 107,
+      "relative": "objects/03838084f7fd3827bc6d231d2d0079fcdfe2ebe6b35cfeb3e8cfd90a534179e7.gz",
+      "compressed_sha256": "6cd7f2bec02ba473ec1febaf4019cce25a2698d4d73d7767eaa9778af98839ab",
+      "compressed_bytes": 100,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_inspect_stderr.txt",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_inspect_stdout.txt",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_preflight.jsonl",
+      "raw_sha256": "2d158e3ea09ee6ca9a8735aaef4aaf351e1f322d90e3b10e5a325d82d2d5016a",
+      "raw_bytes": 443,
+      "relative": "objects/2d158e3ea09ee6ca9a8735aaef4aaf351e1f322d90e3b10e5a325d82d2d5016a.gz",
+      "compressed_sha256": "5032c6e85d5e2d25120c6db682aeaf883ee6ca25ddc95b5a5613f2751d14b6f2",
+      "compressed_bytes": 337,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_registry.jsonl",
+      "raw_sha256": "2a4bbcb2d7162d0ff3dbf5bed312dd565a3905776b80a846c621a16021b10fbd",
+      "raw_bytes": 291,
+      "relative": "objects/2a4bbcb2d7162d0ff3dbf5bed312dd565a3905776b80a846c621a16021b10fbd.gz",
+      "compressed_sha256": "2625b3fdb48b8138af860495dbc332cc42ad0d10cac52218249439acb44760b3",
+      "compressed_bytes": 248,
+      "archived": true
+    },
+    {
+      "source": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/xinput_root_adjudication.json",
+      "raw_sha256": "1fa12d477913c4d6993bae276697457f671188f119a085abf1061ff23c934a05",
+      "raw_bytes": 1217,
+      "relative": "objects/1fa12d477913c4d6993bae276697457f671188f119a085abf1061ff23c934a05.gz",
+      "compressed_sha256": "bb930ec0a0706f0ed13360a9292b224dfd555d74b80a69f158d66211e21c3516",
+      "compressed_bytes": 713,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-preflight-result-root-pins-20261022.json",
+      "raw_sha256": "a41f2a8de6f5426a64039c3b32bb15efe0e45d3fd1fd718b378697f6d76517c7",
+      "raw_bytes": 5185,
+      "relative": "objects/a41f2a8de6f5426a64039c3b32bb15efe0e45d3fd1fd718b378697f6d76517c7.gz",
+      "compressed_sha256": "c89e23cec81561a107486cc965c5f78d607fc3df764af576bc25f4b3a9192a4f",
+      "compressed_bytes": 1175,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}

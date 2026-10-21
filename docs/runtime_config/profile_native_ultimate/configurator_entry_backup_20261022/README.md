@@ -1,0 +1,7 @@
+# Known-menu Configurator entry and backup — approval pending
+
+[Exact entry packet](ENTRY_PACKET.md) and [machine binding](ENTRY_PACKET.json) propose one owner-known Menu → Configurator action including its real firmware restart, plus one normal installed-pySerial CDC metadata lookup. Existing read-only Config/store/current-Configurator identity requests and original bounds follow only on a positively identified ordinary session. All counters remain zero; no entry/lookup ran during preparation.
+
+[Focused independent ACK](independent_ack/REPORT.md) passes the exact held packet and [lookup source](configurator_port_lookup.py.txt). It independently verifies all22 source pins, actual library metadata-only scope, original read bounds and exclusions. The single comports call internally makes two serial-registry metadata passes; no endpoint/device open occurs. Root must rehash actual held files before use. [Offline dependencies](offline_dependencies.json) and [archive](manifest.json) preserve source/runtime/protocol provenance.
+
+The menu file/selector/GET_CONFIG/raw saved-file path match accepted307d/976 at the reviewed boundaries. Configurator's special no-Save predicate is retained. Unknown installed firmware, startup/recovery/bookkeeping and public Config source eligibility prevent a byte-identical-startup or raw-filesystem backup promise. This proposal requires explicit owner approval; it grants no installation, host reset, Config/profile mutation, route retry or H1–H12 campaign.

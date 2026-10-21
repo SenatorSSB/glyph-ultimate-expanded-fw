@@ -1,0 +1,12 @@
+{
+  "kind": "EXPLICIT_OWNER_APPROVAL_EXACT_BOUNDED_PREFLIGHT_ONLY",
+  "packet_id": "GP_NATIVE_001_MAC_PREFLIGHT_V1",
+  "published_commit": "b28c3da9dd134bae4aa1c9ab75a6f82be254dbaf",
+  "scope_json_sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e",
+  "approval_source": "Direct human reply to request_user_input_async/call_325052fe7b5e4f5b9a1747011126e965",
+  "approval_text_sha256": "067fe33a6f8760f73e9a7619a12e2df5c7a173e81a3010e0b05e842ed5c76646",
+  "recorded_utc": "2026-10-21T20:55:22.415361+00:00",
+  "wup_single_init13_included": true,
+  "firmware_installation_or_config_profile_mutation_approved": false,
+  "normal_existing_Configurator_reads_only_if_positively_identified_and_already_reachable": true
+}

@@ -1,0 +1,62 @@
+{
+  "classification": "FOCUSED_SOURCEFREE_PREFLIGHT_RESULT_AND_ENTRY_PROPOSAL_NO_ACCEPTANCE",
+  "framework": "PASS",
+  "sequence": "PASS",
+  "navigation": "PASS",
+  "sourcefree_scope_and_diff": "PASS",
+  "only_native_queue_field_changed": "hardware_evidence_gaps",
+  "other_orders_unchanged": 102,
+  "candidate_build_resource_protocol_fixture_and_prior10archive_manifests_unchanged": true,
+  "new_archives": [
+    {
+      "manifest": "preflight_results_20261022/manifest.json",
+      "sha256": "287323e78cc35e326a9d0863a2dd11acbf68a5630f99390871e4f6088e3b56b3",
+      "inputs": 19
+    },
+    {
+      "manifest": "manual_console_review_20261022/manifest.json",
+      "sha256": "ae88ff1cb9feec118451dca257998119971ea46e2d47377e3fb868530dc91453",
+      "inputs": 25
+    },
+    {
+      "manifest": "configurator_entry_backup_20261022/manifest.json",
+      "sha256": "7170709165ec98d9498e42b03033e9653c28ee6fc499367a074fa15ef96dc432",
+      "inputs": 23
+    },
+    {
+      "manifest": "configurator_entry_backup_20261022/independent_ack/manifest.json",
+      "sha256": "821d864949e3627c8c9e7b52440acf87ead093cfdad7349e9c7239ff7998a3d0",
+      "inputs": 31
+    }
+  ],
+  "new_archive_inputs_rehashed": 98,
+  "actual_private_review_and_source_pins_rehashed": 76,
+  "changed_document_paths_at_check": 135,
+  "local_markdown_links_checked": 188,
+  "XInput_registry_matches": 1,
+  "XInput_capture_attempts": 1,
+  "XInput_interface_open": false,
+  "XInput_reports": 0,
+  "WUP_attempts_and_init13": 0,
+  "all_Configurator_requests": 0,
+  "candidate_installation_profile_mutation_and_physical_campaign_approved": false,
+  "known_entry_proposal_owner_approval": null,
+  "hardware_result": null,
+  "hardware": "NOT_TESTED",
+  "full_aggregate": "NOT_RERUN; historical C024/currentstate length/boundary phrase failures retained; no global PASS",
+  "root_script_sha256": "faefdc4f38a4f4031826af8d945f1158e168ee43874b10a25d1b9edfe3dc0cba",
+  "checker_logs": {
+    "framework.log": {
+      "sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3",
+      "bytes": 2112
+    },
+    "sequence.log": {
+      "sha256": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b",
+      "bytes": 113
+    },
+    "navigation.log": {
+      "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206",
+      "bytes": 1213
+    }
+  }
+}

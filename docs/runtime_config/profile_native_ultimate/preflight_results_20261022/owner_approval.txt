@@ -1,0 +1,25 @@
+I approve GP_NATIVE_001_MAC_PREFLIGHT_V1 as published.
+Include the optional WUP polling initialization:
+Authorize exactly one WUP adapter OUT byte 0x13 during the one designated WUP preflight capture.
+All bounds and stop conditions in the published packet apply exactly.
+In particular:
+- at most one registry-only inspection per approved route;
+- at most one 5-second / 3-report capture per identified, already reachable route;
+- the WUP 0x13 byte may be submitted exactly once;
+- it must complete successfully with an actual completed byte count of exactly 1;
+- no retry is authorized;
+- no 0x11 rumble command;
+- no USB control fallback;
+- no driver detach/seize/install;
+- no privilege or OS-settings workaround;
+- no guessed backend/Configurator/recovery/boot chord;
+- no controller reset or reboot command;
+- no firmware flashing;
+- no Config write;
+- no ProfileStore CREATE/UPDATE/set-reference/DELETE;
+- no native profile mutation;
+- no H1–H12 physical acceptance campaign.
+Existing read-only Config/ProfileStore/identity requests are authorized only on a positively identified, already reachable ordinary Configurator CDC session as bounded in the packet.
+If any route is ambiguous, inaccessible, produces an unexpected descriptor/report, times out, enters an uncertain WUP completion state, or requires an unknown physical entry procedure, stop that route and preserve the evidence. Do not improvise another access path.
+This approval is for the bounded Mac preflight only. It does not approve installation of candidate 334fbd06e4541c120b0db423e5be7e112eb1f6f6, its UF2, any controller-state mutation, or the physical acceptance campaign.
+After the preflight, report the captured route/access facts and prepare the separate exact candidate-specific installation/physical-test packet for explicit approval.

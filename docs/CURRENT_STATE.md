@@ -10,15 +10,20 @@ linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is115
 static RAM197872/delta10528, layout499/512. Broader filesystem support and every
 original cap remain unchanged. Historical failed/incomplete evidence stays exact.
 
-The [corrected334-row packet and final Mac reader review](runtime_config/profile_native_ultimate/mac_observer_20261021/README.md)
-retain the mandatory H10/H11/resource addendum and exact linked-wire correction.
-The [bounded preflight packet](runtime_config/profile_native_ultimate/hardware_preflight_approval_20261021.md)
-awaits explicit owner approval. Actual Mac access is UNVERIFIED; no device call
-occurred. GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED for retained UF2 SHA256
+The [approved Mac preflight result](runtime_config/profile_native_ultimate/preflight_results_20261022/README.md)
+found one XInput device, then stopped before interface open with zero reports;
+no retry occurred. WUP-on-Mac is unavailable. The [independent manual-console
+review](runtime_config/profile_native_ultimate/manual_console_review_20261022/README.md)
+confirms raw WUP is optional equipment; unexposed required fields remain gaps.
+The [known-menu Configurator backup-entry packet](runtime_config/profile_native_ultimate/configurator_entry_backup_20261022/ENTRY_PACKET.md)
+passed focused review and awaits separate owner approval for its one firmware
+restart and CDC metadata lookup. No entry or Config/store request has run.
+GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED for retained UF2 SHA256
 `41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
-No device action is approved; timing/highwater NOT_MEASURED, hardware/Nunchuk
-NOT_TESTED, RT2 DEFERRED/UNRESOLVED, root cause UNPROVEN. Exact human HEP PASS,
-tested-source integration and separate strict DONE remain mandatory.
+No candidate installation, Config/profile mutation or physical campaign is
+approved. Hardware/Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
+root cause UNPROVEN. Exact human HEP PASS, tested-source integration and strict
+DONE remain required; all18/H1-H12 and original limits are unchanged.
 
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,

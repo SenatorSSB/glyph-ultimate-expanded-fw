@@ -1,0 +1,65 @@
+{
+  "classification": "ACTUAL_BOUNDED_HOST_PREFLIGHT_RESULT_NOT_CANDIDATE_ACCEPTANCE",
+  "session": "GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021",
+  "approved_packet_commit": "b28c3da9dd134bae4aa1c9ab75a6f82be254dbaf",
+  "approved_scope_json_sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e",
+  "approval_included_single_WUP0x13": true,
+  "XInput": {
+    "classification": "ACTUAL_APPROVED_PREFLIGHT_ACCESS_RESULT_NOT_HARDWARE_ACCEPTANCE",
+    "route": "xinput",
+    "intended_unit": "Owner-reported currently attached USB normal XInput Mk6; exact revision/installed firmware unverified",
+    "registry_matches": 1,
+    "vendor_hex": "0738",
+    "product_hex": "4726",
+    "location_hex": "0x00100000",
+    "registry_entry_id": 4295235132,
+    "registry_inspect_returncode": 0,
+    "capture_returncode": 2,
+    "capture_stop": "expected exactly1 matching location/interface; no interface opened",
+    "raw_reports": 0,
+    "decoded_reports": 0,
+    "interface_open_reached": false,
+    "exact_interface_candidate_count": "UNKNOWN zero-or-multiple; tool did not log candidate count",
+    "failure_mechanism": "UNPROVEN; no driver, privilege, hardware or firmware cause inferred",
+    "retry_performed": false,
+    "route_status": "STOPPED_UNDER_APPROVED_STOP_CONDITION",
+    "candidate_installed_or_tested": false,
+    "configuration_profile_operations": 0,
+    "wup_init13_submissions": 0,
+    "actual_tool_binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+    "other_routes": "UNINSPECTED; no discovery/capture consumed",
+    "recorded_utc": "2026-10-21T20:58:38.713088+00:00"
+  },
+  "WUP_on_Mac": {
+    "result": "UNAVAILABLE_OWNER_REPORTED",
+    "inspect_attempts": 0,
+    "capture_attempts": 0,
+    "init13_submissions": 0,
+    "owner_record": "owner_wup_unavailable_20261022.json"
+  },
+  "USB_Switch_on_Mac": {
+    "result": "UNATTEMPTED_NO_ALREADY_REACHABLE_ROUTE_CONFIRMED",
+    "inspect_attempts": 0,
+    "capture_attempts": 0
+  },
+  "Configurator": {
+    "result": "NOT_ALREADY_REACHABLE_OWNER_REPORT",
+    "owner_known_entry": "menu -> configurator mode",
+    "backup_requests": 0,
+    "status_queries": 0,
+    "list_calls": 0,
+    "profile_reads": 0,
+    "identity_queries": 0,
+    "entry_executed": false,
+    "next": "Separately reviewed/approved GP_NATIVE_001_CONFIGURATOR_BACKUP_ENTRY_V1, oneknownmenuaction includingfirmwarerestart plusoneOSCDCmetadata lookup; originalreadboundsnotreset"
+  },
+  "candidate": {
+    "git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "uf2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+    "installed": false,
+    "hardware": "NOT_TESTED"
+  },
+  "acceptance_contract": "Unchanged all18/H1-H12. WUPonMac notmandatoryequipment; manualSwitch observations relevant, eachunexposedrequiredfield remainsgap. Noacceptancewaiverinowneravailabilityreply.",
+  "firmware_root_cause": "UNPROVEN",
+  "recorded_utc": "2026-10-21T21:13:35.738490+00:00"
+}

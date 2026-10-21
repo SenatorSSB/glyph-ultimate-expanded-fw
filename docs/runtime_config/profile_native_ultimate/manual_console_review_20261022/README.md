@@ -1,0 +1,7 @@
+# Equipment-independent GameCube observation review
+
+[Independent report](REPORT.md) finds no frozen requirement for a Mac WUP capture or specific host tool. The required evidence is complete applicable route output, including H6's distinct L/R/Z and analog relationships. [All334 manual-card templates](finding_and_manual_cards.json) preserve all18 families/H1–H12 and ordered histories; no automatic334×three-route repetition is required. Existing N129–N137 and S021–S038 provide a27-row visibility/composition block without new profile data.
+
+Owner console/game observations can establish the outputs the actual screen exposes. Native OLED six analog values plus one priority icon, serializer host/source proof and console delivery are separate evidence. They cannot silently close hidden simultaneous bits or unexposed analog fields. The indispensable remaining information is the actual console/game screen and fields. Missing required observations retain their gate unless a demonstrated observer or explicit evidence-standard amendment resolves them. No owner availability statement is an acceptance waiver.
+
+[Known-menu source qualification](CONFIGURATOR_ENTRY_QUALIFICATION.md) compares accepted307d/976 with F334f: Configurator skips its watchdog Save branch; GET_CONFIG reads saved file bytes. Actual firmware, normal startup bookkeeping and backup/store eligibility remain qualified. [Archive](manifest.json) retains all24 original explicit inputs and this sealed report; no device action occurred in review.

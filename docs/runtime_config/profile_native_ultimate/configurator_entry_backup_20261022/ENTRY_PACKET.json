@@ -1,0 +1,21 @@
+{
+  "packet_id": "GP_NATIVE_001_CONFIGURATOR_BACKUP_ENTRY_V1",
+  "classification": "PROPOSED_NARROW_OWNER_MENU_RESTART_AND_READBACK_ONLY_NOT_INSTALLATION",
+  "owner_approval": null,
+  "entry_executed": false,
+  "lookup_executed": false,
+  "original_preflight_scope_sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e",
+  "new_actions": [
+    "one owner-known Menu to Configurator action including its firmware restart",
+    "one installed-pySerial serial-registry metadata lookup, retain only exact2e8a1092 CDC, no port open"
+  ],
+  "existing_reads": "Same already-approved Config/ProfileStore/currentConfiguratoridentity requests; original counters/bounds do not reset",
+  "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "candidate_uf2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+  "candidate_installation_approved": false,
+  "packet_md_sha256": "ca39c8dfc9cfb146b44af26c585168c2d11b70f74353ccd814af27e1f234a0e8",
+  "lookup_source_sha256": "a2c79a297214a672df9d7d06429656561bce302ef332832bf80d240aa55a6e43",
+  "source_pins_sha256": "50bb603dc9ccbf0f501b0789c131a5a1af530410c6b850b851952047e247169a",
+  "focused_review_binding": "Separate final ACK; original source facts and packet remain immutable",
+  "no_device_actions_during_preparation": true
+}

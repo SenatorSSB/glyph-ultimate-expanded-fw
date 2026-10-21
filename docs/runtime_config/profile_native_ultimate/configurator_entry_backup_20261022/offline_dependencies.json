@@ -1,0 +1,11 @@
+{
+  "kind": "OFFLINE_READBACK_DEPENDENCY_CHECK_NO_PORT_OPEN",
+  "python": "3.14.4 (v3.14.4:23116f998f6, Apr  7 2026, 09:45:22) [Clang 17.0.0 (clang-1700.6.4.2)]",
+  "executable": "/usr/local/bin/python3",
+  "executable_sha256": "a6a412ff830271043f7730e2527455bdbf52c9e1712f753dc2d90089949e9943",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "tracked_schema": "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto",
+  "config_message_available": true,
+  "profile_store_request_available": true,
+  "device_calls": 0
+}

@@ -1,0 +1,125 @@
+{
+  "files": {
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/__init__.py": {
+      "bytes": 3212,
+      "sha256": "5dec897fdef45a0eaf63eacda1e01d62e1e75490302584ae0238f75376592344"
+    },
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/serialposix.py": {
+      "bytes": 35127,
+      "sha256": "5d56f98513391e1766a1847a04e2e1202ced4172a152803ba1c823a149a9b6f9"
+    },
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/serialutil.py": {
+      "bytes": 21797,
+      "sha256": "3c84f8c7c319f161a85d6f8db5bedc4f65255714589bdcbeee6f2daf65a17c0a"
+    },
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/tools/list_ports.py": {
+      "bytes": 3389,
+      "sha256": "7830e8c888684b77fd0f7095a6d86a95052a891da5f97d154c618e063b8ce1ec"
+    },
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/tools/list_ports_common.py": {
+      "bytes": 3736,
+      "sha256": "c791c88211b8348cfe5dfe625fa1a4ef165f75e69db36b6a0ac7f226187721fb"
+    },
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/tools/list_ports_osx.py": {
+      "bytes": 11178,
+      "sha256": "7a879f3068ae26a0be382bbd6805aaa895fbe701a5073a2a67a91d98c03cd8b3"
+    },
+    "/Users/rasmus.pekkarinen/Library/Python/3.14/lib/python/site-packages/serial/tools/list_ports_posix.py": {
+      "bytes": 4535,
+      "sha256": "118a83e6445b9347f66b9b1c6914b8b605860729e4a551fbee36bf1ba4b75211"
+    },
+    "/private/tmp/glyph-native-configurator-entry-backup-20261022/ENTRY_PACKET.json": {
+      "bytes": 1326,
+      "sha256": "51b9f5ce29d3b5ff5240687a86db6ded59ac430333af914c329d7a86d8685fd2"
+    },
+    "/private/tmp/glyph-native-configurator-entry-backup-20261022/ENTRY_PACKET.md": {
+      "bytes": 6938,
+      "sha256": "ca39c8dfc9cfb146b44af26c585168c2d11b70f74353ccd814af27e1f234a0e8"
+    },
+    "/private/tmp/glyph-native-configurator-entry-backup-20261022/configurator_port_lookup.py": {
+      "bytes": 1802,
+      "sha256": "a2c79a297214a672df9d7d06429656561bce302ef332832bf80d240aa55a6e43"
+    },
+    "/private/tmp/glyph-native-configurator-entry-backup-20261022/offline_dependencies.json": {
+      "bytes": 543,
+      "sha256": "48c643202cc6fba485151f1f8d568ea7d9ea053011e3f4679752fa402ee18cd1"
+    },
+    "/private/tmp/glyph-native-configurator-entry-backup-20261022/owner_known_entry.json": {
+      "bytes": 336,
+      "sha256": "045483030c08dc8a7886aaaa0d3fb9478e661ec8c9e2a721209295e01c46eb8e"
+    },
+    "/private/tmp/glyph-native-configurator-entry-backup-20261022/source_pins.json": {
+      "bytes": 4733,
+      "sha256": "50bb603dc9ccbf0f501b0789c131a5a1af530410c6b850b851952047e247169a"
+    },
+    "/private/tmp/glyph-native-console-observation-review-20261022/CONFIGURATOR_ENTRY_QUALIFICATION.md": {
+      "bytes": 3572,
+      "sha256": "954b81efdfde7f1eb361d0010731dc950adc805ce2487a0ea1ba946628caa380"
+    },
+    "/private/tmp/glyph-native-console-observation-review-20261022/PINS.json": {
+      "bytes": 5540,
+      "sha256": "4b4030937e11d671645b5e86583ebfcf79f567ca6a101e8337abfa600225f8d2"
+    },
+    "/private/tmp/glyph-native-console-observation-review-20261022/REPORT.md": {
+      "bytes": 10943,
+      "sha256": "e73c407db635cebd668f225907a65f4097efbd4a95e468d1ba1850aa509b559f"
+    },
+    "/private/tmp/glyph-native-console-observation-review-20261022/entry_packet_ack/REPORT.md": {
+      "bytes": 3241,
+      "sha256": "216d58ef27038740fa9b28dd6ca5e20a6ca25b4819a3a28ee19a867c9a5f3c57"
+    },
+    "/private/tmp/glyph-native-console-observation-review-20261022/entry_packet_ack/result.json": {
+      "bytes": 2903,
+      "sha256": "cd73474787c7fdd4e0e882a8727dbb4d2e158d26f2d6f62c9ec5c504a23f48e5"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_preflight_approval_20261021.json": {
+      "bytes": 9843,
+      "sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "bytes": 51807,
+      "sha256": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/backend_init.cpp": {
+      "bytes": 14593,
+      "sha256": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/display/DefaultConfigMenu.cpp": {
+      "bytes": 12909,
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/reboot.cpp": {
+      "bytes": 156,
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/reboot.hpp": {
+      "bytes": 98,
+      "sha256": "bcc6237cd7c3b85e263cdfd2f265aaf257537a75fc6518acb4edf5f0ab14ef6d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.options": {
+      "bytes": 6441,
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto": {
+      "bytes": 33965,
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_candidate_tool.py": {
+      "bytes": 19077,
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_production_tool.py": {
+      "bytes": 10878,
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_runtime_identity_tool.py": {
+      "bytes": 9156,
+      "sha256": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": {
+      "bytes": 46658,
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+    }
+  },
+  "kind": "FOCUSED_ENTRY_PACKET_ACK_PINS_NO_DEVICE_EXECUTION"
+}

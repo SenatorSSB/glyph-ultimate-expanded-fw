@@ -1,5 +1,15 @@
 # Profile-native Ultimate execution chapter
 
+## Actual Mac preflight and known-menu backup gate — 2026-10-22
+
+[Preflight evidence](preflight_results_20261022/README.md) preserves direct owner approval, one positive XInput registry match and the single capture stop before interface open, zero reports and no retry. WUP-on-Mac is owner-unavailable and has no inspection/capture/init13 attempt; Switch remains unattempted. No candidate install, Config/profile mutation or physical campaign occurred. This is host access evidence, not HEP PASS/FAIL.
+
+[Finite independent console review](manual_console_review_20261022/README.md) confirms raw WUP on Mac is optional equipment, derives existing27-row visibility/composition cards and preserves all334 logical rows/all18/H1–H12. Manual GC-adapter-to-Switch evidence remains route-specific; hidden required fields do not become PASS. No acceptance waiver or equipment purchase is inferred.
+
+The same reviewer source-qualified the known Menu → Configurator route and passed the [exact backup-entry packet](configurator_entry_backup_20261022/ENTRY_PACKET.md)/small metadata-only lookup. One menu-triggered firmware restart is the new owner decision. Its specific backend path skips Save; GET_CONFIG streams saved bytes, with unknown installed firmware/startup/backup eligibility limits. No entry or lookup was executed. Root publishes only source-free facts/proposals and releases publication authority at this new concrete owner gate. No new order, product successor, firmware implementation, full chat or review layer is created.
+
+Exact F334f/artifacts/source/resource/diagnostic bounds remain on HOLD. Historical failed/incomplete resource probes and all historical evidence are unchanged. Timing/highwater NOT_MEASURED, hardware/Nunchuk NOT_TESTED, RT2 deferred and root cause UNPROVEN. Separate installation/physical approval, HEP PASS, tested-source integration and strict DONE remain; full objective is incomplete.
+
 ## Current exact334f software/resource closure and hardware preparation — 2026-10-21
 
 [Exact candidate/build/resource facts](exact_candidate_334f_status_20261021.md)

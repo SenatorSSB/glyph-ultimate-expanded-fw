@@ -111,11 +111,19 @@
     "mac_observer_20261021/prefinding_parent/manifest.json": "a1edad4740a3ec0336111b2fb2c3224c034a839f9a7459822380434078d11149",
     "mac_observer_20261021/independent_parent_findings/manifest.json": "3df2ed7f91f202dd6ed8b998c76acf75818b282fb37d34ba5eab487885759f8f",
     "mac_observer_20261021/corrected_child/manifest.json": "3f74175d356cbb4df61264f2bf8ae2c4e7ef007ff02bdace92a5304bf00e3d2a",
-    "mac_observer_20261021/independent_repair_ack/manifest.json": "632e457636bf1f01934722fc173dfe331f03cb30cbc36053421f3ad372f3626a"
+    "mac_observer_20261021/independent_repair_ack/manifest.json": "632e457636bf1f01934722fc173dfe331f03cb30cbc36053421f3ad372f3626a",
+    "preflight_results_20261022/manifest.json": "287323e78cc35e326a9d0863a2dd11acbf68a5630f99390871e4f6088e3b56b3",
+    "manual_console_review_20261022/manifest.json": "ae88ff1cb9feec118451dca257998119971ea46e2d47377e3fb868530dc91453",
+    "configurator_entry_backup_20261022/manifest.json": "7170709165ec98d9498e42b03033e9653c28ee6fc499367a074fa15ef96dc432",
+    "configurator_entry_backup_20261022/independent_ack/manifest.json": "821d864949e3627c8c9e7b52440acf87ead093cfdad7349e9c7239ff7998a3d0"
   },
   "owner_equipment": "hardware_334f_preparation_20261021/owner_equipment_context.json",
   "hardware_result": null,
-  "device_approval": null,
+  "device_approval": {
+    "bounded_preflight": "preflight_results_20261022/approval_receipt.json",
+    "candidate_installation_and_physical_campaign": null,
+    "known_menu_entry_extension": null
+  },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
   "hardware": "NOT_TESTED",
@@ -123,11 +131,12 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit owner approval of the exact bounded Mac/adapter/backup preflight, including separate yes/no for the one optional WUP0x13 operation",
-    "Actual approved preflight: intended unit/route/OS access, available original Config/store/payload backup, entry/chord eligibility and observation gaps; unknown physical entry remains a stop",
-    "Separate exact-candidate flash/profile/physical packet and explicit owner approval after eligible preflight",
-    "All required physical H1-H12 observations, retained instrumented target measurements with startup/backend limits and logical restoration",
-    "Independent human HEP PASS; source-free result, exact tested-source integration, fresh integration review and separate strict DONE"
+    "Explicit approval and execution of the exact known-menu Configurator entry/backup-only extension; then actual original Config/store/eligibility custody",
+    "Usable XInput complete-output observation remains unresolved after the one stopped capture; no retry or alternate device path is authorized by existing preflight",
+    "Manual GC-adapter-to-Switch actual screen/field capability facts and economical source-derived route matrix; optional raw WUP hardware is not required but invisible required fields stay gaps",
+    "Separate exact-candidate installation/profile/physical packet and explicit owner approval, including verified safe reentry/restoration conditions",
+    "All required H1-H12/all18 physical evidence, instrumented target measurements with startup/backend limits, logical restoration and independent HEP PASS",
+    "Source-free result then exact tested-source integration, fresh integration review and separate strict DONE"
   ],
   "historical_evidence": "All earlier failed/incomplete source/resource probes, arithmetic corrections, candidates and custody remain unchanged. Current exact-F proof supersedes their open-state disposition, not their historical facts.",
   "sourcefree_publication_validation": {
@@ -137,7 +146,7 @@
     "full_surface": "FAIL historical C024 auth; current-state length and unchanged boundary phrase failures also reproduce on BASE c0cc; retained framework debt, no full aggregate PASS"
   },
   "mac_observer": {
-    "state": "CORRECTED_CHILD_SAME_REVIEWER_ACK_PASS_ACTUAL_ACCESS_UNVERIFIED",
+    "state": "CORRECTED_SOURCE_REVIEW_PASS_ACTUAL_XINPUT_INTERFACE_SELECTION_STOP_UNPROVEN_CAUSE",
     "binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
     "source_sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2",
     "verifier_sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
@@ -146,19 +155,42 @@
     "repair_ack_PINS_sha256": "604ff494860dee8b595c8c01660dcca11f5735042c653d74d447b8d8d07e43bc",
     "custody": "mac_observer_20261021/host_artifact_custody.json",
     "final_review_binding": "mac_observer_20261021/host_artifact_review_binding.json",
-    "device_calls_executed": false,
-    "device_approval": null
+    "device_calls_executed": true,
+    "device_approval": "EXACT_BOUNDED_PREFLIGHT_ONLY"
   },
   "preflight": {
     "packet_id": "GP_NATIVE_001_MAC_PREFLIGHT_V1",
     "file": "hardware_preflight_approval_20261021.md",
     "scope_json": "hardware_preflight_approval_20261021.json",
     "scope_sha256": "6dc744219762277cc9e990fe53a924916a6c19be5c51cc4840a381d3b85e793e",
-    "owner_approval": null,
-    "includes_candidate_installation_or_profile_mutation": false
+    "owner_approval": "EXPLICIT_OWNER_APPROVED_BOUNDED_PREFLIGHT_INCLUDING_SINGLE_WUP0x13",
+    "includes_candidate_installation_or_profile_mutation": false,
+    "approval_receipt": "preflight_results_20261022/approval_receipt.json",
+    "actual_result": "preflight_results_20261022/preflight_result.json",
+    "XInput": "ONE_REGISTRY_MATCH_CAPTURE_STOPPED_BEFORE_OPEN_ZERO_REPORTS_NO_RETRY",
+    "WUP_on_Mac": "UNAVAILABLE_OWNER_REPORTED_ZERO_ATTEMPTS_ZERO_INIT13",
+    "Switch_on_Mac": "UNATTEMPTED_NO_CONFIRMED_ALREADY_REACHABLE_ROUTE",
+    "Configurator": "NOT_ALREADY_REACHABLE; known_menu_entry_extension_awaits_separate_approval"
   },
   "sourcefree_observer_publication_validation": {
     "record": "observer_preflight_publication_validation_20261021/result.json",
     "state": "See final focused record; historical full-surface failures remain preserved without a global PASS"
-  }
+  },
+  "manual_GameCube_observation": {
+    "report": "manual_console_review_20261022/REPORT.md",
+    "report_sha256": "e73c407db635cebd668f225907a65f4097efbd4a95e468d1ba1850aa509b559f",
+    "raw_WUP_on_Mac_mandatory_equipment": false,
+    "physical_fields_and_all18_H1_H12_unchanged": true,
+    "console_observed": null,
+    "unexposed_required_fields": "REMAIN_GAPS_NO_IMPLICIT_WAIVER"
+  },
+  "next_entry_packet": {
+    "id": "GP_NATIVE_001_CONFIGURATOR_BACKUP_ENTRY_V1",
+    "file": "configurator_entry_backup_20261022/ENTRY_PACKET.md",
+    "json_sha256": "51b9f5ce29d3b5ff5240687a86db6ded59ac430333af914c329d7a86d8685fd2",
+    "review_report_sha256": "216d58ef27038740fa9b28dd6ca5e20a6ca25b4819a3a28ee19a867c9a5f3c57",
+    "owner_approval": null,
+    "entry_and_lookup_executed": false
+  },
+  "latest_sourcefree_preflight_validation": "preflight_publication_validation_20261022/result.json"
 }
