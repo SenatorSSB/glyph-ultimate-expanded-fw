@@ -1,0 +1,69 @@
+[
+  {
+    "op": "test",
+    "path": "/numeric_caps",
+    "value": {
+      "native_schema": 5,
+      "encoding_version": 1,
+      "engine_abi": 1,
+      "native_field_tag": 8,
+      "expected_engine_config_tag": 205,
+      "body_max_bytes": 3336,
+      "profile_wrapper_max_bytes": 3341,
+      "record_max_bytes": 3373,
+      "existing_profile_payload_admission_bytes": 4096,
+      "single_charge_payload_cutoff_bytes": 4056,
+      "record_header_bytes": 32,
+      "directory_entries": 64,
+      "tables": 28,
+      "directions_per_table": 9,
+      "conditions": 96,
+      "condition_tokens": 768,
+      "direction_sources": 8,
+      "table_rules": 32,
+      "digital_bindings": 32,
+      "analogue_effects": 16,
+      "condition_all": 2,
+      "condition_any": 4,
+      "condition_none": 9,
+      "digital_mask": 4095,
+      "native_active_plus_candidate_max_bytes": 7800,
+      "prepared_view_max_bytes": 560,
+      "native_frame_local_aggregate_max_bytes": 144,
+      "validation_local_aggregate_max_bytes": 256,
+      "added_static_ram_max_bytes": 12288,
+      "board_ram_bytes": 262144,
+      "existing_filesystem_bytes": 524288,
+      "existing_recovery_reserve_bytes": 16384,
+      "min_complete_profile_capacity": 20,
+      "measured_active_plus_candidate_bytes": 7792,
+      "measured_short_known_static_delta_bytes": 8256,
+      "measured_no_short_known_static_delta_bytes": 8232,
+      "conservative_20_profile_revision_staging_reserve_bytes": 434176,
+      "conservative_with_latched_migration_extras_bytes": 446464,
+      "whole_firmware_static_ram_max_bytes": 199632
+    }
+  },
+  {
+    "op": "add",
+    "path": "/allowed_source_paths/-",
+    "value": "include/core/ModeSelectionTransaction.hpp"
+  },
+  {
+    "op": "add",
+    "path": "/scope_clarifications/-",
+    "value": "GP-NATIVE-001 bounded lifetime/layout amendment 2026-10-21: adopt only the exact paths, methods, conditional activation, workspace restrictions and validation in docs/runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json. Proposals1/2/4 authorize synchronous boot, Persistence and dispatch/publication sibling phases with original filesystem/store/Config/recovery/transaction behavior unchanged; this qualifies only ambiguous layout exclusions, never store algorithm/redesign authority. include/core/ModeSelectionTransaction.hpp is additionally permitted ONLY after recorded exact post-Persistence/current-IRQ composition still exceeds usable2048 and identifies its existing ConfigValidationError as a contributor; then only move that exact automatic validation fragment into a returning noinline templated helper before the same Save. No config.cpp expansion, new static error or generic dependency authority. Total new layout static workspace <=512 including one sizeof(CheckedStorageFile) aligned raw slot and scalar metadata, inside every unchanged original cap. Exact source/ELF/both-ABI/fault/reset/trace/broader-filesystem proof and fresh final review/build/custody/hardware gates remain mandatory; P1 stays OPEN until proved."
+  },
+  {
+    "op": "add",
+    "path": "/bounded_layout_exception",
+    "value": {
+      "reference": "docs/runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json",
+      "disposition": "ADOPT_BOUNDED",
+      "conditional_header": "include/core/ModeSelectionTransaction.hpp",
+      "no_config_cpp_expansion": true,
+      "original_numeric_caps_unchanged": true,
+      "before_execution": "Canonical source-free adoption and live readback; conditional proposal3 measured-need record before header edit."
+    }
+  }
+]

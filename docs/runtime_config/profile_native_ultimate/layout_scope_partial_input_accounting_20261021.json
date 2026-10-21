@@ -1,0 +1,21 @@
+{
+  "recorded_utc": "2026-10-21T09:52:54.019284+00:00",
+  "kind": "PARTIAL_WORKER_ACCOUNTING_NOT_COMPLETED_REVIEW",
+  "worker": "/root/native_source_review",
+  "terminal_events": 2,
+  "runtime_message": "Agent errored: This content was flagged for possible cybersecurity risk.",
+  "scope": "Owner-authorized local firmware stack/resource accounting and existing test-evidence readback. No network/device action or new implementation in that worker.",
+  "disposition": "No further resume of this errored worker. Preserve original reports and all partial facts; do not claim a completed new review. Fresh independent source/ELF review is required after repair as already mandated.",
+  "partial_source_compositions_bytes": {
+    "gc_create_before_padding": 2132,
+    "gc_duplicate_before_padding": 2164,
+    "record_create_with_irq348_and_premask16": 2068,
+    "record_duplicate_with_irq348_and_premask16": 2100,
+    "rename_firstdirectory_with_irq348_and_premask16": 2148,
+    "duplicate_laterdirectory_with_irq348_and_premask16": 1956,
+    "mode_destination_foreground_before_irq": 2272,
+    "mode_destination_with_premask_before_irq": 2288,
+    "boot_begin_with_fs_irq348_and_premask16": 2164
+  },
+  "qualification": "Source-feasible retained compositions reported in worker messages; final full table not delivered. Existing positive-orphan host witness observes repair/compact/program but not deepest program callback. No actual target stack observation or final repaired-resource PASS."
+}

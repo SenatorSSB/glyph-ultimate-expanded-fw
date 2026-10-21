@@ -1,5 +1,15 @@
 # Agent Context
 
+## Bounded stack-lifetime repair adopted — 2026-10-21
+
+The [independent Curator amendment](runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json) narrows the remaining engineering
+work to synchronous boot, Config-save and dispatch/publication lifetime phases.
+It adds only a measured-need conditional validation-helper header permission;
+config.cpp scope remains unchanged. All new layout workspace together is bounded
+to512 bytes within existing limits. The broader filesystem domain, original
+semantics and final structural/source/build/hardware gates remain intact; P1 is OPEN.
+This amends the same GP-NATIVE-001 and creates no new order or device authority.
+
 ## Broader filesystem support retained — 2026-10-21 owner resume
 
 The [direct owner decision](runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md) resolves the prior domain question: preserve

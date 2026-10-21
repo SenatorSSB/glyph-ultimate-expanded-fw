@@ -217,7 +217,8 @@
     "include/core/RuntimeIdentityWire.hpp",
     "builder_scripts/native_target_metrics.py",
     "platformio.ini",
-    "tools/glyph_native_target_metrics_tool.py"
+    "tools/glyph_native_target_metrics_tool.py",
+    "include/core/ModeSelectionTransaction.hpp"
   ],
   "allowed_test_paths": [
     "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py",
@@ -408,7 +409,8 @@
     "Named current mode-selection/custom-cache/button/capacity test adapters may consume actual changed interfaces while preserving their historical fixtures/pins and proofs. No checker context/campaign/global allowance or aggregate redesign is authorized.",
     "Any further concrete call-site/test dependency must be documented as necessary to a named frozen interface, remain within the exact approved behavioral scope, and receive independent source review. It cannot authorize unrelated firmware, semantics, transport, storage or resource changes.",
     "GP-NATIVE-001 bounded native-identity call-site clarification (2026-10-20): include/core/RuntimeIdentityService.hpp is authorized solely to add __attribute__((noinline)) to the existing runtime_identity::Service::Poll template method. This separates its existing response/Snapshot stack phase from the caller loop frame during the source-grounded NATIVE-REVIEW-P1-STACK repair. Preserve the exact method signature/body, parser, counters, scheduling order, XInput-only admission, 16-byte request/72-byte response, statuses and wire behavior. No new API, static workspace, resource-limit increase, timing facility, SDK edit or other header change is authorized. This path is an existing dependency of frozen native active-runtime identity correspondence, not general transport authority. Require fresh independent source review and exact final build/disassembly/call-chain/interrupt resource proof; this clarification does not establish stack PASS, target measurement, device approval or hardware acceptance. All other source/test paths, numeric caps, frozen architecture/oracles and hardware gates remain unchanged.",
-    "Owner-authorized 2026-10-20 retained bounded diagnostic exception: native frame and selected activation/preparation elapsed target time, post-runtime/core-launch own-core stack-write observations, and exactly one fixed read-only XInput GET_SNAPSHOT command under diagnostic_scope_amendment_20261020.json and diagnostic_design_freeze_20261020.json. This precisely supersedes only conflicting timing/new-command exclusions and prior Poll annotation-only limits for the named demux; existing identity16/72 remains exact. Also authorize only static POD placement/reset of existing core0 setup ConfigValidationError in config.cpp for boot stack lifetime repair, preserving all validation/control/error/boot/display semantics. No other native algorithm, transport/store capability, protected budget, SDK, optimization, startup or device authority is granted. Exact per-path permissions and frozen design are load-bearing; no unlisted path or generic dependency authority. RuntimeIdentityWire.hpp permits only HasPartialFrame() const returning _used != 0; all existing identity source functions/fields/constants/status/bytes remain exact. Current original numeric_caps object is unchanged; diagnostic512 is a subordinate cap inside existing totals."
+    "Owner-authorized 2026-10-20 retained bounded diagnostic exception: native frame and selected activation/preparation elapsed target time, post-runtime/core-launch own-core stack-write observations, and exactly one fixed read-only XInput GET_SNAPSHOT command under diagnostic_scope_amendment_20261020.json and diagnostic_design_freeze_20261020.json. This precisely supersedes only conflicting timing/new-command exclusions and prior Poll annotation-only limits for the named demux; existing identity16/72 remains exact. Also authorize only static POD placement/reset of existing core0 setup ConfigValidationError in config.cpp for boot stack lifetime repair, preserving all validation/control/error/boot/display semantics. No other native algorithm, transport/store capability, protected budget, SDK, optimization, startup or device authority is granted. Exact per-path permissions and frozen design are load-bearing; no unlisted path or generic dependency authority. RuntimeIdentityWire.hpp permits only HasPartialFrame() const returning _used != 0; all existing identity source functions/fields/constants/status/bytes remain exact. Current original numeric_caps object is unchanged; diagnostic512 is a subordinate cap inside existing totals.",
+    "GP-NATIVE-001 bounded lifetime/layout amendment 2026-10-21: adopt only the exact paths, methods, conditional activation, workspace restrictions and validation in docs/runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json. Proposals1/2/4 authorize synchronous boot, Persistence and dispatch/publication sibling phases with original filesystem/store/Config/recovery/transaction behavior unchanged; this qualifies only ambiguous layout exclusions, never store algorithm/redesign authority. include/core/ModeSelectionTransaction.hpp is additionally permitted ONLY after recorded exact post-Persistence/current-IRQ composition still exceeds usable2048 and identifies its existing ConfigValidationError as a contributor; then only move that exact automatic validation fragment into a returning noinline templated helper before the same Save. No config.cpp expansion, new static error or generic dependency authority. Total new layout static workspace <=512 including one sizeof(CheckedStorageFile) aligned raw slot and scalar metadata, inside every unchanged original cap. Exact source/ELF/both-ABI/fault/reset/trace/broader-filesystem proof and fresh final review/build/custody/hardware gates remain mandatory; P1 stays OPEN until proved."
   ],
   "research_replay_modifications": [
     {
@@ -499,5 +501,13 @@
     "runtime_watermark_not_a_structural_proof_substitute": true,
     "outside_ready_paths_requires_bounded_curator_authority_and_independent_review": true,
     "device_or_resource_limit_authority": false
+  },
+  "bounded_layout_exception": {
+    "reference": "docs/runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json",
+    "disposition": "ADOPT_BOUNDED",
+    "conditional_header": "include/core/ModeSelectionTransaction.hpp",
+    "no_config_cpp_expansion": true,
+    "original_numeric_caps_unchanged": true,
+    "before_execution": "Canonical source-free adoption and live readback; conditional proposal3 measured-need record before header edit."
   }
 }
