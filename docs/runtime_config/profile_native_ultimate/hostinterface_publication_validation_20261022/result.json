@@ -1,0 +1,30 @@
+{
+  "state": "FOCUSED_SOURCEFREE_HOSTINTERFACE_V2_PUBLICATION_PASS",
+  "framework_sequence_navigation_diff": "PASS",
+  "scope": "DOCS_ONLY_HOST_SOURCE_ARCHIVED_INERT",
+  "other_orders_unchanged": 102,
+  "only_queue_field_changed": "GP-NATIVE-001.hardware_evidence_gaps",
+  "all_protected_candidate_build_resource_protocol_oracle_hardware_fields_unchanged": true,
+  "private_completed_session_files_rehashed": [
+    227,
+    34,
+    7,
+    251
+  ],
+  "archive_raw_inputs_rehashed": 258,
+  "private_content_addressed_refs_rehashed": 24,
+  "author_and_peer_pin_entries_rehashed": 248,
+  "parent_source_binary_initial_PASS_V1_unchanged": true,
+  "corrected_child_source_binary_V2_review_custody_binding": "PASS",
+  "old_and_child_host_custody_files_rehashed": 14,
+  "owner_approval": null,
+  "new_live_invocations": 0,
+  "device_state": "STOP_CONFIGURATOR",
+  "native_hardware": "NOT_TESTED",
+  "hardware_result": null,
+  "timing_highwater": "NOT_MEASURED",
+  "privacy": "PASS_no_private_serial_or_original_payload_publication",
+  "local_markdown_links": 203,
+  "changed_paths_at_check": 261,
+  "full_surface": "NOT_RERUN; historical aggregate debt retained, no global PASS"
+}

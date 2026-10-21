@@ -1,0 +1,82 @@
+{
+  "sealed_feasibility_PINS_SHA256": "4fd048b309136a12ea8f7c7021626a15e6ad788ea2f5b061e67e816a39fc9f69",
+  "source_and_SDK_inputs_rechecked": [
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHost.h",
+      "sha256": "35824080712ab2c8efe5049f52c4e27832a3527dbb7513e8f25ea58b353a5ce0",
+      "bytes": 872
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostInterface.h",
+      "sha256": "635b59f36874176dc7a63c843341c9331409ce1da82f424b6231250383d8ad04",
+      "bytes": 6115
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostObject.h",
+      "sha256": "49acd363ecf659d22653dc533c36d81b7ca59db86a92adbc9d904cb003be093d",
+      "bytes": 25170
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostPipe.h",
+      "sha256": "1638832f66cf90b6170ff64cce1c992c4de29d94f15d6ae633e3f3504e2314d5",
+      "bytes": 24106
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostIOSource.h",
+      "sha256": "68d7e8c6f355ebe7817c85d398b8d50847cbe3dad66f9b4619d933235fd74faa",
+      "bytes": 2318
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostDefinitions.h",
+      "sha256": "c1d90c000b98c1ea75ba338103f03e3d972692df59ac9b2830b534e04ae1fa79",
+      "bytes": 12452
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/AppleUSBDescriptorParsing.h",
+      "sha256": "1b3dcafe59bcfcc1465879faf60c783776ad5bc88593f263905873102b8aa7e6",
+      "bytes": 21464
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Modules/module.modulemap",
+      "sha256": "98d0c0e8b8eb8112ce82a4f1790d16b327544e1c24d3604946dca3cf0d1719ef",
+      "bytes": 99
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Versions/A/IOUSBHost.tbd",
+      "sha256": "f3787c5df450b2a040c991fe6a71b41fa3a7457dfe32da939732a4e7addc868d",
+      "bytes": 3919
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h",
+      "sha256": "553869588e8c0b162b232e294dea2579cfd739d83e772a0b8a79e2be91a5816e",
+      "bytes": 79847
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/IOUSBLib.h",
+      "sha256": "16acc674ebc759d00904e8ae1cd2137b5f814d54fe237c5193cf6549131d542a",
+      "bytes": 308768
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/HAL/pico/include/comms/XInputBackend.hpp",
+      "sha256": "e0cf78a9c800461f4636b0e4ecebc47a52f7b1e001f709af210373f4bf9229cf",
+      "bytes": 510
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/XInputBackend.cpp",
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+      "bytes": 2197
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/include/Adafruit_USBD_XInput.hpp",
+      "sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+      "bytes": 4555
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f",
+      "bytes": 11301
+    }
+  ],
+  "original_held_native_binary_SHA256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+  "hardware_packet_SHA256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+}

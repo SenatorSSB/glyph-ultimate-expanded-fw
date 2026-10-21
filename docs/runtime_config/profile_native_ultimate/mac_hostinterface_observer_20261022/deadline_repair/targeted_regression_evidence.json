@@ -1,0 +1,72 @@
+[
+  {
+    "compile_argv": [
+      "clang++",
+      "-std=c++17",
+      "-fobjc-arc",
+      "-fblocks",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression.mm",
+      "-o",
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression"
+    ],
+    "compile_returncode": 0,
+    "compile_stdout": "",
+    "compile_stderr": "",
+    "run_argv": [
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression",
+      "0",
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression.jsonl"
+    ],
+    "run_returncode": 0,
+    "run_stdout": "CHILD_REGRESSION_PASS actual_source=child slow_completion_fsync_advance_ns=6000000000 enqueues=1 after_deadline_enqueues=0 aborts=0 retained_owner_safe=1 zero_native_device_calls=1\n",
+    "run_stderr": "",
+    "live_USB_or_registry_calls": 0
+  },
+  {
+    "compile_argv": [
+      "clang++",
+      "-std=c++17",
+      "-fobjc-arc",
+      "-fblocks",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression.mm",
+      "-o",
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression"
+    ],
+    "compile_returncode": 0,
+    "compile_stdout": "",
+    "compile_stderr": "",
+    "run_argv": [
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression",
+      "0",
+      "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression.jsonl"
+    ],
+    "run_returncode": 0,
+    "run_stdout": "CHILD_CLOCK_FAILURE_PASS actual_source=child slow_completion_fsync_advance_ns=6000000000 enqueues=1 after_deadline_enqueues=0 aborts=0 retained_owner_safe=1 zero_native_device_calls=1\n",
+    "run_stderr": "",
+    "live_USB_or_registry_calls": 0
+  }
+]

@@ -1,0 +1,90 @@
+// Actual native source included with ALL registry and IOUSBHost access replaced.
+#import <Foundation/Foundation.h>
+#import <IOUSBHost/IOUSBHostInterface.h>
+#import <IOUSBHost/IOUSBHostPipe.h>
+#include <map>
+#include <time.h>
+#include <unistd.h>
+#include <vector>
+#include <string>
+#include <cstdio>
+static int scenario=0,init_calls=0,pipe_calls=0,read_calls=0,abort_calls=0,destroy_calls=0;
+static bool callback_active=false,cleanup_in_callback=false;
+static bool injected_advance=false;static uint64_t clock_offset_ns=0,observed_deadline=0;static unsigned after_deadline_enqueues=0;
+static int simulated_clock(clockid_t c,timespec*t){int r=::clock_gettime(c,t);if(!r&&c==CLOCK_MONOTONIC){uint64_t ns=uint64_t(t->tv_sec)*1000000000+uint64_t(t->tv_nsec)+clock_offset_ns;t->tv_sec=time_t(ns/1000000000);t->tv_nsec=long(ns%1000000000);}return r;}
+static uint64_t simulated_now(){timespec t{};simulated_clock(CLOCK_MONOTONIC,&t);return uint64_t(t.tv_sec)*1000000000+uint64_t(t.tv_nsec);}
+static int slow_completion_fsync(int fd){int r=::fsync(fd);if(callback_active&&!injected_advance){clock_offset_ns=6000000000ULL;injected_advance=true;}return r;}
+static dispatch_queue_t mock_queue;
+static IOUSBHostCompletionHandler saved_completion;
+static void force_stop();
+static std::vector<uint8_t> config_bytes={9,2,48,0,1,1,0,128,50,9,4,0,0,2,255,93,1,0,16,33,16,1,1,36,129,20,3,0,3,19,1,0,3,0,7,5,133,3,32,0,1,7,5,6,3,32,0,8};
+@class MockInterface;
+@interface MockPipe:NSObject
+@property(strong) MockInterface*hostInterface;
+@property(readonly) NSUInteger endpointAddress;
+@property(readonly) const IOUSBHostIOSourceDescriptors*originalDescriptors;
+@property(readonly) const IOUSBHostIOSourceDescriptors*descriptors;
+-(BOOL)enqueueIORequestWithData:(NSMutableData*)data completionTimeout:(NSTimeInterval)timeout error:(NSError**)error completionHandler:(IOUSBHostCompletionHandler)handler;
+-(BOOL)abortWithOption:(IOUSBHostAbortOption)option error:(NSError**)error;
+@end
+@interface MockInterface:NSObject
+-(instancetype)initWithIOService:(io_service_t)service options:(IOUSBHostObjectInitOptions)options queue:(dispatch_queue_t)queue error:(NSError**)error interestHandler:(IOUSBHostInterestHandler)handler;
+@property(readonly) const IOUSBConfigurationDescriptor*configurationDescriptor;
+@property(readonly) const IOUSBInterfaceDescriptor*interfaceDescriptor;
+-(MockPipe*)copyPipeWithAddress:(NSUInteger)address error:(NSError**)error;
+-(void)destroy;
+@end
+@implementation MockInterface
+-(instancetype)initWithIOService:(io_service_t)service options:(IOUSBHostObjectInitOptions)options queue:(dispatch_queue_t)queue error:(NSError**)error interestHandler:(IOUSBHostInterestHandler)handler{++init_calls;if(service!=101||options!=0||handler||!queue)std::abort();(void)error;mock_queue=queue;if(scenario==8)return nil;return [super init];}
+-(const IOUSBConfigurationDescriptor*)configurationDescriptor{return (const IOUSBConfigurationDescriptor*)config_bytes.data();}
+-(const IOUSBInterfaceDescriptor*)interfaceDescriptor{return (const IOUSBInterfaceDescriptor*)(config_bytes.data()+9);}
+-(MockPipe*)copyPipeWithAddress:(NSUInteger)address error:(NSError**)error{(void)error;++pipe_calls;if(address!=133)std::abort();MockPipe*p=[MockPipe new];p.hostInterface=self;return p;}
+-(void)destroy{++destroy_calls;if(callback_active)cleanup_in_callback=true;}
+@end
+@implementation MockPipe
+-(NSUInteger)endpointAddress{return 133;}
+-(const IOUSBHostIOSourceDescriptors*)originalDescriptors{static IOUSBHostIOSourceDescriptors d{};std::memcpy(&d.descriptor,config_bytes.data()+34,7);return &d;}
+-(const IOUSBHostIOSourceDescriptors*)descriptors{return self.originalDescriptors;}
+-(BOOL)enqueueIORequestWithData:(NSMutableData*)data completionTimeout:(NSTimeInterval)timeout error:(NSError**)error completionHandler:(IOUSBHostCompletionHandler)handler{(void)error;++read_calls;if(observed_deadline&&simulated_now()>=observed_deadline)++after_deadline_enqueues;if(timeout!=0||data.length!=32||read_calls>3)std::abort();saved_completion=[handler copy];if(scenario==5)return NO;if(scenario==6||scenario==7){dispatch_async(mock_queue,^{force_stop();});return YES;}
+ dispatch_async(mock_queue,^{std::memset(data.mutableBytes,0,32);if(scenario==4)((uint8_t*)data.mutableBytes)[1]=20;NSUInteger count=scenario==1?0:scenario==2?21:scenario==12?33:20;IOReturn status=scenario==3?kIOReturnError:0;callback_active=true;handler(status,count);callback_active=false;});return YES;}
+-(BOOL)abortWithOption:(IOUSBHostAbortOption)option error:(NSError**)error{(void)error;++abort_calls;if(option!=IOUSBHostAbortOptionAsynchronous||abort_calls>1)std::abort();if(scenario==6)dispatch_async(mock_queue,^{callback_active=true;saved_completion(kIOReturnAborted,0);callback_active=false;});return YES;}
+@end
+static unsigned next_iterator=1000;static std::map<unsigned,std::vector<unsigned>>lists;
+static CFMutableDictionaryRef mock_match(const char*cls){if(std::strcmp(cls,"IOUSBHostDevice"))std::abort();return CFDictionaryCreateMutable(nullptr,0,&kCFTypeDictionaryKeyCallBacks,&kCFTypeDictionaryValueCallBacks);}
+static kern_return_t mock_services(mach_port_t,CFDictionaryRef d,io_iterator_t*out){CFRelease(d);*out=next_iterator++;lists[*out]=(scenario==15||scenario==20)?std::vector<unsigned>{1,2}:std::vector<unsigned>{1};return 0;}
+static io_object_t mock_next(io_iterator_t it){auto&v=lists[it];if(v.empty())return 0;auto x=v.front();v.erase(v.begin());return x;}
+static kern_return_t mock_release(io_object_t){return 0;}
+static kern_return_t mock_retain(io_object_t){return 0;}
+static boolean_t mock_valid(io_iterator_t){return true;}
+static kern_return_t mock_id(io_registry_entry_t e,uint64_t*out){*out=(scenario==10&&e==1)?2:e;return 0;}
+static kern_return_t mock_class(io_object_t e,io_name_t name){std::snprintf(name,128,"%s",e==1?"IOUSBHostDevice":"IOUSBHostInterface");return 0;}
+static kern_return_t mock_children(io_registry_entry_t e,const io_name_t,io_iterator_t*out){*out=next_iterator++;lists[*out]=e==1?(scenario==17?std::vector<unsigned>{101,102}:std::vector<unsigned>{scenario==11?102u:101u}):std::vector<unsigned>{};return 0;}
+static CFTypeRef mock_property(io_registry_entry_t e,CFStringRef key,CFAllocatorRef,IOOptionBits){int64_t n=-1;if(CFEqual(key,CFSTR("idVendor")))n=1848;else if(CFEqual(key,CFSTR("idProduct")))n=18214;else if(CFEqual(key,CFSTR("locationID"))){if(e!=1)return nullptr;n=(scenario==14||scenario==19)?2097152:1048576;}else if(CFEqual(key,CFSTR("bInterfaceClass")))n=(scenario==13||scenario==18)?2:255;else if(CFEqual(key,CFSTR("bInterfaceSubClass")))n=93;else if(CFEqual(key,CFSTR("bInterfaceProtocol")))n=1;else if(CFEqual(key,CFSTR("bInterfaceNumber"))||CFEqual(key,CFSTR("bAlternateSetting")))n=0;else if(CFEqual(key,CFSTR("bConfigurationValue")))n=1;if(scenario==21&&e!=1&&CFEqual(key,CFSTR("bInterfaceClass")))return CFRetain(kCFBooleanTrue);if((scenario==22||scenario==23)&&e!=1&&CFEqual(key,CFSTR("bInterfaceNumber")))n=1;if(n<0)return nullptr;return CFNumberCreate(nullptr,kCFNumberSInt64Type,&n);}
+#define IOUSBHostInterface MockInterface
+#define IOUSBHostPipe MockPipe
+#define IOServiceMatching mock_match
+#define IOServiceGetMatchingServices mock_services
+#define IOIteratorNext mock_next
+#define IOObjectRelease mock_release
+#define IOObjectRetain mock_retain
+#define IOIteratorIsValid mock_valid
+#define IORegistryEntryGetRegistryEntryID mock_id
+#define IOObjectGetClass mock_class
+#define IORegistryEntryGetChildIterator mock_children
+#define IORegistryEntryCreateCFProperty mock_property
+#define clock_gettime simulated_clock
+#define fsync slow_completion_fsync
+#define main candidate_main
+#include "mac_hostinterface_observer.mm"
+#undef main
+static State*gstate=nullptr;
+static void force_stop(){gstate->failure("mock forced deadline/exception while pending");}
+int main(int argc,char**argv){@autoreleasepool{if(argc!=3)return 9;scenario=std::atoi(argv[1]);if(scenario<0||scenario>23)return 9;if(scenario==9)config_bytes[38]=64;
+ Options o;o.session="MOCK_ONLY";o.inspect=scenario>=16&&scenario<=22;o.anchor=o.inspect?0:1;o.target=o.inspect?0:101;o.output=argv[2];gstate=new State(o);observed_deadline=gstate->engine.deadline;dispatch_async(gstate->queue,^{@try{try{if(gstate->options.inspect)inspect_only(gstate);else begin(gstate);}catch(...){gstate->failure("mock begin caught");}}@catch(NSException*){gstate->failure("mock ObjC caught");}});
+ if(dispatch_semaphore_wait(gstate->ended,dispatch_time(DISPATCH_TIME_NOW,3000000000LL)))return 10;
+ if(gstate->options.inspect){if(init_calls||pipe_calls||read_calls||abort_calls||destroy_calls||gstate->journal)return 19;if((scenario==16)!=(gstate->exit_code==0))return 20;std::printf("PASS actual-source registry-only MOCK_ONLY inspect scenario%d; init/descriptor/pipe/read/cancel calls ZERO\n",scenario);return 0;}
+ if(scenario==7){if(gstate->engine.phase!=Phase::Uncertain||gstate->cleaned||!gstate->host||!gstate->pipe||!gstate->data||!gstate->journal||destroy_calls)return 11;unsigned seq=gstate->sequence;dispatch_sync(gstate->queue,^{saved_completion(0,20);});if(gstate->sequence!=seq||destroy_calls)return 12;}
+ else if(gstate->engine.pending()||!gstate->cleaned||gstate->host||gstate->pipe||gstate->data||gstate->journal)return 13;
+ if(cleanup_in_callback)return 14;if(scenario==0){if(gstate->engine.success||read_calls!=1||destroy_calls!=1||abort_calls||after_deadline_enqueues!=0||!injected_advance)return 15;}else if(gstate->engine.success)return 16;
+ if(scenario==8||scenario==10||scenario==11){if(pipe_calls||read_calls)return 17;}if((scenario==10||scenario==11||scenario==13||scenario==14||scenario==15||scenario==23)&&init_calls)return 18;
+ std::printf("CHILD_REGRESSION_PASS actual_source=child slow_completion_fsync_advance_ns=6000000000 enqueues=%d after_deadline_enqueues=%u aborts=%d retained_owner_safe=1 zero_native_device_calls=1\n",read_calls,after_deadline_enqueues,abort_calls);return 0;}}

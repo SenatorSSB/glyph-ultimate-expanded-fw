@@ -1,0 +1,33 @@
+{
+  "classification": "ACTUAL_PARENT_SOURCE_RUNTIME_NEGATIVE_CONTROL_ALL_USB_AND_REGISTRY_APIS_MOCKED",
+  "parent_source_SHA256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+  "parent_binary_preserved_SHA256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+  "compile_argv": [
+    "clang++",
+    "-std=c++17",
+    "-fobjc-arc",
+    "-fblocks",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wno-deprecated-declarations",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "-framework",
+    "Foundation",
+    "-framework",
+    "IOKit",
+    "-framework",
+    "IOUSBHost",
+    "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parent_late_enqueue_witness.mm",
+    "-o",
+    "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parent_late_enqueue_witness"
+  ],
+  "compile_returncode": 0,
+  "compile_stdout": "",
+  "compile_stderr": "",
+  "run_returncode": 0,
+  "run_stdout": "PARENT_RUNTIME_DEFECT_WITNESSED actual_source=parent slow_completion_fsync_advance_ns=6000000000 enqueues=2 after_deadline_enqueues=1 aborts=0 retained_owner_safe=1 zero_native_device_calls=1\n",
+  "run_stderr": "",
+  "USB_registry_live_calls": 0
+}

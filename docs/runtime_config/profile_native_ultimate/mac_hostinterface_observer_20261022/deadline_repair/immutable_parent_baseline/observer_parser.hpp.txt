@@ -1,0 +1,45 @@
+#pragma once
+// Independent bounded report decoder. No operating-system or device calls.
+#include <cstdint>
+#include <cstddef>
+#include <map>
+#include <stdexcept>
+#include <string>
+#include <vector>
+namespace glyph_observer {
+using Fields=std::map<std::string,int>;
+inline void require(bool ok,const char *s){if(!ok)throw std::runtime_error(s);}
+inline int s16(const uint8_t *p){unsigned n=unsigned(p[0])|(unsigned(p[1])<<8);return n>=32768?int(n)-65536:int(n);}
+inline Fields xinput(const uint8_t *p,size_t n){
+ require(n==20,"XInput length must equal20");
+ // Exact F initializes both header bytes to0 and sends the20-byte struct as-is.
+ // Never silently rewrite this source fact to a generic Xbox00/14 assumption.
+ require(p[0]==0&&p[1]==0,"XInput header differs from exact F source00/00");
+ require(!(p[3]&8),"XInput reserved button bit set");
+ for(size_t i=14;i<20;++i)require(!p[i],"XInput reserved tail differs from exact F");
+ Fields f;const char *b0[]={"dpad_up","dpad_down","dpad_left","dpad_right","start","back","ls","rs"};
+ for(int i=0;i<8;++i)f[b0[i]]=(p[2]>>i)&1;
+ const char *b1[]={"lb","rb","home",nullptr,"a","b","x","y"};
+ for(int i=0;i<8;++i)if(b1[i])f[b1[i]]=(p[3]>>i)&1;
+ f["lt"]=p[4];f["rt"]=p[5];f["lx"]=s16(p+6);f["ly"]=s16(p+8);f["rx"]=s16(p+10);f["ry"]=s16(p+12);return f;
+}
+inline Fields switch_usb(const uint8_t *p,size_t n,unsigned report_id=0){
+ require(report_id==0,"Switch unexpected reportID");require(n==8,"Switch exact F input report must equal8, no inserted reportID byte");
+ require(!(p[1]&0xc0)&&!(p[2]&0xf0)&&!p[7],"Switch reserved fields differ from exact F");require(p[2]<=8,"Switch invalid hat");
+ Fields f;const char *names[]={"y","b","a","x","l","r","zl","zr","minus","plus","l3","r3","home","capture"};
+ for(int i=0;i<14;++i)f[names[i]]=(p[i/8]>>(i%8))&1;
+ f["hat"]=p[2];f["lx"]=p[3];f["ly"]=p[4];f["rx"]=p[5];f["ry"]=p[6];return f;
+}
+inline Fields wup028(const uint8_t *p,size_t n,unsigned port){
+ require(n==37,"WUP028 length must equal37");require(p[0]==0x21,"WUP028 input header must equal21");require(port>=1&&port<=4,"WUP028 explicit port must be1..4");
+ const uint8_t *q=p+1+9*(port-1);require((q[0]&0xf0)==0x10,"selected WUP028 port is not unambiguously wired connected");
+ require(!(q[2]&0xf0),"WUP028 selected port reserved button bits set");
+ Fields f;const char *b1[]={"a","b","x","y","dpad_left","dpad_right","dpad_down","dpad_up"};for(int i=0;i<8;++i)f[b1[i]]=(q[1]>>i)&1;
+ const char *b2[]={"start","z","r","l"};for(int i=0;i<4;++i)f[b2[i]]=(q[2]>>i)&1;
+ f["stick_x"]=q[3];f["stick_y"]=q[4];f["cstick_x"]=q[5];f["cstick_y"]=q[6];f["l_analog"]=q[7];f["r_analog"]=q[8];return f;
+}
+inline std::vector<uint8_t> unhex(const std::string&s){require(!(s.size()%2),"odd hex length");std::vector<uint8_t> o;for(size_t i=0;i<s.size();i+=2){unsigned v=0;for(int j=0;j<2;++j){char c=s[i+j];int x=c>='0'&&c<='9'?c-'0':c>='a'&&c<='f'?c-'a'+10:c>='A'&&c<='F'?c-'A'+10:-1;require(x>=0,"invalid hex digit");v=v*16+unsigned(x);}o.push_back(uint8_t(v));}return o;}
+inline std::string hex(const uint8_t *p,size_t n){const char *d="0123456789abcdef";std::string s;for(size_t i=0;i<n;++i){s+=d[p[i]>>4];s+=d[p[i]&15];}return s;}
+inline std::string json(const Fields&f){std::string s="{";bool first=true;for(auto &kv:f){if(!first)s+=',';first=false;s+='"'+kv.first+'"'+':'+std::to_string(kv.second);}return s+'}';}
+inline Fields decode(const std::string&r,const std::vector<uint8_t>&b,unsigned port=1,unsigned report_id=0){if(r=="xinput")return xinput(b.data(),b.size());if(r=="switch")return switch_usb(b.data(),b.size(),report_id);if(r=="wup028")return wup028(b.data(),b.size(),port);throw std::runtime_error("unknown route");}
+}

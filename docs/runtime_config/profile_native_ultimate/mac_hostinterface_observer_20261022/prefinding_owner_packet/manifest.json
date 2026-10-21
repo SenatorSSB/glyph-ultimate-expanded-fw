@@ -1,0 +1,21 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_HOST_SOURCE_OFFLINE_EVIDENCE_EXPLICIT_ARCHIVE",
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-mac-hostinterface-qualification-20261022/QUALIFICATION_PACKET.json",
+      "raw_bytes": 8158,
+      "raw_sha256": "d36835545684aeb32dad7e00f826935232ef9305e6b2b7eaaf334e67b8bacf1c",
+      "archived": true,
+      "relative": "QUALIFICATION_PACKET.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-hostinterface-qualification-20261022/QUALIFICATION_PACKET.md",
+      "raw_bytes": 6784,
+      "raw_sha256": "33bd27fb65d95d2caedd8e1b340d44e1088d2e3e66180a0595fbd8cde474b2ce",
+      "archived": true,
+      "relative": "QUALIFICATION_PACKET.md"
+    }
+  ],
+  "firmware_change": false,
+  "live_execution_approval": null
+}

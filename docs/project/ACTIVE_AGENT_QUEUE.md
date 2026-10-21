@@ -23,8 +23,13 @@ A proven host-only empty-stderr assertion was corrected after independent offlin
 wire/source review, preserving the valid STATUS/error/snapshot and unused child
 finding, without requery or new device authority. All227 session files are pinned
 privately. This is API preservation, not raw filesystem export or native acceptance.
-Device access ended STOP in Configurator. Next host observation preparation is
-offline only and requires a separate exact owner packet before any live access.
+Device access ended STOP in Configurator. The [new SDK-supported Mac observer](../runtime_config/profile_native_ultimate/mac_hostinterface_observer_20261022/README.md)
+has completed offline checks, independent source review and a focused deadline
+repair ACK. A reproduced pre-use parent defect and the original PASS remain
+preserved; corrected binary108e64/sourcef0e246 and exact V2 packet are retained.
+The [V2 live-access packet](../runtime_config/profile_native_ultimate/mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.md)
+requires new explicit owner approval for one ordinary reconnect, identity, new
+inspect/capture then STOP. No new live access or native mutation is authorized.
 F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
@@ -8830,7 +8835,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_result": null,
       "hardware_evidence_gaps": [
         "Exact F/UF2 installed once; original legacy4 runtime identity matches. Approved postinstall API preservation PASS: Config252B byte-equal54fda, all22 directory entries/revisions/full decoded canonical wrappers equal originals, LIST3/READ22/STATUS26 stable fresh inc1/store172/Config1156314366; no retry or mutation. Device ended STOP in Configurator.",
-        "Raw capture and approved metadata attempts retain exact stops/zero reports. Host-only STATUS stderr assertion independently corrected offline without requery; original error/source/snapshot and unused child finding retained. Separate exact live-observer/native mutation/physical packet approval remains required.",
+        "Raw capture and approved metadata attempts retain exact stops/zero reports. Host-only STATUS stderr assertion independently corrected offline without requery; original error/source/snapshot retained. New SDK observer offline/source review and same-reviewer pre-use deadline repair ACK PASS; parent defect/negative/initial PASS/V1 remain exact unadopted. Corrected108e64/sourcef0e246 V2 live-access approval pending; device STOP in Configurator. Separate native mutation/physical approval remains required.",
         "All18/H1-H12/complete required backend fields/target timing and runtime stack observations/exact human HEP/tested-source integration/strict DONE remain. F/source/build/resource/limits/custody/protocol unchanged; no native profile mutation or activation."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",

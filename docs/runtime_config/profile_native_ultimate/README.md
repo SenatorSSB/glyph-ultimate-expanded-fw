@@ -6,8 +6,11 @@ GP-NATIVE-001 remains at the hardware gate. Exact installation/current legacy
 identity passed. [Approved postinstallation API preservation](postinstallation_preservation_20261022/README.md)
 now matches Config252B and all22 original decoded profiles/revisions exactly,
 with LIST3/READ22/STATUS26 and zero retry/mutation. Device access ended STOP in
-Configurator. Prior raw/metadata failures remain exact; next host observation
-preparation is offline and requires a separate exact live-access approval.
+Configurator. Prior raw/metadata failures remain exact. The [new SDK observer and
+V2 packet](mac_hostinterface_observer_20261022/README.md) have passed offline/source
+review and a focused pre-use deadline repair ACK; parent negative/initial PASS
+remain unchanged. Exact108e64 host custody is retained, zero live invocations;
+new explicit V2 approval remains required.
 No native activation, output acceptance or candidate source integration is claimed.
 Earlier research introduction below is historical.
 

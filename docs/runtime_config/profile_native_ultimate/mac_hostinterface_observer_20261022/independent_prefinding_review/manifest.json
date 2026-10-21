@@ -1,0 +1,419 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_HOST_SOURCE_OFFLINE_EVIDENCE_EXPLICIT_ARCHIVE",
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/PINS.json",
+      "raw_bytes": 8649,
+      "raw_sha256": "8ddd0270712e04f5eb3ff1926f1e39d6715fb87b904f21b3f451bc52353394f2",
+      "archived": true,
+      "relative": "PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/REPORT.md",
+      "raw_bytes": 6601,
+      "raw_sha256": "0c3c0d003d03d8e214938093da6183622a747cb9f91ff9d55e550cd84aef0763",
+      "archived": true,
+      "relative": "REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/SDK-contract-excerpts.json",
+      "raw_bytes": 20361,
+      "raw_sha256": "fb47d3950e7f7f57a39adc7d66f1986510fd4c69bf3b9c0e697a4cd9a64a199c",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/private_review_inputs/fb47d3950e7f7f57a39adc7d66f1986510fd4c69bf3b9c0e697a4cd9a64a199c/SDK-contract-excerpts.json",
+      "reason": "SDK excerpt/command input kept private; public source citations and hashes only"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/TECHNICAL_REPORT.md",
+      "raw_bytes": 7839,
+      "raw_sha256": "b26faaceb325eed09d8d5b53f37f01f3eec57e2aeb7d0157fb76b5118cbf110a",
+      "archived": true,
+      "relative": "TECHNICAL_REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/commands.json",
+      "raw_bytes": 14405,
+      "raw_sha256": "ac68abcc73927b8841fba19a642c14b422f1289574d463ffa2299a87c57cc99f",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/private_review_inputs/ac68abcc73927b8841fba19a642c14b422f1289574d463ffa2299a87c57cc99f/commands.json",
+      "reason": "SDK excerpt/command input kept private; public source citations and hashes only"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/core_tests",
+      "raw_bytes": 377912,
+      "raw_sha256": "92bd995ef4f5cf2472bb70a7cf491df2537d7772e33dea0b2927d505497a9e5f",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/proof_artifacts/92bd995ef4f5cf2472bb70a7cf491df2537d7772e33dea0b2927d505497a9e5f/core_tests",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/exception_mock_tests",
+      "raw_bytes": 828552,
+      "raw_sha256": "a8edfe879e376fb1ad714f6bf6e722adaa51409bd3f249ae2cd176ce10c0c104",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/proof_artifacts/a8edfe879e376fb1ad714f6bf6e722adaa51409bd3f249ae2cd176ce10c0c104/exception_mock_tests",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final-binding.json",
+      "raw_bytes": 16028,
+      "raw_sha256": "6499551ce0173583b5fe71f9ab871126482db76a9f294414c75d2e22ebcd5ba0",
+      "archived": true,
+      "relative": "final-binding.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_binding.py",
+      "raw_bytes": 2608,
+      "raw_sha256": "43dd37b2235a269454ce305fb0fcf6cbed7b2723ba6ea966285c3994c56c08d2",
+      "archived": true,
+      "relative": "final_binding.py.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_bound_inputs/QUALIFICATION_PACKET.json",
+      "raw_bytes": 8158,
+      "raw_sha256": "d36835545684aeb32dad7e00f826935232ef9305e6b2b7eaaf334e67b8bacf1c",
+      "archived": true,
+      "relative": "final_bound_inputs/QUALIFICATION_PACKET.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_bound_inputs/QUALIFICATION_PACKET.md",
+      "raw_bytes": 6784,
+      "raw_sha256": "33bd27fb65d95d2caedd8e1b340d44e1088d2e3e66180a0595fbd8cde474b2ce",
+      "archived": true,
+      "relative": "final_bound_inputs/QUALIFICATION_PACKET.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_bound_inputs/author-OPERATOR_DRAFT.md",
+      "raw_bytes": 3076,
+      "raw_sha256": "fb8ac13eca6c6e59370690b589195ee2c6c459091c064ca7d046a87b83ae902f",
+      "archived": true,
+      "relative": "final_bound_inputs/author-OPERATOR_DRAFT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_bound_inputs/author-PINS.json",
+      "raw_bytes": 13485,
+      "raw_sha256": "0eb2032c64c32e089db3b1b85121207e0716c49c05d7de85b5be9c9c70cab4e0",
+      "archived": true,
+      "relative": "final_bound_inputs/author-PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_bound_inputs/author-REPORT.md",
+      "raw_bytes": 11967,
+      "raw_sha256": "716a090e6d90185a7b09f347bcc44e547f10dd30b3e9b4a76e5b529820bd8130",
+      "archived": true,
+      "relative": "final_bound_inputs/author-REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/final_bound_inputs/custody.json",
+      "raw_bytes": 1337,
+      "raw_sha256": "8f6a3126187f21db275b9d1fbb1a165c0c26443a61a318583d1e0223654fef01",
+      "archived": true,
+      "relative": "final_bound_inputs/custody.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/input-verification.json",
+      "raw_bytes": 5987,
+      "raw_sha256": "b2e581150049350c4b258cca85bb94ed4dc41492c364c1c614a8de98b58a0508",
+      "archived": true,
+      "relative": "input-verification.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/TECHNICAL_HOLD.json",
+      "raw_bytes": 2144,
+      "raw_sha256": "b6d3003dc810fd096cbc86431359d741f579fee56ed25de19460e3d5ae60994c",
+      "archived": true,
+      "relative": "inputs/TECHNICAL_HOLD.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/build_environment.json",
+      "raw_bytes": 601,
+      "raw_sha256": "34223e343bf914d30ac3ce4c1e4ce2aec6859efe0eb8ddf9322032fd296c2d0b",
+      "archived": true,
+      "relative": "inputs/build_environment.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/core_tests.cpp",
+      "raw_bytes": 3263,
+      "raw_sha256": "74b5644ec770a74a21f2fea0dfe5306a1c068e53b848dd97cffe4012e79a30a0",
+      "archived": true,
+      "relative": "inputs/core_tests.cpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/exception_mock_tests.mm",
+      "raw_bytes": 9207,
+      "raw_sha256": "cf2d3e3a7d35399dae35658a742122d58451c0ebce1b3f573437e1af34530d71",
+      "archived": true,
+      "relative": "inputs/exception_mock_tests.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/external_pins.json",
+      "raw_bytes": 4130,
+      "raw_sha256": "6b3fa532c1a6fdeba446d076ced99ddd4e77366be07c8e9f5329051f63e4812d",
+      "archived": true,
+      "relative": "inputs/external_pins.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/mac_hostinterface_observer.mm",
+      "raw_bytes": 18151,
+      "raw_sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+      "archived": true,
+      "relative": "inputs/mac_hostinterface_observer.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/native_mock_tests.mm",
+      "raw_bytes": 8871,
+      "raw_sha256": "0e40e0889e1e4456581c81a3f6b33cefccfab7fdbb8c6cacc67b9f3ae00dad8f",
+      "archived": true,
+      "relative": "inputs/native_mock_tests.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/observer_core.hpp",
+      "raw_bytes": 5032,
+      "raw_sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "archived": true,
+      "relative": "inputs/observer_core.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/inputs/observer_parser.hpp",
+      "raw_bytes": 3670,
+      "raw_sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "archived": true,
+      "relative": "inputs/observer_parser.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mac_hostinterface_observer",
+      "raw_bytes": 223032,
+      "raw_sha256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/proof_artifacts/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/mac_hostinterface_observer",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario0.jsonl",
+      "raw_bytes": 4014,
+      "raw_sha256": "0ea34b59680d66192c915882920037bde20d19d09c18d9328f3575669d348e9a",
+      "archived": true,
+      "relative": "mock_journals/scenario0.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario1.jsonl",
+      "raw_bytes": 2751,
+      "raw_sha256": "2c38b1129fe03d60b850e7fc364ab16fc5a76b2c7bde32b4036c0d549a8bad3f",
+      "archived": true,
+      "relative": "mock_journals/scenario1.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario10.jsonl",
+      "raw_bytes": 1367,
+      "raw_sha256": "b62eb816ed0023cad64feaefd7b4f757088cc26c6e8559fa3ad1369a05982e3b",
+      "archived": true,
+      "relative": "mock_journals/scenario10.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario11.jsonl",
+      "raw_bytes": 2248,
+      "raw_sha256": "809bbf0ac0a7ed98f84cd37e5716b0f23ec4b97e3f7b7c814e5eeac5c6bbdf93",
+      "archived": true,
+      "relative": "mock_journals/scenario11.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario12.jsonl",
+      "raw_bytes": 2658,
+      "raw_sha256": "dcba776bdc4784a08aed1fb0ed448eb9b20c3f49871908791a06f6b5817af757",
+      "archived": true,
+      "relative": "mock_journals/scenario12.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario13.jsonl",
+      "raw_bytes": 2243,
+      "raw_sha256": "a3abe59c9156a02824ac8af0e9bfed8ca20e6f1a9d94ade8fea01b27eef1d98c",
+      "archived": true,
+      "relative": "mock_journals/scenario13.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario14.jsonl",
+      "raw_bytes": 1367,
+      "raw_sha256": "194c0d7ad1bd025ac6d38ae9a7c374b845256e7246a081b826e4033a49f17c6b",
+      "archived": true,
+      "relative": "mock_journals/scenario14.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario15.jsonl",
+      "raw_bytes": 585,
+      "raw_sha256": "cab4a408a79184c54f9430d7ae7bd77d1577ea4550cae11d4ebaa9e1a283da1a",
+      "archived": true,
+      "relative": "mock_journals/scenario15.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario16.jsonl",
+      "raw_bytes": 2494,
+      "raw_sha256": "bc655dc48b293916cd4fadb1d0d37e3d0f66233f70e568be4c01dffb3d3bf9e5",
+      "archived": true,
+      "relative": "mock_journals/scenario16.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario17.jsonl",
+      "raw_bytes": 3103,
+      "raw_sha256": "d394bf4d141a6942436a84d4d5b7927b97bb5f2bb4d6c95b77a19dff5d1560ac",
+      "archived": true,
+      "relative": "mock_journals/scenario17.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario18.jsonl",
+      "raw_bytes": 2220,
+      "raw_sha256": "a854a9c7c4f5c784938d8a5d6f581be2850d260484afc356d0b4d7e4d2a8eab2",
+      "archived": true,
+      "relative": "mock_journals/scenario18.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario19.jsonl",
+      "raw_bytes": 1343,
+      "raw_sha256": "40f690d370137a3f12e22549264d50a7c24e9f99619768c2bc8c7b4e6def540b",
+      "archived": true,
+      "relative": "mock_journals/scenario19.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario2.jsonl",
+      "raw_bytes": 2795,
+      "raw_sha256": "a9e18f0f77b7779df790f91128d952dff1b43a1aef749bc1f71ec62410305f24",
+      "archived": true,
+      "relative": "mock_journals/scenario2.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario20.jsonl",
+      "raw_bytes": 561,
+      "raw_sha256": "fea7f714066b447bc5e105615478aeef4f569525d79511fe5de6f4bf65881c58",
+      "archived": true,
+      "relative": "mock_journals/scenario20.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario21.jsonl",
+      "raw_bytes": 2145,
+      "raw_sha256": "98f775de84484c622560b56b532361763c91ecf1fab84e341a32b0d7bfb59c8a",
+      "archived": true,
+      "relative": "mock_journals/scenario21.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario22.jsonl",
+      "raw_bytes": 2224,
+      "raw_sha256": "c8060eb6254d59b26a5c34152fa3ef90c11204b3b8e48f3c2edf980ddf5e1cc4",
+      "archived": true,
+      "relative": "mock_journals/scenario22.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario23.jsonl",
+      "raw_bytes": 2247,
+      "raw_sha256": "994897c8104258624bceb331ee3c3fb577784ed04b4f0ea40347c8f36b52e396",
+      "archived": true,
+      "relative": "mock_journals/scenario23.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario24.jsonl",
+      "raw_bytes": 2523,
+      "raw_sha256": "fe9e1eb8da21ee937e872ade944fe53e50c06b045f890dfa7c5435eedd3fa854",
+      "archived": true,
+      "relative": "mock_journals/scenario24.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario25.jsonl",
+      "raw_bytes": 2648,
+      "raw_sha256": "28dc3b4224f6b8e1998c91aa77579f5eed8da5165de73cc4ec611e72ef0fc2f3",
+      "archived": true,
+      "relative": "mock_journals/scenario25.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario26.jsonl",
+      "raw_bytes": 2180,
+      "raw_sha256": "df6eeccb05e0dd37fa9b6caebd943a5e2e9f53d17d280bdaa9ecb7fd1df70850",
+      "archived": true,
+      "relative": "mock_journals/scenario26.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario3.jsonl",
+      "raw_bytes": 2667,
+      "raw_sha256": "4740680b87aa71ceed6f44fbd058ed6569c4b46249a9b9badabe4856f4e0566c",
+      "archived": true,
+      "relative": "mock_journals/scenario3.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario4.jsonl",
+      "raw_bytes": 2793,
+      "raw_sha256": "48e985727e168e2dcf40d6d6a6458bd776fcbf51577ae7f702a525bb73bbd9eb",
+      "archived": true,
+      "relative": "mock_journals/scenario4.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario5.jsonl",
+      "raw_bytes": 2613,
+      "raw_sha256": "23c79593c0f4de0d1675a2b83b9ef73e4ad80e00f3fbae1fd5a8e8e654630fb8",
+      "archived": true,
+      "relative": "mock_journals/scenario5.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario6.jsonl",
+      "raw_bytes": 2733,
+      "raw_sha256": "c20e9af84d1c8512b9c3f185db079c83213f9824a390b53b14f32b09e503dad2",
+      "archived": true,
+      "relative": "mock_journals/scenario6.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario7.jsonl",
+      "raw_bytes": 2648,
+      "raw_sha256": "28dc3b4224f6b8e1998c91aa77579f5eed8da5165de73cc4ec611e72ef0fc2f3",
+      "archived": true,
+      "relative": "mock_journals/scenario7.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario8.jsonl",
+      "raw_bytes": 2316,
+      "raw_sha256": "0768acf4ac054ed6a42622991aa9a6cda1f9fdf8920224afc448059b274bde2a",
+      "archived": true,
+      "relative": "mock_journals/scenario8.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/mock_journals/scenario9.jsonl",
+      "raw_bytes": 2315,
+      "raw_sha256": "594622933bfad1ab3d2daa22e84c1ac906bc8f6d54bbc518caaccef3e123803c",
+      "archived": true,
+      "relative": "mock_journals/scenario9.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/native_mock_tests",
+      "raw_bytes": 828208,
+      "raw_sha256": "5ed4a3f426135f57c5af2a44929737cea8c8a5bb103b868099ca3e6d1f328f9a",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/proof_artifacts/5ed4a3f426135f57c5af2a44929737cea8c8a5bb103b868099ca3e6d1f328f9a/native_mock_tests",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/replay.py",
+      "raw_bytes": 4434,
+      "raw_sha256": "25345334e66aa1ffffbcc669d1e0d0635e08e81d52e9461c5fa8ae12028b7f05",
+      "archived": true,
+      "relative": "replay.py.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/result.json",
+      "raw_bytes": 263,
+      "raw_sha256": "e7258815cac0b758abb34eaa5fb83613ead62303a2da34c6fc8d46fed1a43deb",
+      "archived": true,
+      "relative": "result.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/reviewer-initial-correction.txt",
+      "raw_bytes": 347,
+      "raw_sha256": "8fbe2e8c0804472b19007c96ef95300089776f617791b066a66f374346d8b9fb",
+      "archived": true,
+      "relative": "reviewer-initial-correction.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/source-index.json",
+      "raw_bytes": 326,
+      "raw_sha256": "5290eaa090f32ac88cb9dbba733d01af9afd4d7df44543b5fbcff04c6704bbb2",
+      "archived": true,
+      "relative": "source-index.json"
+    }
+  ],
+  "firmware_change": false,
+  "live_execution_approval": null
+}

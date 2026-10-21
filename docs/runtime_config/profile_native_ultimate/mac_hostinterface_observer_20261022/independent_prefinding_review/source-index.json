@@ -1,0 +1,13 @@
+{
+  "static Options arguments": 19,
+  "struct State": 24,
+  "static void inventory": 41,
+  "static io_service_t registry_snapshot": 54,
+  "static void inspect_only": 57,
+  "static void begin": 58,
+  "void State::finish": 69,
+  "void State::failure": 84,
+  "void State::act": 85,
+  "void State::read": 91,
+  "int main(": 102
+}

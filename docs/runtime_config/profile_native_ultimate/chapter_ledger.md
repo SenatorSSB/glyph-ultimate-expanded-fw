@@ -1,5 +1,34 @@
 # Profile-native Ultimate execution chapter
 
+## New Mac SDK observer and exact V2 owner gate — 2026-10-22
+
+The [new IOUSBHostInterface observer](mac_hostinterface_observer_20261022/README.md)
+uses the SDK-supported ordinary exclusive vendor-interface route, with associated
+descriptor/internal-traffic limitations explicit. Offline frozen decoder, core,
+actual-source callback/descriptor mocks and fresh independent source review ran
+without any new live operation. Parent source/binary/PASS/PINS/V1 custody remain
+exact and unexecuted. Root found a concrete slow-fsync stale-receipt deadline bug;
+author and independent actual-source mocks reproduced the late second enqueue.
+The minimal child fresh-clock guard, negative/equal/clock-failure/timely-positive
+regressions, exact byte-identical108e64 build and V2 correspondence passed the same
+reviewer's focused ACK. This is one concrete host Tier2 repair, not a firmware
+successor, new limit/scope, standing team or reviewer-of-reviewer cycle.
+
+Corrected sourcef0e246/binary108e64/custodyc052 and exact V2 MD9707/JSONdc2b are
+sealed. The root publishes only source-free archive/status/packet facts and
+releases the canonical lock at new explicit V2 owner approval. Device remains
+STOP in Configurator after Config/all22 API preservation PASS. No new identity,
+registry, descriptor, pipe, report, cancellation, Config/store or other device
+operation ran. Prior access stops and parent findings remain exact. Candidate F,
+build/resource proof, broad filesystem domain, caps/protocol/oracles and all18/
+H1–H12/HEP/integration/DONE gates remain unchanged. Source stays unmerged.
+
+V2 permits only the explicitly approved bounded reconnect/identity/new inspect/
+capture/STOP after owner approval; it is currently UNAPPROVED. No additional full
+chat, Planner, Curator, product order or broad verification loop was created.
+Both existing finite author/reviewer workers are complete. Per-worker token
+totals remain UNKNOWN; no hardware report-to-DONE timer or human HEP began.
+
 ## Postinstallation original-state preservation PASS — 2026-10-22
 
 The [owner-approved backup-only continuation](postinstallation_preservation_20261022/README.md) completed on installed F334f: known Menu→Configurator, unique same private unit, normal neutral identity, Config252 bytes exactly equal original54fda, all22 directory metadata/revisions/full decoded wrappers equal originals, stable inc1/store172/Config1156314366, LIST3/READ22/STATUS26. No Config/ProfileStore mutation, native activation, firmware copy, report retry or target metric was performed; the stage ended STOP in Configurator and227 private files are pinned.

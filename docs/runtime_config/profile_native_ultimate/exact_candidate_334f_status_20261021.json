@@ -135,7 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Source-supported bounded Mac raw observer preparation, fresh review/offline verification/exact host-artifact custody and separate owner-approved live-access packet; previous failures/stops retained",
+    "Explicit owner approval of exact GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2, then its one bounded ordinary reconnect/identity/new inspect/capture/STOP qualification; new host108e64 sourcef0e246 reviewed and privately retained, zero live calls. Prior stopped attempts and pre-use parent deadline defect/negative/initial PASS remain exact.",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
@@ -256,5 +256,28 @@
     "PINS_SHA256": "71fb4f043895c0611892a9eadd4ba2ea6f370ffc8177a5ab49f4bcc2eb5c4013",
     "reviewer_live_actions": 0,
     "native_HEP": null
-  }
+  },
+  "next_hostinterface_qualification": {
+    "kind": "EXACT_REVIEWED_HOST_ONLY_CHILD_AND_V2_PACKET_BINDING_NOT_DEVICE_APPROVAL",
+    "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "host_binary_SHA256": "108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83",
+    "source_SHA256": "f0e246b6b6d15a6cab0b5db0eba86cf1907aa35795038e5190957ebee876e2f2",
+    "custody_SHA256": "c052ab9505eb588d8cb5852979f6fdc28499e473b60a6a8c8d584fc5eb6260d4",
+    "author_PINS_SHA256": "b97ff6d581a40926f5fcc1fea3460be20b6ae9ff75814e93470b618f8b7d14ef",
+    "independent_REPORT_SHA256": "66873d1b1f835387479cfe3cea574b8af079a6ebe857475d0d1ae1b902eea8f5",
+    "independent_PINS_SHA256": "1c7f644a89a788e3aea490597dfb48c6b2c0feda96c81be37082176b78bacf58",
+    "packet_MD_SHA256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607",
+    "packet_JSON_SHA256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827",
+    "owner_approval": null,
+    "executed": false,
+    "hardware_result": null,
+    "device_state": "STOP_CONFIGURATOR",
+    "firmware_source_changed": false,
+    "known_parent_defect": "Concrete stale-receipt deadline authorization after slow fsync; parent negative retained, minimal child guard independently verified. Parent unadopted, never executed.",
+    "id": "GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2",
+    "file": "mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.md",
+    "independent_ACK": "mac_hostinterface_observer_20261022/independent_deadline_repair_ack/REPORT.md",
+    "archive": "mac_hostinterface_observer_20261022/README.md"
+  },
+  "latest_sourcefree_hostinterface_validation": "hostinterface_publication_validation_20261022/result.json"
 }

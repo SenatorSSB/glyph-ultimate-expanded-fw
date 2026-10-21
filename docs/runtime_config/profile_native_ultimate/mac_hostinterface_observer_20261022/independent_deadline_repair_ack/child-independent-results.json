@@ -1,0 +1,12 @@
+{
+  "cases": {
+    "past_deadline": "PASS actualchild enqueues1 abort0 reports1 success0 cleanonce1; finalclock6000000000 receipt4900000000\n",
+    "exact_deadline": "PASS actualchild enqueues1 abort0 reports1 success0 cleanonce1; finalclock5000000000 receipt4900000000\n",
+    "clock_failure": "PASS actualchild enqueues1 abort0 reports1 success0 cleanonce1; finalclock6000000000 receipt4900000000\n",
+    "timely_positive": "PASS actualchild enqueues3 abort0 reports3 success1 cleanonce1; finalclock4900000000 receipt4900000000\n"
+  },
+  "live_calls": 0,
+  "actual_source_included_unchanged": "f0e246b6b6d15a6cab0b5db0eba86cf1907aa35795038e5190957ebee876e2f2",
+  "receipt_timestamps_preserved": true,
+  "no_abort_for_reserved_unqueued_attempt": true
+}

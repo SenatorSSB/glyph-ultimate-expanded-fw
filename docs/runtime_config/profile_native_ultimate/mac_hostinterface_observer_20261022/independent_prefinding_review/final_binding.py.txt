@@ -1,0 +1,16 @@
+from pathlib import Path
+import json,hashlib,shutil
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-20261022');Q=Path('/private/tmp/glyph-native-mac-hostinterface-qualification-20261022');C=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+expected={P/'REPORT.md':'716a090e6d90185a7b09f347bcc44e547f10dd30b3e9b4a76e5b529820bd8130',P/'OPERATOR_DRAFT.md':'fb8ac13eca6c6e59370690b589195ee2c6c459091c064ca7d046a87b83ae902f',P/'PINS.json':'0eb2032c64c32e089db3b1b85121207e0716c49c05d7de85b5be9c9c70cab4e0',Q/'QUALIFICATION_PACKET.md':'33bd27fb65d95d2caedd8e1b340d44e1088d2e3e66180a0595fbd8cde474b2ce',Q/'QUALIFICATION_PACKET.json':'d36835545684aeb32dad7e00f826935232ef9305e6b2b7eaaf334e67b8bacf1c',C/'custody.json':'8f6a3126187f21db275b9d1fbb1a165c0c26443a61a318583d1e0223654fef01'}
+D=O/'final_bound_inputs';D.mkdir(exist_ok=True)
+for p,h in expected.items():assert sha(p)==h,(p,sha(p));shutil.copyfile(p,D/(('author-' if p.parent==P else '')+p.name))
+checks=[]
+for n,v in json.loads((P/'PINS.json').read_text())['files'].items():
+ assert sha(P/n)==v['sha256'] and (P/n).stat().st_size==v['bytes'];checks.append({'file':n,**v})
+for n,v in json.loads((P/'TECHNICAL_HOLD.json').read_text())['files'].items():assert sha(P/n)==v['sha256']
+packet=json.loads((Q/'QUALIFICATION_PACKET.json').read_text());a=packet['host_artifact']
+for n,k in [('mac_hostinterface_observer','binary_SHA256'),('mac_hostinterface_observer.mm','source_SHA256'),('observer_core.hpp','core_SHA256'),('observer_parser.hpp','parser_SHA256'),('TECHNICAL_HOLD.json','TECHNICAL_HOLD_SHA256')]:assert sha(C/n)==sha(P/n)==a[k]
+assert packet['owner_approval'] is None and packet['hardware_result'] is None
+assert packet['Config_or_ProfileStore_requests']==packet['Config_or_ProfileStore_mutations']==packet['firmware_copies']==packet['target_metric_requests']==packet['Switch_WUP_actions']==0
+(O/'final-binding.json').write_text(json.dumps({'final_files':[{'path':str(p),'sha256':h} for p,h in expected.items()],'author_PIN_entries_rehashed':checks,'technical_inputs_still_equal':True,'owner_binary_and_source_match_reviewed_hold':True,'packet_owner_approval':None,'hardware_result':None,'scope_correspondence':'PASS_HOST_ONLY_PREAPPROVAL'},indent=2)+'\n')
+print('PASS finalauthor pins',len(checks),'ownerMDJSON hashes/custody/source/binary correspondence; approval remainsnull')

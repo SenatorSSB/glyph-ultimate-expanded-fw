@@ -1,0 +1,14 @@
+{
+  "kind": "CONCRETE_PREUSE_HOST_SUBMISSION_DEADLINE_CONTRACT_DEFECT",
+  "recorded_utc": "2026-10-21T23:35:01.276905+00:00",
+  "parent_source_SHA256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+  "parent_binary_SHA256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+  "parent_owner_packet_MD_SHA256": "33bd27fb65d95d2caedd8e1b340d44e1088d2e3e66180a0595fbd8cde474b2ce",
+  "parent_owner_packet_JSON_SHA256": "d36835545684aeb32dad7e00f826935232ef9305e6b2b7eaaf334e67b8bacf1c",
+  "finding": "Completion timestamp sampled before fallible journal sync/fsync; stale t used for Engine.next then enqueue without fresh guard; serial deadline timer cannot intervene until current callback yields. Fresh read can submit after5s.",
+  "independent_parent_negative": "Actualsource ASANUBSAN mocks receipt4.9s/journal advances6s queuesread2at6s, exits17 requiredcutoff failure; zero livecalls",
+  "witness_custody": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent-witness-commands.json",
+  "scope": "One bounded host-only deadline guard repair, no limits/API/firmware changes or new owner decision; preserve parent source/PASS/fail/custody and old packet unexecuted",
+  "parent_execution_eligibility": "UNADOPTED_KNOWN_DEADLINE_DEFECT_DO_NOT_EXECUTE",
+  "hardware": "STOP_IN_CONFIGURATOR_NO_NEW_DEVICE_ACCESS"
+}

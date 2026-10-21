@@ -1,0 +1,34 @@
+from pathlib import Path
+import shutil,hashlib,json,subprocess
+P=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-20261022')
+D=Path(__file__).resolve().parent
+H=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert H(P/'PINS.json')=='0eb2032c64c32e089db3b1b85121207e0716c49c05d7de85b5be9c9c70cab4e0'
+for n,v in json.loads((P/'PINS.json').read_text())['files'].items():assert H(P/n)==v['sha256'],n
+B=D/'immutable_parent_baseline';B.mkdir()
+for n in ['PINS.json','TECHNICAL_HOLD.json','REPORT.md','OPERATOR_DRAFT.md','mac_hostinterface_observer.mm','mac_hostinterface_observer','observer_core.hpp','observer_parser.hpp','native_mock_tests.mm','offline_evidence.json']:
+ shutil.copy2(P/n,B/n)
+for n in ['mac_hostinterface_observer.mm','observer_core.hpp','observer_parser.hpp','native_mock_tests.mm','core_tests.cpp','parser_cli.cpp','validate_offline.py','external_pins.json','build_environment.json']:
+ shutil.copy2(P/n,D/n)
+s=(P/'native_mock_tests.mm').read_text()
+s=s.replace('#include <map>','#include <map>\n#include <time.h>\n#include <unistd.h>')
+point=s.index('static dispatch_queue_t mock_queue;')
+s=s[:point]+'''static bool injected_advance=false;static uint64_t clock_offset_ns=0,observed_deadline=0;static unsigned after_deadline_enqueues=0;
+static int simulated_clock(clockid_t c,timespec*t){int r=::clock_gettime(c,t);if(!r&&c==CLOCK_MONOTONIC){uint64_t ns=uint64_t(t->tv_sec)*1000000000+uint64_t(t->tv_nsec)+clock_offset_ns;t->tv_sec=time_t(ns/1000000000);t->tv_nsec=long(ns%1000000000);}return r;}
+static uint64_t simulated_now(){timespec t{};simulated_clock(CLOCK_MONOTONIC,&t);return uint64_t(t.tv_sec)*1000000000+uint64_t(t.tv_nsec);}
+static int slow_completion_fsync(int fd){int r=::fsync(fd);if(callback_active&&!injected_advance){clock_offset_ns=6000000000ULL;injected_advance=true;}return r;}
+''' +s[point:]
+s=s.replace('++read_calls;if(timeout','++read_calls;if(observed_deadline&&simulated_now()>=observed_deadline)++after_deadline_enqueues;if(timeout')
+s=s.replace('#define main candidate_main','#define clock_gettime simulated_clock\n#define fsync slow_completion_fsync\n#define main candidate_main')
+s=s.replace('#include "mac_hostinterface_observer.mm"','#include "'+str(P/'mac_hostinterface_observer.mm')+'"')
+s=s.replace('gstate=new State(o);dispatch_async','gstate=new State(o);observed_deadline=gstate->engine.deadline;dispatch_async')
+s=s.replace('if(scenario==0){if(!gstate->engine.success||read_calls!=3||destroy_calls!=1||abort_calls)return 15;}','if(scenario==0){if(gstate->engine.success||read_calls!=2||destroy_calls!=1||abort_calls||after_deadline_enqueues!=1||!injected_advance)return 15;}')
+s=s.replace('std::printf("PASS actual-source MOCK_ONLY scenario%d init%d pipe%d read%d abort%d destroy%d retained%d; zero native device calls\\n",scenario,init_calls,pipe_calls,read_calls,abort_calls,destroy_calls,scenario==7);','std::printf("PARENT_RUNTIME_DEFECT_WITNESSED actual_source=parent slow_completion_fsync_advance_ns=6000000000 enqueues=%d after_deadline_enqueues=%u aborts=%d retained_owner_safe=1 zero_native_device_calls=1\\n",read_calls,after_deadline_enqueues,abort_calls);')
+(D/'parent_late_enqueue_witness.mm').write_text(s)
+cmd=['clang++','-std=c++17','-fobjc-arc','-fblocks','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations','-fsanitize=address,undefined','-fno-omit-frame-pointer','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost',str(D/'parent_late_enqueue_witness.mm'),'-o',str(D/'parent_late_enqueue_witness')]
+p=subprocess.run(cmd,capture_output=True,text=True);assert p.returncode==0,p.stderr
+r=subprocess.run([str(D/'parent_late_enqueue_witness'),'0',str(D/'parent_late_enqueue_witness.jsonl')],capture_output=True,text=True,timeout=4)
+e={'classification':'ACTUAL_PARENT_SOURCE_RUNTIME_NEGATIVE_CONTROL_ALL_USB_AND_REGISTRY_APIS_MOCKED','parent_source_SHA256':H(P/'mac_hostinterface_observer.mm'),'parent_binary_preserved_SHA256':H(P/'mac_hostinterface_observer'),'compile_argv':cmd,'compile_returncode':p.returncode,'compile_stdout':p.stdout,'compile_stderr':p.stderr,'run_returncode':r.returncode,'run_stdout':r.stdout,'run_stderr':r.stderr,'USB_registry_live_calls':0}
+(D/'parent_late_enqueue_witness.json').write_text(json.dumps(e,indent=2)+'\n')
+assert r.returncode==0 and 'after_deadline_enqueues=1' in r.stdout,r.stdout+r.stderr
+print(r.stdout,end='')

@@ -1,0 +1,10 @@
+{
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "SDK_root": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+  "live_calls": 0,
+  "expected_live_stdout": "",
+  "expected_settled_exit_stderr": "COMPLETE: bounded host preflight; hardware acceptance NOT_CLAIMED\n",
+  "expected_stopped_exit_stderr": "STOP: bounded host preflight; hardware acceptance NOT_CLAIMED\n",
+  "internal_process_watchdog_seconds": 8,
+  "proposed_external_process_deadline_seconds": 10
+}

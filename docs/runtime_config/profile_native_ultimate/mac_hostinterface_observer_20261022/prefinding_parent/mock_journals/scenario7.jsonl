@@ -1,0 +1,7 @@
+{"kind":"session","observer":"IOUSBHostInterface-optionsNone","session":"MOCK_ONLY","purpose":"preflight","row":"PREFLIGHT","route":"xinput","source_claim":"334fbd06e4541c120b0db423e5be7e112eb1f6f6","source_claim_is_device_attestation":false,"anchor_entry_id":1,"interface_entry_id":101,"vendor":1848,"product":18214,"location":1048576,"max_seconds":5,"max_reports":3}
+{"kind":"anchor_query","status":0,"iterator_nonnull":true}
+{"kind":"anchored_node","entry_id":101,"parent_id":1,"depth":1,"is_target":true}
+{"kind":"interface_init","options":0,"success":true,"error_code":0}
+{"kind":"associated_descriptors","interface_number":0,"interface_hex":"0904000002ff5d0100","configuration_hex":"0902300001010080320904000002ff5d0100102110010124811403000313010003000705850320000107050603200008","in_address":133,"out_address_not_opened":6}
+{"kind":"abort","asynchronous":true,"success":true,"error_code":0}
+{"kind":"end","reports":0,"submissions":1,"abort_calls":1,"outcome":"UNCERTAIN_STOP","hardware_acceptance":"NOT_CLAIMED"}

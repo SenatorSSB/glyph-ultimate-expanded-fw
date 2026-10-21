@@ -1,0 +1,15 @@
+--- frozen_parent
++++ frozen_child
+@@ -90,6 +90,12 @@
+ }
+ void State::read(){
+  require(engine.phase==Phase::Pending&&data&&data.length==32,"read ownership invariant");std::memset(data.mutableBytes,0,32);NSError*error=nil;
++ // The receipt timestamp used by completion() precedes fallible journal I/O.
++ // Recheck NOW immediately before enqueue, with no intervening journal/sync.
++ // A reserved attempt has no native I/O yet: settle without requesting abort.
++ bool enqueue_before_deadline=false;
++ try{enqueue_before_deadline=clock_ns()<engine.deadline;}catch(...){}
++ if(!enqueue_before_deadline){act(engine.submit_failed());return;}
+  BOOL queued=[pipe enqueueIORequestWithData:data completionTimeout:0 error:&error completionHandler:^(IOReturn status,NSUInteger count){
+   @try{try{if(finished)return;uint64_t t=clock_ns();bool parsed=false;std::fprintf(journal,"{\"kind\":\"completion\",\"monotonic_ns\":%llu,\"status\":%d,\"bytes_transferred\":%llu}\n",(unsigned long long)t,int(status),(unsigned long long)count);sync();
+    if(status==0&&count<=32){unsigned seq=++sequence;std::fprintf(journal,"{\"kind\":\"raw\",\"sequence\":%u,\"monotonic_ns\":%llu,\"report_id\":0,\"length\":%llu,\"hex\":\"%s\"}\n",seq,(unsigned long long)t,(unsigned long long)count,glyph_observer::hex((const uint8_t*)data.bytes,count).c_str());sync();try{auto fields=glyph_observer::xinput((const uint8_t*)data.bytes,count);std::fprintf(journal,"{\"kind\":\"decoded\",\"sequence\":%u,\"monotonic_ns\":%llu,\"fields\":%s}\n",seq,(unsigned long long)t,glyph_observer::json(fields).c_str());sync();parsed=true;}catch(const std::exception&){parsed=false;}}

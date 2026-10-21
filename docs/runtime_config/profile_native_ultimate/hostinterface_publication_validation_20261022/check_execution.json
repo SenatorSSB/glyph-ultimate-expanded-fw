@@ -1,0 +1,10 @@
+{
+  "source": "Exact tool-captured stdout transcribed into three logs after unified exec session 87446 completed rc0; --help is ignored by these checker entrypoints, so actual checks ran once. No repeat needed.",
+  "commands": [
+    "python3 tools/check_glyph_agent_framework_docs.py --help",
+    "python3 tools/check_glyph_agentic_sequence_protocol.py --help",
+    "python3 tools/check_glyph_docs_navigation.py --help"
+  ],
+  "scope": "Focused; no aggregate or firmware check rerun",
+  "initial_archive_audit": "Stopped at self-result link before result.json existed; archive/pin/custody/protected/queue checks had passed. Created pending result placeholder then reran complete audit; no device or source operation."
+}

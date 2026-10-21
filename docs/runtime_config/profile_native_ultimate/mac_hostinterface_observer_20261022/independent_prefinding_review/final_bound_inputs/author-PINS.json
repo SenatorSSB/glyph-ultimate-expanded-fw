@@ -1,0 +1,353 @@
+{
+  "state": "DRAFT_SOURCE_PACKET_HOLD_REVIEW_PENDING",
+  "live_invocations": 0,
+  "firmware_builds": 0,
+  "canonical_mutations": 0,
+  "technical_hold_sha256": "b6d3003dc810fd096cbc86431359d741f579fee56ed25de19460e3d5ae60994c",
+  "files": {
+    "OPERATOR_DRAFT.md": {
+      "sha256": "fb8ac13eca6c6e59370690b589195ee2c6c459091c064ca7d046a87b83ae902f",
+      "bytes": 3076
+    },
+    "REPORT.md": {
+      "sha256": "716a090e6d90185a7b09f347bcc44e547f10dd30b3e9b4a76e5b529820bd8130",
+      "bytes": 11967
+    },
+    "TECHNICAL_HOLD.json": {
+      "sha256": "b6d3003dc810fd096cbc86431359d741f579fee56ed25de19460e3d5ae60994c",
+      "bytes": 2144
+    },
+    "build_environment.json": {
+      "sha256": "34223e343bf914d30ac3ce4c1e4ce2aec6859efe0eb8ddf9322032fd296c2d0b",
+      "bytes": 601
+    },
+    "core_tests": {
+      "sha256": "dd39e28555ea889341de3e0737ab11fea4d30c5624324fa9419532988dbb60af",
+      "bytes": 377912
+    },
+    "core_tests.cpp": {
+      "sha256": "74b5644ec770a74a21f2fea0dfe5306a1c068e53b848dd97cffe4012e79a30a0",
+      "bytes": 3263
+    },
+    "external_pins.json": {
+      "sha256": "6b3fa532c1a6fdeba446d076ced99ddd4e77366be07c8e9f5329051f63e4812d",
+      "bytes": 4130
+    },
+    "mac_hostinterface_observer": {
+      "sha256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+      "bytes": 223032
+    },
+    "mac_hostinterface_observer.mm": {
+      "sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+      "bytes": 18151
+    },
+    "mock_journals/scenario0.jsonl": {
+      "sha256": "5339ed30c92cf1769e5daac5d1eadfeeba745c3b2d0b79667acc4d01015bcdea",
+      "bytes": 2388
+    },
+    "mock_journals/scenario1.jsonl": {
+      "sha256": "4bc2601da0e0550d484e372889336980045d76bbcaae2d6f8ac766a1010ed0ac",
+      "bytes": 1125
+    },
+    "mock_journals/scenario10.jsonl": {
+      "sha256": "821beab2bc7f311cad9e30e0b0a1b690c554479a5f93b70c30f2564565c28914",
+      "bytes": 540
+    },
+    "mock_journals/scenario11.jsonl": {
+      "sha256": "d026c9ca08c149acdc9ca0665b5fe77805251fe8413bcb699ff80ad991368292",
+      "bytes": 622
+    },
+    "mock_journals/scenario2.jsonl": {
+      "sha256": "50497d4cab972d13b7285e541fca2075a2d08148f2e6e7d21d74845b45318f0d",
+      "bytes": 1169
+    },
+    "mock_journals/scenario3.jsonl": {
+      "sha256": "44b169090ce77889c11fad69f19065dd941bf3033bb7efe171982d52a6c64af0",
+      "bytes": 1041
+    },
+    "mock_journals/scenario4.jsonl": {
+      "sha256": "9eb2c1f00b9906db2d6b1068a7a2bc89856e1a96275a4f6b9d1c5f49cdc4263e",
+      "bytes": 1167
+    },
+    "mock_journals/scenario5.jsonl": {
+      "sha256": "7ed5b26dad980d5c08b1e3d46fc06c91e6129858c4c95105431a93ecc0684dbb",
+      "bytes": 987
+    },
+    "mock_journals/scenario6.jsonl": {
+      "sha256": "75a63484131f9589618c15ecd6c43e6d2cb948bd7f394fd74dcf298c80f2c7ff",
+      "bytes": 1107
+    },
+    "mock_journals/scenario7.jsonl": {
+      "sha256": "8c7f5a5c33e712d833ebe05ce6afd8dc5faafc69fd575f1c35954a8d17190e4b",
+      "bytes": 1021
+    },
+    "mock_journals/scenario8.jsonl": {
+      "sha256": "ebc0ddf230b46997e5a1b364967764a3a11c6a475a6856addc3438f0dc8b5332",
+      "bytes": 690
+    },
+    "mock_journals/scenario9.jsonl": {
+      "sha256": "ed122a3b73cb2f4ead869651e4b4421c557d5da002815ab24a99b69946facc58",
+      "bytes": 689
+    },
+    "mock_journals_final/scenario0.jsonl": {
+      "sha256": "af33a79707479d049f39648b1e408b5ba7c9a321f292250e26f7d03aed11ff2f",
+      "bytes": 2388
+    },
+    "mock_journals_final/scenario1.jsonl": {
+      "sha256": "db8a15c89f26a937726e26dca860e401ee2dade8431326fd4ff5fdd9a135664b",
+      "bytes": 1125
+    },
+    "mock_journals_final/scenario10.jsonl": {
+      "sha256": "821beab2bc7f311cad9e30e0b0a1b690c554479a5f93b70c30f2564565c28914",
+      "bytes": 540
+    },
+    "mock_journals_final/scenario11.jsonl": {
+      "sha256": "d026c9ca08c149acdc9ca0665b5fe77805251fe8413bcb699ff80ad991368292",
+      "bytes": 622
+    },
+    "mock_journals_final/scenario12.jsonl": {
+      "sha256": "5345f09a62cd6664ab343e8a787418e94def0547689e431cc73ea850d416826f",
+      "bytes": 1032
+    },
+    "mock_journals_final/scenario13.jsonl": {
+      "sha256": "c5252ce874adebb5a95c2286014223a91a0d020068e17bb02bb939c7679c14e0",
+      "bytes": 621
+    },
+    "mock_journals_final/scenario14.jsonl": {
+      "sha256": "821beab2bc7f311cad9e30e0b0a1b690c554479a5f93b70c30f2564565c28914",
+      "bytes": 540
+    },
+    "mock_journals_final/scenario15.jsonl": {
+      "sha256": "821beab2bc7f311cad9e30e0b0a1b690c554479a5f93b70c30f2564565c28914",
+      "bytes": 540
+    },
+    "mock_journals_final/scenario2.jsonl": {
+      "sha256": "a9ede3e2d4b6e984285d6d883b4709c73daab3b3e121dce94c904866376ff2fc",
+      "bytes": 1169
+    },
+    "mock_journals_final/scenario3.jsonl": {
+      "sha256": "4917cb1cd786a78da79c869672abe27fe2f5e539136717190b6ba30618f7f76d",
+      "bytes": 1041
+    },
+    "mock_journals_final/scenario4.jsonl": {
+      "sha256": "e8230a7e94fb7ed82179ad8a85e46ce3f0ab7562829bf6d507ef60e88555b844",
+      "bytes": 1167
+    },
+    "mock_journals_final/scenario5.jsonl": {
+      "sha256": "7ed5b26dad980d5c08b1e3d46fc06c91e6129858c4c95105431a93ecc0684dbb",
+      "bytes": 987
+    },
+    "mock_journals_final/scenario6.jsonl": {
+      "sha256": "ccb67847eea43690910ed7ca4e786b348610d8f1e312853b4e2aeee713e19fc1",
+      "bytes": 1107
+    },
+    "mock_journals_final/scenario7.jsonl": {
+      "sha256": "8c7f5a5c33e712d833ebe05ce6afd8dc5faafc69fd575f1c35954a8d17190e4b",
+      "bytes": 1021
+    },
+    "mock_journals_final/scenario8.jsonl": {
+      "sha256": "ebc0ddf230b46997e5a1b364967764a3a11c6a475a6856addc3438f0dc8b5332",
+      "bytes": 690
+    },
+    "mock_journals_final/scenario9.jsonl": {
+      "sha256": "ed122a3b73cb2f4ead869651e4b4421c557d5da002815ab24a99b69946facc58",
+      "bytes": 689
+    },
+    "mock_journals_freshbinding/scenario0.jsonl": {
+      "sha256": "ba2f97db3273bc410f2e6fa0650b308f02d9ecdc9fa6ba90edb6455b354826ca",
+      "bytes": 4014
+    },
+    "mock_journals_freshbinding/scenario1.jsonl": {
+      "sha256": "0c1149ba152f840e828a5f68b7e83eff1a6e7eeadb9780a148e7f4a7011acf9b",
+      "bytes": 2751
+    },
+    "mock_journals_freshbinding/scenario10.jsonl": {
+      "sha256": "b62eb816ed0023cad64feaefd7b4f757088cc26c6e8559fa3ad1369a05982e3b",
+      "bytes": 1367
+    },
+    "mock_journals_freshbinding/scenario11.jsonl": {
+      "sha256": "809bbf0ac0a7ed98f84cd37e5716b0f23ec4b97e3f7b7c814e5eeac5c6bbdf93",
+      "bytes": 2248
+    },
+    "mock_journals_freshbinding/scenario12.jsonl": {
+      "sha256": "76ae47a9e71e62a9384b0fd18b3ce0f8c03c58a17452f337ccfdb47cc90b4d53",
+      "bytes": 2658
+    },
+    "mock_journals_freshbinding/scenario13.jsonl": {
+      "sha256": "a3abe59c9156a02824ac8af0e9bfed8ca20e6f1a9d94ade8fea01b27eef1d98c",
+      "bytes": 2243
+    },
+    "mock_journals_freshbinding/scenario14.jsonl": {
+      "sha256": "194c0d7ad1bd025ac6d38ae9a7c374b845256e7246a081b826e4033a49f17c6b",
+      "bytes": 1367
+    },
+    "mock_journals_freshbinding/scenario15.jsonl": {
+      "sha256": "cab4a408a79184c54f9430d7ae7bd77d1577ea4550cae11d4ebaa9e1a283da1a",
+      "bytes": 585
+    },
+    "mock_journals_freshbinding/scenario16.jsonl": {
+      "sha256": "bc655dc48b293916cd4fadb1d0d37e3d0f66233f70e568be4c01dffb3d3bf9e5",
+      "bytes": 2494
+    },
+    "mock_journals_freshbinding/scenario17.jsonl": {
+      "sha256": "d394bf4d141a6942436a84d4d5b7927b97bb5f2bb4d6c95b77a19dff5d1560ac",
+      "bytes": 3103
+    },
+    "mock_journals_freshbinding/scenario18.jsonl": {
+      "sha256": "a854a9c7c4f5c784938d8a5d6f581be2850d260484afc356d0b4d7e4d2a8eab2",
+      "bytes": 2220
+    },
+    "mock_journals_freshbinding/scenario19.jsonl": {
+      "sha256": "40f690d370137a3f12e22549264d50a7c24e9f99619768c2bc8c7b4e6def540b",
+      "bytes": 1343
+    },
+    "mock_journals_freshbinding/scenario2.jsonl": {
+      "sha256": "7cc3719cefd895dfffc032dbc59fb795b216b912223acfce9796b88baae328ae",
+      "bytes": 2795
+    },
+    "mock_journals_freshbinding/scenario20.jsonl": {
+      "sha256": "fea7f714066b447bc5e105615478aeef4f569525d79511fe5de6f4bf65881c58",
+      "bytes": 561
+    },
+    "mock_journals_freshbinding/scenario21.jsonl": {
+      "sha256": "98f775de84484c622560b56b532361763c91ecf1fab84e341a32b0d7bfb59c8a",
+      "bytes": 2145
+    },
+    "mock_journals_freshbinding/scenario22.jsonl": {
+      "sha256": "c8060eb6254d59b26a5c34152fa3ef90c11204b3b8e48f3c2edf980ddf5e1cc4",
+      "bytes": 2224
+    },
+    "mock_journals_freshbinding/scenario23.jsonl": {
+      "sha256": "994897c8104258624bceb331ee3c3fb577784ed04b4f0ea40347c8f36b52e396",
+      "bytes": 2247
+    },
+    "mock_journals_freshbinding/scenario3.jsonl": {
+      "sha256": "b9fb8808571917a407d098baf3a5640e3ef9b3516d34a60cbcb46f0567272592",
+      "bytes": 2667
+    },
+    "mock_journals_freshbinding/scenario4.jsonl": {
+      "sha256": "044b8e864de8916eaafaadd3709c54a9b2f2afc4e75be7a0254e3c07ab9ecee1",
+      "bytes": 2793
+    },
+    "mock_journals_freshbinding/scenario5.jsonl": {
+      "sha256": "23c79593c0f4de0d1675a2b83b9ef73e4ad80e00f3fbae1fd5a8e8e654630fb8",
+      "bytes": 2613
+    },
+    "mock_journals_freshbinding/scenario6.jsonl": {
+      "sha256": "59978ed1b88b7c063d325f84dc8fb792396873a2d81443687b2ce13208772fcb",
+      "bytes": 2733
+    },
+    "mock_journals_freshbinding/scenario7.jsonl": {
+      "sha256": "28dc3b4224f6b8e1998c91aa77579f5eed8da5165de73cc4ec611e72ef0fc2f3",
+      "bytes": 2648
+    },
+    "mock_journals_freshbinding/scenario8.jsonl": {
+      "sha256": "0768acf4ac054ed6a42622991aa9a6cda1f9fdf8920224afc448059b274bde2a",
+      "bytes": 2316
+    },
+    "mock_journals_freshbinding/scenario9.jsonl": {
+      "sha256": "594622933bfad1ab3d2daa22e84c1ac906bc8f6d54bbc518caaccef3e123803c",
+      "bytes": 2315
+    },
+    "mock_journals_sealed/scenario0.jsonl": {
+      "sha256": "3884492ea2662a4deb2dadcea09777d7a51e1043a46720c29517832a618f619e",
+      "bytes": 2411
+    },
+    "mock_journals_sealed/scenario1.jsonl": {
+      "sha256": "ed6aef2b287a7be913fbbc9ebffbf7b1bc859ea9bedc84adbd633ef1955d44e4",
+      "bytes": 1148
+    },
+    "mock_journals_sealed/scenario10.jsonl": {
+      "sha256": "e9dc916ca3aa2a108854c0c533b8288d448135c13f9b751b8b7f5c592e0d6017",
+      "bytes": 563
+    },
+    "mock_journals_sealed/scenario11.jsonl": {
+      "sha256": "a7046e692bdd579cbf2798f7df9cfae922577a50d35cfc068f159e0aff03b9e5",
+      "bytes": 645
+    },
+    "mock_journals_sealed/scenario12.jsonl": {
+      "sha256": "c758e60ab961780049630ae77c00a47ad63ab381dc12fa64337e583c48c40330",
+      "bytes": 1055
+    },
+    "mock_journals_sealed/scenario13.jsonl": {
+      "sha256": "f2c6ad50975bbc1bd102cb16ff7683ba28d4fad843727d7a33c871b2d7bfdd61",
+      "bytes": 644
+    },
+    "mock_journals_sealed/scenario14.jsonl": {
+      "sha256": "e9dc916ca3aa2a108854c0c533b8288d448135c13f9b751b8b7f5c592e0d6017",
+      "bytes": 563
+    },
+    "mock_journals_sealed/scenario15.jsonl": {
+      "sha256": "e9dc916ca3aa2a108854c0c533b8288d448135c13f9b751b8b7f5c592e0d6017",
+      "bytes": 563
+    },
+    "mock_journals_sealed/scenario2.jsonl": {
+      "sha256": "5127feeefaa34672590f1f3f8d15703ccf3d800c9e634191ff7cae7cf8ad03aa",
+      "bytes": 1192
+    },
+    "mock_journals_sealed/scenario3.jsonl": {
+      "sha256": "412e2419491d6e2d16796a1797bf074dad2e7995b3be4f1d80e6ca0b4f724470",
+      "bytes": 1064
+    },
+    "mock_journals_sealed/scenario4.jsonl": {
+      "sha256": "57c14a51b92ef0b9f04a4aa16112981fecbc20abfa9d0173f81ec22bdf695863",
+      "bytes": 1190
+    },
+    "mock_journals_sealed/scenario5.jsonl": {
+      "sha256": "f1e6b0b0713477a3a27bd25d1fe36694afb9b68cbdc7f0cc371ba6a9d6c9aa3f",
+      "bytes": 1010
+    },
+    "mock_journals_sealed/scenario6.jsonl": {
+      "sha256": "ee6d51a62b58c1985fd4921428291d9ac42e86750bd70803e9c921c92f40cc77",
+      "bytes": 1130
+    },
+    "mock_journals_sealed/scenario7.jsonl": {
+      "sha256": "7c1b85299ffc296bc6ec306767f75bf15bfeae61889eb9f598f3b6b529a9dc59",
+      "bytes": 1045
+    },
+    "mock_journals_sealed/scenario8.jsonl": {
+      "sha256": "6a5b94061e17821c2d3311a28ca2fcf4b8fab6edc82e5ee399c56ef51b85d380",
+      "bytes": 713
+    },
+    "mock_journals_sealed/scenario9.jsonl": {
+      "sha256": "4008ccc169565d59d811a0c4e31d30b63b7afff457c219812925ca7637549a23",
+      "bytes": 712
+    },
+    "native_mock_results.json": {
+      "sha256": "1723ce7663f63829d164bfc9c644d9f172b0bdd3747dbc728e300dcf49a297bb",
+      "bytes": 2335
+    },
+    "native_mock_tests": {
+      "sha256": "1f92bcf18b6cfc5ab2e84b114b5c62fc3046fefdc7ffd98a446f37f77fb3680f",
+      "bytes": 828208
+    },
+    "native_mock_tests.mm": {
+      "sha256": "0e40e0889e1e4456581c81a3f6b33cefccfab7fdbb8c6cacc67b9f3ae00dad8f",
+      "bytes": 8871
+    },
+    "observer_core.hpp": {
+      "sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "bytes": 5032
+    },
+    "observer_parser.hpp": {
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "bytes": 3670
+    },
+    "offline_evidence.json": {
+      "sha256": "160a9b6164860f4b5d3422caf8d1191285463f4793a0e48d0b94016d56831d62",
+      "bytes": 709736
+    },
+    "parser_cli": {
+      "sha256": "a8d6738c22911deb74d4e008553112acc4837941e03ba9d75ccf31ee54042615",
+      "bytes": 327976
+    },
+    "parser_cli.cpp": {
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7",
+      "bytes": 479
+    },
+    "validate_offline.py": {
+      "sha256": "ee0b308a8aa1f4d21bb8bead5934e30fe1f4be5a4419f3f420bfee519ddd12bc",
+      "bytes": 4938
+    }
+  }
+}

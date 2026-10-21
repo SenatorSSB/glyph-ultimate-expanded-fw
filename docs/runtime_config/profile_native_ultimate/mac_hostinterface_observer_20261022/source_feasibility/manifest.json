@@ -1,0 +1,21 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_HOST_SOURCE_OFFLINE_EVIDENCE_EXPLICIT_ARCHIVE",
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-Mac-observer-route-feasibility-20261022/PINS.json",
+      "raw_bytes": 4194,
+      "raw_sha256": "4fd048b309136a12ea8f7c7021626a15e6ad788ea2f5b061e67e816a39fc9f69",
+      "archived": true,
+      "relative": "PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-observer-route-feasibility-20261022/REPORT.md",
+      "raw_bytes": 10214,
+      "raw_sha256": "b83fe2bc5ccb18c97df697bd30e6b17d1d676fe50693eef74ebde4fb80162fde",
+      "archived": true,
+      "relative": "REPORT.md"
+    }
+  ],
+  "firmware_change": false,
+  "live_execution_approval": null
+}

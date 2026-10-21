@@ -1,0 +1,1 @@
+SDK excerpt extraction initially requested ranges beyond a header extent: {'IOUSBHostObject.h': 418, 'IOUSBHostInterface.h': 125, 'IOUSBHostPipe.h': 393, 'IOUSBHostDefinitions.h': 238}. IndexError occurred before any write/API/test. Extraction now clips spans to actual header length; external input hashes remain verified. Held inputs unchanged.

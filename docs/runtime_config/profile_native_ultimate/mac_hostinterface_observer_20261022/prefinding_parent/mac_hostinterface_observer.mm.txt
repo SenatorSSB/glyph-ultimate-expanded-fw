@@ -1,0 +1,109 @@
+// HOST-ONLY DRAFT. Live capture requires exact candidate-specific owner approval.
+#import <Foundation/Foundation.h>
+#import <IOUSBHost/IOUSBHostInterface.h>
+#import <IOUSBHost/IOUSBHostPipe.h>
+#include <IOKit/IOKitLib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <time.h>
+#include <sys/stat.h>
+#include <cstdio>
+#include <cstring>
+#include <cerrno>
+#include <set>
+#include "observer_core.hpp"
+using namespace host_observer;
+static uint64_t clock_ns(){timespec t{};if(clock_gettime(CLOCK_MONOTONIC,&t))throw std::runtime_error("monotonic clock failed");return uint64_t(t.tv_sec)*1000000000+uint64_t(t.tv_nsec);}
+struct Options{std::string session,output;uint64_t anchor=0,target=0;bool inspect=false;};
+static uint64_t id_number(const char*x){require(x&&*x&&*x!='-'&&*x!='+',"unsigned entryID required");errno=0;char*end=nullptr;auto n=strtoull(x,&end,10);require(!errno&&end&&!*end&&n,"invalid entryID");return n;}
+static Options arguments(int n,char**v){require(n>=2,"explicit inspect/capture command required");Options o;o.inspect=!std::strcmp(v[1],"inspect");require((o.inspect&&n==6)||(!o.inspect&&!std::strcmp(v[1],"capture")&&n==10),"DRAFT: inspect --approved-session TOKEN --output NEWFILE; capture additionally requires fresh --anchor-entry-id DECIMAL --interface-entry-id DECIMAL");std::set<std::string>keys;for(int i=2;i<n;i+=2){require(keys.insert(v[i]).second,"duplicate option");std::string k=v[i];if(k=="--approved-session")o.session=v[i+1];else if(k=="--anchor-entry-id"&&!o.inspect)o.anchor=id_number(v[i+1]);else if(k=="--interface-entry-id"&&!o.inspect)o.target=id_number(v[i+1]);else if(k=="--output")o.output=v[i+1];else throw std::runtime_error("unknown option");}require((o.inspect||(o.anchor&&o.target&&o.anchor!=o.target))&&!o.output.empty()&&!o.session.empty()&&o.session.size()<=128,"explicit approved identity/session/output required");for(char c:o.session)require((c>='A'&&c<='Z')||(c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'||c=='-'||c=='.',"invalid session label");return o;}
+struct Obj{io_object_t value=0;~Obj(){if(value)IOObjectRelease(value);}Obj()=default;explicit Obj(io_object_t x):value(x){}Obj(const Obj&)=delete;};
+// One process-lifetime owner. Never delete this State: callbacks, buffers, queue,
+// host and journal remain valid through every uncertain/exception exit until _Exit.
+// Settled cleanup releases native resources exactly once, leaving this allocation.
+struct State{
+ Options options;Engine engine;FILE*journal=nullptr;bool healthy=true,finished=false,cleaned=false;unsigned sequence=0;
+ dispatch_queue_t queue;dispatch_semaphore_t ended;dispatch_source_t timer=nullptr;
+ __strong IOUSBHostInterface*host=nil;__strong IOUSBHostPipe*pipe=nil;__strong NSMutableData*data=nil;
+ Endpoints endpoints;unsigned interface_number=256;int exit_code=2;
+ explicit State(Options o):options(o),engine(clock_ns()),queue(dispatch_queue_create("glyph.hostinterface.capture",DISPATCH_QUEUE_SERIAL)),ended(dispatch_semaphore_create(0)){require(queue&&ended,"queue/semaphore allocation");}
+ void sync(){if(!journal||fflush(journal)||fsync(fileno(journal))){healthy=false;throw std::runtime_error("journal custody flush failed");}}
+ void failure(const char*reason)noexcept;
+ void act(Action);
+ void finish()noexcept;
+ void record_end()noexcept;
+ void read();
+};
+static void set_number(CFMutableDictionaryRef d,CFStringRef key,int n){auto v=CFNumberCreate(nullptr,kCFNumberIntType,&n);require(v,"match number allocation");CFDictionarySetValue(d,key,v);CFRelease(v);}
+static Number property(io_registry_entry_t s,CFStringRef key){auto v=IORegistryEntryCreateCFProperty(s,key,nullptr,0);if(!v)return {};int64_t x=0;bool ok=CFGetTypeID(v)==CFNumberGetTypeID()&&!CFNumberIsFloatType((CFNumberRef)v)&&CFNumberGetValue((CFNumberRef)v,kCFNumberSInt64Type,&x)&&x>=0&&uint64_t(x)<=UINT32_MAX;CFRelease(v);return {ok?Number::Valid:Number::Invalid,ok?uint32_t(x):0};}
+static std::array<Number,9> properties(io_registry_entry_t s){const CFStringRef keys[]={CFSTR("idVendor"),CFSTR("idProduct"),CFSTR("locationID"),CFSTR("bInterfaceClass"),CFSTR("bInterfaceSubClass"),CFSTR("bInterfaceProtocol"),CFSTR("bInterfaceNumber"),CFSTR("bAlternateSetting"),CFSTR("bConfigurationValue")};std::array<Number,9> n;for(unsigned i=0;i<9;++i)n[i]=property(s,keys[i]);return n;}
+static void log_properties(State*s,uint64_t id,const std::array<Number,9>&n){const char*names[]={"vendor","product","location","class","subclass","protocol","number","alt","configuration"};for(unsigned k=0;k<9;++k){std::fprintf(s->journal,"{\"kind\":\"numeric_property\",\"entry_id\":%llu,\"field\":\"%s\",\"state\":\"%s\",\"value\":",(unsigned long long)id,names[k],n[k].kind==Number::Valid?"valid":n[k].kind==Number::Missing?"missing":"invalid");if(n[k].kind==Number::Valid)std::fprintf(s->journal,"%u",n[k].value);else std::fprintf(s->journal,"null");std::fputs("}\n",s->journal);}s->sync();}
+static void inventory(State*s,io_registry_entry_t node,uint64_t parent,unsigned depth,Inventory&scope,Obj&target){
+ Obj iter;require(IORegistryEntryGetChildIterator(node,kIOServicePlane,&iter.value)==0,"child iterator unavailable");
+ for(;;){Obj child(IOIteratorNext(iter.value));if(!child.value)break;require(depth<=3&&scope.ids.size()<32,"inventory depth/node overflow");uint64_t id=0;require(IORegistryEntryGetRegistryEntryID(child.value,&id)==0&&scope.add(id,depth,s->options.anchor),"unknown/duplicate descendant entryID");io_name_t cls{};require(IOObjectGetClass(child.value,cls)==0,"descendant class unavailable");auto n=properties(child.value);log_properties(s,id,n);for(auto&v:n)require(v.kind!=Number::Invalid,"invalid numeric descendant property");if(!std::strcmp(cls,"IOUSBHostInterface"))for(unsigned k=3;k<9;++k)require(n[k].kind==Number::Valid,"unknown interface identity field");require(n[2].kind!=Number::Invalid&&(n[2].kind==Number::Missing||n[2].value==0x100000),"descendant location conflict");
+ std::fprintf(s->journal,"{\"kind\":\"anchored_node\",\"entry_id\":%llu,\"parent_id\":%llu,\"depth\":%u,\"is_target\":%s}\n",(unsigned long long)id,(unsigned long long)parent,depth,((!s->options.inspect&&id==s->options.target)||(s->options.inspect&&!std::strcmp(cls,"IOUSBHostInterface")&&target_ok(n)))?"true":"false");s->sync();
+ if((!s->options.inspect&&id==s->options.target)||(s->options.inspect&&!std::strcmp(cls,"IOUSBHostInterface")&&target_ok(n))){require(!target.value&&!std::strcmp(cls,"IOUSBHostInterface")&&target_ok(n),"target must be exact anchored XInput interface FF/5D/1/alt0/config1");require(IOObjectRetain(child.value)==0,"retain target service");target.value=child.value;s->interface_number=n[6].value;if(s->options.inspect)s->options.target=id;}
+ inventory(s,child.value,id,depth+1,scope,target);
+ }
+ require(IOIteratorIsValid(iter.value),"inventory iterator invalid");
+}
+static void open_journal(State*s){
+ int fd=open(s->options.output.c_str(),O_CREAT|O_EXCL|O_WRONLY,0600);require(fd>=0,"new private journal unavailable");s->journal=fdopen(fd,"w");if(!s->journal){close(fd);throw std::runtime_error("fdopen failed");}
+ std::fprintf(s->journal,"{\"kind\":\"session\",\"observer\":\"IOUSBHostInterface-optionsNone\",\"operation\":\"%s\",\"session\":\"%s\",\"purpose\":\"preflight\",\"row\":\"PREFLIGHT\",\"route\":\"xinput\",\"source_claim\":\"334fbd06e4541c120b0db423e5be7e112eb1f6f6\",\"source_claim_is_device_attestation\":false,\"anchor_entry_id\":%llu,\"interface_entry_id\":%llu,\"vendor\":1848,\"product\":18214,\"location\":1048576,\"max_seconds\":5,\"max_reports\":3}\n",s->options.inspect?"inspect":"capture",s->options.session.c_str(),(unsigned long long)s->options.anchor,(unsigned long long)s->options.target);s->sync();
+}
+static io_service_t registry_snapshot(State*s){
+ CFMutableDictionaryRef match=IOServiceMatching("IOUSBHostDevice");require(match,"anchor match allocation");set_number(match,CFSTR("idVendor"),0x0738);set_number(match,CFSTR("idProduct"),0x4726);set_number(match,CFSTR("locationID"),0x100000);Obj iter;auto mr=IOServiceGetMatchingServices(kIOMainPortDefault,match,&iter.value);std::fprintf(s->journal,"{\"kind\":\"anchor_query\",\"status\":%d,\"iterator_nonnull\":%s}\n",int(mr),iter.value?"true":"false");s->sync();require(mr==0&&iter.value,"anchor enumeration unavailable");Obj anchor(IOIteratorNext(iter.value)),extra(IOIteratorNext(iter.value));require(anchor.value&&!extra.value&&IOIteratorIsValid(iter.value),"unique valid fixed anchor required");uint64_t actual=0;require(IORegistryEntryGetRegistryEntryID(anchor.value,&actual)==0,"anchor entryID unavailable");auto n=properties(anchor.value);log_properties(s,actual,n);require(anchor_ok(actual,s->options.inspect?actual:s->options.anchor,n),"approved same-unit anchor identity mismatch");if(s->options.inspect)s->options.anchor=actual;Inventory scope;Obj target;inventory(s,anchor.value,actual,1,scope,target);require(scope.complete&&target.value,"complete anchored target required");auto result=target.value;target.value=0;return result;
+}
+static void inspect_only(State*s){open_journal(s);Obj target(registry_snapshot(s));std::fprintf(s->journal,"{\"kind\":\"inspect_end\",\"outcome\":\"ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY\",\"anchor_entry_id\":%llu,\"interface_entry_id\":%llu,\"interface_number\":0,\"location\":1048576,\"same_unit_limitation\":\"location/VID/PID/ancestry only; separately bind approved private-unit CDC identity; IDs valid only in this boot/connection\",\"reports\":0,\"interface_init_calls\":0,\"hardware_acceptance\":\"NOT_CLAIMED\"}\n",(unsigned long long)s->options.anchor,(unsigned long long)s->options.target);s->sync();if(fclose(s->journal)){s->journal=nullptr;throw std::runtime_error("inspect close failed");}s->journal=nullptr;s->exit_code=0;s->finished=true;dispatch_semaphore_signal(s->ended);}
+static void begin(State*s){open_journal(s);Obj target(registry_snapshot(s));
+ require(clock_ns()<s->engine.deadline,"deadline before user-client open");NSError*error=nil;s->host=[[IOUSBHostInterface alloc]initWithIOService:target.value options:IOUSBHostObjectInitOptionsNone queue:s->queue error:&error interestHandler:nil];std::fprintf(s->journal,"{\"kind\":\"interface_init\",\"options\":0,\"success\":%s,\"error_code\":%lld}\n",s->host?"true":"false",(long long)(error?error.code:0));s->sync();require(s->host!=nil,"ordinary interface init unavailable/busy; no fallback");
+ // ONLY associated interface/configuration getters. Generic descriptor-fetch APIs excluded.
+ auto cfg=s->host.configurationDescriptor;auto iface=s->host.interfaceDescriptor;require(cfg&&iface,"associated descriptor unavailable");auto c=(const uint8_t*)cfg;auto i=(const uint8_t*)iface;require(c[0]==9&&c[1]==2&&i[0]==9&&i[1]==4,"associated descriptor headers");unsigned length=le16(c+2);require(length>=9&&length<=4096,"configuration bounded length");std::vector<uint8_t> bytes(c,c+length);std::array<uint8_t,9> associated{};std::copy_n(i,9,associated.begin());s->endpoints=descriptors(bytes,s->interface_number,associated);
+ std::fprintf(s->journal,"{\"kind\":\"associated_descriptors\",\"interface_number\":%u,\"interface_hex\":\"%s\",\"configuration_hex\":\"%s\",\"in_address\":%u,\"out_address_not_opened\":%u}\n",s->interface_number,glyph_observer::hex(associated.data(),9).c_str(),glyph_observer::hex(bytes.data(),bytes.size()).c_str(),s->endpoints.in,s->endpoints.out);s->sync();
+ error=nil;s->pipe=[s->host copyPipeWithAddress:s->endpoints.in error:&error];require(s->pipe&&s->pipe.hostInterface==s->host&&s->pipe.endpointAddress==s->endpoints.in,"IN pipe unavailable/identity mismatch");auto original=s->pipe.originalDescriptors;auto current=s->pipe.descriptors;require(original&&current&&!std::memcmp(&original->descriptor,s->endpoints.in_descriptor.data(),7)&&!std::memcmp(&current->descriptor,s->endpoints.in_descriptor.data(),7),"IN pipe descriptor mismatch");s->data=[NSMutableData dataWithLength:32];require(s->data&&s->data.length==32,"fixed input buffer unavailable");
+ s->timer=dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER,0,0,s->queue);require(s->timer,"deadline timer allocation");uint64_t now=clock_ns();uint64_t delay=now<s->engine.deadline?s->engine.deadline-now:0;dispatch_source_set_timer(s->timer,dispatch_time(DISPATCH_TIME_NOW,int64_t(delay)),DISPATCH_TIME_FOREVER,0);dispatch_source_set_event_handler(s->timer,^{s->failure("five-second observation deadline");});dispatch_resume(s->timer);s->act(s->engine.next(clock_ns()));
+}
+void State::record_end()noexcept{
+ if(healthy&&journal){std::fprintf(journal,"{\"kind\":\"end\",\"reports\":%u,\"submissions\":%u,\"abort_calls\":%u,\"settled_cleanup\":%s,\"outcome\":\"%s\",\"hardware_acceptance\":\"NOT_CLAIMED\"}\n",engine.reports,engine.submissions,engine.abort_calls,cleaned?"true":"false",engine.phase==Phase::Uncertain?"UNCERTAIN_STOP":exit_code==0?"THREE_PREFLIGHT_REPORTS":"STOP");try{sync();}catch(...){exit_code=2;}}
+}
+void State::finish()noexcept{
+ if(finished)return;finished=true;exit_code=engine.success&&healthy?0:2;
+ // Uncertain completion retains EVERY referenced resource and journal to _Exit.
+ if(engine.phase!=Phase::Uncertain&&!engine.pending()){
+  // Queue cleanup AFTER the current completion block has returned. Keep data,
+  // pipe and interface alive for the entire callback, including its epilogue.
+  dispatch_async(queue,^{
+   if(timer){dispatch_source_cancel(timer);timer=nullptr;}
+   @try{pipe=nil;[host destroy];host=nil;data=nil;cleaned=true;}@catch(NSException*){exit_code=2;}
+   record_end();
+   if(journal){if(fclose(journal))exit_code=2;journal=nullptr;}
+   dispatch_semaphore_signal(ended);
+  });
+ }else{record_end();dispatch_semaphore_signal(ended);}
+}
+void State::failure(const char*why)noexcept{if(options.inspect){if(finished)return;finished=true;exit_code=2;if(journal){std::fputs("{\"kind\":\"inspect_end\",\"outcome\":\"STOP\",\"reports\":0,\"interface_init_calls\":0,\"hardware_acceptance\":\"NOT_CLAIMED\"}\n",journal);try{sync();}catch(...){}fclose(journal);journal=nullptr;}dispatch_semaphore_signal(ended);return;}try{act(engine.stop(why));}catch(...){engine.phase=engine.pending()?Phase::Uncertain:Phase::Settled;engine.success=false;finish();}}
+void State::act(Action a){
+ if(a==Action::Submit){read();return;}if(a==Action::Finish){finish();return;}if(a!=Action::Abort)return;
+ // Retention is unconditional, and grace is armed BEFORE fallible abort/logging.
+ dispatch_after(dispatch_time(DISPATCH_TIME_NOW,1000000000LL),queue,^{try{act(engine.grace_expired());}catch(...){failure("drain exception");}});
+ NSError*error=nil;BOOL ok=[pipe abortWithOption:IOUSBHostAbortOptionAsynchronous error:&error];if(healthy&&journal){std::fprintf(journal,"{\"kind\":\"abort\",\"asynchronous\":true,\"success\":%s,\"error_code\":%lld}\n",ok?"true":"false",(long long)(error?error.code:0));sync();}
+}
+void State::read(){
+ require(engine.phase==Phase::Pending&&data&&data.length==32,"read ownership invariant");std::memset(data.mutableBytes,0,32);NSError*error=nil;
+ BOOL queued=[pipe enqueueIORequestWithData:data completionTimeout:0 error:&error completionHandler:^(IOReturn status,NSUInteger count){
+  @try{try{if(finished)return;uint64_t t=clock_ns();bool parsed=false;std::fprintf(journal,"{\"kind\":\"completion\",\"monotonic_ns\":%llu,\"status\":%d,\"bytes_transferred\":%llu}\n",(unsigned long long)t,int(status),(unsigned long long)count);sync();
+   if(status==0&&count<=32){unsigned seq=++sequence;std::fprintf(journal,"{\"kind\":\"raw\",\"sequence\":%u,\"monotonic_ns\":%llu,\"report_id\":0,\"length\":%llu,\"hex\":\"%s\"}\n",seq,(unsigned long long)t,(unsigned long long)count,glyph_observer::hex((const uint8_t*)data.bytes,count).c_str());sync();try{auto fields=glyph_observer::xinput((const uint8_t*)data.bytes,count);std::fprintf(journal,"{\"kind\":\"decoded\",\"sequence\":%u,\"monotonic_ns\":%llu,\"fields\":%s}\n",seq,(unsigned long long)t,glyph_observer::json(fields).c_str());sync();parsed=true;}catch(const std::exception&){parsed=false;}}
+   act(engine.completion(int32_t(status),count,parsed,t));
+  }catch(const std::exception&){failure("completion/journal exception");}}@catch(NSException*){failure("Objective-C completion exception");}
+ }];
+ if(!queued){std::fprintf(journal,"{\"kind\":\"enqueue_rejected\",\"error_code\":%lld}\n",(long long)(error?error.code:0));sync();act(engine.submit_failed());}
+}
+static int pure_selftest(){std::array<uint8_t,20>b{};require(glyph_observer::xinput(b.data(),20).size()==21,"pure decoder");Engine e(0);require(e.next(1)==Action::Submit,"pure submit");require(e.completion(0,20,true,2)==Action::Submit,"pure first report");require(e.stop("test")==Action::Abort&&e.abort_calls==1,"pure bounded cancel");require(e.grace_expired()==Action::Finish&&e.phase==Phase::Uncertain,"pure retained lifetime state");std::puts("PASS pure decoder/lifecycle selftest; zero IOKit/IOUSBHost calls");return 0;}
+int main(int argc,char**argv){@autoreleasepool{@try{try{
+ if(argc==2&&!std::strcmp(argv[1],"--self-test"))return pure_selftest();
+ if(argc==3&&!std::strcmp(argv[1],"--decode-xinput")){auto b=glyph_observer::unhex(argv[2]);std::puts(glyph_observer::json(glyph_observer::xinput(b.data(),b.size())).c_str());return 0;}
+ Options options=arguments(argc,argv);umask(0077);State*s=new State(options);dispatch_async(s->queue,^{@try{try{if(s->options.inspect)inspect_only(s);else begin(s);}catch(const std::exception&){s->failure("initialization/journal/identity/descriptor exception");}}@catch(NSException*){s->failure("Objective-C initialization exception");}});
+ // Internal watchdog is independent of potentially blocked API/IO queue. _Exit
+ // runs no destructors and cannot free a live callback's state or buffer.
+ if(dispatch_semaphore_wait(s->ended,dispatch_time(DISPATCH_TIME_NOW,8000000000LL))){std::fputs("STOP: eight-second process deadline; pending state retained to process exit\n",stderr);_Exit(2);}int code=s->exit_code;std::fprintf(stderr,"%s: bounded host preflight; hardware acceptance NOT_CLAIMED\n",code?"STOP":"COMPLETE");_Exit(code);
+ }catch(const std::exception&e){std::fprintf(stderr,"STOP: %s; no live operation authorized by argv\n",e.what());return 2;}}@catch(NSException*){std::fputs("STOP: Objective-C exception\n",stderr);return 2;}}}

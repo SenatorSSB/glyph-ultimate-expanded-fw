@@ -1,0 +1,18 @@
+{
+  "kind": "EXACT_REVIEWED_HOST_ONLY_CHILD_AND_V2_PACKET_BINDING_NOT_DEVICE_APPROVAL",
+  "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "host_binary_SHA256": "108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83",
+  "source_SHA256": "f0e246b6b6d15a6cab0b5db0eba86cf1907aa35795038e5190957ebee876e2f2",
+  "custody_SHA256": "c052ab9505eb588d8cb5852979f6fdc28499e473b60a6a8c8d584fc5eb6260d4",
+  "author_PINS_SHA256": "b97ff6d581a40926f5fcc1fea3460be20b6ae9ff75814e93470b618f8b7d14ef",
+  "independent_REPORT_SHA256": "66873d1b1f835387479cfe3cea574b8af079a6ebe857475d0d1ae1b902eea8f5",
+  "independent_PINS_SHA256": "1c7f644a89a788e3aea490597dfb48c6b2c0feda96c81be37082176b78bacf58",
+  "packet_MD_SHA256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607",
+  "packet_JSON_SHA256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827",
+  "owner_approval": null,
+  "executed": false,
+  "hardware_result": null,
+  "device_state": "STOP_CONFIGURATOR",
+  "firmware_source_changed": false,
+  "known_parent_defect": "Concrete stale-receipt deadline authorization after slow fsync; parent negative retained, minimal child guard independently verified. Parent unadopted, never executed."
+}

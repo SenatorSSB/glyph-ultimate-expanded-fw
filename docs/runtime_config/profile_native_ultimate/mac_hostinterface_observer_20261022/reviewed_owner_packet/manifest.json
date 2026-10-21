@@ -1,0 +1,21 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_HOST_SOURCE_OFFLINE_EVIDENCE_EXPLICIT_ARCHIVE",
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-mac-hostinterface-qualification-20261022/deadline_repair/QUALIFICATION_PACKET.json",
+      "raw_bytes": 9593,
+      "raw_sha256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827",
+      "archived": true,
+      "relative": "QUALIFICATION_PACKET.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mac-hostinterface-qualification-20261022/deadline_repair/QUALIFICATION_PACKET.md",
+      "raw_bytes": 7717,
+      "raw_sha256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607",
+      "archived": true,
+      "relative": "QUALIFICATION_PACKET.md"
+    }
+  ],
+  "firmware_change": false,
+  "live_execution_approval": null
+}

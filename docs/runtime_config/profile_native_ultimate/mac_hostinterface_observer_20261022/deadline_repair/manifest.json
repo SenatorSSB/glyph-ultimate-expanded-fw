@@ -1,0 +1,474 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_HOST_SOURCE_OFFLINE_EVIDENCE_EXPLICIT_ARCHIVE",
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/OPERATOR_DRAFT.md",
+      "raw_bytes": 1735,
+      "raw_sha256": "a920970db775b7e3aec29d3fa5fb8251b22040328bbef7ae6a6b0594c80f7d6f",
+      "archived": true,
+      "relative": "OPERATOR_DRAFT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/PINS.json",
+      "raw_bytes": 10352,
+      "raw_sha256": "b97ff6d581a40926f5fcc1fea3460be20b6ae9ff75814e93470b618f8b7d14ef",
+      "archived": true,
+      "relative": "PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/REPORT.md",
+      "raw_bytes": 5830,
+      "raw_sha256": "992003ab1f30cfeb3a236040506f2168edeb850fa33df65d007a64ebc5149563",
+      "archived": true,
+      "relative": "REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/TECHNICAL_HOLD.json",
+      "raw_bytes": 4123,
+      "raw_sha256": "5661e6a742b456676824fff8ebe31181f4365b8757ab7251884694fee4778c59",
+      "archived": true,
+      "relative": "TECHNICAL_HOLD.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/build_environment.json",
+      "raw_bytes": 601,
+      "raw_sha256": "34223e343bf914d30ac3ce4c1e4ce2aec6859efe0eb8ddf9322032fd296c2d0b",
+      "archived": true,
+      "relative": "build_environment.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression",
+      "raw_bytes": 828992,
+      "raw_sha256": "e1654c7e6575d87ebe97e9f5e6150d11586f82e401a59320901273d550fd4645",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/e1654c7e6575d87ebe97e9f5e6150d11586f82e401a59320901273d550fd4645/child_clock_failure_regression",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression.jsonl",
+      "raw_bytes": 3045,
+      "raw_sha256": "5b78d0a6e29678465d540f56c63ecffbcb52ae64251ce694d5ffccdde036b3ee",
+      "archived": true,
+      "relative": "child_clock_failure_regression.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_clock_failure_regression.mm",
+      "raw_bytes": 9936,
+      "raw_sha256": "6d4515365bc75faf6f3138b4215e2798c5f7782acc5cc5302d13319a19a94e0a",
+      "archived": true,
+      "relative": "child_clock_failure_regression.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression",
+      "raw_bytes": 828992,
+      "raw_sha256": "a497ae6f76e96b8f3cffa4e7e39aad47eebed9c441999a949c965a8856d7c7a1",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/a497ae6f76e96b8f3cffa4e7e39aad47eebed9c441999a949c965a8856d7c7a1/child_no_late_enqueue_regression",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression.jsonl",
+      "raw_bytes": 3045,
+      "raw_sha256": "9935ca9e31b1caded21b690aaf8f678d554410316af7ff50ab4db4af88cc62cc",
+      "archived": true,
+      "relative": "child_no_late_enqueue_regression.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/child_no_late_enqueue_regression.mm",
+      "raw_bytes": 9883,
+      "raw_sha256": "7588ab61378582c42f108429a32ae4b7741e90125287acc41460984722d6accf",
+      "archived": true,
+      "relative": "child_no_late_enqueue_regression.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/core_tests",
+      "raw_bytes": 377912,
+      "raw_sha256": "3cff155571fab25236e5ffac2bdd20ee67c7ec77fb34940648dbf0158e5660b3",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/3cff155571fab25236e5ffac2bdd20ee67c7ec77fb34940648dbf0158e5660b3/core_tests",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/core_tests.cpp",
+      "raw_bytes": 3263,
+      "raw_sha256": "74b5644ec770a74a21f2fea0dfe5306a1c068e53b848dd97cffe4012e79a30a0",
+      "archived": true,
+      "relative": "core_tests.cpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/external_pins.json",
+      "raw_bytes": 4130,
+      "raw_sha256": "6b3fa532c1a6fdeba446d076ced99ddd4e77366be07c8e9f5329051f63e4812d",
+      "archived": true,
+      "relative": "external_pins.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/OPERATOR_DRAFT.md",
+      "raw_bytes": 3076,
+      "raw_sha256": "fb8ac13eca6c6e59370690b589195ee2c6c459091c064ca7d046a87b83ae902f",
+      "archived": true,
+      "relative": "immutable_parent_baseline/OPERATOR_DRAFT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/PINS.json",
+      "raw_bytes": 13485,
+      "raw_sha256": "0eb2032c64c32e089db3b1b85121207e0716c49c05d7de85b5be9c9c70cab4e0",
+      "archived": true,
+      "relative": "immutable_parent_baseline/PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/REPORT.md",
+      "raw_bytes": 11967,
+      "raw_sha256": "716a090e6d90185a7b09f347bcc44e547f10dd30b3e9b4a76e5b529820bd8130",
+      "archived": true,
+      "relative": "immutable_parent_baseline/REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/TECHNICAL_HOLD.json",
+      "raw_bytes": 2144,
+      "raw_sha256": "b6d3003dc810fd096cbc86431359d741f579fee56ed25de19460e3d5ae60994c",
+      "archived": true,
+      "relative": "immutable_parent_baseline/TECHNICAL_HOLD.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/mac_hostinterface_observer",
+      "raw_bytes": 223032,
+      "raw_sha256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7/mac_hostinterface_observer",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/mac_hostinterface_observer.mm",
+      "raw_bytes": 18151,
+      "raw_sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+      "archived": true,
+      "relative": "immutable_parent_baseline/mac_hostinterface_observer.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/native_mock_tests.mm",
+      "raw_bytes": 8871,
+      "raw_sha256": "0e40e0889e1e4456581c81a3f6b33cefccfab7fdbb8c6cacc67b9f3ae00dad8f",
+      "archived": true,
+      "relative": "immutable_parent_baseline/native_mock_tests.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/observer_core.hpp",
+      "raw_bytes": 5032,
+      "raw_sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "archived": true,
+      "relative": "immutable_parent_baseline/observer_core.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/observer_parser.hpp",
+      "raw_bytes": 3670,
+      "raw_sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "archived": true,
+      "relative": "immutable_parent_baseline/observer_parser.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/immutable_parent_baseline/offline_evidence.json",
+      "raw_bytes": 709736,
+      "raw_sha256": "160a9b6164860f4b5d3422caf8d1191285463f4793a0e48d0b94016d56831d62",
+      "compressed_sha256": "78111bf975b83c224bd97da7251a534e8ebcf45e84e130220c1ca516c1e29490",
+      "compression": "gzip_mtime0",
+      "archived": true,
+      "relative": "immutable_parent_baseline/offline_evidence.json.gz"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mac_hostinterface_observer",
+      "raw_bytes": 223032,
+      "raw_sha256": "108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/mac_hostinterface_observer",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mac_hostinterface_observer.mm",
+      "raw_bytes": 18560,
+      "raw_sha256": "f0e246b6b6d15a6cab0b5db0eba86cf1907aa35795038e5190957ebee876e2f2",
+      "archived": true,
+      "relative": "mac_hostinterface_observer.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario0.jsonl",
+      "raw_bytes": 4014,
+      "raw_sha256": "c76a334518a7b844993b1c44839f1863a9c06a7c1e7ed1629cd8afbe49dc2403",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario0.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario1.jsonl",
+      "raw_bytes": 2751,
+      "raw_sha256": "b831d657ed1851fd380317197f5913b4c271f6f884414e06b2e3a138f7053b76",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario1.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario10.jsonl",
+      "raw_bytes": 1367,
+      "raw_sha256": "b62eb816ed0023cad64feaefd7b4f757088cc26c6e8559fa3ad1369a05982e3b",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario10.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario11.jsonl",
+      "raw_bytes": 2248,
+      "raw_sha256": "809bbf0ac0a7ed98f84cd37e5716b0f23ec4b97e3f7b7c814e5eeac5c6bbdf93",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario11.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario12.jsonl",
+      "raw_bytes": 2658,
+      "raw_sha256": "ff1458522b43a9a62aff1690c220aed732d2fe8b87178dfc9d6b3a7bc25a0569",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario12.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario13.jsonl",
+      "raw_bytes": 2243,
+      "raw_sha256": "a3abe59c9156a02824ac8af0e9bfed8ca20e6f1a9d94ade8fea01b27eef1d98c",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario13.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario14.jsonl",
+      "raw_bytes": 1367,
+      "raw_sha256": "194c0d7ad1bd025ac6d38ae9a7c374b845256e7246a081b826e4033a49f17c6b",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario14.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario15.jsonl",
+      "raw_bytes": 585,
+      "raw_sha256": "cab4a408a79184c54f9430d7ae7bd77d1577ea4550cae11d4ebaa9e1a283da1a",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario15.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario16.jsonl",
+      "raw_bytes": 2494,
+      "raw_sha256": "bc655dc48b293916cd4fadb1d0d37e3d0f66233f70e568be4c01dffb3d3bf9e5",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario16.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario17.jsonl",
+      "raw_bytes": 3103,
+      "raw_sha256": "d394bf4d141a6942436a84d4d5b7927b97bb5f2bb4d6c95b77a19dff5d1560ac",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario17.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario18.jsonl",
+      "raw_bytes": 2220,
+      "raw_sha256": "a854a9c7c4f5c784938d8a5d6f581be2850d260484afc356d0b4d7e4d2a8eab2",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario18.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario19.jsonl",
+      "raw_bytes": 1343,
+      "raw_sha256": "40f690d370137a3f12e22549264d50a7c24e9f99619768c2bc8c7b4e6def540b",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario19.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario2.jsonl",
+      "raw_bytes": 2795,
+      "raw_sha256": "e3e7e93bc6b0105a19aa2f974ef74abbaa1e40ae656451ce98f826c322e92d19",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario2.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario20.jsonl",
+      "raw_bytes": 561,
+      "raw_sha256": "fea7f714066b447bc5e105615478aeef4f569525d79511fe5de6f4bf65881c58",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario20.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario21.jsonl",
+      "raw_bytes": 2145,
+      "raw_sha256": "98f775de84484c622560b56b532361763c91ecf1fab84e341a32b0d7bfb59c8a",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario21.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario22.jsonl",
+      "raw_bytes": 2224,
+      "raw_sha256": "c8060eb6254d59b26a5c34152fa3ef90c11204b3b8e48f3c2edf980ddf5e1cc4",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario22.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario23.jsonl",
+      "raw_bytes": 2247,
+      "raw_sha256": "994897c8104258624bceb331ee3c3fb577784ed04b4f0ea40347c8f36b52e396",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario23.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario3.jsonl",
+      "raw_bytes": 2667,
+      "raw_sha256": "dd346797c1867c48d59053759205d3c7c55c8b6ae28381fa446dee8106680411",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario3.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario4.jsonl",
+      "raw_bytes": 2793,
+      "raw_sha256": "0ccdff4a72bfaf6a0d5d8cde44019527467dc494d306561d1f603cb421505d94",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario4.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario5.jsonl",
+      "raw_bytes": 2613,
+      "raw_sha256": "23c79593c0f4de0d1675a2b83b9ef73e4ad80e00f3fbae1fd5a8e8e654630fb8",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario5.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario6.jsonl",
+      "raw_bytes": 2733,
+      "raw_sha256": "d8138c6bf26c5d56e051aebd16b818623738939592d8751f3a709e963555a261",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario6.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario7.jsonl",
+      "raw_bytes": 2648,
+      "raw_sha256": "28dc3b4224f6b8e1998c91aa77579f5eed8da5165de73cc4ec611e72ef0fc2f3",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario7.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario8.jsonl",
+      "raw_bytes": 2316,
+      "raw_sha256": "0768acf4ac054ed6a42622991aa9a6cda1f9fdf8920224afc448059b274bde2a",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario8.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/mock_journals_freshbinding/scenario9.jsonl",
+      "raw_bytes": 2315,
+      "raw_sha256": "594622933bfad1ab3d2daa22e84c1ac906bc8f6d54bbc518caaccef3e123803c",
+      "archived": true,
+      "relative": "mock_journals_freshbinding/scenario9.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/native_mock_tests",
+      "raw_bytes": 828208,
+      "raw_sha256": "016ae36056450c3ff00adc6129bfc8dc4dca9a43b9e5e17bf48575307320eab6",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/016ae36056450c3ff00adc6129bfc8dc4dca9a43b9e5e17bf48575307320eab6/native_mock_tests",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/native_mock_tests.mm",
+      "raw_bytes": 8871,
+      "raw_sha256": "0e40e0889e1e4456581c81a3f6b33cefccfab7fdbb8c6cacc67b9f3ae00dad8f",
+      "archived": true,
+      "relative": "native_mock_tests.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/native_source.parent-to-child.diff",
+      "raw_bytes": 1692,
+      "raw_sha256": "bc784c0f359ec449cd14c3e234de3297624c6de9fd6d5ad923a9dfa1d99a602e",
+      "archived": true,
+      "relative": "native_source.parent-to-child.diff"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/observer_core.hpp",
+      "raw_bytes": 5032,
+      "raw_sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "archived": true,
+      "relative": "observer_core.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/observer_parser.hpp",
+      "raw_bytes": 3670,
+      "raw_sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "archived": true,
+      "relative": "observer_parser.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/offline_evidence.json",
+      "raw_bytes": 733048,
+      "raw_sha256": "dc78f0f6c755d45abc597b4e777d8164c6ef56b585e542193bb23d5cfa223f4d",
+      "compressed_sha256": "c2bd2d7a9b6818dc2badd74763e9f4aeb1ac99a6fb37cb684e6a61190eb8e6da",
+      "compression": "gzip_mtime0",
+      "archived": true,
+      "relative": "offline_evidence.json.gz"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parent_late_enqueue_witness",
+      "raw_bytes": 828984,
+      "raw_sha256": "10fb5f7a3435c2dd486cc5b54071852d5676d1de7cf27ec439bc1f4fbf8d84ed",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/10fb5f7a3435c2dd486cc5b54071852d5676d1de7cf27ec439bc1f4fbf8d84ed/parent_late_enqueue_witness",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parent_late_enqueue_witness.json",
+      "raw_bytes": 1244,
+      "raw_sha256": "ca77781a8710744036e634c3f18d0fee0f02cec634589e8c5176fce0d74f16ac",
+      "archived": true,
+      "relative": "parent_late_enqueue_witness.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parent_late_enqueue_witness.jsonl",
+      "raw_bytes": 3520,
+      "raw_sha256": "173605a6bae57297f2ad4cf88505841f69f4d19867180c4ad64c0aa7b6e60cf7",
+      "archived": true,
+      "relative": "parent_late_enqueue_witness.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parent_late_enqueue_witness.mm",
+      "raw_bytes": 9956,
+      "raw_sha256": "1e9e73e872866231bfdd09ecad661d7fde88eaa3969cf1e909e338435bef5feb",
+      "archived": true,
+      "relative": "parent_late_enqueue_witness.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parser_cli",
+      "raw_bytes": 327976,
+      "raw_sha256": "065440c7ce47cdda1ce3c9432229a3273bcf2925c7c7b00d40f3d09e6f2aff07",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/065440c7ce47cdda1ce3c9432229a3273bcf2925c7c7b00d40f3d09e6f2aff07/parser_cli",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/parser_cli.cpp",
+      "raw_bytes": 479,
+      "raw_sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7",
+      "archived": true,
+      "relative": "parser_cli.cpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/prepare_witness.py",
+      "raw_bytes": 4365,
+      "raw_sha256": "de65a0736d624e63e2cda7cebb52ecf8d5312887ef065b4430e1e73ffccdfdd3",
+      "archived": true,
+      "relative": "prepare_witness.py.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/targeted_regression_evidence.json",
+      "raw_bytes": 2574,
+      "raw_sha256": "e27ecf2b8d2a7b8ecf549232649864a327380ebca760b892e2bb1dd337ddec0a",
+      "archived": true,
+      "relative": "targeted_regression_evidence.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/validate_offline.py",
+      "raw_bytes": 4938,
+      "raw_sha256": "ee0b308a8aa1f4d21bb8bead5934e30fe1f4be5a4419f3f420bfee519ddd12bc",
+      "archived": true,
+      "relative": "validate_offline.py.txt"
+    }
+  ],
+  "firmware_change": false,
+  "live_execution_approval": null
+}

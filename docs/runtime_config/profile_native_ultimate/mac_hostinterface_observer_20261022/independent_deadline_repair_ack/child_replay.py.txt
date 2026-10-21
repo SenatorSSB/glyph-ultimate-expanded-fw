@@ -1,0 +1,31 @@
+from pathlib import Path
+import json,hashlib,subprocess,shutil,os,difflib
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022');B=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-20261022');D=O/'child_witness';D.mkdir(exist_ok=True);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();logs=[]
+assert sha(P/'TECHNICAL_HOLD.json')=='5661e6a742b456676824fff8ebe31181f4365b8757ab7251884694fee4778c59'
+h=json.loads((P/'TECHNICAL_HOLD.json').read_text());checks=[]
+for n,v in h['files'].items():assert sha(P/n)==v['sha256'] and (P/n).stat().st_size==v['bytes'];checks.append({'file':n,**v})
+for n in ['mac_hostinterface_observer.mm','observer_core.hpp','observer_parser.hpp','TECHNICAL_HOLD.json']:shutil.copyfile(P/n,D/n)
+for n in ['observer_core.hpp','observer_parser.hpp','native_mock_tests.mm']:assert sha(P/n)==sha(B/n)
+(O/'child-held-inputs.json').write_text(json.dumps(checks,indent=2)+'\n')
+(O/'source-parent-to-child.diff').write_text(''.join(difflib.unified_diff((B/'mac_hostinterface_observer.mm').read_text().splitlines(True),(P/'mac_hostinterface_observer.mm').read_text().splitlines(True),fromfile='frozen_parent',tofile='frozen_child')))
+m=(O/'parent_witness/deadline_witness.mm').read_text();m=m[:m.index('int main(int argc,char**argv){')]
+main='''int main(int argc,char**argv){@autoreleasepool{if(argc!=2)return 9;Options o;o.session="DEADLINE_CHILD_MOCK_ONLY";o.anchor=1;o.target=101;o.output=argv[1];gstate=new State(o);dispatch_async(gstate->queue,^{@try{try{begin(gstate);}catch(...){gstate->failure("mock exception");}}@catch(NSException*){gstate->failure("mock ObjC");}});if(dispatch_semaphore_wait(gstate->ended,dispatch_time(DISPATCH_TIME_NOW,3000000000LL)))return 10;bool passed=(read_calls==EXPECTED_READS&&abort_calls==0&&destroy_calls==1&&gstate->cleaned&&!gstate->engine.pending()&&gstate->engine.success==EXPECTED_SUCCESS&&gstate->engine.reports==EXPECTED_REPORTS);if(!passed)return 17;for(auto t:enqueue_times)if(t>=gstate->engine.deadline)return 18;std::printf("PASS actualchild enqueues%d abort%d reports%u success%d cleanonce%d; finalclock%llu receipt4900000000\\n",read_calls,abort_calls,gstate->engine.reports,gstate->engine.success,destroy_calls,(unsigned long long)fake_ns);return 0;}}
+'''
+flags=['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations','-fobjc-arc','-fblocks','-fsanitize=address,undefined','-fno-omit-frame-pointer','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost']
+def run(args):
+ r=subprocess.run(list(map(str,args)),capture_output=True,text=True,timeout=20,env={**os.environ,'ASAN_OPTIONS':'detect_stack_use_after_return=1:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'});logs.append({'argv':list(map(str,args)),'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr});(O/'child-independent-commands.json').write_text(json.dumps(logs,indent=2)+'\n');assert r.returncode==0,r.stdout+r.stderr;return r
+cases={}
+for name in ['past_deadline','exact_deadline','clock_failure','timely_positive']:
+ s=m;positive=name=='timely_positive'
+ if name=='exact_deadline':s=s.replace('fake_ns=6000000000ULL','fake_ns=5000000000ULL')
+ if name=='clock_failure':s=s.replace('static int mock_clock_gettime(clockid_t,timespec*t){','static int mock_clock_gettime(clockid_t,timespec*t){if(fake_ns==6000000000ULL)return -1;')
+ if positive:s=s.replace('fake_ns=6000000000ULL','fake_ns=4900000000ULL')
+ s+=main.replace('EXPECTED_READS','3' if positive else '1').replace('EXPECTED_SUCCESS','true' if positive else 'false').replace('EXPECTED_REPORTS','3' if positive else '1')
+ f=D/(name+'.mm');f.write_text(s);run([*flags,f,'-o',D/name]);r=run([D/name,D/(name+'.jsonl')]);cases[name]=r.stdout
+ records=[json.loads(t) for t in (D/(name+'.jsonl')).read_text().splitlines()]
+ assert all(row['monotonic_ns']==4900000000 for row in records if row['kind'] in ['completion','raw','decoded'])
+ assert records[-1]['abort_calls']==0 and records[-1]['settled_cleanup'] is True
+(O/'child-independent-results.json').write_text(json.dumps({'cases':cases,'live_calls':0,'actual_source_included_unchanged':sha(D/'mac_hostinterface_observer.mm'),'receipt_timestamps_preserved':True,'no_abort_for_reserved_unqueued_attempt':True},indent=2)+'\n')
+# Full host build only; do not invoke live entry points (no extra parser suite needed).
+run(['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations','-fobjc-arc','-fblocks','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost',D/'mac_hostinterface_observer.mm','-o',D/'mac_hostinterface_observer']);assert sha(D/'mac_hostinterface_observer')==h['files']['mac_hostinterface_observer']['sha256']
+print('PASS four independent actualchild deadline/clock/timely mocks underASANUBSAN; exact binary; no live calls')

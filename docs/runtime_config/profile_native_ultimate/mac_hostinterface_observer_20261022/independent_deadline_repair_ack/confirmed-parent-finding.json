@@ -1,0 +1,39 @@
+{
+  "severity": "P2/Tier2",
+  "disposition": "CONFIRMED_PARENT_DEFECT_PENDING_CHILD_REVIEW",
+  "parent_source_sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+  "source_witness": "State::read completion captures clock t before custody flushes, then engine.completion(...,t) calls next(t) and State::read queues without fresh time guard. Serial timer cannot interrupt current callback.",
+  "source_lines": {
+    "mac_hostinterface_observer.mm": [
+      91,
+      94,
+      96
+    ],
+    "observer_core.hpp": [
+      33,
+      37
+    ]
+  },
+  "independent_runtime_witness": {
+    "receipt_ns": 4900000000,
+    "journal_flush_advances_to_ns": 6000000000,
+    "deadline_ns": 5000000000,
+    "second_enqueue_ns": 6000000000,
+    "abort_calls": 0,
+    "runtime_exit_code": 17,
+    "sanitizers": "address,undefined; compilation successful; expected cutoff refusal test fails at runtime",
+    "live_calls": 0
+  },
+  "repair_requirements": [
+    "Fresh current-clock guard after preparation immediately before enqueue, with no intervening fallible/blocking journaling",
+    "Settle reserved but not actually queued submission without abort or retry",
+    "Preserve report receipt timestamps and exact parser/oracle behavior",
+    "Old negative controls and all original sealed PASS/history remain immutable",
+    "Bind corrected source/binary/technical hold/operator/owner packet before same-reviewer ACK"
+  ],
+  "old_review_hashes_still_equal": {
+    "REPORT.md": "0c3c0d003d03d8e214938093da6183622a747cb9f91ff9d55e550cd84aef0763",
+    "TECHNICAL_REPORT.md": "b26faaceb325eed09d8d5b53f37f01f3eec57e2aeb7d0157fb76b5118cbf110a",
+    "PINS.json": "8ddd0270712e04f5eb3ff1926f1e39d6715fb87b904f21b3f451bc52353394f2"
+  }
+}

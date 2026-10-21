@@ -1,0 +1,174 @@
+{
+  "disposition": "PASS_CONFIRMED_PARENT_TIER2_DEFECT_CLOSED_IN_CHILD",
+  "files": {
+    "REPORT.md": {
+      "bytes": 6467,
+      "sha256": "66873d1b1f835387479cfe3cea574b8af079a6ebe857475d0d1ae1b902eea8f5"
+    },
+    "TECHNICAL_REPAIR_REPORT.md": {
+      "bytes": 4822,
+      "sha256": "ae35bb2a14f5728d724aa3883f46c75af60424f98713559541c44ad2ba9f498f"
+    },
+    "child-held-inputs.json": {
+      "bytes": 3771,
+      "sha256": "4baee859c6bfc3dc0466451ef6cdc5746155cc969c6fc0013edb2d1ca64a66e4"
+    },
+    "child-independent-commands.json": {
+      "bytes": 5235,
+      "sha256": "26d0f5e941b7051bd40c50e20275b8d85834a014e7f92d08cfce67541fe65470"
+    },
+    "child-independent-results.json": {
+      "bytes": 754,
+      "sha256": "fe1d4e9371d6c0baa64e2702f1fc00b7420f6a05b4bcd3ba468605fb5b0d1d7b"
+    },
+    "child_replay.py": {
+      "bytes": 4850,
+      "sha256": "a2cf5c4eac32b4d39802056927293ce625bd0aa6bd7e3eafe3beb502b2228e90"
+    },
+    "child_witness/TECHNICAL_HOLD.json": {
+      "bytes": 4123,
+      "sha256": "5661e6a742b456676824fff8ebe31181f4365b8757ab7251884694fee4778c59"
+    },
+    "child_witness/clock_failure": {
+      "bytes": 868992,
+      "sha256": "e53e628fa8c67cc0fa0f32639eef3f0a99ef309ab29579a35695e9fbb83e38a6"
+    },
+    "child_witness/clock_failure.jsonl": {
+      "bytes": 3042,
+      "sha256": "960f464df6520dbbf7b8ad80a2868fde540c03baeb2d7035f2713d0171b8a30a"
+    },
+    "child_witness/clock_failure.mm": {
+      "bytes": 8337,
+      "sha256": "631448494ee39b0c2e4f8c90656a14915bcbf4b496aecbc8ff9ec7c4a9904f24"
+    },
+    "child_witness/exact_deadline": {
+      "bytes": 868992,
+      "sha256": "411945d378bf65b14df05261cf500fefb6195ea9a4981e94b4e73b3dade7ee8d"
+    },
+    "child_witness/exact_deadline.jsonl": {
+      "bytes": 3042,
+      "sha256": "960f464df6520dbbf7b8ad80a2868fde540c03baeb2d7035f2713d0171b8a30a"
+    },
+    "child_witness/exact_deadline.mm": {
+      "bytes": 8301,
+      "sha256": "cbf67a0b99d8788b3033d1dca529853d7f824ba3b3b1247a4f1330f26a109198"
+    },
+    "child_witness/mac_hostinterface_observer": {
+      "bytes": 223032,
+      "sha256": "108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83"
+    },
+    "child_witness/mac_hostinterface_observer.mm": {
+      "bytes": 18560,
+      "sha256": "f0e246b6b6d15a6cab0b5db0eba86cf1907aa35795038e5190957ebee876e2f2"
+    },
+    "child_witness/observer_core.hpp": {
+      "bytes": 5032,
+      "sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1"
+    },
+    "child_witness/observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb"
+    },
+    "child_witness/past_deadline": {
+      "bytes": 868992,
+      "sha256": "c06c7c77443bd78cd031d108f2b2c308ee9b5f7c24ca89d619018495216597a0"
+    },
+    "child_witness/past_deadline.jsonl": {
+      "bytes": 3042,
+      "sha256": "960f464df6520dbbf7b8ad80a2868fde540c03baeb2d7035f2713d0171b8a30a"
+    },
+    "child_witness/past_deadline.mm": {
+      "bytes": 8301,
+      "sha256": "1265220afae0c893a9779d5fa1845a58e1733df409d0fabc439698bf85d8f832"
+    },
+    "child_witness/timely_positive": {
+      "bytes": 868992,
+      "sha256": "8752fe157754f8a7fb456ed3f2dfd67129311aba592bfa425d4b113258b40efa"
+    },
+    "child_witness/timely_positive.jsonl": {
+      "bytes": 3975,
+      "sha256": "1401a961a18b0ac0f0fda6d3a88de36a6bdc61595a48904927e057dbdca8b69d"
+    },
+    "child_witness/timely_positive.mm": {
+      "bytes": 8300,
+      "sha256": "7a5e3fc334a3346a520a3780074c541f4a4f3ac8c09ee10244bba92019ed9328"
+    },
+    "confirmed-parent-finding.json": {
+      "bytes": 1737,
+      "sha256": "081cb2f73870e31ed92ae32940302b434362a0c6e439d2b0ddacbcbf7a79d727"
+    },
+    "final-binding.json": {
+      "bytes": 32421,
+      "sha256": "880cb4f9ee700abdbc8b8baf95832e2e7dd2431a55d97c7756e3b76062290d2b"
+    },
+    "final_binding.py": {
+      "bytes": 3841,
+      "sha256": "630d77d5d2af86a753636776ac8da1eaee4c2716a2ab30bdc9df8217340e4182"
+    },
+    "final_bound_inputs/QUALIFICATION_PACKET.json": {
+      "bytes": 9593,
+      "sha256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827"
+    },
+    "final_bound_inputs/QUALIFICATION_PACKET.md": {
+      "bytes": 7717,
+      "sha256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607"
+    },
+    "final_bound_inputs/author-OPERATOR_DRAFT.md": {
+      "bytes": 1735,
+      "sha256": "a920970db775b7e3aec29d3fa5fb8251b22040328bbef7ae6a6b0594c80f7d6f"
+    },
+    "final_bound_inputs/author-PINS.json": {
+      "bytes": 10352,
+      "sha256": "b97ff6d581a40926f5fcc1fea3460be20b6ae9ff75814e93470b618f8b7d14ef"
+    },
+    "final_bound_inputs/author-REPORT.md": {
+      "bytes": 5830,
+      "sha256": "992003ab1f30cfeb3a236040506f2168edeb850fa33df65d007a64ebc5149563"
+    },
+    "final_bound_inputs/custody.json": {
+      "bytes": 1465,
+      "sha256": "c052ab9505eb588d8cb5852979f6fdc28499e473b60a6a8c8d584fc5eb6260d4"
+    },
+    "parent-witness-commands.json": {
+      "bytes": 1190,
+      "sha256": "cd8078a158f06cc97888b029efa0fefba9dfd51a3a7ff0277e393202a58480df"
+    },
+    "parent_witness.py": {
+      "bytes": 2886,
+      "sha256": "f2995f8bb1285d0e7557bf1535c46756969ba9154c387f5e17ff6649002705b1"
+    },
+    "parent_witness/deadline_witness": {
+      "bytes": 868096,
+      "sha256": "967ffcad57d7684a6eee920ea19ad75a7e8a6ad52e72a6388ea0d068c87364bd"
+    },
+    "parent_witness/deadline_witness.mm": {
+      "bytes": 8135,
+      "sha256": "333094024265b35edac383dae22b338aa0e5e266bdb3512379777d793bcc9a60"
+    },
+    "parent_witness/journal.jsonl": {
+      "bytes": 3493,
+      "sha256": "a6a4a1a3ffd46e1e70e14412fd6cfde78b5adaf9a214510327159f91f25514c2"
+    },
+    "parent_witness/mac_hostinterface_observer.mm": {
+      "bytes": 18151,
+      "sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108"
+    },
+    "parent_witness/observer_core.hpp": {
+      "bytes": 5032,
+      "sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1"
+    },
+    "parent_witness/observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb"
+    },
+    "source-parent-to-child.diff": {
+      "bytes": 1636,
+      "sha256": "1c835d21e06b439b19b03cb21d8638f99c6e3fe1501abf4f16571271f619e812"
+    }
+  },
+  "kind": "SAME_REVIEWER_FINITE_DEADLINE_REPAIR_V2_ACK",
+  "live_calls": 0,
+  "original_parent_seal_preserved": true,
+  "owner_approval": null,
+  "physical_result": null
+}

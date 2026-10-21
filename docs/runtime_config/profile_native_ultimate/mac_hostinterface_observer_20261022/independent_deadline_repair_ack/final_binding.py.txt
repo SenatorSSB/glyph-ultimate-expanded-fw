@@ -1,0 +1,29 @@
+from pathlib import Path
+import json,hashlib,shutil
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022');B=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-20261022');Q=Path('/private/tmp/glyph-native-mac-hostinterface-qualification-20261022');R=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');C=R/'local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+expected={P/'REPORT.md':'992003ab1f30cfeb3a236040506f2168edeb850fa33df65d007a64ebc5149563',P/'OPERATOR_DRAFT.md':'a920970db775b7e3aec29d3fa5fb8251b22040328bbef7ae6a6b0594c80f7d6f',P/'PINS.json':'b97ff6d581a40926f5fcc1fea3460be20b6ae9ff75814e93470b618f8b7d14ef',Q/'deadline_repair/QUALIFICATION_PACKET.md':'9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607',Q/'deadline_repair/QUALIFICATION_PACKET.json':'dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827',C/'custody.json':'c052ab9505eb588d8cb5852979f6fdc28499e473b60a6a8c8d584fc5eb6260d4'}
+D=O/'final_bound_inputs';D.mkdir(exist_ok=True)
+for p,h in expected.items():assert sha(p)==h,(p,sha(p));shutil.copyfile(p,D/(('author-' if p.parent==P else '')+p.name))
+checks={}
+for label,base in [('parent',B),('child',P)]:
+ checks[label]=[]
+ for n,v in json.loads((base/'PINS.json').read_text())['files'].items():assert sha(base/n)==v['sha256'] and (base/n).stat().st_size==v['bytes'],n;checks[label].append({'file':n,**v})
+for n,v in json.loads((P/'TECHNICAL_HOLD.json').read_text())['files'].items():assert sha(P/n)==v['sha256']
+a=json.loads((Q/'QUALIFICATION_PACKET.json').read_text());b=json.loads((Q/'deadline_repair/QUALIFICATION_PACKET.json').read_text());changes=[]
+def compare(a,b,path=''):
+ if isinstance(a,dict) and isinstance(b,dict):
+  for k in sorted(set(a)|set(b)):
+   if k not in a:changes.append({'path':path+'/'+k,'added':b[k]})
+   elif k not in b:changes.append({'path':path+'/'+k,'removed':a[k]})
+   else:compare(a[k],b[k],path+'/'+k)
+ elif a!=b:changes.append({'path':path,'parent':a,'child':b})
+compare(a,b)
+allowed={'/packet_id','/unadopted_parent_packet','/deadline_regression','/capture_API_bounds/end_submissions_field','/capture_API_bounds/submission_deadline_guard'}
+for c in changes:assert c['path'] in allowed or c['path'].startswith('/host_artifact/'),c
+for n,k in [('mac_hostinterface_observer','binary_SHA256'),('mac_hostinterface_observer.mm','source_SHA256'),('observer_core.hpp','core_SHA256'),('observer_parser.hpp','parser_SHA256'),('TECHNICAL_HOLD.json','TECHNICAL_HOLD_SHA256')]:assert sha(C/n)==sha(P/n)==b['host_artifact'][k]
+assert b['owner_approval'] is None and b['hardware_result'] is None
+old={'REPORT.md':'0c3c0d003d03d8e214938093da6183622a747cb9f91ff9d55e550cd84aef0763','TECHNICAL_REPORT.md':'b26faaceb325eed09d8d5b53f37f01f3eec57e2aeb7d0157fb76b5118cbf110a','PINS.json':'8ddd0270712e04f5eb3ff1926f1e39d6715fb87b904f21b3f451bc52353394f2'}
+for n,h in old.items():assert sha(O.parent/n)==h
+assert sha(Q/'QUALIFICATION_PACKET.md')=='33bd27fb65d95d2caedd8e1b340d44e1088d2e3e66180a0595fbd8cde474b2ce' and sha(Q/'QUALIFICATION_PACKET.json')=='d36835545684aeb32dad7e00f826935232ef9305e6b2b7eaaf334e67b8bacf1c'
+(O/'final-binding.json').write_text(json.dumps({'sealed_final_inputs':[{'path':str(p),'sha256':h} for p,h in expected.items()],'all_author_pin_checks':checks,'packet_diff':changes,'old_reviewer_seal_unchanged':old,'old_packet_unchanged':True,'owner_custody_binary_source_match_child':True,'new_owner_approval':None,'physical_result':None},indent=2)+'\n')
+print('PASS finalbinding: parent',len(checks['parent']),'child',len(checks['child']),'pinentries; permittedpacketdiffonly; custodyexact; oldsealunchanged')

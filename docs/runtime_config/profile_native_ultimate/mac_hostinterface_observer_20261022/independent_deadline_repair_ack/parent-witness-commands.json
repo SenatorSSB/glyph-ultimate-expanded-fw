@@ -1,0 +1,37 @@
+[
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/deadline_witness.mm",
+      "-o",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/deadline_witness"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/deadline_witness",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/journal.jsonl"
+    ],
+    "returncode": 17,
+    "stdout": "FAIL required cutoff: actual parent queued submission2 at6000000000 deadline5000000000; receipt4900000000 journaladvanced6000000000; abort0\n",
+    "stderr": ""
+  }
+]

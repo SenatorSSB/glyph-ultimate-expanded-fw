@@ -1,0 +1,40 @@
+#pragma once
+#include "observer_parser.hpp"
+#include <algorithm>
+#include <array>
+#include <set>
+#include <string>
+#include <vector>
+namespace host_observer {
+using glyph_observer::require;
+struct Number{enum Kind{Missing,Invalid,Valid}kind=Missing;uint32_t value=0;};
+struct Identity{uint64_t anchor=0,target=0;unsigned number=256;};
+inline bool anchor_ok(uint64_t actual,uint64_t expected,const std::array<Number,9>&n){return expected&&actual==expected&&n[0].kind==Number::Valid&&n[0].value==0x0738&&n[1].kind==Number::Valid&&n[1].value==0x4726&&n[2].kind==Number::Valid&&n[2].value==0x100000;}
+inline bool target_ok(const std::array<Number,9>&n){for(unsigned i=0;i<3;++i)if(n[i].kind==Number::Invalid||(n[i].kind==Number::Valid&&n[i].value!=(i==0?0x0738u:i==1?0x4726u:0x100000u)))return false;for(unsigned i=3;i<9;++i)if(n[i].kind!=Number::Valid)return false;return n[3].value==255&&n[4].value==93&&n[5].value==1&&n[6].value==0&&n[7].value==0&&n[8].value==1;}
+struct Inventory{std::set<uint64_t>ids;bool complete=true;bool add(uint64_t id,unsigned depth,uint64_t anchor){if(!complete||!id||id==anchor||depth<1||depth>3||ids.size()>=32||!ids.insert(id).second){complete=false;return false;}return true;}};
+inline unsigned le16(const uint8_t*p){return unsigned(p[0])|(unsigned(p[1])<<8);}
+struct Endpoints{uint8_t in=0,out=0;std::array<uint8_t,7> in_descriptor{},out_descriptor{};std::array<uint8_t,9> interface_descriptor{};};
+inline Endpoints descriptors(const std::vector<uint8_t>&b,unsigned number,const std::array<uint8_t,9>&associated){
+ require(number<=255&&b.size()>=9&&b.size()<=4096,"configuration bounds");require(b[0]==9&&b[1]==2&&le16(b.data()+2)==b.size()&&b[4]>=1&&b[5]==1,"configuration header/value");
+ Endpoints ep;unsigned selected=0,ins=0,outs=0;bool active=false;std::set<unsigned>interface_pairs,interface_numbers;
+ for(size_t p=9;p<b.size();){require(b.size()-p>=2,"truncated descriptor header");unsigned n=b[p],type=b[p+1];require(n>=2&&n<=b.size()-p,"descriptor extent");
+ if(type==4){require(n==9,"interface extent");interface_numbers.insert(b[p+2]);unsigned key=unsigned(b[p+2])*256+b[p+3];require(interface_pairs.insert(key).second,"duplicate interface/alternate");active=b[p+2]==number&&b[p+3]==0;if(active){++selected;require(b[p+4]==2&&b[p+5]==255&&b[p+6]==93&&b[p+7]==1,"vendor interface identity");std::copy_n(b.data()+p,9,ep.interface_descriptor.begin());require(ep.interface_descriptor==associated,"associated interface differs from configuration");}}
+ else if(type==5){require(n==7,"endpoint extent");if(!active){p+=n;continue;}uint8_t address=b[p+2];require((address&0x70)==0&&(address&15)!=0&&b[p+3]==3&&le16(b.data()+p+4)==32,"interrupt endpoint identity");if(address&0x80){require(++ins==1&&b[p+6]==1,"IN count/interval");ep.in=address;std::copy_n(b.data()+p,7,ep.in_descriptor.begin());}else{require(++outs==1&&b[p+6]==8,"OUT count/interval");ep.out=address;std::copy_n(b.data()+p,7,ep.out_descriptor.begin());}}
+ p+=n;
+ }
+ require(interface_numbers.size()==b[4],"configuration interface count");require(selected==1&&ins==1&&outs==1,"unique interface/two endpoints required");return ep;
+}
+enum class Phase{Idle,Pending,Draining,Settled,Uncertain};
+enum class Action{None,Submit,Abort,Finish};
+struct Engine{
+ Phase phase=Phase::Idle;unsigned reports=0,submissions=0,abort_calls=0;bool success=false;uint64_t deadline=0;std::string reason;
+ explicit Engine(uint64_t start):deadline(start+5000000000ULL){}
+ bool pending()const{return phase==Phase::Pending||phase==Phase::Draining;}
+ Action next(uint64_t now){require(phase==Phase::Idle,"read lifecycle state");if(now>=deadline){phase=Phase::Settled;reason="deadline before submission";return Action::Finish;}require(submissions<3,"submission budget");++submissions;phase=Phase::Pending;return Action::Submit;}
+ Action submit_failed(){require(phase==Phase::Pending,"submission failure state");phase=Phase::Settled;reason="enqueue rejected; no retry";return Action::Finish;}
+ Action stop(const char*why){if(phase==Phase::Settled||phase==Phase::Uncertain)return Action::None;reason=why;if(phase==Phase::Pending){phase=Phase::Draining;++abort_calls;return Action::Abort;}if(phase==Phase::Draining)return Action::None;phase=Phase::Settled;return Action::Finish;}
+ // Caller journals status/count/raw before this consumer guard. No callback may free state.
+ Action completion(int32_t status,size_t count,bool parsed,uint64_t now){if(!pending())return Action::None;bool draining=phase==Phase::Draining;phase=Phase::Idle;if(draining||now>=deadline||status!=0||count!=20||!parsed){phase=Phase::Settled;if(reason.empty())reason="completion status/count/parser/deadline refused";return Action::Finish;}++reports;if(reports==3){phase=Phase::Settled;success=true;reason="three complete preflight reports";return Action::Finish;}return next(now);}
+ Action grace_expired(){if(phase!=Phase::Draining)return Action::None;phase=Phase::Uncertain;success=false;reason="cancel did not drain; retain complete state until process exit";return Action::Finish;}
+};
+}

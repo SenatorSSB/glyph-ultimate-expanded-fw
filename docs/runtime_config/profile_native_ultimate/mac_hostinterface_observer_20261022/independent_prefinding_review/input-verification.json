@@ -1,0 +1,151 @@
+{
+  "held_files": [
+    {
+      "file": "mac_hostinterface_observer.mm",
+      "sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+      "bytes": 18151
+    },
+    {
+      "file": "mac_hostinterface_observer",
+      "sha256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+      "bytes": 223032
+    },
+    {
+      "file": "observer_core.hpp",
+      "sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "bytes": 5032
+    },
+    {
+      "file": "observer_parser.hpp",
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "bytes": 3670
+    },
+    {
+      "file": "core_tests.cpp",
+      "sha256": "74b5644ec770a74a21f2fea0dfe5306a1c068e53b848dd97cffe4012e79a30a0",
+      "bytes": 3263
+    },
+    {
+      "file": "core_tests",
+      "sha256": "dd39e28555ea889341de3e0737ab11fea4d30c5624324fa9419532988dbb60af",
+      "bytes": 377912
+    },
+    {
+      "file": "native_mock_tests.mm",
+      "sha256": "0e40e0889e1e4456581c81a3f6b33cefccfab7fdbb8c6cacc67b9f3ae00dad8f",
+      "bytes": 8871
+    },
+    {
+      "file": "native_mock_tests",
+      "sha256": "1f92bcf18b6cfc5ab2e84b114b5c62fc3046fefdc7ffd98a446f37f77fb3680f",
+      "bytes": 828208
+    },
+    {
+      "file": "parser_cli.cpp",
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7",
+      "bytes": 479
+    },
+    {
+      "file": "parser_cli",
+      "sha256": "a8d6738c22911deb74d4e008553112acc4837941e03ba9d75ccf31ee54042615",
+      "bytes": 327976
+    },
+    {
+      "file": "validate_offline.py",
+      "sha256": "ee0b308a8aa1f4d21bb8bead5934e30fe1f4be5a4419f3f420bfee519ddd12bc",
+      "bytes": 4938
+    },
+    {
+      "file": "offline_evidence.json",
+      "sha256": "160a9b6164860f4b5d3422caf8d1191285463f4793a0e48d0b94016d56831d62",
+      "bytes": 709736
+    },
+    {
+      "file": "external_pins.json",
+      "sha256": "6b3fa532c1a6fdeba446d076ced99ddd4e77366be07c8e9f5329051f63e4812d",
+      "bytes": 4130
+    },
+    {
+      "file": "build_environment.json",
+      "sha256": "34223e343bf914d30ac3ce4c1e4ce2aec6859efe0eb8ddf9322032fd296c2d0b",
+      "bytes": 601
+    }
+  ],
+  "external_source_SDK": [
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHost.h",
+      "sha256": "35824080712ab2c8efe5049f52c4e27832a3527dbb7513e8f25ea58b353a5ce0",
+      "bytes": 872
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostInterface.h",
+      "sha256": "635b59f36874176dc7a63c843341c9331409ce1da82f424b6231250383d8ad04",
+      "bytes": 6115
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostObject.h",
+      "sha256": "49acd363ecf659d22653dc533c36d81b7ca59db86a92adbc9d904cb003be093d",
+      "bytes": 25170
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostPipe.h",
+      "sha256": "1638832f66cf90b6170ff64cce1c992c4de29d94f15d6ae633e3f3504e2314d5",
+      "bytes": 24106
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostIOSource.h",
+      "sha256": "68d7e8c6f355ebe7817c85d398b8d50847cbe3dad66f9b4619d933235fd74faa",
+      "bytes": 2318
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/IOUSBHostDefinitions.h",
+      "sha256": "c1d90c000b98c1ea75ba338103f03e3d972692df59ac9b2830b534e04ae1fa79",
+      "bytes": 12452
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Headers/AppleUSBDescriptorParsing.h",
+      "sha256": "1b3dcafe59bcfcc1465879faf60c783776ad5bc88593f263905873102b8aa7e6",
+      "bytes": 21464
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Modules/module.modulemap",
+      "sha256": "98d0c0e8b8eb8112ce82a4f1790d16b327544e1c24d3604946dca3cf0d1719ef",
+      "bytes": 99
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOUSBHost.framework/Versions/A/IOUSBHost.tbd",
+      "sha256": "f3787c5df450b2a040c991fe6a71b41fa3a7457dfe32da939732a4e7addc868d",
+      "bytes": 3919
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h",
+      "sha256": "553869588e8c0b162b232e294dea2579cfd739d83e772a0b8a79e2be91a5816e",
+      "bytes": 79847
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/IOUSBLib.h",
+      "sha256": "16acc674ebc759d00904e8ae1cd2137b5f814d54fe237c5193cf6549131d542a",
+      "bytes": 308768
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/HAL/pico/include/comms/XInputBackend.hpp",
+      "sha256": "e0cf78a9c800461f4636b0e4ecebc47a52f7b1e001f709af210373f4bf9229cf",
+      "bytes": 510
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/XInputBackend.cpp",
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+      "bytes": 2197
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/include/Adafruit_USBD_XInput.hpp",
+      "sha256": "0e60e1e91e52bcbde1519aa49a57a5b3dc7f4cd9dfb95e1e3992eb370af1fd3c",
+      "bytes": 4555
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f",
+      "bytes": 11301
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+"""Build and exercise pure/mocked paths ONLY. Never invokes native capture."""
+from pathlib import Path
+import subprocess,json,hashlib,datetime
+D=Path(__file__).resolve().parent
+P=Path('/private/tmp/glyph-native-mac-observer-review-repair-20261021')
+B=D/'build_logs';B.mkdir(exist_ok=True)
+log=[]
+def run(cmd,timeout=30):
+ p=subprocess.run(cmd,capture_output=True,text=True,timeout=timeout)
+ log.append({'argv':cmd,'returncode':p.returncode,'stdout':p.stdout,'stderr':p.stderr})
+ return p
+common=['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations']
+objc=['-fobjc-arc','-fblocks','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost']
+asan=['-fsanitize=address,undefined','-fno-omit-frame-pointer']
+for src,out,flags in [('mac_hostinterface_observer.mm','mac_hostinterface_observer',objc),('native_mock_tests.mm','native_mock_tests',objc+asan),('core_tests.cpp','core_tests',asan),('parser_cli.cpp','parser_cli',asan)]:
+ p=run(common+flags+[str(D/src),'-o',str(D/out)]);assert p.returncode==0,p.stderr
+p=run([str(D/'core_tests')]);assert p.returncode==0,p.stderr
+p=run([str(D/'mac_hostinterface_observer'),'--self-test']);assert p.returncode==0
+for args in [[],['capture'],['inspect'],['capture','--approved-session','MOCK','--anchor-entry-id','1','--interface-entry-id','2','--unknown','x'],['capture','--approved-session','MOCK','--anchor-entry-id','-1','--interface-entry-id','2','--output',str(D/'MUST_NOT_EXIST')]]:
+ p=run([str(D/'mac_hostinterface_observer'),*args]);assert p.returncode==2
+assert not (D/'MUST_NOT_EXIST').exists()
+T=D/'mock_journals_freshbinding';T.mkdir(exist_ok=True)
+for i in range(24):
+ p=run([str(D/'native_mock_tests'),str(i),str(T/f'scenario{i}.jsonl')],5);assert p.returncode==0,p.stdout+p.stderr
+ r=[json.loads(x) for x in (T/f'scenario{i}.jsonl').read_text().splitlines()]
+ assert r[0]['kind']=='session'
+ if 16<=i<=22:
+  assert r[-1]['kind']=='inspect_end' and r[-1]['reports']==0 and r[-1]['interface_init_calls']==0
+  assert (r[-1]['outcome']=='ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY')==(i==16)
+  continue
+ assert r[-1]['kind']=='end'
+ assert r[-1]['hardware_acceptance']=='NOT_CLAIMED'
+ if i==0:assert r[-1]['reports']==3 and r[-1]['outcome']=='THREE_PREFLIGHT_REPORTS'
+ else:assert r[-1]['outcome'] in ['STOP','UNCERTAIN_STOP']
+ if i==7:assert r[-1]['outcome']=='UNCERTAIN_STOP' and r[-1]['abort_calls']==1
+fixtures=json.loads((P/'report_parser_fixtures.json').read_text())
+for f in fixtures:
+ args=[str(D/'parser_cli'),f['route'],f['raw_hex'],'1','0'];p=run(args);assert p.returncode==0 and json.loads(p.stdout)==f['expected_fields']
+ if f['route']=='xinput':
+  p=run([str(D/'mac_hostinterface_observer'),'--decode-xinput',f['raw_hex']]);assert p.returncode==0 and json.loads(p.stdout)==f['expected_fields']
+negative=json.loads((P/'negative_and_boundary_fixtures.json').read_text())
+for f in negative:
+ p=run([str(D/'parser_cli'),f['route'],f['hex'],str(f['port']),str(f['report_id'])]);assert (p.returncode==0)==f['expected_accept']
+ if f['route']=='xinput':
+  p=run([str(D/'mac_hostinterface_observer'),'--decode-xinput',f['hex']]);assert (p.returncode==0)==f['expected_accept']
+s=(D/'mac_hostinterface_observer.mm').read_text()
+for forbidden in ['DeviceCapture','DeviceSeize','IOUSBHostDevice alloc','sendDeviceRequest','enqueueDeviceRequest','descriptorWithType','deviceDescriptor','configurationDescriptorWithIndex','configurationDescriptorWithConfigurationValue','selectAlternateSetting','clearStall','adjustPipe','setIdleTimeout','USBInterfaceOpen','IOCreatePlugInInterfaceForService','IOServiceAuthorize','setConfiguration']:
+ assert forbidden not in s,forbidden
+assert 'completionTimeout:0' in s and 'IOUSBHostObjectInitOptionsNone' in s and 'IOUSBHostAbortOptionAsynchronous' in s
+hashes=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+inputs=[P/'observer_parser.hpp',P/'parser_cli.cpp',P/'report_parser_fixtures.json',P/'negative_and_boundary_fixtures.json',P/'mac_input_observer',P/'mac_input_observer.cpp',P/'reviewed_packet_exactF_wire_observer_draft.json']
+assert hashes(D/'observer_parser.hpp')==hashes(P/'observer_parser.hpp')
+evidence={'classification':'OFFLINE_BUILD_PURE_AND_MOCKED_ONLY','live_capture_or_registry_invocations':0,'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'fixture_replays':len(fixtures),'native_xinput_fixture_replays':sum(f['route']=='xinput' for f in fixtures),'negative_boundary_replays':len(negative),'native_xinput_boundary_replays':sum(f['route']=='xinput' for f in negative),'native_mock_scenarios':24,'core_sanitized_checks':157,'native_arg_rejections':5,'native_selftest':'PASS','static_forbidden_operation_scan':'PASS','inputs':[{'path':str(p),'sha256':hashes(p)} for p in inputs],'commands':log}
+(D/'offline_evidence.json').write_text(json.dumps(evidence,indent=2)+'\n')
+print(json.dumps({k:v for k,v in evidence.items() if k not in ['inputs','commands']},indent=2))

@@ -1,0 +1,22 @@
+from pathlib import Path
+import hashlib,json,shutil,subprocess,os
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-Mac-hostinterface-observer-20261022');D=O/'parent_witness';D.mkdir(exist_ok=True)
+for n in ['mac_hostinterface_observer.mm','observer_core.hpp','observer_parser.hpp']:shutil.copyfile(P/n,D/n)
+m=(P/'native_mock_tests.mm').read_text();m=m[:m.index('int main(int argc,char**argv){')]
+m=m.replace('#include <map>','#include <map>\n#include <unistd.h>\n#include <time.h>')
+m=m.replace('static void force_stop();','''static void force_stop();
+static uint64_t fake_ns=0;
+static std::vector<uint64_t> enqueue_times;
+static int mock_clock_gettime(clockid_t,timespec*t){t->tv_sec=fake_ns/1000000000ULL;t->tv_nsec=fake_ns%1000000000ULL;return 0;}
+static int mock_fsync(int fd){if(read_calls==1&&fake_ns==4900000000ULL)fake_ns=6000000000ULL;return fsync(fd);}
+''')
+m=m.replace('++read_calls;if(timeout','++read_calls;enqueue_times.push_back(fake_ns);if(timeout')
+m=m.replace('dispatch_async(mock_queue,^{std::memset','dispatch_async(mock_queue,^{if(read_calls==1)fake_ns=4900000000ULL;std::memset')
+m=m.replace('#define main candidate_main','#define clock_gettime mock_clock_gettime\n#define fsync mock_fsync\n#define main candidate_main')
+m+='''int main(int argc,char**argv){@autoreleasepool{if(argc!=2)return 9;Options o;o.session="DEADLINE_MOCK_ONLY";o.anchor=1;o.target=101;o.output=argv[1];gstate=new State(o);dispatch_async(gstate->queue,^{@try{try{begin(gstate);}catch(...){gstate->failure("mock exception");}}@catch(NSException*){gstate->failure("mock ObjC");}});if(dispatch_semaphore_wait(gstate->ended,dispatch_time(DISPATCH_TIME_NOW,3000000000LL)))return 10;if(enqueue_times.size()>1&&enqueue_times[1]>=gstate->engine.deadline){std::printf("FAIL required cutoff: actual parent queued submission2 at%llu deadline%llu; receipt4900000000 journaladvanced6000000000; abort%d\\n",(unsigned long long)enqueue_times[1],(unsigned long long)gstate->engine.deadline,abort_calls);return 17;}return 0;}}
+'''
+(D/'deadline_witness.mm').write_text(m)
+commands=[]
+for args,expected in [(['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations','-fobjc-arc','-fblocks','-fsanitize=address,undefined','-fno-omit-frame-pointer','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost',str(D/'deadline_witness.mm'),'-o',str(D/'deadline_witness')],0),([str(D/'deadline_witness'),str(D/'journal.jsonl')],17)]:
+ r=subprocess.run(args,capture_output=True,text=True,env={**os.environ,'ASAN_OPTIONS':'detect_stack_use_after_return=1:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'});commands.append({'argv':args,'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr});(O/'parent-witness-commands.json').write_text(json.dumps(commands,indent=2)+'\n');assert r.returncode==expected,r.stdout+r.stderr
+print(commands[-1]['stdout'])

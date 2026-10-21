@@ -1,0 +1,9 @@
+{
+  "status": "PASS_OFFLINE_ONLY",
+  "actual_core_checks": 157,
+  "actual_source_mock_scenarios": 24,
+  "additional_actual_source_mock_exceptions": 3,
+  "full_host_build_byte_identical": true,
+  "pure_native_executions": 2,
+  "live_registry_IOUSBHost_calls": 0
+}

@@ -1,0 +1,307 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_HOST_SOURCE_OFFLINE_EVIDENCE_EXPLICIT_ARCHIVE",
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/PINS.json",
+      "raw_bytes": 6488,
+      "raw_sha256": "1c7f644a89a788e3aea490597dfb48c6b2c0feda96c81be37082176b78bacf58",
+      "archived": true,
+      "relative": "PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/REPORT.md",
+      "raw_bytes": 6467,
+      "raw_sha256": "66873d1b1f835387479cfe3cea574b8af079a6ebe857475d0d1ae1b902eea8f5",
+      "archived": true,
+      "relative": "REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/TECHNICAL_REPAIR_REPORT.md",
+      "raw_bytes": 4822,
+      "raw_sha256": "ae35bb2a14f5728d724aa3883f46c75af60424f98713559541c44ad2ba9f498f",
+      "archived": true,
+      "relative": "TECHNICAL_REPAIR_REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child-held-inputs.json",
+      "raw_bytes": 3771,
+      "raw_sha256": "4baee859c6bfc3dc0466451ef6cdc5746155cc969c6fc0013edb2d1ca64a66e4",
+      "archived": true,
+      "relative": "child-held-inputs.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child-independent-commands.json",
+      "raw_bytes": 5235,
+      "raw_sha256": "26d0f5e941b7051bd40c50e20275b8d85834a014e7f92d08cfce67541fe65470",
+      "archived": true,
+      "relative": "child-independent-commands.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child-independent-results.json",
+      "raw_bytes": 754,
+      "raw_sha256": "fe1d4e9371d6c0baa64e2702f1fc00b7420f6a05b4bcd3ba468605fb5b0d1d7b",
+      "archived": true,
+      "relative": "child-independent-results.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_replay.py",
+      "raw_bytes": 4850,
+      "raw_sha256": "a2cf5c4eac32b4d39802056927293ce625bd0aa6bd7e3eafe3beb502b2228e90",
+      "archived": true,
+      "relative": "child_replay.py.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/TECHNICAL_HOLD.json",
+      "raw_bytes": 4123,
+      "raw_sha256": "5661e6a742b456676824fff8ebe31181f4365b8757ab7251884694fee4778c59",
+      "archived": true,
+      "relative": "child_witness/TECHNICAL_HOLD.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure",
+      "raw_bytes": 868992,
+      "raw_sha256": "e53e628fa8c67cc0fa0f32639eef3f0a99ef309ab29579a35695e9fbb83e38a6",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/e53e628fa8c67cc0fa0f32639eef3f0a99ef309ab29579a35695e9fbb83e38a6/clock_failure",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure.jsonl",
+      "raw_bytes": 3042,
+      "raw_sha256": "960f464df6520dbbf7b8ad80a2868fde540c03baeb2d7035f2713d0171b8a30a",
+      "archived": true,
+      "relative": "child_witness/clock_failure.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure.mm",
+      "raw_bytes": 8337,
+      "raw_sha256": "631448494ee39b0c2e4f8c90656a14915bcbf4b496aecbc8ff9ec7c4a9904f24",
+      "archived": true,
+      "relative": "child_witness/clock_failure.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline",
+      "raw_bytes": 868992,
+      "raw_sha256": "411945d378bf65b14df05261cf500fefb6195ea9a4981e94b4e73b3dade7ee8d",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/411945d378bf65b14df05261cf500fefb6195ea9a4981e94b4e73b3dade7ee8d/exact_deadline",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline.jsonl",
+      "raw_bytes": 3042,
+      "raw_sha256": "960f464df6520dbbf7b8ad80a2868fde540c03baeb2d7035f2713d0171b8a30a",
+      "archived": true,
+      "relative": "child_witness/exact_deadline.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline.mm",
+      "raw_bytes": 8301,
+      "raw_sha256": "cbf67a0b99d8788b3033d1dca529853d7f824ba3b3b1247a4f1330f26a109198",
+      "archived": true,
+      "relative": "child_witness/exact_deadline.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/mac_hostinterface_observer",
+      "raw_bytes": 223032,
+      "raw_sha256": "108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/mac_hostinterface_observer",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/mac_hostinterface_observer.mm",
+      "raw_bytes": 18560,
+      "raw_sha256": "f0e246b6b6d15a6cab0b5db0eba86cf1907aa35795038e5190957ebee876e2f2",
+      "archived": true,
+      "relative": "child_witness/mac_hostinterface_observer.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/observer_core.hpp",
+      "raw_bytes": 5032,
+      "raw_sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "archived": true,
+      "relative": "child_witness/observer_core.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/observer_parser.hpp",
+      "raw_bytes": 3670,
+      "raw_sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "archived": true,
+      "relative": "child_witness/observer_parser.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline",
+      "raw_bytes": 868992,
+      "raw_sha256": "c06c7c77443bd78cd031d108f2b2c308ee9b5f7c24ca89d619018495216597a0",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/c06c7c77443bd78cd031d108f2b2c308ee9b5f7c24ca89d619018495216597a0/past_deadline",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline.jsonl",
+      "raw_bytes": 3042,
+      "raw_sha256": "960f464df6520dbbf7b8ad80a2868fde540c03baeb2d7035f2713d0171b8a30a",
+      "archived": true,
+      "relative": "child_witness/past_deadline.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline.mm",
+      "raw_bytes": 8301,
+      "raw_sha256": "1265220afae0c893a9779d5fa1845a58e1733df409d0fabc439698bf85d8f832",
+      "archived": true,
+      "relative": "child_witness/past_deadline.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive",
+      "raw_bytes": 868992,
+      "raw_sha256": "8752fe157754f8a7fb456ed3f2dfd67129311aba592bfa425d4b113258b40efa",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/8752fe157754f8a7fb456ed3f2dfd67129311aba592bfa425d4b113258b40efa/timely_positive",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive.jsonl",
+      "raw_bytes": 3975,
+      "raw_sha256": "1401a961a18b0ac0f0fda6d3a88de36a6bdc61595a48904927e057dbdca8b69d",
+      "archived": true,
+      "relative": "child_witness/timely_positive.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive.mm",
+      "raw_bytes": 8300,
+      "raw_sha256": "7a5e3fc334a3346a520a3780074c541f4a4f3ac8c09ee10244bba92019ed9328",
+      "archived": true,
+      "relative": "child_witness/timely_positive.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/confirmed-parent-finding.json",
+      "raw_bytes": 1737,
+      "raw_sha256": "081cb2f73870e31ed92ae32940302b434362a0c6e439d2b0ddacbcbf7a79d727",
+      "archived": true,
+      "relative": "confirmed-parent-finding.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final-binding.json",
+      "raw_bytes": 32421,
+      "raw_sha256": "880cb4f9ee700abdbc8b8baf95832e2e7dd2431a55d97c7756e3b76062290d2b",
+      "archived": true,
+      "relative": "final-binding.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_binding.py",
+      "raw_bytes": 3841,
+      "raw_sha256": "630d77d5d2af86a753636776ac8da1eaee4c2716a2ab30bdc9df8217340e4182",
+      "archived": true,
+      "relative": "final_binding.py.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_bound_inputs/QUALIFICATION_PACKET.json",
+      "raw_bytes": 9593,
+      "raw_sha256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827",
+      "archived": true,
+      "relative": "final_bound_inputs/QUALIFICATION_PACKET.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_bound_inputs/QUALIFICATION_PACKET.md",
+      "raw_bytes": 7717,
+      "raw_sha256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607",
+      "archived": true,
+      "relative": "final_bound_inputs/QUALIFICATION_PACKET.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_bound_inputs/author-OPERATOR_DRAFT.md",
+      "raw_bytes": 1735,
+      "raw_sha256": "a920970db775b7e3aec29d3fa5fb8251b22040328bbef7ae6a6b0594c80f7d6f",
+      "archived": true,
+      "relative": "final_bound_inputs/author-OPERATOR_DRAFT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_bound_inputs/author-PINS.json",
+      "raw_bytes": 10352,
+      "raw_sha256": "b97ff6d581a40926f5fcc1fea3460be20b6ae9ff75814e93470b618f8b7d14ef",
+      "archived": true,
+      "relative": "final_bound_inputs/author-PINS.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_bound_inputs/author-REPORT.md",
+      "raw_bytes": 5830,
+      "raw_sha256": "992003ab1f30cfeb3a236040506f2168edeb850fa33df65d007a64ebc5149563",
+      "archived": true,
+      "relative": "final_bound_inputs/author-REPORT.md"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/final_bound_inputs/custody.json",
+      "raw_bytes": 1465,
+      "raw_sha256": "c052ab9505eb588d8cb5852979f6fdc28499e473b60a6a8c8d584fc5eb6260d4",
+      "archived": true,
+      "relative": "final_bound_inputs/custody.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent-witness-commands.json",
+      "raw_bytes": 1190,
+      "raw_sha256": "cd8078a158f06cc97888b029efa0fefba9dfd51a3a7ff0277e393202a58480df",
+      "archived": true,
+      "relative": "parent-witness-commands.json"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/deadline_witness",
+      "raw_bytes": 868096,
+      "raw_sha256": "967ffcad57d7684a6eee920ea19ad75a7e8a6ad52e72a6388ea0d068c87364bd",
+      "archived": false,
+      "custody_reference": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/108e64e5eab524ad85d184eb7ee75d9e6075b44bd3df68598ed79dbf92622c83/proof_artifacts/967ffcad57d7684a6eee920ea19ad75a7e8a6ad52e72a6388ea0d068c87364bd/deadline_witness",
+      "reason": "Native offline executable; exact owner-local content-addressed custody, no live approval"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/deadline_witness.mm",
+      "raw_bytes": 8135,
+      "raw_sha256": "333094024265b35edac383dae22b338aa0e5e266bdb3512379777d793bcc9a60",
+      "archived": true,
+      "relative": "parent_witness/deadline_witness.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/journal.jsonl",
+      "raw_bytes": 3493,
+      "raw_sha256": "a6a4a1a3ffd46e1e70e14412fd6cfde78b5adaf9a214510327159f91f25514c2",
+      "archived": true,
+      "relative": "parent_witness/journal.jsonl"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/mac_hostinterface_observer.mm",
+      "raw_bytes": 18151,
+      "raw_sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+      "archived": true,
+      "relative": "parent_witness/mac_hostinterface_observer.mm.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/observer_core.hpp",
+      "raw_bytes": 5032,
+      "raw_sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "archived": true,
+      "relative": "parent_witness/observer_core.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness/observer_parser.hpp",
+      "raw_bytes": 3670,
+      "raw_sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "archived": true,
+      "relative": "parent_witness/observer_parser.hpp.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/parent_witness.py",
+      "raw_bytes": 2886,
+      "raw_sha256": "f2995f8bb1285d0e7557bf1535c46756969ba9154c387f5e17ff6649002705b1",
+      "archived": true,
+      "relative": "parent_witness.py.txt"
+    },
+    {
+      "source": "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/source-parent-to-child.diff",
+      "raw_bytes": 1636,
+      "raw_sha256": "1c835d21e06b439b19b03cb21d8638f99c6e3fe1501abf4f16571271f619e812",
+      "archived": true,
+      "relative": "source-parent-to-child.diff"
+    }
+  ],
+  "firmware_change": false,
+  "live_execution_approval": null
+}

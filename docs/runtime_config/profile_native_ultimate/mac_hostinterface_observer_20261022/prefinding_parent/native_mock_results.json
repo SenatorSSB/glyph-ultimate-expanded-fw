@@ -1,0 +1,74 @@
+[
+  {
+    "scenario": 0,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario0 init1 pipe1 read3 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 1,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario1 init1 pipe1 read1 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 2,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario2 init1 pipe1 read1 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 3,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario3 init1 pipe1 read1 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 4,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario4 init1 pipe1 read1 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 5,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario5 init1 pipe1 read1 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 6,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario6 init1 pipe1 read1 abort1 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 7,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario7 init1 pipe1 read1 abort1 destroy0 retained1; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 8,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario8 init1 pipe0 read0 abort0 destroy0 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 9,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario9 init1 pipe0 read0 abort0 destroy1 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 10,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario10 init0 pipe0 read0 abort0 destroy0 retained0; zero native device calls\n",
+    "stderr": ""
+  },
+  {
+    "scenario": 11,
+    "returncode": 0,
+    "stdout": "PASS actual-source MOCK_ONLY scenario11 init0 pipe0 read0 abort0 destroy0 retained0; zero native device calls\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "state": "SOURCE_PACKET_HOLD_NOT_AUTHORIZED_FOR_LIVE_EXECUTION",
+  "live_calls": 0,
+  "fresh_registry_inspect": "separate explicit operation; never auto-capture",
+  "files": {
+    "mac_hostinterface_observer.mm": {
+      "sha256": "f525991c7f43e59b1f0711c41edabe5937e4e03a882d7b653eb41be362823108",
+      "bytes": 18151
+    },
+    "mac_hostinterface_observer": {
+      "sha256": "ee26c84cb19eb40017329297732ee504774211941aa5067620cd6a5fb4b5e1a7",
+      "bytes": 223032
+    },
+    "observer_core.hpp": {
+      "sha256": "e96339c53c098a1d500e71a950b62171be0bce01ac4776e3a7f141046de3efe1",
+      "bytes": 5032
+    },
+    "observer_parser.hpp": {
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "bytes": 3670
+    },
+    "core_tests.cpp": {
+      "sha256": "74b5644ec770a74a21f2fea0dfe5306a1c068e53b848dd97cffe4012e79a30a0",
+      "bytes": 3263
+    },
+    "core_tests": {
+      "sha256": "dd39e28555ea889341de3e0737ab11fea4d30c5624324fa9419532988dbb60af",
+      "bytes": 377912
+    },
+    "native_mock_tests.mm": {
+      "sha256": "0e40e0889e1e4456581c81a3f6b33cefccfab7fdbb8c6cacc67b9f3ae00dad8f",
+      "bytes": 8871
+    },
+    "native_mock_tests": {
+      "sha256": "1f92bcf18b6cfc5ab2e84b114b5c62fc3046fefdc7ffd98a446f37f77fb3680f",
+      "bytes": 828208
+    },
+    "parser_cli.cpp": {
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7",
+      "bytes": 479
+    },
+    "parser_cli": {
+      "sha256": "a8d6738c22911deb74d4e008553112acc4837941e03ba9d75ccf31ee54042615",
+      "bytes": 327976
+    },
+    "validate_offline.py": {
+      "sha256": "ee0b308a8aa1f4d21bb8bead5934e30fe1f4be5a4419f3f420bfee519ddd12bc",
+      "bytes": 4938
+    },
+    "offline_evidence.json": {
+      "sha256": "160a9b6164860f4b5d3422caf8d1191285463f4793a0e48d0b94016d56831d62",
+      "bytes": 709736
+    },
+    "external_pins.json": {
+      "sha256": "6b3fa532c1a6fdeba446d076ced99ddd4e77366be07c8e9f5329051f63e4812d",
+      "bytes": 4130
+    },
+    "build_environment.json": {
+      "sha256": "34223e343bf914d30ac3ce4c1e4ce2aec6859efe0eb8ddf9322032fd296c2d0b",
+      "bytes": 601
+    }
+  }
+}

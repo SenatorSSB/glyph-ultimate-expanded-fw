@@ -1,0 +1,166 @@
+[
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline.mm",
+      "-o",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/past_deadline.jsonl"
+    ],
+    "returncode": 0,
+    "stdout": "PASS actualchild enqueues1 abort0 reports1 success0 cleanonce1; finalclock6000000000 receipt4900000000\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline.mm",
+      "-o",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/exact_deadline.jsonl"
+    ],
+    "returncode": 0,
+    "stdout": "PASS actualchild enqueues1 abort0 reports1 success0 cleanonce1; finalclock5000000000 receipt4900000000\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure.mm",
+      "-o",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/clock_failure.jsonl"
+    ],
+    "returncode": 0,
+    "stdout": "PASS actualchild enqueues1 abort0 reports1 success0 cleanonce1; finalclock6000000000 receipt4900000000\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive.mm",
+      "-o",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/timely_positive.jsonl"
+    ],
+    "returncode": 0,
+    "stdout": "PASS actualchild enqueues3 abort0 reports3 success1 cleanonce1; finalclock4900000000 receipt4900000000\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/mac_hostinterface_observer.mm",
+      "-o",
+      "/private/tmp/glyph-native-hostinterface-independent-review-20261022/deadline_repair_ack/child_witness/mac_hostinterface_observer"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

@@ -23,8 +23,13 @@ A proven host-only empty-stderr assertion was corrected after independent offlin
 wire/source review, preserving the valid STATUS/error/snapshot and unused child
 finding, without requery or new device authority. All227 session files are pinned
 privately. This is API preservation, not raw filesystem export or native acceptance.
-Device access ended STOP in Configurator. Next host observation preparation is
-offline only and requires a separate exact owner packet before any live access.
+Device access ended STOP in Configurator. The [new SDK-supported Mac observer](runtime_config/profile_native_ultimate/mac_hostinterface_observer_20261022/README.md)
+has completed offline checks, independent source review and a focused deadline
+repair ACK. A reproduced pre-use parent defect and the original PASS remain
+preserved; corrected binary108e64/sourcef0e246 and exact V2 packet are retained.
+The [V2 live-access packet](runtime_config/profile_native_ultimate/mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.md)
+requires new explicit owner approval for one ordinary reconnect, identity, new
+inspect/capture then STOP. No new live access or native mutation is authorized.
 F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
