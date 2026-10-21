@@ -1,0 +1,6 @@
+glyph_mk6 build passed
+RAM:   [========  ]  75.4% (used 197528 bytes from 262144 bytes)
+Flash: [===       ]  32.6% (used 511172 bytes from 1568768 bytes)
+========================= [SUCCESS] Took 87.13 seconds =========================
+glyph_mk6      SUCCESS   00:01:27.135
+Full log: /private/tmp/glyph-native-exact-build-bcb9824bc00c-repaired-p1-open//glyph_mk6_build.log

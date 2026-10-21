@@ -1,0 +1,98 @@
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:180:36:virtual ProfileStoreStorageFailure {anonymous}::MountedStorage::LastFailure() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:522:27:void __tcf_0()	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:135:11:{anonymous}::MountedStorage::~MountedStorage()	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:209:14:virtual bool {anonymous}::MountedStorage::Enumerate(CheckedStorage::Visitor, void*)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:205:14:virtual bool {anonymous}::MountedStorage::Geometry(CheckedStorage::Geometry&)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:192:14:virtual bool {anonymous}::MountedStorage::ReadRange(const char*, size_t, uint8_t*, size_t)	192	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:190:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRemove(const char*)	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:152:14:virtual bool {anonymous}::MountedStorage::Remove(const char*)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:186:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRename(const char*, const char*, {anonymous}::Kind)	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:154:14:virtual bool {anonymous}::MountedStorage::Rename(const char*, const char*)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:182:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::Probe(const char*, size_t*)	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:150:14:virtual bool {anonymous}::MountedStorage::Exists(const char*)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:145:16:virtual size_t {anonymous}::MountedStorage::Size(const char*)	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:135:11:virtual {anonymous}::MountedStorage::~MountedStorage()	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1853:47:static constexpr bool ProfileStore::ImportLegacy(const Config&, uint32_t*, size_t)::<lambda(void*, size_t, UltimateProfile&)>::_FUN(void*, size_t, UltimateProfile&)	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:373:10:0(const ProfileStore::Directory&, uint8_t*)	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:158:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedWrite(const char*, const uint8_t*, size_t, {anonymous}::Kind)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:548:27:void __tcf_1()	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:174:16:virtual ProfileStoreStorage::Result {anonymous}::MountedStorage::CheckedRead(const char*, uint8_t*, size_t, {anonymous}::Kind)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:141:14:virtual bool {anonymous}::MountedStorage::Read(const char*, uint8_t*, size_t)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:137:14:virtual bool {anonymous}::MountedStorage::Write(const char*, const uint8_t*, size_t)	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:351:10:bool {anonymous}::Structural(const ProfileStore::Directory&)	80	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:373:10:bool {anonymous}::EncodeDirectory(const ProfileStore::Directory&, uint8_t*)	16	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:414:10:bool {anonymous}::DecodeDirectory(const uint8_t*, size_t, ProfileStore::Directory*)	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:105:27:static constexpr bool {anonymous}::HashMessage(const pb_msgdesc_t*, const void*, uint8_t*)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)	184	static
+include/core/Sha256.hpp:20:10:void Sha256::Final(uint8_t*)	216	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:102:36:bool {anonymous}::HashMessage(const pb_msgdesc_t*, const void*, uint8_t*)	160	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:501:10:bool {anonymous}::SameDirectory(const ProfileStore::Directory&, const ProfileStore::Directory&)	448	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1630:10:void {anonymous}::Receipt(ProfileStore::Directory&)	352	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1654:37:ProfileStoreTransactionIdentity {anonymous}::HistoricalIdentity(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, const UltimateProfile*, const char*, uint32_t)	376	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1614:10:bool {anonymous}::HashFile(ProfileStoreStorage&, const char*, uint8_t*)	456	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:457:36:bool {anonymous}::DecodeLegacy(const uint8_t*, size_t, ProfileStore::Directory*)	296	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:519:1:ProfileStore::ProfileStore(ProfileStoreStorage*)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:573:6:bool ProfileStore::ReadRoot(uint8_t, Directory&) const	80	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:581:6:bool ProfileStore::LoadControl(Directory&, uint32_t&) const	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:801:6:bool ProfileStore::LoadDirectory()	88	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:838:6:bool ProfileStore::PublishDirectory(const Directory&)	88	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:937:6:0()	120	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:868:6:bool ProfileStore::IsReady() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:872:6:bool ProfileStore::IsReadOnlyRecovery() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:876:6:bool ProfileStore::MigrationPending() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:880:10:uint32_t ProfileStore::LegacyMigrationId(size_t) const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:884:10:uint32_t ProfileStore::Incarnation() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:547:6:bool ProfileStore::BeginRecovery(uint32_t, uint32_t)	88	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:888:10:uint32_t ProfileStore::Generation() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:892:10:uint64_t ProfileStore::LastTransactionToken() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:896:8:size_t ProfileStore::Count() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:900:28:const ProfileStore::Entry* ProfileStore::EntryAt(size_t) const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:904:24:const UltimateProfile* ProfileStore::ActiveProfile() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:908:10:uint32_t ProfileStore::ActiveId() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:912:5:int ProfileStore::Find(uint32_t) const	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:920:32:bool ProfileStore::ValidateProfile(const UltimateProfile&) const	152	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:925:6:void ProfileStore::ResetDiagnostic()	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:929:13:const char* ProfileStore::LastDiagnostic() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:933:6:bool ProfileStore::IsTransactionUncertain() const	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:937:6:bool ProfileStore::ReconcileTransaction()	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:981:10:uint32_t ProfileStore::HealthFlags() const	12	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:988:6:bool ProfileStore::PrepareProfileWrite(uint32_t, uint32_t, const UltimateProfile&)	72	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1020:6:bool ProfileStore::PublishPreparedProfile()	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1030:6:bool ProfileStore::ReadProfile(uint32_t, uint32_t, UltimateProfile&, bool*) const	120	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:521:6:bool ProfileStore::Begin(uint32_t, uint32_t)	144	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1072:22:ProfileStore::Status ProfileStore::Read(uint32_t, UltimateProfile&, uint32_t*) const	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1086:24:const UltimateProfile* ProfileStore::Activate(uint32_t, Status*)	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1132:28:ProfileStore::RecordHealth ProfileStore::Health(uint32_t) const	104	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1153:6:bool ProfileStore::LoadProtectedRoot() const	88	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1169:6:bool ProfileStore::Protected(uint32_t, uint32_t) const	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1317:47:static constexpr bool ProfileStore::CollectGarbage()::<lambda(void*, const CheckedStorage::Entry&)>::_FUN(void*, const CheckedStorage::Entry&)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1185:28:ProfileStore::CapacityInfo ProfileStore::Capacity() const	320	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1299:22:ProfileStore::Status ProfileStore::CollectGarbage()	88	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1346:6:bool ProfileStore::Admit(size_t, size_t)	112	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1729:22:0(const Config&, const uint8_t*, LegacyReader, void*, uint32_t*, size_t)	112	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1359:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint64_t) const	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1369:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(const TransactionIdentity&) const	64	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1377:59:ProfileStore::TransactionResult ProfileStore::Start(const TransactionIdentity&) const	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1415:32:void ProfileStore::PrepareCreate()	48	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1433:59:ProfileStore::TransactionResult ProfileStore::FinalizePreparedCreate()	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1475:33:ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, const TransactionIdentity&)	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1479:33:ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, const TransactionIdentity&)	48	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1511:59:ProfileStore::TransactionResult ProfileStore::PrepareDuplicate(uint32_t, uint32_t, const TransactionIdentity&)	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1529:33:ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, const TransactionIdentity&)	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1543:33:ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char*, uint32_t, const TransactionIdentity&)	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1567:33:ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1588:33:ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, const TransactionIdentity&)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1687:6:bool ProfileStore::PrepareCompact(Config&) const	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1712:6:bool ProfileStore::ValidateCompactReceipt(const Config&) const	48	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1729:22:ProfileStore::Status ProfileStore::ImportLegacyStream(const Config&, const uint8_t*, LegacyReader, void*, uint32_t*, size_t)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1822:22:ProfileStore::Status ProfileStore::ImportLegacy(const Config&, uint32_t*, size_t)	392	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1862:22:ProfileStore::Status ProfileStore::CompleteMigration(const Config&)	72	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1896:33:ProfileStore::TransactionResult ProfileStore::Create(const UltimateProfile&, const char*, uint32_t, uint32_t, uint32_t)	96	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1906:33:ProfileStore::TransactionResult ProfileStore::Update(uint32_t, const UltimateProfile&, uint32_t, uint32_t, uint32_t)	112	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1916:33:ProfileStore::TransactionResult ProfileStore::Duplicate(uint32_t, uint32_t, const char*, uint32_t, uint32_t, uint32_t)	112	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1927:33:ProfileStore::TransactionResult ProfileStore::Rename(uint32_t, const char*, uint32_t, uint32_t, uint32_t)	120	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1937:33:ProfileStore::TransactionResult ProfileStore::Reorder(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)	104	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1947:33:ProfileStore::TransactionResult ProfileStore::Delete(uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)	104	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1957:33:ProfileStore::TransactionResult ProfileStore::QueryTransaction(uint32_t, uint32_t) const	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1961:33:ProfileStore::TransactionResult ProfileStore::BeginMutation(uint32_t, uint32_t) const	64	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1967:6:void ProfileStore::Finish(TransactionResult*, uint32_t, uint32_t) const	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/single-create-snapshotted.cpp:1971:27:cpp)	8	static

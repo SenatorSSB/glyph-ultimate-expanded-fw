@@ -46,12 +46,20 @@ def main() -> int:
                      "-c", str(source), "-o", str(target)])
                 objects.append(str(target))
 
+            # The immutable injected-storage fixture predates the production
+            # mounted adapter's separate Write/Sync calls. Complete only its
+            # fail-closed link surface in scratch; no lifecycle assertion or
+            # historical fixture is changed and no real mounted I/O is modeled.
+            supplement = temp / "checked-storage-native-link.cpp"
+            supplement.write_text('#include "core/CheckedStorage.hpp"\nnamespace CheckedStorage {\n'
+                                  'Result Write(File&,const void*,size_t){return {Outcome::Failed};}\n'
+                                  'Result Sync(File&){return {Outcome::Failed};}\n}\n')
             executable = temp / "migration-lifecycle"
             run(["c++", *sanitize, "-std=c++17", "-fshort-enums", "-Wall", "-Wextra", "-Werror",
                  "-I", str(HOST / "include"), "-I", str(generated), "-I", str(nanopb),
                  "-I", str(ROOT / "include"), "-I", str(ROOT / "HAL/pico/include"),
                  "-I", str(ROOT / "config/glyph/common/include"), "-I", str(ROOT / "config/glyph/glyph_mk6/include"),
-                 str(HOST / "migration_lifecycle.cpp"), str(HOST / "checked_storage_unavailable.cpp"), str(ROOT / "HAL/pico/src/core/ProfileStore.cpp"),
+                 str(HOST / "migration_lifecycle.cpp"), str(HOST / "checked_storage_unavailable.cpp"), str(supplement), str(ROOT / "HAL/pico/src/core/ProfileStore.cpp"),
                  str(ROOT / "src/modes/UltimateNativeProfile.cpp"), str(ROOT / "src/core/config_validation.cpp"), str(ROOT / "src/core/config_button_validation.cpp"),
                  str(ROOT / "src/core/config_usb_default_validation.cpp"), str(ROOT / "src/core/config_rgb_target_validation.cpp"),
                  str(ROOT / "config/glyph/common/src/glyph_config_validation.cpp"), *objects, "-o", str(executable)])

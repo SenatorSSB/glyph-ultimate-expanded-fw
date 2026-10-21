@@ -1,0 +1,15 @@
+{
+  "candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "uf2": {
+    "bytes": 1046528,
+    "sha256": "f2c06c41b84aa57c47f44a4eaf53770187cc75287073620e6e6c7e6d0a529057"
+  },
+  "elf": {
+    "bytes": 5590084,
+    "sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884"
+  },
+  "state": "BUILD_PASS_SOURCE_RESOURCE_REVIEW_PENDING_NOT_FOR_HARDWARE_HANDOFF",
+  "p1": "OPEN broader accepted filesystem orphan branch/resource certificate unresolved",
+  "hardware": "NOT_TESTED",
+  "target_timing": "NOT_MEASURED"
+}

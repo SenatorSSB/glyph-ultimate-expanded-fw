@@ -1,0 +1,723 @@
+{
+  "schema_name": "glyph_native_repaired_affected_consumers",
+  "schema_version": 1,
+  "role": "finite_read_only_affected_consumer_validation",
+  "started_utc": "2026-10-20T14:21:14.814735+00:00",
+  "requested_model": "UNKNOWN",
+  "requested_effort": "UNKNOWN",
+  "observed_model": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "model_provenance": "No independently attested runtime telemetry or explicit dispatch parameters supplied to this worker.",
+  "source_repository": "/private/tmp/glyph-profile-native-20261020",
+  "snapshot": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+  "expected_commit": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "expected_tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "offline": true,
+  "live_github_verified": false,
+  "origin_is_local_clone_source": true,
+  "physical_device_actions": 0,
+  "firmware_builds": 0,
+  "source_mutations": 0,
+  "aggregate_pass_claimed": false,
+  "hardware_pass_claimed": false,
+  "symlinks": {
+    ".platformio-home": "/private/tmp/glyph-profile-native-20261020/.platformio-home",
+    ".pio/libdeps": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps"
+  },
+  "dependency_usage": "Read-only source inputs through symlinks; host artifacts and generated files use this report directory tmp.",
+  "setup_note": "Initial clean-snapshot assertion saw only the approved dependency symlink as untracked. The isolated clone local .git/info/exclude now records /.platformio-home; source and shared original metadata were not altered. This was a setup assertion, not a consumer test failure. Original status logs are retained.",
+  "inspection": {
+    "checkers": [
+      "tools/check_glyph_profile_store_migration_lifecycle.py",
+      "tools/check_glyph_profile_store_strict_host.py",
+      "tools/check_glyph_profile_store_strict_protocol.py",
+      "tools/check_glyph_profile_store_timeout_resynchronization.py",
+      "tools/check_glyph_profile_store_read_storage.py"
+    ],
+    "device_review": "Selected mains generate protobuf fixtures and host executables. glyph_serial_config_tool import uses load_runtime_proto_modules and encode_artifact_payload only; PosixSerialPort and main execution paths are not called. Harnesses use injected storage/mock Arduino or RAM-backed pinned LittleFS. No device/flash/upload/network invocation found in selected execution paths."
+  },
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--shared",
+        "--no-checkout",
+        "/private/tmp/glyph-profile-native-20261020",
+        "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/clone.log"
+    },
+    {
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "bcb9824bc00c6210babdf00675952deeda7f7c88"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/checkout.log"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/initial_commit.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/initial_tree.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/initial_status_verified.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/initial_diff_stat.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_initial_commit.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_initial_tree.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_initial_status.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_initial_diff_stat.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "remote",
+        "-v"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/initial_remote.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "c++",
+        "--version"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/cxx-version.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "cc",
+        "--version"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/cc-version.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_migration_lifecycle.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_migration_lifecycle.log",
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--shared",
+        "--no-checkout",
+        "/private/tmp/glyph-profile-native-20261020",
+        "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline-clone.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "ea137fc1f61d6acc0f1475c4165263eb661775da"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline-checkout.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_strict_host.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_strict_host.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_strict_protocol.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_strict_protocol.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_timeout_resynchronization.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_timeout_resynchronization.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_read_storage.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-repaired-consumers-bcb9824b/read-storage"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_read_storage.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/final_commit.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/final_tree.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/final_status.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/final_diff_stat.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_final_commit.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_final_tree.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_final_status.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "/private/tmp/glyph-profile-native-20261020",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/writer_final_diff_stat.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline_final_commit.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD^{tree}"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline_final_tree.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain=v1"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline_final_status.log",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+      "environment": {
+        "GIT_OPTIONAL_LOCKS": "0"
+      },
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline_final_diff_stat.log",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "check_glyph_profile_store_migration_lifecycle",
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_migration_lifecycle.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "started_utc": "2026-10-20T14:21:31.660778+00:00",
+      "elapsed_seconds": 1.658,
+      "exit_code": 1,
+      "result": "FAIL",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_migration_lifecycle.log",
+      "log_sha256": "0f0959cd3574f18077da5aea66b7a28133d7bd2f6b4c1362df4f7d00833b234d",
+      "classification": "PREEXISTING_HOST_FIXTURE_LINK_GAP",
+      "comparison": {
+        "mounted_adapter_block_equal": true,
+        "mounted_adapter_block_sha256": "5fb139ba08db12f65c4461bdba0869f01f7aa032f09523208961f35bf47f20c3",
+        "equal_input_paths": {
+          "tools/check_glyph_profile_store_migration_lifecycle.py": "5e7fce667a11e5ed323102445cf26c829a48fc2e5653bb254a246937a380ba23",
+          "tools/fixtures/profile_store_migration_lifecycle_host/checked_storage_unavailable.cpp": "a9fb4b1d005d773a1f62c7087b953d40c0baf7458a93b576afed8a7401f1fe2b",
+          "include/core/CheckedStorage.hpp": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e"
+        },
+        "baseline_failure_reproduced": true
+      },
+      "abi_note": "Existing checker host compile uses -fshort-enums; no extra default-enum run was added.",
+      "sanitizers": "address,undefined",
+      "source_references": [
+        {
+          "path": "HAL/pico/src/core/ProfileStore.cpp",
+          "line": 166,
+          "claim": "MountedStorage::CheckedWrite calls CheckedStorage::Write(file, b, n)."
+        },
+        {
+          "path": "HAL/pico/src/core/ProfileStore.cpp",
+          "line": 167,
+          "claim": "MountedStorage::CheckedWrite calls CheckedStorage::Sync(file)."
+        },
+        {
+          "path": "tools/fixtures/profile_store_migration_lifecycle_host/checked_storage_unavailable.cpp",
+          "line": 1,
+          "claim": "Fixture intentionally supplies fail-closed production-adapter definitions; Write(File&,const void*,size_t) and Sync(File&) are absent."
+        },
+        {
+          "path": "tools/check_glyph_profile_store_migration_lifecycle.py",
+          "line": 54,
+          "claim": "The existing command links checked_storage_unavailable.cpp instead of production CheckedStorage.cpp."
+        },
+        {
+          "path": "tools/check_glyph_profile_store_strict_host.py",
+          "line": 34,
+          "claim": "The separately passing strict host command includes production HAL/pico/src/core/CheckedStorage.cpp with the actual pinned LittleFS sources."
+        }
+      ],
+      "production_distinction": "This is a missing host fixture symbol/link gap before injected-storage lifecycle execution. It is not a failed firmware/target build and is not the result of the separately passing actual pinned-LittleFS mounted-storage checker. The root owns the current production Mk6 build and independent final-ELF review; this worker ran neither."
+    },
+    {
+      "name": "check_glyph_profile_store_strict_host",
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_strict_host.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "started_utc": "2026-10-20T14:22:37.887402+00:00",
+      "elapsed_seconds": 4.225,
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_strict_host.log",
+      "log_sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb",
+      "classification": "PASS_EXISTING_CHECKER",
+      "abi_note": "Existing checker host compile uses -fshort-enums; no extra default-enum run was added.",
+      "sanitizers": "address,undefined"
+    },
+    {
+      "name": "check_glyph_profile_store_strict_protocol",
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_strict_protocol.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "started_utc": "2026-10-20T14:22:42.115300+00:00",
+      "elapsed_seconds": 5.153,
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_strict_protocol.log",
+      "log_sha256": "2e7e0c3ebc57cb8ac72550440f6d8bbdd8a95bcc0787ddc2b11553bcdabd438d",
+      "classification": "PASS_EXISTING_CHECKER",
+      "abi_note": "Existing checker host compile uses -fshort-enums; no extra default-enum run was added.",
+      "sanitizers": "disabled by existing default (GLYPH_PROFILE_STORE_SANITIZERS was not set)"
+    },
+    {
+      "name": "check_glyph_profile_store_timeout_resynchronization",
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_timeout_resynchronization.py"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "started_utc": "2026-10-20T14:22:47.289674+00:00",
+      "elapsed_seconds": 7.531,
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_timeout_resynchronization.log",
+      "log_sha256": "a6f322d37d8a43ca6204d1b8cdaaee4a8896dc4f6c3e68427374c91ab880a5dc",
+      "classification": "PASS_EXISTING_CHECKER",
+      "abi_note": "Existing checker host compile uses -fshort-enums; no extra default-enum run was added.",
+      "sanitizers": "disabled by existing default (GLYPH_PROFILE_STORE_SANITIZERS was not set)"
+    },
+    {
+      "name": "check_glyph_profile_store_read_storage",
+      "argv": [
+        "/usr/local/bin/python3",
+        "tools/check_glyph_profile_store_read_storage.py",
+        "--output-dir",
+        "/private/tmp/glyph-native-repaired-consumers-bcb9824b/read-storage"
+      ],
+      "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot",
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+        "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+      },
+      "started_utc": "2026-10-20T14:22:54.843047+00:00",
+      "elapsed_seconds": 23.81,
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/check_glyph_profile_store_read_storage.log",
+      "log_sha256": "587d2217d6fc6138227dc28989ffe5428231e07f4f475c33cee8f49bb3a6b9cd",
+      "classification": "PASS_EXISTING_CHECKER",
+      "abi_note": "Existing checker host compile uses -fshort-enums; no extra default-enum run was added.",
+      "sanitizers": "address,undefined"
+    }
+  ],
+  "result": "COMPLETED_WITH_RETAINED_PREEXISTING_FAILURE",
+  "initial_commit": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "initial_tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "initial_status": "",
+  "initial_diff_stat": "",
+  "writer_initial_commit": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "writer_initial_tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "writer_initial_status": "",
+  "writer_initial_diff_stat": "",
+  "initial_remote": "origin\t/private/tmp/glyph-profile-native-20261020 (fetch)\norigin\t/private/tmp/glyph-profile-native-20261020 (push)",
+  "source_sha256": {
+    "tools/check_glyph_profile_store_migration_lifecycle.py": "5e7fce667a11e5ed323102445cf26c829a48fc2e5653bb254a246937a380ba23",
+    "tools/check_glyph_profile_store_strict_host.py": "1fb76187ce242572967921ac18ed5f9f6e2a7ca5452976898671e04faabd011f",
+    "tools/check_glyph_profile_store_strict_protocol.py": "fe385469e02754833765bbe72d5e6cc8119e65da228a9e1804165e6beda58177",
+    "tools/check_glyph_profile_store_timeout_resynchronization.py": "c8309321bffbd9b194204dc23e953b4d31301231a0ab300a153e8f20233b1765",
+    "tools/check_glyph_profile_store_read_storage.py": "64cca35b581f395ffd5ca0ed084c2c2cbc44fabbdca3443e8dc96664e9f36110",
+    "tools/check_glyph_stage_b_ultimate_profiles.py": "b9c8d1afd6f84f075a496fad75d49ba7fc7f877fbec38049e343e00b11722769",
+    "tools/check_glyph_profile_store_littlefs_host.py": "d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1",
+    "tools/check_glyph_profile_store_liveness_host.py": "60925e819cc53330a6f198888baf6b5387079887ae60d6851d9a70ab3e4c10ec",
+    "tools/glyph_serial_config_tool.py": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+    "HAL/pico/src/core/ProfileStore.cpp": "a5ea804c2f18b098776bef4d4d308792682bb48774cf5cc76886fe8b697ce666",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "7897cdea74dc04f73cbd65817e1352bededee6a91c185513a995e9cbe0861605",
+    "include/core/ProfileStore.hpp": "f8cb4759f8739d166f15e0db91d04c44b6e3d31fc4e0412a113f505dffedbc44",
+    "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+    "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "schema/haybox/config.options": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+  },
+  "toolchain": {
+    "python_executable": "/usr/local/bin/python3",
+    "python_version": "3.14.4 (v3.14.4:23116f998f6, Apr  7 2026, 09:45:22) [Clang 17.0.0 (clang-1700.6.4.2)]",
+    "cxx": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+    "cc": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin"
+  },
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+    "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+  },
+  "finished_utc": "2026-10-20T14:23:18.675606+00:00",
+  "baseline": {
+    "commit": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+    "tree": "9000056d2584f65a7ae8b40032c480d5a2250d28",
+    "snapshot": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+    "status": "",
+    "purpose": "Classify existing checker failures against exact immediate predecessor, using only same five selected checkers as needed.",
+    "checks": [
+      {
+        "name": "check_glyph_profile_store_migration_lifecycle",
+        "argv": [
+          "/usr/local/bin/python3",
+          "tools/check_glyph_profile_store_migration_lifecycle.py"
+        ],
+        "cwd": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/baseline",
+        "environment": {
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/tmp",
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico"
+        },
+        "elapsed_seconds": 1.766,
+        "exit_code": 1,
+        "result": "FAIL",
+        "log": "/private/tmp/glyph-native-repaired-consumers-bcb9824b/logs/baseline_check_glyph_profile_store_migration_lifecycle.log",
+        "log_sha256": "ba1f8582b740e86e93d21ff6c17fba8a211d785ed5a55f4d5df0cb69ae8c5d83"
+      }
+    ],
+    "comparison_note": "Immediate predecessor exact source and same checker reproduced the identical missing CheckedStorage::Write/Sync link failure. Entire MountedStorage adapter, checker, fail-closed fixture and CheckedStorage header match repaired F."
+  },
+  "final_commit": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "final_tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "final_status": "",
+  "final_diff_stat": "",
+  "writer_final_commit": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "writer_final_tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "writer_final_status": "",
+  "writer_final_diff_stat": "",
+  "baseline_final_commit": "ea137fc1f61d6acc0f1475c4165263eb661775da",
+  "baseline_final_tree": "9000056d2584f65a7ae8b40032c480d5a2250d28",
+  "baseline_final_status": "",
+  "baseline_final_diff_stat": "",
+  "fixture_source_sha256": {
+    "tools/fixtures/profile_store_liveness_host/lfs_alloc.h": "39f6e1ba919022a795eb0a3556f1fcbebec47ce32aa801f1f9ee435c48f6ef8a",
+    "tools/fixtures/profile_store_liveness_host/liveness_harness.cpp": "8bcffde2dc4cdf6ed79f142fcc938327d01d0013d57f8bcf290df73311571118",
+    "tools/fixtures/profile_store_migration_lifecycle_host/checked_storage_unavailable.cpp": "a9fb4b1d005d773a1f62c7087b953d40c0baf7458a93b576afed8a7401f1fe2b",
+    "tools/fixtures/profile_store_migration_lifecycle_host/include/LittleFS.h": "a80ee25105383a3e7e3be850be415f37df7f2daf3c5e4c081b35ce98581cc7d8",
+    "tools/fixtures/profile_store_migration_lifecycle_host/migration_lifecycle.cpp": "65e0de36c4eecbb1c5a170559864a6d1cbd5a764dafa59e5428340846c2e1dec",
+    "tools/fixtures/profile_store_read_storage/physical_id1_response.json": "a7db2b980f826845d060041233696d10038f46baf3765b0baf7212a09fe52050",
+    "tools/fixtures/profile_store_read_storage/physical_id22_response.json": "b30b8275c9fcab96d4177ee96b9626c7fe1759b2a62f798d543c2239cc4b5aed",
+    "tools/fixtures/profile_store_read_storage/physical_id3_response.json": "2429b2b10320a3d25655436868f58ecb1793b68b92ab4d045175e53cf63741e0",
+    "tools/fixtures/profile_store_read_storage/physical_id4_response.json": "e9e37bfff40a5a50239c260a651cc17d453dba78a0f5198914176b6a0f6d52b8",
+    "tools/fixtures/profile_store_read_storage/read_observer.inc": "c643bfeb07803bd390380a4dbf8d8979db78d695d0ee6c2b8962b7574cb5ed0e",
+    "tools/fixtures/profile_store_read_storage/read_tail.inc": "88ebd46920d11c4b5340e4c1208ecce8f8e2b2e95f016058e15ede1aa246e655",
+    "tools/fixtures/profile_store_strict_host/negative_harness.cpp": "ab1e5ba3c1c8d6d9e147f46433907dd9357c25613695cf690e3af4b770557497",
+    "tools/fixtures/profile_store_strict_host/strict_harness.cpp": "f1f4c2698d996578efbb91d78ed8b461dd7b6775e061c71ffff20762f011bced",
+    "tools/fixtures/profile_store_timeout_host/checked_storage_unavailable.cpp": "b283926c2b2cae06a4de47c3f431ae23e98d49e8d9860757fb2bad181a6bc9d2",
+    "tools/fixtures/profile_store_timeout_host/include/Arduino.h": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/include/LittleFS.h": "e2c16945e2885ab45ef6533d83a2ba87d85fef6a926e0b9404ed838242723d4c",
+    "tools/fixtures/profile_store_timeout_host/include/Print.h": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/include/Stream.h": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/include/arduino/Adafruit_USBD_Device.h": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/include/core/CommunicationBackend.hpp": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/include/core/InputSource.hpp": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/include/core/Persistence.hpp": "df832cf624544db67016e621636925c055caee4b3e673d9f700a4a1b8ad3e75f",
+    "tools/fixtures/profile_store_timeout_host/include/core/ProfileStore.hpp": "5ec21ff3a31fe9f7713e38fbb1e467e4d8f6c233af319af82cc3daa678dfcc42",
+    "tools/fixtures/profile_store_timeout_host/include/core/config_validation.hpp": "951dd4a5d6a65c0e112e0debd0698bcd117939db69560c8711a7d46356cc9be6",
+    "tools/fixtures/profile_store_timeout_host/include/host_stubs.hpp": "c44d2c03642ceab352dccfc221b44e70fb9a3c4a0ca650c4b0afd943f705ce4c",
+    "tools/fixtures/profile_store_timeout_host/include/reboot.hpp": "b62d36f6243f4b8b0f7b7bbba32960ea30a8935a703da22573d89bd9f6d7041c",
+    "tools/fixtures/profile_store_timeout_host/timeout_harness.cpp": "bca272e30551d44ce4c391d30c123112e091932d1d44dbaf1b9c9636df292ec1"
+  },
+  "context_paths_sha256": {
+    "AGENTS.md": "e4e80f93c6e091ba7211e262918bbceae39abbed51bb7589f7f1425a3c3a5cee",
+    "docs/AGENT_CONTEXT.md": "c1d05baa3a83d0a340962886b72c94484c2580f075435927e9ee947183e24fe3",
+    "docs/CURRENT_STATE.md": "3d89f159d96c1b59d574955f46782349f28af7ab6f9e178377c7fb767cefdd09",
+    "docs/ROADMAP.md": "1a46afd5cc0a1f7e194d963fc0ff4c0c7a5c905258b20ef9ab6633bcd664492e",
+    "docs/WORKFLOW.md": "13579e2fe89034e89a6e71c596a0ecdd4a9e197e67618f314b135d7b60e7c43f",
+    "docs/runtime_config/IMPLEMENTATION_BOUNDARY.md": "e66874fa0544fcfa7d65082578b660761ff4480e0657894159bb6ea679fd6567",
+    "docs/agent_framework/README.md": "c45ab7a747260c413d18b4fc36495b80404312d35211703e15e353805dd9aee7",
+    "docs/project/ACTIVE_AGENT_QUEUE.md": "95a3a90e19c76759dfba9f465f7886b33392a649dedb994553fd74902944d501",
+    "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md": "1d653da1759838305eaf8b6f36196af842d19a84a3f3393bf4d471c2ce18fa09",
+    "docs/agent_framework/SUBAGENT_CONTRACTS.md": "b4f5bbb7fff9c8e380c1a8f5fb8d0f66c2a961ab445f325587423e21589be80f",
+    "docs/agent_framework/MODEL_ROUTING.md": "91a945eeb69a12590b88f6e9869d2baef237968a5885100348a24ba01e073115",
+    "docs/runtime_config/profile_native_ultimate/diagnostic_scope_amendment_20261020.json": "3d8684b96663250b4631cf31aaef4323e7eba122ae7e50e135bc04e6a21cfa51"
+  },
+  "dependency_inputs_sha256": {
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/package.json": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs_util.c": "b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.h": "bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs_util.c": "8e1376a90e923a2897388a54ebaa756ad3ea07a0e2a87e73c0045515c0a82685",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs_util.h": "825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.pio/libdeps/glyph_mk6/Nanopb/pb_common.c": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.pio/libdeps/glyph_mk6/Nanopb/pb_decode.c": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.pio/libdeps/glyph_mk6/Nanopb/pb_encode.c": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.pio/libdeps/glyph_mk6/Nanopb/pb.h": "e0db84a27e0d41a2d2d347b8c879e30ceb856d36dc192cce0f1124f833c67bc2",
+    "/private/tmp/glyph-native-repaired-consumers-bcb9824b/snapshot/.pio/libdeps/glyph_mk6/Nanopb/generator/nanopb_generator.py": "67d3c5e6de1e5dbd9f45bb4e5b7055d888d1afd6d6e1690791ab8607b6c6b738"
+  },
+  "coverage_limitations": [
+    "Migration lifecycle did not link and therefore executed no lifecycle behavioral assertion.",
+    "No modifications to checker assertions, fixture stubs, source or SDK were made.",
+    "Only selected existing host checkers were run; no aggregate, broad native rerun, firmware build, live GitHub verification, port/device action or hardware acceptance occurred.",
+    "Strict protocol and timeout use their existing sanitizer-disabled default; short-enum host ABI is the existing checker ABI.",
+    "Retained physical-response JSON reconstruction is historical offline evidence and supplies no new physical observation or USB-causality claim.",
+    "Full-stack/transport/final-ELF independent source review belongs to the separately assigned reviewer."
+  ],
+  "completion_utc": "2026-10-20T14:24:30.941866+00:00",
+  "new_failure_identified": false,
+  "missing_validation": "migration_lifecycle behavioral coverage unavailable due preexisting fixture link gap"
+}

@@ -1,0 +1,10 @@
+{
+  "built_f": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "built_tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "tracked_diff_before_evidence_commit": [
+    "tools/check_glyph_profile_store_migration_lifecycle.py"
+  ],
+  "production_source_blobs": "BYTE_IDENTICAL_TO_BUILT_F",
+  "frozen_migration_fixture_sha256": "a9fb4b1d005d773a1f62c7087b953d40c0baf7458a93b576afed8a7401f1fe2b",
+  "later_docs_host_checkpoint_is_built_f_label": false
+}

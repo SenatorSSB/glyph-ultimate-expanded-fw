@@ -1,0 +1,18 @@
+{
+  "state": "REJECTED_ANALYSIS_PROTOTYPES_NOT_PRODUCTION_OR_DEVICE_ARTIFACTS",
+  "baseline_candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "compiler_recipe": "docs/runtime_config/profile_native_ultimate/native_production_stack_final/compile_commands.json",
+  "object_sha256": {
+    "isolated-dispatch.o": "614c7f30df7aa143df23aac61309bbec472993538f39d9dbe7c37c7fc31baaaa",
+    "single-create-body.o": "805043cc32dc2211bd1db3a19ffcea01bc68846e190be1072f49e91cfcd4c0ce",
+    "status-list-only.o": "24eff3080272d9fdfb055bac6fde4ebb56dcd1b676de172c468793abd75514f6",
+    "single-create-snapshotted.o": "5e93d8a4b6bc21cfb961858375c44e9b196c782d88a010d08f0c50af9f5094dd"
+  },
+  "results": {
+    "shared_inline_Create_body": "Duplicate40 vs current Duplicate32+Create32: saving24; insufficient, not adopted",
+    "snapshotted_inline_Create_body": "Duplicate56: saving8, not adopted",
+    "status_list_isolation": "Dispatch72 vs current64: regression8, rejected",
+    "status_list_and_finalization_isolation": "Dispatch72 vs current64 plus helper; rejected"
+  },
+  "final_whole_stack_bound": "NOT_ESTABLISHED"
+}

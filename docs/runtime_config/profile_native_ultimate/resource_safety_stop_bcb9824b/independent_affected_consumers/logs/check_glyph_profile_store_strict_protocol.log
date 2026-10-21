@@ -1,0 +1,5 @@
+profile_store_strict_protocol=PASS
+profile_store_strict_protocol=PASS
+profile_store_rx_backend=PASS partial_ticket_inert=true pulse_retains_timeout=true trace_after_eop=true admission_before_activation=true ordered_stages=true query=true failed_trace_disarms=true
+profile_store_liveness_protocol=PASS profiles=20 updates=128 arm_loss_cycles=1024 mixed_frames=7680 trace_stages=9 slow_trickle=bounded
+glyph_profile_store_strict_protocol: PASS

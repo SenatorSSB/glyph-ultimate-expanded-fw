@@ -1,0 +1,315 @@
+{
+  "source_sha": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "captured_utc": "2026-10-20T14:20:13.101949+00:00",
+  "kind": "FOCUSED_BUILD_INPUT_PINS_WITH_RETAINED_SDK_PACKAGE_INVENTORY",
+  "sdk_inventory_basis": {
+    "path": "/private/tmp/glyph-native-exact-build-ea137fc1f61d-instrumented-p1-open-clean/build_dependency_pins.json",
+    "sha256": "308066cf2dd5e4dbed652513667b31a301827b1d235f4a26bf5977a134604361",
+    "files": 34163
+  },
+  "fresh_focused_files": {
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/ArduinoCore-API/test/src/main.cpp": {
+      "bytes": 302,
+      "sha256": "8a0af734ebd9376242868aa2136da1304c128a4d6eb880d38515c683c3aeaf72"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp": {
+      "bytes": 10545,
+      "sha256": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.cpp": {
+      "bytes": 1207,
+      "sha256": "e45de2528ef4467ff461cc54ec384254bd785c8eaf2d1adbe9598be411b3cb97"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/delay.cpp": {
+      "bytes": 1647,
+      "sha256": "1f12e590c041dea9231dd45b0f5c42b90ccb3000373f50570d2bdeccdf233454"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/examples/HID/hid_generic_inout/package.json": {
+      "bytes": 331,
+      "sha256": "919e8f3b94a850998381776daaaea016792d000270d949feb652e8bf154cc342"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp": {
+      "bytes": 7486,
+      "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "bytes": 4652,
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": {
+      "bytes": 15750,
+      "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c": {
+      "bytes": 34850,
+      "sha256": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": {
+      "bytes": 46830,
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c": {
+      "bytes": 7503,
+      "sha256": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": {
+      "bytes": 18095,
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c": {
+      "bytes": 13930,
+      "sha256": "8ddbcab9ba5f8abe68b5af78eb471f67093076d9c8c0357acc1498e1185c200e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": {
+      "bytes": 173893,
+      "sha256": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp": {
+      "bytes": 8305,
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c": {
+      "bytes": 340,
+      "sha256": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/package.json": {
+      "bytes": 401,
+      "sha256": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/btstack/port/qt-h4/main.cpp": {
+      "bytes": 10701,
+      "sha256": "baa566be2fc255fa9feb998236e6999796287b87cfa4380ff6c517746ceee1bf"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/btstack/port/qt-usb/main.cpp": {
+      "bytes": 9774,
+      "sha256": "697ea7422df55cd9ac6b4a4fcdec66b7d1b583ecd522fb38e12f0562dc37fe77"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/lwip/contrib/ports/win32/check/time.c": {
+      "bytes": 1326,
+      "sha256": "deabd310fc35ff3e2522b9576d7831d4b5289ab8a35b01a36bf8a2462fa64c6d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/allwinner/f1c100s/machine/exception.c": {
+      "bytes": 2054,
+      "sha256": "6ede1f2e7ac02bc2b694323f366387440e2484a53881025a7ce0f2e27c7cb4e0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/bridgetek/ft9xx/ft90x-sdk/Source/src/usbd.c": {
+      "bytes": 62883,
+      "sha256": "cd01edc99573447580c37694812c423156da701cc92e4d47aaba9d0214eba338"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/gd/nuclei-sdk/OS/RTThread/src/irq.c": {
+      "bytes": 2592,
+      "sha256": "239b2f4e3c03101a2e53998efc17af4a7c5915b024697fe861ecf92ae27753e1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/gd/nuclei-sdk/OS/RTThread/src/timer.c": {
+      "bytes": 19240,
+      "sha256": "56a4ac46b9294b258c29da5eae9913e7a52b071590b5c21f53788c6c431477c6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/gd/nuclei-sdk/package.json": {
+      "bytes": 319,
+      "sha256": "bcc3da6e24925a167f188191f7b3c5e360d43e73307644d6e07a29dea4079706"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc100_120/StdDriver/src/timer.c": {
+      "bytes": 9217,
+      "sha256": "6e2200b7ad3ae6e71f2c26a85575b9eb98d2bc127162dc5168793b97db8522d1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc100_120/StdDriver/src/usbd.c": {
+      "bytes": 20877,
+      "sha256": "5dfcd46f74391cd8642a98241d43ffa73c149f06ad0d178d6ce0be5c546a1fcf"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc121_125/StdDriver/src/timer.c": {
+      "bytes": 9829,
+      "sha256": "99c7348a6b4a5f6a4d089be4406b78a23327ffb8082d4e54e2faaebad946f88c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc121_125/StdDriver/src/usbd.c": {
+      "bytes": 22394,
+      "sha256": "ae03b1ad9f1be89ab82e682383b724881e1cfa707fc0abbb24e4de44724f307e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc126/StdDriver/src/timer.c": {
+      "bytes": 12352,
+      "sha256": "5208072624885f1a90b7fd6d866f75f02c1cc46ab685f3139d2a7c2b9d5f072d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc126/StdDriver/src/usbd.c": {
+      "bytes": 23511,
+      "sha256": "6e33b3913c204aec98fdf7eff24918a513fe7685369be74dec9f82b99c6dbbc4"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc505/StdDriver/src/timer.c": {
+      "bytes": 8058,
+      "sha256": "07ec865fd9d65575f97da762a02fed08b36545f6ca7e7f302c4903d823fe670c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/nuvoton/nuc505/StdDriver/src/usbd.c": {
+      "bytes": 18227,
+      "sha256": "51e915154357dd94ffc9cb66d7bdd03213348f66c354ef91b255f5c969e5408a"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/Application/8_uarts_server/RT-Thread/uart_server_rtt/rt-thread/components/drivers/rtc/alarm.c": {
+      "bytes": 21775,
+      "sha256": "7816e0bb7d0a73f815057c3f268b75ed96d877bc18ea2cc21804ced523c5dfd9"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/Application/8_uarts_server/RT-Thread/uart_server_rtt/rt-thread/components/libc/compilers/common/time.c": {
+      "bytes": 15324,
+      "sha256": "c4e09991b2e2c87b38b762fa148a99d701a94767edadcddc5b1218f6f2776146"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/Application/8_uarts_server/RT-Thread/uart_server_rtt/rt-thread/src/irq.c": {
+      "bytes": 2938,
+      "sha256": "650ffe99092ce0ce7311e551ab5fc5812b304c94ac408fcae9c16224371a8ec0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/Application/8_uarts_server/RT-Thread/uart_server_rtt/rt-thread/src/timer.c": {
+      "bytes": 21342,
+      "sha256": "346817f749a1e7e477bccc41a155d53fd5ea6e51e3755c553b0c5c94f679a72b"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/EVT/EXAM/HarmonyOS/LiteOS_m/LiteOS/kal/posix/src/time.c": {
+      "bytes": 18684,
+      "sha256": "9d36183c9325299a5c4b824813c16920d538712ca10e8b939aa9b392b78ca773"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/EVT/EXAM/RT-Thread/rt-thread/rtthread/src/irq.c": {
+      "bytes": 2592,
+      "sha256": "239b2f4e3c03101a2e53998efc17af4a7c5915b024697fe861ecf92ae27753e1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/hw/mcu/wch/ch32v307/EVT/EXAM/RT-Thread/rt-thread/rtthread/src/timer.c": {
+      "bytes": 19240,
+      "sha256": "56a4ac46b9294b258c29da5eae9913e7a52b071590b5c21f53788c6c431477c6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/lib/CMSIS_5/CMSIS/DSP/Testing/main.cpp": {
+      "bytes": 63,
+      "sha256": "88a576046f162deb6cda76c1a8e17a6e0a994958fcb7e076d5107f7ced8f8f6c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c": {
+      "bytes": 14866,
+      "sha256": "f89dd32b1efd02a9ef42080482df7b51fce5d1585711fa8ce39751fcfd4ec2e4"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c": {
+      "bytes": 33783,
+      "sha256": "b6fb61cf0f9421b6d6d26f4b84e9d2d5c9199e81a6490913a8efd4c10d6f9499"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src/device/usbd.c": {
+      "bytes": 43486,
+      "sha256": "c8201e62a5ec5684e6ea9d97bdd5b18b5251fc924aaebc191c85afc2af91e0b2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src/device/usbd_control.c": {
+      "bytes": 7045,
+      "sha256": "b8d26e8f3361f0534f751c661ce84d2de4cfafa785ff02b5fbb0318fc5ff3148"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c": {
+      "bytes": 17298,
+      "sha256": "dbc5b6f2ba1f29cd79ea13db42c01994a6d8f67f17a3ee3e8c266222023aee70"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/lib/tinyusb/src/tusb.c": {
+      "bytes": 13303,
+      "sha256": "258969e1cea64a7e435b390fc40a710b2a625a41faf4357a38877df018e25dd1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_sync/mutex.c": {
+      "bytes": 6845,
+      "sha256": "ffa89c16fcc806c3799a9bb06e170c7949c667b1bb84db7f8172f75d9376ee04"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/time.c": {
+      "bytes": 17699,
+      "sha256": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/host/hardware_timer/timer.c": {
+      "bytes": 3581,
+      "sha256": "65474fa11b06fab604d64a55645c667724b50c8a035ae7468d016bde2c073af5"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_exception/exception.c": {
+      "bytes": 2216,
+      "sha256": "749662f739699b711bc46ff0c24ca237dec01f70468788e6dfcea2ff53521c55"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/irq.c": {
+      "bytes": 19500,
+      "sha256": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_sync/sync.c": {
+      "bytes": 1824,
+      "sha256": "8e8a60f7007696d8049012b07fa74d42ac1494878e1f3df7d7d114600e1b19fe"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_timer/timer.c": {
+      "bytes": 8960,
+      "sha256": "b275a48c63d9e276cebb05b84cc37842146b08ba766dadcc243580f52b0b0e67"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c": {
+      "bytes": 10079,
+      "sha256": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/tools/elf2uf2/main.cpp": {
+      "bytes": 16520,
+      "sha256": "ef9a2ed608bf9ac93ff21da2e01b54326ca32498b5726f3228d2a3c8af2ab3f4"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/tools/pioasm/main.cpp": {
+      "bytes": 3524,
+      "sha256": "697eab81b54963684670aa4a3edf244e67dec3d4b11b7638c97ba8cc7fcba1fd"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/tool-picotool-rp2040-earlephilhower/package.json": {
+      "bytes": 225,
+      "sha256": "71dc135226e9bc30be4b8bdd9f8aed3e1604c9c1b519bec41c24a11b9513446e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/tool-scons/package.json": {
+      "bytes": 647,
+      "sha256": "e4c25069254659e84a0d150348e7b08b215577fad7a9d8843c58f64ad22ddbbf"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-g++": {
+      "bytes": 1589345,
+      "sha256": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-gcc": {
+      "bytes": 1589345,
+      "sha256": "a67dc17a0f7b8f0b5dafb8c57f6210495403d108d868c23d56aeaa8f1677aa24"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-ld": {
+      "bytes": 1825219,
+      "sha256": "9622e2c05386612dea96061663e956331c44bf7f4664d43f21f54d6496970d16"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/toolchain-rp2040-earlephilhower/package.json": {
+      "bytes": 222,
+      "sha256": "2d4cbf63aee9cc13f3b2a8344aebef39338afbf15850602e39a97ce6956ca086"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/platforms/raspberrypi/examples/arduino-blink/src/main.cpp": {
+      "bytes": 508,
+      "sha256": "6dd67a77888fb770311c5f3f7d5460b369186f087f0356bbcdd97ae12a92e0df"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/platforms/raspberrypi/examples/arduino-external-libs/src/main.cpp": {
+      "bytes": 4560,
+      "sha256": "6090b9cbb12317346b9254a178eb7ecffdf89557cb9cd46649a41ed613b5d5ec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/platforms/raspberrypi/examples/arduino-ota/src/main.cpp": {
+      "bytes": 2098,
+      "sha256": "b1d4b7c313d6c07b6357d50585d6b41829adcb96907946b3b98f06b6980007c1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/platforms/raspberrypi/examples/arduino-signed-ota/src/main.cpp": {
+      "bytes": 2098,
+      "sha256": "b1d4b7c313d6c07b6357d50585d6b41829adcb96907946b3b98f06b6980007c1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/platforms/raspberrypi/examples/arduino-wifi-scan/src/main.cpp": {
+      "bytes": 1236,
+      "sha256": "4b0534c873b06d6a0c37f24dc7b8341b6cfeaca86c9e95ef0ffc5c087372b798"
+    },
+    "/private/tmp/glyph-profile-native-20261020/platformio.ini": {
+      "bytes": 3517,
+      "sha256": "7093257a6c85ef5a325ee49a86e97f56a12f2bfdac467edfde29ba56399fd405"
+    },
+    "/private/tmp/glyph-profile-native-20261020/builder_scripts/native_target_metrics.py": {
+      "bytes": 1953,
+      "sha256": "ce41658b2e69eb61877ce27b3a5c345aa2980ad503db9a721f86a4198a985914"
+    },
+    "/private/tmp/glyph-profile-native-20261020/scripts/build-glyph-mk6-quiet.sh": {
+      "bytes": 349,
+      "sha256": "328ff73b9f1da1ccad5d7ee0431b664b9c33a70c35959e4a14f6677881844eeb"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/native_target_metrics/native_target_source.hpp": {
+      "bytes": 227,
+      "sha256": "1a5d6049df7552e1a34d8fc60558c4e7424428e59f86e0d6d0144cc94c7cba1c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h": {
+      "bytes": 125759,
+      "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.c": {
+      "bytes": 1774,
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    }
+  },
+  "fresh_sdk_changes_vs_basis": [],
+  "qualification": "Actual new source/build/generated files and focused SDK/toolchain pins freshly hashed. Broader34163-file inventory retained from same unchanged SDK packages; not falsely claimed fully rerun or environment archived."
+}

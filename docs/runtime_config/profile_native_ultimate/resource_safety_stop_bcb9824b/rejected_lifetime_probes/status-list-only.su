@@ -1,0 +1,51 @@
+.platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:61:17:virtual int arduino::Print::availableForWrite()	0	static
+.platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:96:18:virtual void arduino::Print::flush()	0	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:128:18:virtual void packetio::COBSStream::flush()	8	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:143:18:virtual void packetio::COBSStream::next()	0	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:151:12:virtual size_t packetio::COBSStream::write(uint8_t)	0	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:152:12:virtual size_t packetio::COBSStream::write(const uint8_t*, size_t)	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:142:24:virtual CommunicationBackendId ConfiguratorBackend::BackendId()	0	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-headers/comms/ConfiguratorBackend.hpp:32:7:ConfiguratorBackend::~ConfiguratorBackend()	0	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:68:9:virtual int CoordinatedCdcStream::availableForWrite()	16	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:75:10:virtual void CoordinatedCdcStream::flush()	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-headers/comms/ConfiguratorBackend.hpp:32:7:virtual ConfiguratorBackend::~ConfiguratorBackend()	8	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:128:18:virtual void packetio::COBSPrint::abort()	16	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:452:39:void CaptureStoreCapacity(ProfileStore::CapacityInfo&)	72	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:88:17:virtual int packetio::COBSStream::read()	16	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:114:12:virtual size_t CoordinatedCdcStream::write(const uint8_t*, size_t)	32	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:132:17:virtual int packetio::COBSStream::available()	16	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Stream.h:114:17:virtual int packetio::COBSStream::peek()	16	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:25:9:virtual int CoordinatedCdcStream::available()	24	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:32:9:virtual int CoordinatedCdcStream::peek()	24	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:39:9:virtual int CoordinatedCdcStream::read()	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:57:12:virtual size_t {anonymous}::ProfilePacketWriter::write(const uint8_t*, size_t)	32	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:108:18:virtual bool packetio::COBSPrint::end()	24	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:93:20:virtual size_t packetio::COBSPrint::write(const uint8_t*, size_t)	32	static
+HAL/pico/include/comms/CoordinatedCdcStream.hpp:113:12:virtual size_t CoordinatedCdcStream::write(uint8_t)	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:56:12:virtual size_t {anonymous}::ProfilePacketWriter::write(uint8_t)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:147:39:bool SendProfileDelimiter(CoordinatedCdcStream&)	40	static
+include/core/ProfileStoreRequestIdentity.hpp:18:23:static constexpr bool ProfileStoreRequestIdentity(ProfileStoreRequest&, ProfileStoreTransactionIdentity&)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)	184	static
+.pio/libdeps/glyph_mk6/PacketIO/src/cobs/Print.h:82:20:virtual size_t packetio::COBSPrint::write(uint8_t)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:449:39:bool PrepareStoreIdentity(ProfileStoreRequest&, ProfileStoreTransactionIdentity&)	344	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:91:6:bool ConfiguratorBackend::WriteProfilePacket(Command, const uint8_t*, size_t, size_t*, bool*)	344	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:125:1:ConfiguratorBackend::ConfiguratorBackend(InputState&, InputSource**, size_t, Config&, arduino::Stream&)	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:221:8:size_t ConfiguratorBackend::ReadPacket(uint8_t*, size_t)	40	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:207:6:bool ConfiguratorBackend::HandleRuntimeIdentity()	136	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:277:5:int ConfiguratorBackend::ReadByte()	24	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:284:6:void ConfiguratorBackend::SkipToNextPacket()	8	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:288:6:bool ConfiguratorBackend::WritePacket(Command, uint8_t*, size_t)	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:334:6:0()	304	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:296:6:bool ConfiguratorBackend::HandleGetDeviceInfo()	88	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:317:6:bool ConfiguratorBackend::HandleGetConfig()	72	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:334:6:bool ConfiguratorBackend::HandleSetConfig()	48	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:474:32:bool ConfiguratorBackend::ReceiveProfileStore()	56	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:534:36:unsigned int ConfiguratorBackend::PrepareStoreMutation()	72	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:586:32:void ConfiguratorBackend::PerformCheckedReference()	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:628:32:bool ConfiguratorBackend::ReadStoreProfile()	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:644:32:bool ConfiguratorBackend::FillStoreStatus()	16	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:698:32:void ConfiguratorBackend::FillStoreList()	32	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:717:32:bool ConfiguratorBackend::DispatchProfileStore()	72	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:899:32:bool ConfiguratorBackend::RespondProfileStore()	64	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:465:6:bool ConfiguratorBackend::HandleProfileStore()	16	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:931:32:bool ConfiguratorBackend::HandleUnknownCommand(Command)	64	static
+/private/tmp/glyph-native-workspace-probes/finite-next/status-list-only.cpp:151:6:virtual void ConfiguratorBackend::SendReport()	24	static
