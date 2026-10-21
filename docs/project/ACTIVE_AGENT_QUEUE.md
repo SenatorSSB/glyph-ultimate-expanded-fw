@@ -1,5 +1,24 @@
 # Active Agent Queue
 
+## Broader filesystem support retained — 2026-10-21 owner resume
+
+The [direct owner decision](../runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md) resolves the prior domain question: preserve
+currently admitted filesystem states, including unrelated directories and applicable
+orphan/PENDING_MOVE recovery. No pristine-history restriction or compatibility
+reduction is permitted. Exact linked co-liveness analysis and bounded engineering
+resume within GP-NATIVE-001; the structural resource gate remains OPEN under all
+unchanged limits and closed paths. Earlier failed/incomplete evidence and exact
+artifact custody remain preserved. No device action or hardware acceptance is granted.
+
+## Native implementation resource gate — 2026-10-21
+
+The isolated native implementation builds within static RAM/flash limits, but
+whole-stack safety remains incomplete. Execution is at an owner filesystem-domain
+decision; see the [exact checkpoint and remaining gate](../runtime_config/profile_native_ultimate/resource_safety_gate_20261021.md).
+No hardware handoff, firmware integration or completion is claimed. This factual
+source-free status leaves the existing READY order, authority and limits unchanged;
+its substantive-stop conditions apply.
+
 ## Owner-authorized native diagnostic exception — 2026-10-20
 
 The later direct owner reply authorizes retained bounded native timing and
