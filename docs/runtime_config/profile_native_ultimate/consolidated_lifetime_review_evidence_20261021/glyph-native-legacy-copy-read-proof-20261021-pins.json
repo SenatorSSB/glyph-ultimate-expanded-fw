@@ -1,0 +1,194 @@
+{
+  "kind": "FINITE_LEGACY_COPY_READ_CHECKPOINT_SDK_ELF_AND_ANALYSIS_PINS",
+  "files": {
+    "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.md": {
+      "bytes": 14077,
+      "sha256": "0097e512a79245fdbcb4ef9bccbd3a9ae8dfb20e6a86e1c0761ee551cf35ff26"
+    },
+    "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.json": {
+      "bytes": 2897,
+      "sha256": "99a46bef5bd734e6a48cdaf258aa7269318363da1e71e81e4b58654f480dbf01"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/manifest.json": {
+      "bytes": 23213,
+      "sha256": "0bf7b4a123d10254795d7a36e0dd130b8013b720231103ca133d4c63536cd46c"
+    },
+    "/private/tmp/glyph-native-bcb9824b-linked.disassembly.txt": {
+      "bytes": 11329913,
+      "sha256": "dbea5bad3ea90d7a5d04d8ba3b402dc618475cc1de80415c67e088e4fbe26fb0"
+    },
+    "/private/tmp/glyph-native-core1-symbol-extents.txt": {
+      "bytes": 371208,
+      "sha256": "86a16e88a16f9a539ac9f6c7616494e25aa645856c7f0a8151add5a66c3be036"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021.md": {
+      "bytes": 19948,
+      "sha256": "bd39d238f52c114fa97da3863006a3168041b4a5a59ca6c0246dce857b600923"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021-manifest.json": {
+      "bytes": 15566,
+      "sha256": "f2da41a6c12f96f5db6e660af42b60d9d35cd7dfbeeb8d078b7d664b96cb4821"
+    },
+    "/private/tmp/glyph-native-mode-destination-irq-upper-proof-20261021.md": {
+      "bytes": 16212,
+      "sha256": "485854b38a56a14d55607ce8250217f97e4085c4791a37fd36d0b04bab7f5727"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/Persistence.o": {
+      "bytes": 37004,
+      "sha256": "deed0dde644d627466c5d3a4b8d01f724e5f0b8859a155be731640b867067d4b"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/Persistence.su": {
+      "bytes": 6961,
+      "sha256": "02ac8d2377f061db658900f127f0249791936a4bd190bce2bac729dd388870b3"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/Persistence.disassembly.txt": {
+      "bytes": 330365,
+      "sha256": "35813b4f85007d19dd2eaae6bfa29820f451b5578e21f77f9247f30b3c53a877"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/Persistence.symbols.txt": {
+      "bytes": 5905,
+      "sha256": "b0a6c16aaba0edfef7a5ef75be1e619119b29396af71c5005f9c7cdbbe869915"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/Persistence.checkpoint-source.cpp": {
+      "bytes": 27847,
+      "sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ProfileStore.o": {
+      "bytes": 92216,
+      "sha256": "e99151c8c692a3177cd6a4b2da1cc0945328711d86b84516754da409c09dea95"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ProfileStore.su": {
+      "bytes": 18363,
+      "sha256": "46f967e3b795e0f626ce7269205e00b626f5101f2c9a20a3d9ed6857c741c662"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ProfileStore.disassembly.txt": {
+      "bytes": 713407,
+      "sha256": "0f9bec3dca9d0489f08bb0549a4670ff6a6440ffc1a62d0275182961861d05b2"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ProfileStore.symbols.txt": {
+      "bytes": 16055,
+      "sha256": "f786184f3cf2719f2dda3c1b643bda4af5d41a3b1568d9f9675e16d290ddb10b"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ProfileStore.checkpoint-source.cpp": {
+      "bytes": 79972,
+      "sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ConfiguratorBackend.o": {
+      "bytes": 47728,
+      "sha256": "5797fca447ca5411c34d0cfe39d08f40a91004ee11bf279639f53a0c3725632b"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ConfiguratorBackend.su": {
+      "bytes": 6992,
+      "sha256": "5e34d1cef75df660f94bf6a168cc95add44e6adf1da2c1a1ab99a41a7bd141ff"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ConfiguratorBackend.disassembly.txt": {
+      "bytes": 388717,
+      "sha256": "835cb90178f29b87cf14cc3a737d5eab02c71b3310a53fc06a0a218ffb78fadc"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ConfiguratorBackend.symbols.txt": {
+      "bytes": 9092,
+      "sha256": "08b65a881254ace7add0d83737e3172e07664a849b285394bbdfe163c3f49029"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/ConfiguratorBackend.checkpoint-source.cpp": {
+      "bytes": 48085,
+      "sha256": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/config.o": {
+      "bytes": 63344,
+      "sha256": "dfe02853a35ea893d0a8b0cd25e5a2bf75e37ac7bbcf7cb396673ec0c9f40ffd"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/config.su": {
+      "bytes": 8157,
+      "sha256": "742eeb3ca94c045a4a94a8ec112fc77264dadfd04b0efd644187301cb602e704"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/config.disassembly.txt": {
+      "bytes": 513295,
+      "sha256": "0b6f5fba0adf9fa773193bf9a71c7ad952cb5d5a7d3d33127c240b2ca20cecf3"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/config.symbols.txt": {
+      "bytes": 13808,
+      "sha256": "b46ea7037d00ed354aa00e606c124554e32579fa3365eee5b5300174283d6a48"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/config.checkpoint-source.cpp": {
+      "bytes": 17902,
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/mode_selection.o": {
+      "bytes": 8248,
+      "sha256": "7327d5084050db42c7915ee26e7d7727d56f2662fdc98a468ac610f40e3fc13d"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/mode_selection.su": {
+      "bytes": 1208,
+      "sha256": "986231d8381327c9a1db2ce5c6ee31a018aef86a5101aa5a7121ec95ad503c2a"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/mode_selection.disassembly.txt": {
+      "bytes": 27938,
+      "sha256": "ef663d03c065506c323e54eba2ff7661256b2b6ba48db1eca4b300e671e1c0d1"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/mode_selection.symbols.txt": {
+      "bytes": 2444,
+      "sha256": "2ec155ef87842eb2d954dd5a470e220b2b6d1b64f9fb8a87d86574e6ac4d2fa5"
+    },
+    "/private/tmp/glyph-native-frozen-boot-capture-20261021/mode_selection.checkpoint-source.cpp": {
+      "bytes": 10045,
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp": {
+      "bytes": 10028,
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/include/core/CheckedStorageFile.hpp": {
+      "bytes": 2782,
+      "sha256": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": {
+      "bytes": 173893,
+      "sha256": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h": {
+      "bytes": 20151,
+      "sha256": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp": {
+      "bytes": 8305,
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h": {
+      "bytes": 8789,
+      "sha256": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_TinyUSB_API.cpp": {
+      "bytes": 2878,
+      "sha256": "d3ccfba32fe1eac05d86a471720368b0a5ebbda85ac8a36c55b9d34486a326d0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp": {
+      "bytes": 17806,
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "bytes": 4652,
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    "/private/tmp/glyph-native-repaired-freeze-stack/HAL_pico_src_core_Persistence_cpp.su": {
+      "bytes": 3775,
+      "sha256": "4f60bdb7e6ff5bddcb844bd6d0a1e5ffbaf7f7c5cf903e32d9488bce7d91ac51"
+    },
+    "/private/tmp/glyph-native-repaired-freeze-stack/_platformio-home_packages_framework-arduinopico_libraries_LittleFS_src_lfs_c.su": {
+      "bytes": 8987,
+      "sha256": "19316864b7e4e8dba8e82b8bc5ee58aedba102e83a1a98d0ba2b4d3ad44f5f44"
+    },
+    "/private/tmp/glyph-native-repaired-freeze-stack/_platformio-home_packages_framework-arduinopico_libraries_LittleFS_src_LittleFS_cpp.su": {
+      "bytes": 19904,
+      "sha256": "e4b71c5ab8d1c6c226ac90531745c46de091bbfa7be73e682511a4abb3bd834f"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/bcb9824bc00c6210babdf00675952deeda7f7c88/f2c06c41b84aa57c47f44a4eaf53770187cc75287073620e6e6c7e6d0a529057/firmware.elf": {
+      "bytes": 5590084,
+      "sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884"
+    }
+  },
+  "checkpoint_git_tree_independently_read": "9a18bd179820c47bdc1a38f1a1afed7b28005f6f"
+}

@@ -1,0 +1,301 @@
+{
+  "kind": "EXACT_EF22_LINKED_COPY_READ_CDC_CORRESPONDENCE_APPENDIX",
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+  "ELF": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf": {
+      "bytes": 5592128,
+      "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+    }
+  },
+  "source_checks": {
+    "HAL/pico/src/core/Persistence.cpp": {
+      "sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1",
+      "same_as_frozen9cff": true
+    },
+    "HAL/pico/src/core/ProfileStore.cpp": {
+      "sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8",
+      "same_as_frozen9cff": true
+    },
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "sha256": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8",
+      "same_as_frozen9cff": true
+    },
+    "config/glyph/common/src/config.cpp": {
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "same_as_frozen9cff": true
+    },
+    "src/core/mode_selection.cpp": {
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6",
+      "same_as_frozen9cff": true
+    }
+  },
+  "SDK_checks": {
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_TinyUSB_API.cpp": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "same_old_source_and_build_dependency_pin": true,
+      "current_matches_build_pin": true
+    }
+  },
+  "affected_frame_changes": {},
+  "source_compositions_preserved_bytes": {
+    "copy": 2308,
+    "existing_read": 2168,
+    "published_read": 2200,
+    "CDC_IRQ": 340,
+    "boot_IRQ": 300
+  },
+  "direct_hash_context_upper_bytes": {
+    "Prepare": 1956,
+    "Execute": 1988,
+    "Identity_under_Prepare": 2236,
+    "Identity_under_Execute": 2268
+  },
+  "conditional_Identity_wrapper8_Execute_upper_bytes": 1996,
+  "new_addresses": {
+    "main": {
+      "address": "0x1003ff08",
+      "frame_bytes": 48
+    },
+    "setup": {
+      "address": "0x1002f2f4",
+      "frame_bytes": 136
+    },
+    "__wrap_main": {
+      "address": "0x1001da44",
+      "frame_bytes": 0
+    },
+    "loop": {
+      "address": "0x1002e2a4",
+      "frame_bytes": 32
+    },
+    "CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)": {
+      "address": "0x1001c5dc",
+      "frame_bytes": 88
+    },
+    "CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)": {
+      "address": "0x1001c73c",
+      "frame_bytes": 16
+    },
+    "CheckedStorage::Close(CheckedStorage::File&)": {
+      "address": "0x1001c870",
+      "frame_bytes": 16
+    },
+    "CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)": {
+      "address": "0x1001c8c0",
+      "frame_bytes": 72
+    },
+    "lfs_file_open": {
+      "address": "0x100163c8",
+      "frame_bytes": 16
+    },
+    "lfs_file_read": {
+      "address": "0x10016588",
+      "frame_bytes": 24
+    },
+    "lfs_file_flushedread": {
+      "address": "0x10011d70",
+      "frame_bytes": 96
+    },
+    "lfs_file_close": {
+      "address": "0x100163dc",
+      "frame_bytes": 48
+    },
+    "lfs_file_flush": {
+      "address": "0x1001332c",
+      "frame_bytes": 112
+    },
+    "lfs_ctz_find.constprop.0": {
+      "address": "0x10010790",
+      "frame_bytes": 64
+    },
+    "lfs_stat": {
+      "address": "0x10016280",
+      "frame_bytes": 56
+    },
+    "lfs_file_rawopencfg": {
+      "address": "0x1001544c",
+      "frame_bytes": 80
+    },
+    "lfs_dir_orphaningcommit": {
+      "address": "0x10014dc8",
+      "frame_bytes": 160
+    },
+    "lfs_dir_relocatingcommit": {
+      "address": "0x1001443c",
+      "frame_bytes": 136
+    },
+    "lfs_dir_splittingcompact.constprop.0": {
+      "address": "0x10013bbc",
+      "frame_bytes": 192
+    },
+    "lfs_dir_compact": {
+      "address": "0x10013914",
+      "frame_bytes": 136
+    },
+    "lfs_dir_traverse.constprop.0": {
+      "address": "0x10010a6c",
+      "frame_bytes": 216
+    },
+    "lfs_dir_commit_commit": {
+      "address": "0x10013520",
+      "frame_bytes": 72
+    },
+    "lfs_dir_commitprog": {
+      "address": "0x10010d4c",
+      "frame_bytes": 72
+    },
+    "lfs_dir_find": {
+      "address": "0x10011a3c",
+      "frame_bytes": 96
+    },
+    "lfs_dir_fetchmatch": {
+      "address": "0x10010e64",
+      "frame_bytes": 152
+    },
+    "lfs_dir_find_match": {
+      "address": "0x100106dc",
+      "frame_bytes": 72
+    },
+    "lfs_bd_read.part.0.constprop.0": {
+      "address": "0x100102c4",
+      "frame_bytes": 64
+    },
+    "noInterrupts": {
+      "address": "0x100406a8",
+      "frame_bytes": 16
+    },
+    "usb_task_irq()": {
+      "address": "0x10007770",
+      "frame_bytes": 8
+    },
+    "tud_task_ext": {
+      "address": "0x10009534",
+      "frame_bytes": 112
+    },
+    "cdcd_xfer_cb": {
+      "address": "0x10007c60",
+      "frame_bytes": 40
+    },
+    "tud_cdc_n_write_flush": {
+      "address": "0x10007928",
+      "frame_bytes": 24
+    },
+    "usbd_edpt_claim": {
+      "address": "0x10009e80",
+      "frame_bytes": 8
+    },
+    "tu_edpt_claim": {
+      "address": "0x1000ab1c",
+      "frame_bytes": 16
+    },
+    "mutex_enter_timeout_ms": {
+      "address": "0x20000b20",
+      "frame_bytes": 24
+    },
+    "mutex_enter_block_until": {
+      "address": "0x20000aca",
+      "frame_bytes": 32
+    },
+    "RP2040::_SystickHandler()": {
+      "address": "0x1003fe54",
+      "frame_bytes": 12
+    },
+    "tud_descriptor_string_cb": {
+      "address": "0x100072cc",
+      "frame_bytes": 8
+    },
+    "Adafruit_USBD_Device::getSerialDescriptor(unsigned short*)": {
+      "address": "0x10007214",
+      "frame_bytes": 80
+    },
+    "TinyUSB_Port_GetSerialNumber(unsigned char*)": {
+      "address": "0x100077f0",
+      "frame_bytes": 8
+    },
+    "pico_get_unique_board_id": {
+      "address": "0x10043850",
+      "frame_bytes": 8
+    },
+    "flash_range_program": {
+      "address": "0x20000ca0",
+      "frame_bytes": 40
+    },
+    "flash_range_erase": {
+      "address": "0x20000c28",
+      "frame_bytes": 40
+    },
+    "__wrap___aeabi_memcpy": {
+      "address": "0x10043730",
+      "frame_bytes": 0
+    },
+    "__wrap_memset": {
+      "address": "0x10043724",
+      "frame_bytes": 0
+    },
+    "littlefs_impl::LittleFSImpl::lfs_flash_read(lfs_config const*, unsigned long, unsigned long, void*, unsigned long)": {
+      "address": "0x1000eae8",
+      "frame_bytes": 8
+    },
+    "littlefs_impl::LittleFSImpl::lfs_flash_prog(lfs_config const*, unsigned long, unsigned long, void const*, unsigned long)": {
+      "address": "0x1000eba8",
+      "frame_bytes": 24
+    },
+    "(anonymous namespace)::copy_checked_file(char const*, char const*, unsigned int, bool&) [clone .constprop.0]": {
+      "address": "0x1001e104",
+      "frame_bytes": 504
+    },
+    "(anonymous namespace)::hash_file(char const*, unsigned char*)": {
+      "address": "0x1001e400",
+      "frame_bytes": 656
+    },
+    "Persistence::LegacySourceIdentity(unsigned char*)": {
+      "address": "0x1001f594",
+      "frame_bytes": 280
+    },
+    "Persistence::PrepareCaptureSource(unsigned char*)": {
+      "address": "0x1001fc10",
+      "frame_bytes": 64
+    },
+    "Persistence::ExecuteCaptureSource(unsigned char*)": {
+      "address": "0x1001fc8c",
+      "frame_bytes": 96
+    },
+    "Persistence::CaptureLegacySource(unsigned char*)": {
+      "address": "0x1001fd34",
+      "frame_bytes": 16
+    }
+  },
+  "historical_reports_preserved": true,
+  "physical_overflow_observation": false,
+  "implementation_authority": false,
+  "whole_resource_PASS": false,
+  "whole_P1": "OPEN"
+}

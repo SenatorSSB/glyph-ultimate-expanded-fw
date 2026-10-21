@@ -1,0 +1,181 @@
+{
+  "qualification": "Immutable independent mixed9cff reports plus exactef22 linked appendix/31screen. WholeP1OPEN; not hardware measured or finalresource acceptance. SDK/Git/custodiedELF referenced by unchangedpins.",
+  "flat_files": [
+    {
+      "original_path": "/private/tmp/glyph-native-9cff-source-resource-review-20261021.md",
+      "file": "glyph-native-9cff-source-resource-review-20261021.md",
+      "bytes": 15278,
+      "sha256": "37090b4c3233d4f75a085220526a180120fccb70fa6bdeaeb0fc634e2d03f9ec"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-9cff-source-resource-review-20261021.json",
+      "file": "glyph-native-9cff-source-resource-review-20261021.json",
+      "bytes": 33539,
+      "sha256": "462fc3bc4101a947ad8ab2b65c231b42675ab401a0e59c209567e1cc0a990ae2"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-9cff-source-resource-review-20261021-inputpins.json",
+      "file": "glyph-native-9cff-source-resource-review-20261021-inputpins.json",
+      "bytes": 9234,
+      "sha256": "7a0dee142f7340aff5c7661ffbaafa5ea697a8feb4f243f1f6c706d30230c04e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.md",
+      "file": "glyph-native-legacy-copy-read-proof-20261021.md",
+      "bytes": 14077,
+      "sha256": "0097e512a79245fdbcb4ef9bccbd3a9ae8dfb20e6a86e1c0761ee551cf35ff26"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.json",
+      "file": "glyph-native-legacy-copy-read-proof-20261021.json",
+      "bytes": 2897,
+      "sha256": "99a46bef5bd734e6a48cdaf258aa7269318363da1e71e81e4b58654f480dbf01"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-copy-read-proof-20261021-pins.json",
+      "file": "glyph-native-legacy-copy-read-proof-20261021-pins.json",
+      "bytes": 10201,
+      "sha256": "061fd8c433e93e63027213d0e505f421872b9299161086bd65cb378101a20d16"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.md",
+      "file": "glyph-native-configurator-cdc340-witness-20261021.md",
+      "bytes": 8007,
+      "sha256": "833960549a1546a68cf3283210d1c8dd50061b5cfd5818d5e93fb9df2e75a796"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.json",
+      "file": "glyph-native-configurator-cdc340-witness-20261021.json",
+      "bytes": 1274,
+      "sha256": "de1e9cb8e05b7682ee1cf76b4f4f084793f7086de724cc01172ba6f3d3229875"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021-pins.json",
+      "file": "glyph-native-configurator-cdc340-witness-20261021-pins.json",
+      "bytes": 3975,
+      "sha256": "2e271ff46f0e1a71f57b2439f98dfb30348c6070aa487f417e99a5d8f8044f27"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.md",
+      "file": "glyph-native-ef22-linked-copy-read-irq-20261021.md",
+      "bytes": 11086,
+      "sha256": "cfc8ec2961922434901991cb70384a708abcae24f251eade3dddf87398fa984f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.json",
+      "file": "glyph-native-ef22-linked-copy-read-irq-20261021.json",
+      "bytes": 9512,
+      "sha256": "da1b2bc7068f02cc66f319d521a26a0ff574d526c2f966eaf6b39e78ef714486"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021-frames.json",
+      "file": "glyph-native-ef22-linked-copy-read-irq-20261021-frames.json",
+      "bytes": 79515,
+      "sha256": "eaa179275b9486eaf2654a73c372eb5e183b79f8153ce1a7f47cd1f16c2a5ed1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021-pins.json",
+      "file": "glyph-native-ef22-linked-copy-read-irq-20261021-pins.json",
+      "bytes": 3721,
+      "sha256": "218b13734c991eefe930dc3c00cf6a2db6823ed4287aeb3ac4aace149908b79e"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021.md",
+      "file": "glyph-native-35e8-joint-state-erratum-20261021.md",
+      "bytes": 7849,
+      "sha256": "51ca34f50cae1f014ba376972c10d4b9daf7c4651411df77f636439ba3b0084f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021.json",
+      "file": "glyph-native-35e8-joint-state-erratum-20261021.json",
+      "bytes": 14053,
+      "sha256": "236155ddca2a3b68a13afe7630452dbbddeeddf8c196a355906f74ac04f95f68"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-35e8-joint-state-erratum-20261021-pins.json",
+      "file": "glyph-native-35e8-joint-state-erratum-20261021-pins.json",
+      "bytes": 6473,
+      "sha256": "911101211faaef41c315633d22957afe4441a21baed2f206564237cddfbccbec"
+    }
+  ],
+  "private_objects": [
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.md",
+      "raw_bytes": 14077,
+      "raw_sha256": "0097e512a79245fdbcb4ef9bccbd3a9ae8dfb20e6a86e1c0761ee551cf35ff26",
+      "gzip_object": "objects/0097e512a79245fdbcb4ef9bccbd3a9ae8dfb20e6a86e1c0761ee551cf35ff26.gz",
+      "gzip_sha256": "c8014ed2d2d469ffebb34f8127d3cdb8652f63e1cc24b213d543a9d36ed15531"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-copy-read-proof-20261021.json",
+      "raw_bytes": 2897,
+      "raw_sha256": "99a46bef5bd734e6a48cdaf258aa7269318363da1e71e81e4b58654f480dbf01",
+      "gzip_object": "objects/99a46bef5bd734e6a48cdaf258aa7269318363da1e71e81e4b58654f480dbf01.gz",
+      "gzip_sha256": "bd81c43bebb71aba4331712c5ec653f9b421645c96053238de0fcb223322a9ef"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.md",
+      "raw_bytes": 8007,
+      "raw_sha256": "833960549a1546a68cf3283210d1c8dd50061b5cfd5818d5e93fb9df2e75a796",
+      "gzip_object": "objects/833960549a1546a68cf3283210d1c8dd50061b5cfd5818d5e93fb9df2e75a796.gz",
+      "gzip_sha256": "e5e717a07a9585038da0a8dbccbd43491d437023bfae05d66312a292f861e045"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021.json",
+      "raw_bytes": 1274,
+      "raw_sha256": "de1e9cb8e05b7682ee1cf76b4f4f084793f7086de724cc01172ba6f3d3229875",
+      "gzip_object": "objects/de1e9cb8e05b7682ee1cf76b4f4f084793f7086de724cc01172ba6f3d3229875.gz",
+      "gzip_sha256": "18b33c9d420068c26bbbe6a118217b2679321da7e16d03973debeabc28e2e26f"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.md",
+      "raw_bytes": 11086,
+      "raw_sha256": "cfc8ec2961922434901991cb70384a708abcae24f251eade3dddf87398fa984f",
+      "gzip_object": "objects/cfc8ec2961922434901991cb70384a708abcae24f251eade3dddf87398fa984f.gz",
+      "gzip_sha256": "990bebc67cbcdbb6116fa8f4ab7a52178fc35a06587777848c62dc1772c30cc8"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021.json",
+      "raw_bytes": 9512,
+      "raw_sha256": "da1b2bc7068f02cc66f319d521a26a0ff574d526c2f966eaf6b39e78ef714486",
+      "gzip_object": "objects/da1b2bc7068f02cc66f319d521a26a0ff574d526c2f966eaf6b39e78ef714486.gz",
+      "gzip_sha256": "d1a49fdd0497424bab7985e61bbd40d2a3f72de3546d17c078161d65b38b6ca6"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-ef22-linked-copy-read-irq-20261021-frames.json",
+      "raw_bytes": 79515,
+      "raw_sha256": "eaa179275b9486eaf2654a73c372eb5e183b79f8153ce1a7f47cd1f16c2a5ed1",
+      "gzip_object": "objects/eaa179275b9486eaf2654a73c372eb5e183b79f8153ce1a7f47cd1f16c2a5ed1.gz",
+      "gzip_sha256": "1b754d8d16400e40f67262c7f1b3b9693bf6137b2299d66493e14e6b1aab9494"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-copy-read-proof-20261021-pins.json",
+      "raw_bytes": 10201,
+      "raw_sha256": "061fd8c433e93e63027213d0e505f421872b9299161086bd65cb378101a20d16",
+      "gzip_object": "objects/061fd8c433e93e63027213d0e505f421872b9299161086bd65cb378101a20d16.gz",
+      "gzip_sha256": "7f8d84818d709a556aa131429ba7cf187c4af08233c51bd4e42845b6430d6e3c"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-configurator-cdc340-witness-20261021-pins.json",
+      "raw_bytes": 3975,
+      "raw_sha256": "2e271ff46f0e1a71f57b2439f98dfb30348c6070aa487f417e99a5d8f8044f27",
+      "gzip_object": "objects/2e271ff46f0e1a71f57b2439f98dfb30348c6070aa487f417e99a5d8f8044f27.gz",
+      "gzip_sha256": "26c2cf8dc417689bac072371045f5887f0bc782addee5664e719ee6190feb4a1"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-9cff-independent-persistence.log",
+      "raw_bytes": 1391,
+      "raw_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84",
+      "gzip_object": "objects/b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84.gz",
+      "gzip_sha256": "8b4a1cb9adeb334f9a24018041cd43735ad2166741a8e2bf41b0e0f4638bced5"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-9cff-linked-selected-functions.json",
+      "raw_bytes": 357846,
+      "raw_sha256": "0b97cedc9871d909e31886b5050ee3a76bab9ddd86dfb42e0edbb2c442646345",
+      "gzip_object": "objects/0b97cedc9871d909e31886b5050ee3a76bab9ddd86dfb42e0edbb2c442646345.gz",
+      "gzip_sha256": "75124b9e2405a813c633d512ea44112a6b5f1bf8c576cce134d336639204e3e2"
+    }
+  ],
+  "critical_latest_correction": "35e8 joint-state erratum supersedes ONLY original directConfigurator initial-orphan witness classifications; eight valid witnesses remain; generated/partial-repair histories OPEN."
+}

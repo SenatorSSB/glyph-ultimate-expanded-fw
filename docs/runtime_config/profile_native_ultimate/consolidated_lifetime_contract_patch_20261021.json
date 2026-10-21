@@ -1,0 +1,243 @@
+[
+  {
+    "op": "test",
+    "path": "/numeric_caps",
+    "value": {
+      "native_schema": 5,
+      "encoding_version": 1,
+      "engine_abi": 1,
+      "native_field_tag": 8,
+      "expected_engine_config_tag": 205,
+      "body_max_bytes": 3336,
+      "profile_wrapper_max_bytes": 3341,
+      "record_max_bytes": 3373,
+      "existing_profile_payload_admission_bytes": 4096,
+      "single_charge_payload_cutoff_bytes": 4056,
+      "record_header_bytes": 32,
+      "directory_entries": 64,
+      "tables": 28,
+      "directions_per_table": 9,
+      "conditions": 96,
+      "condition_tokens": 768,
+      "direction_sources": 8,
+      "table_rules": 32,
+      "digital_bindings": 32,
+      "analogue_effects": 16,
+      "condition_all": 2,
+      "condition_any": 4,
+      "condition_none": 9,
+      "digital_mask": 4095,
+      "native_active_plus_candidate_max_bytes": 7800,
+      "prepared_view_max_bytes": 560,
+      "native_frame_local_aggregate_max_bytes": 144,
+      "validation_local_aggregate_max_bytes": 256,
+      "added_static_ram_max_bytes": 12288,
+      "board_ram_bytes": 262144,
+      "existing_filesystem_bytes": 524288,
+      "existing_recovery_reserve_bytes": 16384,
+      "min_complete_profile_capacity": 20,
+      "measured_active_plus_candidate_bytes": 7792,
+      "measured_short_known_static_delta_bytes": 8256,
+      "measured_no_short_known_static_delta_bytes": 8232,
+      "conservative_20_profile_revision_staging_reserve_bytes": 434176,
+      "conservative_with_latched_migration_extras_bytes": 446464,
+      "whole_firmware_static_ram_max_bytes": 199632
+    }
+  },
+  {
+    "op": "test",
+    "path": "/allowed_source_paths",
+    "value": [
+      "include/core/ControllerMode.hpp",
+      "src/core/ControllerMode.cpp",
+      "include/core/ResolvedInputContext.hpp",
+      "include/modes/Ultimate.hpp",
+      "src/modes/Ultimate.cpp",
+      "include/modes/UltimateNativeProfile.hpp",
+      "include/modes/UltimateNativeEvaluator.hpp",
+      "src/modes/UltimateNativeProfile.cpp",
+      "src/modes/UltimateNativeEvaluator.cpp",
+      "include/modes/UltimateProfileConfig.hpp",
+      "include/modes/UltimateProfileEvaluator.hpp",
+      "schema/haybox/config.proto",
+      "schema/haybox/config.options",
+      "include/core/ProfileStore.hpp",
+      "src/core/ProfileStore_stub.cpp",
+      "HAL/pico/src/core/ProfileStore.cpp",
+      "include/core/ProfileStoreCapacity.hpp",
+      "include/core/ProfileStoreRequestIdentity.hpp",
+      "include/core/RuntimeProfileDigest.hpp",
+      "src/core/config_validation.cpp",
+      "include/core/config_validation.hpp",
+      "src/core/mode_selection.cpp",
+      "HAL/pico/src/core/Persistence.cpp",
+      "HAL/pico/include/core/Persistence.hpp",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "include/core/RuntimeIdentity.hpp",
+      "tools/glyph_serial_config_tool.py",
+      "tools/glyph_profile_store_production_tool.py",
+      "tools/glyph_profile_store_candidate_tool.py",
+      "tools/glyph_runtime_identity_tool.py",
+      "tools/convert_glyph_native_ultimate_profile.py",
+      "tools/check_glyph_profile_native_ultimate.py",
+      "tools/measure_glyph_native_ultimate_resources.py",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "include/core/RuntimeIdentityService.hpp",
+      "include/core/NativeTargetMetrics.hpp",
+      "HAL/pico/src/core/NativeTargetMetrics.cpp",
+      "HAL/pico/src/core/NativeTargetMetricsEntry.S",
+      "config/glyph/common/src/config.cpp",
+      "include/core/RuntimeIdentityWire.hpp",
+      "builder_scripts/native_target_metrics.py",
+      "platformio.ini",
+      "tools/glyph_native_target_metrics_tool.py",
+      "include/core/ModeSelectionTransaction.hpp"
+    ]
+  },
+  {
+    "op": "test",
+    "path": "/bounded_diagnostic_exception",
+    "value": {
+      "authority_reference": "docs/runtime_config/profile_native_ultimate/owner_diagnostic_authorization_20261020.md",
+      "authority_sha256": "cf7f60d61044ffea6d104bfdffe190f2d896b82683059d670c310847605226ed",
+      "scope_record_reference": "docs/runtime_config/profile_native_ultimate/diagnostic_scope_amendment_20261020.json",
+      "design_reference": "docs/runtime_config/profile_native_ultimate/diagnostic_design_freeze_20261020.json",
+      "design_sha256": "fa315a9bc232c9c966eed5c5ff4ad236c360acfd9d0fbedaa84286f70ffc7adb",
+      "design_narrative_reference": "docs/runtime_config/profile_native_ultimate/diagnostic_design_freeze_20261020.md",
+      "design_narrative_sha256": "882309de503a521c5f29cbaf0a29f47cb62adba10ce5c4b960fa7628a20b9069",
+      "single_command_only": true,
+      "wire": {
+        "protocol": "Glyph.Native.TargetMetrics.v1",
+        "magic_hex": "d7474e4d",
+        "request_bytes": 16,
+        "request_opcode": 1,
+        "response_bytes": 160,
+        "response_kind": 129,
+        "fields_and_flags": "Exact frozen JSON tables; no unspecified bits/fields or extra operation"
+      },
+      "finite_service": {
+        "rx_reads_per_Poll_max": 32,
+        "responses_per_Poll_max": 1,
+        "tx_reserve_bytes": 32,
+        "diagnostic_tx_admission_bytes": 192,
+        "minimum_admitted_diagnostic_spacing_ms": 1000,
+        "partial_frame_timeout_ms": 250,
+        "scan_words_per_core_loop_max": 16,
+        "calibration_read_pairs": 16,
+        "measurement_session_expiry_uptime_seconds": 3600,
+        "mailbox_read_attempts": 1,
+        "core_mailbox_atomic_order": "sequentially consistent aligned32-bit lock-free load/store; no retry/lock/libatomic helper"
+      },
+      "diagnostic_static_subcap_bytes": 512,
+      "inside_existing_static_limits": true,
+      "old_numeric_caps_unchanged": true,
+      "source_path_permissions": {
+        "include/core/NativeTargetMetrics.hpp": "Fixed POD/API/wire definitions for this single frozen diagnostic only; no generic facility.",
+        "HAL/pico/src/core/NativeTargetMetrics.cpp": "Bounded timer statistics, own-core fixed-chunk scans/mailboxes, one fixed read-only snapshot; no heap, persistence, blocking or extra commands.",
+        "HAL/pico/src/core/NativeTargetMetricsEntry.S": "Only frozen stackless external __wrap_main and core1 adapter after SDK launch; preserve ABI/LR/PRIMASK/live caller/guard data; no direct runtime_init/main1 wrap or replacement startup.",
+        "src/core/ControllerMode.cpp": "Native-only timing bracket around the existing complete native frame update, preserving exactly one remap/SOCD/output evaluation and normal processing.",
+        "src/core/mode_selection.cpp": "Bracket the single selected native boot activation/preparation through SetConfig/backend publication, without replay or changed selection/recovery semantics.",
+        "config/glyph/common/src/config.cpp": "Only frozen per-core scan scheduling and outside-output diagnostic service hooks; additionally only bounded static POD placement/reset of the EXISTING core0 setup ConfigValidationError validation_error workspace, same validation order/results/control flow/error bytes/recovery/boot/display/UI semantics. Prove single-core ownership, constant/POD initialization, no dynamic/guard construction, exact ARM size and boot filesystem call-chain effect. This layout-repair static charge is separate from diagnostic512 and remains inside existing total RAM caps. No other config.cpp logic.",
+        "include/core/RuntimeIdentityService.hpp": "Existing noinline Poll remains one core0 RX owner; only frozen deterministic demux/invocation for one diagnostic command. Preserve existing identity request/response bytes, framing/status/admission/order and parser behavior, viewer traffic, 32-byte RX budget and one admitted response; no second reader or new control operation.",
+        "include/core/RuntimeIdentityWire.hpp": "Sole addition: const read-only RequestParser::HasPartialFrame() accessor returning _used != 0. Existing data fields/layout, Consume/Expire/DecodeRequest/EncodeResponse bodies, constants, status values, 16/72-byte protocol and behavior remain exact. No duplicate parser state or other edit.",
+        "include/core/ControllerMode.hpp": "Only the frozen public const virtual DiagnosticNativeGeneration() default0 needed for the actual-native bracket; no generic hook framework or other API/algorithm change.",
+        "include/modes/Ultimate.hpp": "Only corresponding DiagnosticNativeGeneration() const override returning the actual owned/published/valid/current NativeAbi1 generation or0 exactly as frozen; no evaluator/profile/dispatch semantics change.",
+        "builder_scripts/native_target_metrics.py": "Mk6-only clean committed full source SHA/build identity and exact external link-wrapper inputs; fail dirty/unresolvable source. No dependency/source/cache/SDK mutation or upload automation.",
+        "platformio.ini": "Only glyph_mk6-specific hook/necessary diagnostic/link flags, preserving current O3/clock/dependencies/partitions/stack sizes/build settings and all other environments. No O1 or other optimization change.",
+        "tools/glyph_native_target_metrics_tool.py": "Strict offline parser and bounded read-only XInput GET_SNAPSHOT host command implementation; no device/session execution before candidate-specific owner packet approval; no flash/profile/Config/reset/control paths.",
+        "tools/check_glyph_native_target_metrics.py": "Frozen protocol/parser/statistic/entry/scan/resource/source-contract checks and negative controls; preserve directly affected original assertions and all prior frozen legacy oracles.",
+        "tools/fixtures/native_target_metrics/": "Only finite source-faithful diagnostic protocol/entry/scan/host-test fixtures, no generic scope/helper bypass or firmware acceptance evidence."
+      },
+      "before_source_edit": "Before diagnostic source edits, independent bounded design/source assessment of this exact frozen contract must resolve measurement/wire/demux/entry/guard/PRIMASK/ABI/mailbox/resource issues, followed by reviewed source-free canonical adoption and fresh live readback. No facility implementation on pending local authority.",
+      "no_device_approval": true,
+      "supersession": "Only conflicting no-new-timing/transport-command provisions for this exact owner-approved facility and prior Poll annotation-only restriction for the frozen single-owner demux. Original frozen evidence stays byte-identical, all other prohibitions stay active."
+    }
+  },
+  {
+    "op": "test",
+    "path": "/filesystem_support_domain_decision",
+    "value": {
+      "owner_decision_reference": "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md",
+      "owner_decision_sha256": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e",
+      "domain": "BROADER_CURRENTLY_ADMITTED_FILESYSTEM_STATES",
+      "includes": [
+        "unrelated physical directories where currently admitted",
+        "applicable positive-orphan recovery",
+        "applicable PENDING_MOVE recovery"
+      ],
+      "no_pristine_history_requirement": true,
+      "no_new_arbitrary_corruption_acceptance": true,
+      "preserve_existing_filesystem_store_checked_storage_recovery_transactions": true,
+      "existing_numeric_caps_and_closed_paths_unchanged": true,
+      "proof_order": [
+        "exact linked source/ELF feasible call-chain and interrupt co-liveness",
+        "materially different bounded lifetime/frame-isolation/call-structure/workspace-reuse investigation",
+        "complete structural stack/resource proof and directly applicable validation"
+      ],
+      "prior_failed_incomplete_evidence_preserved": true,
+      "runtime_watermark_not_a_structural_proof_substitute": true,
+      "outside_ready_paths_requires_bounded_curator_authority_and_independent_review": true,
+      "device_or_resource_limit_authority": false
+    }
+  },
+  {
+    "op": "test",
+    "path": "/bounded_boot_persistence_layout_exception",
+    "value": {
+      "reference": "docs/runtime_config/profile_native_ultimate/boot_persistence_layout_scope_amendment_20261021.json",
+      "disposition": "ADOPT_BOUNDED",
+      "methods": [
+        "Persistence::LoadConfigChecked",
+        "Persistence::CaptureLegacySource"
+      ],
+      "migration_File_workspace_conversion": false,
+      "new_source_paths": [],
+      "original_numeric_caps_unchanged": true,
+      "existing_layout512_total_unchanged": true,
+      "before_execution": "Source-free canonical adoption and fresh live readback."
+    }
+  },
+  {
+    "op": "test",
+    "path": "/work_order/scope",
+    "value": "One primary source writer implements M2 native codec/view/evaluator and default-preserving snapshot hook, M3 complete general converter/ordinary profile and all18 families, M4 minimal native callback admission/lifetime/engine-discriminator/boot activation/identity integration, M5 full frozen proof, M6 fresh review/exact committed build/custody/concrete device packet, M7 owner-approved physical work, independent HEP and exact tested-source integration followed by separate strict completion. Exact reviewed architecture and numeric caps apply; paths are the final packet allowlist, no generic directory authority. Normative exact source/test allowlists, numeric caps and bounded call-site clarifications are in docs/runtime_config/profile_native_ultimate/implementation_contract.json. Owner-authorized 2026-10-20 retained bounded diagnostic exception: native frame and selected activation/preparation elapsed target time, post-runtime/core-launch own-core stack-write observations, and exactly one fixed read-only XInput GET_SNAPSHOT command under diagnostic_scope_amendment_20261020.json and diagnostic_design_freeze_20261020.json. This precisely supersedes only conflicting timing/new-command exclusions and prior Poll annotation-only limits for the named demux; existing identity16/72 remains exact. Also authorize only static POD placement/reset of existing core0 setup ConfigValidationError in config.cpp for boot stack lifetime repair, preserving all validation/control/error/boot/display semantics. No other native algorithm, transport/store capability, protected budget, SDK, optimization, startup or device authority is granted."
+  },
+  {
+    "op": "replace",
+    "path": "/work_order/scope",
+    "value": "One primary source writer implements M2 native codec/view/evaluator and default-preserving snapshot hook, M3 complete general converter/ordinary profile and all18 families, M4 minimal native callback admission/lifetime/engine-discriminator/boot activation/identity integration, M5 full frozen proof, M6 fresh review/exact committed build/custody/concrete device packet, M7 owner-approved physical work, independent HEP and exact tested-source integration followed by separate strict completion. Exact reviewed architecture and numeric caps apply; paths are the final packet allowlist, no generic directory authority. Normative exact source/test allowlists, numeric caps and bounded call-site clarifications are in docs/runtime_config/profile_native_ultimate/implementation_contract.json. Owner-authorized 2026-10-20 retained bounded diagnostic exception: native frame and selected activation/preparation elapsed target time, post-runtime/core-launch own-core stack-write observations, and exactly one fixed read-only XInput GET_SNAPSHOT command under diagnostic_scope_amendment_20261020.json and diagnostic_design_freeze_20261020.json. This precisely supersedes only conflicting timing/new-command exclusions and prior Poll annotation-only limits for the named demux; existing identity16/72 remains exact. Also authorize only static POD placement/reset of existing core0 setup ConfigValidationError in config.cpp for boot stack lifetime repair, preserving all validation/control/error/boot/display semantics. No other native algorithm, transport/store capability, protected budget, SDK, optimization, startup or device authority is granted. GP-NATIVE-001 consolidated lifetime-only extension 2026-10-21: adopt ONLY docs/runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json A-E in existing six Persistence/ProfileStore/Configurator source/header paths. A ONLY LegacySourceIdentity original automatic File/check/explicit-close/destructor returned before SAME unchanged hash_file; historical hash-body alternative NOT adopted. B ONLY original copy INPUT may reuse the ONE existing Save File slot with original automatic OUTPUT, unconditional second construction, simultaneous handles, original explicit-close/uncertainty/reverse-destructor order and source-proven synchronous core0 nonreentry; returned copy/verification/publication phases keep SAME operations. This precisely supersedes old Save-only slot exclusion ONLY copy INPUT, no other migration conversion. C ReconcileTransaction original read/decision returns before SAME control2/aborted checkpoint, exact tokens/highwater/receipts/uncertainty preserved. D Update and shared original Create/Duplicate returned phases preserve BOTH duplicate Starts and all validation/admission/payload lease/record-before-directory behavior. E ONLY legacy HandleSetConfig original receipt/decode/validation prep returns before SAME Save and SAME live Config publication/legacy response, exact error returns/bytes. All original/frozen keys/caps, identity16/72, diagnostic design and TOTAL layout512 stay exact; no new slot/buffer/owner/path/config.cpp/SDK/IRQ/startup/optimization/semantic/domain/device authority. Exact current eight valid witnesses plus lifecycle correction motivate bounded repair; all31 fresh linked proof/tests/bothABI/review/build/custody/hardware gates remain. P1 OPEN."
+  },
+  {
+    "op": "add",
+    "path": "/scope_clarifications/-",
+    "value": "GP-NATIVE-001 consolidated lifetime-only extension 2026-10-21: adopt ONLY docs/runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json A-E in existing six Persistence/ProfileStore/Configurator source/header paths. A ONLY LegacySourceIdentity original automatic File/check/explicit-close/destructor returned before SAME unchanged hash_file; historical hash-body alternative NOT adopted. B ONLY original copy INPUT may reuse the ONE existing Save File slot with original automatic OUTPUT, unconditional second construction, simultaneous handles, original explicit-close/uncertainty/reverse-destructor order and source-proven synchronous core0 nonreentry; returned copy/verification/publication phases keep SAME operations. This precisely supersedes old Save-only slot exclusion ONLY copy INPUT, no other migration conversion. C ReconcileTransaction original read/decision returns before SAME control2/aborted checkpoint, exact tokens/highwater/receipts/uncertainty preserved. D Update and shared original Create/Duplicate returned phases preserve BOTH duplicate Starts and all validation/admission/payload lease/record-before-directory behavior. E ONLY legacy HandleSetConfig original receipt/decode/validation prep returns before SAME Save and SAME live Config publication/legacy response, exact error returns/bytes. All original/frozen keys/caps, identity16/72, diagnostic design and TOTAL layout512 stay exact; no new slot/buffer/owner/path/config.cpp/SDK/IRQ/startup/optimization/semantic/domain/device authority. Exact current eight valid witnesses plus lifecycle correction motivate bounded repair; all31 fresh linked proof/tests/bothABI/review/build/custody/hardware gates remain. P1 OPEN."
+  },
+  {
+    "op": "add",
+    "path": "/bounded_consolidated_lifetime_exception",
+    "value": {
+      "reference": "docs/runtime_config/profile_native_ultimate/consolidated_lifetime_scope_amendment_20261021.json",
+      "disposition": "ADOPT_BOUNDED",
+      "existing_closed_source_paths_only": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+      ],
+      "named_permissions": [
+        "A_IDENTITY_VALIDATION_ONLY_HASH_BODY_UNCHANGED",
+        "B_COPY_INPUT_EXISTING_SINGLE_SLOT_AND_CAPTURE_PHASES",
+        "C_RECONCILE_DECISION",
+        "D_UPDATE_SHARED_CREATE_DUPLICATE_PHASES",
+        "E_LEGACY_SET_PREPARATION"
+      ],
+      "copy_input_only_supersedes_prior_Save_only_slot_exclusion": true,
+      "existing_layout512_total_unchanged": true,
+      "original_numeric_caps_and_frozen_keys_unchanged": true,
+      "no_config_cpp_or_device_authority": true,
+      "before_execution": "Exact source-free canonical adoption and fresh live readback."
+    }
+  }
+]
