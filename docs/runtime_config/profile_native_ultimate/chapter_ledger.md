@@ -1,5 +1,11 @@
 # Profile-native Ultimate execution chapter
 
+## Approved metadata attempt and backup-only stop gate — 2026-10-22
+
+The owner approved metadata plus backup. The [single exact snapshot](metadata_results_20261022/README.md) found the retained unique anchor/10 complete descendants, but original query status0/zero entries/invalid iterator yielded INCOMPLETE_STOP. No plug-in/QI/getter/report or Configurator operation followed; all prior stopped sessions stay immutable. Installed SDK permits NULL on successful no-match, but no handle was logged and the actual root cause remains UNPROVEN.
+
+A [bounded B-only exception](backup_after_metadata_stop_20261022/BACKUP_PACKET.md) now requires new direct owner approval to perform unchanged known-menu/read-only preservation despite that stop. No metadata/report retry, repair/build, firmware copy, Config/ProfileStore/native mutation, route fallback or acceptance waiver is proposed. F334f, original limits and all18/H1–H12/HEP/integration/DONE gates remain unchanged.
+
 ## Exact installation, runtime identity and host access stop — 2026-10-22
 
 [Actual installation/access evidence](installation_results_20261022/README.md) preserves original packet approval and later explicit owner delegation of the single exact UF2 copy. One exclusive copy accepted1041408 bytes with fsync/close, source preserved; owner reports Works. Same-unit XInput metadata and fixed current identity match original legacy profile4/revision1/schema3/incarnation1/digest. No native acceptance or cryptographic program readback is claimed.

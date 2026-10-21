@@ -1,0 +1,209 @@
+{
+  "classification": "OFFLINE_RECORDED_METADATA_ADJUDICATION_NOT_HARDWARE_OUTPUT_PASS",
+  "private_stdout_SHA256": "10038e4ab3f82dbe4765f1d531868ef64a96b581c649a32eaaa01069586f0259",
+  "records": 125,
+  "anchor_query": {
+    "kind": "anchor_query",
+    "status": 0,
+    "expected_entry_id": 4295237137,
+    "vendor": 1848,
+    "product": 18214,
+    "location": 1048576
+  },
+  "anchor_summary": {
+    "kind": "anchor_summary",
+    "anchor_present": true,
+    "multiple": false,
+    "identity_verified": true,
+    "descendants": 10,
+    "inventory_complete": true,
+    "node_cap": 32,
+    "depth_cap": 3
+  },
+  "original_interface_query": {
+    "kind": "original_interface_query",
+    "status": 0,
+    "service_cap": 16,
+    "getter_cap": 144
+  },
+  "summary": {
+    "kind": "summary",
+    "enumerated": 0,
+    "anchored_members": 0,
+    "plugins_attempted": 0,
+    "plugin_success": 0,
+    "interface300_success": 0,
+    "accepted": 0,
+    "iterator_valid": false,
+    "outcome": "INCOMPLETE_STOP",
+    "reports": 0,
+    "acceptance": "NOT_CLAIMED"
+  },
+  "inventory_interfaces_registry_properties_only": [
+    {
+      "entry_id": 4295237143,
+      "parent_id": 4295237137,
+      "depth": 1,
+      "class": "IOUSBHostInterface",
+      "properties": {
+        "vendor": {
+          "state": "valid",
+          "value": 1848
+        },
+        "product": {
+          "state": "valid",
+          "value": 18214
+        },
+        "location": {
+          "state": "valid",
+          "value": 1048576
+        },
+        "class": {
+          "state": "valid",
+          "value": 255
+        },
+        "subclass": {
+          "state": "valid",
+          "value": 93
+        },
+        "protocol": {
+          "state": "valid",
+          "value": 1
+        },
+        "number": {
+          "state": "valid",
+          "value": 0
+        },
+        "alt": {
+          "state": "valid",
+          "value": 0
+        },
+        "configuration": {
+          "state": "valid",
+          "value": 1
+        }
+      }
+    },
+    {
+      "entry_id": 4295237147,
+      "parent_id": 4295237137,
+      "depth": 1,
+      "class": "IOUSBHostInterface",
+      "properties": {
+        "vendor": {
+          "state": "valid",
+          "value": 1848
+        },
+        "product": {
+          "state": "valid",
+          "value": 18214
+        },
+        "location": {
+          "state": "valid",
+          "value": 1048576
+        },
+        "class": {
+          "state": "valid",
+          "value": 2
+        },
+        "subclass": {
+          "state": "valid",
+          "value": 2
+        },
+        "protocol": {
+          "state": "valid",
+          "value": 0
+        },
+        "number": {
+          "state": "valid",
+          "value": 1
+        },
+        "alt": {
+          "state": "valid",
+          "value": 0
+        },
+        "configuration": {
+          "state": "valid",
+          "value": 1
+        }
+      }
+    },
+    {
+      "entry_id": 4295237150,
+      "parent_id": 4295237137,
+      "depth": 1,
+      "class": "IOUSBHostInterface",
+      "properties": {
+        "vendor": {
+          "state": "valid",
+          "value": 1848
+        },
+        "product": {
+          "state": "valid",
+          "value": 18214
+        },
+        "location": {
+          "state": "valid",
+          "value": 1048576
+        },
+        "class": {
+          "state": "valid",
+          "value": 10
+        },
+        "subclass": {
+          "state": "valid",
+          "value": 0
+        },
+        "protocol": {
+          "state": "valid",
+          "value": 0
+        },
+        "number": {
+          "state": "valid",
+          "value": 2
+        },
+        "alt": {
+          "state": "valid",
+          "value": 0
+        },
+        "configuration": {
+          "state": "valid",
+          "value": 1
+        }
+      }
+    }
+  ],
+  "process": {
+    "returncode": 2,
+    "timeout": false,
+    "host_elapsed_seconds": 0.238158,
+    "host_elapsed_not_target_timing": true,
+    "stdout_SHA256": "10038e4ab3f82dbe4765f1d531868ef64a96b581c649a32eaaa01069586f0259",
+    "stderr_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "retry": false
+  },
+  "stop_counters": {
+    "packet_id": "GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1",
+    "choice": "A",
+    "stop": true,
+    "stage": "STOP_METADATA_ERROR_NO_FURTHER_ACTION",
+    "metadata_invocations": 1,
+    "owner_Menu_Configurator_entries": 0,
+    "Configurator_CDC_metadata_lookups": 0,
+    "Configurator_identity_requests": 0,
+    "Config_backups": 0,
+    "STATUS_total": 0,
+    "LIST_calls": 0,
+    "original_profile_READs": 0,
+    "Config_profile_writes": 0,
+    "firmware_copies": 0,
+    "target_metric_requests": 0,
+    "raw_report_capture_retries": 0,
+    "Switch_WUP_actions": 0,
+    "parent_stage_stop_preserved": true
+  },
+  "iterator_handle_was_logged": false,
+  "actual_iterator_cause": "UNPROVEN",
+  "SDK_permitted_explanation": "Successful no-match IOServiceGetMatchingServices may return NULL. Source does not record handle; NULL no-match and nonnull invalidation cannot be distinguished from this journal.",
+  "reviewer_live_operations": 0
+}

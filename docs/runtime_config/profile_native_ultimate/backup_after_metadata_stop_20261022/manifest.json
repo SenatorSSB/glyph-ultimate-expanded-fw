@@ -1,0 +1,35 @@
+{
+  "kind": "PUBLIC_SAFE_EXPLICIT_METADATA_RESULT_OR_OWNER_PACKET",
+  "files": {
+    "BACKUP_PACKET.json": {
+      "bytes": 3256,
+      "sha256": "a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85"
+    },
+    "BACKUP_PACKET.md": {
+      "bytes": 3789,
+      "sha256": "80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229"
+    },
+    "README.md": {
+      "bytes": 645,
+      "sha256": "6cbe33ff2fe9924958998ba66a34f150f1536168e3dfb40613d93e12bab77fdc"
+    },
+    "independent_review/PINS.json": {
+      "bytes": 6157,
+      "sha256": "2f0cd19b8733040dff7ef86d8a63805197357e52093d528453329b550eeee8a8"
+    },
+    "independent_review/REPORT.md": {
+      "bytes": 10631,
+      "sha256": "62a4022798c71e651c3abe203a811ebb101370537f3654b83448dba7080f10eb"
+    },
+    "independent_review/recorded_metadata_facts.json": {
+      "bytes": 5122,
+      "sha256": "3fbdd74caad3eb119cd140bfbf81dbee040864f21e6630c2a7ef9626004ccc2d"
+    },
+    "independent_review/result.json": {
+      "bytes": 1285,
+      "sha256": "6dc4eaf3984497d4bcb4133fc96d1ce6257be5e935ee5336dcb0fa47f758bd04"
+    }
+  },
+  "native_acceptance": false,
+  "new_backup_owner_approval": null
+}

@@ -1,0 +1,69 @@
+"""One owner-approved exact anchored metadata invocation; no serial/report/device commands."""
+from pathlib import Path
+import datetime,hashlib,json,os,subprocess,sys
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077)
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+D=O/'local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022'
+P=Path('/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/interface_metadata_backup_extension_20261022')
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,j,mode='x'):
+ with p.open(mode) as f:
+  json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+assert sha(P/'EXTENSION_PACKET.md')=='19c7fd88a8d6963ae74a53222ae8cb234b0b033e51ff9b28b02c6cac7eade4f0'
+assert sha(P/'EXTENSION_PACKET.json')=='e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3'
+packet=json.loads((P/'EXTENSION_PACKET.json').read_text())
+assert sha(P/'independent_review/PINS.json')=='9e80fcc1d3b066c4bb76dc834fc7fd1efc904a4584ad3a33a9aff36991f9fb79'
+B=O/packet['metadata']['binary_owner_checkout_relative_path'];assert not B.is_symlink() and B.is_file() and sha(B)==packet['metadata']['binary_SHA256']
+source=Path('/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/metadata_probe.cpp');assert sha(source)==packet['metadata']['source_SHA256']
+parent=O/'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022'
+manifest=parent/'installation_stage_custody_manifest.json';assert sha(manifest)=='228e41413f5a49137db80769a21bf1ffca86c0d2d9996706612e4ce14c8e70f2'
+for n,e in json.loads(manifest.read_text())['files'].items():assert sha(parent/n)==e['sha256'] and (parent/n).stat().st_size==e['bytes']
+D.mkdir(mode=0o700,exist_ok=False)
+save(D/'owner_approval.json',{'packet_id':packet['packet_id'],'packet_canonical':'56b128561aa9cfd682a1e7e06ae4915bbc1fe258','MD_SHA256':sha(P/'EXTENSION_PACKET.md'),'JSON_SHA256':sha(P/'EXTENSION_PACKET.json'),'questionItemId':'["request_user_input_async","call_d362d521821142a5b6be21255bf448c5",0]','owner_answer':'Approve metadata + backup (Recommended)','choice':'A_ONE_METADATA_PLUS_B_BACKUP_READS','recorded_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'authority':'DIRECT_OWNER_REPLY; no report retry/Config or ProfileStore/native mutations/flash/metrics/Switch/WUP/acceptance'})
+state={'packet_id':packet['packet_id'],'choice':'A','stop':False,'stage':'METADATA_ATTEMPT_RESERVED_NO_RETRY','metadata_invocations':1,'owner_Menu_Configurator_entries':0,'Configurator_CDC_metadata_lookups':0,'Configurator_identity_requests':0,'Config_backups':0,'STATUS_total':0,'LIST_calls':0,'original_profile_READs':0,'Config_profile_writes':0,'firmware_copies':0,'target_metric_requests':0,'raw_report_capture_retries':0,'Switch_WUP_actions':0,'parent_stage_immutable_custody_SHA256':sha(manifest),'parent_stage_stop_preserved':True}
+save(D/'session_state.json',state)
+cmd=[str(B),'--owner-approved-anchored-metadata-once']
+save(D/'metadata_command.json',{'argv':cmd,'source_SHA256':sha(source),'binary_SHA256':sha(B),'wrapper_SHA256':sha(Path(__file__)),'UID':os.getuid(),'effective_UID':os.geteuid(),'external_timeout_seconds':10,'reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'retries':0})
+started=datetime.datetime.now(datetime.timezone.utc)
+with (D/'metadata_stdout.jsonl').open('xb') as out,(D/'metadata_stderr.txt').open('xb') as err:
+ try:
+  run=subprocess.run(cmd,stdout=out,stderr=err,timeout=10);rc=run.returncode;timed=False
+ except subprocess.TimeoutExpired:
+  rc=None;timed=True
+ except BaseException as error:
+  rc=None;timed=False;save(D/'metadata_launch_error.json',{'error':repr(error),'retry':False})
+ finally:
+  out.flush();os.fsync(out.fileno());err.flush();os.fsync(err.fileno())
+save(D/'metadata_process_result.json',{'returncode':rc,'timeout':timed,'host_elapsed_seconds':(datetime.datetime.now(datetime.timezone.utc)-started).total_seconds(),'host_elapsed_not_target_timing':True,'stdout_SHA256':sha(D/'metadata_stdout.jsonl'),'stderr_SHA256':sha(D/'metadata_stderr.txt'),'retry':False})
+try:
+ assert not timed and rc in (0,2),'Process timeout/error; stop all'
+ raw=(D/'metadata_stdout.jsonl').read_bytes();assert raw.endswith(b'\n') and len(raw)<=262144,'Partial or oversized journal'
+ assert (D/'metadata_stderr.txt').stat().st_size==0,'Unexpected process stderr'
+ rows=[json.loads(x) for x in raw.splitlines()];assert 5<=len(rows)<=650
+ allowed={'anchor_query','registry_node','registry_property','children_iterator','anchor_summary','original_interface_query','original_query_service','plugin','query_interface300','getter','held_guard_result','summary'}
+ assert all(isinstance(x,dict) and x.get('kind') in allowed for x in rows),'Unknown/incomplete journal record'
+ def one(kind):
+  found=[x for x in rows if x['kind']==kind];assert len(found)==1,kind;return found[0]
+ aq=one('anchor_query');assert rows[0]==aq and aq['status']==0 and aq['expected_entry_id']==4295237137 and (aq['vendor'],aq['product'],aq['location'])==(1848,18214,1048576)
+ anchors=[x for x in rows if x['kind']=='registry_node' and x['depth']==0];assert len(anchors)==1 and anchors[0]['entry_id']==4295237137 and anchors[0]['parent_id']==0 and anchors[0]['class_status']==0
+ am=one('anchor_summary');assert am['anchor_present'] is True and am['multiple'] is False and am['identity_verified'] is True and am['inventory_complete'] is True and 0<=am['descendants']<=32
+ nodes=[x for x in rows if x['kind']=='registry_node'];assert len(nodes)==am['descendants']+1 and len({x['entry_id'] for x in nodes})==len(nodes)
+ for node in nodes:
+  assert node['class_status']==0 and isinstance(node['class'],str) and len(node['class'].encode())<=127 and 0<=node['depth']<=3
+  props=[x for x in rows if x['kind']=='registry_property' and x['entry_id']==node['entry_id']];assert len(props)==9 and {x['field'] for x in props}=={'vendor','product','location','class','subclass','protocol','number','alt','configuration'}
+  if node['depth']==0:
+   for field,value in [('vendor',1848),('product',18214),('location',1048576)]:assert any(p['field']==field and p['state']=='valid' and p['value']==value for p in props)
+ assert all(x['status']==0 for x in rows if x['kind']=='children_iterator')
+ iq=one('original_interface_query');assert iq['status']==0 and iq['service_cap']==16 and iq['getter_cap']==144
+ summary=one('summary');assert rows[-1]==summary and summary['iterator_valid'] is True and summary['reports']==0 and summary['acceptance']=='NOT_CLAIMED'
+ assert summary['outcome'] in {'ZERO_ENUMERATED','ZERO_ACCEPTED','ONE_ACCEPTED_METADATA_ONLY','MULTIPLE_ACCEPTED_STOP'}
+ services=[x for x in rows if x['kind']=='original_query_service'];assert len(services)==summary['enumerated']<=16
+ assert sum(x['kind']=='plugin' for x in rows)==summary['plugins_attempted']<=16
+ assert sum(x['kind']=='getter' for x in rows)==9*summary['interface300_success']<=144
+ assert (rc==0)==(summary['outcome']=='ONE_ACCEPTED_METADATA_ONLY')
+ save(D/'metadata_adjudication.json',{'state':'COMPLETE_BOUNDED_METADATA_DATA_BACKUP_PHASE_ALLOWED_BY_NEW_OWNER_APPROVAL','anchor_exact_unique':True,'inventory_complete':True,'summary':summary,'journal_records':len(rows),'report_access_proven':False,'native_acceptance':False,'Configurator_phase':'Separately owner-approved B; request one known Menu entry before any lookup'})
+ state['stage']='METADATA_COMPLETE_READY_ONE_OWNER_MENU_CONFIGURATOR_ENTRY';state['metadata_complete']=True;state['metadata_summary']=summary
+ save(D/'session_state.json',state,'w');print(json.dumps({'metadata':'COMPLETE','anchor_exact_unique':True,'summary':summary,'next':'One owner Menu to Configurator action; no further device operation yet'},indent=2))
+except BaseException as error:
+ state['stop']=True;state['stage']='STOP_METADATA_ERROR_NO_FURTHER_ACTION';save(D/'metadata_stop.json',{'error':repr(error),'no_retry':True,'all_further_actions_stopped':True});save(D/'session_state.json',state,'w');print(json.dumps({'metadata':'STOP','returncode':rc,'timeout':timed,'error':repr(error),'further_actions':'NONE'}));raise

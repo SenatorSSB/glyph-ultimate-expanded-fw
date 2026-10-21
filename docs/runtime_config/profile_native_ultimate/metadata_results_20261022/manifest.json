@@ -1,0 +1,47 @@
+{
+  "kind": "PUBLIC_SAFE_EXPLICIT_METADATA_RESULT_OR_OWNER_PACKET",
+  "files": {
+    "README.md": {
+      "bytes": 1245,
+      "sha256": "a781ef1fcc109858a2b1496cb146f319e7ee72abbd344543e6634a2fdaf2f241"
+    },
+    "metadata_once.py.txt": {
+      "bytes": 8181,
+      "sha256": "5e28d129c8da90bf1d75d76e342aafab3caa456452bb20eee2bddf2505b3ca60"
+    },
+    "metadata_process_result.json": {
+      "bytes": 312,
+      "sha256": "956b6c66731d33441b48d7ff3866eca17718dd24cf4d8edb47d617109e5fb456"
+    },
+    "metadata_stage_custody_manifest.json": {
+      "bytes": 1116,
+      "sha256": "221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7"
+    },
+    "metadata_stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "metadata_stdout.jsonl": {
+      "bytes": 12472,
+      "sha256": "10038e4ab3f82dbe4765f1d531868ef64a96b581c649a32eaaa01069586f0259"
+    },
+    "metadata_stop.json": {
+      "bytes": 93,
+      "sha256": "1121f338302015df74c6a040cf6757c5cadd627dc4600fd4a850941dd7d06fd8"
+    },
+    "owner_approval.json": {
+      "bytes": 691,
+      "sha256": "a7166433bf5757c73418b78fc7079537efbd8cbba026abba9f560ff4fbbf69e8"
+    },
+    "result.json": {
+      "bytes": 1369,
+      "sha256": "43677c2e8fb1852bdfb394164708c4de97b9a7708f3431c7569696e915868ce8"
+    },
+    "session_state.json": {
+      "bytes": 690,
+      "sha256": "3eabb7b4022bd44d9a3b1d199912a8dcd6d166f4b3d3056845e6991a50b0b767"
+    }
+  },
+  "native_acceptance": false,
+  "new_backup_owner_approval": null
+}

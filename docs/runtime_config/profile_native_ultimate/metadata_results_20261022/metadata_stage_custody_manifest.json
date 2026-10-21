@@ -1,0 +1,35 @@
+{
+  "kind": "IMMUTABLE_METADATA_STOP_PRIVATE_SESSION",
+  "files": {
+    "metadata_command.json": {
+      "bytes": 702,
+      "sha256": "f2ce546e938c95e8bc9fe5284bd39e05f8512520d9c8e232e136eeb529e90d5e"
+    },
+    "metadata_process_result.json": {
+      "bytes": 312,
+      "sha256": "956b6c66731d33441b48d7ff3866eca17718dd24cf4d8edb47d617109e5fb456"
+    },
+    "metadata_stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "metadata_stdout.jsonl": {
+      "bytes": 12472,
+      "sha256": "10038e4ab3f82dbe4765f1d531868ef64a96b581c649a32eaaa01069586f0259"
+    },
+    "metadata_stop.json": {
+      "bytes": 93,
+      "sha256": "1121f338302015df74c6a040cf6757c5cadd627dc4600fd4a850941dd7d06fd8"
+    },
+    "owner_approval.json": {
+      "bytes": 691,
+      "sha256": "a7166433bf5757c73418b78fc7079537efbd8cbba026abba9f560ff4fbbf69e8"
+    },
+    "session_state.json": {
+      "bytes": 690,
+      "sha256": "3eabb7b4022bd44d9a3b1d199912a8dcd6d166f4b3d3056845e6991a50b0b767"
+    }
+  },
+  "no_retry": true,
+  "no_Configurator_continuation": true
+}

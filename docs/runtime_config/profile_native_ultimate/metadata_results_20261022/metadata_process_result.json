@@ -1,0 +1,9 @@
+{
+  "returncode": 2,
+  "timeout": false,
+  "host_elapsed_seconds": 0.238158,
+  "host_elapsed_not_target_timing": true,
+  "stdout_SHA256": "10038e4ab3f82dbe4765f1d531868ef64a96b581c649a32eaaa01069586f0259",
+  "stderr_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "retry": false
+}

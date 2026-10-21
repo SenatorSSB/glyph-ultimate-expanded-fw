@@ -10,21 +10,24 @@ linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is115
 static RAM197872/delta10528, layout499/512. Broader filesystem support and every
 original cap remain unchanged. Historical failed/incomplete evidence stays exact.
 
-The [exact installation and access result](runtime_config/profile_native_ultimate/installation_results_20261022/README.md)
-records one owner-delegated F/UF2 copy (1041408 bytes, fsync/close PASS), owner
-“Works” and matching current original-profile4 XInput identity. Its one raw
-capture stopped before interface open with zero reports; no retry followed.
-The approved stop prevented Configurator entry/postinstall preservation reads.
-All22 preinstall backups remain private; unobserved postinstall contents are
-not claimed unchanged. The [bounded metadata/backup extension](runtime_config/profile_native_ultimate/interface_metadata_backup_extension_20261022/EXTENSION_PACKET.md)
-awaits explicit owner approval for one host metadata snapshot and/or the pending
-known-menu preservation reads. No native Config/profile write, new firmware copy,
-raw capture retry or acceptance waiver is approved. Exact F/source/build/resource/
-limits/oracles remain unchanged, and candidate source is unmerged.
-GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
-missing route fields, target measurements, HEP PASS and tested-source/DONE gates
-remain. Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
-root cause UNPROVEN.
+The [exact installation/access result](runtime_config/profile_native_ultimate/installation_results_20261022/README.md)
+records one successful owner-delegated F/UF2 copy, owner “Works” and matching
+original-profile4 XInput identity, followed by raw-selection STOP/zero reports.
+The [owner-approved metadata attempt](runtime_config/profile_native_ultimate/metadata_results_20261022/README.md)
+found the exact retained anchor and10 complete descendants, then original query
+status0/entries0/invalid iterator produced INCOMPLETE_STOP. No plug-in/QI/getter/
+report call or Configurator continuation followed. Root cause remains UNPROVEN;
+the unlogged iterator cannot distinguish SDK-permitted NULL/no-match from
+invalidated nonnull. All preinstall backups remain private; postinstall Config/
+all22 preservation reads remain unexecuted and their contents unclaimed.
+The [backup-only stop exception](runtime_config/profile_native_ultimate/backup_after_metadata_stop_20261022/BACKUP_PACKET.md)
+awaits new explicit owner approval for the unchanged known-menu/read-only phase B.
+It permits no metadata/report retry, firmware copy, Config/ProfileStore/native
+write, target metrics, recovery, route change or acceptance waiver. F/source/
+build/resource/limits/protocol/oracles remain unchanged and source unmerged.
+GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
+missing fields, exact human HEP PASS, tested-source integration and strict DONE
+remain. Nunchuk NOT_TESTED, target timing/highwater NOT_MEASURED, RT2 deferred.
 
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,

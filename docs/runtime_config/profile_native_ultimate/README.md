@@ -2,11 +2,12 @@
 
 Current: [exact334f source/build/resource closure](exact_candidate_334f_status_20261021.md)
 and [independently reviewed hardware preparation](hardware_334f_preparation_20261021/README.md).
-GP-NATIVE-001 remains at the hardware gate. [Exact installation/access facts](installation_results_20261022/README.md)
-record one successful owner-delegated firmware copy and original-profile identity,
-then a raw report-selection stop with zero reports. [Bounded metadata/backup
-exception](interface_metadata_backup_extension_20261022/EXTENSION_PACKET.md) awaits
-new owner approval; Config/profile writes and native acceptance remain excluded.
+GP-NATIVE-001 remains at the hardware gate. Exact installation and current legacy
+identity passed; raw selection stopped with zero reports. The [approved metadata
+attempt](metadata_results_20261022/README.md) also stopped before Configurator,
+with exact anchor/inventory but original query0/invalid iterator. The [backup-only
+stop exception](backup_after_metadata_stop_20261022/BACKUP_PACKET.md) awaits new
+owner approval; no diagnostic/report retry or native mutation is included.
 Earlier research introduction below is historical.
 
 

@@ -10,21 +10,24 @@ linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is115
 static RAM197872/delta10528, layout499/512. Broader filesystem support and every
 original cap remain unchanged. Historical failed/incomplete evidence stays exact.
 
-The [exact installation and access result](../runtime_config/profile_native_ultimate/installation_results_20261022/README.md)
-records one owner-delegated F/UF2 copy (1041408 bytes, fsync/close PASS), owner
-“Works” and matching current original-profile4 XInput identity. Its one raw
-capture stopped before interface open with zero reports; no retry followed.
-The approved stop prevented Configurator entry/postinstall preservation reads.
-All22 preinstall backups remain private; unobserved postinstall contents are
-not claimed unchanged. The [bounded metadata/backup extension](../runtime_config/profile_native_ultimate/interface_metadata_backup_extension_20261022/EXTENSION_PACKET.md)
-awaits explicit owner approval for one host metadata snapshot and/or the pending
-known-menu preservation reads. No native Config/profile write, new firmware copy,
-raw capture retry or acceptance waiver is approved. Exact F/source/build/resource/
-limits/oracles remain unchanged, and candidate source is unmerged.
-GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
-missing route fields, target measurements, HEP PASS and tested-source/DONE gates
-remain. Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
-root cause UNPROVEN.
+The [exact installation/access result](../runtime_config/profile_native_ultimate/installation_results_20261022/README.md)
+records one successful owner-delegated F/UF2 copy, owner “Works” and matching
+original-profile4 XInput identity, followed by raw-selection STOP/zero reports.
+The [owner-approved metadata attempt](../runtime_config/profile_native_ultimate/metadata_results_20261022/README.md)
+found the exact retained anchor and10 complete descendants, then original query
+status0/entries0/invalid iterator produced INCOMPLETE_STOP. No plug-in/QI/getter/
+report call or Configurator continuation followed. Root cause remains UNPROVEN;
+the unlogged iterator cannot distinguish SDK-permitted NULL/no-match from
+invalidated nonnull. All preinstall backups remain private; postinstall Config/
+all22 preservation reads remain unexecuted and their contents unclaimed.
+The [backup-only stop exception](../runtime_config/profile_native_ultimate/backup_after_metadata_stop_20261022/BACKUP_PACKET.md)
+awaits new explicit owner approval for the unchanged known-menu/read-only phase B.
+It permits no metadata/report retry, firmware copy, Config/ProfileStore/native
+write, target metrics, recovery, route change or acceptance waiver. F/source/
+build/resource/limits/protocol/oracles remain unchanged and source unmerged.
+GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
+missing fields, exact human HEP PASS, tested-source integration and strict DONE
+remain. Nunchuk NOT_TESTED, target timing/highwater NOT_MEASURED, RT2 deferred.
 
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,
@@ -8825,10 +8828,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact source/build/resource proof remains closed. Owner approved installation and later delegated the single exact UF2 copy:1041408 host bytes/fsync/close PASS, custody source preserved, owner reports Works. Current XInput original profile4/rev1/schema3/inc1/digest matches; no native acceptance follows.",
-        "One new-stage XInput registry inspection found the unique intended location; its one raw capture stopped at the same interface-selection guard before USBInterfaceOpen, zero reports/no timeout/no retry. Root cause remains unproven. Current stop prevented Configurator entry/postinstallation Config/all22 preservation reads; those unobserved contents are not claimed unchanged.",
-        "New bounded host metadata/original-backup exception awaits explicit owner approval. Exact anchored diagnostic is offline only; it opens no USB interface or endpoint, and is no raw output substitute. Proposed Configurator preservation reads retain1entry/1lookup/1identity/1Config/3LIST/22READ/26STATUS bounds. No further device action is approved under the stopped stage.",
-        "Native Config/profile mutation, route adapter execution, full all18/H1-H12 physical observations/required raw backend fields/target measurements/logical restoration/independent exact HEP/tested-source integration/DONE remain pending. GameCube Smash Ultimate functional observations do not waive unexposed fields; Nunchuk NOT_TESTED/RT2 deferred remain."
+        "Exact F/UF2 installed once; current legacy profile4 identity matches. Approved one metadata attempt found retained unique anchor/10 complete descendants but original query0/invalid iterator caused INCOMPLETE_STOP; no report/plugin/QI/getter or Configurator continuation/retry. Postinstall Config/all22 readback still pending under new bounded backup-only stop-exception approval. No native Config/ProfileStore writes or physical campaign approved; all18/H1-H12/complete fields/target measures/exact HEP/tested-source/DONE remain. Frozen source/build/resource/limits/custody unchanged."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",
       "status_documentation_updates": "Record exact reviewed source/resource/verification/rebinding/converter/identity facts in named chapter docs, candidate B/F/tree/build/descriptor/UF2size+SHA/custody, complete H1-H12 observations and limitations. Governance publishes source-free pending/result queue and mirrors, not candidate source. Preserve GP-BIND-001/002 FAIL,003 HARDWARE_VALIDATED/integrated but not strictDONE, historical H4 root cause UNPROVEN, RT2 DEFERRED/underlyingUNRESOLVED, NunchukNOT_TESTED, GameCube identity unsupported. Independent review and actual proof precede live publication; no aggregate PASS substitution. Record diagnostic wire/source/build/custody/overhead/measurement-window provenance and raw target validity/gaps; NATIVE-REVIEW-P1-STACK remains OPEN until actual affected structural proof closes it. No target measurements or physical PASS inferred by this amendment.",

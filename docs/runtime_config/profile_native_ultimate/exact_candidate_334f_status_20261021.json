@@ -126,7 +126,7 @@
     "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED",
     "exact_installation_qualification": "DIRECT_OWNER_APPROVED_EXECUTED_UNTIL_RAW_GUARD_STOP",
     "agent_instead_of_manual_single_copy": "LATER_DIRECT_OWNER_I_WANT_YOU_TO_WRITE_MOVE_IT",
-    "current": "STOP_NO_RETRY_NO_CONFIGURATOR_CONTINUATION_UNTIL_NEW_EXPLICIT_EXCEPTION"
+    "current": "METADATA_INCOMPLETE_STOP_NO_CONFIGURATOR_UNTIL_NEW_B_ONLY_EXCEPTION"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -135,7 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit bounded metadata/pending-Configurator-preservation exception approval; no new report capture retry under old scope",
+    "Explicit bounded backup-only exception to recorded metadata INCOMPLETE_STOP, then pending known-menu Configurator preservation reads; no metadata/report retry",
     "Actual postinstall Config/all22 original decoded-profile preservation readback, plus source-grounded host raw-report access resolution and complete observer plan",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
@@ -220,11 +220,25 @@
     "id": "GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1",
     "file": "interface_metadata_backup_extension_20261022/EXTENSION_PACKET.md",
     "JSON_SHA256": "e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3",
-    "owner_approval": null,
-    "executed": false,
+    "owner_approval": "DIRECT_OWNER_APPROVED_CHOICE_A_METADATA_PLUS_BACKUP",
+    "executed": true,
     "independent_ACK": "interface_metadata_backup_extension_20261022/independent_review/REPORT.md",
     "independent_ACK_SHA256": "40074ade3ced88305a3941f002d9ef6517d6559efaccd6046895243a4b623015",
-    "independent_pins_SHA256": "9e80fcc1d3b066c4bb76dc834fc7fd1efc904a4584ad3a33a9aff36991f9fb79"
+    "independent_pins_SHA256": "9e80fcc1d3b066c4bb76dc834fc7fd1efc904a4584ad3a33a9aff36991f9fb79",
+    "execution_state": "ONE_METADATA_INCOMPLETE_STOP_BEFORE_B_NO_RETRY"
   },
-  "latest_sourcefree_installation_validation": "installation_publication_validation_20261022/result.json"
+  "latest_sourcefree_installation_validation": "installation_publication_validation_20261022/result.json",
+  "actual_metadata_result": "metadata_results_20261022/result.json",
+  "next_backup_stop_packet": {
+    "id": "GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1",
+    "file": "backup_after_metadata_stop_20261022/BACKUP_PACKET.md",
+    "MD_SHA256": "80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229",
+    "JSON_SHA256": "a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85",
+    "owner_approval": null,
+    "executed": false,
+    "independent_ACK": "backup_after_metadata_stop_20261022/independent_review/REPORT.md",
+    "independent_ACK_SHA256": "62a4022798c71e651c3abe203a811ebb101370537f3654b83448dba7080f10eb",
+    "independent_pins_SHA256": "2f0cd19b8733040dff7ef86d8a63805197357e52093d528453329b550eeee8a8"
+  },
+  "latest_sourcefree_metadata_stop_validation": "metadata_stop_publication_validation_20261022/result.json"
 }

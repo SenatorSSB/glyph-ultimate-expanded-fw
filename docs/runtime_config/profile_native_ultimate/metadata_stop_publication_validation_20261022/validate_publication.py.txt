@@ -1,0 +1,69 @@
+from pathlib import Path
+import json,hashlib,re,subprocess
+W=Path('/private/tmp/glyph-native-curation-20261020');R=W/'docs/runtime_config/profile_native_ultimate';V=R/'metadata_stop_publication_validation_20261022';O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');F=Path('/private/tmp/glyph-profile-native-20261020');BASE='56b128561aa9cfd682a1e7e06ae4915bbc1fe258'
+def sh(*a,cwd=W):return subprocess.check_output(a,cwd=cwd,text=True)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def check(p,e):
+ p=Path(p);assert p.is_file() and not p.is_symlink() and p.stat().st_size==e['bytes'] and sha(p)==e['sha256'],str(p)
+def queue(s):
+ a=s.index('```json',s.index('<!-- queue-state:start -->'))+7;b=s.index('```',a);return json.loads(s[a:b])
+oldq=queue(sh('git','show',BASE+':docs/project/ACTIVE_AGENT_QUEUE.md'));newq=queue((W/'docs/project/ACTIVE_AGENT_QUEUE.md').read_text());q=json.loads(json.dumps(oldq));oldi=next(i for i in q['items'] if i['id']=='GP-NATIVE-001');i=next(i for i in newq['items'] if i['id']=='GP-NATIVE-001');oldi['hardware_evidence_gaps']=i['hardware_evidence_gaps'];assert q==newq
+assert i['status']=='HARDWARE_TEST_REQUIRED' and i['hardware_result'] is None and i['hardware_evidence_record'] is None and i['hardware_evidence_dependency_satisfied'] is False
+old=json.loads(sh('git','show',BASE+':docs/runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.json'));new=json.loads((R/'exact_candidate_334f_status_20261021.json').read_text())
+assert {k for k in set(old)|set(new) if old.get(k)!=new.get(k)}<={'next_access_extension_packet','device_approval','actual_metadata_result','next_backup_stop_packet','latest_sourcefree_metadata_stop_validation','remaining'}
+assert new['next_access_extension_packet']['owner_approval']=='DIRECT_OWNER_APPROVED_CHOICE_A_METADATA_PLUS_BACKUP' and new['next_access_extension_packet']['executed'] is True
+assert new['next_backup_stop_packet']['owner_approval'] is None and new['next_backup_stop_packet']['executed'] is False
+A=R/'metadata_results_20261022';B=R/'backup_after_metadata_stop_20261022';D=O/'local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022';parent=O/'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022';original=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021'
+counts=[]
+for folder,rel,pinh,count in [(D,'metadata_stage_custody_manifest.json','221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7',7),(parent,'installation_stage_custody_manifest.json','228e41413f5a49137db80769a21bf1ffca86c0d2d9996706612e4ce14c8e70f2',34),(original,'configurator_entry_20261022/private_backup_custody_manifest.json','f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d',251)]:
+ p=folder/rel;assert sha(p)==pinh;m=json.loads(p.read_text());assert len(m['files'])==count
+ for n,e in m['files'].items():check(folder/n,e)
+ counts.append(count)
+assert json.loads((D/'session_state.json').read_text())['stop'] is True
+s=json.loads((D/'session_state.json').read_text());assert s['metadata_invocations']==1 and all(s[k]==0 for k in ['owner_Menu_Configurator_entries','Configurator_CDC_metadata_lookups','Configurator_identity_requests','Config_backups','STATUS_total','LIST_calls','original_profile_READs','Config_profile_writes','firmware_copies','target_metric_requests','raw_report_capture_retries','Switch_WUP_actions'])
+for n in ['owner_approval.json','metadata_stdout.jsonl','metadata_stderr.txt','metadata_process_result.json','metadata_stop.json','session_state.json','metadata_stage_custody_manifest.json']:assert (D/n).read_bytes()==(A/n).read_bytes()
+assert (A/'metadata_once.py.txt').read_bytes()==Path('/private/tmp/glyph-native-approved-anchored-metadata-once-20261022.py').read_bytes()
+rows=[json.loads(x) for x in (A/'metadata_stdout.jsonl').read_text().splitlines()];assert len(rows)==125 and rows[-1]['outcome']=='INCOMPLETE_STOP' and rows[-1]['enumerated']==0 and rows[-1]['iterator_valid'] is False
+assert rows[-1]['plugins_attempted']==0 and rows[-1]['reports']==0 and not any(x['kind'] in ['plugin','query_interface300','getter','original_query_service'] for x in rows)
+assert len([x for x in rows if x['kind']=='registry_node'])==11
+bp=json.loads((B/'BACKUP_PACKET.json').read_text());prior=json.loads((R/'interface_metadata_backup_extension_20261022/EXTENSION_PACKET.json').read_text());assert bp['preservation_readback']==prior['preservation_readback']
+assert bp['owner_approval'] is None and bp['hardware_result'] is None and bp['state']=='OWNER_APPROVAL_REQUIRED_NOT_EXECUTED'
+assert sha(B/'BACKUP_PACKET.md')=='80c4a92a8e4e94e4325feaaad29bad3c2ef8ba6f26dcdd8e3655d21327468229' and sha(B/'BACKUP_PACKET.json')=='a864c67394b9d5c857a1489401dcfd387031f9476bced27ea6eca5b33617dd85'
+for p in [A,B]:
+ for n,e in json.loads((p/'manifest.json').read_text())['files'].items():check(p/n,e)
+review=B/'independent_review/PINS.json';pinned=json.loads(review.read_text());review_count=0
+for group in ['files','inputs','source_references','external_SDK_input_references','unchanged_source_input_references','private_input_references','unchanged_binary_input_references']:
+ for p,e in pinned.get(group,{}).items():check(p,e);review_count+=1
+assert sh('git','rev-parse','HEAD',cwd=F).strip()==old['candidate']['git_sha'] and sh('git','rev-parse','HEAD^{tree}',cwd=F).strip()==old['candidate']['tree'] and sh('git','status','--porcelain',cwd=F)==''
+fc=O/Path(old['artifacts']['preserved_firmware_artifact_locator']).parent
+for n,k in [('firmware.uf2','uf2'),('firmware.elf','elf'),('firmware.bin','bin')]:check(fc/n,old['artifacts'][k])
+for n,h in {'tools/glyph_runtime_identity_tool.py':'bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead','tools/glyph_profile_store_production_tool.py':'4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef'}.items():
+ assert (F/n).is_file() and sha(F/n)==h
+tracked=set(sh('git','diff','--name-only',BASE).splitlines());untracked=set(sh('git','ls-files','--others','--exclude-standard').splitlines());changed=tracked|untracked
+assert tracked=={'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md','docs/project/ACTIVE_AGENT_QUEUE.md'}|{'docs/runtime_config/profile_native_ultimate/'+p for p in ['README.md','chapter_ledger.md','exact_candidate_334f_status_20261021.md','exact_candidate_334f_status_20261021.json']}
+prefixes=['docs/runtime_config/profile_native_ultimate/'+p+'/' for p in ['metadata_results_20261022','backup_after_metadata_stop_20261022','metadata_stop_publication_validation_20261022']];assert all(any(p.startswith(x) for x in prefixes) for p in untracked)
+serials=[]
+def walk(v):
+ if isinstance(v,dict):
+  for k,x in v.items():
+   if 'serial' in k.lower() and isinstance(x,str) and x and '/' not in x and len(x)>4:serials.append(x.encode())
+   walk(x)
+ elif isinstance(v,list):
+  for x in v:walk(x)
+walk(json.loads((parent/'xinput_serial_metadata.json').read_text()))
+links=0
+for rel in changed:
+ p=W/rel;assert p.is_file() and not p.is_symlink();b=p.read_bytes();assert b'\x00' not in b
+ for private in serials:assert private not in b,('private serial',rel)
+ if rel in untracked:assert not re.search(rb'[A-Za-z0-9+/]{300,}={0,2}',b),('unexpected encoded payload',rel)
+ if rel.endswith('.md'):
+  for t in re.findall(r'\[[^\]]*\]\(([^)]+)\)',b.decode()):
+   if re.match(r'^[a-z]+:',t) or t.startswith('#'):continue
+   assert (p.parent/t.split('#')[0]).exists(),(rel,t);links+=1
+subprocess.run(['git','diff','--check'],cwd=W,check=True)
+assert 'glyph_agent_framework_docs: PASS' in (V/'framework.log').read_text()
+assert 'status=PASS' in (V/'sequence.log').read_text()
+assert 'PASS' in (V/'navigation.log').read_text()
+assert not (V/'diff.log').read_bytes()
+result={'state':'FOCUSED_SOURCEFREE_PASS_NOT_HARDWARE_ACCEPTANCE','framework':'PASS','sequence':'PASS','navigation':'PASS','diff':'PASS','scope':'DOCS_ONLY','other_orders_unchanged':len(newq['items'])-1,'only_queue_field_changed':'GP-NATIVE-001.hardware_evidence_gaps','frozen_source_build_resource_protocol_oracles_and_hardware_gates_unchanged':True,'private_metadata_stage_files_rehashed':7,'private_installation_stage_files_rehashed':34,'private_original_files_rehashed':251,'all_prior_public_evidence_unchanged_by_diff_scope':True,'peer_input_files_rehashed':review_count,'backup_phase_B_equal_to_prior_reviewed_bounds':True,'actual_metadata_invocations':1,'metadata_result':'INCOMPLETE_STOP_NO_RETRY_NO_CONFIGURATOR_CONTINUATION','new_backup_packet_owner_approval':None,'new_backup_packet_executed':False,'hardware_result':None,'native_hardware':'NOT_TESTED','timing_highwater':'NOT_MEASURED','privacy':'PASS_no_private_serial_or_original_payload_publication','local_markdown_links':links,'changed_paths_at_check':len(changed),'full_surface':'NOT_RERUN; historical aggregate debt preserved; no global PASS'}
+(V/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

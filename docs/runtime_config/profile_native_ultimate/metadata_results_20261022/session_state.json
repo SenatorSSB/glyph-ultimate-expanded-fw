@@ -1,0 +1,21 @@
+{
+  "packet_id": "GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1",
+  "choice": "A",
+  "stop": true,
+  "stage": "STOP_METADATA_ERROR_NO_FURTHER_ACTION",
+  "metadata_invocations": 1,
+  "owner_Menu_Configurator_entries": 0,
+  "Configurator_CDC_metadata_lookups": 0,
+  "Configurator_identity_requests": 0,
+  "Config_backups": 0,
+  "STATUS_total": 0,
+  "LIST_calls": 0,
+  "original_profile_READs": 0,
+  "Config_profile_writes": 0,
+  "firmware_copies": 0,
+  "target_metric_requests": 0,
+  "raw_report_capture_retries": 0,
+  "Switch_WUP_actions": 0,
+  "parent_stage_immutable_custody_SHA256": "228e41413f5a49137db80769a21bf1ffca86c0d2d9996706612e4ce14c8e70f2",
+  "parent_stage_stop_preserved": true
+}

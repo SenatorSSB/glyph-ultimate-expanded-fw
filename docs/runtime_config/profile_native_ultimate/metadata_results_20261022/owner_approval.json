@@ -1,0 +1,11 @@
+{
+  "packet_id": "GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1",
+  "packet_canonical": "56b128561aa9cfd682a1e7e06ae4915bbc1fe258",
+  "MD_SHA256": "19c7fd88a8d6963ae74a53222ae8cb234b0b033e51ff9b28b02c6cac7eade4f0",
+  "JSON_SHA256": "e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3",
+  "questionItemId": "[\"request_user_input_async\",\"call_d362d521821142a5b6be21255bf448c5\",0]",
+  "owner_answer": "Approve metadata + backup (Recommended)",
+  "choice": "A_ONE_METADATA_PLUS_B_BACKUP_READS",
+  "recorded_utc": "2026-10-21T22:55:19.047218+00:00",
+  "authority": "DIRECT_OWNER_REPLY; no report retry/Config or ProfileStore/native mutations/flash/metrics/Switch/WUP/acceptance"
+}
