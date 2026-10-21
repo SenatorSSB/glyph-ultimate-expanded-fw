@@ -1,0 +1,7 @@
+{
+  "equal": true,
+  "rows": 1071,
+  "current_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+  "baseline_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+  "target_stack_timing": "NOT_MEASURED"
+}

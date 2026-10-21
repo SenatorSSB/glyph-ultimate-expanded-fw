@@ -1,0 +1,62 @@
+{
+  "kind": "FROZEN9CFF_LEGACY_COPY_READ_SOURCE_AND_COMPILED_FRAME_ACCOUNTING",
+  "checkpoint": "9cff6df7dac544f8d88237f37cd62c26276c690b",
+  "tree": "9a18bd179820c47bdc1a38f1a1afed7b28005f6f",
+  "source_object_verification": {
+    "HAL/pico/src/core/Persistence.cpp": {
+      "checkpoint_source_sha256": "007ac34395f49c7e3e80bdd42f2c9ce79b2127123b0d83f7b11885213d6698e1",
+      "manifest_source_match": true,
+      "object_match": true
+    },
+    "HAL/pico/src/core/ProfileStore.cpp": {
+      "checkpoint_source_sha256": "a9baf67e22777cb28d7336a51d43a58d769ecc4c120e6b5cc108a1a09d5a7cf8",
+      "manifest_source_match": true,
+      "object_match": true
+    },
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "checkpoint_source_sha256": "594cfa49383f2c7c1026a1d2cc12bd4e7b8d24b7153ca2888d068c0200ecc4c8",
+      "manifest_source_match": true,
+      "object_match": true
+    },
+    "config/glyph/common/src/config.cpp": {
+      "checkpoint_source_sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+      "manifest_source_match": true,
+      "object_match": true
+    },
+    "src/core/mode_selection.cpp": {
+      "checkpoint_source_sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6",
+      "manifest_source_match": true,
+      "object_match": true
+    }
+  },
+  "probe_metadata_head": "750297a42da942f5079eab78b758b05acbcae5ae",
+  "probe_firmware_version_define": "3b792fd7-DIRTY",
+  "artifact_class": "PRELIMINARY_O3_OBJECTS_PLUS_UNCHANGED_BCB_SDK_ELF_NOT_FINAL_FIRMWARE",
+  "bcb_elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "helper_body_identical_bcb_to9cff": {
+    "copy_checked_file": "1aba76f947df654b21de68084c1c3576335a2bd71037d6e0869803a792339d2b",
+    "hash_file": "d16b5675bad922f7e1cb3a413e99b73fe315dec79e96c82b3a2a830961540c9c",
+    "LegacySourceIdentity": "9ff58926028ee6bb927343217160c29bc49b95e7615452cb54a9696a4eb71dde"
+  },
+  "ordinary_commit_program_bytes": 1008,
+  "copy_output_Open_foreground_bytes": 1992,
+  "premask_noInterrupts_bytes": 16,
+  "boot_feasible_beforeROM_IRQ_bytes": 300,
+  "boot_conservative_IRQ_upper_bytes": 348,
+  "copy_qualified_source_composition_bytes": 2308,
+  "copy_conservative_composition_bytes": 2356,
+  "read_Open_definite_prefix_bytes": 668,
+  "read_Open_upper_bytes": 688,
+  "Identity280_retained_during_hash656": true,
+  "existing_snapshot_source_composition_bytes": 2168,
+  "published_snapshot_source_composition_bytes": 2200,
+  "existing_snapshot_conservative_upper_bytes": 2236,
+  "published_snapshot_conservative_upper_bytes": 2268,
+  "copy_two_automatic_Files_only_idealized_composition_bytes": 2156,
+  "hypothetical_Identity8_execute_upper_bytes": 1996,
+  "new_fault_images": false,
+  "physical_overflow_observation": false,
+  "final_linked_resource_bound": false,
+  "whole_resource_PASS": false,
+  "implementation_or_authority_claim": false
+}

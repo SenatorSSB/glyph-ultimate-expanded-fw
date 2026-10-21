@@ -1,0 +1,27 @@
+{
+  "candidate": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+  "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+  "elf": {
+    "bytes": 5592128,
+    "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+  },
+  "outputs": {
+    "disassembly.txt": {
+      "bytes": 11238382,
+      "sha256": "f0e6206eaa4a8e6129a90a3273e59fd54e8fd96ec0d830c43edf12f40111a0e1"
+    },
+    "symbols.txt": {
+      "bytes": 372827,
+      "sha256": "45d5aa7f12d78ff244a5e77be5540e160ac7c4798848dd06fcda5d0392e54602"
+    },
+    "sections.txt": {
+      "bytes": 1251,
+      "sha256": "6d6732a53fb0e266c8b5531aa540450550d9dd0bee7e15b9aac91ea6293967ed"
+    },
+    "elf_headers.txt": {
+      "bytes": 671035,
+      "sha256": "3cf498b5f62aee060ade44d51d17343ae9fb6219e5e587c66d6d691510a5dcfb"
+    }
+  },
+  "qualification": "Engineering P1OPEN artifact; not physical acceptance/finalresource proof"
+}

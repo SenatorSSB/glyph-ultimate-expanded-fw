@@ -9,7 +9,7 @@ from check_glyph_profile_store_littlefs_host import FRAMEWORK
 import glyph_serial_config_tool as writer
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--output-dir',required=True,type=Path);parser.add_argument('--smoke',action='store_true');parser.add_argument('--store-header',type=Path);parser.add_argument('--store-source',type=Path,default=ROOT/'HAL/pico/src/core/ProfileStore.cpp');args=parser.parse_args();out=args.output_dir;out.mkdir(parents=True,exist_ok=True)
+    parser=argparse.ArgumentParser();parser.add_argument('--output-dir',required=True,type=Path);parser.add_argument('--smoke',action='store_true');parser.add_argument('--default-enum',action='store_true');parser.add_argument('--store-header',type=Path);parser.add_argument('--store-source',type=Path,default=ROOT/'HAL/pico/src/core/ProfileStore.cpp');args=parser.parse_args();out=args.output_dir;out.mkdir(parents=True,exist_ok=True)
     def run(argv):
         p=subprocess.run(list(map(str,argv)),cwd=ROOT,capture_output=True,text=True,timeout=120,env={**os.environ,'UBSAN_OPTIONS':'halt_on_error=1:print_stacktrace=1'})
         if p.returncode:raise RuntimeError(' '.join(map(str,argv))+'\n'+p.stdout+p.stderr)
@@ -21,14 +21,14 @@ def main():
     if args.store_header:
         overlay=out/'header/core';overlay.mkdir(parents=True,exist_ok=True);(overlay/'ProfileStore.hpp').write_bytes(args.store_header.read_bytes());includes.insert(0,overlay.parent)
     inc=[x for p in includes for x in ['-I',p]]
-    flags=['-fsanitize=address,undefined','-fno-omit-frame-pointer','-g','-fshort-enums','-DLFS_NAME_MAX=32'];objects=[]
+    flags=['-fsanitize=address,undefined','-fno-omit-frame-pointer','-g','-DLFS_NAME_MAX=32']+([] if args.default_enum else ['-fshort-enums']);objects=[]
     for src in [NANOPB/'pb_common.c',NANOPB/'pb_decode.c',NANOPB/'pb_encode.c',gen/'config.pb.c',library/'src/lfs.c',library/'src/lfs_util.c']:
         obj=out/(src.stem+'.o');run(['cc','-std=c11',*flags,*inc,'-c',src,'-o',obj]);objects.append(obj)
     probe=out/'mounted-gc.cpp';probe.write_text('#include '+json.dumps(str(args.store_source.resolve()))+'\nbool GlyphMountedReadRangeProbe(const char *p,size_t o,uint8_t *b,size_t n){MountedStorage s;return s.ReadRange(p,o,b,n);}\n')
     harness=ROOT/'tools/fixtures/profile_native_ultimate/store_publication_nor.cpp';sources=[harness,probe,ROOT/'HAL/pico/src/core/CheckedStorage.cpp',ROOT/'src/modes/UltimateNativeProfile.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp',ROOT/'src/core/config_rgb_target_validation.cpp',ROOT/'config/glyph/common/src/glyph_config_validation.cpp'];exe=out/'store-publication'
     run(['c++','-std=c++17',*flags,'-Wall','-Wextra','-Werror','-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1',*inc,*sources,*objects,'-o',exe]);output=run([exe,fixture]+(['smoke'] if args.smoke else []));(out/'run.log').write_text(output);print(output,end='')
     pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [args.store_source,harness,Path(__file__),(args.store_header or ROOT/'include/core/ProfileStore.hpp'),ROOT/'HAL/pico/src/core/CheckedStorage.cpp',library/'lib/littlefs/lfs.c',library/'lib/littlefs/lfs.h']}
-    (out/'report.json').write_text(json.dumps({'state':'PASS_HOST_REAL_NOR_LITTLEFS_STORE_PUBLICATION','source_sha256':pins,'broader_namespace':'unrelated directory retained','positive_orphan_PENDING_MOVE':'NOT_RUN_HERE_separate_exact_witness_required','target_stack_timing':'NOT_MEASURED','output_sha256':hashlib.sha256(output.encode()).hexdigest()},indent=2)+'\n')
+    (out/'report.json').write_text(json.dumps({'state':'PASS_HOST_REAL_NOR_LITTLEFS_STORE_PUBLICATION','default_enum':args.default_enum,'source_sha256':pins,'broader_namespace':'unrelated directory retained','positive_orphan_PENDING_MOVE':'NOT_RUN_HERE_separate_exact_witness_required','target_stack_timing':'NOT_MEASURED','output_sha256':hashlib.sha256(output.encode()).hexdigest()},indent=2)+'\n')
 if __name__=='__main__':
     try:main()
     except (AssertionError,OSError,RuntimeError,subprocess.SubprocessError) as e:print(str(e),file=sys.stderr);raise SystemExit(1)

@@ -31,7 +31,7 @@ Config make_config(unsigned selector) {
 Bytes config_record(const Config &c) {
     size_t n=0;require(pb_get_encoded_size(&n,Config_fields,&c),"config encoded size");Bytes b(sizeof(Persistence::ConfigHeader)+n);
     auto out=pb_ostream_from_buffer(b.data()+sizeof(Persistence::ConfigHeader),n);require(pb_encode(&out,Config_fields,&c),"config encode");
-    CRC32 crc;crc.update(b.data()+sizeof(Persistence::ConfigHeader),n);Persistence::ConfigHeader h{};h.config_size=n;h.config_crc=crc.finalize();std::memcpy(b.data(),&h,sizeof(h));return b;
+    CRC32 crc;crc.update(b.data()+sizeof(Persistence::ConfigHeader),n);Persistence::ConfigHeader h;std::memset(&h,0,sizeof(h));h.config_size=n;h.config_crc=crc.finalize();std::memcpy(b.data(),&h,sizeof(h));return b;
 }
 std::string digest(const uint8_t *p,size_t n) {uint8_t d[32];Sha256 sha;sha.Update(p,n);sha.Final(d);char hex[65];for(unsigned i=0;i<32;++i)std::snprintf(hex+2*i,3,"%02x",d[i]);return hex;}
 std::string canonical_files() {
@@ -79,7 +79,11 @@ std::vector<std::string> run_case(const std::string &label,size_t target,Checked
     require(lfs_unmount(&mounted_fs)==0,"release actual NOR mount");return captured;
 }
 }
+#ifdef GLYPH_PERSISTENCE_NOR_NO_MAIN
+int unused_persistence_save_main() {
+#else
 int main() {
+#endif
     try {
         const auto success=run_case("success",SIZE_MAX,CheckedStorage::Fault::None);unsigned faults=0;
         for(size_t i=0;i<success.size();++i)for(auto fault:{CheckedStorage::Fault::Fail,CheckedStorage::Fault::LostAcknowledgement}) {

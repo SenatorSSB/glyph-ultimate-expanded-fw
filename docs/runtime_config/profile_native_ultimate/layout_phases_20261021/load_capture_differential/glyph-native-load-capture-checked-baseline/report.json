@@ -1,0 +1,23 @@
+{
+  "state": "PASS_HOST_ACTUAL_PRODUCTION_NOR_LITTLEFS",
+  "default_enum": false,
+  "source_hashes": {
+    "tools/fixtures/profile_native_ultimate/load_capture_nor.cpp": "7a33bd7a63315962bc2ff8b0312d7c403b0a8e26faaaa09f78fcb05fe8260683",
+    "/private/tmp/glyph-native-load-capture-baseline-a288.cpp": "1eb642b02465e281d2fff969b2d805ec5a9e4d92985454272795b3f351e9af91",
+    "/private/tmp/glyph-native-load-capture-checked-baseline/mounted-store.cpp": "8eab1b1a8d9835297704d418e6d7f1c147b3b81c93eca2e9936405eeec185353",
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/pb_arduino.cpp": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5",
+    "/private/tmp/glyph-profile-native-20261020/tools/fixtures/gp_config021_persisted_recovery/dependencies/CRC32.cpp": "d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918",
+    "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp": "175dc12e388813635cd29dbf146aec6f594d9eb9ca91f431e7876439fcb1fea2",
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_rgb_target_validation.cpp": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7",
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+    "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate/run_persistence_nor.py": "e543de300557f6798e4fb8a704411e78c5523068bc032814e53e6d69ac3af542",
+    "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate/persistence_nor_lifetimes.cpp": "7c413c631666d5e253748265d200ee04c67cdca112592fbebd36aecda8f36eac",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5"
+  },
+  "trace_sha256": "9f8947c85972f72af733dc3e9a1f9f9de9ecad6817cc068a2bf0e792604da377",
+  "target_stack_timing": "NOT_MEASURED"
+}

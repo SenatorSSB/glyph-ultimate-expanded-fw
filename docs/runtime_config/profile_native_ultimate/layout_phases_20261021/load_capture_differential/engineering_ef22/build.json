@@ -1,0 +1,97 @@
+{
+  "kind": "EXACT_COMMITTED_NATIVE_BUILD_ONLY_NO_HARDWARE_ACCEPTANCE",
+  "base_source_free_authorization_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "baseline_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+  "source_free_authority_chain": [
+    "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+    "e4bf626c71d0494a138721eff54ac563ef2877cb",
+    "262e51f2740789458be81fbd49c51c099c7f5a65",
+    "4a858127f35bd607d9bcd00ae669f33d083048d9",
+    "2677215b3cf1f3390782f3a3400ce33b20628d97",
+    "df5fbcd019dfd7e72b897b7d5a43e6c142ecd665",
+    "0a346975a452c5a5d00aac4e2a123783a9773db7"
+  ],
+  "latest_source_free_authority_sha": "0a346975a452c5a5d00aac4e2a123783a9773db7",
+  "original_wrapper_sha256": "2ca2f509d839f73ed5a7c202477761041b18b6932a658467a0ccc18df918cb34",
+  "wrapper_provenance": {
+    "bytes": 5275,
+    "sha256": "26c04bc6120f7eea977e97b3cf0f7de209e5b16cd882e12890e92eb88dc156cd"
+  },
+  "instrumentation_requirement": "Final handed-off hardware candidate must retain the owner-authorized diagnostic facility; source/ELF review separately required.",
+  "before": {
+    "head": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+    "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+    "tracked_status": "",
+    "full_status": ""
+  },
+  "command": [
+    "./scripts/build-glyph-mk6-quiet.sh"
+  ],
+  "canonical_command_unavailable": true,
+  "started_utc": "2026-10-21T10:59:49.851055+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 111.12376304197824,
+  "finished_utc": "2026-10-21T11:01:40.975187+00:00",
+  "after": {
+    "head": "ef22f6107ec1fb26e8a25ab1f7345f301952b237",
+    "tree": "aea9a57e47d717eee9332aceda3cd6f50d44df92",
+    "tracked_status": "",
+    "full_status": ""
+  },
+  "ram": {
+    "used_bytes": 197700,
+    "limit_bytes": 262144
+  },
+  "flash": {
+    "used_bytes": 506812,
+    "limit_bytes": 1568768
+  },
+  "source_stable": true,
+  "artifacts": {
+    "firmware.uf2": {
+      "bytes": 1037824,
+      "sha256": "f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113"
+    },
+    "firmware.elf": {
+      "bytes": 5592128,
+      "sha256": "5d3f25e40b1b3765f891f3bc8f3fa16ff3c67483104c6f08f609a8569bede78f"
+    },
+    "firmware.bin": {
+      "bytes": 518844,
+      "sha256": "89e943b8730d41f78777dd47a89b5e62165a144ece479b8feed2615a1fb7c22a"
+    }
+  },
+  "descriptors": {
+    "config.pb.h": {
+      "bytes": 125759,
+      "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f"
+    },
+    "config.pb.c": {
+      "bytes": 1774,
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    }
+  },
+  "logs": {
+    "wrapper.log": {
+      "bytes": 374,
+      "sha256": "25b937badc633dd2bc8185e9baae7a96aa82cbfddac3c1f02a74a94f58f4838c"
+    },
+    "glyph_mk6_build.log": {
+      "bytes": 40861,
+      "sha256": "4637c50ab0df71a32e28f2ed023308888cef95b75687776c0f850cd774b2db72"
+    }
+  },
+  "hardware_status": "NOT_TESTED",
+  "target_timing": "NOT_MEASURED",
+  "whole_target_stack": "NOT_MEASURED",
+  "accepted_resource_caps": {
+    "static_ram_max": 199632,
+    "added_static_ram_max": 12288,
+    "core0_stack": 2048,
+    "core1_stack": 2048
+  },
+  "static_ram_delta_vs_exact_baseline": 10356,
+  "static_ram_cap_pass": true,
+  "durable_custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113",
+  "custody_rehash": "MATCH"
+}

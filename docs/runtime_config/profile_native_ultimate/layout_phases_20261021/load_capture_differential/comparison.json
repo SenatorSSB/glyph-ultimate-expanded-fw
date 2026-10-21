@@ -1,0 +1,48 @@
+{
+  "state": "PASS_HOST_DIFFERENTIAL_ONLY",
+  "comparisons": [
+    {
+      "name": "load_capture_short",
+      "state": "PASS_EXACT_BYTE_EQUAL",
+      "rows": 7488,
+      "sha256": "9f8947c85972f72af733dc3e9a1f9f9de9ecad6817cc068a2bf0e792604da377",
+      "left": "glyph-native-load-capture-checked-current",
+      "right": "glyph-native-load-capture-checked-baseline"
+    },
+    {
+      "name": "load_capture_default",
+      "state": "PASS_EXACT_BYTE_EQUAL",
+      "rows": 7488,
+      "sha256": "9f8947c85972f72af733dc3e9a1f9f9de9ecad6817cc068a2bf0e792604da377",
+      "left": "glyph-native-load-capture-checked-default-current",
+      "right": "glyph-native-load-capture-checked-default-baseline"
+    },
+    {
+      "name": "store_default",
+      "state": "PASS_EXACT_BYTE_EQUAL",
+      "rows": 1071,
+      "sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241",
+      "left": "glyph-native-store-publication-checked-default-current",
+      "right": "glyph-native-store-publication-default-baseline"
+    }
+  ],
+  "negative_controls": [
+    {
+      "mutation": "publish caller before prior restore Rename",
+      "result": "DETECTED_DIRECT_ASSERTION",
+      "message": "failed Load never publishes candidate to caller"
+    },
+    {
+      "mutation": "construct copy output before input",
+      "result": "DETECTED_FULL_TRACE_DIFFERENTIAL",
+      "first_different_row_zero_based": 1855
+    }
+  ],
+  "coverage": "Load current/prior/legacy, CRC refusal; Capture current/prior/legacy, missing/exact/mismatched snapshot, invalid CRC/missing source; every observed Before/After operation event with Fail and LostAcknowledgement; fresh next Load and foreign-dir/handle invariants",
+  "limits": [
+    "No actual target stack/timing measurement",
+    "No full arbitrary malformed-wire/mixed-native or capacity-exhaustion corpus claimed by this finite harness; existing semantic/native/capacity proofs remain separate",
+    "Positive-orphan/PENDING_MOVE operation/recovery proofs are separately pinned; this suite preserves broader unrelated dirs but does not synthesize those states"
+  ],
+  "hardware": "NOT_TESTED"
+}

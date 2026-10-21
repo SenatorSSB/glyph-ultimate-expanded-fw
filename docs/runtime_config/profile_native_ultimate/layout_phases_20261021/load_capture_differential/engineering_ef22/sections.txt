@@ -1,0 +1,29 @@
+/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/ef22f6107ec1fb26e8a25ab1f7345f301952b237/f9aa42cb2049178d1d0253dcb2db2161b2d6464d5ff8a6dbcc58c5769167f113/firmware.elf  :
+section                size        addr
+.boot2                  256   268435456
+.ota                   9444   268435712
+.partition             2588   268445156
+.text                423560   268447744
+.rodata               58288   268871304
+.ram_vector_table       192   536870912
+.data                 24708   536871104
+.scratch_x                0   537133056
+.scratch_y                0   537137152
+.bss                 172992   536895816
+.heap                  2048   537068808
+.stack1_dummy          2048   537133056
+.stack_dummy           2048   537137152
+.ARM.attributes          40           0
+.comment                 18           0
+.debug_info         2590722           0
+.debug_abbrev        211226           0
+.debug_loclists      654340           0
+.debug_aranges        33168           0
+.debug_rnglists       70759           0
+.debug_line          587173           0
+.debug_str           370593           0
+.debug_frame          91648           0
+.debug_line_str        1020           0
+Total               5308879
+
+

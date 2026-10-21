@@ -1,0 +1,8 @@
+{
+  "equal": true,
+  "rows": 7488,
+  "current_sha256": "9f8947c85972f72af733dc3e9a1f9f9de9ecad6817cc068a2bf0e792604da377",
+  "baseline_sha256": "9f8947c85972f72af733dc3e9a1f9f9de9ecad6817cc068a2bf0e792604da377",
+  "target_stack_timing": "NOT_MEASURED",
+  "state": "PASS_EXACT_DIFFERENTIAL"
+}

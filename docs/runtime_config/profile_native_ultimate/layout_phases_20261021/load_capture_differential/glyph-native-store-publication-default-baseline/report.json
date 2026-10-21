@@ -1,0 +1,16 @@
+{
+  "state": "PASS_HOST_REAL_NOR_LITTLEFS_STORE_PUBLICATION",
+  "source_sha256": {
+    "/private/tmp/glyph-native-publication-baseline-a288.cpp": "42ff650c8380ce9edb1dfccd2dba6de90a523c4bb01e120d2b1e3920d7a34eb3",
+    "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate/store_publication_nor.cpp": "8e93744aee9fcbaa8850d190108666503a6b53dfc889b12db43c7294a29533dc",
+    "/private/tmp/glyph-native-store-publication-default-runner.py": "26fff00f5b7e435467985e63eccdbad451dd7857fcc843f44d68414a39f355d1",
+    "/private/tmp/glyph-native-publication-baseline-a288.hpp": "3f1fab14abe5999f766799f6f19f8d8f46f1c109cc338cac29799f702c0bd2e3",
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5",
+    "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.h": "bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a"
+  },
+  "broader_namespace": "unrelated directory retained",
+  "positive_orphan_PENDING_MOVE": "NOT_RUN_HERE_separate_exact_witness_required",
+  "target_stack_timing": "NOT_MEASURED",
+  "output_sha256": "bf2fd11e2dc1430dd43e5ac3481af3148b6c7cb4e243a4fa483515892fbad241"
+}
