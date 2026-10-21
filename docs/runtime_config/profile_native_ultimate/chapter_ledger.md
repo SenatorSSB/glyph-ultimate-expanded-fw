@@ -1,5 +1,30 @@
 # Profile-native Ultimate execution chapter
 
+## Current exact334f software/resource closure and hardware preparation — 2026-10-21
+
+[Exact candidate/build/resource facts](exact_candidate_334f_status_20261021.md)
+supersede earlier checkpoint status below. Source F334f is clean, frozen, independently
+reviewed and built with retained instrumentation. Final all140/all31 linked proof
+closes P1 within2048/core,197872 total static and499 layout bytes; no support-domain
+or resource-limit change. [Reviewed334-row packet/addendum](hardware_334f_preparation_20261021/README.md)
+binds all18 families, safe H10 current-Configurator non-attestation, and actual-NOR
+H11 refusal/reference recovery/logical restore proof. Hardware preparation now
+uses owner-confirmed Mac/WUP-028 information; complete route observers and actual
+session eligibility remain to be resolved before exact device approval.
+
+Same root is sole canonical publisher. Same finite source/resource/packet workers
+completed their proofs; the hardware preparer resumes only bounded Mac observer
+engineering. No new full chat, standing schedule, product order or successor.
+Requested worker routing remains separately recorded; runtime observed model/effort
+and per-worker token totals are UNKNOWN. READY-to-hardware physical handoff and
+hardware-report-to-DONE times have not completed; no human results or HEP call.
+
+This source-free handoff does not integrate F. Goal remains ACTIVE. Device approval
+absent, hardware/Nunchuk NOT_TESTED, timings/highwater NOT_MEASURED, RT2 deferred,
+root cause UNPROVEN. The history below preserves original findings and superseded
+OPEN states without rewriting them into PASS.
+
+
 ## Selected private ABC resource proposal — 2026-10-21
 
 The [sealed author proposal](legacy_set_resource_extension_20261021/ABC_sealed_author/README.md)

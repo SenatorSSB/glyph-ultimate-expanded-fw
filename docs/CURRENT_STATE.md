@@ -1,5 +1,32 @@
 # Glyph Current State
 
+## Exact native candidate awaiting hardware — 2026-10-21
+
+The [exact334f status](runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.md)
+supersedes older native OPEN checkpoints below. Clean frozen candidate
+`334fbd06e4541c120b0db423e5be7e112eb1f6f6` has passed fresh independent source
+review, directly affected both-ABI validation, exact Mk6 build/custody and complete
+linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is1152,
+static RAM197872/delta10528, layout499/512. Broader filesystem support and every
+original cap remain unchanged. Historical failed/incomplete evidence stays exact.
+
+The [independently reviewed334-row hardware preparation](runtime_config/profile_native_ultimate/hardware_334f_preparation_20261021/README.md)
+includes the mandatory H10/H11/resource addendum. This Mac/WUP-028 observer
+preparation and actual approved-preflight eligibility remain. GP-NATIVE-001 is
+HARDWARE_TEST_REQUIRED for the exact retained UF2 SHA256
+`41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
+No device action is approved; timing/highwater NOT_MEASURED, hardware/Nunchuk
+NOT_TESTED, RT2 DEFERRED/UNRESOLVED, root cause UNPROVEN. Exact human HEP PASS,
+tested-source integration and separate strict DONE remain mandatory.
+
+Guarded runway signals below are mechanically derived portfolio state. Their
+PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,
+another native scope/successor or a global evidence wait; this same product
+continues only its authorized packet preparation and exact hardware gate.
+Earlier native checkpoint paragraphs describe their original times and do not
+reopen the now-closed exact-F structural gate. Canonical firmware remains unchanged.
+
+
 ## Bounded storage adapter phases — 2026-10-21
 
 The [independent clarification](runtime_config/profile_native_ultimate/mounted_write_phase_scope_amendment_20261021.json)
@@ -244,19 +271,19 @@ GP-CONFIG-019 characterization is DONE after reviewed exact original-C ancestry 
 GP-VAL-041 is DONE after reviewed source-free integration `2279ee1923004cca4b05c9f6ccc3272e810080cb` and separate strict DIRECT_ANCESTRY completion. Its exact21-path finite scope preserves immutable original019 identity/evidence, adds only the two calibration literals to three actual scope calls, and authenticates the separate current proof and exact acceptedF020 source compatibility. Focused correspondence, actual affected consumers, historical/current host proofs and required negatives pass with native fingerprint MATCH; completed bounded source-safety cases retain the earlier combined120-second timeout and diagnostic assertion failure as historical incomplete/failed observations. Global aggregate FAIL/incomplete remains honest Revision3 framework debt; no full aggregate PASS is claimed. Preserved original019 C `fe84db39f2fcdd369d0ae26c1cbb80fd5a15d15d` now has its separately reviewed canonical integration and strict characterization completion recorded below.040/KBDDONE, current236critical and frozen014F/artifact/protocol/pendingstate remain exact. No firmware, naming/Keyboard policy, device or hardware acceptance change. Nunchuk NOT_TESTED; root cause UNPROVEN.
 GP-KBD-001 characterization is DONE through reviewed exact-C source-free integration `38705460afc7061fbebb71d186ed7b9da7051276` and separate strict completion correspondence after GP-VAL-040 DONE. Original C `4fb7c1e9507547774ff9f55cd7788355648d5d1e`, its five host blobs and 28 dependency pins are preserved; current 236 critical entries remain exact accepted C020. Host 103 observations, 118 identity negatives, five mutants, sanitizer checks and all five protected full consumers pass. Full aggregate FAIL/incomplete and synthetic topology debt remain honest; no full aggregate PASS or hardware acceptance is claimed. The supported ordinary Keyboard path transforms a copy but maps original inputs; that finding still requires a separate bounded repair/disposition packet before release. No SOCD policy, firmware repair or Keyboard exclusion is selected. Same H1 executor continues preserved019/041 as existing authority permits; exact C014 hardware tuple remains frozen.
 Status label: CURRENT. <!-- current-runway:start -->
-{"ready_ids":["GP-NATIVE-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 Read `docs/AGENT_CONTEXT.md` first, then `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md` before runtime-config work. Historical evidence is indexed from `docs/archive/README.md` and `docs/calibration/INDEX.md`; the marker defines current authorization. The bounded post-C020 GLYPH-UD-027/028 pass installs the current three-tier policy and transport-only contract; see the current post-C020 section in AGENT_CONTEXT and VALIDATION_AND_GATES.md. All 97 orders/runway and exact C020 acceptance stay unchanged; older stage instructions below do not request repeated work. The current C014 handoff below records the completed mechanical activation and exact candidate; GP-CONFIG-014 now waits at the exact built/custodied hardware handoff below.
 <!-- current-runway-summary:start -->
-Ready IDs: GP-NATIVE-001
-Immediate Ready: 1
+Ready IDs: (none)
+Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 0
-Effective authorized runway: 1
+Hardware-pending: 1
+Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: RUNWAY_LOW
+Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 **Current Agentic Operating State:** GP-CONFIG-022 is DONE after fresh independent review and strict completion of exact tested-source integration I `292f27cf88a9e814b1086bd544378b7e733e25e3`, with genuine parents E `0955f1f1082aadb86f16cf97612294f083321b45` and F `bfec69fd5e176ed9a720780a76ff269c7cc29926`. I changes exactly the seven reviewed production paths, each matching F; separate accepted catalog `ec95a1437c428cefd86c2fc8c6220c50319522b9` preserves C/F/M/tree, earliest reviewed R and exact E/I. The exact UF2 SHA-256 `4f7cf192867f05face39b36e9e295d27bdbd19eac25a1effc38833837ae9a539` / 802816 bytes has owner HEP PASS with no gaps. Nine human rows PASS; static_dynamic remains PARTIAL, STATIC subcase PASS, SHIFT/XWAVE physical N/A under owner direction, and no dynamic physical PASS is claimed. Current ACCEPTED_TRANSITION admission and directly affected both-ABI host checks/231 negatives PASS; known checker-mode and synthetic lifecycle framework failures remain debt, with no full aggregate PASS. MB1 cyan/menu/no keyboard output is expected local UI. Nunchuk NOT_TESTED; root cause UNPROVEN.
 CUSTOM_RUNNER_NOT_REQUIRED; retired official-configurator historical evidence remains at `tools/check_glyph_official_configurator_validation.py`; the older import/export compatibility chain is historical-only; external-remapper evidence remains quarantined.

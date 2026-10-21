@@ -1,0 +1,130 @@
+{
+  "classification": "SOURCEFREE_EXACT_CANDIDATE_HARDWARE_WAIT_NOT_ACCEPTANCE",
+  "candidate": {
+    "git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+    "latest_sourcefree_canonical_ancestor": "c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351",
+    "original_baseline": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+    "branch": "codex/gp-native-001-profile-execution",
+    "frozen_clean": true
+  },
+  "build": {
+    "command": "./scripts/build-glyph-mk6-quiet.sh",
+    "canonical_command": "pio run -e glyph_mk6",
+    "fallback_reason": "pio unavailable on PATH",
+    "state": "EXACT_CLEAN_STABLE_PASS",
+    "whole_image_enum": "SMALL unchanged production flags",
+    "ram": 197872,
+    "baseline_ram": 187344,
+    "added_ram": 10528,
+    "ram_cap": 199632,
+    "added_ram_cap": 12288,
+    "flash": 508564,
+    "flash_cap": 1568768,
+    "elapsed_seconds": 314.6009835409932,
+    "original_linker_map_emitted": false,
+    "linked_proof": "Actual retained ELF, compiler graphs, disassembly and source; no invented original linker map"
+  },
+  "artifacts": {
+    "uf2": {
+      "sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+      "bytes": 1041408
+    },
+    "elf": {
+      "sha256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d",
+      "bytes": 5597092
+    },
+    "bin": {
+      "sha256": "ce18487edc51cde3dd08e3e401ce2b4028e50ecd5a1eed82468cc6ef9843a6fb",
+      "bytes": 520596
+    },
+    "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982/firmware.uf2",
+    "correspondence": "ELF flash PT_LOAD = BIN =2034 valid UF2 blocks plus108 zero padding"
+  },
+  "source_review": {
+    "state": "FINAL_NO_BOUNDED_DEFECT_AND_COMMITTED_F_CORRESPONDENCE_PASS",
+    "report": "ABC_final_source_review_20261021/REPORT.md",
+    "sha256": "548cd19dd36a85f35bd248813e0fcc80a35602a512699b88fc8923433feec3a1"
+  },
+  "resource": {
+    "state": "NATIVE-REVIEW-P1-STACK_CLOSED_FOR_EXACT_F",
+    "report": "final_334f_resource_proof_20261021/REPORT.md",
+    "report_sha256": "0c5faf5217e8a636206bb4ae6ed359f0d09ddd98ecbb571b2bd7512e79798355",
+    "root_adjudication_sha256": "696ac0ce6c355c1607dbe5710bfdc75baba5302d2d0b8173b6cef26fc79af8a8",
+    "routes": 140,
+    "classes": 31,
+    "core0_conservative_max": 2048,
+    "core1_max": 1152,
+    "per_core_limit": 2048,
+    "zero_margin_routes": [
+      "Import first-record Open",
+      "Conservative legacy SET composition; emitted directSend SET2040"
+    ],
+    "layout_charge": 499,
+    "layout_cap": 512,
+    "diagnostic_mutable_bytes": 408,
+    "both_enum_component_proof": "Actual explicit short/default descriptors/layout/semantics/O3 evidence verified separately; no alternate whole-image PASS",
+    "native_owners_total": 7800,
+    "native_view": 560,
+    "native_frame_plus_context": 144,
+    "new_filesystem_domain_exclusion": false,
+    "broader_supported_filesystem": "Preserved including unrelated directories and applicable orphan/PENDING_MOVE states",
+    "qualification": "Exact linked supported execution paths and installed source/SDK/ROM/IRQ domain only; no arbitrary corruption, fatal assert, arbitrary direct-entry or OTA path claim"
+  },
+  "validation": {
+    "postadoption_archive_in_F": "docs/runtime_config/profile_native_ultimate/postadoption_ABC_validation_20261021",
+    "postadoption_archive_manifest_sha256": "622fc7b1e9f1d5bad9b5c9f166df25d83f751b4d001bf740481c489df6036331",
+    "actual_both_ABI_trace_rows": {
+      "deep_NOR_and_checked_Write": 952,
+      "Save": 1641,
+      "LoadCapture": 8381,
+      "COBS_SET_full88": 51
+    },
+    "cleanup": "Actual full8/32/176/88 observers plus six cleanup mutants rejected",
+    "native_transport": "100 READ/max-body plus two response-lease controls bothABIs",
+    "affected_stock_checkers": 8,
+    "independent_source": "1009 frozen inputs/14 bodies; independent actual bothABI Write/SET/Save/context and meaningful mutants"
+  },
+  "packet": {
+    "state": "OFFLINE_CONTENT_REVIEW_PASS_ADDENDUM_INCORPORATED_OBSERVER_PREPARATION_PENDING",
+    "file": "hardware_334f_preparation_20261021/reviewed_packet.json",
+    "sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+    "source_families": 18,
+    "selected_rows": 334,
+    "profile_contexts": 17,
+    "review_report_sha256": "ad29c6309212cb0f67ec7b0ebfa1960e91c8133b2e6f0c1ec6d71412ac325cc7",
+    "addendum_sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6",
+    "H11": "Actual extracted checked-reference body, actual NOR/Persistence/ProfileStore, activation, neutral refusal, A/B/A/logical restore/two-owned-ID cleanup PASS bothABIs; target startup/COBS separately attributed source/evidence",
+    "H10": "Actual Configurator identity handler+host decoder bothABIs; concrete before/after UPDATE current Configurator non-attestation and separate postboot gameplay captures; no physical same-gameplay-session writer/latch measurement claimed"
+  },
+  "archive_manifests": {
+    "ABC_final_source_review_20261021/manifest.json": "096fb8751286ab588f60072390d821018c84b8cae81fc422ad18053fcdc810dc",
+    "exact_334f_build_metadata_20261021/manifest.json": "9b1c97197cc7bb3ad1fbf690d5339fc51df22987efc177bbbb1624328276cd5b",
+    "final_334f_resource_proof_20261021/manifest.json": "a29b6e9722d4ea33265aac6f6b61d511dc74af0054b87b6d29985e1bb8b3da9b",
+    "hardware_334f_preparation_20261021/initial_draft/manifest.json": "f0713ec6d5075dd0b2a13594ece94b936fa8bf848b260b20d39d863bdf5697f4",
+    "hardware_334f_preparation_20261021/independent_review/manifest.json": "95ee2505c2979d39b1af0f8788029e661a6aef32fa9f46c0194cfe55518bbd22"
+  },
+  "owner_equipment": "hardware_334f_preparation_20261021/owner_equipment_context.json",
+  "hardware_result": null,
+  "device_approval": null,
+  "target_timing": "NOT_MEASURED",
+  "runtime_stack_highwater": "NOT_MEASURED",
+  "hardware": "NOT_TESTED",
+  "Nunchuk": "NOT_TESTED",
+  "RT2": "DEFERRED/UNRESOLVED",
+  "root_cause": "UNPROVEN",
+  "remaining": [
+    "Resolve Mac/WUP-028 full report observer path and bind any exact host-only tool/procedure with focused review before approval",
+    "Separate concrete exact-candidate owner-approved device/preflight packet",
+    "Actual eligible original Config/store/chord/startup/backup/preflight evidence",
+    "Exact physical H1-H12 outputs and instrumented target measurements with stated startup/backend limitations",
+    "Independent human HEP PASS; source-free result before exact tested-source integration; fresh integration review and separate strict DONE"
+  ],
+  "historical_evidence": "All earlier failed/incomplete source/resource probes, arithmetic corrections, candidates and custody remain unchanged. Current exact-F proof supersedes their open-state disposition, not their historical facts.",
+  "sourcefree_publication_validation": {
+    "record": "exact_334f_hardware_wait_validation_20261021/result.json",
+    "framework_sequence_navigation_scope_diff": "PASS",
+    "archive_input_rehashes": 453,
+    "full_surface": "FAIL historical C024 auth; current-state length and unchanged boundary phrase failures also reproduce on BASE c0cc; retained framework debt, no full aggregate PASS"
+  }
+}

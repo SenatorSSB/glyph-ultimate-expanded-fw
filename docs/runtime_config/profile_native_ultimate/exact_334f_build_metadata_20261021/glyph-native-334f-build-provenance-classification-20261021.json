@@ -1,0 +1,13 @@
+{
+  "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "state": "EXACT_BUILD_STATIC_CAP_AND_CUSTODY_PASS_FINAL_RESOURCE_OPEN",
+  "build": "fallbackscript because canonicalpio unavailablePATH; actual314.6seconds cleanstable",
+  "actual_recipe_audit": "14,268subprocessrecords;262targetrecipes=258compile/archive/ranlib/link/objcopy;0responseerrors; generated20-byteSHA334f flags3",
+  "collector_history": "V1/V2preparednotrun; V3corrects generatedheaderformatbeforefirstuse andexecuted; V4refines actualarchive/ranlib/objcopyoutputs. Initialreport retains5withoutcompileproducer; v2correctlyidentifiesfreshFrameworkArduino archive and4prebuiltinputs, notfreshSDKcompilation. No targetsource/flags/commandchange/rebuild.",
+  "sdk_qualification": "34163filehashes,0compilerdepfiles; broadsource/prebuilt/toolchaininventory,notfullenvironmentarchive. Named-l/transitiveheaders/finalSDKsource+ELFcorrespondenceseparate.",
+  "uf2_bin": "exactbinaryprefixplus108zero pad across2034validblocks,actualobjcopyELFproducerrecordcaptured",
+  "hardware": "NOT_TESTED",
+  "target_timing": "NOT_MEASURED",
+  "P1": "OPEN_AT_ARCHIVE_CREATION",
+  "custody": "ExactfirmwareUF2ELFbin+generateddescriptors/nativeheader/linkscript/wrappers atcontent-addressedownerlocalroot,notembeddedhere"
+}

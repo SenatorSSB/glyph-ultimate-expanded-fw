@@ -1,0 +1,16 @@
+{
+  "F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+  "exact_artifacts_match_packet": true,
+  "resource_report": "/private/tmp/glyph-native-final334-resource-proof-20261021/REPORT.md",
+  "proof_report_sha256": "0c5faf5217e8a636206bb4ae6ed359f0d09ddd98ecbb571b2bd7512e79798355",
+  "resource_result_sha256": "53480e12bcb5aa687f056a8a2764fcabc4adc5966ae217c6dfba5aebb63c1721",
+  "final_table_sha256": "71632a2f1409e3dc7cfde640e232336adf69e2abcd02412999ce0dbf7bcaf679",
+  "resource_pins_sha256": "34f79d370fed71a7ab8cb3fcbe5538523d9f01d074aef49cb1f8b03f99580530",
+  "root_adjudication_path": "/private/tmp/glyph-native-final334-root-resource-adjudication-20261021.json",
+  "root_adjudication_sha256": "696ac0ce6c355c1607dbe5710bfdc75baba5302d2d0b8173b6cef26fc79af8a8",
+  "formal_gate": "NATIVE-REVIEW-P1-STACK_CLOSED_FOR_EXACT_F",
+  "review_scope": "Exact proof/candidate/ELF/UF2/BIN and root-disposition attachment, not a new resource proof or reviewer-of-reviewer audit",
+  "hardware": "NOT_TESTED",
+  "timing_highwater": "NOT_MEASURED"
+}

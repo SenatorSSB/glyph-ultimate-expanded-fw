@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+  File "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/tools/check_glyph_docs_agent_surface.py", line 552, in validate_surface_scope
+    validate_feature_scope(
+    ~~~~~~~~~~~~~~~~~~~~~~^
+        context,
+        ^^^^^^^^
+        allowed_paths=(*schema_attributes, "docs/", "tools/", "builder_scripts/", ".github/workflows/build.yml", "README.md", "AGENTS.md", "CLAUDE.md", "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp", *((GP005_HAL_PATH,) if authorized_hal else ()), *((GP_CONFIG_010_SOURCE_PATH,) if authorized_gp_config_010 else ())),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        protected_prefixes=tuple(prefix for prefix in DEFAULT_PROTECTED_PREFIXES if prefix != "src/" and (not authorized_hal or prefix.casefold() != "hal/")),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/tools/glyph_checker_context.py", line 253, in validate_feature_scope
+    raise ScopeValidationError(f"comparison base {context.base!r} is not an ancestor of HEAD")
+glyph_checker_context.ScopeValidationError: comparison base 'c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351' is not an ancestor of HEAD

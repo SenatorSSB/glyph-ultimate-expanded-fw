@@ -1,0 +1,365 @@
+{
+  "kind": "F334f_FINAL_INDEPENDENT_SOURCE_REVIEW_NOT_RESOURCE_OR_HARDWARE",
+  "files": {
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/PROVISIONAL-PINS.json": {
+      "sha256": "871f2414914e9b4277acbba98506875f980ed98d798449bfb09dcd1b279636a3",
+      "bytes": 18340
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/REPORT.md": {
+      "sha256": "548cd19dd36a85f35bd248813e0fcc80a35602a512699b88fc8923433feec3a1",
+      "bytes": 14500
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/audit.py": {
+      "sha256": "8517ebd6d177c34e7da5fb5707d90e34bc32a059d918a4d168e05f591e836204",
+      "bytes": 3155
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/author-exact-log-readback.json": {
+      "sha256": "4e2736f81d2b79c7e468353d949681c2f584977126c3daf0df8b82ca13154ee4",
+      "bytes": 2953
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/canonical-authority-correspondence.json": {
+      "sha256": "96856bc8d73ba665d7ce7453c6e16588dbfa2cc8450bd145592c34dc0cdc8942",
+      "bytes": 528
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/committed-evidence-object-checks.json": {
+      "sha256": "ad285ff0bd81ac22e3ce4435d688a912c0577ffd2448dedd1c145bee84e771cb",
+      "bytes": 59696
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/committed-native-dispatch-log-review.json": {
+      "sha256": "2cdaa37a1972102f1c80863250f442ed03e0220a6ae9807e939e905370e67d26",
+      "bytes": 865
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/comparisons.json": {
+      "sha256": "5bad7fab30bc4161d9af5866b47229a14b32fa9f2178b01bf40ba84e0dd82210",
+      "bytes": 1153
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-fixture.cpp": {
+      "sha256": "ec4e8a82584ce4beeaa218f2416151760bc2743eb67b0a412416d7df1970cc3f",
+      "bytes": 1670
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-mutant-default-compile.log": {
+      "sha256": "9604ce7547a53e4e377b755b1aa48b28d65923d47dc51dcad7e045d15ee9a6ae",
+      "bytes": 345
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-mutant-default-run.log": {
+      "sha256": "ad90b467ed738bcc3301a6b1bfe1303849d918232e36897904a24b75a2f8765b",
+      "bytes": 95
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-mutant-short-compile.log": {
+      "sha256": "9604ce7547a53e4e377b755b1aa48b28d65923d47dc51dcad7e045d15ee9a6ae",
+      "bytes": 345
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-mutant-short-run.log": {
+      "sha256": "ad90b467ed738bcc3301a6b1bfe1303849d918232e36897904a24b75a2f8765b",
+      "bytes": 95
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-positive-default-compile.log": {
+      "sha256": "9604ce7547a53e4e377b755b1aa48b28d65923d47dc51dcad7e045d15ee9a6ae",
+      "bytes": 345
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-positive-default-run.log": {
+      "sha256": "565710260c8647d1e566f033aa56b2357010ed5fbb277bb61d34ed32c4ebe4ae",
+      "bytes": 421
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-positive-short-compile.log": {
+      "sha256": "9604ce7547a53e4e377b755b1aa48b28d65923d47dc51dcad7e045d15ee9a6ae",
+      "bytes": 345
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-positive-short-run.log": {
+      "sha256": "565710260c8647d1e566f033aa56b2357010ed5fbb277bb61d34ed32c4ebe4ae",
+      "bytes": 421
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context-status.json": {
+      "sha256": "496ca70763481d0d67f41a3b8f3b5745a0068ff51f026f85d9b583e4a7a03129",
+      "bytes": 14871
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/context_test.py": {
+      "sha256": "d7c9bb40b6c6828061daf6c4c708413e961fef489348abe4713daff972591f58",
+      "bytes": 2516
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/exact-archive-recipe-check.json": {
+      "sha256": "82cfcc39275b8084956ba08c9c6f53e5927f0283ad7bb7df92be7b337f9bdd94",
+      "bytes": 588
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/final-committed-correspondence.json": {
+      "sha256": "09f4906455d13dcd7284620d4a5343ee20f68d823689da8f29de7d8985e3f600",
+      "bytes": 10116
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/final_correspondence.py": {
+      "sha256": "58ba6bebda190d08df7f7b59edece6b9ad17b6b4fde1fe1984120b23fdd0ed26",
+      "bytes": 5417
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/full-frozen-source-check.json": {
+      "sha256": "05779086d28946d5c5f559fde906b6979726a90c01f4461b161fde5089ea07ac",
+      "bytes": 303378
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/independent-write-fixture.cpp": {
+      "sha256": "9c818c330f7e7c08a8b54caeab4d9300772e3c5213c48ca5009b80b18acb36a5",
+      "bytes": 15209
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/initial-full-tree-archive-comparison.json": {
+      "sha256": "05779086d28946d5c5f559fde906b6979726a90c01f4461b161fde5089ea07ac",
+      "bytes": 303378
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/initial-test-status.json": {
+      "sha256": "ab93fd515e41ce455060d30ad1a56e2e64820001c65224581df280e635f7dc94",
+      "bytes": 5925
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/input-pins.json": {
+      "sha256": "9533680891724d76125ccb1133f0f1d7b579b7d8bf2f13f37ce76a873684ffd4",
+      "bytes": 1429
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/negative-reset-default/last.log": {
+      "sha256": "2e1986f50ab5a5694ecb9422b622a71c90eff509cbfa360f66ad0ec1f6eddd5b",
+      "bytes": 61
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/negative-reset-default-driver.log": {
+      "sha256": "8721276761ef36e86efaccfff5e124e78c6e573883f5a525953526a7a8108299",
+      "bytes": 261
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/negative-reset-short/last.log": {
+      "sha256": "2e1986f50ab5a5694ecb9422b622a71c90eff509cbfa360f66ad0ec1f6eddd5b",
+      "bytes": 61
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/negative-reset-short-driver.log": {
+      "sha256": "3ba700d56faa57a37220d5e10f9a6d2ea439f50c816f75d55f23a7791ee64829",
+      "bytes": 257
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/protected-body-checks.json": {
+      "sha256": "34f57827d69d8b080afb0b94d6dca2cc1f61634a879e233679bca2b468a78360",
+      "bytes": 3226
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/retry_focused.py": {
+      "sha256": "29f548db2548e058a80e2ea23c88753c6df01087a8834536e6accf704493a186",
+      "bytes": 2292
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/run_review.py": {
+      "sha256": "6b70309ff4b4b714df2fb451d6b4d2cc818d6f43c197a054b4b23d9a20a8c09b",
+      "bytes": 4579
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-default/commands.json": {
+      "sha256": "4f6b8e0922674d9b6d3ee1991242e6b66ca35c1d70218de45d0a98ac780eebba",
+      "bytes": 13266
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-default/last.log": {
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-default/report.json": {
+      "sha256": "90c269a34a1770975008ec8c086eb3a5e7515ec0ebba87a6a9dcf6898e96dc6e",
+      "bytes": 2703
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-default/run.log": {
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-default-driver.log": {
+      "sha256": "1fd9f2c29d4dbf309092fa4fd0a8bf7c14310f27176042a2c39f5b2317fe0c80",
+      "bytes": 116
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-short/commands.json": {
+      "sha256": "6433109bbbf18c7e562c029d178e7df9fc739dbdd7e9679174d46c2e6622075b",
+      "bytes": 13197
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-short/last.log": {
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-short/report.json": {
+      "sha256": "eb5d777ee3a2701f6912a9c10c9201f64291e59236d756bd9db9aecfdf00518d",
+      "bytes": 2702
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-short/run.log": {
+      "sha256": "e95570e83469016f5e3d7e1b6d810192c019f59976aab36740258d3f5e395d51",
+      "bytes": 12488093
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/save-selected-short-driver.log": {
+      "sha256": "1fd9f2c29d4dbf309092fa4fd0a8bf7c14310f27176042a2c39f5b2317fe0c80",
+      "bytes": 116
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-default/commands.json": {
+      "sha256": "4b2187becd7504f640d3fb77ea06d04cae051cd1588f9b4f53b2144dfcac2071",
+      "bytes": 27175
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-default/last.log": {
+      "sha256": "76ac73db61f242b2564a1b2ab50606d1a0ac3021d089e7bc97d21306c80389ce",
+      "bytes": 428
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-default/report.json": {
+      "sha256": "c4fd5c1821b6345719033c70eb1f14cb23e695405effc639768b6facb62e15f7",
+      "bytes": 2764
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-default/run.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-default-driver.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-short/commands.json": {
+      "sha256": "a90e3b71a1b07154d2bb173d3bcbbfa62efbfb89ad9e3424cf33fe3e75c3fa01",
+      "bytes": 26968
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-short/last.log": {
+      "sha256": "76ac73db61f242b2564a1b2ab50606d1a0ac3021d089e7bc97d21306c80389ce",
+      "bytes": 428
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-short/report.json": {
+      "sha256": "57499e7244305f65a6a53c69ba429fe97a0e44cc5f26c7b4a36618a40977629c",
+      "bytes": 2763
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-short/run.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-baseline-short-driver.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-default/commands.json": {
+      "sha256": "a67062bf774131cfef8fa6d79e3dd6db1dfe330585b6ec5ac95eefbb4d2e2b4f",
+      "bytes": 27175
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-default/last.log": {
+      "sha256": "76ac73db61f242b2564a1b2ab50606d1a0ac3021d089e7bc97d21306c80389ce",
+      "bytes": 428
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-default/report.json": {
+      "sha256": "f1b1ad8302cfb8b029bdfa59c66e482139066946a4a0451fee2b8ec3e0c3b29d",
+      "bytes": 2764
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-default/run.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-default-driver.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-short/commands.json": {
+      "sha256": "5441b16b2f3c92c4eed9fb7c7695cfea365db78b1ffd03766b71c1e509263bd7",
+      "bytes": 26968
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-short/last.log": {
+      "sha256": "76ac73db61f242b2564a1b2ab50606d1a0ac3021d089e7bc97d21306c80389ce",
+      "bytes": 428
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-short/report.json": {
+      "sha256": "a2e41f9380caf471c584d1a794831cc9a18f49f85a6c487145c2c7c23aad6950",
+      "bytes": 2763
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-short/run.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/set-selected-short-driver.log": {
+      "sha256": "ee8c7d12fd0f3e1cb47b032231ad5f9a598a0cc58c4c932ee63cd092467f074e",
+      "bytes": 8027
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/test-status.json": {
+      "sha256": "04f008af83d9c7df29cc173a65d6aa96bcda60544a2ab5fe6405536853afdfc1",
+      "bytes": 5921
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-default/commands.json": {
+      "sha256": "b3329f32a42f274c274fe032503026dc4ca7db152d39e3d716325b810ab58b00",
+      "bytes": 12703
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-default/last.log": {
+      "sha256": "15370f0a803780ca00ebbef336123d788bd10a251068114f85c53c6a6f5c8016",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-default/report.json": {
+      "sha256": "ddfa126aa2086690940db4be3bd8168e94d03a4c00203a61d26119659c37dd15",
+      "bytes": 3318
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-default/run.log": {
+      "sha256": "15370f0a803780ca00ebbef336123d788bd10a251068114f85c53c6a6f5c8016",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-default-driver.log": {
+      "sha256": "f90942cfc0216628c99bd43ed310d496ef93ccc777d71a3737ea9fa77834143e",
+      "bytes": 4836
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-default-retry-driver.log": {
+      "sha256": "3b79ae868fb9fe8aeb662b06f969d9b667162b6df790ebad1a1852a1553c402c",
+      "bytes": 97
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-short/commands.json": {
+      "sha256": "d53bde2fb54adc600572b349940acaa45d8af4cf07e27c3fe6d0327a1f7a16e8",
+      "bytes": 12385
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-short/last.log": {
+      "sha256": "dc98ce405c243a76171b41ffde902892ccfe8832a7e12a0cd85af5848d54705b",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-short/report.json": {
+      "sha256": "b648a720f682b58af38973801a46ef0372b91c4f7f63ea361bf2d2e1dfdf9f33",
+      "bytes": 3315
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-short/run.log": {
+      "sha256": "dc98ce405c243a76171b41ffde902892ccfe8832a7e12a0cd85af5848d54705b",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-short-driver.log": {
+      "sha256": "cc93960c07240c9a29674b84bd55e50271605924a5760c9c57754364f78f9b21",
+      "bytes": 4783
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-baseline-short-retry-driver.log": {
+      "sha256": "79887bf15b664b6c8ec05bb8f9173f45cdeab24e33a1a3a48476ed605812ffae",
+      "bytes": 97
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-default/commands.json": {
+      "sha256": "ee2d93aa9ecfd6ae6fdd2ea401d1bd8224b90b9855eacc82d659c191790ad1ff",
+      "bytes": 13496
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-default/last.log": {
+      "sha256": "15370f0a803780ca00ebbef336123d788bd10a251068114f85c53c6a6f5c8016",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-default/report.json": {
+      "sha256": "593b05b9b8fd8244bdb5cdb82234962e5c040fad2ec094f3e706c0ac8b5653fe",
+      "bytes": 3487
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-default/run.log": {
+      "sha256": "15370f0a803780ca00ebbef336123d788bd10a251068114f85c53c6a6f5c8016",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-default-driver.log": {
+      "sha256": "8afcc559b774eeda1546765d74744a08d87a2a8510a7f7a587a1a14bede6cd6e",
+      "bytes": 5044
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-default-retry-driver.log": {
+      "sha256": "3b79ae868fb9fe8aeb662b06f969d9b667162b6df790ebad1a1852a1553c402c",
+      "bytes": 97
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-short/commands.json": {
+      "sha256": "72ee492fa25cc6409fbc7e2519163691d1ba25c55f7e2bf394293b29480c65e7",
+      "bytes": 13178
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-short/last.log": {
+      "sha256": "dc98ce405c243a76171b41ffde902892ccfe8832a7e12a0cd85af5848d54705b",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-short/report.json": {
+      "sha256": "ee77840c0e1db6f57c8ae032ba2510e7b5597c59bcb9b6591a233f4267c664e7",
+      "bytes": 3484
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-short/run.log": {
+      "sha256": "dc98ce405c243a76171b41ffde902892ccfe8832a7e12a0cd85af5848d54705b",
+      "bytes": 5945
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-short-driver.log": {
+      "sha256": "520155323fc88230524f96af458ad29b37ae211f286ab341468dafa6e8408863",
+      "bytes": 4991
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/write-selected-short-retry-driver.log": {
+      "sha256": "79887bf15b664b6c8ec05bb8f9173f45cdeab24e33a1a3a48476ed605812ffae",
+      "bytes": 97
+    },
+    "/private/tmp/glyph-native-ABC-independent-source-review-20261021/PINS.json": {
+      "sha256": "be3d611355852fdc9c79728ea73b0550ee6ba8a90b3b21402244981437b614ef",
+      "bytes": 19543
+    }
+  }
+}

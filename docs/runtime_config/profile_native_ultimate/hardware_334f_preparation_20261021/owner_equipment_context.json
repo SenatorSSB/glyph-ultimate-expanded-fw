@@ -1,0 +1,27 @@
+{
+  "classification": "OWNER_EQUIPMENT_INFORMATION_ONLY_NOT_DEVICE_AUTHORIZATION",
+  "owner_reply": "(this) Mac for XInput, And for GCC the same MOD. WUP-028 CG Adapter as in before tests.",
+  "previous_owner_information": {
+    "revision": "Mk6 as far as owner knows; verify in approved preflight",
+    "routes": [
+      "USB XInput",
+      "USB Switch",
+      "GameCube adapter to Switch"
+    ],
+    "observer": "Usually controller miniscreen; sometimes GameCube system/game",
+    "SWD_or_external_timing_equipment": false
+  },
+  "host_read_only_sw_vers": {
+    "ProductName": "macOS",
+    "ProductVersion": "27.0.1",
+    "BuildVersion": "26A434"
+  },
+  "observer_preparation": "Bounded host-only native SDK feasibility/preparation active. No device enumeration/open, USB operation, installation or firmware/source change.",
+  "unresolved": [
+    "Complete observable fields per route, including pre-adapter GameCube L/R/Z and analog values",
+    "Actual adapter mode/accessible LF6-8/dashboard and raw startup route in separately approved preflight",
+    "Actual original Config/store and logical restoration eligibility in separately approved preflight"
+  ],
+  "device_approval": null,
+  "hardware": "NOT_TESTED"
+}

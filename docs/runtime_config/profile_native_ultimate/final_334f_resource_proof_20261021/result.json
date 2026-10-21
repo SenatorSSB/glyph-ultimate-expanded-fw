@@ -1,0 +1,48 @@
+{
+  "classification": "COMPLETE_FINITE_CANONICAL_SMALL_RESOURCE_SOURCE_ELF_BOUND_PROOF",
+  "resource_result": "CLOSED_FOR_EXACT_F_ARTIFACT",
+  "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+  "ELF": {
+    "bytes": 5597092,
+    "sha256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d"
+  },
+  "UF2": {
+    "bytes": 1041408,
+    "sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982"
+  },
+  "BIN": {
+    "bytes": 520596,
+    "sha256": "ce18487edc51cde3dd08e3e401ce2b4028e50ecd5a1eed82468cc6ef9843a6fb"
+  },
+  "canonical_enum": "small",
+  "rows": 140,
+  "classes": 31,
+  "core0_conservative_upper": 2048,
+  "actual_selected_SET_upper": 2040,
+  "core1_upper": 1152,
+  "core0_reservation": 2048,
+  "core1_reservation": 2048,
+  "static_data_bss": 197872,
+  "static_delta": 10528,
+  "layout_charge": 499,
+  "both_component_charges": [
+    499,
+    503
+  ],
+  "native_active_candidate": 7800,
+  "view": 560,
+  "frame_and_context": 144,
+  "unknown_required_resource_targets": [],
+  "unexamined_resource_classes": [],
+  "unresolved_resource_contradictions": [],
+  "both_component_scope": "Required genuine short/default measurements, source/layout/semantics/O3 correspondence; no separate alternate whole-firmware acceptance",
+  "formal_P1_chapter_adjudication": "PARENT_OWNED",
+  "hardware": "NOT_TESTED",
+  "timing": "NOT_MEASURED",
+  "highwater": "NOT_MEASURED",
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "new_source_domain_exclusion": false,
+  "source_device_build_mutation_by_reviewer": false
+}

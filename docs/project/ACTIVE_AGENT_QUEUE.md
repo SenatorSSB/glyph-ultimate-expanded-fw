@@ -1,5 +1,32 @@
 # Active Agent Queue
 
+## Exact native candidate awaiting hardware — 2026-10-21
+
+The [exact334f status](../runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.md)
+supersedes older native OPEN checkpoints below. Clean frozen candidate
+`334fbd06e4541c120b0db423e5be7e112eb1f6f6` has passed fresh independent source
+review, directly affected both-ABI validation, exact Mk6 build/custody and complete
+linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is1152,
+static RAM197872/delta10528, layout499/512. Broader filesystem support and every
+original cap remain unchanged. Historical failed/incomplete evidence stays exact.
+
+The [independently reviewed334-row hardware preparation](../runtime_config/profile_native_ultimate/hardware_334f_preparation_20261021/README.md)
+includes the mandatory H10/H11/resource addendum. This Mac/WUP-028 observer
+preparation and actual approved-preflight eligibility remain. GP-NATIVE-001 is
+HARDWARE_TEST_REQUIRED for the exact retained UF2 SHA256
+`41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
+No device action is approved; timing/highwater NOT_MEASURED, hardware/Nunchuk
+NOT_TESTED, RT2 DEFERRED/UNRESOLVED, root cause UNPROVEN. Exact human HEP PASS,
+tested-source integration and separate strict DONE remain mandatory.
+
+Guarded runway signals below are mechanically derived portfolio state. Their
+PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,
+another native scope/successor or a global evidence wait; this same product
+continues only its authorized packet preparation and exact hardware gate.
+Earlier native checkpoint paragraphs describe their original times and do not
+reopen the now-closed exact-F structural gate. Canonical firmware remains unchanged.
+
+
 ## Selected ABC lifetime scope — 2026-10-21
 
 The [independent amendment](../runtime_config/profile_native_ultimate/legacy_set_owner_context_scope_amendment_20261021.json)
@@ -409,18 +436,20 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 0,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 1,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "RUNWAY_LOW"
+    "primary_liveness": "PLANNING_REQUIRED"
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
+    "HARDWARE_TEST_REQUIRED",
     "REPAIR_REQUIRED"
   ],
   "global_evidence_wait": {
@@ -8713,7 +8742,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-NATIVE-001",
       "title": "Complete reuse-first profile-native Ultimate execution",
-      "status": "READY",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "codex/gp-native-001-profile-execution",
       "objective": "Implement and validate the entire reviewed schema5/encoding1/engineABI1 native Ultimate execution, converter, bounded multi-profile store activation and truthful runtime identity through coherent M2-M7 gates.",
       "why_this_matters": "Replace intrinsic Glyph-slot controller-function meaning with deterministic profile data while retaining proven remapping, SOCD, coordinate primitives, backend reports and legacy V1-V3 behavior; X1 alone is not completion.",
@@ -8776,11 +8805,11 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+      "candidate_base_configurator_sha": "c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351",
+      "firmware_artifact_build_path": "/private/tmp/glyph-profile-native-20261020/.pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982/firmware.uf2",
+      "firmware_artifact_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
       "manual_acceptance": "REQUIRED",
       "manual_acceptance_protocol_reference": "docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md",
       "manual_acceptance_protocol_version": "GP_NATIVE_001_HW_V1",
@@ -8789,8 +8818,9 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Native candidate/artifact/handoff not yet created.",
-        "All required GP_NATIVE_001_HW_V1 H1-H12 exact candidate-specific human observations, route-specific evidence, restoration and independent HEP pending."
+        "Exact build/source/resource proof closed;334-row offline packet independently reviewed with required addendum. Device approval absent.",
+        "Mac/WUP-028 complete report observer preparation and actual session/preflight eligibility remain pending; miniscreen alone is insufficient for all required fields.",
+        "All required GP_NATIVE_001_HW_V1 H1-H12 exact human observations, route-specific fields, retained diagnostic target measurements, logical restoration and independent HEP pending."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",
       "status_documentation_updates": "Record exact reviewed source/resource/verification/rebinding/converter/identity facts in named chapter docs, candidate B/F/tree/build/descriptor/UF2size+SHA/custody, complete H1-H12 observations and limitations. Governance publishes source-free pending/result queue and mirrors, not candidate source. Preserve GP-BIND-001/002 FAIL,003 HARDWARE_VALIDATED/integrated but not strictDONE, historical H4 root cause UNPROVEN, RT2 DEFERRED/underlyingUNRESOLVED, NunchukNOT_TESTED, GameCube identity unsupported. Independent review and actual proof precede live publication; no aggregate PASS substitution. Record diagnostic wire/source/build/custody/overhead/measurement-window provenance and raw target validity/gaps; NATIVE-REVIEW-P1-STACK remains OPEN until actual affected structural proof closes it. No target measurements or physical PASS inferred by this amendment.",
@@ -8805,7 +8835,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null
+      "hardware_evidence_dependency_satisfied": false
     }
   ]
 }
@@ -8975,19 +9005,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-NATIVE-001"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":0,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-NATIVE-001
-Immediate Ready: 1
+Ready IDs: (none)
+Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 0
-Effective authorized runway: 1
+Hardware-pending: 1
+Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: RUNWAY_LOW
+Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

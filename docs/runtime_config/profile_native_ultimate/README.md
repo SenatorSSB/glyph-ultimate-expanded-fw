@@ -1,5 +1,12 @@
 # Profile-native Ultimate chapter research
 
+Current: [exact334f source/build/resource closure](exact_candidate_334f_status_20261021.md)
+and [independently reviewed hardware preparation](hardware_334f_preparation_20261021/README.md).
+GP-NATIVE-001 awaits exact hardware testing; equipment-specific observer preparation
+continues. No device action is approved and no firmware source is integrated by
+this source-free publication. Earlier research introduction below is historical.
+
+
 This isolated chapter records the owner's consolidated 2026-10-20 directive.
 M0 inventory and M1 design/resource freeze are complete after the fresh exact
 baseline build and current dependency replay. Independent READY adoption and

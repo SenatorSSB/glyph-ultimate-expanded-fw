@@ -1,0 +1,3 @@
+# Initial334f hardware preparation draft
+
+Initial finite offline334-row draft and all115 pinned delivery files. It preserves the190 selected historical rows and144 source-derived supplemental compatibility/rebinding/isolation/refusal rows, plus exact generators, data, outputs, both-enum logs and initial failed attempts. This is the initial preparer version, NOT an approved packet or physical acceptance. Final independent packet review, exact final linked resource association, source-supported H10/H11 safety workflow preflight and actual observer/context decisions remain separate. Original catalogs and firmwareF are unchanged. No device action occurred.

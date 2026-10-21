@@ -1,0 +1,5 @@
+# Exact334f build and custody metadata
+
+Exact clean source334fbd06e4541c120b0db423e5be7e112eb1f6f6 built successfully through the documented fallback because pio was unavailable on PATH. Static RAM197872/delta10528 and flash508564 remain within the unchanged limits. Compiler/link/archive/response provenance, dependency qualifications, descriptor hashes and exact artifact custody are preserved. The retained target diagnostic source identity is the exact20-byte commit with source flags3. Exact firmware bytes remain at owner content-addressed custody; this archive contains metadata and host build/reconciliation tooling only.
+
+UF2 and ELF tuple are in build.json. No original map was emitted. Runtime measurements and hardware remain NOT_MEASURED/NOT_TESTED. Final whole linked stack/static safety was OPEN when this metadata archive was created; any later independent final resource disposition is separate and must bind these exact bytes. Earlier collector preparation versions and initial metadata grouping are preserved honestly without changing target flags/source or rebuilding.

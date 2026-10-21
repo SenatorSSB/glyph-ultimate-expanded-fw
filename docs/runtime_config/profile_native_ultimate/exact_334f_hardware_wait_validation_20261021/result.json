@@ -1,0 +1,45 @@
+{
+  "classification": "FOCUSED_SOURCEFREE_STATUS_VALIDATION_NO_HARDWARE_OR_GLOBAL_PASS",
+  "framework": "PASS",
+  "sequence": "PASS",
+  "navigation": "PASS",
+  "diff_check": "PASS",
+  "five_archives_inputs_rehashed": 453,
+  "all_other_queue_orders_unchanged": 102,
+  "frozen_contract_m1_protocol_unchanged": true,
+  "exact_F_clean_unchanged": true,
+  "full_docs_surface": "FAIL historical C024 authentication",
+  "focused_scope": "PASS exact new sourcefree docs paths",
+  "content": "Current affected context/roadmap and attribution/forbidden-claim checks PASS; current-state length and boundary phrase failures reproduce on unchanged BASE c0cc and remain framework debt",
+  "failed_harness_attempts": "Initial focused invocation used owner checkout by missing workdir and rejected nonancestor; read-only, no owner files changed. Correct cwd invocation then exposed inherited current-state length failure. Both logs preserved; final classification compares same actual predicate on BASE and current. No checker/policy repair or false global PASS.",
+  "files": {
+    "glyph-native-334f-hardware-wait-focused-surface-initial-length-failure.log": {
+      "bytes": 647,
+      "sha256": "0b071fa01cddc5d3753efff2263ff5b34909c9125afae002c011a3896d694a54"
+    },
+    "glyph-native-334f-hardware-wait-focused-surface-initial-wrong-cwd.log": {
+      "bytes": 1741,
+      "sha256": "9e18616942bab2fe772ba8f27500d5aa195289831dde6a3676c19009edb3a6a5"
+    },
+    "glyph-native-334f-hardware-wait-focused-surface.log": {
+      "bytes": 1437,
+      "sha256": "d45eee59db3b725473e5420ca3fd9af0015785e55a341c9be22fc844b6fec0e0"
+    },
+    "glyph-native-334f-hardware-wait-framework.log": {
+      "bytes": 2112,
+      "sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3"
+    },
+    "glyph-native-334f-hardware-wait-navigation.log": {
+      "bytes": 1213,
+      "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    "glyph-native-334f-hardware-wait-sequence.log": {
+      "bytes": 113,
+      "sha256": "8b9c7a8562606d53142f68dbd5aefd9a187f3e37f3975ca174ea678b56c2906b"
+    },
+    "glyph-native-334f-hardware-wait-surface.log": {
+      "bytes": 2487,
+      "sha256": "6fd0b7e477c7488728330b70c02bc7c5b31c8d3a1d0578ea96ad28f26d1544ed"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "classification": "MECHANICAL_DERIVATIVE_PACKET_PATCH_NOT_SOURCE_OR_DEVICE_AUTHORITY",
+  "original_delivery_manifest_sha256": "67fa54862a3b03b9898287ae3d76d8b74fa8c525d3ad821167469a0784566a6e",
+  "original_packet_sha256": "1e2860513dea3a4ad98a848224e6bac23f246246a02e1fecc7d7ec25ad72e76a",
+  "original_coverage_sha256": "f9a3e29fde1b55003d6dafd561e9f72c3f89a80097c45b62d1c3b4f95d4bb7ae",
+  "packet_json_patch": [
+    {
+      "op": "test",
+      "path": "/candidate/git_sha",
+      "value": "334fbd06e4541c120b0db423e5be7e112eb1f6f6"
+    },
+    {
+      "op": "test",
+      "path": "/candidate/tree",
+      "value": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999"
+    },
+    {
+      "op": "replace",
+      "path": "/candidate/whole_linked_resource_P1",
+      "value": "NATIVE-REVIEW-P1-STACK_CLOSED_FOR_EXACT_F; exact report/artifact/root-adjudication attachment in resource_attachment; target measurements and hardware remain NOT_MEASURED/NOT_TESTED"
+    },
+    {
+      "op": "add",
+      "path": "/resource_attachment",
+      "value": {
+        "F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+        "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+        "exact_artifacts_match_packet": true,
+        "resource_report": "/private/tmp/glyph-native-final334-resource-proof-20261021/REPORT.md",
+        "proof_report_sha256": "0c5faf5217e8a636206bb4ae6ed359f0d09ddd98ecbb571b2bd7512e79798355",
+        "resource_result_sha256": "53480e12bcb5aa687f056a8a2764fcabc4adc5966ae217c6dfba5aebb63c1721",
+        "final_table_sha256": "71632a2f1409e3dc7cfde640e232336adf69e2abcd02412999ce0dbf7bcaf679",
+        "resource_pins_sha256": "34f79d370fed71a7ab8cb3fcbe5538523d9f01d074aef49cb1f8b03f99580530",
+        "root_adjudication_path": "/private/tmp/glyph-native-final334-root-resource-adjudication-20261021.json",
+        "root_adjudication_sha256": "696ac0ce6c355c1607dbe5710bfdc75baba5302d2d0b8173b6cef26fc79af8a8",
+        "formal_gate": "NATIVE-REVIEW-P1-STACK_CLOSED_FOR_EXACT_F",
+        "review_scope": "Exact proof/candidate/ELF/UF2/BIN and root-disposition attachment, not a new resource proof or reviewer-of-reviewer audit",
+        "hardware": "NOT_TESTED",
+        "timing_highwater": "NOT_MEASURED"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/independent_final_packet_review",
+      "value": "SAME independent source reviewer completed finite offline M6 packet review: no bounded fixture/source defect; mandatory session addendum incorporated before final publication; actual owner equipment/session fields and physical approval remain pending. See independent_packet_review."
+    },
+    {
+      "op": "add",
+      "path": "/independent_packet_review",
+      "value": {
+        "report": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/REPORT.md",
+        "addendum": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/session_plan_addendum.md",
+        "addendum_sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6",
+        "disposition": "OFFLINE_CONTENT_REVIEW_PASS_WITH_REQUIRED_SESSION_ADDENDUM; NOT_DEVICE_APPROVED",
+        "H11_engineering": "Exact F guarded host preparation + actual extracted checked-reference body + real NOR Persistence/ProfileStore + recreated-store activation + Ultimate/identity + A/B/A/logical restore/two-ID cleanup PASS both explicitABIs; COBS and target startup separately source-reviewed, not newly target-executed",
+        "H10": "Exact current Configurator identity handler plus actual host decoder independently exercised bothABIs: status Configurator, all gameplay identity neutral; before/after stored UPDATE procedure is in addendum, no same-session gameplay writer/attestation claim"
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/required_followup",
+      "value": [
+        "Incorporate session_plan_addendum.md and resource_attachment exactly into a new reviewed-packet derivative; preserve original draft/catalogs/evidence",
+        "Obtain actual unit/revision/safe input access, host/OS, existing route observer exposed fields/GC adapter path and dashboard information; resolve any substantive observation gap explicitly",
+        "Under separate approved preflight capture actual original Config/store/ordinary baseline and verify normal compact-v2 tool eligibility, safe raw Configurator entry, all chord subsets and backup/restoration custody",
+        "Receive explicit owner approval of the resulting concrete exact-candidate physical packet before any controller operation"
+      ]
+    },
+    {
+      "op": "add",
+      "path": "/session_plan_addendum",
+      "value": {
+        "path": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/session_plan_addendum.md",
+        "sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6",
+        "precedence": "Supersedes only stale OPEN resource attachment, pending offline H11 engineering and incomplete H10 identity procedure; original session plan other conditions remain"
+      }
+    }
+  ],
+  "coverage_json_patch": [
+    {
+      "op": "replace",
+      "path": "/gaps/3/needed",
+      "value": "Offline checked-reference/durable-Config/recreated-store activation/identity/restore/two-ID cleanup proof PASS bothABIs at exact boundary in reviewer addendum. Actual source-supported raw Configurator reentry, original compact-v2 eligibility and chord subset checks must be established in the separately approved real session; no target startup or physical PASS inferred."
+    },
+    {
+      "op": "replace",
+      "path": "/gaps/4/needed",
+      "value": "Required addendum specifies current Configurator identity before and after known successful stored UPDATE, both status=configurator with neutral gameplay identity, stored revision/payload READ and unchanged durable user Config/reference, then separately labeled new gameplay identity after reinitialization. Same-object latch remains honest source/host evidence; no unsupported physical same-session hot writer or prior-gameplay attestation is introduced."
+    },
+    {
+      "op": "replace",
+      "path": "/gaps/5/needed",
+      "value": "Exact F resource proof and root formal P1 disposition attached; finite independent offline packet review complete with required addendum. Actual equipment/session info and separate candidate-specific owner physical approval remain pending. Hardware NOT_TESTED; timing/highwater NOT_MEASURED."
+    },
+    {
+      "op": "replace",
+      "path": "/protocol/10/preparation_state",
+      "value": "OFFLINE_EXACT_METHOD_REAL_NOR_CONTEXT_REFUSAL_RESTORATION_PREFLIGHT_PASS_ACTUAL_SESSION_ELIGIBILITY_AND_OWNER_OBSERVERS_PENDING"
+    }
+  ],
+  "apply_requirement": "Apply to a new final derivative, include exact addendum + reviewer report/pins + resource/root attachments, regenerate delivery manifest. Do not edit original catalog/draft/evidence or F. No additional review layer required for exact mechanical incorporation."
+}

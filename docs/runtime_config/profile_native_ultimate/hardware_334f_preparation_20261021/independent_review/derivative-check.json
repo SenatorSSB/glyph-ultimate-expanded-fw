@@ -1,0 +1,10 @@
+{
+  "patch_applied_exactly": true,
+  "candidate_334f_guard": true,
+  "all334rows_and17contexts_counts_unchanged": true,
+  "resource_bound": true,
+  "hardware": "NOT_TESTED",
+  "approval": null,
+  "existing_original_packet_sha256": "1e2860513dea3a4ad98a848224e6bac23f246246a02e1fecc7d7ec25ad72e76a",
+  "derivative_sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92"
+}

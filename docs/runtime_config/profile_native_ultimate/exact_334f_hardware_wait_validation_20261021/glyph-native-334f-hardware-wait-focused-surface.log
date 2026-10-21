@@ -1,0 +1,13 @@
+EXACT_NEW_SOURCEFREE_SCOPE_PASS 355
+CURRENT_CONTENT_BODY_PASS docs/AGENT_CONTEXT.md
+INHERITED_BASELINE_CONTENT_FAIL docs/CURRENT_STATE.md docs/CURRENT_STATE.md should remain concise baseline/current lines 363 390
+CURRENT_CONTENT_BODY_PASS docs/ROADMAP.md
+INHERITED_BASELINE_CONTENT_FAIL docs/runtime_config/IMPLEMENTATION_BOUNDARY.md docs/runtime_config/IMPLEMENTATION_BOUNDARY.md missing required phrases: Runtime-loaded profile claims are forbidden without separate design baseline/current lines 127 127
+UNTOUCHED_BASELINE_DOC_MATCH docs/runtime_config/IMPLEMENTATION_BOUNDARY.md e66874fa0544fcfa7d65082578b660761ff4480e0657894159bb6ea679fd6567
+CURRENT_CONTENT_BODY_PASS docs/runtime_config/README.md
+UNTOUCHED_BASELINE_DOC_MATCH docs/runtime_config/README.md 4a881798121b033b13aa1ff50ebedcbb7c37486aa10486770fea8605a6d783e0
+CURRENT_CONTENT_BODY_PASS docs/calibration/INDEX.md
+UNTOUCHED_BASELINE_DOC_MATCH docs/calibration/INDEX.md 3dbc76b404dc3a4caf5f7c68d79c2d5cbe8aa6f234465516f0cf517d506785af
+CURRENT_CONTENT_BODY_PASS docs/archive/README.md
+UNTOUCHED_BASELINE_DOC_MATCH docs/archive/README.md d76021ea34b101e4d929ad86543b6ffa8b98b211ef0b7b2ead4328fcb3ded0a9
+CLASSIFICATION: raw full surface FAIL historical C024 auth; focused new docs scope PASS. Current-state >120-line and boundary phrase failures also reproduce on untouched BASE c0cc; unrelated framework debt preserved. No checker/policy change, no full content/global PASS.

@@ -1,0 +1,468 @@
+{
+  "files": {
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/REPORT.md": {
+      "bytes": 8775,
+      "sha256": "35cbac7fbe81ef1c98aae675faad7e636fdfa32292f48fa018d19edaebcaf30b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/candidate_packet_draft.json": {
+      "bytes": 2768787,
+      "sha256": "1e2860513dea3a4ad98a848224e6bac23f246246a02e1fecc7d7ec25ad72e76a"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/coverage.json": {
+      "bytes": 25914,
+      "sha256": "f9a3e29fde1b55003d6dafd561e9f72c3f89a80097c45b62d1c3b4f95d4bb7ae"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/engineer_supplement.py": {
+      "bytes": 14287,
+      "sha256": "c974bcc6654dc9e53fce4f056f1ae6efb32b94c7021a251579d478570aa9c000"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/final-source-correspondence.json": {
+      "bytes": 3090,
+      "sha256": "50b7c447f63dbe63a4b6445d45075f16ec644fcb90e9c1b0fdacb550b6160dcd"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/finalize_packet.py": {
+      "bytes": 15367,
+      "sha256": "7de703fac7a77fd7ad9ab18adba67fcaaf84c87f3b802115494830314b123794"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/input-pins.json": {
+      "bytes": 44534,
+      "sha256": "22e6bc79524d8806b38fe8e53cd523f046873b4fba64cf9d3abc748a6525a52d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/physical_selection_index.md": {
+      "bytes": 42054,
+      "sha256": "d088ccef2857316b8ce63c1b9807bd85697ea94dcea2bb663a1def7fd75417f7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/prepare_selection.py": {
+      "bytes": 13615,
+      "sha256": "06a6313bb4fe1bbd36bd8c2e1e0254320208610e087d3b43b287f588a22b1b21"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/selection-validation.json": {
+      "bytes": 436,
+      "sha256": "2aee893fd76b3aac2fd126a170565bc2272747eb823a82e1480e7159a389914b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/selection.json": {
+      "bytes": 1589274,
+      "sha256": "56c1a95ce918d5d5dbe68528e71643a25881fec9120dc169ff5a79f202daae80"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/session_plan.md": {
+      "bytes": 15707,
+      "sha256": "fa4897e3993f76ea906ad67d026fd7345e00884d93be063320de8e7c107ace06"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-default-custody.log": {
+      "bytes": 48,
+      "sha256": "1812e29ff717a5a48fe840c66447d185c5068eaeecb381f018efd8771d69fe0b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-default.log": {
+      "bytes": 48,
+      "sha256": "1812e29ff717a5a48fe840c66447d185c5068eaeecb381f018efd8771d69fe0b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-short-complete.log": {
+      "bytes": 1685,
+      "sha256": "2f91e80bf449376eebcf4a7faed7a5c0f97a33a02e2dec92befd98144d95f942"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-short-custody.log": {
+      "bytes": 46,
+      "sha256": "08049f1aba4413bd42dff95d4c85b17dd33c8ff31f54c71d7d7fee5b89120ffe"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-short-final.log": {
+      "bytes": 46,
+      "sha256": "282d574ceea63cd4c59fe4444e27e4907113fe0af86b7e4df2ca2a91c5fb18e0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-short-ready.log": {
+      "bytes": 46,
+      "sha256": "08049f1aba4413bd42dff95d4c85b17dd33c8ff31f54c71d7d7fee5b89120ffe"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-short-second.log": {
+      "bytes": 46,
+      "sha256": "282d574ceea63cd4c59fe4444e27e4907113fe0af86b7e4df2ca2a91c5fb18e0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-short.log": {
+      "bytes": 886,
+      "sha256": "2e57212a6d08cc95b341f168b9ab8438a9dfe38fe4a7c6445c77d9884c47e963"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement-validation.json": {
+      "bytes": 783,
+      "sha256": "209a6efdb76e2603e44873861f891c32775db46e0f38994063c38569d780d874"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/compatibility/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/compatibility/context.pb": {
+      "bytes": 2,
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/compatibility/conversion.json": {
+      "bytes": 91972,
+      "sha256": "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/compatibility/legacy-config.pb": {
+      "bytes": 6248,
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/compatibility/profile.json": {
+      "bytes": 2690,
+      "sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/compatibility/profile.pb": {
+      "bytes": 1985,
+      "sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/expected_observations.json": {
+      "bytes": 290585,
+      "sha256": "24adb445089d30c94ff16dd1a4a77556bd1aeac6477f39b48d0c6ae6ae0fdc3b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_commands.json": {
+      "bytes": 317879,
+      "sha256": "3e4bf823480eb60b1d4dd7e63a6f2ae432f5ae69fe67d3e0964c54b8fc07cc0b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7.cpp": {
+      "bytes": 3220,
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3.cpp": {
+      "bytes": 7586,
+      "sha256": "22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115.cpp": {
+      "bytes": 7267,
+      "sha256": "245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c.cpp": {
+      "bytes": 1035,
+      "sha256": "30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.cpp": {
+      "bytes": 10362,
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0.cpp": {
+      "bytes": 3522,
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3.cpp": {
+      "bytes": 3105,
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516.c": {
+      "bytes": 12141,
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a.cpp": {
+      "bytes": 7625,
+      "sha256": "923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.cpp": {
+      "bytes": 7613,
+      "sha256": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e.cpp": {
+      "bytes": 30914,
+      "sha256": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832.cpp": {
+      "bytes": 39202,
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.c": {
+      "bytes": 30784,
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08.cpp": {
+      "bytes": 6242,
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.cpp": {
+      "bytes": 14135,
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632.c": {
+      "bytes": 55177,
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.cpp": {
+      "bytes": 9074,
+      "sha256": "f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/host_input_custody/fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750.c": {
+      "bytes": 1774,
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/independent_frozen_legacy_correspondence.json": {
+      "bytes": 77988,
+      "sha256": "029bc7e0877856bdd7b52c98bdd774ac928ad1828f7fd2daafae822ffc4cdf4e"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/isolated_L_R_Z/admission.json": {
+      "bytes": 102,
+      "sha256": "b6c1b9dadaf19789049ebb92b699d5cac0113364d4528394b37d85d6e96def61"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/isolated_L_R_Z/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/isolated_L_R_Z/context.pb": {
+      "bytes": 2,
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/isolated_L_R_Z/profile.json": {
+      "bytes": 1038,
+      "sha256": "85c230165eab82db7195c618c2571bc72c4d94ce66407aa3f796bc75ac79811a"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/isolated_L_R_Z/profile.pb": {
+      "bytes": 745,
+      "sha256": "3eb2ae8e7207b6a3ec6af1779bc8a4413758afbd545d3db7164ada506dee262b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/manifest.json": {
+      "bytes": 5996,
+      "sha256": "cb2cee5f94550c188b5e75d9e5fc2f02dd1191cb7aa28be0e24b82e7b60c106d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/profiles.json": {
+      "bytes": 1744,
+      "sha256": "d1b56ad2963c840af6653c8b228a6da1a80caa3f490ea8343daaec324f9f1372"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/context.pb": {
+      "bytes": 2,
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/conversion.json": {
+      "bytes": 91972,
+      "sha256": "4ca2fc1a3d0f140bf546d0113f9495c2c4b2d2d95997c022577b97b13ddcd354"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/explicit_routing_change.json": {
+      "bytes": 171,
+      "sha256": "e0b1b2513ef5a40d59fa0cb3a7f22be80c9dcebe18c2615ea3007d2399bac2be"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/legacy-config.pb": {
+      "bytes": 6248,
+      "sha256": "2fe958eb9a0a63f9d39ef221de3138d07c2c20a5e455b6c082c50488cbf1f3c0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/profile.json": {
+      "bytes": 2690,
+      "sha256": "57a42529dbdf4f20b12492400292fd4f6705ddb14d2f1cb4a95b6379c0384318"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/rebound/profile.pb": {
+      "bytes": 1985,
+      "sha256": "ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/refusal_context_mismatch/context.json": {
+      "bytes": 166,
+      "sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/refusal_context_mismatch/context.pb": {
+      "bytes": 10,
+      "sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/refusal_context_mismatch/profile.json": {
+      "bytes": 2690,
+      "sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_default/refusal_context_mismatch/profile.pb": {
+      "bytes": 1985,
+      "sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_generator_actual.py": {
+      "bytes": 18524,
+      "sha256": "35951a8cfc138042d9851e918a7ab51f75bb2c945d2be61e294ffcfb7d7df6d6"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_generator_provenance.json": {
+      "bytes": 447,
+      "sha256": "4603171b6487aac8619c1939ef596b35aea86356e5967af31cbb89fbf5de11d9"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/context.pb": {
+      "bytes": 2,
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/conversion.json": {
+      "bytes": 91972,
+      "sha256": "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/legacy-config.pb": {
+      "bytes": 6248,
+      "sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/profile.json": {
+      "bytes": 2690,
+      "sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/profile.pb": {
+      "bytes": 1985,
+      "sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/expected_observations.json": {
+      "bytes": 290585,
+      "sha256": "24adb445089d30c94ff16dd1a4a77556bd1aeac6477f39b48d0c6ae6ae0fdc3b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_commands.json": {
+      "bytes": 316696,
+      "sha256": "56f195bf820251bd6c5dd9ab5b9ae8eb42ef73d65b24692dbe4dd1cc79bb858d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7.cpp": {
+      "bytes": 3220,
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3.cpp": {
+      "bytes": 7586,
+      "sha256": "22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115.cpp": {
+      "bytes": 7267,
+      "sha256": "245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c.cpp": {
+      "bytes": 1035,
+      "sha256": "30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.cpp": {
+      "bytes": 10362,
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0.cpp": {
+      "bytes": 3522,
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3.cpp": {
+      "bytes": 3105,
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516.c": {
+      "bytes": 12141,
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a.cpp": {
+      "bytes": 7625,
+      "sha256": "923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.cpp": {
+      "bytes": 7613,
+      "sha256": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e.cpp": {
+      "bytes": 30914,
+      "sha256": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832.cpp": {
+      "bytes": 39202,
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.c": {
+      "bytes": 30784,
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08.cpp": {
+      "bytes": 6242,
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.cpp": {
+      "bytes": 14135,
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632.c": {
+      "bytes": 55177,
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.cpp": {
+      "bytes": 9074,
+      "sha256": "f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/host_input_custody/fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750.c": {
+      "bytes": 1774,
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/independent_frozen_legacy_correspondence.json": {
+      "bytes": 77988,
+      "sha256": "029bc7e0877856bdd7b52c98bdd774ac928ad1828f7fd2daafae822ffc4cdf4e"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/admission.json": {
+      "bytes": 102,
+      "sha256": "b6c1b9dadaf19789049ebb92b699d5cac0113364d4528394b37d85d6e96def61"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/context.pb": {
+      "bytes": 2,
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/profile.json": {
+      "bytes": 1038,
+      "sha256": "85c230165eab82db7195c618c2571bc72c4d94ce66407aa3f796bc75ac79811a"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/profile.pb": {
+      "bytes": 745,
+      "sha256": "3eb2ae8e7207b6a3ec6af1779bc8a4413758afbd545d3db7164ada506dee262b"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/manifest.json": {
+      "bytes": 5994,
+      "sha256": "a8698845b2dd3714fcdf5f4b27de9fecbd637bb4016f6ea5e068bb7de2d83a11"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/profiles.json": {
+      "bytes": 1744,
+      "sha256": "d1b56ad2963c840af6653c8b228a6da1a80caa3f490ea8343daaec324f9f1372"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/context.pb": {
+      "bytes": 2,
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/conversion.json": {
+      "bytes": 91972,
+      "sha256": "4ca2fc1a3d0f140bf546d0113f9495c2c4b2d2d95997c022577b97b13ddcd354"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/explicit_routing_change.json": {
+      "bytes": 171,
+      "sha256": "e0b1b2513ef5a40d59fa0cb3a7f22be80c9dcebe18c2615ea3007d2399bac2be"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/legacy-config.pb": {
+      "bytes": 6248,
+      "sha256": "2fe958eb9a0a63f9d39ef221de3138d07c2c20a5e455b6c082c50488cbf1f3c0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/profile.json": {
+      "bytes": 2690,
+      "sha256": "57a42529dbdf4f20b12492400292fd4f6705ddb14d2f1cb4a95b6379c0384318"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/profile.pb": {
+      "bytes": 1985,
+      "sha256": "ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/context.json": {
+      "bytes": 166,
+      "sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/context.pb": {
+      "bytes": 10,
+      "sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/profile.json": {
+      "bytes": 2690,
+      "sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/profile.pb": {
+      "bytes": 1985,
+      "sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplemental-input-pins.json": {
+      "bytes": 12535,
+      "sha256": "f715f15237536af411a4b266f8915d2191bede090a193c2fab4671cec1b813c2"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/xcrun_db": {
+      "bytes": 661,
+      "sha256": "e4e160e0cecb7af56050801b83235845e481ccf2c8de6913f7cd5b99c0f35bb2"
+    },
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/delivery-manifest.json": {
+      "bytes": 20764,
+      "sha256": "67fa54862a3b03b9898287ae3d76d8b74fa8c525d3ad821167469a0784566a6e"
+    }
+  }
+}

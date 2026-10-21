@@ -1,0 +1,10 @@
+EXACT_NEW_SOURCEFREE_SCOPE_PASS 355
+AFFECTED_CURRENT_DOC_BODY_PASS docs/AGENT_CONTEXT.md
+Traceback (most recent call last):
+  File "<stdin>", line 7, in <module>
+  File "/private/tmp/glyph-native-curation-20261020/tools/check_glyph_docs_agent_surface.py", line 436, in validate_current_state
+    fail(f"{rel(CURRENT_STATE)} should remain concise")
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-native-curation-20261020/tools/check_glyph_docs_agent_surface.py", line 120, in fail
+    raise AgentSurfaceError(message)
+check_glyph_docs_agent_surface.AgentSurfaceError: docs/CURRENT_STATE.md should remain concise

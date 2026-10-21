@@ -1,0 +1,1365 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/REPORT.md",
+      "relative": "REPORT.md",
+      "bytes": 12794,
+      "sha256": "ad29c6309212cb0f67ec7b0ebfa1960e91c8133b2e6f0c1ec6d71412ac325cc7"
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/PINS.json",
+      "relative": "PINS.json",
+      "bytes": 35416,
+      "sha256": "86e7b28f241a361d4497e492f7f251b8d223134bef3971be723c397e5e0ede2f"
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/session_plan_addendum.md",
+      "relative": "session_plan_addendum.md",
+      "bytes": 10924,
+      "sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6"
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/packet_addendum_patch.json",
+      "relative": "packet_addendum_patch.json",
+      "bytes": 6957,
+      "sha256": "56cc7043eb4b8f6fd70c999b7cb5e6ca1da589d4604c5628df6234c567f8fe24"
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/resource-attachment-binding.json",
+      "relative": "resource-attachment-binding.json",
+      "bytes": 1092,
+      "sha256": "28330c07fb5db7bb0c8fd453b53a537d716e95ec4dccf277080abc60d24805e5"
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/derivative-check.json",
+      "relative": "derivative-check.json",
+      "bytes": 391,
+      "sha256": "733eb586d30b5281519d2f79f4f02fc3d42da1933c4e794da6040eda0360ad23"
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-review-archive-pins-20261021.json",
+      "relative": "glyph-native-334f-hardware-review-archive-pins-20261021.json",
+      "bytes": 34948,
+      "sha256": "0ef7aab0dee33bfc16382e8a5b22cced9d7f4a834b76bbe82a990c91e4c607e4"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/PINS.json",
+      "raw_sha256": "86e7b28f241a361d4497e492f7f251b8d223134bef3971be723c397e5e0ede2f",
+      "raw_bytes": 35416,
+      "relative": "objects/86e7b28f241a361d4497e492f7f251b8d223134bef3971be723c397e5e0ede2f.gz",
+      "compressed_sha256": "22c2dffef5635020f3c89c5353308903c2a34a8492a8477696cc07daf351b05f",
+      "compressed_bytes": 5562,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/REPORT.md",
+      "raw_sha256": "ad29c6309212cb0f67ec7b0ebfa1960e91c8133b2e6f0c1ec6d71412ac325cc7",
+      "raw_bytes": 12794,
+      "relative": "objects/ad29c6309212cb0f67ec7b0ebfa1960e91c8133b2e6f0c1ec6d71412ac325cc7.gz",
+      "compressed_sha256": "2129a88304b55f55b22d1388e7e5606a0cd1c551ed27ac85cb35ee346d5773ca",
+      "compressed_bytes": 5861,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/candidate_packet_reviewed_offline.json",
+      "raw_sha256": "303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92",
+      "raw_bytes": 2772086,
+      "relative": "objects/303d74950087a0b8e67ddd1a47d8c8dee0974a4525206f8e7b87070740422f92.gz",
+      "compressed_sha256": "c357f117c116dbedcd6070405f133da77ad45918cf28c64a13f9e5ea6d139cac",
+      "compressed_bytes": 70370,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/coverage_reviewed_offline.json",
+      "raw_sha256": "ad14e6e3b2fc5b76286c81adc23d25bdacc0053d59f35a8e64d2f39433ebeae5",
+      "raw_bytes": 26271,
+      "relative": "objects/ad14e6e3b2fc5b76286c81adc23d25bdacc0053d59f35a8e64d2f39433ebeae5.gz",
+      "compressed_sha256": "ecb39c0761f22f02e79c9a76d997960b2ab8c75d08b87cae584dacf22e392d15",
+      "compressed_bytes": 4013,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/data_review.py",
+      "raw_sha256": "22af5a1f3c017a1ce4bc6312a5b79d01de3307bd4663dfd2a6606d9c345767aa",
+      "raw_bytes": 2066,
+      "relative": "objects/22af5a1f3c017a1ce4bc6312a5b79d01de3307bd4663dfd2a6606d9c345767aa.gz",
+      "compressed_sha256": "b8257b012b5fafd81864a9f01a9c9302853f74cd3d19e496041071441bbb0af0",
+      "compressed_bytes": 1003,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/derivative-check.json",
+      "raw_sha256": "733eb586d30b5281519d2f79f4f02fc3d42da1933c4e794da6040eda0360ad23",
+      "raw_bytes": 391,
+      "relative": "objects/733eb586d30b5281519d2f79f4f02fc3d42da1933c4e794da6040eda0360ad23.gz",
+      "compressed_sha256": "1aa7cca2fd20a8899f75d12fddff2f045043627d2b6c05908e7ef584405b7a4f",
+      "compressed_bytes": 281,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/exact-configurator-identity-method.cpp",
+      "raw_sha256": "ace57bd75315ab53997af43ad887818df46977df819448375eb16b1b5da4daa8",
+      "raw_bytes": 776,
+      "relative": "objects/ace57bd75315ab53997af43ad887818df46977df819448375eb16b1b5da4daa8.gz",
+      "compressed_sha256": "48d7f13dfa3177133fe1f17220922e44859fb557eb2d211ffe2e69d35dffa9d8",
+      "compressed_bytes": 386,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/exact-reference-method.cpp",
+      "raw_sha256": "525ec832535c8067e864162b908e50aa3b9ea1e3f3eb19f003fd285be3ce42bb",
+      "raw_bytes": 3036,
+      "relative": "objects/525ec832535c8067e864162b908e50aa3b9ea1e3f3eb19f003fd285be3ce42bb.gz",
+      "compressed_sha256": "949ca793b7b654210352de81d67fdfb6c57a04eedd31bca2743436c540c14e75",
+      "compressed_bytes": 943,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/git-input-pin-check.json",
+      "raw_sha256": "43db8e5f93a7ae70fb5b2723b59a7cf4ac216c1689b754cab810f989884165e7",
+      "raw_bytes": 34976,
+      "relative": "objects/43db8e5f93a7ae70fb5b2723b59a7cf4ac216c1689b754cab810f989884165e7.gz",
+      "compressed_sha256": "49e1f3042cb25bf0cca9c963f0156cd1df7a8ab418ea3ab01876e6aa594ae1cc",
+      "compressed_bytes": 6363,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-configurator-identity.cpp",
+      "raw_sha256": "e150b5d6d12490ff631d2d09f7fa11bfb37592f2c63aa37af3cfacf66eb7b6a0",
+      "raw_bytes": 2060,
+      "relative": "objects/e150b5d6d12490ff631d2d09f7fa11bfb37592f2c63aa37af3cfacf66eb7b6a0.gz",
+      "compressed_sha256": "d5a8010cc2292b38536f61e4b51eb0bae1b4da4d34b4b39602b2c902fdea6322",
+      "compressed_bytes": 914,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-default-0.bin",
+      "raw_sha256": "efb3df214e8ef0c829c3715eac0839cfc025dd21f775e2f6790fbeee2f15d87f",
+      "raw_bytes": 72,
+      "relative": "objects/efb3df214e8ef0c829c3715eac0839cfc025dd21f775e2f6790fbeee2f15d87f.gz",
+      "compressed_sha256": "39ae437b3035519828658fe1345d370b70da946634659656a6408bae4519c332",
+      "compressed_bytes": 36,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-default-1.bin",
+      "raw_sha256": "81d7d7ddc766e97da8f194cf12d19db910259d99966d28ad8b4cfa3155b4f930",
+      "raw_bytes": 72,
+      "relative": "objects/81d7d7ddc766e97da8f194cf12d19db910259d99966d28ad8b4cfa3155b4f930.gz",
+      "compressed_sha256": "808dab8e62c9a5b5d674bc3ae4fa96296c34a0363beeeb48e560bc690f0abe33",
+      "compressed_bytes": 36,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-default-compile.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-default-run.log",
+      "raw_sha256": "9ad280f169eb79db9fd1a284b0eec299bd36ed97757facf75fccc35323d48533",
+      "raw_bytes": 113,
+      "relative": "objects/9ad280f169eb79db9fd1a284b0eec299bd36ed97757facf75fccc35323d48533.gz",
+      "compressed_sha256": "bc4c5d245b6e0f8ccfe9e7b2c8b1eec25352016463331e3984f49fdc8a823b81",
+      "compressed_bytes": 114,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-short-0.bin",
+      "raw_sha256": "efb3df214e8ef0c829c3715eac0839cfc025dd21f775e2f6790fbeee2f15d87f",
+      "raw_bytes": 72,
+      "relative": "objects/efb3df214e8ef0c829c3715eac0839cfc025dd21f775e2f6790fbeee2f15d87f.gz",
+      "compressed_sha256": "39ae437b3035519828658fe1345d370b70da946634659656a6408bae4519c332",
+      "compressed_bytes": 36,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-short-1.bin",
+      "raw_sha256": "81d7d7ddc766e97da8f194cf12d19db910259d99966d28ad8b4cfa3155b4f930",
+      "raw_bytes": 72,
+      "relative": "objects/81d7d7ddc766e97da8f194cf12d19db910259d99966d28ad8b4cfa3155b4f930.gz",
+      "compressed_sha256": "808dab8e62c9a5b5d674bc3ae4fa96296c34a0363beeeb48e560bc690f0abe33",
+      "compressed_bytes": 36,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-short-compile.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "relative": "objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "compressed_bytes": 20,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-short-initial-compile.log",
+      "raw_sha256": "6cc22238978845b5b2943ae78785c7c988ac3f8749320d5f15bf295c487b1a1a",
+      "raw_bytes": 338,
+      "relative": "objects/6cc22238978845b5b2943ae78785c7c988ac3f8749320d5f15bf295c487b1a1a.gz",
+      "compressed_sha256": "8c3a70bf65213a6734b9f561132fe01f1360a117b7f36e7653bde183c03e6c17",
+      "compressed_bytes": 232,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-short-run.log",
+      "raw_sha256": "9ad280f169eb79db9fd1a284b0eec299bd36ed97757facf75fccc35323d48533",
+      "raw_bytes": 113,
+      "relative": "objects/9ad280f169eb79db9fd1a284b0eec299bd36ed97757facf75fccc35323d48533.gz",
+      "compressed_sha256": "bc4c5d245b6e0f8ccfe9e7b2c8b1eec25352016463331e3984f49fdc8a823b81",
+      "compressed_bytes": 114,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10-identity-status.json",
+      "raw_sha256": "5bfeb1833f057dcc77be4f3899d98abf7caa0a68852758776d52868e96d472b2",
+      "raw_bytes": 2220,
+      "relative": "objects/5bfeb1833f057dcc77be4f3899d98abf7caa0a68852758776d52868e96d472b2.gz",
+      "compressed_sha256": "1ce79ffabb8f7afdd3fbaf997c4193f0758e62b83b916d850acb36673787131a",
+      "compressed_bytes": 577,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h10_identity.py",
+      "raw_sha256": "52d3613b7816bd88a3a26b178de1da34271890f69220101b07dac28692446d34",
+      "raw_bytes": 3693,
+      "relative": "objects/52d3613b7816bd88a3a26b178de1da34271890f69220101b07dac28692446d34.gz",
+      "compressed_sha256": "56b488384437f4768410adece5cfba2415e25d22758b4e64312c7ba6920c0c55",
+      "compressed_bytes": 1748,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-actual-status.json",
+      "raw_sha256": "1f40985af30954ffc0e0226e6c7bdeef7669c1700e651cc90272ddb8cfab0a3d",
+      "raw_bytes": 9238,
+      "relative": "objects/1f40985af30954ffc0e0226e6c7bdeef7669c1700e651cc90272ddb8cfab0a3d.gz",
+      "compressed_sha256": "d46777326aa5d932046f120f42f061e2d80fb93c30912a4b96fc8b773164ac5d",
+      "compressed_bytes": 1027,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-context-bypass-default-compile.log",
+      "raw_sha256": "2e77e8e88f4c21859b54baa6a4ad3c74dd30d658b048128369fad3f052312f5b",
+      "raw_bytes": 1318,
+      "relative": "objects/2e77e8e88f4c21859b54baa6a4ad3c74dd30d658b048128369fad3f052312f5b.gz",
+      "compressed_sha256": "d96c751b17fff18ae82493c703bbd992e58c16c6ff5179d6ba15a901c481c06f",
+      "compressed_bytes": 460,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-context-bypass-default-run.log",
+      "raw_sha256": "115acdc51347903d3242fe8821706f174b03624b6d29dbe648461ce53f8beccb",
+      "raw_bytes": 125,
+      "relative": "objects/115acdc51347903d3242fe8821706f174b03624b6d29dbe648461ce53f8beccb.gz",
+      "compressed_sha256": "efe4c7f2a46c5fa45ffe14f9e19a72d20c93a2c32f931188f767c9372d523950",
+      "compressed_bytes": 124,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-context-bypass-short-compile.log",
+      "raw_sha256": "2e77e8e88f4c21859b54baa6a4ad3c74dd30d658b048128369fad3f052312f5b",
+      "raw_bytes": 1318,
+      "relative": "objects/2e77e8e88f4c21859b54baa6a4ad3c74dd30d658b048128369fad3f052312f5b.gz",
+      "compressed_sha256": "d96c751b17fff18ae82493c703bbd992e58c16c6ff5179d6ba15a901c481c06f",
+      "compressed_bytes": 460,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-context-bypass-short-run.log",
+      "raw_sha256": "115acdc51347903d3242fe8821706f174b03624b6d29dbe648461ce53f8beccb",
+      "raw_bytes": 125,
+      "relative": "objects/115acdc51347903d3242fe8821706f174b03624b6d29dbe648461ce53f8beccb.gz",
+      "compressed_sha256": "efe4c7f2a46c5fa45ffe14f9e19a72d20c93a2c32f931188f767c9372d523950",
+      "compressed_bytes": 124,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-default-compile.log",
+      "raw_sha256": "ef75e35fdfe8b256c0b8c0bded2ad9f4459b1cee5ed5d850eb027786609bb9f0",
+      "raw_bytes": 1210,
+      "relative": "objects/ef75e35fdfe8b256c0b8c0bded2ad9f4459b1cee5ed5d850eb027786609bb9f0.gz",
+      "compressed_sha256": "f0c62ec7d918ae96a22fd6a4b81cf5287f5c57f197c51511fe117b1be6ac45bb",
+      "compressed_bytes": 429,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-default-earlier-additional-held-set-run.log",
+      "raw_sha256": "fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2",
+      "raw_bytes": 352,
+      "relative": "objects/fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2.gz",
+      "compressed_sha256": "a358b84ca29e577abcae8609dbac3ee9822a4bb06d60cbd44cfa2540c527c98e",
+      "compressed_bytes": 226,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-default-initial-compile.log",
+      "raw_sha256": "920c34b699214e48d8b3a7fbebbccbec86b5facad28a35364d8718eaa8873296",
+      "raw_bytes": 8147,
+      "relative": "objects/920c34b699214e48d8b3a7fbebbccbec86b5facad28a35364d8718eaa8873296.gz",
+      "compressed_sha256": "dceaafce5f470f9ba2768b015a5d260f1eadc5f78a6cb4f43bf0c92ac1640ba8",
+      "compressed_bytes": 794,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-default-run.log",
+      "raw_sha256": "fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2",
+      "raw_bytes": 352,
+      "relative": "objects/fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2.gz",
+      "compressed_sha256": "a358b84ca29e577abcae8609dbac3ee9822a4bb06d60cbd44cfa2540c527c98e",
+      "compressed_bytes": 226,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-earlier-additional-held-set.cpp",
+      "raw_sha256": "0c02cc639eb723a6a14df22a707d14f7c2913a6f056c3d8f7884b8a09c4ba32e",
+      "raw_bytes": 9816,
+      "relative": "objects/0c02cc639eb723a6a14df22a707d14f7c2913a6f056c3d8f7884b8a09c4ba32e.gz",
+      "compressed_sha256": "6eef6c27b25c670582a021c711f60cd5c869d82c354275531f9f846409b9d350",
+      "compressed_bytes": 3144,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-host-preflight.json",
+      "raw_sha256": "7436723cb8274492207f40cf1940902c48c553394de63850d38f7419d8663d0d",
+      "raw_bytes": 281,
+      "relative": "objects/7436723cb8274492207f40cf1940902c48c553394de63850d38f7419d8663d0d.gz",
+      "compressed_sha256": "bad0e439a8fb16778c647bc9f87d34b5389efa5c324e5089913d7b2784cc30cf",
+      "compressed_bytes": 224,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-initial-status.json",
+      "raw_sha256": "7e5faa659f6bdbe2c0ff009a7da3fce89f2afcfa65d5c9f89c8ed433aa3e173b",
+      "raw_bytes": 7744,
+      "relative": "objects/7e5faa659f6bdbe2c0ff009a7da3fce89f2afcfa65d5c9f89c8ed433aa3e173b.gz",
+      "compressed_sha256": "7643e1be1178e115b3621f6441f991ee07d3c6ce8d36f3ca6a365f34055e5730",
+      "compressed_bytes": 879,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-negative-status.json",
+      "raw_sha256": "dbfc6fe3da691bd03708d0996117cdf4e9832c7cffc9f35454cbc59ecc9b0b94",
+      "raw_bytes": 9576,
+      "relative": "objects/dbfc6fe3da691bd03708d0996117cdf4e9832c7cffc9f35454cbc59ecc9b0b94.gz",
+      "compressed_sha256": "1241ad2236298f63c4e859ddb3bbac146de62a6d0053ebb32c241e20e590c4a4",
+      "compressed_bytes": 1106,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-original.pb",
+      "raw_sha256": "88160b41551172027754cdd3087aacda00b31de4eb1d286cc586111293be8ba5",
+      "raw_bytes": 21,
+      "relative": "objects/88160b41551172027754cdd3087aacda00b31de4eb1d286cc586111293be8ba5.gz",
+      "compressed_sha256": "68b5308fb35fa2d3f4265957d74201f8912461ff013313b29c451e34b5fd6fca",
+      "compressed_bytes": 41,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-prepared-config.pb",
+      "raw_sha256": "a3d4d3e717b14203e18cd00f93a304f1cd55cb0228dea0cf1bfbd1c6d9906673",
+      "raw_bytes": 29,
+      "relative": "objects/a3d4d3e717b14203e18cd00f93a304f1cd55cb0228dea0cf1bfbd1c6d9906673.gz",
+      "compressed_sha256": "2a437dabb311142205885c60109ce10a61cf7bb993064155b9474922147c5f7e",
+      "compressed_bytes": 49,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-short-compile.log",
+      "raw_sha256": "ef75e35fdfe8b256c0b8c0bded2ad9f4459b1cee5ed5d850eb027786609bb9f0",
+      "raw_bytes": 1210,
+      "relative": "objects/ef75e35fdfe8b256c0b8c0bded2ad9f4459b1cee5ed5d850eb027786609bb9f0.gz",
+      "compressed_sha256": "f0c62ec7d918ae96a22fd6a4b81cf5287f5c57f197c51511fe117b1be6ac45bb",
+      "compressed_bytes": 429,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-short-earlier-additional-held-set-run.log",
+      "raw_sha256": "fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2",
+      "raw_bytes": 352,
+      "relative": "objects/fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2.gz",
+      "compressed_sha256": "a358b84ca29e577abcae8609dbac3ee9822a4bb06d60cbd44cfa2540c527c98e",
+      "compressed_bytes": 226,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-short-initial-compile.log",
+      "raw_sha256": "920c34b699214e48d8b3a7fbebbccbec86b5facad28a35364d8718eaa8873296",
+      "raw_bytes": 8147,
+      "relative": "objects/920c34b699214e48d8b3a7fbebbccbec86b5facad28a35364d8718eaa8873296.gz",
+      "compressed_sha256": "dceaafce5f470f9ba2768b015a5d260f1eadc5f78a6cb4f43bf0c92ac1640ba8",
+      "compressed_bytes": 794,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11-short-run.log",
+      "raw_sha256": "fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2",
+      "raw_bytes": 352,
+      "relative": "objects/fcd7a19d1618bd09dd36412339ab5c9b16cc4f7af09fb24242e12bc162dbb2d2.gz",
+      "compressed_sha256": "a358b84ca29e577abcae8609dbac3ee9822a4bb06d60cbd44cfa2540c527c98e",
+      "compressed_bytes": 226,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11_actual.cpp",
+      "raw_sha256": "f9443cf812c19b6e2aa317b41c135fa2731d676f00c1d9dbda9d843e11f123db",
+      "raw_bytes": 9821,
+      "relative": "objects/f9443cf812c19b6e2aa317b41c135fa2731d676f00c1d9dbda9d843e11f123db.gz",
+      "compressed_sha256": "a48380c173f44d448f7f97982ae1f04a52fb2961ae5afd88e4ea809aac7e23ce",
+      "compressed_bytes": 3143,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11_negative.py",
+      "raw_sha256": "0e55e3ec5e7afb99fab00206e98a2fbae30d45f49fa4f958f0e66ccc8a0a81d6",
+      "raw_bytes": 1703,
+      "relative": "objects/0e55e3ec5e7afb99fab00206e98a2fbae30d45f49fa4f958f0e66ccc8a0a81d6.gz",
+      "compressed_sha256": "aceee2313cbc94e3eb082805bd41f00f8a0faeab341eb88ae3c862f808df6003",
+      "compressed_bytes": 841,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/h11_preflight.py",
+      "raw_sha256": "c132857a9cbdf90444b192352fcf9cf122057216b08007f076eacf6063fddde7",
+      "raw_bytes": 11270,
+      "relative": "objects/c132857a9cbdf90444b192352fcf9cf122057216b08007f076eacf6063fddde7.gz",
+      "compressed_sha256": "08833d3a1e2f17b33c55bb8b9f22a879417b2694c82691127365375f2b9b4d44",
+      "compressed_bytes": 4141,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/mutant-context-match-bypassed.cpp",
+      "raw_sha256": "0921752ed7ef323a6bd2bd0201e8e6bf8e6623284fceea2d392056fe237cfcb0",
+      "raw_bytes": 39221,
+      "relative": "objects/0921752ed7ef323a6bd2bd0201e8e6bf8e6623284fceea2d392056fe237cfcb0.gz",
+      "compressed_sha256": "55c4ca3d2ad474212ee42cce1d270726ab6525bf0f557f81f26172a7d14dcb97",
+      "compressed_bytes": 7514,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/packet_addendum_patch.json",
+      "raw_sha256": "56cc7043eb4b8f6fd70c999b7cb5e6ca1da589d4604c5628df6234c567f8fe24",
+      "raw_bytes": 6957,
+      "relative": "objects/56cc7043eb4b8f6fd70c999b7cb5e6ca1da589d4604c5628df6234c567f8fe24.gz",
+      "compressed_sha256": "1079bf89e32ce0144e0d9b1da9f62de97fa20740394330752783fdffb436b3a4",
+      "compressed_bytes": 2825,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/preparer-manifest-check.json",
+      "raw_sha256": "f04aab6b2b6c91e3bacb682987a3bc9857cb99971b5da1d24f632a62d29a7e5e",
+      "raw_bytes": 24753,
+      "relative": "objects/f04aab6b2b6c91e3bacb682987a3bc9857cb99971b5da1d24f632a62d29a7e5e.gz",
+      "compressed_sha256": "61c1aa3880fac2bcc17912f93b5e34b613d23ea3a5677cffe260c49a9107878e",
+      "compressed_bytes": 3898,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/replay-comparisons.json",
+      "raw_sha256": "1323947649b6ba650240435eb8c24b52952c32f3a01a4dceb2534090a42a7fd7",
+      "raw_bytes": 1047,
+      "relative": "objects/1323947649b6ba650240435eb8c24b52952c32f3a01a4dceb2534090a42a7fd7.gz",
+      "compressed_sha256": "0e864ba33c9a919e3c376bfbdf33be6dac49cbf20efbbdfbcbc2b4cfed5de7c7",
+      "compressed_bytes": 298,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/replay-default.log",
+      "raw_sha256": "1812e29ff717a5a48fe840c66447d185c5068eaeecb381f018efd8771d69fe0b",
+      "raw_bytes": 48,
+      "relative": "objects/1812e29ff717a5a48fe840c66447d185c5068eaeecb381f018efd8771d69fe0b.gz",
+      "compressed_sha256": "6cd16d45c9b01799d4353c0a31ed975d6c4c5fd77fffaa7b150fb74ce9a1aafa",
+      "compressed_bytes": 68,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/replay-short.log",
+      "raw_sha256": "08049f1aba4413bd42dff95d4c85b17dd33c8ff31f54c71d7d7fee5b89120ffe",
+      "raw_bytes": 46,
+      "relative": "objects/08049f1aba4413bd42dff95d4c85b17dd33c8ff31f54c71d7d7fee5b89120ffe.gz",
+      "compressed_sha256": "ecb0b441233038b5ffa0393e0981182ea7bd54c7750d129c2eab768d1a811cb6",
+      "compressed_bytes": 66,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/replay-status.json",
+      "raw_sha256": "fb382cdfa792a02574d355219674548c1a167ea42709d93ac2151365a496f716",
+      "raw_bytes": 393,
+      "relative": "objects/fb382cdfa792a02574d355219674548c1a167ea42709d93ac2151365a496f716.gz",
+      "compressed_sha256": "2eb949e20ebb268d14cbc3507e93a89fbe91796bb78e36809a84d7012cff6854",
+      "compressed_bytes": 181,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/resource-attachment-binding.json",
+      "raw_sha256": "28330c07fb5db7bb0c8fd453b53a537d716e95ec4dccf277080abc60d24805e5",
+      "raw_bytes": 1092,
+      "relative": "objects/28330c07fb5db7bb0c8fd453b53a537d716e95ec4dccf277080abc60d24805e5.gz",
+      "compressed_sha256": "e745a5f390fb167fc72e3c38b1ee03af3ac98bc779ba7c1cb661522421522d96",
+      "compressed_bytes": 670,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/row-context-custody-audit.json",
+      "raw_sha256": "8be4e552d4974c600730c4652cdd841e8c39cca2666cb7f05e232bfd0c9d56c1",
+      "raw_bytes": 129400,
+      "relative": "objects/8be4e552d4974c600730c4652cdd841e8c39cca2666cb7f05e232bfd0c9d56c1.gz",
+      "compressed_sha256": "30b0764093feaa932cab9cf363492909c2e78d23bcaabb3fb52f57bae338733a",
+      "compressed_bytes": 2546,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/row_audit.py",
+      "raw_sha256": "c4391d069c062468287465171192b4856befa8361b1e640bfe4d3436d815d552",
+      "raw_bytes": 5638,
+      "relative": "objects/c4391d069c062468287465171192b4856befa8361b1e640bfe4d3436d815d552.gz",
+      "compressed_sha256": "15c3a12bea60438d332597b1cb0d759f85aa81bc5a16bb0e4cd71cde82bd7e07",
+      "compressed_bytes": 2442,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/session_plan_addendum.md",
+      "raw_sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6",
+      "raw_bytes": 10924,
+      "relative": "objects/afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6.gz",
+      "compressed_sha256": "c2d4de9229b4eea3a9090b3e001a90822fa10ac925db09efbc3ff241ff2a8bf1",
+      "compressed_bytes": 4684,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/compatibility/context.json",
+      "raw_sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "raw_bytes": 33,
+      "relative": "objects/8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14.gz",
+      "compressed_sha256": "9b432054d94e984129c3a30419d4d22f4d8b571dc501279089cf4463e54cb1e6",
+      "compressed_bytes": 53,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/compatibility/context.pb",
+      "raw_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "raw_bytes": 2,
+      "relative": "objects/2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5.gz",
+      "compressed_sha256": "1cfaab5b2428d535d504d1c00224498699bc52476e776f666f41ea71a5c40a65",
+      "compressed_bytes": 22,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/compatibility/conversion.json",
+      "raw_sha256": "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d",
+      "raw_bytes": 91972,
+      "relative": "objects/6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d.gz",
+      "compressed_sha256": "768739e4f8e2ac21d4d6eaebddc844b46d48d42abec0a8863f21bf33ff06a22c",
+      "compressed_bytes": 7410,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/compatibility/legacy-config.pb",
+      "raw_sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "raw_bytes": 6248,
+      "relative": "objects/0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7.gz",
+      "compressed_sha256": "43d8c219c78fb93abaec02e00f45f41e2821400a1f5d31d079b9e9cbe2d1c0d2",
+      "compressed_bytes": 1415,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/compatibility/profile.json",
+      "raw_sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0",
+      "raw_bytes": 2690,
+      "relative": "objects/d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0.gz",
+      "compressed_sha256": "3db0efb2f2e71cd2aa21beaa5ce5444f370889fa9584d6c11599d0ba3a1d95b7",
+      "compressed_bytes": 1429,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/compatibility/profile.pb",
+      "raw_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+      "raw_bytes": 1985,
+      "relative": "objects/e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa.gz",
+      "compressed_sha256": "17a19651914b684f281421388387a50592b3314a43cf7cb68e942bcc4a3ac90a",
+      "compressed_bytes": 1206,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/expected_observations.json",
+      "raw_sha256": "24adb445089d30c94ff16dd1a4a77556bd1aeac6477f39b48d0c6ae6ae0fdc3b",
+      "raw_bytes": 290585,
+      "relative": "objects/24adb445089d30c94ff16dd1a4a77556bd1aeac6477f39b48d0c6ae6ae0fdc3b.gz",
+      "compressed_sha256": "e3c03693989966a09befa8e7574405d896d1726c64e3a39bcc45453716456e03",
+      "compressed_bytes": 5825,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_commands.json",
+      "raw_sha256": "3e339492c59d93527218d06665de1f99aa4da6e9cb2bd00031de3ab24bd9c31a",
+      "raw_bytes": 312137,
+      "relative": "objects/3e339492c59d93527218d06665de1f99aa4da6e9cb2bd00031de3ab24bd9c31a.gz",
+      "compressed_sha256": "7f4be677fdbd8845687bf4ec4ff2788b889751820dc78655804035dccc07960a",
+      "compressed_bytes": 14284,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7.cpp",
+      "raw_sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+      "raw_bytes": 3220,
+      "relative": "objects/080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7.gz",
+      "compressed_sha256": "5f2c1c71d15da383edace0021a4bd61ac4106d94d36b95e61f13699f996bea11",
+      "compressed_bytes": 939,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3.cpp",
+      "raw_sha256": "22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3",
+      "raw_bytes": 7586,
+      "relative": "objects/22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3.gz",
+      "compressed_sha256": "2c47aa7133e04e490e1955d5a88e952270d0cc270304cdd7381a696a0ef211d0",
+      "compressed_bytes": 2681,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115.cpp",
+      "raw_sha256": "245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115",
+      "raw_bytes": 7267,
+      "relative": "objects/245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115.gz",
+      "compressed_sha256": "eeec953f1b8d731e7516ad306b5cee418aad4e1d0d1dee14bc324cf5957db362",
+      "compressed_bytes": 1567,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c.cpp",
+      "raw_sha256": "30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c",
+      "raw_bytes": 1035,
+      "relative": "objects/30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c.gz",
+      "compressed_sha256": "b7f8d787b334ba8fd0af3f7a95274b1b42e8546befe00cf5690b52b7d3a6df95",
+      "compressed_bytes": 550,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.cpp",
+      "raw_sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "raw_bytes": 10362,
+      "relative": "objects/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.gz",
+      "compressed_sha256": "d64ecd51eff516b2ca150717a4c84527b92c8c8d9d0c350d5bcc05feed7a790b",
+      "compressed_bytes": 2234,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0.cpp",
+      "raw_sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+      "raw_bytes": 3522,
+      "relative": "objects/501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0.gz",
+      "compressed_sha256": "83966689999b3e763d94ced2daa8e9799b4ec6dcad3a54d4149c0adf83062d35",
+      "compressed_bytes": 1027,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3.cpp",
+      "raw_sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+      "raw_bytes": 3105,
+      "relative": "objects/5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3.gz",
+      "compressed_sha256": "1dca27095e49265fee95470069224253ff9ba1a9345dd0436ed19b47e6ab10fb",
+      "compressed_bytes": 452,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516.c",
+      "raw_sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+      "raw_bytes": 12141,
+      "relative": "objects/8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516.gz",
+      "compressed_sha256": "d597825d4df6743da8ba2916a21c40ade4f734a4c82a0a969db96ea63c7302e5",
+      "compressed_bytes": 2902,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a.cpp",
+      "raw_sha256": "923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a",
+      "raw_bytes": 7625,
+      "relative": "objects/923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a.gz",
+      "compressed_sha256": "c5f6eb3ddf9660ff0a804a3d0cfb6f7b09390f168e57882dbf5d92acd222efc3",
+      "compressed_bytes": 2700,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.cpp",
+      "raw_sha256": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43",
+      "raw_bytes": 7613,
+      "relative": "objects/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.gz",
+      "compressed_sha256": "772995bd850a6971cccc2bec883cc13f3769e87ecb5cb5e477bb8b7de2436531",
+      "compressed_bytes": 2688,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e.cpp",
+      "raw_sha256": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e",
+      "raw_bytes": 30914,
+      "relative": "objects/ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e.gz",
+      "compressed_sha256": "3ea9bdb9bcf3a506d35b6dd0205ad40d6a792d6af61bf1b486a73d5c18154ef8",
+      "compressed_bytes": 5881,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832.cpp",
+      "raw_sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+      "raw_bytes": 39202,
+      "relative": "objects/dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832.gz",
+      "compressed_sha256": "a7b5cafd3f32692ddb38839eac1751e92d5de0eb7fe2331fa9cca7b5205c527e",
+      "compressed_bytes": 7486,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.c",
+      "raw_sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "raw_bytes": 30784,
+      "relative": "objects/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.gz",
+      "compressed_sha256": "58e0cffad3cc7d7b630f86ac86a1015d1447f4cd7cb33ab6fc35ab5f58ba9612",
+      "compressed_bytes": 6749,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08.cpp",
+      "raw_sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+      "raw_bytes": 6242,
+      "relative": "objects/e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08.gz",
+      "compressed_sha256": "68bf5a6fb9ef4a915fd44c2b0b9bc54af6a0169363d670cfc77b8ccd6ea7204d",
+      "compressed_bytes": 1963,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.cpp",
+      "raw_sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "raw_bytes": 14135,
+      "relative": "objects/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.gz",
+      "compressed_sha256": "cd7509e5a16a733ec556b60938cee7497f50314f9e9489293a012998fb262e70",
+      "compressed_bytes": 4389,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632.c",
+      "raw_sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "raw_bytes": 55177,
+      "relative": "objects/f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632.gz",
+      "compressed_sha256": "1f705e77d8365f465213f674b96a5254fdc6f533c783746a28d34fd681c24215",
+      "compressed_bytes": 10812,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.cpp",
+      "raw_sha256": "f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15",
+      "raw_bytes": 9074,
+      "relative": "objects/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.gz",
+      "compressed_sha256": "bbd418ff8b835750a3cb81074a3280712c13c55e065c9a6573827a2e1f769f77",
+      "compressed_bytes": 2790,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/host_input_custody/fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750.c",
+      "raw_sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "raw_bytes": 1774,
+      "relative": "objects/fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750.gz",
+      "compressed_sha256": "1865d090350f37e8578d0f956d1db643229f54c47fb1fc3c2600d8d8a3c6dc84",
+      "compressed_bytes": 551,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/independent_frozen_legacy_correspondence.json",
+      "raw_sha256": "029bc7e0877856bdd7b52c98bdd774ac928ad1828f7fd2daafae822ffc4cdf4e",
+      "raw_bytes": 77988,
+      "relative": "objects/029bc7e0877856bdd7b52c98bdd774ac928ad1828f7fd2daafae822ffc4cdf4e.gz",
+      "compressed_sha256": "eaac065ec64b48cca478ad604dd32f6e33bd6a4ca0ff55a6f2a92b8fc5c48e15",
+      "compressed_bytes": 6178,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/isolated_L_R_Z/admission.json",
+      "raw_sha256": "b6c1b9dadaf19789049ebb92b699d5cac0113364d4528394b37d85d6e96def61",
+      "raw_bytes": 102,
+      "relative": "objects/b6c1b9dadaf19789049ebb92b699d5cac0113364d4528394b37d85d6e96def61.gz",
+      "compressed_sha256": "de1a61441a9aa90ad7f103be3ea77580feba821b611e1aa75e2362ed39def778",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/isolated_L_R_Z/context.json",
+      "raw_sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "raw_bytes": 33,
+      "relative": "objects/8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14.gz",
+      "compressed_sha256": "9b432054d94e984129c3a30419d4d22f4d8b571dc501279089cf4463e54cb1e6",
+      "compressed_bytes": 53,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/isolated_L_R_Z/context.pb",
+      "raw_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "raw_bytes": 2,
+      "relative": "objects/2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5.gz",
+      "compressed_sha256": "1cfaab5b2428d535d504d1c00224498699bc52476e776f666f41ea71a5c40a65",
+      "compressed_bytes": 22,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/isolated_L_R_Z/profile.json",
+      "raw_sha256": "85c230165eab82db7195c618c2571bc72c4d94ce66407aa3f796bc75ac79811a",
+      "raw_bytes": 1038,
+      "relative": "objects/85c230165eab82db7195c618c2571bc72c4d94ce66407aa3f796bc75ac79811a.gz",
+      "compressed_sha256": "40125b47b09ab5d478990e47f398577f5a45c510ee0e501320fc539ae7be27cb",
+      "compressed_bytes": 432,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/isolated_L_R_Z/profile.pb",
+      "raw_sha256": "3eb2ae8e7207b6a3ec6af1779bc8a4413758afbd545d3db7164ada506dee262b",
+      "raw_bytes": 745,
+      "relative": "objects/3eb2ae8e7207b6a3ec6af1779bc8a4413758afbd545d3db7164ada506dee262b.gz",
+      "compressed_sha256": "e66e0775e806ddd9a4c61dbe4eb606dffd3f657b6c386a054052037ab0046632",
+      "compressed_bytes": 263,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/manifest.json",
+      "raw_sha256": "313877560df6716d3264cff39f646294f2a44363264e6ab0b34f931b8417d0e7",
+      "raw_bytes": 5996,
+      "relative": "objects/313877560df6716d3264cff39f646294f2a44363264e6ab0b34f931b8417d0e7.gz",
+      "compressed_sha256": "320f8dbb32ffbeab5b206828cfc35bc62fe8bba92d892123294e6b3f5a40af78",
+      "compressed_bytes": 2226,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/profiles.json",
+      "raw_sha256": "d1b56ad2963c840af6653c8b228a6da1a80caa3f490ea8343daaec324f9f1372",
+      "raw_bytes": 1744,
+      "relative": "objects/d1b56ad2963c840af6653c8b228a6da1a80caa3f490ea8343daaec324f9f1372.gz",
+      "compressed_sha256": "85f5ee5bdb6c3903806147e69246b4e9dd44feae5eb83dbf0a1fcb35e711fef0",
+      "compressed_bytes": 689,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/context.json",
+      "raw_sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "raw_bytes": 33,
+      "relative": "objects/8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14.gz",
+      "compressed_sha256": "9b432054d94e984129c3a30419d4d22f4d8b571dc501279089cf4463e54cb1e6",
+      "compressed_bytes": 53,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/context.pb",
+      "raw_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "raw_bytes": 2,
+      "relative": "objects/2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5.gz",
+      "compressed_sha256": "1cfaab5b2428d535d504d1c00224498699bc52476e776f666f41ea71a5c40a65",
+      "compressed_bytes": 22,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/conversion.json",
+      "raw_sha256": "4ca2fc1a3d0f140bf546d0113f9495c2c4b2d2d95997c022577b97b13ddcd354",
+      "raw_bytes": 91972,
+      "relative": "objects/4ca2fc1a3d0f140bf546d0113f9495c2c4b2d2d95997c022577b97b13ddcd354.gz",
+      "compressed_sha256": "c5ce4e1f6d91959dafaeb8b37fde30234acf7a10ffe39cbe17d0f543db3888f1",
+      "compressed_bytes": 7417,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/explicit_routing_change.json",
+      "raw_sha256": "e0b1b2513ef5a40d59fa0cb3a7f22be80c9dcebe18c2615ea3007d2399bac2be",
+      "raw_bytes": 171,
+      "relative": "objects/e0b1b2513ef5a40d59fa0cb3a7f22be80c9dcebe18c2615ea3007d2399bac2be.gz",
+      "compressed_sha256": "5615e55f72f48d0c3c890c3e804d5db406949849438fa34453e7fb33b78b6370",
+      "compressed_bytes": 96,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/legacy-config.pb",
+      "raw_sha256": "2fe958eb9a0a63f9d39ef221de3138d07c2c20a5e455b6c082c50488cbf1f3c0",
+      "raw_bytes": 6248,
+      "relative": "objects/2fe958eb9a0a63f9d39ef221de3138d07c2c20a5e455b6c082c50488cbf1f3c0.gz",
+      "compressed_sha256": "52a27f4ef1ac959418e30e85df58127cb198cf8c26e7a013024b34a9a41013e8",
+      "compressed_bytes": 1466,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/profile.json",
+      "raw_sha256": "57a42529dbdf4f20b12492400292fd4f6705ddb14d2f1cb4a95b6379c0384318",
+      "raw_bytes": 2690,
+      "relative": "objects/57a42529dbdf4f20b12492400292fd4f6705ddb14d2f1cb4a95b6379c0384318.gz",
+      "compressed_sha256": "917c493b0ddf929e89b02cb2b9d37c8acf7a8433377a339f12f12ad1e77dd176",
+      "compressed_bytes": 1430,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/rebound/profile.pb",
+      "raw_sha256": "ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef",
+      "raw_bytes": 1985,
+      "relative": "objects/ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef.gz",
+      "compressed_sha256": "9c05c998625e8d0df67bd69ba94319199936955062d4cb34babefe8ae4d5ec04",
+      "compressed_bytes": 1205,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/refusal_context_mismatch/context.json",
+      "raw_sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7",
+      "raw_bytes": 166,
+      "relative": "objects/768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7.gz",
+      "compressed_sha256": "7258358718bd68d276414713820f22f8e404f99ba146e64ad7ed76fdb01f4167",
+      "compressed_bytes": 133,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/refusal_context_mismatch/context.pb",
+      "raw_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+      "raw_bytes": 10,
+      "relative": "objects/ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba.gz",
+      "compressed_sha256": "1e2484d24fca47591b3c3cf9e37d85c19bcd0e216e336635a38667ca22278ca3",
+      "compressed_bytes": 30,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/refusal_context_mismatch/profile.json",
+      "raw_sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0",
+      "raw_bytes": 2690,
+      "relative": "objects/d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0.gz",
+      "compressed_sha256": "3db0efb2f2e71cd2aa21beaa5ce5444f370889fa9584d6c11599d0ba3a1d95b7",
+      "compressed_bytes": 1429,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_default/refusal_context_mismatch/profile.pb",
+      "raw_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+      "raw_bytes": 1985,
+      "relative": "objects/e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa.gz",
+      "compressed_sha256": "17a19651914b684f281421388387a50592b3314a43cf7cb68e942bcc4a3ac90a",
+      "compressed_bytes": 1206,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_generator_actual.py",
+      "raw_sha256": "35951a8cfc138042d9851e918a7ab51f75bb2c945d2be61e294ffcfb7d7df6d6",
+      "raw_bytes": 18524,
+      "relative": "objects/35951a8cfc138042d9851e918a7ab51f75bb2c945d2be61e294ffcfb7d7df6d6.gz",
+      "compressed_sha256": "085f5b40e73d160e21b9d9ea6b373e6b6b8f67ea6ad2c5e4fa4ea5dd594d8681",
+      "compressed_bytes": 6479,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/compatibility/context.json",
+      "raw_sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "raw_bytes": 33,
+      "relative": "objects/8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14.gz",
+      "compressed_sha256": "9b432054d94e984129c3a30419d4d22f4d8b571dc501279089cf4463e54cb1e6",
+      "compressed_bytes": 53,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/compatibility/context.pb",
+      "raw_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "raw_bytes": 2,
+      "relative": "objects/2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5.gz",
+      "compressed_sha256": "1cfaab5b2428d535d504d1c00224498699bc52476e776f666f41ea71a5c40a65",
+      "compressed_bytes": 22,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/compatibility/conversion.json",
+      "raw_sha256": "6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d",
+      "raw_bytes": 91972,
+      "relative": "objects/6de8b33f40ee23c82189af45320c11db22fb07f754169477988043d5c39fd78d.gz",
+      "compressed_sha256": "768739e4f8e2ac21d4d6eaebddc844b46d48d42abec0a8863f21bf33ff06a22c",
+      "compressed_bytes": 7410,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/compatibility/legacy-config.pb",
+      "raw_sha256": "0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7",
+      "raw_bytes": 6248,
+      "relative": "objects/0cbc9691c6adecd54e446a03c4d5526bc337d54d448e4d76112c6437db84fff7.gz",
+      "compressed_sha256": "43d8c219c78fb93abaec02e00f45f41e2821400a1f5d31d079b9e9cbe2d1c0d2",
+      "compressed_bytes": 1415,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/compatibility/profile.json",
+      "raw_sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0",
+      "raw_bytes": 2690,
+      "relative": "objects/d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0.gz",
+      "compressed_sha256": "3db0efb2f2e71cd2aa21beaa5ce5444f370889fa9584d6c11599d0ba3a1d95b7",
+      "compressed_bytes": 1429,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/compatibility/profile.pb",
+      "raw_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+      "raw_bytes": 1985,
+      "relative": "objects/e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa.gz",
+      "compressed_sha256": "17a19651914b684f281421388387a50592b3314a43cf7cb68e942bcc4a3ac90a",
+      "compressed_bytes": 1206,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/expected_observations.json",
+      "raw_sha256": "24adb445089d30c94ff16dd1a4a77556bd1aeac6477f39b48d0c6ae6ae0fdc3b",
+      "raw_bytes": 290585,
+      "relative": "objects/24adb445089d30c94ff16dd1a4a77556bd1aeac6477f39b48d0c6ae6ae0fdc3b.gz",
+      "compressed_sha256": "e3c03693989966a09befa8e7574405d896d1726c64e3a39bcc45453716456e03",
+      "compressed_bytes": 5825,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_commands.json",
+      "raw_sha256": "5e60f8ca34a33b3f023621dca684a0fdf784decfff362a211a949e626bf50f99",
+      "raw_bytes": 310954,
+      "relative": "objects/5e60f8ca34a33b3f023621dca684a0fdf784decfff362a211a949e626bf50f99.gz",
+      "compressed_sha256": "11bec1ae6e1047124a17df13c3d0aa376e3f095f582d54d13e6648ded3a9aa9f",
+      "compressed_bytes": 14258,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7.cpp",
+      "raw_sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+      "raw_bytes": 3220,
+      "relative": "objects/080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7.gz",
+      "compressed_sha256": "5f2c1c71d15da383edace0021a4bd61ac4106d94d36b95e61f13699f996bea11",
+      "compressed_bytes": 939,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3.cpp",
+      "raw_sha256": "22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3",
+      "raw_bytes": 7586,
+      "relative": "objects/22f5be39efafb704b7b1715bd738d5296695f76606eb9a4f052b66d7635adcb3.gz",
+      "compressed_sha256": "2c47aa7133e04e490e1955d5a88e952270d0cc270304cdd7381a696a0ef211d0",
+      "compressed_bytes": 2681,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115.cpp",
+      "raw_sha256": "245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115",
+      "raw_bytes": 7267,
+      "relative": "objects/245d2d0c16b51bf655501aae40187c745111c7393dc16965e838c3d4643e7115.gz",
+      "compressed_sha256": "eeec953f1b8d731e7516ad306b5cee418aad4e1d0d1dee14bc324cf5957db362",
+      "compressed_bytes": 1567,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c.cpp",
+      "raw_sha256": "30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c",
+      "raw_bytes": 1035,
+      "relative": "objects/30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c.gz",
+      "compressed_sha256": "b7f8d787b334ba8fd0af3f7a95274b1b42e8546befe00cf5690b52b7d3a6df95",
+      "compressed_bytes": 550,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.cpp",
+      "raw_sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "raw_bytes": 10362,
+      "relative": "objects/4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d.gz",
+      "compressed_sha256": "d64ecd51eff516b2ca150717a4c84527b92c8c8d9d0c350d5bcc05feed7a790b",
+      "compressed_bytes": 2234,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0.cpp",
+      "raw_sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+      "raw_bytes": 3522,
+      "relative": "objects/501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0.gz",
+      "compressed_sha256": "83966689999b3e763d94ced2daa8e9799b4ec6dcad3a54d4149c0adf83062d35",
+      "compressed_bytes": 1027,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3.cpp",
+      "raw_sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+      "raw_bytes": 3105,
+      "relative": "objects/5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3.gz",
+      "compressed_sha256": "1dca27095e49265fee95470069224253ff9ba1a9345dd0436ed19b47e6ab10fb",
+      "compressed_bytes": 452,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516.c",
+      "raw_sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516",
+      "raw_bytes": 12141,
+      "relative": "objects/8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516.gz",
+      "compressed_sha256": "d597825d4df6743da8ba2916a21c40ade4f734a4c82a0a969db96ea63c7302e5",
+      "compressed_bytes": 2902,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a.cpp",
+      "raw_sha256": "923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a",
+      "raw_bytes": 7625,
+      "relative": "objects/923aae4c1a0f601eb05d9fee406504875cbded95caf37f900e8fca08e8d1de7a.gz",
+      "compressed_sha256": "c5f6eb3ddf9660ff0a804a3d0cfb6f7b09390f168e57882dbf5d92acd222efc3",
+      "compressed_bytes": 2700,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.cpp",
+      "raw_sha256": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43",
+      "raw_bytes": 7613,
+      "relative": "objects/973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43.gz",
+      "compressed_sha256": "772995bd850a6971cccc2bec883cc13f3769e87ecb5cb5e477bb8b7de2436531",
+      "compressed_bytes": 2688,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e.cpp",
+      "raw_sha256": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e",
+      "raw_bytes": 30914,
+      "relative": "objects/ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e.gz",
+      "compressed_sha256": "3ea9bdb9bcf3a506d35b6dd0205ad40d6a792d6af61bf1b486a73d5c18154ef8",
+      "compressed_bytes": 5881,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832.cpp",
+      "raw_sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+      "raw_bytes": 39202,
+      "relative": "objects/dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832.gz",
+      "compressed_sha256": "a7b5cafd3f32692ddb38839eac1751e92d5de0eb7fe2331fa9cca7b5205c527e",
+      "compressed_bytes": 7486,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.c",
+      "raw_sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed",
+      "raw_bytes": 30784,
+      "relative": "objects/debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed.gz",
+      "compressed_sha256": "58e0cffad3cc7d7b630f86ac86a1015d1447f4cd7cb33ab6fc35ab5f58ba9612",
+      "compressed_bytes": 6749,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08.cpp",
+      "raw_sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+      "raw_bytes": 6242,
+      "relative": "objects/e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08.gz",
+      "compressed_sha256": "68bf5a6fb9ef4a915fd44c2b0b9bc54af6a0169363d670cfc77b8ccd6ea7204d",
+      "compressed_bytes": 1963,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.cpp",
+      "raw_sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "raw_bytes": 14135,
+      "relative": "objects/e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b.gz",
+      "compressed_sha256": "cd7509e5a16a733ec556b60938cee7497f50314f9e9489293a012998fb262e70",
+      "compressed_bytes": 4389,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632.c",
+      "raw_sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632",
+      "raw_bytes": 55177,
+      "relative": "objects/f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632.gz",
+      "compressed_sha256": "1f705e77d8365f465213f674b96a5254fdc6f533c783746a28d34fd681c24215",
+      "compressed_bytes": 10812,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.cpp",
+      "raw_sha256": "f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15",
+      "raw_bytes": 9074,
+      "relative": "objects/f913ea72e05db5753bf74b178537a79b746906338ef7829264e745c6dad05b15.gz",
+      "compressed_sha256": "bbd418ff8b835750a3cb81074a3280712c13c55e065c9a6573827a2e1f769f77",
+      "compressed_bytes": 2790,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/host_input_custody/fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750.c",
+      "raw_sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "raw_bytes": 1774,
+      "relative": "objects/fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750.gz",
+      "compressed_sha256": "1865d090350f37e8578d0f956d1db643229f54c47fb1fc3c2600d8d8a3c6dc84",
+      "compressed_bytes": 551,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/independent_frozen_legacy_correspondence.json",
+      "raw_sha256": "029bc7e0877856bdd7b52c98bdd774ac928ad1828f7fd2daafae822ffc4cdf4e",
+      "raw_bytes": 77988,
+      "relative": "objects/029bc7e0877856bdd7b52c98bdd774ac928ad1828f7fd2daafae822ffc4cdf4e.gz",
+      "compressed_sha256": "eaac065ec64b48cca478ad604dd32f6e33bd6a4ca0ff55a6f2a92b8fc5c48e15",
+      "compressed_bytes": 6178,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/isolated_L_R_Z/admission.json",
+      "raw_sha256": "b6c1b9dadaf19789049ebb92b699d5cac0113364d4528394b37d85d6e96def61",
+      "raw_bytes": 102,
+      "relative": "objects/b6c1b9dadaf19789049ebb92b699d5cac0113364d4528394b37d85d6e96def61.gz",
+      "compressed_sha256": "de1a61441a9aa90ad7f103be3ea77580feba821b611e1aa75e2362ed39def778",
+      "compressed_bytes": 93,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/isolated_L_R_Z/context.json",
+      "raw_sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "raw_bytes": 33,
+      "relative": "objects/8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14.gz",
+      "compressed_sha256": "9b432054d94e984129c3a30419d4d22f4d8b571dc501279089cf4463e54cb1e6",
+      "compressed_bytes": 53,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/isolated_L_R_Z/context.pb",
+      "raw_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "raw_bytes": 2,
+      "relative": "objects/2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5.gz",
+      "compressed_sha256": "1cfaab5b2428d535d504d1c00224498699bc52476e776f666f41ea71a5c40a65",
+      "compressed_bytes": 22,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/isolated_L_R_Z/profile.json",
+      "raw_sha256": "85c230165eab82db7195c618c2571bc72c4d94ce66407aa3f796bc75ac79811a",
+      "raw_bytes": 1038,
+      "relative": "objects/85c230165eab82db7195c618c2571bc72c4d94ce66407aa3f796bc75ac79811a.gz",
+      "compressed_sha256": "40125b47b09ab5d478990e47f398577f5a45c510ee0e501320fc539ae7be27cb",
+      "compressed_bytes": 432,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/isolated_L_R_Z/profile.pb",
+      "raw_sha256": "3eb2ae8e7207b6a3ec6af1779bc8a4413758afbd545d3db7164ada506dee262b",
+      "raw_bytes": 745,
+      "relative": "objects/3eb2ae8e7207b6a3ec6af1779bc8a4413758afbd545d3db7164ada506dee262b.gz",
+      "compressed_sha256": "e66e0775e806ddd9a4c61dbe4eb606dffd3f657b6c386a054052037ab0046632",
+      "compressed_bytes": 263,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/manifest.json",
+      "raw_sha256": "50d136d09a16176049a9d4a56cabf976b94ca6372a80408315a0a1d55f007408",
+      "raw_bytes": 5994,
+      "relative": "objects/50d136d09a16176049a9d4a56cabf976b94ca6372a80408315a0a1d55f007408.gz",
+      "compressed_sha256": "481ca9f17cb2018517e16a700c6a7748de495e48c0d8da1708c9b85256be2264",
+      "compressed_bytes": 2225,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/profiles.json",
+      "raw_sha256": "d1b56ad2963c840af6653c8b228a6da1a80caa3f490ea8343daaec324f9f1372",
+      "raw_bytes": 1744,
+      "relative": "objects/d1b56ad2963c840af6653c8b228a6da1a80caa3f490ea8343daaec324f9f1372.gz",
+      "compressed_sha256": "85f5ee5bdb6c3903806147e69246b4e9dd44feae5eb83dbf0a1fcb35e711fef0",
+      "compressed_bytes": 689,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/context.json",
+      "raw_sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "raw_bytes": 33,
+      "relative": "objects/8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14.gz",
+      "compressed_sha256": "9b432054d94e984129c3a30419d4d22f4d8b571dc501279089cf4463e54cb1e6",
+      "compressed_bytes": 53,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/context.pb",
+      "raw_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "raw_bytes": 2,
+      "relative": "objects/2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5.gz",
+      "compressed_sha256": "1cfaab5b2428d535d504d1c00224498699bc52476e776f666f41ea71a5c40a65",
+      "compressed_bytes": 22,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/conversion.json",
+      "raw_sha256": "4ca2fc1a3d0f140bf546d0113f9495c2c4b2d2d95997c022577b97b13ddcd354",
+      "raw_bytes": 91972,
+      "relative": "objects/4ca2fc1a3d0f140bf546d0113f9495c2c4b2d2d95997c022577b97b13ddcd354.gz",
+      "compressed_sha256": "c5ce4e1f6d91959dafaeb8b37fde30234acf7a10ffe39cbe17d0f543db3888f1",
+      "compressed_bytes": 7417,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/explicit_routing_change.json",
+      "raw_sha256": "e0b1b2513ef5a40d59fa0cb3a7f22be80c9dcebe18c2615ea3007d2399bac2be",
+      "raw_bytes": 171,
+      "relative": "objects/e0b1b2513ef5a40d59fa0cb3a7f22be80c9dcebe18c2615ea3007d2399bac2be.gz",
+      "compressed_sha256": "5615e55f72f48d0c3c890c3e804d5db406949849438fa34453e7fb33b78b6370",
+      "compressed_bytes": 96,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/legacy-config.pb",
+      "raw_sha256": "2fe958eb9a0a63f9d39ef221de3138d07c2c20a5e455b6c082c50488cbf1f3c0",
+      "raw_bytes": 6248,
+      "relative": "objects/2fe958eb9a0a63f9d39ef221de3138d07c2c20a5e455b6c082c50488cbf1f3c0.gz",
+      "compressed_sha256": "52a27f4ef1ac959418e30e85df58127cb198cf8c26e7a013024b34a9a41013e8",
+      "compressed_bytes": 1466,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/profile.json",
+      "raw_sha256": "57a42529dbdf4f20b12492400292fd4f6705ddb14d2f1cb4a95b6379c0384318",
+      "raw_bytes": 2690,
+      "relative": "objects/57a42529dbdf4f20b12492400292fd4f6705ddb14d2f1cb4a95b6379c0384318.gz",
+      "compressed_sha256": "917c493b0ddf929e89b02cb2b9d37c8acf7a8433377a339f12f12ad1e77dd176",
+      "compressed_bytes": 1430,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/rebound/profile.pb",
+      "raw_sha256": "ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef",
+      "raw_bytes": 1985,
+      "relative": "objects/ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef.gz",
+      "compressed_sha256": "9c05c998625e8d0df67bd69ba94319199936955062d4cb34babefe8ae4d5ec04",
+      "compressed_bytes": 1205,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/refusal_context_mismatch/context.json",
+      "raw_sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7",
+      "raw_bytes": 166,
+      "relative": "objects/768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7.gz",
+      "compressed_sha256": "7258358718bd68d276414713820f22f8e404f99ba146e64ad7ed76fdb01f4167",
+      "compressed_bytes": 133,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/refusal_context_mismatch/context.pb",
+      "raw_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+      "raw_bytes": 10,
+      "relative": "objects/ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba.gz",
+      "compressed_sha256": "1e2484d24fca47591b3c3cf9e37d85c19bcd0e216e336635a38667ca22278ca3",
+      "compressed_bytes": 30,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/refusal_context_mismatch/profile.json",
+      "raw_sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0",
+      "raw_bytes": 2690,
+      "relative": "objects/d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0.gz",
+      "compressed_sha256": "3db0efb2f2e71cd2aa21beaa5ce5444f370889fa9584d6c11599d0ba3a1d95b7",
+      "compressed_bytes": 1429,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-independent-review-20261021/supplement_short/refusal_context_mismatch/profile.pb",
+      "raw_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+      "raw_bytes": 1985,
+      "relative": "objects/e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa.gz",
+      "compressed_sha256": "17a19651914b684f281421388387a50592b3314a43cf7cb68e942bcc4a3ac90a",
+      "compressed_bytes": 1206,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-334f-hardware-review-archive-pins-20261021.json",
+      "raw_sha256": "0ef7aab0dee33bfc16382e8a5b22cced9d7f4a834b76bbe82a990c91e4c607e4",
+      "raw_bytes": 34948,
+      "relative": "objects/0ef7aab0dee33bfc16382e8a5b22cced9d7f4a834b76bbe82a990c91e4c607e4.gz",
+      "compressed_sha256": "7b8e500557b1ea0113c60f3d4607f0a76afb363921c0e513311ba81994b5a57f",
+      "compressed_bytes": 5166,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}
