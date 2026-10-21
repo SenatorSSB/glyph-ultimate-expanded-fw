@@ -1,0 +1,116 @@
+{
+  "kind": "FINITE_OFFLINE_METADATA_AND_EXTENSION_ACK_PUBLIC_SAFE_PINS",
+  "result": "PASS_NO_CONCRETE_DEFECT",
+  "no_device_actions": true,
+  "no_private_payload_inputs_in_archive": true,
+  "files": {
+    "/private/tmp/glyph-native-console-observation-review-20261022/PINS.json": {
+      "bytes": 5540,
+      "sha256": "4b4030937e11d671645b5e86583ebfcf79f567ca6a101e8337abfa600225f8d2"
+    },
+    "/private/tmp/glyph-native-console-observation-review-20261022/REPORT.md": {
+      "bytes": 10943,
+      "sha256": "e73c407db635cebd668f225907a65f4097efbd4a95e468d1ba1850aa509b559f"
+    },
+    "/private/tmp/glyph-native-install-qualification-readiness-20261022/CHECKLIST.md": {
+      "bytes": 7827,
+      "sha256": "9907675d664360e66087b17f28a783a799289402f5da7440a40484974828ae76"
+    },
+    "/private/tmp/glyph-native-install-qualification-readiness-20261022/PINS.json": {
+      "bytes": 2985,
+      "sha256": "e30d4da648463cf0bb55a0f8422f0d212cacac9a67c480eac7f4994f9851beb4"
+    },
+    "/private/tmp/glyph-native-metadata-backup-extension-20261022/EXTENSION_PACKET.json": {
+      "bytes": 5476,
+      "sha256": "e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3"
+    },
+    "/private/tmp/glyph-native-metadata-backup-extension-20261022/EXTENSION_PACKET.md": {
+      "bytes": 6714,
+      "sha256": "19c7fd88a8d6963ae74a53222ae8cb234b0b033e51ff9b28b02c6cac7eade4f0"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/PINS.json": {
+      "bytes": 767,
+      "sha256": "c9562ffca1d9943eb741c74c710049b77361943a27b8b7e4992cc33dd92a6a22"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/PINS.json": {
+      "bytes": 1159,
+      "sha256": "48a9a616da96d2f54be42204480387759c3ea9d4fc3747015949c1433840da86"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/REPORT.md": {
+      "bytes": 6929,
+      "sha256": "ded1cc6d87b32aa4ed416570a004713808ad31f0a486b077bab531d13ab9e6ef"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/metadata_probe": {
+      "bytes": 88192,
+      "sha256": "a7323004747c86bd7fada4e3f4e0b9dc9d1ed620bfd1c1233e1a367d124648eb"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/metadata_probe.cpp": {
+      "bytes": 12710,
+      "sha256": "506011f496ae3e9593f625b5c2635f140da4bc49a1a5566fc94e62397f5d0962"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/mock_snapshot_test": {
+      "bytes": 138896,
+      "sha256": "8282f02cc06210c41d377b2d33af1d1bd5c3486e02d699145eafacaf63f83238"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/mock_snapshot_test.cpp": {
+      "bytes": 3842,
+      "sha256": "434259fb2a052b9afe126c9b30ed1f57033e43e6a2015da4d27df642d2b01236"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/offline_evidence.json": {
+      "bytes": 29808,
+      "sha256": "d5a4d4cdac36c287322c471be90d15ddcdbeedca65990953c1b38f7ad345d330"
+    },
+    "/private/tmp/glyph-native-xinput-interface-guard-proposal-20261022/anchored_child/validate_offline.py": {
+      "bytes": 3422,
+      "sha256": "1ca63505bd7e8f2b923dab081ba53283b96eed31cc298f6718c0d7d762b0b378"
+    },
+    "/private/tmp/glyph-native-xinput-interface-metadata-review-20261022/REPORT.md": {
+      "bytes": 12027,
+      "sha256": "40074ade3ced88305a3941f002d9ef6517d6559efaccd6046895243a4b623015"
+    },
+    "/private/tmp/glyph-native-xinput-interface-metadata-review-20261022/result.json": {
+      "bytes": 2216,
+      "sha256": "4bf1482cff523d3b13795d3be07d79040bbd013ed6843f5c43624f9435944d22"
+    }
+  },
+  "external_SDK_input_references": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h": {
+      "bytes": 79847,
+      "sha256": "553869588e8c0b162b232e294dea2579cfd739d83e772a0b8a79e2be91a5816e"
+    },
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/IOUSBHostFamilyDefinitions.h": {
+      "bytes": 31885,
+      "sha256": "5510bc098ac76b827a79e92cf118e30066bd181dbb7323c4586228d12eee6fcf"
+    },
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/IOUSBLib.h": {
+      "bytes": 308768,
+      "sha256": "16acc674ebc759d00904e8ae1cd2137b5f814d54fe237c5193cf6549131d542a"
+    },
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/USBSpec.h": {
+      "bytes": 23800,
+      "sha256": "a7ef477c0d7236dd684ae16cb72d5b8298279e5e99fc7278d8d90b9e14c94358"
+    }
+  },
+  "unchanged_source_input_references": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473/mac_input_observer.cpp": {
+      "bytes": 20672,
+      "sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_candidate_tool.py": {
+      "bytes": 19077,
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_production_tool.py": {
+      "bytes": 10878,
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_runtime_identity_tool.py": {
+      "bytes": 9156,
+      "sha256": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": {
+      "bytes": 46658,
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+    }
+  }
+}

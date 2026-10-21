@@ -1,5 +1,13 @@
 # Profile-native Ultimate execution chapter
 
+## Exact installation, runtime identity and host access stop — 2026-10-22
+
+[Actual installation/access evidence](installation_results_20261022/README.md) preserves original packet approval and later explicit owner delegation of the single exact UF2 copy. One exclusive copy accepted1041408 bytes with fsync/close, source preserved; owner reports Works. Same-unit XInput metadata and fixed current identity match original legacy profile4/revision1/schema3/incarnation1/digest. No native acceptance or cryptographic program readback is claimed.
+
+The one raw capture stopped before USBInterfaceOpen at the same unresolved selection guard, zero reports. No retry, Configurator entry or pending postinstallation preservation reads followed. Private preinstall originals remain validated; unobserved postinstall Config/all22 contents are not claimed unchanged. No candidate source integration or Config/profile mutation occurred.
+
+[Bounded metadata/backup extension](interface_metadata_backup_extension_20261022/EXTENSION_PACKET.md) proposes one exact anchored host metadata lookup and/or known-menu read-only preservation exception, requiring new explicit owner approval. It adds no firmware command, report retry, recovery or output-evidence waiver. Frozen source/build/resource/caps/protocol/all18/H1–H12 and final HEP/integration/DONE gates remain.
+
 ## Original custody complete; exact installation gate — 2026-10-22
 
 [Approved Config/all22 original profile backup](original_backup_results_20261022/README.md) completed with full private custody audit PASS. A source-grounded independent review resolved an overstrict legacy metadata/body equality assertion offline, retaining both versions, original error and zero READ retries. Owner-approved same-user access exception preserved UID502 and prior failed-open history; no Config/profile or firmware write occurred.

@@ -1,0 +1,1136 @@
+{
+  "classification": "OFFLINE_ONLY_DRAFT_HOLD",
+  "live_invocations": 0,
+  "parent_all_pinned_files_rechecked": "UNCHANGED",
+  "parent_PINS_SHA256": "c9562ffca1d9943eb741c74c710049b77361943a27b8b7e4992cc33dd92a6a22",
+  "compile_command": "clang++ -std=c++17 -Wall -Wextra -Werror -Wno-deprecated-declarations -framework IOKit -framework CoreFoundation metadata_probe.cpp -o metadata_probe",
+  "mock_compile_command": "clang++ -std=c++17 -Wall -Wextra -Werror -Wno-deprecated-declarations -framework IOKit -framework CoreFoundation mock_snapshot_test.cpp -o mock_snapshot_test",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "prohibited_operation_scan": "PASS",
+  "pure_cases": [
+    {
+      "argv": [
+        "--self-test"
+      ],
+      "returncode": 0,
+      "stdout": "PASS 85 pure guard/anchor/membership/bounds cases; no IOKit/device calls\n",
+      "stderr": "",
+      "live_IOKit_calls": 0
+    },
+    {
+      "argv": [],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "STOP: child draft requires separate owner approval; no IOKit call made\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "argv": [
+        "--wrong-flag"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "STOP: child draft requires separate owner approval; no IOKit call made\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "argv": [
+        "--owner-approved-anchored-metadata-once",
+        "extra"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "STOP: child draft requires separate owner approval; no IOKit call made\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "argv": [
+        "--owner-approved-metadata-once"
+      ],
+      "returncode": 2,
+      "stdout": "",
+      "stderr": "STOP: child draft requires separate owner approval; no IOKit call made\n",
+      "live_IOKit_calls": 0
+    }
+  ],
+  "source_included_mock_cases": [
+    {
+      "scenario": 1,
+      "description": "anchored inventory survives zero original-query results",
+      "stdout_records": [
+        {
+          "kind": "anchor_query",
+          "status": 0,
+          "expected_entry_id": 4295237137,
+          "vendor": 1848,
+          "product": 18214,
+          "location": 1048576
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 4295237137,
+          "parent_id": 0,
+          "depth": 0,
+          "class_status": 0,
+          "class": "IOUSBHostDevice"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "location",
+          "state": "valid",
+          "value": 1048576
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 4295237137,
+          "status": 0
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 101,
+          "parent_id": 4295237137,
+          "depth": 1,
+          "class_status": 0,
+          "class": "IOUSBHostInterface"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "location",
+          "state": "missing",
+          "value": null
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 101,
+          "status": 0
+        },
+        {
+          "kind": "anchor_summary",
+          "anchor_present": true,
+          "multiple": false,
+          "identity_verified": true,
+          "descendants": 1,
+          "inventory_complete": true,
+          "node_cap": 32,
+          "depth_cap": 3
+        },
+        {
+          "kind": "original_interface_query",
+          "status": 0,
+          "service_cap": 16,
+          "getter_cap": 144
+        },
+        {
+          "kind": "summary",
+          "enumerated": 0,
+          "anchored_members": 0,
+          "plugins_attempted": 0,
+          "plugin_success": 0,
+          "interface300_success": 0,
+          "accepted": 0,
+          "iterator_valid": true,
+          "outcome": "ZERO_ENUMERATED",
+          "reports": 0,
+          "acceptance": "NOT_CLAIMED"
+        }
+      ],
+      "stderr": "MOCK_ONLY anchor_queries=1 interface_queries=1 plugin_calls=0 child_calls=2 rc=2\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "scenario": 2,
+      "description": "wrong retained anchor ID stops before interface query",
+      "stdout_records": [
+        {
+          "kind": "anchor_query",
+          "status": 0,
+          "expected_entry_id": 4295237137,
+          "vendor": 1848,
+          "product": 18214,
+          "location": 1048576
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 4295237138,
+          "parent_id": 0,
+          "depth": 0,
+          "class_status": 0,
+          "class": "IOUSBHostDevice"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "location",
+          "state": "valid",
+          "value": 1048576
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237138,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "anchor_summary",
+          "anchor_present": true,
+          "multiple": false,
+          "identity_verified": false,
+          "descendants": 0,
+          "inventory_complete": false,
+          "node_cap": 32,
+          "depth_cap": 3
+        },
+        {
+          "kind": "summary",
+          "outcome": "ANCHOR_UNKNOWN_OR_INVENTORY_INCOMPLETE_STOP",
+          "plugins_attempted": 0,
+          "reports": 0
+        }
+      ],
+      "stderr": "MOCK_ONLY anchor_queries=1 interface_queries=0 plugin_calls=0 child_calls=0 rc=2\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "scenario": 3,
+      "description": "depth overflow stops before interface query",
+      "stdout_records": [
+        {
+          "kind": "anchor_query",
+          "status": 0,
+          "expected_entry_id": 4295237137,
+          "vendor": 1848,
+          "product": 18214,
+          "location": 1048576
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 4295237137,
+          "parent_id": 0,
+          "depth": 0,
+          "class_status": 0,
+          "class": "IOUSBHostDevice"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "location",
+          "state": "valid",
+          "value": 1048576
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 4295237137,
+          "status": 0
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 101,
+          "parent_id": 4295237137,
+          "depth": 1,
+          "class_status": 0,
+          "class": "IOUSBHostInterface"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "location",
+          "state": "missing",
+          "value": null
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 101,
+          "status": 0
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 102,
+          "parent_id": 101,
+          "depth": 2,
+          "class_status": 0,
+          "class": "IOUSBHostInterface"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "location",
+          "state": "missing",
+          "value": null
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 102,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 102,
+          "status": 0
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 103,
+          "parent_id": 102,
+          "depth": 3,
+          "class_status": 0,
+          "class": "IOUSBHostInterface"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "location",
+          "state": "missing",
+          "value": null
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 103,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 103,
+          "status": 0
+        },
+        {
+          "kind": "inventory_stop",
+          "reason": "node_or_depth_overflow"
+        },
+        {
+          "kind": "anchor_summary",
+          "anchor_present": true,
+          "multiple": false,
+          "identity_verified": true,
+          "descendants": 3,
+          "inventory_complete": false,
+          "node_cap": 32,
+          "depth_cap": 3
+        },
+        {
+          "kind": "summary",
+          "outcome": "ANCHOR_UNKNOWN_OR_INVENTORY_INCOMPLETE_STOP",
+          "plugins_attempted": 0,
+          "reports": 0
+        }
+      ],
+      "stderr": "MOCK_ONLY anchor_queries=1 interface_queries=0 plugin_calls=0 child_calls=4 rc=2\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "scenario": 4,
+      "description": "missing direct child location admits only anchored original-query member; mocked plugin fails",
+      "stdout_records": [
+        {
+          "kind": "anchor_query",
+          "status": 0,
+          "expected_entry_id": 4295237137,
+          "vendor": 1848,
+          "product": 18214,
+          "location": 1048576
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 4295237137,
+          "parent_id": 0,
+          "depth": 0,
+          "class_status": 0,
+          "class": "IOUSBHostDevice"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "location",
+          "state": "valid",
+          "value": 1048576
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 4295237137,
+          "status": 0
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 101,
+          "parent_id": 4295237137,
+          "depth": 1,
+          "class_status": 0,
+          "class": "IOUSBHostInterface"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "location",
+          "state": "missing",
+          "value": null
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 101,
+          "status": 0
+        },
+        {
+          "kind": "anchor_summary",
+          "anchor_present": true,
+          "multiple": false,
+          "identity_verified": true,
+          "descendants": 1,
+          "inventory_complete": true,
+          "node_cap": 32,
+          "depth_cap": 3
+        },
+        {
+          "kind": "original_interface_query",
+          "status": 0,
+          "service_cap": 16,
+          "getter_cap": 144
+        },
+        {
+          "kind": "original_query_service",
+          "index": 1,
+          "entry_status": 0,
+          "entry_id": 101,
+          "anchor_member": true,
+          "direct_location_state": "missing",
+          "direct_location": null,
+          "plugin_permitted": true
+        },
+        {
+          "kind": "plugin",
+          "index": 1,
+          "status": -536870201,
+          "nonnull": false
+        },
+        {
+          "kind": "summary",
+          "enumerated": 1,
+          "anchored_members": 1,
+          "plugins_attempted": 1,
+          "plugin_success": 0,
+          "interface300_success": 0,
+          "accepted": 0,
+          "iterator_valid": true,
+          "outcome": "ZERO_ACCEPTED",
+          "reports": 0,
+          "acceptance": "NOT_CLAIMED"
+        }
+      ],
+      "stderr": "MOCK_ONLY anchor_queries=1 interface_queries=1 plugin_calls=1 child_calls=2 rc=2\n",
+      "live_IOKit_calls": 0
+    },
+    {
+      "scenario": 5,
+      "description": "same-query nonmember never receives plugin",
+      "stdout_records": [
+        {
+          "kind": "anchor_query",
+          "status": 0,
+          "expected_entry_id": 4295237137,
+          "vendor": 1848,
+          "product": 18214,
+          "location": 1048576
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 4295237137,
+          "parent_id": 0,
+          "depth": 0,
+          "class_status": 0,
+          "class": "IOUSBHostDevice"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "location",
+          "state": "valid",
+          "value": 1048576
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 4295237137,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 4295237137,
+          "status": 0
+        },
+        {
+          "kind": "registry_node",
+          "entry_id": 101,
+          "parent_id": 4295237137,
+          "depth": 1,
+          "class_status": 0,
+          "class": "IOUSBHostInterface"
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "vendor",
+          "state": "valid",
+          "value": 1848
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "product",
+          "state": "valid",
+          "value": 18214
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "location",
+          "state": "missing",
+          "value": null
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "class",
+          "state": "valid",
+          "value": 255
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "subclass",
+          "state": "valid",
+          "value": 93
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "protocol",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "number",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "alt",
+          "state": "valid",
+          "value": 0
+        },
+        {
+          "kind": "registry_property",
+          "entry_id": 101,
+          "field": "configuration",
+          "state": "valid",
+          "value": 1
+        },
+        {
+          "kind": "children_iterator",
+          "parent_id": 101,
+          "status": 0
+        },
+        {
+          "kind": "anchor_summary",
+          "anchor_present": true,
+          "multiple": false,
+          "identity_verified": true,
+          "descendants": 1,
+          "inventory_complete": true,
+          "node_cap": 32,
+          "depth_cap": 3
+        },
+        {
+          "kind": "original_interface_query",
+          "status": 0,
+          "service_cap": 16,
+          "getter_cap": 144
+        },
+        {
+          "kind": "original_query_service",
+          "index": 1,
+          "entry_status": 0,
+          "entry_id": 999,
+          "anchor_member": false,
+          "direct_location_state": "missing",
+          "direct_location": null,
+          "plugin_permitted": false
+        },
+        {
+          "kind": "summary",
+          "enumerated": 1,
+          "anchored_members": 0,
+          "plugins_attempted": 0,
+          "plugin_success": 0,
+          "interface300_success": 0,
+          "accepted": 0,
+          "iterator_valid": true,
+          "outcome": "ZERO_ACCEPTED",
+          "reports": 0,
+          "acceptance": "NOT_CLAIMED"
+        }
+      ],
+      "stderr": "MOCK_ONLY anchor_queries=1 interface_queries=1 plugin_calls=0 child_calls=2 rc=2\n",
+      "live_IOKit_calls": 0
+    }
+  ],
+  "SDK_inputs": [
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/IOKitLib.h",
+      "SHA256": "553869588e8c0b162b232e294dea2579cfd739d83e772a0b8a79e2be91a5816e"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/IOUSBLib.h",
+      "SHA256": "16acc674ebc759d00904e8ae1cd2137b5f814d54fe237c5193cf6549131d542a"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/USBSpec.h",
+      "SHA256": "a7ef477c0d7236dd684ae16cb72d5b8298279e5e99fc7278d8d90b9e14c94358"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers/usb/IOUSBHostFamilyDefinitions.h",
+      "SHA256": "5510bc098ac76b827a79e92cf118e30066bd181dbb7323c4586228d12eee6fcf"
+    }
+  ]
+}

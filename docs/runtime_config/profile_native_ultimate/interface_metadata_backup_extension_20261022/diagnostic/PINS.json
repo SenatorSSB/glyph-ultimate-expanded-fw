@@ -1,0 +1,35 @@
+{
+  "state": "DRAFT_SOURCE_PACKET_HOLD",
+  "live_invocations": 0,
+  "immutable_parent_PINS_SHA256": "c9562ffca1d9943eb741c74c710049b77361943a27b8b7e4992cc33dd92a6a22",
+  "files": {
+    "REPORT.md": {
+      "sha256": "ded1cc6d87b32aa4ed416570a004713808ad31f0a486b077bab531d13ab9e6ef",
+      "bytes": 6929
+    },
+    "metadata_probe": {
+      "sha256": "a7323004747c86bd7fada4e3f4e0b9dc9d1ed620bfd1c1233e1a367d124648eb",
+      "bytes": 88192
+    },
+    "metadata_probe.cpp": {
+      "sha256": "506011f496ae3e9593f625b5c2635f140da4bc49a1a5566fc94e62397f5d0962",
+      "bytes": 12710
+    },
+    "mock_snapshot_test": {
+      "sha256": "8282f02cc06210c41d377b2d33af1d1bd5c3486e02d699145eafacaf63f83238",
+      "bytes": 138896
+    },
+    "mock_snapshot_test.cpp": {
+      "sha256": "434259fb2a052b9afe126c9b30ed1f57033e43e6a2015da4d27df642d2b01236",
+      "bytes": 3842
+    },
+    "offline_evidence.json": {
+      "sha256": "d5a4d4cdac36c287322c471be90d15ddcdbeedca65990953c1b38f7ad345d330",
+      "bytes": 29808
+    },
+    "validate_offline.py": {
+      "sha256": "1ca63505bd7e8f2b923dab081ba53283b96eed31cc298f6718c0d7d762b0b378",
+      "bytes": 3422
+    }
+  }
+}

@@ -1,0 +1,98 @@
+"""Approved one raw XInput registry inspection and one bounded capture."""
+from pathlib import Path
+import datetime, hashlib, json, os, stat, subprocess, sys, time
+
+assert os.getuid() == os.geteuid() == 502
+os.umask(0o077)
+O = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+D = O / 'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022'
+S = D / 'session_state.json'
+H = '24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473'
+B = O / 'local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6' / H / 'mac_input_observer'
+assert stat.S_ISREG(B.lstat().st_mode) and not B.is_symlink() and hashlib.sha256(B.read_bytes()).hexdigest() == H
+action = sys.argv[1]
+assert action in ('inspect', 'capture')
+state = json.loads(S.read_text())
+assert not state['stop'] and state['XInput_identity_verified']
+
+def save(p, value, mode='x'):
+    with p.open(mode) as out:
+        json.dump(value, out, indent=2)
+        out.write('\n')
+        out.flush()
+        os.fsync(out.fileno())
+
+prefix = 'xinput_raw_' + action
+cmd = [str(B), action, '--route', 'xinput', '--approved-session', state['XInput_boot_session']]
+if action == 'inspect':
+    assert state['stage'] == 'XINPUT_IDENTITY_MATCH_READY_RAW_REGISTRY_INSPECTION'
+    assert state['XInput_registry_inspections'] == 0
+    state['XInput_registry_inspections'] = 1
+    output = D / 'xinput_registry.jsonl'
+else:
+    assert state['stage'] == 'XINPUT_RAW_REGISTRY_VERIFIED_READY_ONE_CAPTURE'
+    assert state['XInput_registry_verified'] and state['XInput_raw_captures'] == 0
+    state['XInput_raw_captures'] = 1
+    output = D / 'xinput_report_qualification.jsonl'
+    cmd += ['--purpose', 'preflight', '--row', 'PREFLIGHT', '--location', hex(state['XInput_verified_location']), '--seconds', '5', '--count', '3']
+assert not output.exists()
+cmd += ['--output', str(output)]
+save(D / (prefix + '_command.json'), {'argv': cmd, 'reserved_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+     'binary_SHA256': H, 'UID': os.getuid(), 'effective_UID': os.geteuid(), 'retry_authorized': False})
+state['stage'] = prefix.upper() + '_ATTEMPT_RESERVED_NO_RETRY'
+state['actual_device_actions'] += 1
+save(S, state, 'w')
+start = time.monotonic()
+try:
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+    stdout, stderr, rc, timeout = p.stdout, p.stderr, p.returncode, False
+except subprocess.TimeoutExpired as error:
+    stdout, stderr, rc, timeout = error.stdout or b'', error.stderr or b'', None, True
+for suffix, raw in [('_stdout.txt', stdout), ('_stderr.txt', stderr)]:
+    with (D / (prefix + suffix)).open('xb') as out:
+        out.write(raw)
+        out.flush()
+        os.fsync(out.fileno())
+save(D / (prefix + '_result.json'), {'returncode': rc, 'timeout': timeout, 'elapsed_seconds': time.monotonic() - start, 'retry_authorized': False})
+try:
+    assert rc == 0 and not timeout, 'Raw observation stopped; no retry/Configurator continuation'
+    records = [json.loads(line) for line in output.read_text().splitlines()]
+    if action == 'inspect':
+        rows = [r for r in records if r['kind'] == 'registry_only_no_open']
+        assert len(records) == 2 and len(rows) == 1 and records[-1]['kind'] == 'inspect_end' and records[-1]['matches'] == 1
+        row = rows[0]
+        assert row['vendor'] == 0x0738 and row['product'] == 0x4726 and row['route'] == 'xinput' and row['session'] == state['XInput_boot_session']
+        assert row['location'] == 0x100000
+        state['XInput_registry_verified'] = True
+        state['XInput_verified_location'] = row['location']
+        state['XInput_registry_entry_ID'] = row['registry_entry_id']
+        state['stage'] = 'XINPUT_RAW_REGISTRY_VERIFIED_READY_ONE_CAPTURE'
+        summary = {'registry': 'PASS', 'matches': 1, 'location': hex(row['location']), 'USB_interfaces_opened': 0}
+    else:
+        assert records[0]['kind'] == 'session' and records[0]['purpose'] == 'preflight' and records[0]['max_reports'] == 3 and records[0]['max_seconds'] == 5
+        assert records[0]['session'] == state['XInput_boot_session'] and records[0]['adapter_init13_explicitly_allowed'] is False
+        raw = [r for r in records if r['kind'] == 'raw']
+        decoded = [r for r in records if r['kind'] == 'decoded']
+        assert 1 <= len(raw) <= 3 and len(raw) == len(decoded)
+        assert records[-1]['kind'] == 'end' and records[-1]['reports'] == len(raw)
+        assert not any(r['kind'] == 'parse_failure' for r in records)
+        for a, b in zip(raw, decoded):
+            assert a['sequence'] == b['sequence'] and a['monotonic_ns'] == b['monotonic_ns']
+            wire = bytes.fromhex(a['hex'])
+            assert len(wire) == a['length'] == 20 and wire[:2] == b'\0\0'
+        state['XInput_raw_reports'] = len(raw)
+        state['XInput_report_qualification_verified'] = True
+        state['stage'] = 'XINPUT_QUALIFICATION_COMPLETE_READY_APPROVED_OWNER_CONFIGURATOR_ENTRY'
+        summary = {'raw_capture': 'PASS', 'raw_reports': len(raw), 'decoded_reports': len(decoded), 'candidate_acceptance': 'NOT_CLAIMED'}
+    save(D / (prefix + '_adjudication.json'), summary)
+    save(S, state, 'w')
+    print(json.dumps(summary, indent=2))
+except Exception as error:
+    state['stop'] = True
+    state['stage'] = 'STOP_' + prefix.upper() + '_NO_RETRY_NO_CONFIGURATOR_CONTINUATION'
+    save(D / (prefix + '_stop.json'), {'error': repr(error), 'retry_authorized': False, 'candidate_HEP_result': None,
+         'raw_reports': 0 if not output.exists() else sum(json.loads(line).get('kind') == 'raw' for line in output.read_text().splitlines()),
+         'root_cause': 'UNPROVEN; preserve exact stderr and partial capture'})
+    save(S, state, 'w')
+    print(json.dumps({'raw_observation': 'STOP', 'action': action, 'returncode': rc, 'timeout': timeout, 'stderr': stderr.decode(errors='replace')}))
+    raise

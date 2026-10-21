@@ -1,0 +1,95 @@
+"""One owner-requested exact UF2 copy; immutable receipt and no retry."""
+from pathlib import Path
+import datetime, hashlib, json, os, stat, subprocess, time
+
+os.umask(0o077)
+assert os.getuid() == os.geteuid() == 502
+O = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+D = O / 'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022'
+S = D / 'session_state.json'
+F = Path('/private/tmp/glyph-profile-native-20261020')
+SOURCE = O / 'local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982/firmware.uf2'
+VOLUME = Path('/Volumes/RPI-RP2')
+DEST = VOLUME / 'firmware.uf2'
+EXPECTED = '41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982'
+
+def save(path, value, mode='x'):
+    with path.open(mode) as out:
+        json.dump(value, out, indent=2)
+        out.write('\n')
+        out.flush()
+        os.fsync(out.fileno())
+
+state = json.loads(S.read_text())
+assert not state['stop'] and state['stage'] == 'OWNER_AUTHORIZED_AGENT_COPY_AWAITING_POSITIVE_RPI_RP2_DESTINATION'
+assert state['agent_copy_attempts'] == 0 and state['owner_reported_UF2_copies'] == 0
+assert state['copy_executor'] == 'AGENT_SINGLE_COPY_DIRECT_OWNER_AUTHORIZED'
+authority = json.loads((D / 'owner_single_copy_executor_change.json').read_text())
+assert authority['owner_statement'] == 'I want you to write/move it'
+destination = json.loads((D / 'positive_copy_destination.json').read_text())
+assert destination['prior_successful_external_listing']['RPI_RP2_volumes'] == 1
+assert destination['mounted_partition']['MountPoint'] == str(VOLUME)
+assert destination['mounted_partition']['DeviceIdentifier'] == 'disk4s1'
+assert destination['mounted_partition']['Internal'] is False and destination['mounted_partition']['BusProtocol'] == 'USB'
+assert VOLUME.is_dir() and not VOLUME.is_symlink() and VOLUME.resolve() == VOLUME
+assert not DEST.exists() and not DEST.is_symlink(), 'Destination exists: stop, no overwrite or retry'
+assert stat.S_ISREG(SOURCE.lstat().st_mode) and not SOURCE.is_symlink()
+assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=F, text=True).strip() == '334fbd06e4541c120b0db423e5be7e112eb1f6f6'
+assert not subprocess.check_output(['git', 'status', '--porcelain'], cwd=F, text=True)
+payload = SOURCE.read_bytes()
+assert len(payload) == 1041408 and hashlib.sha256(payload).hexdigest() == EXPECTED
+now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+receipt = {'kind': 'DIRECT_OWNER_REQUESTED_SINGLE_EXACT_UF2_COPY', 'source': str(SOURCE),
+           'source_SHA256_immediately_before_copy': EXPECTED, 'source_bytes': len(payload),
+           'destination': str(DEST), 'positive_destination_record': 'positive_copy_destination.json',
+           'authorization': 'owner_single_copy_executor_change.json', 'real_UID': os.getuid(),
+           'effective_UID': os.geteuid(), 'reserved_utc': now,
+           'method': 'One exclusive destination open, one complete unbuffered write, fsync and close; no retry or source removal',
+           'program_flash_readback_claimed': False, 'Config_profile_mutation_authorized': False}
+save(D / 'agent_single_copy_receipt.json', receipt)
+state['agent_copy_attempts'] = 1
+state['stage'] = 'AGENT_SINGLE_EXACT_UF2_COPY_RESERVED_NO_RETRY'
+save(S, state, 'w')
+fd = os.open(str(D), os.O_RDONLY)
+try:
+    os.fsync(fd)
+finally:
+    os.close(fd)
+
+written = 0
+opened = synced = closed = False
+error = None
+started = time.monotonic()
+try:
+    with DEST.open('xb', buffering=0) as target:
+        opened = True
+        written = target.write(payload)
+        if written != len(payload):
+            raise OSError('Short host write; stop without any second write')
+        os.fsync(target.fileno())
+        synced = True
+    closed = True
+except Exception as exc:
+    error = repr(exc)
+
+result = {'finished_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+          'elapsed_seconds': time.monotonic() - started, 'destination_opened': opened,
+          'host_write_accepted_bytes': written, 'fsync_completed': synced, 'close_completed': closed,
+          'copy_API_completed': error is None and written == len(payload) and synced and closed,
+          'error': error, 'retry_authorized': False,
+          'source_file_preserved': SOURCE.is_file() and hashlib.sha256(SOURCE.read_bytes()).hexdigest() == EXPECTED,
+          'program_flash_readback': 'NOT_PERFORMED; wait actual boot and approved runtime correspondence',
+          'further_device_actions_performed': False}
+save(D / 'agent_single_copy_result.json', result)
+state['agent_copy_result'] = 'agent_single_copy_result.json'
+state['host_firmware_copy_write_bytes'] = written
+state['actual_device_actions'] += 1
+if result['copy_API_completed']:
+    state['stage'] = 'AGENT_SINGLE_UF2_COPY_COMPLETED_AWAITING_OWNER_BOOT_REPORT'
+    state['agent_completed_UF2_copies'] = 1
+else:
+    state['stop'] = True
+    state['stage'] = 'UNCERTAIN_SINGLE_UF2_COPY_STOP_NO_RETRY'
+save(S, state, 'w')
+print(json.dumps(result, indent=2))
+raise SystemExit(0 if result['copy_API_completed'] else 1)

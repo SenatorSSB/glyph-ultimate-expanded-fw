@@ -1,0 +1,91 @@
+// DRAFT HOLD. No live invocation authorized. Separate immutable-parent child.
+#include <CoreFoundation/CoreFoundation.h>
+#include <IOKit/IOCFPlugIn.h>
+#include <IOKit/IOKitLib.h>
+#include <IOKit/usb/IOUSBLib.h>
+#include <array>
+#include <set>
+#include <cstdio>
+#include <cstring>
+#include <cstdint>
+#include <unistd.h>
+struct Field { int32_t status=-1; uint32_t value=0; };
+using Fields=std::array<Field,9>;
+static const char* names[]={"vendor","product","location","class","subclass","protocol","number","alt","configuration"};
+static bool accepted(const Fields& f){for(auto&x:f)if(x.status!=0)return false;return f[0].value==0x0738&&f[1].value==0x4726&&f[2].value==0x100000&&f[3].value==255&&f[4].value==93&&f[5].value==1&&f[7].value==0&&f[8].value!=0;}
+static const char* outcome(unsigned enumerated,unsigned accepted_count,bool incomplete){return incomplete?"INCOMPLETE_STOP":!enumerated?"ZERO_ENUMERATED":!accepted_count?"ZERO_ACCEPTED":accepted_count==1?"ONE_ACCEPTED_METADATA_ONLY":"MULTIPLE_ACCEPTED_STOP";}
+constexpr uint64_t anchor_id=4295237137ULL;
+constexpr unsigned node_cap=32,depth_cap=3,query_cap=16;
+struct Number { enum State{Missing,Invalid,Valid} state=Missing;uint32_t value=0; };
+struct Scope {
+ std::set<uint64_t> ids;bool complete=true;
+ bool add(uint64_t id,unsigned depth){if(!complete||!id||id==anchor_id||depth<1||depth>depth_cap||ids.size()>=node_cap||!ids.insert(id).second){complete=false;return false;}return true;}
+ bool permits(uint64_t id,Number n)const{return complete&&ids.count(id)&&n.state!=Number::Invalid&&(n.state==Number::Missing||n.value==0x100000);}
+};
+static bool anchor_matches(uint64_t id,const std::array<Number,9>& n){return id==anchor_id&&n[0].state==Number::Valid&&n[0].value==0x0738&&n[1].state==Number::Valid&&n[1].value==0x4726&&n[2].state==Number::Valid&&n[2].value==0x100000;}
+struct Obj{io_object_t v=0;~Obj(){if(v)IOObjectRelease(v);}Obj()=default;explicit Obj(io_object_t x):v(x){}Obj(const Obj&)=delete;Obj&operator=(const Obj&)=delete;};
+static void number(CFMutableDictionaryRef d,CFStringRef key,int n){CFNumberRef x=CFNumberCreate(nullptr,kCFNumberIntType,&n);if(!x)_exit(3);CFDictionarySetValue(d,key,x);CFRelease(x);}
+static Number property(io_registry_entry_t s,CFStringRef key){CFTypeRef v=IORegistryEntryCreateCFProperty(s,key,nullptr,0);if(!v)return {};int64_t n=0;bool ok=CFGetTypeID(v)==CFNumberGetTypeID()&&!CFNumberIsFloatType((CFNumberRef)v)&&CFNumberGetValue((CFNumberRef)v,kCFNumberSInt64Type,&n)&&n>=0&&uint64_t(n)<=UINT32_MAX;CFRelease(v);return {ok?Number::Valid:Number::Invalid,ok?uint32_t(n):0};}
+static std::array<Number,9> inventory(io_registry_entry_t s,uint64_t id,uint64_t parent,unsigned depth){
+ io_name_t cls{};auto cr=IOObjectGetClass(s,cls);cls[sizeof(cls)-1]=0;
+ // SDK class-name buffer is128bytes; emit bounded JSON escaped ASCII only.
+ std::printf("{\"kind\":\"registry_node\",\"entry_id\":%llu,\"parent_id\":%llu,\"depth\":%u,\"class_status\":%d,\"class\":",(unsigned long long)id,(unsigned long long)parent,depth,int(cr));
+ if(cr)std::printf("null");else{std::putchar('"');for(unsigned i=0;i<sizeof(cls)-1&&cls[i];++i){unsigned char c=cls[i];if(c=='"'||c=='\\')std::putchar('\\');if(c>=32&&c<127)std::putchar(c);else std::printf("\\u%04x",unsigned(c));}std::putchar('"');}std::puts("}");
+ const CFStringRef keys[]={CFSTR(kUSBVendorID),CFSTR(kUSBProductID),CFSTR("locationID"),CFSTR(kUSBInterfaceClass),CFSTR(kUSBInterfaceSubClass),CFSTR(kUSBInterfaceProtocol),CFSTR(kUSBInterfaceNumber),CFSTR(kUSBAlternateSetting),CFSTR(kUSBConfigurationValue)};
+ std::array<Number,9> n{};for(unsigned i=0;i<9;++i){n[i]=property(s,keys[i]);std::printf("{\"kind\":\"registry_property\",\"entry_id\":%llu,\"field\":\"%s\",\"state\":\"%s\",\"value\":",(unsigned long long)id,names[i],n[i].state==Number::Valid?"valid":n[i].state==Number::Missing?"missing":"invalid");if(n[i].state==Number::Valid)std::printf("%u",n[i].value);else std::printf("null");std::puts("}");}
+ // Unavailable class/invalid identity is not used to grant any user-client access.
+ if(cr)n[2].state=Number::Invalid;
+ return n;
+}
+static void children(io_registry_entry_t s,uint64_t parent,unsigned depth,Scope&scope){
+ if(!scope.complete)return;Obj iter;auto r=IORegistryEntryGetChildIterator(s,kIOServicePlane,&iter.v);
+ std::printf("{\"kind\":\"children_iterator\",\"parent_id\":%llu,\"status\":%d}\n",(unsigned long long)parent,int(r));if(r){scope.complete=false;return;}
+ for(;;){Obj child(IOIteratorNext(iter.v));if(!child.v)break;if(depth>depth_cap||scope.ids.size()==node_cap){std::printf("{\"kind\":\"inventory_stop\",\"reason\":\"node_or_depth_overflow\"}\n");scope.complete=false;break;}
+ uint64_t id=0;auto ir=IORegistryEntryGetRegistryEntryID(child.v,&id);if(ir||!scope.add(id,depth)){std::printf("{\"kind\":\"inventory_stop\",\"reason\":\"unknown_or_duplicate_entry\",\"status\":%d}\n",int(ir));scope.complete=false;break;}
+ auto n=inventory(child.v,id,parent,depth);if(n[2].state==Number::Invalid||(n[2].state==Number::Valid&&n[2].value!=0x100000)){scope.complete=false;std::puts("{\"kind\":\"inventory_stop\",\"reason\":\"class_or_location_conflict\"}");break;}
+ children(child.v,id,depth+1,scope);if(!scope.complete)break;
+ }
+ if(!IOIteratorIsValid(iter.v)){scope.complete=false;std::puts("{\"kind\":\"inventory_stop\",\"reason\":\"iterator_invalid\"}");}
+}
+template<typename T,typename Fn> static Field get(Fn fn,IOUSBInterfaceInterface300** p){T v=0;IOReturn r=fn(p,&v);return {int32_t(r),uint32_t(v)};}
+static int proposed_once(){
+ // One planned anchor query; not an alternate user-client/capture path.
+ CFMutableDictionaryRef m=IOServiceMatching("IOUSBHostDevice");if(!m)return 3;number(m,CFSTR(kUSBVendorID),0x0738);number(m,CFSTR(kUSBProductID),0x4726);number(m,CFSTR("locationID"),0x100000);
+ Obj anchor_iter;auto ar=IOServiceGetMatchingServices(kIOMainPortDefault,m,&anchor_iter.v);std::printf("{\"kind\":\"anchor_query\",\"status\":%d,\"expected_entry_id\":%llu,\"vendor\":1848,\"product\":18214,\"location\":1048576}\n",int(ar),(unsigned long long)anchor_id);if(ar)return 2;
+ Obj anchor(IOIteratorNext(anchor_iter.v));Obj extra(IOIteratorNext(anchor_iter.v));bool anchor_valid=anchor.v&&!extra.v&&IOIteratorIsValid(anchor_iter.v);Scope scope;
+ if(anchor_valid){uint64_t id=0;auto ir=IORegistryEntryGetRegistryEntryID(anchor.v,&id);auto n=inventory(anchor.v,id,0,0);anchor_valid=ir==0&&anchor_matches(id,n);if(anchor_valid)children(anchor.v,id,1,scope);}
+ scope.complete=scope.complete&&anchor_valid;
+ std::printf("{\"kind\":\"anchor_summary\",\"anchor_present\":%s,\"multiple\":%s,\"identity_verified\":%s,\"descendants\":%zu,\"inventory_complete\":%s,\"node_cap\":32,\"depth_cap\":3}\n",anchor.v?"true":"false",extra.v?"true":"false",anchor_valid?"true":"false",scope.ids.size(),scope.complete?"true":"false");
+ if(!scope.complete){std::puts("{\"kind\":\"summary\",\"outcome\":\"ANCHOR_UNKNOWN_OR_INVENTORY_INCOMPLETE_STOP\",\"plugins_attempted\":0,\"reports\":0}");return 2;}
+ // The held exact interface query is the ONLY possible plug-in path.
+ m=IOServiceMatching(kIOUSBInterfaceClassName);if(!m)return 3;number(m,CFSTR(kUSBVendorID),0x0738);number(m,CFSTR(kUSBProductID),0x4726);
+ Obj iter;auto r=IOServiceGetMatchingServices(kIOMainPortDefault,m,&iter.v);std::printf("{\"kind\":\"original_interface_query\",\"status\":%d,\"service_cap\":16,\"getter_cap\":144}\n",int(r));if(r)return 2;
+ unsigned seen=0,members=0,attempts=0,plugins=0,queries=0,candidates=0;bool incomplete=false;
+ for(;;){Obj s(IOIteratorNext(iter.v));if(!s.v)break;if(seen==query_cap){incomplete=true;break;}++seen;uint64_t id=0;auto ir=IORegistryEntryGetRegistryEntryID(s.v,&id);auto loc=property(s.v,CFSTR("locationID"));bool permit=ir==0&&scope.permits(id,loc);
+ std::printf("{\"kind\":\"original_query_service\",\"index\":%u,\"entry_status\":%d,\"entry_id\":%llu,\"anchor_member\":%s,\"direct_location_state\":\"%s\",\"direct_location\":",seen,int(ir),(unsigned long long)id,scope.ids.count(id)?"true":"false",loc.state==Number::Valid?"valid":loc.state==Number::Missing?"missing":"invalid");if(loc.state==Number::Valid)std::printf("%u",loc.value);else std::printf("null");std::printf(",\"plugin_permitted\":%s}\n",permit?"true":"false");
+ if(!permit){if(ir||scope.ids.count(id))incomplete=true;continue;}++members;++attempts;
+ IOCFPlugInInterface** plug=nullptr;SInt32 score=0;auto pr=IOCreatePlugInInterfaceForService(s.v,kIOUSBInterfaceUserClientTypeID,kIOCFPlugInInterfaceID,&plug,&score);
+ std::printf("{\"kind\":\"plugin\",\"index\":%u,\"status\":%d,\"nonnull\":%s}\n",seen,int(pr),plug?"true":"false");if(pr||!plug){if(plug)(*plug)->Release(plug);continue;}++plugins;
+ IOUSBInterfaceInterface300** itf=nullptr;HRESULT qr=(*plug)->QueryInterface(plug,CFUUIDGetUUIDBytes(kIOUSBInterfaceInterfaceID300),reinterpret_cast<LPVOID*>(&itf));(*plug)->Release(plug);
+ std::printf("{\"kind\":\"query_interface300\",\"index\":%u,\"status\":%d,\"nonnull\":%s}\n",seen,int(qr),itf?"true":"false");if(qr||!itf){if(itf)(*itf)->Release(itf);continue;}++queries;
+ Fields f={get<UInt16>((*itf)->GetDeviceVendor,itf),get<UInt16>((*itf)->GetDeviceProduct,itf),get<UInt32>((*itf)->GetLocationID,itf),get<UInt8>((*itf)->GetInterfaceClass,itf),get<UInt8>((*itf)->GetInterfaceSubClass,itf),get<UInt8>((*itf)->GetInterfaceProtocol,itf),get<UInt8>((*itf)->GetInterfaceNumber,itf),get<UInt8>((*itf)->GetAlternateSetting,itf),get<UInt8>((*itf)->GetConfigurationValue,itf)};
+ for(unsigned i=0;i<9;++i){std::printf("{\"kind\":\"getter\",\"index\":%u,\"field\":\"%s\",\"status\":%d,\"value\":",seen,names[i],f[i].status);if(f[i].status)std::printf("null");else std::printf("%u",f[i].value);std::puts("}");}bool ok=accepted(f);candidates+=ok;std::printf("{\"kind\":\"held_guard_result\",\"index\":%u,\"accepted\":%s}\n",seen,ok?"true":"false");(*itf)->Release(itf);
+ }
+ bool valid=IOIteratorIsValid(iter.v);incomplete|=!valid;
+ std::printf("{\"kind\":\"summary\",\"enumerated\":%u,\"anchored_members\":%u,\"plugins_attempted\":%u,\"plugin_success\":%u,\"interface300_success\":%u,\"accepted\":%u,\"iterator_valid\":%s,\"outcome\":\"%s\",\"reports\":0,\"acceptance\":\"NOT_CLAIMED\"}\n",seen,members,attempts,plugins,queries,candidates,valid?"true":"false",outcome(seen,candidates,incomplete));if(fflush(stdout)||ferror(stdout))return 3;return !incomplete&&candidates==1?0:2;
+}
+static int selftest(){unsigned checks=0;auto check=[&](bool b){++checks;if(!b){std::fprintf(stderr,"FAIL pure check%u\n",checks);return false;}return true;};
+ Fields f{};uint32_t values[]={0x0738,0x4726,0x100000,255,93,1,0,0,1};for(unsigned i=0;i<9;i++)f[i]={0,values[i]};if(!check(accepted(f)))return 1;
+ for(unsigned i=0;i<9;i++){auto g=f;g[i].status=-536870208;if(!check(!accepted(g)))return 2;}
+ for(unsigned i:{0u,1u,2u,3u,4u,5u,7u,8u}){auto g=f;g[i].value=i==8?0:values[i]+1;if(!check(!accepted(g)))return 3;}f[6].value=255;if(!check(accepted(f)))return 4;
+ if(!check(!std::strcmp(outcome(0,0,false),"ZERO_ENUMERATED"))||!check(!std::strcmp(outcome(2,0,false),"ZERO_ACCEPTED"))||!check(!std::strcmp(outcome(2,1,false),"ONE_ACCEPTED_METADATA_ONLY"))||!check(!std::strcmp(outcome(2,2,false),"MULTIPLE_ACCEPTED_STOP"))||!check(!std::strcmp(outcome(16,1,true),"INCOMPLETE_STOP")))return 5;
+ Scope s;if(!check(s.add(101,1))||!check(s.permits(101,{}))||!check(s.permits(101,{Number::Valid,0x100000}))||!check(!s.permits(101,{Number::Valid,0x200000}))||!check(!s.permits(101,{Number::Invalid,0}))||!check(!s.permits(999,{})))return 6;
+ auto bad=s;if(!check(!bad.add(101,2))||!check(!bad.permits(101,{})))return 7;
+ for(auto id:{uint64_t(0),anchor_id}){Scope b;if(!check(!b.add(id,1))||!check(!b.complete))return 8;}
+ for(unsigned depth:{0u,4u}){Scope b;if(!check(!b.add(102,depth))||!check(!b.complete))return 9;}
+ Scope max;for(unsigned i=1;i<=node_cap;++i)if(!check(max.add(i,3)))return 10;if(!check(!max.add(1000,3))||!check(!max.permits(1,{})))return 11;
+ std::array<Number,9> n{};for(unsigned i=0;i<9;i++)n[i]={Number::Valid,values[i]};if(!check(anchor_matches(anchor_id,n))||!check(!anchor_matches(anchor_id+1,n)))return 12;
+ for(unsigned i=0;i<3;i++){auto g=n;g[i].state=Number::Missing;if(!check(!anchor_matches(anchor_id,g)))return 13;g=n;g[i].state=Number::Invalid;if(!check(!anchor_matches(anchor_id,g)))return 14;g=n;++g[i].value;if(!check(!anchor_matches(anchor_id,g)))return 15;}
+ std::printf("PASS %u pure guard/anchor/membership/bounds cases; no IOKit/device calls\n",checks);return 0;
+}
+int main(int argc,char**argv){if(argc==2&&!std::strcmp(argv[1],"--self-test"))return selftest();if(argc!=2||std::strcmp(argv[1],"--owner-approved-anchored-metadata-once")){std::fputs("STOP: child draft requires separate owner approval; no IOKit call made\n",stderr);return 2;}return proposed_once();}

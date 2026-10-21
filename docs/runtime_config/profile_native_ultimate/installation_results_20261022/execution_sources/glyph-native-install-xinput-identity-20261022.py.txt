@@ -1,0 +1,73 @@
+"""Exactly one approved fixed XInput identity invocation; no retry."""
+from pathlib import Path
+import datetime, hashlib, json, os, secrets, subprocess, sys
+
+assert os.getuid() == os.geteuid() == 502
+os.umask(0o077)
+O = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+D = O / 'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022'
+S = D / 'session_state.json'
+F = Path('/private/tmp/glyph-profile-native-20261020')
+P = Path('/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_installation_qualification_20261022/INSTALL_PACKET.json')
+assert hashlib.sha256(P.read_bytes()).hexdigest() == '0377b61b0f6b87ff345c93e7c377f86b009622d351ea42d4d4fd304eeaf0f3cf'
+packet = json.loads(P.read_text())
+tool = F / 'tools/glyph_runtime_identity_tool.py'
+assert hashlib.sha256(tool.read_bytes()).hexdigest() == 'bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead'
+assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=F, text=True).strip() == packet['candidate']['Git_SHA']
+assert not subprocess.check_output(['git', 'status', '--porcelain'], cwd=F, text=True)
+state = json.loads(S.read_text())
+assert not state['stop'] and state['stage'] == 'XINPUT_CDC_CONFIRMED_READY_IDENTITY'
+assert state['XInput_CDC_positively_identified'] and state['XInput_identity_requests'] == 0
+token = secrets.randbits(64) or 1
+cmd = [sys.executable, str(tool), '--port', state['XInput_port'], '--context', 'xinput',
+       '--token', hex(token), '--session', state['XInput_boot_session'], '--timeout', '2']
+
+def save(p, value, mode='x'):
+    with p.open(mode) as out:
+        json.dump(value, out, indent=2)
+        out.write('\n')
+        out.flush()
+        os.fsync(out.fileno())
+
+save(D / 'xinput_identity_command.json', {'argv': cmd, 'reserved_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+     'tool_SHA256': hashlib.sha256(tool.read_bytes()).hexdigest(), 'UID': os.getuid(),
+     'effective_UID': os.geteuid(), 'request_limit': 1, 'retry_authorized': False})
+state['XInput_identity_requests'] = 1
+state['actual_device_actions'] += 1
+state['stage'] = 'XINPUT_IDENTITY_ATTEMPT_RESERVED_NO_RETRY'
+save(S, state, 'w')
+try:
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=7)
+    stdout, stderr, rc, timed_out = p.stdout, p.stderr, p.returncode, False
+except subprocess.TimeoutExpired as error:
+    stdout, stderr, rc, timed_out = error.stdout or b'', error.stderr or b'', None, True
+for name, data in [('xinput_identity_stdout.json', stdout), ('xinput_identity_stderr.txt', stderr)]:
+    with (D / name).open('xb') as out:
+        out.write(data)
+        out.flush()
+        os.fsync(out.fileno())
+save(D / 'xinput_identity_result.json', {'returncode': rc, 'timeout': timed_out, 'retry_authorized': False})
+try:
+    assert rc == 0 and not timed_out, 'Identity CLI failed/partial/timeout; preserve and stop'
+    j = json.loads(stdout)
+    assert j['session'] == state['XInput_boot_session'] and j['context'] == 'xinput'
+    assert j['observation'] == 'current_session_only' and int(j['token']) == token
+    expected = packet['expected_first_XInput_identity']
+    for key in ('status', 'primary_backend', 'context_row', 'requested_reference', 'active_id', 'active_revision', 'schema_version', 'payload_sha256'):
+        assert j[key] == expected[key], ('Identity mismatch', key)
+    assert j['incarnation'] == expected['store_incarnation']
+    save(D / 'xinput_identity_adjudication.json', {'match': 'PASS', 'request_token_matches': True,
+         'identity': j, 'field_name_mapping': 'packet.store_incarnation == CLI.incarnation',
+         'qualification': 'Current runtime profile correspondence; not program-flash/Git cryptographic attestation'})
+    state['XInput_identity_verified'] = True
+    state['stage'] = 'XINPUT_IDENTITY_MATCH_READY_RAW_REGISTRY_INSPECTION'
+    save(S, state, 'w')
+    print(json.dumps({'identity': 'PASS', **{k: j[k] for k in ('status', 'primary_backend', 'context_row', 'requested_reference', 'incarnation', 'active_id', 'active_revision', 'schema_version', 'payload_sha256')}}, indent=2))
+except Exception as error:
+    state['stop'] = True
+    state['stage'] = 'STOP_XINPUT_IDENTITY_ERROR_OR_MISMATCH_NO_RETRY'
+    save(D / 'xinput_identity_stop.json', {'error': repr(error), 'retry_authorized': False,
+         'firmware_failure_root_cause': 'UNPROVEN; retain exact stdout/stderr before interpretation'})
+    save(S, state, 'w')
+    print(json.dumps({'identity': 'STOP', 'returncode': rc, 'timeout': timed_out, 'error': repr(error)}))
+    raise

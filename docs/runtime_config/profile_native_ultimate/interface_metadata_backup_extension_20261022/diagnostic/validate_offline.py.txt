@@ -1,0 +1,27 @@
+from pathlib import Path
+import hashlib,json,subprocess
+D=Path(__file__).resolve().parent
+P=D.parent
+H=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert H(P/'PINS.json')=='c9562ffca1d9943eb741c74c710049b77361943a27b8b7e4992cc33dd92a6a22'
+for name,v in json.loads((P/'PINS.json').read_text())['files'].items():assert H(P/name)==v['sha256']
+s=(D/'metadata_probe.cpp').read_text()
+for x in ['USBInterfaceOpen','GetNumEndpoints','GetPipeProperties','ReadPipe','WritePipe','ControlRequest','SetConfiguration','SetAlternateInterface','USBDeviceOpen','IOServiceOpen','IOHID','AbortPipe','USBInterfaceClose','IORegistryEntryCreateCFProperties','IORegistryEntrySearchCFProperty','IORegistryEntrySetCFProperty']:assert x not in s,x
+cases=[]
+for args,want in [(['--self-test'],0),([],2),(['--wrong-flag'],2),(['--owner-approved-anchored-metadata-once','extra'],2),(['--owner-approved-metadata-once'],2)]:
+ p=subprocess.run([str(D/'metadata_probe'),*args],capture_output=True,timeout=3);assert p.returncode==want
+ cases.append({'argv':args,'returncode':p.returncode,'stdout':p.stdout.decode(),'stderr':p.stderr.decode(),'live_IOKit_calls':0})
+mocks=[]
+for i in range(1,6):
+ p=subprocess.run([str(D/'mock_snapshot_test'),str(i)],capture_output=True,timeout=3);assert p.returncode==0,p.stderr
+ rows=[json.loads(x) for x in p.stdout.decode().splitlines()];assert rows[-1]['kind']=='summary'
+ if i==1:assert rows[-1]['outcome']=='ZERO_ENUMERATED' and any(r['kind']=='registry_node' and r['class']=='IOUSBHostInterface' for r in rows)
+ if i in [2,3]:assert rows[-1]['outcome']=='ANCHOR_UNKNOWN_OR_INVENTORY_INCOMPLETE_STOP'
+ if i==4:assert rows[-1]['plugins_attempted']==1 and any(r.get('direct_location_state')=='missing' and r['plugin_permitted'] for r in rows)
+ if i==5:assert rows[-1]['plugins_attempted']==0
+ mocks.append({'scenario':i,'description':{1:'anchored inventory survives zero original-query results',2:'wrong retained anchor ID stops before interface query',3:'depth overflow stops before interface query',4:'missing direct child location admits only anchored original-query member; mocked plugin fails',5:'same-query nonmember never receives plugin'}[i],'stdout_records':rows,'stderr':p.stderr.decode(),'live_IOKit_calls':0})
+headers=Path('/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/IOKit.framework/Headers')
+sdk=[headers/'IOKitLib.h',headers/'usb/IOUSBLib.h',headers/'usb/USBSpec.h',headers/'usb/IOUSBHostFamilyDefinitions.h']
+e={'classification':'OFFLINE_ONLY_DRAFT_HOLD','live_invocations':0,'parent_all_pinned_files_rechecked':'UNCHANGED','parent_PINS_SHA256':H(P/'PINS.json'),'compile_command':'clang++ -std=c++17 -Wall -Wextra -Werror -Wno-deprecated-declarations -framework IOKit -framework CoreFoundation metadata_probe.cpp -o metadata_probe','mock_compile_command':'clang++ -std=c++17 -Wall -Wextra -Werror -Wno-deprecated-declarations -framework IOKit -framework CoreFoundation mock_snapshot_test.cpp -o mock_snapshot_test','compiler':subprocess.run(['clang++','--version'],capture_output=True,check=True).stdout.decode(),'prohibited_operation_scan':'PASS','pure_cases':cases,'source_included_mock_cases':mocks,'SDK_inputs':[{'path':str(x),'SHA256':H(x)} for x in sdk]}
+(D/'offline_evidence.json').write_text(json.dumps(e,indent=2)+'\n')
+print('PASS parent pins unchanged; 85 pure cases, four rejection branches, five actual-source mocked snapshots; zero live calls')

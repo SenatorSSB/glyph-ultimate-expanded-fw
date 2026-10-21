@@ -1,0 +1,62 @@
+"""One approved standard serial-metadata lookup; no device/port open."""
+from pathlib import Path
+import datetime, hashlib, json, os, re
+
+assert os.getuid() == os.geteuid() == 502
+os.umask(0o077)
+O = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+D = O / 'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022'
+S = D / 'session_state.json'
+OLD = O / 'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json'
+state = json.loads(S.read_text())
+assert not state['stop'] and state['stage'] == 'COPY_COMPLETED_OWNER_REPORTS_WORKS_READY_XINPUT_METADATA'
+assert state['XInput_CDC_metadata_lookups'] == 0 and state['owner_reported_normal_boot']
+previous = json.loads(OLD.read_text())
+assert previous['match_count'] == 1
+unit = previous['matches'][0]
+assert unit['serial_number'] and unit['location'] == '0-1'
+
+def save(p, value, mode='x'):
+    with p.open(mode) as out:
+        json.dump(value, out, indent=2)
+        out.write('\n')
+        out.flush()
+        os.fsync(out.fileno())
+
+save(D / 'xinput_metadata_attempt.json', {'kind': 'ONE_STANDARD_METADATA_ENUMERATION_NO_PORT_OPEN',
+     'reserved_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+     'filter_VID': 0x0738, 'filter_PID': 0x4726,
+     'same_unit_private_reference_SHA256': hashlib.sha256(OLD.read_bytes()).hexdigest(),
+     'script_SHA256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+     'real_UID': os.getuid(), 'effective_UID': os.geteuid(), 'retry_authorized': False})
+state['XInput_CDC_metadata_lookups'] = 1
+state['actual_device_actions'] += 1
+state['stage'] = 'XINPUT_CDC_METADATA_ATTEMPT_RESERVED_NO_RETRY'
+save(S, state, 'w')
+try:
+    from serial.tools import list_ports
+    matches = []
+    for port in list_ports.comports():  # Exactly one standard metadata call.
+        if port.vid == 0x0738 and port.pid == 0x4726:
+            matches.append(dict(device=port.device, vid=port.vid, pid=port.pid,
+                                serial_number=port.serial_number, location=port.location,
+                                product=port.product, interface=port.interface))
+    save(D / 'xinput_serial_metadata.json', {'kind': 'XINPUT_CDC_METADATA_ONLY_NO_PORT_OPEN',
+         'match_count': len(matches), 'matches': matches})
+    assert len(matches) == 1, 'Ambiguous/missing XInput CDC match; stop'
+    selected = matches[0]
+    assert selected['serial_number'] == unit['serial_number'] and selected['location'] == unit['location'], 'Unit/location differs; stop'
+    assert re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+', selected['device']), 'Unexpected CDC path; stop'
+    state['XInput_CDC_positively_identified'] = True
+    state['XInput_port'] = selected['device']
+    state['XInput_boot_session'] = 'GP_NATIVE_001_INSTALL_BOOT_20261022_01'
+    state['stage'] = 'XINPUT_CDC_CONFIRMED_READY_IDENTITY'
+    save(S, state, 'w')
+    print(json.dumps({'metadata_lookup': 'PASS', 'matches': 1, 'same_unit_and_location': True,
+                      'port': selected['device'], 'serial_ports_opened': 0}, indent=2))
+except Exception as error:
+    state['stop'] = True
+    state['stage'] = 'STOP_XINPUT_CDC_METADATA_ERROR_NO_RETRY'
+    save(D / 'xinput_metadata_stop.json', {'error': repr(error), 'retry_authorized': False, 'port_opens': 0})
+    save(S, state, 'w')
+    raise

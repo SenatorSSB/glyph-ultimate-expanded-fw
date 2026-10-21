@@ -1,0 +1,88 @@
+{
+  "classification": "FOCUSED_SOURCEFREE_INSTALLATION_STOP_AND_NEW_OWNER_PACKET_PUBLICATION",
+  "state": "PASS_FOCUSED_NO_DEVICE_OR_GLOBAL_ACCEPTANCE",
+  "framework": "PASS",
+  "sequence": "PASS",
+  "navigation": "PASS",
+  "diff_scope": "PASS_DOCS_ONLY",
+  "diff_check": "PASS",
+  "other_orders_unchanged": 102,
+  "only_native_queue_field_changed": "hardware_evidence_gaps",
+  "protected_candidate_build_resource_oracles_protocol_hardware_fields_unchanged": true,
+  "hardware_result": null,
+  "native_acceptance": "NOT_TESTED",
+  "target_timing_highwater": "NOT_MEASURED",
+  "private_install_stage_files_rehashed": 34,
+  "private_original_files_rehashed": 251,
+  "prior_archive_input_rehashes": 1065,
+  "archive_manifests_unchanged": true,
+  "peer_input_rehashes": 26,
+  "new_packet_MD_SHA256": "19c7fd88a8d6963ae74a53222ae8cb234b0b033e51ff9b28b02c6cac7eade4f0",
+  "new_packet_JSON_SHA256": "e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3",
+  "new_packet_approval": null,
+  "new_packet_live_actions": 0,
+  "exact_source_and_artifact_custody_match": true,
+  "private_serial_scan": "PASS_PRIVATE_VALUES_NOT_EMITTED",
+  "public_new_files_explicit_and_no_payload_encoding": true,
+  "markdown_local_links_checked": 182,
+  "changed_paths_at_check": 36,
+  "full_docs_surface": "NOT_RERUN; preserved historical aggregate debt in exact_334f_hardware_wait_validation_20261021; no global PASS",
+  "archives": [
+    {
+      "manifest": "ABC_final_source_review_20261021/manifest.json",
+      "inputs": 91
+    },
+    {
+      "manifest": "exact_334f_build_metadata_20261021/manifest.json",
+      "inputs": 19
+    },
+    {
+      "manifest": "final_334f_resource_proof_20261021/manifest.json",
+      "inputs": 80
+    },
+    {
+      "manifest": "hardware_334f_preparation_20261021/initial_draft/manifest.json",
+      "inputs": 117
+    },
+    {
+      "manifest": "hardware_334f_preparation_20261021/independent_review/manifest.json",
+      "inputs": 146
+    },
+    {
+      "manifest": "switch_wire_erratum_20261021/manifest.json",
+      "inputs": 37
+    },
+    {
+      "manifest": "mac_observer_20261021/prefinding_parent/manifest.json",
+      "inputs": 107
+    },
+    {
+      "manifest": "mac_observer_20261021/independent_parent_findings/manifest.json",
+      "inputs": 38
+    },
+    {
+      "manifest": "mac_observer_20261021/corrected_child/manifest.json",
+      "inputs": 171
+    },
+    {
+      "manifest": "mac_observer_20261021/independent_repair_ack/manifest.json",
+      "inputs": 161
+    },
+    {
+      "manifest": "preflight_results_20261022/manifest.json",
+      "inputs": 19
+    },
+    {
+      "manifest": "manual_console_review_20261022/manifest.json",
+      "inputs": 25
+    },
+    {
+      "manifest": "configurator_entry_backup_20261022/manifest.json",
+      "inputs": 23
+    },
+    {
+      "manifest": "configurator_entry_backup_20261022/independent_ack/manifest.json",
+      "inputs": 31
+    }
+  ]
+}

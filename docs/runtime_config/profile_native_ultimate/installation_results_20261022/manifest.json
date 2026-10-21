@@ -1,0 +1,35 @@
+{
+  "kind": "PUBLIC_SAFE_INSTALLATION_RESULT_EXPLICIT_CONTENT_ONLY",
+  "files": {
+    "README.md": {
+      "bytes": 2632,
+      "sha256": "6fef87876bd4ce1e293408f1a64160f0a6e448bb2e4bfafe37f916d0986be559"
+    },
+    "execution_sources/glyph-native-install-raw-qualification-20261022.py.txt": {
+      "bytes": 5910,
+      "sha256": "0365df81a1c4eb2b06fc42404503620b80c106c2edfb785c33d2fc24d22c7c56"
+    },
+    "execution_sources/glyph-native-install-xinput-identity-20261022.py.txt": {
+      "bytes": 4618,
+      "sha256": "ae481b4f8b6df17cd2a02a8876b4128a3e102392158a7a9c8abd1fe73d4f0683"
+    },
+    "execution_sources/glyph-native-install-xinput-metadata-20261022.py.txt": {
+      "bytes": 3389,
+      "sha256": "430c6f0d474bd939808cb4c2c7a95d870cbe1ff19738d1af1bf7d1f230879c77"
+    },
+    "execution_sources/glyph-native-single-approved-uf2-copy-20261022.py.txt": {
+      "bytes": 5120,
+      "sha256": "fa97c3559288470757e4d46c7263072b04dc5e60b424bd91600c38f69f3de9e1"
+    },
+    "installation_result.json": {
+      "bytes": 3371,
+      "sha256": "f4172efebe38056c5c5d9f5d68f2b08c66515c0b72ec6ee6ef5c5e66c2e3e280"
+    },
+    "private_stage_hash_references.json": {
+      "bytes": 5127,
+      "sha256": "bbe37d1dd55ff8259cd75cd122998f7de3dc791253ebf219e521b884c2a2de87"
+    }
+  },
+  "private_hash_reference_inputs_not_copied": true,
+  "native_acceptance": false
+}

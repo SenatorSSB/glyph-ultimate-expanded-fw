@@ -1,0 +1,57 @@
+{
+  "kind": "PUBLIC_SAFE_EXPLICIT_SOURCE_AND_PACKET_WITH_FOCUSED_ACK",
+  "files": {
+    "EXTENSION_PACKET.json": {
+      "bytes": 5476,
+      "sha256": "e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3"
+    },
+    "EXTENSION_PACKET.md": {
+      "bytes": 6714,
+      "sha256": "19c7fd88a8d6963ae74a53222ae8cb234b0b033e51ff9b28b02c6cac7eade4f0"
+    },
+    "README.md": {
+      "bytes": 1726,
+      "sha256": "95fbc7171a904997cb442fa6dbe09f51040a6fb1fbfc9785cd707d087498e1fb"
+    },
+    "diagnostic/PINS.json": {
+      "bytes": 1159,
+      "sha256": "48a9a616da96d2f54be42204480387759c3ea9d4fc3747015949c1433840da86"
+    },
+    "diagnostic/REPORT.md": {
+      "bytes": 6929,
+      "sha256": "ded1cc6d87b32aa4ed416570a004713808ad31f0a486b077bab531d13ab9e6ef"
+    },
+    "diagnostic/metadata_probe.cpp.txt": {
+      "bytes": 12710,
+      "sha256": "506011f496ae3e9593f625b5c2635f140da4bc49a1a5566fc94e62397f5d0962"
+    },
+    "diagnostic/mock_snapshot_test.cpp.txt": {
+      "bytes": 3842,
+      "sha256": "434259fb2a052b9afe126c9b30ed1f57033e43e6a2015da4d27df642d2b01236"
+    },
+    "diagnostic/offline_evidence.json": {
+      "bytes": 29808,
+      "sha256": "d5a4d4cdac36c287322c471be90d15ddcdbeedca65990953c1b38f7ad345d330"
+    },
+    "diagnostic/validate_offline.py.txt": {
+      "bytes": 3422,
+      "sha256": "1ca63505bd7e8f2b923dab081ba53283b96eed31cc298f6718c0d7d762b0b378"
+    },
+    "independent_review/PINS.json": {
+      "bytes": 5969,
+      "sha256": "9e80fcc1d3b066c4bb76dc834fc7fd1efc904a4584ad3a33a9aff36991f9fb79"
+    },
+    "independent_review/REPORT.md": {
+      "bytes": 12027,
+      "sha256": "40074ade3ced88305a3941f002d9ef6517d6559efaccd6046895243a4b623015"
+    },
+    "independent_review/result.json": {
+      "bytes": 2216,
+      "sha256": "4bf1482cff523d3b13795d3be07d79040bbd013ed6843f5c43624f9435944d22"
+    }
+  },
+  "owner_approval": null,
+  "live_diagnostic_invocations": 0,
+  "Configurator_continuation_executed": false,
+  "native_acceptance": false
+}

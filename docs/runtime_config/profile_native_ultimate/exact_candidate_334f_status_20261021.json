@@ -123,7 +123,10 @@
     "bounded_preflight": "preflight_results_20261022/approval_receipt.json",
     "candidate_installation_and_physical_campaign": null,
     "known_menu_entry_extension": "DIRECT_OWNER_APPROVED_COMPLETED",
-    "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED"
+    "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED",
+    "exact_installation_qualification": "DIRECT_OWNER_APPROVED_EXECUTED_UNTIL_RAW_GUARD_STOP",
+    "agent_instead_of_manual_single_copy": "LATER_DIRECT_OWNER_I_WANT_YOU_TO_WRITE_MOVE_IT",
+    "current": "STOP_NO_RETRY_NO_CONFIGURATOR_CONTINUATION_UNTIL_NEW_EXPLICIT_EXCEPTION"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -132,10 +135,10 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit exact retained F/UF2 manual installation and bounded ordinary route/preservation qualification approval",
-    "Usable actual backend output observers and exact native Config/profile/physical campaign packet approval; unexposed GameCube fields need observation or precise owner evidence-standard decision",
-    "All18/H1-H12 physical outputs, target measurements with honest limits, logical restoration/owned-ID cleanup and independent exact HEP PASS",
-    "Source-free result, exact tested-source integration, fresh review and separate strict DONE"
+    "Explicit bounded metadata/pending-Configurator-preservation exception approval; no new report capture retry under old scope",
+    "Actual postinstall Config/all22 original decoded-profile preservation readback, plus source-grounded host raw-report access resolution and complete observer plan",
+    "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
+    "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
   "historical_evidence": "All earlier failed/incomplete source/resource probes, arithmetic corrections, candidates and custody remain unchanged. Current exact-F proof supersedes their open-state disposition, not their historical facts.",
   "sourcefree_publication_validation": {
@@ -145,7 +148,7 @@
     "full_surface": "FAIL historical C024 auth; current-state length and unchanged boundary phrase failures also reproduce on BASE c0cc; retained framework debt, no full aggregate PASS"
   },
   "mac_observer": {
-    "state": "CORRECTED_SOURCE_REVIEW_PASS_ACTUAL_XINPUT_INTERFACE_SELECTION_STOP_UNPROVEN_CAUSE",
+    "state": "ACTUAL_EXACT_INSTALL_STAGE_RAW_GUARD_STOP_BEFORE_INTERFACE_OPEN_ZERO_REPORTS",
     "binary_sha256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
     "source_sha256": "e8e3e2aba80f21bf76fd26dd3fd1a36f27f46513e07f6db00d158aa01a36ece2",
     "verifier_sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
@@ -155,7 +158,7 @@
     "custody": "mac_observer_20261021/host_artifact_custody.json",
     "final_review_binding": "mac_observer_20261021/host_artifact_review_binding.json",
     "device_calls_executed": true,
-    "device_approval": "EXACT_BOUNDED_PREFLIGHT_ONLY"
+    "device_approval": "EARLIER_PREFLIGHT_PLUS_SEPARATE_EXACT_INSTALL_QUALIFICATION; BOTH_SINGLE_CAPTURES_STOPPED_BEFORE_OPEN_ZERO_REPORTS"
   },
   "preflight": {
     "packet_id": "GP_NATIVE_001_MAC_PREFLIGHT_V1",
@@ -198,11 +201,12 @@
     "id": "GP_NATIVE_001_INSTALL_QUALIFY_V1",
     "file": "hardware_installation_qualification_20261022/INSTALL_PACKET.md",
     "json_sha256": "0377b61b0f6b87ff345c93e7c377f86b009622d351ea42d4d4fd304eeaf0f3cf",
-    "owner_approval": null,
-    "executed": false,
+    "owner_approval": "DIRECT_OWNER_APPROVED_PLUS_LATER_DIRECT_AGENT_COPY_DELEGATION",
+    "executed": true,
     "independent_ACK": "hardware_installation_qualification_20261022/independent_ack/REPORT.md",
     "independent_ACK_SHA256": "83e1381fcfbc5e28d541e0de7fef64c955586d23289cc59569c8b555746914fc",
-    "independent_pins_SHA256": "b525979f1e5f06da9fd4a019525e6ba31d17f65c1635d3a600d63d774fc40af1"
+    "independent_pins_SHA256": "b525979f1e5f06da9fd4a019525e6ba31d17f65c1635d3a600d63d774fc40af1",
+    "execution_state": "COPY_AND_RUNTIME_IDENTITY_PASS_RAW_CAPTURE_STOP_ZERO_REPORTS_BEFORE_CONFIGURATOR"
   },
   "prepared_host_route_adapter": {
     "file": "hardware_installation_qualification_20261022/route_packet.py.txt",
@@ -210,5 +214,17 @@
     "review_report_sha256": "379a75f7d051f74ce3b2dc93478e65b49e89b43dc923df1d20bdf310da4c322f",
     "executed": false
   },
-  "latest_sourcefree_readback_validation": "original_backup_publication_validation_20261022/result.json"
+  "latest_sourcefree_readback_validation": "original_backup_publication_validation_20261022/result.json",
+  "installation_qualification_result": "installation_results_20261022/installation_result.json",
+  "next_access_extension_packet": {
+    "id": "GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1",
+    "file": "interface_metadata_backup_extension_20261022/EXTENSION_PACKET.md",
+    "JSON_SHA256": "e8b4a8cd5c6d14adf31caa203a5f78d33c2662407cace40aa64666c41d3812f3",
+    "owner_approval": null,
+    "executed": false,
+    "independent_ACK": "interface_metadata_backup_extension_20261022/independent_review/REPORT.md",
+    "independent_ACK_SHA256": "40074ade3ced88305a3941f002d9ef6517d6559efaccd6046895243a4b623015",
+    "independent_pins_SHA256": "9e80fcc1d3b066c4bb76dc834fc7fd1efc904a4584ad3a33a9aff36991f9fb79"
+  },
+  "latest_sourcefree_installation_validation": "installation_publication_validation_20261022/result.json"
 }
