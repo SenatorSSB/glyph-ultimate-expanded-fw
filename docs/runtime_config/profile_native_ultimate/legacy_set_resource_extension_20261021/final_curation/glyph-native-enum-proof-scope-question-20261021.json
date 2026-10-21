@@ -1,0 +1,21 @@
+{
+  "classification": "QUESTION_FOR_INDEPENDENT_CURATOR_FROZEN_M1_INTERPRETATION_NOT_AUTHORITY",
+  "pins": {
+    "docs/runtime_config/profile_native_ultimate/m1_freeze.md": "06d5a7df685caf86587851be7419276f9e7194842a35cc6bf1b28196b8ea5fa5",
+    "docs/runtime_config/profile_native_ultimate/resource_inventory.md": "057deea7e8c44fb3518ad4f348f3e3c296e86db9d6908e6799caf81e72cd4e76",
+    "docs/runtime_config/profile_native_ultimate/production_abi_reconciliation.md": "4c815bcc0f0ca289042b63b634ca868ce931bb76a4c9a295dd55c9d0f1a065f1",
+    "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "9205291020e55b6d39c04a5349485bf475f19c5a5472f09be7cb6068d7584028"
+  },
+  "source_free_authority": "81a32790d39e3e9dbb53e08874e4a1ca67d803cd",
+  "question": "Clarify final whole-image/stack/build proof applies to the canonical production Mk6 enum ABI, while both explicit enum representations still require all mandated source/descriptor/structure/layout/semantics/component tests. Is an unbuilt alternate no-short whole firmware NOT a newly imposed gate?",
+  "source_facts": [
+    "M1 exact canonical baseline187344 RAM is actual ARM-default small-enum build; M1 projected195600 and hard199632 use that measured baseline.",
+    "M1 inventory explicitly distinguishes ARM short Config31312 and no-short Config56152; three Config copies differ74520 bytes before other types.",
+    "M1 no-short measurement is isolated struct/schema/native-layout reconciliation, explicitly not firmware rebuild/full-stack proof. Both known native additive witnesses8256/8232 were frozen.",
+    "Final canonical flags must remain unchanged; macro1 retained diagnostics and exact clean source/artifact required. No second production ABI/flag variant or hardware evidence transfer is requested.",
+    "Current finite resource report correctly qualifies reused short SDK/dependency frames and does not prove a complete no-short whole firmware. Proposed resolution preserves honest limitation rather than claiming it passed."
+  ],
+  "proposed_interpretation": "Require complete source/finalELF all31 resource proof for exact canonical production small-enum candidate; both explicit ABIs retain real probes, exact component sizes/512 layout, generated data/host/algorithm/resource component validation as frozen. Do not silently strengthen or weaken original owner/M1 acceptance. Curator must adjudicate exact wording, including later bothABI-link-address shorthand, before final acceptance; root does not self-waive requirements.",
+  "limits_unchanged": true,
+  "owner_or_physical_decision": false
+}

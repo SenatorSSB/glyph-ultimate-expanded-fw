@@ -1,0 +1,84 @@
+{
+  "kind": "FINITE_INNER_AND_STARTUP_EVIDENCE_ARCHIVE_NO_WHOLE_RESOURCE_ACCEPTANCE",
+  "script_sha256": "4a0166c0a3f8153f559c5e1413858d2504305a11456e1fe83a5dd2b3d14f1ad2",
+  "flat": [
+    {
+      "source": "/private/tmp/glyph-native-owner-context-ABC-curation-20261021.json",
+      "relative": "glyph-native-owner-context-ABC-curation-20261021.json",
+      "bytes": 26689,
+      "sha256": "6f2df9ecf2e6b26e6a4bb2b71a3e4f1e3c494ad81d8627b3c6ecf2ee4527aff9"
+    },
+    {
+      "source": "/private/tmp/glyph-native-owner-context-ABC-curation-20261021.md",
+      "relative": "glyph-native-owner-context-ABC-curation-20261021.md",
+      "bytes": 6740,
+      "sha256": "0774ea696efa42ae720722906a0145c846a652bd18de7b1960144a226dfc4b0d"
+    },
+    {
+      "source": "/private/tmp/glyph-native-owner-context-ABC-contract-patch-20261021.json",
+      "relative": "glyph-native-owner-context-ABC-contract-patch-20261021.json",
+      "bytes": 29803,
+      "sha256": "3ce0357b15c41ab8c9ab0c0868ff1af0c5e0f56352ec965f62aea499762d0655"
+    },
+    {
+      "source": "/private/tmp/glyph-native-enum-proof-scope-question-20261021.json",
+      "relative": "glyph-native-enum-proof-scope-question-20261021.json",
+      "bytes": 2591,
+      "sha256": "a96b34cd9c4301162d2c5e699b4c4a4654023b3f4457e0f3969c0f547aefbcc1"
+    },
+    {
+      "source": "/private/tmp/glyph-native-ABC-curation-archive-normalized-20261021.json",
+      "relative": "glyph-native-ABC-curation-archive-normalized-20261021.json",
+      "bytes": 825,
+      "sha256": "4e32ab0473bd8f8f89c25a5b9b43b3e3077202041fc34f4d388bbb8ab4081a92"
+    }
+  ],
+  "inputs": [
+    {
+      "source": "/private/tmp/glyph-native-ABC-curation-archive-normalized-20261021.json",
+      "raw_sha256": "4e32ab0473bd8f8f89c25a5b9b43b3e3077202041fc34f4d388bbb8ab4081a92",
+      "raw_bytes": 825,
+      "relative": "objects/4e32ab0473bd8f8f89c25a5b9b43b3e3077202041fc34f4d388bbb8ab4081a92.gz",
+      "compressed_sha256": "7a1ba315b468b684734031e9f750f3478be5da969a721a5e5fce8cb1208acef6",
+      "compressed_bytes": 416,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-enum-proof-scope-question-20261021.json",
+      "raw_sha256": "a96b34cd9c4301162d2c5e699b4c4a4654023b3f4457e0f3969c0f547aefbcc1",
+      "raw_bytes": 2591,
+      "relative": "objects/a96b34cd9c4301162d2c5e699b4c4a4654023b3f4457e0f3969c0f547aefbcc1.gz",
+      "compressed_sha256": "32df62ca55383bc58010a7e29c69f5cabb0fb5d5516afdb55499c02857f0153a",
+      "compressed_bytes": 1403,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-owner-context-ABC-contract-patch-20261021.json",
+      "raw_sha256": "3ce0357b15c41ab8c9ab0c0868ff1af0c5e0f56352ec965f62aea499762d0655",
+      "raw_bytes": 29803,
+      "relative": "objects/3ce0357b15c41ab8c9ab0c0868ff1af0c5e0f56352ec965f62aea499762d0655.gz",
+      "compressed_sha256": "8a897a3858c92b9f5da2c9affab46e95a44e85f080348973bb29a4113d62b7b4",
+      "compressed_bytes": 7643,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-owner-context-ABC-curation-20261021.json",
+      "raw_sha256": "6f2df9ecf2e6b26e6a4bb2b71a3e4f1e3c494ad81d8627b3c6ecf2ee4527aff9",
+      "raw_bytes": 26689,
+      "relative": "objects/6f2df9ecf2e6b26e6a4bb2b71a3e4f1e3c494ad81d8627b3c6ecf2ee4527aff9.gz",
+      "compressed_sha256": "d13c6dfd7662ce40258efea1398a50aab40b6d8d7ead11ff3583e7d8ac41766e",
+      "compressed_bytes": 10887,
+      "archived": true
+    },
+    {
+      "source": "/private/tmp/glyph-native-owner-context-ABC-curation-20261021.md",
+      "raw_sha256": "0774ea696efa42ae720722906a0145c846a652bd18de7b1960144a226dfc4b0d",
+      "raw_bytes": 6740,
+      "relative": "objects/0774ea696efa42ae720722906a0145c846a652bd18de7b1960144a226dfc4b0d.gz",
+      "compressed_sha256": "176d30dbf96c37210ce092689a1becf3ad17141b413ab831db9ae48f7c9673d3",
+      "compressed_bytes": 3473,
+      "archived": true
+    }
+  ],
+  "qualification": "Exact immutable reports and explicit pinned inputs only. Archive does not certify source graph completeness, final candidate correspondence, target observation, hardware acceptance or all31/P1 PASS. Original reports, limitations, failed attempts and custody locators preserved."
+}

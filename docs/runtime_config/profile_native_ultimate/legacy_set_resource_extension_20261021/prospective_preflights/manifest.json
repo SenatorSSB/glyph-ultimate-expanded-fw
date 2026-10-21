@@ -1,0 +1,29 @@
+{
+  "classification": "IMMUTABLE_ENGINEERING_EVIDENCE_NOT_ADOPTED_SOURCE_OR_RESOURCE_ACCEPTANCE",
+  "source_sha": "4209c03a5cd35416ab7fdd6d9a349c063e06106e",
+  "test_only_head": "9ed0f709894705acc508ccdfead15eb4f57fef22",
+  "note": "Finite independent prospective preflights permit named private measurements only. Later owner/context A/C is materially different; optional B requires a concrete A/C gap. No final adoption or production implementation permission is created.",
+  "files": [
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-dispatch-preflight-20261021.json",
+      "bytes": 4565,
+      "sha256": "f45cd19c9eedac6161f1fbde419650e6d9bffc15b634cd8088d8287de78bbf8c",
+      "object": "objects/f45cd19c9eedac6161f1fbde419650e6d9bffc15b634cd8088d8287de78bbf8c.gz",
+      "gzip_sha256": "40e61881e633b831d0e112196f16fc6d982ec6c1117ab9b647e472416025d543"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-owner-context-preflight-20261021.json",
+      "bytes": 7765,
+      "sha256": "0b7c2e77bca049f70cb6de3547e88676a97c6a5d681b9caf3c7e081c7a438b72",
+      "object": "objects/0b7c2e77bca049f70cb6de3547e88676a97c6a5d681b9caf3c7e081c7a438b72.gz",
+      "gzip_sha256": "4df627e8a13b50217f693d384baf4c9edf3fc3ff659776db041816b27a8b2ec3"
+    },
+    {
+      "original_path": "/private/tmp/glyph-native-legacy-set-stage-preflight-20261021.json",
+      "bytes": 6119,
+      "sha256": "e8bc65e2743c9293ca0927f10093b0b7d35daf30418066b1df644733983122c9",
+      "object": "objects/e8bc65e2743c9293ca0927f10093b0b7d35daf30418066b1df644733983122c9.gz",
+      "gzip_sha256": "6c4fc20b237414789b60294ac19dd131f147c697f68e01a125a0d7d073c900df"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+# GP-NATIVE-001 selected ABC lifetime and enum-proof adjudication
+
+**ADOPT_BOUNDED_SELECTED_ABC_ONLY.** Same READY order and resolved broader filesystem domain; no new order/successor/owner question. Root alone publishes source-free authority and verifies live readback before production edits. Requested Sol/medium; observed UNKNOWN. This is independent amendment review, not P1 or implementation/hardware acceptance.
+
+Exact selected packet: /private/tmp/glyph-native-owner-context-ABC-20261021, manifest e7a9ec5d977499d9feb72c1d54aaea505af463d7e0dadf1685d9bda681a02c0e (ALL1651 inputs independently rehashed); proposal53dd4cadd1e30db512ac2106f15a19056798d73ecc7c34ad8a64a4c6b191d071; diffc2942603315958bd6bb0ba9894a63afbb28a1548c907de930d70a80c4ba5b376. Production4209/test9ed five source blobs match. Canonical81a frozen authority and M1 read; root supplied fresh live verification.
+
+A+C2056 prior gap062f117a... was sealed BEFORE conditional B, so B's measured-need condition is satisfied. Inadequate95-input/GetInfo/noinline-HandleStore variants stay historical and are NOT adopted. Curator independently replayed280 equations and section charge. Author952NOR/1641Save/51SET rows per ABI and reset mutants are limited correctly attributed evidence, not full final semantic/ELF proof.
+
+## Exact five-path scope
+
+- Persistence.cpp/.hpp: same176-byte aligned File slot and original RAII ownership. Remove only stored pointer; Construct/Destroy return separately, live File rematerialized with std::launder; same failed construction/explicit close/fallback destructor/zeroing points. Load8 overlays borrowed Persistence*/Config* SaveContext8 with explicit member start/full8 cleanup. Save32 overlays publication20 and ostream20 while header+encoded_size12 remains live. Same headerWrite→pb_encode/bytes_written→EndStream→conditional seek→CRC/header/sync/close→verify/rotate/publish/readback/rollback. Failed encode never seeks. Full32+full8 clear only after all original cleanup owners return. No pointer escape/reentry/new owner.
+- ConfiguratorBackend.cpp/.hpp: SAME receipt88 ends ONLY after successful Decode copied/negotiated/validated/selected-record checks; then borrowed this4 lives through SAME Save/Finalize; full88 reset on entry/every final exit after response/error use. Failed preparation never activates owner/Saves. Exact truefalse/error bytes preserved. ExecuteProfileStoreMutation ONLY noinline attribute, body byte-identical. HandleProfileStore keeps original alwaysinline/body; ReadByte/GetInfo/Send bodies and attributes unchanged. Same RX/fault/transaction/trace/cleanup. Measured Send24+Execute40 retains original64 for store descendants; no tail-pop invention.
+- CheckedStorageFile.hpp: ONLY write(const uint8_t*,size_t) constructs returned trivial Result directly into SAME existing member. One same checked Write then unchanged uncertainty/failure/position/size/bytes/last_result. Same-type nonconst non-base trivial replacement, actual inputs do not alias File/Result and no in-flight callback/IRQ/core1 reads old Result. Other methods/fields/API unchanged.
+
+No new source path, File/Config/body/slot/buffer/API/lock/refusal/queue. Same synchronous core0 no-reentry graph is load-bearing. Full8/32/88 member cleanup and original constructor/destructor scope ends are required on every failure/success; tests and exact final graph must prove them. Complete method/type/field restrictions and immutable pins are normative in JSON.
+
+## Budget and resource qualification
+
+Thirteen actual charged sections remain gross458/462 plus sum(each alignment−1)41 =499/503<=unchanged512. No old32-padding assumption or new object/guard. Final canonical production linker/map/static199632/added12288 remains required. All original core2048/partition/filesystem/reserve/capacity/active-candidate-view/local/identity16-72/diagnostic/frozen oracle caps remain exact.
+
+Independent resource report13c030... and table267145... contain140 equations per genuine ABI/all31 classes, all sums independently replayed<=2048. Conservative SET adds standalone Handle8 to actual emitted path2040, obtaining2048; first Import Open remains2048. Default object rows inherit production SDK frames, not a whole alternate firmware proof. Every final source/call/callback/error/IRQ/ROM/PRIMASK/startup/core1/map correspondence still blocks P1.
+
+## Frozen M1 enum-proof interpretation
+
+**Full canonical production-small whole-image proof remains mandatory; both representation component proof remains mandatory.** M1 freezes exact canonical baseline187344 and cap199632, explicitly labels short/no-short ARM schema/struct/native measurements isolated and not firmware rebuild/full-stack proof, and requires both-ABI oracle/layout reconciliation. It does not request a second all-fno-short firmware image.
+
+Require unchanged actual production flags and verified enum attributes, full exact canonical source/build/ELF/RAM/stack/IRQ/custody/hardware acceptance. Also require ALL mandated explicit short/no-short descriptors/schema/structure/owner/view/local/512 layout/semantics/oracles and affected O3/component/header-consumer proof. A failed mandatory component remains blocking. No unbuilt alternate whole PASS may be claimed; current default ten-TU rows retain their dependency qualifications. This narrowly qualifies any later bothABI-finalmap shorthand accordingly, without rewriting M1/evidence, waiving concrete safety facts or changing flags/caps. No owner decision is needed to preserve the original distinction.
+
+## Required next gates
+
+After source-free adoption/live readback: exact selected implementation, focused Revision3 affected suites, both-representation actual NOR/stream/result/receipt/generation/fence/digest/reset/fault/reboot/close/destructor/alias tests and meaningful mutants; fresh independent final source review; complete canonical production all31/140 linked ELF/IRQ/ROM/PRIMASK/allocator/callback/core1/startup/constructor proof; clean committed build/static/map/input hashes/UF2+ELF custody. Concrete reviewed candidate-specific packet and separate owner device approval precede physical work; exact human HEP PASS precedes tested-source integration and separate strictDONE.
+
+**P1 remains OPEN.** No canonical/production/Git/checker/device writes by Curator. Other102 orders and every historical failed/incomplete/probe record preserved. Nunchuk NOT_TESTED; timing/highwater NOT_MEASURED; root cause UNPROVEN. Root publishes JSON at docs/runtime_config/profile_native_ultimate/legacy_set_owner_context_scope_amendment_20261021.json, applies narrow contract patch and IDENTICAL publication.scope_append_text to sole GP-NATIVE-001 scope. No new path or reviewer-of-reviewer loop. Finite adjudication complete.

@@ -1,0 +1,219 @@
+{
+  "schema_name": "glyph_gp_native_001_legacy_set_owner_context_curation",
+  "schema_version": 1,
+  "disposition": "ADOPT_BOUNDED_SELECTED_ABC_ONLY",
+  "role": "Glyph Work-Order Curator",
+  "finite_role_complete": true,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "recorded_utc": "2026-10-21T15:59:24.157753+00:00",
+  "authority": "Same READY GP-NATIVE-001, exact owner broader-filesystem engineering directive6330f44 and existing adopted bounded lifetime chain. Finite materially distinct same-order ABC engineering amendment, no new product/order/successor/domain choice/standing role. This is its independent amendment review; independent final implementation/source/resource review remains required. Root sole canonical publisher and source writer separate.",
+  "input_pins": {
+    "canonical_sha": "81a32790d39e3e9dbb53e08874e4a1ca67d803cd",
+    "live_verification": "Root supplied fresh live canonical81/test9ed readback; Curator verified exact local HEAD and read frozen Git, not dirty evidence docs. Publisher refreshes live truth before adoption/publication/execution.",
+    "source_sha": "4209c03a5cd35416ab7fdd6d9a349c063e06106e",
+    "source_tree": "3d3efac98c93ac19736371fb4f0894191d714403",
+    "test_only_sha": "9ed0f709894705acc508ccdfead15eb4f57fef22",
+    "five_base_production_blobs_equal_test": true,
+    "base_source_sha256": {
+      "HAL/pico/src/core/Persistence.cpp": "85b536f237764ebcda4afad2e8d4a7a6aac91eac5cda5c951dba20bb252a472b",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "b8a9e7c13338dc942d86e770242e12a92ddfb46de8f40ad2073bc707978cbff7",
+      "HAL/pico/include/core/CheckedStorageFile.hpp": "8ae17613bad0514a69ae7278b55e47abcfc4b122b3b8ec573527df639cd1ffbb",
+      "HAL/pico/include/core/Persistence.hpp": "8c1e9ab6cbe3748bfdfb2abac9e9406778c29a7994f3bde5900cbfb019fc75d5",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "8c289cc1a2d3f986eedbf01d0cd318649405593374f8f5f645e2211cec8ab035"
+    },
+    "normative_sha256": {
+      "docs/project/ACTIVE_AGENT_QUEUE.md": "2313b36428cb361b74c3edf4a5adaddb3eb0197e54dae7ac64699ea9d63f2d15",
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "9205291020e55b6d39c04a5349485bf475f19c5a5472f09be7cb6068d7584028",
+      "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e",
+      "docs/runtime_config/profile_native_ultimate/owner_diagnostic_authorization_20261020.md": "cf7f60d61044ffea6d104bfdffe190f2d896b82683059d670c310847605226ed"
+    },
+    "frozen_M1_sha256": {
+      "docs/runtime_config/profile_native_ultimate/m1_freeze.md": "06d5a7df685caf86587851be7419276f9e7194842a35cc6bf1b28196b8ea5fa5",
+      "docs/runtime_config/profile_native_ultimate/m1_freeze.json": "6164086fa575df35d7ac59735871e97414760c2555fd7f210e21ccb1176da53e",
+      "docs/runtime_config/profile_native_ultimate/resource_inventory.md": "057deea7e8c44fb3518ad4f348f3e3c296e86db9d6908e6799caf81e72cd4e76",
+      "docs/runtime_config/profile_native_ultimate/production_abi_reconciliation.md": "4c815bcc0f0ca289042b63b634ca868ce931bb76a4c9a295dd55c9d0f1a065f1"
+    },
+    "selected_packet_directory": "/private/tmp/glyph-native-owner-context-ABC-20261021",
+    "selected_sha256": {
+      "HAL/pico/src/core/Persistence.cpp": "697903d9f3ee9573c34bcc58b069a41e07d886bc90d041a034d3aa1682c5b306",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561",
+      "HAL/pico/include/core/CheckedStorageFile.hpp": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c",
+      "HAL/pico/include/core/Persistence.hpp": "744adf3955947b18d2ef6e8c10fe31061e2b31c80769f0db6cae1eddf8e76277",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "4b55d6269324d24958f40ea0c52e5bf740821efd8c9dad3e5e500e110a397d98"
+    },
+    "selected_manifest_sha256": "e7a9ec5d977499d9feb72c1d54aaea505af463d7e0dadf1685d9bda681a02c0e",
+    "selected_manifest_inputs_checked": 1651,
+    "packet_sha256": {
+      "PROPOSAL.md": "53dd4cadd1e30db512ac2106f15a19056798d73ecc7c34ad8a64a4c6b191d071",
+      "selected-private.diff": "c2942603315958bd6bb0ba9894a63afbb28a1548c907de930d70a80c4ba5b376",
+      "workspace-layout.json": "29e37202127a37fba729e2aa1e36284ad44afe3f67e89c8f5141cb6d36d518e7",
+      "whole-O3/manifest.json": "b0d7031c5ef8f71525cc07c237dea2ba9f3ec5d0b70a4f18c88aab7cc3e04846"
+    },
+    "independent_resource_sha256": {
+      "REPORT.md": "13c0307588facb71dd865544e3ebd94b61710dbc2be08bc19bf7009c99df881f",
+      "ALL129-ABC-remapping.json": "267145ac16960cbfbde603574454ea0f26934db4372a9f1c32547eb25bb80a1a",
+      "PINS.json": "229d4776ab5e685301926ff1b2705c99cf2f588860aeed8da5fa2e2cf00be84d"
+    },
+    "AC_gap_sha256": "062f117a53951098a86663b4a6a0c725c4e2df96e73d0ad762dfc65360e53c01",
+    "preflight_sha256": {
+      "/private/tmp/glyph-native-legacy-set-stage-preflight-20261021.json": "e8bc65e2743c9293ca0927f10093b0b7d35daf30418066b1df644733983122c9",
+      "/private/tmp/glyph-native-legacy-set-stage-dispatch-preflight-20261021.json": "f45cd19c9eedac6161f1fbde419650e6d9bffc15b634cd8088d8287de78bbf8c",
+      "/private/tmp/glyph-native-legacy-set-stage-owner-context-preflight-20261021.json": "0b7c2e77bca049f70cb6de3547e88676a97c6a5d681b9caf3c7e081c7a438b72"
+    },
+    "enum_question_sha256": "a96b34cd9c4301162d2c5e699b4c4a4654023b3f4457e0f3969c0f547aefbcc1"
+  },
+  "independent_review": {
+    "performed": "Read exact five-file selected diff and bodies, scoped frame/phase/alias reasoning, complete frozen-M1 documents, independent resource report/table; rehashed ALL1651 sealed inputs and five selected sources; independently replayed280 full arithmetic equations and13-section allocation charge. SendReport/ReadByte/HandleProfileStore/GetInfo/ExecuteMutation BODIES independently byte-identical baseline; only selected Execute attribute changes.",
+    "evidence_level": "Author two-ABI952 actual NOR/deep rows,1641 Save rows,51 full88 actual-module SET rows, meaningful full-reset mutants and SourceContext-clear mutant; both-ABI20 metrics1 O3 objects/layout assertions and independent140-row resource remap are accepted limited engineering evidence, correctly attributed. Curator did not rerun them or claim final semantic/linked/hardware PASS.",
+    "activation_need": "A+C2056 gap was sealed BEFORE B, exact sum verified from AC-gap-proof062f117a... . B prospective condition is satisfied by measured same-hypothesis gap. Old95-input/GetInfo/ReadByte/HandleStore wrapper trials remain inadequate and NOT adopted. No speculative optional alternative is authorized.",
+    "no_concrete_source_conflict_found": "Selected ABC keeps original operations, failure precedence, borrowed-object reachpoints and explicit active lifetimes. These source conclusions support bounded implementation authority only; every postadoption/final gate below remains."
+  },
+  "allowed_source_paths": [
+    "HAL/pico/src/core/Persistence.cpp",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+    "HAL/pico/include/core/CheckedStorageFile.hpp",
+    "HAL/pico/include/core/Persistence.hpp",
+    "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+  ],
+  "new_paths": [],
+  "permissions": [
+    {
+      "id": "A_FILE_OWNER",
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "methods": [
+        "existing SynchronousFileScope<Write> constructor/destructor/File/Construct/Destroy ONLY"
+      ],
+      "scope": "Remove ONLY its stored4-byte pointer; rematerialize SAME live placement CheckedStorageFile from SAME aligned176-byte slot via C++17 std::launder. Empty automatic scope retains original ownership/reachpoints; Construct and Destroy are private returned phases. No new File owner, slot, guard flag, heap, callback or public API.",
+      "invariants": "Original scope construction still zeros slot and placement constructs full File EVEN failed Open. No access before object lifetime begins or after destructor. Original explicit close counts/order unchanged. Scope destruction calls actual File destructor (including original opened-handle fallback) ONCE then zeros full slot, at exactly original reached scope end. Copy input uses slot while output remains original automatic File with exact order; hash distinct automatic File unchanged. Private static File getter only within valid live scope, no dangling rematerialized pointer escape."
+    },
+    {
+      "id": "A_SOURCE_CONTEXT",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "LoadConfigDriver/LoadPhaseReset only active Load member/reset adaptation",
+        "SaveConfig",
+        "InitializeSaveContext",
+        "FinishSaveConfig",
+        "selected private static Stage/Encode/Initialize/Complete/Fail/Position helper declarations"
+      ],
+      "scope": "Overlay SAME existing LoadPhase8 with borrowed SaveSourceContext{Persistence*,Config*}8, explicit trivial member starts and full8 cleanup. Returned private helpers rematerialize SAME owner/Config/File instead of retaining argument slots. No new Config/File/body/workspace owner.",
+      "invariants": "Load starts Load member before use, retains source+CRC through same prior restoration/caller publication and clears full8 every exit. Save starts borrowed context before original prepare, keeps it through all stage/verify/rotate/publication/rollback/close/destructor work, clears full8 AND existing full32 only after descendants returned, on every short-circuit/success exit including unavailable/fenced/sizing failures. Preserve exact public Save signatures, availability/fence/sizing/tempRemove/Stage/Verify/Rotate/Publish order, CAS/generation/pending/fence/results and original primitive/error traces. Load and Save context NEVER active together; no Save\u2192Load/Capture/ReadLegacy/nested Save and no validator/encoder/fault/trace/yield/USB/IRQ/core1 reentry. Actual source/indirect graph and tests remain load-bearing; no lock/refusal/second slot can replace proof."
+    },
+    {
+      "id": "A_STAGE_UNION",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "methods": [
+        "SavePhaseState/SavePublicationState temporary union",
+        "RemoveSaveTemporary/RotateSavedConfig/PublishStagedConfig only same current/Result member access adaptation",
+        "StageSaveConfig",
+        "InitializeStagedConfig",
+        "InitializeStagedStream",
+        "EncodeStagedConfig",
+        "EndStagedStream",
+        "PositionStagedConfig",
+        "CompleteStagedConfig",
+        "FailStagedConfig",
+        "remove old private forwarding WriteStagedConfig declaration/body"
+      ],
+      "scope": "Keep encoded_size4+header8 continuously live. SAME existing publication{current,Result}20 span overlays pb_ostream20 inside unchanged Save32; no extra ostream/buffer owner. Explicit start/end trivial members and returned phases, exactly selected code.",
+      "invariants": "Original initial file bool/header Write before stream start. Same as_pb_ostream and pb_encode/bytes_written checks before ending stream; encoded boolean captured first. EndStagedStream runs after encode on success AND failure, reconstructs publication before same seek/CRC. Failed encode never seeks; original stage Fail closes/fences; Complete retains exact read/CRC/header rewrite/sync/close and uncertain-failure priority. Result/current are not inspected inactive; Remove Result already dead at stream start, and later Rotate produces current/operation before publication/rollback. All original checked operation order/readback/status/publication bytes remain. No hash body or seek/sync/close/header/SDK/parser behavior change."
+    },
+    {
+      "id": "B_SET_RECEIPT_OWNER",
+      "paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp"
+      ],
+      "methods": [
+        "SetReceipt\u2192SetPhase receipt88/owner4 overlay",
+        "ResetSetPhase",
+        "HandleSetConfig",
+        "PrepareDecodedSetConfig",
+        "FinishSetPhase",
+        "private corresponding declarations ONLY"
+      ],
+      "scope": "B measured necessity satisfied by exact prior A+C2056 gap. SAME existing receipt88, not another owner; borrow this4 ONLY after successful Decode Ready. Preserve original candidate/body/Config owner and all call/response behavior.",
+      "invariants": "Receipt88 stays active through original guard, optional durable Load, capture, decode, negotiated-format gate, firmware-owned receipt copy, validation and selected-record checks. Failed preparation never activates owner or Saves; preserve true/false/error-return distinctions. Only Ready ends receipt and starts owner; SAME Save and original Finalize use SAME candidate before full reset. No receipt reference remains, IRQ/core1/USB observer/reentrant SET cannot access inactive member. Finish explicitly starts receipt then clears FULL88 AFTER final response/error use on every return; entry reset also full88. No owner-only4 clear, inactive receipt assignment, stale borrow or callback continuation. Do not edit Decode/Finalize algorithms/other handler/wire/transaction semantics."
+    },
+    {
+      "id": "C_MUTATION_BOUNDARY",
+      "paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp"
+      ],
+      "methods": [
+        "ExecuteProfileStoreMutation attribute ONLY"
+      ],
+      "scope": "Replace always_inline with noinline, BODY BYTE-IDENTICAL. HandleProfileStore retains original always_inline/body; SendReport, ReadByte and GetDeviceInfo retain original bodies/attributes. No failed annotation alternative is selected.",
+      "invariants": "Same pending early return, reached Config candidate, trace/argument/result construction/transaction/ref-set calls. Same outer RX/native lease, IncomingScope/DispatchReset/faultticket/Finalize/Respond cleanup; no storage/transport/order/data/status change. Measured Send24+retained Execute40=old64 for mutation descendants; no imagined tail pop. Reads/receive/prelookup/reconcile/Config preload occur before Execute and must use actual separate branch bounds."
+    },
+    {
+      "id": "WRITE_RESULT_MEMBER",
+      "path": "HAL/pico/include/core/CheckedStorageFile.hpp",
+      "methods": [
+        "write(const uint8_t*,size_t) ONLY"
+      ],
+      "scope": "Exactly assignment\u2192::new (&_result) CheckedStorage::Result(CheckedStorage::Write(_file,bytes,size)) into SAME existing member. Necessary measured direct-write24\u219216 phase retirement; every other overload/body/field/API/size stays byte-identical.",
+      "invariants": "ONE same checked Write, same source bytes/count/trace/outcome/error/operation. After construction SAME uncertainty stickiness, failure0, position/size and byte-count/last_result updates. Result is same-type nonconst non-base trivial member; no const/reference submembers, no destructor side effects. Allocation/lifetime reuse precedes initializer, so no in-flight old Result inspection/reentry; _file and actual encoder/header/copy input bytes do NOT alias Result. Current callbacks have no old Result reference and no IRQ/core1 object access. Final actual alias/callback audit and postcall count0/fault/sticky/nextWrite/Close tests required. No read\u2192other-method inference, no additional sync/seek/close/direct storage/API change."
+    }
+  ],
+  "workspace": {
+    "existing_single_File_bytes_alignment": [
+      176,
+      8
+    ],
+    "Source_union_bytes": 8,
+    "Load_Save_context_members_each_bytes": 8,
+    "Save_bytes": 32,
+    "Save_header_and_size_continuous_bytes": 12,
+    "publication_stream_each_bytes": 20,
+    "Set_union_bytes": 88,
+    "Set_owner_bytes": 4,
+    "independent_object_enumeration": "13 exact sections/ABI, aggregate gross458/462 plus EACH alignment-minus-one sum41 =499/503. Curator independently recomputed arithmetic; independent resource worker re-extracted current object sections and constructors. No new section/owner/guard; earlier load_phase\u2192source_phase and receipt\u2192set_phase replace same-sized originals.",
+    "short_default_conservative_charge": [
+      499,
+      503
+    ],
+    "limit_unchanged": 512,
+    "gate": "This is bounded component allocation charge, NOT final actual linker/wholeRAM proof. Every extra symbol/alignment/init padding must be included. Final canonical production map/addresses/static<=199632/added<=12288 and complete512 charge required; both representation actual component sizeof/align/section and source-lifetime proof required. No old32 padding assumption."
+  },
+  "enum_proof_scope_interpretation": {
+    "disposition": "CLARIFY_FROZEN_M1_INTENT_NO_GATE_WAIVER",
+    "basis": "Frozen M1 exact baseline187344/195600projected/199632 cap is canonical production small-enum ARM firmware; resource_inventory explicitly distinguishes ARM struct probes31312short/56152no-short and labels them not firmware rebuild/stack proof. production_abi_reconciliation expressly calls both-ABI schema/descriptor/native measurements isolated, not full firmware/full-stack. m1_freeze requires canonical final build/stack/IRQ plus both-ABI reconciliation/oracles; no separate all-fno-short firmware is specified.",
+    "normative_required_production": "COMPLETE exact clean canonical glyph_mk6 production ABI build/whole-image RAM/flash/linker/source/compiler/generated/dependency identity, all31/final140 route graph/IRQ/ROM/PRIMASK/core1/constructor/cleanup proof, exact UF2/ELF custody and exact candidate hardware acceptance under UNCHANGED actual production flags. Prove actual target enum representation from recipes/attributes; do not add/change flags by this interpretation.",
+    "normative_required_both_representations": "ALL originally mandated explicit short/no-short generated C/C++ descriptor/layout/structure/schema/native owner/view/frame/local/bounded512 component size/alignment/host semantics/oracle/behavior tests, real both-representation affected O3/header-consumer probes and honest component frame/ABI correspondence remain mandatory. A failed required component/semantic/layout proof remains blocking; no substitute or transferred PASS.",
+    "not_new_gate": "An additional all-fno-short whole firmware/SDK/library rebuild, alternate hardware artifact or board-wide resource budget is NOT silently introduced. This is neither an optimization nor permission to claim that unbuilt firmware passed. Known no-short Config expansion does not disprove the canonical unchanged-ABI board budget or authorize its increase.",
+    "honest_evidence_limit": "Current ten-TU default object table reuses short SDK/main/Nanopb/ROM dependency certificates and is NOT complete no-short whole-firmware proof. Label it component/context screen with inherited qualifications, never whole alternate PASS. Only canonical production whole ELF can close the product resource gate.",
+    "earlier_shorthand": "Any later amendment phrase bothABI final linker/map/whole-image shorthand is prospectively interpreted with this precise separation: complete canonical production image, BOTH required representation/component/semantic/layout tests. This clarification narrowly supersedes contrary shorthand only, preserves original records/M1/frozen keys and every actual cap; it cannot waive any concrete original product safety fact or hide failure."
+  },
+  "resource_disposition": {
+    "independent_report": "140 equations PER genuine explicit ABI, all31 covered, no wholly unexamined class; all280 sums independently replayed by Curator, max2048. Actual emitted SET path2040; conservative row adds unused standalone Handle8 allowance to2048. First Import Open remains2048. Component closure only, not final source/linked/P1 acceptance.",
+    "critical_qualification": "Selected Send inlines HandleSET and directly calls Save; no WriteStaged wrapper. Stage/Construct/Initialize/Stream/Encode/End/Position/Complete/Destroy are sequential children, not simultaneously stacked. Same fullD4PB944/first-outline allocator+read596 and ConfigIRQ348 remain; no compact-only/emptylookahead/domain exclusion. Source-feasible prior2116/2132 errors preserved for old source, not physical observations.",
+    "no_P1_PASS": true
+  },
+  "mandatory_validation": [
+    "Source-free canonical adoption/checks and fresh live readback precede production edits; author packet alone grants no product authority. Implement ONLY selected five-file source diff and necessary exact private declarations/attributes, no cleanup/unselected alternatives.",
+    "After adoption run relevant Revision3 Tier1/affectedTier2 suites and actual producer/consumer/callback tests at both representations; all expected rawNOR/primitive/result/position/size/sticky flags/last_result/Config/digest/generation/fence/token/receipt/mapping equivalence with exact immutable4209. Current952NOR/1641Save/51SET component matrices remain attributed and cannot replace final current-source proof.",
+    "Count0/short/failed/lostack Read+Write/native File constructor/explicitClose/fallback/destructor and every Save short-circuit/stage/verification/rotate/publication/readback/rollback branch. Alternate failed/successful Save\u2192Load/ReadLegacy\u2192Copy\u2192Save and Import\u2192Save; verify FULL Source8/Save32/File176 zero after returned operation, explicit active union types, no alias/inflight observer/reentry. No callback/stream pointer survives pb_encode.",
+    "Actual COBS SET all17 exits and following17 same-backend requests, receipt bytes preserved through original Decode, full88 reset after every guard/refusal/decode/validation/selected-record/Save/response failure and success; both meaningful omitted/partial-clear mutants and source-context clear omission detected. Preserve wire lengths/truefalse distinctions/RX/faultscope/nativelease and duplicate-Start invariants.",
+    "Store mutation noinline boundary source-byte identity and actual Send24+Execute40 retained graph on every old/new path; original ReadByte/HandleStore/GetInfo/Send unchanged. Both explicit enum metrics1 selected objects, correct generated label, actual component layout/section/alias/provenance and protected frozen oracles. Historical invalidABI/metrics0/failed probes stay preserved.",
+    "Fresh independent exact final adopted source review plus complete production all31/140 source\u2192linked ELF/map/.su/disassembly/callback/indirect/tail/constructor/allocator/default helper/IRQ/ROM/PRIMASK/core1/startup proof, all header consumers, retained symbols/guards/alignment and valid broad root/repair state predicates. No final acceptance from private O3 or inherited frames. Full default alternative image is not claimed or newly required; BOTH component representations remain required as clarified.",
+    "Final clean committed canonical Mk6 build, actual unchanged flags/production ABI/generated/dependencies/full SHA/tree/ELF+UF2 hashes/sizes/content-addressed custody and static/flash512/199632/12288/2048 limits precede concrete reviewed candidate-specific hardware packet. Separate owner device approval, exact human HEP PASS before tested-source integration/strictDONE. No timing/highwater/physical overflow/controller acceptance implied. Tier1/affectedTier2 FAIL/TIMEOUT/INCOMPLETE/UNAVAILABLE block honestly."
+  ],
+  "protected": "Every original numeric_caps/closed paths outside exact five methods/frozen M1/architecture/schema/legacy-native oracles/active+candidate7800/view560/local bounds/identity16-72/exact retained diagnostic design unchanged. TOTAL512, both2048 core reserves, whole199632/added12288, filesystem524288/reserve16384/capacity20/partition/storage/transaction/domain semantics fixed. No SDK/Nanopb/parser/schema/wire/IRQ/flags/optimization/startup/selector/backend/setup/ModeSelection/hash/CompleteMigration/evaluator/heap/queue/new owner/device authority. Other102 orders, failed/incomplete chronology and immutable evidence preserved. Nunchuk NOT_TESTED; timing/highwater NOT_MEASURED; root cause UNPROVEN.",
+  "publication": {
+    "record_path": "docs/runtime_config/profile_native_ultimate/legacy_set_owner_context_scope_amendment_20261021.json",
+    "sole_order_id": "GP-NATIVE-001",
+    "scope_append_text": "GP-NATIVE-001 selected ABC owner-context lifetime amendment2026-10-21: adopt ONLY docs/runtime_config/profile_native_ultimate/legacy_set_owner_context_scope_amendment_20261021.json and sealed manifest e7a9ec5d977499d9feb72c1d54aaea505af463d7e0dadf1685d9bda681a02c0e, exact five existing paths. SAME live File176 pointer rematerialization via launder, Load8/borrowedSaveContext8 and Save publication20/ostream20 explicit lifetime overlays inside existing8/32, header+size12 continuously live; returned Save/stage/encoder/context phases and full8/full32 cleanup. B permitted only after measuredAC2056 gap: SAME receipt88\u2192borrowedthis4 only AFTER successful Decode copied/validated fields, SAME Save/Finalize then full88 reset. C ONLY ExecuteProfileStoreMutation noinline/bodyexact; original HandleStore/ReadByte/GetInfo/Send bodies+attributes retained. CheckedStorageFile::write(const uint8_t*,size_t) ONLY direct SAME trivial Result member return placement with exact primitive/result/flags/position/size and noalias/inflightobserver/reentry. No new path/API/owner/slot/buffer/algorithm/domain/SDK/parser/IRQ/flags/cap/device authority. Component charge499/503<=unchanged512; private140rows/ABI max2048 is not P1 PASS. Frozen M1 interpretation: COMPLETE exact canonical production-small unchanged-flag whole firmware/source+ELF/RAM/stack/custody/hardware proof, plus mandatory BOTH explicit representation descriptors/layout/semantics/oracles/affected component/O3 tests; no silently imposed all-fno-short alternate firmware and no false alternatewholePASS. Contrary later bothABI-finalmap shorthand is qualified ONLY accordingly; original keys/caps/frozen evidence unchanged. All final production140/all31/IRQ/ROM/PRIMASK/review/build/custody/hardware gates remain. Root source-free adoption/live readback before source edits.",
+    "instruction": "Root sole publisher adds record/narrative and exact contract+sole-order scope append, preserving other102 orders and existing keys/caps/frozen records. No source path addition. Root inspects/checks/live-publishes/readback BEFORE writer implementation. One independent amendment review is this adjudication; no reviewer-of-reviewer loop."
+  },
+  "resource_gate": "NATIVE-REVIEW-P1-STACK OPEN; finite scope/enum interpretation adjudicated, NOT implementation/linked/hardware acceptance."
+}

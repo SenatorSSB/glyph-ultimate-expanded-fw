@@ -1,0 +1,21 @@
+{
+  "kind": "FINAL_BOUNDED_ABC_CURATOR_SCOPE_NOT_P1",
+  "files": {
+    "/private/tmp/glyph-native-owner-context-ABC-curation-20261021.json": {
+      "sha256": "6f2df9ecf2e6b26e6a4bb2b71a3e4f1e3c494ad81d8627b3c6ecf2ee4527aff9",
+      "bytes": 26689
+    },
+    "/private/tmp/glyph-native-owner-context-ABC-curation-20261021.md": {
+      "sha256": "0774ea696efa42ae720722906a0145c846a652bd18de7b1960144a226dfc4b0d",
+      "bytes": 6740
+    },
+    "/private/tmp/glyph-native-owner-context-ABC-contract-patch-20261021.json": {
+      "sha256": "3ce0357b15c41ab8c9ab0c0868ff1af0c5e0f56352ec965f62aea499762d0655",
+      "bytes": 29803
+    },
+    "/private/tmp/glyph-native-enum-proof-scope-question-20261021.json": {
+      "sha256": "a96b34cd9c4301162d2c5e699b4c4a4654023b3f4457e0f3969c0f547aefbcc1",
+      "bytes": 2591
+    }
+  }
+}

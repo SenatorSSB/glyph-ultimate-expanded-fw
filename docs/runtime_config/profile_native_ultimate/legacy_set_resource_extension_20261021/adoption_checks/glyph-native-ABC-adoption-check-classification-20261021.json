@@ -1,0 +1,13 @@
+{
+  "sourcefree_scope": "PASS",
+  "framework": "PASS",
+  "sequence": "PASS",
+  "navigation": "PASS",
+  "surface_global": "FAIL preserved: historical C024 authentication; focused content also unchanged missing boundary phrase",
+  "surface_concrete_new_scope": "PASS exact base81 docs-only; baseline seven docs byteidentical",
+  "classification": "Preexisting unrelated global surface debt; no new active-surface contradiction; no checker/policy/content changes or global PASS claimed",
+  "source": "NO_PRODUCTION_CHANGE",
+  "P1": "OPEN",
+  "other102orders_caps_paths_frozenkeys": "UNCHANGED",
+  "all8archives": "DECOMPRESS_AND_HASH_MATCH"
+}
