@@ -1,5 +1,17 @@
 # Glyph Current State
 
+## Boot Persistence lifetime extension adopted — 2026-10-21
+
+The [independent bounded extension](runtime_config/profile_native_ultimate/boot_persistence_layout_scope_amendment_20261021.json)
+adds only returned preparation phases for LoadConfigChecked and CaptureLegacySource
+inside the existing closed Persistence paths. The same automatic File/Error objects,
+two simultaneous copy Files, recovery and transaction semantics remain required.
+Migration File-slot conversion is not authorized. The existing total layout512 and
+all original limits remain unchanged; the independent2088/2160 foreground findings
+motivate the repair. Complete final source/ELF/IRQ/ROM proof, affected tests, review,
+build/custody and hardware gates remain mandatory; P1 is OPEN. No device authority
+or new work order is created.
+
 ## Bounded stack-lifetime repair adopted — 2026-10-21
 
 The [independent Curator amendment](runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json) narrows the remaining engineering

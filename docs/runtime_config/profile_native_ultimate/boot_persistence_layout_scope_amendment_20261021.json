@@ -1,0 +1,79 @@
+{
+  "schema_name": "glyph_gp_native_001_boot_persistence_layout_curation",
+  "schema_version": 1,
+  "disposition": "ADOPT_BOUNDED",
+  "role": "Glyph Work-Order Curator",
+  "finite_role_complete": true,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "recorded_utc": "2026-10-21T10:29:35.734067+00:00",
+  "authority": "Existing READY GP-NATIVE-001, owner broader currently admitted filesystem decision, independently adopted layout amendment at df5fbcd019dfd7e72b897b7d5a43e6c142ecd665. This is its narrow source-free extension for two new concrete source/resource findings, not a new product order/successor/global campaign or domain decision. No source edit is authorized until canonical adoption/live readback.",
+  "independence": "Curator inspected exact source and independent report and adjudicated the writer hypothesis. This is the independent amendment review; fresh final implementation/source/ELF review remains mandatory. Root sole canonical publisher; Curator did not mutate source/worktree/Git or contact devices.",
+  "input_pins": {
+    "canonical_local_head": "df5fbcd019dfd7e72b897b7d5a43e6c142ecd665",
+    "canonical_live_verification": "Supplied by root; publisher refreshes before publication. Not independently contacted by this Curator.",
+    "canonical_sha256": {
+      "docs/project/ACTIVE_AGENT_QUEUE.md": "efac60d6b0443ad82b41b5ee5de214e57e82014ca37f3c26018182805832b23d",
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "0910f8a5661d08cfbd48c9c66b248714e720dd8e164d52b31e768f77c4d3a266",
+      "docs/runtime_config/profile_native_ultimate/layout_scope_amendment_20261021.json": "984439bd73d6e1099757f4b56cf0f55c4ec108f0935ebcd49c6ca8e53b245b2c",
+      "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e"
+    },
+    "independent_reports_sha256": {
+      "/private/tmp/glyph-native-h1-review-resource-inventory-20261021.md": "2d6251ffb63234469b2115729051b5d845b7ac6fe5927a4fdb9f16df82477042",
+      "/private/tmp/glyph-native-h1-review-resource-inventory-20261021.json": "2ac0fbb10ebbbf1b45fbd9e347792052013061d17d058e68bfe20658967e220e",
+      "/private/tmp/glyph-native-h1-review-resource-inventory-20261021-inputpins.json": "736e372d0219b4bac74ce919043bd7526162e82b7c8ebc0a5f1404be975d9332"
+    },
+    "frozen_review_candidate": "a288908de83e75997cd7459b4abe607ee968bb60",
+    "frozen_review_tree": "d0b92601a26ea1523ffb4fff4b1c2c663b719791",
+    "current_committed_save_candidate": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+    "current_committed_save_tree": "01005eeaf2a9c93abbf7bd47dcd861c4847cea9a",
+    "current_committed_Persistence_cpp_sha256": "37f4ae79abc353d6deaa82611aaa496b23c9c700b39f496c7bd67d846295583e",
+    "frozen_Persistence_cpp_sha256": "1eb642b02465e281d2fff969b2d805ec5a9e4d92985454272795b3f351e9af91"
+  },
+  "finding": {
+    "boot_prior_restore_foreground_bytes": 2088,
+    "boot_capture_first_remove_foreground_bytes": 2160,
+    "usable_per_core_stack_bytes": 2048,
+    "qualification": "Independent reconstructed exact-bcb source-feasible retained foreground compositions for unchanged H1 Persistence/SDK inputs, not physical overflow or completed whole-stack certificate. Premask16/IRQ/ROM additions are separate. Report predicates/evidence gaps remain explicit; no pristine-history premise may exclude currently admitted states. Prior partial interrupted report, negative probes and preserved bcb artifact remain historical/incomplete as recorded."
+  },
+  "writer_hypothesis": "2026-10-21 direct technical response from /root/native_source_writer: ReadConfigCandidate noinline owns select/open/check/decode/validate/header/explicitclose and existing static candidate, returns source/CRC; driver does original prior Rename/publication. PrepareCapture noinline performs selection/source verification/length/hash/snapshot/capacity admission and returns Refused/ExistingExact/NeedsCopy plus static-literal filename/length; driver resumes same Remove/copy/hash/Rename/readback. No file-slot reuse appears needed; copy/helper bodies unchanged. This response is technical input, not independent owner authority.",
+  "allowed_source_paths": [
+    "HAL/pico/src/core/Persistence.cpp",
+    "HAL/pico/include/core/Persistence.hpp"
+  ],
+  "extensions": [
+    {
+      "method": "Persistence::LoadConfigChecked",
+      "permission": "Split only the existing method into a small synchronous driver and necessary private noinline read/check/decode/validation preparation helper/declaration. Reuse the SAME existing static Config candidate with identical reset/init and callback clearing; private relocation within this translation unit to share with driver is permitted. No new Config/body buffer or File workspace conversion.",
+      "preparation": "Keep availability/validator check then candidate reset then exact current/prior/legacy selection, original automatic CheckedStorageFile construction, checks/decode/callback rules, validation with original automatic Error, header reread and explicit close. Return original LoadResult failure unchanged or success plus owned scalar selected-source/CRC. All File/Error/read state retires before the original prior Rename.",
+      "driver": "Only after successful preparation returns, perform SAME conditional prior_compact -> current Rename. On failed/uncertain Rename keep exact _mutation_fenced/result behavior. Only after successful restore (or no restore) copy candidate to caller then update _config_generation from original checked header CRC, then return Loaded. No repeated selection/check/decode/validation/load and no new writer callback/yield/reentry.",
+      "destruction": "Original Load file destructor is lexically after publication, but success path has explicit Close before Rename. Actual CheckedStorage::Close sets opened=false even when injection classifies failure. Earlier destructor after successful close is permitted only as zero-I/O retirement; original failed/early-return cleanup, close counts/order and opened/failed/uncertain results remain exact. No new close, suppression of fallback or changed failure publication."
+    },
+    {
+      "method": "Persistence::CaptureLegacySource",
+      "permission": "Split only the existing method into small synchronous returned phases and necessary private noinline preparation/copy/verification/publication helpers/declarations, preserving public signature and body logic. Existing copy_checked_file and hash_file may receive noinline annotation with otherwise exact bodies; LegacySourceIdentity body may remain called unchanged, with noinline annotation permitted solely for this finite call-structure purpose. No generic migration method authority.",
+      "preparation": "Original availability/fence check, current/prior/legacy selection, source open/check/size/explicitclose/destruction, length<=65536 and source hash, snapshot Stat and existing-snapshot exact LegacySourceIdentity/digest comparison, then only missing-snapshot original geometry/capacity/staged-charge/reserve test. Return Refused/ExistingExact/NeedsCopy plus owned bounded length/filename referencing only original static path constants. Preserve all early returns and digest side effects.",
+      "execution": "Only NeedsCopy resumes SAME first temp Remove after preparation returns, preserving failure/uncertainty flag assignment. Then original copy_checked_file, then temp hash and byte comparison, then temp->source Rename, then original LegacySourceIdentity and digest comparison and same uncertainty/result handling. Earlier phase returns before later work; no extra read/write/selection/retry, no operation reorder or accepted-state change.",
+      "copy_lifetime": "Existing input then output construction order, simultaneous two File handles, scratch64 and loop/read/write/sync/input-close/output-close/uncertain assignment and reverse output/input destruction remain exact. Isolate this phase from Capture driver and later hash/Rename/identity; do not serialize the simultaneous handles, share one slot for both, or reuse scratch while live. No claim successful initial Remove excludes newly generated later recovery/relocation obligations."
+    }
+  ],
+  "workspace": "Reuse existing phase metadata where provably nonoverlapping, or add only reset bounded scalar enum/source/CRC/length/static-path-pointer/result metadata. No additional File slot, automatic File-to-static/raw conversion, new hash/scratch/wire/path/body/directory buffer, Config owner or escaped automatic borrow. Existing total new-layout static512 remains ONE total across all prior and new layout phases, including alignment and file slot; unchanged original budgets still block. Measure both-ABI exact static sizes and final linked totals.",
+  "migration_file_slot_reuse": {
+    "disposition": "NOT_AUTHORIZED",
+    "reason": "Writer confirms no demonstrated need after real isolation; existing proposal2 Save-only raw-slot scope remains. Neither existing source File, hash File nor either copy File may reuse the Save slot under this extension. A later concrete measured post-isolation defect would require its own exact bounded Curator amendment before conversion; do not activate on conjecture."
+  },
+  "validation": [
+    "Differential exact production traces/results/caller bytes/generation/fence/digest side effects for current/prior/legacy Load success and every select/Open/CheckSavedConfig/seek/read/decode/validation/header/close/Rename error and uncertainty. Failed read/check/decode/validate/close/restore never publishes candidate or new generation. Include repeated calls/candidate reset, embedded-native rejection and both enum ABIs.",
+    "PriorCompact restoration before/after Rename Fail/LostAck with boot/recovery/Configurator/query/reconcile/SET/mode caller contexts. Prove no I/O added by earlier destructor and exact old cleanup/destructor fallback behavior.",
+    "Capture existing exact/mismatched/failed snapshot, invalid source/check/length/hash, capacity/erase/charge/reserve refusal, temp Remove, copy input/output Open, each read/write/sync/explicit-close and destructor branch, temp hash/mismatch, publication Fail/LostAck and final identity mismatch/failure. Preserve both simultaneous handles and close/destruction order; verify next-call metadata reset and no stale filename/source/digest/uncertainty.",
+    "Actual pinned checked-storage/NOR/LittleFS adapters and broader supported filesystem states including unrelated directories and applicable orphan/PENDING_MOVE, first Remove/restore Rename and later relocation/compaction. No flat-history exclusion or fixture-only PASS replacing source/ELF proof.",
+    "All directly affected existing Config persistence/recovery/migration/native/legacy/transaction consumers, both ABIs and relevant negative controls; preserve frozen historical/oracle/diagnostic/identity bytes. Tier1/affectedTier2 failures block with honest FAIL/TIMEOUT/INCOMPLETE.",
+    "Fresh exact production O3 source/object/final linked ELF/.su/disassembly caller+callee/indirect/PRIMASK/IRQ/ROM accounting for all31 constrained inventory classes, including Load preparation/restore and Capture preparation/copy/hash/publication. Do not double-count forceconsistency/bd_prog/bd_flush inlined work. Byte savings remain hypotheses pending proof.",
+    "Existing fresh independent final review, clean committed Mk6 build/source/tree/input/generated/ELF/UF2 hashes and custody, concrete candidate-specific reviewed device packet, separate direct owner physical approval and exact human HEP PASS before integration/strictDONE remain mandatory."
+  ],
+  "preserved": "Every original numeric cap, active/candidate/view limit, frozen architecture/M1/oracle, diagnostic design/static512 subordinate cap, GP-BIND00316/72, two usable2048 reserves, filesystem/reserve/capacity/semantic contract stays unchanged. No config.cpp/caller/SDK/IRQ/startup/optimization/resource/storage API/schema/domain expansion, heap, queue, hot swap, device action, hardware acceptance or source integration authority.",
+  "resource_gate": "NATIVE-REVIEW-P1-STACK OPEN. No new resource PASS, final candidate build or physical result claimed. All negative/incomplete evidence, unsupported/unknown qualifications, Nunchuk NOT_TESTED and root cause UNPROVEN preserved.",
+  "publication": "Root publishes this source-free extension and exact narrow implementation-contract plus sole GP-NATIVE-001 scope reference after fresh canonical verification. No new path addition needed; original closed paths and old method permissions otherwise unchanged. Live readback before writer execution. This independent finite adjudication consumes the new concrete scope question; no reviewer-of-review loop required."
+}
