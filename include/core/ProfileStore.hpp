@@ -199,6 +199,7 @@ class ProfileStore {
     bool LoadControl(Directory &, uint32_t &phase) const;
     bool InitializeV2(const Directory &seed);
     bool Admit(size_t staged_record_bytes, size_t records = 1);
+    bool EvaluateAdmission(size_t staged_record_bytes, size_t records);
     bool Protected(uint32_t id, uint32_t revision) const;
     bool LoadProtectedRoot() const;
     TransactionResult Start(const TransactionIdentity &) const;

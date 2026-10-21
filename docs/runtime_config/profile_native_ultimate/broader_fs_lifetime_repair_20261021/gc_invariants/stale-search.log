@@ -1,0 +1,3 @@
+/private/tmp/glyph-native-gc-lifetime-mutants/stale-search/gc-lifetime /private/tmp/glyph-native-gc-lifetime-mutants/stale-search/legacy.pb
+FAIL native GC lifetime: three genuine unprotected records collected
+

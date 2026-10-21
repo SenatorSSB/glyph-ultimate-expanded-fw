@@ -1,0 +1,21 @@
+{
+  "checkpoint": "08bdf08f33343b26c97868b32c4999ad5b7c8195",
+  "built_production": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "state": "SOURCE_ONLY_PROPOSAL_NOT_ADOPTED",
+  "source_sha256": {
+    "HAL/pico/src/core/ProfileStore.cpp": "a5ea804c2f18b098776bef4d4d308792682bb48774cf5cc76886fe8b697ce666",
+    "include/core/ProfileStore.hpp": "f8cb4759f8739d166f15e0db91d04c44b6e3d31fc4e0412a113f505dffedbc44",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "7897cdea74dc04f73cbd65817e1352bededee6a91c185513a995e9cbe0861605",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+    "include/core/ProfileStoreStorage.hpp": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc",
+    "config/glyph/common/src/config.cpp": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc",
+    "src/core/mode_selection.cpp": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+  },
+  "linked_elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "exact_calls": {
+    "Admit": "112 at BL CollectGarbage10027dde",
+    "CollectGarbage": "88 at CheckedRemove BLX10027d98",
+    "ReadRange": "192 at Open100213e0"
+  },
+  "proposal_sha256": "c6216f564876082b4965bf434642f0c1b094b915483c7be172e6a754eb2d067e"
+}

@@ -1312,8 +1312,16 @@ ProfileStore::Status ProfileStore::CollectGarbage() {
         bool found;
     };
 
+    // The synchronous core0 store path owns this scratch until Enumerate and
+    // CheckedRemove return. Neither callback re-enters ProfileStore.
+    static Search search{};
+    struct SearchReset {
+        Search &state;
+        ~SearchReset() { std::memset(&state, 0, sizeof(state)); }
+    } reset{search};
     for (unsigned budget = 0; budget < 128; ++budget) {
-        Search search{ this, {}, false };
+        std::memset(&search, 0, sizeof(search));
+        search.store = this;
         bool enumerated = _storage->Enumerate([](void *opaque, const CheckedStorage::Entry &e) {
             auto &s = *static_cast<Search *>(opaque);
             if (e.directory || s.found)
@@ -1346,6 +1354,11 @@ ProfileStore::Status ProfileStore::CollectGarbage() {
 bool ProfileStore::Admit(size_t bytes, size_t records) {
     if (CollectGarbage() != Status::Ok)
         return false;
+    return EvaluateAdmission(bytes, records);
+}
+
+// Capacity return storage must become live only after garbage collection ends.
+__attribute__((noinline)) bool ProfileStore::EvaluateAdmission(size_t bytes, size_t records) {
     auto c = Capacity();
     if (!c.block_size)
         return false;

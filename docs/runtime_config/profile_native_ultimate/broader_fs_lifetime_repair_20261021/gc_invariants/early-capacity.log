@@ -1,0 +1,5 @@
+/private/tmp/glyph-native-gc-lifetime-mutants/early-capacity/gc-lifetime /private/tmp/glyph-native-gc-lifetime-mutants/early-capacity/legacy.pb
+actual_gc_foreign_dirs_protected_migration_active_repeated_reset=PASS
+actual_gc_16_faults_reset_handles_next_operation=PASS
+FAIL native GC lifetime: Capacity phase never runs after GC Full
+

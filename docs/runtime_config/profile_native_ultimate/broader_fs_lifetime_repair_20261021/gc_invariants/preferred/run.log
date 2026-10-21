@@ -1,0 +1,4 @@
+actual_gc_foreign_dirs_protected_migration_active_repeated_reset=PASS
+actual_gc_16_faults_reset_handles_next_operation=PASS
+actual_gc_128_129_budget_capacity_order_same_token_retry=PASS
+PASS actual broader-namespace GC lifetime/reset/fault/128budget; positive-orphan and PENDING_MOVE compaction witness separately pending; target stack/timing NOT_MEASURED
