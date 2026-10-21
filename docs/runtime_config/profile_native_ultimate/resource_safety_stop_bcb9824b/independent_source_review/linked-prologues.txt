@@ -1,0 +1,285 @@
+10040fd0 main
+10040fd0:	b5f0      	push	{r4, r5, r6, r7, lr}
+10040fd2:	46c6      	mov	lr, r8
+10040fd4:	b500      	push	{lr}
+10040fd6:	b086      	sub	sp, #24
+10040fd8:	4669      	mov	r1, sp
+10040fda:	488d      	ldr	r0, [pc, #564]	@ (10041210 <main+0x240>)
+10040fdc:	ab02      	add	r3, sp, #8
+10040fde:	aa01      	add	r2, sp, #4
+10040fe0:	f003 fdae 	bl	10044b40 <check_sys_clock_khz>
+10040fe4:	2800      	cmp	r0, #0
+10040fe6:	d103      	bne.n	10040ff0 <main+0x20>
+10040fe8:	488a      	ldr	r0, [pc, #552]	@ (10041214 <main+0x244>)
+10040fea:	4989      	ldr	r1, [pc, #548]	@ (10041210 <main+0x240>)
+10040fec:	f003 fd3a 	bl	10044a64 <panic>
+
+1002f5cc loop
+1002f5cc:	b5f0      	push	{r4, r5, r6, r7, lr}
+1002f5ce:	4c2c      	ldr	r4, [pc, #176]	@ (1002f680 <loop+0xb4>)
+1002f5d0:	b083      	sub	sp, #12
+1002f5d2:	0020      	movs	r0, r4
+1002f5d4:	f03c f89c 	bl	1006b710 <__mutex_enter_blocking_veneer>
+1002f5d8:	4d2a      	ldr	r5, [pc, #168]	@ (1002f684 <loop+0xb8>)
+1002f5da:	0020      	movs	r0, r4
+1002f5dc:	682e      	ldr	r6, [r5, #0]
+1002f5de:	f03b fff7 	bl	1006b5d0 <__mutex_exit_veneer>
+1002f5e2:	2e06      	cmp	r6, #6
+1002f5e4:	d044      	beq.n	1002f670 <loop+0xa4>
+1002f5e6:	0020      	movs	r0, r4
+1002f5e8:	f03c f892 	bl	1006b710 <__mutex_enter_blocking_veneer>
+1002f5ec:	682d      	ldr	r5, [r5, #0]
+
+1001b084 ConfiguratorBackend::SendReport()
+1001b084:	b5f0      	push	{r4, r5, r6, r7, lr}
+1001b086:	46c6      	mov	lr, r8
+1001b088:	23d6      	movs	r3, #214	@ 0xd6
+1001b08a:	2650      	movs	r6, #80	@ 0x50
+1001b08c:	2751      	movs	r7, #81	@ 0x51
+1001b08e:	b500      	push	{lr}
+1001b090:	005b      	lsls	r3, r3, #1
+1001b092:	58c4      	ldr	r4, [r0, r3]
+1001b094:	0005      	movs	r5, r0
+1001b096:	5da2      	ldrb	r2, [r4, r6]
+1001b098:	5de3      	ldrb	r3, [r4, r7]
+1001b09a:	429a      	cmp	r2, r3
+1001b09c:	d052      	beq.n	1001b144 <ConfiguratorBackend::SendReport()+0xc0>
+1001b09e:	002c      	movs	r4, r5
+
+1001a7f0 ConfiguratorBackend::DispatchProfileStore()
+1001a7f0:	b5f0      	push	{r4, r5, r6, r7, lr}
+1001a7f2:	46de      	mov	lr, fp
+1001a7f4:	464e      	mov	r6, r9
+1001a7f6:	4645      	mov	r5, r8
+1001a7f8:	4657      	mov	r7, sl
+1001a7fa:	b5e0      	push	{r5, r6, r7, lr}
+1001a7fc:	4cbf      	ldr	r4, [pc, #764]	@ (1001aafc <ConfiguratorBackend::DispatchProfileStore()+0x30c>)
+1001a7fe:	0006      	movs	r6, r0
+1001a800:	4abf      	ldr	r2, [pc, #764]	@ (1001ab00 <ConfiguratorBackend::DispatchProfileStore()+0x310>)
+1001a802:	2100      	movs	r1, #0
+1001a804:	0020      	movs	r0, r4
+1001a806:	b087      	sub	sp, #28
+1001a808:	f029 fff0 	bl	100447ec <__wrap_memset>
+1001a80c:	4dbd      	ldr	r5, [pc, #756]	@ (1001ab04 <ConfiguratorBackend::DispatchProfileStore()+0x314>)
+
+200016b8 ConfiguratorBackend::DispatchProfileStore()::capacity
+	...
+200016d0:	00004000 00000000 00000000 00000000     .@..............
+	...
+
+
+1002889c ProfileStore::Create(_UltimateProfile const&, char const*, unsigned long, ProfileStoreTransactionIdentity const&)
+1002889c:	b5f0      	push	{r4, r5, r6, r7, lr}
+1002889e:	46d6      	mov	lr, sl
+100288a0:	464f      	mov	r7, r9
+100288a2:	4646      	mov	r6, r8
+100288a4:	b5c0      	push	{r6, r7, lr}
+100288a6:	000e      	movs	r6, r1
+100288a8:	2178      	movs	r1, #120	@ 0x78
+100288aa:	4689      	mov	r9, r1
+100288ac:	2100      	movs	r1, #0
+100288ae:	4688      	mov	r8, r1
+100288b0:	4c30      	ldr	r4, [pc, #192]	@ (10028974 <ProfileStore::Create(_UltimateProfile const&, char const*, unsigned long, ProfileStoreTransactionIdentity const&)+0xd8>)
+100288b2:	4649      	mov	r1, r9
+100288b4:	0027      	movs	r7, r4
+100288b6:	0005      	movs	r5, r0
+
+10028c08 ProfileStore::Duplicate(unsigned long, unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)
+10028c08:	b5f0      	push	{r4, r5, r6, r7, lr}
+10028c0a:	000f      	movs	r7, r1
+10028c0c:	2100      	movs	r1, #0
+10028c0e:	4e11      	ldr	r6, [pc, #68]	@ (10028c54 <ProfileStore::Duplicate(unsigned long, unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)+0x4c>)
+10028c10:	b083      	sub	sp, #12
+10028c12:	7031      	strb	r1, [r6, #0]
+10028c14:	4d10      	ldr	r5, [pc, #64]	@ (10028c58 <ProfileStore::Duplicate(unsigned long, unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)+0x50>)
+10028c16:	990a      	ldr	r1, [sp, #40]	@ 0x28
+10028c18:	0004      	movs	r4, r0
+10028c1a:	9100      	str	r1, [sp, #0]
+10028c1c:	0028      	movs	r0, r5
+10028c1e:	0039      	movs	r1, r7
+10028c20:	f7ff ff8e 	bl	10028b40 <ProfileStore::PrepareDuplicate(unsigned long, unsigned long, ProfileStoreTransactionIdentity const&)>
+10028c24:	7833      	ldrb	r3, [r6, #0]
+
+200017a0 ProfileStore::Duplicate(unsigned long, unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)::r
+200017a0:	00000002 00000000 00000000 00000000     ................
+
+
+10025628 ProfileStore::PublishPreparedProfile()
+10025628:	4a58      	ldr	r2, [pc, #352]	@ (1002578c <ProfileStore::PublishPreparedProfile()+0x164>)
+1002562a:	b5f0      	push	{r4, r5, r6, r7, lr}
+1002562c:	46c6      	mov	lr, r8
+1002562e:	4690      	mov	r8, r2
+10025630:	4b57      	ldr	r3, [pc, #348]	@ (10025790 <ProfileStore::PublishPreparedProfile()+0x168>)
+10025632:	4c58      	ldr	r4, [pc, #352]	@ (10025794 <ProfileStore::PublishPreparedProfile()+0x16c>)
+10025634:	58c1      	ldr	r1, [r0, r3]
+10025636:	4b58      	ldr	r3, [pc, #352]	@ (10025798 <ProfileStore::PublishPreparedProfile()+0x170>)
+10025638:	b500      	push	{lr}
+1002563a:	4498      	add	r8, r3
+1002563c:	4642      	mov	r2, r8
+1002563e:	6062      	str	r2, [r4, #4]
+10025640:	4a56      	ldr	r2, [pc, #344]	@ (1002579c <ProfileStore::PublishPreparedProfile()+0x174>)
+10025642:	0005      	movs	r5, r0
+
+200017d0 ProfileStore::PublishPreparedProfile()::result
+200017d0:	00000002 00000000 00000000 00000000     ................
+
+
+10028788 ProfileStore::FinalizePreparedCreate()
+10028788:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+1002878a:	46de      	mov	lr, fp
+1002878c:	4657      	mov	r7, sl
+1002878e:	464e      	mov	r6, r9
+10028790:	4645      	mov	r5, r8
+10028792:	b5e0      	push	{r5, r6, r7, lr}
+10028794:	000e      	movs	r6, r1
+10028796:	4a3e      	ldr	r2, [pc, #248]	@ (10028890 <ProfileStore::FinalizePreparedCreate()+0x108>)
+10028798:	6989      	ldr	r1, [r1, #24]
+1002879a:	4683      	mov	fp, r0
+1002879c:	6930      	ldr	r0, [r6, #16]
+1002879e:	f01c f82b 	bl	100447f8 <__wrap___aeabi_memcpy>
+100287a2:	2280      	movs	r2, #128	@ 0x80
+100287a4:	6935      	ldr	r5, [r6, #16]
+
+100243a0 ProfileStore::PublishDirectory(ProfileStore::Directory const&)
+100243a0:	b5f0      	push	{r4, r5, r6, r7, lr}
+100243a2:	4645      	mov	r5, r8
+100243a4:	46de      	mov	lr, fp
+100243a6:	4657      	mov	r7, sl
+100243a8:	464e      	mov	r6, r9
+100243aa:	b5e0      	push	{r5, r6, r7, lr}
+100243ac:	4b17      	ldr	r3, [pc, #92]	@ (1002440c <ProfileStore::PublishDirectory(ProfileStore::Directory const&)+0x6c>)
+100243ae:	0004      	movs	r4, r0
+100243b0:	5cc3      	ldrb	r3, [r0, r3]
+100243b2:	000d      	movs	r5, r1
+100243b4:	b08d      	sub	sp, #52	@ 0x34
+100243b6:	2b00      	cmp	r3, #0
+100243b8:	d009      	beq.n	100243ce <ProfileStore::PublishDirectory(ProfileStore::Directory const&)+0x2e>
+100243ba:	4b15      	ldr	r3, [pc, #84]	@ (10024410 <ProfileStore::PublishDirectory(ProfileStore::Directory const&)+0x70>)
+
+200017e0 ProfileStore::PublishDirectory(ProfileStore::Directory const&)::r
+200017e0:	00000002 00000000 00000000 00000000     ................
+
+
+10028c60 ProfileStore::Rename(unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)
+10028c60:	b5f0      	push	{r4, r5, r6, r7, lr}
+10028c62:	46de      	mov	lr, fp
+10028c64:	4645      	mov	r5, r8
+10028c66:	464e      	mov	r6, r9
+10028c68:	4657      	mov	r7, sl
+10028c6a:	b5e0      	push	{r5, r6, r7, lr}
+10028c6c:	001e      	movs	r6, r3
+10028c6e:	4b9e      	ldr	r3, [pc, #632]	@ (10028ee8 <ProfileStore::Rename(unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)+0x288>)
+10028c70:	b085      	sub	sp, #20
+10028c72:	4698      	mov	r8, r3
+10028c74:	0004      	movs	r4, r0
+10028c76:	4693      	mov	fp, r2
+10028c78:	0018      	movs	r0, r3
+10028c7a:	9a0f      	ldr	r2, [sp, #60]	@ 0x3c
+
+20001790 ProfileStore::Rename(unsigned long, char const*, unsigned long, ProfileStoreTransactionIdentity const&)::r
+20001790:	00000002 00000000 00000000 00000000     ................
+
+
+1001d9c0 __wrap_main
+1001d9c0:	481a      	ldr	r0, [pc, #104]	@ (1001da2c <__wrap_main+0x6c>)
+1001d9c2:	491b      	ldr	r1, [pc, #108]	@ (1001da30 <__wrap_main+0x70>)
+1001d9c4:	466a      	mov	r2, sp
+1001d9c6:	2307      	movs	r3, #7
+1001d9c8:	421a      	tst	r2, r3
+1001d9ca:	d129      	bne.n	1001da20 <__wrap_main+0x60>
+1001d9cc:	4218      	tst	r0, r3
+1001d9ce:	d127      	bne.n	1001da20 <__wrap_main+0x60>
+1001d9d0:	4219      	tst	r1, r3
+1001d9d2:	d125      	bne.n	1001da20 <__wrap_main+0x60>
+1001d9d4:	1a0b      	subs	r3, r1, r0
+1001d9d6:	2180      	movs	r1, #128	@ 0x80
+1001d9d8:	0109      	lsls	r1, r1, #4
+1001d9da:	428b      	cmp	r3, r1
+
+1001da40 GlyphNativeMetricCore1Entry
+1001da40:	481a      	ldr	r0, [pc, #104]	@ (1001daac <GlyphNativeMetricCore1Entry+0x6c>)
+1001da42:	491b      	ldr	r1, [pc, #108]	@ (1001dab0 <GlyphNativeMetricCore1Entry+0x70>)
+1001da44:	466a      	mov	r2, sp
+1001da46:	2307      	movs	r3, #7
+1001da48:	421a      	tst	r2, r3
+1001da4a:	d129      	bne.n	1001daa0 <GlyphNativeMetricCore1Entry+0x60>
+1001da4c:	4218      	tst	r0, r3
+1001da4e:	d127      	bne.n	1001daa0 <GlyphNativeMetricCore1Entry+0x60>
+1001da50:	4219      	tst	r1, r3
+1001da52:	d125      	bne.n	1001daa0 <GlyphNativeMetricCore1Entry+0x60>
+1001da54:	1a0b      	subs	r3, r1, r0
+1001da56:	2180      	movs	r1, #128	@ 0x80
+1001da58:	0109      	lsls	r1, r1, #4
+1001da5a:	428b      	cmp	r3, r1
+
+1001dac0 __wrap_multicore_launch_core1
+1001dac0:	4905      	ldr	r1, [pc, #20]	@ (1001dad8 <__wrap_multicore_launch_core1+0x18>)
+1001dac2:	4288      	cmp	r0, r1
+1001dac4:	d102      	bne.n	1001dacc <__wrap_multicore_launch_core1+0xc>
+1001dac6:	4805      	ldr	r0, [pc, #20]	@ (1001dadc <__wrap_multicore_launch_core1+0x1c>)
+1001dac8:	4905      	ldr	r1, [pc, #20]	@ (1001dae0 <__wrap_multicore_launch_core1+0x20>)
+1001daca:	4708      	bx	r1
+1001dacc:	4905      	ldr	r1, [pc, #20]	@ (1001dae4 <__wrap_multicore_launch_core1+0x24>)
+1001dace:	2204      	movs	r2, #4
+1001dad0:	624a      	str	r2, [r1, #36]	@ 0x24
+1001dad2:	4903      	ldr	r1, [pc, #12]	@ (1001dae0 <__wrap_multicore_launch_core1+0x20>)
+1001dad4:	4708      	bx	r1
+1001dad6:	0000      	.short	0x0000
+1001dad8:	10040f5d 	.word	0x10040f5d
+1001dadc:	1001da41 	.word	0x1001da41
+
+1001cf68 native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)
+1001cf68:	6a8b      	ldr	r3, [r1, #40]	@ 0x28
+1001cf6a:	b5f0      	push	{r4, r5, r6, r7, lr}
+1001cf6c:	1cda      	adds	r2, r3, #3
+1001cf6e:	d84f      	bhi.n	1001d010 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0xa8>
+1001cf70:	1d1a      	adds	r2, r3, #4
+1001cf72:	d041      	beq.n	1001cff8 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x90>
+1001cf74:	68cc      	ldr	r4, [r1, #12]
+1001cf76:	694a      	ldr	r2, [r1, #20]
+1001cf78:	688f      	ldr	r7, [r1, #8]
+1001cf7a:	1c9d      	adds	r5, r3, #2
+1001cf7c:	42a2      	cmp	r2, r4
+1001cf7e:	d839      	bhi.n	1001cff4 <native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)+0x8c>
+1001cf80:	690c      	ldr	r4, [r1, #16]
+1001cf82:	1aba      	subs	r2, r7, r2
+
+1001d020 native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)
+1001d020:	b5f0      	push	{r4, r5, r6, r7, lr}
+1001d022:	0083      	lsls	r3, r0, #2
+1001d024:	1818      	adds	r0, r3, r0
+1001d026:	4b22      	ldr	r3, [pc, #136]	@ (1001d0b0 <native_metrics::(anonymous namespace)::ReadMailbox(unsigned int, unsigned char*)+0x90>)
+1001d028:	f3bf 8f5b 	dmb	ish
+1001d02c:	0080      	lsls	r0, r0, #2
+1001d02e:	18c5      	adds	r5, r0, r3
+1001d030:	682c      	ldr	r4, [r5, #0]
+1001d032:	f3bf 8f5b 	dmb	ish
+1001d036:	f3bf 8f5b 	dmb	ish
+1001d03a:	1d1a      	adds	r2, r3, #4
+1001d03c:	1882      	adds	r2, r0, r2
+1001d03e:	6816      	ldr	r6, [r2, #0]
+1001d040:	f3bf 8f5b 	dmb	ish
+
+1001d2ac native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)
+1001d2ac:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+1001d2ae:	4657      	mov	r7, sl
+1001d2b0:	464e      	mov	r6, r9
+1001d2b2:	4645      	mov	r5, r8
+1001d2b4:	46de      	mov	lr, fp
+1001d2b6:	b5e0      	push	{r5, r6, r7, lr}
+1001d2b8:	001f      	movs	r7, r3
+1001d2ba:	ab0a      	add	r3, sp, #40	@ 0x28
+1001d2bc:	781b      	ldrb	r3, [r3, #0]
+1001d2be:	4e28      	ldr	r6, [pc, #160]	@ (1001d360 <native_metrics::RecordActivation(unsigned long, unsigned long, unsigned long, bool, bool)+0xb4>)
+1001d2c0:	469a      	mov	sl, r3
+1001d2c2:	6833      	ldr	r3, [r6, #0]
+1001d2c4:	4680      	mov	r8, r0
+1001d2c6:	469b      	mov	fp, r3
+
+1004481a core1_wrapper
+1004481a:	b510      	push	{r4, lr}
+1004481c:	0004      	movs	r4, r0
+1004481e:	f7fd fe69 	bl	100424f4 <irq_init_priorities>
+10044822:	47a0      	blx	r4
+10044824:	bd10      	pop	{r4, pc}
+

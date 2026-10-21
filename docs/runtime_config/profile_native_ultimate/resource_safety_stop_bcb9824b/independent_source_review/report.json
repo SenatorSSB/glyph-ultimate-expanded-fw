@@ -1,0 +1,33 @@
+{
+  "verdict": "INCOMPLETE",
+  "sha": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "prior_findings": {
+    "retained_duplicate_witness": "REPAIRED_AS_WRITTEN_NOT_UNIVERSAL_BOUND",
+    "raw_serial_lock_inversion_and_unbounded_drain": "REPAIRED",
+    "boot_fanout_generation": "REPAIRED"
+  },
+  "new_proven_current_overflow": false,
+  "new_semantic_defect_identified": false,
+  "p1_resource_gate": "OPEN",
+  "whole_stack_upper": "UNKNOWN",
+  "admitted_orphan_compaction_witness": "NOT_ESTABLISHED",
+  "closed_flat_history_exclusion": "CONDITIONAL_SOURCE_INVARIANT_SUPPORTED",
+  "source_blobs_verified": 2989,
+  "source_mismatches": 0,
+  "independent_focused_metrics_transport_mutants": "PASS",
+  "independent_focused_store_dispatch_mutants": "PASS",
+  "attributed_consumers": "4PASS_1MIGRATION_LINK_GAP",
+  "linked_configurator_prefix_bytes": 168,
+  "collector_prefix_bytes": 184,
+  "diagnostic_static_conservative_bytes": 444,
+  "data_bss_bytes": 197528,
+  "stack_each_bytes": 2048,
+  "target_highwater_and_timing": "NOT_MEASURED",
+  "hardware_handoff": "NOT_APPROVED",
+  "report": "/private/tmp/glyph-native-bcb9824b-source-review.md",
+  "later_checker_only_sha": "78d1b39a2ded32dd3772b19c314aed977b8b9ff9",
+  "later_migration_closure": "FAIL_CLOSED_SCRATCH_ADAPTER_SOURCE_REVIEWED_AUTHOR_ASAN_UBSAN_PASS",
+  "source_free_status_consistency": "NO_MATERIAL_CORRECTION"
+}

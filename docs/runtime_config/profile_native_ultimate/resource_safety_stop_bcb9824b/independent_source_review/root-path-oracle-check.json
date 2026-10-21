@@ -1,0 +1,50 @@
+{
+  "verified_utc": "2026-10-20T14:25:07.831670+00:00",
+  "base": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+  "candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "tree": "dc8b97bae0d88caf89aeb0be2c091701cd69bd16",
+  "authority": "262e51f2740789458be81fbd49c51c099c7f5a65",
+  "authority_ancestor": true,
+  "changed_path_count": 1012,
+  "non_doc_path_count": 148,
+  "outside_allowlist": [],
+  "protected": {
+    "src/core/InputMode.cpp": {
+      "unchanged": true,
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    "src/core/socd.cpp": {
+      "unchanged": true,
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3"
+    },
+    "include/core/state.hpp": {
+      "unchanged": true,
+      "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3"
+    },
+    "src/modes/CustomControllerMode.cpp": {
+      "unchanged": true,
+      "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31"
+    },
+    "tools/fixtures/stage_a_ultimate_profiles_dry_run.json": {
+      "unchanged": true,
+      "sha256": "fc86614108390f46ede813d5655a73aca34ed9a193258126c9fb6e593b353143"
+    },
+    "tools/fixtures/stage_b_ultimate_profiles_fixture.json": {
+      "unchanged": true,
+      "sha256": "9cebfa70d0dc379d60e04f1814921c92330540af68c6bc9d6dd3b2c73b09cb9b"
+    },
+    "tools/fixtures/stage_c_ultimate_profiles_fixture.json": {
+      "unchanged": true,
+      "sha256": "8cb2b68d4d99c162d543077e8f7b8f30f646401c7d9710c34fd92cdadd5d64d1"
+    },
+    "tools/fixtures/stage_c_ultimate_profiles_dry_run.json": {
+      "unchanged": true,
+      "sha256": "e349702562427a492fa4de78ad47108af5cbf71a9ea322b31ae9fe61f5de63cb"
+    },
+    "tools/fixtures/stage_c_ultimate_profiles_host/legacy_ultimate.cpp": {
+      "unchanged": true,
+      "sha256": "ba20e5e280b8a280fa725bc1fcd24cf3b713581028714c832397ca66ebf0f98e"
+    }
+  },
+  "qualification": "Exact committed path/source equality only; P1_OPEN, no whole-stack safety or hardware handoff PASS."
+}
