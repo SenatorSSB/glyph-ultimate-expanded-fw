@@ -1,0 +1,134 @@
+{
+  "schema_name": "glyph_gp_native_001_bounded_layout_curation",
+  "schema_version": 1,
+  "disposition": "ADOPT_BOUNDED",
+  "role": "Glyph Work-Order Curator",
+  "finite_role_complete": true,
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "runtime_observed_model": "UNKNOWN",
+  "runtime_observed_effort": "UNKNOWN",
+  "reviewed_at_utc": "2026-10-21T09:58:11.666557+00:00",
+  "independence": "Independent adjudication of writer proposals; no product-source edits, implementation review or firmware acceptance performed. This is the one independent review of the amendment itself; post-implementation fresh review remains mandatory.",
+  "canonical_base_sha": "2677215b3cf1f3390782f3a3400ce33b20628d97",
+  "candidate_source_sha": "a288908de83e75997cd7459b4abe607ee968bb60",
+  "candidate_source_tree": "d0b92601a26ea1523ffb4fff4b1c2c663b719791",
+  "verification": "Local canonical HEAD equals root-supplied live push/readback pin. Root is sole canonical publisher and must freshly verify live canonical before adoption/publication and writer execution. Curator did not independently contact GitHub or mutate Git.",
+  "input_pins": {
+    "canonical_head": "2677215b3cf1f3390782f3a3400ce33b20628d97",
+    "canonical": {
+      "AGENTS.md": "e4e80f93c6e091ba7211e262918bbceae39abbed51bb7589f7f1425a3c3a5cee",
+      "docs/project/AGENTS.md": "166bfb1ea5447c00d58442724e2a3d18599adabd48267140cf59c49e3e2f49f4",
+      "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md": "1d653da1759838305eaf8b6f36196af842d19a84a3f3393bf4d471c2ce18fa09",
+      "docs/agent_framework/VALIDATION_AND_GATES.md": "ba7b73b559e13f3bc81a58e26052b9ab6177df67469e303e22d6b4334251f28f",
+      "docs/project/ACTIVE_AGENT_QUEUE.md": "7bf9198f1703f90649098a45c9f020f6c48f14f47211676459471a5a71f8fd85",
+      "docs/runtime_config/profile_native_ultimate/implementation_contract.json": "0249f892a5fc3b20adfd81415e38ec1ffa0ada5fb6b2f6002ddf61979965181e",
+      "docs/runtime_config/profile_native_ultimate/owner_filesystem_support_decision_20261021.md": "6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e",
+      "docs/runtime_config/profile_native_ultimate/m1_freeze.json": "6164086fa575df35d7ac59735871e97414760c2555fd7f210e21ccb1176da53e",
+      "docs/runtime_config/profile_native_ultimate/diagnostic_design_freeze_20261020.json": "fa315a9bc232c9c966eed5c5ff4ad236c360acfd9d0fbedaa84286f70ffc7adb"
+    },
+    "source": {
+      "HAL/pico/src/core/ProfileStore.cpp": "42ff650c8380ce9edb1dfccd2dba6de90a523c4bb01e120d2b1e3920d7a34eb3",
+      "include/core/ProfileStore.hpp": "3f1fab14abe5999f766799f6f19f8d8f46f1c109cc338cac29799f702c0bd2e3",
+      "HAL/pico/src/core/Persistence.cpp": "1eb642b02465e281d2fff969b2d805ec5a9e4d92985454272795b3f351e9af91",
+      "HAL/pico/include/core/Persistence.hpp": "b2ffb00a4ae6a05d047c0c8d53bf1a481fa8d68fbaa991630a18e56c7843f553",
+      "HAL/pico/include/core/CheckedStorageFile.hpp": "7cab2070e1e0b3d3f4a9d98b2aad97e7b31aa4a808f38aa6ce00658e1e4e6e0c",
+      "HAL/pico/src/comms/ConfiguratorBackend.cpp": "7897cdea74dc04f73cbd65817e1352bededee6a91c185513a995e9cbe0861605",
+      "HAL/pico/include/comms/ConfiguratorBackend.hpp": "1ede80e7202642dd0fa9f2dbf67f6d537d62661cf0611c12f6fef4cfd5344524",
+      "include/core/ModeSelectionTransaction.hpp": "5ee7a5f854743127bb0344fefea938f477156405adae71abcce0c11aaf128ca1",
+      "config/glyph/common/src/config.cpp": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "private": {
+      "/private/tmp/glyph-native-next-lifetime-scope-proposal-20261021.md": "b1c89ebffe33c098b5531d0bdcc5e2a689fde2c248d04b1a1f593a7de27837c0",
+      "/private/tmp/glyph-native-interrupted-accounting-20261021.json": "975bd8f70d8468b9bc7802a272a6d164aeba71108ac51d135a7740cef449f5cd"
+    }
+  },
+  "authority": "Existing complete READY GP-NATIVE-001 plus direct owner broader-filesystem decision 6330f44ba47eaac340d1bf9a3770836264f7863b50432f783b717f476700cb6e. Ordinary bounded layout clarification/amendment to same order, no new work order, successor, global framework campaign, domain choice or device authority.",
+  "activation": "Source-free canonical adoption of this exact bounded amendment, matching sole queue-item scope and implementation contract, followed by fresh live readback precedes edits under the amendment. Proposal3 has the additional objective measured-need condition below.",
+  "proposals": [
+    {
+      "id": 1,
+      "disposition": "ADOPT_BOUNDED",
+      "paths": [
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp"
+      ],
+      "method_authority": "Begin, BeginRecovery, Bootstrap, InitializeV2 and private boot preparation/action execution helpers/declarations only. Split preparation from mutating execution with real returns and bounded scalar action. The plan may contain only owned/reset scalar data and refer to existing store-owned seed; no borrowed automatic object survives preparation.",
+      "invariants": [
+        "Keep all current geometry, root-format, expected-incarnation, control/legacy reads, dependency validation, refusal and readiness/error semantics. Preserve exact read-only recovery phase1 refusal and phase3 LoadDirectory behavior.",
+        "Execute ordinary phase3 ReconcileTransaction after preparation returns; preserve its exact original place relative to all prior checks and all following operations.",
+        "Fresh/upgrade WriteControl phase1 then _v2=true then InitializeV2 root0/root1/control2 then LoadDirectory; phase1 resume enters existing InitializeV2 directly. Preserve initial admission checks before first write and InitializeV2 own geometry check at its original reached point.",
+        "No extra reads/writes, new preflight mutation, delayed cross-loop execution or filesystem domain reduction. Mere nested noinline helper without retiring preparation is not accepted proof."
+      ]
+    },
+    {
+      "id": 2,
+      "disposition": "ADOPT_BOUNDED",
+      "paths": [
+        "HAL/pico/src/core/Persistence.cpp",
+        "HAL/pico/include/core/Persistence.hpp"
+      ],
+      "method_authority": "SaveConfigIfGenerationMatches, SaveConfig and necessary private verified-generation, encode-size, staging/verification/publication/readback/rollback phase helpers/declarations only. Preserve public signatures. VerifyExpectedConfigGeneration (or equivalent) returns before SaveConfig, retiring the existing current CheckedStorageFile frame. Synchronous Save helpers must return between phases rather than retaining the old large parent frame.",
+      "workspace": "At most ONE new alignas(CheckedStorageFile) raw slot of sizeof(CheckedStorageFile), reused only by the nonoverlapping existing generation-check and SaveConfig file lifetimes. Construct unchanged CheckedStorageFile with placement new exactly when its original constructor was reached; destroy exactly at its original scope end on every exit, then clear raw bytes. A bounded RAII scope owner must cover all exits. No changes to CheckedStorageFile.hpp, CheckedStorage.cpp, LittleFS/SDK, Stream implementation, other Persistence load/migration file objects, or public storage API are authorized.",
+      "invariants": [
+        "Check mutation fence, expected RAM generation, availability, selected durable file, CheckSavedConfig/seek/header/read and checked close before comparing durable CRC, in original order. No writer callback/yield, repeated load, fence weakening or reordered compare-and-save.",
+        "Keep encoding-size then temp Remove then stage/write/encode/CRC/header/sync/close then independent reopen/check/reencode comparison then Stat/prior removal/rotation then pending_crc/pending_size then publication then exact uncertainty readback or rollback; preserve every result, generation and mutation-fence assignment and early return.",
+        "Explicit close counts and order stay exact, including destructor fallback if a failed Close leaves handle open. Inspect and preserve opened/failed/uncertain/result/position/size state, including constructor-failure cleanup. Guard must not introduce close of already closed handles or suppress pre-existing fallback.",
+        "Single synchronous core0 ownership, no recursive writer entry, no escaped pointer/borrow, no live slot overlap. Clear phase metadata on every normal/error exit without changing observable status/trace/fault-ticket behavior."
+      ]
+    },
+    {
+      "id": 3,
+      "disposition": "CONDITIONAL_ADOPT_BOUNDED",
+      "paths": [
+        "include/core/ModeSelectionTransaction.hpp"
+      ],
+      "mechanical_activation_condition": "After implementing and measuring proposal2 on its exact committed/reviewable source checkpoint, record current production O3 frame/call-chain composition for mode-destination Save including feasible caller/IRQ/exception/PRIMASK/ROM/indirect co-liveness and unchanged usable core0 2048-byte reserve. Activate ONLY if the route still exceeds that reserve and source/compiled evidence identifies the existing local ConfigValidationError retained across Save as a concrete remaining contributor. Record exact source SHA/tree, build/object recipe and measurements before this header is edited. If proposal2 alone fits, do not edit the header. A failure elsewhere does not satisfy this condition.",
+      "method_authority": "Sole new closed-path permission: introduce one allocation-free noinline templated validate-mode-destination helper containing the existing local ConfigValidationError error and the exact storage.ValidateConfig(candidate,error) call; replace only that local validation fragment in persist_mode_destination with the helper returning before the SAME SaveConfigIfGenerationMatches(candidate,generation) call. No static error object is authorized here.",
+      "invariants": [
+        "Preserve exact loading, target search, backend/default selection, unchanged/refusal results, generation capture, candidate field edits, validation, save, backend_index publication, Config metadata and status order.",
+        "consume_committed_mode_destination, scratch/watchdog/reboot behavior, selection algorithms, public signatures and config.cpp request_mode_destination remain unchanged. No generic header authority or expansion of config.cpp permission. A noinline wrapper around the whole template is not this authorization."
+      ]
+    },
+    {
+      "id": 4,
+      "disposition": "ADOPT_BOUNDED",
+      "paths": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/ProfileStore.hpp"
+      ],
+      "method_authority": "HandleProfileStore/DispatchProfileStore and necessary private request-preparation/admitted-operation execution/response-finalization helpers/declarations; ProfileStore Publish, WriteControl, PublishDirectory, PublishPreparedProfile, Commit, Rename, Reorder, Delete and necessary private bounded metadata/preparation/execution helpers/declarations only. Existing other public store operations may call the refactored shared publication helper unchanged; no other operation algorithm is authorized to change.",
+      "invariants": [
+        "Actual sibling phases: request/metadata preparation RETURNS before execution, execution RETURNS before response finalization. Preserve original synchronous call and all Start/admission/CAS/name/index/revision validation before edits. Do not repeat admission or durable Config loads.",
+        "Keep IncomingScope and incoming_native RX lease alive across all siblings, release at existing response-encode boundary, preserve separate READ record-wire/candidate owner and no second body copy. No response-frame or active/candidate/view reuse as scratch.",
+        "FaultScope currently spans Dispatch; moving it to an outer bounded owning scope is permitted only to preserve exactly the same effective begin/end lifetime, cleanup on all exits, trace placement, ticket/readback/status ordering and EndMutation behavior. Do not end it at the new preparation return or extend it into response encode/TX.",
+        "Publication may use the existing PreparedPublication struct and existing owned wire/path buffers, initialized before an executor that consumes only fixed metadata. Preserve each CheckedWrite/read/compare/Rename sequence and _last_io_stage/unknown-outcome handling. All fields reset/cleared on every exit.",
+        "Metadata prepare may mutate existing _next and receipt exactly as current Rename/Reorder/Delete/Commit, but returns before publication. One original authoritative commit/control sequence, exact generation/receipt/flags ordering and durable control phase3/root/control phase2 publication remain. No reordered durable operation, new retry, queue or loop return."
+      ]
+    }
+  ],
+  "new_fixed_storage_bound": {
+    "total_new_layout_static_max_bytes": 512,
+    "includes": "The single sizeof(CheckedStorageFile) raw slot, alignment padding and ALL new boot/dispatch/persistence/publication scalar action/result/phase metadata combined. Existing buffers may be reused only after proven nonoverlap. No new payload/body/directory/wire/path buffers or second file slot. This is an additional subordinate implementation bound, not an increase to any original limit or diagnostic512.",
+    "required": "Measure exact ARM size/alignment and total delta in both ABI layouts, constant initialization/no dynamic guard where applicable, ownership/reset/exit audit and final linked static totals. If 512 or any original limit would be exceeded, this amendment does not authorize the excess."
+  },
+  "protected_invariants": [
+    "All original numeric_caps byte-for-byte unchanged, including active+candidate7800/view560/frame144/validation256/added-static12288/whole-static199632, two usable2048-byte core reserves, filesystem524288/recovery reserve16384/capacity20 and all finite profile bounds.",
+    "Original frozen M1/architecture/oracles and all legacy/Config semantics remain load-bearing; no native evaluator/schema/primitives/transport/identity/diagnostic design changes. GP-BIND-003 identity16/72 exact; retained diagnostic wire/design/subcap unchanged.",
+    "No heap, cache-all, hot swapping, new queue, storage format/API/partition/capacity/recovery algorithm change, filesystem-domain narrowing, pristine-history restriction, new SDK/IRQ/startup/optimization/stack/limit changes or device authority.",
+    "Existing source-free pending/results, failed/incomplete evidence and previous bcb built artifact remain preserved; bcb is NOT_FOR_HARDWARE. a288 source checkpoint has no final build or physical acceptance. Nunchuk NOT_TESTED; historical root cause UNPROVEN."
+  ],
+  "mandatory_validation": [
+    "Exact before/after checked-storage operation traces and return/status/generation/fence/receipt equivalence for all changed success/refusal/error branches. Fault and lost-ack tests before/after Open/Read/Write/Seek/Sync/Close/Remove/Rename, constructor failure, destructor fallback, every early return, next-operation reset and no stale workspace/lease.",
+    "Actual production Persistence adapter with pinned checked-storage/LittleFS tests; generation conflicts, temp staging, independent reopen/reencode verification, uncertain publication readback, prior fallback/rotation/rollback, reboot/recovery and mode-destination transaction tests.",
+    "Begin normal/recovery phase1/2/3, fresh/legacy upgrade, expected-incarnation/root-format failures, initial pre-admission geometry, root/control publication loss and cleanup, read-only behavior and all existing migration/lifecycle/atomic-commit tests.",
+    "Native/legacy dispatch RX lease/mutant/transaction proofs; first-record CREATE/UPDATE/duplicate and first-directory Rename/Reorder/Delete/publication faults/reset/readback. Preserve exact actual broader filesystem states including unrelated directories and applicable orphan/PENDING_MOVE evidence; no flat-only fixtures in place of the broader domain.",
+    "Both supported enum ABIs and directly affected consumers; frozen legacy source/oracles and current identity/diagnostic assertions remain exact. Real failure results retained; Tier1/affectedTier2 failures block.",
+    "Fresh independent exact-source and final linked ELF/map/disassembly/.su review of every feasible boot/save/store/decode/recovery/identity/diagnostic/scan route and IRQ/exception/ROM/indirect co-liveness within unchanged reserves, with only source-proven mutually unreachable exclusions. Measure sibling caller+callee sums; expected frame savings are hypotheses until proved.",
+    "Final clean committed canonical Mk6 build, exact SHA/tree/source/generated/dependency/flags/ELF/UF2 sizes+hashes/content-addressed custody, candidate-specific reviewed hardware packet and separate direct owner device approval; exact human HEP PASS before integration and strict DONE."
+  ],
+  "resource_gate": "NATIVE-REVIEW-P1-STACK OPEN. Partial worker accounting is not completed independent review; this Curator does not certify any route bound, resource PASS, timing value, artifact, controller acceptance or implementation.",
+  "publish_instructions": "Root sole publisher copies this adjudication and narrow scope text into source-free canonical docs, appends include/core/ModeSelectionTransaction.hpp to the closed source array with conditional permission and updates only sole GP-NATIVE-001 scope/reference. Preserve all other orders, original caps, provenance and historical artifacts. No product or framework-checker edit by Curator."
+}
