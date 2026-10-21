@@ -1,0 +1,21 @@
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from /private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp:8:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from HAL/pico/include/rgb/ButtonLocations.hpp:7,
+                 from HAL/pico/include/comms/NeoPixelBackend.hpp:6,
+                 from config/glyph/common/include/glyph_overrides.hpp:6,
+                 from /private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp:26:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h: At global scope:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp:131:6: warning: 'void {anonymous}::refuse_boot(BootOutcome, bool)' defined but not used [-Wunused-function]
+  131 | void refuse_boot(BootOutcome outcome, bool display_ready) {
+      |      ^~~~~~~~~~~

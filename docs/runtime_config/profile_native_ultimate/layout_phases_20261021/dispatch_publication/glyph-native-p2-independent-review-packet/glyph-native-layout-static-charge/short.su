@@ -1,0 +1,43 @@
+.platformio-home/packages/framework-arduinopico/cores/rp2040/api/../../../ArduinoCore-API/api/Print.h:61:17:virtual int arduino::Print::availableForWrite()	0	static
+HAL/pico/include/core/CheckedStorageFile.hpp:16:9:virtual int CheckedStorageFile::available()	0	static
+HAL/pico/include/core/CheckedStorageFile.hpp:25:12:virtual size_t CheckedStorageFile::write(const uint8_t*, size_t)	24	static
+HAL/pico/include/core/CheckedStorageFile.hpp:31:10:virtual void CheckedStorageFile::flush()	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:95:24:static constexpr bool {anonymous}::compare_config_bytes(CheckedStorageFile&, const Config&, size_t)::<lambda(pb_ostream_t*, const pb_byte_t*, size_t)>::_FUN(pb_ostream_t*, const pb_byte_t*, size_t)	88	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:72:6:bool {anonymous}::read_config_file(pb_istream_t*, pb_byte_t*, size_t)	88	static
+HAL/pico/include/core/CheckedStorageFile.hpp:24:12:virtual size_t CheckedStorageFile::write(uint8_t)	32	static
+HAL/pico/include/core/CheckedStorageFile.hpp:17:9:virtual int CheckedStorageFile::read()	32	static
+HAL/pico/include/core/CheckedStorageFile.hpp:23:9:virtual int CheckedStorageFile::peek()	56	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:45:31:{anonymous}::SaveFileScope<Write>::~SaveFileScope() [with bool Write = true]	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:45:31:{anonymous}::SaveFileScope<Write>::~SaveFileScope() [with bool Write = false]	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:41:31:{anonymous}::SaveFileScope<Write>::SaveFileScope(const char*) [with bool Write = true]	56	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:41:31:{anonymous}::SaveFileScope<Write>::SaveFileScope(const char*) [with bool Write = false]	56	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:124:6:bool {anonymous}::hash_file(const char*, uint8_t*)	656	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:351:6:0(uint8_t*)	280	static
+HAL/pico/include/core/CheckedStorageFile.hpp:36:10:bool CheckedStorageFile::close()	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:152:1:Persistence::Persistence()	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:159:1:Persistence::~Persistence()	8	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:165:6:bool Persistence::IsAvailable() const	0	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:169:10:uint32_t Persistence::ConfigGeneration(const Config&) const	0	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:174:6:bool Persistence::SetValidator(ConfigSemanticValidator)	0	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:185:6:bool Persistence::ValidateConfig(const Config&, ConfigValidationError&) const	16	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:233:32:bool Persistence::PrepareSaveConfig(const Config&)	8	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:238:32:bool Persistence::RemoveSaveTemporary()	16	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:250:32:bool Persistence::WriteStagedConfig(CheckedStorageFile&, Config&)	104	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:245:32:bool Persistence::StageSaveConfig(Config&)	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:286:32:bool Persistence::RotateSavedConfig()	24	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:351:6:bool Persistence::LegacySourceIdentity(uint8_t*)	280	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:360:6:bool Persistence::CaptureLegacySource(uint8_t*)	608	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:405:25:Persistence::LoadResult Persistence::ReadLegacyProfile(size_t, UltimateProfile&)	296	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:442:25:Persistence::LoadResult Persistence::LoadConfigChecked(Config&)	456	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:342:25:Persistence::SaveResult Persistence::ReconcileConfig(Config&)	8	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:438:6:bool Persistence::LoadConfig(Config&)	8	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:516:6:bool Persistence::CheckSavedConfig()	272	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:534:8:size_t Persistence::LoadConfigRaw(arduino::Print&, bool)	280	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:569:6:bool Persistence::CheckSavedConfig(CheckedStorageFile&, LoadResult*)	80	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:204:51:Persistence::SaveResult Persistence::VerifyExpectedConfigGeneration(uint64_t)	80	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:276:32:bool Persistence::VerifyStagedConfig(Config&)	72	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:303:32:bool Persistence::PublishStagedConfig(Config&)	80	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:335:6:bool Persistence::SaveConfig(Config&)	16	static
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:224:25:Persistence::SaveResult Persistence::SaveConfigIfGenerationMatches(Config&, uint64_t)	16	static
+/private/tmp/glyph-native-layout-file-slot-size.cpp:5:108:cpp)	8	static
+/private/tmp/glyph-native-layout-file-slot-size.cpp:5:108:cpp)	8	static

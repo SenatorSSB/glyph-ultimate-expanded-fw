@@ -1,0 +1,95 @@
+         U Config_msg
+         U LittleFS
+         U UltimateProfile_msg
+00000000 0000001c t _GLOBAL__sub_D__ZN11PersistenceC2Ev
+00000000 00000010 t _GLOBAL__sub_I__ZN11PersistenceC2Ev
+         U as_pb_ostream(arduino::Print&)
+         U validate_config_extents(_Config const&)
+00000000 0000000e T Persistence::LoadConfig(_Config&)
+00000000 0000006c T Persistence::SaveConfig(_Config&)
+00000000 0000001e T Persistence::SetValidator(bool (*)(_Config const&, ConfigValidationError&))
+00000000 0000044c T Persistence::LoadConfigRaw(arduino::Print&, bool)
+00000000 00000020 T Persistence::ReconcileConfig(_Config&)
+00000000 00000026 T Persistence::StageSaveConfig(_Config&)
+00000000 0000000e V Persistence::config_filename
+00000000 0000019c T Persistence::CheckSavedConfig(CheckedStorageFile&, Persistence::LoadResult*)
+00000000 000002dc T Persistence::CheckSavedConfig()
+00000000 00000590 T Persistence::LoadConfigChecked(_Config&)
+00000000 00000030 T Persistence::PrepareSaveConfig(_Config const&)
+00000000 000003c0 T Persistence::ReadLegacyProfile(unsigned int, _UltimateProfile&)
+00000000 0000007c T Persistence::RotateSavedConfig()
+00000000 00000340 T Persistence::WriteStagedConfig(CheckedStorageFile&, _Config&)
+00000000 0000017c T Persistence::VerifyStagedConfig(_Config&)
+00000000 00000842 T Persistence::CaptureLegacySource(unsigned char*)
+00000000 0000024c T Persistence::PublishStagedConfig(_Config&)
+00000000 00000030 T Persistence::RemoveSaveTemporary()
+00000000 000002a4 T Persistence::LegacySourceIdentity(unsigned char*)
+00000000 000002a0 t Persistence::LegacySourceIdentity(unsigned char*) [clone .part.0]
+00000000 0000000b V Persistence::legacy_config_filename
+00000000 0000000f V Persistence::prior_compact_filename
+00000000 00000024 T Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)
+00000000 000001b4 T Persistence::VerifyExpectedConfigGeneration(unsigned long long)
+00000000 00000048 T Persistence::Persistence()
+00000000 00000048 T Persistence::Persistence()
+00000000 0000001c T Persistence::~Persistence()
+00000000 0000001c T Persistence::~Persistence()
+00000000 00000020 d (anonymous namespace)::save_phase
+00000000 000000ec t (anonymous namespace)::SaveFileScope<false>::SaveFileScope(char const*) [clone .isra.0]
+00000000 00000034 t (anonymous namespace)::SaveFileScope<false>::~SaveFileScope() [clone .isra.0]
+00000000 000000bc t (anonymous namespace)::SaveFileScope<true>::SaveFileScope(char const*) [clone .constprop.0] [clone .isra.0]
+00000000 00000034 t (anonymous namespace)::SaveFileScope<true>::~SaveFileScope() [clone .isra.0]
+00000000 000000b0 b (anonymous namespace)::save_file_slot
+00000000 000000bc t (anonymous namespace)::read_config_file(pb_istream_s*, unsigned char*, unsigned int)
+00000000 00000c3c t (anonymous namespace)::hash_file(char const*, unsigned char*)
+00000000 0000000e r (anonymous namespace)::save_temporary_filename
+         U CheckedStorage::Open(CheckedStorage::File&, char const*, bool, CheckedStorage::Kind)
+         U CheckedStorage::Read(CheckedStorage::File&, void*, unsigned int)
+         U CheckedStorage::Seek(CheckedStorage::File&, unsigned int)
+         U CheckedStorage::Stat(char const*, unsigned int*, CheckedStorage::Kind)
+         U CheckedStorage::Sync(CheckedStorage::File&)
+         U CheckedStorage::Close(CheckedStorage::File&)
+         U CheckedStorage::Write(CheckedStorage::File&, void const*, unsigned int)
+         U CheckedStorage::Remove(char const*, CheckedStorage::Kind)
+         U CheckedStorage::Rename(char const*, char const*, CheckedStorage::Kind)
+         U CheckedStorage::Capacity(CheckedStorage::Geometry&)
+         U ultimate_native::RejectPayload(pb_istream_s*, pb_field_iter_s const*, void**)
+         U ultimate_native::RejectEmbedded(_Config&)
+         U ultimate_native::ClearEmbeddedCallbacks(_Config&)
+00000000 000000bc W CheckedStorageFile::peek()
+00000000 00000058 W CheckedStorageFile::read()
+00000000 00000044 W CheckedStorageFile::close()
+00000000 0000003a W CheckedStorageFile::flush()
+00000000 00000058 W CheckedStorageFile::write(unsigned char const*, unsigned int)
+00000000 00000074 W CheckedStorageFile::write(unsigned char)
+00000000 00000012 W CheckedStorageFile::available()
+         U fs::FS::end()
+         U fs::FS::begin()
+         U fs::FS::setConfig(fs::FSConfig const&)
+         U CRC32::update(unsigned char const&)
+         U CRC32::CRC32()
+00000000 00000004 W arduino::Print::availableForWrite()
+00000000 0000000c T Persistence::IsAvailable() const
+00000000 00000058 T Persistence::ValidateConfig(_Config const&, ConfigValidationError&) const
+00000000 00000004 T Persistence::ConfigGeneration(_Config const&) const
+         U CRC32::finalize() const
+00000000 00000024 V vtable for CheckedStorageFile
+00000000 00007ae0 b Persistence::LoadConfigChecked(_Config&)::candidate
+00000000 0000009a t (anonymous namespace)::compare_config_bytes(CheckedStorageFile&, _Config const&, unsigned int)::{lambda(pb_ostream_s*, unsigned char const*, unsigned int)#1}::_FUN(pb_ostream_s*, unsigned char const*, unsigned int)
+00000000 00000100 V Sha256::Transform()::k
+         U __aeabi_ldivmod
+         U __aeabi_lmul
+         U __aeabi_uldivmod
+00000000 000000b0 B layout_new_file_slot_size
+00000000 00000020 B layout_new_save_phase_size
+00000000 000000d6 B layout_new_total_charge
+         U memcmp
+         U memcpy
+         U memset
+         U pb_close_string_substream
+         U pb_decode
+         U pb_decode_tag
+         U pb_encode
+         U pb_get_encoded_size
+         U pb_make_string_substream
+         U pb_skip_field
+00000000 00000014 B persistence

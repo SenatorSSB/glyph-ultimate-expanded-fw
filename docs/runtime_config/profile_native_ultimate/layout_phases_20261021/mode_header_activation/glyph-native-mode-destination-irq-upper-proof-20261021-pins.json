@@ -1,0 +1,138 @@
+{
+  "kind": "FINITE_ALL_BACKEND_PERSISTENCE_IRQ_EVIDENCE_PINS",
+  "files": {
+    "/private/tmp/glyph-native-mode-destination-irq-upper-proof-20261021.md": {
+      "bytes": 16212,
+      "sha256": "485854b38a56a14d55607ce8250217f97e4085c4791a37fd36d0b04bab7f5727"
+    },
+    "/private/tmp/glyph-native-mode-destination-irq-upper-proof-20261021.json": {
+      "bytes": 1874,
+      "sha256": "7547e1bf4e7b2b2a40d6e62ca70dc24287c0e84d5da35536bf984a2ff69a86e5"
+    },
+    "/private/tmp/glyph-native-core1-exact-functions.json": {
+      "bytes": 2586816,
+      "sha256": "eb1473d639b2d22b8dea31aa5ed9ab96b003f329fded82093f7ae383513cb533"
+    },
+    "/private/tmp/glyph-native-core1-symbol-extents.txt": {
+      "bytes": 371208,
+      "sha256": "86a16e88a16f9a539ac9f6c7616494e25aa645856c7f0a8151add5a66c3be036"
+    },
+    "/private/tmp/glyph-native-core1-upper-proof-20261021-pins.json": {
+      "bytes": 12683,
+      "sha256": "a52d4f6d9d6476fc08936f68a798c633d7fd8e2f25b3be5d0d52f03bee1b7915"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021-manifest.json": {
+      "bytes": 15566,
+      "sha256": "f2da41a6c12f96f5db6e660af42b60d9d35cd7dfbeeb8d078b7d664b96cb4821"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/core/ModeSelectionTransaction.hpp": {
+      "bytes": 3666,
+      "sha256": "5ee7a5f854743127bb0344fefea938f477156405adae71abcce0c11aaf128ca1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp": {
+      "bytes": 17902,
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/mode_selection.cpp": {
+      "bytes": 10045,
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_usb_default_validation.cpp": {
+      "bytes": 448,
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/backend_init.cpp": {
+      "bytes": 11708,
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/console_detection.cpp": {
+      "bytes": 2116,
+      "sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/GamecubeBackend.cpp": {
+      "bytes": 2118,
+      "sha256": "48f2bfd711c2f44f6b32f030002c018c4ef716e71d917cb28d9f5d881a249329"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/N64Backend.cpp": {
+      "bytes": 1884,
+      "sha256": "8cdf98be87caaeb23b9a0412a6bfd08bc98615a2f64f6e5ea3096a9fb60535ce"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/XInputBackend.cpp": {
+      "bytes": 2197,
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/DInputBackend.cpp": {
+      "bytes": 1844,
+      "sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/NintendoSwitchBackend.cpp": {
+      "bytes": 6691,
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25"
+    },
+    "/private/tmp/glyph-profile-native-20261020/lib/TUCompositeHID/src/TUCompositeHID.cpp": {
+      "bytes": 890,
+      "sha256": "8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/nes-pio/src/NesConsole.cpp": {
+      "bytes": 1761,
+      "sha256": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/nes-pio/src/SnesConsole.cpp": {
+      "bytes": 1734,
+      "sha256": "fe179cb1f880f1238e09fd43d054eb54718b1a2c5ac73a81e1878f078914a55e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/nes-pio/src/nes.c": {
+      "bytes": 1562,
+      "sha256": "26d3980173684eb117bb543c998c3496ada18187da0e1eda64122c53a763cb98"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp": {
+      "bytes": 11301,
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/CoreMutex.cpp": {
+      "bytes": 2419,
+      "sha256": "f4975882d07274392618651da550ceffe39eb4c85171a00a54245f1a13345d28"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_private.cpp": {
+      "bytes": 4383,
+      "sha256": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c": {
+      "bytes": 9409,
+      "sha256": "a4cda18f0e872ef17bac45c51ed46bb9a0c1c743875001d6d63acd69510ea7aa"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S": {
+      "bytes": 2825,
+      "sha256": "ac608575377af5dd9587559b647dfa646094e7366ef29a658bba37ab3aa1653e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_pio/pio.c": {
+      "bytes": 10143,
+      "sha256": "64e1bf1b0cf9195c8a5b1981a41a003764cd203420fecf68867be9cca4cb93b1"
+    },
+    "/private/tmp/glyph-bootrom-license-provenance-20261021.json": {
+      "bytes": 8096,
+      "sha256": "29e0aa7f2be22d4d22e9924367ba65ba4db722bf66ee89b8a5bf0ff64d1c8048"
+    },
+    "/private/tmp/glyph-bootrom-NOTICES-20261021.txt": {
+      "bytes": 11373,
+      "sha256": "ac722815a1675f7bd60d662128cb6bb10715e65aef8fc991a4cb990c0300f76d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include/glyph_pinout.hpp": {
+      "bytes": 356,
+      "sha256": "1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp": {
+      "bytes": 17806,
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "bytes": 4652,
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c": {
+      "bytes": 1289,
+      "sha256": "933146c5c102ba8f7f876270b06715c813ba2a148d1659ca4f908e9573af8e6e"
+    }
+  },
+  "mutations": "private /tmp evidence only"
+}

@@ -1,0 +1,29 @@
+{
+  "state": "CONDITIONAL_HEADER_SCOPE_ACTIVATED_MEASURED_NEED_NOT_RESOURCE_PASS",
+  "source_sha": "a2a5c94d0a0bef3638b1ead1071ff58faaa7528f",
+  "tree": "01005eeaf2a9c93abbf7bd47dcd861c4847cea9a",
+  "recipe": "manifest.json current production O3 with source hashes; object/relocations preserved before header edit",
+  "current_header_sha256": "5ee7a5f854743127bb0344fefea938f477156405adae71abcce0c11aaf128ca1",
+  "retained_frames": {
+    "main_exact_bcb_unchanged": 48,
+    "loop_exact_bcb_lower_charge_current_object40": 32,
+    "select_mode_current_object": 32,
+    "request_mode_destination_current_object": 168,
+    "SaveConfigIfGenerationMatches_current_object": 16,
+    "SaveConfig_current_object": 16,
+    "RemoveSaveTemporary_current_object": 16,
+    "CheckedStorageRemove_unchanged": 48,
+    "lfs_remove_inlining_force_unchanged": 136,
+    "deorphan_unchanged": 176,
+    "orphaning_compact_program_unchanged": 1008
+  },
+  "foreground": 1696,
+  "premask": 16,
+  "source_feasible_NES_serial_IRQ": 360,
+  "total_without_ROM_or_pad": 2072,
+  "reservation": 2048,
+  "Error_contributor": "existing automatic ConfigValidationError132 lies in persist_mode_destination inlined into current request frame168 and remains live over Save call; exact source and object relocation show this. No config.cpp edits.",
+  "SDK_calls": "unchanged pinned bcb ELF/LFS and source-feasible broad orphan compaction branch; no force64 separately added to lfs_remove. Body leaf1008 is source-feasible accounting, not observed target/host peak.",
+  "scope": "Only prescribed noinline templated ValidateConfig helper; all other mode template and consume functions remain exact.",
+  "completed_before_header_edit": true
+}

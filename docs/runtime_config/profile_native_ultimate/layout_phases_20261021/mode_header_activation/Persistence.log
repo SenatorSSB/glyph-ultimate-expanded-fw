@@ -1,0 +1,23 @@
+In file included from HAL/pico/include/core/Persistence.hpp:22,
+                 from /private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:18:
+HAL/pico/include/core/CheckedStorageFile.hpp: In constructor 'CheckedStorageFile::CheckedStorageFile(const char*, const char*)':
+HAL/pico/include/core/CheckedStorageFile.hpp:11:9: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |         ^~
+HAL/pico/include/core/CheckedStorageFile.hpp:11:116: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   11 |         if (_result && mode[0] != 'w') _result = CheckedStorage::Stat(path, &_size, CheckedStorage::Kind::Config); remember_uncertainty();
+      |                                                                                                                    ^~~~~~~~~~~~~~~~~~~~
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp: In destructor '{anonymous}::SavePhaseReset::~SavePhaseReset()':
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:63:36: warning: 'void* memset(void*, int, size_t)' clearing an object of non-trivial type 'struct {anonymous}::SavePhaseState'; use assignment or value-initialization instead [-Wclass-memaccess]
+   63 |     ~SavePhaseReset() { std::memset(&save_phase, 0, sizeof(save_phase)); }
+      |                         ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:55:8: note: 'struct {anonymous}::SavePhaseState' declared here
+   55 | struct SavePhaseState {
+      |        ^~~~~~~~~~~~~~
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp: In member function 'bool Persistence::SaveConfig(Config&)':
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:336:16: warning: 'void* memset(void*, int, size_t)' clearing an object of non-trivial type 'struct {anonymous}::SavePhaseState'; use assignment or value-initialization instead [-Wclass-memaccess]
+  336 |     std::memset(&save_phase, 0, sizeof(save_phase));
+      |     ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/Persistence.cpp:55:8: note: 'struct {anonymous}::SavePhaseState' declared here
+   55 | struct SavePhaseState {
+      |        ^~~~~~~~~~~~~~

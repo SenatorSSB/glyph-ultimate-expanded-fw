@@ -459,16 +459,27 @@ static ProfileStoreResponse response;
 static uint8_t frame[kFrameLimit];
 static ultimate_native::PayloadLease incoming_native;
 static bool profile_received;
+static bool dispatch_handled, dispatch_pending;
 static ProfileStoreTransactionIdentity identity;
 static ProfileStore::TransactionResult result;
 }
-bool ConfiguratorBackend::HandleProfileStore() {
+__attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileStore() {
     incoming_native.Release();
     struct IncomingScope { ~IncomingScope() { incoming_native.Release(); } } incoming_scope;
     profile_received = false;
     const bool received = ReceiveProfileStore();
     if (!profile_received) return received;
-    if (!DispatchProfileStore()) return false;
+    {
+        struct DispatchReset {
+            ~DispatchReset() { dispatch_handled = dispatch_pending = false; }
+        } dispatch_reset;
+#if GLYPH_STRICT_HARDENING_CANDIDATE
+        struct FaultScope { ~FaultScope(){ProfileStoreFaultControls::EndMutation();} } fault_scope;
+#endif
+        if (!DispatchProfileStore()) return false;
+        if (!ExecuteProfileStoreMutation()) return false;
+        if (!FinalizeProfileStore()) return false;
+    } // original fault scope ends before response encoding/TX
     return RespondProfileStore();
 }
 __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
@@ -657,7 +668,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
     identity = {};
     result = {};
-    bool handled = false;
+    dispatch_handled = dispatch_pending = false;
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     const bool ticket_invalid = request.fault_ticket &&
         (!mutation || request.protocol_version != 2 || !kStrictHardeningCandidate);
@@ -668,11 +679,6 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     const bool ticket_invalid = request.fault_kind || request.fault_operation ||
         request.fault_phase || request.fault_result || request.fault_path_class ||
         request.fault_skip || request.fault_clear || request.fault_ticket || request.liveness_trace;
-#endif
-    // Scope ends before encoding/TX, including failed/unused rules. Pending
-    // rules never affect STATUS, QUERY, replay without ticket, or legacy SET.
-#if GLYPH_STRICT_HARDENING_CANDIDATE
-    struct FaultScope { ~FaultScope(){ProfileStoreFaultControls::EndMutation();} } fault_scope;
 #endif
     if (!TraceProfileStage(request, 2)) return false; // CRC complete; before reconciliation
 
@@ -688,7 +694,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
     }
     if (ticket_invalid) {
         response.status = PROFILE_STORE_INVALID;
-        handled = true;
+        dispatch_handled = true;
     } else if (pulse) {
         response.status = kStrictHardeningCandidate && request.protocol_version == 2 ? PROFILE_STORE_OK : PROFILE_STORE_UNSUPPORTED;
 #if GLYPH_STRICT_HARDENING_CANDIDATE
@@ -704,15 +710,15 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
             response.rx_flags = _last_profile_rx.flags;
         }
 #endif
-        handled = true;
+        dispatch_handled = true;
 #if !GLYPH_STRICT_HARDENING_CANDIDATE
     } else if (request.operation == PROFILE_STORE_ARM_STORAGE_FAULT) {
         response.status = PROFILE_STORE_UNSUPPORTED;
-        handled = true;
+        dispatch_handled = true;
 #endif
     } else if (mutation && request.protocol_version != 2) {
         response.status = PROFILE_STORE_UNSUPPORTED;
-        handled = true;
+        dispatch_handled = true;
     } else if (request.operation == PROFILE_STORE_STATUS) {
         response.status = _recovery_storage_available && profile_store.IsReady() &&
             !profile_store.IsReadOnlyRecovery() && !_recovery_config_invalid &&
@@ -765,7 +771,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
         response.resource_diagnostics_enabled = resources.resource_diagnostics_enabled;
         response.strict_hardening_candidate = kStrictHardeningCandidate;
 #endif
-        handled = true;
+        dispatch_handled = true;
     } else if (!_recovery_storage_available) {
         result.status = ProfileStore::Status::IoFailure;
         strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
@@ -780,7 +786,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
 #else
         response.status = PROFILE_STORE_UNSUPPORTED;
 #endif
-        handled = true;
+        dispatch_handled = true;
     } else if (request.operation == PROFILE_STORE_LIST) {
         const size_t cursor = request.page_cursor;
         const size_t count = request.page_size == 0 ? 8 : request.page_size;
@@ -799,57 +805,65 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
             response.next_page_cursor = end < profile_store.Count() ? end : 0;
             response.status = PROFILE_STORE_OK;
         }
-        handled = true;
+        dispatch_handled = true;
     } else if (request.operation == PROFILE_STORE_INSPECT_HEALTH) {
         response.profile_id = request.profile_id;
         response.profile_health = static_cast<uint32_t>(profile_store.Health(request.profile_id)) + 1;
         response.status = PROFILE_STORE_OK;
-        handled = true;
+        dispatch_handled = true;
     } else if (request.operation == PROFILE_STORE_READ) {
         if (!ReadStoreProfile()) return false;
     } else if (!mutation && !query) {
         response.status = PROFILE_STORE_UNSUPPORTED;
-        handled = true;
+        dispatch_handled = true;
     } else if (!request.request_token || !PrepareStoreIdentity(request, identity)) {
         result.status = ProfileStore::Status::Invalid;
     } else {
         const unsigned admission = PrepareStoreMutation();
-        if (admission == 2) handled = true;
-        else if (admission == 1) {
-            Config &candidate = ConfigWriteCandidate();
-            if (request.operation == PROFILE_STORE_CREATE) {
-                if (!TraceProfileDispatch(request)) return false;
-                if (request.has_profile) ::new (&result) ProfileStore::TransactionResult(profile_store.Create(request.profile, request.name,
-                    request.display_rank, identity)); else result = {ProfileStore::Status::Invalid};
-            } else if (request.operation == PROFILE_STORE_UPDATE) {
-                if (!TraceProfileDispatch(request)) return false;
-                if (request.has_profile) ::new (&result) ProfileStore::TransactionResult(profile_store.Update(request.profile_id, request.profile,
-                    static_cast<uint32_t>(request.expected_profile_revision), identity)); else result = {ProfileStore::Status::Invalid};
-            } else if (request.operation == PROFILE_STORE_DUPLICATE) {
-                if (!TraceProfileDispatch(request)) return false;
-                ::new (&result) ProfileStore::TransactionResult(profile_store.Duplicate(request.profile_id,
-                    static_cast<uint32_t>(request.expected_profile_revision), request.name, request.display_rank, identity));
-            } else if (request.operation == PROFILE_STORE_RENAME) {
-                if (!TraceProfileDispatch(request)) return false;
-                ::new (&result) ProfileStore::TransactionResult(profile_store.Rename(request.profile_id, request.name,
-                    static_cast<uint32_t>(request.expected_store_generation), identity));
-            } else if (request.operation == PROFILE_STORE_REORDER) {
-                if (!TraceProfileDispatch(request)) return false;
-                ::new (&result) ProfileStore::TransactionResult(profile_store.Reorder(request.profile_id, request.display_rank,
-                    static_cast<uint32_t>(request.expected_store_generation), identity));
-            } else if (request.operation == PROFILE_STORE_DELETE) {
-                if (!TraceProfileDispatch(request)) return false;
-                const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
-                    ReferencesProfile(candidate, request.profile_id) ? request.profile_id : 0;
-                ::new (&result) ProfileStore::TransactionResult(profile_store.Delete(request.profile_id,
-                    static_cast<uint32_t>(request.expected_store_generation), referenced, identity));
-            } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
-                if (!TraceProfileDispatch(request)) return false;
-                PerformCheckedReference();
-            }
-        }
+        if (admission == 2) dispatch_handled = true;
+        else if (admission == 1) dispatch_pending = true;
     }
-    if (!handled) {
+    return true;
+}
+
+__attribute__((always_inline)) inline bool ConfiguratorBackend::ExecuteProfileStoreMutation() {
+    if (!dispatch_pending) return true;
+    Config &candidate = ConfigWriteCandidate();
+    if (request.operation == PROFILE_STORE_CREATE) {
+        if (!TraceProfileDispatch(request)) return false;
+        if (request.has_profile) ::new (&result) ProfileStore::TransactionResult(profile_store.Create(request.profile, request.name,
+            request.display_rank, identity)); else result = {ProfileStore::Status::Invalid};
+    } else if (request.operation == PROFILE_STORE_UPDATE) {
+        if (!TraceProfileDispatch(request)) return false;
+        if (request.has_profile) ::new (&result) ProfileStore::TransactionResult(profile_store.Update(request.profile_id, request.profile,
+            static_cast<uint32_t>(request.expected_profile_revision), identity)); else result = {ProfileStore::Status::Invalid};
+    } else if (request.operation == PROFILE_STORE_DUPLICATE) {
+        if (!TraceProfileDispatch(request)) return false;
+        ::new (&result) ProfileStore::TransactionResult(profile_store.Duplicate(request.profile_id,
+            static_cast<uint32_t>(request.expected_profile_revision), request.name, request.display_rank, identity));
+    } else if (request.operation == PROFILE_STORE_RENAME) {
+        if (!TraceProfileDispatch(request)) return false;
+        ::new (&result) ProfileStore::TransactionResult(profile_store.Rename(request.profile_id, request.name,
+            static_cast<uint32_t>(request.expected_store_generation), identity));
+    } else if (request.operation == PROFILE_STORE_REORDER) {
+        if (!TraceProfileDispatch(request)) return false;
+        ::new (&result) ProfileStore::TransactionResult(profile_store.Reorder(request.profile_id, request.display_rank,
+            static_cast<uint32_t>(request.expected_store_generation), identity));
+    } else if (request.operation == PROFILE_STORE_DELETE) {
+        if (!TraceProfileDispatch(request)) return false;
+        const uint32_t referenced = ReferencesProfile(_config, request.profile_id) ||
+            ReferencesProfile(candidate, request.profile_id) ? request.profile_id : 0;
+        ::new (&result) ProfileStore::TransactionResult(profile_store.Delete(request.profile_id,
+            static_cast<uint32_t>(request.expected_store_generation), referenced, identity));
+    } else if (request.operation == PROFILE_STORE_SET_MODE_REFERENCE) {
+        if (!TraceProfileDispatch(request)) return false;
+        PerformCheckedReference();
+    }
+    return true;
+}
+
+__attribute__((noinline)) bool ConfiguratorBackend::FinalizeProfileStore() {
+    if (!dispatch_handled) {
         response.profile_id = result.id;
         response.profile_revision = result.revision;
         response.store_generation = result.status == ProfileStore::Status::Ok ? result.generation : profile_store.Generation();

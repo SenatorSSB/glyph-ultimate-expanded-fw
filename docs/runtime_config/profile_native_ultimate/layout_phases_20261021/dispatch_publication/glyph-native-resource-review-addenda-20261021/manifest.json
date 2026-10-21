@@ -1,0 +1,41 @@
+{
+  "qualification": "Independent evidence addenda; exact bcb-source ELF claims only. P1OPEN/final candidate correspondence required. Historical456 untouched. No target measurement or device action.",
+  "files": [
+    {
+      "source": "/private/tmp/glyph-native-mode-destination-irq-408-amendment-20261021.md",
+      "file": "glyph-native-mode-destination-irq-408-amendment-20261021.md",
+      "bytes": 11376,
+      "sha256": "c1fdc750332c66f63dfabbe9f2224f36b3b6c1792b0fdfaf47c5ef48847ecb39"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mode-destination-irq-408-amendment-20261021.json",
+      "file": "glyph-native-mode-destination-irq-408-amendment-20261021.json",
+      "bytes": 1480,
+      "sha256": "4a667963a247e960b9e20c8d7cabd3310998111c854fe1c2d70e75541204817e"
+    },
+    {
+      "source": "/private/tmp/glyph-native-mode-destination-irq-408-amendment-20261021-pins.json",
+      "file": "glyph-native-mode-destination-irq-408-amendment-20261021-pins.json",
+      "bytes": 7457,
+      "sha256": "61e6981c21f546be3775b57bd2f3d8428382dc34c259fd5171911ae9cf70f83e"
+    },
+    {
+      "source": "/private/tmp/glyph-native-h1-review-resource-inventory-20261021.md",
+      "file": "glyph-native-h1-review-resource-inventory-20261021.md",
+      "bytes": 31678,
+      "sha256": "2d6251ffb63234469b2115729051b5d845b7ac6fe5927a4fdb9f16df82477042"
+    },
+    {
+      "source": "/private/tmp/glyph-native-h1-review-resource-inventory-20261021.json",
+      "file": "glyph-native-h1-review-resource-inventory-20261021.json",
+      "bytes": 37329,
+      "sha256": "2ac0fbb10ebbbf1b45fbd9e347792052013061d17d058e68bfe20658967e220e"
+    },
+    {
+      "source": "/private/tmp/glyph-native-h1-review-resource-inventory-20261021-inputpins.json",
+      "file": "glyph-native-h1-review-resource-inventory-20261021-inputpins.json",
+      "bytes": 34663,
+      "sha256": "736e372d0219b4bac74ce919043bd7526162e82b7c8ebc0a5f1404be975d9332"
+    }
+  ]
+}

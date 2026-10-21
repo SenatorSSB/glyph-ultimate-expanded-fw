@@ -1,0 +1,32 @@
+{
+  "kind": "EXACT_ELF_MODE_DESTINATION_IRQ_408_AMENDMENT",
+  "candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "ordinary_mode_save_IRQ_upper_including_alignment_bytes": 408,
+  "upper_is_feasible_lower_witness": false,
+  "previous_safe456_report": "PRESERVED_UNCHANGED",
+  "deferred_USB_C_bytes": 264,
+  "outer_exception_bytes": 32,
+  "priority0_GPIO_increment_bytes": 104,
+  "two_alignment_allowances_bytes": 8,
+  "priority0_GPIO_C_max_bytes": 64,
+  "GPIO_default_handler_scan_without_callback_bytes": 40,
+  "priority0_default_dispatcher_subtree": "EXCLUDED_BY_ENABLED_PIN10_AND_PERSISTENT_RAW_BIT10_INVARIANT",
+  "USB_default_row_type_restricted_to_USB": false,
+  "physical_backend_replacement_during_initialization": "COVERED",
+  "initial_NES_to_final_SNES_priority0_history": "RAW_BIT10_REMAINS_SET_BY_EXACT_DATA8_CLEANUP",
+  "other_alternatives_bytes": {
+    "deferred_USB_SysTick": 348,
+    "hardware_USB_GPIO0": 300,
+    "GPIO128_SysTick": 204,
+    "alarm_unmasked_GPIO0": 256,
+    "alarm_masked_heap": 336,
+    "SIO_premask_GPIO0": 176,
+    "NES_standalone_alignment": 108
+  },
+  "existing_feasible_NES_serial_witness_bytes": 360,
+  "new_candidate_obligation": "Exact source/ELF correspondence and affected frames/priorities/callback/mask/lifecycle review",
+  "mutations": "private /tmp analysis evidence only",
+  "whole_resource_PASS": false,
+  "hardware_observations": false
+}

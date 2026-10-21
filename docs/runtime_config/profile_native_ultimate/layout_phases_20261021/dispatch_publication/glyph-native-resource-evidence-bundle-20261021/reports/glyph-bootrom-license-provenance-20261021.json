@@ -1,0 +1,139 @@
+{
+  "kind": "OFFICIAL_RP2040_ROM_PRIVATE_EVIDENCE_LICENSE_AND_PROVENANCE_SUPPLEMENT",
+  "entries": {
+    "b0": {
+      "source_commit": "c09c7f08550e8a36fc38dc74f8873b9576de99eb",
+      "official_release_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b0/b0.elf",
+      "files": {
+        "/private/tmp/glyph-bootrom-b0-LICENSE.TXT": {
+          "bytes": 1638,
+          "sha256": "78a0e1a470fc8d6380142ba80e854baf15f5b452b976a38d3c7051be6d022179",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/c09c7f08550e8a36fc38dc74f8873b9576de99eb/LICENSE.TXT"
+        },
+        "/private/tmp/glyph-bootrom-b0-mufplib.S": {
+          "bytes": 31632,
+          "sha256": "01fc6d156a18fd8ee2d99b11024db2ba6c54921979523bc7a16977b28300ea06",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/c09c7f08550e8a36fc38dc74f8873b9576de99eb/bootrom/mufplib.S"
+        },
+        "/private/tmp/glyph-bootrom-b0.elf": {
+          "bytes": 176164,
+          "sha256": "0a0415656d76479b46daefe7460df2576a18e79cfae29f54b625af178a9e9085",
+          "official_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b0/b0.elf",
+          "relationship": "downloaded official ELF"
+        },
+        "/private/tmp/glyph-bootrom-b0.disassembly.txt": {
+          "bytes": 262123,
+          "sha256": "92c8bc69fcaef13ec5db0b21a1866300449db40fb2cdb21d6e19ee7072754481",
+          "official_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b0/b0.elf",
+          "relationship": "local static disassembly of downloaded official ELF"
+        },
+        "/private/tmp/glyph-bootrom-b0-misc.S": {
+          "bytes": 5405,
+          "sha256": "4ac1218a8e63b289922a8b7b30cf4b0580b82d0c0f6394fe0aec7cbd0baa40e7",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/c09c7f08550e8a36fc38dc74f8873b9576de99eb/bootrom/bootrom_misc.S"
+        }
+      }
+    },
+    "b1": {
+      "source_commit": "ad55537bf35e332503b950d6951c41bcb8a7954f",
+      "official_release_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b1/b1.elf",
+      "files": {
+        "/private/tmp/glyph-bootrom-b1-LICENSE.TXT": {
+          "bytes": 1669,
+          "sha256": "69f1e3f7bd45c28982b321076f6065bc6a37eaafeaf3b0c241611cec8a932555",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ad55537bf35e332503b950d6951c41bcb8a7954f/LICENSE.TXT"
+        },
+        "/private/tmp/glyph-bootrom-b1-mufplib.S": {
+          "bytes": 32519,
+          "sha256": "8ec8bc2e32f4e351f741ee4f49ee67438f1bf74d214a8e11f2309c5d79710851",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ad55537bf35e332503b950d6951c41bcb8a7954f/bootrom/mufplib.S"
+        },
+        "/private/tmp/glyph-bootrom-b1-mufplib-double.S": {
+          "bytes": 54383,
+          "sha256": "6b99cfddf585a66c22d373cf961fc8b7a1af204d3711c1a65ff1657baa5a10ee",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ad55537bf35e332503b950d6951c41bcb8a7954f/bootrom/mufplib-double.S"
+        },
+        "/private/tmp/glyph-bootrom-b1.elf": {
+          "bytes": 233344,
+          "sha256": "53b2723b590207c678c5a52c095e9150d2afa60e7f66a1c26d188ff59d29c778",
+          "official_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b1/b1.elf",
+          "relationship": "downloaded official ELF"
+        },
+        "/private/tmp/glyph-bootrom-b1.disassembly.txt": {
+          "bytes": 297088,
+          "sha256": "2ed5c16628bde9546bd4bed73263afe63e0060646dfe15d0bac233fa4d4fc350",
+          "official_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b1/b1.elf",
+          "relationship": "local static disassembly of downloaded official ELF"
+        },
+        "/private/tmp/glyph-bootrom-b1-misc.S": {
+          "bytes": 5382,
+          "sha256": "7f0b77643828cf9465f9f45c8cbbad55b2afefc7b77195109e6e7e533184c754",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ad55537bf35e332503b950d6951c41bcb8a7954f/bootrom/bootrom_misc.S"
+        }
+      }
+    },
+    "b2": {
+      "source_commit": "ef22cd8ede5bc007f81d7f2416b48db90f313434",
+      "official_release_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b2/b2.elf",
+      "files": {
+        "/private/tmp/glyph-bootrom-b2-LICENSE.TXT": {
+          "bytes": 1669,
+          "sha256": "69f1e3f7bd45c28982b321076f6065bc6a37eaafeaf3b0c241611cec8a932555",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/LICENSE.TXT"
+        },
+        "/private/tmp/glyph-bootrom-b2-mufplib.S": {
+          "bytes": 32563,
+          "sha256": "3310e93e3b2f1f8a5a4278e8c22697ed247a4867622d9b9f43ece5a4379c725b",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/bootrom/mufplib.S"
+        },
+        "/private/tmp/glyph-bootrom-b2-mufplib-double.S": {
+          "bytes": 54634,
+          "sha256": "3101f080a4bdb176de7d19fb7637c669920dc322ca2cfc394e403ef89a4b6d23",
+          "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/bootrom/mufplib-double.S"
+        },
+        "/private/tmp/glyph-bootrom-b2.elf": {
+          "bytes": 231324,
+          "sha256": "3a3c4c617d83bc9b910a6fa7bfdffa11ce26ff89370271d861507be821cc49aa",
+          "official_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b2/b2.elf",
+          "relationship": "downloaded official ELF"
+        },
+        "/private/tmp/glyph-bootrom-b2.disassembly.txt": {
+          "bytes": 296727,
+          "sha256": "cfb393705853472ab08e78ff93e24534842bc5a05763e78209cc50b42b471372",
+          "official_elf_url": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b2/b2.elf",
+          "relationship": "local static disassembly of downloaded official ELF"
+        }
+      }
+    },
+    "b2_source_copies": {
+      "/private/tmp/glyph-bootrom-bootrom-program_flash_generic.c": {
+        "bytes": 16647,
+        "sha256": "8185c6a08d5beb062a86f3ecaac5afcce76ee21976ed7fc89e15d8ee8ed55e8f",
+        "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/bootrom/program_flash_generic.c"
+      },
+      "/private/tmp/glyph-bootrom-bootrom-bootrom_misc.S": {
+        "bytes": 5382,
+        "sha256": "7f0b77643828cf9465f9f45c8cbbad55b2afefc7b77195109e6e7e533184c754",
+        "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/bootrom/bootrom_misc.S"
+      },
+      "/private/tmp/glyph-bootrom-bootrom-bootrom_rt0.S": {
+        "bytes": 15015,
+        "sha256": "d8df6ad4e3063c34eae9d8eb785c25716e4e23aa8463494cc07e0c64e7833ae1",
+        "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/bootrom/bootrom_rt0.S"
+      },
+      "/private/tmp/glyph-bootrom-bootrom-bootrom_main.c": {
+        "bytes": 9967,
+        "sha256": "b92f6f87976623ea45d7b9c0311c19b98f5609551032719b02192cbd3cda9776",
+        "source_url": "https://raw.githubusercontent.com/raspberrypi/pico-bootrom-rp2040/ef22cd8ede5bc007f81d7f2416b48db90f313434/bootrom/bootrom_main.c"
+      }
+    }
+  },
+  "notices": {
+    "/private/tmp/glyph-bootrom-NOTICES-20261021.txt": {
+      "bytes": 11373,
+      "sha256": "ac722815a1675f7bd60d662128cb6bb10715e65aef8fc991a4cb990c0300f76d"
+    }
+  },
+  "license_scope": "Repository LICENSE excludes mufplib.S / mufplib-double.S; their full original source headers are retained separately and in NOTICES. No public redistribution or SDK mutation performed.",
+  "existing_hashed_manifests": "Unchanged; this is an additive provenance supplement."
+}

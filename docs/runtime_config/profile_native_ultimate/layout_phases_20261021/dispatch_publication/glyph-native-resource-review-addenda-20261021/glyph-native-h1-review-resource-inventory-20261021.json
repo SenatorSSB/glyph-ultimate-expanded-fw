@@ -1,0 +1,613 @@
+{
+  "schema_name": "glyph_finite_independent_h1_source_resource_inventory",
+  "schema_version": 1,
+  "recorded_utc": "2026-10-21T10:13:46.814879+00:00",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high",
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "finite_role_complete": true,
+  "scope": "Frozen H1 source review and complete constrained branch-class inventory; no final repaired source/ELF acceptance",
+  "candidate": "a288908de83e75997cd7459b4abe607ee968bb60",
+  "tree": "d0b92601a26ea1523ffb4fff4b1c2c663b719791",
+  "historical_built_candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "historical_elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "canonical_local_readback": "df5fbcd019dfd7e72b897b7d5a43e6c142ecd665",
+  "live_remote_verification": "Root-owned live df5fbcd pin supplied; this read-only reviewer did not contact GitHub or claim independent live truth",
+  "production_delta": [
+    "HAL/pico/src/core/ProfileStore.cpp",
+    "include/core/ProfileStore.hpp"
+  ],
+  "h1_source_verdict": "NO_MATERIAL_DEFECT_FOUND_IN_FROZEN_H1_DELTA",
+  "whole_resource_gate": "OPEN_FINAL_ALL_PATH_ELF_PROOF_REQUIRED",
+  "h1_final_build": "NOT_RUN_NOT_CLAIMED",
+  "hardware": "NO_DEVICE_APPROVAL_NO_ACTION_NO_ACCEPTANCE",
+  "independent_host_test": {
+    "command": "GLYPH_ARDUINOPICO_FRAMEWORK=/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico PYTHONDONTWRITEBYTECODE=1 python3 tools/fixtures/profile_native_ultimate/run_gc_lifetime.py --output-dir /private/tmp/glyph-native-h1-review-gc-20261021",
+    "result": "PASS_ASAN_UBSAN_ACTUAL_PINNED_NOR_LITTLEFS",
+    "scope": "GC reset/foreign directories/protected records/16 faults/handles/128-129 budget/no-Capacity-after-Full/same-token retry",
+    "excluded": "No new orphan/power-loss images, broad matrix or target build/measurement"
+  },
+  "h1_object_facts": {
+    "classification": "SOURCE_PINNED_RELOCATABLE_O3_NOT_FINAL_ELF",
+    "source_hash_match": true,
+    "header_hash_match": true,
+    "Admit_bytes": 16,
+    "CollectGarbage_bytes": 48,
+    "EvaluateAdmission_bytes": 120,
+    "Capacity_bytes": 320,
+    "static_Search_bytes": 40,
+    "no_semantic_change": "Exact Capacity formula moved into noinline helper after successful same GC status check; per-iteration full reset and every-exit cleanup preserve Search ownership"
+  },
+  "inventory": [
+    {
+      "id": "STARTUP",
+      "phase": "reset, C++ constructors and ordinary SDK main",
+      "source": [
+        "config/glyph/common/src/config.cpp:170",
+        "HAL/pico/src/core/Persistence.cpp:120",
+        "HAL/pico/src/core/NativeTargetMetricsEntry.S"
+      ],
+      "invariant": "Persistence mounts with LittleFSConfig(false); no automatic formatting is inferred. External main paint and core1 adapter do not observe earlier startup. Bootloader MB1/DMA route terminates before ordinary persistence.",
+      "final_proof_obligation": "Retain reset/linker/main/constructor stack proof separately from post-main scan; account mount/allocation and display startup, actual 2048 regions and wrapper ABI. No startup or stack change is allowed.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "BOOT-PREFLIGHT",
+      "phase": "normal/recovery Begin common checks",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:521",
+        "HAL/pico/src/core/ProfileStore.cpp:547",
+        "HAL/pico/src/core/ProfileStore.cpp:641"
+      ],
+      "invariant": "Reset owned directory/active state; required format, geometry/control presence/load, expected incarnation and legacy authority checks precede writes.",
+      "final_proof_obligation": "Measure both Begin entries and actual preparation/execution siblings after repair. Preparation must return before mutation; scalar plan must not borrow an expired automatic. Include geometry lfs_fs_size traversal and decode/hash alternatives.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "BOOT-PHASE1",
+      "phase": "control phase1 resume",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:611",
+        "HAL/pico/src/core/ProfileStore.cpp:662"
+      ],
+      "invariant": "Normal resume calls InitializeV2 directly. Recovery refuses without root/control writes. InitializeV2 repeats its original geometry check at the original reached point.",
+      "final_proof_obligation": "Separate root0/root1/control2 publication and readback/failure maxima, with first mutating operation allowed pending consistency. Preserve all operation order/flags/early returns.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "BOOT-PHASE2",
+      "phase": "healthy or degraded phase2",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:684",
+        "HAL/pico/src/core/ProfileStore.cpp:801"
+      ],
+      "invariant": "Load roots, generation/high-water/incarnation and SameDirectory checks are read-only. One invalid root causes read-only recovery. A healthy Begin does not inherently clear LittleFS move/orphan state.",
+      "final_proof_obligation": "Bound root reads/decode and SameDirectory SHA independently; retain pending state at first later mutation. Do not add subsequent write recovery merely because boot was read-only.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "BOOT-PHASE3",
+      "phase": "uncertain control phase3",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:674",
+        "HAL/pico/src/core/ProfileStore.cpp:937"
+      ],
+      "invariant": "Recovery calls LoadDirectory then remains read-only; ordinary Begin calls ReconcileTransaction. Reconcile may write control2 or publish an aborted identity/high-water checkpoint.",
+      "final_proof_obligation": "Include successful-already-published, aborted-next-generation, unmatched/failure branches. Phase3 reconciliation must remain after original prior checks and may be the first mutation.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "BOOT-FRESH-UPGRADE",
+      "phase": "no v2 control / fresh / v1 legacy upgrade",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:701",
+        "HAL/pico/src/core/ProfileStore.cpp:728",
+        "HAL/pico/src/core/ProfileStore.cpp:747",
+        "HAL/pico/src/core/ProfileStore.cpp:784"
+      ],
+      "invariant": "Missing control plus any v2 root, required-format>=2, invalid v1 pairs, expected-incarnation mismatch or recovery/fenced migration must retain original refusal/read-only behavior. Accepted upgrade validates all retained dependencies before write.",
+      "final_proof_obligation": "Bound legacy DecodeLegacy, ReadProfile/current+previous, HashMessage and Receipt as separate pre-write paths; preserve initial admission then control1, _v2, root0/root1/control2/LoadDirectory.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CONFIG-LOAD",
+      "phase": "Config current/prior/legacy load, decode and validation",
+      "source": [
+        "HAL/pico/src/core/Persistence.cpp:370",
+        "HAL/pico/src/core/Persistence.cpp:497",
+        "include/core/RecoveryInitialization.hpp:19"
+      ],
+      "invariant": "Config candidate is static; CheckedStorageFile and ConfigValidationError are automatic. Ordinary read/validation/close paths precede publication to caller.",
+      "final_proof_obligation": "Include every boot/recovery/Configurator/query/mode caller prefix and protobuf Stream callbacks, validator/error, close/destructor error paths. Existing .su LoadConfigChecked456 is not a whole-route bound.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CONFIG-PRIOR-RESTORE",
+      "phase": "LoadConfigChecked PriorCompact Rename",
+      "source": [
+        "HAL/pico/src/core/Persistence.cpp:429",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:534",
+        "include/core/ModeSelectionTransaction.hpp:41"
+      ],
+      "invariant": "Explicit close precedes Rename(prior,current), but the LoadConfigChecked automatic frame remains retained. This can be the first filesystem mutation before Save and is reachable even from the recovery load helper.",
+      "final_proof_obligation": "Dedicated broad-FS forceconsistency/deorphan/MOVE + metadata-write and IRQ bound; do not assume Save lifetime repair removes this frame. Preserve existing uncertainty/generation/result behavior. No new edit scope is inferred.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-GENERATION",
+      "phase": "SaveConfigIfGenerationMatches durable fence",
+      "source": [
+        "HAL/pico/src/core/Persistence.cpp:172"
+      ],
+      "invariant": "Fence, RAM generation, availability, file selection, CheckSavedConfig/seek/header/read/close then durable CRC comparison precede Save; all writers synchronous core0.",
+      "final_proof_obligation": "Verify file lifetime actually ends before Save in new source/ELF; exact constructor failure, explicit-close and destructor-fallback equivalence; generation/fence conflicts and no interposed callback/yield.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-STAGE",
+      "phase": "SaveConfig size, remove temp, open/write/encode/CRC/header/sync/close",
+      "source": [
+        "HAL/pico/src/core/Persistence.cpp:194",
+        "HAL/pico/include/core/CheckedStorageFile.hpp:9"
+      ],
+      "invariant": "Encoding-size precedes temp Remove. Temp remove/open can be the first mutation; even absent Remove enters LFS consistency before lookup. Staging has one checked file and exact error cleanup.",
+      "final_proof_obligation": "Measure size, initial remove, constructor/open, body encoder, CRC read, sync/close separately under new raw-slot owner and phase siblings. Check all before/after fault/lost-ack branches, failed constructor and fallback closes; no second live raw slot.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-VERIFY",
+      "phase": "independent reopen and deterministic reencode compare",
+      "source": [
+        "HAL/pico/src/core/Persistence.cpp:232",
+        "HAL/pico/src/core/Persistence.cpp:60"
+      ],
+      "invariant": "Read-open/check/seek/compare/checked-close is independent of staging, and its automatic file lifetime is nonoverlapping.",
+      "final_proof_obligation": "Bound nanopb compare callback -> checked read with actual File slot and caller phase. Check every return resets slot/metadata and compares unchanged bytes; sequential stages are maxima, not additions.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CONFIG-SAVE-PUBLISH",
+      "phase": "current stat/prior remove/rotation/publication/uncertainty/rollback",
+      "source": [
+        "HAL/pico/src/core/Persistence.cpp:240"
+      ],
+      "invariant": "Stat, remove prior, rename current to prior, set pending metadata, rename temp to current; exact authenticated readback may clear uncertainty; failed publication may rollback.",
+      "final_proof_obligation": "Bound Remove, each Rename, readback/check/reencode, rollback and close/destructor alternatives. Preserve _config_generation/_mutation_fenced/_pending fields and statuses. Earlier successful mutation can clear boot pending state, but metadata relocation/repair generated later still needs source-specific treatment.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "MODE-DESTINATION",
+      "phase": "selected backend mode persistence",
+      "source": [
+        "config/glyph/common/src/config.cpp:141",
+        "include/core/ModeSelectionTransaction.hpp:41",
+        "src/core/mode_selection.cpp"
+      ],
+      "invariant": "Load candidate, locate backend, unchanged/refusal, capture generation, field edits, validate, Save then scratch/reboot. Configurator/Unspecified excluded; physical backends remain admitted.",
+      "final_proof_obligation": "Use 456 safe all-backend IRQ union (512 rounding optional), or a proved tighter route. Conditional header permission requires exact post-Persistence feasible overflow with validation Error contributor; 456 alone is not a feasible lower witness. Existing NES+serial360 witness must be paired with simultaneously unmasked foreground>1688.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "MIGRATION-CAPTURE",
+      "phase": "legacy snapshot capture and source identity",
+      "source": [
+        "config/glyph/common/src/config.cpp:247",
+        "HAL/pico/src/core/Persistence.cpp:279",
+        "HAL/pico/src/core/Persistence.cpp:288",
+        "HAL/pico/src/core/Persistence.cpp:77",
+        "HAL/pico/src/core/Persistence.cpp:92"
+      ],
+      "invariant": "Read/check/hash existing config; if absent snapshot, capacity admission precedes temp Remove/copy/hash/Rename/identity check. Existing snapshot takes identity-only path.",
+      "final_proof_obligation": "Include CaptureLegacySource608 and hash_file656 object frames only at their actual calls, copy input/output simultaneous handles, first-write consistency and all failure/uncertainty exits. No extra snapshot/format/erase is authorized.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "MIGRATION-IMPORT",
+      "phase": "ImportLegacyStream admission, two streamed records and directory",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:1737",
+        "HAL/pico/src/core/Persistence.cpp:333",
+        "config/glyph/common/src/config.cpp:254"
+      ],
+      "invariant": "Hash source, replay/migration-state checks, Admit, per-profile reader/validate/record publication, receipt/compact digest then directory publication. Portable ImportLegacy is a separate API, not assumed a linked device caller.",
+      "final_proof_obligation": "Account boot setup/lambda/ReadLegacyProfile stream and all profile publication paths; source SHA/hash/receipt maxima separate from FS maxima. Determine final linked reachability of portable compatibility entry before inclusion/exclusion.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "MIGRATION-COMPLETE",
+      "phase": "compact receipt/Config save/CompleteMigration",
+      "source": [
+        "config/glyph/common/src/config.cpp:231",
+        "config/glyph/common/src/config.cpp:274",
+        "config/glyph/common/src/config.cpp:289",
+        "HAL/pico/src/core/ProfileStore.cpp:1695",
+        "HAL/pico/src/core/ProfileStore.cpp:1720",
+        "HAL/pico/src/core/ProfileStore.cpp:1870"
+      ],
+      "invariant": "Boot may save compact config or acceptance marker, verify source/profile payloads, then publish migration state2; already-state2 returns without write.",
+      "final_proof_obligation": "Separate compact hash/read validation, ordinary Save and CompleteMigration directory write prefixes; include receipt mismatch, migration fence, Config current/prior/recovery cases.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "DISPATCH-RX",
+      "phase": "Receive/identity/CAS/admission preparation",
+      "source": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:465",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:474",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:534"
+      ],
+      "invariant": "IncomingScope/RX lease remains owned across Receive, Dispatch and Respond; request/response/frame are separate static state. Preparation performs durable load/replay/CAS before mutation.",
+      "final_proof_obligation": "Verify true returned siblings in final source/ELF rather than nested wrapper alone. RX decode/preparation/identity digest/load and operation execution cannot be blindly added; preserve FaultScope/tickets/trace/reset at effective original boundaries.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "STORE-GC",
+      "phase": "GC protected-root/no-garbage/enumerate/remove/budget",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:1153",
+        "HAL/pico/src/core/ProfileStore.cpp:1299",
+        "HAL/pico/src/core/CheckedStorage.cpp:163"
+      ],
+      "invariant": "Early readiness/uncertainty/migration/protected-root checks precede Search acquisition. Directory scan closes before removal. First eligible unprotected root regular .bin/.tmp is removed; directories/skipped names retained. Each iteration and operation exit reset all Search bytes; 128 removals returns Full.",
+      "final_proof_obligation": "Include enumeration callback sscanf/snprintf/libc and protected checks as separate read-only maximum; include remove/forceconsistency/deorphan/MOVE/compaction maximum with GC48. No Capacity frame during GC. No mutation after Full/failure. New independent host fixture PASS covers these invariants.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "STORE-CAPACITY",
+      "phase": "post-GC EvaluateAdmission and STATUS Capacity",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:1185",
+        "HAL/pico/src/core/ProfileStore.cpp:1354",
+        "HAL/pico/src/core/ProfileStore.cpp:1361",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:452"
+      ],
+      "invariant": "EvaluateAdmission runs only after GC Ok, with unchanged formula/geometry/protected/fixed/reserve accounting. Capacity traverses actual FS then bounded union records; STATUS uses its own capacity wrapper.",
+      "final_proof_obligation": "Account EvaluateAdmission120+Capacity320+actual child/caller, not GC+Evaluate frames together; all protected record Stat and filesystem/CTZ reads, uint64 helpers, LoadProtectedRoot and errors. Source pinning proves object correspondence only; final linked ELF required.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "STORE-FIRST-RECORD",
+      "phase": "CREATE/UPDATE/DUPLICATE and imported first record",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:988",
+        "HAL/pico/src/core/ProfileStore.cpp:1020",
+        "HAL/pico/src/core/ProfileStore.cpp:1459",
+        "HAL/pico/src/core/ProfileStore.cpp:1488",
+        "HAL/pico/src/core/ProfileStore.cpp:1538"
+      ],
+      "invariant": "Preparation validation/encode ends before publication. CREATE/UPDATE first record may be first write after read-only GC/no garbage. DUPLICATE retains caller32 over Create and preserves candidate lease.",
+      "final_proof_obligation": "Bound Open(create/truncate), Write, Sync, Close, readback and Rename separately, with pending MOVE/orphan at first actual mutator. GC success alone does not prove pending state cleared when no deletion occurred. Preserve unknown outcome and exact immutable payload owners.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "STORE-DIRECTORY",
+      "phase": "first directory and later directory publication",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:838",
+        "HAL/pico/src/core/ProfileStore.cpp:1413",
+        "HAL/pico/src/core/ProfileStore.cpp:1446",
+        "HAL/pico/src/core/ProfileStore.cpp:1551",
+        "HAL/pico/src/core/ProfileStore.cpp:1575",
+        "HAL/pico/src/core/ProfileStore.cpp:1596"
+      ],
+      "invariant": "Rename/Reorder/Delete have no preceding record; control3 can be first write. Create/Update/Duplicate directory occurs after successful record. Sequence is control3 -> parity root -> RAM authority/protected invalidation -> control2.",
+      "final_proof_obligation": "Cover each retained metadata caller, WriteControl/PublishDirectory/Publish final executor; preserve Start/name/CAS/refused semantics. Pending state cleared by a successful earlier mutation is not added again merely from boot; include relocation-created recovery separately.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "STORE-RECONCILE",
+      "phase": "uncertainty/query/replay/abort reconciliation",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:937",
+        "HAL/pico/src/core/ProfileStore.cpp:1372",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:681"
+      ],
+      "invariant": "Query/mutation may reconcile both store and Config before admission. Already-published control2 repair and aborted checkpoint publication differ. Exact replay/conflict can return without new operation.",
+      "final_proof_obligation": "Bound pre-dispatch ReconcileTransaction/LoadDirectory/SameDirectory/control write and ReconcileConfig->LoadConfigChecked; retain normal/recovery differences, token/high-water/receipt/fence order and error statuses.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "STORE-READ-REFERENCE",
+      "phase": "READ/health/status dependency/reference SET",
+      "source": [
+        "HAL/pico/src/core/ProfileStore.cpp:1030",
+        "HAL/pico/src/core/ProfileStore.cpp:1132",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:586",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:628",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:737"
+      ],
+      "invariant": "READ record wire lease stays through response encode; Health uses candidate scratch. Reference SET validates chosen profile and Config then SaveConfigIfGenerationMatches with existing static validation error.",
+      "final_proof_obligation": "Bound record Stat/open/read/close, native scan/decode/validation and legacy alternatives, fallback prior revision, checked-reference Save and Config status load. Read/response encode does not carry FS write frames.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "LEGACY-CONFIGURATOR",
+      "phase": "legacy GET/SET/device-info/unknown/reboot responses",
+      "source": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:296",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:317",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:334",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp:924",
+        "HAL/pico/src/core/Persistence.cpp:462"
+      ],
+      "invariant": "Whole-Config SET has independent decode/error and automatic validation_error, profile engine checks then Save. GET config uses LoadConfigRaw/Stream; unknown formatting is separate helper. Retired fault requests remain inert in production.",
+      "final_proof_obligation": "Include retained HandleSetConfig caller during new Save phases; PriorCompact load before SET and error formatting/TX need separate maxima. Include real transport/yield/USB guard scopes rather than transferring filesystem-specific mutex assumptions blindly.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "NATIVE-ACTIVATION",
+      "phase": "profile selection, native prepare/copy/bind/context digest",
+      "source": [
+        "src/core/mode_selection.cpp:130",
+        "HAL/pico/src/core/ProfileStore.cpp:1086",
+        "src/modes/Ultimate.cpp:782",
+        "src/modes/UltimateNativeProfile.cpp:182"
+      ],
+      "invariant": "Read current then previous fallback; copy candidate to dedicated active, BindOwned, then ContextMatches and latch selected engine. Hash scratch is synchronous core0 and not reentered by IRQ/core1; invalid/native-unavailable output is neutral.",
+      "final_proof_obligation": "Retain exact source/ELF read/decode/PrepareStructure/BodyDigest/CopyProgram/ContextDigest/SetConfig and activation metric paths with their actual callers/IRQ routes. No FS frames remain during later native frame evaluation; unchanged native oracles apply only to unchanged sources.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "NATIVE-FRAME",
+      "phase": "real per-frame preprocess/evaluator",
+      "source": [
+        "src/core/ControllerMode.cpp:9",
+        "src/modes/Ultimate.cpp:795",
+        "src/modes/UltimateNativeEvaluator.cpp:41"
+      ],
+      "invariant": "One remap+ordered SOCD; consume owned published view; FrameState132+context12=144 source aggregate. Evaluator232 compiled frame is a different measurement. Table/rule/effect loops are finite.",
+      "final_proof_obligation": "Bound actual backend SendReport/ControllerMode/Evaluate/direction/helper/IRQ prefix; separate sibling metrics RecordFrame. Preserve all18 frozen family/oracle semantics and no parser/load/status dependency in output hot path.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "IDENTITY-DIAGNOSTIC",
+      "phase": "XInput Poll, parser/digest/snapshot/TX",
+      "source": [
+        "include/core/RuntimeIdentityService.hpp:42",
+        "HAL/pico/src/core/NativeTargetMetrics.cpp:181",
+        "include/core/RuntimeIdentity.hpp"
+      ],
+      "invariant": "Poll is noinline after reports, XInput-only, one try-lock CDC pass, consume<=32, identity16/72 wins; diagnostic16/160 and one admitted write; no blocking Task/flush/retry in pass.",
+      "final_proof_obligation": "Separate parser, Observe/body/context SHA, diagnostic mailbox/snapshot and write maxima; actual outer __usb_mutex suppresses deferred task here but does not mask all IRQs. Generic raw transport prefixes need actual lock/IRQ analysis. Preserve status/wire/parser counters and no new command.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "SCAN",
+      "phase": "post-main own-core stack-write scan/mailboxes",
+      "source": [
+        "HAL/pico/src/core/NativeTargetMetrics.cpp:155",
+        "HAL/pico/src/core/NativeTargetMetrics.cpp:93",
+        "config/glyph/common/src/config.cpp:338",
+        "config/glyph/common/src/config.cpp:438"
+      ],
+      "invariant": "Scan is per-core, bounded chunk, SaveIrq/restore exact state; mailbox word atomic stores/loads are bounded no-retry, no heap/FS. Scan then Publish are partially distinct masking windows.",
+      "final_proof_obligation": "Account ServiceCore/Publish/Now/atomic helper presence and own entry prefix; preserve bottom32 exclusion and 2048 bounds. Watermark/timing remain NOT_MEASURED and cannot close structural gap.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "CORE1",
+      "phase": "setup1/display/control/RGB/metrics",
+      "source": [
+        "config/glyph/common/src/config.cpp:350",
+        "config/glyph/common/src/config.cpp:437"
+      ],
+      "invariant": "Concrete seven modes, SSD1306/Wire1, NEOPIXEL11 and callbacks; no core1 Config writer/ProfileStore/CDC endpoint producer in inspected source. setup and loop sequential.",
+      "final_proof_obligation": "Reuse attributed exact-bcb graph1152 upper only after unchanged source/dependency and final emitted-code correspondence; linker movement alone is not a changed stack. Final stack regions/SIO/DMA/core1 entry must still match.",
+      "status": "EXACT_BCB_GRAPH1152_SAFE_CONSERVATIVE_UPPER_FINAL_CORRESPONDENCE_REQUIRED"
+    },
+    {
+      "id": "LFS-INTERNAL",
+      "phase": "all admitted mutable/read filesystem branches",
+      "source": [
+        "HAL/pico/src/core/CheckedStorage.cpp:77",
+        "SDK LittleFS lfs.c:796",
+        "SDK LittleFS lfs.c:2174",
+        "SDK LittleFS lfs.c:4448"
+      ],
+      "invariant": "Checked storage is same mount. Writable Open/Remove/Rename force consistency before work; read-only Begin need not. forceconsistency demove and deorphan are ordered, but demove dir_commit can itself deorphan on orphaned return. deorphan directly invokes orphaningcommit; repair restart is a loop. Traverse uses explicit fixed depth3 state, not one C frame per directory.",
+      "final_proof_obligation": "For every caller above bound append/compaction/split/relocation, allocator rawtraverse/CTZ, commit callback/prog/flush/CRC and read/erase alternatives at exact same prefix. Handle broad positive-orphan/PENDING_MOVE source predicates; do not add all alternatives or assume every guard simultaneously true. Existing witness proves nested repair compact/program, not deepest target callback/IRQ realization.",
+      "status": "SOURCE_REACHABLE_FINAL_LINKED_BOUND_OPEN"
+    },
+    {
+      "id": "IRQ-ROM",
+      "phase": "unmasked/pre-mask/masked and backend alternatives",
+      "source": [
+        "/private/tmp/glyph-native-irq-rom-upper-proof-20261021.md",
+        "/private/tmp/glyph-native-mode-destination-irq-upper-proof-20261021.md"
+      ],
+      "invariant": "Configurator/recovery FS upper348 incl pads; mode-destination union456 (round512) incl pads; core1 IRQ68. noInterrupts16 prologue can coexist before CPSID; after PRIMASK no new maskable IRQ. Flash SDK40+ROM88=128 below LFS callback is masked alternative.",
+      "final_proof_obligation": "Carry exact source-selected priorities/handlers/class callbacks/endpoint-owner invariants and B0/B1/B2 ROM domain into final ELF. Alarm336, SIO116, hardwareUSB240 are alternatives; SysTick and priority0 GPIO do not mutually nest. Do not stack entire IRQ chains onto masked flash or blindly use a conservative union as feasible overflow witness.",
+      "status": "ATTRIBUTED_EXACT_BCB_ROUTE_CERTIFICATES_FINAL_CORRESPONDENCE_REQUIRED"
+    }
+  ],
+  "partial_accounting_disposition": "Earlier interrupted table retained as partial uncompleted accounting; its totals were not blindly endorsed or promoted into this review. This report independently verifies source branch predicates and H1 object source pins, but supplies no new whole-chain numerical overflow/PASS certificate.",
+  "constraints": {
+    "core0_bytes": 2048,
+    "core1_bytes": 2048,
+    "layout_new_static_max_bytes": 512,
+    "diagnostic_static_max_bytes": 512,
+    "added_static_max_bytes": 12288,
+    "whole_static_max_bytes": 199632,
+    "active_plus_candidate_max_bytes": 7800,
+    "view_max_bytes": 560,
+    "native_local_aggregate_max_bytes": 144,
+    "validation_local_aggregate_max_bytes": 256,
+    "filesystem_bytes": 524288,
+    "reserve_bytes": 16384,
+    "minimum_complete_profiles": 20,
+    "caps_changed": false
+  },
+  "final_gate_checklist": [
+    "Exact final clean SHA/tree and complete source diff within adopted closed scope/conditional activation record",
+    "All31 branch classes closed with actual caller/callee/indirect/IRQ/PRIMASK/ROM paths; sequential alternatives composed by maximum",
+    "Source-proven state predicates distinguish first write/no-garbage/pending recovery/later publication/uncertainty and broad admitted domain",
+    "Both ABI measured layout delta/reset ownership/one raw file slot/all metadata<=512 inside original caps",
+    "All changed-path operation trace/status/generation/fence/receipt/fault/lease negatives plus directly affected consumers pass",
+    "Exact final production O3 build flags/generated/source/dependency/map/ELF/.su correspondence and original stack/static/flash/storage bounds",
+    "Fresh final independent source/resource review and exact UF2/ELF content-addressed custody",
+    "Concrete reviewed candidate hardware packet then direct owner device approval; exact human HEP PASS before integration; no PASS transfer"
+  ],
+  "nonclaims": [
+    "No observed target timing/highwater",
+    "No accepted controller candidate",
+    "No Nunchuk test",
+    "Historical root cause remains UNPROVEN",
+    "No new implementation, source/checker/SDK/Git/canonical/device/network mutation",
+    "No reviewer-of-reviewer acceptance; attributed prior IRQ/core1 proof remains exact-bcb and final source/ELF correspondence is open"
+  ],
+  "concrete_overlimit_source_compositions": [
+    {
+      "label": "boot LoadConfigChecked PriorCompact restore",
+      "prefix": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Persistence::LoadConfigChecked",
+          456
+        ],
+        [
+          "CheckedStorage::Rename",
+          24
+        ],
+        [
+          "lfs_rename",
+          240
+        ]
+      ],
+      "retained_LFS_chain": [
+        [
+          "lfs_fs_deorphan",
+          176
+        ],
+        [
+          "lfs_dir_orphaningcommit",
+          160
+        ],
+        [
+          "lfs_dir_relocatingcommit",
+          136
+        ],
+        [
+          "lfs_dir_splittingcompact.constprop.0",
+          192
+        ],
+        [
+          "lfs_dir_compact",
+          136
+        ],
+        [
+          "lfs_dir_traverse.constprop.0",
+          216
+        ],
+        [
+          "lfs_dir_commit_commit",
+          72
+        ],
+        [
+          "lfs_dir_commitprog",
+          72
+        ],
+        [
+          "LittleFSImpl::lfs_flash_prog",
+          24
+        ]
+      ],
+      "foreground_before_noInterrupts_bytes": 2088,
+      "foreground_with_premask16_bytes": 2104,
+      "budget_bytes": 2048,
+      "over_budget_before_IRQ_bytes": 40,
+      "truth": "SOURCE_FEASIBLE_EXACT_BCB_LINKED_RETAINED_CHAIN_NOT_OBSERVED_TARGET_PEAK",
+      "predicate": "Mountable admitted filesystem with valid named Config/source files and positive orphan repair affecting an adequately populated metadata pair; compaction traversal fills program cache and reaches cfg->prog. No pristine-history premise is allowed. No new witness image was generated; existing host orphan witness proves repair/compact/program, not this entire target chain or deepest leaf.",
+      "exactness": "All fixed retained prologues and call edges from exact bcb ELF; source/header inputs unchanged at H1 for these routes. lfs_remove/lfs_rename inline forceconsistency, so standalone forceconsistency64 is NOT added. No IRQ, padding, ROM child, bd_prog or bd_flush sibling frame is used to establish these foreground over-budget compositions."
+    },
+    {
+      "label": "boot CaptureLegacySource first temp Remove",
+      "prefix": [
+        [
+          "main",
+          48
+        ],
+        [
+          "setup",
+          136
+        ],
+        [
+          "Persistence::CaptureLegacySource",
+          608
+        ],
+        [
+          "CheckedStorage::Remove",
+          48
+        ],
+        [
+          "lfs_remove",
+          136
+        ]
+      ],
+      "retained_LFS_chain": [
+        [
+          "lfs_fs_deorphan",
+          176
+        ],
+        [
+          "lfs_dir_orphaningcommit",
+          160
+        ],
+        [
+          "lfs_dir_relocatingcommit",
+          136
+        ],
+        [
+          "lfs_dir_splittingcompact.constprop.0",
+          192
+        ],
+        [
+          "lfs_dir_compact",
+          136
+        ],
+        [
+          "lfs_dir_traverse.constprop.0",
+          216
+        ],
+        [
+          "lfs_dir_commit_commit",
+          72
+        ],
+        [
+          "lfs_dir_commitprog",
+          72
+        ],
+        [
+          "LittleFSImpl::lfs_flash_prog",
+          24
+        ]
+      ],
+      "foreground_before_noInterrupts_bytes": 2160,
+      "foreground_with_premask16_bytes": 2176,
+      "budget_bytes": 2048,
+      "over_budget_before_IRQ_bytes": 112,
+      "truth": "SOURCE_FEASIBLE_EXACT_BCB_LINKED_RETAINED_CHAIN_NOT_OBSERVED_TARGET_PEAK",
+      "predicate": "Mountable admitted filesystem with valid named Config/source files and positive orphan repair affecting an adequately populated metadata pair; compaction traversal fills program cache and reaches cfg->prog. No pristine-history premise is allowed. No new witness image was generated; existing host orphan witness proves repair/compact/program, not this entire target chain or deepest leaf.",
+      "exactness": "All fixed retained prologues and call edges from exact bcb ELF; source/header inputs unchanged at H1 for these routes. lfs_remove/lfs_rename inline forceconsistency, so standalone forceconsistency64 is NOT added. No IRQ, padding, ROM child, bd_prog or bd_flush sibling frame is used to establish these foreground over-budget compositions."
+    }
+  ],
+  "additional_scope_findings": [
+    {
+      "method": "Persistence::LoadConfigChecked",
+      "disposition": "OUTSIDE_CURRENT_PERSISTENCE_AMENDMENT_NO_EDIT_AUTHORITY",
+      "bounded_phase_hypothesis": "A returning checked-load preparation phase owns the unchanged automatic CheckedStorageFile and ConfigValidationError through exact checked close/destructor; only after it returns may the orchestration perform the SAME prior->current Rename then SAME candidate/config_generation publication. Carry only owned scalar source/CRC/result metadata and the existing static candidate. No raw File-slot conversion, new Config buffer, reordered read/validation/close/publication or changed recovery semantics."
+    },
+    {
+      "method": "Persistence::CaptureLegacySource",
+      "disposition": "OUTSIDE_CURRENT_PERSISTENCE_AMENDMENT_NO_EDIT_AUTHORITY",
+      "bounded_phase_hypothesis": "Retire unchanged source-check/length/hash/capacity preparation before SAME first temp Remove; isolate existing copy_checked_file automatic input/output lifetime from outer capture orchestration and later hash/publication checks using actual returned synchronous phases. Preserve all byte copy/hash/readback/fence and uncertainty order. No load/migration File workspace conversion or new snapshot/storage semantics. Further exact source/ELF validation is needed because capture hash/read/copy branches have distinct large retained frames."
+    }
+  ]
+}

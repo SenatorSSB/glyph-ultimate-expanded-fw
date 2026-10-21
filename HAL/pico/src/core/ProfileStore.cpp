@@ -258,6 +258,65 @@ namespace {
         ProfileStoreIoStage *stage;
     };
     PreparedPublication publishing{};
+    // Existing owned publication buffers, shared only by synchronous phases.
+    uint8_t control_publication_wire[kDirectoryWireBytes + 16];
+    uint8_t directory_publication_wire[kDirectoryWireBytes];
+    char directory_publication_path[32], directory_publication_temp[32];
+    uint8_t initialize_root_wire[kDirectoryWireBytes];
+
+    Result publication_result;
+    __attribute__((noinline)) void ExecutePublication() {
+        static uint8_t readback[kMaxRecordWireBytes];
+        if (publishing.stage)
+            *publishing.stage = ProfileStoreIoStage::None;
+        if (publishing.length > sizeof(readback)) {
+            std::memset(&publishing, 0, sizeof(publishing));
+            publication_result = { Outcome::Failed, 0, 0 };
+            return;
+        }
+        // C++17 constructs returned PODs directly in fixed scratch. Publication
+        // inputs are reset each call and cleared on every exit. No callback
+        // recursively enters the synchronous core0 store/publication path.
+        auto &r = publication_result;
+        ::new (&r) Result(publishing.storage->CheckedWrite(publishing.tmp, publishing.bytes, publishing.length, publishing.kind));
+        if (!r) {
+            if (publishing.stage) {
+                *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publishing.storage->LastFailure());
+                if (*publishing.stage == ProfileStoreIoStage::None)
+                    *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordTempWrite);
+            }
+            std::memset(&publishing, 0, sizeof(publishing));
+            return;
+        }
+        ::new (&r) Result(publishing.storage->CheckedRead(publishing.tmp, readback, publishing.length, publishing.kind));
+        if (!r) {
+            if (publishing.stage) {
+                *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publishing.storage->LastFailure());
+                if (*publishing.stage == ProfileStoreIoStage::None)
+                    *publishing.stage = publishing.kind == Kind::Root
+                                 ? ProfileStoreIoStage::DirectoryTempRead
+                                 : ProfileStoreIoStage::RecordTempRead;
+            }
+            std::memset(&publishing, 0, sizeof(publishing));
+            return;
+        }
+        if (std::memcmp(publishing.bytes, readback, publishing.length) != 0) {
+            if (publishing.stage)
+                *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordVerify);
+            std::memset(&publishing, 0, sizeof(publishing));
+            publication_result = { Outcome::Failed, 0, 0 };
+            return;
+        }
+        ::new (&r) Result(publishing.storage->CheckedRename(publishing.tmp, publishing.dest, publishing.kind));
+        if (!r && publishing.stage)
+            *publishing.stage = ProfileStoreStage(
+                publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory
+                                : ProfileStorePublicationKind::Record,
+                ProfileStoreIoStage::RecordRename
+            );
+        std::memset(&publishing, 0, sizeof(publishing));
+        return;
+    }
     __attribute__((always_inline)) inline Result Publish(
         ProfileStoreStorage &s,
         const char *tmp,
@@ -268,57 +327,10 @@ namespace {
         ProfileStoreIoStage *stage
     ) {
         publishing = {&s, tmp, dest, b, n, k, stage};
-        static uint8_t readback[kMaxRecordWireBytes];
-        if (publishing.stage)
-            *publishing.stage = ProfileStoreIoStage::None;
-        if (publishing.length > sizeof(readback)) {
-            std::memset(&publishing, 0, sizeof(publishing));
-            return { Outcome::Failed, 0, 0 };
-        }
-        const auto publication = publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory
-                                                 : ProfileStorePublicationKind::Record;
-        // C++17 constructs returned PODs directly in fixed scratch. Publication
-        // inputs are reset each call and cleared on every exit. No callback
-        // recursively enters the synchronous core0 store/publication path.
-        static Result r;
-        ::new (&r) Result(publishing.storage->CheckedWrite(publishing.tmp, publishing.bytes, publishing.length, publishing.kind));
-        if (!r) {
-            if (publishing.stage) {
-                *publishing.stage = ProfileStoreStage(publication, publishing.storage->LastFailure());
-                if (*publishing.stage == ProfileStoreIoStage::None)
-                    *publishing.stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordTempWrite);
-            }
-            std::memset(&publishing, 0, sizeof(publishing));
-            return r;
-        }
-        ::new (&r) Result(publishing.storage->CheckedRead(publishing.tmp, readback, publishing.length, publishing.kind));
-        if (!r) {
-            if (publishing.stage) {
-                *publishing.stage = ProfileStoreStage(publication, publishing.storage->LastFailure());
-                if (*publishing.stage == ProfileStoreIoStage::None)
-                    *publishing.stage = publication == ProfileStorePublicationKind::Directory
-                                 ? ProfileStoreIoStage::DirectoryTempRead
-                                 : ProfileStoreIoStage::RecordTempRead;
-            }
-            std::memset(&publishing, 0, sizeof(publishing));
-            return r;
-        }
-        if (std::memcmp(publishing.bytes, readback, publishing.length) != 0) {
-            if (publishing.stage)
-                *publishing.stage = ProfileStoreStage(publication, ProfileStoreIoStage::RecordVerify);
-            std::memset(&publishing, 0, sizeof(publishing));
-            return { Outcome::Failed, 0, 0 };
-        }
-        ::new (&r) Result(publishing.storage->CheckedRename(publishing.tmp, publishing.dest, publishing.kind));
-        if (!r && publishing.stage)
-            *publishing.stage = ProfileStoreStage(
-                publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory
-                                : ProfileStorePublicationKind::Record,
-                ProfileStoreIoStage::RecordRename
-            );
-        std::memset(&publishing, 0, sizeof(publishing));
-        return r;
+        ExecutePublication();
+        return publication_result;
     }
+
 }
 
 struct ProfileStore::Directory {
@@ -518,11 +530,8 @@ namespace {
 
 ProfileStore::ProfileStore(ProfileStoreStorage *s) : _storage(s) {}
 
-bool ProfileStore::Begin(uint32_t expected, uint32_t required_root_format) {
-    static MountedStorage storage;
+__attribute__((noinline)) void ProfileStore::PrepareBeginState(uint32_t expected, uint32_t required_root_format, bool recovery) {
     Directory *work = Workspace();
-    if (!_storage)
-        _storage = &storage;
     _directory = &work[0];
     _next = &work[1];
     _other = &work[2];
@@ -535,38 +544,25 @@ bool ProfileStore::Begin(uint32_t expected, uint32_t required_root_format) {
     _root_invalid = false;
     _v2 = false;
     _uncertain = false;
-    _read_only_recovery = false;
-    _recovery_only = false;
+    _read_only_recovery = recovery;
+    _recovery_only = recovery;
     _protected_ready = false;
     _active_id = 0;
     _active_revision = 0;
     _active_native.view.valid = false; _active_native_lease.Release();
+}
+
+bool ProfileStore::Begin(uint32_t expected, uint32_t required_root_format) {
+    static MountedStorage storage;
+    if (!_storage) _storage = &storage;
+    PrepareBeginState(expected, required_root_format, false);
     return ExecuteBootstrap(PrepareBootstrap(false));
 }
 
 bool ProfileStore::BeginRecovery(uint32_t expected, uint32_t required_root_format) {
     static MountedStorage storage;
-    Directory *work = Workspace();
-    if (!_storage)
-        _storage = &storage;
-    _directory = &work[0];
-    _next = &work[1];
-    _other = &work[2];
-    ClearDirectory(*_directory);
-    ClearDirectory(*_next);
-    ClearDirectory(*_other);
-    _expected_incarnation = expected;
-    _required_root_format = required_root_format;
-    _ready = false;
-    _root_invalid = false;
-    _v2 = false;
-    _uncertain = false;
-    _read_only_recovery = true;
-    _recovery_only = true;
-    _protected_ready = false;
-    _active_id = 0;
-    _active_revision = 0;
-    _active_native.view.valid = false; _active_native_lease.Release();
+    if (!_storage) _storage = &storage;
+    PrepareBeginState(expected, required_root_format, true);
     return ExecuteBootstrap(PrepareBootstrap(true));
 }
 
@@ -591,24 +587,28 @@ bool ProfileStore::LoadControl(Directory &seed, uint32_t &phase) const {
 
 // Share the control publication body while ending its preparation phases
 // inside each synchronous caller; no retained control adapter frame.
-__attribute__((always_inline)) inline bool ProfileStore::WriteControl(const Directory &seed, uint32_t phase) {
-    static uint8_t wire[kDirectoryWireBytes + 16];
+__attribute__((noinline)) bool ProfileStore::PrepareControlPublication(const Directory &seed, uint32_t phase) {
+    auto &wire = control_publication_wire;
     if (!EncodeDirectory(seed, wire + 16))
         return false;
     Put32(wire, kControlMagic);
     Put32(wire + 4, phase);
     Put32(wire + 8, kDirectoryWireBytes);
     Put32(wire + 12, Crc32(wire, 12) ^ Crc32(wire + 16, kDirectoryWireBytes));
-    static Result r; ::new (&r) Result(
-        Publish(*_storage, kControlTemp, kControl, wire, sizeof(wire), Kind::Root, &_last_io_stage));
-    if (r.outcome == Outcome::Uncertain)
-        _uncertain = true;
-    return bool(r);
+    publishing = {_storage, kControlTemp, kControl, wire, sizeof(wire), Kind::Root, &_last_io_stage};
+    return true;
+}
+
+__attribute__((always_inline)) inline bool ProfileStore::WriteControl(const Directory &seed, uint32_t phase) {
+    if (!PrepareControlPublication(seed, phase)) return false;
+    ExecutePublication();
+    if (publication_result.outcome == Outcome::Uncertain) _uncertain = true;
+    return bool(publication_result);
 }
 
 // Keep bootstrap publication in its owning Begin frame; decode/hash helpers
 // above remain separate so their scratch ends before any filesystem write.
-__attribute__((always_inline)) inline bool ProfileStore::InitializeV2(const Directory &seed) {
+__attribute__((noinline)) bool ProfileStore::PrepareInitializeV2(const Directory &seed) {
     static CheckedStorage::Geometry geometry; geometry = {};
     if (!_storage->Geometry(geometry) || !geometry.erase_bytes ||
         geometry.free_bytes < kReserve +
@@ -617,20 +617,33 @@ __attribute__((always_inline)) inline bool ProfileStore::InitializeV2(const Dire
         _read_only_recovery = true;
         return false;
     }
-    static uint8_t wire[kDirectoryWireBytes];
+    auto &wire = initialize_root_wire;
     if (!EncodeDirectory(seed, wire))
         return false;
-    for (unsigned slot = 0; slot < 2; ++slot) {
-        static char p[32], t[32];
-        RootPath(p, sizeof(p), slot);
-        RootTemp(t, sizeof(t), slot);
-        static Result r; ::new (&r) Result(Publish(*_storage, t, p, wire, sizeof(wire), Kind::Root, &_last_io_stage));
-        if (!r) {
-            _uncertain = r.outcome == Outcome::Uncertain;
+    return true;
+}
+
+__attribute__((noinline)) void ProfileStore::PrepareInitializedRoot(unsigned slot) {
+    static char p[32], t[32];
+    RootPath(p, sizeof(p), slot);
+    RootTemp(t, sizeof(t), slot);
+    publishing = {_storage, t, p, initialize_root_wire, sizeof(initialize_root_wire), Kind::Root, &_last_io_stage};
+}
+
+__attribute__((always_inline)) inline bool ProfileStore::InitializeV2(const Directory &seed) {
+    static unsigned slot; slot = 0;
+    if (!PrepareInitializeV2(seed)) return false;
+    for (; slot < 2; ++slot) {
+        PrepareInitializedRoot(slot);
+        ExecutePublication();
+        if (!publication_result) {
+            _uncertain = publication_result.outcome == Outcome::Uncertain;
             _read_only_recovery = true;
+            slot = 0;
             return false;
         }
     }
+    slot = 0;
     if (!WriteControl(seed, 2)) {
         _read_only_recovery = true;
         return false;
@@ -793,7 +806,7 @@ __attribute__((noinline)) ProfileStore::BootstrapAction ProfileStore::PrepareBoo
     return BootstrapAction::PublishAndInitialize;
 }
 
-__attribute__((noinline)) bool ProfileStore::ExecuteBootstrap(BootstrapAction action) {
+__attribute__((always_inline)) inline bool ProfileStore::ExecuteBootstrap(BootstrapAction action) {
     switch (action) {
         case BootstrapAction::Complete: return true;
         case BootstrapAction::Refused: return false;
@@ -847,24 +860,26 @@ bool ProfileStore::LoadDirectory() {
     return _ready;
 }
 
+__attribute__((noinline)) bool ProfileStore::PrepareDirectoryPublication(const Directory &next) {
+    if (!_ready || _read_only_recovery || _uncertain || !_v2) return false;
+    if (!EncodeDirectory(next, directory_publication_wire)) return false;
+    unsigned slot = next.generation & 1u;
+    RootPath(directory_publication_path, sizeof(directory_publication_path), slot);
+    RootTemp(directory_publication_temp, sizeof(directory_publication_temp), slot);
+    return true;
+}
+
 bool ProfileStore::PublishDirectory(const Directory &next) {
-    if (!_ready || _read_only_recovery || _uncertain || !_v2)
-        return false;
-    static uint8_t wire[kDirectoryWireBytes];
-    if (!EncodeDirectory(next, wire))
-        return false;
-    // Persist the intended next high-water/root before publication. This one
-    // format-owned control record fences rollback of an entire older root pair.
+    if (!PrepareDirectoryPublication(next)) return false;
+    // Persist intended authority before the root, then its completed control.
     if (!WriteControl(next, 3)) {
         _uncertain = true;
         return false;
     }
-    static char p[32], t[32];
-    unsigned slot = next.generation & 1u;
-    RootPath(p, sizeof(p), slot);
-    RootTemp(t, sizeof(t), slot);
-    static Result r; ::new (&r) Result(Publish(*_storage, t, p, wire, sizeof(wire), Kind::Root, &_last_io_stage));
-    if (!r) {
+    publishing = {_storage, directory_publication_temp, directory_publication_path,
+        directory_publication_wire, sizeof(directory_publication_wire), Kind::Root, &_last_io_stage};
+    ExecutePublication();
+    if (!publication_result) {
         _uncertain = true;
         return false;
     }
@@ -1420,21 +1435,29 @@ __attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::Start(co
     return { Status::NotFound };
 }
 
-// Receipt preparation and publication share the caller frame; transaction
-// ordering and the single authoritative directory publication stay unchanged.
-__attribute__((always_inline)) inline ProfileStore::TransactionResult ProfileStore::Commit(
-    Directory &next,
-    uint32_t id,
-    uint32_t rev,
-    const TransactionIdentity &t
+namespace { ProfileStore::TransactionResult committing_result{}; }
+
+__attribute__((noinline)) void ProfileStore::PrepareCommit(
+    Directory &next, uint32_t id, uint32_t rev, const TransactionIdentity &t
 ) {
     next.generation = Generation() + 1;
     next.last_identity = t;
     next.last_result = { Status::Ok, id, rev, next.generation };
-    static TransactionResult result; result = next.last_result;
-    if (PublishDirectory(next)) return result;
-    result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure, id, rev, next.generation };
-    return result;
+    committing_result = next.last_result;
+}
+
+__attribute__((always_inline)) inline void ProfileStore::PublishPreparedCommit(const Directory &next) {
+    if (!PublishDirectory(next))
+        committing_result = { _uncertain ? Status::UnknownOutcome : Status::IoFailure,
+            committing_result.id, committing_result.revision, next.generation };
+}
+
+__attribute__((always_inline)) inline ProfileStore::TransactionResult ProfileStore::Commit(
+    Directory &next, uint32_t id, uint32_t rev, const TransactionIdentity &t
+) {
+    PrepareCommit(next, id, rev, t);
+    PublishPreparedCommit(next);
+    return committing_result;
 }
 
 __attribute__((noinline)) void ProfileStore::PrepareCreate() {
@@ -1560,29 +1583,77 @@ ProfileStore::TransactionResult ProfileStore::Duplicate(
     return Create(_candidate_profile, name, rank, t);
 }
 
+__attribute__((noinline)) bool ProfileStore::PrepareRename(uint32_t id, const char *name, uint32_t generation, const TransactionIdentity &t) {
+    ::new (&committing_result) TransactionResult(Start(t));
+    auto &r = committing_result;
+    if (r.status != Status::NotFound)
+        return false;
+    int i = Find(id);
+    if (i < 0)
+        { r = { Status::NotFound }; return false; }
+    if (generation != Generation())
+        { r = { Status::Conflict }; return false; }
+    if (!ValidName(name))
+        { r = { Status::Invalid }; return false; }
+    if (!Admit(0, 0))
+        { r = { Status::Full }; return false; }
+    *_next = *_directory;
+    std::memset(_next->entries[i].name, 0, 33);
+    std::memcpy(_next->entries[i].name, name, std::strlen(name));
+    PrepareCommit(*_next, id, _next->entries[i].revision, t);
+    return true;
+}
+
+__attribute__((noinline)) bool ProfileStore::PrepareReorder(uint32_t id, uint32_t rank, uint32_t generation, const TransactionIdentity &t) {
+    ::new (&committing_result) TransactionResult(Start(t));
+    auto &r = committing_result;
+    if (r.status != Status::NotFound)
+        return false;
+    int i = Find(id);
+    if (i < 0)
+        { r = { Status::NotFound }; return false; }
+    if (generation != Generation())
+        { r = { Status::Conflict }; return false; }
+    if (!Admit(0, 0))
+        { r = { Status::Full }; return false; }
+    *_next = *_directory;
+    _next->entries[i].rank = rank;
+    PrepareCommit(*_next, id, _next->entries[i].revision, t);
+    return true;
+}
+
+__attribute__((noinline)) bool ProfileStore::PrepareDelete(uint32_t id, uint32_t generation, uint32_t referenced, const TransactionIdentity &t) {
+    ::new (&committing_result) TransactionResult(Start(t));
+    auto &r = committing_result;
+    if (r.status != Status::NotFound)
+        return false;
+    int i = Find(id);
+    if (i < 0)
+        { r = { Status::NotFound }; return false; }
+    if (generation != Generation())
+        { r = { Status::Conflict }; return false; }
+    if (id == referenced || id == _active_id)
+        { r = { Status::Referenced }; return false; }
+    if (!Admit(0, 0))
+        { r = { Status::Full }; return false; }
+    *_next = *_directory;
+    for (size_t j = i + 1; j < _next->count; ++j)
+        _next->entries[j - 1] = _next->entries[j];
+    --_next->count;
+    PrepareCommit(*_next, id, 0, t);
+    return true;
+}
+
 ProfileStore::TransactionResult ProfileStore::Rename(
     uint32_t id,
     const char *name,
     uint32_t generation,
     const TransactionIdentity &t
 ) {
-    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
-    if (r.status != Status::NotFound)
-        return r;
-    int i = Find(id);
-    if (i < 0)
-        return { Status::NotFound };
-    if (generation != Generation())
-        return { Status::Conflict };
-    if (!ValidName(name))
-        return { Status::Invalid };
-    if (!Admit(0, 0))
-        return { Status::Full };
-    *_next = *_directory;
-    std::memset(_next->entries[i].name, 0, 33);
-    std::memcpy(_next->entries[i].name, name, std::strlen(name));
-    return Commit(*_next, id, _next->entries[i].revision, t);
+    if (PrepareRename(id, name, generation, t)) PublishPreparedCommit(*_next);
+    return committing_result;
 }
+
 
 ProfileStore::TransactionResult ProfileStore::Reorder(
     uint32_t id,
@@ -1590,20 +1661,10 @@ ProfileStore::TransactionResult ProfileStore::Reorder(
     uint32_t generation,
     const TransactionIdentity &t
 ) {
-    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
-    if (r.status != Status::NotFound)
-        return r;
-    int i = Find(id);
-    if (i < 0)
-        return { Status::NotFound };
-    if (generation != Generation())
-        return { Status::Conflict };
-    if (!Admit(0, 0))
-        return { Status::Full };
-    *_next = *_directory;
-    _next->entries[i].rank = rank;
-    return Commit(*_next, id, _next->entries[i].revision, t);
+    if (PrepareReorder(id, rank, generation, t)) PublishPreparedCommit(*_next);
+    return committing_result;
 }
+
 
 ProfileStore::TransactionResult ProfileStore::Delete(
     uint32_t id,
@@ -1611,23 +1672,8 @@ ProfileStore::TransactionResult ProfileStore::Delete(
     uint32_t referenced,
     const TransactionIdentity &t
 ) {
-    static TransactionResult r; ::new (&r) TransactionResult(Start(t));
-    if (r.status != Status::NotFound)
-        return r;
-    int i = Find(id);
-    if (i < 0)
-        return { Status::NotFound };
-    if (generation != Generation())
-        return { Status::Conflict };
-    if (id == referenced || id == _active_id)
-        return { Status::Referenced };
-    if (!Admit(0, 0))
-        return { Status::Full };
-    *_next = *_directory;
-    for (size_t j = i + 1; j < _next->count; ++j)
-        _next->entries[j - 1] = _next->entries[j];
-    --_next->count;
-    return Commit(*_next, id, 0, t);
+    if (PrepareDelete(id, generation, referenced, t)) PublishPreparedCommit(*_next);
+    return committing_result;
 }
 
 namespace {

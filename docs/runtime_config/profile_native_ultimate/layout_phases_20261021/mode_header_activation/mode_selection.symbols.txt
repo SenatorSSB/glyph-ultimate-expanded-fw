@@ -1,0 +1,47 @@
+00000000 00000018 t _GLOBAL__sub_D_melee_mode
+00000000 00000068 t _GLOBAL__sub_I_melee_mode
+00000000 00000094 T select_mode(CommunicationBackend**, unsigned int, _Config&)
+00000000 0000000c T set_mode_destination_selector(void (*)(_CommunicationBackendId, unsigned int, _Config const&))
+00000000 000000ec T setup_mode_activation_bindings(_GameModeConfig const*, unsigned int, unsigned long long)
+00000000 0000002c T set_mode(CommunicationBackend*, _GameModeId, _Config&)
+00000000 00000024 T set_mode(CommunicationBackend*, KeyboardMode*)
+00000000 00000014 T set_mode(CommunicationBackend*, ControllerMode*)
+00000000 00000224 T set_mode(CommunicationBackend*, _GameModeConfig&, _Config&)
+         U KeyboardMode::~KeyboardMode()
+         U ProfileStore::Activate(unsigned long, ProfileStore::Status*)
+00000000 00000001 b (anonymous namespace)::mode_chord_consumed
+00000000 00000004 b (anonymous namespace)::destination_selector
+         U Melee20Button::SetConfig(_GameModeConfig&, _MeleeOptions)
+         U Melee20Button::Melee20Button()
+         U RivalsOfAether::RivalsOfAether()
+         U SenscopePrototype::SenscopePrototype()
+         U CustomKeyboardMode::SetConfig(_GameModeConfig&, _KeyboardModeConfig const&)
+         U CustomKeyboardMode::CustomKeyboardMode()
+         U CommunicationBackend::GetInputs()
+         U CustomControllerMode::SetConfig(_GameModeConfig&, _CustomModeConfig const&)
+         U CustomControllerMode::CustomControllerMode()
+         U FgcMode::SetConfig(_GameModeConfig&)
+         U FgcMode::FgcMode()
+         U Rivals2::Rivals2()
+         U Smash64::SetConfig(_GameModeConfig&)
+         U Smash64::Smash64()
+         U ProjectM::SetConfig(_GameModeConfig&, _ProjectMOptions)
+         U ProjectM::ProjectM()
+         U Ultimate::SetConfig(_GameModeConfig&, _UltimateProfile const*, ultimate_native::PreparedView const*)
+         U Ultimate::Ultimate()
+         U InputMode::SetConfig(_GameModeConfig&)
+         U vtable for CustomKeyboardMode
+         U current_kb_mode
+00000000 00000004 D current_mode_index
+00000000 00000118 B custom_mode
+00000000 00000038 B fgc_mode
+00000000 00000038 B keyboard_mode
+00000000 00000040 B melee_mode
+00000000 000000f0 B mode_activation_masks
+         U profile_store
+00000000 00000040 B projectm_mode
+00000000 00000038 B rivals2_mode
+00000000 00000038 B rivals_mode
+00000000 00000038 B s64_mode
+00000000 00000038 B senscope_prototype_mode
+00000000 00000048 B ultimate_mode

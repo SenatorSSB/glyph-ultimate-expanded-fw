@@ -193,11 +193,16 @@ class ProfileStore {
 
   private:
     bool LoadDirectory();
+    void PrepareBeginState(uint32_t expected, uint32_t required_root_format, bool recovery);
+    void PrepareInitializedRoot(unsigned slot);
     enum class BootstrapAction : uint8_t { Complete, Refused, Reconcile, Initialize, PublishAndInitialize };
     BootstrapAction PrepareBootstrap(bool recovery);
     bool ExecuteBootstrap(BootstrapAction action);
     bool ReadRoot(uint8_t slot, Directory &out) const;
     bool WriteControl(const Directory &, uint32_t phase);
+    bool PrepareControlPublication(const Directory &, uint32_t phase);
+    bool PrepareDirectoryPublication(const Directory &);
+    bool PrepareInitializeV2(const Directory &);
     bool LoadControl(Directory &, uint32_t &phase) const;
     bool InitializeV2(const Directory &seed);
     bool Admit(size_t staged_record_bytes, size_t records = 1);
@@ -205,6 +210,11 @@ class ProfileStore {
     bool Protected(uint32_t id, uint32_t revision) const;
     bool LoadProtectedRoot() const;
     TransactionResult Start(const TransactionIdentity &) const;
+    void PrepareCommit(Directory &, uint32_t id, uint32_t revision, const TransactionIdentity &);
+    void PublishPreparedCommit(const Directory &);
+    bool PrepareRename(uint32_t id, const char *name, uint32_t generation, const TransactionIdentity &);
+    bool PrepareReorder(uint32_t id, uint32_t rank, uint32_t generation, const TransactionIdentity &);
+    bool PrepareDelete(uint32_t id, uint32_t generation, uint32_t referenced, const TransactionIdentity &);
     TransactionResult Commit(
         Directory &,
         uint32_t id,

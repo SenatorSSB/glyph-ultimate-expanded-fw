@@ -1,0 +1,246 @@
+         U FastLED
+         U LED_OK
+         U RGB_Wave_StarterHSV
+         U SCREEN_OK
+         U Serial
+         U UltimateProfile_msg
+         U Wire1
+00000000 00000020 t _GLOBAL__sub_D_full_layout_buttons
+00000000 000000dc t _GLOBAL__sub_I_full_layout_buttons
+         U select_mode(CommunicationBackend**, unsigned int, _Config&)
+         U detect_console(Pinout const&)
+         U hsv2rgb_rainbow(CHSV const&, CRGB&)
+         U reboot_firmware()
+         U reboot_bootloader()
+         U initialize_backends(CommunicationBackend**&, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&, void (*)(_CommunicationBackendConfig&, _InputState const&, _Config&), void (*)(_CommunicationBackendConfig&, _Config const&), _CommunicationBackendId (*)(Pinout const&), unsigned int (*)(CommunicationBackend**&, CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&), void (*)(CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&))
+00000000 00001e90 T glyph_default_config()
+         U validate_glyph_config(_Config const&, ConfigValidationError&)
+         U is_valid_usb_default_index(_Config const&)
+00000000 00000024 T init_secondary_backends_glyph(CommunicationBackend**&, CommunicationBackend*&, _CommunicationBackendId, _InputState&, InputSource**, unsigned int, _Config&, Pinout const&)
+         U set_mode_destination_selector(void (*)(_CommunicationBackendId, unsigned int, _Config const&))
+         U setup_mode_activation_bindings(_GameModeConfig const*, unsigned int, unsigned long long)
+         U calculate_max_brightness_for_power_mW(unsigned char, unsigned long)
+00000000 00000014 T dummyloop()
+00000000 00000004 b guard variable for setup1::about_menu
+00000000 00000004 b guard variable for setup1::remap_menu
+00000000 00000004 b guard variable for setup1::config_menu
+00000000 00000004 b guard variable for setup1::oopsie_menu
+00000000 00000004 b guard variable for setup1::input_display
+00000000 00000004 b guard variable for setup1::menu_button_hints
+00000000 00000004 b guard variable for setup1::rgb_brightness_menu
+00000000 00000004 V guard variable for NeoPixelBackend<(unsigned char)11, 76>::SendReport()::prevTime
+00000000 00000004 V guard variable for CFastLED::addLeds<NEOPIXEL, (unsigned char)11>(CRGB*, int, int)::c
+00000000 00000400 r Bitmap_Update
+00000000 00000030 b dma_chan_waits
+00000000 00000001 b clockless_isr_installed
+00000000 0000004c r pixel_to_button_mappings
+00000000 00000018 b runtime_identity_service
+00000000 00000400 r Bitmap_Glyph_Splashscreen
+00000000 00000140 t clockless_dma_complete_handler()
+00000000 0000002c r matrix
+00000000 00000014 r pinout
+00000000 0000002c r col_pins
+00000000 00000010 r row_pins
+         U OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)
+         U InputSource::InputSource()
+         U Persistence::SaveConfig(_Config&)
+         U Persistence::SetValidator(bool (*)(_Config const&, ConfigValidationError&))
+         U Persistence::LoadConfigChecked(_Config&)
+         U Persistence::ReadLegacyProfile(unsigned int, _UltimateProfile&)
+         U Persistence::CaptureLegacySource(unsigned char*)
+         U Persistence::SaveConfigIfGenerationMatches(_Config&, unsigned long long)
+         U Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)
+         U Adafruit_GFX::setTextSize(unsigned char)
+         U Adafruit_GFX::setFont(GFXfont const*)
+         U InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)
+         U InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)
+         U KeyboardMode::SendReport(_InputState const&)
+         U ProfileStore::BeginRecovery(unsigned long, unsigned long)
+         U ProfileStore::CompleteMigration(_Config const&)
+         U ProfileStore::ImportLegacyStream(_Config const&, unsigned char const*, bool (*)(void*, unsigned int, _UltimateProfile&), void*, unsigned long*, unsigned int)
+         U ProfileStore::Begin(unsigned long, unsigned long)
+00000000 00000008 b (anonymous namespace)::boot_state
+00000000 00000004 b (anonymous namespace)::recovery_configurator
+00000000 00000250 t (anonymous namespace)::request_mode_destination(_CommunicationBackendId, unsigned int, _Config const&)
+00000000 0000011c t (anonymous namespace)::enter_recovery_configurator()
+00000000 00000008 d (anonymous namespace)::boot_state_mutex
+00000000 00000004 W CLEDController::size()
+         U CLEDController::m_pHead
+         U CLEDController::m_pTail
+00000000 000003ac W CLEDController::clearLeds(int)
+         U GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)
+         U MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)
+00000000 000001a4 W NeoPixelBackend<(unsigned char)11, 76>::SendReport()
+00000000 00000198 W NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)
+00000000 0000002c W NeoPixelBackend<(unsigned char)11, 76>::ManualSendReport(CRGB*, unsigned char)
+00000000 00000028 W NeoPixelBackend<(unsigned char)11, 76>::~NeoPixelBackend()
+00000000 0000001c W NeoPixelBackend<(unsigned char)11, 76>::~NeoPixelBackend()
+00000000 0000001c W NeoPixelBackend<(unsigned char)11, 76>::~NeoPixelBackend()
+00000000 n NeoPixelBackend<(unsigned char)11, 76>::~NeoPixelBackend()
+         U ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)
+         U ultimate_native::ContextMatches(ultimate_native::PreparedView const&, _GameModeConfig const&)
+         U ultimate_native::Lease(_UltimateProfile const&)
+         U Adafruit_SSD1306::clearDisplay()
+         U Adafruit_SSD1306::begin(unsigned char, unsigned char, bool, bool)
+         U Adafruit_SSD1306::display()
+         U Adafruit_SSD1306::Adafruit_SSD1306(unsigned char, unsigned char, TwoWire*, signed char, unsigned long, unsigned long)
+         U Adafruit_SSD1306::~Adafruit_SSD1306()
+00000000 0000081c W runtime_identity::PayloadDigest(_UltimateProfile const&, unsigned char*)
+00000000 000004bc W void runtime_identity::Service::Poll<Adafruit_USBD_CDC>(Adafruit_USBD_CDC&, CommunicationBackend*, _Config const&, ProfileStore const&, Ultimate const&, unsigned long)
+00000000 00000004 r runtime_identity::kMagic
+         U Adafruit_USBD_CDC::begin(unsigned long)
+         U DefaultConfigMenu::~DefaultConfigMenu()
+         U IntegratedDisplay::SetDisplayMode(_DisplayModeId)
+         U IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)
+         U RgbBrightnessMenu::RgbBrightnessMenu(_Config&)
+00000000 000000ce W SwitchMatrixInput<4u, 11u>::UpdateInputs(_InputState&)
+00000000 0000006a W SwitchMatrixInput<4u, 11u>::UpdateButtonState(_InputState&, unsigned int, unsigned int, bool)
+00000000 00000004 W SwitchMatrixInput<4u, 11u>::ScanSpeed()
+00000000 00000034 W SwitchMatrixInput<4u, 11u>::~SwitchMatrixInput()
+00000000 0000002c W SwitchMatrixInput<4u, 11u>::~SwitchMatrixInput()
+00000000 0000002c W SwitchMatrixInput<4u, 11u>::~SwitchMatrixInput()
+00000000 n SwitchMatrixInput<4u, 11u>::~SwitchMatrixInput()
+00000000 00000462 W CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)
+00000000 00000004 W CPixelLEDController<(EOrder)66, 1, 4294967295ul>::lanes()
+00000000 00000462 W CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)
+00000000 0000033c W ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)
+00000000 0000023c W ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()
+         U ConfiguratorBackend::ConfiguratorBackend(_InputState&, InputSource**, unsigned int, _Config&, arduino::Stream&)
+         U CommunicationBackend::UpdateOutputs()
+         U CommunicationBackend::CurrentGameMode()
+         U CommunicationBackend::BackendId()
+         U CommunicationBackend::GetInputs()
+         U CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)
+00000000 0000010c W DebouncedSwitchMatrixInput<4u, 11u>::UpdateButtonState(_InputState&, unsigned int, unsigned int, bool)
+00000000 00000038 W DebouncedSwitchMatrixInput<4u, 11u>::~DebouncedSwitchMatrixInput()
+00000000 0000002c W DebouncedSwitchMatrixInput<4u, 11u>::~DebouncedSwitchMatrixInput()
+00000000 0000002c W DebouncedSwitchMatrixInput<4u, 11u>::~DebouncedSwitchMatrixInput()
+00000000 n DebouncedSwitchMatrixInput<4u, 11u>::~DebouncedSwitchMatrixInput()
+         U gpio::init_pin(unsigned int, gpio::GpioMode)
+         U TwoWire::begin()
+         U TwoWire::setSCL(unsigned char)
+         U TwoWire::setSDA(unsigned char)
+         U TwoWire::setClock(unsigned long)
+         U arduino::Print::println(char const*)
+         U CFastLED::setMaxRefreshRate(unsigned short, bool)
+         U CFastLED::show(unsigned char)
+         U CFastLED::clear(bool)
+         U CFastLED::addLeds(CLEDController*, CRGB*, int, int)
+         U AboutMenu::AboutMenu(_Config&)
+         U InputMode::GetConfig()
+         U RemapMenu::RemapMenu()
+         U Persistence::IsAvailable() const
+         U Persistence::ValidateConfig(_Config const&, ConfigValidationError&) const
+         U Persistence::ConfigGeneration(_Config const&) const
+         U ProfileStore::Incarnation() const
+         U ProfileStore::ActiveProfile() const
+         U ProfileStore::PrepareCompact(_Config&) const
+         U ProfileStore::MigrationPending() const
+         U ProfileStore::IsReadOnlyRecovery() const
+         U ProfileStore::ValidateCompactReceipt(_Config const&) const
+         U ProfileStore::IsReady() const
+         U ProfileStore::ActiveId() const
+00000000 00000006 W ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const
+         U vtable for GlyphConfigMenu
+00000000 00000028 V vtable for NeoPixelBackend<(unsigned char)11, 76>
+00000000 0000001c V vtable for SwitchMatrixInput<4u, 11u>
+00000000 0000001c V vtable for DebouncedSwitchMatrixInput<4u, 11u>
+00000000 00000028 V vtable for NEOPIXEL<(unsigned char)11>
+00000000 00007ae0 V ConfigWriteCandidate()::candidate
+00000000 00000084 b setup::validation_error
+00000000 00000014 t setup::{lambda(void*, unsigned int, _UltimateProfile&)#1}::_FUN(void*, unsigned int, _UltimateProfile&)
+00000000 00000008 b setup1::about_menu
+00000000 00000004 b setup1::remap_menu
+00000000 00000038 b setup1::config_menu
+00000000 0000001c b setup1::oopsie_menu
+00000000 0000001c d setup1::display_modes
+00000000 00000010 b setup1::input_display
+00000000 00000038 b setup1::menu_button_hints
+00000000 00000008 b setup1::rgb_brightness_menu
+00000000 00000010 t setup1::{lambda()#2}::_FUN()
+00000000 00000010 t setup1::{lambda()#1}::_FUN()
+00000000 00000008 V NeoPixelBackend<(unsigned char)11, 76>::SendReport()::prevTime
+00000000 00000001 V PixelController<(EOrder)66, 1, 4294967295ul>::init_binary_dithering()::R
+00000000 00000270 W runtime_identity::PayloadDigest(_UltimateProfile const&, unsigned char*)::{lambda(pb_ostream_s*, unsigned char const*, unsigned int)#1}::_FUN(pb_ostream_s*, unsigned char const*, unsigned int)
+00000000 00000100 V Sha256::Transform()::k
+00000000 00000038 V CFastLED::addLeds<NEOPIXEL, (unsigned char)11>(CRGB*, int, int)::c
+         U operator delete(void*, unsigned int)
+         U operator new(unsigned int)
+         U __aeabi_f2uiz
+         U __aeabi_fdiv
+         U __aeabi_fmul
+         U __aeabi_fsub
+         U __aeabi_i2f
+         U __aeabi_idiv
+         U __aeabi_ldivmod
+         U __aeabi_lmul
+         U __aeabi_ui2f
+         U __aeabi_uidiv
+         U __aeabi_ul2f
+         U __aeabi_uldivmod
+         U __cxa_guard_acquire
+         U __cxa_guard_release
+00000000 00000002 t __tcf_0
+00000000 00000002 t __tcf_1
+00000000 00000002 t __tcf_2
+00000000 00000002 t __tcf_3
+00000000 00000002 t __tcf_4
+00000000 00000018 t __tcf_5
+00000000 00000002 t __tcf_6
+         w atexit
+00000000 00000004 B backend_count
+00000000 00000004 B backends
+         U bootloaderRGB
+         U calloc
+         U clock_get_hz
+00000000 00007ae0 B config
+00000000 00000004 B current_kb_mode
+         U delay
+00000000 0000004c B display
+00000000 00000004 B display_backend
+         U dma_claim_unused_channel
+00000000 00000001 B failed_detection
+00000000 00000034 D fgc_buttons
+00000000 00000004 D fgc_buttons_count
+         U free
+00000000 0000008c D full_layout_buttons
+00000000 00000004 D full_layout_buttons_count
+         U get_backend_config_default
+         U get_usb_backend_config_default
+         U gpio_set_function
+         U init_primary_backend_default
+         U init_secondary_backends_default
+00000000 00000004 D input_source_count
+00000000 00000004 D input_sources
+00000000 00000004 B input_viewer
+00000000 00000018 B inputs
+         U irq_set_enabled
+         U irq_set_exclusive_handler
+00000000 00000004 B led_backend
+00000000 000000e0 T loop
+00000000 0000087c W loop1
+00000000 000002e8 B matrix_input
+         U memcpy
+         U memset
+         U micros
+         U millis
+         U mutex_enter_blocking
+         U mutex_exit
+         U pb_encode
+         U persistence
+         U pio_add_program
+         U pio_can_add_program
+         U pio_claim_unused_sm
+         U pio_sm_init
+         U pio_sm_set_consecutive_pindirs
+         U pio_sm_unclaim
+00000000 0000005c D platform_fighter_buttons
+00000000 00000004 D platform_fighter_buttons_count
+         U profile_store
+00000000 000005b8 T setup
+00000000 000003b0 W setup1
+00000000 0000003c D split_fgc_buttons
+00000000 00000004 D split_fgc_buttons_count
+         U time_us_64
+         U ultimate_mode
+         U watchdog_caused_reboot

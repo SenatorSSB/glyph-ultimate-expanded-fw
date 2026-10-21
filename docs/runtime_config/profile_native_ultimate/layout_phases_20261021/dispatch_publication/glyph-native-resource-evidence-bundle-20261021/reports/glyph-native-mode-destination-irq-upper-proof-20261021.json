@@ -1,0 +1,41 @@
+{
+  "kind": "EXACT_ELF_MODE_DESTINATION_PERSISTENCE_IRQ_UPPER",
+  "candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "mode_destination_IRQ_upper_including_alignment_bytes": 456,
+  "optional_rounded_layout_allowance_bytes": 512,
+  "software_USB_C_subtree_bytes": 264,
+  "priority0_GPIO_increment_before_alignment_bytes": 152,
+  "GPIO_C_subtree_bytes": 112,
+  "NES_raw_C_subtree_bytes": 64,
+  "SNES_raw_C_subtree_bytes": 48,
+  "hardware_USB_with_priority0_GPIO_bytes": 348,
+  "alarm_max_bytes": 336,
+  "SIO_with_priority0_GPIO_bytes": 224,
+  "sysTick_and_GPIO_priority0_can_nest": false,
+  "USB_and_other_priority128_IRQs_can_nest": false,
+  "retained_USB_class_union": [
+    "CDC",
+    "HID",
+    "XInput_vendor"
+  ],
+  "not_registered_interfaces": [
+    "MSC",
+    "MIDI"
+  ],
+  "endpoint_contention_during_FS": "EXCLUDED_BY_SOURCE_SCOPED_PRODUCER_AND_RETURN_INVARIANT",
+  "foreground_included": false,
+  "LFS_pre_mask_helper_if_not_already_counted_bytes": 16,
+  "masked_flash_below_retained_LFS_callback_bytes": 128,
+  "hardware_observations": "NOT_MEASURED",
+  "whole_resource_gate": "NOT_CLAIMED",
+  "source_SDK_build_device_mutations": false,
+  "upper_interpretation": "SAFE_CONSERVATIVE_UNION_NOT_SOURCE_FEASIBLE_LOWER_WITNESS",
+  "feasible_NES_default_serial_IRQ_witness_excluding_optional_alignment_bytes": 360,
+  "feasible_NES_witness_USB_C_prefix_bytes": 224,
+  "feasible_NES_raw_activation_bytes": 104,
+  "NES_default_dispatcher_subtree_feasible_on_ordinary_latch_events": false,
+  "NES_CDC_TX_flush264_feasibility": "NOT_CLAIMED_WITHOUT_QUEUED_TX_PRODUCER",
+  "feasible_witness_total_exceeds2048_if_independent_simultaneously_unmasked_foreground_exceeds_bytes": 1688,
+  "ROM_license_provenance_supplement": "/private/tmp/glyph-bootrom-license-provenance-20261021.json"
+}

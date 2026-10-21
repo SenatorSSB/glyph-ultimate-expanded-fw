@@ -33,6 +33,12 @@ inline bool consume_committed_mode_destination(volatile uint32_t *scratch,
 enum class ModeDestinationResult { Unchanged, Saved, Refused };
 
 template <typename PersistenceType>
+__attribute__((noinline)) bool validate_mode_destination(PersistenceType &storage, const Config &candidate) {
+    ConfigValidationError error;
+    return storage.ValidateConfig(candidate, error);
+}
+
+template <typename PersistenceType>
 ModeDestinationResult persist_mode_destination(PersistenceType &storage, Config &candidate,
     CommunicationBackendId backend, size_t mode_index, size_t &backend_index) {
     if (!storage.IsAvailable() ||
@@ -57,8 +63,7 @@ ModeDestinationResult persist_mode_destination(PersistenceType &storage, Config 
     const uint32_t generation = storage.ConfigGeneration(candidate);
     default_backend = backend_index + 1;
     selected_backend.default_mode_config = mode_index + 1;
-    ConfigValidationError error;
-    if (!storage.ValidateConfig(candidate, error)) return ModeDestinationResult::Refused;
+    if (!validate_mode_destination(storage, candidate)) return ModeDestinationResult::Refused;
     return storage.SaveConfigIfGenerationMatches(candidate, generation) == PersistenceType::SaveResult::Saved
         ? ModeDestinationResult::Saved : ModeDestinationResult::Refused;
 }

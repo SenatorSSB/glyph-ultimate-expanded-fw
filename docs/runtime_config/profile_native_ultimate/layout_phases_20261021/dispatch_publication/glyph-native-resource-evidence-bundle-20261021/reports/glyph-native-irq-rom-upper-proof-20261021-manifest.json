@@ -1,0 +1,298 @@
+{
+  "kind": "FINITE_READ_ONLY_SOURCE_AND_EXACT_ELF_EVIDENCE",
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high",
+  "files": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/bcb9824bc00c6210babdf00675952deeda7f7c88/f2c06c41b84aa57c47f44a4eaf53770187cc75287073620e6e6c7e6d0a529057/firmware.elf": {
+      "bytes": 5590084,
+      "sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h": {
+      "bytes": 8789,
+      "sha256": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp": {
+      "bytes": 5490,
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_private.cpp": {
+      "bytes": 4383,
+      "sha256": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp": {
+      "bytes": 8305,
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/time.c": {
+      "bytes": 17699,
+      "sha256": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/include/pico/time.h": {
+      "bytes": 37021,
+      "sha256": "04ccda2a581b8b92323da7dfc75cf3dfe44dbf165cb3367ac87e0678d8c949ce"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_util/pheap.c": {
+      "bytes": 5018,
+      "sha256": "1d156a619e668dd4bd3aca6974b0b28ad74257d73689fa66a59c5edfd261fea4"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_util/include/pico/util/pheap.h": {
+      "bytes": 9595,
+      "sha256": "e0776e1792373f146cba0449cdeebe01ebc79b98bd152350223295a5d8a4b47d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/irq.c": {
+      "bytes": 19500,
+      "sha256": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_timer/timer.c": {
+      "bytes": 8960,
+      "sha256": "b275a48c63d9e276cebb05b84cc37842146b08ba766dadcc243580f52b0b0e67"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S": {
+      "bytes": 2247,
+      "sha256": "6fd48c4250c947bfa2d9a199836cc7062136a13b828092d026444a1e8d606284"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_flash/flash.c": {
+      "bytes": 7372,
+      "sha256": "ad7af777d6f600bc718ee455a82638a14bcb20ccef93440e4c85df2e571840ed"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c": {
+      "bytes": 10079,
+      "sha256": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h": {
+      "bytes": 60367,
+      "sha256": "0695fb33d8d04ba4280f02e6a829514689528a505a75eba9d78a7ad97ea50518"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c": {
+      "bytes": 15750,
+      "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c": {
+      "bytes": 34850,
+      "sha256": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.h": {
+      "bytes": 8077,
+      "sha256": "e6be10be98e632a4e07a9bece593d7bb83caebd50d95a7561a99c585be44e4d2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c": {
+      "bytes": 46830,
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c": {
+      "bytes": 7503,
+      "sha256": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h": {
+      "bytes": 6017,
+      "sha256": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp": {
+      "bytes": 4652,
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp": {
+      "bytes": 17806,
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c": {
+      "bytes": 18095,
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c": {
+      "bytes": 14516,
+      "sha256": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp": {
+      "bytes": 17902,
+      "sha256": "5b407ecb9283ea311cd1c033abcc6a5baff2a8a42ad3ffacbbf4974e683177bc"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/backend_init.cpp": {
+      "bytes": 11708,
+      "sha256": "057e4eb529fd9d9fbe94872ee73f0a64799ce77cdfc7f32c367775c9293c27d0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include/glyph_overrides.hpp": {
+      "bytes": 58387,
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "bytes": 47694,
+      "sha256": "7897cdea74dc04f73cbd65817e1352bededee6a91c185513a995e9cbe0861605"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/include/comms/NeoPixelBackend.hpp": {
+      "bytes": 7490,
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/comms/IntegratedDisplay.cpp": {
+      "bytes": 2909,
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/NativeTargetMetrics.cpp": {
+      "bytes": 12036,
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/core/NativeTargetMetricsEntry.S": {
+      "bytes": 2154,
+      "sha256": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/display/DefaultConfigMenu.cpp": {
+      "bytes": 12909,
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/display/ConfigMenu.cpp": {
+      "bytes": 9280,
+      "sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/display/GlyphConfigMenu.cpp": {
+      "bytes": 4059,
+      "sha256": "4ef795f0d34a745cf2d96f52be2493808452e2998a371ee5a96747a08207fcf0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/lib/TUCompositeHID/src/TUCompositeHID.cpp": {
+      "bytes": 890,
+      "sha256": "8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h": {
+      "bytes": 13302,
+      "sha256": "41b87aaa9f719f051473c2fdb4b8661fc8b24bc7ff4d55ff0816818bbe8606bb"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/nes-pio/src/NesConsole.cpp": {
+      "bytes": 1761,
+      "sha256": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/nes-pio/src/SnesConsole.cpp": {
+      "bytes": 1734,
+      "sha256": "fe179cb1f880f1238e09fd43d054eb54718b1a2c5ac73a81e1878f078914a55e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp": {
+      "bytes": 11301,
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f"
+    },
+    "/private/tmp/glyph-native-bcb9824b-linked.disassembly.txt": {
+      "bytes": 11329913,
+      "sha256": "dbea5bad3ea90d7a5d04d8ba3b402dc618475cc1de80415c67e088e4fbe26fb0"
+    },
+    "/private/tmp/glyph-native-bcb9824b-linked.symbols.txt": {
+      "bytes": 371208,
+      "sha256": "86a16e88a16f9a539ac9f6c7616494e25aa645856c7f0a8151add5a66c3be036"
+    },
+    "/private/tmp/glyph-native-bcb9824b-boot2-thumb.txt": {
+      "bytes": 5226,
+      "sha256": "8ab649578c7914d910c41a667863fb4001d9599ac7e858246304986c837e664f"
+    },
+    "/private/tmp/glyph-native-irq-assessment.md": {
+      "bytes": 9282,
+      "sha256": "5b767ec53155a35a2ce853fac863b3e2e433ff914465bbed066540d6e186e3eb"
+    },
+    "/private/tmp/glyph-native-p1-consistency-branch-assessment.md": {
+      "bytes": 7248,
+      "sha256": "12a92f35a5ab9ef09dcb2aa32673c528b29f6792e297c3feb78ba8e39f86817d"
+    },
+    "/private/tmp/glyph-bootrom-tree-ef22cd8.json": {
+      "bytes": 15366,
+      "sha256": "844fc1f3f7b1b2cc27c94ad0f615309c72da5a79097dc1fd0eee880871e793d8"
+    },
+    "/private/tmp/glyph-bootrom-tags.json": {
+      "bytes": 1497,
+      "sha256": "d64fb2bd9a044c009473c9a42332aa61b28e0ea74a947e9e40928645b170cdc1"
+    },
+    "/private/tmp/glyph-bootrom-releases.json": {
+      "bytes": 11859,
+      "sha256": "1dad7b0ad488c69ae2c6a5a466d4213f5af359a5536f87477346c1ed04de1e19"
+    },
+    "/private/tmp/glyph-bootrom-README.md": {
+      "bytes": 434,
+      "sha256": "28c9608c713a6518ac0d7abac7bf8991dea717c754769c71666601a3fd546528"
+    },
+    "/private/tmp/glyph-bootrom-bootrom-bootrom_misc.S": {
+      "bytes": 5382,
+      "sha256": "7f0b77643828cf9465f9f45c8cbbad55b2afefc7b77195109e6e7e533184c754"
+    },
+    "/private/tmp/glyph-bootrom-bootrom-program_flash_generic.c": {
+      "bytes": 16647,
+      "sha256": "8185c6a08d5beb062a86f3ecaac5afcce76ee21976ed7fc89e15d8ee8ed55e8f"
+    },
+    "/private/tmp/glyph-bootrom-bootrom-bootrom_rt0.S": {
+      "bytes": 15015,
+      "sha256": "d8df6ad4e3063c34eae9d8eb785c25716e4e23aa8463494cc07e0c64e7833ae1"
+    },
+    "/private/tmp/glyph-bootrom-bootrom-bootrom_main.c": {
+      "bytes": 9967,
+      "sha256": "b92f6f87976623ea45d7b9c0311c19b98f5609551032719b02192cbd3cda9776"
+    },
+    "/private/tmp/glyph-bootrom-b0-misc.S": {
+      "bytes": 5405,
+      "sha256": "4ac1218a8e63b289922a8b7b30cf4b0580b82d0c0f6394fe0aec7cbd0baa40e7"
+    },
+    "/private/tmp/glyph-bootrom-b1-misc.S": {
+      "bytes": 5382,
+      "sha256": "7f0b77643828cf9465f9f45c8cbbad55b2afefc7b77195109e6e7e533184c754"
+    },
+    "/private/tmp/glyph-bootrom-b0.elf": {
+      "bytes": 176164,
+      "sha256": "0a0415656d76479b46daefe7460df2576a18e79cfae29f54b625af178a9e9085"
+    },
+    "/private/tmp/glyph-bootrom-b0.disassembly.txt": {
+      "bytes": 262123,
+      "sha256": "92c8bc69fcaef13ec5db0b21a1866300449db40fb2cdb21d6e19ee7072754481"
+    },
+    "/private/tmp/glyph-bootrom-b1.elf": {
+      "bytes": 233344,
+      "sha256": "53b2723b590207c678c5a52c095e9150d2afa60e7f66a1c26d188ff59d29c778"
+    },
+    "/private/tmp/glyph-bootrom-b1.disassembly.txt": {
+      "bytes": 297088,
+      "sha256": "2ed5c16628bde9546bd4bed73263afe63e0060646dfe15d0bac233fa4d4fc350"
+    },
+    "/private/tmp/glyph-bootrom-b2.elf": {
+      "bytes": 231324,
+      "sha256": "3a3c4c617d83bc9b910a6fa7bfdffa11ce26ff89370271d861507be821cc49aa"
+    },
+    "/private/tmp/glyph-bootrom-b2.disassembly.txt": {
+      "bytes": 296727,
+      "sha256": "cfb393705853472ab08e78ff93e24534842bc5a05763e78209cc50b42b471372"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021.md": {
+      "bytes": 19948,
+      "sha256": "bd39d238f52c114fa97da3863006a3168041b4a5a59ca6c0246dce857b600923"
+    },
+    "/private/tmp/glyph-native-irq-rom-upper-proof-20261021.json": {
+      "bytes": 1701,
+      "sha256": "f4a96a448a7b3780a24a285641c8135e042060a037d52692df4d3be1c57b1a95"
+    },
+    "/private/tmp/glyph-native-irq-rom-proof-write.py": {
+      "bytes": 5968,
+      "sha256": "c5bd4014d9a953b52d6abacb8bfc9504931ffb97b07d636bf64dcb9619716e72"
+    }
+  },
+  "network": {
+    "default": "git ls-remote pico-bootrom HEAD: DNS failure, inconclusive",
+    "network_enabled_retry": "same read-only ls-remote SUCCESS ef22cd8ede5bc007f81d7f2416b48db90f313434",
+    "account_mutation": false,
+    "download_root": "/private/tmp only"
+  },
+  "official_rom_release_provenance": [
+    {
+      "revision": "b2",
+      "release": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/tag/b2",
+      "description": "The version of the bootrom in RP2040-B2",
+      "asset": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b2/b2.elf",
+      "asset_size_reported": 231324
+    },
+    {
+      "revision": "b1",
+      "release": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/tag/b1",
+      "description": "The version of the bootrom in RP2040-B1",
+      "asset": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b1/b1.elf",
+      "asset_size_reported": 233344
+    },
+    {
+      "revision": "b0",
+      "release": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/tag/b0",
+      "description": "The version of the bootrom in RP2040-B0",
+      "asset": "https://github.com/raspberrypi/pico-bootrom-rp2040/releases/download/b0/b0.elf",
+      "asset_size_reported": 176164
+    }
+  ]
+}

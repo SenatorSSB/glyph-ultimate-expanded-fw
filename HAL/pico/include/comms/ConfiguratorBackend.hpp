@@ -58,6 +58,8 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleProfileStore();
     bool ReceiveProfileStore();
     bool DispatchProfileStore();
+    bool ExecuteProfileStoreMutation();
+    bool FinalizeProfileStore();
     unsigned PrepareStoreMutation();
     void PerformCheckedReference();
     bool ReadStoreProfile();

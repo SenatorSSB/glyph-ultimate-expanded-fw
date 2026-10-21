@@ -100,6 +100,7 @@ def main() -> int:
             run(['c++','-std=c++17','-fshort-enums','-Wall','-Wextra','-Werror',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',
                  *sum((['-I',str(p)] for p in [directory,generated,nanopb,ROOT/'include']),[]),
+                 '-include',str(ROOT/'include/core/NativeTargetMetrics.hpp'),
                  str(HOST/'setup_routes.cpp'),'-o',str(exe)])
             return exe
         routes = app_case('actual_routes')

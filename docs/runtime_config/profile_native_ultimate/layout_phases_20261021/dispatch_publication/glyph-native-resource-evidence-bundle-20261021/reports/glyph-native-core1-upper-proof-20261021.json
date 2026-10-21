@@ -1,0 +1,341 @@
+{
+  "classification": "EXACT_LINKED_ORDINARY_APPLICATION_CORE1_STATIC_UPPER_PROVED",
+  "candidate": "bcb9824bc00c6210babdf00675952deeda7f7c88",
+  "elf_sha256": "3f43081cec177763abf9f1955f8a3686faa39fa4ca660a5de174a2d70ca62884",
+  "runtime_model": "UNKNOWN",
+  "runtime_effort": "UNKNOWN",
+  "core1_budget_bytes": 2048,
+  "retained_core1_upper_allowance_bytes": 1152,
+  "extracted_conservative_composition_bytes": 1036,
+  "setup1_subtree_bytes": 936,
+  "loop1_subtree_bytes": 952,
+  "outer_core1_wrapper_plus_main1_bytes": 16,
+  "largest_core1_IRQ_including_alignment_bytes": 68,
+  "DMA_IRQ_bytes": 52,
+  "metrics_chain_including_IRQ_bytes": 224,
+  "remaining_below_budget_bytes": 896,
+  "concrete_nonaggregate_functions": 196,
+  "unresolved_indirect_targets": 0,
+  "callgraph_cycles": 0,
+  "numeric_aggregate_child_bytes": 64,
+  "sleep_us_aggregate_bytes": 512,
+  "sleep_ms_aggregate_bytes": 520,
+  "malloc_wrapper_bound_bytes": 136,
+  "calloc_wrapper_bound_bytes": 176,
+  "whole_firmware_resource_gate": "NOT_CLAIMED: separate foreground/core0 proof remains authoritative",
+  "target_highwater": "NOT_MEASURED",
+  "target_timing": "NOT_MEASURED",
+  "later_ELF_correspondence": "REQUIRED",
+  "repository_or_device_changes": false,
+  "core0_XInput_boot_activation_USB_IRQ_extension_bytes": 348,
+  "graph_bounds": {
+    "setup1": {
+      "bound": 936,
+      "max_path": [
+        "setup1",
+        "IntegratedDisplay::SendReport()",
+        "IntegratedDisplay::HandleControls(DisplayMode*)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "loop1": {
+      "bound": 952,
+      "max_path": [
+        "loop1",
+        "IntegratedDisplay::SendReport()",
+        "IntegratedDisplay::HandleControls(DisplayMode*)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "IntegratedDisplay::SendReport()": {
+      "bound": 880,
+      "max_path": [
+        "IntegratedDisplay::SendReport()",
+        "IntegratedDisplay::HandleControls(DisplayMode*)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 784,
+      "max_path": [
+        "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 768,
+      "max_path": [
+        "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 124,
+      "max_path": [
+        "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::writePixel(short, short, unsigned short)",
+        "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+      ]
+    },
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 752,
+      "max_path": [
+        "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 464,
+      "max_path": [
+        "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::write(unsigned char const*, unsigned int)",
+        "Adafruit_GFX::write(unsigned char)",
+        "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+        "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+        "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+        "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+        "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+        "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+      ]
+    },
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 768,
+      "max_path": [
+        "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 776,
+      "max_path": [
+        "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 832,
+      "max_path": [
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 0,
+      "max_path": [
+        "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 784,
+      "max_path": [
+        "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "CFastLED::show(unsigned char)": {
+      "bound": 448,
+      "max_path": [
+        "CFastLED::show(unsigned char)",
+        "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()": {
+      "bound": 136,
+      "max_path": [
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+        "__wrap___aeabi_f2uiz"
+      ]
+    },
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": {
+      "bound": 392,
+      "max_path": [
+        "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": {
+      "bound": 392,
+      "max_path": [
+        "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)": {
+      "bound": 264,
+      "max_path": [
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "__wrap_malloc": {
+      "bound": 136,
+      "max_path": [
+        "__wrap_malloc",
+        "malloc",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "__wrap_calloc": {
+      "bound": 176,
+      "max_path": [
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "TwoWire::endTransmission()": {
+      "bound": 672,
+      "max_path": [
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "Adafruit_SSD1306::display()": {
+      "bound": 752,
+      "max_path": [
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    }
+  }
+}
