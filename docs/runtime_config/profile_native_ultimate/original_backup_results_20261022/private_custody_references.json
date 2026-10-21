@@ -1,0 +1,45 @@
+{
+  "private_input_policy": "HASHES_AND_QUALIFICATIONS_ONLY_NO_CONTENT_ARCHIVE",
+  "files": {
+    "owner_entry_approval.json": {
+      "bytes": 736,
+      "sha256": "f531b3350b8af44eb8febd66a5eb7d109ee9673feeac402a8e0c3dae6ab96f1d",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "read_access_owner_approval.json": {
+      "bytes": 664,
+      "sha256": "a0a30e7ddd276a2f7f970a4d47aee2b68a29296c69273ef55854894bf71debba",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "original_config_custody.json": {
+      "bytes": 612,
+      "sha256": "166dfd33200379f6d4e5e162ddbd1a31253c3a77933ebadddb53f82eb0b4d22f",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "original_directory_complete.json": {
+      "bytes": 3341,
+      "sha256": "c658e052820fb14be8a13291c9ad56c2d056b64f7ea97c147d2588f479d92e47",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "all_original_profiles_custody.json": {
+      "bytes": 22238,
+      "sha256": "f230d1c7ccb0b907d6d2cb7e8dc9e58494798ea15a29223e786b12d257ca19a5",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "private_backup_custody_manifest.json": {
+      "bytes": 43006,
+      "sha256": "f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "profile_backup_stop.json": {
+      "bytes": 77,
+      "sha256": "547c233b89388150a9f75ac4a64a197772a68e9aa2096af366dcd9ba2ccca98d",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    },
+    "legacy_host_gate_root_adjudication.json": {
+      "bytes": 1064,
+      "sha256": "efbacae1feaad817b33590f5b4ad5108891793404f689314d30e9af03aaae326",
+      "publication": "HASH_REFERENCE_ONLY_NO_PRIVATE_PAYLOAD"
+    }
+  }
+}

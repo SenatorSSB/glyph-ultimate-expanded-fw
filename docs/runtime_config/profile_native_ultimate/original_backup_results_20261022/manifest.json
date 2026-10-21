@@ -1,0 +1,63 @@
+{
+  "kind": "SOURCEFREE_PUBLIC_SAFE_EXPLICIT_FILES_NO_PRIVATE_INPUT_CONTENT",
+  "files": {
+    "README.md": {
+      "bytes": 2527,
+      "sha256": "35a2d077e7c72a70186fdb90e30556d5ea528d1f802c831d240c3aa2cc9e7849"
+    },
+    "actual_route_review/PINS.json": {
+      "bytes": 8862,
+      "sha256": "8a0575c0294ff115f412f47e43ea182da9630ad868c27b0566de1a064a9eb228"
+    },
+    "actual_route_review/REPORT.md": {
+      "bytes": 14910,
+      "sha256": "81f4b876a4e93c258938442a6aa74c86f5e745486fd0f59d2f3d4d2fc3f9d820"
+    },
+    "actual_route_review/result.json": {
+      "bytes": 7163,
+      "sha256": "790931885a7a31bad1aa0cc331aa909f1335c03ca92983a6930e097a11b13ddd"
+    },
+    "legacy_version_review/PINS.json": {
+      "bytes": 6523,
+      "sha256": "38eddc6d6cb0f0b13e5d5d4336a3e3e1d97919cd931773f599066f62ad983b93"
+    },
+    "legacy_version_review/REPORT.md": {
+      "bytes": 8400,
+      "sha256": "06e00021ea8dc74aac0e10b11a8f271bc3b0bff82fac64905f8b3240c4d75c21"
+    },
+    "legacy_version_review/result.json": {
+      "bytes": 5722,
+      "sha256": "dd4e1420633a112c9ac009efd6304c1136fb4b8ef61da512266fbd520517f2b4"
+    },
+    "legacy_version_review/source_excerpts.json": {
+      "bytes": 9566,
+      "sha256": "48a1a5f1b1662deebeeb2393e7c0b4abef0206074b7c8124bcbda3e8b1c57d96"
+    },
+    "private_custody_references.json": {
+      "bytes": 1817,
+      "sha256": "ab6bf8a3e08f79faab59d58a9cfc7367d41301174cf6c71e43eab71ce614a6f6"
+    },
+    "readback_result.json": {
+      "bytes": 4138,
+      "sha256": "b39f09903a2394d009d82060e5f5841c0544d9420f6f1ca5b22f859799f6f2a9"
+    },
+    "route_adapter_review/PINS.json": {
+      "bytes": 2765,
+      "sha256": "16bff2ebea549c3e1cabb556a0bc20b3ecb46d5c99b9f7edbb23897515371b76"
+    },
+    "route_adapter_review/REPORT.md": {
+      "bytes": 7357,
+      "sha256": "379a75f7d051f74ce3b2dc93478e65b49e89b43dc923df1d20bdf310da4c322f"
+    },
+    "route_adapter_review/initial_harness_failure.json": {
+      "bytes": 369,
+      "sha256": "bc1a4fd58b222a22d6efe1f15383f3dc4887b52e921dde03bb69e0f4f17a4397"
+    },
+    "route_adapter_review/root_safety_result.json": {
+      "bytes": 3212,
+      "sha256": "d552e2e074d8491350fa8716aa888d52ce853e84a8d59b156fa09edd9db600a1"
+    }
+  },
+  "private_hash_references_are_not_archived_inputs": true,
+  "device_execution_by_publication": false
+}

@@ -1,0 +1,8 @@
+{
+  "test_source_sha256": "303c692c0cb163797bc5c3ccc958a19b6e1cca44b202d9767c86fcaffefa63ca",
+  "first_case": "offline_never_constructs_port",
+  "expected_returncode": 0,
+  "actual_returncode": 1,
+  "actual_device_operations": 0,
+  "cause": "Fake transport proxy omitted existing _NATIVE_RECEIPT_FIELDS required by production pure projection; test harness fix only."
+}

@@ -1,0 +1,59 @@
+{
+  "files": {
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/PINS.json": {
+      "bytes": 8862,
+      "sha256": "8a0575c0294ff115f412f47e43ea182da9630ad868c27b0566de1a064a9eb228"
+    },
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/REPORT.md": {
+      "bytes": 14910,
+      "sha256": "81f4b876a4e93c258938442a6aa74c86f5e745486fd0f59d2f3d4d2fc3f9d820"
+    },
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/result.json": {
+      "bytes": 7163,
+      "sha256": "790931885a7a31bad1aa0cc331aa909f1335c03ca92983a6930e097a11b13ddd"
+    },
+    "/private/tmp/glyph-native-route-packet-20261022.py": {
+      "bytes": 10902,
+      "sha256": "258857385d9ed8d43a6fdab42843b46cc3c1bcd7ee027fb7f1018fbaa4ec1516"
+    },
+    "/private/tmp/glyph-native-route-packet-review-20261022/REPORT.md": {
+      "bytes": 7357,
+      "sha256": "379a75f7d051f74ce3b2dc93478e65b49e89b43dc923df1d20bdf310da4c322f"
+    },
+    "/private/tmp/glyph-native-route-packet-review-20261022/result.json": {
+      "bytes": 1178,
+      "sha256": "04415297c687358dccca21fc37ce97727d92828d95fe9ad834440ddbd095dc3f"
+    },
+    "/private/tmp/glyph-native-route-packet-safety-20261022.py": {
+      "bytes": 7143,
+      "sha256": "bc202ca5ad88ee769f4398b95a5d2e6da903e94d308736c0ffc796ecd46ee976"
+    },
+    "/private/tmp/glyph-native-route-packet-safety-initial-20261022.py": {
+      "bytes": 7072,
+      "sha256": "303c692c0cb163797bc5c3ccc958a19b6e1cca44b202d9767c86fcaffefa63ca"
+    },
+    "/private/tmp/glyph-native-route-packet-safety-initial-failure-20261022.json": {
+      "bytes": 369,
+      "sha256": "bc1a4fd58b222a22d6efe1f15383f3dc4887b52e921dde03bb69e0f4f17a4397"
+    },
+    "/private/tmp/glyph-native-route-packet-safety-result-20261022.json": {
+      "bytes": 3212,
+      "sha256": "d552e2e074d8491350fa8716aa888d52ce853e84a8d59b156fa09edd9db600a1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_candidate_tool.py": {
+      "bytes": 19077,
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_production_tool.py": {
+      "bytes": 10878,
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": {
+      "bytes": 46658,
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+    }
+  },
+  "kind": "FINITE_HOST_ROUTE_ADAPTER_REVIEW_PUBLIC_SAFE_PINS",
+  "no_device_action": true,
+  "private_policy": "No original/derived Config bytes or raw private simulation receipts copied. Hash-only prior private references remain in their existing private custody."
+}

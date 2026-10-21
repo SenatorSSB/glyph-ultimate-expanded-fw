@@ -1,0 +1,168 @@
+"""Candidate-specific host Config route packet. No device action without --execute.
+
+Separate owner approval is required before execution. This host artifact is not
+part of, and does not change, frozen firmware F334f or its retained UF2.
+"""
+from pathlib import Path
+import argparse, base64, hashlib, json, os, re, subprocess, sys
+
+F = Path('/private/tmp/glyph-profile-native-20261020')
+F_SHA = '334fbd06e4541c120b0db423e5be7e112eb1f6f6'
+ORIGINAL_SHA = '54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460'
+SOURCE_PINS = {
+    'glyph_serial_config_tool.py': '0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c',
+    'glyph_profile_store_production_tool.py': '4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef',
+    'glyph_profile_store_candidate_tool.py': '33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2',
+}
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def initialize():
+    if subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=F, text=True).strip() != F_SHA:
+        raise ValueError('frozen firmware source identity changed')
+    if subprocess.check_output(['git', 'status', '--porcelain'], cwd=F, text=True):
+        raise ValueError('frozen firmware checkout is dirty')
+    for name, pin in SOURCE_PINS.items():
+        if digest((F / 'tools' / name).read_bytes()) != pin:
+            raise ValueError('pinned existing host source changed')
+    sys.dont_write_bytecode = True
+    sys.path.insert(0, str(F / 'tools'))
+    import glyph_serial_config_tool as transport
+    import glyph_profile_store_candidate_tool as requests
+    import glyph_profile_store_production_tool as production
+    pb, jf, _ = transport.load_runtime_proto_modules(F)
+    return transport, requests, production, pb, jf
+
+def project(action, current_raw, original_raw, transport, pb):
+    if action not in ('prepare-routes', 'select-switch', 'select-xinput'):
+        raise ValueError('unsupported route action')
+    if digest(original_raw) != ORIGINAL_SHA:
+        raise ValueError('requires exact true original Config backup')
+    original = transport.native_packet_config(original_raw, pb)
+    current = transport.native_packet_config(current_raw, pb)
+    if current.ultimate_profile_store_incarnation != original.ultimate_profile_store_incarnation:
+        raise ValueError('store incarnation differs from true original')
+    if len(original.communication_backend_configs) != 3 or len(original.game_mode_configs) != 3:
+        raise ValueError('unexpected true original extent')
+    if [b.backend_id for b in original.communication_backend_configs] != [pb.COMMS_BACKEND_XINPUT, pb.COMMS_BACKEND_GAMECUBE, pb.COMMS_BACKEND_CONFIGURATOR]:
+        raise ValueError('unexpected original backend sequence')
+    if any(r.mode_id != pb.MODE_ULTIMATE for r in current.game_mode_configs) or len(current.game_mode_configs) != 3:
+        raise ValueError('requires same three existing Ultimate rows')
+    new_backend = pb.CommunicationBackendConfig(backend_id=pb.COMMS_BACKEND_NINTENDO_SWITCH, default_mode_config=3)
+    expected_backends = pb.Config()
+    expected_backends.communication_backend_configs.extend(original.communication_backend_configs)
+    expected_backends.communication_backend_configs[1].default_mode_config = 3
+    expected_backends.communication_backend_configs.add().CopyFrom(new_backend)
+    candidate = pb.Config()
+    candidate.CopyFrom(current)
+    if action == 'prepare-routes':
+        # Permit only firmware-owned receipt progression before setup. No stale
+        # snapshot or prior user/profile/context change is silently overwritten.
+        normalized = transport.decode_config_payload(current_raw, pb)
+        for name in transport._NATIVE_RECEIPT_FIELDS:
+            setattr(normalized, name, getattr(original, name))
+        if normalized.SerializeToString(deterministic=True) != original.SerializeToString(deterministic=True):
+            raise ValueError('route setup requires unchanged original user Config')
+        candidate.communication_backend_configs[1].default_mode_config = 3
+        candidate.communication_backend_configs.add().CopyFrom(new_backend)
+        check = pb.Config()
+        check.CopyFrom(candidate)
+        del check.communication_backend_configs[-1]
+        check.communication_backend_configs[1].CopyFrom(current.communication_backend_configs[1])
+    else:
+        if list(current.communication_backend_configs) != list(expected_backends.communication_backend_configs):
+            raise ValueError('requires exact approved four backend records/chords/order')
+        if current.default_backend_config != original.default_backend_config:
+            raise ValueError('non-USB backend default changed')
+        previous, selected = (1, 4) if action == 'select-switch' else (4, 1)
+        if current.default_usb_backend_config != previous:
+            raise ValueError('unexpected/already selected USB default; no replay')
+        candidate.default_usb_backend_config = selected
+        check = pb.Config()
+        check.CopyFrom(candidate)
+        check.default_usb_backend_config = current.default_usb_backend_config
+    if check.SerializeToString(deterministic=True) != current.SerializeToString(deterministic=True):
+        raise ValueError('non-whitelisted Config field changed')
+    return candidate.SerializeToString(deterministic=True)
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('action', choices=['prepare-routes', 'select-switch', 'select-xinput'])
+    parser.add_argument('--expected-current-backup', type=Path, required=True)
+    parser.add_argument('--expected-current-sha256', required=True)
+    parser.add_argument('--original-backup', type=Path, required=True)
+    parser.add_argument('--session', required=True)
+    parser.add_argument('--receipt-out', type=Path, required=True)
+    parser.add_argument('--journal-out', type=Path, required=True)
+    parser.add_argument('--execute', action='store_true')
+    parser.add_argument('--exclusive-configurator-session', action='store_true')
+    parser.add_argument('--port')
+    args = parser.parse_args(argv)
+    try:
+        os.umask(0o077)
+        if not args.session.strip():
+            raise ValueError('explicit actual session required')
+        if args.receipt_out.resolve() == args.journal_out.resolve():
+            raise ValueError('receipt/journal paths must differ')
+        if args.execute:
+            if os.getuid() != 502 or os.geteuid() != 502:
+                raise ValueError('requires same approved normal user UID502')
+            if not args.exclusive_configurator_session or not args.port or not re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+', args.port):
+                raise ValueError('requires explicit positively identified exclusive ordinary Configurator CDC session')
+        elif args.port or args.exclusive_configurator_session:
+            raise ValueError('offline preparation forbids port/execution flags')
+        transport, requests, production, pb, jf = initialize()
+        current_raw = transport.native_packet_backup(args.expected_current_backup, args.expected_current_sha256)
+        original_raw = transport.native_packet_backup(args.original_backup, ORIGINAL_SHA)
+        payload = project(args.action, current_raw, original_raw, transport, pb)
+        current = transport.native_packet_config(current_raw, pb)
+        # All output paths are new private custody. Reserve both before a port
+        # open; do not send if custody could overwrite a prior attempt.
+        with args.journal_out.open('x', encoding='utf-8') as journal:
+            with args.receipt_out.open('x', encoding='utf-8') as receipt_file:
+                receipt = {'kind': 'EXACT_F334F_TEMPORARY_ROUTE_CONFIG_PACKET', 'action': args.action,
+                           'session': args.session, 'execute': args.execute, 'firmware_source_SHA': F_SHA,
+                           'true_original_raw_SHA256': ORIGINAL_SHA, 'fresh_current_raw_SHA256': digest(current_raw),
+                           'payload_SHA256': digest(payload), 'payload_bytes': len(payload),
+                           'private_payload_base64': base64.b64encode(payload).decode(),
+                           'atomic_generation_fence': False, 'existing_SET_CONFIG_command': transport.CMD_SET_CONFIG,
+                           'fixed_changes': 'Append one Switch row4 and point GC default to existing Ultimate row3, OR change only USB default1/4; preserve all other fields and startup chords',
+                           'manual_reinitialization_exposed': False, 'retry_or_recovery_exposed': False}
+                json.dump(receipt, receipt_file, indent=2)
+                receipt_file.write('\n')
+                receipt_file.flush()
+                os.fsync(receipt_file.fileno())
+            fd = os.open(str(args.receipt_out.parent), os.O_RDONLY)
+            try:
+                os.fsync(fd)
+            finally:
+                os.close(fd)
+            production.emit(journal, args.action, 'immutable_route_receipt_persisted', payload_sha256=digest(payload))
+            if args.execute:
+                port = transport.PosixSerialPort(args.port, 115200, 5.0)
+                try:
+                    port.open()
+                    port.flush_input()
+                    status = requests.request(port, pb, pb.ProfileStoreRequest(protocol_version=2, operation=pb.PROFILE_STORE_STATUS), phase='route_status')
+                    production.verify_production_status(type('Admission', (), {'action': 'status'})(), pb, status)
+                    if status.recovery_flags or not status.mutation_feasible or status.store_incarnation != current.ultimate_profile_store_incarnation:
+                        raise ValueError('normal status/incarnation/admission required')
+                    if transport.request_get_config(port) != current_raw:
+                        raise ValueError('fresh Config differs; no SET sent')
+                    # Exactly one existing SET; no replay, reset or new protocol.
+                    transport.request_set_config(port, payload)
+                    readback = transport.decode_config_payload(transport.request_get_config(port), pb).SerializeToString(deterministic=True)
+                    if readback != payload:
+                        raise ValueError('readback mismatch: uncertain outcome; stop, no retry')
+                    production.emit(journal, args.action, 'readback_verified', payload_sha256=digest(payload))
+                finally:
+                    port.close()
+        print(json.dumps({'route_packet': args.action, 'dry_run': not args.execute, 'payload_sha256': digest(payload), 'payload_bytes': len(payload), 'serial_opened': args.execute}))
+        return 0
+    except Exception as error:
+        print('route Config packet STOP: ' + str(error))
+        return 1
+
+if __name__ == '__main__':
+    sys.exit(main())

@@ -1,0 +1,133 @@
+{
+  "kind": "FINITE_HOST_ROUTE_SAFETY_NOT_HARDWARE_ACCEPTANCE",
+  "pure_source_backed_checks": [
+    "independently_derived_actual_route_hashes",
+    "true_original_logical_restore",
+    "no_double_append",
+    "no_select_before_setup",
+    "no_duplicate_switch_selection",
+    "no_duplicate_xinput_selection",
+    "no_unknown_action",
+    "no_fake_original_backup",
+    "no_stale_user_state_overwrite",
+    "no_changed_startup_chord",
+    "no_cross_incarnation"
+  ],
+  "fake_transport_cases": [
+    {
+      "case": "offline_never_constructs_port",
+      "returncode": 0,
+      "constructed": 0,
+      "opened": 0,
+      "closed": 0,
+      "SETs": 0,
+      "GETs": 0,
+      "STATUS": 0,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "existing_receipt_never_opens",
+      "returncode": 1,
+      "constructed": 0,
+      "opened": 0,
+      "closed": 0,
+      "SETs": 0,
+      "GETs": 0,
+      "STATUS": 0,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "existing_journal_never_opens",
+      "returncode": 1,
+      "constructed": 0,
+      "opened": 0,
+      "closed": 0,
+      "SETs": 0,
+      "GETs": 0,
+      "STATUS": 0,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "recovery_refusal_before_SET",
+      "returncode": 1,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 0,
+      "GETs": 0,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "protocol_refusal_before_SET",
+      "returncode": 1,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 0,
+      "GETs": 0,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "incarnation_refusal_before_SET",
+      "returncode": 1,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 0,
+      "GETs": 0,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "changed_fresh_GET_before_SET",
+      "returncode": 1,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 0,
+      "GETs": 1,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "uncertain_SET_no_retry",
+      "returncode": 1,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 1,
+      "GETs": 1,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "wrong_readback_no_retry",
+      "returncode": 1,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 1,
+      "GETs": 2,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    },
+    {
+      "case": "one_SET_success",
+      "returncode": 0,
+      "constructed": 1,
+      "opened": 1,
+      "closed": 1,
+      "SETs": 1,
+      "GETs": 2,
+      "STATUS": 1,
+      "actual_device_operations": 0
+    }
+  ],
+  "actual_device_operations": 0,
+  "actual_device_or_F_source_mutations": 0,
+  "host_adapter_sha256": "258857385d9ed8d43a6fdab42843b46cc3c1bcd7ee027fb7f1018fbaa4ec1516",
+  "private_simulation_receipts": "/private/tmp/glyph-route-safety-ayep9o25",
+  "qualification": "Fake transport validates ordering, no-retry and custody guards; actual OS, firmware transport and hardware outcomes remain unverified."
+}

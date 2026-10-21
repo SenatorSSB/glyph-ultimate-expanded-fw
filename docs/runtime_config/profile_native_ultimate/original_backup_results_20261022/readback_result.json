@@ -1,0 +1,81 @@
+{
+  "kind": "ACTUAL_APPROVED_ORIGINAL_CONFIGURATOR_API_BACKUP_NOT_CANDIDATE_ACCEPTANCE",
+  "date": "2026-10-22",
+  "owner_authority": [
+    "GP_NATIVE_001_MAC_PREFLIGHT_V1",
+    "GP_NATIVE_001_CONFIGURATOR_BACKUP_ENTRY_V1",
+    "GP_NATIVE_001_CONFIGURATOR_READ_ACCESS_V1 same-user sandbox-exempt method"
+  ],
+  "execution": {
+    "real_UID": 502,
+    "effective_UID": 502,
+    "sudo_driver_permission_OS_setting_changes": 0,
+    "owner_menu_entries": 1,
+    "CDC_metadata_lookups": 1,
+    "identity_attempts": 2,
+    "identity_requests_transmitted": 1,
+    "first_identity_attempt": "EPERM before fd/request; retained unchanged",
+    "additional_owner_approved_identity": "Valid current Configurator-only response; no firmware attestation",
+    "Config_backups": 1,
+    "explicit_STATUS": 1,
+    "LIST_calls": 3,
+    "profile_READs": 22,
+    "STATUS_including_LIST_READ_preflights": 26,
+    "automatic_retries": 0
+  },
+  "custody": {
+    "original_Config_bytes": 252,
+    "original_Config_raw_sha256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+    "original_Config_backup_sha256": "f797540a7925fa4db28baa2302cf29fba984684641bc5424542153d900f6ee47",
+    "original_profile_count": 22,
+    "directory_complete": true,
+    "Config_CRC32": 1156314366,
+    "store_incarnation": 1,
+    "store_generation": 172,
+    "all_READ_status_ID_revision_fences_match": true,
+    "all_retained_wire_protobuf_JSON_correspondence": "MATCH",
+    "all_reconstructed_wrappers_roundtrip": "PASS",
+    "all_profiles_custody_sha256": "f230d1c7ccb0b907d6d2cb7e8dc9e58494798ea15a29223e786b12d257ca19a5",
+    "private_custody_manifest_sha256": "f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d",
+    "private_pinned_files": 251,
+    "private_location": "Owner checkout local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022",
+    "original_payloads_journals_device_serial": "PRIVATE_LOCAL_ONLY_NOT_CONTENT_ARCHIVED_OR_PUBLISHED",
+    "qualification": "API Config raw payload and deterministic complete READ wrappers, with exact received response journals. Not raw on-flash records, filesystem image or record history."
+  },
+  "legacy_host_checker_correction": {
+    "original_assertion_and_checker": "Retained unchanged as failed host validation evidence",
+    "finding": "Exact legacy directory/body version equality is not an accepted firmware READ invariant",
+    "observed_directory_payload_version": 1,
+    "observed_decoded_schema_version": 3,
+    "both_versions_preserved": true,
+    "origin": "UNKNOWN_ROOT_CAUSE_UNPROVEN",
+    "independent_report_sha256": "06e00021ea8dc74aac0e10b11a8f271bc3b0bff82fac64905f8b3240c4d75c21",
+    "independent_pins_sha256": "38eddc6d6cb0f0b13e5d5d4336a3e3e1d97919cd931773f599066f62ad983b93",
+    "disputed_READ_retries": 0,
+    "remaining_first_attempts_after_offline_adjudication": 19,
+    "source_protocol_metadata_mutations": 0
+  },
+  "route_facts": {
+    "XInput": "One positive registry match; one raw report selection stop before interface open; zero raw reports, no retry",
+    "GameCube_adapter_to_Switch": "Owner available manual route; Mac WUP unavailable; zero WUP/init13 actions",
+    "USB_Switch": "No backend row in actual saved Config, no route inspect/capture",
+    "actual_Config_backend_kinds": [
+      "XINPUT",
+      "GAMECUBE",
+      "CONFIGURATOR"
+    ],
+    "ordinary_Configurator": "Owner-confirmed mode, one identified ordinary CDC session and valid readback"
+  },
+  "unchanged_candidate": {
+    "Git_SHA": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "UF2_SHA256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+    "installed": false,
+    "Config_profile_writes": 0,
+    "physical_acceptance": "NOT_TESTED",
+    "target_timing_highwater": "NOT_MEASURED",
+    "Nunchuk": "NOT_TESTED",
+    "RT2": "DEFERRED_UNRESOLVED",
+    "root_cause": "UNPROVEN"
+  },
+  "next_gate": "Separate exact-candidate installation/Config-profile/physical packet and explicit owner approval; safe reentry, route access and complete required observations must be concrete; no automatic install or further reads."
+}

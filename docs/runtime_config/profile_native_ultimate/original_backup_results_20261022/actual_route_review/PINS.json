@@ -1,0 +1,167 @@
+{
+  "files": {
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/REPORT.md": {
+      "bytes": 14910,
+      "sha256": "81f4b876a4e93c258938442a6aa74c86f5e745486fd0f59d2f3d4d2fc3f9d820"
+    },
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/derive_route_plan.py": {
+      "bytes": 8762,
+      "sha256": "f12c5792334288040c52500fa5cf45cc15de970956701c88c8db689cc5636705"
+    },
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/fixture_input_references.json": {
+      "bytes": 1094,
+      "sha256": "9db2711fe17c6fec833c748e687ffe742f8cee6d03129ceac9b939f38964224b"
+    },
+    "/private/tmp/glyph-native-actual-config-route-plan-20261022/result.json": {
+      "bytes": 7163,
+      "sha256": "790931885a7a31bad1aa0cc331aa909f1335c03ca92983a6930e097a11b13ddd"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_334f_preparation_20261021/current_packet_exactF.json": {
+      "bytes": 2772067,
+      "sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_334f_preparation_20261021/session_plan_addendum.md": {
+      "bytes": 10924,
+      "sha256": "afc820774bf43c0ffed7067ea77f6506bb27cf1d694b2bc8e0618f94b4b13bb6"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md": {
+      "bytes": 6954,
+      "sha256": "51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/implementation_contract.json": {
+      "bytes": 80045,
+      "sha256": "4bfc3eae1b00581c970cbff4665748469ec6372d9017dc0c9b315ef1a706a3c0"
+    },
+    "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_store_rt2_deferred_closure.md": {
+      "bytes": 9076,
+      "sha256": "6eec64ba9322a0e3d0938af002c5b412450ace3a881d3ce5788b45ec441bca71"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/include/util/state_util.hpp": {
+      "bytes": 3192,
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/ConfiguratorBackend.cpp": {
+      "bytes": 51807,
+      "sha256": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/XInputBackend.cpp": {
+      "bytes": 2197,
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/backend_init.cpp": {
+      "bytes": 14593,
+      "sha256": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/console_detection.cpp": {
+      "bytes": 2116,
+      "sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/display/ConfigMenu.cpp": {
+      "bytes": 9280,
+      "sha256": "5772d5accd688ffe176d968146c02c17682512c9551348438d6a7a76e94a57be"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/display/DefaultConfigMenu.cpp": {
+      "bytes": 12909,
+      "sha256": "4b8f7cdf492a34c70fbd02110b27e5814b4efd910082a05f5b3f205ed334b520"
+    },
+    "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/serial.cpp": {
+      "bytes": 531,
+      "sha256": "4a38620ffc8683d55d61d88a262ebc1f2a9f830dbd086fca8733f0253e222e4d"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/config.cpp": {
+      "bytes": 18318,
+      "sha256": "229caebd37a724a8c88d09c6e34ec1941ac4d5ff3cd144198fc61c5730489ed9"
+    },
+    "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/glyph_config_validation.cpp": {
+      "bytes": 615,
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/context.json": {
+      "bytes": 33,
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+    },
+    "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/profile.json": {
+      "bytes": 2690,
+      "sha256": "d458e8a6f8165c2643af667e2d71a5bb773b37bb5df7ef7752df21dfd33523b0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/context.json": {
+      "bytes": 166,
+      "sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7"
+    },
+    "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/profile.json": {
+      "bytes": 2730,
+      "sha256": "e8c549e529820d44faf868a54c7ed24cffc27037be8e57fae39c83d518b30781"
+    },
+    "/private/tmp/glyph-profile-native-20261020/include/core/RuntimeIdentityService.hpp": {
+      "bytes": 5114,
+      "sha256": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7"
+    },
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.options": {
+      "bytes": 6441,
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+    },
+    "/private/tmp/glyph-profile-native-20261020/schema/haybox/config.proto": {
+      "bytes": 33965,
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/comms/B0XXInputViewer.cpp": {
+      "bytes": 1743,
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/comms/IntegratedDisplay.cpp": {
+      "bytes": 2909,
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/CommunicationBackend.cpp": {
+      "bytes": 1619,
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/ControllerMode.cpp": {
+      "bytes": 3522,
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_utils.cpp": {
+      "bytes": 2258,
+      "sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/config_validation.cpp": {
+      "bytes": 23117,
+      "sha256": "bd91ec9807a1167eded5c7588cb49b8f7ebebdd3379150a1c1d0f8336e966822"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/core/mode_selection.cpp": {
+      "bytes": 10045,
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    "/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp": {
+      "bytes": 39202,
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_native_target_metrics_tool.py": {
+      "bytes": 8362,
+      "sha256": "91ff6d0e31b5e370c7a4c100f3d4fb477c264413ebe363b27da48fcb1b1d777f"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_runtime_identity_tool.py": {
+      "bytes": 9156,
+      "sha256": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead"
+    },
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": {
+      "bytes": 46658,
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+    }
+  },
+  "kind": "FINITE_ACTUAL_CONFIG_ROUTE_PLAN_PUBLIC_SAFE_PINS",
+  "no_device_actions": true,
+  "private_input_policy": "Hash references only; do not publish/content-archive original or derived Config payloads.",
+  "private_input_references": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_backup.json": {
+      "bytes": 2744,
+      "publication": "HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_RAW_PAYLOAD",
+      "sha256": "f797540a7925fa4db28baa2302cf29fba984684641bc5424542153d900f6ee47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_config_custody.json": {
+      "bytes": 612,
+      "publication": "HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_RAW_PAYLOAD",
+      "sha256": "166dfd33200379f6d4e5e162ddbd1a31253c3a77933ebadddb53f82eb0b4d22f"
+    }
+  }
+}

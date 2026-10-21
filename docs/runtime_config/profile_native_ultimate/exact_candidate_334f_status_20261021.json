@@ -122,7 +122,8 @@
   "device_approval": {
     "bounded_preflight": "preflight_results_20261022/approval_receipt.json",
     "candidate_installation_and_physical_campaign": null,
-    "known_menu_entry_extension": null
+    "known_menu_entry_extension": "DIRECT_OWNER_APPROVED_COMPLETED",
+    "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -131,12 +132,10 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit approval and execution of the exact known-menu Configurator entry/backup-only extension; then actual original Config/store/eligibility custody",
-    "Usable XInput complete-output observation remains unresolved after the one stopped capture; no retry or alternate device path is authorized by existing preflight",
-    "Manual GC-adapter-to-Switch actual screen/field capability facts and economical source-derived route matrix; optional raw WUP hardware is not required but invisible required fields stay gaps",
-    "Separate exact-candidate installation/profile/physical packet and explicit owner approval, including verified safe reentry/restoration conditions",
-    "All required H1-H12/all18 physical evidence, instrumented target measurements with startup/backend limits, logical restoration and independent HEP PASS",
-    "Source-free result then exact tested-source integration, fresh integration review and separate strict DONE"
+    "Explicit exact retained F/UF2 manual installation and bounded ordinary route/preservation qualification approval",
+    "Usable actual backend output observers and exact native Config/profile/physical campaign packet approval; unexposed GameCube fields need observation or precise owner evidence-standard decision",
+    "All18/H1-H12 physical outputs, target measurements with honest limits, logical restoration/owned-ID cleanup and independent exact HEP PASS",
+    "Source-free result, exact tested-source integration, fresh review and separate strict DONE"
   ],
   "historical_evidence": "All earlier failed/incomplete source/resource probes, arithmetic corrections, candidates and custody remain unchanged. Current exact-F proof supersedes their open-state disposition, not their historical facts.",
   "sourcefree_publication_validation": {
@@ -170,7 +169,8 @@
     "XInput": "ONE_REGISTRY_MATCH_CAPTURE_STOPPED_BEFORE_OPEN_ZERO_REPORTS_NO_RETRY",
     "WUP_on_Mac": "UNAVAILABLE_OWNER_REPORTED_ZERO_ATTEMPTS_ZERO_INIT13",
     "Switch_on_Mac": "UNATTEMPTED_NO_CONFIRMED_ALREADY_REACHABLE_ROUTE",
-    "Configurator": "NOT_ALREADY_REACHABLE; known_menu_entry_extension_awaits_separate_approval"
+    "Configurator": "COMPLETED_APPROVED_CONFIG_AND_ALL22_ORIGINALS_CUSTODY_PASS",
+    "historical_entry_proposal": "Approved and completed later; original proposal/archive unchanged"
   },
   "sourcefree_observer_publication_validation": {
     "record": "observer_preflight_publication_validation_20261021/result.json",
@@ -189,8 +189,26 @@
     "file": "configurator_entry_backup_20261022/ENTRY_PACKET.md",
     "json_sha256": "51b9f5ce29d3b5ff5240687a86db6ded59ac430333af914c329d7a86d8685fd2",
     "review_report_sha256": "216d58ef27038740fa9b28dd6ca5e20a6ca25b4819a3a28ee19a867c9a5f3c57",
-    "owner_approval": null,
-    "entry_and_lookup_executed": false
+    "owner_approval": "DIRECT_OWNER_APPROVED_20261022",
+    "entry_and_lookup_executed": true
   },
-  "latest_sourcefree_preflight_validation": "preflight_publication_validation_20261022/result.json"
+  "latest_sourcefree_preflight_validation": "preflight_publication_validation_20261022/result.json",
+  "original_backup_result": "original_backup_results_20261022/readback_result.json",
+  "next_installation_packet": {
+    "id": "GP_NATIVE_001_INSTALL_QUALIFY_V1",
+    "file": "hardware_installation_qualification_20261022/INSTALL_PACKET.md",
+    "json_sha256": "0377b61b0f6b87ff345c93e7c377f86b009622d351ea42d4d4fd304eeaf0f3cf",
+    "owner_approval": null,
+    "executed": false,
+    "independent_ACK": "hardware_installation_qualification_20261022/independent_ack/REPORT.md",
+    "independent_ACK_SHA256": "83e1381fcfbc5e28d541e0de7fef64c955586d23289cc59569c8b555746914fc",
+    "independent_pins_SHA256": "b525979f1e5f06da9fd4a019525e6ba31d17f65c1635d3a600d63d774fc40af1"
+  },
+  "prepared_host_route_adapter": {
+    "file": "hardware_installation_qualification_20261022/route_packet.py.txt",
+    "sha256": "258857385d9ed8d43a6fdab42843b46cc3c1bcd7ee027fb7f1018fbaa4ec1516",
+    "review_report_sha256": "379a75f7d051f74ce3b2dc93478e65b49e89b43dc923df1d20bdf310da4c322f",
+    "executed": false
+  },
+  "latest_sourcefree_readback_validation": "original_backup_publication_validation_20261022/result.json"
 }

@@ -1,0 +1,166 @@
+{
+  "BTN_RT2": {
+    "Configurator_backend_row_one_based": 3,
+    "backend_startup_binding_only": true,
+    "physical_ID_one_based": 42,
+    "proposed_Switch_row_has_no_new_chord": true,
+    "qualification": "Source-backed cold-entry possibility, not yet a physically verified raw startup/recovery route; runtime rows must start only after normal gameplay initialization with controls released at boot",
+    "selected_count": 13,
+    "selected_rows_containing_RT2": [
+      "O185",
+      "O212",
+      "O293",
+      "N074",
+      "N075",
+      "N076",
+      "N077",
+      "N078",
+      "N082",
+      "N083",
+      "N086",
+      "N088",
+      "N110"
+    ]
+  },
+  "F": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "H11_reentry": {
+    "RT2_startup_physically_mandatory": false,
+    "manual_severe_RT2_recovery_reopened": false,
+    "method": "Owner-known ordinary Menu to Configurator on XInput",
+    "physical_F_NativeUnavailable_reentry_verified": false,
+    "procedural_clarification": "Root accepted replacing only historical addendum raw-startup entry method with ordinary raw-input menu; preserve historical addendum and all H11 refusal/restore gates",
+    "source_grounded_original_input_controls_survive_NativeUnavailable": true
+  },
+  "USB_Switch_minimum_temporary_route_delta": {
+    "append_one_existing_supported_backend_record": {
+      "activation_binding": [],
+      "backend_id_name": "COMMS_BACKEND_NINTENDO_SWITCH",
+      "backend_id_numeric": 7,
+      "backend_row_one_based": 4,
+      "default_mode_config_one_based": 3
+    },
+    "existing_context_tool_applies_backend_delta": false,
+    "initial_default_indices_unchanged": true,
+    "preserve_existing_backend_rows_and_order": true,
+    "to_enter_USB_Switch_without_new_chord": {
+      "default_usb_backend_config": 4,
+      "manual_reinitialization": "Separate explicit future approval; no device action here"
+    },
+    "to_return_XInput_without_new_chord": {
+      "default_usb_backend_config": 1,
+      "manual_reinitialization": "Same exact future packet"
+    }
+  },
+  "XInput_CDC": {
+    "actual_Mac_XInput_CDC_access": "UNVERIFIED",
+    "actual_USB_output_capture_reports": 0,
+    "identity": "Existing current-XInput16/72 protocol source-feasible",
+    "live_retry_or_query_here": false,
+    "metrics": "Fixed read-only request16/response160 source-feasible; exact F and poststartup conditions",
+    "viewer": "Physical input records25bytes only; cannot replace report output observer"
+  },
+  "approval": null,
+  "date": "2026-10-22",
+  "device_actions": 0,
+  "existing_helper_offline_integration": [
+    {
+      "backend_and_route_fields_preserved": true,
+      "context": "candidate_fixture_packet/compatibility",
+      "existing_context_tool_accepts_existing_Ultimate_row_zero_index": 2,
+      "existing_restore_restores_original_user_fields": true,
+      "qualification": "Pure existing helper calls on in-memory protobufs; no device write or target validation claim"
+    },
+    {
+      "backend_and_route_fields_preserved": true,
+      "context": "candidate_safe_fixture_packet/complete_sample_1",
+      "existing_context_tool_accepts_existing_Ultimate_row_zero_index": 2,
+      "existing_restore_restores_original_user_fields": true,
+      "qualification": "Pure existing helper calls on in-memory protobufs; no device write or target validation claim"
+    }
+  ],
+  "host_gap": "Prepare/pin a narrow host-only route Config delta adapter or reviewed exact-artifact workflow that preserves fresh backup/status/incarnation/metadata guards. Existing native-packet context/true-original restore must not be abused as generic route-write bypass.",
+  "kind": "FINITE_ACTUAL_CONFIG_OFFLINE_ROUTE_PLAN_NOT_APPROVAL",
+  "necessary_derived_route_facts": {
+    "Ultimate_rows": 3,
+    "all_Ultimate_mode_chords_empty": true,
+    "default_USB_backend_row": 1,
+    "default_backend_row": 1,
+    "existing_backends_one_based": [
+      {
+        "backend": "COMMS_BACKEND_XINPUT",
+        "default_Ultimate_row_one_based": 3,
+        "row": 1,
+        "startup_chord": []
+      },
+      {
+        "backend": "COMMS_BACKEND_GAMECUBE",
+        "default_Ultimate_row_one_based": 1,
+        "row": 2,
+        "startup_chord": []
+      },
+      {
+        "backend": "COMMS_BACKEND_CONFIGURATOR",
+        "default_Ultimate_row_one_based": 1,
+        "row": 3,
+        "startup_chord": [
+          "BTN_RT2"
+        ]
+      }
+    ],
+    "missing_route": "COMMS_BACKEND_NINTENDO_SWITCH"
+  },
+  "no_source_changes_or_build_needed_for_Config_data_route_extension": true,
+  "offline_config_variant_hashes_only": {
+    "Switch_selected": {
+      "bytes": 258,
+      "sha256": "1940d93bd9da97cb1525561572fd4f5e760cdfb689f94ed61d5bd376845f8b46"
+    },
+    "append_Switch_only": {
+      "bytes": 258,
+      "sha256": "e907b7c47318a8377be7aefcd58da79b28962dde77aff49ae074a276e98bbe8b"
+    },
+    "original_deterministic_wrapper": {
+      "bytes": 252,
+      "sha256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460"
+    },
+    "shared_test_row_Switch_selected": {
+      "bytes": 258,
+      "sha256": "d9b5e8fa6a192c877d83031f26dfa8561d98e0b558d321b49c0bcad81c3214a9"
+    },
+    "shared_test_row_append_Switch": {
+      "bytes": 258,
+      "sha256": "aa63c63f3a30534ec2b7aab21cd3379807fd173b072be799baea8f917e6d5bb8"
+    }
+  },
+  "original_config_custody": {
+    "payload": {
+      "bytes": 252,
+      "sha256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460"
+    },
+    "publication": "HASH_ONLY_NO_ORIGINAL_CONFIG_BYTES_OR_FULL_JSON"
+  },
+  "owner_console_screen_and_fields": "UNKNOWN; root requested factual screen/field information, no test",
+  "private_backups_modified": false,
+  "private_input_references": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_backup.json": {
+      "bytes": 2744,
+      "publication": "HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_RAW_PAYLOAD",
+      "sha256": "f797540a7925fa4db28baa2302cf29fba984684641bc5424542153d900f6ee47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_config_custody.json": {
+      "bytes": 612,
+      "publication": "HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_RAW_PAYLOAD",
+      "sha256": "166dfd33200379f6d4e5e162ddbd1a31253c3a77933ebadddb53f82eb0b4d22f"
+    }
+  },
+  "recommended_shared_test_row_economy": {
+    "XInput_already_points_here": true,
+    "existing_Ultimate_row_one_based": 3,
+    "new_Switch_row_points_here": true,
+    "reason": "One controlled existing Ultimate row for all contexts/checked references/identities; avoids applying every profile/context to separate GC row1",
+    "restore": "Existing prepare_native_restore from true original restores original3 backend records/defaults; retain current firmware receipts as existing helper specifies",
+    "strict_minimum_USB_Switch_requirement": false,
+    "temporary_GameCube_backend_default_mode_config_change": "row2 field1 ->3"
+  },
+  "source_or_firmware_or_queue_mutation": false
+}

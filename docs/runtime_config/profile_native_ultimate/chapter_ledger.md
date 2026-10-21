@@ -1,5 +1,13 @@
 # Profile-native Ultimate execution chapter
 
+## Original custody complete; exact installation gate — 2026-10-22
+
+[Approved Config/all22 original profile backup](original_backup_results_20261022/README.md) completed with full private custody audit PASS. A source-grounded independent review resolved an overstrict legacy metadata/body equality assertion offline, retaining both versions, original error and zero READ retries. Owner-approved same-user access exception preserved UID502 and prior failed-open history; no Config/profile or firmware write occurred.
+
+Actual Config lacks USB Switch. Narrow host route preparation/guards passed focused review and11 pure/10 fake-transport cases; no controller execution. The known raw-input ordinary menu is a source-grounded H11 reentry option on XInput, subject to actual F verification. Owner GameCube observation is Smash Ultimate gameplay; unexposed required fields remain gaps. No RT2 recovery reopening or backend evidence waiver.
+
+[Exact retained F/UF2 installation and access-qualification stage](hardware_installation_qualification_20261022/INSTALL_PACKET.md) is the next separate approval. It excludes native Config/profile writes and the H1–H12 campaign. All source/resource/caps/protocol/fixtures and final human HEP/integration/DONE gates remain unchanged.
+
 ## Actual Mac preflight and known-menu backup gate — 2026-10-22
 
 [Preflight evidence](preflight_results_20261022/README.md) preserves direct owner approval, one positive XInput registry match and the single capture stop before interface open, zero reports and no retry. WUP-on-Mac is owner-unavailable and has no inspection/capture/init13 attempt; Switch remains unattempted. No candidate install, Config/profile mutation or physical campaign occurred. This is host access evidence, not HEP PASS/FAIL.

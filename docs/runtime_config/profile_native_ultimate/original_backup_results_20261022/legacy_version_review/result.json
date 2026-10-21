@@ -1,0 +1,107 @@
+{
+  "READ4_retry_permitted": false,
+  "actual_response_status": "PROFILE_STORE_OK",
+  "canonical_profile_is_original_record_file_bytes": false,
+  "canonical_profile_wrapper_bytes": 3047,
+  "canonical_profile_wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+  "classifier": {
+    "engine": "legacy",
+    "legacy_semantic_admission": "firmware existing validator",
+    "schema": 3
+  },
+  "config_generation": 1156314366,
+  "continuation": "Root may complete PRIVATE offline canonical READ4 custody from retained response bytes with BOTH versions preserved, then only first attempts for untouched remaining original IDs under existing read approval/counters and unchanged stop conditions. This review does not renew or widen approval.",
+  "date": "2026-10-22",
+  "decoded_profile_schema_version": 3,
+  "device_requests_performed": 0,
+  "directory_payload_version": 1,
+  "disposition": "SUPPORTED_LEGACY_METADATA_BODY_VERSION_DISTINCTION_UNJUSTIFIED_PRIVATE_HOST_EQUALITY_GATE",
+  "exact_json_matches_retained_wire_response": true,
+  "full_wire_protobuf_consumed": true,
+  "historical_mismatch_origin": "UNKNOWN_ROOT_CAUSE_UNPROVEN",
+  "local_validation_scope": "Complete retained frame/protobuf/JSON correspondence, status/fences/ID/revision, schema class, no native field,28table IDs with9coordinates, deterministic roundtrip; full legacy semantic admission is target/source-backed, not a new independent C++ validator run",
+  "private_input_references": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/original_directory_complete.json": {
+      "bytes": 3341,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "c658e052820fb14be8a13291c9ad56c2d056b64f7ea97c147d2588f479d92e47"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/profile_backup_stop.json": {
+      "bytes": 77,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "547c233b89388150a9f75ac4a64a197772a68e9aa2096af366dcd9ba2ccca98d"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/read_4_command.json": {
+      "bytes": 831,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "7acfef7325d61c20c729e51d90345b9734f54cccb0ae6db2d9ab9224510cdd59"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/read_4_journal.jsonl": {
+      "bytes": 11847,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "665f4baddb6f25933442d4c01154bb77382609b80d2c7a1e7ad752d95373da55"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/read_4_response.json": {
+      "bytes": 39389,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "100fe119917ea841bd581e7592a013842f58aac85b27e332a4570fbd2e6a3479"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/read_4_result.json": {
+      "bytes": 124,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "6cdb3c3064728f005e53294a39ed2390acebabeb69082da8dd65fc453108b6b7"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/read_4_stderr.txt": {
+      "bytes": 11847,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "665f4baddb6f25933442d4c01154bb77382609b80d2c7a1e7ad752d95373da55"
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/read_4_stdout.txt": {
+      "bytes": 39389,
+      "publication": "PRIVATE_INPUT_HASH_REFERENCE_ONLY_DO_NOT_ARCHIVE_PAYLOAD",
+      "sha256": "100fe119917ea841bd581e7592a013842f58aac85b27e332a4570fbd2e6a3479"
+    }
+  },
+  "profile_id": 4,
+  "read_attempts_for_ID4": 1,
+  "read_response_replayed": {
+    "raw_frame_bytes": 3088,
+    "raw_frame_sha256": "d413010e3b2e9b30254e5eff41ffc2646293ba3a9854fc111688b135a7184b3a",
+    "receive_chunks": 12,
+    "received_protobuf_bytes": 3073,
+    "received_protobuf_sha256": "79b3539d1465127018d493c40e8a642f8ae9187e921d24bfe89a7ab5651fa21a"
+  },
+  "remaining_original_ids": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    24
+  ],
+  "revision": 1,
+  "source_or_backup_mutation_performed": false,
+  "source_scope": "Finite existing supported legacy READ/admission/class boundary; no root-cause or source/resource repair",
+  "status_preflight_replayed": {
+    "raw_frame_bytes": 74,
+    "raw_frame_sha256": "27b8a0c9cf8ab8ec3b9175feb37179ff133b4d097f9019d9486267a676b0fb6a",
+    "receive_chunks": 1,
+    "received_protobuf_bytes": 71,
+    "received_protobuf_sha256": "afc85dc98de4d941238908a5b3ac5b36b2abbe0fea645ef62c023cb93c043330"
+  },
+  "store_generation": 172,
+  "store_incarnation": 1
+}

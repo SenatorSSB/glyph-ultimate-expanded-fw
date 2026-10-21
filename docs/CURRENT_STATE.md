@@ -10,20 +10,19 @@ linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is115
 static RAM197872/delta10528, layout499/512. Broader filesystem support and every
 original cap remain unchanged. Historical failed/incomplete evidence stays exact.
 
-The [approved Mac preflight result](runtime_config/profile_native_ultimate/preflight_results_20261022/README.md)
-found one XInput device, then stopped before interface open with zero reports;
-no retry occurred. WUP-on-Mac is unavailable. The [independent manual-console
-review](runtime_config/profile_native_ultimate/manual_console_review_20261022/README.md)
-confirms raw WUP is optional equipment; unexposed required fields remain gaps.
-The [known-menu Configurator backup-entry packet](runtime_config/profile_native_ultimate/configurator_entry_backup_20261022/ENTRY_PACKET.md)
-passed focused review and awaits separate owner approval for its one firmware
-restart and CDC metadata lookup. No entry or Config/store request has run.
-GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED for retained UF2 SHA256
-`41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
-No candidate installation, Config/profile mutation or physical campaign is
-approved. Hardware/Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
-root cause UNPROVEN. Exact human HEP PASS, tested-source integration and strict
-DONE remain required; all18/H1-H12 and original limits are unchanged.
+The [approved original backup](runtime_config/profile_native_ultimate/original_backup_results_20261022/README.md)
+is complete: Config and all22 original profiles passed custody audit; private
+payloads/journals remain local. The [staged installation/qualification packet](runtime_config/profile_native_ultimate/hardware_installation_qualification_20261022/INSTALL_PACKET.md)
+awaits separate owner approval for exact retained F/UF2 installation and bounded
+ordinary XInput/menu/CDC preservation checks. Native Config/profile writes and
+the acceptance campaign remain excluded. The new route adapter passed focused
+review/offline safety checks; it has not executed. USB Switch is absent from the
+actual Config; GameCube uses owner-observed Smash Ultimate gameplay, with hidden
+report fields still unverified. GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED,
+UF2 SHA256 `41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
+Hardware/Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
+root cause UNPROVEN. All18/H1–H12, exact human HEP PASS, tested-source integration
+and strict DONE remain required. No firmware/resource/protocol limit changes.
 
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,

@@ -1,0 +1,119 @@
+"""Finite host guard/uncertainty checks. Fake transport; no real port created."""
+from pathlib import Path
+from types import SimpleNamespace
+import base64, contextlib, copy, importlib.util, io, json, tempfile
+
+P = Path('/private/tmp/glyph-native-route-packet-20261022.py')
+spec = importlib.util.spec_from_file_location('route_packet', P)
+m = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(m)
+t, requests, production, pb, jf = m.initialize()
+D = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022')
+original = (D / 'original_config_payload.bin').read_bytes()
+setup = m.project('prepare-routes', original, original, t, pb)
+switch = m.project('select-switch', setup, original, t, pb)
+assert m.digest(setup) == 'aa63c63f3a30534ec2b7aab21cd3379807fd173b072be799baea8f917e6d5bb8'
+assert m.digest(switch) == 'd9b5e8fa6a192c877d83031f26dfa8561d98e0b558d321b49c0bcad81c3214a9'
+assert m.project('select-xinput', switch, original, t, pb) == setup
+assert t.prepare_native_restore(switch, original, pb) == original
+outcomes = ['independently_derived_actual_route_hashes', 'true_original_logical_restore']
+
+def refusal(label, action, current, baseline=original):
+    try:
+        m.project(action, current, baseline, t, pb)
+    except Exception:
+        outcomes.append(label)
+        return
+    raise AssertionError('unsafe admission: ' + label)
+
+refusal('no_double_append', 'prepare-routes', setup)
+refusal('no_select_before_setup', 'select-switch', original)
+refusal('no_duplicate_switch_selection', 'select-switch', switch)
+refusal('no_duplicate_xinput_selection', 'select-xinput', setup)
+refusal('no_unknown_action', 'arbitrary', original)
+refusal('no_fake_original_backup', 'prepare-routes', original, setup)
+changed = pb.Config()
+changed.ParseFromString(original)
+changed.game_mode_configs[0].name = 'OTHER_USER_STATE'
+refusal('no_stale_user_state_overwrite', 'prepare-routes', changed.SerializeToString(deterministic=True))
+changed.ParseFromString(setup)
+changed.communication_backend_configs[2].activation_binding.append(pb.BTN_MB1)
+refusal('no_changed_startup_chord', 'select-switch', changed.SerializeToString(deterministic=True))
+changed.ParseFromString(setup)
+changed.ultimate_profile_store_incarnation += 1
+refusal('no_cross_incarnation', 'select-switch', changed.SerializeToString(deterministic=True))
+
+# Exercise the actual command frontend and its single SET path under a fake
+# adapter, including failures after an actual simulated mutation submission.
+temp = Path(tempfile.mkdtemp(prefix='glyph-route-safety-', dir='/private/tmp'))
+status_dict = json.loads((D / 'status_response.json').read_text())['response']
+normal_status = pb.ProfileStoreResponse()
+jf.ParseDict(status_dict, normal_status, ignore_unknown_fields=False)
+case_results = []
+
+def case(label, behavior, expected_rc, expected_sets, execute=True, collision=None):
+    folder = temp / label
+    folder.mkdir()
+    calls = {'constructed': 0, 'opened': 0, 'closed': 0, 'SETs': 0, 'GETs': 0, 'STATUS': 0}
+    class FakePort:
+        def __init__(self, *a): calls['constructed'] += 1
+        def open(self): calls['opened'] += 1
+        def flush_input(self): pass
+        def close(self): calls['closed'] += 1
+    def fake_status(port, proto, request, phase):
+        calls['STATUS'] += 1
+        s = pb.ProfileStoreResponse()
+        s.CopyFrom(normal_status)
+        if behavior == 'recovery': s.recovery_flags = 1
+        if behavior == 'wrong_incarnation': s.store_incarnation += 1
+        if behavior == 'protocol': s.protocol_version = 1
+        return s
+    def fake_get(port):
+        calls['GETs'] += 1
+        if calls['GETs'] == 1: return original + b'\0' if behavior == 'stale_GET' else original
+        return original if behavior == 'wrong_readback' else setup
+    def fake_set(port, payload):
+        calls['SETs'] += 1
+        assert payload == setup
+        if behavior == 'uncertain_SET': raise TimeoutError('simulated uncertain SET completion')
+    proxy = SimpleNamespace(**{name: getattr(t, name) for name in ('native_packet_backup', 'native_packet_config', 'decode_config_payload', 'CMD_SET_CONFIG', '_NATIVE_RECEIPT_FIELDS')})
+    proxy.PosixSerialPort = FakePort
+    proxy.request_get_config = fake_get
+    proxy.request_set_config = fake_set
+    m.initialize = lambda: (proxy, SimpleNamespace(request=fake_status), production, pb, jf)
+    receipt = folder / 'receipt.json'
+    journal = folder / 'journal.jsonl'
+    if collision == 'receipt': receipt.write_text('retained attempt\n')
+    if collision == 'journal': journal.write_text('retained attempt\n')
+    argv = ['prepare-routes', '--expected-current-backup', str(D / 'original_backup.json'), '--expected-current-sha256', m.ORIGINAL_SHA,
+            '--original-backup', str(D / 'original_backup.json'), '--session', 'OFFLINE_FAKE_ONLY_' + label,
+            '--receipt-out', str(receipt), '--journal-out', str(journal)]
+    if execute: argv += ['--execute', '--exclusive-configurator-session', '--port', '/dev/cu.usbmodemOFFLINE_FAKE']
+    captured = io.StringIO()
+    with contextlib.redirect_stdout(captured): rc = m.main(argv)
+    assert rc == expected_rc and calls['SETs'] == expected_sets, (label, rc, calls, captured.getvalue())
+    assert calls['SETs'] <= 1
+    if collision or not execute: assert calls['constructed'] == calls['opened'] == calls['SETs'] == 0
+    if calls['constructed']: assert calls['closed'] == 1
+    if calls['SETs']:
+        r = json.loads(receipt.read_text())
+        assert base64.b64decode(r['private_payload_base64']) == setup
+    case_results.append({'case': label, 'returncode': rc, **calls, 'actual_device_operations': 0})
+
+case('offline_never_constructs_port', 'normal', 0, 0, execute=False)
+case('existing_receipt_never_opens', 'normal', 1, 0, collision='receipt')
+case('existing_journal_never_opens', 'normal', 1, 0, collision='journal')
+case('recovery_refusal_before_SET', 'recovery', 1, 0)
+case('protocol_refusal_before_SET', 'protocol', 1, 0)
+case('incarnation_refusal_before_SET', 'wrong_incarnation', 1, 0)
+case('changed_fresh_GET_before_SET', 'stale_GET', 1, 0)
+case('uncertain_SET_no_retry', 'uncertain_SET', 1, 1)
+case('wrong_readback_no_retry', 'wrong_readback', 1, 1)
+case('one_SET_success', 'normal', 0, 1)
+result = {'kind': 'FINITE_HOST_ROUTE_SAFETY_NOT_HARDWARE_ACCEPTANCE', 'pure_source_backed_checks': outcomes, 'fake_transport_cases': case_results,
+          'actual_device_operations': 0, 'actual_device_or_F_source_mutations': 0,
+          'host_adapter_sha256': m.digest(P.read_bytes()), 'private_simulation_receipts': str(temp),
+          'qualification': 'Fake transport validates ordering, no-retry and custody guards; actual OS, firmware transport and hardware outcomes remain unverified.'}
+out = Path('/private/tmp/glyph-native-route-packet-safety-result-20261022.json')
+with out.open('x') as f: json.dump(result, f, indent=2); f.write('\n')
+print(json.dumps({'safety_checks': len(outcomes), 'fake_transport_cases': len(case_results), 'actual_device_operations': 0, 'result': str(out)}, indent=2))

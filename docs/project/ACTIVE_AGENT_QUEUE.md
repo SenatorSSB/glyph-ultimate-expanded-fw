@@ -10,20 +10,19 @@ linked resource proof. All140 routes/all31 classes fit2048 per core; core1 is115
 static RAM197872/delta10528, layout499/512. Broader filesystem support and every
 original cap remain unchanged. Historical failed/incomplete evidence stays exact.
 
-The [approved Mac preflight result](../runtime_config/profile_native_ultimate/preflight_results_20261022/README.md)
-found one XInput device, then stopped before interface open with zero reports;
-no retry occurred. WUP-on-Mac is unavailable. The [independent manual-console
-review](../runtime_config/profile_native_ultimate/manual_console_review_20261022/README.md)
-confirms raw WUP is optional equipment; unexposed required fields remain gaps.
-The [known-menu Configurator backup-entry packet](../runtime_config/profile_native_ultimate/configurator_entry_backup_20261022/ENTRY_PACKET.md)
-passed focused review and awaits separate owner approval for its one firmware
-restart and CDC metadata lookup. No entry or Config/store request has run.
-GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED for retained UF2 SHA256
-`41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
-No candidate installation, Config/profile mutation or physical campaign is
-approved. Hardware/Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
-root cause UNPROVEN. Exact human HEP PASS, tested-source integration and strict
-DONE remain required; all18/H1-H12 and original limits are unchanged.
+The [approved original backup](../runtime_config/profile_native_ultimate/original_backup_results_20261022/README.md)
+is complete: Config and all22 original profiles passed custody audit; private
+payloads/journals remain local. The [staged installation/qualification packet](../runtime_config/profile_native_ultimate/hardware_installation_qualification_20261022/INSTALL_PACKET.md)
+awaits separate owner approval for exact retained F/UF2 installation and bounded
+ordinary XInput/menu/CDC preservation checks. Native Config/profile writes and
+the acceptance campaign remain excluded. The new route adapter passed focused
+review/offline safety checks; it has not executed. USB Switch is absent from the
+actual Config; GameCube uses owner-observed Smash Ultimate gameplay, with hidden
+report fields still unverified. GP-NATIVE-001 remains HARDWARE_TEST_REQUIRED,
+UF2 SHA256 `41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982`.
+Hardware/Nunchuk NOT_TESTED, timing/highwater NOT_MEASURED, RT2 deferred,
+root cause UNPROVEN. All18/H1–H12, exact human HEP PASS, tested-source integration
+and strict DONE remain required. No firmware/resource/protocol limit changes.
 
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,
@@ -8824,10 +8823,10 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact source/build/resource proof remains closed. Approved preflight found one XInput registry target but its one capture stopped before interface open with zero reports; no retry. Capture access mechanism remains unproven.",
-        "WUP-on-Mac unavailable by owner report; no WUP inspection/capture/init13 occurred. Independent review confirms raw WUP is optional equipment; actual manual GC-adapter-to-Switch visible fields and any unexposed required fields remain explicit gaps, all18/H1-H12 unchanged.",
-        "Known Menu-to-Configurator backup-entry extension passed focused review and awaits separate approval for its firmware restart/CDC lookup. Original Config/store readback and eligibility remain unavailable; no request, entry, candidate install, Config/profile mutation or physical campaign has run.",
-        "Separate exact-candidate installation/physical approval, all required human outputs/diagnostic measurements/logical restoration and independent HEP remain pending. This host access stop is not a candidate hardware FAIL/PASS event."
+        "Exact F/source/build/resource proof remains closed. Owner-approved Configurator entry/access exception completed: original Config and all22 profiles custody PASS; private originals/journals retained, legacy metadata/body distinction independently adjudicated without retry.",
+        "Candidate F/UF2 installation and ordinary access qualification await explicit GP_NATIVE_001_INSTALL_QUALIFY_V1 approval; no installation or Config/profile writes/campaign occurred. Prior XInput raw capture stopped before open with zero reports; no new attempt yet.",
+        "Actual Config lacks USB Switch. Narrow host route adapter preparation/review/11 pure and10 fake-transport checks PASS; execution remains unapproved. H11 may use source-qualified ordinary raw-input menu on XInput, with actual F reentry preflight required; RT2 remains deferred.",
+        "Owner GameCube route uses Smash Ultimate gameplay. Complete required backend fields remain unobserved; no viewer/OLED/game/source substitution or acceptance-standard waiver. All18/H1-H12, target measurements, true-original restore/owned-ID cleanup, independent HEP and tested-source integration/DONE remain pending."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",
       "status_documentation_updates": "Record exact reviewed source/resource/verification/rebinding/converter/identity facts in named chapter docs, candidate B/F/tree/build/descriptor/UF2size+SHA/custody, complete H1-H12 observations and limitations. Governance publishes source-free pending/result queue and mirrors, not candidate source. Preserve GP-BIND-001/002 FAIL,003 HARDWARE_VALIDATED/integrated but not strictDONE, historical H4 root cause UNPROVEN, RT2 DEFERRED/underlyingUNRESOLVED, NunchukNOT_TESTED, GameCube identity unsupported. Independent review and actual proof precede live publication; no aggregate PASS substitution. Record diagnostic wire/source/build/custody/overhead/measurement-window provenance and raw target validity/gaps; NATIVE-REVIEW-P1-STACK remains OPEN until actual affected structural proof closes it. No target measurements or physical PASS inferred by this amendment.",

@@ -1,0 +1,78 @@
+{
+  "packet_id": "GP_NATIVE_001_INSTALL_QUALIFY_V1",
+  "date": "2026-10-22",
+  "state": "OWNER_APPROVAL_REQUIRED_NOT_EXECUTED",
+  "candidate": {
+    "Git_SHA": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+    "UF2_SHA256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+    "UF2_bytes": 1041408,
+    "UF2_owner_checkout_relative_path": "local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982/firmware.uf2",
+    "ELF_SHA256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d",
+    "RAM": 197872,
+    "RAM_delta": 10528,
+    "flash": 508564,
+    "resource_limits_unchanged": true,
+    "UF2_target_range_hex": [
+      "0x10000000",
+      "0x1007f200 exclusive"
+    ],
+    "all_UF2_blocks_within_unchanged_program_partition": true
+  },
+  "original_custody": {
+    "result": "../original_backup_results_20261022/readback_result.json",
+    "Config_raw_SHA256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+    "all22_profiles_manifest_SHA256": "f230d1c7ccb0b907d6d2cb7e8dc9e58494798ea15a29223e786b12d257ca19a5",
+    "private_custody_manifest_SHA256": "f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d"
+  },
+  "authorized_only_if_owner_approves": {
+    "manual_exact_UF2_installations_max": 1,
+    "raw_XInput_registry_inspections_max": 1,
+    "raw_XInput_captures_max": 1,
+    "raw_XInput_seconds_max": 5,
+    "raw_XInput_reports_max": 3,
+    "XInput_CDC_metadata_lookups_max": 1,
+    "XInput_identity_requests_max": 1,
+    "manual_Menu_to_Configurator_entries_max": 1,
+    "Configurator_CDC_metadata_lookups_max": 1,
+    "Configurator_identity_requests_max": 1,
+    "fresh_Config_backups_max": 1,
+    "explicit_STATUS_max": 1,
+    "LIST_max": 3,
+    "READ_original_IDs_max": 22,
+    "STATUS_including_LIST_READ_preflights_max": 26,
+    "retries_max": 0,
+    "UID": 502,
+    "effective_UID": 502,
+    "execution_context": "same-user sandbox-exempt fixed read-only host requests, no sudo/permissions/driver changes"
+  },
+  "expected_first_XInput_identity": {
+    "status": "persisted",
+    "primary_backend": 2,
+    "context_row": 3,
+    "requested_reference": 4,
+    "store_incarnation": 1,
+    "active_id": 4,
+    "active_revision": 1,
+    "schema_version": 3,
+    "payload_sha256": "d12805847da6f8f07096842cb0c7ce275c1606f911a1f5efd188bb9aeaf2b384",
+    "qualification": "Exact installed-image custody plus protocol/runtime correspondence, not cryptographic program attestation"
+  },
+  "host_raw_reader_SHA256": "24ed913f55ca9e6ebcd6a8f1d13e4d504f122b395e2b7beaa4d8ec8545ffd473",
+  "host_route_adapter_SHA256": "258857385d9ed8d43a6fdab42843b46cc3c1bcd7ee027fb7f1018fbaa4ec1516",
+  "host_route_adapter_execution_approved_by_this_packet": false,
+  "native_ProfileStore_or_Config_mutation_approved_by_this_packet": false,
+  "physical_acceptance_campaign_approved_by_this_packet": false,
+  "automatic_flash_or_rollback": false,
+  "WUP_or_USB_Switch_route_action_approved_by_this_packet": false,
+  "target_metric_requests_approved_by_this_packet": false,
+  "hardware_result": null,
+  "source_merge_eligible": false,
+  "phases": [
+    "Rehash exact preserved candidate and original backups; require known owner BOOTSEL/RPI-RP2 procedure",
+    "Owner performs one manual exact UF2 copy; no flashing utility, rebuild or factory image",
+    "Owner confirms normal XInput; one CDC lookup and identity, one bounded raw registry/capture qualification; stop any failure",
+    "One known Menu\u2192Configurator entry and one identified CDC/normal identity; bounded fresh Config and all22 originals preservation comparison",
+    "Stop at preserved result; no Config/backend/profile writes or all18 acceptance campaign without later exact approval"
+  ]
+}

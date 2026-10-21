@@ -1,0 +1,35 @@
+{
+  "kind": "SOURCEFREE_PUBLIC_SAFE_EXPLICIT_FILES_NO_PRIVATE_INPUT_CONTENT",
+  "files": {
+    "INSTALL_PACKET.json": {
+      "bytes": 3851,
+      "sha256": "0377b61b0f6b87ff345c93e7c377f86b009622d351ea42d4d4fd304eeaf0f3cf"
+    },
+    "INSTALL_PACKET.md": {
+      "bytes": 8907,
+      "sha256": "3bb3a1b54351230706c33bf51caaa2d0fd1a86b25608b48ca09fe3ea27e60f98"
+    },
+    "README.md": {
+      "bytes": 702,
+      "sha256": "cf1b453747b848a3380f98fdf4f4d401be83816129a32e045e449eca3b9a721e"
+    },
+    "independent_ack/PINS.json": {
+      "bytes": 7108,
+      "sha256": "b525979f1e5f06da9fd4a019525e6ba31d17f65c1635d3a600d63d774fc40af1"
+    },
+    "independent_ack/REPORT.md": {
+      "bytes": 6586,
+      "sha256": "83e1381fcfbc5e28d541e0de7fef64c955586d23289cc59569c8b555746914fc"
+    },
+    "route_packet.py.txt": {
+      "bytes": 10902,
+      "sha256": "258857385d9ed8d43a6fdab42843b46cc3c1bcd7ee027fb7f1018fbaa4ec1516"
+    },
+    "route_packet_safety.py.txt": {
+      "bytes": 7143,
+      "sha256": "bc202ca5ad88ee769f4398b95a5d2e6da903e94d308736c0ffc796ecd46ee976"
+    }
+  },
+  "private_hash_references_are_not_archived_inputs": true,
+  "device_execution_by_publication": false
+}
