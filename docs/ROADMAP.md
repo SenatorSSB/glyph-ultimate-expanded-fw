@@ -1,5 +1,23 @@
 # Glyph Roadmap
 
+## Exact tested selector source integration — strict completion pending — 2026-10-23
+
+This snapshot contains genuine integrationI785057b470321a9e36b427144775fad261465e05,
+parents canonical source-free acceptance02c5d8a2 and exact testedF8b2c75e3.
+All303critical source/build mode/blob/SHA inputs and220required F source/test/
+fixture paths match F. The full native implementation, controller selector and
+GameCube liveness repair are included; no firmware cleanup, rebuild or device
+operation occurred. [Exact catalog and validation](runtime_config/controller_profile_selector/integration_20261023/README.md)
+record the path set and preserved fixture/framework debt. Fresh independent
+integration review and live publication must complete before separate strictDONE.
+GP-NATIVE-002 remains HARDWARE_VALIDATED, notDONE, in this snapshot.
+GP-NATIVE-001's independent order status is unchanged; its native product source
+lineage is integrated through the accepted GP-NATIVE-002 F, not separately closed.
+Historical48989519 FAIL remains immutable. Physical no-poll NOT_TESTED;
+GameCube OWNER_REPORTED_PASS on normal Switch/adapter without raw identity;
+root cause UNPROVEN; Nunchuk NOT_TESTED; electrical timing/highwater NOT_MEASURED.
+
+
 ## Exact repaired selector acceptance adopted — 2026-10-23
 
 GP-NATIVE-002 is HARDWARE_VALIDATED for exact

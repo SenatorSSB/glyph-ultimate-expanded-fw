@@ -1,0 +1,484 @@
+{
+  "schema_name": "glyph_native002_integration_validation",
+  "schema_version": 1,
+  "product_integration": "785057b470321a9e36b427144775fad261465e05",
+  "tested_F": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "per_checker_limit_seconds": 120,
+  "timeouts": 0,
+  "root_original_runs": [
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_controller_profile_selector.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 15.003,
+      "timeout_seconds": 120,
+      "log_sha256": "42c723cbcd12e80d4b226b74cccec80a1703a26e7ec0b5600a7c04d4daeb9c96"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_gamecube_selector_liveness.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 21.519,
+      "timeout_seconds": 120,
+      "log_sha256": "433380f8b6772165a7df37bf3d8e8f4b8326d6a7ac015b9f00ba60bbc8992c7b"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_config_persistence.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 2.539,
+      "timeout_seconds": 120,
+      "log_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_selection_recovery.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "FAIL",
+      "returncode": 1,
+      "seconds": 2.305,
+      "timeout_seconds": 120,
+      "log_sha256": "1f1b4c4d44ac4e601517ee42e96025b9c2d8a38a94db9c0bfd9949d56e15eed3"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_strict_host.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 4.164,
+      "timeout_seconds": 120,
+      "log_sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_littlefs_host.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 0.889,
+      "timeout_seconds": 120,
+      "log_sha256": "fd494947956a356c5bfffa4d3e063b01ab1c67478a9ded22328722bd1af83b4c"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_read_storage.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "FAIL",
+      "returncode": 2,
+      "seconds": 0.074,
+      "timeout_seconds": 120,
+      "log_sha256": "be27e862dae5afa81869cedfe1d036530f89e944b81bace49193248bee0f153c"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_migration_lifecycle.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 1.849,
+      "timeout_seconds": 120,
+      "log_sha256": "202e9822fb9fe980cc4f1d84bec0ed7e55cf19a9199b1ab795c731ef5f8c8d38"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_directory_decoder.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 1.85,
+      "timeout_seconds": 120,
+      "log_sha256": "1dcec47c6c5b2276808d99c3fda23478f57092e5a0d4b9c50e81529a7a5979dd"
+    },
+    {
+      "command": [
+        "/usr/local/bin/python3",
+        "<integration-worktree>/tools/check_glyph_profile_store_timeout_resynchronization.py"
+      ],
+      "cwd": "<integration-worktree>",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 7.636,
+      "timeout_seconds": 120,
+      "log_sha256": "a6f322d37d8a43ca6204d1b8cdaaee4a8896dc4f6c3e68427374c91ab880a5dc"
+    }
+  ],
+  "specialist_runs": {
+    "integration": "785057b470321a9e36b427144775fad261465e05",
+    "parallel_limit": 2,
+    "per_checker_timeout_seconds": 120,
+    "initial": [
+      {
+        "name": "native-short",
+        "command": [
+          "python3",
+          "tools/check_glyph_profile_native_ultimate.py"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:33:48.438441+00:00",
+        "returncode": 0,
+        "status": "PASS",
+        "elapsed_seconds": 55.066,
+        "log": "<private-validation-evidence>/host-specialist/native-short.log",
+        "log_sha256": "1976e973bbe157ea53c2c0d04bec2cb13e32aa9cbe2ef25a49e8c025fbe5d6a3",
+        "log_bytes": 10385,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "native-default",
+        "command": [
+          "python3",
+          "tools/check_glyph_profile_native_ultimate.py",
+          "--default-enum"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:33:48.438707+00:00",
+        "returncode": 0,
+        "status": "PASS",
+        "elapsed_seconds": 55.027,
+        "log": "<private-validation-evidence>/host-specialist/native-default.log",
+        "log_sha256": "a900683502651086167887d95584c11cdfc862c4caaadd91e215390590a82ed1",
+        "log_bytes": 10385,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "metrics",
+        "command": [
+          "python3",
+          "tools/check_glyph_native_target_metrics.py",
+          "--output-dir",
+          "<private-validation-evidence>/host-specialist/metrics-objects"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:34:43.469075+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 4.983,
+        "log": "<private-validation-evidence>/host-specialist/metrics.log",
+        "log_sha256": "3d8bb020b0899bb0ee7ca9032dff5ad76ce747659ed662059d4aaaa3d187e010",
+        "log_bytes": 4414,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "identity",
+        "command": [
+          "python3",
+          "tools/check_glyph_gp_bind_003_runtime_identity.py"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:34:43.507513+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 4.722,
+        "log": "<private-validation-evidence>/host-specialist/identity.log",
+        "log_sha256": "648e6eb8c220e9d22d8b33db1db43746913ff246a60829f0feb6cd8a125d6bda",
+        "log_bytes": 3907,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "button-mask",
+        "command": [
+          "python3",
+          "tools/check_glyph_gp_config012_button_mask_characterization.py"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:34:48.231922+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 3.35,
+        "log": "<private-validation-evidence>/host-specialist/button-mask.log",
+        "log_sha256": "20f354bdba6b306d2c709c7dae476dbae31ca12150e970a3b1ef06833de2da60",
+        "log_bytes": 118,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "capacity",
+        "command": [
+          "python3",
+          "tools/check_glyph_config_010_mode_activation_capacity.py"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:34:48.455917+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 0.089,
+        "log": "<private-validation-evidence>/host-specialist/capacity.log",
+        "log_sha256": "dfb59627df479dd29cfc91f6767db0fc3d8d9fd2df80edaa2e6073d021a26415",
+        "log_bytes": 71,
+        "timeout_cleanup": []
+      }
+    ],
+    "exact_F_comparisons": [
+      {
+        "name": "identity",
+        "command": [
+          "python3",
+          "tools/check_glyph_gp_bind_003_runtime_identity.py"
+        ],
+        "cwd": "<tested-F-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<tested-F-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:35:18.586474+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 4.609,
+        "log": "<private-validation-evidence>/host-specialist/exact-F-comparison/identity.log",
+        "log_sha256": "3672a63a0a458efb20780e04cdc7101de53528c8ccabf5f5ea9d5ca5b63e79b0",
+        "log_bytes": 3934,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "button-mask",
+        "command": [
+          "python3",
+          "tools/check_glyph_gp_config012_button_mask_characterization.py"
+        ],
+        "cwd": "<tested-F-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<tested-F-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:35:18.586756+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 3.417,
+        "log": "<private-validation-evidence>/host-specialist/exact-F-comparison/button-mask.log",
+        "log_sha256": "20f354bdba6b306d2c709c7dae476dbae31ca12150e970a3b1ef06833de2da60",
+        "log_bytes": 118,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "capacity",
+        "command": [
+          "python3",
+          "tools/check_glyph_config_010_mode_activation_capacity.py"
+        ],
+        "cwd": "<tested-F-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<tested-F-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:35:22.005044+00:00",
+        "returncode": 1,
+        "status": "FAIL",
+        "elapsed_seconds": 0.074,
+        "log": "<private-validation-evidence>/host-specialist/exact-F-comparison/capacity.log",
+        "log_sha256": "dfb59627df479dd29cfc91f6767db0fc3d8d9fd2df80edaa2e6073d021a26415",
+        "log_bytes": 71,
+        "timeout_cleanup": []
+      }
+    ],
+    "followup": [
+      {
+        "name": "metrics-provisioned",
+        "command": [
+          "python3",
+          "tools/check_glyph_native_target_metrics.py",
+          "--output-dir",
+          "<private-validation-evidence>/host-specialist/followup/metrics-objects"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:36:12.577806+00:00",
+        "returncode": 0,
+        "status": "PASS",
+        "elapsed_seconds": 4.125,
+        "log": "<private-validation-evidence>/host-specialist/followup/metrics-provisioned.log",
+        "log_sha256": "6a56095533668f252b207959ffa62b417d0271d7aff291b63c9987c3507181bb",
+        "log_bytes": 550,
+        "timeout_cleanup": []
+      },
+      {
+        "name": "identity-private-interface-bridge",
+        "command": [
+          "python3",
+          "<private-validation-evidence>/host-specialist/identity_bridge.py"
+        ],
+        "cwd": "<integration-worktree>",
+        "environment_override": {
+          "GLYPH_ARDUINOPICO_FRAMEWORK": "<integration-worktree>/.platformio-home/packages/framework-arduinopico"
+        },
+        "timeout_seconds": 120,
+        "started_utc": "2026-10-22T22:36:12.578095+00:00",
+        "returncode": 0,
+        "status": "PASS",
+        "elapsed_seconds": 38.032,
+        "log": "<private-validation-evidence>/host-specialist/followup/identity-private-interface-bridge.log",
+        "log_sha256": "0301fa2b85c40be8d872cef02e40be82819e15ed2878da0584e80b2fada73efa",
+        "log_bytes": 5293,
+        "timeout_cleanup": []
+      }
+    ],
+    "classification": {
+      "native_short": "PASS_UNMODIFIED",
+      "native_default": "PASS_UNMODIFIED",
+      "metrics": "INITIAL_ENVIRONMENT_MISSING_IGNORED_HEADER_FAIL_THEN_PASS_WITH_EXACT_F_GENERATED_INPUTS",
+      "identity": "UNMODIFIED_FAIL_IDENTICAL_EXACT_F_UNDEFINED_UNUSED_DEFAULT_ADAPTER_APIS; PRIVATE_ABORT_IF_CALLED_INTERFACE_BRIDGE_COMPLETE_CURRENT_ASSERTIONS_AND_MUTANTS_PASS",
+      "button_mask": "UNMODIFIED_FAIL_IDENTICAL_EXACT_F_C024_SCOPE_AUTHORITY",
+      "historical_capacity": "UNMODIFIED_FAIL_IDENTICAL_EXACT_F_HAYBOX_SELECTOR_DRIFT; CURRENT_NATIVE_CAPACITY_COMPONENTS_PASS_WITHIN_BOTH_NATIVE_FULL_RUNS"
+    },
+    "private_bridge": {
+      "driver": "<private-validation-evidence>/host-specialist/identity_bridge.py",
+      "driver_sha256": "8bdcdb9971fc768e6931a2cc8c2264962c2e2457641b908498530e89c494e4b3",
+      "definitions": "<private-validation-evidence>/host-specialist/identity_bridge.cpp",
+      "definitions_sha256": "5634b699467005d643caa20d6fe8ec6dff9a73b5bb929e3b9a80d48e7b24be44",
+      "semantics": "Only missing unused CheckedStorage::Write/Sync link definitions; abort if invoked. Original checker/observer/engines/assertions/mutants unchanged. Not an unmodified CLI PASS.",
+      "modified_link_commands": 13
+    },
+    "source_test_F_hashes_rechecked": 456,
+    "source_test_changes": false,
+    "timeout_occurrences": 0,
+    "hardware": "NOT_TESTED_BY_THIS_AUDIT",
+    "no_poll": "NOT_TESTED",
+    "root_cause": "UNPROVEN"
+  },
+  "private_startup_interface_supplement": {
+    "results": [
+      {
+        "command": [
+          "/usr/local/bin/python3",
+          "<tested-F-worktree>/tools/check_glyph_profile_store_selection_recovery.py"
+        ],
+        "cwd": "<tested-F-worktree>",
+        "status": "FAIL",
+        "returncode": 1,
+        "seconds": 2.46,
+        "timeout": 120,
+        "log_sha256": "692926e48ac757dfaafbc48579bb44f7d27ca6e076cb874c26f2d86a584cd7a9"
+      },
+      {
+        "command": [
+          "/usr/local/bin/python3",
+          "<private-validation-evidence>/host-supplement/run_setup_compat.py"
+        ],
+        "cwd": "<integration-worktree>",
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 3.752,
+        "timeout": 120,
+        "log_sha256": "5f76c524ac7562b7892ecf5559dee7efcff92874a514b34331df89d2bc7ef7fc"
+      },
+      {
+        "command": [
+          "/usr/local/bin/python3",
+          "<integration-worktree>/tools/check_glyph_profile_store_read_storage.py",
+          "--output-dir",
+          "<private-validation-evidence>/host-supplement/read-storage-proof"
+        ],
+        "cwd": "<integration-worktree>",
+        "status": "PASS",
+        "returncode": 0,
+        "seconds": 24.628,
+        "timeout": 120,
+        "log_sha256": "2258371a8d6694a26f7ea3c75fdf81771cb08eea138b57772305cdc249b213e9"
+      }
+    ],
+    "adapter": "Private fixture interface only; two inert methods + type alias; all source bodies and original assertions/negative controls retained; actual GC service proven separately",
+    "fixture_original_sha256": "9f29ec15fb716d7d4549a2c25c6adb6abbe63973bb15596290e55f71e93d766d",
+    "fixture_compat_sha256": "05459d5c2fe7201c304fc6e735847e87af5ae924d30b16e8b42290695b57f952",
+    "repository_files_modified": false
+  },
+  "exact_correspondence": {
+    "status": "PASS_EXACT_ACCEPTED_TRANSITION",
+    "snapshot": "785057b470321a9e36b427144775fad261465e05",
+    "integration": "785057b470321a9e36b427144775fad261465e05",
+    "F": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+    "F_tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+    "E": "7ee104debde92c61390ff44fcc35afa14e9e5548",
+    "critical_inputs": 303,
+    "reviewed_F_paths": 220,
+    "all_modes_blobs_sha256": "MATCH",
+    "all_product_build_namespace": "EXACT_F",
+    "R_E_I_ancestry": "PASS",
+    "historical_failure": "UNCHANGED",
+    "custody": "EXACT_RETAINED_UF2_MATCH",
+    "physical_no_poll": "NOT_TESTED",
+    "root_cause": "UNPROVEN",
+    "Nunchuk": "NOT_TESTED",
+    "GameCube": "OWNER_REPORTED_PASS_NORMAL_SWITCH_ADAPTER_NO_RAW_IDENTITY",
+    "build_performed": false,
+    "device_operations": 0,
+    "negative_controls": [
+      "F REJECTED",
+      "accepted_UF2_sha256 REJECTED",
+      "physical_no_poll REJECTED",
+      "actual_failed_predecessor_snapshot REJECTED"
+    ]
+  },
+  "results_summary": {
+    "selector_all_counts_names_ranks_backend_legacy_ids_scroll": "PASS_BOTH_ABI",
+    "actual_persistence_selector_context_conflict_uncertain_ABA_all4routes": "PASS_BOTH_ABI",
+    "GC_old_new_no_poll_active_command_admission_report_equivalence": "PASS_BOTH_ABI",
+    "native_schema_evaluator_full_legacy_oracles_and_current_capacity": "PASS_BOTH_ABI",
+    "current_persistence_37": "PASS",
+    "strict_store_littlefs_migration_directory_timeout": "PASS",
+    "long_history_read_storage_corrected_cli": "PASS",
+    "recovery_startup_original": "FAIL_IDENTICAL_EXACT_F_STALE_HOST_INTERFACE",
+    "recovery_startup_private_bridge_all_original_assertions_negatives": "PASS",
+    "identity_original": "FAIL_IDENTICAL_EXACT_F_MISSING_UNUSED_HOST_ADAPTER_METHODS",
+    "identity_private_abort_interface_bridge_all_original_assertions_mutants": "PASS_BOTH_ABI",
+    "metrics_initial": "FAIL_MISSING_IGNORED_GENERATED_HEADER",
+    "metrics_exact_F_input_provisioned": "PASS_UNMODIFIED_CHECKER",
+    "historical_button_mask": "FAIL_IDENTICAL_EXACT_F_C024_AUTHENTICATION",
+    "historical_activation_capacity": "FAIL_IDENTICAL_EXACT_F_HISTORICAL_SELECTOR_PIN_DRIFT",
+    "unfiltered_integration_diff_check": "FAIL_INHERITED_TESTED_F_WHITESPACE_DIAGNOSTICS_IDENTICAL",
+    "new_integration_documentation_diff_check": "PASS",
+    "global_aggregate": "NOT_RUN_NO_PASS_CLAIM"
+  },
+  "classification_boundary": "Final independent integration review must assess preserved original failures against concrete current source proofs. No tested input/checker was modified to suppress them. Private bridges are interface supplements, not unmodified CLI PASS.",
+  "no_firmware_build": true,
+  "no_device_operations": true
+}

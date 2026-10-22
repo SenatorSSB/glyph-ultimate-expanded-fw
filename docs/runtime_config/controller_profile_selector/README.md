@@ -1,5 +1,7 @@
 # Controller ProfileStore selector
 
+Exact tested-source [integration I and catalog](integration_20261023/README.md) now prepared; GP-NATIVE-002 remains HARDWARE_VALIDATED pending independent integration review, live publication and separate strict DONE. All303critical inputs matchF8b2c. Historical failure and acceptance records below remain unchanged.
+
 Current: exact repaired8b2c/ca0b HARDWARE_VALIDATED under the original applicable
 acceptance scope. [Canonical adoption record](integration_20261023/ACCEPTANCE_ADOPTION.json)
 references immutableE7ee104; this is separate from source integration and DONE.

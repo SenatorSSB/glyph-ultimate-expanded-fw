@@ -1,0 +1,42 @@
+{
+  "tested_F": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "source_identity": "303critical source/build mode/blob/SHA inputs exact F; complete namespace including3buildscripts and imported integrity helper",
+  "tested_ELF_sha256": "79c9827b33bfe5919801e8875965b3203288d6650a75edb7f3ce8c5c51f52849",
+  "accepted_UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "accepted_UF2_bytes": 1046016,
+  "static_RAM": 198288,
+  "static_ceiling": 199632,
+  "core0_conservative": 2048,
+  "core0_limit": 2048,
+  "core1_composition": 1060,
+  "core1_retained": 1152,
+  "layout_small": 506,
+  "layout_ordinary_enum": 510,
+  "layout_limit": 512,
+  "old_routes": 140,
+  "selector_routes": 39,
+  "GC_routes": 14,
+  "all193_equations_independently_replayed": "PASS",
+  "SDK_pins": 72,
+  "direct_build_inputs": 259,
+  "missing_direct_build_inputs": 0,
+  "generated_input_pins_verified": 3,
+  "source_build_resource_artifact_substitution": false,
+  "target_electrical_timing_highwater": "NOT_MEASURED",
+  "independent_audit_report_sha256": "a6af351d0c0fa67bdbf38a96b33f7c425cf65b38ad3dd740085c0cbfc7cf767b",
+  "independent_audit_pins_sha256": "f1a0b53ffe9e3af22fec227c66c8ab4ca2775c6ac81fbe36d959eea1ca391a76",
+  "copied_generated_host_inputs": [
+    {
+      "path": "nanopb/generated-src/config.pb.c",
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "bytes": 1774,
+      "source": "Exact tested F build input; copied without rebuild"
+    },
+    {
+      "path": "nanopb/generated-src/config.pb.h",
+      "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f",
+      "bytes": 125759,
+      "source": "Exact tested F build input; copied without rebuild"
+    }
+  ]
+}

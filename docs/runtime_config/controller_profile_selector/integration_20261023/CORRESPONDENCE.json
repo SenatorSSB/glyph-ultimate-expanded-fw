@@ -1,0 +1,27 @@
+{
+  "status": "PASS_EXACT_ACCEPTED_TRANSITION",
+  "snapshot": "785057b470321a9e36b427144775fad261465e05",
+  "integration": "785057b470321a9e36b427144775fad261465e05",
+  "F": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "F_tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+  "E": "7ee104debde92c61390ff44fcc35afa14e9e5548",
+  "critical_inputs": 303,
+  "reviewed_F_paths": 220,
+  "all_modes_blobs_sha256": "MATCH",
+  "all_product_build_namespace": "EXACT_F",
+  "R_E_I_ancestry": "PASS",
+  "historical_failure": "UNCHANGED",
+  "custody": "EXACT_RETAINED_UF2_MATCH",
+  "physical_no_poll": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "GameCube": "OWNER_REPORTED_PASS_NORMAL_SWITCH_ADAPTER_NO_RAW_IDENTITY",
+  "build_performed": false,
+  "device_operations": 0,
+  "negative_controls": [
+    "F REJECTED",
+    "accepted_UF2_sha256 REJECTED",
+    "physical_no_poll REJECTED",
+    "actual_failed_predecessor_snapshot REJECTED"
+  ]
+}
