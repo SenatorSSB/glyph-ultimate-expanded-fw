@@ -67,6 +67,7 @@ void neutral_unavailable(GameModeConfig &mc,const UltimateProfile *p,const ultim
     mode.UpdateOutputs(in,out,COMMS_BACKEND_XINPUT);require(out.buttons==0&&out.leftStickX==128&&out.leftStickY==128&&out.rightStickX==128&&out.rightStickY==128&&out.triggerLAnalog==0&&out.triggerRAnalog==0,"fully neutral unavailable bypasses Nunchuk/legacy/reserved bits");
 }
 }
+#include "../controller_profile_selector/native_store_selection.hpp"
 int main(int argc,char **argv) {
  try {
     require(argc==4,"native_store PROFILE_DIRECTORY LEGACY_CONFIG CONTEXT");std::ifstream f(argv[2],std::ios::binary);Bytes raw((std::istreambuf_iterator<char>(f)),{});auto decoder=pb_istream_from_buffer(raw.data(),raw.size());require(pb_decode(&decoder,Config_fields,&legacy),"legacy source decode");
@@ -123,6 +124,7 @@ int main(int argc,char **argv) {
     const auto incarnation=store.Incarnation();require(lfs_unmount(&mounted_fs)==0&&lfs_mount(&mounted_fs,&mounted_cfg)==0&&store.Begin(incarnation,2)&&store.Count()==22,"actual reboot retained twenty complete profiles, duplicate and legacy");
     active=store.Activate(1,&status);require(active&&store.ActiveRevision()==3&&store.ActiveNativeView(),"reference reboot activates latest selected native revision");mode.SetConfig(mc,active,store.ActiveNativeView());require(mode.ActiveEngine()==Ultimate::Engine::NativeAbi1,"native reinitialization context valid");
     active=store.Activate(2,&status);require(active&&store.ActiveId()==2&&store.ActiveRevision()==3,"second native selection after reboot");
+    test_actual_store_selector(store,mc);
     // Real integrity corruption falls back only to a same-kind previous record.
     auto path=record_path(1,3);size_t size=0;require(CheckedStorage::Stat(path.c_str(),&size,Kind::Record).outcome==Outcome::Ok,"current native record stat");Bytes corrupted(size);{CheckedStorage::File file;require(bool(CheckedStorage::Open(file,path.c_str(),false,Kind::Record)),"record open");auto result=CheckedStorage::Read(file,corrupted.data(),size);require(bool(result)&&result.bytes==size&&bool(CheckedStorage::Close(file)),"record exact read");}
     corrupted.back()^=1;require(bool(CheckedStorage::WriteFile(path.c_str(),corrupted.data(),corrupted.size(),Kind::Record)),"host corrupt current record");

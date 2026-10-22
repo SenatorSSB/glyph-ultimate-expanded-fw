@@ -9,6 +9,7 @@
 #include "core/ProfileStore.hpp"
 #include "core/mode_selection.hpp"
 #include "core/ModeSelectionTransaction.hpp"
+#include "core/ProfileSelection.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RuntimeIdentityService.hpp"
@@ -51,6 +52,7 @@ DebouncedSwitchMatrixInput<num_rows, num_cols> matrix_input(
     DiodeDirection::COL2ROW
 );
 
+extern size_t current_mode_index;
 CommunicationBackend **backends = nullptr;
 size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
@@ -147,6 +149,24 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
     watchdog_hw->scratch[1] = mode_index + 1;
     watchdog_hw->scratch[2] = kCommittedModeDestination;
     reboot_firmware();
+}
+
+// Called only by core0, outside output generation. Never lend candidate state
+// to the menu core. The pending ID remains occupied until this attempt returns.
+__attribute__((noinline)) void service_profile_selection() {
+    const uint32_t id = profile_selection::Pending();
+    if (!id) return;
+    size_t mode_index = 0, backend_index = 0;
+    const auto result = profile_selection::Persist(persistence, profile_store,
+        ConfigWriteCandidate(), backends[0]->BackendId(), id, current_mode_index,
+        mode_index, backend_index);
+    if (result == ModeDestinationResult::Saved) {
+        watchdog_hw->scratch[0] = backend_index + 1;
+        watchdog_hw->scratch[1] = mode_index + 1;
+        watchdog_hw->scratch[2] = kCommittedModeDestination;
+        reboot_firmware();
+    }
+    profile_selection::Complete();
 }
 
 // Recovery deliberately reuses the single source-owned Configurator transport
@@ -340,6 +360,7 @@ void loop() {
     }
     if (read_boot_state().outcome != BootOutcome::Normal) return;
     if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
+    service_profile_selection();
     select_mode(backends, backend_count, config);
 
     for (size_t i = 0; i < backend_count; i++) {

@@ -71,6 +71,9 @@ struct ConfiguratorBackend {
 };unsigned ConfiguratorBackend::constructions=0;ConfiguratorBackend *recovery_configurator=nullptr;
 bool validate_glyph_config(const Config &,ConfigValidationError &){return true;}
 void normalize_legacy_glyph_rgb_noops(Config &){}
+// Selector transaction is covered by the dedicated selector fixtures; this
+// extraction exercises startup refusal/routes only.
+void service_profile_selection() {}
 void request_mode_destination(CommunicationBackendId,size_t,const Config &){}
 void set_mode_destination_selector(void(*)(CommunicationBackendId,size_t,const Config &)){}
 void setup_mode_activation_bindings(GameModeConfig *,size_t,uint64_t){}

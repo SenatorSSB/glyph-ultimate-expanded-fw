@@ -1,0 +1,75 @@
+{
+  "id": "GP-NATIVE-002",
+  "title": "Controller-side native ProfileStore profile selection",
+  "status": "READY",
+  "branch": "codex/gp-native-002-controller-selector",
+  "objective": "Expose eligible separately named stored native profiles in the existing scrollable .Profile menu and commit selected profile/context/current backend coherently before reboot activation.",
+  "why_this_matters": "Configurator-driven selection already exists; the owner requires the controller menu itself to select among at least20 stored profiles.",
+  "hardware_risk": "H3",
+  "behavioral_claim": "Metadata-based ordered native entries retain stable uint32 IDs, share one source-backed backend eligibility policy, validate an eligible compatible bounded Ultimate context, and perform one checked durable Config publication before committed destination/reboot. Failure preserves current profile and never reboots into uncommitted selection. Legitimate ordinary/legacy entries remain available.",
+  "scope": "Normative full owner requirements/tests/completion criteria: docs/runtime_config/controller_profile_selector/owner_directive_20261022.md. Implementation from exact334f, not canonical. Existing scroll/nav/graphics unchanged. Source changes limited to HAL/pico/src/display/DefaultConfigMenu.cpp, HAL/pico/include/display/DefaultConfigMenu.hpp, HAL/pico/src/display/ConfigMenu.cpp, HAL/pico/include/display/ConfigMenu.hpp, config/glyph/common/src/display/GlyphConfigMenu.cpp, config/glyph/common/src/config.cpp, include/core/ModeSelectionTransaction.hpp, src/core/mode_selection.cpp, include/core/ProfileSelection.hpp and src/core/profile_selection.cpp. New core helper paths are optional. config.cpp only bounded atomic selector request service: menu is core1, existing candidate/store/persistence owner is core0; a one-request scalar handoff with proper acquire/release ownership may connect menu to the existing core0 bounded candidate. No new profile body/Config cache, second candidate or concurrent filesystem owner. No menu-core ProfileStore body reads or writes. Existing directory metadata must be published/read coherently; stale identity must fail on core0 selection. Do not alter existing setup/diagnostic/native execution semantics. Source-faithful host fixture/checker additions and affected fixture adapters may be placed under tools/ and docs/runtime_config/controller_profile_selector/ solely for this bounded selector product, preserving original assertions/oracles. No generic checker/runner/provenance redesign. Document concise eight-question source ledger before implementation; immediately proceed if no real contradiction.",
+  "explicit_excluded_scope": "All owner out-of-scope list applies: no visual/menu/navigation redesign; no evaluator/remapper/SOCD/coordinate or backend serialization/detection changes; no schema or ProfileStore format/root/directory/record/ID/transaction/recovery/reserve/64 capacity redesign; no new preprocessing persistence architecture; no protocol command/wire redesign; no cache-all bodies or one Config row/profile; no hot switching; no resource/stack/partition/storage cap increase; no Senscope/Nunchuk/Keyboard redesign/RT2/factory/cloud/sharing/flashing automation; no device mutation or source integration by this READY alone.",
+  "touched_planes": [
+    "existing controller menu data source",
+    "bounded core0 checked selection and core1 request ownership",
+    "backend/context eligibility policy reuse",
+    "host/storage/selection/resource proof",
+    "source-free chapter control plane and hardware packet"
+  ],
+  "source_authority": "Original latest owner goal attachment copied byte-exact in owner_directive_20261022.md SHA256034e241fefd4187f78814c7274ec400298aaade2e75463d36f34ff0aea897972; independently adjudicated by git-json:83d580d980b8b141210d9e8a60a8d354145a8a4e:docs/runtime_config/controller_profile_selector/curator_adjudication_20261022.json. Exact source base334fbd06e4541c120b0db423e5be7e112eb1f6f6/tree0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999. Actual GlyphConfigMenu overrides DefaultConfigMenu visibility; preserve source-backed effective Glyph policy with shared helper, including Keyboard/USB restrictions and empty applicability semantics. Owner requirement resolves intended backend filtering; do not invent per-record backend fields.",
+  "dependencies_prerequisites": [
+    "Verify live configurator and exact334f/tree; retain immutable prior resource/source evidence. Canonical e43be478 is source-free control plane; no unrelated canonical merge into native source lineage.",
+    "Reviewed source-free READY adoption and fresh live canonical readback before firmware mutation. Root retains sole canonical publication; one primary source writer.",
+    "Audit all required owner-listed source paths and exact resource proof; source inspection is allowed outside source edit list. Reuse existing bounded native contexts; context validation before persistent mutation.",
+    "Independent final source review; exact committed Mk6 build/custody and fresh complete affected linked resource analysis; then separate candidate-specific hardware packet owner approval."
+  ],
+  "substantive_authorization_rationale": "Direct owner explicitly requests this new bounded chapter and resolves menu/profile/backend/context/persistence requirements. This independent Curator approves READY for implementation through exact candidate/build/hardware handoff. Ordinary source-policy reconciliation and bounded ownership/mailbox implementation are technical work within this resolved product requirement. Genuine incompatible preprocessing architecture, material backend policy contradiction or inability to fit unchanged resource caps returns to owner. No new Planner packet or recursive governance successor needed merely to restate explicit direction.",
+  "mechanical_activation_conditions": [],
+  "invalidation_conditions": [
+    "Native source base/tree mismatch or unrelated semantic drift.",
+    "New persisted preprocessing architecture, changed profile/store/schema or unsupported backend capability requirement.",
+    "Concrete resource overflow, substantive eligibility conflict or unresolved source-authority/product decision.",
+    "Required source/review/build/artifact/HEP mismatch; candidate modification invalidates affected exact proof."
+  ],
+  "authorization_snapshot_provenance": "git-json:83d580d980b8b141210d9e8a60a8d354145a8a4e:docs/runtime_config/controller_profile_selector/curator_adjudication_20261022.json; independent source-free Curator 2026-10-22. Activation only after sole publisher canonical integration and live readback; parent messages alone grant no authority.",
+  "automated_validation": [
+    "All explicit owner test matrices are mandatory:0/1/>10/20/64, mixed legacy/native/backend, duplicates/ineligible, display rank reorder, ID>255, safe scroll/count/empty/name truncation/NUL and unchanged hidden records.",
+    "Source-backed XInput/Switch/DInput/GameCube/Keyboard empty/default eligibility; one shared helper; preserve legitimate legacy entries without duplicate native placeholders.",
+    "Native matching/mismatching/multiple existing contexts, legacy/corrupt/missing/recovered record. Context mismatch never mutates or reboots; no silent substitute.",
+    "Actual storage/Persistence fixtures prove A->B->A durable references/boot activation, backend unchanged, unrelated Config preserved, no profile body/revision changes, conflict/uncertain/invalid/recovery/read-only refusal.",
+    "Core1 request/core0 ownership tests prove bounded single request, stable metadata ownership, acquire/release ordering, no concurrent persistence/body decode, stale directory rejection, no precommit reboot.",
+    "Run directly affected native/ProfileStore/Persistence/selector and legacy checks, both explicit enum representation component/layout/semantic tests where affected. Retain actual historical failures/debt. Tier1 always blocks and affectedTier2 blocks; no false full aggregate PASS.",
+    "Fresh exact linked ELF/static/heap/menu-allocation/frame/call/IRQ/boot/reboot/selection proof: whole static<=199632 (base197872, margin1760), percore2048, all formerly accepted140 routes/31classes valid, core1 baseline1152; active+candidate<=7800, PreparedView<=560, frame+context<=144, existing layout<=512 with existing499 accounted. Add actual new selector route; no inherited zero-margin proof.",
+    "Fresh independent committed source review checks backend/IDs/pointers/context/atomic save/reboot/body mutation/legacy/resource/call paths. Canonical Mk6 build after source review; exact source label/generated descriptors/flags/dependencies/ELF/BIN/UF2 byte sizes+SHA256/content-addressed custody; no source substitution or reuse334f acceptance."
+  ],
+  "canonical_build": "pio run -e glyph_mk6",
+  "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
+  "candidate_git_sha": null,
+  "candidate_base_configurator_sha": null,
+  "firmware_artifact_build_path": null,
+  "preserved_firmware_artifact_locator": null,
+  "firmware_artifact_sha256": null,
+  "manual_acceptance": "REQUIRED",
+  "manual_acceptance_protocol_reference": "docs/runtime_config/controller_profile_selector/owner_directive_20261022.md#physical-acceptance-preparation",
+  "manual_acceptance_protocol_version": "GP_NATIVE_002_HW_V1",
+  "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "hardware_evidence_record": null,
+  "hardware_result": null,
+  "hardware_evidence_gaps": [
+    "Exact selector candidate/artifact has not been built or physically accepted.",
+    "USB/XInput and separately available GameCube controller-menu A->B->A,>10 scrolling,eligibility,reboot,identity/behavior,persistence/preservation rows remain required."
+  ],
+  "rollback_recovery": "No device action now. Concrete later packet must bind exact artifact, backups/restoration and disposable/approved profiles; do not flash automatically. Failed/uncertain persistence refuses reboot and keeps known-good state; preserve original store bodies and revisions.",
+  "status_documentation_updates": "Record eight-question audit, implementation/tests/resources/source review/build/custody and exact hardware packet. Latest owner reports installed334f/nativeID27 revision1 schema5 Ultimate/normalGC and Configurator-driven native selection observed; attribute to owner, not HEP. Earlier published observations remain historical, never overwritten. GP-NATIVE-001 remains unmerged and hardware-pending with all exact evidence intact; no automatic DONE or acceptance transfer.",
+  "done_evidence": "All20 owner criteria incl physical controller A->B->A and all required routes with exact candidate/artifact HEP PASS, source-free E before exact tested-source integration I, independent integration review and separate strict glyph_done_completion_evidence after verified live integration. No DONE at build or Configurator selection.",
+  "stop_conditions": [
+    "No firmware edits until canonical READY adoption/live readback.",
+    "Stop for genuine new persisted preprocessing architecture, material owner/source backend policy conflict, inability to fit unchanged resource limits or other substantive source/authority contradiction.",
+    "No source integration before exact human HEP PASS; no device mutation before concrete separately owner-approved candidate packet.",
+    "Preserve one publisher; do not execute old hardware packet or transfer prior334f PASS; retain Nunchuk NOT_TESTED/rootcause UNPROVEN."
+  ],
+  "activation_state": "NOT_APPLICABLE",
+  "activation_requires_new_judgment": false,
+  "hardware_evidence_dependency_satisfied": null
+}

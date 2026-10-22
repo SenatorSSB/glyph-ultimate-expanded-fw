@@ -1,0 +1,24 @@
+{
+  "schema_name": "glyph_direct_owner_work_order_adjudication",
+  "schema_version": 1,
+  "role": "Glyph Work-Order Curator",
+  "review_date": "2026-10-22",
+  "canonical_base_sha": "e43be478e1f267f422bb56d4619141885ac838b7",
+  "work_order": "GP-NATIVE-002",
+  "disposition": "READY",
+  "owner_directive_path": "docs/runtime_config/controller_profile_selector/owner_directive_20261022.md",
+  "owner_directive_sha256": "034e241fefd4187f78814c7274ec400298aaade2e75463d36f34ff0aea897972",
+  "independence": "Disposable independent Curator/control-plane specialist; no product source authorship. Original owner attachment independently read; parent summary is not authority.",
+  "judgment": "The owner resolves controller-side ProfileStore enumeration, current-backend filtering, separate stored names, bounded native context association and checked persistent reboot-bound selection. This is a new bounded selector chapter, not completion or acceptance of GP-NATIVE-001. Existing contexts must be reused; genuine persisted architecture, source-policy or resource contradictions stop. READY authorizes an isolated candidate from exact334f only after canonical adoption/live readback.",
+  "preserved_gates": [
+    "One primary source writer; one canonical source-free publisher",
+    "Fresh independent exact source/safety review",
+    "Fresh committed exact build and complete affected resource proof under unchanged limits",
+    "No device mutation until separate concrete candidate-specific owner approval",
+    "No behavior-changing integration before exact human HEP PASS; separate source-free evidence and strict completion"
+  ],
+  "planner_disposition": "No new Planner: original owner explicitly directs bounded chapter/READY preparation and continuation; preserved consumed prior packet remains unchanged. No global scarcity claim.",
+  "source_base_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "source_base_tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+  "existing_orders": "All prior queue objects and observations preserved; later owner physical statements are attributed to owner, not invented HEP acceptance."
+}

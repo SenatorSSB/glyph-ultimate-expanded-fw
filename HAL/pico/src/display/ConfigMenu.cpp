@@ -13,6 +13,10 @@ ConfigMenu::ConfigMenu(Config &config, CommunicationBackend **backends, size_t b
       _backends(backends),
       _backends_count(backends_count) {}
 
+const MenuPage::MenuItem *ConfigMenu::ResolveItem(MenuPage *page, size_t index) {
+    return page && page->items && index < page->items_count ? &page->items[index] : nullptr;
+}
+
 DisplayModeId ConfigMenu::GetId() {
     return DISPLAY_MODE_CONFIG;
 }
@@ -28,6 +32,8 @@ void ConfigMenu::HandleControls(
         return;
     }
 
+    // Empty Profile lists support Back but never arithmetic on count - 1.
+    if (_current_menu_page->items_count == 0 && button != controls.back) return;
     if (button == controls.up) {
         if(_current_menu_page == _top_level_page) {
             switch(_backends[0]->BackendId()) {
@@ -71,12 +77,14 @@ void ConfigMenu::HandleControls(
         }
     } else if (button == controls.enter) {
         // Bounds check.
-        if (_highlighted_menu_item > _current_menu_page->items_count) {
+        if (_highlighted_menu_item >= _current_menu_page->items_count) {
             _highlighted_menu_item = 0;
             return;
         }
 
-        const MenuPage::MenuItem &selected_item = _current_menu_page->items[_highlighted_menu_item];
+        const auto *resolved = ResolveItem(_current_menu_page, _highlighted_menu_item);
+        if (!resolved) return;
+        const MenuPage::MenuItem &selected_item = *resolved;
 
         // If there's an action defined, perform it.
         if (selected_item.action != nullptr) {
@@ -192,6 +200,8 @@ void ConfigMenu::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &displa
         } else if (_highlighted_menu_item < _current_menu_offset) {
             _current_menu_offset--;
         }
+        if (_current_menu_offset < 0 || size_t(_current_menu_offset) > _current_menu_page->items_count)
+            _current_menu_offset = 0;
         uint8_t last_item_to_display =
             min(_current_menu_page->items_count - _current_menu_offset, max_visible_lines + 1);
         for (size_t i = 0; i < last_item_to_display; i++) {
@@ -202,7 +212,8 @@ void ConfigMenu::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &displa
                 display.print(highlight_string);
             }
             display.setCursor(xOffset + font_width + padding, (i * (font_height + padding)) + 10);
-            display.print(_current_menu_page->items[i + _current_menu_offset].text);
+            const auto *item = ResolveItem(_current_menu_page, i + _current_menu_offset);
+            if (item) display.print(item->text);
             if (highlighted) {
                 display.print(" <");
             }

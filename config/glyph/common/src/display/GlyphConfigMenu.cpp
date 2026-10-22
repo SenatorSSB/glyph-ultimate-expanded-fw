@@ -11,56 +11,7 @@ GlyphConfigMenu::GlyphConfigMenu(
     size_t backends_count
 )
     : DefaultConfigMenu(config, backends, backends_count) {
-    /* Build gamemodes page */
-    size_t gamemode_options_count = 0;
-
-    CommunicationBackendId primary_backend_id = _backends[0]->BackendId();
-    bool is_in_usb_mode = false;
-    switch(primary_backend_id) {
-        case COMMS_BACKEND_XINPUT:
-        case COMMS_BACKEND_DINPUT:
-        case COMMS_BACKEND_NINTENDO_SWITCH:
-            is_in_usb_mode = true;
-            break;
-        default: 
-            break;
-    }
-    for (size_t i = 0; i < config.game_mode_configs_count; i++) {
-        GameModeConfig &mode_config = config.game_mode_configs[i];
-        MenuPage::MenuItem &current_option = _gamemode_options_page.items[gamemode_options_count];
-
-        // Only show gamemodes that are applicable to the current comms backend.
-        if (mode_config.applicable_backends_count > 0 && _backends_count > 0 &&
-            _backends[0] != nullptr) {
-            bool applicable = false;
-            for (size_t j = 0; j < mode_config.applicable_backends_count; j++) {
-                bool is_keyboard = mode_config.keyboard_mode_config != 0;
-                if (primary_backend_id == mode_config.applicable_backends[j]) {
-                    applicable = true;
-                    break;
-                } else if(is_keyboard && is_in_usb_mode) {
-                    applicable = true;
-                }
-            }
-            if (!applicable) {
-                continue;
-            }
-        }
-
-        if (strnlen(mode_config.name, sizeof(mode_config.name)) > 0) {
-            strlcpy(current_option.text, mode_config.name, sizeof(current_option.text));
-        } else {
-            strlcpy(
-                current_option.text,
-                gamemode_name(mode_config.mode_id),
-                sizeof(current_option.text)
-            );
-        }
-        current_option.key = i;
-        current_option.action = &SetDefaultMode;
-        gamemode_options_count++;
-    }
-    _gamemode_options_page.items_count = gamemode_options_count;
+    // Profile data/eligibility is shared with DefaultConfigMenu.
 
     /* Add new page for dashboard option */
     // clang-format off
