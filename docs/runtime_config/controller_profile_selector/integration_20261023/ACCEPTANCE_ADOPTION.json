@@ -1,0 +1,47 @@
+{
+  "schema_name": "glyph_tested_source_acceptance_adoption",
+  "schema_version": 1,
+  "work_order": "GP-NATIVE-002",
+  "canonical_predecessor": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "source_free_handoff_E": "7ee104debde92c61390ff44fcc35afa14e9e5548",
+  "original_reviewed_R": "cc132574660a2b2e0065f07dad225f971e70d01c",
+  "evidence_reference": "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json",
+  "evidence_sha256": "4b209227b3e4fa3d96d86a0bdd5552206e33e0449ce6b4a40218043365e066b9",
+  "receipt_reference": "git-json:85d80072c7aa5b7aec525051660e50749518243d:docs/agent_framework/curation_receipts/gp_native002_tested_source_acceptance_20261023.json",
+  "owner_continuation": "docs/runtime_config/controller_profile_selector/integration_20261023/OWNER_CONTINUATION.md",
+  "owner_continuation_sha256": "e00d97c58cd65d9c6063b0d6d9e1e873b0d1618e802b1af10cb0d402b60c7e66",
+  "candidate_F": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "candidate_tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+  "UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "UF2_bytes": 1046016,
+  "hardware_result": "PASS_APPLICABLE_SCOPE",
+  "GameCube": "OWNER_REPORTED_PASS_NORMAL_SETUP_ONLY_NO_RAW_IDENTITY",
+  "physical_no_poll": "NOT_TESTED_SAFE_CONDITIONAL_SETUP_UNAVAILABLE",
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "original_failure": {
+    "candidate": "4898951994bcabcaef2846145de2922a674656f8",
+    "UF2_sha256": "7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e",
+    "evidence": "docs/runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json",
+    "disposition": "IMMUTABLE_HISTORICAL_FAIL"
+  },
+  "adoption_boundary": "This descendant queue adoption is separate from original immutable E and post-opening receipt; no hardware evidence rewritten or new E invented. No I catalog at this stage. Only after source-free canonical adoption/live verification proceed exact tested-source integration/catalog/review/separate strictDONE.",
+  "source_integration": "NOT_PERFORMED_AT_E_ADOPTION",
+  "device_io": "NONE",
+  "prior_obligation_snapshot": {
+    "pending": true,
+    "trigger": "New GP-NATIVE-002 exact GameCube SEL20->SEL01 freeze requires bounded failure adjudication; candidate4898951994bcabcaef2846145de2922a674656f8/evidence docs/runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json. GP-BIND-001 and GP-BIND-002 preserved resolved failures remain included for singleton-contract coverage only; prior c5415ab0348b9c1db9dce36eda73bf4a7e2f7478 resolution unchanged, no work reopened.",
+    "resolution": null,
+    "provenance": {
+      "opened_by_role": "Glyph Hardware Evidence Processor",
+      "opening_reference": "owner-report:GP_NATIVE_002_HW_V1:2026-10-22T20:13:08.896407+00:00:sha256:4b9e449ddd16afc2441ae04d65e22815b66ae9b00e2785a18c001cadb268dabf",
+      "subject_ids": [
+        "GP-BIND-001",
+        "GP-BIND-002",
+        "GP-NATIVE-002"
+      ],
+      "resolved_by_role": null,
+      "resolution_reference": null
+    }
+  }
+}
