@@ -1,0 +1,27 @@
+{
+  "schema_name": "glyph_curation_resolution_receipt",
+  "schema_version": 1,
+  "resolver_role": "Glyph Work-Order Curator",
+  "resolved_at": "2026-10-22T22:27:45Z",
+  "opening_reference": "git-json:3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "subject_resolutions": [
+    {
+      "subject_id": "GP-BIND-001",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "REPAIR_REQUIRED",
+      "resolution": "Prior resolved disposition from git-json:c5415ab0348b9c1db9dce36eda73bf4a7e2f7478:docs/agent_framework/curation_receipts/gp_bind_activation_observation_20261019.json is preserved without reopening or extending work. Preserve the exact GP-BIND-001 failed candidate, artifact, H1-H4 evidence, recovery-only record, and non-transfer rule without amendment. This resolution grants no additional diagnostic, implementation, build, device, acceptance, or merge authority for GP-BIND-001."
+    },
+    {
+      "subject_id": "GP-BIND-002",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "NARROWED",
+      "resolution": "Prior resolved disposition from git-json:c5415ab0348b9c1db9dce36eda73bf4a7e2f7478:docs/agent_framework/curation_receipts/gp_bind_activation_observation_20261019.json is preserved without reopening or extending work. Authorize only GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1: before any future H4 action, a terminal agent may use existing approved read-only Config/ProfileStore surfaces to retain raw Config bytes/hash, observable backend/host, selected GameModeConfig index/ID/decoded row/ultimate_profile_id, ProfileStore STATUS, selected-profile readback/revision/payload hash, and prepared alternate-payload hash; it must state whether ActiveId or the in-memory Ultimate profile pointer is unavailable. No writes, mutation, restoration, reset, flash, build, artifact custody, source edit, repair candidate, work-order allocation, H1-H5 acceptance, or merge is authorized. The exact GP-BIND-002 failure and every non-transfer rule remain preserved."
+    },
+    {
+      "subject_id": "GP-NATIVE-002",
+      "event_kind": "HARDWARE_FAILED",
+      "disposition": "REAUTHORIZED",
+      "resolution": "Preserve failed4898951994bcabcaef2846145de2922a674656f8 and UF2 7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e with exact published failure evidence unchanged. Independently read latest direct owner continuation docs/runtime_config/controller_profile_selector/integration_20261023/OWNER_CONTINUATION.md SHA256 e00d97c58cd65d9c6063b0d6d9e1e873b0d1618e802b1af10cb0d402b60c7e66. It explicitly authorizes only mechanical adoption of reviewed immutable source-free E7ee104debde92c61390ff44fcc35afa14e9e5548, exact tested F8b2c75e35bb990aee06de3165e5780082c4f08ad/treecd5d280e3b04a3b4e9d9a1bc760917406175b988 and acceptedUF2 ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760/1046016bytes through genuine tested-source integration, catalog/correspondence, fresh independent integration review and separate strict completion. No new product/source changes, build/artifact substitution, device action, physical retest or fixture cleanup. V2 PASS is limited to original applicable scope: XInput normal A/B/A and preservation, GameCube OWNER_REPORTED_PASS with no raw identity/Mac telemetry, physical no-poll NOT_TESTED because safe conditional setup unavailable. Historical root cause remains UNPROVEN and Nunchuk NOT_TESTED. Evidence E and failure chronology remain immutable; this receipt alone neither adopts queue status nor grants source integration before accepted-E publication/live verification. Original native001 order/status/evidence is not silently completed or promoted."
+    }
+  ]
+}
