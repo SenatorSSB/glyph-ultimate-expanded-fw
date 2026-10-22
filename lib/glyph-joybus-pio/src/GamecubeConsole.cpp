@@ -137,9 +137,18 @@ PollStartStatus __no_inline_not_in_flash_func(GamecubeConsole::WaitForPollStartB
     pio_sm_set_enabled(_port.pio, _port.sm, true);
     uint8_t received[1];
     while (joybus_receive_bytes(&_port, received, 1, receive_timeout_us, true) != 1) {
-        // With no pending request, keep receiving without a pause or idle yield.
-        if (pending() && PauseAtIdleBoundary()) {
-            return PollStartStatus::IDLE;
+        if (pending()) {
+            if (PauseAtIdleBoundary()) {
+                return PollStartStatus::IDLE;
+            }
+        } else if (!pio_interrupt_get(_port.pio, _port.sm + 4) &&
+                   pio_sm_get_pc(_port.pio, _port.sm) == _port.offset + joybus_offset_read_loop &&
+                   gpio_get(_port.pin) &&
+                   pio_sm_is_rx_fifo_empty(_port.pio, _port.sm)) {
+            // Core1 menu controls consume the shared input snapshot. Give the
+            // backend its existing FAST scan during idle traffic gaps, without
+            // pausing/resetting reception or admitting application persistence.
+            return PollStartStatus::CONTINUE;
         }
     }
     return HandleCommand(received[0]) ? PollStartStatus::CONTINUE : PollStartStatus::POLL;

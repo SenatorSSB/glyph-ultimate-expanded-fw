@@ -25,6 +25,11 @@ def main():
         start=source.index('__attribute__((noinline)) void service_profile_selection()')
         end=source.index('\n// Recovery deliberately reuses',start)
         (g/'selector_service.inc').write_text(source[start:end])
+        gc_bridge=[]
+        if '--gamecube-liveness' in sys.argv:
+            from check_glyph_gamecube_selector_liveness import aggregate
+            bridge=g/'gamecube_bridge.cpp';bridge.write_text(aggregate(bridge=True))
+            gc_bridge=['-DGLYPH_GC_LIVENESS_BRIDGE',bridge]
         # Existing UI doubles are retained; remove enum doubles now supplied
         # by the actual current generated ABI.
         ui=t/'include/comms';ui.mkdir(parents=True)
@@ -53,7 +58,7 @@ def main():
                 obj=t/(abi+source.stem+'.o');run(['cc','-std=c11',abi,*flags,'-c',source,'-o',obj]);objects.append(obj)
             sources=[ROOT/'tools/fixtures/controller_profile_selector/selection_persistence.cpp',host/'checked_storage_double.cpp',ROOT/'HAL/pico/src/core/Persistence.cpp',deps/'dependencies/pb_arduino.cpp',deps/'dependencies/CRC32.cpp',ROOT/'src/modes/UltimateNativeProfile.cpp',ROOT/'src/core/profile_selection.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'src/core/config_button_validation.cpp',ROOT/'src/core/config_usb_default_validation.cpp']
             exe=t/(abi+'-persistence')
-            run(['c++','-std=c++17',abi,'-O1','-g','-DARDUINO=1','-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1','-fsanitize=address,undefined','-fno-omit-frame-pointer',*flags,*sources,*objects,'-o',exe])
+            run(['c++','-std=c++17',abi,'-O1','-g','-DARDUINO=1','-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1','-fsanitize=address,undefined','-fno-omit-frame-pointer',*flags,*gc_bridge,*sources,*objects,'-o',exe])
             print(abi,run([exe,*wrappers]),end='')
     return 0
 if __name__=='__main__':raise SystemExit(main())

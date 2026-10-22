@@ -13,6 +13,7 @@ WAIT and a 19-cycle nonwaiting IRQ; the input sampling cycle is unchanged.
 The generated instruction header must match the accompanying PIO source.
 
 An admitted idle result leaves the receiver paused for the core0 transaction.
-The next wait resumes it if the transaction is refused. No-request timeouts
-continue receiving without pausing. A partial first byte retains active-command
+The next wait resumes it if the transaction is refused. No-request idle timeouts
+return to the backend FAST input scan without pausing reception or admitting
+application persistence. A partial first byte retains active-command
 priority; malformed first-byte traffic is not given a new protocol timeout.

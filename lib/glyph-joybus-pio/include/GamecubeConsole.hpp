@@ -63,6 +63,10 @@ class GamecubeConsole {
     // Only admit pending control-plane work at a paused, untouched receive boundary.
     PollStartStatus WaitForPollStartBounded(uint32_t (*pending)());
     void ResetAfterInvalidPoll();
+    // Runtime disables this receiver only for an admitted idle transaction.
+    bool IsIdleAdmitted() const {
+        return (_port.pio->ctrl & (1u << _port.sm)) == 0;
+    }
 
     /**
      * @brief Block until last two bytes of a poll command are received, or time out after 50us.

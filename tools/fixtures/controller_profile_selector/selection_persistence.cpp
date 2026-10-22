@@ -4,6 +4,9 @@
 #include "core/ProfileSelection.hpp"
 #include "core/ModeSelectionTransaction.hpp"
 #include <fstream>
+#ifdef GLYPH_GC_LIVENESS_BRIDGE
+extern "C" void run_gc_idle_then(void (*service)());
+#endif
 // Metadata methods are not exercised by this persistence-only fixture.
 size_t ProfileStore::Count() const { return 0; }
 const ProfileStore::Entry *ProfileStore::EntryAt(size_t) const { return nullptr; }
@@ -84,13 +87,23 @@ int main(int argc,char **argv){try{
   require(profile_selection::Persist(storage,store,candidate,COMMS_BACKEND_XINPUT,1001,0,m,b)==ModeDestinationResult::Saved&&m==1,"multiple existing contexts resolve matching eligible row");
  }
  selected_store.wire[0]=store.wire[0];selected_store.wire[1]=store.wire[1];
- for(unsigned failure=0;failure<3;++failure) {
+ for(unsigned failure=0;failure<4;++failure) {
   const bool fail=failure!=0;
-  seed(selected_persistence,COMMS_BACKEND_XINPUT);host_watchdog={};reboots=0;selected_store.ro=failure==1;
+#ifdef GLYPH_GC_LIVENESS_BRIDGE
+  seed(selected_persistence,COMMS_BACKEND_GAMECUBE);backend_instance.id=COMMS_BACKEND_GAMECUBE;
+#else
+  seed(selected_persistence,COMMS_BACKEND_XINPUT);
+#endif
+  host_watchdog={};reboots=0;selected_store.ro=failure==1;selected_store.race=failure==3;
   if(failure==2)checked_inject(CheckedStorage::Operation::Close,CheckedStorage::Phase::After,"config-v2.tmp");
+#ifdef GLYPH_GC_LIVENESS_BRIDGE
+  run_gc_idle_then(service_profile_selection);
+#else
   require(profile_selection::Request(1001),"service request accepted");
   service_profile_selection();
+#endif
   CheckedStorage::SetFaultHook(nullptr);
+  selected_store.race=false;
   require(!profile_selection::Pending(),"service releases request after returned attempt");
   require(reboots==(fail?0u:1u),"exact service reboot only after Saved");
   require(host_watchdog.scratch[2]==(fail?0u:kCommittedModeDestination),"failed service never publishes destination");

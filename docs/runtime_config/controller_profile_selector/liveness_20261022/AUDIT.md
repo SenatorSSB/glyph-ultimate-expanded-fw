@@ -80,3 +80,43 @@ Atomic idle admission must distinguish marker, PC, GPIO and FIFO states, and
 must not pause normal polling without a pending selection. Generated instruction
 relocations, flag ownership and24-instruction fit need explicit proof. This is
 not yet implementation, resource, build, review or hardware acceptance.
+
+## Implemented refinement and review chronology
+
+The local vendored source preserves exact upstream f2f59c0aee07aea58cdd03616439bc3c6a8cbd8a
+except the named hook/marker changes. SDK pioasm regeneration confirms all
+24 generated instruction words and relocated labels; generated formatting is
+normalized only by stripping trailing whitespace. Per-SM IRQ flags4–7 do not
+enable CPU PIO interrupts. GC's24 instructions and FastLED's4 fit32; NES's
+4-instruction program and GPIO rise handlers use their own backend/pins. No
+co-resident PIO program uses the new flags. No new object field, profile owner,
+timer subsystem, IRQ handler or Config buffer is introduced.
+
+Pending idle admission disables CPU IRQs, acknowledges raw FALL while receive
+still runs, pauses SM and checks marker clear/initial undelayed WAIT PC/high
+pin/empty RX FIFO/raw FALL clear. Rejected admission resumes the same receiver;
+accepted admission leaves it paused until the core0 transaction. Refusal then
+resumes unchanged on the next wait. No command byte is synthesized. An active
+partial byte retains priority, even if malformed traffic never completes; no
+finite malformed-first-byte guarantee is claimed. Existing split-poll ERROR
+now invokes the same130us invalid-command drain/reset already used by upstream
+WaitForPoll; this retires its marker. Normal report fields/tail/reply delay/TX
+bytes stay unchanged. The marker is cleared only in existing disabled
+receive-reset/send-init boundaries, never after asynchronous TX enqueue.
+
+Fresh review of initial commit d80e0c5028ccdb9bb442d8f0fb63a9e8cc70aadd
+withheld approval for P1: config.cpp's initial service call could bypass safe
+admission, including while a previous report remained queued. The repair now
+gates EVERY GameCube service attempt on actual paused SM admission; non-GC
+backends retain their service. There is no !Pending fast-path, since a producer
+could post between that predicate and the service's acquire. Tests must execute
+the actual gate before wait, during partial receive and queued TX. Incidental
+persistence duration is never used as proof of TX completion.
+
+Root also confirmed IntegratedDisplay reads shared inputs and does not scan
+sources itself. No-request idle FIFO timeouts therefore return CONTINUE to the
+existing backend FAST scan only while receive appears idle, with PIO untouched.
+Detected partial reception remains inside receive. This permits menu posting
+without host polls without entering application service or dispatching a fake
+command. Exact final source re-review, build and fresh linked resource proof
+remain required; neither the initial review nor its superseded gate is PASS.

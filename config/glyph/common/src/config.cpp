@@ -2,6 +2,7 @@
 #include "button_positions.hpp"
 #include "comms/backend_init.hpp"
 #include "comms/ConfiguratorBackend.hpp"
+#include "comms/GamecubeBackend.hpp"
 #include "core/CommunicationBackend.hpp"
 #include "core/config_usb_default_validation.hpp"
 #include "core/KeyboardMode.hpp"
@@ -360,7 +361,12 @@ void loop() {
     }
     if (read_boot_state().outcome != BootOutcome::Normal) return;
     if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
-    service_profile_selection();
+    // GameCube persistence requires the receiver's explicit idle admission,
+    // including requests posted before a wait or while a prior report drains.
+    if (backends[0]->BackendId() != COMMS_BACKEND_GAMECUBE ||
+        static_cast<GamecubeBackend *>(backends[0])->SelectionIdleAdmitted()) {
+        service_profile_selection();
+    }
     select_mode(backends, backend_count, config);
 
     for (size_t i = 0; i < backend_count; i++) {
