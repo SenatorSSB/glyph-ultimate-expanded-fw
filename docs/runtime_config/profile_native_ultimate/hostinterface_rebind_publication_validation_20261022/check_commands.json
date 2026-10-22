@@ -1,0 +1,9 @@
+{
+  "commands": [
+    "python3 tools/check_glyph_agent_framework_docs.py",
+    "python3 tools/check_glyph_agentic_sequence_protocol.py",
+    "python3 tools/check_glyph_docs_navigation.py",
+    "git diff --check"
+  ],
+  "scope": "Focused source-free; no firmware build or device action; no broad aggregate"
+}

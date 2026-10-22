@@ -1,0 +1,63 @@
+from pathlib import Path
+import json,hashlib,re,subprocess
+W=Path('/private/tmp/glyph-native-curation-20261020');R=W/'docs/runtime_config/profile_native_ultimate';A=R/'hostinterface_qualification_results_20261022';B=R/'hostinterface_rebind_approval_20261022';V=R/'hostinterface_rebind_publication_validation_20261022';O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');F=Path('/private/tmp/glyph-profile-native-20261020');BASE='22b5119e7d15eb869086a20253f4bc691df12952'
+def sh(*a,cwd=W):return subprocess.check_output(a,cwd=cwd,text=True)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def check(p,e):
+ p=Path(p);assert p.is_file() and not p.is_symlink() and p.stat().st_size==e['bytes'] and sha(p)==e['sha256'],str(p)
+def queue(s):
+ a=s.index('```json',s.index('<!-- queue-state:start -->'))+7;b=s.index('```',a);return json.loads(s[a:b])
+oldq=queue(sh('git','show',BASE+':docs/project/ACTIVE_AGENT_QUEUE.md'));newq=queue((W/'docs/project/ACTIVE_AGENT_QUEUE.md').read_text());q=json.loads(json.dumps(oldq));oldi=next(x for x in q['items'] if x['id']=='GP-NATIVE-001');i=next(x for x in newq['items'] if x['id']=='GP-NATIVE-001');oldi['hardware_evidence_gaps']=i['hardware_evidence_gaps'];assert q==newq
+assert i['status']=='HARDWARE_TEST_REQUIRED' and i['hardware_result'] is None and i['hardware_evidence_record'] is None and i['hardware_evidence_dependency_satisfied'] is False
+old=json.loads(sh('git','show',BASE+':docs/runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.json'));new=json.loads((R/'exact_candidate_334f_status_20261021.json').read_text());allowed={'next_hostinterface_qualification','device_approval','actual_hostinterface_qualification_result','next_hostinterface_rebind','remaining','latest_sourcefree_hostinterface_rebind_validation'};assert {k for k in set(old)|set(new) if old.get(k)!=new.get(k)}==allowed
+o=json.loads(json.dumps(old['device_approval']));o['current']=new['device_approval']['current'];assert o==new['device_approval']
+o=json.loads(json.dumps(old['next_hostinterface_qualification']));n=new['next_hostinterface_qualification'];keys={'owner_approval','executed','device_state','execution_state','metadata_lookups','runtime_identity_requests','inspect_invocations','capture_invocations','host_binary_live_invocations'};assert {k for k in set(o)|set(n) if o.get(k)!=n.get(k)}==keys
+assert n['executed'] is True and n['owner_approval']=='DIRECT_OWNER_APPROVED_BOUNDED_QUALIFICATION' and n['metadata_lookups']==1 and n['runtime_identity_requests']==n['inspect_invocations']==n['capture_invocations']==n['host_binary_live_invocations']==0
+assert new['remaining'][1:]==old['remaining'][1:]
+D=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2_20261022';prior=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022';install=O/'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022';metadata=O/'local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022';original=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021'
+for folder,rel,h,count in [(D,'qualification_stage_custody_manifest.json','2bf76af2e46352fed5ed6e44fc0df131d7abc43fec81e449ad41148b27223584',12),(prior,'postinstall_preservation_custody_manifest.json','e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40',227),(install,'installation_stage_custody_manifest.json','228e41413f5a49137db80769a21bf1ffca86c0d2d9996706612e4ce14c8e70f2',34),(metadata,'metadata_stage_custody_manifest.json','221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7',7),(original,'configurator_entry_20261022/private_backup_custody_manifest.json','f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d',251)]:
+ p=folder/rel;assert sha(p)==h;m=json.loads(p.read_text());assert len(m['files'])==count
+ for n,e in m['files'].items():check(folder/n,e)
+s=json.loads((D/'session_state.json').read_text());assert s['stop'] and s['stage']=='STOP_METADATA_NO_RETRY' and s['owner_ordinary_reconnect_confirmed']==s['CDC_metadata_lookups']==1
+for k in ['runtime_identity_requests','inspect_invocations','capture_invocations','firmware_copies','Config_or_ProfileStore_requests','Config_or_ProfileStore_mutations','native_activation','target_metrics','Switch_WUP_actions','old_reader_retries']:assert s[k]==0,k
+current=json.loads((D/'xinput_serial_metadata.json').read_text());assert current['match_count']==1;orig=json.loads((original/'configurator_entry_20261022/configurator_port.json').read_text())['matches'][0];c=current['matches'][0]
+assert c['serial_number']==orig['serial_number'] and (c['vid'],c['pid'])==(1848,18214) and orig['location']=='0-1' and c['location']=='1-1' and c['device']!=orig['device']
+assert (D/'publicsafe_result.json').read_bytes()==(A/'result.json').read_bytes();assert sha(A/'executed_session_wrapper.py.txt')==s['source_wrapper_SHA256']==sha('/private/tmp/glyph-native-hostinterface-V2-session-20261022.py')
+pkt=json.loads((B/'REBIND_PACKET.json').read_text());v2=json.loads((R/'mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.json').read_text());delta={k for k in set(pkt)|set(v2) if pkt.get(k)!=v2.get(k)};assert delta=={'packet_id','new_exception','manual_known_normal_USB_disconnect_reconnect_max','entry','prior_V2_actual_stop','owner_current_connection_report','current_connection_verified','owner_normal_display_confirmation_required_before_lookup','inherited_reviewed_V2'}
+assert pkt['owner_approval'] is None and pkt['hardware_result'] is None and pkt['manual_known_normal_USB_disconnect_reconnect_max']==0 and pkt['owner_normal_display_confirmation_required_before_lookup'] is True and pkt['current_connection_verified'] is False
+assert pkt['prior_V2_actual_stop']['private_manifest_SHA256']=='2bf76af2e46352fed5ed6e44fc0df131d7abc43fec81e449ad41148b27223584'
+assert sha(B/'REBIND_PACKET.md')=='8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d' and sha(B/'REBIND_PACKET.json')=='4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129'
+C=(O/pkt['host_artifact']['binary_owner_checkout_relative_path']).parent;assert sha(C/'custody.json')==pkt['host_artifact']['owner_custody_SHA256']
+for n,e in json.loads((C/'custody.json').read_text())['files'].items():check(C/n,e)
+assert sh('git','rev-parse','HEAD',cwd=F).strip()==old['candidate']['git_sha'] and sh('git','rev-parse','HEAD^{tree}',cwd=F).strip()==old['candidate']['tree'] and not sh('git','status','--porcelain',cwd=F)
+fc=O/Path(old['artifacts']['preserved_firmware_artifact_locator']).parent
+for n,k in [('firmware.uf2','uf2'),('firmware.elf','elf'),('firmware.bin','bin')]:check(fc/n,old['artifacts'][k])
+for n,e in json.loads((A/'manifest.json').read_text())['files'].items():check(A/n,e)
+for n,e in json.loads((B/'manifest.json').read_text())['files'].items():check(B/n,e)
+peer=Path('/private/tmp/glyph-native-hostinterface-V2-stop-audit-20261022');pins=json.loads((peer/'PINS.json').read_text());peer_count=0
+def walkpins(v):
+ global peer_count
+ if isinstance(v,dict):
+  for k,e in v.items():
+   if isinstance(e,dict) and 'sha256' in e and 'bytes' in e:
+    p=Path(k) if Path(k).is_absolute() else peer/k;check(p,e);peer_count+=1
+   else:walkpins(e)
+ elif isinstance(v,list):
+  for e in v:walkpins(e)
+walkpins(pins);assert peer_count>10
+assert new['next_hostinterface_rebind']['independent_ACK_SHA256']==sha(peer/'REPORT.md') and new['next_hostinterface_rebind']['independent_PINS_SHA256']==sha(peer/'PINS.json')
+tracked=set(sh('git','diff','--name-only',BASE).splitlines());untracked=set(sh('git','ls-files','--others','--exclude-standard').splitlines());changed=tracked|untracked
+currentdocs={'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md','docs/project/ACTIVE_AGENT_QUEUE.md'}|{'docs/runtime_config/profile_native_ultimate/'+n for n in ['README.md','chapter_ledger.md','exact_candidate_334f_status_20261021.json','exact_candidate_334f_status_20261021.md']};prefixes=['docs/runtime_config/profile_native_ultimate/'+x+'/' for x in ['hostinterface_qualification_results_20261022','hostinterface_rebind_approval_20261022','hostinterface_rebind_publication_validation_20261022']]
+assert currentdocs<=tracked and all(x in currentdocs or any(x.startswith(pre) for pre in prefixes) for x in changed)
+links=0
+for rel in changed:
+ p=W/rel;assert p.is_file() and not p.is_symlink();b=p.read_bytes();assert b'\0' not in b
+ assert orig['serial_number'].encode() not in b,('Private serial leak',rel)
+ if rel.endswith('.md'):
+  for t in re.findall(r'\[[^\]]*\]\(([^)]+)\)',b.decode()):
+   if re.match(r'^[a-z]+:',t) or t.startswith('#'):continue
+   assert (p.parent/t.split('#')[0]).exists(),(rel,t);links+=1
+subprocess.run(['git','diff','--check'],cwd=W,check=True)
+assert 'glyph_agent_framework_docs: PASS' in (V/'framework.log').read_text() and 'status=PASS' in (V/'sequence.log').read_text() and 'glyph_docs_navigation: PASS' in (V/'navigation.log').read_text() and not (V/'diff.log').read_bytes()
+result={'state':'FOCUSED_SOURCEFREE_V2_STOP_AND_REBIND_PUBLICATION_PASS','framework_sequence_navigation_diff':'PASS','scope':'DOCS_ONLY','only_queue_field_changed':'GP-NATIVE-001.hardware_evidence_gaps','other_orders_unchanged':len(newq['items'])-1,'protected_F_source_build_artifact_resource_protocol_oracle_HEP_fields_unchanged':True,'private_completed_session_files_rehashed':[12,227,34,7,251],'actual_stop':'ONE_METADATA_SAME_SERIAL_LOCATION_MISMATCH_STOP_BEFORE_PORT_OPEN','identity_inspect_capture_native_framework_init_reports':0,'new_reader_source_build_changed':False,'new_packet_delta_fields':sorted(delta),'new_owner_approval':None,'new_reconnect_authority':False,'private_host_custody_files_rehashed':7,'independent_audit_pin_entries_rehashed':peer_count,'privacy':'PASS_no_serial_raw_metadata_original_payload_publication','markdown_links':links,'changed_paths':len(changed),'native_hardware_result':None,'target_timing_highwater':'NOT_MEASURED','current_connection':'UNVERIFIED_OWNER_REPORT_ONLY','full_surface':'NOT_RERUN; historical framework debt retained, no aggregate PASS'}
+(V/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

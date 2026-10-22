@@ -126,7 +126,7 @@
     "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED",
     "exact_installation_qualification": "DIRECT_OWNER_APPROVED_EXECUTED_UNTIL_RAW_GUARD_STOP",
     "agent_instead_of_manual_single_copy": "LATER_DIRECT_OWNER_I_WANT_YOU_TO_WRITE_MOVE_IT",
-    "current": "STOP_POSTINSTALL_PRESERVATION_COMPLETE; NO_NEW_OBSERVER_OR_NATIVE_MUTATION_AUTHORITY"
+    "current": "STOP_V2_METADATA_LOCATION_MISMATCH; PRESENT_CONNECTION_UNVERIFIED; NEW_REBIND_APPROVAL_REQUIRED"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -135,7 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit owner approval of exact GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2, then its one bounded ordinary reconnect/identity/new inspect/capture/STOP qualification; new host108e64 sourcef0e246 reviewed and privately retained, zero live calls. Prior stopped attempts and pre-use parent deadline defect/negative/initial PASS remain exact.",
+    "Explicit owner approval of exact no-reconnect GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1 and normal-display confirmation, then one fresh metadata lookup requiring original private serial/location0-1; only then unchanged bounded identity/inspect/capture/STOP with108e64. Current connection unverified; prior V2 spent metadata stop remains exact.",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
@@ -268,16 +268,37 @@
     "independent_PINS_SHA256": "1c7f644a89a788e3aea490597dfb48c6b2c0feda96c81be37082176b78bacf58",
     "packet_MD_SHA256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607",
     "packet_JSON_SHA256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827",
-    "owner_approval": null,
-    "executed": false,
+    "owner_approval": "DIRECT_OWNER_APPROVED_BOUNDED_QUALIFICATION",
+    "executed": true,
     "hardware_result": null,
-    "device_state": "STOP_CONFIGURATOR",
+    "device_state": "STOP_METADATA_CURRENT_CONNECTION_UNVERIFIED",
     "firmware_source_changed": false,
     "known_parent_defect": "Concrete stale-receipt deadline authorization after slow fsync; parent negative retained, minimal child guard independently verified. Parent unadopted, never executed.",
     "id": "GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2",
     "file": "mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.md",
     "independent_ACK": "mac_hostinterface_observer_20261022/independent_deadline_repair_ack/REPORT.md",
-    "archive": "mac_hostinterface_observer_20261022/README.md"
+    "archive": "mac_hostinterface_observer_20261022/README.md",
+    "execution_state": "SAME_PRIVATE_SERIAL_LOCATION_1-1_VS_REQUIRED_0-1_STOP_BEFORE_PORT_OPEN",
+    "metadata_lookups": 1,
+    "runtime_identity_requests": 0,
+    "inspect_invocations": 0,
+    "capture_invocations": 0,
+    "host_binary_live_invocations": 0
   },
-  "latest_sourcefree_hostinterface_validation": "hostinterface_publication_validation_20261022/result.json"
+  "latest_sourcefree_hostinterface_validation": "hostinterface_publication_validation_20261022/result.json",
+  "actual_hostinterface_qualification_result": "hostinterface_qualification_results_20261022/result.json",
+  "next_hostinterface_rebind": {
+    "id": "GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1",
+    "file": "hostinterface_rebind_approval_20261022/REBIND_PACKET.md",
+    "MD_SHA256": "8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d",
+    "JSON_SHA256": "4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129",
+    "owner_approval": null,
+    "executed": false,
+    "new_reconnect_authority": false,
+    "reader_source_build_unchanged": true,
+    "independent_ACK": "hostinterface_qualification_results_20261022/independent_audit/REPORT.md",
+    "independent_ACK_SHA256": "600df66bebbaabf54b6e6de4f6b897627dfafbffaf85e577f055c0ea6013112f",
+    "independent_PINS_SHA256": "31f3665f8cf53d0681ee851612205231518a413328da51d1780b8147acb900a4"
+  },
+  "latest_sourcefree_hostinterface_rebind_validation": "hostinterface_rebind_publication_validation_20261022/result.json"
 }

@@ -1,5 +1,36 @@
 # Profile-native Ultimate execution chapter
 
+## Actual V2 location stop and no-reconnect rebind gate — 2026-10-22
+
+The owner approved exact V2 and confirmed one ordinary USB reconnect. The
+[single standard metadata lookup](hostinterface_qualification_results_20261022/README.md)
+found one0738/4726 unit with original private serial, but location1-1 vs required0-1
+and a changed CDC path. Root stopped immediately; identity/registry inspect/
+capture/port open/interface init/reports and every mutation/metric remain0. No
+reader binary ran. Source wrapper, approval, metadata, stop and12-file private
+custody are retained; prior four sessions and all source/artifact history stay
+exact. This is a binding stop, not firmware/driver/hardware failure or native HEP.
+
+The owner later said “different one, I think we are now back in previous one”.
+Current connection and post-stop owner reconnect count remain UNVERIFIED/UNKNOWN.
+Root requested no further reconnect or mode change. Installed pyserial formatting
+source does not make the saved location string an independently verified current
+raw registry location. No fresh lookup or inferred new anchor was substituted.
+
+The [new exact rebind packet](hostinterface_rebind_approval_20261022/REBIND_PACKET.md)
+requests separate approval and current normal-display confirmation for one fresh
+original-unit/location0-1 lookup; only if it passes may the previously unspent
+unchanged bounded identity/new inspect/capture run. No further reconnect or
+reader/source/build change is proposed. Same artifact108e64/sourcef0e246, SDK/API/
+deadline/retention limits and source review carry unchanged. One existing finite
+console reviewer audits the actual stop and narrow packet correspondence; no
+new full chat, source reviewer, product order, successor or broad test loop.
+
+F334f/build/resource/caps/protocol/oracles, sealed API preservation and all18/
+H1–H12/HEP/integration/DONE gates remain unchanged; source is unmerged. Root
+publishes source-free facts and releases the canonical lock at the new owner
+decision. No native activation or physical acceptance has occurred.
+
 ## New Mac SDK observer and exact V2 owner gate — 2026-10-22
 
 The [new IOUSBHostInterface observer](mac_hostinterface_observer_20261022/README.md)

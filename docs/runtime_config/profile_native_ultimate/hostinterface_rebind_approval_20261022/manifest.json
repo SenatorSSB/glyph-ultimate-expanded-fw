@@ -1,0 +1,22 @@
+{
+  "kind": "SOURCEFREE_PUBLICSAFE_STOP_OR_EXACT_OWNER_PACKET_ARCHIVE",
+  "files": {
+    "README.md": {
+      "bytes": 504,
+      "sha256": "e7251b59c7e751bd73938e33b839cc921734cdaccf824bbf93d0e17873d9d998"
+    },
+    "REBIND_PACKET.json": {
+      "bytes": 11937,
+      "sha256": "4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129"
+    },
+    "REBIND_PACKET.md": {
+      "bytes": 3247,
+      "sha256": "8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d"
+    },
+    "review_binding.json": {
+      "bytes": 513,
+      "sha256": "2de0f5b0946c29487c79bc59bdc6f8364e1a9705f673e7c0545163a3507a0d6f"
+    }
+  },
+  "raw_private_metadata_or_serial_publication": false
+}

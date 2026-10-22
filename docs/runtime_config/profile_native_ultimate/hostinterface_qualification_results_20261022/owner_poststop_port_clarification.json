@@ -1,0 +1,8 @@
+{
+  "questionItemId": "[\"request_user_input_async\",\"call_f8aa99f607d547dd8c143393095268ac\",0]",
+  "question": "The saved metadata shows the same controller serial but USB location 1-1; the approved packet expected 0-1. Did you reconnect it to the same physical Mac USB port as before? Leave it connected and unchanged for now.",
+  "answer": "different one, I think we are now back in previous one",
+  "current_location": "UNVERIFIED",
+  "poststop_owner_initiated_reconnect_count": "UNKNOWN",
+  "new_agent_device_actions": 0
+}

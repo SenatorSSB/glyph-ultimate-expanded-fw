@@ -1,0 +1,40 @@
+{
+  "state": "FOCUSED_SOURCEFREE_V2_STOP_AND_REBIND_PUBLICATION_PASS",
+  "framework_sequence_navigation_diff": "PASS",
+  "scope": "DOCS_ONLY",
+  "only_queue_field_changed": "GP-NATIVE-001.hardware_evidence_gaps",
+  "other_orders_unchanged": 102,
+  "protected_F_source_build_artifact_resource_protocol_oracle_HEP_fields_unchanged": true,
+  "private_completed_session_files_rehashed": [
+    12,
+    227,
+    34,
+    7,
+    251
+  ],
+  "actual_stop": "ONE_METADATA_SAME_SERIAL_LOCATION_MISMATCH_STOP_BEFORE_PORT_OPEN",
+  "identity_inspect_capture_native_framework_init_reports": 0,
+  "new_reader_source_build_changed": false,
+  "new_packet_delta_fields": [
+    "current_connection_verified",
+    "entry",
+    "inherited_reviewed_V2",
+    "manual_known_normal_USB_disconnect_reconnect_max",
+    "new_exception",
+    "owner_current_connection_report",
+    "owner_normal_display_confirmation_required_before_lookup",
+    "packet_id",
+    "prior_V2_actual_stop"
+  ],
+  "new_owner_approval": null,
+  "new_reconnect_authority": false,
+  "private_host_custody_files_rehashed": 7,
+  "independent_audit_pin_entries_rehashed": 25,
+  "privacy": "PASS_no_serial_raw_metadata_original_payload_publication",
+  "markdown_links": 203,
+  "changed_paths": 32,
+  "native_hardware_result": null,
+  "target_timing_highwater": "NOT_MEASURED",
+  "current_connection": "UNVERIFIED_OWNER_REPORT_ONLY",
+  "full_surface": "NOT_RERUN; historical framework debt retained, no aggregate PASS"
+}

@@ -1,0 +1,7 @@
+{
+  "questionItemId": "[\"request_user_input_async\",\"call_ee93a08d6bec4b71ab5b0257958ff34f\",0]",
+  "question": "Unplug and reconnect the controller by USB exactly once, with all controls released, using your normal procedure. Confirm when the normal controller screen appears in XInput mode. If anything unexpected appears, stop without trying again.",
+  "answer": "confirmed",
+  "known_ordinary_reconnect_confirmed": 1,
+  "recorded_utc": "2026-10-22T11:00:24.203318+00:00"
+}

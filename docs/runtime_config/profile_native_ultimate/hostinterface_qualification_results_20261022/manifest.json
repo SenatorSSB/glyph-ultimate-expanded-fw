@@ -1,0 +1,46 @@
+{
+  "kind": "SOURCEFREE_PUBLICSAFE_STOP_OR_EXACT_OWNER_PACKET_ARCHIVE",
+  "files": {
+    "README.md": {
+      "bytes": 1953,
+      "sha256": "99cececba235dc4782c8331b47291bef6d54f516af5b1ec92f39112115966cbe"
+    },
+    "executed_session_wrapper.py.txt": {
+      "bytes": 10224,
+      "sha256": "c929b3413f4056c5d73b90c0abc0f9fe08e12b12fbe8f7e848d312c4b45af73d"
+    },
+    "independent_audit/PINS.json": {
+      "bytes": 7396,
+      "sha256": "31f3665f8cf53d0681ee851612205231518a413328da51d1780b8147acb900a4"
+    },
+    "independent_audit/REPORT.md": {
+      "bytes": 8784,
+      "sha256": "600df66bebbaabf54b6e6de4f6b897627dfafbffaf85e577f055c0ea6013112f"
+    },
+    "independent_audit/result.json": {
+      "bytes": 3394,
+      "sha256": "70b61ad97289b117e8313cc78bb0ecc52288b3767d60b94074469c643e0fece1"
+    },
+    "owner_approval.json": {
+      "bytes": 629,
+      "sha256": "83c5ddebd3c7a8a432240cabbb262d9a5ff24c31285fdb8d30845d86e9744aae"
+    },
+    "owner_poststop_port_clarification.json": {
+      "bytes": 530,
+      "sha256": "68c8938ecf9172e939abd4521db0d021bf431a321c08d2b7c7314666e0dca855"
+    },
+    "owner_reconnect_confirmation.json": {
+      "bytes": 479,
+      "sha256": "c7c1dea8c8c57ebda1239dae98d44d68c4c060590cd54867eb3381c107998750"
+    },
+    "private_hash_references.json": {
+      "bytes": 2092,
+      "sha256": "c9c8080ee81b402382116cc1d1952d28d8dc659d4357ce05ba580026c55d87e3"
+    },
+    "result.json": {
+      "bytes": 1217,
+      "sha256": "d6874db8c8c820ba8d8f9e3eca57faba1447348322c89eca371ea3c497473942"
+    }
+  },
+  "raw_private_metadata_or_serial_publication": false
+}

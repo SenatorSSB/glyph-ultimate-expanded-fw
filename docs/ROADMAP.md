@@ -23,13 +23,14 @@ A proven host-only empty-stderr assertion was corrected after independent offlin
 wire/source review, preserving the valid STATUS/error/snapshot and unused child
 finding, without requery or new device authority. All227 session files are pinned
 privately. This is API preservation, not raw filesystem export or native acceptance.
-Device access ended STOP in Configurator. The [new SDK-supported Mac observer](runtime_config/profile_native_ultimate/mac_hostinterface_observer_20261022/README.md)
-has completed offline checks, independent source review and a focused deadline
-repair ACK. A reproduced pre-use parent defect and the original PASS remain
-preserved; corrected binary108e64/sourcef0e246 and exact V2 packet are retained.
-The [V2 live-access packet](runtime_config/profile_native_ultimate/mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.md)
-requires new explicit owner approval for one ordinary reconnect, identity, new
-inspect/capture then STOP. No new live access or native mutation is authorized.
+The [approved V2 attempt](runtime_config/profile_native_ultimate/hostinterface_qualification_results_20261022/README.md)
+stopped after one metadata lookup: original private serial matched, but saved
+location1-1 differed from required0-1. Identity/inspect/capture/port opens are0.
+The owner reports a different port and possible return; present connection
+remains UNVERIFIED. The [no-reconnect rebind packet](runtime_config/profile_native_ultimate/hostinterface_rebind_approval_20261022/REBIND_PACKET.md)
+requires separate explicit approval and current normal-display confirmation
+before one fresh exact-location lookup and only then unchanged bounded access.
+No further reconnect, reader/source/build change or native mutation is proposed.
 F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE

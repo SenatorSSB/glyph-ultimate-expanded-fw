@@ -1,0 +1,56 @@
+{
+  "kind": "PRIVATE_V2_STOP12FILE_CUSTODY_HASH_REFERENCES_ONLY",
+  "private_session_owner_checkout_relative": "local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2_20261022",
+  "manifest_SHA256": "2bf76af2e46352fed5ed6e44fc0df131d7abc43fec81e449ad41148b27223584",
+  "files": {
+    "QUALIFICATION_PACKET.json": {
+      "bytes": 9593,
+      "sha256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827"
+    },
+    "QUALIFICATION_PACKET.md": {
+      "bytes": 7717,
+      "sha256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607"
+    },
+    "executed_session_wrapper.py": {
+      "bytes": 10224,
+      "sha256": "c929b3413f4056c5d73b90c0abc0f9fe08e12b12fbe8f7e848d312c4b45af73d"
+    },
+    "metadata_command.json": {
+      "bytes": 747,
+      "sha256": "2cf5d5d231d372baed5dcda78e04c77b32701e380cd6615d1568f60653ed1722"
+    },
+    "metadata_stop.json": {
+      "bytes": 123,
+      "sha256": "4f14b1add31ec21235bddcdb23ae5c7c49d924386c2c2a9e98298a01d633d129"
+    },
+    "owner_approval.json": {
+      "bytes": 629,
+      "sha256": "83c5ddebd3c7a8a432240cabbb262d9a5ff24c31285fdb8d30845d86e9744aae"
+    },
+    "owner_poststop_port_clarification.json": {
+      "bytes": 530,
+      "sha256": "68c8938ecf9172e939abd4521db0d021bf431a321c08d2b7c7314666e0dca855"
+    },
+    "owner_reconnect_confirmation.json": {
+      "bytes": 479,
+      "sha256": "c7c1dea8c8c57ebda1239dae98d44d68c4c060590cd54867eb3381c107998750"
+    },
+    "preuse_verification.json": {
+      "bytes": 701,
+      "sha256": "56fc90faf273a749b53bfc32e26d04715cdd366b283a546a9e413a227707a580"
+    },
+    "publicsafe_result.json": {
+      "bytes": 1217,
+      "sha256": "d6874db8c8c820ba8d8f9e3eca57faba1447348322c89eca371ea3c497473942"
+    },
+    "session_state.json": {
+      "bytes": 688,
+      "sha256": "63952648ed4a83e19ef37817a953ba0d9af70330bf79e702e4593248af371724"
+    },
+    "xinput_serial_metadata.json": {
+      "bytes": 413,
+      "sha256": "99059228663780858bf9eb93df34543012d2c23b9bb406a4420255026daf452b"
+    }
+  },
+  "raw_private_metadata_published": false
+}

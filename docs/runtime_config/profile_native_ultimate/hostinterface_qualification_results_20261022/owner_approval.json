@@ -1,0 +1,11 @@
+{
+  "id": "GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2",
+  "questionItemId": "[\"request_user_input_async\",\"call_74d4b21ce4b6442f87896ab138cb081c\",0]",
+  "answer": "Approve bounded qualification (Recommended)",
+  "trusted_source": "Direct owner reply in this root conversation",
+  "published_commit": "22b5119e7d15eb869086a20253f4bc691df12952",
+  "packet_MD_SHA256": "9707eb4ef20bfacff4ddf66ac6e2b3c1a72055726f06fe77ea9deb2e0a0ca607",
+  "packet_JSON_SHA256": "dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827",
+  "recorded_utc": "2026-10-22T11:00:24.203318+00:00",
+  "no_native_or_acceptance_authority": true
+}
