@@ -1,0 +1,49 @@
+"""Offline Config/494 scheduled-held-set inventory; no device action or usability proof."""
+from pathlib import Path
+import json,sys,base64,re,hashlib,collections
+sys.dont_write_bytecode=True
+F=Path('/private/tmp/glyph-profile-native-20261020');D=Path(__file__).parent;SRC=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');P=O/'local_backups/hardware-acceptance/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1_20261022'
+J=lambda p:json.loads(Path(p).read_text());H=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+sys.path.insert(0,str(F/'tools'));import glyph_serial_config_tool as t
+t.PosixSerialPort=lambda *a,**k: (_ for _ in ()).throw(AssertionError('no device constructor'))
+pb,jf,_=t.load_runtime_proto_modules(F);raw=base64.b64decode(J(P/'C00/config_backup.json')['rawConfigPayloadBase64'],validate=True);assert hashlib.sha256(raw).hexdigest()=='54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460';cfg=pb.Config();cfg.ParseFromString(raw)
+m=J(SRC/'acceptance_comparison_matrix.json');pkt=J(P/'APPROVED_PACKET.json');assert H(SRC/'acceptance_comparison_matrix.json')==pkt['matrix_sha256']
+rows={x['selection_id']:x for x in m['rows']};assert len(rows)==len(m['rows'])==386;events=[x for x in pkt['events']if x.get('case_run_id')];assert len(events)==494 and len({x['case_run_id']for x in events})==494
+matrixpath=F/'config/glyph/glyph_mk6/include/matrix_definition.hpp';text=matrixpath.read_text();block=re.search(r'const Button matrix\[num_rows\]\[num_cols\] = \{(.*?)\n\};',text,re.S)[1];grid=[re.findall(r'BTN_[A-Z0-9]+|\bNA\b',s)for s in re.findall(r'\{([^{}]+)\}',block)];assert len(grid)==4 and all(len(x)==11 for x in grid)
+rpins=[26,25,24,23];cpins=[15,14,13,12,16,17,21,20,19,18,22];carriers={}
+for r,row in enumerate(grid):
+ for c,n in enumerate(row):
+  if n!='NA':
+   i=pb.Button.Value(n);assert i not in carriers;carriers[i]={'id':i,'name':n,'matrix_row_zero_based':r,'matrix_column_zero_based':c,'row_GPIO':rpins[r],'column_GPIO':cpins[c]}
+assert len(carriers)==42
+modechords=[set(map(int,x.activation_binding))for x in cfg.game_mode_configs];backendchords=[set(map(int,x.activation_binding))for x in cfg.communication_backend_configs]
+assert len(modechords)==3 and all(not x for x in modechords)
+assert backendchords==[set(),set(),{42}] and cfg.communication_backend_configs[2].backend_id==pb.COMMS_BACKEND_CONFIGURATOR
+assert cfg.communication_backend_configs[0].backend_id==pb.COMMS_BACKEND_XINPUT and cfg.communication_backend_configs[0].default_mode_config==3 and cfg.default_usb_backend_config==1
+# Source all_buttons_held excludes empty masks; boot backend selection is outside runtime mode selection.
+facts=[];union=set();rt2=[];mb4=[];maxhold=0
+for e in events:
+ row=rows[e['selection_id']];held=set(row['physical_held_input_ids']);assert len(held)==len(row['physical_held_input_ids']);union|=held;maxhold=max(maxhold,len(held));missing=sorted(held-carriers.keys());modeconflict=[i+1 for i,ch in enumerate(modechords)if ch and ch<=held]
+ ctx=m['contexts'][e['context']]['context_json'];assert not ctx.get('activation_binding',[])
+ entry=49 in held;assert pb.Button.Name(49)=='BTN_MB1';senscope_debug={33,34,49,50}<=held
+ facts.append({'case_run_id':e['case_run_id'],'selection_id':e['selection_id'],'context':e['context'],'all_held_IDs_have_Mk6_matrix_carrier':not missing,'missing_carrier_IDs':missing,'actual_nonempty_game_mode_chord_matches':modeconflict,'dashboard_menu_entry_MB1_held':entry,'manual_debug_full_chord_held':senscope_debug,'startup_Configurator_binding_member_held_after_boot':42 in held,'dashboard_enter_control_MB4_held':52 in held,'held_count':len(held),'physical_owner_usability_observed':False})
+ if 42 in held:rt2.append(e['case_run_id'])
+ if 52 in held:mb4.append(e['case_run_id'])
+assert all(x['all_held_IDs_have_Mk6_matrix_carrier']and not x['actual_nonempty_game_mode_chord_matches']and not x['dashboard_menu_entry_MB1_held']and not x['manual_debug_full_chord_held']for x in facts)
+boots=[e for e in pkt['events']if e['kind']=='ORDINARY_USB_REINITIALIZATION'];assert len(boots)==26 and all(any('all controls released' in x for x in e['guards'])for e in boots)
+sources={
+'config/glyph/glyph_mk6/include/matrix_definition.hpp':{'lines':'7-17','purpose':'4x11 matrix/carriers/GPIO'},
+'config/glyph/common/src/config.cpp':{'lines':'47-64;170-175;263-264;418-439','purpose':'COL2ROW single matrix input; boot scan; mode masks; original-input display controls'},
+'include/input/SwitchMatrixInput.hpp':{'lines':'61-79;90-99','purpose':'scan every matrix cell without an at-most-one-row restriction'},
+'HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp':{'lines':'15;25-34','purpose':'5ms default per-cell debounce and original input bit update'},
+'HAL/pico/include/util/state_util.hpp':{'lines':'10-35','purpose':'ID-1 bits and nonempty subset hold masks'},
+'src/core/mode_selection.cpp':{'lines':'230-269','purpose':'runtime mode selection reads original inputs and cached GameModeConfig masks'},
+'src/core/config_utils.cpp':{'lines':'8-30','purpose':'backend activation binding lookup'},
+'HAL/pico/src/comms/backend_init.cpp':{'lines':'307-339','purpose':'backend selection at initialization; watchdog distinct'},
+'src/comms/IntegratedDisplay.cpp':{'lines':'57-85','purpose':'display consumes configured original controls'},
+'HAL/pico/src/display/InputDisplay.cpp':{'lines':'20-28','purpose':'only back enters menu from input dashboard'},
+'config/glyph/common/src/display/MenuButtonHints.cpp':{'lines':'218-226','purpose':'only back enters menu from normal hints dashboard'},
+}
+for path,d in sources.items():p=F/path;d['bytes']=p.stat().st_size;d['sha256']=H(p)
+result={'kind':'FINITE_ACTUAL_CONFIG_AND_494_POSE_SOURCE_ELIGIBILITY_INVENTORY','result':'PASS_SOURCE_ELIGIBILITY_ONLY_PHYSICAL_USABILITY_UNOBSERVED','actual_Config_SHA256':hashlib.sha256(raw).hexdigest(),'comparison_matrix_SHA256':H(SRC/'acceptance_comparison_matrix.json'),'approved_packet_SHA256':H(P/'APPROVED_PACKET.json'),'scheduled_case_runs':494,'unique_matrix_selections':386,'source_carrier_union_count':len(union),'matrix_source_carriers':42,'maximum_listed_controls_held':maxhold,'nonempty_actual_game_mode_activation_chords':0,'mode_chord_conflicts':0,'dashboard_menu_entry_control_in_any_pose':False,'manual_debug_full_chord_in_any_pose':False,'all_scheduled_inputs_have_matrix_carriers':True,'used_carriers':[carriers[i]for i in sorted(union)],'neutral_ordinary_reinitializations':len(boots),'startup_Configurator_control_in_after_boot_poses':{'count':len(rt2),'case_runs':rt2,'qualification':'BTN_RT2 is a supported gameplay input held only after neutral boot in these rows. Startup/backend activation is evaluated during initialization. This does not authorize held-RT2 boot, investigate deferred RT2, or prove physical behavior.'},'dashboard_MB4_poses':{'count':len(mb4),'case_runs':mb4,'qualification':'Normal input/hints dashboard handlers respond only to back/MB1. MB4 is enter in an already-open menu; no pose includes MB1. Actual display state must remain normal and owner-observed.'},'source_constraints':['Source carrier existence does not prove installed plate accessibility, human simultaneous reach, wiring correctness or physical asserted held set.','Per-cell scan/debounce does not prove same-frame simultaneous transitions or hidden-edge absence. Existing settled endpoint/history qualifications remain unchanged.','This inventory changes no fixture/profile/context/acceptance requirement and licenses no new stimulus, boot chord, source change or device action.'],'case_run_checks':facts,'source_inputs':sources,'reviewer_device_operations':0}
+(D/'pose_eligibility.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps({k:result[k]for k in ['result','scheduled_case_runs','unique_matrix_selections','source_carrier_union_count','matrix_source_carriers','maximum_listed_controls_held','nonempty_actual_game_mode_activation_chords','mode_chord_conflicts','all_scheduled_inputs_have_matrix_carriers']},indent=2));print('RT2 afterboot poses',len(rt2),'MB4 poses',len(mb4))

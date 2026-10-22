@@ -1,5 +1,25 @@
 # Profile-native Ultimate chapter research
 
+## Owner-approved native XInput campaign: C00 preservation PASS — 2026-10-22
+
+The owner approved [the exact bounded XInput campaign](native_xinput_campaign_20261022/README.md).
+C00 matched the original unit/location and current Configurator identity; Config252
+API bytes remain exactly original54fda, and all22 full profile wrappers/revisions
+and directory entries match. STATUS26/LIST3/READ22, fresh inc1/store172/Config1156314366;
+224 private files sealed. No native activation, Config/profile mutation or
+target metric has occurred. The fixed XInput filter copy error is
+preserved and independently reconciled by the existing phase-specific procedures
+within the already approved24 Configurator/26 XInput events; no extra lookup,
+fallback or rights. Original frozen packet/source/review/custody remain exact.
+
+The owner confirmed B00 ordinary reconnect and neutral READY; fresh original4
+XInput identity/registry inspect and the first neutral/LF1 baselines each matched
+all21 fields in three measurements, with two separately preserved drains/eight
+reads total, abort0/settled cleanup. Next B00_B002 needs its actual human pose. Native/other-route/HEP/integration/DONE gaps remain;
+F334f remains unchanged and unmerged. This checkpoint supersedes older pending
+approval descriptions below without changing their historical evidence.
+
+
 The [reviewed native XInput packet](native_hardware_preparation_20261022/OWNER_PACKET.md)
 is prepared for exact owner approval and remains unexecuted. It binds the corrected
 native-only four-read host child, genuine owner poses, two disposable profiles,

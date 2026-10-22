@@ -1,0 +1,301 @@
+{
+  "kind": "FINITE_C00_ACTUAL_SAVED_EVIDENCE_AUDIT",
+  "result": "PASS_C00_API_PRESERVATION_ONLY",
+  "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "C00_manifest_SHA256": "6dcc072cb19c8c7d1cb90f458983111a6cc2e258066d6d06f01d499c489bf4d5",
+  "C00_files_verified": 224,
+  "summary_included_in_manifest": true,
+  "original_files_rehashed": 251,
+  "postinstall_files_rehashed": 227,
+  "same_private_unit_and_location": true,
+  "Configurator_VID_PID": [
+    11914,
+    4242
+  ],
+  "identity": {
+    "context": "configurator",
+    "status": "configurator",
+    "primary_backend": 8,
+    "context_row": 0,
+    "requested_reference": 0,
+    "incarnation": 0,
+    "active_id": 0,
+    "active_revision": 0,
+    "schema_version": 0,
+    "payload_sha256": null,
+    "session": "C00",
+    "observation": "current_session_only",
+    "protocol_version": 1,
+    "viewer_records": 0
+  },
+  "Config_bytes": 252,
+  "Config_raw_SHA256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+  "Config_full_API_and_decoded_JSON_equal_original": true,
+  "current_receipt_differences": {},
+  "fences": {
+    "store_incarnation": 1,
+    "store_generation": 172,
+    "config_generation": 1156314366
+  },
+  "actual_completed_counters": {
+    "CDC_same_private_unit_lookups": 1,
+    "runtime_identity_queries": 1,
+    "GET_CONFIG_commands": 1,
+    "STATUS_commands": 26,
+    "LIST_commands": 3,
+    "READ_commands": 22,
+    "serial_opens": 28,
+    "known_Menu_entries": 1,
+    "Menu_Configurator_restarts": 1
+  },
+  "approved_events": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26
+  ],
+  "host_invocations": 29,
+  "profile_store_wire_transmissions": 51,
+  "standalone_STATUS_attempts": 1,
+  "all_journal_wire_JSON_mirrors_valid": true,
+  "all_journal_frames_sequential": true,
+  "profile_facts": [
+    {
+      "profile_id": 1,
+      "revision": 2,
+      "directory_payload_version": 1,
+      "body_schema_version": 1,
+      "canonical_bytes": 1960,
+      "canonical_SHA256": "b5b0f076b5f4bbad97f76ea722281018c3e9cf54355f66efaed54aa1b98dce4d",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 3,
+      "revision": 5,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 4,
+      "revision": 1,
+      "directory_payload_version": 1,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 5,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 6,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 7,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 8,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 9,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 10,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 11,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 12,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 13,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 14,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 15,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 16,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 17,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 18,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 19,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 20,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 21,
+      "revision": 1,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 22,
+      "revision": 132,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3042,
+      "canonical_SHA256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    },
+    {
+      "profile_id": 24,
+      "revision": 2,
+      "directory_payload_version": 3,
+      "body_schema_version": 3,
+      "canonical_bytes": 3047,
+      "canonical_SHA256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+      "full_wrapper_original_and_postinstall_and_wire_equal": true
+    }
+  ],
+  "phase_filter_selected_before_single_lookup": true,
+  "global_filter_discrepancy_preserved": true,
+  "no_unrecorded_requests_proven_beyond_saved_scope": false,
+  "native_activation_Config_profile_mutations_raw_reports_target_metrics": 0,
+  "reviewer_device_or_registry_or_serial_calls": 0,
+  "port_constructions": 0,
+  "outcome_scope": "Current Configurator API preservation only; no earlier gameplay or installed-byte attestation, native activation, target timing, output, other backend or HEP PASS inferred.",
+  "pose_source_eligibility": {
+    "result": "PASS_SOURCE_ELIGIBILITY_ONLY_PHYSICAL_USABILITY_UNOBSERVED",
+    "scheduled_case_runs": 494,
+    "unique_matrix_selections": 386,
+    "used_input_IDs": 39,
+    "all_have_Mk6_matrix_carrier": true,
+    "active_mode_chord_conflicts": 0,
+    "menu_entry_control_in_any_pose": false,
+    "physical_usability": "UNOBSERVED_BY_THIS_AUDIT"
+  }
+}

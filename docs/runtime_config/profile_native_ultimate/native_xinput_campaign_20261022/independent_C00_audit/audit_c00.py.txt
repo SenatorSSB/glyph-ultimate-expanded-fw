@@ -1,0 +1,115 @@
+"""Read retained C00 files only; no discovery, serial, binary CLI or device operation."""
+from pathlib import Path
+import sys,json,hashlib,base64,importlib.util,datetime,re,collections
+sys.dont_write_bytecode=True
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+P=O/'local_backups/hardware-acceptance/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1_20261022'
+C=P/'C00'; B=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022'
+POST=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022'
+D=Path(__file__).parent; F=Path('/private/tmp/glyph-profile-native-20261020'); SOURCE=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022')
+J=lambda p:json.loads(Path(p).read_text());H=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();HB=lambda b:hashlib.sha256(b).hexdigest()
+refs={}
+def ref(p):
+ p=Path(p);assert p.is_file() and not p.is_symlink();refs[str(p)]={'bytes':p.stat().st_size,'sha256':H(p)};return refs[str(p)]
+def closure(root,name,count,expected_hash=None):
+ p=root/name
+ if expected_hash:assert H(p)==expected_hash
+ m=J(p);assert len(m['files'])==count
+ ref(p)
+ for n,e in m['files'].items():
+  assert not Path(n).is_absolute() and '..' not in Path(n).parts
+  q=root/n;assert q.is_file() and not q.is_symlink() and q.stat().st_size==e['bytes'] and H(q)==e['sha256'],n
+ return m
+cm=closure(C,'custody_manifest.json',224)
+assert {p.name for p in C.iterdir() if p.is_file()}==set(cm['files'])|{'custody_manifest.json'}
+assert 'summary.json' in cm['files'];summary=J(C/'summary.json')
+# Original manifest paths intentionally resolve from preflight root.
+assert H(B/'private_backup_custody_manifest.json')=='f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d'
+om=J(B/'private_backup_custody_manifest.json');assert len(om['files'])==251;ref(B/'private_backup_custody_manifest.json')
+for n,e in om['files'].items():
+ q=B.parent/n;assert not Path(n).is_absolute() and '..' not in Path(n).parts and q.stat().st_size==e['bytes'] and H(q)==e['sha256'],n
+pm=closure(POST,'postinstall_preservation_custody_manifest.json',227,'e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40')
+# Exact event authority and saved phase choice, not the mutable campaign state.
+packet=J(P/'APPROVED_PACKET.json');assert H(P/'APPROVED_PACKET.json')=='7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8' and H(P/'APPROVED_PACKET.md')=='a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040'
+approval=J(P/'owner_approval.json');assert approval['actual_owner_answer']=='Approve bounded XInput campaign' and approval['JSON_SHA256']==H(P/'APPROVED_PACKET.json') and approval['MD_SHA256']==H(P/'APPROVED_PACKET.md')
+display=J(P/'C00_owner_display_confirmation.json');assert display['clarification']['answer']=='yes' and display['new_reconnect_or_second_entry_requested'] is False
+wrapper=P/'C00_fixed_read_wrapper.py';wh=H(wrapper);assert wh=='d224719e6ab634eb96c09c1332d46222700d1e50d94b85b6cfee238c949faa84'
+for p,h in packet['pins'].items():assert H(p)==h,p
+for p in [P/'APPROVED_PACKET.json',P/'APPROVED_PACKET.md',P/'owner_approval.json',P/'C00_owner_display_confirmation.json',P/'cdc_phase_filter_erratum.json',wrapper]:ref(p)
+for n in ['REPORT.md','PINS.json','source-witnesses.json']:ref(Path('/private/tmp/glyph-native-native-acceptance-independent-review-20261022/cdc_phase_clarification')/n)
+lookup=Path('/private/tmp/glyph-native-configurator-entry-backup-20261022/configurator_port_lookup.py');assert H(lookup)=='a2c79a297214a672df9d7d06429656561bce302ef332832bf80d240aa55a6e43';ref(lookup)
+# One unique same-unit, same-location Configurator metadata result; private fields never emitted.
+meta=J(C/'configurator_port.json');origmeta=J(B/'configurator_port.json');assert meta['match_count']==origmeta['match_count']==1
+cur=meta['matches'][0];oldunit=origmeta['matches'][0];assert (cur['vid'],cur['pid'])==(0x2e8a,0x1092) and cur['serial_number']==oldunit['serial_number'] and cur['location']==oldunit['location']=='0-1'
+assert re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+',cur['device'])
+assert (C/'metadata_stdout.txt').read_text().strip()==cur['device'] and not (C/'metadata_stderr.txt').read_bytes()
+# Host tool hashes, offline schema generator and port-construction refusal.
+sourcehashes={'glyph_serial_config_tool.py':'0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c','glyph_runtime_identity_tool.py':'bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead','glyph_profile_store_production_tool.py':'4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef','glyph_profile_store_candidate_tool.py':'33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2'}
+for n,h in sourcehashes.items():assert H(F/'tools'/n)==h;ref(F/'tools'/n)
+validator=Path('/private/tmp/glyph-native-preservation-journal-validator-20261022.py');assert H(validator)=='670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264';ref(validator)
+sys.path.insert(0,str(F/'tools'));import glyph_serial_config_tool as t
+port_constructions=0
+class ForbiddenPort:
+ def __init__(self,*a,**k):
+  global port_constructions
+  port_constructions+=1;raise AssertionError('device construction forbidden')
+t.PosixSerialPort=ForbiddenPort
+spec=importlib.util.spec_from_file_location('offline_C00_validator',validator);v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
+ident=J(C/'identity_stdout.txt');identcmd=J(C/'identity_command.json');a=identcmd['argv'];assert ident['token']==int(a[a.index('--token')+1],0)
+expected_identity={'context':'configurator','status':'configurator','primary_backend':8,'context_row':0,'requested_reference':0,'incarnation':0,'active_id':0,'active_revision':0,'schema_version':0,'payload_sha256':None,'session':'C00','observation':'current_session_only','protocol_version':1,'viewer_records':0}
+assert all(ident[k]==x for k,x in expected_identity.items()) and not (C/'identity_stderr.txt').read_bytes()
+# Full Config API bytes and complete decoded JSON equal the original and post-install data.
+now=J(C/'config_backup.json');old=J(B/'original_backup.json');raw=base64.b64decode(now['rawConfigPayloadBase64'],validate=True);oldraw=base64.b64decode(old['rawConfigPayloadBase64'],validate=True)
+assert raw==oldraw==(C/'config_payload.bin').read_bytes()==(POST/'postinstall_config_payload.bin').read_bytes() and len(raw)==252 and HB(raw)=='54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460'
+cfg=v.pb.Config();assert cfg.ParseFromString(raw)==len(raw)
+for data in [now['config'],old['config']]:p=v.pb.Config();v.jf.ParseDict(data,p,ignore_unknown_fields=False);assert p==cfg
+assert not (C/'get_stderr.txt').read_bytes()
+# Exact saved argv bindings, same private port, source/approval hashes and operation accounting.
+ids=[1,3,4,*range(5,23),24];fences={'store_incarnation':1,'store_generation':172,'config_generation':1156314366}
+seq=[('metadata',None,None,None),('identity',None,None,None),('status','status',None,None),('get',None,None,None)]+[(f'list_{c}','list',None,c) for c in (0,8,16)]+[(f'read_{i}','read',i,None) for i in ids]
+commands=list(C.glob('*_command.json'));assert {p.name for p in commands}=={p+'_command.json' for p,_,_,_ in seq}
+costs=collections.Counter();responses={};proofs={};opcounts=collections.Counter();lasttime=0;lastreserve=''
+for prefix,action,i,cursor in seq:
+ command=J(C/(prefix+'_command.json'));result=J(C/(prefix+'_result.json'));argv=command['argv'];assert command['source_sha256']==wh and command['approval_sha256']==H(P/'owner_approval.json') and command['packet_sha256']==H(P/'APPROVED_PACKET.json') and command['UID']==command['effective_UID']==502 and command['retry'] is False and command['external_timeout_seconds']==20 and command['phase']=='C00'
+ assert command['reserved_utc']>lastreserve;lastreserve=command['reserved_utc'];assert result['returncode']==0 and result['timeout'] is False and result['launch_error'] is None and result['retry'] is False
+ assert H(C/(prefix+'_stdout.txt'))==result['stdout_SHA256'] and H(C/(prefix+'_stderr.txt'))==result['stderr_SHA256']
+ costs.update(command['costs']);assert command['event_index']==(1 if prefix in ('metadata','identity','status','get') else 2+cursor//8 if action=='list' else 5+ids.index(i))
+ if prefix=='metadata':assert argv==['/usr/local/bin/python3',str(lookup),'--output',str(C/'configurator_port.json')]
+ else:assert argv[argv.index('--port')+1]==cur['device']
+ if action:
+  assert argv[1]==str(F/'tools/glyph_profile_store_production_tool.py') and argv[argv.index('--timeout')+1]=='5' and argv[argv.index('--journal-out')+1]==str(C/(prefix+'_journal.jsonl')) and argv[argv.index('--output')+1]==str(C/(prefix+'_response.json'))
+  if action=='list':assert argv[-8:]==['list','--page',str(cursor),'--page-size','8','--output',str(C/(prefix+'_response.json'))] or argv[argv.index('list'):] == ['list','--page',str(cursor),'--page-size','8','--output',str(C/(prefix+'_response.json'))]
+  if action=='read':assert argv[argv.index('read'):] == ['read','--profile-id',str(i),'--output',str(C/(prefix+'_response.json'))]
+  r,proof=v.validate(C,prefix,action,fences,i,cursor);responses[prefix]=r;proofs[prefix]=proof;assert J(C/(prefix+'_adjudication.json'))['journal']==proof
+  rows=[json.loads(x) for x in (C/(prefix+'_journal.jsonl')).read_text().splitlines()];times=[r['monotonic_ns'] for r in rows];assert times==sorted(times) and times[0]>lasttime;lasttime=times[-1]
+  phases=['status_preflight']+([] if action=='status' else [action]);assert [r['phase'] for r in rows]==[phase for phase in phases for r in rows if r['phase']==phase]
+  for row in rows:
+   if row['event']=='transmit_attempt':opcounts[row['operation']]+=1
+assert dict(opcounts)=={1:26,2:3,3:22} and sum(opcounts.values())==51
+expected_cost={'CDC_same_private_unit_lookups':1,'runtime_identity_queries':1,'GET_CONFIG_commands':1,'STATUS_commands':26,'LIST_commands':3,'READ_commands':22,'serial_opens':28}
+assert dict(costs)==expected_cost
+expected_summary_counts=dict(expected_cost,known_Menu_entries=1,Menu_Configurator_restarts=1);assert summary['actual_completed_counters']==expected_summary_counts
+approvedcost=collections.Counter()
+for e in packet['events'][:26]:approvedcost.update(e['maximum_cost'])
+assert dict(approvedcost)==expected_summary_counts
+assert summary['native_activation']==summary['profile_or_Config_mutations']==summary['raw_reports']==summary['target_metrics']==0 and summary['next_event']==27
+entries=[];profilefacts=[]
+for c in (0,8,16):
+ prefix=f'list_{c}';r=responses[prefix];original=v.pb.ProfileStoreResponse();v.jf.ParseDict(J(B/(prefix+'_response.json'))['response'],original,ignore_unknown_fields=False)
+ assert list(r.entries)==list(original.entries) and r.next_page_cursor==original.next_page_cursor=={0:8,8:16,16:0}[c];entries.extend(r.entries)
+assert [int(e.profile_id) for e in entries]==ids
+originalentries={int(e['profile_id']):e for e in J(B/'original_directory_complete.json')['entries']}
+for i in ids:
+ r=responses[f'read_{i}'];e=originalentries[i];assert r.HasField('profile') and r.profile_id==i and r.profile_revision==int(e['revision'])
+ body=r.profile.SerializeToString(deterministic=True);assert body==(B/f'original_profile_{i}_canonical.bin').read_bytes()==(POST/f'postinstall_profile_{i}_canonical.bin').read_bytes()==(C/f'original_profile_{i}_canonical.bin').read_bytes()
+ assert int(e['payload_version']) in (1,2,3) and r.profile.schema_version in (1,2,3) and not r.profile.native_payload
+ profilefacts.append({'profile_id':i,'revision':r.profile_revision,'directory_payload_version':int(e['payload_version']),'body_schema_version':r.profile.schema_version,'canonical_bytes':len(body),'canonical_SHA256':HB(body),'full_wrapper_original_and_postinstall_and_wire_equal':True})
+assert next(p for p in profilefacts if p['profile_id']==4)['directory_payload_version']==1 and next(p for p in profilefacts if p['profile_id']==4)['body_schema_version']==3
+assert port_constructions==0
+facts={'kind':'FINITE_C00_ACTUAL_SAVED_EVIDENCE_AUDIT','result':'PASS_C00_API_PRESERVATION_ONLY','candidate_git_sha':packet['candidate']['git_sha'] if 'git_sha' in packet['candidate'] else '334fbd06e4541c120b0db423e5be7e112eb1f6f6','C00_manifest_SHA256':H(C/'custody_manifest.json'),'C00_files_verified':224,'summary_included_in_manifest':True,'original_files_rehashed':251,'postinstall_files_rehashed':227,'same_private_unit_and_location':True,'Configurator_VID_PID':[0x2e8a,0x1092],'identity':expected_identity,'Config_bytes':len(raw),'Config_raw_SHA256':HB(raw),'Config_full_API_and_decoded_JSON_equal_original':True,'current_receipt_differences':{},'fences':fences,'actual_completed_counters':expected_summary_counts,'approved_events':list(range(1,27)),'host_invocations':29,'profile_store_wire_transmissions':51,'standalone_STATUS_attempts':1,'all_journal_wire_JSON_mirrors_valid':True,'all_journal_frames_sequential':True,'profile_facts':profilefacts,'phase_filter_selected_before_single_lookup':True,'global_filter_discrepancy_preserved':True,'no_unrecorded_requests_proven_beyond_saved_scope':False,'native_activation_Config_profile_mutations_raw_reports_target_metrics':0,'reviewer_device_or_registry_or_serial_calls':0,'port_constructions':port_constructions,'outcome_scope':'Current Configurator API preservation only; no earlier gameplay or installed-byte attestation, native activation, target timing, output, other backend or HEP PASS inferred.'}
+(D/'result.json').write_text(json.dumps(facts,indent=2)+'\n')
+(D/'private_hash_references.json').write_text(json.dumps({'publication_policy':'Private original payloads and unit fields remain private; these are paths/lengths/hashes only. No raw fields included.','files':refs,'C00_manifest_files':cm['files']},indent=2)+'\n')
+(D/'journal_proofs.json').write_text(json.dumps(proofs,indent=2)+'\n')
+# Expose only a small source-grounded projection to the bounded eligibility stage.
+(D/'_offline_schema_ready.txt').write_text('Schema generation and saved-wire replay complete; zero port constructions.\n')
+print(json.dumps({'result':facts['result'],'C00_files':224,'original_files':251,'postinstall_files':227,'Config_bytes':252,'profile_wrappers':22,'STATUS':26,'LIST':3,'READ':22,'wire_transmissions':51,'reviewer_device_calls':0,'result_SHA256':H(D/'result.json')},indent=2))

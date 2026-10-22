@@ -1,0 +1,42 @@
+{
+  "classification": "ACTUAL_ORIGINAL_LEGACY4_FIRST_TWO_BASELINES_CORRESPONDENCE_NOT_HEP",
+  "session": "B00",
+  "original_profile": {
+    "id": 4,
+    "revision": 1,
+    "schema": 3
+  },
+  "cases": [
+    {
+      "case_run_id": "B00_B000",
+      "capture_SHA256": "479ed11d40dfe796df921c6645ce2aed508c5c8ff5116903bb3725dc2a25183c",
+      "binding_SHA256": "2162e3506c42a254da21e64fc0028820b6920bb9877a5f74c551c643091ca49d",
+      "verification_SHA256": "17f865c1e4f7977eb25cc3344da80a8df6068ea06c58990484a10da5a7fdc6e1",
+      "actual_human_response_SHA256": "c1a6604aacf4e672901b1e77e08bead7e92e2c0cbce5b0cd0bd5eb6b7174abe6",
+      "full21_field3measurement_match": true,
+      "logged_structural_drain": 1
+    },
+    {
+      "case_run_id": "B00_B001",
+      "capture_SHA256": "25ff15feac80a4f4798047a0a1dd06e3ebbf04b37719791766440e7f1da8a8a7",
+      "binding_SHA256": "c334fd33a9d33053e23afddc2d48f20d0f7351a91679e5df6c178ce9cc5bf16e",
+      "verification_SHA256": "7a0524be133be639679d344d3ad9edd4e281053acde47f37c3c5e56c16fd5c06",
+      "actual_human_response_SHA256": "7432d7dcf48f0fe5e21e1c28e81215634c07b185cc63f074eb98f2fa6c740aae",
+      "full21_field3measurement_match": true,
+      "logged_structural_drain": 1
+    }
+  ],
+  "capture_invocations": 2,
+  "total_read_submissions": 8,
+  "preserved_structural_drains": 2,
+  "strict_measurement_reports": 6,
+  "wire_fields_each": 21,
+  "abort_calls": 0,
+  "settled_cleanup_each": true,
+  "native_activation": 0,
+  "Config_profile_mutations": 0,
+  "target_metrics": 0,
+  "next": "B00_B002_ACTUAL_HUMAN_POSE_REQUIRED",
+  "private_snapshot_manifest_SHA256": "b836eb4922a2876506bedb792fd45261491cfe0f49b03a5473d58504e4d3dc3d",
+  "native_other_route_or_HEP_PASS": false
+}

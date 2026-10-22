@@ -1,0 +1,14 @@
+{
+  "kind": "DIRECT_OWNER_EXACT_CAMPAIGN_APPROVAL",
+  "recorded_utc": "2026-10-22T12:28:42.764689+00:00",
+  "question_item_id": "[\"request_user_input_async\",\"call_da7e7400315f4e269deedb368ecb7c13\",0]",
+  "actual_owner_answer": "Approve bounded XInput campaign",
+  "packet_id": "GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1",
+  "published_commit": "30e1880f7cb213457456a828cb938c3931d103ec",
+  "MD_SHA256": "a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040",
+  "JSON_SHA256": "7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8",
+  "includes_4read_and21edge_qualification": true,
+  "delegation": "fixed host commands after actual human READY/checkpoints",
+  "other_route_or_stronger_frame_claim_waiver": false,
+  "new_firmware_flash": false
+}

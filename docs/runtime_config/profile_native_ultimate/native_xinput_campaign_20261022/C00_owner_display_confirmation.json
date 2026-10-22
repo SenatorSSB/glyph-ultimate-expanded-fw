@@ -1,0 +1,14 @@
+{
+  "kind": "ACTUAL_OWNER_C00_DISPLAY_CONFIRMATION",
+  "initial_reply": {
+    "question": "single normal Menu -> Configurator entry/display request",
+    "answer": "connected"
+  },
+  "clarification": {
+    "question_item_id": "[\"request_user_input_async\",\"call_c2b70a7f048c411a9eba3fb37b602f7b\",0]",
+    "question": "Does the controller display currently say Configurator Mode? Just read the display; no additional menu action or reconnect.",
+    "answer": "yes"
+  },
+  "confirmed_utc": "2026-10-22T12:34:14.534521+00:00",
+  "new_reconnect_or_second_entry_requested": false
+}

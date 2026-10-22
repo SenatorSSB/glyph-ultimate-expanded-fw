@@ -1,0 +1,41 @@
+"""Proposed one-shot OS serial-registry lookup; never run before packet approval.
+
+No serial port/interface is opened. Installed pySerial enumerates serial-service
+metadata; only exact Configurator VID/PID matches are retained. Ambiguity stops.
+"""
+import argparse
+import json
+import os
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', required=True)
+    args = parser.parse_args()
+    # Exclusive output prevents overwriting an earlier observation.
+    with open(args.output, 'x', encoding='utf-8') as out:
+        from serial.tools import list_ports
+        matches = []
+        for port in list_ports.comports():  # Exactly one metadata enumeration.
+            if port.vid == 0x2E8A and port.pid == 0x1092:
+                matches.append(dict(device=port.device, vid=port.vid, pid=port.pid,
+                                    serial_number=port.serial_number,
+                                    location=port.location, product=port.product,
+                                    interface=port.interface))
+        result = dict(kind='CONFIGURATOR_SERIAL_METADATA_ONLY_NO_PORT_OPEN',
+                      matches=matches, match_count=len(matches),
+                      device_firmware='UNKNOWN', candidate_acceptance=False)
+        json.dump(result, out, indent=2)
+        out.write('\n')
+        out.flush()
+        os.fsync(out.fileno())
+    if len(matches) != 1:
+        raise SystemExit('STOP: expected exactly one Configurator CDC port; no port opened; no retry')
+    device = matches[0]['device']
+    if not isinstance(device, str) or not device.startswith('/dev/cu.usbmodem'):
+        raise SystemExit('STOP: unexpected Configurator CDC path; no port opened; no fallback')
+    print(device)
+
+
+if __name__ == '__main__':
+    main()

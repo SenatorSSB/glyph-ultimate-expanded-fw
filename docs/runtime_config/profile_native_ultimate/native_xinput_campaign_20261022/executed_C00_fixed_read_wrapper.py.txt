@@ -1,0 +1,94 @@
+"""C00 only: fixed approved metadata/identity/STATUS/GET/LIST/original READ; no writes/retries."""
+from pathlib import Path
+import base64,datetime,fcntl,hashlib,importlib.util,json,os,re,secrets,subprocess,sys,time
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077);sys.dont_write_bytecode=True
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-acceptance/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1_20261022';C=D/'C00';F=Path('/private/tmp/glyph-profile-native-20261020');OLD=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022';S=D/'campaign_state.json';SOURCE=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');LOOKUP=Path('/private/tmp/glyph-native-configurator-entry-backup-20261022/configurator_port_lookup.py');IDS=[1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24]
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,v,mode='x'):
+ with Path(p).open(mode)as f:json.dump(v,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+def filecheck(p,h):assert Path(p).is_file() and not Path(p).is_symlink() and sha(p)==h,str(p)
+def statewrite():save(S,s,'w')
+assert len(sys.argv)in(2,3) and sys.argv[1]in('preuse','metadata','identity','status','get','list','read')
+action=sys.argv[1];C.mkdir(exist_ok=True);lock=(D/'campaign_execution.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+s=json.loads(S.read_text());assert not s['stop'] and s['approval']=='DIRECT_OWNER_APPROVED' and s['current_session']=='C00'
+filecheck(D/'APPROVED_PACKET.json','7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8');filecheck(D/'APPROVED_PACKET.md','a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040')
+assert json.loads((D/'owner_approval.json').read_text())['actual_owner_answer']=='Approve bounded XInput campaign'
+packet=json.loads((D/'APPROVED_PACKET.json').read_text());filecheck(LOOKUP,'a2c79a297214a672df9d7d06429656561bce302ef332832bf80d240aa55a6e43')
+assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=F,text=True).strip()=='334fbd06e4541c120b0db423e5be7e112eb1f6f6' and not subprocess.check_output(['git','status','--porcelain'],cwd=F,text=True)
+for p,h in packet['pins'].items():filecheck(p,h)
+if action=='preuse':
+ assert not s['device_calls']
+ for n,h,count in [('private_backup_custody_manifest.json','f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d',251)]:
+  filecheck(OLD/n,h);m=json.loads((OLD/n).read_text());assert len(m['files'])==count
+  for rel,e in m['files'].items():p=OLD.parent/rel;filecheck(p,e['sha256']);assert p.stat().st_size==e['bytes']
+ cm=O/'local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164';filecheck(cm/'custody.json','cc4ec988a70e5eb14fdb7af67d64b3e555252c22b7e60e7f6e7ac0af2eb1a255')
+ for n,e in json.loads((cm/'custody.json').read_text())['files'].items():filecheck(cm/n,e['sha256']);filecheck(e['source_path'],e['sha256'])
+ save(C/'preuse_verification.json',{'result':'PASS_OFFLINE_ONLY','packet_pins':len(packet['pins']),'original_private_entries_rehashed':251,'host_custody_and_operational_files':11,'lookup_phase':'Configurator2E8A1092','wrong_XInput_global_filter_erratum':str(D/'cdc_phase_filter_erratum.json'),'new_device_calls':0,'source_sha256':sha(__file__)})
+ s['C00_preuse_verified']=True;statewrite();print('PASS C00 preuse; no live action');sys.exit(0)
+assert s.get('C00_preuse_verified') and s.get('C00_owner_display_confirmed') is True
+prefix=action;ident=cursor=None;expected_stage=None;event=1
+if action=='metadata':
+ expected_stage='C00_DISPLAY_CONFIRMED_READY_METADATA';cmd=[sys.executable,str(LOOKUP),'--output',str(C/'configurator_port.json')];cost={'CDC_same_private_unit_lookups':1}
+elif action=='identity':
+ expected_stage='C00_SAME_UNIT_VERIFIED_READY_IDENTITY';token=secrets.randbits(64) or 1;cmd=[sys.executable,str(F/'tools/glyph_runtime_identity_tool.py'),'--port',s['C00_port'],'--context','configurator','--token',hex(token),'--session','C00'];cost={'runtime_identity_queries':1,'serial_opens':1}
+elif action=='status':
+ expected_stage='C00_IDENTITY_VERIFIED_READY_STATUS';cmd=[sys.executable,str(F/'tools/glyph_profile_store_production_tool.py'),'--port',s['C00_port'],'--timeout','5','--journal-out',str(C/'status_journal.jsonl'),'status','--output',str(C/'status_response.json')];cost={'STATUS_commands':1,'serial_opens':1}
+elif action=='get':
+ expected_stage='C00_STATUS_VERIFIED_READY_GET';cmd=[sys.executable,str(F/'tools/glyph_serial_config_tool.py'),'--read','--port',s['C00_port'],'--timeout-sec','5','--backup-out',str(C/'config_backup.json')];cost={'GET_CONFIG_commands':1,'serial_opens':1}
+elif action=='list':
+ assert len(sys.argv)==3;cursor=int(sys.argv[2]);assert cursor in (0,8,16) and cursor==8*len(s.get('C00_listed_pages',[]));expected_stage='C00_READY_LIST' if cursor==0 else 'C00_LIST_'+str(cursor-8)+'_VERIFIED';event=2+cursor//8;prefix='list_'+str(cursor);cmd=[sys.executable,str(F/'tools/glyph_profile_store_production_tool.py'),'--port',s['C00_port'],'--timeout','5','--journal-out',str(C/(prefix+'_journal.jsonl')),'list','--page',str(cursor),'--page-size','8','--output',str(C/(prefix+'_response.json'))];cost={'STATUS_commands':1,'LIST_commands':1,'serial_opens':1}
+else:
+ assert len(sys.argv)==3;ident=int(sys.argv[2]);done=s.get('C00_read_ids',[]);assert len(done)<22 and ident==IDS[len(done)];expected_stage='C00_DIRECTORY_VERIFIED_READY_READ' if not done else 'C00_READ_'+str(done[-1])+'_VERIFIED';event=5+len(done);prefix='read_'+str(ident);cmd=[sys.executable,str(F/'tools/glyph_profile_store_production_tool.py'),'--port',s['C00_port'],'--timeout','5','--journal-out',str(C/(prefix+'_journal.jsonl')),'read','--profile-id',str(ident),'--output',str(C/(prefix+'_response.json'))];cost={'STATUS_commands':1,'READ_commands':1,'serial_opens':1}
+assert s['stage']==expected_stage,(s['stage'],expected_stage)
+assert s['next_event_index']==event
+for k,v in cost.items():assert s['reserved_counters'].get(k,0)+v<=s['maximum_counters'][k]
+for k,v in cost.items():s['reserved_counters'][k]=s['reserved_counters'].get(k,0)+v
+save(C/(prefix+'_command.json'),{'argv':cmd,'reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'event_index':event,'phase':'C00','source_sha256':sha(__file__),'approval_sha256':sha(D/'owner_approval.json'),'packet_sha256':sha(D/'APPROVED_PACKET.json'),'UID':os.getuid(),'effective_UID':os.geteuid(),'costs':cost,'retry':False,'external_timeout_seconds':20})
+s['device_calls']+=1;s['stage']='C00_ATTEMPT_RESERVED_'+prefix.upper()+'_NO_RETRY';statewrite()
+try:
+ started=time.monotonic();rc=None;timed=False;error=None
+ with (C/(prefix+'_stdout.txt')).open('xb')as out,(C/(prefix+'_stderr.txt')).open('xb')as err:
+  try:rc=subprocess.run(cmd,stdout=out,stderr=err,timeout=20).returncode
+  except subprocess.TimeoutExpired:timed=True
+  except BaseException as e:error=repr(e)
+  finally:out.flush();os.fsync(out.fileno());err.flush();os.fsync(err.fileno())
+ save(C/(prefix+'_result.json'),{'returncode':rc,'timeout':timed,'launch_error':error,'stdout_SHA256':sha(C/(prefix+'_stdout.txt')),'stderr_SHA256':sha(C/(prefix+'_stderr.txt')),'host_elapsed_seconds_not_target_timing':time.monotonic()-started,'retry':False})
+ assert rc==0 and not timed and error is None,'CLI failure/timeout, stop without retry'
+ if action=='metadata':
+  assert not (C/(prefix+'_stderr.txt')).read_bytes();j=json.loads((C/'configurator_port.json').read_text());old=json.loads((OLD/'configurator_port.json').read_text());assert j['match_count']==old['match_count']==1;cur=j['matches'][0];unit=old['matches'][0]
+  assert (cur['vid'],cur['pid'])==(0x2e8a,0x1092) and cur['serial_number']==unit['serial_number'] and cur['location']==unit['location']=='0-1' and re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+',cur['device'])
+  assert (C/(prefix+'_stdout.txt')).read_text().strip()==cur['device'];s['C00_port']=cur['device'];s['stage']='C00_SAME_UNIT_VERIFIED_READY_IDENTITY';proof={'result':'PASS_SAME_ORIGINAL_UNIT_AND_LOCATION','matches':1,'port_opens':0,'phase_specific_existing_filter':'2E8A1092'}
+ elif action=='identity':
+  assert not (C/(prefix+'_stderr.txt')).read_bytes();j=json.loads((C/(prefix+'_stdout.txt')).read_text());assert j['session']=='C00' and j['token']==token and j['observation']=='current_session_only'
+  for k,v in {'context':'configurator','status':'configurator','primary_backend':8,'context_row':0,'requested_reference':0,'incarnation':0,'active_id':0,'active_revision':0,'schema_version':0,'payload_sha256':None}.items():assert j[k]==v,k
+  s['stage']='C00_IDENTITY_VERIFIED_READY_STATUS';proof={'result':'PASS_CURRENT_CONFIGURATOR_NEUTRAL_IDENTITY','not_prior_gameplay_attestation':True}
+ elif action=='get':
+  sys.path.insert(0,str(F/'tools'));import glyph_serial_config_tool as t
+  pb,jf,_=t.load_runtime_proto_modules(F);b=json.loads((C/'config_backup.json').read_text());orig=json.loads((OLD/'original_backup.json').read_text());raw=base64.b64decode(b['rawConfigPayloadBase64'],validate=True);orr=base64.b64decode(orig['rawConfigPayloadBase64'],validate=True);assert hashlib.sha256(orr).hexdigest()=='54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460';current=t.native_packet_config(raw,pb);oldcfg=t.native_packet_config(orr,pb);fromjson=pb.Config();jf.ParseDict(b['config'],fromjson,ignore_unknown_fields=False);assert current==fromjson
+  changes={}
+  for n in t._NATIVE_RECEIPT_FIELDS:
+   if getattr(current,n)!=getattr(oldcfg,n):changes[n]={'before':str(getattr(oldcfg,n)),'after':str(getattr(current,n))};setattr(oldcfg,n,getattr(current,n))
+  assert current==oldcfg,'Original user Config/references changed';assert current.ultimate_profile_store_incarnation==1 and current.game_mode_configs[2].ultimate_profile_id==4 and current.game_mode_configs[2].mode_id==pb.MODE_ULTIMATE
+  with(C/'config_payload.bin').open('xb')as f:f.write(raw);f.flush();os.fsync(f.fileno())
+  s['stage']='C00_READY_LIST';s['next_event_index']=2;s['event_results']['1']={'result':'PASS_INITIAL_CONFIGURATOR_IDENTITY_STATUS_CONFIG','physical_owner_display_confirmed':True};proof={'result':'PASS_ORIGINAL_USER_CONFIG_REFERENCES','raw_bytes':len(raw),'raw_sha256':hashlib.sha256(raw).hexdigest(),'raw_API_bytes_equal':raw==orr,'current_receipt_differences':changes,'not_raw_filesystem_export':True}
+ else:
+  validator=Path('/private/tmp/glyph-native-preservation-journal-validator-20261022.py');filecheck(validator,'670a34e42f7dd910db9e3782b5d23b8eeda9dd96854f6f09639c543a81c3a264');spec=importlib.util.spec_from_file_location('c00_pure_journal',validator);v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v);received,jproof=v.validate(C,prefix,action,s.get('C00_fences'),ident,cursor)
+  if action=='status':
+   s['C00_fences']={k:int(getattr(received,k))for k in ['store_incarnation','store_generation','config_generation']};assert received.mutation_feasible and received.store_incarnation==1 and not received.recovery_flags
+   s['stage']='C00_STATUS_VERIFIED_READY_GET';proof={'result':'PASS_NORMAL_PRODUCTION_STATUS','fresh_fences':s['C00_fences'],'journal':jproof}
+  elif action=='list':
+   old=v.pb.ProfileStoreResponse();v.jf.ParseDict(json.loads((OLD/(prefix+'_response.json')).read_text())['response'],old,ignore_unknown_fields=False);assert list(received.entries)==list(old.entries) and received.next_page_cursor==old.next_page_cursor=={0:8,8:16,16:0}[cursor]
+   s.setdefault('C00_listed_pages',[]).append(cursor);s.setdefault('C00_directory_ids',[]).extend(int(e.profile_id)for e in received.entries);s['next_event_index']=event+1;s['stage']='C00_LIST_'+str(cursor)+'_VERIFIED'
+   if cursor==16:assert s['C00_directory_ids']==IDS;s['stage']='C00_DIRECTORY_VERIFIED_READY_READ'
+   s['event_results'][str(event)]={'result':'PASS_ORIGINAL_DIRECTORY_PAGE'};proof={'result':'PASS_ORIGINAL_DIRECTORY_METADATA','entries':len(received.entries),'journal':jproof}
+  else:
+   oldentries={int(e['profile_id']):e for e in json.loads((OLD/'original_directory_complete.json').read_text())['entries']};e=oldentries[ident];assert received.HasField('profile') and received.profile_id==ident and received.profile_revision==int(e['revision']);raw=received.profile.SerializeToString(deterministic=True);assert raw==(OLD/f'original_profile_{ident}_canonical.bin').read_bytes(),'Original full wrapper/revision changed';assert int(e['payload_version'])in(1,2,3) and received.profile.schema_version in(1,2,3) and not received.profile.native_payload
+   with(C/f'original_profile_{ident}_canonical.bin').open('xb')as f:f.write(raw);f.flush();os.fsync(f.fileno())
+   s.setdefault('C00_read_ids',[]).append(ident);s['next_event_index']=event+1;s['stage']='C00_READ_'+str(ident)+'_VERIFIED';s['event_results'][str(event)]={'result':'PASS_FULL_ORIGINAL_PROFILE_WRAPPER_REVISION'};proof={'result':'PASS_FULL_ORIGINAL_WRAPPER_REVISION','profile_id':ident,'revision':received.profile_revision,'directory_payload_version':int(e['payload_version']),'actual_body_schema_version':received.profile.schema_version,'canonical_sha256':hashlib.sha256(raw).hexdigest(),'journal':jproof}
+   if len(s['C00_read_ids'])==22:s['stage']='C00_ALL22_PRESERVATION_COMPLETE_READY_B00_MANUAL_BOOT'
+ save(C/(prefix+'_adjudication.json'),proof)
+ for k,val in cost.items():s['completed_counters'][k]=s['completed_counters'].get(k,0)+val
+ statewrite();print(json.dumps({k:val for k,val in proof.items()if k!='journal'},indent=2))
+except BaseException as e:
+ s['stop']=True;s['stage']='STOP_C00_'+prefix.upper()+'_NO_RETRY';save(C/(prefix+'_stop.json'),{'error':repr(e),'all_actions_stopped':True,'retry':False});statewrite();print(json.dumps({'result':'STOP','action':prefix,'error':repr(e),'retry':False}));raise

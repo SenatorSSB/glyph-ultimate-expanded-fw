@@ -1,0 +1,32 @@
+{
+  "classification": "ACTUAL_ORIGINAL_LEGACY_PROFILE_NEUTRAL_XINPUT_WIRE_CORRESPONDENCE_NOT_HEP",
+  "session": "B00",
+  "case_run_id": "B00_B000",
+  "actual_owner_reply": "ready",
+  "original_profile": {
+    "id": 4,
+    "revision": 1,
+    "schema": 3
+  },
+  "fresh_same_private_unit_location": "MATCHED_ORIGINAL_LOCATION0_1",
+  "identity": "MATCHED_CURRENT_XINPUT_ORIGINAL_LEGACY4",
+  "registry_inspect_invocations": 1,
+  "registry_nodes": 10,
+  "capture_invocations": 1,
+  "explicit_preserved_structural_drain": 1,
+  "strict_measurement_reports": 3,
+  "full_wire_fields_each": 21,
+  "read_submissions": 4,
+  "abort_calls": 0,
+  "settled_cleanup": true,
+  "capture_SHA256": "479ed11d40dfe796df921c6645ce2aed508c5c8ff5116903bb3725dc2a25183c",
+  "verification_SHA256": "17f865c1e4f7977eb25cc3344da80a8df6068ea06c58990484a10da5a7fdc6e1",
+  "binding_SHA256": "2162e3506c42a254da21e64fc0028820b6920bb9877a5f74c551c643091ca49d",
+  "private_snapshot_manifest_SHA256": "bffee67b6ace0e078926d5598b409f3ead10e6a8ac7b78ba174dff2953193887",
+  "native_activation": 0,
+  "Config_ProfileStore_mutations": 0,
+  "target_metrics": 0,
+  "source_or_firmware_attestation_claim": false,
+  "native_or_other_route_or_HEP_PASS": false,
+  "next": "B00_B001_LF1_ONLY_WAIT_ACTUAL_OWNER_READY"
+}

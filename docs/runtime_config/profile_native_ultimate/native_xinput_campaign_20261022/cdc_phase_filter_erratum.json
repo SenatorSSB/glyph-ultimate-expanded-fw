@@ -1,0 +1,32 @@
+{
+  "classification": "SOURCE_GROUNDED_PHASE_FILTER_ERRATUM_WITHIN_EXPLICIT_APPROVED_EVENTS",
+  "original_fixed_filter_error": "Frozen MD74 and command_templates2-18 incorrectly generalize XInput0738:4726 across all50lookups. Original approved bytes/PINS/reports unchanged.",
+  "owner_authority": "Direct owner approved exact24Configurator/26XInput event schedule; C00 explicitly1CDClookup+currentConfigurator/backend8 identity. No extra rights or operation inferred.",
+  "Configurator_events": {
+    "count_max": 24,
+    "VID": 11914,
+    "PID": 4242,
+    "source": "/private/tmp/glyph-native-configurator-entry-backup-20261022/configurator_port_lookup.py",
+    "source_sha256": "a2c79a297214a672df9d7d06429656561bce302ef332832bf80d240aa55a6e43",
+    "source_lines": [
+      19,
+      36
+    ],
+    "target_F_descriptor": "HAL/pico/src/comms/ConfiguratorBackend.cpp:139",
+    "lookup_operation": "Exactly1 serial.tools.list_ports.comports call; retain only2e8a:1092; existing output uniqueness/path check; then pure same-original-serial/location0-1 comparison before any port open"
+  },
+  "XInput_events": {
+    "count_max": 26,
+    "VID": 1848,
+    "PID": 18214,
+    "existing_rebind_source_lines": [
+      42,
+      51
+    ],
+    "existing_filter_unchanged": true
+  },
+  "lookup_union_fallback_extra_retry_or_stopped_wrapper_execution": false,
+  "live_actions": 0,
+  "independent_source_correspondence": "Same finite reviewer confirms already-approved phase-specific reconciliation without newapproval loop; sealed short report pending",
+  "recorded_utc": "2026-10-22T12:30:31.748569+00:00"
+}

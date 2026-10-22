@@ -1,5 +1,25 @@
 # Active Agent Queue
 
+## Owner-approved native XInput campaign: C00 preservation PASS — 2026-10-22
+
+The owner approved [the exact bounded XInput campaign](../runtime_config/profile_native_ultimate/native_xinput_campaign_20261022/README.md).
+C00 matched the original unit/location and current Configurator identity; Config252
+API bytes remain exactly original54fda, and all22 full profile wrappers/revisions
+and directory entries match. STATUS26/LIST3/READ22, fresh inc1/store172/Config1156314366;
+224 private files sealed. No native activation, Config/profile mutation or
+target metric has occurred. The fixed XInput filter copy error is
+preserved and independently reconciled by the existing phase-specific procedures
+within the already approved24 Configurator/26 XInput events; no extra lookup,
+fallback or rights. Original frozen packet/source/review/custody remain exact.
+
+The owner confirmed B00 ordinary reconnect and neutral READY; fresh original4
+XInput identity/registry inspect and the first neutral/LF1 baselines each matched
+all21 fields in three measurements, with two separately preserved drains/eight
+reads total, abort0/settled cleanup. Next B00_B002 needs its actual human pose. Native/other-route/HEP/integration/DONE gaps remain;
+F334f remains unchanged and unmerged. This checkpoint supersedes older pending
+approval descriptions below without changing their historical evidence.
+
+
 ## Exact native candidate awaiting hardware — 2026-10-21
 
 The [exact334f status](../runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.md)
@@ -8847,7 +8867,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_result": null,
       "hardware_evidence_gaps": [
         "Exact F/UF2 installed once; original Config252/all22 API preservation remains sealed PASS. Approved no-reconnect continuation now PASS: same private unit/location0-1, unchanged legacy4 runtime identity, fresh vendor inspect, three full20-byte/21-field reports/abort0/settled cleanup/rc0. Stage ended STOP,29 private files sealed; no Config/store/native/metric action. Prior location/raw/metadata stops remain exact.",
-        "Mac current-legacy preflight is qualified. Reviewed native-only four-read source/tool/exact XInput packet is ready but UNAPPROVED/UNEXECUTED:494 captures/1976reports/50restarts maxima; one labeled drain+three strict measurements and explicit21-edge settled-endpoint qualification need owner approval. Parent JSONL failure and nine saved-schema3 baseline oracle differences are preserved/source-explained. Native334/context17 unchanged. USB-Switch wire and GC hidden simultaneousL/R/Z/numericalanalog remain unqualified; no waiver.",
+        "ExactboundedXInputcampaign ownerAPPROVED. C00 Config252byteexact/all22fullwrappers/revisions/directory/custody+savedwire independentlyPASS; phasefiltererror preserved/source-qualified within24C/26B. B00original4 identity/freshinspect/firstneutral+LF1 baselines each21field3measurement MATCH;2captures/8reads/2drains/abort0/settledcleanup. No nativeactivation/Config/profilemutation/metrics. NextB00_B002 actualhumanpose required; remaining494capture/1976report/50restart caps and native/otherroute/strongerhistory/HEP/restore gates stay open.",
         "All18/H1-H12/complete required backend fields/target timing and runtime stack observations/exact human HEP/tested-source integration/strict DONE remain. F/source/build/resource/limits/custody/protocol unchanged; no native profile mutation or activation."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",

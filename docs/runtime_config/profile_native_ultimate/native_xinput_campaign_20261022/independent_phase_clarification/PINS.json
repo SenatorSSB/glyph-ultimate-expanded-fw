@@ -1,0 +1,15 @@
+{
+  "kind": "READ_ONLY_SAME_CAMPAIGN_CDC_PHASE_CORRESPONDENCE",
+  "disposition": "SOURCE_SUPPORTED_PHASE_SPECIFIC_EXISTING_PROCEDURE_WITH_DOCUMENTED_GLOBAL_FILTER_ERROR",
+  "live_calls": 0,
+  "files": {
+    "REPORT.md": {
+      "bytes": 4740,
+      "sha256": "8a3b7a8c11a8423888eea182b5fcd8dc173d900130734c47df2325bc9e995c96"
+    },
+    "source-witnesses.json": {
+      "bytes": 36384,
+      "sha256": "582118c6996ae06fa6854747f1b7c15f2d32dfb38cbb0423c7c0f8b508a0028d"
+    }
+  }
+}

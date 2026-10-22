@@ -126,7 +126,7 @@
     "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED",
     "exact_installation_qualification": "DIRECT_OWNER_APPROVED_EXECUTED_UNTIL_RAW_GUARD_STOP",
     "agent_instead_of_manual_single_copy": "LATER_DIRECT_OWNER_I_WANT_YOU_TO_WRITE_MOVE_IT",
-    "current": "STOP_MAC_HOST_ROUTE_QUALIFIED_ON_ORIGINAL_LEGACY4; NO_NATIVE_MUTATION_OR_ACCEPTANCE_AUTHORITY"
+    "current": "DIRECT_OWNER_APPROVED_CAMPAIGN_C00_PASS_B00_FIRST2_ORIGINAL_BASELINES_MATCH_NEXT_POSE_REQUIRED"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -135,7 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Reviewed offline native-only four-read acquisition/context tools and exact GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1 packet are prepared; new exact owner approval is required for guarded Config/two-owned-ID changes, human stimuli, measurements,21-edge settled-endpoint qualification and full logical restore. Proposed494 captures/1976reports/50restarts are NOT_EXECUTED. Old preflight remains legacy access only; USB-Switch wire and GC hidden fields remain open.",
+    "Owner approved exact boundedXInputcampaign; C00 Config/all22 API preservation independently passes. B00 original4 identity/freshinspect/neutral and LF1 first2 baselines each match all21fields/3measurements, explicit2drains/8reads/abort0/settledcleanup. NextB00_B002 actualhumanpose required; no nativeactivation/Config/profilewrite/metrics. Continue exact494capture/1976report/50restart scope with otherroute/strongerhistory/HEP/restore/integration/DONE gates open.",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
@@ -325,8 +325,8 @@
     "file": "native_hardware_preparation_20261022/OWNER_PACKET.md",
     "MD_SHA256": "a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040",
     "JSON_SHA256": "7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8",
-    "owner_approval": "NOT_PROVIDED",
-    "executed": false,
+    "owner_approval": "DIRECT_OWNER_APPROVED_BOUNDED_XINPUT_CAMPAIGN",
+    "executed": true,
     "new_firmware_flash": false,
     "captures_max": 494,
     "read_submissions_max": 1976,
@@ -337,7 +337,9 @@
     ],
     "settled_endpoint_edges_requiring_owner_qualification": 21,
     "route": "XINPUT_ONLY_PARTIAL_CHAPTER",
-    "no_other_route_or_frame_exact_waiver": true
+    "no_other_route_or_frame_exact_waiver": true,
+    "execution_state": "C00_PRESERVATION_PASS_B00_FIRST2_ORIGINAL_BASELINES_MATCH_ONLY",
+    "approval_receipt": "native_xinput_campaign_20261022/owner_approval.json"
   },
   "native_acceptance_preparation": {
     "directory": "native_hardware_preparation_20261022",
@@ -360,5 +362,97 @@
     "independent_PINS_SHA256": "008983c84dc3fad55cae2668ab6eaa13c3b5628f8a04b49904578ce0a823ed2d",
     "independent_final_ACK": "PASS_HOST_CHILD_EXACT_PACKET_ONLY_NOT_OWNER_APPROVAL"
   },
-  "latest_sourcefree_native_preparation_validation": "native_preparation_publication_validation_20261022/result.json"
+  "latest_sourcefree_native_preparation_validation": "native_preparation_publication_validation_20261022/result.json",
+  "native_campaign_execution": {
+    "directory": "native_xinput_campaign_20261022",
+    "approval_receipt_SHA256": "77de8a276756ff68c6b0fc96400ec95da5ae5acc16784b989aa40186a5e621d2",
+    "current_phase": "B00_FIRST2_BASELINES_MATCH_NEXT_B00_B002_ACTUAL_OWNER_POSE_REQUIRED",
+    "C00_result": "native_xinput_campaign_20261022/C00_result.json",
+    "C00_private_files": 224,
+    "Config_payload_bytes": 252,
+    "Config_SHA256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+    "original22_wrappers_revisions_equal": true,
+    "STATUS": 26,
+    "LIST": 3,
+    "READ": 22,
+    "serial_opens": 29,
+    "Config_profile_mutations": 0,
+    "native_activation": 0,
+    "raw_reports": 8,
+    "metrics": 0,
+    "phase_filter_error_preserved": true,
+    "phase_correspondence_clarification": "native_xinput_campaign_20261022/independent_phase_clarification/REPORT.md",
+    "phase_clarification_REPORT_SHA256": "8a3b7a8c11a8423888eea182b5fcd8dc173d900130734c47df2325bc9e995c96",
+    "phase_clarification_PINS_SHA256": "4b59f0a86495582650ac93cbfd90e3d118775544368c0180cc5ae1ef59b1acfc",
+    "new_owner_approval_required_for_phase_specific_existing_procedure": false,
+    "native_hardware_result": null,
+    "independent_C00_audit": {
+      "file": "native_xinput_campaign_20261022/independent_C00_audit/REPORT.md",
+      "REPORT_SHA256": "ada98f91ad5d788c097417a830f5e262a8925563925fa0b5938daef57e8d333a",
+      "PINS_SHA256": "6df47f810d8ee812ccdcda842a179d38c29c7c5d2d860d946a5b3963f2d22e94",
+      "result": "PASS_SAVED_C00_ONLY_NOT_NATIVE_HARDWARE",
+      "source_pose_inventory_SHA256": "45c438d1ea3e5b2523d6baec735b9d8f39c0941c91f8b8f93c40ac14cbfc4cd2",
+      "physical_carriers_observed": false
+    },
+    "B00_first_neutral": {
+      "file": "native_xinput_campaign_20261022/B00_first_neutral_result.json",
+      "current_original_profile_identity": true,
+      "metadata": 1,
+      "identity": 1,
+      "registry_inspect": 1,
+      "capture": 1,
+      "raw_submissions": 4,
+      "explicit_drain": 1,
+      "measurement_reports": 3,
+      "fields_each": 21,
+      "abort_calls": 0,
+      "settled_cleanup": true,
+      "native_HEP": null
+    },
+    "B00_completed_baselines": {
+      "file": "native_xinput_campaign_20261022/B00_first_two_baselines_result.json",
+      "cases": [
+        "B00_B000",
+        "B00_B001"
+      ],
+      "captures": 2,
+      "read_submissions": 8,
+      "drains": 2,
+      "measurement_reports": 6,
+      "fields_each": 21,
+      "abort_calls": 0,
+      "settled_cleanup_each": true,
+      "native_HEP": null
+    },
+    "C00_completed_counters": {
+      "known_Menu_entries": 1,
+      "Menu_Configurator_restarts": 1,
+      "CDC_same_private_unit_lookups": 1,
+      "runtime_identity_queries": 1,
+      "serial_opens": 28,
+      "STATUS_commands": 26,
+      "GET_CONFIG_commands": 1,
+      "LIST_commands": 3,
+      "READ_commands": 22
+    },
+    "campaign_completed_counters_through_B001": {
+      "known_Menu_entries": 1,
+      "Menu_Configurator_restarts": 1,
+      "CDC_same_private_unit_lookups": 2,
+      "runtime_identity_queries": 2,
+      "serial_opens": 29,
+      "STATUS_commands": 26,
+      "GET_CONFIG_commands": 1,
+      "LIST_commands": 3,
+      "READ_commands": 22,
+      "ordinary_USB_restarts": 1,
+      "registry_inspections": 1,
+      "raw_capture_invocations": 2,
+      "raw_read_submissions": 8,
+      "logged_drain_reports": 2,
+      "strict_measurement_reports": 6
+    },
+    "counters_scope": "Campaign totals through B00_B001; C00-only counters are separately preserved in C00_result"
+  },
+  "latest_sourcefree_C00_validation": "native_C00_publication_validation_20261022/result.json"
 }

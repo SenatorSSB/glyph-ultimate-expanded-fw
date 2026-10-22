@@ -1,0 +1,65 @@
+"""B00 only: approved metadata/identity/inspect and sequential original-profile baselines. No writes/retries."""
+from pathlib import Path
+import base64,datetime,fcntl,hashlib,json,os,re,secrets,subprocess,sys,time
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077);sys.dont_write_bytecode=True
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-acceptance/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1_20261022';B=D/'B00';C=D/'C00';S=D/'campaign_state.json';F=Path('/private/tmp/glyph-profile-native-20261020');H=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');OLD=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022'
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,j,mode='x'):
+ with Path(p).open(mode)as f:json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+def write_state():save(S,s,'w')
+def run(cmd,prefix,timeout):
+ started=time.monotonic();rc=None;timed=False;error=None
+ with(prefix.parent/(prefix.name+'_stdout.txt')).open('xb')as out,(prefix.parent/(prefix.name+'_stderr.txt')).open('xb')as err:
+  try:rc=subprocess.run(cmd,stdout=out,stderr=err,timeout=timeout).returncode
+  except subprocess.TimeoutExpired:timed=True
+  except BaseException as e:error=repr(e)
+  finally:out.flush();os.fsync(out.fileno());err.flush();os.fsync(err.fileno())
+ result={'returncode':rc,'timeout':timed,'launch_error':error,'stdout_SHA256':sha(prefix.parent/(prefix.name+'_stdout.txt')),'stderr_SHA256':sha(prefix.parent/(prefix.name+'_stderr.txt')),'host_elapsed_seconds_not_target_timing':time.monotonic()-started,'retry':False};save(prefix.parent/(prefix.name+'_result.json'),result);assert rc==0 and not timed and error is None,'process failure/timeout; STOP no retry';return result
+assert len(sys.argv)in(2,3)and sys.argv[1]in('metadata','identity','inspect','capture');action=sys.argv[1]
+lock=(D/'campaign_execution.lock').open('a');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);s=json.loads(S.read_text());assert not s['stop']and s['approval']=='DIRECT_OWNER_APPROVED'and s['current_session']=='B00'and s.get('B00_boot_confirmed')is True
+assert sha(D/'APPROVED_PACKET.json')=='7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8';packet=json.loads((D/'APPROVED_PACKET.json').read_text())
+for p,h in packet['pins'].items():assert Path(p).is_file()and not Path(p).is_symlink()and sha(p)==h,p
+assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=F,text=True).strip()=='334fbd06e4541c120b0db423e5be7e112eb1f6f6'and not subprocess.check_output(['git','status','--porcelain'],cwd=F,text=True)
+case=None;prefix=B/action;event=27
+if action=='metadata':
+ assert s['stage']=='B00_BOOT_CONFIRMED_READY_METADATA'and s['next_event_index']==27;cost={'CDC_same_private_unit_lookups':1};cmd=[sys.executable,str(Path(__file__)),'metadata'];timeout=10
+elif action=='identity':
+ assert s['stage']=='B00_SAME_UNIT_VERIFIED_READY_IDENTITY'and s['next_event_index']==27;token=secrets.randbits(64)or 1;cost={'runtime_identity_queries':1,'serial_opens':1};cmd=[sys.executable,str(F/'tools/glyph_runtime_identity_tool.py'),'--port',s['B00_port'],'--context','xinput','--token',hex(token),'--session','B00'];timeout=7
+elif action=='inspect':
+ assert s['stage']=='B00_IDENTITY_VERIFIED_READY_INSPECT'and s['next_event_index']==27;cost={'registry_inspections':1};cmd=[str(H/'mac_hostinterface_observer'),'inspect','--approved-session','B00','--output',str(B/'inspect_journal.jsonl')];timeout=10
+else:
+ assert len(sys.argv)==3 and s['stage']=='B00_READY_BASELINE_STIMULUS';case=sys.argv[2];event=s['next_event_index'];planned=packet['events'][event-1];assert 28<=event<=79 and planned['boot_session']=='B00'and planned['kind']=='ORIGINAL_BASELINE_CAPTURE'and planned['selection_id']==case;runid=planned['case_run_id'];P=B/runid;assert P.is_dir()and not P.is_symlink();stim=P/'stimulus_confirmation.json';assert stim.is_file();receipt=P/'owner_actual_response.json';rr=json.loads(receipt.read_text());assert rr['source']=='ACTUAL_HUMAN_USER_REPLY'and rr['actual_response']and rr['case_run_id']==runid;st=json.loads(stim.read_text());assert st['actual_owner_response_sha256']==sha(receipt)
+ index={'profile_read':str(C/'read_4_response.json'),'config_backup':str(C/'config_backup.json'),'original_custody':str(C/'custody_manifest.json'),'checked_reference_receipt':str(C/'config_backup.json'),'checked_reference_response':str(C/'config_backup.json'),'runtime_identity':str(B/'identity_stdout.txt'),'boot_record':str(B/'boot_record.json'),'registry_inspection':str(B/'inspect_journal.jsonl'),'stimulus_confirmation':str(stim)};save(P/'proof_index.json',index)
+ bindcmd=[sys.executable,str(H/'binding_contract.py'),'--matrix',str(H/'acceptance_comparison_matrix.json'),'--proof-index',str(P/'proof_index.json'),'--row',case,'--run',runid,'--output',str(P/'binding.json')];save(P/'binding_command.json',{'argv':bindcmd,'device_calls':0});run(bindcmd,P/'binding',20);b64=base64.b64encode((P/'binding.json').read_bytes()).decode();binding=json.loads((P/'binding.json').read_text());assert binding['case_kind']=='baseline'and binding['reference_evidence_kind']=='original_Config_reference'
+ prefix=P/'capture';cost={'raw_capture_invocations':1,'raw_read_submissions':4,'logged_drain_reports':1,'strict_measurement_reports':3};cmd=[str(H/'mac_hostinterface_observer'),'capture','--approved-session','B00','--anchor-entry-id',str(s['B00_anchor']),'--interface-entry-id',str(s['B00_interface']),'--output',str(P/'capture_journal.jsonl'),'--binding-base64',b64];timeout=10
+for k,v in cost.items():assert s['reserved_counters'].get(k,0)+v<=s['maximum_counters'][k]
+for k,v in cost.items():s['reserved_counters'][k]=s['reserved_counters'].get(k,0)+v
+save(prefix.parent/(prefix.name+'_command.json'),{'argv':cmd,'event_index':event,'session':'B00','source_sha256':sha(__file__),'approval_sha256':sha(D/'owner_approval.json'),'packet_sha256':sha(D/'APPROVED_PACKET.json'),'reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'UID':os.getuid(),'effective_UID':os.geteuid(),'costs':cost,'retry':False,'external_timeout_seconds':timeout})
+s['stage']='B00_ATTEMPT_RESERVED_'+action.upper()+'_NO_RETRY';s['device_calls']+=1;write_state()
+try:
+ if action=='metadata':
+  from serial.tools import list_ports
+  matches=[]
+  for p in list_ports.comports():
+   if p.vid==0x0738 and p.pid==0x4726:matches.append({k:getattr(p,k)for k in ['device','vid','pid','serial_number','location','product','interface']})
+  save(B/'xinput_metadata.json',{'kind':'ONE_STANDARD_METADATA_LOOKUP_NO_PORT_OPEN','match_count':len(matches),'matches':matches,'private_original_reference_sha256':sha(OLD/'configurator_port.json')});old=json.loads((OLD/'configurator_port.json').read_text())['matches'][0];assert len(matches)==1;cur=matches[0];assert cur['serial_number']==old['serial_number']and cur['location']==old['location']=='0-1'and re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+',cur['device']);s['B00_port']=cur['device'];s['stage']='B00_SAME_UNIT_VERIFIED_READY_IDENTITY';proof={'result':'PASS_SAME_ORIGINAL_PRIVATE_UNIT_LOCATION','matches':1,'port_opens':0}
+ else:
+  result=run(cmd,prefix,timeout)
+  if action=='identity':
+   assert not(B/'identity_stderr.txt').read_bytes();j=json.loads((B/'identity_stdout.txt').read_text());assert j['token']==token and j['session']=='B00'and j['observation']=='current_session_only'
+   for k,v in {'context':'xinput','status':'persisted','primary_backend':2,'context_row':3,'requested_reference':4,'incarnation':1,'active_id':4,'active_revision':1,'schema_version':3,'payload_sha256':'d12805847da6f8f07096842cb0c7ce275c1606f911a1f5efd188bb9aeaf2b384'}.items():assert j[k]==v,k
+   s['stage']='B00_IDENTITY_VERIFIED_READY_INSPECT';proof={'result':'PASS_CURRENT_ORIGINAL_LEGACY4_IDENTITY','not_cryptographic_program_attestation':True}
+  elif action=='inspect':
+   assert not(B/'inspect_stdout.txt').read_bytes()and(B/'inspect_stderr.txt').read_bytes()==b'COMPLETE: bounded native proposal; hardware acceptance NOT_CLAIMED\n';rows=[json.loads(l)for l in(B/'inspect_journal.jsonl').read_text().splitlines()];assert rows[0]['kind']=='session'and rows[0]['session']=='B00'and rows[0]['purpose']=='preflight'and rows[0]['operation']=='inspect';end=rows[-1];assert end['kind']=='inspect_end'and end['outcome']=='ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY'and end['reports']==end['interface_init_calls']==0 and end['location']==1048576
+   assert len([r for r in rows if r['kind']=='anchor_query'and r['status']==0 and r['iterator_nonnull']is True])==1;nodes=[r for r in rows if r['kind']=='anchored_node'];assert 0<len(nodes)<=32 and len({r['entry_id']for r in nodes})==len(nodes)and len([r for r in nodes if r['is_target']is True and r['entry_id']==end['interface_entry_id']])==1
+   assert all(type(end[k])is int and 0<end[k]<2**63 for k in ['anchor_entry_id','interface_entry_id']);s['B00_anchor']=end['anchor_entry_id'];s['B00_interface']=end['interface_entry_id'];s['stage']='B00_READY_BASELINE_STIMULUS';s['next_event_index']=28;s['event_results']['27']={'result':'PASS_OWNER_ORDINARY_RESTART_METADATA_IDENTITY_REGISTRY_ONLY'};proof={'result':'PASS_FRESH_ANCHORED_INTERFACE_REGISTRY_ONLY','nodes':len(nodes),'reports':0,'interface_init':0}
+  else:
+   assert not(prefix.parent/'capture_stdout.txt').read_bytes()and(prefix.parent/'capture_stderr.txt').read_bytes()==b'COMPLETE: bounded native proposal; hardware acceptance NOT_CLAIMED\n';capture=prefix.parent/'capture_journal.jsonl';execution={'argv':cmd,'binary_sha256':sha(H/'mac_hostinterface_observer'),'returncode':0,'capture_sha256':sha(capture),'owner_packet_approval_sha256':sha(D/'owner_approval.json')};save(prefix.parent/'execution_receipt.json',execution)
+   verifycmd=[sys.executable,str(H/'verify_native_capture.py'),'--capture',str(capture),'--matrix',str(H/'acceptance_comparison_matrix.json'),'--proof-index',str(prefix.parent/'proof_index.json'),'--row',case,'--run',planned['case_run_id'],'--execution',str(prefix.parent/'execution_receipt.json')];save(prefix.parent/'verification_command.json',{'argv':verifycmd,'device_calls':0});run(verifycmd,prefix.parent/'verification',20);match=json.loads((prefix.parent/'verification_stdout.txt').read_text());assert match['status']=='MATCH_NATIVE_PROPOSAL_CORRESPONDENCE_ONLY_NOT_HEP'and match['measurement_reports']==3
+   s['event_results'][str(event)]={'result':'MATCH_ORIGINAL_BASELINE_21_WIRE_FIELDS_NOT_HEP','case_run_id':planned['case_run_id'],'capture_sha256':sha(capture)};s['next_event_index']=event+1;s.setdefault('B00_completed_baseline_cases',[]).append(case);s['stage']='B00_READY_BASELINE_STIMULUS'if event<79 else'B00_ALL52_BASELINES_COMPLETE_READY_C01';proof={'result':'PASS_ORIGINAL_BASELINE_FULL_WIRE_CORRESPONDENCE_NOT_HEP','case_run_id':planned['case_run_id'],'explicit_drain':1,'strict_measurements':3,'wire_fields_each':21,'original_profile_only':True}
+ save(prefix.parent/(prefix.name+'_adjudication.json'),proof)
+ for k,v in cost.items():s['completed_counters'][k]=s['completed_counters'].get(k,0)+v
+ write_state();print(json.dumps(proof,indent=2))
+except BaseException as e:
+ s['stop']=True;s['stage']='STOP_B00_'+action.upper()+'_NO_RETRY';save(prefix.parent/(prefix.name+'_stop.json'),{'error':repr(e),'all_actions_stopped':True,'retry':False});write_state();print(json.dumps({'result':'STOP','action':action,'error':repr(e),'retry':False}));raise
