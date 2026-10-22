@@ -1,5 +1,15 @@
 # Controller ProfileStore selector
 
+Current: **GP-NATIVE-002 DONE** after exact tested-source integration and fresh
+independent review, liveJb998cb73, then separate strict completion.
+[Completion record](integration_20261023/STRICT_COMPLETION.json) binds original334f
+lineage, failed4898, accepted8b2c/ca0b, immutableE, genuineI and reviewed liveJ.
+The native product source is integrated through002F; separateGP-NATIVE001 order
+status remains unchanged. Physical no-poll NOT_TESTED; GameCube owner-reported
+normal route only; historical root cause UNPROVEN; Nunchuk NOT_TESTED; electrical
+timing/highwater NOT_MEASURED. All43records retained; no fixture cleanup/device
+action or rebuild. Historical chapter checkpoints below remain preserved.
+
 Exact tested-source [integration I and catalog](integration_20261023/README.md) now prepared; GP-NATIVE-002 remains HARDWARE_VALIDATED pending independent integration review, live publication and separate strict DONE. All303critical inputs matchF8b2c. Historical failure and acceptance records below remain unchanged.
 
 Current: exact repaired8b2c/ca0b HARDWARE_VALIDATED under the original applicable

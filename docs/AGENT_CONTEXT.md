@@ -1,5 +1,27 @@
 # Agent Context
 
+## GP-NATIVE-002 DONE after exact tested-source integration — 2026-10-23
+
+[Strict completion](runtime_config/controller_profile_selector/integration_20261023/STRICT_COMPLETION.json)
+follows independently reviewed live integrationI785057b470321a9e36b427144775fad261465e05
+and catalogJb998cb73430c915d7d1ad66910c97939279f694a. All303critical inputs and
+220required source/test inputs match exact hardware-testedF8b2c75e3; retained
+1046016byte UF2 SHA256ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760
+is unchanged. Immutable source-freeE7ee104 supplies applicable hardwarePASS.
+The native product, selector and GameCube liveness source lineage is integrated;
+GP-NATIVE-001 independent work-order status/evidence remains unchanged.
+
+Historical48989519 FAIL remains preserved. Normal GameCube is OWNER_REPORTED_PASS
+on Switch/adapter only; no hidden raw GameCube identity or Mac telemetry is
+inferred. Conditional physical no-poll remains NOT_TESTED; historical root cause
+UNPROVEN; Nunchuk NOT_TESTED; target electrical timing/highwater NOT_MEASURED.
+All43 original/owned profiles remain retained, including20fixtures28..47; no
+cleanup, new device action or rebuild occurred. Focused checks/source/custody
+correspondence and fresh independent integration review PASS; exact-F fixture
+and historical framework debt remain honest, with no fullaggregatePASS. Earlier
+queue/status checkpoints below retain their completion-time chronology.
+
+
 ## Exact tested selector source integration — strict completion pending — 2026-10-23
 
 This snapshot contains genuine integrationI785057b470321a9e36b427144775fad261465e05,

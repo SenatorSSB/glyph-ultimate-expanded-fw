@@ -1,0 +1,213 @@
+{
+  "objective": "Original controller selector owner objective20completioncriteria, reconciled with latest exact tested-source continuation and accepted conditional hardware scope",
+  "status": "Completion established only together with separate committed strictDONE evidence and live final verification",
+  "requirements": [
+    {
+      "number": 1,
+      "requirement": "Profile menu no longer limited to Config labels",
+      "evidence_scope": "Stored names SEL01..SEL20 plus retained legacy/native choices; current selector source and accepted owner observations",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 2,
+      "requirement": "Stored names displayed",
+      "evidence_scope": "Metadata name tests and accepted named-profile menu observations",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 3,
+      "requirement": "At least20 profiles handled safely",
+      "evidence_scope": "BothABI0/1/11/20/64 production metadata/menu tests; accepted normal physical named fixture workflow throughSEL20. No claim physical64.",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 4,
+      "requirement": "Current-backend eligibility preserved",
+      "evidence_scope": "Shared Eligible policy, XInput/Switch/DInput/GameCube/Keyboard/empty applicability current tests",
+      "references": [
+        "VALIDATION.json",
+        "SOURCE_PATHS.md"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 5,
+      "requirement": "Ineligible records hidden and preserved",
+      "evidence_scope": "Backend subset tests; all43 wrappers/revisions/names/ranks unchanged in accepted API readback",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 6,
+      "requirement": "Eligible ordinary/legacy choices retained",
+      "evidence_scope": "Mixed native/legacy tests; original ordinary rows remain in accepted list",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 7,
+      "requirement": "Stable uint32IDs used",
+      "evidence_scope": "High-ID/nontruncation host cases; exact physical XInput28\u219247\u219228 identities",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 8,
+      "requirement": "Native context validated",
+      "evidence_scope": "Actual Persistence matching/mismatching/multiple-template context tests; fixture context accepted unchanged",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 9,
+      "requirement": "Checked publication before reboot",
+      "evidence_scope": "Literal core0 service/Persistence success/conflict/uncertain tests; exact source committed destination afterSaved",
+      "references": [
+        "VALIDATION.json",
+        "ACCEPTED_TRANSITION.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 10,
+      "requirement": "Backend retained",
+      "evidence_scope": "Actual four-route persistence tests; XInput runtime backend2; normal Switch-through-GC owner PASS without raw GCidentity",
+      "references": [
+        "VALIDATION.json",
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 11,
+      "requirement": "Selected record active",
+      "evidence_scope": "XInput exactID/revision/schema/runtimehash captures; distinct owner axis observations; GameCube behavioral scope owner-reported",
+      "references": [
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 12,
+      "requirement": "Controller A\u2192B\u2192A",
+      "evidence_scope": "Accepted XInput identities28\u219247\u219228 and distinct output; GameCube normal sequence owner-reportedPASS",
+      "references": [
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 13,
+      "requirement": "No all-profile body cache",
+      "evidence_scope": "Exact source/linkedresource proof bounds303critical input equality; active+candidate7800,PreparedView560,menuheap752payload",
+      "references": [
+        "VALIDATION.json",
+        "RESOURCE_CORRESPONDENCE.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 14,
+      "requirement": "No profile body/revision changes through selection",
+      "evidence_scope": "All43 canonical wrappers/revisions/directory metadata unchanged; Config byte-exact approvedStageA. API scope, no raw filesystem image claim",
+      "references": [
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 15,
+      "requirement": "Native/legacy/storage/recovery preserved",
+      "evidence_scope": "Both nativefull suites and frozen V1\u2013V3 oracles; current strictstore/Persistence/READ/migration/timeout; explicit private startup/identity interface supplements preserve assertions. Original CLI debt retained.",
+      "references": [
+        "VALIDATION.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 16,
+      "requirement": "Exact build/resource proof under unchanged limits",
+      "evidence_scope": "TestedF committed build/ELF/BIN/UF2 custody and all193resource equations; all303criticalIinputs and exacttargetgeneratedFinputs verified; no integration rebuild/artifact transfer",
+      "references": [
+        "RESOURCE_CORRESPONDENCE.json",
+        "CORRESPONDENCE.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 17,
+      "requirement": "Independent exact source review",
+      "evidence_scope": "Immutable handoff source_review.json exact8b2c/tree; final header correction reviewed; separate exactI/J integration review beforepublication",
+      "references": [
+        "ACCEPTED_TRANSITION.json",
+        "INDEPENDENT_INTEGRATION_REVIEW.md"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 18,
+      "requirement": "Exact physical menu acceptance applicable scope",
+      "evidence_scope": "XInputPASS and normalSwitch/GC ownerPASS. Conditional physical no-poll NOT_TESTED safely unavailable; not fabricated or required withoutsafecondition.",
+      "references": [
+        "git-json:7ee104debde92c61390ff44fcc35afa14e9e5548:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 19,
+      "requirement": "Source-free evidence accepted",
+      "evidence_scope": "Rcc132\u2192E7ee; exact V2PASS adopted canonical02c5 after postfailure85dreceipt; historical4898FAIL preserved",
+      "references": [
+        "ACCEPTANCE_ADOPTION.json",
+        "E_ADOPTION_REVIEW.md"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    },
+    {
+      "number": 20,
+      "requirement": "Only exact tested source integrated",
+      "evidence_scope": "GenuineI785 parents02c5+F8b2c, all303critical+220requiredFpaths exact; independentJreview/liveverification before separateDONE",
+      "references": [
+        "ACCEPTED_TRANSITION.json",
+        "CORRESPONDENCE.json",
+        "LIVE_INTEGRATION_RECEIPT.json"
+      ],
+      "assessment": "PROVEN_WITH_STATED_SCOPE"
+    }
+  ],
+  "preserved_limits": [
+    "historical4898freeze rootcauseUNPROVEN",
+    "physical_no_pollNOT_TESTED_safeconditionalsetupunavailable",
+    "NunchukNOT_TESTED",
+    "GameCubeownerreportednormalsetup_only_no_rawruntimeidentity",
+    "targetelectricaltiming_highwaterNOT_MEASURED",
+    "43profiles_retained_no_devicecleanup",
+    "originalCLIandframeworkdebt_retained_noaggregatePASS"
+  ],
+  "firmware_implementation_lineage_base": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "testedF": "8b2c75e35bb990aee06de3165e5780082c4f08ad"
+}

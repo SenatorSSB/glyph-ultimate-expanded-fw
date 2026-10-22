@@ -1,0 +1,20 @@
+{
+  "canonical_pre_continuation": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "source_free_adoption_live": "02c5d8a29ffc666fddd1c311d1e8b515aec3f22b",
+  "I": "785057b470321a9e36b427144775fad261465e05",
+  "reviewed_catalog_J_live_canonical": "b998cb73430c915d7d1ad66910c97939279f694a",
+  "remote_feature": "b998cb73430c915d7d1ad66910c97939279f694a",
+  "F_live": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "E_immutable": "7ee104debde92c61390ff44fcc35afa14e9e5548",
+  "live_verified_utc": "2026-10-22T22:41:53.033287+00:00",
+  "source_identity": "303critical allMATCH F; exact IparentsEadopt+F; postlivecorrespondence rerun",
+  "integration_review_sha256": "4cb708b3d227682aaee1db5b266af416a576cf20d0946283fa8130aafce8e86b",
+  "framework": "PASS",
+  "navigation": "PASS",
+  "sequence": "PASS",
+  "accepted_transition_catalog": "PASS_WITH_NEGATIVE_CONTROLS",
+  "hardware_result": "PASS_APPLICABLE_SCOPE",
+  "strict_DONE": "NOT_YET_PUBLISHED",
+  "device_operations": 0,
+  "firmware_rebuilds": 0
+}
