@@ -1,0 +1,70 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-NATIVE-002",
+  "candidate_branch": "codex/gp-native-002-gc-liveness",
+  "candidate_git_sha": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "candidate_base_configurator_sha": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": "/private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5780082c4f08ad/ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Original owner Glyph Mk6, stable unit matched privately; identifiers omitted",
+  "firmware_profile_state": "Retained SEL01 ID28/r1/schema5 and SEL20 ID47/r1/schema5; all23 originals and20 owned fixtures preserved; final Config API destination SEL01/GameCube",
+  "update_method": "Owner approved Stage B then explicitly requested agent copy to user-connected RPI-RP2; one exact rehashed1046016byte write/flush/fsync completed, bootloader disappeared and controller reenumerated; no retry",
+  "host_platform_adapter": "Mac XInput and Configurator; separate Switch through GC adapter with Mac entirely disconnected during GameCube observations",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/OWNER_PACKET.md",
+  "candidate_protocol_version": "GP_NATIVE_002_GC_LIVENESS_HW_V1",
+  "preconditions": [
+    "Exact committed candidate/source review/build/linked resource/custody PASS; failed48989519 and artifact preserved",
+    "Stage A owner-approved read-only API snapshot and43 exact wrappers/metadata match retained baseline; exact unit matched",
+    "Separate Stage B approval binds full candidate and UF2 SHA; later direct owner instruction authorizes one exact mounted-volume copy"
+  ],
+  "steps": [
+    {
+      "id": "XINPUT_A_B_A",
+      "instruction": "Use controller Profile menu SEL01→SEL20→SEL01 on established XInput setup",
+      "expected": "Named profiles through SEL20, normal reboot/reconnect, responsive controls, exact persisted identities28→47→28 and LF1(53,0)→(72,0)→(53,0), released(0,0)",
+      "observed": "PASS: raw identity captures backend2/revision1/schema5 with exact three creation-receipt digests; owner confirmed initial SEL01, SEL20 and final SEL01 outputs plus normal reboot and responsive controls; named fixtures confirmed through contextual reply"
+    },
+    {
+      "id": "GC_A_B_A",
+      "instruction": "Use controller Profile menu SEL01→SEL20→SEL01 on owner normal Switch/GC adapter setup",
+      "expected": "Usable named list, accepted selections, normal reboot/reconnect, GameCube retained, expected fixture behavior and responsive controls/menu",
+      "observed": "OWNER_REPORTED_PASS: everything worked without a hitch on the GC adapter, in response to full printed expected process. No Mac telemetry or raw GameCube runtime identity is available or inferred"
+    },
+    {
+      "id": "POSTTEST_PRESERVATION",
+      "instruction": "Reconnect in owner-established Configurator and read identity, Config, STATUS, paginated directory and each full wrapper once",
+      "expected": "All original/owned records, revisions and metadata unchanged; final Config coherent with approved SEL01/GameCube destination; clear stable store status",
+      "observed": "PASS: all43 canonical wrappers/revisions/directory metadata exact Stage A and historical baselines; Config277bytes byte-exact Stage A SHA65ecdcf32ecc4d0ce99edbc9a6b29aa99186ce1cd0c217d626764659d54e71dd; fences1/197/3717489385; all50STATUS clear; zero mutation requests/retries"
+    },
+    {
+      "id": "CONDITIONAL_NO_POLL",
+      "instruction": "Repeat physically without polling only if an approved safe setup can create that condition, per original objective",
+      "expected": "When safely executable, selector completes/reboots/responds without polling; otherwise record condition unavailable and do not fabricate observations",
+      "observed": "NOT_TESTED: owner has no established powered/no-poll method and will likely not provide one absent another failure. Condition not met. Source-faithful old/new no-poll regressions prove software bounded progress; they are not physical no-poll evidence"
+    }
+  ],
+  "negative_regression_checks": [
+    "Source-faithful literal old/new both-ABI no-poll regressions: old dependency exceeds finite bound, repair reaches checked persistence/reboot; active-command and normal report equivalence tests PASS",
+    "Exact current selector/native/ProfileStore/Persistence/context/legacy/failure tests and all unchanged resource limits PASS; honest C024 framework authentication checker debt retained, no aggregate PASS",
+    "No GameCube hidden identity or physical no-poll observation inferred from XInput; raw filesystem integrity not claimed beyond checked APIs"
+  ],
+  "power_cycle_reconnect_checks": [
+    "Owner-confirmed normal selection-driven reboot/reconnect for XInput and normal GameCube sequence; separately reconnected Configurator for preservation readback; no additional standalone power-cycle experiment claimed"
+  ],
+  "result": "PASS",
+  "anomalies": [
+    "Historical48989519 freeze root cause remains UNPROVEN; this exact candidate normal sequence passed",
+    "Physical no-poll row NOT_TESTED because original conditional safe-setup prerequisite unavailable; assistant packet stronger wording explicitly reconciled in CONDITIONAL_TEST_RECONCILIATION.md",
+    "No raw GameCube active identity/Mac telemetry during GC; no independent raw filesystem image; Nunchuk NOT_TESTED"
+  ],
+  "rollback_recovery": "None after repaired tests; no reflash/retry/cleanup/restoration/deletion. Owned fixture IDs28–47 retained with exact original wrappers. Controller returned to owner-established Configurator connection.",
+  "tester": "Project owner physical observations; root exact identity and read-only preservation captures; fresh independent recovery and acceptance review",
+  "tested_at": "2026-10-22T22:16:44.968471+00:00",
+  "evidence_gaps": []
+}

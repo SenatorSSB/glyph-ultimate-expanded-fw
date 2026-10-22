@@ -3,7 +3,8 @@
 Prepared2026-10-23 (Europe/Helsinki). Source, host regressions, fresh independent
 source review, exact Mk6 build, linked resource proof and artifact custody PASS.
 **Normal GameCube sequence owner-reported PASS; XInput identities and post-test
-API preservation PASS. Full acceptance INCOMPLETE; no-poll row NOT_TESTED.**
+API preservation PASS. Original conditional repair hardware criteria supported; no-poll physical row
+NOT_TESTED (safe setup unavailable). Source-free HEP prepared; no integration.**
 
 Exact candidate `8b2c75e35bb990aee06de3165e5780082c4f08ad`, tree
 `cd5d280e3b04a3b4e9d9a1bc760917406175b988`, is published on
@@ -13,6 +14,8 @@ contains only the source-free proposal, with no queue promotion, HEP or DONE.
 The later [owner objective](OWNER_OBJECTIVE.md) authorizes the named bounded
 repair after the historical failure stop. Device approval remains separate.
 
+- [Conditional test applicability correction](hardware_20261023/CONDITIONAL_TEST_RECONCILIATION.md)
+  and [source-free HEP](hardware_20261023/evidence.json).
 - [Stage B bounded hardware results and remaining gates](hardware_20261023/SUMMARY.md).
 - [Completed Stage A recovery and limits](recovery_20261023/SUMMARY.md).
 - [Owner approval packet](OWNER_PACKET.md): Stage A recovery and separately approved Stage B normal rows completed;

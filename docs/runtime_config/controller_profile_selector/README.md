@@ -1,8 +1,8 @@
 # Controller ProfileStore selector
 
-Status: historical candidate HARDWARE_FAILED; owner-directed exact repair proposal has owner-reported normal GameCube PASS and exact post-test API preservation; full acceptance remains incomplete.
+Status: historical candidate HARDWARE_FAILED; owner-directed exact repair proposal has owner-reported normal GameCube PASS and exact post-test API preservation; final XInput is confirmed and original conditional repair criteria supported; physical no-poll NOT_TESTED, no source integration.
 
-[Repair8b2c75e3 source-free packet](liveness_candidate_8b2c75e3/README.md) preserves the failed bytes and provides the bounded read-only recovery/explicit hardware gates. No full repaired hardware acceptance or source integration.
+[Repair8b2c75e3 source-free packet](liveness_candidate_8b2c75e3/README.md) preserves the failed bytes and provides the bounded read-only recovery/explicit hardware gates. Source-free repair HEP prepared; canonical adoption/source integration remain separate.
 
 Historical original handoff:
 

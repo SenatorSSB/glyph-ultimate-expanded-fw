@@ -1,7 +1,9 @@
 # GP_NATIVE_002_GC_LIVENESS_HW_V1 — owner approval packet
 
 Stage A completed; approved Stage B normal rows and preservation readback executed.
-[Results and remaining gates](hardware_20261023/SUMMARY.md). Full acceptance INCOMPLETE. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
+[Results and remaining gates](hardware_20261023/SUMMARY.md). Later owner confirmation and original conditional-scope reconciliation recorded
+in hardware_20261023/CONDITIONAL_TEST_RECONCILIATION.md; normal hardware/preservation
+PASS. Physical no-poll NOT_TESTED; no canonical integration/DONE. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
 treecd5d280e3b04a3b4e9d9a1bc760917406175b988. Implementation parentage retains
 failed4898951994bcabcaef2846145de2922a674656f8 and original334fbd06.
 Exact Mk6 build and byte correspondence PASS. UF2 is1046016bytes, SHA256
@@ -55,7 +57,8 @@ stops this packet and preserves all evidence; no reflash/cleanup follows.
    evidence for no-poll condition, posted selection, reboot/reconnect and
    responsiveness. This packet supplies no adapter unplug/replug sequence.
    If safe setup/verification is unavailable, mark this row NOT_TESTED and
-   acceptance incomplete; do not silently waive it.
+   apply the original objective condition explicitly; see the reconciliation
+   addendum. Do not claim this physical row PASS.
 4. Perform post-test read-only Config/status/directory/full-wrapper readback
    through approved connection steps. Verify all original/fixture record bytes,
    revisions, IDs, names and ranks against preflight backups; selection alone
@@ -71,7 +74,9 @@ Record exact F/UF2 SHA256 for every row with actual owner observations, route,
 backend, expected/actual output, active identity where supported and timestamps.
 One non-reproduction of the old freeze is insufficient. All source/old-vs-new
 regression/normal protocol/resource/review/build/custody gates and physical
-XInput/GameCube/no-poll/responsiveness/Config+store preservation must pass before
+XInput/GameCube/responsiveness/Config+store preservation must pass; physical
+no-poll applies only when its safe-setup condition is met, per original objective
+and explicit reconciliation addendum. Those applicable requirements precede
 source-free HEP/integration evidence. No merge or DONE before exact acceptance.
 Any renewed hardware failure, unexpected stored-state change, backup/custody
 mismatch or new device mutation stops for the owner. No watchdog workaround,

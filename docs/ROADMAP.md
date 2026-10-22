@@ -9,8 +9,10 @@ metadata unchanged; Config byte-exact, retaining SEL01/GameCube. Owner-approved
 single exact installation completed. XInput identities28→47→28 match; normal
 Switch/GC-adapter A→B→A is owner-reported PASS with no Mac telemetry during GC.
 [Bounded hardware evidence](runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/SUMMARY.md)
-retains limits. Final XInput output confirmation remains pending; powered/
-no-poll method NOT_ESTABLISHED and row NOT_TESTED. Full acceptance INCOMPLETE.
+retains limits. Final XInput output/reboot/responsiveness now owner-confirmed. Original
+conditional powered/no-poll setup unavailable; row NOT_TESTED. Normal repair
+hardware/preservation PASS with explicit applicability reconciliation; source-free
+HEP prepared, canonical adoption/integration remain separate.
 Raw filesystem integrity and GameCube active identity remain UNKNOWN. No HEP,
 source integration, DONE or queue promotion. Root cause UNPROVEN; Nunchuk NOT_TESTED.
 

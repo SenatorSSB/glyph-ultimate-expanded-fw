@@ -1,0 +1,93 @@
+{
+  "result": "ELIGIBLE_SOURCE_FREE_E_WITH_EXPLICIT_CONDITIONAL_RECONCILIATION",
+  "objective_sha256": "d3a1141a55d15e116cca96478f5f89ccb4f33c9baf53db58b9a9afa1df58f688",
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "acceptance_criteria": [
+    {
+      "id": 1,
+      "requirement": "Source-level bounded progress guarantee",
+      "classification": "SUPPORTED",
+      "evidence": "Inspected F8b loop allGCservice admission gate; pending-only paused idle boundary in GamecubeConsole::WaitForPollStartBounded/PauseAtIdleBoundary. Absent traffic yields; already-active partial byte remains protected. evidence/source_review.json exact review PASS."
+    },
+    {
+      "id": 2,
+      "requirement": "Old/new dependency regression and bounded progress",
+      "classification": "PASS",
+      "evidence": "evidence/final-host.log: literal old-source actual blocking receive exceeds finite bound under both enumABIs; new idle/interleavings/races/TX/marker tests PASS; integrated actual Persistence selector service and reboot outcomes PASS."
+    },
+    {
+      "id": 3,
+      "requirement": "Normal GameCube report equivalence",
+      "classification": "PASS_WITH_STATED_SCOPE",
+      "evidence": "evidence/final-host.log old/new exact report/update/end, normal response dispatch/bytes/invalid drain PASS bothABIs; PIO bit sample cycles/rest wire instructions equivalent. Physical electrical timing NOT_MEASURED."
+    },
+    {
+      "id": 4,
+      "requirement": "All selector host tests",
+      "classification": "PASS",
+      "evidence": "evidence/selector.log metadata0/1/11/20/64 names/ranks/IDs/backends/legacy/context/scrolling and actual Persistence A-B-A/all4routes/fences/conflict/uncertain/preservation PASS bothABIs. Native default/short, Persistence37,recovery,strict24 logs PASS."
+    },
+    {
+      "id": 5,
+      "requirement": "Exact resource proof unchanged limits",
+      "classification": "PASS",
+      "evidence": "resource/result.json and sealed handoff_review: static198288/199632, core0max2048/2048, core11060/1152;193linkedroutes; no cap increase. Current ELF custody rehashed79c9827b...; exact resource identity agrees."
+    },
+    {
+      "id": 6,
+      "requirement": "Fresh independent review",
+      "classification": "PASS",
+      "evidence": "evidence/source_review.json F8b exact rereview PASS after preserved P1finding and include correction; evidence/handoff_review.json HANDOFF_PASS covers source/build/dependencies/custody/resource proof."
+    },
+    {
+      "id": 7,
+      "requirement": "Physical XInput selector regression",
+      "classification": "OWNER_REPORTED_PASS_PLUS_RAW_IDENTITIES",
+      "evidence": "Raw captured28/47/28 all backend2/r1/schema5 and exact fixture digests independently decoded. InitialA and B observations owner-confirmed; owner_final_confirmations.json now confirms finalA LF1(53,0),release(0,0),normal reboot/responsiveness. Earlier pending status remains historical."
+    },
+    {
+      "id": 8,
+      "requirement": "Physical GameCube A-B-A",
+      "classification": "OWNER_REPORTED_PASS",
+      "evidence": "owner_gc_report.json exact owner response to printed normalSwitch/GC SEL01-SEL20-SEL01 sequence covering usable list, selection,reboot/reconnect,expected behavior,responsiveness. No Mac telemetry or hidden runtime identity; not inferred."
+    },
+    {
+      "id": 9,
+      "requirement": "Exact repaired candidate remains responsive",
+      "classification": "OWNER_REPORTED_PASS",
+      "evidence": "NormalGC owner report covers responsiveness; XInput final explicit confirmation and three raw identity replies/posttestConfigurator responses corroborate responsiveness in their actual contexts. No physical no-poll responsiveness claim."
+    },
+    {
+      "id": 10,
+      "requirement": "Posttest Config/ProfileStore preservation",
+      "classification": "PASS_API_SCOPE",
+      "evidence": "Independent stageBreview:277byteConfig exactStageA hash65ecdcf3..., all43 canonical wrappers/revisions/directory metadata exactStageA/originalfixturebaselines;99actualProfileStoreRXclear/stable1/197/3717489385. No independent rawphysicalFS image/integrity claim."
+    },
+    {
+      "id": 11,
+      "requirement": "Exact tested artifact/source correspondence",
+      "classification": "SUPPORTED_EXACT_CUSTODY_CHAIN",
+      "evidence": "F8b fullSHA/treecd5d280e, UF2ca0bb9e8...1046016bytes named in approval/copy/result/ownerhardware records; one ownerdirected exact copy after rehash; build_custody and independent allUF2/ELF/BIN correspondence. Current preservedELF/BIN/UF2 rehashed exact. Runtime wire supplies no Git hash; correspondence derives installed exact artifact custody, not neutralidentity."
+    }
+  ],
+  "original_physical_no_poll_requirement": "Repeat at least once from idle/no-poll/disconnected-host condition IF approved setup can safely create that condition; no unsafe adapter steps without explicit packet approval. Not listed as unconditional item in11numbered criteria.",
+  "current_safe_condition": "Owner states no known method available; no new method/test authorized. Actual physical row NOT_TESTED.",
+  "packet_discrepancy": "Assistant-authored OWNER_PACKET strengthened original conditional into unconditional acceptance gate. Preserve historical wording and explicitly reconcile; do not silently remove gate or label NOT_TESTED as PASS.",
+  "reconciliation_classification": "Originalownerobjective condition controls applicability. Approval to execute StageB as described does not itself establish owner intention to replace original conditional objective with an unconditional new test requirement. Latest owner no-method statement supports condition unavailable. This is explicit applicability correction, not physical PASS or waiver of mandatoryTier1.",
+  "eligible_next": "Prepare source-free E recording exact normalphysicalPASS and preservation, finalXInputconfirmation, no-poll NOT_TESTED/condition unavailable safely, evidenceprovenance and reconciliation for independent review.",
+  "integration_boundary": "This audit does not merge or authorize source integration, HEP/DONE or queue changes. Separate exact humanHEP/governance gates remain. Do not propagate normal PASS to no-pollphysicaltiming/highwater/rawGCidentity.",
+  "framework_validation": "Global surfaceC024FAIL preserved as debt, aggregate notPASS; does not contradict named candidatecritical/affected proof in inspected evidence.",
+  "retained_nonclaims": [
+    "RootcauseUNPROVEN",
+    "NunchukNOT_TESTED",
+    "Physicalelectricaltiming/highwaterNOT_MEASURED",
+    "RawGCactiveidentityUNKNOWN",
+    "RawphysicalFSintegrityUNKNOWN",
+    "No firmwaremerge/queuepromotion/DONE from thisaudit"
+  ],
+  "observed_private_original_stageB_seal": "395files076bb521255fb8c6aad37ada055826678f5e2544983771bf6b6f9a3d48f031d5",
+  "owner_confirmation_sha256": "97895bb999f62544ab54422eae962ef2da893c6a60ab5dfcc27a1b54b148e409",
+  "review_device_io": 0,
+  "review_repository_mutations": 0
+}

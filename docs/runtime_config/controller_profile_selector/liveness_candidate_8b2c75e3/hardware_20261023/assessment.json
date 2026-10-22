@@ -25,12 +25,15 @@
   "GC_normal_sequence": "OWNER_REPORTED_PASS",
   "GC_Mac_telemetry": "NONE",
   "GC_active_identity": "UNKNOWN",
-  "no_poll_physical_test": "NOT_TESTED_METHOD_NOT_ESTABLISHED",
+  "no_poll_physical_test": "NOT_TESTED_CONDITIONAL_SAFE_SETUP_UNAVAILABLE",
   "XInput_identities": "EXACT_28_47_28",
-  "XInput_final_output": "NOT_SEPARATELY_EXPLICITLY_REPORTED",
+  "XInput_final_output": "OWNER_CONFIRMED_53_0_RELEASE_0_0_NORMAL_REBOOT_RESPONSIVE",
   "raw_filesystem_integrity": "NOT_PROVEN_BY_API_SNAPSHOT",
   "root_cause": "UNPROVEN",
   "Nunchuk": "NOT_TESTED",
   "HEP_integration_DONE": false,
-  "independent_review": "PASS_BOUNDED_STAGE_B_EVIDENCE_WITH_ACCEPTANCE_GAPS"
+  "independent_review": "PASS_BOUNDED_STAGE_B_EVIDENCE_WITH_ACCEPTANCE_GAPS",
+  "repair_hardware_result": "PASS_ORIGINAL_CONDITIONAL_SCOPE",
+  "canonical_HEP_integration_DONE": false,
+  "current_acceptance_audit": "ALL_11_ORIGINAL_CRITERIA_SUPPORTED_WITH_EXPLICIT_CONDITIONAL_RECONCILIATION"
 }

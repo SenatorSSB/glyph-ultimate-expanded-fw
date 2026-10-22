@@ -1,6 +1,6 @@
 {
   "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
-  "hardware": "NORMAL_GC_OWNER_REPORTED_PASS_FULL_ACCEPTANCE_INCOMPLETE",
+  "hardware": "NORMAL_REPAIR_PASS_ORIGINAL_CONDITIONAL_SCOPE_NO_POLL_NOT_TESTED",
   "files": {
     "AUDIT.md": {
       "bytes": 7766,
@@ -11,20 +11,20 @@
       "sha256": "d3a1141a55d15e116cca96478f5f89ccb4f33c9baf53db58b9a9afa1df58f688"
     },
     "OWNER_PACKET.md": {
-      "bytes": 5483,
-      "sha256": "be01f631c9e7b42c08308aa9c39310395396c9826d9f6fa0e33afcdd5107afaf"
+      "bytes": 5915,
+      "sha256": "d68c6d007fcd32ea79d2f30f4ba4e5e724cf305c86ed98cec94d6dac4e74c431"
     },
     "README.md": {
-      "bytes": 2837,
-      "sha256": "c348e0cd1cad824b2b2e927e40ecb205d3a371b7b8a739166ff7015d6043ab9a"
+      "bytes": 3100,
+      "sha256": "4ea99172be212e89b578eda0e9ad1cdc78972524a9bbaacd8cb091a07498172a"
     },
     "RECOVERY_PREFLIGHT.md": {
       "bytes": 4262,
       "sha256": "297c5aec67eb7c3e71686d3772a54b9b1d31f99d093916871195d1026e9f0f48"
     },
     "RESULT.md": {
-      "bytes": 5274,
-      "sha256": "b40532386878b969d6dcb1dfd5350c57e3482c17db484641a25e6f7bbc0f00d3"
+      "bytes": 5583,
+      "sha256": "5eb62ea9cc915bdde42263f47ad2d46d3ba4d06d4a66f1e57bb04c57a1d16cc7"
     },
     "evidence/abi-layout.json": {
       "bytes": 2461,
@@ -150,17 +150,37 @@
       "bytes": 1931,
       "sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb"
     },
+    "hardware_20261023/CONDITIONAL_TEST_RECONCILIATION.md": {
+      "bytes": 1735,
+      "sha256": "635cc06a8f153b29ccb0484dff8045c02c06bd0da242455351ee0036b48c2822"
+    },
+    "hardware_20261023/INTEGRATION_HANDOFF.md": {
+      "bytes": 1357,
+      "sha256": "09e99a6e0f7c545bcfa753d2344bce2cc5aa2d9b04c446f199a4be17f4012ebf"
+    },
     "hardware_20261023/SUMMARY.md": {
-      "bytes": 2930,
-      "sha256": "a84fb551f5eb2dc8d78c7b8640ea85a368a56fbd917708566c7ce73472ea6806"
+      "bytes": 3649,
+      "sha256": "6fd666759c904d7079a2619ef1fcf072aa16954c94c807c52db5bb5cb2deb3d8"
+    },
+    "hardware_20261023/acceptance_audit.json": {
+      "bytes": 7048,
+      "sha256": "a922f9ce8135baf85dbc265006f00eec256961b123a2d17da610aa14da8bd158"
     },
     "hardware_20261023/assessment.json": {
-      "bytes": 1239,
-      "sha256": "09310c59686b298804d97a8096d27207e3da0d1e2a2ce20ca849db7c71cd2992"
+      "bytes": 1489,
+      "sha256": "64f93735a0f454ecf779b08349e28168e5d20c7106c8721cc13aeaf07c45a4b0"
+    },
+    "hardware_20261023/evidence.json": {
+      "bytes": 6475,
+      "sha256": "4b209227b3e4fa3d96d86a0bdd5552206e33e0449ce6b4a40218043365e066b9"
     },
     "hardware_20261023/independent_review.json": {
       "bytes": 1988,
       "sha256": "4203e3a04cafb1ab136c3436c2a0b1eaaa2f6bf67200e1db4b26241fae5446e1"
+    },
+    "hardware_20261023/owner_final_confirmations.json": {
+      "bytes": 839,
+      "sha256": "97895bb999f62544ab54422eae962ef2da893c6a60ab5dfcc27a1b54b148e409"
     },
     "hardware_20261023/public_review.json": {
       "bytes": 1227,
@@ -327,8 +347,8 @@
       "sha256": "83ae4c2acde68d168be0353a197d2ade6f2023d33a0e581a0db7f3e9d94a184b"
     },
     "telemetry.json": {
-      "bytes": 2692,
-      "sha256": "6cfa372c9b0ea0a1c5c4e1ed3c38b6b60ba78f5fcdd27bbc66bcaf1a7ed0ad4b"
+      "bytes": 2975,
+      "sha256": "bc4aefc2a6ec3700784faf25928c895276785cb2f68291c4103564918c794c05"
     }
   },
   "recovery": "PASS_WITH_API_SCOPE_QUALIFICATION"

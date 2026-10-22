@@ -83,3 +83,8 @@ Stage A details and private custody seals: [recovery summary](recovery_20261023/
 Stage B update: [normal hardware results and post-test preservation](hardware_20261023/SUMMARY.md).
 Normal GameCube owner-reported PASS; full acceptance INCOMPLETE with no-poll
 physical row NOT_TESTED and final XInput output confirmation pending.
+
+Later owner final XInput confirmation completes normal physical rows. Original
+conditional no-poll scope governs: safe setup unavailable, physical row
+NOT_TESTED. See explicit reconciliation, structured HEP and integration handoff
+in hardware_20261023. No canonical queue/source integration/DONE is claimed.

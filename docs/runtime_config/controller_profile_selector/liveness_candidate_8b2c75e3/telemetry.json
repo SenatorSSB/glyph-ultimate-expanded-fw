@@ -36,11 +36,14 @@
     "single exact UF2 copy",
     "XInput raw identities28-47-28",
     "owner normalGC A-B-A report",
-    "post-test API preservation and independent review PASS with acceptance gaps"
+    "post-test API preservation and independent review PASS with acceptance gaps",
+    "finalXInput owner confirmation",
+    "explicit correction of assistant-added unconditional no-poll gate to original conditional objective",
+    "source-free HEP/integration handoff preparation"
   ],
   "device_operations": 205,
   "flash_operations": 1,
-  "physical_reports_processed": 4,
+  "physical_reports_processed": 5,
   "planner_calls": 0,
   "curator_calls": 0,
   "no_op_calls": 0,
@@ -52,9 +55,9 @@
   "recovery_review": "recovery_review",
   "recovery_result": "PASS_WITH_API_SCOPE_QUALIFICATION",
   "Stage_B_installation_approval": "GRANTED_THEN_SPECIFIC_OWNER_DIRECTED_COPY",
-  "no_poll_method": "NOT_ESTABLISHED",
-  "physical_reports_count_scope": "XInput ready, initialA/B/return confirmations, overall GC report; counts source messages with readiness included",
+  "no_poll_method": "UNAVAILABLE_OWNER_CONFIRMED",
+  "physical_reports_count_scope": "XInput ready, initialA, B/return, normalGC overall, finalXInput/no-poll availability messages",
   "device_mutations_scope": "One exact UF2 copy; profile selections performed by owner; no agent Config/ProfileStore mutation queries",
-  "full_acceptance": "INCOMPLETE",
+  "full_acceptance": "ALL_11_ORIGINAL_REPAIR_CRITERIA_SUPPORTED; PHYSICAL_NO_POLL_NOT_TESTED_CONDITIONAL_SETUP_UNAVAILABLE",
   "Config_ProfileStore_mutation_queries": 0
 }

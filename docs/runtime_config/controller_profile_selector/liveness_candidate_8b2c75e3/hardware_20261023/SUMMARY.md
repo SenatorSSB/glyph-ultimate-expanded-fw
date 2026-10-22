@@ -44,3 +44,14 @@ powered/no-poll row; method NOT_ESTABLISHED and row NOT_TESTED. No adapter
 unplug/replug or new powered topology is authorized by these results. No HEP,
 source integration, DONE or queue promotion. Root cause UNPROVEN; Nunchuk
 NOT_TESTED. Candidate remains isolated and canonical failure publication stays.
+
+## Later owner confirmation and applicability correction
+
+Owner separately confirmed final XInput SEL01 output/reboot/responsiveness:
+“Yes, all matched”. No safe no-poll setup is available; the original objective
+makes this physical row conditional. See [explicit reconciliation](CONDITIONAL_TEST_RECONCILIATION.md).
+The earlier incomplete classification above and original independent review are
+preserved as chronology. Current normal hardware/preservation result is PASS
+under the original conditional scope; physical no-poll remains NOT_TESTED.
+[Structured HEP evidence](evidence.json) and [integration handoff](INTEGRATION_HANDOFF.md)
+are source-free; no canonical queue adoption, source integration or DONE.
