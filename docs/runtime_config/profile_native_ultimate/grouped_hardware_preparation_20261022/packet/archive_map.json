@@ -40,9 +40,17 @@
       "sha256": "151d458c18748141497e951bfe602de1ea7ad8516bb17eba26aa6a452466e7f0"
     },
     "WORKSHEET.md": {
-      "archive_path": "WORKSHEET.md",
+      "archive_path": "WORKSHEET.md.gz",
       "bytes": 36436,
-      "sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f"
+      "sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f",
+      "encoding": "gzip",
+      "compressed_bytes": 5557,
+      "compressed_sha256": "f30f7d500602b0628136093938e468f6055a3fd0836f1aaf265e0154c3efb8a6",
+      "readable_view": {
+        "archive_path": "WORKSHEET.md",
+        "sha256": "b810794c329285f423f4a3f1944bd02afb3683d29e24ca1f0968396b196d056a",
+        "transformation": "Remove trailing empty lines; retain one final LF. All other bytes unchanged."
+      }
     },
     "acceptance_comparison_matrix.json": {
       "archive_path": "acceptance_comparison_matrix.json",
@@ -90,9 +98,17 @@
       "sha256": "3e271fedee8f57f88803bb389d62ba29dde6673a9e9f9d7a151cffce17f9e70d"
     },
     "parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md": {
-      "archive_path": "parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md",
+      "archive_path": "parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md.gz",
       "bytes": 36436,
-      "sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f"
+      "sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f",
+      "encoding": "gzip",
+      "compressed_bytes": 5557,
+      "compressed_sha256": "f30f7d500602b0628136093938e468f6055a3fd0836f1aaf265e0154c3efb8a6",
+      "readable_view": {
+        "archive_path": "parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md",
+        "sha256": "b810794c329285f423f4a3f1944bd02afb3683d29e24ca1f0968396b196d056a",
+        "transformation": "Remove trailing empty lines; retain one final LF. All other bytes unchanged."
+      }
     },
     "parent_draft_not_adopted/available_after_focused_repairs_binding_contract.py": {
       "archive_path": "parent_draft_not_adopted/available_after_focused_repairs_binding_contract.py.txt",
@@ -194,5 +210,6 @@
       "bytes": 78608,
       "sha256": "427f4aacaa3b933c77caa334f0f3e2cea360a5d8d941653d9cda282d65d20560"
     }
-  }
+  },
+  "worksheet_packaging": "Two exact original worksheets are gzip capsules. Readable views remove only trailing empty lines; source/PINS/custody untouched."
 }

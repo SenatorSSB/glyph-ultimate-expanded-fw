@@ -19,6 +19,11 @@ inert `.py.txt` copies. Synthetic test data and mock logs are offline validation
 not physical observations. The original failed synthetic-header test and source
 findings remain preserved with their stated provenance limitations.
 
+The two original worksheet snapshots retain their exact frozen bytes in gzip
+capsules named by the archive map. Readable Markdown views remove only trailing
+empty lines. The private operational packet, its PINS and owner-held custody
+remain byte-identical; no expected value or instruction changes.
+
 [Durable owner-held custody](host_packet_custody.json) preserves every frozen
 helper/input byte separately from the operational temporary directory. The
 firmware and original host reader remain unchanged. The old 494-capture packet,

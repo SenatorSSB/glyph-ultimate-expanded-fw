@@ -15,8 +15,8 @@
       "sha256": "70b1440667c2ea03384c7545ba656b22143e5644826943cdeed4c189b0912171"
     },
     "README.md": {
-      "bytes": 1668,
-      "sha256": "86b3002e7fd04fa67da328185e2dcddc0b4f9997ccfc92580132b0d9c142e4c8"
+      "bytes": 1968,
+      "sha256": "32a92bff52ecbd58c4591b876744b16971f5759f10ecf388b8328271d10ebd0e"
     },
     "host_packet_custody.json": {
       "bytes": 6410,
@@ -103,16 +103,20 @@
       "sha256": "151d458c18748141497e951bfe602de1ea7ad8516bb17eba26aa6a452466e7f0"
     },
     "packet/WORKSHEET.md": {
-      "bytes": 36436,
-      "sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f"
+      "bytes": 36435,
+      "sha256": "b810794c329285f423f4a3f1944bd02afb3683d29e24ca1f0968396b196d056a"
+    },
+    "packet/WORKSHEET.md.gz": {
+      "bytes": 5557,
+      "sha256": "f30f7d500602b0628136093938e468f6055a3fd0836f1aaf265e0154c3efb8a6"
     },
     "packet/acceptance_comparison_matrix.json": {
       "bytes": 2861710,
       "sha256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5"
     },
     "packet/archive_map.json": {
-      "bytes": 8042,
-      "sha256": "b28d4c7ad6e675e1819a0b16674b2c814e76bf44de2afc6999cbb73171a4243f"
+      "bytes": 9098,
+      "sha256": "d50e98e646380f74fddeb2886b6c8366a4987ccac2767120e52650a487e03bc3"
     },
     "packet/binding_contract.py.txt": {
       "bytes": 10680,
@@ -147,8 +151,12 @@
       "sha256": "3e271fedee8f57f88803bb389d62ba29dde6673a9e9f9d7a151cffce17f9e70d"
     },
     "packet/parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md": {
-      "bytes": 36436,
-      "sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f"
+      "bytes": 36435,
+      "sha256": "b810794c329285f423f4a3f1944bd02afb3683d29e24ca1f0968396b196d056a"
+    },
+    "packet/parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md.gz": {
+      "bytes": 5557,
+      "sha256": "f30f7d500602b0628136093938e468f6055a3fd0836f1aaf265e0154c3efb8a6"
     },
     "packet/parent_draft_not_adopted/available_after_focused_repairs_binding_contract.py.txt": {
       "bytes": 10680,

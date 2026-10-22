@@ -18,8 +18,8 @@
   "revised_owner_approval": "PENDING",
   "no_new_device_actions": true,
   "private_unit_token_not_published": true,
-  "changed_paths": 74,
-  "local_links": 229,
+  "changed_paths": 79,
+  "local_links": 232,
   "hardware_PASS_integration_DONE": false,
   "aggregate": "NOT_RERUN_NO_GLOBAL_PASS"
 }

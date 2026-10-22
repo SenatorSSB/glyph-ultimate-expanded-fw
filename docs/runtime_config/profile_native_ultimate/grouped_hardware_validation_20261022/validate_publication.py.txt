@@ -1,6 +1,6 @@
 from pathlib import Path
 from collections import Counter
-import hashlib, json, re, subprocess
+import gzip, hashlib, json, re, subprocess
 
 W = Path('/private/tmp/glyph-native-curation-20261020')
 R = W / 'docs/runtime_config/profile_native_ultimate'
@@ -66,8 +66,17 @@ for name, record in archive.items():
     source = P / name
     target = A / 'packet' / record['archive_path']
     assert source.is_file() and not source.is_symlink()
-    assert target.read_bytes() == source.read_bytes()
-    assert sha(target) == record['sha256'] and target.stat().st_size == record['bytes']
+    archived_bytes = target.read_bytes()
+    if record.get('encoding') == 'gzip':
+        assert len(archived_bytes) == record['compressed_bytes']
+        assert sha(target) == record['compressed_sha256']
+        archived_bytes = gzip.decompress(archived_bytes)
+        view = A / 'packet' / record['readable_view']['archive_path']
+        assert view.read_bytes() == archived_bytes.rstrip(b'\n') + b'\n'
+        assert sha(view) == record['readable_view']['sha256']
+    assert archived_bytes == source.read_bytes()
+    assert hashlib.sha256(archived_bytes).hexdigest() == record['sha256']
+    assert len(archived_bytes) == record['bytes']
 for name, expected in pins['files'].items():
     assert sha(P / name) == expected, name
 for name, expected in pins['external_inputs'].items():
@@ -129,6 +138,8 @@ links = 0
 for name in changed:
     path = W / name
     data = path.read_bytes()
+    if path.suffix == '.gz':
+        data = gzip.decompress(data)
     assert b'\0' not in data and all(v not in data for v in private), name
     if name.endswith('.md'):
         for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', data.decode()):
@@ -136,7 +147,7 @@ for name in changed:
                 continue
             assert (path.parent / target.split('#')[0]).exists(), (name, target)
             links += 1
-subprocess.run(['git', 'diff', '--check'], cwd=W, check=True)
+subprocess.run(['git', 'diff', BASE, '--check'], cwd=W, check=True)
 assert 'glyph_agent_framework_docs: PASS' in (V / 'framework.log').read_text()
 assert 'status=PASS' in (V / 'sequence.log').read_text()
 assert 'glyph_docs_navigation: PASS' in (V / 'navigation.log').read_text()

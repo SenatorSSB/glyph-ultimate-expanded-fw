@@ -1,0 +1,21 @@
+{
+  "kind": "BYTE_PRESERVATION_AND_READABLE_VIEW_PROOF",
+  "local_before_packaging_commit": "ef257a7d1a4e84fa7e447157079f9337a0d309d7",
+  "unfiltered_initial_staged_check": "FAIL_TWO_FROZEN_ARCHIVE_EOF_BLANK_LINES",
+  "no_remote_push_occurred": true,
+  "files": [
+    {
+      "operational_name": "WORKSHEET.md",
+      "original_sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f",
+      "readable_view_sha256": "b810794c329285f423f4a3f1944bd02afb3683d29e24ca1f0968396b196d056a",
+      "original_bytes_preserved_by_gzip": true
+    },
+    {
+      "operational_name": "parent_draft_not_adopted/available_after_focused_repairs_WORKSHEET.md",
+      "original_sha256": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f",
+      "readable_view_sha256": "b810794c329285f423f4a3f1944bd02afb3683d29e24ca1f0968396b196d056a",
+      "original_bytes_preserved_by_gzip": true
+    }
+  ],
+  "firmware_private_packet_and_review_inputs": "UNCHANGED"
+}
