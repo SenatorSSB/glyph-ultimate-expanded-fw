@@ -6,7 +6,7 @@
 
 #include <hardware/pio.h>
 #include <hardware/gpio.h>
-#include <hardware/structs/io_bank0.h>
+#include <hardware/structs/iobank0.h>
 #include <hardware/sync.h>
 #include <hardware/timer.h>
 #include <pico/stdlib.h>
