@@ -1,6 +1,6 @@
 # Controller ProfileStore selector
 
-Status: historical candidate HARDWARE_FAILED; owner-directed exact repair proposal awaits recovery and hardware approval.
+Status: historical candidate HARDWARE_FAILED; owner-directed exact repair proposal has completed read-only API recovery and awaits separate hardware approval.
 
 [Repair8b2c75e3 source-free packet](liveness_candidate_8b2c75e3/README.md) preserves the failed bytes and provides the bounded read-only recovery/explicit hardware gates. No repaired hardware PASS or source integration.
 

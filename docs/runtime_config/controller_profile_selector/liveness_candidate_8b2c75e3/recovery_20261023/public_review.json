@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "scope": "Stage A public recovery documentation delta versus cc132574; no device I/O",
+  "findings": [],
+  "public_evidence_manifest_files_verified": 76,
+  "public_manifest_sha256": "ce40ecd50521a43bf23c794e35757d6c3d4eec0fa6d269dc5b9eb489bdac9e27",
+  "assessment_copy": "EXACT_PRIVATE_FINAL",
+  "independent_review_copy": "EXACT_REVIEWED_JSON",
+  "private_final_manifest": "379files hash matches summary; no repeated private baseline audit",
+  "privacy": "No original names/profile bodies/device identifiers/Config body/journals exposed",
+  "limits": "Checked API snapshot only; raw filesystem integrity, freeze/save chronology, running Git identity and GC active runtime UNKNOWN",
+  "topology": "Owner Switch/GC adapter separately from Mac reflected",
+  "Stage_B": "NOT_GRANTED",
+  "no_poll_method": "NOT_ESTABLISHED; separate gate retained",
+  "hardware_acceptance": "NOT_TESTED",
+  "HEP_merge_DONE_queue": "No new claims",
+  "firmware_delta": "NONE; docs paths only",
+  "review_device_io": 0
+}

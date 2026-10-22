@@ -29,9 +29,11 @@
     "fresh exact source re-review",
     "exact target build/custody PASS",
     "fresh linked resource proof PASS; source-free packet prepared",
-    "independent exact handoff review PASS"
+    "independent exact handoff review PASS",
+    "owner-approved Stage A read-only recovery",
+    "independent recovery review with explicit API scope qualification"
   ],
-  "device_operations": 0,
+  "device_operations": 101,
   "flash_operations": 0,
   "physical_reports_processed": 0,
   "planner_calls": 0,
@@ -40,5 +42,11 @@
   "repair_READY_timestamp": null,
   "READY_to_hardware_seconds": null,
   "hardware_report_to_DONE_seconds": null,
-  "timing_caveat": "Direct owner attachment authorizes this repair; no new canonical READY adoption or physical report/DONE event exists. No timing manufactured from file mtimes."
+  "timing_caveat": "Direct owner attachment authorizes this repair; no new canonical READY adoption or physical report/DONE event exists. No timing manufactured from file mtimes.",
+  "device_operations_unit": "read-only protocol queries; 52 serial opens",
+  "device_mutations": 0,
+  "recovery_review": "recovery_review",
+  "recovery_result": "PASS_WITH_API_SCOPE_QUALIFICATION",
+  "Stage_B_installation_approval": "NOT_GRANTED",
+  "no_poll_method": "NOT_ESTABLISHED"
 }

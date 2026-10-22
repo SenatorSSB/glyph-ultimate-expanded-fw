@@ -1,6 +1,6 @@
 # GP_NATIVE_002_GC_LIVENESS_HW_V1 — owner approval packet
 
-Prepared, not executed. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
+Stage A completed; Stage B prepared, not executed. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
 treecd5d280e3b04a3b4e9d9a1bc760917406175b988. Implementation parentage retains
 failed4898951994bcabcaef2846145de2922a674656f8 and original334fbd06.
 Exact Mk6 build and byte correspondence PASS. UF2 is1046016bytes, SHA256
@@ -14,13 +14,14 @@ may inherit any physical result. Candidate remains unmerged.
 
 ## Stage A: read-only recovery first
 
-Approval of RECOVERY_PREFLIGHT.md authorizes only its bounded read-only sequence
-on the identified original Mk6 and owner-established connections. Verify current
-Config/identity, all original record wrappers and fixtures28–47; preserve exact
-private backups. Current identity and postfailure integrity remain UNKNOWN until
-those reads and exact offline comparisons finish. Stop on unexpected state.
-No automatic restore/delete/retry or fixture recreation. No flash before a
-matching adjudicated preflight and separate Stage B approval.
+Owner-approved bounded recovery completed on the matching original Mk6.
+[Independent recovery evidence](recovery_20261023/SUMMARY.md) confirms all43
+canonical API wrappers/metadata exact and Config retaining SEL01/GameCube with
+only the three expected selector fields. Zero mutations/retries/flashes.
+This is an API snapshot; raw filesystem integrity, save/freeze chronology,
+installed firmware Git identity and GameCube active runtime remain UNKNOWN.
+No unexpected stored state was found. Stage A approval does not authorize Stage B.
+No automatic restore/delete or fixture recreation.
 
 ## Stage B: exact installation and smallest decisive physical test
 
@@ -36,12 +37,13 @@ stops this packet and preserves all evidence; no reflash/cleanup follows.
    identity/hash where supported, expected distinct LF1(53,0)/(72,0)/(53,0)
    and released neutral(0,0), route and continued responsiveness. This is the
    quick selector regression, not a repeat of the whole native campaign.
-2. Owner-established normal GameCube setup: repeat SEL01→SEL20→SEL01 through
+2. Owner-confirmed Switch through GC adapter, connected separately from Mac: repeat SEL01→SEL20→SEL01 through
    controller .Profile. For each transition record list usable, selection
    accepted, reboot screen/reconnect, expected distinct already-known profile
    behavior, GameCube retained and controller responsive. Unavailable hidden
-   raw identity fields remain UNKNOWN; do not infer them from XInput.
-3. Idle/no-poll row: repeat at least once only with a separately described and
+   raw identity fields remain UNKNOWN; do not infer them from XInput. Record
+   owner observations on Switch; reconnect to Mac separately for readbacks.
+3. Idle/no-poll row (safe method currently NOT_ESTABLISHED): repeat at least once only with a separately described and
    explicitly owner-approved safe setup that truly withholds GameCube polling
    while retaining controller/menu operation. Record exact topology/action,
    evidence for no-poll condition, posted selection, reboot/reconnect and

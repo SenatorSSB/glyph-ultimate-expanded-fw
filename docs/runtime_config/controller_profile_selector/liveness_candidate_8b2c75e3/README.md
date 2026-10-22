@@ -2,7 +2,8 @@
 
 Prepared2026-10-23 (Europe/Helsinki). Source, host regressions, fresh independent
 source review, exact Mk6 build, linked resource proof and artifact custody PASS.
-**Hardware acceptance remains NOT_TESTED. No device operation or source merge.**
+**Stage A read-only recovery PASS within API scope; repaired hardware acceptance
+remains NOT_TESTED. No flash or source merge.**
 
 Exact candidate `8b2c75e35bb990aee06de3165e5780082c4f08ad`, tree
 `cd5d280e3b04a3b4e9d9a1bc760917406175b988`, is published on
@@ -12,6 +13,7 @@ contains only the source-free proposal, with no queue promotion, HEP or DONE.
 The later [owner objective](OWNER_OBJECTIVE.md) authorizes the named bounded
 repair after the historical failure stop. Device approval remains separate.
 
+- [Completed Stage A recovery and limits](recovery_20261023/SUMMARY.md).
 - [Owner approval packet](OWNER_PACKET.md): Stage A read-only recovery first;
   Stage B exact installation/physical test requires its own explicit approval.
 - [Read-only recovery/preflight](RECOVERY_PREFLIGHT.md): current unit, Config,

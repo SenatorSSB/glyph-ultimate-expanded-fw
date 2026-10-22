@@ -61,12 +61,13 @@ Backend behavior claims:
   a required exact hardware acceptance property, not inferred from host proof.
 
 Stop conditions hit:
-- Hardware/owner gate only; postfailure identity/Config/original preservation
-  UNKNOWN until approved readback. No device I/O/flash/cleanup/restore or merge.
+- Stage A read-only recovery PASS within API scope; all43 wrappers/metadata
+  exact and Config retains SEL01/GameCube. GameCube active identity and raw
+  filesystem integrity remain UNKNOWN. No flash/cleanup/restore or merge.
 
 Follow-ups:
-- Owner Stage A recovery approval; exact Stage B approval only after matching
-  readback and concrete safe no-poll setup. XInput+GC A→B→A, idle progress,
+- Exact Stage B manual-installation and normal-row approval remains pending;
+  powered/no-poll row remains separately gated on a verified safe setup. XInput+GC A→B→A, idle progress,
   responsiveness and post-test Config/store preservation remain required.
 - Fresh source-free HEP and exact tested-source integration only after PASS.
 
@@ -76,3 +77,5 @@ Delegation:
   linked-resource specialist; fresh independent source/repaired review.
 - Root retained Git, authoritative verification, artifact custody and handoff.
   No new user-owned chat, Planner/Curator invocation or delegated device action.
+
+Stage A details and private custody seals: [recovery summary](recovery_20261023/SUMMARY.md).

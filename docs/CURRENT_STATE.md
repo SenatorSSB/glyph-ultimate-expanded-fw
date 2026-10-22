@@ -4,12 +4,15 @@
 
 Exact repair candidate8b2c75e35bb990aee06de3165e5780082c4f08ad is published
 on an isolated branch with host/source-review/build/resource/custody PASS.
-The [source-free approval packet](runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/README.md)
-requires read-only postfailure recovery before separately approved hardware
-continuation. No device operation, HEP PASS, source integration, DONE or queue
-promotion is claimed. The historical failure and all failed bytes remain
-preserved; postfailure Config/identity/original integrity stays UNKNOWN.
-Root cause UNPROVEN; Nunchuk NOT_TESTED. The live queue remains authoritative.
+Stage A read-only recovery completed with independent review
+PASS_WITH_SCOPE_QUALIFICATION: all43 profile API wrappers/metadata match and
+Config API retains SEL01/GameCube with only expected selector fields.
+[Recovery evidence](runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/recovery_20261023/SUMMARY.md)
+records API limits; raw filesystem integrity, save/freeze timing and GameCube
+active identity remain UNKNOWN. Stage B installation is NOT_APPROVED; repaired
+hardware acceptance remains NOT_TESTED. Owner uses Switch/GC adapter separately
+from Mac; a powered/no-poll method is NOT_ESTABLISHED. No HEP, integration,
+DONE or queue promotion. Root cause UNPROVEN; Nunchuk NOT_TESTED.
 
 ## Selector exact GameCube hardware FAIL — 2026-10-22
 

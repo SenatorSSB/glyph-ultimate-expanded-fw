@@ -1,0 +1,13 @@
+{
+  "scope": "Stage A redacted docs delta only; source F8b unchanged",
+  "docs_navigation": "PASS",
+  "agent_framework_docs": "PASS",
+  "agentic_sequence_protocol": "PASS",
+  "git_diff_check": "PASS",
+  "docs_agent_surface": "FAIL",
+  "docs_agent_surface_reason": "C024 post-integration change outside validation/evidence paths",
+  "classification": "FRAMEWORK_VALIDATION_DEBT; same authenticated restriction retained in prior packet and clean canonical baseline",
+  "aggregate_PASS": false,
+  "device_mutations": 0,
+  "source_changes": 0
+}

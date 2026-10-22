@@ -1,0 +1,84 @@
+{
+  "result": "PASS_WITH_SCOPE_QUALIFICATION",
+  "manifest_sha256": "db4bca49575f9f4a173871ce295c8b096bf127271414c800ab594a0b6d9cbfa8",
+  "sealed_files_verified": 371,
+  "qualification_revision_sha256": "1e6367543d8ee555d77ac7f740b430edff8cb3c80c67fb2a5fc8a3d18eb3ce5b",
+  "ProfileStore_wire_requests_verified": {
+    "STATUS": 50,
+    "LIST": 6,
+    "READ": 43
+  },
+  "ProfileStore_responses_verified": 99,
+  "all_50_STATUS_recovery_flags": 0,
+  "all_50_STATUS_mutation_feasible": true,
+  "original_profiles_exact": 23,
+  "owned_profiles_exact": 20,
+  "config_bytes": 277,
+  "config_sha256": "65ecdcf32ecc4d0ce99edbc9a6b29aa99186ce1cd0c217d626764659d54e71dd",
+  "config_reconstruction": "BYTE_EXACT_THREE_SELECTOR_FIELDS",
+  "crc_matches_generation": true,
+  "stable_fences": [
+    1,
+    197,
+    3717489385
+  ],
+  "known_unit": "VID_PID_SERIAL_MATCH; transport path/location changed",
+  "unexpected_stored_state": [],
+  "qualification": "GET_CONFIG checks saved Config then streams LoadConfigRaw; checked API snapshot, no independent filesystem image. Current API retains GameCube SEL01 ID28. Save/freeze chronology and GameCube active runtime UNKNOWN. Additive qualifications supersede original durable wording.",
+  "protected_backups": [
+    "Exact277byte API Config protobuf/JSON",
+    "Raw neutral Configurator identity response",
+    "43full canonical profile wrappers/revisions/directory metadata",
+    "Raw journal receive chunks/transmitted requests/execution records"
+  ],
+  "not_proven": [
+    "Raw physical filesystem integrity",
+    "Running firmware/source identity from neutral identity",
+    "Repaired8b2c75e3 physical acceptance",
+    "Publication timing versus freeze",
+    "GameCube active runtime"
+  ],
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "installation_authorized": false,
+  "review_device_io": 0,
+  "draft_privacy": "PASS",
+  "execution_tool_sha256": {
+    "glyph_serial_config_tool.py": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+    "glyph_profile_store_production_tool.py": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef",
+    "glyph_profile_store_candidate_tool.py": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+    "glyph_runtime_identity_tool.py": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead"
+  },
+  "committed_source_provenance": {
+    "tools/glyph_serial_config_tool.py": {
+      "sha256": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+      "candidate_equals_failed_ancestor": true,
+      "execution_bytes_exact": true
+    },
+    "tools/glyph_profile_store_production_tool.py": {
+      "sha256": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef",
+      "candidate_equals_failed_ancestor": true,
+      "execution_bytes_exact": true
+    },
+    "tools/glyph_profile_store_candidate_tool.py": {
+      "sha256": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+      "candidate_equals_failed_ancestor": true,
+      "execution_bytes_exact": true
+    },
+    "tools/glyph_runtime_identity_tool.py": {
+      "sha256": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+      "candidate_equals_failed_ancestor": true,
+      "execution_bytes_exact": true
+    },
+    "schema/haybox/config.proto": {
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "candidate_equals_failed_ancestor": true,
+      "execution_bytes_exact": true
+    }
+  },
+  "source_commits_verified": [
+    "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+    "4898951994bcabcaef2846145de2922a674656f8"
+  ],
+  "scope_excludes_new_owner_topology": "No Stage A read authorizes Switch/GC adapter installation or physical actions"
+}

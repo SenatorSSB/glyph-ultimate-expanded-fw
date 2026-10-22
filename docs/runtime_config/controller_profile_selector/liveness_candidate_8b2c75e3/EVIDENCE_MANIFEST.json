@@ -11,20 +11,20 @@
       "sha256": "d3a1141a55d15e116cca96478f5f89ccb4f33c9baf53db58b9a9afa1df58f688"
     },
     "OWNER_PACKET.md": {
-      "bytes": 4825,
-      "sha256": "906d7203fa0c6884fbcbcf02aa9a5969ac0cebf2106b2924cd39ebf027f4eff8"
+      "bytes": 5056,
+      "sha256": "554b3245ae777e6a67c6bfdf4dade8bdfae03c69463a25d8f37ffa33455c9963"
     },
     "README.md": {
-      "bytes": 2593,
-      "sha256": "c12cf381d1ec290540b9c0f009a7a55213e483fcca1b7ff5b42285c365baa326"
+      "bytes": 2714,
+      "sha256": "bca9b56211b5e0c1a475d99f80ee307b19d3d8e350dba450ff1e0c536b6cde3a"
     },
     "RECOVERY_PREFLIGHT.md": {
       "bytes": 4262,
       "sha256": "297c5aec67eb7c3e71686d3772a54b9b1d31f99d093916871195d1026e9f0f48"
     },
     "RESULT.md": {
-      "bytes": 4714,
-      "sha256": "5da5169ff887a65a5d1d031165f0a350dcc1752d9f6c2324c8de0bf4dd7f6548"
+      "bytes": 4903,
+      "sha256": "c3ff692648caff1538ba7953e8c0a1c179b985eb8013b1a4616d17f32a9f6caa"
     },
     "evidence/abi-layout.json": {
       "bytes": 2461,
@@ -149,6 +149,26 @@
     "evidence/strict.log": {
       "bytes": 1931,
       "sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb"
+    },
+    "recovery_20261023/SUMMARY.md": {
+      "bytes": 2342,
+      "sha256": "5b8888b0532123ddd2b93e6c6ad067ba785975199a2f826204ed250cfb6ff3a1"
+    },
+    "recovery_20261023/assessment.json": {
+      "bytes": 2365,
+      "sha256": "77985b205a84d349b32cc99c7edf31b998f9d82095c8b189914cd3b4acf6daac"
+    },
+    "recovery_20261023/independent_review.json": {
+      "bytes": 3735,
+      "sha256": "9fdc5be2a9f4ea7617ec13b74f3c265af2d447398d182f4f45f2fa80a0f5bf3e"
+    },
+    "recovery_20261023/public_review.json": {
+      "bytes": 1022,
+      "sha256": "2e67a3045a22322e90c3e29d2d479219d65934113110b8404f33845f88e68e6b"
+    },
+    "recovery_20261023/validation.json": {
+      "bytes": 541,
+      "sha256": "919dffc15cbddc8356cec7a151eeb3cddc2273c825eddbf8b018fb96a00fc9ee"
     },
     "resource/PINS.json": {
       "bytes": 4241,
@@ -287,8 +307,9 @@
       "sha256": "83ae4c2acde68d168be0353a197d2ade6f2023d33a0e581a0db7f3e9d94a184b"
     },
     "telemetry.json": {
-      "bytes": 1581,
-      "sha256": "e8290ee84cf2e1b2e77c7eebb77c256ce36dc9e54e71e387c1e68b3a3239a748"
+      "bytes": 1992,
+      "sha256": "4dd75d7cbe16d3ddb1018183c18683d06e104db43caebbb34b4ae5d53892cbba"
     }
-  }
+  },
+  "recovery": "PASS_WITH_API_SCOPE_QUALIFICATION"
 }
