@@ -1,5 +1,38 @@
 # Profile-native Ultimate execution chapter
 
+## Mac current-legacy host-route qualification PASS — 2026-10-22
+
+The owner approved REBIND and confirmed the normal controller screen, clarifying
+that the controller had been returned to the previous USB port and either port
+was acceptable. The packet's original binding remained enforced: one fresh
+metadata lookup matched the private serial/location0-1. One unchanged identity
+matched current original legacy4/rev1/schema3/inc1/backend2/row3/reference4/d128.
+One registry inspect found10 descendants and fresh anchor/interface IDs. One
+exact108e64 capture succeeded with optionsNone/validated associated descriptors/
+derived IN129/OUT1 unopened, three actual20-byte/full21-field reports, submissions3/
+abort0/settled cleanup/rc0. Host process elapsed0.020689334s is not target timing.
+
+The [actual result](hostinterface_rebind_results_20261022/README.md) preserves29
+private files and exact six scope/entry substitutions. No further
+reconnect was requested. Stage ended STOP; Config/store/native/metric/firmware/
+Switch/WUP actions remain0. Prior stopped sessions, original Config/all22 custody
+and every frozen source/build/resource/oracle/protocol fact remain unchanged.
+Mac preflight on legacy4 is not native acceptance, console PASS or program/Git
+attestation. Strong native verification must still reject these preflight logs.
+
+The existing finite console reviewer independently passes the saved success/custody/decoder.
+The existing primary host author prepares the exact native Config/two-owned-ID/
+physical packet and minimal native-only context/acquisition tool offline. Source
+shows a prior-pose report can remain queued between captures; no first-frame
+discard or extra read may be hidden inside the frozen preflight limits. A new
+explicit native-only proposal may contain one preserved drain plus three strict
+measurement reports, subject to exact source/review/custody and separate owner
+approval before live use. All target resource limits stay fixed; SDK queue/settling
+uncertainties remain honest. USB-Switch wire and GC hidden console fields remain
+actual acceptance gaps without waiver. No new full chat, firmware product order,
+standing team, HEP or integration occurred. Root remains sole publisher and holds
+the canonical lock through this logical offline preparation chain.
+
 ## Actual V2 location stop and no-reconnect rebind gate — 2026-10-22
 
 The owner approved exact V2 and confirmed one ordinary USB reconnect. The

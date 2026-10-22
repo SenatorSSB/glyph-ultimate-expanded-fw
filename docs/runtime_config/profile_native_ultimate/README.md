@@ -6,12 +6,13 @@ GP-NATIVE-001 remains at the hardware gate. Exact installation/current legacy
 identity passed. [Approved postinstallation API preservation](postinstallation_preservation_20261022/README.md)
 now matches Config252B and all22 original decoded profiles/revisions exactly,
 with LIST3/READ22/STATUS26 and zero retry/mutation. Device access ended STOP in
-Configurator. The [later V2 attempt](hostinterface_qualification_results_20261022/README.md)
-stopped at its one metadata lookup: same private serial, location1-1 vs required0-1;
-zero identity/inspect/capture/port opens. Owner reports possible original-port
-return, presently UNVERIFIED. The [no-reconnect rebind packet](hostinterface_rebind_approval_20261022/REBIND_PACKET.md)
-requires separate approval/current-display confirmation. Reader108e64/sourcef0e246
-and its review/build/limits remain unchanged, never live-invoked.
+Configurator. The [approved continuation](hostinterface_rebind_results_20261022/README.md)
+now qualifies current legacy Mac access: fresh exact unit/location, matching
+runtime identity, new inspect and three full20-byte/21-field reports, abort0/
+settled cleanup/rc0,29 files sealed then STOP. Previous location/raw/metadata
+stops remain exact. Native-only strict context/acquisition and exact device
+mutation/physical packet remain offline; prior-pose queue handling is explicit,
+preflight logs cannot be native acceptance, and console gaps remain unqualified.
 No native activation, output acceptance or candidate source integration is claimed.
 Earlier research introduction below is historical.
 

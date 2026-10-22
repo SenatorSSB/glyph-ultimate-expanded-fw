@@ -23,14 +23,15 @@ A proven host-only empty-stderr assertion was corrected after independent offlin
 wire/source review, preserving the valid STATUS/error/snapshot and unused child
 finding, without requery or new device authority. All227 session files are pinned
 privately. This is API preservation, not raw filesystem export or native acceptance.
-The [approved V2 attempt](runtime_config/profile_native_ultimate/hostinterface_qualification_results_20261022/README.md)
-stopped after one metadata lookup: original private serial matched, but saved
-location1-1 differed from required0-1. Identity/inspect/capture/port opens are0.
-The owner reports a different port and possible return; present connection
-remains UNVERIFIED. The [no-reconnect rebind packet](runtime_config/profile_native_ultimate/hostinterface_rebind_approval_20261022/REBIND_PACKET.md)
-requires separate explicit approval and current normal-display confirmation
-before one fresh exact-location lookup and only then unchanged bounded access.
-No further reconnect, reader/source/build change or native mutation is proposed.
+The [approved no-reconnect continuation](runtime_config/profile_native_ultimate/hostinterface_rebind_results_20261022/README.md)
+now passes Mac host-route qualification: same private unit/location0-1, unchanged
+legacy4 runtime identity, fresh vendor-interface inspect and three full20-byte/
+21-field reports, abort0/settled cleanup/rc0. Device access ended STOP; no native
+profile, Config/store or target-metric operation occurred. All29 private files
+are sealed. Previous location/raw/metadata stops remain exact. These preflight
+reports qualify only current legacy access; native acceptance requires its own
+strict context/acquisition tools and exact owner-approved mutation/test packet.
+USB-Switch wire and hidden GC console fields remain unqualified gaps.
 F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE

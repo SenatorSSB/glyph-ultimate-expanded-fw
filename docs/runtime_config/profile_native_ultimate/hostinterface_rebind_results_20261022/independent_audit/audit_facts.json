@@ -1,0 +1,73 @@
+{
+  "kind": "FINITE_SAVED_REBIND_CURRENT_LEGACY_ACCESS_QUALIFICATION_AUDIT",
+  "result": "PASS_CURRENT_LEGACY_MAC_ROUTE_QUALIFICATION_ONLY",
+  "manifest_SHA256": "42211067fd42502a9472f04966d1cf0f439b14047dff8cd8be765a17d55de029",
+  "session_files_verified": 29,
+  "approved_packet_MD_SHA256": "8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d",
+  "approved_packet_JSON_SHA256": "4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129",
+  "private_unit_serial_original_equal": true,
+  "exact_formatted_location_original_equal": true,
+  "formatted_location": "0-1",
+  "raw_registry_location": 1048576,
+  "current_identity_expected_legacy_fields_match": true,
+  "identity_token_and_current_session_match": true,
+  "identity_raw72byte_frame_separately_retained": false,
+  "fresh_anchor_entry_id": 4295245698,
+  "fresh_interface_entry_id": 4295245704,
+  "inspect_and_capture_same10node_ancestry_and_numeric_properties": true,
+  "associated_descriptor_source_bounds_and_IN_OUT_identity_match": true,
+  "associated_configuration_bytes": 114,
+  "associated_configuration_SHA256": "a5f0e46f7691bc8ed58d71fab4c8512b6644874d0a088d96fcc71ede01281b5e",
+  "associated_interface_SHA256": "196133344122907493ff2a2568304374e2fef7eda098c15ece77a451e727aec2",
+  "ordinary_optionsNone_init_success_count": 1,
+  "reports": [
+    {
+      "sequence": 1,
+      "completion_status": 0,
+      "actual_bytes": 20,
+      "raw_SHA256": "a9bc61e88ffda2b4b3a6d9ee6ea3f17bbd695822c7b14dc5960cb0caf71d8ba0",
+      "full21field_independent_decode_equal": true
+    },
+    {
+      "sequence": 2,
+      "completion_status": 0,
+      "actual_bytes": 20,
+      "raw_SHA256": "a9bc61e88ffda2b4b3a6d9ee6ea3f17bbd695822c7b14dc5960cb0caf71d8ba0",
+      "full21field_independent_decode_equal": true
+    },
+    {
+      "sequence": 3,
+      "completion_status": 0,
+      "actual_bytes": 20,
+      "raw_SHA256": "a9bc61e88ffda2b4b3a6d9ee6ea3f17bbd695822c7b14dc5960cb0caf71d8ba0",
+      "full21field_independent_decode_equal": true
+    }
+  ],
+  "successful_full21field_reports": 3,
+  "logical_submissions": 3,
+  "abort_calls": 0,
+  "settled_cleanup": true,
+  "capture_rc": 0,
+  "capture_host_elapsed_seconds_not_target_timing": 0.020689334021881223,
+  "operation_counters": {
+    "manual_reconnect_requests": 0,
+    "CDC_metadata_lookups": 1,
+    "runtime_identity_requests": 1,
+    "inspect_invocations": 1,
+    "capture_invocations": 1,
+    "firmware_copies": 0,
+    "Config_or_ProfileStore_requests": 0,
+    "Config_or_ProfileStore_mutations": 0,
+    "native_activation": 0,
+    "target_metrics": 0,
+    "Switch_WUP_actions": 0,
+    "old_reader_retries": 0
+  },
+  "prior_V2_all12_stopped_files_unchanged": true,
+  "final_stop": true,
+  "final_stage": "NEW_HOST_ROUTE_THREE_REPORT_QUALIFICATION_PASS_THEN_STOP",
+  "native_behavior_output_HEP_metrics_or_integration": "NOT_CLAIMED",
+  "reviewer_live_actions": 0,
+  "native_binary_entrypoints_executed_by_reviewer": 0,
+  "private_raw_serial_and_decoded_values_published": false
+}

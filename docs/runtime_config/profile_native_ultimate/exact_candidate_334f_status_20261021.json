@@ -126,7 +126,7 @@
     "same_user_read_access_exception": "DIRECT_OWNER_APPROVED_COMPLETED",
     "exact_installation_qualification": "DIRECT_OWNER_APPROVED_EXECUTED_UNTIL_RAW_GUARD_STOP",
     "agent_instead_of_manual_single_copy": "LATER_DIRECT_OWNER_I_WANT_YOU_TO_WRITE_MOVE_IT",
-    "current": "STOP_V2_METADATA_LOCATION_MISMATCH; PRESENT_CONNECTION_UNVERIFIED; NEW_REBIND_APPROVAL_REQUIRED"
+    "current": "STOP_MAC_HOST_ROUTE_QUALIFIED_ON_ORIGINAL_LEGACY4; NO_NATIVE_MUTATION_OR_ACCEPTANCE_AUTHORITY"
   },
   "target_timing": "NOT_MEASURED",
   "runtime_stack_highwater": "NOT_MEASURED",
@@ -135,7 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Explicit owner approval of exact no-reconnect GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1 and normal-display confirmation, then one fresh metadata lookup requiring original private serial/location0-1; only then unchanged bounded identity/inspect/capture/STOP with108e64. Current connection unverified; prior V2 spent metadata stop remains exact.",
+    "Complete offline native-only strict acquisition/context tool and exact mutation/physical packet, including transparent bounded prior-pose drain proposal, source/build/custody/fresh review and separate owner approval before native writes/tests. Actual three-report preflight evidence remains legacy-only and cannot satisfy native verifier.",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
@@ -292,13 +292,32 @@
     "file": "hostinterface_rebind_approval_20261022/REBIND_PACKET.md",
     "MD_SHA256": "8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d",
     "JSON_SHA256": "4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129",
-    "owner_approval": null,
-    "executed": false,
+    "owner_approval": "DIRECT_OWNER_APPROVED_PLUS_NORMAL_SCREEN_CONFIRMED",
+    "executed": true,
     "new_reconnect_authority": false,
     "reader_source_build_unchanged": true,
     "independent_ACK": "hostinterface_qualification_results_20261022/independent_audit/REPORT.md",
     "independent_ACK_SHA256": "600df66bebbaabf54b6e6de4f6b897627dfafbffaf85e577f055c0ea6013112f",
-    "independent_PINS_SHA256": "31f3665f8cf53d0681ee851612205231518a413328da51d1780b8147acb900a4"
+    "independent_PINS_SHA256": "31f3665f8cf53d0681ee851612205231518a413328da51d1780b8147acb900a4",
+    "execution_state": "MAC_HOST_ROUTE_CURRENT_LEGACY_ONLY_PASS_THEN_STOP",
+    "metadata_lookups": 1,
+    "identity_requests": 1,
+    "inspect_invocations": 1,
+    "capture_invocations": 1,
+    "reports": 3,
+    "native_activation": 0,
+    "manual_reconnect_requests": 0
   },
-  "latest_sourcefree_hostinterface_rebind_validation": "hostinterface_rebind_publication_validation_20261022/result.json"
+  "latest_sourcefree_hostinterface_rebind_validation": "hostinterface_rebind_publication_validation_20261022/result.json",
+  "actual_hostinterface_rebind_result": "hostinterface_rebind_results_20261022/result.json",
+  "latest_sourcefree_rebind_success_validation": "rebind_success_publication_validation_20261022/result.json",
+  "hostinterface_rebind_success_audit": {
+    "file": "hostinterface_rebind_results_20261022/independent_audit/REPORT.md",
+    "REPORT_SHA256": "c017397869514943fae447b1148de757b91a86a799861736d9eb4a256043ae94",
+    "PINS_SHA256": "597b2e84e382a000659b1c168ab9a92b9f3be8f6471c0d6473233f4bf4cc79e8",
+    "result_SHA256": "49c47741ee03af88837488334f31e892e6e6c3ede862f7a7d94666f39dc2fc53",
+    "reviewer_device_actions": 0,
+    "raw_identity72_separately_retained": false,
+    "scope": "CURRENT_LEGACY_MAC_HOST_ACCESS_ONLY_NOT_NATIVE_HEP"
+  }
 }

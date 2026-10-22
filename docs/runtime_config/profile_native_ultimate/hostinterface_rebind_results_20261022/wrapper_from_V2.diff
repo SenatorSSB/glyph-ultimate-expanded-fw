@@ -1,0 +1,35 @@
+--- immutable_V2_wrapper
++++ approved_rebind_wrapper
+@@ -1,19 +1,19 @@
+-"""Exact owner-approved V2 actions, individually invoked, never retried or chained."""
++"""Exact owner-approved original-port rebind actions, individually invoked, never retried or chained."""
+ from pathlib import Path
+ import datetime,hashlib,json,os,re,secrets,subprocess,sys,time
+ assert os.getuid()==os.geteuid()==502
+ os.umask(0o077);sys.dont_write_bytecode=True
+-O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2_20261022';S=D/'session_state.json';F=Path('/private/tmp/glyph-profile-native-20261020');R=Path('/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate');P=R/'mac_hostinterface_observer_20261022/reviewed_owner_packet/QUALIFICATION_PACKET.json'
++O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1_20261022';S=D/'session_state.json';F=Path('/private/tmp/glyph-profile-native-20261020');R=Path('/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate');P=R/'hostinterface_rebind_approval_20261022/REBIND_PACKET.json'
+ def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ def save(p,j,mode='x'):
+  with p.open(mode) as f:json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+ def rawsave(p,b):
+  with p.open('xb') as f:f.write(b);f.flush();os.fsync(f.fileno())
+-assert sha(P)=='dc2b47fd68bef882614ac306e4dffcd4478dc5a8fe7da30735badb7d97ef7827';packet=json.loads(P.read_text());H=O/packet['host_artifact']['binary_owner_checkout_relative_path'];C=H.parent;tool=F/'tools/glyph_runtime_identity_tool.py'
++assert sha(P)=='4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129';packet=json.loads(P.read_text());H=O/packet['host_artifact']['binary_owner_checkout_relative_path'];C=H.parent;tool=F/'tools/glyph_runtime_identity_tool.py'
+ assert sha(H)==packet['host_artifact']['binary_SHA256'] and sha(C/'mac_hostinterface_observer.mm')==packet['host_artifact']['source_SHA256'] and sha(C/'custody.json')==packet['host_artifact']['owner_custody_SHA256']
+ assert sha(tool)==packet['runtime_identity_tool_SHA256']
+ assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=F,text=True).strip()==packet['candidate'] and not subprocess.check_output(['git','status','--porcelain'],cwd=F,text=True)
+-state=json.loads(S.read_text());assert not state['stop'] and state['owner_approval_verified'] and state['owner_ordinary_reconnect_confirmed']==1
++state=json.loads(S.read_text());assert not state['stop'] and state['owner_approval_verified'] and state['owner_current_normal_display_confirmed'] is True and state['manual_reconnect_requests']==0
+ action=sys.argv[1];assert len(sys.argv)==2 and action in ('metadata','identity','inspect','capture')
+ def reserve(counter,cmd):
+  assert state[counter]==0;state[counter]=1
+@@ -40,7 +40,7 @@
+  return rows
+ try:
+  if action=='metadata':
+-  assert state['stage']=='OWNER_RECONNECT_CONFIRMED_READY_METADATA';old=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json';previous=json.loads(old.read_text());assert previous['match_count']==1;unit=previous['matches'][0];assert unit['serial_number'] and unit['location']=='0-1'
++  assert state['stage']=='OWNER_CURRENT_NORMAL_DISPLAY_CONFIRMED_READY_METADATA';old=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json';previous=json.loads(old.read_text());assert previous['match_count']==1;unit=previous['matches'][0];assert unit['serial_number'] and unit['location']=='0-1'
+   reserve('CDC_metadata_lookups',[sys.executable,str(Path(__file__)),'metadata'])
+   from serial.tools import list_ports
+   matches=[]

@@ -23,14 +23,15 @@ A proven host-only empty-stderr assertion was corrected after independent offlin
 wire/source review, preserving the valid STATUS/error/snapshot and unused child
 finding, without requery or new device authority. All227 session files are pinned
 privately. This is API preservation, not raw filesystem export or native acceptance.
-The [approved V2 attempt](../runtime_config/profile_native_ultimate/hostinterface_qualification_results_20261022/README.md)
-stopped after one metadata lookup: original private serial matched, but saved
-location1-1 differed from required0-1. Identity/inspect/capture/port opens are0.
-The owner reports a different port and possible return; present connection
-remains UNVERIFIED. The [no-reconnect rebind packet](../runtime_config/profile_native_ultimate/hostinterface_rebind_approval_20261022/REBIND_PACKET.md)
-requires separate explicit approval and current normal-display confirmation
-before one fresh exact-location lookup and only then unchanged bounded access.
-No further reconnect, reader/source/build change or native mutation is proposed.
+The [approved no-reconnect continuation](../runtime_config/profile_native_ultimate/hostinterface_rebind_results_20261022/README.md)
+now passes Mac host-route qualification: same private unit/location0-1, unchanged
+legacy4 runtime identity, fresh vendor-interface inspect and three full20-byte/
+21-field reports, abort0/settled cleanup/rc0. Device access ended STOP; no native
+profile, Config/store or target-metric operation occurred. All29 private files
+are sealed. Previous location/raw/metadata stops remain exact. These preflight
+reports qualify only current legacy access; native acceptance requires its own
+strict context/acquisition tools and exact owner-approved mutation/test packet.
+USB-Switch wire and hidden GC console fields remain unqualified gaps.
 F/source/build/resource/limits/identity/oracles remain unchanged and source unmerged.
 GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12,
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
@@ -8835,8 +8836,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact F/UF2 installed once; original legacy4 runtime identity matches and Config252/all22 API preservation PASS remains sealed. Later approved V2 metadata lookup1 found same private serial but location1-1 vs required0-1; STOP before identity/inspect/capture/port open, no retry. Owner reports possible return to original port; present connection UNVERIFIED.",
-        "Prior raw/metadata stops, host-journal correction and new reader pre-use deadline defect/negative/initial PASS/repair ACK remain exact. Unchanged108e64/sourcef0e246 reader never live-invoked. New no-reconnect GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1 approval and normal-display confirmation required for fresh original0-1 unit lookup, only then unchanged bounded identity/inspect/capture. Separate native mutation/physical approval remains required.",
+        "Exact F/UF2 installed once; original Config252/all22 API preservation remains sealed PASS. Approved no-reconnect continuation now PASS: same private unit/location0-1, unchanged legacy4 runtime identity, fresh vendor inspect, three full20-byte/21-field reports/abort0/settled cleanup/rc0. Stage ended STOP,29 private files sealed; no Config/store/native/metric action. Prior location/raw/metadata stops remain exact.",
+        "Mac preflight access is qualified on original legacy profile only. Native-only strict capture/context/acquisition and exact Config/two-owned-ID/physical packet remain offline preparation and require new exact owner approval. Old verifier must refuse preflight transfer; queued prior-pose report needs explicit bounded contract, no silent discard. USB-Switch wire access and GC console hidden simultaneousL/R/Z/numericanalog remain unqualified; no waiver.",
         "All18/H1-H12/complete required backend fields/target timing and runtime stack observations/exact human HEP/tested-source integration/strict DONE remain. F/source/build/resource/limits/custody/protocol unchanged; no native profile mutation or activation."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",

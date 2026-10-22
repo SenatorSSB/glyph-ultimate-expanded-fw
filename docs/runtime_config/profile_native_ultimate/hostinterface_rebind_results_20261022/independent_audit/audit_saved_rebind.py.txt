@@ -1,0 +1,125 @@
+"""Pure saved-evidence audit. No native binary/module, serial, registry or SDK calls."""
+from pathlib import Path
+import json,hashlib,difflib
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+S=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1_20261022'
+V=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2_20261022'
+OLD=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json'
+D=Path(__file__).resolve().parent
+H=lambda f:hashlib.sha256(Path(f).read_bytes()).hexdigest()
+HB=lambda b:hashlib.sha256(b).hexdigest()
+J=lambda f:json.loads(Path(f).read_text())
+manifest=S/'rebind_success_custody_manifest.json'
+assert H(manifest)=='42211067fd42502a9472f04966d1cf0f439b14047dff8cd8be765a17d55de029'
+m=J(manifest);assert len(m['files'])==29
+assert {p.name for p in S.iterdir() if p.is_file()}==set(m['files'])|{manifest.name}
+for n,e in m['files'].items():assert Path(n).name==n and (S/n).stat().st_size==e['bytes'] and H(S/n)==e['sha256'],n
+packet=J(S/'REBIND_PACKET.json');assert H(S/'REBIND_PACKET.json')=='4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129' and H(S/'REBIND_PACKET.md')=='8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d'
+a=J(S/'owner_approval.json');assert a['packet_MD_SHA256']==H(S/'REBIND_PACKET.md') and a['packet_JSON_SHA256']==H(S/'REBIND_PACKET.json') and a['published_commit']=='62259d113d7d3957f9d6ea8d8b40e04b993aad9b'
+assert a['no_further_reconnect_requested'] and a['answer'].startswith('Approved.')
+assert J(S/'owner_current_display_confirmation.json')['normal_display_confirmed'] is True
+state=J(S/'session_state.json');assert state['stop'] is True and state['stage']=='NEW_HOST_ROUTE_THREE_REPORT_QUALIFICATION_PASS_THEN_STOP'
+assert state['owner_approval_verified'] and state['owner_current_normal_display_confirmed']
+for k in ['CDC_metadata_lookups','runtime_identity_requests','inspect_invocations','capture_invocations']:assert state[k]==1,k
+for k in ['manual_reconnect_requests','firmware_copies','Config_or_ProfileStore_requests','Config_or_ProfileStore_mutations','native_activation','target_metrics','Switch_WUP_actions','old_reader_retries']:assert state[k]==0,k
+assert state['same_unit_CDC_verified'] and state['current_legacy_identity_verified'] and state['inspect_verified'] and state['capture_verified']
+wrapper=S/'executed_session_wrapper.py';assert H(wrapper)=='2dc4d9cd32c1716491cf916e0b28b804cf56ba0f7354d36340e683f8568918b3'
+old_wrapper=V/'executed_session_wrapper.py';assert H(old_wrapper)=='c929b3413f4056c5d73b90c0abc0f9fe08e12b12fbe8f7e848d312c4b45af73d'
+assert ''.join(difflib.unified_diff(old_wrapper.read_text().splitlines(True),wrapper.read_text().splitlines(True),fromfile='immutable_V2_wrapper',tofile='approved_rebind_wrapper'))==(S/'wrapper_from_V2.diff').read_text()
+C=O/packet['host_artifact']['binary_owner_checkout_relative_path'];A=C.parent
+for path,key in [(C,'binary_SHA256'),(A/'mac_hostinterface_observer.mm','source_SHA256'),(A/'observer_core.hpp','core_SHA256'),(A/'observer_parser.hpp','parser_SHA256'),(A/'custody.json','owner_custody_SHA256')]:assert H(path)==packet['host_artifact'][key]
+identity_tool=Path('/private/tmp/glyph-profile-native-20261020/tools/glyph_runtime_identity_tool.py');assert H(identity_tool)==packet['runtime_identity_tool_SHA256']
+now=J(S/'xinput_serial_metadata.json');original=J(OLD);assert now['match_count']==original['match_count']==1 and now['private_original_reference_SHA256']==H(OLD)
+n=now['matches'][0];o=original['matches'][0];assert n['serial_number'] and n['serial_number']==o['serial_number'] and n['location']==o['location']=='0-1' and (n['vid'],n['pid'])==(1848,18214) and n['device']==state['port']
+identity=J(S/'identity_stdout.txt');assert all(identity[k]==v for k,v in packet['runtime_identity_expected'].items())
+assert identity['session']==state['boot_session'] and identity['observation']=='current_session_only'
+for action in ['metadata','identity','inspect','capture']:
+ command=J(S/(action+'_command.json'));assert command['UID']==command['effective_UID']==502 and command['retry'] is False and command['wrapper_SHA256']==H(wrapper)
+ assert command['packet_SHA256']==H(S/'REBIND_PACKET.json') and command['host_binary_SHA256']==H(C) and command['host_source_SHA256']==H(A/'mac_hostinterface_observer.mm') and command['runtime_identity_tool_SHA256']==H(identity_tool)
+ if action=='metadata':continue
+ result=J(S/(action+'_result.json'));assert result['returncode']==0 and result['timeout'] is False and result['launch_error'] is None and result['retry'] is False
+ assert result['stdout_SHA256']==H(S/(action+'_stdout.txt')) and result['stderr_SHA256']==H(S/(action+'_stderr.txt'))
+ if action=='identity':
+  argv=command['argv'];assert argv[argv.index('--port')+1]==state['port'] and argv[argv.index('--context')+1]=='xinput' and argv[argv.index('--session')+1]==state['boot_session']
+  token=int(argv[argv.index('--token')+1],0);assert 0<token<2**64 and int(identity['token'])==token and argv[argv.index('--timeout')+1]=='2'
+  assert (S/'identity_stderr.txt').read_bytes()==b''
+ else:
+  assert (S/(action+'_stdout.txt')).read_bytes()==b'' and (S/(action+'_stderr.txt')).read_bytes()==b'COMPLETE: bounded host preflight; hardware acceptance NOT_CLAIMED\n'
+anchor=4295245698;target=4295245704;assert state['fresh_anchor_entry_id']==anchor and state['fresh_interface_entry_id']==target
+fields=['vendor','product','location','class','subclass','protocol','number','alt','configuration']
+parsed={}
+for action in ['inspect','capture']:
+ data=(S/(action+'_journal.jsonl')).read_bytes();assert data.endswith(b'\n');rows=[json.loads(x) for x in data.splitlines()];parsed[action]=rows
+ first=rows[0];assert first['kind']=='session' and first['operation']==action and first['session']==state['boot_session'] and first['purpose']=='preflight' and first['row']=='PREFLIGHT' and first['route']=='xinput' and first['source_claim']==packet['candidate'] and first['source_claim_is_device_attestation'] is False and first['max_seconds']==5 and first['max_reports']==3
+ assert (first['vendor'],first['product'],first['location'])==(1848,18214,1048576)
+ qs=[r for r in rows if r['kind']=='anchor_query'];assert len(qs)==1 and qs[0]['status']==0 and qs[0]['iterator_nonnull']
+ nodes=[r for r in rows if r['kind']=='anchored_node'];assert len(nodes)==10 and len({r['entry_id'] for r in nodes})==10
+ node_map={r['entry_id']:r for r in nodes};assert anchor not in node_map and target in node_map
+ for r in nodes:
+  assert 1<=r['depth']<=3 and r['entry_id']>0
+  if r['depth']==1:assert r['parent_id']==anchor
+  else:assert r['parent_id'] in node_map and node_map[r['parent_id']]['depth']==r['depth']-1
+ assert [r['entry_id'] for r in nodes if r['is_target']]==[target]
+ props=[r for r in rows if r['kind']=='numeric_property'];assert len(props)==99
+ group={entry:[r for r in props if r['entry_id']==entry] for entry in {anchor,*node_map}}
+ assert len(group)==11 and all(len(g)==9 and [r['field'] for r in g]==fields for g in group.values())
+ for r in props:
+  assert r['state'] in ['valid','missing']
+  if r['state']=='missing':assert r['value'] is None
+  else:assert type(r['value']) is int and 0<=r['value']<=2**32-1
+  if r['entry_id']!=anchor and r['field']=='location' and r['state']=='valid':assert r['value']==1048576
+ for field,value in [('vendor',1848),('product',18214),('location',1048576)]:assert any(r['field']==field and r['state']=='valid' and r['value']==value for r in group[anchor])
+ for field,value in zip(fields,[1848,18214,1048576,255,93,1,0,0,1]):
+  r=next(r for r in group[target] if r['field']==field)
+  assert (r['state']=='missing' and field in fields[:3]) or (r['state']=='valid' and r['value']==value)
+ if action=='inspect':
+  assert set(r['kind'] for r in rows)<={'session','anchor_query','numeric_property','anchored_node','inspect_end'}
+  end=rows[-1];assert sum(r['kind']=='inspect_end' for r in rows)==1 and end['kind']=='inspect_end' and end['outcome']=='ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY' and end['anchor_entry_id']==anchor and end['interface_entry_id']==target and end['reports']==end['interface_init_calls']==0 and end['hardware_acceptance']=='NOT_CLAIMED'
+ else:
+  assert first['anchor_entry_id']==anchor and first['interface_entry_id']==target
+  argv=J(S/'capture_command.json')['argv'];assert int(argv[argv.index('--anchor-entry-id')+1])==anchor and int(argv[argv.index('--interface-entry-id')+1])==target
+# Fresh capture repeats the same complete source-bounded ancestry and properties.
+for kind in ['anchored_node','numeric_property']:assert [r for r in parsed['inspect'] if r['kind']==kind]==[r for r in parsed['capture'] if r['kind']==kind]
+rows=parsed['capture'];assert set(r['kind'] for r in rows)<={'session','anchor_query','numeric_property','anchored_node','interface_init','associated_descriptors','completion','raw','decoded','end'}
+init=[r for r in rows if r['kind']=='interface_init'];assert len(init)==1 and init[0]['options']==0 and init[0]['success'] is True and init[0]['error_code']==0
+# Pure associated-descriptor replay against the frozen core's exact bounds.
+desc=[r for r in rows if r['kind']=='associated_descriptors'];assert len(desc)==1;d=desc[0];cfg=bytes.fromhex(d['configuration_hex']);iface=bytes.fromhex(d['interface_hex'])
+assert len(iface)==9 and iface[:2]==bytes([9,4]) and d['interface_number']==0
+assert 9<=len(cfg)<=4096 and cfg[:2]==bytes([9,2]) and int.from_bytes(cfg[2:4],'little')==len(cfg) and cfg[4]>=1 and cfg[5]==1
+p=9;pairs=set();numbers=set();selected=0;active=False;ins=[];outs=[]
+while p<len(cfg):
+ assert len(cfg)-p>=2;n=cfg[p];typ=cfg[p+1];assert 2<=n<=len(cfg)-p
+ if typ==4:
+  assert n==9;number=cfg[p+2];alternate=cfg[p+3];assert (number,alternate) not in pairs;pairs.add((number,alternate));numbers.add(number);active=number==0 and alternate==0
+  if active:assert cfg[p:p+9]==iface and cfg[p+4:p+8]==bytes([2,255,93,1]);selected+=1
+ elif typ==5:
+  assert n==7
+  if active:
+   ep=cfg[p:p+7];address=ep[2];assert address&0x70==0 and address&15 and ep[3]==3 and int.from_bytes(ep[4:6],'little')==32
+   if address&0x80:assert ep[6]==1;ins.append(ep)
+   else:assert ep[6]==8;outs.append(ep)
+ p+=n
+assert p==len(cfg) and len(numbers)==cfg[4] and selected==1 and len(ins)==len(outs)==1 and d['in_address']==ins[0][2] and d['out_address_not_opened']==outs[0][2]
+# Independently implement the frozen21-field XInput decoder without executing it.
+def decode(raw):
+ assert len(raw)==20 and raw[:2]==b'\0\0' and not raw[3]&8 and raw[14:]==bytes(6)
+ f={name:(raw[2]>>i)&1 for i,name in enumerate(['dpad_up','dpad_down','dpad_left','dpad_right','start','back','ls','rs'])}
+ for i,name in enumerate(['lb','rb','home',None,'a','b','x','y']):
+  if name is not None:f[name]=(raw[3]>>i)&1
+ f.update(lt=raw[4],rt=raw[5])
+ for offset,name in zip([6,8,10,12],['lx','ly','rx','ry']):f[name]=int.from_bytes(raw[offset:offset+2],'little',signed=True)
+ assert len(f)==21;return f
+completions=[r for r in rows if r['kind']=='completion'];raws=[r for r in rows if r['kind']=='raw'];decoded=[r for r in rows if r['kind']=='decoded'];assert len(completions)==len(raws)==len(decoded)==3
+private_receipts=[];last=0
+for seq,(c,r,f) in enumerate(zip(completions,raws,decoded),1):
+ assert c['status']==0 and c['bytes_transferred']==20 and r['report_id']==0 and r['length']==20 and r['sequence']==f['sequence']==seq and c['monotonic_ns']==r['monotonic_ns']==f['monotonic_ns']>last;last=c['monotonic_ns']
+ b=bytes.fromhex(r['hex']);out=decode(b);assert out==f['fields'] and all(type(x) is int for x in f['fields'].values())
+ private_receipts.append({'sequence':seq,'completion_status':0,'actual_bytes':20,'raw_SHA256':HB(b),'full21field_independent_decode_equal':True})
+end=rows[-1];assert sum(r['kind']=='end' for r in rows)==1 and end['kind']=='end' and end['reports']==end['submissions']==3 and end['abort_calls']==0 and end['settled_cleanup'] is True and end['outcome']=='THREE_PREFLIGHT_REPORTS' and end['hardware_acceptance']=='NOT_CLAIMED'
+assert J(S/'capture_result.json')['host_elapsed_seconds_not_target_timing']<5
+# All earlier stopped evidence remains immutable, no old action is retried.
+assert H(V/'qualification_stage_custody_manifest.json')=='2bf76af2e46352fed5ed6e44fc0df131d7abc43fec81e449ad41148b27223584'
+for n,e in J(V/'qualification_stage_custody_manifest.json')['files'].items():assert (V/n).stat().st_size==e['bytes'] and H(V/n)==e['sha256']
+facts={'kind':'FINITE_SAVED_REBIND_CURRENT_LEGACY_ACCESS_QUALIFICATION_AUDIT','result':'PASS_CURRENT_LEGACY_MAC_ROUTE_QUALIFICATION_ONLY','manifest_SHA256':H(manifest),'session_files_verified':29,'approved_packet_MD_SHA256':H(S/'REBIND_PACKET.md'),'approved_packet_JSON_SHA256':H(S/'REBIND_PACKET.json'),'private_unit_serial_original_equal':True,'exact_formatted_location_original_equal':True,'formatted_location':'0-1','raw_registry_location':1048576,'current_identity_expected_legacy_fields_match':True,'identity_token_and_current_session_match':True,'identity_raw72byte_frame_separately_retained':False,'fresh_anchor_entry_id':anchor,'fresh_interface_entry_id':target,'inspect_and_capture_same10node_ancestry_and_numeric_properties':True,'associated_descriptor_source_bounds_and_IN_OUT_identity_match':True,'associated_configuration_bytes':len(cfg),'associated_configuration_SHA256':HB(cfg),'associated_interface_SHA256':HB(iface),'ordinary_optionsNone_init_success_count':1,'reports':private_receipts,'successful_full21field_reports':3,'logical_submissions':3,'abort_calls':0,'settled_cleanup':True,'capture_rc':0,'capture_host_elapsed_seconds_not_target_timing':J(S/'capture_result.json')['host_elapsed_seconds_not_target_timing'],'operation_counters':{k:state[k] for k in ['manual_reconnect_requests','CDC_metadata_lookups','runtime_identity_requests','inspect_invocations','capture_invocations','firmware_copies','Config_or_ProfileStore_requests','Config_or_ProfileStore_mutations','native_activation','target_metrics','Switch_WUP_actions','old_reader_retries']},'prior_V2_all12_stopped_files_unchanged':True,'final_stop':True,'final_stage':state['stage'],'native_behavior_output_HEP_metrics_or_integration':'NOT_CLAIMED','reviewer_live_actions':0,'native_binary_entrypoints_executed_by_reviewer':0,'private_raw_serial_and_decoded_values_published':False}
+(D/'audit_facts.json').write_text(json.dumps(facts,indent=2)+'\n')
+print(json.dumps({'result':facts['result'],'session_files':29,'metadata':1,'identity':1,'inspect':1,'capture':1,'actual20byte_reports':3,'full21fields_decode_matches':3,'abort':0,'settled_cleanup':True,'final_stop':True,'reviewer_live_actions':0,'facts_SHA256':H(D/'audit_facts.json')},indent=2))

@@ -1,0 +1,62 @@
+{
+  "kind": "PUBLIC_SAFE_EXACT_MAC_REBIND_SUCCESS_AND_FINITE_AUDIT",
+  "files": {
+    "README.md": {
+      "bytes": 2770,
+      "sha256": "3eef957e69d658f867e5ab494efd37ec637474fc0e214d9be92a1cb00f90aee4"
+    },
+    "executed_session_wrapper.py.txt": {
+      "bytes": 10279,
+      "sha256": "2dc4d9cd32c1716491cf916e0b28b804cf56ba0f7354d36340e683f8568918b3"
+    },
+    "independent_audit/PINS.json": {
+      "bytes": 13491,
+      "sha256": "597b2e84e382a000659b1c168ab9a92b9f3be8f6471c0d6473233f4bf4cc79e8"
+    },
+    "independent_audit/REPORT.md": {
+      "bytes": 8329,
+      "sha256": "c017397869514943fae447b1148de757b91a86a799861736d9eb4a256043ae94"
+    },
+    "independent_audit/audit_execution.json": {
+      "bytes": 277,
+      "sha256": "4830682e3fa90568854e4d2b272ff7912c474f796664bd033a01af126aa32409"
+    },
+    "independent_audit/audit_facts.json": {
+      "bytes": 3008,
+      "sha256": "996e2a3e8bc7f539e487a3474a648bfc0c6f544ef6f86929116a9301b071a75f"
+    },
+    "independent_audit/audit_saved_rebind.py.txt": {
+      "bytes": 14743,
+      "sha256": "1ab1232bc3a12ec7dd4d05fddc6c890c016ad37ffb5b1c6e518c3b40e7a7f431"
+    },
+    "independent_audit/report_summary_shape_note.json": {
+      "bytes": 599,
+      "sha256": "013204bb167f5e11c790ba64be08fdcd7fd0dda981e33cca6812784fc236b565"
+    },
+    "independent_audit/result.json": {
+      "bytes": 1663,
+      "sha256": "49c47741ee03af88837488334f31e892e6e6c3ede862f7a7d94666f39dc2fc53"
+    },
+    "owner_approval.json": {
+      "bytes": 724,
+      "sha256": "d0b19260d91cf10e344d33ffc51c381b2e68d7baf45ca7af1834b4463284dd10"
+    },
+    "owner_current_display_confirmation.json": {
+      "bytes": 278,
+      "sha256": "40d1e1855680f601761c63f6c95e45fd97ae940d0a35a1aff5e67573cf0c5095"
+    },
+    "private_hash_references.json": {
+      "bytes": 4488,
+      "sha256": "dae7209f6aa04ad8e5fd610ff2119c1b7adcc2fc3b45ee58273a9dff31ba10a6"
+    },
+    "result.json": {
+      "bytes": 2257,
+      "sha256": "dfab0da3cac3e0cd18228131a230084045d4e6684e23d17b823c80acbac26109"
+    },
+    "wrapper_from_V2.diff": {
+      "bytes": 3942,
+      "sha256": "e0729b67fd76e824048c432d681231a93fbeaf16c614fde2bc3a30cf3bdebefc"
+    }
+  },
+  "raw_private_unit_reports_identity_tokens_or_profile_payloads_published": false
+}

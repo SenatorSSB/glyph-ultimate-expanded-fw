@@ -1,0 +1,70 @@
+from pathlib import Path
+import json,hashlib,re,subprocess
+W=Path('/private/tmp/glyph-native-curation-20261020');R=W/'docs/runtime_config/profile_native_ultimate';A=R/'hostinterface_rebind_results_20261022';V=R/'rebind_success_publication_validation_20261022';O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');F=Path('/private/tmp/glyph-profile-native-20261020');BASE='62259d113d7d3957f9d6ea8d8b40e04b993aad9b'
+def sh(*a,cwd=W):return subprocess.check_output(a,cwd=cwd,text=True)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def check(p,e):
+ p=Path(p);assert p.is_file() and not p.is_symlink() and p.stat().st_size==e['bytes'] and sha(p)==e['sha256'],str(p)
+def queue(s):
+ a=s.index('```json',s.index('<!-- queue-state:start -->'))+7;b=s.index('```',a);return json.loads(s[a:b])
+oldq=queue(sh('git','show',BASE+':docs/project/ACTIVE_AGENT_QUEUE.md'));newq=queue((W/'docs/project/ACTIVE_AGENT_QUEUE.md').read_text());q=json.loads(json.dumps(oldq));oldi=next(x for x in q['items'] if x['id']=='GP-NATIVE-001');i=next(x for x in newq['items'] if x['id']=='GP-NATIVE-001');oldi['hardware_evidence_gaps']=i['hardware_evidence_gaps'];assert q==newq
+assert i['status']=='HARDWARE_TEST_REQUIRED' and i['hardware_result'] is None and i['hardware_evidence_record'] is None and i['hardware_evidence_dependency_satisfied'] is False
+old=json.loads(sh('git','show',BASE+':docs/runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.json'));new=json.loads((R/'exact_candidate_334f_status_20261021.json').read_text());allowed={'next_hostinterface_rebind','device_approval','actual_hostinterface_rebind_result','remaining','latest_sourcefree_rebind_success_validation','hostinterface_rebind_success_audit'};assert {k for k in set(old)|set(new) if old.get(k)!=new.get(k)}==allowed
+o=json.loads(json.dumps(old['device_approval']));o['current']=new['device_approval']['current'];assert o==new['device_approval']
+o=json.loads(json.dumps(old['next_hostinterface_rebind']));n=new['next_hostinterface_rebind'];keys={'owner_approval','executed','execution_state','metadata_lookups','identity_requests','inspect_invocations','capture_invocations','reports','native_activation','manual_reconnect_requests'};assert {k for k in set(o)|set(n) if o.get(k)!=n.get(k)}==keys
+assert n['executed'] and n['owner_approval']=='DIRECT_OWNER_APPROVED_PLUS_NORMAL_SCREEN_CONFIRMED' and n['metadata_lookups']==n['identity_requests']==n['inspect_invocations']==n['capture_invocations']==1 and n['reports']==3 and n['native_activation']==n['manual_reconnect_requests']==0
+assert new['remaining'][1:]==old['remaining'][1:]
+D=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1_20261022';v2=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_QUALIFY_V2_20261022';prior=O/'local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022';install=O/'local_backups/hardware-installation/GP_NATIVE_001_INSTALL_QUALIFY_V1_20261022';metadata=O/'local_backups/hardware-installation/GP_NATIVE_001_METADATA_BACKUP_EXTENSION_V1_20261022';original=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021'
+for folder,rel,h,count in [(D,'rebind_success_custody_manifest.json','42211067fd42502a9472f04966d1cf0f439b14047dff8cd8be765a17d55de029',29),(v2,'qualification_stage_custody_manifest.json','2bf76af2e46352fed5ed6e44fc0df131d7abc43fec81e449ad41148b27223584',12),(prior,'postinstall_preservation_custody_manifest.json','e47d58f59688955cd39788317ab30f33c41eeed04fd5794ba62c42c51cb0bb40',227),(install,'installation_stage_custody_manifest.json','228e41413f5a49137db80769a21bf1ffca86c0d2d9996706612e4ce14c8e70f2',34),(metadata,'metadata_stage_custody_manifest.json','221ab6e17094d6197dfe811f24d504c5d457ff05b904affcd8c02edc9b5500e7',7),(original,'configurator_entry_20261022/private_backup_custody_manifest.json','f528431ccc4e23efdfe5fe19056a7cd2056bdfb458765c870a4db18a52d6fb3d',251)]:
+ p=folder/rel;assert sha(p)==h;m=json.loads(p.read_text());assert len(m['files'])==count
+ for name,e in m['files'].items():check(folder/name,e)
+s=json.loads((D/'session_state.json').read_text());assert s['stop'] and s['stage']=='NEW_HOST_ROUTE_THREE_REPORT_QUALIFICATION_PASS_THEN_STOP' and s['manual_reconnect_requests']==0 and s['owner_current_normal_display_confirmed'] is True
+for k in ['CDC_metadata_lookups','runtime_identity_requests','inspect_invocations','capture_invocations']:assert s[k]==1
+for k in ['firmware_copies','Config_or_ProfileStore_requests','Config_or_ProfileStore_mutations','native_activation','target_metrics','Switch_WUP_actions','old_reader_retries']:assert s[k]==0
+pkt=json.loads((D/'REBIND_PACKET.json').read_text());assert sha(D/'REBIND_PACKET.json')=='4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129' and sha(D/'REBIND_PACKET.md')=='8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d'
+meta=json.loads((D/'xinput_serial_metadata.json').read_text());orig=json.loads((original/'configurator_entry_20261022/configurator_port.json').read_text())['matches'][0];assert meta['match_count']==1;cur=meta['matches'][0];assert cur['serial_number']==orig['serial_number'] and cur['location']==orig['location']=='0-1' and (cur['vid'],cur['pid'])==(1848,18214)
+ident=json.loads((D/'identity_stdout.txt').read_text());ic=json.loads((D/'identity_command.json').read_text());token=int(ic['argv'][ic['argv'].index('--token')+1],0);assert ident['token']==token and ident['session']==s['boot_session'] and ident['observation']=='current_session_only'
+for k,val in pkt['runtime_identity_expected'].items():assert ident[k]==val
+expected_stderr=b'COMPLETE: bounded host preflight; hardware acceptance NOT_CLAIMED\n'
+for op in ['inspect','capture']:
+ r=json.loads((D/(op+'_result.json')).read_text());assert r['returncode']==0 and r['timeout'] is False and r['launch_error'] is None;assert not (D/(op+'_stdout.txt')).read_bytes() and (D/(op+'_stderr.txt')).read_bytes()==expected_stderr
+rows=[json.loads(x) for x in (D/'capture_journal.jsonl').read_text().splitlines()];end=rows[-1];assert end['outcome']=='THREE_PREFLIGHT_REPORTS' and end['reports']==end['submissions']==3 and end['abort_calls']==0 and end['settled_cleanup'] is True
+raws=[x for x in rows if x['kind']=='raw'];decs=[x for x in rows if x['kind']=='decoded'];comps=[x for x in rows if x['kind']=='completion'];assert len(raws)==len(decs)==len(comps)==3
+for num,(raw,dec,comp) in enumerate(zip(raws,decs,comps),1):assert raw['sequence']==dec['sequence']==num and raw['monotonic_ns']==dec['monotonic_ns']==comp['monotonic_ns'] and raw['length']==comp['bytes_transferred']==20 and len(bytes.fromhex(raw['hex']))==20 and comp['status']==0 and len(dec['fields'])==21
+assert (D/'publicsafe_result.json').read_bytes()==(A/'result.json').read_bytes()
+assert sha(A/'executed_session_wrapper.py.txt')==s['source_wrapper_SHA256']==sha('/private/tmp/glyph-native-hostinterface-rebind-session-20261022.py')
+preuse=json.loads((D/'preuse_verification.json').read_text());old_wrapper=Path('/private/tmp/glyph-native-hostinterface-V2-session-20261022.py').read_text()
+for a,b in preuse['wrapper_scope_changes_only']:assert old_wrapper.count(a)==1;old_wrapper=old_wrapper.replace(a,b)
+assert old_wrapper==(D/'executed_session_wrapper.py').read_text()
+C=(O/pkt['host_artifact']['binary_owner_checkout_relative_path']).parent;assert sha(C/'custody.json')==pkt['host_artifact']['owner_custody_SHA256']
+for name,e in json.loads((C/'custody.json').read_text())['files'].items():check(C/name,e)
+assert sh('git','rev-parse','HEAD',cwd=F).strip()==old['candidate']['git_sha'] and sh('git','rev-parse','HEAD^{tree}',cwd=F).strip()==old['candidate']['tree'] and not sh('git','status','--porcelain',cwd=F)
+fc=O/Path(old['artifacts']['preserved_firmware_artifact_locator']).parent
+for name,k in [('firmware.uf2','uf2'),('firmware.elf','elf'),('firmware.bin','bin')]:check(fc/name,old['artifacts'][k])
+for name,e in json.loads((A/'manifest.json').read_text())['files'].items():check(A/name,e)
+peer=Path('/private/tmp/glyph-native-hostinterface-rebind-success-audit-20261022');pins=json.loads((peer/'PINS.json').read_text());peer_count=0
+def walkpins(v):
+ global peer_count
+ if isinstance(v,dict):
+  for k,e in v.items():
+   if isinstance(e,dict) and 'sha256' in e and 'bytes' in e:check(Path(k) if Path(k).is_absolute() else peer/k,e);peer_count+=1
+   else:walkpins(e)
+ elif isinstance(v,list):
+  for e in v:walkpins(e)
+walkpins(pins);assert peer_count>20
+assert new['hostinterface_rebind_success_audit']['REPORT_SHA256']==sha(peer/'REPORT.md') and new['hostinterface_rebind_success_audit']['PINS_SHA256']==sha(peer/'PINS.json')
+tracked=set(sh('git','diff','--name-only',BASE).splitlines());untracked=set(sh('git','ls-files','--others','--exclude-standard').splitlines());changed=tracked|untracked
+currentdocs={'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md','docs/project/ACTIVE_AGENT_QUEUE.md'}|{'docs/runtime_config/profile_native_ultimate/'+name for name in ['README.md','chapter_ledger.md','exact_candidate_334f_status_20261021.json','exact_candidate_334f_status_20261021.md']};prefixes=['docs/runtime_config/profile_native_ultimate/'+x+'/' for x in ['hostinterface_rebind_results_20261022','rebind_success_publication_validation_20261022']]
+assert currentdocs<=tracked and all(x in currentdocs or any(x.startswith(pre) for pre in prefixes) for x in changed)
+links=0
+for rel in changed:
+ p=W/rel;assert p.is_file() and not p.is_symlink();b=p.read_bytes();assert b'\0' not in b
+ for private in [orig['serial_number'].encode(),str(token).encode(),hex(token).encode()]:assert private not in b,('Private serial/token leak',rel)
+ if rel.endswith('.md'):
+  for t in re.findall(r'\[[^\]]*\]\(([^)]+)\)',b.decode()):
+   if re.match(r'^[a-z]+:',t) or t.startswith('#'):continue
+   assert (p.parent/t.split('#')[0]).exists(),(rel,t);links+=1
+subprocess.run(['git','diff','--check'],cwd=W,check=True)
+assert 'glyph_agent_framework_docs: PASS' in (V/'framework.log').read_text() and 'status=PASS' in (V/'sequence.log').read_text() and 'glyph_docs_navigation: PASS' in (V/'navigation.log').read_text() and not (V/'diff.log').read_bytes()
+result={'state':'FOCUSED_SOURCEFREE_REBIND_SUCCESS_PUBLICATION_PASS','framework_sequence_navigation_diff':'PASS','scope':'DOCS_ONLY','only_queue_field_changed':'GP-NATIVE-001.hardware_evidence_gaps','other_orders_unchanged':len(newq['items'])-1,'protected_F_source_build_artifact_resource_protocol_oracle_HEP_fields_unchanged':True,'private_completed_session_files_rehashed':[29,12,227,34,7,251],'actual_result':'THREE_COMPLETE_CURRENT_LEGACY_MAC_PREFLIGHT_REPORTS_THEN_STOP','reports':3,'report_bytes':20,'decoded_fields':21,'abort_calls':0,'settled_cleanup':True,'native_Config_ProfileStore_metric_actions':0,'host_source_binary_unchanged':True,'wrapper_scope_only_substitutions':6,'private_host_custody_files_rehashed':7,'independent_audit_pin_entries_rehashed':peer_count,'privacy':'PASS_no_serial_tokens_raw_reports_original_payload_publication','markdown_links':links,'changed_paths':len(changed),'native_hardware_result':None,'target_timing_highwater':'NOT_MEASURED','next_work':'OFFLINE_NATIVE_ACCEPTANCE_ACQUISITION_AND_EXACT_OWNER_PACKET_PREPARATION_ONLY','full_surface':'NOT_RERUN; historical framework debt retained, no aggregate PASS'}
+(V/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

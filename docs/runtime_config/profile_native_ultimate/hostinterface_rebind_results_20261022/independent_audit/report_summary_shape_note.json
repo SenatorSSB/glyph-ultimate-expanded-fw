@@ -1,0 +1,23 @@
+{
+  "kind": "REPORT_GENERATOR_SHAPE_CORRECTION_ONLY",
+  "initial_assertion": "Assumed scalar20 and21 for aggregate per-report byte/field fields.",
+  "actual_shape": {
+    "reports": 3,
+    "actual_report_bytes": [
+      20,
+      20,
+      20
+    ],
+    "full_decoded_fields_per_report": [
+      21,
+      21,
+      21
+    ],
+    "abort_calls": 0,
+    "settled_cleanup": true,
+    "native_hardware_result": null
+  },
+  "retained_actual_auditor_result": "PASS; three independent complete20-byte/full21-field receipt checks already passed.",
+  "no_data_or_device_failure": true,
+  "live_actions": 0
+}

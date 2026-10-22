@@ -1,0 +1,76 @@
+"""Exact owner-approved original-port rebind actions, individually invoked, never retried or chained."""
+from pathlib import Path
+import datetime,hashlib,json,os,re,secrets,subprocess,sys,time
+assert os.getuid()==os.geteuid()==502
+os.umask(0o077);sys.dont_write_bytecode=True
+O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');D=O/'local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1_20261022';S=D/'session_state.json';F=Path('/private/tmp/glyph-profile-native-20261020');R=Path('/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate');P=R/'hostinterface_rebind_approval_20261022/REBIND_PACKET.json'
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,j,mode='x'):
+ with p.open(mode) as f:json.dump(j,f,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+def rawsave(p,b):
+ with p.open('xb') as f:f.write(b);f.flush();os.fsync(f.fileno())
+assert sha(P)=='4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129';packet=json.loads(P.read_text());H=O/packet['host_artifact']['binary_owner_checkout_relative_path'];C=H.parent;tool=F/'tools/glyph_runtime_identity_tool.py'
+assert sha(H)==packet['host_artifact']['binary_SHA256'] and sha(C/'mac_hostinterface_observer.mm')==packet['host_artifact']['source_SHA256'] and sha(C/'custody.json')==packet['host_artifact']['owner_custody_SHA256']
+assert sha(tool)==packet['runtime_identity_tool_SHA256']
+assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=F,text=True).strip()==packet['candidate'] and not subprocess.check_output(['git','status','--porcelain'],cwd=F,text=True)
+state=json.loads(S.read_text());assert not state['stop'] and state['owner_approval_verified'] and state['owner_current_normal_display_confirmed'] is True and state['manual_reconnect_requests']==0
+action=sys.argv[1];assert len(sys.argv)==2 and action in ('metadata','identity','inspect','capture')
+def reserve(counter,cmd):
+ assert state[counter]==0;state[counter]=1
+ save(D/(action+'_command.json'),{'argv':cmd,'reserved_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'UID':os.getuid(),'effective_UID':os.geteuid(),'wrapper_SHA256':sha(__file__),'host_binary_SHA256':sha(H),'host_source_SHA256':sha(C/'mac_hostinterface_observer.mm'),'runtime_identity_tool_SHA256':sha(tool),'packet_SHA256':sha(P),'external_native_timeout_seconds':10,'retry':False})
+ state['stage']='ATTEMPT_RESERVED_'+action.upper()+'_NO_RETRY';save(S,state,'w')
+def run(cmd,timeout):
+ assert not (D/(action+'_stdout.txt')).exists() and not (D/(action+'_stderr.txt')).exists()
+ started=time.monotonic();rc=None;timed=False;error=None
+ with (D/(action+'_stdout.txt')).open('xb') as out,(D/(action+'_stderr.txt')).open('xb') as err:
+  try:rc=subprocess.run(cmd,stdout=out,stderr=err,timeout=timeout).returncode
+  except subprocess.TimeoutExpired:timed=True
+  except BaseException as e:error=repr(e)
+  finally:out.flush();os.fsync(out.fileno());err.flush();os.fsync(err.fileno())
+ save(D/(action+'_result.json'),{'returncode':rc,'timeout':timed,'launch_error':error,'host_elapsed_seconds_not_target_timing':time.monotonic()-started,'stdout_SHA256':sha(D/(action+'_stdout.txt')),'stderr_SHA256':sha(D/(action+'_stderr.txt')),'retry':False})
+ assert rc==0 and not timed and error is None,'Process failure/timeout; STOP no retry'
+ return (D/(action+'_stdout.txt')).read_bytes(),(D/(action+'_stderr.txt')).read_bytes()
+def journal(path):
+ b=path.read_bytes();assert b and b.endswith(b'\n');rows=[json.loads(x) for x in b.splitlines()];assert all(isinstance(x,dict) and isinstance(x.get('kind'),str) for x in rows)
+ first=rows[0];assert first['kind']=='session' and first['session']==state['boot_session'] and first['operation']==action and first['purpose']=='preflight' and first['row']=='PREFLIGHT' and first['route']=='xinput' and first['source_claim']==packet['candidate'] and first['source_claim_is_device_attestation'] is False and first['max_seconds']==5 and first['max_reports']==3
+ assert (first['vendor'],first['product'],first['location'])==(1848,18214,1048576)
+ qs=[x for x in rows if x['kind']=='anchor_query'];assert len(qs)==1 and qs[0]['status']==0 and qs[0]['iterator_nonnull'] is True
+ nodes=[x for x in rows if x['kind']=='anchored_node'];assert 0<len(nodes)<=32 and len({x['entry_id'] for x in nodes})==len(nodes) and all(1<=x['depth']<=3 for x in nodes)
+ props=[x for x in rows if x['kind']=='numeric_property'];assert len(props)==9*(1+len(nodes)) and all(x['state'] in ('valid','missing') for x in props)
+ return rows
+try:
+ if action=='metadata':
+  assert state['stage']=='OWNER_CURRENT_NORMAL_DISPLAY_CONFIRMED_READY_METADATA';old=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json';previous=json.loads(old.read_text());assert previous['match_count']==1;unit=previous['matches'][0];assert unit['serial_number'] and unit['location']=='0-1'
+  reserve('CDC_metadata_lookups',[sys.executable,str(Path(__file__)),'metadata'])
+  from serial.tools import list_ports
+  matches=[]
+  for p in list_ports.comports():
+   if p.vid==0x0738 and p.pid==0x4726:matches.append({k:getattr(p,k) for k in ('device','vid','pid','serial_number','location','product','interface')})
+  save(D/'xinput_serial_metadata.json',{'kind':'ONE_STANDARD_METADATA_LOOKUP_NO_PORT_OPEN','match_count':len(matches),'matches':matches,'private_original_reference_SHA256':sha(old)})
+  assert len(matches)==1,'Missing/ambiguous CDC';m=matches[0];assert m['serial_number']==unit['serial_number'] and m['location']==unit['location'],'Private unit/location mismatch';assert re.fullmatch(r'/dev/cu\.usbmodem[A-Za-z0-9._-]+',m['device'])
+  state.update({'same_unit_CDC_verified':True,'port':m['device'],'stage':'SAME_UNIT_CDC_VERIFIED_READY_IDENTITY'});proof={'result':'PASS','same_unit_and_location':True,'match_count':1,'port_opens':0}
+ elif action=='identity':
+  assert state['stage']=='SAME_UNIT_CDC_VERIFIED_READY_IDENTITY' and state['same_unit_CDC_verified'];token=secrets.randbits(64) or 1;cmd=[sys.executable,str(tool),'--port',state['port'],'--context','xinput','--token',hex(token),'--session',state['boot_session'],'--timeout','2'];reserve('runtime_identity_requests',cmd);out,err=run(cmd,7);assert not err,'Unexpected identity stderr';j=json.loads(out);assert j['session']==state['boot_session'] and int(j['token'])==token and j['observation']=='current_session_only'
+  for k,v in packet['runtime_identity_expected'].items():assert j[k]==v,('Identity mismatch',k)
+  state.update({'current_legacy_identity_verified':True,'stage':'CURRENT_LEGACY_IDENTITY_VERIFIED_READY_INSPECT'});proof={'result':'PASS','current_original_legacy_profile':True,'not_program_or_Git_attestation':True,'identity':j}
+ else:
+  jp=D/(action+'_journal.jsonl');assert not jp.exists();cmd=[str(H),action,'--approved-session',state['boot_session']]
+  if action=='inspect':assert state['stage']=='CURRENT_LEGACY_IDENTITY_VERIFIED_READY_INSPECT' and state['current_legacy_identity_verified']
+  else:
+   assert state['stage']=='NEW_INSPECT_COMPLETE_READY_ONE_CAPTURE' and state['inspect_verified'];cmd+=['--anchor-entry-id',str(state['fresh_anchor_entry_id']),'--interface-entry-id',str(state['fresh_interface_entry_id'])]
+  cmd+=['--output',str(jp)];reserve(action+'_invocations',cmd);out,err=run(cmd,10);assert not out and err==b'COMPLETE: bounded host preflight; hardware acceptance NOT_CLAIMED\n','Unexpected native stdout/stderr';rows=journal(jp)
+  if action=='inspect':
+   assert rows[-1]['kind']=='inspect_end' and sum(x['kind']=='inspect_end' for x in rows)==1 and set(x['kind'] for x in rows)<=set(('session','anchor_query','numeric_property','anchored_node','inspect_end'))
+   end=rows[-1];assert end['outcome']=='ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY' and end['reports']==end['interface_init_calls']==0 and end['interface_number']==0 and end['location']==1048576
+   anchor=end['anchor_entry_id'];interface=end['interface_entry_id'];assert type(anchor) is int and type(interface) is int and anchor>0 and interface>0 and anchor!=interface
+   assert len([x for x in rows if x['kind']=='anchored_node' and x['is_target'] is True and x['entry_id']==interface])==1
+   state.update({'inspect_verified':True,'fresh_anchor_entry_id':anchor,'fresh_interface_entry_id':interface,'stage':'NEW_INSPECT_COMPLETE_READY_ONE_CAPTURE'});proof={'result':'PASS','registry_only':True,'fresh_anchor_entry_id':anchor,'fresh_interface_entry_id':interface,'descendant_nodes':len([x for x in rows if x['kind']=='anchored_node']),'interface_init_calls':0,'reports':0}
+  else:
+   first=rows[0];assert first['anchor_entry_id']==state['fresh_anchor_entry_id'] and first['interface_entry_id']==state['fresh_interface_entry_id'];ends=[x for x in rows if x['kind']=='end'];assert len(ends)==1 and rows[-1]==ends[0];end=ends[0];assert end['reports']==end['submissions']==3 and end['abort_calls']==0 and end['settled_cleanup'] is True and end['outcome']=='THREE_PREFLIGHT_REPORTS'
+   completions=[x for x in rows if x['kind']=='completion'];raws=[x for x in rows if x['kind']=='raw'];dec=[x for x in rows if x['kind']=='decoded'];assert len(completions)==len(raws)==len(dec)==3
+   assert all(x['status']==0 and x['bytes_transferred']==20 for x in completions)
+   for k,(c,r,b) in enumerate(zip(completions,raws,dec),1):assert r['sequence']==b['sequence']==k and r['monotonic_ns']==b['monotonic_ns']==c['monotonic_ns'] and r['length']==20 and len(bytes.fromhex(r['hex']))==20 and r['report_id']==0 and len(b['fields'])==21
+   state.update({'capture_verified':True,'stop':True,'stage':'NEW_HOST_ROUTE_THREE_REPORT_QUALIFICATION_PASS_THEN_STOP'});proof={'result':'PASS','raw_reports':3,'full_decoded_reports':3,'settled_cleanup':True,'current_legacy_profile_only':True,'native_hardware_acceptance':None}
+ save(D/(action+'_adjudication.json'),proof);save(S,state,'w');print(json.dumps({k:v for k,v in proof.items() if k!='identity'},indent=2))
+except BaseException as e:
+ state.update({'stop':True,'stage':'STOP_'+action.upper()+'_NO_RETRY'});save(D/(action+'_stop.json'),{'error':repr(e),'all_further_actions_stopped':True,'retry':False});save(S,state,'w');print(json.dumps({'action':action,'result':'STOP','error':repr(e),'retry':False}));raise

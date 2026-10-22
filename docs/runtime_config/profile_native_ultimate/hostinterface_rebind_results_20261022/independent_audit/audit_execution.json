@@ -1,0 +1,7 @@
+{
+  "audit_source_SHA256": "1ab1232bc3a12ec7dd4d05fddc6c890c016ad37ffb5b1c6e518c3b40e7a7f431",
+  "returncode": 0,
+  "facts_SHA256": "996e2a3e8bc7f539e487a3474a648bfc0c6f544ef6f86929116a9301b071a75f",
+  "no_native_binary_or_device_module_execution": true,
+  "live_actions": 0
+}

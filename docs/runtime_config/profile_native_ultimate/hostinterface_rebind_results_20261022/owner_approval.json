@@ -1,0 +1,11 @@
+{
+  "id": "GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1",
+  "questionItemId": "[\"request_user_input_async\",\"call_c5f8dfccb0af44ccb0dcb5844e5add04\",0]",
+  "answer": "Approved. just to confirm, I did reconnect back to the previous usb, I do not care which one it is as long as you can read it and work with it",
+  "published_commit": "62259d113d7d3957f9d6ea8d8b40e04b993aad9b",
+  "packet_MD_SHA256": "8a77722a01d456ed6d7617f8a77633d3fd16df4d30f1abec53b32ae52f58993d",
+  "packet_JSON_SHA256": "4ac86a08f2375d49b4554dbd3f2bd74d8e2b6380a7249b6a0b73380176ea7129",
+  "recorded_utc": "2026-10-22T11:13:04.502408+00:00",
+  "trusted_source": "Direct owner reply in this root conversation",
+  "no_further_reconnect_requested": true
+}
