@@ -1,0 +1,27 @@
+{
+  "result": "PASS_FINAL_SOURCE_FREE_E_PREPARATION",
+  "reviewed_commit": "e808741b plus final notice/protocol qualification/conformance/validation/manifest working delta",
+  "candidate_git_sha": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "formal_evidence_record_sha256": "4b209227b3e4fa3d96d86a0bdd5552206e33e0449ce6b4a40218043365e066b9",
+  "manifest_sha256": "322b50723532c735f8062bbf341ff90c2e873c9ac4190c700d578b697316de5c",
+  "manifest_files_verified": 88,
+  "findings": [],
+  "closed_findings": [
+    "NoHEP notices distinguish no canonicaladoption",
+    "Pretestpacket physicalacceptance absence qualified by current normalacceptance"
+  ],
+  "original_conditional_scope": "Explicitly reconciled assistant stronger clause; physical no-poll NOT_TESTED safely unavailable; no fabricated physicalPASS; no extra test authorized",
+  "all11_original_criteria": "Supported by audited source/regression/resource/custody/ownerreports/readbacks and exact copied acceptance audit",
+  "formal_record": "V2 full source/artifact tuple, owner observations, separate Mac/SwitchGCtopology and limits preserved",
+  "existing_validator": "Independently positivePASS in ephemeral tuple; failed489source and failedUF2 mismatches REJECTED; no queueadoption",
+  "R_ancestry": "cc132574 ancestor; canonical3a diff docs-only; ACTIVE_AGENT_QUEUE unchanged; candidate firmware absent from E",
+  "privacy": "PASS no originalnames/bodies/deviceidentifiers/journals",
+  "current_chronology": "Historicalgaps retained; latest ownerconfirmation/conditionalreconciliation supersede currentgaps",
+  "source_integration": "NOT_PERFORMED; handoff names future canonicalcuration/queue/immutableE/liveverification/catalog/exactsource/review/DONE gates",
+  "framework_debt": "C024surfaceFAIL preserved; aggregatePASSfalse",
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "review_device_io": 0,
+  "review_repository_edits": 0
+}

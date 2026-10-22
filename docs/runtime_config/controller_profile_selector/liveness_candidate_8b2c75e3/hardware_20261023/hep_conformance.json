@@ -1,0 +1,13 @@
+{
+  "result": "PASS_CONFORMANCE_ONLY",
+  "committed_record": "repo-json:docs/runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/evidence.json",
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "schema": "glyph_hardware_evidence_record_v2",
+  "existing_validator": "validate_evidence_record",
+  "positive": "PASS",
+  "negative_wrong_failed_candidate": "REJECTED",
+  "negative_wrong_failed_UF2": "REJECTED",
+  "comparison_context": "Ephemeral in-memory tuple; canonical queue unchanged and not adopted",
+  "canonical_HEP_or_integration": "NOT_CLAIMED"
+}

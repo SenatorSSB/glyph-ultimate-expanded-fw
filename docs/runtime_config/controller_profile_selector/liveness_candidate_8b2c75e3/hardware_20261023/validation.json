@@ -9,5 +9,11 @@
   "classification": "Retained FRAMEWORK_VALIDATION_DEBT; identical authenticated restriction already documented on clean canonical baseline",
   "aggregate_PASS": false,
   "firmware_source_changed": false,
-  "canonical_queue_changed": false
+  "canonical_queue_changed": false,
+  "final_E_focused_docs_navigation_framework_sequence": "PASS",
+  "formal_V2_record_conformance": "PASS_ON_COMMITTED_E808_RECORD_EPHEMERAL_COMPARISON_TUPLE_ONLY",
+  "formal_wrong_failed_source_and_UF2": "BOTH_REJECTED",
+  "final_artifact_custody": "ELF_BIN_UF2_ALL_UNCHANGED",
+  "source_free_R_ancestry": "PASS_CC132_ANCESTOR",
+  "canonical_queue_unchanged": "PASS"
 }

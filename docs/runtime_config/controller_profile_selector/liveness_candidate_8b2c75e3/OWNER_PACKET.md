@@ -12,8 +12,9 @@ Owner-held custody: local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5
 Static RAM198288/199632; flash510956. Fresh exact linked resource proof PASS:
 core0max2048/2048, core1composition1060 within retained1152, all140old+39selector
 and14GC routes fit unchanged limits. Fresh source review and independent exact build/resource/custody/handoff review
-PASS. This is a concrete approval packet; no physical acceptance is claimed. No substituted rebuild
-may inherit any physical result. Candidate remains unmerged.
+PASS. This preserves the approval procedure; later normal physical acceptance
+is recorded with conditional-test applicability in hardware_20261023. No substituted
+rebuild may inherit any physical result. Candidate remains unmerged.
 
 ## Stage A: read-only recovery first
 

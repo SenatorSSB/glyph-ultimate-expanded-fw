@@ -13,8 +13,8 @@ retains limits. Final XInput output/reboot/responsiveness now owner-confirmed. O
 conditional powered/no-poll setup unavailable; row NOT_TESTED. Normal repair
 hardware/preservation PASS with explicit applicability reconciliation; source-free
 HEP prepared, canonical adoption/integration remain separate.
-Raw filesystem integrity and GameCube active identity remain UNKNOWN. No HEP,
-source integration, DONE or queue promotion. Root cause UNPROVEN; Nunchuk NOT_TESTED.
+Raw filesystem integrity and GameCube active identity remain UNKNOWN. No canonical
+HEP adoption, source integration, DONE or queue promotion. Root cause UNPROVEN; Nunchuk NOT_TESTED.
 
 ## Selector exact GameCube hardware FAIL — 2026-10-22
 

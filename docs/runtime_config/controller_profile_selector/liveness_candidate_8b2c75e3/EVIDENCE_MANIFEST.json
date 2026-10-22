@@ -11,8 +11,8 @@
       "sha256": "d3a1141a55d15e116cca96478f5f89ccb4f33c9baf53db58b9a9afa1df58f688"
     },
     "OWNER_PACKET.md": {
-      "bytes": 5915,
-      "sha256": "d68c6d007fcd32ea79d2f30f4ba4e5e724cf305c86ed98cec94d6dac4e74c431"
+      "bytes": 5986,
+      "sha256": "b81631ce74fc35fc0ff1981f47795cbbb7e84a440e87a6848147d5e04e2b6305"
     },
     "README.md": {
       "bytes": 3100,
@@ -174,6 +174,18 @@
       "bytes": 6475,
       "sha256": "4b209227b3e4fa3d96d86a0bdd5552206e33e0449ce6b4a40218043365e066b9"
     },
+    "hardware_20261023/final_e_review.json": {
+      "bytes": 1992,
+      "sha256": "fda3eaaac07a890544bd98a1425e5f5a2d72beb95e1fdda426dc5f7bbb4b7463"
+    },
+    "hardware_20261023/final_private_custody.json": {
+      "bytes": 267,
+      "sha256": "cf1b27bce040da2f91483a23098d60b0f5976ea5a173be401227dcb0023e5b8c"
+    },
+    "hardware_20261023/hep_conformance.json": {
+      "bytes": 686,
+      "sha256": "0d444639ffdf3a14450e287b39231f00a971fac1009cb84263bfb90e6073528e"
+    },
     "hardware_20261023/independent_review.json": {
       "bytes": 1988,
       "sha256": "4203e3a04cafb1ab136c3436c2a0b1eaaa2f6bf67200e1db4b26241fae5446e1"
@@ -187,8 +199,8 @@
       "sha256": "d9894b046b609ac29faf1e7a3092adb74cef5000ca7ea9ff63fc930122c6b8e2"
     },
     "hardware_20261023/validation.json": {
-      "bytes": 548,
-      "sha256": "1ea5c939d97e7a23780b68ed53352a6a73a5732ad055bad20cf003bba8b0bdd9"
+      "bytes": 915,
+      "sha256": "7d1c3b1bb632fb51d4ac3391932143d9b82b02903cb9b026f788be42cbdc90b7"
     },
     "recovery_20261023/SUMMARY.md": {
       "bytes": 2342,
