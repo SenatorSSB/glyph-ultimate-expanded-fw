@@ -1,0 +1,23 @@
+{
+  "reported_at_utc": "2026-10-22T20:13:08.896407+00:00",
+  "candidate_sha": "4898951994bcabcaef2846145de2922a674656f8",
+  "uf2_sha256": "7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e",
+  "packet": "GP_NATIVE_002_FIXTURES_V1",
+  "owner_verbatim": "Switching to SEL01 -> SEL20 -> SEL01. Values were correct, but switching back to SEL01 from SEL20 crashed the controller. Reconnecting fixed it.\n\nI also now was able to register in my eyes how the profile switch happens. With this new firmware, selecting the profile quickly shows the normal menu screen (as if I would back out from the profile list) (something that did not happen with earlier fws nor the default) after that I get the boot screen. The crash happened/froze at the \"back to menu view\" part. It never moved anymore and was unresponsive. Could be a crash, or some looping in the code during that exact moment.",
+  "route": "GameCube",
+  "sequence": [
+    "SEL01",
+    "SEL20",
+    "SEL01"
+  ],
+  "reported_axis_values": "Correct; exact per-transition timing relative to freeze/reconnect not separately specified",
+  "freeze": "Return from Profile list to menu view on SEL20 to SEL01; no subsequent boot screen, unresponsive",
+  "recovery": "Owner already reconnected and reports recovery",
+  "current_active_profile_identity": "UNKNOWN_AFTER_OWNER_RECONNECT",
+  "root_cause": "UNPROVEN",
+  "disposition": "HARDWARE_FAILURE_STOP_NO_RETRY_NO_AUTOCLEANUP",
+  "owned_fixtures_remaining": 20,
+  "originals_last_full_readback": "Unchanged before fixture creation; no postfailure readback",
+  "source_merge": "FORBIDDEN_NO_HARDWARE_PASS",
+  "next_device_operation": "NONE_AUTHORIZED_BY_FAILURE_CONTINUATION"
+}

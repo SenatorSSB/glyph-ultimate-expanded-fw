@@ -1,0 +1,66 @@
+{
+  "schema_name": "glyph_hardware_evidence_record",
+  "schema_version": 2,
+  "work_order_id": "GP-NATIVE-002",
+  "candidate_branch": "codex/gp-native-002-controller-selector",
+  "candidate_git_sha": "4898951994bcabcaef2846145de2922a674656f8",
+  "candidate_base_configurator_sha": "47d4f00a751a77f0d4de930c993813209c0998e0",
+  "firmware_artifact_filename": "firmware.uf2",
+  "firmware_artifact_build_path": "/private/tmp/glyph-native-selector-20261022/.pio/build/glyph_mk6/firmware.uf2",
+  "firmware_artifact_sha256": "7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e",
+  "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/4898951994bcabcaef2846145de2922a674656f8/7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e/firmware.uf2",
+  "pre_update_sha256_verified": true,
+  "controller_model_revision": "Owner Glyph Mk6; private hardware identifiers omitted.",
+  "firmware_profile_state": "Schema5 fixtureSEL01 ID28/r1 andSEL20 ID47/r1,20 ownedfixtures28..47. Current active identity after failure/reconnect UNKNOWN; original preservation/restoration unconfirmed.",
+  "update_method": "One directly owner-approved RPI-RP2 UF2 copy, prewrite exact size/hash assertions; copy_returned true. No retry/reflash after failure.",
+  "host_platform_adapter": "Mac/XInput USB observations; separate owner normal GameCube setup. No hidden GameCube field inference.",
+  "evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
+  "evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
+  "candidate_protocol_reference": "docs/runtime_config/controller_profile_selector/candidate_48989519/OWNER_PACKET.md",
+  "candidate_protocol_version": "GP_NATIVE_002_HW_V1",
+  "preconditions": [
+    "Exact candidate/ref and retained1045504-byte UF2 SHA256 independently verified. Root confirms actual preinstallation hash assertions before single approved copy.",
+    "Owner-approved GP_NATIVE_002_HW_V1 and disposable fixture packet GP_NATIVE_002_FIXTURES_V1; original private backups preserved; no original profile body published."
+  ],
+  "steps": [
+    {
+      "id": "USB_A_B_A",
+      "instruction": "Select SEL01->SEL20->SEL01 through controller .Profile menu in XInput.",
+      "expected": "Committed reboot-bound identity28->47->28,distinct fixture behavior,backend XInput.",
+      "observed": "Private assessment records revision1 IDs28->47->28, all exact runtime hashes match,all backends XInput; owner LF1 offsets(53,0)->(72,0)->(53,0),final release(0,0). USB observation scope only."
+    },
+    {
+      "id": "USB_POWER",
+      "instruction": "Ordinary owner power reconnect with SEL01 selected.",
+      "expected": "SEL01 ID28 revision1 schema5 and XInput remain active.",
+      "observed": "Private A_power_assessment.json reports MATCH_SEL01_ID28_REV1_SCHEMA5_XINPUT_AFTER_OWNER_POWER_RECONNECT."
+    },
+    {
+      "id": "GC_A_B_A",
+      "instruction": "On GameCube select SEL01->SEL20->SEL01 from controller .Profile menu.",
+      "expected": "Each selection commits,reboots and activates expected profile with GameCube retained; all transitions responsive.",
+      "observed": "FAIL: owner reports values correct, final SEL20->SEL01 froze at intermediate parent menu before boot screen and remained unresponsive. Final value timing relative to reconnect not separately established."
+    }
+  ],
+  "negative_regression_checks": [
+    "Required GameCube liveness fails; USB host/runtime/resource proof cannot substitute for physical route acceptance.",
+    "No postfailure original-profile integrity or Config readback; no inferred restoration or hidden field acceptance."
+  ],
+  "power_cycle_reconnect_checks": [
+    "USB ordinary owner reconnect matchedSEL01; later GameCube failure recovered operation after owner reconnect. Current postfailure identity UNKNOWN."
+  ],
+  "result": "FAIL",
+  "anomalies": [
+    "Unresponsive final GameCube B->A transition before boot screen.",
+    "Concrete source progress gap across unbounded GameCube polls is plausible mechanism, not proven causal diagnosis. Root cause UNPROVEN."
+  ],
+  "rollback_recovery": "Owner already reconnected and reports recovery. No agent cleanup,restore,retry,flash or additional device I/O follows failure;20fixture IDs28..47 remain;restoration unconfirmed.",
+  "tester": "Project owner, human observations; independent bounded failed-hardware classification by selector_governance; root sole publisher.",
+  "tested_at": "2026-10-22T20:13:08.896407+00:00",
+  "evidence_gaps": [
+    "Required GameCube A->B->A fails.",
+    "Postfailure active identity, Config and original record preservation are unknown; restoration not confirmed.",
+    "Twenty owned fixture records28..47 remain; no automatic deletion/readback/retry/flash authorization.",
+    "Complete exact human HEP PASS, source integration and strict DONE absent."
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schema_name": "glyph_hardware_failure_evidence",
+  "schema_version": 1,
+  "work_order": "GP-NATIVE-002",
+  "candidate_git_sha": "4898951994bcabcaef2846145de2922a674656f8",
+  "candidate_tree": "7b73fe086fcc6a0c4f5f8010751a64ec2dd07150",
+  "candidate_base_configurator_sha": "47d4f00a751a77f0d4de930c993813209c0998e0",
+  "candidate_branch": "codex/gp-native-002-controller-selector",
+  "firmware_artifact_sha256": "7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e",
+  "firmware_artifact_bytes": 1045504,
+  "preserved_artifact_locator": "local_backups/hardware-artifacts/4898951994bcabcaef2846145de2922a674656f8/7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e/firmware.uf2",
+  "artifact_readonly_rehash": "MATCH",
+  "candidate_ref_readonly_verification": "MATCH",
+  "protocol_version": "GP_NATIVE_002_HW_V1",
+  "fixture_packet": "GP_NATIVE_002_FIXTURES_V1",
+  "hardware_result": "FAIL",
+  "status": "HARDWARE_FAILED",
+  "failure_report_utc": "2026-10-22T20:13:08.896407+00:00",
+  "failure_route": "GameCube",
+  "controller": "Owner Glyph Mk6; normal GameCube setup per owner. Private hardware identifiers omitted.",
+  "test_sequence": [
+    "SEL01 ID28 revision1 schema5",
+    "SEL20 ID47 revision1 schema5",
+    "SEL01 ID28 revision1 schema5"
+  ],
+  "expected": "Each controller-menu choice commits, reboots and activates selected profile while retaining GameCube.",
+  "observed": "Owner reports correct values but final SEL20->SEL01 froze at intermediate parent menu view, before boot screen, unresponsive. Exact final values timing relative to reconnect is not separately established.",
+  "recovery": "Owner already power-reconnected and reports recovery; no agent retry, cleanup, restore or flash follows this failure.",
+  "current_active_identity": "UNKNOWN_AFTER_OWNER_RECONNECT",
+  "postfailure_config_and_original_record_integrity": "UNKNOWN_NO_POSTFAILURE_READBACK",
+  "restoration": "NOT_CONFIRMED",
+  "owned_fixture_ids_remaining": [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "root_cause": "UNPROVEN",
+  "source_review": "Independent source review establishes selector request lacks bounded consumer opportunity across existing unbounded GameCube poll/waits. Plausible failure explanation, not demonstrated cause; no captured PC/poll state. Storage/flash lockout/reset hypotheses remain unexcluded.",
+  "usb_observations": {
+    "route": "XInput",
+    "menu_identity_sequence": [
+      28,
+      47,
+      28
+    ],
+    "revisions": [
+      1,
+      1,
+      1
+    ],
+    "runtime_hashes": "All three match approved fixture runtime hashes in private XInput_A_B_A_assessment.json",
+    "owner_LF1_offsets": [
+      [
+        53,
+        0
+      ],
+      [
+        72,
+        0
+      ],
+      [
+        53,
+        0
+      ]
+    ],
+    "owner_final_release": [
+      0,
+      0
+    ],
+    "ordinary_power_reconnect": "Private A_power_assessment.json reports MATCH_SEL01_ID28_REV1_SCHEMA5_XINPUT_AFTER_OWNER_POWER_RECONNECT",
+    "scope": "Retained USB observations only; neither GameCube acceptance nor complete HEP PASS."
+  },
+  "gaps": [
+    "Required GameCube A->B->A fails.",
+    "Postfailure active identity, Config and original record preservation are unknown; restoration not confirmed.",
+    "Twenty owned fixture records28..47 remain; no automatic deletion/readback/retry/flash authorization.",
+    "Complete exact human HEP PASS, source integration and strict DONE absent."
+  ],
+  "publication": "Source-free failure evidence only; failed firmware source must not enter configurator.",
+  "repair_authorization": "NONE; pending curation is not READY and this report authorizes no repair implementation or device continuation.",
+  "privacy": "No USB serial, full original Config or original profile bodies published.",
+  "inputs": {
+    "owner_report.json": "4b9e449ddd16afc2441ae04d65e22815b66ae9b00e2785a18c001cadb268dabf",
+    "SOURCE_DIAGNOSIS.md": "eb030676ad2f16ad2ac924962cd02345bc3144bcf360289a863443bae8f3e591"
+  },
+  "private_supporting_assessment_sha256": {
+    "XInput_A_B_A_assessment.json": "f903bc76b53a95dd6d6dede394aad23b977e3f4af1a0b8f83e55e8f9528f4b97",
+    "A_power_assessment.json": "51f726c7f826efd7e19b38f7e9536171526a48976211af490caa99b1b0b3beb7"
+  },
+  "preserved_prior_curation_obligation": {
+    "pending": false,
+    "trigger": null,
+    "resolution": "Post-opening receipt c5415ab0348b9c1db9dce36eda73bf4a7e2f7478 preserves the exact GP-BIND-001 and GP-BIND-002 failures and narrows GP-BIND-002 only to GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1. The terminal agent may retain the specified read-only activation evidence before a future H4 row; no mutation, repair implementation, candidate, build, artifact, flash, acceptance, or merge is authorized.",
+    "provenance": {
+      "opened_by_role": "Glyph Implementation Supervisor",
+      "opening_reference": "git-json:112a1ec21df37b4867b08145d9a9f7c11429afb4:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "subject_ids": [
+        "GP-BIND-001",
+        "GP-BIND-002"
+      ],
+      "resolved_by_role": "Glyph Work-Order Curator",
+      "resolution_reference": "git-json:c5415ab0348b9c1db9dce36eda73bf4a7e2f7478:docs/agent_framework/curation_receipts/gp_bind_activation_observation_20261019.json"
+    }
+  },
+  "prior_curation_snapshot": "git-json:c394357dd3bbe0ad65c985a22d9a16c97bcf4aa1:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+  "preinstallation_verification": "Root independently confirms execution-time size1045504 and SHA256 assertion before single copy and again within copy script; uf2_copy_started.json and uf2_copy_result.json retained privately. Current independent custody rehash also MATCH."
+}

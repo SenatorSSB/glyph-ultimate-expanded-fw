@@ -1,5 +1,23 @@
 # Active Agent Queue
 
+## Selector exact GameCube hardware FAIL — 2026-10-22
+
+GP-NATIVE-002 is HARDWARE_FAILED with REPAIR_REQUIRED and a pending bounded
+curation obligation. [Exact failure evidence](../runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json)
+binds candidate4898951994bcabcaef2846145de2922a674656f8 and
+UF2 SHA2567ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e.
+GameCube SEL01→SEL20→SEL01 reported correct values, then final B→A froze
+at the intermediate menu before boot. Owner reconnect recovered operation;
+current identity, postfailure original preservation and restoration are unknown.
+Twenty owned fixtures IDs28..47 remain. No retry, cleanup, restore or flash is
+authorized. Root cause UNPROVEN; source review identifies a concrete missing
+consumer progress guarantee, not proven causation. XInput28→47→28 exact runtime
+hash matches, offsets53→72→53 and power persistence remain separate observations.
+No hardware PASS, repair READY, source integration or DONE. Prior GP-BIND-001/002
+resolved dispositions remain unchanged; their pending-subject coverage reopens
+no work. Nunchuk NOT_TESTED. Earlier checkpoints below remain historical.
+
+
 ## Controller selector exact candidate — approval required — 2026-10-22
 
 GP-NATIVE-002 is HARDWARE_TEST_REQUIRED at exact
@@ -457,21 +475,22 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
 {
   "schema_version": 3,
   "canonical_branch": "configurator",
-  "audit_base_sha": "e43be478e1f267f422bb56d4619141885ac838b7",
+  "audit_base_sha": "c394357dd3bbe0ad65c985a22d9a16c97bcf4aa1",
   "operating_mode": "MINIMAL_SUPERVISOR_WITH_ON_DEMAND_CONSULTATIVE_PLANNING_AND_HARD_HARDWARE_GATE",
   "curation_obligation": {
-    "pending": false,
-    "trigger": null,
-    "resolution": "Post-opening receipt c5415ab0348b9c1db9dce36eda73bf4a7e2f7478 preserves the exact GP-BIND-001 and GP-BIND-002 failures and narrows GP-BIND-002 only to GP_BIND_002_ACTIVATION_OBSERVATION_DIAGNOSTIC_V1. The terminal agent may retain the specified read-only activation evidence before a future H4 row; no mutation, repair implementation, candidate, build, artifact, flash, acceptance, or merge is authorized.",
+    "pending": true,
+    "trigger": "New GP-NATIVE-002 exact GameCube SEL20->SEL01 freeze requires bounded failure adjudication; candidate4898951994bcabcaef2846145de2922a674656f8/evidence docs/runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json. GP-BIND-001 and GP-BIND-002 preserved resolved failures remain included for singleton-contract coverage only; prior c5415ab0348b9c1db9dce36eda73bf4a7e2f7478 resolution unchanged, no work reopened.",
+    "resolution": null,
     "provenance": {
-      "opened_by_role": "Glyph Implementation Supervisor",
-      "opening_reference": "git-json:112a1ec21df37b4867b08145d9a9f7c11429afb4:docs/project/ACTIVE_AGENT_QUEUE.md#queue-state",
+      "opened_by_role": "Glyph Hardware Evidence Processor",
+      "opening_reference": "owner-report:GP_NATIVE_002_HW_V1:2026-10-22T20:13:08.896407+00:00:sha256:4b9e449ddd16afc2441ae04d65e22815b66ae9b00e2785a18c001cadb268dabf",
       "subject_ids": [
         "GP-BIND-001",
-        "GP-BIND-002"
+        "GP-BIND-002",
+        "GP-NATIVE-002"
       ],
-      "resolved_by_role": "Glyph Work-Order Curator",
-      "resolution_reference": "git-json:c5415ab0348b9c1db9dce36eda73bf4a7e2f7478:docs/agent_framework/curation_receipts/gp_bind_activation_observation_20261019.json"
+      "resolved_by_role": null,
+      "resolution_reference": null
     }
   },
   "planner_packet": {
@@ -488,7 +507,8 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "global_wait_proposed": false,
     "material_events_since_packet": [
       "Independent Curator adopts sole GP-NATIVE-001 READY for the complete frozen M2-M7 native Ultimate product chain; initial inventory consumed into the queue, no unadjudicated survivors or global wait. GP-BIND-001/002 FAIL and their resolved event provenance are unchanged; GP-BIND-003 remains HARDWARE_VALIDATED with accepted source integrated, no strict DONE invented.",
-      "Latest direct owner selector directive independently curated as GP-NATIVE-002 READY. Prior consumed GP-NATIVE-001 packet inventory/provenance unchanged; no new Planner/global wait."
+      "Latest direct owner selector directive independently curated as GP-NATIVE-002 READY. Prior consumed GP-NATIVE-001 packet inventory/provenance unchanged; no new Planner/global wait.",
+      "GP-NATIVE-002 exact hardware FAIL on GameCube; pending bounded failure curation, no repair authorization. Prior consumed packet/provenance and resolved GP-BIND-001/002 disposition preserved."
     ],
     "curator_review_provenance": {
       "planning_branch": "planning/portfolio-20261020-1228",
@@ -532,15 +552,14 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 2,
+    "hardware_pending": 1,
     "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "PLANNING_REQUIRED"
+    "primary_liveness": "CURATION_REQUIRED"
   },
   "signals": [
-    "PLANNING_REQUIRED",
-    "PLANNER_REFRESH_REQUIRED",
+    "CURATION_REQUIRED",
     "HARDWARE_TEST_REQUIRED",
     "REPAIR_REQUIRED"
   ],
@@ -8932,7 +8951,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-NATIVE-002",
       "title": "Controller-side native ProfileStore profile selection",
-      "status": "HARDWARE_TEST_REQUIRED",
+      "status": "HARDWARE_FAILED",
       "branch": "codex/gp-native-002-controller-selector",
       "objective": "Expose eligible separately named stored native profiles in the existing scrollable .Profile menu and commit selected profile/context/current backend coherently before reboot activation.",
       "why_this_matters": "Configurator-driven selection already exists; the owner requires the controller menu itself to select among at least20 stored profiles.",
@@ -8985,17 +9004,17 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "manual_acceptance_protocol_version": "GP_NATIVE_002_HW_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
-      "hardware_evidence_record": null,
-      "hardware_result": null,
+      "hardware_evidence_record": "repo-json:docs/runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json",
+      "hardware_result": "FAIL",
       "hardware_evidence_gaps": [
-        "Separate explicit owner approval for exact GP_NATIVE_002_HW_V1 installation/selection packet; no device action performed.",
-        "USB/XInput controller-menu names/eligibility/>10 scroll/20 native choices/A->B->A actual identity and distinctive behavior/power persistence remain NOT_TESTED. If existing approved records do not support20/A-B expectations, separately prepare bounded fixtures before any profile mutation.",
-        "GameCube menu availability/backend retention and A->B->A distinctive behavior require separate actual observations; no USB inference.",
-        "Original Config/profile metadata/body/revision preservation readback, independent exact human HEP, all applicable predecessor gates, exact tested-source integration and separate strict DONE remain."
+        "Required GameCube A->B->A fails.",
+        "Postfailure active identity, Config and original record preservation are unknown; restoration not confirmed.",
+        "Twenty owned fixture records28..47 remain; no automatic deletion/readback/retry/flash authorization.",
+        "Complete exact human HEP PASS, source integration and strict DONE absent."
       ],
       "rollback_recovery": "No device action now. Concrete later packet must bind exact artifact, backups/restoration and disposable/approved profiles; do not flash automatically. Failed/uncertain persistence refuses reboot and keeps known-good state; preserve original store bodies and revisions.",
       "status_documentation_updates": "Record eight-question audit, implementation/tests/resources/source review/build/custody and exact hardware packet. Latest owner reports installed334f/nativeID27 revision1 schema5 Ultimate/normalGC and Configurator-driven native selection observed; attribute to owner, not HEP. Earlier published observations remain historical, never overwritten. GP-NATIVE-001 remains unmerged and hardware-pending with all exact evidence intact; no automatic DONE or acceptance transfer.",
-      "done_evidence": "Candidate4898951994bcabcaef2846145de2922a674656f8/tree7b73fe086fcc6a0c4f5f8010751a64ec2dd07150 has both-ABI current selector/Persistence/native/NOR host proof, fresh repaired-source independent review, exact Mk6 build/custody/correspondence and independent finite linked resource PASS (old140/31 + new39, core0max2048/new2012,core1retained1152,static197936,layout506/510). Exact evidence under docs/runtime_config/controller_profile_selector/candidate_48989519/. This is HARDWARE_TEST_REQUIRED, never DONE. Historical menu C024 authentication FAIL and native scanner identical baseline/current snapshot FAIL retained; no aggregate PASS. All20 owner completion criteria still require exact physical selection/HEP and tested-source integration; GP-NATIVE-001 remains unchanged and unmerged.",
+      "done_evidence": "Candidate4898951994bcabcaef2846145de2922a674656f8/tree7b73fe086fcc6a0c4f5f8010751a64ec2dd07150 has both-ABI current selector/Persistence/native/NOR host proof, fresh repaired-source independent review, exact Mk6 build/custody/correspondence and independent finite linked resource PASS (old140/31 + new39, core0max2048/new2012,core1retained1152,static197936,layout506/510). Exact evidence under docs/runtime_config/controller_profile_selector/candidate_48989519/. This is HARDWARE_TEST_REQUIRED, never DONE. Historical menu C024 authentication FAIL and native scanner identical baseline/current snapshot FAIL retained; no aggregate PASS. All20 owner completion criteria still require exact physical selection/HEP and tested-source integration; GP-NATIVE-001 remains unchanged and unmerged. 2026-10-22 exact GameCube hardware FAIL supersedes hardware-wait disposition; see docs/runtime_config/controller_profile_selector/hardware_failure_20261022/evidence.json. No HEP PASS, source integration or DONE.",
       "stop_conditions": [
         "No firmware edits until canonical READY adoption/live readback.",
         "Stop for genuine new persisted preprocessing architecture, material owner/source backend policy conflict, inability to fit unchanged resource limits or other substantive source/authority contradiction.",
@@ -9174,7 +9193,7 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":2,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"CURATION_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
@@ -9183,10 +9202,10 @@ Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 2
+Hardware-pending: 1
 Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: PLANNING_REQUIRED
+Primary liveness: CURATION_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication
