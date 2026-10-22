@@ -1,0 +1,24 @@
+{
+  "candidate_sha": "4898951994bcabcaef2846145de2922a674656f8",
+  "tree": "7b73fe086fcc6a0c4f5f8010751a64ec2dd07150",
+  "artifacts": {
+    "elf": {
+      "path": "/private/tmp/glyph-native-selector-20261022/.pio/build/glyph_mk6/firmware.elf",
+      "bytes": 5598588,
+      "sha256": "321878007d79fc09ecfe827a0058fb11d089159f0880cfc9ee459d701a6baa38",
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/4898951994bcabcaef2846145de2922a674656f8/7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e/firmware.elf"
+    },
+    "bin": {
+      "path": "/private/tmp/glyph-native-selector-20261022/.pio/build/glyph_mk6/firmware.bin",
+      "bytes": 522596,
+      "sha256": "b6bcfac6180d8bff9c48c5f03bfe9cbe11fabeb26b5825d778840c4d35f75711",
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/4898951994bcabcaef2846145de2922a674656f8/7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e/firmware.bin"
+    },
+    "uf2": {
+      "path": "/private/tmp/glyph-native-selector-20261022/.pio/build/glyph_mk6/firmware.uf2",
+      "bytes": 1045504,
+      "sha256": "7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e",
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/4898951994bcabcaef2846145de2922a674656f8/7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e/firmware.uf2"
+    }
+  }
+}

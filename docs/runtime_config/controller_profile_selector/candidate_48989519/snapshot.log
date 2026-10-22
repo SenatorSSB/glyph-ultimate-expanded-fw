@@ -1,0 +1,2 @@
+snapshot_check=FAIL
+reason=normalized scanner output differs from fixture

@@ -1,0 +1,105 @@
+{
+  "candidate": "4898951994bcabcaef2846145de2922a674656f8",
+  "files": [
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/REPORT.md",
+      "bytes": 9802,
+      "sha256": "f086d6ea940deed9fdbe31e28179b7db7dd79723f529b8bade57b964a6eeb27c"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/changed-vtable-review.json",
+      "bytes": 2381,
+      "sha256": "aa9cc2c26c4af36e17a7d874e2764d44036eb2f8ff082dfde8936bfa66281140"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/core1-bound-graph.json",
+      "bytes": 167400,
+      "sha256": "93095e2216db3743d9eedfde1b151c1f72883e44c004f9fe30feaf5590bb60d7"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/core1-run.log",
+      "bytes": 14462,
+      "sha256": "e45b3537078c84e9f666d9657f4a6859b83a5de4b3153972f48bb15226fcc478"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/disassembly.txt",
+      "bytes": 11241046,
+      "sha256": "40d97b84a6fc529e4444f5a0f1eab44dfffc36cc5dc938f5e25300c34b3d95ff"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/elf-attributes.txt",
+      "bytes": 336,
+      "sha256": "29d6d04c7e30d62addf6659f757ad117bcab87abb6ff8a56d41f9361bf4e6e2e"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/exact-source-pins.json",
+      "bytes": 66773,
+      "sha256": "29fd803fca7db0b18f7ef4ae9d766310c593614ae6a464a89bffa4b322842262"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/functions.json",
+      "bytes": 2934966,
+      "sha256": "b6e470aecf44fd19b89d6cd6ce57e4b2f4fb8d0d6ebcc856a21d427061994070"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/graph-delta.json",
+      "bytes": 234608,
+      "sha256": "b9f7d907ea5821bc69f38b33d5a09038266081cf4d90dc684954690ac5d3e100"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/new-selector-routes.json",
+      "bytes": 42169,
+      "sha256": "d1d16ee0bb0a4c2e86cf19cd7502f2a087d8f80e16bef764a923d1a69f0d5a32"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/old140-transferred.json",
+      "bytes": 256277,
+      "sha256": "b7094616b71d73e944fac24e4f904788f46f8a51c88c006ea0f9557e9eb799aa"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/result.json",
+      "bytes": 1467,
+      "sha256": "d95f9b6541d01846d329ec9ad5305dc0646ffcdeba813d788db1c3d29a6fe065"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/sdk-rehash.json",
+      "bytes": 28389,
+      "sha256": "bc27206397f48f9be2cea79a3e5b907748634b007aeac7c722d1c7dab491d6ca"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/sections-size.txt",
+      "bytes": 1111,
+      "sha256": "782a1831e93fef8cb9b33947a8c41ed4dd8a01e6eb7269383d3c2088ede9a1f5"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/startup-transfer.json",
+      "bytes": 3545,
+      "sha256": "6d9e9d4b5bdf2ee8b7cfdb5a20fd219eeca2b4ec12d35b5e3e909c47dfcad5de"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/static-layout.json",
+      "bytes": 2735,
+      "sha256": "305d43d9dd3fb3f508dd1ebe092e0d61da57ef27e6415d9b2f2b8cc48416bcd0"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/symbols.json",
+      "bytes": 542969,
+      "sha256": "9307715fb9024f0fe079cc196eb73414c068a152fa415a3fe263e53426a84fe0"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/symbols.txt",
+      "bytes": 377626,
+      "sha256": "a1483cb9870190ee3fb1ef8e894ac81e90c8057a0c5ff14834241c93403dd131"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/vtable-correspondence.json",
+      "bytes": 9403,
+      "sha256": "009645dcbcfe86b59a8fcfb283a1773f8c0e4ddf13b508427aefb20d7432c30e"
+    },
+    {
+      "path": "/private/tmp/glyph-selector-resource-audit-20261022/exact4898/vtables.json",
+      "bytes": 349742,
+      "sha256": "a244e0b7a9d965ff71bf220e09ae735e7187dc085e01faef64981f4e6513af79"
+    }
+  ]
+}

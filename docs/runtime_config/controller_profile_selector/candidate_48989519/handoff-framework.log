@@ -1,0 +1,9 @@
+FAIL: zero runway plus absent/stale/consumed packet requires PLANNER_REFRESH_REQUIRED
+PASS: required docs and JSON schemas exist and parse
+PASS: current framework surface is Codex/OpenAI-only
+PASS: task/lane routing, requested/observed dispatch policy and negative controls validate
+PASS: optional chapter roster, model provenance, transport/recovery boundaries and negative controls validate
+PASS: Planner/Curator packet object and survivor adversarial cases validate
+PASS: legacy Curator receipt immutability adversarial cases validate
+PASS: append-only Curator receipt registry adversarial cases validate
+PASS: new zero/nonzero Planner receipts and accepted-wait adversarial cases validate

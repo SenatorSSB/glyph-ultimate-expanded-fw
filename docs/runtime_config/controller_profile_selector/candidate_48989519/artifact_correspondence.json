@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "ELF_flash_PT_LOAD_segments": 2,
+  "base": "0x10000000",
+  "BIN_bytes": 522596,
+  "UF2_blocks": 2042,
+  "zero_padding_bytes": 156,
+  "ELF_BIN_UF2_exact": true
+}

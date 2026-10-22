@@ -1,0 +1,30 @@
+{
+  "schema/haybox/config.proto": {
+    "bytes": 33965,
+    "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec"
+  },
+  "schema/haybox/config.options": {
+    "bytes": 6441,
+    "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1"
+  },
+  "platformio.ini": {
+    "bytes": 3517,
+    "sha256": "7093257a6c85ef5a325ee49a86e97f56a12f2bfdac467edfde29ba56399fd405"
+  },
+  "builder_scripts/native_target_metrics.py": {
+    "bytes": 1953,
+    "sha256": "ce41658b2e69eb61877ce27b3a5c345aa2980ad503db9a721f86a4198a985914"
+  },
+  ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.h": {
+    "bytes": 125759,
+    "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f"
+  },
+  ".pio/build/glyph_mk6/nanopb/generated-src/config.pb.c": {
+    "bytes": 1774,
+    "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+  },
+  ".pio/build/glyph_mk6/native_target_metrics/native_target_source.hpp": {
+    "bytes": 227,
+    "sha256": "9c2c912a3ca8ffd05128f75a633545dd5a3362b5253d76ddfce3359d8d51c13a"
+  }
+}

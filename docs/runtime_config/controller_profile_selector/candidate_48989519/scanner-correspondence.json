@@ -1,0 +1,7 @@
+{
+  "baseline_result": "snapshot_check=FAIL\nreason=normalized scanner output differs from fixture",
+  "candidate_result": "snapshot_check=FAIL\nreason=normalized scanner output differs from fixture",
+  "normalized_base_equals_candidate": true,
+  "base_sha256": "b9dd207b37c32dd13d0f8ac237e10ed6b058102f7b734da017b40db9dee8f5ac",
+  "candidate_sha256": "b9dd207b37c32dd13d0f8ac237e10ed6b058102f7b734da017b40db9dee8f5ac"
+}

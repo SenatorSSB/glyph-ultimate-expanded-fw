@@ -1,0 +1,18 @@
+{
+  "status": "PASS_SOURCE_AND_ELF_COMPOSITION",
+  "negative_controls": 4,
+  "source_sha256": {
+    "config/glyph/env.ini": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36",
+    "config/glyph/common/src/config.cpp": "326a0c8ca870114e5c4d2f59a2d79c29976b69e63e7912a4d569cc66909ed143",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561",
+    "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+    "include/core/ProfileStoreReadTrace.hpp": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd"
+  },
+  "hardware": "NOT_TESTED",
+  "underlying_RT2_cause": "UNRESOLVED",
+  "elf_sha256": "321878007d79fc09ecfe827a0058fb11d089159f0880cfc9ee459d701a6baa38",
+  "retired_symbols": "ABSENT",
+  "ordinary_DCD": "ONE",
+  "ordinary_TinyUSB_init": "WEAK_ORIGINAL"
+}

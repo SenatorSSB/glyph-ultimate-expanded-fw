@@ -1,5 +1,29 @@
 # Active Agent Queue
 
+## Controller selector exact candidate — approval required — 2026-10-22
+
+GP-NATIVE-002 is HARDWARE_TEST_REQUIRED at exact
+`4898951994bcabcaef2846145de2922a674656f8`, tree
+`7b73fe086fcc6a0c4f5f8010751a64ec2dd07150`, from retained334f.
+The existing Profile graphics/navigation now enumerate separately named native
+store records through shared backend eligibility; selection resolves a matching
+native context and performs one checked core0 reference/default save before
+committed reboot. A single-word intercore request fences competing menu resets.
+Fresh repaired-source review, both-ABI selector/Persistence/native/NOR tests,
+exact Mk6 build/custody/correspondence and linked resource proof PASS. Static
+197936, old140routes/31classes plus39new, core0max2048/new2012,
+core1retained1152, layout506/510; no limits changed. UF2
+`7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e` /1045504bytes.
+The candidate-specific approval packet and sealed evidence are in
+`docs/runtime_config/controller_profile_selector/candidate_48989519/`.
+No device action/physical PASS/HEP/source integration/DONE is claimed.
+Historical C024 menu authentication FAIL and identical base/current scanner
+snapshot FAIL remain explicit; no full aggregate PASS. GP-NATIVE-001 and all
+prior orders/evidence stay unchanged and source unmerged. Current zero-runway
+markers do not require Planner/Curator restatement of this hardware handoff.
+Nunchuk NOT_TESTED; timing/highwater NOT_MEASURED; root cause UNPROVEN.
+
+
 ## Controller ProfileStore selector chapter — READY — 2026-10-22
 
 GP-NATIVE-002 is independently curated READY under the latest direct owner
@@ -504,18 +528,19 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     ]
   },
   "runway": {
-    "immediate_ready": 1,
+    "immediate_ready": 0,
     "recorded_preauthorized": 0,
     "mechanically_activatable_preauthorized": 0,
     "invalidated_preauthorized": 0,
-    "hardware_pending": 1,
-    "effective_authorized_runway": 1,
+    "hardware_pending": 2,
+    "effective_authorized_runway": 0,
     "target_effective_authorized_runway": 4,
     "target_provenance": "Initial 4-hour Implementation / 12-hour Curator cadence: three expected opportunities plus one resilience item; target only, never a quota.",
-    "primary_liveness": "RUNWAY_LOW"
+    "primary_liveness": "PLANNING_REQUIRED"
   },
   "signals": [
-    "RUNWAY_LOW",
+    "PLANNING_REQUIRED",
+    "PLANNER_REFRESH_REQUIRED",
     "HARDWARE_TEST_REQUIRED",
     "REPAIR_REQUIRED"
   ],
@@ -8907,7 +8932,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
     {
       "id": "GP-NATIVE-002",
       "title": "Controller-side native ProfileStore profile selection",
-      "status": "READY",
+      "status": "HARDWARE_TEST_REQUIRED",
       "branch": "codex/gp-native-002-controller-selector",
       "objective": "Expose eligible separately named stored native profiles in the existing scrollable .Profile menu and commit selected profile/context/current backend coherently before reboot activation.",
       "why_this_matters": "Configurator-driven selection already exists; the owner requires the controller menu itself to select among at least20 stored profiles.",
@@ -8950,25 +8975,27 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "canonical_build": "pio run -e glyph_mk6",
       "expected_artifact": ".pio/build/glyph_mk6/firmware.uf2",
-      "candidate_git_sha": null,
-      "candidate_base_configurator_sha": null,
-      "firmware_artifact_build_path": null,
-      "preserved_firmware_artifact_locator": null,
-      "firmware_artifact_sha256": null,
+      "candidate_git_sha": "4898951994bcabcaef2846145de2922a674656f8",
+      "candidate_base_configurator_sha": "47d4f00a751a77f0d4de930c993813209c0998e0",
+      "firmware_artifact_build_path": "/private/tmp/glyph-native-selector-20261022/.pio/build/glyph_mk6/firmware.uf2",
+      "preserved_firmware_artifact_locator": "local_backups/hardware-artifacts/4898951994bcabcaef2846145de2922a674656f8/7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e/firmware.uf2",
+      "firmware_artifact_sha256": "7ab99a2f4461c5002c9f71b29f3b7bfe9c87f404970ecd3048e73f8ed885a81e",
       "manual_acceptance": "REQUIRED",
-      "manual_acceptance_protocol_reference": "docs/runtime_config/controller_profile_selector/owner_directive_20261022.md#physical-acceptance-preparation",
+      "manual_acceptance_protocol_reference": "docs/runtime_config/controller_profile_selector/candidate_48989519/OWNER_PACKET.md",
       "manual_acceptance_protocol_version": "GP_NATIVE_002_HW_V1",
       "hardware_evidence_contract_reference": "docs/agent_framework/HARDWARE_EVIDENCE.md",
       "hardware_evidence_contract_version": "GLYPH_HARDWARE_EVIDENCE_V2",
       "hardware_evidence_record": null,
       "hardware_result": null,
       "hardware_evidence_gaps": [
-        "Exact selector candidate/artifact has not been built or physically accepted.",
-        "USB/XInput and separately available GameCube controller-menu A->B->A,>10 scrolling,eligibility,reboot,identity/behavior,persistence/preservation rows remain required."
+        "Separate explicit owner approval for exact GP_NATIVE_002_HW_V1 installation/selection packet; no device action performed.",
+        "USB/XInput controller-menu names/eligibility/>10 scroll/20 native choices/A->B->A actual identity and distinctive behavior/power persistence remain NOT_TESTED. If existing approved records do not support20/A-B expectations, separately prepare bounded fixtures before any profile mutation.",
+        "GameCube menu availability/backend retention and A->B->A distinctive behavior require separate actual observations; no USB inference.",
+        "Original Config/profile metadata/body/revision preservation readback, independent exact human HEP, all applicable predecessor gates, exact tested-source integration and separate strict DONE remain."
       ],
       "rollback_recovery": "No device action now. Concrete later packet must bind exact artifact, backups/restoration and disposable/approved profiles; do not flash automatically. Failed/uncertain persistence refuses reboot and keeps known-good state; preserve original store bodies and revisions.",
       "status_documentation_updates": "Record eight-question audit, implementation/tests/resources/source review/build/custody and exact hardware packet. Latest owner reports installed334f/nativeID27 revision1 schema5 Ultimate/normalGC and Configurator-driven native selection observed; attribute to owner, not HEP. Earlier published observations remain historical, never overwritten. GP-NATIVE-001 remains unmerged and hardware-pending with all exact evidence intact; no automatic DONE or acceptance transfer.",
-      "done_evidence": "All20 owner criteria incl physical controller A->B->A and all required routes with exact candidate/artifact HEP PASS, source-free E before exact tested-source integration I, independent integration review and separate strict glyph_done_completion_evidence after verified live integration. No DONE at build or Configurator selection.",
+      "done_evidence": "Candidate4898951994bcabcaef2846145de2922a674656f8/tree7b73fe086fcc6a0c4f5f8010751a64ec2dd07150 has both-ABI current selector/Persistence/native/NOR host proof, fresh repaired-source independent review, exact Mk6 build/custody/correspondence and independent finite linked resource PASS (old140/31 + new39, core0max2048/new2012,core1retained1152,static197936,layout506/510). Exact evidence under docs/runtime_config/controller_profile_selector/candidate_48989519/. This is HARDWARE_TEST_REQUIRED, never DONE. Historical menu C024 authentication FAIL and native scanner identical baseline/current snapshot FAIL retained; no aggregate PASS. All20 owner completion criteria still require exact physical selection/HEP and tested-source integration; GP-NATIVE-001 remains unchanged and unmerged.",
       "stop_conditions": [
         "No firmware edits until canonical READY adoption/live readback.",
         "Stop for genuine new persisted preprocessing architecture, material owner/source backend policy conflict, inability to fit unchanged resource limits or other substantive source/authority contradiction.",
@@ -8977,7 +9004,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       ],
       "activation_state": "NOT_APPLICABLE",
       "activation_requires_new_judgment": false,
-      "hardware_evidence_dependency_satisfied": null
+      "hardware_evidence_dependency_satisfied": false
     }
   ]
 }
@@ -9147,19 +9174,19 @@ Nunchuk remains NOT_TESTED; root cause remains unproven.
 ## Interpretation
 
 <!-- current-runway:start -->
-{"ready_ids":["GP-NATIVE-002"],"immediate_ready":1,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":1,"effective_authorized_runway":1,"target_effective_authorized_runway":4,"primary_liveness":"RUNWAY_LOW","global_evidence_wait_supported":false}
+{"ready_ids":[],"immediate_ready":0,"recorded_preauthorized":0,"mechanically_activatable_preauthorized":0,"invalidated_preauthorized":0,"hardware_pending":2,"effective_authorized_runway":0,"target_effective_authorized_runway":4,"primary_liveness":"PLANNING_REQUIRED","global_evidence_wait_supported":false}
 <!-- current-runway:end -->
 
 <!-- current-runway-summary:start -->
-Ready IDs: GP-NATIVE-002
-Immediate Ready: 1
+Ready IDs: (none)
+Immediate Ready: 0
 Recorded Preauthorized: 0
 Mechanically activatable Preauthorized: 0
 Invalidated Preauthorized: 0
-Hardware-pending: 1
-Effective authorized runway: 1
+Hardware-pending: 2
+Effective authorized runway: 0
 Target effective authorized runway: 4
-Primary liveness: RUNWAY_LOW
+Primary liveness: PLANNING_REQUIRED
 <!-- current-runway-summary:end -->
 
 ## 2026-10-01 23:05 portfolio Curator adjudication

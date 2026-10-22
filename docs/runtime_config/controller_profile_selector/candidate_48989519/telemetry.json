@@ -1,0 +1,47 @@
+{
+  "logical_order": "GP-NATIVE-002",
+  "full_user_chats_created": 0,
+  "native_specialist_roles": [
+    "source-authority",
+    "independent Curator",
+    "resource specialist",
+    "fresh source/safety reviewer"
+  ],
+  "Planner_calls": 0,
+  "Curator_calls": 1,
+  "no_op_calls": 0,
+  "ordinary_GP_VAL_successors": 0,
+  "exceptional_GP_VAL_repairs": 0,
+  "READY_live_canonical": "47d4f00a751a77f0d4de930c993813209c0998e0",
+  "READY_time": "2026-10-22T18:06:43Z",
+  "candidate_hardware_ready_time": "2026-10-22T18:33:38Z",
+  "READY_to_hardware_ready_seconds": 1615,
+  "hardware_report_to_DONE_seconds": null,
+  "canonical_commits_before_this_handoff": [
+    "83d580d980b8b141210d9e8a60a8d354145a8a4e",
+    "3e6153683a6c9643a1c75c369cf8829a6a62f9e2",
+    "47d4f00a751a77f0d4de930c993813209c0998e0"
+  ],
+  "source_commits": [
+    "cce6e9d96804d25274822297d7cf59f6160c9dbd",
+    "4898951994bcabcaef2846145de2922a674656f8"
+  ],
+  "internal_transitions": [
+    "audit",
+    "independent READY adoption",
+    "implementation",
+    "host proof",
+    "review P2",
+    "concrete repair",
+    "re-review PASS",
+    "clean exact build/custody",
+    "linked resource PASS",
+    "source-free hardware approval handoff"
+  ],
+  "external_handoffs": [
+    "exact hardware approval required"
+  ],
+  "device_actions": 0,
+  "source_integration": false,
+  "DONE": false
+}

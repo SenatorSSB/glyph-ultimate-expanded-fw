@@ -1,0 +1,21 @@
+{
+  "root_arithmetic_replay": [
+    {
+      "file": "old140-transferred.json",
+      "sha256": "b7094616b71d73e944fac24e4f904788f46f8a51c88c006ea0f9557e9eb799aa",
+      "rows": 140,
+      "maximum": 2048,
+      "arithmetic": "PASS"
+    },
+    {
+      "file": "new-selector-routes.json",
+      "sha256": "d1d16ee0bb0a4c2e86cf19cd7502f2a087d8f80e16bef764a923d1a69f0d5a32",
+      "rows": 39,
+      "maximum": 2012,
+      "arithmetic": "PASS"
+    }
+  ],
+  "runtime_root_MOVE_refinements": "ACCEPTED after direct Persistence331-395 and prior restore600-610/source caller readback; no new filesystem exclusion",
+  "artifact_association": "ELF/BIN/UF2 exact reconstruction and content-addressed readback PASS",
+  "scope": "No hardware/timing/highwater claim; source candidate remains unmerged"
+}

@@ -1,0 +1,17 @@
+{
+  "reviewer": "/root/selector_source_review",
+  "result": "PASS_LIMITED_HANDOFF",
+  "candidate_sha": "4898951994bcabcaef2846145de2922a674656f8",
+  "verified": [
+    "Exact source tree identity",
+    "Retained ELF/BIN/UF2 rehashed against custody",
+    "Only GP-NATIVE-002 queue object changed",
+    "Packet requires explicit owner approval and no CREATE/UPDATE/DELETE",
+    "Unsupported20-profile/A-B rows stop NOT_TESTED",
+    "No premature physical PASS/HEP/integration/DONE"
+  ],
+  "limitations": [
+    "Artifact/docs consistency review; does not duplicate independent expert resource proof",
+    "No device approval or hardware acceptance"
+  ]
+}

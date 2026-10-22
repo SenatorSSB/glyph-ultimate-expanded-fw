@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/glyph_checker_context.py", line 288, in authenticated_campaign_context
+    proof = authenticate(context.repo_root)
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/glyph_campaign_transition.py", line 84, in invoke
+    return function(*args, **kwargs)
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/glyph_campaign_transition.py", line 466, in authenticate
+    return authenticate_c024_phase(root)
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/glyph_c014_campaign_transition.py", line 1206, in authenticate_c024_phase
+    require(changed_since_i <= post_i_validation_paths,
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            'C024 post-integration change outside validation/evidence paths')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/glyph_campaign_transition.py", line 104, in require
+    if not ok: raise CorrespondenceError(message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+glyph_hardware_correspondence.CorrespondenceError: C024 post-integration change outside validation/evidence paths
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/check_glyph_docs_agent_surface.py", line 561, in main
+    context = authenticated_campaign_context(collect_checker_context(repo_root=REPO_ROOT))
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/glyph_checker_context.py", line 290, in authenticated_campaign_context
+    raise ScopeValidationError(str(exc)) from exc
+glyph_checker_context.ScopeValidationError: C024 post-integration change outside validation/evidence paths
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/check_glyph_docs_agent_surface.py", line 576, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/check_glyph_docs_agent_surface.py", line 564, in main
+    fail(str(exc))
+    ~~~~^^^^^^^^^^
+  File "/private/tmp/glyph-native-selector-curation-20261022/tools/check_glyph_docs_agent_surface.py", line 120, in fail
+    raise AgentSurfaceError(message)
+AgentSurfaceError: C024 post-integration change outside validation/evidence paths

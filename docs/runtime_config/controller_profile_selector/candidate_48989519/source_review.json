@@ -1,0 +1,14 @@
+{
+  "reviewer": "/root/selector_source_review",
+  "source_sha": "4898951994bcabcaef2846145de2922a674656f8",
+  "reviewed_base": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "source_result": "PASS",
+  "initial_review_sha": "cce6e9d96804d25274822297d7cf59f6160c9dbd",
+  "initial_finding": "P2: competing core1 menu reset actions while native selection pending",
+  "resolution": "DefaultConfigMenu HandleControls fences all controls until Complete; retained-pending and literal service actual Persistence tests pass both ABIs",
+  "limits": [
+    "No resource/build/custody approval in source review",
+    "No hardware acceptance",
+    "Historical menu checker actual C024 authentication FAIL retained; current direct tests cover affected properties"
+  ]
+}
