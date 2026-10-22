@@ -1,0 +1,23 @@
+from pathlib import Path
+import sys,json,tempfile,io,contextlib,copy
+sys.dont_write_bytecode=True
+D=Path('/private/tmp/glyph-native-reduced-execution-independent-review-20261022');sys.path.insert(0,str(D/'private_replay'))
+import guided_group as h
+s=json.load(open(h.D/'sequence.json'));step=next(copy.deepcopy(x) for g in s['groups'] for x in g['steps'] if x['selection_id']=='N092');assert step['required_visible_icon']=='x' and not step['raw']
+g={'group_id':'SYNTHETIC_ICON_CONTROL','steps':[step]};results=[]
+for response in ['mismatch\n','q\n','']:
+ with tempfile.TemporaryDirectory(dir=D) as td:
+  out=Path(td);calls=[]
+  try:
+   with contextlib.redirect_stdout(io.StringIO()):h.execute(g,{},out,io.StringIO(response),lambda *a,**k:calls.append(a))
+  except (ValueError,RuntimeError):pass
+  else:raise AssertionError('nonconfirmation accepted')
+  assert not calls and not list(out.glob('segment*')) and not (out/'summary.json').exists()
+  results.append({'case':repr(response),'refused_without_receipt_or_capture':True})
+with tempfile.TemporaryDirectory(dir=D) as td:
+ out=Path(td);buf=io.StringIO()
+ with contextlib.redirect_stdout(buf):h.execute(g,{},out,io.StringIO('\n'),lambda *a,**k:(_ for _ in ()).throw(AssertionError('capture')))
+ receipt=json.load(open(out/'segment_01_human.json'));assert receipt['visible_icons_confirmed']=={'N092':'x'} and 'REQUIRED visible X icon' in receipt['prompt'] and 'explicitly required visible icon' in receipt['prompt']
+ results.append({'case':'synthetic Enter','required_X_in_prompt_and_report':True,'machine_pixel_verification':False})
+(D/'icon-control-results.json').write_text(json.dumps({'classification':'SYNTHETIC_OFFLINE_ONLY','controls':results,'live_calls':0},indent=2)+'\n')
+print('PASS four focused icon controls; zero device calls')

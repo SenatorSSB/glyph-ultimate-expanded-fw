@@ -1,0 +1,16 @@
+{
+  "status": "UNADOPTED_DRAFT_FINDINGS_RETAINED",
+  "chronology": "Root retention instruction arrived after changes were applied. Exact pre-repair author bytes were not retained; these are explicitly post-repair available snapshots, never reconstructed parent evidence.",
+  "findings": [
+    "Coordinates alone cannot verify isolated A/B/X/Y; required visible icons added to worksheet/prompt/receipt.",
+    "Raw binding accepted SCREEN_CHECK event; explicit RAW_CAPTURE admission added and negative test.",
+    "Timeout partial stdout/stderr absent from custody; preserve fixed argv/partial streams/uncertain outcome before STOP, no retry."
+  ],
+  "available_after_repair_files": {
+    "available_after_focused_repairs_binding_contract.py": "19e79cc8347a761249978f42a445571a41daea7c80ed5ca235f0e2e9b849d489",
+    "available_after_focused_repairs_guided_group.py": "890be19dfbbf345c89b9d1a026b97c2c3b9724b054e9c8a8f2683dadc6ea1f00",
+    "available_after_focused_repairs_WORKSHEET.md": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f",
+    "available_after_focused_repairs_DEVICE_PACKET.json": "3e271fedee8f57f88803bb389d62ba29dde6673a9e9f9d7a151cffce17f9e70d"
+  },
+  "live_actions": 0
+}

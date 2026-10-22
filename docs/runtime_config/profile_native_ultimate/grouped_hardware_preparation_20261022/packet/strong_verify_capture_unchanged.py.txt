@@ -1,0 +1,46 @@
+"""Offline raw-capture correspondence only; never opens a device or grants HEP."""
+import argparse,hashlib,json,subprocess
+from pathlib import Path
+def verify(capture,packet,rowid,route,decoder,min_reports=3):
+ rows=json.loads(Path(packet).read_text())['rows'];row=next(r for r in rows if r['selection_id']==rowid)
+ backend={'xinput':'XInput','switch':'Switch','wup028':'Gamecube'}[route]
+ expected=next(b['fields'] for b in row['expected_literal_backend_assignment_fields'] if b['backend']==backend)
+ if route=='switch' and any(not 0<=v<=255 for v in expected.values()):raise ValueError('packet Switch expectation is not a wire byte; exact linked-source corrected derivative required')
+ records=[json.loads(s) for s in Path(capture).read_text().splitlines()];session=[r for r in records if r['kind']=='session'];ends=[r for r in records if r['kind']=='end']
+ if len(session)!=1 or len(ends)!=1 or records[0]['kind']!='session' or records[-1]['kind']!='end':raise ValueError('missing/duplicate session/end; incomplete or concatenated capture')
+ session=session[0]
+ if session.get('purpose')!='candidate':raise ValueError('access-preflight capture cannot become candidate output evidence')
+ if session['route']!=route or session['row']!=rowid or session['candidate_source_claim']!=json.loads(Path(packet).read_text())['candidate']['git_sha']:raise ValueError('capture row/route/source claim mismatch')
+ raw=[r for r in records if r['kind']=='raw'];decoded_rows=[r for r in records if r['kind']=='decoded'];decoded={r['sequence']:r for r in records if r['kind']=='decoded'}
+ if len(raw)<min_reports or len(raw)!=len(decoded) or len(decoded_rows)!=len(decoded) or ends[0]['reports']!=len(raw):raise ValueError('insufficient/incomplete raw and decoded report pairs')
+ if any(r['kind'] not in ['session','raw','decoded','end','adapter_init13_out','usb_interface','usb_pipe','hid_descriptor'] for r in records):raise ValueError('failure/unrecognized record')
+ if len([r for r in records if r['kind']=='adapter_init13_out'])>1:raise ValueError('adapter init repeated')
+ for r in records:
+  if r['kind']=='adapter_init13_out' and (route!='wup028' or not session['adapter_init13_explicitly_allowed'] or type(r.get('ior_return')) is not int or r['ior_return']!=0 or r.get('completion_received') is not True or type(r.get('completion_ior_return')) is not int or r['completion_ior_return']!=0 or type(r.get('bytes_written')) is not int or r['bytes_written']!=1 or r.get('pending') is not False or r.get('outcome')!='complete'):raise ValueError('unapproved/failed/uncertain adapter init: completion must be status0 and exactly1 known byte')
+ if route=='switch':
+  descriptors=[r for r in records if r['kind']=='hid_descriptor'];expected_desc=(Path(__file__).resolve().parent/'F_Switch_HID_descriptor.bin').read_bytes().hex()
+  if len(descriptors)!=1 or descriptors[0]['hex']!=expected_desc:raise ValueError('missing/wrong exactF Switch descriptor')
+ else:
+  interfaces=[r for r in records if r['kind']=='usb_interface'];pipes=[r for r in records if r['kind']=='usb_pipe']
+  if len(interfaces)!=1 or len(pipes)!=2 or any(r['type']!=3 for r in pipes) or set(r['direction'] for r in pipes)!={0,1}:raise ValueError('USB descriptor/endpoint ambiguity')
+  d=interfaces[0];vid,pid=(0x738,0x4726) if route=='xinput' else (0x57e,0x337)
+  if (d['vendor'],d['product'])!=(vid,pid) or d['alt']!=0 or not d['configuration']:raise ValueError('USB identity/alternate/configuration mismatch')
+  if route=='xinput' and ((d['class'],d['subclass'],d['protocol'])!=(255,93,1) or any(p['max_packet']!=32 for p in pipes)):raise ValueError('wrong XInput interface')
+  if route=='wup028' and (d['interface']!=0 or any(not 37<=p['max_packet']<=64 for p in pipes if p['direction']==1)):raise ValueError('wrong WUP028 interface/IN packet extent')
+ previous=-1
+ for i,r in enumerate(raw,1):
+  if r['sequence']!=i or r['monotonic_ns']<previous:raise ValueError('sequence/timestamp order')
+  previous=r['monotonic_ns']
+  if len(bytes.fromhex(r['hex']))!=r['length']:raise ValueError('raw length mismatch')
+  d=decoded[i]
+  if d['monotonic_ns']!=r['monotonic_ns']:raise ValueError('field/raw timestamp mismatch')
+  result=subprocess.run([str(decoder),route,r['hex'],str(session['port'] if route=='wup028' else 1),str(r['report_id'])],capture_output=True,text=True)
+  if result.returncode:raise ValueError('raw parser refusal: '+result.stderr)
+  actual=json.loads(result.stdout)
+  if actual!=expected or d['fields']!=actual:raise ValueError('complete raw-report field mismatch; no scaling/clamping/remapping tolerated')
+ return {'status':'MATCH_HOST_CAPTURE_CORRESPONDENCE_ONLY_NOT_HEP','route':route,'selection_id':rowid,'reports':len(raw),'capture_sha256':hashlib.sha256(Path(capture).read_bytes()).hexdigest(),'packet_sha256':hashlib.sha256(Path(packet).read_bytes()).hexdigest(),'decoder_sha256':hashlib.sha256(Path(decoder).read_bytes()).hexdigest(),'fields':expected,'qualification':'Matching reports do not attest flashed firmware, earlier session, other route, console delivery, native untransmitted bits, or electrical Joybus. Hardware result requires genuine approved provenance and independent HEP.'}
+def main():
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--capture',required=True,type=Path);p.add_argument('--packet',required=True,type=Path);p.add_argument('--row',required=True);p.add_argument('--route',choices=['xinput','switch','wup028'],required=True);p.add_argument('--decoder',required=True,type=Path);p.add_argument('--min-reports',type=int,default=3);a=p.parse_args();
+ if not 3<=a.min_reports<=10000:p.error('min-reports must be3..10000')
+ print(json.dumps(verify(a.capture,a.packet,a.row,a.route,a.decoder,a.min_reports),indent=2))
+if __name__=='__main__':main()

@@ -1,0 +1,51 @@
+from pathlib import Path
+import hashlib,json,shutil,subprocess,os,re,collections
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-reduced-execution-packet-20261022');H=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');F=Path('/private/tmp/glyph-profile-native-20261020');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+expected={'PINS.json':'427f4aacaa3b933c77caa334f0f3e2cea360a5d8d941653d9cda282d65d20560','TECHNICAL_HOLD.json':'151d458c18748141497e951bfe602de1ea7ad8516bb17eba26aa6a452466e7f0','DEVICE_PACKET.json':'3e271fedee8f57f88803bb389d62ba29dde6673a9e9f9d7a151cffce17f9e70d','sequence.json':'b09211357e973c4311110922e39d2387461660d8c601851fa3187cad38fdadc3','WORKSHEET.md':'91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f','OPERATOR_PACKET.md':'14271517b02b016e1dd93274ed5664402e373d9e4a6aab46c76818a246f6d30c'}
+for n,h in expected.items():assert sha(P/n)==h,n
+pins=json.loads((P/'PINS.json').read_text())
+for n,h in pins['files'].items():assert sha(P/n)==h,n
+for n,h in pins['external_inputs'].items():assert sha(Path(n))==h,n
+D=O/'private_replay';D.mkdir(exist_ok=True)
+for n in [*pins['files'],'PINS.json']:
+ (D/n).parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(P/n,D/n)
+(O/'frozen-input-verification.json').write_text(json.dumps({'exact_seals':expected,'internal_file_count':len(pins['files']),'external_file_count':len(pins['external_inputs']),'all_match':True,'live_calls':0},indent=2)+'\n')
+# Execute only inspected pure/mocked test entrypoint: its one native call is --check-binding.
+t=(D/'test_reduced.py').read_text();assert "'--check-binding'" in t and 'h.main(' not in t and 'port.open' not in t
+r=json.loads((O/'focused-test-run.json').read_text());assert r['returncode']==0 # reuse completed applicable run, no repeat
+s=json.loads((P/'sequence.json').read_text());m=json.loads((P/'acceptance_comparison_matrix.json').read_text());rs={r['selection_id']:r for r in m['rows']};p=json.loads((P/'DEVICE_PACKET.json').read_text());c=collections.Counter()
+for e in s['events']:c.update(e['maximum_cost'])
+assert dict(c)==s['future_costs']==p['future_costs']
+assert c['raw_capture_invocations']==20 and c['raw_read_submissions']==80 and c['strict_measurement_reports']==60 and c['logged_drain_reports']==20
+assert c['Menu_Configurator_restarts']==18 and c['ordinary_USB_restarts']==19 and s['future_firmware_restarts']==37
+assert len(s['groups'])==20 and sum(len(g['steps'])for g in s['groups'])==209
+numeric=[];ordered=[]
+for g in s['groups']:
+ prefix=[]
+ for st in g['steps']:
+  row=rs[st['selection_id']];assert st['physical_held_input_ids']==row['physical_held_input_ids'] and st['physical_held_input_names']==row['physical_held_input_names']
+  raw=row.get('expected_complete_native_output',row.get('expected_complete_output_state'));want={k:raw[k]-128 if 'Stick'in k else raw[k] for k in ['leftStickX','leftStickY','rightStickX','rightStickY','triggerLAnalog','triggerRAnalog']};assert st['expected_dashboard_six_values']==want,st['selection_id'];numeric.append(st['selection_id'])
+  if g['ordered_history']:
+   assert st['required_history_before_this_row']==prefix==row['history_before_this_row'];ordered.append(st['selection_id'])
+  else:assert st['required_history_before_this_row']==[] and st['history_contract']=='STATELESS_SETTLED_SAMPLE_NO_FROZEN_GROUP_EXECUTION_CLAIM'
+  prefix.append(st['physical_held_input_ids'])
+for i in range(6):
+ g=next(g for g in s['groups']if g['description'].startswith('SOCD_'+str(i)+' '));assert g['ordered_history'] and g['new_boot'] and len(g['steps'])==13
+ assert [st['selection_id']for st in g['steps']]==[f'O{n:03}'for n in range(378+13*i,391+13*i)]
+ assert g['steps'][11]['raw'] and g['steps'][12]['physical_held_input_ids']==[] and not g['steps'][12]['raw']
+# All representative IDs actually scheduled; raw coverage never names screen-only row.
+selected={st['selection_id']for g in s['groups']for st in g['steps']};rawset={st['selection_id']for g in s['groups']for st in g['steps']if st['raw']}
+assert {z['family']for z in p['coverage_18']}==set(range(1,19))
+for z in p['coverage_18']:assert set(z['selected_screen_rows'])<=selected and set(z['selected_raw_rows'])<=rawset and z['result']=='NOT_TESTED'
+# Compare every printed full-grid cell against source-pinned immutable compatibility catalog.
+cat=json.loads((F/'docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/expected_observations.json').read_text());text=(P/'WORKSHEET.md').read_text();gridtext=text[text.index('# Optional full nine-way table reference'):];cells=re.findall(r'O(\d+) \((-?\d+),(-?\d+);(-?\d+),(-?\d+);(-?\d+),(-?\d+)\)',gridtext)
+for cell in cells:
+ row=cat[int(cell[0])];assert row['package']=='compatibility';z=row['expected_output_state'];want=[z[k]-128 if 'Stick'in k else z[k]for k in ['leftStickX','leftStickY','rightStickX','rightStickY','triggerLAnalog','triggerRAnalog']];assert list(map(int,cell[1:]))==want
+sections=re.split(r'^## Optional ',gridtext,flags=re.M)[1:];assert all(len(re.findall(r'O\d+ \(',part))==9 for part in sections)
+# Preservation H12: confirmed restore then two owned deletions then final checks then single original boot.
+restore=next(e['index']for e in s['events']if e['kind']=='LOGICAL_RESTORE');deletes=[e['index']for e in s['events']if e['kind']=='PROFILE_DELETE'];assert len(deletes)==2 and restore<min(deletes)
+lastboot=[e for e in s['events']if e['kind']=='ORDINARY_USB_REINITIALIZATION'][-1];assert max(deletes)<lastboot['index'] and lastboot['profile']==4
+assert len([e for e in s['events']if e['kind']=='CONFIGURATOR_SESSION'and restore<e['index']<max(deletes)])==0
+finalreads=[e['profile']for e in s['events']if e['kind']=='PROFILE_READ'and max(deletes)<e['index']<lastboot['index']];assert sorted(finalreads)==p['protected_original_IDs']
+result={'status':'PASS_FOCUSED_OFFLINE_PENDING_FINAL_CLARIFICATION_BINDING','focused_author_cases':len(json.loads((D/'test_evidence/results.json').read_text())['checks']),'all209_numeric_plateaus_exact':True,'all6_SOCD13state_prefixes_and_raw_step12_exact':True,'ordered_steps_checked':len(ordered),'full_grid_sections':len(sections),'source_exact_grid_cells':len(cells),'representative_families':18,'future_counts':dict(c),'total_raw_including_retained2':22,'total_reads_including_retained8':88,'H12_same_session_restore_delete_then_originalboot':True,'live_calls':0}
+(O/'independent-results.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

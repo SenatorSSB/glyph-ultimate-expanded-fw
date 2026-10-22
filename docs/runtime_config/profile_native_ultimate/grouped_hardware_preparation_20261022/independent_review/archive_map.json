@@ -1,0 +1,56 @@
+{
+  "kind": "PUBLIC_SAFE_REVIEW_ARCHIVE",
+  "excluded": "private_replay synthetic proof payloads not published",
+  "files": {
+    "REPORT.md": {
+      "archive_path": "REPORT.md",
+      "bytes": 5768,
+      "sha256": "7483eca6c92acf8a9d8c95977929e04db228cd86810daf5d0eb6ef1a6c891341"
+    },
+    "base-input-pins.json": {
+      "archive_path": "base-input-pins.json",
+      "bytes": 2961,
+      "sha256": "48aa01dc30c471eb42f85d75562a1060855a05f549e685c04d46447ead125172"
+    },
+    "focused-test-run.json": {
+      "archive_path": "focused-test-run.json",
+      "bytes": 2933,
+      "sha256": "99e6549dab688adb6bc9d9b57fe3ff5c4aa50b3600abf3b8c456e2e51986d8fd"
+    },
+    "frozen-input-verification.json": {
+      "archive_path": "frozen-input-verification.json",
+      "bytes": 670,
+      "sha256": "78dd69a68e5b993116d2d6121af924a24b2b50c8d9b754b8a0021bf44e526c36"
+    },
+    "icon-control-results.json": {
+      "archive_path": "icon-control-results.json",
+      "bytes": 484,
+      "sha256": "87c0408f4886d8d4381ed652da21550354838aed7367bc1214a243e81459b038"
+    },
+    "icon_negative_controls.py": {
+      "archive_path": "icon_negative_controls.py.txt",
+      "bytes": 1792,
+      "sha256": "37996caf13c1efc52051036308ba5d985aa783e4bc26514d04dde319ab79391a"
+    },
+    "independent-results.json": {
+      "archive_path": "independent-results.json",
+      "bytes": 1251,
+      "sha256": "5c93295b86817cd62d6205eeca530320b30312d8d9599c88430549ff82365f75"
+    },
+    "review_frozen.py": {
+      "archive_path": "review_frozen.py.txt",
+      "bytes": 6498,
+      "sha256": "9cc418b74f8a8ece703eb715b127e6dcac939b969694f18363fe90243d84a14d"
+    },
+    "seal_review.py": {
+      "archive_path": "seal_review.py.txt",
+      "bytes": 7771,
+      "sha256": "7604ef98387de9d3a0e77d07cd1733f0ceb35e0e7e5a11902cfe2bf589589704"
+    },
+    "PINS.json": {
+      "archive_path": "PINS.json",
+      "bytes": 2188,
+      "sha256": "5a2dcdd4927d1e67111810e7ab8df1e9d25b9b77735bf6d2fd79bf2a0c086b20"
+    }
+  }
+}

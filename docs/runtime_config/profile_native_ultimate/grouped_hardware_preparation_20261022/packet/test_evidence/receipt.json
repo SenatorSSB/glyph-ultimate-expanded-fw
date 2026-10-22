@@ -1,0 +1,10 @@
+{
+  "actual_response": "\n",
+  "classification": "SYNTHETIC_TEST_ONLY_NOT_ACTUAL_HUMAN",
+  "group_id": "RG01",
+  "matched_screen_rows": [
+    "N038"
+  ],
+  "source": "ACTUAL_HUMAN_USER_REPLY",
+  "transport": "owner_terminal_stdin"
+}

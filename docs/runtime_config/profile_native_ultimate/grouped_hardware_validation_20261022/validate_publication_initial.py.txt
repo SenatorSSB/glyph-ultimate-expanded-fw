@@ -1,0 +1,144 @@
+from pathlib import Path
+from collections import Counter
+import hashlib, json, re, subprocess
+
+W = Path('/private/tmp/glyph-native-curation-20261020')
+R = W / 'docs/runtime_config/profile_native_ultimate'
+F = Path('/private/tmp/glyph-profile-native-20261020')
+O = Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw')
+D = O / 'local_backups/hardware-acceptance/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1_20261022'
+P = Path('/private/tmp/glyph-native-reduced-execution-packet-20261022')
+BASE = '88d4edecb056722c30162918335416c87f946eaa'
+
+def sh(*args, cwd=W):
+    return subprocess.check_output(args, cwd=cwd, text=True)
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+def queue(text):
+    start = text.index('```json', text.index('<!-- queue-state:start -->')) + 7
+    return json.loads(text[start:text.index('```', start)])
+
+baseline = json.loads((P / 'root_protected_baseline.json').read_text())
+assert baseline['base_sha'] == BASE
+for name, expected in baseline['protected_paths_sha256'].items():
+    assert sha(W / name) == expected, name
+
+before = queue(sh('git', 'show', BASE + ':docs/project/ACTIVE_AGENT_QUEUE.md'))
+after = queue((W / 'docs/project/ACTIVE_AGENT_QUEUE.md').read_text())
+allowed_queue = json.loads(json.dumps(before))
+item = next(x for x in after['items'] if x['id'] == 'GP-NATIVE-001')
+next(x for x in allowed_queue['items'] if x['id'] == item['id'])['hardware_evidence_gaps'] = item['hardware_evidence_gaps']
+assert after == allowed_queue
+assert item['status'] == 'HARDWARE_TEST_REQUIRED' and item['hardware_result'] is None
+assert not item['hardware_evidence_dependency_satisfied']
+
+old_status = json.loads(sh('git', 'show', BASE + ':docs/runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.json'))
+new_status = json.loads((R / 'exact_candidate_334f_status_20261021.json').read_text())
+allowed_status = {'grouped_native_acceptance_preparation'}
+assert {k for k in set(old_status) | set(new_status) if old_status.get(k) != new_status.get(k)} <= allowed_status
+assert sh('git', 'rev-parse', 'HEAD', cwd=F).strip() == baseline['F']
+assert not sh('git', 'status', '--porcelain', cwd=F)
+custody = O / Path(old_status['artifacts']['preserved_firmware_artifact_locator']).parent
+for name, key in [('firmware.uf2', 'uf2'), ('firmware.elf', 'elf'), ('firmware.bin', 'bin')]:
+    p = custody / name
+    expected = old_status['artifacts'][key]
+    assert p.is_file() and not p.is_symlink() and p.stat().st_size == expected['bytes']
+    assert sha(p) == expected['sha256']
+
+state = json.loads((D / 'campaign_state.json').read_text())
+assert state['B00_completed_baseline_cases'] == ['B000', 'B001']
+assert state['next_event_index'] == 30
+assert not state['actual_owned_profile_ids']
+assert state['completed_counters'].get('raw_capture_invocations') == 2
+assert state['completed_counters'].get('raw_read_submissions') == 8
+for name in ['PROFILE_CREATE', 'PROFILE_UPDATE', 'PROFILE_SET-REFERENCE', 'PROFILE_DELETE', 'SET_CONFIG_commands', 'target_metric_queries']:
+    assert state['completed_counters'].get(name, 0) == 0, name
+
+A = R / 'grouped_hardware_preparation_20261022'
+V = R / 'grouped_hardware_validation_20261022'
+assert sha(P / 'PINS.json') == '427f4aacaa3b933c77caa334f0f3e2cea360a5d8d941653d9cda282d65d20560'
+pins = json.loads((P / 'PINS.json').read_text())
+archive = json.loads((A / 'packet/archive_map.json').read_text())['files']
+assert len(pins['files']) == 37 and len(archive) == 38
+for name, record in archive.items():
+    source = P / name
+    target = A / 'packet' / record['archive_path']
+    assert source.is_file() and not source.is_symlink()
+    assert target.read_bytes() == source.read_bytes()
+    assert sha(target) == record['sha256'] and target.stat().st_size == record['bytes']
+for name, expected in pins['files'].items():
+    assert sha(P / name) == expected, name
+for name, expected in pins['external_inputs'].items():
+    assert sha(name) == expected, name
+
+review = json.loads((A / 'independent_review/PINS.json').read_text())
+assert sha(A / 'independent_review/PINS.json') == '5a2dcdd4927d1e67111810e7ab8df1e9d25b9b77735bf6d2fd79bf2a0c086b20'
+review_map = json.loads((A / 'independent_review/archive_map.json').read_text())['files']
+for name, record in review_map.items():
+    assert sha(A / 'independent_review' / record['archive_path']) == record['sha256']
+for name, expected in review['approval_bound_root_inputs'].items():
+    assert sha(name) == expected, name
+assert review['live_calls'] == 0 and review['hardware_result'] is None
+
+custody = json.loads((A / 'host_packet_custody.json').read_text())
+assert sha(A / 'host_packet_custody.json') == '83cc9f1cd6b78ea0f371d9ad4e68522967652c9fb51f17ca8b122c903dfd2bae'
+for name, record in custody['files'].items():
+    path = Path(custody['custody_directory']) / name
+    assert path.is_file() and not path.is_symlink()
+    assert path.stat().st_size == record['bytes'] and sha(path) == record['sha256']
+
+packet = json.loads((P / 'DEVICE_PACKET.json').read_text())
+sequence = json.loads((P / 'sequence.json').read_text())
+costs = Counter()
+for event in sequence['events']:
+    costs.update(event['maximum_cost'])
+assert dict(costs) == sequence['future_costs'] == packet['future_costs']
+assert costs['raw_capture_invocations'] == 20 and costs['raw_read_submissions'] == 80
+assert costs['logged_drain_reports'] == 20 and costs['strict_measurement_reports'] == 60
+assert costs['Menu_Configurator_restarts'] == 18 and costs['ordinary_USB_restarts'] == 19
+assert sum(costs[k] for k in ['PROFILE_CREATE', 'PROFILE_UPDATE', 'PROFILE_SET-REFERENCE', 'PROFILE_DELETE', 'SET_CONFIG_commands']) == 35
+assert packet['required_screen_positions'] == 209 and packet['future_firmware_restarts'] == 37
+assert sha(A / 'OWNER_PACKET.md') == '70b1440667c2ea03384c7545ba656b22143e5644826943cdeed4c189b0912171'
+for name, record in json.loads((A / 'manifest.json').read_text())['files'].items():
+    assert (A / name).stat().st_size == record['bytes'] and sha(A / name) == record['sha256'], name
+
+current_docs = {'docs/AGENT_CONTEXT.md', 'docs/CURRENT_STATE.md', 'docs/ROADMAP.md', 'docs/project/ACTIVE_AGENT_QUEUE.md'}
+current_docs |= {'docs/runtime_config/profile_native_ultimate/' + n for n in ['README.md', 'chapter_ledger.md', 'exact_candidate_334f_status_20261021.md', 'exact_candidate_334f_status_20261021.json']}
+prefixes = ['docs/runtime_config/profile_native_ultimate/' + n + '/' for n in ['grouped_hardware_preparation_20261022', 'grouped_hardware_validation_20261022']]
+changed = set(sh('git', 'diff', '--name-only', BASE).splitlines()) | set(sh('git', 'ls-files', '--others', '--exclude-standard').splitlines())
+assert current_docs <= changed
+assert all(n in current_docs or any(n.startswith(p) for p in prefixes) for n in changed)
+
+meta = json.loads((D / 'C00/configurator_port.json').read_text())['matches'][0]
+identity = json.loads((D / 'C00/identity_stdout.txt').read_text())
+private = [meta['serial_number'].encode(), str(identity['token']).encode(), hex(identity['token']).encode()]
+for path in (D / 'B00').rglob('*identity*'):
+    if not path.is_file():
+        continue
+    try:
+        value = json.loads(path.read_text())
+    except (ValueError, UnicodeDecodeError):
+        continue
+    if isinstance(value, dict) and isinstance(value.get('token'), int):
+        private.extend([str(value['token']).encode(), hex(value['token']).encode()])
+links = 0
+for name in changed:
+    path = W / name
+    data = path.read_bytes()
+    assert b'\0' not in data and all(v not in data for v in private), name
+    if name.endswith('.md'):
+        for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)', data.decode()):
+            if re.match(r'^[a-z]+:', target) or target.startswith('#'):
+                continue
+            assert (path.parent / target.split('#')[0]).exists(), (name, target)
+            links += 1
+subprocess.run(['git', 'diff', '--check'], cwd=W, check=True)
+assert 'glyph_agent_framework_docs: PASS' in (V / 'framework.log').read_text()
+assert 'status=PASS' in (V / 'sequence.log').read_text()
+assert 'glyph_docs_navigation: PASS' in (V / 'navigation.log').read_text()
+assert not (V / 'diff.log').read_bytes()
+result = {'scope': 'SOURCEFREE_GROUPED_PREPARATION_ONLY', 'framework_sequence_navigation_diff': 'PASS', 'protected_inputs': len(baseline['protected_paths_sha256']), 'other_orders_unchanged': len(after['items']) - 1, 'queue_only_change': 'GP-NATIVE-001.hardware_evidence_gaps', 'F_artifacts_and_prior_protocol_evidence_unchanged': True, 'internal_packet_files': 37, 'external_packet_inputs': len(pins['external_inputs']), 'durable_host_files': len(custody['files']), 'independent_affected_checks': '28 pure/mock and4 actual-helper icon controls PASS; no physical evidence', 'future_raw_captures': 20, 'future_raw_reads': 80, 'future_screen_positions': 209, 'future_restarts': 37, 'future_persistent_requests': 35, 'all6_SOCD_histories_retained': True, 'revised_owner_approval': 'PENDING', 'no_new_device_actions': True, 'private_unit_token_not_published': True, 'changed_paths': len(changed), 'local_links': links, 'hardware_PASS_integration_DONE': False, 'aggregate': 'NOT_RERUN_NO_GLOBAL_PASS'}
+(V / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
+print(json.dumps(result, indent=2))

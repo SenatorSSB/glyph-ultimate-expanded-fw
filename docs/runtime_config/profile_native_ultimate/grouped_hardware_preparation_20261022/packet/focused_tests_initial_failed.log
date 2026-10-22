@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/private/tmp/glyph-native-reduced-execution-packet-20261022/test_reduced.py", line 44, in <module>
+    write_j(j);assert v.verify_bound(cp,D/'acceptance_comparison_matrix.json',binding,execution())['measurement_reports']==3;passed('strict_full21_synthetic_N038_match_with_explicit_drain')
+                      ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-native-reduced-execution-packet-20261022/verify_native_capture.py", line 40, in verify_bound
+    z=subprocess.run([str(H/'parser_cli'),'xinput',r['hex'],'1','0'],capture_output=True,text=True);b.require(z.returncode==0 and json.loads(z.stdout)==d['fields'] and len(bytes.fromhex(r['hex']))==20,'every report including drain structurally valid')
+                                                                                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-native-reduced-execution-packet-20261022/binding_contract.py", line 14, in require
+    if not x:raise ValueError(msg)
+             ^^^^^^^^^^^^^^^^^^^^^
+ValueError: every report including drain structurally valid

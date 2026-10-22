@@ -1,0 +1,29 @@
+{
+  "kind": "DIRECT_OWNER_STEERING_NOT_REVISED_DEVICE_APPROVAL",
+  "date": "2026-10-22",
+  "actual_owner_messages": [
+    "just to confirm, we are not going to test 50 things like this, right? thinking steps between every move?",
+    "what is the benefit compared to me just checking all the modifier tables work as expected? You printing out those tables and me viewing the miniscreen?",
+    "let's proceed then"
+  ],
+  "authorized_continuation": "Prepare grouped printed coordinate worksheets and a smaller targeted USB sequence under the existing full native chapter. Retain the original goal and required safety, exact-candidate, physical-evidence and restoration gates.",
+  "not_inferred": [
+    "Approval of unpublished revised device commands or packet bytes",
+    "Waiver of five SOCD policy histories",
+    "Observation of hidden fields or unexecuted rows",
+    "Hardware PASS, source integration or strict DONE"
+  ],
+  "original_494_packet": "Retained immutable; do not resume old next B002 while preparing replacement.",
+  "current_physical_evidence": {
+    "C00_original_Config_and_all_22_profiles": "PRESERVATION_PASS",
+    "completed_original_baseline_cases": ["B000", "B001"],
+    "raw_captures": 2,
+    "raw_reads": 8,
+    "native_activated": false,
+    "Config_profile_writes": 0,
+    "target_metrics": "NOT_MEASURED",
+    "firmware_installations": 1,
+    "candidate": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "UF2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "classification": "SYNTHETIC_OFFLINE_ONLY",
+  "controls": [
+    {
+      "case": "'mismatch\\n'",
+      "refused_without_receipt_or_capture": true
+    },
+    {
+      "case": "'q\\n'",
+      "refused_without_receipt_or_capture": true
+    },
+    {
+      "case": "''",
+      "refused_without_receipt_or_capture": true
+    },
+    {
+      "case": "synthetic Enter",
+      "required_X_in_prompt_and_report": true,
+      "machine_pixel_verification": false
+    }
+  ],
+  "live_calls": 0
+}

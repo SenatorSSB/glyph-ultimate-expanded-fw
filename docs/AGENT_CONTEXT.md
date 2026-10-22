@@ -1,5 +1,24 @@
 # Agent Context
 
+## Reviewed grouped hardware packet — revised approval required — 2026-10-22
+
+The owner-directed [grouped acceptance packet](runtime_config/profile_native_ultimate/grouped_hardware_preparation_20261022/OWNER_PACKET.md)
+has passed one focused independent preparation review: twenty further USB
+captures/eighty reads, 209 visible-state positions in twenty owner groups,
+thirty-seven restarts and thirty-five bounded persistent requests. All six SOCD
+histories and representative eighteen-family coverage remain. Printed nine-way
+grids and a genuine owner-terminal guide replace per-pose chat. The sampling
+amendment and family-9 observation clarification are explicit approval inputs;
+visible-field reports never establish hidden fields or unexecuted cases.
+
+Revised exact device approval remains pending. Do not execute the old next B002
+pose or the new sequence yet. C00 preservation and B000/B001 remain immutable;
+only two legacy captures/eight reads exist. Original legacy4 remains active,
+F334f remains unchanged/installed once/unmerged, and no native activation,
+Config/profile mutation, target metric or second flash has occurred. Other-route
+gaps, exact human HEP, tested-source integration and strict DONE remain open.
+This current checkpoint supersedes older pending/next-pose instructions below.
+
 ## Owner-approved native XInput campaign: C00 preservation PASS — 2026-10-22
 
 The owner approved [the exact bounded XInput campaign](runtime_config/profile_native_ultimate/native_xinput_campaign_20261022/README.md).

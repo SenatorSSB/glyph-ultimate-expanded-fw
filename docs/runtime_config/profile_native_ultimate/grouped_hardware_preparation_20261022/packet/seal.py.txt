@@ -1,0 +1,13 @@
+"""Hash-only private closure; no device/Git/network operations."""
+from pathlib import Path
+import hashlib,json
+D=Path(__file__).resolve().parent
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,x):Path(p).write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
+core=['DEVICE_PACKET.json','sequence.json','WORKSHEET.md','OPERATOR_PACKET.md','COMMANDS.json','binding_contract.py','verify_native_capture.py','guided_group.py','acceptance_comparison_matrix.json','strong_verify_capture_unchanged.py','SOURCE_PROVENANCE.json','source_context_correspondence.json','REUSED_EVIDENCE_PINS.json','test_reduced.py','test_evidence/results.json','focused_tests.log','REPORT.md']
+save(D/'TECHNICAL_HOLD.json',{'status':'SOURCE_AND_PACKET_HOLD_DRAFT_REVIEW_REQUIRED_NOT_DEVICE_AUTHORITY','code_and_packet':{n:sha(D/n)for n in core},'frozen_native_binary_sha256':'ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164','source_F_unchanged':True,'live_actions':0,'approval_state':'NOT_APPROVED'})
+files={str(p.relative_to(D)):sha(p)for p in D.rglob('*')if p.is_file()and p.name not in ['PINS.json','root_protected_baseline.json']and'tmp'not in p.relative_to(D).parts and'__pycache__'not in p.parts}
+external=json.loads((D/'SOURCE_PROVENANCE.json').read_text())['external_inputs']
+external.update(json.loads((D/'REUSED_EVIDENCE_PINS.json').read_text())['files'])
+save(D/'PINS.json',{'kind':'PRIVATE_REDUCED_PACKET_CLOSURE_NOT_APPROVAL','files':files,'external_inputs':external,'excluded':['root_protected_baseline.json','tmp/','__pycache__/','PINS.json itself'],'source_F_unchanged':True,'live_actions':0})
+print(json.dumps({'directory':str(D),'PINS.json':sha(D/'PINS.json'),'TECHNICAL_HOLD.json':sha(D/'TECHNICAL_HOLD.json'),'DEVICE_PACKET.json':sha(D/'DEVICE_PACKET.json'),'sequence.json':sha(D/'sequence.json'),'WORKSHEET.md':sha(D/'WORKSHEET.md'),'OPERATOR_PACKET.md':sha(D/'OPERATOR_PACKET.md'),'binding_contract.py':sha(D/'binding_contract.py'),'verify_native_capture.py':sha(D/'verify_native_capture.py'),'guided_group.py':sha(D/'guided_group.py'),'REPORT.md':sha(D/'REPORT.md')},indent=2))

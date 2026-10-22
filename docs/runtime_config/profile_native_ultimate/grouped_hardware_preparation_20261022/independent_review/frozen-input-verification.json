@@ -1,0 +1,14 @@
+{
+  "exact_seals": {
+    "PINS.json": "427f4aacaa3b933c77caa334f0f3e2cea360a5d8d941653d9cda282d65d20560",
+    "TECHNICAL_HOLD.json": "151d458c18748141497e951bfe602de1ea7ad8516bb17eba26aa6a452466e7f0",
+    "DEVICE_PACKET.json": "3e271fedee8f57f88803bb389d62ba29dde6673a9e9f9d7a151cffce17f9e70d",
+    "sequence.json": "b09211357e973c4311110922e39d2387461660d8c601851fa3187cad38fdadc3",
+    "WORKSHEET.md": "91fb4801f20a4a20c9f906b3b6de5a396fdadb4f5eb7ee85ddec308be961ff9f",
+    "OPERATOR_PACKET.md": "14271517b02b016e1dd93274ed5664402e373d9e4a6aab46c76818a246f6d30c"
+  },
+  "internal_file_count": 37,
+  "external_file_count": 301,
+  "all_match": true,
+  "live_calls": 0
+}

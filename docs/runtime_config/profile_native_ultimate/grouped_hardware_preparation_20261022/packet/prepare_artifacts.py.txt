@@ -1,0 +1,70 @@
+"""Pure child adaptation and printable data; never invokes a device branch."""
+from pathlib import Path
+import json,hashlib,shutil
+D=Path(__file__).resolve().parent;H=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');F=Path('/private/tmp/glyph-profile-native-20261020')
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,x):Path(p).write_text(json.dumps(x,indent=2,sort_keys=True)+'\n')
+s=json.loads((D/'sequence.json').read_text());m=json.loads((H/'acceptance_comparison_matrix.json').read_text());rows={r['selection_id']:r for r in m['rows']}
+shutil.copyfile(H/'acceptance_comparison_matrix.json',D/'acceptance_comparison_matrix.json');shutil.copyfile(H/'strong_verify_capture_unchanged.py',D/'strong_verify_capture_unchanged.py')
+b=(H/'binding_contract.py').read_text();b=b.replace("schedule=read_json(D/'native_xinput_owner_packet_draft.json');", "schedule=read_json(D/'sequence.json');require(index['sequence_sha256']==sha(D/'sequence.json'),'reduced sequence hash mismatch');")
+b=b.replace("and stimulus['history_before_this_row']==row['history_before_this_row']", "and stimulus['history_before_this_row']==planned['required_history_before_this_row'] and stimulus['history_contract']==planned['history_contract']")
+# This adds proof admission only; the native binding schema and exact oracle row remain unchanged.
+b=b.replace("current=read_json(index['runtime_identity']);", "require(index['approval_id']=='GP_NATIVE_001_GROUPED_XINPUT_ACCEPTANCE_V1' and len(index['owner_packet_approval_sha256'])==64,'exact revised approval required');current=read_json(index['runtime_identity']);")
+b=b.replace("require(stimulus['case_id']==rowid","receipt=read_json(stimulus['human_receipt']);require(sha(stimulus['human_receipt'])==stimulus['human_receipt_sha256'] and stimulus['source']==receipt['source']=='ACTUAL_HUMAN_USER_REPLY' and stimulus['transport']==receipt['transport']=='owner_terminal_stdin' and stimulus['actual_response']==receipt['actual_response']=='\\n' and rowid in receipt['matched_screen_rows'] and receipt['group_id']==session,'actual terminal receipt correspondence required');require(stimulus['case_id']==rowid")
+b=b.replace("planned=matches[0];","planned=matches[0];require(planned['kind']=='RAW_CAPTURE','screen-only case cannot obtain raw binding');")
+(D/'binding_contract.py').write_text(b)
+v=(H/'verify_native_capture.py').read_text().replace("D=Path(__file__).resolve().parent", "D=Path(__file__).resolve().parent\nH=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022')")
+for f in ['mac_hostinterface_observer','descriptor_cli','parser_cli']:v=v.replace("D/'"+f+"'", "H/'"+f+"'")
+v=v.replace("binding=b.build(matrix,b.read_json(proof_index),rowid,runid)","index=b.read_json(proof_index);b.require(b.read_json(execution)['owner_packet_approval_sha256']==index['owner_packet_approval_sha256'],'execution approval/proof mismatch');binding=b.build(matrix,index,rowid,runid)")
+(D/'verify_native_capture.py').write_text(v)
+# Explicit source-derived representative coverage, not an aggregate hardware PASS.
+coverage={
+'default': ['O000','O001','O002','O003','O004','O005','O006','O007','O008'],
+'X1':['O014'],'X2':['O023'],'Y1':['O032'],'Y2':['O041','N005'],'Tilt1':['O050'],'Tilt2':['O059'],'Tilt3':['O068'],
+'Mode':['O072','O073','O074','O075','O076','O077','O078','O079','O080','N009','N015','N021','N023','N025'],
+'normal-X':['O104','N023'],'minus-41':['O122','N027','N029','N031'],'flipper':['O158','N025'],
+'LF4/Y2 suppression':['N005'],'LT6 source submodes':['N032','N038','N041','N045','N047','N050','N053'],
+'right-stick/default and compounds':['N078','N079','N080','N081','N082','N083','N084','N085','N086','N060'],
+'forced conflict policy':['S000','S001','S002','S003','S004','S005','S006','S007','S008','S009','S010','S011','S012','S013','S014','S015','S016','S017','S018','S019','S020'],
+'complete independent output slots/OR':['S021','S022','S023','S024','S025','S026','S027','S028','S029','S030','S031','S032','S033','S034','S035','S036','S037','S038'],
+'all six SOCD policies':[f'O{i:03}'for i in range(378,456)]}
+assert len(coverage)==18
+for family,ids in coverage.items():assert all(any(st['selection_id']==rid for g in s['groups']for st in g['steps'])for rid in ids)
+original_coverage=json.loads(Path('/private/tmp/glyph-native-334f-hardware-preparation-20261021/coverage.json').read_text())
+selected={st['selection_id']for g in s['groups']for st in g['steps']};rawselected={st['selection_id']for g in s['groups']for st in g['steps']if st['raw']}
+actual_coverage=[{'family':f['family'],'name':f['name'],'source_scope':f['scope'],'selected_screen_rows':[r for r in f['selected_rows']if r in selected],'selected_raw_rows':[r for r in f['selected_rows']if r in rawselected],'result':'NOT_TESTED','unseen_fields':'UNKNOWN; screen-only is not complete output PASS'}for f in original_coverage['families']]
+assert len(actual_coverage)==18 and all(f['selected_screen_rows']for f in actual_coverage)
+packet={'kind':'EXACT_REDUCED_GROUPED_DEVICE_PACKET_DRAFT_NOT_APPROVED','approval_id':'GP_NATIVE_001_GROUPED_XINPUT_ACCEPTANCE_V1','status':'DRAFT_PENDING_INDEPENDENT_REVIEW_AND_EXACT_OWNER_APPROVAL','candidate':m['candidate'],'frozen_oracle_sha256':'dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744','matrix_sha256':sha(D/'acceptance_comparison_matrix.json'),'sequence_sha256':sha(D/'sequence.json'),'representative_detail':coverage,'coverage_18':actual_coverage,'coverage_interpretation':'Listed screen rows establish six visible numeric fields/one actually visible icon only; only selected raw rows establish all21 transmitted XInput fields. Optional grids earn evidence only if specifically reported. All other original rows NOT_TESTED physically.','events_file':'sequence.json','grouped_worksheet':'WORKSHEET.md','future_costs':s['future_costs'],'future_firmware_restarts':s['future_firmware_restarts'],'required_screen_positions':sum(len(g['steps'])for g in s['groups']),'existing_evidence_reused':s['existing_evidence_reused'],'phase_filters':{'Configurator':{'VID':'2e8a','PID':'1092','backend':8},'XInput':{'VID':'0738','PID':'4726','backend':2}},'unit_binding':'one original private serial, exactly one phase-correct CDC lookup per session; fresh actual registry IDs; frozen reader only supports location0x100000; another location STOP, no fallback','protected_original_IDs':[1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24],'owned_IDs':'actual two distinct successful CREATE response IDs only, never guessed','observer':{'directory':str(H),'binary_sha256':sha(H/'mac_hostinterface_observer'),'source_sha256':sha(H/'mac_hostinterface_observer.mm'),'metadata_header_sha256':sha(H/'acceptance_metadata.hpp'),'operation_change':False,'read_contract':'one logged structurally valid drain +3 strict matching20B measurements,4 submissions maximum,5s,32B buffer,one pending,one abort/1sgrace,8/10s watchdogs; no retry','one_drain_guarantees_settling':False},'history':'All six13-state histories plus forced7-state and complete9-state ordered groups actually performed. Other selected states explicitly stateless settled samples, not original-prefix execution.21multicontrol edges establish settled endpoints only, no frame-exact/transient/no-unlisted-sample claim.','H1':'reuse original B000/B001 actual captures, first dashboard five-position original worksheet; final postcleanup full B000/B001. Original schema3 oracle remains separate from independent native334.','H9':'two complete independent owned profiles; B ordinary reinitialization; A unchanged after B update before intentional update; distinct checked references and new-boot identities','H10':'known Configurator READ B old, guarded UPDATE B complete2, read new, unchanged Config/ref check and Configurator identity; next gameplay identity latest revision; no hotswap claim','H11':'valid mismatch checked B reference with complete1 context unchanged; six neutral screen endpoints and N141 raw; identity unavailable; not legacy fallback; checked A recovery/newboot S026 raw','H12':'guarded original user Config restore preserving seven current receipts; original-reference reboot; confirmed original restore then delete only two ownedIDs in same Configurator session, LIST3+READ22 versus C00 originals; final original basic boot+two raw baseline repeats; monotonic allocator/generation/receipts not byte-identical state','metrics':'six existing read-only snapshots, two each compatibility/complete2/SOCD2, >=1000ms interval; finite current-boot/overhead flags/calibration/expiry honest; no WCET/whole-stack claim','uncertainty_stop':'any mutation response uncertainty stops all execution; no automatic retry or restoration; root/owner review preserved receipts before any new decision','remaining_gates':['dashboard numeric-field eligibility, unknown entry procedure STOP','USB-Switch raw output observer unqualified','WUP028->Switch functional behavior cannot prove hidden simultaneous L/R/Z/numeric analog or electrical Joybus','timing/transient/latency and untransmitted fields remain unobserved','independent HEP/source integration/merge/strict DONE separate; no aggregate PASS from worksheet']}
+save(D/'DEVICE_PACKET.json',packet)
+# Each group table is the literal execution worksheet, required rows only.
+lines=['# Grouped native output worksheet — DRAFT, NOT APPROVED','','FIRST: confirm the actual view shows four resolved stick numbers and two trigger numbers. If it shows only physical-input circles, STOP. No unknown menu/chord/display setting is authorized. The source does not establish that the currently visible screen is this view.','','Numbers below are `(LX,LY,RX,RY,LT,RT)`: stick raw−128, triggers raw. A single visible priority icon is not the complete digital mask. Hold only listed physical controls; all others released. No pose is automatically applied. Owner reports actual matches/anomalies once per segment/group; targeted raw holds use real terminal Enter.','','Existing C00 originals/B000/B001 stay preserved. B00 repeats below are screen-only; no new backup/capture. Required positions209, including20 targeted raw holds; optional grids below add zero mandatory positions. No per-pose chat.','']
+for g in s['groups']:
+ lines += [f"## {g['group_id']} — {g['description']}",'',f"Profile {g['profile']}; exact context `{g['physical_context']}`; preprocessing `{g['preprocessing_sha256']}`. "+('Fresh ordinary boot and current identity/registry binding required.'if g['new_boot']else'Current known B00 original4; no new I/O.'), '']
+ if g['ordered_history']:lines+=['Perform every row in order. No deliberate extra release/reset between rows. Pause at RAW before proceeding; terminal release is listed. Stable dwell is allowed. Settled endpoint evidence does not prove same-frame switching or absence of transient intermediate states.','']
+ else:lines+=['Each listed state is a stateless settled sample. This does not claim any omitted original history prefix was performed.','']
+ lines+=['|Step / exact row|Held physical inputs (IDs)|Expected LX,LY,RX,RY,LT,RT|Evidence|','|---|---|---|---|']
+ for st in g['steps']:
+  vals=st['expected_dashboard_six_values'];six=','.join(str(vals[k])for k in ['leftStickX','leftStickY','rightStickX','rightStickY','triggerLAnalog','triggerRAnalog'])
+  held=', '.join(f'{n}({i})'for n,i in zip(st['physical_held_input_names'],st['physical_held_input_ids']))or'ALL RELEASED'
+  lines.append(f"|{st['step']} / {st['selection_id']}|{held}|{six}|{('RAW full21 fields + screen'if st['raw']else'screen six numbers')+(' + REQUIRED visible '+st['required_visible_icon'].upper()+' icon'if st.get('required_visible_icon')else'')}|")
+ lines+=['','Actual report: NOT_TESTED. Record matched rows, any discrepancy and the actually visible priority icon; hidden bits UNKNOWN. Stop on any mismatch.','']
+# Catalog compatibility grids: first19 nine-way tables have stable9 layout in original immutable catalog.
+catpath=F/'docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/expected_observations.json';cat=json.loads(catpath.read_text());compat=[(i,r)for i,r in enumerate(cat)if r['package']=='compatibility']
+lines+=['# Optional full nine-way table reference','','These printed grids are source-derived optional reference. Mandatory rows are only those listed above. Checking a whole grid is optional and must be specifically reported to become evidence. Grid cell contains original catalog O-index and `(LX,LY;RX,RY;LT,RT)`, not an angle. Physical controls remain literal catalog names.','','Immutable catalog SHA-256 `'+sha(catpath)+'`. Order is neutral,left,right,down,up,left-down,left-up,right-down,right-up. Screen top row is up.','']
+labels=['Default','X1','X2','Y1','Y2','Tilt1','Tilt2','Tilt3','Mode','Y2 + RF3 sublayer','Y2 + RF4 sublayer','X1 + X2 conflict','X1 + Y2 conflict','Tilt3 + Mode / minus41','RF6','RF7','RF9 / analog null','RF13 / flipper','LT6','RF5','RF3 + RT2 + RT3']
+# Only print groups with the exact source9-way direction pattern: verify actual held direction sets.
+dirs=[set(),{3},{1},{5},{2},{3,5},{3,2},{1,5},{1,2}]
+for start in range(0,min(378,len(compat)),9):
+ block=compat[start:start+9]
+ if len(block)!=9:break
+ base=set(block[0][1]['original_input_ids']);
+ if any(set(r['original_input_ids'])!=base|direction for (_,r),direction in zip(block,dirs)):continue
+ name=labels[start//9]if start//9<len(labels)else'catalog table '+str(start//9)
+ lines += [f'## Optional {name} — modifier carriers '+(', '.join(block[0][1]['original_inputs'])or'none'),'', '|left-up|up|right-up|','|---|---|---|']
+ cells=[]
+ for i,r in block:
+  z=r['expected_output_state'];values=[z[k]-128 if'Stick'in k else z[k]for k in ['leftStickX','leftStickY','rightStickX','rightStickY','triggerLAnalog','triggerRAnalog']];cells.append(f'O{i:03} ({values[0]},{values[1]};{values[2]},{values[3]};{values[4]},{values[5]})')
+ for order in [[6,4,8],[1,0,2],[5,3,7]]:lines.append('|'+ '|'.join(cells[i]for i in order)+'|')
+ lines+=['']
+(D/'WORKSHEET.md').write_text('\n'.join(lines)+'\n')
+print('prepared data/binding/strict adapter/worksheet; no device calls')

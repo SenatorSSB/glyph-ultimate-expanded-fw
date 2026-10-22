@@ -1,0 +1,177 @@
+{
+  "all_context_reuse_events": [
+    {
+      "context": "candidate_safe_fixture_packet/complete_sample_2",
+      "description": "canonical preprocessing already exact; no SET_CONFIG",
+      "index": 100,
+      "kind": "CONTEXT_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "preprocessing_sha256": "97e7867b60526bbc2a12cbfe66ee4381c1214440e0354faa6e1167705ce6c6f1",
+      "result": "NOT_TESTED"
+    },
+    {
+      "context": "candidate_safe_fixture_packet/complete_sample_1",
+      "description": "canonical preprocessing already exact; no SET_CONFIG",
+      "index": 119,
+      "kind": "CONTEXT_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "preprocessing_sha256": "97e7867b60526bbc2a12cbfe66ee4381c1214440e0354faa6e1167705ce6c6f1",
+      "result": "NOT_TESTED"
+    },
+    {
+      "context": "candidate_safe_fixture_packet/forced_loses",
+      "description": "canonical preprocessing already exact; no SET_CONFIG",
+      "index": 269,
+      "kind": "CONTEXT_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "preprocessing_sha256": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+      "result": "NOT_TESTED"
+    },
+    {
+      "context": "candidate_safe_fixture_packet/forced_filter",
+      "description": "canonical preprocessing already exact; no SET_CONFIG",
+      "index": 282,
+      "kind": "CONTEXT_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "preprocessing_sha256": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+      "result": "NOT_TESTED"
+    }
+  ],
+  "all_reference_reuse_events": [
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 101,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "B",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 128,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 142,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 161,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 180,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 200,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 219,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 238,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 257,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 270,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 283,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    },
+    {
+      "description": "durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit",
+      "index": 296,
+      "kind": "REFERENCE_REUSE",
+      "maximum_cost": {},
+      "observed": null,
+      "profile": "A",
+      "result": "NOT_TESTED"
+    }
+  ],
+  "classification": "PURE_CANONICAL_PREPROCESSING_AND_IMMUTABLE_PROFILE_HASH_CORRESPONDENCE",
+  "context_sha256": {
+    "candidate_fixture_packet/clean_socd_0": "d742ad1a24b60d0ddf7cb0ca65d2c7394a42c2dbeeca02546a658dedede8f10b",
+    "candidate_fixture_packet/clean_socd_1": "d1a1622d110f09db9485d98beafa6b1c6e3c3230c5a27ce51b295828dad08974",
+    "candidate_fixture_packet/clean_socd_2": "29ae093b913cb8e6c834d4b0acb618744979fdf6a831731547a3d70b69bfc177",
+    "candidate_fixture_packet/clean_socd_3": "a935da03c9500c1d2d644ca499b66064a0f18bc6c4a01d74ea8926604f195982",
+    "candidate_fixture_packet/clean_socd_4": "509e0e3426a6f7889bb73f97ce110f23002e5cc87bba2f7f7c51703b09b431be",
+    "candidate_fixture_packet/clean_socd_5": "627b3102c444bfeb9de98231859b700cd2cb19b951e582a0a94c43522401e99a",
+    "candidate_fixture_packet/compatibility": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "candidate_fixture_packet/rebound": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "candidate_safe_fixture_packet/complete_sample_1": "97e7867b60526bbc2a12cbfe66ee4381c1214440e0354faa6e1167705ce6c6f1",
+    "candidate_safe_fixture_packet/complete_sample_2": "97e7867b60526bbc2a12cbfe66ee4381c1214440e0354faa6e1167705ce6c6f1",
+    "candidate_safe_fixture_packet/forced_filter": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "candidate_safe_fixture_packet/forced_loses": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "candidate_safe_fixture_packet/forced_wins": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "original_legacy4": "271b021266de90478317cced8662cf50a1a7fafb00a1073633e1378ec92ff1e7",
+    "supplement_short/compatibility": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "supplement_short/isolated_L_R_Z": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "supplement_short/rebound": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+    "supplement_short/refusal_context_mismatch": "97e7867b60526bbc2a12cbfe66ee4381c1214440e0354faa6e1167705ce6c6f1"
+  },
+  "no_device_calls": true,
+  "source_matrix_sha256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5"
+}

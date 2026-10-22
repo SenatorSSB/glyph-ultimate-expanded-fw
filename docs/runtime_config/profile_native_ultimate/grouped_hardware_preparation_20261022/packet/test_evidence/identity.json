@@ -1,0 +1,14 @@
+{
+  "active_id": 25,
+  "active_revision": 1,
+  "context": "xinput",
+  "context_row": 3,
+  "incarnation": 1,
+  "observation": "current_session_only",
+  "payload_sha256": "4171bf83f87ab6ac8842148af9e9f23a950349f5cc8464d35593302309ada651",
+  "primary_backend": 2,
+  "requested_reference": 25,
+  "schema_version": 5,
+  "session": "RG01",
+  "status": "persisted"
+}

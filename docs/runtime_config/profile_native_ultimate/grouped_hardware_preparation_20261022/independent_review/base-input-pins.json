@@ -1,0 +1,56 @@
+{
+  "review_phase": "BASE_AND_AMENDMENT_READ_ONLY_NOT_FINAL_DRAFT_ACK",
+  "protected_six_files_unchanged": [
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/implementation_contract.json",
+      "sha256": "4bfc3eae1b00581c970cbff4665748469ec6372d9017dc0c9b315ef1a706a3c0"
+    },
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/m1_freeze.json",
+      "sha256": "6164086fa575df35d7ac59735871e97414760c2555fd7f210e21ccb1176da53e"
+    },
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md",
+      "sha256": "51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d"
+    },
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/native_hardware_preparation_20261022/OWNER_PACKET.md",
+      "sha256": "a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040"
+    },
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/native_hardware_preparation_20261022/OWNER_PACKET.json",
+      "sha256": "7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8"
+    },
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/native_xinput_campaign_20261022/manifest.json",
+      "sha256": "b3065b86a0724a5869913f3dd185a11d26f4681839e5c25b6cab4f6aac01dd74"
+    }
+  ],
+  "unchanged_inputs": [
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/grouped_hardware_preparation_20261022/ACCEPTANCE_AMENDMENT.md",
+      "sha256": "63037f5d1c0f63fcc378af04aad9dcf2a153f8da968af48d0e4f25bf123c877c"
+    },
+    {
+      "path": "/private/tmp/glyph-native-curation-20261020/docs/runtime_config/profile_native_ultimate/grouped_hardware_preparation_20261022/owner_steering.json",
+      "sha256": "e06c4d880784c8e7f075c5d9f81222f97d1c38264a23fa8ee20630ac003db3b4"
+    },
+    {
+      "path": "/private/tmp/glyph-native-reduced-execution-packet-20261022/root_protected_baseline.json",
+      "sha256": "e9ef75acc7ba94b62f683dfe9334caed4283d472a29c62cf142689815244aff2"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1.json",
+      "sha256": "7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/mac_hostinterface_observer",
+      "sha256": "ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/config/glyph/common/src/display/MenuButtonHints.cpp",
+      "sha256": "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc"
+    }
+  ],
+  "live_calls": 0
+}

@@ -1,0 +1,85 @@
+"""Finite pure-file/mocked control-flow tests, no device branch or enumeration."""
+from pathlib import Path
+import sys,json,base64,copy,io,tempfile,subprocess,struct
+sys.dont_write_bytecode=True
+import binding_contract as b
+import verify_native_capture as v
+import guided_group as h
+D=Path(__file__).resolve().parent;H=h.H;T=D/'test_evidence';T.mkdir(exist_ok=True)
+def save(name,x):p=T/name;p.write_text(json.dumps(x,sort_keys=True,indent=2)+'\n');return str(p)
+checks=[]
+def passed(name):checks.append({'case':name,'result':'PASS'})
+def refuses(name,fn):
+ try:fn()
+ except (ValueError,RuntimeError,FileExistsError,KeyError):passed(name)
+ else:raise AssertionError(name+' accepted')
+s=b.read_json(D/'sequence.json');matrix=b.read_json(D/'acceptance_comparison_matrix.json');g=next(g for g in s['groups']if g['group_id']=='RG01');st=next(st for st in g['steps']if st['selection_id']=='N038');row=next(r for r in matrix['rows']if r['selection_id']=='N038')
+index=b.read_json(H/'synthetic_tests/proof_index.json');index=copy.deepcopy(index)
+for key in ['profile_read','config_backup','checked_reference_receipt','checked_reference_response']:
+ index[key]=str(H/'synthetic_tests'/Path(index[key]).name)
+for label in ['A','B']:
+ for key in ['request','response']:index['ownership'][label][key]=str(H/'synthetic_tests'/Path(index['ownership'][label][key]).name)
+identity=b.read_json(H/'synthetic_tests/identity.json');identity['session']='RG01';index['runtime_identity']=save('identity.json',identity)
+boot=b.read_json(H/'synthetic_tests/boot.json');boot['session']='RG01';index['boot_record']=save('boot.json',boot)
+ip=T/'inspect.jsonl';ip.write_text(json.dumps({'kind':'session','session':'RG01'})+'\n'+json.dumps({'kind':'inspect_end','outcome':'ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY','anchor_entry_id':1,'interface_entry_id':101})+'\n');index['registry_inspection']=str(ip)
+receipt={'source':'ACTUAL_HUMAN_USER_REPLY','transport':'owner_terminal_stdin','actual_response':'\n','matched_screen_rows':['N038'],'group_id':'RG01','classification':'SYNTHETIC_TEST_ONLY_NOT_ACTUAL_HUMAN'};rp=save('receipt.json',receipt)
+stim={'session':'RG01','case_id':'N038','physical_held_input_ids':row['physical_held_input_ids'],'history_group':row['history_group'],'history_before_this_row':[],'history_contract':st['history_contract'],'owner_confirmed_listed_stimulus':True,'source':receipt['source'],'transport':receipt['transport'],'actual_response':'\n','human_receipt':rp,'human_receipt_sha256':b.sha(rp)};index['stimulus_confirmation']=save('stimulus.json',stim);index.update(sequence_sha256=b.sha(D/'sequence.json'),approval_id='GP_NATIVE_001_GROUPED_XINPUT_ACCEPTANCE_V1',owner_packet_approval_sha256='0'*64)
+binding=b.build(D/'acceptance_comparison_matrix.json',index,'N038','RG01_N038');bp=save('binding.json',binding)
+p=subprocess.run([str(H/'mac_hostinterface_observer'),'--check-binding',base64.b64encode(Path(bp).read_bytes()).decode(),'RG01'],capture_output=True,text=True);assert p.returncode==0,p.stderr;passed('actual_child_binding_to_frozen_native_pure_argv_admission')
+for key,value in [('sequence_sha256','0'*64),('approval_id','old'),('owner_packet_approval_sha256','bad')]:
+ z=copy.deepcopy(index);z[key]=value;refuses('reject_'+key,lambda:b.build(D/'acceptance_comparison_matrix.json',z,'N038','RG01_N038'))
+for key,value in [('actual_response',''),('source','AGENT'),('history_before_this_row',[[]]),('physical_held_input_ids',[]),('history_contract','EXACT_FROZEN_PREFIX')]:
+ z=copy.deepcopy(index);x=copy.deepcopy(stim);x[key]=value;z['stimulus_confirmation']=save('bad_stimulus.json',x);refuses('reject_stimulus_'+key,lambda:b.build(D/'acceptance_comparison_matrix.json',z,'N038','RG01_N038'))
+refuses('known_screen_only_case_cannot_bind',lambda:b.build(D/'acceptance_comparison_matrix.json',index,'N032','RG01_N032'))
+refuses('reject_unplanned_or_duplicate_run',lambda:b.build(D/'acceptance_comparison_matrix.json',index,'N038','RG02_N038'))
+# Actual strict adapter + unchanged parser/strong oracle, with synthetic bytes visibly labeled.
+j=[json.loads(x)for x in (H/'mock_journals_final/scenario0.jsonl').read_text().splitlines()];j[0].update(session='RG01',row='N038');j[1]={'kind':'acceptance_binding','binding':binding,'sha256':b.sha(bp)}
+f=next(x['fields']for x in row['expected_literal_backend_assignment_fields']if x['backend']=='XInput');buttons=sum(f[k]<<n for n,k in [(0,'dpad_up'),(1,'dpad_down'),(2,'dpad_left'),(3,'dpad_right'),(4,'start'),(5,'back'),(6,'ls'),(7,'rs'),(8,'lb'),(9,'rb'),(10,'home'),(12,'a'),(13,'b'),(14,'x'),(15,'y')]);raw=struct.pack('<BBHBBhhhh6x',0,0,buttons,f['lt'],f['rt'],f['lx'],f['ly'],f['rx'],f['ry'])
+assert len(raw)==20
+for r in j:
+ if r['kind']=='raw':r['hex']=raw.hex()
+ if r['kind']=='decoded':r['fields']=f
+cp=T/'synthetic_capture.jsonl'
+def write_j(z):cp.write_text(''.join(json.dumps(r)+'\n'for r in z))
+def execution():return {'argv':[str(H/'mac_hostinterface_observer'),'capture','--approved-session','RG01','--anchor-entry-id','1','--interface-entry-id','101','--output',str(cp),'--binding-base64',base64.b64encode(Path(bp).read_bytes()).decode()],'returncode':0,'binary_sha256':h.BINARY_SHA,'capture_sha256':b.sha(cp),'owner_packet_approval_sha256':'0'*64}
+write_j(j);assert v.verify_bound(cp,D/'acceptance_comparison_matrix.json',binding,execution())['measurement_reports']==3;passed('strict_full21_synthetic_N038_match_with_explicit_drain')
+for name,change in [('preflight',lambda z:z[0].update(purpose='preflight')),('first_measurement_mismatch',lambda z:next(r for r in z if r['kind']=='decoded'and r['sequence']==2)['fields'].update(a=0)),('last_measurement_mismatch',lambda z:next(r for r in z if r['kind']=='decoded'and r['sequence']==4)['fields'].update(a=0)),('missing_drain',lambda z:z.__setitem__(slice(None),[r for r in z if r.get('role')!='drain'])),('unsettled',lambda z:z[-1].update(settled_cleanup=False))]:
+ z=copy.deepcopy(j);change(z);write_j(z);refuses(name,lambda:v.verify_bound(cp,D/'acceptance_comparison_matrix.json',binding,execution()))
+# Exact13 steps/prefix per policy, and matching raw hold before release.
+for policy in range(6):
+ gg=next(g for g in s['groups']if g['description'].startswith('SOCD_'+str(policy)+' '));assert len(gg['steps'])==13
+ for n,step in enumerate(gg['steps']):assert step['required_history_before_this_row']==[prev['physical_held_input_ids']for prev in gg['steps'][:n]]
+ assert gg['steps'][11]['raw']is True and gg['steps'][12]['physical_held_input_ids']==[]
+passed('all6_exact13step_histories_and_raw_before_terminal_release')
+assert sum(g['raw_count']for g in s['groups'])==20 and len(s['groups'])==20 and sum(len(g['steps'])for g in s['groups'])==209;passed('exact_counts20raw_209positions_37restarts')
+assert {st['selection_id']:st['required_visible_icon']for st in g['steps']if st.get('required_visible_icon')}==dict(zip(['N090','N091','N092','N093'],['a','b','x','y']));passed('four_required_visible_icons_pinned')
+for response in ['q\n','']:
+ refuses('readiness_'+repr(response),lambda:h.readiness('SYNTHETIC_TEST',io.StringIO(response)))
+assert h.readiness('SYNTHETIC_TEST',io.StringIO('\n'))['actual_response']=='\n';passed('readiness_preserves_real_newline_bytes')
+refuses('mismatch_text_never_capture',lambda:h.readiness('SYNTHETIC_TEST',io.StringIO('mismatch\n')))
+# One raw group control flow, USB invocation replaced at Python runner seam.
+oldbuild=b.build;oldverify=v.verify
+b.build=lambda *a:{'anchor_entry_id':1,'interface_entry_id':101}
+v.verify=lambda *a:{'measurement_reports':3,'status':'SYNTHETIC_MOCK_ONLY'}
+mini={'group_id':'RGTEST','steps':[copy.deepcopy(st)]};mini['steps'][0]['case_run_id']='RGTEST_N038'
+setup={'proof_index':{},'approval_id':'GP_NATIVE_001_GROUPED_XINPUT_ACCEPTANCE_V1','owner_packet_approval_sha256':'0'*64}
+try:
+ with tempfile.TemporaryDirectory(dir=T)as td:
+  out=Path(td);calls=[]
+  def failure(argv,**kwargs):calls.append(argv);return subprocess.CompletedProcess(argv,2,'','SYNTHETIC_NO_USB')
+  refuses('capture_failure_stops_group_no_retry',lambda:h.execute(mini,setup,out,io.StringIO('\n'),failure));assert len(calls)==1
+ with tempfile.TemporaryDirectory(dir=T)as td:
+  out=Path(td);calls=[]
+  def timeout(argv,**kwargs):calls.append(argv);raise subprocess.TimeoutExpired(argv,10,output=b'partial stdout',stderr=b'partial stderr')
+  try:h.execute(mini,setup,out,io.StringIO('\n'),timeout)
+  except subprocess.TimeoutExpired:pass
+  else:raise AssertionError('timeout not raised')
+  assert len(calls)==1 and base64.b64decode(b.read_json(out/'RGTEST_N038/execution_timeout.json')['partial_stdout_base64'])==b'partial stdout';passed('timeout_partial_stdout_stderr_and_argv_preserved_once')
+ with tempfile.TemporaryDirectory(dir=T)as td:
+  out=Path(td);calls=[]
+  refuses('EOF_zero_capture_calls',lambda:h.execute(mini,setup,out,io.StringIO(''),lambda *a,**k:calls.append(a)));assert not calls
+ with tempfile.TemporaryDirectory(dir=T)as td:
+  out=Path(td);h.execute({'group_id':'B00','steps':s['groups'][0]['steps']},setup,out,io.StringIO('\n'),lambda *a,**k:(_ for _ in()).throw(AssertionError('unexpected device')))
+  refuses('reentry_existing_setup_never_reexecutes',lambda:h.execute({'group_id':'B00','steps':[]},setup,out,io.StringIO('\n')))
+finally:b.build=oldbuild;v.verify=oldverify
+save('results.json',{'classification':'PURE_FILE_AND_MOCK_ONLY_NOT_HARDWARE_OR_APPROVAL','live_device_calls':0,'checks':checks});print('PASS',len(checks),'focused checks; no live calls')

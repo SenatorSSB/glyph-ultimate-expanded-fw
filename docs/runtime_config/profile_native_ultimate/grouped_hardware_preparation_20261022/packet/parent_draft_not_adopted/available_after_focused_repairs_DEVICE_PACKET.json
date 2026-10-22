@@ -1,0 +1,1600 @@
+{
+  "H1": "reuse original B000/B001 actual captures, first dashboard five-position original worksheet; final postcleanup full B000/B001. Original schema3 oracle remains separate from independent native334.",
+  "H10": "known Configurator READ B old, guarded UPDATE B complete2, read new, unchanged Config/ref check and Configurator identity; next gameplay identity latest revision; no hotswap claim",
+  "H11": "valid mismatch checked B reference with complete1 context unchanged; six neutral screen endpoints and N141 raw; identity unavailable; not legacy fallback; checked A recovery/newboot S026 raw",
+  "H12": "same final Configurator: fully confirmed guarded original user Config/reference restore preserving current seven receipts; live and loaded references original4; then DELETE only owned A/B; LIST3+READ22 versus C00 originals; final GET original fields/allowed monotonic; one final original boot with B000/B001 strict repeats and five visible states. Unknown outcomes STOP without automatic restore.",
+  "H9": "two complete independent owned profiles; B ordinary reinitialization; A unchanged after B update before intentional update; distinct checked references and new-boot identities",
+  "approval_id": "GP_NATIVE_001_GROUPED_XINPUT_ACCEPTANCE_V1",
+  "candidate": {
+    "build": {
+      "accepted_resource_caps": {
+        "added_static_ram_max": 12288,
+        "core0_stack": 2048,
+        "core1_stack": 2048,
+        "static_ram_max": 199632
+      },
+      "after": {
+        "full_status": "",
+        "head": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+        "tracked_status": "",
+        "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999"
+      },
+      "artifacts": {
+        "firmware.bin": {
+          "bytes": 520596,
+          "sha256": "ce18487edc51cde3dd08e3e401ce2b4028e50ecd5a1eed82468cc6ef9843a6fb"
+        },
+        "firmware.elf": {
+          "bytes": 5597092,
+          "sha256": "a42bd2bf6ab1efd3cac565b27d9e236c0128da3be84a5977e5c739db2697c15d"
+        },
+        "firmware.uf2": {
+          "bytes": 1041408,
+          "sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982"
+        }
+      },
+      "base_source_free_authorization_sha": "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+      "baseline_sha": "976ba2195b72046b32f7ecdd41063e7bad791ded",
+      "before": {
+        "full_status": "",
+        "head": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+        "tracked_status": "",
+        "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999"
+      },
+      "canonical_command_unavailable": true,
+      "command": [
+        "./scripts/build-glyph-mk6-quiet.sh"
+      ],
+      "custody_rehash": "MATCH",
+      "descriptors": {
+        "config.pb.c": {
+          "bytes": 1774,
+          "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+        },
+        "config.pb.h": {
+          "bytes": 125759,
+          "sha256": "efd4850ee94fe32c52c8cff1a93021ad2a4959d04615a1463c1e54a845b63c4f"
+        }
+      },
+      "durable_custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+      "elapsed_seconds": 314.6009835409932,
+      "exit_code": 0,
+      "finished_utc": "2026-10-21T16:26:33.805304+00:00",
+      "flash": {
+        "limit_bytes": 1568768,
+        "used_bytes": 508564
+      },
+      "hardware_status": "NOT_TESTED",
+      "host_only_command_audit": {
+        "coverage_status": "REQUIRES_POST_BUILD_RECIPE_OBJECT_LINK_RECONCILIATION",
+        "hook": "/private/tmp/glyph-native-build-audit-v2-20261021/sitecustomize.py",
+        "hook_stable": true,
+        "parent_v5_sha256": "b6da7ea94eeb026b4268504a85bb4b91e349eb1ff6db9933b7f050c7119e509b",
+        "pin": {
+          "bytes": 2652,
+          "sha256": "022d08f8e14899dbe6266befc4f4df321d978daad193812822899d4a259d7e07"
+        },
+        "qualification": "Python subprocess audit records executable/argv/cwd and bounded response-file bytes/hashes. Does not change firmware flags, source or command. Coverage is checked separately; environment values are not logged.",
+        "records": 14268
+      },
+      "instrumentation_requirement": "Final handed-off hardware candidate must retain the owner-authorized diagnostic facility; source/ELF review separately required.",
+      "kind": "EXACT_COMMITTED_NATIVE_BUILD_ONLY_NO_HARDWARE_ACCEPTANCE",
+      "latest_source_free_authority_sha": "c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351",
+      "logs": {
+        "compiler_commands.log": {
+          "bytes": 4839525,
+          "sha256": "cecabccaab17438518f81b1384da3383bf981c982d7a7b5bc566ca73aa235a00"
+        },
+        "glyph_mk6_build.log": {
+          "bytes": 45222,
+          "sha256": "b269266c65b66b2c3c10d55706cd3abcee20125ef1c1b2c08b43768bb949cafe"
+        },
+        "wrapper.log": {
+          "bytes": 387,
+          "sha256": "6e619f04eb43df4e50ffc24f33c6399921e67f5d23d47d52b52fe15960b32b65"
+        }
+      },
+      "original_wrapper_sha256": "2ca2f509d839f73ed5a7c202477761041b18b6932a658467a0ccc18df918cb34",
+      "parent_wrapper_sha256": "f8bdf36f3b1db80308af1c4228a1acabeec05c7d50523aa4cbb8c3c75a339815",
+      "ram": {
+        "limit_bytes": 262144,
+        "used_bytes": 197872
+      },
+      "source_free_authority_chain": [
+        "753932c8fbec3e002d455f4cd2b9b1dbc0ed896f",
+        "e4bf626c71d0494a138721eff54ac563ef2877cb",
+        "262e51f2740789458be81fbd49c51c099c7f5a65",
+        "4a858127f35bd607d9bcd00ae669f33d083048d9",
+        "2677215b3cf1f3390782f3a3400ce33b20628d97",
+        "df5fbcd019dfd7e72b897b7d5a43e6c142ecd665",
+        "0a346975a452c5a5d00aac4e2a123783a9773db7",
+        "543ab532918dcf71925940d0f7ff8c172209420a",
+        "7faa85fecbac4940a1a4c1d8310b85baaced460e",
+        "76b8bf943ee940c57b9a612556d76d2b3401cd76",
+        "81a32790d39e3e9dbb53e08874e4a1ca67d803cd",
+        "c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351"
+      ],
+      "source_stable": true,
+      "started_utc": "2026-10-21T16:21:19.203602+00:00",
+      "static_ram_cap_pass": true,
+      "static_ram_delta_vs_exact_baseline": 10528,
+      "target_timing": "NOT_MEASURED",
+      "whole_target_stack": "NOT_MEASURED",
+      "wrapper_provenance": {
+        "bytes": 7026,
+        "sha256": "8bd8480396ed560a41bfd38813f74b5797695bcb2a3ce0952ee8d77faf4155a4"
+      }
+    },
+    "custody_rehashed_here": true,
+    "git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+    "review": {
+      "disposition": "NO BOUNDED SOURCE DEFECT FOUND; exact committed-source correspondence PASS",
+      "path": "/private/tmp/glyph-native-ABC-independent-source-review-20261021/REPORT.md",
+      "sha256": "548cd19dd36a85f35bd248813e0fcc80a35602a512699b88fc8923433feec3a1"
+    },
+    "tree": "0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999",
+    "whole_linked_resource_P1": "NATIVE-REVIEW-P1-STACK_CLOSED_FOR_EXACT_F; exact report/artifact/root-adjudication attachment in resource_attachment; target measurements and hardware remain NOT_MEASURED/NOT_TESTED"
+  },
+  "context_sources": {
+    "candidate_fixture_packet/clean_socd_0": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_LT6"
+          },
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_RF11"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF5",
+            "button_dir2": "BTN_LF2"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_0/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_0/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "ca2b2c6510fac589566ea3f00a7c6020ed40acbfdbf76953cbabf0f76bd92161",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_0/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_0/profile.pb",
+      "profile_record": {
+        "body_sha256": "1ac5805ea1cf9ecf488642612c68d8fb51cc03cff52839fdba4f31dadf88f0e4",
+        "complete_sample": null,
+        "context_sha256": "2cad9d4700e3e9b5f64ec14f7eebb74c29db25112c58916dbb94e4e86e5ccae2",
+        "name": "clean_socd_0",
+        "policy": "clean_down_a",
+        "profile_sha256": "10a02d7d0dbe93933c5e411774e911e7e57a5e56d5fc140e3c3acbc873b56598",
+        "wrapper_bytes": 1989
+      }
+    },
+    "candidate_fixture_packet/clean_socd_1": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_LT6"
+          },
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_RF11"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF5",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_NEUTRAL"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_1/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_1/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "584672bbb8e6286a90e70dfe665eba003e5a4cfae3d81be5fd016941be73b614",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_1/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_1/profile.pb",
+      "profile_record": {
+        "body_sha256": "554b32ae755c28490b90ea90368af273f466ba670f072f65f4e3f4f74453d21d",
+        "complete_sample": null,
+        "context_sha256": "bd500b13de6ee59edea3f75e0343d7b7aa243e302a6cd6bcccb9539ba6e4d5c7",
+        "name": "clean_socd_1",
+        "policy": "clean_down_a",
+        "profile_sha256": "755e40df48332d8957978f4c46c3d0bcdd3da341a3185a07189948d7f60bc3e8",
+        "wrapper_bytes": 1989
+      }
+    },
+    "candidate_fixture_packet/clean_socd_2": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_LT6"
+          },
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_RF11"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF5",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_2IP"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_2/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_2/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "28bd7bbf06e517655db52f8c53eb8ae8f657baab3c2f3367e1c199742b3ab8c2",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_2/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_2/profile.pb",
+      "profile_record": {
+        "body_sha256": "87f005895f64f07448bcc1603d6ec515de0716e541a3ad2d0465144f22a8c7bb",
+        "complete_sample": null,
+        "context_sha256": "849dccce9b109bd0872683ce8272372e47312b4ee663853d4f56a94838f9630e",
+        "name": "clean_socd_2",
+        "policy": "clean_down_a",
+        "profile_sha256": "3390f14bc1ec236a49e67a2f3c92c8a4af12e7fc7f40353a36643ed0f50d6cb2",
+        "wrapper_bytes": 1989
+      }
+    },
+    "candidate_fixture_packet/clean_socd_3": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_LT6"
+          },
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_RF11"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF5",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_2IP_NO_REAC"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_3/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_3/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "58af3a15d9a0e0c468242bd4f13a5351dc179b3197ecaab60ff13e8d5a9ab38f",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_3/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_3/profile.pb",
+      "profile_record": {
+        "body_sha256": "22512692a10c48b6adcda29f8489abe7edb20ff77454f4041da9118c424c1742",
+        "complete_sample": null,
+        "context_sha256": "21c401e8525c1a4721f0efee055eacf16570e56af194445961560e7308d1ee76",
+        "name": "clean_socd_3",
+        "policy": "clean_down_a",
+        "profile_sha256": "5484650e41cd8f2a8825b0f08b82038b40c4f8a16f3f580101aa8d553bd60998",
+        "wrapper_bytes": 1989
+      }
+    },
+    "candidate_fixture_packet/clean_socd_4": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_LT6"
+          },
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_RF11"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF5",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_DIR1_PRIORITY"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_4/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_4/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "7ff5f2e78696f1beb68d012bc44d7b9ca3795cc696777af748c0aeb38f5eb1b0",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_4/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_4/profile.pb",
+      "profile_record": {
+        "body_sha256": "9bce0313d3c57b05fd1955dce1fab3a252f8e3df1b7bed701617ff2f0dc9c2b6",
+        "complete_sample": null,
+        "context_sha256": "82fc93dfb786fe3b625e0ca8562f5e7acd4ebfd5cb24c5403cd3cc18c5d741db",
+        "name": "clean_socd_4",
+        "policy": "clean_down_a",
+        "profile_sha256": "5246bb54c5a5ff1334ebd954d25855e1dd3e9f0b34a03abcb22dbb0db0733a03",
+        "wrapper_bytes": 1989
+      }
+    },
+    "candidate_fixture_packet/clean_socd_5": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_LT6"
+          },
+          {
+            "activates": "BTN_LF5",
+            "physical_button": "BTN_RF11"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF5",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_DIR2_PRIORITY"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_5/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_5/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "163908c8196e32f18c5b134aca050bf32b4fbd21b481cfa54f35a291af4657f4",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_5/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_5/profile.pb",
+      "profile_record": {
+        "body_sha256": "cdddc419e1ae7c7384746ba7d16806d382896ad38c77da890b251de5a5a3c6f0",
+        "complete_sample": null,
+        "context_sha256": "8188b41acfee693f21c1d4b6f0ac4361a4043d547ff03708e76f20c5f30b33b2",
+        "name": "clean_socd_5",
+        "policy": "clean_down_a",
+        "profile_sha256": "c0f2445f3af7178ba6eaef4c8cce81e67792aa7ff0571ff513f6b9d23479e23f",
+        "wrapper_bytes": 1989
+      }
+    },
+    "candidate_fixture_packet/compatibility": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "4171bf83f87ab6ac8842148af9e9f23a950349f5cc8464d35593302309ada651",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/profile.pb",
+      "profile_record": {
+        "body_sha256": "2184a9be01f1d538fa60a2095aaab1008a5a35f6320f7313db9b8c96ddd15891",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "compatibility",
+        "policy": "historical_compatibility",
+        "profile_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+        "wrapper_bytes": 1985
+      }
+    },
+    "candidate_fixture_packet/rebound": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/rebound/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/rebound/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "af39f64a6c807c831f168f3986d78cc1185c22d16e98bd70d30a63878aa8da92",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/rebound/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/rebound/profile.pb",
+      "profile_record": {
+        "body_sha256": "b57a40ac8b513e9bf2972042c126267441807e7b27825d3fea67e4d433fd14ed",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "rebound",
+        "policy": "historical_compatibility",
+        "profile_sha256": "ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef",
+        "wrapper_bytes": 1985
+      }
+    },
+    "candidate_safe_fixture_packet/complete_sample_1": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF6",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_NEUTRAL"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "a29d575b77343748a71096c7bf21fe4419fee95317c90726ea7dd91216d2f03b",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/profile.pb",
+      "profile_record": {
+        "body_sha256": "32d178490712de2a10c0727b934405b21291bf5bcaa2472500cf38568617ab0f",
+        "complete_sample": 1,
+        "context_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+        "name": "complete_sample_1",
+        "policy": "historical_compatibility",
+        "profile_sha256": "c3bc3614423dbc07c8cf9a31df3335e7bb12158ad69d5657b28139c1a7ca3a62",
+        "wrapper_bytes": 2014
+      }
+    },
+    "candidate_safe_fixture_packet/complete_sample_2": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF6",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_NEUTRAL"
+          }
+        ]
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_2/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_2/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "0f4be84f27a71319813a03c59cd07ba50bd41422b35fdc3f42d13544bcc7d596",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_2/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_2/profile.pb",
+      "profile_record": {
+        "body_sha256": "238d0c062917e5223584358ef03e323a98fa974cc2b7c40f65ab1d01adc90cc3",
+        "complete_sample": 2,
+        "context_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+        "name": "complete_sample_2",
+        "policy": "historical_compatibility",
+        "profile_sha256": "cf9242df366920dfaa269df4cc0ffac5948d1d6d7956a4a8fe50f1057400ae2a",
+        "wrapper_bytes": 2014
+      }
+    },
+    "candidate_safe_fixture_packet/forced_filter": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_filter/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_filter/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "ad1f052af87ae88ee51d40afd7829bc8be05cf1d95d99d95533f063afbf7afea",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_filter/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_filter/profile.pb",
+      "profile_record": {
+        "body_sha256": "a926797c689e5b7760f255723f18d978dca8376fb6025c68a161e404ead506fa",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "forced_filter",
+        "policy": "forced_table_down_a",
+        "profile_sha256": "a247db7e1994c04c412595da6f85a7b7999e7d18d89b3a67ca2291da6d15d8e9",
+        "wrapper_bytes": 1995
+      }
+    },
+    "candidate_safe_fixture_packet/forced_loses": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_loses/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_loses/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "c1321e35edf654e16c4f6b28b4eefad5bb1c49129032caf9343bbeadb4fd683f",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_loses/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_loses/profile.pb",
+      "profile_record": {
+        "body_sha256": "d052183a16f373dd2a1cafdc5c233e2b3cd0af639335fdee60081c2a908cfd13",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "forced_loses",
+        "policy": "forced_table_down_a",
+        "profile_sha256": "30f35f2c2e1a7809cac0e691456380e36bc08e4f9ec49ef90f57eb79e6e5623b",
+        "wrapper_bytes": 1995
+      }
+    },
+    "candidate_safe_fixture_packet/forced_wins": {
+      "bindings": "exact immutable schema5 profile body; no rewritten package",
+      "context_application": "replace remaps/SOCD in one existing Ultimate row using native-packet, never append to defaults; checked persistent reference then manual reinitialize, fresh readback/identity before inputs",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_wins/context.json",
+      "context_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_wins/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "9f6257a4f8e737f6239068bbb385e7c9233b4b2556869aafafc3c02361c96e7f",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_wins/profile.json",
+      "profile_pb_path": "docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_wins/profile.pb",
+      "profile_record": {
+        "body_sha256": "8e3cd2028bc6894c0145502c24a1f8ac0f3383e65b5656a2470220b1ba576005",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "forced_wins",
+        "policy": "forced_table_down_a",
+        "profile_sha256": "70029461c4c2f34b54af3a3e0ba5186e1cf5bdc58dd1ae903076573d1015cd6b",
+        "wrapper_bytes": 1995
+      }
+    },
+    "original_legacy4": {
+      "context_json": {
+        "button_remapping": [
+          {
+            "activates": "BTN_RF3",
+            "physical_button": "BTN_RF3"
+          },
+          {
+            "activates": "BTN_RF4",
+            "physical_button": "BTN_RF4"
+          },
+          {
+            "activates": "BTN_LT3",
+            "physical_button": "BTN_LT3"
+          }
+        ],
+        "mode_id": "MODE_ULTIMATE",
+        "name": "Ultimate Runtime",
+        "ultimate_profile_id": 4
+      },
+      "profile_record": {
+        "profile_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+        "revision": 1,
+        "schema_version": 3
+      },
+      "qualification": "Private original payload stays in existing custody; only canonical hash/context/output oracle here."
+    },
+    "supplement_short/compatibility": {
+      "context_application": "Validated native-packet context then checked-reference/reinitialize with fresh fences; EXCEPTION H11 uses matched safe complete context first, then only checked-reference to valid wrong-context owned body; no malformed SET.",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/context.json",
+      "context_pb_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "4171bf83f87ab6ac8842148af9e9f23a950349f5cc8464d35593302309ada651",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/profile.json",
+      "profile_pb_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/profile.pb",
+      "profile_record": {
+        "body_sha256": "2184a9be01f1d538fa60a2095aaab1008a5a35f6320f7313db9b8c96ddd15891",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "compatibility",
+        "policy": "historical_compatibility",
+        "profile_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+        "wrapper_bytes": 1985
+      }
+    },
+    "supplement_short/rebound": {
+      "context_application": "Validated native-packet context then checked-reference/reinitialize with fresh fences; EXCEPTION H11 uses matched safe complete context first, then only checked-reference to valid wrong-context owned body; no malformed SET.",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE"
+      },
+      "context_json_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/context.json",
+      "context_pb_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/context.pb",
+      "expected_current_session_identity": {
+        "active_id": "actual selected owned ID",
+        "active_revision": "actual active latched revision",
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": "actual original current incarnation",
+        "payload_sha256": "af39f64a6c807c831f168f3986d78cc1185c22d16e98bd70d30a63878aa8da92",
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 5,
+        "status": "persisted"
+      },
+      "profile_json_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/profile.json",
+      "profile_pb_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/profile.pb",
+      "profile_record": {
+        "body_sha256": "b57a40ac8b513e9bf2972042c126267441807e7b27825d3fea67e4d433fd14ed",
+        "complete_sample": null,
+        "context_sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+        "name": "rebound",
+        "policy": "historical_compatibility",
+        "profile_sha256": "ed6c34e00d7ff01aa8e3918b7a23506200fb7ae0df94e27e10316478179192ef",
+        "wrapper_bytes": 1985
+      }
+    },
+    "supplement_short/refusal_context_mismatch": {
+      "context_application": "Validated native-packet context then checked-reference/reinitialize with fresh fences; EXCEPTION H11 uses matched safe complete context first, then only checked-reference to valid wrong-context owned body; no malformed SET.",
+      "context_json": {
+        "mode_id": "MODE_ULTIMATE",
+        "socd_pairs": [
+          {
+            "button_dir1": "BTN_LF6",
+            "button_dir2": "BTN_LF2",
+            "socd_type": "SOCD_NEUTRAL"
+          }
+        ]
+      },
+      "context_json_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/context.json",
+      "context_pb_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/context.pb",
+      "expected_current_session_identity": {
+        "active_id": 0,
+        "active_revision": 0,
+        "context_row_one_based": "actual selected Ultimate row+1",
+        "incarnation": 0,
+        "payload_sha256": null,
+        "physical_observation": null,
+        "primary_backend_XInput": 2,
+        "qualification": "Native engine/encoding/context validated separately from identity72wire. Unavailable status has neutral persistent fields. In Configurator current status=configurator.",
+        "requested_reference": "actual owned ID",
+        "result": "NOT_TESTED",
+        "schema_version": 0,
+        "status": "snapshot_unavailable"
+      },
+      "profile_json_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/profile.json",
+      "profile_pb_path": "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/profile.pb",
+      "profile_record": {
+        "body_sha256": "2184a9be01f1d538fa60a2095aaab1008a5a35f6320f7313db9b8c96ddd15891",
+        "context_sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba",
+        "derivation": "unchanged compatibility native body plus unchanged complete_sample_1 safe context; deliberate valid digest mismatch, component-only neutral proof",
+        "name": "refusal_context_mismatch",
+        "profile_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+        "wrapper_bytes": 1985
+      }
+    }
+  },
+  "coverage_18": [
+    {
+      "family": 1,
+      "name": "LS/preprocessing",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "O000",
+        "O001",
+        "O002",
+        "O003",
+        "O004",
+        "O005",
+        "O006",
+        "O007",
+        "O008",
+        "O378",
+        "O379",
+        "O380"
+      ],
+      "source_scope": "All nine representative directions and all6 SOCD histories. Physical actual unit mapping/preflight unknown.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 2,
+      "name": "RS axes and diagonal",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "N078",
+        "N079",
+        "N080",
+        "N081",
+        "N082",
+        "N083",
+        "N084",
+        "N085",
+        "N086",
+        "N087",
+        "N088",
+        "N089"
+      ],
+      "source_scope": "Four axes/four diagonals, plus vertical RF3 source conditions.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 3,
+      "name": "Default/ModeDefault lookup",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "O000",
+        "O001",
+        "O002",
+        "O003",
+        "O004",
+        "O005",
+        "O006",
+        "O007",
+        "O008",
+        "O072",
+        "O073",
+        "O074",
+        "O075",
+        "O076",
+        "O077",
+        "O078",
+        "O079",
+        "O080"
+      ],
+      "source_scope": "All nine entries for two representative tables, Mode neutral128/169 retained.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 4,
+      "name": "X1/X2/Y1/Y2",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "N005",
+        "N009",
+        "N015",
+        "N029",
+        "N050",
+        "O014",
+        "O023",
+        "O032",
+        "O041",
+        "O104"
+      ],
+      "source_scope": "Singleton lower-left and explicit Mode/submode/conflicts; not exhaustive combinations.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 5,
+      "name": "Tilt1/2/3 and minus41",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "N021",
+        "N027",
+        "N029",
+        "N031",
+        "N053",
+        "O050",
+        "O059",
+        "O068",
+        "O122"
+      ],
+      "source_scope": "Source-supported minus41 and RS suppression/custom conflicts now data-complete.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 6,
+      "name": "Mode/sublayers/LF4",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "N005",
+        "N009",
+        "N015",
+        "N021",
+        "N023",
+        "N025"
+      ],
+      "source_scope": "Both Y2 sublayers and LF4 digital/submode changes, actual Mode combinations.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 7,
+      "name": "Priority/default behavior",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "S009"
+      ],
+      "selected_screen_rows": [
+        "N027",
+        "N029",
+        "N031",
+        "O104",
+        "O122",
+        "S002",
+        "S009",
+        "S016"
+      ],
+      "source_scope": "Full output contrasts, not selected table names. Storage order permutation remains host proof.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 8,
+      "name": "Independent digital bindings",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "S022"
+      ],
+      "selected_screen_rows": [
+        "N090",
+        "N091",
+        "N092",
+        "N093",
+        "N094",
+        "N095",
+        "N097",
+        "S022",
+        "S027"
+      ],
+      "source_scope": "A/B/X/Y plus gated/submode cases; misc menu buttons not held. Current ordinary baseline H1 remains session-dependent.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 9,
+      "name": "Digital/analog triggers and Z",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "S022"
+      ],
+      "selected_screen_rows": [
+        "N094",
+        "N095",
+        "S022"
+      ],
+      "source_scope": "Isolated GC L1/R0/Z0, L0/R1/Z0, L0/R0/Z1 and combinations; native140 with digital. Actual report observers remain unknown.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 10,
+      "name": "One-to-many and OR merge",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "S022",
+        "S023",
+        "S025",
+        "S026"
+      ],
+      "selected_screen_rows": [
+        "S022",
+        "S023",
+        "S025",
+        "S026",
+        "S027"
+      ],
+      "source_scope": "Complete sample A+L+R single input8; inputs6/7 A OR; exact controls retained. No isolation claim from A icon.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 11,
+      "name": "Genuine Down+A SOCD",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "O389",
+        "O402",
+        "O415",
+        "O428",
+        "O441",
+        "O454"
+      ],
+      "selected_screen_rows": [
+        "O378",
+        "O379",
+        "O380",
+        "O381",
+        "O382",
+        "O383",
+        "O384",
+        "O385",
+        "O386",
+        "O387",
+        "O388",
+        "O389",
+        "O390",
+        "O391",
+        "O392",
+        "O393",
+        "O394",
+        "O395",
+        "O396",
+        "O397",
+        "O398",
+        "O399",
+        "O400",
+        "O401",
+        "O402",
+        "O403",
+        "O404",
+        "O405",
+        "O406",
+        "O407",
+        "O408",
+        "O409",
+        "O410",
+        "O411",
+        "O412",
+        "O413",
+        "O414",
+        "O415",
+        "O416",
+        "O417",
+        "O418",
+        "O419",
+        "O420",
+        "O421",
+        "O422",
+        "O423",
+        "O424",
+        "O425",
+        "O426",
+        "O427",
+        "O428",
+        "O429",
+        "O430",
+        "O431",
+        "O432",
+        "O433",
+        "O434",
+        "O435",
+        "O436",
+        "O437",
+        "O438",
+        "O439",
+        "O440",
+        "O441",
+        "O442",
+        "O443",
+        "O444",
+        "O445",
+        "O446",
+        "O447",
+        "O448",
+        "O449",
+        "O450",
+        "O451",
+        "O452",
+        "O453",
+        "O454",
+        "O455"
+      ],
+      "source_scope": "All78 original ordered policy/history steps; A survives cancellation; remapped duplicate38/27.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 12,
+      "name": "Forced Down+A",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "S009"
+      ],
+      "selected_screen_rows": [
+        "S000",
+        "S001",
+        "S002",
+        "S003",
+        "S004",
+        "S005",
+        "S006",
+        "S007",
+        "S008",
+        "S009",
+        "S010",
+        "S011",
+        "S012",
+        "S013",
+        "S014",
+        "S015",
+        "S016",
+        "S017",
+        "S018",
+        "S019",
+        "S020"
+      ],
+      "source_scope": "All21 safe rows: winner/loser/gated loser; no unselected table leak assumption.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 13,
+      "name": "Historical LT6",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "N038",
+        "N045"
+      ],
+      "selected_screen_rows": [
+        "N032",
+        "N038",
+        "N041",
+        "N045",
+        "N047",
+        "N050",
+        "N053"
+      ],
+      "source_scope": "RF5/RF6/RF7/null/Dpad/Mode/X1/Tilt1 conflicts including horizontal controls.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 14,
+      "name": "RF5/RF6/RF7",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "N060"
+      ],
+      "selected_screen_rows": [
+        "N060"
+      ],
+      "source_scope": "Right/left coordinate distinctions and post-effect null, real Z/trigger distinction.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 15,
+      "name": "RS diagonal/RF3 vertical",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "N078",
+        "N079",
+        "N080",
+        "N081",
+        "N082",
+        "N083",
+        "N084",
+        "N085",
+        "N086",
+        "N087",
+        "N088",
+        "N089"
+      ],
+      "source_scope": "Four diagonals, vertical alone and effective LS horizontal source cases.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 16,
+      "name": "Dpad/LS-to-Dpad",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "N045"
+      ],
+      "selected_screen_rows": [
+        "N045",
+        "O158"
+      ],
+      "source_scope": "Actual report Dpad/hat observation required. Nunchuk remains NOT_TESTED.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 17,
+      "name": "Analog null",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [
+        "N060"
+      ],
+      "selected_screen_rows": [
+        "N041",
+        "N060"
+      ],
+      "source_scope": "Null controls and A/Z/compound effects; no assumption of digital erasure.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    },
+    {
+      "family": 18,
+      "name": "28 raw tables/asymmetry",
+      "result": "NOT_TESTED",
+      "selected_raw_rows": [],
+      "selected_screen_rows": [
+        "O000",
+        "O001",
+        "O002",
+        "O003",
+        "O004",
+        "O005",
+        "O006",
+        "O007",
+        "O008",
+        "O072",
+        "O073",
+        "O074",
+        "O075",
+        "O076",
+        "O077",
+        "O078",
+        "O079",
+        "O080"
+      ],
+      "source_scope": "Representative all9 raw coordinates incl asymmetric/noncenter neutral; all28 admitted tables remain host/source proof, not28-table hardware PASS.",
+      "unseen_fields": "UNKNOWN; screen-only is not complete output PASS"
+    }
+  ],
+  "coverage_interpretation": "Listed screen rows establish six visible numeric fields/one actually visible icon only; only selected raw rows establish all21 transmitted XInput fields. Optional grids earn evidence only if specifically reported. All other original rows NOT_TESTED physically.",
+  "events_file": "sequence.json",
+  "existing_evidence_reused": {
+    "closed_C00": "existing accepted fresh Config/all22 originals custody",
+    "current_session": "B00",
+    "existing_raw_captures": 2,
+    "existing_raw_reads": 8,
+    "new_metrics_before_this_plan": 0,
+    "new_writes_before_this_plan": 0,
+    "retained_raw": [
+      "B000",
+      "B001"
+    ]
+  },
+  "frozen_oracle_sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
+  "future_costs": {
+    "CDC_same_private_unit_lookups": 37,
+    "GET_CONFIG_commands": 73,
+    "LIST_commands": 3,
+    "Menu_Configurator_restarts": 18,
+    "PROFILE_CREATE": 2,
+    "PROFILE_DELETE": 2,
+    "PROFILE_SET-REFERENCE": 5,
+    "PROFILE_UPDATE": 14,
+    "READ_commands": 40,
+    "SET_CONFIG_commands": 12,
+    "STATUS_commands": 119,
+    "logged_drain_reports": 20,
+    "ordinary_USB_restarts": 19,
+    "raw_capture_invocations": 20,
+    "raw_read_submissions": 80,
+    "registry_inspections": 19,
+    "runtime_identity_queries": 38,
+    "serial_opens": 212,
+    "strict_measurement_reports": 60,
+    "target_metric_queries": 6
+  },
+  "future_firmware_restarts": 37,
+  "grouped_worksheet": "WORKSHEET.md",
+  "history": "All six13-state histories plus forced7-state and complete9-state ordered groups actually performed. Other selected states explicitly stateless settled samples, not original-prefix execution.21multicontrol edges establish settled endpoints only, no frame-exact/transient/no-unlisted-sample claim.",
+  "kind": "EXACT_REDUCED_GROUPED_DEVICE_PACKET_DRAFT_NOT_APPROVED",
+  "matrix_sha256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5",
+  "metrics": "six existing read-only snapshots, two each compatibility/complete2/SOCD2, >=1000ms interval; finite current-boot/overhead flags/calibration/expiry honest; no WCET/whole-stack claim",
+  "observer": {
+    "binary_sha256": "ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164",
+    "directory": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022",
+    "metadata_header_sha256": "18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c",
+    "one_drain_guarantees_settling": false,
+    "operation_change": false,
+    "read_contract": "one logged structurally valid drain +3 strict matching20B measurements,4 submissions maximum,5s,32B buffer,one pending,one abort/1sgrace,8/10s watchdogs; no retry",
+    "source_sha256": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55"
+  },
+  "owned_IDs": "actual two distinct successful CREATE response IDs only, never guessed",
+  "packet_adoption": "Only exact revised owner approval after independent review. Supersedes remaining old494 schedule, not past evidence/oracle/source/protocol history.",
+  "phase_filters": {
+    "Configurator": {
+      "PID": "1092",
+      "VID": "2e8a",
+      "backend": 8
+    },
+    "XInput": {
+      "PID": "4726",
+      "VID": "0738",
+      "backend": 2
+    }
+  },
+  "protected_original_IDs": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    24
+  ],
+  "remaining_gates": [
+    "dashboard numeric-field eligibility, unknown entry procedure STOP",
+    "USB-Switch raw output observer unqualified",
+    "WUP028->Switch functional behavior cannot prove hidden simultaneous L/R/Z/numeric analog or electrical Joybus",
+    "timing/transient/latency and untransmitted fields remain unobserved",
+    "independent HEP/source integration/merge/strict DONE separate; no aggregate PASS from worksheet"
+  ],
+  "representative_detail": {
+    "LF4/Y2 suppression": [
+      "N005"
+    ],
+    "LT6 source submodes": [
+      "N032",
+      "N038",
+      "N041",
+      "N045",
+      "N047",
+      "N050",
+      "N053"
+    ],
+    "Mode": [
+      "O072",
+      "O073",
+      "O074",
+      "O075",
+      "O076",
+      "O077",
+      "O078",
+      "O079",
+      "O080",
+      "N009",
+      "N015",
+      "N021",
+      "N023",
+      "N025"
+    ],
+    "Tilt1": [
+      "O050"
+    ],
+    "Tilt2": [
+      "O059"
+    ],
+    "Tilt3": [
+      "O068"
+    ],
+    "X1": [
+      "O014"
+    ],
+    "X2": [
+      "O023"
+    ],
+    "Y1": [
+      "O032"
+    ],
+    "Y2": [
+      "O041",
+      "N005"
+    ],
+    "all six SOCD policies": [
+      "O378",
+      "O379",
+      "O380",
+      "O381",
+      "O382",
+      "O383",
+      "O384",
+      "O385",
+      "O386",
+      "O387",
+      "O388",
+      "O389",
+      "O390",
+      "O391",
+      "O392",
+      "O393",
+      "O394",
+      "O395",
+      "O396",
+      "O397",
+      "O398",
+      "O399",
+      "O400",
+      "O401",
+      "O402",
+      "O403",
+      "O404",
+      "O405",
+      "O406",
+      "O407",
+      "O408",
+      "O409",
+      "O410",
+      "O411",
+      "O412",
+      "O413",
+      "O414",
+      "O415",
+      "O416",
+      "O417",
+      "O418",
+      "O419",
+      "O420",
+      "O421",
+      "O422",
+      "O423",
+      "O424",
+      "O425",
+      "O426",
+      "O427",
+      "O428",
+      "O429",
+      "O430",
+      "O431",
+      "O432",
+      "O433",
+      "O434",
+      "O435",
+      "O436",
+      "O437",
+      "O438",
+      "O439",
+      "O440",
+      "O441",
+      "O442",
+      "O443",
+      "O444",
+      "O445",
+      "O446",
+      "O447",
+      "O448",
+      "O449",
+      "O450",
+      "O451",
+      "O452",
+      "O453",
+      "O454",
+      "O455"
+    ],
+    "complete independent output slots/OR": [
+      "S021",
+      "S022",
+      "S023",
+      "S024",
+      "S025",
+      "S026",
+      "S027",
+      "S028",
+      "S029",
+      "S030",
+      "S031",
+      "S032",
+      "S033",
+      "S034",
+      "S035",
+      "S036",
+      "S037",
+      "S038"
+    ],
+    "default": [
+      "O000",
+      "O001",
+      "O002",
+      "O003",
+      "O004",
+      "O005",
+      "O006",
+      "O007",
+      "O008"
+    ],
+    "flipper": [
+      "O158",
+      "N025"
+    ],
+    "forced conflict policy": [
+      "S000",
+      "S001",
+      "S002",
+      "S003",
+      "S004",
+      "S005",
+      "S006",
+      "S007",
+      "S008",
+      "S009",
+      "S010",
+      "S011",
+      "S012",
+      "S013",
+      "S014",
+      "S015",
+      "S016",
+      "S017",
+      "S018",
+      "S019",
+      "S020"
+    ],
+    "minus-41": [
+      "O122",
+      "N027",
+      "N029",
+      "N031"
+    ],
+    "normal-X": [
+      "O104",
+      "N023"
+    ],
+    "right-stick/default and compounds": [
+      "N078",
+      "N079",
+      "N080",
+      "N081",
+      "N082",
+      "N083",
+      "N084",
+      "N085",
+      "N086",
+      "N060"
+    ]
+  },
+  "required_screen_positions": 209,
+  "sequence_sha256": "b09211357e973c4311110922e39d2387461660d8c601851fa3187cad38fdadc3",
+  "source_assertions": {
+    "H12_same_session": "ProfileStoreFinalizeSetConfig successfulSave publishes _config=candidate at461; DELETE915-918 checks both live _config and freshly loadedcandidate references. No deletion until original restore known successful and readback confirmed.",
+    "history": "all six exact13-state groups; source-pinned independent eligibility report; constructor-only 2IP freshness, no extra internal reset; multibit endpoints qualification explicit",
+    "screen": "MenuButtonHints.cpp:GetOutputs256; four raw-128 coords358/361/364/367; raw trigger numbers370/373; first-match single icon92+; actual view eligibility unproven until owner confirms"
+  },
+  "status": "DRAFT_PENDING_INDEPENDENT_REVIEW_AND_EXACT_OWNER_APPROVAL",
+  "uncertainty_stop": "any mutation response uncertainty stops all execution; no automatic retry or restoration; root/owner review preserved receipts before any new decision",
+  "unit_binding": "one original private serial, exactly one phase-correct CDC lookup per session; fresh actual registry IDs; frozen reader only supports location0x100000; another location STOP, no fallback",
+  "write_bounds": {
+    "CREATE": 2,
+    "Config_SET": 12,
+    "DELETE_owned_only": 2,
+    "UPDATE": 14,
+    "checked_reference": 5,
+    "total_persistent_command_requests": 35
+  }
+}

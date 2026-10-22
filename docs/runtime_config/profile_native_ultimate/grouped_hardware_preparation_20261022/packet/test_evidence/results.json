@@ -1,0 +1,118 @@
+{
+  "checks": [
+    {
+      "case": "actual_child_binding_to_frozen_native_pure_argv_admission",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_sequence_sha256",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_approval_id",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_owner_packet_approval_sha256",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_stimulus_actual_response",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_stimulus_source",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_stimulus_history_before_this_row",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_stimulus_physical_held_input_ids",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_stimulus_history_contract",
+      "result": "PASS"
+    },
+    {
+      "case": "known_screen_only_case_cannot_bind",
+      "result": "PASS"
+    },
+    {
+      "case": "reject_unplanned_or_duplicate_run",
+      "result": "PASS"
+    },
+    {
+      "case": "strict_full21_synthetic_N038_match_with_explicit_drain",
+      "result": "PASS"
+    },
+    {
+      "case": "preflight",
+      "result": "PASS"
+    },
+    {
+      "case": "first_measurement_mismatch",
+      "result": "PASS"
+    },
+    {
+      "case": "last_measurement_mismatch",
+      "result": "PASS"
+    },
+    {
+      "case": "missing_drain",
+      "result": "PASS"
+    },
+    {
+      "case": "unsettled",
+      "result": "PASS"
+    },
+    {
+      "case": "all6_exact13step_histories_and_raw_before_terminal_release",
+      "result": "PASS"
+    },
+    {
+      "case": "exact_counts20raw_209positions_37restarts",
+      "result": "PASS"
+    },
+    {
+      "case": "four_required_visible_icons_pinned",
+      "result": "PASS"
+    },
+    {
+      "case": "readiness_'q\\n'",
+      "result": "PASS"
+    },
+    {
+      "case": "readiness_''",
+      "result": "PASS"
+    },
+    {
+      "case": "readiness_preserves_real_newline_bytes",
+      "result": "PASS"
+    },
+    {
+      "case": "mismatch_text_never_capture",
+      "result": "PASS"
+    },
+    {
+      "case": "capture_failure_stops_group_no_retry",
+      "result": "PASS"
+    },
+    {
+      "case": "timeout_partial_stdout_stderr_and_argv_preserved_once",
+      "result": "PASS"
+    },
+    {
+      "case": "EOF_zero_capture_calls",
+      "result": "PASS"
+    },
+    {
+      "case": "reentry_existing_setup_never_reexecutes",
+      "result": "PASS"
+    }
+  ],
+  "classification": "PURE_FILE_AND_MOCK_ONLY_NOT_HARDWARE_OR_APPROVAL",
+  "live_device_calls": 0
+}

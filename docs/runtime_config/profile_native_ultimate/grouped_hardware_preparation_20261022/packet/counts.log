@@ -1,0 +1,28 @@
+{
+  "future_costs": {
+    "Menu_Configurator_restarts": 18,
+    "CDC_same_private_unit_lookups": 37,
+    "runtime_identity_queries": 38,
+    "STATUS_commands": 119,
+    "GET_CONFIG_commands": 73,
+    "serial_opens": 212,
+    "PROFILE_CREATE": 2,
+    "READ_commands": 40,
+    "SET_CONFIG_commands": 12,
+    "PROFILE_SET-REFERENCE": 5,
+    "ordinary_USB_restarts": 19,
+    "registry_inspections": 19,
+    "raw_capture_invocations": 20,
+    "raw_read_submissions": 80,
+    "logged_drain_reports": 20,
+    "strict_measurement_reports": 60,
+    "target_metric_queries": 6,
+    "PROFILE_UPDATE": 14,
+    "PROFILE_DELETE": 2,
+    "LIST_commands": 3
+  },
+  "groups": 20,
+  "screen_positions": 209,
+  "native_boots": 18,
+  "future_firmware_restarts": 37
+}

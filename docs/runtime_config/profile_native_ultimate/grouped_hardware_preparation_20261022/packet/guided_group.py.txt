@@ -1,0 +1,76 @@
+"""One owner-terminal group only; never Config/ProfileStore/identity/inspect/restart/metrics.
+No live invocation is authorized by possessing this script or passing argv.
+"""
+from pathlib import Path
+import argparse,base64,datetime,fcntl,hashlib,json,os,subprocess,sys
+sys.dont_write_bytecode=True
+import binding_contract as b
+import verify_native_capture as v
+D=Path(__file__).resolve().parent;H=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022')
+CAMPAIGN=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-acceptance/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1_20261022/grouped_v1')
+BINARY_SHA='ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164'
+def now():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+def write(path,value):
+ with Path(path).open('x')as f:json.dump(value,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+def readiness(prompt,stream):
+ print(prompt,flush=True);start=now();response=stream.readline()
+ if response in ('','q\n','Q\n'):raise RuntimeError('STOPPED_READINESS_WAIT_NO_CAPTURE')
+ b.require(response=='\n','only actual Enter or q accepted; no capture')
+ return {'source':'ACTUAL_HUMAN_USER_REPLY','transport':'owner_terminal_stdin','actual_response':response,'actual_response_sha256':hashlib.sha256(response.encode()).hexdigest(),'prompt':prompt,'prompt_sha256':hashlib.sha256(prompt.encode()).hexdigest(),'prompt_utc':start,'received_utc':now()}
+def segments(group):
+ out=[];part=[]
+ for st in group['steps']:
+  part.append(st)
+  if st['raw']:out.append(part);part=[]
+ if part:out.append(part)
+ return out
+def execute(group,setup,out,stream,runner=subprocess.run):
+ # Caller admits real interactive owner terminal. Tests replace runner/stream only
+ # by importing this pure seam, never invoking main or host device operations.
+ write(out/'setup_copy.json',setup)
+ receipts=[];results=[]
+ for part in segments(group):
+  text=['Perform these states in order; all other controls released. Compare all six displayed numbers. Stop on any difference. No added reset inside ordered group.']
+  for st in part:
+   text.append(st['selection_id']+' HOLD '+(', '.join(f'{n}({i})'for n,i in zip(st['physical_held_input_names'],st['physical_held_input_ids']))or'ALL RELEASED')+' EXPECT '+json.dumps(st['expected_dashboard_six_values'],sort_keys=True)+(' AND REQUIRED visible '+st['required_visible_icon'].upper()+' icon'if st.get('required_visible_icon')else''))
+  text.append(('Remain at final RAW hold. 'if part[-1]['raw']else'Complete this listed segment. ')+'Enter only after actually performing every listed state and seeing matching six numbers AND each explicitly required visible icon; q/EOF STOP.')
+  receipt=readiness('\n'.join(text),stream);receipt.update(group_id=group['group_id'],matched_screen_rows=[x['selection_id']for x in part],classification='HUMAN_REPORTED_VISIBLE_FIELDS_ONLY',hidden_bits='UNKNOWN',visible_icons_confirmed={x['selection_id']:x['required_visible_icon']for x in part if x.get('required_visible_icon')});rp=out/f'segment_{len(receipts)+1:02}_human.json';write(rp,receipt);receipts.append(str(rp))
+  st=part[-1]
+  if not st['raw']:continue
+  case=out/st['case_run_id'];case.mkdir(exist_ok=False)
+  stimulus={'session':group['group_id'],'case_id':st['selection_id'],'physical_held_input_ids':st['physical_held_input_ids'],'history_group':st['history_group'],'history_before_this_row':st['required_history_before_this_row'],'history_contract':st['history_contract'],'owner_confirmed_listed_stimulus':True,'human_receipt':str(rp),'human_receipt_sha256':b.sha(rp),'actual_response':receipt['actual_response'],'source':receipt['source'],'transport':receipt['transport']}
+  write(case/'stimulus.json',stimulus);index=dict(setup['proof_index']);index.update(stimulus_confirmation=str(case/'stimulus.json'),sequence_sha256=b.sha(D/'sequence.json'),approval_id=setup['approval_id'],owner_packet_approval_sha256=setup['owner_packet_approval_sha256']);write(case/'proof_index.json',index)
+  binding=b.build(D/'acceptance_comparison_matrix.json',index,st['selection_id'],st['case_run_id']);write(case/'binding.json',binding)
+  b.require(b.sha(H/'mac_hostinterface_observer')==BINARY_SHA,'frozen binary changed')
+  capture=case/'capture.jsonl';argv=[str(H/'mac_hostinterface_observer'),'capture','--approved-session',group['group_id'],'--anchor-entry-id',str(binding['anchor_entry_id']),'--interface-entry-id',str(binding['interface_entry_id']),'--output',str(capture),'--binding-base64',base64.b64encode((case/'binding.json').read_bytes()).decode()]
+  # Exactly one fixed invocation; no retry. Timeout ends process, never restarts it.
+  write(case/'submission.json',{'argv':argv,'at_utc':now(),'attempt':1,'real_human_receipt_sha256':b.sha(rp)})
+  try:p=runner(argv,capture_output=True,text=True,timeout=10)
+  except subprocess.TimeoutExpired as e:
+   def partial(value):return base64.b64encode(value if isinstance(value,bytes)else(value or '').encode()).decode()
+   write(case/'execution_timeout.json',{'argv':argv,'outcome':'UNCERTAIN_TIMEOUT_STOP_NO_RETRY','timeout_seconds':10,'partial_stdout_base64':partial(e.stdout),'partial_stderr_base64':partial(e.stderr),'capture_sha256':b.sha(capture)if capture.exists()else None,'at_utc':now()});raise
+  execution={'argv':argv,'returncode':p.returncode,'stdout':p.stdout,'stderr':p.stderr,'binary_sha256':BINARY_SHA,'capture_sha256':b.sha(capture)if capture.exists()else None,'owner_packet_approval_sha256':setup['owner_packet_approval_sha256'],'completed_utc':now()};write(case/'execution.json',execution)
+  b.require(p.returncode==0,'capture failed; entire group STOP; no retry')
+  result=v.verify(capture,D/'acceptance_comparison_matrix.json',case/'proof_index.json',st['selection_id'],st['case_run_id'],case/'execution.json');write(case/'comparison.json',result);results.append(result)
+  print('PASS full21 transmitted fields for '+st['selection_id']+'. Advance only as next displayed segment directs.',flush=True)
+ summary={'status':'GROUP_REPORTED_AND_TARGETED_RAW_MATCH_ONLY_NOT_HEP','group_id':group['group_id'],'completed_utc':now(),'raw_matches':len(results),'screen_rows_actually_reported':[s['selection_id']for s in group['steps']],'human_receipts':[{'path':p,'sha256':b.sha(p)}for p in receipts],'setup_sha256':b.sha(out/'setup_copy.json'),'limits':'Visible six fields only outside targeted raw; no timing/transient/full hidden mask claim.'};write(out/'summary.json',summary);return summary
+def main():
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--group',required=True);p.add_argument('--setup',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+ b.require(os.getuid()==502 and sys.stdin.isatty(),'actual owner UID502 interactive terminal stdin required; agent must never supply stdin')
+ pins=b.read_json(D/'PINS.json')
+ for name,digest in pins['files'].items():b.require(b.sha(D/name)==digest,'frozen packet input changed: '+name)
+ for path,digest in pins['external_inputs'].items():b.require(b.sha(path)==digest,'frozen external source/tool changed: '+path)
+ b.require(a.output.resolve()==(CAMPAIGN/a.group).resolve() and a.setup.resolve()==(CAMPAIGN/('setup_'+a.group+'.json')).resolve(),'fixed one-output/one-setup per group; re-entry never changes path');setup=b.read_json(a.setup);packet=b.read_json(D/'DEVICE_PACKET.json');seq=b.read_json(D/'sequence.json')
+ b.require(setup['approval_id']==packet['approval_id'] and setup['approval_state']=='DIRECT_OWNER_APPROVED' and setup['device_packet_sha256']==b.sha(D/'DEVICE_PACKET.json') and setup['sequence_sha256']==b.sha(D/'sequence.json'),'exact revised owner approval/data required')
+ b.require(b.sha(setup['owner_approval_receipt'])==setup['owner_packet_approval_sha256'],'actual approval receipt hash')
+ b.require(setup['current_group']==a.group and setup['previous_group_complete']is True and setup['uncertain_write']is False and setup['root_phase_setup_complete']is True,'root current-group/previous-checkpoint/known-state admission')
+ matches=[g for g in seq['groups']if g['group_id']==a.group];b.require(len(matches)==1,'unknown group');g=matches[0]
+ a.output.parent.mkdir(parents=True,exist_ok=True)
+ with (a.output.parent/'group_runner.lock').open('a')as lock:
+  fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);a.output.mkdir(exist_ok=False)
+  try:
+   proof=readiness('Confirm the actual dashboard shows FOUR resolved stick numbers and TWO trigger numbers, as WORKSHEET. If only input circles or unknown entry, q STOP. Enter confirms six-number view.',sys.stdin);write(a.output/'dashboard_eligibility.json',proof)
+   result=execute(g,setup,a.output,sys.stdin);print(json.dumps(result,indent=2))
+  except BaseException as e:
+   write(a.output/'STOP.json',{'status':'STOP_NO_RETRY_NO_AUTOMATIC_RESTORE','error':str(e),'at_utc':now()});raise
+if __name__=='__main__':main()

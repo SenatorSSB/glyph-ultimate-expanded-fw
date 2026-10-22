@@ -1,0 +1,31 @@
+{
+  "code_delta": "Python binding: exact reduced sequence/approval/human receipt/history admission only. Strict adapter points to unchanged frozen binary/parsers; same full21 strong comparator. Group helper prompts/capture/compare only; never mutation or setup operations.",
+  "existing_approval_is_not_new_packet_approval": true,
+  "external_inputs": {
+    "/private/tmp/glyph-native-334f-hardware-preparation-20261021/coverage.json": "f9a3e29fde1b55003d6dafd561e9f72c3f89a80097c45b62d1c3b4f95d4bb7ae",
+    "/private/tmp/glyph-native-hardware-history-eligibility-20261022/eligibility.json": "db2b241c1b65daac9e151ab2b5c07c072b266d46c5fde4c0ddf46e496d84df01",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/acceptance_comparison_matrix.json": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/acceptance_metadata.hpp": "18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/binding_contract.py": "d8999e5e32bec423604873f2e6d025e7bebb16a45344ed17e083055c63c5a048",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/descriptor_cli": "b0afa7397979ba616894f3df71fb8056a8c8f5fada5b0bbe5431ec088a9c3952",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/mac_hostinterface_observer": "ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/mac_hostinterface_observer.mm": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/observer_core.hpp": "a18d19cf0596a8cf8b02e5cd3874047b890241df383339e76fcecad69bfdb2d4",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/observer_parser.hpp": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/parser_cli": "e40c710577e7c99048fa4a2738254a7e6e6b049b63ea0cbc9f7103b2825155e8",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/strong_verify_capture_unchanged.py": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+    "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/verify_native_capture.py": "d44a0cfb5f4a6ee46ca547b267b239f49130edfe2e98877a4bdce8551d70f92b",
+    "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/expected_observations.json": "e2cf3540b28519c06dc66a9f11a17a19fb08536cecfc4808e1dd2d3d533481bd",
+    "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/hardware_acceptance_protocol.md": "51b3958910c25396851c9cdf4ece95743b20c875e788f3170923834f94574a2d",
+    "/private/tmp/glyph-profile-native-20261020/tools/convert_glyph_native_ultimate_profile.py": "d6a84657308ee957172185de2393205cf849465416c2f7e250a91e27774d293f",
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_native_target_metrics_tool.py": "91ff6d0e31b5e370c7a4c100f3d4fb477c264413ebe363b27da48fcb1b1d777f",
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_profile_store_production_tool.py": "4623bc6afd8a2480db80ff9debec0d79b386d891b12c1d2693cc0b844bb786ef",
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_runtime_identity_tool.py": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+    "/private/tmp/glyph-profile-native-20261020/tools/glyph_serial_config_tool.py": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c"
+  },
+  "initial_test_failure": "Synthetic producer initially used01/14-style length header; exactF parser correctly refused. Fixed synthetic bytes to source00/00; initialfailedlog retained. No product/source defect or hardware evidence.",
+  "no_live_calls": true,
+  "no_native_reader_source_or_binary_change": true,
+  "root_mutable_baseline_excluded_from_pins": true,
+  "source_F_unchanged": true
+}

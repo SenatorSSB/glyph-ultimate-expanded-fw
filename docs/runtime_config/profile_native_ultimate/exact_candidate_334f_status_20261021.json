@@ -454,5 +454,43 @@
     },
     "counters_scope": "Campaign totals through B00_B001; C00-only counters are separately preserved in C00_result"
   },
-  "latest_sourcefree_C00_validation": "native_C00_publication_validation_20261022/result.json"
+  "latest_sourcefree_C00_validation": "native_C00_publication_validation_20261022/result.json",
+  "grouped_native_acceptance_preparation": {
+    "state": "INDEPENDENT_PREPARATION_PASS_REVISED_DEVICE_APPROVAL_REQUIRED",
+    "amendment": "grouped_hardware_preparation_20261022/ACCEPTANCE_AMENDMENT.md",
+    "owner_steering": "Printed tables/miniscreen plus targeted USB, followed by direct continuation.",
+    "all_six_SOCD_histories_retained": true,
+    "old_494_packet_and_actual_evidence": "IMMUTABLE_NOT_RESUMED",
+    "actual_retained_baseline_cases": [
+      "B000",
+      "B001"
+    ],
+    "actual_total_raw_captures": 2,
+    "actual_total_raw_reads": 8,
+    "new_device_calls": 0,
+    "native_activation": false,
+    "Config_profile_mutations": 0,
+    "native_hardware_result": null,
+    "pending": [
+      "Revised concrete device-sequence and sampling-amendment approval",
+      "Actual human observations and independent HEP",
+      "Other-route/hidden-field gaps",
+      "Exact tested-source integration and strict DONE"
+    ],
+    "owner_packet": "grouped_hardware_preparation_20261022/OWNER_PACKET.md",
+    "owner_packet_sha256": "70b1440667c2ea03384c7545ba656b22143e5644826943cdeed4c189b0912171",
+    "technical_PINS_sha256": "427f4aacaa3b933c77caa334f0f3e2cea360a5d8d941653d9cda282d65d20560",
+    "device_packet_sha256": "3e271fedee8f57f88803bb389d62ba29dde6673a9e9f9d7a151cffce17f9e70d",
+    "sequence_sha256": "b09211357e973c4311110922e39d2387461660d8c601851fa3187cad38fdadc3",
+    "future_raw_captures": 20,
+    "future_raw_reads": 80,
+    "future_required_screen_positions": 209,
+    "future_owner_groups": 20,
+    "future_firmware_restarts": 37,
+    "future_persistent_requests": 35,
+    "independent_review_report_sha256": "7483eca6c92acf8a9d8c95977929e04db228cd86810daf5d0eb6ef1a6c891341",
+    "independent_review_PINS_sha256": "5a2dcdd4927d1e67111810e7ab8df1e9d25b9b77735bf6d2fd79bf2a0c086b20",
+    "host_custody_sha256": "83cc9f1cd6b78ea0f371d9ad4e68522967652c9fb51f17ca8b122c903dfd2bae",
+    "focused_offline_tests": "28 affected pure/mock checks and4 additional icon controls PASS; no physical evidence"
+  }
 }

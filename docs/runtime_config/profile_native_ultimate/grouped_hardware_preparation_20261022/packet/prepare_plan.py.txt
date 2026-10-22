@@ -1,0 +1,82 @@
+"""Pure reduced sequence/worksheet compilation from immutable fixtures. No device entrypoint."""
+from pathlib import Path
+from collections import Counter
+import json,hashlib,sys,tempfile
+D=Path(__file__).resolve().parent;H=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');F=Path('/private/tmp/glyph-profile-native-20261020');sys.dont_write_bytecode=True;sys.path.insert(0,str(F/'tools'));(D/'tmp').mkdir(exist_ok=True);tempfile.tempdir=str(D/'tmp')
+import glyph_serial_config_tool as transport
+from convert_glyph_native_ultimate_profile import preprocessing_bytes
+pb,jf,_=transport.load_runtime_proto_modules(F)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,x):Path(p).write_text(json.dumps(x,indent=2,sort_keys=True)+'\n')
+matrix=json.loads((H/'acceptance_comparison_matrix.json').read_text());rows={r['selection_id']:r for r in matrix['rows']};contexts=matrix['contexts']
+def ch(k):
+ c=pb.GameModeConfig();jf.ParseDict(contexts[k]['context_json'],c,ignore_unknown_fields=False);return hashlib.sha256(preprocessing_bytes(c,pb)).hexdigest()
+for a,b in [('candidate_fixture_packet/compatibility','supplement_short/compatibility'),('candidate_fixture_packet/rebound','supplement_short/rebound')]:assert contexts[a]['profile_record']['profile_sha256']==contexts[b]['profile_record']['profile_sha256']and ch(a)==ch(b)
+C='candidate_fixture_packet/compatibility';R='candidate_fixture_packet/rebound';A='candidate_safe_fixture_packet/complete_sample_1';B='candidate_safe_fixture_packet/complete_sample_2';U='supplement_short/refusal_context_mismatch';OR='original_legacy4'
+events=[];groups=[];tot=Counter();current_ctx=OR;selected=4;cnum=0;bootnum=0
+def event(kind,desc,cost=None,**extra):
+ cost=cost or {};tot.update(cost);e={'index':len(events)+1,'kind':kind,'description':desc,'maximum_cost':cost,'result':'NOT_TESTED','observed':None,**extra};events.append(e);return e
+def cfg(desc):
+ global cnum
+ cnum+=1;return event('CONFIGURATOR_SESSION',desc,{'Menu_Configurator_restarts':1,'CDC_same_private_unit_lookups':1,'runtime_identity_queries':1,'STATUS_commands':1,'GET_CONFIG_commands':1,'serial_opens':3},session=f'RC{cnum:02}',lookup={'VID':11914,'PID':4242,'private_serial':'same original private reference','location':'0-1'},identity={'context':'configurator','status':'configurator','primary_backend':8,'context_row':0,'requested_reference':0,'incarnation':0,'active_id':0,'active_revision':0,'schema_version':0,'payload_sha256':None})
+def read(profile,why):event('PROFILE_READ',why,{'READ_commands':1,'STATUS_commands':1,'serial_opens':1},profile=profile)
+def mut(action,profile,why,body=None):
+ event('PROFILE_'+action.upper(),why,{'PROFILE_'+action.upper():1,'STATUS_commands':2,'serial_opens':2},profile=profile,profile_context=body,fences='fresh explicit STATUS then unchanged production-tool admission STATUS; incarnation1/current generation; UPDATE actual owned revision; fresh unique token+durable request; ONE send/no retry')
+ if action in ['create','update']:read(profile,'known successful '+action+' exact canonical wrapper/revision')
+def context(k,restore=False):
+ global current_ctx
+ if not restore and ch(k)==ch(current_ctx):event('CONTEXT_REUSE','canonical preprocessing already exact; no SET_CONFIG',context=k,preprocessing_sha256=ch(k));current_ctx=k;return
+ event('LOGICAL_RESTORE'if restore else'CONTEXT_CONFIG_WRITE','guarded exact-original logical restore'if restore else'existing row3 remaps/SOCD only; other fields/reference unchanged',{'SET_CONFIG_commands':1,'STATUS_commands':1,'GET_CONFIG_commands':4,'serial_opens':3},context=k,preprocessing_sha256=ch(k),source_tool='glyph_serial_config_tool.py --native-packet; fresh backup+source guard; STATUS/fresh GET/ONE SET/GET; external postbackup; exclusive Configurator; no CAS/no retry')
+ current_ctx=k
+ defunused=0
+
+def reference(profile,why):
+ global selected
+ if selected==profile:event('REFERENCE_REUSE','durable selected ID/engine1 unchanged; stored UPDATE does not require another reference commit',profile=profile);return
+ mut('set-reference',profile,why);event('REFERENCE_CONFIG_READBACK','row3 exact requested owned ID/engine1; unchanged other user fields',{'GET_CONFIG_commands':1,'serial_opens':1},profile=profile);selected=profile
+
+def group(label,profile,k,sequence,raw,ordered=False,metrics=False,boot=True):
+ global bootnum
+ if boot:
+  bootnum+=1;session=f'RG{bootnum:02}';event('ORDINARY_USB_REINITIALIZATION',label,{'ordinary_USB_restarts':1,'CDC_same_private_unit_lookups':1,'runtime_identity_queries':1,'registry_inspections':1,'serial_opens':1},boot_session=session,profile=profile,physical_context=k,lookup={'VID':1848,'PID':18214,'location':'0-1'},guards='all controls released before known ordinary USB restart; no runtime/watchdog switch; one private-unit lookup/current identity/fresh bounded registry inspect; actual known Menu route preserved')
+ else:session='B00'
+ g={'group_id':session,'description':label,'profile':profile,'physical_context':k,'preprocessing_sha256':ch(k),'new_boot':boot,'dashboard_required':True,'ordered_history':ordered,'raw_count':len(raw),'steps':[]}
+ for n,rid in enumerate(sequence):
+  r=rows[rid];israw=rid in raw;history=r['history_before_this_row']if ordered else[]
+  step={'step':n+1,'selection_id':rid,'case_run_id':session+'_'+rid,'profile_context_key':r['profile_context_key'],'physical_held_input_ids':r['physical_held_input_ids'],'physical_held_input_names':r['physical_held_input_names'],'expected_dashboard_six_values':r.get('expected_dashboard_six_values')or{key:(v-128 if 'Stick' in key else v)for key,v in r['expected_complete_output_state'].items()if key!='buttons_hex'},'expected_priority_icon':r.get('expected_dashboard_priority_field'),'required_visible_icon':r.get('expected_dashboard_priority_field')if rid in ['N090','N091','N092','N093']else None,'observation_scope':'six numeric fields and only visible first-priority icon; all other bits UNKNOWN unless raw','raw':israw,'history_group':r['history_group'],'required_history_before_this_row':history,'history_contract':'EXACT_FROZEN_PREFIX'if ordered else'STATELESS_SETTLED_SAMPLE_NO_FROZEN_GROUP_EXECUTION_CLAIM','result':'NOT_TESTED','observed':None}
+  g['steps'].append(step)
+  e=event('RAW_CAPTURE'if israw else'SCREEN_CHECK','strict full21wire fields'if israw else'grouped dashboard coordinate/visible-icon evidence only',{'raw_capture_invocations':1,'raw_read_submissions':4,'logged_drain_reports':1,'strict_measurement_reports':3}if israw else{},group_id=session,boot_session=session,case_run_id=step['case_run_id'],selection_id=rid,profile=profile,context=r['profile_context_key'],history_contract=step['history_contract'],required_history_before_this_row=history)
+ if metrics:event('TARGET_METRICS','two existing readonly snapshots >=1000ms apart after designated stress group; finite current-boot observations only',{'target_metric_queries':2,'serial_opens':2},boot_session=session,expected_source=matrix['candidate']['git_sha'],limits='status/flags/calibration/one-hour expiry; partial stays partial; not WCET/whole-stack proof')
+ groups.append(g);return session
+# Current closed C00/B000/B001 evidence is retained; no lookup/identity/backup redo.
+existing={'closed_C00':'existing accepted fresh Config/all22 originals custody','current_session':'B00','retained_raw':['B000','B001'],'existing_raw_captures':2,'existing_raw_reads':8,'new_writes_before_this_plan':0,'new_metrics_before_this_plan':0}
+basic=['B000','B001',next(r['selection_id']for r in matrix['rows'][334:]if r['physical_held_input_ids']==[42]),next(r['selection_id']for r in matrix['rows'][334:]if r['physical_held_input_ids']==[17]),next(r['selection_id']for r in matrix['rows'][334:]if set(r['physical_held_input_ids'])=={33,32})]
+group('FIRST: output-dashboard eligibility and grouped original basic checks, no device call',4,OR,basic,[],False,False,False)
+cfg('early useful compatibility tables; allocate only actual owned A/B');mut('create','A','native compatibility full profile',C);mut('create','B','complete1 independent full profile',A);context(C);reference('A','first checked native A')
+comp=[*[f'O{i:03}'for i in range(9)],'O014','O023','O032','O041','O050','O059','O068',*[f'O{i:03}'for i in range(72,81)],'N005','N009','N015','N021','N023','N025','O104','O122','N027','N029','N031',*[f'N{i:03}'for i in range(78,90)],'N032','N038','N041','N045','N047','N050','N053','N060','O158','N090','N091','N092','N093','N094','N095','N097']
+assert len(comp)==len(set(comp))
+group('compatibility modifiers/default/Mode/sublayers/conflicts/RS/compound worksheet','A',C,comp,['N038','N045','N060'],metrics=True)
+cfg('checked complete1 B before H10');context(A);reference('B','checked independent native B');group('complete1/B: one-to-many and OR; exact nine-state sequence','B',A,[f'S{i:03}'for i in range(21,30)],['S022','S023','S025'],True)
+cfg('H10 current Configurator before UPDATE');read('B','H10 exact old stored B revision');mut('update','B','H10 complete2 on B only',B);event('H10_POST_UPDATE_CONFIG','fresh GET compare unchanged user context/reference',{'GET_CONFIG_commands':1,'serial_opens':1});event('H10_AFTER_IDENTITY','fresh current Configurator neutral, not old gameplay attestation',{'runtime_identity_queries':1,'serial_opens':1});context(B);reference('B','same reference remainsB after UPDATE');group('complete2/B newly initialized exact nine states','B',B,[f'S{i:03}'for i in range(30,39)],['S035'],True,True)
+group('complete2/B ordinary reconnect persistence singleton','B',B,['S035'],['S035'])
+cfg('A unchanged by B UPDATE, then independently complete A');read('A','A canonical compatibility/revision unchanged before intentional UPDATE');mut('update','A','complete1 independently on A',A);context(A);reference('A','checked distinct complete native A');group('complete1/A independently selected after B','A',A,['S026'],['S026'])
+cfg('multiple modifier rebindings');mut('update','A','unchanged exact rebound fixture',R);context(R);reference('A','A stays selected');group('old/new X1/X2/Y1/Y2/Tilt1 carriers','A',R,['N104','N113','N109','N110','N106','N107','N115','N116'],[])
+for i in range(6):
+ k=f'candidate_fixture_packet/clean_socd_{i}';cfg('complete supported SOCD history '+str(i));mut('update','A','exact clean-policy fixture',k);context(k);reference('A','A stays selected');group('SOCD_'+str(i)+' full ordered13-state group; no extra release/reset','A',k,[f'O{n:03}'for n in range(378+13*i,391+13*i)],[f'O{389+13*i:03}'],True, i==2)
+for i,name in enumerate(['forced_wins','forced_loses','forced_filter']):
+ k='candidate_safe_fixture_packet/'+name;cfg(name);mut('update','A','exact forced table variant',k);context(k);reference('A','A stays selected');group(name+' exact seven-state coordinate/digital-gating group','A',k,[f'S{n:03}'for n in range(7*i,7*i+7)],['S009']if i==1 else[],True)
+cfg('H11 known matching A restored before mismatch');mut('update','A','exact complete1 on A',A);context(A);reference('A','A stays selected');group('known matching A before safe expected refusal','A',A,['S026'],[])
+cfg('valid native mismatch on B, unchanged safe context');mut('update','B','valid compatibility body with deliberate complete1-context mismatch',C);reference('B','only checked reference creates approved mismatch; never bypass Config context guard');group('H11 all six neutral endpoints; active fields unavailable, no legacy fallback','B',U,[f'N{i:03}'for i in range(138,144)],['N141'])
+cfg('known Menu/Configurator checked matching A recovery');reference('A','recover known matching A');group('current matching A recovered','A',A,['S026'],['S026'])
+cfg('H12 guarded logical original restore and owned-only cleanup in SAME Configurator session');context(OR,True);selected=4
+event('RESTORED_REFERENCE_GUARD','successful Save+readback originalConfig/ref means live _config and loaded candidate both no longer reference A/B; uncertainty STOP; no delete before confirmation')
+mut('delete','A','only known owned A after confirmed original restore');mut('delete','B','only known owned B after confirmed original restore')
+original=[1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24]
+for page in [0,8,16]:event('PROFILE_LIST','postcleanup directory page',{'LIST_commands':1,'STATUS_commands':1,'serial_opens':1},page=page,page_size=8)
+for pid in original:read(pid,'postcleanup original exact payload/revision versus already retained C00 originals')
+event('FINAL_CONFIG_GET','original user fields/references plus enumerated current seven receipt fields',{'GET_CONFIG_commands':1,'serial_opens':1})
+group('final original4 after confirmed restore+cleanup: basic worksheet and full retained baseline repeats, then STOP',4,OR,basic,['B000','B001'])
+assert tot['raw_capture_invocations']==20 and tot['raw_read_submissions']==80 and tot['target_metric_queries']==6
+save(D/'sequence.json',{'kind':'REDUCED_GROUPED_NATIVE_SEQUENCE_UNAPPROVED','existing_evidence_reused':existing,'future_costs':dict(tot),'future_Config_sessions':cnum,'future_ordinary_boots':bootnum,'future_firmware_restarts':tot['Menu_Configurator_restarts']+tot['ordinary_USB_restarts'],'events':events,'groups':groups})
+save(D/'source_context_correspondence.json',{'classification':'PURE_CANONICAL_PREPROCESSING_AND_IMMUTABLE_PROFILE_HASH_CORRESPONDENCE','context_sha256':{k:ch(k)for k in contexts},'source_matrix_sha256':sha(H/'acceptance_comparison_matrix.json'),'all_context_reuse_events':[e for e in events if e['kind']=='CONTEXT_REUSE'],'all_reference_reuse_events':[e for e in events if e['kind']=='REFERENCE_REUSE'],'no_device_calls':True})
+print(json.dumps({'future_costs':dict(tot),'groups':len(groups),'screen_positions':sum(len(g['steps'])for g in groups),'native_boots':sum(g['new_boot']and g['profile']!=4 for g in groups),'future_firmware_restarts':tot['Menu_Configurator_restarts']+tot['ordinary_USB_restarts']},indent=2))

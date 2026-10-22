@@ -1,0 +1,21 @@
+SYNTHETIC_TEST
+SYNTHETIC_TEST
+SYNTHETIC_TEST
+SYNTHETIC_TEST
+Perform these states in order; all other controls released. Compare all six displayed numbers. Stop on any difference. No added reset inside ordered group.
+N038 HOLD BTN_LT6(38), BTN_RF7(23) EXPECT {"leftStickX": 0, "leftStickY": 44, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 0, "triggerRAnalog": 0}
+Remain at final RAW hold. Enter only after actually performing every listed state and seeing matching six numbers AND each explicitly required visible icon; q/EOF STOP.
+Perform these states in order; all other controls released. Compare all six displayed numbers. Stop on any difference. No added reset inside ordered group.
+N038 HOLD BTN_LT6(38), BTN_RF7(23) EXPECT {"leftStickX": 0, "leftStickY": 44, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 0, "triggerRAnalog": 0}
+Remain at final RAW hold. Enter only after actually performing every listed state and seeing matching six numbers AND each explicitly required visible icon; q/EOF STOP.
+Perform these states in order; all other controls released. Compare all six displayed numbers. Stop on any difference. No added reset inside ordered group.
+N038 HOLD BTN_LT6(38), BTN_RF7(23) EXPECT {"leftStickX": 0, "leftStickY": 44, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 0, "triggerRAnalog": 0}
+Remain at final RAW hold. Enter only after actually performing every listed state and seeing matching six numbers AND each explicitly required visible icon; q/EOF STOP.
+Perform these states in order; all other controls released. Compare all six displayed numbers. Stop on any difference. No added reset inside ordered group.
+B000 HOLD ALL RELEASED EXPECT {"leftStickX": 0, "leftStickY": 0, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 0, "triggerRAnalog": 0}
+B001 HOLD BTN_LF1(1) EXPECT {"leftStickX": 67, "leftStickY": 0, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 0, "triggerRAnalog": 0}
+B032 HOLD BTN_RT2(42) EXPECT {"leftStickX": 0, "leftStickY": 0, "rightStickX": 0, "rightStickY": -100, "triggerLAnalog": 0, "triggerRAnalog": 0}
+B009 HOLD BTN_RF1(17) EXPECT {"leftStickX": 0, "leftStickY": 0, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 0, "triggerRAnalog": 0}
+B048 HOLD BTN_LT1(33), BTN_RF16(32) EXPECT {"leftStickX": 0, "leftStickY": 0, "rightStickX": 0, "rightStickY": 0, "triggerLAnalog": 100, "triggerRAnalog": 180}
+Complete this listed segment. Enter only after actually performing every listed state and seeing matching six numbers AND each explicitly required visible icon; q/EOF STOP.
+PASS 28 focused checks; no live calls

@@ -1,0 +1,17 @@
+{
+  "actual_response": "\n",
+  "case_id": "N038",
+  "history_before_this_row": [],
+  "history_contract": "EXACT_FROZEN_PREFIX",
+  "history_group": "N038",
+  "human_receipt": "/private/tmp/glyph-native-reduced-execution-packet-20261022/test_evidence/receipt.json",
+  "human_receipt_sha256": "5c0369fc54ba78ff5255bfe86bca7faafca2cc2d1286fba3b7d962161b5c947b",
+  "owner_confirmed_listed_stimulus": true,
+  "physical_held_input_ids": [
+    38,
+    23
+  ],
+  "session": "RG01",
+  "source": "ACTUAL_HUMAN_USER_REPLY",
+  "transport": "owner_terminal_stdin"
+}

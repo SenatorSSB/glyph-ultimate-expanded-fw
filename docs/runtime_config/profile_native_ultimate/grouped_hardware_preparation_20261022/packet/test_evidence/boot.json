@@ -1,0 +1,7 @@
+{
+  "all_controls_released_before_reinitialize": true,
+  "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "reinitialization": "owner_known_ordinary_USB_restart",
+  "session": "RG01",
+  "uf2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982"
+}
