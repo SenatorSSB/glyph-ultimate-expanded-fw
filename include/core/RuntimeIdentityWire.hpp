@@ -52,6 +52,7 @@ inline void EncodeResponse(uint64_t token, const Snapshot &s, uint8_t bytes[kRes
 // Identity-only RX. No length-controlled allocation, waits or dispatch table.
 class RequestParser {
   public:
+    bool HasPartialFrame() const { return _used != 0; }
     void Expire(uint32_t now) {
         if (_used && uint32_t(now - _started) >= kPartialTimeoutMs) _used = 0;
     }

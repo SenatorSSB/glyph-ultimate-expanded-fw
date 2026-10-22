@@ -2,13 +2,19 @@
 #define _DISPLAY_DEFAULTCONFIGMENU_HPP
 
 #include "display/ConfigMenu.hpp"
+#include "core/ProfileSelection.hpp"
 
 class DefaultConfigMenu : public ConfigMenu {
   public:
     DefaultConfigMenu(Config &config, CommunicationBackend **backends, size_t backends_count);
     ~DefaultConfigMenu();
+    void HandleControls(IntegratedDisplay *, const DisplayControls &, Button) override;
 
   protected:
+    const MenuPage::MenuItem *ResolveItem(MenuPage *page, size_t index) override;
+    static void SetStoredProfile(IntegratedDisplay *, ConfigMenu *, Config &, uint8_t);
+    profile_selection::Target *_profile_targets = nullptr;
+    MenuPage::MenuItem _profile_item{};
     static void SetDefaultMode(
         IntegratedDisplay *instance,
         ConfigMenu *menu,

@@ -3,6 +3,7 @@
 #include "modes/UltimateProfileConfig.hpp"
 #include "modes/UltimateProfileEvaluator.hpp"
 #include "core/ProfileStore.hpp"
+#include "modes/UltimateNativeProfile.hpp"
 
 #include <cstdio>
 #include <cstring>
@@ -54,13 +55,13 @@ bool is_required_routing_slot(uint32_t token) {
     }
 }
 
-bool validate_profile_condition(
+enum class ConditionResult { Valid,InvalidToken,UnresolvedRole };
+__attribute__((noinline)) ConditionResult check_profile_condition(
     const UltimateProfileCondition &condition,
     const bool defined_roles[32],
     const bool routed_buttons[61],
     uint8_t maximum_role_id,
-    ConfigValidationError &error,
-    uint8_t profile_id
+    uint8_t /*profile_id*/
 ) {
     const uint8_t *lists[] = {condition.all_tokens, condition.any_tokens, condition.none_tokens};
     const size_t counts[] = {
@@ -74,17 +75,30 @@ bool validate_profile_condition(
             const uint32_t token = lists[list][index];
             if ((!is_button_token(token) && !is_role_token(token)) || seen_tokens[token] ||
                 (is_button_token(token) && !routed_buttons[token])) {
-                return reference_error(error, "Ultimate profile %d has an invalid condition token", profile_id);
+                return ConditionResult::InvalidToken;
             }
             seen_tokens[token] = true;
             if (is_role_token(token)) {
                 const uint8_t role_id = static_cast<uint8_t>(token - 64);
                 if (role_id > maximum_role_id || !defined_roles[role_id - 1]) {
-                    return reference_error(error, "Ultimate profile %d has an unresolved role token", profile_id);
+                    return ConditionResult::UnresolvedRole;
                 }
             }
         }
     }
+    return ConditionResult::Valid;
+}
+bool validate_profile_condition(
+    const UltimateProfileCondition &condition,
+    const bool defined_roles[32],
+    const bool routed_buttons[61],
+    uint8_t maximum_role_id,
+    ConfigValidationError &error,
+    uint8_t profile_id
+) {
+    const auto result=check_profile_condition(condition,defined_roles,routed_buttons,maximum_role_id,profile_id);
+    if(result==ConditionResult::InvalidToken)return reference_error(error,"Ultimate profile %d has an invalid condition token",profile_id);
+    if(result==ConditionResult::UnresolvedRole)return reference_error(error,"Ultimate profile %d has an unresolved role token",profile_id);
     return true;
 }
 
@@ -114,6 +128,10 @@ bool validate_ultimate_profile_extents(const UltimateProfile &profile) {
 bool validate_ultimate_profile_semantics_impl(const UltimateProfile &profile,
                                               ConfigValidationError &error,
                                               uint8_t profile_id) {
+    if (profile.schema_version == ultimate_native::kSchema)
+        return ultimate_native::ValidProfile(profile) || reference_error(error, "Ultimate profile %d has an invalid native program", profile_id);
+    if (profile.native_payload.funcs.encode || profile.native_payload.arg)
+        return reference_error(error, "Ultimate profile %d contains native payload in legacy schema", profile_id);
     if ((profile.schema_version != kUltimateProfileSchemaVersionV1 &&
          profile.schema_version != kUltimateProfileSchemaVersionV2 &&
          profile.schema_version != kUltimateProfileSchemaVersionV3) ||
@@ -353,11 +371,16 @@ bool validate_config_semantics(const Config &config, ConfigValidationError &erro
         return reference_error(error, "%s", "Compact Ultimate profile store config is invalid");
     }
     for (size_t i = 0; i < config.ultimate_profiles_count; ++i) {
+        if (config.ultimate_profiles[i].schema_version == ultimate_native::kSchema || config.ultimate_profiles[i].native_payload.funcs.encode || config.ultimate_profiles[i].native_payload.arg)
+            return reference_error(error, "%s", "Embedded native profile is forbidden");
         if (!validate_ultimate_profile_semantics_impl(config.ultimate_profiles[i], error,
                 static_cast<uint8_t>(i) + 1)) return false;
     }
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const GameModeConfig &mode = config.game_mode_configs[i];
+        if (mode.ultimate_profile_engine > 1 || (mode.ultimate_profile_engine &&
+            (mode.mode_id != MODE_ULTIMATE || !mode.ultimate_profile_id || config.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat)))
+            return reference_error(error, "%s", "Native engine reference is invalid");
         const uint8_t keyboard_mode_id = mode.keyboard_mode_config;
         const uint32_t custom_mode_id = mode.custom_mode_config;
         const uint8_t ultimate_profile_id = mode.ultimate_profile_config;

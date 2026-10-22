@@ -46,6 +46,8 @@ class ConfigMenu : public DisplayMode {
     virtual void ReturnToDashboard(IntegratedDisplay *instance);
 
   protected:
+    virtual const MenuPage::MenuItem *ResolveItem(MenuPage *page, size_t index);
+
     Config &_config;
     CommunicationBackend **_backends;
     size_t _backends_count;

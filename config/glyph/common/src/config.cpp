@@ -1,6 +1,8 @@
+#include "core/NativeTargetMetrics.hpp"
 #include "button_positions.hpp"
 #include "comms/backend_init.hpp"
 #include "comms/ConfiguratorBackend.hpp"
+#include "comms/GamecubeBackend.hpp"
 #include "core/CommunicationBackend.hpp"
 #include "core/config_usb_default_validation.hpp"
 #include "core/KeyboardMode.hpp"
@@ -8,6 +10,7 @@
 #include "core/ProfileStore.hpp"
 #include "core/mode_selection.hpp"
 #include "core/ModeSelectionTransaction.hpp"
+#include "core/ProfileSelection.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RuntimeIdentityService.hpp"
@@ -50,6 +53,7 @@ DebouncedSwitchMatrixInput<num_rows, num_cols> matrix_input(
     DiodeDirection::COL2ROW
 );
 
+extern size_t current_mode_index;
 CommunicationBackend **backends = nullptr;
 size_t backend_count;
 KeyboardMode *current_kb_mode = nullptr;
@@ -148,6 +152,24 @@ void request_mode_destination(CommunicationBackendId backend, size_t mode_index,
     reboot_firmware();
 }
 
+// Called only by core0, outside output generation. Never lend candidate state
+// to the menu core. The pending ID remains occupied until this attempt returns.
+__attribute__((noinline)) void service_profile_selection() {
+    const uint32_t id = profile_selection::Pending();
+    if (!id) return;
+    size_t mode_index = 0, backend_index = 0;
+    const auto result = profile_selection::Persist(persistence, profile_store,
+        ConfigWriteCandidate(), backends[0]->BackendId(), id, current_mode_index,
+        mode_index, backend_index);
+    if (result == ModeDestinationResult::Saved) {
+        watchdog_hw->scratch[0] = backend_index + 1;
+        watchdog_hw->scratch[1] = mode_index + 1;
+        watchdog_hw->scratch[2] = kCommittedModeDestination;
+        reboot_firmware();
+    }
+    profile_selection::Complete();
+}
+
 // Recovery deliberately reuses the single source-owned Configurator transport
 // and runs without gameplay, menu, display, or core1 initialization.
 void enter_recovery_configurator() {
@@ -166,7 +188,7 @@ void enter_recovery_configurator() {
 }  // namespace
 
 
-void setup() {
+__attribute__((noinline)) bool PrepareBootDisplay() {
     // Create GPIO input source and use it to read button states for checking button holds.
     matrix_input.UpdateInputs(inputs);
 
@@ -204,9 +226,79 @@ void setup() {
         display.display();
     }
 
+    return display_ready;
+}
+
+__attribute__((noinline)) bool MigrateBootLegacyConfiguration() {
+        uint32_t legacy_ids[2] = {};
+        uint8_t source_digest[32];
+        if (!persistence.CaptureLegacySource(source_digest)) {
+            enter_recovery_configurator();
+            return false;
+        }
+        const ProfileStore::Status migration = profile_store.ImportLegacyStream(
+            config, source_digest,
+            [](void *, size_t index, UltimateProfile &profile) {
+                return persistence.ReadLegacyProfile(index, profile) == Persistence::LoadResult::Loaded;
+            }, nullptr, legacy_ids, 2);
+        if (migration != ProfileStore::Status::Ok && migration != ProfileStore::Status::MigrationFenced) {
+            enter_recovery_configurator();
+            return false;
+        }
+        // Shared synchronous core0 scratch: no extra whole Config allocation or
+        // automatic migration frame; bodies are streamed one at a time above.
+        Config &compact = ConfigWriteCandidate();
+        compact = config;
+        if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact) ||
+            profile_store.CompleteMigration(compact) != ProfileStore::Status::Ok) {
+            enter_recovery_configurator();
+            return false;
+        }
+        config = compact;
+        return true;
+}
+
+__attribute__((noinline)) bool InitializeBootBackends() {
+    native_metrics::Calibrate();
+    // Create array of input sources to be used.
+    const size_t initialized_backend_count = initialize_backends(
+        backends,
+        inputs,
+        input_sources,
+        input_source_count,
+        config,
+        pinout,
+        get_backend_config_default,
+        get_usb_backend_config_default,
+        &detect_console,
+        &init_secondary_backends_glyph
+    );
+
+    if (!is_valid_usb_default_index(config)) {
+        enter_recovery_configurator();
+        return false;
+    }
+
+    backend_count = initialized_backend_count;
+
+    set_mode_destination_selector(request_mode_destination);
+    setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count, inputs.buttons);
+
+    if(backend_count == 0) {
+        failed_detection = true;
+        backend_count = 1;
+    }
+
+    return true;
+}
+
+void setup() {
+    const bool display_ready = PrepareBootDisplay();
+
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.
-    ConfigValidationError validation_error;
+    // Single core0 startup workspace, reset before the existing validation.
+    static ConfigValidationError validation_error; validation_error = {};
     if (!persistence.SetValidator(validate_glyph_config) ||
         !persistence.ValidateConfig(config, validation_error)) {
         enter_recovery_configurator();
@@ -242,33 +334,8 @@ void setup() {
             return;
         }
     }
-    if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0) {
-        uint32_t legacy_ids[2] = {};
-        uint8_t source_digest[32];
-        if (!persistence.CaptureLegacySource(source_digest)) {
-            enter_recovery_configurator();
-            return;
-        }
-        const ProfileStore::Status migration = profile_store.ImportLegacyStream(
-            config, source_digest,
-            [](void *, size_t index, UltimateProfile &profile) {
-                return persistence.ReadLegacyProfile(index, profile) == Persistence::LoadResult::Loaded;
-            }, nullptr, legacy_ids, 2);
-        if (migration != ProfileStore::Status::Ok && migration != ProfileStore::Status::MigrationFenced) {
-            enter_recovery_configurator();
-            return;
-        }
-        // Shared synchronous core0 scratch: no extra whole Config allocation or
-        // automatic migration frame; bodies are streamed one at a time above.
-        Config &compact = ConfigWriteCandidate();
-        compact = config;
-        if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact) ||
-            profile_store.CompleteMigration(compact) != ProfileStore::Status::Ok) {
-            enter_recovery_configurator();
-            return;
-        }
-        config = compact;
-    }
+    if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0 &&
+        !MigrateBootLegacyConfiguration()) return;
 
     // Persist the independent v2 acceptance marker before any ordinary store
     // mutation can be serviced, including a legacy Config with zero profiles.
@@ -282,34 +349,7 @@ void setup() {
         config = compact;
     }
 
-    // Create array of input sources to be used.
-    const size_t initialized_backend_count = initialize_backends(
-        backends,
-        inputs,
-        input_sources,
-        input_source_count,
-        config,
-        pinout,
-        get_backend_config_default,
-        get_usb_backend_config_default,
-        &detect_console,
-        &init_secondary_backends_glyph
-    );
-
-    if (!is_valid_usb_default_index(config)) {
-        enter_recovery_configurator();
-        return;
-    }
-
-    backend_count = initialized_backend_count;
-
-    set_mode_destination_selector(request_mode_destination);
-    setup_mode_activation_bindings(config.game_mode_configs, config.game_mode_configs_count, inputs.buttons);
-
-    if(backend_count == 0) {
-        failed_detection = true;
-        backend_count = 1;
-    } 
+    if (!InitializeBootBackends()) return;
 
     publish_boot_state(BootOutcome::Normal, display_ready);
 }
@@ -321,6 +361,12 @@ void loop() {
     }
     if (read_boot_state().outcome != BootOutcome::Normal) return;
     if (backends == nullptr || backend_count == 0 || backends[0] == nullptr) return;
+    // GameCube persistence requires the receiver's explicit idle admission,
+    // including requests posted before a wait or while a prior report drains.
+    if (backends[0]->BackendId() != COMMS_BACKEND_GAMECUBE ||
+        static_cast<GamecubeBackend *>(backends[0])->SelectionIdleAdmitted()) {
+        service_profile_selection();
+    }
     select_mode(backends, backend_count, config);
 
     for (size_t i = 0; i < backend_count; i++) {
@@ -329,6 +375,7 @@ void loop() {
 
     // Complete viewer records precede identity writes; output generation is finished.
     runtime_identity_service.Poll(Serial, backends[0], config, profile_store, ultimate_mode, millis());
+    native_metrics::ServiceCore(0);
 
     if (current_kb_mode != nullptr) {
         current_kb_mode->SendReport(backends[0]->GetInputs());
@@ -431,6 +478,7 @@ void dummyloop() {
 }
 
 void loop1() {
+    native_metrics::ServiceCore(1);
     const BootSnapshot snapshot = read_boot_state();
     if (refused(snapshot.outcome)) {
         if (snapshot.display_ready) {
@@ -491,7 +539,7 @@ void loop1() {
                     );
                     break;
             }
-        } 
+        }
         if(!is_nes) {
             display_backend->SendReport();
         } else if(SCREEN_OK) {

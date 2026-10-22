@@ -1,0 +1,13 @@
+{
+  "upstream_commit": "f2f59c0aee07aea58cdd03616439bc3c6a8cbd8a",
+  "files": {
+    "include/gamecube_definitions.h": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+    "include/joybus.h": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+    "include/GamecubeConsole.hpp": "d7f49ba5088c75beffac09c6b3e8b22abbf2db111125e90e18d3746837e95e4c",
+    "include/joybus.pio.h": "b66f76e70927ac5e873e9cf678ebba907f75d585289fedc6a97fabe34ab1e8c7",
+    "src/joybus.pio": "032ea620fc031bc498d826137977747f83c534604966c8e616311c0bf1ff68cb",
+    "src/joybus.c": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3",
+    "src/GamecubeConsole.cpp": "e090267d5e6759e71b152c8289d894a8c535f6bcd31bbbeebe6c2bc307b34eb1",
+    "LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+  }
+}

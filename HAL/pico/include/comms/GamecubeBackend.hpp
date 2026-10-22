@@ -20,6 +20,9 @@ class GamecubeBackend : public CommunicationBackend {
     CommunicationBackendId BackendId();
     void SendReport();
     int GetOffset();
+    bool SelectionIdleAdmitted() const {
+        return _gamecube.IsIdleAdmitted();
+    }
 
   private:
     GamecubeConsole _gamecube;

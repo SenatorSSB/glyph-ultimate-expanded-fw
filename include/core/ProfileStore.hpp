@@ -4,6 +4,7 @@
 
 #include "core/ProfileStoreStorage.hpp"
 #include "core/ProfileStoreTransaction.hpp"
+#include "modes/UltimateNativeProfile.hpp"
 
 #include <config.pb.h>
 #include <cstddef>
@@ -103,6 +104,7 @@ class ProfileStore {
     Status Read(uint32_t id, UltimateProfile &into, uint32_t *revision = nullptr) const;
     const UltimateProfile *Activate(uint32_t id, Status *status = nullptr);
     const UltimateProfile *ActiveProfile() const;
+    const ultimate_native::PreparedView *ActiveNativeView() const { return _active_native.view.valid ? &_active_native.view : nullptr; }
     uint32_t ActiveId() const;
     uint32_t ActiveRevision() const { return _active_revision; }
     TransactionResult Create(
@@ -191,15 +193,28 @@ class ProfileStore {
 
   private:
     bool LoadDirectory();
-    bool Bootstrap(bool recovery);
+    void PrepareBeginState(uint32_t expected, uint32_t required_root_format, bool recovery);
+    void PrepareInitializedRoot(unsigned slot);
+    enum class BootstrapAction : uint8_t { Complete, Refused, Reconcile, Initialize, PublishAndInitialize };
+    BootstrapAction PrepareBootstrap(bool recovery);
+    bool ExecuteBootstrap(BootstrapAction action);
     bool ReadRoot(uint8_t slot, Directory &out) const;
     bool WriteControl(const Directory &, uint32_t phase);
+    bool PrepareControlPublication(const Directory &, uint32_t phase);
+    bool PrepareDirectoryPublication(const Directory &);
+    bool PrepareInitializeV2(const Directory &);
     bool LoadControl(Directory &, uint32_t &phase) const;
     bool InitializeV2(const Directory &seed);
     bool Admit(size_t staged_record_bytes, size_t records = 1);
+    bool EvaluateAdmission(size_t staged_record_bytes, size_t records);
     bool Protected(uint32_t id, uint32_t revision) const;
     bool LoadProtectedRoot() const;
     TransactionResult Start(const TransactionIdentity &) const;
+    void PrepareCommit(Directory &, uint32_t id, uint32_t revision, const TransactionIdentity &);
+    void PublishPreparedCommit(const Directory &);
+    bool PrepareRename(uint32_t id, const char *name, uint32_t generation, const TransactionIdentity &);
+    bool PrepareReorder(uint32_t id, uint32_t rank, uint32_t generation, const TransactionIdentity &);
+    bool PrepareDelete(uint32_t id, uint32_t generation, uint32_t referenced, const TransactionIdentity &);
     TransactionResult Commit(
         Directory &,
         uint32_t id,
@@ -217,13 +232,33 @@ class ProfileStore {
     Directory *_other = nullptr;
 
     bool PublishDirectory(const Directory &next);
+    void PrepareDirectoryRootPublication();
+    bool PrepareDirectoryCompletion(const Directory &next);
     bool ReadProfile(
         uint32_t id,
         uint32_t revision,
         UltimateProfile &into,
         bool *unsupported = nullptr
     ) const;
-    bool WriteProfile(uint32_t id, uint32_t revision, const UltimateProfile &profile);
+    enum class ReconcileAction : uint8_t { Refused, Complete, WriteCompleted, PublishAborted };
+    ReconcileAction PrepareReconciliation();
+    bool ExecuteReconciliation(ReconcileAction action);
+    TransactionResult FinalizePreparedCreate();
+    TransactionResult FinalizePreparedUpdate();
+    void PrepareCreateRecord();
+    void ExecutePreparedCreate();
+    void PrepareUpdateRecord();
+    void PrepareCreate();
+    TransactionResult PrepareDuplicate(uint32_t id, uint32_t rev, const TransactionIdentity &t);
+    bool PublishPreparedProfile();
+    Status ExecuteLegacyImport();
+    Status PublishImportedLegacyRecord();
+    Status PublishImportedLegacyDirectory();
+    bool PrepareImportedCompact(const Config &,uint32_t *,size_t);
+    Status PrepareLegacyImport();
+    Status PrepareImportedLegacyRecord(LegacyReader,void *,size_t);
+    bool FinishImportedLegacyRecord(size_t,uint32_t *);
+    bool PrepareProfileWrite(uint32_t id, uint32_t revision, const UltimateProfile &profile);
     bool ValidateProfile(const UltimateProfile &profile) const;
     int Find(uint32_t id) const;
     TransactionResult BeginMutation(uint32_t token, uint32_t digest) const;
@@ -232,6 +267,9 @@ class ProfileStore {
     Directory *_directory = nullptr;
     UltimateProfile _active_profile = UltimateProfile_init_default;
     UltimateProfile _candidate_profile = UltimateProfile_init_default;
+    ultimate_native::OwnedProgram _active_native;
+    ultimate_native::PayloadLease _active_native_lease;
+    uint32_t _native_generation = 0;
     uint32_t _active_id = 0;
     uint32_t _active_revision = 0;
     bool _ready = false;

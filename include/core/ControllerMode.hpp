@@ -4,6 +4,7 @@
 #include "core/InputMode.hpp"
 #include "core/socd.hpp"
 #include "core/state.hpp"
+#include "core/ResolvedInputContext.hpp"
 
 #include <config.pb.h>
 
@@ -12,6 +13,7 @@ class ControllerMode : public InputMode {
     ControllerMode();
     void UpdateOutputs(const InputState &inputs, OutputState &outputs, CommunicationBackendId backend_id);
     void ResetDirections();
+    virtual uint32_t DiagnosticNativeGeneration() const { return 0; }
     virtual void UpdateDirections(
         bool lsLeft,
         bool lsRight,
@@ -29,6 +31,7 @@ class ControllerMode : public InputMode {
 
   protected:
     StickDirections directions;
+    virtual void UpdatePreprocessedOutputs(const ResolvedInputContext &, OutputState &, CommunicationBackendId);
 
   private:
     virtual void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs) = 0;

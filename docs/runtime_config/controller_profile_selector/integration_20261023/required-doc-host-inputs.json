@@ -1,0 +1,190 @@
+{
+  "base": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "required_F_doc_paths": [
+    "docs/runtime_config/profile_native_ultimate/design_evidence/maximum-native.body",
+    "docs/runtime_config/profile_native_ultimate/native_production_stack_final/compile_commands.json",
+    "docs/runtime_config/profile_native_ultimate/legacy_oracle_hashes.json",
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/context.json",
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/context.pb",
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/conversion.json",
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/profile.json",
+    "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/profile.pb"
+  ],
+  "files": [
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/design_evidence/maximum-native.body",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cf4af96e50542ca2730f10766e450a289a65ab96",
+      "sha256": "cc0edd079f07687441740bfca2c4416137ade1c9d57f43da4954fff521fba362",
+      "bytes": 3336,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cf4af96e50542ca2730f10766e450a289a65ab96"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/native_production_stack_final/compile_commands.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b1961255945a4a4e41ce5ce978d8e94cde73c971",
+      "sha256": "3a95d1efd7c3a60285f52802d2563b3313e93980db8f55c770f4b8b3a9bc175a",
+      "bytes": 745740,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/legacy_oracle_hashes.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "81afdd429b1b1f32aa89d2527095ddfacafb1202",
+      "sha256": "c5532afd4810bc0e1a40169e80b9e0d46ea5c2430d68c3bf43ab549661aedda9",
+      "bytes": 1929,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "81afdd429b1b1f32aa89d2527095ddfacafb1202"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/context.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e824a64888095132123e896954f1b5cb2288a7d0",
+      "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14",
+      "bytes": 33,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/context.pb",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d65dd8f1d544a6b5058ca9bcfa2fcb00e3719918",
+      "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5",
+      "bytes": 2,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/conversion.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ad2a3d7ee8d6d8821f763289f795738c9bf0a44a",
+      "sha256": "daa685b880e2cc6b179190c1b651a376981d2a9cb1d23b107f1c58b9633ea12c",
+      "bytes": 94216,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/profile.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "21d7e4d477dc2a97840cb6361a5006dca42cb1ba",
+      "sha256": "67cc890a8302ad98be49f086cee2872d7e633eccd7f1060a23930120c7fc18b1",
+      "bytes": 2706,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins/profile.pb",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bca0440d59d9e440da58f1ee1fcfbab546fd6980",
+      "sha256": "ce1c2b13b6a0b0026140d76649ca1c64fdbb7ebcffad679b9180bfb9c6b20a68",
+      "bytes": 1995,
+      "canonical": null,
+      "canonical_matches": false
+    }
+  ],
+  "retained_existing_canonical_host_inputs": [
+    {
+      "path": "docs/runtime_config/fixtures/gp_config012_button_mask_characterization.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "85bc20e74404f62fcbd67b6be4f18968a35d3482",
+      "sha256": "ca2da3a4d6dd53bd980734cfb59594d4f121daa7cfff0e1202c288304f0ada54",
+      "bytes": 11296,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "85bc20e74404f62fcbd67b6be4f18968a35d3482"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "docs/runtime_config/fixtures/gp_prov_014_decoder_closure.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "25d32a1fc1cc9c39626eadd4dca4835103579d80",
+      "sha256": "a0f017c36ce0354f91d1a62210756c0464c6db9b5183ba6592ce69d32da1e13f",
+      "bytes": 9792,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "25d32a1fc1cc9c39626eadd4dca4835103579d80"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "docs/runtime_config/gp_prov_014_decoder_closure.md",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ca1c80486340c97a3d06cb3e9c7d35a749c97a38",
+      "sha256": "93bda0975f70bb9a92da9bef33ec74d2d99f397c46bb9bb2ebfa9079d4fbddc8",
+      "bytes": 3954,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ca1c80486340c97a3d06cb3e9c7d35a749c97a38"
+      },
+      "canonical_matches": true
+    }
+  ],
+  "historical_oracle_reproducer_inputs_optional_for_current_checker": [
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/production_abi_evidence/baseline/generated/config.pb.c",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "89a57658afe07a2d0c4295b80549c4b95f4c9307",
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750",
+      "bytes": 1774,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "89a57658afe07a2d0c4295b80549c4b95f4c9307"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "docs/runtime_config/profile_native_ultimate/production_abi_evidence/baseline/generated/config.pb.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0edbda5a04d3a9c5cf451949ac2f899d01349655",
+      "sha256": "c2a289d304a74c2a875d3fb2413a9afc0880f758cb1f5d7781c450b7841f51a0",
+      "bytes": 125209,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0edbda5a04d3a9c5cf451949ac2f899d01349655"
+      },
+      "canonical_matches": true
+    }
+  ],
+  "consumers": {
+    "maximum-native.body": "check_glyph_profile_native_ultimate.py allocation/decoder/import/dispatch/negative specimens",
+    "native_production_stack_final/compile_commands.json": "check_glyph_native_target_metrics.py target-only component compile recipe",
+    "legacy_oracle_hashes.json": "convert_glyph_native_ultimate_profile.py reproducibility metadata digest",
+    "forced_wins/context.json +profile.json": "check_glyph_profile_store_production_tool.py context fixture; preserve complete5-file packet to retain fixture consistency"
+  },
+  "portability_limits": [
+    "Metrics checker archive recipe contains original private workspace absolute include/toolchain paths; preserve exact historical bytes, root maps environment rather than rewriting tested source.",
+    "Historical independent_legacy/run.py contains fixed private roots and is a record/reproducer, not invoked by current native checker; optional baseline generated2 inputs retained separately if reproducing historical corpus."
+  ],
+  "do_not_apply_F_doc_deletions": true,
+  "do_not_overwrite_canonical_governance_mirrors": true
+}

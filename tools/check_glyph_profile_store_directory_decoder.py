@@ -45,7 +45,7 @@ def compile_variant(temp: Path, generated: Path, name: str, old_copy: bool) -> N
         obj = temp / f"{unit.stem}-{name}.o"
         run(["cc", "-std=c11", "-fshort-enums", "-fsanitize=address,undefined", "-fno-omit-frame-pointer", "-I", str(generated), "-I", str(nanopb), "-c", str(unit), "-o", str(obj)])
         objects.append(obj)
-    for unit in (ROOT / "src/core/config_validation.cpp", ROOT / "src/core/config_button_validation.cpp",
+    for unit in (ROOT / "src/modes/UltimateNativeProfile.cpp", ROOT / "src/core/config_validation.cpp", ROOT / "src/core/config_button_validation.cpp",
                  ROOT / "src/core/config_usb_default_validation.cpp", ROOT / "src/core/config_rgb_target_validation.cpp",
                  ROOT / "config/glyph/common/src/glyph_config_validation.cpp"):
         obj = temp / f"{unit.stem}-{name}.o"

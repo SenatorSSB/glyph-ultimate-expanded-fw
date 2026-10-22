@@ -1,5 +1,6 @@
 #include "comms/GamecubeBackend.hpp"
 #include "core/InputSource.hpp"
+#include "core/ProfileSelection.hpp"
 
 #include <GamecubeConsole.hpp>
 #include <hardware/pio.h>
@@ -32,7 +33,11 @@ void  __no_inline_not_in_flash_func(GamecubeBackend::SendReport()) {
     bool pollTime = true;
     while(pollTime == true) {
         ScanInputs(InputScanSpeed::FAST);
-        pollTime = _gamecube.WaitForPollStart();
+        const auto status = _gamecube.WaitForPollStartBounded(profile_selection::Pending);
+        if (status == PollStartStatus::IDLE) {
+            return;
+        }
+        pollTime = status != PollStartStatus::POLL;
     }
 
     rp2040.idleOtherCore();
@@ -67,6 +72,8 @@ void  __no_inline_not_in_flash_func(GamecubeBackend::SendReport()) {
     // Send outputs to console unless poll command is invalid.
     if (_gamecube.WaitForPollEnd() != PollStatus::ERROR) {
         _gamecube.SendReport(&_report);
+    } else {
+        _gamecube.ResetAfterInvalidPoll();
     }
     rp2040.resumeOtherCore();
 }

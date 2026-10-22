@@ -22,45 +22,48 @@
 #include <TUKeyboard.hpp>
 #include <config.pb.h>
 
-size_t initialize_backends(
-    CommunicationBackend **&backends,
-    InputState &inputs,
-    InputSource **input_sources,
-    size_t input_source_count,
-    Config &config,
-    const Pinout &pinout,
-    backend_config_selector_t get_backend_config,
-    usb_backend_getter_t get_usb_backend_config,
-    detect_console_t detect_console,
-    secondary_backend_initializer_t init_secondary_backends,
-    primary_backend_initializer_t init_primary_backend
-) {
+namespace {
+struct BackendInputs {
+    CommunicationBackend ***backends;InputState *inputs;InputSource **sources;size_t count;Config *config;const Pinout *pinout;
+    backend_config_selector_t selector;usb_backend_getter_t usb;detect_console_t detect;secondary_backend_initializer_t secondary;primary_backend_initializer_t primary;
+};
+struct BackendPhase {BackendInputs inputs;CommunicationBackend *primary;CommunicationBackendId backend_id;uint8_t default_mode;bool failed;} backend_phase{};
+struct BackendPhaseReset {~BackendPhaseReset(){backend_phase={};}};
+enum class BackendAction {Refused,Ready,Save};
+__attribute__((noinline)) BackendAction PrepareBackendPhase() {
+    auto &backends=*backend_phase.inputs.backends;auto &inputs=*backend_phase.inputs.inputs;
+    auto *input_sources=backend_phase.inputs.sources;const size_t input_source_count=backend_phase.inputs.count;
+    auto &config=*backend_phase.inputs.config;const auto &pinout=*backend_phase.inputs.pinout;
+    const auto get_backend_config=backend_phase.inputs.selector;const auto get_usb_backend_config=backend_phase.inputs.usb;
+    const auto detect_console=backend_phase.inputs.detect;const auto init_secondary_backends=backend_phase.inputs.secondary;
+    const auto init_primary_backend=backend_phase.inputs.primary;
+
     // Reject an invalid required USB selection before selectors, initializers,
     // console detection, descriptors, or persistence can observe it.
     if (!is_valid_usb_default_index(config)) {
-        return 0;
+        return BackendAction::Refused;
     }
 
     // Make sure required function pointers are not null.
     if (get_backend_config == nullptr || get_usb_backend_config == nullptr ||
         init_primary_backend == nullptr || detect_console == nullptr) {
-        return 0;
+        return BackendAction::Refused;
     }
 
-    CommunicationBackendConfig backend_config = CommunicationBackendConfig_init_zero;
+    CommunicationBackendConfig backend_config=CommunicationBackendConfig_init_zero;
     const bool committed_destination = consume_committed_mode_destination(
         watchdog_hw->scratch, watchdog_caused_reboot(), config, backend_config);
     if (!committed_destination) get_backend_config(backend_config, inputs, config);
 
     // The named selector can apply watchdog scratch values to Config.
     if (!is_valid_usb_default_index(config)) {
-        return 0;
+        return BackendAction::Refused;
     }
 
-    CommunicationBackend *primary_backend = nullptr;
+    auto &primary_backend=backend_phase.primary;primary_backend=nullptr;
 
-    bool failed_to_detect = false;
-    bool has_watchdog_override =
+    auto &failed_to_detect=backend_phase.failed;failed_to_detect=false;
+    const bool has_watchdog_override =
         committed_destination ||
         (watchdog_caused_reboot() && (watchdog_hw->scratch[0] > 0 || watchdog_hw->scratch[1] > 0));
 
@@ -133,18 +136,30 @@ size_t initialize_backends(
 
         if(backend_config.backend_id != COMMS_BACKEND_CONFIGURATOR) {
             if(temp_backend_index > 0 || temp_gamemode_index > 0) {
-                persistence.SaveConfig(config);
+                backend_phase.backend_id=backend_config.backend_id;backend_phase.default_mode=backend_config.default_mode_config;
+                return BackendAction::Save;
             }
         }
 
     }
 
+    backend_phase.backend_id=backend_config.backend_id;backend_phase.default_mode=backend_config.default_mode_config;
+    return BackendAction::Ready;
+}
+__attribute__((noinline)) size_t FinishBackendPhase() {
+    auto &backends=*backend_phase.inputs.backends;auto &inputs=*backend_phase.inputs.inputs;
+    auto *input_sources=backend_phase.inputs.sources;const size_t input_source_count=backend_phase.inputs.count;
+    auto &config=*backend_phase.inputs.config;const auto &pinout=*backend_phase.inputs.pinout;
+    const auto get_backend_config=backend_phase.inputs.selector;const auto get_usb_backend_config=backend_phase.inputs.usb;
+    const auto detect_console=backend_phase.inputs.detect;const auto init_secondary_backends=backend_phase.inputs.secondary;
+    const auto init_primary_backend=backend_phase.inputs.primary;
+    auto &primary_backend=backend_phase.primary;const bool failed_to_detect=backend_phase.failed;
     size_t backend_count = 1;
     if (init_secondary_backends != nullptr) {
         backend_count = init_secondary_backends(
             backends,
             primary_backend,
-            backend_config.backend_id,
+            backend_phase.backend_id,
             inputs,
             input_sources,
             input_source_count,
@@ -153,9 +168,9 @@ size_t initialize_backends(
         );
     }
 
-    if (backend_config.default_mode_config > 0) {
+    if (backend_phase.default_mode > 0) {
         GameModeConfig &mode_config =
-            config.game_mode_configs[backend_config.default_mode_config - 1];
+            config.game_mode_configs[backend_phase.default_mode - 1];
         for (size_t i = 0; i < backend_count; i++) {
             set_mode(backends[i], mode_config, config);
         }
@@ -165,6 +180,27 @@ size_t initialize_backends(
     if(failed_to_detect) return 0;
 
     return backend_count;
+}
+}
+size_t initialize_backends(
+    CommunicationBackend **&backends,
+    InputState &inputs,
+    InputSource **input_sources,
+    size_t input_source_count,
+    Config &config,
+    const Pinout &pinout,
+    backend_config_selector_t get_backend_config,
+    usb_backend_getter_t get_usb_backend_config,
+    detect_console_t detect_console,
+    secondary_backend_initializer_t init_secondary_backends,
+    primary_backend_initializer_t init_primary_backend
+) {
+    backend_phase={};BackendPhaseReset reset;
+    backend_phase.inputs={&backends,&inputs,input_sources,input_source_count,&config,&pinout,get_backend_config,get_usb_backend_config,detect_console,init_secondary_backends,init_primary_backend};
+    const auto action=PrepareBackendPhase();
+    if(action==BackendAction::Refused)return 0;
+    if(action==BackendAction::Save)persistence.SaveConfig(config);
+    return FinishBackendPhase();
 }
 
 void init_primary_backend(

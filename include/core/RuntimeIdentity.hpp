@@ -30,6 +30,9 @@ inline Snapshot Observe(CommunicationBackend *primary, const Config &config,
         }
     }
     if (!s.row || context->mode_id != MODE_ULTIMATE) { s.status = Status::ContextUnavailable; return s; }
+    if (ultimate.ActiveEngine() == Ultimate::Engine::NativeUnavailable) {
+        s.status = Status::SnapshotUnavailable; return s;
+    }
     const UltimateProfile *profile = ultimate.SelectedProfile();
     if (!profile) { s.status = Status::SourceFallback; return s; }
     if (!config.ultimate_profile_store_format) {
@@ -49,8 +52,19 @@ inline Snapshot Observe(CommunicationBackend *primary, const Config &config,
     if (profile != store.ActiveProfile() || !store.ActiveId() || !store.ActiveRevision()) {
         s.status = Status::ObjectMismatch; return s;
     }
+    const auto *native = ultimate.NativeView();
+    const uint32_t native_generation = native ? native->generation : 0;
+    if (profile->schema_version == ultimate_native::kSchema &&
+        (context->ultimate_profile_engine != 1 || ultimate.ActiveEngine() != Ultimate::Engine::NativeAbi1 ||
+         !native || native != store.ActiveNativeView() || !ultimate_native::IsOwnedView(*native) || !native->published ||
+         !native_generation || ultimate.NativeGeneration() != native_generation ||
+         !ultimate_native::ContextMatches(*native, *context) || !ultimate_native::Lease(*profile) ||
+         ultimate_native::Lease(*profile)->bytes != native->body || !ultimate_native::Lease(*profile)->live)) {
+        s.status = Status::SnapshotUnavailable; return s;
+    }
     if (!PayloadDigest(*profile, s.digest)) { s.status = Status::DigestFailure; return s; }
-    if (primary->ObservedGameMode() != mode || ultimate.SelectedProfile() != profile) {
+    if (primary->ObservedGameMode() != mode || ultimate.SelectedProfile() != profile ||
+        (native && (ultimate.NativeView() != native || !native->valid || native->generation != native_generation))) {
         std::memset(s.digest, 0, sizeof(s.digest));
         s.status = Status::SnapshotUnavailable; return s;
     }

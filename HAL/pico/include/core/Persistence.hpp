@@ -79,6 +79,38 @@ class Persistence {
     uint32_t _config_generation = 0;
     ConfigSemanticValidator _validator = nullptr;
 
+    enum class CaptureAction : uint8_t { Refused, ExistingExact, NeedsCopy };
+    bool ValidateLegacySource();
+    bool CheckCaptureInput();
+    bool AdmitCaptureSource();
+    CaptureAction PrepareCaptureSource(uint8_t digest[32]);
+    bool ExecuteCaptureSource(uint8_t digest[32]);
+    bool RemoveCaptureTemporary();
+    bool CopyCapturedSource();
+    bool VerifyPublishCapturedSource(uint8_t digest[32]);
+    const char *SelectReadConfigCandidate();
+    LoadResult InitializeReadConfigCandidate(CheckedStorageFile &);
+    LoadResult FinishConfigDecode(CheckedStorageFile &,bool);
+    static bool InitializeStagedConfig();
+    static bool FailStagedConfig();
+    LoadResult ReadConfigCandidate();
+    LoadResult LoadConfigDriver(Config &);
+    LoadResult CompleteReadConfigCandidate(CheckedStorageFile &);
+    LoadResult FinishLoadedConfig(Config &);
+    static bool EncodeStagedConfig();
+    static void InitializeStagedStream();
+    static void EndStagedStream();
+    static bool FinishSaveConfig(bool);
+    static void InitializeSaveContext(Persistence *,Config *);
+    static bool PositionStagedConfig();
+    static bool CompleteStagedConfig();
+    SaveResult VerifyExpectedConfigGeneration(uint64_t expected_generation);
+    bool PrepareSaveConfig(const Config &config);
+    bool RemoveSaveTemporary();
+    static bool StageSaveConfig();
+    bool VerifyStagedConfig(Config &config);
+    bool RotateSavedConfig();
+    bool PublishStagedConfig(Config &config);
     bool CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *failure = nullptr);
 };
 

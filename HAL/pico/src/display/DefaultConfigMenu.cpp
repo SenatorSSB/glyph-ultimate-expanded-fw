@@ -7,6 +7,7 @@
 #include "config/glyph/common/include/LEDTemplates.hpp"
 #include "comms/NeoPixelBackend.hpp"
 #include "img/update.hpp"
+#include <new>
 
 DefaultConfigMenu::DefaultConfigMenu(
     Config &config,
@@ -48,42 +49,17 @@ DefaultConfigMenu::DefaultConfigMenu(
         .items_count = usb_backend_options_count,
     };
 
-    /* Build gamemodes page */
-    MenuPage::MenuItem *gamemode_options = new MenuPage::MenuItem[config.game_mode_configs_count];
-
-    size_t gamemode_options_count = 0;
-    for (size_t i = 0; i < config.game_mode_configs_count; i++) {
-        GameModeConfig &mode_config = config.game_mode_configs[i];
-        MenuPage::MenuItem &current_option = gamemode_options[gamemode_options_count];
-
-        if (_backends_count > 0 && _backends[0] != nullptr) {
-            CommunicationBackendId primary_backend_id = _backends[0]->BackendId();
-            if ( !(primary_backend_id == COMMS_BACKEND_DINPUT
-                    || primary_backend_id == COMMS_BACKEND_XINPUT
-                    || primary_backend_id == COMMS_BACKEND_NINTENDO_SWITCH) &&
-                mode_config.mode_id == MODE_KEYBOARD) {
-                continue;
-            }
-        }
-
-        if (strnlen(mode_config.name, sizeof(mode_config.name)) > 0) {
-            strlcpy(current_option.text, mode_config.name, sizeof(current_option.text));
-        } else {
-            strlcpy(
-                current_option.text,
-                gamemode_name(mode_config.mode_id),
-                sizeof(current_option.text)
-            );
-        }
-        current_option.key = i;
-        current_option.action = &SetDefaultMode;
-        gamemode_options_count++;
-    }
-
-    _gamemode_options_page = {
-        .items = gamemode_options,
-        .items_count = gamemode_options_count,
-    };
+    /* The visible list is unchanged; only its bounded metadata source differs. */
+    const auto backend = _backends_count && _backends[0] ? _backends[0]->BackendId() : COMMS_BACKEND_UNSPECIFIED;
+    // Configurator is the only live store writer. Its display is the remapper,
+    // so it must never enumerate the directory concurrently with that writer.
+    const bool browse = backend != COMMS_BACKEND_CONFIGURATOR && backend != COMMS_BACKEND_UNSPECIFIED;
+    const size_t capacity = browse && config.game_mode_configs_count <= 30 && profile_store.Count() <= ProfileStore::kMaxEntries
+        ? config.game_mode_configs_count + profile_store.Count() : 0;
+    _profile_targets = capacity ? new (std::nothrow) profile_selection::Target[capacity] : nullptr;
+    _gamemode_options_page = {};
+    _gamemode_options_page.items_count = profile_selection::BuildTargets(
+        config, profile_store, backend, _profile_targets, capacity);
 
     /* Build SOCD types page */
     static MenuPage::MenuItem socd_options[_SocdType_MAX] = {};
@@ -266,7 +242,53 @@ DefaultConfigMenu::DefaultConfigMenu(
 
 DefaultConfigMenu::~DefaultConfigMenu() {
     delete[] _usb_backends_page.items;
-    delete[] _gamemode_options_page.items;
+    delete[] _profile_targets;
+}
+
+void DefaultConfigMenu::HandleControls(IntegratedDisplay *display, const DisplayControls &controls, Button button) {
+    // The menu core cannot escape to another reset/write-capable action while
+    // core0 owns a checked native selection. Failure releases this fence.
+    if (profile_selection::Pending()) return;
+    ConfigMenu::HandleControls(display, controls, button);
+}
+
+const MenuPage::MenuItem *DefaultConfigMenu::ResolveItem(MenuPage *page, size_t index) {
+    if (page != &_gamemode_options_page) return ConfigMenu::ResolveItem(page, index);
+    if (!_profile_targets || index >= page->items_count) return nullptr;
+    const auto target = _profile_targets[index];
+    _profile_item = {};
+    _profile_item.key = static_cast<uint8_t>(index);
+    if (target.profile_id) {
+        const auto *entry = profile_selection::FindEntry(profile_store, target.profile_id);
+        if (!entry) return nullptr;
+        // Source and destination extents are bounded independently.
+        size_t n = 0;
+        while (n + 1 < sizeof(_profile_item.text) && n < sizeof(entry->name) && entry->name[n]) {
+            _profile_item.text[n] = entry->name[n];
+            ++n;
+        }
+        _profile_item.text[n] = '\0';
+        _profile_item.action = &SetStoredProfile;
+    } else {
+        if (target.mode_index >= _config.game_mode_configs_count) return nullptr;
+        const auto &mode = _config.game_mode_configs[target.mode_index];
+        const char *name = mode.name[0] ? mode.name : gamemode_name(mode.mode_id);
+        size_t n = 0;
+        const size_t limit = mode.name[0] ? sizeof(mode.name) : sizeof(_profile_item.text);
+        while (n + 1 < sizeof(_profile_item.text) && n < limit && name[n]) {
+            _profile_item.text[n] = name[n]; ++n;
+        }
+        _profile_item.text[n] = '\0';
+        _profile_item.key = target.mode_index;
+        _profile_item.action = &SetDefaultMode;
+    }
+    return &_profile_item;
+}
+
+void DefaultConfigMenu::SetStoredProfile(IntegratedDisplay *, ConfigMenu *menu, Config &, uint8_t key) {
+    auto *self = static_cast<DefaultConfigMenu *>(menu);
+    if (self->_profile_targets && key < self->_gamemode_options_page.items_count)
+        profile_selection::Request(self->_profile_targets[key].profile_id);
 }
 
 void DefaultConfigMenu::SetDefaultMode(

@@ -1,0 +1,8 @@
+{
+  "result": "INHERITED_F_WHITESPACE_IDENTICAL",
+  "integration_diff_check_returncode": 2,
+  "exact_F_comparison_returncode": 2,
+  "diagnostics_byte_equal": true,
+  "diagnostics_sha256": "066b4f0cf15b0e38786b2880ecf53d3b5d718a300708e330e32ec648bb5325cc",
+  "disposition": "Preserve exact hardware-tested source and frozen upstream fixtures, no formatting alteration. No firmware safety contradiction; not a full diff-check PASS."
+}

@@ -1,0 +1,4135 @@
+{
+  "base": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+  "count": 303,
+  "files": [
+    {
+      "path": "HAL/avr/avr_nousb/include/comms/backend_init.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0d778251f8cace9b12afb0806d2619a11a9c596e",
+      "sha256": "bcf1a719c1237ca89d64b39c202daeda2f525aa9a675a4277ac3c9d6d0012119",
+      "bytes": 1289,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0d778251f8cace9b12afb0806d2619a11a9c596e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_nousb/include/config_defaults.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8668191f050450ea36ca16f199f8d52b36e077d4",
+      "sha256": "0630d1e9eef930f2916f36bf7271f0109b747348332274ed10628e12e89dfe90",
+      "bytes": 3772,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8668191f050450ea36ca16f199f8d52b36e077d4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_nousb/include/core/KeyboardMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e1730fdeb248f22119cda5046572a0135849ae4c",
+      "sha256": "0bce112ca5e1d4cf7abc95441f861dad62d0d25458068ee8b3c361a9271cede1",
+      "bytes": 578,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e1730fdeb248f22119cda5046572a0135849ae4c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_nousb/include/core/keycodes.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "21ebd1c2bf0f71e6cf696e2e8a93ef742995e0cb",
+      "sha256": "e14316cffc17795eec5ca4a82340e3ea73195b84d6421a7cc3fb8d7df620d4d5",
+      "bytes": 5223,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "21ebd1c2bf0f71e6cf696e2e8a93ef742995e0cb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_nousb/src/comms/backend_init.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5767254295b49daf8e89a7d0374429075c0a2bfc",
+      "sha256": "343a31026cf393f67b62fea2439cb72717d2bcdbe72554170d0e4708884eb849",
+      "bytes": 3195,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5767254295b49daf8e89a7d0374429075c0a2bfc"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_nousb/src/comms/console_detection.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a679e359564875875c236373f0713d6b0eb57b8e",
+      "sha256": "d633a7f1a183b8da8277746089812ccd7695e14c9bbe8cc82607059a57619136",
+      "bytes": 139,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a679e359564875875c236373f0713d6b0eb57b8e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_nousb/src/core/KeyboardMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "66cc370a840b0380fea6d7fb58253e7c9ee60639",
+      "sha256": "f2e3daf44db7c85cdad293e7f27cb3650d2f08f64cfd1eebb0dd309169526805",
+      "bytes": 290,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "66cc370a840b0380fea6d7fb58253e7c9ee60639"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/comms/DInputBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f0e7b78525cce4ef8878e9eff7f0c2d73d682ffe",
+      "sha256": "fc9bdbf87073c3ee6a97bd6ee7f0398f5bc06beb490e0db1729c5b6006e50d78",
+      "bytes": 512,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f0e7b78525cce4ef8878e9eff7f0c2d73d682ffe"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/comms/backend_init.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0d778251f8cace9b12afb0806d2619a11a9c596e",
+      "sha256": "bcf1a719c1237ca89d64b39c202daeda2f525aa9a675a4277ac3c9d6d0012119",
+      "bytes": 1289,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0d778251f8cace9b12afb0806d2619a11a9c596e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/config_defaults.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "68a030b7b7dc91f42a6219d0b534b4e2f54b2a38",
+      "sha256": "0442b12680440099878fe864d63a7afce57437e3a46c606de4c37c0b6e6df57e",
+      "bytes": 5538,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "68a030b7b7dc91f42a6219d0b534b4e2f54b2a38"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/include/core/KeyboardMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "42e5a23b82398187bd1dd33654a4b1abbdfb1781",
+      "sha256": "315e0e21b8880db08d82b8ec39861be4bb6a500c6d97c958101ef7f88c95875e",
+      "bytes": 544,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "42e5a23b82398187bd1dd33654a4b1abbdfb1781"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/comms/DInputBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "72349eb4faa551fbf396607a6c83cd88d3a7fcff",
+      "sha256": "e240965b0b8941c1f558b1ddea1767ff3ae5fcac2a68b47a87f1b7007d130900",
+      "bytes": 1760,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "72349eb4faa551fbf396607a6c83cd88d3a7fcff"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/comms/backend_init.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "405541aca05ade36dc9ba2540e68ac1ac434d3b8",
+      "sha256": "df77b89c4c751aa5564fce4378cc440391ae758bcb172748332c9bfb85cb32f8",
+      "bytes": 2920,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "405541aca05ade36dc9ba2540e68ac1ac434d3b8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/comms/console_detection.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e639e0a04d8ac6e34dd4624f74399bfd63285e6a",
+      "sha256": "1e23aa138e4d4e1c8f175f61d74c2d1275e61eb77beaf35aa3341c4b81bd0e98",
+      "bytes": 379,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e639e0a04d8ac6e34dd4624f74399bfd63285e6a"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/avr_usb/src/core/KeyboardMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5e3f5692af4a84d2879ca765caf1fe864c72e068",
+      "sha256": "dcf43c8a3b8d53df0a0359c6b0ac6e28a53d85ca20caf5538c289fbc1a33e703",
+      "bytes": 591,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5e3f5692af4a84d2879ca765caf1fe864c72e068"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/comms/GamecubeBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2780d77408f00dc4aedf2ae48fc18d26c72c0c86",
+      "sha256": "10a771fa10f73234cb8e4b1f8713d23000dddfca27a25cdd30a6755248d39a36",
+      "bytes": 562,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2780d77408f00dc4aedf2ae48fc18d26c72c0c86"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/comms/N64Backend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "34a141facc08791cb14af527b5bea7c3315b9298",
+      "sha256": "701322be26a57be3b8733d3c4bca7a7d823da49c0f2c1fa6513e042edc85ac11",
+      "bytes": 533,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "34a141facc08791cb14af527b5bea7c3315b9298"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/gpio.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0188727f560331026ee080212d343d66a7839b20",
+      "sha256": "9e3d5b0707fe0866757a6bc78ee14d06969fe217b12651bc10a2858dbf519c50",
+      "bytes": 437,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0188727f560331026ee080212d343d66a7839b20"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/input/NunchukInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f3f299024a07cba6a112b5d2c81a36b7e335a6a6",
+      "sha256": "bd8713f919892a9a31faa078b3e963d83d658e1553fed0fbf5c3cd1b99ac3406",
+      "bytes": 388,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f3f299024a07cba6a112b5d2c81a36b7e335a6a6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/serial.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9d05798bbca779e229e32b20d1c9c81f23e3eaa1",
+      "sha256": "829424b1189ab60bb604a994a44257779c4cc38155108afd73250fc960698297",
+      "bytes": 290,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9d05798bbca779e229e32b20d1c9c81f23e3eaa1"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/stdlib.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6a2eb5cf41f9e6e660413d33cd0bec707aa3bf01",
+      "sha256": "7fd5fc2820f5f1fdbec8f79579d95083ce79444bf7de715f2a54b2fb7c49825c",
+      "bytes": 105,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6a2eb5cf41f9e6e660413d33cd0bec707aa3bf01"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/include/util/state_util.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1efaaa4de7b84bd250190411e313fddec1d16602",
+      "sha256": "daf54029491dc42df3e16d4a90a4f7a9e6a185674c54dd2ce42f582764bc29de",
+      "bytes": 9866,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1efaaa4de7b84bd250190411e313fddec1d16602"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/proto/config.options",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dfaf43e5707f604ab6d0f7931446dcafced9f28c",
+      "sha256": "41c31500a7c865899927f1024412e54ea93883968047615d57b72eb44b824697",
+      "bytes": 1970,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dfaf43e5707f604ab6d0f7931446dcafced9f28c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/src/comms/GamecubeBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "370d6f71233728c309d33aba0000ecdb13dd92b3",
+      "sha256": "d422c31ddd40d88d5b25af654978701f2cbddd565e32e798ffdecf6c148903ae",
+      "bytes": 1963,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "370d6f71233728c309d33aba0000ecdb13dd92b3"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/src/comms/N64Backend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fbda08683f5dcd1829a114b8d1fb30b10010a325",
+      "sha256": "8f1a93bdbebdb84359e4edced1f2ca3639b7da93e760130a1369758b3102b14d",
+      "bytes": 1877,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fbda08683f5dcd1829a114b8d1fb30b10010a325"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/src/gpio.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9a9f84e07c1f5e8fed30ff49239268e06b91e265",
+      "sha256": "ec2bd0142c9105abbbd206bb8aeec69d340dd24d6132d68516160446041aca58",
+      "bytes": 443,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9a9f84e07c1f5e8fed30ff49239268e06b91e265"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/src/input/NunchukInput.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9344d7054ff72bd36a8e8236c5a5c060be658f0b",
+      "sha256": "fe426c1f8ccdb4b32bd74e6ca3e90fd62e436405dabdf2d87f9b0e4bc8e2af9c",
+      "bytes": 1251,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9344d7054ff72bd36a8e8236c5a5c060be658f0b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/src/reboot.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3c4f98ea4cd4f374a5e50482afd479828080c02d",
+      "sha256": "042c0825b4d7def4694100e43bdc522ec324e0e666d46e38a14444821a35a90e",
+      "bytes": 353,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3c4f98ea4cd4f374a5e50482afd479828080c02d"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/avr/src/serial.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f12ab2ce50abd6ae3d775d328a315e7b0a12410e",
+      "sha256": "7e34fb0519142d0bd66e35dfa1cf6b7380214688db47adc978192a8abdd52315",
+      "bytes": 500,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f12ab2ce50abd6ae3d775d328a315e7b0a12410e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/ConfiguratorBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "54d6c20822e2553d27fd9e33ff2ebe925c26a8d7",
+      "sha256": "4b55d6269324d24958f40ea0c52e5bf740821efd8c9dad3e5e500e110a397d98",
+      "bytes": 4091,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1b35fc2b6da40c0440ac17afe79799904684b6d4"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2e886e9e8374554fa4930d6694832493c3708b35",
+      "sha256": "925ff8ec51387dacfff0651af44404fd8caa2076016107c74745ab8df222e2f9",
+      "bytes": 5550,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2e886e9e8374554fa4930d6694832493c3708b35"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/DInputBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1758c361b4b3c0fa71b84d55799f4617ab93f8eb",
+      "sha256": "d647b49a4c338f0abaa03b9a3d9518f7a3a25b4b51cce0d1c830d8c98742475e",
+      "bytes": 478,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1758c361b4b3c0fa71b84d55799f4617ab93f8eb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/GamecubeBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c2e324f50b1c458ad20f496bd88bb783fce73b58",
+      "sha256": "2dcf4c3a906a860663617583becc2495062a3d5ba7ef7286591b12d462a406b5",
+      "bytes": 708,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c08c3e7e7508106976ec6296e24f220cf84d3bd8"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/include/comms/N64Backend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f82c676bedb6a917755e82f7a00d15458eb2e24c",
+      "sha256": "50a1b0f125346b5881c2665c3da2fbb0485aa563dbf98aedc70bb8c105047cd0",
+      "bytes": 584,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f82c676bedb6a917755e82f7a00d15458eb2e24c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/NeoPixelBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4724544d5989fdf403c5e6e0accab721371bc9d3",
+      "sha256": "71108cbd6ac17f78fd2698be5236854c292a599077f8e74f002493565953b10b",
+      "bytes": 7490,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4724544d5989fdf403c5e6e0accab721371bc9d3"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/NesBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "83378a88428661d02371dd606014c55c2e7eaaa9",
+      "sha256": "a07f99ec7da25c529c42b62e2d8d92faa1ef8b6b1052e55a1b401063f1cd8f12",
+      "bytes": 605,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "83378a88428661d02371dd606014c55c2e7eaaa9"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/NintendoSwitchBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0d16ac393e4678382caee9b57ce2b030bc16e182",
+      "sha256": "201faa4dbaaddb5badf274e350f17ab9d6b3e6e286de321094d590e0c031540c",
+      "bytes": 1409,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0d16ac393e4678382caee9b57ce2b030bc16e182"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/SnesBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "aca980c9998ecb4d431502a997c9d9d3953be85f",
+      "sha256": "a55c6001beb1d42c82a5ff81b603add089e15687e43700bfec7afe106922d925",
+      "bytes": 613,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "aca980c9998ecb4d431502a997c9d9d3953be85f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/XInputBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d0f884c9568b7f84f086aee96333dcff6136160c",
+      "sha256": "e0cf78a9c800461f4636b0e4ecebc47a52f7b1e001f709af210373f4bf9229cf",
+      "bytes": 510,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d0f884c9568b7f84f086aee96333dcff6136160c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/comms/backend_init.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "783cb54e5d01d33e931136e9cbb15f696a510029",
+      "sha256": "3c2e4b29d06e85e17ba0f63ac7160589ec0b5661874406a9e3a576446b2cf227",
+      "bytes": 5304,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "783cb54e5d01d33e931136e9cbb15f696a510029"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/config_defaults.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9f74b0dda4e1467495d16f642e1b649f8929dc6b",
+      "sha256": "468903039d4ae881e9529ffe07427b635c74e4c6ff7e64f7237c9f286cdcfb8a",
+      "bytes": 7269,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9f74b0dda4e1467495d16f642e1b649f8929dc6b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/core/CheckedStorageFile.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c99e50909ad4e6008c1d6c7d85424df635c7e4d4",
+      "sha256": "2ff1c21a4a22d0a78505521cb3dbd2a759b1d2ad2b026aa6287e6e817facff7c",
+      "bytes": 2857,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1a780114fc1e5a4f1e342bfaf5cf216ddbdf736a"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/include/core/KeyboardMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "81ad10d78f86da84fd8b1e51fb3857a463014f1e",
+      "sha256": "6bc35650a119ec942e26015dcb36361ffb284e0f8221134ccd5776ebdfb7a7b5",
+      "bytes": 612,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "81ad10d78f86da84fd8b1e51fb3857a463014f1e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/core/Persistence.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e65fd302fe1f6680bf51f6e682d2588bb53ae5a0",
+      "sha256": "744adf3955947b18d2ef6e8c10fe31061e2b31c80769f0db6cae1eddf8e76277",
+      "bytes": 4812,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e8068d0657733e70a8714c4375e4713d8b60075d"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/include/display/ConfigMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0f1b76206dd6da1db2868e2f3a4dac64f7d93532",
+      "sha256": "847d938f57951c2ed08898d47bca3c3c853ebb1db6168bc063d99cd825c9c9e0",
+      "bytes": 1740,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b896fa08480d15fbb4b35e345de6cb66555bddff"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/include/display/ConfigMenuAssets/GlyphMenuBitmaps.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d3ac8e30c1df919d830afdc4ca13123337b9aa1b",
+      "sha256": "2571a4f5d3f7952ba007ef022cc24e24bb9069f4e99e94c2e193dd398c0e4dd7",
+      "bytes": 57565,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d3ac8e30c1df919d830afdc4ca13123337b9aa1b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/display/DefaultConfigMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c996a370c1741898bc08071fb8844c0b19a3c137",
+      "sha256": "ffde924e685b817472775da6fe0291fca2e41b948063a1616d2b634d86b38701",
+      "bytes": 1409,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "49a6e62839320ea96f6d8a954af5828d75dc6287"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/include/display/DisplayMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4121c4538517b89e6b9b4de93284f9dd0bded1e0",
+      "sha256": "6dfa4950dc2280df961de0198ea3a01c0a271b2f8fc3334374463793fa316a29",
+      "bytes": 794,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4121c4538517b89e6b9b4de93284f9dd0bded1e0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/display/InputDisplay.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "641dc7e68da7d5ed039bd0d5d8ce2e37cbc4369d",
+      "sha256": "4f06b4ec13b1359b676e7945e0be473231192e70256fc81c2ed563bb09e987d4",
+      "bytes": 969,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "641dc7e68da7d5ed039bd0d5d8ce2e37cbc4369d"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/display/RemapMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2d05bc182482da054e1074c9fc14e144cef689ef",
+      "sha256": "fed30a80b3f4a76dd09a0eaa3a7742d8cf953ca77aff5b18c70d5df06700c135",
+      "bytes": 410,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2d05bc182482da054e1074c9fc14e144cef689ef"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/display/RgbBrightnessMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d44ee328e78de21fd040c62f9d1b92d09d9ade0f",
+      "sha256": "d752ea83abefeaccd390d58df6826a001397038f650a5539ac5342cf6a23c521",
+      "bytes": 489,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d44ee328e78de21fd040c62f9d1b92d09d9ade0f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/game_utils/Ult_adc.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "539eb6cc7c0df382107fde930618104a28f71470",
+      "sha256": "de421be79897f8fd8f0fe66e8d1cea9b997da3b543f6471cc18683dd1c2fe648",
+      "bytes": 130,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "539eb6cc7c0df382107fde930618104a28f71470"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/gpio.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5122a908e2bd34616fc02962b20f2794df107624",
+      "sha256": "0a1bf79395451be05260e928a2c5197e2804f04e9d375f43d35378f1bc406553",
+      "bytes": 430,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5122a908e2bd34616fc02962b20f2794df107624"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/input/DebouncedGpioButtonInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "916c34d9bbfc40fdd24383a3b9af0d7bed9dde76",
+      "sha256": "0aaf94af6a0fd96a12f7eba2dafb046eed0d02d3bf7c22196418fad09aa4a973",
+      "bytes": 1073,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "916c34d9bbfc40fdd24383a3b9af0d7bed9dde76"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/input/DebouncedSwitchMatrixInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bd6d6dd843c5359a284330d3b96c3ca2e5db9c7a",
+      "sha256": "45c3dfd010eebbcce79329df30f71f3d25a33759b30ecbe9fe2cc95fa1e5df30",
+      "bytes": 1233,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "bd6d6dd843c5359a284330d3b96c3ca2e5db9c7a"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/input/GamecubeControllerInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c4e2913a1412bb492275971a72d46d264b3bb488",
+      "sha256": "e3ce3ddd0bd176be7b56b56822aa6e212746b27f29ed6df71965ea0252f08462",
+      "bytes": 647,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c4e2913a1412bb492275971a72d46d264b3bb488"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/input/NunchukInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9984f6dafc269481134cb167d63c915919ba249c",
+      "sha256": "aa0b068b73a8726f9a2eee201e94b024b42dc27c60e273007dee805cc3da1185",
+      "bytes": 444,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9984f6dafc269481134cb167d63c915919ba249c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/input/Pca9671Input.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1ed9d4041ee911ea450bacf4337044ab498590d9",
+      "sha256": "2968f3413ae2d865c09730a669f7600e43d5d80c216b6362068fca6f2d87ff98",
+      "bytes": 816,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1ed9d4041ee911ea450bacf4337044ab498590d9"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/input/debounce.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f9b7c450eaa70d9c9f4fe65e6690152b19bc4595",
+      "sha256": "75327d780827f78b87993fcb9dc584b67ec9847346112f19a3a8b3918e7503ae",
+      "bytes": 882,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f9b7c450eaa70d9c9f4fe65e6690152b19bc4595"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/rgb/ButtonLocations.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a291b9ff6ed8482a2caa7452362eafa3077b13f1",
+      "sha256": "4b1a0aa989c2c162e0700b0d30c22f0f1653dc27708ad8cc51f27c97cdb6cb05",
+      "bytes": 861,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a291b9ff6ed8482a2caa7452362eafa3077b13f1"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/serial.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9d05798bbca779e229e32b20d1c9c81f23e3eaa1",
+      "sha256": "829424b1189ab60bb604a994a44257779c4cc38155108afd73250fc960698297",
+      "bytes": 290,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9d05798bbca779e229e32b20d1c9c81f23e3eaa1"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/stdlib.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6bc7bc5ee7f56de07116608399af228314dab004",
+      "sha256": "676ecc6f5a9b333bf2c55a9df11ddf037a83fe217788c17f887fae4851ea90bc",
+      "bytes": 102,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6bc7bc5ee7f56de07116608399af228314dab004"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/tempfix.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "55d54c295ba047fa2c8a8a297163c9eca0770712",
+      "sha256": "a33d7576b55839bb26da5fe3b80fbea8951d55d52d65a6a8cf0ca329edef7930",
+      "bytes": 66,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "55d54c295ba047fa2c8a8a297163c9eca0770712"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/tusb_config_pico.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "31568e512d12fd0bbc2e079c52fbf572a614eb93",
+      "sha256": "ca059e0e8ff7f779e469b40ad67bea695e9d69abf092af7e119993963ba2238c",
+      "bytes": 3450,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "31568e512d12fd0bbc2e079c52fbf572a614eb93"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/include/util/state_util.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "40b8aeb9c4db3268696c49f20b3278efabc7688c",
+      "sha256": "db4b4ee7dcfe462dd00097a5109e028787e11d7868b012f447c9fee84e68ea81",
+      "bytes": 3192,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "40b8aeb9c4db3268696c49f20b3278efabc7688c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "790cdce6cfa17c7871263f8968b29e40e5b73ba8",
+      "sha256": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561",
+      "bytes": 51807,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6865f49491e56e7f17ada3238d3996d47a71834b"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/comms/DInputBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e1941c5548cc8761e025b691f619be0faf8b1165",
+      "sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea",
+      "bytes": 1844,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e1941c5548cc8761e025b691f619be0faf8b1165"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/GamecubeBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f4eb123c807cc049a92a90ff4ef06b424c0abf9c",
+      "sha256": "a0d6aee316ebfc023159efcd0a353550b801ec11291c5e9320d9544d1c5fa21f",
+      "bytes": 2382,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8e7d839cbc5b77377aae8c08dfd550c45274d8a0"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/comms/N64Backend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "308e39087df954da072fd32b058366c51c7cecf2",
+      "sha256": "8cdf98be87caaeb23b9a0412a6bfd08bc98615a2f64f6e5ea3096a9fb60535ce",
+      "bytes": 1884,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "308e39087df954da072fd32b058366c51c7cecf2"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/NesBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c59063e02ea96a49876b56f3a8f3b3cd975c371a",
+      "sha256": "60b721c48257df2a8d2783f666cfb4ffdb75c61eb649978b4b64c69ceade0fa2",
+      "bytes": 1095,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c59063e02ea96a49876b56f3a8f3b3cd975c371a"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4b388ecca60b1eedaef5fcd8656d71d2f2be97c6",
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25",
+      "bytes": 6691,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4b388ecca60b1eedaef5fcd8656d71d2f2be97c6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/SnesBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "161e30eb958a27ebe6dea71ce4627014390bd17f",
+      "sha256": "cbe6b62c117469b0ba970b17c939d1966cff0078e09e51242aa2c106d6941660",
+      "bytes": 1229,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "161e30eb958a27ebe6dea71ce4627014390bd17f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/XInputBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1699e06253a93cb5f492282b5d43ce26fe8cfd0e",
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+      "bytes": 2197,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1699e06253a93cb5f492282b5d43ce26fe8cfd0e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/comms/backend_init.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8eeaa1d94c03de650d37cc0e3cd9184abc9166d4",
+      "sha256": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa",
+      "bytes": 14593,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dea3dcb52cfcd853268aca8d0009681815cd7f19"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/comms/console_detection.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "93a82ab7af00b967fd8c7f63844cfecbcc71dd70",
+      "sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c",
+      "bytes": 2116,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "93a82ab7af00b967fd8c7f63844cfecbcc71dd70"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/core/CheckedStorage.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9a62b351e8432809cbeddd2ebb9304e677e75a3b",
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd",
+      "bytes": 10028,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9a62b351e8432809cbeddd2ebb9304e677e75a3b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/core/KeyboardMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a14f01d030dad62305fc0accdc07d224c61eefcf",
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d",
+      "bytes": 642,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a14f01d030dad62305fc0accdc07d224c61eefcf"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/core/NativeTargetMetrics.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "59f789cf9f98c536b840715ad8cffb83dd7b3115",
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c",
+      "bytes": 12036,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/core/NativeTargetMetricsEntry.S",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f7fb11ef0c2990531027b7127273bc94e7f72b6a",
+      "sha256": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a",
+      "bytes": 2154,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/core/Persistence.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c78f204c56292882324e1d404fcf7410debf59a1",
+      "sha256": "697903d9f3ee9573c34bcc58b069a41e07d886bc90d041a034d3aa1682c5b306",
+      "bytes": 32668,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "44c7faec2248c60a802ec6844086ba4e8b646908"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/core/ProfileStore.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9b1e1dc54ef23aac51cfc2f64cd2fec165a7029c",
+      "sha256": "86e96518d789b597b4764910b3314192affe97019f4be263cc6c318cd594a4c6",
+      "bytes": 86508,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2704e375fdbe7532ad1a2aade48983ad82c7af7"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/core/ResourceDiagnostics.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "16b1c39e253b6687d880c3e633cec710b9f04409",
+      "sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da",
+      "bytes": 3914,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "16b1c39e253b6687d880c3e633cec710b9f04409"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/display/ConfigMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d5243bc57138253f5083705e053bfa540a31e70b",
+      "sha256": "fbbd6124ce97139e290465ddd5c2b7f6f38c754566845cbd8b765ab24943b09f",
+      "bytes": 9890,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f1a5f978fadd90fdffd7af19966444fd0748936b"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1883f22ae5a27ff181684a410ad36efcb34e88d7",
+      "sha256": "448ed9d08ad8ab040ac065d4e95d636a9250ae7ee6e7ae0df32726aeacc5c789",
+      "bytes": 14658,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "424e1ae19c8af3cf24f590455700a9eaed12a4cb"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "HAL/pico/src/display/InputDisplay.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c3ccd582bf95f7c5d6c1e0cfcf6e95df90659ea0",
+      "sha256": "761f3a5bb6357a278042356e25c691ef82bb45030ee6588cd6571a08e2e6480b",
+      "bytes": 2316,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c3ccd582bf95f7c5d6c1e0cfcf6e95df90659ea0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/display/RemapMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d0cb4fb353c3ef1668e8a04aa55c99874662fae7",
+      "sha256": "3707564737f8e9f4652e1daddedb6f0e40c94a2cc741d89bc29760d94a39b7fb",
+      "bytes": 934,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d0cb4fb353c3ef1668e8a04aa55c99874662fae7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/display/RgbBrightnessMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f06778790cf88b639a33baa3800276ad82d4a90e",
+      "sha256": "2a1cf75ef2db9c933404c5a60d4850836b0ba6faf16579a6d7f258701afad650",
+      "bytes": 2794,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f06778790cf88b639a33baa3800276ad82d4a90e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/game_utils/Rivals2_adc.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/game_utils/Ult_adc.c",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4448fc28c2358289c5f6102107c7d947b6d6bc54",
+      "sha256": "447012837b38bcac0ed70d7cae6d69540217523cc1d88758021913dc2571156e",
+      "bytes": 5339,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4448fc28c2358289c5f6102107c7d947b6d6bc54"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/gpio.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "39a8f859e1c9e3ac570adc5d06e711009cd86ae5",
+      "sha256": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c",
+      "bytes": 475,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "39a8f859e1c9e3ac570adc5d06e711009cd86ae5"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/input/GamecubeControllerInput.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "120488b50f8dcab833f609028d401f0146270121",
+      "sha256": "1365d96c017fc3889e660edab39884c6d86019d59b0fa6de08c09dd9b421175c",
+      "bytes": 922,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "120488b50f8dcab833f609028d401f0146270121"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/input/NunchukInput.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "eafb9b79cc7c024c89118b0dda6fc8874fe51e86",
+      "sha256": "31435748031cfe1fd0781892c3b5818d63e0ce36b6caa9e30683a2916167c497",
+      "bytes": 1404,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "eafb9b79cc7c024c89118b0dda6fc8874fe51e86"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/input/Pca9671Input.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fd501853c7ce1c7a2476b725c36598c83dcb7f34",
+      "sha256": "97777d2cff4f64873bc10c6595fce045d773cc84fe65d10b9497cecff62517d8",
+      "bytes": 1084,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fd501853c7ce1c7a2476b725c36598c83dcb7f34"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/reboot.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "796c7f4b7337004b6f68a59c9e775e55f4578742",
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e",
+      "bytes": 156,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "796c7f4b7337004b6f68a59c9e775e55f4578742"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/rgb/ButtonLocations.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d59b490890477b359c98c9a8c09e7f3f42e8a883",
+      "sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f",
+      "bytes": 4236,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d59b490890477b359c98c9a8c09e7f3f42e8a883"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "HAL/pico/src/serial.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0430a44f8434e6c51c8abc29418e9c6ce1e9982e",
+      "sha256": "4a38620ffc8683d55d61d88a262ebc1f2a9f830dbd086fca8733f0253e222e4d",
+      "bytes": 531,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0430a44f8434e6c51c8abc29418e9c6ce1e9982e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "builder_scripts/arduino_pico.py",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "35381a91ad5aa4ffdbcd362365c1bf9fbd13136e",
+      "sha256": "676b20e42500cb0b5f671892250a2c063e21a31459ed542ad48a9481a7fce0af",
+      "bytes": 2112,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "35381a91ad5aa4ffdbcd362365c1bf9fbd13136e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "builder_scripts/native_target_metrics.py",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "93e5dce8846378200ac7dce6097c16c374d90dba",
+      "sha256": "ce41658b2e69eb61877ce27b3a5c345aa2980ad503db9a721f86a4198a985914",
+      "bytes": 1953,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "config/glyph/.clang-format",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ad08d3a29c12a629554d3587bee8b87d8f762ee2",
+      "sha256": "50183aa8e613253fd778203d5d6824f94710c3986d627e5d28df52d9d74fc3c7",
+      "bytes": 1778,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ad08d3a29c12a629554d3587bee8b87d8f762ee2"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/.github/workflows/build.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8254ee56cc82c7fd5e4fd2da7c02412311eaca1a",
+      "sha256": "85e134a6b98e377db510c468e50a41446c4b62ec486728e1da880f04e531c4a7",
+      "bytes": 198,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8254ee56cc82c7fd5e4fd2da7c02412311eaca1a"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/LEDTemplates.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c5c22831246faf2d06c7a77e63b0f790570e363e",
+      "sha256": "913df323d7eebe69146dec8e03cb4cc944a927b56d482a039a67f3cd3e42ec53",
+      "bytes": 128,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c5c22831246faf2d06c7a77e63b0f790570e363e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/config_rgb_target_domain.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d5ed14ade7c67fa644bc3c9168db1cf124afbb65",
+      "sha256": "aaa1859f1964bcf99145fc6a0210f835c7f9f05ab64705f6700f40be618f682d",
+      "bytes": 1515,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d5ed14ade7c67fa644bc3c9168db1cf124afbb65"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/display/AboutMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5ff112b06e4e9d6d783126a40667e30769df7ca8",
+      "sha256": "decc5c33755d07974c906bb68a0a77c083c7349cc329cc3a838177069418736f",
+      "bytes": 457,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5ff112b06e4e9d6d783126a40667e30769df7ca8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/display/Font4x7Fixed.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "25363c38671aee95ff6b7284e3e122b0c274bdd4",
+      "sha256": "697738b9192b5c97872ccf3b0a6f94970e1f3df95d88efa8bb27958d85079d5f",
+      "bytes": 6788,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "25363c38671aee95ff6b7284e3e122b0c274bdd4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/display/GlyphConfigMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ab18e1ba53f3eb4f355784b5d6a0a87f65929249",
+      "sha256": "428ad8033d9a03adbf51526a7cb494287da0525e6c493f83f8c19d8d366f64d7",
+      "bytes": 670,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ab18e1ba53f3eb4f355784b5d6a0a87f65929249"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/display/MenuButtonHints.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7b9c85a34a20e95c44564031a2b6bfabed03fbfe",
+      "sha256": "2773d48665657301e72c071114eba137f7ab0fc257e845ee0419664a750ebfed",
+      "bytes": 1317,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7b9c85a34a20e95c44564031a2b6bfabed03fbfe"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/display/OopsieMenu.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4e80bb3afa6fdd00da7e8fdc26808fb0db84efe6",
+      "sha256": "d4b29b14d2421b284b7a3d42f3c717ece9df2e9e45026190b10901f277c8df24",
+      "bytes": 1317,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4e80bb3afa6fdd00da7e8fdc26808fb0db84efe6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/display/Picopixel.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "463b1b562ddc156efece7a432a031f701d4a287e",
+      "sha256": "035c01e6d48efdfef1e4de6152d0d03910210e449236506ec7c8f71799073363",
+      "bytes": 9089,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "463b1b562ddc156efece7a432a031f701d4a287e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/glyph_config_validation.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91",
+      "sha256": "074ecae57e9c170aea9ae49e38ed315ad6c3e67d05baa7c342bf9235ea179229",
+      "bytes": 133,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6b7cde5afc96870c26d431008b0cdbd1f89f8e91"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/glyph_overrides.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a0836a09477ea53d7ba2aae90287196831a986bb",
+      "sha256": "7a1bc4b09745767d7a34d4b2495edfe22af5d3b4b960eb822c361ac16590803c",
+      "bytes": 58387,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a0836a09477ea53d7ba2aae90287196831a986bb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/icons/12x12bitmaps.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0ae4f61b69a20792de7a082982929f87fffe76c0",
+      "sha256": "6c8b930223444cc753e2e1ba0a77886fc49879eaf1360db8e7f50686e7c1891e",
+      "bytes": 11940,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0ae4f61b69a20792de7a082982929f87fffe76c0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/icons/12x12buttons.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e56b9eec94b14477c59f8379f86dfb32b782ac71",
+      "sha256": "d738fa0effbc7c2931852acbf92015ad79ed04c707cbf9ee6422375aebb459e3",
+      "bytes": 8183,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e56b9eec94b14477c59f8379f86dfb32b782ac71"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/icons/16x16bitmaps.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "242a856254b555a0b3dcb67d2200c0ae8e0c2e56",
+      "sha256": "d7dea73e0a0ffaac25d3cd095a11bd71e4c12a000492e58279f8320904d843e2",
+      "bytes": 16340,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "242a856254b555a0b3dcb67d2200c0ae8e0c2e56"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/icons/menubases.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "382c94953d7931c02147e04c915963fc59dd1117",
+      "sha256": "ec71e2e9d304782edffb457ff46aac6151644a4a9fc80c1299de2055486b7873",
+      "bytes": 25477,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "382c94953d7931c02147e04c915963fc59dd1117"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/include/icons/splashscreen.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fda47105d3d85bcd731f4af5714cc4d4a93cd09b",
+      "sha256": "241acda95bcb2b4ced277e020c85c0afc6ff4108acc817094682f4d9c6b41fa2",
+      "bytes": 6408,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fda47105d3d85bcd731f4af5714cc4d4a93cd09b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/src/LEDTemplates.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f15011835ccf8a095be447ec07b7a78949e71844",
+      "sha256": "a30275c41a87d152fc653caf084c80a9dfb59493b73c40639e8eedbeb6c264a7",
+      "bytes": 1507,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f15011835ccf8a095be447ec07b7a78949e71844"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d8627ede563b9fd738acb0d8138f9a58e3b99de9",
+      "sha256": "d05fa385e28f6bdbb86f1d54aad921001c7c42daa0356094acc6646961d339bc",
+      "bytes": 19591,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "eb6d2d9cdc2ffbebc99aac6bfed9a0838a2385f2"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "config/glyph/common/src/display/AboutMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e73bd0ad49d47b774573c71d781e31847904ed98",
+      "sha256": "d53f71f87cb407c477b588f28cbd4ebadb522326f560e1209b8a3bacb832beee",
+      "bytes": 1317,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e73bd0ad49d47b774573c71d781e31847904ed98"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a624ea3d3d9584b94becbe30306ee8800fe9e49f",
+      "sha256": "137fbcac8b6d95c6ee06a0e2be1b11769a56f2a03c75cd8060cc24bf3c7b8fdf",
+      "bytes": 2177,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "819549dfdf2de34d5ceebed58fa30d278da4f4cb"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "config/glyph/common/src/display/MenuButtonHints.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c6930cd7c7847acddf6085be6cdc1f1b2d05ae22",
+      "sha256": "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc",
+      "bytes": 14926,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c6930cd7c7847acddf6085be6cdc1f1b2d05ae22"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/src/display/OopsieMenu.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f0410e4d3771345d3b06054437ee10a9084b4a7d",
+      "sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2",
+      "bytes": 3391,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f0410e4d3771345d3b06054437ee10a9084b4a7d"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/common/src/glyph_config_validation.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e",
+      "bytes": 615,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1dbcd772c478027a5adaf47f29abf63dd44cfda1"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/env.ini",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3b9bb3cfb1c25b72fa34098b05c79e868df9dec9",
+      "sha256": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36",
+      "bytes": 1502,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3b9bb3cfb1c25b72fa34098b05c79e868df9dec9"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/button_positions.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b5b908d9a25cb021d5b22fc238173455e8fde1db",
+      "sha256": "73b84b62bec59650ed5a027b0d6100bb09109618c65611ca6bf37b8877736e2f",
+      "bytes": 4733,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b5b908d9a25cb021d5b22fc238173455e8fde1db"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/glyph_pinout.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3cde279fc38c08e58ddc4283f324c14222d299e8",
+      "sha256": "1ac5e4278fb72b8c918a6bb307521927afb8d27142aba278bd0f7bfb219e4ab6",
+      "bytes": 356,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3cde279fc38c08e58ddc4283f324c14222d299e8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/matrix_definition.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "870532bef36d7e28e8decf6ff152b131a6db5ef7",
+      "sha256": "c7782c507912c45b1c282027f3ba24ab43f526e653ef2dd426fa8159973fc0f1",
+      "bytes": 925,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "870532bef36d7e28e8decf6ff152b131a6db5ef7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_mk6/include/neopixel_definitions.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "252c624733f2aee65be51b363f46957658957a78",
+      "sha256": "f6fa43c14db9394bdc409bb63978b58a27aff340f4ba125bf27dcaedc7be6a32",
+      "bytes": 1086,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "252c624733f2aee65be51b363f46957658957a78"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/button_positions.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1654a12591cfe9fcaac781eea53cfba1507ab140",
+      "sha256": "1bfc10fcbbfdd38dd76e4fd9bc7567272fc5c56d8b61eb9faebf0f931da5e745",
+      "bytes": 4539,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1654a12591cfe9fcaac781eea53cfba1507ab140"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/glyph_pinout.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "82ad7af430b4d7fd58d58511cf414b52bbcc10c8",
+      "sha256": "70274b04cf82ef037932afd75b51260e9c1edbe22067106ae99ecb8c0b4b23b2",
+      "bytes": 355,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "82ad7af430b4d7fd58d58511cf414b52bbcc10c8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/matrix_definition.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "60c6e76058d7b6a9d213383a21c6f55ccc8a0653",
+      "sha256": "d6044350481f23f0c38b4b95edb10d8fe8a085d2cd034a6e74220c2cf80ecbce",
+      "bytes": 989,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "60c6e76058d7b6a9d213383a21c6f55ccc8a0653"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/glyph_protoA/include/neopixel_definitions.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6a661fbcf244dd01ce88e3f52542e4d8bad24141",
+      "sha256": "125bb5e45b15067fa36de64747775f71226fe478bf43a63dbed8096240c7bef9",
+      "bytes": 1039,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6a661fbcf244dd01ce88e3f52542e4d8bad24141"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "config/glyph/meta.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b875b765da097f247823d9550b9d417b0f657656",
+      "sha256": "22e3d23a7b596aa99da26fe86cc83e9e24d57b40200f702b9289e94cef2d8655",
+      "bytes": 129,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b875b765da097f247823d9550b9d417b0f657656"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/comms/B0XXInputViewer.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "47713956220032521addcefab1ba89425a3c067c",
+      "sha256": "3c64aa64e551830da8c4779686e2f289457dcdbe405319533b9bc8a44e14833f",
+      "bytes": 508,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "47713956220032521addcefab1ba89425a3c067c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/comms/IntegratedDisplay.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "743c5e184e5a9f14f17a8d00a534fe40279a3d52",
+      "sha256": "8b66db83f79a251ac1d6fe80ad88f131c973c3c7b5191579ec787dc2423fdcae",
+      "bytes": 2148,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "743c5e184e5a9f14f17a8d00a534fe40279a3d52"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/comms/console_detection.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9ddea46d534af36bb828dd23caf839acc0952ad9",
+      "sha256": "dfde769f360b8cac0b9e0deaa4d2f35f53d26f0f3c6fff769e6727d31b8a7e8e",
+      "bytes": 195,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9ddea46d534af36bb828dd23caf839acc0952ad9"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/CheckedStorage.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2993ab7913faddbc7814505ae6be4ab9dea86ad9",
+      "sha256": "5813a3016aadad0fcb31d87a15b82362e38468b957eb7a589b185ce54ee2707e",
+      "bytes": 2755,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2993ab7913faddbc7814505ae6be4ab9dea86ad9"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/CommunicationBackend.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0ba7dd49b5d174a4fc1245fc633e41401fd13e9e",
+      "sha256": "27926c1f7a3c8ce765e17ab200367795d323f2fa3450b8f1ad2e2185117ac494",
+      "bytes": 1015,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0ba7dd49b5d174a4fc1245fc633e41401fd13e9e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/CompactConfigRecovery.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b1bf503cc8642f2ff5c2b8a7d210f02623176b6",
+      "sha256": "d8ff4e60420c5964c5d6ab863a4e28cc737a4fc7491eaf26043007846ce3dfc4",
+      "bytes": 708,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b1bf503cc8642f2ff5c2b8a7d210f02623176b6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ConfigWriteCandidate.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "be48821fe89942408ace4cc2f016215b538b3869",
+      "sha256": "7f45aa7acbb8e3985a91af4bde26f4bd5aefcfb59154f7cc740775f93c56c24b",
+      "bytes": 286,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "be48821fe89942408ace4cc2f016215b538b3869"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ControllerMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0a3f9c180bba39e83bef3ef45e95b405dfa22ffd",
+      "sha256": "f45832e3f6a764e8b2720da3c4591f5989b835513619bcb1f238e26f5986f16d",
+      "bytes": 1228,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "97136730b3fa05b61c9335f7950ec39a5b1c5dab"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/InputMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f0a219777566bf8c0d0a3b023aea5e73352990a9",
+      "sha256": "07de8d5f1d72b9c25a18b152e57c958839d4e6abf30b4ef18effc5035f35e832",
+      "bytes": 695,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f0a219777566bf8c0d0a3b023aea5e73352990a9"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/InputSource.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ad3fa9bb10f606186fa8b6527a47678155bac538",
+      "sha256": "10c5e42a7c624ff89d3ab14389a071fab9f332a973fff7db3791358334aa500a",
+      "bytes": 340,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ad3fa9bb10f606186fa8b6527a47678155bac538"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ModeSelectionTransaction.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e4586fc5e56b95cdfb06b58b436d2c17651cc27f",
+      "sha256": "b2e90f0115cc8dc23f972c57e15f74822a95ed1776b8be820bb1909de5ade5ba",
+      "bytes": 3873,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f0f3eb17e538ede40e1c9cce1f44e2a54113e4bd"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/NativeTargetMetrics.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2ea10b8e21f07cf54477d0947926a3d36045d51c",
+      "sha256": "1f5dc61a2c0556de9c1501677ff0661674a91ce03a2b33669c9251a406bdfcaf",
+      "bytes": 1301,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/ProfileSelection.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a53bf8d2219771a78e768a41de35eda49fac4131",
+      "sha256": "40bb7799d69f139e9a7ab3eb705853d3e06877e304d840f147e60e7d85542ce4",
+      "bytes": 4509,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/ProfileStore.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "288597e49483c4b52df710fa21b3224c03ebb13a",
+      "sha256": "856ff4be33c61bede3ff19959b48eebf3ed308ee9ac8132e791d8713c7e20aa1",
+      "bytes": 10354,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "25ed2c73df3e8ee886a1f86c6c39afb556ff0926"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/ProfileStoreAtomicCommit.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dd6fa36de5ec37103c4de051b7e464ce91c7e32f",
+      "sha256": "2ff1ed344b3f79ea7798ca68665b90ba5d684de8fb818898441b441bf9f14cf9",
+      "bytes": 3938,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dd6fa36de5ec37103c4de051b7e464ce91c7e32f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreCapacity.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a8575b035322e92f7ae627f1a8369ccbccf2c53",
+      "sha256": "7c63893a21efd5cf75926c83e107d4e3e36b456ffc6353e0cbe93f15879dcc9b",
+      "bytes": 933,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5a8575b035322e92f7ae627f1a8369ccbccf2c53"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreFaultControls.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fc596cd7a257a3c8bf31c9ef03f6325d0e4ccca6",
+      "sha256": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+      "bytes": 3394,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fc596cd7a257a3c8bf31c9ef03f6325d0e4ccca6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreName.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c9899943e519b9c979767b2afffb7961921120e3",
+      "sha256": "3d1b30552c2e4eff0f515714d3b70cb346a5eefcd6fb67205e824c8d3775aeef",
+      "bytes": 1062,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c9899943e519b9c979767b2afffb7961921120e3"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStorePaths.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c7eeba1e7e2370d0459af150c948a84c51b580b",
+      "sha256": "e2919e14fd17f820eb604a20117dc0fd33ee104aa53960607dd5f8eeb6c412e0",
+      "bytes": 2165,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c7eeba1e7e2370d0459af150c948a84c51b580b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreReadTrace.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "50f966e3ac42bd9f2a9735212cdddeb4e206b3e7",
+      "sha256": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+      "bytes": 1113,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "50f966e3ac42bd9f2a9735212cdddeb4e206b3e7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreRequestIdentity.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0ff089d37fd063bdb642f31643305a5a8d1985f4",
+      "sha256": "a0ee0e8d0d6d2c9f40404af3643a671ed405fd640a00b681b0664f8f663c3bd9",
+      "bytes": 1315,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0ff089d37fd063bdb642f31643305a5a8d1985f4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreRxDiagnostics.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a7ced0595c2a1f3bfed150f2d834d210b6928420",
+      "sha256": "123f0e55754d8ad9b3e91b8f0f29f8e4360f428765af88e545d74d3afde26624",
+      "bytes": 693,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a7ced0595c2a1f3bfed150f2d834d210b6928420"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreStorage.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c9b3993eb47f1960eab1761507b8ef8d46b99664",
+      "sha256": "c68040e69214eb13404f6945caa6d35f4069809797ebf77c0ff7186169050efc",
+      "bytes": 7657,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c9b3993eb47f1960eab1761507b8ef8d46b99664"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ProfileStoreTransaction.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e94d0287b3dbc4d12ab20611f521cbfec7faf327",
+      "sha256": "af647f116534fac3f10c473d11c8c93347d25b541efa8924c13454e34686f5ab",
+      "bytes": 324,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e94d0287b3dbc4d12ab20611f521cbfec7faf327"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/RecoveryInitialization.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9f9b33e8ad9adfde82cb98ad4b0fa4a23c8f9159",
+      "sha256": "af91a4af2a5c4acbcac37a905af4a4038f11b6300bbc9476b2fa362995f1710a",
+      "bytes": 1446,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9f9b33e8ad9adfde82cb98ad4b0fa4a23c8f9159"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/ResolvedInputContext.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3f6eda664d9389c3bb396828b35ac157a54fc82a",
+      "sha256": "52bb4f647cb78595f1d670bd53b2944fb2711685acf99b6ef8370a8142db4dea",
+      "bytes": 243,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/ResourceDiagnostics.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d003dd644069307364fc86a48e74ce3c5d9b3763",
+      "sha256": "00cddf0ce9bd9a34c0f3daa54fd3f909946ce9c17f0a9ce9dbe3dfa28e8715ad",
+      "bytes": 1178,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d003dd644069307364fc86a48e74ce3c5d9b3763"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/RuntimeIdentity.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "544712ee7aea6114c79d0079652728ee9da224fc",
+      "sha256": "0450362343a148cc647272a7671ae536578caca8edf8ec075dec3db2d139090f",
+      "bytes": 4089,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "44fa0ab73fdc8f279f53d811060d04af52c1f1ca"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/RuntimeIdentityService.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "13be4dda32f4ce4dc6fdd6572c7560f804456e18",
+      "sha256": "fa7695213529918e52676cbe3d6ed3af435eeca0795f944662141d3a8111c5e7",
+      "bytes": 5114,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7324a0fad301e2652b16191aa5e003f24e40db40"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/RuntimeIdentityWire.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "be03fe1f90f941619432f65000b3a70f038e97e6",
+      "sha256": "f613fcdcb244b00da2d99a24b784784936e0a44fc11c8668ed1da90ed15d1197",
+      "bytes": 2841,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f73d75873db0c35705113e5d7560228c9e8a7796"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/RuntimeProfileDigest.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "41b13296c5cfdc0529b0c5c37c69bd8ea7229941",
+      "sha256": "d882efc236d334e5b8ecb403d1d5c99f8bea0539afa788e267a28ddb7a786ffb",
+      "bytes": 921,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fa854501c8e42a896f6e306baf07003111893c90"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/core/Sha256.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a14d952f2f4d4c70c9a5a3005136978f3e64b440",
+      "sha256": "ba6080472c663e99489e378382af6ff3718ef8f737f9e7aaf375b4f187fa9e83",
+      "bytes": 3093,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a14d952f2f4d4c70c9a5a3005136978f3e64b440"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/StackWatermark.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "47c4a4ce0cb63c0cbc3717fb8324f0132e762aa0",
+      "sha256": "7b87846fa11a0910ec0c4fc6c5fd5520c78dffd6bce1015c335983ab9845f236",
+      "bytes": 844,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "47c4a4ce0cb63c0cbc3717fb8324f0132e762aa0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/config_button_validation.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb",
+      "sha256": "176cec58249c48e51d418af0af9f64b4d6b8942d4c53c6a8b6f519dcc9c3193f",
+      "bytes": 627,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1b6e3dc98a9b6c0eb1f04e077c86382eaee324bb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/config_rgb_target_validation.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c26d9c02d8441c23da7e1c0cf22b81833d91a9cb",
+      "sha256": "f75b4229ec193c172f9bc8b1d38a44a29d34b039763542a9788bda2974c35a0f",
+      "bytes": 871,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c26d9c02d8441c23da7e1c0cf22b81833d91a9cb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/config_usb_default_validation.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b91148336567287b17cc0b73cae0fddc5f39aadb",
+      "sha256": "d08a1a7489933bf64480c94334accfa714644a21874bf5f1e9660cd66c52cf11",
+      "bytes": 184,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b91148336567287b17cc0b73cae0fddc5f39aadb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/config_utils.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6d8fa67d146f3700f9add9181667e4da69b5b262",
+      "sha256": "c4aaf06ebaf36422510a9f746bec20cbdc87bef099de2981c456719c637e076f",
+      "bytes": 2459,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6d8fa67d146f3700f9add9181667e4da69b5b262"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/config_validation.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3997e08acc81db2bb197af6c6140e17e8410bf87",
+      "sha256": "1c73c8b2ab2c0ded58f8023e1236cc28af8e3c8d76d946a904708074f9849fc2",
+      "bytes": 898,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3997e08acc81db2bb197af6c6140e17e8410bf87"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/mode_selection.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "20ef654ab816c0612f94edd65d092cc5261435d4",
+      "sha256": "f3ee863138396ed70d4bf6a194dba0aa9a2a0335ec7373426df990b37cf9c059",
+      "bytes": 1044,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "20ef654ab816c0612f94edd65d092cc5261435d4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/pinout.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "794268925073d9235d7b26ed71ce57ede233d528",
+      "sha256": "6ec5dcf6130383825a1fb5c0ce573a563a97719d7015cef68cb4c7e7cabf906a",
+      "bytes": 284,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "794268925073d9235d7b26ed71ce57ede233d528"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/socd.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d912b274ba54fde5e07a575cf9bec84da07c9bb",
+      "sha256": "88ff9be552e89f0c92a1548662fc4bf9b6fd4408b242f6f42bec8ecf70e6fc91",
+      "bytes": 794,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d912b274ba54fde5e07a575cf9bec84da07c9bb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/core/state.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ff3aa94df61fd6a41448799fa1d6f508c41ecd0f",
+      "sha256": "c46eb5347843ac4574dcffb28faeace608f029c27b94690c02ce06981cc4e6a3",
+      "bytes": 3723,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ff3aa94df61fd6a41448799fa1d6f508c41ecd0f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/img/remap.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c0f50e5691a098dbc9dd50348e1cd352e3c5d775",
+      "sha256": "62cd1efb2f2fa30089b4a11f236712c582cf3b99b23dc350676cd2f858f1fbff",
+      "bytes": 6415,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c0f50e5691a098dbc9dd50348e1cd352e3c5d775"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/img/remap.png",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1a60e1ec301b014f1d43212974fe93545a576583",
+      "sha256": "11b0ecd17f556172d315894a7e44f71bbf56781249defbf94bfc0aa425921418",
+      "bytes": 601,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1a60e1ec301b014f1d43212974fe93545a576583"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/img/update.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "06d897ff3b884a37960cfa767dcc2fdd0ee88d91",
+      "sha256": "ae7cb4bd3ea6d3e8d1f581b75612bf0f1254cde142b37c494e2bc7087fcebbcf",
+      "bytes": 6563,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "06d897ff3b884a37960cfa767dcc2fdd0ee88d91"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/img/update.png",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6d98a7d28260ecfbec9a251ad535efea0af91950",
+      "sha256": "93024b400be941f7c08d5fba07fec56160f1a51212cc7f7f6af42477edf0d026",
+      "bytes": 531,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6d98a7d28260ecfbec9a251ad535efea0af91950"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/input/GpioButtonInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fdc4c9b68ff4d8ebb2265cd9fbca40901e9d800f",
+      "sha256": "bdc492be32684546c2c77a307e934a9227243c582b1beed917ae7cf266de48cb",
+      "bytes": 670,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fdc4c9b68ff4d8ebb2265cd9fbca40901e9d800f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/input/SwitchMatrixInput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d499de645867413f1eda280afd292640c7dcbc39",
+      "sha256": "9f7fa65db078877d53cc851c8a906ac6c37ddbbb615f28266fc35bcd301f88f6",
+      "bytes": 2953,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d499de645867413f1eda280afd292640c7dcbc39"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/64.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "52983b70702b57f752e8e96cabf857255cba57ea",
+      "sha256": "2839f6573877ff438e674e8e3c406850e02c2624bac7c79975cbe637e3b99442",
+      "bytes": 508,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "52983b70702b57f752e8e96cabf857255cba57ea"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/CustomControllerMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9658f5e15f50887caaaf5a71efc0096e9677d144",
+      "sha256": "8df7cb8fcb3245961e6bb8fee3ba44a99b5896fbd0f75f458173cc99afcb4414",
+      "bytes": 1220,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9658f5e15f50887caaaf5a71efc0096e9677d144"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/CustomKeyboardMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "79a2725ca7703dfdabbd1c186d197e2250122c86",
+      "sha256": "c907de266f4ebeea8518511cf725c57bf52c85c0c9827f25cc2a7d20381f9464",
+      "bytes": 451,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "79a2725ca7703dfdabbd1c186d197e2250122c86"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/DefaultKeyboardMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cf1a0b3e62c4d8ddb1c11d51dde5188b3d21a703",
+      "sha256": "5fd3dbe2d6e377dcb13e5f58eea8b800c1477bcf84d8b4321649314edd1b2a75",
+      "bytes": 296,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cf1a0b3e62c4d8ddb1c11d51dde5188b3d21a703"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/FgcMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cd197cbe7c84c63cd675b81b1315250523894dcb",
+      "sha256": "90b854be77c26b268399f0f6d3849e27f804f83b4ab61eaedede34d83353da78",
+      "bytes": 482,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cd197cbe7c84c63cd675b81b1315250523894dcb"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/Melee18Button.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f2eb70b37e4e84e4646f239ba518b99b1a784da0",
+      "sha256": "cc80c0cb76c0714b42eaeaaa9819093f6d2ddf18dda9ec09f2f430651f5b4e11",
+      "bytes": 631,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f2eb70b37e4e84e4646f239ba518b99b1a784da0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/Melee20Button.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c44baed2ea01e075ca115481928e8003a702ec72",
+      "sha256": "38dfa8a874455d3f865c722bf6bfe4ebf607292085375440cb46ccf294c53cd6",
+      "bytes": 626,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c44baed2ea01e075ca115481928e8003a702ec72"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/ProjectM.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cd730fbb6868bcd9bb71708ceee7b35b46cfae21",
+      "sha256": "35f2e3695bfc8c209400a5c66f2ba81f02341ed22f24591ab044beac09c9d115",
+      "bytes": 719,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cd730fbb6868bcd9bb71708ceee7b35b46cfae21"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/Rivals2.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7cf4ff25a848b01829533e8e8e5b3aee959b4d82",
+      "sha256": "90bfc5ab82915b63f41504c78a50e8e8565df44734c36016428b3dba3f5b20dc",
+      "bytes": 422,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7cf4ff25a848b01829533e8e8e5b3aee959b4d82"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/RivalsOfAether.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "130e4a1d348e0a6160e5ea4a57cb30418c71546f",
+      "sha256": "5feadf8205b79807bd467184aa0a195e07fcc090af367010a7aaf3e77d0afb0e",
+      "bytes": 439,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "130e4a1d348e0a6160e5ea4a57cb30418c71546f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/SenscopePrototype.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "136400741b59e189d9bd334ca659c8ae19fd7aba",
+      "sha256": "8c17dd70815e30e356355cc7f28a199441f92872d63dcae6277ff86ae609bcd1",
+      "bytes": 737,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "136400741b59e189d9bd334ca659c8ae19fd7aba"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/Ultimate.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "daf23ec09a8b4196465c947c58a4f51650e07517",
+      "sha256": "1773c2c8f5649640f0b403b4028016265f7f8e110f080dda446ee162deabcb2c",
+      "bytes": 1688,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "788b4f31a87bc1e55ccd5a10ca0c965dbb5dff69"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "include/modes/UltimateNativeEvaluator.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "552759a3d7c1ef113dbf7b7bb4152d6365332d6f",
+      "sha256": "9c080b6444efac9f302a10975948c26b8d38c7d7c22caa4ba26baf5cb3bc3a52",
+      "bytes": 832,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "include/modes/UltimateNativeProfile.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "933abed2b5fbf5725d0d5cf337180ea77ffaa0ee",
+      "sha256": "98983da977093dd226c4570dc0c9ae5ea48f794d65fab70d0dc9f652aa6b8f59",
+      "bytes": 3088,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "include/modes/UltimateProfileConfig.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0fcce0697a69df7de1d00e4da51a70962d5f91c7",
+      "sha256": "2eba575ba8ace466426e94fb68614fba297730a3fd092e044d9dc83e48eb1bd3",
+      "bytes": 1225,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0fcce0697a69df7de1d00e4da51a70962d5f91c7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/UltimateProfileEvaluator.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b37d1c6134bb64674555b4fc9f87483e2ac1590b",
+      "sha256": "e7a68817e13a11ba7e9e88c112fc3ade46e40c5d75fa94060896be70f4f722fc",
+      "bytes": 9814,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b37d1c6134bb64674555b4fc9f87483e2ac1590b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/WordProcessorMode.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "686d3f82ccc9378f5f9ca0bc1a9ac7b7389463a3",
+      "sha256": "4a71d99de878182377d810209adb92c0a6281d62c7701dfd16f9665ac13c50af",
+      "bytes": 622,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "686d3f82ccc9378f5f9ca0bc1a9ac7b7389463a3"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/DarkSouls.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3b2fa8d99eb0b1f02771da31ab28183ce408b98f",
+      "sha256": "f88664aa5496b01e181995d27d2540884c7df51f0bc645910595e2e69c0543ae",
+      "bytes": 429,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3b2fa8d99eb0b1f02771da31ab28183ce408b98f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/HollowKnight.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9668e4e313919ad9d5f0d48cab7ee888dec2a2c7",
+      "sha256": "2ee4a18947bcefb5a047aca0e96885c9220e60eaeccd2b35cc091808d1086849",
+      "bytes": 482,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9668e4e313919ad9d5f0d48cab7ee888dec2a2c7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/MKWii.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "02d7074639783138eade09b0088503719b175bdd",
+      "sha256": "00449d919f23e47357089b3fa113307a8b290d717b8f224235d1b5020134cf19",
+      "bytes": 413,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "02d7074639783138eade09b0088503719b175bdd"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/MultiVersus.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ae4abcc7757b97e1065af7fded0bb6af7d11a057",
+      "sha256": "3c9270177fce9f2604fb1b4eac8c5eeed9fcb112953d1b6f6ec1eba331e527ce",
+      "bytes": 456,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ae4abcc7757b97e1065af7fded0bb6af7d11a057"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/RocketLeague.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "032b514d6e42d1ace44879eeacdb47a7472d888c",
+      "sha256": "59798c9b4d3d1f295b1df1473def893fc313f7f95a11a144ee93814295e58ef4",
+      "bytes": 441,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "032b514d6e42d1ace44879eeacdb47a7472d888c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/SaltAndSanctuary.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2b85bbd60a12126117cfff306635c19f717e56b8",
+      "sha256": "c848bf3429951dc8f859b858bc434633746d7a2d50b277a15846f0cf5c946e79",
+      "bytes": 457,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2b85bbd60a12126117cfff306635c19f717e56b8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/ShovelKnight.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cdceafbd0ebcb3c472da0b1e11d7210fce150ef7",
+      "sha256": "ddb1a9a9ce2ccc52312f1457c893078d35c2fa83cb1dbdc75142eb2d537c6e8c",
+      "bytes": 458,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cdceafbd0ebcb3c472da0b1e11d7210fce150ef7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/ToughLoveArena.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7f5d0fd0d605afc28c481373b992fdb4290ec393",
+      "sha256": "c9b38505dc4ffc5d1b8a3192761d9030ad3e5e80e1104d1d40635be0a432350f",
+      "bytes": 301,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7f5d0fd0d605afc28c481373b992fdb4290ec393"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/modes/extra/Ultimate2.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "88f2d69f495228f9ab4767427c721f32554f8a0b",
+      "sha256": "0b6cd1f76a9fbfaea3f3e47e98b24ead82f2a482948c7f1a269806eb00adbeba",
+      "bytes": 443,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "88f2d69f495228f9ab4767427c721f32554f8a0b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeBuildFlags.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0326fe08999152deacfdde97c06a1020fe31eb32",
+      "sha256": "0486efd34d98a2a89620bdf3159a609e5c3bb3b1d0170db1380446ec5c75ff4c",
+      "bytes": 410,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0326fe08999152deacfdde97c06a1020fe31eb32"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeDigital.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2bf3e0dbdfaa46fb22678adf54181aeece229ef7",
+      "sha256": "d08c02c66b0258c9d9bbae9d53a04f1375edc6f3a8579808c2609199dac475e7",
+      "bytes": 1580,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2bf3e0dbdfaa46fb22678adf54181aeece229ef7"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeDirection.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ba4253d2239b49565f426dddb150793cb231ee0b",
+      "sha256": "c9b1e29aecaa6993f12324503a8631f9625c8917883677cca3ff7baba05a5dd3",
+      "bytes": 1637,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ba4253d2239b49565f426dddb150793cb231ee0b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeForce.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e8e5a39a7f7a20b6167679988c18275bf5187166",
+      "sha256": "c3ea72442fa9ff1ac263d24453da61d6ceaa061d4a033251d8a4d47be1e387be",
+      "bytes": 2660,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e8e5a39a7f7a20b6167679988c18275bf5187166"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeModifier.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "09b09dd7e2259c86baaab4748139d2b5dff2ce8e",
+      "sha256": "14aaddebe44ac170a53889564bf3202a9d28cb6ed79f4ebf7f9d344f04f16ca8",
+      "bytes": 1796,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "09b09dd7e2259c86baaab4748139d2b5dff2ce8e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeOutput.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "26b508034eb913ea367f0e32f7c3b6def11dc5b2",
+      "sha256": "7e79a6b10b35dd56fbc49a38b14caa796ce05f7acf9eefb04e549a334070af29",
+      "bytes": 3653,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "26b508034eb913ea367f0e32f7c3b6def11dc5b2"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeResolver.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e90259cae8dd55059e9c3e1ccafd00a048d4b1b0",
+      "sha256": "001f6b923bbab6917f8a86030e2235550f2b865ce40ecc273a072c7456dd9fc5",
+      "bytes": 2281,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e90259cae8dd55059e9c3e1ccafd00a048d4b1b0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeSelfTest.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "93f8bd5ed7bf63d40f98fafa1e4a1ade678bfaf8",
+      "sha256": "39d0151759e199e2e70e1e74716e1beff8b38f8d5fb6f38efac8ea28b1e2d0a1",
+      "bytes": 3197,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "93f8bd5ed7bf63d40f98fafa1e4a1ade678bfaf8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/prototypes/senscope/SenscopePrototypeTypes.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "64ebfdb3eb46cb75718d18f6f7d5a7be9c34202e",
+      "sha256": "1c3cd07ddcee4ce1cb4f5d33b66392c88b7217bf5dc9d021a1cf058bf4c5d0fe",
+      "bytes": 9152,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "64ebfdb3eb46cb75718d18f6f7d5a7be9c34202e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "include/reboot.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "506e0c5784eaa9d5da632e05504fef4928b20e52",
+      "sha256": "bcc6237cd7c3b85e263cdfd2f265aaf257537a75fc6518acb4edf5f0ab14ef6d",
+      "bytes": 98,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "506e0c5784eaa9d5da632e05504fef4928b20e52"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/TUCompositeHID/include/TUCompositeHID.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dce350df36575cdc43a532896cd25ac8d5527a9f",
+      "sha256": "a1b6a39213696018fb11e7694baff07c255b042b9bfce5989592a2403031763d",
+      "bytes": 271,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dce350df36575cdc43a532896cd25ac8d5527a9f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/TUCompositeHID/include/TUGamepad.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2e4c33a2a9fb01a31307e563edea2dc9f22470a2",
+      "sha256": "4e8b6b3ad56bfa5506a5febb5a4c018b7ac68fc9d35ae926b7ade55fd2a61c06",
+      "bytes": 2838,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2e4c33a2a9fb01a31307e563edea2dc9f22470a2"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/TUCompositeHID/include/TUKeyboard.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7e4305865e63483e98f7d902d6f43a0a112c808f",
+      "sha256": "29421cd802dc74ffb930ffbff16045cc3764d4129327751b0949d3dbb873e7d7",
+      "bytes": 558,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7e4305865e63483e98f7d902d6f43a0a112c808f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/TUCompositeHID/src/TUCompositeHID.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "acaa6b8c0732423de785132834d680b04b95bd5e",
+      "sha256": "8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294",
+      "bytes": 890,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "acaa6b8c0732423de785132834d680b04b95bd5e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/TUCompositeHID/src/TUGamepad.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "aaefa0940928387fc850650eefd18239a73e0821",
+      "sha256": "b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e",
+      "bytes": 6494,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "aaefa0940928387fc850650eefd18239a73e0821"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/TUCompositeHID/src/TUKeyboard.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d3ac6cbc5c1604bcb8bbe3bcb0b7fec16b032cc3",
+      "sha256": "bc046bbf1b998caf53bc58deed4b4927da050a9e3d24cf9a1e7da0373ab41ca9",
+      "bytes": 2369,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d3ac6cbc5c1604bcb8bbe3bcb0b7fec16b032cc3"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "lib/glyph-joybus-pio/LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0a041280bd00a9d068f503b8ee7ce35214bd24a1",
+      "sha256": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "bytes": 7652,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/UPSTREAM.md",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c7689f011efdd5155b95b0f44d2366c0095a2fe0",
+      "sha256": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",
+      "bytes": 1086,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/GamecubeConsole.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c516951e9172326581beeab71e89729a6eca5df2",
+      "sha256": "54d2ced01964d91c2f8858f62b0b0b083681ba57bb5698a716f68a00ca29f2fa",
+      "bytes": 3383,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/GamecubeController.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "05bbeafbdac25b6a424f370a701598c9084f40d6",
+      "sha256": "60171271dc96bdc0e89a58379806a32d4bc9ac11772b7bef63bb34551f638e99",
+      "bytes": 2440,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/N64Console.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1e4508404042f16c6189b95a5e744048fa6b95fc",
+      "sha256": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+      "bytes": 2331,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/N64Controller.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9a3cac2cd7396b54225b4b0e940817176bdf5201",
+      "sha256": "1b190c1db980b628376c8b2a70ce3928effe2fdfa6dd847fd2658b076ae980ef",
+      "bytes": 2397,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/README",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "45496b1f1ed67fa9e900d9d20258b6560fddb024",
+      "sha256": "d1995176b3585fd998d0094d692fe9daf37b9dd6b3ef5dcd3b44914bf154dd9a",
+      "bytes": 1425,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/gamecube_definitions.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7bf54f0f3ec820f6d5943cdba5f3450eb77b8e41",
+      "sha256": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+      "bytes": 1609,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/joybus.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dffd5cb74462a3f4b7e7a29d4328568debf0105a",
+      "sha256": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+      "bytes": 3694,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/joybus.pio.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "766455ee1cfba55666535184c32cddc914f4ef59",
+      "sha256": "22ef77997e80d886f058484c06b9cf6521682dbdf10c40d8225e15ca028519e3",
+      "bytes": 3225,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/include/n64_definitions.h",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e1718206cea79452748a5ef49ac97f67c33a9192",
+      "sha256": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+      "bytes": 1233,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/library.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3a49ea2e88a5015c189620f2be1c5f86d412f5ca",
+      "sha256": "30ad48b1bb69e5019f4ea94d948c90bea29a478df72f28d52066fa7e8b842b99",
+      "bytes": 63,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/GamecubeConsole.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b3cb6bbe23833bb7374e146dc8b3640d2d01fe69",
+      "sha256": "ab05eed54f34138ef2693c724eb6607a99e453a921bf6d308845739b5d7e09a1",
+      "bytes": 7812,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/GamecubeController.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "05830440a72996945e06914d25c1be614c975e4c",
+      "sha256": "d2a57d444ea7062e567bbbd35934dcb0974b483bec895ed4e618d29ed7470e5d",
+      "bytes": 3031,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/N64Console.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fbc9537bd1fa30160dec5ec47b1334921ef45ad4",
+      "sha256": "3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41",
+      "bytes": 3417,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/N64Controller.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f960aa9b5645ebb3f0f161d64d8055698b788942",
+      "sha256": "4cb9727eedf90442417f60e7ea6464ae65e1ab62e050968bfc21da2ab24932ed",
+      "bytes": 2871,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/joybus.c",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0fdf1a1ffd2b9d5373ba8daa564cfd56e9936741",
+      "sha256": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3",
+      "bytes": 3649,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "lib/glyph-joybus-pio/src/joybus.pio",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1898422bafe4ec091fbb0bd79706f4ea775eafc6",
+      "sha256": "17b9d52460c8b9e2d57fe649b1a64e0f523140a0bc58aca0b8929120d8481ba8",
+      "bytes": 2897,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "platformio.ini",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6caf9ed3be0febce79162213deea7bba8a96c122",
+      "sha256": "f010ec52c8248dcc261e0cc1d1ac6b567d06448d15861019e6207130d96ebcba",
+      "bytes": 3465,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2eb93d6ad302bb955d517ce50349450a3107eb49"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "schema/haybox/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "58b60343549e63c6279f6e778030d4bf4ae5981e",
+      "sha256": "763b498457a656436304bfe04799f12018be8a6bee69ea0b69c80e601b3a1a43",
+      "bytes": 471,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "58b60343549e63c6279f6e778030d4bf4ae5981e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "schema/haybox/config.options",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a68be0a266a45b7d536778194f3b2f12fe97d18b",
+      "sha256": "d2f886060b40a9d61810904990f40ea252bb60c4b6d0717d3d145ffcb7855db1",
+      "bytes": 6441,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5ee6b8d02f295bf77f5a1d987ecb45e009cea0de"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "schema/haybox/config.proto",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a678e2daac7e6d265020b6b707785a58a3db4d99",
+      "sha256": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+      "bytes": 33965,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8f347aeb0f565d2a65231e1ffa792a3cca7e96c6"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "scripts/build-glyph-mk6-quiet.sh",
+      "mode": "100755",
+      "type": "blob",
+      "blob": "e35164eeb512cec678a2f138b2b13f2b52263dc6",
+      "sha256": "328ff73b9f1da1ccad5d7ee0431b664b9c33a70c35959e4a14f6677881844eeb",
+      "bytes": 349,
+      "canonical": {
+        "mode": "100755",
+        "type": "blob",
+        "blob": "e35164eeb512cec678a2f138b2b13f2b52263dc6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "scripts/build-glyph-mk6-senscope-playtest-quiet.sh",
+      "mode": "100755",
+      "type": "blob",
+      "blob": "ff5f34f06be5218670c13098b7d5df17bf97c327",
+      "sha256": "ba43d4b4509f0b7096fd2adf4f6ad7da1a9f5871b6e7a2c2e4d648f36d0efd7c",
+      "bytes": 421,
+      "canonical": {
+        "mode": "100755",
+        "type": "blob",
+        "blob": "ff5f34f06be5218670c13098b7d5df17bf97c327"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "scripts/pio-local.sh",
+      "mode": "100755",
+      "type": "blob",
+      "blob": "deaabc271a8268dcd1f29c473f48beadf979cf7f",
+      "sha256": "3b81e400830b30db0a4a194cdb5ff35df61e4d15f13b8d3891e79f2716ee9714",
+      "bytes": 279,
+      "canonical": {
+        "mode": "100755",
+        "type": "blob",
+        "blob": "deaabc271a8268dcd1f29c473f48beadf979cf7f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/comms/B0XXInputViewer.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e9b3dfe4e11011dda0bb7b9faa436770fcafae44",
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e",
+      "bytes": 1743,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e9b3dfe4e11011dda0bb7b9faa436770fcafae44"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/comms/IntegratedDisplay.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "67263adc7fc9520594df39dc85eed8d8973b39ac",
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e",
+      "bytes": 2909,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "67263adc7fc9520594df39dc85eed8d8973b39ac"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/CommunicationBackend.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e4b8ca4fdca9512dbabe08cf291e7eb0ffe0a03",
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575",
+      "bytes": 1619,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e4b8ca4fdca9512dbabe08cf291e7eb0ffe0a03"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/ControllerMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1a4edb3a0a6e908fd02ef6e6967d8b3a3e358355",
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+      "bytes": 3522,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ca74124dec2a4dc060bb5a89c3f0e3b87bab6c4e"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "src/core/InputMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b",
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+      "bytes": 3220,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f1388a1948fc73f7525463db219a53f5af1e6b7b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/InputSource.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6f9b782489a42b87ac9fd9a3b2665a6554cbae7c",
+      "sha256": "daeefea10d724ea5be8c9ea4faeee3d0d8716a4e091a3ce57537604d4b111ad8",
+      "bytes": 63,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6f9b782489a42b87ac9fd9a3b2665a6554cbae7c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/ProfileStore_stub.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fa373b2b7c9713be68303abc14d1168318dc1953",
+      "sha256": "2c4021af6daf08d2f2dc312aa192e1c88524ac0a9f85fcaff837d78c4b0bea3f",
+      "bytes": 2532,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fa373b2b7c9713be68303abc14d1168318dc1953"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/config_button_validation.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "70a7cee746fd42d1cfaff11f6043650bbfcc4c74",
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d",
+      "bytes": 10362,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "70a7cee746fd42d1cfaff11f6043650bbfcc4c74"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/config_rgb_target_validation.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3c4184ebeb66408a2b43e541c1da2978e46651c4",
+      "sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7",
+      "bytes": 3059,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3c4184ebeb66408a2b43e541c1da2978e46651c4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/config_usb_default_validation.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7a442014e0c5176e360ece8b64a8e88c02547716",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb",
+      "bytes": 448,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7a442014e0c5176e360ece8b64a8e88c02547716"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/config_utils.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "beeb1202f67f61ce717e0e020cb3dd339dfa6206",
+      "sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab",
+      "bytes": 2258,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "beeb1202f67f61ce717e0e020cb3dd339dfa6206"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/core/config_validation.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2d7f0683ffaf65b451da5d419d34501173dca9b8",
+      "sha256": "bd91ec9807a1167eded5c7588cb49b8f7ebebdd3379150a1c1d0f8336e966822",
+      "bytes": 23117,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "175b2eb08b2c2f650330b413d9e12473d11a0c72"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "src/core/mode_selection.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "24a5978e850a697f722d660db3cdee773086517c",
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6",
+      "bytes": 10045,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cbae52f6ae93e7a16362c9e873dffa1744420616"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "src/core/profile_selection.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c9fdc572384cc4f97e6c61b47958f4d31dfaa374",
+      "sha256": "c8e42e80b50381c699c99e8c02cc77ca0e71e364b14f4bb83db46300c27208ac",
+      "bytes": 3681,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "src/core/socd.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "81a0d53fae96305c07d5943f4785b33b02ca1949",
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+      "bytes": 3105,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "81a0d53fae96305c07d5943f4785b33b02ca1949"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/input/GpioButtonInput.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "69fc2ee1cfb877d769571554830b859a4d5c73b8",
+      "sha256": "df29717f747bf8e95dd9d9382c10dec5b94d3ff7e8d4c8521b8bb02cb8c2323d",
+      "bytes": 950,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "69fc2ee1cfb877d769571554830b859a4d5c73b8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/64.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7c65c0c7ee0579e133c358f5357b3200e1531a1f",
+      "sha256": "ee374d38fc3293e884e97dddb2d48a0fd410a9a4b84f5311206f3b5921a4ca49",
+      "bytes": 2186,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7c65c0c7ee0579e133c358f5357b3200e1531a1f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/CustomControllerMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85",
+      "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31",
+      "bytes": 6304,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8cb336f31acd4c324b3ae1f8ef0827c14f15ee85"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/CustomKeyboardMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8",
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def",
+      "bytes": 868,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "60c7c69ad77e6c3acf931fdd3ccf1d448701c7f8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/DefaultKeyboardMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c016527ab7763210745c00e02d10e14948004354",
+      "sha256": "120f9cbe1909660c176b7bd49ff1a5c23b90e6f0e1db49c6b95cf2d3e448b757",
+      "bytes": 973,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c016527ab7763210745c00e02d10e14948004354"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/FgcMode.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d6817ce4481f3fd05598df9052d4db38dcab77b",
+      "sha256": "236de331e38c68a221f44ececf4444b601b3c1e56b1ac20bb6422390720f5ef0",
+      "bytes": 2004,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d6817ce4481f3fd05598df9052d4db38dcab77b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/Melee18Button.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "80dc835778202dfa32ef66a737b2142b8874d08e",
+      "sha256": "b3185ca5e260444f8e7b05c2bb8d60ec0ca9d46ae9d33980dd0b829212f07c21",
+      "bytes": 10820,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "80dc835778202dfa32ef66a737b2142b8874d08e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/Melee20Button.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b144810d7033dcc12d97ab9979b8a6128b82d4e3",
+      "sha256": "42f9be54340a918172194ecf152bb1aaad8762da9f5f04c4f52925a679929522",
+      "bytes": 12434,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b144810d7033dcc12d97ab9979b8a6128b82d4e3"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/ProjectM.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e321b3254d9c3374d9069cc4c91bfe95f3f0cfaf",
+      "sha256": "ad3b3c1b80e1157a13adb3b3166569f8f955d2f94462426aeb5ea31070a94c2a",
+      "bytes": 8163,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e321b3254d9c3374d9069cc4c91bfe95f3f0cfaf"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/Rivals2.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f464e5e775e39c9030f3c0d9f1ce28345a6933e4",
+      "sha256": "44242d673f75fa417168f69c63075345eaabad6c8ef5b90393ef01b56ddd329c",
+      "bytes": 12403,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f464e5e775e39c9030f3c0d9f1ce28345a6933e4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/RivalsOfAether.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "374687b48ea0cd439bb7ce01c6543d907fedfc4e",
+      "sha256": "ccc04805c353d4beec97164d45ac0a5dfb0792e5816b4cf1882f3ec7a7e80c4e",
+      "bytes": 6348,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "374687b48ea0cd439bb7ce01c6543d907fedfc4e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/SenscopePrototype.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8ef6cdcb35d55011bab35a617414749f4fa64a02",
+      "sha256": "cadadf8668701d6296e69688519e1a0679835150e9135d6e1b5f9369e23d01c8",
+      "bytes": 7113,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8ef6cdcb35d55011bab35a617414749f4fa64a02"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/Ultimate.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "60d0d7a899caf9db8d927076384821b0939cd8c2",
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+      "bytes": 39202,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4d2f14db7e801e67c531fbd4ae789345de8ff846"
+      },
+      "canonical_matches": false
+    },
+    {
+      "path": "src/modes/UltimateIdentityRuntimeTables.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1249b2f8b702eca1522a915e08ae9bd442a74d78",
+      "sha256": "a0563d1c86f48b8e2e4f664b206eee0e11eb330940426998f6ed80d2c5388fdb",
+      "bytes": 3418,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1249b2f8b702eca1522a915e08ae9bd442a74d78"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/UltimateNativeEvaluator.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "48e613a2be0ebea76cd36433a8fe8c8f886e01e6",
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+      "bytes": 6242,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "src/modes/UltimateNativeProfile.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a5161cb62458b1d9753bfc5d2731e3328434ad9b",
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+      "bytes": 14135,
+      "canonical": null,
+      "canonical_matches": false
+    },
+    {
+      "path": "src/modes/UltimateRuntimeConfigInterpreter.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "29a30df2c45e3ae4ce90af47775f0b8f94b8cc83",
+      "sha256": "8354ab72bd8dd9e5b14cebc6658bd08cd70396382d1b7499cfbb940684b76108",
+      "bytes": 13700,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "29a30df2c45e3ae4ce90af47775f0b8f94b8cc83"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/UltimateRuntimeConfigParser.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d432b21f9ea3e0745ccb05b581b33c9c9f32adfc",
+      "sha256": "efc24de83510f214f97a0d72986b3f4b3f8fc0673fa2ee12d74353e373d54234",
+      "bytes": 4268,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d432b21f9ea3e0745ccb05b581b33c9c9f32adfc"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/DarkSouls.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9f4798d5cb1faf6d806be7085ecca70a588f63b8",
+      "sha256": "68d224e9168e68b1f576d08be9ab4966385bdd50e40a19e17018f70eb96202cd",
+      "bytes": 1819,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9f4798d5cb1faf6d806be7085ecca70a588f63b8"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/HollowKnight.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "51503b796240aa516ee7b77e54677780854e7e2d",
+      "sha256": "349f3f39e733762112314205cf4db74127cd71b29e9c521abe86bca60b1b1081",
+      "bytes": 1128,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "51503b796240aa516ee7b77e54677780854e7e2d"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/MKWii.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ab809f32a1280754ed30a6a16bd02e9e2e146df0",
+      "sha256": "fe30535aad13a9b05195cc12e34c5092c951b3987f68b4319b052effabbec31d",
+      "bytes": 1119,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ab809f32a1280754ed30a6a16bd02e9e2e146df0"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/MultiVersus.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "88f112b34422aeecc3b526014460a38da724e1f6",
+      "sha256": "c4c86a703703142ecb4511be70ad811c74f1cb52a82713ee5b80c4d0333ab2da",
+      "bytes": 3888,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "88f112b34422aeecc3b526014460a38da724e1f6"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/RocketLeague.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9225d78c91b34eacf0d6616d83426b7ca5475785",
+      "sha256": "dfdb89b6d94575b1f23d2869f4b650ce8acfb8e76ba0718cac7d14e7d650f01b",
+      "bytes": 2652,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9225d78c91b34eacf0d6616d83426b7ca5475785"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/SaltAndSanctuary.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0392ebc5818c68fd2ea84757635b74ccfc0aa196",
+      "sha256": "088cfd1bc1dfb7e055103a6f8e5323e3a6ff24794a950f47aa127efeece80ca6",
+      "bytes": 1319,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "0392ebc5818c68fd2ea84757635b74ccfc0aa196"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/ShovelKnight.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2bdafd8d0cf415aab86b3edef26615edfdfade1b",
+      "sha256": "635524dd5890548a8c68c13decce46a4463aee3d38119506dbfbb564c639390a",
+      "bytes": 1174,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2bdafd8d0cf415aab86b3edef26615edfdfade1b"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/ToughLoveArena.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e20768a7bdca95a17532d2fd8a3ab7b4318781c",
+      "sha256": "1bb0f372a91d16e8e6f94a94c56b4a9602084b9df0423b0e24851bce657fd39c",
+      "bytes": 329,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3e20768a7bdca95a17532d2fd8a3ab7b4318781c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/extra/Ultimate2.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9397328363ac2cbcaa5711acfaaa1a68d84cf92c",
+      "sha256": "4af4597ad7467be10e92f198e9ea4edcf2ba796dbd3c0e5c36357483d839a3c7",
+      "bytes": 6265,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9397328363ac2cbcaa5711acfaaa1a68d84cf92c"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigArtifact.example.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bac7668aa517d88a43ef49f9468481316a468544",
+      "sha256": "85b0a87cfbc46035e9b255394f2105dd92b9057cad42ec0d606df51d89dde624",
+      "bytes": 7255,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "bac7668aa517d88a43ef49f9468481316a468544"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigBaseline.current.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "40a0b4703b3cbc5800acca5f2fdc3229bd82844a",
+      "sha256": "e9984660752cecba91a2fbc0fc4cbfe1f940f02389d55a3753dd0022c2f0069d",
+      "bytes": 7670,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "40a0b4703b3cbc5800acca5f2fdc3229bd82844a"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigExample.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "03a8dd8e89af5c415ae3aab8574dbd4b068240d1",
+      "sha256": "b2493dee6328f87e2c8b936a0ce2472ee9670f805136d0042edc4e55d4cb067d",
+      "bytes": 943,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "03a8dd8e89af5c415ae3aab8574dbd4b068240d1"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/modes/runtime_config/generated_source_owned/GeneratedRuntimeConfigSchema.hpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "440dffa1ceb23a8967de89b349c189f667ec3521",
+      "sha256": "b47c24415c9e9dddf573f8255dfedac7be26f4d7568bc3dfbcab68befe95937d",
+      "bytes": 1252,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "440dffa1ceb23a8967de89b349c189f667ec3521"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeDigital.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d068d99241953bc3059fad1d0247f72a5a12b517",
+      "sha256": "1e070471ad29d1ed9ed753b05187e92bc9166228ef0b961068d03befe10cc5cd",
+      "bytes": 2784,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d068d99241953bc3059fad1d0247f72a5a12b517"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeDirection.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a88ba78e781c58d7655a284ee9621e8088ca8a2e",
+      "sha256": "852bc5f9886e1e69c9e978b12cbac8a37482926972a06f2fa38799d51693641e",
+      "bytes": 4679,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a88ba78e781c58d7655a284ee9621e8088ca8a2e"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeForce.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1da94c03338816ccbe9fb84ebdca471e5107fe3f",
+      "sha256": "413f62bacc6b2ce2c71525ebd82df11e0292467d8ff845a27744b3bcae295efe",
+      "bytes": 7412,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1da94c03338816ccbe9fb84ebdca471e5107fe3f"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeModifier.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "636f8fb1ad44376f252f812fb060a7df5e799b87",
+      "sha256": "0b7f895499d6a203f772fde35298524698b4822fd64063187bc05c13fafd9cde",
+      "bytes": 2138,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "636f8fb1ad44376f252f812fb060a7df5e799b87"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeOutput.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "04fb81320f86f84729c4a7c116f5f2270075d871",
+      "sha256": "cac775337faba93ee47cebed2035557e1a92b04f5ade9b32e8a695560b09e623",
+      "bytes": 9578,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "04fb81320f86f84729c4a7c116f5f2270075d871"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeResolver.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b829ccaf2315dd823b4b57e574983261440a66f4",
+      "sha256": "24a20cdb21a7d8ad3a1ff775f4c1c34fc08c190c15db38744d8afb7e1db04d31",
+      "bytes": 8270,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b829ccaf2315dd823b4b57e574983261440a66f4"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeSelfTest.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7372928723b1ed5f9e2de0642a5cf740e69d684a",
+      "sha256": "f20a15b5e751a6bd531967112fe53c54fffd1f969e549c5b0e9f8e3465bb0c79",
+      "bytes": 44096,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "7372928723b1ed5f9e2de0642a5cf740e69d684a"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "src/prototypes/senscope/SenscopePrototypeValidation.cpp",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2cbb10713e955fc7d096894c3cb1255578924285",
+      "sha256": "5b39b461a168a5eb84b581797805f4a1a7a7b5fd7db2a64d1ada37cbdcdbc528",
+      "bytes": 15088,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2cbb10713e955fc7d096894c3cb1255578924285"
+      },
+      "canonical_matches": true
+    },
+    {
+      "path": "tools/glyph_tracked_worktree_integrity.py",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f653b4619ee0ce8a8c35d972fa591545522c0be7",
+      "sha256": "604bea90c4b3cb2cbb0fdf023918da7ba45d1be7d128c2b40050e09e5a220fc7",
+      "bytes": 9284,
+      "canonical": {
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f653b4619ee0ce8a8c35d972fa591545522c0be7"
+      },
+      "canonical_matches": true
+    }
+  ],
+  "definition": "All302tracked production/build root blobs plus imported tracked integrity build-control helper. Preserve exact mode+blob/hash across final integration; no-only-final-file shortcut."
+}

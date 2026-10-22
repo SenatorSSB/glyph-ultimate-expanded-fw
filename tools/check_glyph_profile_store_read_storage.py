@@ -57,6 +57,8 @@ def instrument(source):
         ('    if (out.schema_version < 1', '    ReadStoragePhase(2);\n    if (out.schema_version < 1'),
         ('    return ValidateProfile(out);', '    const bool valid = ValidateProfile(out);\n    if (valid) ReadStoragePhase(3);\n    return valid;'),
     ]
+    if 'if ((out.schema_version < 1' in body:
+        replacements[2] = ('    if ((out.schema_version < 1', '    ReadStoragePhase(2);\n    if ((out.schema_version < 1')
     if 'const bool valid = ValidateProfile(out);' in body:
         replacements[-1] = ('    const bool valid = ValidateProfile(out);', '    const bool valid = ValidateProfile(out);\n    if (valid) ReadStoragePhase(3);')
     for old, new in replacements:
@@ -135,7 +137,7 @@ def main():
             for relative in SOURCES:
                 content=subprocess.run(['git','show',FROZEN+':'+relative],cwd=ROOT,capture_output=True,check=True).stdout
                 target=frozen/relative;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
-            validation=[ROOT/p for p in ['src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp']]
+            validation=[ROOT/p for p in ['src/modes/UltimateNativeProfile.cpp','src/core/config_validation.cpp','src/core/config_button_validation.cpp','src/core/config_usb_default_validation.cpp','src/core/config_rgb_target_validation.cpp','config/glyph/common/src/glyph_config_validation.cpp']]
             for label,source_root in [('frozen_d596',frozen),('current_candidate',ROOT)]:
                 source=(source_root/SOURCES[0]).read_text()
                 probe=temp/(label+'.cpp')
@@ -147,7 +149,7 @@ def main():
                 (args.output_dir/(label+'.log')).write_text(output)
                 report['runs'][label]={'result':'PASS','output':output,'source_sha256':hashlib.sha256(source.encode()).hexdigest()}
                 print(label+':\n'+output,flush=True)
-        for p in [Path(__file__),HISTORY,*HOST.glob('*.inc'),*HOST.glob('physical_id*_response.json'),ROOT/'include/core/ProfileStoreReadTrace.hpp',*(ROOT/s for s in SOURCES),ROOT/'src/core/config_validation.cpp',ROOT/'schema/haybox/config.options']:
+        for p in [Path(__file__),HISTORY,*HOST.glob('*.inc'),*HOST.glob('physical_id*_response.json'),ROOT/'include/core/ProfileStoreReadTrace.hpp',*(ROOT/s for s in SOURCES),ROOT/'src/modes/UltimateNativeProfile.cpp',ROOT/'src/core/config_validation.cpp',ROOT/'schema/haybox/config.options']:
             report['source_sha256'][str(p.relative_to(ROOT))]=hashlib.sha256(p.read_bytes()).hexdigest()
         report['result']='PASS'
         (args.output_dir/'report.json').write_text(json.dumps(report,indent=2)+'\n')

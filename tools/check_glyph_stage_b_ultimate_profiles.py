@@ -97,7 +97,7 @@ def main() -> int:
             run([sys.executable, str(generator), "-I", str(schema), "-f", str(schema / "config.options"),
                  "--error-on-unmatched", "--no-timestamp", "-D", str(generated), str(schema / "config.proto")])
             objects: list[str] = []
-            for source in (NANOPB / "pb_common.c", NANOPB / "pb_decode.c", generated / "config.pb.c"):
+            for source in (NANOPB / "pb_common.c", NANOPB / "pb_decode.c", NANOPB / "pb_encode.c", generated / "config.pb.c"):
                 target = temp / (source.stem + ".o")
                 run(["cc", "-std=c11", "-fshort-enums", "-I", str(generated), "-I", str(NANOPB),
                      "-c", str(source), "-o", str(target)])
@@ -108,7 +108,7 @@ def main() -> int:
                  "-I", str(ROOT / "HAL/pico/include"),
                  "-I", str(ROOT / "config/glyph/common/include"), "-I", str(ROOT / "config/glyph/glyph_mk6/include"),
                  str(ROOT / "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp"),
-                 str(ROOT / "src/core/config_validation.cpp"),
+                 str(ROOT / "src/core/config_validation.cpp"), str(ROOT / "src/modes/UltimateNativeProfile.cpp"),
                  str(ROOT / "src/core/config_button_validation.cpp"),
                  str(ROOT / "src/core/config_usb_default_validation.cpp"),
                  str(ROOT / "src/core/config_rgb_target_validation.cpp"),

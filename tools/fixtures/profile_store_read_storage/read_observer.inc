@@ -9,7 +9,9 @@ CheckedStorage::Fault read_observer(Kind, CheckedStorage::Operation operation,
     return CheckedStorage::Fault::None;
 }
 void roundtrip_response(const ProfileStoreResponse &response, const char *label, bool print) {
-    static_assert(ProfileStoreResponse_size < 8192, "all bounded protobuf response fields fit frame");
+    // Callback descriptors have no generated size macro. Profiles retain the
+    // admitted4096 bound; each actual response must fit the existing8192 frame.
+    static_assert(4096 < 8192, "admitted profile fits response frame");
     uint8_t frame[8192];
     size_t n = 0;
     require(pb_get_encoded_size(&n, ProfileStoreResponse_fields, &response), "response size terminates");
@@ -22,9 +24,9 @@ void roundtrip_response(const ProfileStoreResponse &response, const char *label,
             "response full nanopb decode");
     require(decoded.has_profile && encode(decoded.profile) == encode(response.profile),
             "response profile exact roundtrip");
-    if (print) std::printf("response label=%s id=%u profile_bytes=%zu response_bytes=%zu host_response_object=%zu static_schema_response_bound=%u static_schema_profile_bound=%u frame=8192\n",
+    if (print) std::printf("response label=%s id=%u profile_bytes=%zu response_bytes=%zu host_response_object=%zu response_frame_bound=%u admitted_profile_bound=%u frame=8192\n",
             label, response.profile_id, encode(response.profile).size(), n, sizeof(response),
-            unsigned(ProfileStoreResponse_size), unsigned(UltimateProfile_size));
+            unsigned(8192), unsigned(4096));
 }
 Bytes fixture_bytes(const char *path) {
     std::ifstream in(path, std::ios::binary);

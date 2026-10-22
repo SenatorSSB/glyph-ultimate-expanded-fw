@@ -585,6 +585,8 @@ def verify_ultimate_profiles(config_message: Any, config_pb2: ModuleType) -> lis
         failures.append(f"Stage-A supports at most two ultimate_profiles, found {len(profiles)}")
 
     for profile_index, profile in enumerate(profiles, start=1):
+        if profile.native_payload:
+            failures.append(f"ultimate_profiles[{profile_index}] contains forbidden embedded native payload")
         label = f"ultimate_profiles[{profile_index}]"
         if profile.schema_version not in (1, 2, 3):
             failures.append(
@@ -880,5 +882,148 @@ def main() -> int:
         return 1
 
 
+# A bounded native acceptance packet path. The historical artifact CLI and its
+# fixture-specific legacy binding policy above remain unchanged.
+_NATIVE_RECEIPT_FIELDS = ('ultimate_profile_root_format', 'profile_reference_token',
+    'profile_reference_digest', 'profile_reference_result_id',
+    'profile_reference_result_store_generation', 'profile_reference_result_mode_index',
+    'ultimate_profile_migration_receipt')
+
+
+def native_packet_backup(path: Path, expected_sha256: str) -> bytes:
+    import hashlib
+    try:
+        raw = base64.b64decode(json.loads(path.read_text())['rawConfigPayloadBase64'], validate=True)
+    except Exception as exc:
+        raise ToolError('requires exact raw GET_CONFIG backup: ' + str(exc)) from exc
+    if len(expected_sha256) != 64 or hashlib.sha256(raw).hexdigest() != expected_sha256.lower():
+        raise ToolError('raw Config backup SHA-256 mismatch')
+    return raw
+
+
+def native_packet_config(raw: bytes, pb: ModuleType) -> Any:
+    config = decode_config_payload(raw, pb)
+    if (config.ultimate_profile_store_format != 1 or not config.ultimate_profile_store_incarnation
+            or config.ultimate_profile_root_format != 2 or config.ultimate_profiles):
+        raise ToolError('native packet requires existing compact format-v2 Config without embedded profiles')
+    if not 0 < len(config.game_mode_configs) <= 30:
+        raise ToolError('existing mode row extent is invalid')
+    return config
+
+
+def prepare_native_context(raw: bytes, mode_index: int, context_data: dict,
+                           profile_data: dict, pb: ModuleType, json_format: ModuleType) -> bytes:
+    import hashlib
+    from convert_glyph_native_ultimate_profile import preprocessing_bytes, validate_standalone_profile
+    current = native_packet_config(raw, pb)
+    if not 0 <= mode_index < len(current.game_mode_configs) or current.game_mode_configs[mode_index].mode_id != pb.MODE_ULTIMATE:
+        raise ToolError('context changes require one existing Ultimate row')
+    allowed = {'modeId','mode_id','buttonRemapping','button_remapping','socdPairs','socd_pairs'}
+    if context_data.keys() - allowed:
+        raise ToolError('context permits only mode_id/button_remapping/socd_pairs')
+    # Refuse ambiguous aliases instead of allowing last-one-wins JSON parsing.
+    for first,second in [('modeId','mode_id'),('buttonRemapping','button_remapping'),('socdPairs','socd_pairs')]:
+        if first in context_data and second in context_data: raise ToolError('duplicate context field alias')
+    context = pb.GameModeConfig(); json_format.ParseDict(context_data, context, ignore_unknown_fields=False)
+    profile = pb.UltimateProfile(); json_format.ParseDict(profile_data, profile, ignore_unknown_fields=False)
+    try:
+        if profile.schema_version != 5: raise ValueError('requires native schema5 profile')
+        validate_standalone_profile(profile, pb)
+        digest = hashlib.sha256(preprocessing_bytes(context, pb)).digest()
+        if profile.native_payload[28:60] != digest: raise ValueError('profile preprocessing digest mismatch')
+    except ValueError as exc: raise ToolError(str(exc)) from exc
+    candidate = pb.Config(); candidate.CopyFrom(current)
+    row = candidate.game_mode_configs[mode_index]
+    del row.button_remapping[:]; row.button_remapping.extend(context.button_remapping)
+    del row.socd_pairs[:]; row.socd_pairs.extend(context.socd_pairs)
+    # Only these two fields of an existing row change. In particular, applying
+    # context does not select a new ID/engine; checked reference follows it.
+    normalized = pb.Config(); normalized.CopyFrom(candidate)
+    normalized.game_mode_configs[mode_index].CopyFrom(current.game_mode_configs[mode_index])
+    if normalized.SerializeToString(deterministic=True) != current.SerializeToString(deterministic=True):
+        raise ToolError('non-whitelisted Config change')
+    return candidate.SerializeToString(deterministic=True)
+
+
+def prepare_native_restore(current_raw: bytes, original_raw: bytes, pb: ModuleType) -> bytes:
+    current = native_packet_config(current_raw, pb); original = native_packet_config(original_raw, pb)
+    if current.ultimate_profile_store_incarnation != original.ultimate_profile_store_incarnation:
+        raise ToolError('restore backup belongs to another store incarnation')
+    # The firmware preserves these transaction/recovery receipts on SET_CONFIG.
+    # Restore original user fields while retaining current monotonic metadata.
+    for name in _NATIVE_RECEIPT_FIELDS: setattr(original, name, getattr(current, name))
+    return original.SerializeToString(deterministic=True)
+
+
+def native_packet_main(argv: list[str]) -> int:
+    import hashlib
+    import glyph_profile_store_candidate_tool as requests
+    import glyph_profile_store_production_tool as production
+    parser = argparse.ArgumentParser(description='Bounded native context/backup restoration using existing GET/SET_CONFIG; no retry or reboot')
+    parser.add_argument('--expected-current-backup', type=Path, required=True)
+    parser.add_argument('--expected-current-sha256', required=True)
+    parser.add_argument('--session', required=True)
+    parser.add_argument('--mode-index', type=int); parser.add_argument('--context-json', type=Path)
+    parser.add_argument('--native-profile-json', type=Path)
+    parser.add_argument('--restore-original-backup', type=Path); parser.add_argument('--original-sha256')
+    parser.add_argument('--execute', action='store_true'); parser.add_argument('--exclusive-configurator-session', action='store_true')
+    parser.add_argument('--port'); parser.add_argument('--timeout', type=float, default=5)
+    parser.add_argument('--receipt-out', type=Path, required=True); parser.add_argument('--journal-out', type=Path, required=True)
+    args = parser.parse_args(argv)
+    try:
+        if not args.session.strip() or not 0 < args.timeout <= 10: raise ToolError('explicit session and bounded timeout required')
+        if args.receipt_out.resolve() == args.journal_out.resolve(): raise ToolError('receipt and journal must differ')
+        if args.execute and (not args.port or not args.exclusive_configurator_session):
+            raise ToolError('execution requires explicit port and owner-exclusive Configurator session; SET_CONFIG has no atomic generation fence')
+        pb,jf,_ = load_runtime_proto_modules(REPO_ROOT)
+        current_raw = native_packet_backup(args.expected_current_backup,args.expected_current_sha256)
+        current = native_packet_config(current_raw,pb)
+        if args.restore_original_backup:
+            if not args.original_sha256 or any(x is not None for x in (args.mode_index,args.context_json,args.native_profile_json)):
+                raise ToolError('restore requires original SHA and forbids context inputs')
+            original = native_packet_backup(args.restore_original_backup,args.original_sha256)
+            payload = prepare_native_restore(current_raw,original,pb); action = 'restore_original_user_config'
+        else:
+            if args.original_sha256 or args.mode_index is None or not args.context_json or not args.native_profile_json:
+                raise ToolError('context requires mode-index/context-json/native-profile-json')
+            profile_data = json.loads(args.native_profile_json.read_text())
+            profile_data = profile_data.get('response',profile_data); profile_data = profile_data.get('profile',profile_data)
+            payload = prepare_native_context(current_raw,args.mode_index,json.loads(args.context_json.read_text()),profile_data,pb,jf)
+            action = 'apply_native_preprocessing_context'
+        receipt = {'format':1,'action':action,'session':args.session,'expected_current_sha256':hashlib.sha256(current_raw).hexdigest(),
+                   'payload_sha256':hashlib.sha256(payload).hexdigest(),'payload_base64':base64.b64encode(payload).decode(),
+                   'existing_command':CMD_SET_CONFIG,'atomic_generation_fence':False,'execute':args.execute}
+        # Reserve custody paths before opening a port. Existing files fail closed.
+        with args.journal_out.open('x',encoding='utf-8') as journal:
+            port = None
+            try:
+                if args.execute:
+                    port = PosixSerialPort(args.port,115200,args.timeout); port.open(); port.flush_input()
+                    status = requests.request(port,pb,pb.ProfileStoreRequest(protocol_version=2,operation=pb.PROFILE_STORE_STATUS),phase='native_context_status')
+                    production.verify_production_status(type('Admission',(),{'action':'status'})(),pb,status)
+                    if status.recovery_flags or not status.mutation_feasible or status.store_incarnation != current.ultimate_profile_store_incarnation:
+                        raise ToolError('native context STATUS recovery/incarnation/admission refusal')
+                    if request_get_config(port) != current_raw: raise ToolError('fresh GET_CONFIG differs from explicit current backup; no SET sent')
+                with args.receipt_out.open('x',encoding='utf-8') as out:
+                    json.dump(receipt,out,sort_keys=True,indent=2); out.write('\n'); out.flush(); os.fsync(out.fileno())
+                fd = os.open(str(args.receipt_out.parent),os.O_RDONLY)
+                try: os.fsync(fd)
+                finally: os.close(fd)
+                production.emit(journal,action,'immutable_receipt_persisted',payload_sha256=receipt['payload_sha256'])
+                if port is not None:
+                    # One send only. An exception or uncertain response stops;
+                    # do not replay this legacy whole-Config mutation.
+                    request_set_config(port,payload)
+                    readback = decode_config_payload(request_get_config(port),pb).SerializeToString(deterministic=True)
+                    if readback != payload: raise ToolError('SET_CONFIG readback differs; outcome requires inspection, no retry')
+                    production.emit(journal,action,'readback_verified',payload_sha256=receipt['payload_sha256'])
+            finally:
+                if port is not None: port.close()
+        print(json.dumps({'native_packet':action,'dry_run':not args.execute,'payload_sha256':receipt['payload_sha256'],'serial_opened':args.execute},sort_keys=True))
+        return 0
+    except Exception as exc:
+        print('native Config packet: '+str(exc)); return 1
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(native_packet_main(sys.argv[2:]) if len(sys.argv)>1 and sys.argv[1]=="--native-packet" else main())

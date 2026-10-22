@@ -544,6 +544,8 @@ message UltimateProfile {
   // Version 3 opts into the fixed Stage-C output pipeline.  Its absence is
   // significant: v1 and v2 retain their byte-for-byte legacy behavior.
   UltimateProfileOutputProgram output_program = 7;
+  // Schema 5 only, ProfileStore-owned synchronous finite program bytes.
+  bytes native_payload = 8;
 }
 enum ProfileStoreOperation {
   PROFILE_STORE_OPERATION_UNSPECIFIED = 0;
@@ -779,6 +781,8 @@ message GameModeConfig {
   // one-based ultimate_profile_config array index, which remains migration
   // input only.
   uint32 ultimate_profile_id = 204;
+  // 0: legacy/source fallback; 1: native schema5, fail closed if unavailable.
+  uint32 ultimate_profile_engine = 205;
 }
 /**
  * A communication backend config.
