@@ -57,7 +57,18 @@ int main() { try {
     const size_t index=legacy;menu._highlighted_menu_item=index;
     menu.HandleControls(&display,controls,controls.enter);
     check(profile_selection::Pending()==entries.back().id,"menu confirms stable ID");
-    check(!profile_selection::Request(5),"occupied mailbox rejects second request");profile_selection::Complete();
+    check(!profile_selection::Request(5),"occupied mailbox rejects second request");
+    // Keep the asynchronous request occupied while attempting every top-level
+    // action, including immediate Configurator and bootloader resets.
+    for(size_t action=0;action<menu._top_level_page->items_count;++action) {
+     menu._current_menu_page=menu._top_level_page;menu._highlighted_menu_item=action;
+     menu.HandleControls(&display,controls,controls.enter);
+     check(menu._current_menu_page==menu._top_level_page&&menu._highlighted_menu_item==action,"pending prevents action/page transition");
+     menu.HandleControls(&display,controls,controls.back);
+     check(menu._current_menu_page==menu._top_level_page,"pending prevents escape");
+    }
+    check(!firmware_reboots&&!bootloader_reboots&&!disconnects,"pending prevents all device-side effects");
+    profile_selection::Complete();
    }
   }
  }

@@ -22,6 +22,7 @@ void test_actual_store_selector(ProfileStore &store,const GameModeConfig &contex
  const uint32_t generation=store.Generation();const size_t count=store.Count();
  std::vector<ProfileStore::Entry> metadata;for(size_t i=0;i<count;++i)metadata.push_back(*store.EntryAt(i));
  static Config candidate;
+ OutputState first{},second{};unsigned selection=0;
  for(uint32_t id:{1u,2u,1u}) {
   size_t mode=99,backend=99;
   require(profile_selection::Persist(storage,store,candidate,COMMS_BACKEND_XINPUT,id,0,mode,backend)==ModeDestinationResult::Saved,"actual store native selector A B A");
@@ -30,6 +31,12 @@ void test_actual_store_selector(ProfileStore &store,const GameModeConfig &contex
   require(profile&&status==ProfileStore::Status::Ok&&store.ActiveId()==id,"actual initialization activates selected record");
   Ultimate runtime;runtime.SetConfig(candidate.game_mode_configs[mode],profile,store.ActiveNativeView());
   require(runtime.ActiveEngine()==Ultimate::Engine::NativeAbi1,"selected exact context activates native evaluator");
+  InputState input{};input.buttons=uint64_t{1}<<49;OutputState output{};
+  runtime.UpdateOutputs(input,output,COMMS_BACKEND_XINPUT);
+  if(selection==0)first=output;
+  else if(selection==1){second=output;require(first.leftStickX!=second.leftStickX||first.leftStickY!=second.leftStickY,"B distinct from A in actual evaluator");}
+  else require(first.leftStickX==output.leftStickX&&first.leftStickY==output.leftStickY&&first.buttons==output.buttons,"return to A removes B output");
+  ++selection;
  }
  for(size_t i=0;i<count;++i)require(!std::memcmp(&metadata[i],store.EntryAt(i),sizeof(ProfileStore::Entry)),"all directory/revisions/names/ranks untouched");
  std::puts("PASS selector actual NOR/LittleFS metadata21 native choices and A->B->A validated reference/boot activation; no store mutation");

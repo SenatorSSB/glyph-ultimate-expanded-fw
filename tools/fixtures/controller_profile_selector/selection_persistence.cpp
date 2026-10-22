@@ -22,6 +22,19 @@ struct Store {
   return ProfileStore::Status::Ok;
  }
 };
+#include "core/ConfigWriteCandidate.hpp"
+static Store selected_store;
+static Persistence selected_persistence;
+static unsigned reboots=0;
+static void reboot_firmware(){++reboots;}
+struct Backend { CommunicationBackendId id=COMMS_BACKEND_XINPUT; CommunicationBackendId BackendId(){return id;} } backend_instance;
+static Backend *backends[]={&backend_instance};
+static size_t current_mode_index=0;
+#define profile_store selected_store
+#define persistence selected_persistence
+#include "selector_service.inc"
+#undef persistence
+#undef profile_store
 int main(int argc,char **argv){try{
  require(argc==3,"two source-faithful native wrappers");Store store;
  for(unsigned i=0;i<2;++i){std::ifstream f(argv[i+1],std::ios::binary);store.wire[i]=Bytes((std::istreambuf_iterator<char>(f)),{});}
@@ -70,6 +83,20 @@ int main(int argc,char **argv){try{
  {Persistence storage;seed(storage,COMMS_BACKEND_XINPUT);durable.game_mode_configs_count=2;durable.game_mode_configs[1]=durable.game_mode_configs[0];durable.game_mode_configs[0].button_remapping_count=1;durable.game_mode_configs[0].button_remapping[0]={BTN_RF1,BTN_LF1};put("config-v2.bin",record(durable));size_t m=0,b=0;
   require(profile_selection::Persist(storage,store,candidate,COMMS_BACKEND_XINPUT,1001,0,m,b)==ModeDestinationResult::Saved&&m==1,"multiple existing contexts resolve matching eligible row");
  }
+ selected_store.wire[0]=store.wire[0];selected_store.wire[1]=store.wire[1];
+ for(unsigned failure=0;failure<3;++failure) {
+  const bool fail=failure!=0;
+  seed(selected_persistence,COMMS_BACKEND_XINPUT);host_watchdog={};reboots=0;selected_store.ro=failure==1;
+  if(failure==2)checked_inject(CheckedStorage::Operation::Close,CheckedStorage::Phase::After,"config-v2.tmp");
+  require(profile_selection::Request(1001),"service request accepted");
+  service_profile_selection();
+  CheckedStorage::SetFaultHook(nullptr);
+  require(!profile_selection::Pending(),"service releases request after returned attempt");
+  require(reboots==(fail?0u:1u),"exact service reboot only after Saved");
+  require(host_watchdog.scratch[2]==(fail?0u:kCommittedModeDestination),"failed service never publishes destination");
+  if(!fail)require(ConfigWriteCandidate().game_mode_configs[0].ultimate_profile_id==1001,"service saved requested native ID");
+ }
+ selected_store.ro=false;
  require(store.wire[0]==bodies,"selection never mutates record body");
  std::cout<<"PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation\n";
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

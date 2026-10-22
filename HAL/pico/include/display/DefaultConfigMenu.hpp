@@ -8,6 +8,7 @@ class DefaultConfigMenu : public ConfigMenu {
   public:
     DefaultConfigMenu(Config &config, CommunicationBackend **backends, size_t backends_count);
     ~DefaultConfigMenu();
+    void HandleControls(IntegratedDisplay *, const DisplayControls &, Button) override;
 
   protected:
     const MenuPage::MenuItem *ResolveItem(MenuPage *page, size_t index) override;

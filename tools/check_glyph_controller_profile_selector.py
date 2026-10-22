@@ -21,12 +21,22 @@ def main():
         wrappers=[]
         for i in range(2):
             path=t/('native'+str(i)+'.pb');path.write_bytes(program(pb,context,[]).SerializeToString());wrappers.append(path)
+        source=(ROOT/'config/glyph/common/src/config.cpp').read_text()
+        start=source.index('__attribute__((noinline)) void service_profile_selection()')
+        end=source.index('\n// Recovery deliberately reuses',start)
+        (g/'selector_service.inc').write_text(source[start:end])
         # Existing UI doubles are retained; remove enum doubles now supplied
         # by the actual current generated ABI.
         ui=t/'include/comms';ui.mkdir(parents=True)
         s=(ROOT/'tools/fixtures/config_menu_host/include/comms/IntegratedDisplay.hpp').read_text()
         s='\n'.join(x for x in s.splitlines() if not x.startswith(('enum Button','enum DashboardOption')))+'\n'
         (ui/'IntegratedDisplay.hpp').write_text(s)
+        resets=(ROOT/'tools/fixtures/config_menu_host/include/reboot.hpp').read_text()
+        resets=resets.replace('struct WatchdogStub', 'inline unsigned firmware_reboots=0,bootloader_reboots=0,disconnects=0;\nstruct WatchdogStub')
+        resets=resets.replace('inline void reboot_firmware() {}','inline void reboot_firmware() {++firmware_reboots;}')
+        resets=resets.replace('inline void reboot_bootloader() {}','inline void reboot_bootloader() {++bootloader_reboots;}')
+        resets=resets.replace('inline void tud_disconnect() {}','inline void tud_disconnect() {++disconnects;}')
+        (t/'include/reboot.hpp').write_text(resets)
         includes=[g,t/'include',ROOT/'tools/fixtures/config_menu_host/include',ROOT/'HAL/pico/include',ROOT/'config/glyph/common/include',ROOT/'include',ROOT,NANOPB]
         for abi in ['-fshort-enums','-fno-short-enums']:
             exe=t/abi[2:]

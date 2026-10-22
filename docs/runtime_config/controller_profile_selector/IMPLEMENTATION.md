@@ -46,3 +46,23 @@ transfer all140 old routes and31classes and add selector/menu paths under
 unchanged caps, including both enum component obligations. One atomic4byte
 owner avoids the earlier proposed two-word mailbox's no-short layout overflow;
 actual symbol alignment/charge remains to be measured.
+
+Fresh independent source review of cce6e9d96804d25274822297d7cf59f6160c9dbd
+found one concrete P2: asynchronous selection left other menu reset actions
+reachable while core0 persisted. The repaired DefaultConfigMenu control override
+blocks all input while the request remains occupied; repaint remains unchanged.
+The dedicated both-ABI host test now retains a pending request while attempting
+all top-level actions, verifies zero disconnect/firmware/bootloader calls, and
+executes the literal core0 service with actual Persistence for successful,
+read-only and uncertain-save cases. Independent repaired-scope review and the
+new exact target/resource proof remain required. The cce6 clean build was
+interrupted before compilation to make this material source repair; no artifact
+or acceptance is attributed to that incomplete attempt.
+
+The old config-menu characterization checker currently stops at the previously
+recorded C024 authentication failure before it can evaluate source. This is an
+actual FAIL, preserved in menu-historical-checker.log; no historical fixture,
+assertion, source fingerprint or framework scope was weakened. Current menu
+properties have direct production-body sanitizer tests. Native ABI layout probe
+passes both representations; target whole stack remains NOT_MEASURED by that
+component probe and requires the separate linked proof.

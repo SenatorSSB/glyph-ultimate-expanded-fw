@@ -245,6 +245,13 @@ DefaultConfigMenu::~DefaultConfigMenu() {
     delete[] _profile_targets;
 }
 
+void DefaultConfigMenu::HandleControls(IntegratedDisplay *display, const DisplayControls &controls, Button button) {
+    // The menu core cannot escape to another reset/write-capable action while
+    // core0 owns a checked native selection. Failure releases this fence.
+    if (profile_selection::Pending()) return;
+    ConfigMenu::HandleControls(display, controls, button);
+}
+
 const MenuPage::MenuItem *DefaultConfigMenu::ResolveItem(MenuPage *page, size_t index) {
     if (page != &_gamemode_options_page) return ConfigMenu::ResolveItem(page, index);
     if (!_profile_targets || index >= page->items_count) return nullptr;

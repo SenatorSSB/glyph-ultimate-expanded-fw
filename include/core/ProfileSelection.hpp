@@ -12,6 +12,7 @@ struct Target {
     uint32_t profile_id = 0; // zero denotes an ordinary Config row
     uint8_t mode_index = 0;
 };
+static_assert(sizeof(Config::game_mode_configs) / sizeof(GameModeConfig) == 30, "bounded Config row capacity");
 constexpr size_t kMaxTargets = ProfileStore::kMaxEntries + 30;
 static_assert(kMaxTargets < 256, "menu keys represent list indices, never IDs");
 const ProfileStore::Entry *FindEntry(const ProfileStore &store, uint32_t id);
