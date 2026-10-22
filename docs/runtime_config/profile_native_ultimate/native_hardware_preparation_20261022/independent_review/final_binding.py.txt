@@ -1,0 +1,27 @@
+from pathlib import Path
+import hashlib,json,shutil,collections
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');B=Path('/private/tmp/glyph-native-native-acceptance-preparation-20261022');sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+expected={'CHILD_HOLD.json':'3b447b893811e7e2207a6b48f1921e51ae1e079c97502fb99ab398ed93bcd33a','PINS.json':'d3aedae5698326cec4552ae77574af7c72b1fb8f8e15934dc436228fb23a08f0','REPORT.md':'c96f0a780a828f61aa4bc78788ec517d6d82c91af24e373e35ebdc9efe623e4f','GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1.json':'7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8','GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1.md':'a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040','OPERATOR_DRAFT.md':'a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040'}
+D=O/'final_bound_inputs';D.mkdir(exist_ok=True)
+for n,h in expected.items():assert sha(P/n)==h,n;shutil.copyfile(P/n,D/('author-'+n))
+checks={}
+for key,items in [('parent47',json.loads((B/'TECHNICAL_HOLD.json').read_text())['frozen_technical_inputs']),('child_hold',json.loads((P/'CHILD_HOLD.json').read_text())['child_frozen_inputs']),('child_final',json.loads((P/'PINS.json').read_text())['files'])]:
+ checks[key]=[]
+ for v in items:
+  f=Path(v['path']);assert f.stat().st_size==v['bytes'] and sha(f)==v['sha256'],str(f);checks[key].append(v)
+packet=json.loads((P/'GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1.json').read_text());old=json.loads((B/'native_xinput_owner_packet_draft.json').read_text());assert packet['events']==old['events'] and packet['counts']==old['counts'] and packet['scope']==old['scope'] and packet['sessions']==old['sessions']
+for path,h in packet['pins'].items():assert sha(Path(path))==h,path
+assert packet['approval']=='NOT_APPROVED' and packet['observer_attachment']['owner_approval'] is None and packet['all_observations'] is None and packet['physical_result']=='NOT_TESTED'
+counts=collections.Counter()
+for e in packet['events']:counts.update(e['maximum_cost'])
+assert dict(counts)==packet['counts']
+a=packet['observer_attachment'];C=Path(a['durable_matching_owner_custody_path']);assert sha(C)=='cc4ec988a70e5eb14fdb7af67d64b3e555252c22b7e60e7f6e7ac0af2eb1a255';custody=json.loads(C.read_text());assert len(custody['files'])==11
+for n,v in custody['files'].items():
+ for f in [C.parent/n,Path(v['source_path'])]:assert sha(f)==v['sha256'] and f.stat().st_size==v['bytes'],str(f)
+assert sha(P/'acceptance_metadata.hpp')==a['included_metadata_header_sha256']=='18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c'
+assert sha(P/'mac_hostinterface_observer')==a['binary_sha256']=='ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164'
+shutil.copyfile(C,D/'custody.json')
+# Current child matrix content remains exact; no drift after independent baseline replay.
+assert sha(P/'acceptance_comparison_matrix.json')==sha(O/'replay/acceptance_comparison_matrix.json')=='4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5'
+(O/'final-binding.json').write_text(json.dumps({'final_author_and_packet_hashes':expected,'all_frozen_checks':checks,'all_packet_pin_paths_match':len(packet['pins']),'event_scope_counts_sessions_exact_parent_correspondence':True,'owner_custody_sha256':sha(C),'custody_files':len(custody['files']),'owner_approval':None,'physical_result':'NOT_TESTED','matrix_matches_independent_regeneration':True},indent=2)+'\n')
+print('PASS final child/packet/custody binding;', {k:len(v)for k,v in checks.items()},';packetpins',len(packet['pins']),';same748events; no approval')

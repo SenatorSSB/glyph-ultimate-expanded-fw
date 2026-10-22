@@ -1,0 +1,53 @@
+"""Finite offline original-profile4 baseline using existing frozen legacy oracle and literal XInput encoder."""
+from pathlib import Path
+import ast,sys,json,hashlib,subprocess,base64,tempfile
+D=Path(__file__).resolve().parent;F=Path('/private/tmp/glyph-profile-native-20261020')
+sys.dont_write_bytecode=True;sys.path.insert(0,str(F/'tools'));tempfile.tempdir=str(D/'tmp');(D/'tmp').mkdir(exist_ok=True)
+import glyph_serial_config_tool as w
+import check_glyph_profile_native_ultimate as c
+from convert_glyph_native_ultimate_profile import preprocessing_bytes
+P=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022')
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def save(p,x):Path(p).write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def run(v):
+ r=subprocess.run(list(map(str,v)),capture_output=True,text=True);commands.append({'argv':list(map(str,v)),'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr});assert r.returncode==0,r.stderr;return r.stdout
+commands=[]
+pb,jf,_=w.load_runtime_proto_modules(F)
+raw=base64.b64decode(json.loads((P/'postinstall_config_backup.json').read_text())['rawConfigPayloadBase64']);cfg=w.native_packet_config(raw,pb);orig=pb.UltimateProfile();orig.ParseFromString((P/'postinstall_profile_4_canonical.bin').read_bytes());assert orig.schema_version==3
+mode=pb.GameModeConfig();mode.CopyFrom(cfg.game_mode_configs[2]);assert mode.ultimate_profile_id==4 and mode.ultimate_profile_engine==0
+legacy=pb.Config();legacy.ultimate_profiles.add().CopyFrom(orig)
+labels=[[]]+[[i]for i in list(range(1,9))+list(range(17,33))+list(range(33,39))+list(range(41,46))+list(range(52,56))]+[[3,5],[3,2],[1,5],[1,2],[42,43],[42,45],[44,43],[44,45],[33,32],[17,3],[17,18],[38,21]]
+# Resolve MB labels by enum rather than assume numeric values.
+ordinary=[getattr(pb,'BTN_'+s)for s in [*[f'LF{i}'for i in range(1,9)],*[f'RF{i}'for i in range(1,17)],*[f'LT{i}'for i in range(1,7)],*[f'RT{i}'for i in range(1,6)],*[f'MB{i}'for i in range(4,8)]]]
+labels=[[]]+[[i]for i in ordinary]+[[3,5],[3,2],[1,5],[1,2],[42,43],[42,45],[44,43],[44,45],[33,32],[17,3],[17,18],[38,21]];assert len(labels)==52
+out=D/'baseline';out.mkdir(exist_ok=True)
+with tempfile.TemporaryDirectory(prefix='legacy-baseline-')as t:
+ t=Path(t);_,_,flags,objects=c.compile_runner(t)
+ source=ast.parse(Path('/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_generator_actual.py').read_text())
+ harness=next(x.value for x in ast.walk(source)if isinstance(x,ast.Constant)and isinstance(x.value,str)and x.value.startswith('#include "core/state.hpp"\n#include <pb_decode.h>'))
+ (out/'frozen_legacy_baseline_runner.cpp').write_text(harness)
+ exe=out/'frozen_legacy_baseline_runner'
+ run(['c++','-std=c++17',*flags,out/'frozen_legacy_baseline_runner.cpp',*[F/s for s in ['src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/socd.cpp','src/core/config_button_validation.cpp']],t/'legacy.o',*objects,'-o',exe])
+ (t/'Config.pb').write_bytes(legacy.SerializeToString(deterministic=True));(t/'context.pb').write_bytes(mode.SerializeToString(deterministic=True));(t/'frames.txt').write_text(''.join(f'{sum(1<<(i-1)for i in ids):x}\n'for ids in labels))
+ outputs=run([exe,t/'Config.pb',t/'context.pb',t/'frames.txt']).splitlines();assert len(outputs)==52
+ actual_source=harness.replace('#define Ultimate LegacyUltimate\n#include "frozen/modes/Ultimate.hpp"\n#undef Ultimate','#include "modes/Ultimate.hpp"').replace('LegacyUltimate m;','Ultimate m;')
+ (out/'actual_F_legacy_baseline_runner.cpp').write_text(actual_source)
+ run(['c++','-std=c++17',*flags,out/'actual_F_legacy_baseline_runner.cpp',*[F/s for s in ['src/modes/Ultimate.cpp','src/modes/UltimateNativeProfile.cpp','src/modes/UltimateNativeEvaluator.cpp','src/core/ControllerMode.cpp','src/core/InputMode.cpp','src/core/socd.cpp','src/core/config_button_validation.cpp']],*objects,'-o',out/'actual_F_legacy_baseline_runner'])
+ original_frozen_outputs=outputs[:]
+ control=pb.Config();control.CopyFrom(legacy);control.ultimate_profiles[0].schema_version=2
+ (t/'HOST_ONLY_SCHEMA2_GATE_CONTROL.pb').write_bytes(control.SerializeToString(deterministic=True))
+ gate_outputs=run([out/'actual_F_legacy_baseline_runner',t/'HOST_ONLY_SCHEMA2_GATE_CONTROL.pb',t/'context.pb',t/'frames.txt']).splitlines()
+ save(out/'schema3_gate_control.json',{'classification':'HOST_ONLY_UNADMITTED_SCHEMA_VERSION_CONTROL_NOT_DEVICE_PROFILE','source_gate':'F RouteLogicalInputs/FindEffect and schema_version3 paths versus frozen StageC legacy source','actual_schema2_gate_outputs':gate_outputs,'frozen_stageC_outputs':original_frozen_outputs,'equal':gate_outputs==original_frozen_outputs,'no_profile_fixture_or_device_mutation':True})
+ assert gate_outputs==original_frozen_outputs,'schema3 source gate does not fully explain frozen oracle discrepancy'
+ actual_outputs=run([out/'actual_F_legacy_baseline_runner',t/'Config.pb',t/'context.pb',t/'frames.txt']).splitlines();save(out/'actual_F_vs_frozen_initial_crosscheck.json',{'classification':'OFFLINE_ONLY_INITIAL_HARNESS_COMPARISON','commands':commands,'frozen_outputs':outputs,'actual_F_outputs':actual_outputs,'equal':actual_outputs==outputs,'differing_indices':[i for i,(a,b)in enumerate(zip(outputs,actual_outputs))if a!=b]});assert len(actual_outputs)==52;outputs=actual_outputs
+
+ prefix=Path('/private/tmp/glyph-native-mac-observer-review-repair-20261021/actual_report_fixture_encoder.cpp').read_text().split('int main(){')[0]
+ (out/'baseline_xinput_encoder.cpp').write_text('#include <cstdlib>\n'+prefix+'int main(int n,char**v){if(n!=8)return 2;OutputState o{};o.buttons=strtoul(v[1],nullptr,16);for(int i=0;i<6;++i)o.analog_axes[i]=atoi(v[i+2]);auto r=make_XInput(o);emit("xinput","baseline",reinterpret_cast<const uint8_t*>(&r),sizeof(r));}')
+ run(['c++','-std=c++17',*flags,'-fsanitize=undefined,float-cast-overflow',out/'baseline_xinput_encoder.cpp','-o',out/'baseline_xinput_encoder'])
+ rows=[];names={v.number:v.name for v in pb.Button.DESCRIPTOR.values}
+ for n,(ids,values)in enumerate(zip(labels,outputs)):
+  z=values.split();rawhex=run([out/'baseline_xinput_encoder',*z]).split()[-1];fields=json.loads(run([D/'parser_cli','xinput',rawhex,'1','0']))
+  rows.append({'selection_id':f'B{n:03}','profile_context_key':'original_legacy4','physical_held_input_ids':ids,'physical_held_input_names':[names[i]for i in ids],'history_group':f'B{n:03}','history_before_this_row':[],'hardware_rows':['H1','H12'],'expected_complete_native_output':dict(zip(['buttons_hex','leftStickX','leftStickY','rightStickX','rightStickY','triggerLAnalog','triggerRAnalog'],[z[0]]+list(map(int,z[1:])))),'expected_literal_backend_assignment_fields':[{'backend':'XInput','fields':fields}],'raw_xinput_hex':rawhex,'result':'NOT_TESTED','observed':None,'observation_limit':'Existing original legacy4 output, XInput21 transmitted fields only. Capture and native internal bookkeeping are not independently observable over XInput; no Switch/GC acceptance.'})
+ packet=json.loads((D/'fixture_packet_immutable.json').read_text());packet['rows']+=rows;packet['contexts']['original_legacy4']={'context_json':jf.MessageToDict(mode,preserving_proto_field_name=True),'profile_record':{'profile_sha256':sha(P/'postinstall_profile_4_canonical.bin'),'schema_version':3,'revision':1},'qualification':'Private original payload stays in existing custody; only canonical hash/context/output oracle here.'};packet['kind']='UNAPPROVED_NATIVE_XINPUT_COMPARISON_MATRIX_WITH_UNCHANGED_334_AND_52_ORIGINAL_BASELINES';packet['approval']='NOT_APPROVED';packet['all_physical_observations']='NOT_TESTED';save(D/'acceptance_comparison_matrix.json',packet)
+ save(out/'baseline_oracle_proof.json',{'classification':'HOST_ACTUAL_F_LEGACY_PLUS_ACTUAL_TYPED_XINPUT_ENCODER_WITH_FROZEN_STAGEC_NEGATIVE_CONTROL','live_actions':0,'rows':52,'actual_F_legacy_vs_frozen_oracle_52_full_outputs':'43MATCH_9_SOURCE_EXPECTED_SCHEMA3_DIFFERENCES_RETAINED','baseline_authority':'actual F legacy path and actual preserved schema3 profile4/Config; frozen StageC oracle predates routing/output_program and is a retained negative control, not authority for these9 current-profile fields','original_profile_sha256':sha(P/'postinstall_profile_4_canonical.bin'),'original_Config_sha256':sha(P/'postinstall_config_payload.bin'),'preprocessing_sha256':hashlib.sha256(preprocessing_bytes(mode,pb)).hexdigest(),'source_generator_sha256':sha(__file__),'commands':commands,'all_observations':None})
+ print('PASS52 baseline source-oracle/typed-XInput/parser fixtures;334 rows unchanged; zero live actions')

@@ -1,0 +1,7 @@
+{
+  "classification": "PUBLICATION_VALIDATOR_BOOTSTRAP_INCOMPLETE",
+  "result": "ASSERTION_AT_GENERATED_RESULT_LINK_BEFORE_RESULT_FILE_EXISTS",
+  "path": "README.md -> result.json",
+  "source_or_device_failure": false,
+  "resolution": "Create explicit VALIDATION_IN_PROGRESS output sentinel, then rerun unchanged audit; final PASS only after all existing checks complete"
+}

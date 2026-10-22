@@ -1,5 +1,16 @@
 # Profile-native Ultimate chapter research
 
+The [reviewed native XInput packet](native_hardware_preparation_20261022/OWNER_PACKET.md)
+is prepared for exact owner approval and remains unexecuted. It binds the corrected
+native-only four-read host child, genuine owner poses, two disposable profiles,
+guarded Config/reference changes, measurements and logical restoration. Maxima
+are494 captures/1976 reports/50 firmware restarts, with explicit21-edge settled
+endpoint qualification; no frame-exact/transient or other-route waiver follows.
+The older-schema oracle discrepancy and actual JSONL host defect are preserved
+with source-grounded baseline qualification and independently reviewed child
+closure. F/UF2, original Config/all22, caps and all prior evidence stay unchanged.
+
+
 Current: [exact334f source/build/resource closure](exact_candidate_334f_status_20261021.md)
 and [independently reviewed hardware preparation](hardware_334f_preparation_20261021/README.md).
 GP-NATIVE-001 remains at the hardware gate. Exact installation/current legacy

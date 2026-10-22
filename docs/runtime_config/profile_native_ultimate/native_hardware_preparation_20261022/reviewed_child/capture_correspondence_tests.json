@@ -1,0 +1,104 @@
+{
+  "status": "PASS_HOST_SYNTHETIC_ONLY",
+  "cases": [
+    {
+      "label": "xinput_complete",
+      "expected_match": true,
+      "matched": true,
+      "error": null,
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "switch_complete",
+      "expected_match": true,
+      "matched": true,
+      "error": null,
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "wup028_complete",
+      "expected_match": true,
+      "matched": true,
+      "error": null,
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "wrong_end_count",
+      "expected_match": false,
+      "matched": false,
+      "error": "insufficient/incomplete raw and decoded report pairs",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "missing_end",
+      "expected_match": false,
+      "matched": false,
+      "error": "missing/duplicate session/end; incomplete or concatenated capture",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "duplicate_decoded",
+      "expected_match": false,
+      "matched": false,
+      "error": "missing/duplicate session/end; incomplete or concatenated capture",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "decoded_forgery",
+      "expected_match": false,
+      "matched": false,
+      "error": "complete raw-report field mismatch; no scaling/clamping/remapping tolerated",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "raw_axis_bit_changed",
+      "expected_match": false,
+      "matched": false,
+      "error": "complete raw-report field mismatch; no scaling/clamping/remapping tolerated",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "raw_field_timestamp_mismatch",
+      "expected_match": false,
+      "matched": false,
+      "error": "field/raw timestamp mismatch",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "wrong_row",
+      "expected_match": false,
+      "matched": false,
+      "error": "capture row/route/source claim mismatch",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "wrong_descriptor",
+      "expected_match": false,
+      "matched": false,
+      "error": "missing/wrong exactF Switch descriptor",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "unallowed_adapter_init",
+      "expected_match": false,
+      "matched": false,
+      "error": "unapproved/failed/uncertain adapter init: completion must be status0 and exactly1 known byte",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "wrong_source_claim",
+      "expected_match": false,
+      "matched": false,
+      "error": "capture row/route/source claim mismatch",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    },
+    {
+      "label": "preflight_not_candidate",
+      "expected_match": false,
+      "matched": false,
+      "error": "access-preflight capture cannot become candidate output evidence",
+      "status": "PASS_SYNTHETIC_HOST_CHALLENGE_ONLY"
+    }
+  ],
+  "hardware": "NOT_TESTED"
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "EXACT_FINITE_SOURCE_ROW_HISTORY_ELIGIBILITY_NOT_ACCEPTANCE",
+  "files": {
+    "PINS.json": {
+      "bytes": 12800,
+      "sha256": "041dd03c8a42b28f016a844dde8e3f81d392efdd29568343aef01293c63bf6d7"
+    },
+    "REPORT.md": {
+      "bytes": 6586,
+      "sha256": "b9cdd96e37b1747aeb4429c8196c6e6106762b3ebba3ec548f44fd6b1a2c7c48"
+    },
+    "context_input_references.json": {
+      "bytes": 8212,
+      "sha256": "4ce04ac78b2b3061fd48316b4c823126240daf5cd6c4e2ec1913cdb2b97411a3"
+    },
+    "eligibility.json": {
+      "bytes": 29022,
+      "sha256": "db2b241c1b65daac9e151ab2b5c07c072b266d46c5fde4c0ddf46e496d84df01"
+    },
+    "fixture_path_note.json": {
+      "bytes": 329,
+      "sha256": "ccd89881f5cb716125ef5217c6f43c07c965967316d710ef4a21bef83b1f7de3"
+    }
+  },
+  "row_or_contract_change": false,
+  "hardware_actions": 0
+}

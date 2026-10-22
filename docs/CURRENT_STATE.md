@@ -37,6 +37,16 @@ GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
 remain. Nunchuk NOT_TESTED, target timing/highwater NOT_MEASURED, RT2 deferred.
 
+The [reviewed native XInput packet](runtime_config/profile_native_ultimate/native_hardware_preparation_20261022/OWNER_PACKET.md)
+is prepared for exact owner approval and remains unexecuted. It binds the corrected
+native-only four-read host child, genuine owner poses, two disposable profiles,
+guarded Config/reference changes, measurements and logical restoration. Maxima
+are494 captures/1976 reports/50 firmware restarts, with explicit21-edge settled
+endpoint qualification; no frame-exact/transient or other-route waiver follows.
+The older-schema oracle discrepancy and actual JSONL host defect are preserved
+with source-grounded baseline qualification and independently reviewed child
+closure. F/UF2, original Config/all22, caps and all prior evidence stay unchanged.
+
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,
 another native scope/successor or a global evidence wait; this same product

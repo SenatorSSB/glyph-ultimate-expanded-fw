@@ -1,5 +1,16 @@
 # Exact334f candidate — hardware testing required
 
+The [reviewed native XInput packet](native_hardware_preparation_20261022/OWNER_PACKET.md)
+is prepared for exact owner approval and remains unexecuted. It binds the corrected
+native-only four-read host child, genuine owner poses, two disposable profiles,
+guarded Config/reference changes, measurements and logical restoration. Maxima
+are494 captures/1976 reports/50 firmware restarts, with explicit21-edge settled
+endpoint qualification; no frame-exact/transient or other-route waiver follows.
+The older-schema oracle discrepancy and actual JSONL host defect are preserved
+with source-grounded baseline qualification and independently reviewed child
+closure. F/UF2, original Config/all22, caps and all prior evidence stay unchanged.
+
+
 The complete native Ultimate candidate is frozen at `334fbd06e4541c120b0db423e5be7e112eb1f6f6`, tree `0483dbb0cc8f7eb5a1c93cb1d91044f4d3dcf999`, on `codex/gp-native-001-profile-execution`. Its source and evidence worktree is clean. The latest source-free canonical ancestor is `c0cc03fe0ce8a8b39bddf3cf7ef14400fb7c6351`; original exact baseline976ba219 remains separately preserved. Firmware is not integrated into canonical.
 
 [Independent source review](ABC_final_source_review_20261021/REPORT.md) and directly affected actual both-enum-ABI tests pass within their stated scopes. The exact committed validation archive retains952 deep NOR/checked-write rows,1641 Save rows,8381 LoadCapture rows and51 full-receipt COBS SET rows per representation, complete owner cleanup observers and meaningful rejected mutants. Eight affected stock checkers pass. Earlier failures remain preserved.

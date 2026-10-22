@@ -1,0 +1,218 @@
+{
+  "severity": "P2/Tier2",
+  "status": "CONFIRMED_ACTUAL_SOURCE_JSONL_CONTRACT_FAILURE",
+  "source_sha256": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55",
+  "metadata_sha256": "aa577b4a6c095ba65b16ebe4eed3b901fcc89e72072ae78910679c215692a5d3",
+  "binding_producer_sha256": "d8999e5e32bec423604873f2e6d025e7bebb16a45344ed17e083055c63c5a048",
+  "binding_file_sha256": "ab3f9d3e2c2b75760031ec248a33ae7db592903f74fa2440d0f37d50b0612051",
+  "actual_journal_sha256": "677ab3c5d456664c34367f870de38fb852c4e66dbf46b40ee8012f8ecee87659",
+  "invalid_JSONL_lines": [
+    {
+      "line": 2,
+      "error": "Expecting property name enclosed in double quotes: line 1 column 117 (char 116)"
+    },
+    {
+      "line": 3,
+      "error": "Extra data: line 1 column 29 (char 28)"
+    },
+    {
+      "line": 4,
+      "error": "Extra data: line 1 column 20 (char 19)"
+    },
+    {
+      "line": 5,
+      "error": "Extra data: line 1 column 23 (char 22)"
+    },
+    {
+      "line": 6,
+      "error": "Extra data: line 1 column 17 (char 16)"
+    },
+    {
+      "line": 7,
+      "error": "Extra data: line 1 column 22 (char 21)"
+    },
+    {
+      "line": 8,
+      "error": "Extra data: line 1 column 12 (char 11)"
+    },
+    {
+      "line": 9,
+      "error": "Extra data: line 1 column 14 (char 13)"
+    },
+    {
+      "line": 10,
+      "error": "Extra data: line 1 column 16 (char 15)"
+    },
+    {
+      "line": 11,
+      "error": "Extra data: line 1 column 37 (char 36)"
+    },
+    {
+      "line": 12,
+      "error": "Extra data: line 1 column 38 (char 37)"
+    },
+    {
+      "line": 13,
+      "error": "Extra data: line 1 column 16 (char 15)"
+    },
+    {
+      "line": 14,
+      "error": "Extra data: line 1 column 35 (char 34)"
+    },
+    {
+      "line": 15,
+      "error": "Extra data: line 1 column 23 (char 22)"
+    },
+    {
+      "line": 16,
+      "error": "Extra data: line 1 column 33 (char 32)"
+    },
+    {
+      "line": 17,
+      "error": "Extra data: line 1 column 16 (char 15)"
+    },
+    {
+      "line": 18,
+      "error": "Extra data: line 1 column 23 (char 22)"
+    },
+    {
+      "line": 19,
+      "error": "Extra data: line 1 column 9 (char 8)"
+    },
+    {
+      "line": 20,
+      "error": "Extra data: line 1 column 22 (char 21)"
+    },
+    {
+      "line": 21,
+      "error": "Extra data: line 1 column 7 (char 6)"
+    },
+    {
+      "line": 23,
+      "error": "Expecting value: line 1 column 3 (char 2)"
+    },
+    {
+      "line": 24,
+      "error": "Extra data: line 1 column 30 (char 29)"
+    },
+    {
+      "line": 25,
+      "error": "Extra data: line 1 column 25 (char 24)"
+    },
+    {
+      "line": 26,
+      "error": "Extra data: line 1 column 24 (char 23)"
+    },
+    {
+      "line": 27,
+      "error": "Extra data: line 1 column 15 (char 14)"
+    },
+    {
+      "line": 28,
+      "error": "Extra data: line 1 column 21 (char 20)"
+    },
+    {
+      "line": 29,
+      "error": "Extra data: line 1 column 27 (char 26)"
+    },
+    {
+      "line": 30,
+      "error": "Extra data: line 1 column 12 (char 11)"
+    },
+    {
+      "line": 31,
+      "error": "Extra data: line 1 column 28 (char 27)"
+    },
+    {
+      "line": 32,
+      "error": "Extra data: line 1 column 31 (char 30)"
+    },
+    {
+      "line": 33,
+      "error": "Extra data: line 1 column 10 (char 9)"
+    },
+    {
+      "line": 34,
+      "error": "Extra data: line 1 column 21 (char 20)"
+    },
+    {
+      "line": 35,
+      "error": "Extra data: line 1 column 16 (char 15)"
+    },
+    {
+      "line": 36,
+      "error": "Extra data: line 1 column 22 (char 21)"
+    },
+    {
+      "line": 37,
+      "error": "Extra data: line 1 column 14 (char 13)"
+    },
+    {
+      "line": 38,
+      "error": "Extra data: line 1 column 18 (char 17)"
+    },
+    {
+      "line": 39,
+      "error": "Extra data: line 1 column 18 (char 17)"
+    },
+    {
+      "line": 40,
+      "error": "Extra data: line 1 column 18 (char 17)"
+    },
+    {
+      "line": 41,
+      "error": "Extra data: line 1 column 21 (char 20)"
+    },
+    {
+      "line": 42,
+      "error": "Extra data: line 1 column 22 (char 21)"
+    },
+    {
+      "line": 43,
+      "error": "Extra data: line 1 column 26 (char 25)"
+    },
+    {
+      "line": 44,
+      "error": "Extra data: line 1 column 21 (char 20)"
+    },
+    {
+      "line": 45,
+      "error": "Extra data: line 1 column 14 (char 13)"
+    },
+    {
+      "line": 46,
+      "error": "Extra data: line 1 column 13 (char 12)"
+    },
+    {
+      "line": 47,
+      "error": "Expecting value: line 1 column 3 (char 2)"
+    },
+    {
+      "line": 48,
+      "error": "Extra data: line 1 column 28 (char 27)"
+    },
+    {
+      "line": 49,
+      "error": "Extra data: line 1 column 33 (char 32)"
+    },
+    {
+      "line": 50,
+      "error": "Extra data: line 1 column 35 (char 34)"
+    },
+    {
+      "line": 51,
+      "error": "Extra data: line 1 column 15 (char 14)"
+    },
+    {
+      "line": 52,
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "line": 53,
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    }
+  ],
+  "cause": "Producer writes pretty multiline JSON; metadata preserves exact bytes; open_journal prints raw bytes inside acceptance_binding JSONL. Consumer json.loads(each line) refuses valid produced binding. Synthetic tests compact their replacement record, masking actual integration.",
+  "live_registry_or_USB_calls": 0,
+  "required_repair": "Emit a single-line valid JSON binding object in journal while preserving hash of original argv bytes, or output compact binding bytes consistently; test actual producer->parse->journal->verifier path with pretty/compact/trailing newline and original exact hash."
+}

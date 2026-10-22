@@ -1,0 +1,18 @@
+from pathlib import Path
+import hashlib,shutil,json,subprocess,os
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022');B=Path('/private/tmp/glyph-native-native-acceptance-preparation-20261022');D=O/'corrected_child_replay';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert sha(P/'acceptance_metadata.hpp')=='18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c' and sha(P/'mac_hostinterface_observer')=='ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164'
+for n in ['mac_hostinterface_observer.mm','observer_core.hpp','observer_parser.hpp','binding_contract.py','verify_native_capture.py','strong_verify_capture_unchanged.py','acceptance_comparison_matrix.json']:assert sha(P/n)==sha(B/n),n
+shutil.copytree(P,D,ignore=shutil.ignore_patterns('*.dSYM','__pycache__','actual_handoff_tests','tmp'))
+commands=[]
+def run(args):
+ r=subprocess.run(list(map(str,args)),capture_output=True,text=True,timeout=40,env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','ASAN_OPTIONS':'detect_stack_use_after_return=1:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'});commands.append({'argv':list(map(str,args)),'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr});(O/'child-handoff-commands.json').write_text(json.dumps(commands,indent=2)+'\n');assert r.returncode==0,r.stdout+r.stderr;return r
+# Effectful APIs are entirely mocked in the inspected actual argv-to-begin harness.
+m=(D/'actual_binding_handoff_mock.mm').read_text()
+for n in ['IOUSBHostInterface','IOUSBHostPipe','IOServiceMatching','IOServiceGetMatchingServices','IOIteratorNext','IOObjectRelease','IOObjectRetain','IOIteratorIsValid','IORegistryEntryGetRegistryEntryID','IOObjectGetClass','IORegistryEntryGetChildIterator','IORegistryEntryCreateCFProperty']:assert '#define '+n+' 'in m,n
+common=['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations'];objc=['-fobjc-arc','-fblocks','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost'];san=['-fsanitize=address,undefined','-fno-omit-frame-pointer']
+run([*common,*objc,D/'mac_hostinterface_observer.mm','-o',D/'mac_hostinterface_observer']);assert sha(D/'mac_hostinterface_observer')==sha(P/'mac_hostinterface_observer')
+run([*common,*objc,*san,D/'actual_binding_handoff_mock.mm','-o',D/'actual_binding_handoff_mock'])
+run(['python3',D/'test_actual_binding_handoff.py'])
+r=json.loads((D/'actual_handoff_repair_evidence.json').read_text());assert len(r['cases'])==7
+(O/'child-handoff-results.json').write_text(json.dumps({'runtime_header_sha256':sha(P/'acceptance_metadata.hpp'),'rebuilt_binary_sha256':sha(D/'mac_hostinterface_observer'),'unchanged_strict_verifier':sha(P/'strong_verify_capture_unchanged.py'),'unchanged_binding_producer':sha(P/'binding_contract.py'),'cases':r['cases'],'live_registry_or_USB_calls':0,'parent47_preserved':True},indent=2)+'\n');print('PASS independent actualCLI/argv/sourcejournal/strict7-case handoff, exact binary; old51invalid negative retained; no device calls')

@@ -1,0 +1,3 @@
+#include "observer_core.hpp"
+#include <iostream>
+int main(int n,char**v){try{if(n!=3)throw std::runtime_error("offline associated descriptor parser only");auto c=glyph_observer::unhex(v[1]),i=glyph_observer::unhex(v[2]);if(i.size()!=9)throw std::runtime_error("interface length");std::array<uint8_t,9>a{};std::copy(i.begin(),i.end(),a.begin());auto p=host_observer::descriptors(c,0,a);std::cout<<"{\"in\":"<<unsigned(p.in)<<",\"out\":"<<unsigned(p.out)<<"}\n";return 0;}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 2;}}

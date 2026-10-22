@@ -1,0 +1,70 @@
+"""Synthetic pure-file proofs only; no device or approval evidence created."""
+from pathlib import Path
+import json,copy,base64,subprocess,hashlib,sys
+import binding_contract as b
+import verify_native_capture as v
+D=Path(__file__).resolve().parent;T=D/'synthetic_tests';T.mkdir(exist_ok=True)
+def save(name,value):
+ p=T/name;p.write_text(json.dumps(value,sort_keys=True,indent=2)+'\n');return str(p)
+def run(cmd):
+ p=subprocess.run(list(map(str,cmd)),capture_output=True,text=True);return p
+transport,identity,preprocess,validate,pb,jf=b.modules()
+schedule=b.read_json(D/'native_xinput_owner_packet_draft.json');planned=next(e for e in schedule['events']if e.get('selection_id')=='O000');SESSION=planned['boot_session'];RUN=planned['case_run_id'];packet=b.read_json(D/'acceptance_comparison_matrix.json');row=packet['rows'][0];ctx=packet['contexts'][row['profile_context_key']]
+profile=pb.UltimateProfile();profile.ParseFromString((b.F/ctx['profile_pb_path']).read_bytes())
+P=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_BACKUP_AFTER_METADATA_STOP_V1_20261022')
+raw=base64.b64decode(b.read_json(P/'postinstall_config_backup.json')['rawConfigPayloadBase64']);config=transport.native_packet_config(raw,pb)
+config.game_mode_configs[2].ClearField('button_remapping');config.game_mode_configs[2].ClearField('socd_pairs');config.game_mode_configs[2].ultimate_profile_id=25;config.game_mode_configs[2].ultimate_profile_engine=1
+index={'profile_read':save('READ.json',{'response':{'profile_id':25,'profile_revision':1,'profile':jf.MessageToDict(profile,preserving_proto_field_name=True)}}),'config_backup':save('Config.json',{'rawConfigPayloadBase64':base64.b64encode(config.SerializeToString(deterministic=True)).decode()}),'checked_reference_receipt':save('reference.json',{'decoded_request':{'operation':'PROFILE_STORE_SET_REFERENCE','profile_id':25,'mode_config_index':2,'expected_store_incarnation':1}}),'checked_reference_response':save('reference_response.json',{'response':{'profile_id':25}}),'runtime_identity':save('identity.json',{'session':SESSION,'context':'xinput','observation':'current_session_only','status':'persisted','primary_backend':2,'context_row':3,'requested_reference':25,'incarnation':1,'active_id':25,'active_revision':1,'schema_version':5,'payload_sha256':identity.payload_digest(profile)}),'boot_record':save('boot.json',{'session':SESSION,'candidate_git_sha':b.F_SHA,'uf2_sha256':b.UF2,'all_controls_released_before_reinitialize':True,'reinitialization':'owner_known_ordinary_USB_restart'}),'stimulus_confirmation':save('stimulus.json',{'session':SESSION,'case_id':'O000','physical_held_input_ids':[],'history_group':'O000','history_before_this_row':[],'owner_confirmed_listed_stimulus':True}),'ownership':{}}
+inspect=T/'inspect.jsonl';inspect.write_text(json.dumps({'kind':'session','session':SESSION})+'\n'+json.dumps({'kind':'inspect_end','outcome':'ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY','anchor_entry_id':1,'interface_entry_id':101})+'\n');index['registry_inspection']=str(inspect)
+for label,pid in [('A',25),('B',26)]:index['ownership'][label]={'request':save(label+'create_request.json',{'decoded_request':{'operation':'PROFILE_STORE_CREATE','expected_store_incarnation':1}}),'response':save(label+'create_response.json',{'response':{'profile_id':pid}})}
+save('proof_index.json',index)
+binding=b.build(D/'acceptance_comparison_matrix.json',index,'O000',RUN);bindingpath=save('binding.json',binding);encoded=base64.b64encode(Path(bindingpath).read_bytes()).decode()
+p=run([D/'mac_hostinterface_observer','--check-binding',encoded,SESSION]);assert p.returncode==0,p.stderr
+checks=[{'case':'valid_metadata','result':'PASS'}]
+for key,val in [('purpose','preflight'),('candidate_git_sha','0'*40),('owned_profile_ids',[4,26]),('owned_profile_ids',[25,25]),('profile_id',4),('incarnation',True),('profile_revision',0),('context_row',2),('anchor_entry_id',0),('anchor_entry_id',True),('case_kind','other'),('fixture_row_sha256','bad')]:
+ z=copy.deepcopy(binding);z[key]=val;p=run([D/'mac_hostinterface_observer','--check-binding',base64.b64encode(b.canonical(z)).decode(),SESSION]);assert p.returncode==2,(key,p.stdout,p.stderr);checks.append({'case':'invalid_'+key+'_'+str(val),'result':'REFUSED'})
+for key,val in [('active_revision',2),('requested_reference',26),('primary_backend',4),('payload_sha256','0'*64),('session','OLD_BOOT')]:
+ z=copy.deepcopy(index);old=b.read_json(index['runtime_identity']);old[key]=val;z['runtime_identity']=save('bad_identity.json',old)
+ try:b.build(D/'acceptance_comparison_matrix.json',z,'O000',RUN)
+ except ValueError:checks.append({'case':'proof_wrong_'+key,'result':'REFUSED'})
+ else:raise AssertionError('bad actual proof accepted '+key)
+# Native-source MOCK journal carries no real proof; install synthetic metadata in a
+# separate derivative solely to challenge comparator boundaries. Never edit mock.
+rows=[json.loads(x)for x in (D/'mock_journals_final/scenario0.jsonl').read_text().splitlines()];rows[0]['session']=SESSION;rows[1]={'kind':'acceptance_binding','binding':binding,'sha256':b.sha(bindingpath)}
+capture=T/'synthetic_capture.jsonl'
+def journal(r):capture.write_text(''.join(json.dumps(x,sort_keys=True)+'\n'for x in r))
+def execution():return {'argv':[str(D/'mac_hostinterface_observer'),'capture','--approved-session',SESSION,'--anchor-entry-id','1','--interface-entry-id','101','--output',str(capture),'--binding-base64',encoded],'returncode':0,'binary_sha256':b.sha(D/'mac_hostinterface_observer'),'capture_sha256':b.sha(capture),'owner_packet_approval_sha256':'0'*64,'classification':'SYNTHETIC_TEST_ONLY_NO_OWNER_APPROVAL'}
+journal(rows);assert v.verify_bound(capture,D/'acceptance_comparison_matrix.json',binding,execution())['measurement_reports']==3;checks.append({'case':'synthetic4report_strict_match','result':'PASS_CORRESPONDENCE_ONLY_NOT_HEP'})
+# A different valid drain is allowed and must remain visible; all3 measurements strict.
+z=copy.deepcopy(rows)
+for r in z:
+ if r.get('role')=='drain'and r['kind']=='raw':r['hex']='0000100000008000800080008000000000000000'
+ if r.get('role')=='drain'and r['kind']=='decoded':r['fields']['start']=1
+journal(z);v.verify_bound(capture,D/'acceptance_comparison_matrix.json',binding,execution());checks.append({'case':'explicit_different_structurally_valid_drain','result':'PASS_NO_POSE_ACCEPTANCE'})
+mutations=[]
+for desc,fn in [('preflight',lambda r:r[0].update(purpose='preflight')),('missing_drain',lambda r:r.__setitem__(slice(None),[x for x in r if x.get('role')!='drain'])),('extra_drain',lambda r:next(x for x in r if x['kind']=='raw'and x['sequence']==2).update(role='drain')),('bad_drain_header',lambda r:next(x for x in r if x['kind']=='raw').update(hex='0014'+'00'*18)),('wrong_first_measurement',lambda r:next(x for x in r if x['kind']=='decoded'and x['sequence']==2)['fields'].update(a=1)),('wrong_last_measurement',lambda r:next(x for x in r if x['kind']=='decoded'and x['sequence']==4)['fields'].update(a=1)),('nonzero_status',lambda r:next(x for x in r if x['kind']=='completion').update(status=1)),('count0',lambda r:next(x for x in r if x['kind']=='completion').update(bytes_transferred=0)),('unsettled',lambda r:r[-1].update(settled_cleanup=False)),('abort',lambda r:r[-1].update(abort_calls=1)),('truncated',lambda r:r.pop()),('bad_descriptor',lambda r:next(x for x in r if x['kind']=='associated_descriptors').update(in_address=129))]:
+ z=copy.deepcopy(rows);fn(z);journal(z)
+ try:v.verify_bound(capture,D/'acceptance_comparison_matrix.json',binding,execution())
+ except (ValueError,KeyError):checks.append({'case':desc,'result':'REFUSED'})
+ else:raise AssertionError('comparator accepted '+desc)
+# Frozen verifier must refuse old actual preflight, independently of this adapter.
+old=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-installation/GP_NATIVE_001_MAC_HOSTINTERFACE_REBIND_V1_20261022/capture_journal.jsonl')
+try:v.strong.verify(old,D/'acceptance_comparison_matrix.json','O000','xinput',D/'parser_cli',3)
+except ValueError as e:assert 'preflight' in str(e);checks.append({'case':'unchanged_strong_verifier_actual_preflight_refusal','result':'REFUSED'})
+else:raise AssertionError('oldpreflight accepted')
+# Truthful schema3 original baseline and schema5 unavailable-refusal bindings.
+for kind in ['baseline','refusal']:
+ selected=next(e for e in schedule['events']if e['kind']==('ORIGINAL_BASELINE_CAPTURE' if kind=='baseline' else 'NATIVE_ACCEPTANCE_CAPTURE') and (kind=='baseline' or e['context'].endswith('/refusal_context_mismatch')))
+ rid=selected['selection_id'];rr=next(r for r in packet['rows']if r['selection_id']==rid);cc=packet['contexts'][rr['profile_context_key']];pid=4 if kind=='baseline' else 26
+ pp=pb.UltimateProfile();pp.ParseFromString((P/'postinstall_profile_4_canonical.bin' if kind=='baseline' else Path(cc['profile_pb_path']) if Path(cc['profile_pb_path']).is_absolute() else b.F/cc['profile_pb_path']).read_bytes())
+ cg=transport.native_packet_config(raw,pb);mm=pb.GameModeConfig();jf.ParseDict(cc['context_json'],mm,ignore_unknown_fields=False);cg.game_mode_configs[2].ClearField('button_remapping');cg.game_mode_configs[2].ClearField('socd_pairs');cg.game_mode_configs[2].button_remapping.extend(mm.button_remapping);cg.game_mode_configs[2].socd_pairs.extend(mm.socd_pairs);cg.game_mode_configs[2].ultimate_profile_id=pid;cg.game_mode_configs[2].ultimate_profile_engine=0 if kind=='baseline' else 1
+ z=copy.deepcopy(index);z['profile_read']=save(kind+'_READ.json',{'response':{'profile_id':pid,'profile_revision':1,'profile':jf.MessageToDict(pp,preserving_proto_field_name=True)}});z['config_backup']=save(kind+'_Config.json',{'rawConfigPayloadBase64':base64.b64encode(cg.SerializeToString(deterministic=True)).decode()});z['original_custody']=str(P/'all22_postinstall_preservation_result.json')
+ ci=b.read_json(index['runtime_identity']);ci.update(session=selected['boot_session'],requested_reference=pid,active_id=pid,schema_version=3 if kind=='baseline' else 5,payload_sha256=identity.payload_digest(pp))
+ if kind=='refusal':ci.update(status='snapshot_unavailable',incarnation=0,active_id=0,active_revision=0,schema_version=0,payload_sha256=None)
+ z['runtime_identity']=save(kind+'_identity.json',ci);br=b.read_json(index['boot_record']);br['session']=selected['boot_session'];z['boot_record']=save(kind+'_boot.json',br)
+ st=b.read_json(index['stimulus_confirmation']);st.update(session=selected['boot_session'],case_id=rid,physical_held_input_ids=rr['physical_held_input_ids'],history_group=rr['history_group'],history_before_this_row=rr['history_before_this_row']);z['stimulus_confirmation']=save(kind+'_stimulus.json',st)
+ ip=T/(kind+'_inspect.jsonl');ip.write_text(json.dumps({'kind':'session','session':selected['boot_session']})+'\n'+json.dumps({'kind':'inspect_end','outcome':'ONE_FRESH_ANCHORED_INTERFACE_METADATA_ONLY','anchor_entry_id':1,'interface_entry_id':101})+'\n');z['registry_inspection']=str(ip)
+ z['checked_reference_receipt']=save(kind+'_reference.json',{'decoded_request':{'operation':'PROFILE_STORE_SET_REFERENCE','profile_id':pid,'mode_config_index':2,'expected_store_incarnation':1}}) if kind=='refusal' else str(P/'postinstall_config_backup.json');z['checked_reference_response']=save(kind+'_reference_response.json',{'response':{'profile_id':pid}}) if kind=='refusal' else str(P/'postinstall_config_backup.json')
+ bb=b.build(D/'acceptance_comparison_matrix.json',z,rid,selected['case_run_id']);assert bb['case_kind']==kind
+ p=run([D/'mac_hostinterface_observer','--check-binding',base64.b64encode(b.canonical(bb)).decode(),selected['boot_session']]);assert p.returncode==0,p.stderr;checks.append({'case':'truthful_'+kind+'_binding','result':'PASS_METADATA_ONLY'})
+save('results.json',{'classification':'SYNTHETIC_PURE_FILE_AND_PURE_ARGV_ONLY_NOT_HARDWARE_OR_APPROVAL','live_calls':0,'checks':checks});print('PASS',len(checks),'metadata/proof/strict4report comparator cases; no device calls')

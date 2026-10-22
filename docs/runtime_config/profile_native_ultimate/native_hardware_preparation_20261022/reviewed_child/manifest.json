@@ -1,0 +1,222 @@
+{
+  "classification": "OFFLINE_NATIVE4READ_CHILD_RUNTIME_AND_EXACT_PACKET_REVIEW_ARTIFACTS",
+  "files": {
+    "mac_hostinterface_observer.mm.txt": {
+      "bytes": 19654,
+      "sha256": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/mac_hostinterface_observer.mm"
+    },
+    "observer_core.hpp.txt": {
+      "bytes": 5121,
+      "sha256": "a18d19cf0596a8cf8b02e5cd3874047b890241df383339e76fcecad69bfdb2d4",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/observer_core.hpp"
+    },
+    "observer_parser.hpp.txt": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/observer_parser.hpp"
+    },
+    "acceptance_metadata.hpp.txt": {
+      "bytes": 6348,
+      "sha256": "18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/acceptance_metadata.hpp"
+    },
+    "binding_contract.py.txt": {
+      "bytes": 9839,
+      "sha256": "d8999e5e32bec423604873f2e6d025e7bebb16a45344ed17e083055c63c5a048",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/binding_contract.py"
+    },
+    "verify_native_capture.py.txt": {
+      "bytes": 7176,
+      "sha256": "d44a0cfb5f4a6ee46ca547b267b239f49130edfe2e98877a4bdce8551d70f92b",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/verify_native_capture.py"
+    },
+    "strong_verify_capture_unchanged.py.txt": {
+      "bytes": 5762,
+      "sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/strong_verify_capture_unchanged.py"
+    },
+    "descriptor_cli.cpp.txt": {
+      "bytes": 538,
+      "sha256": "91254bd754e105a6c2cfe31a78f8010e444b6c71f3f860f8f4cc9c3cb5ef1dd7",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/descriptor_cli.cpp"
+    },
+    "parser_cli.cpp.txt": {
+      "bytes": 479,
+      "sha256": "59f5ce09bcd99aa063fb192beab58e68a2f171a0fc671ba58fb49e53c50c82a7",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/parser_cli.cpp"
+    },
+    "core_tests.cpp.txt": {
+      "bytes": 3351,
+      "sha256": "4d4aae4a4629bf481071a686a2eeff7cfd6918fa5325e0929d0aaca28ba0aaf5",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/core_tests.cpp"
+    },
+    "native_mock_tests.mm.txt": {
+      "bytes": 9135,
+      "sha256": "f2238f087a1669ff2235f3bdf161578350e071de810b87eb3a6482a6439b6fbd",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/native_mock_tests.mm"
+    },
+    "test_acceptance_binding.py.txt": {
+      "bytes": 12035,
+      "sha256": "5f874859aca9c2751494a1e82c79dc0333a09158d71dd24175c375236c3a7311",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/test_acceptance_binding.py"
+    },
+    "test_capture_correspondence_replay.py.txt": {
+      "bytes": 4143,
+      "sha256": "77eb6181a43338dccc0628c64397050cf5af277231fa32e1daf90a6de3e0a906",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/test_capture_correspondence_replay.py"
+    },
+    "actual_binding_handoff_mock.mm.txt": {
+      "bytes": 7953,
+      "sha256": "9982f14d58d1c770ceacf5cfc83319eb0f95d74decfd55712cf0e5adfff183fa",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/actual_binding_handoff_mock.mm"
+    },
+    "test_actual_binding_handoff.py.txt": {
+      "bytes": 5484,
+      "sha256": "30248062617324c4ff9e77aafe14979a36d842527a4da87840de560c6974ffbc",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/test_actual_binding_handoff.py"
+    },
+    "child_no_late_enqueue_regression.mm.txt": {
+      "bytes": 9958,
+      "sha256": "148e803b16382865003431768fd01cc414021947d858ca304ed8242002420230",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/child_no_late_enqueue_regression.mm"
+    },
+    "child_clock_failure_regression.mm.txt": {
+      "bytes": 10011,
+      "sha256": "7300c5d75537b78a5c1ccdc5cb055c33baaa5d8f3e6a8c50b29a1d7e616fbb5e",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/child_clock_failure_regression.mm"
+    },
+    "validate_offline.py.txt": {
+      "bytes": 5029,
+      "sha256": "8adb66ae28177b698f54768e5d734fca648a01e2b3f665b280bf3abfcbb4f4cd",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/validate_offline.py"
+    },
+    "prepare_baseline.py.txt": {
+      "bytes": 8793,
+      "sha256": "2899a1bf567bbb3d3a4482acd47b124b088a22a39f2ee23b184d939d29d869e2",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/prepare_baseline.py"
+    },
+    "baseline/baseline_generator_executed_snapshot.py.txt": {
+      "bytes": 8652,
+      "sha256": "c7af7f826cef6fb42db74f99b4cbce58c4ddd872e5999baeb8f7dde842122ba8",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/baseline/baseline_generator_executed_snapshot.py"
+    },
+    "baseline/actual_F_legacy_baseline_runner.cpp.txt": {
+      "bytes": 974,
+      "sha256": "f9981989cb2066353c2b718a6edca124e890b4d80e7ef6dcd0c86ce3c125fed7",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/baseline/actual_F_legacy_baseline_runner.cpp"
+    },
+    "baseline/frozen_legacy_baseline_runner.cpp.txt": {
+      "bytes": 1035,
+      "sha256": "30c85621e709ab43edcec5905098eab50b1c2ab6006ce49a2ba628b326faeb7c",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/baseline/frozen_legacy_baseline_runner.cpp"
+    },
+    "baseline/baseline_xinput_encoder.cpp.txt": {
+      "bytes": 6591,
+      "sha256": "cac75ef3d0ba185dd92c6966d02a3df0cf42a4dc96b06c94c9cd44d9cd861732",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/baseline/baseline_xinput_encoder.cpp"
+    },
+    "offline_evidence.json": {
+      "bytes": 717401,
+      "sha256": "10180113c586d2467fcb688e025ac1fdbd7e12881773ef6771274be81556002b",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/offline_evidence.json"
+    },
+    "actual_handoff_repair_evidence.json": {
+      "bytes": 21595,
+      "sha256": "9e2246df205c1329036932b408354f7c3233cd21eb3196165eeb7ad81605a7cf",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/actual_handoff_repair_evidence.json"
+    },
+    "capture_correspondence_tests.json": {
+      "bytes": 3185,
+      "sha256": "14f75be1a5d5ecf6a31257713d225df0e33b58610af4166e5adc2686c02e794e",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/capture_correspondence_tests.json"
+    },
+    "repair_late_enqueue_regression.jsonl": {
+      "bytes": 3282,
+      "sha256": "391e09c88b0ef8fc01a7981e591bcd0a086ce4dd0370a70bf77ae723c9ecd08c",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/repair_late_enqueue_regression.jsonl"
+    },
+    "repair_clock_failure_regression.jsonl": {
+      "bytes": 3282,
+      "sha256": "ca3a03c40967508d6718551eb710a27744a509ee6c28061fc7f6706cb7ed1b91",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/repair_clock_failure_regression.jsonl"
+    },
+    "build_environment.json": {
+      "bytes": 954,
+      "sha256": "7354221781f578529246026155779b586b018346ec223872e589b256c062d13e",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/build_environment.json"
+    },
+    "baseline_derivation_provenance.json": {
+      "bytes": 1837,
+      "sha256": "ec89927f7e9f868edf77fe68e2718b6db7067743460859f3967a8b398c2361d3",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/baseline_derivation_provenance.json"
+    },
+    "baseline/baseline_oracle_proof.json": {
+      "bytes": 59648,
+      "sha256": "c62a0f0c978e356fae0d3d0b2bd344f9dc6babce69346ba4a8f21723f3b09af6",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/baseline/baseline_oracle_proof.json"
+    },
+    "acceptance_comparison_matrix.json": {
+      "bytes": 2861710,
+      "sha256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/acceptance_comparison_matrix.json"
+    },
+    "history_observation_proposal.json": {
+      "bytes": 18386,
+      "sha256": "08f82256ef6273fa4261e3273a59b591749de1702f8901c88f99beb42c16c58b",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/history_observation_proposal.json"
+    },
+    "queued_report_source_pins.json": {
+      "bytes": 1535,
+      "sha256": "932153905db6271da58c68d9b2b08647c3805455d4625d0903e33a0a7a807a9d",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/queued_report_source_pins.json"
+    },
+    "packet_counter_proof.json": {
+      "bytes": 929,
+      "sha256": "c42a3e67dc100db47945c10071ec61dfc0d7faee53f1ef98e8e6b6728a11aa95",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/packet_counter_proof.json"
+    },
+    "owner_host_custody.json": {
+      "bytes": 3651,
+      "sha256": "cc4ec988a70e5eb14fdb7af67d64b3e555252c22b7e60e7f6e7ac0af2eb1a255",
+      "original": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164/custody.json"
+    },
+    "REPORT.md": {
+      "bytes": 9456,
+      "sha256": "c96f0a780a828f61aa4bc78788ec517d6d82c91af24e373e35ebdc9efe623e4f",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/REPORT.md"
+    },
+    "PINS.json": {
+      "bytes": 21164,
+      "sha256": "d3aedae5698326cec4552ae77574af7c72b1fb8f8e15934dc436228fb23a08f0",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/PINS.json"
+    },
+    "CHILD_HOLD.json": {
+      "bytes": 21675,
+      "sha256": "3b447b893811e7e2207a6b48f1921e51ae1e079c97502fb99ab398ed93bcd33a",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/CHILD_HOLD.json"
+    },
+    "command_templates.json": {
+      "bytes": 10549,
+      "sha256": "db4f523e9e589b3c12949c20846edccb83b6854b6806f55183272466148d143e",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/command_templates.json"
+    },
+    "prepare_command_templates.py.txt": {
+      "bytes": 5666,
+      "sha256": "7b402183e499dae490418ac0dd82c29152766676214e1846450911e0c315c7d1",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/prepare_command_templates.py"
+    },
+    "prepare_packet.py.txt": {
+      "bytes": 16019,
+      "sha256": "0b1dd14005a1988ee9753c7bc59baae0053619bd92450c58e6a46f65dd5f0420",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/prepare_packet.py"
+    },
+    "seal_baseline_provenance.py.txt": {
+      "bytes": 2718,
+      "sha256": "d15dcbd6bf461e972280f74331a0ed9c7011b01cbceb3f94d1077efbb5fd3487",
+      "original": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/seal_baseline_provenance.py"
+    }
+  },
+  "physical_observations": null,
+  "device_actions": 0
+}

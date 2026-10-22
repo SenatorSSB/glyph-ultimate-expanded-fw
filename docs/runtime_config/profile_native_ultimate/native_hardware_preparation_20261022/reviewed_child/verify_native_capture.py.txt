@@ -1,0 +1,57 @@
+"""Offline native proposal correspondence. Original preflight evidence is never eligible."""
+from pathlib import Path
+import argparse,base64,hashlib,json,subprocess,tempfile
+import binding_contract as b
+import strong_verify_capture_unchanged as strong
+D=Path(__file__).resolve().parent
+ALLOWED={'session','acceptance_binding','anchor_query','numeric_property','anchored_node','interface_init','associated_descriptors','completion','raw','decoded','end'}
+def only(records,kind):
+ values=[r for r in records if r['kind']==kind];b.require(len(values)==1,'one '+kind+' required');return values[0]
+def verify(capture,matrix,proof_index,rowid,runid,execution):
+ binding=b.build(matrix,b.read_json(proof_index),rowid,runid)
+ return verify_bound(capture,matrix,binding,b.read_json(execution))
+def verify_bound(capture,matrix,binding,execution):
+ rows=[json.loads(s) for s in Path(capture).read_text().splitlines()];b.require(rows and rows[0]['kind']=='session' and rows[-1]['kind']=='end','complete single capture journal')
+ b.require(all(r['kind'] in ALLOWED for r in rows),'failure/unknown event')
+ s=only(rows,'session');end=only(rows,'end');att=only(rows,'acceptance_binding')
+ b.require(s['purpose']=='candidate' and s['operation']=='capture' and s['route']=='xinput' and s['row']==binding['case_id'] and s['candidate_source_claim']==b.F_SHA and s['source_claim_is_device_attestation'] is False,'preflight/cross-source/row refused')
+ b.require(s['session']==binding['boot_session'] and s['anchor_entry_id']==binding['anchor_entry_id'] and s['interface_entry_id']==binding['interface_entry_id'],'cross-boot registry binding')
+ b.require((s['max_seconds'],s['max_reports'],s['max_measurements'],s['explicit_drain_reports'])==(5,4,3,1),'exact acquisition contract')
+ b.require(att['binding']==binding,'binding must rederive from actual proof files')
+ encoded=base64.b64encode(json.dumps(binding,sort_keys=True,indent=2).encode()+b'\n').decode()
+ # Preserve exact JSON bytes hash: reconstruct only from the argv-encoded bytes.
+ argv=execution['argv'];b.require(len(argv)==12 and argv[1]=='capture','bounded capture argv')
+ opts=dict(zip(argv[2::2],argv[3::2]));b.require(set(opts)=={'--approved-session','--anchor-entry-id','--interface-entry-id','--output','--binding-base64'},'exact capture options')
+ raw_binding=base64.b64decode(opts['--binding-base64'],validate=True);b.require(json.loads(raw_binding)==binding and hashlib.sha256(raw_binding).hexdigest()==att['sha256'],'exact argv binding/hash')
+ b.require(opts['--approved-session']==binding['boot_session'] and opts['--anchor-entry-id']==str(binding['anchor_entry_id']) and opts['--interface-entry-id']==str(binding['interface_entry_id']) and Path(opts['--output']).resolve()==Path(capture).resolve(),'execution argv/session/IDs/output')
+ b.require(execution['returncode']==0 and execution['binary_sha256']==b.sha(D/'mac_hostinterface_observer') and Path(argv[0]).resolve()==(D/'mac_hostinterface_observer').resolve(),'exact successful host binary execution required')
+ b.require(execution['capture_sha256']==b.sha(capture) and execution['owner_packet_approval_sha256'] and len(execution['owner_packet_approval_sha256'])==64,'execution/capture/approval evidence')
+ q=only(rows,'anchor_query');i=only(rows,'interface_init');ds=only(rows,'associated_descriptors')
+ b.require(q['status']==0 and q['iterator_nonnull'] is True and i['success'] is True and i['options']==0,'ordinary successful unique anchor/init')
+ b.require(ds['interface_number']==0,'interface0 only');p=subprocess.run([str(D/'descriptor_cli'),ds['configuration_hex'],ds['interface_hex']],capture_output=True,text=True);b.require(p.returncode==0,'associated descriptor parser refusal');ep=json.loads(p.stdout)
+ b.require(ds['in_address']==ep['in'] and ds['out_address_not_opened']==ep['out'],'descriptor endpoint identity')
+ raw=[r for r in rows if r['kind']=='raw'];decoded=[r for r in rows if r['kind']=='decoded'];completions=[r for r in rows if r['kind']=='completion'];b.require(len(raw)==len(decoded)==len(completions)==4,'exactly4 explicit paired completions/raw/decoded required')
+ previous=-1
+ for n,(r,d,c) in enumerate(zip(raw,decoded,completions),1):
+  role='drain' if n==1 else 'measurement';b.require(r['role']==d['role']==c['role']==role and r['sequence']==d['sequence']==n,'one drain then3 ordered measurements')
+  b.require(type(c['status'])is int and c['status']==0 and type(c['bytes_transferred'])is int and c['bytes_transferred']==r['length']==20 and r['report_id']==0,'full successful20byte completion')
+  b.require(type(r['monotonic_ns'])is int and r['monotonic_ns']>=previous and r['monotonic_ns']==d['monotonic_ns']==c['monotonic_ns'],'paired receipt timestamps');previous=r['monotonic_ns']
+  z=subprocess.run([str(D/'parser_cli'),'xinput',r['hex'],'1','0'],capture_output=True,text=True);b.require(z.returncode==0 and json.loads(z.stdout)==d['fields'] and len(bytes.fromhex(r['hex']))==20,'every report including drain structurally valid')
+ b.require(end['reports']==3 and end['drain_completed']==1 and end['submissions']==4 and end['abort_calls']==0 and end['settled_cleanup'] is True and end['outcome']=='THREE_NATIVE_MEASUREMENTS_WITH_EXPLICIT_DRAIN' and end['hardware_acceptance']=='NOT_CLAIMED','strict settled successful end')
+ # A NEW derivative; original journal/drain stay unchanged. Only the3 explicit
+ # measurements enter the unchanged strong verifier. Endpoint OUT is metadata,
+ # not an opened pipe or a transmitted operation.
+ legacy=[dict(s),{'kind':'usb_interface','vendor':1848,'product':18214,'class':255,'subclass':93,'protocol':1,'alt':0,'configuration':1,'interface':0}]
+ legacy +=[{'kind':'usb_pipe','direction':direction,'type':3,'max_packet':32,'endpoint':ep[name],'derived_from_associated_descriptor':True,'opened':direction==1} for direction,name in [(1,'in'),(0,'out')]]
+ for n in range(1,4):
+  for r in [raw[n],decoded[n]]:
+   v=dict(r);v['source_sequence']=v['sequence'];v['sequence']=n;legacy.append(v)
+ legacy.append({'kind':'end','reports':3})
+ with tempfile.TemporaryDirectory(dir=D/'tmp',prefix='comparison-')as t:
+  derivative=Path(t)/'measurement_derivative.jsonl';derivative.write_text(''.join(json.dumps(r,sort_keys=True)+'\n'for r in legacy));result=strong.verify(derivative,matrix,binding['case_id'],'xinput',D/'parser_cli',3)
+ return {'status':'MATCH_NATIVE_PROPOSAL_CORRESPONDENCE_ONLY_NOT_HEP','case_id':binding['case_id'],'case_run_id':binding['case_run_id'],'original_capture_sha256':b.sha(capture),'binding_sha256':att['sha256'],'drain_structurally_valid':True,'measurement_reports':3,'strict_comparison':result,'limits':'One drain does not guarantee queue settling; source binding and raw-byte match do not establish physical stimulus timing, untransmitted native fields, other routes or independent HEP.'}
+def main():
+ p=argparse.ArgumentParser(description=__doc__)
+ for k in ['capture','matrix','proof-index','execution']:p.add_argument('--'+k,type=Path,required=True)
+ p.add_argument('--row',required=True);p.add_argument('--run',required=True);a=p.parse_args();print(json.dumps(verify(a.capture,a.matrix,a.proof_index,a.row,a.run,a.execution),indent=2))
+if __name__=='__main__':main()

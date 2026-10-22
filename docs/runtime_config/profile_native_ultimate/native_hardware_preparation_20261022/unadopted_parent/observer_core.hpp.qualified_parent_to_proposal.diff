@@ -1,0 +1,20 @@
+--- /private/tmp/glyph-native-Mac-hostinterface-observer-deadline-repair-20261022/observer_core.hpp
++++ /private/tmp/glyph-native-native-acceptance-preparation-20261022/observer_core.hpp
+@@ -27,14 +27,14 @@
+ enum class Phase{Idle,Pending,Draining,Settled,Uncertain};
+ enum class Action{None,Submit,Abort,Finish};
+ struct Engine{
+- Phase phase=Phase::Idle;unsigned reports=0,submissions=0,abort_calls=0;bool success=false;uint64_t deadline=0;std::string reason;
++ Phase phase=Phase::Idle;unsigned reports=0,submissions=0,abort_calls=0,completed=0;bool success=false;uint64_t deadline=0;std::string reason;
+  explicit Engine(uint64_t start):deadline(start+5000000000ULL){}
+  bool pending()const{return phase==Phase::Pending||phase==Phase::Draining;}
+- Action next(uint64_t now){require(phase==Phase::Idle,"read lifecycle state");if(now>=deadline){phase=Phase::Settled;reason="deadline before submission";return Action::Finish;}require(submissions<3,"submission budget");++submissions;phase=Phase::Pending;return Action::Submit;}
++ Action next(uint64_t now){require(phase==Phase::Idle,"read lifecycle state");if(now>=deadline){phase=Phase::Settled;reason="deadline before submission";return Action::Finish;}require(submissions<4,"submission budget");++submissions;phase=Phase::Pending;return Action::Submit;}
+  Action submit_failed(){require(phase==Phase::Pending,"submission failure state");phase=Phase::Settled;reason="enqueue rejected; no retry";return Action::Finish;}
+  Action stop(const char*why){if(phase==Phase::Settled||phase==Phase::Uncertain)return Action::None;reason=why;if(phase==Phase::Pending){phase=Phase::Draining;++abort_calls;return Action::Abort;}if(phase==Phase::Draining)return Action::None;phase=Phase::Settled;return Action::Finish;}
+  // Caller journals status/count/raw before this consumer guard. No callback may free state.
+- Action completion(int32_t status,size_t count,bool parsed,uint64_t now){if(!pending())return Action::None;bool draining=phase==Phase::Draining;phase=Phase::Idle;if(draining||now>=deadline||status!=0||count!=20||!parsed){phase=Phase::Settled;if(reason.empty())reason="completion status/count/parser/deadline refused";return Action::Finish;}++reports;if(reports==3){phase=Phase::Settled;success=true;reason="three complete preflight reports";return Action::Finish;}return next(now);}
++ Action completion(int32_t status,size_t count,bool parsed,uint64_t now){if(!pending())return Action::None;bool draining=phase==Phase::Draining;phase=Phase::Idle;if(draining||now>=deadline||status!=0||count!=20||!parsed){phase=Phase::Settled;if(reason.empty())reason="completion status/count/parser/deadline refused";return Action::Finish;}++completed;if(completed==1)return next(now);++reports;if(reports==3){phase=Phase::Settled;success=true;reason="one explicit drain and three complete native measurement reports";return Action::Finish;}return next(now);}
+  Action grace_expired(){if(phase!=Phase::Draining)return Action::None;phase=Phase::Uncertain;success=false;reason="cancel did not drain; retain complete state until process exit";return Action::Finish;}
+ };
+ }

@@ -1,0 +1,31 @@
+{
+  "all334_rows_retained_exactly_once_primary_plus_declared_replays": true,
+  "all_original17_contexts_equal": true,
+  "costs_are_maxima_no_retry": true,
+  "event_count": 748,
+  "live_actions": 0,
+  "original334_content_byte_canonical_equal": true,
+  "totals": {
+    "CDC_same_private_unit_lookups": 50,
+    "GET_CONFIG_commands": 123,
+    "LIST_commands": 9,
+    "Menu_Configurator_restarts": 24,
+    "PROFILE_CREATE": 2,
+    "PROFILE_DELETE": 2,
+    "PROFILE_SET-REFERENCE": 21,
+    "PROFILE_UPDATE": 17,
+    "READ_commands": 87,
+    "SET_CONFIG_commands": 19,
+    "STATUS_commands": 223,
+    "known_Menu_entries": 24,
+    "logged_drain_reports": 494,
+    "ordinary_USB_restarts": 26,
+    "raw_capture_invocations": 494,
+    "raw_read_submissions": 1976,
+    "registry_inspections": 26,
+    "runtime_identity_queries": 51,
+    "serial_opens": 405,
+    "strict_measurement_reports": 1482,
+    "target_metric_queries": 46
+  }
+}

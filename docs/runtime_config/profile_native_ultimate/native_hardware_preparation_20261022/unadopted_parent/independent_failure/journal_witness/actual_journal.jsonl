@@ -1,0 +1,53 @@
+{"kind":"session","observer":"IOUSBHostInterface-optionsNone","operation":"capture","session":"B13","purpose":"candidate","row":"O000","route":"xinput","candidate_source_claim":"334fbd06e4541c120b0db423e5be7e112eb1f6f6","source_claim_is_device_attestation":false,"anchor_entry_id":1,"interface_entry_id":101,"vendor":1848,"product":18214,"location":1048576,"max_seconds":5,"max_reports":4,"max_measurements":3,"explicit_drain_reports":1}
+{"kind":"acceptance_binding","sha256":"ab3f9d3e2c2b75760031ec248a33ae7db592903f74fa2440d0f37d50b0612051","binding":{
+  "acceptance_matrix_sha256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5",
+  "anchor_entry_id": 1,
+  "boot_record_sha256": "001796d26d26aaedd8ad584e064feac0ea5ff74e81b896bbeda400dddd146ee7",
+  "boot_session": "B13",
+  "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "case_id": "O000",
+  "case_kind": "native",
+  "case_run_id": "B13_O000",
+  "checked_reference_receipt_sha256": "cb1e2f1de32cb7227d758bff9d0a49ab1f6d70c9ae55f3d2436ae9cfdfc150b5",
+  "checked_reference_response_sha256": "b9aa4106f285ed2e3a5e5f5e295059215be10e2a60452fd327283ee72b8b87ae",
+  "context_row": 3,
+  "durable_config_readback_sha256": "529a2260a7fe351bb7fd4ceb837e3979e4220b13f5c7660be2e24aa295b41d38",
+  "fixture_row_sha256": "c028f5ca6b89ec5f35973c912ddc5d32a3ee66827dfd0d46be742764083e411b",
+  "frozen_fixture_packet_sha256": "dfd4ab5c81c24e1380095fa637ff0d51de83b478f66641c53d1a69d9f76be744",
+  "incarnation": 1,
+  "interface_entry_id": 101,
+  "kind": "GP_NATIVE_001_NATIVE_ACCEPTANCE_BINDING_V1",
+  "owned_profile_ids": [
+    25,
+    26
+  ],
+  "ownership_receipts_sha256": "b1673e42c88ed0e18f882292261765af2d50622a1ea2eb2f46d5c8a2490badd7",
+  "preprocessing_sha256": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+  "profile_context_key": "candidate_fixture_packet/compatibility",
+  "profile_id": 25,
+  "profile_revision": 1,
+  "profile_wrapper_sha256": "e6ba1f3118cc8d1a6182cd3bb2efa4f4ad82adb8607bed26e9828162213389aa",
+  "purpose": "candidate",
+  "reference_evidence_kind": "checked_native_reference",
+  "registry_inspection_sha256": "801c0d7a5e89c6f260689ed6d1c782a30c09978b99284ea4c410e317589fca82",
+  "route": "xinput",
+  "runtime_identity": {
+    "active_id": 25,
+    "active_revision": 1,
+    "context": "xinput",
+    "context_row": 3,
+    "incarnation": 1,
+    "observation": "current_session_only",
+    "payload_sha256": "4171bf83f87ab6ac8842148af9e9f23a950349f5cc8464d35593302309ada651",
+    "primary_backend": 2,
+    "requested_reference": 25,
+    "schema_version": 5,
+    "session": "B13",
+    "status": "persisted"
+  },
+  "runtime_identity_sha256": "ba33a755400b6441fded169b679a64e90353df7ee6ad06e610b7ee3d633a736c",
+  "stimulus_confirmation_sha256": "a9f2db7a269c2c2deeaed00aff741d1d8e1476f5866c7143bb822f42ac2c968b",
+  "stored_profile_readback_sha256": "fd3dd68359e31cf12541b8aedb3f6ee1c9575b0e2c63af7cf4c623504b6a1b37",
+  "uf2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982"
+}
+}

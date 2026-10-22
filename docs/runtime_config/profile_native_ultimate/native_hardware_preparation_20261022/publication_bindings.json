@@ -1,0 +1,66 @@
+{
+  "classification": "ROOT_PUBLICATION_BINDINGS_UNAPPROVED_NATIVE_XINPUT_PROPOSAL",
+  "sealed_inputs": [
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/CHILD_HOLD.json",
+      "bytes": 21675,
+      "sha256": "3b447b893811e7e2207a6b48f1921e51ae1e079c97502fb99ab398ed93bcd33a"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/PINS.json",
+      "bytes": 21164,
+      "sha256": "d3aedae5698326cec4552ae77574af7c72b1fb8f8e15934dc436228fb23a08f0"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/REPORT.md",
+      "bytes": 9456,
+      "sha256": "c96f0a780a828f61aa4bc78788ec517d6d82c91af24e373e35ebdc9efe623e4f"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1.json",
+      "bytes": 671898,
+      "sha256": "7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1.md",
+      "bytes": 19668,
+      "sha256": "a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/REPORT.md",
+      "bytes": 10478,
+      "sha256": "4b9d70e4243a42a7e48a0055f75f9defd925e2548aea76968423795ed93c2ced"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/TECHNICAL_REPORT.md",
+      "bytes": 10636,
+      "sha256": "9d017d093d314aeeddd58ee186c89529194f44a231999642b5963280cd52ea0f"
+    },
+    {
+      "path": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/PINS.json",
+      "bytes": 80140,
+      "sha256": "008983c84dc3fad55cae2668ab6eaa13c3b5628f8a04b49904578ce0a823ed2d"
+    }
+  ],
+  "pin_collections": [
+    {
+      "root": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022",
+      "pins": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/PINS.json"
+    },
+    {
+      "root": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022",
+      "pins": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/CHILD_HOLD.json"
+    },
+    {
+      "root": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022",
+      "pins": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/PINS.json"
+    },
+    {
+      "root": "/private/tmp/glyph-native-native-acceptance-preparation-20261022",
+      "pins": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/TECHNICAL_HOLD.json"
+    }
+  ],
+  "host_custody_relative": "local_backups/host-observer-artifacts/334fbd06e4541c120b0db423e5be7e112eb1f6f6/ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164",
+  "owner_approval": "NOT_PROVIDED",
+  "new_device_actions": 0
+}

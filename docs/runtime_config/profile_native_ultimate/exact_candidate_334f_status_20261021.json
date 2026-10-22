@@ -135,7 +135,7 @@
   "RT2": "DEFERRED/UNRESOLVED",
   "root_cause": "UNPROVEN",
   "remaining": [
-    "Complete offline native-only strict acquisition/context tool and exact mutation/physical packet, including transparent bounded prior-pose drain proposal, source/build/custody/fresh review and separate owner approval before native writes/tests. Actual three-report preflight evidence remains legacy-only and cannot satisfy native verifier.",
+    "Reviewed offline native-only four-read acquisition/context tools and exact GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1 packet are prepared; new exact owner approval is required for guarded Config/two-owned-ID changes, human stimuli, measurements,21-edge settled-endpoint qualification and full logical restore. Proposed494 captures/1976reports/50restarts are NOT_EXECUTED. Old preflight remains legacy access only; USB-Switch wire and GC hidden fields remain open.",
     "Separate exact native route/Config/two-owned-ID/profile/physical approval and full all18/H1-H12 evidence with target measurements/limits and logical restoration",
     "Independent exact HEP PASS, sourcefree result, tested-source integration/fresh review and separate strict DONE"
   ],
@@ -319,5 +319,46 @@
     "reviewer_device_actions": 0,
     "raw_identity72_separately_retained": false,
     "scope": "CURRENT_LEGACY_MAC_HOST_ACCESS_ONLY_NOT_NATIVE_HEP"
-  }
+  },
+  "next_native_xinput_acceptance": {
+    "id": "GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1",
+    "file": "native_hardware_preparation_20261022/OWNER_PACKET.md",
+    "MD_SHA256": "a87861e8b784cf1a02778dfd52afc0d757f1c85635e7a80925a1f47b1f434040",
+    "JSON_SHA256": "7e6110732755314299086d8cfb9329b775c3cd6afcd787c0e8408ecf3ee23ef8",
+    "owner_approval": "NOT_PROVIDED",
+    "executed": false,
+    "new_firmware_flash": false,
+    "captures_max": 494,
+    "read_submissions_max": 1976,
+    "all_firmware_restarts_max": 50,
+    "explicit_drain_then_measurement_reports": [
+      1,
+      3
+    ],
+    "settled_endpoint_edges_requiring_owner_qualification": 21,
+    "route": "XINPUT_ONLY_PARTIAL_CHAPTER",
+    "no_other_route_or_frame_exact_waiver": true
+  },
+  "native_acceptance_preparation": {
+    "directory": "native_hardware_preparation_20261022",
+    "child_binary_SHA256": "ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164",
+    "translation_unit_SHA256": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55",
+    "included_metadata_header_SHA256": "18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c",
+    "matrix_SHA256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5",
+    "child_HOLD_SHA256": "3b447b893811e7e2207a6b48f1921e51ae1e079c97502fb99ab398ed93bcd33a",
+    "child_PINS_SHA256": "d3aedae5698326cec4552ae77574af7c72b1fb8f8e15934dc436228fb23a08f0",
+    "child_REPORT_SHA256": "c96f0a780a828f61aa4bc78788ec517d6d82c91af24e373e35ebdc9efe623e4f",
+    "owner_host_custody_SHA256": "cc4ec988a70e5eb14fdb7af67d64b3e555252c22b7e60e7f6e7ac0af2eb1a255",
+    "independent_review": "native_hardware_preparation_20261022/independent_review/REPORT.md",
+    "original_native334_rows_and17contexts_unchanged": true,
+    "source_only_legacy_baseline_cases": 52,
+    "older_oracle_schema3_non_equivalences_preserved": 9,
+    "new_device_actions": 0,
+    "physical_result": null,
+    "parent_JSONL_failure_preserved": true,
+    "independent_REPORT_SHA256": "4b9d70e4243a42a7e48a0055f75f9defd925e2548aea76968423795ed93c2ced",
+    "independent_PINS_SHA256": "008983c84dc3fad55cae2668ab6eaa13c3b5628f8a04b49904578ce0a823ed2d",
+    "independent_final_ACK": "PASS_HOST_CHILD_EXACT_PACKET_ONLY_NOT_OWNER_APPROVAL"
+  },
+  "latest_sourcefree_native_preparation_validation": "native_preparation_publication_validation_20261022/result.json"
 }

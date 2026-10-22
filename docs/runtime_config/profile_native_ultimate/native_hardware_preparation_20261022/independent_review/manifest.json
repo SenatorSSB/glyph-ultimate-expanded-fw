@@ -1,0 +1,71 @@
+{
+  "classification": "FINAL_SAME_FINITE_INDEPENDENT_NATIVE_XINPUT_SOURCE_CHILD_PACKET_ACK_PASS",
+  "private_replay_payloads_excluded": true,
+  "files": {
+    "REPORT.md": {
+      "bytes": 10478,
+      "sha256": "4b9d70e4243a42a7e48a0055f75f9defd925e2548aea76968423795ed93c2ced",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/REPORT.md"
+    },
+    "TECHNICAL_REPORT.md": {
+      "bytes": 10636,
+      "sha256": "9d017d093d314aeeddd58ee186c89529194f44a231999642b5963280cd52ea0f",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/TECHNICAL_REPORT.md"
+    },
+    "PINS.json": {
+      "bytes": 80140,
+      "sha256": "008983c84dc3fad55cae2668ab6eaa13c3b5628f8a04b49904578ce0a823ed2d",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/PINS.json"
+    },
+    "final-binding.json": {
+      "bytes": 54585,
+      "sha256": "9f4e31c04963061b3e0452cd690e798e9d322bd00060485158b14dbb7e3553f3",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/final-binding.json"
+    },
+    "affected-results.json": {
+      "bytes": 1551,
+      "sha256": "e9155f626ab394ccafca09fc3300dd179e3576d6630677311f4c678b22e86e50",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/affected-results.json"
+    },
+    "child-handoff-results.json": {
+      "bytes": 1930,
+      "sha256": "17601532821321e74b1eb55399262b97f97c852fc63a8a083580adaeb08565c9",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/child-handoff-results.json"
+    },
+    "FINDING_JSONL.md": {
+      "bytes": 447,
+      "sha256": "daa7c725bf3d0ac713f5481822874243709fa68962b8a3af9d1d7155005797df",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/FINDING_JSONL.md"
+    },
+    "finding-jsonl.json": {
+      "bytes": 5670,
+      "sha256": "f6495331a5dd23382cc7d9258f048e9bcff863d25431c965af06add1c60fcc58",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/finding-jsonl.json"
+    },
+    "replay_affected.py.txt": {
+      "bytes": 4901,
+      "sha256": "aa0a5c23467d7e94976ecab05128946c55948cb065b8d0999fcbd02e1d6f627f",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/replay_affected.py"
+    },
+    "replay_child_handoff.py.txt": {
+      "bytes": 3051,
+      "sha256": "a5037b2e767235b521baac9976363889906a53cfe6edc4c90acd134b78ad173d",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/replay_child_handoff.py"
+    },
+    "final_binding.py.txt": {
+      "bytes": 3622,
+      "sha256": "8a85278269bc1608123e3f8f0a9c1dcd0fa9268217cc2207200f643bef80fb52",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/final_binding.py"
+    },
+    "journal_finding.py.txt": {
+      "bytes": 4131,
+      "sha256": "57c9ad17f848191bbfe60cb957d3085db8a8be579ec32048bac7bcb5fbc1cadb",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_finding.py"
+    },
+    "journal_witness/actual_journal.mm.txt": {
+      "bytes": 7477,
+      "sha256": "3f3f6144330fbca97ce6240c799df7779d84ef2d42078606240510455512db9c",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal.mm"
+    }
+  }
+}

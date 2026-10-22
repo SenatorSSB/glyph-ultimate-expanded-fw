@@ -1,0 +1,14 @@
+"""Pure final baseline correspondence/provenance check; no registry/SDK/device operation."""
+from pathlib import Path
+import hashlib,json,subprocess
+D=Path(__file__).resolve().parent
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+proof=json.loads((D/'baseline/baseline_oracle_proof.json').read_text());snapshot=D/'baseline/baseline_generator_executed_snapshot.py';assert sha(snapshot)==proof['source_generator_sha256']
+matrix=json.loads((D/'acceptance_comparison_matrix.json').read_text());cross=json.loads((D/'baseline/actual_F_vs_frozen_initial_crosscheck.json').read_text());gate=json.loads((D/'baseline/schema3_gate_control.json').read_text());assert len(cross['differing_indices'])==9 and gate['equal'] is True
+checks=[]
+for i,(row,line)in enumerate(zip(matrix['rows'][334:],cross['actual_F_outputs'])):
+ z=line.split();expect=dict(zip(['buttons_hex','leftStickX','leftStickY','rightStickX','rightStickY','triggerLAnalog','triggerRAnalog'],[z[0]]+list(map(int,z[1:]))));assert row['expected_complete_output_state']==expect
+ p=subprocess.run([str(D/'baseline/baseline_xinput_encoder'),*z],capture_output=True,text=True);assert p.returncode==0,p.stderr;raw=p.stdout.split()[-1];assert row['raw_xinput_hex']==raw
+ p=subprocess.run([str(D/'parser_cli'),'xinput',raw,'1','0'],capture_output=True,text=True);assert p.returncode==0;assert json.loads(p.stdout)==row['expected_literal_backend_assignment_fields'][0]['fields'];checks.append(row['selection_id'])
+result={'classification':'OFFLINE_PROVENANCE_AND_TYPED_52_BASELINE_REPLAY_ONLY','live_actions':0,'executed_generator_snapshot_sha256':sha(snapshot),'original_execution_proof_sha256':sha(D/'baseline/baseline_oracle_proof.json'),'final_generator_sha256':sha(D/'prepare_baseline.py'),'final_matrix_sha256':sha(D/'acceptance_comparison_matrix.json'),'post_execution_schema_label_derivative':'Before technical HOLD, baseline-only expected_complete_native_output renamed expected_complete_output_state and oracle_authority description added; evaluator outputs/held inputs/wrappers/native334 unchanged. The preserved executed source snapshot is exact to original proof hash; final source produces same52 outputs with these explicit legacy labels. No claim that edited generator reran.','actual_F_legacy_52_outputs_and_actual_typed_XInput_and_independent_parser':'MATCH','matched_baseline_cases':checks,'old_frozen_StageC_differences':9,'host_only_schema2_gate_matches_all52_frozen_outputs':True,'not_a_device_profile_or_hardware_result':True}
+(D/'baseline_derivation_provenance.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');print('PASS52 baseline final source/typed wire provenance; nine negative controls retained; no live calls')

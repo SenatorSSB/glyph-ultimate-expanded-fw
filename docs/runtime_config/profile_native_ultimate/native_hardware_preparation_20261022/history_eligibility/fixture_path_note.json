@@ -1,0 +1,4 @@
+{
+  "kind": "READONLY_REFERENCE_ROOT_CORRECTION",
+  "note": "Packet fixture paths resolve in frozen F checkout, not source-free curation checkout. First inventory read at curation root failed before data creation; exact F JSON and protobuf context hashes then matched all17 entries. No source/data/hardware failure or action."
+}

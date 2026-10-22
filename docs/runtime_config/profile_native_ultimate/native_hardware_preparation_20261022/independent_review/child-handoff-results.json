@@ -1,0 +1,45 @@
+{
+  "runtime_header_sha256": "18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c",
+  "rebuilt_binary_sha256": "ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164",
+  "unchanged_strict_verifier": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+  "unchanged_binding_producer": "d8999e5e32bec423604873f2e6d025e7bebb16a45344ed17e083055c63c5a048",
+  "cases": [
+    {
+      "case": "actual_pretty_CLI",
+      "result": "PASS_ACTUAL_HANDOFF_CORRESPONDENCE_ONLY_NOT_HEP",
+      "capture_sha256": "5554828fc3fca48af0c273645299dcb4be1f68235b4e92530df2cf3551697419",
+      "binding_exact_input_sha256": "ab3f9d3e2c2b75760031ec248a33ae7db592903f74fa2440d0f37d50b0612051"
+    },
+    {
+      "case": "compact_equivalent",
+      "result": "PASS_ACTUAL_HANDOFF_CORRESPONDENCE_ONLY_NOT_HEP",
+      "capture_sha256": "10178168d082f6675446efd24e1d5d6d50776cff1d8264302d8dab368a543102",
+      "binding_exact_input_sha256": "6fc7fa6dc8c562ebabae9a717ca519a4da67514ec44b1015286c30d592606a94"
+    },
+    {
+      "case": "equivalent_CRLF_whitespace",
+      "result": "PASS_ACTUAL_HANDOFF_CORRESPONDENCE_ONLY_NOT_HEP",
+      "capture_sha256": "3ea994d3ae2cd4478eb8fe45a241c3cf66cf9c7fbc7729f677468c92ba1162b5",
+      "binding_exact_input_sha256": "5fbe5bdba7eb80ac678d7e7df05143a9dc59f2935eab9116dc14f3adfc093c33"
+    },
+    {
+      "case": "equivalent_structure_wrong_original_argv_bytes",
+      "result": "REFUSED_EXACT_HASH"
+    },
+    {
+      "case": "forged_exact_input_hash",
+      "result": "REFUSED"
+    },
+    {
+      "case": "unapproved_extra_binding_key",
+      "result": "REFUSED_REDERIVED_SCHEMA"
+    },
+    {
+      "case": "immutable_parent_reviewer_actual_source_witness",
+      "result": "NEGATIVE_CONTROL_51_INVALID_JSONL_LINES",
+      "sha256": "677ab3c5d456664c34367f870de38fb852c4e66dbf46b40ee8012f8ecee87659"
+    }
+  ],
+  "live_registry_or_USB_calls": 0,
+  "parent47_preserved": true
+}

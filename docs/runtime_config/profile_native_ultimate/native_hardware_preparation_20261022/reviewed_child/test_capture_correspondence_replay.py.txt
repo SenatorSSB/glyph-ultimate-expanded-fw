@@ -1,0 +1,36 @@
+"""Synthetic host fixtures ONLY; no native capture path or device API executes."""
+from pathlib import Path
+import copy,json,subprocess,importlib.util
+P=Path(__file__).resolve().parent;spec=importlib.util.spec_from_file_location('capture_verify',P/'strong_verify_capture_unchanged.py');mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
+packet=P/'fixture_packet_immutable.json';fixtures=json.loads((Path('/private/tmp/glyph-native-mac-observer-review-repair-20261021/report_parser_fixtures.json')).read_text());directory=P/'synthetic_capture_fixtures';directory.mkdir(exist_ok=True);results=[]
+def records(route,row):
+ f=next(x for x in fixtures if x['route']==route and x['row']==row)
+ records=[{'kind':'session','candidate_source_claim':'334fbd06e4541c120b0db423e5be7e112eb1f6f6','route':route,'session':'SYNTHETIC_HOST_ONLY','row':row,'location':1,'port':1 if route=='wup028' else 0,'adapter_init13_explicitly_allowed':False,'synthetic':True,'purpose':'candidate'}]
+ if route=='switch':records += [{'kind':'hid_descriptor','hex':(P/'F_Switch_HID_descriptor.bin').read_bytes().hex()}]
+ else:
+  records += [{'kind':'usb_interface','vendor':0x738 if route=='xinput' else 0x57e,'product':0x4726 if route=='xinput' else 0x337,'interface':0,'class':255,'subclass':93 if route=='xinput' else 0,'protocol':1 if route=='xinput' else 0,'alt':0,'configuration':1}]
+  records += [{'kind':'usb_pipe','pipe':1,'direction':1,'number':1,'type':3,'max_packet':32 if route=='xinput' else 37,'interval':1},{'kind':'usb_pipe','pipe':2,'direction':0,'number':2,'type':3,'max_packet':32 if route=='xinput' else 5,'interval':8}]
+ for seq in range(1,4):records += [{'kind':'raw','sequence':seq,'monotonic_ns':seq,'report_id':0,'length':len(bytes.fromhex(f['raw_hex'])),'hex':f['raw_hex']},{'kind':'decoded','sequence':seq,'monotonic_ns':seq,'fields':f['expected_fields']}]
+ records += [{'kind':'end','reports':3,'hardware_acceptance':'NOT_CLAIMED'}];return records
+
+def check(label,route,row,rs,ok):
+ p=directory/(label+'.jsonl');p.write_text(''.join(json.dumps(r,sort_keys=True)+'\n' for r in rs));error=None
+ try:result=mod.verify(p,packet,row,route,P/'parser_cli');passed=True
+ except Exception as e:error=str(e);passed=False
+ assert passed==ok,(label,error)
+ results.append({'label':label,'expected_match':ok,'matched':passed,'error':error,'status':'PASS_SYNTHETIC_HOST_CHALLENGE_ONLY'})
+for route,row in [('xinput','S022'),('switch','O074'),('wup028','N130')]:check(route+'_complete',route,row,records(route,row),True)
+base=records('switch','O074')
+r=copy.deepcopy(base);r[-1]['reports']=4;check('wrong_end_count','switch','O074',r,False)
+r=copy.deepcopy(base);r=[x for x in r if x['kind']!='end'];check('missing_end','switch','O074',r,False)
+r=copy.deepcopy(base);r.append(next(x for x in r if x['kind']=='decoded'));check('duplicate_decoded','switch','O074',r,False)
+r=copy.deepcopy(base);next(x for x in r if x['kind']=='decoded')['fields']['lx']=15;check('decoded_forgery','switch','O074',r,False)
+r=copy.deepcopy(base);x=next(x for x in r if x['kind']=='raw');b=bytearray.fromhex(x['hex']);b[3]^=1;x['hex']=b.hex();check('raw_axis_bit_changed','switch','O074',r,False)
+r=copy.deepcopy(base);next(x for x in r if x['kind']=='decoded')['monotonic_ns']=99;check('raw_field_timestamp_mismatch','switch','O074',r,False)
+r=copy.deepcopy(base);r[0]['row']='O073';check('wrong_row','switch','O074',r,False)
+r=copy.deepcopy(base);next(x for x in r if x['kind']=='hid_descriptor')['hex']='00';check('wrong_descriptor','switch','O074',r,False)
+r=copy.deepcopy(base);r.insert(1,{'kind':'adapter_init13_out','ior_return':0});check('unallowed_adapter_init','switch','O074',r,False)
+r=copy.deepcopy(base);r[0]['candidate_source_claim']='bad';check('wrong_source_claim','switch','O074',r,False)
+r=copy.deepcopy(base);r[0]['purpose']='preflight';check('preflight_not_candidate','switch','O074',r,False)
+(P/'capture_correspondence_tests.json').write_text(json.dumps({'status':'PASS_HOST_SYNTHETIC_ONLY','cases':results,'hardware':'NOT_TESTED'},indent=2)+'\n')
+print('PASS',len(results),'synthetic capture/parser/correspondence challenges; no devices')

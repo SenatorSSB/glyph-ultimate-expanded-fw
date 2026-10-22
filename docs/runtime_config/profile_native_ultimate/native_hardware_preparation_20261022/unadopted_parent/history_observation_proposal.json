@@ -1,0 +1,772 @@
+{
+  "all_observations": null,
+  "claims_excluded": [
+    "same-frame physical edges",
+    "no unlisted sampled intermediate states",
+    "bounce/latency/transient output",
+    "queue settling guarantee"
+  ],
+  "frozen334_rows_or_old_contract_edited": false,
+  "kind": "UNAPPROVED_SOURCE_GROUNDED_SETTLED_ENDPOINT_QUALIFICATION_PROPOSAL",
+  "multi_control_edges": [
+    {
+      "added": [],
+      "from_held": [
+        2,
+        27,
+        38
+      ],
+      "from_row": "O389",
+      "group": "SOCD_0",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_UNSPECIFIED",
+      "released": [
+        2,
+        27,
+        38
+      ],
+      "terminal_release": true,
+      "to_held": [],
+      "to_row": "O390"
+    },
+    {
+      "added": [],
+      "from_held": [
+        2,
+        27,
+        38
+      ],
+      "from_row": "O402",
+      "group": "SOCD_1",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        2,
+        27,
+        38
+      ],
+      "terminal_release": true,
+      "to_held": [],
+      "to_row": "O403"
+    },
+    {
+      "added": [],
+      "from_held": [
+        2,
+        27,
+        38
+      ],
+      "from_row": "O415",
+      "group": "SOCD_2",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_2IP",
+      "released": [
+        2,
+        27,
+        38
+      ],
+      "terminal_release": true,
+      "to_held": [],
+      "to_row": "O416"
+    },
+    {
+      "added": [],
+      "from_held": [
+        2,
+        27,
+        38
+      ],
+      "from_row": "O428",
+      "group": "SOCD_3",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_2IP_NO_REAC",
+      "released": [
+        2,
+        27,
+        38
+      ],
+      "terminal_release": true,
+      "to_held": [],
+      "to_row": "O429"
+    },
+    {
+      "added": [],
+      "from_held": [
+        2,
+        27,
+        38
+      ],
+      "from_row": "O441",
+      "group": "SOCD_4",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_DIR1_PRIORITY",
+      "released": [
+        2,
+        27,
+        38
+      ],
+      "terminal_release": true,
+      "to_held": [],
+      "to_row": "O442"
+    },
+    {
+      "added": [],
+      "from_held": [
+        2,
+        27,
+        38
+      ],
+      "from_row": "O454",
+      "group": "SOCD_5",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_DIR2_PRIORITY",
+      "released": [
+        2,
+        27,
+        38
+      ],
+      "terminal_release": true,
+      "to_held": [],
+      "to_row": "O455"
+    },
+    {
+      "added": [
+        5
+      ],
+      "from_held": [
+        6,
+        24
+      ],
+      "from_row": "S002",
+      "group": "forced_wins",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "NO_PAIRS",
+      "released": [
+        24
+      ],
+      "terminal_release": false,
+      "to_held": [
+        5,
+        6
+      ],
+      "to_row": "S003"
+    },
+    {
+      "added": [
+        2
+      ],
+      "from_held": [
+        5,
+        6
+      ],
+      "from_row": "S003",
+      "group": "forced_wins",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "NO_PAIRS",
+      "released": [
+        5
+      ],
+      "terminal_release": false,
+      "to_held": [
+        2,
+        6
+      ],
+      "to_row": "S004"
+    },
+    {
+      "added": [
+        24
+      ],
+      "from_held": [
+        2,
+        6
+      ],
+      "from_row": "S004",
+      "group": "forced_wins",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "NO_PAIRS",
+      "released": [
+        2,
+        6
+      ],
+      "terminal_release": false,
+      "to_held": [
+        24
+      ],
+      "to_row": "S005"
+    },
+    {
+      "added": [
+        5
+      ],
+      "from_held": [
+        6,
+        24
+      ],
+      "from_row": "S009",
+      "group": "forced_loses",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "NO_PAIRS",
+      "released": [
+        24
+      ],
+      "terminal_release": false,
+      "to_held": [
+        5,
+        6
+      ],
+      "to_row": "S010"
+    },
+    {
+      "added": [
+        2
+      ],
+      "from_held": [
+        5,
+        6
+      ],
+      "from_row": "S010",
+      "group": "forced_loses",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "NO_PAIRS",
+      "released": [
+        5
+      ],
+      "terminal_release": false,
+      "to_held": [
+        2,
+        6
+      ],
+      "to_row": "S011"
+    },
+    {
+      "added": [
+        24
+      ],
+      "from_held": [
+        2,
+        6
+      ],
+      "from_row": "S011",
+      "group": "forced_loses",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "NO_PAIRS",
+      "released": [
+        2,
+        6
+      ],
+      "terminal_release": false,
+      "to_held": [
+        24
+      ],
+      "to_row": "S012"
+    },
+    {
+      "added": [
+        5
+      ],
+      "from_held": [
+        6,
+        24
+      ],
+      "from_row": "S016",
+      "group": "forced_filter",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "NO_PAIRS",
+      "released": [
+        24
+      ],
+      "terminal_release": false,
+      "to_held": [
+        5,
+        6
+      ],
+      "to_row": "S017"
+    },
+    {
+      "added": [
+        2
+      ],
+      "from_held": [
+        5,
+        6
+      ],
+      "from_row": "S017",
+      "group": "forced_filter",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "NO_PAIRS",
+      "released": [
+        5
+      ],
+      "terminal_release": false,
+      "to_held": [
+        2,
+        6
+      ],
+      "to_row": "S018"
+    },
+    {
+      "added": [
+        24
+      ],
+      "from_held": [
+        2,
+        6
+      ],
+      "from_row": "S018",
+      "group": "forced_filter",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "NO_PAIRS",
+      "released": [
+        2,
+        6
+      ],
+      "terminal_release": false,
+      "to_held": [
+        24
+      ],
+      "to_row": "S019"
+    },
+    {
+      "added": [
+        6
+      ],
+      "from_held": [
+        8
+      ],
+      "from_row": "S022",
+      "group": "complete_sample_1",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        8
+      ],
+      "terminal_release": false,
+      "to_held": [
+        6
+      ],
+      "to_row": "S023"
+    },
+    {
+      "added": [
+        7
+      ],
+      "from_held": [
+        2,
+        6
+      ],
+      "from_row": "S024",
+      "group": "complete_sample_1",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        2,
+        6
+      ],
+      "terminal_release": false,
+      "to_held": [
+        7
+      ],
+      "to_row": "S025"
+    },
+    {
+      "added": [
+        2
+      ],
+      "from_held": [
+        6,
+        7,
+        8
+      ],
+      "from_row": "S027",
+      "group": "complete_sample_1",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 4,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        6,
+        7,
+        8
+      ],
+      "terminal_release": false,
+      "to_held": [
+        2
+      ],
+      "to_row": "S028"
+    },
+    {
+      "added": [
+        6
+      ],
+      "from_held": [
+        8
+      ],
+      "from_row": "S031",
+      "group": "complete_sample_2",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 2,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        8
+      ],
+      "terminal_release": false,
+      "to_held": [
+        6
+      ],
+      "to_row": "S032"
+    },
+    {
+      "added": [
+        7
+      ],
+      "from_held": [
+        2,
+        6
+      ],
+      "from_row": "S033",
+      "group": "complete_sample_2",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 3,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        2,
+        6
+      ],
+      "terminal_release": false,
+      "to_held": [
+        7
+      ],
+      "to_row": "S034"
+    },
+    {
+      "added": [
+        2
+      ],
+      "from_held": [
+        6,
+        7,
+        8
+      ],
+      "from_row": "S036",
+      "group": "complete_sample_2",
+      "no_intermediate_sampled_state_proven_by_settled_output": false,
+      "physical_control_delta_count": 4,
+      "policy": "SOCD_NEUTRAL",
+      "released": [
+        6,
+        7,
+        8
+      ],
+      "terminal_release": false,
+      "to_held": [
+        2
+      ],
+      "to_row": "S037"
+    }
+  ],
+  "ordered_group_facts": [
+    {
+      "context": "candidate_fixture_packet/clean_socd_0",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "SOCD_0",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 1,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 11,
+      "policy": "SOCD_UNSPECIFIED",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "O378",
+        "O379",
+        "O380",
+        "O381",
+        "O382",
+        "O383",
+        "O384",
+        "O385",
+        "O386",
+        "O387",
+        "O388",
+        "O389",
+        "O390"
+      ],
+      "rows": 13
+    },
+    {
+      "context": "candidate_fixture_packet/clean_socd_1",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "SOCD_1",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 1,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 11,
+      "policy": "SOCD_NEUTRAL",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "O391",
+        "O392",
+        "O393",
+        "O394",
+        "O395",
+        "O396",
+        "O397",
+        "O398",
+        "O399",
+        "O400",
+        "O401",
+        "O402",
+        "O403"
+      ],
+      "rows": 13
+    },
+    {
+      "context": "candidate_fixture_packet/clean_socd_2",
+      "fresh_start_fact": "True zero-initialized mode history required by frozen precondition; release-all insufficient; planned full normal boot, not SetConfig/set_mode.",
+      "group": "SOCD_2",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 1,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 11,
+      "policy": "SOCD_2IP",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "O404",
+        "O405",
+        "O406",
+        "O407",
+        "O408",
+        "O409",
+        "O410",
+        "O411",
+        "O412",
+        "O413",
+        "O414",
+        "O415",
+        "O416"
+      ],
+      "rows": 13
+    },
+    {
+      "context": "candidate_fixture_packet/clean_socd_3",
+      "fresh_start_fact": "Both-released clears active pair four flags; conservative author fresh boot retained.",
+      "group": "SOCD_3",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 1,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 11,
+      "policy": "SOCD_2IP_NO_REAC",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "O417",
+        "O418",
+        "O419",
+        "O420",
+        "O421",
+        "O422",
+        "O423",
+        "O424",
+        "O425",
+        "O426",
+        "O427",
+        "O428",
+        "O429"
+      ],
+      "rows": 13
+    },
+    {
+      "context": "candidate_fixture_packet/clean_socd_4",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "SOCD_4",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 1,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 11,
+      "policy": "SOCD_DIR1_PRIORITY",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "O430",
+        "O431",
+        "O432",
+        "O433",
+        "O434",
+        "O435",
+        "O436",
+        "O437",
+        "O438",
+        "O439",
+        "O440",
+        "O441",
+        "O442"
+      ],
+      "rows": 13
+    },
+    {
+      "context": "candidate_fixture_packet/clean_socd_5",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "SOCD_5",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 1,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 11,
+      "policy": "SOCD_DIR2_PRIORITY",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "O443",
+        "O444",
+        "O445",
+        "O446",
+        "O447",
+        "O448",
+        "O449",
+        "O450",
+        "O451",
+        "O452",
+        "O453",
+        "O454",
+        "O455"
+      ],
+      "rows": 13
+    },
+    {
+      "context": "candidate_safe_fixture_packet/forced_wins",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "forced_wins",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 3,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 3,
+      "policy": "NO_PAIRS",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "S000",
+        "S001",
+        "S002",
+        "S003",
+        "S004",
+        "S005",
+        "S006"
+      ],
+      "rows": 7
+    },
+    {
+      "context": "candidate_safe_fixture_packet/forced_loses",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "forced_loses",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 3,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 3,
+      "policy": "NO_PAIRS",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "S007",
+        "S008",
+        "S009",
+        "S010",
+        "S011",
+        "S012",
+        "S013"
+      ],
+      "rows": 7
+    },
+    {
+      "context": "candidate_safe_fixture_packet/forced_filter",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "forced_filter",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 3,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 3,
+      "policy": "NO_PAIRS",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "S014",
+        "S015",
+        "S016",
+        "S017",
+        "S018",
+        "S019",
+        "S020"
+      ],
+      "rows": 7
+    },
+    {
+      "context": "candidate_safe_fixture_packet/complete_sample_1",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "complete_sample_1",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 3,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 5,
+      "policy": "SOCD_NEUTRAL",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "S021",
+        "S022",
+        "S023",
+        "S024",
+        "S025",
+        "S026",
+        "S027",
+        "S028",
+        "S029"
+      ],
+      "rows": 9
+    },
+    {
+      "context": "candidate_safe_fixture_packet/complete_sample_2",
+      "fresh_start_fact": "Stateless/no-pair SOCD-observable fresh equivalence; exact grouped order remains required.",
+      "group": "complete_sample_2",
+      "history_before_arrays_exact_prefix": true,
+      "initial_and_final_held_empty": true,
+      "multi_control_edges": 3,
+      "no_extra_release_or_reboot_inside_group": true,
+      "one_control_edges": 5,
+      "policy": "SOCD_NEUTRAL",
+      "repeated_same_processed_held_set_idempotent": true,
+      "row_ids": [
+        "S030",
+        "S031",
+        "S032",
+        "S033",
+        "S034",
+        "S035",
+        "S036",
+        "S037",
+        "S038"
+      ],
+      "rows": 9
+    }
+  ],
+  "owner_approval_required": true,
+  "proof": "15 stateless-context intermediate samples cannot affect subsequent endpoint; six SOCD releases terminate their groups and have no later dependent row; SOCD2 final neutral is not fresh and not reused; required full boot reconstructs flags before next stateful group",
+  "source_eligibility_path": "/private/tmp/glyph-native-hardware-history-eligibility-20261022/eligibility.json",
+  "source_eligibility_sha256": "db2b241c1b65daac9e151ab2b5c07c072b266d46c5fde4c0ddf46e496d84df01"
+}

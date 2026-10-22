@@ -1,0 +1,76 @@
+{
+  "classification": "PRIVATE_REVIEWED_NATIVE_ONLY4READ_HOST_CHILD_CUSTODY_PENDING_FINAL_PACKET_ACK",
+  "candidate_git_sha": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "installed_uf2_sha256": "41305f260d42e8206bf4a2fb06c88912416e49cd8a68bc13ce3d3c7605306982",
+  "operational_directory": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022",
+  "custody_rule": "Exact operational files must equal these preserved copies immediately before approved use; no path relocation/host source substitution",
+  "live_authority": false,
+  "files": {
+    "mac_hostinterface_observer": {
+      "bytes": 269080,
+      "sha256": "ceb0736414720a5398a4d499b8a503194df5a0a3e7d4ffae7a75770f4bfd5164",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/mac_hostinterface_observer",
+      "mode": "0o500"
+    },
+    "mac_hostinterface_observer.mm": {
+      "bytes": 19654,
+      "sha256": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/mac_hostinterface_observer.mm",
+      "mode": "0o400"
+    },
+    "observer_core.hpp": {
+      "bytes": 5121,
+      "sha256": "a18d19cf0596a8cf8b02e5cd3874047b890241df383339e76fcecad69bfdb2d4",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/observer_core.hpp",
+      "mode": "0o400"
+    },
+    "observer_parser.hpp": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/observer_parser.hpp",
+      "mode": "0o400"
+    },
+    "acceptance_metadata.hpp": {
+      "bytes": 6348,
+      "sha256": "18f5a35f0094f3ad3ee8a420f6b1fe69a54e25680f53d41456f94b2fac2bb57c",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/acceptance_metadata.hpp",
+      "mode": "0o400"
+    },
+    "binding_contract.py": {
+      "bytes": 9839,
+      "sha256": "d8999e5e32bec423604873f2e6d025e7bebb16a45344ed17e083055c63c5a048",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/binding_contract.py",
+      "mode": "0o400"
+    },
+    "verify_native_capture.py": {
+      "bytes": 7176,
+      "sha256": "d44a0cfb5f4a6ee46ca547b267b239f49130edfe2e98877a4bdce8551d70f92b",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/verify_native_capture.py",
+      "mode": "0o400"
+    },
+    "strong_verify_capture_unchanged.py": {
+      "bytes": 5762,
+      "sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/strong_verify_capture_unchanged.py",
+      "mode": "0o400"
+    },
+    "descriptor_cli": {
+      "bytes": 89968,
+      "sha256": "b0afa7397979ba616894f3df71fb8056a8c8f5fada5b0bbe5431ec088a9c3952",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/descriptor_cli",
+      "mode": "0o500"
+    },
+    "parser_cli": {
+      "bytes": 327976,
+      "sha256": "e40c710577e7c99048fa4a2738254a7e6e6b049b63ea0cbc9f7103b2825155e8",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/parser_cli",
+      "mode": "0o500"
+    },
+    "acceptance_comparison_matrix.json": {
+      "bytes": 2861710,
+      "sha256": "4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5",
+      "source_path": "/private/tmp/glyph-native-native-acceptance-jsonl-repair-20261022/acceptance_comparison_matrix.json",
+      "mode": "0o400"
+    }
+  }
+}

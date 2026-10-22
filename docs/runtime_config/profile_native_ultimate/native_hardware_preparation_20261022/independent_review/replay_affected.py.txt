@@ -1,0 +1,35 @@
+from pathlib import Path
+import json,hashlib,subprocess,os,collections
+O=Path(__file__).resolve().parent;D=O/'replay';P=Path('/private/tmp/glyph-native-native-acceptance-preparation-20261022');commands=[];sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+def run(args):
+ r=subprocess.run(list(map(str,args)),capture_output=True,text=True,timeout=40,env={**os.environ,'PYTHONDONTWRITEBYTECODE':'1','ASAN_OPTIONS':'detect_stack_use_after_return=1:halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'});commands.append({'argv':list(map(str,args)),'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr});(O/'affected-commands.json').write_text(json.dumps(commands,indent=2)+'\n');assert r.returncode==0,r.stdout+r.stderr;return r
+common=['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations'];objc=['-fobjc-arc','-fblocks','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost'];san=['-fsanitize=address,undefined','-fno-omit-frame-pointer']
+for src,flags in [('mac_hostinterface_observer.mm',objc),('native_mock_tests.mm',objc+san),('core_tests.cpp',san),('parser_cli.cpp',san),('descriptor_cli.cpp',[])]:run([*common,*flags,D/src,'-o',D/Path(src).stem])
+assert sha(D/'mac_hostinterface_observer')=='ad9408fa882b50e6deac9fcbc5d8627582cc661f4ce2535a70260be68d8ca9f9'
+run([D/'core_tests']);J=D/'independent_mock_journals';J.mkdir(exist_ok=True)
+for i in range(28):run([D/'native_mock_tests',i,J/('scenario'+str(i)+'.jsonl')])
+# Pure-file/metadata and strict comparison tests; no native live entry is invoked.
+run(['python3',D/'test_acceptance_binding.py'])
+for name in ['child_no_late_enqueue_regression','child_clock_failure_regression']:
+ run([*common,*objc,*san,D/(name+'.mm'),'-o',D/name]);run([D/name,0,J/(name+'.jsonl')])
+# Independently inspect plan arithmetic, exact prefix/order, baseline and oracle separation.
+f=json.loads((D/'fixture_packet_immutable.json').read_text());m=json.loads((D/'acceptance_comparison_matrix.json').read_text());assert m['rows'][:334]==f['rows'] and all(m['contexts'][k]==v for k,v in f['contexts'].items());assert sha(D/'acceptance_comparison_matrix.json')=='4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5'
+s=json.loads((D/'native_xinput_owner_packet_draft.json').read_text());totals=collections.Counter()
+for e in s['events']:totals.update(e['maximum_cost'])
+assert dict(totals)==s['counts'] and len(s['events'])==748
+captures=[e for e in s['events']if e['kind'] in ['NATIVE_ACCEPTANCE_CAPTURE','ORIGINAL_BASELINE_CAPTURE']];assert len(captures)==494 and totals['raw_read_submissions']==1976
+byid={r['selection_id']:r for r in m['rows']};boots={e['boot_session']:e for e in s['events']if e['kind']=='ORDINARY_USB_REINITIALIZATION'};assert len(boots)==26
+for bid,boot in boots.items():
+ es=[e for e in captures if e['boot_session']==bid];assert all(byid[e['selection_id']]['profile_context_key']==boot['context']for e in es)
+ ids=[e['selection_id']for e in es]
+ groups={byid[i]['history_group']for i in ids}
+ for g in groups:
+  rs=[byid[i]for i in ids if byid[i]['history_group']==g];prefix=[]
+  for r in rs:assert r['history_before_this_row']==prefix;prefix.append(r['physical_held_input_ids'])
+for context in ['candidate_fixture_packet/clean_socd_2','candidate_fixture_packet/clean_socd_3']:
+ bs=[v for v in boots.values()if v['context']==context];assert len(bs)==1
+ elig=json.loads((D/'history_observation_proposal.json').read_text());assert len(elig['multi_control_edges'])==21
+# Exact original baseline control: current schema3 differs9; host schema2 agrees52, no native oracle alteration.
+x=json.loads((D/'baseline/actual_F_vs_frozen_initial_crosscheck.json').read_text());g=json.loads((D/'baseline/schema3_gate_control.json').read_text());assert len(x['differing_indices'])==9 and g['equal'] is True and len(g['actual_schema2_gate_outputs'])==52
+result={'parent_source_technical_HOLD':'f736bae361dbf503814f26b5e37dc20d952fda3de23708423135526d3287ac9f','qualified_reader_unchanged':True,'native334_and17contexts_exact':True,'baseline52_reexecuted_from_actual_F_source':True,'current_schema3_differences9_retained':True,'host_only_schema2_control52_equal':True,'matrix_exact':sha(D/'acceptance_comparison_matrix.json'),'events':748,'captures':494,'drains':494,'strict_measurements':1482,'read_submissions':1976,'actual_source_mocks':28,'deadline_regressions':2,'metadata_synthetic_checks':len(json.loads((D/'synthetic_tests/results.json').read_text())['checks']),'native_jsonl_handoff_defect':'separately confirmed, remains blocker pending child','live_calls':0,'counts_replayed':dict(totals),'history_prefixes_all_ordered_groups_exact':True,'freshboot_SOCD2_and3':True,'multicontrol_qualification_required21':True}
+(O/'affected-results.json').write_text(json.dumps(result,indent=2)+'\n');print('PASS affectedoffline source/matrix/baseline/history/counters; JSONL knownblocker retained')

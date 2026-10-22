@@ -1,0 +1,39 @@
+[
+  {
+    "argv": [
+      "clang++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wno-deprecated-declarations",
+      "-fobjc-arc",
+      "-fblocks",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-framework",
+      "Foundation",
+      "-framework",
+      "IOKit",
+      "-framework",
+      "IOUSBHost",
+      "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal.mm",
+      "-o",
+      "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal",
+      "ewogICJhY2NlcHRhbmNlX21hdHJpeF9zaGEyNTYiOiAiNGE5NzY5YTQ3MzE1ODQ1MGJjZjcwZDIwOWJmYjM5YWFiZTJiMGYzOTY0NTk4MmNiNzk4YjcwNDY5MWFkMDNhNSIsCiAgImFuY2hvcl9lbnRyeV9pZCI6IDEsCiAgImJvb3RfcmVjb3JkX3NoYTI1NiI6ICIwMDE3OTZkMjZkMjZhYWVkZDhhZDU4NGUwNjRmZWFjMGVhNWZmNzRlODFiODk2YmJlZGE0MDBkZGRkMTQ2ZWU3IiwKICAiYm9vdF9zZXNzaW9uIjogIkIxMyIsCiAgImNhbmRpZGF0ZV9naXRfc2hhIjogIjMzNGZiZDA2ZTQ1NDFjMTIwYjBkYjQyM2U1YmU3ZTExMmViMWY2ZjYiLAogICJjYXNlX2lkIjogIk8wMDAiLAogICJjYXNlX2tpbmQiOiAibmF0aXZlIiwKICAiY2FzZV9ydW5faWQiOiAiQjEzX08wMDAiLAogICJjaGVja2VkX3JlZmVyZW5jZV9yZWNlaXB0X3NoYTI1NiI6ICJjYjFlMmYxZGUzMmNiNzIyN2Q3NThiZmY5ZDBhNDlhYjFmNmQ3MGM5YWU1NWYzZDI0MzZhZTljZmRmYzE1MGI1IiwKICAiY2hlY2tlZF9yZWZlcmVuY2VfcmVzcG9uc2Vfc2hhMjU2IjogImI5YWE0MTA2ZjI4NWVkMmUzYTVlNWY1ZTI5NTA1OTIxNWJlMTBlMmE2MDQ1MmZkMzI3MjgzZWU3MmI4Yjg3YWUiLAogICJjb250ZXh0X3JvdyI6IDMsCiAgImR1cmFibGVfY29uZmlnX3JlYWRiYWNrX3NoYTI1NiI6ICI1MjlhMjI2MGE3ZmUzNTFiYjdmZDRjZWI4MzdlMzk3OWU0MjIwYjEzZjVjNzY2MGJlMmUyNGFhMjk1YjQxZDM4IiwKICAiZml4dHVyZV9yb3dfc2hhMjU2IjogImMwMjhmNWNhNmI4OWVjNWYzNTk3M2M5MTJkZGM1ZDMyYTNlZTY2ODI3ZGZkMGQ0NmJlNzQyNzY0MDgzZTQxMWIiLAogICJmcm96ZW5fZml4dHVyZV9wYWNrZXRfc2hhMjU2IjogImRmZDRhYjVjODFjMjRlMTM4MDA5NWZhNjM3ZmYwZDUxZGU4M2I0NzhmNjY2NDFjNTNkMWE2OWQ5Zjc2YmU3NDQiLAogICJpbmNhcm5hdGlvbiI6IDEsCiAgImludGVyZmFjZV9lbnRyeV9pZCI6IDEwMSwKICAia2luZCI6ICJHUF9OQVRJVkVfMDAxX05BVElWRV9BQ0NFUFRBTkNFX0JJTkRJTkdfVjEiLAogICJvd25lZF9wcm9maWxlX2lkcyI6IFsKICAgIDI1LAogICAgMjYKICBdLAogICJvd25lcnNoaXBfcmVjZWlwdHNfc2hhMjU2IjogImIxNjczZTQyYzg4ZWQwZTE4Zjg4MjI5MjI2MTc2NWFmMmQ1MDYyMmExZWEyZWIyZjQ2ZDVjOGEyNDkwYmFkZDciLAogICJwcmVwcm9jZXNzaW5nX3NoYTI1NiI6ICJlNzI5ODU2MGFmYzE5YTJiMzhjYmY1NTQ2NjkyNjJlM2ZhZGJkNDE2NmM5ZWUwNTYxYmZkY2M5ZTQyOTJmY2U2IiwKICAicHJvZmlsZV9jb250ZXh0X2tleSI6ICJjYW5kaWRhdGVfZml4dHVyZV9wYWNrZXQvY29tcGF0aWJpbGl0eSIsCiAgInByb2ZpbGVfaWQiOiAyNSwKICAicHJvZmlsZV9yZXZpc2lvbiI6IDEsCiAgInByb2ZpbGVfd3JhcHBlcl9zaGEyNTYiOiAiZTZiYTFmMzExOGNjOGQxYTYxODJjZDNiYjJlZmE0ZjRhZDgyYWRiODYwN2JlZDI2ZTk4MjgxNjIyMTMzODlhYSIsCiAgInB1cnBvc2UiOiAiY2FuZGlkYXRlIiwKICAicmVmZXJlbmNlX2V2aWRlbmNlX2tpbmQiOiAiY2hlY2tlZF9uYXRpdmVfcmVmZXJlbmNlIiwKICAicmVnaXN0cnlfaW5zcGVjdGlvbl9zaGEyNTYiOiAiODAxYzBkN2E1ZTg5YzZmMjYwNjg5ZWQ2ZDFjNzgyYTMwYzA5OTc4Yjk5Mjg0ZWE0YzQxMGUzMTc1ODlmY2E4MiIsCiAgInJvdXRlIjogInhpbnB1dCIsCiAgInJ1bnRpbWVfaWRlbnRpdHkiOiB7CiAgICAiYWN0aXZlX2lkIjogMjUsCiAgICAiYWN0aXZlX3JldmlzaW9uIjogMSwKICAgICJjb250ZXh0IjogInhpbnB1dCIsCiAgICAiY29udGV4dF9yb3ciOiAzLAogICAgImluY2FybmF0aW9uIjogMSwKICAgICJvYnNlcnZhdGlvbiI6ICJjdXJyZW50X3Nlc3Npb25fb25seSIsCiAgICAicGF5bG9hZF9zaGEyNTYiOiAiNDE3MWJmODNmODdhYjZhYzg4NDIxNDhhZjllOWYyM2E5NTAzNDlmNWNjODQ2NGQzNTU5MzMwMjMwOWFkYTY1MSIsCiAgICAicHJpbWFyeV9iYWNrZW5kIjogMiwKICAgICJyZXF1ZXN0ZWRfcmVmZXJlbmNlIjogMjUsCiAgICAic2NoZW1hX3ZlcnNpb24iOiA1LAogICAgInNlc3Npb24iOiAiQjEzIiwKICAgICJzdGF0dXMiOiAicGVyc2lzdGVkIgogIH0sCiAgInJ1bnRpbWVfaWRlbnRpdHlfc2hhMjU2IjogImJhMzNhNzU1NDAwYjY0NDFmZGVkMTY5YjY3OWE2NGU5MDM1M2RmN2VlNmFkMDZlNjEwYjdlZTNkNjMzYTczNmMiLAogICJzdGltdWx1c19jb25maXJtYXRpb25fc2hhMjU2IjogImE5ZjJkYjdhMjY5YzJjMmRlZWFlZDAwYWZmNzQxZDFkOGUxNDc2ZjU4NjZjNzE0M2JiODIyZjQyYWMyYzk2OGIiLAogICJzdG9yZWRfcHJvZmlsZV9yZWFkYmFja19zaGEyNTYiOiAiZmQzZGQ2ODM1OWUzMWNmMTI1NDFiOGFlZGIzZjZlZTFjOTU3NWIwZTJjNjNhZjdjZjRjNjIzNTA0YjZhMWIzNyIsCiAgInVmMl9zaGEyNTYiOiAiNDEzMDVmMjYwZDQyZTgyMDZiZjRhMmZiMDZjODg5MTI0MTZlNDljZDhhNjhiYzEzY2UzZDNjNzYwNTMwNjk4MiIKfQo=",
+      "B13",
+      "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal.jsonl"
+    ],
+    "returncode": 0,
+    "stdout": "Actual source parse+open_journal executed; zero registry/hostcalls\n",
+    "stderr": ""
+  }
+]

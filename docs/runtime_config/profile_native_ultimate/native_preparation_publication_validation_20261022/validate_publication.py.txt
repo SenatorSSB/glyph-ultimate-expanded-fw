@@ -1,0 +1,63 @@
+from pathlib import Path
+import json,hashlib,re,subprocess
+W=Path('/private/tmp/glyph-native-curation-20261020');R=W/'docs/runtime_config/profile_native_ultimate';A=R/'native_hardware_preparation_20261022';V=R/'native_preparation_publication_validation_20261022';O=Path('/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw');F=Path('/private/tmp/glyph-profile-native-20261020');BASE='527554e9ca050d3d923eb2f92cff660d0a7a0b93'
+def sh(*args,cwd=W):return subprocess.check_output(args,cwd=cwd,text=True)
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def check(p,e):
+ p=Path(p);assert p.is_file() and not p.is_symlink() and p.stat().st_size==e['bytes'] and sha(p)==e['sha256'],str(p)
+def queue(s):
+ a=s.index('```json',s.index('<!-- queue-state:start -->'))+7;b=s.index('```',a);return json.loads(s[a:b])
+oldq=queue(sh('git','show',BASE+':docs/project/ACTIVE_AGENT_QUEUE.md'));newq=queue((W/'docs/project/ACTIVE_AGENT_QUEUE.md').read_text());q=json.loads(json.dumps(oldq));oi=next(x for x in q['items'] if x['id']=='GP-NATIVE-001');ni=next(x for x in newq['items'] if x['id']=='GP-NATIVE-001');oi['hardware_evidence_gaps']=ni['hardware_evidence_gaps'];assert q==newq
+assert ni['status']=='HARDWARE_TEST_REQUIRED' and ni['hardware_result'] is None and ni['hardware_evidence_record'] is None and ni['hardware_evidence_dependency_satisfied'] is False
+old=json.loads(sh('git','show',BASE+':docs/runtime_config/profile_native_ultimate/exact_candidate_334f_status_20261021.json'));new=json.loads((R/'exact_candidate_334f_status_20261021.json').read_text());allowed={'remaining','next_native_xinput_acceptance','native_acceptance_preparation','latest_sourcefree_native_preparation_validation'};assert {k for k in set(old)|set(new) if old.get(k)!=new.get(k)}==allowed
+for k in ['candidate','build','artifacts','source_review','resource','validation','packet','archive_manifests','device_approval','hardware_result','target_timing','runtime_stack_highwater','hardware','Nunchuk','RT2','root_cause','actual_hostinterface_rebind_result','hostinterface_rebind_success_audit']:assert old[k]==new[k],k
+assert new['remaining'][1:]==old['remaining'][1:]
+assert new['next_native_xinput_acceptance']['owner_approval']=='NOT_PROVIDED' and new['next_native_xinput_acceptance']['executed'] is False
+assert sh('git','rev-parse','HEAD',cwd=F).strip()==old['candidate']['git_sha'] and sh('git','rev-parse','HEAD^{tree}',cwd=F).strip()==old['candidate']['tree'] and not sh('git','status','--porcelain',cwd=F)
+fc=O/Path(old['artifacts']['preserved_firmware_artifact_locator']).parent
+for name,k in [('firmware.uf2','uf2'),('firmware.elf','elf'),('firmware.bin','bin')]:check(fc/name,old['artifacts'][k])
+manifest_count=file_count=0
+for mp in A.rglob('manifest.json'):
+ m=json.loads(mp.read_text());manifest_count+=1
+ for name,e in m['files'].items():check(mp.parent/name,e);file_count+=1
+bindings=json.loads((A/'publication_bindings.json').read_text());pin_count=0
+for obj in bindings['sealed_inputs']:
+ check(obj['path'],obj);pin_count+=1
+for collection in bindings['pin_collections']:
+ root=Path(collection['root']);d=json.loads(Path(collection['pins']).read_text())
+ def walk(v):
+  global pin_count
+  if isinstance(v,dict):
+   if {'path','sha256','bytes'}<=v.keys():check(v['path'],v);pin_count+=1
+   else:
+    for k,e in v.items():
+     if isinstance(e,dict) and {'sha256','bytes'}<=e.keys():check(Path(k) if Path(k).is_absolute() else root/k,e);pin_count+=1
+     else:walk(e)
+  elif isinstance(v,list):
+   for e in v:walk(e)
+ walk(d)
+C=O/bindings['host_custody_relative'];cm=json.loads((C/'custody.json').read_text());assert sha(C/'custody.json')=='cc4ec988a70e5eb14fdb7af67d64b3e555252c22b7e60e7f6e7ac0af2eb1a255' and len(cm['files'])==11
+for name,e in cm['files'].items():check(C/name,e);check(e['source_path'],e)
+packet=json.loads((A/'OWNER_PACKET.json').read_text());assert packet['physical_result']=='NOT_TESTED' and packet['all_observations'] is None and packet['owner_approval_request_id']=='GP_NATIVE_001_XINPUT_NATIVE_ACCEPTANCE_V1'
+assert len(packet['events'])==748 and all(x['observed'] is None and x['result']=='NOT_TESTED' and x['proposed_only'] for x in packet['events'])
+totals={}
+for e in packet['events']:
+ for k,v in e['maximum_cost'].items():totals[k]=totals.get(k,0)+v
+assert totals['raw_capture_invocations']==494 and totals['raw_read_submissions']==1976 and totals['ordinary_USB_restarts']+totals['Menu_Configurator_restarts']==50
+assert packet['scope']['new_firmware_flash']==packet['scope']['original_profile_mutations']==packet['scope']['route_adapter_execution']==0
+matrix=json.loads((A/'reviewed_child/acceptance_comparison_matrix.json').read_text());frozen=json.loads((R/'hardware_334f_preparation_20261021/current_packet_exactF.json').read_text());assert matrix['rows'][:334]==frozen['rows'] and all(matrix['contexts'][k]==v for k,v in frozen['contexts'].items())
+assert sha(A/'reviewed_child/acceptance_comparison_matrix.json')=='4a9769a473158450bcf70d209bfb39aabe2b0f39645982cb798b704691ad03a5'
+tracked=set(sh('git','diff','--name-only',BASE).splitlines());untracked=set(sh('git','ls-files','--others','--exclude-standard').splitlines());changed=tracked|untracked
+currentdocs={'docs/AGENT_CONTEXT.md','docs/CURRENT_STATE.md','docs/ROADMAP.md','docs/project/ACTIVE_AGENT_QUEUE.md'}|{'docs/runtime_config/profile_native_ultimate/'+name for name in ['README.md','chapter_ledger.md','exact_candidate_334f_status_20261021.json','exact_candidate_334f_status_20261021.md']};prefixes=['docs/runtime_config/profile_native_ultimate/'+x+'/' for x in ['native_hardware_preparation_20261022','native_preparation_publication_validation_20261022']]
+assert currentdocs<=tracked and all(x in currentdocs or any(x.startswith(pre) for pre in prefixes) for x in changed)
+original=O/'local_backups/hardware-preflight/GP_NATIVE_001_MAC_PREFLIGHT_V1_20261021/configurator_entry_20261022/configurator_port.json';serial=json.loads(original.read_text())['matches'][0]['serial_number'].encode();links=0
+for rel in changed:
+ p=W/rel;assert p.is_file() and not p.is_symlink();data=p.read_bytes();assert b'\0' not in data and serial not in data,rel
+ if rel.endswith('.md'):
+  for target in re.findall(r'\[[^\]]*\]\(([^)]+)\)',data.decode()):
+   if re.match(r'^[a-z]+:',target) or target.startswith('#'):continue
+   assert (p.parent/target.split('#')[0]).exists(),(rel,target);links+=1
+subprocess.run(['git','diff','--check'],cwd=W,check=True)
+assert 'glyph_agent_framework_docs: PASS' in (V/'framework.log').read_text() and 'status=PASS' in (V/'sequence.log').read_text() and 'glyph_docs_navigation: PASS' in (V/'navigation.log').read_text() and not (V/'diff.log').read_bytes()
+result={'state':'FOCUSED_SOURCEFREE_NATIVE_XINPUT_PREPARATION_PUBLICATION_PASS','scope':'DOCS_AND_INERT_REVIEWED_HOST_SOURCE_ARCHIVE_ONLY','framework_sequence_navigation_diff':'PASS','only_queue_field_changed':'GP-NATIVE-001.hardware_evidence_gaps','other_orders_unchanged':len(newq['items'])-1,'candidate_source_build_artifact_resource_caps_protocol_oracles_and_actual_evidence_unchanged':True,'archive_manifests':manifest_count,'archive_entries_rehashed':file_count,'sealed_inputs_and_pin_entries_rehashed':pin_count,'host_custody_and_operational_files_rehashed':11,'new_live_actions':0,'owner_approval':'NOT_PROVIDED','native_hardware_result':None,'proposed_campaign':{'events':748,'captures':494,'reports':1976,'all_restarts':50},'native334_and17contexts_unchanged':True,'parent_failure_preserved':True,'reviewed_child_handoff_closure':'PASS_WITHOUT_DEVICE_CALLS','markdown_links':links,'privacy':'PASS_no_private_serial_original_payload_or_captured_device_raw_publication','full_surface':'NOT_RERUN; historical framework debt retained, no aggregate PASS','changed_paths':len(changed)}
+(V/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

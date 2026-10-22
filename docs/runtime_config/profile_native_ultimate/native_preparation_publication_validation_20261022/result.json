@@ -1,0 +1,28 @@
+{
+  "state": "FOCUSED_SOURCEFREE_NATIVE_XINPUT_PREPARATION_PUBLICATION_PASS",
+  "scope": "DOCS_AND_INERT_REVIEWED_HOST_SOURCE_ARCHIVE_ONLY",
+  "framework_sequence_navigation_diff": "PASS",
+  "only_queue_field_changed": "GP-NATIVE-001.hardware_evidence_gaps",
+  "other_orders_unchanged": 102,
+  "candidate_source_build_artifact_resource_caps_protocol_oracles_and_actual_evidence_unchanged": true,
+  "archive_manifests": 5,
+  "archive_entries_rehashed": 182,
+  "sealed_inputs_and_pin_entries_rehashed": 656,
+  "host_custody_and_operational_files_rehashed": 11,
+  "new_live_actions": 0,
+  "owner_approval": "NOT_PROVIDED",
+  "native_hardware_result": null,
+  "proposed_campaign": {
+    "events": 748,
+    "captures": 494,
+    "reports": 1976,
+    "all_restarts": 50
+  },
+  "native334_and17contexts_unchanged": true,
+  "parent_failure_preserved": true,
+  "reviewed_child_handoff_closure": "PASS_WITHOUT_DEVICE_CALLS",
+  "markdown_links": 206,
+  "privacy": "PASS_no_private_serial_original_payload_or_captured_device_raw_publication",
+  "full_surface": "NOT_RERUN; historical framework debt retained, no aggregate PASS",
+  "changed_paths": 113
+}

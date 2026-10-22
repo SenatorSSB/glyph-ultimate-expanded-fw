@@ -1,0 +1,131 @@
+{
+  "classification": "UNADOPTED_PARENT_AND_INDEPENDENT_ACTUAL_SOURCE_JSONL_FAILURE",
+  "files": {
+    "TECHNICAL_HOLD.json": {
+      "bytes": 11531,
+      "sha256": "f736bae361dbf503814f26b5e37dc20d952fda3de23708423135526d3287ac9f",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/TECHNICAL_HOLD.json"
+    },
+    "mac_hostinterface_observer.mm.txt": {
+      "bytes": 19654,
+      "sha256": "0bf8d5f4f929215280b6ce28ed0abf853590e7ee5bf007bccb84d475a3ca3d55",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/mac_hostinterface_observer.mm"
+    },
+    "observer_core.hpp.txt": {
+      "bytes": 5121,
+      "sha256": "a18d19cf0596a8cf8b02e5cd3874047b890241df383339e76fcecad69bfdb2d4",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/observer_core.hpp"
+    },
+    "observer_parser.hpp.txt": {
+      "bytes": 3670,
+      "sha256": "34d1130576088947c52a7df1224f689969d0d22672296330c89557afe01818fb",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/observer_parser.hpp"
+    },
+    "acceptance_metadata.hpp.txt": {
+      "bytes": 5858,
+      "sha256": "aa577b4a6c095ba65b16ebe4eed3b901fcc89e72072ae78910679c215692a5d3",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/acceptance_metadata.hpp"
+    },
+    "binding_contract.py.txt": {
+      "bytes": 9839,
+      "sha256": "d8999e5e32bec423604873f2e6d025e7bebb16a45344ed17e083055c63c5a048",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/binding_contract.py"
+    },
+    "verify_native_capture.py.txt": {
+      "bytes": 7176,
+      "sha256": "d44a0cfb5f4a6ee46ca547b267b239f49130edfe2e98877a4bdce8551d70f92b",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/verify_native_capture.py"
+    },
+    "strong_verify_capture_unchanged.py.txt": {
+      "bytes": 5762,
+      "sha256": "442110b2ada7eb1e9159ecd4fa38036773d111f3f6c056cdaf62e154a4a8a006",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/strong_verify_capture_unchanged.py"
+    },
+    "test_acceptance_binding.py.txt": {
+      "bytes": 12035,
+      "sha256": "5f874859aca9c2751494a1e82c79dc0333a09158d71dd24175c375236c3a7311",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/test_acceptance_binding.py"
+    },
+    "test_capture_correspondence_replay.py.txt": {
+      "bytes": 4143,
+      "sha256": "77eb6181a43338dccc0628c64397050cf5af277231fa32e1daf90a6de3e0a906",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/test_capture_correspondence_replay.py"
+    },
+    "native_mock_tests.mm.txt": {
+      "bytes": 9135,
+      "sha256": "f2238f087a1669ff2235f3bdf161578350e071de810b87eb3a6482a6439b6fbd",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/native_mock_tests.mm"
+    },
+    "core_tests.cpp.txt": {
+      "bytes": 3351,
+      "sha256": "4d4aae4a4629bf481071a686a2eeff7cfd6918fa5325e0929d0aaca28ba0aaf5",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/core_tests.cpp"
+    },
+    "validate_offline.py.txt": {
+      "bytes": 5029,
+      "sha256": "8adb66ae28177b698f54768e5d734fca648a01e2b3f665b280bf3abfcbb4f4cd",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/validate_offline.py"
+    },
+    "child_no_late_enqueue_regression.mm.txt": {
+      "bytes": 9958,
+      "sha256": "148e803b16382865003431768fd01cc414021947d858ca304ed8242002420230",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/child_no_late_enqueue_regression.mm"
+    },
+    "child_clock_failure_regression.mm.txt": {
+      "bytes": 10011,
+      "sha256": "7300c5d75537b78a5c1ccdc5cb055c33baaa5d8f3e6a8c50b29a1d7e616fbb5e",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/child_clock_failure_regression.mm"
+    },
+    "mac_hostinterface_observer.mm.qualified_parent_to_proposal.diff": {
+      "bytes": 12719,
+      "sha256": "fb2270850e88c48fe607ec6bfbfd50b1c6e866b5500b781492983d560c844c24",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/mac_hostinterface_observer.mm.qualified_parent_to_proposal.diff"
+    },
+    "observer_core.hpp.qualified_parent_to_proposal.diff": {
+      "bytes": 3106,
+      "sha256": "5b3b0a997d6ec48c138a52f2f4ef0fbe1380b26d6352bcc377ac058af51abfa2",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/observer_core.hpp.qualified_parent_to_proposal.diff"
+    },
+    "packet_counter_proof.json": {
+      "bytes": 929,
+      "sha256": "c42a3e67dc100db47945c10071ec61dfc0d7faee53f1ef98e8e6b6728a11aa95",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/packet_counter_proof.json"
+    },
+    "history_observation_proposal.json": {
+      "bytes": 18386,
+      "sha256": "08f82256ef6273fa4261e3273a59b591749de1702f8901c88f99beb42c16c58b",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/history_observation_proposal.json"
+    },
+    "queued_report_source_pins.json": {
+      "bytes": 1535,
+      "sha256": "932153905db6271da58c68d9b2b08647c3805455d4625d0903e33a0a7a807a9d",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/queued_report_source_pins.json"
+    },
+    "baseline/actual_F_vs_frozen_initial_crosscheck.json": {
+      "bytes": 15196,
+      "sha256": "6fb445ecd6eafa9c682683bd7975ddb3dde062f9d821cd0dc1c6a4b1b91e4c5f",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/actual_F_vs_frozen_initial_crosscheck.json"
+    },
+    "baseline/schema3_gate_control.json": {
+      "bytes": 4072,
+      "sha256": "6a32212300f48f669a1827072d8a8713159f920ab7ec669e9b75a1434c63a607",
+      "original": "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/schema3_gate_control.json"
+    },
+    "independent_failure/finding-jsonl.json": {
+      "bytes": 5670,
+      "sha256": "f6495331a5dd23382cc7d9258f048e9bcff863d25431c965af06add1c60fcc58",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/finding-jsonl.json"
+    },
+    "independent_failure/journal-witness-commands.json": {
+      "bytes": 4368,
+      "sha256": "b7dbba9a02fd0bd48265a977f6338159a52f16e5f5894e415d75eb387dd9d3d1",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal-witness-commands.json"
+    },
+    "independent_failure/journal_witness/actual_journal.jsonl": {
+      "bytes": 3020,
+      "sha256": "677ab3c5d456664c34367f870de38fb852c4e66dbf46b40ee8012f8ecee87659",
+      "original": "/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal.jsonl"
+    }
+  },
+  "device_actions": 0
+}

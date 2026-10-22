@@ -1,0 +1,253 @@
+#include <cstdlib>
+#include <cstdint>
+#include <cstdio>
+#include <cstring>
+typedef struct __attribute((packed, aligned(1))) {
+    uint8_t report_id;
+    uint8_t report_size;
+
+    // Buttons first byte
+    bool dpad_up : 1;
+    bool dpad_down : 1;
+    bool dpad_left : 1;
+    bool dpad_right : 1;
+    bool start : 1;
+    bool back : 1;
+    bool ls : 1;
+    bool rs : 1;
+
+    // Buttons second byte
+    bool lb : 1;
+    bool rb : 1;
+    bool home : 1;
+    bool _reserved0 : 1;
+    bool a : 1;
+    bool b : 1;
+    bool x : 1;
+    bool y : 1;
+
+    uint8_t lt;
+    uint8_t rt;
+    int16_t lx;
+    int16_t ly;
+    int16_t rx;
+    int16_t ry;
+    uint8_t _reserved1[6];
+} xinput_report_t;typedef enum {
+    SWITCH_HAT_UP,
+    SWITCH_HAT_UP_RIGHT,
+    SWITCH_HAT_RIGHT,
+    SWITCH_HAT_DOWN_RIGHT,
+    SWITCH_HAT_DOWN,
+    SWITCH_HAT_DOWN_LEFT,
+    SWITCH_HAT_LEFT,
+    SWITCH_HAT_UP_LEFT,
+    SWITCH_HAT_CENTERED,
+} switch_gamepad_hat_t;
+
+typedef struct __attribute__((packed, aligned(1))) {
+    bool y : 1;
+    bool b : 1;
+    bool a : 1;
+    bool x : 1;
+    bool l : 1;
+    bool r : 1;
+    bool zl : 1;
+    bool zr : 1;
+    bool minus : 1;
+    bool plus : 1;
+    bool l3 : 1;
+    bool r3 : 1;
+    bool home : 1;
+    bool capture : 1;
+    uint8_t reserved0 : 2;
+    switch_gamepad_hat_t hat;
+    uint8_t lx;
+    uint8_t ly;
+    uint8_t rx;
+    uint8_t ry;
+    uint8_t reserved1;
+} switch_gamepad_report_t;
+
+typedef struct __attribute__((packed)) {
+    bool a : 1;
+    bool b : 1;
+    bool x : 1;
+    bool y : 1;
+    bool start : 1;
+    bool origin : 1;
+    uint8_t reserved0 : 2;
+
+    bool dpad_left : 1;
+    bool dpad_right : 1;
+    bool dpad_down : 1;
+    bool dpad_up : 1;
+    bool z : 1;
+    bool r : 1;
+    bool l : 1;
+    uint8_t reserved1 : 1;
+
+    uint8_t stick_x;
+    uint8_t stick_y;
+    uint8_t cstick_x;
+    uint8_t cstick_y;
+    uint8_t l_analog;
+    uint8_t r_analog;
+} gc_report_t;
+static_assert(sizeof(xinput_report_t)==20);static_assert(sizeof(switch_gamepad_report_t)==8);static_assert(sizeof(gc_report_t)==8);
+void emit(const char*r,const char*id,const uint8_t*p,size_t n){std::printf("%s %s ",r,id);for(size_t i=0;i<n;++i)std::printf("%02x",p[i]);std::puts("");}
+switch_gamepad_hat_t GetHatPosition(
+    bool left,
+    bool right,
+    bool down,
+    bool up
+) {
+    switch_gamepad_hat_t angle = SWITCH_HAT_CENTERED;
+    if (right && !left) {
+        angle = SWITCH_HAT_RIGHT;
+        if (down)
+            angle = SWITCH_HAT_DOWN_RIGHT;
+        if (up)
+            angle = SWITCH_HAT_UP_RIGHT;
+    } else if (left && !right) {
+        angle = SWITCH_HAT_LEFT;
+        if (down)
+            angle = SWITCH_HAT_DOWN_LEFT;
+        if (up)
+            angle = SWITCH_HAT_UP_LEFT;
+    } else if (down && !up) {
+        angle = SWITCH_HAT_DOWN;
+    } else if (up && !down) {
+        angle = SWITCH_HAT_UP;
+    }
+    return angle;
+}
+typedef struct _OutputState {
+    // Digital outputs.
+    union {
+        uint32_t buttons = 0;
+
+        struct {
+            bool a : 1;
+            bool b : 1;
+            bool x : 1;
+            bool y : 1;
+            bool buttonL : 1;
+            bool buttonR : 1;
+            bool triggerLDigital : 1;
+            bool triggerRDigital : 1;
+            bool start : 1;
+            bool select : 1;
+            bool home : 1;
+            bool capture : 1;
+            bool dpadUp : 1;
+            bool dpadDown : 1;
+            bool dpadLeft : 1;
+            bool dpadRight : 1;
+            bool leftStickClick : 1;
+            bool rightStickClick : 1;
+            bool leftStickLeft : 1;
+            bool leftStickRight : 1;
+            bool leftStickUp : 1;
+            bool leftStickDown : 1;
+            bool rightStickLeft : 1;
+            bool rightStickRight : 1;
+            bool rightStickUp : 1;
+            bool rightStickDown : 1;
+            bool modX : 1;
+            bool modY : 1;
+        };
+    };
+
+    // Analog outputs.
+    union {
+        uint8_t analog_axes[6] = { 128, 128, 128, 128, 0, 0 };
+
+        struct {
+            uint8_t leftStickX;
+            uint8_t leftStickY;
+            uint8_t rightStickX;
+            uint8_t rightStickY;
+            uint8_t triggerLAnalog;
+            uint8_t triggerRAnalog;
+        };
+    };
+
+} OutputState;
+xinput_report_t make_XInput(const OutputState&o){xinput_report_t r{};    // Digital outputs
+    r.a = o.a;
+    r.b = o.b;
+    r.x = o.x;
+    r.y = o.y;
+    r.lb = o.buttonL;
+    r.rb = o.buttonR;
+    r.lt = o.triggerLDigital ? 255 : o.triggerLAnalog;
+    r.rt = o.triggerRDigital ? 255 : o.triggerRAnalog;
+    r.start = o.start;
+    r.back = o.select;
+    r.home = o.home;
+    r.dpad_up = o.dpadUp;
+    r.dpad_down = o.dpadDown;
+    r.dpad_left = o.dpadLeft;
+    r.dpad_right = o.dpadRight;
+    r.ls = o.leftStickClick;
+    r.rs = o.rightStickClick;
+
+    r.lx = (o.leftStickX - 128) * 65535 / 255 + 128;
+    r.ly = (o.leftStickY - 128) * 65535 / 255 + 128;
+    r.rx = (o.rightStickX - 128) * 65535 / 255 + 128;
+    r.ry = (o.rightStickY - 128) * 65535 / 255 + 128;
+
+return r;}
+switch_gamepad_report_t make_Switch(const OutputState&o){switch_gamepad_report_t r{};    // Digital outputs
+    r.y = o.y;
+    r.b = o.b;
+    r.a = o.a;
+    r.x = o.x;
+    r.l = o.buttonL;
+    r.r = o.buttonR;
+    r.zl = o.triggerLDigital;
+    r.zr = o.triggerRDigital;
+    r.minus = o.select;
+    r.plus = o.start;
+    r.l3 = o.leftStickClick;
+    r.r3 = o.rightStickClick;
+    r.home = o.home;
+    r.capture = o.capture;
+
+    // Analog outputs
+    r.lx = (o.leftStickX - 128) * 1.25 + 128;
+    r.ly = 255 - ((o.leftStickY - 128) * 1.25 + 128);
+    r.rx = (o.rightStickX - 128) * 1.25 + 128;
+    r.ry = 255 - ((o.rightStickY - 128) * 1.25 + 128);
+
+    // D-pad Hat Switch
+    r.hat =
+        GetHatPosition(o.dpadLeft, o.dpadRight, o.dpadDown, o.dpadUp);
+
+return r;}
+gc_report_t make_Gamecube(const OutputState&o){gc_report_t r{};    // Digital outputs
+    r.a = o.a;
+    r.b = o.b;
+    r.x = o.x;
+    r.y = o.y;
+    r.z = o.buttonR;
+    r.l = o.triggerLDigital;
+    r.r = o.triggerRDigital;
+    r.start = o.start;
+    r.dpad_left = o.dpadLeft;
+    r.dpad_right = o.dpadRight;
+    r.dpad_down = o.dpadDown;
+    r.dpad_up = o.dpadUp;
+
+    // Analog outputs
+    r.stick_x = o.leftStickX;
+    r.stick_y = o.leftStickY;
+    r.cstick_x = o.rightStickX;
+    r.cstick_y = o.rightStickY;
+    r.l_analog = o.triggerLAnalog;
+    r.r_analog = o.triggerRAnalog;
+
+return r;}
+
+int main(int n,char**v){if(n!=8)return 2;OutputState o{};o.buttons=strtoul(v[1],nullptr,16);for(int i=0;i<6;++i)o.analog_axes[i]=atoi(v[i+2]);auto r=make_XInput(o);emit("xinput","baseline",reinterpret_cast<const uint8_t*>(&r),sizeof(r));}

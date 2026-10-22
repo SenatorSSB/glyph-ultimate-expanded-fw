@@ -1,0 +1,27 @@
+{
+  "finding": "Possible pre-stimulus pending report across independent captures; one explicit drain is bounded proposal, not a settling guarantee",
+  "SDK_queue_depth_and_transition_timing": "UNPROVEN",
+  "sources": [
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4"
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+    },
+    {
+      "path": "/Users/rasmus.pekkarinen/.platformio/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c",
+      "sha256": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/HAL/pico/src/comms/XInputBackend.cpp",
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    {
+      "path": "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f"
+    }
+  ],
+  "source_path_qualification": "Existing exact F dependency source paths; no new target build or machine-code queue-depth proof"
+}

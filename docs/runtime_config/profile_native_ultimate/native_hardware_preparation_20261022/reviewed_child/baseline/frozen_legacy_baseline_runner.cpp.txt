@@ -1,0 +1,12 @@
+#include "core/state.hpp"
+#include <pb_decode.h>
+#include <fstream>
+#include <iterator>
+#include <vector>
+#include <cstdio>
+#include <cstdlib>
+#define Ultimate LegacyUltimate
+#include "frozen/modes/Ultimate.hpp"
+#undef Ultimate
+std::vector<uint8_t> bytes(const char *p){std::ifstream s(p,std::ios::binary);return {(std::istreambuf_iterator<char>(s)),{}};}
+int main(int n,char **v){if(n!=4)return 1;static Config c;GameModeConfig mc{};auto b=bytes(v[1]);auto s=pb_istream_from_buffer(b.data(),b.size());if(!pb_decode(&s,Config_fields,&c))return 2;b=bytes(v[2]);s=pb_istream_from_buffer(b.data(),b.size());if(!pb_decode(&s,GameModeConfig_fields,&mc))return 3;LegacyUltimate m;m.SetConfig(mc,&c.ultimate_profiles[0]);std::ifstream frames(v[3]);unsigned long long mask;while(frames>>std::hex>>mask){InputState in{};in.buttons=mask;OutputState o{};m.UpdateOutputs(in,o,COMMS_BACKEND_XINPUT);std::printf("%08x %u %u %u %u %u %u\n",o.buttons,o.leftStickX,o.leftStickY,o.rightStickX,o.rightStickY,o.triggerLAnalog,o.triggerRAnalog);}return 0;}

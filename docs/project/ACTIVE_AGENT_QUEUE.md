@@ -37,6 +37,16 @@ GP-NATIVE-001 stays HARDWARE_TEST_REQUIRED, hardware_result null; all18/H1–H12
 missing fields, exact human HEP PASS, tested-source integration and strict DONE
 remain. Nunchuk NOT_TESTED, target timing/highwater NOT_MEASURED, RT2 deferred.
 
+The [reviewed native XInput packet](../runtime_config/profile_native_ultimate/native_hardware_preparation_20261022/OWNER_PACKET.md)
+is prepared for exact owner approval and remains unexecuted. It binds the corrected
+native-only four-read host child, genuine owner poses, two disposable profiles,
+guarded Config/reference changes, measurements and logical restoration. Maxima
+are494 captures/1976 reports/50 firmware restarts, with explicit21-edge settled
+endpoint qualification; no frame-exact/transient or other-route waiver follows.
+The older-schema oracle discrepancy and actual JSONL host defect are preserved
+with source-grounded baseline qualification and independently reviewed child
+closure. F/UF2, original Config/all22, caps and all prior evidence stay unchanged.
+
 Guarded runway signals below are mechanically derived portfolio state. Their
 PLANNING_REQUIRED/PLANNER_REFRESH_REQUIRED labels do not authorize filler work,
 another native scope/successor or a global evidence wait; this same product
@@ -8837,7 +8847,7 @@ GP-VAL-037 is strict DONE through reviewed source-free integration `caf0718472c7
       "hardware_result": null,
       "hardware_evidence_gaps": [
         "Exact F/UF2 installed once; original Config252/all22 API preservation remains sealed PASS. Approved no-reconnect continuation now PASS: same private unit/location0-1, unchanged legacy4 runtime identity, fresh vendor inspect, three full20-byte/21-field reports/abort0/settled cleanup/rc0. Stage ended STOP,29 private files sealed; no Config/store/native/metric action. Prior location/raw/metadata stops remain exact.",
-        "Mac preflight access is qualified on original legacy profile only. Native-only strict capture/context/acquisition and exact Config/two-owned-ID/physical packet remain offline preparation and require new exact owner approval. Old verifier must refuse preflight transfer; queued prior-pose report needs explicit bounded contract, no silent discard. USB-Switch wire access and GC console hidden simultaneousL/R/Z/numericanalog remain unqualified; no waiver.",
+        "Mac current-legacy preflight is qualified. Reviewed native-only four-read source/tool/exact XInput packet is ready but UNAPPROVED/UNEXECUTED:494 captures/1976reports/50restarts maxima; one labeled drain+three strict measurements and explicit21-edge settled-endpoint qualification need owner approval. Parent JSONL failure and nine saved-schema3 baseline oracle differences are preserved/source-explained. Native334/context17 unchanged. USB-Switch wire and GC hidden simultaneousL/R/Z/numericalanalog remain unqualified; no waiver.",
         "All18/H1-H12/complete required backend fields/target timing and runtime stack observations/exact human HEP/tested-source integration/strict DONE remain. F/source/build/resource/limits/custody/protocol unchanged; no native profile mutation or activation."
       ],
       "rollback_recovery": "Before any device mutation, approved M6 packet binds fresh original Config/store list/read/identity/payload backups, ordinary outputs and known-good firmware/artifact custody; preserve original IDs/payloads using distinct test IDs. Use only existing proven interfaces, never infer raw filesystem export/erasure. Restore Config/references/payloads and ordinary outputs after reboot, recording monotonic ID/transaction metadata differences and cleanup limitations; uncertain writes stop. RT2 remains deferred and ROM recovery restrictions unchanged. Preserve failed candidates/evidence; no blind repair or acceptance transfer.",

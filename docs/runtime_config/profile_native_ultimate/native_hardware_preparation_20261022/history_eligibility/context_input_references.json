@@ -1,0 +1,138 @@
+{
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_0/context.json": {
+    "bytes": 316,
+    "sha256": "1e99a2ccbab001190810e8f79488e813e621007128ffe361e58668aff5083a29"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_0/context.pb": {
+    "bytes": 20,
+    "sha256": "2cad9d4700e3e9b5f64ec14f7eebb74c29db25112c58916dbb94e4e86e5ccae2"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_1/context.json": {
+    "bytes": 351,
+    "sha256": "7924adba3fa8263fb06c16851ed0840eff35a5ef0cc4e8d996becad6d7026a3b"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_1/context.pb": {
+    "bytes": 22,
+    "sha256": "bd500b13de6ee59edea3f75e0343d7b7aa243e302a6cd6bcccb9539ba6e4d5c7"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_2/context.json": {
+    "bytes": 347,
+    "sha256": "cf1ce4dd129434154b56551222cf4ef4aff5197200935b22499494b4d03395af"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_2/context.pb": {
+    "bytes": 22,
+    "sha256": "849dccce9b109bd0872683ce8272372e47312b4ee663853d4f56a94838f9630e"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_3/context.json": {
+    "bytes": 355,
+    "sha256": "f56097c31ac182875f158e2a448d9692bbb5a41cc764f370974abde5d433ef30"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_3/context.pb": {
+    "bytes": 22,
+    "sha256": "21c401e8525c1a4721f0efee055eacf16570e56af194445961560e7308d1ee76"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_4/context.json": {
+    "bytes": 357,
+    "sha256": "d280eaf536ad9ef1a2443b8f7e17e75be722b24f4bf734a393963f86ad55193f"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_4/context.pb": {
+    "bytes": 22,
+    "sha256": "82fc93dfb786fe3b625e0ca8562f5e7acd4ebfd5cb24c5403cd3cc18c5d741db"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_5/context.json": {
+    "bytes": 357,
+    "sha256": "4c3b4c2bd6d433543d898f3fba57bbadaec048b4eef4b3453281a5d862f1497e"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/clean_socd_5/context.pb": {
+    "bytes": 22,
+    "sha256": "8188b41acfee693f21c1d4b6f0ac4361a4043d547ff03708e76f20c5f30b33b2"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/compatibility/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/rebound/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/rebound/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/context.json": {
+    "bytes": 166,
+    "sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_1/context.pb": {
+    "bytes": 10,
+    "sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_2/context.json": {
+    "bytes": 166,
+    "sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/complete_sample_2/context.pb": {
+    "bytes": 10,
+    "sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_filter/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_filter/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_loses/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_loses/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_wins/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-profile-native-20261020/docs/runtime_config/profile_native_ultimate/candidate_safe_fixture_packet/forced_wins/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/compatibility/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/isolated_L_R_Z/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/context.json": {
+    "bytes": 33,
+    "sha256": "8975809beed4419f432749306d9b3c3500fdce00bd1af69f8823325256b96e14"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/rebound/context.pb": {
+    "bytes": 2,
+    "sha256": "2d88972e9536ba54deed37db380728b3c58eab9bca1d173ae523098b0774cdf5"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/context.json": {
+    "bytes": 166,
+    "sha256": "768eca2c8710521e0edf8242147564fe88deb10d135ce8727b8d5c907cc95ac7"
+  },
+  "/private/tmp/glyph-native-334f-hardware-preparation-20261021/supplement_short/refusal_context_mismatch/context.pb": {
+    "bytes": 10,
+    "sha256": "ed14d599a5f69ed39e1185e7457ad1125037403532c694b19e2db822e21a20ba"
+  }
+}

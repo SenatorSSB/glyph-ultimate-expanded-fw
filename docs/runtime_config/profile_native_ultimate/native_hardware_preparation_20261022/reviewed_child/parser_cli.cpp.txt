@@ -1,0 +1,4 @@
+#include "observer_parser.hpp"
+#include <cstdio>
+#include <iostream>
+int main(int argc,char **argv){try{if(argc<3||argc>5)throw std::runtime_error("offline only: parser_cli route hex [port] [reportID]");auto b=glyph_observer::unhex(argv[2]);auto f=glyph_observer::decode(argv[1],b,argc>3?unsigned(std::stoul(argv[3])):1,argc>4?unsigned(std::stoul(argv[4])):0);std::cout<<glyph_observer::json(f)<<'\n';return 0;}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 2;}}

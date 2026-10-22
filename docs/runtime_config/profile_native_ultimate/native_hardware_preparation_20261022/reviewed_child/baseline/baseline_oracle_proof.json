@@ -1,0 +1,1583 @@
+{
+  "actual_F_legacy_vs_frozen_oracle_52_full_outputs": "43MATCH_9_SOURCE_EXPECTED_SCHEMA3_DIFFERENCES_RETAINED",
+  "all_observations": null,
+  "baseline_authority": "actual F legacy path and actual preserved schema3 profile4/Config; frozen StageC oracle predates routing/output_program and is a retained negative control, not authority for these9 current-profile fields",
+  "classification": "HOST_ACTUAL_F_LEGACY_PLUS_ACTUAL_TYPED_XINPUT_ENCODER_WITH_FROZEN_STAGEC_NEGATIVE_CONTROL",
+  "commands": [
+    {
+      "argv": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unused-function",
+        "-Wno-non-c-typedef-for-linkage",
+        "-fshort-enums",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/stage_c_ultimate_profiles_host/include",
+        "-I",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/src",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/frozen_legacy_baseline_runner.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/ControllerMode.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/InputMode.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/socd.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/legacy.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/pb_common.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/pb_encode.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/pb_decode.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/config.pb.o",
+        "-o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/frozen_legacy_baseline_runner"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/frozen_legacy_baseline_runner",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/Config.pb",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/context.pb",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/frames.txt"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "00000000 128 128 128 128 0 0\n00080000 195 128 128 128 0 0\n00100000 128 205 128 128 0 0\n00040000 61 128 128 128 0 0\n00000002 128 128 128 128 0 0\n00200000 128 51 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000001 128 128 128 128 0 0\n00000002 128 128 128 128 0 0\n00000004 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00100001 128 205 128 128 0 0\n00000020 128 128 128 128 0 0\n00000002 128 172 128 128 0 0\n00000000 128 169 128 128 0 0\n00000000 128 128 128 128 0 0\n00000008 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000080 128 128 128 128 0 140\n00000050 128 128 128 128 140 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00200001 128 51 128 128 0 0\n00000000 128 128 128 128 0 0\n02000000 128 128 128 28 0 0\n00400000 128 128 28 128 0 0\n00800000 128 128 228 128 0 0\n01000000 128 128 128 228 0 0\n00000800 128 128 128 128 0 0\n00000400 128 128 128 128 0 0\n00000200 128 128 128 128 0 0\n00000100 128 128 128 128 0 0\n00240000 61 51 128 128 0 0\n00140000 61 205 128 128 0 0\n00280000 195 51 128 128 0 0\n00180000 195 205 128 128 0 0\n02400000 128 128 86 60 0 0\n03000000 128 128 128 28 0 0\n00c00000 128 128 28 128 0 0\n01800000 128 128 170 196 0 0\n000000d0 128 128 128 128 140 140\n00040001 61 128 128 128 0 0\n00000003 128 128 128 128 0 0\n00100001 128 205 128 128 0 0\n"
+    },
+    {
+      "argv": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unused-function",
+        "-Wno-non-c-typedef-for-linkage",
+        "-fshort-enums",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/stage_c_ultimate_profiles_host/include",
+        "-I",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/src",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/actual_F_legacy_baseline_runner.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/Ultimate.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeProfile.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/modes/UltimateNativeEvaluator.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/ControllerMode.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/InputMode.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/socd.cpp",
+        "/private/tmp/glyph-profile-native-20261020/src/core/config_button_validation.cpp",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/pb_common.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/pb_encode.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/pb_decode.o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/config.pb.o",
+        "-o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/actual_F_legacy_baseline_runner"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/actual_F_legacy_baseline_runner",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/HOST_ONLY_SCHEMA2_GATE_CONTROL.pb",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/context.pb",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/frames.txt"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "00000000 128 128 128 128 0 0\n00080000 195 128 128 128 0 0\n00100000 128 205 128 128 0 0\n00040000 61 128 128 128 0 0\n00000002 128 128 128 128 0 0\n00200000 128 51 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000001 128 128 128 128 0 0\n00000002 128 128 128 128 0 0\n00000004 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00100001 128 205 128 128 0 0\n00000020 128 128 128 128 0 0\n00000002 128 172 128 128 0 0\n00000000 128 169 128 128 0 0\n00000000 128 128 128 128 0 0\n00000008 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000080 128 128 128 128 0 140\n00000050 128 128 128 128 140 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00200001 128 51 128 128 0 0\n00000000 128 128 128 128 0 0\n02000000 128 128 128 28 0 0\n00400000 128 128 28 128 0 0\n00800000 128 128 228 128 0 0\n01000000 128 128 128 228 0 0\n00000800 128 128 128 128 0 0\n00000400 128 128 128 128 0 0\n00000200 128 128 128 128 0 0\n00000100 128 128 128 128 0 0\n00240000 61 51 128 128 0 0\n00140000 61 205 128 128 0 0\n00280000 195 51 128 128 0 0\n00180000 195 205 128 128 0 0\n02400000 128 128 86 60 0 0\n03000000 128 128 128 28 0 0\n00c00000 128 128 28 128 0 0\n01800000 128 128 170 196 0 0\n000000d0 128 128 128 128 140 140\n00040001 61 128 128 128 0 0\n00000003 128 128 128 128 0 0\n00100001 128 205 128 128 0 0\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/actual_F_legacy_baseline_runner",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/Config.pb",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/context.pb",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/frames.txt"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "00000000 128 128 128 128 0 0\n00080000 195 128 128 128 0 0\n00100000 128 205 128 128 0 0\n00040000 61 128 128 128 0 0\n00000002 128 128 128 128 0 0\n00200000 128 51 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000008 128 128 128 128 0 0\n00000002 128 128 128 128 0 0\n00000004 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00100001 128 205 128 128 0 0\n00000020 128 128 128 128 0 0\n00000002 128 160 128 128 0 0\n00000000 128 169 128 128 0 0\n00000000 128 128 128 128 0 0\n00000008 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000080 128 128 128 128 0 180\n00000050 128 128 128 128 100 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00000000 128 128 128 128 0 0\n00200001 128 51 128 128 0 0\n00000000 128 128 128 128 0 0\n02000000 128 128 128 28 0 0\n00400000 128 128 28 128 0 0\n00800000 128 128 228 128 0 0\n01000000 128 128 128 228 0 0\n00000800 128 128 128 128 0 0\n00000400 128 128 128 128 0 0\n00000200 128 128 128 128 0 0\n00000100 128 128 128 128 0 0\n00240000 61 51 128 128 0 0\n00140000 61 205 128 128 0 0\n00280000 195 51 128 128 0 0\n00180000 195 205 128 128 0 0\n02400000 128 128 78 68 0 0\n03000000 128 128 128 28 0 0\n00c00000 128 128 28 128 0 0\n01800000 128 128 178 188 0 0\n000000d0 128 128 128 128 100 180\n00040008 61 128 128 128 0 0\n0000000a 128 128 128 128 0 0\n00100001 128 205 128 128 0 0\n"
+    },
+    {
+      "argv": [
+        "c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unused-function",
+        "-Wno-non-c-typedef-for-linkage",
+        "-fshort-enums",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/stage_c_ultimate_profiles_host/include",
+        "-I",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/tmp/legacy-baseline-0ihl8zu0/generated",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/.pio/libdeps/glyph_mk6/Nanopb",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/HAL/pico/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/common/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/config/glyph/glyph_mk6/include",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/src",
+        "-I",
+        "/private/tmp/glyph-profile-native-20261020/tools/fixtures/profile_native_ultimate",
+        "-fsanitize=undefined,float-cast-overflow",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder.cpp",
+        "-o",
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00080000",
+        "195",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000c343800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000c343800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":17347,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00100000",
+        "128",
+        "205",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000cd4d80008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000cd4d80008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":19917,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00040000",
+        "61",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000003dbd800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000003dbd800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":-17091,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000002",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000002000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000002000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":1,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00200000",
+        "128",
+        "51",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000800033b380008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000800033b380008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":-19661,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000008",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000008000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000008000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":1}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000002",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000002000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000002000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":1,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000004",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000004000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000004000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":1,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00100001",
+        "128",
+        "205",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000001000008000cd4d80008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000001000008000cd4d80008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":1,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":19917,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000020",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000200008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000200008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":1,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000002",
+        "128",
+        "160",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000002000008000a02080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000002000008000a02080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":1,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":8352,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "169",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000a92980008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000a92980008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":10665,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000008",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000008000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000008000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":1}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000080",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "180"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000ff8000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000ff8000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":255,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000050",
+        "128",
+        "128",
+        "128",
+        "128",
+        "100",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 00000001ff008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "00000001ff008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":1,\"ls\":0,\"lt\":255,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00200001",
+        "128",
+        "51",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000100000800033b380008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000100000800033b380008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":1,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":-19661,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000000",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "02000000",
+        "128",
+        "128",
+        "128",
+        "28",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080001c9c000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080001c9c000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":-25572,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00400000",
+        "128",
+        "128",
+        "28",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000800080001c9c8000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000800080001c9c8000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":-25572,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00800000",
+        "128",
+        "128",
+        "228",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 00000000000080008000e4648000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "00000000000080008000e4648000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":25828,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "01000000",
+        "128",
+        "128",
+        "128",
+        "228",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000800080008000e464000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000800080008000e464000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":25828,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000800",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000400",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000400008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000400008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":1,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000200",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000200000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000200000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":1,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00000100",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000100000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000100000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":1,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00240000",
+        "61",
+        "51",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000003dbd33b380008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000003dbd33b380008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":-17091,\"ly\":-19661,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00140000",
+        "61",
+        "205",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000003dbdcd4d80008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000003dbdcd4d80008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":-17091,\"ly\":19917,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00280000",
+        "195",
+        "51",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000c34333b380008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000c34333b380008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":17347,\"ly\":-19661,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00180000",
+        "195",
+        "205",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000c343cd4d80008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000c343cd4d80008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":17347,\"ly\":19917,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "02400000",
+        "128",
+        "128",
+        "78",
+        "68",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000800080004ece44c4000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000800080004ece44c4000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":-12722,\"ry\":-15292,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "03000000",
+        "128",
+        "128",
+        "128",
+        "28",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000000000008000800080001c9c000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000000000008000800080001c9c000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":-25572,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00c00000",
+        "128",
+        "128",
+        "28",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000000000800080001c9c8000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000000000800080001c9c8000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":-25572,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "01800000",
+        "128",
+        "128",
+        "178",
+        "188",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 00000000000080008000b232bc3c000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "00000000000080008000b232bc3c000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":12978,\"ry\":15548,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "000000d0",
+        "128",
+        "128",
+        "128",
+        "128",
+        "100",
+        "180"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 00000001ffff8000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "00000001ffff8000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":1,\"ls\":0,\"lt\":255,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":255,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00040008",
+        "61",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000008000003dbd800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000008000003dbd800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":-17091,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":1}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "0000000a",
+        "128",
+        "128",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 000000a000008000800080008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "000000a000008000800080008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":0,\"b\":1,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":128,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":1}\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/baseline/baseline_xinput_encoder",
+        "00100001",
+        "128",
+        "205",
+        "128",
+        "128",
+        "0",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "xinput baseline 0000001000008000cd4d80008000000000000000\n"
+    },
+    {
+      "argv": [
+        "/private/tmp/glyph-native-native-acceptance-preparation-20261022/parser_cli",
+        "xinput",
+        "0000001000008000cd4d80008000000000000000",
+        "1",
+        "0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"a\":1,\"b\":0,\"back\":0,\"dpad_down\":0,\"dpad_left\":0,\"dpad_right\":0,\"dpad_up\":0,\"home\":0,\"lb\":0,\"ls\":0,\"lt\":0,\"lx\":128,\"ly\":19917,\"rb\":0,\"rs\":0,\"rt\":0,\"rx\":128,\"ry\":128,\"start\":0,\"x\":0,\"y\":0}\n"
+    }
+  ],
+  "live_actions": 0,
+  "original_Config_sha256": "54fda3988c30e03b653153ec23d0623674da3649492caa75da8aa08fbce6b460",
+  "original_profile_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+  "preprocessing_sha256": "271b021266de90478317cced8662cf50a1a7fafb00a1073633e1378ec92ff1e7",
+  "rows": 52,
+  "source_generator_sha256": "c7af7f826cef6fb42db74f99b4cbce58c4ddd872e5999baeb8f7dde842122ba8"
+}

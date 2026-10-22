@@ -1,5 +1,23 @@
 # Profile-native Ultimate execution chapter
 
+## Reviewed native XInput owner gate — 2026-10-22
+
+The [reviewed native XInput packet](native_hardware_preparation_20261022/OWNER_PACKET.md)
+is prepared for exact owner approval and remains unexecuted. It binds the corrected
+native-only four-read host child, genuine owner poses, two disposable profiles,
+guarded Config/reference changes, measurements and logical restoration. Maxima
+are494 captures/1976 reports/50 firmware restarts, with explicit21-edge settled
+endpoint qualification; no frame-exact/transient or other-route waiver follows.
+The older-schema oracle discrepancy and actual JSONL host defect are preserved
+with source-grounded baseline qualification and independently reviewed child
+closure. F/UF2, original Config/all22, caps and all prior evidence stay unchanged.
+
+The same finite reviewer covers the exact child/source/packet; no new full chat,
+Planner, Curator, firmware order, target rebuild, controller action or HEP occurred.
+Root publishes source-free archive/status and releases the publication lock at
+this exact owner decision. All physical observations remain NOT_TESTED.
+
+
 ## Mac current-legacy host-route qualification PASS — 2026-10-22
 
 The owner approved REBIND and confirmed the normal controller screen, clarifying

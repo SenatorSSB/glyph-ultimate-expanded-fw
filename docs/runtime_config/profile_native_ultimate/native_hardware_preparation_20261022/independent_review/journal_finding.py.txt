@@ -1,0 +1,23 @@
+from pathlib import Path
+import shutil,json,hashlib,subprocess,base64,os
+O=Path(__file__).resolve().parent;P=Path('/private/tmp/glyph-native-native-acceptance-preparation-20261022');D=O/'journal_witness';D.mkdir(exist_ok=True);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+assert sha(P/'TECHNICAL_HOLD.json')=='f736bae361dbf503814f26b5e37dc20d952fda3de23708423135526d3287ac9f'
+h=json.loads((P/'TECHNICAL_HOLD.json').read_text());checks=[]
+for v in h['frozen_technical_inputs']:
+ f=Path(v['path']);assert sha(f)==v['sha256'] and f.stat().st_size==v['bytes'];checks.append(v)
+(O/'held-technical-inputs.json').write_text(json.dumps(checks,indent=2)+'\n')
+for n in ['mac_hostinterface_observer.mm','observer_core.hpp','observer_parser.hpp','acceptance_metadata.hpp']:shutil.copyfile(P/n,D/n)
+m=(P/'native_mock_tests.mm').read_text();m=m[:m.index('int main(int argc,char**argv){')]
+m+='''int main(int argc,char**argv){@autoreleasepool{if(argc!=4)return 9;Options o;o.session=argv[2];o.binding=acceptance_meta::parse(argv[1],o.session);o.anchor=o.binding.anchor;o.target=o.binding.target;o.output=argv[3];State*s=new State(o);open_journal(s);if(fclose(s->journal))return 10;s->journal=nullptr;std::puts("Actual source parse+open_journal executed; zero registry/hostcalls");return 0;}}
+''';(D/'actual_journal.mm').write_text(m)
+binding=P/'synthetic_tests/binding.json';data=binding.read_bytes();assert b'\n' in data;encoded=base64.b64encode(data).decode();session=json.loads(data)['boot_session'];commands=[]
+for args in [['clang++','-std=c++17','-Wall','-Wextra','-Werror','-Wno-deprecated-declarations','-fobjc-arc','-fblocks','-fsanitize=address,undefined','-fno-omit-frame-pointer','-framework','Foundation','-framework','IOKit','-framework','IOUSBHost',str(D/'actual_journal.mm'),'-o',str(D/'actual_journal')],[str(D/'actual_journal'),encoded,session,str(D/'actual_journal.jsonl')]]:
+ r=subprocess.run(args,capture_output=True,text=True,env={**os.environ,'ASAN_OPTIONS':'halt_on_error=1','UBSAN_OPTIONS':'halt_on_error=1'});commands.append({'argv':args,'returncode':r.returncode,'stdout':r.stdout,'stderr':r.stderr});(O/'journal-witness-commands.json').write_text(json.dumps(commands,indent=2)+'\n');assert r.returncode==0,r.stderr
+failures=[]
+for n,line in enumerate((D/'actual_journal.jsonl').read_text().splitlines(),1):
+ try:json.loads(line)
+ except json.JSONDecodeError as e:failures.append({'line':n,'error':str(e)})
+assert failures and failures[0]['line']==2
+finding={'severity':'P2/Tier2','status':'CONFIRMED_ACTUAL_SOURCE_JSONL_CONTRACT_FAILURE','source_sha256':sha(P/'mac_hostinterface_observer.mm'),'metadata_sha256':sha(P/'acceptance_metadata.hpp'),'binding_producer_sha256':sha(P/'binding_contract.py'),'binding_file_sha256':sha(binding),'actual_journal_sha256':sha(D/'actual_journal.jsonl'),'invalid_JSONL_lines':failures,'cause':'Producer writes pretty multiline JSON; metadata preserves exact bytes; open_journal prints raw bytes inside acceptance_binding JSONL. Consumer json.loads(each line) refuses valid produced binding. Synthetic tests compact their replacement record, masking actual integration.','live_registry_or_USB_calls':0,'required_repair':'Emit a single-line valid JSON binding object in journal while preserving hash of original argv bytes, or output compact binding bytes consistently; test actual producer->parse->journal->verifier path with pretty/compact/trailing newline and original exact hash.'}
+(O/'FINDING_JSONL.md').write_text('# Confirmed binding JSONL handoff defect\n\nP2/Tier2: valid normal pretty binding bytes are interpolated verbatim into the acceptance_binding journal record. Actual source emits multiline records; strict JSONL verifier refuses them. Independent actual parse+open_journal sanitized witness succeeds with zero registry/host calls, then JSON parsing fails at line2. See finding-jsonl.json and journal-witness-commands.json. No repair made by reviewer.\n')
+(O/'finding-jsonl.json').write_text(json.dumps(finding,indent=2)+'\n');print('CONFIRMED actual-source JSONL failure; firstinvalidline',failures[0]['line'],'invalidlines',len(failures),'no livecalls')

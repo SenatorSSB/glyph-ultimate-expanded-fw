@@ -1,0 +1,39 @@
+"""Actual producer->actual native argv/parser/journal (SDK MOCKED)->unchanged strict adapter. No live branch."""
+from pathlib import Path
+import base64,copy,hashlib,json,subprocess
+import binding_contract as b
+import verify_native_capture as v
+D=Path(__file__).resolve().parent;T=D/'actual_handoff_tests';T.mkdir(exist_ok=True);commands=[]
+def run(c):
+ p=subprocess.run(list(map(str,c)),capture_output=True,text=True,timeout=10);commands.append({'argv':list(map(str,c)),'returncode':p.returncode,'stdout':p.stdout,'stderr':p.stderr});assert p.returncode==0,p.stderr;return p
+plan=b.read_json(D/'native_xinput_owner_packet_draft.json');event=next(e for e in plan['events']if e.get('selection_id')=='O000');session=event['boot_session'];runid=event['case_run_id'];proof=D/'synthetic_tests/proof_index.json';matrix=D/'acceptance_comparison_matrix.json'
+# Invoke the ACTUAL pretty-printing CLI producer, not a hand-made replacement.
+pretty=T/'actual_producer_pretty.json';p=run(['python3',D/'binding_contract.py','--matrix',matrix,'--proof-index',proof,'--row','O000','--run',runid,'--output',pretty]);cli=json.loads(p.stdout);assert cli['binding_base64']==base64.b64encode(pretty.read_bytes()).decode() and cli['binding_sha256']==b.sha(pretty)
+binding=json.loads(pretty.read_bytes());variants={'actual_pretty_CLI':pretty.read_bytes(),'compact_equivalent':b.canonical(binding),'equivalent_CRLF_whitespace':b' \r\n'+json.dumps(binding,indent=4,sort_keys=True).replace('\n','\r\n').encode()+b'\r\n\t '};cases=[];executions={};captures={}
+for name,data in variants.items():
+ capture=T/(name+'.jsonl');encoded=base64.b64encode(data).decode();argv=[str(D/'mac_hostinterface_observer'),'capture','--approved-session',session,'--anchor-entry-id','1','--interface-entry-id','101','--output',str(capture),'--binding-base64',encoded]
+ p=run([D/'actual_binding_handoff_mock',*argv]);records=[json.loads(line)for line in capture.read_text().splitlines()];assert len([r for r in records if r['kind']=='acceptance_binding'])==1
+ att=next(r for r in records if r['kind']=='acceptance_binding');assert att['sha256']==hashlib.sha256(data).hexdigest() and att['binding']==binding
+ exe={'argv':argv,'returncode':0,'binary_sha256':b.sha(D/'mac_hostinterface_observer'),'capture_sha256':b.sha(capture),'owner_packet_approval_sha256':'0'*64,'classification':'SYNTHETIC_ACTUAL_SOURCE_SDK_MOCK_HARNESS_NOT_OWNER_APPROVAL_OR_DEVICE','actual_executed_harness_argv':commands[-1]['argv']}
+ (T/(name+'_execution.json')).write_text(json.dumps(exe,indent=2)+'\n');result=v.verify(capture,matrix,proof,'O000',runid,T/(name+'_execution.json'));assert result['measurement_reports']==3;cases.append({'case':name,'result':'PASS_ACTUAL_HANDOFF_CORRESPONDENCE_ONLY_NOT_HEP','capture_sha256':b.sha(capture),'binding_exact_input_sha256':att['sha256']});executions[name]=exe;captures[name]=capture
+# Same structure, different original bytes: must NOT transfer the input hash.
+exe=copy.deepcopy(executions['actual_pretty_CLI']);exe['argv'][-1]=base64.b64encode(variants['compact_equivalent']).decode()
+try:v.verify_bound(captures['actual_pretty_CLI'],matrix,binding,exe)
+except ValueError as e:assert 'hash' in str(e);cases.append({'case':'equivalent_structure_wrong_original_argv_bytes','result':'REFUSED_EXACT_HASH'})
+else:raise AssertionError('original byte hash weakened')
+# Hash event forgery also refuses, using original journal preserved separately.
+records=[json.loads(x)for x in captures['actual_pretty_CLI'].read_text().splitlines()];next(r for r in records if r['kind']=='acceptance_binding')['sha256']='0'*64;bad=T/'forged_event_hash.jsonl';bad.write_text(''.join(json.dumps(r)+'\n'for r in records));exe=copy.deepcopy(executions['actual_pretty_CLI']);exe['argv'][9]=str(bad);exe['capture_sha256']=b.sha(bad)
+try:v.verify_bound(bad,matrix,binding,exe)
+except ValueError:cases.append({'case':'forged_exact_input_hash','result':'REFUSED'})
+else:raise AssertionError('bad event hash accepted')
+# Unknown binding metadata must not become accepted just through serialization.
+extra=copy.deepcopy(binding);extra['unapproved_extra_key']='unapproved';data=b.canonical(extra);capture=T/'unknown_extra_key.jsonl';argv=executions['actual_pretty_CLI']['argv'][:];argv[9]=str(capture);argv[-1]=base64.b64encode(data).decode();run([D/'actual_binding_handoff_mock',*argv]);exe=copy.deepcopy(executions['actual_pretty_CLI']);exe.update(argv=argv,capture_sha256=b.sha(capture))
+try:v.verify_bound(capture,matrix,binding,exe)
+except ValueError as e:assert 'binding' in str(e);cases.append({'case':'unapproved_extra_binding_key','result':'REFUSED_REDERIVED_SCHEMA'})
+else:raise AssertionError('unknown key accepted by full contract')
+parent=Path('/private/tmp/glyph-native-native-acceptance-independent-review-20261022/journal_witness/actual_journal.jsonl');invalid=[]
+for n,line in enumerate(parent.read_text().splitlines(),1):
+ try:json.loads(line)
+ except json.JSONDecodeError:invalid.append(n)
+assert len(invalid)==51;cases.append({'case':'immutable_parent_reviewer_actual_source_witness','result':'NEGATIVE_CONTROL_51_INVALID_JSONL_LINES','sha256':b.sha(parent)})
+(D/'actual_handoff_repair_evidence.json').write_text(json.dumps({'classification':'PURE_CLI_AND_ACTUAL_NATIVE_SOURCE_SDK_MOCKED_ONLY','live_registry_or_USB_calls':0,'cases':cases,'commands':commands,'parent47_UNCHANGED':True},indent=2)+'\n');print('PASS',len(cases),'actual pretty/compact/whitespace producer-journal-consumer and hash/refusal cases; no device calls')
