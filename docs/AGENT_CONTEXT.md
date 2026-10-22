@@ -1,5 +1,24 @@
 # Agent Context
 
+## Controller ProfileStore selector chapter — READY — 2026-10-22
+
+GP-NATIVE-002 is independently curated READY under the latest direct owner
+[selector directive](runtime_config/controller_profile_selector/owner_directive_20261022.md)
+and [complete work order](runtime_config/controller_profile_selector/work_order_20261022.json).
+Implement in isolation from exact334f/tree0483dbb, retain the existing .Profile
+visuals and scrolling, expose eligible stored names, validate bounded existing
+contexts, and commit one coherent profile/backend destination before reboot.
+One source writer and one source-free canonical publisher remain required.
+Fresh tests/resource proof/review/exact build/custody precede a small separate
+owner-approved physical packet; no device mutation or source integration now.
+
+The latest owner reports nativeID27/revision1/schema5/nameUltimate and ordinary
+GameCube operation plus Configurator-driven native selection observed on334f.
+These are attributed owner observations; they do not constitute exact selector
+HEP or close GP-NATIVE-001. Earlier physical checkpoints below retain their
+historical scope. Nunchuk NOT_TESTED; root cause UNPROVEN.
+
+
 ## Reviewed grouped hardware packet — revised approval required — 2026-10-22
 
 The owner-directed [grouped acceptance packet](runtime_config/profile_native_ultimate/grouped_hardware_preparation_20261022/OWNER_PACKET.md)
