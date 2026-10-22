@@ -1,6 +1,6 @@
 {
   "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
-  "hardware": "NOT_TESTED",
+  "hardware": "NORMAL_GC_OWNER_REPORTED_PASS_FULL_ACCEPTANCE_INCOMPLETE",
   "files": {
     "AUDIT.md": {
       "bytes": 7766,
@@ -11,20 +11,20 @@
       "sha256": "d3a1141a55d15e116cca96478f5f89ccb4f33c9baf53db58b9a9afa1df58f688"
     },
     "OWNER_PACKET.md": {
-      "bytes": 5056,
-      "sha256": "554b3245ae777e6a67c6bfdf4dade8bdfae03c69463a25d8f37ffa33455c9963"
+      "bytes": 5483,
+      "sha256": "be01f631c9e7b42c08308aa9c39310395396c9826d9f6fa0e33afcdd5107afaf"
     },
     "README.md": {
-      "bytes": 2714,
-      "sha256": "bca9b56211b5e0c1a475d99f80ee307b19d3d8e350dba450ff1e0c536b6cde3a"
+      "bytes": 2837,
+      "sha256": "c348e0cd1cad824b2b2e927e40ecb205d3a371b7b8a739166ff7015d6043ab9a"
     },
     "RECOVERY_PREFLIGHT.md": {
       "bytes": 4262,
       "sha256": "297c5aec67eb7c3e71686d3772a54b9b1d31f99d093916871195d1026e9f0f48"
     },
     "RESULT.md": {
-      "bytes": 4903,
-      "sha256": "c3ff692648caff1538ba7953e8c0a1c179b985eb8013b1a4616d17f32a9f6caa"
+      "bytes": 5274,
+      "sha256": "b40532386878b969d6dcb1dfd5350c57e3482c17db484641a25e6f7bbc0f00d3"
     },
     "evidence/abi-layout.json": {
       "bytes": 2461,
@@ -149,6 +149,26 @@
     "evidence/strict.log": {
       "bytes": 1931,
       "sha256": "3716623cafaf00eb53544769d3042ff536de357aa2a1076fc24b7baea1719eeb"
+    },
+    "hardware_20261023/SUMMARY.md": {
+      "bytes": 2930,
+      "sha256": "a84fb551f5eb2dc8d78c7b8640ea85a368a56fbd917708566c7ce73472ea6806"
+    },
+    "hardware_20261023/assessment.json": {
+      "bytes": 1239,
+      "sha256": "09310c59686b298804d97a8096d27207e3da0d1e2a2ce20ca849db7c71cd2992"
+    },
+    "hardware_20261023/independent_review.json": {
+      "bytes": 1988,
+      "sha256": "4203e3a04cafb1ab136c3436c2a0b1eaaa2f6bf67200e1db4b26241fae5446e1"
+    },
+    "hardware_20261023/public_review.json": {
+      "bytes": 1227,
+      "sha256": "d9894b046b609ac29faf1e7a3092adb74cef5000ca7ea9ff63fc930122c6b8e2"
+    },
+    "hardware_20261023/validation.json": {
+      "bytes": 548,
+      "sha256": "1ea5c939d97e7a23780b68ed53352a6a73a5732ad055bad20cf003bba8b0bdd9"
     },
     "recovery_20261023/SUMMARY.md": {
       "bytes": 2342,
@@ -307,8 +327,8 @@
       "sha256": "83ae4c2acde68d168be0353a197d2ade6f2023d33a0e581a0db7f3e9d94a184b"
     },
     "telemetry.json": {
-      "bytes": 1992,
-      "sha256": "4dd75d7cbe16d3ddb1018183c18683d06e104db43caebbb34b4ae5d53892cbba"
+      "bytes": 2692,
+      "sha256": "6cfa372c9b0ea0a1c5c4e1ed3c38b6b60ba78f5fcdd27bbc66bcaf1a7ed0ad4b"
     }
   },
   "recovery": "PASS_WITH_API_SCOPE_QUALIFICATION"

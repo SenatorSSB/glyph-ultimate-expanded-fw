@@ -1,0 +1,13 @@
+{
+  "scope": "Stage B source-free hardware result documentation",
+  "docs_navigation": "PASS",
+  "agent_framework_docs": "PASS",
+  "agentic_sequence_protocol": "PASS",
+  "git_diff_check": "PASS",
+  "docs_agent_surface": "FAIL",
+  "reason": "C024 post-integration change outside validation/evidence paths",
+  "classification": "Retained FRAMEWORK_VALIDATION_DEBT; identical authenticated restriction already documented on clean canonical baseline",
+  "aggregate_PASS": false,
+  "firmware_source_changed": false,
+  "canonical_queue_changed": false
+}

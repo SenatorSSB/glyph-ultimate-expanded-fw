@@ -1,0 +1,36 @@
+{
+  "timestamp_utc": "2026-10-22T22:11:02.889757+00:00",
+  "result": "PASS_POSTTEST_CONFIG_AND_PROFILE_API_PRESERVATION",
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "profile_wrappers_exact": 43,
+  "original_records": 23,
+  "fixture_records": 20,
+  "directory_metadata": "EXACT_STAGE_A",
+  "Config_API": "BYTE_EXACT_STAGE_A_SEL01_GAMECUBE",
+  "Config_API_sha256": "65ecdcf32ecc4d0ce99edbc9a6b29aa99186ce1cd0c217d626764659d54e71dd",
+  "fences": [
+    1,
+    197,
+    3717489385
+  ],
+  "posttest_read_queries": {
+    "identity": 1,
+    "Config_GET": 1,
+    "STATUS": 50,
+    "LIST": 6,
+    "READ": 43
+  },
+  "posttest_mutations": 0,
+  "GC_normal_sequence": "OWNER_REPORTED_PASS",
+  "GC_Mac_telemetry": "NONE",
+  "GC_active_identity": "UNKNOWN",
+  "no_poll_physical_test": "NOT_TESTED_METHOD_NOT_ESTABLISHED",
+  "XInput_identities": "EXACT_28_47_28",
+  "XInput_final_output": "NOT_SEPARATELY_EXPLICITLY_REPORTED",
+  "raw_filesystem_integrity": "NOT_PROVEN_BY_API_SNAPSHOT",
+  "root_cause": "UNPROVEN",
+  "Nunchuk": "NOT_TESTED",
+  "HEP_integration_DONE": false,
+  "independent_review": "PASS_BOUNDED_STAGE_B_EVIDENCE_WITH_ACCEPTANCE_GAPS"
+}

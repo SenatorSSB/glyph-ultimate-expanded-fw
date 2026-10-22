@@ -4,15 +4,15 @@
 
 Exact repair candidate8b2c75e35bb990aee06de3165e5780082c4f08ad is published
 on an isolated branch with host/source-review/build/resource/custody PASS.
-Stage A read-only recovery completed with independent review
-PASS_WITH_SCOPE_QUALIFICATION: all43 profile API wrappers/metadata match and
-Config API retains SEL01/GameCube with only expected selector fields.
-[Recovery evidence](runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/recovery_20261023/SUMMARY.md)
-records API limits; raw filesystem integrity, save/freeze timing and GameCube
-active identity remain UNKNOWN. Stage B installation is NOT_APPROVED; repaired
-hardware acceptance remains NOT_TESTED. Owner uses Switch/GC adapter separately
-from Mac; a powered/no-poll method is NOT_ESTABLISHED. No HEP, integration,
-DONE or queue promotion. Root cause UNPROVEN; Nunchuk NOT_TESTED.
+Stage A and post-test readbacks PASS within API scope: all43 profile wrappers/
+metadata unchanged; Config byte-exact, retaining SEL01/GameCube. Owner-approved
+single exact installation completed. XInput identities28→47→28 match; normal
+Switch/GC-adapter A→B→A is owner-reported PASS with no Mac telemetry during GC.
+[Bounded hardware evidence](runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/hardware_20261023/SUMMARY.md)
+retains limits. Final XInput output confirmation remains pending; powered/
+no-poll method NOT_ESTABLISHED and row NOT_TESTED. Full acceptance INCOMPLETE.
+Raw filesystem integrity and GameCube active identity remain UNKNOWN. No HEP,
+source integration, DONE or queue promotion. Root cause UNPROVEN; Nunchuk NOT_TESTED.
 
 ## Selector exact GameCube hardware FAIL — 2026-10-22
 

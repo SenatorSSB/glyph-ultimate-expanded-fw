@@ -1,6 +1,7 @@
 # GP_NATIVE_002_GC_LIVENESS_HW_V1 — owner approval packet
 
-Stage A completed; Stage B prepared, not executed. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
+Stage A completed; approved Stage B normal rows and preservation readback executed.
+[Results and remaining gates](hardware_20261023/SUMMARY.md). Full acceptance INCOMPLETE. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
 treecd5d280e3b04a3b4e9d9a1bc760917406175b988. Implementation parentage retains
 failed4898951994bcabcaef2846145de2922a674656f8 and original334fbd06.
 Exact Mk6 build and byte correspondence PASS. UF2 is1046016bytes, SHA256
@@ -22,6 +23,11 @@ This is an API snapshot; raw filesystem integrity, save/freeze chronology,
 installed firmware Git identity and GameCube active runtime remain UNKNOWN.
 No unexpected stored state was found. Stage A approval does not authorize Stage B.
 No automatic restore/delete or fixture recreation.
+
+Owner subsequently approved Stage B and explicitly requested one agent copy to
+RPI-RP2, superseding the manual-operator restriction only for that exact write.
+The numbered procedure below is retained for scope; completed normal rows must
+not be repeated implicitly. No-poll row remains separately gated.
 
 ## Stage B: exact installation and smallest decisive physical test
 

@@ -1,0 +1,40 @@
+{
+  "result": "PASS_BOUNDED_STAGE_B_EVIDENCE_WITH_ACCEPTANCE_GAPS",
+  "source": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "UF2_sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+  "approved_install": "Owner separately approved Stage B then specifically requested one mounted bootloader copy; recorded one1046016byte WRITE_FLUSH_FSYNC_COMPLETED, does not itself prove acceptance",
+  "XInput_identity": "Raw decoded28/47/28; backend2/revision1/schema5; all exact creation receipt digests",
+  "XInput_output": "InitialA and B owner confirmed; finalA LF1(53,0)/release neutral not separately explicitly confirmed",
+  "GameCube": "OWNER_REPORTED_NORMAL_A_B_A_PASS scoped to printed process; no Mac telemetry or hidden runtime identity",
+  "posttest_queries": {
+    "1": 50,
+    "3": 43,
+    "2": 6
+  },
+  "all50STATUS_clear_admissible_stable": true,
+  "posttest_fences": [
+    1,
+    197,
+    3717489385
+  ],
+  "posttest_Config_bytes": 277,
+  "posttest_Config_sha256": "65ecdcf32ecc4d0ce99edbc9a6b29aa99186ce1cd0c217d626764659d54e71dd",
+  "posttest_Config": "BYTE_EXACT_STAGE_A",
+  "profile_preservation": "ALL43WRAPPERS_REVISIONS_DIRECTORY_EXACT_STAGE_A_AND_OLD_BASELINES",
+  "source_provenance": "Four execution tools and schema byte equal committedF8b; XInput wrapper guards fixed identity request and stable unit",
+  "unexpected_stored_state": [],
+  "limits": [
+    "No raw filesystem image/integrity proof beyond checked APIs",
+    "No GameCube raw runtime identity/Mac telemetry",
+    "FinalXInputA output53/release neutral not separately explicitly confirmed",
+    "No-poll physical progress NOT_TESTED; safe method NOT_ESTABLISHED",
+    "Rootcause UNPROVEN; Nunchuk NOT_TESTED"
+  ],
+  "full_acceptance": "INCOMPLETE",
+  "HEP_source_integration_DONE": "NOT_AUTHORIZED_BY_THIS_REVIEW",
+  "review_device_io": 0,
+  "private_stage_B_manifest": {
+    "files_verified": 395,
+    "sha256": "076bb521255fb8c6aad37ada055826678f5e2544983771bf6b6f9a3d48f031d5"
+  }
+}

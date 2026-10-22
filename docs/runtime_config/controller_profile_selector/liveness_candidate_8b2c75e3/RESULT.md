@@ -60,12 +60,12 @@ Backend behavior claims:
   second writer, unconditional reboot or fake traffic. Target response remains
   a required exact hardware acceptance property, not inferred from host proof.
 
-Stop conditions hit:
+Historical Stage A stop conditions (superseded by Stage B update below):
 - Stage A read-only recovery PASS within API scope; all43 wrappers/metadata
   exact and Config retains SEL01/GameCube. GameCube active identity and raw
   filesystem integrity remain UNKNOWN. No flash/cleanup/restore or merge.
 
-Follow-ups:
+Historical Stage A follow-ups (completed approval and normal rows recorded below):
 - Exact Stage B manual-installation and normal-row approval remains pending;
   powered/no-poll row remains separately gated on a verified safe setup. XInput+GC A→B→A, idle progress,
   responsiveness and post-test Config/store preservation remain required.
@@ -79,3 +79,7 @@ Delegation:
   No new user-owned chat, Planner/Curator invocation or delegated device action.
 
 Stage A details and private custody seals: [recovery summary](recovery_20261023/SUMMARY.md).
+
+Stage B update: [normal hardware results and post-test preservation](hardware_20261023/SUMMARY.md).
+Normal GameCube owner-reported PASS; full acceptance INCOMPLETE with no-poll
+physical row NOT_TESTED and final XInput output confirmation pending.

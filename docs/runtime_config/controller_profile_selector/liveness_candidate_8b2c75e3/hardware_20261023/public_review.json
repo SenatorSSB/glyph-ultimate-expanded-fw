@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "scope": "Stage B redacted documentation delta versus da2cdd7f, after stale-current-claim repairs",
+  "findings": [],
+  "prior_findings": "ALL_FOUR_CORRECTED: current claims qualified or historical; telemetry distinguishes agentConfig/ProfileStore queries from flash",
+  "manifest_files_verified": 81,
+  "manifest_sha256": "46186a93bc8656795e1bbcedb08ea00c2ffb1eaf9832c3fe8b84918757d1a3b0",
+  "privacy": "PASS no original profile names/bodies/device identifiers or journals",
+  "reviewcopy": "EXACT_STAGE_B_INDEPENDENT_REVIEW",
+  "assessment": "Exact supervisor fields plus independent review annotation",
+  "normalGC": "OWNER_REPORTED_PASS only, noMac telemetry/rawGCidentity",
+  "XInput": "Raw identities28/47/28, finaloutputconfirmation pending",
+  "no_poll": "NOT_TESTED; methodNOT_ESTABLISHED; separate approval retained",
+  "full_acceptance": "INCOMPLETE",
+  "telemetry": {
+    "readqueries": 205,
+    "StageA": 101,
+    "StageB": 104,
+    "flash": 1,
+    "agentConfigProfileStoreMutationQueries": 0
+  },
+  "copy_scope": "Exact candidate/UF2 onecopy approval and later owneroperatoroverride described",
+  "HEP_source_integration_DONE_queue": "No new claim or promotion",
+  "review_device_io": 0
+}
