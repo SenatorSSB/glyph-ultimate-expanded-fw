@@ -1,0 +1,44 @@
+{
+  "run_kind": "OWNER_DIRECTED_BOUNDED_REPAIR",
+  "full_chats": 1,
+  "new_user_owned_chats": 0,
+  "native_specialists": [
+    "joybus_audit",
+    "safe_boundary",
+    "resource_plan"
+  ],
+  "fresh_source_reviewer": "source_review",
+  "source_commits": [
+    "d80e0c5028ccdb9bb442d8f0fb63a9e8cc70aadd",
+    "0d7bdc3f8ba20fc9511246db497fd2deea9f5946",
+    "8b2c75e35bb990aee06de3165e5780082c4f08ad"
+  ],
+  "canonical_start": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "canonical_last_live_readback": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "canonical_publications": 0,
+  "source_integration": false,
+  "internal_transitions": [
+    "exact failed-source audit",
+    "initial bounded candidate",
+    "independent P1 finding",
+    "all-path idle gate and producer race repair",
+    "idle FAST input progress",
+    "both-ABI literal/integrated regressions",
+    "exact target compile failure preserved",
+    "SDK header-name correction",
+    "fresh exact source re-review",
+    "exact target build/custody PASS",
+    "fresh linked resource proof PASS; source-free packet prepared",
+    "independent exact handoff review PASS"
+  ],
+  "device_operations": 0,
+  "flash_operations": 0,
+  "physical_reports_processed": 0,
+  "planner_calls": 0,
+  "curator_calls": 0,
+  "no_op_calls": 0,
+  "repair_READY_timestamp": null,
+  "READY_to_hardware_seconds": null,
+  "hardware_report_to_DONE_seconds": null,
+  "timing_caveat": "Direct owner attachment authorizes this repair; no new canonical READY adoption or physical report/DONE event exists. No timing manufactured from file mtimes."
+}

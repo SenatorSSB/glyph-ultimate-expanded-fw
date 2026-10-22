@@ -1,0 +1,39 @@
+{
+  "reviewer": "/root/source_review",
+  "result": "HANDOFF_PASS",
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+  "reviewed_handoff_worktree": "/private/tmp/glyph-gc-liveness-handoff-20261023",
+  "findings": [],
+  "independent_checks": [
+    "All three custody/build artifact pairs checked using non-symlink regular file reads: exact sizes and SHA256",
+    "All 2043 UF2 blocks, addresses, lengths, sequence/count, magic and 20 zero tail bytes match BIN",
+    "ELF two flash LOAD payloads exactly cover and match full 522988-byte BIN; full20-byte candidate source identity occurs once in ELF",
+    "All 27 compressed resource objects and sealed PINS hash verified; plain REPORT/result match sealed objects",
+    "All 193 route equations and margins independently replayed: 140 old max2048,39 selector max2012,14 GC max1344",
+    "Changed source inventory matches exact committed and present working bytes; 18 Joybus hashes and installed platform/framework commits match",
+    "259 compile recipes and actual source/ABI/production/build/test evidence reviewed",
+    "Ordinary GitHub probe DNS failure retried through permitted escalation: feature exact8b2c75e3, canonical exact3a7a8174",
+    "Read-only Stage A and separate exact-artifact Stage B approval boundaries, unexpected-state stops, no-poll safe setup and full acceptance gates reviewed",
+    "Source-free modified status/index paths checked; no firmware integration or queue promotion",
+    "Actual surface checker and clean canonical base both fail with same retained C024 post-integration restriction; no aggregate PASS inferred"
+  ],
+  "resource_limits": {
+    "static": 198288,
+    "static_ceiling": 199632,
+    "core0": 2048,
+    "core0_limit": 2048,
+    "core1_composition": 1060,
+    "core1_retained_bound": 1152,
+    "PIO": 28,
+    "PIO_limit": 32
+  },
+  "limits": [
+    "Finite exact production-small source/disassembly resource proof; no alternate whole-image ABI claim",
+    "Physical timing/highwater NOT_MEASURED; hardware NOT_TESTED",
+    "Postfailure device state UNKNOWN pending approved read-only recovery",
+    "Known surface checker FAIL must remain recorded as framework debt; no aggregate PASS",
+    "No device action, installation approval, integration, HEP or DONE granted"
+  ],
+  "review_actions": "Read-only; sole private report output; no source/Git/build/device mutation"
+}

@@ -1,0 +1,4 @@
+-fshort-enums PASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates
+-fshort-enums PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation
+-fno-short-enums PASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates
+-fno-short-enums PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation

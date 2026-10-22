@@ -1,0 +1,23 @@
+[
+  {
+    "file": "old140-transferred.json",
+    "sha256": "e92ad85f78ba93779d6107b2e67a90ed19faa67b555ffc72bb76f382109f8211",
+    "rows": 140,
+    "maximum": 2048,
+    "arithmetic": "PASS"
+  },
+  {
+    "file": "new-selector-routes.json",
+    "sha256": "2f7d2da67a817ef69b863b070e96aafe8e752af04e45dd826ecc447c7e832c09",
+    "rows": 39,
+    "maximum": 2012,
+    "arithmetic": "PASS"
+  },
+  {
+    "file": "new-gc-routes.json",
+    "sha256": "6ce610e83b6bd4009959d5182d42adeb16efb4e7ed8f62223ba20d61593b25d7",
+    "rows": 14,
+    "maximum": 1344,
+    "arithmetic": "PASS"
+  }
+]

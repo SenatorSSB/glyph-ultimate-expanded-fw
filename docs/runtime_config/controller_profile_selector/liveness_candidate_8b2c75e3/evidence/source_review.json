@@ -1,0 +1,18 @@
+{
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+  "reviewer": "/root/source_review",
+  "result": "PASS_SOURCE_REVIEW",
+  "prior_review": {
+    "candidate": "d80e0c5028ccdb9bb442d8f0fb63a9e8cc70aadd",
+    "result": "P1_APPROVAL_WITHHELD",
+    "finding": "Every GameCube persistence attempt must require idle admission; service entry could bypass and TX enqueue did not prove completion."
+  },
+  "closure": "All GC service gated on paused admission; no Pending fastpath TOCTOU; no-request FAST scans preserve running receiver.",
+  "limits": [
+    "linked resource/build/custody pending",
+    "physical electrical timing and hardware acceptance not established"
+  ],
+  "header_correction": "Fresh same-reviewer exact-source re-review PASS; sole io_bank0.h -> iobank0.h SDK include correction, no behavior change.",
+  "behavioral_review_candidate": "0d7bdc3f8ba20fc9511246db497fd2deea9f5946"
+}

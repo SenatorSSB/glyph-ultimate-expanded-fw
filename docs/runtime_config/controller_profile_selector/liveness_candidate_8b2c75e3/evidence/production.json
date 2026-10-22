@@ -1,0 +1,21 @@
+{
+  "status": "PASS_SOURCE_AND_ELF_COMPOSITION",
+  "negative_controls": 4,
+  "source_sha256": {
+    "config/glyph/env.ini": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36",
+    "config/glyph/common/src/config.cpp": "d05fa385e28f6bdbb86f1d54aad921001c7c42daa0356094acc6646961d339bc",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561",
+    "include/core/ProfileStoreFaultControls.hpp": "845225281661bbcd962d7f84e87ae28049ccca4635cb8aed3178eb1f5b8d46e1",
+    "include/core/ProfileStoreReadTrace.hpp": "6ef9e5a352aaeb7cfc2da60ecf7513c30841513c2f12a06c4706b9a162d3c456",
+    "HAL/pico/src/core/CheckedStorage.cpp": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd"
+  },
+  "hardware": "NOT_TESTED",
+  "underlying_RT2_cause": "UNRESOLVED",
+  "elf_sha256": "79c9827b33bfe5919801e8875965b3203288d6650a75edb7f3ce8c5c51f52849",
+  "retired_symbols": "ABSENT",
+  "ordinary_DCD": "ONE",
+  "ordinary_TinyUSB_init": "WEAK_ORIGINAL",
+  "compile_database_sha256": "da63265e9610f75b02e1622c0cc8b2987a06ace23e1c356929a224e9a567c3a3",
+  "dcd_source": ".platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+  "compiled_commands": 259
+}

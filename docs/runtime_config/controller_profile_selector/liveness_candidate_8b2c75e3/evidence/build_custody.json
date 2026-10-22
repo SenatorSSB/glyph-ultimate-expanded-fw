@@ -1,0 +1,49 @@
+{
+  "candidate": "8b2c75e35bb990aee06de3165e5780082c4f08ad",
+  "tree": "cd5d280e3b04a3b4e9d9a1bc760917406175b988",
+  "failed_ancestor": "4898951994bcabcaef2846145de2922a674656f8",
+  "implementation_lineage": "334fbd06e4541c120b0db423e5be7e112eb1f6f6",
+  "artifacts": {
+    "elf": {
+      "build_path": "/private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/firmware.elf",
+      "bytes": 5599120,
+      "sha256": "79c9827b33bfe5919801e8875965b3203288d6650a75edb7f3ce8c5c51f52849",
+      "preserved_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5780082c4f08ad/79c9827b33bfe5919801e8875965b3203288d6650a75edb7f3ce8c5c51f52849/firmware.elf",
+      "readback": "MATCH",
+      "regular_file": true
+    },
+    "bin": {
+      "build_path": "/private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/firmware.bin",
+      "bytes": 522988,
+      "sha256": "373a8dcf0fc7b31eb85921d6236abf12ff3647792f91784a983864f99f2db769",
+      "preserved_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5780082c4f08ad/373a8dcf0fc7b31eb85921d6236abf12ff3647792f91784a983864f99f2db769/firmware.bin",
+      "readback": "MATCH",
+      "regular_file": true
+    },
+    "uf2": {
+      "build_path": "/private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/firmware.uf2",
+      "bytes": 1046016,
+      "sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+      "preserved_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5780082c4f08ad/ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760/firmware.uf2",
+      "readback": "MATCH",
+      "regular_file": true
+    }
+  },
+  "ELF_BIN_UF2_correspondence": "PASS_EXACT_OBJCOPY_AND_ALL_UF2_BLOCKS",
+  "UF2_tail_padding_bytes": 20,
+  "build": "fallback ./scripts/build-glyph-mk6-quiet.sh; pio unavailable on PATH",
+  "static_RAM": 198288,
+  "static_ceiling": 199632,
+  "flash": 510956,
+  "hardware": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "limits_changed": false,
+  "native_source_label_bytes_in_ELF": "MATCH_FULL_20_BYTE_CANDIDATE_SHA",
+  "source_review": "PASS_EXACT_8b2c75e3",
+  "both_enum_host_regressions": "PASS",
+  "resource_status": "PASS_UNCHANGED_LIMITS",
+  "resource_pins_sha256": "d73a8e02298400d0fd2eece820b39d4acb266a9fed7f239ef244dd1a1361e307",
+  "core0_bound": 2048,
+  "core1_composition": 1060,
+  "core1_retained_bound": 1152
+}

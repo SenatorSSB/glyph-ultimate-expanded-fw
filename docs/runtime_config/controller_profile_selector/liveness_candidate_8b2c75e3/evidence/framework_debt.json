@@ -1,0 +1,17 @@
+{
+  "base": "3a7a8174f10dfc11563b4a6a6d2029a4e2acf29f",
+  "base_worktree_clean": true,
+  "base_result": "FAIL",
+  "proposal_result": "FAIL",
+  "same_authentication_stop": "C024 post-integration change outside validation/evidence paths",
+  "classification": "FRAMEWORK_VALIDATION_DEBT",
+  "nav": "PASS",
+  "framework": "PASS",
+  "sequence": "PASS",
+  "aggregate": "NOT_RUN_NO_PASS_CLAIM",
+  "source_scope": "no checker/test assertions or runtime source changed in this source-free proposal",
+  "logs": {
+    "base-surface.log": "23d3927e3a46b14588ae98e87da6a2ad17eeb10d19abbc39ae69bb8662aeda4e",
+    "handoff-check_glyph_docs_agent_surface.log": "794f434126eed640f99bf3b820944e3f0163f35649ec12b27fb31acf282730a8"
+  }
+}

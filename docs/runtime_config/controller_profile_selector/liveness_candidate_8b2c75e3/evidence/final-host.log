@@ -1,0 +1,26 @@
+PIO: identical bit-sample cycles and remaining wire instructions; relocated write label PASS
+old -fshort-enums normal-poll exact report/update/end PASS
+normal command response dispatch/bytes/invalid drain PASS
+old-source actual blocking receive exceeds finite bound PASS
+old -fno-short-enums normal-poll exact report/update/end PASS
+normal command response dispatch/bytes/invalid drain PASS
+old-source actual blocking receive exceeds finite bound PASS
+new -fshort-enums normal-poll exact report/update/end PASS
+normal command response dispatch/bytes/invalid drain PASS
+new-source bounded idle/interleavings/admission races/TX/marker lifecycle PASS
+new -fno-short-enums normal-poll exact report/update/end PASS
+normal command response dispatch/bytes/invalid drain PASS
+new-source bounded idle/interleavings/admission races/TX/marker lifecycle PASS
+Scope: source/peripheral proof plus integrated actual Persistence; exact build/resource/hardware acceptance remains separate.
+-fshort-enums PASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates
+-fshort-enums GC no-poll request -> bounded return -> actual selector service PASS
+GC no-poll request -> bounded return -> actual selector service PASS
+GC no-poll request -> bounded return -> actual selector service PASS
+GC no-poll request -> bounded return -> actual selector service PASS
+PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation
+-fno-short-enums PASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates
+-fno-short-enums GC no-poll request -> bounded return -> actual selector service PASS
+GC no-poll request -> bounded return -> actual selector service PASS
+GC no-poll request -> bounded return -> actual selector service PASS
+GC no-poll request -> bounded return -> actual selector service PASS
+PASS actual Persistence selector A->B->A/all4 routes/committed boot/context/fences/conflict/uncertain/multiple-context preservation

@@ -1,0 +1,198 @@
+Processing glyph_mk6 (platform: https://github.com/maxgerhardt/platform-raspberrypi.git#5e87ae34ca025274df25b3303e9e9cb6c120123c; framework: arduino; board: pico)
+--------------------------------------------------------------------------------
+Removing unused dependencies...
+Library Manager: Removing joybus-pio @ 0.0.0+20261020122043.sha.f2f59c0
+Library Manager: joybus-pio@0.0.0+20261020122043.sha.f2f59c0 has been removed!
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/raspberrypi/pico.html
+PLATFORM: Raspberry Pi RP2040 (1.14.0+sha.5e87ae3) > Raspberry Pi Pico
+HARDWARE: RP2040 130MHz, 256KB RAM, 2MB Flash
+DEBUG: Current (cmsis-dap) External (blackmagic, cmsis-dap, jlink, pico-debug, picoprobe, raspberrypi-swd)
+PACKAGES: 
+ - framework-arduinopico @ 1.30603.0+sha.32e74d0 
+ - tool-picotool-rp2040-earlephilhower @ 5.120300.240827 (12.3.0) 
+ - toolchain-rp2040-earlephilhower @ 5.120300.240127 (12.3.0)
+Flash size: 2.00MB
+Sketch size: 1.50MB
+Filesystem size: 0.50MB
+Maximium Sketch size: 1568768 EEPROM start: 0x101ff000 Filesystem start: 0x1017f000 Filesystem end: 0x101ff000
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain+, Compatibility ~ soft
+[nanopb] Processing 'schema/haybox/config.proto' (config.options)
+os.chdir('/private/tmp/glyph-native-selector-liveness-20261022')
+/usr/local/bin/python3 /private/tmp/glyph-native-selector-liveness-20261022/.pio/libdeps/glyph_mk6/Nanopb/generator/../generator/nanopb_generator.py --output-dir /private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/nanopb/generated-src --error-on-unmatched --proto-path /private/tmp/glyph-native-selector-liveness-20261022/schema/haybox config.proto
+Writing to /private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.h and /private/tmp/glyph-native-selector-liveness-20261022/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.c
+os.chdir('/private/tmp/glyph-native-selector-liveness-20261022/.pio/libdeps/glyph_mk6/Nanopb/generator')
+Found 68 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- Nanopb @ 0.4.92
+|-- HayBox-proto @ 0.0.0+sha.5b2bb5d
+|-- nes-pio @ 0.0.0+20240730101251.sha.422f16f
+|-- arduino-nunchuk @ 0.0.0+20261020122045
+|-- Adafruit_TinyUSB_XInput @ 0.0.0+20261020122046.sha.4b5617b
+|-- FastLED @ 3.6.0+sha.6daa7823c8
+|-- nanopb-arduino @ 1.1.0
+|-- Adafruit SSD1306 @ 2.5.17
+|-- Adafruit GFX Library @ 1.12.6
+|-- PacketIO @ 0.3.0
+|-- CRC32 @ 2.0.1
+|-- PCF8575 @ 0.2.5
+|-- TUCompositeHID
+|-- HayBox-proto @ 0.0.0+sha.db4e2f6
+|-- Adafruit TinyUSB Library
+|-- joybus-pio @ 0.0.0+20261020122043
+|-- LittleFS @ 0.1.0
+|-- Adafruit BusIO @ 1.17.4
+|-- Wire @ 1.0
+|-- SPI @ 1.0
+|-- ESP8266SdFat @ 2.1.1
+Building in release mode
+Compiling .pio/build/glyph_mk6/FrameworkArduinoBootloader/boot2_w25q080_2_padded_checksum.S.o
+Compiling .pio/build/glyph_mk6/nanopb/generated-build/config.pb.c.o
+Compiling .pio/build/glyph_mk6/libeea/Nanopb/pb_common.c.o
+Compiling .pio/build/glyph_mk6/libeea/Nanopb/pb_decode.c.o
+Compiling .pio/build/glyph_mk6/libeea/Nanopb/pb_encode.c.o
+Compiling .pio/build/glyph_mk6/lib6f7/nes-pio/NesConsole.cpp.o
+Compiling .pio/build/glyph_mk6/lib6f7/nes-pio/SnesConsole.cpp.o
+Compiling .pio/build/glyph_mk6/lib6f7/nes-pio/nes.c.o
+Compiling .pio/build/glyph_mk6/lib19c/SPI/SPI.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatDbg.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatFile.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatFilePrint.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatFileWrite.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatFormatter.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatName.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatPartition.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/ExFatLib/ExFatVolume.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatDbg.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatFile.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatFileLFN.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatFilePrint.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatFileSFN.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatFormatter.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatName.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatPartition.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FatLib/FatVolume.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FreeStack.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FsLib/FsFile.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FsLib/FsNew.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/FsLib/FsVolume.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/MinimumSerial.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SdCard/SdCardInfo.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SdCard/SdSpiCard.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SdCard/SdioTeensy.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiArtemis.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiChipSelect.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiDue.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiESP.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiParticle.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiSTM32.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiSTM32Core.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/SpiDriver/SdSpiTeensy3.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/FmtNumber.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/FsCache.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/FsDateTime.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/FsName.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/FsStructs.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/FsUtf.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/common/upcase.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/iostream/StdioStream.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/iostream/StreamBaseClass.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/iostream/istream.cpp.o
+Compiling .pio/build/glyph_mk6/lib58b/ESP8266SdFat/iostream/ostream.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/Adafruit_TinyUSB_API.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/Adafruit_USBD_CDC.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/Adafruit_USBD_Device.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/Adafruit_USBH_Host.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/cdc/Adafruit_USBH_CDC.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/hid/Adafruit_USBD_HID.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/midi/Adafruit_USBD_MIDI.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/msc/Adafruit_USBD_MSC.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/msc/Adafruit_USBH_MSC.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/ports/esp32/Adafruit_TinyUSB_esp32.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/ports/nrf/Adafruit_TinyUSB_nrf.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/ports/samd/Adafruit_TinyUSB_samd.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/arduino/webusb/Adafruit_USBD_WebUSB.cpp.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/audio/audio_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/bth/bth_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/cdc/cdc_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/cdc/cdc_host.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/dfu/dfu_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/dfu/dfu_rt_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/hid/hid_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/hid/hid_host.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/midi/midi_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/msc/msc_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/msc/msc_host.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/net/ecm_rndis_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/net/ncm_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/usbtmc/usbtmc_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/vendor/vendor_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/class/video/video_device.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/common/tusb_fifo.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/device/usbd.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/device/usbd_control.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/host/hub.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/host/usbh.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/analog/max3421/hcd_max3421.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/microchip/samd/dcd_samd.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/nordic/nrf5x/dcd_nrf5x.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/raspberrypi/pio_usb/dcd_pio_usb.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/raspberrypi/pio_usb/hcd_pio_usb.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/raspberrypi/rp2040/hcd_rp2040.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/portable/raspberrypi/rp2040/rp2040_usb.c.o
+Compiling .pio/build/glyph_mk6/lib708/Adafruit_TinyUSB_Arduino/tusb.c.o
+Compiling .pio/build/glyph_mk6/libfc8/Wire/Wire.cpp.o
+Compiling .pio/build/glyph_mk6/lib5a4/arduino-nunchuk/ArduinoNunchuk.cpp.o
+Compiling .pio/build/glyph_mk6/libcbb/Adafruit_TinyUSB_XInput/Adafruit_USBD_XInput.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/FastLED.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/bitswap.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/colorpalettes.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/colorutils.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/five_bit_hd_gamma.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/hsv2rgb.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/lib8tion.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/noise.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/platforms.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/platforms/esp/32/clockless_rmt_esp32.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/power_mgt.cpp.o
+Compiling .pio/build/glyph_mk6/libeec/FastLED/wiring.cpp.o
+Compiling .pio/build/glyph_mk6/lib3aa/nanopb-arduino/pb_arduino.cpp.o
+Compiling .pio/build/glyph_mk6/lib143/Adafruit BusIO/Adafruit_BusIO_Register.cpp.o
+Compiling .pio/build/glyph_mk6/lib143/Adafruit BusIO/Adafruit_GenericDevice.cpp.o
+Compiling .pio/build/glyph_mk6/lib143/Adafruit BusIO/Adafruit_I2CDevice.cpp.o
+Compiling .pio/build/glyph_mk6/lib143/Adafruit BusIO/Adafruit_SPIDevice.cpp.o
+Compiling .pio/build/glyph_mk6/lib0e7/Adafruit GFX Library/Adafruit_GFX.cpp.o
+Compiling .pio/build/glyph_mk6/lib0e7/Adafruit GFX Library/Adafruit_GrayOLED.cpp.o
+Compiling .pio/build/glyph_mk6/lib0e7/Adafruit GFX Library/Adafruit_SPITFT.cpp.o
+Compiling .pio/build/glyph_mk6/lib0e7/Adafruit GFX Library/glcdfont.c.o
+Compiling .pio/build/glyph_mk6/libae9/Adafruit SSD1306/Adafruit_SSD1306.cpp.o
+Compiling .pio/build/glyph_mk6/libea8/CRC32/CRC32.cpp.o
+In file included from .pio/libdeps/glyph_mk6/FastLED/src/FastLED.h:79,
+                 from .pio/libdeps/glyph_mk6/FastLED/src/five_bit_hd_gamma.cpp:1:
+.pio/libdeps/glyph_mk6/FastLED/src/fastspi.h:172:23: note: '#pragma message: Forcing software SPI - no hardware SPI for you!'
+  172 | #      pragma message "Forcing software SPI - no hardware SPI for you!"
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compiling .pio/build/glyph_mk6/libb86/PCF8575/PCF8575.cpp.o
+Compiling .pio/build/glyph_mk6/libeeb/TUCompositeHID/TUCompositeHID.cpp.o
+Compiling .pio/build/glyph_mk6/libeeb/TUCompositeHID/TUGamepad.cpp.o
+Compiling .pio/build/glyph_mk6/libeeb/TUCompositeHID/TUKeyboard.cpp.o
+Compiling .pio/build/glyph_mk6/lib86d/glyph-joybus-pio/GamecubeConsole.cpp.o
+Compiling .pio/build/glyph_mk6/lib86d/glyph-joybus-pio/GamecubeController.cpp.o
+Compiling .pio/build/glyph_mk6/lib86d/glyph-joybus-pio/N64Console.cpp.o
+Compiling .pio/build/glyph_mk6/lib86d/glyph-joybus-pio/N64Controller.cpp.o
+Compiling .pio/build/glyph_mk6/lib86d/glyph-joybus-pio/joybus.c.o
+lib/glyph-joybus-pio/src/GamecubeConsole.cpp:9:10: fatal error: hardware/structs/io_bank0.h: No such file or directory
+    9 | #include <hardware/structs/io_bank0.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+*** [.pio/build/glyph_mk6/lib86d/glyph-joybus-pio/GamecubeConsole.cpp.o] Error 1
+========================= [FAILED] Took 199.51 seconds =========================
+
+Environment    Status    Duration
+-------------  --------  ------------
+glyph_mk6      FAILED    00:03:19.512
+==================== 1 failed, 0 succeeded in 00:03:19.512 ====================

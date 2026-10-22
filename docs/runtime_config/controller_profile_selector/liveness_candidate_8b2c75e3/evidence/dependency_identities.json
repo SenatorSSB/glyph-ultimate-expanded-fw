@@ -1,0 +1,166 @@
+{
+  "platform": {
+    "path": "/private/tmp/glyph-native-selector-liveness-20261022/.platformio-home/platforms/raspberrypi",
+    "git_head": "5e87ae34ca025274df25b3303e9e9cb6c120123c"
+  },
+  "framework": {
+    "path": "/private/tmp/glyph-native-selector-liveness-20261022/.platformio-home/packages/framework-arduinopico",
+    "git_head": "32e74d024e5e3ee5e7ec9593f5a4101641c61897"
+  },
+  "vendored_joybus": {
+    "upstream": "f2f59c0aee07aea58cdd03616439bc3c6a8cbd8a",
+    "files": {
+      "lib/glyph-joybus-pio/LICENSE": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+      "lib/glyph-joybus-pio/UPSTREAM.md": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",
+      "lib/glyph-joybus-pio/include/GamecubeConsole.hpp": "54d2ced01964d91c2f8858f62b0b0b083681ba57bb5698a716f68a00ca29f2fa",
+      "lib/glyph-joybus-pio/include/GamecubeController.hpp": "60171271dc96bdc0e89a58379806a32d4bc9ac11772b7bef63bb34551f638e99",
+      "lib/glyph-joybus-pio/include/N64Console.hpp": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+      "lib/glyph-joybus-pio/include/N64Controller.hpp": "1b190c1db980b628376c8b2a70ce3928effe2fdfa6dd847fd2658b076ae980ef",
+      "lib/glyph-joybus-pio/include/README": "d1995176b3585fd998d0094d692fe9daf37b9dd6b3ef5dcd3b44914bf154dd9a",
+      "lib/glyph-joybus-pio/include/gamecube_definitions.h": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+      "lib/glyph-joybus-pio/include/joybus.h": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+      "lib/glyph-joybus-pio/include/joybus.pio.h": "22ef77997e80d886f058484c06b9cf6521682dbdf10c40d8225e15ca028519e3",
+      "lib/glyph-joybus-pio/include/n64_definitions.h": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+      "lib/glyph-joybus-pio/library.json": "30ad48b1bb69e5019f4ea94d948c90bea29a478df72f28d52066fa7e8b842b99",
+      "lib/glyph-joybus-pio/src/GamecubeConsole.cpp": "ab05eed54f34138ef2693c724eb6607a99e453a921bf6d308845739b5d7e09a1",
+      "lib/glyph-joybus-pio/src/GamecubeController.cpp": "d2a57d444ea7062e567bbbd35934dcb0974b483bec895ed4e618d29ed7470e5d",
+      "lib/glyph-joybus-pio/src/N64Console.cpp": "3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41",
+      "lib/glyph-joybus-pio/src/N64Controller.cpp": "4cb9727eedf90442417f60e7ea6464ae65e1ab62e050968bfc21da2ab24932ed",
+      "lib/glyph-joybus-pio/src/joybus.c": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3",
+      "lib/glyph-joybus-pio/src/joybus.pio": "17b9d52460c8b9e2d57fe649b1a64e0f523140a0bc58aca0b8929120d8481ba8"
+    }
+  },
+  "Adafruit BusIO": {
+    "library.properties": {
+      "sha256": "1f1c13c18d84a15f71e8e833aeaf1ada2d505cc915485174167ea661ed085194",
+      "text": "name=Adafruit BusIO\nversion=1.17.4\nauthor=Adafruit\nmaintainer=Adafruit <info@adafruit.com>\nsentence=This is a library for abstracting away UART, I2C and SPI interfacing\nparagraph=This is a library for abstracting away UART, I2C and SPI interfacing\ncategory=Signal Input/Output\nurl=https://github.com/adafruit/Adafruit_BusIO\narchitectures=*\n"
+    },
+    ".piopm": {
+      "sha256": "771c328575dfedeba2d82d66b318b686bdd6b47e2c241f5a40d733e9809307ce",
+      "text": "{\"type\": \"library\", \"name\": \"Adafruit BusIO\", \"version\": \"1.17.4\", \"spec\": {\"owner\": \"adafruit\", \"id\": 6214, \"name\": \"Adafruit BusIO\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "Adafruit GFX Library": {
+    "library.properties": {
+      "sha256": "e6b702f2d0463216bf4b89d10c1701ae0de2aabbee42f7088054e9e21949cc31",
+      "text": "name=Adafruit GFX Library\nversion=1.12.6\nauthor=Adafruit\nmaintainer=Adafruit <info@adafruit.com>\nsentence=Adafruit GFX graphics core library, this is the 'core' class that all our other graphics libraries derive from.\nparagraph=Install this library in addition to the display library for your hardware.\ncategory=Display\nurl=https://github.com/adafruit/Adafruit-GFX-Library\narchitectures=*\ndepends=Adafruit BusIO\n"
+    },
+    ".piopm": {
+      "sha256": "f8bb427fe1e24fdd1e030afffea197fe5a5bc778a10b1eaa2956c5fd57365e35",
+      "text": "{\"type\": \"library\", \"name\": \"Adafruit GFX Library\", \"version\": \"1.12.6\", \"spec\": {\"owner\": \"adafruit\", \"id\": 13, \"name\": \"Adafruit GFX Library\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "Adafruit SSD1306": {
+    "library.properties": {
+      "sha256": "bfb5d85959c14de682a285496e3c905054a0b126b0ca2d7c1870307890e6bc9d",
+      "text": "name=Adafruit SSD1306\nversion=2.5.17\nauthor=Adafruit\nmaintainer=Adafruit <info@adafruit.com>\nsentence=SSD1306 oled driver library for monochrome 128x64 and 128x32 displays\nparagraph=SSD1306 oled driver library for monochrome 128x64 and 128x32 displays\ncategory=Display\nurl=https://github.com/adafruit/Adafruit_SSD1306\narchitectures=*\ndepends=Adafruit GFX Library\n"
+    },
+    ".piopm": {
+      "sha256": "b6e4f7d45ce512e6f14b88e7d979e5df98a4b7bb481eaed2b5616d55bdc21a9e",
+      "text": "{\"type\": \"library\", \"name\": \"Adafruit SSD1306\", \"version\": \"2.5.17\", \"spec\": {\"owner\": \"adafruit\", \"id\": 135, \"name\": \"Adafruit SSD1306\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "Adafruit_TinyUSB_XInput": {
+    "git_head": "4b5617b19294e808ce1d950a69e6e5cc96f4ec06",
+    "library.json": {
+      "sha256": "dd2f057673e36b29d9b5f635adfaf8850d81ab709737a96c9651aa9ea03e3b4e",
+      "text": "{\n  \"name\": \"Adafruit_TinyUSB_XInput\",\n  \"version\": \"0.0.0+20261020122046\"\n}"
+    }
+  },
+  "CRC32": {
+    "library.properties": {
+      "sha256": "5be5d90979c0cfe05b5e67ddab7bd23b85d85c7f6b835beefae7819bcf4675ca",
+      "text": "name=CRC32\nversion=2.0.1\nauthor=Christopher Baker <info@christopherbaker.net>\nmaintainer=Christopher Baker <info@christopherbaker.net>\nsentence=An Arduino library for calculating a CRC32 checksum.\nparagraph=An Arduino library for calculating a CRC32 checksum.\ncategory=Data Processing\nurl=https://github.com/bakercp/CRC32\narchitectures=*\n"
+    },
+    ".piopm": {
+      "sha256": "413964b58623a8c73c34ace434d25279f49a733a6c7ce1e24873e6e2c217fb5e",
+      "text": "{\"type\": \"library\", \"name\": \"CRC32\", \"version\": \"2.0.1\", \"spec\": {\"owner\": \"bakercp\", \"id\": 1202, \"name\": \"CRC32\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "FastLED": {
+    "git_head": "6daa7823c8f936ca171629a2f501a7ea929837ea",
+    "library.json": {
+      "sha256": "6e1989adaaf462bc80516f325f37e4ec5c85a109d336eb86e2a12a886c4bca30",
+      "text": "{\n    \"name\": \"FastLED\",\n    \"description\": \"FastLED is a library for programming addressable rgb led strips (APA102/Dotstar, WS2812/Neopixel, LPD8806, and a dozen others) acting both as a driver and as a library for color management and fast math.\",\n    \"keywords\": \"led,noise,rgb,math,fast\",\n    \"authors\": [\n        {\n            \"name\": \"Daniel Garcia\",\n            \"url\": \"https://github.com/focalintent\",\n            \"maintainer\": true\n        },\n        {\n            \"name\": \"Mark Kriegsman\",\n            \"url\": \"https://github.com/kriegsman\",\n            \"maintainer\": true\n        },\n        {\n            \"name\": \"Sam Guyer\",\n            \"url\": \"https://github.com/samguyer\",\n            \"maintainer\": true\n        },\n        {\n            \"name\": \"Jason Coon\",\n            \"url\": \"https://github.com/jasoncoon\",\n            \"maintainer\": true\n        },\n        {\n            \"name\": \"Josh Huber\",\n            \"url\": \"https://github.com/uberjay\",\n            \"maintainer\": true\n        }\n    ],\n    \"repository\": {\n        \"type\": \"git\",\n        \"url\": \"https://github.com/FastLED/FastLED.git\"\n    },\n    \"version\": \"3.6.0\",\n    \"license\": \"MIT\",\n    \"homepage\": \"http://fastled.io\",\n    \"frameworks\": \"arduino\",\n    \"platforms\": \"atmelavr, atmelsam, freescalekinetis, nordicnrf51, nxplpc, ststm32, teensy, espressif8266, espressif32, nordicnrf52\",\n    \"headers\": \"FastLED.h\",\n    \"export\": {\n        \"exclude\": [\n            \"docs\",\n            \"extras\"\n        ]\n    },\n    \"build\": {\n        \"srcFilter\": [\n            \"+<*.c>\",\n            \"+<*.cpp>\",\n            \"+<*.h>\",\n            \"+<platforms/esp/32/*.cpp>\"\n        ],\n        \"libArchive\": false\n    }\n}\n"
+    },
+    "library.properties": {
+      "sha256": "e14e8b44eab57d89f2afc5db7e003efd26b40611a1f7b4a5786ceb8e0c8f2676",
+      "text": "name=FastLED\nversion=3.6.0\nauthor=Daniel Garcia\nmaintainer=Daniel Garcia <dgarcia@fastled.io>\nsentence=Multi-platform library for controlling dozens of different types of LEDs along with optimized math, effect, and noise functions.\nparagraph=Multi-platform library for controlling dozens of different types of LEDs along with optimized math, effect, and noise functions.\ncategory=Display\nurl=https://github.com/FastLED/FastLED\narchitectures=*\nincludes=FastLED.h\n"
+    }
+  },
+  "HayBox-proto": {
+    "git_head": "db4e2f68b5c4ddd407e7c11050a920c4b4ec54c8",
+    "library.json": {
+      "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "text": "{\n  \"$schema\": \"https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json\",\n  \"name\": \"HayBox-proto\",\n  \"description\": \"Protobuf definitions for HayBox configuration\",\n  \"keywords\": \"HayBox, game controller, protocol buffers, protobuf\",\n  \"authors\": {\n    \"name\": \"Jonathan Haylett\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/JonnyHaystack/HayBox-proto.git\"\n  },\n  \"version\": \"0.0.0\",\n  \"license\": \"GPL-3.0-only\",\n  \"homepage\": \"https://github.com/JonnyHaystack/HayBox-proto\",\n  \"dependencies\": {\n    \"Nanopb\": \"^0.4.8\"\n  },\n  \"frameworks\": \"*\",\n  \"platforms\": \"*\"\n}\n"
+    }
+  },
+  "HayBox-proto@src-777dd83f5e06d71aba0103adf11d16aa": {
+    "git_head": "5b2bb5d2c2a212647d5aaef7d5dc794be5197ecb",
+    "library.json": {
+      "sha256": "2ce5e98b846ef1451168277b67a4138ad5820365f1f09cb8f2fbf7d33a17951e",
+      "text": "{\n  \"$schema\": \"https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json\",\n  \"name\": \"HayBox-proto\",\n  \"description\": \"Protobuf definitions for HayBox configuration\",\n  \"keywords\": \"HayBox, game controller, protocol buffers, protobuf\",\n  \"authors\": {\n    \"name\": \"Jonathan Haylett\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/JonnyHaystack/HayBox-proto.git\"\n  },\n  \"version\": \"0.0.0\",\n  \"license\": \"GPL-3.0-only\",\n  \"homepage\": \"https://github.com/JonnyHaystack/HayBox-proto\",\n  \"dependencies\": {\n    \"Nanopb\": \"^0.4.8\"\n  },\n  \"frameworks\": \"*\",\n  \"platforms\": \"*\"\n}\n"
+    }
+  },
+  "Nanopb": {
+    "library.json": {
+      "sha256": "01f2027fcd3c19b304581c0bba7a9f0096a16842874e6686a38d168a69d952fe",
+      "text": "{\n  \"name\": \"Nanopb\",\n  \"version\": \"0.4.92\",\n  \"keywords\": \"protocol buffers, protobuf, google\",\n  \"description\": \"Nanopb is a plain-C implementation of Google's Protocol Buffers data format. It is targeted at 32 bit microcontrollers, but is also fit for other embedded systems with tight (<10 kB ROM, <1 kB RAM) memory constraints.\",\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/nanopb/nanopb.git\"\n  },\n  \"authors\": [{\n    \"name\": \"Petteri Aimonen\",\n    \"email\": \"jpa@nanopb.mail.kapsi.fi\",\n    \"url\": \"http://koti.kapsi.fi/jpa/nanopb/\"\n  }],\n  \"export\": {\n    \"include\": [\n      \"*.c\",\n      \"*.cpp\",\n      \"*.h\",\n      \"examples\",\n      \"generator\"\n    ],\n    \"exclude\": [\n      \"generator/**/__pycache__\",\n      \"examples/platformio/.gitignore\"\n    ]\n  },\n  \"build\": {\n    \"extraScript\": \"generator/platformio_generator.py\",\n    \"includeDir\": \"\",\n    \"srcDir\": \"\",\n    \"srcFilter\": [\n      \"+<*.c>\"\n    ]\n  },\n  \"examples\": [\n    \"examples/platformio/platformio.ini\",\n    \"examples/platformio/src/*.c\",\n    \"examples/*/*.c\"\n  ],\n  \"frameworks\": \"*\",\n  \"platforms\": \"*\"\n}\n"
+    },
+    ".piopm": {
+      "sha256": "bc8ba8afe756cc4b7a7c6146b098ef893c0f9dabd4ab0b1cdc608d15ab72ec7a",
+      "text": "{\"type\": \"library\", \"name\": \"Nanopb\", \"version\": \"0.4.92\", \"spec\": {\"owner\": \"nanopb\", \"id\": 431, \"name\": \"Nanopb\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "PCF8575": {
+    "library.json": {
+      "sha256": "e5c92f15c9d10b40a895ed96331b2a0ef440710eb60d37020471c75ccc4b887d",
+      "text": "{\n  \"name\": \"PCF8575\",\n  \"keywords\": \"I2C, PCF8575, 16 channel, IO, shift, rotate, readButton, toggle, reverse\",\n  \"description\": \"Arduino library for PCF8575 - 16 channel I2C IO expander, implements shift rotate.\",\n  \"authors\":\n  [\n    {\n      \"name\": \"Rob Tillaart\",\n      \"email\": \"Rob.Tillaart@gmail.com\",\n      \"maintainer\": true\n    }\n  ],\n  \"repository\":\n  {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/RobTillaart/PCF8575.git\"\n  },\n  \"version\": \"0.2.5\",\n  \"license\": \"MIT\",\n  \"frameworks\": \"*\",\n  \"platforms\": \"*\",\n  \"headers\": \"PCF8575.h\"\n}\n"
+    },
+    "library.properties": {
+      "sha256": "ece7bb50f2808dfaf628ac332f391a26249dfa880bd62c1deeb86d50b9ff76a9",
+      "text": "name=PCF8575\nversion=0.2.5\nauthor=Rob Tillaart <rob.tillaart@gmail.com>\nmaintainer=Rob Tillaart <rob.tillaart@gmail.com>\nsentence=Arduino library for PCF8575 - 16 channel I2C IO expander\nparagraph=Implements shift rotate and toggle.\ncategory=Signal Input/Output\nurl=https://github.com/RobTillaart/PCF8575.git\narchitectures=*\nincludes=PCF8575.h\ndepends=\n"
+    },
+    ".piopm": {
+      "sha256": "8966d39bfce97e0755f8444b10f768e13cc8a39c47bdc342fbfec4193e4539d5",
+      "text": "{\"type\": \"library\", \"name\": \"PCF8575\", \"version\": \"0.2.5\", \"spec\": {\"owner\": \"robtillaart\", \"id\": 12096, \"name\": \"PCF8575\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "PacketIO": {
+    "library.json": {
+      "sha256": "1091365aa24ed74b5b8c646edf7c28f2647a0c92f02996665c4b3cd916c02b18",
+      "text": "{\n  \"name\": \"PacketIO\",\n  \"description\": \"Packetizing wrapper for arduino Streams\",\n  \"keywords\": \"Print, Stream, packet, framing, COBS, SLIP\",\n  \"authors\":\n  {\n    \"name\": \"Eric Wieser\"\n  },\n  \"repository\":\n  {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/eric-wieser/packet-io.git\"\n  },\n  \"version\": \"0.3.0\",\n  \"license\": \"MIT\",\n  \"homepage\": \"https://packetio.readthedocs.io\",\n  \"frameworks\": \"arduino\",\n  \"platforms\": \"*\",\n  \"build\": {\n    \"flags\": \"-std=gnu++11 -Wall -Werror -Wpedantic -O2\"\n  }\n}\n"
+    },
+    ".piopm": {
+      "sha256": "1220dbda0e7880899d0a325d1a35ddbe2c22993177b89f1a03b9e9cb94d36ae7",
+      "text": "{\"type\": \"library\", \"name\": \"PacketIO\", \"version\": \"0.3.0\", \"spec\": {\"owner\": \"eric-wieser\", \"id\": 1377, \"name\": \"PacketIO\", \"requirements\": null, \"uri\": null}}"
+    }
+  },
+  "arduino-nunchuk": {
+    "library.json": {
+      "sha256": "bb1c504b86802b1f5ba72f3c8c5f48b1f1ac97c3e8b2d0f3d2e527255292d4a3",
+      "text": "{\n  \"name\": \"arduino-nunchuk\",\n  \"version\": \"0.0.0+20261020122045\"\n}"
+    },
+    ".piopm": {
+      "sha256": "b580cca54a1a2ebe144c2c74d55e3dd82ecac79935fbade46bbfe3de18d1f4f9",
+      "text": "{\"type\": \"library\", \"name\": \"arduino-nunchuk\", \"version\": \"0.0.0+20261020122045\", \"spec\": {\"owner\": null, \"id\": null, \"name\": \"arduino-nunchuk\", \"requirements\": null, \"uri\": \"https://github.com/JonnyHaystack/arduino-nunchuk/archive/refs/tags/v1.0.1.zip\"}}"
+    }
+  },
+  "nanopb-arduino": {
+    "library.json": {
+      "sha256": "7921e2464098e0d08c15147df7dd0a131b49812be2739ed37c02c550bf08f4a8",
+      "text": "{\n  \"name\": \"nanopb-arduino\",\n  \"description\": \"Simple layer to convert arduino Streams into nanopb's pb_streams\",\n  \"keywords\": \"Print, Stream, nanopb, protobuf\",\n  \"authors\":\n  {\n    \"name\": \"Eric Wieser\"\n  },\n  \"repository\":\n  {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/eric-wieser/nanopb-arduino.git\"\n  },\n  \"version\": \"1.1.0\",\n  \"license\": \"MIT\",\n  \"homepage\": \"https://github.com/eric-wieser/nanopb-arduino\",\n  \"frameworks\": \"arduino\",\n  \"platforms\": \"*\",\n  \"dependencies\": [\n    {\"name\": \"Nanopb\"}\n  ]\n}\n"
+    },
+    ".piopm": {
+      "sha256": "0b3c220ed5736fa464cfc9465907e2b807e0977e0748e96b587d2412bcb662aa",
+      "text": "{\"type\": \"library\", \"name\": \"nanopb-arduino\", \"version\": \"1.1.0\", \"spec\": {\"owner\": null, \"id\": null, \"name\": \"nanopb-arduino\", \"requirements\": null, \"uri\": \"https://github.com/JonnyHaystack/nanopb-arduino/archive/refs/tags/v1.1.1.zip\"}}"
+    }
+  },
+  "nes-pio": {
+    "git_head": "422f16f6b2ea91b4da1c90876fa2a8b7f0e0a88a",
+    "library.json": {
+      "sha256": "7afd8086bfee7907f963b7b38a3a2bcbfe0136c43ab1e47ea8d6e968d5fdd3fa",
+      "text": "{\n  \"name\": \"nes-pio\",\n  \"version\": \"0.0.0+20240730101251\"\n}"
+    }
+  }
+}

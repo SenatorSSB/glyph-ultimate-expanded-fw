@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/private/tmp/glyph-native-selector-liveness-20261022/tools/check_glyph_gamecube_selector_liveness.py", line 140, in <module>
+    main()
+    ~~~~^^
+  File "/private/tmp/glyph-native-selector-liveness-20261022/tools/check_glyph_gamecube_selector_liveness.py", line 127, in main
+    pio_proof(old_pio,(ROOT/'lib/glyph-joybus-pio/src/joybus.pio').read_text())
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/glyph-native-selector-liveness-20261022/tools/check_glyph_gamecube_selector_liveness.py", line 82, in pio_proof
+    assert nw[2] == 0xd224  # irq set 4 rel [18]
+           ^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,71 @@
+# GP_NATIVE_002_GC_LIVENESS_HW_V1 — owner approval packet
+
+Prepared, not executed. Candidate8b2c75e35bb990aee06de3165e5780082c4f08ad,
+treecd5d280e3b04a3b4e9d9a1bc760917406175b988. Implementation parentage retains
+failed4898951994bcabcaef2846145de2922a674656f8 and original334fbd06.
+Exact Mk6 build and byte correspondence PASS. UF2 is1046016bytes, SHA256
+ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760.
+Owner-held custody: local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5780082c4f08ad/ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760/firmware.uf2.
+Static RAM198288/199632; flash510956. Fresh exact linked resource proof PASS:
+core0max2048/2048, core1composition1060 within retained1152, all140old+39selector
+and14GC routes fit unchanged limits. Fresh source review and independent exact build/resource/custody/handoff review
+PASS. This is a concrete approval packet; no physical acceptance is claimed. No substituted rebuild
+may inherit any physical result. Candidate remains unmerged.
+
+## Stage A: read-only recovery first
+
+Approval of RECOVERY_PREFLIGHT.md authorizes only its bounded read-only sequence
+on the identified original Mk6 and owner-established connections. Verify current
+Config/identity, all original record wrappers and fixtures28–47; preserve exact
+private backups. Current identity and postfailure integrity remain UNKNOWN until
+those reads and exact offline comparisons finish. Stop on unexpected state.
+No automatic restore/delete/retry or fixture recreation. No flash before a
+matching adjudicated preflight and separate Stage B approval.
+
+## Stage B: exact installation and smallest decisive physical test
+
+Requires explicit owner approval naming this candidate AND its completed exact
+UF2 hash. Rehash the retained non-symlink custody file immediately before the
+single established manual installation. No automated flash, fallback artifact
+or second attempt. Owner confirms one reconnect/normal operation. Any failure
+stops this packet and preserves all evidence; no reflash/cleanup follows.
+
+1. XInput on the previously approved existing setup: confirm named fixtures
+   remain in .Profile. Select SEL01(ID28/r1/schema5)→SEL20(ID47/r1/schema5)→SEL01.
+   For each, record accepted selection, one reboot/reconnect, exact runtime
+   identity/hash where supported, expected distinct LF1(53,0)/(72,0)/(53,0)
+   and released neutral(0,0), route and continued responsiveness. This is the
+   quick selector regression, not a repeat of the whole native campaign.
+2. Owner-established normal GameCube setup: repeat SEL01→SEL20→SEL01 through
+   controller .Profile. For each transition record list usable, selection
+   accepted, reboot screen/reconnect, expected distinct already-known profile
+   behavior, GameCube retained and controller responsive. Unavailable hidden
+   raw identity fields remain UNKNOWN; do not infer them from XInput.
+3. Idle/no-poll row: repeat at least once only with a separately described and
+   explicitly owner-approved safe setup that truly withholds GameCube polling
+   while retaining controller/menu operation. Record exact topology/action,
+   evidence for no-poll condition, posted selection, reboot/reconnect and
+   responsiveness. This packet supplies no adapter unplug/replug sequence.
+   If safe setup/verification is unavailable, mark this row NOT_TESTED and
+   acceptance incomplete; do not silently waive it.
+4. Perform post-test read-only Config/status/directory/full-wrapper readback
+   through approved connection steps. Verify all original/fixture record bytes,
+   revisions, IDs, names and ranks against preflight backups; selection alone
+   must change no stored body. Config must match only approved selection,
+   current backend/default context and checked-publication metadata changes.
+   Expected final selected fixture is SEL01, with final route as explicitly
+   exercised. No original restoration/deletion is implicit. Preserve exact
+   post-test backups and any mismatch for adjudication.
+
+## Acceptance and stop
+
+Record exact F/UF2 SHA256 for every row with actual owner observations, route,
+backend, expected/actual output, active identity where supported and timestamps.
+One non-reproduction of the old freeze is insufficient. All source/old-vs-new
+regression/normal protocol/resource/review/build/custody gates and physical
+XInput/GameCube/no-poll/responsiveness/Config+store preservation must pass before
+source-free HEP/integration evidence. No merge or DONE before exact acceptance.
+Any renewed hardware failure, unexpected stored-state change, backup/custody
+mismatch or new device mutation stops for the owner. No watchdog workaround,
+second writer, device cleanup, RT2/factory or Nunchuk testing is authorized.
+Root cause of the old physical failure remains UNPROVEN; Nunchuk NOT_TESTED.

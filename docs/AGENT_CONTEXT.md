@@ -1,5 +1,16 @@
 # Agent Context
 
+## Owner-directed GameCube liveness repair proposal — 2026-10-23
+
+Exact repair candidate8b2c75e35bb990aee06de3165e5780082c4f08ad is published
+on an isolated branch with host/source-review/build/resource/custody PASS.
+The [source-free approval packet](runtime_config/controller_profile_selector/liveness_candidate_8b2c75e3/README.md)
+requires read-only postfailure recovery before separately approved hardware
+continuation. No device operation, HEP PASS, source integration, DONE or queue
+promotion is claimed. The historical failure and all failed bytes remain
+preserved; postfailure Config/identity/original integrity stays UNKNOWN.
+Root cause UNPROVEN; Nunchuk NOT_TESTED. The live queue remains authoritative.
+
 ## Selector exact GameCube hardware FAIL — 2026-10-22
 
 GP-NATIVE-002 is HARDWARE_FAILED with REPAIR_REQUIRED and a pending bounded
