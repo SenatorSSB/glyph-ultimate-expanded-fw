@@ -1,0 +1,183 @@
+{
+  "schema": "glyph_kazuya_verification_v1",
+  "classification": "INACTIVE_GENERATOR_OR_FIXTURE",
+  "status": "HOST_CANDIDATE_VERIFIED_WITH_PROVISIONAL_GAMEPLAY_DECISIONS",
+  "baseline": "9a2a20730625671f89988e3911242c71e3f3fc5b",
+  "branch": "codex/kazuya-profile-v1",
+  "authoring_contract_changed": false,
+  "firmware_or_backend_changed": false,
+  "commands": [
+    {
+      "command": "python3 tools/glyph_native_profile_json.py validate profiles/kazuya/Kazuya.profile.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tools/glyph_native_profile_json.py compile profiles/kazuya/Kazuya.profile.json --output /tmp/Kazuya.pb",
+      "result": "PASS",
+      "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8"
+    },
+    {
+      "command": "python3 tools/glyph_native_profile_json.py report profiles/kazuya/Kazuya.profile.json --output /tmp/Kazuya.report.json",
+      "result": "PASS",
+      "report": {
+        "analog_effect_count": 11,
+        "body_bytes": 1834,
+        "body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+        "condition_count": 68,
+        "declared_tables": [
+          "AsymmetricTilt",
+          "CDCNeutral",
+          "CompactTilt",
+          "Default",
+          "DefensiveDownBack",
+          "DownBack",
+          "DownDiagonal",
+          "FlippedHorizontal41",
+          "FlippedTilt",
+          "FlippedTilt41",
+          "ForcedDown",
+          "Horizontal35",
+          "Horizontal41",
+          "Horizontal46",
+          "RF6LowMagnitude",
+          "VerticalAsymmetric"
+        ],
+        "digital_binding_count": 20,
+        "direction_source_count": 6,
+        "format_version": 1,
+        "neutral_filled_slots": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ],
+        "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+        "profile_name": "Kazuya",
+        "provenance_kind": "authoredSourceV1",
+        "provenance_sha256": "09392756ec1fce89479e5008f4653b866f11e31254bec435a0c1c0edf2531ae7",
+        "table_rule_count": 14,
+        "table_slots": {
+          "AsymmetricTilt": 13,
+          "CDCNeutral": 3,
+          "CompactTilt": 12,
+          "Default": 0,
+          "DefensiveDownBack": 5,
+          "DownBack": 4,
+          "DownDiagonal": 2,
+          "FlippedHorizontal41": 10,
+          "FlippedTilt": 11,
+          "FlippedTilt41": 14,
+          "ForcedDown": 1,
+          "Horizontal35": 6,
+          "Horizontal41": 9,
+          "Horizontal46": 7,
+          "RF6LowMagnitude": 15,
+          "VerticalAsymmetric": 8
+        },
+        "token_count": 220,
+        "wrapper_bytes": 1839,
+        "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8"
+      }
+    },
+    {
+      "command": "python3 tools/test_glyph_native_profile_json.py -v",
+      "result": "PASS",
+      "tests_run": 17
+    },
+    {
+      "command": "python3 tools/test_glyph_native_profile_json_v1.py -v",
+      "result": "PASS",
+      "tests_run": 23
+    },
+    {
+      "command": "python3 tools/test_kazuya_profile.py -v --report tools/fixtures/kazuya/host-results.json --workbook <exact-owner-workbook>",
+      "result": "PASS",
+      "tests_run": 6,
+      "observations": {
+        "matrix_composition": 8928,
+        "negative_mutants": [
+          "historical RF7 B",
+          "RF6 Z in EWGF",
+          "RF6 Z in neutral",
+          "RF5 A in Spinning Demon",
+          "four-button RF5 A",
+          "four-button B leakage",
+          "LT2 becomes Z",
+          "RF8 Mode resurrection",
+          "ordinary analogue override 3",
+          "ordinary analogue override 4",
+          "residual analogue after carrier clear"
+        ],
+        "release_and_socd": 704,
+        "retained_differential_frames": 110702,
+        "lt2_retained_overlay_frames": 110702
+      }
+    },
+    {
+      "command": "python3 tools/check_glyph_docs_navigation.py",
+      "result": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    },
+    {
+      "command": "cmp tools/fixtures/native_profile_json/Ultimate.pb /tmp/Kazuya.archival-Ultimate.pb",
+      "result": "PASS"
+    }
+  ],
+  "archival": {
+    "json_git_blob": "0c25c3d6f85480898f18f6104fa4405ed2e497cb",
+    "compiled_wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+    "golden_wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+    "untouched_paths": [
+      "profiles/ultimate/",
+      "tools/fixtures/native_profile_json/",
+      "tools/fixtures/native_profile_json_v1/",
+      "profiles/schema/",
+      "src/",
+      "include/",
+      "HAL/",
+      "schema/"
+    ]
+  },
+  "native_resource_authority": "tools/glyph_native_profile_json.py compile_report, unchanged production validate_native_body and C++ admission",
+  "local_environment": {
+    "python": "Isolated /private/tmp/glyph-kazuya-test-venv (jsonschema test dependency; protobuf/grpcio-tools for Nanopb generation)",
+    "nanopb": "Read-only existing dependency in original checkout, exposed by ignored .pio symlink; no cache edits",
+    "cxx": "Apple clang version 21.0.0 (clang-2100.3.34.2)"
+  },
+  "historical_findings": [
+    {
+      "result": "INITIAL_ENVIRONMENT_FAILURE",
+      "detail": "Default Python lacked jsonschema; fresh isolated test environment resolved dependency without source edits."
+    },
+    {
+      "result": "INITIAL_RETAINED_DIFFERENTIAL_FAILURES_REPAIRED",
+      "detail": "Reconstruction omitted flipped-layer and LT3/RT1 overlap exceptions; corrected graph, complete suite rerun."
+    },
+    {
+      "result": "INITIAL_EXPECTED_MASK_FAILURE_REPAIRED",
+      "detail": "Expanded C opposing-input fixture needed both independent quadrant flags; raw C reduction unchanged."
+    }
+  ],
+  "independent_review": "PASS_FOR_OFFLINE_HOST_CANDIDATE",
+  "installation_ready": false,
+  "device_operations": [],
+  "hardware_acceptance": "NOT_TESTED",
+  "gameplay_acceptance": "NOT_TESTED",
+  "nunchuk": "NOT_TESTED",
+  "remaining_owner_assessments": [
+    "Broad LT2 && (RF8 || RF7) also overrides EWGF/Hells-Gate-purpose stick geometry; gameplay desirability unresolved.",
+    "No-horizontal [128,128] fallback is a host candidate, not a gameplay-approved assignment.",
+    "No installed, hardware or in-game command-recognition acceptance."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "glyph_kazuya_offline_review_v1",
+  "reviewer": "Independent Codex subagent /root/implementation_review",
+  "review_kind": "implementation_review",
+  "verdict": "PASS_FOR_OFFLINE_HOST_CANDIDATE",
+  "baseline": "9a2a20730625671f89988e3911242c71e3f3fc5b",
+  "reviewed_sha256": {
+    "profiles/kazuya/Kazuya.profile.json": "8f28cdc430a8347cc193f7a8519f5a3e7a4f0ce49558ebb4f7ff26ca61219499",
+    "tools/test_kazuya_profile.py": "0c7e3d0254cff90aa7a3604531210be4ddf274fc4757264f0eb248e892086409",
+    "tools/fixtures/kazuya/compile-report.json": "f4dcb89884af6533a9f819bbb66e5094c8b5ad4b03c8ef63bb4b3368e0e5fee2",
+    "tools/fixtures/kazuya/coordinate-evidence.json": "ccd6d75800bb2aba92fc429deaf413d6cb5411cebab3386a825c4032780413b2"
+  },
+  "readme_before_prose_correction_sha256": "001288ced4546357d361f8e6e7b6dea5ab9176f90fb8ad88049f6cbda493156e",
+  "readme_after_prose_correction_sha256": "65142ceb60e880758695cbed6f0f2bd8b52f9c00bc30047f5cd91b4408f6c8db",
+  "findings": [
+    {
+      "severity": "documentation",
+      "finding": "Other eleven maps should say other ten maps; eleven archival tables total includes Default.",
+      "resolution": "Changed other eleven to other ten; independently identified bounded prose correction; no executable change."
+    }
+  ],
+  "verification": {
+    "fresh_focused_suite": "6/6 PASS",
+    "measured_workbook": "Exact SHA256 and all67 raw/effective Values ranges independently checked",
+    "lt2_retained_overlay_frames": 110702,
+    "scope": [
+      "domain interpretation",
+      "RF-combination exclusivity",
+      "horizontal sign/SOCD",
+      "analogue-effect precedence",
+      "GameCube digital Shield carriers",
+      "table-slot/reference validity",
+      "retained behavior and accidental legacy imports",
+      "preprocessing/provenance",
+      "resources",
+      "negative controls",
+      "no prohibited changes"
+    ]
+  },
+  "source_sufficiency_review": {
+    "reviewer": "Separate Codex subagent /root/source_audit",
+    "gram_identity": "GRAMCTRL/HayBox-GRAM ac8f5f5d9f075cbabf232be28906629335cf8555 src/modes/Ultimate.cpp:81-84",
+    "source_verification": "Read-only default network attempt plus successful permitted network-enabled retry; both signed diagonal sides source-backed; candidate application only"
+  },
+  "open_owner_assessments": [
+    "Broad LT2 && (RF8 || RF7) also overrides EWGF/Hells-Gate-purpose stick geometry; gameplay desirability unresolved.",
+    "No-horizontal [128,128] fallback is a host candidate, not a gameplay-approved assignment.",
+    "No installed, hardware or in-game command-recognition acceptance."
+  ],
+  "installation_ready": false,
+  "hardware_acceptance": "NOT_TESTED"
+}
