@@ -1,0 +1,79 @@
+{
+  "actual_integration_I": "b8f9d14079e0930e2e4616c2df7923be564255f6",
+  "exact_parents": [
+    "2b0da786dc4832c9575c1a8448f25279b0d2799e",
+    "1de243c7bada73ba85843018058b4f66a06acdda"
+  ],
+  "findings": [],
+  "hardware_acceptance": {
+    "GameCube": "PASS_OWNER_OBSERVED_MENU_ONLY_NO_RAW_IDENTITY_INFERENCE",
+    "USB_Nintendo_Switch": "PASS_OWNER_OBSERVED_MENU_ONLY",
+    "XInput": "PASS",
+    "final_preservation": "PASS_CONFIG_ALL24_RECORDS_STORE_FENCES_EXACT"
+  },
+  "independent_checks": {
+    "I_to_F": "ALL_1099_NON_DOC_PATHS_GIT_MODES_KINDS_OBJECT_IDS_AND_SHA256_EXACT",
+    "accepted_Ehardware": "IMMUTABLE_AT_I_EXACT_HASH",
+    "active_source_delta": "ONLY_src/core/profile_selection.cpp_COMPACT_ULTIMATE_CONFIG_ROW_VISIBILITY",
+    "compressed_and_raw_log_hashes": "ALL_9_EXACT_SAVED_ACTUAL_LOGS",
+    "dependency_manifest": "41_HASHES_MATCH_REUSED_CANDIDATE_HOST_ONLY",
+    "documentation_conflicts": "FOUR_ACCEPTED_E_VERSIONS_EXACT",
+    "execution_context_and_persistence": "NativeTemplate_Persist_ContextMatches_boot_backend_defaults_writers_UNCHANGED",
+    "focused_native": "PASS_SHORT_AND_DEFAULT_ENUM_FULL_OUTPUT_COMPARISONS",
+    "focused_persistence": "PASS_37_CASES",
+    "focused_production": "PASS_SOURCE_COMPOSITION_4_NEGATIVE_CONTROLS",
+    "focused_selector": "PASS_BOTH_ENUM_ABIS_METADATA_MENU_SELECTION_GC_IDLE_BRIDGE",
+    "full_aggregate": "NOT_CLAIMED",
+    "inherited_recovery_fixture_failure": "HONEST_UNCHANGED_BASELINE_DEBT_RETAINED",
+    "initial_dependency_failures": "FOUR_MISSING_NANOPB_PRECOMPILATION_FAILURES_PRESERVED",
+    "name_filtering": "NONE",
+    "read_only_replay": "PASS_INDEPENDENT_RUN",
+    "real_merge_ancestry": "EXACT_E_F_PARENTS",
+    "source_free_E": "1099_NON_DOC_INPUTS_EXACT_PRIOR_BASE_F_NOT_ANCESTOR",
+    "test_deltas": "TWO_SELECTOR_FIXTURES_EXACT_F",
+    "unrelated_dirty_root_imports": "NONE_NON_DOC_CATALOG_EXACT_F",
+    "validation_exit_codes": "ALL_7_RECORDED_ZERO"
+  },
+  "limits": {
+    "Kazuya_activation_during_task": "NO",
+    "Kazuya_gameplay": "NOT_TESTED",
+    "Kazuya_stored_id": 48,
+    "firmware_rebuild": "NOT_RUN",
+    "flash": "NOT_RUN",
+    "historical_GameCube_liveness": "SEPARATE"
+  },
+  "live_remote_at_review": {
+    "codex/native-profile-menu-candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+    "configurator": "2b0da786dc4832c9575c1a8448f25279b0d2799e",
+    "method": "Default ls-remote DNS failure; same read-only escalated retry succeeded"
+  },
+  "prior_canonical": "55ab5984f47728db53a12665d685d16cfad39201",
+  "publication_condition": "Executor must freshly verify unchanged live canonical E and frozen F/custody immediately before normal publication; subsequent publication receipt must record actual live result. Reviewer does not publish.",
+  "review_time_utc": "2026-10-23T20:33:07.505778+00:00",
+  "reviewed_files_sha256": {
+    "docs/AGENT_CONTEXT.md": "8febf28863bdefc5dd3608e2b28e5444cde3dd4ba4a15e90f0593a9faee45c4a",
+    "docs/CURRENT_STATE.md": "34ac5900fd4fb729d366c710094f06520159c246585b7e19fc7f860cc1d0ea66",
+    "docs/ROADMAP.md": "590d73fa2ca2c9849c7b326526470d32868388a5bfc06ef582d5a9be26642cd3",
+    "docs/runtime_config/character_profile_menu/README.md": "0a489e5ffe21ee50dd586f71f29c62bf8bcf3046831b1193c40c50a74d3d2ca0",
+    "docs/runtime_config/character_profile_menu/integration_20261023/CORRESPONDENCE.json": "8089b2242e775cc006353d62aef931e242999fcde812d2c15cf2767d76208655",
+    "docs/runtime_config/character_profile_menu/integration_20261023/README.md": "d52fbf5f29215add40a6af0055655c3f6027320eb63115b4874630d628b19326",
+    "docs/runtime_config/character_profile_menu/integration_20261023/VALIDATION.json": "fc1c8e6b8e9f743c56442565527c20d6e72c35fbdf71c2b7724f04acf01d2547",
+    "docs/runtime_config/character_profile_menu/integration_20261023/host_dependency_manifest.json": "2f3c37951e5f50c4b4f09b1d065b7bb361e48cb0079307369482b51a657e09ed",
+    "docs/runtime_config/character_profile_menu/integration_20261023/native-default.log.gz": "7c97c6810bb6b25e7cc3325cbc95f31c31bd0d3fbdb146993a54c84fdcdd1369",
+    "docs/runtime_config/character_profile_menu/integration_20261023/native-default.run2.log.gz": "25594c794058a88f92cf951b3f5001d69637aa7ff16204436d20052c989886ce",
+    "docs/runtime_config/character_profile_menu/integration_20261023/native-short.log.gz": "99dd996a201b84d3d0f0f16b5de9efa19847613a54232d004ff435024a9f56af",
+    "docs/runtime_config/character_profile_menu/integration_20261023/native-short.run2.log.gz": "a31660a29dab90c490016fdb8c69da53b77e1189f8d1a7b446b839ebb2c90b1f",
+    "docs/runtime_config/character_profile_menu/integration_20261023/persistence.log.gz": "0c8e74bd3b469a9cc668623b32f9400e6f997d5d82ebb1521fd0f4d6ae7e6104",
+    "docs/runtime_config/character_profile_menu/integration_20261023/persistence.run2.log.gz": "8b4a1cb9adeb334f9a24018041cd43735ad2166741a8e2bf41b0e0f4638bced5",
+    "docs/runtime_config/character_profile_menu/integration_20261023/production.log.gz": "4e7d9f9a3ecaa28463b35dfb116f5f8d425a4d171caaef2f3ea2566f33aa1c9b",
+    "docs/runtime_config/character_profile_menu/integration_20261023/selector.log.gz": "9e100433a6ff45827cee43f23a2eda98c5a3022667329fab6c2470a6701dd86c",
+    "docs/runtime_config/character_profile_menu/integration_20261023/selector.run2.log.gz": "427bd50497d70cd28935b9113507724dd179b8bbeeb4bc2bff08586752ab8698",
+    "docs/runtime_config/character_profile_menu/integration_20261023/verify_correspondence.py": "8b21bd6a5ddaf5f7d3a889f46054bef48cf4b7c20bdbf80db789430460432799"
+  },
+  "reviewer": "independent menu_acceptance_review agent; fresh integration phase after separate hardware evidence review",
+  "reviewer_controller_operations": [],
+  "reviewer_source_or_git_writes": [],
+  "schema_name": "glyph_character_menu_independent_integration_review",
+  "schema_version": 1,
+  "verdict": "PASS_FOR_EXACT_TESTED_MENU_SOURCE_PUBLICATION"
+}

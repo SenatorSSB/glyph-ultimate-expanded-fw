@@ -1,5 +1,19 @@
 # Glyph Roadmap
 
+## Exact tested character-profile menu source integration
+
+Genuine integration `b8f9d14079e0930e2e4616c2df7923be564255f6` joins source-free
+accepted E`2b0da786dc4832c9575c1a8448f25279b0d2799e` and exact tested
+F`1de243c7bada73ba85843018058b4f66a06acdda`. All1099 tracked non-doc inputs
+match F; only active firmware change is bounded compact Ultimate-row menu hiding.
+XInput, owner-observed GameCube and USB Nintendo Switch menu/Ultimate-only
+selection hardware acceptance and final preservation PASS. Kazuya stored ID48
+remains unselected, gameplay NOT_TESTED.
+[Catalog, validation, independent review and publication](runtime_config/character_profile_menu/integration_20261023/README.md)
+preserve the exact installed UF2 and all prior evidence. No rebuild, new flash,
+cleanup or gameplay phase. Historical queue adjudications remain unchanged.
+
+
 ## Character-profile menu hardware validated
 
 Exact menu candidate `1de243c7bada73ba85843018058b4f66a06acdda`, UF2 SHA256

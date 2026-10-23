@@ -1,0 +1,111 @@
+{
+  "Kazuya_activation": "NO",
+  "Kazuya_gameplay": "NOT_TESTED",
+  "accepted_E": "2b0da786dc4832c9575c1a8448f25279b0d2799e",
+  "actual_integration_I": "b8f9d14079e0930e2e4616c2df7923be564255f6",
+  "candidate_F": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "checks": [
+    {
+      "command": "tools/check_glyph_controller_profile_selector.py --gamecube-liveness",
+      "exit_code": 0,
+      "log": "selector.run2.log.gz",
+      "result": "PASS_BOTH_ENUM_ABIS_MENU_PERSISTENCE_GC_IDLE_BRIDGE"
+    },
+    {
+      "command": "tools/check_glyph_profile_native_ultimate.py",
+      "exit_code": 0,
+      "log": "native-short.run2.log.gz",
+      "result": "PASS_NATIVE_AND_LEGACY_FULL_OUTPUT_CORRESPONDENCE_SHORT_ENUM"
+    },
+    {
+      "command": "tools/check_glyph_profile_native_ultimate.py --default-enum",
+      "exit_code": 0,
+      "log": "native-default.run2.log.gz",
+      "result": "PASS_NATIVE_AND_LEGACY_FULL_OUTPUT_CORRESPONDENCE_DEFAULT_ENUM"
+    },
+    {
+      "command": "tools/check_glyph_profile_store_production.py",
+      "exit_code": 0,
+      "log": "production.log.gz",
+      "result": "PASS_PRODUCTION_COMPOSITION_NEGATIVE_CONTROLS"
+    },
+    {
+      "command": "tools/check_glyph_profile_store_config_persistence.py",
+      "exit_code": 0,
+      "log": "persistence.run2.log.gz",
+      "result": "PASS_37_CURRENT_PERSISTENCE_CASES"
+    },
+    {
+      "command": "tools/check_glyph_docs_navigation.py",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "correspondence": "CORRESPONDENCE.json",
+  "device_writes": "NONE_DURING_INTEGRATION",
+  "firmware_build": "NOT_RUN_TESTED_ARTIFACT_UNCHANGED",
+  "flash": "NOT_RUN",
+  "full_non_doc_paths_exact": 1099,
+  "inherited_debt": {
+    "aggregate_PASS": "NOT_CLAIMED",
+    "checker": "tools/check_glyph_profile_store_selection_recovery.py",
+    "evidence": "../evidence/inherited_recovery_fixture_debt.json",
+    "rerun": "NOT_NEEDED_UNCHANGED_FIXTURE_AND_SOURCE",
+    "state": "PREEXISTING_IDENTICAL_BASE_AND_CANDIDATE_FAIL_PRESERVED"
+  },
+  "initial_environment_failures": {
+    "cause": "Fresh worktree lacks ignored Nanopb dependency source; failed before compiling tested source",
+    "exit_code": 1,
+    "logs": [
+      "selector.log.gz",
+      "native-short.log.gz",
+      "native-default.log.gz",
+      "persistence.log.gz"
+    ],
+    "resolution": "Reused retained candidate ignored .pio/libdeps,41 Nanopb source hashes pinned in host_dependency_manifest.json; no download/source change/firmware build"
+  },
+  "logs": {
+    "native-default.log.gz": {
+      "gzip_sha256": "7c97c6810bb6b25e7cc3325cbc95f31c31bd0d3fbdb146993a54c84fdcdd1369",
+      "raw_sha256": "949bbf88cad9d4c10c454241086d580e14c5169ce7d945a9fc84a022621f3c3b"
+    },
+    "native-default.run2.log.gz": {
+      "gzip_sha256": "25594c794058a88f92cf951b3f5001d69637aa7ff16204436d20052c989886ce",
+      "raw_sha256": "a900683502651086167887d95584c11cdfc862c4caaadd91e215390590a82ed1"
+    },
+    "native-short.log.gz": {
+      "gzip_sha256": "99dd996a201b84d3d0f0f16b5de9efa19847613a54232d004ff435024a9f56af",
+      "raw_sha256": "1a2ab2275f5ce3dd5179aab110f4f186a749a0a15de1f62c888e54026349bfac"
+    },
+    "native-short.run2.log.gz": {
+      "gzip_sha256": "a31660a29dab90c490016fdb8c69da53b77e1189f8d1a7b446b839ebb2c90b1f",
+      "raw_sha256": "1976e973bbe157ea53c2c0d04bec2cb13e32aa9cbe2ef25a49e8c025fbe5d6a3"
+    },
+    "persistence.log.gz": {
+      "gzip_sha256": "0c8e74bd3b469a9cc668623b32f9400e6f997d5d82ebb1521fd0f4d6ae7e6104",
+      "raw_sha256": "1dd998b9dc8396fa2a826911f35395a0ec71e82eaaf6603680b782c5274f068b"
+    },
+    "persistence.run2.log.gz": {
+      "gzip_sha256": "8b4a1cb9adeb334f9a24018041cd43735ad2166741a8e2bf41b0e0f4638bced5",
+      "raw_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+    },
+    "production.log.gz": {
+      "gzip_sha256": "4e7d9f9a3ecaa28463b35dfb116f5f8d425a4d171caaef2f3ea2566f33aa1c9b",
+      "raw_sha256": "34242b6068d3c7df12810290a5e4c04c00dffbd7c3b72eee72486a784ac8d7a9"
+    },
+    "selector.log.gz": {
+      "gzip_sha256": "9e100433a6ff45827cee43f23a2eda98c5a3022667329fab6c2470a6701dd86c",
+      "raw_sha256": "8f2f1795841d4f902bbbbc890a0db66a698f1f1df27eb85308cda2591acbe746"
+    },
+    "selector.run2.log.gz": {
+      "gzip_sha256": "427bd50497d70cd28935b9113507724dd179b8bbeeb4bc2bff08586752ab8698",
+      "raw_sha256": "75fd23e962f4ed584f22f871209eaee305a79fe4f8ab523fe93b4dfc52e066ba"
+    }
+  },
+  "schema_name": "glyph_character_menu_integration_validation"
+}

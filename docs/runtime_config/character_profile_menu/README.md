@@ -1,6 +1,7 @@
 # Native character profile menu — exact candidate and unexecuted installation
 
-Current: **HARDWARE_VALIDATED — EXACT TESTED SOURCE INTEGRATION PENDING**.
+Current: **HARDWARE_VALIDATED — EXACT TESTED SOURCE INTEGRATED**.
+See [exact-source catalog/review/publication](integration_20261023/README.md).
 See [three-route hardware acceptance](hardware_20261023/README.md).
 Historical preparation sections and frozen CANDIDATE.json retain creation-time facts.
 The owner corrected the runtime-label count to **two** and explicitly chose to
