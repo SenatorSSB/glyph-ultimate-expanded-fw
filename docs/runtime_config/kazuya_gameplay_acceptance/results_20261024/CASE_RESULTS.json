@@ -1,0 +1,270 @@
+{
+  "packet_id": "KGA-ID48-GC-R2",
+  "planned_required_checks": 33,
+  "planned_optional_checks": 2,
+  "case_results": [
+    {
+      "id": "SMOKE-01",
+      "input_or_sequence": "Ordinary movement/diagonals; A/B/X/Y; cardinal C-stick; Z; Shield; responsive controller/menu",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "DOWN-RF7",
+      "input_or_sequence": "RF7",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "DOWN-RF8",
+      "input_or_sequence": "RF8",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "EWGF-L",
+      "input_or_sequence": "RF7+RF6+LF3",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "EWGF-R",
+      "input_or_sequence": "RF7+RF6+LF1",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "HELL-L",
+      "input_or_sequence": "RF8+RF6+LF3",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "HELL-R",
+      "input_or_sequence": "RF8+RF6+LF1",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "DEMON-L",
+      "input_or_sequence": "RF8+RF7+RF5+LF3",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": [
+        "Known horizontal-release Down-loss design defect applies to command usability; successful held-state action does not resolve it"
+      ]
+    },
+    {
+      "id": "DEMON-R",
+      "input_or_sequence": "RF8+RF7+RF5+LF1",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": [
+        "Known horizontal-release Down-loss design defect applies to command usability; successful held-state action does not resolve it"
+      ]
+    },
+    {
+      "id": "BACK-L",
+      "input_or_sequence": "RF8+RF7+RF6+RF5+LF3",
+      "result": "PARTIAL_WORKS_WITH_INTERMITTENT_GRABS",
+      "caveats": [
+        "Owner reports random grabs on tested three/four-command-button combinations involving RF6; exact release order/game cause not proven",
+        "Known horizontal-release Down-loss design defect applies to command usability; successful held-state action does not resolve it"
+      ]
+    },
+    {
+      "id": "BACK-R",
+      "input_or_sequence": "RF8+RF7+RF6+RF5+LF1",
+      "result": "PARTIAL_WORKS_WITH_INTERMITTENT_GRABS",
+      "caveats": [
+        "Owner reports random grabs on tested three/four-command-button combinations involving RF6; exact release order/game cause not proven",
+        "Known horizontal-release Down-loss design defect applies to command usability; successful held-state action does not resolve it"
+      ]
+    },
+    {
+      "id": "CDC-NORMAL",
+      "input_or_sequence": "RF8+RF7+RF6 with one recorded normal horizontal setup",
+      "result": "PARTIAL_WORKS_WITH_INTERMITTENT_GRABS",
+      "caveats": [
+        "Owner reports random grabs on tested three/four-command-button combinations involving RF6; exact release order/game cause not proven"
+      ]
+    },
+    {
+      "id": "CDC-NOH",
+      "input_or_sequence": "RF8+RF7+RF6; neither LF1 nor LF3",
+      "result": "PARTIAL_WORKS_WITH_INTERMITTENT_GRABS",
+      "caveats": [
+        "Owner reports random grabs on tested three/four-command-button combinations involving RF6; exact release order/game cause not proven"
+      ]
+    },
+    {
+      "id": "RISING-A",
+      "input_or_sequence": "RF8+RF5 in normal gameplay setup",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "COMPOSE-DOWN-A",
+      "input_or_sequence": "RF7+RF5 in one normal setup",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "COMPOSE-DIAG-AZ",
+      "input_or_sequence": "RF8+RF6+RF5 with one recorded horizontal side",
+      "result": "BEHAVIOR_WORKS_GAMEPLAY_PURPOSE_UNDECIDED",
+      "caveats": [
+        "Owner questions why this composition case exists; not a requested named move; A+Z is intentional in the compiled profile"
+      ]
+    },
+    {
+      "id": "FALLBACK-DIAG",
+      "input_or_sequence": "RF8+RF7; neither LF1 nor LF3",
+      "result": "NEEDS_CHANGE_OWNER_REJECTED",
+      "caveats": [
+        "Neutral when horizontal released is harmful; exact replacement unspecified"
+      ]
+    },
+    {
+      "id": "FALLBACK-BACK",
+      "input_or_sequence": "RF8+RF7+RF6+RF5; neither LF1 nor LF3",
+      "result": "NOT_ISOLATED_GENERAL_OWNER_REJECTION_RECORDED",
+      "caveats": [
+        "Owner rejects Down loss across horizontal-dependent commands; do not invent an isolated case-specific trial"
+      ]
+    },
+    {
+      "id": "FALLBACK-DEFENSIVE",
+      "input_or_sequence": "LT2+RF8+RF7; neither LF1 nor LF3",
+      "result": "STABLE_BUT_OWNER_SAYS_NO_GAMEPLAY_PURPOSE",
+      "caveats": [
+        "Owner identified RF8+RF7+RF6+LT2 as relevant instead"
+      ]
+    },
+    {
+      "id": "RELEASE-A-L",
+      "input_or_sequence": "LF3 held: RF8+RF7 \u2192 add LT2 \u2192 release RF7 \u2192 LT2+RF8 \u2192 release RF8 \u2192 LT2",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "RELEASE-B-L",
+      "input_or_sequence": "LF3 held: RF8+RF7 \u2192 add LT2 \u2192 release RF8 \u2192 LT2+RF7 \u2192 release RF7 \u2192 LT2",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "RELEASE-A-R",
+      "input_or_sequence": "LF1 held: RF8+RF7 \u2192 add LT2 \u2192 release RF7 \u2192 LT2+RF8 \u2192 release RF8 \u2192 LT2",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "RELEASE-B-R",
+      "input_or_sequence": "LF1 held: RF8+RF7 \u2192 add LT2 \u2192 release RF8 \u2192 LT2+RF7 \u2192 release RF7 \u2192 LT2",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "OVERLAP-EWGF-L",
+      "input_or_sequence": "LT2+RF7+RF6+LF3",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "OVERLAP-EWGF-R",
+      "input_or_sequence": "LT2+RF7+RF6+LF1",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "OVERLAP-HELL-L",
+      "input_or_sequence": "LT2+RF8+RF6+LF3",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "OVERLAP-HELL-R",
+      "input_or_sequence": "LT2+RF8+RF6+LF1",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "OVERLAP-RISING",
+      "input_or_sequence": "LT2+RF8+RF5 in one normal setup",
+      "result": "NOT_TESTED_INDIVIDUALLY",
+      "caveats": [
+        "Do not infer exact side/order cases from successful held state or owner\u2019s related relevant combination; release-grab defect retained"
+      ]
+    },
+    {
+      "id": "REG-RF5",
+      "input_or_sequence": "RF5",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "REG-RF6",
+      "input_or_sequence": "RF6",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "REG-RF56",
+      "input_or_sequence": "RF5+RF6",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "SOCD-LEFT-RIGHT",
+      "input_or_sequence": "RF8+RF7 held: LF3 \u2192 add LF1 \u2192 release LF1 \u2192 release LF3",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "SOCD-RIGHT-LEFT",
+      "input_or_sequence": "RF8+RF7 held: LF1 \u2192 add LF3 \u2192 release LF3 \u2192 release LF1",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    },
+    {
+      "id": "OPTIONAL-LT5",
+      "input_or_sequence": "LT5 with normal gameplay directions",
+      "result": "DEFERRED_NOT_PART_OF_INITIAL_ACCEPTANCE",
+      "caveats": [
+        "Owner does not intend LT5 for this use; future assignment unspecified"
+      ]
+    },
+    {
+      "id": "OPTIONAL-RT1",
+      "input_or_sequence": "RT1 with normal gameplay directions",
+      "result": "PASS_OWNER_REPORTED",
+      "caveats": []
+    }
+  ],
+  "all_required_checks_executed": false,
+  "not_an_all_33_PASS": "Exact original release and overlap cases were not individually established; explicit NOT_TESTED rows remain",
+  "additional_owner_report": {
+    "input": "RF8+RF7+RF6+LT2",
+    "working": "YES_OWNER_REPORTED",
+    "release_grabs": "YES_OWNER_REPORTED",
+    "classification": "PARTIAL_NEEDS_CHANGE",
+    "exact_orders_and_sides": "NOT_ESTABLISHED"
+  },
+  "optional_LT5": "DEFERRED",
+  "optional_RT1": "PASS_BOUNDED_OWNER_REPORTED"
+}

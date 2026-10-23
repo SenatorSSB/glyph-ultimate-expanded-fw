@@ -1,0 +1,66 @@
+{
+  "packet_id": "KGA-ID48-GC-R2",
+  "packet_commit": "bab644bb87ecbc0326b08b08a54f990c30db4e9e",
+  "canonical_source_baseline": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
+  "installed_candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "installed_tree": "5a25a83705a654480b8db805f20822f4d180d70f",
+  "UF2": {
+    "bytes": 1046016,
+    "sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+    "installation": "prior accepted exact menu-candidate installation; no new flash",
+    "runtime_identity_limit": "No Git/UF2 or raw GC identity attested by Configurator"
+  },
+  "profile": {
+    "id": 48,
+    "name": "Kazuya",
+    "schema": 5,
+    "wrapper_bytes": 1839,
+    "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8",
+    "body_bytes": 1834,
+    "body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+    "source_sha256": "8f28cdc430a8347cc193f7a8519f5a3e7a4f0ce49558ebb4f7ff26ca61219499"
+  },
+  "classification": "SOURCE_FREE_PARTIAL_GAMEPLAY_EVIDENCE",
+  "gameplay_route": "Glyph GameCube backend \u2192 GC adapter \u2192 Nintendo Switch \u2192 Ultimate Training Mode, owner-reported",
+  "core_Kazuya_command_system": "PARTIAL",
+  "ordinary_controls_and_final_Ultimate_adjacency": "PASS_OWNER_REPORTED_BOUNDED_SMOKE",
+  "SOCD_sanity": "PASS_OWNER_REPORTED_BOUNDED_TWO_HISTORIES",
+  "shield_transition_design": "PARTIAL_NEEDS_CHANGE_RELEASE_ORDER_GRABS",
+  "broad_LT2_geometry_gate": "NOT_SEPARATELY_ACCEPTED_OR_DECIDED",
+  "no_horizontal_fallback": "NEEDS_CHANGE_OWNER_REJECTED_LOSS_OF_DOWN",
+  "retained_optional": {
+    "RT1_CompactTilt": "PASS_BOUNDED_GAMEPLAY_SPOT_CHECK",
+    "RF6LowMagnitude": "PASS_BOUNDED_RELEVANT_REGRESSION",
+    "LT5_Horizontal35": "DEFERRED_NOT_OWNER_INTENDED",
+    "others": "NOT_TESTED_DEFERRED_NO_INDIVIDUAL_GAMEPLAY_ACCEPTANCE"
+  },
+  "known_defects": [
+    {
+      "id": "KGA-R2-ISSUE-NOH-DOWN-LOSS",
+      "observation": "releasing forward/horizontal loses Down from command buttons and harms gameplay",
+      "owner_decision": "NEEDS_CHANGE",
+      "replacement_design": "UNSPECIFIED_NO_COORDINATES_INVENTED"
+    },
+    {
+      "id": "KGA-R2-ISSUE-SHIELD-RELEASE-GRAB",
+      "observation": "RF6-containing three/four-command combinations can yield grabs; owner-relevant RF8+RF7+RF6+LT2 has release-order-dependent grabs",
+      "owner_hypothesis": "A from RF7+RF6 under LT2 causes grab",
+      "root_cause": "UNPROVEN",
+      "future_owner_requirement": "LT2 should suppress the command A contribution from RF7+RF6",
+      "scope_limit": "No blanket ordinary-A/Z suppression, coordinate edits or gate narrowing inferred; no repair in this campaign"
+    }
+  ],
+  "unexecuted_scope": "CASE_RESULTS.json preserves individually untested exact release/overlap rows; no all33 PASS or full R2 execution claim",
+  "final_preservation": "PASS_STRICT_BYTE_EXACT_CONFIG_ALL24_RECORDS_AND_STORE_FENCES",
+  "final_controller": "Ultimate ID27 operating normally on GameCube route, owner confirmed after final Configurator audit",
+  "final_raw_GameCube_runtime_identity": "NOT_OBSERVED_NOT_INFERRED",
+  "mutations": {
+    "ProfileStore": 0,
+    "profile_update": 0,
+    "firmware_change": 0,
+    "source_repair": 0,
+    "Config": "normal owner profile/backend selections only; no direct Config writes by agent"
+  },
+  "campaign_state": "CLOSED_PARTIAL_NO_FURTHER_CAMPAIGN",
+  "next_action": "separate bounded repair/design authority required; do not implement here"
+}

@@ -1,0 +1,312 @@
+{
+  "reports": {
+    "GRAB_SCOPE_OWNER_CLARIFICATION.json": {
+      "recorded_at_utc": "2026-10-23T21:39:31.963379+00:00",
+      "owner_report_verbatim": "every three and 4 button combination that involved the grab button, unsurprisingly.",
+      "clarified_scope": "all tested three- and four-button combinations involving grab button RF6",
+      "intermittent_grab_timing": "NOT_EXPLICITLY_CONFIRMED_HOLD_VERSUS_RELEASE",
+      "cause": "UNPROVEN; owner previously suggested finger release; deterministic intermediate-Z exposure is a possible explanation, not physical proof",
+      "affected_acceptance": "retain intermittent unwanted grab caveat across relevant RF6 multi-button command cases; no clean overall PASS",
+      "no_new_experiment_or_mutation": true
+    },
+    "GROUP2_BATCH1_RESULT.json": {
+      "owner_report": "RF7 and RF8 crouch as expected. EWGF works with LF3, feels consistent, and there are no unwanted grabs or other actions. All three feel acceptable. Pressing RF7 and RF8 together without forward input give neutral state, which surprises me, but was likely set on purpose by the designer agent. I\u2019m wondering on how this was built, but alas, all works.",
+      "recorded_at_utc": "2026-10-23T21:18:35.185555+00:00",
+      "cases": {
+        "DOWN-RF7": {
+          "observed": "crouch as expected",
+          "acceptable": "YES",
+          "result": "PASS_OWNER_REPORTED"
+        },
+        "DOWN-RF8": {
+          "observed": "crouch as expected",
+          "acceptable": "YES",
+          "result": "PASS_OWNER_REPORTED"
+        },
+        "EWGF-L": {
+          "observed": "EWGF works with LF3",
+          "consistency": "consistent",
+          "unwanted_action": "none reported, including grabs",
+          "acceptable": "YES",
+          "result": "PASS_OWNER_REPORTED"
+        }
+      },
+      "incidental_FALLBACK-DIAG": {
+        "input_reported": "RF7+RF8 without forward input",
+        "observed": "neutral; surprising",
+        "full_no_horizontal_condition": "Owner says without forward; confirm neither LF1 nor LF3 when fallback group is reached",
+        "retain_or_redesign": "UNDECIDED",
+        "note": "Do not reinterpret all works as explicit approval of neutral fallback design; no raw coordinate measurement claimed"
+      }
+    },
+    "GROUP2_BATCH2_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T21:26:33.564155+00:00",
+      "owner_report_verbatim": "EWGFs work as expected. Hell's Gate works as expected, but you are wrong. It is Down-Forward plus RF8->RF6.",
+      "cases": {
+        "EWGF-R": {
+          "observed": "works as expected",
+          "result": "PASS_OWNER_REPORTED"
+        },
+        "HELL-L": {
+          "observed": "Hell\u2019s Gate works as expected; owner aggregate reply to requested left/right checks",
+          "result": "PASS_OWNER_REPORTED_GROUPED_RESPONSE"
+        },
+        "HELL-R": {
+          "observed": "Hell\u2019s Gate works as expected; owner aggregate reply to requested left/right checks",
+          "result": "PASS_OWNER_REPORTED_GROUPED_RESPONSE"
+        }
+      },
+      "owner_execution_authority": {
+        "command": "Hell\u2019s Gate",
+        "sequence_verbatim": "Down-Forward plus RF8->RF6",
+        "scope": "Owner correction of manual game-command execution, not profile/firmware change",
+        "caution": "Do not invent RF8 release/overlap timing beyond owner wording; deterministic held-state output is distinct from complete game command"
+      },
+      "assistant_correction": "Earlier held-chord shorthand omitted owner-specified Down-Forward and RF8\u2192RF6 sequence; acknowledged and corrected; no source/profile change"
+    },
+    "GROUP2_BATCH3_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T21:31:21.174624+00:00",
+      "owner_report_verbatim": "all work, but the fact that releasing forward input negates the down input from command buttons screws me over, this will need to be changed, however, all work as designed.",
+      "cases": {
+        "DEMON-L": {
+          "observed": "works as designed",
+          "command_recognition": "PASS_OWNER_REPORTED",
+          "gameplay_caveat": "loss of Down on horizontal release rejected"
+        },
+        "DEMON-R": {
+          "observed": "works as designed",
+          "command_recognition": "PASS_OWNER_REPORTED",
+          "gameplay_caveat": "loss of Down on horizontal release rejected"
+        },
+        "BACK-L": {
+          "observed": "works as designed",
+          "command_recognition": "PASS_OWNER_REPORTED",
+          "gameplay_caveat": "loss of Down on horizontal release rejected"
+        }
+      },
+      "design_issue": {
+        "id": "KGA-R2-ISSUE-NOH-DOWN-LOSS",
+        "trigger": "release forward/horizontal while command buttons remain held",
+        "observed_consequence": "Down input lost / neutral fallback, harms play",
+        "owner_decision": "NEEDS_CHANGE_UNACCEPTABLE",
+        "scope": "horizontal-dependent command neutral fallback; exact affected transitions and replacement design remain to be bounded in separate repair",
+        "replacement_coordinates_or_release_semantics": "NOT_SPECIFIED_NOT_INVENTED",
+        "defensive_fallback": "NOT_YET_SEPARATELY_ASSESSED"
+      },
+      "overall_core_acceptance": "PARTIAL_PENDING_REMAINING_CHECKS_WITH_KNOWN_GAMEPLAY_DEFECT",
+      "profile_or_source_edit": "NONE_NOT_AUTHORIZED_IN_THIS_CAMPAIGN"
+    },
+    "GROUP2_BATCH4_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T21:38:35.282049+00:00",
+      "owner_report_verbatim": "All work, I do get random grabs sometimes, but that's likely because I release my fingers incorrectly.",
+      "cases": {
+        "BACK-R": {
+          "intended_behavior": "works per aggregate owner report",
+          "recognition": "WORKING_OWNER_REPORTED",
+          "clean_gameplay_result": "PARTIAL_UNWANTED_GRAB_SCOPE_UNRESOLVED"
+        },
+        "CDC-NORMAL": {
+          "intended_behavior": "works per aggregate owner report",
+          "recognition": "WORKING_OWNER_REPORTED",
+          "clean_gameplay_result": "PARTIAL_UNWANTED_GRAB_SCOPE_UNRESOLVED"
+        },
+        "CDC-NOH": {
+          "intended_behavior": "works per aggregate owner report",
+          "recognition": "WORKING_OWNER_REPORTED",
+          "clean_gameplay_result": "PARTIAL_UNWANTED_GRAB_SCOPE_UNRESOLVED"
+        }
+      },
+      "unwanted_grabs": {
+        "consistency": "intermittent/random",
+        "affected_case": "NOT_YET_IDENTIFIED",
+        "owner_hypothesis": "incorrect finger release",
+        "root_cause": "UNPROVEN",
+        "not_reinterpreted_as_PASS": true
+      },
+      "host_supported_possible_transition": {
+        "before": "RF8+RF7+RF6 (index14): CDCNeutral, no command A/B/Z",
+        "release": "RF7 released while RF8+RF6 remain",
+        "after": "RF8+RF6 (index10): DownDiagonal + Z",
+        "authority": "unchanged tools/test_kazuya_profile.py MATRIX",
+        "scope": "deterministic potential explanation only; not an observed physical sequence or proven root cause"
+      },
+      "next_action": "Ask which of the three checks produces grabs; no automatic replay/new test/source repair"
+    },
+    "GROUP2_BATCH5_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T21:43:42.105593+00:00",
+      "owner_report_verbatim": "All confirmed. Do not remember what 3. was for, did I ever ask for it?",
+      "cases": {
+        "RISING-A": {
+          "observed": "confirmed",
+          "result": "PASS_OWNER_REPORTED"
+        },
+        "COMPOSE-DOWN-A": {
+          "observed": "confirmed",
+          "result": "PASS_OWNER_REPORTED"
+        },
+        "COMPOSE-DIAG-AZ": {
+          "observed": "behavior confirmed",
+          "gameplay_purpose_or_owner_need": "UNDECIDED_OWNER_QUESTIONS_WHY_PRESENT",
+          "result": "BEHAVIOR_WORKS_PURPOSE_NOT_ACCEPTED"
+        }
+      },
+      "scope_explanation": {
+        "COMPOSE-DIAG-AZ": "R2 agent-retained distinct composition/regression check; not a named Kazuya move or owner-stated new gameplay goal",
+        "profile_behavior": "existing RF8+RF6+RF5 produces diagonal A+Z through RF5/RF6 composition; unchanged",
+        "historical_preparation_objective": "Prior full preparation objective explicitly listed this as another composition case; no inference owner assigned it a game move",
+        "current_owner_need": "NOT_ASSUMED"
+      },
+      "known_unacceptable_neutral_fallback": "NEEDS_CHANGE",
+      "known_grab_caveat": "INTERMITTENT_ROOT_CAUSE_UNPROVEN"
+    },
+    "GROUP3_DEFENSIVE_AND_OWNER_RELEVANT_SHIELD.json": {
+      "recorded_at_utc": "2026-10-23T21:46:47.672509+00:00",
+      "owner_report_verbatim": "it does, although I don't think I've asked for that either since it serves no gameplay purpose. It's RF8+RF7+RF6+LT2 that was relevant, and it works too.",
+      "FALLBACK-DEFENSIVE": {
+        "observed": "Shield remains stable with LT2+RF8+RF7 and neither LF1/LF3",
+        "stability": "WORKING_OWNER_REPORTED",
+        "gameplay_purpose": "OWNER_SAYS_NO_GAMEPLAY_PURPOSE_NOT_A_DESIRED_FEATURE",
+        "acceptance": "Do not equate stable behavior with requested gameplay feature"
+      },
+      "owner_relevant_CDC_Shield": {
+        "input": "RF8+RF7+RF6+LT2",
+        "observed": "works too",
+        "authority": "direct owner correction of relevant gameplay use",
+        "held_vs_transition_scope": "NOT_EXPLICITLY_SEPARATED",
+        "release_order_A_B_both_sides": "NOT_TESTED_NOT_INFERRED"
+      },
+      "scope_reconciliation": "Do not insist irrelevant held-state permutations are owner command requirements. Record volunteered relevant chord without adding a new campaign or modifying profile/source. Clarify whether reported success includes actual entry/release transitions.",
+      "source_profile_firmware_changes": "NONE"
+    },
+    "GROUP6_ORDINARY_RF_REGRESSION_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T21:54:26.096682+00:00",
+      "owner_report_verbatim": "confirmed",
+      "scope": "Reply to RF5 alone, RF6 alone and RF5+RF6 ordinary regression checks without RF7/RF8/LT2",
+      "cases": {
+        "REG-RF5": {
+          "result": "PASS_OWNER_REPORTED",
+          "ordinary_behavior": "matches owner expectation from known-good Ultimate"
+        },
+        "REG-RF6": {
+          "result": "PASS_OWNER_REPORTED",
+          "ordinary_behavior": "matches owner expectation from known-good Ultimate"
+        },
+        "REG-RF56": {
+          "result": "PASS_OWNER_REPORTED",
+          "ordinary_behavior": "matches owner expectation from known-good Ultimate"
+        }
+      },
+      "raw_coordinates": "NOT_MEASURED_NOT_CLAIMED",
+      "known_design_defects": "UNCHANGED_OPEN"
+    },
+    "GROUP7_SOCD_SANITY_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T21:57:07.499996+00:00",
+      "owner_report_verbatim": "work",
+      "scope": "Both requested opposing-input sequences while holding RF8+RF7 without LT2",
+      "cases": {
+        "SOCD-LEFT-RIGHT": {
+          "result": "PASS_OWNER_REPORTED",
+          "observed": "second input priority, return to first on second release, no sticking per grouped reply"
+        },
+        "SOCD-RIGHT-LEFT": {
+          "result": "PASS_OWNER_REPORTED",
+          "observed": "second input priority, return to first on second release, no sticking per grouped reply"
+        }
+      },
+      "gameplay_acceptance": "PARTIAL_KNOWN_DEFECTS_REMAIN",
+      "full_host_history_hardware_acceptance": "NOT_CLAIMED"
+    },
+    "OPTIONAL_RT1_GAMEPLAY_RESULT.json": {
+      "recorded_at_utc": "2026-10-23T22:02:23.941534+00:00",
+      "owner_report_verbatim": "all works",
+      "case": "OPTIONAL-RT1",
+      "result": "PASS_OWNER_REPORTED_BOUNDED_GAMEPLAY_SPOT_CHECK",
+      "scope": "RT1 in owner-relevant movement/tilt situations; useful and no surprising movement/unwanted action reported",
+      "not_claimed": "Not per-coordinate/table exhaustive gameplay certification",
+      "OPTIONAL-LT5": "DEFERRED_NOT_OWNER_INTENDED"
+    },
+    "OWNER_APPROVAL.json": {
+      "packet_id": "KGA-ID48-GC-R2",
+      "packet_commit": "bab644bb87ecbc0326b08b08a54f990c30db4e9e",
+      "recorded_at_utc": "2026-10-23T21:06:32.438386+00:00",
+      "owner_approval": "I approve KGA-ID48-GC-R2 only: select ID48, run its 33 required and up to 2 optional GameCube/Switch checks, return to Ultimate ID27 and verify preservation. No profile updates, firmware changes, source repairs or further campaigns."
+    },
+    "OWNER_CONFIGURATOR_RETURN.json": {
+      "owner_report_verbatim": "connected, once again, through XInput first",
+      "recorded_at_utc": "2026-10-23T22:05:48.089342+00:00",
+      "return_route": "XINPUT_THEN_CONFIGURATOR_OWNER_REPORTED",
+      "normal_Ultimate_comparison": "AWAITING_EXPLICIT_REPORT",
+      "complete_snapshot_equal_to_preflight": true,
+      "record_count": 24,
+      "current_state": "CONFIGURATOR_FINAL_NORMAL_GC_BOOT_PENDING"
+    },
+    "OWNER_FINAL_ULTIMATE_BOOT_CONFIRMATION.json": {
+      "owner_report_verbatim": "confirmed",
+      "scope": "Reply to final normal GameCube boot on Ultimate and ordinary movement/A/B/X/Y/C-stick/Shield/RF5/RF6 comparison; leave Ultimate active",
+      "recorded_at_utc": "2026-10-23T22:09:00.773512+00:00",
+      "final_normal_GC_Ultimate_boot": "PASS_OWNER_REPORTED",
+      "ordinary_Ultimate_controls_and_bounded_adjacency": "PASS_OWNER_REPORTED",
+      "final_active_profile": "Ultimate ID27 OWNER_REPORTED; persisted destination established by prior final read-only snapshot",
+      "raw_GameCube_runtime_identity": "NOT_OBSERVED_NOT_INFERRED",
+      "no_additional_Kazuya_activation_requested": true
+    },
+    "OWNER_OPTIONAL_MODIFIER_SCOPE.json": {
+      "recorded_at_utc": "2026-10-23T22:01:50.802055+00:00",
+      "owner_report_verbatim": "RT1 yes\nLT5 no, will be something else later",
+      "OPTIONAL-RT1": {
+        "owner_relevant": true,
+        "gameplay_result": "NOT_TESTED_AWAITING_CHECK"
+      },
+      "OPTIONAL-LT5": {
+        "owner_relevant": false,
+        "gameplay_result": "DEFERRED / NOT PART OF INITIAL KAZUYA ACCEPTANCE",
+        "future_assignment": "OWNER_SAYS_WILL_BE_SOMETHING_ELSE_LATER_NOT_SPECIFIED",
+        "implementation_authority": "NONE_IN_THIS_CAMPAIGN"
+      },
+      "inherited_maps_other_than_RT1_RF6": "NOT_TESTED_DEFERRED_NO_GAMEPLAY_PASS_CLAIM"
+    },
+    "OWNER_SELECTION_SMOKE.json": {
+      "recorded_at_utc": "2026-10-23T21:15:48.918253+00:00",
+      "owner_report_verbatim": "all confirmed",
+      "scope": "Owner confirms preceding normal GameCube/GC-adapter route, Ultimate/Kazuya menu, Kazuya selection and normal reboot, Training setup and ordinary controls smoke",
+      "selection": {
+        "profile_id": 48,
+        "backend": 3,
+        "mode_index": 2,
+        "owner_observation": "all confirmed \u2014 in reply to normal GC Kazuya selection/reboot and Training/smoke instructions"
+      },
+      "SMOKE-01": {
+        "initial_Kazuya_smoke": "PASS_OWNER_REPORTED",
+        "material_difference_from_known_good_Ultimate": "NONE_REPORTED_IN_ALL_CONFIRMED_REPLY",
+        "direct_final_Ultimate_adjacency_comparison": "PENDING_SAFE_RETURN"
+      },
+      "raw_GameCube_runtime_identity": "NOT_OBSERVED_NOT_INFERRED",
+      "gameplay_acceptance": "NOT_TESTED_CORE_COMMANDS_PENDING"
+    },
+    "OWNER_SHIELD_RELEASE_DEFECT_AND_FUTURE_A_SUPPRESSION.json": {
+      "recorded_at_utc": "2026-10-23T21:51:50.096886+00:00",
+      "owner_report_verbatim": "it works, but if I release the command buttons in wrong order, I get grab. I think the A input from RF7+RF6 causes it, for future, that needs to not input A when LT2 is pressed clearly.",
+      "owner_relevant_CDC_Shield": {
+        "input": "RF8+RF7+RF6+LT2",
+        "entry_or_use": "works",
+        "release": "some command-button release orders cause grab",
+        "exact_failing_release_order": "NOT_SPECIFIED",
+        "gameplay_classification": "PARTIAL_NEEDS_CHANGE"
+      },
+      "future_owner_requirement": {
+        "requirement": "LT2 must suppress command A contribution from RF7+RF6",
+        "authority": "direct owner instruction for future",
+        "implementation_in_this_run": "NOT_AUTHORIZED_NO_CHANGE",
+        "not_assumed": "Do not broaden to all ordinary A sources, all Shield carrier suppression, coordinates or gate narrowing without separate design authority"
+      },
+      "root_cause": {
+        "owner_hypothesis": "A from RF7+RF6 while LT2 held causes grab",
+        "confirmed_deterministic_fact": "current profile retains command A for RF7+RF6 even with LT2",
+        "physical_game_grab_cause": "UNPROVEN; do not exclude intermediate Z exposure"
+      },
+      "release_order_test_scope": "Do not mark all four approved release-order cases PASS; exact orders/sides not individually established",
+      "remaining_policy": "Continue unrelated bounded regression checks; retain defects and no source/profile/firmware repair"
+    }
+  },
+  "scope": "Owner observations retained separately from host expectations. Minor transcript formatting normalization does not add measurements. Controller USB identity/raw Config remain private."
+}

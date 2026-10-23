@@ -1,5 +1,22 @@
 # Glyph Current State
 
+## Kazuya gameplay campaign R2 — partial result, 2026-10-24
+
+Owner-observed GameCube/GC-adapter/Switch gameplay on unchanged Kazuya ID48
+is **PARTIAL**, not NOT_TESTED and not full acceptance. Tested moves work;
+horizontal-release loss of Down is rejected and release-dependent grabs require
+change. Owner requests future suppression of RF7+RF6 command A under LT2;
+exact grab cause remains UNPROVEN, and no repair/design replacement is implemented.
+RT1 spot-check passes; LT5 and optional inherited maps remain deferred. Individually
+untested exact release/overlap rows stay NOT_TESTED; no all33-check PASS.
+Final complete Config/all24 record/store-fence preservation PASS; zero store writes,
+profile updates, source repairs or firmware changes. Owner confirmed final normal
+GameCube operation/ordinary comparison on Ultimate ID27 and left it active.
+[Source-free partial result](runtime_config/kazuya_gameplay_acceptance/results_20261024/README.md)
+preserves reports, per-case limits and full preservation. Stop after this campaign;
+future repair needs its own bounded authority. Earlier menu/NOT_TESTED snapshots
+below describe their original completion times and remain unchanged evidence.
+
 ## Exact tested character-profile menu source integration
 
 Genuine integration `b8f9d14079e0930e2e4616c2df7923be564255f6` joins source-free

@@ -1,0 +1,41 @@
+{
+  "verdict": "PASS_FOR_SOURCE_FREE_PARTIAL_RESULT_PUBLICATION",
+  "packet_id": "KGA-ID48-GC-R2",
+  "reviewer": "fresh independent agent /root/kga_result_review",
+  "reviewed_at_utc": "2026-10-23T22:10:56.786975+00:00",
+  "findings": [],
+  "reviewed_files_sha256": {
+    "docs/AGENT_CONTEXT.md": "465bb7d51fd97a2054fd0bad524ab2e82e5e2ab02864b727abf3ab45cb5e72fe",
+    "docs/CURRENT_STATE.md": "e3f0af53a2f80db0688f4fa690668d282ce5795afca44535e42f9136322bbdff",
+    "docs/ROADMAP.md": "5cc77aacc40060e52d193ef57cab3b5b4c236f0a1b238c6b7b82435f71088802",
+    "docs/runtime_config/kazuya_gameplay_acceptance/results_20261024/CASE_RESULTS.json": "e29cae9fee6515c35f6d71e5ed7a62dbbced7816a4e4bee68eac72bde4765cf4",
+    "docs/runtime_config/kazuya_gameplay_acceptance/results_20261024/OWNER_REPORTS.json": "94c0ec41ebb1382f7121f2cd5a231679e73e2f491cc92d5d5e3e450740dd4a3a",
+    "docs/runtime_config/kazuya_gameplay_acceptance/results_20261024/PRESERVATION.json": "7eabd09c2b2696e1e806ec3cea01b03653742d66f9cce7eb88571fe5fd05528e",
+    "docs/runtime_config/kazuya_gameplay_acceptance/results_20261024/PRIVATE_MANIFEST.json": "a0ad642e8bdc4482e80df96d7d0ee2c5f23a82593f7a3cf0bb1c95d5f3449591",
+    "docs/runtime_config/kazuya_gameplay_acceptance/results_20261024/README.md": "214036c67c21f590b51ade3dd6da6d375a77980975042c9116f93e601e115645",
+    "docs/runtime_config/kazuya_gameplay_acceptance/results_20261024/RESULT.json": "4bd2f9f2eb27ca6cc2dc0fa7318def87014a7875130fac602682392c37a2c364"
+  },
+  "verification": {
+    "private_capture_files": 154,
+    "private_capture_hashes": "ALL_MATCH_NO_SYMLINKS",
+    "actual_readonly_capture_audits": "INDEPENDENTLY_REPLAYED_FROZEN_AUDIT_BOTH_ENDPOINTS_ALL24_PASS",
+    "strict_frozen_compare_preserve": "PASS",
+    "preflight_equals_accepted_baseline": "PASS",
+    "preflight_equals_final_complete_snapshot": "PASS",
+    "approved_packet_pins_compile_and_review_hashes": "PASS_INDEPENDENT_CAMPAIGN_CHECKS_VERIFY",
+    "production_source_profile_and_frozen_packet_changes": "NONE; tracked diff since bab644bb only three current-state docs, plus new source-free result directory",
+    "owner_transcript_correspondence": "PASS_WITH_GROUPED_RESPONSES_EXPLICITLY_BOUNDED",
+    "final_Ultimate_GameCube_confirmation": "DIRECT_OWNER_CONFIRMED_AFTER_FINAL_AUDIT",
+    "no_device_operations_during_review": true
+  },
+  "scope_assessment": {
+    "gameplay": "PARTIAL; no full 33-case PASS; no all-route claim",
+    "release_orders": "four exact original cases individually NOT_TESTED",
+    "LT2_overlaps": "five exact original cases individually NOT_TESTED; broad gate not separately decided",
+    "known_defects": "Down loss owner-rejected; RF6 multi-button/release grabs retained, cause UNPROVEN",
+    "future_requirement": "RF7+RF6 command A suppression under LT2 recorded as future requirement only, not implemented",
+    "optional": "RT1 bounded PASS, LT5 owner-deferred, remaining optional maps not individually accepted",
+    "preservation": "Exact Config/all24/store-fence comparison; intermediate Config timeline and raw GC identity explicitly not claimed",
+    "publication_scope": "Source-free partial result and bounded current-state notes only; no repair/new campaign authority"
+  }
+}
