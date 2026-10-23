@@ -1,0 +1,16 @@
+{
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "ELF_objcopy_BIN": "EXACT",
+  "UF2_all_blocks_payload_addresses_family_padding": "EXACT",
+  "UF2_blocks": 2043,
+  "UF2_bytes": 1046016,
+  "BIN_bytes": 522988,
+  "recovery": {
+    "path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/8b2c75e35bb990aee06de3165e5780082c4f08ad/ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760/firmware.uf2",
+    "bytes": 1046016,
+    "sha256": "ca0bb9e800f196ea2a233c42cb921cfd2fecc80b8a9c285340684f1db38fc760",
+    "readback": "O_NOFOLLOW_EXACT"
+  },
+  "hardware": "NOT_TESTED",
+  "flashed": false
+}

@@ -1,0 +1,21 @@
+{
+  "UF2_sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+  "authority": "Direct human owner messages in this chat",
+  "base": "55ab5984f47728db53a12665d685d16cfad39201",
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "excluded": [
+    "repeat cleanup",
+    "CREATE",
+    "flash",
+    "store mutations",
+    "Kazuya activation",
+    "Kazuya gameplay",
+    "modifying tested source"
+  ],
+  "owner_return_path_report": "I tried connecting by holding RT2, not the normal way. Then I went in through XInput, menu, configurator",
+  "packet_commit": "a2767d6a0a9241cfdaf50ef6264762b8fb6765d8",
+  "scope": "Remaining GameCube and USB Nintendo Switch exact-candidate menu hardware acceptance, read-only final preservation, source-free hardware adoption and then conditional exact tested-source integration/publication to configurator",
+  "source_merge_condition": "All three route checks and final preservation PASS; exact correspondence and fresh integration review; no refactor/rebuild; live canonical verification",
+  "stop_after": "Exact menu-source integration; Kazuya gameplay remains separate",
+  "tree": "5a25a83705a654480b8db805f20822f4d180d70f"
+}

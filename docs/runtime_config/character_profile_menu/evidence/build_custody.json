@@ -1,0 +1,35 @@
+{
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "tree": "5a25a83705a654480b8db805f20822f4d180d70f",
+  "build_command": "pio run -e glyph_mk6",
+  "command_environment": {
+    "PATH": "worktree .venv/bin prepended",
+    "PLATFORMIO_CORE_DIR": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home"
+  },
+  "build_exit_code": 0,
+  "build_log_sha256": "e4bcbc1f7cfbf61779124795392b58c39417e5d3aab2c4c45d93b3d4314a8986",
+  "initial_and_postbuild_tracked_state": "CLEAN_EXACT_COMMIT",
+  "items": {
+    "elf": {
+      "path": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/firmware.elf",
+      "bytes": 5599120,
+      "sha256": "7f81d783420d2f823fdf68d30297c42e5b7354b2d076d7afdf13d01f56ae5096",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/1de243c7bada73ba85843018058b4f66a06acdda/a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b/firmware.elf"
+    },
+    "bin": {
+      "path": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/firmware.bin",
+      "bytes": 522988,
+      "sha256": "464502c28df5c551bc3b3e00c5b0b23430434ffeb9a06ebe96fbef44f34e6af7",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/1de243c7bada73ba85843018058b4f66a06acdda/a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b/firmware.bin"
+    },
+    "uf2": {
+      "path": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/firmware.uf2",
+      "bytes": 1046016,
+      "sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/1de243c7bada73ba85843018058b4f66a06acdda/a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b/firmware.uf2"
+    }
+  },
+  "custody_readback": "O_NOFOLLOW_EXACT_HASH_MATCH",
+  "firmware_flashed": false,
+  "hardware_acceptance": "NOT_TESTED"
+}

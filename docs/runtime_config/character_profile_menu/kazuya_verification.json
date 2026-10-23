@@ -1,0 +1,14 @@
+{
+  "body_bytes": 1834,
+  "body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+  "canonical": "55ab5984f47728db53a12665d685d16cfad39201",
+  "compile_report_matches_committed_report": true,
+  "controller_create_executed": false,
+  "gameplay_acceptance": "NOT_TESTED",
+  "protobuf_json_roundtrip_matches_wrapper": true,
+  "protobuf_json_sha256": "769c384330bb7fcceaa0ac16a986f24a654892460e659fba205d7ea2f9eabd26",
+  "scope": "OFFLINE_COMPILE_ONLY",
+  "source": "profiles/kazuya/Kazuya.profile.json",
+  "wrapper_bytes": 1839,
+  "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8"
+}

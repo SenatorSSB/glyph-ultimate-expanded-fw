@@ -1,0 +1,107 @@
+{
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+  "checks": [
+    {
+      "log": "baseline-negative",
+      "command": "new topology fixture against original source",
+      "exit_code": 1,
+      "result": "EXPECTED_FAIL_NAMED_CHARACTER_COUNT"
+    },
+    {
+      "log": "selector-positive",
+      "command": "tools/check_glyph_controller_profile_selector.py --gamecube-liveness",
+      "exit_code": 0,
+      "result": "PASS_BOTH_ENUM_ABIS"
+    },
+    {
+      "log": "native-short",
+      "command": "tools/check_glyph_profile_native_ultimate.py",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "log": "native-default",
+      "command": "tools/check_glyph_profile_native_ultimate.py --default-enum",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "log": "legacy-short",
+      "command": "tools/fixtures/profile_native_ultimate/run_legacy_set_phases.py --output-dir <short>",
+      "exit_code": 0,
+      "result": "PASS_17_CASES"
+    },
+    {
+      "log": "legacy-default",
+      "command": "tools/fixtures/profile_native_ultimate/run_legacy_set_phases.py --default-enum --output-dir <default>",
+      "exit_code": 0,
+      "result": "PASS_17_CASES"
+    },
+    {
+      "log": "legacy-oracle",
+      "command": "tools/fixtures/profile_native_ultimate/independent_legacy/run.py",
+      "exit_code": 0,
+      "result": "PASS_72_OUTPUTS_BOTH_ABIS"
+    },
+    {
+      "log": "store-production",
+      "command": "tools/check_glyph_profile_store_production.py",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "log": "store-persistence",
+      "command": "tools/check_glyph_profile_store_config_persistence.py",
+      "exit_code": 0,
+      "result": "PASS_37_CURRENT_PERSISTENCE_CASES"
+    },
+    {
+      "log": "store-selection-recovery",
+      "command": "tools/check_glyph_profile_store_selection_recovery.py",
+      "exit_code": 1,
+      "result": "FAIL_INHERITED_FIXTURE_DEBT"
+    },
+    {
+      "log": "baseline-store-selection-recovery",
+      "command": "exact canonical source export:tools/check_glyph_profile_store_selection_recovery.py",
+      "exit_code": 1,
+      "result": "SAME_FAIL_INHERITED_FIXTURE_DEBT"
+    },
+    {
+      "log": "build",
+      "command": "pio run -e glyph_mk6",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "log": "compiledb",
+      "command": "pio run -e glyph_mk6 -t compiledb",
+      "exit_code": 0,
+      "result": "PASS_259_RECIPES"
+    },
+    {
+      "log": "resource-objects",
+      "command": "tools/measure_glyph_profile_store_resources.py --elf <exact custody ELF> --output-dir <analysis objects>",
+      "exit_code": 0,
+      "result": "COLLECTED_53_TUS_1012_FRAMES"
+    },
+    {
+      "log": "native-abi",
+      "command": "tools/measure_glyph_native_ultimate_resources.py --output-dir <ABI evidence>",
+      "exit_code": 0,
+      "result": "PASS_BOTH_TARGET_ABIS"
+    }
+  ],
+  "menu_target_frames": "PASS_56_BYTES_BOTH_TARGET_ABIS",
+  "native_ABI_correspondence": "EXACT_TO_PREDECESSOR",
+  "Kazuya": "UNCHANGED_CANONICAL_COMPILE_REPORT_WRAPPER_BODY_AND_JSON_ROUNDTRIP_PASS",
+  "linked_resource_result": "resource/result.json",
+  "source_review": "evidence/source_review.json",
+  "final_handoff_review": "evidence/handoff_review.json",
+  "docs_navigation": "PASS_FINAL_PACKET",
+  "diff_check": "PASS_FINAL_PACKET",
+  "full_aggregate": "NOT_RUN_NO_PASS_CLAIM",
+  "hardware": "NOT_TESTED",
+  "final_handoff_review_verdict": "PASS_FOR_OWNER_APPROVAL_PACKET"
+}

@@ -1,0 +1,60 @@
+{
+  "agent": "/root/menu_handoff_review",
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "tree": "5a25a83705a654480b8db805f20822f4d180d70f",
+  "verdict": "PASS_FOR_OWNER_APPROVAL_PACKET",
+  "material_findings": [],
+  "reviewed_document_sha256": {
+    "README.md": "03b44850b669a4ca3c5834f79ab2101f00f0b7a30a92f590ff0c79894dae4112",
+    "OWNER_PACKET.md": "e856b12bf407a7fe9afe2bd8f4749d5eb76f6846e6917d0ecba871efb9eeeb06",
+    "CANDIDATE.json": "ab841da65433fd3bb8d98c787684408389ae2692b9c80a5862108fff17a295b5",
+    "validation.json": "04a08c2ef0f4fa73840746bdcac8403d470cb32e41be5b049101cf17ab61670e",
+    "ledger.json": "1c9e28b5b5afa0b857298e7ac7428ea71058ab7decc91b918f52f94cc3de4da5",
+    "evidence/source_review.json": "c21cbda5cd846343ca7bb58c3a38a923e10c732142e4360b82b5d62c801dc920",
+    "evidence/build_custody.json": "c8a8c1ffc8d7d46ff12927f8d9d9b0d8b246039d89206f7084b70ca3e51d079b",
+    "evidence/artifact_correspondence.json": "b342d8bafe88fc478977441c281af851f966c7b4ca74e8a25d521f4c70b0f7e2",
+    "resource/REPORT.md": "e21afa879c95b006d80b7a24515e49dd9ef6022a73c35c32be1ba89403e015e8",
+    "resource/result.json": "6d1bf4cd7cc168cbe516b73373955a4ebed9e783806de1c6a87315c4f00feedb",
+    "resource/manifest.json": "0defd42859555a0b98cd609048c18f710bfff50c16b4fe642f8f09028f661486",
+    "evidence/root_resource_replay.json": "dd5e766b147e5ff0186a00db4c5424f39c74d203f5db520926a700a0fbc70e17"
+  },
+  "independent_verification": {
+    "candidate_ref_and_HEAD_and_tree": "EXACT",
+    "source_reviewed_three_file_hashes": "EXACT",
+    "custody_readback": "O_NOFOLLOW_ALL_ELF_BIN_UF2_AND_RECOVERY_HASHES_EXACT",
+    "candidate_uf2_bytes": 1046016,
+    "candidate_uf2_sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+    "UF2_all_2043_blocks_addresses_family_padding_and_BIN_payload": "EXACT",
+    "resource_manifest_all_221_objects": "EXACT_DECOMPRESSED_HASH_AND_SIZE",
+    "production_source_pins": 284,
+    "SDK_vendored_pins": 90,
+    "toolchain_pins": 5,
+    "pins_rehashed": "ALL_EXACT",
+    "resource_graph_signatures": 3059,
+    "route_replay_maxima": [
+      2048,
+      2012,
+      1344
+    ],
+    "core0_margin": 0,
+    "retained_ID27_and_twenty_SEL_wrapper_and_body_hashes": "EXACT",
+    "twenty_SEL_original_fixture_bytes": "EXACT",
+    "kazuya_wrapper_and_native_body_and_protobuf_JSON": "EXACT_EXPECTED_HASHES",
+    "canonical_kazuya_source": "UNCHANGED",
+    "all_15_sealed_logs": "EXACT_HASHES",
+    "production_operator_CLI_status_fences_tokens_receipt_fsync_no_retry": "SOURCE_INSPECTED_MATCHES_PACKET"
+  },
+  "packet_judgment": [
+    "Fresh actual preflight required, with whole Config/all records and golden/lineage reconciliation before mutation.",
+    "Stage2 requires all SEL references resolved via exact context checked SET_REFERENCE plus committed safe Ultimate selection/reboot and supported runtime identity before deletion.",
+    "Twenty individually fenced DELETEs preserve unknown and permanent records; new request/journal/output receipts, actual generations and monotonic tokens, no uncertain retry.",
+    "Kazuya exact unchanged canonical bytes, available adjacent rank, returned stable ID, inactive final state and safe Ultimate final selection.",
+    "Candidate-specific per-route menu/display and preservation observations remain unexecuted. No gameplay/hardware acceptance or canonical merge is inferred.",
+    "Inherited recovery fixture failure is identical baseline/candidate and explicitly preserved; no aggregate PASS claim."
+  ],
+  "scope_limits": [
+    "Review only; no builds/tests/device actions/network/Git or repository mutation.",
+    "Linked resource/source transfer and independent source review inspected and mechanical pins independently verified; broad source review not duplicated.",
+    "Hardware NOT_TESTED; Kazuya gameplay NOT_TESTED; target timing/highwater NOT_MEASURED; Nunchuk NOT_TESTED."
+  ]
+}

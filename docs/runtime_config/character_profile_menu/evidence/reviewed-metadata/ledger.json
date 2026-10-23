@@ -1,0 +1,119 @@
+{
+  "UF2_bytes": 1046016,
+  "UF2_sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+  "active_firmware_changed": true,
+  "authority": {
+    "clarification": "OWNER_DIRECTIVE.md",
+    "exclusions": [
+      "controller mutations",
+      "flashing",
+      "Kazuya gameplay semantics",
+      "hardware acceptance inference"
+    ],
+    "kind": "direct_owner_objective_file",
+    "path": "/Users/rasmus.pekkarinen/.codex/attachments/a1e4fe97-db94-482d-bc91-c75b87ba2594/goal-objective.md",
+    "scope": "diagnosis;conditional menu-only implementation;exact unchanged Kazuya compilation;unexecuted cleanup/install packet",
+    "sha256": "f06b6060e57267c010b08c16039f367686d93d26a60d011d93993b097a3391b9"
+  },
+  "base_live_configurator": "55ab5984f47728db53a12665d685d16cfad39201",
+  "blocked_work": [],
+  "branch": "codex/native-profile-menu-cleanup",
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "candidate_tree": "5a25a83705a654480b8db805f20822f4d180d70f",
+  "canonical_merge": false,
+  "canonical_publication_lock": "NOT_ACQUIRED_NO_CANONICAL_PUBLICATION",
+  "chapter": "character_profile_menu",
+  "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+  "controller_mutations": [],
+  "current_active_identity": "UNKNOWN",
+  "date": "2026-10-23",
+  "delegation": {
+    "capability_discovery": "Runtime collaboration tools and repository SUBAGENT_CONTRACTS inspected.",
+    "final_handoff_review": "PENDING",
+    "guidance_applicable": true,
+    "independent_preparation_review": "PASS_FOR_BOUNDED_PREPARATION_ONLY",
+    "native_capability_available": true,
+    "resource_review": "PASS_UNCHANGED_LIMITS",
+    "source_review": "PASS_SOURCE_ONLY"
+  },
+  "firmware_flashed": false,
+  "fixed_candidate_ref": "codex/native-profile-menu-candidate",
+  "fresh_controller_readback": "NOT_PERFORMED_OWNER_COUNT_CORRECTION_RECONCILES_RETAINED_SNAPSHOT",
+  "goal_resume": "Owner corrected count and authorized native-only Ultimate menu;no external goal status mutation to active is available.",
+  "hardware_acceptance": "NOT_TESTED",
+  "initial_semantic_stop": "RESOLVED_BY_DIRECT_OWNER_CLARIFICATION",
+  "kazuya_created": false,
+  "kazuya_gameplay_acceptance": "NOT_TESTED",
+  "live_ref_recheck": "PASS_UNCHANGED_55ab5984f47728db53a12665d685d16cfad39201",
+  "network_capabilities": {
+    "default_probe": "DNS_FAILURE_INCONCLUSIVE",
+    "live_github_requires_network_enabled": true,
+    "permitted_network_enabled_retry": "PASS_EXACT_EXPECTED_REF"
+  },
+  "next_permissible_action": "Return exact independently reviewed packet for owner approval;execute no hardware/controller operation in this task.",
+  "nunchuk": "NOT_TESTED",
+  "original_checkout_preserved": true,
+  "owner_questions": [],
+  "root_cause": "UNPROVEN",
+  "sel_deleted": false,
+  "state": "CANDIDATE_VALIDATED_OWNER_APPROVAL_PENDING",
+  "telemetry": {
+    "canonical_commits": [],
+    "hardware_handoff": "PACKET_PREPARED_REVIEW_PENDING",
+    "hardware_report_to_done_seconds": null,
+    "internal_review_calls": 2,
+    "internal_specialist_calls": 3,
+    "ready_to_hardware_seconds": null,
+    "token_usage": null,
+    "user_visible_chats_created": 0
+  },
+  "workers": [
+    {
+      "deliverable": "source_investigation.json",
+      "id": "menu_semantic_review",
+      "lane": "read-only source authority",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    },
+    {
+      "deliverable": "independent_preparation_review.json",
+      "id": "preparation_review",
+      "lane": "fresh independent preparation review",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    },
+    {
+      "id": "menu_resource_scope",
+      "lane": "read-only mechanical resource/build scope",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6-luna",
+      "state": "retired"
+    },
+    {
+      "id": "menu_source_review",
+      "lane": "fresh independent source review",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    },
+    {
+      "id": "menu_linked_resources",
+      "lane": "independent linked resource proof",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    }
+  ]
+}

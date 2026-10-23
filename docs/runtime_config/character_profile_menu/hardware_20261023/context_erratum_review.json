@@ -1,0 +1,74 @@
+{
+  "packet_id": "CPM-HW-1DE243C7-R2",
+  "supplement_id": "CPM-HW-1DE243C7-R2-E1",
+  "reviewer": "/root/packet_r2_review",
+  "verdict": "PASS_FOR_OWNER_APPROVAL_CONTEXT_CONVERSION_ONLY",
+  "material_findings": [
+    {
+      "priority": 1,
+      "file": "docs/runtime_config/character_profile_menu/OWNER_PACKET.md",
+      "lines": [
+        342,
+        346
+      ],
+      "defect": "SAFE_MODE conflates zero-based Config index required by selection audit and one-based wire context_row compared literally by identity audit. With actual Config index2 and wire row3 the original identity invocation necessarily stops.",
+      "source": "include/core/RuntimeIdentity.hpp:27 sets row=i+1; tools/glyph_runtime_identity_tool.py preserves row; packet_checks.py:206 compares context_row directly to --mode.",
+      "review_accountability": "Original packet review missed this unit mismatch; existing synthetic identity fixture used row2 for Config index2 and did not expose it."
+    }
+  ],
+  "exact_supplemental_scope": "Keep all R2 bytes and original review immutable. For this exact saved XInput identity and corresponding fresh safe-ultimate capture only, set SAFE_MODE_INDEX=2 and SAFE_IDENTITY_WIRE_ROW=3, require SAFE_IDENTITY_WIRE_ROW == SAFE_MODE_INDEX + 1, use selection audit --mode 2 --backend 2 and identity audit --mode 3. Preserve every existing identity, digest, reference, Config and store check. No DELETE until complete fresh safe-ultimate snapshot PASS and both audits PASS. This conversion creates no additional device/mutation/test/merge authority; original approved packet fences continue to apply.",
+  "commands_after_owner_approval": [
+    "SAFE_MODE_INDEX=2",
+    "SAFE_IDENTITY_WIRE_ROW=3",
+    "test \"$SAFE_IDENTITY_WIRE_ROW\" -eq \"$((SAFE_MODE_INDEX + 1))\"",
+    "\"$PY\" \"$CHECK\" compare \"$BEFORE\" \"$CAPTURE/safe-ultimate\" --kind selection --mode \"$SAFE_MODE_INDEX\" --backend 2",
+    "\"$PY\" \"$CHECK\" identity \"$CAPTURE/safe-ultimate\" \"$CAPTURE/safe-ultimate-identity.json\" --mode \"$SAFE_IDENTITY_WIRE_ROW\""
+  ],
+  "exact_file_sha256": {
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/docs/runtime_config/character_profile_menu/OWNER_PACKET.md": "762095c8b6ab92d959f0b8ca40ab6ce78e741652044c00fb61c18351215f55d5",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/docs/runtime_config/character_profile_menu/packet_checks.py": "372dad3f30be30f130219f56b55133852b084c718021aa44d94c119074f4da8a",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/docs/runtime_config/character_profile_menu/packet_final_review.json": "76c8209e73141db5da477eabaa21bfd3f0c8aa50a8e11cb70916264e676de28a",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/include/core/RuntimeIdentity.hpp": "0450362343a148cc647272a7671ae536578caca8edf8ec075dec3db2d139090f",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/include/core/RuntimeIdentityWire.hpp": "f613fcdcb244b00da2d99a24b784784936e0a44fc11c8668ed1da90ed15d1197",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/include/core/RuntimeProfileDigest.hpp": "d882efc236d334e5b8ecb403d1d5c99f8bea0539afa788e267a28ddb7a786ffb",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/tools/glyph_runtime_identity_tool.py": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/include/core/ProfileSelection.hpp": "40bb7799d69f139e9a7ab3eb705853d3e06877e304d840f147e60e7d85542ce4",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/safe-ultimate-identity.json": "9160ff29269c86287774fd6ac7790d662f622ed551c7ee4e5429f1e64c6fd60e",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/reference-2-after/snapshot.json": "729c0770d321f7e89a182b9a96472d094714dbeae74b86b208e0f434d51cdb04",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/reference-2-after/config.json": "6aa6f60062b2c3aedd7f406f6c1992d89a64c331d614b232efce524379232255",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/reference-2-after/read-27.json": "5ada8bd73ba2b9b5b7bbfde0cf79685f0d7f6eae1c72933c294c77345c93741b",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/reference-2-after/status-start.json": "d984bc61fe213cc3922e28c52cf353df6cbdae7d7358cb9d6c264dd7bae89cd4",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/reference-2-after/status-end.json": "d984bc61fe213cc3922e28c52cf353df6cbdae7d7358cb9d6c264dd7bae89cd4",
+    "/tmp/CPM-R2-context-erratum.md": "37f7d5e54cb4f388f3ffa6d864780508c4ef7d6700e02aa1a9383bc964050af3",
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/character_profile_menu_R2.aDS8I26u/CONTEXT_NUMBERING_ERRATUM.md": "37f7d5e54cb4f388f3ffa6d864780508c4ef7d6700e02aa1a9383bc964050af3"
+  },
+  "verified_observations": {
+    "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+    "RuntimeIdentity_header_matches_frozen_candidate": true,
+    "wire_row": 3,
+    "config_index": 2,
+    "identity_context": "xinput",
+    "identity_status": "persisted",
+    "primary_backend": 2,
+    "active_id": 27,
+    "requested_reference": 27,
+    "revision": 1,
+    "schema": 5,
+    "incarnation": 1,
+    "payload_digest": "8bc50b7ff340ae17dd7f3477532594a721f267b115d008cc9dd5fb3f90e372ff",
+    "digest_matches_exact_retained_ID27": true,
+    "reference_after_complete_audit_records": 43,
+    "safe_snapshot_exists": false,
+    "offline_conversion_check": "Original --mode2 rejected; --mode3 passes all existing identity checks against reference-after stage for unit-conversion demonstration only."
+  },
+  "execution_gate": "Fresh complete safe-ultimate snapshot and both audits still REQUIRED; reference-after demonstration is not post-selection preservation proof. No deletion authority is released by this review.",
+  "owner_approval_required": true,
+  "scope_limits": [
+    "No controller/device/network operations, no repository/Git mutation, no firmware build.",
+    "No frozen file changes or hidden fixture amendments.",
+    "No identity field bypass or weaker equality; exact conversion between established source-defined units only.",
+    "No gameplay or hardware acceptance inferred."
+  ],
+  "concrete_erratum_judgment": "PASS: exact drafted supplement corrects unit conversion only, retains raw identity/STOP evidence, requires fresh same-unit full43 safe snapshot and both unchanged audits before resuming original separately guarded operations; no wider authority or frozen-file changes.",
+  "erratum_sha256": "37f7d5e54cb4f388f3ffa6d864780508c4ef7d6700e02aa1a9383bc964050af3"
+}

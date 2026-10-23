@@ -1,0 +1,15 @@
+{
+  "approved_supplement": "CPM-HW-1DE243C7-R2-E1",
+  "candidate_F": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "candidate_source_included": false,
+  "canonical_base": "55ab5984f47728db53a12665d685d16cfad39201",
+  "classification": "DOCS_CHECKER_ONLY_SOURCE_FREE_HANDOFF",
+  "original_reviewed_packet_commit": "a2767d6a0a9241cfdaf50ef6264762b8fb6765d8",
+  "packet_id": "CPM-HW-1DE243C7-R2",
+  "packet_sha256": "762095c8b6ab92d959f0b8ca40ab6ce78e741652044c00fb61c18351215f55d5",
+  "purpose": "Canonical-base source-free mirror of reviewed packet and E1; hardware evidence adoption follows separately, then exact tested source integration",
+  "schema_name": "glyph_character_menu_source_free_handoff",
+  "schema_version": 1,
+  "source_integration": "NOT_PERFORMED",
+  "tree": "5a25a83705a654480b8db805f20822f4d180d70f"
+}
