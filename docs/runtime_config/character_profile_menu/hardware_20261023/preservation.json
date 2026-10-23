@@ -1,0 +1,506 @@
+{
+  "after": {
+    "config_generation": 3121997913,
+    "config_raw_sha256": "4605bfdab7ad705e647dbe30877fa4911192c33d39e1162a26cb233dd9371633",
+    "generation": 218,
+    "high_water": 17293822569102712121,
+    "incarnation": 1,
+    "records": {
+      "1": {
+        "body_sha256": null,
+        "directory_payload_version": 1,
+        "id": 1,
+        "name": "CRUD Primary",
+        "rank": 20,
+        "revision": 2,
+        "schema": 1,
+        "wrapper_sha256": "b5b0f076b5f4bbad97f76ea722281018c3e9cf54355f66efaed54aa1b98dce4d"
+      },
+      "10": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 10,
+        "name": "ACCEPT-10",
+        "rank": 120,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "11": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 11,
+        "name": "ACCEPT-11",
+        "rank": 121,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "12": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 12,
+        "name": "ACCEPT-12",
+        "rank": 122,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "13": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 13,
+        "name": "ACCEPT-13",
+        "rank": 123,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "14": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 14,
+        "name": "ACCEPT-14",
+        "rank": 124,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "15": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 15,
+        "name": "ACCEPT-15",
+        "rank": 125,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "16": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 16,
+        "name": "ACCEPT-16",
+        "rank": 126,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "17": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 17,
+        "name": "ACCEPT-17",
+        "rank": 127,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "18": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 18,
+        "name": "ACCEPT-18",
+        "rank": 128,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "19": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 19,
+        "name": "ACCEPT-19",
+        "rank": 129,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "20": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 20,
+        "name": "ACCEPT-20",
+        "rank": 130,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "21": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 21,
+        "name": "ACCEPT-21",
+        "rank": 131,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "22": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 22,
+        "name": "TX-RENAMED",
+        "rank": 151,
+        "revision": 132,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "24": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 24,
+        "name": "PRODUCTION-ACCEPTANCE-0000000001",
+        "rank": 23,
+        "revision": 2,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "27": {
+        "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+        "directory_payload_version": 5,
+        "id": 27,
+        "name": "Ultimate",
+        "rank": 0,
+        "revision": 1,
+        "schema": 5,
+        "wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b"
+      },
+      "3": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 3,
+        "name": "Migrated 1",
+        "rank": 0,
+        "revision": 5,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "4": {
+        "body_sha256": null,
+        "directory_payload_version": 1,
+        "id": 4,
+        "name": "Migrated 2",
+        "rank": 1,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "48": {
+        "body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+        "directory_payload_version": 5,
+        "id": 48,
+        "name": "Kazuya",
+        "rank": 2,
+        "revision": 1,
+        "schema": 5,
+        "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8"
+      },
+      "5": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 5,
+        "name": "ACCEPT-01",
+        "rank": 100,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "6": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 6,
+        "name": "12345678901234567890123456789012",
+        "rank": 110,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "7": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 7,
+        "name": "123456789012345678",
+        "rank": 111,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "8": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 8,
+        "name": "12345678901234567890123456789012",
+        "rank": 112,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "9": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 9,
+        "name": "12345678901234567890123456789012",
+        "rank": 113,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      }
+    }
+  },
+  "before": {
+    "config_generation": 3121997913,
+    "config_raw_sha256": "4605bfdab7ad705e647dbe30877fa4911192c33d39e1162a26cb233dd9371633",
+    "generation": 218,
+    "high_water": 17293822569102712121,
+    "incarnation": 1,
+    "records": {
+      "1": {
+        "body_sha256": null,
+        "directory_payload_version": 1,
+        "id": 1,
+        "name": "CRUD Primary",
+        "rank": 20,
+        "revision": 2,
+        "schema": 1,
+        "wrapper_sha256": "b5b0f076b5f4bbad97f76ea722281018c3e9cf54355f66efaed54aa1b98dce4d"
+      },
+      "10": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 10,
+        "name": "ACCEPT-10",
+        "rank": 120,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "11": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 11,
+        "name": "ACCEPT-11",
+        "rank": 121,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "12": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 12,
+        "name": "ACCEPT-12",
+        "rank": 122,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "13": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 13,
+        "name": "ACCEPT-13",
+        "rank": 123,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "14": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 14,
+        "name": "ACCEPT-14",
+        "rank": 124,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "15": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 15,
+        "name": "ACCEPT-15",
+        "rank": 125,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "16": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 16,
+        "name": "ACCEPT-16",
+        "rank": 126,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "17": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 17,
+        "name": "ACCEPT-17",
+        "rank": 127,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "18": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 18,
+        "name": "ACCEPT-18",
+        "rank": 128,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "19": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 19,
+        "name": "ACCEPT-19",
+        "rank": 129,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "20": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 20,
+        "name": "ACCEPT-20",
+        "rank": 130,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "21": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 21,
+        "name": "ACCEPT-21",
+        "rank": 131,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "22": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 22,
+        "name": "TX-RENAMED",
+        "rank": 151,
+        "revision": 132,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "24": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 24,
+        "name": "PRODUCTION-ACCEPTANCE-0000000001",
+        "rank": 23,
+        "revision": 2,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "27": {
+        "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+        "directory_payload_version": 5,
+        "id": 27,
+        "name": "Ultimate",
+        "rank": 0,
+        "revision": 1,
+        "schema": 5,
+        "wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b"
+      },
+      "3": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 3,
+        "name": "Migrated 1",
+        "rank": 0,
+        "revision": 5,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "4": {
+        "body_sha256": null,
+        "directory_payload_version": 1,
+        "id": 4,
+        "name": "Migrated 2",
+        "rank": 1,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4"
+      },
+      "48": {
+        "body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+        "directory_payload_version": 5,
+        "id": 48,
+        "name": "Kazuya",
+        "rank": 2,
+        "revision": 1,
+        "schema": 5,
+        "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8"
+      },
+      "5": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 5,
+        "name": "ACCEPT-01",
+        "rank": 100,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "6": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 6,
+        "name": "12345678901234567890123456789012",
+        "rank": 110,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "7": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 7,
+        "name": "123456789012345678",
+        "rank": 111,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "8": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 8,
+        "name": "12345678901234567890123456789012",
+        "rank": 112,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      },
+      "9": {
+        "body_sha256": null,
+        "directory_payload_version": 3,
+        "id": 9,
+        "name": "12345678901234567890123456789012",
+        "rank": 113,
+        "revision": 1,
+        "schema": 3,
+        "wrapper_sha256": "ee5bad071a429317ffd4bc16b44807463c16e0d9d5fc865000c2c50db688a00b"
+      }
+    }
+  },
+  "initial_comparison_anomaly": "Initial host checker incorrectly required USB Switch as final USB default; actual raw Config unchanged. Retained failure log; owner reports return through XInput menu then Configurator. No controller anomaly, repair, retry or extra writer occurred.",
+  "method": "Unchanged reviewed packet_checks.py full snapshot audit plus compare --kind preserve; all snapshot fields equal",
+  "protocol": "production2/mutation2; Configurator identity dedicated protocol1/backend8",
+  "result": "PASS",
+  "scope": "API Config/profile preservation, not raw filesystem forensic proof",
+  "strict_audit_log": "PASS preserve\n"
+}

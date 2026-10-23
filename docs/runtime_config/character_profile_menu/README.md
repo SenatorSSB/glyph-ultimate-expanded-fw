@@ -1,6 +1,8 @@
 # Native character profile menu — exact candidate and unexecuted installation
 
-Status: **CANDIDATE_VALIDATED — OWNER_APPROVED_HARDWARE_OPERATION_PENDING**.
+Current: **HARDWARE_VALIDATED — EXACT TESTED SOURCE INTEGRATION PENDING**.
+See [three-route hardware acceptance](hardware_20261023/README.md).
+Historical preparation sections and frozen CANDIDATE.json retain creation-time facts.
 The owner corrected the runtime-label count to **two** and explicitly chose to
 hide built-in/legacy Ultimate choices in compact mode, retaining their execution
 contexts. [Direct authority and bounded order](OWNER_DIRECTIVE.md) resolves the

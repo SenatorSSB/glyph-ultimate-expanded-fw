@@ -1,0 +1,207 @@
+{
+  "packet_id": "CPM-HW-1DE243C7-R2",
+  "supplement": "CPM-HW-1DE243C7-R2-E1",
+  "time_utc": "2026-10-23T20:10:36.895345+00:00",
+  "execution_state": "APPROVED_EXECUTION_COMPLETE_XINPUT_SCOPE_STOP_BEFORE_KAZUYA_ACTIVATION",
+  "firmware_copy": "OWNER_REPORTED_EXACT_COPY",
+  "postflash_preservation": "PASS_COMPLETE_CONFIG_ALL43_RECORDS",
+  "safe_selection_audits": "PASS_WITH_E1_ROW_CONVERSION",
+  "set_reference": {
+    "mode_index": 2,
+    "profile_id": 27,
+    "store_delta": 0,
+    "audit": "PASS"
+  },
+  "deleted": [
+    {
+      "id": 28,
+      "name": "SEL01",
+      "audit": "PASS",
+      "receipt": "delete-28.request.json"
+    },
+    {
+      "id": 29,
+      "name": "SEL02",
+      "audit": "PASS",
+      "receipt": "delete-29.request.json"
+    },
+    {
+      "id": 30,
+      "name": "SEL03",
+      "audit": "PASS",
+      "receipt": "delete-30.request.json"
+    },
+    {
+      "id": 31,
+      "name": "SEL04",
+      "audit": "PASS",
+      "receipt": "delete-31.request.json"
+    },
+    {
+      "id": 32,
+      "name": "SEL05",
+      "audit": "PASS",
+      "receipt": "delete-32.request.json"
+    },
+    {
+      "id": 33,
+      "name": "SEL06",
+      "audit": "PASS",
+      "receipt": "delete-33.request.json"
+    },
+    {
+      "id": 34,
+      "name": "SEL07",
+      "audit": "PASS",
+      "receipt": "delete-34.request.json"
+    },
+    {
+      "id": 35,
+      "name": "SEL08",
+      "audit": "PASS",
+      "receipt": "delete-35.request.json"
+    },
+    {
+      "id": 36,
+      "name": "SEL09",
+      "audit": "PASS",
+      "receipt": "delete-36.request.json"
+    },
+    {
+      "id": 37,
+      "name": "SEL10",
+      "audit": "PASS",
+      "receipt": "delete-37.request.json"
+    },
+    {
+      "id": 38,
+      "name": "SEL11",
+      "audit": "PASS",
+      "receipt": "delete-38.request.json"
+    },
+    {
+      "id": 39,
+      "name": "SEL12",
+      "audit": "PASS",
+      "receipt": "delete-39.request.json"
+    },
+    {
+      "id": 40,
+      "name": "SEL13",
+      "audit": "PASS",
+      "receipt": "delete-40.request.json"
+    },
+    {
+      "id": 41,
+      "name": "SEL14",
+      "audit": "PASS",
+      "receipt": "delete-41.request.json"
+    },
+    {
+      "id": 42,
+      "name": "SEL15",
+      "audit": "PASS",
+      "receipt": "delete-42.request.json"
+    },
+    {
+      "id": 43,
+      "name": "SEL16",
+      "audit": "PASS",
+      "receipt": "delete-43.request.json"
+    },
+    {
+      "id": 44,
+      "name": "SEL17",
+      "audit": "PASS",
+      "receipt": "delete-44.request.json"
+    },
+    {
+      "id": 45,
+      "name": "SEL18",
+      "audit": "PASS",
+      "receipt": "delete-45.request.json"
+    },
+    {
+      "id": 46,
+      "name": "SEL19",
+      "audit": "PASS",
+      "receipt": "delete-46.request.json"
+    },
+    {
+      "id": 47,
+      "name": "SEL20",
+      "audit": "PASS",
+      "receipt": "delete-47.request.json"
+    }
+  ],
+  "create": {
+    "id": 48,
+    "name": "Kazuya",
+    "revision": 1,
+    "rank": 2,
+    "audit": "PASS",
+    "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8",
+    "native_body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405"
+  },
+  "preservation": {
+    "all_non_SEL_preexisting_records": "EXACT",
+    "Ultimate_ID27": "EXACT",
+    "Config": "UNCHANGED_FROM_SAFE_CHECKPOINT",
+    "no_SEL_or_dangling_references": true,
+    "store_healthy": true,
+    "recovery_flags_clear": true,
+    "store_generation_before": 197,
+    "store_generation_after": 218,
+    "successful_store_mutations": 21,
+    "Config_generation_behavior": "ACTUAL_RAW_CRC_CHECKED_NO_ARITHMETIC_ASSUMPTION"
+  },
+  "records_now": 24,
+  "kazuya_activation": "NOT_PERFORMED",
+  "kazuya_gameplay": "NOT_TESTED",
+  "menu_hardware_acceptance": {
+    "XInput": "OWNER_REPORTED_PASS",
+    "visible_entries": [
+      "Ultimate",
+      "Kazuya"
+    ],
+    "other_entries": "NONE_REPORTED",
+    "scrolling": "OWNER_REPORTED_PASS",
+    "Ultimate_selection_and_reboot": "OWNER_REPORTED_PASS",
+    "reconnect_persistence": "OWNER_REPORTED_PASS",
+    "Kazuya_selected": "OWNER_REPORTED_NO",
+    "GameCube": "NOT_TESTED_THIS_CANDIDATE",
+    "USB_Nintendo_Switch": "NOT_TESTED_THIS_CANDIDATE"
+  },
+  "next_action": "STOP. No subsequent Kazuya activation/gameplay or source merge authorized by this packet.",
+  "post_menu_XInput_identity": {
+    "result": "PASS_ACTIVE_ID27_EXACT",
+    "file": "menu-ultimate-identity.json",
+    "wire_context_row": 3,
+    "Config_index": 2
+  },
+  "final_preservation": {
+    "result": "PASS",
+    "all24_records": "EXACT_TO_AFTER_CREATE",
+    "store_generation": 218,
+    "transaction_high_water": 17293822569102712121,
+    "incarnation": 1,
+    "Config_crc": 3121997913,
+    "Config_raw_sha256": "4605bfdab7ad705e647dbe30877fa4911192c33d39e1162a26cb233dd9371633",
+    "Config_comparison": "PASS_ONLY_APPROVED_NORMAL_ULTIMATE_SELECTION_FIELDS",
+    "healthy_recovery_clear_no_dangling_reference": true,
+    "Kazuya_exact": "PASS",
+    "Ultimate_exact": "PASS"
+  },
+  "final_normal_boot": {
+    "source": "DIRECT_OWNER_REPORT_IN_CHAT",
+    "route": "XInput",
+    "profile": "Ultimate",
+    "normal_boot": "CONFIRMED",
+    "buttons": "OWNER_REPORTED_ALL_LOOKS_NORMAL",
+    "Kazuya_selected": false
+  },
+  "final_gameplay_profile": "Ultimate_ID27",
+  "additional_controller_operations": "NONE_AFTER_FINAL_PRESERVATION",
+  "canonical_merge": "NOT_PERFORMED_NOT_AUTHORIZED",
+  "hardware_scope": "Exact candidate XInput menu/storage preservation only; GameCube and USB Nintendo Switch NOT_TESTED for this candidate"
+}

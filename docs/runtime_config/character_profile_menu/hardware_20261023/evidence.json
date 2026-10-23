@@ -1,0 +1,101 @@
+{
+  "Kazuya_activation_during_this_task": "NO",
+  "Kazuya_gameplay_acceptance": "NOT_TESTED",
+  "Kazuya_stored_profile": {
+    "id": 48,
+    "name": "Kazuya",
+    "native_body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+    "rank": 2,
+    "revision": 1,
+    "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8"
+  },
+  "Nunchuk": "NOT_TESTED",
+  "UF2": {
+    "adoption_rehash": "PASS_O_NOFOLLOW",
+    "bytes": 1046016,
+    "identity_protocol_limit": "Runtime identity does not attest Git SHA/UF2",
+    "installation": "OWNER_REPORTED_SINGLE_EXACT_MANUAL_UF2_COPY_NORMAL_REBOOT",
+    "locator": "local_backups/hardware-artifacts/1de243c7bada73ba85843018058b4f66a06acdda/a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b/firmware.uf2",
+    "preinstallation_rehash": "PASS_O_NOFOLLOW",
+    "sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b"
+  },
+  "anomalies": [
+    {
+      "disposition": "Original STOP retained; source-proven E1 conversion independently reviewed and explicitly approved; frozen R2 unchanged",
+      "kind": "ORIGINAL_PACKET_HOST_ROW_NUMBERING"
+    },
+    {
+      "disposition": "No command sent; later fresh same-unit endpoint matched",
+      "kind": "NO_CONFIGURATOR_ENDPOINT_INITIAL_LOOKUP"
+    },
+    {
+      "disposition": "Strict preservation PASS: raw Config unchanged; owner returned via XInput menu after initial RT2 attempt; no controller/storage anomaly or repair",
+      "kind": "HOST_EXPECTED_FINAL_USB_DESTINATION_OVERCONSTRAINT"
+    }
+  ],
+  "buttons_modifiers": "Owner says normal on Ultimate on both newly tested backend routes; no Kazuya semantics inferred",
+  "candidate_F": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "candidate_tree": "5a25a83705a654480b8db805f20822f4d180d70f",
+  "chapter": "character_profile_menu",
+  "classification": "SOURCE_FREE_HARDWARE_EVIDENCE",
+  "controller_writes_this_route_task": "NONE_BY_AGENT_NORMAL_OWNER_MENU_SELECTIONS_ONLY",
+  "every_route_checks": [
+    "normal boot",
+    "only Ultimate then Kazuya native entries",
+    "no Ultimate Runtime labels",
+    "no SEL entries",
+    "scrolling and responsiveness",
+    "Ultimate-only selection and committed reboot",
+    "ordinary controller responsiveness",
+    "reopened correct list"
+  ],
+  "evidence_gap_list": [],
+  "historical_GameCube_liveness": "SEPARATE_UNCHANGED_EVIDENCE",
+  "original_packet_commit": "a2767d6a0a9241cfdaf50ef6264762b8fb6765d8",
+  "owner_authority": "OWNER_CONTINUATION.json",
+  "preservation": {
+    "ID27": "EXACT",
+    "ID48": "EXACT_CANONICAL_KAZUYA",
+    "SEL": "ABSENT",
+    "after_authorized_cleanup_create": "PASS24_RECORDS",
+    "all_non_SEL_originals": "EXACT",
+    "incarnation": 1,
+    "no_dangling_references": true,
+    "post_all_routes": "PASS_BYTE_EXACT_CONFIG_ALL24_RECORDS_AND_STORE_FENCES",
+    "preflash_postflash": "PASS_CONFIG_AND_ALL43",
+    "record": "preservation.json",
+    "store_generation": 218,
+    "store_healthy_recovery_clear": true,
+    "token_high_water": 17293822569102712121
+  },
+  "result": "PASS",
+  "review": "independent_hardware_review.json",
+  "root_cause": "UNPROVEN",
+  "routes": {
+    "GameCube": {
+      "evidence": "GameCube_owner_report.json",
+      "observations": "OWNER_OBSERVED_NORMAL_SWITCH_GC_ADAPTER",
+      "raw_runtime_identity": "NOT_OBSERVED_NOT_INFERRED",
+      "result": "PASS"
+    },
+    "USB_Nintendo_Switch": {
+      "evidence": "USB_Nintendo_Switch_owner_report.json",
+      "observations": "OWNER_OBSERVED_ESTABLISHED_USB_BACKEND",
+      "raw_runtime_identity": "NOT_OBSERVED_NOT_INFERRED",
+      "result": "PASS"
+    },
+    "XInput": {
+      "active_ID27": "EXACT_SOURCE_SUPPORTED_RUNTIME_IDENTITY",
+      "evidence": "prior_execution.json",
+      "observations": "OWNER_REPORTED_PASS",
+      "result": "PASS"
+    }
+  },
+  "schema_name": "glyph_character_menu_hardware_acceptance",
+  "schema_version": 1,
+  "scope": "Menu visibility and Ultimate-only selector/reboot/responsiveness on XInput, normal GameCube Switch/GC adapter route and USB Nintendo Switch, with full API preservation; no Kazuya gameplay",
+  "source_free_handoff_R": "b954070214251ab61d4f703aab4902dfbcff36b7",
+  "source_integration": "NOT_PERFORMED_AT_E",
+  "state": "HARDWARE_VALIDATED",
+  "target_electrical_timing_highwater": "NOT_MEASURED"
+}

@@ -1,0 +1,22 @@
+{
+  "route": "GameCube",
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "UF2_sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+  "time_utc": "2026-10-23T20:15:51.967947+00:00",
+  "outcome": "PASS",
+  "evidence_kind": "DIRECT_OWNER_OBSERVATION_IN_CHAT",
+  "owner_report": "GameCube checks pass: menu shows only Ultimate and Kazuya, scrolling works, Ultimate selection/reboot works, controller stays responsive, and the list is correct after reopening. Kazuya not selected.",
+  "visible_entries": [
+    "Ultimate",
+    "Kazuya"
+  ],
+  "scrolling": "PASS_OWNER_REPORTED",
+  "Ultimate_selection_reboot": "PASS_OWNER_REPORTED",
+  "controller_responsiveness": "PASS_OWNER_REPORTED",
+  "list_after_reopening": "PASS_OWNER_REPORTED",
+  "Kazuya_selected": false,
+  "raw_GameCube_runtime_identity": "NOT_OBSERVED_NOT_INFERRED",
+  "Kazuya_gameplay": "NOT_TESTED",
+  "final_preservation": "PENDING",
+  "integration": "GATED_USB_SWITCH_AND_FINAL_PRESERVATION"
+}

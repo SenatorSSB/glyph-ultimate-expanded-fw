@@ -1,5 +1,20 @@
 # Glyph Current State
 
+## Character-profile menu hardware validated
+
+Exact menu candidate `1de243c7bada73ba85843018058b4f66a06acdda`, UF2 SHA256
+`a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b` /1046016bytes
+is HARDWARE_VALIDATED for XInput, owner-observed normal GameCube/GC-adapter and
+USB Nintendo Switch menu/Ultimate-only selection/reboot. Final Config/all24
+records and store fences are exact. Menu is Ultimate then Kazuya; ID27 unchanged,
+canonical Kazuya stored as ID48 but unselected, gameplay NOT_TESTED.
+[Source-free hardware evidence](runtime_config/character_profile_menu/hardware_20261023/README.md)
+preserves route reports, R2/E1 and independent review. Tested source integration
+is still PENDING in this snapshot; no rebuild, new flash or cleanup.
+This owner-directed chapter changes no historical GP-NATIVE queue adjudication.
+Earlier43-record/SEL checkpoints below describe their original times.
+
+
 ## Character-independent native authoring v1 — 2026-10-23
 
 The owner-authorized [offline v1 authoring format](../profiles/README.md) adds
