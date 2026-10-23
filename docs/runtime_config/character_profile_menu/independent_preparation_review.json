@@ -1,0 +1,24 @@
+{
+  "agent": "/root/preparation_review",
+  "base": "55ab5984f47728db53a12665d685d16cfad39201",
+  "material_findings": [],
+  "observed_effort": "UNKNOWN",
+  "observed_model": "UNKNOWN",
+  "remaining_gates": [
+    "fresh controller diagnosis",
+    "explicit menu policy",
+    "subsequent exact candidate-specific validation/review/build/resource/custody/hardware gates if source changes"
+  ],
+  "requested_effort": "medium",
+  "requested_model": "gpt-6.1-sol",
+  "role": "fresh_independent_preparation_reviewer",
+  "verdict": "PASS_FOR_BOUNDED_PREPARATION_ONLY",
+  "verified": [
+    "Retained Config/status and all21 native wrapper/body identities match original private evidence.",
+    "All20 SEL wrappers match original fixtures.",
+    "Delivered Kazuya hashes and compile report match canonical evidence.",
+    "Semantic stop justified: engine0 supported legacy/fallback;engine1 already hidden.",
+    "Three reported visible labels versus two predicted remains unresolved.",
+    "Packet non-actionable for mutations;no firmware candidate/controller operation/hardware acceptance established."
+  ]
+}

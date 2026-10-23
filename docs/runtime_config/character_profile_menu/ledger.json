@@ -1,0 +1,87 @@
+{
+  "active_firmware_changed": false,
+  "authority": {
+    "exclusions": [
+      "controller mutations",
+      "flashing",
+      "Kazuya gameplay semantics",
+      "hardware acceptance inference"
+    ],
+    "kind": "direct_owner_objective_file",
+    "path": "/Users/rasmus.pekkarinen/.codex/attachments/a1e4fe97-db94-482d-bc91-c75b87ba2594/goal-objective.md",
+    "scope": "diagnosis;conditional menu-only implementation;exact unchanged Kazuya compilation;unexecuted cleanup/install packet",
+    "sha256": "f06b6060e57267c010b08c16039f367686d93d26a60d011d93993b097a3391b9"
+  },
+  "base_live_configurator": "55ab5984f47728db53a12665d685d16cfad39201",
+  "blocked_work": [
+    "source fix pending exact diagnosis and semantic policy",
+    "candidate build/resource/source review",
+    "final actionable hardware packet"
+  ],
+  "branch": "codex/native-profile-menu-cleanup",
+  "canonical_merge": false,
+  "canonical_publication_lock": "NOT_ACQUIRED_NO_CANONICAL_PUBLICATION",
+  "chapter": "character_profile_menu",
+  "classification": "INACTIVE_GENERATOR_OR_FIXTURE",
+  "controller_mutations": [],
+  "current_active_identity": "UNKNOWN",
+  "date": "2026-10-23",
+  "delegation": {
+    "capability_discovery": "Runtime collaboration tools and repository SUBAGENT_CONTRACTS inspected.",
+    "guidance_applicable": true,
+    "independent_preparation_review": "PASS_FOR_BOUNDED_PREPARATION_ONLY",
+    "native_capability_available": true
+  },
+  "firmware_flashed": false,
+  "fresh_controller_readback": "NOT_AVAILABLE_NO_USB_SERIAL_ENDPOINT",
+  "kazuya_created": false,
+  "kazuya_gameplay_acceptance": "NOT_TESTED",
+  "live_ref_recheck": "PASS_UNCHANGED_55ab5984f47728db53a12665d685d16cfad39201",
+  "network_capabilities": {
+    "default_probe": "DNS_FAILURE_INCONCLUSIVE",
+    "live_github_requires_network_enabled": true,
+    "permitted_network_enabled_retry": "PASS_EXACT_EXPECTED_REF"
+  },
+  "next_permissible_action": "Owner answers diagnosis/policy questions;read-only current Config and identity if available. No mutation approval requested yet.",
+  "nunchuk": "NOT_TESTED",
+  "original_checkout_preserved": true,
+  "owner_questions": [
+    "Make known controller available in Configurator mode for authorized read-only diagnosis.",
+    "Explicitly choose whether compact-mode Ultimate menu hides legitimate built-in/legacy choices too."
+  ],
+  "root_cause": "UNPROVEN",
+  "sel_deleted": false,
+  "state": "DIAGNOSIS_AND_PRODUCT_DECISION_GATED",
+  "telemetry": {
+    "canonical_commits": [],
+    "hardware_handoff": "NOT_READY",
+    "hardware_report_to_done_seconds": null,
+    "internal_review_calls": 1,
+    "internal_specialist_calls": 1,
+    "ready_to_hardware_seconds": null,
+    "token_usage": null,
+    "user_visible_chats_created": 0
+  },
+  "workers": [
+    {
+      "deliverable": "source_investigation.json",
+      "id": "menu_semantic_review",
+      "lane": "read-only source authority",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    },
+    {
+      "deliverable": "independent_preparation_review.json",
+      "id": "preparation_review",
+      "lane": "fresh independent preparation review",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    }
+  ]
+}

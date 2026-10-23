@@ -1,0 +1,47 @@
+{
+  "agent": "/root/menu_semantic_review",
+  "base": "55ab5984f47728db53a12665d685d16cfad39201",
+  "device_operations": [],
+  "edits": false,
+  "findings": [
+    {
+      "finding": "Engine0 explicitly denotes legacy/source fallback;compact format does not mean native engine.",
+      "source": "schema/haybox/config.proto:784"
+    },
+    {
+      "finding": "Compact Config permits engine0 built-in and stable legacy references.",
+      "source": "src/core/config_validation.cpp:366"
+    },
+    {
+      "finding": "Migration preserves legacy rows using stable IDs without making engine1 native templates.",
+      "source": "HAL/pico/src/core/ProfileStore.cpp:1869"
+    },
+    {
+      "finding": "Only compact MODE_ULTIMATE engine1 rows are hidden native templates;other eligible rows remain ordinary menu targets.",
+      "source": "src/core/profile_selection.cpp:32"
+    },
+    {
+      "finding": "Persist uses NativeTemplate plus backend eligibility and exact preprocessing ContextMatches;do not widen NativeTemplate for menu visibility.",
+      "source": "include/core/ProfileSelection.hpp:47"
+    },
+    {
+      "finding": "Compact boot activation supports both native and legacy/source Ultimate rows.",
+      "source": "src/core/mode_selection.cpp:126"
+    },
+    {
+      "finding": "Engine0 null/legacy profile selects supported Legacy execution.",
+      "source": "src/modes/Ultimate.cpp:782"
+    },
+    {
+      "finding": "Keep regression refusing engine0 rows as native templates.",
+      "source": "tools/fixtures/controller_profile_selector/selection_persistence.cpp:74"
+    },
+    {
+      "finding": "Historical selector authority preserved legitimate legacy and built-in Ultimate choices;new policy can explicitly supersede that visibility choice.",
+      "source": "docs/runtime_config/controller_profile_selector/owner_directive_20261022.md:370"
+    }
+  ],
+  "minimum_next_decision": "Explicitly hide legitimate engine0 Ultimate choices too, or supply a semantic internal-row designation. Also reconcile current Config/firmware versus reported three labels.",
+  "result": "SEMANTIC_STOP_FOR_BLANKET_COMPACT_ULTIMATE_INFRASTRUCTURE_CLASSIFICATION",
+  "role": "bounded_read_only_source_authority_specialist"
+}

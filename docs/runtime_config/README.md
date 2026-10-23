@@ -2,6 +2,10 @@
 
 Status label: CURRENT.
 
+[Character profile menu preparation](character_profile_menu/README.md) records
+retained Config diagnosis, the unresolved legacy/native menu distinction, exact
+Kazuya compile identities and an unexecuted, non-actionable cleanup/install draft.
+
 This directory contains runtime-config design, evidence, fixtures, and checker
 contracts. Read the current boundary first; use archived diagnostics only when
 you need the supporting evidence.

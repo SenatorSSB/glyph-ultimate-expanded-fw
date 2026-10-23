@@ -1,0 +1,161 @@
+{
+  "backend_configs": [
+    {
+      "backendId": "COMMS_BACKEND_XINPUT",
+      "defaultModeConfig": 3
+    },
+    {
+      "backendId": "COMMS_BACKEND_GAMECUBE",
+      "defaultModeConfig": 3
+    },
+    {
+      "activationBinding": [
+        "BTN_RT2"
+      ],
+      "backendId": "COMMS_BACKEND_CONFIGURATOR",
+      "defaultModeConfig": 1
+    },
+    {
+      "backendId": "COMMS_BACKEND_NINTENDO_SWITCH",
+      "defaultModeConfig": 3
+    }
+  ],
+  "captured_at_utc": "2026-10-22T22:09:38.885589+00:00",
+  "current_serial_port_inventory": [
+    "/dev/cu.Bluetooth-Incoming-Port",
+    "/dev/cu.debug-console"
+  ],
+  "defaultBackendConfig": 2,
+  "defaultUsbBackendConfig": 1,
+  "discrepancy": "UNRESOLVED_REQUIRES_FRESH_CONFIG_AND_RUNNING_FIRMWARE_IDENTITY",
+  "fresh_active_identity": "UNKNOWN",
+  "json_snapshot_sha256": "60a23b04b0d512db2a831e0bb001e64c32a4ff61ff6f6ad1b3aac35e8fcc6de9",
+  "owner_reported_runtime_labels": 3,
+  "predicted_runtime_labels_in_current_menu": 2,
+  "provenance": "local_backups/hardware-acceptance/GP_NATIVE_002_GC_LIVENESS_HW_V1_20261023/posttest_configurator/config_backup.json",
+  "raw_config_bytes": 277,
+  "raw_config_sha256": "65ecdcf32ecc4d0ce99edbc9a6b29aa99186ce1cd0c217d626764659d54e71dd",
+  "rows": [
+    {
+      "activationBinding": [],
+      "applicableBackends": [],
+      "buttonRemapping": [
+        {
+          "activates": "BTN_RF3",
+          "physicalButton": "BTN_RF3"
+        },
+        {
+          "activates": "BTN_RF4",
+          "physicalButton": "BTN_RF4"
+        },
+        {
+          "activates": "BTN_LT3",
+          "physicalButton": "BTN_LT3"
+        }
+      ],
+      "current_source_visible_for_gameplay_backend": true,
+      "default_backend_references": [
+        "COMMS_BACKEND_CONFIGURATOR"
+      ],
+      "modeId": "MODE_ULTIMATE",
+      "name": "Ultimate Runtime",
+      "native_template_usable_by_Persist": false,
+      "row_index_zero_based": 0,
+      "socdPairs": [],
+      "ultimateProfileConfig": 0,
+      "ultimateProfileEngine": 0,
+      "ultimateProfileId": 0
+    },
+    {
+      "activationBinding": [],
+      "applicableBackends": [],
+      "buttonRemapping": [
+        {
+          "activates": "BTN_RF3",
+          "physicalButton": "BTN_RF3"
+        },
+        {
+          "activates": "BTN_RF4",
+          "physicalButton": "BTN_RF4"
+        },
+        {
+          "activates": "BTN_LT3",
+          "physicalButton": "BTN_LT3"
+        }
+      ],
+      "current_source_visible_for_gameplay_backend": true,
+      "default_backend_references": [],
+      "modeId": "MODE_ULTIMATE",
+      "name": "Ultimate Runtime",
+      "native_template_usable_by_Persist": false,
+      "row_index_zero_based": 1,
+      "socdPairs": [],
+      "ultimateProfileConfig": 0,
+      "ultimateProfileEngine": 0,
+      "ultimateProfileId": 3
+    },
+    {
+      "activationBinding": [],
+      "applicableBackends": [],
+      "buttonRemapping": [
+        {
+          "activates": "BTN_RF3",
+          "physicalButton": "BTN_RF3"
+        },
+        {
+          "activates": "BTN_RF4",
+          "physicalButton": "BTN_RF4"
+        },
+        {
+          "activates": "BTN_LT3",
+          "physicalButton": "BTN_LT3"
+        }
+      ],
+      "current_source_visible_for_gameplay_backend": false,
+      "default_backend_references": [
+        "COMMS_BACKEND_XINPUT",
+        "COMMS_BACKEND_GAMECUBE",
+        "COMMS_BACKEND_NINTENDO_SWITCH"
+      ],
+      "modeId": "MODE_ULTIMATE",
+      "name": "Ultimate Runtime",
+      "native_template_usable_by_Persist": true,
+      "row_index_zero_based": 2,
+      "socdPairs": [
+        {
+          "buttonDir1": "BTN_LF3",
+          "buttonDir2": "BTN_LF1",
+          "socdType": "SOCD_2IP"
+        },
+        {
+          "buttonDir1": "BTN_LF5",
+          "buttonDir2": "BTN_LF2",
+          "socdType": "SOCD_2IP"
+        }
+      ],
+      "ultimateProfileConfig": 0,
+      "ultimateProfileEngine": 1,
+      "ultimateProfileId": 28
+    }
+  ],
+  "scope": "RETAINED_API_SNAPSHOT_NOT_FRESH_CONTROLLER_VERIFICATION",
+  "status_snapshot": {
+    "admissible_profiles": 30,
+    "config_generation": "3717489385",
+    "filesystem_block_bytes": 4096,
+    "filesystem_free_bytes": "266240",
+    "filesystem_program_bytes": 256,
+    "filesystem_total_bytes": "524288",
+    "filesystem_used_bytes": "258048",
+    "mutation_feasible": true,
+    "mutation_protocol_version": 2,
+    "protected_bytes": "282624",
+    "protocol_version": 2,
+    "reserved_bytes": "16384",
+    "staging_bytes": "45056",
+    "status": "PROFILE_STORE_OK",
+    "store_generation": "197",
+    "store_incarnation": 1,
+    "transaction_token_high_water": "17293822569102712099"
+  }
+}

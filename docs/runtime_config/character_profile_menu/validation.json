@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "command": "python3 tools/glyph_native_profile_json.py validate profiles/kazuya/Kazuya.profile.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tools/glyph_native_profile_json.py compile profiles/kazuya/Kazuya.profile.json --output /tmp/Kazuya.pb",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tools/glyph_native_profile_json.py compile profiles/kazuya/Kazuya.profile.json --format protobuf-json --output /tmp/Kazuya.protobuf.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tools/glyph_native_profile_json.py report profiles/kazuya/Kazuya.profile.json --output /tmp/Kazuya.report.json",
+      "result": "PASS"
+    },
+    {
+      "command": "Offline assertions: exact report equality to tools/fixtures/kazuya/compile-report.json;production protobuf-JSON roundtrip equals binary wrapper;wrapper/body hashes",
+      "result": "PASS"
+    },
+    {
+      "command": "Offline retained snapshot assertions: Config277-byte hash;43 entries;ID27 golden;20 exact SEL name/ID/schema/revision/rank/wrapper/body and original fixture lineage",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 tools/check_glyph_docs_navigation.py",
+      "result": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    },
+    {
+      "command": "All delivered JSON parse;planned conditional deletion identities/count",
+      "result": "PASS"
+    },
+    {
+      "command": "git diff --name-only 55ab5984 -- src include HAL config schema profiles tools",
+      "result": "EMPTY_NO_SOURCE_CHANGES"
+    }
+  ],
+  "classification": "OFFLINE_PREPARATION_ONLY",
+  "firmware_build": "NOT_RUN_NO_FIRMWARE_CHANGE",
+  "full_aggregate": "NOT_RUN_NOT_CLAIMED",
+  "hardware": "NOT_TESTED",
+  "resource_proof": "NO_NEW_CANDIDATE",
+  "review": "independent_preparation_review.json"
+}
