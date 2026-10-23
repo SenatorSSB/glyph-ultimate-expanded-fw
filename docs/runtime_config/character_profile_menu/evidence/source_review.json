@@ -1,0 +1,23 @@
+{
+  "agent": "/root/menu_source_review",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "medium",
+  "observed_model": "UNKNOWN",
+  "observed_effort": "UNKNOWN",
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "verdict": "PASS_SOURCE_ONLY",
+  "material_findings": [],
+  "reviewed_sha256": {
+    "src/core/profile_selection.cpp": "4483f46b3e5b78ef70016a51769f62f7595953b454bae653ac02d01155098da5",
+    "tools/fixtures/controller_profile_selector/metadata_menu.cpp": "1881ba4d785641e710cdb6f475d9b29f36d1936569755bfd8e04f6ed91b73e73",
+    "tools/fixtures/controller_profile_selector/selection_persistence.cpp": "3f04fee9396653af4c65c2f134479443f87c02475286baf8917d6872dd12a1d7"
+  },
+  "findings": [
+    "Compact MODE_ULTIMATE rows hidden independent of name/engine as authorized.",
+    "NativeTemplate/Persist/ContextMatches/backend gates/boot/persistence remain unchanged.",
+    "Only eligible engine1 template admits stored profiles;engine0-only compact Config invents no native choices.",
+    "Noncompact Ultimate and ordinary other-mode enumeration unchanged.",
+    "Fixtures cover topology,sorting,keys,IDs,read-only and hidden-context selection."
+  ],
+  "scope": "Inspection only;no independent test execution or build/resource/custody/hardware acceptance."
+}

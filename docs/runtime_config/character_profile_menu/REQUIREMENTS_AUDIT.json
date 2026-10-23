@@ -1,0 +1,106 @@
+{
+  "status": "PROVEN_REQUESTED_CANDIDATE_AND_UNEXECUTED_PACKET_COMPLETE",
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "requirements": [
+    {
+      "phase": "A",
+      "status": "PROVEN_FROM_RETAINED_CURRENT_EVIDENCE_AND_DIRECT_OWNER_CORRECTION",
+      "evidence": [
+        "retained_config_diagnosis.json",
+        "OWNER_DIRECTIVE.md"
+      ],
+      "limit": "No new live readback;future pre-mutation fresh checks remain mandatory."
+    },
+    {
+      "phase": "B",
+      "status": "PROVEN_CANDIDATE_SOURCE",
+      "evidence": [
+        "src/core/profile_selection.cpp at candidate",
+        "evidence/source_review.json"
+      ],
+      "invariant": "Compact MODE_ULTIMATE rows hidden;all execution contexts and eligible engine1 stored admission remain."
+    },
+    {
+      "phase": "C",
+      "status": "PASS_BOTH_ENUM_ABIS",
+      "evidence": [
+        "tools/fixtures/controller_profile_selector/metadata_menu.cpp at candidate",
+        "tools/fixtures/controller_profile_selector/selection_persistence.cpp at candidate",
+        "evidence/log_manifest.json",
+        "validation.json"
+      ],
+      "coverage": [
+        "owner43-record topology and planned2-character list",
+        "multiple contexts and backend/context resolution",
+        "ordinary modes and noncompact behavior",
+        "rank/tie order/menu indices/stableIDs",
+        "read-only enumeration/no writer delta",
+        "XInput/GameCube/NintendoSwitch/DInput"
+      ]
+    },
+    {
+      "phase": "D",
+      "status": "PASS_SOURCE_BUILD_RESOURCES_CUSTODY",
+      "evidence": [
+        "evidence/source_review.json",
+        "evidence/build_custody.json",
+        "evidence/build_provenance.json",
+        "evidence/artifact_correspondence.json",
+        "resource/result.json",
+        "evidence/abi-layout.json",
+        "evidence/menu-target-frames.json"
+      ],
+      "limit": "Exact candidate hardware NOT_TESTED;no canonical merge."
+    },
+    {
+      "phase": "KAZUYA",
+      "status": "PROVEN_UNCHANGED_CANONICAL_COMPILATION",
+      "evidence": [
+        "Kazuya.pb",
+        "Kazuya.protobuf.json",
+        "Kazuya.report.json",
+        "kazuya_verification.json"
+      ],
+      "limit": "No live CREATE/selection/gameplay acceptance."
+    },
+    {
+      "phase": "E",
+      "status": "PASS_EXACT_UNEXECUTED_PACKET_REVIEW",
+      "evidence": [
+        "OWNER_PACKET.md",
+        "CANDIDATE.json",
+        "retained_profile_identities.json",
+        "evidence/handoff_review.json"
+      ],
+      "coverage": [
+        "exact firmware/recovery tuple",
+        "fresh production STATUS/LIST/READ/Config/identity preflight",
+        "ID27 golden invariant",
+        "SEL stableID/name/schema/revision/rank/body/wrapper lineage",
+        "safe checked reference/default path toUltimate beforedelete",
+        "permutation freshgen/token and immutable receipt no uncertain retry",
+        "returned KazuyaID/rank and exact readback",
+        "all retained unknownlegacy records",
+        "genuine per-route menu display/preservation checks",
+        "safe finalUltimate and STOP before Kazuya gameplay"
+      ]
+    },
+    {
+      "phase": "BOUNDARY",
+      "status": "PROVEN_NO_DEVICE_OPERATIONS_NO_CANONICAL_SOURCE_MERGE",
+      "evidence": [
+        "ledger.json",
+        "OWNER_PACKET.md"
+      ],
+      "controller_mutations": [],
+      "flashed": false,
+      "SEL_deleted": false,
+      "Kazuya_created": false,
+      "Kazuya_gameplay": "NOT_TESTED"
+    }
+  ],
+  "known_debt": [
+    "evidence/inherited_recovery_fixture_debt.json"
+  ],
+  "full_aggregate": "NOT_RUN_NOT_CLAIMED"
+}

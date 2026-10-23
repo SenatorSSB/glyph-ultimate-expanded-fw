@@ -1,0 +1,77 @@
+{
+  "baseline-negative": {
+    "bytes": 906,
+    "file": "logs/baseline-negative.log.gz",
+    "sha256": "501711bc7b68266658538b301b545ab613b6e244a367910e43fab3d055a27276"
+  },
+  "baseline-store-selection-recovery": {
+    "bytes": 2016,
+    "file": "logs/baseline-store-selection-recovery.log.gz",
+    "sha256": "7c8aec6ab37730e5208ff9e5179342daacac4f84b09c63bdaca9e8bbd0defdab"
+  },
+  "build": {
+    "bytes": 46412,
+    "file": "logs/build.log.gz",
+    "sha256": "e4bcbc1f7cfbf61779124795392b58c39417e5d3aab2c4c45d93b3d4314a8986"
+  },
+  "compiledb": {
+    "bytes": 3669,
+    "file": "logs/compiledb.log.gz",
+    "sha256": "975095bcb6d8a6fad9a3faf284aaae525b7acdeff491249af47e82f1fd1b0e2c"
+  },
+  "legacy-default": {
+    "bytes": 6973,
+    "file": "logs/legacy-default.log.gz",
+    "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49"
+  },
+  "legacy-oracle": {
+    "bytes": 76,
+    "file": "logs/legacy-oracle.log.gz",
+    "sha256": "ff0d86e5b246eca61f40bd6bcd0b7ad9e6d176cf44680a6e000d890c63923270"
+  },
+  "legacy-short": {
+    "bytes": 6973,
+    "file": "logs/legacy-short.log.gz",
+    "sha256": "5fa27219e9db8531bc3dccfa4537df0d1a27d46d95d8c47a06c7227c5785fc49"
+  },
+  "native-abi": {
+    "bytes": 2461,
+    "file": "logs/native-abi.log.gz",
+    "sha256": "593727cef5aeed6e7743cf041c326eed46213322946382584d7ebb53098a7eac"
+  },
+  "native-default": {
+    "bytes": 10385,
+    "file": "logs/native-default.log.gz",
+    "sha256": "a900683502651086167887d95584c11cdfc862c4caaadd91e215390590a82ed1"
+  },
+  "native-short": {
+    "bytes": 10385,
+    "file": "logs/native-short.log.gz",
+    "sha256": "1976e973bbe157ea53c2c0d04bec2cb13e32aa9cbe2ef25a49e8c025fbe5d6a3"
+  },
+  "resource-objects": {
+    "bytes": 3141,
+    "file": "logs/resource-objects.log.gz",
+    "sha256": "e5a60321770402978a5993c2ad0ecab4da958a1a6672b689e60d9b45fe200001"
+  },
+  "selector-positive": {
+    "bytes": 1434,
+    "file": "logs/selector-positive.log.gz",
+    "sha256": "75fd23e962f4ed584f22f871209eaee305a79fe4f8ab523fe93b4dfc52e066ba"
+  },
+  "store-persistence": {
+    "bytes": 1391,
+    "file": "logs/store-persistence.log.gz",
+    "sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+  },
+  "store-production": {
+    "bytes": 829,
+    "file": "logs/store-production.log.gz",
+    "sha256": "34242b6068d3c7df12810290a5e4c04c00dffbd7c3b72eee72486a784ac8d7a9"
+  },
+  "store-selection-recovery": {
+    "bytes": 2316,
+    "file": "logs/store-selection-recovery.log.gz",
+    "sha256": "4bf77dcd013271ca7a7ca01318a158ececbc114366175060551a12ce90eba4a9"
+  }
+}

@@ -1,0 +1,1051 @@
+{
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "compile_database_sha256": "e3f1b3e67eb2dbd96259df1034e72cddd4b7e2199f957bd384c3476dc036a540",
+  "recipe_count": 259,
+  "source_pins": [
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/BluetoothDebug.cpp",
+      "sha256": "5bff5cdeccc0ee8bbcdf0b3c4ba182ae6201ad5a54980038df5514854ebeefd4"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/Bootsel.cpp",
+      "sha256": "d5d825800ddb1ee1f92e8dd8c8123f415da942fb0319ca1068e28d70154afbdb"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/CoreMutex.cpp",
+      "sha256": "f4975882d07274392618651da550ceffe39eb4c85171a00a54245f1a13345d28"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp",
+      "sha256": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/PIOProgram.cpp",
+      "sha256": "eb4d8aaa05636e96b6187ef6c6b9044fbfca533b02e020e211f0737fcbe1ae11"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.cpp",
+      "sha256": "e45de2528ef4467ff461cc54ec384254bd785c8eaf2d1adbe9598be411b3cb97"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040USB.cpp",
+      "sha256": "b08307f194af5fa5727cb9021ce92e529a2780ac93a08fd4d2b5f4643c4bd7ee"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/SerialPIO.cpp",
+      "sha256": "ef513969fc7349497361324ec02542997cf4dbe50688b0acda103abeb7f2be25"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/SerialUART.cpp",
+      "sha256": "659e876b8fda903cee18d6dec618ea095c43b76843711517a19aab564dad9ff2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/SerialUSB.cpp",
+      "sha256": "83d25c56da11631c4be3e75ea498da714dfa3186e4dec244fdfb3a50335a3df3"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/StackThunk.cpp",
+      "sha256": "2b377d5bc840d7e53c34ea60d41b416d77c29bff3bf50600c920660831f69588"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/Tone.cpp",
+      "sha256": "03eb738c297dffdd6ace5b544a717429337bdcfa8a2b83a4e9ef23a3fcf374bd"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/WMath.cpp",
+      "sha256": "20982422cdcb8fe74f04d3f2b85c2b5ed1ea1331cbc859da2910666ecc1465e2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/_freertos.cpp",
+      "sha256": "5c303917a9bd65b1e9e526f345e65f5c640c31016e0d73a851b03fec4d9edcec"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/Common.cpp",
+      "sha256": "8c2c0fefce611d48c6edb66d5f44e213c7de3beb1e899a394a50f2f417ee9b41"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/IPAddress.cpp",
+      "sha256": "604e8c8f922c60bf599250ec0e39fb44d6687d672a8e05936e0860712f5143cc"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/PluggableUSB.cpp",
+      "sha256": "e547cca019b5df52d21f74ad0399ab57a6e04e89cbc436d3b48b441ae5984bf8"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/Print.cpp",
+      "sha256": "ba9801ef5e10d2ef358efa38d68793932f5156ef7fbbd332cf4aff84d02d8ffd"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/Stream.cpp",
+      "sha256": "e161e1cfd36bb3b414d66e271f333b8f25af4791a4855a6010737af61a38a806"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/api/String.cpp",
+      "sha256": "3aac608c8a47a44cd40108b28b4736cb2aa93cbe444c99bb1bd5c0511e467716"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/cyw43_wrappers.cpp",
+      "sha256": "9a8a0320d8c25a5fd8d0d019303a68a0eb48ee07055140a851643743c8d90fa5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/delay.cpp",
+      "sha256": "1f12e590c041dea9231dd45b0f5c42b90ccb3000373f50570d2bdeccdf233454"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/libb64/cdecode.cpp",
+      "sha256": "a57abc678353819f76766656781cf02af66a53b2ad3c2f9ee476a7eed84fc9b2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/libb64/cencode.cpp",
+      "sha256": "0e1d7cc4db31c339fda787e92061d880dbb2b15e50cad8f06d8f6d35377ad822"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/lock.cpp",
+      "sha256": "ea7cdc3df66c1cd83521fdfa544c2122eb950ceac1394a81fdc4b0bb2d70fe44"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/lwip_wrap.cpp",
+      "sha256": "495ac2d0ba24f016b86a7f90c094f63561077985f161d9e1a531db1836cb9186"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp",
+      "sha256": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/malloc-lock.cpp",
+      "sha256": "532acda747dc6700283599e5a7ecee2a12335d164388cef55b9002205950fb98"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/posix.cpp",
+      "sha256": "a4fd1520d9b4700befe02edc7e6c8c41b70a13cb5f9867ce7d52c68bede2036f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/sdkoverride/att_db.c",
+      "sha256": "fc268d3bc252cfc80b248cc9c46d2d3aaded91954173fd5b2761bf788c428854"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/sdkoverride/btstack_flash_bank.cpp",
+      "sha256": "a36cc77ef53b721c40abea5274b6ebd685192ececce9f7b39efced00e33da3ef"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/sdkoverride/hids_device.c",
+      "sha256": "2d29e58d7e0fd301c01f119fb9df7b76dab6c2ce1251a9e87e65eda7ce00900a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/sdkoverride/pico_bootsel_via_double_reset.c",
+      "sha256": "b1e3662d64f0a19abcb703dcb1d97319df56850964842933317cc9cbee9717e6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/stdlib_noniso.cpp",
+      "sha256": "554bad74361de017b8f29977ed7f072868dc5f11c34dddebcb2d63065261c6a7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_analog.cpp",
+      "sha256": "b3a8d6f177e62fa9963ee3d2bddff5fa2d08acaccd86c5dc086aea2f4699ff3d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_digital.cpp",
+      "sha256": "30e9cc76e47eca1a922145321c042e15fbbedd8fd180834b3c265739e96d176e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_private.cpp",
+      "sha256": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_pulse.cpp",
+      "sha256": "d485079cfa6d31a8fca28bc713a40df0c6db281cccb49874c6736701ed184d2f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_shift.cpp",
+      "sha256": "1e2f91a6f8d1041e54dd5055cf0ee7b514651379b874fbc72048041b07db915a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/boot2/boot2_w25q080_2_padded_checksum.S",
+      "sha256": "cf323974302d13ab53d3a9c574b09bbdda02ecbe53a5721235640082697e712a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/nanopb/generated-src/config.pb.c",
+      "sha256": "fce08045cd7da7795357dff85827a634ef6a7f3fb21ec32e89b0e84817c54750"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/pb_common.c",
+      "sha256": "8d2ec28baaaf2b7a5e90e4cb2fa9700d21cef7f826f051a637c30b7a1e6a0516"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/pb_decode.c",
+      "sha256": "f5b425beaa207251e531c8ce2c86c9b6867e2920ed59cc1b125332af0c147632"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Nanopb/pb_encode.c",
+      "sha256": "debb0714dff8d1515b9724eae45531cad912f12028a0311fc3e2c694689e1fed"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/nes-pio/src/NesConsole.cpp",
+      "sha256": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/nes-pio/src/SnesConsole.cpp",
+      "sha256": "fe179cb1f880f1238e09fd43d054eb54718b1a2c5ac73a81e1878f078914a55e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/nes-pio/src/nes.c",
+      "sha256": "26d3980173684eb117bb543c998c3496ada18187da0e1eda64122c53a763cb98"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/SPI/src/SPI.cpp",
+      "sha256": "f1d4bb930bcd59135d198b530376908c1205a0a9db105735c210da18de223254"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatDbg.cpp",
+      "sha256": "1cd354dfc643bddf4617ebc562d43edf79ab0a97cdeb02af5f347cc8ddbabe1c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatFile.cpp",
+      "sha256": "9b77f72c442cd94ad5678c14a8660da7004589538390fff4f5506110a871baa9"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatFilePrint.cpp",
+      "sha256": "758b748f1bc01f1a0e2bf5fc329c430d8a9eea1087b7523d1e5ce6e023452913"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatFileWrite.cpp",
+      "sha256": "a61fa48625cb1beb0ec0ade2ddb9cef71f3a358d9d96bf656f96e92e50eedb73"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatFormatter.cpp",
+      "sha256": "e2b0e964bf5cbf28a196647bf7efa36533b90a8a8be2c48599b3fefb2760d508"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatName.cpp",
+      "sha256": "8293ea41b16320b9da29bfdf94c83f3a7d843dc167cdaf6d3d1e8694d2a460a3"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatPartition.cpp",
+      "sha256": "4b4383aac862cd61fbb9022149166ab17049326fa463e958d40f65ed703f27a5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/ExFatLib/ExFatVolume.cpp",
+      "sha256": "01d7f9fb4a9acfe67741add61c1202cc1d0b50c4005bd198b5a2ffb0e3b2fc57"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatDbg.cpp",
+      "sha256": "e994ea94163660b4a373f96e5f0b873a36fafd70c8b78307bdb58a83ef119c56"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatFile.cpp",
+      "sha256": "e68b87fcf34e345ae88bed86fcf240aa08201595ec86493957b18bd46ea8e6be"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatFileLFN.cpp",
+      "sha256": "fe8be639c95141668e2965ea0db39ab1d73df4f41c69e830d1fb6290668bf9ab"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatFilePrint.cpp",
+      "sha256": "d2d999b485cd769d3d25c301c68ac19cb2ba750e9a42c6931a59c45fc14a3f85"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatFileSFN.cpp",
+      "sha256": "9409f130b45f559502e590958b96acbd6f0fb99adf630216f13e77b4a00e911f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatFormatter.cpp",
+      "sha256": "93311dc38619ab039c0bd5d6e5fc165be01c9be7be6ed411d2ec519e42371914"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatName.cpp",
+      "sha256": "fa46444a2d24451ce41274b7735d63d01beeed275bd63f5ff16821fa5d738b1e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatPartition.cpp",
+      "sha256": "7965cbb5785ec49d546556e6bf37dabd2dbcee2a3e810365cc29eb8a29bf066b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FatLib/FatVolume.cpp",
+      "sha256": "2281473ad7278fb639d985815288824ef5fef7be528d73de576ca5dcf5f08ca2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FreeStack.cpp",
+      "sha256": "105869ea6c1af60a2b7b00293d9f495a59d7ec55d95ac5570c4518c6df937752"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FsLib/FsFile.cpp",
+      "sha256": "dea2b6efeb4d334832890cc4952801724621791df788fc9459f56c714eebaec1"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FsLib/FsNew.cpp",
+      "sha256": "9084b3a53faaaab2e715c7306b2475271114224e14a888160847cb888300e503"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/FsLib/FsVolume.cpp",
+      "sha256": "0a570d29177711636450699bd659e267262f2af6480152fa08eea09097b032c2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/MinimumSerial.cpp",
+      "sha256": "7a9f326347b93aa534fdb12344e710cc61c2d67d74a42e65be3a3b58c178f80e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SdCard/SdCardInfo.cpp",
+      "sha256": "8354c311dff9a6b94473d78460525bc1dbc326c2789959733725ea2384b535c5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SdCard/SdSpiCard.cpp",
+      "sha256": "8bd88787e6cae4a321f8615e25bb64deb852059737cc114c0d05a4490f3a0519"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SdCard/SdioTeensy.cpp",
+      "sha256": "aa66ce5294486c290f4ac127b3486fee882c2c2d00b339b975f31e6c8ecd2205"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiArtemis.cpp",
+      "sha256": "27adf6029cfaf3ea498b5f37d654f61e3bb1440149dfdabd3585e65b93035302"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiChipSelect.cpp",
+      "sha256": "4c802ca5b9dce751b05439e41a38e7df27a1198bc972afd6f54d768e01b1a660"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiDue.cpp",
+      "sha256": "e919e542734c87990cf5ff47f6d11f4c6104e923cafce35079be665b60691517"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiESP.cpp",
+      "sha256": "bac08e7f2e80eb3fc3787cf0c7d3c7c6306f864641db8c01159c4df2e154bf26"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiParticle.cpp",
+      "sha256": "c1ba3d12633697af647009532fa93a0855b8a27f21ddcf25cd09faacf8289436"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiSTM32.cpp",
+      "sha256": "d30d1d722452be2c4f952cd844618030eb61675927bded44ff3eb46d1ebfd21f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiSTM32Core.cpp",
+      "sha256": "1e50f450009805576fbde5b843b8c27fd0e864773caa6bf3fad8732281d17e2a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/SpiDriver/SdSpiTeensy3.cpp",
+      "sha256": "735d43aa2961c4b3c0047affa07b90145f1d6617f0d6612490a706d787303045"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/FmtNumber.cpp",
+      "sha256": "6496cabed4c6b6e8b3e86d2a4e92c2a21f7eae7d7ba8511215eb4a9e62083547"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/FsCache.cpp",
+      "sha256": "8d8ebb7de44ad0d763da66de7e5fd5e4e409bb6569f93db0d2de3837565ab019"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/FsDateTime.cpp",
+      "sha256": "52dd60efd25dd02edb01b415600a9b8ad821b4cfbb49b2da929c8c3bf2030045"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/FsName.cpp",
+      "sha256": "f6c55be6b86d35fd81866d5cf1fe23762ec985c37c9e1d441f7ffd5b40102894"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/FsStructs.cpp",
+      "sha256": "8574ebd6ff98e2990bf68d37fd6f2f23a2941a998952ec1a7bac0132c7d86f76"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/FsUtf.cpp",
+      "sha256": "dfa406832d6b3625f934b4dca58fb4527df0ae903d0897c2e37181dea07236ee"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/common/upcase.cpp",
+      "sha256": "928a5bff7b8e9c6735e6bc1d3bbd69fc920a3c78b84b6cc4a9ef44d9f4778d56"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/iostream/StdioStream.cpp",
+      "sha256": "ae1e1e9d37a6026a1de0b1dfdc9da0889b3df1b4bc849a433ee1ae50fdff1bd0"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/iostream/StreamBaseClass.cpp",
+      "sha256": "8098a5bdcae69ca83e97299b5caf3a71467ac50b8798a68b6e22132b43df6719"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/iostream/istream.cpp",
+      "sha256": "925e7b00856a42d93e40e5ffa6acd16adda4adda95d471a2262b4fb5e58b510a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/ESP8266SdFat/src/iostream/ostream.cpp",
+      "sha256": "a45b1f79493838f342626e86bfc38f975de50c5c7ec3d1e8db27ea4e7ca11c71"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_TinyUSB_API.cpp",
+      "sha256": "d3ccfba32fe1eac05d86a471720368b0a5ebbda85ac8a36c55b9d34486a326d0"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_CDC.cpp",
+      "sha256": "497dfa3ee62693f9187ea6e909bb92830b4e792d19773fdf3f55c0ecc3304ec8"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp",
+      "sha256": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBH_Host.cpp",
+      "sha256": "000519bf1f21fdde8597885bda5352769d078f5d6255822b90fb70f82cab9c8b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/cdc/Adafruit_USBH_CDC.cpp",
+      "sha256": "4c364c4b4bf8e250a7da807b96a3bfb941fbd5390f87cb306f3826eb6e26faee"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/hid/Adafruit_USBD_HID.cpp",
+      "sha256": "fecf901b40f6650ad944aa171ec50a6776313035c33ff6f705b6f8f54c79d443"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/midi/Adafruit_USBD_MIDI.cpp",
+      "sha256": "29f5486dc5b7a6564a89ebefd21270de72702c8efabd089543535fe15e184630"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/msc/Adafruit_USBD_MSC.cpp",
+      "sha256": "27576bc9e34c320f185c1aeb115abd52318f51a89bfb925a1392b9fa804fab22"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/msc/Adafruit_USBH_MSC.cpp",
+      "sha256": "fa792afd6373e00f66e484b95cf61657f7b954b7cacb3cc20c22b9125703a4d4"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/esp32/Adafruit_TinyUSB_esp32.cpp",
+      "sha256": "34e36a0968495cba6a847eba4367e53d67a2f6ee3c123eb7e02ad3221ff4e04c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/nrf/Adafruit_TinyUSB_nrf.cpp",
+      "sha256": "6768d195f90fe6186a1114515ba6647b0282ae1c7f139c38c0aa7b7d097d4ba7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+      "sha256": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/samd/Adafruit_TinyUSB_samd.cpp",
+      "sha256": "6c33da7183bfc176fa3e39f3ebcef38899ae1f9738b155c58cbe59d3b96f97e0"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/webusb/Adafruit_USBD_WebUSB.cpp",
+      "sha256": "f69844a5352e60943f6690ae371bdc457c3b5e81cacd103a2c076883a2cc566d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/audio/audio_device.c",
+      "sha256": "4dcd0649af2bfebecc3609029f64b01d69cd30ee8ae42e83fc747a42b779079e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/bth/bth_device.c",
+      "sha256": "af99e1e3ead4d340784a7b502b182e323e8ca534af5c0984ad80642f2aa802c9"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c",
+      "sha256": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_host.c",
+      "sha256": "0c934eefe032138d5bf3c6a8d7dce62c9cc4426023612e449dfeb68b2a8d8aeb"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/dfu/dfu_device.c",
+      "sha256": "b5d8fe89370ba229a27edabfc0708dc22341a7c241a5d4323d53831d104c634c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/dfu/dfu_rt_device.c",
+      "sha256": "544547a0b14068ebb6f8c0dd31cc0ce1d0cbac67c571b77aa2b0cf70f45567b7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/hid/hid_device.c",
+      "sha256": "b294a55c928a68b185889c909d1a63e81d20900595307638bfeef2198e03332d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/hid/hid_host.c",
+      "sha256": "d01df5beccd3430e4b6702a8f97889e68f4721153a8a34d782e411bfeaa61bc3"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/midi/midi_device.c",
+      "sha256": "015f0e4711cf6f4da1a041196d3e011da99ade47b95c0f380358c932053927ec"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/msc/msc_device.c",
+      "sha256": "554d7541456e9c4fa84c02f8536fe84706d0f0f02e4b3efab6ca8239a01f837f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/msc/msc_host.c",
+      "sha256": "037b95047e218e3834cfad590ad20f21e2bcef60fb1a7446bf568c8018c9da1c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/net/ecm_rndis_device.c",
+      "sha256": "dc88a7b271b226c90fb27853393e0c8591718de5ae5c75fa936ec37436a24b58"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/net/ncm_device.c",
+      "sha256": "f2153b9ce21103e447947079349ba19cce2ae8d7c607123ee4bc32176272000a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/usbtmc/usbtmc_device.c",
+      "sha256": "5df6e70c6867ad32700d3f810ee33619222a045aa3cdf4e7eef07c9b0be72443"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/vendor/vendor_device.c",
+      "sha256": "d667251db0042f447eb5c014fcfd3bc4b35442961f013c908356b333b78a08fe"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/video/video_device.c",
+      "sha256": "6a0bcd01d9bc4abef459c96d16c56d2a96ebcb959e8779b786a05bf2cce579b1"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c",
+      "sha256": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+      "sha256": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c",
+      "sha256": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/host/hub.c",
+      "sha256": "9021ea8f5e74328aa7927e919c5e0b7d0c58ca9fc7ac558e3d59774d957a83ce"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/host/usbh.c",
+      "sha256": "7786163784b899db688f93c00740bb5be9f4e591a6823af9be0112938decbda0"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/analog/max3421/hcd_max3421.c",
+      "sha256": "2d5a4f343934617a5e93ec3115560d4e5a7677b028211489f0c1a2df4de86b1b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/microchip/samd/dcd_samd.c",
+      "sha256": "454c0da66c1afa9effd2020c23d46e81801e34e8010712f9e13c3a3fe4198fc6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/nordic/nrf5x/dcd_nrf5x.c",
+      "sha256": "e81ac6ca1440f9cf15e0aa5a565fcbf6ee22d55d93e06f21cd3d6f59faa4791f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/pio_usb/dcd_pio_usb.c",
+      "sha256": "be9676f998c40a06781f041990ba03c7b1103fb037dec1595ef318c2d4818799"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/pio_usb/hcd_pio_usb.c",
+      "sha256": "e232d9e9cc591e01c39b067ab354a40b705b260414b0225ef534b99c87c75c16"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+      "sha256": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/hcd_rp2040.c",
+      "sha256": "82e16a85caeb30929d9e6312cc4547092b86d070db4c7729fb42f7b364819230"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c",
+      "sha256": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/tusb.c",
+      "sha256": "8ddbcab9ba5f8abe68b5af78eb471f67093076d9c8c0357acc1498e1185c200e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/Wire/src/Wire.cpp",
+      "sha256": "9ecbc63e404f7e493dc59a331cf7f7f49ded0fd02b426ade2b3f9cbb98dab370"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/arduino-nunchuk/src/ArduinoNunchuk.cpp",
+      "sha256": "881871cebd824b9e29afe6703e15d879c715d570dd5abefaa15c585f93519306"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+      "sha256": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/FastLED.cpp",
+      "sha256": "dd166ec53ec3bfe6822d5c6c8b499525cb58d81a64fbb64f24a5fd9430e7c451"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/bitswap.cpp",
+      "sha256": "ba472bd8ad87ae88fc64e63e3c1df15c94637620edc09d8d0b905c731d3dbaeb"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/colorpalettes.cpp",
+      "sha256": "bde36bc55bc93351ca304d9c0703a3a49c05a6ecdc40e8a3e7fcfe6c36fac47d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/colorutils.cpp",
+      "sha256": "594a1241877cea7e1b3995e0dfb5dbfa54f4ef640a6f8a3f36d00d6c98acc435"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/five_bit_hd_gamma.cpp",
+      "sha256": "f861ab3a4b75e8a4810bcc37989a49f36b22b8db25295405160a5f12e4c1fc2e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/hsv2rgb.cpp",
+      "sha256": "feca46818cd6531d39b779ddb51488644e18ac94888bccae51cc1f843941b9ad"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/lib8tion.cpp",
+      "sha256": "555ae0ff41bd0887907be172b81c34dc28a3e7776325c4ac94d618db9c417ea8"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/noise.cpp",
+      "sha256": "2079b7d2378ee557b49d4190b67e6618ca90f0e43fd3149e339fa4bafaefd261"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/platforms.cpp",
+      "sha256": "694fb6f466a25ea012e53086b6eaca650295b42f8ae19d29a378fde7189c5004"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/platforms/esp/32/clockless_rmt_esp32.cpp",
+      "sha256": "e88bfe76296138436d85615f6367f16bc1546c69a3147bfb44bb2c75303e5c02"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/power_mgt.cpp",
+      "sha256": "cb5311a764aeb21ef8d5eaaa250ef0a513f629c95b4f9fa03d3ddf100d025022"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/FastLED/src/wiring.cpp",
+      "sha256": "442a4e61ba37ab0367affc258d4c1fd68a0cf38c486da9d7ac2f7032d0594730"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/nanopb-arduino/src/pb_arduino.cpp",
+      "sha256": "fce084205617404819227b37d9ce1e46dbd9f37d431a974efaebcf02263ebcd5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit BusIO/Adafruit_BusIO_Register.cpp",
+      "sha256": "9a0af578ea07956296834f4505e5b134ad7e1cc22ac9c9d84a640a07a94f870b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit BusIO/Adafruit_GenericDevice.cpp",
+      "sha256": "c26d9c1207c3626fb95884f01cc1f8179fcd7c2c6b0583fff25187c4f2c814d2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit BusIO/Adafruit_I2CDevice.cpp",
+      "sha256": "317c342821f1df676a0e034f65685b4d6bf240d2ab8dcea91d18f1e063326d37"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit BusIO/Adafruit_SPIDevice.cpp",
+      "sha256": "f846ee438eee41bef174c6dbe1f689f7ccbbd732ca4261c7b9e9337b1e5d08b5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit GFX Library/Adafruit_GFX.cpp",
+      "sha256": "5afa8ca16241a9a0cb354012dd00780c6c00620c345b810a9504cb77bfc698d5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit GFX Library/Adafruit_GrayOLED.cpp",
+      "sha256": "03ea5c79bf86d8c7a7118dee264341fac0ecc0c5ecdc57eee47dea1981f9edd6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit GFX Library/Adafruit_SPITFT.cpp",
+      "sha256": "b5982e2ebb558b29a9c76a9bb694193208b46fdafa7d8ea105eb168b0fe9dcb5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit GFX Library/glcdfont.c",
+      "sha256": "bd6d60ecb9cc350a83f209d7c62de2fe5f6ce3402d5598cde2988b5b44e83e02"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/Adafruit SSD1306/Adafruit_SSD1306.cpp",
+      "sha256": "ddbd788bfaf97dd3b5ba5ee67eb62ab51652cbe86e34c2e7d24d5e074bb34bdd"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/CRC32/src/CRC32.cpp",
+      "sha256": "d225540b9cd5d167fac74a5ea5b615c5bcbb9609cd83d1cd26a067d153f31918"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/libdeps/glyph_mk6/PCF8575/PCF8575.cpp",
+      "sha256": "9e36d61fb96e7ec94af86a2c92927a49017f3ca0c504c68e8d3753b9cdd7671c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/TUCompositeHID/src/TUCompositeHID.cpp",
+      "sha256": "8dda015db9bb7a458d106ed7a415ccfa2a2888bc6c9ebdcc03f240fa96e8d294"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/TUCompositeHID/src/TUGamepad.cpp",
+      "sha256": "b43911537a77fde06fb1a2c13482f30f59869b15470367c2b47c0ae16c6b2b0e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/TUCompositeHID/src/TUKeyboard.cpp",
+      "sha256": "bc046bbf1b998caf53bc58deed4b4927da050a9e3d24cf9a1e7da0373ab41ca9"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/glyph-joybus-pio/src/GamecubeConsole.cpp",
+      "sha256": "ab05eed54f34138ef2693c724eb6607a99e453a921bf6d308845739b5d7e09a1"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/glyph-joybus-pio/src/GamecubeController.cpp",
+      "sha256": "d2a57d444ea7062e567bbbd35934dcb0974b483bec895ed4e618d29ed7470e5d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/glyph-joybus-pio/src/N64Console.cpp",
+      "sha256": "3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/glyph-joybus-pio/src/N64Controller.cpp",
+      "sha256": "4cb9727eedf90442417f60e7ea6464ae65e1ab62e050968bfc21da2ab24932ed"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/lib/glyph-joybus-pio/src/joybus.c",
+      "sha256": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp",
+      "sha256": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs.c",
+      "sha256": "3ede3a5ee496159150b9f5a1bacac98d157eb1f761e19d7d58a9b0fa4528ca6e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/lfs_util.c",
+      "sha256": "b9fa5f2a127c97bce6b11054222c82e612cba585940bec18848b93ed0017e0c1"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/ConfiguratorBackend.cpp",
+      "sha256": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/DInputBackend.cpp",
+      "sha256": "2cc781a407518df81ffe5fb8e2b2ab1b9e7261a4f0f761cd2b377a6b792e70ea"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/GamecubeBackend.cpp",
+      "sha256": "a0d6aee316ebfc023159efcd0a353550b801ec11291c5e9320d9544d1c5fa21f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/N64Backend.cpp",
+      "sha256": "8cdf98be87caaeb23b9a0412a6bfd08bc98615a2f64f6e5ea3096a9fb60535ce"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/NesBackend.cpp",
+      "sha256": "60b721c48257df2a8d2783f666cfb4ffdb75c61eb649978b4b64c69ceade0fa2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/NintendoSwitchBackend.cpp",
+      "sha256": "c55860e0d9ecab5eb033b7fa058bc132a51e51eb7c66df4dcdb998649cc49c25"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/SnesBackend.cpp",
+      "sha256": "cbe6b62c117469b0ba970b17c939d1966cff0078e09e51242aa2c106d6941660"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/XInputBackend.cpp",
+      "sha256": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/backend_init.cpp",
+      "sha256": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/comms/console_detection.cpp",
+      "sha256": "f1ea6909a935eb9d47c11c37b1e5e47a84b69a8623709a002163cde46914b18c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/CheckedStorage.cpp",
+      "sha256": "56550007b7b0e1ae83f90671ac4ef2ae0259bd5ffb0b25f196e2d33728b396dd"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/KeyboardMode.cpp",
+      "sha256": "a4396ef241cde82c7296ee01aad6b7907e6c7579aa4349c5366621c73c59791d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/NativeTargetMetrics.cpp",
+      "sha256": "10d94198e5e1836cb4066e8fddeb89e4dde6900124344e5c0aa1a2d5c1eed09c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/NativeTargetMetricsEntry.S",
+      "sha256": "319a50ecef85093cd0b91660c1a25bd55df36e64f85e744f8df004627918cb0a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/Persistence.cpp",
+      "sha256": "697903d9f3ee9573c34bcc58b069a41e07d886bc90d041a034d3aa1682c5b306"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/ProfileStore.cpp",
+      "sha256": "86e96518d789b597b4764910b3314192affe97019f4be263cc6c318cd594a4c6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/core/ResourceDiagnostics.cpp",
+      "sha256": "99628d38b1adbc44aa2084ccded843e050e453341291de29c0c34ef03df418da"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/display/ConfigMenu.cpp",
+      "sha256": "fbbd6124ce97139e290465ddd5c2b7f6f38c754566845cbd8b765ab24943b09f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/display/DefaultConfigMenu.cpp",
+      "sha256": "448ed9d08ad8ab040ac065d4e95d636a9250ae7ee6e7ae0df32726aeacc5c789"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/display/InputDisplay.cpp",
+      "sha256": "761f3a5bb6357a278042356e25c691ef82bb45030ee6588cd6571a08e2e6480b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/display/RemapMenu.cpp",
+      "sha256": "3707564737f8e9f4652e1daddedb6f0e40c94a2cc741d89bc29760d94a39b7fb"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/display/RgbBrightnessMenu.cpp",
+      "sha256": "2a1cf75ef2db9c933404c5a60d4850836b0ba6faf16579a6d7f258701afad650"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/game_utils/Rivals2_adc.cpp",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/game_utils/Ult_adc.c",
+      "sha256": "447012837b38bcac0ed70d7cae6d69540217523cc1d88758021913dc2571156e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/gpio.cpp",
+      "sha256": "141d0d3ce6bfa98ea2883086963a0517967f74629617510a9f8f7918abc2973c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/input/GamecubeControllerInput.cpp",
+      "sha256": "1365d96c017fc3889e660edab39884c6d86019d59b0fa6de08c09dd9b421175c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/input/NunchukInput.cpp",
+      "sha256": "31435748031cfe1fd0781892c3b5818d63e0ce36b6caa9e30683a2916167c497"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/input/Pca9671Input.cpp",
+      "sha256": "97777d2cff4f64873bc10c6595fce045d773cc84fe65d10b9497cecff62517d8"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/reboot.cpp",
+      "sha256": "f89b9199f55e8f116901ca49484f7ef6c3fe51c048dc31a98934d08bf0a5627e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/rgb/ButtonLocations.cpp",
+      "sha256": "348fe34ea848a08a5d03b078caf3bb2b0008f816734c53241eaa7db527ed9a6f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/HAL/pico/src/serial.cpp",
+      "sha256": "4a38620ffc8683d55d61d88a262ebc1f2a9f830dbd086fca8733f0253e222e4d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/LEDTemplates.cpp",
+      "sha256": "a30275c41a87d152fc653caf084c80a9dfb59493b73c40639e8eedbeb6c264a7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/config.cpp",
+      "sha256": "d05fa385e28f6bdbb86f1d54aad921001c7c42daa0356094acc6646961d339bc"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/display/AboutMenu.cpp",
+      "sha256": "d53f71f87cb407c477b588f28cbd4ebadb522326f560e1209b8a3bacb832beee"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/display/GlyphConfigMenu.cpp",
+      "sha256": "137fbcac8b6d95c6ee06a0e2be1b11769a56f2a03c75cd8060cc24bf3c7b8fdf"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/display/MenuButtonHints.cpp",
+      "sha256": "99bfce1128b8ab25922088a334f8354b1bf8aad0522909122ab5a2962f6c2bcc"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/display/OopsieMenu.cpp",
+      "sha256": "f54669889d633d25bddebd74af931b547421d43fb2263fa1ff690fee482947e2"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/config/glyph/common/src/glyph_config_validation.cpp",
+      "sha256": "344e607e46a668d83e8cf706afd31fd7854c76e2523997c721a43d25d899337e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/comms/B0XXInputViewer.cpp",
+      "sha256": "4ea39c7bf81929697f881753cb957796dc10e7ffa33f93b68e0ad84a74f23c2e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/comms/IntegratedDisplay.cpp",
+      "sha256": "37213732b17e8d911ecdb22908a005cc792540f4f4cd67b3c986ecfcdeed006e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/CommunicationBackend.cpp",
+      "sha256": "9be53fab3470f83a4e9c080a0afe295fadc88afcb2ffc4598657aeb211241575"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/ControllerMode.cpp",
+      "sha256": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/InputMode.cpp",
+      "sha256": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/InputSource.cpp",
+      "sha256": "daeefea10d724ea5be8c9ea4faeee3d0d8716a4e091a3ce57537604d4b111ad8"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/ProfileStore_stub.cpp",
+      "sha256": "2c4021af6daf08d2f2dc312aa192e1c88524ac0a9f85fcaff837d78c4b0bea3f"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/config_button_validation.cpp",
+      "sha256": "4025f581961e63a8ef6a290b41786b59291bada5e77ab665dbe448ed27418d2d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/config_rgb_target_validation.cpp",
+      "sha256": "be2c6abfd30242b1049836598fa18e7a0ecc0b62f1e2dc17db7034aef36feda7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/config_usb_default_validation.cpp",
+      "sha256": "bf617caab589c1a286a6856f0199d2726cf80c4810337e77c90d4981bef5edeb"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/config_utils.cpp",
+      "sha256": "b97af928bff72103f90b0155e4e63fd44a3cfcb84e46ac93cf74f6f3227e02ab"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/config_validation.cpp",
+      "sha256": "bd91ec9807a1167eded5c7588cb49b8f7ebebdd3379150a1c1d0f8336e966822"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/mode_selection.cpp",
+      "sha256": "f395110a5d1df8a762bccee9c977e6cbd13374ba2c5c12222969207a0c47acb6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/profile_selection.cpp",
+      "sha256": "4483f46b3e5b78ef70016a51769f62f7595953b454bae653ac02d01155098da5"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/core/socd.cpp",
+      "sha256": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/input/GpioButtonInput.cpp",
+      "sha256": "df29717f747bf8e95dd9d9382c10dec5b94d3ff7e8d4c8521b8bb02cb8c2323d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/64.cpp",
+      "sha256": "ee374d38fc3293e884e97dddb2d48a0fd410a9a4b84f5311206f3b5921a4ca49"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/CustomControllerMode.cpp",
+      "sha256": "4460a97129b8aab788d2c4826be486dc7be9bda8d93686f61efe81acfb95ec31"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/CustomKeyboardMode.cpp",
+      "sha256": "90db32b605383adda19c9f00ad69daf538a766d801415483915ea8d6429a9def"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/DefaultKeyboardMode.cpp",
+      "sha256": "120f9cbe1909660c176b7bd49ff1a5c23b90e6f0e1db49c6b95cf2d3e448b757"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/FgcMode.cpp",
+      "sha256": "236de331e38c68a221f44ececf4444b601b3c1e56b1ac20bb6422390720f5ef0"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/Melee18Button.cpp",
+      "sha256": "b3185ca5e260444f8e7b05c2bb8d60ec0ca9d46ae9d33980dd0b829212f07c21"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/Melee20Button.cpp",
+      "sha256": "42f9be54340a918172194ecf152bb1aaad8762da9f5f04c4f52925a679929522"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/ProjectM.cpp",
+      "sha256": "ad3b3c1b80e1157a13adb3b3166569f8f955d2f94462426aeb5ea31070a94c2a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/Rivals2.cpp",
+      "sha256": "44242d673f75fa417168f69c63075345eaabad6c8ef5b90393ef01b56ddd329c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/RivalsOfAether.cpp",
+      "sha256": "ccc04805c353d4beec97164d45ac0a5dfb0792e5816b4cf1882f3ec7a7e80c4e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/SenscopePrototype.cpp",
+      "sha256": "cadadf8668701d6296e69688519e1a0679835150e9135d6e1b5f9369e23d01c8"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/Ultimate.cpp",
+      "sha256": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/UltimateNativeEvaluator.cpp",
+      "sha256": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/UltimateNativeProfile.cpp",
+      "sha256": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/DarkSouls.cpp",
+      "sha256": "68d224e9168e68b1f576d08be9ab4966385bdd50e40a19e17018f70eb96202cd"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/HollowKnight.cpp",
+      "sha256": "349f3f39e733762112314205cf4db74127cd71b29e9c521abe86bca60b1b1081"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/MKWii.cpp",
+      "sha256": "fe30535aad13a9b05195cc12e34c5092c951b3987f68b4319b052effabbec31d"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/MultiVersus.cpp",
+      "sha256": "c4c86a703703142ecb4511be70ad811c74f1cb52a82713ee5b80c4d0333ab2da"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/RocketLeague.cpp",
+      "sha256": "dfdb89b6d94575b1f23d2869f4b650ce8acfb8e76ba0718cac7d14e7d650f01b"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/SaltAndSanctuary.cpp",
+      "sha256": "088cfd1bc1dfb7e055103a6f8e5323e3a6ff24794a950f47aa127efeece80ca6"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/ShovelKnight.cpp",
+      "sha256": "635524dd5890548a8c68c13decce46a4463aee3d38119506dbfbb564c639390a"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/ToughLoveArena.cpp",
+      "sha256": "1bb0f372a91d16e8e6f94a94c56b4a9602084b9df0423b0e24851bce657fd39c"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/modes/extra/Ultimate2.cpp",
+      "sha256": "4af4597ad7467be10e92f198e9ea4edcf2ba796dbd3c0e5c36357483d839a3c7"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeDigital.cpp",
+      "sha256": "1e070471ad29d1ed9ed753b05187e92bc9166228ef0b961068d03befe10cc5cd"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeDirection.cpp",
+      "sha256": "852bc5f9886e1e69c9e978b12cbac8a37482926972a06f2fa38799d51693641e"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeForce.cpp",
+      "sha256": "413f62bacc6b2ce2c71525ebd82df11e0292467d8ff845a27744b3bcae295efe"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeModifier.cpp",
+      "sha256": "0b7f895499d6a203f772fde35298524698b4822fd64063187bc05c13fafd9cde"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeOutput.cpp",
+      "sha256": "cac775337faba93ee47cebed2035557e1a92b04f5ade9b32e8a695560b09e623"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeResolver.cpp",
+      "sha256": "24a20cdb21a7d8ad3a1ff775f4c1c34fc08c190c15db38744d8afb7e1db04d31"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeSelfTest.cpp",
+      "sha256": "f20a15b5e751a6bd531967112fe53c54fffd1f969e549c5b0e9f8e3465bb0c79"
+    },
+    {
+      "file": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/src/prototypes/senscope/SenscopePrototypeValidation.cpp",
+      "sha256": "5b39b461a168a5eb84b581797805f4a1a7a7b5fd7db2a64d1ada37cbdcdbc528"
+    }
+  ],
+  "PLATFORMIO_CORE_DIR": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.platformio-home",
+  "platformio": "PlatformIO Core, version 6.1.19",
+  "python": "Python 3.14.4",
+  "compiler": "arm-none-eabi-g++ (GCC) 12.3.0",
+  "cache_note": "SDK/platform/libdeps were isolated copies of retained predecessor cache;PIO6.1.19 selected SCons4.40801 instead of copied4.41101. Compiler/framework/relied SDK+vendored pins freshly match predecessor.",
+  "source_snapshot_clean_at_build": true,
+  "resource_objects_instrumentation_not_linked_into_candidate": true,
+  "mutable_build_outputs": "compiledb target removed original .pio artifacts;exact sealed custody is authoritative."
+}

@@ -1,0 +1,95 @@
+{
+  "status": "PASS_INDEPENDENT_ROOT_MECHANICAL_REPLAY",
+  "resource_manifest_objects": 221,
+  "exact_named_frame_callee_graphs": 3059,
+  "route_maxima": [
+    2048,
+    2012,
+    1344
+  ],
+  "core1_composition": 1060,
+  "static": 198288,
+  "static_margin": 1344,
+  "native_ABI": "EXACT_BASELINE_CORRESPONDENCE",
+  "callsite_positions_changed": [
+    {
+      "name": "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)",
+      "old": [
+        {
+          "at": "0x10034578",
+          "to": "0x10024ab8",
+          "name": "ProfileStore::Count() const"
+        },
+        {
+          "at": "0x100346da",
+          "to": "0x10024a54",
+          "name": "ProfileStore::IsReady() const"
+        },
+        {
+          "at": "0x100346f2",
+          "to": "0x10024ab8",
+          "name": "ProfileStore::Count() const"
+        },
+        {
+          "at": "0x100346fe",
+          "to": "0x10024acc",
+          "name": "ProfileStore::EntryAt(unsigned int) const"
+        },
+        {
+          "at": "0x10034762",
+          "to": "0x10024ab8",
+          "name": "ProfileStore::Count() const"
+        },
+        {
+          "at": "0x10034772",
+          "to": "0x10024acc",
+          "name": "ProfileStore::EntryAt(unsigned int) const"
+        },
+        {
+          "at": "0x10034796",
+          "to": "0x1004462c",
+          "name": "__wrap___aeabi_memcpy"
+        }
+      ],
+      "new": [
+        {
+          "at": "0x10034576",
+          "to": "0x10024ab8",
+          "name": "ProfileStore::Count() const"
+        },
+        {
+          "at": "0x100346e4",
+          "to": "0x10024a54",
+          "name": "ProfileStore::IsReady() const"
+        },
+        {
+          "at": "0x100346fe",
+          "to": "0x10024ab8",
+          "name": "ProfileStore::Count() const"
+        },
+        {
+          "at": "0x1003470a",
+          "to": "0x10024acc",
+          "name": "ProfileStore::EntryAt(unsigned int) const"
+        },
+        {
+          "at": "0x10034770",
+          "to": "0x10024ab8",
+          "name": "ProfileStore::Count() const"
+        },
+        {
+          "at": "0x10034780",
+          "to": "0x10024acc",
+          "name": "ProfileStore::EntryAt(unsigned int) const"
+        },
+        {
+          "at": "0x100347a4",
+          "to": "0x1004462c",
+          "name": "__wrap___aeabi_memcpy"
+        }
+      ]
+    }
+  ],
+  "initial_attempt": "Overstrict comparison of callsite instruction addresses failed only within changed BuildTargets;inspection confirms unchanged ordered callee targets and56-byte frame. Predicate compares resource graphs and retains actual moved positions rather than falsely claiming identical instructions.",
+  "scope": "Identity/arithmetic/graph replay;full source/route predicate assessment is in independent resource report."
+}

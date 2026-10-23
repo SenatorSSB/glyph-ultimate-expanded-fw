@@ -1,0 +1,20 @@
+{
+  "schema": "glyph_character_menu_candidate_v1",
+  "source_commit": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "source_tree": "5a25a83705a654480b8db805f20822f4d180d70f",
+  "source_ref": "codex/native-profile-menu-candidate",
+  "canonical_base": "55ab5984f47728db53a12665d685d16cfad39201",
+  "UF2": {
+    "path": "/Users/rasmus.pekkarinen/.codex/worktrees/native-profile-menu-cleanup/glyph-ultimate-expanded-fw/.pio/build/glyph_mk6/firmware.uf2",
+    "bytes": 1046016,
+    "sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
+    "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/1de243c7bada73ba85843018058b4f66a06acdda/a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b/firmware.uf2"
+  },
+  "build": "PASS",
+  "source_review": "PASS",
+  "resources": "PASS_UNCHANGED_LIMITS",
+  "hardware": "NOT_TESTED",
+  "controller_operations": "UNEXECUTED",
+  "Kazuya_gameplay": "NOT_TESTED",
+  "owner_packet": "OWNER_PACKET.md"
+}

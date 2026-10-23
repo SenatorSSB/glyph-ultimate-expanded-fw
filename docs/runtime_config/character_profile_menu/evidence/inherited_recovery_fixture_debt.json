@@ -1,0 +1,25 @@
+{
+  "state": "PRESERVED_IDENTICAL_BASELINE_AND_CANDIDATE_FAILURE",
+  "finding": "Stale setup_routes Backend double lacks BackendId,GamecubeBackend and SelectionIdleAdmitted;source unchanged from live canonical.",
+  "baseline_exit_code": 1,
+  "candidate_exit_code": 1,
+  "proof": [
+    {
+      "path": "config/glyph/common/src/config.cpp",
+      "sha256": "d05fa385e28f6bdbb86f1d54aad921001c7c42daa0356094acc6646961d339bc",
+      "baseline_identical": true
+    },
+    {
+      "path": "tools/check_glyph_profile_store_selection_recovery.py",
+      "sha256": "a03ad92b2fec23ff3f1a5d1549d0eb61db069eec5a64ce93764b7d742da849c1",
+      "baseline_identical": true
+    },
+    {
+      "path": "tools/fixtures/profile_store_selection_recovery_host/setup_routes.cpp",
+      "sha256": "9f29ec15fb716d7d4549a2c25c6adb6abbe63973bb15596290e55f71e93d766d",
+      "baseline_identical": true
+    }
+  ],
+  "scope": "Existing route-extraction fixture debt;not proof of product failure. Actual selector and GC no-poll bridge tests pass both enum ABIs. No aggregate PASS claimed.",
+  "validation_policy": "Revision3 Tier3 unless concrete Tier1/2 contradiction;no contract weakened or test edited."
+}
