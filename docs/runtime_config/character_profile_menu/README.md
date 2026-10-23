@@ -7,6 +7,25 @@ contexts. [Direct authority and bounded order](OWNER_DIRECTIVE.md) resolves the
 initial semantic stop without a name heuristic or schema change. Historical
 GP-NATIVE-002 evidence and its accepted source remain unchanged.
 
+
+## Final executable owner packet — R2
+
+[OWNER_PACKET.md](OWNER_PACKET.md) is packet **CPM-HW-1DE243C7-R2**;
+[fresh independent review](packet_final_review.json) is
+**PASS_FOR_OWNER_APPROVAL_PACKET**, with all35 reviewed file hashes bound.
+Implementation, source review, host/ABI tests, exact build, resource proof and
+custody are complete. Only fresh controller state remains an execution-time
+dependency; exact owner approval remains required before executing this packet.
+The packet separates frozen artifacts from fresh port/incarnation/generation/
+Config digest/token/directory/reference/rank/recovery observations.
+
+[Offline audit helper](packet_checks.py) verifies saved snapshots, individual
+mutation receipts and complete preservation; it cannot open a controller.
+[Nine safety tests](test_packet_checks.py), [validation record](packet_finalization_validation.json)
+and [concrete canonical Kazuya compile identity](packet_compile_identity.json)
+record the packet-only checks. The earlier handoff review remains historical;
+R2 review binds this final packet. No controller operations occurred.
+
 ## Diagnosis and menu behavior
 
 The exact retained Config has277 API bytes, SHA-256

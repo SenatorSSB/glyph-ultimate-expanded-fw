@@ -1,0 +1,25 @@
+test_crc_status_drift_and_recovery (__main__.PacketChecks.test_crc_status_drift_and_recovery) ... ok
+test_exact_runtime_identity_and_no_gamecube_inference (__main__.PacketChecks.test_exact_runtime_identity_and_no_gamecube_inference) ... ok
+test_full_retained_snapshot_and_preserve (__main__.PacketChecks.test_full_retained_snapshot_and_preserve) ... ok
+test_identity_and_context_negatives (__main__.PacketChecks.test_identity_and_context_negatives) ... ok
+test_rank_exhaustion_and_payload_mutant (__main__.PacketChecks.test_rank_exhaustion_and_payload_mutant) ... ok
+test_reference_receipt_token_and_payload_digest_negatives (__main__.PacketChecks.test_reference_receipt_token_and_payload_digest_negatives) ... ok
+test_safe_selection_and_no_arithmetic_digest_assumption (__main__.PacketChecks.test_safe_selection_and_no_arithmetic_digest_assumption) ... ok
+test_single_delete_preflight_continuity_and_no_skip (__main__.PacketChecks.test_single_delete_preflight_continuity_and_no_skip) ... ok
+test_twenty_delete_accounting_create_and_preservation (__main__.PacketChecks.test_twenty_delete_accounting_create_and_preservation) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.722s
+
+OK
+PASS reference
+PASS active ID27 exact XInput identity
+PASS preserve
+PASS reference
+PASS reference
+PASS selection
+PASS reference
+PASS verified unreferenced SEL01
+PASS reference
+PASS deletes
+PASS create

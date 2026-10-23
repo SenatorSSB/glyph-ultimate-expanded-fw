@@ -54,6 +54,16 @@
   "nunchuk": "NOT_TESTED",
   "original_checkout_preserved": true,
   "owner_questions": [],
+  "packet_finalization": {
+    "approval": "EXACT_OWNER_APPROVAL_REQUIRED_BEFORE_EXECUTION",
+    "classification": "DOCS_CHECKER_ONLY",
+    "controller_operations": [],
+    "fresh_execution_dependency": "FRESH_CONTROLLER_STATE_ONLY",
+    "implementation_build_review_resource_custody": "COMPLETE",
+    "packet_id": "CPM-HW-1DE243C7-R2",
+    "review": "packet_final_review.json",
+    "validation": "packet_finalization_validation.json"
+  },
   "root_cause": "UNPROVEN",
   "sel_deleted": false,
   "state": "CANDIDATE_VALIDATED_OWNER_APPROVAL_PENDING",
@@ -61,7 +71,7 @@
     "canonical_commits": [],
     "hardware_handoff": "EXACT_PACKET_REVIEW_PASS_OWNER_APPROVAL_REQUIRED",
     "hardware_report_to_done_seconds": null,
-    "internal_review_calls": 3,
+    "internal_review_calls": 4,
     "internal_specialist_calls": 3,
     "ready_to_hardware_seconds": null,
     "token_usage": null,
@@ -118,6 +128,16 @@
     {
       "id": "menu_handoff_review",
       "lane": "fresh independent controller operation packet review",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "medium",
+      "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    },
+    {
+      "deliverable": "packet_final_review.json",
+      "id": "packet_r2_review",
+      "lane": "fresh independent executable R2 packet review",
       "observed_effort": "UNKNOWN",
       "observed_model": "UNKNOWN",
       "requested_effort": "medium",

@@ -1,0 +1,41 @@
+{
+  "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "canonical_compilation": "Exact unchanged canonical source; concrete values in packet_compile_identity.json",
+  "classification": "DOCS_CHECKER_ONLY",
+  "controller_operations": [],
+  "hardware_acceptance": "NOT_TESTED",
+  "implementation_build_review_resource_custody": "COMPLETE",
+  "kazuya_gameplay": "NOT_TESTED",
+  "live_refs_before_publication": {
+    "codex/native-profile-menu-candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
+    "codex/native-profile-menu-cleanup": "a50a32b42e86f3dee2e5ca76abc61153afa144ae",
+    "configurator": "55ab5984f47728db53a12665d685d16cfad39201"
+  },
+  "new_firmware_build": false,
+  "new_firmware_source_changes": false,
+  "offline_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 .venv/bin/python docs/runtime_config/character_profile_menu/test_packet_checks.py -v",
+    "log": "evidence/packet_r2_tests.log",
+    "log_sha256": "f145c1d996f7375f2616eaa529533d67a76538c66c1c4d51b0ad0b8260a9b00c",
+    "result": "9 PASS"
+  },
+  "packet_bash_syntax": {
+    "blocks": 18,
+    "method": "Each Bash block separately passed /bin/bash -n; no packet commands executed",
+    "result": "PASS"
+  },
+  "packet_id": "CPM-HW-1DE243C7-R2",
+  "remaining_execution_dependency": "Fresh controller state, after exact packet approval",
+  "repo_checks": {
+    "docs_navigation": "PASS",
+    "git_diff_check": "PASS",
+    "original_checkout_preexisting_edits": "PRESERVED",
+    "production_source_tools_schema_canonical_kazuya_vs_candidate": "NO_DIFF"
+  },
+  "review_binding": {
+    "files": 35,
+    "receipt": "packet_final_review.json",
+    "result": "PASS"
+  },
+  "tree": "5a25a83705a654480b8db805f20822f4d180d70f"
+}
