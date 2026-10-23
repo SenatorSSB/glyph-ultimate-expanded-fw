@@ -48,8 +48,11 @@ size_t BuildTargets(const Config &config, const ProfileStore &store,
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const auto &mode = config.game_mode_configs[i];
         if (!Eligible(mode, backend)) continue;
-        if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat && NativeTemplate(mode)) {
-            native = true;
+        if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat && mode.mode_id == MODE_ULTIMATE) {
+            // Compact-mode character choices come from native store records.
+            // Keep every Config context internally; only an eligible native
+            // template can admit those choices to the selector.
+            native = native || NativeTemplate(mode);
             continue;
         }
         if (count == capacity) return count;

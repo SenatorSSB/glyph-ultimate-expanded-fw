@@ -86,6 +86,19 @@ int main(int argc,char **argv){try{
  {Persistence storage;seed(storage,COMMS_BACKEND_XINPUT);durable.game_mode_configs_count=2;durable.game_mode_configs[1]=durable.game_mode_configs[0];durable.game_mode_configs[0].button_remapping_count=1;durable.game_mode_configs[0].button_remapping[0]={BTN_RF1,BTN_LF1};put("config-v2.bin",record(durable));size_t m=0,b=0;
   require(profile_selection::Persist(storage,store,candidate,COMMS_BACKEND_XINPUT,1001,0,m,b)==ModeDestinationResult::Saved&&m==1,"multiple existing contexts resolve matching eligible row");
  }
+ for(auto backend:{COMMS_BACKEND_XINPUT,COMMS_BACKEND_NINTENDO_SWITCH,COMMS_BACKEND_DINPUT,COMMS_BACKEND_GAMECUBE}) {
+  Persistence storage;seed(storage,backend);durable.game_mode_configs_count=4;
+  for(size_t i=1;i<4;++i)durable.game_mode_configs[i]=durable.game_mode_configs[0];
+  durable.game_mode_configs[0].ultimate_profile_engine=0;durable.game_mode_configs[0].ultimate_profile_id=3;
+  durable.game_mode_configs[1].button_remapping_count=1;durable.game_mode_configs[1].button_remapping[0]={BTN_RF1,BTN_LF1};
+  auto &ineligible=durable.game_mode_configs[2];ineligible.applicable_backends_count=1;
+  ineligible.applicable_backends[0]=backend==COMMS_BACKEND_GAMECUBE?COMMS_BACKEND_XINPUT:COMMS_BACKEND_GAMECUBE;
+  auto &matching=durable.game_mode_configs[3];matching.applicable_backends_count=1;matching.applicable_backends[0]=backend;
+  put("config-v2.bin",record(durable));size_t m=0,b=0;
+  require(profile_selection::Persist(storage,store,candidate,backend,1001,0,m,b)==ModeDestinationResult::Saved&&m==3&&b==0,"hidden contexts preserve engine/backend/exact preprocessing resolution on every route");
+  Config expected=durable;expected.game_mode_configs[3].ultimate_profile_id=1001;expected.communication_backend_configs[0].default_mode_config=4;
+  require(encode(expected)==encode(candidate),"only selected hidden context/reference and backend destination change");
+ }
  selected_store.wire[0]=store.wire[0];selected_store.wire[1]=store.wire[1];
  for(unsigned failure=0;failure<4;++failure) {
   const bool fail=failure!=0;

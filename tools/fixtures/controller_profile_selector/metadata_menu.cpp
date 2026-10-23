@@ -23,6 +23,89 @@ ProfileStore profile_store;
 #include "HAL/pico/src/display/DefaultConfigMenu.cpp"
 #include "config/glyph/common/src/display/GlyphConfigMenu.cpp"
 static void check(bool ok,const char *why) { if(!ok) throw std::runtime_error(why); }
+static void character_menu_policy() {
+ // Exact retained topology: source fallback, legacy ID3, native ID28;
+ // 22 non-native records, permanent Ultimate and twenty selector fixtures.
+ Config config{};config.ultimate_profile_store_format=ProfileStore::kCompactConfigFormat;
+ config.game_mode_configs_count=3;
+ for(size_t i=0;i<3;++i) {
+  auto &m=config.game_mode_configs[i];m.mode_id=MODE_ULTIMATE;
+  std::strcpy(m.name,"Ultimate Runtime");m.button_remapping_count=3;
+  m.button_remapping[0]={BTN_RF3,BTN_RF3};m.button_remapping[1]={BTN_RF4,BTN_RF4};m.button_remapping[2]={BTN_LT3,BTN_LT3};
+ }
+ config.game_mode_configs[1].ultimate_profile_id=3;
+ auto &native=config.game_mode_configs[2];native.ultimate_profile_engine=1;native.ultimate_profile_id=28;
+ native.socd_pairs_count=2;native.socd_pairs[0]={BTN_LF3,BTN_LF1,SOCD_2IP};native.socd_pairs[1]={BTN_LF5,BTN_LF2,SOCD_2IP};
+ entries.clear();
+ auto add=[](uint32_t id,uint8_t schema,uint32_t rank,const char *name) {
+  ProfileStore::Entry e{};e.id=id;e.payload_version=schema;e.rank=rank;
+  std::snprintf(e.name,sizeof(e.name),"%s",name);entries.push_back(e);
+ };
+ add(1,1,0,"retained legacy");
+ for(uint32_t id=3;id<=22;++id)add(id,3,0,"retained legacy");
+ add(24,3,0,"retained legacy");add(27,5,0,"Ultimate");
+ for(uint32_t id=28;id<=47;++id) {
+  char name[8];std::snprintf(name,sizeof(name),"SEL%02u",unsigned(id-27));add(id,5,1000+id-27,name);
+ }
+ check(entries.size()==43,"retained full directory topology");
+ const CommunicationBackendId routes[]={COMMS_BACKEND_XINPUT,COMMS_BACKEND_GAMECUBE,COMMS_BACKEND_NINTENDO_SWITCH,COMMS_BACKEND_DINPUT};
+ config.communication_backend_configs_count=4;
+ for(size_t i=0;i<4;++i){config.communication_backend_configs[i].backend_id=routes[i];config.communication_backend_configs[i].default_mode_config=3;}
+ const auto preserved=config;
+ profile_selection::Target targets[profile_selection::kMaxTargets]{};
+ auto verify=[&](size_t expected) {
+  const auto directory=entries;
+  for(auto route:routes) {
+   check(profile_selection::BuildTargets(config,profile_store,route,targets,profile_selection::kMaxTargets)==expected,"compact character-only count");
+   check(targets[0].profile_id==27,"Ultimate first stable ID");
+   InputMode current(&native);CommunicationBackend backend(route,&current);CommunicationBackend *backends[]={&backend};
+   GlyphConfigMenu menu(config,backends,1);
+   check(menu._gamemode_options_page.items_count==expected,"actual menu character count");
+   for(size_t i=0;i<expected;++i) {
+    const auto *item=menu.ResolveItem(&menu._gamemode_options_page,i);
+    check(item&&item->key==i,"stored menu key remains list index");
+    const auto *e=profile_selection::FindEntry(profile_store,targets[i].profile_id);
+    check(e&&!std::strcmp(item->text,e->name),"actual menu uses stored character label");
+    check(targets[i].profile_id!=0,"no compact Ultimate Config target");
+   }
+  }
+  check(!std::memcmp(&config,&preserved,sizeof(config)),"menu keeps exact runtime contexts/defaults");
+  check(entries.size()==directory.size(),"enumeration preserves store count");
+  for(size_t i=0;i<entries.size();++i)check(entries[i].id==directory[i].id&&entries[i].rank==directory[i].rank&&entries[i].payload_version==directory[i].payload_version&&!std::strcmp(entries[i].name,directory[i].name),"enumeration preserves store metadata");
+ };
+ verify(21);
+ for(size_t i=1;i<21;++i)check(targets[i].profile_id==27+i,"SEL stable IDs/ranks preserved");
+ entries.erase(std::remove_if(entries.begin(),entries.end(),[](const auto &e){return e.id>=28&&e.id<=47;}),entries.end());
+ check(entries.size()==23,"simulated cleanup retains all non-native records");verify(1);
+ add(0x80000030u,5,1,"Kazuya");verify(2);
+ check(targets[1].profile_id==0x80000030u,"Kazuya uses actual arbitrary full32 stable ID");
+ // Names never designate context visibility. Legacy/noncompact choices stay.
+ std::strcpy(config.game_mode_configs[0].name,"Source fallback");
+ std::strcpy(config.game_mode_configs[1].name,"Legacy choice");native.name[0]=0;
+ check(profile_selection::BuildTargets(config,profile_store,routes[0],targets,94)==2,"semantic predicate independent of names");
+ config.ultimate_profile_store_format=0;
+ for(size_t i=0;i<3;++i){config.game_mode_configs[i].ultimate_profile_engine=0;config.game_mode_configs[i].ultimate_profile_id=0;}
+ check(profile_selection::BuildTargets(config,profile_store,routes[0],targets,94)==3,"noncompact Ultimate choices retained");
+ for(size_t i=0;i<3;++i)check(!targets[i].profile_id&&targets[i].mode_index==i,"noncompact ordinary row identity");
+ config=preserved;
+ // All contexts stay hidden with distinct eligibility/preprocessing. Only an
+ // eligible engine1 template admits native choices; never promote engine0.
+ config.game_mode_configs_count=5;config.game_mode_configs[3]=native;config.game_mode_configs[4]=native;
+ for(size_t i=2;i<5;++i){auto &m=config.game_mode_configs[i];m.applicable_backends_count=1;m.applicable_backends[0]=routes[i-2];}
+ config.game_mode_configs[3].button_remapping[0]={BTN_RF1,BTN_LF1};
+ for(size_t i=0;i<3;++i)check(profile_selection::BuildTargets(config,profile_store,routes[i],targets,94)==2,"multiple hidden eligible contexts");
+ check(profile_selection::BuildTargets(config,profile_store,COMMS_BACKEND_DINPUT,targets,94)==0,"no eligible native template invents no selectable profiles");
+ config.game_mode_configs_count=2;
+ check(profile_selection::BuildTargets(config,profile_store,routes[0],targets,94)==0,"engine0-only compact rows hidden without promoting legacy templates");
+ config=preserved;
+ add(501,5,1,"equal-rank later");add(502,5,1,"equal-rank last");
+ check(profile_selection::BuildTargets(config,profile_store,routes[0],targets,94)==4,"tie fixture count");
+ check(targets[1].profile_id==0x80000030u&&targets[2].profile_id==501&&targets[3].profile_id==502,"equal-rank directory stability");
+ check(profile_selection::BuildTargets(config,profile_store,routes[0],targets,1)==1&&targets[0].profile_id==27,"capacity bound retains first native");
+ check(!profile_selection::BuildTargets(config,profile_store,routes[0],targets,0),"zero capacity safe");
+ check(!profile_selection::BuildTargets(config,profile_store,COMMS_BACKEND_CONFIGURATOR,targets,94),"Configurator does not enumerate profiles");
+ std::cout<<"PASS compact character policy:43-record owner topology/Ultimate+20SEL/Ultimate+Kazuya/all4 routes/contexts/read-only/names/noncompact/ties/keys/capacity\n";
+}
 int main() { try {
  Config config{};config.ultimate_profile_store_format=1;
  config.communication_backend_configs_count=4;
@@ -87,5 +170,6 @@ int main() { try {
  check(empty._highlighted_menu_item==0&&!empty.ResolveItem(empty._current_menu_page,0),"empty list safe");
  empty.HandleControls(&display,controls,controls.back);check(empty._current_menu_page==empty._top_level_page,"empty back");
  check(profile_selection::Request(UINT32_MAX)&&profile_selection::Pending()==UINT32_MAX,"maximum ID no sentinel/truncation");profile_selection::Complete();check(!profile_selection::Request(0),"zero ID refuses");
+ character_menu_policy();
  std::cout<<"PASS production metadata/menu/mailbox:0/1/11/20/64 ranks names backend Keyboard legacy scrolling empty full32 IDs duplicates\n";
  }catch(const std::exception &e){std::cerr<<e.what()<<'\n';return 1;} }
