@@ -2,6 +2,7 @@
   "UF2_bytes": 1046016,
   "UF2_sha256": "a8a012e3d264d622a08ddfbe1f2e547c441c5406645203069e90314b4996e04b",
   "active_firmware_changed": true,
+  "actual_source_integration_I": "b8f9d14079e0930e2e4616c2df7923be564255f6",
   "authority": {
     "clarification": "OWNER_DIRECTIVE.md",
     "exclusions": [
@@ -20,39 +21,50 @@
   "branch": "codex/native-profile-menu-cleanup",
   "candidate": "1de243c7bada73ba85843018058b4f66a06acdda",
   "candidate_tree": "5a25a83705a654480b8db805f20822f4d180d70f",
-  "canonical_merge": false,
+  "canonical_merge": true,
+  "canonical_publication": "integration_20261023/PUBLICATION_RECEIPT.json",
   "canonical_publication_lock": "NOT_ACQUIRED_NO_CANONICAL_PUBLICATION",
   "chapter": "character_profile_menu",
   "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
   "controller_mutations": [],
-  "current_active_identity": "UNKNOWN",
+  "controller_store_mutations_during_this_continuation": [],
+  "current_active_identity": "LAST_GAMEPLAY_ULTIMATE_ON_OWNER_TESTED_ROUTES; CURRENT_CONFIGURATOR_AFTER_READ_ONLY_AUDIT",
+  "current_authority": "hardware_20261023/OWNER_CONTINUATION.json",
   "date": "2026-10-23",
   "delegation": {
     "capability_discovery": "Runtime collaboration tools and repository SUBAGENT_CONTRACTS inspected.",
     "final_handoff_review": "PASS_FOR_OWNER_APPROVAL_PACKET",
     "guidance_applicable": true,
+    "hardware_adoption_review": "PASS_FOR_SOURCE_FREE_MENU_HARDWARE_ADOPTION",
     "independent_preparation_review": "PASS_FOR_BOUNDED_PREPARATION_ONLY",
+    "integration_review": "PASS_FOR_EXACT_TESTED_MENU_SOURCE_PUBLICATION",
     "native_capability_available": true,
     "resource_review": "PASS_UNCHANGED_LIMITS",
     "source_review": "PASS_SOURCE_ONLY"
   },
-  "firmware_flashed": false,
+  "firmware_flashed": true,
+  "firmware_flashed_during_this_continuation": false,
   "fixed_candidate_ref": "codex/native-profile-menu-candidate",
-  "fresh_controller_readback": "NOT_PERFORMED_OWNER_COUNT_CORRECTION_RECONCILES_RETAINED_SNAPSHOT",
+  "fresh_controller_readback": "PASS_FINAL_ALL24_RECORDS_CONFIG_STORE_FENCES_EXACT",
   "goal_resume": "Owner correction and explicit menu policy resolved the initial block;bounded candidate and unexecuted packet completed.",
-  "hardware_acceptance": "NOT_TESTED",
+  "hardware_acceptance": "PASS_ALL_THREE_MENU_ROUTES_FINAL_PRESERVATION",
+  "historical_authorized_controller_operations": "hardware_20261023/prior_execution.json",
+  "historical_queue_adjudications": "UNCHANGED_OWNER_DIRECTED_CHAPTER_ONLY",
   "initial_semantic_stop": "RESOLVED_BY_DIRECT_OWNER_CLARIFICATION",
-  "kazuya_created": false,
+  "kazuya_activation_during_this_task": false,
+  "kazuya_created": true,
   "kazuya_gameplay_acceptance": "NOT_TESTED",
-  "live_ref_recheck": "PASS_CANONICAL_UNCHANGED_55ab5984_BEFORE_PUBLICATION",
+  "kazuya_stored_id": 48,
+  "live_ref_recheck": "PASS_CANONICAL_REVIEWED_INTEGRATION_PUBLISHED",
   "network_capabilities": {
     "default_probe": "DNS_FAILURE_INCONCLUSIVE",
     "live_github_requires_network_enabled": true,
     "permitted_network_enabled_retry": "PASS_EXACT_EXPECTED_REF"
   },
-  "next_permissible_action": "Return exact independently reviewed packet for owner approval;execute no hardware/controller operation in this task.",
+  "next_permissible_action": "STOP. Separate Kazuya gameplay campaign requires separate owner authority.",
   "nunchuk": "NOT_TESTED",
   "original_checkout_preserved": true,
+  "original_preparation_snapshot": "git-json:b954070214251ab61d4f703aab4902dfbcff36b7:docs/runtime_config/character_profile_menu/ledger.json",
   "owner_questions": [],
   "packet_finalization": {
     "approval": "EXACT_OWNER_APPROVAL_REQUIRED_BEFORE_EXECUTION",
@@ -65,13 +77,18 @@
     "validation": "packet_finalization_validation.json"
   },
   "root_cause": "UNPROVEN",
-  "sel_deleted": false,
-  "state": "CANDIDATE_VALIDATED_OWNER_APPROVAL_PENDING",
+  "sel_deleted": true,
+  "source_free_accepted_E": "2b0da786dc4832c9575c1a8448f25279b0d2799e",
+  "source_integration": "COMPLETE",
+  "state": "DONE_MENU_ONLY_KAZUYA_GAMEPLAY_NOT_TESTED",
   "telemetry": {
-    "canonical_commits": [],
+    "canonical_commits": [
+      "2b0da786dc4832c9575c1a8448f25279b0d2799e",
+      "dad5ce8a6dd060e4cc3b89464d3bc64595c751d5"
+    ],
     "hardware_handoff": "EXACT_PACKET_REVIEW_PASS_OWNER_APPROVAL_REQUIRED",
     "hardware_report_to_done_seconds": null,
-    "internal_review_calls": 4,
+    "internal_review_calls": 6,
     "internal_specialist_calls": 3,
     "ready_to_hardware_seconds": null,
     "token_usage": null,
@@ -142,6 +159,19 @@
       "observed_model": "UNKNOWN",
       "requested_effort": "medium",
       "requested_model": "gpt-6.1-sol",
+      "state": "retired"
+    },
+    {
+      "deliverables": [
+        "hardware_20261023/independent_hardware_review.json",
+        "integration_20261023/INDEPENDENT_REVIEW.json"
+      ],
+      "id": "menu_acceptance_review",
+      "lane": "independent source-free hardware adoption then fresh independent integration review",
+      "observed_effort": "UNKNOWN",
+      "observed_model": "UNKNOWN",
+      "requested_effort": "inherited default",
+      "requested_model": "inherited default",
       "state": "retired"
     }
   ]

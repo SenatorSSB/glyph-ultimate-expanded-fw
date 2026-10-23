@@ -1,0 +1,28 @@
+{
+  "Kazuya_activation_during_this_task": "NO",
+  "Kazuya_gameplay_acceptance": "NOT_TESTED",
+  "Kazuya_stored_profile": 48,
+  "actual_integration_I": "b8f9d14079e0930e2e4616c2df7923be564255f6",
+  "exact_tested_F": "1de243c7bada73ba85843018058b4f66a06acdda",
+  "final_preservation": "PASS_CONFIG_AND_ALL24_RECORDS_STORE_FENCES_EXACT",
+  "formal_historical_queue_adjudication": "UNCHANGED_OWNER_DIRECTED_CHAPTER_COMPLETION_ONLY",
+  "historical_GameCube_liveness": "SEPARATE_UNCHANGED",
+  "live_verification_time_utc": "2026-10-23T20:34:18.681074+00:00",
+  "menu_candidate_hardware_acceptance": "PASS",
+  "menu_source_integration": "COMPLETE",
+  "new_firmware_build": false,
+  "new_flash": false,
+  "prior_canonical": "55ab5984f47728db53a12665d685d16cfad39201",
+  "receipt_boundary": "This receipt commit changes documentation only, preserves J/I source bytes, and is separately live-verified after publication; it does not self-reference an unknown commit SHA.",
+  "route_hardware_acceptance": {
+    "GameCube": "OWNER_OBSERVED_PASS",
+    "USB_Nintendo_Switch": "OWNER_OBSERVED_PASS",
+    "XInput": "PASS"
+  },
+  "schema_name": "glyph_character_menu_live_publication",
+  "schema_version": 1,
+  "source_correspondence": "PASS_ALL1099_NON_DOC_INPUTS_EXACT_F",
+  "source_free_acceptance_E": "2b0da786dc4832c9575c1a8448f25279b0d2799e",
+  "source_free_handoff_R": "b954070214251ab61d4f703aab4902dfbcff36b7",
+  "verified_publication_J": "dad5ce8a6dd060e4cc3b89464d3bc64595c751d5"
+}
