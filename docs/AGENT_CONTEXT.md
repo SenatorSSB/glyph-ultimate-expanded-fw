@@ -1,5 +1,17 @@
 # Agent Context
 
+## Human-editable native Ultimate source — 2026-10-23
+
+The separate owner-authorized [profile authoring chapter](../profiles/ultimate/README.md)
+recovers the exact retained ID27/revision1/Ultimate/schema5 wrapper into finite
+hand-editable JSON v0. Offline decode/validate/compile reproduces the original
+1985-byte wrapper and1980-byte native body exactly; production ordered
+preprocessing digest matches. Schema/codec tests and both-ABI legacy-converter
+regressions pass. No firmware source or physical-controller command changed;
+no upload, Config write, profile change or hardware acceptance is claimed.
+GP-NATIVE-002 remains DONE and its immutable evidence stays unchanged.
+See the chapter ledger and exact public fixtures for review/validation provenance.
+
 ## GP-NATIVE-002 DONE after exact tested-source integration — 2026-10-23
 
 [Strict completion](runtime_config/controller_profile_selector/integration_20261023/STRICT_COMPLETION.json)

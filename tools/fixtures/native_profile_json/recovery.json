@@ -1,0 +1,34 @@
+{
+  "recovery": "retained backups; no live device I/O",
+  "id": 27,
+  "revision": 1,
+  "name": "Ultimate",
+  "schema": 5,
+  "wrapper_bytes": 1985,
+  "wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+  "body_bytes": 1980,
+  "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+  "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+  "historical_provenance_sha256": "f09a210f9fc7400d52673f6455004185451d33575e88eb0fc54abfc73297dda0",
+  "preprocessing_canonical_hex": "476c7970682e4e61746976652e50726570726f636573732e76310003000313131414232302030102050202",
+  "conversion_package_profile_matches": true,
+  "controller_commands": [],
+  "retained_copy_count": 4,
+  "all_retained_wrappers_byte_identical": true,
+  "capture_sources": [
+    "local_backups/hardware-acceptance/GP_NATIVE_002_GC_LIVENESS_HW_V1_20261023/posttest_configurator/profile_27.pb",
+    "local_backups/hardware-acceptance/GP_NATIVE_002_GC_LIVENESS_RECOVERY_V1_20261023/profile_27.pb",
+    "local_backups/hardware-acceptance/GP_NATIVE_002_HW_V1_20261022/posttest_configurator/profile_27.pb",
+    "local_backups/hardware-acceptance/GP_NATIVE_002_HW_V1_20261022/preupdate_configurator/profile_27.pb"
+  ],
+  "latest_manifest_verified_files": [
+    "profile_27.pb",
+    "profile_27.json",
+    "directory.json",
+    "current_config.pb",
+    "config_backup.json",
+    "profile_27_result.json"
+  ],
+  "context_source": "Latest retained posttest Config game-mode index 2; same ordered preprocessing as exact conversion package.",
+  "privacy": "Fixture wrapper has only schema_version and native_payload; no device identifier, stable profile ID, revision, name, Config receipt, path, or session metadata."
+}

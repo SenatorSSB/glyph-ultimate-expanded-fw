@@ -1,0 +1,209 @@
+{
+  "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+  "correspondence_report": {
+    "families": [
+      {
+        "condition_tokens": {
+          "base_rf3": 12291,
+          "c_any": 12289,
+          "c_diagonal": 12315,
+          "c_horizontal": 12313,
+          "c_vertical": 12314,
+          "custom": 12293,
+          "digital_a": 12306,
+          "digital_b": 12307,
+          "digital_lf4x": 12311,
+          "digital_x": 12309,
+          "digital_y2b": 12308,
+          "digital_y2x": 12310,
+          "direction_a": 12303,
+          "force_lf4": 12297,
+          "force_up": 12298,
+          "force_y2": 12296,
+          "ls_down": 12300,
+          "ls_left": 12301,
+          "ls_right": 12302,
+          "ls_up": 12299,
+          "not_force": 12304,
+          "null": 12312,
+          "rf3_suppress": 12305,
+          "rf3_vertical": 12316,
+          "rf4_available": 12295,
+          "rf4_cblocked": 12294,
+          "rf6_down": 12317,
+          "rf6_up": 12318,
+          "rf9base": 12292,
+          "y2sub": 12290
+        }
+      }
+    ],
+    "legacy_role_mapping": [
+      {
+        "legacy_role_id": 1,
+        "native_condition_token": 12319
+      },
+      {
+        "legacy_role_id": 2,
+        "native_condition_token": 12320
+      },
+      {
+        "legacy_role_id": 3,
+        "native_condition_token": 12321
+      },
+      {
+        "legacy_role_id": 4,
+        "native_condition_token": 12322
+      },
+      {
+        "legacy_role_id": 5,
+        "native_condition_token": 12323
+      },
+      {
+        "legacy_role_id": 6,
+        "native_condition_token": 12324
+      },
+      {
+        "legacy_role_id": 7,
+        "native_condition_token": 12325
+      },
+      {
+        "legacy_role_id": 8,
+        "native_condition_token": 12326
+      },
+      {
+        "legacy_role_id": 9,
+        "native_condition_token": 12327
+      },
+      {
+        "legacy_role_id": 10,
+        "native_condition_token": 12328
+      },
+      {
+        "legacy_role_id": 11,
+        "native_condition_token": 12329
+      },
+      {
+        "legacy_role_id": 12,
+        "native_condition_token": 12330
+      },
+      {
+        "legacy_role_id": 13,
+        "native_condition_token": 12331
+      },
+      {
+        "legacy_role_id": 14,
+        "native_condition_token": 12332
+      },
+      {
+        "legacy_role_id": 15,
+        "native_condition_token": 12333
+      },
+      {
+        "legacy_role_id": 16,
+        "native_condition_token": 12334
+      },
+      {
+        "legacy_role_id": 17,
+        "native_condition_token": 12335
+      },
+      {
+        "legacy_role_id": 18,
+        "native_condition_token": 12336
+      },
+      {
+        "legacy_role_id": 19,
+        "native_condition_token": 12337
+      },
+      {
+        "legacy_role_id": 20,
+        "native_condition_token": 12338
+      },
+      {
+        "legacy_role_id": 21,
+        "native_condition_token": 12339
+      },
+      {
+        "legacy_role_id": 22,
+        "native_condition_token": 12340
+      }
+    ],
+    "rules": [
+      {
+        "native_index": 0,
+        "condition_token": 12341
+      },
+      {
+        "native_index": 1,
+        "condition_token": 12342
+      },
+      {
+        "native_index": 2,
+        "condition_token": 12343
+      },
+      {
+        "native_index": 3,
+        "condition_token": 12344
+      },
+      {
+        "native_index": 4,
+        "condition_token": 12345
+      },
+      {
+        "native_index": 5,
+        "condition_token": 12346
+      },
+      {
+        "native_index": 6,
+        "condition_token": 12347
+      },
+      {
+        "native_index": 7,
+        "condition_token": 12348
+      },
+      {
+        "native_index": 8,
+        "condition_token": 12349
+      },
+      {
+        "native_index": 9,
+        "condition_token": 12350
+      },
+      {
+        "native_index": 10,
+        "condition_token": 12351
+      },
+      {
+        "native_index": 11,
+        "condition_token": 12352
+      },
+      {
+        "native_index": 12,
+        "condition_token": 12353
+      },
+      {
+        "native_index": 13,
+        "condition_token": 12354
+      },
+      {
+        "native_index": 14,
+        "condition_token": 12355
+      },
+      {
+        "native_index": 15,
+        "condition_token": 12356
+      },
+      {
+        "native_index": 16,
+        "condition_token": 12357
+      },
+      {
+        "native_index": 17,
+        "condition_token": 12358
+      },
+      {
+        "native_index": 18,
+        "condition_token": 12359
+      }
+    ]
+  }
+}

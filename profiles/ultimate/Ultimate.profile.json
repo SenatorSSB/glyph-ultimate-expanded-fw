@@ -1,0 +1,1827 @@
+{
+  "format": "glyph-native-ultimate-profile",
+  "formatVersion": 0,
+  "name": "Ultimate",
+  "provenance": {
+    "kind": "preservedConversionSourceSha256",
+    "sha256": "f09a210f9fc7400d52673f6455004185451d33575e88eb0fc54abfc73297dda0"
+  },
+  "preprocessing": {
+    "mode": "MODE_ULTIMATE",
+    "remaps": [
+      {
+        "physical": "RF3",
+        "activates": "RF3"
+      },
+      {
+        "physical": "RF4",
+        "activates": "RF4"
+      },
+      {
+        "physical": "LT3",
+        "activates": "LT3"
+      }
+    ],
+    "socd": [
+      {
+        "first": "LF3",
+        "second": "LF1",
+        "policy": "secondInputPriority"
+      },
+      {
+        "first": "LF5",
+        "second": "LF2",
+        "policy": "secondInputPriority"
+      }
+    ]
+  },
+  "tables": {
+    "Default": {
+      "id": 0,
+      "directions": {
+        "1": [61, 51],
+        "2": [128, 51],
+        "3": [195, 51],
+        "4": [61, 128],
+        "5": [128, 128],
+        "6": [195, 128],
+        "7": [61, 205],
+        "8": [128, 205],
+        "9": [195, 205]
+      }
+    },
+    "ModeDefault": {
+      "id": 1,
+      "directions": {
+        "1": [14, 87],
+        "2": [128, 87],
+        "3": [242, 87],
+        "4": [14, 169],
+        "5": [128, 169],
+        "6": [242, 169],
+        "7": [14, 169],
+        "8": [128, 169],
+        "9": [242, 169]
+      }
+    },
+    "X1": {
+      "id": 2,
+      "directions": {
+        "1": [93, 51],
+        "2": [128, 51],
+        "3": [163, 51],
+        "4": [93, 128],
+        "5": [128, 128],
+        "6": [163, 128],
+        "7": [93, 205],
+        "8": [128, 205],
+        "9": [163, 205]
+      }
+    },
+    "X2": {
+      "id": 3,
+      "directions": {
+        "1": [82, 51],
+        "2": [128, 51],
+        "3": [174, 51],
+        "4": [82, 128],
+        "5": [128, 128],
+        "6": [174, 128],
+        "7": [82, 205],
+        "8": [128, 205],
+        "9": [174, 205]
+      }
+    },
+    "MX1": {
+      "id": 4,
+      "directions": {
+        "1": [78, 87],
+        "2": [128, 87],
+        "3": [178, 87],
+        "4": [78, 169],
+        "5": [128, 169],
+        "6": [178, 169],
+        "7": [78, 169],
+        "8": [128, 169],
+        "9": [178, 169]
+      }
+    },
+    "MX2": {
+      "id": 5,
+      "directions": {
+        "1": [65, 87],
+        "2": [128, 87],
+        "3": [191, 87],
+        "4": [65, 169],
+        "5": [128, 169],
+        "6": [191, 169],
+        "7": [65, 169],
+        "8": [128, 169],
+        "9": [191, 169]
+      }
+    },
+    "Y1": {
+      "id": 6,
+      "directions": {
+        "1": [61, 99],
+        "2": [128, 99],
+        "3": [195, 99],
+        "4": [61, 128],
+        "5": [128, 128],
+        "6": [195, 128],
+        "7": [61, 157],
+        "8": [128, 157],
+        "9": [195, 157]
+      }
+    },
+    "Y2": {
+      "id": 7,
+      "directions": {
+        "1": [69, 78],
+        "2": [128, 78],
+        "3": [187, 78],
+        "4": [61, 128],
+        "5": [128, 128],
+        "6": [195, 128],
+        "7": [61, 164],
+        "8": [128, 174],
+        "9": [195, 164]
+      }
+    },
+    "MY1": {
+      "id": 8,
+      "directions": {
+        "1": [14, 179],
+        "2": [128, 179],
+        "3": [242, 179],
+        "4": [14, 169],
+        "5": [128, 169],
+        "6": [242, 169],
+        "7": [14, 77],
+        "8": [128, 77],
+        "9": [242, 77]
+      }
+    },
+    "LayerNormalX": {
+      "id": 9,
+      "directions": {
+        "1": [87, 51],
+        "2": [128, 51],
+        "3": [169, 51],
+        "4": [87, 128],
+        "5": [128, 128],
+        "6": [169, 128],
+        "7": [87, 205],
+        "8": [128, 205],
+        "9": [169, 205]
+      }
+    },
+    "MLayerNormalX": {
+      "id": 10,
+      "directions": {
+        "1": [87, 87],
+        "2": [128, 87],
+        "3": [169, 87],
+        "4": [87, 169],
+        "5": [128, 169],
+        "6": [169, 169],
+        "7": [87, 169],
+        "8": [128, 169],
+        "9": [169, 169]
+      }
+    },
+    "LayerFlipper": {
+      "id": 11,
+      "directions": {
+        "1": [169, 51],
+        "2": [128, 51],
+        "3": [87, 51],
+        "4": [169, 128],
+        "5": [128, 128],
+        "6": [87, 128],
+        "7": [169, 205],
+        "8": [128, 205],
+        "9": [87, 205]
+      }
+    },
+    "MLayerFlipper": {
+      "id": 12,
+      "directions": {
+        "1": [169, 87],
+        "2": [128, 87],
+        "3": [87, 87],
+        "4": [169, 169],
+        "5": [128, 169],
+        "6": [87, 169],
+        "7": [169, 169],
+        "8": [128, 169],
+        "9": [87, 169]
+      }
+    },
+    "Y1Tilt1": {
+      "id": 13,
+      "directions": {
+        "1": [169, 99],
+        "2": [128, 99],
+        "3": [87, 99],
+        "4": [169, 128],
+        "5": [128, 128],
+        "6": [87, 128],
+        "7": [169, 157],
+        "8": [128, 157],
+        "9": [87, 157]
+      }
+    },
+    "MY1Tilt1": {
+      "id": 14,
+      "directions": {
+        "1": [169, 179],
+        "2": [128, 179],
+        "3": [87, 179],
+        "4": [169, 169],
+        "5": [128, 169],
+        "6": [87, 169],
+        "7": [169, 77],
+        "8": [128, 77],
+        "9": [87, 77]
+      }
+    },
+    "Y1LayerFlipper": {
+      "id": 15,
+      "directions": {
+        "1": [169, 99],
+        "2": [128, 99],
+        "3": [87, 99],
+        "4": [169, 128],
+        "5": [128, 128],
+        "6": [87, 128],
+        "7": [169, 157],
+        "8": [128, 157],
+        "9": [87, 157]
+      }
+    },
+    "MY1LayerFlipper": {
+      "id": 16,
+      "directions": {
+        "1": [169, 179],
+        "2": [128, 179],
+        "3": [87, 179],
+        "4": [169, 169],
+        "5": [128, 169],
+        "6": [87, 169],
+        "7": [169, 77],
+        "8": [128, 77],
+        "9": [87, 77]
+      }
+    },
+    "Y1LayerNormalX": {
+      "id": 17,
+      "directions": {
+        "1": [87, 99],
+        "2": [128, 99],
+        "3": [169, 99],
+        "4": [87, 128],
+        "5": [128, 128],
+        "6": [169, 128],
+        "7": [87, 157],
+        "8": [128, 157],
+        "9": [169, 157]
+      }
+    },
+    "MY1LayerNormalX": {
+      "id": 18,
+      "directions": {
+        "1": [87, 179],
+        "2": [128, 179],
+        "3": [169, 179],
+        "4": [87, 169],
+        "5": [128, 169],
+        "6": [169, 169],
+        "7": [87, 77],
+        "8": [128, 77],
+        "9": [169, 77]
+      }
+    },
+    "Tilt1": {
+      "id": 19,
+      "directions": {
+        "1": [187, 47],
+        "2": [128, 47],
+        "3": [69, 47],
+        "4": [187, 128],
+        "5": [128, 128],
+        "6": [69, 128],
+        "7": [187, 209],
+        "8": [128, 209],
+        "9": [69, 209]
+      }
+    },
+    "Tilt2": {
+      "id": 20,
+      "directions": {
+        "1": [88, 79],
+        "2": [128, 79],
+        "3": [168, 79],
+        "4": [88, 128],
+        "5": [128, 128],
+        "6": [168, 128],
+        "7": [88, 177],
+        "8": [128, 177],
+        "9": [168, 177]
+      }
+    },
+    "Tilt3": {
+      "id": 21,
+      "directions": {
+        "1": [69, 82],
+        "2": [128, 83],
+        "3": [187, 82],
+        "4": [69, 128],
+        "5": [128, 128],
+        "6": [187, 128],
+        "7": [76, 169],
+        "8": [128, 179],
+        "9": [180, 169]
+      }
+    },
+    "Tilt1Minus41": {
+      "id": 22,
+      "directions": {
+        "1": [169, 47],
+        "2": [128, 47],
+        "3": [87, 47],
+        "4": [169, 128],
+        "5": [128, 128],
+        "6": [87, 128],
+        "7": [169, 209],
+        "8": [128, 209],
+        "9": [87, 209]
+      }
+    },
+    "RT1RF4Custom": {
+      "id": 23,
+      "directions": {
+        "1": [69, 78],
+        "2": [128, 78],
+        "3": [187, 78],
+        "4": [69, 128],
+        "5": [128, 128],
+        "6": [187, 128],
+        "7": [72, 172],
+        "8": [128, 179],
+        "9": [184, 172]
+      }
+    },
+    "MTilt1": {
+      "id": 24,
+      "directions": {
+        "1": [169, 88],
+        "2": [128, 88],
+        "3": [87, 88],
+        "4": [169, 169],
+        "5": [128, 169],
+        "6": [87, 169],
+        "7": [169, 168],
+        "8": [128, 168],
+        "9": [87, 168]
+      }
+    },
+    "MTilt2": {
+      "id": 25,
+      "directions": {
+        "1": [96, 82],
+        "2": [128, 82],
+        "3": [160, 82],
+        "4": [96, 169],
+        "5": [128, 169],
+        "6": [160, 169],
+        "7": [96, 174],
+        "8": [128, 174],
+        "9": [160, 174]
+      }
+    },
+    "MTilt3": {
+      "id": 26,
+      "directions": {
+        "1": [96, 86],
+        "2": [128, 86],
+        "3": [160, 86],
+        "4": [96, 169],
+        "5": [128, 169],
+        "6": [160, 169],
+        "7": [96, 170],
+        "8": [128, 170],
+        "9": [160, 170]
+      }
+    },
+    "Lt1LowMagnitude": {
+      "id": 27,
+      "directions": {
+        "1": [89, 89],
+        "2": [128, 79],
+        "3": [167, 89],
+        "4": [79, 128],
+        "5": [128, 128],
+        "6": [177, 128],
+        "7": [89, 167],
+        "8": [128, 177],
+        "9": [167, 167]
+      }
+    }
+  },
+  "defaultTable": "Default",
+  "leftStickSource": "source1",
+  "rightStickSource": "source2",
+  "gates": {
+    "mode": "postSocd:RF8",
+    "leftStickDigital": "true",
+    "rightStickDigital": "true",
+    "dpad": "postSocd:RF13"
+  },
+  "dpad": {
+    "routeToDpad": true,
+    "bypassLeftStick": true,
+    "suppressLeftStickDigital": true
+  },
+  "conditions": [
+    {
+      "name": "c_any",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT2",
+        "postSocd:RT3",
+        "postSocd:RT4",
+        "postSocd:RT5"
+      ],
+      "none": []
+    },
+    {
+      "name": "y2sub",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3"
+      ],
+      "any": [
+        "postSocd:RF3",
+        "postSocd:RF4"
+      ],
+      "none": [
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "base_rf3",
+      "stage": "early",
+      "all": [
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT3",
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "rf9base",
+      "stage": "early",
+      "all": [
+        "postSocd:RF9",
+        "condition:base_rf3"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "custom",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1",
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf9base"
+      ]
+    },
+    {
+      "name": "rf4_cblocked",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4",
+        "condition:c_any"
+      ],
+      "any": [],
+      "none": [
+        "condition:custom"
+      ]
+    },
+    {
+      "name": "rf4_available",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf4_cblocked",
+        "condition:rf9base"
+      ]
+    },
+    {
+      "name": "force_y2",
+      "stage": "early",
+      "all": [
+        "condition:y2sub",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "force_lf4",
+      "stage": "early",
+      "all": [
+        "postSocd:LF4",
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "force_up",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RF5",
+        "condition:force_y2",
+        "condition:force_lf4"
+      ],
+      "none": []
+    },
+    {
+      "name": "ls_up",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:LF2",
+        "condition:force_up"
+      ],
+      "none": []
+    },
+    {
+      "name": "ls_down",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:LF5",
+        "postSocd:LT6"
+      ],
+      "none": [
+        "condition:force_up"
+      ]
+    },
+    {
+      "name": "ls_left",
+      "stage": "early",
+      "all": [
+        "postSocd:LF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF1"
+      ]
+    },
+    {
+      "name": "ls_right",
+      "stage": "early",
+      "all": [
+        "postSocd:LF1"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF3"
+      ]
+    },
+    {
+      "name": "direction_a",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:LT6",
+        "postSocd:RF5"
+      ],
+      "none": []
+    },
+    {
+      "name": "not_force",
+      "stage": "early",
+      "all": [],
+      "any": [],
+      "none": [
+        "condition:force_up"
+      ]
+    },
+    {
+      "name": "rf3_suppress",
+      "stage": "early",
+      "all": [
+        "condition:rf9base"
+      ],
+      "any": [],
+      "none": [
+        "condition:c_any"
+      ]
+    },
+    {
+      "name": "digital_a",
+      "stage": "early",
+      "all": [
+        "postSocd:RF1"
+      ],
+      "any": [],
+      "none": [
+        "condition:y2sub"
+      ]
+    },
+    {
+      "name": "digital_b",
+      "stage": "early",
+      "all": [
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4",
+        "condition:y2sub"
+      ]
+    },
+    {
+      "name": "digital_y2b",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3",
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "digital_x",
+      "stage": "early",
+      "all": [
+        "condition:base_rf3"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf3_suppress"
+      ]
+    },
+    {
+      "name": "digital_y2x",
+      "stage": "early",
+      "all": [
+        "condition:y2sub",
+        "postSocd:RF1"
+      ],
+      "any": [],
+      "none": [
+        "condition:c_any"
+      ]
+    },
+    {
+      "name": "digital_lf4x",
+      "stage": "early",
+      "all": [
+        "postSocd:LF4",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": [
+        "condition:c_any"
+      ]
+    },
+    {
+      "name": "null",
+      "stage": "early",
+      "all": [
+        "postSocd:RF9"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf9base",
+        "condition:rf4_available"
+      ]
+    },
+    {
+      "name": "c_horizontal",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT3",
+        "postSocd:RT4"
+      ],
+      "none": []
+    },
+    {
+      "name": "c_vertical",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT2",
+        "postSocd:RT5"
+      ],
+      "none": []
+    },
+    {
+      "name": "c_diagonal",
+      "stage": "early",
+      "all": [
+        "condition:c_horizontal",
+        "condition:c_vertical"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "rf3_vertical",
+      "stage": "early",
+      "all": [
+        "postSocd:RF3",
+        "condition:c_vertical"
+      ],
+      "any": [
+        "condition:ls_left",
+        "condition:ls_right"
+      ],
+      "none": [
+        "postSocd:RT3",
+        "postSocd:RT4"
+      ]
+    },
+    {
+      "name": "rf6_down",
+      "stage": "early",
+      "all": [
+        "condition:ls_down"
+      ],
+      "any": [],
+      "none": [
+        "condition:ls_up"
+      ]
+    },
+    {
+      "name": "rf6_up",
+      "stage": "early",
+      "all": [
+        "condition:ls_up"
+      ],
+      "any": [],
+      "none": [
+        "condition:ls_down"
+      ]
+    },
+    {
+      "name": "legacyRole01",
+      "stage": "early",
+      "all": [
+        "postSocd:RF8"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole02",
+      "stage": "early",
+      "all": [
+        "postSocd:LT5"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole03",
+      "stage": "early",
+      "all": [
+        "postSocd:LT4"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole04",
+      "stage": "early",
+      "all": [
+        "postSocd:LT2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "legacyRole05",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4",
+        "postSocd:RF3",
+        "postSocd:RF4"
+      ]
+    },
+    {
+      "name": "legacyRole06",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3"
+      ],
+      "any": [
+        "postSocd:RF3",
+        "postSocd:RF4"
+      ],
+      "none": [
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "legacyRole07",
+      "stage": "early",
+      "all": [
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT3",
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "legacyRole08",
+      "stage": "early",
+      "all": [
+        "postSocd:RF9",
+        "condition:legacyRole07"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole09",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole08",
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole10",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1",
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole09"
+      ]
+    },
+    {
+      "name": "legacyRole11",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT2",
+        "postSocd:RT3",
+        "postSocd:RT4",
+        "postSocd:RT5"
+      ],
+      "none": []
+    },
+    {
+      "name": "legacyRole12",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4",
+        "condition:legacyRole11"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole10"
+      ]
+    },
+    {
+      "name": "legacyRole13",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole12",
+        "condition:legacyRole09"
+      ]
+    },
+    {
+      "name": "legacyRole14",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole06",
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole15",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3",
+        "condition:legacyRole13"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4",
+        "condition:legacyRole10"
+      ]
+    },
+    {
+      "name": "legacyRole16",
+      "stage": "early",
+      "all": [],
+      "any": [],
+      "none": [
+        "postSocd:LT3"
+      ]
+    },
+    {
+      "name": "legacyRole17",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:legacyRole16",
+        "postSocd:LF4"
+      ],
+      "none": []
+    },
+    {
+      "name": "legacyRole18",
+      "stage": "early",
+      "all": [
+        "postSocd:LF4",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole19",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole13",
+        "condition:legacyRole17"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RT1",
+        "condition:legacyRole18"
+      ]
+    },
+    {
+      "name": "legacyRole20",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF4"
+      ]
+    },
+    {
+      "name": "legacyRole21",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole10"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "legacyRole22",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole13",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT3",
+        "postSocd:LF4",
+        "condition:legacyRole10"
+      ]
+    },
+    {
+      "name": "tableRuleGate00",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole22"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "tableRuleGate01",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole19",
+        "condition:legacyRole20"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole22"
+      ]
+    },
+    {
+      "name": "tableRuleGate02",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole02"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole05",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate03",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole02"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole01",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole05",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate04",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole03"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole04",
+        "condition:legacyRole05",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate05",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole03"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole01",
+        "condition:legacyRole02",
+        "condition:legacyRole04",
+        "condition:legacyRole05",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate06",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole04"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole05",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate07",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole04"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole01",
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole05",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate08",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole05"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate09",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole14"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate10",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole14"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate11",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole15"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate12",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole15"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole19",
+        "condition:legacyRole20",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate13",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole19"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole01",
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole20",
+        "condition:legacyRole21",
+        "condition:legacyRole22"
+      ]
+    },
+    {
+      "name": "tableRuleGate14",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole20"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate15",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole20"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole14",
+        "condition:legacyRole15",
+        "condition:legacyRole19",
+        "condition:legacyRole21"
+      ]
+    },
+    {
+      "name": "tableRuleGate16",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01",
+        "condition:legacyRole21"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole14",
+        "condition:legacyRole15"
+      ]
+    },
+    {
+      "name": "tableRuleGate17",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole21"
+      ],
+      "any": [],
+      "none": [
+        "condition:legacyRole02",
+        "condition:legacyRole03",
+        "condition:legacyRole04",
+        "condition:legacyRole14",
+        "condition:legacyRole15"
+      ]
+    },
+    {
+      "name": "tableRuleGate18",
+      "stage": "early",
+      "all": [
+        "condition:legacyRole01"
+      ],
+      "any": [],
+      "none": []
+    }
+  ],
+  "directionSources": [
+    {
+      "name": "source1",
+      "left": "condition:ls_left",
+      "right": "condition:ls_right",
+      "down": "condition:ls_down",
+      "up": "condition:ls_up"
+    },
+    {
+      "name": "source2",
+      "left": "postSocd:RT3",
+      "right": "postSocd:RT4",
+      "down": "postSocd:RT2",
+      "up": "postSocd:RT5"
+    },
+    {
+      "name": "source3",
+      "left": "false",
+      "right": "false",
+      "down": "condition:not_force",
+      "up": "condition:force_up"
+    },
+    {
+      "name": "source4",
+      "left": "condition:ls_left",
+      "right": "condition:ls_right",
+      "down": "condition:rf6_down",
+      "up": "condition:rf6_up"
+    },
+    {
+      "name": "source5",
+      "left": "condition:ls_left",
+      "right": "condition:ls_right",
+      "down": "postSocd:RT2",
+      "up": "postSocd:RT5"
+    },
+    {
+      "name": "source6",
+      "left": "false",
+      "right": "false",
+      "down": "false",
+      "up": "false"
+    },
+    {
+      "name": "source7",
+      "left": "false",
+      "right": "false",
+      "down": "postSocd:RT2",
+      "up": "postSocd:RT5"
+    }
+  ],
+  "tableRules": [
+    {
+      "priority": 1,
+      "table": "Tilt1Minus41",
+      "when": "condition:tableRuleGate00"
+    },
+    {
+      "priority": 2,
+      "table": "RT1RF4Custom",
+      "when": "condition:tableRuleGate01"
+    },
+    {
+      "priority": 10,
+      "table": "MX1",
+      "when": "condition:tableRuleGate02"
+    },
+    {
+      "priority": 11,
+      "table": "X1",
+      "when": "condition:tableRuleGate03"
+    },
+    {
+      "priority": 12,
+      "table": "MX2",
+      "when": "condition:tableRuleGate04"
+    },
+    {
+      "priority": 13,
+      "table": "X2",
+      "when": "condition:tableRuleGate05"
+    },
+    {
+      "priority": 14,
+      "table": "MY1",
+      "when": "condition:tableRuleGate06"
+    },
+    {
+      "priority": 15,
+      "table": "Y1",
+      "when": "condition:tableRuleGate07"
+    },
+    {
+      "priority": 16,
+      "table": "Y2",
+      "when": "condition:tableRuleGate08"
+    },
+    {
+      "priority": 17,
+      "table": "MLayerNormalX",
+      "when": "condition:tableRuleGate09"
+    },
+    {
+      "priority": 18,
+      "table": "LayerNormalX",
+      "when": "condition:tableRuleGate10"
+    },
+    {
+      "priority": 19,
+      "table": "MLayerFlipper",
+      "when": "condition:tableRuleGate11"
+    },
+    {
+      "priority": 20,
+      "table": "LayerFlipper",
+      "when": "condition:tableRuleGate12"
+    },
+    {
+      "priority": 21,
+      "table": "Tilt1",
+      "when": "condition:tableRuleGate13"
+    },
+    {
+      "priority": 22,
+      "table": "MTilt2",
+      "when": "condition:tableRuleGate14"
+    },
+    {
+      "priority": 23,
+      "table": "Tilt2",
+      "when": "condition:tableRuleGate15"
+    },
+    {
+      "priority": 24,
+      "table": "MTilt3",
+      "when": "condition:tableRuleGate16"
+    },
+    {
+      "priority": 25,
+      "table": "Tilt3",
+      "when": "condition:tableRuleGate17"
+    },
+    {
+      "priority": 250,
+      "table": "ModeDefault",
+      "when": "condition:tableRuleGate18"
+    }
+  ],
+  "digitalBindings": [
+    {
+      "when": "condition:digital_a",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT6",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF5",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:digital_b",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LF4",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF7",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:digital_y2b",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:digital_x",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:digital_y2x",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:digital_lf4x",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF10",
+      "outputs": [
+        "buttonY"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT1",
+      "outputs": [
+        "buttonL",
+        "triggerLDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF6",
+      "outputs": [
+        "buttonR"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF16",
+      "outputs": [
+        "triggerRDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB7",
+      "outputs": [
+        "start"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB6",
+      "outputs": [
+        "select"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB5",
+      "outputs": [
+        "home"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB4",
+      "outputs": [
+        "capture"
+      ],
+      "winnerTable": "any"
+    }
+  ],
+  "analogEffects": [
+    {
+      "target": "leftStick",
+      "priority": 200,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "source1",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 200,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "source2",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [28, 28],
+          [128, 28],
+          [228, 28],
+          [28, 128],
+          [128, 128],
+          [228, 128],
+          [28, 228],
+          [128, 228],
+          [228, 228]
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 80,
+      "activation": "condition:direction_a",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "source3",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Default",
+        "modeTable": "ModeDefault"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 60,
+      "activation": "postSocd:RF6",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "source4",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Lt1LowMagnitude",
+        "modeTable": "Lt1LowMagnitude"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 40,
+      "activation": "postSocd:RF7",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "source1",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [77, 172],
+          [128, 172],
+          [179, 172],
+          [77, 172],
+          [128, 172],
+          [179, 172],
+          [77, 172],
+          [128, 172],
+          [179, 172]
+        ]
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 100,
+      "activation": "condition:c_diagonal",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "source2",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [86, 60],
+          [128, 60],
+          [170, 60],
+          [86, 128],
+          [128, 128],
+          [170, 128],
+          [86, 196],
+          [128, 196],
+          [170, 196]
+        ]
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 80,
+      "activation": "condition:rf3_vertical",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "source5",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [95, 91],
+          [128, 91],
+          [161, 91],
+          [95, 91],
+          [128, 91],
+          [161, 91],
+          [95, 165],
+          [128, 165],
+          [161, 165]
+        ]
+      }
+    },
+    {
+      "target": "bothSticks",
+      "priority": 10,
+      "activation": "condition:null",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "source6",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [128, 128]
+      }
+    },
+    {
+      "target": "triggerL",
+      "priority": 200,
+      "activation": "finalDigital:triggerLDigital",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 140
+    },
+    {
+      "target": "triggerR",
+      "priority": 200,
+      "activation": "finalDigital:triggerRDigital",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 140
+    },
+    {
+      "target": "leftStick",
+      "priority": 20,
+      "activation": "postSocd:RF13",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "source6",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Default",
+        "modeTable": "ModeDefault"
+      }
+    }
+  ],
+  "digitalPostMask": {
+    "gate": "true",
+    "set": [],
+    "clear": [],
+    "inverted": false
+  },
+  "metadata": {
+    "description": "Exact archival authoring source recovered from the working native Ultimate profile. Raw coordinates and historical behavior are preserved.",
+    "notes": [
+      "Direction numbering is numpad order: 7 8 9 / 4 5 6 / 1 2 3. Coordinates are absolute raw bytes.",
+      "The provenance hash records the historical conversion; it is preserved rather than recomputed from this JSON."
+    ],
+    "character": null
+  }
+}

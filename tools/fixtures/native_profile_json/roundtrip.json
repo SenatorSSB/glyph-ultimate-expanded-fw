@@ -1,0 +1,27 @@
+{
+  "exact_wrapper_byte_match": "PASS",
+  "exact_native_body_byte_match": "PASS",
+  "preprocessing_digest_match": "PASS",
+  "wrapper_bytes": 1985,
+  "original_wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+  "compiled_wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+  "native_body_bytes": 1980,
+  "original_body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+  "compiled_body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+  "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+  "historical_conversion_provenance_sha256": "f09a210f9fc7400d52673f6455004185451d33575e88eb0fc54abfc73297dda0",
+  "controller_commands": [],
+  "controller_mutations": 0,
+  "counts": {
+    "conditions": 71,
+    "early_conditions": 71,
+    "direction_sources": 7,
+    "table_rules": 19,
+    "digital_bindings": 18,
+    "analog_effects": 11
+  },
+  "token_count": 280,
+  "preprocessing_bytes": 43,
+  "source_json_sha256": "c3bfeaa42ad6e81ef5f8ff7ff3d4484656404651b3665b8908d8c7c662d10a05",
+  "schema_sha256": "8a1043635d83fd9d3b0529ab1a741ab25807f1c7328d7eaaafc6c5ecfa1680f9"
+}

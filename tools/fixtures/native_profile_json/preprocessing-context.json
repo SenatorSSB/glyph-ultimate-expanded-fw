@@ -1,0 +1,29 @@
+{
+  "modeId": "MODE_ULTIMATE",
+  "socdPairs": [
+    {
+      "buttonDir1": "BTN_LF3",
+      "buttonDir2": "BTN_LF1",
+      "socdType": "SOCD_2IP"
+    },
+    {
+      "buttonDir1": "BTN_LF5",
+      "buttonDir2": "BTN_LF2",
+      "socdType": "SOCD_2IP"
+    }
+  ],
+  "buttonRemapping": [
+    {
+      "physicalButton": "BTN_RF3",
+      "activates": "BTN_RF3"
+    },
+    {
+      "physicalButton": "BTN_RF4",
+      "activates": "BTN_RF4"
+    },
+    {
+      "physicalButton": "BTN_LT3",
+      "activates": "BTN_LT3"
+    }
+  ]
+}

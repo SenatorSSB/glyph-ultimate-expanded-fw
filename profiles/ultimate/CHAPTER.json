@@ -1,0 +1,133 @@
+{
+  "chapter": "Human-editable native Ultimate profile v0",
+  "authority": "Direct owner work order in this chat, 2026-10-23: recover exact ID27 and create offline source/schema/codec/tests; this bounded source/tooling chapter does not reopen GP-NATIVE-002. Explicit owner offline protobuf generation authorization applies.",
+  "status": "VERIFIED_SOURCE_AND_TOOLING",
+  "base_canonical_sha": "80341dca4b454ab1dcc1730df930f8806930858b",
+  "branch": "codex/ultimate-profile-json",
+  "classification": "INACTIVE_GENERATOR_OR_FIXTURE",
+  "hardware_risk": "H1",
+  "manual_acceptance": "NOT_REQUIRED",
+  "scope": [
+    "Read retained exact ID27 wrapper and portable ordered preprocessing",
+    "Define strict finite hand-editable format v0",
+    "Host-only deterministic decode/validate/compile",
+    "Exact wrapper/body/context proof",
+    "Focused legacy converter regressions and independent review"
+  ],
+  "exclusions": [
+    "Firmware/runtime/schema5/ABI changes",
+    "All controller mutations and Config writes",
+    "Any upload command",
+    "ProfileStore/selector/liveness changes",
+    "Game semantics and Senscope schema authority",
+    "Historical campaign evidence changes"
+  ],
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "canonical_publication_lock": "Single parent publisher only; publication/release result recorded in ignored local proof package.",
+  "workers": [
+    {
+      "role": "codec implementer",
+      "native_task": "codec",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "high",
+      "observed_model": "UNKNOWN",
+      "observed_effort": "UNKNOWN",
+      "reason": "Coupled finite binary decoder/compiler and strict authoring schema",
+      "lifecycle": "retired"
+    },
+    {
+      "role": "test specialist",
+      "native_task": "codec_tests",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "medium",
+      "observed_model": "UNKNOWN",
+      "observed_effort": "UNKNOWN",
+      "reason": "Independent ABI fixture generation and malformed-input coverage",
+      "lifecycle": "retired"
+    },
+    {
+      "role": "fresh independent reviewer",
+      "native_task": "review",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "high",
+      "observed_model": "UNKNOWN",
+      "observed_effort": "UNKNOWN",
+      "lifecycle": "retired",
+      "reason": "Binary codec/schema/provenance/privacy review with independent mutation probes"
+    }
+  ],
+  "direct_return_capability": "VERIFIED: native child completion messages delivered to parent",
+  "controller_commands": [],
+  "private_proof_locator": "local_backups/ultimate-profile-json-20261023 (original checkout; ignored)",
+  "completion_requires": [
+    "Exact original/compiled wrapper equality",
+    "Exact native body equality",
+    "Production preprocessing digest equality",
+    "Schema and codec tests",
+    "Affected converter checks",
+    "Fresh independent review",
+    "Commit only after exact proof"
+  ],
+  "stop_conditions": [
+    "Unknown/reserved nonzero binary fields",
+    "Inability to prove retained exact bytes or ordered context",
+    "Concrete correctness or privacy defect",
+    "Firmware/device mutation required",
+    "Live canonical drift before publication"
+  ],
+  "telemetry": {
+    "full_chats": 1,
+    "internal_worker_dispatches": 3,
+    "owner_handoffs": 0,
+    "planner_calls": 0,
+    "curator_calls": 0,
+    "hardware_wait": "NOT_APPLICABLE",
+    "token_usage": "UNKNOWN",
+    "same_scope_worker_resumes": 2
+  },
+  "next_action": "Publish only this independently reviewed offline chapter; no firmware/device work or successor scope.",
+  "review": {
+    "verdict": "APPROVE",
+    "findings": [],
+    "independent_checks": [
+      "four retained wrappers/read metadata/directory match",
+      "six recovery files match original private manifest",
+      "ordered Config preprocessing reproduces exact header digest",
+      "all17 final codec/schema tests PASS",
+      "550 native-byte mutations:323 admitted exact roundtrips,227 invalid rejected",
+      "README, source-name correspondence, privacy and exclusions verified"
+    ],
+    "compatibility_log": "Both-ABI converter regression log inspected; not independently rerun by reviewer",
+    "reviewed_sha256": {
+      "tools/glyph_native_profile_json.py": "5cba6eea7085333f4922b7d8007ed170812193cc2a0f85d6a4ab831a23f7fa13",
+      "profiles/ultimate/Ultimate.profile.json": "c3bfeaa42ad6e81ef5f8ff7ff3d4484656404651b3665b8908d8c7c662d10a05",
+      "profiles/ultimate/Ultimate.profile.schema.json": "8a1043635d83fd9d3b0529ab1a741ab25807f1c7328d7eaaafc6c5ecfa1680f9",
+      "tools/test_glyph_native_profile_json.py": "43a7cc338c63f8685bf2d0a384a8b10196bb6fe28edd87f431ad2de5b5fb66ce"
+    }
+  },
+  "validation": {
+    "exact_wrapper_match": "PASS",
+    "exact_native_body_match": "PASS",
+    "preprocessing_digest": "PASS",
+    "standard_json_schema": "PASS",
+    "codec_tests": {
+      "passed": 17,
+      "failed": 0
+    },
+    "legacy_converter": {
+      "enum_ABIs": 2,
+      "frozen_corpus_rows_per_ABI": 72,
+      "V1_V2_V3_matrix_comparisons_each_per_ABI": 1124032,
+      "result": "PASS"
+    },
+    "all303_critical_source_build_inputs_unchanged": "PASS",
+    "docs_navigation": "PASS",
+    "forbidden_artifacts": "PASS",
+    "git_diff_check": "PASS",
+    "firmware_build": "NOT_REQUIRED: no firmware/build input changed",
+    "hardware_acceptance": "NOT_REQUIRED: no device/firmware mutation",
+    "full_aggregate": "NOT_RUN; no aggregate PASS claim"
+  }
+}

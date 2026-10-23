@@ -13,6 +13,8 @@ not change Senscope game-semantic source authority.
 
 ## Start Here
 
+- [Editable Ultimate native profile](profiles/ultimate/README.md) - exact recovered
+  profile source, finite JSON schema, offline compiler and byte-exact proof.
 - [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) - current baseline, readiness
   categories, approval gates, and non-claims.
 - [docs/ROADMAP.md](docs/ROADMAP.md) - clean long-term Glyph-side roadmap.
