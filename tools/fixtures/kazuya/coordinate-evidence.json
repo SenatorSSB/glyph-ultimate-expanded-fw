@@ -1,0 +1,1622 @@
+{
+  "status": "HOST_CANDIDATE_NOT_GAMEPLAY_ACCEPTED",
+  "baseline": "9a2a20730625671f89988e3911242c71e3f3fc5b",
+  "archival_blob": "0c25c3d6f85480898f18f6104fa4405ed2e497cb",
+  "workbook": {
+    "file": "GC Left Stick Values & Vectors.xlsx",
+    "sha256": "f905dd2c9a44fccc2d8ccfa6d311e355a65ebc7b06884db0a149eccfc4baa1e7",
+    "sheet": "Values",
+    "effective_units": "Measured dataset integer axes; no angle/radius derived"
+  },
+  "gram": {
+    "repository": "GRAMCTRL/HayBox-GRAM",
+    "commit": "ac8f5f5d9f075cbabf232be28906629335cf8555",
+    "path": "src/modes/Ultimate.cpp",
+    "lines": [
+      81,
+      84
+    ],
+    "scope": "Ordinary shield-modified diagonal formula, not Kazuya acceptance"
+  },
+  "measurements": [
+    {
+      "raw": [
+        61,
+        51
+      ],
+      "effective": [
+        -83,
+        -99
+      ],
+      "range": "A15577:D15577"
+    },
+    {
+      "raw": [
+        61,
+        128
+      ],
+      "effective": [
+        -120,
+        0
+      ],
+      "range": "A3966:D3966"
+    },
+    {
+      "raw": [
+        61,
+        164
+      ],
+      "effective": [
+        -120,
+        48
+      ],
+      "range": "A6037:D6037"
+    },
+    {
+      "raw": [
+        61,
+        205
+      ],
+      "effective": [
+        -83,
+        99
+      ],
+      "range": "A15819:D15819"
+    },
+    {
+      "raw": [
+        69,
+        47
+      ],
+      "effective": [
+        -71,
+        -107
+      ],
+      "range": "A18158:D18158"
+    },
+    {
+      "raw": [
+        69,
+        78
+      ],
+      "effective": [
+        -101,
+        -80
+      ],
+      "range": "A10727:D10727"
+    },
+    {
+      "raw": [
+        69,
+        82
+      ],
+      "effective": [
+        -101,
+        -71
+      ],
+      "range": "A10735:D10735"
+    },
+    {
+      "raw": [
+        69,
+        128
+      ],
+      "effective": [
+        -101,
+        0
+      ],
+      "range": "A10781:D10781"
+    },
+    {
+      "raw": [
+        69,
+        209
+      ],
+      "effective": [
+        -71,
+        107
+      ],
+      "range": "A18307:D18307"
+    },
+    {
+      "raw": [
+        76,
+        169
+      ],
+      "effective": [
+        -85,
+        60
+      ],
+      "range": "A15222:D15222"
+    },
+    {
+      "raw": [
+        77,
+        98
+      ],
+      "effective": [
+        -83,
+        -34
+      ],
+      "range": "A15651:D15651"
+    },
+    {
+      "raw": [
+        79,
+        128
+      ],
+      "effective": [
+        -78,
+        0
+      ],
+      "range": "A16801:D16801"
+    },
+    {
+      "raw": [
+        82,
+        51
+      ],
+      "effective": [
+        -57,
+        -115
+      ],
+      "range": "A20644:D20644"
+    },
+    {
+      "raw": [
+        82,
+        128
+      ],
+      "effective": [
+        -71,
+        0
+      ],
+      "range": "A18226:D18226"
+    },
+    {
+      "raw": [
+        82,
+        205
+      ],
+      "effective": [
+        -57,
+        115
+      ],
+      "range": "A20805:D20805"
+    },
+    {
+      "raw": [
+        87,
+        47
+      ],
+      "effective": [
+        -47,
+        -120
+      ],
+      "range": "A22340:D22340"
+    },
+    {
+      "raw": [
+        87,
+        51
+      ],
+      "effective": [
+        -50,
+        -119
+      ],
+      "range": "A21783:D21783"
+    },
+    {
+      "raw": [
+        87,
+        128
+      ],
+      "effective": [
+        -60,
+        0
+      ],
+      "range": "A20258:D20258"
+    },
+    {
+      "raw": [
+        87,
+        205
+      ],
+      "effective": [
+        -50,
+        119
+      ],
+      "range": "A21966:D21966"
+    },
+    {
+      "raw": [
+        87,
+        209
+      ],
+      "effective": [
+        -47,
+        120
+      ],
+      "range": "A22387:D22387"
+    },
+    {
+      "raw": [
+        88,
+        79
+      ],
+      "effective": [
+        -57,
+        -78
+      ],
+      "range": "A20666:D20666"
+    },
+    {
+      "raw": [
+        88,
+        128
+      ],
+      "effective": [
+        -57,
+        0
+      ],
+      "range": "A20715:D20715"
+    },
+    {
+      "raw": [
+        88,
+        177
+      ],
+      "effective": [
+        -57,
+        78
+      ],
+      "range": "A20764:D20764"
+    },
+    {
+      "raw": [
+        89,
+        89
+      ],
+      "effective": [
+        -55,
+        -55
+      ],
+      "range": "A21036:D21036"
+    },
+    {
+      "raw": [
+        89,
+        167
+      ],
+      "effective": [
+        -55,
+        55
+      ],
+      "range": "A21114:D21114"
+    },
+    {
+      "raw": [
+        93,
+        51
+      ],
+      "effective": [
+        -39,
+        -120
+      ],
+      "range": "A23486:D23486"
+    },
+    {
+      "raw": [
+        93,
+        128
+      ],
+      "effective": [
+        -46,
+        0
+      ],
+      "range": "A22510:D22510"
+    },
+    {
+      "raw": [
+        93,
+        205
+      ],
+      "effective": [
+        -39,
+        120
+      ],
+      "range": "A23665:D23665"
+    },
+    {
+      "raw": [
+        128,
+        47
+      ],
+      "effective": [
+        0,
+        -120
+      ],
+      "range": "A29909:D29909"
+    },
+    {
+      "raw": [
+        128,
+        51
+      ],
+      "effective": [
+        0,
+        -120
+      ],
+      "range": "A29913:D29913"
+    },
+    {
+      "raw": [
+        128,
+        78
+      ],
+      "effective": [
+        0,
+        -80
+      ],
+      "range": "A31365:D31365"
+    },
+    {
+      "raw": [
+        128,
+        79
+      ],
+      "effective": [
+        0,
+        -78
+      ],
+      "range": "A31396:D31396"
+    },
+    {
+      "raw": [
+        128,
+        83
+      ],
+      "effective": [
+        0,
+        -69
+      ],
+      "range": "A31520:D31520"
+    },
+    {
+      "raw": [
+        128,
+        128
+      ],
+      "effective": [
+        0,
+        0
+      ],
+      "range": "A32915:D32915"
+    },
+    {
+      "raw": [
+        128,
+        174
+      ],
+      "effective": [
+        0,
+        71
+      ],
+      "range": "A34341:D34341"
+    },
+    {
+      "raw": [
+        128,
+        177
+      ],
+      "effective": [
+        0,
+        78
+      ],
+      "range": "A34434:D34434"
+    },
+    {
+      "raw": [
+        128,
+        179
+      ],
+      "effective": [
+        0,
+        83
+      ],
+      "range": "A34496:D34496"
+    },
+    {
+      "raw": [
+        128,
+        205
+      ],
+      "effective": [
+        0,
+        120
+      ],
+      "range": "A35902:D35902"
+    },
+    {
+      "raw": [
+        128,
+        209
+      ],
+      "effective": [
+        0,
+        120
+      ],
+      "range": "A35906:D35906"
+    },
+    {
+      "raw": [
+        163,
+        51
+      ],
+      "effective": [
+        39,
+        -120
+      ],
+      "range": "A42134:D42134"
+    },
+    {
+      "raw": [
+        163,
+        128
+      ],
+      "effective": [
+        46,
+        0
+      ],
+      "range": "A43290:D43290"
+    },
+    {
+      "raw": [
+        163,
+        205
+      ],
+      "effective": [
+        39,
+        120
+      ],
+      "range": "A42314:D42314"
+    },
+    {
+      "raw": [
+        167,
+        89
+      ],
+      "effective": [
+        55,
+        -55
+      ],
+      "range": "A44687:D44687"
+    },
+    {
+      "raw": [
+        167,
+        167
+      ],
+      "effective": [
+        55,
+        55
+      ],
+      "range": "A44765:D44765"
+    },
+    {
+      "raw": [
+        168,
+        79
+      ],
+      "effective": [
+        57,
+        -78
+      ],
+      "range": "A45036:D45036"
+    },
+    {
+      "raw": [
+        168,
+        128
+      ],
+      "effective": [
+        57,
+        0
+      ],
+      "range": "A45085:D45085"
+    },
+    {
+      "raw": [
+        168,
+        177
+      ],
+      "effective": [
+        57,
+        78
+      ],
+      "range": "A45134:D45134"
+    },
+    {
+      "raw": [
+        169,
+        47
+      ],
+      "effective": [
+        47,
+        -120
+      ],
+      "range": "A43412:D43412"
+    },
+    {
+      "raw": [
+        169,
+        51
+      ],
+      "effective": [
+        50,
+        -119
+      ],
+      "range": "A43833:D43833"
+    },
+    {
+      "raw": [
+        169,
+        128
+      ],
+      "effective": [
+        60,
+        0
+      ],
+      "range": "A45542:D45542"
+    },
+    {
+      "raw": [
+        169,
+        205
+      ],
+      "effective": [
+        50,
+        119
+      ],
+      "range": "A44017:D44017"
+    },
+    {
+      "raw": [
+        169,
+        209
+      ],
+      "effective": [
+        47,
+        120
+      ],
+      "range": "A43461:D43461"
+    },
+    {
+      "raw": [
+        174,
+        51
+      ],
+      "effective": [
+        57,
+        -115
+      ],
+      "range": "A44995:D44995"
+    },
+    {
+      "raw": [
+        174,
+        128
+      ],
+      "effective": [
+        71,
+        0
+      ],
+      "range": "A47574:D47574"
+    },
+    {
+      "raw": [
+        174,
+        205
+      ],
+      "effective": [
+        57,
+        115
+      ],
+      "range": "A45156:D45156"
+    },
+    {
+      "raw": [
+        177,
+        128
+      ],
+      "effective": [
+        78,
+        0
+      ],
+      "range": "A48999:D48999"
+    },
+    {
+      "raw": [
+        179,
+        98
+      ],
+      "effective": [
+        83,
+        -34
+      ],
+      "range": "A50090:D50090"
+    },
+    {
+      "raw": [
+        180,
+        169
+      ],
+      "effective": [
+        85,
+        60
+      ],
+      "range": "A50661:D50661"
+    },
+    {
+      "raw": [
+        187,
+        47
+      ],
+      "effective": [
+        71,
+        -107
+      ],
+      "range": "A47492:D47492"
+    },
+    {
+      "raw": [
+        187,
+        78
+      ],
+      "effective": [
+        101,
+        -80
+      ],
+      "range": "A54828:D54828"
+    },
+    {
+      "raw": [
+        187,
+        82
+      ],
+      "effective": [
+        101,
+        -71
+      ],
+      "range": "A54925:D54925"
+    },
+    {
+      "raw": [
+        187,
+        128
+      ],
+      "effective": [
+        101,
+        0
+      ],
+      "range": "A54971:D54971"
+    },
+    {
+      "raw": [
+        187,
+        209
+      ],
+      "effective": [
+        71,
+        107
+      ],
+      "range": "A47642:D47642"
+    },
+    {
+      "raw": [
+        195,
+        51
+      ],
+      "effective": [
+        83,
+        -99
+      ],
+      "range": "A49980:D49980"
+    },
+    {
+      "raw": [
+        195,
+        128
+      ],
+      "effective": [
+        120,
+        0
+      ],
+      "range": "A61654:D61654"
+    },
+    {
+      "raw": [
+        195,
+        164
+      ],
+      "effective": [
+        120,
+        48
+      ],
+      "range": "A65494:D65494"
+    },
+    {
+      "raw": [
+        195,
+        205
+      ],
+      "effective": [
+        83,
+        99
+      ],
+      "range": "A50223:D50223"
+    }
+  ],
+  "tables": {
+    "Default": {
+      "slot": 0,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Default",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "analogEffect",
+          "index": 3,
+          "priority": 80,
+          "activation": "condition:ordinaryForcedVertical"
+        },
+        {
+          "kind": "analogEffect",
+          "index": 10,
+          "priority": 20,
+          "activation": "postSocd:RF13"
+        },
+        {
+          "kind": "defaultTable"
+        }
+      ],
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
+      }
+    },
+    "ForcedDown": {
+      "slot": 1,
+      "source": {
+        "kind": "archivalPointProjection",
+        "table": "Default",
+        "direction": 2,
+        "assignment": "Repeat source Down point for all nine directions; owner candidate"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 5,
+          "when": "condition:commandActive"
+        }
+      ],
+      "directions": {
+        "1": [
+          128,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          128,
+          51
+        ],
+        "4": [
+          128,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          128,
+          51
+        ],
+        "7": [
+          128,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          128,
+          51
+        ]
+      }
+    },
+    "DownDiagonal": {
+      "slot": 2,
+      "source": {
+        "kind": "archivalPointProjection",
+        "table": "Default",
+        "assignment": "Horizontal column maps to source directions 1,5,3; repeat across vertical rows. Center is explicit neutral candidate fallback, no facing inference."
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 4,
+          "when": "condition:downDiagonalCommand"
+        }
+      ],
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "CDCNeutral": {
+      "slot": 3,
+      "source": {
+        "kind": "archivalPointProjection",
+        "table": "Default",
+        "direction": 5,
+        "assignment": "Repeat ordinary neutral for all nine directions; owner candidate"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 3,
+          "when": "condition:neutralCommand"
+        }
+      ],
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    },
+    "DownBack": {
+      "slot": 4,
+      "source": {
+        "kind": "archivalPointProjection",
+        "table": "Default",
+        "assignment": "Horizontal column maps to source directions 3,5,1; repeat across vertical rows. Center is explicit neutral candidate fallback, no facing inference."
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 2,
+          "when": "condition:downBackCommand"
+        }
+      ],
+      "directions": {
+        "1": [
+          195,
+          51
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          61,
+          51
+        ],
+        "4": [
+          195,
+          51
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          61,
+          51
+        ],
+        "7": [
+          195,
+          51
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          61,
+          51
+        ]
+      }
+    },
+    "DefensiveDownBack": {
+      "slot": 5,
+      "source": {
+        "kind": "gramDiagonalCandidate",
+        "assignment": "LF-left -> Gram down-right [179,98]; LF-right -> Gram down-left [77,98]; neither -> archival neutral [128,128]. Both sides measured independently. No-horizontal neutral is implementation-selected host fallback; no gameplay approval."
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 1,
+          "when": "condition:defensiveShield"
+        }
+      ],
+      "directions": {
+        "1": [
+          179,
+          98
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          77,
+          98
+        ],
+        "4": [
+          179,
+          98
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          77,
+          98
+        ],
+        "7": [
+          179,
+          98
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          77,
+          98
+        ]
+      }
+    },
+    "Horizontal35": {
+      "slot": 6,
+      "source": {
+        "kind": "archivalTable",
+        "table": "X1",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 30,
+          "when": "condition:selectHorizontal35"
+        }
+      ],
+      "directions": {
+        "1": [
+          93,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          163,
+          51
+        ],
+        "4": [
+          93,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          163,
+          128
+        ],
+        "7": [
+          93,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          163,
+          205
+        ]
+      }
+    },
+    "Horizontal46": {
+      "slot": 7,
+      "source": {
+        "kind": "archivalTable",
+        "table": "X2",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 31,
+          "when": "condition:selectHorizontal46"
+        }
+      ],
+      "directions": {
+        "1": [
+          82,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          174,
+          51
+        ],
+        "4": [
+          82,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          174,
+          128
+        ],
+        "7": [
+          82,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          174,
+          205
+        ]
+      }
+    },
+    "VerticalAsymmetric": {
+      "slot": 8,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Y2",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 32,
+          "when": "condition:selectVerticalAsymmetric"
+        }
+      ],
+      "directions": {
+        "1": [
+          69,
+          78
+        ],
+        "2": [
+          128,
+          78
+        ],
+        "3": [
+          187,
+          78
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          164
+        ],
+        "8": [
+          128,
+          174
+        ],
+        "9": [
+          195,
+          164
+        ]
+      }
+    },
+    "Horizontal41": {
+      "slot": 9,
+      "source": {
+        "kind": "archivalTable",
+        "table": "LayerNormalX",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 33,
+          "when": "condition:selectHorizontal41"
+        }
+      ],
+      "directions": {
+        "1": [
+          87,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          169,
+          51
+        ],
+        "4": [
+          87,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          169,
+          128
+        ],
+        "7": [
+          87,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          169,
+          205
+        ]
+      }
+    },
+    "FlippedHorizontal41": {
+      "slot": 10,
+      "source": {
+        "kind": "archivalTable",
+        "table": "LayerFlipper",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 34,
+          "when": "condition:selectFlippedHorizontal41"
+        }
+      ],
+      "directions": {
+        "1": [
+          169,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          87,
+          51
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          87,
+          205
+        ]
+      }
+    },
+    "FlippedTilt": {
+      "slot": 11,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Tilt1",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 35,
+          "when": "condition:selectFlippedTilt"
+        }
+      ],
+      "directions": {
+        "1": [
+          187,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          69,
+          47
+        ],
+        "4": [
+          187,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          69,
+          128
+        ],
+        "7": [
+          187,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          69,
+          209
+        ]
+      }
+    },
+    "CompactTilt": {
+      "slot": 12,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Tilt2",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 36,
+          "when": "condition:selectCompactTilt"
+        }
+      ],
+      "directions": {
+        "1": [
+          88,
+          79
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          168,
+          79
+        ],
+        "4": [
+          88,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          168,
+          128
+        ],
+        "7": [
+          88,
+          177
+        ],
+        "8": [
+          128,
+          177
+        ],
+        "9": [
+          168,
+          177
+        ]
+      }
+    },
+    "AsymmetricTilt": {
+      "slot": 13,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Tilt3",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 37,
+          "when": "condition:selectAsymmetricTilt"
+        }
+      ],
+      "directions": {
+        "1": [
+          69,
+          82
+        ],
+        "2": [
+          128,
+          83
+        ],
+        "3": [
+          187,
+          82
+        ],
+        "4": [
+          69,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          187,
+          128
+        ],
+        "7": [
+          76,
+          169
+        ],
+        "8": [
+          128,
+          179
+        ],
+        "9": [
+          180,
+          169
+        ]
+      }
+    },
+    "FlippedTilt41": {
+      "slot": 14,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Tilt1Minus41",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "tableRule",
+          "priority": 20,
+          "when": "condition:rf4RF2Flipped41"
+        }
+      ],
+      "directions": {
+        "1": [
+          169,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          87,
+          47
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          87,
+          209
+        ]
+      }
+    },
+    "RF6LowMagnitude": {
+      "slot": 15,
+      "source": {
+        "kind": "archivalTable",
+        "table": "Lt1LowMagnitude",
+        "directions": "All nine verbatim; exact baseline blob above"
+      },
+      "references": [
+        {
+          "kind": "analogEffect",
+          "index": 4,
+          "priority": 60,
+          "activation": "condition:rf6OrdinaryAnalog"
+        }
+      ],
+      "directions": {
+        "1": [
+          89,
+          89
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          167,
+          89
+        ],
+        "4": [
+          79,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          177,
+          128
+        ],
+        "7": [
+          89,
+          167
+        ],
+        "8": [
+          128,
+          177
+        ],
+        "9": [
+          167,
+          167
+        ]
+      }
+    }
+  }
+}
