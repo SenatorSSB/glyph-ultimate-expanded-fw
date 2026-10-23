@@ -1,7 +1,9 @@
 # Character profile menu and Kazuya installation preparation
 
-Status: DIAGNOSIS_AND_PRODUCT_DECISION_GATED. No firmware edit or executable
-hardware packet is claimed. This chapter follows the direct owner objective
+Status: OWNER_AUTHORIZED_CANDIDATE_IN_VALIDATION. The owner corrected the
+visible count to two and explicitly chose native-only Ultimate menu visibility;
+see [bounded authority](OWNER_DIRECTIVE.md). Source validation is in progress.
+No executable hardware packet or physical acceptance is claimed. This chapter follows the direct owner objective
 provided on 2026-10-23; its exact attachment SHA-256 is recorded in ledger.json.
 It does not reopen GP-NATIVE-002 or rewrite its historical evidence.
 
@@ -44,12 +46,12 @@ No separate fourth/hidden template appears in this snapshot.
 
 At the verified canonical source, BuildTargets therefore predicts **two**
 visible runtime-named choices plus Ultimate and SEL01–SEL20 for XInput,
-GameCube and Nintendo Switch. The owner's report says **three**. The current
-Config and running firmware identity must reconcile that discrepancy before
-source changes. No live Config/identity query was possible without a serial
-endpoint; no reconnect, reboot or profile switch was performed.
+GameCube and Nintendo Switch. The owner originally reported **three**, then directly corrected it to **two**,
+matching these retained fields and source. No live Config/identity query was
+performed; no reconnect, reboot or profile switch occurred. Fresh controller
+state remains mandatory before any future mutation.
 
-## Semantic finding and stop
+## Initial semantic finding and later owner resolution
 
 The existing native-placeholder predicate is compact ProfileStore format plus
 MODE_ULTIMATE plus engine1. It already hides row2. Engine0 is explicitly
@@ -58,23 +60,25 @@ not make it internal infrastructure. Config validation permits engine0 stable
 legacy references, migration preserves them, and `mode_selection::set_mode`
 activates both engines. See [source investigation](source_investigation.json).
 
-**Strong semantic stop:** no existing field identifies rows0/1 as internal
+**Historical strong semantic stop (resolved by OWNER_DIRECTIVE.md):** no existing field identifies rows0/1 as internal
 rather than legitimate selectable legacy choices. Their names cannot be used
 as that discriminator. Hiding all compact MODE_ULTIMATE rows requires an
 explicit policy to hide built-in/legacy Ultimate choices as well, or a
-source-backed semantic designation of the internal subset. That decision is
-pending. No name heuristic, schema change, Config deletion or firmware edit
-has been made. The new owner objective's conditional investigation does not
-establish the prerequisite that all these rows are infrastructure.
+source-backed semantic designation of the internal subset. The owner has now explicitly chosen to hide those legitimate legacy choices
+too, preserving them internally. That new product policy supplies the missing
+visibility decision; no claim that engine0 is inherently infrastructure follows.
+No name heuristic, schema change or Config deletion is used.
 
-If the owner chooses a native-only Ultimate menu policy, implement a separate
-menu-only predicate in `src/core/profile_selection.cpp`. Keep NativeTemplate
-and Persist unchanged. Preserve noncompact Ultimate and ordinary non-Ultimate
-choices. Then prove current/cleaned topology, multiple contexts, backend
-eligibility, rank/tie ordering, index keys, stable IDs, read-only enumeration,
-checked selection and GameCube liveness. Fresh source review, both-ABI affected
-checks, resource proof and exact committed Mk6 build/custody precede a separate
-candidate-specific hardware packet. No inherited hardware PASS applies.
+The source change is confined to BuildTargets in `src/core/profile_selection.cpp`:
+compact format plus MODE_ULTIMATE hides the Config row, independent of name.
+NativeTemplate and Persist remain unchanged. The eligible engine1-template gate
+still controls whether stored profiles can appear; an engine0-only Config does
+not gain a new native selection facility. Noncompact Ultimate and ordinary
+non-Ultimate choices remain. Focused tests cover current/cleaned topology,
+multiple contexts, backend eligibility, rank/tie ordering, index keys, stable
+IDs, read-only enumeration, checked selection and GameCube liveness. Fresh
+source review, resource proof and exact committed Mk6 build/custody precede
+a separate candidate-specific hardware packet. No inherited hardware PASS applies.
 
 ## Offline preservation and installation identities
 
@@ -111,12 +115,11 @@ list is Ultimate, Kazuya, with Ultimate active. That outcome remains unproven.
 ## Delivery boundary
 
 [Owner packet](OWNER_PACKET.md) is an **unexecuted, non-actionable draft** plus
-an authorized read-only diagnosis packet. It cannot be approved for mutations
-until diagnosis/policy, implementation if needed, tests, independent review,
-resource/build/custody and the actual operation fences are resolved. No firmware
-candidate, source commit/tree, new ELF/BIN/UF2 or physical menu PASS exists.
-Classification: INACTIVE_GENERATOR_OR_FIXTURE / docs and offline preparation;
-active firmware behavior unchanged. Historical acceptance remains historical.
+an authorized read-only diagnosis packet. It cannot be approved for mutations until candidate tests/review/resource/
+build/custody and the actual operation fences are resolved. Candidate source is
+in validation; no new ELF/BIN/UF2 or physical menu PASS is claimed at this
+checkpoint. Classification: FIRMWARE_SOURCE_ACTIVE_BEHAVIOR, limited to menu
+visibility. Historical acceptance remains historical.
 
 Controller mutations performed: NONE. Firmware flashed: NO. SEL records
 deleted: NO. Kazuya created on controller: NO. Kazuya gameplay acceptance:

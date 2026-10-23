@@ -21,16 +21,18 @@
     }
   ],
   "captured_at_utc": "2026-10-22T22:09:38.885589+00:00",
+  "clarification": "OWNER_DIRECTIVE.md",
   "current_serial_port_inventory": [
     "/dev/cu.Bluetooth-Incoming-Port",
     "/dev/cu.debug-console"
   ],
   "defaultBackendConfig": 2,
   "defaultUsbBackendConfig": 1,
-  "discrepancy": "UNRESOLVED_REQUIRES_FRESH_CONFIG_AND_RUNNING_FIRMWARE_IDENTITY",
+  "discrepancy": "RESOLVED_BY_OWNER_COUNT_CORRECTION_NO_NEW_DEVICE_READBACK",
   "fresh_active_identity": "UNKNOWN",
   "json_snapshot_sha256": "60a23b04b0d512db2a831e0bb001e64c32a4ff61ff6f6ad1b3aac35e8fcc6de9",
-  "owner_reported_runtime_labels": 3,
+  "owner_reported_runtime_labels": 2,
+  "owner_reported_runtime_labels_initial": 3,
   "predicted_runtime_labels_in_current_menu": 2,
   "provenance": "local_backups/hardware-acceptance/GP_NATIVE_002_GC_LIVENESS_HW_V1_20261023/posttest_configurator/config_backup.json",
   "raw_config_bytes": 277,
@@ -39,6 +41,7 @@
     {
       "activationBinding": [],
       "applicableBackends": [],
+      "baseline55ab_source_visible_for_gameplay_backend": true,
       "buttonRemapping": [
         {
           "activates": "BTN_RF3",
@@ -53,7 +56,7 @@
           "physicalButton": "BTN_LT3"
         }
       ],
-      "current_source_visible_for_gameplay_backend": true,
+      "candidate_compact_menu_visible": false,
       "default_backend_references": [
         "COMMS_BACKEND_CONFIGURATOR"
       ],
@@ -69,6 +72,7 @@
     {
       "activationBinding": [],
       "applicableBackends": [],
+      "baseline55ab_source_visible_for_gameplay_backend": true,
       "buttonRemapping": [
         {
           "activates": "BTN_RF3",
@@ -83,7 +87,7 @@
           "physicalButton": "BTN_LT3"
         }
       ],
-      "current_source_visible_for_gameplay_backend": true,
+      "candidate_compact_menu_visible": false,
       "default_backend_references": [],
       "modeId": "MODE_ULTIMATE",
       "name": "Ultimate Runtime",
@@ -97,6 +101,7 @@
     {
       "activationBinding": [],
       "applicableBackends": [],
+      "baseline55ab_source_visible_for_gameplay_backend": false,
       "buttonRemapping": [
         {
           "activates": "BTN_RF3",
@@ -111,7 +116,7 @@
           "physicalButton": "BTN_LT3"
         }
       ],
-      "current_source_visible_for_gameplay_backend": false,
+      "candidate_compact_menu_visible": false,
       "default_backend_references": [
         "COMMS_BACKEND_XINPUT",
         "COMMS_BACKEND_GAMECUBE",
