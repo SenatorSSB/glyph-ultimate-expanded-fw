@@ -1,0 +1,70 @@
+{
+  "chapter": "Character-independent native Ultimate authoring v1",
+  "authority": "Direct owner goal-objective.md attached to this chat, 2026-10-23; named bounded offline implementation and protobuf compilation authorization. No firmware/device scope.",
+  "base_canonical_sha": "cef1c59ce0ec9b8cb1e97003d2f02a7c7a7a256c",
+  "branch": "codex/native-profile-authoring-v1",
+  "classification": "INACTIVE_GENERATOR_OR_FIXTURE",
+  "hardware_risk": "H1",
+  "status": "VERIFIED_SOURCE_AND_TOOLING",
+  "scope": [
+    "Versioned v1 schema",
+    "Sparse named explicit-slot tables and exact neutral fill",
+    "Named references and generic existing native operations",
+    "Authored-source provenance",
+    "Compile reports",
+    "Synthetic examples, tests and generic documentation"
+  ],
+  "exclusions": [
+    "Production firmware or build input changes",
+    "v0 golden source/schema changes",
+    "Controller operations, upload UX, flashing or hardware tests",
+    "Kazuya or other game semantics",
+    "Senscope neutral/export schema decisions",
+    "Queue or historical evidence changes"
+  ],
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "workers": [
+    {
+      "native_task": "v1_codec",
+      "role": "bounded codec/schema implementation",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "medium",
+      "observed_model": "UNKNOWN",
+      "observed_effort": "UNKNOWN",
+      "lifecycle": "retired"
+    },
+    {
+      "native_task": "independent_review",
+      "role": "fresh independent review",
+      "requested_model": "gpt-6.1-sol",
+      "requested_effort": "high",
+      "observed_model": "UNKNOWN",
+      "observed_effort": "UNKNOWN",
+      "lifecycle": "retired"
+    }
+  ],
+  "direct_return_capability": "VERIFIED: native completion messages delivered to parent",
+  "canonical_publication": "Retained as a reviewed local implementation branch; no canonical publication in this milestone execution.",
+  "controller_operations": [],
+  "production_firmware_behavior_changed": false,
+  "schema5_wire_format_changed": false,
+  "hardware_acceptance_required": false,
+  "telemetry": {
+    "full_chats": 1,
+    "internal_worker_dispatches": 2,
+    "planner_calls": 0,
+    "curator_calls": 0,
+    "hardware_handoffs": 0,
+    "same_scope_review_finalization_resumes": 1
+  },
+  "stop_conditions": [
+    "Any required firmware primitive absent",
+    "Substantive source/domain decision needed",
+    "Concrete review defect unresolved",
+    "Live canonical drift before publication"
+  ],
+  "independent_review": "INDEPENDENT_REVIEW.json",
+  "validation": "VALIDATION.json"
+}

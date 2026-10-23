@@ -1,5 +1,17 @@
 # Agent Context
 
+## Character-independent native authoring v1 — 2026-10-23
+
+The owner-authorized [offline v1 authoring format](../profiles/README.md) adds
+profile-owned sparse table names with unique explicit wire slots, deterministic
+neutral fill, strict name references, authored-source provenance and compile
+reports. Schema5/encoding1/ABI1 and all production firmware inputs remain
+unchanged. The v0 Ultimate source/schema and exact ID27 wrapper/body remain
+frozen. Examples are synthetic; no Kazuya semantics, controller operation,
+upload UX or hardware acceptance is introduced. This tooling chapter does not
+reopen GP-NATIVE-002 or alter the executable queue. Validation and independent
+review are recorded in `profiles/authoring-v1/VALIDATION.json`.
+
 ## Human-editable native Ultimate source — 2026-10-23
 
 The separate owner-authorized [profile authoring chapter](../profiles/ultimate/README.md)

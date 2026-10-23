@@ -12,6 +12,8 @@ except ModuleNotFoundError:
     from tools.extract_glyph_identity_runtime_tables import runtime_table_id_names
 ROOT=Path(__file__).resolve().parents[1]
 SCHEMA_PATH=ROOT/'profiles/ultimate/Ultimate.profile.schema.json'
+V1_SCHEMA_PATH=ROOT/'profiles/schema/glyph-native-ultimate-profile.v1.schema.json'
+AUTHORING_V1_DOMAIN=b'Glyph.Native.Authoring.v1\0'
 TABLES=tuple(runtime_table_id_names())
 INPUTS=tuple(f'{p}{i}' for p,n in [('LF',16),('RF',16),('LT',8),('RT',8),('MB',12)] for i in range(1,n+1))
 # include/core/state.hpp OutputState bits 0..11; friendly A/B/X/Y names are
@@ -53,11 +55,14 @@ def _schema_check(value,schema,path='$'):
     kind=schema.get('type');types={'object':dict,'array':list,'string':str,'integer':int,'boolean':bool,'null':type(None)}
     if kind:_require(type(value) is types[kind],path+': expected '+kind)
     if kind=='object':
-        props=schema.get('properties',{})
+        props=schema.get('properties',{});patterns=schema.get('patternProperties',{})
+        _require(schema.get('minProperties',0)<=len(value)<=schema.get('maxProperties',len(value)),path+': invalid property count')
         _require(set(schema.get('required',[]))<=value.keys(),path+': missing required fields')
-        if schema.get('additionalProperties') is False:_require(value.keys()<=props.keys(),path+': unknown fields '+str(sorted(value.keys()-props.keys())))
         for k,v in value.items():
+            matching=[sub for pattern,sub in patterns.items() if re.search(pattern,k) is not None]
+            if schema.get('additionalProperties') is False:_require(k in props or matching,path+': unknown field '+k)
             if k in props:_schema_check(v,props[k],path+'.'+k)
+            for sub in matching:_schema_check(v,sub,path+'.'+k)
     if kind=='array':
         _require(schema.get('minItems',0)<=len(value)<=schema.get('maxItems',len(value)),path+': invalid length')
         if schema.get('uniqueItems'):_require(len({json.dumps(x,sort_keys=True) for x in value})==len(value),path+': duplicate items')
@@ -161,8 +166,25 @@ def unwrap_profile(data):
 def _mask(names):return sum(1<<OUTPUTS.index(n) for n in names)
 def _outputs(mask):return [n for i,n in enumerate(OUTPUTS) if mask&(1<<i)]
 
+def _profile_version(profile):
+    _require(type(profile) is dict,'profile must be object')
+    version=profile.get('formatVersion')
+    _require(type(version) is int and version in (0,1),'unsupported formatVersion')
+    return version
+
+def _authored_source_v1_sha256(profile):
+    semantic={k:v for k,v in profile.items() if k not in ('provenance','metadata','name')}
+    canonical=json.dumps(semantic,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode('utf-8')
+    return hashlib.sha256(AUTHORING_V1_DOMAIN+canonical).digest()
+
 def compile_profile(profile):
-    _schema_check(profile,load_json(SCHEMA_PATH))
+    version=_profile_version(profile)
+    _schema_check(profile,load_json(V1_SCHEMA_PATH if version==1 else SCHEMA_PATH))
+    if version==1:
+        slots={name:t['slot'] for name,t in profile['tables'].items()}
+        _require('any' not in slots,'table name any is reserved')
+        _require(len(set(slots.values()))==len(slots),'duplicate table slots')
+    else:slots={name:i for i,name in enumerate(TABLES)}
     conditions=profile['conditions'];sources=profile['directionSources'];cn=[c['name'] for c in conditions];sn=[s['name'] for s in sources]
     _require(len(set(cn))==len(cn),'duplicate condition names');_require(len(set(sn))==len(sn),'duplicate source names')
     early=sum(c['stage']=='early' for c in conditions)
@@ -178,20 +200,29 @@ def compile_profile(profile):
         raise ValueError('unknown token '+t)
     def source(name):
         _require(name in sn,'unknown direction source '+name);return sn.index(name)+1
-    def table(name):return 255 if name=='any' else TABLES.index(name)
+    def table(name,*,winner=False):
+        if version==0:return 255 if name=='any' else TABLES.index(name)
+        if winner and name=='any':return 255
+        _require(name in slots,'unknown table '+str(name))
+        return slots[name]
     header=bytearray(96);header[:4]=b'GNP5';struct.pack_into('<HH',header,4,1,1)
     header[10:20]=bytes([len(conditions),early,len(sources),len(profile['tableRules']),len(profile['digitalBindings']),len(profile['analogEffects']),table(profile['defaultTable']),source(profile['leftStickSource']),source(profile['rightStickSource']),sum(1<<i for i,k in enumerate(('routeToDpad','bypassLeftStick','suppressLeftStickDigital')) if profile['dpad'][k])])
     struct.pack_into('<HHHH',header,20,*(token(profile['gates'][k]) for k in ('mode','leftStickDigital','rightStickDigital','dpad')))
-    header[28:60]=hashlib.sha256(context_bytes(profile['preprocessing'])).digest();header[60:92]=bytes.fromhex(profile['provenance']['sha256']);body=bytearray()
-    for i,name in enumerate(TABLES):
-        t=profile['tables'][name];_require(t['id']==i,'table ID/name mismatch: '+name);body+=bytes(v for d in range(1,10) for v in t['directions'][str(d)])
+    header[28:60]=hashlib.sha256(context_bytes(profile['preprocessing'])).digest();header[60:92]=_authored_source_v1_sha256(profile) if version==1 else bytes.fromhex(profile['provenance']['sha256']);body=bytearray()
+    if version==0:
+        for i,name in enumerate(TABLES):
+            t=profile['tables'][name];_require(t['id']==i,'table ID/name mismatch: '+name);body+=bytes(v for d in range(1,10) for v in t['directions'][str(d)])
+    else:
+        body=bytearray([128])*(28*18)
+        for name,t in profile['tables'].items():
+            slot=slots[name];body[slot*18:(slot+1)*18]=bytes(v for d in range(1,10) for v in t['directions'][str(d)])
     pool=[]
     for i,c in enumerate(conditions):
         body+=struct.pack('<BH',i+1,len(c['all'])|len(c['any'])<<2|len(c['none'])<<5);pool.extend(token(t) for k in ('all','any','none') for t in c[k])
     _require(len(pool)<=768,'condition token pool exceeds 768');struct.pack_into('<H',header,92,len(pool));body+=b''.join(struct.pack('<H',t) for t in pool)
     for i,s in enumerate(sources):body+=struct.pack('<BHHHH',i+1,*(token(s[k]) for k in ('left','right','down','up')))
     for r in profile['tableRules']:body+=struct.pack('<BBH',r['priority'],table(r['table']),token(r['when']))
-    for b in profile['digitalBindings']:body+=struct.pack('<HHBB',token(b['when']),_mask(b['outputs']),table(b['winnerTable']),0)
+    for b in profile['digitalBindings']:body+=struct.pack('<HHBB',token(b['when']),_mask(b['outputs']),table(b['winnerTable'],winner=True),0)
     for e in profile['analogEffects']:
         target=TARGETS.index(e['target'])+1;data=bytes(18);s=mode=t0=t1=0
         if target in (3,4):data=bytes([e['value']])+bytes(17)
@@ -200,7 +231,7 @@ def compile_profile(profile):
             if mode==2:t0=table(c['normalTable']);t1=table(c['modeTable'])
             if mode==3:data=bytes(c['point'])+bytes(16)
             if mode==4:data=bytes(v for p in c['points'] for v in p)
-        body+=struct.pack('<BBHHBBBB18sBBH',target,e['priority'],token(e['activation']),token(e['gate']),s,mode,t0,t1,data,table(e['winnerTable']),int(e['gateInverted'])|int(e['skipWhenDpadBypass'])<<1,0)
+        body+=struct.pack('<BBHHBBBB18sBBH',target,e['priority'],token(e['activation']),token(e['gate']),s,mode,t0,t1,data,table(e['winnerTable'],winner=True),int(e['gateInverted'])|int(e['skipWhenDpadBypass'])<<1,0)
     m=profile['digitalPostMask'];body+=struct.pack('<HHHH',token(m['gate']),_mask(m['set']),_mask(m['clear']),int(m['inverted']))
     body=header+body;_require(len(body)<=3336,'native body capacity exceeded');struct.pack_into('<H',body,8,len(body));return wrap_body(bytes(body))
 
@@ -209,7 +240,24 @@ def validate_profile(profile):
     wire=compile_profile(profile);body=unwrap_profile(wire)
     return {**validate_native_body(body),'profile_sha256':hashlib.sha256(wire).hexdigest(),'body_sha256':hashlib.sha256(body).hexdigest(),'preprocessing_sha256':body[28:60].hex()}
 
+def compile_report(profile):
+    """Compile and report exact offline source/wire correspondence; no device access."""
+    wire=compile_profile(profile);body=unwrap_profile(wire)
+    version=profile['formatVersion']
+    slots={name:t['slot'] if version==1 else t['id'] for name,t in profile['tables'].items()}
+    return {'profile_name':profile['name'],'format_version':version,
+            'declared_tables':sorted(slots),'table_slots':dict(sorted(slots.items())),
+            'neutral_filled_slots':[i for i in range(28) if i not in slots.values()],
+            'condition_count':body[10],'token_count':struct.unpack_from('<H',body,92)[0],
+            'direction_source_count':body[12],'table_rule_count':body[13],
+            'digital_binding_count':body[14],'analog_effect_count':body[15],
+            'body_bytes':len(body),'wrapper_bytes':len(wire),
+            'preprocessing_sha256':body[28:60].hex(),'provenance_sha256':body[60:92].hex(),
+            'provenance_kind':profile['provenance']['kind'],
+            'body_sha256':hashlib.sha256(body).hexdigest(),'wrapper_sha256':hashlib.sha256(wire).hexdigest()}
+
 def decode_profile(data,preprocessing,*,correspondence=None,name='Ultimate'):
+    """Decode to archival v0 wire labels, never recover lost v1 source names."""
     body=unwrap_profile(data);context=_context(preprocessing);_require(hashlib.sha256(context_bytes(context)).digest()==body[28:60],'preprocessing context digest mismatch')
     u16=lambda at:struct.unpack_from('<H',body,at)[0]
     count,early,ns,nr,nb,ne=body[10:16];names=[f'condition{i+1:02d}' for i in range(count)]
@@ -266,7 +314,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);sub=parser.add_subparsers(dest='command',required=True)
     dec=sub.add_parser('decode');dec.add_argument('input',type=Path);dec.add_argument('--preprocessing',required=True,type=Path);dec.add_argument('--correspondence',type=Path);dec.add_argument('--name',default='Ultimate');dec.add_argument('--output',required=True,type=Path)
     comp=sub.add_parser('compile');comp.add_argument('input',type=Path);comp.add_argument('--output',required=True,type=Path);comp.add_argument('--format',choices=('pb','protobuf-json'),default='pb')
-    val=sub.add_parser('validate');val.add_argument('input',type=Path);args=parser.parse_args()
+    val=sub.add_parser('validate');val.add_argument('input',type=Path)
+    report=sub.add_parser('report');report.add_argument('input',type=Path);report.add_argument('--output',type=Path)
+    args=parser.parse_args()
     try:
         if args.command=='decode':
             raw=args.input.read_bytes();data=load_json(args.input) if raw.lstrip().startswith(b'{') else raw
@@ -275,6 +325,10 @@ def main():
             profile=load_json(args.input)
             if args.format=='pb':args.output.write_bytes(compile_profile(profile))
             else:args.output.write_text(json.dumps(profile_to_protobuf_json(profile),indent=2)+'\n')
+        elif args.command=='report':
+            text=json.dumps(compile_report(load_json(args.input)),indent=2,sort_keys=True)+'\n'
+            if args.output:args.output.write_text(text,encoding='utf-8')
+            else:print(text,end='')
         else:print(json.dumps(validate_profile(load_json(args.input)),sort_keys=True))
     except (OSError,ValueError,KeyError,IndexError,TypeError,struct.error) as exc:parser.exit(2,'error: '+str(exc)+'\n')
 if __name__=='__main__':main()

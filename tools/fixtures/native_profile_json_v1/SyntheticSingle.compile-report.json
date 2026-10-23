@@ -1,0 +1,52 @@
+{
+  "analog_effect_count": 0,
+  "body_bytes": 617,
+  "body_sha256": "a05570b725ab59aa66ca51672fe7480a7760455a279aaad376e9264568af9733",
+  "condition_count": 0,
+  "declared_tables": [
+    "Only_Table-1"
+  ],
+  "digital_binding_count": 0,
+  "direction_source_count": 1,
+  "format_version": 1,
+  "neutral_filled_slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26
+  ],
+  "preprocessing_sha256": "e7298560afc19a2b38cbf554669262e3fadbd4166c9ee0561bfdcc9e4292fce6",
+  "profile_name": "Synthetic single table \u2014 not a product profile",
+  "provenance_kind": "authoredSourceV1",
+  "provenance_sha256": "68346d68dbc0c27e5597d3f367366bacf7b8cb6ad2edf095a4fc20e9a1e145ec",
+  "table_rule_count": 0,
+  "table_slots": {
+    "Only_Table-1": 27
+  },
+  "token_count": 0,
+  "wrapper_bytes": 622,
+  "wrapper_sha256": "4d7fe8dc24dd3656a33308a643c666d97f62c0f327f3f90897d8c277f291fae6"
+}

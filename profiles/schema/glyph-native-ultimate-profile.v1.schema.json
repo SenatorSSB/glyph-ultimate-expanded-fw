@@ -1,0 +1,1026 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:glyph:native-ultimate-profile:v1",
+  "title": "Offline Glyph native Ultimate profile v1",
+  "description": "Character-independent sparse offline authoring format for unchanged GNP5 encoding1 ABI1. Semantic validation additionally enforces declared references, unique slots, staged tokens, priorities, overlap, pool and body bounds. Undeclared wire slots are neutral. Table name any is reserved for winner-filter sentinel.",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "glyph-native-ultimate-profile"
+    },
+    "formatVersion": {
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "authoredSourceV1"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "preprocessing": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "const": "MODE_ULTIMATE"
+        },
+        "remaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "physical": {
+                "type": "string",
+                "enum": [
+                  "LF1",
+                  "LF2",
+                  "LF3",
+                  "LF4",
+                  "LF5",
+                  "LF6",
+                  "LF7",
+                  "LF8",
+                  "LF9",
+                  "LF10",
+                  "LF11",
+                  "LF12",
+                  "LF13",
+                  "LF14",
+                  "LF15",
+                  "LF16",
+                  "RF1",
+                  "RF2",
+                  "RF3",
+                  "RF4",
+                  "RF5",
+                  "RF6",
+                  "RF7",
+                  "RF8",
+                  "RF9",
+                  "RF10",
+                  "RF11",
+                  "RF12",
+                  "RF13",
+                  "RF14",
+                  "RF15",
+                  "RF16",
+                  "LT1",
+                  "LT2",
+                  "LT3",
+                  "LT4",
+                  "LT5",
+                  "LT6",
+                  "LT7",
+                  "LT8",
+                  "RT1",
+                  "RT2",
+                  "RT3",
+                  "RT4",
+                  "RT5",
+                  "RT6",
+                  "RT7",
+                  "RT8",
+                  "MB1",
+                  "MB2",
+                  "MB3",
+                  "MB4",
+                  "MB5",
+                  "MB6",
+                  "MB7",
+                  "MB8",
+                  "MB9",
+                  "MB10",
+                  "MB11",
+                  "MB12"
+                ]
+              },
+              "activates": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "LF1",
+                  "LF2",
+                  "LF3",
+                  "LF4",
+                  "LF5",
+                  "LF6",
+                  "LF7",
+                  "LF8",
+                  "LF9",
+                  "LF10",
+                  "LF11",
+                  "LF12",
+                  "LF13",
+                  "LF14",
+                  "LF15",
+                  "LF16",
+                  "RF1",
+                  "RF2",
+                  "RF3",
+                  "RF4",
+                  "RF5",
+                  "RF6",
+                  "RF7",
+                  "RF8",
+                  "RF9",
+                  "RF10",
+                  "RF11",
+                  "RF12",
+                  "RF13",
+                  "RF14",
+                  "RF15",
+                  "RF16",
+                  "LT1",
+                  "LT2",
+                  "LT3",
+                  "LT4",
+                  "LT5",
+                  "LT6",
+                  "LT7",
+                  "LT8",
+                  "RT1",
+                  "RT2",
+                  "RT3",
+                  "RT4",
+                  "RT5",
+                  "RT6",
+                  "RT7",
+                  "RT8",
+                  "MB1",
+                  "MB2",
+                  "MB3",
+                  "MB4",
+                  "MB5",
+                  "MB6",
+                  "MB7",
+                  "MB8",
+                  "MB9",
+                  "MB10",
+                  "MB11",
+                  "MB12"
+                ]
+              }
+            },
+            "required": [
+              "physical",
+              "activates"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 60
+        },
+        "socd": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "first": {
+                "type": "string",
+                "enum": [
+                  "LF1",
+                  "LF2",
+                  "LF3",
+                  "LF4",
+                  "LF5",
+                  "LF6",
+                  "LF7",
+                  "LF8",
+                  "LF9",
+                  "LF10",
+                  "LF11",
+                  "LF12",
+                  "LF13",
+                  "LF14",
+                  "LF15",
+                  "LF16",
+                  "RF1",
+                  "RF2",
+                  "RF3",
+                  "RF4",
+                  "RF5",
+                  "RF6",
+                  "RF7",
+                  "RF8",
+                  "RF9",
+                  "RF10",
+                  "RF11",
+                  "RF12",
+                  "RF13",
+                  "RF14",
+                  "RF15",
+                  "RF16",
+                  "LT1",
+                  "LT2",
+                  "LT3",
+                  "LT4",
+                  "LT5",
+                  "LT6",
+                  "LT7",
+                  "LT8",
+                  "RT1",
+                  "RT2",
+                  "RT3",
+                  "RT4",
+                  "RT5",
+                  "RT6",
+                  "RT7",
+                  "RT8",
+                  "MB1",
+                  "MB2",
+                  "MB3",
+                  "MB4",
+                  "MB5",
+                  "MB6",
+                  "MB7",
+                  "MB8",
+                  "MB9",
+                  "MB10",
+                  "MB11",
+                  "MB12"
+                ]
+              },
+              "second": {
+                "type": "string",
+                "enum": [
+                  "LF1",
+                  "LF2",
+                  "LF3",
+                  "LF4",
+                  "LF5",
+                  "LF6",
+                  "LF7",
+                  "LF8",
+                  "LF9",
+                  "LF10",
+                  "LF11",
+                  "LF12",
+                  "LF13",
+                  "LF14",
+                  "LF15",
+                  "LF16",
+                  "RF1",
+                  "RF2",
+                  "RF3",
+                  "RF4",
+                  "RF5",
+                  "RF6",
+                  "RF7",
+                  "RF8",
+                  "RF9",
+                  "RF10",
+                  "RF11",
+                  "RF12",
+                  "RF13",
+                  "RF14",
+                  "RF15",
+                  "RF16",
+                  "LT1",
+                  "LT2",
+                  "LT3",
+                  "LT4",
+                  "LT5",
+                  "LT6",
+                  "LT7",
+                  "LT8",
+                  "RT1",
+                  "RT2",
+                  "RT3",
+                  "RT4",
+                  "RT5",
+                  "RT6",
+                  "RT7",
+                  "RT8",
+                  "MB1",
+                  "MB2",
+                  "MB3",
+                  "MB4",
+                  "MB5",
+                  "MB6",
+                  "MB7",
+                  "MB8",
+                  "MB9",
+                  "MB10",
+                  "MB11",
+                  "MB12"
+                ]
+              },
+              "policy": {
+                "type": "string",
+                "enum": [
+                  "unspecified",
+                  "neutral",
+                  "secondInputPriority",
+                  "secondInputPriorityNoReactivation",
+                  "firstPriority",
+                  "secondPriority"
+                ]
+              }
+            },
+            "required": [
+              "first",
+              "second",
+              "policy"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "mode",
+        "remaps",
+        "socd"
+      ],
+      "additionalProperties": false
+    },
+    "tables": {
+      "type": "object",
+      "patternProperties": {
+        "^(?!any(?![\\s\\S]))[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])": {
+          "type": "object",
+          "properties": {
+            "directions": {
+              "type": "object",
+              "properties": {
+                "1": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "2": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "3": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "4": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "5": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "6": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "7": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "8": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "9": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 255
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "required": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+              ],
+              "additionalProperties": false
+            },
+            "slot": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 27
+            }
+          },
+          "required": [
+            "slot",
+            "directions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 28,
+      "additionalProperties": false
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+          },
+          "stage": {
+            "type": "string",
+            "enum": [
+              "early",
+              "late"
+            ]
+          },
+          "all": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+            },
+            "minItems": 0,
+            "maxItems": 2
+          },
+          "any": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+            },
+            "minItems": 0,
+            "maxItems": 4
+          },
+          "none": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+            },
+            "minItems": 0,
+            "maxItems": 9
+          }
+        },
+        "required": [
+          "name",
+          "stage",
+          "all",
+          "any",
+          "none"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 96
+    },
+    "directionSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+          },
+          "left": {
+            "type": "string",
+            "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+          },
+          "right": {
+            "type": "string",
+            "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+          },
+          "down": {
+            "type": "string",
+            "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+          },
+          "up": {
+            "type": "string",
+            "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+          }
+        },
+        "required": [
+          "name",
+          "left",
+          "right",
+          "down",
+          "up"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 8
+    },
+    "defaultTable": {
+      "type": "string",
+      "pattern": "^(?!any(?![\\s\\S]))[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+    },
+    "leftStickSource": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+    },
+    "rightStickSource": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+    },
+    "gates": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+        },
+        "leftStickDigital": {
+          "type": "string",
+          "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+        },
+        "rightStickDigital": {
+          "type": "string",
+          "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+        },
+        "dpad": {
+          "type": "string",
+          "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+        }
+      },
+      "required": [
+        "mode",
+        "leftStickDigital",
+        "rightStickDigital",
+        "dpad"
+      ],
+      "additionalProperties": false
+    },
+    "dpad": {
+      "type": "object",
+      "properties": {
+        "routeToDpad": {
+          "type": "boolean"
+        },
+        "bypassLeftStick": {
+          "type": "boolean"
+        },
+        "suppressLeftStickDigital": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "routeToDpad",
+        "bypassLeftStick",
+        "suppressLeftStickDigital"
+      ],
+      "additionalProperties": false
+    },
+    "tableRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 255
+          },
+          "table": {
+            "type": "string",
+            "pattern": "^(?!any(?![\\s\\S]))[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+          },
+          "when": {
+            "type": "string",
+            "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+          }
+        },
+        "required": [
+          "priority",
+          "table",
+          "when"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 32
+    },
+    "digitalBindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "when": {
+            "type": "string",
+            "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "buttonA",
+                "buttonB",
+                "buttonX",
+                "buttonY",
+                "buttonL",
+                "buttonR",
+                "triggerLDigital",
+                "triggerRDigital",
+                "start",
+                "select",
+                "home",
+                "capture"
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 12,
+            "uniqueItems": true
+          },
+          "winnerTable": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+          }
+        },
+        "required": [
+          "when",
+          "outputs",
+          "winnerTable"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 32
+    },
+    "analogEffects": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "target": {
+                "type": "string",
+                "enum": [
+                  "leftStick",
+                  "rightStick",
+                  "bothSticks"
+                ]
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 255
+              },
+              "activation": {
+                "type": "string",
+                "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+              },
+              "gate": {
+                "type": "string",
+                "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+              },
+              "gateInverted": {
+                "type": "boolean"
+              },
+              "skipWhenDpadBypass": {
+                "type": "boolean"
+              },
+              "winnerTable": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+              },
+              "source": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+              },
+              "coordinates": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "selectedTable"
+                      }
+                    },
+                    "required": [
+                      "mode"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "table"
+                      },
+                      "normalTable": {
+                        "type": "string",
+                        "pattern": "^(?!any(?![\\s\\S]))[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+                      },
+                      "modeTable": {
+                        "type": "string",
+                        "pattern": "^(?!any(?![\\s\\S]))[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+                      }
+                    },
+                    "required": [
+                      "mode",
+                      "normalTable",
+                      "modeTable"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "fixed"
+                      },
+                      "point": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 255
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                      }
+                    },
+                    "required": [
+                      "mode",
+                      "point"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "inline"
+                      },
+                      "points": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 255
+                          },
+                          "minItems": 2,
+                          "maxItems": 2
+                        },
+                        "minItems": 9,
+                        "maxItems": 9
+                      }
+                    },
+                    "required": [
+                      "mode",
+                      "points"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "target",
+              "priority",
+              "activation",
+              "gate",
+              "gateInverted",
+              "skipWhenDpadBypass",
+              "winnerTable",
+              "source",
+              "coordinates"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "target": {
+                "type": "string",
+                "enum": [
+                  "triggerL",
+                  "triggerR"
+                ]
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 255
+              },
+              "activation": {
+                "type": "string",
+                "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+              },
+              "gate": {
+                "type": "string",
+                "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+              },
+              "gateInverted": {
+                "type": "boolean"
+              },
+              "skipWhenDpadBypass": {
+                "const": false
+              },
+              "winnerTable": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+              },
+              "value": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              }
+            },
+            "required": [
+              "target",
+              "priority",
+              "activation",
+              "gate",
+              "gateInverted",
+              "skipWhenDpadBypass",
+              "winnerTable",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 16
+    },
+    "digitalPostMask": {
+      "type": "object",
+      "properties": {
+        "gate": {
+          "type": "string",
+          "pattern": "^(false|true|(?:original|preSocd|postSocd):(?:LF(?:[1-9]|1[0-6])|RF(?:[1-9]|1[0-6])|LT[1-8]|RT[1-8]|MB(?:[1-9]|1[0-2]))|condition:[A-Za-z][A-Za-z0-9_-]{0,63}|direction:(?:leftStickLeft|leftStickRight|leftStickDown|leftStickUp|rightStickLeft|rightStickRight|rightStickDown|rightStickUp)|finalDigital:(?:buttonA|buttonB|buttonX|buttonY|buttonL|buttonR|triggerLDigital|triggerRDigital|start|select|home|capture))$"
+        },
+        "set": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "buttonA",
+              "buttonB",
+              "buttonX",
+              "buttonY",
+              "buttonL",
+              "buttonR",
+              "triggerLDigital",
+              "triggerRDigital",
+              "start",
+              "select",
+              "home",
+              "capture"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 12,
+          "uniqueItems": true
+        },
+        "clear": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "buttonA",
+              "buttonB",
+              "buttonX",
+              "buttonY",
+              "buttonL",
+              "buttonR",
+              "triggerLDigital",
+              "triggerRDigital",
+              "start",
+              "select",
+              "home",
+              "capture"
+            ]
+          },
+          "minItems": 0,
+          "maxItems": 12,
+          "uniqueItems": true
+        },
+        "inverted": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "gate",
+        "set",
+        "clear",
+        "inverted"
+      ],
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional annotations ignored by native encoding. No gameplay semantics are inferred.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "maxItems": 32
+        },
+        "character": {
+          "oneOf": [
+            {
+              "type": "string",
+              "maxLength": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "format",
+    "formatVersion",
+    "name",
+    "provenance",
+    "preprocessing",
+    "tables",
+    "conditions",
+    "directionSources",
+    "defaultTable",
+    "leftStickSource",
+    "rightStickSource",
+    "gates",
+    "dpad",
+    "tableRules",
+    "digitalBindings",
+    "analogEffects",
+    "digitalPostMask"
+  ],
+  "additionalProperties": false
+}

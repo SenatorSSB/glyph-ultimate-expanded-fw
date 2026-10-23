@@ -1,5 +1,8 @@
 # Editable native Ultimate profile v0
 
+For new profiles use [character-independent authoring v1](../README.md). This
+v0 source, schema and historical table mapping remain archival and unchanged.
+
 [Ultimate.profile.json](Ultimate.profile.json) is the human-editable source of the
 owner's working native Ultimate profile. [Ultimate.profile.schema.json](Ultimate.profile.schema.json)
 describes its finite JSON syntax. The offline compiler emits the existing

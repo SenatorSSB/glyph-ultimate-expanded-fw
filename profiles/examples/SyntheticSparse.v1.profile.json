@@ -1,0 +1,391 @@
+{
+  "format": "glyph-native-ultimate-profile",
+  "formatVersion": 1,
+  "name": "Synthetic sparse tables — not a product profile",
+  "provenance": {
+    "kind": "authoredSourceV1"
+  },
+  "preprocessing": {
+    "mode": "MODE_ULTIMATE",
+    "remaps": [],
+    "socd": []
+  },
+  "tables": {
+    "Default": {
+      "slot": 0,
+      "directions": {
+        "1": [
+          22,
+          34
+        ],
+        "2": [
+          39,
+          63
+        ],
+        "3": [
+          56,
+          92
+        ],
+        "4": [
+          73,
+          121
+        ],
+        "5": [
+          90,
+          150
+        ],
+        "6": [
+          107,
+          179
+        ],
+        "7": [
+          124,
+          208
+        ],
+        "8": [
+          141,
+          237
+        ],
+        "9": [
+          158,
+          10
+        ]
+      }
+    },
+    "ForcedDown": {
+      "slot": 7,
+      "directions": {
+        "1": [
+          128,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          128,
+          51
+        ],
+        "4": [
+          128,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          128,
+          51
+        ],
+        "7": [
+          128,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          128,
+          51
+        ]
+      }
+    },
+    "Diagonal_Test-2": {
+      "slot": 27,
+      "directions": {
+        "1": [
+          48,
+          60
+        ],
+        "2": [
+          65,
+          89
+        ],
+        "3": [
+          82,
+          118
+        ],
+        "4": [
+          99,
+          147
+        ],
+        "5": [
+          116,
+          176
+        ],
+        "6": [
+          133,
+          205
+        ],
+        "7": [
+          150,
+          234
+        ],
+        "8": [
+          167,
+          7
+        ],
+        "9": [
+          184,
+          36
+        ]
+      }
+    },
+    "Neutral": {
+      "slot": 13,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    }
+  },
+  "conditions": [
+    {
+      "name": "forceDown",
+      "stage": "early",
+      "all": [
+        "postSocd:RF1"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "alternateInput",
+      "stage": "early",
+      "all": [
+        "original:RF8"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "resolvedLeft",
+      "stage": "late",
+      "all": [
+        "direction:leftStickLeft"
+      ],
+      "any": [],
+      "none": []
+    }
+  ],
+  "directionSources": [
+    {
+      "name": "axes",
+      "left": "postSocd:LF1",
+      "right": "postSocd:LF2",
+      "down": "postSocd:LF3",
+      "up": "postSocd:LF4"
+    }
+  ],
+  "defaultTable": "Default",
+  "leftStickSource": "axes",
+  "rightStickSource": "axes",
+  "gates": {
+    "mode": "false",
+    "leftStickDigital": "true",
+    "rightStickDigital": "true",
+    "dpad": "false"
+  },
+  "dpad": {
+    "routeToDpad": false,
+    "bypassLeftStick": false,
+    "suppressLeftStickDigital": false
+  },
+  "tableRules": [
+    {
+      "priority": 10,
+      "table": "ForcedDown",
+      "when": "condition:forceDown"
+    },
+    {
+      "priority": 20,
+      "table": "Diagonal_Test-2",
+      "when": "condition:resolvedLeft"
+    }
+  ],
+  "digitalBindings": [
+    {
+      "when": "condition:forceDown",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "ForcedDown"
+    },
+    {
+      "when": "postSocd:RF2",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    }
+  ],
+  "analogEffects": [
+    {
+      "target": "leftStick",
+      "priority": 10,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "axes",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 10,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "axes",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Neutral",
+        "modeTable": "Diagonal_Test-2"
+      }
+    },
+    {
+      "target": "bothSticks",
+      "priority": 20,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "axes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          0,
+          255
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 30,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "axes",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            0,
+            0
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            6,
+            14
+          ],
+          [
+            9,
+            21
+          ],
+          [
+            12,
+            28
+          ],
+          [
+            15,
+            35
+          ],
+          [
+            18,
+            42
+          ],
+          [
+            21,
+            49
+          ],
+          [
+            24,
+            56
+          ]
+        ]
+      }
+    },
+    {
+      "target": "triggerL",
+      "priority": 1,
+      "activation": "finalDigital:buttonA",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "ForcedDown",
+      "value": 131
+    },
+    {
+      "target": "triggerR",
+      "priority": 1,
+      "activation": "false",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 9
+    }
+  ],
+  "digitalPostMask": {
+    "gate": "condition:resolvedLeft",
+    "set": [
+      "buttonX"
+    ],
+    "clear": [
+      "buttonY"
+    ],
+    "inverted": false
+  },
+  "metadata": {
+    "description": "Synthetic format fixture only. Arbitrary coordinates and inputs assert no gameplay semantics.",
+    "character": null
+  }
+}

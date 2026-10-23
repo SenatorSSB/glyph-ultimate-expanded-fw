@@ -1,0 +1,62 @@
+{
+  "review": "Fresh independent offline native authoring v1 review",
+  "result": "APPROVE",
+  "base_sha": "cef1c59ce0ec9b8cb1e97003d2f02a7c7a7a256c",
+  "findings": [],
+  "reviewed_file_sha256": {
+    "docs/AGENT_CONTEXT.md": "aa34c51a58521d6ffd8a1f3dc379a5c8b3498e46b193a64623690eda06174581",
+    "docs/CURRENT_STATE.md": "01828e37c318506536e6bd03a673a58fdc7817725d67573738ee3320ea6cb387",
+    "docs/ROADMAP.md": "9b8f791535750ad345ca54b31bd7cea4326ca61cccdf8358cdddb2a7be37a9fe",
+    "profiles/ultimate/README.md": "7a18822f44cf045032f271924d0726c7404079b5286f59281067e722c7e6504d",
+    "tools/glyph_native_profile_json.py": "05936f8be10d602130943dfa32c8ace69b636c5e5e18b88984df0ace63d73981",
+    "profiles/README.md": "0b00089cac690a8eaefc355fc1ba5ff009c0f3b9c9af599e92ccad9031624b3c",
+    "profiles/authoring-v1/CHAPTER.json": "3e581d0df98f24d86155b8f113fff77f88f1ed1781ba2332aaa6becfab6fe64a",
+    "profiles/examples/SyntheticSingle.v1.profile.json": "8b3ab399c97cceab556a9b37ef6bf812b7cc5724dbda96ac20c32d423f2831d5",
+    "profiles/examples/SyntheticSparse.v1.profile.json": "03e2f7854a5c2a28fb736d1a47fdce382e34d4e1637fa15bc078f23ed5de5301",
+    "profiles/schema/glyph-native-ultimate-profile.v1.schema.json": "61eb5645feb6de8f8815567768fe911cfd9f7cf6bda9e8520116ad7dd87f8967",
+    "tools/fixtures/native_profile_json_v1/SyntheticSingle.compile-report.json": "7e9ba550346c58ea3f0c6c11683c09e755f5b0a202d1031d34c385efd7b498f8",
+    "tools/fixtures/native_profile_json_v1/SyntheticSparse.compile-report.json": "ff94cb1d34629f16a77c1866dfd6ef2c43220ba0638e71fde8bf4a0670eb948d",
+    "tools/test_glyph_native_profile_json_v1.py": "cb9a1aba60d3b7fcdeb42536b9cbd0f7004b9d0521f8403869fb83d90225cd26"
+  },
+  "v0_preservation": {
+    "source_unchanged_from_base": true,
+    "schema_unchanged_from_base": true,
+    "source_sha256": "c3bfeaa42ad6e81ef5f8ff7ff3d4484656404651b3665b8908d8c7c662d10a05",
+    "schema_sha256": "8a1043635d83fd9d3b0529ab1a741ab25807f1c7328d7eaaafc6c5ecfa1680f9",
+    "wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+    "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee"
+  },
+  "independently_performed_checks": [
+    "Full v0 test suite:17 methods PASS (PYTHONPATH=/private/tmp/glyph-profile-json-deps)",
+    "Full v1 test suite:23 methods PASS;87 negative cases;89 standard/built-in schema fixtures",
+    "Exact source/schema bytes compared with git show of fixed base; v0 golden wrapper/body hashes asserted",
+    "Both example compile-report files compared with newly compiled exact report objects",
+    "Built actual production C++ native codec/evaluator through existing compile_runner;56 independent finite frames PASS:all9 directions, slots0/27, mode=false/true/original:RF8 with RF8 inactive/active, selectedTable default/rule selection, noncenter direction5",
+    "All26 undeclared table slots of independent two-table fixture directly checked as18 bytes0x80 each",
+    "Unknown-field mutations at34 separate object locations independently rejected by standard schema and compiler",
+    "Reviewed final tracked diff and enumerated untracked scope: no production firmware/build/protocol/store/selector inputs changed",
+    "Read schema/compiler/tests/examples/docs/compile reports/chapter ledger; verified strict table references, optional Mode preservation, canonical authored-source digest, native bounds, synthetic semantics and truthful decode limitation"
+  ],
+  "inspected_not_rerun": {
+    "/private/tmp/native-v1-legacy-short.log": {
+      "sha256": "1976e973bbe157ea53c2c0d04bec2cb13e32aa9cbe2ef25a49e8c025fbe5d6a3",
+      "result": "All PASS including legacy V1,V2,V3 each1124032 comparisons; inspected evidence produced by parent"
+    },
+    "/private/tmp/native-v1-legacy-default.log": {
+      "sha256": "a900683502651086167887d95584c11cdfc862c4caaadd91e215390590a82ed1",
+      "result": "All PASS including legacy V1,V2,V3 each1124032 comparisons; inspected evidence produced by parent"
+    }
+  },
+  "scope_limits": [
+    "Fixed reviewed file hashes bind substantive implementation; later evidence-only ledger updates require truthful finalization",
+    "No device/hardware operation performed",
+    "No source edit, commit, publication or queue/evidence mutation performed by reviewer",
+    "No live remote or independent303-input catalog rerun claimed"
+  ],
+  "model_provenance": {
+    "requested_model": "gpt-6.1-sol",
+    "requested_effort": "high",
+    "observed_model": "UNKNOWN",
+    "observed_effort": "UNKNOWN"
+  }
+}

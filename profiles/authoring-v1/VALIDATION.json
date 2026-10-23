@@ -1,0 +1,97 @@
+{
+  "classification": "INACTIVE_GENERATOR_OR_FIXTURE",
+  "base_canonical_sha": "cef1c59ce0ec9b8cb1e97003d2f02a7c7a7a256c",
+  "v0_source_changed": false,
+  "v0_schema_changed": false,
+  "v0_tests_changed": false,
+  "v0_regression": {
+    "test_methods": 17,
+    "result": "PASS",
+    "wrapper_bytes": 1985,
+    "wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+    "body_bytes": 1980,
+    "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee"
+  },
+  "v1_regression": {
+    "test_methods": 23,
+    "positive_methods": 12,
+    "provenance_methods": 8,
+    "negative_source_cases": 87,
+    "additional_binary_oversize_rejection": true,
+    "schema_agreement_fixtures": 89,
+    "schema_standard": "Draft202012Validator; schema self-validation and agreement with built-in syntax validator PASS",
+    "exact_maximum_native_body_bytes": 3336,
+    "result": "PASS"
+  },
+  "legacy_converter": {
+    "result": "PASS",
+    "enum_ABIs": [
+      "short enums",
+      "default enums"
+    ],
+    "frozen_corpus_rows_per_ABI": 72,
+    "V1_V2_V3_matrix_comparisons_each_per_ABI": 1124032,
+    "commands": [
+      "python3 tools/check_glyph_profile_native_ultimate.py",
+      "python3 tools/check_glyph_profile_native_ultimate.py --default-enum"
+    ]
+  },
+  "independent_review": {
+    "result": "APPROVE",
+    "record": "INDEPENDENT_REVIEW.json",
+    "record_sha256": "4f8e5b28a26b79edb036d0da4512f47c465724d49665f659cd970cc63d4273b9",
+    "independent_additional_production_CPP_frames": 56,
+    "independent_unknown_field_mutations": 34,
+    "findings": [],
+    "legacy_log_review": "Inspected, not independently rerun"
+  },
+  "production_input_correspondence": "All303 accepted catalog files and all307 separately selected current critical-plus-schema paths match base/index/working inputs; bytes/modes/blobs verified. Inventory predicate and set differences are explicit in PRODUCTION_CORRESPONDENCE.json. No production source/build input changed.",
+  "repo_checks": {
+    "docs_navigation": "PASS",
+    "forbidden_artifacts": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "firmware_build": "NOT_REQUIRED: production build inputs unchanged",
+  "hardware_acceptance": "NOT_REQUIRED: no production firmware or controller mutation",
+  "full_aggregate": "NOT_RUN; no aggregate PASS claim",
+  "test_environment": {
+    "python": "Python3",
+    "jsonschema_dependency": "Existing /private/tmp/glyph-profile-json-deps; PYTHONPATH used for test-only dependency",
+    "host_dependencies": "Existing local Nanopb/nanopb-arduino/PacketIO copied into ignored .pio cache; no dependency or build inputs committed"
+  },
+  "prior_attempts": [
+    "Broad host regressions initially stopped on missing isolated-worktree Nanopb dependency; restored existing local dependency then reran.",
+    "Next host run stopped on missing nanopb-arduino/PacketIO; restored existing local dependencies then reran both ABIs successfully.",
+    "Initial v1 test expected2 early conditions in maximum fixture; corrected test expectation to its actual95; final23 tests PASS."
+  ],
+  "logs": {
+    "native-v1-v0-tests.log": {
+      "local_locator": "/private/tmp/native-v1-v0-tests.log",
+      "sha256": "4110b25a1004564b4dcd538be9644112de33ec4a3b74656acb8e4b4803b72479"
+    },
+    "native-v1-tests.log": {
+      "local_locator": "/private/tmp/native-v1-tests.log",
+      "sha256": "ed37dc06daa33ea2ad79e02af230c1cc68a5ebe330f89545b7d3ae339d2c4523"
+    },
+    "native-v1-legacy-short.log": {
+      "local_locator": "/private/tmp/native-v1-legacy-short.log",
+      "sha256": "1976e973bbe157ea53c2c0d04bec2cb13e32aa9cbe2ef25a49e8c025fbe5d6a3"
+    },
+    "native-v1-legacy-default.log": {
+      "local_locator": "/private/tmp/native-v1-legacy-default.log",
+      "sha256": "a900683502651086167887d95584c11cdfc862c4caaadd91e215390590a82ed1"
+    },
+    "native-v1-navigation.log": {
+      "local_locator": "/private/tmp/native-v1-navigation.log",
+      "sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    "native-v1-forbidden.log": {
+      "local_locator": "/private/tmp/native-v1-forbidden.log",
+      "sha256": "c91aa1ae70ecd77dc9dfecc52938a6f3fc527275dc34bbac6ca5b66162c0ae24"
+    }
+  },
+  "production_firmware_behavior_changed": false,
+  "schema5_wire_format_changed": false,
+  "controller_operations": [],
+  "hardware_acceptance_required": false
+}

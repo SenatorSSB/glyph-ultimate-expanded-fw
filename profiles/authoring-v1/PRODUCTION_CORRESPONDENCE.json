@@ -1,0 +1,22 @@
+{
+  "base_canonical_sha": "cef1c59ce0ec9b8cb1e97003d2f02a7c7a7a256c",
+  "all303_accepted_critical_files_bytes_modes_and_blobs_unchanged": "PASS",
+  "all_critical_and_schema_paths_unchanged": 307,
+  "frozen_v0_source_schema_tests_unchanged": "PASS",
+  "legacy_converter_and_uploader_unchanged": "PASS",
+  "working_critical_divergence": [],
+  "production_firmware_behavior_changed": false,
+  "schema5_wire_format_changed": false,
+  "controller_operations": [],
+  "current307_inventory_definition": "All base-tree paths for which tools/glyph_tracked_worktree_integrity.py:is_critical_path(path) is true, plus paths starting with 'schema/'. This is a separate set from the accepted303 catalog.",
+  "current307_paths_additional_to_accepted303": [
+    ".gitattributes",
+    ".github/workflows/build-device-config.yml",
+    ".github/workflows/build.yml",
+    ".gitignore",
+    "glyph_nuker"
+  ],
+  "accepted303_paths_outside_current307": [
+    "tools/glyph_tracked_worktree_integrity.py"
+  ]
+}

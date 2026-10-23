@@ -1,0 +1,93 @@
+{
+  "format": "glyph-native-ultimate-profile",
+  "formatVersion": 1,
+  "name": "Synthetic single table — not a product profile",
+  "provenance": {
+    "kind": "authoredSourceV1"
+  },
+  "preprocessing": {
+    "mode": "MODE_ULTIMATE",
+    "remaps": [],
+    "socd": []
+  },
+  "tables": {
+    "Only_Table-1": {
+      "slot": 27,
+      "directions": {
+        "1": [
+          30,
+          42
+        ],
+        "2": [
+          47,
+          71
+        ],
+        "3": [
+          64,
+          100
+        ],
+        "4": [
+          81,
+          129
+        ],
+        "5": [
+          98,
+          158
+        ],
+        "6": [
+          115,
+          187
+        ],
+        "7": [
+          132,
+          216
+        ],
+        "8": [
+          149,
+          245
+        ],
+        "9": [
+          166,
+          18
+        ]
+      }
+    }
+  },
+  "conditions": [],
+  "directionSources": [
+    {
+      "name": "axes",
+      "left": "postSocd:LF1",
+      "right": "postSocd:LF2",
+      "down": "postSocd:LF3",
+      "up": "postSocd:LF4"
+    }
+  ],
+  "defaultTable": "Only_Table-1",
+  "leftStickSource": "axes",
+  "rightStickSource": "axes",
+  "gates": {
+    "mode": "false",
+    "leftStickDigital": "true",
+    "rightStickDigital": "true",
+    "dpad": "false"
+  },
+  "dpad": {
+    "routeToDpad": false,
+    "bypassLeftStick": false,
+    "suppressLeftStickDigital": false
+  },
+  "tableRules": [],
+  "digitalBindings": [],
+  "analogEffects": [],
+  "digitalPostMask": {
+    "gate": "false",
+    "set": [],
+    "clear": [],
+    "inverted": false
+  },
+  "metadata": {
+    "description": "Synthetic format fixture only. Arbitrary coordinates and inputs assert no gameplay semantics.",
+    "character": null
+  }
+}
