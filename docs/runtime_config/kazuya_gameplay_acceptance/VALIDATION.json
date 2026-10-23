@@ -1,56 +1,61 @@
 {
+  "packet_id": "KGA-ID48-GC-R2",
   "classification": "DOCS_CHECKER_ONLY",
   "preparation_status": "PREPARED_REVIEWED_AWAITING_OWNER_APPROVAL",
   "canonical_verified": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
+  "supersedes_packet_at": "47219cd4639f363d3fa3230b3ef9baa0148569e1",
+  "manual_scope": {
+    "required_checks": 33,
+    "optional_checks": 2,
+    "maximum_checks": 35,
+    "sequence_counting": "one complete sequence = one case",
+    "routine_max_cases_per_batch": 3
+  },
   "validation": [
     {
-      "check": "fresh canonical v1 validate/compile report and hashes",
+      "check": "candidate ID48 source/compile identity unchanged except packet label",
       "result": "PASS"
     },
     {
-      "check": "independent packet/source/matrix review and exact-PY verify",
-      "result": "PASS",
+      "check": "fresh independent R2 review and source/host-expectation correspondence",
+      "result": "PASS_FOR_OWNER_APPROVAL",
       "receipt": "packet_review.json"
+    },
+    {
+      "check": "exact packet Python verify and reviewed-file hashes",
+      "result": "PASS"
+    },
+    {
+      "check": "all35 cases displayed once, <=3 complete cases/batch, deterministic diagnostics excluded from routine owner presentation",
+      "result": "PASS"
+    },
+    {
+      "check": "R1 checks/snap/compare functions unchanged AST; capture script changes only session label",
+      "result": "PASS"
     },
     {
       "check": "retained complete24-record snapshot --accepted (host files only)",
       "result": "PASS"
     },
     {
-      "check": "synthetic offline GC48\u2192GC27\u2192XInput27 Config replay",
-      "result": "PASS_NOT_HARDWARE"
-    },
-    {
       "check": "negative controls: unexplained valid Config change, Kazuya XInput, missing Ultimate return, unobserved selection",
       "result": "ALL_REJECTED"
     },
     {
-      "check": "all177 poses displayed once in atomic <=8-pose batches; no RELEASE/SOCD split",
-      "result": "PASS"
-    },
-    {
-      "check": "Python parse, bash -n capture_readonly.sh",
-      "result": "PASS"
-    },
-    {
-      "check": "repository docs navigation and git diff --check",
+      "check": "bash -n and docs navigation and git diff --check",
       "result": "PASS"
     }
-  ],
-  "diagnostics_resolved": [
-    "Initial fixed batch split repaired after independent review",
-    "Initial exact-PY oracle import lacked jsonschema; replaced with AST extraction of pinned literal; exact-PY final verify PASS",
-    "Before review receipt existed verify failed closed at missing receipt; actual final receipt then exact hashes PASS"
   ],
   "mutations": {
     "controller_operations": [],
     "Kazuya_ID48_selected": "NO",
-    "gameplay_tests_performed": "NONE",
+    "gameplay_performed": "NONE",
     "ProfileStore_mutations": "NONE",
-    "profile_updates": "NONE",
-    "firmware_flashed": "NO",
+    "profile_update": "NONE",
+    "firmware_change": "NONE",
     "production_source_or_profile_changes": "NONE",
     "historical_menu_evidence_changes": "NONE"
   },
-  "gameplay_acceptance": "NOT_TESTED"
+  "gameplay_acceptance": "NOT_TESTED",
+  "retained_scope": "RF6 operational regression included; LT5/RT1 at most2 owner-relevant optional spots; all other inherited modifier maps remain individually deferred, not core blockers"
 }

@@ -5,7 +5,7 @@ capture_all() {
   mkdir "$d" || return
   "$PY" "$STORE" --port "$PORT" --journal-out "$d/status-start.jsonl" --output "$d/status-start.json" status || return
   "$PY" "$CONFIG" --read --port "$PORT" --backup-out "$d/config.json" --timeout-sec 5 > "$d/config-command.log" 2>&1 || return
-  "$PY" "$IDENTITY" --port "$PORT" --context configurator --session "KGA-ID48-$(basename "$d")" --timeout 2 > "$d/identity.json" || return
+  "$PY" "$IDENTITY" --port "$PORT" --context configurator --session "KGA-ID48-R2-$(basename "$d")" --timeout 2 > "$d/identity.json" || return
   for n in {0..8}; do
     "$PY" "$STORE" --port "$PORT" --journal-out "$d/list-$cursor.jsonl" --output "$d/list-$cursor.json" list --page "$cursor" --page-size 8 || return
     next=$("$PY" "$FROZEN" cursor "$d/list-$cursor.json") || return

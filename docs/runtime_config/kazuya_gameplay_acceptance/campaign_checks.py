@@ -18,22 +18,25 @@ def verify():
     import glyph_native_profile_json as c
     p=c.load_json(ROOT/'profiles/kazuya/Kazuya.profile.json')
     need(c.compile_report(p)==ident['compile_report'],'canonical compile report mismatch')
-    matrix=load(HERE/'TEST_MATRIX.json');ids=[x['id'] for x in matrix['poses']]
-    need(len(ids)==len(set(ids))==matrix['pose_count'],'duplicate/missing pose ID')
-    # Read the hand-specified literal from pinned host oracle without importing
-    # test-only dependencies or running its C++ harness.
+    matrix=load(HERE/'TEST_MATRIX.json');cases=matrix['cases'];ids=[x['id'] for x in cases]
+    need(matrix['packet_id']==ident['packet_id']=='KGA-ID48-GC-R2','packet identity mismatch')
+    need(len(ids)==len(set(ids))==matrix['manual_check_count_maximum']==35,'case count/identity')
+    need(sum(not x['optional'] for x in cases)==matrix['required_checks']==33,'required count')
+    need(sum(x['optional'] for x in cases)==matrix['optional_checks']==2,'optional count')
+    # Deterministic expectations remain pinned to the host oracle. Manual R2
+    # intentionally does not enumerate every RF state/horizontal combination.
     tree=ast.parse((ROOT/'tools/test_kazuya_profile.py').read_text())
     assignments=[n for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='MATRIX' for t in n.targets)]
     need(len(assignments)==1,'ambiguous host MATRIX')
-    oracle=ast.literal_eval(assignments[0].value)
-    need(len(oracle)==16,'host MATRIX extent')
-    for rf,(table,digital) in enumerate(oracle):
-        rows=[x for x in matrix['poses'] if x.get('rf_index')==rf and x['group'] in (2,3)]
-        need({x['LF_side'] for x in rows}=={'actual left','no horizontal','actual right'},'matrix side gap')
-        names={0:'none',1:'A',2:'B',32:'Z',33:'A+Z'}
-        need(all(x['expected_native_table']==table and x['expected_command_digital_contribution']==names[digital] for x in rows),'oracle disagreement')
+    oracle=ast.literal_eval(assignments[0].value);need(len(oracle)==16,'host MATRIX extent')
+    names={0:'none',1:'A',2:'B',32:'Z',33:'A+Z'}
+    for case in cases:
+        if 'rf_index' not in case or 'agent_expected_native_table' not in case:continue
+        table,digital=oracle[case['rf_index']]
+        if case.get('shield'):table='DefensiveDownBack'
+        need(case['agent_expected_native_table']==table and case['agent_expected_command_digital']==names[digital],'attached expectation differs '+case['id'])
     review=load(HERE/'packet_review.json')
-    need(review['verdict']=='PASS_FOR_OWNER_APPROVAL','independent review not PASS')
+    need(review['verdict']=='PASS_FOR_OWNER_APPROVAL' and review['packet_id']==ident['packet_id'],'independent R2 review not PASS')
     for name,h in review['reviewed_files_sha256'].items():need(sha(HERE/name)==h,'reviewed file changed '+name)
     print('PASS pinned sources, canonical compile, matrix, independent reviewed packet')
 def snap(path,accepted=False):
@@ -76,24 +79,18 @@ def main():
     sub.add_parser('verify')
     s=sub.add_parser('snapshot');s.add_argument('path');s.add_argument('--accepted',action='store_true')
     c=sub.add_parser('compare');c.add_argument('before');c.add_argument('after');c.add_argument('events')
-    s=sub.add_parser('show');s.add_argument('group',type=int,choices=range(1,7));s.add_argument('--batch',type=int,default=1)
+    s=sub.add_parser('show');s.add_argument('group',type=int,choices=range(1,9));s.add_argument('--batch',type=int,default=1)
     a=p.parse_args()
     if a.action=='verify':verify()
     elif a.action=='snapshot':s,_,_=snap(a.path,a.accepted);print('PASS full snapshot',len(s['records']),'records')
     elif a.action=='compare':compare(a.before,a.after,a.events)
     else:
-        rows=[x for x in load(HERE/'TEST_MATRIX.json')['poses'] if x['group']==a.group]
-        units=[]
-        for row in rows:
-            if row.get('sequence') and units and units[-1][0].get('sequence')==row['sequence']:
-                units[-1].append(row)
-            else:units.append([row])
-        batches=[];current=[]
-        for unit in units:
-            need(len(unit)<=8,'atomic sequence exceeds batch bound')
-            if len(current)+len(unit)>8:batches.append(current);current=[]
-            current.extend(unit)
-        if current:batches.append(current)
-        need(1<=a.batch<=len(batches),'batch outside group')
-        print(json.dumps(batches[a.batch-1],indent=2))
+        rows=[x for x in load(HERE/'TEST_MATRIX.json')['cases'] if x['group']==a.group]
+        need(1<=a.batch<=(len(rows)+2)//3,'batch outside group')
+        shown=[]
+        for row in rows[(a.batch-1)*3:a.batch*3]:
+            owner={k:v for k,v in row.items() if not k.startswith('agent_') and k not in ('rf_index','shield')}
+            if 'steps' in owner:owner['steps']=[{k:v for k,v in step.items() if not k.startswith('agent_')} for step in owner['steps']]
+            shown.append(owner)
+        print(json.dumps(shown,indent=2))
 if __name__=='__main__':main()

@@ -1,4 +1,4 @@
-# KGA-ID48-GC-R1 — stored Kazuya gameplay campaign
+# KGA-ID48-GC-R2 — stored Kazuya gameplay campaign
 
 **PREPARED ONLY. Execute only after the owner sends the exact approval sentence
 at the end.** Preparation selected no profile, accessed no controller, changed no
@@ -70,9 +70,9 @@ STORE="$ROOT/tools/glyph_profile_store_production_tool.py"
 CONFIG="$ROOT/tools/glyph_serial_config_tool.py"
 IDENTITY="$ROOT/tools/glyph_runtime_identity_tool.py"
 "$PY" "$CHECK" verify
-CAPTURE=$(mktemp -d '/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/kazuya_gameplay_R1.XXXXXXXX')
+CAPTURE=$(mktemp -d '/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/kazuya_gameplay_R2.XXXXXXXX')
 cp "$PKT/RESULT_TEMPLATE.md" "$CAPTURE/RESULTS.md"
-cp "$PKT/TEST_MATRIX.json" "$CAPTURE/poses-unexecuted.json"
+cp "$PKT/TEST_MATRIX.json" "$CAPTURE/checks-unexecuted.json"
 source "$PKT/capture_readonly.sh"
 "$PY" -m serial.tools.list_ports -v
 PORT='<fresh matched Configurator endpoint>'
@@ -136,126 +136,150 @@ automated move sequence. Do not invent frame thresholds or blame a failure on
 mistiming without evidence. Record deterministic expectation, actual human
 execution and game result separately.
 
-## Human test workflow — six groups, small batches
+## Gameplay workflow — 33 required checks, up to 2 optional checks
 
-The [177-pose matrix](TEST_MATRIX.json) supplies stable IDs, starting state,
-physical held buttons, transition order, LF side, expected native table/effect,
-command digital contribution, purpose and exact observation fields.
-No binary-mask interpretation is required. All begin NOT_TESTED.
-The agent presents **one batch of at most eight poses** at a time, waits for actual
-owner results, and saves them privately before continuing. For example:
+R2 supersedes R1's 177-pose plan under the owner's explicit direction:
+
+> I will not manually confirm every table's every value.
+
+The existing host verification covers all 16 RF states, horizontal/neutral cases,
+SOCD histories, LT2 overlays, exact retained differential behavior, raw coordinate
+compilation, digital masks and resources. **Do not reproduce these host tests
+manually.** The question here is whether the exact profile produces intended,
+acceptable Kazuya gameplay. No coordinate/table-by-table certification is required.
+
+[TEST_MATRIX.json](TEST_MATRIX.json) has 35 meaningful cases maximum, including
+two optional inherited-modifier checks. A complete transition sequence is **one
+case**, regardless of intermediate states or reasonable repeated attempts.
+The agent presents at most **three complete checks** at a time and saves actual
+owner observations before continuing. No truth-table batches, new side matrix or
+unbounded follow-up campaign. For example:
 
 ```bash
-"$PY" "$CHECK" show 1 --batch 1 > "$CAPTURE/group1-batch1.json"
+"$PY" "$CHECK" show 2 --batch 1 > "$CAPTURE/group2-batch1.json"
 ```
 
-Present that batch in plain language. Advance `--batch` within that group only
-after saving observations; never issue a loop that asks the owner to perform all
-poses. Each group ends with an owner checkpoint: results saved, unresolved failures
-listed, controller state understood, safe to continue. Preserve skipped IDs/reasons.
-No reported FAIL may be rewritten as PASS.
+For each case the owner reports only actual move/state, repeat consistency,
+unwanted action, acceptable yes/no/undecided, and optional notes/video timestamp.
+Input/chord and purpose are already attached. The agent attaches deterministic
+table/output expectations automatically. Do **not** ask the owner to transcribe
+raw/effective coordinates, table IDs or masks. Record input order/timing/facing
+when recognition is ambiguous; no frame-perfect threshold or assumed mistiming.
+Every check begins NOT_TESTED. Save results after each small batch/group; preserve
+reported FAIL and skipped checks honestly. A discrepancy may motivate later
+offline deterministic investigation, not profile/source edits or extra manual
+poses beyond this packet. Any new targeted campaign requires separate direction.
 
-| Group | Poses / batches | Procedure and checkpoint |
+| Group | Checks | Gameplay task |
+| --- | ---: | --- |
+| 1 ordinary smoke | 1 | One whole-group check: normal movement, A/B/X/Y, cardinal C-stick, ordinary Z and Shield, controller/menu responsiveness. Ask: **Does ordinary movement/basic control feel materially different from your known-good Ultimate profile where it should not?** Serious regression: safe Ultimate return and STOP before commands. |
+| 2 core commands | 15 | RF7 and RF8 Down primitives once each; EWGF-purpose, Hell's-Gate-purpose, Spinning Demon and four-button DownBack on both LF sides; CDC neutral in one normal setup and no-horizontal; while-rising-purpose A once. Two single composition checks cover distinct ForcedDown+A and DownDiagonal+A+Z, with no side matrix. |
+| 3 neutral fallback | 3 | No LF1/LF3 for DownDiagonal (RF8+RF7), DownBack (all four RF), DefensiveDownBack (LT2+RF8+RF7). What happens; useful/safe; retain neutral fallback or different design? These are owner design judgments. |
+| 4 Shield/release | 4 | Both complete release orders on LF1 and LF3. Observe Shield retention, roll/spot-dodge, crouch/movement, defensive-diagonal usefulness, final LT2-only normality. Repeat full sequence for consistency; do not count steps as separate tests. |
+| 5 LT2 overlap risk | 5 | EWGF-purpose and Hell's-Gate-purpose overlap on one side plus opposite-side confirmation (deeper repetitions only if direction-sensitive); one rising-A overlap. Decide broad gate acceptable as-is / should narrow / ambiguous follow-up. No permutation matrix. |
+| 6 ordinary RF5/RF6 | 3 | RF5 Up+A; RF6 ordinary Z/low-magnitude; RF5+RF6 combined behavior. Normal gameplay setup only; no exhaustive side variants. |
+| 7 SOCD sanity | 2 | On RF8+RF7 diagonal command: LF3→addLF1→releaseLF1; opposite history LF1→addLF3→releaseLF3. Second wins, release returns to first, nothing stuck. Whole history is one check. |
+| Optional inherited modifiers | 0–2 | LT5 Horizontal35 and RT1 CompactTilt, one representative gameplay check each **only if actually relevant to the owner**. Otherwise mark deferred, not failed. No additional retained table list to certify. |
+
+### Core command purposes and leakage
+
+LF1 is actual right, LF3 actual left. No character-facing inference: record facing
+where it matters. DownBack reverses actual horizontal columns, not detected facing.
+
+| Meaningful command | Attached controller expectation | Gameplay observation |
 | --- | --- | --- |
-| 1 ordinary controls | 24 / 3 | SMOKE: four LF directions and four diagonals; RF1 A/RF2 B/RF3 X/RF10 Y; RF6 Z, LT1 L, RF16 R, LT2 L+R; RT3 left/RT4 right/RT2 down/RT5 up C-stick; MB7 Start/MB6 Select/MB5 Home/MB4 Capture as relevant. Record system actions separately, return safely to Training. Any serious control regression: return to Ultimate and STOP before commands. |
-| 2 core commands | 24 / 3 | DOWN/DIAG: RF7, RF8, RF7+RF6, RF7+RF6+RF5, RF8+RF6, RF8+RF6+RF5, RF8+RF7, RF8+RF7+RF5; each LF3, neither, LF1. Record crouch-dash, EWGF/WGF-purpose, Hell's-Gate-purpose and Spinning Demon recognition; assess unwanted A/B/Z moves. |
-| 3 neutral/back/composition | 24 / 3 | NEUTRAL/DOWNBACK/COMPOSE: none, RF5, RF6, RF5+RF6, RF7+RF5, RF8+RF5, RF8+RF7+RF6, all four RF; all three horizontal states. Test while-rising/CDC cancel, non-Shield down-back, and ordinary RF5/RF6 precedence. Decide no-horizontal fallback consequences per relevant command. |
-| 4 Shield and release | 33 / 5 | Five ordinary LT2 directional/diagonal checks plus LT5/RT1 modifier diagonals on both sides, then RELEASE A/B, all three horizontal states. Sequences must stay contiguous across batches. Record every step, Shield retention, roll/spot-dodge, crouch/movement and owner acceptability; repeat whole sequences. |
-| 5 LT2 overlap | 36 / 5 | All12 RF command states under broad LT2 gate, each LF3/neither/LF1. Observe without LT2, add LT2, release LT2; digital remains independent. Decide broad gate acceptable / needs narrowing / ambiguous targeted follow-up. |
-| 6 SOCD and retained smoke | 36 / 5 | SOCD histories for DownDiagonal and DownBack in both directions; second wins, first resumes when second released, then neutral, no stuck side. Twenty retained-modifier side/diagonal poses. Stop affected subarea on mismatch; preserve main-command results. |
+| RF7; RF8 separately | ForcedDown, no command A/B/Z | Actual Down consequence; no horizontal repeats unless leakage is surprising |
+| RF7+RF6+horizontal | DownDiagonal, A only, no Z | EWGF / WGF non-electric / other action, repeated human consistency, unwanted action |
+| RF8+RF6+horizontal | DownDiagonal, Z only | Actual Hell's-Gate-purpose recognition and interference |
+| RF8+RF7+RF5+horizontal | DownDiagonal, B only | Spinning Demon recognition; no unwanted A/Z action |
+| RF8+RF7+RF6 | CDCNeutral, no A/B/Z | Usable cancel/neutral state and no attack/grab; normal and no-horizontal setup |
+| RF8+RF5 | Neutral+A | Actual while-rising-purpose result, normal setup once |
+| all four RF+horizontal | DownBack, no A/B/Z | High-priority non-Shield down-back CDC usefulness, both actual sides, no leakage |
+| RF7+RF5 | ForcedDown+A | One distinct composition check |
+| RF8+RF6+RF5+horizontal | DownDiagonal+A+Z | One distinct composition check |
 
-### Controller-output reference for Groups 2–5
+These digital contributions are from command buttons. Independent ordinary
+face/trigger bindings remain; isolate the stated chord when judging leakage.
+Timing-sensitive recognition may need reasonable repeated human attempts. A held
+chord is not an automatically performed game command; record the actual manual
+setup/order, game result and consistency separately.
 
-Bit-order label is RF5 RF6 RF7 RF8; table below uses physical names.
-Independent ordinary face/trigger contributions remain, so isolate listed poses
-before adding anything. “None” is no **command** A/B/Z, not a promise of zero
-total output when LT2/ordinary controls are held.
+### Shield transition and provisional overlap decision
 
-| RF inputs | Geometry/effect | Command digital |
-| --- | --- | --- |
-| none | Default | none |
-| RF5 | Default + forced Up | A |
-| RF6 | Default + RF6LowMagnitude | Z |
-| RF5+RF6 | RF6LowMagnitude wins | A+Z |
-| RF7 | ForcedDown | none |
-| RF7+RF5 | ForcedDown | A |
-| RF7+RF6 | DownDiagonal | A only; no Z |
-| RF7+RF6+RF5 | DownDiagonal | A only |
-| RF8 | ForcedDown | none |
-| RF8+RF5 | CDCNeutral | A |
-| RF8+RF6 | DownDiagonal | Z |
-| RF8+RF6+RF5 | DownDiagonal | A+Z |
-| RF8+RF7 | DownDiagonal | none |
-| RF8+RF7+RF5 | DownDiagonal | B only; no A/Z |
-| RF8+RF7+RF6 | CDCNeutral | no A/B/Z |
-| RF8+RF7+RF6+RF5 | DownBack | no A/B/Z |
-
-Raw points are source expectations; effective points are **prior workbook
-measurements**, never new gameplay measurements:
-
-| Geometry | LF3 actual left | Neither | LF1 actual right |
-| --- | --- | --- | --- |
-| ForcedDown | [128,51] | [128,51] | [128,51] |
-| DownDiagonal | [61,51] | [128,128] | [195,51] |
-| CDCNeutral | [128,128] | [128,128] | [128,128] |
-| DownBack | [195,51] | [128,128] | [61,51] |
-| DefensiveDownBack | [179,98] | [128,128] | [77,98] |
-
-Prior effective points: ForcedDown [0,-120]; diagonal sides [-83,-99]/[83,-99];
-defensive sides [83,-34]/[-83,-34] in LF3/LF1 order. No facing inference.
-DownBack and DefensiveDownBack reverse the actual horizontal column; describe
-character-relative back/forward only with recorded actual facing.
-
-With `LT2 && (RF7 || RF8)`, **DefensiveDownBack overrides every command table**,
-including EWGF/Hell's-Gate-purpose combinations and all RF5/RF6 additions.
-Command A/B/Z contributions remain unchanged; LT2 separately supplies L+R Shield.
-Both full sequences are mandatory for LF1/LF3 (also neutral in this matrix):
+For each actual LF side, perform the **entire** sequences:
 
 ```text
 A: RF8+RF7 → add LT2 → release RF7 → LT2+RF8 → release RF8 → LT2
 B: RF8+RF7 → add LT2 → release RF8 → LT2+RF7 → release RF7 → LT2
 ```
 
-Defensive geometry persists while either RF remains; ordinary LT2 geometry returns
-immediately after both release. For ordinary LT2 test usability and absence of
-unexpected Z; analog/digital L/R composition is an expectation, not a raw game
-measurement. Broad overlap set includes LT2+RF7+RF6, +RF8+RF6, +RF8+RF5,
-+RF7+RF5, both singleton RF7/RF8 and every RF8+RF7+RF5/RF6 variant.
+The current gate `LT2 && (RF7 || RF8)` selects DefensiveDownBack until both RF
+buttons release; ordinary LT2 geometry then returns. Assess usefulness/safety in
+gameplay. In the high-risk EWGF/Hell's-Gate overlaps the gate replaces geometry
+while A/Z remains respectively; rising-A overlap retains A. Owner decides broad
+gate **acceptable as-is / gate should be narrowed / ambiguous; targeted follow-up
+needed**. Do not edit or narrow it here.
 
-Retained smoke covers LT5 Horizontal35, LT4 Horizontal46, LT3
-VerticalAsymmetric, LT3+RF3 Horizontal41, LT3+RF4 FlippedHorizontal41,
-RF4 FlippedTilt, RT1 CompactTilt, RT1+RF4 AsymmetricTilt, RF4+RF2
-FlippedTilt41 and ordinary RF6LowMagnitude. Isolate exact admitted combinations
-from unrelated modifiers. The matrix names selected table separately from
-analog effects and independent retained digital bindings.
+### Small Ultimate adjacency comparison and retained scope
 
-Deferred, **not acceptance failures**: Kazuya-specific angled C-stick tilts;
-action-button Shield suppression; additional undesigned left-thumb sublayers;
-Nunchuk physical acceptance. Do not implement them here.
+Use the initial Kazuya smoke, then the normal safe return to known-good Ultimate
+at the end for one bounded comparison: movement, A/B/X/Y, C-stick basics, ordinary
+Shield, ordinary RF5 and RF6. This is the completion of SMOKE-01, not another set
+of atomic poses. Record any material difference where behavior should be retained.
+If none appears, rely on the existing 110,702-frame archival differential rather
+than comparing every map/value. A clear mismatch is recorded for investigation;
+no automatic expansion, firmware/profile change or raw-byte manual exercise.
 
-## Failure handling and classifications
+RF6LowMagnitude is operationally covered by Group 6. At most two optional spots:
+Horizontal35 (LT5) and CompactTilt (RT1), only if owner-intended for current use.
+If not intended, mark them **DEFERRED / NOT PART OF INITIAL KAZUYA ACCEPTANCE**.
+Horizontal46, VerticalAsymmetric, Horizontal41, FlippedHorizontal41, FlippedTilt,
+AsymmetricTilt and FlippedTilt41 are deliberately **NOT_TESTED / DEFERRED** here.
+No individual gameplay PASS for a deferred map. They do not block useful core
+Kazuya command-system acceptance. Relevant symptoms can be investigated afterward
+using deterministic evidence, without modifying ID48.
 
-For a failed command record physical inputs and order/timing, LF state, LT2,
-expected table/effect/digital, actual game action, consistency, and optional video
-timestamp. No UPDATE ID48, coordinate edit, firmware/source repair or ad hoc
-experiment outside the matrix. Continue unrelated tests only if state remains
-clear and safe. Systemic control/profile failure, freeze, unexpected menu entry,
-loss of response or corruption: STOP testing and use safe return below if responsive.
-Do not automatically retry a failed selection/reboot or a frozen route.
+### Diagnostic reference only — no routine raw-value acceptance
 
-Classify controller/profile integrity separately (ordinary controls, leakage,
-selection/persistence, corruption). Per command use PASS / FAIL / PARTIAL
-(timing-sensitive but usable) / AMBIGUOUS; skipped tests remain NOT_TESTED.
-Owner judgments are separate: no-horizontal neutral fallback; defensive coordinates;
-broad LT2 gate; each release order; timing-sensitive command recognition.
-Host PASS does not decide these judgments. No single undifferentiated gameplay PASS.
+| Geometry | Source raw points |
+| --- | --- |
+| ForcedDown | [128,51] |
+| DownDiagonal | LF3 [61,51]; LF1 [195,51] |
+| Neutral / no-horizontal fallback | [128,128] |
+| DownBack | LF3 [195,51]; LF1 [61,51], reversed actual side |
+| DefensiveDownBack | LF3 [179,98]; LF1 [77,98] |
+
+Prior workbook effective points: ForcedDown [0,-120]; diagonal LF3/LF1
+[-83,-99]/[83,-99]; defensive LF3/LF1 [83,-34]/[-83,-34]. These are historical
+diagnostic references, **not newly measured gameplay values or manual poses**.
+
+### Classification and failure handling
+
+Separate core Kazuya command system **PASS / PARTIAL / FAIL / AMBIGUOUS** from
+Shield-transition design, broad LT2 gate, no-horizontal fallback and optional
+retained modifiers. Untested core checks remain NOT_TESTED; a useful partial
+conclusion is allowed. Optional maps may remain deferred without blocking core
+acceptance. Do not invent one undifferentiated all-profile gameplay PASS.
+
+For a failed command save exact input/order/timing/LF/LT2, observed action,
+consistency and optional timestamp; agent attaches deterministic expectations.
+Continue unrelated checks only if state is clear and safe. A freeze, systemic
+ordinary-control regression, unexpected menu entry, unresponsiveness or corruption
+means stop testing and use safe return if responsive. No automatic retry of
+uncertain selection/reboot, no UPDATE/CREATE, source repair or flash.
+
+Deferred functionality remains: Kazuya-specific angled C-stick tilts,
+action-button Shield suppression, undesigned thumb sublayers, Nunchuk physical
+acceptance. These are not failures of this bounded campaign.
 
 ## Safe return, final preservation and STOP
 
 1. Leave Training/match normally. Open `.Profile`, select **Ultimate ID27**,
    allow normal committed reboot, verify ordinary **GameCube** operation and
    correct menu. Record the selection/reboot; no automatic retry on uncertainty.
-2. Return to Configurator through the established normal route. If the owner
+2. While Ultimate is active, complete the bounded SMOKE-01 adjacency comparison
+   (movement, A/B/X/Y, C-stick, Shield, ordinary RF5/RF6), save any discrepancy,
+   then return to Configurator through the established normal route. If the owner
    must pass via XInput/menu, use Ultimate only, and record every actual selection.
    Do not omit intermediate actions to force a Config comparison.
 3. Re-enumerate/match fresh `PORT`; capture full final state:
@@ -312,14 +336,14 @@ Preparation status:
 
 ```text
 Kazuya ID48 selected: NO
-Kazuya gameplay tests performed: NONE
+Gameplay performed: NONE
 ProfileStore mutations: NONE
-Profile updates: NONE
-Firmware flashed: NO
+Profile update: NONE
+Firmware change: NONE
 Canonical source changes: packet/evidence only
-Kazuya gameplay acceptance: NOT_TESTED
+Gameplay acceptance: NOT_TESTED
 ```
 
 ## Approval sentence
 
-I approve KGA-ID48-GC-R1 only: select stored Kazuya ID48, perform its bounded GameCube-adapter/Switch manual tests, return safely to Ultimate ID27 and verify final read-only preservation; no profile update, firmware change, source repair or further gameplay campaign.
+I approve KGA-ID48-GC-R2 only: select stored Kazuya ID48, perform only its 33 required and up to 2 owner-relevant optional GameCube-adapter/Switch gameplay checks, return safely to Ultimate ID27 and verify final read-only preservation; no profile update, firmware change, source repair or further gameplay campaign.
