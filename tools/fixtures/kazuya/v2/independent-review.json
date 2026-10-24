@@ -1,0 +1,57 @@
+{
+  "verdict": "PASS",
+  "reviewer": "Independent native subagent /root/kazuya_review",
+  "scope": [
+    "v2 source semantic graph",
+    "native verification coverage",
+    "frozen v1/archival comparison",
+    "offline native host evidence"
+  ],
+  "excluded": [
+    "live controller preflight",
+    "device CREATE/readback",
+    "physical selection",
+    "gameplay"
+  ],
+  "reviewed_files_sha256": {
+    "profiles/kazuya/v2/KazuyaV2.profile.json": "1434bef01ecea5b6103105a95ecb03aa3666d9a95bfb160cdea2f33f320cd075",
+    "tools/test_kazuya_profile_v2.py": "39224893913a031d084a6d37fc4e255b18e66f72d524170f8fb9c7e292fb4008",
+    "tools/test_kazuya_profile.py": "0c7e3d0254cff90aa7a3604531210be4ddf274fc4757264f0eb248e892086409",
+    "tools/glyph_native_profile_json.py": "05936f8be10d602130943dfa32c8ace69b636c5e5e18b88984df0ace63d73981",
+    "src/modes/Ultimate.cpp": "dd4502778efe4e919d2a4eef687af4c5daca787a60b0cad45c0c9aa25dd00832",
+    "src/modes/UltimateNativeProfile.cpp": "e7b39d703049c974eb7e5ae440b42271ae7bd96a9f10ef7ae0a150603eee782b",
+    "src/modes/UltimateNativeEvaluator.cpp": "e35ca0ee79dc5add52205361a8954da8d11e24680400c505b7b1c9a19de13f08",
+    "src/core/ControllerMode.cpp": "501de8537c8274e6cf42d1f182e9daba14e951261476b3b9642e73eda895f8a0",
+    "src/core/InputMode.cpp": "080bcc65bb83b1b896a2b4efa6ea9e9d304071ee30f279fe3386ff2c29cc85c7",
+    "src/core/socd.cpp": "5a2bb8e776873d149559e914b07cc4224853e3e3593a46760c38d23ff4d38bb3",
+    "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "HAL/pico/src/comms/GamecubeBackend.cpp": "a0d6aee316ebfc023159efcd0a353550b801ec11291c5e9320d9544d1c5fa21f",
+    "tools/fixtures/profile_native_ultimate/native_runner.cpp": "973f769df8e0d036c7cf9dbda0d8ce17aaac2cbe2fe36f2eaf242eb9eb44af43"
+  },
+  "wrapper_sha256": "b43f5fa595582b076e9af6794a42fd01579eed6931b38da8f92c1537b1fcfa24",
+  "body_sha256": "9658566f59fd2bb058282b53b4f86610c2ff870a1492c4377ea143ce9cf1f91f",
+  "independent_native_rerun": "8/8 PASS; 17.679 seconds",
+  "independent_report_sha256": "f7618733736868a142710afd3e26eb21a1b54bf174d55fd00af233ead4c61c25",
+  "findings": [
+    {
+      "severity": "supported retained-behavior defect",
+      "finding": "Initial full-Up RF6 rows changed synthetic-only Up from LT3/LF4 sublayers",
+      "resolution": "priority50 original inline low map gated on absence of post-SOCD physical LF2; corrected table7/8/9 each [128,205]",
+      "status": "REPAIRED_AND_INDEPENDENTLY_VERIFIED",
+      "regression": "9269 complete-output v1 differentials PASS"
+    }
+  ],
+  "unresolved_findings": [],
+  "packaging_review": {
+    "verdict": "PASS",
+    "reviewer": "Independent native subagent /root/kazuya_review",
+    "scope": "docs, compiled protobuf JSON/binary identity, resource/coordinate/effect/rule inventories and test logs",
+    "reviewed_files_sha256": {
+      "profiles/kazuya/v2/README.md": "4b832bf016b4b4eabca1192db5e532a6c607af96892799d63ef6505c93363769",
+      "profiles/kazuya/v2/GAMEPLAY_TEST.md": "94f82ecac16abccc40d31ed64b3050e0df90dcaec3b15de15420f93f5bf4e9e6",
+      "tools/fixtures/kazuya/v2/verification.json": "9b079694925a2755117eb497de66ebb25f6d4fba9c2429ed39e7794e8065aca9"
+    },
+    "subsequent_mechanical_doc_change": "Added reviewer-supplied exact MB1/MB2/MB3/MB4 menu instructions, verified directly against config.cpp, MenuButtonHints.cpp and ConfigMenu/DefaultConfigMenu source",
+    "final_gameplay_sheet_sha256": "f855144e88f92d2f674777ea11827a0a443d6068b5f8eee8c550ae935eff39e4"
+  }
+}
