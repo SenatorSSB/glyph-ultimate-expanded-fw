@@ -1,0 +1,42 @@
+{
+  "verdict": "PASS",
+  "reviewer": "Independent native subagent /root/kazuya_review",
+  "source_sha256": "d2bb27191e603089eef27ecabd06b3c264fae6075f11eb43839b97f0cc552a7b",
+  "tests_sha256": "ecf1920f682e2997f50f62c92cf8028bbfc5c76b891914a194cf7e2299e7825a",
+  "independent_native_rerun": "11/11 PASS in14.591s",
+  "independent_report_sha256": "f01cf893e12fcc22c3dabd3893dba380be0134fc98d37fb252bc738ac7f71f7a",
+  "wrapper_sha256": "1f919177691afc7ba35621229301169f710540c5e74952487b25ed3db0782131",
+  "body_sha256": "22263a77a2f6b2555747381634ec1f80c5b96e81f793e2aea4027ed5fb142e3d",
+  "findings": [
+    {
+      "finding": "V3 frozen-baselines initially omitted v2 GAMEPLAY_TEST.md",
+      "resolution": "Added exact unchanged file digest; complete v3 suite rerun",
+      "status": "REPAIRED"
+    }
+  ],
+  "unresolved_controller_semantic_findings": [],
+  "scope": [
+    "source semantic delta",
+    "actual native tests",
+    "v2 comparison",
+    "capacity/identity",
+    "firmware and historical input preservation"
+  ],
+  "excluded": [
+    "live device operations",
+    "physical selection",
+    "gameplay acceptance"
+  ],
+  "packaging_review": {
+    "verdict": "PASS",
+    "reviewer": "Independent native subagent /root/kazuya_review",
+    "reviewed_files_sha256": {
+      "profiles/kazuya/v3/README.md": "d967e7eb8b4a0b1784de59a680ec9a8271b0b6407dfe9fb2acd85534d47e467f",
+      "profiles/kazuya/v3/GAMEPLAY_TEST.md": "bd72c8fdff681dcb1b8af8e9d2d6b4787497870a767be8ad8453de503bc1765c",
+      "tools/fixtures/kazuya/v3/frozen-baselines.json": "049df3c2dd2ad27ef35ecc1b088d8f15fdd15fc42d3621c11401949edd6f017b",
+      "tools/fixtures/kazuya/v3/verification.json": "11c3e778cd8c81dfcd3d07995bc6bd4ebb0ab416f00e5ac67601a36013112000",
+      "tools/fixtures/kazuya/v3/host-results.json": "f01cf893e12fcc22c3dabd3893dba380be0134fc98d37fb252bc738ac7f71f7a"
+    },
+    "unresolved_findings": []
+  }
+}

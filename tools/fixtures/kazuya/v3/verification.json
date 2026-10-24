@@ -1,0 +1,153 @@
+{
+  "status": "HOST_VERIFIED",
+  "base_live_configurator": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
+  "behavioral_baseline_commit": "1381193b0101825d2a9afb46cd7a01009da67cdf",
+  "branch": "codex/kazuya-v3-profile",
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "draft_handling": "Existing uncommitted draft examined and exact private backup retained before versioned v3 rename; only naming/metadata changed, no duplicated semantic design",
+  "changed_semantics": {
+    "table": "SpringloadUp",
+    "slot": 16,
+    "all_nine_points": [
+      128,
+      205
+    ],
+    "effective_measured": [
+      0,
+      120
+    ],
+    "activation": "RF7+RF5, RF8 absent, RF6 optional",
+    "conditions_changed": false,
+    "priorities_changed": false,
+    "digital_bindings_changed": false,
+    "native_body_allowed_delta": "authored provenance bytes60..91 and slot16 table bytes384..401 only"
+  },
+  "source_sha256": "d2bb27191e603089eef27ecabd06b3c264fae6075f11eb43839b97f0cc552a7b",
+  "protobuf_json_sha256": "1e4e56ebe31ce0b5f2299d6099d5dd3874d8dc44394cbf5320e8f37551f48e10",
+  "compile_report": {
+    "profile_name": "KazTest3",
+    "format_version": 1,
+    "declared_tables": [
+      "AsymmetricTilt",
+      "CDArmed",
+      "CDCNeutral",
+      "CompactTilt",
+      "Default",
+      "DownDiagonal",
+      "FlippedHorizontal41",
+      "FlippedTilt",
+      "FlippedTilt41",
+      "ForcedDown",
+      "Horizontal35",
+      "Horizontal41",
+      "Horizontal46",
+      "RF6LowMagnitude",
+      "RF7ReleaseNeutral",
+      "SpringloadUp",
+      "VerticalAsymmetric"
+    ],
+    "table_slots": {
+      "AsymmetricTilt": 13,
+      "CDArmed": 4,
+      "CDCNeutral": 3,
+      "CompactTilt": 12,
+      "Default": 0,
+      "DownDiagonal": 2,
+      "FlippedHorizontal41": 10,
+      "FlippedTilt": 11,
+      "FlippedTilt41": 14,
+      "ForcedDown": 1,
+      "Horizontal35": 6,
+      "Horizontal41": 9,
+      "Horizontal46": 7,
+      "RF6LowMagnitude": 15,
+      "RF7ReleaseNeutral": 5,
+      "SpringloadUp": 16,
+      "VerticalAsymmetric": 8
+    },
+    "neutral_filled_slots": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "condition_count": 67,
+    "token_count": 221,
+    "direction_source_count": 7,
+    "table_rule_count": 16,
+    "digital_binding_count": 18,
+    "analog_effect_count": 13,
+    "body_bytes": 1902,
+    "wrapper_bytes": 1907,
+    "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+    "provenance_sha256": "10d0692cd7490e07113965bd1569242a837468e92d26d200e9c6a75f5ecc4843",
+    "provenance_kind": "authoredSourceV1",
+    "body_sha256": "22263a77a2f6b2555747381634ec1f80c5b96e81f793e2aea4027ed5fb142e3d",
+    "wrapper_sha256": "1f919177691afc7ba35621229301169f710540c5e74952487b25ed3db0782131"
+  },
+  "resources": {
+    "declared_tables": {
+      "actual": 17,
+      "limit": 28,
+      "headroom": 11
+    },
+    "condition_count": {
+      "actual": 67,
+      "limit": 96,
+      "headroom": 29
+    },
+    "token_count": {
+      "actual": 221,
+      "limit": 768,
+      "headroom": 547
+    },
+    "direction_source_count": {
+      "actual": 7,
+      "limit": 8,
+      "headroom": 1
+    },
+    "table_rule_count": {
+      "actual": 16,
+      "limit": 32,
+      "headroom": 16
+    },
+    "digital_binding_count": {
+      "actual": 18,
+      "limit": 32,
+      "headroom": 14
+    },
+    "analog_effect_count": {
+      "actual": 13,
+      "limit": 16,
+      "headroom": 3
+    },
+    "body_bytes": {
+      "actual": 1902,
+      "limit": 3336,
+      "headroom": 1434
+    }
+  },
+  "test_results": {
+    "authoring_v0": "17/17 PASS",
+    "authoring_v1": "23/23 PASS",
+    "v1_native": "6/6 PASS",
+    "v2_native": "8/8 PASS",
+    "v3_native": "11/11 PASS",
+    "independent_v3_native": "11/11 PASS"
+  },
+  "source_authority": "Explicit owner v3 output specification; user gameplay findings are attributed observations, not reverse-engineered game rules",
+  "upload_snapshot": "NOT_ATTEMPTED; one new KazTest3 CREATE authorized after fresh preflight",
+  "gameplay": "NOT_TESTED",
+  "nunchuk": "NOT_TESTED",
+  "firmware_changed": false,
+  "canonical_merge": false
+}

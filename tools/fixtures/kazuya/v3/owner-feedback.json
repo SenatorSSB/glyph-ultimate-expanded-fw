@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-25",
+  "authority": "Historical initial feedback, followed by explicit pause. Draft preserved before v3 conversion. New Kazuya v3 owner work order supersedes the initial upload exclusion within its named single CREATE scope.",
+  "reported_test_profile": "KazTest2 (contextual attribution; exact tested snapshot not freshly attested)",
+  "observation": "Owner reports RF5 spring-load CDC sequences frequently produce Left Splits Kick; manually inspected frame by frame. Owner reports A after a forward-dash cancel can produce the undesired move even with pure Up at attack time, while making the first post-neutral direction Up avoids the issue. RF8/RF6 behavior mostly matches expectations.",
+  "exact_requested_constraint": "Therefore getting these sort of CDC upsmashes with RF5 means the springload should never allow the left stick input to give forward after the cancel.",
+  "bounded_realization": "While RF7+RF5 and RF8 absent, pure Up [128,205] for all nine physical LF directions, also with RF6. Preserve LT6 neutral override. No facing inference or history. All other v2 semantics remain exact.",
+  "game_engine_root_cause": "UNPROVEN; no buffer duration, priority or hidden-state claim",
+  "installed_profile_changed": false,
+  "new_candidate_gameplay": "NOT_TESTED",
+  "v3_authority": "Direct Kazuya v3 work order in this chat authorizes exact constant-Up correction, independent review, dedicated feature commit/push, and at most one new KazTest3 CREATE after complete host proof and fresh production preflight. Preserve all existing profiles/Config references; no canonical merge or gameplay acceptance."
+}

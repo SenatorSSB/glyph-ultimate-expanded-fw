@@ -1,0 +1,29 @@
+V1 fixtures: 12 positive test methods; 8 provenance methods; 87 negative cases (including duplicate-key input); independent schema agreement over 89 fixtures.
+test_all_negative_fixtures_fail_compilation (__main__.V1NegativeTests.test_all_negative_fixtures_fail_compilation) ... ok
+test_builtin_and_standard_schema_agree_on_all_fixtures (__main__.V1NegativeTests.test_builtin_and_standard_schema_agree_on_all_fixtures) ... ok
+test_duplicate_table_names_rejected_at_json_load (__main__.V1NegativeTests.test_duplicate_table_names_rejected_at_json_load) ... ok
+test_all_coordinate_modes_targets_and_routing_flags (__main__.V1PositiveTests.test_all_coordinate_modes_targets_and_routing_flags) ... ok
+test_arbitrary_symbols_and_inventory_order (__main__.V1PositiveTests.test_arbitrary_symbols_and_inventory_order) ... ok
+test_binary_decode_retains_only_archival_wire_representation (__main__.V1PositiveTests.test_binary_decode_retains_only_archival_wire_representation) ... ok
+test_cli_validate_compile_report_and_protobuf_json (__main__.V1PositiveTests.test_cli_validate_compile_report_and_protobuf_json) ... ok
+test_manifest_matches_wire (__main__.V1PositiveTests.test_manifest_matches_wire) ... ok
+test_mode_false_and_active_native_tokens (__main__.V1PositiveTests.test_mode_false_and_active_native_tokens) ... ok
+test_native_capacity_boundary (__main__.V1PositiveTests.test_native_capacity_boundary) ... ok
+test_one_table_and_all_neutral_slots (__main__.V1PositiveTests.test_one_table_and_all_neutral_slots) ... ok
+test_preprocessing_matches_production_ordered_digest (__main__.V1PositiveTests.test_preprocessing_matches_production_ordered_digest) ... ok
+test_references_resolve_to_slots (__main__.V1PositiveTests.test_references_resolve_to_slots) ... ok
+test_slot_zero_as_only_table (__main__.V1PositiveTests.test_slot_zero_as_only_table) ... ok
+test_sparse_nonsequential_slots_and_nonneutral_five (__main__.V1PositiveTests.test_sparse_nonsequential_slots_and_nonneutral_five) ... ok
+test_array_order_is_preserved (__main__.V1ProvenanceTests.test_array_order_is_preserved) ... ok
+test_condition_and_rule_edits_change_digest (__main__.V1ProvenanceTests.test_condition_and_rule_edits_change_digest) ... ok
+test_condition_and_source_renames_are_semantic_source_identity (__main__.V1ProvenanceTests.test_condition_and_source_renames_are_semantic_source_identity) ... ok
+test_coordinate_and_slot_edits_change_digest (__main__.V1ProvenanceTests.test_coordinate_and_slot_edits_change_digest) ... ok
+test_exact_independent_canonical_digest (__main__.V1ProvenanceTests.test_exact_independent_canonical_digest) ... ok
+test_identical_semantics_and_object_key_order (__main__.V1ProvenanceTests.test_identical_semantics_and_object_key_order) ... ok
+test_metadata_and_display_name_are_nonsemantic (__main__.V1ProvenanceTests.test_metadata_and_display_name_are_nonsemantic) ... ok
+test_symbolic_table_rename_changes_only_provenance (__main__.V1ProvenanceTests.test_symbolic_table_rename_changes_only_provenance) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.473s
+
+OK
