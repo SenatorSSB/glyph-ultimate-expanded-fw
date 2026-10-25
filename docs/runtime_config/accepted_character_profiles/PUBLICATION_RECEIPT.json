@@ -1,0 +1,10 @@
+{
+  "status": "REVIEWED_PENDING_CANONICAL_PUBLICATION",
+  "prior_canonical": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
+  "accepted_source_commit": "5e30341ee06761e20e864ccc013ca6658e42b5ca",
+  "canonical_source_sha256": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434",
+  "wrapper_sha256": "46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c",
+  "integration_commit": null,
+  "controller_mutations": "NONE",
+  "firmware_flash": false
+}

@@ -1,0 +1,153 @@
+{
+  "packet_id": "ACP-20261025-01",
+  "status": "PREPARED_UNEXECUTED_OWNER_APPROVAL_REQUIRED",
+  "method": "Existing checked PROFILE_STORE_RENAME opcode7; owner explicitly approved host exposure and revision-preserving correction",
+  "native_records": [
+    {
+      "id": 27,
+      "name": "Ultimate",
+      "rank": 0,
+      "revision": 1,
+      "payload_version": 5,
+      "health": 0,
+      "schema": 5,
+      "wrapper_sha256": "30d43278fee3a835ca006f4b5df67963c8e9b11ef059ab3b49329b65c7934c6b",
+      "body_sha256": "ca9985997471f247d2f44ba1290e95197393a6c6bdf80a5e59a357f2d6c3e5ee",
+      "disposition": "KEEP_PIKACHU",
+      "source_path": "profiles/ultimate/Ultimate.profile.json",
+      "source_sha256": "c3bfeaa42ad6e81ef5f8ff7ff3d4484656404651b3665b8908d8c7c662d10a05",
+      "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+      "provenance_sha256": "f09a210f9fc7400d52673f6455004185451d33575e88eb0fc54abfc73297dda0",
+      "development_role": "golden permanent owner Pikachu / archival Ultimate",
+      "referenced_at_preparation": false,
+      "current_read_sha256": "c4e1fed5509bfdbf5be4367480b93a0fba92a0f2207d8f5a6793ebe2a32d50f8",
+      "target_name": "Pikachu"
+    },
+    {
+      "id": 48,
+      "name": "Kazuya",
+      "rank": 2,
+      "revision": 1,
+      "payload_version": 5,
+      "health": 0,
+      "schema": 5,
+      "wrapper_sha256": "60f1715738fb5a46f8ac7cde326a3178e4560e52a8489da54e3a435eb70fd3e8",
+      "body_sha256": "44fa76903206c7a86a9f5d5a19c0be5f237e1c7e631dd5adf21cdb27eb3e4405",
+      "disposition": "DELETE_SUPERSEDED",
+      "source_path": "profiles/kazuya/v1/Kazuya.profile.json",
+      "source_sha256": "8f28cdc430a8347cc193f7a8519f5a3e7a4f0ce49558ebb4f7ff26ca61219499",
+      "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+      "provenance_sha256": "09392756ec1fce89479e5008f4653b866f11e31254bec435a0c1c0edf2531ae7",
+      "development_role": "original Kazuya v1 experiment",
+      "referenced_at_preparation": false,
+      "current_read_sha256": "a13a9ad11a1ff9d868c66d3eb8817a37e0f7b32fdb59ce14d246f0034707ce99",
+      "historical_evidence": {
+        "relative_private_path": "local_backups/character_profile_menu_R2.aDS8I26u/after-create/read-48.json",
+        "sha256": "4aee98f0ed2a369bfc3eaa7c1c483bb080b8aa51b592f6f73ae3bc19c09a1c6c"
+      }
+    },
+    {
+      "id": 49,
+      "name": "KazTest2",
+      "rank": 152,
+      "revision": 1,
+      "payload_version": 5,
+      "health": 0,
+      "schema": 5,
+      "wrapper_sha256": "b43f5fa595582b076e9af6794a42fd01579eed6931b38da8f92c1537b1fcfa24",
+      "body_sha256": "9658566f59fd2bb058282b53b4f86610c2ff870a1492c4377ea143ce9cf1f91f",
+      "disposition": "DELETE_SUPERSEDED",
+      "source_path": "profiles/kazuya/v2/KazuyaV2.profile.json",
+      "source_sha256": "1434bef01ecea5b6103105a95ecb03aa3666d9a95bfb160cdea2f33f320cd075",
+      "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+      "provenance_sha256": "57abfb736ea2391a6c20eebc915cc0dae1cdbcfaf39fd8c351acc3eed2e6709c",
+      "development_role": "Kazuya v2 experiment",
+      "referenced_at_preparation": false,
+      "current_read_sha256": "347dbdee912e892777c3679e1deca0cb5d44285c5d377919a9860570fd62b033",
+      "historical_evidence": {
+        "relative_private_path": "local_backups/kazuya_v2_20261024_c92fln0z/operation-receipt.json",
+        "sha256": "94a1b9c3407af56b8fbee3bafa788a6c49c2e60cb78455c2d8226a5f65220c4f"
+      }
+    },
+    {
+      "id": 50,
+      "name": "KazTest3",
+      "rank": 153,
+      "revision": 1,
+      "payload_version": 5,
+      "health": 0,
+      "schema": 5,
+      "wrapper_sha256": "1f919177691afc7ba35621229301169f710540c5e74952487b25ed3db0782131",
+      "body_sha256": "22263a77a2f6b2555747381634ec1f80c5b96e81f793e2aea4027ed5fb142e3d",
+      "disposition": "DELETE_SUPERSEDED",
+      "source_path": "profiles/kazuya/v3/KazuyaV3.profile.json",
+      "source_sha256": "d2bb27191e603089eef27ecabd06b3c264fae6075f11eb43839b97f0cc552a7b",
+      "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+      "provenance_sha256": "10d0692cd7490e07113965bd1569242a837468e92d26d200e9c6a75f5ecc4843",
+      "development_role": "Kazuya v3 pure-Up experiment",
+      "referenced_at_preparation": false,
+      "current_read_sha256": "a8768f7963f62e8b5f0071d94ec22725ca578198e0e1e5aa77f228c02ddd5285",
+      "historical_evidence": {
+        "relative_private_path": "local_backups/kazuya_v3_20261025_t9br1ueg/operation-receipt.json",
+        "sha256": "f0c6084a5fe17b9074401c9c23f59a48393948d3a28e6d874cf485623bf9cd77"
+      }
+    },
+    {
+      "id": 51,
+      "name": "KazTest4",
+      "rank": 154,
+      "revision": 1,
+      "payload_version": 5,
+      "health": 0,
+      "schema": 5,
+      "wrapper_sha256": "46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c",
+      "body_sha256": "a8b03ed4952f4ea81317ca2053830925e751a2647b05a5777b01a82d40e349d2",
+      "disposition": "KEEP_KAZUYA",
+      "source_path": "profiles/kazuya/v4/KazuyaV4.profile.json",
+      "source_sha256": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434",
+      "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+      "provenance_sha256": "cf8132314b1bf75392761b550f2149d329ce132e79499626fdafcccec87ea01c",
+      "development_role": "accepted Kazuya v4",
+      "referenced_at_preparation": true,
+      "current_read_sha256": "5548aeb417f6a41aa7253bb02a3b8bea26910e6e2ccbad60218f02f26faa776a",
+      "historical_evidence": {
+        "relative_private_path": "local_backups/kazuya_v4_20261025_howr5_vn/owner-gameplay-acceptance-20261025.json",
+        "sha256": "eaeb128fd838420ec311ec6203bf061e306b75a222819b8575f7a94dc5cf709e"
+      },
+      "target_name": "Kazuya"
+    }
+  ],
+  "current_total_records": 27,
+  "current_native_records": 5,
+  "current_legacy_unrelated_records": 22,
+  "legacy_policy": "Preserve all fresh unrelated/legacy/unknown records; no ID-range or name-prefix deletion",
+  "delete_ids": [
+    48,
+    49,
+    50
+  ],
+  "rename_ids": [
+    27,
+    51
+  ],
+  "expected_store_generation_delta": 5,
+  "expected_profile_revision_delta": 0,
+  "rank_changes": false,
+  "payload_changes": false,
+  "safe_final_native_id": 27,
+  "intended_final_native_records": [
+    {
+      "id": 27,
+      "name": "Pikachu"
+    },
+    {
+      "id": 51,
+      "name": "Kazuya"
+    }
+  ],
+  "fresh_execution_preflight_required": true,
+  "current_capture_relative_path": "local_backups/accepted_character_profiles_20261025_l5b_hsi4/current-inventory",
+  "private_snapshot_sha256": "003ba899ff42299972a4c539974ee1e06079d68e1d36374f8d19cf6714e177eb",
+  "mutations_this_run": "NONE",
+  "firmware_flash_this_run": false
+}

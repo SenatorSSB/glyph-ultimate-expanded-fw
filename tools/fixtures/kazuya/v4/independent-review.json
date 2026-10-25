@@ -1,0 +1,39 @@
+{
+  "verdict": "PASS",
+  "reviewer": "Independent native subagent /root/kazuya_review",
+  "scope": [
+    "profile graph and exact owner clauses",
+    "LT2 semantic gating and RF5/RF6 exclusions",
+    "RF12/LT6/command priority",
+    "complete final native suite",
+    "historical source/evidence preservation"
+  ],
+  "reviewed_files_sha256": {
+    "profiles/kazuya/v4/KazuyaV4.profile.json": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434",
+    "tools/test_kazuya_profile_v4.py": "37e46c614b0a39587e9dcd374704061500028ab20c462f43d0fe3f96a25ed431",
+    "tools/fixtures/kazuya/v4/frozen-baselines.json": "2f69c9aa0177716d58c5f39415e9b9ae5ebe1c4a9270b95a6a9133664fdeabaf"
+  },
+  "native_rerun": "11/11 PASS in17.467s",
+  "additional_independent_full_output_v3_comparisons": 18432,
+  "wrapper_sha256": "46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c",
+  "independent_report_sha256": "8132ba6fe83d5b23d60fab656c878f708aa14991efcd5614eb4cfeb8cbef7286",
+  "unresolved_findings": [],
+  "excluded": [
+    "device preflight/mutation",
+    "physical selection",
+    "gameplay acceptance"
+  ],
+  "packaging_review": {
+    "verdict": "PASS",
+    "reviewer": "Independent native subagent /root/kazuya_review",
+    "unresolved_findings": [],
+    "reviewed_files_sha256": {
+      "profiles/kazuya/v4/README.md": "9ee09ce76b339a597631de3f6f2e71ccd5599ffe5cdb10df472da6b03e7842c1",
+      "profiles/kazuya/v4/GAMEPLAY_TEST.md": "a5815eb7f771c0c4287e82bcd771f6d9bb0295de8c19d1328f71d26654aab30b",
+      "profiles/kazuya/v4/CROUCH_JAB_DEFERRED.md": "7db58e004689c045d1de91637a69dc06bbd6f1dd25f0a54738b01e774f6dc175",
+      "tools/fixtures/kazuya/v4/verification.json": "7769ef2f5a71fbf0f22abd435f4004b44d8eb18fe8dbf75c56a41c06ba3e4589",
+      "tools/fixtures/kazuya/v4/native-transitions.json": "2216d1b684da6272914d807620447012d5ed484ea67811e7f26db2c5ef999a04",
+      "tools/fixtures/kazuya/v4/host-results.json": "8132ba6fe83d5b23d60fab656c878f708aa14991efcd5614eb4cfeb8cbef7286"
+    }
+  }
+}

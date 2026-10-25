@@ -1,0 +1,20 @@
+{
+  "chapter": "accepted_character_profiles",
+  "classification": "PROFILE_SOURCE_PROMOTION_AND_HOST_ONLY_PACKET_PREPARATION",
+  "owner_authority": "current goal objective + explicit checked RENAME support amendment",
+  "prior_canonical": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
+  "accepted_v4_commit": "5e30341ee06761e20e864ccc013ca6658e42b5ca",
+  "phase_A": "PASS exact sealed and fresh source/wrapper/body/ID51/gameplay authority",
+  "phase_B": "PASS exact root source promotion and byte-preserved v1 archive",
+  "phase_C": "PASS canonical source against actual current C++; immutable historical replay; host RENAME and packet negatives; native/legacy regressions",
+  "phase_D": "PENDING reviewed canonical integration/publication",
+  "phase_E": "PREPARED future packet; zero controller mutations; independent final review pending",
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "previous_goal_turn_classification": "PROGRESS: exact authority evidence, source promotion, checked host RENAME support and tested offline packet preparation",
+  "firmware_inputs_changed": false,
+  "firmware_build_or_flash": false,
+  "controller_mutations": "NONE",
+  "remaining_owner_action": "Separate approval of ACP-20261025-01 after reviewed publication"
+}

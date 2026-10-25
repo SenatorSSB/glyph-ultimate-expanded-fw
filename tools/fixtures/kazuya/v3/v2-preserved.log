@@ -1,0 +1,13 @@
+test_16_by_9_matrix_digital_cstick_and_winners (__main__.KazuyaV2Tests.test_16_by_9_matrix_digital_cstick_and_winners) ... ok
+test_horizontal_vertical_socd_histories_and_simultaneous (__main__.KazuyaV2Tests.test_horizontal_vertical_socd_histories_and_simultaneous) ... ok
+test_lt2_release_carriers_and_independent_triggers (__main__.KazuyaV2Tests.test_lt2_release_carriers_and_independent_triggers) ... ok
+test_lt6_absolute_neutral_all_commands_and_retained_modifiers (__main__.KazuyaV2Tests.test_lt6_absolute_neutral_all_commands_and_retained_modifiers) ... ok
+test_negative_mutants (__main__.KazuyaV2Tests.test_negative_mutants) ... ok
+test_release_orders_all_directions_and_single_edges (__main__.KazuyaV2Tests.test_release_orders_all_directions_and_single_edges) ... ok
+test_retained_v1_and_archival_differential (__main__.KazuyaV2Tests.test_retained_v1_and_archival_differential) ... ok
+test_schema_resources_coordinates_and_frozen_inputs (__main__.KazuyaV2Tests.test_schema_resources_coordinates_and_frozen_inputs) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 13.187s
+
+OK

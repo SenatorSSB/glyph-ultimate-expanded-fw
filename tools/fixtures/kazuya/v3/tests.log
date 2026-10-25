@@ -1,0 +1,16 @@
+test_16_by_9_matrix_digital_cstick_and_winners (__main__.KazuyaV3Tests.test_16_by_9_matrix_digital_cstick_and_winners) ... ok
+test_exact_source_delta_and_forward_reintroduction_mutation (__main__.KazuyaV3Tests.test_exact_source_delta_and_forward_reintroduction_mutation) ... ok
+test_first_post_cancel_frame_is_pure_up (__main__.KazuyaV3Tests.test_first_post_cancel_frame_is_pure_up) ... ok
+test_horizontal_vertical_socd_histories_and_simultaneous (__main__.KazuyaV3Tests.test_horizontal_vertical_socd_histories_and_simultaneous) ... ok
+test_lt2_release_carriers_and_independent_triggers (__main__.KazuyaV3Tests.test_lt2_release_carriers_and_independent_triggers) ... ok
+test_lt6_absolute_neutral_all_commands_and_retained_modifiers (__main__.KazuyaV3Tests.test_lt6_absolute_neutral_all_commands_and_retained_modifiers) ... ok
+test_negative_mutants (__main__.KazuyaV3Tests.test_negative_mutants) ... ok
+test_only_springload_left_coordinates_change_from_v2 (__main__.KazuyaV3Tests.test_only_springload_left_coordinates_change_from_v2) ... ok
+test_release_orders_all_directions_and_single_edges (__main__.KazuyaV3Tests.test_release_orders_all_directions_and_single_edges) ... ok
+test_retained_v1_and_archival_differential (__main__.KazuyaV3Tests.test_retained_v1_and_archival_differential) ... ok
+test_schema_resources_coordinates_and_frozen_inputs (__main__.KazuyaV3Tests.test_schema_resources_coordinates_and_frozen_inputs) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 18.660s
+
+OK

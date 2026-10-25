@@ -1,7 +1,7 @@
 {
   "format": "glyph-native-ultimate-profile",
   "formatVersion": 1,
-  "name": "Kazuya",
+  "name": "KazTest4",
   "provenance": {
     "kind": "authoredSourceV1"
   },
@@ -38,225 +38,739 @@
     "Default": {
       "slot": 0,
       "directions": {
-        "1": [61, 51],
-        "2": [128, 51],
-        "3": [195, 51],
-        "4": [61, 128],
-        "5": [128, 128],
-        "6": [195, 128],
-        "7": [61, 205],
-        "8": [128, 205],
-        "9": [195, 205]
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
       }
     },
     "ForcedDown": {
       "slot": 1,
       "directions": {
-        "1": [128, 51],
-        "2": [128, 51],
-        "3": [128, 51],
-        "4": [128, 51],
-        "5": [128, 51],
-        "6": [128, 51],
-        "7": [128, 51],
-        "8": [128, 51],
-        "9": [128, 51]
+        "1": [
+          128,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          128,
+          51
+        ],
+        "4": [
+          128,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          128,
+          51
+        ],
+        "7": [
+          128,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          128,
+          51
+        ]
       }
     },
     "DownDiagonal": {
       "slot": 2,
       "directions": {
-        "1": [61, 51],
-        "2": [128, 128],
-        "3": [195, 51],
-        "4": [61, 51],
-        "5": [128, 128],
-        "6": [195, 51],
-        "7": [61, 51],
-        "8": [128, 128],
-        "9": [195, 51]
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          195,
+          51
+        ]
       }
     },
     "CDCNeutral": {
       "slot": 3,
       "directions": {
-        "1": [128, 128],
-        "2": [128, 128],
-        "3": [128, 128],
-        "4": [128, 128],
-        "5": [128, 128],
-        "6": [128, 128],
-        "7": [128, 128],
-        "8": [128, 128],
-        "9": [128, 128]
-      }
-    },
-    "DownBack": {
-      "slot": 4,
-      "directions": {
-        "1": [195, 51],
-        "2": [128, 128],
-        "3": [61, 51],
-        "4": [195, 51],
-        "5": [128, 128],
-        "6": [61, 51],
-        "7": [195, 51],
-        "8": [128, 128],
-        "9": [61, 51]
-      }
-    },
-    "DefensiveDownBack": {
-      "slot": 5,
-      "directions": {
-        "1": [179, 98],
-        "2": [128, 128],
-        "3": [77, 98],
-        "4": [179, 98],
-        "5": [128, 128],
-        "6": [77, 98],
-        "7": [179, 98],
-        "8": [128, 128],
-        "9": [77, 98]
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
       }
     },
     "Horizontal35": {
       "slot": 6,
       "directions": {
-        "1": [93, 51],
-        "2": [128, 51],
-        "3": [163, 51],
-        "4": [93, 128],
-        "5": [128, 128],
-        "6": [163, 128],
-        "7": [93, 205],
-        "8": [128, 205],
-        "9": [163, 205]
+        "1": [
+          93,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          163,
+          51
+        ],
+        "4": [
+          93,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          163,
+          128
+        ],
+        "7": [
+          93,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          163,
+          205
+        ]
       }
     },
     "Horizontal46": {
       "slot": 7,
       "directions": {
-        "1": [82, 51],
-        "2": [128, 51],
-        "3": [174, 51],
-        "4": [82, 128],
-        "5": [128, 128],
-        "6": [174, 128],
-        "7": [82, 205],
-        "8": [128, 205],
-        "9": [174, 205]
+        "1": [
+          82,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          174,
+          51
+        ],
+        "4": [
+          82,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          174,
+          128
+        ],
+        "7": [
+          82,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          174,
+          205
+        ]
       }
     },
     "VerticalAsymmetric": {
       "slot": 8,
       "directions": {
-        "1": [69, 78],
-        "2": [128, 78],
-        "3": [187, 78],
-        "4": [61, 128],
-        "5": [128, 128],
-        "6": [195, 128],
-        "7": [61, 164],
-        "8": [128, 174],
-        "9": [195, 164]
+        "1": [
+          69,
+          78
+        ],
+        "2": [
+          128,
+          78
+        ],
+        "3": [
+          187,
+          78
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          164
+        ],
+        "8": [
+          128,
+          174
+        ],
+        "9": [
+          195,
+          164
+        ]
       }
     },
     "Horizontal41": {
       "slot": 9,
       "directions": {
-        "1": [87, 51],
-        "2": [128, 51],
-        "3": [169, 51],
-        "4": [87, 128],
-        "5": [128, 128],
-        "6": [169, 128],
-        "7": [87, 205],
-        "8": [128, 205],
-        "9": [169, 205]
+        "1": [
+          87,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          169,
+          51
+        ],
+        "4": [
+          87,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          169,
+          128
+        ],
+        "7": [
+          87,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          169,
+          205
+        ]
       }
     },
     "FlippedHorizontal41": {
       "slot": 10,
       "directions": {
-        "1": [169, 51],
-        "2": [128, 51],
-        "3": [87, 51],
-        "4": [169, 128],
-        "5": [128, 128],
-        "6": [87, 128],
-        "7": [169, 205],
-        "8": [128, 205],
-        "9": [87, 205]
+        "1": [
+          169,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          87,
+          51
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          87,
+          205
+        ]
       }
     },
     "FlippedTilt": {
       "slot": 11,
       "directions": {
-        "1": [187, 47],
-        "2": [128, 47],
-        "3": [69, 47],
-        "4": [187, 128],
-        "5": [128, 128],
-        "6": [69, 128],
-        "7": [187, 209],
-        "8": [128, 209],
-        "9": [69, 209]
+        "1": [
+          187,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          69,
+          47
+        ],
+        "4": [
+          187,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          69,
+          128
+        ],
+        "7": [
+          187,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          69,
+          209
+        ]
       }
     },
     "CompactTilt": {
       "slot": 12,
       "directions": {
-        "1": [88, 79],
-        "2": [128, 79],
-        "3": [168, 79],
-        "4": [88, 128],
-        "5": [128, 128],
-        "6": [168, 128],
-        "7": [88, 177],
-        "8": [128, 177],
-        "9": [168, 177]
+        "1": [
+          88,
+          79
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          168,
+          79
+        ],
+        "4": [
+          88,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          168,
+          128
+        ],
+        "7": [
+          88,
+          177
+        ],
+        "8": [
+          128,
+          177
+        ],
+        "9": [
+          168,
+          177
+        ]
       }
     },
     "AsymmetricTilt": {
       "slot": 13,
       "directions": {
-        "1": [69, 82],
-        "2": [128, 83],
-        "3": [187, 82],
-        "4": [69, 128],
-        "5": [128, 128],
-        "6": [187, 128],
-        "7": [76, 169],
-        "8": [128, 179],
-        "9": [180, 169]
+        "1": [
+          69,
+          82
+        ],
+        "2": [
+          128,
+          83
+        ],
+        "3": [
+          187,
+          82
+        ],
+        "4": [
+          69,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          187,
+          128
+        ],
+        "7": [
+          76,
+          169
+        ],
+        "8": [
+          128,
+          179
+        ],
+        "9": [
+          180,
+          169
+        ]
       }
     },
     "FlippedTilt41": {
       "slot": 14,
       "directions": {
-        "1": [169, 47],
-        "2": [128, 47],
-        "3": [87, 47],
-        "4": [169, 128],
-        "5": [128, 128],
-        "6": [87, 128],
-        "7": [169, 209],
-        "8": [128, 209],
-        "9": [87, 209]
+        "1": [
+          169,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          87,
+          47
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          87,
+          209
+        ]
       }
     },
     "RF6LowMagnitude": {
       "slot": 15,
       "directions": {
-        "1": [89, 89],
-        "2": [128, 79],
-        "3": [167, 89],
-        "4": [79, 128],
-        "5": [128, 128],
-        "6": [177, 128],
-        "7": [89, 167],
-        "8": [128, 177],
-        "9": [167, 167]
+        "1": [
+          89,
+          89
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          167,
+          89
+        ],
+        "4": [
+          79,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          177,
+          128
+        ],
+        "7": [
+          128,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          128,
+          205
+        ]
+      }
+    },
+    "CDArmed": {
+      "slot": 4,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "RF7ReleaseNeutral": {
+      "slot": 5,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    },
+    "SpringloadUp": {
+      "slot": 16,
+      "directions": {
+        "1": [
+          128,
+          205
+        ],
+        "2": [
+          128,
+          205
+        ],
+        "3": [
+          128,
+          205
+        ],
+        "4": [
+          128,
+          205
+        ],
+        "5": [
+          128,
+          205
+        ],
+        "6": [
+          128,
+          205
+        ],
+        "7": [
+          128,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          128,
+          205
+        ]
+      }
+    },
+    "LT2DefensiveDownBack": {
+      "slot": 17,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          195,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          61,
+          51
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
       }
     }
   },
@@ -272,96 +786,27 @@
       "none": []
     },
     {
-      "name": "cdcWithRF6",
-      "stage": "early",
-      "all": [
-        "condition:cdcPair",
-        "postSocd:RF6"
-      ],
-      "any": [],
-      "none": []
-    },
-    {
-      "name": "downBackCommand",
-      "stage": "early",
-      "all": [
-        "condition:cdcWithRF6",
-        "postSocd:RF5"
-      ],
-      "any": [],
-      "none": []
-    },
-    {
       "name": "cdcNeutral",
       "stage": "early",
       "all": [
-        "condition:cdcPair",
-        "postSocd:RF6"
+        "condition:cdcPair"
       ],
-      "any": [],
-      "none": [
-        "postSocd:RF5"
-      ]
-    },
-    {
-      "name": "neutralAttack",
-      "stage": "early",
-      "all": [
-        "postSocd:RF8",
-        "postSocd:RF5"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:RF7",
-        "postSocd:RF6"
-      ]
-    },
-    {
-      "name": "neutralCommand",
-      "stage": "early",
-      "all": [],
       "any": [
-        "condition:cdcNeutral",
-        "condition:neutralAttack"
+        "postSocd:RF5",
+        "postSocd:RF6"
       ],
       "none": []
     },
     {
-      "name": "downDiagonalZ",
+      "name": "cdArmed",
       "stage": "early",
       "all": [
-        "postSocd:RF8",
-        "postSocd:RF6"
+        "condition:cdcPair"
       ],
       "any": [],
       "none": [
-        "postSocd:RF7"
-      ]
-    },
-    {
-      "name": "downDiagonalA",
-      "stage": "early",
-      "all": [
-        "postSocd:RF7",
+        "postSocd:RF5",
         "postSocd:RF6"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:RF8"
-      ]
-    },
-    {
-      "name": "downDiagonalCommand",
-      "stage": "early",
-      "all": [],
-      "any": [
-        "condition:cdcPair",
-        "condition:downDiagonalZ",
-        "condition:downDiagonalA"
-      ],
-      "none": [
-        "condition:downBackCommand",
-        "condition:cdcNeutral"
       ]
     },
     {
@@ -375,14 +820,69 @@
       "none": []
     },
     {
-      "name": "defensiveShield",
+      "name": "downDiagonalCommand",
       "stage": "early",
       "all": [
-        "postSocd:LT2",
-        "condition:commandActive"
+        "postSocd:RF8"
+      ],
+      "any": [
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ],
+      "none": [
+        "postSocd:RF7"
+      ]
+    },
+    {
+      "name": "forcedDown",
+      "stage": "early",
+      "all": [
+        "postSocd:RF8"
       ],
       "any": [],
-      "none": []
+      "none": [
+        "postSocd:RF7",
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "springloadUp",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7",
+        "postSocd:RF5"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8"
+      ]
+    },
+    {
+      "name": "springloadGrab",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7",
+        "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "rf7ReleaseNeutral",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
     },
     {
       "name": "rf5Attack",
@@ -392,19 +892,7 @@
       ],
       "any": [],
       "none": [
-        "condition:cdcPair"
-      ]
-    },
-    {
-      "name": "spinningDemon",
-      "stage": "early",
-      "all": [
-        "condition:cdcPair",
-        "postSocd:RF5"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:RF6"
+        "postSocd:RF7"
       ]
     },
     {
@@ -415,7 +903,8 @@
       ],
       "any": [],
       "none": [
-        "postSocd:RF7"
+        "postSocd:RF7",
+        "postSocd:RF5"
       ]
     },
     {
@@ -437,7 +926,8 @@
       ],
       "any": [],
       "none": [
-        "condition:commandActive"
+        "condition:commandActive",
+        "postSocd:RF5"
       ]
     },
     {
@@ -450,6 +940,68 @@
       "none": [
         "condition:commandActive"
       ]
+    },
+    {
+      "name": "lt2UpAction",
+      "stage": "early",
+      "all": [
+        "postSocd:LF2"
+      ],
+      "any": [
+        "postSocd:RF1",
+        "postSocd:RF2"
+      ],
+      "none": []
+    },
+    {
+      "name": "lt2Shield",
+      "stage": "early",
+      "all": [
+        "postSocd:LT2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF3",
+        "condition:rf5Attack",
+        "condition:lt2UpAction"
+      ]
+    },
+    {
+      "name": "lt2DefensivePrepare",
+      "stage": "early",
+      "all": [
+        "condition:cdcPair",
+        "condition:lt2Shield"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "lt2DefensiveDownBack",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7",
+        "condition:lt2Shield"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "neutralCommand",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:cdcNeutral",
+        "condition:lt2DefensivePrepare"
+      ],
+      "none": []
     },
     {
       "name": "cAny",
@@ -581,8 +1133,7 @@
       "stage": "early",
       "all": [],
       "any": [
-        "postSocd:LF5",
-        "postSocd:LT6"
+        "postSocd:LF5"
       ],
       "none": [
         "condition:forcedUp"
@@ -615,7 +1166,6 @@
       "stage": "early",
       "all": [],
       "any": [
-        "postSocd:LT6",
         "condition:rf5OrdinaryUp"
       ],
       "none": []
@@ -1116,6 +1666,13 @@
       "right": "false",
       "down": "false",
       "up": "false"
+    },
+    {
+      "name": "physicalLeft",
+      "left": "postSocd:LF3",
+      "right": "postSocd:LF1",
+      "down": "postSocd:LF5",
+      "up": "postSocd:LF2"
     }
   ],
   "defaultTable": "Default",
@@ -1135,18 +1692,18 @@
   "tableRules": [
     {
       "priority": 1,
-      "table": "DefensiveDownBack",
-      "when": "condition:defensiveShield"
+      "table": "CDCNeutral",
+      "when": "condition:neutralCommand"
     },
     {
       "priority": 2,
-      "table": "DownBack",
-      "when": "condition:downBackCommand"
+      "table": "LT2DefensiveDownBack",
+      "when": "condition:lt2DefensiveDownBack"
     },
     {
       "priority": 3,
-      "table": "CDCNeutral",
-      "when": "condition:neutralCommand"
+      "table": "CDArmed",
+      "when": "condition:cdArmed"
     },
     {
       "priority": 4,
@@ -1156,7 +1713,22 @@
     {
       "priority": 5,
       "table": "ForcedDown",
-      "when": "condition:commandActive"
+      "when": "condition:forcedDown"
+    },
+    {
+      "priority": 6,
+      "table": "SpringloadUp",
+      "when": "condition:springloadUp"
+    },
+    {
+      "priority": 7,
+      "table": "Default",
+      "when": "condition:springloadGrab"
+    },
+    {
+      "priority": 8,
+      "table": "RF7ReleaseNeutral",
+      "when": "condition:rf7ReleaseNeutral"
     },
     {
       "priority": 20,
@@ -1227,13 +1799,6 @@
       "winnerTable": "any"
     },
     {
-      "when": "condition:downDiagonalA",
-      "outputs": [
-        "buttonA"
-      ],
-      "winnerTable": "any"
-    },
-    {
       "when": "condition:ordinaryB",
       "outputs": [
         "buttonB"
@@ -1249,13 +1814,6 @@
     },
     {
       "when": "condition:thumb3RF3B",
-      "outputs": [
-        "buttonB"
-      ],
-      "winnerTable": "any"
-    },
-    {
-      "when": "condition:spinningDemon",
       "outputs": [
         "buttonB"
       ],
@@ -1340,11 +1898,18 @@
       "winnerTable": "any"
     },
     {
-      "when": "postSocd:LT2",
+      "when": "condition:lt2Shield",
       "outputs": [
         "buttonL",
         "triggerLDigital",
         "triggerRDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF12",
+      "outputs": [
+        "buttonA"
       ],
       "winnerTable": "any"
     }
@@ -1358,7 +1923,7 @@
       "gateInverted": false,
       "skipWhenDpadBypass": false,
       "winnerTable": "any",
-      "source": "ordinaryLeft",
+      "source": "physicalLeft",
       "coordinates": {
         "mode": "selectedTable"
       }
@@ -1388,15 +1953,42 @@
       "coordinates": {
         "mode": "inline",
         "points": [
-          [28, 28],
-          [128, 28],
-          [228, 28],
-          [28, 128],
-          [128, 128],
-          [228, 128],
-          [28, 228],
-          [128, 228],
-          [228, 228]
+          [
+            28,
+            28
+          ],
+          [
+            128,
+            28
+          ],
+          [
+            228,
+            28
+          ],
+          [
+            28,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            228,
+            128
+          ],
+          [
+            28,
+            228
+          ],
+          [
+            128,
+            228
+          ],
+          [
+            228,
+            228
+          ]
         ]
       }
     },
@@ -1442,15 +2034,42 @@
       "coordinates": {
         "mode": "inline",
         "points": [
-          [86, 60],
-          [128, 60],
-          [170, 60],
-          [86, 128],
-          [128, 128],
-          [170, 128],
-          [86, 196],
-          [128, 196],
-          [170, 196]
+          [
+            86,
+            60
+          ],
+          [
+            128,
+            60
+          ],
+          [
+            170,
+            60
+          ],
+          [
+            86,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            170,
+            128
+          ],
+          [
+            86,
+            196
+          ],
+          [
+            128,
+            196
+          ],
+          [
+            170,
+            196
+          ]
         ]
       }
     },
@@ -1466,15 +2085,42 @@
       "coordinates": {
         "mode": "inline",
         "points": [
-          [95, 91],
-          [128, 91],
-          [161, 91],
-          [95, 91],
-          [128, 91],
-          [161, 91],
-          [95, 165],
-          [128, 165],
-          [161, 165]
+          [
+            95,
+            91
+          ],
+          [
+            128,
+            91
+          ],
+          [
+            161,
+            91
+          ],
+          [
+            95,
+            91
+          ],
+          [
+            128,
+            91
+          ],
+          [
+            161,
+            91
+          ],
+          [
+            95,
+            165
+          ],
+          [
+            128,
+            165
+          ],
+          [
+            161,
+            165
+          ]
         ]
       }
     },
@@ -1489,7 +2135,10 @@
       "source": "neutralAxes",
       "coordinates": {
         "mode": "fixed",
-        "point": [128, 128]
+        "point": [
+          128,
+          128
+        ]
       }
     },
     {
@@ -1526,6 +2175,91 @@
         "normalTable": "Default",
         "modeTable": "Default"
       }
+    },
+    {
+      "target": "leftStick",
+      "priority": 50,
+      "activation": "condition:rf6OrdinaryAnalog",
+      "gate": "postSocd:LF2",
+      "gateInverted": true,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "rf6Axes",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            89,
+            89
+          ],
+          [
+            128,
+            79
+          ],
+          [
+            167,
+            89
+          ],
+          [
+            79,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            177,
+            128
+          ],
+          [
+            89,
+            167
+          ],
+          [
+            128,
+            177
+          ],
+          [
+            167,
+            167
+          ]
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 2,
+      "activation": "postSocd:LT6",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          51
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 1,
+      "activation": "postSocd:RF12",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          128
+        ]
+      }
     }
   ],
   "digitalPostMask": {
@@ -1535,7 +2269,7 @@
     "inverted": false
   },
   "metadata": {
-    "description": "Offline Kazuya host candidate. Coordinate assignments and broad defensive Shield gate require gameplay evaluation; not installed or hardware accepted.",
+    "description": "Kazuya v4: revised CD/release neutral, semantic LT2 defensive cancel, LT6 Down+A and RF12 neutral+A. Gameplay NOT_TESTED.",
     "character": "Kazuya"
   }
 }

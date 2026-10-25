@@ -1,0 +1,22 @@
+test_all_domains_modes_stages_and_raw_tables_roundtrip (__main__.NativeProfileJsonTests.test_all_domains_modes_stages_and_raw_tables_roundtrip) ... ok
+test_exact_3336_byte_boundary (__main__.NativeProfileJsonTests.test_exact_3336_byte_boundary) ... ok
+test_exact_owner_fixture_and_committed_human_profile (__main__.NativeProfileJsonTests.test_exact_owner_fixture_and_committed_human_profile) ... ok
+test_explicit_token_pool_and_local_condition_limits (__main__.NativeProfileJsonTests.test_explicit_token_pool_and_local_condition_limits) ... ok
+test_human_references_priorities_modes_and_capacities_rejected (__main__.NativeProfileJsonTests.test_human_references_priorities_modes_and_capacities_rejected) ... ok
+test_json_loader_rejects_duplicate_keys (__main__.NativeProfileJsonTests.test_json_loader_rejects_duplicate_keys) ... ok
+test_malformed_preprocessing_rejected (__main__.NativeProfileJsonTests.test_malformed_preprocessing_rejected) ... ok
+test_minimal_finite_program_roundtrip (__main__.NativeProfileJsonTests.test_minimal_finite_program_roundtrip) ... ok
+test_optional_metadata_edits_preserve_exact_bytes_and_closed_fields (__main__.NativeProfileJsonTests.test_optional_metadata_edits_preserve_exact_bytes_and_closed_fields) ... ok
+test_preprocessing_order_all_policies_and_digest_binding (__main__.NativeProfileJsonTests.test_preprocessing_order_all_policies_and_digest_binding) ... ok
+test_profile_name_is_nonsemantic (__main__.NativeProfileJsonTests.test_profile_name_is_nonsemantic) ... ok
+test_protobuf_json_transport_roundtrip_and_unknown_fields (__main__.NativeProfileJsonTests.test_protobuf_json_transport_roundtrip_and_unknown_fields) ... ok
+test_read_export_snake_and_camel_envelopes_are_offline_only (__main__.NativeProfileJsonTests.test_read_export_snake_and_camel_envelopes_are_offline_only) ... ok
+test_reserved_counts_references_and_unused_unions_rejected (__main__.NativeProfileJsonTests.test_reserved_counts_references_and_unused_unions_rejected) ... ok
+test_standard_json_schema_validation (__main__.NativeProfileJsonTests.test_standard_json_schema_validation) ... ok
+test_unknown_semantics_and_boolean_integer_rejected (__main__.NativeProfileJsonTests.test_unknown_semantics_and_boolean_integer_rejected) ... ok
+test_unknown_wrapper_or_wrong_schema_rejected (__main__.NativeProfileJsonTests.test_unknown_wrapper_or_wrong_schema_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.714s
+
+OK

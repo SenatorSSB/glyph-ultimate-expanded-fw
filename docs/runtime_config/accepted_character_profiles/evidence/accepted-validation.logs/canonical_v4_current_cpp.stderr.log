@@ -1,0 +1,16 @@
+test_16_by_9_matrix_digital_cstick_and_winners (test_kazuya_profile_v4.KazuyaV4Tests.test_16_by_9_matrix_digital_cstick_and_winners) ... ok
+test_defensive_shield_release_sequences_all_directions (test_kazuya_profile_v4.KazuyaV4Tests.test_defensive_shield_release_sequences_all_directions) ... ok
+test_defensive_socd_and_semantic_shield_gate (test_kazuya_profile_v4.KazuyaV4Tests.test_defensive_socd_and_semantic_shield_gate) ... ok
+test_horizontal_vertical_socd_histories_and_simultaneous (test_kazuya_profile_v4.KazuyaV4Tests.test_horizontal_vertical_socd_histories_and_simultaneous) ... ok
+test_lt2_release_carriers_and_independent_triggers (test_kazuya_profile_v4.KazuyaV4Tests.test_lt2_release_carriers_and_independent_triggers) ... ok
+test_lt6_absolute_neutral_all_commands_and_retained_modifiers (test_kazuya_profile_v4.KazuyaV4Tests.test_lt6_absolute_neutral_all_commands_and_retained_modifiers) ... ok
+test_negative_mutants (test_kazuya_profile_v4.KazuyaV4Tests.test_negative_mutants) ... ok
+test_release_orders_all_directions_and_single_edges (test_kazuya_profile_v4.KazuyaV4Tests.test_release_orders_all_directions_and_single_edges) ... ok
+test_retained_v1_and_archival_differential (test_kazuya_profile_v4.KazuyaV4Tests.test_retained_v1_and_archival_differential) ... ok
+test_rf12_sequence_and_all_cstick_geometry (test_kazuya_profile_v4.KazuyaV4Tests.test_rf12_sequence_and_all_cstick_geometry) ... ok
+test_schema_resources_coordinates_and_frozen_inputs (test_kazuya_profile_v4.KazuyaV4Tests.test_schema_resources_coordinates_and_frozen_inputs) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 17.430s
+
+OK

@@ -1,0 +1,21 @@
+{
+  "accepted_history_commit": "5e30341ee06761e20e864ccc013ca6658e42b5ca",
+  "old_v1_source": {
+    "original": "profiles/kazuya/Kazuya.profile.json",
+    "archive": "profiles/kazuya/v1/Kazuya.profile.json",
+    "sha256": "8f28cdc430a8347cc193f7a8519f5a3e7a4f0ce49558ebb4f7ff26ca61219499"
+  },
+  "old_v1_readme": {
+    "original": "profiles/kazuya/README.md",
+    "archive": "profiles/kazuya/README.v1.md",
+    "sha256": "65142ceb60e880758695cbed6f0f2bd8b52f9c00bc30047f5cd91b4408f6c8db",
+    "same_relative_link_depth": true
+  },
+  "canonical_source": {
+    "path": "profiles/kazuya/Kazuya.profile.json",
+    "exact_copy_of": "profiles/kazuya/v4/KazuyaV4.profile.json",
+    "sha256": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434"
+  },
+  "historical_tests_evidence": "Unchanged. Execute at immutable accepted history via accepted verifier; no pin rewriting.",
+  "current_native_replay": "Canonical source and current production C++, frozen v4 assertions/fixtures at immutable5e. Current production/harness hashes checked before and after; canonical source revalidated after replay."
+}

@@ -2,7 +2,7 @@
 """Guarded production ProfileStore acceptance operator.
 
 This is deliberately not the strict-candidate/fault operator.  It implements
-only STATUS, LIST, READ, and owner-authorized CREATE/UPDATE/checked-reference/DELETE acceptance
+only STATUS, LIST, READ, and owner-authorized CREATE/UPDATE/RENAME/checked-reference/DELETE acceptance
 workflow.  It never retries, resets, flashes, queries transactions, or writes
 whole Configs.
 """
@@ -12,7 +12,7 @@ import glyph_serial_config_tool as transport
 import glyph_profile_store_candidate_tool as candidate_transport
 
 ROOT = Path(__file__).resolve().parents[1]
-MUTATIONS = {"create": 4, "update": 5, "set-reference": 10, "delete": 9}
+MUTATIONS = {"create": 4, "update": 5, "rename": 7, "set-reference": 10, "delete": 9}
 
 def parse_uint(text): return int(text, 0)
 
@@ -32,18 +32,21 @@ def parse_args(argv=None):
     if not 0 < a.timeout <= 10: p.error("timeout must be within (0,10] seconds")
     if not 0 <= a.page <= 64 or not 1 <= a.page_size <= 8: p.error("page must be 0..64 and page-size 1..8")
     if a.output and a.output.resolve() == a.journal_out.resolve(): p.error("output and journal must differ")
-    if a.action in ("read", "update", "delete") and not (a.profile_id is not None and 0 < a.profile_id <= 0xffffffff): p.error("requires nonzero uint32 --profile-id")
+    if a.action in ("read", "update", "rename", "delete") and not (a.profile_id is not None and 0 < a.profile_id <= 0xffffffff): p.error("requires nonzero uint32 --profile-id")
     if a.action in MUTATIONS:
         if not (0 < a.token <= 0xffffffffffffffff): p.error("mutation requires full nonzero uint64 --token")
         if a.incarnation is None or a.store_generation is None or not (0 < a.incarnation <= 0xffffffff and 0 <= a.store_generation <= 0xffffffff): p.error("mutation requires explicit valid --incarnation and --store-generation")
         if not a.request_out: p.error("mutation requires new --request-out receipt")
         if a.action in ("create", "update") and not a.profile_json: p.error("CREATE/UPDATE require --profile-json")
-        if a.action in ("set-reference", "delete") and a.profile_json: p.error("reference/delete never accept a payload")
+        if a.action in ("set-reference", "delete", "rename") and a.profile_json: p.error("reference/delete/rename never accept a payload")
         if a.action == "set-reference":
             if a.profile_id is None or not 0 <= a.profile_id <= 0xffffffff: p.error("reference requires explicit uint32 --profile-id (zero clears)")
             if a.mode_index is None or not 0 <= a.mode_index < 30: p.error("reference requires --mode-index within0..29")
             if a.config_generation is None or not 0 <= a.config_generation <= 0xffffffff: p.error("reference requires explicit uint32 --config-generation")
         elif a.mode_index is not None or a.config_generation is not None: p.error("mode/config fences apply only to set-reference")
+        if a.action == "rename":
+            if a.name is None: p.error("RENAME requires explicit --name")
+            if a.rank is not None or a.profile_revision is not None: p.error("RENAME preserves rank/revision; only store-generation fencing applies")
         if a.action == "create" and (a.name is None or a.rank is None): p.error("CREATE requires --name and --rank")
         if a.action == "update" and not (a.profile_revision and a.profile_revision <= 0xffffffff): p.error("UPDATE requires positive --profile-revision")
         if a.name is not None and ("\0" in a.name or len(a.name.encode()) > 32): p.error("name must be <=32 UTF-8 bytes without NUL")
@@ -104,7 +107,7 @@ def validate_result(a, pb, r):
     if r.request_token != a.token: raise transport.ToolError("response token mismatch; operation unresolved")
     if r.status != pb.PROFILE_STORE_OK: raise transport.ToolError("device returned non-OK status; operation outcome is device-reported")
     if a.action == "create" and not r.profile_id: raise transport.ToolError("CREATE response lacks allocated stable ID")
-    if a.action in ("update", "set-reference", "delete") and r.profile_id != a.profile_id: raise transport.ToolError("response profile identity mismatch")
+    if a.action in ("update", "rename", "set-reference", "delete") and r.profile_id != a.profile_id: raise transport.ToolError("response profile identity mismatch")
 
 def main(argv=None):
     a = parse_args(argv); port = transport.PosixSerialPort(a.port, 115200, a.timeout)

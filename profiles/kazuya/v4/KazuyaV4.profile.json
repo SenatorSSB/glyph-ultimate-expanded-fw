@@ -1,0 +1,2275 @@
+{
+  "format": "glyph-native-ultimate-profile",
+  "formatVersion": 1,
+  "name": "KazTest4",
+  "provenance": {
+    "kind": "authoredSourceV1"
+  },
+  "preprocessing": {
+    "mode": "MODE_ULTIMATE",
+    "remaps": [
+      {
+        "physical": "RF3",
+        "activates": "RF3"
+      },
+      {
+        "physical": "RF4",
+        "activates": "RF4"
+      },
+      {
+        "physical": "LT3",
+        "activates": "LT3"
+      }
+    ],
+    "socd": [
+      {
+        "first": "LF3",
+        "second": "LF1",
+        "policy": "secondInputPriority"
+      },
+      {
+        "first": "LF5",
+        "second": "LF2",
+        "policy": "secondInputPriority"
+      }
+    ]
+  },
+  "tables": {
+    "Default": {
+      "slot": 0,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
+      }
+    },
+    "ForcedDown": {
+      "slot": 1,
+      "directions": {
+        "1": [
+          128,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          128,
+          51
+        ],
+        "4": [
+          128,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          128,
+          51
+        ],
+        "7": [
+          128,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          128,
+          51
+        ]
+      }
+    },
+    "DownDiagonal": {
+      "slot": 2,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "CDCNeutral": {
+      "slot": 3,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    },
+    "Horizontal35": {
+      "slot": 6,
+      "directions": {
+        "1": [
+          93,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          163,
+          51
+        ],
+        "4": [
+          93,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          163,
+          128
+        ],
+        "7": [
+          93,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          163,
+          205
+        ]
+      }
+    },
+    "Horizontal46": {
+      "slot": 7,
+      "directions": {
+        "1": [
+          82,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          174,
+          51
+        ],
+        "4": [
+          82,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          174,
+          128
+        ],
+        "7": [
+          82,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          174,
+          205
+        ]
+      }
+    },
+    "VerticalAsymmetric": {
+      "slot": 8,
+      "directions": {
+        "1": [
+          69,
+          78
+        ],
+        "2": [
+          128,
+          78
+        ],
+        "3": [
+          187,
+          78
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          164
+        ],
+        "8": [
+          128,
+          174
+        ],
+        "9": [
+          195,
+          164
+        ]
+      }
+    },
+    "Horizontal41": {
+      "slot": 9,
+      "directions": {
+        "1": [
+          87,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          169,
+          51
+        ],
+        "4": [
+          87,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          169,
+          128
+        ],
+        "7": [
+          87,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          169,
+          205
+        ]
+      }
+    },
+    "FlippedHorizontal41": {
+      "slot": 10,
+      "directions": {
+        "1": [
+          169,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          87,
+          51
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          87,
+          205
+        ]
+      }
+    },
+    "FlippedTilt": {
+      "slot": 11,
+      "directions": {
+        "1": [
+          187,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          69,
+          47
+        ],
+        "4": [
+          187,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          69,
+          128
+        ],
+        "7": [
+          187,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          69,
+          209
+        ]
+      }
+    },
+    "CompactTilt": {
+      "slot": 12,
+      "directions": {
+        "1": [
+          88,
+          79
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          168,
+          79
+        ],
+        "4": [
+          88,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          168,
+          128
+        ],
+        "7": [
+          88,
+          177
+        ],
+        "8": [
+          128,
+          177
+        ],
+        "9": [
+          168,
+          177
+        ]
+      }
+    },
+    "AsymmetricTilt": {
+      "slot": 13,
+      "directions": {
+        "1": [
+          69,
+          82
+        ],
+        "2": [
+          128,
+          83
+        ],
+        "3": [
+          187,
+          82
+        ],
+        "4": [
+          69,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          187,
+          128
+        ],
+        "7": [
+          76,
+          169
+        ],
+        "8": [
+          128,
+          179
+        ],
+        "9": [
+          180,
+          169
+        ]
+      }
+    },
+    "FlippedTilt41": {
+      "slot": 14,
+      "directions": {
+        "1": [
+          169,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          87,
+          47
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          87,
+          209
+        ]
+      }
+    },
+    "RF6LowMagnitude": {
+      "slot": 15,
+      "directions": {
+        "1": [
+          89,
+          89
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          167,
+          89
+        ],
+        "4": [
+          79,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          177,
+          128
+        ],
+        "7": [
+          128,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          128,
+          205
+        ]
+      }
+    },
+    "CDArmed": {
+      "slot": 4,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "RF7ReleaseNeutral": {
+      "slot": 5,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    },
+    "SpringloadUp": {
+      "slot": 16,
+      "directions": {
+        "1": [
+          128,
+          205
+        ],
+        "2": [
+          128,
+          205
+        ],
+        "3": [
+          128,
+          205
+        ],
+        "4": [
+          128,
+          205
+        ],
+        "5": [
+          128,
+          205
+        ],
+        "6": [
+          128,
+          205
+        ],
+        "7": [
+          128,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          128,
+          205
+        ]
+      }
+    },
+    "LT2DefensiveDownBack": {
+      "slot": 17,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          195,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          61,
+          51
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
+      }
+    }
+  },
+  "conditions": [
+    {
+      "name": "cdcPair",
+      "stage": "early",
+      "all": [
+        "postSocd:RF8",
+        "postSocd:RF7"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "cdcNeutral",
+      "stage": "early",
+      "all": [
+        "condition:cdcPair"
+      ],
+      "any": [
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ],
+      "none": []
+    },
+    {
+      "name": "cdArmed",
+      "stage": "early",
+      "all": [
+        "condition:cdcPair"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "commandActive",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RF8",
+        "postSocd:RF7"
+      ],
+      "none": []
+    },
+    {
+      "name": "downDiagonalCommand",
+      "stage": "early",
+      "all": [
+        "postSocd:RF8"
+      ],
+      "any": [
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ],
+      "none": [
+        "postSocd:RF7"
+      ]
+    },
+    {
+      "name": "forcedDown",
+      "stage": "early",
+      "all": [
+        "postSocd:RF8"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF7",
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "springloadUp",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7",
+        "postSocd:RF5"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8"
+      ]
+    },
+    {
+      "name": "springloadGrab",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7",
+        "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "rf7ReleaseNeutral",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "rf5Attack",
+      "stage": "early",
+      "all": [
+        "postSocd:RF5"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF7"
+      ]
+    },
+    {
+      "name": "rf6Grab",
+      "stage": "early",
+      "all": [
+        "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF7",
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "rf5OrdinaryUp",
+      "stage": "early",
+      "all": [
+        "postSocd:RF5"
+      ],
+      "any": [],
+      "none": [
+        "condition:commandActive"
+      ]
+    },
+    {
+      "name": "rf6OrdinaryAnalog",
+      "stage": "early",
+      "all": [
+        "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "condition:commandActive",
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "dpadRoute",
+      "stage": "early",
+      "all": [
+        "postSocd:RF13"
+      ],
+      "any": [],
+      "none": [
+        "condition:commandActive"
+      ]
+    },
+    {
+      "name": "lt2UpAction",
+      "stage": "early",
+      "all": [
+        "postSocd:LF2"
+      ],
+      "any": [
+        "postSocd:RF1",
+        "postSocd:RF2"
+      ],
+      "none": []
+    },
+    {
+      "name": "lt2Shield",
+      "stage": "early",
+      "all": [
+        "postSocd:LT2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF3",
+        "condition:rf5Attack",
+        "condition:lt2UpAction"
+      ]
+    },
+    {
+      "name": "lt2DefensivePrepare",
+      "stage": "early",
+      "all": [
+        "condition:cdcPair",
+        "condition:lt2Shield"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "lt2DefensiveDownBack",
+      "stage": "early",
+      "all": [
+        "postSocd:RF7",
+        "condition:lt2Shield"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF5",
+        "postSocd:RF6"
+      ]
+    },
+    {
+      "name": "neutralCommand",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:cdcNeutral",
+        "condition:lt2DefensivePrepare"
+      ],
+      "none": []
+    },
+    {
+      "name": "cAny",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT2",
+        "postSocd:RT3",
+        "postSocd:RT4",
+        "postSocd:RT5"
+      ],
+      "none": []
+    },
+    {
+      "name": "thumb3FaceLayer",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3"
+      ],
+      "any": [
+        "postSocd:RF3",
+        "postSocd:RF4"
+      ],
+      "none": [
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "ordinaryRF3",
+      "stage": "early",
+      "all": [
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT3",
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "rf9WithOrdinaryRF3",
+      "stage": "early",
+      "all": [
+        "postSocd:RF9",
+        "condition:ordinaryRF3"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "intrinsicRT1RF4",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1",
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf9WithOrdinaryRF3"
+      ]
+    },
+    {
+      "name": "intrinsicRF4CBlocked",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4",
+        "condition:cAny"
+      ],
+      "any": [],
+      "none": [
+        "condition:intrinsicRT1RF4"
+      ]
+    },
+    {
+      "name": "intrinsicRF4Available",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:intrinsicRF4CBlocked",
+        "condition:rf9WithOrdinaryRF3"
+      ]
+    },
+    {
+      "name": "thumb3RF2Up",
+      "stage": "early",
+      "all": [
+        "condition:thumb3FaceLayer",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "lf4RF3Up",
+      "stage": "early",
+      "all": [
+        "postSocd:LF4",
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "forcedUp",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:rf5OrdinaryUp",
+        "condition:thumb3RF2Up",
+        "condition:lf4RF3Up"
+      ],
+      "none": []
+    },
+    {
+      "name": "leftUp",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:LF2",
+        "condition:forcedUp"
+      ],
+      "none": []
+    },
+    {
+      "name": "leftDown",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:LF5"
+      ],
+      "none": [
+        "condition:forcedUp"
+      ]
+    },
+    {
+      "name": "leftLeft",
+      "stage": "early",
+      "all": [
+        "postSocd:LF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF1"
+      ]
+    },
+    {
+      "name": "leftRight",
+      "stage": "early",
+      "all": [
+        "postSocd:LF1"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF3"
+      ]
+    },
+    {
+      "name": "ordinaryForcedVertical",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:rf5OrdinaryUp"
+      ],
+      "none": []
+    },
+    {
+      "name": "notForcedUp",
+      "stage": "early",
+      "all": [],
+      "any": [],
+      "none": [
+        "condition:forcedUp"
+      ]
+    },
+    {
+      "name": "rf3XSuppressed",
+      "stage": "early",
+      "all": [
+        "condition:rf9WithOrdinaryRF3"
+      ],
+      "any": [],
+      "none": [
+        "condition:cAny"
+      ]
+    },
+    {
+      "name": "ordinaryA",
+      "stage": "early",
+      "all": [
+        "postSocd:RF1"
+      ],
+      "any": [],
+      "none": [
+        "condition:thumb3FaceLayer"
+      ]
+    },
+    {
+      "name": "ordinaryB",
+      "stage": "early",
+      "all": [
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4",
+        "condition:thumb3FaceLayer"
+      ]
+    },
+    {
+      "name": "thumb3RF3B",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3",
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4"
+      ]
+    },
+    {
+      "name": "ordinaryX",
+      "stage": "early",
+      "all": [
+        "condition:ordinaryRF3"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf3XSuppressed"
+      ]
+    },
+    {
+      "name": "thumb3RF1X",
+      "stage": "early",
+      "all": [
+        "condition:thumb3FaceLayer",
+        "postSocd:RF1"
+      ],
+      "any": [],
+      "none": [
+        "condition:cAny"
+      ]
+    },
+    {
+      "name": "lf4RF2X",
+      "stage": "early",
+      "all": [
+        "postSocd:LF4",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": [
+        "condition:cAny"
+      ]
+    },
+    {
+      "name": "nullSticks",
+      "stage": "early",
+      "all": [
+        "postSocd:RF9"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf9WithOrdinaryRF3",
+        "condition:intrinsicRF4Available"
+      ]
+    },
+    {
+      "name": "cHorizontal",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT3",
+        "postSocd:RT4"
+      ],
+      "none": []
+    },
+    {
+      "name": "cVertical",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:RT2",
+        "postSocd:RT5"
+      ],
+      "none": []
+    },
+    {
+      "name": "cDiagonal",
+      "stage": "early",
+      "all": [
+        "condition:cHorizontal",
+        "condition:cVertical"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "rf3VerticalCWithHorizontal",
+      "stage": "early",
+      "all": [
+        "postSocd:RF3",
+        "condition:cVertical"
+      ],
+      "any": [
+        "condition:leftLeft",
+        "condition:leftRight"
+      ],
+      "none": [
+        "postSocd:RT3",
+        "postSocd:RT4"
+      ]
+    },
+    {
+      "name": "rf6Down",
+      "stage": "early",
+      "all": [
+        "condition:leftDown"
+      ],
+      "any": [],
+      "none": [
+        "condition:leftUp"
+      ]
+    },
+    {
+      "name": "rf6Up",
+      "stage": "early",
+      "all": [
+        "condition:leftUp"
+      ],
+      "any": [],
+      "none": [
+        "condition:leftDown"
+      ]
+    },
+    {
+      "name": "tableRF9RF3RF4",
+      "stage": "early",
+      "all": [
+        "condition:rf9WithOrdinaryRF3",
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "tableRT1RF4",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1",
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:tableRF9RF3RF4"
+      ]
+    },
+    {
+      "name": "tableRF4CBlocked",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4",
+        "condition:cAny"
+      ],
+      "any": [],
+      "none": [
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "tableRF4Available",
+      "stage": "early",
+      "all": [
+        "postSocd:RF4"
+      ],
+      "any": [],
+      "none": [
+        "condition:tableRF4CBlocked",
+        "condition:tableRF9RF3RF4"
+      ]
+    },
+    {
+      "name": "thumb3Vertical",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4",
+        "postSocd:RF3",
+        "postSocd:RF4"
+      ]
+    },
+    {
+      "name": "thumb3RF3Horizontal",
+      "stage": "early",
+      "all": [
+        "condition:thumb3FaceLayer",
+        "postSocd:RF3"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "thumb3RF4Flipped",
+      "stage": "early",
+      "all": [
+        "postSocd:LT3",
+        "condition:tableRF4Available"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF4",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "thumb3Released",
+      "stage": "early",
+      "all": [],
+      "any": [],
+      "none": [
+        "postSocd:LT3"
+      ]
+    },
+    {
+      "name": "ordinaryTiltLayer",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:thumb3Released",
+        "postSocd:LF4"
+      ],
+      "none": []
+    },
+    {
+      "name": "lf4RF2",
+      "stage": "early",
+      "all": [
+        "postSocd:LF4",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "rf4Tilt",
+      "stage": "early",
+      "all": [
+        "condition:tableRF4Available",
+        "condition:ordinaryTiltLayer"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RT1",
+        "condition:lf4RF2"
+      ]
+    },
+    {
+      "name": "rt1Compact",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF4"
+      ]
+    },
+    {
+      "name": "rf4RF2Flipped41",
+      "stage": "early",
+      "all": [
+        "condition:tableRF4Available",
+        "postSocd:RF2"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT3",
+        "postSocd:LF4",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectHorizontal35",
+      "stage": "early",
+      "all": [
+        "postSocd:LT5"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT4",
+        "condition:thumb3Vertical",
+        "condition:thumb3RF3Horizontal",
+        "condition:thumb3RF4Flipped",
+        "condition:rf4Tilt",
+        "condition:rt1Compact",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectHorizontal46",
+      "stage": "early",
+      "all": [
+        "postSocd:LT4"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "condition:thumb3Vertical",
+        "condition:thumb3RF3Horizontal",
+        "condition:thumb3RF4Flipped",
+        "condition:rf4Tilt",
+        "condition:rt1Compact",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectVerticalAsymmetric",
+      "stage": "early",
+      "all": [
+        "condition:thumb3Vertical"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "postSocd:LT4",
+        "condition:thumb3RF3Horizontal",
+        "condition:thumb3RF4Flipped",
+        "condition:rf4Tilt",
+        "condition:rt1Compact",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectHorizontal41",
+      "stage": "early",
+      "all": [
+        "condition:thumb3RF3Horizontal"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "postSocd:LT4",
+        "condition:thumb3Vertical",
+        "condition:thumb3RF4Flipped",
+        "condition:rf4Tilt",
+        "condition:rt1Compact",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectFlippedHorizontal41",
+      "stage": "early",
+      "all": [
+        "condition:thumb3RF4Flipped"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "postSocd:LT4",
+        "condition:rf4Tilt",
+        "condition:rt1Compact",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectFlippedTilt",
+      "stage": "early",
+      "all": [
+        "condition:rf4Tilt"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "postSocd:LT4",
+        "condition:thumb3Vertical",
+        "condition:thumb3RF3Horizontal",
+        "condition:thumb3RF4Flipped",
+        "condition:rt1Compact",
+        "condition:tableRT1RF4",
+        "condition:rf4RF2Flipped41"
+      ]
+    },
+    {
+      "name": "selectCompactTilt",
+      "stage": "early",
+      "all": [
+        "condition:rt1Compact"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "postSocd:LT4",
+        "condition:thumb3RF3Horizontal",
+        "condition:thumb3RF4Flipped",
+        "condition:rf4Tilt",
+        "condition:tableRT1RF4"
+      ]
+    },
+    {
+      "name": "selectAsymmetricTilt",
+      "stage": "early",
+      "all": [
+        "condition:tableRT1RF4"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LT5",
+        "postSocd:LT4",
+        "condition:thumb3Vertical",
+        "condition:thumb3RF3Horizontal",
+        "condition:thumb3RF4Flipped",
+        "condition:rf4Tilt",
+        "condition:rt1Compact"
+      ]
+    }
+  ],
+  "directionSources": [
+    {
+      "name": "ordinaryLeft",
+      "left": "condition:leftLeft",
+      "right": "condition:leftRight",
+      "down": "condition:leftDown",
+      "up": "condition:leftUp"
+    },
+    {
+      "name": "cStick",
+      "left": "postSocd:RT3",
+      "right": "postSocd:RT4",
+      "down": "postSocd:RT2",
+      "up": "postSocd:RT5"
+    },
+    {
+      "name": "forcedVertical",
+      "left": "false",
+      "right": "false",
+      "down": "condition:notForcedUp",
+      "up": "condition:forcedUp"
+    },
+    {
+      "name": "rf6Axes",
+      "left": "condition:leftLeft",
+      "right": "condition:leftRight",
+      "down": "condition:rf6Down",
+      "up": "condition:rf6Up"
+    },
+    {
+      "name": "angledC",
+      "left": "condition:leftLeft",
+      "right": "condition:leftRight",
+      "down": "postSocd:RT2",
+      "up": "postSocd:RT5"
+    },
+    {
+      "name": "neutralAxes",
+      "left": "false",
+      "right": "false",
+      "down": "false",
+      "up": "false"
+    },
+    {
+      "name": "physicalLeft",
+      "left": "postSocd:LF3",
+      "right": "postSocd:LF1",
+      "down": "postSocd:LF5",
+      "up": "postSocd:LF2"
+    }
+  ],
+  "defaultTable": "Default",
+  "leftStickSource": "ordinaryLeft",
+  "rightStickSource": "cStick",
+  "gates": {
+    "mode": "false",
+    "leftStickDigital": "true",
+    "rightStickDigital": "true",
+    "dpad": "condition:dpadRoute"
+  },
+  "dpad": {
+    "routeToDpad": true,
+    "bypassLeftStick": true,
+    "suppressLeftStickDigital": true
+  },
+  "tableRules": [
+    {
+      "priority": 1,
+      "table": "CDCNeutral",
+      "when": "condition:neutralCommand"
+    },
+    {
+      "priority": 2,
+      "table": "LT2DefensiveDownBack",
+      "when": "condition:lt2DefensiveDownBack"
+    },
+    {
+      "priority": 3,
+      "table": "CDArmed",
+      "when": "condition:cdArmed"
+    },
+    {
+      "priority": 4,
+      "table": "DownDiagonal",
+      "when": "condition:downDiagonalCommand"
+    },
+    {
+      "priority": 5,
+      "table": "ForcedDown",
+      "when": "condition:forcedDown"
+    },
+    {
+      "priority": 6,
+      "table": "SpringloadUp",
+      "when": "condition:springloadUp"
+    },
+    {
+      "priority": 7,
+      "table": "Default",
+      "when": "condition:springloadGrab"
+    },
+    {
+      "priority": 8,
+      "table": "RF7ReleaseNeutral",
+      "when": "condition:rf7ReleaseNeutral"
+    },
+    {
+      "priority": 20,
+      "table": "FlippedTilt41",
+      "when": "condition:rf4RF2Flipped41"
+    },
+    {
+      "priority": 30,
+      "table": "Horizontal35",
+      "when": "condition:selectHorizontal35"
+    },
+    {
+      "priority": 31,
+      "table": "Horizontal46",
+      "when": "condition:selectHorizontal46"
+    },
+    {
+      "priority": 32,
+      "table": "VerticalAsymmetric",
+      "when": "condition:selectVerticalAsymmetric"
+    },
+    {
+      "priority": 33,
+      "table": "Horizontal41",
+      "when": "condition:selectHorizontal41"
+    },
+    {
+      "priority": 34,
+      "table": "FlippedHorizontal41",
+      "when": "condition:selectFlippedHorizontal41"
+    },
+    {
+      "priority": 35,
+      "table": "FlippedTilt",
+      "when": "condition:selectFlippedTilt"
+    },
+    {
+      "priority": 36,
+      "table": "CompactTilt",
+      "when": "condition:selectCompactTilt"
+    },
+    {
+      "priority": 37,
+      "table": "AsymmetricTilt",
+      "when": "condition:selectAsymmetricTilt"
+    }
+  ],
+  "digitalBindings": [
+    {
+      "when": "condition:ordinaryA",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT6",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:rf5Attack",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:ordinaryB",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LF4",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:thumb3RF3B",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:ordinaryX",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:thumb3RF1X",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:lf4RF2X",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF10",
+      "outputs": [
+        "buttonY"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:rf6Grab",
+      "outputs": [
+        "buttonR"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF16",
+      "outputs": [
+        "triggerRDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB7",
+      "outputs": [
+        "start"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB6",
+      "outputs": [
+        "select"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB5",
+      "outputs": [
+        "home"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB4",
+      "outputs": [
+        "capture"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT1",
+      "outputs": [
+        "buttonL",
+        "triggerLDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:lt2Shield",
+      "outputs": [
+        "buttonL",
+        "triggerLDigital",
+        "triggerRDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF12",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    }
+  ],
+  "analogEffects": [
+    {
+      "target": "leftStick",
+      "priority": 5,
+      "activation": "condition:commandActive",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "physicalLeft",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 200,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "ordinaryLeft",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 200,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "cStick",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            28,
+            28
+          ],
+          [
+            128,
+            28
+          ],
+          [
+            228,
+            28
+          ],
+          [
+            28,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            228,
+            128
+          ],
+          [
+            28,
+            228
+          ],
+          [
+            128,
+            228
+          ],
+          [
+            228,
+            228
+          ]
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 80,
+      "activation": "condition:ordinaryForcedVertical",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "forcedVertical",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Default",
+        "modeTable": "Default"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 60,
+      "activation": "condition:rf6OrdinaryAnalog",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "rf6Axes",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "RF6LowMagnitude",
+        "modeTable": "RF6LowMagnitude"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 100,
+      "activation": "condition:cDiagonal",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "cStick",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            86,
+            60
+          ],
+          [
+            128,
+            60
+          ],
+          [
+            170,
+            60
+          ],
+          [
+            86,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            170,
+            128
+          ],
+          [
+            86,
+            196
+          ],
+          [
+            128,
+            196
+          ],
+          [
+            170,
+            196
+          ]
+        ]
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 80,
+      "activation": "condition:rf3VerticalCWithHorizontal",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "angledC",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            95,
+            91
+          ],
+          [
+            128,
+            91
+          ],
+          [
+            161,
+            91
+          ],
+          [
+            95,
+            91
+          ],
+          [
+            128,
+            91
+          ],
+          [
+            161,
+            91
+          ],
+          [
+            95,
+            165
+          ],
+          [
+            128,
+            165
+          ],
+          [
+            161,
+            165
+          ]
+        ]
+      }
+    },
+    {
+      "target": "bothSticks",
+      "priority": 10,
+      "activation": "condition:nullSticks",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          128
+        ]
+      }
+    },
+    {
+      "target": "triggerL",
+      "priority": 200,
+      "activation": "finalDigital:triggerLDigital",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 140
+    },
+    {
+      "target": "triggerR",
+      "priority": 200,
+      "activation": "finalDigital:triggerRDigital",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 140
+    },
+    {
+      "target": "leftStick",
+      "priority": 20,
+      "activation": "postSocd:RF13",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Default",
+        "modeTable": "Default"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 50,
+      "activation": "condition:rf6OrdinaryAnalog",
+      "gate": "postSocd:LF2",
+      "gateInverted": true,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "rf6Axes",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            89,
+            89
+          ],
+          [
+            128,
+            79
+          ],
+          [
+            167,
+            89
+          ],
+          [
+            79,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            177,
+            128
+          ],
+          [
+            89,
+            167
+          ],
+          [
+            128,
+            177
+          ],
+          [
+            167,
+            167
+          ]
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 2,
+      "activation": "postSocd:LT6",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          51
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 1,
+      "activation": "postSocd:RF12",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          128
+        ]
+      }
+    }
+  ],
+  "digitalPostMask": {
+    "gate": "true",
+    "set": [],
+    "clear": [],
+    "inverted": false
+  },
+  "metadata": {
+    "description": "Kazuya v4: revised CD/release neutral, semantic LT2 defensive cancel, LT6 Down+A and RF12 neutral+A. Gameplay NOT_TESTED.",
+    "character": "Kazuya"
+  }
+}

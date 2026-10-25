@@ -1,0 +1,1537 @@
+{
+  "status": "HOST_VERIFIED",
+  "classification": "PROFILE_ONLY; owner-authorized conditional one-CREATE device operation is separate",
+  "behavioral_baseline_commit": "b2d72b1367ea6c350574727168cdc8b5c2ce3f1d",
+  "live_configurator_at_start": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
+  "branch": "codex/kazuya-v4-profile",
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "owner_authority": "Direct Glyph Kazuya v4 work order in this chat: closed raw-coordinate/output graph, complete native verification, independent review, feature commit/push and at most one new KazTest4 CREATE after fresh preflight. No UPDATE/DELETE, Config/reference write, firmware change/flash, canonical merge, Crouch Jab loop or gameplay acceptance.",
+  "source_sha256": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434",
+  "protobuf_json_sha256": "76df425640e1d435b55a9d72facfcb80b94277921619b17e7ce13b0fbfa4da72",
+  "compile_report": {
+    "profile_name": "KazTest4",
+    "format_version": 1,
+    "declared_tables": [
+      "AsymmetricTilt",
+      "CDArmed",
+      "CDCNeutral",
+      "CompactTilt",
+      "Default",
+      "DownDiagonal",
+      "FlippedHorizontal41",
+      "FlippedTilt",
+      "FlippedTilt41",
+      "ForcedDown",
+      "Horizontal35",
+      "Horizontal41",
+      "Horizontal46",
+      "LT2DefensiveDownBack",
+      "RF6LowMagnitude",
+      "RF7ReleaseNeutral",
+      "SpringloadUp",
+      "VerticalAsymmetric"
+    ],
+    "table_slots": {
+      "AsymmetricTilt": 13,
+      "CDArmed": 4,
+      "CDCNeutral": 3,
+      "CompactTilt": 12,
+      "Default": 0,
+      "DownDiagonal": 2,
+      "FlippedHorizontal41": 10,
+      "FlippedTilt": 11,
+      "FlippedTilt41": 14,
+      "ForcedDown": 1,
+      "Horizontal35": 6,
+      "Horizontal41": 9,
+      "Horizontal46": 7,
+      "LT2DefensiveDownBack": 17,
+      "RF6LowMagnitude": 15,
+      "RF7ReleaseNeutral": 5,
+      "SpringloadUp": 16,
+      "VerticalAsymmetric": 8
+    },
+    "neutral_filled_slots": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "condition_count": 70,
+    "token_count": 234,
+    "direction_source_count": 7,
+    "table_rule_count": 17,
+    "digital_binding_count": 19,
+    "analog_effect_count": 14,
+    "body_bytes": 1979,
+    "wrapper_bytes": 1984,
+    "preprocessing_sha256": "3bd30c1151a171c5693319f534772e0427d3d177fcaaa15f823eecf75a25f51f",
+    "provenance_sha256": "cf8132314b1bf75392761b550f2149d329ce132e79499626fdafcccec87ea01c",
+    "provenance_kind": "authoredSourceV1",
+    "body_sha256": "a8b03ed4952f4ea81317ca2053830925e751a2647b05a5777b01a82d40e349d2",
+    "wrapper_sha256": "46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c"
+  },
+  "resources": {
+    "declared_tables": {
+      "actual": 18,
+      "limit": 28,
+      "headroom": 10
+    },
+    "condition_count": {
+      "actual": 70,
+      "limit": 96,
+      "headroom": 26
+    },
+    "token_count": {
+      "actual": 234,
+      "limit": 768,
+      "headroom": 534
+    },
+    "direction_source_count": {
+      "actual": 7,
+      "limit": 8,
+      "headroom": 1
+    },
+    "table_rule_count": {
+      "actual": 17,
+      "limit": 32,
+      "headroom": 15
+    },
+    "digital_binding_count": {
+      "actual": 19,
+      "limit": 32,
+      "headroom": 13
+    },
+    "analog_effect_count": {
+      "actual": 14,
+      "limit": 16,
+      "headroom": 2
+    },
+    "body_bytes": {
+      "actual": 1979,
+      "limit": 3336,
+      "headroom": 1357
+    }
+  },
+  "command_matrix": [
+    {
+      "inputs": "none",
+      "geometry": "Default / retained modifiers",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF5",
+      "geometry": "pure Up",
+      "rf5_rf6_contribution": "A"
+    },
+    {
+      "inputs": "RF6",
+      "geometry": "ordinary RF6; physical7/8/9 pure Up",
+      "rf5_rf6_contribution": "Z"
+    },
+    {
+      "inputs": "RF5+RF6",
+      "geometry": "pure Up",
+      "rf5_rf6_contribution": "A, no Z"
+    },
+    {
+      "inputs": "RF7",
+      "geometry": "exact neutral",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF7+RF5",
+      "geometry": "pure Up",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF7+RF6",
+      "geometry": "Default physical",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF7+RF5+RF6",
+      "geometry": "pure Up",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF8",
+      "geometry": "ForcedDown",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF8+RF5",
+      "geometry": "DownDiagonal",
+      "rf5_rf6_contribution": "A"
+    },
+    {
+      "inputs": "RF8+RF6",
+      "geometry": "DownDiagonal",
+      "rf5_rf6_contribution": "Z"
+    },
+    {
+      "inputs": "RF8+RF5+RF6",
+      "geometry": "DownDiagonal",
+      "rf5_rf6_contribution": "A, no Z"
+    },
+    {
+      "inputs": "RF8+RF7",
+      "geometry": "CDArmed: down by physical horizontal",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF8+RF7+RF5",
+      "geometry": "exact neutral",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF8+RF7+RF6",
+      "geometry": "exact neutral",
+      "rf5_rf6_contribution": "none"
+    },
+    {
+      "inputs": "RF8+RF7+RF5+RF6",
+      "geometry": "exact neutral",
+      "rf5_rf6_contribution": "none"
+    }
+  ],
+  "table_inventory": {
+    "Default": {
+      "slot": 0,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
+      }
+    },
+    "ForcedDown": {
+      "slot": 1,
+      "directions": {
+        "1": [
+          128,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          128,
+          51
+        ],
+        "4": [
+          128,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          128,
+          51
+        ],
+        "7": [
+          128,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          128,
+          51
+        ]
+      }
+    },
+    "DownDiagonal": {
+      "slot": 2,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "CDCNeutral": {
+      "slot": 3,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    },
+    "Horizontal35": {
+      "slot": 6,
+      "directions": {
+        "1": [
+          93,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          163,
+          51
+        ],
+        "4": [
+          93,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          163,
+          128
+        ],
+        "7": [
+          93,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          163,
+          205
+        ]
+      }
+    },
+    "Horizontal46": {
+      "slot": 7,
+      "directions": {
+        "1": [
+          82,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          174,
+          51
+        ],
+        "4": [
+          82,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          174,
+          128
+        ],
+        "7": [
+          82,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          174,
+          205
+        ]
+      }
+    },
+    "VerticalAsymmetric": {
+      "slot": 8,
+      "directions": {
+        "1": [
+          69,
+          78
+        ],
+        "2": [
+          128,
+          78
+        ],
+        "3": [
+          187,
+          78
+        ],
+        "4": [
+          61,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          195,
+          128
+        ],
+        "7": [
+          61,
+          164
+        ],
+        "8": [
+          128,
+          174
+        ],
+        "9": [
+          195,
+          164
+        ]
+      }
+    },
+    "Horizontal41": {
+      "slot": 9,
+      "directions": {
+        "1": [
+          87,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          169,
+          51
+        ],
+        "4": [
+          87,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          169,
+          128
+        ],
+        "7": [
+          87,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          169,
+          205
+        ]
+      }
+    },
+    "FlippedHorizontal41": {
+      "slot": 10,
+      "directions": {
+        "1": [
+          169,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          87,
+          51
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          87,
+          205
+        ]
+      }
+    },
+    "FlippedTilt": {
+      "slot": 11,
+      "directions": {
+        "1": [
+          187,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          69,
+          47
+        ],
+        "4": [
+          187,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          69,
+          128
+        ],
+        "7": [
+          187,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          69,
+          209
+        ]
+      }
+    },
+    "CompactTilt": {
+      "slot": 12,
+      "directions": {
+        "1": [
+          88,
+          79
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          168,
+          79
+        ],
+        "4": [
+          88,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          168,
+          128
+        ],
+        "7": [
+          88,
+          177
+        ],
+        "8": [
+          128,
+          177
+        ],
+        "9": [
+          168,
+          177
+        ]
+      }
+    },
+    "AsymmetricTilt": {
+      "slot": 13,
+      "directions": {
+        "1": [
+          69,
+          82
+        ],
+        "2": [
+          128,
+          83
+        ],
+        "3": [
+          187,
+          82
+        ],
+        "4": [
+          69,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          187,
+          128
+        ],
+        "7": [
+          76,
+          169
+        ],
+        "8": [
+          128,
+          179
+        ],
+        "9": [
+          180,
+          169
+        ]
+      }
+    },
+    "FlippedTilt41": {
+      "slot": 14,
+      "directions": {
+        "1": [
+          169,
+          47
+        ],
+        "2": [
+          128,
+          47
+        ],
+        "3": [
+          87,
+          47
+        ],
+        "4": [
+          169,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          87,
+          128
+        ],
+        "7": [
+          169,
+          209
+        ],
+        "8": [
+          128,
+          209
+        ],
+        "9": [
+          87,
+          209
+        ]
+      }
+    },
+    "RF6LowMagnitude": {
+      "slot": 15,
+      "directions": {
+        "1": [
+          89,
+          89
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          167,
+          89
+        ],
+        "4": [
+          79,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          177,
+          128
+        ],
+        "7": [
+          128,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          128,
+          205
+        ]
+      }
+    },
+    "CDArmed": {
+      "slot": 4,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          128,
+          51
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "RF7ReleaseNeutral": {
+      "slot": 5,
+      "directions": {
+        "1": [
+          128,
+          128
+        ],
+        "2": [
+          128,
+          128
+        ],
+        "3": [
+          128,
+          128
+        ],
+        "4": [
+          128,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          128,
+          128
+        ],
+        "7": [
+          128,
+          128
+        ],
+        "8": [
+          128,
+          128
+        ],
+        "9": [
+          128,
+          128
+        ]
+      }
+    },
+    "SpringloadUp": {
+      "slot": 16,
+      "directions": {
+        "1": [
+          128,
+          205
+        ],
+        "2": [
+          128,
+          205
+        ],
+        "3": [
+          128,
+          205
+        ],
+        "4": [
+          128,
+          205
+        ],
+        "5": [
+          128,
+          205
+        ],
+        "6": [
+          128,
+          205
+        ],
+        "7": [
+          128,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          128,
+          205
+        ]
+      }
+    },
+    "LT2DefensiveDownBack": {
+      "slot": 17,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          128,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          195,
+          51
+        ],
+        "5": [
+          128,
+          51
+        ],
+        "6": [
+          61,
+          51
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          128,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
+      }
+    }
+  },
+  "table_rules": [
+    {
+      "priority": 1,
+      "table": "CDCNeutral",
+      "when": "condition:neutralCommand"
+    },
+    {
+      "priority": 2,
+      "table": "LT2DefensiveDownBack",
+      "when": "condition:lt2DefensiveDownBack"
+    },
+    {
+      "priority": 3,
+      "table": "CDArmed",
+      "when": "condition:cdArmed"
+    },
+    {
+      "priority": 4,
+      "table": "DownDiagonal",
+      "when": "condition:downDiagonalCommand"
+    },
+    {
+      "priority": 5,
+      "table": "ForcedDown",
+      "when": "condition:forcedDown"
+    },
+    {
+      "priority": 6,
+      "table": "SpringloadUp",
+      "when": "condition:springloadUp"
+    },
+    {
+      "priority": 7,
+      "table": "Default",
+      "when": "condition:springloadGrab"
+    },
+    {
+      "priority": 8,
+      "table": "RF7ReleaseNeutral",
+      "when": "condition:rf7ReleaseNeutral"
+    },
+    {
+      "priority": 20,
+      "table": "FlippedTilt41",
+      "when": "condition:rf4RF2Flipped41"
+    },
+    {
+      "priority": 30,
+      "table": "Horizontal35",
+      "when": "condition:selectHorizontal35"
+    },
+    {
+      "priority": 31,
+      "table": "Horizontal46",
+      "when": "condition:selectHorizontal46"
+    },
+    {
+      "priority": 32,
+      "table": "VerticalAsymmetric",
+      "when": "condition:selectVerticalAsymmetric"
+    },
+    {
+      "priority": 33,
+      "table": "Horizontal41",
+      "when": "condition:selectHorizontal41"
+    },
+    {
+      "priority": 34,
+      "table": "FlippedHorizontal41",
+      "when": "condition:selectFlippedHorizontal41"
+    },
+    {
+      "priority": 35,
+      "table": "FlippedTilt",
+      "when": "condition:selectFlippedTilt"
+    },
+    {
+      "priority": 36,
+      "table": "CompactTilt",
+      "when": "condition:selectCompactTilt"
+    },
+    {
+      "priority": 37,
+      "table": "AsymmetricTilt",
+      "when": "condition:selectAsymmetricTilt"
+    }
+  ],
+  "analogue_effects": [
+    {
+      "target": "leftStick",
+      "priority": 5,
+      "activation": "condition:commandActive",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "physicalLeft",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 200,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "ordinaryLeft",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 200,
+      "activation": "true",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "cStick",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            28,
+            28
+          ],
+          [
+            128,
+            28
+          ],
+          [
+            228,
+            28
+          ],
+          [
+            28,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            228,
+            128
+          ],
+          [
+            28,
+            228
+          ],
+          [
+            128,
+            228
+          ],
+          [
+            228,
+            228
+          ]
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 80,
+      "activation": "condition:ordinaryForcedVertical",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "forcedVertical",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Default",
+        "modeTable": "Default"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 60,
+      "activation": "condition:rf6OrdinaryAnalog",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "rf6Axes",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "RF6LowMagnitude",
+        "modeTable": "RF6LowMagnitude"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 100,
+      "activation": "condition:cDiagonal",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "cStick",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            86,
+            60
+          ],
+          [
+            128,
+            60
+          ],
+          [
+            170,
+            60
+          ],
+          [
+            86,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            170,
+            128
+          ],
+          [
+            86,
+            196
+          ],
+          [
+            128,
+            196
+          ],
+          [
+            170,
+            196
+          ]
+        ]
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 80,
+      "activation": "condition:rf3VerticalCWithHorizontal",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "angledC",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            95,
+            91
+          ],
+          [
+            128,
+            91
+          ],
+          [
+            161,
+            91
+          ],
+          [
+            95,
+            91
+          ],
+          [
+            128,
+            91
+          ],
+          [
+            161,
+            91
+          ],
+          [
+            95,
+            165
+          ],
+          [
+            128,
+            165
+          ],
+          [
+            161,
+            165
+          ]
+        ]
+      }
+    },
+    {
+      "target": "bothSticks",
+      "priority": 10,
+      "activation": "condition:nullSticks",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          128
+        ]
+      }
+    },
+    {
+      "target": "triggerL",
+      "priority": 200,
+      "activation": "finalDigital:triggerLDigital",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 140
+    },
+    {
+      "target": "triggerR",
+      "priority": 200,
+      "activation": "finalDigital:triggerRDigital",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "value": 140
+    },
+    {
+      "target": "leftStick",
+      "priority": 20,
+      "activation": "postSocd:RF13",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "Default",
+        "modeTable": "Default"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 50,
+      "activation": "condition:rf6OrdinaryAnalog",
+      "gate": "postSocd:LF2",
+      "gateInverted": true,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "rf6Axes",
+      "coordinates": {
+        "mode": "inline",
+        "points": [
+          [
+            89,
+            89
+          ],
+          [
+            128,
+            79
+          ],
+          [
+            167,
+            89
+          ],
+          [
+            79,
+            128
+          ],
+          [
+            128,
+            128
+          ],
+          [
+            177,
+            128
+          ],
+          [
+            89,
+            167
+          ],
+          [
+            128,
+            177
+          ],
+          [
+            167,
+            167
+          ]
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 2,
+      "activation": "postSocd:LT6",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          51
+        ]
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 1,
+      "activation": "postSocd:RF12",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          128
+        ]
+      }
+    }
+  ],
+  "digital_bindings": [
+    {
+      "when": "condition:ordinaryA",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT6",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:rf5Attack",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:ordinaryB",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LF4",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:thumb3RF3B",
+      "outputs": [
+        "buttonB"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:ordinaryX",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:thumb3RF1X",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:lf4RF2X",
+      "outputs": [
+        "buttonX"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF10",
+      "outputs": [
+        "buttonY"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:rf6Grab",
+      "outputs": [
+        "buttonR"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF16",
+      "outputs": [
+        "triggerRDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB7",
+      "outputs": [
+        "start"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB6",
+      "outputs": [
+        "select"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB5",
+      "outputs": [
+        "home"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:MB4",
+      "outputs": [
+        "capture"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT1",
+      "outputs": [
+        "buttonL",
+        "triggerLDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:lt2Shield",
+      "outputs": [
+        "buttonL",
+        "triggerLDigital",
+        "triggerRDigital"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:RF12",
+      "outputs": [
+        "buttonA"
+      ],
+      "winnerTable": "any"
+    }
+  ],
+  "test_results": {
+    "authoring_v0": "17/17 PASS",
+    "authoring_v1": "23/23 PASS",
+    "v1_native": "6/6 PASS",
+    "v2_native": "8/8 PASS",
+    "v3_native": "11/11 PASS",
+    "v4_native": "11/11 PASS",
+    "independent_v4_native": "11/11 PASS"
+  },
+  "geometry_authority": "All raw points already exist in frozen tools/fixtures/kazuya/coordinate-evidence.json. V4 assignments and direction5 defensive Down fallback are explicitly owner-approved candidate semantics; no Cartesian approximation or game-engine inference.",
+  "preprocessing_changed": false,
+  "firmware_changed": false,
+  "historical_artifacts_changed": false,
+  "crouch_jab_loop_implemented": false,
+  "upload_snapshot": "NOT_ATTEMPTED; fresh preflight required",
+  "gameplay": "NOT_TESTED",
+  "nunchuk": "NOT_TESTED",
+  "canonical_merge": false
+}

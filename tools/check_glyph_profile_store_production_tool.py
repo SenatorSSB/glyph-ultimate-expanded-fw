@@ -74,11 +74,12 @@ def main():
       yes(sequence==[('status_preflight',False),('create',True)],'receipt precedes one mutation; no retry')
       yes(len(directory_sync)>=3,'receipt file and parent directory are fsynced before mutation')
       # Existing protocol operations10/9 have their own explicit fences and no payload.
-      for action in ('set-reference','delete'):
+      for action in ('set-reference','delete','rename'):
         argv=['--port','UNOPENED','--journal-out',str(d/(action+'.jsonl')),action,'--profile-id','99','--token','101','--incarnation','1','--store-generation','166','--request-out',str(d/(action+'.json'))]
         if action=='set-reference':argv+=['--mode-index','0','--config-generation','77']
+        if action=='rename':argv+=['--name','Pikachu']
         args=tool.parse_args(argv); message=tool.build_message(args,pb,jf)
-        yes(message.operation==(10 if action=='set-reference' else 9) and message.profile_id==99 and not message.HasField('profile'),'existing bounded operation/no payload')
+        yes(message.operation=={'set-reference':10,'delete':9,'rename':7}[action] and message.profile_id==99 and not message.HasField('profile'),'existing bounded operation/no payload')
         status=pb.ProfileStoreResponse();status.CopyFrom(healthy);status.transaction_token_high_water=100;status.config_generation=77
         tool.verify_production_status(args,pb,status)
         if action=='set-reference':
@@ -90,6 +91,15 @@ def main():
           for flag in ('--mode-index','--config-generation','--profile-id'):
             missing=argv.copy();i=missing.index(flag);del missing[i:i+2];yes(rejected(missing),'missing explicit reference '+flag)
         yes(rejected([*argv,'--profile-json',str(profile)]),'reference/delete reject body')
+        if action=='rename':
+          for bad in [pb.ProfileStoreResponse(status=pb.PROFILE_STORE_OK,request_token=args.token+1,profile_id=99),pb.ProfileStoreResponse(status=pb.PROFILE_STORE_OK,request_token=args.token,profile_id=27),pb.ProfileStoreResponse(status=pb.PROFILE_STORE_CONFLICT,request_token=args.token,profile_id=99)]:
+            try:tool.validate_result(args,pb,bad)
+            except transport.ToolError:pass
+            else:raise AssertionError('rename wrong token/ID/non-OK response accepted')
+          yes(message.name=='Pikachu' and not message.display_rank and not message.expected_profile_revision,'rename only metadata name; rank/revision absent')
+          for flag,value in [('--rank','9'),('--profile-revision','1')]:yes(rejected([*argv,flag,value]),'rename cannot misleadingly change '+flag)
+          missing=argv.copy();i=missing.index('--name');del missing[i:i+2];yes(rejected(missing),'rename requires explicit name')
+          for name in ['x'*33,'bad\0name']:bad=argv.copy();bad[bad.index('--name')+1]=name;yes(rejected(bad),'invalid rename name')
         calls=[]
         def checked_request(_port,_pb,m,**kwargs):
           calls.append((m.operation,(d/(action+'.json')).exists()))
@@ -98,6 +108,15 @@ def main():
         with patch.object(tool.transport,'PosixSerialPort',Port),patch.object(tool.candidate_transport,'request',checked_request):
           yes(tool.main(argv)==0,'checked existing operation succeeds')
         yes([x for x in calls if isinstance(x,tuple)]==[(pb.PROFILE_STORE_STATUS,False),(message.operation,True)],'checked reference/delete immutable receipt before exactly one mutation')
+      rename_argv=['--port','UNOPENED','--journal-out',str(d/'rename-uncertain.jsonl'),'rename','--profile-id','99','--name','Kazuya','--token','101','--incarnation','1','--store-generation','166','--request-out',str(d/'rename-uncertain.json')]
+      rename_calls=[]
+      def uncertain_rename(_port,_pb,message,**kwargs):
+        rename_calls.append(message.operation)
+        if message.operation==pb.PROFILE_STORE_STATUS:return status
+        yes((d/'rename-uncertain.json').exists(),'rename immutable receipt precedes send')
+        raise transport.ToolError('rename acknowledgement lost; outcome unknown')
+      with patch.object(tool.transport,'PosixSerialPort',Port),patch.object(tool.candidate_transport,'request',uncertain_rename):yes(tool.main(rename_argv)==1,'uncertain rename stops')
+      yes(rename_calls==[pb.PROFILE_STORE_STATUS,pb.PROFILE_STORE_RENAME],'rename emits at most one mutation; no retry')
       # Native/compact context path changes only one existing row's preprocessing.
       # The old legacy fixture binding validator is deliberately still strict.
       from check_glyph_stage_b_ultimate_profiles import make_v3_artifact

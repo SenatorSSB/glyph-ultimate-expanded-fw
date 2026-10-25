@@ -1,5 +1,21 @@
 # Glyph Roadmap
 
+## Accepted v4 baseline; controller cleanup awaits approval — 2026-10-25
+
+Canonical `profiles/kazuya/Kazuya.profile.json` is the exact accepted v4 source
+from5e30341e, wrapperSHA25646084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c.
+ID51/revision1/KazTest4 is host verified, installed/readback verified and
+GAMEPLAY_ACCEPTED by owner report. V1-v4 history and archival Ultimate remain
+exact. [Chapter evidence and publication](runtime_config/accepted_character_profiles/README.md)
+record source→binary→ID51→gameplay correspondence and validation/review.
+This profile-only adoption changes no firmware and performs no device mutation.
+Future packetACP-20261025-01 targets ID27 Pikachu andID51 Kazuya with unchanged
+payloads/ranks/revisions via owner-approved existing RENAME7, then deletes only
+verified unreferenced experiments48/49/50 after separate approval. Current names/
+records remain unchanged; ID51 remains referenced. Crouch Jab and unapproved
+optimizations remain deferred; Nunchuk NOT_TESTED. Earlier checkpoints below
+retain their original chronology and do not override this accepted baseline.
+
 ## Exact tested character-profile menu source integration
 
 Genuine integration `b8f9d14079e0930e2e4616c2df7923be564255f6` joins source-free
