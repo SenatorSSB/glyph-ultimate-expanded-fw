@@ -1,0 +1,542 @@
+[
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h",
+    "expected": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412",
+    "actual": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp",
+    "expected": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "actual": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_private.cpp",
+    "expected": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "actual": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp",
+    "expected": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+    "actual": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/time.c",
+    "expected": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04",
+    "actual": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/include/pico/time.h",
+    "expected": "04ccda2a581b8b92323da7dfc75cf3dfe44dbf165cb3367ac87e0678d8c949ce",
+    "actual": "04ccda2a581b8b92323da7dfc75cf3dfe44dbf165cb3367ac87e0678d8c949ce",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_util/pheap.c",
+    "expected": "1d156a619e668dd4bd3aca6974b0b28ad74257d73689fa66a59c5edfd261fea4",
+    "actual": "1d156a619e668dd4bd3aca6974b0b28ad74257d73689fa66a59c5edfd261fea4",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_util/include/pico/util/pheap.h",
+    "expected": "e0776e1792373f146cba0449cdeebe01ebc79b98bd152350223295a5d8a4b47d",
+    "actual": "e0776e1792373f146cba0449cdeebe01ebc79b98bd152350223295a5d8a4b47d",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_irq/irq.c",
+    "expected": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36",
+    "actual": "a8ce7f79e707f3c41f8a2a062a6f7b8954bdef6cd834973a0b779f9f7a21bf36",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_timer/timer.c",
+    "expected": "b275a48c63d9e276cebb05b84cc37842146b08ba766dadcc243580f52b0b0e67",
+    "actual": "b275a48c63d9e276cebb05b84cc37842146b08ba766dadcc243580f52b0b0e67",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_mem_ops/mem_ops_aeabi.S",
+    "expected": "6fd48c4250c947bfa2d9a199836cc7062136a13b828092d026444a1e8d606284",
+    "actual": "6fd48c4250c947bfa2d9a199836cc7062136a13b828092d026444a1e8d606284",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_flash/flash.c",
+    "expected": "ad7af777d6f600bc718ee455a82638a14bcb20ccef93440e4c85df2e571840ed",
+    "actual": "ad7af777d6f600bc718ee455a82638a14bcb20ccef93440e4c85df2e571840ed",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c",
+    "expected": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28",
+    "actual": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/m0plus.h",
+    "expected": "0695fb33d8d04ba4280f02e6a829514689528a505a75eba9d78a7ad97ea50518",
+    "actual": "0695fb33d8d04ba4280f02e6a829514689528a505a75eba9d78a7ad97ea50518",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/class/cdc/cdc_device.c",
+    "expected": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+    "actual": "adeeb7fe83e70f7cce0eef67dbcbda1f47eb9006d5c2160bea6edaaf8bb34f6f",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.c",
+    "expected": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5",
+    "actual": "9d396893a091ca04945e8784b8e21c283c4cdd595ccb1210d0b6938e80b8c8b5",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/common/tusb_fifo.h",
+    "expected": "e6be10be98e632a4e07a9bece593d7bb83caebd50d95a7561a99c585be44e4d2",
+    "actual": "e6be10be98e632a4e07a9bece593d7bb83caebd50d95a7561a99c585be44e4d2",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd.c",
+    "expected": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "actual": "c39f68050719aaa803b193206baf117cfe6e763e47065ed1ffbab745ada173a4",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/device/usbd_control.c",
+    "expected": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c",
+    "actual": "53876e35d899d584a3a15563c6548ecb1596c620a989a766889f17942aa4215c",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/osal/osal_pico.h",
+    "expected": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192",
+    "actual": "fae15a1c7f4fc2911e04243c5506ca44cd470ed202343498fb30993e8df02192",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/ports/rp2040/Adafruit_TinyUSB_rp2040.cpp",
+    "expected": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "actual": "ac9a2397254aafc498ad1d1eb59d0a8291c6943f9261369b8c49b09c19691c3a",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/arduino/Adafruit_USBD_Device.cpp",
+    "expected": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597",
+    "actual": "eec9057db61afaf73768df4a4fad020d1f28ca7d62cfbbfafa6b118776494597",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/dcd_rp2040.c",
+    "expected": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "actual": "92a74cc04eef498a9523b3980c4b6b704990bff40531e23bb7ca490dd3358b12",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Adafruit_TinyUSB_Arduino/src/portable/raspberrypi/rp2040/rp2040_usb.c",
+    "expected": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6",
+    "actual": "81c24999f3ec9918723d4494619a9abdb2733a21d4bf39573a7c60eb461c5de6",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h",
+    "expected": "41b87aaa9f719f051473c2fdb4b8661fc8b24bc7ff4d55ff0816818bbe8606bb",
+    "actual": "41b87aaa9f719f051473c2fdb4b8661fc8b24bc7ff4d55ff0816818bbe8606bb",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/nes-pio/src/NesConsole.cpp",
+    "expected": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b",
+    "actual": "f09c1289d2c61c4be0b737cbb0aed59581ba55efb21d9dd7ff59000acf69140b",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/nes-pio/src/SnesConsole.cpp",
+    "expected": "fe179cb1f880f1238e09fd43d054eb54718b1a2c5ac73a81e1878f078914a55e",
+    "actual": "fe179cb1f880f1238e09fd43d054eb54718b1a2c5ac73a81e1878f078914a55e",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/Adafruit_TinyUSB_XInput/src/Adafruit_USBD_XInput.cpp",
+    "expected": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f",
+    "actual": "ea35e3cbec69d1a60ab980a5bbce1350be16ae9faf83bc15e59112e68067491f",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.c",
+    "expected": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5",
+    "actual": "8c28c80018293820d5400759f4918359b09d869c1a1240959b0647cc844783b5",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs.h",
+    "expected": "bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a",
+    "actual": "bece5357a4721c826c3d25ffab83962986a92f929fcf2d06bc9d66b5be2a3f3a",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs_util.h",
+    "expected": "825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33",
+    "actual": "825e70edbe8839dc814fb41ad950c191035e6fa5b697a90ee7fa2b287e360c33",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/lfs_util.c",
+    "expected": "8e1376a90e923a2897388a54ebaa756ad3ea07a0e2a87e73c0045515c0a82685",
+    "actual": "8e1376a90e923a2897388a54ebaa756ad3ea07a0e2a87e73c0045515c0a82685",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.h",
+    "expected": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9",
+    "actual": "6036f92f824ee8257da051ed37fe01e7dfdedece33c772ae6321036dc0f412f9",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/src/LittleFS.cpp",
+    "expected": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+    "actual": "dfc032cc49b5254abc204b67a2aa56156d28e39b5adbb3b70c2e291667c70e5d",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_divider/divider.S",
+    "expected": "b71ec8c9a7277465806517df754e2fe178ead579133552f8942d29aa3bb612f8",
+    "actual": "b71ec8c9a7277465806517df754e2fe178ead579133552f8942d29aa3bb612f8",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_flash/flash.c",
+    "expected": "ad7af777d6f600bc718ee455a82638a14bcb20ccef93440e4c85df2e571840ed",
+    "actual": "ad7af777d6f600bc718ee455a82638a14bcb20ccef93440e4c85df2e571840ed",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/malloc-lock.cpp",
+    "expected": "532acda747dc6700283599e5a7ecee2a12335d164388cef55b9002205950fb98",
+    "actual": "532acda747dc6700283599e5a7ecee2a12335d164388cef55b9002205950fb98",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.cpp",
+    "expected": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50",
+    "actual": "cfde210641c927435f7ba828c9062e42150d586329f14442246832ba6ab8de50",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/FS.h",
+    "expected": "c188a6b49d593855d839162dd112c6a81ef4142dd5da82d59dcb983916521763",
+    "actual": "c188a6b49d593855d839162dd112c6a81ef4142dd5da82d59dcb983916521763",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/stdlib_noniso.cpp",
+    "expected": "554bad74361de017b8f29977ed7f072868dc5f11c34dddebcb2d63065261c6a7",
+    "actual": "554bad74361de017b8f29977ed7f072868dc5f11c34dddebcb2d63065261c6a7",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/package.json",
+    "expected": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+    "actual": "0aa78013e54caef261f2fd38b12ac84ce16c8f1e5dcba5660be6846e888c8960",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_private.cpp",
+    "expected": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "actual": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/lock.cpp",
+    "expected": "ea7cdc3df66c1cd83521fdfa544c2122eb950ceac1394a81fdc4b0bb2d70fe44",
+    "actual": "ea7cdc3df66c1cd83521fdfa544c2122eb950ceac1394a81fdc4b0bb2d70fe44",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/CoreMutex.cpp",
+    "expected": "f4975882d07274392618651da550ceffe39eb4c85171a00a54245f1a13345d28",
+    "actual": "f4975882d07274392618651da550ceffe39eb4c85171a00a54245f1a13345d28",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/LittleFS/lib/littlefs/LICENSE.md",
+    "expected": "0cb4ff1daf5fdc1359c6a6ee3116092f08fc100c9d58b1b77ab17bfd801f856d",
+    "actual": "0cb4ff1daf5fdc1359c6a6ee3116092f08fc100c9d58b1b77ab17bfd801f856d",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/main.cpp",
+    "expected": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "actual": "c715e100f362b7520ed11348b9e446d9f451432a2fabce07766b14dd9f5f0fe3",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/lock.cpp",
+    "expected": "ea7cdc3df66c1cd83521fdfa544c2122eb950ceac1394a81fdc4b0bb2d70fe44",
+    "actual": "ea7cdc3df66c1cd83521fdfa544c2122eb950ceac1394a81fdc4b0bb2d70fe44",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/CoreMutex.cpp",
+    "expected": "f4975882d07274392618651da550ceffe39eb4c85171a00a54245f1a13345d28",
+    "actual": "f4975882d07274392618651da550ceffe39eb4c85171a00a54245f1a13345d28",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/wiring_private.cpp",
+    "expected": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "actual": "7486696cf7065981fdb9e405cac176b3fe5c713248e56d0270bc0a82a3ba44ec",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/RP2040Support.h",
+    "expected": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412",
+    "actual": "f9aebd5a7e47ca82a6ff2f38f5bde74f048f8cac668e02df84752c29ccb01412",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/cores/rp2040/_freertos.cpp",
+    "expected": "5c303917a9bd65b1e9e526f345e65f5c640c31016e0d73a851b03fec4d9edcec",
+    "actual": "5c303917a9bd65b1e9e526f345e65f5c640c31016e0d73a851b03fec4d9edcec",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/ArduinoCore-API/api/Print.cpp",
+    "expected": "cd47ebb985cd77e7cf8070e6f75617101c3bdfe6bde3e449e03066b7bf5452a2",
+    "actual": "cd47ebb985cd77e7cf8070e6f75617101c3bdfe6bde3e449e03066b7bf5452a2",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/libraries/Wire/src/Wire.cpp",
+    "expected": "9ecbc63e404f7e493dc59a331cf7f7f49ded0fd02b426ade2b3f9cbb98dab370",
+    "actual": "9ecbc63e404f7e493dc59a331cf7f7f49ded0fd02b426ade2b3f9cbb98dab370",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_float/float_init_rom.c",
+    "expected": "e7dee510ae1e8521c9079df02bf32b56b3e3475eccfee97f7d36a741e340b81b",
+    "actual": "e7dee510ae1e8521c9079df02bf32b56b3e3475eccfee97f7d36a741e340b81b",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S",
+    "expected": "7cb8f566dd9584931865e050f3c21c69b05c0bd9f139acea1cd5cf6f2e9d0720",
+    "actual": "7cb8f566dd9584931865e050f3c21c69b05c0bd9f139acea1cd5cf6f2e9d0720",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_float/float_v1_rom_shim.S",
+    "expected": "cfcd3d8da268ace145dca449df15fc48a2b429c7c96767c1be2e993231837fac",
+    "actual": "cfcd3d8da268ace145dca449df15fc48a2b429c7c96767c1be2e993231837fac",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_divider/divider.S",
+    "expected": "b71ec8c9a7277465806517df754e2fe178ead579133552f8942d29aa3bb612f8",
+    "actual": "b71ec8c9a7277465806517df754e2fe178ead579133552f8942d29aa3bb612f8",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_pio/pio.c",
+    "expected": "64e1bf1b0cf9195c8a5b1981a41a003764cd203420fecf68867be9cca4cb93b1",
+    "actual": "64e1bf1b0cf9195c8a5b1981a41a003764cd203420fecf68867be9cca4cb93b1",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c",
+    "expected": "b457c40884a438f1843bfd29ba1cef3b8d10ba366f6615e0da7b6ddaa2865c39",
+    "actual": "b457c40884a438f1843bfd29ba1cef3b8d10ba366f6615e0da7b6ddaa2865c39",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_time/time.c",
+    "expected": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04",
+    "actual": "4b8971f5a4cda35a99b331948fcceb8b698aea81fef76db9cbe4dcbba7f17f04",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/common/pico_util/pheap.c",
+    "expected": "1d156a619e668dd4bd3aca6974b0b28ad74257d73689fa66a59c5edfd261fea4",
+    "actual": "1d156a619e668dd4bd3aca6974b0b28ad74257d73689fa66a59c5edfd261fea4",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/framework-arduinopico/pico-sdk/src/rp2_common/pico_multicore/multicore.c",
+    "expected": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28",
+    "actual": "b6c1e838be570742412419af531d64cef2b53e5ecc247e3bb71bb0836deeae28",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/Adafruit GFX Library/Adafruit_GFX.h",
+    "expected": "e4ace04cbed4499c0e2a80df33b381c87ce98689d98da82712f0748bf7359171",
+    "actual": "e4ace04cbed4499c0e2a80df33b381c87ce98689d98da82712f0748bf7359171",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/Adafruit GFX Library/Adafruit_GFX.cpp",
+    "expected": "5afa8ca16241a9a0cb354012dd00780c6c00620c345b810a9504cb77bfc698d5",
+    "actual": "5afa8ca16241a9a0cb354012dd00780c6c00620c345b810a9504cb77bfc698d5",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/Adafruit SSD1306/Adafruit_SSD1306.h",
+    "expected": "89c5e18cc19a41bd47130e1a4dc344733ad2bb6b6ef6c4c43eeddaf9854db6a2",
+    "actual": "89c5e18cc19a41bd47130e1a4dc344733ad2bb6b6ef6c4c43eeddaf9854db6a2",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/Adafruit SSD1306/Adafruit_SSD1306.cpp",
+    "expected": "ddbd788bfaf97dd3b5ba5ee67eb62ab51652cbe86e34c2e7d24d5e074bb34bdd",
+    "actual": "ddbd788bfaf97dd3b5ba5ee67eb62ab51652cbe86e34c2e7d24d5e074bb34bdd",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/FastLED/src/controller.h",
+    "expected": "a497daf1a292ec4348756edaff6921fcb964cb1b2661a06ff21c0ce5e2d69eef",
+    "actual": "a497daf1a292ec4348756edaff6921fcb964cb1b2661a06ff21c0ce5e2d69eef",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/FastLED/src/FastLED.cpp",
+    "expected": "dd166ec53ec3bfe6822d5c6c8b499525cb58d81a64fbb64f24a5fd9430e7c451",
+    "actual": "dd166ec53ec3bfe6822d5c6c8b499525cb58d81a64fbb64f24a5fd9430e7c451",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/FastLED/src/FastLED.h",
+    "expected": "eafa471439379478f1ec37e902a62621ea969861ea9b37ef01f2a8bde8c96c56",
+    "actual": "eafa471439379478f1ec37e902a62621ea969861ea9b37ef01f2a8bde8c96c56",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.pio/libdeps/glyph_mk6/FastLED/src/platforms/arm/rp2040/clockless_arm_rp2040.h",
+    "expected": "41b87aaa9f719f051473c2fdb4b8661fc8b24bc7ff4d55ff0816818bbe8606bb",
+    "actual": "41b87aaa9f719f051473c2fdb4b8661fc8b24bc7ff4d55ff0816818bbe8606bb",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-objdump",
+    "expected": "ff610289719538e7b277eb46438227ec6988b92e2471cd9c4610d8e82c49d615",
+    "actual": "ff610289719538e7b277eb46438227ec6988b92e2471cd9c4610d8e82c49d615",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/.platformio-home/packages/toolchain-rp2040-earlephilhower/bin/arm-none-eabi-nm",
+    "expected": "8318e247fd773691a0e18afd627054765ce7a22bbba1d7152fbc1f9b71e79fc2",
+    "actual": "8318e247fd773691a0e18afd627054765ce7a22bbba1d7152fbc1f9b71e79fc2",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/LICENSE",
+    "expected": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "actual": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/UPSTREAM.md",
+    "expected": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",
+    "actual": "2c03ff0daf3228ddd76602bfec0de59426bfc300bf098e4d40b30c43da7a18a6",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/GamecubeConsole.hpp",
+    "expected": "54d2ced01964d91c2f8858f62b0b0b083681ba57bb5698a716f68a00ca29f2fa",
+    "actual": "54d2ced01964d91c2f8858f62b0b0b083681ba57bb5698a716f68a00ca29f2fa",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/GamecubeController.hpp",
+    "expected": "60171271dc96bdc0e89a58379806a32d4bc9ac11772b7bef63bb34551f638e99",
+    "actual": "60171271dc96bdc0e89a58379806a32d4bc9ac11772b7bef63bb34551f638e99",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/N64Console.hpp",
+    "expected": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+    "actual": "1a7dd60cc45aa2d1db4143270b67d28a0249bb7d121076b7f5fc24351d703a9e",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/N64Controller.hpp",
+    "expected": "1b190c1db980b628376c8b2a70ce3928effe2fdfa6dd847fd2658b076ae980ef",
+    "actual": "1b190c1db980b628376c8b2a70ce3928effe2fdfa6dd847fd2658b076ae980ef",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/README",
+    "expected": "d1995176b3585fd998d0094d692fe9daf37b9dd6b3ef5dcd3b44914bf154dd9a",
+    "actual": "d1995176b3585fd998d0094d692fe9daf37b9dd6b3ef5dcd3b44914bf154dd9a",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/gamecube_definitions.h",
+    "expected": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+    "actual": "acd49623d248fc2ff73f3cb7156e2f0b68aea15c16e8c1494e0d5c640fbea9b2",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/joybus.h",
+    "expected": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+    "actual": "0404672b2a215b251252b78cca996b1cc41e8db24a4effb814d858ee342032ce",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/joybus.pio.h",
+    "expected": "22ef77997e80d886f058484c06b9cf6521682dbdf10c40d8225e15ca028519e3",
+    "actual": "22ef77997e80d886f058484c06b9cf6521682dbdf10c40d8225e15ca028519e3",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/include/n64_definitions.h",
+    "expected": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+    "actual": "88f7a08d7a78a471fa08dab45ea40979748ee78edc404deacb59caade2f217ef",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/library.json",
+    "expected": "30ad48b1bb69e5019f4ea94d948c90bea29a478df72f28d52066fa7e8b842b99",
+    "actual": "30ad48b1bb69e5019f4ea94d948c90bea29a478df72f28d52066fa7e8b842b99",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/src/GamecubeConsole.cpp",
+    "expected": "ab05eed54f34138ef2693c724eb6607a99e453a921bf6d308845739b5d7e09a1",
+    "actual": "ab05eed54f34138ef2693c724eb6607a99e453a921bf6d308845739b5d7e09a1",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/src/GamecubeController.cpp",
+    "expected": "d2a57d444ea7062e567bbbd35934dcb0974b483bec895ed4e618d29ed7470e5d",
+    "actual": "d2a57d444ea7062e567bbbd35934dcb0974b483bec895ed4e618d29ed7470e5d",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/src/N64Console.cpp",
+    "expected": "3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41",
+    "actual": "3d2e250805ec43aa318d63ee5216a67d5ddb30b209a8d4d833070a29c5a7da41",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/src/N64Controller.cpp",
+    "expected": "4cb9727eedf90442417f60e7ea6464ae65e1ab62e050968bfc21da2ab24932ed",
+    "actual": "4cb9727eedf90442417f60e7ea6464ae65e1ab62e050968bfc21da2ab24932ed",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/src/joybus.c",
+    "expected": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3",
+    "actual": "e902fb66507ec708d2bdae1f2a2fc11c4f769c581fd11f07cb18db2643352fb3",
+    "same": true
+  },
+  {
+    "path": "/private/tmp/glyph-active-profile-display/lib/glyph-joybus-pio/src/joybus.pio",
+    "expected": "17b9d52460c8b9e2d57fe649b1a64e0f523140a0bc58aca0b8929120d8481ba8",
+    "actual": "17b9d52460c8b9e2d57fe649b1a64e0f523140a0bc58aca0b8929120d8481ba8",
+    "same": true
+  }
+]

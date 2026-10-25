@@ -1,5 +1,17 @@
 # Agent Context
 
+## Active-profile display candidate — 2026-10-25
+
+The owner-directed [display chapter](runtime_config/active_profile_display/README.md)
+adds a shared presentation-only stored-native-profile label for dashboard/viewer
+and omits unspecified plate text. Exact build/resource/review evidence and the
+unexecuted owner packet belong to that chapter. Hardware display acceptance is
+NOT_TESTED; no candidate merge or device/profile mutation is authorized by host
+proof. Owner reports Pikachu ID27 safely selected, Kazuya ID51 accepted v4 and
+experiments48–50 removed; this run performs no controller readback or mutation.
+Historical profile/menu evidence below retains its original chronology.
+
+
 ## Accepted Kazuya v4 source and prepared two-profile packet — 2026-10-25
 
 Canonical `profiles/kazuya/Kazuya.profile.json` is the exact accepted v4 source

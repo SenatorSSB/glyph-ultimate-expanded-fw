@@ -1,0 +1,22 @@
+{
+  "authority": "direct owner work order in 2026-10-25 chat",
+  "base": "a6e3bc885d46e2a7412ec697aa822bcd8c4ce495",
+  "branch": "codex/active-profile-display",
+  "classification": "FIRMWARE_SOURCE_ACTIVE_BEHAVIOR",
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "delegation": {
+    "native_capability": "collaboration.spawn_agent",
+    "guidance": "docs/agent_framework/SUBAGENT_CONTRACTS.md",
+    "specialists": [
+      "identity_safety",
+      "resource_proof"
+    ],
+    "reviewer": "pending"
+  },
+  "hardware_display_acceptance": "NOT_TESTED",
+  "firmware_flashed": false,
+  "ProfileStore_mutations": "NONE",
+  "profiles_modified": "NONE"
+}

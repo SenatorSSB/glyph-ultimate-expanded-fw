@@ -1,0 +1,72 @@
+{
+  "checks": [
+    {
+      "check": "focused",
+      "exit_code": 0,
+      "log": "evidence/focused.log.gz",
+      "log_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455"
+    },
+    {
+      "check": "selector",
+      "exit_code": 0,
+      "log": "evidence/selector.log.gz",
+      "log_sha256": "75fd23e962f4ed584f22f871209eaee305a79fe4f8ab523fe93b4dfc52e066ba"
+    },
+    {
+      "check": "persistence",
+      "exit_code": 0,
+      "log": "evidence/persistence.log.gz",
+      "log_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+    },
+    {
+      "check": "store",
+      "exit_code": 0,
+      "log": "evidence/store.log.gz",
+      "log_sha256": "34242b6068d3c7df12810290a5e4c04c00dffbd7c3b72eee72486a784ac8d7a9"
+    },
+    {
+      "check": "native-short",
+      "exit_code": 0,
+      "log": "evidence/native-short.log.gz",
+      "log_sha256": "1976e973bbe157ea53c2c0d04bec2cb13e32aa9cbe2ef25a49e8c025fbe5d6a3"
+    },
+    {
+      "check": "native-default",
+      "exit_code": 0,
+      "log": "evidence/native-default.log.gz",
+      "log_sha256": "a900683502651086167887d95584c11cdfc862c4caaadd91e215390590a82ed1"
+    },
+    {
+      "check": "navigation",
+      "exit_code": 0,
+      "log": "evidence/navigation.log.gz",
+      "log_sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    {
+      "check": "framework",
+      "exit_code": 0,
+      "log": "evidence/framework.log.gz",
+      "log_sha256": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3"
+    },
+    {
+      "check": "surface",
+      "exit_code": 1,
+      "log": "evidence/surface.log.gz",
+      "log_sha256": "d8b5c461556d0c115f1c09cea21efe5b47b91649f9edc8e35b4e4524ab6646ad"
+    },
+    {
+      "check": "recovery",
+      "exit_code": 1,
+      "log": "evidence/recovery.log.gz",
+      "log_sha256": "c91c1baf83b4073efd0778811881879ee8313bcd3e1c0464e8a9af84ce9e2d07"
+    }
+  ],
+  "focused": "PASS_BOTH_ABIS_ASAN_UBSAN_ACTUAL_NATIVE_ACTIVATION_RESOLVER_VIEWER",
+  "hardware": "NOT_TESTED",
+  "aggregate": "NOT_CLAIMED",
+  "known_failures": {
+    "recovery": "stale Backend double, identical inherited menu debt; actual selector GameCube route PASS",
+    "surface": "C024 cumulative scope rejects later owner-directed chapters; no gate weakened"
+  },
+  "build_resource_review": "PENDING"
+}

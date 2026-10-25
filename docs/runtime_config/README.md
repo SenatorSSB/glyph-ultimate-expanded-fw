@@ -533,3 +533,5 @@ These controls detect repository mutation and bound ordinary process trees;
 they are not a network sandbox or protection against intentionally detached
 daemons or arbitrary absolute host writes. No checker applicability, workflow,
 firmware, build, device, or hardware behavior changes.
+
+- [Active-profile display identity candidate](active_profile_display/README.md) — display-only ownership, validation and unexecuted hardware packet.
