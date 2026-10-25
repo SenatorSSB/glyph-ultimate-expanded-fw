@@ -1,0 +1,21 @@
+{
+  "classification": "DOCS_CHECKER_ONLY_HARDWARE_OBSERVATION_RECORD",
+  "checks": [
+    {
+      "check": "navigation",
+      "result": "PASS",
+      "log": "navigation.log.gz",
+      "sha256_uncompressed": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    {
+      "check": "framework",
+      "result": "PASS",
+      "log": "framework.log.gz",
+      "sha256_uncompressed": "7270d97cadb66db5e8e8265a413227f334dd8c9952882674265e663be7f365f3"
+    }
+  ],
+  "production_firmware_changed_since_candidate": "NONE",
+  "independent_review": "PASS_BOUNDED_EVIDENCE_RECORD",
+  "global_hardware_PASS_claimed": false,
+  "source_integration": "NOT_PERFORMED"
+}

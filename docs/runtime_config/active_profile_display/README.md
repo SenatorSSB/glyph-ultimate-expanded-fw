@@ -1,5 +1,12 @@
 # Active stored-profile display identity
 
+Later [hardware observations and preservation](hardware_20261025/README.md)
+record owner-confirmed dashboard results on all three requested routes and the
+exact write/readback/final inventory. Input Viewer physical name remains
+unconfirmed; no global hardware PASS or source integration is claimed. The
+preparation snapshot below retains its original preflash chronology.
+
+
 Status: exact candidate built, preserved and independently reviewed; hardware display acceptance NOT_TESTED.
 
 Owner work order: direct 2026-10-25 chat instruction, bounded display/UI only.

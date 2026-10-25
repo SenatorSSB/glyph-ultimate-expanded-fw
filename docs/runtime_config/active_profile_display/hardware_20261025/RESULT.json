@@ -1,0 +1,46 @@
+{
+  "candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "candidate_tree": "c071f006e3e21b5e3146a85c8a767264e8822264",
+  "uf2_sha256": "cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3",
+  "dashboard_routes": {
+    "XInput": "PASS_OWNER_REPORTED",
+    "GameCube": "PASS_OWNER_REPORTED",
+    "USB_Nintendo_Switch": "PASS_OWNER_REPORTED"
+  },
+  "profiles_tested": [
+    27,
+    51
+  ],
+  "input_viewer_physical_label": "UNCONFIRMED_NOT_OBSERVED; no PASS claimed",
+  "records_compared": 24,
+  "all_record_metadata_payloads_equal_sealed_accepted_inventory": true,
+  "native_ids": [
+    27,
+    51
+  ],
+  "store_incarnation_unchanged": true,
+  "store_generation_unchanged": true,
+  "transaction_high_water_unchanged": true,
+  "recovery_flags": 0,
+  "ProfileStore_mutation_commands": "NONE",
+  "Config_write_commands": "NONE; owner normal selections may persist Config",
+  "full_flash_pre_postwrite_preservation": "PASS; write-stage Config/ProfileStore bytes identical",
+  "capture_stable_fences": true,
+  "current_mode": "CONFIGURATOR",
+  "native_selection_references": "Pikachu ID27",
+  "source_integration": "NOT_PERFORMED",
+  "acceptance_scope": "DASHBOARD_HARDWARE_PASS_ALL_THREE_ROUTES; input-viewer physical name unconfirmed",
+  "evidence_type": "OWNER_REPORTED_DASHBOARD_OBSERVATIONS_AND_TOOL_READBACK",
+  "uf2_bytes": 1046528,
+  "firmware_written": true,
+  "write_verify": "PASS",
+  "all_candidate_UF2_blocks_match_readback": true,
+  "all_bytes_outside_firmware_sectors_unchanged": true,
+  "private_evidence_root": "local_backups/active_profile_display_hardware_20261025T172604Z",
+  "private_manifest_sha256": "6467c88283dc2b84c30ae4532a2fc41c2c0475107768833c14b3d78fa539f154",
+  "private_preservation_result_sha256": "ea2c9ff38d48ffaaccc96f55b21fbb2cc3db051f4c5efa5247fcdf6336f15de0",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "global_hardware_PASS_claimed": false,
+  "independent_review": "PASS_BOUNDED_EVIDENCE_RECORD"
+}

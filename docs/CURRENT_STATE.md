@@ -1,5 +1,18 @@
 # Glyph Current State
 
+## Display hardware observations and final preservation — 2026-10-25
+
+[Exact display hardware record](runtime_config/active_profile_display/hardware_20261025/README.md)
+binds candidate e416cabe/UF2cbd5320d to owner-reported Pikachu/Kazuya dashboard
+checks on XInput, GameCube and USB Nintendo Switch. Write/readback and final
+read-only24-record preservation PASS; no profile/store mutation, all generations/
+record identities unchanged. Physical Input Viewer name remains UNCONFIRMED;
+no global hardware PASS or source integration is claimed. Device is currently in
+Configurator for inspection; native selection references remain Pikachu ID27,
+with normal-mode return an owner step. Earlier preparation snapshots retain
+preflash chronology; gameplay payload baselines remain unchanged.
+
+
 ## Active-profile display candidate — 2026-10-25
 
 The owner-directed [display chapter](runtime_config/active_profile_display/README.md)

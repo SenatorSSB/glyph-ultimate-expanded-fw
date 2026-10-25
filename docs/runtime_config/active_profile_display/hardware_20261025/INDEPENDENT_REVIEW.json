@@ -1,0 +1,59 @@
+{
+  "reviewer": "fresh bounded native HEP reviewer /root/independent_review",
+  "verdict": "PASS_BOUNDED_EVIDENCE_RECORD",
+  "candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "candidate_tree": "c071f006e3e21b5e3146a85c8a767264e8822264",
+  "uf2_sha256": "cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3",
+  "uf2_bytes": 1046528,
+  "review_scope": [
+    "hardware_20261025/RESULT.json",
+    "hardware_20261025/README.md",
+    "private manifest and referenced private write/readback/owner-observation/preservation records"
+  ],
+  "excluded_scope": [
+    "source integration",
+    "new firmware/display fix",
+    "device operations",
+    "global hardware acceptance",
+    "Input Viewer physical acceptance"
+  ],
+  "material_findings": [],
+  "checks": {
+    "private_manifest_SHA256": "PASS",
+    "private_manifest_105_regular_file_hashes_and_lengths": "PASS",
+    "preflash_postwrite_full16MiB_hashes": "PASS",
+    "accepted_firmware_all2043_UF2_blocks_match_preflash": "PASS",
+    "candidate_all2044_UF2_blocks_match_postwrite": "PASS",
+    "all_bytes_outside_firmware_sector_end0x10080000_identical": "PASS",
+    "Config_ProfileStore_FS_region_from0x1017f000_byte_exact_at_write": "PASS",
+    "existing_offline_packet_audit_safe": "PASS_24_RECORDS_2_NATIVE",
+    "all24_record_payload_metadata_equal_sealed_accepted_inventory": "PASS",
+    "all_capture_fences_and_baseline_store_incarnation_generation_token_unchanged": "PASS",
+    "final_capture_journals_transmit_operations": "PASS_56_ATTEMPTS_ONLY_STATUS1_LIST2_READ3",
+    "postboot_and_return_XInput_identity_native27_rev1_schema5": "PASS",
+    "owner_dashboard_report_scope": "PASS_BOUNDED_OWNER_REPORTED_THREE_ROUTES",
+    "no_viewer_or_global_hardware_PASS": "PASS",
+    "current_Configurator_and_normal_return_pending_disclosed": "PASS"
+  },
+  "qualifications": [
+    "Fresh preflash logical inventory was unavailable because device was already BOOTSEL; full-flash before/after byte-preservation comparison and independently matching accepted firmware bytes are explicitly disclosed alternatives. No fresh logical preflash inventory claimed.",
+    "Dashboard physical results are owner reported; GameCube/Switch confirmation is tied to the exact bounded dashboard request. Reviewer performed no visual controller inspection.",
+    "Pikachu/Kazuya payloads and all records remain unchanged. Ordinary owner selections may persist Config; tool final capture transmits no Config/store write operation.",
+    "Input Viewer physical name remains UNCONFIRMED_NOT_OBSERVED. Source/host evidence or inferred baseline/font clipping cannot supply physical acceptance or a proven root cause.",
+    "Device currently Configurator; native Config references27. Final normal Pikachu return remains owner physical step.",
+    "No global hardware PASS or firmware merge approval follows from this bounded evidence."
+  ],
+  "acceptance_scope": "DASHBOARD_HARDWARE_PASS_ALL_THREE_ROUTES_OWNER_REPORTED_PLUS_EXACT_PRESERVATION",
+  "input_viewer_physical_label": "UNCONFIRMED_NOT_OBSERVED",
+  "source_integration": "NOT_PERFORMED",
+  "global_hardware_PASS_claimed": false,
+  "private_manifest_sha256": "6467c88283dc2b84c30ae4532a2fc41c2c0475107768833c14b3d78fa539f154",
+  "private_preservation_result_sha256": "ea2c9ff38d48ffaaccc96f55b21fbb2cc3db051f4c5efa5247fcdf6336f15de0",
+  "reviewed_substantive_result_sha256": "4a94a644d9fb4306b2597256a8d801265c8988231c4507bfadd1d8cf72d9d681",
+  "substantive_result_binding": "Canonical JSON excluding only independent_review status field; review-status update is non-substantive.",
+  "readme_sha256": "15a3017e3938302902be647d6f59c0955bb72f441acc147f170ab031f860b2e5",
+  "nunchuk": "NOT_TESTED",
+  "root_cause": "UNPROVEN",
+  "reviewer_device_operations": "NONE",
+  "reviewer_Git_network_operations": "NONE"
+}
