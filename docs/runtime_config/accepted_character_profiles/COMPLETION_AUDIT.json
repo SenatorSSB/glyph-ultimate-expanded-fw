@@ -1,0 +1,138 @@
+{
+  "status": "PASS_FOR_REQUESTED_ADOPTION_AND_PACKET_PREPARATION",
+  "scope_note": "Future controller operations and final physical smoke are deliberately unexecuted, as required; this audit does not claim the controller already has two renamed entries.",
+  "items": [
+    {
+      "requirement": "A exact accepted v4 source/bytes/digests/report",
+      "status": "PROVEN",
+      "evidence": "ACCEPTED_KAZUYA.json + source5e/current canonical + evidence/accepted-report.json"
+    },
+    {
+      "requirement": "A source\u2192wrapper/body\u2192historical and fresh ID51/rev1\u2192gameplay",
+      "status": "PROVEN",
+      "evidence": "ACCEPTED_KAZUYA.json private evidence hashes; INDEPENDENT_REVIEW.json authority audit"
+    },
+    {
+      "requirement": "B exact root promotion and truthful canonical status",
+      "status": "PROVEN",
+      "evidence": "profiles/kazuya/Kazuya.profile.json and README.md; docs current-state/context/roadmap pointers"
+    },
+    {
+      "requirement": "B v1-v4 history and archival Ultimate preserved",
+      "status": "PROVEN",
+      "evidence": "ROOT_PATH_MIGRATION.json; byte-preservedv1 archive; accepted verifier1102 input/historical snapshot checks"
+    },
+    {
+      "requirement": "B deferred Crouch Jab/untested scope and rollback baseline",
+      "status": "PROVEN",
+      "evidence": "canonical README + immutable v4 source/evidence + chapter README"
+    },
+    {
+      "requirement": "C all four validate/compile/protobuf-json/report commands exact",
+      "status": "PROVEN",
+      "evidence": "VALIDATION.json + evidence/accepted-report.json; /tmp/Kazuya.accepted outputs equal accepted payload"
+    },
+    {
+      "requirement": "C current-C++ Kazuya and immutable historical verification",
+      "status": "PROVEN",
+      "evidence": "VALIDATION.json + evidence/accepted-validation.json and logs: canonical11, historical6/8/11/11, authoring17/23"
+    },
+    {
+      "requirement": "C native/legacy/host-operator/packet/docs guards",
+      "status": "PROVEN",
+      "evidence": "native-legacy.log3x1124032 + production-tool.log + packet-tests.log9 + navigation + Bash syntax-only"
+    },
+    {
+      "requirement": "C fresh independent review",
+      "status": "PROVEN",
+      "evidence": "INDEPENDENT_REVIEW.json, exact TOOLS_MANIFEST digest and post-integration verdict"
+    },
+    {
+      "requirement": "D authorized clean canonical adoption",
+      "status": "PROVEN",
+      "evidence": "PUBLICATION_RECEIPT.json; priorbf6f; candidate59e; integration812aff1f; identical reviewed tree"
+    },
+    {
+      "requirement": "D final live canonical exact source/payload and firmware unchanged",
+      "status": "INTEGRATION_PROVEN_FINAL_EVIDENCE_REF_VERIFICATION_PENDING",
+      "evidence": "private canonical-final-live-verification.json after source-free evidence publication; identity checker and Git diff"
+    },
+    {
+      "requirement": "E full fresh read-only inventory and individually proven deletions",
+      "status": "PROVEN",
+      "evidence": "CONTROLLER_INVENTORY.md + CONTROLLER_PLAN.json; native27/48/49/50/51;3candidates unreferenced;22legacy retained"
+    },
+    {
+      "requirement": "E ID27 golden Pikachu identity",
+      "status": "PROVEN",
+      "evidence": "CONTROLLER_PLAN.json + archival Ultimate source and fresh READ27:30d43278 wrapper/ca998599 body"
+    },
+    {
+      "requirement": "E ID51 exact accepted v4 identity",
+      "status": "PROVEN",
+      "evidence": "ACCEPTED_KAZUYA.json + CONTROLLER_PLAN.json + fresh READ51:46084bbc wrapper/a8b03ed4 body"
+    },
+    {
+      "requirement": "E source-backed method amendment",
+      "status": "PROVEN",
+      "evidence": "OWNER_AUTHORITY.md: owner approved existing RENAME host support; revisions/ranks preserved, original UPDATE assumption superseded"
+    },
+    {
+      "requirement": "E exact unexecuted owner packet and scopes",
+      "status": "PROVEN",
+      "evidence": "OWNER_PACKET.md ACP-20261025-01 + reviewed helper/manifest + nine synthetic negatives + Bash syntax"
+    },
+    {
+      "requirement": "E fresh execution preflight, per-operation checkpoint/fence/request/readback",
+      "status": "PROVEN",
+      "evidence": "OWNER_PACKET.md + packet_checks.py; no retry, no blind pairs, no unknown/referenced deletion"
+    },
+    {
+      "requirement": "E final two-native menu, preservation, bounded smoke and safeID27",
+      "status": "PROVEN",
+      "evidence": "OWNER_PACKET.md final checks, compare_final and genuine future owner smoke requirement"
+    },
+    {
+      "requirement": "E no device mutation/firmware flash in this run",
+      "status": "PROVEN",
+      "evidence": "Read-only trace phases only; no execution of future packet; ledger and task-scope checks"
+    },
+    {
+      "requirement": "Final response exact authority/Git/inventory/intended state/NO status/approval",
+      "status": "PROVEN",
+      "evidence": "Final report + OWNER_PACKET.md verbatim final sentence; cleanup explicitly remains future approval-gated"
+    }
+  ],
+  "controller_status": {
+    "ID27_renamed": "NO",
+    "ID51_renamed": "NO",
+    "superseded_deleted": "NO",
+    "ProfileStore_mutations": "NONE",
+    "firmware_flashed": "NO"
+  },
+  "read_only_request_trace_phases": [
+    "list",
+    "read",
+    "status_preflight"
+  ],
+  "read_only_transmit_attempts": 64,
+  "native_records_at_preparation": [
+    27,
+    48,
+    49,
+    50,
+    51
+  ],
+  "intended_native_records": [
+    {
+      "id": 27,
+      "name": "Pikachu"
+    },
+    {
+      "id": 51,
+      "name": "Kazuya"
+    }
+  ],
+  "integration_commit": "812aff1f93618ddd81cf7491d3cc95ef56f7fb9d",
+  "final_live_ref_verified_external_to_this_commit": true
+}

@@ -7,14 +7,18 @@
   "phase_A": "PASS exact sealed and fresh source/wrapper/body/ID51/gameplay authority",
   "phase_B": "PASS exact root source promotion and byte-preserved v1 archive",
   "phase_C": "PASS canonical source against actual current C++; immutable historical replay; host RENAME and packet negatives; native/legacy regressions",
-  "phase_D": "PENDING reviewed canonical integration/publication",
-  "phase_E": "PREPARED future packet; zero controller mutations; independent final review pending",
+  "phase_D": "PASS live canonical integration and independent post-integration review",
+  "phase_E": "PASS exact independently reviewed ACP-20261025-01 prepared; remains unexecuted and separately approval-gated",
   "network_capabilities": {
     "live_github_requires_network_enabled": true
   },
-  "previous_goal_turn_classification": "PROGRESS: exact authority evidence, source promotion, checked host RENAME support and tested offline packet preparation",
+  "previous_goal_turn_classification": "PROGRESS: canonical adoption is published and independently verified; final source-free receipt/audit publication remains",
   "firmware_inputs_changed": false,
   "firmware_build_or_flash": false,
   "controller_mutations": "NONE",
-  "remaining_owner_action": "Separate approval of ACP-20261025-01 after reviewed publication"
+  "remaining_owner_action": "Separate approval of ACP-20261025-01 after reviewed publication",
+  "reviewed_candidate": "59e12e3812b60d0dc085dd3d4d539b6401bd4ea8",
+  "integration_commit": "812aff1f93618ddd81cf7491d3cc95ef56f7fb9d",
+  "live_verified_at_integration": "812aff1f93618ddd81cf7491d3cc95ef56f7fb9d",
+  "current_controller_mutations": "NONE"
 }

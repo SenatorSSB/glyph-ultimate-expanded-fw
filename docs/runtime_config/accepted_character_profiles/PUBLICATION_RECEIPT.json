@@ -1,10 +1,19 @@
 {
-  "status": "REVIEWED_PENDING_CANONICAL_PUBLICATION",
+  "status": "CANONICAL_ADOPTION_LIVE_VERIFIED",
   "prior_canonical": "bf6f1e2e6814c6b6f1eb710175a488961c8295e7",
-  "accepted_source_commit": "5e30341ee06761e20e864ccc013ca6658e42b5ca",
+  "reviewed_candidate": "59e12e3812b60d0dc085dd3d4d539b6401bd4ea8",
+  "accepted_v4_commit": "5e30341ee06761e20e864ccc013ca6658e42b5ca",
+  "integration_commit": "812aff1f93618ddd81cf7491d3cc95ef56f7fb9d",
+  "integration_tree": "ea9d996044c498a69e495315688105a0db36db09",
+  "candidate_and_integration_trees_exact": true,
+  "live_configurator_at_integration": "812aff1f93618ddd81cf7491d3cc95ef56f7fb9d",
   "canonical_source_sha256": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434",
   "wrapper_sha256": "46084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c",
-  "integration_commit": null,
   "controller_mutations": "NONE",
-  "firmware_flash": false
+  "firmware_build_or_flash": false,
+  "publication_scope": "Exact accepted v4 canonical source and reviewed host-only future cleanup packet; no device execution",
+  "fresh_independent_post_integration_review": "PASS: live canonical, identical reviewed tree, no firmware drift,1102 inputs and packet attestation",
+  "final_evidence_publication_note": "This receipt records actual integration publication. The subsequent source-free evidence commit/final live ref is captured externally under the private final-live-verification record to avoid a self-SHA cycle.",
+  "final_live_verification_relative_path": "local_backups/accepted_character_profiles_20261025_l5b_hsi4/canonical-final-live-verification.json",
+  "accepted_source_to_id51_gameplay": "Exact ce7097ca source\u219246084bbc wrapper/a8b03ed4 body\u2192sealed and fresh ID51/rev1\u2192sealed OWNER_REPORTED GAMEPLAY_ACCEPTED"
 }
