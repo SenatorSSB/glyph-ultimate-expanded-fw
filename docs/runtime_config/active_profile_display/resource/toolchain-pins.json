@@ -1,0 +1,5 @@
+{
+  "arm-none-eabi-g++": "ce911118c96964b17d1ba0f7607ca7ec78565981c9f7f5447a1831e1bb8d9a1c",
+  "arm-none-eabi-objdump": "ff610289719538e7b277eb46438227ec6988b92e2471cd9c4610d8e82c49d615",
+  "arm-none-eabi-nm": "8318e247fd773691a0e18afd627054765ce7a22bbba1d7152fbc1f9b71e79fc2"
+}

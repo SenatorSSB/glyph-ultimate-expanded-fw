@@ -1,0 +1,43 @@
+{
+  "candidate_commit": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "candidate_tree": "c071f006e3e21b5e3146a85c8a767264e8822264",
+  "base": "a6e3bc885d46e2a7412ec697aa822bcd8c4ce495",
+  "build_command": "pio run -e glyph_mk6",
+  "build_exit_code": 0,
+  "build_seconds": 149.99,
+  "fallback_used": false,
+  "build_environment": {
+    "PATH_prefix": "/private/tmp/glyph-active-profile-display/.venv/bin",
+    "PLATFORMIO_CORE_DIR": "/private/tmp/glyph-active-profile-display/.platformio-home",
+    "Nanopb": "0.4.92 accepted complete libdeps cache"
+  },
+  "source_state_before_after_build": "CLEAN_EXACT_COMMITTED",
+  "artifacts": {
+    "elf": {
+      "build_path": "/private/tmp/glyph-active-profile-display/.pio/build/glyph_mk6/firmware.elf",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e416cabe3e0878e69036d2f75d59eed0d4d05208/cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3/firmware.elf",
+      "bytes": 5599268,
+      "sha256": "97b940dd8dd7b59875e11f4642baa61ddf2c7806b74fd19a59b9ad7a157d8991"
+    },
+    "bin": {
+      "build_path": "/private/tmp/glyph-active-profile-display/.pio/build/glyph_mk6/firmware.bin",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e416cabe3e0878e69036d2f75d59eed0d4d05208/cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3/firmware.bin",
+      "bytes": 523220,
+      "sha256": "dfdbc90a3b822517e7cdf25cceeeea2cf989eb5ff90bcbfab664fe67c1d1dd16"
+    },
+    "uf2": {
+      "build_path": "/private/tmp/glyph-active-profile-display/.pio/build/glyph_mk6/firmware.uf2",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e416cabe3e0878e69036d2f75d59eed0d4d05208/cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3/firmware.uf2",
+      "bytes": 1046528,
+      "sha256": "cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3"
+    }
+  },
+  "resource_status": "PASS_FINITE_LINKED_RESOURCE_PROOF_UNCHANGED_LIMITS",
+  "hardware_display_acceptance": "NOT_TESTED",
+  "firmware_flashed": false,
+  "ProfileStore_mutations": "NONE",
+  "profiles_modified": "NONE",
+  "build_log_sha256": "f1d90c74c85233f2a0c74c8a37d174a88dd076533be1aa6c0bad1ac2991af990",
+  "resource_evidence": "resource/result.json",
+  "independent_review": "INDEPENDENT_REVIEW.json"
+}

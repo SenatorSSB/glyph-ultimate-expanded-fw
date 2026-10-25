@@ -63,10 +63,21 @@
   ],
   "focused": "PASS_BOTH_ABIS_ASAN_UBSAN_ACTUAL_NATIVE_ACTIVATION_RESOLVER_VIEWER",
   "hardware": "NOT_TESTED",
-  "aggregate": "NOT_CLAIMED",
+  "aggregate": "NOT_CLAIMED: all four inherited checker failures retained",
   "known_failures": {
     "recovery": "stale Backend double, identical inherited menu debt; actual selector GameCube route PASS",
-    "surface": "C024 cumulative scope rejects later owner-directed chapters; no gate weakened"
+    "surface": "C024 cumulative scope rejects later owner-directed chapters; no gate weakened",
+    "resource-diagnostics": "stale strict-hardening define expectation; same fresh canonical baseline failure; actual linked resource proof independent",
+    "liveness-elf": "missing InitializeResourceDiagnosticsCore symbol in both exact baseline and candidate; raw FAIL retained; linked whole-resource proof separately establishes named bounds"
   },
-  "build_resource_review": "PENDING"
+  "build_resource_review": "Canonical exact source build PASS; finite linked resource proof PASS; independent final handoff review recorded separately",
+  "dependency_refresh": "Final focused/selector/store/persistence/native/ARM passes rerun with accepted complete libdeps/Nanopb0.4.92; previous0.4.91 cache results superseded.",
+  "baseline_reproductions": {
+    "surface": "SAME_FAIL",
+    "recovery": "SAME_FAIL",
+    "resource-diagnostics": "SAME_FAIL",
+    "liveness-elf": "SAME_FAIL"
+  },
+  "resource_evidence": "resource/result.json",
+  "source_build_candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208"
 }

@@ -1,0 +1,25 @@
+{
+  "source_candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "source_tree": "c071f006e3e21b5e3146a85c8a767264e8822264",
+  "postbuild_changes": "docs only",
+  "production_pins": [
+    {
+      "path": "HAL/pico/include/display/CurrentProfileLabel.hpp",
+      "sha256": "11a9d5c493bf545ff0fef42496d653fb8c1ce6c39bc694a0a9df0c767901a33b"
+    },
+    {
+      "path": "HAL/pico/src/display/CurrentProfileLabel.cpp",
+      "sha256": "f71bd009465968082452d711ceaab0735eb450662a746432e1bb5cc0594f3c5d"
+    },
+    {
+      "path": "HAL/pico/src/display/InputDisplay.cpp",
+      "sha256": "ed99cd63a3d241f935fb10e117139d87bc43fdb961840dca574e3137e0006dec"
+    },
+    {
+      "path": "config/glyph/common/src/display/MenuButtonHints.cpp",
+      "sha256": "c105da750576759579b1b881657602d20a8eca45da148dbbc4a5cddf8fb2531e"
+    }
+  ],
+  "profiles_store_selection_schema_config_backend_evaluator_changes": "NONE",
+  "device_operations": "NONE"
+}

@@ -1,0 +1,104 @@
+{
+  "reviewer": "fresh native child /root/independent_review",
+  "base": "a6e3bc885d46e2a7412ec697aa822bcd8c4ce495",
+  "source_verdict": "PASS",
+  "final_handoff_verdict": "PASS_EXACT_CANDIDATE_HANDOFF_TO_OWNER_HARDWARE_WAIT",
+  "material_findings": [],
+  "source_sha256": {
+    "HAL/pico/include/display/CurrentProfileLabel.hpp": "11a9d5c493bf545ff0fef42496d653fb8c1ce6c39bc694a0a9df0c767901a33b",
+    "HAL/pico/src/display/CurrentProfileLabel.cpp": "f71bd009465968082452d711ceaab0735eb450662a746432e1bb5cc0594f3c5d",
+    "HAL/pico/src/display/InputDisplay.cpp": "ed99cd63a3d241f935fb10e117139d87bc43fdb961840dca574e3137e0006dec",
+    "config/glyph/common/src/display/MenuButtonHints.cpp": "c105da750576759579b1b881657602d20a8eca45da148dbbc4a5cddf8fb2531e",
+    "tools/check_glyph_active_profile_display.py": "3aab514225f845947c4cbfee1c19da24f5c6e1b22a464dc174538cfda8211a11",
+    "tools/fixtures/active_profile_display/labels.cpp": "e7f90c1d383528fcc6f2bf9dfa2b2e8be5d9a3418930d19712007b868d6d9c8b",
+    "tools/fixtures/active_profile_display/include/Adafruit_GFX.h": "317adcead959c6190cb1de46b1c80c27507da5ede4a8b2b4e195934745bbbafd",
+    "tools/fixtures/active_profile_display/include/comms/IntegratedDisplay.hpp": "972a7aaf1e2d50f1323444ff66691cbb2d1a04bc71aab32fc368d2de6a78a1d3",
+    "docs/runtime_config/active_profile_display/README.md": "51a9ee789a788c6216ace196e9057b35d20e404393c004fbb056450ea6f0a9ba",
+    "docs/runtime_config/active_profile_display/OWNER_PACKET.md": "c6aa64e25b8ee841399fe52a59b7052287fd328e3b4c977039084829d68f5403"
+  },
+  "checks": {
+    "independent_focused_both_ABI_ASan_UBSan": "PASS",
+    "boot_handoff_and_immutable_metadata_lifetime": "PASS_SOURCE_REVIEW",
+    "writer_excluded_before_store_reads": "PASS",
+    "failed_activation_stale_id_fallback": "PASS",
+    "no_store_config_selection_evaluator_mutation": "PASS",
+    "profile_name_no_allocation_no_storage_IO": "PASS",
+    "shared_current_identity_surfaces": "PASS",
+    "specified_plate_preserved_unspecified_blank": "PASS",
+    "hardware_packet_unexecuted_separate_approval": "PASS",
+    "independent_focused_final_accepted_cache_both_ABI_ASan_UBSan": "PASS",
+    "exact_ELF_BIN_UF2_build_custody_size_SHA256": "PASS",
+    "exact_candidate_tree_and_native_source_header": "PASS",
+    "resource_manifest22_payload_hashes": "PASS",
+    "actual_baseline259_candidate259_source_rehash": "PASS_259_BASELINE_MATCH_257_CANDIDATE_MATCH_TWO_INTENDED_SURFACES",
+    "mutable318_exact_records": "PASS",
+    "vtables153_named_targets879_relocations": "PASS",
+    "preinit4_init23_target_order": "PASS",
+    "reserved_stack_sections_symbols_no_atomic_helper": "PASS_COMPONENTS_ONLY",
+    "finite_linked_resource_proof": "PASS_UNCHANGED_LIMITS"
+  },
+  "debt": {
+    "selection_recovery": "FAIL inherited stale Backend double; unchanged source/checker/fixture, actual selector/GC route regression PASS",
+    "docs_agent_surface": "FAIL frozen C024-only post-integration cumulative path scope rejects later authorized chapters; framework topology debt, no concrete display safety contradiction",
+    "liveness_resource_safety": "FAIL identically baseline/candidate: expected legacy InitializeResourceDiagnosticsCore symbol absent. Direct independent section/symbol/no-atomic checks pass; full checker not PASS.",
+    "resource_diagnostics": "FAIL identically baseline/candidate: stale GLYPH_STRICT_HARDENING_CANDIDATE define assertion. No checker/env edits."
+  },
+  "hardware_display_acceptance": "NOT_TESTED",
+  "firmware_flashed": false,
+  "ProfileStore_mutations": "NONE",
+  "profiles_modified": "NONE",
+  "candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "tree": "c071f006e3e21b5e3146a85c8a767264e8822264",
+  "cache_repair": "Original cache rejected; final proof requires accepted native-profile-menu-cleanup dependency closure including Nanopb0.4.92.",
+  "approval_scope": "Display-only source/build/custody/finite resource proof and unexecuted owner packet. No merge, flash, ProfileStore mutation or physical acceptance.",
+  "independent_final_focused_log_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455",
+  "resources": {
+    "core0_bound": 2048,
+    "core0_reservation": 2048,
+    "core0_margin": 0,
+    "core1_composition": 1060,
+    "core1_retained_limit": 1152,
+    "core1_reservation": 2048,
+    "static": 198288,
+    "static_ceiling": 199632,
+    "heap_capacity": 63660,
+    "flash_delta": 232,
+    "resolver_frame": 24,
+    "resolver_code": 272,
+    "new_buffer_heap_IO": "NONE",
+    "qualification": "Finite prior route predicates transferred only through exact baseline/current source and dependency/linked graph correspondence; no highwater/timing/whole-checker/aggregate PASS."
+  },
+  "artifacts": {
+    "elf": {
+      "bytes": 5599268,
+      "sha256": "97b940dd8dd7b59875e11f4642baa61ddf2c7806b74fd19a59b9ad7a157d8991",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e416cabe3e0878e69036d2f75d59eed0d4d05208/cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3/firmware.elf"
+    },
+    "bin": {
+      "bytes": 523220,
+      "sha256": "dfdbc90a3b822517e7cdf25cceeeea2cf989eb5ff90bcbfab664fe67c1d1dd16",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e416cabe3e0878e69036d2f75d59eed0d4d05208/cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3/firmware.bin"
+    },
+    "uf2": {
+      "bytes": 1046528,
+      "sha256": "cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3",
+      "custody_path": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/e416cabe3e0878e69036d2f75d59eed0d4d05208/cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3/firmware.uf2"
+    }
+  },
+  "debt_classification": "Revision3 framework/fixture applicability debt; fresh concrete candidate-critical source/build/custody/resource facts established independently; no concrete Tier1/Tier2 contradiction found. Hardware remains required before merge.",
+  "resource_evidence_sha256": {
+    "REPORT.md": "6e64fef43ba19a3dd252a846b171c2948874e31725584f25351faf712e12d510",
+    "result.json": "35f371b0bde9c9f55a4185a9c1ec98511e6010b148804aae6225d6f44b68c703",
+    "manifest.json": "7a533649a548560199e2c61cc6400b59a973cba6ccda0d559cfe0bca69580e94",
+    "correspondence.json": "78618bb1fc4f109e2b92283f240f83a5ce5eb437082ac4498cb271b095cfcb73"
+  },
+  "physical_boundary": {
+    "firmware_flashed": "NO",
+    "ProfileStore_mutations": "NONE",
+    "profiles_modified": "NONE",
+    "hardware_display_acceptance": "NOT_TESTED",
+    "Pikachu_gameplay_state": "unchanged",
+    "Kazuya_gameplay_baseline": "unchanged",
+    "Nunchuk": "NOT_TESTED"
+  }
+}

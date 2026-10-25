@@ -1,6 +1,6 @@
 # Active stored-profile display identity
 
-Status: source candidate preparation; hardware display acceptance NOT_TESTED.
+Status: exact candidate built, preserved and independently reviewed; hardware display acceptance NOT_TESTED.
 
 Owner work order: direct 2026-10-25 chat instruction, bounded display/UI only.
 Live canonical verified `a6e3bc885d46e2a7412ec697aa822bcd8c4ce495` before work.
@@ -69,8 +69,17 @@ doubled; source ownership is audited separately. It covers Pikachu, arbitrary
 Fox, Kazuya switch, unresolved/mismatched/invalid metadata, failed native activation,
 ordinary modes, specified/unspecified plates and writer exclusion. The checker
 also binds both current-name call sites. Existing selector/menu and persistence
-checks remain unchanged. Results, exact candidate/custody/resource and independent
-review are recorded separately as they become available. No aggregate PASS is
+checks remain unchanged. [Validation](VALIDATION.json), [exact candidate/custody](CANDIDATE.json),
+[resource proof](resource/REPORT.md) and [independent review](INDEPENDENT_REVIEW.json)
+record the final source tuple and actual observations. The source commit is
+`e416cabe3e0878e69036d2f75d59eed0d4d05208`, tree
+`c071f006e3e21b5e3146a85c8a767264e8822264`. Later evidence commits change docs
+only; they do not identify a rebuild. Canonical pio build PASS; no fallback.
+Static RAM198288 unchanged, core1composition1060 unchanged, resolver24-byte
+frame, flash+232bytes. Existing core0 bound2048/2048 retains zero margin.
+Both resource checkers, the frozen C024 surface guard and stale recovery fixture
+retain actual FAIL, independently reproduced on canonical. Their applicability
+debt does not replace the focused tests or finite linked resource proof. No aggregate PASS is
 claimed by omission.
 
 [Owner packet](OWNER_PACKET.md) remains unexecuted, requires separate owner
@@ -78,3 +87,15 @@ approval, and never creates/updates/renames/reorders/deletes profiles.
 Firmware flashed: NO. ProfileStore mutations: NONE. Profiles modified: NONE.
 Pikachu gameplay state unchanged; Kazuya accepted gameplay baseline unchanged.
 Hardware display acceptance NOT_TESTED. Nunchuk NOT_TESTED; root cause UNPROVEN.
+
+## Build preparation chronology
+
+Initial restricted GitHub DNS failure was retried successfully with permitted
+network access; canonical remained the supplied SHA. Dirty unrelated original
+checkout files were left untouched. An archive-only baseline was refused for
+missing Git identity; ignored cache symlinks were corrected to real ignored
+folders after the clean-source guard correctly refused them. No guard changed.
+Resource preflight detected older SSD1306/Nanopb cache bytes; root restored the
+complete accepted menu libdeps cache, refreshed tests and rebuilt both clean
+canonical and exact candidate. Only final accepted-cache artifacts are eligible
+for handoff; prior interrupted/noncandidate runs are not acceptance evidence.

@@ -1,0 +1,24 @@
+{
+  "baseline": {
+    "elf_sha256": "95eb7657b01a3febb916ce477ef61cfcb453325719f44e3ad99442574fd5186b",
+    "reserved_stack_banks_clear": true,
+    "stack_top_limit_symbols_exact": true,
+    "no_atomic_library_helpers": true,
+    "missing_legacy_symbol": "InitializeResourceDiagnosticsCore()"
+  },
+  "candidate": {
+    "elf_sha256": "97b940dd8dd7b59875e11f4642baa61ddf2c7806b74fd19a59b9ad7a157d8991",
+    "reserved_stack_banks_clear": true,
+    "stack_top_limit_symbols_exact": true,
+    "no_atomic_library_helpers": true,
+    "missing_legacy_symbol": "InitializeResourceDiagnosticsCore()"
+  },
+  "watermark_component": {
+    "fill_cycles": 10000,
+    "scans": 50000,
+    "maximum_words_per_scan": 1024,
+    "sanitizer": "ASan+UBSan",
+    "disabled_control": true
+  },
+  "qualification": "Direct unchanged checker components only; full liveness checker FAIL retained on both ELFs at missing legacy initialization symbol. No full checker PASS."
+}

@@ -1,0 +1,11 @@
+{
+  "mutable_sized_symbols_preserved": 318,
+  "vtables_preserved": 153,
+  "vtable_relocated_named_function_or_metadata_slots": 879,
+  "vtable_unresolved": 0,
+  "preinit_entries": 4,
+  "init_entries": 23,
+  "mutable_symbol_address_size_type_exact": true,
+  "initializer_target_order_exact": true,
+  "mutable_unique_names": 313
+}

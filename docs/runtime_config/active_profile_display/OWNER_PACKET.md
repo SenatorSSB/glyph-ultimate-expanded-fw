@@ -2,20 +2,24 @@
 
 Separate owner approval is required before any device/flash action. Do not use a
 rebuild: first bind the exact candidate SHA/tree and preserved UF2 SHA-256/bytes
-from the final candidate evidence, verify those preserved bytes, and STOP if any
+from [exact candidate evidence](CANDIDATE.json), verify those preserved bytes, and STOP if any
 identity/custody/resource/review gate is absent or fails. The baseline firmware's
 hardware acceptance does not transfer to this new display code.
 
 1. On the currently accepted firmware, take a fresh read-only inventory with the
    existing approved production inspection route. Seal all records (IDs, names,
    ranks, revisions and payload hashes), store incarnation/generation and health;
-   confirm ID27 Pikachu and ID51 Kazuya, no recovery/uncertain state, ID27 active.
+   confirm ID27 Pikachu and ID51 Kazuya, compact format1/root format2, no
+   migration/recovery/uncertain state, ID27 active.
    Preserve Config separately so ordinary selection/reboot persistence can be
    distinguished from forbidden profile-record changes. Abort on any mismatch.
 2. After explicit owner approval, install only the exact retained candidate using
    the existing accepted manual route. No flashing automation. No ProfileStore
    CREATE/UPDATE/RENAME/REORDER/DELETE, migration or recovery operation is allowed.
-3. On each existing accepted route — XInput, GameCube (ordinary accepted adapter/
+3. Menu controls from the current source: MB1 opens menu/back, MB2 moves up,
+   MB3 moves down, MB4 enters. Use `.Profile` for ordinary stored-profile
+   selection and allow its normal reboot; use `Input.Viewer` to open the viewer.
+   On each existing accepted route — XInput, GameCube (ordinary accepted adapter/
    console route), USB Nintendo Switch — select/boot Pikachu normally. Dashboard
    must show Pikachu, the expected backend, no Ultimate Runtime, no Unknown Plate
    for the unspecified context. Open Input Viewer and confirm Pikachu too.

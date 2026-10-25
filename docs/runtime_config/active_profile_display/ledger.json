@@ -13,10 +13,28 @@
       "identity_safety",
       "resource_proof"
     ],
-    "reviewer": "pending"
+    "reviewer": "independent_review"
   },
   "hardware_display_acceptance": "NOT_TESTED",
   "firmware_flashed": false,
   "ProfileStore_mutations": "NONE",
-  "profiles_modified": "NONE"
+  "profiles_modified": "NONE",
+  "candidate_commit": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "candidate_tree": "c071f006e3e21b5e3146a85c8a767264e8822264",
+  "build": "PASS canonical pio, no fallback",
+  "source_identity": "verified generated native source header, full candidate SHA",
+  "canonical_publication": "NONE",
+  "chronology": [
+    "live canonical verified",
+    "owner/source audit",
+    "source-only candidate commit",
+    "accepted dependency cache restored after initial mismatch",
+    "focused regressions rerun accepted cache",
+    "clean exact source candidate built",
+    "artifacts copied and rehashed to owner-held custody",
+    "linked resource review",
+    "fresh independent exact source/build/resource/custody/packet review PASS"
+  ],
+  "independent_review": "PASS_EXACT_CANDIDATE_HANDOFF_TO_OWNER_HARDWARE_WAIT",
+  "hardware_handoff": "READY_FOR_SEPARATELY_APPROVED_OWNER_PACKET"
 }
