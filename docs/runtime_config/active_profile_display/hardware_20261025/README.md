@@ -52,3 +52,12 @@ mutations NONE; profiles modified NONE. Pikachu/Kazuya gameplay payload baseline
 unchanged. Nunchuk NOT_TESTED; root cause UNPROVEN. Initial chapter candidate and
 review files retain their preflash chronology. No canonical firmware merge follows
 from this bounded evidence record.
+
+## Final normal-mode return
+
+The owner subsequently reported returning to Pikachu in normal mode. A fresh
+read-only XInput identity confirms persisted ID27/revision1/schema5 with the
+same payload digest as the postwrite Pikachu observation. [Final checkpoint](FINAL_NORMAL.json)
+closes the Configurator-return step above. No Config/store write or additional
+flash occurred. Input Viewer physical label remains UNCONFIRMED; no global
+hardware PASS or source integration is implied.

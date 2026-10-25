@@ -1,0 +1,20 @@
+{
+  "candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "uf2_sha256": "cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3",
+  "owner_report": "Back on Pikachu in normal mode",
+  "recorded_at_utc": "2026-10-25T18:20:27.207057+00:00",
+  "final_normal_return": "PASS_OWNER_REPORTED_AND_READ_ONLY_IDENTITY",
+  "current_backend": "XInput",
+  "active_id": 27,
+  "active_revision": 1,
+  "schema_version": 5,
+  "payload_sha256": "8bc50b7ff340ae17dd7f3477532594a721f267b115d008cc9dd5fb3f90e372ff",
+  "payload_matches_postwrite_Pikachu": true,
+  "ProfileStore_mutation_commands": "NONE",
+  "Config_write_commands": "NONE",
+  "input_viewer_label": "UNCONFIRMED",
+  "global_hardware_PASS_claimed": false,
+  "source_integration": "NOT_PERFORMED",
+  "private_identity_capture_sha256": "6e10871f69c7a635e925638338e42267ae303445d42047922df40071a775d9c6",
+  "independent_review": "PASS_FINAL_NORMAL_CHECKPOINT"
+}

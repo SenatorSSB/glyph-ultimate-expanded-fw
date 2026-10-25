@@ -1,0 +1,27 @@
+{
+  "reviewer": "bounded final-normal checkpoint reviewer /root/independent_review",
+  "verdict": "PASS_BOUNDED_FINAL_NORMAL_CHECKPOINT",
+  "candidate": "e416cabe3e0878e69036d2f75d59eed0d4d05208",
+  "uf2_sha256": "cbd5320d84e72d59bcf8618a4714fd7e94f6ec51fcbbc38450f1cffc077c45b3",
+  "final_normal_return": "PASS_OWNER_REPORTED_AND_READ_ONLY_IDENTITY",
+  "active_id": 27,
+  "active_revision": 1,
+  "schema_version": 5,
+  "checks": {
+    "private_capture_SHA256": "PASS",
+    "public_private_result_field_correspondence": "PASS",
+    "persisted_XInput_identity_ID27_revision1_schema5": "PASS",
+    "payload_identical_postwrite_Pikachu": "PASS",
+    "README_append_and_three_status_summaries": "PASS_BOUNDED_NO_GLOBAL_OR_VIEWER_PASS",
+    "capture_time_chronology_preserved": "PASS"
+  },
+  "material_findings": [],
+  "private_identity_capture_sha256": "6e10871f69c7a635e925638338e42267ae303445d42047922df40071a775d9c6",
+  "private_result_sha256": "1881f4339130664538471d747a656aeacdbed0cd7041a10a3ca73facb4bcafeb",
+  "substantive_final_normal_sha256": "b52e39243d027280479780b0974efdbdf49dd0879fd1a8e1123d17c094dad51a",
+  "binding": "Canonical JSON excluding only independent_review status field",
+  "input_viewer_label": "UNCONFIRMED",
+  "global_hardware_PASS_claimed": false,
+  "source_integration": "NOT_PERFORMED",
+  "reviewer_operations": "Read-only evidence review; only this review JSON written. No device, Git or network operations."
+}
