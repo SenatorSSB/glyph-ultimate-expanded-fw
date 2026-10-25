@@ -1,0 +1,24 @@
+{
+  "packet_id": "ACP-20261025-01",
+  "purpose": "Exact future packet/operator attestation; execution still requires explicit owner approval",
+  "files_sha256": {
+    "tools/glyph_profile_store_production_tool.py": "5e15373f6b31820d8af8d083d1bc36f0fdd3cc4efdd139d315f1334880c2dba5",
+    "tools/check_glyph_profile_store_production_tool.py": "0678d9196468b930d5728101ea3f4808df9bda2d0218255f3522bd77c45a80f5",
+    "tools/glyph_profile_store_candidate_tool.py": "33475c736cfee7f6c0df0f0ee2e81b3b4befcb914a6ae9b342a008f1e3cc65e2",
+    "tools/glyph_serial_config_tool.py": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+    "tools/glyph_runtime_identity_tool.py": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+    "tools/convert_glyph_native_ultimate_profile.py": "d6a84657308ee957172185de2393205cf849465416c2f7e250a91e27774d293f",
+    "schema/haybox/config.proto": "1e65f3f62f8a7f220c480217722f0e96ad2d48f9c274b462e5494a68ef15edec",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "f7e5e57d03b6cf0a8fb224a4f4a49c213d1879ccf14f4bd064aa6b0ff8e04561",
+    "HAL/pico/src/core/ProfileStore.cpp": "86e96518d789b597b4764910b3314192affe97019f4be263cc6c318cd594a4c6",
+    "src/core/profile_selection.cpp": "4483f46b3e5b78ef70016a51769f62f7595953b454bae653ac02d01155098da5",
+    "include/core/ProfileSelection.hpp": "40bb7799d69f139e9a7ab3eb705853d3e06877e304d840f147e60e7d85542ce4",
+    "profiles/kazuya/Kazuya.profile.json": "ce7097ca98d84893d7e71aeb5a42832854be0cc275b88811121f85129719a434",
+    "profiles/ultimate/Ultimate.profile.json": "c3bfeaa42ad6e81ef5f8ff7ff3d4484656404651b3665b8908d8c7c662d10a05",
+    "docs/runtime_config/accepted_character_profiles/OWNER_PACKET.md": "b77d060531872b34cdee7df9339a0e10e78c1227c7a3d6e2ea56d15fd5b51e49",
+    "docs/runtime_config/accepted_character_profiles/CONTROLLER_PLAN.json": "9f24ab4b202f98e9bb0b93e95d05655ece0b6d79fa707dce6f7b36ecd6b8f797",
+    "docs/runtime_config/accepted_character_profiles/packet_checks.py": "1afaaed23b4f56f6023a91c8b6e27864ca863c32996bdd95040ee9ce3c995c7c",
+    "docs/runtime_config/accepted_character_profiles/test_packet_checks.py": "42769360ff1c9b8169bbbcbce8a20cf48c8b12f8a42b598575ba75e3744904e2",
+    "docs/runtime_config/accepted_character_profiles/ACCEPTED_KAZUYA.json": "c3264408b3daca92f53eee6421280afeaf7c90790e47a95cb67638ad25bb53b2"
+  }
+}

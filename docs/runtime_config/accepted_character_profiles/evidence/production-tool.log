@@ -1,0 +1,31 @@
+production ProfileStore tool: [Errno 17] File exists: '/var/folders/_f/25t1m0794kb7ms1vx8tdwgr00000gp/T/tmpmcjhk9se/r.json'
+production ProfileStore tool: malformed response after transmission; unresolved
+{
+  "response": {
+    "profile_id": 99,
+    "request_token": "101",
+    "status": "PROFILE_STORE_OK"
+  }
+}
+{
+  "response": {
+    "profile_id": 99,
+    "request_token": "101",
+    "status": "PROFILE_STORE_OK"
+  }
+}
+{
+  "response": {
+    "profile_id": 99,
+    "request_token": "101",
+    "status": "PROFILE_STORE_OK"
+  }
+}
+production ProfileStore tool: rename acknowledgement lost; outcome unknown
+{"dry_run": true, "native_packet": "apply_native_preprocessing_context", "payload_sha256": "1cc6e0af9ddf4dfd78526e8d63380a0c61333fa1105ca0f2ea4b178f156290c8", "serial_opened": false}
+native Config packet: execution requires explicit port and owner-exclusive Configurator session; SET_CONFIG has no atomic generation fence
+{"dry_run": false, "native_packet": "apply_native_preprocessing_context", "payload_sha256": "1cc6e0af9ddf4dfd78526e8d63380a0c61333fa1105ca0f2ea4b178f156290c8", "serial_opened": true}
+native Config packet: lost acknowledgement
+native Config packet: fresh GET_CONFIG differs from explicit current backup; no SET sent
+{"dry_run": true, "native_packet": "restore_original_user_config", "payload_sha256": "63d197c632439c678be46d2bf877699880c3caf5972da9130a0e1b73939cfa79", "serial_opened": false}
+glyph_profile_store_production_tool: PASS offline=true strict_candidate_guard_preserved=true no_serial_opened=true

@@ -1,0 +1,44 @@
+{
+  "verdict": "PASS",
+  "packet_id": "ACP-20261025-01",
+  "reviewer": "Independent native subagent /root/kazuya_review",
+  "review_date": "2026-10-25",
+  "scope": [
+    "exact accepted source\u2192payload\u2192ID51/readback\u2192owner gameplay authority",
+    "canonical source promotion and v1 archive",
+    "unchanged firmware and historical inputs",
+    "current-C++/historical host verification",
+    "source-backed owner-approved RENAME exposure and no-retry negatives",
+    "exact future packet, identities, refs, checkpoint/fence/preservation guards",
+    "zero controller mutations in preparation"
+  ],
+  "tools_manifest_sha256": "27d2e54e3376f6fea53360e3e97a08e4f8fdc8e63665393390b85ad915d03464",
+  "reviewed_chapter_files_sha256": {
+    "TOOLS_MANIFEST.json": "27d2e54e3376f6fea53360e3e97a08e4f8fdc8e63665393390b85ad915d03464",
+    "OWNER_PACKET.md": "b77d060531872b34cdee7df9339a0e10e78c1227c7a3d6e2ea56d15fd5b51e49",
+    "CONTROLLER_PLAN.json": "9f24ab4b202f98e9bb0b93e95d05655ece0b6d79fa707dce6f7b36ecd6b8f797",
+    "packet_checks.py": "1afaaed23b4f56f6023a91c8b6e27864ca863c32996bdd95040ee9ce3c995c7c",
+    "test_packet_checks.py": "42769360ff1c9b8169bbbcbce8a20cf48c8b12f8a42b598575ba75e3744904e2",
+    "ACCEPTED_KAZUYA.json": "c3264408b3daca92f53eee6421280afeaf7c90790e47a95cb67638ad25bb53b2",
+    "VALIDATION.json": "b8b24e36f2e3a7f4b2d5aee45d46270bdb3a6c5c61a7bb44ca2039abec0e823d"
+  },
+  "reviewed_operator_sha256": "5e15373f6b31820d8af8d083d1bc36f0fdd3cc4efdd139d315f1334880c2dba5",
+  "reviewed_operator_checker_sha256": "0678d9196468b930d5728101ea3f4808df9bda2d0218255f3522bd77c45a80f5",
+  "reviewed_accepted_checker_sha256": "27819fb95429780996074a0cce53b41793c829d2457ffd82582b2b42c8f81768",
+  "reviewed_final_validation_sha256": "58507a69d5969aeabb004f47561fc21752cab335b8886d04e572c984aa7e8e61",
+  "repaired_findings": [
+    "UPDATE does not rename: owner explicitly approved existing RENAME host exposure and unchanged revision semantics",
+    "canonical source is now rechecked after native replay",
+    "rename-specific wrong-ID/token/non-OK and one-send/no-retry negatives added"
+  ],
+  "independent_checks": [
+    "production host operator checker PASS",
+    "nine synthetic packet tests PASS",
+    "saved27record inventory audit PASS",
+    "Bash syntax-only PASS",
+    "full accepted current-C++/historical validation PASS"
+  ],
+  "unresolved_findings": [],
+  "controller_execution_authorized": false,
+  "canonical_adoption_authorized_by": "Direct owner goal objective PhaseD"
+}

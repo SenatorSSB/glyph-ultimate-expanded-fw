@@ -1,0 +1,11 @@
+test_command_matrix_and_composition (__main__.KazuyaTests.test_command_matrix_and_composition) ... ok
+test_coordinate_evidence_and_retained_inventory (__main__.KazuyaTests.test_coordinate_evidence_and_retained_inventory) ... ok
+test_negative_mutants_are_detected (__main__.KazuyaTests.test_negative_mutants_are_detected) ... ok
+test_release_addition_and_socd_history (__main__.KazuyaTests.test_release_addition_and_socd_history) ... ok
+test_retained_baseline_differential (__main__.KazuyaTests.test_retained_baseline_differential) ... ok
+test_schema_resources_provenance_and_golden (__main__.KazuyaTests.test_schema_resources_provenance_and_golden) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 11.128s
+
+OK

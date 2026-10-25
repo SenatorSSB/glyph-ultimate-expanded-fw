@@ -1,0 +1,14 @@
+test_exact_five_operation_chain_and_unknown_preservation (__main__.PacketTests.test_exact_five_operation_chain_and_unknown_preservation) ... ok
+test_health_crc_and_torn_snapshot_stop (__main__.PacketTests.test_health_crc_and_torn_snapshot_stop) ... ok
+test_payload_rank_revision_and_name_drift_stop (__main__.PacketTests.test_payload_rank_revision_and_name_drift_stop) ... ok
+test_previous_checkpoint_drift_blocks_next_operation (__main__.PacketTests.test_previous_checkpoint_drift_blocks_next_operation) ... ok
+test_referenced_or_unknown_delete_never_planned (__main__.PacketTests.test_referenced_or_unknown_delete_never_planned) ... ok
+test_response_uncertainty_and_accounting_stop (__main__.PacketTests.test_response_uncertainty_and_accounting_stop) ... ok
+test_unknown_native_stops_instead_of_deleting (__main__.PacketTests.test_unknown_native_stops_instead_of_deleting) ... ok
+test_unrelated_metadata_change_fails_preservation (__main__.PacketTests.test_unrelated_metadata_change_fails_preservation) ... ok
+test_wrong_operation_hidden_payload_and_wrong_identity_rejected (__main__.PacketTests.test_wrong_operation_hidden_payload_and_wrong_identity_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.678s
+
+OK
