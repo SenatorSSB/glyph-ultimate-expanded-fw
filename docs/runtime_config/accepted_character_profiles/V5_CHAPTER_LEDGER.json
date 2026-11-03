@@ -1,0 +1,14 @@
+{
+  "chapter": "Kazuya v5 canonical promotion",
+  "owner_authority": "direct owner directive, 2026-11-03",
+  "classification": "SOURCE_ONLY_PUBLICATION",
+  "promotion_commit": "a37bb5e930b3a4bddcbdc29d00c420c76354d10c",
+  "source_blob": "64c2825605082701b9252832149535c82ebb7fc5",
+  "host_validation": "PASS",
+  "independent_review": "APPROVED",
+  "gameplay_acceptance": "OWNER_REPORTED; KazTest5/ID53; private receipts unavailable locally",
+  "historical_v4": "PRESERVED as accepted rollback reference, KazTest4/ID51",
+  "controller_operations": "NONE",
+  "firmware_inputs_changed": false,
+  "remaining_action": "post-publication live readback"
+}

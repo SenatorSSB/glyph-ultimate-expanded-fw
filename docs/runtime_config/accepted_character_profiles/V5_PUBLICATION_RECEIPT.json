@@ -1,0 +1,12 @@
+{
+  "status": "CANONICAL_V5_PROMOTED_LIVE_VERIFIED",
+  "published_at_configurator_commit": "a37bb5e930b3a4bddcbdc29d00c420c76354d10c",
+  "publication_commit_message": "Promote gameplay-accepted Kazuya v5 as canonical profile",
+  "prior_live_configurator": "a6e3bc885d46e2a7412ec697aa822bcd8c4ce495",
+  "reviewed_v5_commit": "510234798d74d4aa29dbc35df030df5530c26c81",
+  "canonical_source": {"path": "profiles/kazuya/Kazuya.profile.json", "git_blob": "64c2825605082701b9252832149535c82ebb7fc5", "wrapper_sha256": "72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87", "body_sha256": "30bd0b711e3973527e1d48b59af08aa5c71b6ef8f2dc5b9d932932420d9c0f6f"},
+  "independent_review": "APPROVED; docs/runtime_config/accepted_character_profiles/INDEPENDENT_REVIEW.json",
+  "firmware_build_or_flash": false,
+  "controller_operations": "NONE",
+  "post_publication_live_readback_required": true
+}

@@ -25,6 +25,9 @@ relabeled PASS.
 
 The [fresh v5 independent review](INDEPENDENT_REVIEW.json) is APPROVED; the
 [v4 review](INDEPENDENT_REVIEW_V4_HISTORICAL.json) remains preserved history.
+The [v5 publication receipt](V5_PUBLICATION_RECEIPT.json) and
+[chapter ledger](V5_CHAPTER_LEDGER.json) record the separately published
+source-only promotion.
 
 Run the source-only verification:
 
