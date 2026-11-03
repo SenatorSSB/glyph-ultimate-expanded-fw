@@ -1,7 +1,7 @@
 {
   "format": "glyph-native-ultimate-profile",
   "formatVersion": 1,
-  "name": "KazTest4",
+  "name": "Kazuya",
   "provenance": {
     "kind": "authoredSourceV1"
   },
@@ -236,47 +236,6 @@
         ],
         "9": [
           163,
-          205
-        ]
-      }
-    },
-    "Horizontal46": {
-      "slot": 7,
-      "directions": {
-        "1": [
-          82,
-          51
-        ],
-        "2": [
-          128,
-          51
-        ],
-        "3": [
-          174,
-          51
-        ],
-        "4": [
-          82,
-          128
-        ],
-        "5": [
-          128,
-          128
-        ],
-        "6": [
-          174,
-          128
-        ],
-        "7": [
-          82,
-          205
-        ],
-        "8": [
-          128,
-          205
-        ],
-        "9": [
-          174,
           205
         ]
       }
@@ -568,47 +527,6 @@
         ]
       }
     },
-    "RF6LowMagnitude": {
-      "slot": 15,
-      "directions": {
-        "1": [
-          89,
-          89
-        ],
-        "2": [
-          128,
-          79
-        ],
-        "3": [
-          167,
-          89
-        ],
-        "4": [
-          79,
-          128
-        ],
-        "5": [
-          128,
-          128
-        ],
-        "6": [
-          177,
-          128
-        ],
-        "7": [
-          128,
-          205
-        ],
-        "8": [
-          128,
-          205
-        ],
-        "9": [
-          128,
-          205
-        ]
-      }
-    },
     "CDArmed": {
       "slot": 4,
       "directions": {
@@ -647,47 +565,6 @@
         "9": [
           195,
           51
-        ]
-      }
-    },
-    "RF7ReleaseNeutral": {
-      "slot": 5,
-      "directions": {
-        "1": [
-          128,
-          128
-        ],
-        "2": [
-          128,
-          128
-        ],
-        "3": [
-          128,
-          128
-        ],
-        "4": [
-          128,
-          128
-        ],
-        "5": [
-          128,
-          128
-        ],
-        "6": [
-          128,
-          128
-        ],
-        "7": [
-          128,
-          128
-        ],
-        "8": [
-          128,
-          128
-        ],
-        "9": [
-          128,
-          128
         ]
       }
     },
@@ -772,6 +649,211 @@
           205
         ]
       }
+    },
+    "RF15Weak": {
+      "slot": 15,
+      "directions": {
+        "1": [
+          89,
+          89
+        ],
+        "2": [
+          128,
+          79
+        ],
+        "3": [
+          167,
+          89
+        ],
+        "4": [
+          79,
+          128
+        ],
+        "5": [
+          128,
+          128
+        ],
+        "6": [
+          177,
+          128
+        ],
+        "7": [
+          89,
+          167
+        ],
+        "8": [
+          128,
+          177
+        ],
+        "9": [
+          167,
+          167
+        ]
+      }
+    },
+    "MashDownLeft": {
+      "slot": 18,
+      "directions": {
+        "1": [
+          61,
+          51
+        ],
+        "2": [
+          61,
+          51
+        ],
+        "3": [
+          61,
+          51
+        ],
+        "4": [
+          61,
+          51
+        ],
+        "5": [
+          61,
+          51
+        ],
+        "6": [
+          61,
+          51
+        ],
+        "7": [
+          61,
+          51
+        ],
+        "8": [
+          61,
+          51
+        ],
+        "9": [
+          61,
+          51
+        ]
+      }
+    },
+    "MashDownRight": {
+      "slot": 19,
+      "directions": {
+        "1": [
+          195,
+          51
+        ],
+        "2": [
+          195,
+          51
+        ],
+        "3": [
+          195,
+          51
+        ],
+        "4": [
+          195,
+          51
+        ],
+        "5": [
+          195,
+          51
+        ],
+        "6": [
+          195,
+          51
+        ],
+        "7": [
+          195,
+          51
+        ],
+        "8": [
+          195,
+          51
+        ],
+        "9": [
+          195,
+          51
+        ]
+      }
+    },
+    "MashUpRight": {
+      "slot": 20,
+      "directions": {
+        "1": [
+          195,
+          205
+        ],
+        "2": [
+          195,
+          205
+        ],
+        "3": [
+          195,
+          205
+        ],
+        "4": [
+          195,
+          205
+        ],
+        "5": [
+          195,
+          205
+        ],
+        "6": [
+          195,
+          205
+        ],
+        "7": [
+          195,
+          205
+        ],
+        "8": [
+          195,
+          205
+        ],
+        "9": [
+          195,
+          205
+        ]
+      }
+    },
+    "MashUpLeft": {
+      "slot": 21,
+      "directions": {
+        "1": [
+          61,
+          205
+        ],
+        "2": [
+          61,
+          205
+        ],
+        "3": [
+          61,
+          205
+        ],
+        "4": [
+          61,
+          205
+        ],
+        "5": [
+          61,
+          205
+        ],
+        "6": [
+          61,
+          205
+        ],
+        "7": [
+          61,
+          205
+        ],
+        "8": [
+          61,
+          205
+        ],
+        "9": [
+          61,
+          205
+        ]
+      }
     }
   },
   "conditions": [
@@ -786,14 +868,67 @@
       "none": []
     },
     {
-      "name": "cdcNeutral",
+      "name": "cdcTriple",
       "stage": "early",
       "all": [
-        "condition:cdcPair"
+        "condition:cdcPair",
+        "postSocd:RF6"
       ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "commandActive",
+      "stage": "early",
+      "all": [],
       "any": [
+        "postSocd:RF8",
+        "postSocd:RF7",
+        "postSocd:RF6"
+      ],
+      "none": []
+    },
+    {
+      "name": "rf5rf6Armed",
+      "stage": "early",
+      "all": [
         "postSocd:RF5",
         "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF8",
+        "postSocd:RF7"
+      ]
+    },
+    {
+      "name": "rf6Neutral",
+      "stage": "early",
+      "all": [
+        "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "condition:rf5rf6Armed"
+      ]
+    },
+    {
+      "name": "cdRF5Neutral",
+      "stage": "early",
+      "all": [
+        "condition:cdcPair",
+        "postSocd:RF5"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "neutralCommand",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:rf6Neutral",
+        "condition:cdRF5Neutral"
       ],
       "none": []
     },
@@ -810,16 +945,6 @@
       ]
     },
     {
-      "name": "commandActive",
-      "stage": "early",
-      "all": [],
-      "any": [
-        "postSocd:RF8",
-        "postSocd:RF7"
-      ],
-      "none": []
-    },
-    {
       "name": "downDiagonalCommand",
       "stage": "early",
       "all": [
@@ -827,21 +952,23 @@
       ],
       "any": [
         "postSocd:RF5",
-        "postSocd:RF6"
+        "postSocd:LT4",
+        "postSocd:RF15"
       ],
       "none": [
-        "postSocd:RF7"
+        "postSocd:RF7",
+        "postSocd:RF6"
       ]
     },
     {
       "name": "forcedDown",
       "stage": "early",
-      "all": [
-        "postSocd:RF8"
+      "all": [],
+      "any": [
+        "postSocd:RF8",
+        "postSocd:RF7"
       ],
-      "any": [],
       "none": [
-        "postSocd:RF7",
         "postSocd:RF5",
         "postSocd:RF6"
       ]
@@ -855,32 +982,7 @@
       ],
       "any": [],
       "none": [
-        "postSocd:RF8"
-      ]
-    },
-    {
-      "name": "springloadGrab",
-      "stage": "early",
-      "all": [
-        "postSocd:RF7",
-        "postSocd:RF6"
-      ],
-      "any": [],
-      "none": [
         "postSocd:RF8",
-        "postSocd:RF5"
-      ]
-    },
-    {
-      "name": "rf7ReleaseNeutral",
-      "stage": "early",
-      "all": [
-        "postSocd:RF7"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:RF8",
-        "postSocd:RF5",
         "postSocd:RF6"
       ]
     },
@@ -892,19 +994,8 @@
       ],
       "any": [],
       "none": [
-        "postSocd:RF7"
-      ]
-    },
-    {
-      "name": "rf6Grab",
-      "stage": "early",
-      "all": [
-        "postSocd:RF6"
-      ],
-      "any": [],
-      "none": [
         "postSocd:RF7",
-        "postSocd:RF5"
+        "postSocd:RF6"
       ]
     },
     {
@@ -919,15 +1010,59 @@
       ]
     },
     {
-      "name": "rf6OrdinaryAnalog",
+      "name": "rf15Z",
       "stage": "early",
       "all": [
-        "postSocd:RF6"
+        "postSocd:RF15"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "rf15Weak",
+      "stage": "early",
+      "all": [
+        "postSocd:RF15"
       ],
       "any": [],
       "none": [
         "condition:commandActive",
         "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "cjabLayer",
+      "stage": "early",
+      "all": [
+        "postSocd:RT1",
+        "postSocd:RF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "cjabAttack",
+      "stage": "early",
+      "all": [
+        "condition:cjabLayer",
+        "postSocd:LT6"
+      ],
+      "any": [],
+      "none": []
+    },
+    {
+      "name": "lt6DownSmash",
+      "stage": "early",
+      "all": [
+        "postSocd:LT6"
+      ],
+      "any": [],
+      "none": [
+        "condition:cjabLayer"
       ]
     },
     {
@@ -965,43 +1100,6 @@
         "condition:rf5Attack",
         "condition:lt2UpAction"
       ]
-    },
-    {
-      "name": "lt2DefensivePrepare",
-      "stage": "early",
-      "all": [
-        "condition:cdcPair",
-        "condition:lt2Shield"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:RF5",
-        "postSocd:RF6"
-      ]
-    },
-    {
-      "name": "lt2DefensiveDownBack",
-      "stage": "early",
-      "all": [
-        "postSocd:RF7",
-        "condition:lt2Shield"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:RF8",
-        "postSocd:RF5",
-        "postSocd:RF6"
-      ]
-    },
-    {
-      "name": "neutralCommand",
-      "stage": "early",
-      "all": [],
-      "any": [
-        "condition:cdcNeutral",
-        "condition:lt2DefensivePrepare"
-      ],
-      "none": []
     },
     {
       "name": "cAny",
@@ -1319,28 +1417,6 @@
       ]
     },
     {
-      "name": "rf6Down",
-      "stage": "early",
-      "all": [
-        "condition:leftDown"
-      ],
-      "any": [],
-      "none": [
-        "condition:leftUp"
-      ]
-    },
-    {
-      "name": "rf6Up",
-      "stage": "early",
-      "all": [
-        "condition:leftUp"
-      ],
-      "any": [],
-      "none": [
-        "condition:leftDown"
-      ]
-    },
-    {
       "name": "tableRF9RF3RF4",
       "stage": "early",
       "all": [
@@ -1497,24 +1573,6 @@
       ],
       "any": [],
       "none": [
-        "postSocd:LT4",
-        "condition:thumb3Vertical",
-        "condition:thumb3RF3Horizontal",
-        "condition:thumb3RF4Flipped",
-        "condition:rf4Tilt",
-        "condition:rt1Compact",
-        "condition:tableRT1RF4"
-      ]
-    },
-    {
-      "name": "selectHorizontal46",
-      "stage": "early",
-      "all": [
-        "postSocd:LT4"
-      ],
-      "any": [],
-      "none": [
-        "postSocd:LT5",
         "condition:thumb3Vertical",
         "condition:thumb3RF3Horizontal",
         "condition:thumb3RF4Flipped",
@@ -1532,7 +1590,6 @@
       "any": [],
       "none": [
         "postSocd:LT5",
-        "postSocd:LT4",
         "condition:thumb3RF3Horizontal",
         "condition:thumb3RF4Flipped",
         "condition:rf4Tilt",
@@ -1549,7 +1606,6 @@
       "any": [],
       "none": [
         "postSocd:LT5",
-        "postSocd:LT4",
         "condition:thumb3Vertical",
         "condition:thumb3RF4Flipped",
         "condition:rf4Tilt",
@@ -1566,7 +1622,6 @@
       "any": [],
       "none": [
         "postSocd:LT5",
-        "postSocd:LT4",
         "condition:rf4Tilt",
         "condition:rt1Compact",
         "condition:tableRT1RF4"
@@ -1581,7 +1636,6 @@
       "any": [],
       "none": [
         "postSocd:LT5",
-        "postSocd:LT4",
         "condition:thumb3Vertical",
         "condition:thumb3RF3Horizontal",
         "condition:thumb3RF4Flipped",
@@ -1599,7 +1653,6 @@
       "any": [],
       "none": [
         "postSocd:LT5",
-        "postSocd:LT4",
         "condition:thumb3RF3Horizontal",
         "condition:thumb3RF4Flipped",
         "condition:rf4Tilt",
@@ -1615,13 +1668,235 @@
       "any": [],
       "none": [
         "postSocd:LT5",
-        "postSocd:LT4",
         "condition:thumb3Vertical",
         "condition:thumb3RF3Horizontal",
         "condition:thumb3RF4Flipped",
         "condition:rf4Tilt",
         "condition:rt1Compact"
       ]
+    },
+    {
+      "name": "zWeakDown",
+      "stage": "early",
+      "all": [
+        "condition:leftDown"
+      ],
+      "any": [],
+      "none": [
+        "condition:leftUp"
+      ]
+    },
+    {
+      "name": "zWeakUp",
+      "stage": "early",
+      "all": [
+        "condition:leftUp"
+      ],
+      "any": [],
+      "none": [
+        "condition:leftDown"
+      ]
+    },
+    {
+      "name": "lt2CdcDownBack",
+      "stage": "early",
+      "all": [
+        "condition:cdcTriple",
+        "condition:lt2Shield"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:RF5"
+      ]
+    },
+    {
+      "name": "mashAny4",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "postSocd:LF8",
+        "postSocd:LF7",
+        "postSocd:LF6",
+        "postSocd:RF10"
+      ],
+      "none": []
+    },
+    {
+      "name": "mashAny",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:mashAny4",
+        "postSocd:RF16"
+      ],
+      "none": []
+    },
+    {
+      "name": "mashA",
+      "stage": "early",
+      "all": [
+        "postSocd:LF8"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF7",
+        "postSocd:LF6",
+        "postSocd:RF10",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashAB",
+      "stage": "early",
+      "all": [
+        "postSocd:LF8",
+        "postSocd:LF7"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF6",
+        "postSocd:RF10",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashB",
+      "stage": "early",
+      "all": [
+        "postSocd:LF7"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:LF6",
+        "postSocd:RF10",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashBC",
+      "stage": "early",
+      "all": [
+        "postSocd:LF7",
+        "postSocd:LF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:RF10",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashC",
+      "stage": "early",
+      "all": [
+        "postSocd:LF6"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:LF7",
+        "postSocd:RF10",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashCD",
+      "stage": "early",
+      "all": [
+        "postSocd:LF6",
+        "postSocd:RF10"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:LF7",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashD",
+      "stage": "early",
+      "all": [
+        "postSocd:RF10"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:LF7",
+        "postSocd:LF6",
+        "postSocd:RF16"
+      ]
+    },
+    {
+      "name": "mashDE",
+      "stage": "early",
+      "all": [
+        "postSocd:RF10",
+        "postSocd:RF16"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:LF7",
+        "postSocd:LF6"
+      ]
+    },
+    {
+      "name": "mashE",
+      "stage": "early",
+      "all": [
+        "postSocd:RF16"
+      ],
+      "any": [],
+      "none": [
+        "postSocd:LF8",
+        "postSocd:LF7",
+        "postSocd:LF6",
+        "postSocd:RF10"
+      ]
+    },
+    {
+      "name": "mashDiag1",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:mashA",
+        "condition:mashC",
+        "condition:mashE"
+      ],
+      "none": []
+    },
+    {
+      "name": "mashDiag3",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:mashAB",
+        "condition:mashCD"
+      ],
+      "none": []
+    },
+    {
+      "name": "mashDiag9",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:mashB",
+        "condition:mashD"
+      ],
+      "none": []
+    },
+    {
+      "name": "mashDiag7",
+      "stage": "early",
+      "all": [],
+      "any": [
+        "condition:mashBC",
+        "condition:mashDE"
+      ],
+      "none": []
     }
   ],
   "directionSources": [
@@ -1647,11 +1922,11 @@
       "up": "condition:forcedUp"
     },
     {
-      "name": "rf6Axes",
+      "name": "zWeakAxes",
       "left": "condition:leftLeft",
       "right": "condition:leftRight",
-      "down": "condition:rf6Down",
-      "up": "condition:rf6Up"
+      "down": "condition:zWeakDown",
+      "up": "condition:zWeakUp"
     },
     {
       "name": "angledC",
@@ -1692,43 +1967,68 @@
   "tableRules": [
     {
       "priority": 1,
+      "table": "MashDownLeft",
+      "when": "condition:mashDiag1"
+    },
+    {
+      "priority": 2,
+      "table": "MashDownRight",
+      "when": "condition:mashDiag3"
+    },
+    {
+      "priority": 3,
+      "table": "MashUpRight",
+      "when": "condition:mashDiag9"
+    },
+    {
+      "priority": 4,
+      "table": "MashUpLeft",
+      "when": "condition:mashDiag7"
+    },
+    {
+      "priority": 5,
+      "table": "CDCNeutral",
+      "when": "condition:mashAny"
+    },
+    {
+      "priority": 6,
+      "table": "LT2DefensiveDownBack",
+      "when": "condition:lt2CdcDownBack"
+    },
+    {
+      "priority": 7,
+      "table": "LT2DefensiveDownBack",
+      "when": "condition:cjabLayer"
+    },
+    {
+      "priority": 8,
+      "table": "SpringloadUp",
+      "when": "condition:rf5rf6Armed"
+    },
+    {
+      "priority": 9,
       "table": "CDCNeutral",
       "when": "condition:neutralCommand"
     },
     {
-      "priority": 2,
-      "table": "LT2DefensiveDownBack",
-      "when": "condition:lt2DefensiveDownBack"
-    },
-    {
-      "priority": 3,
+      "priority": 10,
       "table": "CDArmed",
       "when": "condition:cdArmed"
     },
     {
-      "priority": 4,
+      "priority": 11,
       "table": "DownDiagonal",
       "when": "condition:downDiagonalCommand"
     },
     {
-      "priority": 5,
+      "priority": 12,
       "table": "ForcedDown",
       "when": "condition:forcedDown"
     },
     {
-      "priority": 6,
+      "priority": 13,
       "table": "SpringloadUp",
       "when": "condition:springloadUp"
-    },
-    {
-      "priority": 7,
-      "table": "Default",
-      "when": "condition:springloadGrab"
-    },
-    {
-      "priority": 8,
-      "table": "RF7ReleaseNeutral",
-      "when": "condition:rf7ReleaseNeutral"
     },
     {
       "priority": 20,
@@ -1739,11 +2039,6 @@
       "priority": 30,
       "table": "Horizontal35",
       "when": "condition:selectHorizontal35"
-    },
-    {
-      "priority": 31,
-      "table": "Horizontal46",
-      "when": "condition:selectHorizontal46"
     },
     {
       "priority": 32,
@@ -1785,7 +2080,7 @@
       "winnerTable": "any"
     },
     {
-      "when": "postSocd:LT6",
+      "when": "condition:lt6DownSmash",
       "outputs": [
         "buttonA"
       ],
@@ -1841,21 +2136,14 @@
       "winnerTable": "any"
     },
     {
-      "when": "postSocd:RF10",
+      "when": "postSocd:RF11",
       "outputs": [
         "buttonY"
       ],
       "winnerTable": "any"
     },
     {
-      "when": "condition:rf6Grab",
-      "outputs": [
-        "buttonR"
-      ],
-      "winnerTable": "any"
-    },
-    {
-      "when": "postSocd:RF16",
+      "when": "postSocd:RF14",
       "outputs": [
         "triggerRDigital"
       ],
@@ -1910,6 +2198,20 @@
       "when": "postSocd:RF12",
       "outputs": [
         "buttonA"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "postSocd:LT4",
+      "outputs": [
+        "buttonR"
+      ],
+      "winnerTable": "any"
+    },
+    {
+      "when": "condition:rf15Z",
+      "outputs": [
+        "buttonR"
       ],
       "winnerTable": "any"
     }
@@ -2005,21 +2307,6 @@
         "mode": "table",
         "normalTable": "Default",
         "modeTable": "Default"
-      }
-    },
-    {
-      "target": "leftStick",
-      "priority": 60,
-      "activation": "condition:rf6OrdinaryAnalog",
-      "gate": "true",
-      "gateInverted": false,
-      "skipWhenDpadBypass": true,
-      "winnerTable": "any",
-      "source": "rf6Axes",
-      "coordinates": {
-        "mode": "table",
-        "normalTable": "RF6LowMagnitude",
-        "modeTable": "RF6LowMagnitude"
       }
     },
     {
@@ -2178,59 +2465,8 @@
     },
     {
       "target": "leftStick",
-      "priority": 50,
-      "activation": "condition:rf6OrdinaryAnalog",
-      "gate": "postSocd:LF2",
-      "gateInverted": true,
-      "skipWhenDpadBypass": true,
-      "winnerTable": "any",
-      "source": "rf6Axes",
-      "coordinates": {
-        "mode": "inline",
-        "points": [
-          [
-            89,
-            89
-          ],
-          [
-            128,
-            79
-          ],
-          [
-            167,
-            89
-          ],
-          [
-            79,
-            128
-          ],
-          [
-            128,
-            128
-          ],
-          [
-            177,
-            128
-          ],
-          [
-            89,
-            167
-          ],
-          [
-            128,
-            177
-          ],
-          [
-            167,
-            167
-          ]
-        ]
-      }
-    },
-    {
-      "target": "leftStick",
-      "priority": 2,
-      "activation": "postSocd:LT6",
+      "priority": 3,
+      "activation": "condition:lt6DownSmash",
       "gate": "true",
       "gateInverted": false,
       "skipWhenDpadBypass": false,
@@ -2246,7 +2482,7 @@
     },
     {
       "target": "leftStick",
-      "priority": 1,
+      "priority": 2,
       "activation": "postSocd:RF12",
       "gate": "true",
       "gateInverted": false,
@@ -2260,6 +2496,51 @@
           128
         ]
       }
+    },
+    {
+      "target": "leftStick",
+      "priority": 1,
+      "activation": "condition:mashAny",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "selectedTable"
+      }
+    },
+    {
+      "target": "leftStick",
+      "priority": 60,
+      "activation": "condition:rf15Weak",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": true,
+      "winnerTable": "any",
+      "source": "zWeakAxes",
+      "coordinates": {
+        "mode": "table",
+        "normalTable": "RF15Weak",
+        "modeTable": "RF15Weak"
+      }
+    },
+    {
+      "target": "rightStick",
+      "priority": 1,
+      "activation": "condition:cjabAttack",
+      "gate": "true",
+      "gateInverted": false,
+      "skipWhenDpadBypass": false,
+      "winnerTable": "any",
+      "source": "neutralAxes",
+      "coordinates": {
+        "mode": "fixed",
+        "point": [
+          128,
+          28
+        ]
+      }
     }
   ],
   "digitalPostMask": {
@@ -2269,7 +2550,7 @@
     "inverted": false
   },
   "metadata": {
-    "description": "Kazuya v4: revised CD/release neutral, semantic LT2 defensive cancel, LT6 Down+A and RF12 neutral+A. Gameplay NOT_TESTED.",
+    "description": "Kazuya v5 draft: press-only RF8/RF7/RF6 CDC, LT2 reactive down-back Shield, LT4 Z, RF15 weak Z/HG, optional RT1/LT6 C-Jab input layer, two-finger directional mash row. Owner gameplay NOT_TESTED.",
     "character": "Kazuya"
   }
 }

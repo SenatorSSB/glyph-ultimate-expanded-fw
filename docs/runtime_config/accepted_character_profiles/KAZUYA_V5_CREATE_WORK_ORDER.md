@@ -1,4 +1,9 @@
-# Proposed Kazuya v5 guarded CREATE work order
+# Historical Kazuya v5 guarded CREATE work order
+
+This is the pre-installation packet retained as historical evidence. Its
+DEVICE_AUTHORIZATION_PENDING status was true when authored; it is superseded as
+current status by the owner-reported ID53/KazTest5 installation, readback and
+gameplay acceptance in `ACCEPTED_KAZUYA.json`. It grants no current operation.
 
 Disposition: **PROPOSED — NOT READY — owner/Curator device authorization required**. This is a one-operation packet, not authority to contact a controller.
 

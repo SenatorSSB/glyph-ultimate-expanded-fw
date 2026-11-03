@@ -1,56 +1,25 @@
 {
-  "verdict": "PASS",
-  "packet_id": "ACP-20261025-01",
-  "reviewer": "Independent native subagent /root/kazuya_review",
-  "review_date": "2026-10-25",
+  "verdict": "APPROVED",
+  "review_type": "fresh independent canonical-promotion review",
+  "reviewer": "Independent native subagent /root/v5_independent_review",
+  "review_date": "2026-11-03",
+  "reviewed_base": "a6e3bc885d46e2a7412ec697aa822bcd8c4ce495",
+  "reviewed_v5_commit": "510234798d74d4aa29dbc35df030df5530c26c81",
   "scope": [
-    "exact accepted source\u2192payload\u2192ID51/readback\u2192owner gameplay authority",
-    "canonical source promotion and v1 archive",
-    "unchanged firmware and historical inputs",
-    "current-C++/historical host verification",
-    "source-backed owner-approved RENAME exposure and no-retry negatives",
-    "exact future packet, identities, refs, checkpoint/fence/preservation guards",
-    "zero controller mutations in preparation"
+    "exact v5 source-copy and Git-blob correspondence",
+    "versioned Kazuya v1-v4 and Ultimate archival preservation",
+    "accepted-profile authority, provenance, and owner-reported device/gameplay wording",
+    "historical-verifier migration and v5 current-native verification",
+    "production compilation identities and validation scope",
+    "documentation accuracy and integration scope",
+    "absence of controller operations, firmware changes, evaluator changes, builds, and flashes"
   ],
-  "tools_manifest_sha256": "27d2e54e3376f6fea53360e3e97a08e4f8fdc8e63665393390b85ad915d03464",
-  "reviewed_chapter_files_sha256": {
-    "TOOLS_MANIFEST.json": "27d2e54e3376f6fea53360e3e97a08e4f8fdc8e63665393390b85ad915d03464",
-    "OWNER_PACKET.md": "b77d060531872b34cdee7df9339a0e10e78c1227c7a3d6e2ea56d15fd5b51e49",
-    "CONTROLLER_PLAN.json": "9f24ab4b202f98e9bb0b93e95d05655ece0b6d79fa707dce6f7b36ecd6b8f797",
-    "packet_checks.py": "1afaaed23b4f56f6023a91c8b6e27864ca863c32996bdd95040ee9ce3c995c7c",
-    "test_packet_checks.py": "42769360ff1c9b8169bbbcbce8a20cf48c8b12f8a42b598575ba75e3744904e2",
-    "ACCEPTED_KAZUYA.json": "c3264408b3daca92f53eee6421280afeaf7c90790e47a95cb67638ad25bb53b2",
-    "VALIDATION.json": "b8b24e36f2e3a7f4b2d5aee45d46270bdb3a6c5c61a7bb44ca2039abec0e823d"
-  },
-  "reviewed_operator_sha256": "5e15373f6b31820d8af8d083d1bc36f0fdd3cc4efdd139d315f1334880c2dba5",
-  "reviewed_operator_checker_sha256": "0678d9196468b930d5728101ea3f4808df9bda2d0218255f3522bd77c45a80f5",
-  "reviewed_accepted_checker_sha256": "27819fb95429780996074a0cce53b41793c829d2457ffd82582b2b42c8f81768",
-  "reviewed_final_validation_sha256": "58507a69d5969aeabb004f47561fc21752cab335b8886d04e572c984aa7e8e61",
-  "repaired_findings": [
-    "UPDATE does not rename: owner explicitly approved existing RENAME host exposure and unchanged revision semantics",
-    "canonical source is now rechecked after native replay",
-    "rename-specific wrong-ID/token/non-OK and one-send/no-retry negatives added"
+  "findings": [
+    "Initial review found the stale v4 current-review record; it was preserved as INDEPENDENT_REVIEW_V4_HISTORICAL.json and replaced by this v5 review record.",
+    "Canonical source is byte-identical to reviewed v5 source; both Git-blob checks equal 64c2825605082701b9252832149535c82ebb7fc5.",
+    "The v5 wrapper/body identities match the required values and the identity-only accepted-profile verifier passes.",
+    "No src/include/HAL/config/schema/platformio active firmware input changed; v1-v4 and Ultimate archived source paths are unchanged."
   ],
-  "independent_checks": [
-    "production host operator checker PASS",
-    "nine synthetic packet tests PASS",
-    "saved27record inventory audit PASS",
-    "Bash syntax-only PASS",
-    "full accepted current-C++/historical validation PASS"
-  ],
-  "unresolved_findings": [],
-  "controller_execution_authorized": false,
-  "canonical_adoption_authorized_by": "Direct owner goal objective PhaseD",
-  "post_integration_review": {
-    "verdict": "PASS",
-    "reviewer": "Independent native subagent /root/kazuya_review",
-    "live_canonical_verified": "812aff1f93618ddd81cf7491d3cc95ef56f7fb9d",
-    "reviewed_candidate": "59e12e3812b60d0dc085dd3d4d539b6401bd4ea8",
-    "identical_tree": "ea9d996044c498a69e495315688105a0db36db09",
-    "current_input_count": 1102,
-    "packet_attestation": "PASS",
-    "firmware_drift": false,
-    "controller_access_or_mutation": false,
-    "scope_note": "Source-free publication facts recorded afterward are independently inspectable factual evidence, not new source or execution authority."
-  }
+  "controller_operations": "NONE",
+  "publication_status_at_review": "NOT_YET_PUBLISHED"
 }

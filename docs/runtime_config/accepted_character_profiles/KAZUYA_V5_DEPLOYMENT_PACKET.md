@@ -1,4 +1,10 @@
-# Kazuya v5 deployment packet — prepared, unexecuted
+# Historical Kazuya v5 deployment packet — prepared, unexecuted
+
+This packet records the pre-installation host-verification state and remains
+unexecuted as a packet. It is superseded for current accepted-profile status by
+the owner-reported installed/readback-verified and gameplay-accepted ID53
+KazTest5 record in `ACCEPTED_KAZUYA.json`; it does not authorize any controller
+operation now.
 
 Status: **HOST_VERIFIED — DEVICE_AUTHORIZATION_PENDING**. This packet grants no
 device operation. It is version-specific and does not reuse ACP-20261025-01.

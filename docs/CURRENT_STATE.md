@@ -1,6 +1,20 @@
 # Glyph Current State
 
-## Accepted Kazuya v4 and intended Pikachu/Kazuya controller state — 2026-10-25
+## Accepted Kazuya v5 canonical baseline — 2026-11-03
+
+Canonical `profiles/kazuya/Kazuya.profile.json` is byte-identical to reviewed v5
+source `profiles/kazuya/v5/KazuyaV5.profile.json` (Git blob
+`64c2825605082701b9252832149535c82ebb7fc5`). Its native wrapper is
+`72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87`; native
+host validation is required for this source-only promotion. The owner reports
+that installed ProfileStore ID53/KazTest5 is readback verified and gameplay
+accepted. The private device receipts are unavailable in this checkout, so those
+device and gameplay facts remain explicitly owner-reported here. KazTest4/ID51
+remains a gameplay-accepted historical rollback reference. No controller action,
+firmware source change, build, flash, runtime evaluator change, or payload write
+is part of this promotion. V1-v4 and archival Ultimate remain preserved.
+
+## Historical v4 acceptance record — 2026-10-25
 
 Canonical `profiles/kazuya/Kazuya.profile.json` is the exact accepted v4 source
 from5e30341e, wrapperSHA25646084bbcf55646819ab0ce824b9de9ac778d3bc4d9344a8c8bcbfe5d15f6142c.

@@ -1,44 +1,36 @@
-# Accepted Kazuya v4 gameplay baseline
+# Kazuya v5 canonical gameplay baseline
 
-The canonical [Kazuya.profile.json](Kazuya.profile.json) is the exact owner-accepted
-v4 source: **HOST_VERIFIED**, **DEVICE_CREATED_AND_READBACK_VERIFIED** and
-**GAMEPLAY_ACCEPTED (owner-reported)** for stored ID51/revision1/nameKazTest4.
-Its source bytes, compiled wrapper/body, preprocessing and authored provenance
-are unchanged from accepted commit5e30341ee06761e20e864ccc013ca6658e42b5ca.
+`Kazuya.profile.json` is byte-identical to
+[`v5/KazuyaV5.profile.json`](v5/KazuyaV5.profile.json), the reviewed gameplay-
+accepted v5 source. Its Git blob is `64c2825605082701b9252832149535c82ebb7fc5`.
+The compiled wrapper/body/protobuf JSON identities are respectively
+`72c1d401f65c1884ca5bd37f6114727a196fddd8082298c9c95dd39d4ecfae87`,
+`30bd0b711e3973527e1d48b59af08aa5c71b6ef8f2dc5b9d932932420d9c0f6f`, and
+`54821170ddf4916f310e254c09a06f78d6ece8e8304f030761c3d03d5c6a8828`.
 
-[Accepted identity and correspondence](../../docs/runtime_config/accepted_character_profiles/ACCEPTED_KAZUYA.json)
-and [chapter evidence/operation packet](../../docs/runtime_config/accepted_character_profiles/README.md)
-record exact source→binary→ID51 readback→gameplay linkage. The human source name
-KazTest4 remains intentionally exact. A future metadata-only store rename to
-Kazuya preserves stableID51 and payload; the firmware's existing RENAME operation
-also preserves payload revision. No controller rename/cleanup is performed here.
+The owner reports installed **KazTest5**, ProfileStore **ID53**, as readback
+verified and gameplay accepted. Private controller receipts are not available in
+this checkout; no controller operation occurred as part of canonical promotion.
 
-Validate/compile/report using the unchanged authoring compiler:
+## Historical sources
+
+[v1](v1/README.md), [v2](v2/README.md), [v3](v3/README.md), and
+[v4](v4/README.md) are preserved immutable historical sources/evidence. In
+particular v4/KazTest4 (historical ID51) remains a gameplay-accepted rollback
+reference, not an invalid profile. The Ultimate/Pikachu archival source is also
+preserved. Do not change historical hashes or replay their root-pinned tests
+against the new canonical file; use the accepted-profile snapshot verifier.
+
+## Reproduction
 
 ```sh
 python3 tools/glyph_native_profile_json.py validate profiles/kazuya/Kazuya.profile.json
-python3 tools/glyph_native_profile_json.py compile profiles/kazuya/Kazuya.profile.json --output /tmp/Kazuya.accepted.pb
-python3 tools/glyph_native_profile_json.py compile profiles/kazuya/Kazuya.profile.json --format protobuf-json --output /tmp/Kazuya.accepted.protobuf.json
-python3 tools/glyph_native_profile_json.py report profiles/kazuya/Kazuya.profile.json --output /tmp/Kazuya.accepted.report.json
-python3 tools/check_glyph_accepted_character_profiles.py --report /tmp/Kazuya.accepted.validation.json
+python3 tools/glyph_native_profile_json.py compile profiles/kazuya/Kazuya.profile.json --output /tmp/KazuyaV5.pb
+python3 tools/test_kazuya_profile_v5.py -v
+python3 tools/check_glyph_accepted_character_profiles.py --report /tmp/KazuyaV5.accepted.json
 ```
 
-## History and test entrypoints
-
-The old root v1 source and README are byte-preserved under [v1/](v1/README.md).
-[V2](v2/README.md), [v3](v3/README.md) and [v4](v4/README.md) are immutable historical
-candidate/evidence chapters; their original status text describes their publication
-time, not the accepted current baseline. All old tests/manifests/results remain
-unchanged. They pinned the former root source and README, so run them via the
-accepted-character snapshot verifier above, which replays immutable5e source,
-checks current production/harness correspondence, then runs its native v4 suite
-against this canonical source. Do not rewrite frozen historical pins to match
-this later source promotion. Direct old test commands require the historical checkout.
-
-## Remaining scope
-
-V4 remains the rollback/reference for future experiments. Crouch Jab loop design
-is deferred; no additional loop, timers, history or macros are implemented.
-Unapproved Kazuya optimizations/sublayers and functionality outside the owner report
-remain unaccepted. Nunchuk remains NOT_TESTED. Glyph describes deterministic raw
-outputs; game command history and timing are not inferred from host tests.
+The promotion leaves firmware, native evaluator behavior, SOCD configuration,
+runtime configuration, device records and generated tracked payloads unchanged.
+Nunchuk remains NOT_TESTED; no new gameplay semantics are claimed beyond the
+owner's acceptance report.
