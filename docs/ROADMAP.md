@@ -1,5 +1,125 @@
 # Glyph Roadmap
 
+## Complete logical user profile direction — 2026-11-05
+
+Owner source: `owner-chat/2026-11-05/full-package-one-to-one-profile-architecture`.
+
+One installed user profile owns exactly one dedicated MODE_ULTIMATE GameModeConfig
+row and exactly one dedicated ProfileStore runtime record. Backing objects are not
+shared between user profiles. The user sees and manages only the complete logical
+profile.
+
+This is an ownership invariant, not a new schema. The exact field split remains
+source/schema-defined. Each Glyph user profile independently owns SOCD, physical
+button mappings/remaps, modifier coordinate/value tables, conditions/roles,
+sublayers/conditional layers, direction sources, routing, rules, precedence/
+priorities, digital bindings, analogue effects, gates, supported trigger/C-stick
+behavior, backend applicability/visibility, identity/name and other functionality
+owned by the target Glyph profile. Internal firmware layers are hidden from
+ordinary users; advanced diagnostics may expose them.
+
+| Concept | Meaning |
+| --- | --- |
+| Neutral Profile / modifier asset | Controller-independent Senscope modifier intent |
+| Glyph user profile / installed Glyph profile | Complete target-specific logical package |
+| Config backing row / execution context | Hidden dedicated `MODE_ULTIMATE` `GameModeConfig` |
+| Runtime backing record | Hidden dedicated ProfileStore record |
+| Active runtime profile | Single record/context currently loaded into Ultimate runtime |
+
+The Config backing row owns context fields such as SOCD/remaps and
+`applicable_backends`, and `ultimate_profile_id` references the package's runtime
+backing record. That record owns native runtime-program state such as tables,
+conditions, sublayers, routing, bindings, effects and gates as defined by source.
+Identical preprocessing does not justify shared, interned or copy-on-write rows.
+Editing one package must never mutate another. The owner accepts the 30-row Config
+capacity: roughly 30 full user profiles, fewer when non-Ultimate rows consume
+slots, is sufficient. Capacity remains visible validation feedback, not a current
+product blocker; 64-profile capacity, row compression and deduplication are not
+priorities.
+
+Installation/update establishes the one-to-one reference. Target ordinary
+miniscreen selection shows only the final logical profile list (for example
+Pikachu, Kazuya, Fox, Luigi), filtered by backend availability. Selecting Kazuya
+selects its dedicated row for the current backend and reboots/activates through
+the normal mode-selection path. It should not rewrite `ultimate_profile_id`
+between profiles. G6 `SET_MODE_REFERENCE` remains a valid hardware-proven
+lower-level management primitive; its evidence is unchanged. Backend applicability
+may be GameCube, XInput, Nintendo Switch USB or combinations, represented internally
+by `GameModeConfig.applicable_backends`; no second user-facing backend object is
+required. This is target behavior, not a claim that the existing menu already
+implements dedicated package selection.
+
+## Immediate product sequence — owner priority 1A / 1B
+
+Full-package lifecycle, starting with CREATE, and the full-profile Builder /
+Visualizer are the absolute top product priorities. Required maintenance/safety
+work may continue without displacing this sequence. These milestones are planning,
+not READY work or implementation/hardware authorization:
+
+1. **A — Full-package architecture.** Define identity, independently owned backing
+   pair, 30-row capacity, backend applicability, selection and lifecycle invariants,
+   and create/update/delete failure states. Determine the safest bounded operation
+   model; do not assume unrestricted `SET_CONFIG` is appropriate.
+2. **B — Glyph package lifecycle capability.** Plan missing bounded firmware/protocol
+   support for dedicated Config-row management and safe paired creation, reusing
+   proven G4/G5/G6 primitives. Require exact package identity, atomic or transactionally
+   safe creation, deterministic failure/uncertainty, no silently valid orphaned
+   half-profile, backend preservation and exact readback. These are requirements,
+   not a choice of transaction design.
+3. **C — Senscope full-profile Builder/Visualizer.** One target-specific workspace
+   edits and inspects the complete package, compiled result, validation/capacity and
+   eventual installed-device state. Consume/reference Designer assets without
+   collapsing the game-centric Designer and controller-specific Builder models.
+4. **D — End-to-end full-package CREATE.** Validated Builder project → compile →
+   preview → create dedicated runtime backing record → create/configure dedicated
+   Config backing row → link → verify → expose the logical profile to miniscreen
+   selection. This conceptual flow does not decide transaction order/protocol;
+   hardware acceptance remains separately gated.
+5. **E — Ordinary switching.** Validate final backend-filtered logical profile list
+   and activation of each paired row/record without reference rewrites.
+6. **F — Coherent full-package management.** After CREATE is stable, update, rename,
+   reorder, delete, richer device-state reconciliation and advanced visual debugging.
+
+Useful visual editing ships progressively: physical button layout and input →
+assigned-function tracing; modifier/table ownership; conditions/sublayers;
+rule/priority resolution; digital and analogue effects; SOCD/remaps; final
+left/right-stick/controller outputs; before/after changes; backend availability;
+capacity/validation. Simple whole-profile comprehension/editing comes first;
+advanced execution graphs/tracing/debugging need not block it.
+
+Deferred behind these priorities: production multi-slot/global optimization,
+cloud accounts/sharing and community infrastructure, Pro Controller and additional
+controller ecosystems, generic device CRUD for its own sake, 64-profile capacity,
+Config-row deduplication/interning/copy-on-write/compression, broad governance
+redesign, and semantic expansion unnecessary for this workflow.
+
+Non-decisions: operation numbers, one firmware transaction versus a coordinated
+finite sequence, row allocation algorithm, update/delete transaction protocol,
+neutral Profile schema migration, source pins, ProfileStore schema, gameplay and
+USB/backend semantics. These require later architecture/implementation authority.
+
+## Hardware-proven integration baseline — 2026-11-05
+
+G4 read-only Glyph integration and G5/G5.1 stored native ProfileStore CREATE
+under accepted one-shot custody are HARDWARE_VALIDATED. G6/HW5 saved Ultimate
+Config-row reference mutation is also DONE / HARDWARE_VALIDATED; it is a
+management primitive, not ordinary user-profile switching.
+
+Canonical Senscope acceptance: `G6-HW5-REFERENCE-ACCEPTANCE`, authority
+`G6-HW5-V6-EXTERNAL-AUTHORITY-20261104`, SHA-256
+`ee4a8f45919f798e3f9841869b65c6dd237e6f093ed5625577d08b46f3542d65`.
+One `SET_MODE_REFERENCE`, one selected READ and 16 successful exchanges verified
+exact expected-after Config, preserved unrelated Config fields and all 26
+directory IDs/metadata, store incarnation 1 / generation 228, and clean
+custody/disconnect settlement. Saved Ultimate row 0 now references Pikachu /
+ProfileStore ID27, native engine 1 / legacy selector 0. These are exact episode
+facts, not product constants or a fresh device observation.
+
+This does not claim active runtime switching during G6, immediate reload,
+gameplay validation, or installed-build attestation. Frozen proposals and prior
+inconclusive episodes remain historical; no new device authority follows.
+
+
 ## Accepted v4 baseline; controller cleanup awaits approval — 2026-10-25
 
 Canonical `profiles/kazuya/Kazuya.profile.json` is the exact accepted v4 source
@@ -504,187 +624,21 @@ hardware smoke. It does not authorize a public release, Senscope expansion, or
 a successor firmware chapter. LS-to-D-pad remains a bounded host-only physical
 observation limitation; Nunchuk remains NOT_TESTED.
 
-## Future Chapter — Multi-Profile Persistent Ultimate Profile Store
+## Completed native store and binding baseline
 
-Status: `FUTURE_ARCHITECTURE`, not authorized for implementation by this
-roadmap entry.
+Multi-profile ProfileStore persistence, migration and Configurator protocol,
+runtime-loaded native Ultimate programs and profile-defined controller bindings
+are implemented. Current source/tested integration records above govern their
+bounded accepted behavior. The former future-design sections are superseded as
+forward planning; their frozen records remain unchanged in
+[runtime store design](runtime_config/multi_profile_persistent_ultimate_profile_store_design.md).
+The native character-profile menu is hardware validated with exact tested source
+integrated; [menu architecture/evidence](runtime_config/character_profile_menu/README.md)
+retains its template/context matching and persistence details.
 
-The completed Runtime-Loaded Ultimate Profiles chapter is retired. Its accepted
-v3 `UltimateProfile` semantics and evaluator are the starting point for a
-future persistence/loading/selection and Configurator-protocol evolution, not
-a redesign of Stage A/B/C behavior. The initial product target is **at least
-20 stored Ultimate profiles**, with a storage- and resource-defined upper
-bound rather than a fundamental architectural maximum of 20.
-
-### Intended architecture
-
-- Store Ultimate profiles independently in persistent flash/LittleFS instead
-  of embedding every profile body in the main `Config`.
-- Materialize only the selected active profile in RAM, plus one bounded
-  candidate/staging buffer while loading, validating, or updating.
-- Keep the existing validated v3 profile vocabulary and bounded evaluator where
-  practical: 28 `RuntimeTableId` tables with nine coordinates each,
-  profile-owned routing, bounded roles/sublayers, numeric-priority table rules,
-  and the fixed Stage-C output-effect model.
-- Treat stable persistent `profile_id` as identity, separate from a user-visible
-  `name` and optional display `order`. Rename/reorder must not invalidate
-  references; a menu slot is not permanent identity.
-- Profile selection may retain the current reboot/reset boundary. A switch is:
-  select ID -> persist selected ID -> reboot/reset -> load requested profile ->
-  decode candidate -> fully validate -> publish active profile -> enter
-  Ultimate mode. Gameplay hot swapping is not required.
-- A corrupt or invalid individual profile must not invalidate the main
-  controller Config or unrelated stored profiles. Recovery must retain
-  Configurator access and allow fallback to a known-valid/default Ultimate
-  mode.
-
-### Persistence and protocol direction
-
-An update must not overwrite the only known-good active profile in place. The
-intended safety sequence is: receive/decode candidate -> structural validation
--> semantic validation -> write new/temporary record -> verify persisted record
--> atomically publish directory/reference -> retire the previous record when
-appropriate. Interrupted writes or power loss must not destroy the active
-known-good profile.
-
-This store is the intended firmware persistence boundary for later
-Senscope-driven profile management. Expected future operations are enumerate,
-create, duplicate, rename, update, delete, reorder display, set active,
-import/export, and inspect validation errors. Senscope may use a higher-level
-sparse or human-readable format, but firmware must consume a fully
-materialized, bounded, validated profile representation. This roadmap does not
-approve firmware inheritance or sparse-profile semantics.
-
-Firmware continues to own the finite legal vocabulary: `RuntimeTableId`,
-routing semantics, condition/token vocabulary, role evaluation, table-rule
-priority semantics, Stage-C phases/targets, and code-owned effect ordering.
-Profile data owns coordinates, routing assignments, role and table-selection
-conditions/priorities, and bounded effect parameters/gates. The format must not
-become a scripting, macro, turbo, timing, or arbitrary-expression system.
-
-### Future scope and gates
-
-Future design must cover stable IDs; directory/index and record formats;
-active-profile reference; versioning/migration; capacity measurement; boot
-loading and fallback; atomic recovery; deletion/reordering; replacement of the
-embedded `Config.ultimate_profiles` body with lightweight references where
-appropriate; Configurator record operations; RAM, flash/LittleFS, encoded-size
-and boot-latency budgets; and migration from accepted embedded-profile Configs.
-
-Required future tests include 20 stored profiles, switch/reboot persistence,
-one-profile corruption isolation, interrupted writes, deleted/invalid selected
-profiles, embedded-Config migration, and identity preservation through
-rename/reorder. Hardware scope follows exact-candidate review and should cover
-representative switch/reboot and recovery paths without unnecessarily repeating
-the accepted Stage A/B/C matrix.
-
-Explicitly deferred: no-reset hot swapping, dynamic modifier definitions,
-scripting/macros/turbo/timing, a broad Stage A/B/C redesign, Senscope UI,
-public/cloud sharing, Nunchuk validation, or reopening the LS-to-D-pad physical
-observability limitation.
-
-## Future Chapter — Profile-Defined Controller Function Bindings
-
-Status: `FUTURE_ARCHITECTURE`, sequenced after the Multi-Profile Persistent
-Ultimate Profile Store and not authorized for implementation by this roadmap
-entry. The store must not unnecessarily freeze assumptions that prevent this
-later profile evolution.
-
-Current Ultimate profile routing can select which physical Glyph input feeds a
-named logical slot, while substantial Ultimate controller behavior remains
-source-owned in `Ultimate.cpp`: logical-slot identities still carry meanings
-such as modifier/table selection, digital output, stick behavior, layers, and
-compound output behavior. This is the remaining semantic coupling to remove.
-
-### Intended boundary
-
-```text
-physical Glyph input
--> profile-defined binding / condition
--> firmware-defined bounded controller-function class
--> profile-defined parameters / bounded priority
--> virtual controller output
-```
-
-Firmware owns the finite legal controller-function vocabulary, validation,
-condition semantics, deterministic evaluation order, and conflict-domain
-resolution. Profiles own which physical inputs activate function instances,
-role/sublayer gates, virtual controller outputs, table/coordinate selections,
-bounded parameters, and permitted priority within a relevant domain. A
-physical or logical Glyph ID must not intrinsically mean X1, A, B, a modifier,
-or a layer.
-
-This boundary has three distinct domains:
-
-- **Physical controller input** identifies Glyph controls, for example
-  `BTN_LF1`, `BTN_RF7`, `BTN_LT5`, or `BTN_RT3`.
-- **Virtual controller output** expresses controller semantics: GameCube `A`,
-  `B`, `X`, `Y`, `Z`, `L`, `R`, Start, left/C-stick coordinates, analogue
-  triggers, and D-pad.
-- **Game semantics** such as attack, special, jump, shield, Up-B, airdodge,
-  tilt, smash, tech, and dash remain Senscope-owned. They must not become
-  persisted firmware/profile vocabulary.
-
-Thus a bounded compound function may mechanically emit virtual `B` plus a
-left-stick output using effective horizontal direction and bounded precedence;
-Senscope may label that combination for a game separately. It is not a macro.
-
-### Function classes, instances, and bindings
-
-The exact typed vocabulary must follow a systematic inventory and
-factorization of current `Ultimate.cpp`, not a guessed final enum. Likely
-categories include `DIGITAL_OUTPUT`, `DIRECTION_INPUT`,
-`RIGHT_STICK_DIRECTION`/`C_STICK_DIRECTION`, `STICK_TABLE_MODIFIER`,
-`STICK_OVERRIDE`, `DIGITAL_PLUS_STICK_OUTPUT`, `ANALOG_TRIGGER_OUTPUT`,
-`ROLE`/`LAYER_CONDITION`, `DPAD_ROUTING`, and `ANALOGUE_NULL`.
-
-Firmware owns **function classes**. Profiles own **function instances** and
-physical bindings. For example, X1, X2, Y1, Y2, Tilt1–3, and layer-specific
-tables can become `STICK_TABLE_MODIFIER` instances when they differ only in
-activation, table, role/sublayer, priority, or bounded parameters. Likewise a
-`DIGITAL_OUTPUT` instance can target virtual `A`, `B`, `X`, `Y`, or `Z` without
-tying any physical Glyph button to that output.
-
-Function declaration and physical binding are conceptually separate: a
-`DIGITAL_OUTPUT` instance targeting `A` may bind to `BTN_RF1` in one profile
-and `BTN_RF4` in another; an X1 table-modifier instance may bind to `BTN_LT5`
-or another input. The persisted schema need not use these names or this exact
-shape.
-
-Existing bounded roles/conditions point in the intended direction. Where a
-source-owned sublayer represents profile-specific behavior, migrate it to
-profile-declared boolean conditions composed from physical/routed input tokens,
-lower-numbered role tokens, `ALL`, `ANY`, and `NONE`. Firmware retains bounds,
-validation, and deterministic evaluation; profiles declare participating
-inputs and structural roles.
-
-### Conflict model, scope, and proof
-
-There is no unrestricted global execution priority and persisted array order
-must not be executable. Firmware defines deterministic conflict domains—such
-as left-stick table selection/overrides, right-stick overrides, digital
-outputs, analogue triggers, and D-pad routing—while profiles may provide
-bounded priority where ordering is necessary. Existing `tableRules.priority`
-is the model. Stage-C hard-coded precedence must be inventoried and factored
-into explicit controller-function conflict semantics where appropriate.
-
-Future phases are: (1) exhaustive current-behavior inventory; (2) function-
-class factorization; (3) typed profile bindings; (4) safe role/condition
-migration; (5) deterministic output/priority domains; (6) exact
-correspondence proof against accepted Ultimate behavior before retiring legacy
-paths; and (7) exact-candidate, boundary-focused hardware validation.
-
-Invariants: no arbitrary executable code, timing, delays, sequences, loops,
-turbo, or macros; raw stick coordinates remain distinct from effective/game-
-semantic outputs; vendor physical layout remains separate from virtual
-GameCube outputs; and accepted Stage A/B/C behavior must be reproducible before
-legacy hard-coded semantic coupling is removed.
-
-This architecture enables Senscope to present a physical button assigned to a
-typed controller function and parameters—for example an X1-table modifier or a
-bounded `B` plus left-stick compound—without firmware or profile data calling
-the result a game action.
-
+These completed mechanisms do not prove full-package lifecycle or the new ordinary
+paired-row selection target. The owner direction at the top of this roadmap now
+sets the forward sequence, including accepted 30-row capacity and no sharing.
 
 ## Current C024 completion
 
@@ -1038,6 +992,10 @@ because table contents differ rather than formatting alone.
 
 ## Phase 2 - Coordinate-Native Runtime Profile Contract Scaffolding
 
+This section describes the legacy generic scaffold only; implemented native
+Ultimate/ProfileStore capabilities are described above. It is not the current
+full-package product priority.
+
 Status: `READY_FOR_ENGINEERING_DESIGN`, implementation deferred.
 
 Goal: design coordinate-native runtime profile contract scaffolding around the
@@ -1092,8 +1050,8 @@ is now documented and checker-enforced.
 ## Phase 3 - Future Browser/Protobuf/Persistence Backend
 
 Status: `FUTURE_PHASE` for the legacy generic coordinate-native lane. Its
-Ultimate-profile persistence direction is superseded by **Future Chapter —
-Multi-Profile Persistent Ultimate Profile Store** above.
+Ultimate-profile persistence direction is superseded by the completed native store
+baseline above; the current full-package product sequence is milestones A–F.
 
 Goal: after the runtime model exists, design browser/protobuf/persistence
 backend infrastructure for moving a bounded runtime profile safely.
@@ -1101,9 +1059,9 @@ backend infrastructure for moving a bounded runtime profile safely.
 Next concrete action: none until the coordinate-native runtime profile design is
 reviewed and a hardware-proof strategy exists.
 
-Boundary: no WebSerial/device write, protobuf binary write, persistent
-runtime-config storage, backend/config.pb write path, or firmware flashing
-automation is implemented or approved by this roadmap.
+Boundary: this legacy generic lane adds no WebSerial/device write, protobuf
+binary write, persistent storage or flashing. Accepted native ProfileStore and
+Senscope G4/G5/G6 capabilities above are distinct. This roadmap approves no new operations.
 
 ## Archived Diagnostics
 

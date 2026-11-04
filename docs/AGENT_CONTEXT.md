@@ -1,5 +1,40 @@
 # Agent Context
 
+## Current full-package product priority — 2026-11-05
+
+The owner adopts one logical installed Glyph user profile = one dedicated
+MODE_ULTIMATE GameModeConfig backing row + one dedicated ProfileStore runtime
+backing record. Neither is shared; users manage only the whole logical profile.
+The 30-row Config limit is accepted, including non-Ultimate consumption.
+[Roadmap ownership, terminology and milestones A–F](ROADMAP.md) supersede older
+forward ordering: full-package architecture/bounded CREATE lifecycle and full-profile
+Builder/Visualizer first, then end-to-end installation and ordinary backend-filtered
+miniscreen selection without reference rewrites, then later full lifecycle/debugging.
+Existing menu acceptance does not prove that target package-selection model.
+No READY work, implementation, source repin or hardware authority is created.
+
+## Hardware-proven integration baseline — 2026-11-05
+
+G4 read-only Glyph integration and G5/G5.1 stored native ProfileStore CREATE
+under accepted one-shot custody are HARDWARE_VALIDATED. G6/HW5 saved Ultimate
+Config-row reference mutation is also DONE / HARDWARE_VALIDATED; it is a
+management primitive, not ordinary user-profile switching.
+
+Canonical Senscope acceptance: `G6-HW5-REFERENCE-ACCEPTANCE`, authority
+`G6-HW5-V6-EXTERNAL-AUTHORITY-20261104`, SHA-256
+`ee4a8f45919f798e3f9841869b65c6dd237e6f093ed5625577d08b46f3542d65`.
+One `SET_MODE_REFERENCE`, one selected READ and 16 successful exchanges verified
+exact expected-after Config, preserved unrelated Config fields and all 26
+directory IDs/metadata, store incarnation 1 / generation 228, and clean
+custody/disconnect settlement. Saved Ultimate row 0 now references Pikachu /
+ProfileStore ID27, native engine 1 / legacy selector 0. These are exact episode
+facts, not product constants or a fresh device observation.
+
+This does not claim active runtime switching during G6, immediate reload,
+gameplay validation, or installed-build attestation. Frozen proposals and prior
+inconclusive episodes remain historical; no new device authority follows.
+
+
 ## Accepted Kazuya v4 source and prepared two-profile packet — 2026-10-25
 
 Canonical `profiles/kazuya/Kazuya.profile.json` is the exact accepted v4 source
@@ -730,8 +765,8 @@ GP-VAL-028 is DONE: an authenticated tracked Nanopb 0.4.9.2 generated header mak
   SUPERSEDED historical evidence; current authority is the 28-table baseline
   extraction, source-owned generator modes, and source-authority intake.
 - Design coordinate-native runtime profile support separately.
-- Treat browser/protobuf/persistence backend work as future infrastructure
-  after the runtime model exists.
+- Native ProfileStore/runtime and bounded device transport are implemented.
+  The legacy generic browser/protobuf/persistence lane remains separate.
 - Keep game semantics outside firmware.
 
 ## Evidence Map

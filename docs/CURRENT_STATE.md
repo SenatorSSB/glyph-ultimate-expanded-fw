@@ -1,5 +1,40 @@
 # Glyph Current State
 
+## Current full-package product priority — 2026-11-05
+
+The owner adopts one logical installed Glyph user profile = one dedicated
+MODE_ULTIMATE GameModeConfig backing row + one dedicated ProfileStore runtime
+backing record. Neither is shared; users manage only the whole logical profile.
+The 30-row Config limit is accepted, including non-Ultimate consumption.
+[Roadmap ownership, terminology and milestones A–F](ROADMAP.md) supersede older
+forward ordering: full-package architecture/bounded CREATE lifecycle and full-profile
+Builder/Visualizer first, then end-to-end installation and ordinary backend-filtered
+miniscreen selection without reference rewrites, then later full lifecycle/debugging.
+Existing menu acceptance does not prove that target package-selection model.
+No READY work, implementation, source repin or hardware authority is created.
+
+## Hardware-proven integration baseline — 2026-11-05
+
+G4 read-only Glyph integration and G5/G5.1 stored native ProfileStore CREATE
+under accepted one-shot custody are HARDWARE_VALIDATED. G6/HW5 saved Ultimate
+Config-row reference mutation is also DONE / HARDWARE_VALIDATED; it is a
+management primitive, not ordinary user-profile switching.
+
+Canonical Senscope acceptance: `G6-HW5-REFERENCE-ACCEPTANCE`, authority
+`G6-HW5-V6-EXTERNAL-AUTHORITY-20261104`, SHA-256
+`ee4a8f45919f798e3f9841869b65c6dd237e6f093ed5625577d08b46f3542d65`.
+One `SET_MODE_REFERENCE`, one selected READ and 16 successful exchanges verified
+exact expected-after Config, preserved unrelated Config fields and all 26
+directory IDs/metadata, store incarnation 1 / generation 228, and clean
+custody/disconnect settlement. Saved Ultimate row 0 now references Pikachu /
+ProfileStore ID27, native engine 1 / legacy selector 0. These are exact episode
+facts, not product constants or a fresh device observation.
+
+This does not claim active runtime switching during G6, immediate reload,
+gameplay validation, or installed-build attestation. Frozen proposals and prior
+inconclusive episodes remain historical; no new device authority follows.
+
+
 ## Accepted Kazuya v5 canonical baseline — 2026-11-03
 
 Canonical `profiles/kazuya/Kazuya.profile.json` is byte-identical to reviewed v5
@@ -497,7 +532,7 @@ resume is invented by this status overlay. Canonical integration remains separat
 authorized after review and required hardware acceptance.
 
 
-C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). The Multi-Profile Persistent Ultimate Profile Store is recorded as future architecture, not started or authorized by this documentation update.
+C020–C024 is complete; GLYPH-UD-029 is historical only. Future chapters require fresh owner scope, current queue/contracts and the mandatory first-turn [bootstrap](agent_framework/FUTURE_DAEMON_BOOTSTRAP.md). The multi-profile ProfileStore and native runtime are now implemented; later accepted records above supersede that former future status. This documentation update authorizes no new implementation.
 
 ## Runtime-Loaded Ultimate Profiles completion
 
@@ -512,36 +547,16 @@ The chapter accepts the bounded runtime-profile behavior, Configurator recovery,
 and GameCube startup/default selection. LS-to-D-pad remains HOST_ONLY / PHYSICAL_NOT_DISTINGUISHABLE_WITH_AVAILABLE_OBSERVER,
 not a physical PASS; Nunchuk remains NOT_TESTED. Public release is a separate owner decision.
 
-### Current persistence representation and its limit
+### Current native persistence and binding representation
 
-Current accepted persistence embeds complete Ultimate profile objects directly
-in the main Nanopb `Config`, with `Config.ultimate_profiles max_count: 2`.
-That is a transitional representation, not a semantic limit of Ultimate
-profile behavior. A complete v3 profile has bounded storage for 28 coordinate
-tables of nine coordinates, up to 22 roles, 32 routing slots, up to 19 table
-rules, and exactly 12 Stage-C output-effect slots. The measured representation
-is `sizeof(UltimateProfile) = 2,152 bytes` and `sizeof(Config) = 31,224 bytes`.
-
-The repository holds multiple full `Config` instances/buffers, including the
-active Config, boot/load candidate, and Configurator `SET_CONFIG` candidate.
-Naively increasing the embedded fixed profile array therefore scales RAM across
-each of those instances. The planned store direction is to persist many
-profiles independently while materializing only active plus candidate/staging
-profiles in RAM; see the `Multi-Profile Persistent Ultimate Profile Store`
-roadmap chapter. This is a future architecture only and does not implement the
-store, protocol, or migration.
-
-### Subsequent function-binding direction
-
-Current profiles make tables, routing, bounded roles, table-rule priorities,
-and bounded output-effect parameters profile-driven, but `Ultimate.cpp` still
-assigns controller behavior to named logical Glyph slots. The later
-`Profile-Defined Controller Function Bindings` chapter follows the multi-profile
-store: it will replace that coupling with profile bindings to finite
-firmware-defined controller-function classes. The profile/firmware layer ends
-at deterministic virtual controller outputs; Smash/game concepts remain
-Senscope-owned. This is documentation-only future architecture, not an
-implemented binding schema or behavior change.
+The former two-profile embedded Config representation is historical and has been
+superseded by separate native ProfileStore records and Config row references.
+Native profile-defined controller bindings are implemented; the finite native
+vocabulary remains firmware-owned, with game semantics owned by Senscope.
+See [current roadmap](ROADMAP.md) and unchanged frozen design/evidence records.
+The new installed logical-profile ownership target is one dedicated row and one
+dedicated runtime record per user profile, not context sharing. Complete package
+CREATE and ordinary paired selection remain future product work.
 
 ## Current C024 completion
 
@@ -640,21 +655,22 @@ historical completion prose below does not authorize implementation.
   `docs/runtime_config/IMPLEMENTATION_BOUNDARY.md`.
 - The legacy generic coordinate-native runtime-config lane is not implemented;
   the accepted bounded Ultimate-profile runtime/persistence capability above is
-  distinct. The future multi-profile store, its migration, and its Configurator
-  protocol are not implemented. For that legacy generic lane, Runtime-loaded
+  distinct. The accepted multi-profile store, migration and Configurator protocol
+  are implemented in their bounded native lane. For the legacy generic lane, Runtime-loaded
   config is not implemented. WebSerial/device write is not implemented.
   Protobuf binary write is not implemented. Firmware flashing automation is not
   implemented. External adapter output is not implemented.
 
 ## Forward Direction
 
-- Next docs/tools direction: source-owned realization generator hardening.
+- Primary product direction: full-package CREATE and full-profile Builder/Visualizer;
+  legacy source-owned tooling remains maintenance.
 - Current docs/checker queue includes activation-alternatives and
   source-owned table symbol-map claim-invariant hardening.
 - Next safe queue: keep coordinate-native offline pipeline, bundle manifest,
   and export-package checks aligned with their fixtures.
 - Future X1 values or other table ownership require separate explicit authority; a behavior-changing candidate must also pass the exact-candidate hardware lifecycle.
-- Next design direction: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
+- Legacy-lane maintenance design: coordinate-native runtime profile contract scaffolding, with separate design and hardware proof before any runtime-active implementation.
 - Current contract scaffold packet: `docs/runtime_config/coordinate_native_runtime_profile_contract.md` with `docs/runtime_config/fixtures/coordinate_native_runtime_profile_contract.json`.
 - Offline dry-run evaluator: `tools/dry_run_coordinate_native_runtime_profile.py` with fixture-backed positive and negative cases under `docs/runtime_config/fixtures/`.
 - Browser/protobuf/persistence as future infrastructure is likely solvable, but it follows the runtime model and does not define the canonical profile.
@@ -667,11 +683,12 @@ historical completion prose below does not authorize implementation.
 - Candidate-generation diff diagnosis is executable and remains `TABLE_CONTENT_DIFFERENT`; it is hardware-candidate material, not a canonicalization-only branch.
 - Active behavior remains gated on an implemented activation strategy and exact hardware review. This docs/checker cleanup needs no hardware test; future behavior-changing firmware deltas need exact hardware PASS before merge.
 - Product approval is required before a new generic runtime-loaded config path,
-  multi-profile store implementation, profile-defined controller-function
-  bindings, device write, protobuf binary write, flashing automation, external
+  expansion beyond accepted native store/bindings/device-write contracts,
+  flashing automation, external
   adapter output, or neutral profile schema changes.
 ## Non-Claims
-- No push-to-device behavior is implemented or claimed.
+- Bounded native CREATE and saved-reference writes are proven above; no generic
+  unrestricted push-to-device capability is claimed.
 - No universal official configurator compatibility claim is made.
 - No nunchuk validation is claimed.
 - No root-cause claim is made.

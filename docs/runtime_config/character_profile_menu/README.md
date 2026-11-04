@@ -1,9 +1,16 @@
-# Native character profile menu — exact candidate and unexecuted installation
+# Native character profile menu — tested source integrated
 
 Current: **HARDWARE_VALIDATED — EXACT TESTED SOURCE INTEGRATED**.
 See [exact-source catalog/review/publication](integration_20261023/README.md).
 See [three-route hardware acceptance](hardware_20261023/README.md).
 Historical preparation sections and frozen CANDIDATE.json retain creation-time facts.
+
+Forward owner direction (2026-11-05) is [complete one-to-one user profiles](../../ROADMAP.md):
+each installed logical profile independently owns a dedicated MODE_ULTIMATE Config
+backing row and ProfileStore runtime backing record. Ordinary target selection
+activates that pair without rewriting references. The accepted menu below uses
+NativeTemplate/Persist semantics; its hardware PASS does not establish the future
+dedicated-package selection model. No menu implementation is changed here.
 The owner corrected the runtime-label count to **two** and explicitly chose to
 hide built-in/legacy Ultimate choices in compact mode, retaining their execution
 contexts. [Direct authority and bounded order](OWNER_DIRECTIVE.md) resolves the

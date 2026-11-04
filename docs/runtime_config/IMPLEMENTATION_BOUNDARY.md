@@ -2,6 +2,26 @@
 
 Status label: CURRENT.
 
+## Current native lane and owner direction — 2026-11-05
+
+Native ProfileStore persistence/protocol, runtime-loaded Ultimate profiles, native
+controller-function bindings and the tested character-profile menu are implemented.
+See [current state](../CURRENT_STATE.md) and [menu acceptance](character_profile_menu/README.md).
+Senscope G4 read-only, G5/G5.1 stored-record CREATE and G6/HW5 saved-reference
+mutation are hardware validated within their exact accepted scopes; G6 does not
+prove runtime activation or gameplay.
+
+The [current roadmap](../ROADMAP.md) adopts one complete logical Glyph user profile
+owning one dedicated MODE_ULTIMATE Config backing row and one dedicated ProfileStore
+runtime backing record, with no sharing. The 30-row cap is accepted. Full-package
+CREATE/lifecycle and full-profile Builder/Visualizer are next; safe row/pair
+management remains architecture work. Ordinary target selection activates the
+paired row without reference rewrites. No generic SET_CONFIG editor, new protocol,
+schema, implementation or hardware operation is authorized here.
+
+The older boundary below governs the **legacy generic coordinate-native lane**;
+it must not be read as negating the implemented native path.
+
 ## Later bounded native diagnostic exception — 2026-10-20
 
 The direct owner diagnostic authorization adds only the exact retained timing,
@@ -65,7 +85,7 @@ contract scaffold.
 - Generated active RuntimeConfigView wrapper publication is forbidden.
 - RuntimeConfigView replacement as the customization mechanism is forbidden.
 - RAM-backed active table publication is forbidden.
-- New generic runtime-loaded profile claims, and the future multi-profile store,
+- New generic runtime-loaded profile claims, and expansion beyond the accepted native store,
   require separate design, source authority, build proof, and hardware proof.
   This does not negate the accepted bounded Runtime-Loaded Ultimate Profiles
   chapter recorded in `docs/CURRENT_STATE.md`.
@@ -73,6 +93,10 @@ contract scaffold.
   are forbidden without those separate proofs.
 
 ## Future Coordinate-Native Boundary
+
+This section describes the legacy generic scaffold only; implemented native
+Ultimate/ProfileStore capabilities are described above. It is not the current
+full-package product priority.
 
 The future target is coordinate-native runtime profile support, but it remains a
 separate design and hardware-proof phase. The current contract scaffold is
@@ -114,14 +138,11 @@ storage, backend config write paths, or flashing automation.
 - Root cause remains unproven.
 - The legacy generic coordinate-native runtime-loaded config lane is not
   implemented.
-- The future multi-profile persistent Ultimate profile store is not
-  implemented. The accepted bounded Ultimate-profile persistence representation
-  is distinct and remains documented in `docs/CURRENT_STATE.md`.
-- The subsequent profile-defined controller-function binding architecture is
-  not implemented. Current `Ultimate.cpp` logical-slot interpretation remains
-  source-owned; a future implementation must retain finite deterministic
-  controller semantics and must not introduce game semantics, scripting,
-  macros, turbo, timing, or arbitrary expressions.
-- WebSerial/device write is not implemented.
-- Protobuf binary write is not implemented.
+- The native multi-profile store is implemented; the legacy generic lane does
+  not add another persistence model. See `docs/CURRENT_STATE.md`.
+- Native profile-defined bindings are implemented; legacy generic scaffolding
+  supplies no additional binding runtime. Preserve finite deterministic controller
+  semantics without game semantics, scripting, macros, turbo or timing.
+- The legacy generic lane adds no WebSerial/device write; bounded native writes exist.
+- No generic protobuf binary editor is claimed; accepted Config/protocol paths are distinct.
 - Firmware flashing automation is not implemented.
