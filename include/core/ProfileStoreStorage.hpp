@@ -3,6 +3,7 @@
 #define _CORE_PROFILE_STORE_STORAGE_HPP
 
 #include "core/CheckedStorage.hpp"
+#include "core/PackageStorageFence.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -176,6 +177,8 @@ class ProfileStoreStorage {
     using Outcome = CheckedStorage::Outcome;
 
     virtual Result CheckedWrite(const char *p, const uint8_t *b, size_t n, CheckedStorage::Kind) {
+        if (!PackageStorageFence::Permit(CheckedStorage::Operation::OpenWrite,p))
+            return {Outcome::Failed,0,0};
         return { Write(p, b, n) ? Outcome::Ok : Outcome::Failed, 0, n };
     }
 
@@ -192,10 +195,14 @@ class ProfileStoreStorage {
     }
 
     virtual Result CheckedRename(const char *a, const char *b, CheckedStorage::Kind) {
+        if (!PackageStorageFence::Permit(CheckedStorage::Operation::Rename,a,b))
+            return {Outcome::Failed,0,0};
         return { Rename(a, b) ? Outcome::Ok : Outcome::Uncertain, 0, 0 };
     }
 
     virtual Result CheckedRemove(const char *p) {
+        if (!PackageStorageFence::Permit(CheckedStorage::Operation::Remove,p))
+            return {Outcome::Failed,0,0};
         return { Remove(p) ? Outcome::Ok : Outcome::Uncertain, 0, 0 };
     }
 

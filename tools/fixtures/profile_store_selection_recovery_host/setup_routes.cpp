@@ -32,7 +32,8 @@ struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready
 void publish_boot_state(BootOutcome o,bool d){boot_state={o,d};}
 BootSnapshot read_boot_state(){return boot_state;}
 void refuse_boot(BootOutcome o,bool d){publish_boot_state(o,d);}
-struct Backend {void SendReport(){++ordinary_reports;}InputState &GetInputs(){return inputs;}};
+struct Backend {void SendReport(){++ordinary_reports;}InputState &GetInputs(){return inputs;}CommunicationBackendId BackendId(){return COMMS_BACKEND_CONFIGURATOR;}};
+struct GamecubeBackend : Backend {bool SelectionIdleAdmitted(){return true;}};
 Backend **backends=nullptr;size_t backend_count=0;bool failed_detection=false;
 struct Keyboard {void SendReport(InputState &){++ordinary_reports;}};Keyboard *current_kb_mode=nullptr;
 Config config=Config_init_default;

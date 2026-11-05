@@ -66,11 +66,12 @@ Result before(Kind k, Operation op, const char *path) {
     return f == Fault::None ? Result{Outcome::Ok, 0, 0, op} :
         Result{f == Fault::LostAcknowledgement ? Outcome::Uncertain : Outcome::Failed, LFS_ERR_IO, 0, op};
 }
-Result after(Kind k, Operation op, const char *path, Result r) {
-    if (fault(k, op, Phase::After, path) != Fault::None)
-        return {Outcome::Uncertain, LFS_ERR_IO, r.bytes, op};
+void afterInPlace(Kind k, Operation op, const char *path, Result &r) {
+    if (fault(k, op, Phase::After, path) != Fault::None) {
+        r.outcome = Outcome::Uncertain;
+        r.error = LFS_ERR_IO;
+    }
     r.operation = op;
-    return r;
 }
 bool valid(const char *p) {
     if (!p || !*p) return false;
@@ -104,7 +105,7 @@ Result Open(File &f, const char *path, bool write, Kind kind) {
             return {Outcome::Uncertain, LFS_ERR_INVAL, 0, Operation::OpenWrite};
         }
     }
-    r = after(kind, write ? Operation::OpenWrite : Operation::OpenRead, path, r);
+    afterInPlace(kind, write ? Operation::OpenWrite : Operation::OpenRead, path, r);
     // A lost open acknowledgement still owns a native handle; close it exactly
     // once so a failed stage cannot leak into the next synchronous operation.
     if (!r && f.opened) {
@@ -126,7 +127,8 @@ Result Read(File &f, void *bytes, size_t length) {
     if (!b) { if (f.writable) PackageStorageFence::Fence(); return b; }
     if (f.writable && !PackageStorageFence::PermitHandle(f.write_owner, Operation::Read, f.path))
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Read};
-    auto r = after(f.kind, Operation::Read, f.path, result(lfs_file_read(filesystem(f), handle(f), bytes, length)));
+    auto r = result(lfs_file_read(filesystem(f), handle(f), bytes, length));
+    afterInPlace(f.kind, Operation::Read, f.path, r);
     if (!r && f.writable) PackageStorageFence::Fence();
     return r;
 }
@@ -141,7 +143,7 @@ Result Write(File &f, const void *bytes, size_t length) {
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Write};
     auto r = result(lfs_file_write(filesystem(f), handle(f), bytes, length));
     if (r && r.bytes != length) r.outcome = Outcome::Failed;
-    r = after(f.kind, Operation::Write, f.path, r);
+    afterInPlace(f.kind, Operation::Write, f.path, r);
     if (!r) PackageStorageFence::Fence();
     return r;
 }
@@ -154,7 +156,8 @@ Result Seek(File &f, size_t offset) {
     if (!b) { if (f.writable) PackageStorageFence::Fence(); return b; }
     if (f.writable && !PackageStorageFence::PermitHandle(f.write_owner, Operation::Seek, f.path))
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Seek};
-    auto r = after(f.kind, Operation::Seek, f.path, result(lfs_file_seek(filesystem(f), handle(f), offset, LFS_SEEK_SET)));
+    auto r = result(lfs_file_seek(filesystem(f), handle(f), offset, LFS_SEEK_SET));
+    afterInPlace(f.kind, Operation::Seek, f.path, r);
     if (!r && f.writable) PackageStorageFence::Fence();
     return r;
 }
@@ -167,7 +170,8 @@ Result Sync(File &f) {
     if (!b) { if (f.writable) PackageStorageFence::Fence(); return b; }
     if (f.writable && !PackageStorageFence::PermitHandle(f.write_owner, Operation::Sync, f.path))
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Sync};
-    auto r = after(f.kind, Operation::Sync, f.path, result(lfs_file_sync(filesystem(f), handle(f))));
+    auto r = result(lfs_file_sync(filesystem(f), handle(f)));
+    afterInPlace(f.kind, Operation::Sync, f.path, r);
     if (!r && f.writable) PackageStorageFence::Fence();
     return r;
 }
@@ -189,7 +193,7 @@ Result Close(File &f) {
     if (f.writable) PackageStorageFence::ReleaseHandle(f.write_owner);
     if (denied) return !b ? b : Result{Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Close};
     if (!b) return b;
-    r = after(f.kind, Operation::Close, f.path, r);
+    afterInPlace(f.kind, Operation::Close, f.path, r);
     if (!r && f.writable) PackageStorageFence::Fence();
     return r;
 }
@@ -199,7 +203,8 @@ Result Stat(const char *path, size_t *size, Kind kind) {
     auto *fs = mount(); if (!fs) return {Outcome::Failed, LFS_ERR_IO, 0};
     lfs_info info{}; auto r = result(lfs_stat(fs, path, &info));
     if (r && size) *size = info.size;
-    return after(kind, Operation::Stat, path, r);
+    afterInPlace(kind, Operation::Stat, path, r);
+    return r;
 }
 Result Remove(const char *path, Kind kind) {
     if (!PackageStorageFence::Permit(Operation::Remove, path))
@@ -211,7 +216,7 @@ Result Remove(const char *path, Kind kind) {
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Remove};
     auto r = result(lfs_remove(fs, path), true);
     if (r.outcome == Outcome::NotFound) r = {Outcome::Ok, 0, 0};
-    r = after(kind, Operation::Remove, path, r);
+    afterInPlace(kind, Operation::Remove, path, r);
     if (!r) PackageStorageFence::Fence();
     return r;
 }
@@ -223,7 +228,8 @@ Result Rename(const char *from, const char *to, Kind kind) {
     auto *fs = mount(); if (!fs) return {Outcome::Failed, LFS_ERR_IO, 0};
     if (!PackageStorageFence::Permit(Operation::Rename, from, to))
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Rename};
-    auto r = after(kind, Operation::Rename, from, result(lfs_rename(fs, from, to), true));
+    auto r = result(lfs_rename(fs, from, to), true);
+    afterInPlace(kind, Operation::Rename, from, r);
     if (!r) PackageStorageFence::Fence();
     return r;
 }
@@ -238,7 +244,9 @@ Result Capacity(Geometry &g) {
     g.free_bytes = g.total_bytes - g.used_bytes;
     g.erase_bytes = c.block_size; g.program_bytes = c.prog_size; g.read_bytes = c.read_size;
     g.block_count = c.block_count; g.cache_bytes = c.cache_size; g.name_max = 31;
-    return after(Kind::Root, Operation::Capacity, "/", {Outcome::Ok, 0, 0});
+    Result r{Outcome::Ok, 0, 0};
+    afterInPlace(Kind::Root, Operation::Capacity, "/", r);
+    return r;
 }
 Result Enumerate(const char *directory, Visitor visitor, void *context) {
     if (!visitor || !valid(directory)) return {Outcome::Failed, LFS_ERR_INVAL, 0};
@@ -255,7 +263,8 @@ Result Enumerate(const char *directory, Visitor visitor, void *context) {
         if (!visitor(context, entry)) { r = {Outcome::Failed, LFS_ERR_INVAL, 0}; break; }
     }
     auto closed = result(lfs_dir_close(fs, &dir)); if (!closed) r = closed;
-    return after(Kind::Root, Operation::Enumerate, directory, r);
+    afterInPlace(Kind::Root, Operation::Enumerate, directory, r);
+    return r;
 }
 Result WriteFile(const char *path, const uint8_t *bytes, size_t length, Kind kind) {
     File file; auto r = Open(file, path, true, kind); if (!r) return r;

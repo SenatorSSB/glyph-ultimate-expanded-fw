@@ -25,6 +25,8 @@ bool IsPackageWriter(const void *owner, uint64_t token);
 void EndWrite(const void *owner);
 bool Permit(CheckedStorage::Operation, const char *path,
             const char *destination = nullptr);
+bool PermitLegacy(CheckedStorage::Operation, const char *path,
+                  const char *destination = nullptr);
 // An opened writable handle belongs to exactly one scope. A later scope
 // cannot start until every handle from the previous scope is released.
 const void *WriteOwner();
@@ -43,6 +45,7 @@ inline bool BeginWrite(const void *, WriteKind, uint64_t, Authorize, void *) { r
 inline bool IsPackageWriter(const void *, uint64_t) { return false; }
 inline void EndWrite(const void *) {}
 inline bool Permit(CheckedStorage::Operation, const char *, const char * = nullptr) { return true; }
+inline bool PermitLegacy(CheckedStorage::Operation, const char *, const char * = nullptr) { return true; }
 inline const void *WriteOwner() { return nullptr; }
 inline bool RetainHandle(const void *) { return true; }
 inline void ReleaseHandle(const void *) {}

@@ -217,6 +217,7 @@ class ProfileStore {
     friend class GlyphPackageSourceReader;
     bool BeginPackageObservation(bool recovery);
     bool PreparePackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
+    bool ObservePackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
     bool BeginPackageWriteScope();
     bool PublishPackageTransaction();
     bool PublishPackageConfigStage();

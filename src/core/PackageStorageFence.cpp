@@ -86,6 +86,9 @@ bool Permit(CheckedStorage::Operation operation, const char *path, const char *d
            !MutationFenced() && authority.owner == owner && authority.token == token && authority.kind == kind;
 }
 const void *WriteOwner() { return authority.owner; }
+bool PermitLegacy(CheckedStorage::Operation operation,const char *path,const char *destination) {
+    return authority.kind==WriteKind::Legacy&&Permit(operation,path,destination);
+}
 bool IsPackageWriter(const void *owner, uint64_t token) {
     return owner && owner == authority.owner && token && token == authority.token &&
            authority.kind == WriteKind::Package && !MutationFenced();

@@ -277,6 +277,41 @@ inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePh
     if (!wire::RoundTrip(bytes, size, PackageEnvelope_fields, &phase.request)) { phase.Release(); return false; }
     return true;
 }
+// Error correlation inspects only the bounded closed outer grammar. Nested
+// package bytes and SHA extents are payload validation, never trusted data.
+// This does not admit a request or expose a decode callback.
+inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &phase) {
+    phase.Release(); phase.request=PackageEnvelope_init_zero;
+    if(!bytes||!size||size>4564)return false;
+    size_t at=0; unsigned previous=0;
+    while(at<size) {
+        uint64_t key,value;
+        if(!wire::Varint(bytes,size,at,key)||key>UINT32_MAX)return false;
+        const unsigned tag=unsigned(key>>3),type=unsigned(key&7);
+        wire::Rule rule;
+        if(tag<=previous||!wire::RuleFor(wire::Message::Envelope,tag,rule))return false;
+        previous=tag;
+        if(rule.kind==wire::Kind::Scalar) {
+            if(type||!wire::Varint(bytes,size,at,value)||!value||
+               (tag!=2&&value>UINT32_MAX))return false;
+            switch(tag) {
+            case 1:phase.request.protocol_version=uint32_t(value);break;
+            case 2:phase.request.request_token=value;break;
+            case 3:if(value!=1&&value!=15&&value!=16)return false;
+                phase.request.operation=static_cast<PackageOperation>(value);break;
+            case 21:phase.request.expected_store_incarnation=uint32_t(value);break;
+            default:break;
+            }
+        } else {
+            if(type!=2||!wire::Varint(bytes,size,at,value)||value>size-at)return false;
+            at+=size_t(value);
+        }
+    }
+    return phase.request.protocol_version==3&&phase.request.request_token&&
+        (phase.request.operation==PackageOperation_PACKAGE_STATUS||
+         ((phase.request.operation==PackageOperation_CREATE_PACKAGE||phase.request.operation==PackageOperation_QUERY_PACKAGE)&&
+          phase.request.expected_store_incarnation));
+}
 // Caller supplies the existing initialization owner; not a local/max-size body.
 inline bool DecodeCanonicalBody(EnvelopePhase &phase, PackageBody &body) {
     body = PackageBody_init_zero;

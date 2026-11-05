@@ -302,8 +302,13 @@ __attribute__((noinline)) bool Persistence::StageSaveConfig() {
     if(!encoded||!PositionStagedConfig())return FailStagedConfig();
     return CompleteStagedConfig();
 }
+// The exact existing slot holds CheckedStorageFile, so no virtual Print bridge
+// is needed. This callback owns no state and preserves byte-count semantics.
+static __attribute__((noinline)) bool WriteStagedBytes(pb_ostream_t *, const pb_byte_t *bytes, size_t count) {
+    return SynchronousFileScope<true>::File().CheckedStorageFile::write(bytes, count) == count;
+}
 __attribute__((noinline)) void Persistence::InitializeStagedStream() {
-    ::new (&save_phase.temporary.stream) pb_ostream_t(as_pb_ostream(SynchronousFileScope<true>::File()));
+    ::new (&save_phase.temporary.stream) pb_ostream_t{WriteStagedBytes, nullptr, SIZE_MAX, 0};
 }
 __attribute__((noinline)) bool Persistence::EncodeStagedConfig() {
     return pb_encode(&save_phase.temporary.stream,Config_fields,save_context.config)&&save_phase.temporary.stream.bytes_written==save_phase.encoded_size;
@@ -415,11 +420,15 @@ __attribute__((noinline)) void Persistence::InitializeSaveContext(Persistence *o
     std::memset(&save_phase,0,sizeof(save_phase));
     ::new (&save_phase.temporary.publication) SavePublicationState{};
 }
-bool Persistence::SaveConfig(Config &config) {
+__attribute__((noinline)) bool Persistence::InitializeOrdinarySaveContext(Persistence *owner, Config *config) {
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
-    if (!profile_store.BeginOrdinaryConfigWrite(config)) return false;
+    if (!profile_store.BeginOrdinaryConfigWrite(*config)) return false;
 #endif
-    InitializeSaveContext(this,&config);
+    InitializeSaveContext(owner, config);
+    return true;
+}
+bool Persistence::SaveConfig(Config &config) {
+    if (!InitializeOrdinarySaveContext(this,&config)) return false;
     return FinishSaveConfig(save_context.owner->PrepareSaveConfig(*save_context.config)&&
         save_context.owner->RemoveSaveTemporary()&&StageSaveConfig()&&
         save_context.owner->VerifyStagedConfig(*save_context.config)&&save_context.owner->RotateSavedConfig()&&

@@ -77,6 +77,7 @@ struct Classification {
 // Place this object IN existing publication_readback4128 after exclusive lease.
 // It may not coexist there with any publication readback or READ owner.
 struct ClassificationWorkspace {
+    Classification classification{};
     RootFacts roots[3]{};
     ConfigFacts current{}, prior{}, scan_config{};
     NamespaceObject object{};

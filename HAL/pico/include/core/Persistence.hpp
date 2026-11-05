@@ -125,6 +125,7 @@ class Persistence {
     static void EndStagedStream();
     static bool FinishSaveConfig(bool);
     static void InitializeSaveContext(Persistence *,Config *);
+    static bool InitializeOrdinarySaveContext(Persistence *,Config *);
     static bool PositionStagedConfig();
     static bool CompleteStagedConfig();
     SaveResult VerifyExpectedConfigGeneration(uint64_t expected_generation);

@@ -394,13 +394,16 @@ bool ProtectedReference(const ClassificationWorkspace &w,size_t ordinal,uint32_t
     return id&&revision;
 }
 __attribute__((noinline)) bool PackageProtectedBytes(NamespaceReader &reader,ClassificationWorkspace &w,
-                                                    uint32_t active_id,uint32_t active_revision) {
+                                                    uint32_t active_id,uint32_t active_revision,uint64_t &protected_bytes) {
     w.logical_bytes=0;
+    protected_bytes=0;
     for(size_t i=0;;++i) {
         bool eof=false; if(!reader.ObjectAt(i,w.object,eof))return false; if(eof)break;
         uint64_t charge=0;
-        if(!FileCharge(w.object.bytes,charge)||w.logical_bytes>UINT64_MAX-charge)return false;
-        w.logical_bytes+=charge;
+        if(!FileCharge(w.object.bytes,charge)||protected_bytes>UINT64_MAX-charge||
+           w.logical_bytes>UINT64_MAX-w.object.bytes)return false;
+        protected_bytes+=charge;
+        w.logical_bytes+=w.object.bytes;
     }
     for(size_t i=0;i<394;++i) {
         uint32_t id,revision; bool managed;
@@ -417,10 +420,7 @@ __attribute__((noinline)) bool PackageProtectedBytes(NamespaceReader &reader,Cla
         else ProfileStorePaths::RecordPath(path,sizeof(path),id,revision);
         size_t extent=0; const auto state=reader.Extent(path,extent);
         if(state==Probe::Error)return false;
-        if(state==Probe::Absent) {
-            uint64_t charge=0; if(!FileCharge(4128,charge)||w.logical_bytes>UINT64_MAX-charge)return false;
-            w.logical_bytes+=charge;
-        }
+        if(state==Probe::Absent)return false;
     }
     return !reader.ObservationFailed();
 }
@@ -562,6 +562,7 @@ __attribute__((noinline)) bool ProfileStore::PreparePackageDispatch() {
     in.respond=true; InitPackageResponse(*in.response,in.phase->request.request_token);
     if(package_owner_live)return false;
     package_owner_live=true;
+    if(!ObservePackageTransaction(*in.phase,*in.response))return false;
     return PreparePackageTransaction(*in.phase,*in.response);
 }
 __attribute__((noinline)) void ProfileStore::FinishPackageDispatch(bool success) {
@@ -576,11 +577,13 @@ __attribute__((noinline)) bool ProfileStore::ReleasePackageDispatch() {
     in={}; return response;
 }
 
-bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
+__attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
     BeginClassifierOwner();
     GlyphPackageSourceReader reader(*this,persistence,true);
-    auto classification=ClassifyNamespace(reader,PackageOwners());
-    auto &work=PackageWorkspace(); SetObservedFence(classification); ApplyRuntimeFence(classification);
+    auto &work=PackageWorkspace();
+    auto &classification=work.classification;
+    classification=ClassifyNamespace(reader,PackageOwners());
+    SetObservedFence(classification); ApplyRuntimeFence(classification);
     ObservedPackageResponse(response,classification,work);
     if(phase.request.operation==PackageOperation_PACKAGE_STATUS) {
         EndClassifierOwner(); return false;
@@ -609,9 +612,16 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
        phase.request.expected_store_incarnation!=classification.incarnation||
        phase.request.expected_store_generation!=classification.generation||
        phase.request.expected_config_generation!=work.current.crc||
-       !work.current.source_valid||std::memcmp(phase.request.expected_config_sha256,work.current.sha,32)) {
+       !work.current.source_valid||(work.prior.body_bytes&&!work.prior.source_valid)||
+       std::memcmp(phase.request.expected_config_sha256,work.current.sha,32)) {
         EndClassifierOwner(); return false;
     }
+    return true;
+}
+bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
+    GlyphPackageSourceReader reader(*this,persistence,true);
+    auto &work=PackageWorkspace();
+    const auto &classification=work.classification;
     const unsigned selected=SelectedObservedRoot(work);
     if(!DecodeDirectory(work.roots[selected].prefix,3908,_directory,work.roots[selected].format==3)) {
         UnavailablePackageResponse(response); EndClassifierOwner(); return false;
@@ -626,8 +636,11 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     ::new(&initialization_owner.body)PackageBody;
     auto &body=initialization_owner.body;
     response.status=ProfileStoreStatus_PROFILE_STORE_INVALID;
-    if(!glyph_package::DecodeCanonicalBody(phase,body)||!ValidName(body.name)||
-       (body.has_rgb&&work.current.rgbs>=30)) {
+    if(!glyph_package::DecodeCanonicalBody(phase,body)||!ValidName(body.name)) {
+        body.native_body={}; EndClassifierOwner(); return false;
+    }
+    if(body.has_rgb&&work.current.rgbs>=30) {
+        response.status=ProfileStoreStatus_PROFILE_STORE_FULL;
         body.native_body={}; EndClassifierOwner(); return false;
     }
     // Reload the exact baseline into Persistence's existing scratch, then copy
@@ -683,7 +696,8 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     _next->last_identity.token=phase.request.request_token;
     std::memcpy(_next->last_identity.digest,response.semantic_digest,32);
     _next->last_result={Status::Ok,id,1,_next->generation};
-    if(!PackageProtectedBytes(reader,work,_active_id,_active_revision)||
+    uint64_t needed=0;
+    if(!PackageProtectedBytes(reader,work,_active_id,_active_revision,needed)||
        !EncodeDirectory(*_next,directory_publication_wire)||
        !ComputePackageAggregate(reader,work,candidate,id)) {
         ClearPackageReceipt(response); UnavailablePackageResponse(response); EndClassifierOwner(); return false;
@@ -691,14 +705,13 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     std::memcpy(_next->managed_aggregate,directory_publication_wire+264,32);
     HashBytes(prepared_record.record,prepared_record.n,response.record_sha);
     CheckedStorage::Geometry geometry{};
-    uint64_t needed=0;
     const AdmissionArithmetic arithmetic{geometry.used_bytes,geometry.free_bytes,geometry.total_bytes,
-        work.logical_bytes,phase.request.request_token,classification.high_token,work.current.rows,work.current.rgbs,
+        needed,phase.request.request_token,classification.high_token,work.current.rows,work.current.rgbs,
         uint32_t(_directory->count),_directory->high_water_id,classification.generation,classification.package_sequence,
         uint32_t(work.namespace_files),work.scan_config.body_bytes,uint32_t(prepared_record.n),body.has_rgb};
     // Geometry is read afresh in the same serialized preflight domain.
     AdmissionArithmetic checked=arithmetic;
-    if(!_storage->Geometry(geometry)||!ExactGeometry(geometry)) {
+    if(!_storage->Geometry(geometry)||!ExactGeometry(geometry)||geometry.used_bytes<work.logical_bytes) {
         ClearPackageReceipt(response); UnavailablePackageResponse(response); EndClassifierOwner(); return false;
     }
     checked.used=geometry.used_bytes; checked.free=geometry.free_bytes; checked.total=geometry.total_bytes;
@@ -828,6 +841,7 @@ bool ProfileStore::BeginOrdinaryConfigWrite(const Config &candidate) {
     const auto state=ClassifyNamespace(reader,PackageOwners()); auto &w=PackageWorkspace();
     SetObservedFence(state);
     bool valid=!state.write_fenced&&(state.floor==Floor::NoManaged||state.floor==Floor::Supported)&&
+        (!w.prior.body_bytes||w.prior.source_valid)&&
         reader.DescribeConfig(candidate,w.scan_config)&&w.scan_config.source_valid&&
         reader.Config(kPackageCurrent,8191,w.prior)&&w.prior.source_valid;
     if(valid) {
@@ -835,7 +849,9 @@ bool ProfileStore::BeginOrdinaryConfigWrite(const Config &candidate) {
         valid=candidate.ultimate_profile_store_format==baseline.ultimate_profile_store_format&&
             candidate.ultimate_profile_store_incarnation==baseline.ultimate_profile_store_incarnation&&
             candidate.ultimate_profile_root_format==baseline.ultimate_profile_root_format&&
-            candidate.managed_format==baseline.managed_format&&candidate.managed_sequence==baseline.managed_sequence;
+            candidate.managed_format==baseline.managed_format&&candidate.managed_sequence==baseline.managed_sequence&&
+            !std::memcmp(candidate.ultimate_profile_migration_receipt,baseline.ultimate_profile_migration_receipt,
+                         sizeof(candidate.ultimate_profile_migration_receipt));
         for(size_t i=0;i<baseline.game_mode_configs_count&&valid;++i) {
             const auto &row=baseline.game_mode_configs[i];
             if(!row.managed_format)continue;
@@ -863,7 +879,18 @@ bool ProfileStore::BeginOrdinaryConfigWrite(const Config &candidate) {
         if(valid&&candidate.profile_reference_token!=baseline.profile_reference_token) {
             valid=candidate.profile_reference_token>state.high_token&&
                 w.scan_config.reference_digest_valid&&w.scan_config.reference_row<candidate.game_mode_configs_count&&
+                w.scan_config.reference_generation==state.generation&&
                 !candidate.game_mode_configs[w.scan_config.reference_row].managed_format;
+            if(valid) {
+                const auto &row=candidate.game_mode_configs[w.scan_config.reference_row];
+                valid=row.mode_id==GameModeId_MODE_ULTIMATE&&
+                    row.ultimate_profile_id==w.scan_config.reference_id&&!row.ultimate_profile_config;
+                if(valid&&w.scan_config.reference_id) {
+                    const int index=Find(w.scan_config.reference_id);
+                    valid=index>=0&&!_directory->entries[index].managed_format&&
+                        row.ultimate_profile_engine==(_directory->entries[index].payload_version==5?1u:0u);
+                } else if(valid)valid=!row.ultimate_profile_engine;
+            }
         } else if(valid)valid=w.scan_config.reference_token==w.current.reference_token&&
             !std::memcmp(w.scan_config.reference_digest,w.current.reference_digest,32)&&
             w.scan_config.reference_id==w.current.reference_id&&w.scan_config.reference_row==w.current.reference_row&&

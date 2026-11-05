@@ -512,6 +512,7 @@ static_assert(sizeof(RequestOwner) == 2312 && sizeof(ResponseOwner) == 3032,
 #endif
 static RequestOwner request_owner = {ProfileStoreRequest_init_default};
 static ResponseOwner response_owner = {ProfileStoreResponse_init_default};
+static size_t package_received_bytes;
 #else
 static ProfileStoreRequest request;
 static ProfileStoreResponse response;
@@ -533,6 +534,12 @@ static __attribute__((noinline)) bool InvalidProfileTicket(const ProfileStoreReq
     return request.fault_kind||request.fault_operation||request.fault_phase||request.fault_result||request.fault_path_class||request.fault_skip||request.fault_clear||request.fault_ticket||request.liveness_trace;
 #endif
 }
+static __attribute__((noinline)) void ReleaseIncomingProfile() {
+    incoming_native.Release();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    request_owner.legacy.profile.native_payload = {};
+#endif
+}
 __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileStore() {
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
     auto &request = request_owner.legacy;
@@ -540,15 +547,17 @@ __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileSto
     dispatch_loaded=Persistence::LoadResult::Absent;
     incoming_native.Release();
     struct IncomingScope {
-        ~IncomingScope() {
-            incoming_native.Release();
-#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
-            request_owner.legacy.profile.native_payload = {};
-#endif
-        }
+        ~IncomingScope() { ReleaseIncomingProfile(); }
     } incoming_scope;
     profile_received = false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    package_received_bytes = 0;
+#endif
     const bool received = ReceiveProfileStore();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // The receive/decode frame must end before any package writer begins.
+    if (package_received_bytes) return HandlePackageRequest(package_received_bytes);
+#endif
     if (!profile_received) return received;
     {
         struct DispatchReset {
@@ -605,9 +614,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
     const auto route = glyph_package::RouteProtocol(frame, length);
     if (route == glyph_package::ProtocolRoute::Malformed) return false;
     if (route == glyph_package::ProtocolRoute::Package) {
-        // Receive leaves profile_received false. HandleProfileStore returns
-        // directly without entering legacy reconciliation/admission/Config I/O.
-        return HandlePackageRequest(length);
+        // Leave the receive frame before entering publication. No legacy
+        // reconciliation/admission/Config I/O runs for this request.
+        package_received_bytes = length;
+        return true;
     }
 #endif
     request = ProfileStoreRequest_init_default;
@@ -666,11 +676,13 @@ struct PackageOwnerScope {
     }
 };
 }
-static __attribute__((noinline)) bool DecodePackageFrame(size_t length) {
+enum class PackageDecode { Drop, Invalid, Valid };
+static __attribute__((noinline)) PackageDecode DecodePackageFrame(size_t length) {
     request_owner.legacy.profile.native_payload = {};
     ::new (&request_owner.package) glyph_package::EnvelopePhase{};
     ::new (&response_owner.package) PackageResponse{};
-    return glyph_package::DecodeCanonicalRequest(frame, length, request_owner.package);
+    if(glyph_package::DecodeCanonicalRequest(frame, length, request_owner.package))return PackageDecode::Valid;
+    return glyph_package::TrustedOuterHeader(frame,length,request_owner.package)?PackageDecode::Invalid:PackageDecode::Drop;
 }
 __attribute__((noinline)) bool ConfiguratorBackend::HandlePackageRequest(size_t length) {
     PackageOwnerScope owners;
@@ -678,7 +690,17 @@ __attribute__((noinline)) bool ConfiguratorBackend::HandlePackageRequest(size_t 
     auto &package_response = response_owner.package;
     // Invalid/untrusted outer bytes are dropped. Never fall back to the legacy
     // parser after any protocol3 field was found by the bounded routing probe.
-    if (!DecodePackageFrame(length)) return false;
+    const auto decoded=DecodePackageFrame(length);
+    if(decoded==PackageDecode::Drop)return false;
+    if(decoded==PackageDecode::Invalid) {
+        // A trustworthy correlation header permits only a read-only storage
+        // observation and a receipt-free INVALID refusal.
+        phase.request.operation=PackageOperation_PACKAGE_STATUS;
+        if(!profile_store.DispatchPackage(phase,package_response))return false;
+        package_response.status=PROFILE_STORE_INVALID;
+        owners.ReleaseRequest();
+        return RespondPackage();
+    }
     if (!profile_store.DispatchPackage(phase, package_response)) return false;
     if (package_response.protocol_version != 3 ||
         package_response.request_token != phase.request.request_token) return false;

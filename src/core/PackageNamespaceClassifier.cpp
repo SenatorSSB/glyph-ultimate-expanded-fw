@@ -72,7 +72,7 @@ class Classifier {
     if(Marked(c)&&!Is(w.object.path,kCurrent)&&!Is(w.object.path,kPrior)&&!Is(w.object.path,"/config-v2.tmp"))w.corrupt=true;
    }
    if(RootPath(w.object.path)){
-    if(n<8){w.corrupt=true;continue;}const auto magic=Get32(p);const auto v=Get16(p+4);
+    if(n<6){w.corrupt=true;continue;}const auto magic=Get32(p);const auto v=Get16(p+4);
     const bool old=Starts(w.object.path,"/ultimate-dir-");if(magic!=(old?0x31534450u:0x32534450u))w.corrupt=true;
     if(magic==0x31534450u){w.unsupported|=v>1;if(v<=1&&!LegacyRoot(w.object.path,false))w.corrupt=true;}
     if(magic==0x32534450u){w.unsupported|=v>3||(v==3&&n>=300&&Get32(p+296)>1);w.managed_observed|=v==3;if(v<2)w.corrupt=true;
