@@ -93,6 +93,7 @@ void ClearPackageReceipt(PackageResponse &r) {
     std::memset(r.record_sha,0,32); r.record_publication_generation=0;
 }
 void UnavailablePackageResponse(PackageResponse &r) {
+    PackageStorageFence::Fence();
     ClearPackageReceipt(r);
     r.status=ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN;
     r.logical=PackageLogicalDisposition_UNRESOLVED;
@@ -719,9 +720,14 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     if(!AdmissionNeed(checked,needed)) { ClearPackageReceipt(response); EndClassifierOwner(); return false; }
     // Re-read baseline Config after every source callback/capacity probe and
     // before PREPARED. It also detects source facts drifting during preflight.
-    if(!reader.Config(kPackageCurrent,8191,work.prior)||!work.prior.source_valid||
+    const bool baseline_read=reader.Config(kPackageCurrent,8191,work.prior);
+    const bool roots_match=baseline_read&&RecheckPackageBaselineRoots(reader,work);
+    if(reader.ObservationFailed()) {
+        UnavailablePackageResponse(response); EndClassifierOwner(); return false;
+    }
+    if(!baseline_read||!work.prior.source_valid||
        work.prior.crc!=work.current.crc||std::memcmp(work.prior.sha,work.current.sha,32)||
-       !RecheckPackageBaselineRoots(reader,work)||reader.ObservationFailed()) {
+       !roots_match) {
         ClearPackageReceipt(response); response.status=ProfileStoreStatus_PROFILE_STORE_CONFLICT;
         EndClassifierOwner(); return false;
     }
