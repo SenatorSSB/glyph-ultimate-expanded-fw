@@ -29,7 +29,9 @@ struct File {
     void *mount = nullptr;
     bool opened = false;
     Kind kind = Kind::Record;
+    bool writable = false;
     const char *path = nullptr; // caller keeps path alive until Close
+    const void *write_owner = nullptr;
     File() = default;
     File(const File &) = delete;
     File &operator=(const File &) = delete;

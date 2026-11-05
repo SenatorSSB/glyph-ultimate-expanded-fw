@@ -12,6 +12,7 @@
 #include "core/ModeSelectionTransaction.hpp"
 #include "core/ProfileSelection.hpp"
 #include "core/ConfigWriteCandidate.hpp"
+#include "core/PackageOwnership.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RuntimeIdentityService.hpp"
 #include "core/state.hpp"
@@ -339,7 +340,7 @@ void setup() {
 
     // Persist the independent v2 acceptance marker before any ordinary store
     // mutation can be serviced, including a legacy Config with zero profiles.
-    if (config.ultimate_profile_root_format != 2) {
+    if (!package_ownership::SupportedLayout(config)) {
         Config &compact = ConfigWriteCandidate();
         compact = config;
         if (!profile_store.PrepareCompact(compact) || !persistence.SaveConfig(compact)) {

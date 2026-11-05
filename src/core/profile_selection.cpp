@@ -30,7 +30,7 @@ bool Eligible(const GameModeConfig &mode, CommunicationBackendId backend) {
     return false;
 }
 bool NativeTemplate(const GameModeConfig &mode) {
-    return mode.mode_id == MODE_ULTIMATE && mode.ultimate_profile_engine == 1;
+    return !package_ownership::Managed(mode) && mode.mode_id == MODE_ULTIMATE && mode.ultimate_profile_engine == 1;
 }
 const ProfileStore::Entry *FindEntry(const ProfileStore &store, uint32_t id) {
     for (size_t i = 0; i < store.Count() && i < ProfileStore::kMaxEntries; ++i) {
@@ -47,7 +47,7 @@ size_t BuildTargets(const Config &config, const ProfileStore &store,
     bool native = false;
     for (size_t i = 0; i < config.game_mode_configs_count; ++i) {
         const auto &mode = config.game_mode_configs[i];
-        if (!Eligible(mode, backend)) continue;
+        if (package_ownership::Managed(mode) || !Eligible(mode, backend)) continue;
         if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat && mode.mode_id == MODE_ULTIMATE) {
             // Compact-mode character choices come from native store records.
             // Keep every Config context internally; only an eligible native
@@ -62,7 +62,7 @@ size_t BuildTargets(const Config &config, const ProfileStore &store,
     const size_t first_native = count;
     for (size_t i = 0; i < store.Count(); ++i) {
         const auto *entry = store.EntryAt(i);
-        if (!entry || !entry->id || entry->payload_version != ultimate_native::kSchema) continue;
+        if (!entry || package_ownership::Managed(*entry) || !entry->id || entry->payload_version != ultimate_native::kSchema) continue;
         bool duplicate = false;
         for (size_t j = first_native; j < count; ++j) duplicate |= targets[j].profile_id == entry->id;
         if (duplicate) continue;

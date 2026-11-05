@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/ProfileStore.hpp"
+#include "core/PackageOwnership.hpp"
 #include "core/ModeSelectionTransaction.hpp"
 
 namespace profile_selection {
@@ -38,6 +39,9 @@ __attribute__((noinline)) ModeDestinationResult Persist(PersistenceType &storage
         candidate.ultimate_profiles_count != 0 ||
         candidate.ultimate_profile_store_incarnation != store.Incarnation())
         return ModeDestinationResult::Refused;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (package_ownership::ManagedId(store, id)) return ModeDestinationResult::Refused;
+#endif
     const uint32_t generation = storage.ConfigGeneration(candidate);
     const auto read = store.Read(id, candidate.ultimate_profiles[0]);
     if ((read != ProfileStore::Status::Ok && read != ProfileStore::Status::RecoveredPrevious) ||

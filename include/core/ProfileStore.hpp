@@ -10,6 +10,12 @@
 #include <cstddef>
 #include <cstdint>
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+namespace glyph_package { struct EnvelopePhase; }
+class GlyphPackageSourceReader;
+typedef struct _PackageResponse PackageResponse;
+#endif
+
 class ProfileStore {
   public:
     static constexpr uint8_t kCompactConfigFormat = 1;
@@ -44,6 +50,9 @@ class ProfileStore {
         uint32_t payload_version = 0;
         uint32_t rank = 0;
         char name[kNameCapacity] = {};
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        uint8_t managed_format = 0, owned_row1 = 0, owned_rgb1 = 0;
+#endif
     };
 
     struct TransactionResult {
@@ -59,8 +68,20 @@ class ProfileStore {
 
     explicit ProfileStore(ProfileStoreStorage *storage = nullptr);
     bool Begin(uint32_t expected_incarnation = 0, uint32_t required_root_format = 0);
-    bool BeginRecovery(uint32_t expected_incarnation = 0, uint32_t required_root_format = 0);
     using TransactionIdentity = ProfileStoreTransactionIdentity;
+    bool BeginRecovery(uint32_t expected_incarnation = 0, uint32_t required_root_format = 0);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // Synchronous protocol3 owner boundary. The complete implementation must
+    // clear body/native callbacks before returning; this declaration adds no
+    // handler, admission, persistence or retry behavior.
+    bool BeginOrdinaryStoreWrite(const TransactionIdentity *, uint32_t target_id);
+    void EndOrdinaryStoreWrite();
+    bool IsOrdinaryStoreWriteActive() const;
+    bool BeginOrdinaryConfigWrite(const Config &);
+    void EndOrdinaryConfigWrite();
+    bool DispatchPackage(glyph_package::EnvelopePhase &, PackageResponse &response);
+#endif
+
 
     struct CapacityInfo {
         uint64_t total_bytes = 0, used_bytes = 0, free_bytes = 0, reserve_bytes = 16384,
@@ -192,6 +213,22 @@ class ProfileStore {
     const char *LastDiagnostic() const;
 
   private:
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    friend class GlyphPackageSourceReader;
+    bool BeginPackageObservation(bool recovery);
+    bool PreparePackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
+    bool BeginPackageWriteScope();
+    bool PublishPackageTransaction();
+    bool PublishPackageConfigStage();
+    void FinishPackageWriteScope(bool);
+    void FinishPackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &, bool);
+    bool PreparePackageDispatch();
+    void FinishPackageDispatch(bool);
+    bool ReleasePackageDispatch();
+    bool _package_visible = false;
+#endif
+    bool ValidateManagedCompactReceipt(const Config &) const;
+    bool PublishManagedDirectory(const Directory &);
     bool LoadDirectory();
     void PrepareBeginState(uint32_t expected, uint32_t required_root_format, bool recovery);
     void PrepareInitializedRoot(unsigned slot);
@@ -278,6 +315,10 @@ class ProfileStore {
     ProfileStoreIoStage _last_io_stage = ProfileStoreIoStage::None;
 };
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+static_assert(sizeof(ProfileStore::Entry)==56,"managed ownership reuses source entry padding");
+static_assert(offsetof(ProfileStore::Entry,managed_format)==53&&offsetof(ProfileStore::Entry,owned_row1)==54&&offsetof(ProfileStore::Entry,owned_rgb1)==55,"frozen entry ownership offsets");
+#endif
 extern ProfileStore profile_store;
 
 #endif

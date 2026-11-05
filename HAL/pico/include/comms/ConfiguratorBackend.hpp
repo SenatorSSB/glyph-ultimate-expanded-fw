@@ -68,6 +68,11 @@ class ConfiguratorBackend : public CommunicationBackend {
     static bool FinishSetPhase(bool);
     bool HandleProfileStore();
     bool ReceiveProfileStore();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    bool HandlePackageRequest(size_t length);
+    bool RespondPackage();
+    bool RefreshPackageConfig();
+#endif
     bool DispatchProfileStore();
     bool PrepareProfileDispatch();
     bool ReconcileProfileDispatch();

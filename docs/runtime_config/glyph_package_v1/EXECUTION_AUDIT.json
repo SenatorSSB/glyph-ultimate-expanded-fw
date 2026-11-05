@@ -1,0 +1,98 @@
+{
+  "work_order": "FULLPKG-B2-CREATE-PACKAGE-FIRMWARE",
+  "authority": "Senscope READY contract and retained direct owner request; one candidate-only E1 order",
+  "client_date": "2026-11-06",
+  "client_timezone": "Europe/Helsinki",
+  "glyph_base": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+  "senscope_verified_base": "dcfc52e79ef21d462953235e5f8361554abe3796",
+  "accepted_source_pin_unchanged": "a6e3bc885d46e2a7412ec697aa822bcd8c4ce495",
+  "corpus_work": "cd9b9b387fe64e1d6acb9546b212b045bf158be4",
+  "corpus_git_tree": "395a827f5561afa034607fe72095b991babec646",
+  "candidate_branch": "codex/fullpkg-b2-create-package-firmware",
+  "endpoint": "reviewed pushed Glyph candidate plus Senscope REVIEW evidence; no Glyph configurator merge and no DONE",
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true,
+    "verified_live_refs": true,
+    "authentication_changes": false
+  },
+  "delegation": {
+    "guidance_applicable": "Both repositories require native discovery, separable specialists and independent review; owner explicitly requests strongest technical and fresh final review.",
+    "capability_discovery": "Native collaboration tool schema inspected; successful internal child dispatches verify availability.",
+    "native_available": true,
+    "root_requested_model": "INHERITED_UNKNOWN",
+    "root_runtime_observed_model": "UNKNOWN",
+    "root_runtime_observed_effort": "UNKNOWN",
+    "workers": [
+      {
+        "id": "b2_authority_preflight",
+        "requested_model": "gpt-6.1-sol",
+        "requested_effort": "high",
+        "scope": "source/corpus authority, wire and strict Config grammar"
+      },
+      {
+        "id": "b2_storage_integration",
+        "requested_model": "gpt-6.1-sol",
+        "requested_effort": "high",
+        "scope": "storage formats, classifier and actual source reader"
+      },
+      {
+        "id": "b2_resource_feasibility",
+        "requested_model": "gpt-6.1-sol",
+        "requested_effort": "high",
+        "scope": "owner/resource feasibility and exact dependency correspondence"
+      },
+      {
+        "id": "b2_persistence_fence_review",
+        "requested_model": "gpt-6-astra",
+        "requested_effort": "high",
+        "scope": "finite adversarial lower-fence/Config-driver draft review"
+      },
+      {
+        "id": "b2_transaction_draft",
+        "requested_model": "gpt-6.1-sol",
+        "requested_effort": "high",
+        "scope": "production transaction/query draft and source fault/restart tests"
+      },
+      {
+        "id": "b2_test_packaging",
+        "requested_model": "gpt-6-luna",
+        "requested_effort": "medium",
+        "scope": "mechanical portable component test packaging"
+      }
+    ],
+    "worker_runtime_observed_model": "UNKNOWN",
+    "worker_runtime_observed_effort": "UNKNOWN",
+    "mutation_ownership": "Root applies integrated source, owns Git/lifecycle/validation/publication. Worker mutation limited to explicitly scoped temporary drafts/tests.",
+    "fresh_final_review_required": true,
+    "exact_candidate_review_receipts": "Recorded separately in Senscope REVIEW evidence after an existing exact candidate is reviewed."
+  },
+  "preflight": {
+    "source_manifest_paths_matched_both_pins": 131,
+    "artifact_index_hashes_matched": 442,
+    "immutable_verifier": "PASS: 463 Git blobs and source/wire/storage/mount/resource checks",
+    "immutable_unit_tests": "PASS: 81 tests"
+  },
+  "known_repairs": [
+    "Fence immediately after failed/lost writable operations; release revoked dirty handles with pinned LFS_F_ERRED and no post-failure flush.",
+    "Apply a schema-aware strict streaming Config grammar before source semantic validation; nanopb roundtrip alone is insufficient.",
+    "Verify rotated prior against the exact baseline before publishing current Config.",
+    "Bind package publication to writer kind, owner and exact nonzero token.",
+    "Split backend decode/encode from persistent dispatch so their stack frames are not retained by writers.",
+    "Pin accepted GFX 1.12.6 to preserve sealed graphics/core1 dependency inputs."
+  ],
+  "publication_lock": "No Glyph canonical publication is authorized; root is the only task-branch publisher. Refresh live refs and concurrency before publication.",
+  "hardware": {
+    "authorized": false,
+    "physical_operations": 0,
+    "result": "NOT_TESTED"
+  },
+  "scope_exclusions": [
+    "hardware/device/USB/serial/port operations",
+    "Glyph configurator merge",
+    "source promotion/repin",
+    "Senscope product changes",
+    "B2 DONE",
+    "successors/Planner/Goal"
+  ],
+  "remaining_proof": "An execution audit is not a completion receipt. Exact committed build, linked resource, full fault/restart/legacy gates and independent reviews must be established before candidate publication."
+}

@@ -783,6 +783,7 @@ message GameModeConfig {
   uint32 ultimate_profile_id = 204;
   // 0: legacy/source fallback; 1: native schema5, fail closed if unavailable.
   uint32 ultimate_profile_engine = 205;
+  uint32 managed_format = 206;
 }
 /**
  * A communication backend config.
@@ -898,6 +899,8 @@ message Config {
   uint32 profile_reference_result_mode_index = 208;
   bytes ultimate_profile_migration_receipt = 209;
   uint32 ultimate_profile_root_format = 210;
+  uint32 managed_format = 211;
+  uint32 managed_sequence = 212;
 }
 /**
  * Device info message.

@@ -20,15 +20,26 @@
 
 #include <LittleFS.h>
 #include "core/CheckedStorageFile.hpp"
+#include "core/PackageStorageFence.hpp"
 #include <config.pb.h>
 #include "core/config_validation.hpp"
 
 class Persistence {
   public:
     typedef struct _ConfigHeader {
-        size_t config_size = 0;
+        uint32_t config_size = 0;
         uint32_t config_crc = 0;
     } ConfigHeader;
+
+    static_assert(sizeof(ConfigHeader) == 8, "Config file header is two LE32 words");
+    enum class PackageConfigFile : uint8_t {
+        Current, Prior, Staged, Legacy, MigrationSource, MigrationTemporary
+    };
+    struct PackageConfigFacts {
+        uint8_t sha[32]{};
+        uint32_t crc = 0;
+        uint32_t bytes = 0;
+    };
 
     Persistence();
     ~Persistence();
@@ -44,7 +55,15 @@ class Persistence {
     LoadResult LoadConfigChecked(Config &config);
 
     enum class SaveResult { Saved, Conflict, StorageFailure, Uncertain, UnknownOutcome = Uncertain };
-    bool IsMutationFenced() const { return _mutation_fenced; }
+    // Read-only exact named observations. No fallback, restoration, migration,
+    // reconciliation, callback retention, or persistent writer acquisition.
+    Config &PackageConfigScratch(); // borrowed loaded_candidate, classifier lease only
+    LoadResult ObservePackageConfig(PackageConfigFile, Config &, PackageConfigFacts &, bool &source_valid);
+    SaveResult PublishPackageConfig(Config &, const PackageConfigFacts &baseline,
+                                   const PackageConfigFacts &expected,
+                                   const void *package_owner, uint64_t token);
+
+    bool IsMutationFenced() const { return _mutation_fenced || PackageStorageFence::MutationFenced(); }
     SaveResult ReconcileConfig(Config &authoritative);
     // Synchronous core0 compare-and-save. Checks both the loaded generation
     // and freshly verified durable bytes before touching any staged file.
@@ -64,6 +83,10 @@ class Persistence {
     static constexpr size_t config_offset = sizeof(ConfigHeader);
 
   private:
+    static const char *PackageFilename(PackageConfigFile);
+    LoadResult ReadPackageFacts(const char *, size_t maximum, PackageConfigFacts &);
+    bool MatchPackageConfig(const char *, const PackageConfigFacts &);
+    bool PublishPackageStaged(const PackageConfigFacts &baseline);
     // config.bin is immutable migration input once a compact Config exists.
     // New writes use a separate name so an interrupted migration cannot erase
     // the only legacy source record.

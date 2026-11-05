@@ -17,6 +17,11 @@
 
 #include "core/Persistence.hpp"
 #include "core/CompactConfigRecovery.hpp"
+#include "core/PackageStorageFence.hpp"
+#include "core/ConfigWireValidator.hpp"
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "core/ProfileStore.hpp"
+#endif
 #include "core/Sha256.hpp"
 
 #include "stdlib.hpp"
@@ -66,7 +71,7 @@ struct SavePhaseState {
 // preparation. Filenames below refer solely to the existing static constants.
 Config loaded_candidate;
 struct LoadPhaseState { CompactConfigRecovery::Source source; uint32_t crc; };
-struct SaveSourceContext { Persistence *owner; Config *config; };
+struct SaveSourceContext { Persistence *owner; Config *config; bool package = false; };
 union SourcePhaseContext { LoadPhaseState load{}; SaveSourceContext save; } source_phase{};
 #define load_phase source_phase.load
 #define save_context source_phase.save
@@ -111,6 +116,20 @@ bool read_config_file(pb_istream_t *stream,pb_byte_t *buffer,size_t count) {
     if(n<0||static_cast<size_t>(n)!=count){reader.io_failed=true;return false;}
     return true;
 }
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+__attribute__((noinline)) config_wire::Result ValidatePackageConfigWire(CheckedStorageFile &file, size_t bytes) {
+    config_wire::Workspace parser;
+    uint8_t chunk[32];
+    return config_wire::ValidateReader(parser,
+        [](void *context, size_t offset, uint8_t *into, size_t count) {
+            auto &source = *static_cast<CheckedStorageFile *>(context);
+            return source.seek(Persistence::config_offset + offset) &&
+                   source.read(into, count) == static_cast<int>(count);
+        }, &file, bytes, chunk, sizeof(chunk));
+}
+
+#endif
 
 bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t encoded_size) {
     if (!file.seek(Persistence::config_offset)) return false;
@@ -180,10 +199,12 @@ bool select_config_filename(const char *current, const char *prior, const char *
 }  // namespace
 
 Persistence::Persistence() {
+    PackageStorageFence::BeginMountAttempt();
     _configuration_ok = LittleFS.setConfig(LittleFSConfig(false));
     if (_configuration_ok) {
         _mounted = LittleFS.begin();
     }
+    PackageStorageFence::FinishMountAttempt(_configuration_ok, _mounted);
 }
 
 Persistence::~Persistence() {
@@ -296,7 +317,7 @@ __attribute__((noinline)) bool Persistence::CompleteStagedConfig() {
     auto &file=SynchronousFileScope<true>::File();
     auto *owner=save_context.owner;
     auto &header=save_phase.header;
-    auto staging_failed=[owner,&file](){file.close();if(file.uncertain())owner->_mutation_fenced=true;return false;};
+    auto staging_failed=[owner,&file](){if(save_context.package)PackageStorageFence::Fence();file.close();if(file.uncertain()||save_context.package)owner->_mutation_fenced=true;return false;};
     CRC32 crc;
     for (size_t i = 0; i < save_phase.encoded_size; ++i) {
         int value = file.read();
@@ -311,7 +332,8 @@ __attribute__((noinline)) bool Persistence::CompleteStagedConfig() {
 }
 __attribute__((noinline)) bool Persistence::FailStagedConfig() {
     auto &file=SynchronousFileScope<true>::File();auto *owner=save_context.owner;
-    file.close();if(file.uncertain())owner->_mutation_fenced=true;return false;
+    if(save_context.package)PackageStorageFence::Fence();
+    file.close();if(file.uncertain()||save_context.package)owner->_mutation_fenced=true;return false;
 }
 __attribute__((noinline)) bool Persistence::InitializeStagedConfig() {
     auto &file=SynchronousFileScope<true>::File();
@@ -335,9 +357,11 @@ __attribute__((noinline)) bool Persistence::RotateSavedConfig() {
     if (!current && current.outcome != Outcome::NotFound) return false;
     save_phase.temporary.publication.current = bool(current);
     if (current) {
+#if !defined(GLYPH_PACKAGE_V1) || !GLYPH_PACKAGE_V1
         auto &prior_removed = save_phase.temporary.publication.operation;
         ::new (&prior_removed) Result(Remove(prior_compact_filename, Kind::Config));
         if (!prior_removed) { _mutation_fenced = prior_removed.outcome == Outcome::Uncertain; return false; }
+#endif
         auto &rotated = save_phase.temporary.publication.operation;
         ::new (&rotated) Result(Rename(config_filename, prior_compact_filename, Kind::Config));
         if (!rotated) { _mutation_fenced = rotated.outcome == Outcome::Uncertain; return false; }
@@ -378,6 +402,9 @@ __attribute__((noinline)) bool Persistence::PublishStagedConfig(Config &config) 
 }
 
 __attribute__((noinline)) bool Persistence::FinishSaveConfig(bool saved) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (!save_context.package) profile_store.EndOrdinaryConfigWrite();
+#endif
     std::memset(&save_phase,0,sizeof(save_phase));
     std::memset(&source_phase,0,sizeof(source_phase));
     return saved;
@@ -389,6 +416,9 @@ __attribute__((noinline)) void Persistence::InitializeSaveContext(Persistence *o
     ::new (&save_phase.temporary.publication) SavePublicationState{};
 }
 bool Persistence::SaveConfig(Config &config) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (!profile_store.BeginOrdinaryConfigWrite(config)) return false;
+#endif
     InitializeSaveContext(this,&config);
     return FinishSaveConfig(save_context.owner->PrepareSaveConfig(*save_context.config)&&
         save_context.owner->RemoveSaveTemporary()&&StageSaveConfig()&&
@@ -711,5 +741,147 @@ bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *
     }
     return crc.finalize() == header.config_crc;
 }
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+const char *Persistence::PackageFilename(PackageConfigFile file) {
+    switch (file) {
+        case PackageConfigFile::Current: return config_filename;
+        case PackageConfigFile::Prior: return prior_compact_filename;
+        case PackageConfigFile::Staged: return save_temporary_filename;
+        case PackageConfigFile::Legacy: return legacy_config_filename;
+        case PackageConfigFile::MigrationSource: return "/ultimate-migration.src";
+        case PackageConfigFile::MigrationTemporary: return "/ultimate-migration.tmp";
+    }
+    return nullptr;
+}
+
+__attribute__((noinline)) Persistence::LoadResult Persistence::ReadPackageFacts(
+    const char *path, size_t maximum, PackageConfigFacts &facts) {
+    facts = {};
+    SynchronousFileScope<false> scope(path);
+    auto &file = scope.File();
+    if (!file) return LoadResult::StorageFailure;
+    if (file.size() < config_offset || file.size() - config_offset > maximum) {
+        return file.close() ? LoadResult::Rejected : LoadResult::StorageFailure;
+    }
+    ConfigHeader header;
+    if (file.read(reinterpret_cast<uint8_t *>(&header), sizeof(header)) != static_cast<int>(sizeof(header)))
+        return LoadResult::StorageFailure;
+    if (header.config_size != file.size() - config_offset) {
+        return file.close() ? LoadResult::Rejected : LoadResult::StorageFailure;
+    }
+    Sha256 hash;
+    CRC32 crc;
+    uint8_t scratch[32];
+    size_t remaining = header.config_size;
+    while (remaining) {
+        const size_t count = remaining < sizeof(scratch) ? remaining : sizeof(scratch);
+        if (file.read(scratch, count) != static_cast<int>(count)) return LoadResult::StorageFailure;
+        hash.Update(scratch, count); crc.update(scratch, count); remaining -= count;
+    }
+    if (file.position() != file.size() || !file.close()) return LoadResult::StorageFailure;
+    if (crc.finalize() != header.config_crc) return LoadResult::Rejected;
+    hash.Final(facts.sha); facts.crc = header.config_crc; facts.bytes = header.config_size;
+    return LoadResult::Loaded;
+}
+
+__attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
+    PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid) {
+    facts = {}; source_valid = false;
+    if (!IsAvailable() || !_validator) return LoadResult::StorageFailure;
+    const char *path = PackageFilename(selection);
+    const auto present = CheckedStorage::Stat(path, nullptr, CheckedStorage::Kind::Config);
+    if (present.outcome == CheckedStorage::Outcome::NotFound) return LoadResult::Absent;
+    if (!present) return LoadResult::StorageFailure;
+    const size_t maximum = selection == PackageConfigFile::Current ||
+                           selection == PackageConfigFile::Staged ? 8191 : 65536;
+    const auto observed = ReadPackageFacts(path, maximum, facts);
+    if (observed != LoadResult::Loaded) return observed;
+    ResetReadWorkspace(); ReadWorkspaceReset reset;
+    loaded_candidate = Config_init_default;
+    SynchronousFileScope<false> scope(path);
+    auto &file = scope.File();
+    if (!file) { facts = {}; return LoadResult::StorageFailure; }
+    const auto strict = ValidatePackageConfigWire(file, facts.bytes);
+    if (strict != config_wire::Result::Valid) {
+        const bool closed = file.close(); facts = {};
+        return !closed || strict == config_wire::Result::StorageFailure ? LoadResult::StorageFailure : LoadResult::Rejected;
+    }
+    if (!file.seek(config_offset)) { facts = {}; return LoadResult::StorageFailure; }
+    read_workspace.reader = {&file};
+    read_workspace.stream = {};
+    read_workspace.stream.callback = read_config_file;
+    read_workspace.stream.state = &read_workspace.reader;
+    read_workspace.stream.bytes_left = facts.bytes;
+    ultimate_native::RejectEmbedded(loaded_candidate);
+    const bool decoded = pb_decode(&read_workspace.stream, Config_fields, &loaded_candidate) &&
+                         read_workspace.stream.bytes_left == 0 &&
+                         file.position() == file.size() && !read_workspace.reader.io_failed;
+    ultimate_native::ClearEmbeddedCallbacks(loaded_candidate);
+    // Independent byte comparison closes permissive nanopb parsing, including
+    // unknown fields, duplicate/default encodings and field ordering.
+    const bool canonical = decoded && compare_config_bytes(file, loaded_candidate, facts.bytes);
+    const bool closed = file.close();
+    if (!closed) { facts = {}; return LoadResult::StorageFailure; }
+    ConfigValidationError error;
+    if (!canonical) { facts = {}; return LoadResult::Rejected; }
+    source_valid = ValidateConfig(loaded_candidate, error);
+    into = loaded_candidate;
+    return LoadResult::Loaded;
+}
+
+__attribute__((noinline)) bool Persistence::MatchPackageConfig(
+    const char *path, const PackageConfigFacts &expected) {
+    PackageConfigFacts actual;
+    return ReadPackageFacts(path, 8191, actual) == LoadResult::Loaded && actual.bytes == expected.bytes &&
+           actual.crc == expected.crc && !std::memcmp(actual.sha, expected.sha, 32);
+}
+
+__attribute__((noinline)) bool Persistence::PublishPackageStaged(const PackageConfigFacts &baseline) {
+    using namespace CheckedStorage;
+    // Same-mount rename replaces the retained prior atomically. Never delete
+    // prior first, roll it back, reconcile a lost acknowledgement or clean temp.
+    auto &operation = save_phase.temporary.publication.operation;
+    ::new (&operation) Result(Rename(config_filename, prior_compact_filename, Kind::Config));
+    if (!operation || !MatchPackageConfig(prior_compact_filename, baseline) ||
+        Stat(config_filename, nullptr, Kind::Config).outcome != Outcome::NotFound) return false;
+    ::new (&operation) Result(Rename(save_temporary_filename, config_filename, Kind::Config));
+    return bool(operation);
+}
+
+Persistence::SaveResult Persistence::PublishPackageConfig(
+    Config &config, const PackageConfigFacts &baseline, const PackageConfigFacts &expected,
+    const void *package_owner, uint64_t token) {
+    // The one-shot package writer scope and all reservation/ownership/resource
+    // proofs must already be live. No ordinary save/recovery entry is called.
+    if (!IsAvailable() || _mutation_fenced || PackageStorageFence::MutationFenced() ||
+        !PackageStorageFence::IsPackageWriter(package_owner, token)) return SaveResult::Uncertain;
+    InitializeSaveContext(this, &config);
+    save_context.package = true;
+    const auto temporary = CheckedStorage::Stat(save_temporary_filename, nullptr, CheckedStorage::Kind::Config);
+    bool saved = temporary.outcome == CheckedStorage::Outcome::NotFound &&
+                 MatchPackageConfig(config_filename, baseline) && PrepareSaveConfig(config) &&
+                 save_phase.encoded_size == expected.bytes && expected.bytes && expected.bytes <= 8191;
+    saved = saved && StageSaveConfig();
+    saved = saved && save_phase.header.config_crc == expected.crc &&
+            VerifyStagedConfig(config) && MatchPackageConfig(save_temporary_filename, expected);
+    // Baseline recheck remains SHA-based immediately before Config rotation.
+    saved = saved && MatchPackageConfig(config_filename, baseline) && PublishPackageStaged(baseline);
+    saved = saved && MatchPackageConfig(config_filename, expected) &&
+            CheckedStorage::Stat(save_temporary_filename, nullptr, CheckedStorage::Kind::Config).outcome == CheckedStorage::Outcome::NotFound;
+    saved = saved && PackageStorageFence::IsPackageWriter(package_owner, token);
+    if (saved) {
+        _config_generation = expected.crc;
+    } else {
+        _mutation_fenced = true;
+        PackageStorageFence::Fence();
+    }
+    FinishSaveConfig(saved);
+    return saved ? SaveResult::Saved : SaveResult::Uncertain;
+}
+
+Config &Persistence::PackageConfigScratch() { return loaded_candidate; }
+
+#endif
 
 Persistence persistence;
