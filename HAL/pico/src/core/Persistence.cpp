@@ -966,7 +966,8 @@ __attribute__((noinline)) bool EncodeObservedField(pb_ostream_t &out,size_t &dep
         if(depth+1>=sizeof(read_workspace.encoding)/sizeof(*read_workspace.encoding))return false;
         size_t bytes=0;
         // Sizing uses the original child descriptor after native callbacks have
-        // been cleared; frozen Config descriptors contain no other callbacks.
+        // been cleared. secondary_backends remains null from generated defaults
+        // and strict callback-wire rejection; all sizing callbacks are null.
         if(!pb_get_encoded_size(&bytes,field.submsg_desc,message)||
            !pb_encode_tag(&out,PB_WT_STRING,field.tag)||!pb_encode_varint(&out,bytes))return false;
         auto &child=read_workspace.encoding[depth+1];child={};

@@ -153,7 +153,8 @@ bool AppendVarint(AppendCursor &cursor,uint8_t *raw,uint8_t &count,unsigned maxi
         if(!(byte&128))return count==1||byte!=0;
     }return false;
 }
-bool ReadAppendField(AppendCursor &cursor,AppendField &field){
+// Field-parser temporaries end before NextAppendField performs its final stat.
+__attribute__((noinline)) bool ReadAppendField(AppendCursor &cursor,AppendField &field){
     uint64_t value=0;field={};
     if(!AppendVarint(cursor,field.key,field.key_count,5,value)||!(field.tag=uint32_t(value)>>3))return false;
     field.wire=value&7;
