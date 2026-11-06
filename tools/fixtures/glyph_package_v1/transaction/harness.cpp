@@ -64,7 +64,10 @@ bool recheck_armed=false,recheck_hit=false,recheck_drift=false;
 const char *recheck_path=nullptr;
 CheckedStorage::Phase recheck_when=CheckedStorage::Phase::Before;
 CheckedStorage::Fault recheck_hook(CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase when,const char *name){
- if(!recheck_armed||recheck_hit||op!=CheckedStorage::Operation::Read||when!=recheck_when||!name||std::strcmp(name,recheck_path))return CheckedStorage::Fault::None;
+ if(!recheck_armed||recheck_hit||op!=CheckedStorage::Operation::Read||when!=recheck_when||!name||!recheck_path)return CheckedStorage::Fault::None;
+ const char *actual=name+(name[0]=='/');const char *wanted=recheck_path+(recheck_path[0]=='/');
+ if(std::strcmp(actual,wanted))return CheckedStorage::Fault::None;
+ need(programs==0&&erases==0,"final preflight probe cannot hit after earlier publication");
  need(!PackageStorageFence::WriteOwner(),"final baseline probe precedes writer admission");recheck_hit=true;
  if(recheck_drift){
   // Actual final root reads target this existing chunk. Change the successfully
