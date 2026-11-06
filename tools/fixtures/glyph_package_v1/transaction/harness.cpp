@@ -102,7 +102,8 @@ lfs_t *CheckedStorageTestMount(){return test::mounted?&test::fs:nullptr;}
 
 int main(int argc,char **argv){using namespace test;try{
  need(argc>=2,"mode required");configure();owner_aliases();
- if(!std::strcmp(argv[1],"observe-configs")){
+ if(!std::strcmp(argv[1],"observe-configs")||!std::strcmp(argv[1],"observe-configs-faults")){
+  const bool inject=!std::strcmp(argv[1],"observe-configs-faults");
   // Synthetic NOR setup only; production observation itself must never write.
   need(lfs_format(&fs,&cfg)==0&&lfs_mount(&fs,&cfg)==0,"observation fixture mount");mounted=true;
   need(persistence.SetValidator(validate_glyph_config),"source Config validator");
@@ -119,6 +120,25 @@ int main(int argc,char **argv){using namespace test;try{
    if(result==Persistence::LoadResult::Loaded){
     need(facts.bytes==body.size()&&facts.crc==package_storage::Crc32(body.data(),body.size()),"exact observed extent/CRC");
     Sha256 hash;hash.Update(body.data(),body.size());uint8_t digest[32];hash.Final(digest);need(!std::memcmp(digest,facts.sha,32),"exact observed SHA");
+   }
+   if(inject&&result==Persistence::LoadResult::Loaded){
+    // Enumerate this actual observation's read/seek seams, then independently
+    // fail each one before/after. No fault selection changes production code.
+    static size_t seen,fail_at;seen=0;fail_at=SIZE_MAX;
+    const auto fault=[](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase,const char*){
+     if(op!=CheckedStorage::Operation::Read&&op!=CheckedStorage::Operation::Seek)return CheckedStorage::Fault::None;
+     const auto index=seen++;return index==fail_at?CheckedStorage::Fault::Fail:CheckedStorage::Fault::None;
+    };
+    CheckedStorage::SetFaultHook(fault);
+    Persistence::PackageConfigFacts observed{};bool valid=false;
+    need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::Loaded,"fault census positive");
+    const auto seams=seen;
+    for(size_t i=0;i<seams;++i){seen=0;fail_at=i;
+     need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)!=Persistence::LoadResult::Loaded,"Config read/seek failure closed");
+     need(seen>i,"Config fault reached");no_handles();need(nor==before&&programs==p&&erases==e,"faulted Config observation write-free");
+    }
+    CheckedStorage::SetFaultHook(nullptr);
+    std::cerr<<"observation fault seams "<<seams<<" bytes "<<body.size()<<"\n";
    }
    std::cout<<(result==Persistence::LoadResult::Loaded?0:1)<<"\n";
   }

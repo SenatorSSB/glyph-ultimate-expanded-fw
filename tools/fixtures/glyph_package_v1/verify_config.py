@@ -171,11 +171,14 @@ historical=encode(saturated('Config'));assert 8191<len(historical)<=65536,len(hi
 add('historical-large','saturated Config '+str(len(historical)),historical,True)
 print('Schema-valid historical Config body bytes',len(historical),'(separate source validation still mandatory)')
 for raw in [b'\0',b'\x80',b'\x88\0\1',b'\xff'*10,b'\xff'*65536,b'\xff'*65537]:add('bounds',str(len(raw)),raw,False)
+# Retain the exact independent vectors when exercising production observation.
+if os.environ.get('GLYPH_PACKAGE_CONFIG_CASES'):
+ Path(os.environ['GLYPH_PACKAGE_CONFIG_CASES']).write_text(json.dumps([dict(group=g,name=n,hex=r.hex(),valid=v) for g,n,r,v in cases],indent=2)+'\n')
 proc=subprocess.run([os.environ.get('CONFIG_WIRE_PROBE',str(HERE/'build/probe'))],input='\n'.join(raw.hex() for _,_,raw,_ in cases)+'\n',text=True,capture_output=True,check=False)
 if proc.returncode:print(proc.stderr);raise SystemExit(proc.returncode)
 lines=proc.stdout.splitlines();assert len(lines)==len(cases),(len(lines),len(cases),proc.stderr)
 for (group,name,raw,expected),actual in zip(cases,lines):assert (actual=='0')==expected,(group,name,actual,expected,raw.hex()[:300])
-valid=sum(x[3] for x in cases);print('Differential oracle PASS:',len(cases),'cases;',valid,'valid;',len(cases)-valid,'rejected;',len(seen),'unique package/migration Config snapshots; reader chunks1/2/3/7/31/32/255/256 and first/later-read storage failures')
+valid=sum(x[3] for x in cases);print('Differential oracle PASS:',len(cases),'cases;',valid,'valid;',len(cases)-valid,'rejected;',len(seen),'unique package/migration Config snapshots;',os.environ.get('GLYPH_PACKAGE_CONFIG_PROBE_KIND','streaming wire reader chunks1/2/3/7/31/32/255/256 and first/later-read storage failures'))
 print('Groups:',json.dumps(groups,sort_keys=True))
 if os.environ.get('GLYPH_PACKAGE_TEST_OUTPUT'):
  (Path(os.environ['GLYPH_PACKAGE_TEST_OUTPUT'])/'config-results.json').write_text(json.dumps(dict(cases=len(cases),valid=valid,rejected=len(cases)-valid,snapshots=len(seen),groups=groups),indent=2)+'\n')
