@@ -111,7 +111,7 @@ int main(int argc,char **argv){using namespace test;try{
  if(!std::strcmp(argv[1],"execute")){
   need(argc==6,"execute NOR CREATE OUTDIR FAULT_INDEX(-1none)");target=std::strtoll(argv[5],nullptr,10);const auto bytes=input(argv[3]);
   glyph_package::EnvelopePhase header{};need(glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),header),"canonical CREATE fixture");const auto inc=header.request.expected_store_incarnation;const auto token=header.request.request_token;uint8_t semantic[32];need(PackageCreateDigest(header,semantic),"independent query identity preparation");header.Release();
-  const auto boot=nor;profile_store.BeginRecovery(inc,0);need(nor==boot,"preflight/recovery boot readonly");
+  const auto boot=nor;profile_store.Begin(inc,0);need(nor==boot,"ordinary creation boot readonly");
   CheckedStorage::SetFaultHook(hook);trace_enabled=true;PackageResponse result{};need(dispatch(bytes,result),"CREATE dispatch");trace_enabled=false;CheckedStorage::SetFaultHook(nullptr);response(result,"response");
   if(fault_hit){const auto after_error=nor;const auto p=programs,e=erases;
    need(PackageStorageFence::MutationFenced(),"every admitted publication failure remains same-boot fenced");
