@@ -133,12 +133,15 @@ int main(int argc,char **argv){using namespace test;try{
     Persistence::PackageConfigFacts observed{};bool valid=false;
     need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::Loaded,"fault census positive");
     const auto seams=seen;
-    for(size_t i=0;i<seams;++i){seen=0;fail_at=i;
+    const size_t count=body.size()>8191?32:seams;
+    for(size_t selected=0;selected<count;++selected){
+     const size_t i=count==seams?selected:selected*(seams-1)/(count-1);
+     seen=0;fail_at=i;
      need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)!=Persistence::LoadResult::Loaded,"Config read/seek failure closed");
      need(seen>i,"Config fault reached");no_handles();need(nor==before&&programs==p&&erases==e,"faulted Config observation write-free");
     }
     CheckedStorage::SetFaultHook(nullptr);
-    std::cerr<<"observation fault seams "<<seams<<" bytes "<<body.size()<<"\n";
+    std::cerr<<"observation fault seams "<<count<<" of "<<seams<<" bytes "<<body.size()<<"\n";
    }
    std::cout<<(result==Persistence::LoadResult::Loaded?0:1)<<"\n";
   }

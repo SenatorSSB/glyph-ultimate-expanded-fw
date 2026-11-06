@@ -416,14 +416,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
  }
 };
 }
-void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owners){
- // Placement construction never materializes a 4KiB automatic temporary.
- owners.work.~ClassificationWorkspace();::new(&owners.work)ClassificationWorkspace;
- Classifier classifier(reader,owners);
- classifier.Run();
- if(owners.work.run.next_phase==1)classifier.RunRoots();
- if(owners.work.run.next_phase==2)classifier.RunBaseline();
- if(owners.work.run.next_phase==3)classifier.RunFinal();
+static __attribute__((noinline)) void FinishClassification(NamespaceReader &reader,const ClassifierOwners &owners){
  auto &classified=owners.work.classification;
  if(reader.ObservationFailed()){classified=Classification{};classified.diagnostic="checked I/O uncertainty";return;}
  if(classified.logical!=Logical::Unresolved){
@@ -436,7 +429,16 @@ void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owner
   if(owners.work.current.reference_token>classified.high_token)classified.high_token=owners.work.current.reference_token;
   if(owners.work.prior.reference_token>classified.high_token)classified.high_token=owners.work.prior.reference_token;
  }
- return;
+}
+void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owners){
+ // Placement construction never materializes a 4KiB automatic temporary.
+ owners.work.~ClassificationWorkspace();::new(&owners.work)ClassificationWorkspace;
+ Classifier classifier(reader,owners);
+ classifier.Run();
+ if(owners.work.run.next_phase==1)classifier.RunRoots();
+ if(owners.work.run.next_phase==2)classifier.RunBaseline();
+ if(owners.work.run.next_phase==3)classifier.RunFinal();
+ FinishClassification(reader,owners);
 }
 Classification ClassifyNamespace(NamespaceReader &reader,const ClassifierOwners &owners){
  ClassifyNamespaceInto(reader,owners);
