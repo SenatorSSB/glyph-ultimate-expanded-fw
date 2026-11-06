@@ -74,6 +74,9 @@ bool ExtractConfigFacts(const ::Config &config,package_storage::ConfigFacts &fac
     return true;
 }
 struct ConfigEncodingFacts {Sha256 hash;config_wire::Workspace wire;uint32_t crc=~0u;};
+// SHA compression scratch is released before wire validation's scalar walk.
+__attribute__((noinline)) void UpdateConfigEncodingHash(Sha256 &hash,const pb_byte_t *bytes,size_t n){hash.Update(bytes,n);}
+
 __attribute__((noinline)) bool EncodeConfigFacts(const ::Config &config,package_storage::ConfigFacts &facts){
     size_t bytes=0;if(!pb_get_encoded_size(&bytes,Config_fields,&config)||!bytes||bytes>8191)return false;
     ConfigEncodingFacts encoding;pb_ostream_t stream{};
@@ -82,7 +85,7 @@ __attribute__((noinline)) bool EncodeConfigFacts(const ::Config &config,package_
     stream.callback=[](pb_ostream_t *out,const pb_byte_t *bytes,size_t n){
         auto &state=*static_cast<ConfigEncodingFacts *>(out->state);
         if(!config_wire::Consume(state.wire,bytes,n))return false;
-        state.hash.Update(bytes,n);
+        UpdateConfigEncodingHash(state.hash,bytes,n);
         while(n--){state.crc^=*bytes++;for(unsigned j=0;j<8;++j)state.crc=(state.crc>>1)^(0xedb88320u&(0u-(state.crc&1)));}
         return true;
     };

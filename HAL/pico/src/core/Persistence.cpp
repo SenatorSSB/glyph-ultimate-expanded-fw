@@ -114,9 +114,10 @@ struct PackageObservationReset {
 // legacy embedded UltimateProfile children. Streams borrow the same read file;
 // no Config/encoded-body owner or recursive filesystem decoder is added.
 struct ObservedMessageFrame { pb_istream_t stream; const pb_msgdesc_t *descriptor; void *message; };
+struct ObservedEncodingFrame { pb_field_iter_t field; size_t child_index; bool have_field; };
 struct ReadWorkspace {
     ConfigFileReader reader; pb_istream_t stream; size_t file_size;
-    ObservedMessageFrame observed[4];
+    union { ObservedMessageFrame observed[4]; ObservedEncodingFrame encoding[4]; };
 };
 union SynchronousPhaseWorkspace { SavePhaseState save{}; ReadWorkspace read; } phase_workspace{};
 __attribute__((always_inline)) inline SavePhaseState &SavePhase(){return phase_workspace.save;}
@@ -161,7 +162,13 @@ __attribute__((noinline)) config_wire::Result ValidatePackageConfigWire(CheckedS
 
 #endif
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+bool CompareObservedConfigBytes(CheckedStorageFile &,const Config &,size_t);
+#endif
 bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t encoded_size) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(package_observation.live)return CompareObservedConfigBytes(file,config,encoded_size);
+#endif
     if (!file.seek(Persistence::config_offset)) return false;
     pb_ostream_t compare{};
     compare.callback = [](pb_ostream_t *out, const pb_byte_t *bytes, size_t count) {
@@ -169,13 +176,7 @@ bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t
         uint8_t actual[32];
         while (count) {
             const size_t chunk = count > sizeof(actual) ? sizeof(actual) : count;
-            if (input.read(actual, chunk) != static_cast<int>(chunk)) {
-#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
-                if(package_observation.live)read_workspace.reader.io_failed=true;
-#endif
-                return false;
-            }
-            if(std::memcmp(actual,bytes,chunk))return false;
+            if (input.read(actual, chunk) != static_cast<int>(chunk) || std::memcmp(actual, bytes, chunk)) return false;
             bytes += chunk; count -= chunk;
         }
         return true;
@@ -884,7 +885,7 @@ __attribute__((noinline)) bool DecodeObservedField(size_t &depth) {
     if(!pb_decode_tag(&stream,&wire,&tag,&eof))return false;
     pb_field_iter_t field;
     if(!pb_field_iter_begin(&field,frame.descriptor,frame.message)||!pb_field_iter_find(&field,tag))return false;
-    if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER)return false;
+    if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER||PB_LTYPE(field.type)==PB_LTYPE_EXTENSION)return false;
     if(PB_LTYPE_IS_SUBMSG(field.type)) {
         // Unsupported descriptor representations cannot fall through to a
         // recursive decode. The frozen schema uses STATIC SUBMESSAGE only.
@@ -915,6 +916,7 @@ __attribute__((noinline)) bool DecodeObservedField(size_t &depth) {
     stream.bytes_left=after;return true;
 }
 __attribute__((noinline)) bool DecodeObservedConfigFields() {
+    ::new(static_cast<void*>(&read_workspace.observed))ObservedMessageFrame[4]{};
     auto &root=read_workspace.observed[0];root={read_workspace.stream,Config_fields,&loaded_candidate};
     size_t depth=0;
     for(;;) {
@@ -928,6 +930,70 @@ __attribute__((noinline)) bool DecodeObservedConfigFields() {
     read_workspace.stream=root.stream;
     auto &file=SynchronousFileScope<false>::File();
     return file.position()==file.size()&&!read_workspace.reader.io_failed;
+}
+namespace {
+__attribute__((noinline)) bool CompareObservedBytes(pb_ostream_t *out,const pb_byte_t *bytes,size_t count) {
+    auto &file=*static_cast<CheckedStorageFile*>(out->state);uint8_t actual[32];
+    while(count){const size_t chunk=count>sizeof(actual)?sizeof(actual):count;
+        if(file.read(actual,chunk)!=static_cast<int>(chunk)){read_workspace.reader.io_failed=true;return false;}
+        if(std::memcmp(actual,bytes,chunk))return false;
+        bytes+=chunk;count-=chunk;
+    }
+    return true;
+}
+void NextObservedEncodingField(ObservedEncodingFrame &frame) {
+    frame.child_index=0;frame.have_field=pb_field_iter_next(&frame.field);
+}
+__attribute__((noinline)) bool EncodeObservedField(pb_ostream_t &out,size_t &depth) {
+    auto &frame=read_workspace.encoding[depth];auto &field=frame.field;
+    if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER||PB_LTYPE(field.type)==PB_LTYPE_EXTENSION)return false;
+    if(PB_LTYPE_IS_SUBMSG(field.type)) {
+        if(PB_ATYPE(field.type)!=PB_ATYPE_STATIC||PB_LTYPE(field.type)!=PB_LTYPE_SUBMESSAGE||
+           !field.submsg_desc)return false;
+        const void *message=field.pField;
+        if(PB_HTYPE(field.type)==PB_HTYPE_REPEATED){
+            if(!field.pSize)return false;
+            const size_t count=*static_cast<const pb_size_t*>(field.pSize);
+            if(count>field.array_size)return false;
+            if(frame.child_index==count){NextObservedEncodingField(frame);return true;}
+            message=static_cast<const char*>(field.pField)+size_t(field.data_size)*frame.child_index++;
+        }else if(PB_HTYPE(field.type)==PB_HTYPE_OPTIONAL){
+            // Every optional submessage in the frozen schema has a has flag.
+            if(!field.pSize)return false;
+            if(frame.child_index||!*static_cast<const bool*>(field.pSize)){NextObservedEncodingField(frame);return true;}
+            frame.child_index=1;
+        }else return false;
+        if(depth+1>=sizeof(read_workspace.encoding)/sizeof(*read_workspace.encoding))return false;
+        size_t bytes=0;
+        // Sizing uses the original child descriptor after native callbacks have
+        // been cleared; frozen Config descriptors contain no other callbacks.
+        if(!pb_get_encoded_size(&bytes,field.submsg_desc,message)||
+           !pb_encode_tag(&out,PB_WT_STRING,field.tag)||!pb_encode_varint(&out,bytes))return false;
+        auto &child=read_workspace.encoding[depth+1];child={};
+        child.have_field=pb_field_iter_begin_const(&child.field,field.submsg_desc,message);
+        ++depth;return true;
+    }
+    // This exact original field-info record retains type, width, offsets,
+    // count/presence and packed/default/callback behavior. Its descriptor view
+    // contains no message field, so encoding cannot recurse over filesystem I/O.
+    const pb_msgdesc_t one{field.descriptor->field_info+field.field_info_index,nullptr,
+        field.descriptor->default_value,field.descriptor->field_callback,1,0,field.tag};
+    if(!pb_encode(&out,&one,field.message))return false;
+    NextObservedEncodingField(frame);return true;
+}
+__attribute__((noinline)) bool CompareObservedConfigBytes(CheckedStorageFile &file,const Config &config,size_t bytes) {
+    if(!file.seek(Persistence::config_offset))return false;
+    // Decode streams are dead before this mutually exclusive phase begins.
+    ::new(static_cast<void*>(&read_workspace.encoding))ObservedEncodingFrame[4]{};
+    auto &root=read_workspace.encoding[0];root.have_field=pb_field_iter_begin_const(&root.field,Config_fields,&config);
+    pb_ostream_t out{};out.callback=CompareObservedBytes;out.state=&file;out.max_size=bytes;
+    size_t depth=0;
+    for(;;){auto &frame=read_workspace.encoding[depth];
+        if(frame.have_field){if(!EncodeObservedField(out,depth))return false;}
+        else if(depth){frame={};--depth;}else break;
+    }
+    return out.bytes_written==bytes;
+}
 }
 __attribute__((noinline)) void Persistence::DecodeObservedPackageConfig() {
     package_observation.decoded = DecodeObservedConfigFields();
