@@ -87,6 +87,20 @@ struct ConfigFileReader {
     bool io_failed = false;
 };
 
+// One finite synchronous observation; these scalar outputs survive sibling
+// decode/wire/canonical phases, never another Config or encoded-body owner.
+struct PackageObservationState {
+    Config *into = nullptr;
+    Persistence::PackageConfigFacts *facts = nullptr;
+    bool *source_valid = nullptr;
+    const char *path = nullptr;
+    size_t maximum = 0;
+    bool decoded = false;
+    bool live = false;
+} package_observation{};
+struct PackageObservationReset {
+    ~PackageObservationReset() { package_observation = {}; }
+};
 struct ReadWorkspace { ConfigFileReader reader; pb_istream_t stream; size_t file_size; };
 union SynchronousPhaseWorkspace { SavePhaseState save{}; ReadWorkspace read; } phase_workspace{};
 __attribute__((always_inline)) inline SavePhaseState &SavePhase(){return phase_workspace.save;}
@@ -805,22 +819,18 @@ __attribute__((noinline)) bool Persistence::ValidateObservedPackageConfig(const 
     ConfigValidationError error;
     return ValidateConfig(config,error);
 }
-__attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
-    PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid,size_t maximum) {
-    facts = {}; source_valid = false;
+__attribute__((noinline)) Persistence::LoadResult Persistence::PrepareObservedPackageConfig() {
+    auto &state = package_observation;
     if (!IsAvailable() || !_validator) return LoadResult::StorageFailure;
-    const char *path = PackageFilename(selection);
-    const auto present = CheckedStorage::Stat(path, nullptr, CheckedStorage::Kind::Config);
+    const auto present = CheckedStorage::Stat(state.path, nullptr, CheckedStorage::Kind::Config);
     if (present.outcome == CheckedStorage::Outcome::NotFound) return LoadResult::Absent;
     if (!present) return LoadResult::StorageFailure;
-    if(!maximum)maximum=selection==PackageConfigFile::Current||selection==PackageConfigFile::Staged?8191:65536;
-    if(maximum>65536)return LoadResult::Rejected;
-    const auto observed = ReadPackageFacts(path, maximum, facts);
-    if (observed != LoadResult::Loaded) return observed;
-    ResetReadWorkspace(); ReadWorkspaceReset reset;
-    loaded_candidate = Config_init_default;
-    SynchronousFileScope<false> scope(path);
-    auto &file = scope.File();
+    if (state.maximum > 65536) return LoadResult::Rejected;
+    return ReadPackageFacts(state.path, state.maximum, *state.facts);
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::InitializeObservedPackageConfig() {
+    auto &file = SynchronousFileScope<false>::File();
+    auto &facts = *package_observation.facts;
     if (!file) { facts = {}; return LoadResult::StorageFailure; }
     const auto strict = ValidatePackageConfigWire(file, facts.bytes);
     if (strict != config_wire::Result::Valid) {
@@ -834,19 +844,42 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageCon
     read_workspace.stream.state = &read_workspace.reader;
     read_workspace.stream.bytes_left = facts.bytes;
     ultimate_native::RejectEmbedded(loaded_candidate);
-    const bool decoded = pb_decode(&read_workspace.stream, Config_fields, &loaded_candidate) &&
-                         read_workspace.stream.bytes_left == 0 &&
-                         file.position() == file.size() && !read_workspace.reader.io_failed;
+    return LoadResult::Loaded;
+}
+__attribute__((noinline)) void Persistence::DecodeObservedPackageConfig() {
+    auto &file = SynchronousFileScope<false>::File();
+    package_observation.decoded = pb_decode(&read_workspace.stream, Config_fields, &loaded_candidate) &&
+        read_workspace.stream.bytes_left == 0 && file.position() == file.size() && !read_workspace.reader.io_failed;
     ultimate_native::ClearEmbeddedCallbacks(loaded_candidate);
-    // Independent byte comparison closes permissive nanopb parsing, including
-    // unknown fields, duplicate/default encodings and field ordering.
-    const bool canonical = decoded && compare_config_bytes(file, loaded_candidate, facts.bytes);
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPackageConfig() {
+    auto &file = SynchronousFileScope<false>::File();
+    auto &state = package_observation;
+    auto &facts = *state.facts;
+    const bool canonical = state.decoded && compare_config_bytes(file, loaded_candidate, facts.bytes);
     const bool closed = file.close();
     if (!closed) { facts = {}; return LoadResult::StorageFailure; }
     if (!canonical) { facts = {}; return LoadResult::Rejected; }
-    source_valid = ValidateObservedPackageConfig(loaded_candidate);
-    into = loaded_candidate;
+    *state.source_valid = ValidateObservedPackageConfig(loaded_candidate);
+    *state.into = loaded_candidate;
     return LoadResult::Loaded;
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
+    PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid,size_t maximum) {
+    facts = {}; source_valid = false;
+    if (package_observation.live) return LoadResult::StorageFailure;
+    PackageObservationReset observation_reset;
+    if (!maximum) maximum = selection == PackageConfigFile::Current || selection == PackageConfigFile::Staged ? 8191 : 65536;
+    package_observation = {&into, &facts, &source_valid, PackageFilename(selection), maximum, false, true};
+    const auto prepared = PrepareObservedPackageConfig();
+    if (prepared != LoadResult::Loaded) return prepared;
+    ResetReadWorkspace(); ReadWorkspaceReset reset;
+    loaded_candidate = Config_init_default;
+    SynchronousFileScope<false> scope(package_observation.path);
+    const auto initialized = InitializeObservedPackageConfig();
+    if (initialized != LoadResult::Loaded) return initialized;
+    DecodeObservedPackageConfig();
+    return FinishObservedPackageConfig();
 }
 
 __attribute__((noinline)) bool Persistence::MatchPackageConfig(

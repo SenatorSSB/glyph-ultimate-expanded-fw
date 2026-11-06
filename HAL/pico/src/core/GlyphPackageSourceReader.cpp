@@ -255,18 +255,17 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Read(const char *path,s
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::LoadNamedConfig(
     const char *path,uint32_t maximum,uint8_t *sha,uint32_t *crc,uint32_t *bytes,bool *source_valid){
-    Persistence::PackageConfigFile file;
-    if(!SelectConfig(path,file))return false;
-    Persistence::PackageConfigFacts facts{};
-    bool valid=false;
-    ::Config &scratch=_persistence.PackageConfigScratch();
-    const auto result=_persistence.ObservePackageConfig(file,scratch,facts,valid,maximum);
+    if(!SelectConfig(path,_config_file))return false;
+    _config_facts={}; _config_valid=false;
+    _config_outputs={sha,crc,bytes,source_valid,maximum};
+    const auto result=_persistence.ObservePackageConfig(_config_file,_persistence.PackageConfigScratch(),
+        _config_facts,_config_valid,_config_outputs.maximum);
     if(result==Persistence::LoadResult::StorageFailure)_failed=true;
-    if(result!=Persistence::LoadResult::Loaded||facts.bytes>maximum)return false;
-    if(sha)std::memcpy(sha,facts.sha,32);
-    if(crc)*crc=facts.crc;
-    if(bytes)*bytes=facts.bytes;
-    if(source_valid)*source_valid=valid;
+    if(result!=Persistence::LoadResult::Loaded||_config_facts.bytes>_config_outputs.maximum)return false;
+    if(_config_outputs.sha)std::memcpy(_config_outputs.sha,_config_facts.sha,32);
+    if(_config_outputs.crc)*_config_outputs.crc=_config_facts.crc;
+    if(_config_outputs.bytes)*_config_outputs.bytes=_config_facts.bytes;
+    if(_config_outputs.source_valid)*_config_outputs.source_valid=_config_valid;
     return true;
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::Config(const char *path,uint32_t maximum,package_storage::ConfigFacts &facts){
@@ -312,8 +311,14 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::LegacyProfile(const uin
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::Native(const char *path,size_t index,const uint8_t *record,size_t bytes){
     ClearProfileLease();
-    bool source_valid=false;
-    if(!RecordValid(record,bytes)||!LoadNamedConfig(path,8191,nullptr,nullptr,nullptr,&source_valid)||!source_valid)return false;
+    if(!RecordValid(record,bytes))return false;
+    _native_record=record; _native_bytes=bytes; _native_index=index;
+    if(!LoadNamedConfig(path,8191)||!_config_valid)return false;
+    return ValidateMaterializedNative();
+}
+__attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNative(){
+    const auto *record=_native_record;
+    const auto bytes=_native_bytes, index=_native_index;
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.game_mode_configs_count||index>=sizeof(config.game_mode_configs)/sizeof(config.game_mode_configs[0]))return false;
     const auto &row=config.game_mode_configs[index];

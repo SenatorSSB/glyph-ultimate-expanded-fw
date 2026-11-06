@@ -2,6 +2,7 @@
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
 #include "core/PackageNamespaceClassifier.hpp"
 #include "modes/UltimateNativeProfile.hpp"
+#include "core/Persistence.hpp"
 class ProfileStore;
 class Persistence;
 
@@ -35,6 +36,18 @@ class GlyphPackageSourceReader final : public package_storage::NamespaceReader {
     bool ValidateCandidateProfile();
     bool CanonicalCandidateProfile(const uint8_t *, size_t);
     void ClearProfileLease();
+    bool ValidateMaterializedNative();
+    Persistence::PackageConfigFacts _config_facts{};
+    Persistence::PackageConfigFile _config_file{};
+    bool _config_valid = false;
+    struct ConfigOutputs {
+        uint8_t *sha = nullptr;
+        uint32_t *crc = nullptr, *bytes = nullptr;
+        bool *source_valid = nullptr;
+        uint32_t maximum = 0;
+    } _config_outputs{};
+    const uint8_t *_native_record = nullptr;
+    size_t _native_bytes = 0, _native_index = 0;
     ProfileStore &_store;
     Persistence &_persistence;
     ultimate_native::PayloadLease _profile_lease{};

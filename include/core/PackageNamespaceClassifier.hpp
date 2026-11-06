@@ -85,6 +85,18 @@ struct ClassificationWorkspace {
     Sha256 hash{}, aggregate_hash{};
     uint8_t digest[32]{}, row_sha[32]{}, rgb_sha[32]{}, record_sha[32]{}, entry_sha[32]{};
     uint8_t read_chunk[256]{};
+    struct OwnedScratch {
+        uint8_t word[16]{};
+        size_t managed_count=0, mapped=0, item=0, i=0, j=0, n=0;
+        uint32_t previous_id=0, id=0, sequence=0, extra_id=0;
+        uint64_t token=0;
+        const RootFacts *root=nullptr;
+        const ConfigFacts *config=nullptr;
+        const char *config_path=nullptr;
+        const uint8_t *e=nullptr;
+        bool all_extra=false;
+    } owned{};
+    struct RunScratch { unsigned next_phase=0; const RootFacts *selected=nullptr; unsigned v2=0; bool baseline_root_found=false, baseline_selected=false, store_published=false, baseline_current=false, baseline_prior=false; } run{};
     uint64_t logical_bytes = 0;
     size_t namespace_files = 0;
     bool managed_observed = false, unsupported = false, corrupt = false;
@@ -100,5 +112,6 @@ struct ClassifierOwners {
 };
 // Every failure remains fenced and reports unavailablezero checked facts.
 // No method on NamespaceReader can write; this classifier never acquires grant.
+void ClassifyNamespaceInto(NamespaceReader &, const ClassifierOwners &);
 Classification ClassifyNamespace(NamespaceReader &, const ClassifierOwners &);
 }

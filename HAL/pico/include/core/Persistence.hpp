@@ -87,6 +87,10 @@ class Persistence {
     static const char *PackageFilename(PackageConfigFile);
     LoadResult ReadPackageFacts(const char *, size_t maximum, PackageConfigFacts &);
     bool ValidateObservedPackageConfig(const Config &) const;
+    LoadResult PrepareObservedPackageConfig();
+    LoadResult InitializeObservedPackageConfig();
+    void DecodeObservedPackageConfig();
+    LoadResult FinishObservedPackageConfig();
     bool MatchPackageConfig(const char *, const PackageConfigFacts &);
     bool PublishPackageStaged(const PackageConfigFacts &baseline);
     // config.bin is immutable migration input once a compact Config exists.

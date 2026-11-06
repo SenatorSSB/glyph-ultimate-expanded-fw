@@ -36,12 +36,51 @@ constexpr const char *kPackageStaged = "/config-v2.tmp";
 ClassificationWorkspace &PackageWorkspace() {
     return *reinterpret_cast<ClassificationWorkspace *>(publication_readback);
 }
-ClassifierOwners PackageOwners() {
-    return {PackageWorkspace(), RootReadWire(), directory_publication_wire,
-        control_publication_wire, initialization_owner.intent, prepared_record.record};
+// The source reader and its owner tuple live only during the classifier lease.
+// Keep them outside ClassificationWorkspace: ClassifyNamespace reconstructs that
+// workspace, while these objects must retain their lifetime through the call.
+struct PackageClassifierTail {
+    ClassifierOwners owners;
+    alignas(GlyphPackageSourceReader) uint8_t reader_bytes[sizeof(GlyphPackageSourceReader)];
+    bool reader_live = false;
+    PackageClassifierTail() : owners{PackageWorkspace(), RootReadWire(),
+        directory_publication_wire, control_publication_wire,
+        initialization_owner.intent, prepared_record.record} {}
+};
+constexpr size_t kPackageTailOffset =
+    (sizeof(publication_readback) - sizeof(PackageClassifierTail)) & ~(alignof(PackageClassifierTail) - 1);
+static_assert(sizeof(ClassificationWorkspace) <= kPackageTailOffset,
+              "classifier workspace and live source reader must not overlap");
+static_assert(alignof(PackageClassifierTail) <= alignof(std::max_align_t),
+              "publication owner supplies reader alignment");
+PackageClassifierTail &PackageTail() {
+    return *reinterpret_cast<PackageClassifierTail *>(publication_readback + kPackageTailOffset);
 }
-void BeginClassifierOwner() { ::new (publication_readback) ClassificationWorkspace; }
-void EndClassifierOwner() { PackageWorkspace().~ClassificationWorkspace(); }
+const ClassifierOwners &PackageOwners() { return PackageTail().owners; }
+GlyphPackageSourceReader &PackageReader(ProfileStore &store, Persistence &source) {
+    auto &tail = PackageTail();
+    if (!tail.reader_live) {
+        ::new (tail.reader_bytes) GlyphPackageSourceReader(store, source);
+        tail.reader_live = true;
+    }
+    return *reinterpret_cast<GlyphPackageSourceReader *>(tail.reader_bytes);
+}
+void ReleasePackageReader() {
+    auto &tail = PackageTail();
+    if (tail.reader_live) {
+        reinterpret_cast<GlyphPackageSourceReader *>(tail.reader_bytes)->~GlyphPackageSourceReader();
+        tail.reader_live = false;
+    }
+}
+void BeginClassifierOwner() {
+    ::new (publication_readback) ClassificationWorkspace;
+    ::new (publication_readback + kPackageTailOffset) PackageClassifierTail;
+}
+void EndClassifierOwner() {
+    ReleasePackageReader();
+    PackageTail().~PackageClassifierTail();
+    PackageWorkspace().~ClassificationWorkspace();
+}
 void SetObservedFence(const Classification &c) {
     using C = PackageStorageFence::Classification;
     PackageStorageFence::Classify(c.write_fenced ?
@@ -525,8 +564,9 @@ void ConstructPackageIntent(const ClassificationWorkspace &w,const Classificatio
 bool ProfileStore::BeginPackageObservation(bool recovery) {
     if(package_owner_live)return false;
     package_owner_live=true; BeginClassifierOwner();
-    GlyphPackageSourceReader reader(*this,persistence,true);
-    auto classification=ClassifyNamespace(reader,PackageOwners());
+    auto &reader=PackageReader(*this,persistence);
+    ClassifyNamespaceInto(reader,PackageOwners());
+    auto &classification=PackageWorkspace().classification;
     SetObservedFence(classification); ApplyRuntimeFence(classification);
     auto &work=PackageWorkspace();
     bool legacy_bootstrap=false, result=false;
@@ -581,10 +621,10 @@ __attribute__((noinline)) bool ProfileStore::ReleasePackageDispatch() {
 
 __attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
     BeginClassifierOwner();
-    GlyphPackageSourceReader reader(*this,persistence,true);
+    auto &reader=PackageReader(*this,persistence);
     auto &work=PackageWorkspace();
     auto &classification=work.classification;
-    classification=ClassifyNamespace(reader,PackageOwners());
+    ClassifyNamespaceInto(reader,PackageOwners());
     SetObservedFence(classification); ApplyRuntimeFence(classification);
     ObservedPackageResponse(response,classification,work);
     if(phase.request.operation==PackageOperation_PACKAGE_STATUS) {
@@ -622,10 +662,11 @@ __attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_pac
        std::memcmp(phase.request.expected_config_sha256,work.current.sha,32)) {
         EndClassifierOwner(); return false;
     }
+    ReleasePackageReader();
     return true;
 }
 bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
-    GlyphPackageSourceReader reader(*this,persistence,true);
+    auto &reader=PackageReader(*this,persistence);
     auto &work=PackageWorkspace();
     const auto &classification=work.classification;
     const unsigned selected=SelectedObservedRoot(work);
@@ -810,8 +851,9 @@ void ProfileStore::FinishPackageTransaction(glyph_package::EnvelopePhase &phase,
     // Final response is a fresh read-only classification, also on failure/lost
     // acknowledgement. It never repeats any publication or clears a sticky fence.
     BeginClassifierOwner();
-    GlyphPackageSourceReader final_reader(*this,persistence,true);
-    auto final_classification=ClassifyNamespace(final_reader,PackageOwners());
+    auto &final_reader=PackageReader(*this,persistence);
+    ClassifyNamespaceInto(final_reader,PackageOwners());
+    auto &final_classification=PackageWorkspace().classification;
     ApplyRuntimeFence(final_classification);
     if(!QueryObservedPackage(final_reader,final_classification,PackageWorkspace(),phase.request.request_token,
                              phase.request.expected_digest,phase.request.expected_store_incarnation,response))
@@ -847,8 +889,9 @@ bool OrdinaryConfigAuthorized(void *context,PackageStorageFence::WriteKind kind,
 bool ProfileStore::BeginOrdinaryConfigWrite(const Config &candidate) {
     if(package_owner_live||package_call.owner||&candidate==&persistence.PackageConfigScratch())return false;
     package_owner_live=true; BeginClassifierOwner();
-    GlyphPackageSourceReader reader(*this,persistence,false);
-    const auto state=ClassifyNamespace(reader,PackageOwners()); auto &w=PackageWorkspace();
+    auto &reader=PackageReader(*this,persistence);
+    ClassifyNamespaceInto(reader,PackageOwners());
+    const auto &state=PackageWorkspace().classification; auto &w=PackageWorkspace();
     SetObservedFence(state);
     bool valid=!state.write_fenced&&(state.floor==Floor::NoManaged||state.floor==Floor::Supported)&&
         (!w.prior.body_bytes||w.prior.source_valid)&&
@@ -948,8 +991,9 @@ bool ProfileStore::IsOrdinaryStoreWriteActive() const {
 bool ProfileStore::BeginOrdinaryStoreWrite(const TransactionIdentity *identity,uint32_t target_id) {
     if(package_owner_live||package_call.owner||!_ready||!_storage)return false;
     package_owner_live=true; BeginClassifierOwner();
-    GlyphPackageSourceReader reader(*this,persistence,true);
-    const auto state=ClassifyNamespace(reader,PackageOwners()); auto &w=PackageWorkspace();
+    auto &reader=PackageReader(*this,persistence);
+    ClassifyNamespaceInto(reader,PackageOwners());
+    const auto &state=PackageWorkspace().classification; auto &w=PackageWorkspace();
     SetObservedFence(state);
     bool valid=!state.write_fenced&&(state.floor==Floor::NoManaged||state.floor==Floor::Supported)&&
         w.roots[0].present&&w.roots[1].present;
@@ -1018,8 +1062,9 @@ bool ProfileStore::ValidateManagedCompactReceipt(const Config &config) const {
     if(package_owner_live||!_ready||!_directory||!_directory->managed_format)return false;
     package_owner_live=true;BeginClassifierOwner();
     auto &self=*const_cast<ProfileStore *>(this);
-    GlyphPackageSourceReader reader(self,persistence,false);
-    auto state=ClassifyNamespace(reader,PackageOwners());SetObservedFence(state);ApplyRuntimeFence(state);
+    auto &reader=PackageReader(self,persistence);
+    ClassifyNamespaceInto(reader,PackageOwners());
+    auto &state=PackageWorkspace().classification;SetObservedFence(state);ApplyRuntimeFence(state);
     auto &work=PackageWorkspace();
     const bool valid=!state.write_fenced&&state.floor==Floor::Supported&&state.logical==Logical::Committed&&
         state.incarnation==_directory->incarnation&&state.generation==_directory->generation&&

@@ -217,50 +217,53 @@ class Classifier {
   }return true;
  }
  bool OwnedSet(const RootFacts &root,const char *config_path,const ConfigFacts &config,bool all_extra=false,uint32_t extra_id=0){
-  if(root.format!=3||!config.source_valid||config.embedded_profiles||config.store_format!=1||config.incarnation!=Incarnation(root)||config.root_format!=3||config.managed_format!=1||config.sequence!=Sequence(root))return false;
-  size_t managed_count=0;for(size_t i=0;i<Count(root);++i)if(Entry(root,i)[53])++managed_count;
-  size_t mapped=0;
-  for(size_t i=0;i<config.rows;++i){if(!reader.Row(config_path,i,w.row))return false;
-   const uint8_t *owned=nullptr;for(size_t j=0;j<Count(root);++j)if(Entry(root,j)[53]&&Get32(Entry(root,j))==w.row.id)owned=Entry(root,j);
-   if(owned){if(w.row.marker!=1||unsigned(owned[54]-1)!=i)return false;++mapped;}else if(w.row.marker)return false;
-  }if(mapped!=managed_count)return false;
+  auto &scratch=w.owned; scratch={};
+  scratch.root=&root; scratch.config=&config; scratch.config_path=config_path;
+  scratch.all_extra=all_extra; scratch.extra_id=extra_id;
+  if((*scratch.root).format!=3||!(*scratch.config).source_valid||(*scratch.config).embedded_profiles||(*scratch.config).store_format!=1||(*scratch.config).incarnation!=Incarnation((*scratch.root))||(*scratch.config).root_format!=3||(*scratch.config).managed_format!=1||(*scratch.config).sequence!=Sequence((*scratch.root)))return false;
+  for(size_t i=0;i<Count((*scratch.root));++i)if(Entry((*scratch.root),i)[53])++scratch.managed_count;
+
+  for(size_t i=0;i<(*scratch.config).rows;++i){if(!reader.Row(scratch.config_path,i,w.row))return false;
+   const uint8_t *owned=nullptr;for(size_t j=0;j<Count((*scratch.root));++j)if(Entry((*scratch.root),j)[53]&&Get32(Entry((*scratch.root),j))==w.row.id)owned=Entry((*scratch.root),j);
+   if(owned){if(w.row.marker!=1||unsigned(owned[54]-1)!=i)return false;++scratch.mapped;}else if(w.row.marker)return false;
+  }if(scratch.mapped!=scratch.managed_count)return false;
   static constexpr char domain[]="Glyph.Package.Set.v1";
   w.aggregate_hash.~Sha256();::new(&w.aggregate_hash)Sha256;w.aggregate_hash.Update(domain,sizeof(domain));
-  uint8_t word[16];Put32(word,Incarnation(root));Put32(word+4,managed_count);w.aggregate_hash.Update(word,8);
-  uint32_t previous_id=0;
-  for(size_t item=0;item<managed_count;++item){
-   const uint8_t *e=nullptr;for(size_t j=0;j<Count(root);++j){const auto *candidate=Entry(root,j);if(candidate[53]&&Get32(candidate)>previous_id&&(!e||Get32(candidate)<Get32(e)))e=candidate;}
-   if(!e)return false;
-   const auto id=Get32(e);previous_id=id;
-   if(!reader.Row(config_path,e[54]-1,w.row)||w.row.mode!=3||w.row.legacy||w.row.engine!=1||w.row.rgb!=e[55])return false;
+Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.managed_count);w.aggregate_hash.Update(scratch.word,8);
+
+  for(scratch.item=0;scratch.item<scratch.managed_count;++scratch.item){
+   scratch.e=nullptr;for(size_t j=0;j<Count((*scratch.root));++j){const auto *candidate=Entry((*scratch.root),j);if(candidate[53]&&Get32(candidate)>scratch.previous_id&&(!scratch.e||Get32(candidate)<Get32(scratch.e)))scratch.e=candidate;}
+   if(!scratch.e)return false;
+   scratch.id=Get32(scratch.e);scratch.previous_id=scratch.id;
+   if(!reader.Row(scratch.config_path,scratch.e[54]-1,w.row)||w.row.mode!=3||w.row.legacy||w.row.engine!=1||w.row.rgb!=scratch.e[55])return false;
    std::memcpy(w.row_sha,w.row.sha,32);
    Hash(nullptr,0,w.rgb_sha);
-   if(e[55]){
-    if(e[55]>config.rgbs||!reader.Rgb(config_path,e[55]-1,w.rgb_sha))return false;
-    unsigned shares=0;for(size_t j=0;j<config.rows;++j){if(!reader.Row(config_path,j,w.other_row))return false;if(w.other_row.rgb==e[55])++shares;}if(shares!=1)return false;
+   if(scratch.e[55]){
+    if(scratch.e[55]>(*scratch.config).rgbs||!reader.Rgb(scratch.config_path,scratch.e[55]-1,w.rgb_sha))return false;
+    unsigned shares=0;for(size_t j=0;j<(*scratch.config).rows;++j){if(!reader.Row(scratch.config_path,j,w.other_row))return false;if(w.other_row.rgb==scratch.e[55])++shares;}if(shares!=1)return false;
    }
-   auto *path=reinterpret_cast<char*>(w.read_chunk);if(!RecordPath(path,32,id,Get32(e+4),false))return false;
-   size_t n=0;if(!ReadObject(path,owners.record,4128,n)||!RecordValid(owners.record,n))return false;
-   const auto *r=owners.record;const auto token=Get64(r+32);const auto sequence=Get32(r+124);
-   if(Get32(r+8)!=Incarnation(root)||Get32(r+12)!=id||Get32(r+16)!=Get32(e+4)||Get32(r+72)!=unsigned(e[54]-1)||Get32(r+76)!=e[55]||Get32(r+120)>Generation(root)||sequence>Sequence(root)||token>Token(root)||token==config.reference_token||!reader.Native(config_path,e[54]-1,r,n))return false;
-   Hash(r,n,w.record_sha);Hash(e,56,w.entry_sha);
-   const auto &intent=root.intent;
-   if(intent.operation&&id==intent.id){
+   auto *path=reinterpret_cast<char*>(w.read_chunk);if(!RecordPath(path,32,scratch.id,Get32(scratch.e+4),false))return false;
+   scratch.n=0;if(!ReadObject(path,owners.record,4128,scratch.n)||!RecordValid(owners.record,scratch.n))return false;
+   const auto *r=owners.record;scratch.token=Get64(r+32);scratch.sequence=Get32(r+124);
+   if(Get32(r+8)!=Incarnation((*scratch.root))||Get32(r+12)!=scratch.id||Get32(r+16)!=Get32(scratch.e+4)||Get32(r+72)!=unsigned(scratch.e[54]-1)||Get32(r+76)!=scratch.e[55]||Get32(r+120)>Generation((*scratch.root))||scratch.sequence>Sequence((*scratch.root))||scratch.token>Token((*scratch.root))||scratch.token==(*scratch.config).reference_token||!reader.Native(scratch.config_path,scratch.e[54]-1,r,scratch.n))return false;
+   Hash(r,scratch.n,w.record_sha);Hash(scratch.e,56,w.entry_sha);
+   const auto &intent=(*scratch.root).intent;
+   if(intent.operation&&scratch.id==intent.id){
     Hash(r,128,w.digest);
-    if(n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||token!=intent.token||!Eq(r+40,intent.digest)||!Eq(r+80,intent.baseline_config)||Get32(r+120)!=intent.generation||sequence!=intent.sequence||!Eq(w.row_sha,intent.row_sha)||(intent.flags?!Eq(w.rgb_sha,intent.rgb_sha):!Zero(intent.rgb_sha,32)))return false;
+    if(scratch.n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||scratch.token!=intent.token||!Eq(r+40,intent.digest)||!Eq(r+80,intent.baseline_config)||Get32(r+120)!=intent.generation||scratch.sequence!=intent.sequence||!Eq(w.row_sha,intent.row_sha)||(intent.flags?!Eq(w.rgb_sha,intent.rgb_sha):!Zero(intent.rgb_sha,32)))return false;
    }
-   Put32(word,id);Put32(word+4,Get32(e+4));Put32(word+8,e[54]);Put32(word+12,e[55]);w.aggregate_hash.Update(word,16);w.aggregate_hash.Update(w.row_sha,32);w.aggregate_hash.Update(w.rgb_sha,32);w.aggregate_hash.Update(w.record_sha,32);w.aggregate_hash.Update(w.entry_sha,32);
-   for(size_t j=0;j<Count(root);++j){const auto *old=Entry(root,j);if(!old[53]||Get32(old)>=id)continue;
-    if(!RecordPath(path,32,Get32(old),Get32(old+4),false)||!ReadObject(path,owners.record,4128,n)||!RecordValid(owners.record,n))return false;
-    if(Get64(owners.record+32)==token||Get32(owners.record+124)==sequence)return false;
+   Put32(scratch.word,scratch.id);Put32(scratch.word+4,Get32(scratch.e+4));Put32(scratch.word+8,scratch.e[54]);Put32(scratch.word+12,scratch.e[55]);w.aggregate_hash.Update(scratch.word,16);w.aggregate_hash.Update(w.row_sha,32);w.aggregate_hash.Update(w.rgb_sha,32);w.aggregate_hash.Update(w.record_sha,32);w.aggregate_hash.Update(w.entry_sha,32);
+   for(size_t j=0;j<Count((*scratch.root));++j){const auto *old=Entry((*scratch.root),j);if(!old[53]||Get32(old)>=scratch.id)continue;
+    if(!RecordPath(path,32,Get32(old),Get32(old+4),false)||!ReadObject(path,owners.record,4128,scratch.n)||!RecordValid(owners.record,scratch.n))return false;
+    if(Get64(owners.record+32)==scratch.token||Get32(owners.record+124)==scratch.sequence)return false;
    }
   }
-  w.aggregate_hash.Final(w.digest);if(!Eq(w.digest,root.prefix+264))return false;
-  if(all_extra)return true;
+  w.aggregate_hash.Final(w.digest);if(!Eq(w.digest,(*scratch.root).prefix+264))return false;
+  if(scratch.all_extra)return true;
   for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof)return false;if(!Starts(w.object.path,"/ultpkg-"))continue;
    bool known=false;auto *path=reinterpret_cast<char*>(w.read_chunk);
-   for(size_t j=0;j<Count(root);++j){const auto *e=Entry(root,j);if(e[53]&&RecordPath(path,32,Get32(e),Get32(e+4),false)&&Is(path,w.object.path))known=true;}
-   if(extra_id&&RecordPath(path,32,extra_id,1,false)&&Is(path,w.object.path))known=true;
+   for(size_t j=0;j<Count((*scratch.root));++j){scratch.e=Entry((*scratch.root),j);if(scratch.e[53]&&RecordPath(path,32,Get32(scratch.e),Get32(scratch.e+4),false)&&Is(path,w.object.path))known=true;}
+   if(scratch.extra_id&&RecordPath(path,32,scratch.extra_id,1,false)&&Is(path,w.object.path))known=true;
    if(!known)return false;
   }return true;
  }
@@ -280,13 +283,18 @@ class Classifier {
  }
  public:
  Classifier(NamespaceReader &r,const ClassifierOwners &o):reader(r),owners(o),w(o.work){}
- Classification Run(){
-  Classification result{};
+ __attribute__((noinline)) Classification &Run(){
+  w.classification={}; auto &result=w.classification; w.run={}; auto &run_state=w.run;
   if(!Scan()){result.diagnostic=why;return result;}
   if(reader.ObservationFailed()){result.diagnostic="checked I/O uncertainty";return result;}
   if(w.unsupported){result.floor=Floor::Unsupported;result.diagnostic="recognized newer storage";return result;}
   if(w.corrupt){result.diagnostic="reserved namespace corruption";return result;}
   if(!w.namespace_files){result.floor=Floor::NoManaged;result.logical=Logical::None;result.write_fenced=false;result.diagnostic="mounted empty namespace";return result;}
+  run_state.next_phase=1; return result;
+ }
+ __attribute__((noinline)) Classification &RunRoots(){
+  auto &result=w.classification;
+  auto &run_state=w.run; run_state.next_phase=0;
   if(!LoadRoot(kRoots[0],w.roots[0],owners.root0,false)||!LoadRoot(kRoots[1],w.roots[1],owners.root1,false)||!LoadRoot(kRoots[2],w.roots[2],owners.control,true)||!Slots()||!LoadConfigs()){result.diagnostic="root/control/Config uncertainty";return result;}
   const auto &control=w.roots[2];const auto &intent=control.intent;
   if(!w.managed_observed){
@@ -296,24 +304,24 @@ class Classifier {
    result.incarnation=Incarnation(selected);result.generation=Generation(selected);return result;
   }
   if(control.format!=3||intent.operation!=15||Incarnation(control)!=intent.incarnation||HighId(control)<intent.id||Token(control)<intent.token){result.diagnostic="invalid package reservation";return result;}
-  unsigned v2=0;const RootFacts *selected=nullptr;bool baseline_root_found=false;
+
   for(unsigned i=0;i<2;++i){const auto &r=w.roots[i];
-   if(Eq(r.sha,intent.baseline_root))baseline_root_found=true;
-   if(r.format==2){++v2;if(Incarnation(r)!=intent.incarnation||Generation(r)>intent.baseline_generation){result.diagnostic="invalid V2 transition baseline";return result;}}
-   else if(!selected||Generation(r)>Generation(*selected))selected=&r;
+   if(Eq(r.sha,intent.baseline_root))run_state.baseline_root_found=true;
+   if(r.format==2){++run_state.v2;if(Incarnation(r)!=intent.incarnation||Generation(r)>intent.baseline_generation){result.diagnostic="invalid V2 transition baseline";return result;}}
+   else if(!run_state.selected||Generation(r)>Generation(*run_state.selected))run_state.selected=&r;
   }
-  if(v2){
+  if(run_state.v2){
    bool first=false,next=false;
    if(!intent.baseline_sequence)for(unsigned i=0;i<2;++i)if(w.roots[i].format==2&&Eq(w.roots[i].sha,intent.baseline_root))first=true;
-   if(selected&&Eq(selected->sha,intent.baseline_root)){next=true;for(unsigned i=0;i<2;++i)if(w.roots[i].format==2&&Generation(w.roots[i])+1!=intent.baseline_generation)next=false;}
+   if(run_state.selected&&Eq(run_state.selected->sha,intent.baseline_root)){next=true;for(unsigned i=0;i<2;++i)if(w.roots[i].format==2&&Generation(w.roots[i])+1!=intent.baseline_generation)next=false;}
    if(!first&&!next){result.diagnostic="unproven mixed-root transition";return result;}
   }
-  if(selected&&Get32(selected->prefix+20)==1){result.diagnostic="migration pending";return result;}
-  const bool baseline_selected=selected&&Generation(*selected)==intent.baseline_generation;
-  const bool store_published=selected&&(Generation(*selected)==intent.generation||(intent.terminal==3&&Generation(*selected)>intent.generation));
-  if((baseline_selected&&(!Eq(selected->sha,intent.baseline_root)||Sequence(*selected)!=intent.baseline_sequence))||(selected&&!baseline_selected&&!store_published)||!NoTemps()){result.diagnostic="selected root/temp disagreement";return result;}
-  const bool baseline_current=w.current.body_bytes&&Eq(w.current.sha,intent.baseline_config);
-  const bool baseline_prior=w.prior.body_bytes&&Eq(w.prior.sha,intent.baseline_config);
+  if(run_state.selected&&Get32(run_state.selected->prefix+20)==1){result.diagnostic="migration pending";return result;}
+  run_state.baseline_selected=run_state.selected&&Generation(*run_state.selected)==intent.baseline_generation;
+  run_state.store_published=run_state.selected&&(Generation(*run_state.selected)==intent.generation||(intent.terminal==3&&Generation(*run_state.selected)>intent.generation));
+  if((run_state.baseline_selected&&(!Eq(run_state.selected->sha,intent.baseline_root)||Sequence(*run_state.selected)!=intent.baseline_sequence))||(run_state.selected&&!run_state.baseline_selected&&!run_state.store_published)||!NoTemps()){result.diagnostic="selected root/temp disagreement";return result;}
+  run_state.baseline_current=w.current.body_bytes&&Eq(w.current.sha,intent.baseline_config);
+  run_state.baseline_prior=w.prior.body_bytes&&Eq(w.prior.sha,intent.baseline_config);
   for(unsigned i=0;i<2;++i){const auto &r=w.roots[i];
    if(Generation(r)==intent.baseline_generation){
     if(!Eq(r.sha,intent.baseline_root)||HighId(r)!=intent.baseline_high_id||Token(r)>intent.baseline_token||Sequence(r)!=intent.baseline_sequence){result.diagnostic="retained baseline differs";return result;}
@@ -324,8 +332,15 @@ class Classifier {
     if(r.intent.phase!=3&&r.intent.phase!=5){result.diagnostic="unreachable visible root phase";return result;}
    }
   }
-  if(selected)for(unsigned i=0;i<3;++i)if(!Eq(w.roots[i].prefix+20,selected->prefix+20,4)||!Eq(w.roots[i].prefix+80,selected->prefix+80,184)){result.diagnostic="migration provenance changed";return result;}
-  if(baseline_current&&intent.terminal!=3){
+  if(run_state.selected)for(unsigned i=0;i<3;++i)if(!Eq(w.roots[i].prefix+20,run_state.selected->prefix+20,4)||!Eq(w.roots[i].prefix+80,run_state.selected->prefix+80,184)){result.diagnostic="migration provenance changed";return result;}
+  run_state.next_phase=2; return result;
+ }
+ __attribute__((noinline)) Classification &RunBaseline(){
+  auto &result=w.classification;
+  auto &run_state=w.run; run_state.next_phase=0;
+  const auto &control=w.roots[2];
+  const auto &intent=control.intent;
+  if(run_state.baseline_current&&intent.terminal!=3){
    uint64_t high=0;for(unsigned i=0;i<2;++i)if(Generation(w.roots[i])<=intent.baseline_generation&&Token(w.roots[i])>high)high=Token(w.roots[i]);
    for(const auto *c:{&w.current,&w.prior})if(c->body_bytes&&c->store_format==1&&c->incarnation==intent.incarnation&&c->reference_token>high)high=c->reference_token;
    for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof)return result;
@@ -335,9 +350,9 @@ class Classifier {
    }
    if(high!=intent.baseline_token){result.diagnostic="baseline omitted shared high-water";return result;}
   }
-  if(baseline_current||baseline_prior){
-   const auto &base=baseline_current?w.current:w.prior;const char *base_path=baseline_current?kCurrent:kPrior;
-   if(!base.source_valid||base.store_format!=1||base.incarnation!=intent.incarnation||base.root_format!=(intent.baseline_sequence?3u:2u)||base.managed_format!=(intent.baseline_sequence?1u:0u)||base.sequence!=intent.baseline_sequence||base.crc!=intent.baseline_crc||base.rows!=intent.baseline_rows||base.rgbs!=intent.baseline_rgbs||(!baseline_root_found&&intent.terminal!=3)){result.diagnostic="baseline Config mismatch";return result;}
+  if(run_state.baseline_current||run_state.baseline_prior){
+   const auto &base=run_state.baseline_current?w.current:w.prior;const char *base_path=run_state.baseline_current?kCurrent:kPrior;
+   if(!base.source_valid||base.store_format!=1||base.incarnation!=intent.incarnation||base.root_format!=(intent.baseline_sequence?3u:2u)||base.managed_format!=(intent.baseline_sequence?1u:0u)||base.sequence!=intent.baseline_sequence||base.crc!=intent.baseline_crc||base.rows!=intent.baseline_rows||base.rgbs!=intent.baseline_rgbs||(!run_state.baseline_root_found&&intent.terminal!=3)){result.diagnostic="baseline Config mismatch";return result;}
    const RootFacts *baseline=nullptr;for(unsigned i=0;i<2;++i)if(Eq(w.roots[i].sha,intent.baseline_root))baseline=&w.roots[i];
    if(!baseline){if(intent.baseline_token<base.reference_token)return result;}
    else{
@@ -349,44 +364,51 @@ class Classifier {
     }
    }
   }
+  run_state.next_phase=3; return result;
+ }
+ __attribute__((noinline)) Classification &RunFinal(){
+  auto &result=w.classification;
+  auto &run_state=w.run; run_state.next_phase=0;
+  const auto &control=w.roots[2];
+  const auto &intent=control.intent;
   if(intent.terminal!=3&&!HistoricalPrior(intent)){result.diagnostic="marked prior unproven";return result;}
   if(!SharedReceipts()){result.diagnostic="shared transaction receipt conflict";return result;}
   auto *path=reinterpret_cast<char*>(w.read_chunk);if(!RecordPath(path,32,intent.id,1,false))return result;
   size_t n=0;const auto probe=reader.Extent(path,n);
   if(probe==Probe::Error)return result;
   if(probe==Probe::Absent){
-   if(store_published||!baseline_current||(v2!=2&&!baseline_selected)||control.control_phase!=1)return result;
+   if(run_state.store_published||!run_state.baseline_current||(run_state.v2!=2&&!run_state.baseline_selected)||control.control_phase!=1)return result;
    result.logical=Logical::ProvenAborted;result.diagnostic="reserved identity; expected record absent";return result;
   }
   if(n>4128||!reader.Read(path,0,owners.record,n)||!RecordValid(owners.record,n)){result.diagnostic="managed record invalid";return result;}
   const auto *record=owners.record;
   Hash(record,n,w.record_sha);Hash(record,128,w.digest);
   if(n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||Get32(record+8)!=intent.incarnation||Get32(record+12)!=intent.id||Get64(record+32)!=intent.token||!Eq(record+40,intent.digest)||Get32(record+72)!=intent.row||Get32(record+76)!=intent.rgb||!Eq(record+80,intent.baseline_config)||Get32(record+120)!=intent.generation||Get32(record+124)!=intent.sequence||record[128]!=8||record[129]!=5||!reader.LegacyProfile(record+128,n-128)){result.diagnostic="managed receipt/native mismatch";return result;}
-  if(!store_published){
-   if(!baseline_current||(control.control_phase!=1&&control.control_phase!=2)||(intent.phase!=1&&intent.phase!=2))return result;
+  if(!run_state.store_published){
+   if(!run_state.baseline_current||(control.control_phase!=1&&control.control_phase!=2)||(intent.phase!=1&&intent.phase!=2))return result;
    result.logical=Logical::Incomplete;result.diagnostic="record published; store absent";return result;
   }
-  if(Generation(*selected)<intent.generation||Sequence(*selected)!=intent.sequence||!Eq(selected->intent.immutable,intent.immutable)||selected->intent.phase<intent.phase)return result;
-  if(baseline_current||(!w.current.body_bytes&&baseline_prior)){
-   if(intent.terminal==3||selected->intent.terminal==3||intent.phase>=4)return result;
+  if(Generation(*run_state.selected)<intent.generation||Sequence(*run_state.selected)!=intent.sequence||!Eq(run_state.selected->intent.immutable,intent.immutable)||run_state.selected->intent.phase<intent.phase)return result;
+  if(run_state.baseline_current||(!w.current.body_bytes&&run_state.baseline_prior)){
+   if(intent.terminal==3||run_state.selected->intent.terminal==3||intent.phase>=4)return result;
    result.logical=Logical::Incomplete;result.diagnostic="store published; Config uninstalled";return result;
   }
-  if(!w.current.body_bytes||!Migration(*selected,w.current)||w.current.reference_token==Token(*selected))return result;
-  if((intent.terminal!=3||baseline_prior)&&(!Eq(w.current.sha,intent.final_config)||w.current.crc!=intent.final_crc||w.current.body_bytes!=intent.config_bytes))return result;
-  if(baseline_prior&&!reader.AppendConfig(kPrior,kCurrent))return result;
-  if(!OwnedSet(*selected,kCurrent,w.current)||!Eq(selected->prefix+264,intent.aggregate))return result;
+  if(!w.current.body_bytes||!Migration(*run_state.selected,w.current)||w.current.reference_token==Token(*run_state.selected))return result;
+  if((intent.terminal!=3||run_state.baseline_prior)&&(!Eq(w.current.sha,intent.final_config)||w.current.crc!=intent.final_crc||w.current.body_bytes!=intent.config_bytes))return result;
+  if(run_state.baseline_prior&&!reader.AppendConfig(kPrior,kCurrent))return result;
+  if(!OwnedSet(*run_state.selected,kCurrent,w.current)||!Eq(run_state.selected->prefix+264,intent.aggregate))return result;
   if(!reader.Row(kCurrent,intent.row,w.row)||!Eq(w.row.sha,intent.row_sha))return result;
   if(intent.flags){if(!reader.Rgb(kCurrent,intent.rgb-1,w.rgb_sha)||!Eq(w.rgb_sha,intent.rgb_sha))return result;}else if(!Zero(intent.rgb_sha,32))return result;
   if(w.current.reference_token==intent.token)return result;
-  if(w.prior.body_bytes&&!baseline_prior){
+  if(w.prior.body_bytes&&!run_state.baseline_prior){
    if(w.prior.managed_format){bool matched=false;for(unsigned i=0;i<2;++i)if(w.roots[i].format==3&&OwnedSet(w.roots[i],kPrior,w.prior,true))matched=true;if(!matched)return result;}
    else return result;
   }
   if(w.prior.body_bytes&&w.current.store_format==1&&w.prior.store_format==1&&w.current.incarnation==intent.incarnation&&w.prior.incarnation==intent.incarnation&&w.current.root_format==3&&w.prior.root_format==3&&w.current.managed_format==1&&w.prior.managed_format==1&&w.current.reference_token<w.prior.reference_token)return result;
-  const bool terminal=control.control_phase==3&&intent.phase==5&&intent.terminal==3&&selected->intent.phase==5&&selected->intent.terminal==3;
-  if(terminal&&!Eq(control.sha,selected->sha))return result;
+  const bool terminal=control.control_phase==3&&intent.phase==5&&intent.terminal==3&&run_state.selected->intent.phase==5&&run_state.selected->intent.terminal==3;
+  if(terminal&&!Eq(control.sha,run_state.selected->sha))return result;
   result.logical=Logical::Committed;result.write_fenced=!terminal;result.floor=terminal?Floor::Supported:Floor::Unresolved;result.diagnostic=terminal?"exact installed pair and terminal metadata":"exact installed pair; terminal metadata incomplete";
-  result.incarnation=Incarnation(*selected);result.generation=Generation(*selected);result.package_sequence=Sequence(*selected);
+  result.incarnation=Incarnation(*run_state.selected);result.generation=Generation(*run_state.selected);result.package_sequence=Sequence(*run_state.selected);
   result.high_token=Token(control);for(unsigned i=0;i<2;++i)if(Token(w.roots[i])>result.high_token)result.high_token=Token(w.roots[i]);
   if(w.current.reference_token>result.high_token)result.high_token=w.current.reference_token;
   if(w.prior.reference_token>result.high_token)result.high_token=w.prior.reference_token;
@@ -394,11 +416,16 @@ class Classifier {
  }
 };
 }
-Classification ClassifyNamespace(NamespaceReader &reader,const ClassifierOwners &owners){
+void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owners){
  // Placement construction never materializes a 4KiB automatic temporary.
  owners.work.~ClassificationWorkspace();::new(&owners.work)ClassificationWorkspace;
- auto classified=Classifier(reader,owners).Run();
- if(reader.ObservationFailed()){Classification failed{};failed.diagnostic="checked I/O uncertainty";return failed;}
+ Classifier classifier(reader,owners);
+ classifier.Run();
+ if(owners.work.run.next_phase==1)classifier.RunRoots();
+ if(owners.work.run.next_phase==2)classifier.RunBaseline();
+ if(owners.work.run.next_phase==3)classifier.RunFinal();
+ auto &classified=owners.work.classification;
+ if(reader.ObservationFailed()){classified=Classification{};classified.diagnostic="checked I/O uncertainty";return;}
  if(classified.logical!=Logical::Unresolved){
   const RootFacts *selected=nullptr;
   for(unsigned i=0;i<3;++i){const auto &r=owners.work.roots[i];if(!r.present)continue;
@@ -409,6 +436,11 @@ Classification ClassifyNamespace(NamespaceReader &reader,const ClassifierOwners 
   if(owners.work.current.reference_token>classified.high_token)classified.high_token=owners.work.current.reference_token;
   if(owners.work.prior.reference_token>classified.high_token)classified.high_token=owners.work.prior.reference_token;
  }
- return classified;
+ return;
 }
+Classification ClassifyNamespace(NamespaceReader &reader,const ClassifierOwners &owners){
+ ClassifyNamespaceInto(reader,owners);
+ return owners.work.classification;
+}
+
 }
