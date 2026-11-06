@@ -287,7 +287,7 @@ if(!std::strcmp(argv[1],"transport")){
   need(storage.geometry_called&&recheck_hit,"final recheck fault/drift reached after fresh geometry");
   need(result.status==(recheck_drift?ProfileStoreStatus_PROFILE_STORE_CONFLICT:ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN),"positive changed baseline is conflict; IO uncertainty is unavailable");
   need(!result.profile_id&&!result.profile_revision&&!result.has_row_index&&!result.has_semantic_digest&&!result.has_config_sha&&!result.has_record_sha&&!result.record_publication_generation,"preflight refusal has no receipt");
-  need(nor==baseline&&programs==0&&erases==0,"preflight recheck refusal is zero-write");
+  need(nor==baseline&&programs==0&&erases==0,"preflight recheck refusal is zero-write: unchanged="+std::to_string(nor==baseline)+" programs="+std::to_string(programs)+" erases="+std::to_string(erases));
   no_handles();response(result,"response");dump_files(path("namespace.bin"));output(path("unwound.nor"),nor);summary(true,true,0);shutdown();return 0;
  }
  if(!std::strcmp(argv[1],"underreported")){
