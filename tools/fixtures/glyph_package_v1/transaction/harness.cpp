@@ -328,6 +328,22 @@ if(!std::strcmp(argv[1],"transport")){
   need(raw_id&&raw_revision,"existing unmanaged raw regression record");
   UltimateProfile profile=UltimateProfile_init_default;profile.schema_version=5;ultimate_native::PayloadLease lease;lease.bytes=request.native.bytes;lease.size=request.native.size;lease.live=true;ultimate_native::Bind(profile,lease);
   auto identity=[](uint64_t token,const char *label){ProfileStore::TransactionIdentity id;id.token=token;Sha256 hash;hash.Update(label,std::strlen(label));hash.Final(id.digest);return id;};
+  uint32_t managed_id=0,managed_revision=0;
+  for(size_t i=0;i<profile_store.Count();++i){const auto &entry=*profile_store.EntryAt(i);if(entry.managed_format){managed_id=entry.id;managed_revision=entry.revision;break;}}
+  need(managed_id&&managed_revision,"managed target denial fixture");
+  const auto protected_nor=nor;const auto protected_programs=programs,protected_erases=erases;
+  const auto protected_generation=profile_store.Generation();const auto protected_count=profile_store.Count();
+  auto denied=[&](const ProfileStore::TransactionResult &result,const char *label){
+   need(result.status==ProfileStore::Status::ReadOnlyRecovery,std::string("managed mutation denied: ")+label);
+   need(nor==protected_nor&&programs==protected_programs&&erases==protected_erases,"managed denial has zero storage effects");
+   need(profile_store.Generation()==protected_generation&&profile_store.Count()==protected_count&&!PackageStorageFence::MutationFenced(),"managed denial preserves healthy namespace and identity");no_handles();
+  };
+  denied(profile_store.Update(managed_id,profile,managed_revision,identity(550,"forbidden update")),"update");
+  denied(profile_store.Duplicate(managed_id,managed_revision,"Forbidden copy",1,identity(551,"forbidden duplicate")),"duplicate");
+  denied(profile_store.Rename(managed_id,"Forbidden name",profile_store.Generation(),identity(552,"forbidden rename")),"rename");
+  denied(profile_store.Reorder(managed_id,123,profile_store.Generation(),identity(553,"forbidden reorder")),"reorder");
+  denied(profile_store.Delete(managed_id,profile_store.Generation(),0,identity(554,"forbidden delete")),"delete");
+  {std::ofstream proof(path("managed-denials.json"));proof<<"{\"cases\":5,\"zero_write\":true,\"namespace_healthy\":true}\n";}
   auto check=[&](const ProfileStore::TransactionResult &result,const char *label){need(result.status==ProfileStore::Status::Ok,std::string("raw ")+label);need(!PackageStorageFence::MutationFenced(),"allowed raw mutation keeps managed namespace healthy");no_handles();dump_files(path(std::string(label)+".namespace.bin"));};
   check(profile_store.Update(raw_id,profile,raw_revision,identity(600,"update")),"update");++raw_revision;
   auto duplicated=profile_store.Duplicate(raw_id,raw_revision,"Raw duplicate",1,identity(601,"duplicate"));check(duplicated,"duplicate");

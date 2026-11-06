@@ -26,7 +26,9 @@ def main():
   work=out/name;work.mkdir(exist_ok=True);dump_namespace(disk,work/'seed.namespace');(work/'create.pb').write_bytes(request);invoke('seed',work/'seed.namespace',work/'seed.nor');return work
  base=f.baseline(ultimate=True,backend=True);base['/keep.bin']=b'UNRELATED-CUSTODY\0'+bytes(range(128));first,_=f.package_plan(base,True,100);second,_=f.package_plan(first['COMMITTED'],False,200);prior=f.later_raw_create(second['COMMITTED'],300);reachable.model=m;reachable.fixtures=f;prior=reachable.save_config(prior,'G',400);prior=reachable.save_config(prior,'D',400)
  _,plan=f.package_plan(prior,True,500);work=raw_input('raw-and-g6',prior,plan['request']);invoke('regress',work/'seed.nor',work/'create.pb',work)
+ managed_denials=json.loads((work/'managed-denials.json').read_text());assert managed_denials=={'cases':5,'zero_write':True,'namespace_healthy':True}
  original=m.decode_root(max((prior['/ultimate-v2-0.bin'],prior['/ultimate-v2-1.bin']),key=lambda b:m.u32(b,8)));managed={e['id']:e['entry_bytes'] for e in original['entries'] if e['managed']};results=[]
+ results.append({'name':'managed-mutation-denials',**managed_denials})
  for name in ['update','duplicate','rename','reorder','delete','advance','gc','g6']:
   disk=load_namespace(work/(name+'.namespace.bin'));state=m.classify(disk);assert state['logical']=='COMMITTED' and not state['write_fenced'],(name,state)
   selected=max((disk['/ultimate-v2-0.bin'],disk['/ultimate-v2-1.bin']),key=lambda b:m.u32(b,8));root=m.decode_root(selected)
