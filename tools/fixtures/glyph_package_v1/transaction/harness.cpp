@@ -102,7 +102,7 @@ lfs_t *CheckedStorageTestMount(){return test::mounted?&test::fs:nullptr;}
 
 int main(int argc,char **argv){using namespace test;try{
  need(argc>=2,"mode required");configure();owner_aliases();
- if(!std::strcmp(argv[1],"observe-configs")||!std::strcmp(argv[1],"observe-configs-faults")){
+ if(!std::strcmp(argv[1],"observe-configs")||!std::strcmp(argv[1],"observe-configs-faults")||!std::strcmp(argv[1],"observe-configs-facts")){
   const bool inject=!std::strcmp(argv[1],"observe-configs-faults");
   // Synthetic NOR setup only; production observation itself must never write.
   need(lfs_format(&fs,&cfg)==0&&lfs_mount(&fs,&cfg)==0,"observation fixture mount");mounted=true;
@@ -137,13 +137,47 @@ int main(int argc,char **argv){using namespace test;try{
     for(size_t selected=0;selected<count;++selected){
      const size_t i=count==seams?selected:selected*(seams-1)/(count-1);
      seen=0;fail_at=i;
-     need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)!=Persistence::LoadResult::Loaded,"Config read/seek failure closed");
+     need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::StorageFailure,"Config read/seek failure is storage uncertainty");
      need(seen>i,"Config fault reached");no_handles();need(nor==before&&programs==p&&erases==e,"faulted Config observation write-free");
     }
     CheckedStorage::SetFaultHook(nullptr);
     std::cerr<<"observation fault seams "<<count<<" of "<<seams<<" bytes "<<body.size()<<"\n";
+    // Positive short reads do not set CheckedStorageFile::_failed. Move only
+    // the synthetic read cursor to EOF after an acknowledged read, so the
+    // next decoder/comparison read can return zero without a negative error.
+    // A later seek can legitimately repair the cursor; canonical valid bytes
+    // must then be Loaded, otherwise actual I/O uncertainty is StorageFailure.
+    static size_t reads_seen,short_at;reads_seen=0;short_at=SIZE_MAX;
+    const auto short_read=[](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase when,const char*){
+     if(op!=CheckedStorage::Operation::Read||when!=CheckedStorage::Phase::After)return CheckedStorage::Fault::None;
+     if(reads_seen++==short_at){
+      for(auto *entry=fs.mlist;entry;entry=entry->next)if(entry->type==LFS_TYPE_REG){
+       auto *file=reinterpret_cast<lfs_file_t*>(entry);
+       need(lfs_file_seek(&fs,file,0,LFS_SEEK_END)>=0,"synthetic short-read cursor");
+      }
+     }
+     return CheckedStorage::Fault::None;
+    };
+    CheckedStorage::SetFaultHook(short_read);
+    need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::Loaded,"short-read census positive");
+    const auto read_seams=reads_seen;const size_t short_count=body.size()>8191?32:read_seams;
+    for(size_t selected=0;selected<short_count;++selected){
+     reads_seen=0;short_at=short_count==read_seams?selected:selected*(read_seams-1)/(short_count-1);
+     const auto outcome=persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536);
+     need(outcome==Persistence::LoadResult::Loaded||outcome==Persistence::LoadResult::StorageFailure,"short read never becomes canonical rejection");
+     need(reads_seen>short_at,"short-read seam reached");no_handles();need(nor==before&&programs==p&&erases==e,"short-read observation write-free");
+    }
+    CheckedStorage::SetFaultHook(nullptr);
+    std::cerr<<"short-read fault seams "<<short_count<<" of "<<read_seams<<" bytes "<<body.size()<<"\n";
    }
-   std::cout<<(result==Persistence::LoadResult::Loaded?0:1)<<"\n";
+   if(!std::strcmp(argv[1],"observe-configs-facts")){
+    std::cout<<unsigned(result)<<" "<<source;
+    if(result==Persistence::LoadResult::Loaded){ConfigValidationError error{};need(persistence.ValidateConfig(persistence.PackageConfigScratch(),error)==source,"source validation consistency");
+     std::cout<<" "<<unsigned(error.length)<<" ";const char hexchars[]="0123456789abcdef";
+     for(size_t i=0;i<error.length;++i){const auto byte=static_cast<unsigned char>(error.message[i]);std::cout<<hexchars[byte>>4]<<hexchars[byte&15];}
+    }
+    std::cout<<"\n";
+   }else std::cout<<(result==Persistence::LoadResult::Loaded?0:1)<<"\n";
   }
   shutdown();return 0;
  }

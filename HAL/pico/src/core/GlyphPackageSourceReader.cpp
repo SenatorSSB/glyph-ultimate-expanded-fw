@@ -332,10 +332,16 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNat
 #endif
 
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+namespace {
+// Error formatting storage lives only in the validation phase, after encoding.
+__attribute__((noinline)) bool ValidateDescribedConfig(Persistence &source,const ::Config &config){
+    ConfigValidationError error;return source.ValidateConfig(config,error);
+}
+}
 __attribute__((noinline)) bool GlyphPackageSourceReader::DescribeConfig(const ::Config &config,package_storage::ConfigFacts &facts){
     std::memset(static_cast<void *>(&facts),0,sizeof(facts));
     if(!ExtractConfigFacts(config,facts)||!EncodeConfigFacts(config,facts))return false;
-    ConfigValidationError error;facts.source_valid=_persistence.ValidateConfig(config,error);return true;
+    facts.source_valid=ValidateDescribedConfig(_persistence,config);return true;
 }
 #endif
 

@@ -30,6 +30,7 @@
 #include <LittleFS.h>
 #include <pb_arduino.h>
 #include <pb_decode.h>
+#include <pb_common.h>
 #include "modes/UltimateNativeProfile.hpp"
 #include <pb_encode.h>
 
@@ -109,7 +110,14 @@ struct PackageSaveState {
 struct PackageObservationReset {
     ~PackageObservationReset() { package_observation = {}; }
 };
-struct ReadWorkspace { ConfigFileReader reader; pb_istream_t stream; size_t file_size; };
+// Four is the frozen Config wire schema's complete message depth, including
+// legacy embedded UltimateProfile children. Streams borrow the same read file;
+// no Config/encoded-body owner or recursive filesystem decoder is added.
+struct ObservedMessageFrame { pb_istream_t stream; const pb_msgdesc_t *descriptor; void *message; };
+struct ReadWorkspace {
+    ConfigFileReader reader; pb_istream_t stream; size_t file_size;
+    ObservedMessageFrame observed[4];
+};
 union SynchronousPhaseWorkspace { SavePhaseState save{}; ReadWorkspace read; } phase_workspace{};
 __attribute__((always_inline)) inline SavePhaseState &SavePhase(){return phase_workspace.save;}
 __attribute__((always_inline)) inline ReadWorkspace &ReadPhase(){return phase_workspace.read;}
@@ -161,7 +169,13 @@ bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t
         uint8_t actual[32];
         while (count) {
             const size_t chunk = count > sizeof(actual) ? sizeof(actual) : count;
-            if (input.read(actual, chunk) != static_cast<int>(chunk) || std::memcmp(actual, bytes, chunk)) return false;
+            if (input.read(actual, chunk) != static_cast<int>(chunk)) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+                if(package_observation.live)read_workspace.reader.io_failed=true;
+#endif
+                return false;
+            }
+            if(std::memcmp(actual,bytes,chunk))return false;
             bytes += chunk; count -= chunk;
         }
         return true;
@@ -854,55 +868,66 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::InitializeObserve
     ultimate_native::RejectEmbedded(loaded_candidate);
     return LoadResult::Loaded;
 }
-// Strict wire admission has already rejected unordered/duplicate fields and
-// embedded profiles. Decode each top-level child directly with its generated
-// descriptor, releasing Config's recursive nanopb frames before child I/O.
-// The source validator and whole-file canonical comparison remain unchanged.
-__attribute__((noinline)) bool DecodeObservedConfigFields() {
-    auto &stream = read_workspace.stream;
-    auto &file = SynchronousFileScope<false>::File();
-    while (stream.bytes_left) {
-        const size_t start = file.position(), remaining = stream.bytes_left;
-        pb_wire_type_t wire; uint32_t tag; bool eof;
-        if (!pb_decode_tag(&stream, &wire, &tag, &eof)) return false;
-        const pb_msgdesc_t *descriptor = nullptr; void *destination = nullptr;
-#define PACKAGE_CONFIG_CHILD(number, field, type) \
-        case number: \
-            if (loaded_candidate.field##_count >= sizeof(loaded_candidate.field) / sizeof(*loaded_candidate.field)) return false; \
-            destination = &loaded_candidate.field[loaded_candidate.field##_count++]; \
-            descriptor = type##_fields; break
-        switch (tag) {
-            PACKAGE_CONFIG_CHILD(1, game_mode_configs, GameModeConfig);
-            PACKAGE_CONFIG_CHILD(2, communication_backend_configs, CommunicationBackendConfig);
-            PACKAGE_CONFIG_CHILD(3, custom_modes, CustomModeConfig);
-            PACKAGE_CONFIG_CHILD(4, keyboard_modes, KeyboardModeConfig);
-            PACKAGE_CONFIG_CHILD(5, rgb_configs, RgbConfig);
-            case 9: loaded_candidate.has_melee_options = true;
-                destination = &loaded_candidate.melee_options; descriptor = MeleeOptions_fields; break;
-            case 10: loaded_candidate.has_project_m_options = true;
-                destination = &loaded_candidate.project_m_options; descriptor = ProjectMOptions_fields; break;
-            default: break;
-        }
-#undef PACKAGE_CONFIG_CHILD
-        if (descriptor) {
-            if (wire != PB_WT_STRING) return false;
-            pb_istream_t child;
-            if (!pb_make_string_substream(&stream, &child)) return false;
-            if (!pb_decode(&child, descriptor, destination) || child.bytes_left ||
-                !pb_close_string_substream(&stream, &child)) return false;
-        } else {
-            // Use the original Config descriptor for every scalar/bytes field.
-            // Limit the replay to this field so it cannot recursively decode
-            // the next child. No handwritten scalar/default interpretation.
-            if (!pb_skip_field(&stream, wire)) return false;
-            const size_t after = stream.bytes_left;
-            if (!file.seek(start)) { read_workspace.reader.io_failed = true; return false; }
-            stream.bytes_left = remaining - after;
-            if (!pb_decode_ex(&stream, Config_fields, &loaded_candidate, PB_DECODE_NOINIT) || stream.bytes_left) return false;
-            stream.bytes_left = after;
-        }
+// Initialize only through the original generated descriptor. The frozen
+// schema has no required fields; callbacks retain nanopb's original default
+// policy, including the already-bound native-payload reject callback.
+__attribute__((noinline)) bool InitializeObservedMessage(ObservedMessageFrame &frame) {
+    if(frame.descriptor->required_field_count)return false;
+    auto empty=pb_istream_from_buffer(nullptr,0);
+    return pb_decode(&empty,frame.descriptor,frame.message);
+}
+__attribute__((noinline)) bool DecodeObservedField(size_t &depth) {
+    auto &frame=read_workspace.observed[depth];auto &stream=frame.stream;
+    auto &file=SynchronousFileScope<false>::File();
+    const size_t start=file.position(),remaining=stream.bytes_left;
+    pb_wire_type_t wire;uint32_t tag;bool eof;
+    if(!pb_decode_tag(&stream,&wire,&tag,&eof))return false;
+    pb_field_iter_t field;
+    if(!pb_field_iter_begin(&field,frame.descriptor,frame.message)||!pb_field_iter_find(&field,tag))return false;
+    if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER)return false;
+    if(PB_LTYPE_IS_SUBMSG(field.type)) {
+        // Unsupported descriptor representations cannot fall through to a
+        // recursive decode. The frozen schema uses STATIC SUBMESSAGE only.
+        if(PB_ATYPE(field.type)!=PB_ATYPE_STATIC||PB_LTYPE(field.type)!=PB_LTYPE_SUBMESSAGE||
+           wire!=PB_WT_STRING||depth+1>=sizeof(read_workspace.observed)/sizeof(*read_workspace.observed))return false;
+        void *destination=field.pField;
+        if(PB_HTYPE(field.type)==PB_HTYPE_REPEATED) {
+            if(!field.pSize)return false;
+            auto &count=*static_cast<pb_size_t*>(field.pSize);
+            if(count>=field.array_size)return false;
+            destination=static_cast<char*>(field.pField)+size_t(field.data_size)*count++;
+        } else if(PB_HTYPE(field.type)==PB_HTYPE_OPTIONAL) {
+            if(field.pSize)*static_cast<bool*>(field.pSize)=true;
+        } else return false;
+        auto &child=read_workspace.observed[depth+1];
+        child.descriptor=field.submsg_desc;child.message=destination;
+        if(!child.descriptor||!pb_make_string_substream(&stream,&child.stream)||!InitializeObservedMessage(child))return false;
+        ++depth;return true;
     }
-    return file.position() == file.size() && !read_workspace.reader.io_failed;
+    // Scalar, fixed bytes, callbacks and packed arrays retain the original
+    // descriptor decoder and its NOINIT accumulation/presence semantics. The
+    // exact one-field replay cannot enter a following submessage recursively.
+    if(!pb_skip_field(&stream,wire))return false;
+    const size_t after=stream.bytes_left;
+    if(!file.seek(start)){read_workspace.reader.io_failed=true;return false;}
+    stream.bytes_left=remaining-after;
+    if(!pb_decode_ex(&stream,frame.descriptor,frame.message,PB_DECODE_NOINIT)||stream.bytes_left)return false;
+    stream.bytes_left=after;return true;
+}
+__attribute__((noinline)) bool DecodeObservedConfigFields() {
+    auto &root=read_workspace.observed[0];root={read_workspace.stream,Config_fields,&loaded_candidate};
+    size_t depth=0;
+    for(;;) {
+        auto &frame=read_workspace.observed[depth];
+        if(frame.stream.bytes_left){if(!DecodeObservedField(depth))return false;}
+        else if(depth){
+            if(!pb_close_string_substream(&read_workspace.observed[depth-1].stream,&frame.stream))return false;
+            frame={};--depth;
+        } else break;
+    }
+    read_workspace.stream=root.stream;
+    auto &file=SynchronousFileScope<false>::File();
+    return file.position()==file.size()&&!read_workspace.reader.io_failed;
 }
 __attribute__((noinline)) void Persistence::DecodeObservedPackageConfig() {
     package_observation.decoded = DecodeObservedConfigFields();
@@ -913,8 +938,9 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPac
     auto &state = package_observation;
     auto &facts = *state.facts;
     const bool canonical = state.decoded && compare_config_bytes(file, loaded_candidate, facts.bytes);
+    const bool io_failed=read_workspace.reader.io_failed||file.failed();
     const bool closed = file.close();
-    if (!closed) { facts = {}; return LoadResult::StorageFailure; }
+    if (io_failed||!closed) { facts = {}; return LoadResult::StorageFailure; }
     if (!canonical) { facts = {}; return LoadResult::Rejected; }
     *state.source_valid = ValidateObservedPackageConfig(loaded_candidate);
     *state.into = loaded_candidate;
@@ -923,7 +949,7 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPac
 __attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
     PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid,size_t maximum) {
     facts = {}; source_valid = false;
-    if (package_observation.live) return LoadResult::StorageFailure;
+    if (package_observation.live||package_save.persistence) return LoadResult::StorageFailure;
     PackageObservationReset observation_reset;
     if (!maximum) maximum = selection == PackageConfigFile::Current || selection == PackageConfigFile::Staged ? 8191 : 65536;
     package_observation = {&into, &facts, &source_valid, PackageFilename(selection), maximum, false, true};
@@ -969,7 +995,7 @@ __attribute__((noinline)) bool Persistence::PublishPackageStaged() {
 __attribute__((noinline)) bool Persistence::PreparePackageConfig(
     Config &config,const PackageConfigFacts &baseline,const PackageConfigFacts &expected,
     const void *package_owner,uint64_t token) {
-    if(package_save.persistence||!IsAvailable()||_mutation_fenced||PackageStorageFence::MutationFenced()||
+    if(package_save.persistence||package_observation.live||!IsAvailable()||_mutation_fenced||PackageStorageFence::MutationFenced()||
        !PackageStorageFence::IsPackageWriter(package_owner,token))return false;
     package_save={this,&baseline,&expected,package_owner,token};
     InitializeSaveContext(this,&config);save_context.package=true;

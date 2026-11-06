@@ -88,18 +88,13 @@ __attribute__((noinline)) ConditionResult check_profile_condition(
     }
     return ConditionResult::Valid;
 }
-bool validate_profile_condition(
-    const UltimateProfileCondition &condition,
-    const bool defined_roles[32],
-    const bool routed_buttons[61],
-    uint8_t maximum_role_id,
-    ConfigValidationError &error,
-    uint8_t profile_id
-) {
-    const auto result=check_profile_condition(condition,defined_roles,routed_buttons,maximum_role_id,profile_id);
-    if(result==ConditionResult::InvalidToken)return reference_error(error,"Ultimate profile %d has an invalid condition token",profile_id);
-    if(result==ConditionResult::UnresolvedRole)return reference_error(error,"Ultimate profile %d has an unresolved role token",profile_id);
-    return true;
+const char *profile_condition_error(
+    const UltimateProfileCondition &condition,const bool defined_roles[32],
+    const bool routed_buttons[61],uint8_t maximum_role_id) {
+    const auto result=check_profile_condition(condition,defined_roles,routed_buttons,maximum_role_id,0);
+    if(result==ConditionResult::InvalidToken)return "Ultimate profile %d has an invalid condition token";
+    if(result==ConditionResult::UnresolvedRole)return "Ultimate profile %d has an unresolved role token";
+    return nullptr;
 }
 
 bool validate_ultimate_profile_extents(const UltimateProfile &profile) {
@@ -125,45 +120,43 @@ bool validate_ultimate_profile_extents(const UltimateProfile &profile) {
     return true;
 }
 
-bool validate_ultimate_profile_semantics_impl(const UltimateProfile &profile,
-                                              ConfigValidationError &error,
-                                              uint8_t profile_id) {
+__attribute__((noinline)) const char *ultimate_profile_semantics_error(const UltimateProfile &profile) {
     if (profile.schema_version == ultimate_native::kSchema)
-        return ultimate_native::ValidProfile(profile) || reference_error(error, "Ultimate profile %d has an invalid native program", profile_id);
+        return ultimate_native::ValidProfile(profile)?nullptr:"Ultimate profile %d has an invalid native program";
     if (profile.native_payload.funcs.encode || profile.native_payload.arg)
-        return reference_error(error, "Ultimate profile %d contains native payload in legacy schema", profile_id);
+        return "Ultimate profile %d contains native payload in legacy schema";
     if ((profile.schema_version != kUltimateProfileSchemaVersionV1 &&
          profile.schema_version != kUltimateProfileSchemaVersionV2 &&
          profile.schema_version != kUltimateProfileSchemaVersionV3) ||
         profile.tables_count != kUltimateProfileTableCount)
-        return reference_error(error, "Ultimate profile %d has an unsupported shape", profile_id);
+        return "Ultimate profile %d has an unsupported shape";
     if (profile.schema_version == kUltimateProfileSchemaVersionV1 &&
         (profile.roles_count != 0 || profile.routing_slots_count != 0 ||
          profile.default_table_id != 0 || profile.table_rules_count != 0 || profile.has_output_program))
-        return reference_error(error, "Ultimate profile %d adds fields to schema version 1", profile_id);
+        return "Ultimate profile %d adds fields to schema version 1";
     if (profile.schema_version == kUltimateProfileSchemaVersionV2 && profile.has_output_program)
-        return reference_error(error, "Ultimate profile %d adds an output program to schema version 2", profile_id);
+        return "Ultimate profile %d adds an output program to schema version 2";
 
     bool seen_table_ids[kUltimateProfileTableCount] = {};
     for (size_t i = 0; i < profile.tables_count; ++i) {
         const UltimateProfileTable &table = profile.tables[i];
         if (table.table_id >= kUltimateProfileTableCount ||
             table.coordinates_count != kUltimateProfileCoordinateCount || seen_table_ids[table.table_id])
-            return reference_error(error, "Ultimate profile %d has an invalid table", profile_id);
+            return "Ultimate profile %d has an invalid table";
         seen_table_ids[table.table_id] = true;
     }
     for (size_t table_id = 0; table_id < kUltimateProfileTableCount; ++table_id)
-        if (!seen_table_ids[table_id]) return reference_error(error, "Ultimate profile %d is missing a table", profile_id);
-    if (profile.schema_version == kUltimateProfileSchemaVersionV1) return true;
+        if (!seen_table_ids[table_id]) return "Ultimate profile %d is missing a table";
+    if (profile.schema_version == kUltimateProfileSchemaVersionV1) return nullptr;
     if (profile.roles_count == 0 || profile.routing_slots_count < kUltimateProfileRequiredRoutingSlotCount ||
         profile.table_rules_count == 0 || profile.default_table_id >= kUltimateProfileTableCount)
-        return reference_error(error, "Ultimate profile %d has an incomplete version 2 shape", profile_id);
+        return "Ultimate profile %d has an incomplete version 2 shape";
 
     bool defined_roles[32] = {};
     for (size_t i = 0; i < profile.roles_count; ++i) {
         const UltimateProfileRole &role = profile.roles[i];
         if (role.role_id == 0 || role.role_id > 32 || defined_roles[role.role_id - 1])
-            return reference_error(error, "Ultimate profile %d has an invalid role", profile_id);
+            return "Ultimate profile %d has an invalid role";
         defined_roles[role.role_id - 1] = true;
     }
     bool seen_routing_slots[kUltimateProfileButtonTokenMax + 1] = {};
@@ -172,49 +165,60 @@ bool validate_ultimate_profile_semantics_impl(const UltimateProfile &profile,
         const UltimateProfileRoutingSlot &slot = profile.routing_slots[i];
         if (!is_button_token(slot.slot_id) || !is_button_token(slot.input_token) ||
             seen_routing_slots[slot.slot_id] || seen_routing_inputs[slot.input_token])
-            return reference_error(error, "Ultimate profile %d has an invalid routing slot", profile_id);
+            return "Ultimate profile %d has an invalid routing slot";
         seen_routing_slots[slot.slot_id] = true;
         seen_routing_inputs[slot.input_token] = true;
     }
     for (uint32_t token = kUltimateProfileButtonTokenMin; token <= kUltimateProfileButtonTokenMax; ++token)
         if (is_required_routing_slot(token) && !seen_routing_slots[token])
-            return reference_error(error, "Ultimate profile %d is missing a required routing slot", profile_id);
-    for (size_t i = 0; i < profile.roles_count; ++i)
-        if (!validate_profile_condition(profile.roles[i].condition, defined_roles, seen_routing_slots,
-                static_cast<uint8_t>(profile.roles[i].role_id - 1), error, profile_id)) return false;
+            return "Ultimate profile %d is missing a required routing slot";
+    for (size_t i = 0; i < profile.roles_count; ++i) {
+        const auto message=profile_condition_error(profile.roles[i].condition,defined_roles,seen_routing_slots,
+            static_cast<uint8_t>(profile.roles[i].role_id-1));
+        if(message)return message;
+    }
 
     bool seen_priorities[256] = {};
     for (size_t i = 0; i < profile.table_rules_count; ++i) {
         const UltimateProfileTableRule &rule = profile.table_rules[i];
         if (rule.priority == 0 || rule.table_id >= kUltimateProfileTableCount || seen_priorities[rule.priority])
-            return reference_error(error, "Ultimate profile %d has an invalid table priority", profile_id);
+            return "Ultimate profile %d has an invalid table priority";
         seen_priorities[rule.priority] = true;
-        if (!validate_profile_condition(rule.condition, defined_roles, seen_routing_slots, 32, error, profile_id)) return false;
+        const auto message=profile_condition_error(rule.condition,defined_roles,seen_routing_slots,32);
+        if(message)return message;
     }
-    if (profile.schema_version != kUltimateProfileSchemaVersionV3) return true;
+    if (profile.schema_version != kUltimateProfileSchemaVersionV3) return nullptr;
     if (!profile.has_output_program || !profile.output_program.enabled ||
         profile.routing_slots_count != kUltimateProfileRoutingSlotCount ||
         profile.output_program.effects_count != UltimateProfileEvaluator::kOutputEffectCount)
-        return reference_error(error, "Ultimate profile %d has an incomplete version 3 output program", profile_id);
+        return "Ultimate profile %d has an incomplete version 3 output program";
     const uint8_t required[] = {1,2,3,4,5,17,18,19,20,21,22,23,24,25,26,29,32,33,34,35,36,37,38,41,42,43,44,45,52,53,54,55};
     for (uint8_t slot : required) if (!seen_routing_slots[slot])
-        return reference_error(error, "Ultimate profile %d is missing an output input slot", profile_id);
+        return "Ultimate profile %d is missing an output input slot";
     bool keys[UltimateProfileEvaluator::kOutputEffectCount] = {};
     for (size_t i = 0; i < profile.output_program.effects_count; ++i) {
         const UltimateProfileOutputEffect &effect = profile.output_program.effects[i];
         const int key = UltimateProfileEvaluator::EffectKey(effect);
         if (key < 0 || keys[key] || !UltimateProfileEvaluator::ValidEffectShape(effect))
-            return reference_error(error, "Ultimate profile %d has an invalid output effect", profile_id);
+            return "Ultimate profile %d has an invalid output effect";
         keys[key] = true;
         const uint32_t token = effect.gate_token;
         if ((token == 0 && effect.gate_inverted) ||
             (token != 0 && !((is_button_token(token) && seen_routing_slots[token]) ||
                 (is_role_token(token) && defined_roles[token - 65]))))
-            return reference_error(error, "Ultimate profile %d has an invalid output gate", profile_id);
+            return "Ultimate profile %d has an invalid output gate";
     }
     for (bool present : keys) if (!present)
-        return reference_error(error, "Ultimate profile %d is missing an output phase", profile_id);
-    return true;
+        return "Ultimate profile %d is missing an output phase";
+    return nullptr;
+}
+
+// Preserve the exact first error and diagnostic bytes, but release all finite
+// validation arrays before the fixed integer formatter acquires its stack.
+__attribute__((noinline)) bool validate_ultimate_profile_semantics_impl(
+    const UltimateProfile &profile,ConfigValidationError &error,uint8_t profile_id) {
+    const auto message=ultimate_profile_semantics_error(profile);
+    return !message||reference_error(error,message,profile_id);
 }
 
 }  // namespace

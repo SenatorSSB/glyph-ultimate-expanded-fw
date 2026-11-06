@@ -40,14 +40,14 @@ class Classifier {
  NamespaceReader &reader;const ClassifierOwners &owners;ClassificationWorkspace &w;
  const char *why="namespace uncertainty";
  bool Fail(const char *message){why=message;return false;}
- bool Hash(const uint8_t *p,size_t n,uint8_t out[32]){
+ __attribute__((noinline)) bool Hash(const uint8_t *p,size_t n,uint8_t out[32]){
   w.hash.~Sha256();::new(&w.hash)Sha256;w.hash.Update(p,n);w.hash.Final(out);return true;
  }
  bool ReadObject(const char *path,uint8_t *out,size_t cap,size_t &n){
   if(reader.Extent(path,n)!=Probe::Present||n>cap)return false;
   return reader.Read(path,0,out,n);
  }
- bool RawHash(const char *path,uint8_t out[32]){
+ __attribute__((noinline)) bool RawHash(const char *path,uint8_t out[32]){
   size_t n=0;if(reader.Extent(path,n)!=Probe::Present)return false;
   w.hash.~Sha256();::new(&w.hash)Sha256;
   for(size_t o=0;o<n;){size_t take=n-o;if(take>sizeof(w.read_chunk))take=sizeof(w.read_chunk);if(!reader.Read(path,o,w.read_chunk,take))return false;w.hash.Update(w.read_chunk,take);o+=take;}
@@ -97,7 +97,7 @@ class Classifier {
   for(size_t i=0;i<Get16(p+6);++i)if(!Zero(p+320+i*56+53,3))return false;
   return true;
  }
- bool LegacyRoot(const char *path,bool migration){
+ __attribute__((noinline)) bool LegacyRoot(const char *path,bool migration){
   size_t n=0;auto *p=owners.record;if(!ReadObject(path,p,4128,n)||n!=2620||Get32(p)!=0x31534450u||Get16(p+4)!=1||Crc32(p,2616)!=Get32(p+2616)||Get16(p+6)>64||!Get32(p+8)||!Get32(p+12)||Get32(p+24)>2)return false;
   if(migration&&Get32(p+24)!=2)return false;
   for(size_t i=0;i<Get16(p+6);++i){const auto *e=p+32+i*40;
@@ -187,13 +187,17 @@ class Classifier {
   }
   return true;
  }
- bool Migration(const RootFacts &root,const ConfigFacts &config){
-  const auto *p=root.prefix;const auto state=Get32(p+20);if(!state)return true;if(state!=2)return false;
+ __attribute__((noinline)) bool MigrationReceipt(const RootFacts &root,const ConfigFacts &config){
+  const auto *p=root.prefix;
   static constexpr char domain[]="Glyph.ProfileStore.Migration.v2";
   w.hash.~Sha256();::new(&w.hash)Sha256;w.hash.Update(domain,sizeof(domain));
   uint8_t words[16];Put32(words,Get32(p+80));Put32(words+4,Incarnation(root));Put32(words+8,Get32(p+84));Put32(words+12,0);w.hash.Update(words,16);w.hash.Update(p+88,32);
   for(size_t i=0;i<Get32(p+84);++i){Put32(words,Get32(p+120+i*4));Put32(words+4,Get32(p+128+i*4));w.hash.Update(words,8);w.hash.Update(p+136+i*32,32);}
-  w.hash.Final(w.digest);if(!Eq(w.digest,p+200)||!Eq(w.digest,config.migration_receipt))return false;
+  w.hash.Final(w.digest);return Eq(w.digest,p+200)&&Eq(w.digest,config.migration_receipt);
+ }
+ bool Migration(const RootFacts &root,const ConfigFacts &config){
+  const auto *p=root.prefix;const auto state=Get32(p+20);if(!state)return true;if(state!=2)return false;
+  if(!MigrationReceipt(root,config))return false;
   if(Get32(p+80)==2){if(!RawHash("/ultimate-migration.src",w.digest)||!Eq(w.digest,p+88))return false;}
   if(Get32(p+80)==3){
    uint32_t generations[2]{};bool present[2]{};const char *paths[2]={"/ultimate-dir-0.bin","/ultimate-dir-1.bin"};
