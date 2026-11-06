@@ -102,6 +102,28 @@ lfs_t *CheckedStorageTestMount(){return test::mounted?&test::fs:nullptr;}
 
 int main(int argc,char **argv){using namespace test;try{
  need(argc>=2,"mode required");configure();owner_aliases();
+ if(!std::strcmp(argv[1],"observe-configs")){
+  // Synthetic NOR setup only; production observation itself must never write.
+  need(lfs_format(&fs,&cfg)==0&&lfs_mount(&fs,&cfg)==0,"observation fixture mount");mounted=true;
+  need(persistence.SetValidator(validate_glyph_config),"source Config validator");
+  std::string hex;
+  while(std::getline(std::cin,hex)){
+   need(hex.size()%2==0,"Config hex extent");Bytes body(hex.size()/2);
+   for(size_t i=0;i<body.size();++i){const auto pair=hex.substr(2*i,2);body[i]=std::strtoul(pair.c_str(),nullptr,16);}
+   Bytes wrapped;append_word(wrapped,body.size());append_word(wrapped,package_storage::Crc32(body.data(),body.size()));wrapped.insert(wrapped.end(),body.begin(),body.end());
+   lfs_file_t seed{};need(lfs_file_open(&fs,&seed,"/config-v2.bin",LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"Config seed open");
+   need(lfs_file_write(&fs,&seed,wrapped.data(),wrapped.size())==int(wrapped.size()),"Config seed write");need(lfs_file_close(&fs,&seed)==0,"Config seed close");
+   const auto before=nor;const auto p=programs,e=erases;Persistence::PackageConfigFacts facts{};bool source=false;
+   const auto result=persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),facts,source,65536);
+   no_handles();need(nor==before&&programs==p&&erases==e,"Config observation write-free");
+   if(result==Persistence::LoadResult::Loaded){
+    need(facts.bytes==body.size()&&facts.crc==package_storage::Crc32(body.data(),body.size()),"exact observed extent/CRC");
+    Sha256 hash;hash.Update(body.data(),body.size());uint8_t digest[32];hash.Final(digest);need(!std::memcmp(digest,facts.sha,32),"exact observed SHA");
+   }
+   std::cout<<(result==Persistence::LoadResult::Loaded?0:1)<<"\n";
+  }
+  shutdown();return 0;
+ }
  if(!std::strcmp(argv[1],"seed")){
   need(argc==4,"seed NAMESPACE NOR");const auto all=namespace_input(argv[2]);need(lfs_format(&fs,&cfg)==0&&lfs_mount(&fs,&cfg)==0,"explicit test seed format/mount");mounted=true;
   for(const auto &item:all){lfs_file_t file{};need(lfs_file_open(&fs,&file,item.first.c_str(),LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"seed open");need(lfs_file_write(&fs,&file,item.second.data(),item.second.size())==int(item.second.size()),"seed transfer");need(lfs_file_close(&fs,&file)==0,"seed close");}

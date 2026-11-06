@@ -846,10 +846,58 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::InitializeObserve
     ultimate_native::RejectEmbedded(loaded_candidate);
     return LoadResult::Loaded;
 }
-__attribute__((noinline)) void Persistence::DecodeObservedPackageConfig() {
+// Strict wire admission has already rejected unordered/duplicate fields and
+// embedded profiles. Decode each top-level child directly with its generated
+// descriptor, releasing Config's recursive nanopb frames before child I/O.
+// The source validator and whole-file canonical comparison remain unchanged.
+__attribute__((noinline)) bool DecodeObservedConfigFields() {
+    auto &stream = read_workspace.stream;
     auto &file = SynchronousFileScope<false>::File();
-    package_observation.decoded = pb_decode(&read_workspace.stream, Config_fields, &loaded_candidate) &&
-        read_workspace.stream.bytes_left == 0 && file.position() == file.size() && !read_workspace.reader.io_failed;
+    while (stream.bytes_left) {
+        const size_t start = file.position(), remaining = stream.bytes_left;
+        pb_wire_type_t wire; uint32_t tag; bool eof;
+        if (!pb_decode_tag(&stream, &wire, &tag, &eof)) return false;
+        const pb_msgdesc_t *descriptor = nullptr; void *destination = nullptr;
+#define PACKAGE_CONFIG_CHILD(number, field, type) \
+        case number: \
+            if (loaded_candidate.field##_count >= sizeof(loaded_candidate.field) / sizeof(*loaded_candidate.field)) return false; \
+            destination = &loaded_candidate.field[loaded_candidate.field##_count++]; \
+            descriptor = type##_fields; break
+        switch (tag) {
+            PACKAGE_CONFIG_CHILD(1, game_mode_configs, GameModeConfig);
+            PACKAGE_CONFIG_CHILD(2, communication_backend_configs, CommunicationBackendConfig);
+            PACKAGE_CONFIG_CHILD(3, custom_modes, CustomModeConfig);
+            PACKAGE_CONFIG_CHILD(4, keyboard_modes, KeyboardModeConfig);
+            PACKAGE_CONFIG_CHILD(5, rgb_configs, RgbConfig);
+            case 9: loaded_candidate.has_melee_options = true;
+                destination = &loaded_candidate.melee_options; descriptor = MeleeOptions_fields; break;
+            case 10: loaded_candidate.has_project_m_options = true;
+                destination = &loaded_candidate.project_m_options; descriptor = ProjectMOptions_fields; break;
+            default: break;
+        }
+#undef PACKAGE_CONFIG_CHILD
+        if (descriptor) {
+            if (wire != PB_WT_STRING) return false;
+            pb_istream_t child;
+            if (!pb_make_string_substream(&stream, &child)) return false;
+            if (!pb_decode(&child, descriptor, destination) || child.bytes_left ||
+                !pb_close_string_substream(&stream, &child)) return false;
+        } else {
+            // Use the original Config descriptor for every scalar/bytes field.
+            // Limit the replay to this field so it cannot recursively decode
+            // the next child. No handwritten scalar/default interpretation.
+            if (!pb_skip_field(&stream, wire)) return false;
+            const size_t after = stream.bytes_left;
+            if (!file.seek(start)) { read_workspace.reader.io_failed = true; return false; }
+            stream.bytes_left = remaining - after;
+            if (!pb_decode_ex(&stream, Config_fields, &loaded_candidate, PB_DECODE_NOINIT) || stream.bytes_left) return false;
+            stream.bytes_left = after;
+        }
+    }
+    return file.position() == file.size() && !read_workspace.reader.io_failed;
+}
+__attribute__((noinline)) void Persistence::DecodeObservedPackageConfig() {
+    package_observation.decoded = DecodeObservedConfigFields();
     ultimate_native::ClearEmbeddedCallbacks(loaded_candidate);
 }
 __attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPackageConfig() {
