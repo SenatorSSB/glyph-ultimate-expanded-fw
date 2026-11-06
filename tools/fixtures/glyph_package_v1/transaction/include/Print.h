@@ -1,0 +1,11 @@
+#pragma once
+#include <cstddef>
+#include <cstdint>
+using std::size_t;
+class Print {
+public:
+    virtual ~Print() = default;
+    virtual int availableForWrite() { return 64; }
+    virtual size_t write(uint8_t) = 0;
+    virtual size_t write(const uint8_t *, size_t) = 0;
+};

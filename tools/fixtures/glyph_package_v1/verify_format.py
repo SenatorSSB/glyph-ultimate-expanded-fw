@@ -48,4 +48,71 @@ for n in range(1,524289):
     charged=ctypes.c_ulonglong()
     assert lib.charge(n,ctypes.byref(charged)) and charged.value==model.file_charge(n),n
     counts['file_charge']+=1
+# Proposed addition before existing verify_format.py's final result print.
+# Differential bindings for the existing admission/geometry responsibility.
+lib.admission_need.argtypes=[ctypes.POINTER(ctypes.c_ulonglong),ctypes.POINTER(ctypes.c_uint),ctypes.c_int,ctypes.POINTER(ctypes.c_ulonglong)]
+lib.exact_geometry.argtypes=[ctypes.POINTER(ctypes.c_ulonglong),ctypes.POINTER(ctypes.c_uint)]
+wide_names=['used','free','total','protected','token','high_token']
+small_names=['rows','rgbs','count','high_id','generation','sequence','namespace_files','config_bytes','record_bytes']
+def admission_actual(values):
+    wide=(ctypes.c_ulonglong*6)(*(values[k] for k in wide_names))
+    small=(ctypes.c_uint*9)(*(values[k] for k in small_names))
+    need=ctypes.c_ulonglong()
+    ok=bool(lib.admission_need(wide,small,values['with_rgb'],ctypes.byref(need)))
+    return ok,need.value
+base_admission=dict(used=0,free=524288,total=524288,protected=0,token=100,high_token=0,
+                   rows=1,rgbs=0,count=0,high_id=0,generation=7,sequence=0,
+                   namespace_files=4,config_bytes=120,record_bytes=750,with_rgb=False)
+admission_cases=[dict(base_admission)]
+for name,values in {
+ 'rows':[0,1,29,30,31,2**32-1], 'rgbs':[0,1,29,30,31,2**32-1],
+ 'count':[0,1,63,64,65,2**32-1], 'high_id':[0,1,2**32-2,2**32-1],
+ 'generation':[0,1,2**32-2,2**32-1], 'sequence':[0,1,2**32-2,2**32-1],
+ 'token':[0,1,99,100,2**64-1], 'high_token':[0,99,100,101,2**64-1],
+ 'namespace_files':[0,1,16,17,255,256,257,2**32-1],
+ 'config_bytes':[0,1,255,256,257,4063,4064,4065,8191,8192,2**32-1],
+ 'record_bytes':[0,128,129,255,256,257,3468,3469,3470,2**32-1],
+ 'protected':[0,4096,524288,2**64-1],
+}.items():
+    for value in values:
+        for with_rgb in [False,True]:
+            admission_cases.append(dict(base_admission,**{name:value,'with_rgb':with_rgb}))
+# All aligned free extents, plus exact protected-space threshold boundaries.
+for used in range(0,524289,4096):
+    admission_cases.append(dict(base_admission,used=used,free=524288-used))
+_,base_need=model.admission(**base_admission)
+for protected in [524288-base_need-1,524288-base_need,524288-base_need+1]:
+    admission_cases.append(dict(base_admission,protected=protected))
+counts['admission_arithmetic']=0
+for values in admission_cases:
+    try: expected=model.admission(**values)
+    except ValueError: expected=None
+    actual=admission_actual(values)
+    if expected is None: assert not actual[0],values
+    else: assert actual==expected,(values,actual,expected)
+    counts['admission_arithmetic']+=1
+# Geometry is a separate frozen predicate; arithmetic never grants source or
+# namespace authority. Mutate each pinned component independently.
+geometry=[524288,0,524288,4096,256,256,128,256,31]
+def geometry_actual(v):
+    return bool(lib.exact_geometry((ctypes.c_ulonglong*3)(*v[:3]),(ctypes.c_uint*6)(*v[3:])))
+assert geometry_actual(geometry)
+counts['exact_geometry']=1
+for used in range(0,524289,4096):
+    values=list(geometry);values[1:3]=[used,524288-used]
+    assert geometry_actual(values);counts['exact_geometry']+=1
+for index,original in enumerate(geometry):
+    for changed in {0,1,original-1 if original else 1,original+1,(2**64-1 if index<3 else 2**32-1)}-{original}:
+        values=list(geometry);values[index]=changed
+        assert not geometry_actual(values),(index,changed)
+        counts['exact_geometry']+=1
+for n in [0,2**64-1,2**64-256,2**63,2**63-1]:
+    charged=ctypes.c_ulonglong()
+    try: expected=model.file_charge(n)
+    except ValueError: expected=None
+    actual=bool(lib.charge(n,ctypes.byref(charged)))
+    assert actual==(expected is not None),(n,actual,expected)
+    if actual: assert charged.value==expected
+    counts['file_charge']+=1
+
 print(json.dumps({'result':'PASS','counts':counts},sort_keys=True))

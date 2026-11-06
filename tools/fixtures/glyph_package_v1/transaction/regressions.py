@@ -90,5 +90,9 @@ def main():
   initial=f.completed_migration(2) if kind=='migration' else base;installed,_=f.package_plan(initial,True,100);case=raw_input('public-save-'+kind,installed['COMMITTED'],plan['request']);invoke('probe-save',case/'seed.nor',kind,case);assert load_namespace(case/'namespace.bin')==installed['COMMITTED'];results.append({'name':'public-save-'+kind,'zero_write':True})
  for kind in ['unresolved','unsupported','unscoped','wrong-path','wrong-token','package-helper','revoked-helper']:
   case=raw_input('lower-fallback-'+kind,base,plan['request']);invoke('fallback',case/'seed.nor',kind,case);summary=json.loads((case/'summary.json').read_text());assert summary['programs']==summary['erases']==0;results.append({'name':'lower-fallback-'+kind,'zero_nor_mutations':True,'helper_effects_checked':True})
+ from transport_regressions import transport_regressions
+ from wire_regressions import wire_regressions
+ results.extend(wire_regressions(binary,c,out/'wire-corpus'))
+ results.extend(transport_regressions(binary,a.repo,c,out/'transport',base,m,f,p,response))
  (out/'results.json').write_text(json.dumps(results,indent=2)+'\n');oracle.close();print('actual production regression checks',len(results),'PASS')
 if __name__=='__main__':main()

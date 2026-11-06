@@ -3,6 +3,7 @@
 // exactly 512 KiB raw NOR images; neither formats nor recreates namespace files.
 #include "ProfileStore.cpp"
 #include "glyph_config_validation.hpp"
+#include "comms/ConfiguratorBackend.hpp"
 #include <lfs.h>
 #include <algorithm>
 #include <fstream>
@@ -102,6 +103,35 @@ lfs_t *CheckedStorageTestMount(){return test::mounted?&test::fs:nullptr;}
 
 int main(int argc,char **argv){using namespace test;try{
  need(argc>=2,"mode required");configure();owner_aliases();
+// No Persistence/ProfileStore storage routine is invoked by this mode.
+if(!std::strcmp(argv[1],"wire-requests")){
+ need(argc==4,"wire-requests PACKED_REQUESTS OUTPUT_JSON");
+ const auto all=requests(argv[2]);std::ofstream report(argv[3]);
+ need(bool(report),"wire results output open");report<<"[";bool first=true;
+ for(size_t i=0;i<all.size();++i){
+  const auto &bytes=all[i];glyph_package::EnvelopePhase phase{};
+  const auto route=glyph_package::RouteProtocol(bytes.data(),bytes.size());
+  const bool canonical=glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),phase);
+  bool body_attempted=false,body_valid=false;
+  if(canonical&&phase.request.operation==PackageOperation_CREATE_PACKAGE){
+   body_attempted=true;
+   ::new(&initialization_owner.body)PackageBody;
+   body_valid=glyph_package::DecodeCanonicalBody(phase,initialization_owner.body);
+   initialization_owner.body.native_body={};initialization_owner.body.~PackageBody();
+  }
+  phase.Release();
+  need(!phase.package.bytes&&!phase.native.bytes&&!phase.request.package_body.funcs.decode,"wire probe ends borrowed callbacks");
+  if(!first)report<<",";first=false;
+  report<<"{\"index\":"<<i<<",\"route\":"<<unsigned(route)
+   <<",\"canonical_request\":"<<(canonical?"true":"false")
+   <<",\"body_attempted\":"<<(body_attempted?"true":"false")
+   <<",\"canonical_body\":"<<(body_valid?"true":"false")<<"}";
+ }
+ report<<"]\n";report.close();need(bool(report),"wire output close");
+ need(!mounted&&reads==0&&programs==0&&erases==0&&syncs==0,"pure wire probe performs no storage operation");
+ no_handles();return 0;
+}
+
  if(!std::strcmp(argv[1],"observe-configs")||!std::strcmp(argv[1],"observe-configs-faults")||!std::strcmp(argv[1],"observe-configs-facts")){
   const bool inject=!std::strcmp(argv[1],"observe-configs-faults");
   // Synthetic NOR setup only; production observation itself must never write.
@@ -187,6 +217,38 @@ int main(int argc,char **argv){using namespace test;try{
   need(files()==all,"seed exact namespace");no_handles();output(argv[3],nor);shutdown();return 0;
  }
  need(argc>=5,"execute|inspect NOR REQUESTS OUTDIR");output_dir=argv[4];mount_image(argv[2]);need(persistence.SetValidator(validate_glyph_config),"configured actual source validator");
+// Real package transport over the existing mounted NOR fixture.
+// Uses real ConfiguratorBackend, PacketIO, Persistence, ProfileStore and mounted NOR.
+if(!std::strcmp(argv[1],"transport")){
+ need(argc==5,"transport NOR REQUESTS OUTDIR");
+ Config saved=Config_init_default;
+ need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"transport saved Config load");
+ need(profile_store.Begin(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format),"normal package-aware startup");
+ const auto active_id=profile_store.ActiveId();
+ const auto *active_profile=profile_store.ActiveProfile();
+ VectorStream duplex;
+ for(const auto &request:requests(argv[3])){
+  packetio::COBSPrint packet(duplex);
+  need(packet.write(uint8_t(CMD_PROFILE_STORE))==1&&packet.write(request.data(),request.size())==request.size()&&packet.end(),"real PacketIO request framing");
+ }
+ duplex.input=std::move(duplex.output);duplex.output.clear();
+ output(path("requests.cobs"),duplex.input);
+ InputState inputs{};ConfiguratorBackend backend(inputs,nullptr,0,saved,duplex);
+ const auto before=nor;const auto p=programs,e=erases;
+ for(size_t guard=0;duplex.position<duplex.input.size();++guard){
+  need(guard<duplex.input.size()+8,"bounded transport pump");backend.SendReport();
+ }
+ need(profile_store.ActiveId()==active_id&&profile_store.ActiveProfile()==active_profile,"package transport cannot activate/reload profile");
+ no_handles();output(path("responses.cobs"),duplex.output);
+ // Emit both snapshots; Python asserts byte-exact equality after successful
+ // CREATE and unchanged original saved bytes for pure malformed/drop controls.
+ const auto encode=[](const Config &config){size_t n=0;need(pb_get_encoded_size(&n,Config_fields,&config),"saved Config size");Bytes raw(n);auto stream=pb_ostream_from_buffer(raw.data(),raw.size());need(pb_encode(&stream,Config_fields,&config),"saved Config encode");return raw;};
+ output(path("saved-config.pb"),encode(saved));
+ dump_files(path("namespace.bin"));output(path("after.nor"),nor);
+ std::ofstream report(path("transport.json"));report<<"{\"programs\":"<<programs-p<<",\"erases\":"<<erases-e<<",\"unchanged\":"<<(nor==before?"true":"false")<<",\"active_id\":"<<active_id<<",\"active_unchanged\":true,\"no_handles\":true}\n";
+ shutdown();return 0;
+}
+
  if(!std::strcmp(argv[1],"execute")){
   need(argc==6,"execute NOR CREATE OUTDIR FAULT_INDEX(-1none)");target=std::strtoll(argv[5],nullptr,10);const auto bytes=input(argv[3]);
   glyph_package::EnvelopePhase header{};need(glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),header),"canonical CREATE fixture");const auto inc=header.request.expected_store_incarnation;const auto token=header.request.request_token;uint8_t semantic[32];need(PackageCreateDigest(header,semantic),"independent query identity preparation");header.Release();
