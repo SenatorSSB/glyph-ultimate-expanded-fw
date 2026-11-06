@@ -132,14 +132,16 @@ Result Read(File &f, void *bytes, size_t length) {
     if (!r && f.writable) PackageStorageFence::Fence();
     return r;
 }
+static __attribute__((noinline)) bool PermitWriteHandle(File &f) {
+    return !f.writable || PackageStorageFence::PermitHandle(f.write_owner, Operation::Write, f.path);
+}
 Result Write(File &f, const void *bytes, size_t length) {
-    if (f.opened && f.writable &&
-        !PackageStorageFence::PermitHandle(f.write_owner, Operation::Write, f.path))
+    if (f.opened && !PermitWriteHandle(f))
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Write};
     if (!f.opened) return {Outcome::Failed, LFS_ERR_BADF, 0};
     auto b = before(f.kind, Operation::Write, f.path);
     if (!b) { if (f.writable) PackageStorageFence::Fence(); return b; }
-    if (f.writable && !PackageStorageFence::PermitHandle(f.write_owner, Operation::Write, f.path))
+    if (!PermitWriteHandle(f))
         return {Outcome::Failed, LFS_ERR_INVAL, 0, Operation::Write};
     auto r = result(lfs_file_write(filesystem(f), handle(f), bytes, length));
     if (r && r.bytes != length) r.outcome = Outcome::Failed;

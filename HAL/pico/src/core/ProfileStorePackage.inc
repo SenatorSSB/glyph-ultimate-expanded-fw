@@ -56,6 +56,24 @@ static_assert(alignof(PackageClassifierTail) <= alignof(std::max_align_t),
 PackageClassifierTail &PackageTail() {
     return *reinterpret_cast<PackageClassifierTail *>(publication_readback + kPackageTailOffset);
 }
+// Preparation scalars occupy the unused middle of the existing publication
+// readback owner. They never overlap classifier bytes, source reader, roots,
+// record, RX or Config. All leases end before this owner becomes I/O readback.
+struct PackagePreparationScratch {
+    RecordIdentity identity{};
+    AdmissionArithmetic admission{};
+    CheckedStorage::Geometry geometry{};
+    ultimate_native::PayloadLease native_lease{};
+    uint64_t needed=0;
+};
+constexpr size_t kPackagePreparationOffset =
+    (sizeof(ClassificationWorkspace)+alignof(PackagePreparationScratch)-1)&~(alignof(PackagePreparationScratch)-1);
+static_assert(kPackagePreparationOffset+sizeof(PackagePreparationScratch)<=kPackageTailOffset,
+              "preparation scalars must not overlap classifier or reader");
+static_assert(alignof(PackagePreparationScratch)<=alignof(std::max_align_t),"preparation scalar alignment");
+PackagePreparationScratch &PackagePreparation() {
+    return *reinterpret_cast<PackagePreparationScratch *>(publication_readback+kPackagePreparationOffset);
+}
 const ClassifierOwners &PackageOwners() { return PackageTail().owners; }
 GlyphPackageSourceReader &PackageReader(ProfileStore &store, Persistence &source) {
     auto &tail = PackageTail();
@@ -74,10 +92,12 @@ void ReleasePackageReader() {
 }
 void BeginClassifierOwner() {
     ::new (publication_readback) ClassificationWorkspace;
+    ::new (publication_readback+kPackagePreparationOffset) PackagePreparationScratch;
     ::new (publication_readback + kPackageTailOffset) PackageClassifierTail;
 }
 void EndClassifierOwner() {
     ReleasePackageReader();
+    PackagePreparation().~PackagePreparationScratch();
     PackageTail().~PackageClassifierTail();
     PackageWorkspace().~ClassificationWorkspace();
 }
@@ -173,7 +193,7 @@ void IntentReceipt(PackageResponse &r,const IntentFacts &i,const ClassificationW
         logical==Logical::Committed&&!r.write_fenced ? ProfileStoreStatus_PROFILE_STORE_OK :
         ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN;
 }
-void HashBytes(const uint8_t *b,size_t n,uint8_t out[32]) { Sha256 h; h.Update(b,n); h.Final(out); }
+__attribute__((noinline)) void HashBytes(const uint8_t *b,size_t n,uint8_t out[32]) { Sha256 h; h.Update(b,n); h.Final(out); }
 bool PackageRecordName(const char *p) {
     const auto n=std::strlen(p);
     return n==29 && !std::strncmp(p,"/ultpkg-",8) && !std::strcmp(p+n-4,".bin");
@@ -479,15 +499,18 @@ void AppendPackageRow(Config &config,const PackageBody &body,uint32_t id) {
     if(body.has_rgb) { config.rgb_configs[config.rgb_configs_count++]=body.rgb; row.rgb_config=config.rgb_configs_count; }
     config.ultimate_profile_root_format=3; config.managed_format=1; ++config.managed_sequence;
 }
+// Compression/finalization temporaries are sibling phases of source I/O.
+__attribute__((noinline)) void UpdateAggregateHash(Sha256 &hash,const void *bytes,size_t count){hash.Update(bytes,count);}
+__attribute__((noinline)) void FinalizeAggregateHash(Sha256 &hash,uint8_t out[32]){hash.Final(out);}
 __attribute__((noinline)) bool ComputePackageAggregate(NamespaceReader &reader,ClassificationWorkspace &w,
                                                        const Config &candidate,uint32_t new_id) {
     auto &hash=w.aggregate_hash; hash.~Sha256(); ::new(&hash)Sha256;
     static constexpr char domain[]="Glyph.Package.Set.v1";
-    hash.Update(domain,sizeof(domain)); uint8_t numbers[16];
+    UpdateAggregateHash(hash,domain,sizeof(domain)); uint8_t numbers[16];
     Put32(numbers,candidate.ultimate_profile_store_incarnation);
     uint32_t managed_count=0;
     for(size_t i=0;i<Get16(directory_publication_wire+6);++i)managed_count+=directory_publication_wire[320+i*56+53]!=0;
-    Put32(numbers+4,managed_count); hash.Update(numbers,8);
+    Put32(numbers+4,managed_count); UpdateAggregateHash(hash,numbers,8);
     uint32_t previous=0;
     for(uint32_t item=0;item<managed_count;++item) {
         const uint8_t *entry=nullptr;
@@ -498,29 +521,29 @@ __attribute__((noinline)) bool ComputePackageAggregate(NamespaceReader &reader,C
         if(!entry)return false;
         const uint32_t id=Get32(entry); previous=id;
         Put32(numbers,id); Put32(numbers+4,Get32(entry+4)); Put32(numbers+8,entry[54]); Put32(numbers+12,entry[55]);
-        hash.Update(numbers,16);
+        UpdateAggregateHash(hash,numbers,16);
         if(id==new_id) {
-            hash.Update(w.row_sha,32);
-            if(entry[55])hash.Update(w.rgb_sha,32);
-            else { HashBytes(nullptr,0,w.digest); hash.Update(w.digest,32); }
-            HashBytes(prepared_record.record,prepared_record.n,w.record_sha); hash.Update(w.record_sha,32);
+            UpdateAggregateHash(hash,w.row_sha,32);
+            if(entry[55])UpdateAggregateHash(hash,w.rgb_sha,32);
+            else { HashBytes(nullptr,0,w.digest); UpdateAggregateHash(hash,w.digest,32); }
+            HashBytes(prepared_record.record,prepared_record.n,w.record_sha); UpdateAggregateHash(hash,w.record_sha,32);
         } else {
             if(!reader.Row(kPackageCurrent,entry[54]-1,w.row))return false;
-            hash.Update(w.row.sha,32);
+            UpdateAggregateHash(hash,w.row.sha,32);
             if(entry[55]) { if(!reader.Rgb(kPackageCurrent,entry[55]-1,w.digest))return false; }
             else HashBytes(nullptr,0,w.digest);
-            hash.Update(w.digest,32);
+            UpdateAggregateHash(hash,w.digest,32);
             char path[32]; size_t extent=0;
             if(!RecordPath(path,sizeof(path),id,Get32(entry+4),false)||reader.Extent(path,extent)!=Probe::Present||
                extent>4128||!reader.Read(path,0,ProfileReadWire(),extent)||!RecordValid(ProfileReadWire(),extent))return false;
-            HashBytes(ProfileReadWire(),extent,w.digest); hash.Update(w.digest,32);
+            HashBytes(ProfileReadWire(),extent,w.digest); UpdateAggregateHash(hash,w.digest,32);
         }
-        HashBytes(entry,56,w.digest); hash.Update(w.digest,32);
+        HashBytes(entry,56,w.digest); UpdateAggregateHash(hash,w.digest,32);
     }
-    hash.Final(directory_publication_wire+264);
+    FinalizeAggregateHash(hash,directory_publication_wire+264);
     return !reader.ObservationFailed();
 }
-bool RecheckPackageBaselineRoots(NamespaceReader &reader,ClassificationWorkspace &w) {
+__attribute__((noinline)) bool RecheckPackageBaselineRoots(NamespaceReader &reader,ClassificationWorkspace &w) {
     const char *paths[]={"/ultimate-v2-0.bin","/ultimate-v2-1.bin","/ultimate-v2.ctrl"};
     for(unsigned k=0;k<3;++k) {
         const auto &root=w.roots[k]; if(!root.present)return false;
@@ -540,7 +563,7 @@ bool RecheckPackageBaselineRoots(NamespaceReader &reader,ClassificationWorkspace
     }
     return !reader.ObservationFailed();
 }
-void ConstructPackageIntent(const ClassificationWorkspace &w,const Classification &c,
+__attribute__((noinline)) void ConstructPackageIntent(const ClassificationWorkspace &w,const Classification &c,
                             const PackageResponse &r,const uint8_t baseline_root[32],uint32_t baseline_high_id) {
     auto *intent=initialization_owner.intent;
     initialization_owner.intent[0]=0; EmptyIntent(intent);
@@ -710,7 +733,7 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     }
     // Source Prepare/semantic/context validation uses the existing native
     // candidate owner. The borrowed RX lease ends before any storage writes.
-    ultimate_native::PayloadLease native_lease;
+    auto &native_lease=PackagePreparation().native_lease;
     native_lease.bytes=phase.native.bytes; native_lease.size=phase.native.size; native_lease.live=true;
     _candidate_profile=UltimateProfile_init_default; _candidate_profile.schema_version=5;
     ultimate_native::Bind(_candidate_profile,native_lease);
@@ -724,7 +747,7 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     response.profile_id=id; response.profile_revision=1;
     response.row_index=work.current.rows; response.rgb_index=body.has_rgb?work.current.rgbs+1:0;
     std::memcpy(response.semantic_digest,work.digest,32);
-    const RecordIdentity identity{classification.incarnation,id,response.row_index,response.rgb_index,
+    auto &identity=PackagePreparation().identity; identity={classification.incarnation,id,response.row_index,response.rgb_index,
         classification.generation+1,classification.package_sequence+1,phase.request.request_token,
         response.semantic_digest,work.current.sha};
     if(!MakeRecordHeader(prepared_record.record,prepared_record.record+128,prepared_record.n-128,identity)||
@@ -743,7 +766,7 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     _next->last_identity.token=phase.request.request_token;
     std::memcpy(_next->last_identity.digest,response.semantic_digest,32);
     _next->last_result={Status::Ok,id,1,_next->generation};
-    uint64_t needed=0;
+    auto &needed=PackagePreparation().needed; needed=0;
     if(!PackageProtectedBytes(reader,work,_active_id,_active_revision,needed)||
        !EncodeDirectory(*_next,directory_publication_wire)||
        !ComputePackageAggregate(reader,work,candidate,id)) {
@@ -751,8 +774,8 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     }
     std::memcpy(_next->managed_aggregate,directory_publication_wire+264,32);
     HashBytes(prepared_record.record,prepared_record.n,response.record_sha);
-    CheckedStorage::Geometry geometry{};
-    AdmissionArithmetic checked{geometry.used_bytes,geometry.free_bytes,geometry.total_bytes,
+    auto &geometry=PackagePreparation().geometry; geometry={};
+    auto &checked=PackagePreparation().admission; checked={geometry.used_bytes,geometry.free_bytes,geometry.total_bytes,
         needed,phase.request.request_token,classification.high_token,work.current.rows,work.current.rgbs,
         uint32_t(_directory->count),_directory->high_water_id,classification.generation,classification.package_sequence,
         uint32_t(work.namespace_files),work.scan_config.body_bytes,uint32_t(prepared_record.n),body.has_rgb};
