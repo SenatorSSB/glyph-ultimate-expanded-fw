@@ -2,7 +2,9 @@
 #define GLYPH_PACKAGE_STORAGE_FENCE_HPP
 #include "core/CheckedStorage.hpp"
 
-// Synchronous core0 authority. Classification is supplied only after the
+// Ownership and writer callbacks remain synchronous core0 authority. Read-only
+// core1 visibility observes atomic classification/fence flags (loads/stores only).
+// Classification is supplied only after the
 // package namespace observer has completed its no-write proof. The observer
 // must not acquire a writer, and no writer callback may enter storage.
 namespace PackageStorageFence {

@@ -74,7 +74,8 @@ run([a.python, HERE/'verify_classifier.py'], env=env)
 
 # The checked-storage harness is compiled against repository CheckedStorage and
 # PackageStorageFence plus the selected pinned LittleFS sources. Four positive/
-# negative state scenarios and two repaired adversarial controls are replayed.
+# negative state scenarios, two repaired adversarial controls, and the concrete
+# core1 flag-publication race regression are replayed.
 lfs = a.littlefs.resolve() if a.littlefs else next((x for x in repo.glob('.platformio-home/**/lib/littlefs') if (x/'lfs.c').is_file()), None)
 if lfs is None:
     print('GAP: LittleFS source not found; pass --littlefs', file=sys.stderr); raise SystemExit(2)
@@ -85,6 +86,6 @@ run([os.environ.get('CC','cc'), '-std=c99', '-O1', '-DLFS_NAME_MAX=32', '-I', lf
 run([os.environ.get('CC','cc'), '-std=c99', '-O1', '-DLFS_NAME_MAX=32', '-I', lfs, '-c', lfs/'lfs_util.c', '-o', lu])
 compile_cpp(fence, [HERE/'fence_harness.cpp', checked, src/'PackageStorageFence.cpp', lo, lu],
             ['-DGLYPH_PACKAGE_V1=1', '-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1', '-DLFS_NAME_MAX=32', '-I', lfs])
-for scenario in ('unclassified', 'failed-mount', 'healthy', 'revoked-dirty', 'sync-before', 'close-before'):
+for scenario in ('unclassified', 'failed-mount', 'healthy', 'revoked-dirty', 'sync-before', 'close-before', 'concurrent-observation'):
     run([fence, scenario])
 print('PASS glyph_package_components; immutable corpus unchanged; hardware=NOT_TESTED')

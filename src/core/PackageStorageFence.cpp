@@ -1,5 +1,6 @@
 #include "core/PackageStorageFence.hpp"
 #include <limits>
+#include <atomic>
 
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
 namespace PackageStorageFence {
@@ -12,15 +13,17 @@ struct Authority {
     uint64_t token = 0;
     WriteKind kind = WriteKind::Legacy;
     uint16_t handles = 0;
-    Classification classification = Classification::Unclassified;
+    // These flags alone cross the core0 writer/core1 display boundary.
+    // Loads/stores only; lease pointers, callbacks and handles stay core0-only.
+    std::atomic<Classification> classification{Classification::Unclassified};
     bool mount_attempted = false;
     bool mounted = false;
     bool boot_failed = false;
-    bool fenced = false;
+    std::atomic<bool> fenced{false};
 } authority;
 bool healthy() {
-    return authority.classification == Classification::LegacyHealthy ||
-           authority.classification == Classification::ManagedHealthy;
+    const auto classification=authority.classification.load(std::memory_order_acquire);
+    return classification==Classification::LegacyHealthy||classification==Classification::ManagedHealthy;
 }
 void revoke() {
     authority.owner = nullptr;
@@ -36,7 +39,7 @@ void BeginMountAttempt() {
     if (authority.mount_attempted || authority.handles) authority.boot_failed = true;
     authority.mount_attempted = true;
     authority.mounted = false;
-    authority.classification = Classification::Unclassified;
+    authority.classification.store(Classification::Unclassified,std::memory_order_release);
     revoke();
 }
 void FinishMountAttempt(bool configuration_ok, bool mounted) {
@@ -45,9 +48,9 @@ void FinishMountAttempt(bool configuration_ok, bool mounted) {
     authority.mounted = configuration_ok && mounted;
 }
 bool Available() { return authority.mounted && !authority.boot_failed; }
-bool MutationFenced() { return !Available() || authority.fenced || !healthy(); }
+bool MutationFenced() { return !Available() || authority.fenced.load(std::memory_order_acquire) || !healthy(); }
 void Fence() {
-    authority.fenced = true;
+    authority.fenced.store(true,std::memory_order_release);
     revoke();
 }
 void Classify(Classification classification) {
@@ -56,7 +59,7 @@ void Classify(Classification classification) {
         Fence();
         return;
     }
-    authority.classification = classification;
+    authority.classification.store(classification,std::memory_order_release);
     if (classification == Classification::Unresolved ||
         classification == Classification::Unsupported) Fence();
 }

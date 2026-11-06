@@ -5,6 +5,8 @@
 #include <cstring>
 #include <stdexcept>
 #include <vector>
+#include <atomic>
+#include <thread>
 using namespace CheckedStorage;
 namespace {
 lfs_t filesystem{};
@@ -67,6 +69,28 @@ int main(int argc, char **argv) {
             require(!PackageStorageFence::Available(), "failed mount remains unavailable");
         } else if (std::strcmp(scenario, "unclassified")) {
             observe_mount();
+        }
+        if(!std::strcmp(scenario,"concurrent-observation")) {
+            // Actual core1-visible APIs race core0 classification/fence stores.
+            // No directory/storage writer is introduced on the reader thread.
+            std::atomic<bool> start{false},done{false},bad{false};
+            std::thread display([&]{bool seen_fence=false;start.store(true,std::memory_order_release);
+                while(!done.load(std::memory_order_acquire)) {
+                    const bool fenced=PackageStorageFence::MutationFenced();
+                    if(!PackageStorageFence::Available()||(seen_fence&&!fenced))bad.store(true,std::memory_order_release);
+                    seen_fence|=fenced;
+                }
+            });
+            while(!start.load(std::memory_order_acquire)){}
+            for(unsigned i=0;i<100000;++i)PackageStorageFence::Classify(i%2?
+                PackageStorageFence::Classification::LegacyHealthy:PackageStorageFence::Classification::ManagedHealthy);
+            PackageStorageFence::Fence();
+            for(unsigned i=0;i<1000;++i)PackageStorageFence::Classify(PackageStorageFence::Classification::LegacyHealthy);
+            done.store(true,std::memory_order_release);display.join();
+            require(!bad.load()&&PackageStorageFence::MutationFenced()&&PackageStorageFence::Available(),"atomic display observation and sticky fence");
+            require(flash==original,"concurrent observation is NOR write-free");
+            require(lfs_unmount(&filesystem)==0,"test unmount");
+            std::puts("PASS concurrent display observation/classification; sticky fence; zero NOR writes");return 0;
         }
         File file;
         require(!Open(file, "/stage", true, Kind::Config), "no implicit writer");
