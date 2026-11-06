@@ -60,9 +60,23 @@ Bytes encoded_envelope(const PackageEnvelope &request){size_t n=0;need(pb_get_en
 void hidden_id(uint32_t id){if(!id)return;for(size_t i=0;i<profile_store.Count();++i)need(profile_store.EntryAt(i)->id!=id,"pending absent from LIST");UltimateProfile scratch=UltimateProfile_init_default;need(profile_store.Read(id,scratch)!=ProfileStore::Status::Ok,"pending absent from READ");ProfileStore::Status state;need(!profile_store.Activate(id,&state),"pending cannot activate");++hidden_checks;}
 // Geometry contradiction injection at the existing ProfileStoreStorage seam.
 // Namespace/config/native reads still bind the real mounted production adapter.
+bool recheck_armed=false,recheck_hit=false,recheck_drift=false;
+const char *recheck_path=nullptr;
+CheckedStorage::Phase recheck_when=CheckedStorage::Phase::Before;
+CheckedStorage::Fault recheck_hook(CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase when,const char *name){
+ if(!recheck_armed||recheck_hit||op!=CheckedStorage::Operation::Read||when!=recheck_when||!name||std::strcmp(name,recheck_path))return CheckedStorage::Fault::None;
+ need(!PackageStorageFence::WriteOwner(),"final baseline probe precedes writer admission");recheck_hit=true;
+ if(recheck_drift){
+  // Actual final root reads target this existing chunk. Change the successfully
+  // read destination only: no IO error, persistent mutation or fake new root.
+  PackageWorkspace().read_chunk[0]^=1;return CheckedStorage::Fault::None;
+ }
+ return when==CheckedStorage::Phase::Before?CheckedStorage::Fault::Fail:CheckedStorage::Fault::LostAcknowledgement;
+}
 class UnderreportedStorage final : public ProfileStoreStorage {
  MountedStorage source;
  public:
+ bool final_recheck=false;
  bool Write(const char *p,const uint8_t *b,size_t n)override{return source.Write(p,b,n);}
  bool Read(const char *p,uint8_t *b,size_t n)override{return source.Read(p,b,n);}
  size_t Size(const char *p)override{return source.Size(p);}
@@ -76,7 +90,7 @@ class UnderreportedStorage final : public ProfileStoreStorage {
  Result CheckedRemove(const char *p)override{return source.CheckedRemove(p);}
  bool ReadRange(const char *p,size_t o,uint8_t *b,size_t n)override{return source.ReadRange(p,o,b,n);}
  bool Enumerate(CheckedStorage::Visitor v,void *c)override{return source.Enumerate(v,c);}
- bool Geometry(CheckedStorage::Geometry &g)override{if(!source.Geometry(g))return false;g.used_bytes=0;g.free_bytes=g.total_bytes;return true;}
+ bool Geometry(CheckedStorage::Geometry &g)override{if(!source.Geometry(g))return false;if(final_recheck){recheck_armed=true;return true;}g.used_bytes=0;g.free_bytes=g.total_bytes;return true;}
 };
 class FallbackBacking final : public ProfileStoreStorage {
  public:
@@ -261,6 +275,20 @@ if(!std::strcmp(argv[1],"transport")){
    need(nor==after_error&&programs==p&&erases==e,"sameboot failure inspection is write-free");}
   trace();output(path("unwound.nor"),nor);dump_files(path("namespace.bin"));
   const bool unchanged=!fault_hit||cut==nor;summary(unchanged,false,0);shutdown();return 0;
+ }
+ if(!std::strcmp(argv[1],"preflight-recheck")){
+  need(argc==7,"preflight-recheck NOR CREATE OUTDIR PATH before|after|drift");
+  const auto baseline=nor;UnderreportedStorage storage;storage.final_recheck=true;ProfileStore observed(&storage);
+  const auto bytes=input(argv[3]);glyph_package::EnvelopePhase phase{};need(glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),phase),"recheck input");
+  observed.BeginRecovery(phase.request.expected_store_incarnation,0);recheck_armed=false;recheck_hit=false;recheck_path=argv[5];
+  recheck_drift=!std::strcmp(argv[6],"drift");recheck_when=!std::strcmp(argv[6],"before")?CheckedStorage::Phase::Before:CheckedStorage::Phase::After;
+  need(!recheck_drift||std::strcmp(recheck_path,"/config-v2.bin"),"positive destination drift targets root chunk only");
+  CheckedStorage::SetFaultHook(recheck_hook);PackageResponse result{};need(observed.DispatchPackage(phase,result),"recheck dispatch");CheckedStorage::SetFaultHook(nullptr);
+  need(recheck_hit,"final recheck fault/drift reached after fresh geometry");
+  need(result.status==(recheck_drift?ProfileStoreStatus_PROFILE_STORE_CONFLICT:ProfileStoreStatus_PROFILE_STORE_COMMIT_UNKNOWN),"positive changed baseline is conflict; IO uncertainty is unavailable");
+  need(!result.profile_id&&!result.profile_revision&&!result.has_row_index&&!result.has_semantic_digest&&!result.has_config_sha&&!result.has_record_sha&&!result.record_publication_generation,"preflight refusal has no receipt");
+  need(nor==baseline&&programs==0&&erases==0,"preflight recheck refusal is zero-write");
+  no_handles();response(result,"response");dump_files(path("namespace.bin"));output(path("unwound.nor"),nor);summary(true,true,0);shutdown();return 0;
  }
  if(!std::strcmp(argv[1],"underreported")){
   const auto baseline=nor;UnderreportedStorage storage;ProfileStore observed(&storage);auto bytes=input(argv[3]);glyph_package::EnvelopePhase phase{};need(glyph_package::DecodeCanonicalRequest(bytes.data(),bytes.size(),phase),"underreported input");observed.BeginRecovery(phase.request.expected_store_incarnation,0);PackageResponse result{};trace_enabled=true;CheckedStorage::SetFaultHook(hook);need(observed.DispatchPackage(phase,result),"underreported source dispatch");trace_enabled=false;CheckedStorage::SetFaultHook(nullptr);response(result,"response");trace();dump_files(path("namespace.bin"));output(path("unwound.nor"),nor);need(nor==baseline&&programs==0&&erases==0&&events.empty(),"used below observed logical byte sum refuses before any publication");summary(true,true,0);shutdown();return 0;

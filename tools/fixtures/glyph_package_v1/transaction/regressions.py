@@ -90,6 +90,28 @@ def main():
   initial=f.completed_migration(2) if kind=='migration' else base;installed,_=f.package_plan(initial,True,100);case=raw_input('public-save-'+kind,installed['COMMITTED'],plan['request']);invoke('probe-save',case/'seed.nor',kind,case);assert load_namespace(case/'namespace.bin')==installed['COMMITTED'];results.append({'name':'public-save-'+kind,'zero_write':True})
  for kind in ['unresolved','unsupported','unscoped','wrong-path','wrong-token','package-helper','revoked-helper']:
   case=raw_input('lower-fallback-'+kind,base,plan['request']);invoke('fallback',case/'seed.nor',kind,case);summary=json.loads((case/'summary.json').read_text());assert summary['programs']==summary['erases']==0;results.append({'name':'lower-fallback-'+kind,'zero_nor_mutations':True,'helper_effects_checked':True})
+ # Final serialized baseline rechecks happen after the last capacity callback.
+ # IO-failed/lost-read acknowledgements must not become positive guard drift.
+ for path in ['/config-v2.bin','/ultimate-v2-0.bin','/ultimate-v2-1.bin','/ultimate-v2.ctrl']:
+  for when in ['before','after']+(['drift'] if path!='/config-v2.bin' else []):
+   label='final-recheck-'+path[1:]+'-'+when;case=raw_input(label,base,native_plan['request'])
+   invoke('preflight-recheck',case/'seed.nor',case/'create.pb',case,path,when)
+   r=response((case/'response.pb').read_bytes(),15)
+   assert r.status==(6 if when=='drift' else 9) and not r.profile_id and not r.HasField('semantic_digest')
+   assert (case/'unwound.nor').read_bytes()==(case/'seed.nor').read_bytes() and load_namespace(case/'namespace.bin')==base
+   results.append({'name':label,'zero_write':True,'status':r.status,'positive_read_destination_drift':when=='drift'})
+ # A complete recognized future-version marker is six bytes, not eight.
+ # Actual startup and CREATE must preserve every byte and never autoformat.
+ for magic,version,path in [(b'PDS1',2,'/ultimate-dir-0.bin'),(b'PDS2',4,'/ultimate-v2-0.bin')]:
+  for length in [6,7]:
+   disk=dict(base);disk[path]=magic+struct.pack('<H',version)+b'X'*(length-6)
+   label='future-root-'+magic.decode()+'-'+str(length);case=raw_input(label,disk,native_plan['request'])
+   invoke('execute',case/'seed.nor',case/'create.pb',case,-1)
+   r=response((case/'response.pb').read_bytes(),15)
+   assert r.storage_floor==3 and r.write_fenced and not r.profile_id
+   assert (case/'unwound.nor').read_bytes()==(case/'seed.nor').read_bytes() and load_namespace(case/'namespace.bin')==disk
+   assert not json.loads((case/'trace.json').read_text())
+   results.append({'name':label,'complete_marker_bytes':length,'unsupported':True,'zero_write':True})
  from transport_regressions import transport_regressions
  from wire_regressions import wire_regressions
  results.extend(wire_regressions(binary,c,out/'wire-corpus'))
