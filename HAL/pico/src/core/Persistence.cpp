@@ -101,12 +101,14 @@ struct PackageObservationState {
 } package_observation{};
 // Borrowed scalar inputs span only the synchronous package save phases.
 // Both fact objects live in the existing publication owner until completion.
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
 struct PackageSaveState {
     Persistence *persistence=nullptr;
     const Persistence::PackageConfigFacts *baseline=nullptr,*expected=nullptr;
     const void *owner=nullptr;
     uint64_t token=0;
 } package_save{};
+#endif
 struct PackageObservationReset {
     ~PackageObservationReset() { package_observation = {}; }
 };
