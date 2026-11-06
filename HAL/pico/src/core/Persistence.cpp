@@ -764,6 +764,13 @@ const char *Persistence::PackageFilename(PackageConfigFile file) {
     return nullptr;
 }
 
+// SHA compression/finalization scratch ends before the next filesystem read.
+static __attribute__((noinline)) void UpdatePackageHash(Sha256 &hash, const uint8_t *bytes, size_t count) {
+    hash.Update(bytes, count);
+}
+static __attribute__((noinline)) void FinalizePackageHash(Sha256 &hash, uint8_t out[32]) {
+    hash.Final(out);
+}
 __attribute__((noinline)) Persistence::LoadResult Persistence::ReadPackageFacts(
     const char *path, size_t maximum, PackageConfigFacts &facts) {
     facts = {};
@@ -786,24 +793,28 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ReadPackageFacts(
     while (remaining) {
         const size_t count = remaining < sizeof(scratch) ? remaining : sizeof(scratch);
         if (file.read(scratch, count) != static_cast<int>(count)) return LoadResult::StorageFailure;
-        hash.Update(scratch, count); crc.update(scratch, count); remaining -= count;
+        UpdatePackageHash(hash, scratch, count); crc.update(scratch, count); remaining -= count;
     }
     if (file.position() != file.size() || !file.close()) return LoadResult::StorageFailure;
     if (crc.finalize() != header.config_crc) return LoadResult::Rejected;
-    hash.Final(facts.sha); facts.crc = header.config_crc; facts.bytes = header.config_size;
+    FinalizePackageHash(hash, facts.sha); facts.crc = header.config_crc; facts.bytes = header.config_size;
     return LoadResult::Loaded;
 }
 
+__attribute__((noinline)) bool Persistence::ValidateObservedPackageConfig(const Config &config) const {
+    ConfigValidationError error;
+    return ValidateConfig(config,error);
+}
 __attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
-    PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid) {
+    PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid,size_t maximum) {
     facts = {}; source_valid = false;
     if (!IsAvailable() || !_validator) return LoadResult::StorageFailure;
     const char *path = PackageFilename(selection);
     const auto present = CheckedStorage::Stat(path, nullptr, CheckedStorage::Kind::Config);
     if (present.outcome == CheckedStorage::Outcome::NotFound) return LoadResult::Absent;
     if (!present) return LoadResult::StorageFailure;
-    const size_t maximum = selection == PackageConfigFile::Current ||
-                           selection == PackageConfigFile::Staged ? 8191 : 65536;
+    if(!maximum)maximum=selection==PackageConfigFile::Current||selection==PackageConfigFile::Staged?8191:65536;
+    if(maximum>65536)return LoadResult::Rejected;
     const auto observed = ReadPackageFacts(path, maximum, facts);
     if (observed != LoadResult::Loaded) return observed;
     ResetReadWorkspace(); ReadWorkspaceReset reset;
@@ -832,9 +843,8 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageCon
     const bool canonical = decoded && compare_config_bytes(file, loaded_candidate, facts.bytes);
     const bool closed = file.close();
     if (!closed) { facts = {}; return LoadResult::StorageFailure; }
-    ConfigValidationError error;
     if (!canonical) { facts = {}; return LoadResult::Rejected; }
-    source_valid = ValidateConfig(loaded_candidate, error);
+    source_valid = ValidateObservedPackageConfig(loaded_candidate);
     into = loaded_candidate;
     return LoadResult::Loaded;
 }

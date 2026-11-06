@@ -142,7 +142,7 @@ bool PackageRecordName(const char *p) {
 // Caller first obtained complete positive classification. Inspect all current
 // and protected receipts BEFORE deciding conflict, expiry or stale CREATE guards.
 // No writer acquisition, checkpoint, reconciliation or cleanup occurs here.
-bool QueryObservedPackage(NamespaceReader &reader,const Classification &c,
+__attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,const Classification &c,
                           const ClassificationWorkspace &w,uint64_t token,
                           const uint8_t digest[32],uint32_t incarnation,
                           PackageResponse &r) {
@@ -554,6 +554,7 @@ bool ProfileStore::BeginPackageObservation(bool recovery) {
 }
 
 bool ProfileStore::DispatchPackage(glyph_package::EnvelopePhase &phase,PackageResponse &response) {
+    if(package_owner_live)return false;
     ::new(&prepared_create_owner.package)PackageDispatchInputs{&phase,&response,false};
     if(PreparePackageDispatch())FinishPackageDispatch(PublishPackageTransaction());
     return ReleasePackageDispatch();
@@ -608,6 +609,10 @@ __attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_pac
         UnavailablePackageResponse(response); EndClassifierOwner(); return false;
     }
     if(response.status!=ProfileStoreStatus_PROFILE_STORE_NOT_FOUND) { EndClassifierOwner(); return false; }
+    if(_recovery_only) {
+        ClearPackageReceipt(response); response.status=ProfileStoreStatus_PROFILE_STORE_CONFLICT;
+        EndClassifierOwner(); return false;
+    }
     response.status=ProfileStoreStatus_PROFILE_STORE_CONFLICT;
     if(classification.write_fenced||!classification.incarnation||!work.roots[0].present||!work.roots[1].present||
        phase.request.expected_store_incarnation!=classification.incarnation||
@@ -706,12 +711,11 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     std::memcpy(_next->managed_aggregate,directory_publication_wire+264,32);
     HashBytes(prepared_record.record,prepared_record.n,response.record_sha);
     CheckedStorage::Geometry geometry{};
-    const AdmissionArithmetic arithmetic{geometry.used_bytes,geometry.free_bytes,geometry.total_bytes,
+    AdmissionArithmetic checked{geometry.used_bytes,geometry.free_bytes,geometry.total_bytes,
         needed,phase.request.request_token,classification.high_token,work.current.rows,work.current.rgbs,
         uint32_t(_directory->count),_directory->high_water_id,classification.generation,classification.package_sequence,
         uint32_t(work.namespace_files),work.scan_config.body_bytes,uint32_t(prepared_record.n),body.has_rgb};
     // Geometry is read afresh in the same serialized preflight domain.
-    AdmissionArithmetic checked=arithmetic;
     if(!_storage->Geometry(geometry)||!ExactGeometry(geometry)||geometry.used_bytes<work.logical_bytes) {
         ClearPackageReceipt(response); UnavailablePackageResponse(response); EndClassifierOwner(); return false;
     }

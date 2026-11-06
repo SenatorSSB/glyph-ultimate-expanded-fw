@@ -260,7 +260,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::LoadNamedConfig(
     Persistence::PackageConfigFacts facts{};
     bool valid=false;
     ::Config &scratch=_persistence.PackageConfigScratch();
-    const auto result=_persistence.ObservePackageConfig(file,scratch,facts,valid);
+    const auto result=_persistence.ObservePackageConfig(file,scratch,facts,valid,maximum);
     if(result==Persistence::LoadResult::StorageFailure)_failed=true;
     if(result!=Persistence::LoadResult::Loaded||facts.bytes>maximum)return false;
     if(sha)std::memcpy(sha,facts.sha,32);

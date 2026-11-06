@@ -58,7 +58,8 @@ class Persistence {
     // Read-only exact named observations. No fallback, restoration, migration,
     // reconciliation, callback retention, or persistent writer acquisition.
     Config &PackageConfigScratch(); // borrowed loaded_candidate, classifier lease only
-    LoadResult ObservePackageConfig(PackageConfigFile, Config &, PackageConfigFacts &, bool &source_valid);
+    LoadResult ObservePackageConfig(PackageConfigFile, Config &, PackageConfigFacts &, bool &source_valid,
+                                   size_t maximum = 0);
     SaveResult PublishPackageConfig(Config &, const PackageConfigFacts &baseline,
                                    const PackageConfigFacts &expected,
                                    const void *package_owner, uint64_t token);
@@ -85,6 +86,7 @@ class Persistence {
   private:
     static const char *PackageFilename(PackageConfigFile);
     LoadResult ReadPackageFacts(const char *, size_t maximum, PackageConfigFacts &);
+    bool ValidateObservedPackageConfig(const Config &) const;
     bool MatchPackageConfig(const char *, const PackageConfigFacts &);
     bool PublishPackageStaged(const PackageConfigFacts &baseline);
     // config.bin is immutable migration input once a compact Config exists.
