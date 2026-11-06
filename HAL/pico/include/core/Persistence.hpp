@@ -60,9 +60,10 @@ class Persistence {
     Config &PackageConfigScratch(); // borrowed loaded_candidate, classifier lease only
     LoadResult ObservePackageConfig(PackageConfigFile, Config &, PackageConfigFacts &, bool &source_valid,
                                    size_t maximum = 0);
-    SaveResult PublishPackageConfig(Config &, const PackageConfigFacts &baseline,
+    bool PreparePackageConfig(Config &, const PackageConfigFacts &baseline,
                                    const PackageConfigFacts &expected,
                                    const void *package_owner, uint64_t token);
+    SaveResult PublishPreparedPackageConfig();
 
     bool IsMutationFenced() const { return _mutation_fenced || PackageStorageFence::MutationFenced(); }
     SaveResult ReconcileConfig(Config &authoritative);
@@ -92,7 +93,15 @@ class Persistence {
     void DecodeObservedPackageConfig();
     LoadResult FinishObservedPackageConfig();
     bool MatchPackageConfig(const char *, const PackageConfigFacts &);
-    bool PublishPackageStaged(const PackageConfigFacts &baseline);
+    static bool PublishPackageStaged();
+    static bool RotatePackagePrior();
+    static bool VerifyPackagePrior();
+    static bool RotatePackageFinal();
+    static bool PreparePackageSave();
+    static bool VerifyPackageSave();
+    static bool VerifyPackageBaseline();
+    static bool VerifyPackagePublished();
+    static SaveResult FinishPackageSave(bool);
     // config.bin is immutable migration input once a compact Config exists.
     // New writes use a separate name so an interrupted migration cannot erase
     // the only legacy source record.

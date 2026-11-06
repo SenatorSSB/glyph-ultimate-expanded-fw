@@ -98,6 +98,14 @@ struct PackageObservationState {
     bool decoded = false;
     bool live = false;
 } package_observation{};
+// Borrowed scalar inputs span only the synchronous package save phases.
+// Both fact objects live in the existing publication owner until completion.
+struct PackageSaveState {
+    Persistence *persistence=nullptr;
+    const Persistence::PackageConfigFacts *baseline=nullptr,*expected=nullptr;
+    const void *owner=nullptr;
+    uint64_t token=0;
+} package_save{};
 struct PackageObservationReset {
     ~PackageObservationReset() { package_observation = {}; }
 };
@@ -937,47 +945,69 @@ __attribute__((noinline)) bool Persistence::MatchPackageConfig(
            actual.crc == expected.crc && !std::memcmp(actual.sha, expected.sha, 32);
 }
 
-__attribute__((noinline)) bool Persistence::PublishPackageStaged(const PackageConfigFacts &baseline) {
-    using namespace CheckedStorage;
-    // Same-mount rename replaces the retained prior atomically. Never delete
-    // prior first, roll it back, reconcile a lost acknowledgement or clean temp.
-    auto &operation = save_phase.temporary.publication.operation;
-    ::new (&operation) Result(Rename(config_filename, prior_compact_filename, Kind::Config));
-    if (!operation || !MatchPackageConfig(prior_compact_filename, baseline) ||
-        Stat(config_filename, nullptr, Kind::Config).outcome != Outcome::NotFound) return false;
-    ::new (&operation) Result(Rename(save_temporary_filename, config_filename, Kind::Config));
+__attribute__((noinline)) bool Persistence::RotatePackagePrior() {
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Rename(config_filename,prior_compact_filename,CheckedStorage::Kind::Config));
     return bool(operation);
 }
+__attribute__((noinline)) bool Persistence::VerifyPackagePrior() {
+    if(!package_save.persistence->MatchPackageConfig(prior_compact_filename,*package_save.baseline))return false;
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Stat(config_filename,nullptr,CheckedStorage::Kind::Config));
+    return operation.outcome==CheckedStorage::Outcome::NotFound;
+}
+__attribute__((noinline)) bool Persistence::RotatePackageFinal() {
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Rename(save_temporary_filename,config_filename,CheckedStorage::Kind::Config));
+    return bool(operation);
+}
+__attribute__((noinline)) bool Persistence::PublishPackageStaged() {
+    // Same-mount replacement; no delete, rollback, continuation or cleanup.
+    return RotatePackagePrior()&&VerifyPackagePrior()&&RotatePackageFinal();
+}
 
-Persistence::SaveResult Persistence::PublishPackageConfig(
-    Config &config, const PackageConfigFacts &baseline, const PackageConfigFacts &expected,
-    const void *package_owner, uint64_t token) {
-    // The one-shot package writer scope and all reservation/ownership/resource
-    // proofs must already be live. No ordinary save/recovery entry is called.
-    if (!IsAvailable() || _mutation_fenced || PackageStorageFence::MutationFenced() ||
-        !PackageStorageFence::IsPackageWriter(package_owner, token)) return SaveResult::Uncertain;
-    InitializeSaveContext(this, &config);
-    save_context.package = true;
-    const auto temporary = CheckedStorage::Stat(save_temporary_filename, nullptr, CheckedStorage::Kind::Config);
-    bool saved = temporary.outcome == CheckedStorage::Outcome::NotFound &&
-                 MatchPackageConfig(config_filename, baseline) && PrepareSaveConfig(config) &&
-                 save_phase.encoded_size == expected.bytes && expected.bytes && expected.bytes <= 8191;
-    saved = saved && StageSaveConfig();
-    saved = saved && save_phase.header.config_crc == expected.crc &&
-            VerifyStagedConfig(config) && MatchPackageConfig(save_temporary_filename, expected);
-    // Baseline recheck remains SHA-based immediately before Config rotation.
-    saved = saved && MatchPackageConfig(config_filename, baseline) && PublishPackageStaged(baseline);
-    saved = saved && MatchPackageConfig(config_filename, expected) &&
-            CheckedStorage::Stat(save_temporary_filename, nullptr, CheckedStorage::Kind::Config).outcome == CheckedStorage::Outcome::NotFound;
-    saved = saved && PackageStorageFence::IsPackageWriter(package_owner, token);
-    if (saved) {
-        _config_generation = expected.crc;
-    } else {
-        _mutation_fenced = true;
-        PackageStorageFence::Fence();
-    }
-    FinishSaveConfig(saved);
-    return saved ? SaveResult::Saved : SaveResult::Uncertain;
+__attribute__((noinline)) bool Persistence::PreparePackageConfig(
+    Config &config,const PackageConfigFacts &baseline,const PackageConfigFacts &expected,
+    const void *package_owner,uint64_t token) {
+    if(package_save.persistence||!IsAvailable()||_mutation_fenced||PackageStorageFence::MutationFenced()||
+       !PackageStorageFence::IsPackageWriter(package_owner,token))return false;
+    package_save={this,&baseline,&expected,package_owner,token};
+    InitializeSaveContext(this,&config);save_context.package=true;
+    return true;
+}
+__attribute__((noinline)) bool Persistence::PreparePackageSave() {
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Stat(save_temporary_filename,nullptr,CheckedStorage::Kind::Config));
+    return operation.outcome==CheckedStorage::Outcome::NotFound&&
+        package_save.persistence->MatchPackageConfig(config_filename,*package_save.baseline)&&
+        package_save.persistence->PrepareSaveConfig(*save_context.config)&&
+        save_phase.encoded_size==package_save.expected->bytes&&package_save.expected->bytes&&package_save.expected->bytes<=8191;
+}
+__attribute__((noinline)) bool Persistence::VerifyPackageSave() {
+    return save_phase.header.config_crc==package_save.expected->crc&&
+        package_save.persistence->VerifyStagedConfig(*save_context.config)&&
+        package_save.persistence->MatchPackageConfig(save_temporary_filename,*package_save.expected);
+}
+__attribute__((noinline)) bool Persistence::VerifyPackageBaseline() {
+    return package_save.persistence->MatchPackageConfig(config_filename,*package_save.baseline);
+}
+__attribute__((noinline)) bool Persistence::VerifyPackagePublished() {
+    if(!package_save.persistence->MatchPackageConfig(config_filename,*package_save.expected))return false;
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Stat(save_temporary_filename,nullptr,CheckedStorage::Kind::Config));
+    return operation.outcome==CheckedStorage::Outcome::NotFound&&
+        PackageStorageFence::IsPackageWriter(package_save.owner,package_save.token);
+}
+__attribute__((noinline)) Persistence::SaveResult Persistence::FinishPackageSave(bool saved) {
+    if(saved)package_save.persistence->_config_generation=package_save.expected->crc;
+    else {package_save.persistence->_mutation_fenced=true;PackageStorageFence::Fence();}
+    FinishSaveConfig(saved);package_save={};
+    return saved?SaveResult::Saved:SaveResult::Uncertain;
+}
+__attribute__((noinline)) Persistence::SaveResult Persistence::PublishPreparedPackageConfig() {
+    if(package_save.persistence!=this)return SaveResult::Uncertain;
+    return FinishPackageSave(PreparePackageSave()&&StageSaveConfig()&&VerifyPackageSave()&&
+        VerifyPackageBaseline()&&PublishPackageStaged()&&VerifyPackagePublished());
 }
 
 Config &Persistence::PackageConfigScratch() { return loaded_candidate; }

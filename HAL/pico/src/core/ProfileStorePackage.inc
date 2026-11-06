@@ -812,7 +812,7 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     return true;
 }
 
-__attribute__((noinline)) bool ProfileStore::PublishPackageConfigStage() {
+__attribute__((noinline)) bool ProfileStore::PreparePackageConfigStage() {
         package_call.phase=PackageWritePhase::Config;
         Config &candidate=ConfigWriteCandidate();
         bool success=true;
@@ -828,8 +828,12 @@ __attribute__((noinline)) bool ProfileStore::PublishPackageConfigStage() {
         baseline.bytes=uint32_t(prepared_record.n);
         std::memcpy(final.sha,initialization_owner.intent+136,32);
         final.crc=Get32(initialization_owner.intent+92); final.bytes=Get32(initialization_owner.intent+364);
-        if(success)success=persistence.PublishPackageConfig(candidate,baseline,final,package_call.owner,package_call.token)==Persistence::SaveResult::Saved;
+        if(success)success=persistence.PreparePackageConfig(candidate,baseline,final,package_call.owner,package_call.token);
     return success;
+}
+
+__attribute__((noinline)) bool ProfileStore::PublishPackageConfigStage() {
+    return PreparePackageConfigStage()&&persistence.PublishPreparedPackageConfig()==Persistence::SaveResult::Saved;
 }
 
 __attribute__((noinline)) void ProfileStore::FinishPackageWriteScope(bool success) {

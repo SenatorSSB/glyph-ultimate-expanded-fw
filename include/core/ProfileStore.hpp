@@ -220,6 +220,7 @@ class ProfileStore {
     bool ObservePackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &);
     bool BeginPackageWriteScope();
     bool PublishPackageTransaction();
+    bool PreparePackageConfigStage();
     bool PublishPackageConfigStage();
     void FinishPackageWriteScope(bool);
     void FinishPackageTransaction(glyph_package::EnvelopePhase &, PackageResponse &, bool);
