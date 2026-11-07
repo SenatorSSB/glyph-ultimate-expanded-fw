@@ -118,6 +118,9 @@ void shutdown(){if(mounted){const auto before=nor;need(lfs_unmount(&fs)==0,"unmo
 }
 lfs_t *CheckedStorageTestMount(){return test::mounted?&test::fs:nullptr;}
 
+#if defined(GLYPH_BOOT_PROBE)
+#include "boot_probe.hpp"
+#endif
 int main(int argc,char **argv){using namespace test;try{
  need(argc>=2,"mode required");configure();owner_aliases();
 // No Persistence/ProfileStore storage routine is invoked by this mode.
@@ -234,6 +237,9 @@ if(!std::strcmp(argv[1],"wire-requests")){
   need(files()==all,"seed exact namespace");no_handles();output(argv[3],nor);shutdown();return 0;
  }
  need(argc>=5,"execute|inspect NOR REQUESTS OUTDIR");output_dir=argv[4];mount_image(argv[2]);need(persistence.SetValidator(validate_glyph_config),"configured actual source validator");
+#if defined(GLYPH_BOOT_PROBE)
+ if(!std::strcmp(argv[1],"boot"))return boot_probe::run(argv[3]);
+#endif
 // Real package transport over the existing mounted NOR fixture.
 // Uses real ConfiguratorBackend, PacketIO, Persistence, ProfileStore and mounted NOR.
 if(!std::strcmp(argv[1],"transport")){

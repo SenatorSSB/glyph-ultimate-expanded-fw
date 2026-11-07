@@ -3,7 +3,7 @@
 from pathlib import Path
 import argparse,hashlib,json,os,re,subprocess,sys
 
-def build(repo,out,framework=None,nanopb=None,sanitize=True):
+def build(repo,out,framework=None,nanopb=None,sanitize=True,boot_probe=False):
  repo=Path(repo).resolve();out=Path(out).resolve();out.mkdir(parents=True,exist_ok=True)
  here=Path(__file__).resolve().parent
  home=Path(os.environ.get('PLATFORMIO_CORE_DIR',Path.home()/'.platformio'))
@@ -25,6 +25,10 @@ def build(repo,out,framework=None,nanopb=None,sanitize=True):
  inc=[here/'include',repo/'.pio/libdeps/glyph_mk6/PacketIO/src',repo/'tools/fixtures/profile_store_config_persistence_host/include',repo/'tools/fixtures/gp_config021_persisted_recovery/include',gen,nanopb,repo/'include',repo/'HAL/pico/include',repo/'HAL/pico/src/core',repo/'config/glyph/common/include',repo/'config/glyph/glyph_mk6/include',fw/'lib/littlefs',deps]
  args=[x for p in inc for x in ['-I',str(p)]]
  flags=['-O1','-DARDUINO=1','-DFIRMWARE_NAME="host"','-DFIRMWARE_VERSION="host"','-DDEVICE_NAME="host"','-fshort-enums','-DGLYPH_PACKAGE_V1=1','-DGLYPH_CHECKED_STORAGE_TEST_MOUNT=1','-DLFS_NAME_MAX=32','-fno-omit-frame-pointer','-g']
+ if boot_probe:
+  from boot_probe import extract
+  extract(repo,gen/'extracted_boot.inc')
+  flags+=['-DGLYPH_BOOT_PROBE=1']
  if sanitize:flags+=['-fsanitize=address,undefined']
  cc=os.environ.get('CC','cc');cxx=os.environ.get('CXX','c++');objects=[]
  cs=[nanopb/'pb_common.c',nanopb/'pb_decode.c',nanopb/'pb_encode.c',gen/'config.pb.c',gen/'package.pb.c',fw/'src/lfs.c',fw/'src/lfs_util.c']
@@ -45,5 +49,5 @@ def build(repo,out,framework=None,nanopb=None,sanitize=True):
  (out/'source-manifest.json').write_text(json.dumps({'fingerprint':fingerprint,'files':manifest,'binary_sha256':hashlib.sha256(binary.read_bytes()).hexdigest(),'sanitizers':sanitize,'python_version':sys.version,'compiler':subprocess.check_output([cxx,'--version'],text=True),'framework':str(framework),'nanopb':str(nanopb)},indent=2)+'\n')
  return binary
 if __name__=='__main__':
- ap=argparse.ArgumentParser();ap.add_argument('--repo',required=True,type=Path);ap.add_argument('--out',required=True,type=Path);ap.add_argument('--framework',type=Path);ap.add_argument('--nanopb',type=Path);ap.add_argument('--no-sanitize',action='store_true');a=ap.parse_args()
- print(build(a.repo,a.out,a.framework,a.nanopb,not a.no_sanitize))
+ ap=argparse.ArgumentParser();ap.add_argument('--repo',required=True,type=Path);ap.add_argument('--out',required=True,type=Path);ap.add_argument('--framework',type=Path);ap.add_argument('--nanopb',type=Path);ap.add_argument('--no-sanitize',action='store_true');ap.add_argument('--boot-probe',action='store_true');a=ap.parse_args()
+ print(build(a.repo,a.out,a.framework,a.nanopb,not a.no_sanitize,a.boot_probe))
