@@ -1,4 +1,5 @@
 #include "comms/console_detection.hpp"
+#include "comms/BootJoybusDetection.hpp"
 
 #include "core/pinout.hpp"
 
@@ -58,6 +59,58 @@ CommunicationBackendId detect_console(const Pinout &pinout) {
         } else if (GamecubeConsole(pinout.joybus_data).Detect()) {
             result = COMMS_BACKEND_GAMECUBE;
         } else if (N64Console(pinout.joybus_data).Detect()) {
+            result = COMMS_BACKEND_N64;
+        }
+    }
+    */
+
+    detachInterrupt(pinout.nes_latch);
+    detachInterrupt(pinout.nes_clock);
+
+    return result;
+}
+
+// Glyph startup uses finite detection; the original callback remains unchanged.
+CommunicationBackendId detect_console_at_boot(const Pinout &pinout) {
+    if (pinout.nes_latch > -1 && pinout.nes_clock > -1) {
+        attachInterrupt(pinout.nes_latch, &latch_irq_handler, PinStatus::RISING);
+        attachInterrupt(pinout.nes_clock, &clock_irq_handler, PinStatus::FALLING);
+    }
+
+    delay(500);
+    bool usb_connected = usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS;
+
+    if (pinout.nes_latch > -1 && pinout.nes_clock > -1) {
+        detachInterrupt(pinout.nes_latch);
+        detachInterrupt(pinout.nes_clock);
+    }
+
+    CommunicationBackendId result = COMMS_BACKEND_UNSPECIFIED;
+
+    if (usb_connected) {
+        result = COMMS_BACKEND_XINPUT;
+    } else if (latch_pulses && (clock_pulses / latch_pulses) > 8) {
+        result = COMMS_BACKEND_SNES;
+    } else if (latch_pulses && (clock_pulses / latch_pulses) > 1) {
+        result = COMMS_BACKEND_NES;
+    } else if (detect_boot_gamecube(pinout.joybus_data)) {
+        result = COMMS_BACKEND_GAMECUBE;
+    } else if (detect_boot_n64(pinout.joybus_data)) {
+        result = COMMS_BACKEND_N64;
+    }
+
+    /*
+    if(result == COMMS_BACKEND_UNSPECIFIED) {
+        delay(500);
+        if (usb_connected) {
+            result = COMMS_BACKEND_XINPUT;
+        } else if (latch_pulses && (clock_pulses / latch_pulses) > 8) {
+            result = COMMS_BACKEND_SNES;
+        } else if (latch_pulses && (clock_pulses / latch_pulses) > 1) {
+            result = COMMS_BACKEND_NES;
+        } else if (detect_boot_gamecube(pinout.joybus_data)) {
+            result = COMMS_BACKEND_GAMECUBE;
+        } else if (detect_boot_n64(pinout.joybus_data)) {
             result = COMMS_BACKEND_N64;
         }
     }

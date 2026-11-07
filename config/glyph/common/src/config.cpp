@@ -300,7 +300,7 @@ __attribute__((noinline)) bool InitializeBootBackends() {
         pinout,
         get_backend_config_default,
         get_usb_backend_config_default,
-        &detect_console,
+        &detect_console_at_boot,
         &init_secondary_backends_glyph
     );
 

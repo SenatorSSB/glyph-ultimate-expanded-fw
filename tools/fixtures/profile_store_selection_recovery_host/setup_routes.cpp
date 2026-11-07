@@ -85,7 +85,7 @@ void setup_mode_activation_bindings(GameModeConfig *,size_t,uint64_t){}
 void select_mode(Backend **,size_t,Config &){++ordinary_reports;}
 bool is_valid_usb_default_index(const Config &){return true;}
 unsigned pinout=0,get_backend_config_default=0,get_usb_backend_config_default=0;
-void detect_console(){}void init_secondary_backends_glyph(){}
+void detect_console(){}void detect_console_at_boot(){}void init_secondary_backends_glyph(){}
 template<typename... Args>size_t initialize_backends(Args&&...){++normal_initializations;return 0;}
 #include "extracted_setup.inc"
 int main(int argc,char **argv){try{require(argc==2,"case arg");config.ultimate_profile_store_format=1;config.ultimate_profile_store_incarnation=41;
