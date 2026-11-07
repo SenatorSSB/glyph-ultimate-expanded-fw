@@ -27,6 +27,18 @@ def main():
         root=bytearray(pending[path]);m.put32(root,20,1);m.put32(root,3904,m.crc(root[:3904]));pending[path]=bytes(root)
     pending['/ultimate-v2.ctrl']=f.source_control(pending['/ultimate-v2-0.bin'])
     cases += [('migration-pending',pending,False),('mount-failure',None,False)]
+    corrupt=copy.deepcopy(baseline);raw=bytearray(corrupt['/config-v2.bin']);raw[4]^=1
+    corrupt['/config-v2.bin']=bytes(raw);cases += [('config-crc-failure',corrupt,False)]
+    unsupported=copy.deepcopy(baseline);_,tree=m.config_body(unsupported['/config-v2.bin'])
+    f.put(tree,211,2);unsupported['/config-v2.bin']=f.config_file(tree)
+    cases += [('unsupported-config',unsupported,False)]
+    for name,path in [('unreadable-prior','/config-v2.prev'),('pending-staged','/config-v2.tmp')]:
+        disk=copy.deepcopy(baseline);disk[path]=b'';cases.append((name,disk,False))
+    corrupt_root=copy.deepcopy(baseline);raw=bytearray(corrupt_root['/ultimate-v2-0.bin']);raw[-1]^=1
+    corrupt_root['/ultimate-v2-0.bin']=bytes(raw);cases += [('corrupt-root',corrupt_root,False)]
+    embedded=f.completed_migration(2)
+    embedded={'/config.bin':embedded['/ultimate-migration.src']}
+    cases += [('embedded-legacy-config',embedded,False)]
     results=[]
     env={**os.environ,'ASAN_OPTIONS':'detect_leaks=0','UBSAN_OPTIONS':'halt_on_error=1:print_stacktrace=1'}
     def run(argv):
