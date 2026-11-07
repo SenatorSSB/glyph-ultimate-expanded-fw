@@ -5,9 +5,9 @@
 // source mode-routing scratch0..2. No filesystem, reset policy or authority.
 namespace boot_diagnostics {
 enum class Stage : uint8_t {
-    Enter=1, DisplayReady, ValidatorReady, ConfigLoadBegin, ConfigLoadDone,
+    Enter=1, DisplayAttemptDone, ValidatorReady, ConfigLoadBegin, ConfigLoadDone,
     StoreBegin, StoreReady, ReceiptBegin, ReceiptDone, MigrationBegin,
-    MigrationDone, LayoutBegin, LayoutDone, BackendBegin, BackendDone, Normal
+    MigrationDone, LayoutBegin, LayoutDone, BackendBegin, BackendDone, NormalPublishBegin
 };
 constexpr uint32_t kTag=0xB0030000u;
 inline void Mark(volatile uint32_t &slot,Stage stage) {

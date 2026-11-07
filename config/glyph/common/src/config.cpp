@@ -326,7 +326,7 @@ void setup() {
     show_boot_stage(boot_diagnostics::Stage::Enter);
     const bool display_ready = PrepareBootDisplay();
     boot_display_ready=display_ready;
-    show_boot_stage(boot_diagnostics::Stage::DisplayReady);
+    show_boot_stage(boot_diagnostics::Stage::DisplayAttemptDone);
 
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.
@@ -397,7 +397,7 @@ void setup() {
     if (!InitializeBootBackends()) return;
     show_boot_stage(boot_diagnostics::Stage::BackendDone);
 
-    show_boot_stage(boot_diagnostics::Stage::Normal);
+    show_boot_stage(boot_diagnostics::Stage::NormalPublishBegin);
     publish_boot_state(BootOutcome::Normal, display_ready);
 }
 
