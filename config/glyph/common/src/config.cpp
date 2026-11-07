@@ -13,6 +13,7 @@
 #include "core/ProfileSelection.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/PackageOwnership.hpp"
+#include "core/BootDiagnostics.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RuntimeIdentityService.hpp"
 #include "core/state.hpp"
@@ -90,6 +91,7 @@ struct BootSnapshot {
     bool display_ready = false;
 };
 BootSnapshot boot_state;
+bool boot_display_ready=false;
 ConfiguratorBackend *recovery_configurator = nullptr;
 
 BootSnapshot read_boot_state() {
@@ -118,7 +120,9 @@ void draw_recovery_page(BootOutcome outcome) {
     display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
     display.setCursor(0, 0);
-    if (outcome == BootOutcome::StoredConfigRejected) {
+    if (outcome == BootOutcome::RecoveryConfigurator) {
+        display.println("Startup recovery");
+    } else if (outcome == BootOutcome::StoredConfigRejected) {
         display.println("Stored Config rejected");
     } else if (outcome == BootOutcome::DefaultsRejected) {
         display.println("Config defaults rejected");
@@ -129,6 +133,26 @@ void draw_recovery_page(BootOutcome outcome) {
     }
     display.println("Recovery required");
     display.println("Operation refused");
+    display.print("Boot stage: ");
+    display.println(boot_diagnostics::StageCode(watchdog_hw->scratch[3]));
+    if(outcome==BootOutcome::RecoveryConfigurator)
+        display.println(boot_diagnostics::RecoveryReady(watchdog_hw->scratch[3])
+            ? "Configurator ready" : "Recovery starting");
+    display.display();
+}
+
+// End this display/I2C frame before entering any storage or backend phase.
+// Stage numbers describe the current phase, never successful installation.
+__attribute__((noinline)) void show_boot_stage(boot_diagnostics::Stage stage) {
+    boot_diagnostics::Mark(watchdog_hw->scratch[3],stage);
+    if(!boot_display_ready)return;
+    display.clearDisplay();
+    display.setFont(nullptr);
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0,0);
+    display.println("Startup stage");
+    display.println(boot_diagnostics::StageCode(watchdog_hw->scratch[3]));
     display.display();
 }
 
@@ -172,18 +196,23 @@ __attribute__((noinline)) void service_profile_selection() {
 }
 
 // Recovery deliberately reuses the single source-owned Configurator transport
-// and runs without gameplay, menu, display, or core1 initialization.
+// and runs without gameplay or menu initialization. Core0 may update the boot
+// display only while core1 is still waiting for the terminal publication.
 void enter_recovery_configurator() {
     watchdog_hw->scratch[0] = 0;
     watchdog_hw->scratch[1] = 0;
     watchdog_hw->scratch[2] = 0;
+    boot_diagnostics::Recovery(watchdog_hw->scratch[3],false);
+    if(boot_display_ready)draw_recovery_page(BootOutcome::RecoveryConfigurator);
     const RecoveryInitialization recovery = initialize_recovery(
         persistence, profile_store, config, ConfigWriteCandidate(), validate_glyph_config);
     Serial.begin(115200);
     recovery_configurator = new ConfiguratorBackend(
         inputs, input_sources, input_source_count, config, Serial);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
-    publish_boot_state(BootOutcome::RecoveryConfigurator, false);
+    boot_diagnostics::Recovery(watchdog_hw->scratch[3],true);
+    if(boot_display_ready)draw_recovery_page(BootOutcome::RecoveryConfigurator);
+    publish_boot_state(BootOutcome::RecoveryConfigurator, boot_display_ready);
 }
 
 }  // namespace
@@ -294,7 +323,10 @@ __attribute__((noinline)) bool InitializeBootBackends() {
 }
 
 void setup() {
+    show_boot_stage(boot_diagnostics::Stage::Enter);
     const bool display_ready = PrepareBootDisplay();
+    boot_display_ready=display_ready;
+    show_boot_stage(boot_diagnostics::Stage::DisplayReady);
 
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.
@@ -305,17 +337,23 @@ void setup() {
         enter_recovery_configurator();
         return;
     }
+    show_boot_stage(boot_diagnostics::Stage::ValidatorReady);
+    show_boot_stage(boot_diagnostics::Stage::ConfigLoadBegin);
     const Persistence::LoadResult load_result = persistence.LoadConfigChecked(config);
     if (load_result != Persistence::LoadResult::Loaded) {
         enter_recovery_configurator();
         return;
     }
+    show_boot_stage(boot_diagnostics::Stage::ConfigLoadDone);
     const uint32_t expected_incarnation = config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat
         ? config.ultimate_profile_store_incarnation : 0;
+    show_boot_stage(boot_diagnostics::Stage::StoreBegin);
     if (!profile_store.Begin(expected_incarnation, config.ultimate_profile_root_format) || profile_store.IsReadOnlyRecovery()) {
         enter_recovery_configurator();
         return;
     }
+    show_boot_stage(boot_diagnostics::Stage::StoreReady);
+    show_boot_stage(boot_diagnostics::Stage::ReceiptBegin);
     if (config.ultimate_profile_store_format == ProfileStore::kCompactConfigFormat) {
         // A completed v1 store upgrade adds only the authenticated migration
         // provenance field; stable references and all user Config fields remain.
@@ -335,11 +373,15 @@ void setup() {
             return;
         }
     }
+    show_boot_stage(boot_diagnostics::Stage::ReceiptDone);
+    show_boot_stage(boot_diagnostics::Stage::MigrationBegin);
     if (config.ultimate_profile_store_format == 0 && config.ultimate_profiles_count != 0 &&
         !MigrateBootLegacyConfiguration()) return;
 
     // Persist the independent v2 acceptance marker before any ordinary store
     // mutation can be serviced, including a legacy Config with zero profiles.
+    show_boot_stage(boot_diagnostics::Stage::MigrationDone);
+    show_boot_stage(boot_diagnostics::Stage::LayoutBegin);
     if (!package_ownership::SupportedLayout(config)) {
         Config &compact = ConfigWriteCandidate();
         compact = config;
@@ -350,8 +392,12 @@ void setup() {
         config = compact;
     }
 
+    show_boot_stage(boot_diagnostics::Stage::LayoutDone);
+    show_boot_stage(boot_diagnostics::Stage::BackendBegin);
     if (!InitializeBootBackends()) return;
+    show_boot_stage(boot_diagnostics::Stage::BackendDone);
 
+    show_boot_stage(boot_diagnostics::Stage::Normal);
     publish_boot_state(BootOutcome::Normal, display_ready);
 }
 

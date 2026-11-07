@@ -8,6 +8,7 @@
 #include "core/RecoveryInitialization.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/ResourceDiagnostics.hpp"
+#include "core/BootDiagnostics.hpp"
 static void require(bool b,const char *m){if(!b)throw std::runtime_error(m);}
 struct InputState {uint64_t buttons=0;bool rt2=false,mb1=false;};
 InputState inputs;
@@ -29,6 +30,9 @@ struct BootloaderRequest{};
 void reboot_bootloader(){++bootloader;throw BootloaderRequest{};}
 enum class BootOutcome {Pending,Normal,StorageFailure,DefaultsRejected,StartupConfigRejected,RecoveryConfigurator};
 struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready=false;}boot_state;
+bool boot_display_ready=false;
+void draw_recovery_page(BootOutcome) {throw std::runtime_error("headless recovery display use");}
+void show_boot_stage(boot_diagnostics::Stage stage) {boot_diagnostics::Mark(watchdog_hw->scratch[3],stage);}
 void publish_boot_state(BootOutcome o,bool d){boot_state={o,d};}
 BootSnapshot read_boot_state(){return boot_state;}
 void refuse_boot(BootOutcome o,bool d){publish_boot_state(o,d);}

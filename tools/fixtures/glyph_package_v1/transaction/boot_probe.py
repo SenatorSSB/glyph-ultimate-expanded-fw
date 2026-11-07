@@ -10,6 +10,6 @@ def function(text, name, result='void'):
 
 def extract(repo, out):
     text = (repo/'config/glyph/common/src/config.cpp').read_text()
-    names = [('enter_recovery_configurator','void'),
+    names = [('draw_recovery_page','void'),('show_boot_stage','void'),('enter_recovery_configurator','void'),
              ('MigrateBootLegacyConfiguration','bool'),('setup','void')]
     out.write_text('\n'.join(function(text,n,t) for n,t in names)+'\n')

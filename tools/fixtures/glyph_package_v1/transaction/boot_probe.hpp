@@ -3,6 +3,7 @@
 // bounded stubs; no target timing, I2C, USB or physical boot claim follows.
 #include "core/RecoveryInitialization.hpp"
 #include "core/PackageOwnership.hpp"
+#include "core/BootDiagnostics.hpp"
 namespace boot_probe {
 Config config = Config_init_default;
 InputState inputs{};
@@ -14,6 +15,20 @@ enum class BootOutcome {Pending,Normal,StoredConfigRejected,StorageFailure,
 struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready=false;} state;
 unsigned publications=0,backend_initializations=0;
 bool splash=true,recovery_visible=false;
+bool boot_display_ready=false;
+constexpr unsigned SSD1306_WHITE=1;
+struct Display {
+    std::string text;
+    void clearDisplay(){splash=false;text.clear();}
+    void setFont(const void*){} void setTextSize(unsigned){} void setTextColor(unsigned){}
+    void setCursor(unsigned,unsigned){}
+    void print(const char *s){text+=s;}
+    void println(const char *s){text+=s;text+='\n';}
+    void println(unsigned n){text+=std::to_string(n);text+='\n';}
+    void display(){
+        recovery_visible=text.find("Startup recovery")!=std::string::npos;
+    }
+}display;
 void publish_boot_state(BootOutcome outcome,bool ready) {
     test::need(state.outcome==BootOutcome::Pending,"exactly one terminal publication");
     state={outcome,ready};++publications;

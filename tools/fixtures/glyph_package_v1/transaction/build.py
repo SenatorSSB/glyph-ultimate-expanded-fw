@@ -40,6 +40,8 @@ def build(repo,out,framework=None,nanopb=None,sanitize=True,boot_probe=False):
  binary=out/'package-fault-harness';run([cxx,'-std=c++17',*flags,*args,*cpp,*objects,'-o',binary])
  files=set(cpp+cs+[version_header,repo/'HAL/pico/src/core/ProfileStore.cpp',repo/'HAL/pico/src/core/ProfileStorePackage.inc'])
  files.update(here.glob('*.py'))
+ if boot_probe:
+  files.update([here/'boot_probe.hpp',gen/'extracted_boot.inc',repo/'config/glyph/common/src/config.cpp'])
  for base in [repo/'HAL/pico/include/comms',repo/'include/core',repo/'HAL/pico/include/core',schema,gen,nanopb,fw/'lib/littlefs']:
   files.update(p for p in base.glob('*') if p.is_file() and p.suffix in {'.h','.hpp','.proto','.options','.inc'})
  for base in [here/'include',repo/'.pio/libdeps/glyph_mk6/PacketIO/src']:
