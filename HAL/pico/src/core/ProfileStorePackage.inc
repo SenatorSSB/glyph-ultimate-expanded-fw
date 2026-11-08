@@ -585,11 +585,15 @@ __attribute__((noinline)) void ConstructPackageIntent(const ClassificationWorksp
 }
 }
 bool ProfileStore::BeginPackageObservation(bool recovery) {
-    if(package_owner_live)return false;
+    if(package_owner_live) { _startup_diagnostic="package.owner_busy"; return false; }
     package_owner_live=true; BeginClassifierOwner();
     auto &reader=PackageReader(*this,persistence);
     ClassifyNamespaceInto(reader,PackageOwners());
     auto &classification=PackageWorkspace().classification;
+    // Literal diagnostics survive the exclusive scratch lease. Recovery may
+    // repeat the observation but cannot overwrite the original boot refusal.
+    if(!recovery || !std::strcmp(_startup_diagnostic,"store.not_observed"))
+        _startup_diagnostic=classification.diagnostic;
     SetObservedFence(classification); ApplyRuntimeFence(classification);
     auto &work=PackageWorkspace();
     bool legacy_bootstrap=false, result=false;
@@ -600,6 +604,9 @@ bool ProfileStore::BeginPackageObservation(bool recovery) {
             const auto &root=work.roots[selected];
             result=(!_expected_incarnation||classification.incarnation==_expected_incarnation)&&
                 DecodeDirectory(root.prefix,3908,_directory,root.format==3);
+            if(!result && !recovery) _startup_diagnostic=
+                _expected_incarnation && classification.incarnation!=_expected_incarnation ?
+                "store.incarnation_mismatch" : "store.directory_decode";
             if(result) {
                 _ready=true; _v2=true; _root_invalid=false;
                 _read_only_recovery=recovery||classification.write_fenced;

@@ -44,6 +44,21 @@ int run(const char *defaults) {
     setup();
     test::need(state.outcome!=BootOutcome::Pending&&publications==1,"finite terminal startup");
     test::need(test::nor==before&&test::programs==programs&&test::erases==erases,"startup fixture has zero persistent mutation");
+    // Exercise actual recovery/ordinary protocol2 STATUS after production setup.
+    // This also verifies that the selected prior is never restored by STATUS.
+    const uint8_t status_request[]={8,2,16,1,24,1};
+    packetio::COBSPrint framed(Serial);
+    test::need(framed.write(uint8_t(CMD_PROFILE_STORE))==1 &&
+        framed.write(status_request,sizeof(status_request))==sizeof(status_request) && framed.end(),"STATUS frame");
+    Serial.input=std::move(Serial.output);Serial.output.clear();
+    auto *backend=recovery_configurator;
+    if(!backend)backend=new ConfiguratorBackend(inputs,nullptr,0,config,Serial);
+    for(size_t guard=0;Serial.position<Serial.input.size();++guard) {
+        test::need(guard<Serial.input.size()+8,"finite recovery STATUS");backend->SendReport();
+    }
+    test::output(test::path("status.cobs"),Serial.output);
+    if(backend!=recovery_configurator)delete backend;
+    test::need(test::nor==before&&test::programs==programs&&test::erases==erases,"recovery/STATUS never writes");
     test::no_handles();
     std::ofstream out(test::path("boot.json"));
     out<<"{\"outcome\":"<<unsigned(state.outcome)<<",\"display_ready\":"<<state.display_ready

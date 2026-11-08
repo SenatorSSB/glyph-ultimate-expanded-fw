@@ -130,3 +130,16 @@ controls are not added to these30 regressions. Parent retained concrete probes
 and owns extending them. Malformed nested payload INVALID response behavior is
 also outside this ProfileStore-seam harness and needs actual backend coverage.
 No full matrix is running at handoff; prior runs were stopped on source drift.
+
+## Storage-fence recovery diagnostics
+
+`storage_fence_regressions.py` exercises actual extracted startup plus actual
+protocol2 recovery STATUS on real synthetic NOR. It covers selected current,
+prior and legacy, invalid-current no fallback, legacy/compact coexistence,
+missing peers/control, pending metadata, source validity, frozen package cuts,
+and historical pre-fixed32 Config retention. Optional `--historical-config`
+requires the exact known280-byte G6/HW5 body hash; roots remain explicitly
+synthetic and are never a reconstruction of the current physical filesystem.
+All startup/recovery/STATUS probes require zero program/erase and unchanged NOR.
+See `docs/project/STORAGE_FENCE_REPAIR_20261109.md` for non-authoritative diagnostic
+bits and the frozen-boundary limit on automatic reconciliation.

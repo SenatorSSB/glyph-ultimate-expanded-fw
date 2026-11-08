@@ -40,6 +40,7 @@ class Classifier {
  NamespaceReader &reader;const ClassifierOwners &owners;ClassificationWorkspace &w;
  const char *why="namespace uncertainty";
  bool Fail(const char *message){why=message;return false;}
+ void Corrupt(const char *message){if(!w.corrupt)why=message;w.corrupt=true;}
  __attribute__((noinline)) bool Hash(const uint8_t *p,size_t n,uint8_t out[32]){
   w.hash.~Sha256();::new(&w.hash)Sha256;w.hash.Update(p,n);w.hash.Final(out);return true;
  }
@@ -66,28 +67,28 @@ class Classifier {
    auto *p=owners.root0;const auto n=w.object.bytes;const size_t head=n<320?n:320;
    if(head&&!reader.Read(w.object.path,0,p,head))return false;
    if(ConfigPath(w.object.path)){
-    w.scan_config={};if(!reader.Config(w.object.path,65536,w.scan_config)){w.corrupt=true;continue;}
+    w.scan_config={};if(!reader.Config(w.object.path,65536,w.scan_config)){Corrupt(Is(w.object.path,kCurrent)?"current Config invalid":Is(w.object.path,kPrior)?"prior Config invalid":Is(w.object.path,"/config.bin")?"config.bin: retained input invalid":"retained migration/staged Config invalid");continue;}
     const auto &c=w.scan_config;w.unsupported|=c.root_format>3||c.managed_format>1||c.newer_row_marker;
     w.managed_observed|=Marked(c);
-    if(Marked(c)&&!Is(w.object.path,kCurrent)&&!Is(w.object.path,kPrior)&&!Is(w.object.path,"/config-v2.tmp"))w.corrupt=true;
+    if(Marked(c)&&!Is(w.object.path,kCurrent)&&!Is(w.object.path,kPrior)&&!Is(w.object.path,"/config-v2.tmp"))Corrupt("retained Config ownership marker");
    }
    if(RootPath(w.object.path)){
-    if(n<6){w.corrupt=true;continue;}const auto magic=Get32(p);const auto v=Get16(p+4);
-    const bool old=Starts(w.object.path,"/ultimate-dir-");if(magic!=(old?0x31534450u:0x32534450u))w.corrupt=true;
-    if(magic==0x31534450u){w.unsupported|=v>1;if(v<=1&&!LegacyRoot(w.object.path,false))w.corrupt=true;}
-    if(magic==0x32534450u){w.unsupported|=v>3||(v==3&&n>=300&&Get32(p+296)>1);w.managed_observed|=v==3;if(v<2)w.corrupt=true;
-     if(v==2){size_t z=0;if(!ReadObject(w.object.path,owners.record,4128,z)||z!=3908||!ValidV2(owners.record))w.corrupt=true;}
-     if(v==3&&!old){if(!LoadRoot(w.object.path,w.roots[0],owners.root0,false))w.corrupt=true;}
+    if(n<6){Corrupt("truncated root");continue;}const auto magic=Get32(p);const auto v=Get16(p+4);
+    const bool old=Starts(w.object.path,"/ultimate-dir-");if(magic!=(old?0x31534450u:0x32534450u))Corrupt("root magic");
+    if(magic==0x31534450u){w.unsupported|=v>1;if(v<=1&&!LegacyRoot(w.object.path,false))Corrupt("legacy root invalid");}
+    if(magic==0x32534450u){w.unsupported|=v>3||(v==3&&n>=300&&Get32(p+296)>1);w.managed_observed|=v==3;if(v<2)Corrupt("compact root version");
+     if(v==2){size_t z=0;if(!ReadObject(w.object.path,owners.record,4128,z)||z!=3908||!ValidV2(owners.record))Corrupt("compact root invalid");}
+     if(v==3&&!old){if(!LoadRoot(w.object.path,w.roots[0],owners.root0,false))Corrupt("managed root invalid");}
     }
    }
    if(ControlPath(w.object.path)){
-    if(n<22||Get32(p)!=0x32435350u||Get32(p+16)!=0x32534450u)w.corrupt=true;
+    if(n<22||Get32(p)!=0x32435350u||Get32(p+16)!=0x32534450u)Corrupt("control header invalid");
     else {const auto v=Get16(p+20);w.unsupported|=v>3||(v==3&&n>=316&&Get32(p+312)>1);w.managed_observed|=v==3;}
    }
    if(Starts(w.object.path,"/ultpkg-"))w.managed_observed=true;
    if((Starts(w.object.path,"/ultpkg-")||(Starts(w.object.path,"/ultimate-")&&(Ends(w.object.path,".bin")||Ends(w.object.path,".tmp"))))&&n>=8&&Get32(p)==0x31525055u){
     const auto v=Get16(p+4);w.unsupported|=v>2||(v==2&&n>=120&&Get32(p+116)>1);
-    if(v==2){w.managed_observed=true;if(!Starts(w.object.path,"/ultpkg-"))w.corrupt=true;}
+    if(v==2){w.managed_observed=true;if(!Starts(w.object.path,"/ultpkg-"))Corrupt("managed record namespace");}
    }
   }
   return true;
@@ -273,7 +274,16 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
  }
  bool Legacy(){
   const auto &a=w.roots[0],&b=w.roots[1],&ctrl=w.roots[2];const auto &selected=Generation(a)>=Generation(b)?a:b;
-  if(a.format!=2||b.format!=2||ctrl.format!=2||!Eq(ctrl.sha,selected.sha)||Get32(selected.prefix+20)==1||!w.current.source_valid||w.current.managed_format||w.current.any_row_marker||w.current.embedded_profiles||w.current.store_format!=1||w.current.incarnation!=Incarnation(selected)||w.current.root_format!=2||!NoTemps()||!Migration(selected,w.current)||!SharedReceipts())return false;
+  if(a.format!=2||b.format!=2||ctrl.format!=2)return Fail("legacy: root format");
+  if(!Eq(ctrl.sha,selected.sha))return Fail("legacy: control differs");
+  if(Get32(selected.prefix+20)==1)return Fail("legacy: migration pending");
+  if(!w.current.source_valid)return Fail("legacy: Config source invalid");
+  if(w.current.managed_format||w.current.any_row_marker)return Fail("legacy: Config ownership");
+  if(w.current.embedded_profiles)return Fail("legacy: embedded profiles");
+  if(w.current.store_format!=1||w.current.incarnation!=Incarnation(selected)||w.current.root_format!=2)return Fail("legacy: Config/store mismatch");
+  if(!NoTemps())return Fail("legacy: temporary present");
+  if(!Migration(selected,w.current))return Fail("legacy: migration proof");
+  if(!SharedReceipts())return Fail("legacy: shared receipts");
   return true;
  }
  bool HistoricalPrior(const IntentFacts &intent){
@@ -292,17 +302,21 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   if(!Scan()){result.diagnostic=why;return result;}
   if(reader.ObservationFailed()){result.diagnostic="checked I/O uncertainty";return result;}
   if(w.unsupported){result.floor=Floor::Unsupported;result.diagnostic="recognized newer storage";return result;}
-  if(w.corrupt){result.diagnostic="reserved namespace corruption";return result;}
+  if(w.corrupt){result.diagnostic=why;return result;}
   if(!w.namespace_files){result.floor=Floor::NoManaged;result.logical=Logical::None;result.write_fenced=false;result.diagnostic="mounted empty namespace";return result;}
   run_state.next_phase=1; return result;
  }
  __attribute__((noinline)) Classification &RunRoots(){
   auto &result=w.classification;
   auto &run_state=w.run; run_state.next_phase=0;
-  if(!LoadRoot(kRoots[0],w.roots[0],owners.root0,false)||!LoadRoot(kRoots[1],w.roots[1],owners.root1,false)||!LoadRoot(kRoots[2],w.roots[2],owners.control,true)||!Slots()||!LoadConfigs()){result.diagnostic="root/control/Config uncertainty";return result;}
+  if(!LoadRoot(kRoots[0],w.roots[0],owners.root0,false)){result.diagnostic="root0: absent/invalid";return result;}
+  if(!LoadRoot(kRoots[1],w.roots[1],owners.root1,false)){result.diagnostic="root1: absent/invalid";return result;}
+  if(!LoadRoot(kRoots[2],w.roots[2],owners.control,true)){result.diagnostic="control: absent/invalid";return result;}
+  if(!Slots()){result.diagnostic="root slots disagree";return result;}
+  if(!LoadConfigs()){result.diagnostic="Config observation invalid";return result;}
   const auto &control=w.roots[2];const auto &intent=control.intent;
   if(!w.managed_observed){
-   if(!Legacy()){result.diagnostic="legacy correspondence failed";return result;}
+   if(!Legacy()){result.diagnostic=why;return result;}
    result.floor=Floor::NoManaged;result.logical=Logical::None;result.write_fenced=false;result.diagnostic="validated no-managed legacy";
    const auto &selected=Generation(w.roots[0])>=Generation(w.roots[1])?w.roots[0]:w.roots[1];
    result.incarnation=Incarnation(selected);result.generation=Generation(selected);return result;

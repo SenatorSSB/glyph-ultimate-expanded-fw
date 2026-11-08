@@ -115,6 +115,7 @@ class ProfileStore {
 
     bool IsReady() const;
     bool IsReadOnlyRecovery() const;
+    const char *StartupDiagnostic() const { return _startup_diagnostic; }
     bool MigrationPending() const;
     uint32_t LegacyMigrationId(size_t legacy_index) const;
     uint32_t Incarnation() const;
@@ -213,6 +214,7 @@ class ProfileStore {
     const char *LastDiagnostic() const;
 
   private:
+    const char *_startup_diagnostic = "store.not_observed";
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
     friend class GlyphPackageSourceReader;
     bool BeginPackageObservation(bool recovery);

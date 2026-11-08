@@ -479,6 +479,10 @@ Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
     // Reload the actually selected current/prior publication, never stale RAM.
     const auto loaded = LoadConfigDriver(authoritative);
     if (loaded != LoadResult::Loaded) return SaveResult::Uncertain;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // An observed predecessor cannot prove the outcome of current publication.
+    if (_config_selection != ConfigSelection::Current) return SaveResult::Uncertain;
+#endif
     _mutation_fenced = false;
     return SaveResult::Saved;
 }
@@ -677,6 +681,7 @@ __attribute__((always_inline)) inline Persistence::LoadResult Persistence::ReadC
 }
 
 __attribute__((noinline)) Persistence::LoadResult Persistence::FinishLoadedConfig(Config &config) {
+#if !defined(GLYPH_PACKAGE_V1) || !GLYPH_PACKAGE_V1
     if (load_phase.source == CompactConfigRecovery::Source::PriorCompact) {
         auto restored = CheckedStorage::Rename(prior_compact_filename, config_filename, CheckedStorage::Kind::Config);
         if (!restored) {
@@ -684,12 +689,18 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::FinishLoadedConfi
             return LoadResult::StorageFailure;
         }
     }
+#endif
+    // Package startup and recovery are observations. A prior is not current
+    // publication authority; classification must still refuse missing current.
+    _config_selection = load_phase.source == CompactConfigRecovery::Source::Current ? ConfigSelection::Current :
+        load_phase.source == CompactConfigRecovery::Source::PriorCompact ? ConfigSelection::Prior : ConfigSelection::Legacy;
     config = loaded_candidate;
     _config_generation = load_phase.crc;
     return LoadResult::Loaded;
 }
 __attribute__((always_inline)) inline Persistence::LoadResult Persistence::LoadConfigDriver(Config &config) {
     ::new (&source_phase.load) LoadPhaseState{};std::memset(&source_phase,0,sizeof(source_phase));LoadPhaseReset reset;
+    _config_selection = ConfigSelection::None;
     const auto prepared=ReadConfigCandidate();
     if(prepared!=LoadResult::Loaded)return prepared;
     return FinishLoadedConfig(config);

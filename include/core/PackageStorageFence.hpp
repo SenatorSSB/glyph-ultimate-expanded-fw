@@ -21,6 +21,8 @@ void FinishMountAttempt(bool configuration_ok, bool mounted);
 void Classify(Classification);
 bool Available();
 bool MutationFenced();
+Classification ObservedClassification();
+bool StickyFenced();
 void Fence();
 bool BeginWrite(const void *owner, WriteKind, uint64_t token, Authorize, void *context);
 bool IsPackageWriter(const void *owner, uint64_t token);
@@ -42,6 +44,8 @@ inline void FinishMountAttempt(bool, bool) {}
 inline void Classify(Classification) {}
 inline bool Available() { return true; }
 inline bool MutationFenced() { return false; }
+inline Classification ObservedClassification() { return Classification::LegacyHealthy; }
+inline bool StickyFenced() { return false; }
 inline void Fence() {}
 inline bool BeginWrite(const void *, WriteKind, uint64_t, Authorize, void *) { return false; }
 inline bool IsPackageWriter(const void *, uint64_t) { return false; }

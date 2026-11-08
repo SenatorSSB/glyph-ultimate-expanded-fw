@@ -923,6 +923,21 @@ __attribute__((noinline)) bool ConfiguratorBackend::CompleteStatusDispatch() {
                 }
             }
         }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        // Independent observations only; these bits grant no storage authority.
+        if(persistence.IsConfigMutationFenced()) response.recovery_flags |= 1u << 21;
+        if(PackageStorageFence::MutationFenced()) response.recovery_flags |= 1u << 22;
+        if(!PackageStorageFence::Available()) response.recovery_flags |= 1u << 23;
+        if(PackageStorageFence::StickyFenced()) response.recovery_flags |= 1u << 27;
+        const auto classified=PackageStorageFence::ObservedClassification();
+        if(classified==PackageStorageFence::Classification::Unclassified) response.recovery_flags |= 1u << 28;
+        if(classified==PackageStorageFence::Classification::Unsupported) response.recovery_flags |= 1u << 29;
+        if(classified==PackageStorageFence::Classification::Unresolved) response.recovery_flags |= 1u << 30;
+        const auto selected=persistence.SelectedConfig();
+        if(selected==Persistence::ConfigSelection::Current) response.recovery_flags |= 1u << 24;
+        if(selected==Persistence::ConfigSelection::Prior) response.recovery_flags |= 1u << 25;
+        if(selected==Persistence::ConfigSelection::Legacy) response.recovery_flags |= 1u << 26;
+#endif
         if (!TraceProfileStage(request, 6)) return false; // Config complete; before diagnostics
 #if GLYPH_STRICT_HARDENING_CANDIDATE
         const auto resources = ReadResourceDiagnostics();
@@ -981,7 +996,12 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
             !profile_store.IsTransactionUncertain() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
         if (!_recovery_storage_available) strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
         else if (_recovery_config_invalid) strlcpy(response.diagnostic, "config.invalid", sizeof(response.diagnostic));
-        else if (persistence.IsMutationFenced() || _reference_unknown) strlcpy(response.diagnostic, "config.commit_unknown", sizeof(response.diagnostic));
+        else if (_reference_unknown) strlcpy(response.diagnostic, "config.reference_unknown", sizeof(response.diagnostic));
+        else if (persistence.IsConfigMutationFenced()) strlcpy(response.diagnostic, "config.local_fence", sizeof(response.diagnostic));
+        else if (PackageStorageFence::MutationFenced()) {
+            strlcpy(response.diagnostic, "package: ", sizeof(response.diagnostic));
+            strlcat(response.diagnostic, profile_store.StartupDiagnostic(), sizeof(response.diagnostic));
+        }
         else if (profile_store.IsTransactionUncertain()) strlcpy(response.diagnostic, "directory.commit_unknown", sizeof(response.diagnostic));
         else if (profile_store.MigrationPending()) strlcpy(response.diagnostic, "migration.fenced", sizeof(response.diagnostic));
         else if (profile_store.IsReadOnlyRecovery()) strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));

@@ -49,6 +49,8 @@ void FinishMountAttempt(bool configuration_ok, bool mounted) {
 }
 bool Available() { return authority.mounted && !authority.boot_failed; }
 bool MutationFenced() { return !Available() || authority.fenced.load(std::memory_order_acquire) || !healthy(); }
+Classification ObservedClassification() { return authority.classification.load(std::memory_order_acquire); }
+bool StickyFenced() { return authority.fenced.load(std::memory_order_acquire); }
 void Fence() {
     authority.fenced.store(true,std::memory_order_release);
     revoke();

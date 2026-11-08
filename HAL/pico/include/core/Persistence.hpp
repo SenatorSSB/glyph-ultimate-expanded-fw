@@ -65,6 +65,9 @@ class Persistence {
                                    const void *package_owner, uint64_t token);
     SaveResult PublishPreparedPackageConfig();
 
+    bool IsConfigMutationFenced() const { return _mutation_fenced; }
+    enum class ConfigSelection : uint8_t { None, Current, Prior, Legacy };
+    ConfigSelection SelectedConfig() const { return _config_selection; }
     bool IsMutationFenced() const { return _mutation_fenced || PackageStorageFence::MutationFenced(); }
     SaveResult ReconcileConfig(Config &authoritative);
     // Synchronous core0 compare-and-save. Checks both the loaded generation
@@ -112,6 +115,7 @@ class Persistence {
     bool _configuration_ok = false;
     bool _mounted = false;
     bool _mutation_fenced = false;
+    ConfigSelection _config_selection = ConfigSelection::None;
     uint32_t _pending_crc = 0;
     size_t _pending_size = 0;
     uint32_t _config_generation = 0;
