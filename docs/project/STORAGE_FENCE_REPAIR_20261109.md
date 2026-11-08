@@ -60,6 +60,11 @@ Automatically admitting/re-encoding the historical family would change frozen
 B1-R2 source/canonicality rules and requires a separate boundary decision. Never
 infer permission to delete `config.bin`, restore a Config, or clear the fence.
 
+Fresh package-enabled STATUS also refuses health when its current Config reread
+fails or only a predecessor is selected. It reports config.read_failed or
+config.not_current and mutation_feasible=false; no persistent fence is cleared
+or established by this diagnostic.
+
 ## Bounded read-only diagnostics
 
 Protocol2 STATUS retains its schema and status/fencing meaning. The existing
@@ -99,7 +104,7 @@ That optional tuple has no reconstructed directory/payload correspondence and
 is only a classifier/startup seam probe; backend initialization remains a stub.
 No test image represents the actual physical filesystem. Test `seed` alone
 formats synthetic NOR; all production startup/recovery/STATUS paths assert
-unchanged raw NOR and zero program/erase calls. Thirty-three focused cases with the
+unchanged raw NOR and zero program/erase calls. Thirty-four focused cases with the
 historical witness and the existing58 boot families cover finite Normal/refusal.
 
 Future physical work needs one new exact UNAPPROVED Phase-A packet: install once,

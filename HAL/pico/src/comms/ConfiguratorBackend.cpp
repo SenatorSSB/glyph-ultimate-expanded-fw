@@ -927,6 +927,20 @@ __attribute__((noinline)) bool ConfiguratorBackend::CompleteStatusDispatch() {
             }
         }
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        // STATUS health requires the fresh selected current Config read to
+        // complete. Cached startup health cannot hide a checked read failure.
+        if(_recovery_storage_available && !_recovery_config_invalid &&
+           dispatch_loaded!=Persistence::LoadResult::Loaded) {
+            response.status=PROFILE_STORE_IO_FAILURE;
+            response.mutation_feasible=false;
+            if(response.diagnostic[0])strlcat(response.diagnostic,"; config.read_failed",sizeof(response.diagnostic));
+            else strlcpy(response.diagnostic,"config.read_failed",sizeof(response.diagnostic));
+        } else if(response.status==PROFILE_STORE_OK &&
+                  persistence.SelectedConfig()!=Persistence::ConfigSelection::Current) {
+            response.status=PROFILE_STORE_IO_FAILURE;
+            response.mutation_feasible=false;
+            strlcpy(response.diagnostic,"config.not_current",sizeof(response.diagnostic));
+        }
         // Independent observations only; these bits grant no storage authority.
         if(persistence.IsConfigMutationFenced()) response.recovery_flags |= 1u << 21;
         if(PackageStorageFence::MutationFenced()) response.recovery_flags |= 1u << 22;

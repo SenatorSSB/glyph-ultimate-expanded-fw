@@ -242,7 +242,7 @@ if(!std::strcmp(argv[1],"wire-requests")){
 #endif
 // Real package transport over the existing mounted NOR fixture.
 // Uses real ConfiguratorBackend, PacketIO, Persistence, ProfileStore and mounted NOR.
-if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")||!std::strcmp(argv[1],"runtime-transport")||!std::strcmp(argv[1],"local-fence-transport")){
+if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")||!std::strcmp(argv[1],"runtime-transport")||!std::strcmp(argv[1],"local-fence-transport")||!std::strcmp(argv[1],"status-read-failure-transport")){
  const bool recovery=!std::strcmp(argv[1],"recovery-transport");
  const auto initial_nor=nor;
  need(argc==5,"transport NOR REQUESTS OUTDIR");
@@ -268,6 +268,11 @@ if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")
   need(persistence.ReconcileConfig(proposal)==Persistence::SaveResult::Uncertain && persistence.IsConfigMutationFenced(),"package fence prevents false local clearance");
   need(nor==after_failure,"uncertain reconciliation is read-only");
  }
+ if(!std::strcmp(argv[1],"status-read-failure-transport")) {
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind kind,CheckedStorage::Operation op,CheckedStorage::Phase when,const char*) {
+   return kind==CheckedStorage::Kind::Config && op==CheckedStorage::Operation::Read && when==CheckedStorage::Phase::Before ? CheckedStorage::Fault::Fail : CheckedStorage::Fault::None;
+  });
+ }
  const auto active_id=profile_store.ActiveId();
  const auto *active_profile=profile_store.ActiveProfile();
  VectorStream duplex;
@@ -284,6 +289,7 @@ if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")
   need(guard<duplex.input.size()+8,"bounded transport pump");backend.SendReport();
  }
  need(profile_store.ActiveId()==active_id&&profile_store.ActiveProfile()==active_profile,"package transport cannot activate/reload profile");
+ CheckedStorage::SetFaultHook(nullptr);
  no_handles();output(path("responses.cobs"),duplex.output);
  // Emit both snapshots; Python asserts byte-exact equality after successful
  // CREATE and unchanged original saved bytes for pure malformed/drop controls.

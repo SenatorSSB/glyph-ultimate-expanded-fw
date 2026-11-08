@@ -102,13 +102,15 @@ def main():
     receipt=json.loads((work/'transport.json').read_text());assert receipt['programs']==receipt['erases']==0 and receipt['unchanged']
     assert (work/'after.nor').read_bytes()==(work/'seed.nor').read_bytes()
     results.append({'name':'prior-is-not-active-G6-query-or-setter','statuses':states,'zero_write':True,'reconciliation':'UNCERTAIN'})
-    for mode,diag in [('runtime-transport','package: runtime fence'),('local-fence-transport','config.local_fence')]:
+    for mode,diag in [('runtime-transport','package: runtime fence'),('local-fence-transport','config.local_fence'),('status-read-failure-transport','config.read_failed')]:
         work=a.out/mode;work.mkdir();dump_namespace(base,work/'seed.namespace');run([a.binary,'seed',work/'seed.namespace',work/'seed.nor'])
         request=cfg.ProfileStoreRequest(protocol_version=2,operation=1,request_token=1).SerializeToString(deterministic=True)
         (work/'requests.bin').write_bytes(struct.pack('<II',1,len(request))+request)
         run([a.binary,mode,work/'seed.nor',work/'requests.bin',work])
         r=response((work/'responses.cobs').read_bytes(),cfg.ProfileStoreResponse);assert r.status==8 and r.diagnostic==diag,(mode,r)
-        assert bool(r.recovery_flags&(1<<21))==(mode=='local-fence-transport') and r.recovery_flags&(1<<22) and r.recovery_flags&(1<<27)
+        assert bool(r.recovery_flags&(1<<21))==(mode=='local-fence-transport')
+        if mode=='status-read-failure-transport':assert r.recovery_flags==0 and not r.mutation_feasible
+        else:assert r.recovery_flags&(1<<22) and r.recovery_flags&(1<<27)
         receipt=json.loads((work/'transport.json').read_text());assert receipt['programs']==receipt['erases']==0 and receipt['unchanged']
         results.append({'name':mode,'diagnostic':r.diagnostic,'recovery_flags':r.recovery_flags,'zero_inspection_writes':True})
     (a.out/'results.json').write_text(json.dumps({'cases':results,'historical':historical,'physical_filesystem':'UNKNOWN','hardware_operations':0},indent=2)+'\n')
