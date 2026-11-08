@@ -242,11 +242,32 @@ if(!std::strcmp(argv[1],"wire-requests")){
 #endif
 // Real package transport over the existing mounted NOR fixture.
 // Uses real ConfiguratorBackend, PacketIO, Persistence, ProfileStore and mounted NOR.
-if(!std::strcmp(argv[1],"transport")){
+if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")||!std::strcmp(argv[1],"runtime-transport")||!std::strcmp(argv[1],"local-fence-transport")){
+ const bool recovery=!std::strcmp(argv[1],"recovery-transport");
+ const auto initial_nor=nor;
  need(argc==5,"transport NOR REQUESTS OUTDIR");
  Config saved=Config_init_default;
  need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"transport saved Config load");
- need(profile_store.Begin(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format),"normal package-aware startup");
+ if(recovery) {
+  profile_store.BeginRecovery(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format);
+  need(persistence.ReconcileConfig(ConfigWriteCandidate())==Persistence::SaveResult::Uncertain,"fenced/prior reconciliation cannot establish authority");
+ } else need(profile_store.Begin(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format),"normal package-aware startup");
+ need(nor==initial_nor,"all startup Config observation is read-only");
+ if(!std::strcmp(argv[1],"runtime-transport"))PackageStorageFence::Fence();
+ if(!std::strcmp(argv[1],"local-fence-transport")) {
+  static bool hit=false;
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind kind,CheckedStorage::Operation op,CheckedStorage::Phase when,const char*) {
+   if(!hit && kind==CheckedStorage::Kind::Config && op==CheckedStorage::Operation::Write && when==CheckedStorage::Phase::After) {
+    hit=true;return CheckedStorage::Fault::LostAcknowledgement;
+   }return CheckedStorage::Fault::None;
+  });
+  auto &proposal=ConfigWriteCandidate();proposal=saved;proposal.rgb_brightness^=1;
+  need(!persistence.SaveConfig(proposal)&&hit&&persistence.IsConfigMutationFenced(),"actual Config publication uncertainty");
+  CheckedStorage::SetFaultHook(nullptr);
+  const auto after_failure=nor;
+  need(persistence.ReconcileConfig(proposal)==Persistence::SaveResult::Uncertain && persistence.IsConfigMutationFenced(),"package fence prevents false local clearance");
+  need(nor==after_failure,"uncertain reconciliation is read-only");
+ }
  const auto active_id=profile_store.ActiveId();
  const auto *active_profile=profile_store.ActiveProfile();
  VectorStream duplex;
@@ -257,6 +278,7 @@ if(!std::strcmp(argv[1],"transport")){
  duplex.input=std::move(duplex.output);duplex.output.clear();
  output(path("requests.cobs"),duplex.input);
  InputState inputs{};ConfiguratorBackend backend(inputs,nullptr,0,saved,duplex);
+ if(recovery)backend.SetRecoveryState(false,true);
  const auto before=nor;const auto p=programs,e=erases;
  for(size_t guard=0;duplex.position<duplex.input.size();++guard){
   need(guard<duplex.input.size()+8,"bounded transport pump");backend.SendReport();

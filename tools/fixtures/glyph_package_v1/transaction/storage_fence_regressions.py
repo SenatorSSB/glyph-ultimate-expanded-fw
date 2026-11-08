@@ -77,13 +77,40 @@ def main():
         assert boot['outcome']==(1 if normal else 6),(name,boot,status.diagnostic)
         if not normal:assert boot['recovery_visible'] and not boot['splash'] and status.status==8
         if diagnostic:assert diagnostic in status.diagnostic,(name,status.diagnostic,diagnostic)
-        assert status.recovery_flags&((1<<24)|(1<<25)|(1<<26))==selection,(name,status.recovery_flags,selection)
+        assert status.recovery_flags&((1<<24)|(1<<25)|(1<<26))==(0 if normal else selection),(name,status.recovery_flags,selection)
         assert not status.recovery_flags&(1<<21),(name,'local Config fence should not arise from reads')
-        if normal:assert status.status==1 and not status.recovery_flags&((1<<22)|(1<<23)|(1<<27)|(1<<28)|(1<<29)|(1<<30))
+        if normal:assert status.status==1 and status.recovery_flags==0
         elif selection or name=='bad-current-never-falls-back':assert status.recovery_flags&(1<<22)
         if name=='prior-only-rotation':assert status.store_incarnation==status.store_generation==0 and status.recovery_flags&0x32==0x32 and status.recovery_flags&(1<<30)
         if name=='historical-Config-retained-old-input':assert status.config_generation==223169280 and status.transaction_token_high_water==17293822569102712132 and status.store_incarnation==status.store_generation==0 and status.recovery_flags&0x32==0x32
         results.append({'name':name,'normal':normal,'outcome':boot['outcome'],'diagnostic':status.diagnostic,'recovery_flags':status.recovery_flags,'config_generation':status.config_generation,'store_incarnation':status.store_incarnation,'store_generation':status.store_generation,'transaction_highwater':status.transaction_token_high_water,'raw_nor_unchanged':boot['unchanged']})
         (a.out/'results.json').write_text(json.dumps({'cases':results,'historical':historical,'physical_filesystem':'UNKNOWN','hardware_operations':0},indent=2)+'\n')
-    oracle.close();print(json.dumps({'cases':len(results),'normal':sum(x['normal'] for x in results),'hardware_operations':0,'physical_filesystem':'UNKNOWN'}))
+    # A selected predecessor is observable but is never active G6 receipt truth.
+    setter=cfg.ProfileStoreRequest(protocol_version=2,operation=10,request_token=9001,profile_id=1,expected_store_incarnation=42,expected_store_generation=7,expected_config_generation=m.crc(base['/config-v2.bin'][8:]))
+    semantic=cfg.ProfileStoreRequest();semantic.CopyFrom(setter);semantic.request_token=0
+    digest=hashlib.sha256(b'Glyph.ProfileStore.Request.v1\0'+semantic.SerializeToString(deterministic=True)).digest()
+    _,tree=m.config_body(base['/config-v2.bin']);f.put(tree,204,9001);f.put(tree,205,digest.hex());f.put(tree,206,1);f.put(tree,207,7)
+    prior=copy.deepcopy(base);prior['/config-v2.prev']=f.config_file(tree);del prior['/config-v2.bin']
+    requests=[cfg.ProfileStoreRequest(protocol_version=2,operation=11,request_token=9001).SerializeToString(deterministic=True),setter.SerializeToString(deterministic=True)]
+    work=a.out/'prior-active-replay';work.mkdir();dump_namespace(prior,work/'seed.namespace');run([a.binary,'seed',work/'seed.namespace',work/'seed.nor'])
+    (work/'requests.bin').write_bytes(struct.pack('<I',len(requests))+b''.join(struct.pack('<I',len(r))+r for r in requests))
+    run([a.binary,'recovery-transport',work/'seed.nor',work/'requests.bin',work])
+    frames=(work/'responses.cobs').read_bytes().split(b'\0');assert len(frames)==3 and not frames[-1]
+    states=[]
+    for raw in frames[:-1]:
+        r=response(raw+b'\0',cfg.ProfileStoreResponse);assert r.status==8 and not r.profile_id and not r.transaction_operation;states.append(r.status)
+    receipt=json.loads((work/'transport.json').read_text());assert receipt['programs']==receipt['erases']==0 and receipt['unchanged']
+    assert (work/'after.nor').read_bytes()==(work/'seed.nor').read_bytes()
+    results.append({'name':'prior-is-not-active-G6-query-or-setter','statuses':states,'zero_write':True,'reconciliation':'UNCERTAIN'})
+    for mode,diag in [('runtime-transport','package: runtime fence'),('local-fence-transport','config.local_fence')]:
+        work=a.out/mode;work.mkdir();dump_namespace(base,work/'seed.namespace');run([a.binary,'seed',work/'seed.namespace',work/'seed.nor'])
+        request=cfg.ProfileStoreRequest(protocol_version=2,operation=1,request_token=1).SerializeToString(deterministic=True)
+        (work/'requests.bin').write_bytes(struct.pack('<II',1,len(request))+request)
+        run([a.binary,mode,work/'seed.nor',work/'requests.bin',work])
+        r=response((work/'responses.cobs').read_bytes(),cfg.ProfileStoreResponse);assert r.status==8 and r.diagnostic==diag,(mode,r)
+        assert bool(r.recovery_flags&(1<<21))==(mode=='local-fence-transport') and r.recovery_flags&(1<<22) and r.recovery_flags&(1<<27)
+        receipt=json.loads((work/'transport.json').read_text());assert receipt['programs']==receipt['erases']==0 and receipt['unchanged']
+        results.append({'name':mode,'diagnostic':r.diagnostic,'recovery_flags':r.recovery_flags,'zero_inspection_writes':True})
+    (a.out/'results.json').write_text(json.dumps({'cases':results,'historical':historical,'physical_filesystem':'UNKNOWN','hardware_operations':0},indent=2)+'\n')
+    oracle.close();print(json.dumps({'cases':len(results),'normal':sum(x.get('normal',False) for x in results),'hardware_operations':0,'physical_filesystem':'UNKNOWN'}))
 if __name__=='__main__':main()

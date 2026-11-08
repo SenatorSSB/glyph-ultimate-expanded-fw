@@ -762,6 +762,9 @@ __attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
         candidate.profile_reference_token : profile_store.LastTransactionToken();
     response.transaction_token_high_water = high_water;
     if (loaded == Persistence::LoadResult::Loaded &&
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        persistence.SelectedConfig() == Persistence::ConfigSelection::Current &&
+#endif
         candidate.profile_reference_token == request.request_token) {
         if (!query && std::memcmp(candidate.profile_reference_digest, identity.digest, 32) != 0)
             result.status = ProfileStore::Status::Conflict;
@@ -934,9 +937,9 @@ __attribute__((noinline)) bool ConfiguratorBackend::CompleteStatusDispatch() {
         if(classified==PackageStorageFence::Classification::Unsupported) response.recovery_flags |= 1u << 29;
         if(classified==PackageStorageFence::Classification::Unresolved) response.recovery_flags |= 1u << 30;
         const auto selected=persistence.SelectedConfig();
-        if(selected==Persistence::ConfigSelection::Current) response.recovery_flags |= 1u << 24;
-        if(selected==Persistence::ConfigSelection::Prior) response.recovery_flags |= 1u << 25;
-        if(selected==Persistence::ConfigSelection::Legacy) response.recovery_flags |= 1u << 26;
+        if(response.status!=PROFILE_STORE_OK && selected==Persistence::ConfigSelection::Current) response.recovery_flags |= 1u << 24;
+        if(response.status!=PROFILE_STORE_OK && selected==Persistence::ConfigSelection::Prior) response.recovery_flags |= 1u << 25;
+        if(response.status!=PROFILE_STORE_OK && selected==Persistence::ConfigSelection::Legacy) response.recovery_flags |= 1u << 26;
 #endif
         if (!TraceProfileStage(request, 6)) return false; // Config complete; before diagnostics
 #if GLYPH_STRICT_HARDENING_CANDIDATE
@@ -996,12 +999,16 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
             !profile_store.IsTransactionUncertain() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
         if (!_recovery_storage_available) strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
         else if (_recovery_config_invalid) strlcpy(response.diagnostic, "config.invalid", sizeof(response.diagnostic));
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
         else if (_reference_unknown) strlcpy(response.diagnostic, "config.reference_unknown", sizeof(response.diagnostic));
         else if (persistence.IsConfigMutationFenced()) strlcpy(response.diagnostic, "config.local_fence", sizeof(response.diagnostic));
         else if (PackageStorageFence::MutationFenced()) {
             strlcpy(response.diagnostic, "package: ", sizeof(response.diagnostic));
-            strlcat(response.diagnostic, profile_store.StartupDiagnostic(), sizeof(response.diagnostic));
+            strlcat(response.diagnostic, profile_store.FenceDiagnostic(), sizeof(response.diagnostic));
         }
+#else
+        else if (persistence.IsMutationFenced() || _reference_unknown) strlcpy(response.diagnostic, "config.commit_unknown", sizeof(response.diagnostic));
+#endif
         else if (profile_store.IsTransactionUncertain()) strlcpy(response.diagnostic, "directory.commit_unknown", sizeof(response.diagnostic));
         else if (profile_store.MigrationPending()) strlcpy(response.diagnostic, "migration.fenced", sizeof(response.diagnostic));
         else if (profile_store.IsReadOnlyRecovery()) strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));

@@ -46,8 +46,10 @@ on the actual device remains UNKNOWN. Host fixtures model these separately.
 
 Package-enabled Config selection is now read-only, including prior-only
 selection, recovery, STATUS and reconciliation. It never restores/renames a prior.
-A bad current still cannot fall back to prior or legacy. A prior-only read cannot
-clear the local publication fence in ReconcileConfig, and the strict package
+A bad current still cannot fall back to prior or legacy. A selected prior never
+counts as active G6 QUERY/SET_MODE_REFERENCE success evidence. A prior-only read cannot
+clear the local publication fence in ReconcileConfig (nor can a current read while
+the package fence remains set), and the strict package
 observer continues refusing missing-current authority.
 
 No classifier acceptance predicate, B1-R2 format, allocation, receipt, token,
@@ -64,7 +66,8 @@ Protocol2 STATUS retains its schema and status/fencing meaning. The existing
 96-character diagnostic distinguishes backend reference uncertainty, local
 Config fence, package observation failure, root0/root1/control, slot pairing,
 Config selection/validation, migration proof and shared receipts. The initial
-boot observation's literal survives scratch destruction and recovery observation.
+failed boot observation's literal survives scratch destruction and recovery observation.
+A fence arising after successful startup is labeled `package: runtime fence`.
 No private contents or arbitrary filename are copied into it.
 
 Additional informational bits in existing `recovery_flags` (not authority):
@@ -83,7 +86,7 @@ Additional informational bits in existing `recovery_flags` (not authority):
 |30|Package classification Unresolved|
 
 Bits24–26 are mutually exclusive; none means no successful selected load. They
-are informational even on healthy STATUS. Existing bit18 remains the combined
+are emitted only during refusal/recovery; healthy Normal STATUS retains flags0. Existing bit18 remains the combined
 backend/Config/package condition. Recovery still forces read-only status.
 
 ## Reproduction
@@ -96,7 +99,7 @@ That optional tuple has no reconstructed directory/payload correspondence and
 is only a classifier/startup seam probe; backend initialization remains a stub.
 No test image represents the actual physical filesystem. Test `seed` alone
 formats synthetic NOR; all production startup/recovery/STATUS paths assert
-unchanged raw NOR and zero program/erase calls. Thirty focused cases with the
+unchanged raw NOR and zero program/erase calls. Thirty-three focused cases with the
 historical witness and the existing58 boot families cover finite Normal/refusal.
 
 Future physical work needs one new exact UNAPPROVED Phase-A packet: install once,

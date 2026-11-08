@@ -481,7 +481,8 @@ Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
     if (loaded != LoadResult::Loaded) return SaveResult::Uncertain;
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
     // An observed predecessor cannot prove the outcome of current publication.
-    if (_config_selection != ConfigSelection::Current) return SaveResult::Uncertain;
+    if (_config_selection != ConfigSelection::Current || PackageStorageFence::MutationFenced())
+        return SaveResult::Uncertain;
 #endif
     _mutation_fenced = false;
     return SaveResult::Saved;
