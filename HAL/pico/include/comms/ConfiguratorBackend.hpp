@@ -46,6 +46,9 @@ class ConfiguratorBackend : public CommunicationBackend {
         _recovery_config_invalid = config_invalid;
         _recovery_storage_available = storage_available;
     }
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    void SetRecoveryUsbReady(bool ready) { _recovery_usb_ready = ready; }
+#endif
 
   private:
     size_t ReadPacket(uint8_t *buffer, size_t max_len);
@@ -111,6 +114,9 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool _recovery_service = false;
     bool _recovery_config_invalid = false;
     bool _recovery_storage_available = true;
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    bool _recovery_usb_ready = false;
+#endif
     bool _reference_unknown = false;
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     ProfileStoreRxDiagnostics _rx, _last_profile_rx;

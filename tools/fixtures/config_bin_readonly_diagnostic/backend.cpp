@@ -39,6 +39,11 @@ void scenario(const char *name,const test::Bytes &body,bool recovery,bool availa
     const auto before=nor;const auto generation=profile_store.Generation();const auto active=profile_store.ActiveId();
     InputState inputs{};ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
     if(recovery)backend.SetRecoveryState(true,available);
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    // This transport fixture begins after the separately tested bounded
+    // device-mount lifecycle has reported success.
+    backend.SetRecoveryUsbReady(true);
+#endif
     if(malformed) { auto bad=query();bad[0]='X';append(wire,config_bin_diagnostic::kCommand,bad); }
     for(unsigned i=0;i<request_count;++i)append(wire,config_bin_diagnostic::kCommand,query(42+i));
     // A subsequent ordinary Identity must survive frame/union ownership.
@@ -49,6 +54,23 @@ void scenario(const char *name,const test::Bytes &body,bool recovery,bool availa
     need(nor==before&&programs==0&&erases==0,"transport zero NOR mutation");no_handles();
     output(output_dir+"/"+name+".cobs",wire.output);
 }
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+void unavailable_transport_gate(const test::Bytes &body) {
+    using namespace test;fresh(body);VectorStream wire;
+    static Config config=Config_init_default;const auto before=nor;
+    InputState inputs{};ConfiguratorBackend backend(inputs,nullptr,0,config,wire);
+    backend.SetRecoveryState(true,true);
+    append(wire,config_bin_diagnostic::kCommand,query(77));
+    backend.SendReport();
+    need(wire.position==0&&wire.output.empty(),"USB-unready diagnostic must not consume or answer request");
+    need(nor==before&&programs==0&&erases==0,"USB-unready diagnostic must not mutate NOR");
+    backend.SetRecoveryUsbReady(true);
+    pump(backend,wire);
+    need(wire.position==wire.input.size()&&!wire.output.empty(),"USB-ready diagnostic resumes retained request");
+    need(nor==before&&programs==0&&erases==0,"USB-ready extraction remains readonly");no_handles();
+    output(output_dir+"/unavailable-transport-gate.cobs",wire.output);
+}
+#endif
 }
 int main(int argc,char **argv) { try {
     using namespace test;need(argc==2,"output directory");output_dir=argv[1];
@@ -57,6 +79,9 @@ int main(int argc,char **argv) { try {
     scenario("not-recovery",bytes,false,true,1);
     scenario("no-storage",bytes,true,false,2);
     scenario("malformed-then-valid",bytes,true,true,1,true);
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    unavailable_transport_gate(bytes);
+#endif
     // Negative raw-library calls prove mounted callbacks cannot reach the
     // actual NOR mutators. They are test controls, not diagnostic API options.
     fresh(bytes);const auto before=nor;

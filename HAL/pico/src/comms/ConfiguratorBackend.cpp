@@ -173,8 +173,9 @@ ConfiguratorBackend::ConfiguratorBackend(
       _out(_coordinated_stream),
       _base_stream(_coordinated_stream),
       _config(config) {
-
+#if !GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
     TinyUSBDevice.setID(0x2E8A, 0x1092);
+#endif
 }
 
 CommunicationBackendId ConfiguratorBackend::BackendId() {
@@ -187,6 +188,13 @@ static __attribute__((noinline)) bool SendProfileDelimiter(CoordinatedCdcStream 
     return writer.write(uint8_t{0}) == 1;
 }
 void ConfiguratorBackend::SendReport() {
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    // setup() only returns after the bounded device-level mount probe.  Keep
+    // the diagnostic transport closed if that probe failed; a later CDC-DTR
+    // transition must not turn an explicit USB-unavailable outcome into an
+    // extraction-capable session.
+    if (_recovery_service && !_recovery_usb_ready) return;
+#endif
     int data = ReadByte();
     if (data < 0) {
         if (data == _in.EOP) {

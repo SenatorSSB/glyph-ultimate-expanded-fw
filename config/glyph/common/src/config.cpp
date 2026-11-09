@@ -15,6 +15,7 @@
 #include "core/PackageOwnership.hpp"
 #include "core/BootDiagnostics.hpp"
 #include "core/RecoveryInitialization.hpp"
+#include "core/RecoveryUsbBringup.hpp"
 #include "core/RuntimeIdentityService.hpp"
 #include "core/state.hpp"
 #include "display/DisplayMode.hpp"
@@ -39,6 +40,8 @@
 
 #include <Adafruit_SSD1306.h>
 #include <config.pb.h>
+#include "arduino/Adafruit_TinyUSB_API.h"
+#include "arduino/Adafruit_USBD_Device.h"
 #include "hardware/sync.h"
 #include "pico/lock_core.h"
 #include "pico/mutex.h"
@@ -93,6 +96,21 @@ struct BootSnapshot {
 BootSnapshot boot_state;
 bool boot_display_ready=false;
 ConfiguratorBackend *recovery_configurator = nullptr;
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+enum class DiagnosticUsbState : uint8_t { Starting, Ready, Unavailable };
+DiagnosticUsbState diagnostic_usb_state = DiagnosticUsbState::Starting;
+
+class RecoveryTinyUsbLifecycle final : public recovery_usb::Lifecycle {
+  public:
+    bool mounted() const override { return TinyUSBDevice.mounted(); }
+    uint32_t now() const override { return millis(); }
+    // This is the pinned RP2040 port's mutex-aware task pass.  Do not call
+    // yield(): it additionally flushes CDC outside CoordinatedCdcStream's
+    // ownership discipline, and startup has no diagnostic TX to flush.
+    void service() override { TinyUSB_Device_Task(); }
+    void wait(uint32_t milliseconds) override { delay(milliseconds); }
+};
+#endif
 
 BootSnapshot read_boot_state() {
     mutex_enter_blocking(&boot_state_mutex);
@@ -135,9 +153,18 @@ void draw_recovery_page(BootOutcome outcome) {
     display.println("Operation refused");
     display.print("Boot stage: ");
     display.println(boot_diagnostics::StageCode(watchdog_hw->scratch[3]));
-    if(outcome==BootOutcome::RecoveryConfigurator)
+    if(outcome==BootOutcome::RecoveryConfigurator) {
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+        switch (diagnostic_usb_state) {
+            case DiagnosticUsbState::Starting: display.println("USB starting"); break;
+            case DiagnosticUsbState::Ready: display.println("Configurator ready"); break;
+            case DiagnosticUsbState::Unavailable: display.println("USB unavailable"); break;
+        }
+#else
         display.println(boot_diagnostics::RecoveryReady(watchdog_hw->scratch[3])
             ? "Configurator ready" : "Recovery starting");
+#endif
+    }
     display.display();
 }
 
@@ -203,6 +230,9 @@ void enter_recovery_configurator() {
     watchdog_hw->scratch[1] = 0;
     watchdog_hw->scratch[2] = 0;
     boot_diagnostics::Recovery(watchdog_hw->scratch[3],false);
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    diagnostic_usb_state = DiagnosticUsbState::Starting;
+#endif
     if(boot_display_ready)draw_recovery_page(BootOutcome::RecoveryConfigurator);
 #if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
     // The extraction candidate never loads/adopts Config or begins ProfileStore.
@@ -211,11 +241,21 @@ void enter_recovery_configurator() {
     const RecoveryInitialization recovery = initialize_recovery(
         persistence, profile_store, config, ConfigWriteCandidate(), validate_glyph_config);
 #endif
+#if !GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
     Serial.begin(115200);
+#endif
     recovery_configurator = new ConfiguratorBackend(
         inputs, input_sources, input_source_count, config, Serial);
     recovery_configurator->SetRecoveryState(recovery.config_invalid, recovery.storage_available);
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    RecoveryTinyUsbLifecycle usb_lifecycle;
+    const bool usb_ready = recovery_usb::WaitForMount(usb_lifecycle) == recovery_usb::Outcome::Mounted;
+    recovery_configurator->SetRecoveryUsbReady(usb_ready);
+    diagnostic_usb_state = usb_ready ? DiagnosticUsbState::Ready : DiagnosticUsbState::Unavailable;
+    boot_diagnostics::Recovery(watchdog_hw->scratch[3],usb_ready);
+#else
     boot_diagnostics::Recovery(watchdog_hw->scratch[3],true);
+#endif
     if(boot_display_ready)draw_recovery_page(BootOutcome::RecoveryConfigurator);
     publish_boot_state(BootOutcome::RecoveryConfigurator, boot_display_ready);
 }
