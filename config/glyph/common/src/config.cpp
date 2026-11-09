@@ -204,8 +204,13 @@ void enter_recovery_configurator() {
     watchdog_hw->scratch[2] = 0;
     boot_diagnostics::Recovery(watchdog_hw->scratch[3],false);
     if(boot_display_ready)draw_recovery_page(BootOutcome::RecoveryConfigurator);
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    // The extraction candidate never loads/adopts Config or begins ProfileStore.
+    const RecoveryInitialization recovery{true,persistence.IsAvailable()};
+#else
     const RecoveryInitialization recovery = initialize_recovery(
         persistence, profile_store, config, ConfigWriteCandidate(), validate_glyph_config);
+#endif
     Serial.begin(115200);
     recovery_configurator = new ConfiguratorBackend(
         inputs, input_sources, input_source_count, config, Serial);
@@ -327,6 +332,11 @@ void setup() {
     const bool display_ready = PrepareBootDisplay();
     boot_display_ready=display_ready;
     show_boot_stage(boot_diagnostics::Stage::DisplayAttemptDone);
+
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    enter_recovery_configurator();
+    return;
+#endif
 
     // Defaults are private until validated and a complete stored load succeeds.
     // Boolean open failure cannot prove absence on the selected filesystem API.

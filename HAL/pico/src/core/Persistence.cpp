@@ -16,6 +16,7 @@
  */
 
 #include "core/Persistence.hpp"
+#include "core/ConfigBinReadOnlyDiagnostic.hpp"
 #include "core/CompactConfigRecovery.hpp"
 #include "core/PackageStorageFence.hpp"
 #include "core/ConfigWireValidator.hpp"
@@ -241,6 +242,10 @@ bool select_config_filename(const char *current, const char *prior, const char *
 Persistence::Persistence() {
     PackageStorageFence::BeginMountAttempt();
     _configuration_ok = LittleFS.setConfig(LittleFSConfig(false));
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    // Install denial before the first mount, never after observing storage.
+    _configuration_ok = _configuration_ok && config_bin_diagnostic::InstallReadOnlyMount();
+#endif
     if (_configuration_ok) {
         _mounted = LittleFS.begin();
     }

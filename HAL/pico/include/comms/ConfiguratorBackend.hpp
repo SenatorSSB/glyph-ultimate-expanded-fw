@@ -20,6 +20,7 @@
 
 #include "comms/CoordinatedCdcStream.hpp"
 #include "core/ResourceDiagnostics.hpp"
+#include "core/ConfigBinReadOnlyDiagnostic.hpp"
 #if GLYPH_STRICT_HARDENING_CANDIDATE
 #include "core/ProfileStoreRxDiagnostics.hpp"
 #endif
@@ -85,6 +86,11 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool ReadStoreProfile();
     bool RespondProfileStore();
     bool HandleRuntimeIdentity();
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    bool HandleConfigBinReadOnlyDiagnostic();
+    bool WriteConfigBinDiagnosticPacket(const uint8_t *,size_t,uint32_t);
+    bool _config_bin_diagnostic_used = false;
+#endif
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     bool PrepareProfileMutation(const ProfileStoreRequest &request);
     bool TraceProfileDispatch(const ProfileStoreRequest &request);

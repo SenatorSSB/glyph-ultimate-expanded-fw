@@ -90,6 +90,40 @@ class ProfilePacketWriter final : public Print {
     CoordinatedCdcStream &_stream;
     uint32_t _start;
 };
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+// Candidate-only absolute operation budget. Existing production writer and
+// its retained frames are unchanged. No blocking TinyUSB write or yield().
+class DiagnosticPacketWriter final : public Print {
+  public:
+    DiagnosticPacketWriter(CoordinatedCdcStream &stream,uint32_t operation)
+        : _stream(stream),_packet(millis()),_operation(operation) {}
+    size_t write(uint8_t byte) override { return write(&byte,1); }
+    size_t write(const uint8_t *p,size_t n) override {
+        size_t sent=0;
+        while(sent<n&&!expired()) {
+            const size_t written=_stream.writeAvailable(p+sent,n-sent);
+            sent+=written;_stream.serviceTx();
+            if(!written)delay(1);
+        }
+        return sent;
+    }
+    bool finish() {
+        while(!expired()) {
+            _stream.serviceTx();
+            if(_stream.txSubmitted())return true;
+            delay(1);
+        }
+        return false;
+    }
+  private:
+    bool expired() const {
+        const uint32_t now=millis();
+        return uint32_t(now-_packet)>=2000u||uint32_t(now-_operation)>=config_bin_diagnostic::kDeadlineMs;
+    }
+    CoordinatedCdcStream &_stream;
+    uint32_t _packet,_operation;
+};
+#endif
 }
 
 bool ConfiguratorBackend::WriteProfilePacket(Command command, const uint8_t *bytes, size_t length, size_t *accepted, bool *flushRequested) {
@@ -162,6 +196,12 @@ void ConfiguratorBackend::SendReport() {
     }
 
     Command command = (Command)data;
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+    if(data==config_bin_diagnostic::kCommand) {
+        HandleConfigBinReadOnlyDiagnostic();
+        return;
+    }
+#endif
     if (_profile_tx_needs_sync && command != CMD_PROFILE_STORE) {
         // Legacy command responses share the physical stream. They must also
         // terminate a partial ProfileStore frame before using their encoder.
@@ -517,7 +557,18 @@ static size_t package_received_bytes;
 static ProfileStoreRequest request;
 static ProfileStoreResponse response;
 #endif
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+union DiagnosticFrameOwner {
+    uint8_t bytes[kFrameLimit];
+    config_bin_diagnostic::Workspace diagnostic;
+    DiagnosticFrameOwner() : bytes{} {}
+};
+static_assert(sizeof(DiagnosticFrameOwner)==kFrameLimit,"diagnostic enlarged existing frame owner");
+static DiagnosticFrameOwner diagnostic_frame_owner;
+#define frame diagnostic_frame_owner.bytes
+#else
 static uint8_t frame[kFrameLimit];
+#endif
 static ultimate_native::PayloadLease incoming_native;
 static bool profile_received;
 static bool dispatch_handled, dispatch_pending;
@@ -525,6 +576,41 @@ static ProfileStoreTransactionIdentity identity;
 static ProfileStore::TransactionResult result;
 static Persistence::LoadResult dispatch_loaded;
 }
+#if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
+__attribute__((noinline)) bool ConfiguratorBackend::WriteConfigBinDiagnosticPacket(const uint8_t *bytes,size_t count,uint32_t started) {
+    DiagnosticPacketWriter writer(_base_stream,started);
+    if(_profile_tx_needs_sync&&writer.write(uint8_t{0})!=1)return false;
+    packetio::COBSPrint packet(writer);
+    const bool encoded=packet.write(config_bin_diagnostic::kCommand)==1&&packet.write(bytes,count)==count&&packet.end();
+    const bool ok=encoded&&writer.finish();
+    _profile_tx_needs_sync=!ok;
+    return ok;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::HandleConfigBinReadOnlyDiagnostic() {
+    const size_t length=ReadPacket(frame,config_bin_diagnostic::kRequestBytes+1);
+    uint64_t nonce=0;
+    if(_packet_timed_out||!config_bin_diagnostic::DecodeRequest(frame,length,nonce))return false;
+    auto &workspace=*::new (&diagnostic_frame_owner.diagnostic) config_bin_diagnostic::Workspace{};
+    const auto send=[](void *context,const uint8_t *bytes,size_t count) {
+        return static_cast<ConfiguratorBackend *>(context)->WriteConfigBinDiagnosticPacket(
+            bytes,count,diagnostic_frame_owner.diagnostic.started);
+    };
+    bool sent=false;
+    if(!_recovery_service)sent=config_bin_diagnostic::Refuse(workspace,nonce,config_bin_diagnostic::Status::NotRecovery,send,this);
+    else if(_config_bin_diagnostic_used)sent=config_bin_diagnostic::Refuse(workspace,nonce,config_bin_diagnostic::Status::AlreadyUsed,send,this);
+    else {
+        // A complete trusted request consumes this boot's one operation before
+        // even checking mount availability. Failure never grants retry rights.
+        _config_bin_diagnostic_used=true;
+        if(!_recovery_storage_available)sent=config_bin_diagnostic::Refuse(workspace,nonce,config_bin_diagnostic::Status::StorageUnavailable,send,this);
+        else sent=config_bin_diagnostic::Extract(workspace,nonce,send,this);
+    }
+    workspace.~Workspace();
+    // ProfileStore's existing RX/TX frame regains ownership only after close.
+    ::new (&diagnostic_frame_owner.bytes) uint8_t[kFrameLimit]{};
+    return sent;
+}
+#endif
 static __attribute__((always_inline)) inline void LoadStoreCandidate() {dispatch_loaded=persistence.LoadConfigChecked(ConfigWriteCandidate());}
 static __attribute__((noinline)) bool InvalidProfileTicket(const ProfileStoreRequest &request) {
 #if GLYPH_STRICT_HARDENING_CANDIDATE
