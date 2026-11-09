@@ -45,11 +45,16 @@ Duplicate/nonminimal/unknown/future fields, invalid types/counts/nested messages
 callbacks and all compact/native/reference/package ownership fields reject.
 Fields205/209 are fixed-length32-byte protobuf bytes (wire type2), not the
 protobuf fixed32 scalar type (wire type5). Only embedded profile schema1/2/3 with complete existing structural/semantic
-rules is valid. Current source validators retain the profile rules. The historical path also
-rejects every BTN_UNSPECIFIED RGB target: the old Glyph adapter rejected even
-zero-color no-op mappings, while the successor permits those for format0. That
-later relaxation is excluded only from historical recognition. All later fields
-remain forbidden. The historical observer initializes
+rules is valid. `BTN_UNSPECIFIED = 0` is a generated enum member in the
+source-proven historical schema. Generic historical persistence validation does
+not traverse `rgb_configs[].button_colors[]`; it validates extents and the
+game/backend/custom/keyboard binding domains. Therefore historical-family
+recognition accepts canonical RGB mappings with `BTN_UNSPECIFIED`, including
+zero and nonzero colors, when every strict wire and source-supported semantic
+condition otherwise passes. The separate Glyph runtime adapter target-domain
+rule is not a persistence-writer rule and is not imported into this read-only
+recognizer; recognition never makes that Config active. All later fields remain
+forbidden. The historical observer initializes
 current scratch at generated defaults and never publishes it. Nested new scalars
 are zero and callbacks cleared, so old child sizing is identical; comparison
 skips only post201 root fields, including always-encoded fixed-length byte fields205/209.

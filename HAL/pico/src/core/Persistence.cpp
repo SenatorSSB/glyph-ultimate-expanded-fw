@@ -855,14 +855,18 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ReadPackageFacts(
 
 __attribute__((noinline)) bool Persistence::ValidateObservedPackageConfig(const Config &config) const {
     ConfigValidationError error;
-    if (!ValidateConfig(config,error)) return false;
-    // The precompact Glyph adapter required every RGB mapping to name a
-    // physical button. Its successor permits an unspecified zero-color no-op
-    // for format0; that later relaxation is not historical writer validity.
-    if (package_observation.historical_retained)
-        for (size_t i=0;i<config.rgb_configs_count;++i)
-            for (size_t j=0;j<config.rgb_configs[i].button_colors_count;++j)
-                if (config.rgb_configs[i].button_colors[j].button==BTN_UNSPECIFIED) return false;
+    // Current Config authority continues through the installed board validator.
+    // A retained precompact input is instead classified against the historical
+    // generic persistence contract; that contract deliberately excludes the
+    // later board/runtime RGB-adapter applicability rule.
+    if (package_observation.historical_retained) {
+        if (!validate_config_semantics(config,error)) return false;
+    } else if (!ValidateConfig(config,error)) return false;
+    // Historical retained-input recognition follows the generic source-proven
+    // persistence validator, not a board/runtime adapter target rule. In
+    // particular, BTN_UNSPECIFIED is a generated historical enum member; this
+    // observer never adopts the decoded historical Config as active runtime
+    // configuration.
     return true;
 }
 __attribute__((noinline)) Persistence::LoadResult Persistence::PrepareObservedPackageConfig() {

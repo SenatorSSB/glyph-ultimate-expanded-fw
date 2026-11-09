@@ -32,7 +32,12 @@ def main():
  historical=(fixture/'minimal.pb').read_bytes();assert hashlib.sha256(historical).hexdigest()=='191856fe3a60529575e2305f839327d6186e909f35b2acfa52b794132b077de2'
  # This exact independently old-descriptor-encoded body is the only supported
  # family. Multiple source-valid structures exercise nested old representation.
- positive=[historical]
+ # Historical generic persistence validation does not traverse RGB target
+ # applicability; the strict observer still enforces schema and enum domain.
+ rgb_unspecified_default=historical[:22]+msg(5,msg(1,b''))+historical[22:]
+ rgb_unspecified_colored=historical[:22]+msg(5,msg(1,field(2,1)))+historical[22:]
+ rgb_named_button=historical[:22]+msg(5,msg(1,field(1,1)))+historical[22:]
+ positive=[historical,rgb_unspecified_default,rgb_unspecified_colored,rgb_named_button]
  embedded=cfg.Config.FromString(historical);profile=embedded.ultimate_profiles.add(schema_version=1)
  for i in range(28):
   table=profile.tables.add(table_id=i)
@@ -40,8 +45,7 @@ def main():
  embedded.game_mode_configs[0].ultimate_profile_config=1
  positive.append(embedded.SerializeToString(deterministic=True))
  negative={
-  'historically-invalid-empty-rgb-target':historical[:22]+msg(5,msg(1,b''))+historical[22:],
-  'historically-invalid-colored-rgb-target':historical[:22]+msg(5,msg(1,field(2,1)))+historical[22:],
+  'invalid-rgb-button-enum':historical[:22]+msg(5,msg(1,field(1,61)))+historical[22:],
   'wrong-wire-type':bytes([historical[0]^1])+historical[1:],
   'duplicate-field':historical+field(6,1),
   'nonminimal-varint':b'\x8a\x00'+historical[1:],
