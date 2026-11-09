@@ -88,6 +88,7 @@ class ConfiguratorBackend : public CommunicationBackend {
     bool HandleRuntimeIdentity();
 #if GLYPH_CONFIG_BIN_READONLY_DIAGNOSTIC
     bool HandleConfigBinReadOnlyDiagnostic();
+    bool PrepareConfigBinReadOnlyDiagnostic();
     bool WriteConfigBinDiagnosticPacket(const uint8_t *,size_t,uint32_t);
     bool _config_bin_diagnostic_used = false;
 #endif

@@ -586,7 +586,7 @@ __attribute__((noinline)) bool ConfiguratorBackend::WriteConfigBinDiagnosticPack
     _profile_tx_needs_sync=!ok;
     return ok;
 }
-__attribute__((noinline)) bool ConfiguratorBackend::HandleConfigBinReadOnlyDiagnostic() {
+__attribute__((noinline)) bool ConfiguratorBackend::PrepareConfigBinReadOnlyDiagnostic() {
     const size_t length=ReadPacket(frame,config_bin_diagnostic::kRequestBytes+1);
     uint64_t nonce=0;
     if(_packet_timed_out||!config_bin_diagnostic::DecodeRequest(frame,length,nonce))return false;
@@ -595,16 +595,23 @@ __attribute__((noinline)) bool ConfiguratorBackend::HandleConfigBinReadOnlyDiagn
         return static_cast<ConfiguratorBackend *>(context)->WriteConfigBinDiagnosticPacket(
             bytes,count,diagnostic_frame_owner.diagnostic.started);
     };
-    bool sent=false;
-    if(!_recovery_service)sent=config_bin_diagnostic::Refuse(workspace,nonce,config_bin_diagnostic::Status::NotRecovery,send,this);
-    else if(_config_bin_diagnostic_used)sent=config_bin_diagnostic::Refuse(workspace,nonce,config_bin_diagnostic::Status::AlreadyUsed,send,this);
+    auto status=config_bin_diagnostic::Status::Ok;
+    if(!_recovery_service)status=config_bin_diagnostic::Status::NotRecovery;
+    else if(_config_bin_diagnostic_used)status=config_bin_diagnostic::Status::AlreadyUsed;
     else {
         // A complete trusted request consumes this boot's one operation before
         // even checking mount availability. Failure never grants retry rights.
         _config_bin_diagnostic_used=true;
-        if(!_recovery_storage_available)sent=config_bin_diagnostic::Refuse(workspace,nonce,config_bin_diagnostic::Status::StorageUnavailable,send,this);
-        else sent=config_bin_diagnostic::Extract(workspace,nonce,send,this);
+        if(!_recovery_storage_available)status=config_bin_diagnostic::Status::StorageUnavailable;
     }
+    config_bin_diagnostic::Prepare(workspace,nonce,status,send,this);
+    return true;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::HandleConfigBinReadOnlyDiagnostic() {
+    // Request/constructor scratch returns before any filesystem primitive.
+    if(!PrepareConfigBinReadOnlyDiagnostic())return false;
+    auto &workspace=diagnostic_frame_owner.diagnostic;
+    const bool sent=config_bin_diagnostic::Extract(workspace);
     workspace.~Workspace();
     // ProfileStore's existing RX/TX frame regains ownership only after close.
     ::new (&diagnostic_frame_owner.bytes) uint8_t[kFrameLimit]{};

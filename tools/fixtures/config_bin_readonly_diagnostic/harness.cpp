@@ -67,7 +67,8 @@ void run(const std::string &name,const Bytes *bytes,size_t cutoff=SIZE_MAX,size_
     read_calls=size_calls=close_calls=0;fail_read=read_fault;fail_size=size_fault;fail_close=close_fault;tick=0;tick_step=clock_step;
     config_bin_diagnostic::Workspace w;Output out;out.cutoff=cutoff;
     allocations=0;monitor=true;
-    const bool result=config_bin_diagnostic::Extract(w,0x0102030405060708ULL,send,&out);
+    config_bin_diagnostic::Prepare(w,0x0102030405060708ULL,config_bin_diagnostic::Status::Ok,send,&out);
+    const bool result=config_bin_diagnostic::Extract(w);
     monitor=false;
     need(result==(cutoff==SIZE_MAX),"TX termination");
     need(!w.opened&&!fs.mlist,"all handles released");

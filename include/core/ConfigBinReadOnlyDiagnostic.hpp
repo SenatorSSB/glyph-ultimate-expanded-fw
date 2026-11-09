@@ -35,13 +35,16 @@ struct Workspace {
     uint8_t wire[24+kChunkBytes]{}, header[8]{};
     uint32_t file_size=0, sent=0, started=0, body_crc=~0u;
     uint64_t nonce=0;
+    Send send=nullptr;
+    void *context=nullptr;
+    uint32_t count=0;
     Status status=Status::Ok;
     uint8_t header_count=0;
     bool opened=false, complete=false, closed=false;
 };
 bool InstallReadOnlyMount();
 bool DecodeRequest(const uint8_t *, size_t, uint64_t &);
-bool Refuse(Workspace &, uint64_t, Status, Send, void *);
-bool Extract(Workspace &, uint64_t, Send, void *);
+void Prepare(Workspace &, uint64_t, Status, Send, void *);
+bool Extract(Workspace &);
 }
 #endif

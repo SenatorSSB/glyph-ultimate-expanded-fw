@@ -49,9 +49,9 @@ void Common(Workspace &w,uint8_t type) {
 }
 bool Expired(const Workspace &w) { return uint32_t(millis()-w.started)>=kDeadlineMs; }
 // SHA compression is a sibling of filesystem work, never its retained caller.
-__attribute__((noinline)) void HashChunk(Workspace &w,size_t n) {
-    const auto *p=w.wire+24;w.full_hash.Update(p,n);
-    for(size_t i=0;i<n;++i) {
+__attribute__((noinline)) void HashChunk(Workspace &w) {
+    const auto *p=w.wire+24;w.full_hash.Update(p,w.count);
+    for(size_t i=0;i<w.count;++i) {
         if(w.sent+i<8) { w.header[w.sent+i]=p[i];++w.header_count; }
         else {
             w.body_hash.Update(p+i,1);w.body_crc^=p[i];
@@ -59,7 +59,7 @@ __attribute__((noinline)) void HashChunk(Workspace &w,size_t n) {
         }
     }
 }
-__attribute__((noinline)) bool Open(Workspace &w) {
+__attribute__((always_inline)) inline bool Open(Workspace &w) {
     w.fs=mount();
     if(!w.fs||!w.fs->cfg||w.fs->mlist||w.fs->cfg->prog!=DenyProgram||w.fs->cfg->erase!=DenyErase||w.fs->cfg->cache_size!=sizeof(w.file_cache)) {
         w.status=Status::StorageUnavailable;return false;
@@ -74,12 +74,12 @@ __attribute__((noinline)) bool Open(Workspace &w) {
     if(w.file_size>kMaxFileBytes) { w.status=Status::SizeLimit;return false; }
     return true;
 }
-__attribute__((noinline)) void Close(Workspace &w) {
+__attribute__((always_inline)) inline void Close(Workspace &w) {
     if(!w.opened)return;
     const int rc=lfs_file_close(w.fs,&w.file);w.opened=false;w.closed=rc==0;
     if(rc<0)w.status=Status::CloseFailed;
 }
-__attribute__((noinline)) bool Final(Workspace &w,Send send,void *context) {
+__attribute__((always_inline)) inline bool Final(Workspace &w) {
     Common(w,3);
     Put32(w.wire+16,w.file_size);Put32(w.wire+20,w.sent);
     if(w.header_count==8) { Put32(w.wire+24,Get32(w.header));Put32(w.wire+28,Get32(w.header+4)); }
@@ -94,7 +94,7 @@ __attribute__((noinline)) bool Final(Workspace &w,Send send,void *context) {
     if(w.closed)w.wire[41]|=16;
     std::memcpy(w.wire+44,w.header,8);
     if(w.complete&&w.closed) { w.full_hash.Final(w.wire+52);w.body_hash.Final(w.wire+84); }
-    return send(context,w.wire,kFinalBytes);
+    return w.send(w.context,w.wire,kFinalBytes);
 }
 }
 bool InstallReadOnlyMount() {
@@ -115,30 +115,30 @@ bool DecodeRequest(const uint8_t *p,size_t n,uint64_t &nonce) {
     nonce=0;for(unsigned i=0;i<8;++i)nonce|=uint64_t(p[8+i])<<(8*i);
     return nonce!=0;
 }
-bool Refuse(Workspace &w,uint64_t nonce,Status status,Send send,void *context) {
-    w.nonce=nonce;w.status=status;w.started=millis();return Final(w,send,context);
+__attribute__((noinline)) void Prepare(Workspace &w,uint64_t nonce,Status status,Send send,void *context) {
+    w.nonce=nonce;w.status=status;w.send=send;w.context=context;w.started=millis();
 }
-__attribute__((noinline)) bool Extract(Workspace &w,uint64_t nonce,Send send,void *context) {
-    w.nonce=nonce;w.started=millis();
-    if(!Open(w)) { Close(w);return Final(w,send,context); }
+__attribute__((noinline)) bool Extract(Workspace &w) {
+    if(w.status!=Status::Ok)return Final(w);
+    if(!Open(w)) { Close(w);return Final(w); }
     Common(w,1);Put32(w.wire+16,w.file_size);Put32(w.wire+20,kChunkBytes);
-    if(!send(context,w.wire,24)) { Close(w);return false; }
+    if(!w.send(w.context,w.wire,24)) { Close(w);return false; }
     while(w.sent<w.file_size) {
         if(Expired(w)) { w.status=Status::Deadline;break; }
         Common(w,2);Put32(w.wire+16,w.sent);
-        const size_t count=w.file_size-w.sent<kChunkBytes?w.file_size-w.sent:kChunkBytes;
-        Put16(w.wire+20,uint16_t(count));
-        if(lfs_file_read(w.fs,&w.file,w.wire+24,count)!=static_cast<lfs_ssize_t>(count)) { w.status=Status::ReadFailed;break; }
-        HashChunk(w,count);
-        if(!send(context,w.wire,24+count)) { Close(w);return false; }
-        w.sent+=count;
+        w.count=w.file_size-w.sent<kChunkBytes?w.file_size-w.sent:kChunkBytes;
+        Put16(w.wire+20,uint16_t(w.count));
+        if(lfs_file_read(w.fs,&w.file,w.wire+24,w.count)!=static_cast<lfs_ssize_t>(w.count)) { w.status=Status::ReadFailed;break; }
+        HashChunk(w);
+        if(!w.send(w.context,w.wire,24+w.count)) { Close(w);return false; }
+        w.sent+=w.count;
     }
     if(w.status==Status::Ok) {
         if(Expired(w))w.status=Status::Deadline;
         else if(lfs_file_read(w.fs,&w.file,w.wire,1)!=0||lfs_file_size(w.fs,&w.file)!=static_cast<lfs_soff_t>(w.file_size))w.status=Status::ReadFailed;
         else w.complete=true;
     }
-    Close(w);return Final(w,send,context);
+    Close(w);return Final(w);
 }
 }
 #endif
