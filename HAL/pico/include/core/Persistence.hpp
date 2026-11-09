@@ -60,6 +60,9 @@ class Persistence {
     Config &PackageConfigScratch(); // borrowed loaded_candidate, classifier lease only
     LoadResult ObservePackageConfig(PackageConfigFile, Config &, PackageConfigFacts &, bool &source_valid,
                                    size_t maximum = 0);
+    // Preservation-only exact old writer observation. No Config output, load
+    // selection, fallback, generation or package authority is produced.
+    LoadResult ObserveHistoricalRetainedConfig(PackageConfigFacts &, bool &source_valid);
     bool PreparePackageConfig(Config &, const PackageConfigFacts &baseline,
                                    const PackageConfigFacts &expected,
                                    const void *package_owner, uint64_t token);
@@ -91,6 +94,7 @@ class Persistence {
     static const char *PackageFilename(PackageConfigFile);
     LoadResult ReadPackageFacts(const char *, size_t maximum, PackageConfigFacts &);
     bool ValidateObservedPackageConfig(const Config &) const;
+    LoadResult RunObservedPackageConfig();
     LoadResult PrepareObservedPackageConfig();
     LoadResult InitializeObservedPackageConfig();
     void DecodeObservedPackageConfig();

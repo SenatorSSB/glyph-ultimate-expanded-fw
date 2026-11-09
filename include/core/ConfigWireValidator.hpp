@@ -21,12 +21,14 @@ struct Workspace {
     uint16_t field, packed_count;
     uint8_t depth, varint_count, utf8_left;
     Phase phase;
-    bool failed;
+    bool failed, historical_retained;
 };
 // Begin/Consume/Finish permit arbitrary chunk boundaries and retain all parser
 // state in this caller-owned workspace. Alias it to an approved existing owner;
 // do not add a new static instance. Source graph depth is exactly four frames.
 bool Begin(Workspace &, size_t body_bytes);
+// Exact precompact writer 6b73a7c schema only; never current Config authority.
+bool BeginHistoricalRetained(Workspace &, size_t body_bytes);
 bool Consume(Workspace &, const uint8_t *bytes, size_t count);
 bool Finish(Workspace &);
 Result ValidateSpan(Workspace &, const uint8_t *bytes, size_t count);
@@ -36,5 +38,5 @@ Result ValidateSpan(Workspace &, const uint8_t *bytes, size_t count);
 // cannot overlap storage I/O. Borrowed chunk capacity must be in 1..256.
 using Reader = bool (*)(void *context, size_t offset, uint8_t *into, size_t count);
 Result ValidateReader(Workspace &, Reader, void *context, size_t body_bytes,
-                      uint8_t *borrowed_chunk, size_t chunk_capacity);
+                      uint8_t *borrowed_chunk, size_t chunk_capacity, bool historical_retained = false);
 } // namespace config_wire

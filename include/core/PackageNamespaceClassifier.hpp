@@ -41,6 +41,9 @@ class NamespaceReader {
     virtual bool Read(const char *path, size_t offset, uint8_t *out, size_t bytes) = 0;
     // Enforces exact8-byte wrapper/body CRC, canonical roundtrip and maximum.
     virtual bool Config(const char *path, uint32_t maximum, ConfigFacts &) = 0;
+    // Exact supported historical /config.bin only. Boolean recognition grants
+    // no Config facts/ownership; adapters without proof must reject.
+    virtual bool HistoricalRetainedConfig() { return false; }
     virtual bool Row(const char *config_path, size_t index, RowFacts &) = 0;
     virtual bool Rgb(const char *config_path, size_t index, uint8_t sha[32]) = 0;
     // Source Prepare/ContextMatches + exact row/RGB semantic predicates.

@@ -98,6 +98,7 @@ struct PackageObservationState {
     size_t maximum = 0;
     bool decoded = false;
     bool live = false;
+    bool historical_retained = false;
 } package_observation{};
 // Borrowed scalar inputs span only the synchronous package save phases.
 // Both fact objects live in the existing publication owner until completion.
@@ -159,7 +160,7 @@ __attribute__((noinline)) config_wire::Result ValidatePackageConfigWire(CheckedS
             auto &source = *static_cast<CheckedStorageFile *>(context);
             return source.seek(Persistence::config_offset + offset) &&
                    source.read(into, count) == static_cast<int>(count);
-        }, &file, bytes, chunk, sizeof(chunk));
+        }, &file, bytes, chunk, sizeof(chunk), package_observation.historical_retained);
 }
 
 #endif
@@ -960,6 +961,9 @@ void NextObservedEncodingField(ObservedEncodingFrame &frame) {
 }
 __attribute__((noinline)) bool EncodeObservedField(pb_ostream_t &out,size_t &depth) {
     auto &frame=read_workspace.encoding[depth];auto &field=frame.field;
+    if(package_observation.historical_retained && depth==0 && field.tag>201){
+        NextObservedEncodingField(frame);return true;
+    }
     if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER||PB_LTYPE(field.type)==PB_LTYPE_EXTENSION)return false;
     if(PB_LTYPE_IS_SUBMSG(field.type)) {
         if(PB_ATYPE(field.type)!=PB_ATYPE_STATIC||PB_LTYPE(field.type)!=PB_LTYPE_SUBMESSAGE||
@@ -1024,7 +1028,11 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPac
     if (io_failed||!closed) { facts = {}; return LoadResult::StorageFailure; }
     if (!canonical) { facts = {}; return LoadResult::Rejected; }
     *state.source_valid = ValidateObservedPackageConfig(loaded_candidate);
-    *state.into = loaded_candidate;
+    // Historical grammar forbids all new nested fields. They therefore remain
+    // generated zero defaults: nested sizing/encoding is exactly the old writer
+    // (new nested fields are omitted scalars or cleared null callbacks). Only
+    // top-level fixed32 205/209 needed explicit exclusion above.
+    if (!state.historical_retained) *state.into = loaded_candidate;
     return LoadResult::Loaded;
 }
 __attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
@@ -1034,6 +1042,17 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageCon
     PackageObservationReset observation_reset;
     if (!maximum) maximum = selection == PackageConfigFile::Current || selection == PackageConfigFile::Staged ? 8191 : 65536;
     package_observation = {&into, &facts, &source_valid, PackageFilename(selection), maximum, false, true};
+    return RunObservedPackageConfig();
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::ObserveHistoricalRetainedConfig(
+    PackageConfigFacts &facts, bool &source_valid) {
+    facts = {}; source_valid = false;
+    if (package_observation.live||package_save.persistence) return LoadResult::StorageFailure;
+    PackageObservationReset observation_reset;
+    package_observation = {nullptr, &facts, &source_valid, legacy_config_filename, 65536, false, true, true};
+    return RunObservedPackageConfig();
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::RunObservedPackageConfig() {
     const auto prepared = PrepareObservedPackageConfig();
     if (prepared != LoadResult::Loaded) return prepared;
     ResetReadWorkspace(); ReadWorkspaceReset reset;

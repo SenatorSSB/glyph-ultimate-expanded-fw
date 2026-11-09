@@ -54,6 +54,15 @@ class Classifier {
   for(size_t o=0;o<n;){size_t take=n-o;if(take>sizeof(w.read_chunk))take=sizeof(w.read_chunk);if(!reader.Read(path,o,w.read_chunk,take))return false;w.hash.Update(w.read_chunk,take);o+=take;}
   w.hash.Final(out);return true;
  }
+ __attribute__((noinline)) bool HistoricalRetained(){
+  if(reader.ObservationFailed())return false;
+  // Current compact authority must independently pass. Historical bytes supply
+  // no facts and cannot repair a missing/invalid current or another predicate.
+  w.scan_config={};
+  const bool current=reader.Config(kCurrent,8191,w.scan_config)&&w.scan_config.source_valid;
+  w.scan_config={};
+  return current&&!reader.ObservationFailed()&&reader.HistoricalRetainedConfig();
+ }
  bool Scan(){
   if(!reader.MountedAndConfigured())return Fail("mount/configuration uncertainty");
   // Read every byte before considering future-format markers; unreadable wins.
@@ -67,7 +76,9 @@ class Classifier {
    auto *p=owners.root0;const auto n=w.object.bytes;const size_t head=n<320?n:320;
    if(head&&!reader.Read(w.object.path,0,p,head))return false;
    if(ConfigPath(w.object.path)){
-    w.scan_config={};if(!reader.Config(w.object.path,65536,w.scan_config)){Corrupt(Is(w.object.path,kCurrent)?"current Config invalid":Is(w.object.path,kPrior)?"prior Config invalid":Is(w.object.path,"/config.bin")?"config.bin: retained input invalid":"retained migration/staged Config invalid");continue;}
+    w.scan_config={};if(!reader.Config(w.object.path,65536,w.scan_config)){
+     if(Is(w.object.path,"/config.bin")&&HistoricalRetained())continue;
+     Corrupt(Is(w.object.path,kCurrent)?"current Config invalid":Is(w.object.path,kPrior)?"prior Config invalid":Is(w.object.path,"/config.bin")?"config.bin: retained input invalid":"retained migration/staged Config invalid");continue;}
     const auto &c=w.scan_config;w.unsupported|=c.root_format>3||c.managed_format>1||c.newer_row_marker;
     w.managed_observed|=Marked(c);
     if(Marked(c)&&!Is(w.object.path,kCurrent)&&!Is(w.object.path,kPrior)&&!Is(w.object.path,"/config-v2.tmp"))Corrupt("retained Config ownership marker");

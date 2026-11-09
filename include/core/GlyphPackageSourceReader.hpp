@@ -21,6 +21,7 @@ class GlyphPackageSourceReader final : public package_storage::NamespaceReader {
     package_storage::Probe Extent(const char *, size_t &) override;
     bool Read(const char *, size_t, uint8_t *, size_t) override;
     bool Config(const char *, uint32_t, package_storage::ConfigFacts &) override;
+    bool HistoricalRetainedConfig() override;
     bool Row(const char *, size_t, package_storage::RowFacts &) override;
     bool Rgb(const char *, size_t, uint8_t[32]) override;
     bool Native(const char *, size_t, const uint8_t *, size_t) override;

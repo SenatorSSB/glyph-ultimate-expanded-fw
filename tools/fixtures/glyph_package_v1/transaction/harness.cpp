@@ -152,8 +152,13 @@ if(!std::strcmp(argv[1],"wire-requests")){
  no_handles();return 0;
 }
 
- if(!std::strcmp(argv[1],"observe-configs")||!std::strcmp(argv[1],"observe-configs-faults")||!std::strcmp(argv[1],"observe-configs-facts")){
-  const bool inject=!std::strcmp(argv[1],"observe-configs-faults");
+ if(!std::strcmp(argv[1],"observe-historical")||!std::strcmp(argv[1],"observe-historical-faults")||!std::strcmp(argv[1],"observe-configs")||!std::strcmp(argv[1],"observe-configs-faults")||!std::strcmp(argv[1],"observe-configs-facts")){
+  const bool historical=!std::strcmp(argv[1],"observe-historical")||!std::strcmp(argv[1],"observe-historical-faults");
+  const bool inject=!std::strcmp(argv[1],"observe-configs-faults")||!std::strcmp(argv[1],"observe-historical-faults");
+  const auto observe=[&](Persistence::PackageConfigFacts &facts,bool &valid){
+   return historical?persistence.ObserveHistoricalRetainedConfig(facts,valid):
+    persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),facts,valid,65536);
+  };
   // Synthetic NOR setup only; production observation itself must never write.
   need(lfs_format(&fs,&cfg)==0&&lfs_mount(&fs,&cfg)==0,"observation fixture mount");mounted=true;
   need(persistence.SetValidator(validate_glyph_config),"source Config validator");
@@ -162,10 +167,10 @@ if(!std::strcmp(argv[1],"wire-requests")){
    need(hex.size()%2==0,"Config hex extent");Bytes body(hex.size()/2);
    for(size_t i=0;i<body.size();++i){const auto pair=hex.substr(2*i,2);body[i]=std::strtoul(pair.c_str(),nullptr,16);}
    Bytes wrapped;append_word(wrapped,body.size());append_word(wrapped,package_storage::Crc32(body.data(),body.size()));wrapped.insert(wrapped.end(),body.begin(),body.end());
-   lfs_file_t seed{};need(lfs_file_open(&fs,&seed,"/config-v2.bin",LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"Config seed open");
+   lfs_file_t seed{};need(lfs_file_open(&fs,&seed,historical?"/config.bin":"/config-v2.bin",LFS_O_WRONLY|LFS_O_CREAT|LFS_O_TRUNC)==0,"Config seed open");
    need(lfs_file_write(&fs,&seed,wrapped.data(),wrapped.size())==int(wrapped.size()),"Config seed write");need(lfs_file_close(&fs,&seed)==0,"Config seed close");
    const auto before=nor;const auto p=programs,e=erases;Persistence::PackageConfigFacts facts{};bool source=false;
-   const auto result=persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),facts,source,65536);
+   const auto result=observe(facts,source);
    no_handles();need(nor==before&&programs==p&&erases==e,"Config observation write-free");
    if(result==Persistence::LoadResult::Loaded){
     need(facts.bytes==body.size()&&facts.crc==package_storage::Crc32(body.data(),body.size()),"exact observed extent/CRC");
@@ -174,20 +179,20 @@ if(!std::strcmp(argv[1],"wire-requests")){
    if(inject&&result==Persistence::LoadResult::Loaded){
     // Enumerate this actual observation's read/seek seams, then independently
     // fail each one before/after. No fault selection changes production code.
-    static size_t seen,fail_at;seen=0;fail_at=SIZE_MAX;
+    static size_t seen,fail_at;static bool historical_faults;historical_faults=historical;seen=0;fail_at=SIZE_MAX;
     const auto fault=[](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase,const char*){
-     if(op!=CheckedStorage::Operation::Read&&op!=CheckedStorage::Operation::Seek)return CheckedStorage::Fault::None;
+     if(!historical_faults&&op!=CheckedStorage::Operation::Read&&op!=CheckedStorage::Operation::Seek)return CheckedStorage::Fault::None;
      const auto index=seen++;return index==fail_at?CheckedStorage::Fault::Fail:CheckedStorage::Fault::None;
     };
     CheckedStorage::SetFaultHook(fault);
     Persistence::PackageConfigFacts observed{};bool valid=false;
-    need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::Loaded,"fault census positive");
+    need(observe(observed,valid)==Persistence::LoadResult::Loaded,"fault census positive");
     const auto seams=seen;
     const size_t count=body.size()>8191?32:seams;
     for(size_t selected=0;selected<count;++selected){
      const size_t i=count==seams?selected:selected*(seams-1)/(count-1);
      seen=0;fail_at=i;
-     need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::StorageFailure,"Config read/seek failure is storage uncertainty");
+     need(observe(observed,valid)==Persistence::LoadResult::StorageFailure,"Config read/seek failure is storage uncertainty");
      need(seen>i,"Config fault reached");no_handles();need(nor==before&&programs==p&&erases==e,"faulted Config observation write-free");
     }
     CheckedStorage::SetFaultHook(nullptr);
@@ -209,16 +214,20 @@ if(!std::strcmp(argv[1],"wire-requests")){
      return CheckedStorage::Fault::None;
     };
     CheckedStorage::SetFaultHook(short_read);
-    need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536)==Persistence::LoadResult::Loaded,"short-read census positive");
+    need(observe(observed,valid)==Persistence::LoadResult::Loaded,"short-read census positive");
     const auto read_seams=reads_seen;const size_t short_count=body.size()>8191?32:read_seams;
     for(size_t selected=0;selected<short_count;++selected){
      reads_seen=0;short_at=short_count==read_seams?selected:selected*(read_seams-1)/(short_count-1);
-     const auto outcome=persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current,persistence.PackageConfigScratch(),observed,valid,65536);
+     const auto outcome=observe(observed,valid);
      need(outcome==Persistence::LoadResult::Loaded||outcome==Persistence::LoadResult::StorageFailure,"short read never becomes canonical rejection");
      need(reads_seen>short_at,"short-read seam reached");no_handles();need(nor==before&&programs==p&&erases==e,"short-read observation write-free");
     }
     CheckedStorage::SetFaultHook(nullptr);
     std::cerr<<"short-read fault seams "<<short_count<<" of "<<read_seams<<" bytes "<<body.size()<<"\n";
+   }
+   if(historical&&result==Persistence::LoadResult::Loaded){
+    Persistence::PackageConfigFacts current{};bool valid=false;
+    need(persistence.ObservePackageConfig(Persistence::PackageConfigFile::Legacy,persistence.PackageConfigScratch(),current,valid,65536)==Persistence::LoadResult::Rejected,"historical recognition cannot relax current observer");
    }
    if(!std::strcmp(argv[1],"observe-configs-facts")){
     std::cout<<unsigned(result)<<" "<<source;
@@ -227,7 +236,7 @@ if(!std::strcmp(argv[1],"wire-requests")){
      for(size_t i=0;i<error.length;++i){const auto byte=static_cast<unsigned char>(error.message[i]);std::cout<<hexchars[byte>>4]<<hexchars[byte&15];}
     }
     std::cout<<"\n";
-   }else std::cout<<(result==Persistence::LoadResult::Loaded?0:1)<<"\n";
+   }else std::cout<<(result==Persistence::LoadResult::Loaded&&(!historical||source)?0:1)<<"\n";
   }
   shutdown();return 0;
  }
@@ -240,6 +249,26 @@ if(!std::strcmp(argv[1],"wire-requests")){
 #if defined(GLYPH_BOOT_PROBE)
  if(!std::strcmp(argv[1],"boot"))return boot_probe::run(argv[3]);
 #endif
+if(!std::strcmp(argv[1],"historical-classifier-faults")){
+ const auto before=nor;const auto p=programs,e=erases;
+ static size_t seen,selected;seen=0;selected=SIZE_MAX;
+ const auto fault=[](CheckedStorage::Kind,CheckedStorage::Operation,CheckedStorage::Phase,const char *path){
+  if(!path||(std::strcmp(path,"/config.bin")&&std::strcmp(path,"/config-v2.bin")&&std::strcmp(path,"config.bin")&&std::strcmp(path,"config-v2.bin")))return CheckedStorage::Fault::None;
+  return seen++==selected?CheckedStorage::Fault::Fail:CheckedStorage::Fault::None;
+ };
+ const auto classify=[&](bool healthy){
+  BeginClassifierOwner();auto &reader=PackageReader(profile_store,persistence);
+  package_storage::ClassifyNamespaceInto(reader,PackageOwners());
+  need(PackageWorkspace().classification.write_fenced!=healthy,"historical classifier fault preserves fence");
+  if(!healthy)need(reader.ObservationFailed(),"historical classifier fault sticky uncertainty");
+  EndClassifierOwner();no_handles();need(nor==before&&programs==p&&erases==e,"classifier fault observation write-free");
+ };
+ CheckedStorage::SetFaultHook(fault);classify(true);const auto seams=seen;
+ for(size_t i=0;i<seams;++i){seen=0;selected=i;classify(false);need(seen>i,"historical classifier fault reached");}
+ CheckedStorage::SetFaultHook(nullptr);
+ std::ofstream out(path("historical-classifier-faults.json"));out<<"{\"seams\":"<<seams<<",\"unchanged\":true,\"programs\":0,\"erases\":0}\n";
+ shutdown();return 0;
+}
 // Real package transport over the existing mounted NOR fixture.
 // Uses real ConfiguratorBackend, PacketIO, Persistence, ProfileStore and mounted NOR.
 if(!std::strcmp(argv[1],"transport")||!std::strcmp(argv[1],"recovery-transport")||!std::strcmp(argv[1],"runtime-transport")||!std::strcmp(argv[1],"local-fence-transport")||!std::strcmp(argv[1],"status-read-failure-transport")){

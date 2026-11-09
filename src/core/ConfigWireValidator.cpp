@@ -40,6 +40,11 @@ bool Key(Workspace &w) {
     uint8_t local = 0;
     while (local < message.count && fields[message.first + local].tag < tag) ++local;
     if (!tag || local == message.count || fields[message.first + local].tag != tag) return Reject(w);
+    // Exact old schema/options are retained under historical_config/. The only
+    // changed messages are Config, GameModeConfig and UltimateProfile. Every
+    // other field/type/bound is byte-for-byte inventory-equivalent.
+    if (w.historical_retained && ((frame.message == config_message && tag > 201) ||
+        (frame.message == 10 && tag > 203) || (frame.message == 16 && tag > 7))) return Reject(w);
     w.field = message.first + local;
     const auto &field = fields[w.field];
     if ((field.flags & kCallback) || tag < frame.previous_tag) return Reject(w);
@@ -139,6 +144,12 @@ bool Begin(Workspace &w, size_t size) {
     w.frames[0] = {uint32_t(size), messages[config_message].required, 0, 0, config_message};
     return true;
 }
+bool BeginHistoricalRetained(Workspace &w, size_t size) {
+    if (!Begin(w, size)) return false;
+    w.historical_retained = true;
+    w.frames[0].missing = 0; // old Config has no fixed32 fields 205/209
+    return true;
+}
 bool Consume(Workspace &w, const uint8_t *bytes, size_t count) {
     if (w.failed || (!bytes && count) || count > w.length - w.position) return Reject(w);
     while (count--) {
@@ -165,8 +176,9 @@ Result ValidateSpan(Workspace &w, const uint8_t *bytes, size_t size) {
     return Begin(w, size) && Consume(w, bytes, size) && Finish(w) ? Result::Valid : Result::Rejected;
 }
 __attribute__((noinline)) Result ValidateReader(Workspace &w, Reader read, void *context, size_t size,
-                                               uint8_t *chunk, size_t capacity) {
-    if (!read || !chunk || !capacity || capacity > 256 || !Begin(w, size)) return Result::Rejected;
+                                               uint8_t *chunk, size_t capacity, bool historical) {
+    if (!read || !chunk || !capacity || capacity > 256 ||
+        !(historical ? BeginHistoricalRetained(w, size) : Begin(w, size))) return Result::Rejected;
     while (w.position < w.length) {
         const size_t count = w.length - w.position < capacity ? w.length - w.position : capacity;
         if (!read(context, w.position, chunk, count)) { w.failed = true; return Result::StorageFailure; }

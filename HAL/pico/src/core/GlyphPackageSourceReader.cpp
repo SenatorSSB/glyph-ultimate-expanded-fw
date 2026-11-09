@@ -278,6 +278,12 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Config(const char *path
     // Source-invalid canonical objects still expose positive future markers.
     return ExtractConfigFacts(_persistence.PackageConfigScratch(),facts);
 }
+__attribute__((noinline)) bool GlyphPackageSourceReader::HistoricalRetainedConfig(){
+    _config_valid=false;
+    const auto result=_persistence.ObserveHistoricalRetainedConfig(_config_facts,_config_valid);
+    if(result==Persistence::LoadResult::StorageFailure)_failed=true;
+    return result==Persistence::LoadResult::Loaded&&_config_valid&&!_failed;
+}
 __attribute__((noinline)) bool GlyphPackageSourceReader::Row(const char *path,size_t index,package_storage::RowFacts &facts){
     std::memset(static_cast<void *>(&facts),0,sizeof(facts));
     if(!LoadNamedConfig(path,8191))return false;
