@@ -855,7 +855,15 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::ReadPackageFacts(
 
 __attribute__((noinline)) bool Persistence::ValidateObservedPackageConfig(const Config &config) const {
     ConfigValidationError error;
-    return ValidateConfig(config,error);
+    if (!ValidateConfig(config,error)) return false;
+    // The precompact Glyph adapter required every RGB mapping to name a
+    // physical button. Its successor permits an unspecified zero-color no-op
+    // for format0; that later relaxation is not historical writer validity.
+    if (package_observation.historical_retained)
+        for (size_t i=0;i<config.rgb_configs_count;++i)
+            for (size_t j=0;j<config.rgb_configs[i].button_colors_count;++j)
+                if (config.rgb_configs[i].button_colors[j].button==BTN_UNSPECIFIED) return false;
+    return true;
 }
 __attribute__((noinline)) Persistence::LoadResult Persistence::PrepareObservedPackageConfig() {
     auto &state = package_observation;
@@ -1031,7 +1039,7 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPac
     // Historical grammar forbids all new nested fields. They therefore remain
     // generated zero defaults: nested sizing/encoding is exactly the old writer
     // (new nested fields are omitted scalars or cleared null callbacks). Only
-    // top-level fixed32 205/209 needed explicit exclusion above.
+    // top-level fixed-length byte fields205/209 needed explicit exclusion above.
     if (!state.historical_retained) *state.into = loaded_candidate;
     return LoadResult::Loaded;
 }

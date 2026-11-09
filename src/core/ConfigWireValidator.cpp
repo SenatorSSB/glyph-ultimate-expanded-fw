@@ -147,7 +147,7 @@ bool Begin(Workspace &w, size_t size) {
 bool BeginHistoricalRetained(Workspace &w, size_t size) {
     if (!Begin(w, size)) return false;
     w.historical_retained = true;
-    w.frames[0].missing = 0; // old Config has no fixed32 fields 205/209
+    w.frames[0].missing = 0; // old Config has no fixed-length byte fields 205/209
     return true;
 }
 bool Consume(Workspace &w, const uint8_t *bytes, size_t count) {

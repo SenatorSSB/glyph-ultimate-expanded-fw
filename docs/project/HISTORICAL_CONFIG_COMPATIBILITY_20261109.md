@@ -43,12 +43,16 @@ current source. Ordered fields, minimal varints, omitted scalar/string defaults,
 one packed numeric field and bounded repeated submessages follow nanopb encoding.
 Duplicate/nonminimal/unknown/future fields, invalid types/counts/nested messages,
 callbacks and all compact/native/reference/package ownership fields reject.
-Only embedded profile schema1/2/3 with complete existing structural/semantic
-rules is valid. Current source validators retain those rules and are safely
-narrower with all later fields forbidden. The historical observer initializes
+Fields205/209 are fixed-length32-byte protobuf bytes (wire type2), not the
+protobuf fixed32 scalar type (wire type5). Only embedded profile schema1/2/3 with complete existing structural/semantic
+rules is valid. Current source validators retain the profile rules. The historical path also
+rejects every BTN_UNSPECIFIED RGB target: the old Glyph adapter rejected even
+zero-color no-op mappings, while the successor permits those for format0. That
+later relaxation is excluded only from historical recognition. All later fields
+remain forbidden. The historical observer initializes
 current scratch at generated defaults and never publishes it. Nested new scalars
 are zero and callbacks cleared, so old child sizing is identical; comparison
-skips only post201 root fields, including always-encoded fixed32 fields205/209.
+skips only post201 root fields, including always-encoded fixed-length byte fields205/209.
 Independent old-descriptor roundtrip tests prove positive fixture representation.
 
 ## Authority and preservation

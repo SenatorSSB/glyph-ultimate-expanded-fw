@@ -40,6 +40,8 @@ def main():
  embedded.game_mode_configs[0].ultimate_profile_config=1
  positive.append(embedded.SerializeToString(deterministic=True))
  negative={
+  'historically-invalid-empty-rgb-target':historical[:22]+msg(5,msg(1,b''))+historical[22:],
+  'historically-invalid-colored-rgb-target':historical[:22]+msg(5,msg(1,field(2,1)))+historical[22:],
   'wrong-wire-type':bytes([historical[0]^1])+historical[1:],
   'duplicate-field':historical+field(6,1),
   'nonminimal-varint':b'\x8a\x00'+historical[1:],
@@ -47,8 +49,8 @@ def main():
   'unknown-field':historical+field(213,1),
   'compact-marker':historical+field(202,1),
   'package-marker':historical+field(211,1),
-  'fixed32-reference-marker':historical+msg(205,bytes(32)),
-  'fixed32-receipt-marker':historical+msg(209,bytes(32)),
+  'fixed-length-reference-marker':historical+msg(205,bytes(32)),
+  'fixed-length-receipt-marker':historical+msg(209,bytes(32)),
   'truncated-nested':historical[:-1],
   'invalid-nested-reference':msg(1,field(1,3)+field(203,3))+historical[16:],
   'future-row-engine':msg(1,field(1,3)+field(205,1))+historical[16:],
@@ -87,7 +89,7 @@ def main():
  d=retained(wrap(historical));del d['/config-v2.bin'];add('absent-current-no-rescue',d,False)
  for path in ['/ultimate-v2-0.bin','/ultimate-v2.ctrl']:
   d=retained(wrap(historical));raw=bytearray(d[path]);raw[-1]^=1;d[path]=bytes(raw);add('unrelated-corruption-'+path[1:],d,False)
- d=retained(wrap(historical),f.completed_migration(2));src=bytearray(d['/ultimate-migration.src']);src[-1]^=1;d['/ultimate-migration.src']=bytes(src);add('migration-source-receipt-still-required',d,False)
+ d=retained(wrap(historical),f.completed_migration(2));d['/ultimate-migration.src']=base['/config-v2.bin'];add('migration-source-receipt-still-required',d,False)
  results=[]
  for index,(name,disk,healthy) in enumerate(cases):
   out=a.out/str(index);out.mkdir();dump_namespace(disk,out/'seed.namespace');run([a.binary,'seed',out/'seed.namespace',out/'seed.nor']);run([a.binary,'boot',out/'seed.nor',defaults,out])
@@ -97,6 +99,7 @@ def main():
   assert boot['unchanged'],name
   if healthy:assert status.status==1 and status.recovery_flags==0,name
   else:assert status.status==8 and status.recovery_flags,name
+  if name=='migration-source-receipt-still-required':assert 'migration proof' in status.diagnostic,status.diagnostic
   results.append(dict(name=name,healthy=healthy,diagnostic=status.diagnostic,raw_nor_unchanged=True))
  (a.out/'summary.json').write_text(json.dumps(dict(complete=True,observer_positive=len(positive),observer_negative=len(negative),namespace_cases=results,physical_filesystem_attestation=False,hardware_operations=0),indent=2)+'\n')
  print('historical compatibility:',len(positive),'positive,',len(negative),'negative,',len(cases),'namespace cases; read/seek/stat/open/close and short-read faults PASS')
