@@ -249,6 +249,24 @@ if(!std::strcmp(argv[1],"wire-requests")){
 #if defined(GLYPH_BOOT_PROBE)
  if(!std::strcmp(argv[1],"boot"))return boot_probe::run(argv[3]);
 #endif
+if(!std::strcmp(argv[1],"migration-diagnostic")){
+ const auto before=nor;const auto p=programs,e=erases;
+ static size_t seen,selected;seen=0;selected=std::strtoull(argv[3],nullptr,10);
+ const auto fault=[](CheckedStorage::Kind,CheckedStorage::Operation,CheckedStorage::Phase,const char*){
+  return seen++==selected?CheckedStorage::Fault::Fail:CheckedStorage::Fault::None;
+ };
+ CheckedStorage::SetFaultHook(fault);BeginClassifierOwner();
+ auto &reader=PackageReader(profile_store,persistence);package_storage::ClassifyNamespaceInto(reader,PackageOwners());
+ const auto result=PackageWorkspace().classification;const bool failed=reader.ObservationFailed();
+ EndClassifierOwner();CheckedStorage::SetFaultHook(nullptr);no_handles();
+ need(nor==before&&programs==p&&erases==e,"migration diagnostic zero NOR mutation");
+ if(failed)need(result.write_fenced&&!std::strcmp(result.diagnostic,"checked I/O uncertainty"),"I/O uncertainty dominates semantic reason");
+ std::ofstream out(path("classification.json"));
+ out<<"{\"logical\":"<<unsigned(result.logical)<<",\"floor\":"<<unsigned(result.floor)<<",\"write_fenced\":"<<result.write_fenced
+ <<",\"incarnation\":"<<result.incarnation<<",\"generation\":"<<result.generation<<",\"package_sequence\":"<<result.package_sequence
+ <<",\"high_token\":"<<result.high_token<<",\"diagnostic\":\""<<result.diagnostic<<"\",\"seams\":"<<seen<<",\"observation_failed\":"<<failed<<"}\n";
+ dump_files(path("namespace.bin"));output(path("after.nor"),nor);summary(true,true,0);shutdown();return 0;
+}
 if(!std::strcmp(argv[1],"historical-classifier-faults")){
  const auto before=nor;const auto p=programs,e=erases;
  static size_t seen,selected;seen=0;selected=SIZE_MAX;

@@ -205,31 +205,49 @@ class Classifier {
   w.hash.~Sha256();::new(&w.hash)Sha256;w.hash.Update(domain,sizeof(domain));
   uint8_t words[16];Put32(words,Get32(p+80));Put32(words+4,Incarnation(root));Put32(words+8,Get32(p+84));Put32(words+12,0);w.hash.Update(words,16);w.hash.Update(p+88,32);
   for(size_t i=0;i<Get32(p+84);++i){Put32(words,Get32(p+120+i*4));Put32(words+4,Get32(p+128+i*4));w.hash.Update(words,8);w.hash.Update(p+136+i*32,32);}
-  w.hash.Final(w.digest);return Eq(w.digest,p+200)&&Eq(w.digest,config.migration_receipt);
+  w.hash.Final(w.digest);
+  if(!Eq(w.digest,p+200))return Fail("migration: receipt formula");
+  if(!Eq(w.digest,config.migration_receipt))return Fail("migration: Config receipt");
+  return true;
  }
+ // Diagnostic refinement only: preserve predicate and short-circuit read order.
+ // Checked I/O failure is still overridden by ClassifyNamespaceInto below.
  bool Migration(const RootFacts &root,const ConfigFacts &config){
-  const auto *p=root.prefix;const auto state=Get32(p+20);if(!state)return true;if(state!=2)return false;
+  const auto *p=root.prefix;const auto state=Get32(p+20);if(!state)return true;if(state!=2)return Fail("migration: state");
   if(!MigrationReceipt(root,config))return false;
-  if(Get32(p+80)==2){if(!RawHash("/ultimate-migration.src",w.digest)||!Eq(w.digest,p+88))return false;}
+  if(Get32(p+80)==2){
+   if(!RawHash("/ultimate-migration.src",w.digest))return Fail("migration: source object unavailable");
+   if(!Eq(w.digest,p+88))return Fail("migration: source hash");
+  }
   if(Get32(p+80)==3){
    uint32_t generations[2]{};bool present[2]{};const char *paths[2]={"/ultimate-dir-0.bin","/ultimate-dir-1.bin"};
-   for(unsigned i=0;i<2;++i){size_t n=0;const auto pr=reader.Extent(paths[i],n);if(pr==Probe::Error)return false;if(pr==Probe::Absent)continue;
-    if(!LegacyRoot(paths[i],true)||Get32(owners.record+12)!=Incarnation(root)||Get32(owners.record+8)>Generation(root))return false;
-    present[i]=true;generations[i]=Get32(owners.record+8);if(!RawHash(paths[i],i?w.row_sha:w.rgb_sha))return false;
+   for(unsigned i=0;i<2;++i){size_t n=0;const auto pr=reader.Extent(paths[i],n);if(pr==Probe::Error)return Fail("migration: legacy root unavailable");if(pr==Probe::Absent)continue;
+    if(!LegacyRoot(paths[i],true))return Fail("migration: legacy root");
+    if(Get32(owners.record+12)!=Incarnation(root))return Fail("migration: legacy root incarnation");
+    if(Get32(owners.record+8)>Generation(root))return Fail("migration: legacy root generation");
+    present[i]=true;generations[i]=Get32(owners.record+8);if(!RawHash(paths[i],i?w.row_sha:w.rgb_sha))return Fail("migration: legacy root unavailable");
    }
    if(present[0]||present[1]){
     const unsigned newest=present[1]&&(!present[0]||generations[1]>generations[0])?1:0;
-    if(present[0]&&present[1]&&((generations[newest]-generations[newest^1])>1||(generations[0]==generations[1]&&!Eq(w.row_sha,w.rgb_sha))))return false;
-    if(!Eq(newest?w.row_sha:w.rgb_sha,p+88)||!LegacyRoot(paths[newest],true))return false;
+    if(present[0]&&present[1]&&((generations[newest]-generations[newest^1])>1||(generations[0]==generations[1]&&!Eq(w.row_sha,w.rgb_sha))))return Fail("migration: legacy root slots");
+    if(!Eq(newest?w.row_sha:w.rgb_sha,p+88))return Fail("migration: legacy root hash");
+    if(!LegacyRoot(paths[newest],true))return Fail("migration: legacy root");
     unsigned count=0;for(unsigned i=0;i<2;++i){const auto id=Get32(owners.record+2608+i*4);if(!id)continue;
-     if(count>=Get32(p+84)||id!=Get32(p+120+count*4)||Get32(p+128+count*4)!=1)return false;
+     if(count>=Get32(p+84)||id!=Get32(p+120+count*4)||Get32(p+128+count*4)!=1)return Fail("migration: legacy migrated entries");
      ++count;
-    }if(count!=Get32(p+84))return false;
+    }if(count!=Get32(p+84))return Fail("migration: legacy migrated count");
    }
   }
   for(size_t i=0;i<Get32(p+84);++i){auto *path=reinterpret_cast<char*>(w.read_chunk);std::snprintf(path,32,"/ultimate-%08x-%08x.bin",unsigned(Get32(p+120+i*4)),unsigned(Get32(p+128+i*4)));
-   size_t n=0;if(!ReadObject(path,owners.record,4128,n)||n<=32||Get32(owners.record)!=0x31525055u||Get16(owners.record+4)!=1||Get16(owners.record+6)!=1||Get32(owners.record+8)!=Incarnation(root)||Get32(owners.record+12)!=Get32(p+120+i*4)||Get32(owners.record+16)!=Get32(p+128+i*4)||Get32(owners.record+20)!=n-32||Crc32(owners.record,24)!=Get32(owners.record+24)||Crc32(owners.record+32,n-32)!=Get32(owners.record+28)||!reader.LegacyProfile(owners.record+32,n-32))return false;
-   Hash(owners.record+32,n-32,w.digest);if(!Eq(w.digest,p+136+i*32))return false;
+   size_t n=0;
+   if(!ReadObject(path,owners.record,4128,n))return Fail("migration: revision unavailable");
+   if(n<=32||Get32(owners.record)!=0x31525055u||Get16(owners.record+4)!=1||Get16(owners.record+6)!=1)return Fail("migration: revision format");
+   if(Get32(owners.record+8)!=Incarnation(root)||Get32(owners.record+12)!=Get32(p+120+i*4)||Get32(owners.record+16)!=Get32(p+128+i*4))return Fail("migration: revision identity");
+   if(Get32(owners.record+20)!=n-32)return Fail("migration: revision extent");
+   if(Crc32(owners.record,24)!=Get32(owners.record+24))return Fail("migration: revision header CRC");
+   if(Crc32(owners.record+32,n-32)!=Get32(owners.record+28))return Fail("migration: revision payload CRC");
+   if(!reader.LegacyProfile(owners.record+32,n-32))return Fail("migration: profile validation");
+   Hash(owners.record+32,n-32,w.digest);if(!Eq(w.digest,p+136+i*32))return Fail("migration: payload hash");
   }return true;
  }
  bool OwnedSet(const RootFacts &root,const char *config_path,const ConfigFacts &config,bool all_extra=false,uint32_t extra_id=0){
@@ -293,7 +311,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   if(w.current.embedded_profiles)return Fail("legacy: embedded profiles");
   if(w.current.store_format!=1||w.current.incarnation!=Incarnation(selected)||w.current.root_format!=2)return Fail("legacy: Config/store mismatch");
   if(!NoTemps())return Fail("legacy: temporary present");
-  if(!Migration(selected,w.current))return Fail("legacy: migration proof");
+  if(!Migration(selected,w.current))return false;
   if(!SharedReceipts())return Fail("legacy: shared receipts");
   return true;
  }
