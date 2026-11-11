@@ -210,7 +210,7 @@ class Classifier {
   if(!Eq(w.digest,config.migration_receipt))return Fail("migration: Config receipt");
   return true;
  }
- // Diagnostic refinement only: preserve predicate and short-circuit read order.
+ // Recognize the exact historical f7ba state1 -> state2 slot publication.
  // Checked I/O failure is still overridden by ClassifyNamespaceInto below.
  bool Migration(const RootFacts &root,const ConfigFacts &config){
   const auto *p=root.prefix;const auto state=Get32(p+20);if(!state)return true;if(state!=2)return Fail("migration: state");
@@ -220,9 +220,10 @@ class Classifier {
    if(!Eq(w.digest,p+88))return Fail("migration: source hash");
   }
   if(Get32(p+80)==3){
-   uint32_t generations[2]{};bool present[2]{};const char *paths[2]={"/ultimate-dir-0.bin","/ultimate-dir-1.bin"};
+   uint32_t generations[2]{},states[2]{};bool present[2]{};const char *paths[2]={"/ultimate-dir-0.bin","/ultimate-dir-1.bin"};
    for(unsigned i=0;i<2;++i){size_t n=0;const auto pr=reader.Extent(paths[i],n);if(pr==Probe::Error)return Fail("migration: legacy root unavailable");if(pr==Probe::Absent)continue;
-    if(!LegacyRoot(paths[i],true))return Fail("migration: legacy root");
+    if(!LegacyRoot(paths[i],false)||!Get32(owners.record+24))return Fail("migration: legacy root");
+    states[i]=Get32(owners.record+24);
     if(Get32(owners.record+12)!=Incarnation(root))return Fail("migration: legacy root incarnation");
     if(Get32(owners.record+8)>Generation(root))return Fail("migration: legacy root generation");
     present[i]=true;generations[i]=Get32(owners.record+8);if(!RawHash(paths[i],i?w.row_sha:w.rgb_sha))return Fail("migration: legacy root unavailable");
@@ -231,6 +232,20 @@ class Classifier {
     const unsigned newest=present[1]&&(!present[0]||generations[1]>generations[0])?1:0;
     if(present[0]&&present[1]&&((generations[newest]-generations[newest^1])>1||(generations[0]==generations[1]&&!Eq(w.row_sha,w.rgb_sha))))return Fail("migration: legacy root slots");
     if(!Eq(newest?w.row_sha:w.rgb_sha,p+88))return Fail("migration: legacy root hash");
+    if(present[newest^1]&&states[newest^1]==1){
+     // f7ba CompleteMigration copies the directory, changes only state/generation,
+     // and atomically replaces (generation+1)&1. The other slot is untouched.
+     // Compare the exact encoded successor in existing RAM scratch; never publish it.
+     const unsigned older=newest^1;
+     if(states[newest]!=2||generations[newest]-generations[older]!=1||
+        ((generations[newest]+1)&1u)!=newest||((generations[older]+1)&1u)!=older||
+        !LegacyRoot(paths[older],false)||Get32(owners.record+24)!=1||
+        Get32(owners.record+8)!=generations[older])return Fail("migration: legacy root transition");
+     Put32(owners.record+8,generations[newest]);Put32(owners.record+24,2);
+     Put32(owners.record+2616,Crc32(owners.record,2616));
+     Hash(owners.record,2620,w.digest);
+     if(!Eq(w.digest,p+88))return Fail("migration: legacy root transition");
+    }
     if(!LegacyRoot(paths[newest],true))return Fail("migration: legacy root");
     unsigned count=0;for(unsigned i=0;i<2;++i){const auto id=Get32(owners.record+2608+i*4);if(!id)continue;
      if(count>=Get32(p+84)||id!=Get32(p+120+count*4)||Get32(p+128+count*4)!=1)return Fail("migration: legacy migrated entries");
