@@ -40,7 +40,10 @@ adapter=(a.baseline/'tools/fixtures/glyph_package_v1/verify_classifier.py').read
 adapter=adapter.replace('def run_case(disk,mounted=True,read_fail_at=None):','def run_case(disk,mounted=True,read_fail_at=None,direct=False,fault=None):\n events=[]\n counters={}\n def event(kind,*args):\n  events.append((kind,*args));counters[kind]=counters.get(kind,0)+1\n  return fault==(kind,counters[kind])')
 # All callback observations are traced; only original storage callbacks are faulted.
 injections={'mount':"  event('mount')",'obj':"  if event('object',i):return 0",'extent':"  if event('extent',path.decode()):return 2",'read':"  if event('read',path.decode(),offset,n):return 0",'config':"  event('config',path.decode(),maximum)",'row':"  event('row',path.decode(),index)",'rgb':"  event('rgb',path.decode(),index)",'native':"  event('native',path.decode(),index,n)",'legacy':"  event('legacy',n)",'append':"  event('append',base.decode(),current.decode())"}
-for name,body in injections.items():adapter=re.sub(r'( def '+name+r'\([^\n]*\):\n)',lambda m:m[1]+body+'\n',adapter)
+adapter=adapter.replace(' def mount():return mounted',' def mount():\n  return mounted').replace(' def legacy(ptr,n):return',' def legacy(ptr,n):\n  return')
+for name,body in injections.items():
+ adapter,count=re.subn(r'( def '+name+r'\([^\n]*\):\n)',lambda m:m[1]+body+'\n',adapter)
+ assert count==1,('untraced callback',name,count)
 adapter=adapter.replace("callbacks=Callbacks(mount,obj,extent,read,config,row,rgb,native,legacy,append);out=(ctypes.c_int*3)();diagnostic=lib.classify(ctypes.byref(callbacks),out).decode()",'''callbacks=Callbacks(mount,obj,extent,read,config,row,rgb,native,legacy,append);out=(ctypes.c_int*3)()
  if direct:
   cfg=Facts();assert config(b'/config-v2.bin',8191,ctypes.pointer(cfg));events.clear();counters.clear()
@@ -94,7 +97,7 @@ editroot('legacy-count-overflow',84,0,'migration: legacy migrated entries',3)
 # Each migrated-record false exit is independent of the source blob proof.
 path='/ultimate-00000001-00000001.bin'
 d=f.completed_migration();del d[path];add('revision-absent',d,'migration: revision unavailable')
-for name,offset,value,reason in [('format-magic',0,0,'revision format'),('format-version',4,0,'revision format'),('format-kind',4,65537,'revision format'),('identity-inc',8,99,'revision identity'),('identity-id',12,2,'revision identity'),('identity-rev',16,2,'revision identity'),('extent',20,1,'revision extent'),('header-crc',24,0,'revision header CRC'),('payload-crc',28,0,'revision payload CRC')]:
+for name,offset,value,reason in [('format-magic',0,0,'revision format'),('format-version',4,0,'revision format'),('format-kind',4,131073,'revision format'),('identity-inc',8,99,'revision identity'),('identity-id',12,2,'revision identity'),('identity-rev',16,2,'revision identity'),('extent',20,1,'revision extent'),('header-crc',24,0,'revision header CRC'),('payload-crc',28,0,'revision payload CRC')]:
  d=f.completed_migration();b=bytearray(d[path]);m.put32(b,offset,value);d[path]=bytes(b);add(name,d,'migration: '+reason)
 d=f.completed_migration();d[path]=d[path][:32];add('revision-short',d,'migration: revision format')
 d=f.completed_migration();d[path]+=bytes(5000);add('revision-oversize',d,'migration: revision unavailable')
