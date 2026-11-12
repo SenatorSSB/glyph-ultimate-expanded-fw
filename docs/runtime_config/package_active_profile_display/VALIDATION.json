@@ -1,0 +1,128 @@
+{
+  "status": "HOST_VALIDATED_BUILD_PASS_HARDWARE_NOT_TESTED",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "built_source_tree": "cd0d8408b1c8b808a3a41529259b57c0896e2f7c",
+  "base_sha": "c439b7c6aab24ed8a0af3b497b7204ba3cd033c5",
+  "canonical_configurator_sha": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+  "senscope_direction_sha": "acf22010522ac5b2b17392e977d692195d39e154",
+  "senscope_main_sha": "0d97bb6d9f66a756785135b66b1d391abb88dec2",
+  "source_clean_at_build": true,
+  "build_command": "./scripts/build-glyph-mk6-quiet.sh",
+  "build_command_reason": "pio not on PATH; documented fallback executes PlatformIO run -e glyph_mk6",
+  "artifact_identity_note": "Artifacts were built from built_source_sha; later evidence-only branch commits are not rebuilt artifacts.",
+  "artifacts": {
+    "firmware.elf": {
+      "sha256": "30e5c15b61d4e2b1822aa521cf7e53ffbab9cfe568f63f792047069f965929ff",
+      "bytes": 5759256,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.elf"
+    },
+    "firmware.bin": {
+      "sha256": "8f9f60a2e5bdacd59c8f97a29d00cfcc6387c72005e042a967bf5891ef93b834",
+      "bytes": 648420,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.bin"
+    },
+    "firmware.uf2": {
+      "sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+      "bytes": 1296896,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.uf2"
+    },
+    "firmware.map": {
+      "sha256": "8b9bb82ec6a6a67e9ff94f241b4bb58e1254bf5ce0b7583aad55a77a034f2f00",
+      "bytes": 4712138,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.map"
+    }
+  },
+  "resource_evidence": {
+    "ram_bytes": 198852,
+    "ram_limit": 262144,
+    "flash_bytes": 636388,
+    "flash_limit": 1568768,
+    "compiler_local_frames_bytes": {
+      "current_profile_label": 32,
+      "MenuButtonHints::UpdateDisplay": 48,
+      "InputDisplay::UpdateDisplay": 48
+    },
+    "full_linked_core1_bound": "NOT_RECOMPUTED; historical whole-core bounds not transferred",
+    "target_stack_highwater_timing": "NOT_MEASURED"
+  },
+  "dependencies": {
+    "platformio": "6.2.0",
+    "platform": "raspberrypi 1.14.0+sha.5e87ae3",
+    "framework": "arduinopico 1.30603.0+sha.32e74d0",
+    "toolchain": "5.120300.240127 (GCC 12.3.0)",
+    "Adafruit_GFX_h_sha256": "e4ace04cbed4499c0e2a80df33b381c87ce98689d98da82712f0748bf7359171",
+    "Adafruit_GFX_cpp_sha256": "5afa8ca16241a9a0cb354012dd00780c6c00620c345b810a9504cb77bfc698d5"
+  },
+  "checks": {
+    "focused both enum ABIs ASan/UBSan actual dashboard/viewer": "PASS",
+    "controller selector both ABIs": "PASS",
+    "selection recovery": "PASS",
+    "Config persistence": "PASS",
+    "native short enum": "PASS",
+    "native default enum": "PASS",
+    "package components immutable oracle": "PASS",
+    "docs navigation": "PASS",
+    "linked production composition": "PASS",
+    "Senscope npm run check:agentic-workflow": "PASS",
+    "git diff --check": "PASS"
+  },
+  "logs": {
+    "focused": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/focused.log.gz",
+      "uncompressed_sha256": "01c3a57d4ddf39b0785398defa433144799283c6f1435fb422cfe8c480e51455"
+    },
+    "selector": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/selector.log.gz",
+      "uncompressed_sha256": "deb54042f1c012739bbe539904d83baa509bcf230bf76030f803bae45502a24b"
+    },
+    "recovery": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/recovery.log.gz",
+      "uncompressed_sha256": "5f76c524ac7562b7892ecf5559dee7efcff92874a514b34331df89d2bc7ef7fc"
+    },
+    "persistence": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/persistence.log.gz",
+      "uncompressed_sha256": "b22b4e43882b10318caa1feb1c5b14917093c9a89ae1dad990199e3bc7ca1a84"
+    },
+    "native-short": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/native-short.log.gz",
+      "uncompressed_sha256": "ac0222897c717900262531a5d5dfafb109bf76f1a187960a9e1e73a7330b56f0"
+    },
+    "native-default": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/native-default.log.gz",
+      "uncompressed_sha256": "689fcaa2065b1dea73032d486ea45b592f56d5540b04aa1cdc22db3d7ace9fc0"
+    },
+    "package": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/package.log.gz",
+      "uncompressed_sha256": "c381360f371200cb8e2722b041bf2b5c1f2a6687c184474911ed8c0c76fa0e8f"
+    },
+    "navigation": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/navigation.log.gz",
+      "uncompressed_sha256": "ade21c5642bec6ad58ce2bbb3857edfdb6223d1ee7fbf7a19a6f6a2817444206"
+    },
+    "production": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/production.log.gz",
+      "uncompressed_sha256": "c2611059e1f0b6a272201139b72baefde724b8774aabb4390540535fa9a1af70"
+    },
+    "build-wrapper": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/build-wrapper.log.gz",
+      "uncompressed_sha256": "4a884f34d48febebff44d6df7cf82d1e4a74ab93ea546c6f7e7ffca6270b671a"
+    },
+    "build": {
+      "file": "docs/runtime_config/package_active_profile_display/evidence/build.log.gz",
+      "uncompressed_sha256": "e308c87e6e72e8b615e26aaed06aeb6a6f3d53fa5c97ca5cbd6bca8680c52b2b"
+    }
+  },
+  "limits": [
+    "No hardware access, flash, installed profile mutation, physical display or gameplay validation",
+    "Managed execution/visibility cases use host directory doubles; ordinary managed selection remains excluded",
+    "Failed activation is modeled through actual SetConfig/native-state refusal; focused test does not call real ProfileStore::Activate failure",
+    "Existing long-name clipping/layout retained; physical pixel fit not observed",
+    "No source-authority repin, schema, semantic data, selection/reference/protocol/storage source changes",
+    "No historical hardware evidence modified; package-aware parent boot/hardware remains separately unvalidated"
+  ],
+  "delegation": {
+    "preflight": "Native collaboration spawn/review facility available; user explicitly requires fresh independent final review; repository safety specialist guidance applies",
+    "specialist": "display_safety read-only current package/runtime/concurrency audit",
+    "reviewer": "final_display_review fresh independent final source/evidence review; verdict recorded separately"
+  }
+}

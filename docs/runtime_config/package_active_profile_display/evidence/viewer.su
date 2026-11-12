@@ -1,0 +1,8 @@
+HAL/pico/src/display/InputDisplay.cpp:17:15:virtual DisplayModeId InputDisplay::GetId()	0	static
+HAL/pico/include/display/InputDisplay.hpp:13:7:InputDisplay::~InputDisplay()	0	static
+HAL/pico/src/display/InputDisplay.cpp:31:6:virtual void InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)	48	static
+HAL/pico/include/display/InputDisplay.hpp:13:7:virtual InputDisplay::~InputDisplay()	8	static
+HAL/pico/src/display/InputDisplay.cpp:21:6:virtual void InputDisplay::HandleControls(IntegratedDisplay*, const DisplayControls&, Button)	8	static
+HAL/pico/src/display/InputDisplay.cpp:8:1:InputDisplay::InputDisplay(InputViewerButton*, size_t, CommunicationBackendId)	8	static
+HAL/pico/src/display/InputDisplay.cpp:61:6:void InputDisplay::UpdateButtonLayout(InputViewerButton*, size_t)	0	static
+HAL/pico/src/display/InputDisplay.cpp:67:1:cpp)	0	static

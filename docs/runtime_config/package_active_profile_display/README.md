@@ -29,7 +29,9 @@ backend and ProfileStore directory ownership are host doubles; managed visibilit
 is modeled here, not a physical managed activation. Relevant production store/
 selection/package regressions must accompany them. No hardware, gameplay,
 Nunchuk, timing/highwater or installed-build claim follows from host tests/build.
-Exact source/build/artifact/review results will be recorded in a separate
-post-build record, referencing the already-existing clean source commit.
+[Exact source/build/artifact results](VALIDATION.json) bind clean built source
+`9e69188d857138a3884bcbe243f22188815e9355`. Evidence-only successor commits do not
+change the built source or authorize substituting a rebuilt UF2. The final
+independent review is recorded separately in FINAL_REVIEW.md.
 
 See [hardware proposal](HARDWARE_PROPOSAL.md); it is UNAPPROVED and non-executable.

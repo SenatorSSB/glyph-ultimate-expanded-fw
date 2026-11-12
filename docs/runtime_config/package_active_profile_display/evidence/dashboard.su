@@ -1,0 +1,13 @@
+config/glyph/common/src/display/MenuButtonHints.cpp:215:15:virtual DisplayModeId MenuButtonHints::GetId()	0	static
+config/glyph/common/include/display/MenuButtonHints.hpp:7:7:MenuButtonHints::~MenuButtonHints()	0	static
+config/glyph/common/include/display/MenuButtonHints.hpp:7:7:virtual MenuButtonHints::~MenuButtonHints()	8	static
+config/glyph/common/src/display/MenuButtonHints.cpp:219:6:virtual void MenuButtonHints::HandleControls(IntegratedDisplay*, const DisplayControls&, Button)	8	static
+config/glyph/common/src/display/MenuButtonHints.cpp:17:22:const unsigned char* switchIcon(OutputOption)	0	static
+config/glyph/common/src/display/MenuButtonHints.cpp:93:22:const unsigned char* currentInputIcon(OutputState, CommunicationBackendId, bool, bool)	32	static
+config/glyph/common/src/display/MenuButtonHints.cpp:209:1:MenuButtonHints::MenuButtonHints(CommunicationBackend**, size_t)	16	static
+config/glyph/common/src/display/MenuButtonHints.cpp:376:8:Button findMenuBind(Button, GameModeConfig)	8	static
+config/glyph/common/src/display/MenuButtonHints.cpp:386:6:void MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)	16	static
+config/glyph/common/src/display/MenuButtonHints.cpp:237:6:virtual void MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)	48	static
+config/glyph/common/src/display/MenuButtonHints.cpp:402:13:const char* MenuButtonHints::CurrentlyPressedButtonText()	16	static
+config/glyph/common/src/display/MenuButtonHints.cpp:434:1:cpp)	8	static
+config/glyph/common/src/display/MenuButtonHints.cpp:434:1:cpp)	8	static

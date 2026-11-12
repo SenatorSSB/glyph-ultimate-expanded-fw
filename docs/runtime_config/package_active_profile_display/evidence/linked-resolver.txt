@@ -1,0 +1,204 @@
+10039c44 <current_profile_label(InputMode const*, _CommunicationBackendId)>:
+10039c44:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+10039c46:	46ce      	mov	lr, r9
+10039c48:	4647      	mov	r7, r8
+10039c4a:	b580      	push	{r7, lr}
+10039c4c:	2800      	cmp	r0, #0
+10039c4e:	d015      	beq.n	10039c7c <current_profile_label(InputMode const*, _CommunicationBackendId)+0x38>
+10039c50:	6844      	ldr	r4, [r0, #4]
+10039c52:	2c00      	cmp	r4, #0
+10039c54:	d012      	beq.n	10039c7c <current_profile_label(InputMode const*, _CommunicationBackendId)+0x38>
+10039c56:	7863      	ldrb	r3, [r4, #1]
+10039c58:	1c65      	adds	r5, r4, #1
+10039c5a:	2b00      	cmp	r3, #0
+10039c5c:	d007      	beq.n	10039c6e <current_profile_label(InputMode const*, _CommunicationBackendId)+0x2a>
+10039c5e:	2308      	movs	r3, #8
+10039c60:	4399      	bics	r1, r3
+10039c62:	d002      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039c64:	4e5a      	ldr	r6, [pc, #360]	@ (10039dd0 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x18c>)
+10039c66:	42b0      	cmp	r0, r6
+10039c68:	d012      	beq.n	10039c90 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x4c>
+10039c6a:	002c      	movs	r4, r5
+10039c6c:	e007      	b.n	10039c7e <current_profile_label(InputMode const*, _CommunicationBackendId)+0x3a>
+10039c6e:	7823      	ldrb	r3, [r4, #0]
+10039c70:	3b01      	subs	r3, #1
+10039c72:	b2db      	uxtb	r3, r3
+10039c74:	2b08      	cmp	r3, #8
+10039c76:	d907      	bls.n	10039c88 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x44>
+10039c78:	4d56      	ldr	r5, [pc, #344]	@ (10039dd4 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x190>)
+10039c7a:	e7f0      	b.n	10039c5e <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1a>
+10039c7c:	4c56      	ldr	r4, [pc, #344]	@ (10039dd8 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x194>)
+10039c7e:	0020      	movs	r0, r4
+10039c80:	bcc0      	pop	{r6, r7}
+10039c82:	46b9      	mov	r9, r7
+10039c84:	46b0      	mov	r8, r6
+10039c86:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+10039c88:	4a54      	ldr	r2, [pc, #336]	@ (10039ddc <current_profile_label(InputMode const*, _CommunicationBackendId)+0x198>)
+10039c8a:	009b      	lsls	r3, r3, #2
+10039c8c:	589d      	ldr	r5, [r3, r2]
+10039c8e:	e7e6      	b.n	10039c5e <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1a>
+10039c90:	7823      	ldrb	r3, [r4, #0]
+10039c92:	2b03      	cmp	r3, #3
+10039c94:	d1e9      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039c96:	4b52      	ldr	r3, [pc, #328]	@ (10039de0 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x19c>)
+10039c98:	4a52      	ldr	r2, [pc, #328]	@ (10039de4 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1a0>)
+10039c9a:	5c9b      	ldrb	r3, [r3, r2]
+10039c9c:	2b01      	cmp	r3, #1
+10039c9e:	d1e4      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039ca0:	33db      	adds	r3, #219	@ 0xdb
+10039ca2:	5ce3      	ldrb	r3, [r4, r3]
+10039ca4:	2b01      	cmp	r3, #1
+10039ca6:	d1e0      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039ca8:	27d8      	movs	r7, #216	@ 0xd8
+10039caa:	59e3      	ldr	r3, [r4, r7]
+10039cac:	2b00      	cmp	r3, #0
+10039cae:	d0dc      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cb0:	2340      	movs	r3, #64	@ 0x40
+10039cb2:	5cf3      	ldrb	r3, [r6, r3]
+10039cb4:	2b01      	cmp	r3, #1
+10039cb6:	d1d8      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cb8:	4b4b      	ldr	r3, [pc, #300]	@ (10039de8 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1a4>)
+10039cba:	0018      	movs	r0, r3
+10039cbc:	4698      	mov	r8, r3
+10039cbe:	f7f7 fa91 	bl	100311e4 <ProfileStore::IsReady() const>
+10039cc2:	2800      	cmp	r0, #0
+10039cc4:	d0d1      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cc6:	4640      	mov	r0, r8
+10039cc8:	f7f7 fa92 	bl	100311f0 <ProfileStore::IsReadOnlyRecovery() const>
+10039ccc:	2800      	cmp	r0, #0
+10039cce:	d1cc      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cd0:	4640      	mov	r0, r8
+10039cd2:	59e7      	ldr	r7, [r4, r7]
+10039cd4:	f7f7 fb3a 	bl	1003134c <ProfileStore::ActiveId() const>
+10039cd8:	4287      	cmp	r7, r0
+10039cda:	d1c6      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cdc:	4640      	mov	r0, r8
+10039cde:	6bb7      	ldr	r7, [r6, #56]	@ 0x38
+10039ce0:	f7f7 fb2a 	bl	10031338 <ProfileStore::ActiveProfile() const>
+10039ce4:	4287      	cmp	r7, r0
+10039ce6:	d1c0      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039ce8:	6bb0      	ldr	r0, [r6, #56]	@ 0x38
+10039cea:	2800      	cmp	r0, #0
+10039cec:	d0bd      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cee:	7803      	ldrb	r3, [r0, #0]
+10039cf0:	2b05      	cmp	r3, #5
+10039cf2:	d1ba      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039cf4:	6bf3      	ldr	r3, [r6, #60]	@ 0x3c
+10039cf6:	4699      	mov	r9, r3
+10039cf8:	f021 ff46 	bl	1005bb88 <ultimate_native::Lease(_UltimateProfile const&)>
+10039cfc:	464b      	mov	r3, r9
+10039cfe:	0007      	movs	r7, r0
+10039d00:	2b00      	cmp	r3, #0
+10039d02:	d0b2      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d04:	4642      	mov	r2, r8
+10039d06:	4b39      	ldr	r3, [pc, #228]	@ (10039dec <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1a8>)
+10039d08:	5cd3      	ldrb	r3, [r2, r3]
+10039d0a:	2b00      	cmp	r3, #0
+10039d0c:	d0ad      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d0e:	4b38      	ldr	r3, [pc, #224]	@ (10039df0 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1ac>)
+10039d10:	4599      	cmp	r9, r3
+10039d12:	d1aa      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d14:	2340      	movs	r3, #64	@ 0x40
+10039d16:	5cf3      	ldrb	r3, [r6, r3]
+10039d18:	2b01      	cmp	r3, #1
+10039d1a:	d1a6      	bne.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d1c:	6bf0      	ldr	r0, [r6, #60]	@ 0x3c
+10039d1e:	2800      	cmp	r0, #0
+10039d20:	d0a3      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d22:	4b34      	ldr	r3, [pc, #208]	@ (10039df4 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1b0>)
+10039d24:	5cc3      	ldrb	r3, [r0, r3]
+10039d26:	2b00      	cmp	r3, #0
+10039d28:	d09f      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d2a:	4b33      	ldr	r3, [pc, #204]	@ (10039df8 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1b4>)
+10039d2c:	5cc3      	ldrb	r3, [r0, r3]
+10039d2e:	2b00      	cmp	r3, #0
+10039d30:	d09b      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d32:	f021 fef1 	bl	1005bb18 <ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)>
+10039d36:	2800      	cmp	r0, #0
+10039d38:	d097      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d3a:	6c73      	ldr	r3, [r6, #68]	@ 0x44
+10039d3c:	2b00      	cmp	r3, #0
+10039d3e:	d094      	beq.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d40:	6bf2      	ldr	r2, [r6, #60]	@ 0x3c
+10039d42:	6852      	ldr	r2, [r2, #4]
+10039d44:	4293      	cmp	r3, r2
+10039d46:	d000      	beq.n	10039d4a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x106>
+10039d48:	e78f      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d4a:	4642      	mov	r2, r8
+10039d4c:	4b2b      	ldr	r3, [pc, #172]	@ (10039dfc <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1b8>)
+10039d4e:	58d3      	ldr	r3, [r2, r3]
+10039d50:	2b00      	cmp	r3, #0
+10039d52:	d100      	bne.n	10039d56 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x112>
+10039d54:	e789      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d56:	2f00      	cmp	r7, #0
+10039d58:	d100      	bne.n	10039d5c <current_profile_label(InputMode const*, _CommunicationBackendId)+0x118>
+10039d5a:	e786      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d5c:	7a3b      	ldrb	r3, [r7, #8]
+10039d5e:	2b00      	cmp	r3, #0
+10039d60:	d100      	bne.n	10039d64 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x120>
+10039d62:	e782      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d64:	4641      	mov	r1, r8
+10039d66:	4b26      	ldr	r3, [pc, #152]	@ (10039e00 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1bc>)
+10039d68:	683a      	ldr	r2, [r7, #0]
+10039d6a:	58cb      	ldr	r3, [r1, r3]
+10039d6c:	429a      	cmp	r2, r3
+10039d6e:	d000      	beq.n	10039d72 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x12e>
+10039d70:	e77b      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d72:	4b24      	ldr	r3, [pc, #144]	@ (10039e04 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x1c0>)
+10039d74:	687a      	ldr	r2, [r7, #4]
+10039d76:	5acb      	ldrh	r3, [r1, r3]
+10039d78:	429a      	cmp	r2, r3
+10039d7a:	d000      	beq.n	10039d7e <current_profile_label(InputMode const*, _CommunicationBackendId)+0x13a>
+10039d7c:	e775      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d7e:	4640      	mov	r0, r8
+10039d80:	f7f7 fa62 	bl	10031248 <ProfileStore::Count() const>
+10039d84:	0007      	movs	r7, r0
+10039d86:	2840      	cmp	r0, #64	@ 0x40
+10039d88:	d900      	bls.n	10039d8c <current_profile_label(InputMode const*, _CommunicationBackendId)+0x148>
+10039d8a:	e76e      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d8c:	23d8      	movs	r3, #216	@ 0xd8
+10039d8e:	2600      	movs	r6, #0
+10039d90:	4699      	mov	r9, r3
+10039d92:	42be      	cmp	r6, r7
+10039d94:	d100      	bne.n	10039d98 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x154>
+10039d96:	e768      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039d98:	0031      	movs	r1, r6
+10039d9a:	4640      	mov	r0, r8
+10039d9c:	f7f7 fa7e 	bl	1003129c <ProfileStore::EntryAt(unsigned int) const>
+10039da0:	2800      	cmp	r0, #0
+10039da2:	d012      	beq.n	10039dca <current_profile_label(InputMode const*, _CommunicationBackendId)+0x186>
+10039da4:	464b      	mov	r3, r9
+10039da6:	6802      	ldr	r2, [r0, #0]
+10039da8:	58e3      	ldr	r3, [r4, r3]
+10039daa:	429a      	cmp	r2, r3
+10039dac:	d10d      	bne.n	10039dca <current_profile_label(InputMode const*, _CommunicationBackendId)+0x186>
+10039dae:	68c3      	ldr	r3, [r0, #12]
+10039db0:	2b05      	cmp	r3, #5
+10039db2:	d000      	beq.n	10039db6 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x172>
+10039db4:	e759      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039db6:	3014      	adds	r0, #20
+10039db8:	2121      	movs	r1, #33	@ 0x21
+10039dba:	0004      	movs	r4, r0
+10039dbc:	f047 fa8a 	bl	100812d4 <strnlen>
+10039dc0:	3801      	subs	r0, #1
+10039dc2:	281f      	cmp	r0, #31
+10039dc4:	d800      	bhi.n	10039dc8 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x184>
+10039dc6:	e75a      	b.n	10039c7e <current_profile_label(InputMode const*, _CommunicationBackendId)+0x3a>
+10039dc8:	e74f      	b.n	10039c6a <current_profile_label(InputMode const*, _CommunicationBackendId)+0x26>
+10039dca:	3601      	adds	r6, #1
+10039dcc:	e7e1      	b.n	10039d92 <current_profile_label(InputMode const*, _CommunicationBackendId)+0x14e>
+10039dce:	46c0      	nop			@ (mov r8, r8)
+10039dd0:	200308cc 	.word	0x200308cc
+10039dd4:	1008c4c4 	.word	0x1008c4c4
+10039dd8:	1008f7b0 	.word	0x1008f7b0
+10039ddc:	1008c510 	.word	0x1008c510
+10039de0:	20018410 	.word	0x20018410
+10039de4:	00007af4 	.word	0x00007af4
+10039de8:	2002e52c 	.word	0x2002e52c
+10039dec:	00002036 	.word	0x00002036
+10039df0:	20030338 	.word	0x20030338
+10039df4:	0000022a 	.word	0x0000022a
+10039df8:	0000022b 	.word	0x0000022b
+10039dfc:	00002050 	.word	0x00002050
+10039e00:	00001e0c 	.word	0x00001e0c
+10039e04:	00001e14 	.word	0x00001e14

@@ -1,8 +1,10 @@
 # Candidate-specific display acceptance proposal
 
 Status: UNAPPROVED / NON-EXECUTABLE. No controller access or installation is
-authorized by this document. Exact candidate/artifact identities must be bound
-from the accompanying post-build record in a separate owner-approved packet.
+authorized by this document. Exact candidate source is `9e69188d857138a3884bcbe243f22188815e9355`; retained UF2 SHA-256 is
+`da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc` (1296896 bytes).
+[VALIDATION.json](VALIDATION.json) records custody and the remaining artifacts.
+These identities must be bound in a separate owner-approved packet.
 Historical hardware packets/results are unchanged and do not accept this build.
 
 Proposed small scope after separate owner approval:
