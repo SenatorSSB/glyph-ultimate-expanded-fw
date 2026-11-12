@@ -1,5 +1,18 @@
 # Glyph Roadmap
 
+## Package-aware display and plate direction — 2026-11-12
+
+The owner-authorized display repair targets package-aware candidate c439b7c6,
+not canonical integration. Dashboard and Input Viewer must name the executing
+logical profile with execution proof; dashboard retains its row's plate.
+Every newly created complete Glyph package carries its selected plate. Future
+Builder local/portable persistence, preview, installation and exact readback must
+preserve it; neutral Profile JSON is unchanged. Ordinary managed selection stays
+protected. See [owner direction](agent_framework/USER_DIRECTION.md#package-aware-active-profile-display-repair--2026-11-12)
+and [candidate preparation](runtime_config/package_active_profile_display/README.md).
+No hardware acceptance, source integration or source-authority repin is claimed.
+
+
 ## Complete logical user profile direction — 2026-11-05
 
 Owner source: `owner-chat/2026-11-05/full-package-one-to-one-profile-architecture`.

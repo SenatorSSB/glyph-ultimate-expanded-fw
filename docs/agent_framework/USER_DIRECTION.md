@@ -600,3 +600,33 @@ hypotheses are evidence inputs, not automatic work authorization.
   not erase GP-BIND-001/002 FAIL or authorize failed-source import, a generic
   transport redesign or an unadjudicated X1 repair. The independent
   [Curator decision](PORTFOLIO_20261019_0200_CURATOR.md) bounds GP-BIND-003.
+
+## Package-aware active-profile display repair — 2026-11-12
+
+Source: direct owner request in this chat, `owner-chat/2026-11-12/package-active-profile-display`.
+The owner authorizes porting/adapting historical e416cabe onto package-aware
+c439b7c6, focused regressions, exact Mk6 build, fresh independent final review,
+and publication of an isolated reviewed candidate branch only.
+
+Normal dashboard and Input Viewer share an execution-proven ProfileStore name
+resolver. A saved reference or stale active ID is insufficient. Preserve store
+visibility, recovery and concurrency boundaries. Rendering performs no storage
+writes, activation, allocation or filesystem access. Dashboard retains the
+executing row's selected `layout_plate`, using existing supported labels and
+an honest unknown label when legacy information is absent. This prospectively
+supersedes the historical proposal to blank the plate line for logical profiles;
+historical implementation/evidence remains unchanged.
+
+Every newly created complete target-specific Glyph package must carry its
+selected plate. Subsequent Senscope Builder work must preserve it through local
+and portable persistence, package preview, installation and exact readback.
+Plate belongs to the complete target-specific package; no neutral Profile schema
+change is authorized in this repair. This records future product direction and
+does not implement or authorize that downstream Builder work.
+
+Ordinary managed-profile selection is excluded: retain its protections and do
+not rewrite references to make managed display physically reachable. Prepare a
+small candidate-specific hardware display proposal separating host-tested managed
+cases from physically reachable cases. No flash, controller access, installed
+profile mutation, configurator merge or Senscope source-authority repin is
+authorized. Hardware acceptance requires a separate owner-approved step.

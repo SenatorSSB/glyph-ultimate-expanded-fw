@@ -2,6 +2,7 @@
 
 #include "comms/IntegratedDisplay.hpp"
 #include "core/config_utils.hpp"
+#include "display/CurrentProfileLabel.hpp"
 #include "util/state_util.hpp"
 
 #include "icons/12x12bitmaps.hpp"
@@ -226,22 +227,6 @@ void MenuButtonHints::HandleControls(
 }
 
 
-constexpr const char *plate_name(LayoutPlate plate) {
-    switch(plate) {
-        case LAYOUT_PLATE_UNSPECIFIED: 
-            return "Unknown Plate";
-        case LAYOUT_PLATE_EVERYTHING: 
-            return "Full";
-        case LAYOUT_PLATE_FGC:
-            return "FGC";
-        case LAYOUT_PLATE_SPLIT_FGC:
-            return "Split FGC";
-        case LAYOUT_PLATE_PLATFORM_FIGHTER:
-            return "Plat Fighter";
-    }
-    return "Unknown Plate";
-}
-
 constexpr const char *get_stick_string(uint8_t center, uint8_t value) {
     if(value > center) {
 
@@ -270,14 +255,10 @@ void MenuButtonHints::UpdateDisplay(IntegratedDisplay *instance, Adafruit_GFX &d
         const GameModeConfig &mode_config = *instance->CurrentGameMode()->GetConfig();
         /* profile info */
         display.setCursor(12, 20);
-        if (strnlen(mode_config.name, sizeof(mode_config.name)) > 0) {
-            display.print(mode_config.name);
-        } else {
-            display.print(gamemode_name(mode_config.mode_id));
-        }
+        display.print(current_profile_label(instance->CurrentGameMode(), _backend_id));
 
         display.setCursor(12, 30);
-        display.print(plate_name(mode_config.layout_plate));
+        display.print(dashboard_plate_label(mode_config.layout_plate));
 
         const char *backend_text = backend_name(_backend_id);
         display.setCursor(12, 40);
