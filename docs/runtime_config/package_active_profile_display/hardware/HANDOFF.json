@@ -1,0 +1,12 @@
+{
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v1",
+  "status": "READY_FOR_OWNER_APPROVAL_NOT_EXECUTED",
+  "owner_approval": null,
+  "packet_sha256": "b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b",
+  "preparation_manifest_sha256": "90bb909c7d2f22c3e3cd9802deb490cb4d87fb0d5f45eb52ab6e60e2be366c86",
+  "source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "uf2_sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+  "uf2_bytes": 1296896,
+  "physical_operations_performed": 0,
+  "rebuilds": 0
+}

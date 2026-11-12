@@ -1,0 +1,46 @@
+{
+  "verdict": "DONE_FOR_EVIDENCE_PUBLICATION_AND_EXACT_OWNER_APPROVAL_HANDOFF",
+  "reviewer": "resource_handoff_review fresh independent native child",
+  "requested_model": "gpt-6.1-sol",
+  "requested_effort": "high",
+  "observed_model": "UNKNOWN",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v1",
+  "packet_sha256": "b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b",
+  "preparation_manifest_sha256": "90bb909c7d2f22c3e3cd9802deb490cb4d87fb0d5f45eb52ab6e60e2be366c86",
+  "resource_manifest_sha256": "75ab3dff87ca6e0cfcebb563f74f26b65a7ff442fa09a1f646cb06b6e838aef7",
+  "independent_verification": [
+    "Retained exact ELF re-extraction functions/vtables/symbols match sealed current inventories; disassembly differs only locator header",
+    "Exact core1 oracle replay; no unknown edges; resolver64, new label292, affected rendering948, qualified core1 composition1060 within2048",
+    "Canonical parent terminal summary and sealed baseline resource inputs match acf220 source",
+    "All4 original retained custody artifacts size/hash/non-symlink match",
+    "Packet/checker allowlist and five negative controls PASS; fixed legacy route/source-backed two-Back navigation and host-only managed separation verified",
+    "Diff check PASS"
+  ],
+  "repair": "Unsupported compiler-hash wording replaced with sealed objdump/nm hash equality; final manifests resealed and independently rechecked. Optional two-Back clarity also rechecked against exact final approval objects.",
+  "material_findings_remaining": [],
+  "authority": "No approval granted by review; packet stays UNAPPROVED and unexecuted. Root may faithfully record verdict and publish evidence metadata only; no rebuild or source/artifact substitution.",
+  "limits": [
+    "Existing supported non-RTOS/IRQ/ROM/time/no-fault resource predicates retained; graphics source drift qualified through linked shapes/slots only",
+    "No timing/highwater/physical pixel or managed activation/gameplay/new-display hardware PASS",
+    "No controller access, flash, mutation or publication by reviewer"
+  ],
+  "delegation": {
+    "guidance_applicable": true,
+    "capability_discovery": "Native collaboration tool schema inspected and successful child dispatch observed",
+    "native_available": true,
+    "specialist": "stack_impact_audit read-only retained exact ELF/resource correspondence",
+    "independent_reviewer": "resource_handoff_review focused final resource and handoff review",
+    "no_native_reason": "NOT_APPLICABLE"
+  },
+  "network_capabilities": {
+    "live_github_requires_network_enabled": true
+  },
+  "senscope_explicit_owner_publication": {
+    "live_main_verified": "acf22010522ac5b2b17392e977d692195d39e154",
+    "prior_main": "0d97bb6d9f66a756785135b66b1d391abb88dec2",
+    "scope": "Previously reviewed plate direction only, explicitly requested fast-forward; no source repin"
+  },
+  "current_task_physical_operations": 0,
+  "current_task_rebuilds": 0
+}

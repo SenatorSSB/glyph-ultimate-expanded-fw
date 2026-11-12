@@ -1,0 +1,26 @@
+{
+  "hardware/packet.json": {
+    "sha256": "b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b",
+    "bytes": 14351
+  },
+  "hardware/OWNER_PACKET.md": {
+    "sha256": "62f56530f2f0a4ad453bef0cb94bc455edf70ac18bb381ee74ea615258b0f20c",
+    "bytes": 10306
+  },
+  "hardware/BASELINE_BINDING.json": {
+    "sha256": "0a32692dfd73c99e44724f1452122a3a09acf0be2ee43fd5f652e3369cf6dc1d",
+    "bytes": 3400
+  },
+  "hardware/CHECK_HANDOFF.py": {
+    "sha256": "ba705d54eacf5727a54437756bf0776c059520a5df5e707fbb9334f266cc6d08",
+    "bytes": 5994
+  },
+  "resource/MANIFEST.json": {
+    "sha256": "75ab3dff87ca6e0cfcebb563f74f26b65a7ff442fa09a1f646cb06b6e838aef7",
+    "bytes": 2614
+  },
+  "PARENT_ACCEPTANCE.json": {
+    "sha256": "ec80585548ac7dd21319dc2b8c4f914ca63fd1f2289034d7175a8d0d5ff4c187",
+    "bytes": 1053
+  }
+}

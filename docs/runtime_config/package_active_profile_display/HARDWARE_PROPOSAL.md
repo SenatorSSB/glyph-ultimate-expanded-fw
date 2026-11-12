@@ -1,38 +1,21 @@
 # Candidate-specific display acceptance proposal
 
-Status: UNAPPROVED / NON-EXECUTABLE. No controller access or installation is
-authorized by this document. Exact candidate source is `9e69188d857138a3884bcbe243f22188815e9355`; retained UF2 SHA-256 is
-`da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc` (1296896 bytes).
-[VALIDATION.json](VALIDATION.json) records custody and the remaining artifacts.
-These identities must be bound in a separate owner-approved packet.
-Historical hardware packets/results are unchanged and do not accept this build.
+The finalized, exact target-bound proposal is
+[GLYPH-DISPLAY-9E69188D-HW-v1](hardware/OWNER_PACKET.md).
+**FINAL PROPOSAL / UNAPPROVED / NON-EXECUTABLE.**
+Packet bytes and preparation manifest hashes are in [HANDOFF.json](hardware/HANDOFF.json).
+Only later explicit owner approval of those exact objects can authorize the bounded
+physical sequence. This host-only preparation performs no connection or installation.
 
-Proposed small scope after separate owner approval:
+Source remains9e69188d857138a3884bcbe243f22188815e9355 and the exact retained UF2
+remains da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc
+(1296896bytes). No rebuild. Parent c439's bounded canonical CREATE/readback/
+preservation PASS is recorded in [PARENT_ACCEPTANCE.json](PARENT_ACCEPTANCE.json);
+it does not validate the new display build, managed activation or gameplay.
 
-1. Bind full source SHA and retained UF2 SHA-256/size, target unit and known
-   installation/recovery plan. Confirm candidate custody hash before installation.
-   Parent package/migration behavior remains separately unvalidated; stop for
-   storage/recovery anomalies rather than attempting recovery or profile mutation.
-2. Using only already installed, physically reachable legacy native profiles and
-   existing ordinary selection, observe dashboard name and plate and Input Viewer
-   name on one owner-selected backend. Compare against known executing profile
-   and its paired/current Config row, not just a saved reference. Record literal
-   observed text and route; no ID/build attestation inferred from visible text.
-3. If already reachable without mutations, inspect an ordinary non-native mode
-   and unspecified-plate legacy row for truthful fallback/Unknown Plate. Otherwise
-   mark those physical rows NOT_TESTED. Do not create/modify fixtures on hardware.
-4. Record responsiveness and the owner-observed return to the starting existing
-   profile. No Configurator writes or installed profile changes are included.
-
-Host-only cases: synthetic managed execution, hidden managed directory entries,
-stale IDs/native generations/leases, active-record mismatches, failed activation,
-unavailable/recovery store, Configurator exclusion, every supported plate and
-unknown information. Host tests do not establish physical reachability or pixel
-fit. Current ordinary selection refuses managed packages; do not relax guards or
-rewrite references to exercise them. Physical managed display acceptance remains
-NOT_TESTED/deferred until separately authorized selection capability and an exact
-reachable package exist. Do not treat native legacy observations as managed PASS.
-
-This proposal authorizes no flash, connection, serial request, profile installation,
-activation command, reference rewrite or merge. Any eventual operation list and
-preservation evidence require separate exact owner approval before execution.
+The concrete reachable route uses unchanged saved XInput default53 / KazTest5 /
+unspecified row plate, without selecting another profile or rewriting references.
+Known plate/managed execution cases remain host-only. Exact same-unit admission,
+all27-profile/Config/directory preservation, one manual installation and terminal
+uncertainty rules are bound in the proposal. Ordinary managed selection protections
+and all historical evidence remain unchanged.

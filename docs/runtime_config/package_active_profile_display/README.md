@@ -35,3 +35,26 @@ change the built source or authorize substituting a rebuilt UF2. The final
 independent review is recorded separately in FINAL_REVIEW.md.
 
 See [hardware proposal](HARDWARE_PROPOSAL.md); it is UNAPPROVED and non-executable.
+
+## Parent acceptance scope correction — 2026-11-13
+
+Senscope's canonical [Phase-B terminal summary](https://github.com/SenatorSSB/senscope/blob/acf22010522ac5b2b17392e977d692195d39e154/docs/project/hardware/phase-b-corrected-packet/terminal-evidence/summary.json)
+records PASS/HARDWARE_VALIDATED for parent c439 and its exact UF2
+f7827890313cabdbcbe962add049d0f6cccc089f5c78afe3033a5b8285f6c37a.
+It covers one Kazuya Managed CREATE (ID54/revision1, row3), native readback and
+receipt correspondence, and preservation of all26 prior directory entries and
+existing Config/default/backend/RGB state. Managed envelope/root bytes were
+reconstructed expected bytes, not raw exported storage; Runtime Identity did not
+attest the installed build. No activation or gameplay occurred. See
+[PARENT_ACCEPTANCE.json](PARENT_ACCEPTANCE.json) for exact source/packet hashes.
+
+The earlier blanket description of parent package behavior as unvalidated was
+incorrect. This bounded acceptance does **not** validate the new9e691 display
+build, managed activation, gameplay or arbitrary package/migration scenarios.
+The accepted CREATE campaign is not rerun by this preparation.
+
+[Post-build stack proof](resource/REPORT.md) closes the affected rendering bound.
+The finalized [owner packet](hardware/OWNER_PACKET.md) remains UNAPPROVED.
+
+[Focused independent follow-up review](FOLLOWUP_REVIEW.json) approves evidence
+publication and this exact owner-approval handoff only. No physical approval follows.

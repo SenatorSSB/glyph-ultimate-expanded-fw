@@ -42,7 +42,7 @@
       "MenuButtonHints::UpdateDisplay": 48,
       "InputDisplay::UpdateDisplay": 48
     },
-    "full_linked_core1_bound": "NOT_RECOMPUTED; historical whole-core bounds not transferred",
+    "full_linked_core1_bound": "POST_BUILD_QUALIFIED_REPLAY_2026_11_13: affected rendering948, new label292, core1 composition1060 within2048; see resource/REPORT.md. No whole-image/core0 or hardware renewal.",
     "target_stack_highwater_timing": "NOT_MEASURED"
   },
   "dependencies": {
@@ -118,11 +118,21 @@
     "Failed activation is modeled through actual SetConfig/native-state refusal; focused test does not call real ProfileStore::Activate failure",
     "Existing long-name clipping/layout retained; physical pixel fit not observed",
     "No source-authority repin, schema, semantic data, selection/reference/protocol/storage source changes",
-    "No historical hardware evidence modified; package-aware parent boot/hardware remains separately unvalidated"
+    "Historical hardware evidence unchanged; parent c439 has bounded canonical CREATE/readback/preservation PASS, which does not accept this display build, managed activation or gameplay"
   ],
   "delegation": {
     "preflight": "Native collaboration spawn/review facility available; user explicitly requires fresh independent final review; repository safety specialist guidance applies",
     "specialist": "display_safety read-only current package/runtime/concurrency audit",
     "reviewer": "final_display_review fresh independent final source/evidence review; verdict recorded separately"
+  },
+  "followup_2026_11_13": {
+    "parent_acceptance": "PARENT_ACCEPTANCE.json",
+    "affected_rendering_stack_bound_bytes": 948,
+    "new_label_path_including_irq_bytes": 292,
+    "reused_core1_composition_bytes": 1060,
+    "stack1_reservation_bytes": 2048,
+    "resource_evidence": "resource/REPORT.md",
+    "hardware_packet": "hardware/packet.json",
+    "no_rebuild": true
   }
 }

@@ -1,0 +1,77 @@
+{
+  "classification": "OFFLINE_SEALED_EVIDENCE_DERIVATION_NOT_FRESH_DEVICE_STATE",
+  "canonical_senscope_commit": "acf22010522ac5b2b17392e977d692195d39e154",
+  "summary_sha256": "9e2c652a5e3219aaeb935387c91b63b03008f2a2cb9c66aef3bc89d7eccab22c",
+  "private_inventory_sha256": "a0f9d2e3162a5fb483d3d2e335ba775205986334c279034e0b45f27765189e00",
+  "original_inputs_verified": {
+    "expected-Config-after.body": {
+      "bytes": 368,
+      "sha256": "913e9db4e3809b36f101ede84b6019c7fa60c3d52e3c94e97254ae95d82e8d42"
+    },
+    "13-FINAL_LIST-response.cobs": {
+      "bytes": 276,
+      "sha256": "83384530b92a7fca850e34c4658c7bbcd8591c54e67303f225cd2ee4ef43c8b3"
+    },
+    "14-FINAL_LIST-response.cobs": {
+      "bytes": 194,
+      "sha256": "0c5abadbed5191231bc7e5587df1b1b48d0b318f0451affebe5429c8e96b8f98"
+    },
+    "15-FINAL_LIST-response.cobs": {
+      "bytes": 218,
+      "sha256": "86b6da3fc2e9fef0f17ea7a55bdec3b41b8e3653f151b2d5eaae34d0263c1925"
+    },
+    "16-FINAL_LIST-response.cobs": {
+      "bytes": 108,
+      "sha256": "d8e2db4aa388cf6bef1252e5dbc614d9631918ca53b668eb2d4476a377e5bb9d"
+    }
+  },
+  "expected_config_sha256": "913e9db4e3809b36f101ede84b6019c7fa60c3d52e3c94e97254ae95d82e8d42",
+  "directory_entries": 27,
+  "ordered_directory_sha256": "80dbc10ee89d4bde3223f5c3daa4e9852b39ed731d290e9bce53f104253ae85a",
+  "directory_digest_definition": "SHA256(UTF8 Glyph.DisplayPacket.Directory.v1 + NUL + for each entry in observed LIST order: u32 big-endian wrapper length + deterministic ProfileStoreEntry protobuf bytes); no excluded fields",
+  "store_incarnation": 1,
+  "store_generation": 229,
+  "config_crc32": 1599895773,
+  "high_water": "17293822569102712133",
+  "default_usb_backend_config_one_based": 1,
+  "xinput_default_mode_config_one_based": 3,
+  "selected_legacy_record": {
+    "row_zero_based": 2,
+    "context_row_one_based": 3,
+    "reference": 53,
+    "engine": 1,
+    "directory_name": "KazTest5",
+    "revision": 1,
+    "schema": 5,
+    "layout_plate": 0,
+    "expected_plate_label": "Unknown Plate"
+  },
+  "managed_record_not_selected": {
+    "row_zero_based": 3,
+    "id": 54,
+    "name": "Kazuya Managed",
+    "layout_plate": 4,
+    "expected_label_if_reachable": "Plat Fighter",
+    "physical_display_status": "NOT_TESTED_HOST_ONLY"
+  },
+  "target_binding": {
+    "method": "OS_USB_SERIAL_EXACT_MATCH_PLUS_VID_PID_AND_OPERATOR_BROWSER_CHOOSER_CONFIRMATION",
+    "expected_vid": "0x2e8a",
+    "private_reference": "/Users/rasmus.pekkarinen/Personal code/senscope-hardware-evidence/G4-HW1-20261027/target-identification.json",
+    "record_sha256": "5bf2b230b9c526ded304c78f0fb328a0ea460d145403332c228a54b63a20463f",
+    "private_field": "serial_number",
+    "private_value_utf8_bytes": 16,
+    "private_value_sha256": "91eed08ea4e2a72d702c9364103b9905b730caac0978bad074f4f6d8e379b30e",
+    "future_unit_count": 1,
+    "fallback": "NONE",
+    "current_physical_observation": "NOT_OBSERVED",
+    "verification": "OFFLINE_EXISTING_FILE_ONLY_NO_OS_USB_OR_SERIAL_ACCESS",
+    "supported_configurator_pids": [
+      "0x000a",
+      "0x1092"
+    ],
+    "runtime_admission": "Runtime Identity status2/backend8 normal; status3/backend8 recovery STOP; PID supplies correspondence only"
+  },
+  "target_file_and_serial_digest_verified_offline": true,
+  "fresh_admission": "Require all baseline identities unchanged; refuse drift. This record is not a live observation."
+}

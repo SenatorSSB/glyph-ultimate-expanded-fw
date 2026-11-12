@@ -1,0 +1,14 @@
+{
+  "result": "PASS_OFFLINE_ONLY",
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v1",
+  "packet_sha256": "b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b",
+  "preparation_manifest_sha256": "90bb909c7d2f22c3e3cd9802deb490cb4d87fb0d5f45eb52ab6e60e2be366c86",
+  "resource_manifest_sha256": "75ab3dff87ca6e0cfcebb563f74f26b65a7ff442fa09a1f646cb06b6e838aef7",
+  "all4_retained_artifacts": "HASH_SIZE_NONSYMLINK_MATCH",
+  "affected_rendering_bound_bytes": 948,
+  "new_label_path_bytes": 292,
+  "core1_composition_bytes": 1060,
+  "negative_controls_rejected": 5,
+  "hardware_access": false,
+  "rebuild": false
+}

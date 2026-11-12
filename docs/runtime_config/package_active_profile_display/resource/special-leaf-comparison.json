@@ -1,0 +1,217 @@
+[
+  {
+    "name": "__wrap___aeabi_drsub",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_cdrcmple",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_frsub",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fsub",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fadd",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fdiv",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fmul",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_cfrcmple",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_cfcmpeq",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_cfcmple",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fcmpeq",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fcmple",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_fcmpun",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_ui2f",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_i2f",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_f2uiz",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_ul2f",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_lmul",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "____wrap___aeabi_idivmod_veneer",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "____wrap___aeabi_uidiv_veneer",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "____wrap___aeabi_uldivmod_veneer",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "____wrap___aeabi_uidivmod_veneer",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "____wrap___aeabi_idiv_veneer",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_idiv",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_idivmod",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_uidiv",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_uidivmod",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_ldivmod",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_uldivmod",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "____wrap___aeabi_lmul_veneer",
+    "retained_bound": 64,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap_memset",
+    "retained_bound": 8,
+    "shape_match": true
+  },
+  {
+    "name": "__wrap___aeabi_memcpy",
+    "retained_bound": 12,
+    "shape_match": true
+  },
+  {
+    "name": "__aeabi_llsr",
+    "retained_bound": 0,
+    "shape_match": true
+  },
+  {
+    "name": "____aeabi_llsr_veneer",
+    "retained_bound": 4,
+    "shape_match": true
+  },
+  {
+    "name": "sleep_us",
+    "retained_bound": 512,
+    "shape_match": true
+  },
+  {
+    "name": "sleep_until",
+    "retained_bound": 496,
+    "shape_match": true
+  },
+  {
+    "name": "sleep_ms",
+    "retained_bound": 520,
+    "shape_match": true
+  },
+  {
+    "name": "best_effort_wfe_or_timeout",
+    "retained_bound": 512,
+    "shape_match": true
+  },
+  {
+    "name": "__retarget_lock_acquire",
+    "retained_bound": 24,
+    "shape_match": true
+  },
+  {
+    "name": "__retarget_lock_acquire_recursive",
+    "retained_bound": 24,
+    "shape_match": true
+  },
+  {
+    "name": "__retarget_lock_release",
+    "retained_bound": 24,
+    "shape_match": true
+  },
+  {
+    "name": "__retarget_lock_release_recursive",
+    "retained_bound": 24,
+    "shape_match": true
+  },
+  {
+    "name": "reboot_bootloader()",
+    "retained_bound": 32,
+    "shape_match": true
+  }
+]
