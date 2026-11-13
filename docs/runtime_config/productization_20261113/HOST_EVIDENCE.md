@@ -5,7 +5,7 @@ The source under test for the combined firmware is `84556d904f067bda5a101e629768
 | Feature | Diagnostic source | Integration |
 | --- | --- | --- |
 | Startup and presentation | `7d1f6a3ba99627e88dfdaf404e08ff816902ccfc` | Namespace reader, release splash, recovery diagnostics and About timing. Combined borrowed the same timing frame correction. |
-| Ordinary profile selection | `c0ac5106605df6f5f6b6d95610dfb58d251c8ece` | Dedicated pair, backend-filtered menu, reboot-bound activation, exact ID, physical GameCube idle admission. |
+| Ordinary profile selection | `f6655e30c6d94b4468711053e5c6c76c00be9cc7` | Dedicated pair, backend-filtered menu, reboot-bound activation, exact ID, physical GameCube idle admission. |
 | Package lifecycle | Integrated on top of the accepted CREATE transaction. `9ea1898b` records an intermediate storage design only. | Protocol 4, operations 17 through 20, exact replacement and deletion guards, dense owned-row/RGB compaction, transaction fencing, protected references and retry receipts. |
 | Combined | `84556d904f067bda5a101e6297689239ecd04aae` | Forward integration followed by cross-feature fixes, source-bounded stack lifetimes, and GameCube chord admission. |
 | Host tooling | Senscope `codex/glyph-productization-20261113` | Explicit target plate in local/portable persistence, native compiler, file preview, finite package codec and offline stored-data verification. |
