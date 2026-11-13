@@ -23,6 +23,8 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(ROOT / "tools"))
 from generate_glyph_checker_census import generate as generate_census, rendered as render_census  # noqa: E402
 
+import glyph_ci_package_scope as package_scope
+
 MANIFEST = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
 CENSUS = ROOT / "docs/runtime_config/fixtures/glyph_checker_census.json"
 REQUIRED = {"id", "path", "command", "category", "applicability", "branch_policy", "required_arguments", "mutation_risk", "source_dependencies", "load_bearing", "historical", "reason"}
@@ -407,7 +409,13 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     if any(entry['id'] == 'gp_config023_usb_index_validation' and c023_replay_arguments(entry)
            for entry in entries):
         from glyph_c023_campaign_transition import replay_covered_checker_paths
-        replay_paths = replay_covered_checker_paths(ROOT)
+        if package_scope.package_lineage(ROOT):
+            package_scope.verify_current_package(ROOT)
+            with tempfile.TemporaryDirectory(prefix="glyph-c023-classify-") as directory:
+                proof = package_scope.original_proof(ROOT, Path(directory))
+            replay_paths = frozenset(proof["covered"])
+        else:
+            replay_paths = replay_covered_checker_paths(ROOT)
     elif any(entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
            for entry in entries):
         from glyph_c022_campaign_transition import replay_covered_checker_paths
@@ -823,7 +831,13 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         # the predecessor's smaller object-root catalog.
         if c023_selected:
             from glyph_c023_campaign_transition import authenticate as authenticate_c023
-            proof = authenticate_c023(ROOT)
+            if package_scope.package_lineage(ROOT):
+                package_scope.verify_current_package(ROOT)
+                with tempfile.TemporaryDirectory(prefix="glyph-c023-catalog-") as directory:
+                    proof = package_scope.original_proof(ROOT, Path(directory))
+                roots.add(package_scope.C023_DONE)
+            else:
+                proof = authenticate_c023(ROOT)
         else:
             proof = authenticate(ROOT)
         roots.update(ROOTS)
@@ -1111,8 +1125,17 @@ def main() -> int:
                     output["phase"] = "checker:" + str(entry["id"])
                     remaining = require_budget(output["phase"])
                     timeout = min(CHECKER_TIMEOUT_SECONDS, remaining)
+                    active = clone
+                    checker_env = checker_environment(entry, env)
+                    is_c023 = (entry["id"] == "gp_config023_usb_index_validation"
+                               and package_scope.package_lineage(ROOT))
+                    if is_c023:
+                        active = package_scope.materialize(clone, package_scope.C023_DONE, parent)
+                        checker_env.update(GLYPH_CHECKER_BASE=package_scope.C023_DONE,
+                                           GLYPH_CHECKER_EXPECTED_MERGE_BASE=package_scope.C023_DONE)
+                        replay_before = canonical_fingerprint(active)
                     code, stdout, stderr, failure, duration = run_checker(
-                        execution_command(entry["command"]), clone, checker_environment(entry, env), timeout
+                        execution_command(entry["command"]), active, checker_env, timeout
                     )
                     if failure == "CHECKER_TIMEOUT" and remaining <= CHECKER_TIMEOUT_SECONDS:
                         failure = "AGGREGATE_TIMEOUT"
@@ -1121,9 +1144,11 @@ def main() -> int:
                               "failure_kind": failure, "timeout_seconds": timeout,
                               "stdout_summary": stdout.strip().splitlines()[-1:], "stderr_summary": stderr.strip().splitlines()[-1:],
                               "duration_seconds": round(duration, 3), "isolated_proof": "UNAVAILABLE"}
+                    if is_c023:
+                        result["historical_execution_source"] = package_scope.C023_DONE
                     output["results"].append(result)
                     try:
-                        if canonical_fingerprint(clone) != isolated_before:
+                        if canonical_fingerprint(clone) != isolated_before or (is_c023 and canonical_fingerprint(active) != replay_before):
                             result["isolated_proof"] = "MISMATCH"
                             failure = failure or "ISOLATED_REPOSITORY_MUTATION"
                         else:
