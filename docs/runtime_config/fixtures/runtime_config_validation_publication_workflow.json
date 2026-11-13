@@ -310,6 +310,39 @@
       "id": "inverted_build_condition",
       "old": "if: needs.validation.outputs.firmware == 'true'",
       "new": "if: needs.validation.outputs.firmware == 'false'"
+    },
+    {
+      "id": "current_host_removed_dependency",
+      "old": "    needs: current_host\n",
+      "new": ""
+    },
+    {
+      "id": "current_host_omits_real_package_checks",
+      "old": "        python3 tools/glyph_ci_current_package_tests.py",
+      "new": "        echo skipped"
+    },
+    {
+      "id": "current_host_tolerates_native_failure",
+      "old": "        python3 tools/glyph_ci_current_firmware.py",
+      "new": "        python3 tools/glyph_ci_current_firmware.py || true"
     }
+  ],
+  "current_host_checks": [
+    "python3 tools/test_glyph_ci_build_inputs.py",
+    "python3 tools/check_glyph_checker_census.py",
+    "python3 tools/check_glyph_runtime_config_validation_health.py",
+    "python3 tools/check_glyph_build_input_provenance_inventory.py",
+    "python3 tools/check_glyph_build_input_non_selector_configuration.py",
+    "python3 tools/check_glyph_build_input_resolution_observations.py",
+    "python3 tools/check_glyph_runtime_config_validation_publication_workflow.py",
+    "python3 tools/check_glyph_artifact_postprocessor_workflow.py",
+    "python3 tools/check_glyph_active_profile_display.py",
+    "python3 tools/check_glyph_controller_profile_selector.py",
+    "python3 tools/check_glyph_profile_store_selection_recovery.py",
+    "python3 tools/check_glyph_profile_store_config_persistence.py",
+    "python3 tools/check_glyph_profile_store_production_tool.py",
+    "python3 tools/check_glyph_profile_store_littlefs_host.py",
+    "python3 tools/glyph_ci_current_firmware.py",
+    "python3 tools/glyph_ci_current_package_tests.py"
   ]
 }
