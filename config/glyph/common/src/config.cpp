@@ -170,7 +170,8 @@ void refuse_boot(BootOutcome outcome, bool display_ready) {
 // I/O. Both phases run in the same loop iteration with the same live backend.
 uint8_t pending_chord_row1 = 0;
 void request_mode_destination(CommunicationBackendId, size_t mode_index, const Config &live) {
-    if (mode_index < live.game_mode_configs_count && mode_index < sizeof(live.game_mode_configs) / sizeof(live.game_mode_configs[0]))
+    if (!pending_chord_row1 && mode_index < live.game_mode_configs_count &&
+        mode_index < sizeof(live.game_mode_configs) / sizeof(live.game_mode_configs[0]))
         pending_chord_row1 = static_cast<uint8_t>(mode_index + 1);
 }
 __attribute__((noinline)) void commit_mode_destination(size_t backend_index, size_t mode_index) {
@@ -239,6 +240,11 @@ void enter_recovery_configurator() {
 
 }  // namespace
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+uint32_t profile_selection::GamecubeSelectionPending() {
+    return Pending() || pending_chord_row1 || managed_chord_held(inputs.buttons);
+}
+#endif
 
 __attribute__((noinline)) bool PrepareBootDisplay() {
     // Create GPIO input source and use it to read button states for checking button holds.
@@ -439,12 +445,19 @@ void loop() {
     select_mode(backends, backend_count, config);
     if (pending_chord_row1) {
         const size_t row = pending_chord_row1 - 1;
-        pending_chord_row1 = 0;
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
-        if (config.game_mode_configs[row].managed_format) persist_managed_chord(row);
-        else
+        if (config.game_mode_configs[row].managed_format) {
+            if (backends[0]->BackendId() != COMMS_BACKEND_GAMECUBE ||
+                static_cast<GamecubeBackend *>(backends[0])->SelectionIdleAdmitted()) {
+                pending_chord_row1 = 0;
+                persist_managed_chord(row);
+            }
+        } else
 #endif
+        {
+            pending_chord_row1 = 0;
             persist_ordinary_chord(row);
+        }
     }
 
     for (size_t i = 0; i < backend_count; i++) {

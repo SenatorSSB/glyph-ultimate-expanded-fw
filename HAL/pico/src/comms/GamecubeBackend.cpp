@@ -33,7 +33,11 @@ void  __no_inline_not_in_flash_func(GamecubeBackend::SendReport()) {
     bool pollTime = true;
     while(pollTime == true) {
         ScanInputs(InputScanSpeed::FAST);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        const auto status = _gamecube.WaitForPollStartBounded(profile_selection::GamecubeSelectionPending);
+#else
         const auto status = _gamecube.WaitForPollStartBounded(profile_selection::Pending);
+#endif
         if (status == PollStartStatus::IDLE) {
             return;
         }
