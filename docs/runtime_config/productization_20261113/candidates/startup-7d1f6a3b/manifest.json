@@ -1,0 +1,46 @@
+{
+  "source": "7d1f6a3ba99627e88dfdaf404e08ff816902ccfc",
+  "classification": "isolated startup diagnostic, hardware acceptance pending",
+  "files": {
+    "firmware.elf": {
+      "stored": "firmware.elf.gz",
+      "bytes": 5760392,
+      "sha256": "885d500ea5a331f2929e55b1ca08c2a6c284f71ce92424fb315c686e5b9a82d0"
+    },
+    "firmware.bin": {
+      "stored": "firmware.bin.gz",
+      "bytes": 650036,
+      "sha256": "ad918ba330e52990c7f8287b7f7ac22419586f0e3fe69b0f5ba1af349f18f7cb"
+    },
+    "firmware.uf2": {
+      "stored": "firmware.uf2",
+      "bytes": 1300480,
+      "sha256": "46bf9d701376dba8b0d013efd8429b15ee36fde0fbf0964a2f9cc5866bcc3a57"
+    },
+    "firmware.map": {
+      "stored": "firmware.map.gz",
+      "bytes": 3799138,
+      "sha256": "1586552105dc275b747b5ec22fac7d70e34936d70aebada78bb18f53cee27228"
+    },
+    "build.log": {
+      "stored": "build.log.gz",
+      "bytes": 49143,
+      "sha256": "f56a4d7a8056f64261d1ec721462b3fbdc1fc02c84f9633e44b48768450ab469"
+    },
+    "resource/display-stack-result.json": {
+      "stored": "display-stack-result.json.gz",
+      "bytes": 516,
+      "sha256": "0aa8c80f393c5d630a77f20e17ec94a4a46a88c6de2bfc7f7b8482e3425413a6"
+    },
+    "resource/summary.json": {
+      "stored": "summary.json.gz",
+      "bytes": 3473,
+      "sha256": "4db804c6f86e8a2a41b16333befb196612127d924aa881685dbc94f40affc71d"
+    },
+    "resource/startup.json": {
+      "stored": "startup.json.gz",
+      "bytes": 1691,
+      "sha256": "c3c191e3e95a8a4bb25b9dda1a71948cc56fb9b7cee7f7a8d5355177992c9852"
+    }
+  }
+}
