@@ -16,22 +16,21 @@ namespace {
 using package_storage::Get32;
 using package_storage::RecordValid;
 struct EnumerationSelection {
-    size_t wanted, seen;
-    package_storage::NamespaceObject *out;
-    bool found;
+    size_t first, capacity, seen;
+    package_storage::NamespaceObject *objects;
+    size_t count;
 };
 bool SelectObject(void *context,const CheckedStorage::Entry &entry) {
     auto &selection=*static_cast<EnumerationSelection *>(context);
-    if(selection.seen==selection.wanted){
-        // Same-mount name_max31; reserve slash/NUL without truncating a name.
+    if(selection.seen>=selection.first && selection.count<selection.capacity){
         size_t n=0;while(n<sizeof(entry.name)&&entry.name[n])++n;
         if(!n||n>31||n==sizeof(entry.name))return false;
-        selection.out->path[0]='/';
-        std::memcpy(selection.out->path+1,entry.name,n);
-        selection.out->path[n+1]=0;
-        selection.out->bytes=entry.bytes;
-        selection.out->directory=entry.directory;
-        selection.found=true;
+        auto &object=selection.objects[selection.count++];
+        object.path[0]='/';
+        std::memcpy(object.path+1,entry.name,n);
+        object.path[n+1]=0;
+        object.bytes=entry.bytes;
+        object.directory=entry.directory;
     }
     if(selection.seen==SIZE_MAX)return false;
     ++selection.seen;
@@ -231,12 +230,29 @@ GlyphPackageSourceReader::GlyphPackageSourceReader(ProfileStore &store,Persisten
 GlyphPackageSourceReader::~GlyphPackageSourceReader(){ClearProfileLease();}
 bool GlyphPackageSourceReader::MountedAndConfigured()const{return _persistence.IsAvailable()&&PackageStorageFence::Available();}
 bool GlyphPackageSourceReader::ObservationFailed()const{return _failed;}
+void GlyphPackageSourceReader::BeginClassification(){
+    _classifying=true; _page_valid=false; _materialized=false;
+}
+void GlyphPackageSourceReader::EndClassification(){
+    _classifying=false; _page_valid=false; _materialized=false;
+}
 __attribute__((noinline)) bool GlyphPackageSourceReader::ObjectAt(size_t index,package_storage::NamespaceObject &out,bool &eof){
     out={};eof=false;
-    EnumerationSelection selection{index,0,&out,false};
-    const auto result=CheckedStorage::Enumerate("/",SelectObject,&selection);
-    if(!result){_failed=true;return false;}
-    eof=!selection.found;return true;
+    if(!_classifying){
+        EnumerationSelection one{index,1,0,&out,0};
+        if(!CheckedStorage::Enumerate("/",SelectObject,&one)){_failed=true;return false;}
+        eof=!one.count;return true;
+    }
+    if(_page_valid && index>=_total){eof=true;return true;}
+    if(!_page_valid || index<_first || index-_first>=_count){
+        const size_t start=index-index%kDirectoryPage;
+        EnumerationSelection page{start,kDirectoryPage,0,_objects,0};
+        if(!CheckedStorage::Enumerate("/",SelectObject,&page) ||
+           (_page_valid && _total!=page.seen)){_failed=true;return false;}
+        _first=start;_count=page.count;_total=page.seen;_page_valid=true;
+    }
+    if(index>=_total){eof=true;return true;}
+    out=_objects[index-_first];return true;
 }
 __attribute__((noinline)) package_storage::Probe GlyphPackageSourceReader::Extent(const char *path,size_t &bytes){
     bytes=0;const auto result=CheckedStorage::Stat(path,&bytes);
@@ -249,7 +265,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Read(const char *path,s
     CheckedStorage::File file;
     auto result=CheckedStorage::Open(file,path,false,CheckedStorage::Kind::Root);
     bool ok=bool(result);
-    if(ok)ok=bool(CheckedStorage::Seek(file,offset));
+    if(ok&&offset)ok=bool(CheckedStorage::Seek(file,offset));
     if(ok){result=CheckedStorage::Read(file,out,bytes);ok=bool(result)&&result.bytes==bytes;}
     // Failed/lost-open acknowledgement may still own a native handle under a
     // different test adapter; exactly one checked close is mandatory if owned.
@@ -259,6 +275,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Read(const char *path,s
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::LoadNamedConfig(
     const char *path,uint32_t maximum,uint8_t *sha,uint32_t *crc,uint32_t *bytes,bool *source_valid){
+    _materialized=false;
     if(!SelectConfig(path,_config_file))return false;
     _config_facts={}; _config_valid=false;
     _config_outputs={sha,crc,bytes,source_valid,maximum};
@@ -266,6 +283,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::LoadNamedConfig(
         _config_facts,_config_valid,_config_outputs.maximum);
     if(result==Persistence::LoadResult::StorageFailure)_failed=true;
     if(result!=Persistence::LoadResult::Loaded||_config_facts.bytes>_config_outputs.maximum)return false;
+    _materialized=_classifying;
     if(_config_outputs.sha)std::memcpy(_config_outputs.sha,_config_facts.sha,32);
     if(_config_outputs.crc)*_config_outputs.crc=_config_facts.crc;
     if(_config_outputs.bytes)*_config_outputs.bytes=_config_facts.bytes;
@@ -279,14 +297,20 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Config(const char *path
     return ExtractConfigFacts(_persistence.PackageConfigScratch(),facts);
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::HistoricalRetainedConfig(){
-    _config_valid=false;
+    _materialized=false; _config_valid=false;
     const auto result=_persistence.ObserveHistoricalRetainedConfig(_config_facts,_config_valid);
     if(result==Persistence::LoadResult::StorageFailure)_failed=true;
     return result==Persistence::LoadResult::Loaded&&_config_valid&&!_failed;
 }
+bool GlyphPackageSourceReader::MaterializeProjection(const char *path){
+    Persistence::PackageConfigFile file;
+    if(_materialized && SelectConfig(path,file) && file==_config_file)
+        return _config_facts.bytes<=8191;
+    return LoadNamedConfig(path,8191);
+}
 __attribute__((noinline)) bool GlyphPackageSourceReader::Row(const char *path,size_t index,package_storage::RowFacts &facts){
     std::memset(static_cast<void *>(&facts),0,sizeof(facts));
-    if(!LoadNamedConfig(path,8191))return false;
+    if(!MaterializeProjection(path))return false;
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.game_mode_configs_count||index>=sizeof(config.game_mode_configs)/sizeof(config.game_mode_configs[0]))return false;
     const auto &row=config.game_mode_configs[index];
@@ -294,7 +318,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Row(const char *path,si
     return HashMessage(GameModeConfig_fields,&row,facts.sha);
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::Rgb(const char *path,size_t index,uint8_t sha[32]){
-    if(!LoadNamedConfig(path,8191))return false;
+    if(!MaterializeProjection(path))return false;
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.rgb_configs_count||index>=sizeof(config.rgb_configs)/sizeof(config.rgb_configs[0]))return false;
     return HashMessage(RgbConfig_fields,&config.rgb_configs[index],sha);
@@ -323,7 +347,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::Native(const char *path
     ClearProfileLease();
     if(!RecordValid(record,bytes))return false;
     _native_record=record; _native_bytes=bytes; _native_index=index;
-    if(!LoadNamedConfig(path,8191)||!_config_valid)return false;
+    if(!MaterializeProjection(path)||!_config_valid)return false;
     return ValidateMaterializedNative();
 }
 __attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNative(){

@@ -15,6 +15,8 @@ class GlyphPackageSourceReader final : public package_storage::NamespaceReader {
     // append proof never borrows or overwrites ConfigWriteCandidate.
     GlyphPackageSourceReader(ProfileStore &, Persistence &, bool = true);
     ~GlyphPackageSourceReader() override;
+    void BeginClassification() override;
+    void EndClassification() override;
     bool MountedAndConfigured() const override;
     bool ObservationFailed() const override;
     bool ObjectAt(size_t, package_storage::NamespaceObject &, bool &eof) override;
@@ -34,6 +36,13 @@ class GlyphPackageSourceReader final : public package_storage::NamespaceReader {
     bool LoadNamedConfig(const char *, uint32_t, uint8_t *sha = nullptr,
                          uint32_t *crc = nullptr, uint32_t *bytes = nullptr,
                          bool *source_valid = nullptr);
+    // A bounded page borrows space in the existing classifier lease. Larger
+    // directories refill it through the same complete checked enumeration.
+    static constexpr size_t kDirectoryPage = 8;
+    package_storage::NamespaceObject _objects[kDirectoryPage]{};
+    size_t _first = 0, _count = 0, _total = 0;
+    bool _classifying = false, _page_valid = false, _materialized = false;
+    bool MaterializeProjection(const char *path);
     bool ValidateCandidateProfile();
     bool CanonicalCandidateProfile(const uint8_t *, size_t);
     void ClearProfileLease();
