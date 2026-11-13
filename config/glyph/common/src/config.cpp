@@ -429,6 +429,14 @@ void setup() {
     publish_boot_state(BootOutcome::Normal, display_ready);
 }
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+// Return the idle decision before any report, filesystem or encoder frame.
+static __attribute__((noinline)) bool managed_chord_admitted(CommunicationBackend *backend) {
+    return backend->BackendId() != COMMS_BACKEND_GAMECUBE ||
+        static_cast<GamecubeBackend *>(backend)->SelectionIdleAdmitted();
+}
+#endif
+
 void loop() {
     if (read_boot_state().outcome == BootOutcome::RecoveryConfigurator) {
         if (recovery_configurator != nullptr) recovery_configurator->SendReport();
@@ -447,8 +455,7 @@ void loop() {
         const size_t row = pending_chord_row1 - 1;
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
         if (config.game_mode_configs[row].managed_format) {
-            if (backends[0]->BackendId() != COMMS_BACKEND_GAMECUBE ||
-                static_cast<GamecubeBackend *>(backends[0])->SelectionIdleAdmitted()) {
+            if (managed_chord_admitted(backends[0])) {
                 pending_chord_row1 = 0;
                 persist_managed_chord(row);
             }
@@ -459,6 +466,7 @@ void loop() {
             persist_ordinary_chord(row);
         }
     }
+
 
     for (size_t i = 0; i < backend_count; i++) {
         backends[i]->SendReport();

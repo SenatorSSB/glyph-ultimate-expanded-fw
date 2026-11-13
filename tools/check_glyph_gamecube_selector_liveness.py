@@ -134,7 +134,9 @@ bool all_buttons_held(const uint64_t &buttons,uint64_t mask){return mask && (but
 ''' + sensed + '\n' + pending
         begin=config.index('    if (pending_chord_row1) {',config.index('void loop()'))
         end=config.index('    for (size_t i = 0; i < backend_count; i++)',begin)
-        chord_gate='void application_chord_gate(CommunicationBackend **backends, void (*persist_managed_chord)(size_t), void (*persist_ordinary_chord)(size_t)) {\n'+config[begin:end]+'}\n'
+        helper=config.index('static __attribute__((noinline)) bool managed_chord_admitted(')
+        gate_helper=config[helper:config.index('\n#endif',helper)]
+        chord_gate=gate_helper+'\nvoid application_chord_gate(CommunicationBackend **backends, void (*persist_managed_chord)(size_t), void (*persist_ordinary_chord)(size_t)) {\n'+config[begin:end]+'}\n'
     parts = [defs,(FIX/'hardware.cpp').read_text(),source('include/gamecube_definitions.h'),
              source('include/joybus.h'), sdk, source('include/GamecubeConsole.hpp'),
              mailbox+managed_helpers,old_source('HAL/pico/include/comms/GamecubeBackend.hpp') if old else
