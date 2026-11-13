@@ -29,6 +29,9 @@ struct EnvelopePhase {
 static_assert(sizeof(EnvelopePhase) <= sizeof(ProfileStoreRequest), "package request exceeds owner");
 static_assert(sizeof(PackageBody) <= 3908, "package body exceeds initialization owner");
 static_assert(sizeof(PackageResponse) <= sizeof(ProfileStoreResponse), "package response exceeds owner");
+inline bool LifecycleOperation(PackageOperation operation) {
+    return operation >= PackageOperation_UPDATE_PACKAGE && operation <= PackageOperation_DELETE_PACKAGE;
+}
 namespace wire {
 enum class Message : uint8_t { Envelope, Body, Mode, Socd, Remap, Rgb, Color };
 enum class Kind : uint8_t { Scalar, String, Bytes, Packed, Child };
@@ -39,6 +42,8 @@ inline bool RuleFor(Message message, unsigned tag, Rule &r) {
     case Message::Envelope:
         switch (tag) {
         case 1: case 3: case 4: case 13: case 21: return true;
+        case 27: case 28: case 30: return true;
+        case 29: r = {Kind::String, 17, 1, {}}; return true;
         case 2: return true; // only full-width uint64 field in requests
         case 24: r = {Kind::Child, 4491, 1, Message::Body}; return true;
         case 25: case 26: r = {Kind::Bytes, 32, 1, {}}; return true;
@@ -135,9 +140,9 @@ inline bool Scan(const uint8_t *b, size_t size, Message message, unsigned depth 
         previous = tag;
         if (tag < 32) seen |= uint32_t(1) << tag;
         if (r.kind == Kind::Scalar) {
-            if (type != 0 || !Varint(b, size, i, v) || !v) return false;
+            if (type != 0 || !Varint(b, size, i, v) || (!v && !(message == Message::Envelope && tag == 30))) return false;
             if (!(message == Message::Envelope && tag == 2) && v > r.maximum) return false;
-            if (message == Message::Envelope && tag == 3 && v != 1 && v != 15 && v != 16) return false;
+            if (message == Message::Envelope && tag == 3 && v != 1 && (v < 15 || v > 20)) return false;
             if (message == Message::Color && tag == 1 && !PhysicalRgb(v)) return false;
             continue;
         }
@@ -235,7 +240,7 @@ inline ProtocolRoute RouteProtocol(const uint8_t *b, size_t size) {
         const unsigned tag = unsigned(key >> 3), type = unsigned(key & 7);
         if (type == 0) {
             if (!raw_varint(value)) return ProtocolRoute::Malformed;
-            if (tag == 1 && value == 3) package = true;
+            if (tag == 1 && (value == 3 || value == 4)) package = true;
         } else {
             if (tag == 1) return ProtocolRoute::Malformed;
             if (type == 2) { if (!raw_varint(value)) return ProtocolRoute::Malformed; }
@@ -251,7 +256,7 @@ inline ProtocolRoute RouteProtocol(const uint8_t *b, size_t size) {
 
 inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePhase &phase) {
     phase.Release(); phase.request = PackageEnvelope_init_zero;
-    if (!size || size > 4564 || !wire::Scan(bytes, size, wire::Message::Envelope)) return false;
+    if (!size || size > 4580 || !wire::Scan(bytes, size, wire::Message::Envelope)) return false;
     phase.package.maximum = 4491; phase.native.maximum = 3336;
     if (!wire::FindSpan(bytes, size, 24, phase.package)) return false;
     if (phase.package.bytes) {
@@ -262,16 +267,27 @@ inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePh
     auto input = pb_istream_from_buffer(bytes, size);
     if (!pb_decode(&input, PackageEnvelope_fields, &phase.request) || input.bytes_left) { phase.Release(); return false; }
     auto &r = phase.request;
-    if (r.protocol_version != 3 || !r.request_token ||
+    if ((r.protocol_version != 3 && r.protocol_version != 4) || !r.request_token ||
         (r.operation != PackageOperation_PACKAGE_STATUS && !r.expected_store_incarnation)) { phase.Release(); return false; }
+    const bool target = r.target_id && r.expected_revision;
+    const bool extras = r.target_id || r.expected_revision || r.replacement_name[0] || r.has_replacement_rank;
+    if ((r.protocol_version == 3 && (extras || size > 4564)) ||
+        (!LifecycleOperation(r.operation) && extras)) { phase.Release(); return false; }
     bool valid = false;
     if (r.operation == PackageOperation_PACKAGE_STATUS) valid = size <= 15 && !r.expected_store_generation &&
         !r.expected_config_generation && !r.expected_store_incarnation && !phase.package.bytes &&
         !r.has_expected_digest && !r.has_expected_config_sha256;
-    else if (r.operation == PackageOperation_CREATE_PACKAGE) valid = r.expected_store_generation &&
+    else if (r.operation == PackageOperation_CREATE_PACKAGE) valid = r.protocol_version == 3 && r.expected_store_generation &&
         phase.package.seen && !r.has_expected_digest && r.has_expected_config_sha256;
     else if (r.operation == PackageOperation_QUERY_PACKAGE) valid = size <= 57 && !r.expected_store_generation &&
         !r.expected_config_generation && !phase.package.bytes && r.has_expected_digest && !r.has_expected_config_sha256;
+    else if (LifecycleOperation(r.operation)) {
+        valid = r.protocol_version == 4 && target && r.expected_store_generation &&
+            !r.has_expected_digest && r.has_expected_config_sha256 &&
+            phase.package.seen == (r.operation == PackageOperation_UPDATE_PACKAGE) &&
+            bool(r.replacement_name[0]) == (r.operation == PackageOperation_RENAME_PACKAGE) &&
+            r.has_replacement_rank == (r.operation == PackageOperation_REORDER_PACKAGE);
+    }
     if (!valid) { phase.Release(); return false; }
     if (phase.package.seen) phase.request.package_body.funcs.encode = wire::EncodeSpan;
     if (!wire::RoundTrip(bytes, size, PackageEnvelope_fields, &phase.request)) { phase.Release(); return false; }
@@ -282,7 +298,7 @@ inline bool DecodeCanonicalRequest(const uint8_t *bytes, size_t size, EnvelopePh
 // This does not admit a request or expose a decode callback.
 inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &phase) {
     phase.Release(); phase.request=PackageEnvelope_init_zero;
-    if(!bytes||!size||size>4564)return false;
+    if(!bytes||!size||size>4580)return false;
     size_t at=0; unsigned previous=0;
     while(at<size) {
         uint64_t key,value;
@@ -292,12 +308,12 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
         if(tag<=previous||!wire::RuleFor(wire::Message::Envelope,tag,rule))return false;
         previous=tag;
         if(rule.kind==wire::Kind::Scalar) {
-            if(type||!wire::Varint(bytes,size,at,value)||!value||
+            if(type||!wire::Varint(bytes,size,at,value)||(!value&&tag!=30)||
                (tag!=2&&value>UINT32_MAX))return false;
             switch(tag) {
             case 1:phase.request.protocol_version=uint32_t(value);break;
             case 2:phase.request.request_token=value;break;
-            case 3:if(value!=1&&value!=15&&value!=16)return false;
+            case 3:if(value!=1&&(value<15||value>20))return false;
                 phase.request.operation=static_cast<PackageOperation>(value);break;
             case 21:phase.request.expected_store_incarnation=uint32_t(value);break;
             default:break;
@@ -307,15 +323,15 @@ inline bool TrustedOuterHeader(const uint8_t *bytes,size_t size,EnvelopePhase &p
             at+=size_t(value);
         }
     }
-    return phase.request.protocol_version==3&&phase.request.request_token&&
+    return (phase.request.protocol_version==3||phase.request.protocol_version==4)&&phase.request.request_token&&
         (phase.request.operation==PackageOperation_PACKAGE_STATUS||
-         ((phase.request.operation==PackageOperation_CREATE_PACKAGE||phase.request.operation==PackageOperation_QUERY_PACKAGE)&&
+         ((phase.request.operation==PackageOperation_CREATE_PACKAGE||phase.request.operation==PackageOperation_QUERY_PACKAGE||LifecycleOperation(phase.request.operation))&&
           phase.request.expected_store_incarnation));
 }
 // Caller supplies the existing initialization owner; not a local/max-size body.
 inline bool DecodeCanonicalBody(EnvelopePhase &phase, PackageBody &body) {
     body = PackageBody_init_zero;
-    if (phase.request.operation != PackageOperation_CREATE_PACKAGE || !phase.package.seen || !phase.native.bytes) return false;
+    if ((phase.request.operation != PackageOperation_CREATE_PACKAGE && phase.request.operation != PackageOperation_UPDATE_PACKAGE) || !phase.package.seen || !phase.native.bytes) return false;
     phase.native.seen = false;
     body.native_body.funcs.decode = wire::DecodeSpan; body.native_body.arg = &phase.native;
     auto input = pb_istream_from_buffer(phase.package.bytes, phase.package.size);

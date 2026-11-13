@@ -17,7 +17,7 @@ message PackageBody {
  bytes native_body = 5;
  RgbConfig rgb = 6;
 }
-enum PackageOperation { PACKAGE_OPERATION_UNSPECIFIED = 0; PACKAGE_STATUS = 1; CREATE_PACKAGE = 15; QUERY_PACKAGE = 16; }
+enum PackageOperation { PACKAGE_OPERATION_UNSPECIFIED = 0; PACKAGE_STATUS = 1; CREATE_PACKAGE = 15; QUERY_PACKAGE = 16; UPDATE_PACKAGE = 17; RENAME_PACKAGE = 18; REORDER_PACKAGE = 19; DELETE_PACKAGE = 20; }
 message PackageEnvelope {
  uint32 protocol_version = 1;
  uint64 request_token = 2;
@@ -28,6 +28,10 @@ message PackageEnvelope {
  bytes package_body = 24;
  optional bytes expected_digest = 25;
  optional bytes expected_config_sha256 = 26;
+ uint32 target_id = 27;
+ uint32 expected_revision = 28;
+ string replacement_name = 29;
+ optional uint32 replacement_rank = 30;
 }
 
 enum PackageLogicalDisposition { LOGICAL_NONE = 0; PROVEN_ABORTED = 1; INCOMPLETE = 2; COMMITTED = 3; UNRESOLVED = 4; }
