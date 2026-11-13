@@ -8,6 +8,7 @@
 #include "core/RecoveryInitialization.hpp"
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/ResourceDiagnostics.hpp"
+#include "core/BootDiagnostics.hpp"
 static void require(bool b,const char *m){if(!b)throw std::runtime_error(m);}
 struct InputState {uint64_t buttons=0;bool rt2=false,mb1=false;};
 InputState inputs;
@@ -29,10 +30,14 @@ struct BootloaderRequest{};
 void reboot_bootloader(){++bootloader;throw BootloaderRequest{};}
 enum class BootOutcome {Pending,Normal,StorageFailure,DefaultsRejected,StartupConfigRejected,RecoveryConfigurator};
 struct BootSnapshot {BootOutcome outcome=BootOutcome::Pending;bool display_ready=false;}boot_state;
+bool boot_display_ready=false;
+void draw_recovery_page(BootOutcome) {throw std::runtime_error("headless recovery display use");}
+void show_boot_stage(boot_diagnostics::Stage stage) {boot_diagnostics::Mark(watchdog_hw->scratch[3],stage);}
 void publish_boot_state(BootOutcome o,bool d){boot_state={o,d};}
 BootSnapshot read_boot_state(){return boot_state;}
 void refuse_boot(BootOutcome o,bool d){publish_boot_state(o,d);}
-struct Backend {void SendReport(){++ordinary_reports;}InputState &GetInputs(){return inputs;}};
+struct Backend {void SendReport(){++ordinary_reports;}InputState &GetInputs(){return inputs;}CommunicationBackendId BackendId(){return COMMS_BACKEND_CONFIGURATOR;}};
+struct GamecubeBackend : Backend {bool SelectionIdleAdmitted(){return true;}};
 Backend **backends=nullptr;size_t backend_count=0;bool failed_detection=false;
 struct Keyboard {void SendReport(InputState &){++ordinary_reports;}};Keyboard *current_kb_mode=nullptr;
 Config config=Config_init_default;
@@ -80,7 +85,7 @@ void setup_mode_activation_bindings(GameModeConfig *,size_t,uint64_t){}
 void select_mode(Backend **,size_t,Config &){++ordinary_reports;}
 bool is_valid_usb_default_index(const Config &){return true;}
 unsigned pinout=0,get_backend_config_default=0,get_usb_backend_config_default=0;
-void detect_console(){}void init_secondary_backends_glyph(){}
+void detect_console(){}void detect_console_at_boot(){}void init_secondary_backends_glyph(){}
 template<typename... Args>size_t initialize_backends(Args&&...){++normal_initializations;return 0;}
 #include "extracted_setup.inc"
 int main(int argc,char **argv){try{require(argc==2,"case arg");config.ultimate_profile_store_format=1;config.ultimate_profile_store_incarnation=41;

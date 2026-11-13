@@ -14,6 +14,13 @@
 #include <cstring>
 #include <new>
 #include <initializer_list>
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "core/PackageRequestWire.hpp"
+#include "core/PackageNamespaceClassifier.hpp"
+#include "core/GlyphPackageSourceReader.hpp"
+#include "core/PackageStorageFence.hpp"
+#include "core/Persistence.hpp"
+#endif
 #include <pb_decode.h>
 #include <pb_encode.h>
 
@@ -40,7 +47,21 @@ namespace {
         ProfileStore::TransactionResult result;
         bool ready;
     };
+    #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    struct PackageDispatchInputs {
+        glyph_package::EnvelopePhase *phase;
+        PackageResponse *response;
+        bool respond;
+    };
+    union PreparedCreateOwner {
+        PreparedCreate legacy;
+        PackageDispatchInputs package;
+        PreparedCreateOwner() : legacy{} {}
+    } prepared_create_owner;
+#define prepared_create prepared_create_owner.legacy
+#else
     PreparedCreate prepared_create{};
+#endif
 
     struct PreparedRecordWrite {
         uint8_t record[kMaxRecordWireBytes]; size_t n; pb_ostream_t stream;
@@ -182,8 +203,18 @@ namespace {
             if (mounted_write_result) {
                 TransferMountedWrite();
                 if (mounted_write_result) SyncMountedWrite();
+#if !defined(GLYPH_PACKAGE_V1) || !GLYPH_PACKAGE_V1
+                CloseMountedWrite();
+#endif
+            }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+            // Open's acknowledgement can be lost after the native writable
+            // handle exists. Stop/fence first, then close that exact handle once.
+            if(mounted_write_file.opened) {
+                if(!mounted_write_result)PackageStorageFence::Fence();
                 CloseMountedWrite();
             }
+#endif
             mounted_write_inputs.owner->Remember(mounted_write_result, true, mounted_write_inputs.length);
             mounted_write_inputs = {};
             return mounted_write_result;
@@ -275,67 +306,101 @@ namespace {
         Kind kind;
         ProfileStoreIoStage *stage;
     };
-    PreparedPublication publishing{};
+    #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    struct PackagePublication {
+        const uint8_t *prefix, *intent, *trailer;
+        size_t prefix_bytes;
+        uint32_t crc;
+        size_t offset;
+        ProfileStoreStorage *storage;
+    };
+    union PublicationOwner {
+        PreparedPublication legacy;
+        PackagePublication package;
+        PublicationOwner() : legacy{} {}
+    } publication_owner;
+    static_assert(sizeof(PackagePublication) <= sizeof(PreparedPublication), "publication owner extent");
+#else
+    struct { PreparedPublication legacy; } publication_owner{};
+#endif
     // Existing owned publication buffers, shared only by synchronous phases.
     uint8_t control_publication_wire[kDirectoryWireBytes + 16];
     uint8_t directory_publication_wire[kDirectoryWireBytes];
     char directory_publication_path[32], directory_publication_temp[32];
+    #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    union InitializationOwner {
+        uint8_t v2[kDirectoryWireBytes];
+        PackageBody body;
+        uint8_t intent[package_storage::kIntentBytes];
+        InitializationOwner() : v2{} {}
+    } initialization_owner;
+    bool package_owner_live = false;
+    static_assert(sizeof(InitializationOwner) <= ((kDirectoryWireBytes + alignof(InitializationOwner) - 1) / alignof(InitializationOwner)) * alignof(InitializationOwner), "initialization owner extent");
+#define initialize_root_wire initialization_owner.v2
+    uint8_t *RootReadWire() { static uint8_t wire[kDirectoryWireBytes]; return wire; }
+    ultimate_native::PayloadLease &ProfileReadLease() { static ultimate_native::PayloadLease lease; return lease; }
+    uint8_t *ProfileReadWire() {
+        ProfileReadLease().Release();
+        static uint8_t wire[kMaxRecordWireBytes]; return wire;
+    }
+#else
     uint8_t initialize_root_wire[kDirectoryWireBytes];
+#endif
 
     Result publication_result;
     // The original readback owner is shared only by synchronous publication.
-    uint8_t publication_readback[kMaxRecordWireBytes];
+    alignas(std::max_align_t) uint8_t publication_readback[kMaxRecordWireBytes];
     __attribute__((noinline)) bool PreparePublicationWrite() {
-        if (publishing.stage)
-            *publishing.stage = ProfileStoreIoStage::None;
-        if (publishing.length > sizeof(publication_readback)) {
-            std::memset(&publishing, 0, sizeof(publishing));
+        if (publication_owner.legacy.stage)
+            *publication_owner.legacy.stage = ProfileStoreIoStage::None;
+        if (publication_owner.legacy.length > sizeof(publication_readback)) {
+            std::memset(&publication_owner.legacy, 0, sizeof(publication_owner.legacy));
             publication_result = { Outcome::Failed, 0, 0 };
             return false;
         }
         return true;
     }
     __attribute__((noinline)) void WritePreparedPublication() {
-        ::new (&publication_result) Result(publishing.storage->CheckedWrite(publishing.tmp, publishing.bytes, publishing.length, publishing.kind));
+        ::new (&publication_result) Result(publication_owner.legacy.storage->CheckedWrite(publication_owner.legacy.tmp, publication_owner.legacy.bytes, publication_owner.legacy.length, publication_owner.legacy.kind));
     }
     __attribute__((noinline)) void FinishWrittenPublication() {
         auto &r = publication_result;
         if (!r) {
-            if (publishing.stage) {
-                *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publishing.storage->LastFailure());
-                if (*publishing.stage == ProfileStoreIoStage::None)
-                    *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordTempWrite);
+            if (publication_owner.legacy.stage) {
+                *publication_owner.legacy.stage = ProfileStoreStage(publication_owner.legacy.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publication_owner.legacy.storage->LastFailure());
+                if (*publication_owner.legacy.stage == ProfileStoreIoStage::None)
+                    *publication_owner.legacy.stage = ProfileStoreStage(publication_owner.legacy.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordTempWrite);
             }
-            std::memset(&publishing, 0, sizeof(publishing));
+            std::memset(&publication_owner.legacy, 0, sizeof(publication_owner.legacy));
             return;
         }
-        ::new (&r) Result(publishing.storage->CheckedRead(publishing.tmp, publication_readback, publishing.length, publishing.kind));
+        ::new (&r) Result(publication_owner.legacy.storage->CheckedRead(publication_owner.legacy.tmp, publication_readback, publication_owner.legacy.length, publication_owner.legacy.kind));
         if (!r) {
-            if (publishing.stage) {
-                *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publishing.storage->LastFailure());
-                if (*publishing.stage == ProfileStoreIoStage::None)
-                    *publishing.stage = publishing.kind == Kind::Root
+            if (publication_owner.legacy.stage) {
+                *publication_owner.legacy.stage = ProfileStoreStage(publication_owner.legacy.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, publication_owner.legacy.storage->LastFailure());
+                if (*publication_owner.legacy.stage == ProfileStoreIoStage::None)
+                    *publication_owner.legacy.stage = publication_owner.legacy.kind == Kind::Root
                                  ? ProfileStoreIoStage::DirectoryTempRead
                                  : ProfileStoreIoStage::RecordTempRead;
             }
-            std::memset(&publishing, 0, sizeof(publishing));
+            std::memset(&publication_owner.legacy, 0, sizeof(publication_owner.legacy));
             return;
         }
-        if (std::memcmp(publishing.bytes, publication_readback, publishing.length) != 0) {
-            if (publishing.stage)
-                *publishing.stage = ProfileStoreStage(publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordVerify);
-            std::memset(&publishing, 0, sizeof(publishing));
+        if (std::memcmp(publication_owner.legacy.bytes, publication_readback, publication_owner.legacy.length) != 0) {
+            if (publication_owner.legacy.stage)
+                *publication_owner.legacy.stage = ProfileStoreStage(publication_owner.legacy.kind == Kind::Root ? ProfileStorePublicationKind::Directory : ProfileStorePublicationKind::Record, ProfileStoreIoStage::RecordVerify);
+            std::memset(&publication_owner.legacy, 0, sizeof(publication_owner.legacy));
             publication_result = { Outcome::Failed, 0, 0 };
             return;
         }
-        ::new (&r) Result(publishing.storage->CheckedRename(publishing.tmp, publishing.dest, publishing.kind));
-        if (!r && publishing.stage)
-            *publishing.stage = ProfileStoreStage(
-                publishing.kind == Kind::Root ? ProfileStorePublicationKind::Directory
+        ::new (&r) Result(publication_owner.legacy.storage->CheckedRename(publication_owner.legacy.tmp, publication_owner.legacy.dest, publication_owner.legacy.kind));
+        if (!r && publication_owner.legacy.stage)
+            *publication_owner.legacy.stage = ProfileStoreStage(
+                publication_owner.legacy.kind == Kind::Root ? ProfileStorePublicationKind::Directory
                                 : ProfileStorePublicationKind::Record,
                 ProfileStoreIoStage::RecordRename
             );
-        std::memset(&publishing, 0, sizeof(publishing));
+        std::memset(&publication_owner.legacy, 0, sizeof(publication_owner.legacy));
         return;
     }
     __attribute__((always_inline)) inline void ExecutePublication() {
@@ -352,7 +417,7 @@ namespace {
         Kind k,
         ProfileStoreIoStage *stage
     ) {
-        publishing = {&s, tmp, dest, b, n, k, stage};
+        publication_owner.legacy = {&s, tmp, dest, b, n, k, stage};
         ExecutePublication();
         return publication_result;
     }
@@ -367,6 +432,10 @@ struct ProfileStore::Directory {
     uint32_t migration_ids[2]{}, migration_revisions[2]{};
     TransactionIdentity last_identity{};
     TransactionResult last_result{};
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    uint8_t managed_aggregate[32]{};
+    uint32_t managed_format = 0, package_sequence = 0;
+#endif
     size_t count = 0;
     Entry entries[kMaxEntries]{};
 };
@@ -413,7 +482,11 @@ namespace {
             return false;
         std::memset(wire, 0, kDirectoryWireBytes);
         Put32(wire, kRootMagic);
-        Put16(wire + 4, 2);
+        Put16(wire + 4,
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+            d.managed_format ? 3 :
+#endif
+            2);
         Put16(wire + 6, d.count);
         Put32(wire + 8, d.generation);
         Put32(wire + 12, d.incarnation);
@@ -435,6 +508,13 @@ namespace {
         }
         std::memcpy(wire + 200, d.migration_receipt, 32);
         std::memcpy(wire + 232, d.compact_digest, 32);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        if (d.managed_format) {
+            std::memcpy(wire + 264, d.managed_aggregate, 32);
+            Put32(wire + 296, d.managed_format);
+            Put32(wire + 300, d.package_sequence);
+        }
+#endif
         for (size_t i = 0; i < d.count; ++i) {
             auto *p = wire + kRootHeader + i * kEntryBytes;
             const auto &e = d.entries[i];
@@ -444,16 +524,27 @@ namespace {
             Put32(p + 12, e.payload_version);
             Put32(p + 16, e.rank);
             std::memcpy(p + 20, e.name, 33);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+            p[53] = e.managed_format; p[54] = e.owned_row1; p[55] = e.owned_rgb1;
+#endif
         }
         Put32(wire + kDirectoryWireBytes - 4, Crc32(wire, kDirectoryWireBytes - 4));
         return true;
     }
 
-    bool DecodeDirectory(const uint8_t *wire, size_t length, ProfileStore::Directory *d) {
-        if (length != kDirectoryWireBytes || Get32(wire) != kRootMagic || Get16(wire + 4) != 2 ||
-            Get16(wire + 6) > 64 || Get32(wire + length - 4) != Crc32(wire, length - 4))
+    bool DecodeDirectory(const uint8_t *wire, size_t length, ProfileStore::Directory *d, bool observed_v3 = false) {
+        if (length != kDirectoryWireBytes || Get32(wire) != kRootMagic || Get16(wire + 4) != (observed_v3 ? 3 : 2) ||
+            Get16(wire + 6) > 64 || (!observed_v3 && Get32(wire + length - 4) != Crc32(wire, length - 4)))
             return false;
         ClearDirectory(*d);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        if (observed_v3) {
+            if (!package_storage::SourcePrefixValid(wire)) return false;
+            std::memcpy(d->managed_aggregate, wire + 264, 32);
+            d->managed_format = Get32(wire + 296);
+            d->package_sequence = Get32(wire + 300);
+        }
+#endif
         d->count = Get16(wire + 6);
         d->generation = Get32(wire + 8);
         d->incarnation = Get32(wire + 12);
@@ -486,6 +577,9 @@ namespace {
             e.payload_version = Get32(p + 12);
             e.rank = Get32(p + 16);
             std::memcpy(e.name, p + 20, 33);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+            if (observed_v3) { e.managed_format = p[53]; e.owned_row1 = p[54]; e.owned_rgb1 = p[55]; }
+#endif
         }
         return Structural(*d);
     }
@@ -554,6 +648,27 @@ namespace {
     }
 }
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+namespace {
+    bool ordinary_store_scope=false;
+    class OrdinaryStoreScope {
+        ProfileStore &store;
+        bool owned=false, admitted=false;
+      public:
+        OrdinaryStoreScope(ProfileStore &s,const ProfileStore::TransactionIdentity *identity,uint32_t id) : store(s) {
+            admitted=store.IsOrdinaryStoreWriteActive();
+            if(!admitted)owned=admitted=store.BeginOrdinaryStoreWrite(identity,id);
+        }
+        ~OrdinaryStoreScope(){if(owned)store.EndOrdinaryStoreWrite();}
+        explicit operator bool()const{return admitted;}
+    };
+    void OrdinaryRecordPhase();
+    void OrdinaryControlPhase();
+    void OrdinaryRootPhase();
+    void OrdinaryGarbagePhase(const char *);
+}
+#endif
+
 ProfileStore::ProfileStore(ProfileStoreStorage *s) : _storage(s) {}
 
 __attribute__((noinline)) void ProfileStore::PrepareBeginState(uint32_t expected, uint32_t required_root_format, bool recovery) {
@@ -582,6 +697,9 @@ bool ProfileStore::Begin(uint32_t expected, uint32_t required_root_format) {
     static MountedStorage storage;
     if (!_storage) _storage = &storage;
     PrepareBeginState(expected, required_root_format, false);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    return BeginPackageObservation(false);
+#endif
     return ExecuteBootstrap(PrepareBootstrap(false));
 }
 
@@ -589,15 +707,36 @@ bool ProfileStore::BeginRecovery(uint32_t expected, uint32_t required_root_forma
     static MountedStorage storage;
     if (!_storage) _storage = &storage;
     PrepareBeginState(expected, required_root_format, true);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    return BeginPackageObservation(true);
+#endif
     return ExecuteBootstrap(PrepareBootstrap(true));
 }
 
 bool ProfileStore::ReadRoot(uint8_t slot, Directory &d) const {
     char p[32];
     RootPath(p, sizeof(p), slot);
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto *wire = RootReadWire();
+    size_t extent = 0;
+    if (!_storage->Probe(p, &extent)) return false;
+    if (extent == package_storage::kRootBytes) {
+        if (package_owner_live) return false;
+        package_owner_live = true;
+        const bool ok = _storage->ReadRange(p, 0, wire, 3904) &&
+            _storage->ReadRange(p, 3904, initialization_owner.intent, 512) &&
+            _storage->ReadRange(p, 4416, wire + 3904, 4) &&
+            package_storage::RootValid({wire, initialization_owner.intent, wire + 3904}) &&
+            DecodeDirectory(wire, 3908, &d, true);
+        package_owner_live = false;
+        return ok;
+    }
+    if (extent != kDirectoryWireBytes) return false;
+#else
     static uint8_t wire[kDirectoryWireBytes];
-    return _storage->CheckedRead(p, wire, sizeof(wire), Kind::Root) &&
-           DecodeDirectory(wire, sizeof(wire), &d);
+#endif
+    return _storage->CheckedRead(p, wire, kDirectoryWireBytes, Kind::Root) &&
+           DecodeDirectory(wire, kDirectoryWireBytes, &d);
 }
 
 bool ProfileStore::LoadControl(Directory &seed, uint32_t &phase) const {
@@ -614,6 +753,9 @@ bool ProfileStore::LoadControl(Directory &seed, uint32_t &phase) const {
 // Share the control publication body while ending its preparation phases
 // inside each synchronous caller; no retained control adapter frame.
 __attribute__((noinline)) bool ProfileStore::PrepareControlPublication(const Directory &seed, uint32_t phase) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryControlPhase();
+#endif
     auto &wire = control_publication_wire;
     if (!EncodeDirectory(seed, wire + 16))
         return false;
@@ -621,7 +763,7 @@ __attribute__((noinline)) bool ProfileStore::PrepareControlPublication(const Dir
     Put32(wire + 4, phase);
     Put32(wire + 8, kDirectoryWireBytes);
     Put32(wire + 12, Crc32(wire, 12) ^ Crc32(wire + 16, kDirectoryWireBytes));
-    publishing = {_storage, kControlTemp, kControl, wire, sizeof(wire), Kind::Root, &_last_io_stage};
+    publication_owner.legacy = {_storage, kControlTemp, kControl, wire, sizeof(wire), Kind::Root, &_last_io_stage};
     return true;
 }
 
@@ -653,7 +795,7 @@ __attribute__((noinline)) void ProfileStore::PrepareInitializedRoot(unsigned slo
     static char p[32], t[32];
     RootPath(p, sizeof(p), slot);
     RootTemp(t, sizeof(t), slot);
-    publishing = {_storage, t, p, initialize_root_wire, sizeof(initialize_root_wire), Kind::Root, &_last_io_stage};
+    publication_owner.legacy = {_storage, t, p, initialize_root_wire, sizeof(initialize_root_wire), Kind::Root, &_last_io_stage};
 }
 
 __attribute__((always_inline)) inline bool ProfileStore::InitializeV2(const Directory &seed) {
@@ -896,7 +1038,10 @@ __attribute__((noinline)) bool ProfileStore::PrepareDirectoryPublication(const D
 }
 
 __attribute__((noinline)) void ProfileStore::PrepareDirectoryRootPublication() {
-    publishing = {_storage, directory_publication_temp, directory_publication_path,
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryRootPhase();
+#endif
+    publication_owner.legacy = {_storage, directory_publication_temp, directory_publication_path,
         directory_publication_wire, sizeof(directory_publication_wire), Kind::Root, &_last_io_stage};
 }
 
@@ -907,6 +1052,9 @@ __attribute__((noinline)) bool ProfileStore::PrepareDirectoryCompletion(const Di
 }
 
 __attribute__((always_inline)) inline bool ProfileStore::PublishDirectory(const Directory &next) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(next.managed_format)return PublishManagedDirectory(next);
+#endif
     if (!PrepareDirectoryPublication(next)) return false;
     if (!PrepareControlPublication(next, 3)) { _uncertain = true; return false; }
     ExecutePublication();
@@ -949,11 +1097,27 @@ uint64_t ProfileStore::LastTransactionToken() const {
 }
 
 size_t ProfileStore::Count() const {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(_directory&&(!_package_visible||PackageStorageFence::MutationFenced())) {
+        size_t count=0; for(size_t i=0;i<_directory->count;++i)count+=!_directory->entries[i].managed_format;
+        return count;
+    }
+#endif
     return _directory ? _directory->count : 0;
 }
 
 const ProfileStore::Entry *ProfileStore::EntryAt(size_t i) const {
+    if(!_directory)return nullptr;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    for(size_t slot=0;slot<_directory->count;++slot) {
+        const auto &entry=_directory->entries[slot];
+        if((!_package_visible||PackageStorageFence::MutationFenced())&&entry.managed_format)continue;
+        if(!i--)return &entry;
+    }
+    return nullptr;
+#else
     return i < Count() ? &_directory->entries[i] : nullptr;
+#endif
 }
 
 const UltimateProfile *ProfileStore::ActiveProfile() const {
@@ -965,9 +1129,14 @@ uint32_t ProfileStore::ActiveId() const {
 }
 
 int ProfileStore::Find(uint32_t id) const {
-    for (size_t i = 0; i < Count(); ++i)
-        if (_directory->entries[i].id == id)
+    if(!_directory)return -1;
+    for (size_t i = 0; i < _directory->count; ++i)
+        if (_directory->entries[i].id == id) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+            if((!_package_visible||PackageStorageFence::MutationFenced())&&_directory->entries[i].managed_format)return -1;
+#endif
             return static_cast<int>(i);
+        }
     return -1;
 }
 
@@ -986,7 +1155,11 @@ const char *ProfileStore::LastDiagnostic() const {
 }
 
 bool ProfileStore::IsTransactionUncertain() const {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    return _uncertain || PackageStorageFence::MutationFenced();
+#else
     return _uncertain;
+#endif
 }
 
 __attribute__((noinline)) ProfileStore::ReconcileAction ProfileStore::PrepareReconciliation() {
@@ -1041,6 +1214,9 @@ __attribute__((always_inline)) inline bool ProfileStore::ExecuteReconciliation(R
 }
 
 bool ProfileStore::ReconcileTransaction() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(PackageStorageFence::MutationFenced()||(_directory&&_directory->managed_format))return false;
+#endif
     return ExecuteReconciliation(PrepareReconciliation());
 }
 
@@ -1054,6 +1230,9 @@ uint32_t ProfileStore::HealthFlags() const {
 bool ProfileStore::PrepareProfileWrite(uint32_t id, uint32_t rev, const UltimateProfile &p) {
     if (!ValidateProfile(p))
         return false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryRecordPhase();
+#endif
     auto &record = prepared_record.record;
     auto &n = prepared_record.n; n=0;
     if (!pb_get_encoded_size(&n, UltimateProfile_fields, &p) || n > kMaxProfileWireBytes) {
@@ -1104,14 +1283,36 @@ bool ProfileStore::ReadProfile(
     char path[32];
     ProfileStorePaths::RecordPath(path, sizeof(path), id, rev);
     size_t n = 0;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto *wire = ProfileReadWire();
+    const int managed_index = Find(id);
+    const bool managed = managed_index >= 0 && _directory->entries[managed_index].managed_format;
+    if (managed && (!_package_visible || PackageStorageFence::MutationFenced() || rev != 1 ||
+        !package_storage::RecordPath(path, sizeof(path), id, rev, false))) return false;
+#else
     static uint8_t wire[kMaxRecordWireBytes];
+#endif
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &read_lease=ProfileReadLease();
+#else
     static ultimate_native::PayloadLease read_lease;
+#endif
     read_lease.Release(); // invalidate the prior read before reusing its wire
     if (!ProfileStoreReadTrace::Mark(10) || !_storage->Probe(path, &n) ||
-        !ProfileStoreReadTrace::Mark(11, n) || n < 32 || n > sizeof(wire) ||
+        !ProfileStoreReadTrace::Mark(11, n) || n < 32 || n > kMaxRecordWireBytes ||
         !ProfileStoreReadTrace::Mark(12) || !_storage->CheckedRead(path, wire, n, Kind::Record) ||
         ProfileStoreReadTrace::Failed())
         return false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (managed) {
+        const auto &entry = _directory->entries[managed_index];
+        if (!package_storage::RecordValid(wire, n) || Get32(wire + 8) != Incarnation() ||
+            Get32(wire + 12) != id || Get32(wire + 72) + 1 != entry.owned_row1 ||
+            Get32(wire + 76) != entry.owned_rgb1) return false;
+        out = UltimateProfile_init_default;
+        return ultimate_native::DecodeProfile(wire + 128, n - 128, out, read_lease) && ValidateProfile(out);
+    }
+#endif
     if (Get32(wire) != kRecordMagic || Get32(wire + 8) != Incarnation() || Get32(wire + 12) != id ||
         Get32(wire + 16) != rev || Get32(wire + 20) != n - 32 ||
         Get32(wire + 24) != Crc32(wire, 24) || Get32(wire + 28) != Crc32(wire + 32, n - 32))
@@ -1363,6 +1564,10 @@ ProfileStore::CapacityInfo ProfileStore::Capacity() const {
 }
 
 ProfileStore::Status ProfileStore::CollectGarbage() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,nullptr,0);
+    if(!scope)return Status::ReadOnlyRecovery;
+#endif
     if (!_ready || _read_only_recovery)
         return Status::ReadOnlyRecovery;
     if (_uncertain)
@@ -1411,6 +1616,9 @@ ProfileStore::Status ProfileStore::CollectGarbage() {
             return Status::IoFailure;
         if (!search.found)
             return Status::Ok;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        OrdinaryGarbagePhase(search.path);
+#endif
         if (!_storage->CheckedRemove(search.path))
             return Status::IoFailure;
     }
@@ -1580,6 +1788,10 @@ __attribute__((always_inline)) inline void ProfileStore::ExecutePreparedCreate()
 ProfileStore::TransactionResult ProfileStore::Create(
     const UltimateProfile &p, const char *name, uint32_t rank, const TransactionIdentity &t
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,&t,0);
+    if(!scope)return {Status::ReadOnlyRecovery};
+#endif
     SetCreateInputs(p, name, rank, t);
     PrepareCreateRecord();
     ExecutePreparedCreate();
@@ -1625,6 +1837,10 @@ __attribute__((noinline)) ProfileStore::TransactionResult ProfileStore::Finalize
 ProfileStore::TransactionResult ProfileStore::Update(
     uint32_t id, const UltimateProfile &p, uint32_t rev, const TransactionIdentity &t
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,&t,id);
+    if(!scope)return {Status::ReadOnlyRecovery};
+#endif
     prepared_create.ready = false;
     prepared_create.profile = &p;
     prepared_create.input_name = nullptr;
@@ -1667,6 +1883,10 @@ ProfileStore::TransactionResult ProfileStore::Duplicate(
     uint32_t rank,
     const TransactionIdentity &t
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,&t,id);
+    if(!scope)return {Status::ReadOnlyRecovery};
+#endif
     duplicate_prepared = false;
     static TransactionResult r; ::new (&r) TransactionResult(PrepareDuplicate(id, rev, t));
     if (!duplicate_prepared) return r;
@@ -1765,6 +1985,10 @@ ProfileStore::TransactionResult ProfileStore::Rename(
     uint32_t generation,
     const TransactionIdentity &t
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,&t,id);
+    if(!scope)return {Status::ReadOnlyRecovery};
+#endif
     if (PrepareRename(id, name, generation, t)) PublishPreparedCommit(*_next);
     return committing_result;
 }
@@ -1775,6 +1999,10 @@ ProfileStore::TransactionResult ProfileStore::Reorder(
     uint32_t generation,
     const TransactionIdentity &t
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,&t,id);
+    if(!scope)return {Status::ReadOnlyRecovery};
+#endif
     if (PrepareReorder(id, rank, generation, t)) PublishPreparedCommit(*_next);
     return committing_result;
 }
@@ -1785,6 +2013,10 @@ ProfileStore::TransactionResult ProfileStore::Delete(
     uint32_t referenced,
     const TransactionIdentity &t
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    OrdinaryStoreScope scope(*this,&t,id);
+    if(!scope)return {Status::ReadOnlyRecovery};
+#endif
     if (PrepareDelete(id, generation, referenced, t)) PublishPreparedCommit(*_next);
     return committing_result;
 }
@@ -1864,6 +2096,9 @@ namespace {
 }
 
 bool ProfileStore::PrepareCompact(Config &c) const {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if((_directory&&_directory->managed_format)||c.managed_format||c.managed_sequence||c.ultimate_profile_root_format>=3)return false;
+#endif
     if (!_directory || (c.ultimate_profiles_count && !_directory->migration_state))
         return false;
     if (c.ultimate_profile_store_format == 0) {
@@ -1889,6 +2124,9 @@ bool ProfileStore::PrepareCompact(Config &c) const {
 }
 
 bool ProfileStore::ValidateCompactReceipt(const Config &c) const {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(c.ultimate_profile_root_format==3||(_directory&&_directory->managed_format))return ValidateManagedCompactReceipt(c);
+#endif
     if (!_directory || c.ultimate_profile_root_format != 2 ||
         c.ultimate_profile_store_format != kCompactConfigFormat ||
         c.ultimate_profile_store_incarnation != Incarnation() || c.ultimate_profiles_count)
@@ -2029,6 +2267,9 @@ ProfileStore::Status ProfileStore::ImportLegacyStream(
     uint32_t *mapping,
     size_t capacity
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if((_directory&&_directory->managed_format)||PackageStorageFence::MutationFenced())return Status::ReadOnlyRecovery;
+#endif
     import_inputs={&legacy,source,reader,context,mapping,capacity};ImportInputsReset reset;
     return ExecuteLegacyImport();
 }
@@ -2038,6 +2279,9 @@ ProfileStore::Status ProfileStore::ImportLegacy(
     uint32_t *mapping,
     size_t capacity
 ) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if((_directory&&_directory->managed_format)||PackageStorageFence::MutationFenced())return Status::ReadOnlyRecovery;
+#endif
     // Portable host/application entry: capture the canonical immutable source.
     // Device boot uses Persistence's exact-file snapshot and streamed reader.
     static uint8_t wire[8192];
@@ -2074,6 +2318,9 @@ ProfileStore::Status ProfileStore::ImportLegacy(
 }
 
 ProfileStore::Status ProfileStore::CompleteMigration(const Config &compact) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if((_directory&&_directory->managed_format)||PackageStorageFence::MutationFenced())return Status::ReadOnlyRecovery;
+#endif
     if (!_ready || _read_only_recovery)
         return Status::ReadOnlyRecovery;
     if (_uncertain)
@@ -2183,3 +2430,7 @@ void ProfileStore::Finish(TransactionResult *r, uint32_t id, uint32_t rev) const
 }
 
 ProfileStore profile_store;
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "ProfileStorePackage.inc"
+#endif

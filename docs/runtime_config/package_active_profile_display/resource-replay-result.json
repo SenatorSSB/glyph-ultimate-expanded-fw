@@ -1,0 +1,9 @@
+{
+  "result": "PASS_EXACT_REPLAY",
+  "graph_sha256": "cf8490ea69f1659bdd292609590a5064769720c497b748ceadc430f3ab10f72d",
+  "unknown": [],
+  "setup1": 960,
+  "loop1": 976,
+  "rebuild": false,
+  "device_access": false
+}

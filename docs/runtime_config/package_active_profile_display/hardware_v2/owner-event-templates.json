@@ -1,0 +1,67 @@
+{
+  "classification": "UNFILLED_FALSE_TEMPLATES_NEVER_ACTUAL_EVIDENCE",
+  "events": {
+    "pre_snapshot": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_FRESH_OWNER_READINESS",
+      "ready": false,
+      "exclusive": false,
+      "prior_firmware_c439_no_change": false,
+      "route": "menu"
+    },
+    "install": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_OWNER_ONE_COPY_RESULT",
+      "source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+      "uf2_sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+      "uf2_bytes": 1296896,
+      "manual_install_count": 0,
+      "one_same_unit_bootloader": false,
+      "copy_result": "unknown",
+      "reenumeration": "unknown",
+      "fresh_volume_path": ""
+    },
+    "first_xinput_boot": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_OWNER_NORMAL_BOOT",
+      "ready": false,
+      "exclusive": false,
+      "same_unit_no_change": false,
+      "route": "normal_no_buttons_USB_default"
+    },
+    "display": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_OWNER_LITERAL_DISPLAY_REPORT",
+      "dashboard_name": "",
+      "plate": "",
+      "backend": "",
+      "responsive": false,
+      "viewer_name": "",
+      "returned_dashboard": false
+    },
+    "post_snapshot": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_OWNER_CONFIGURATOR_READY",
+      "ready": false,
+      "exclusive": false,
+      "same_unit_no_change": false,
+      "route": "menu"
+    },
+    "final_xinput_boot": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_OWNER_FINAL_NORMAL_BOOT",
+      "ready": false,
+      "exclusive": false,
+      "same_unit_no_change": false,
+      "route": "normal_no_buttons_USB_default"
+    },
+    "finish": {
+      "owner_present": false,
+      "owner_message_reference": "ACTUAL_OWNER_FINAL_OBSERVATION",
+      "dashboard_name": "",
+      "plate": "",
+      "backend": "",
+      "responsive": false
+    }
+  }
+}

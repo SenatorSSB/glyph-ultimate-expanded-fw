@@ -1,0 +1,9 @@
+{
+  "approved": false,
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v2",
+  "packet_sha256": "FILL_ONLY_FROM_FINAL_HANDOFF_AFTER_ACTUAL_OWNER_APPROVAL",
+  "preparation_manifest_sha256": "FILL_ONLY_FROM_FINAL_HANDOFF_AFTER_ACTUAL_OWNER_APPROVAL",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "uf2_sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+  "owner_message_reference": "UNAPPROVED_TEMPLATE_NOT_EVIDENCE"
+}

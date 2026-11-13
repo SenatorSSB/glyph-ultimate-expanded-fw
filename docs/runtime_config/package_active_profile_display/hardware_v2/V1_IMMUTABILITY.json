@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "terminal_commit": "75f83c4c11929b4b839b3a369c1cb7a40f0f1fa9",
+  "private_inventory_sha256": "7fa7637fcd562d17f196e46b91152e21a0ea110382b0b8ae81b3582af36acb55",
+  "private_files_verified": 84,
+  "private_bytes": 62257,
+  "v1_packet_sha256": "b9a14463a65a6901a499836c0e879f5a4b34e8111976199dcd6d59d7b1a3774b",
+  "v1_preparation_manifest_sha256": "90bb909c7d2f22c3e3cd9802deb490cb4d87fb0d5f45eb52ab6e60e2be366c86",
+  "v1_consumed_approval_resumed": false,
+  "firmware_rebuilds": 0,
+  "new_device_access": false
+}

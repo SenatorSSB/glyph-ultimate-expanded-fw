@@ -44,6 +44,10 @@ ModeDestinationResult persist_mode_destination(PersistenceType &storage, Config 
     if (!storage.IsAvailable() ||
         storage.LoadConfigChecked(candidate) != PersistenceType::LoadResult::Loaded ||
         mode_index >= candidate.game_mode_configs_count) return ModeDestinationResult::Refused;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // Managed packages are not targets of the legacy destination/reference UI.
+    if (candidate.game_mode_configs[mode_index].managed_format) return ModeDestinationResult::Refused;
+#endif
     backend_index = candidate.communication_backend_configs_count;
     for (size_t i = 0; i < candidate.communication_backend_configs_count; ++i) {
         if (candidate.communication_backend_configs[i].backend_id == backend) {

@@ -1,0 +1,182 @@
+{
+  "elf": ".pio/build/glyph_mk6/firmware.elf",
+  "elf_sha256": "30e5c15b61d4e2b1822aa521cf7e53ffbab9cfe568f63f792047069f965929ff",
+  "elf_bytes": 5759256,
+  "sections": {
+    "": {
+      "type": 0,
+      "address": 0,
+      "size": 0,
+      "offset": 0
+    },
+    ".boot2": {
+      "type": 1,
+      "address": 268435456,
+      "size": 256,
+      "offset": 65536
+    },
+    ".ota": {
+      "type": 1,
+      "address": 268435712,
+      "size": 9444,
+      "offset": 65792
+    },
+    ".partition": {
+      "type": 1,
+      "address": 268445156,
+      "size": 2588,
+      "offset": 75236
+    },
+    ".text": {
+      "type": 1,
+      "address": 268447744,
+      "size": 546856,
+      "offset": 77824
+    },
+    ".rodata": {
+      "type": 1,
+      "address": 268994600,
+      "size": 64312,
+      "offset": 624680
+    },
+    ".ram_vector_table": {
+      "type": 1,
+      "address": 536870912,
+      "size": 192,
+      "offset": 746052
+    },
+    ".data": {
+      "type": 1,
+      "address": 536871104,
+      "size": 24964,
+      "offset": 721088
+    },
+    ".scratch_x": {
+      "type": 1,
+      "address": 537133056,
+      "size": 0,
+      "offset": 746244
+    },
+    ".scratch_y": {
+      "type": 1,
+      "address": 537137152,
+      "size": 0,
+      "offset": 746244
+    },
+    ".bss": {
+      "type": 8,
+      "address": 536896072,
+      "size": 173888,
+      "offset": 746056
+    },
+    ".heap": {
+      "type": 1,
+      "address": 537069960,
+      "size": 2048,
+      "offset": 746244
+    },
+    ".stack1_dummy": {
+      "type": 1,
+      "address": 537133056,
+      "size": 2048,
+      "offset": 748292
+    },
+    ".stack_dummy": {
+      "type": 1,
+      "address": 537137152,
+      "size": 2048,
+      "offset": 750368
+    },
+    ".ARM.attributes": {
+      "type": 1879048195,
+      "address": 0,
+      "size": 40,
+      "offset": 752416
+    },
+    ".comment": {
+      "type": 1,
+      "address": 0,
+      "size": 18,
+      "offset": 752456
+    },
+    ".debug_info": {
+      "type": 1,
+      "address": 0,
+      "size": 2591353,
+      "offset": 752474
+    },
+    ".debug_abbrev": {
+      "type": 1,
+      "address": 0,
+      "size": 211627,
+      "offset": 3343827
+    },
+    ".debug_loclists": {
+      "type": 1,
+      "address": 0,
+      "size": 654747,
+      "offset": 3555454
+    },
+    ".debug_aranges": {
+      "type": 1,
+      "address": 0,
+      "size": 33264,
+      "offset": 4210208
+    },
+    ".debug_rnglists": {
+      "type": 1,
+      "address": 0,
+      "size": 70759,
+      "offset": 4243472
+    },
+    ".debug_line": {
+      "type": 1,
+      "address": 0,
+      "size": 588014,
+      "offset": 4314231
+    },
+    ".debug_str": {
+      "type": 1,
+      "address": 0,
+      "size": 370730,
+      "offset": 4902245
+    },
+    ".debug_frame": {
+      "type": 1,
+      "address": 0,
+      "size": 91736,
+      "offset": 5272976
+    },
+    ".debug_line_str": {
+      "type": 1,
+      "address": 0,
+      "size": 1020,
+      "offset": 5364712
+    },
+    ".symtab": {
+      "type": 2,
+      "address": 0,
+      "size": 189920,
+      "offset": 5365732
+    },
+    ".strtab": {
+      "type": 3,
+      "address": 0,
+      "size": 202186,
+      "offset": 5555652
+    },
+    ".shstrtab": {
+      "type": 3,
+      "address": 0,
+      "size": 298,
+      "offset": 5757838
+    }
+  },
+  "static": 198852,
+  "stack_reservations": [
+    2048,
+    2048
+  ],
+  "heap_start": 537069960,
+  "heap_capacity": 63096
+}

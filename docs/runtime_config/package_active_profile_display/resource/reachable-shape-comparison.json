@@ -1,0 +1,2772 @@
+{
+  "baseline_reachable": [
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)",
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)",
+    "AboutMenu::AboutMenu(_Config&)",
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)",
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)",
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::fillScreen(unsigned short)",
+    "Adafruit_GFX::setFont(GFXfont const*)",
+    "Adafruit_GFX::setRotation(unsigned char)",
+    "Adafruit_GFX::setTextSize(unsigned char)",
+    "Adafruit_GFX::startWrite()",
+    "Adafruit_GFX::write(unsigned char)",
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::writePixel(short, short, unsigned short)",
+    "Adafruit_SSD1306::clearDisplay()",
+    "Adafruit_SSD1306::display()",
+    "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+    "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]",
+    "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+    "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+    "Adafruit_SSD1306::invertDisplay(bool)",
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)",
+    "CFastLED::operator[](int)",
+    "CFastLED::setMaxRefreshRate(unsigned short, bool)",
+    "CFastLED::show(unsigned char)",
+    "CLEDController::size()",
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const",
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+    "CommunicationBackend::BackendId()",
+    "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)",
+    "CommunicationBackend::CurrentGameMode()",
+    "CommunicationBackend::GetInputs()",
+    "CommunicationBackend::GetOutputs()",
+    "CommunicationBackend::SetGameMode(InputMode*)",
+    "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+    "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)",
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)",
+    "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "InputMode::GetConfig()",
+    "IntegratedDisplay::Clear()",
+    "IntegratedDisplay::HandleControls(DisplayMode*)",
+    "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)",
+    "IntegratedDisplay::SendReport()",
+    "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+    "IntegratedDisplay::UpdateDisplay()",
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)",
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "NeoPixelBackend<(unsigned char)11, 76>::SendReport()",
+    "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)",
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "PackageStorageFence::MutationFenced()",
+    "ProfileStore::Count() const",
+    "ProfileStore::EntryAt(unsigned int) const",
+    "ProfileStore::IsReady() const",
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "RemapMenu::RemapMenu()",
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)",
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "TwoWire::_handleTimeout(bool)",
+    "TwoWire::begin()",
+    "TwoWire::beginTransmission(unsigned char)",
+    "TwoWire::end()",
+    "TwoWire::endTransmission()",
+    "TwoWire::endTransmission(bool)",
+    "TwoWire::setClock(unsigned long)",
+    "TwoWire::write(unsigned char const*, unsigned int)",
+    "TwoWire::write(unsigned char)",
+    "__clearADCPin(unsigned char)",
+    "__cxa_guard_acquire",
+    "__cxa_guard_release",
+    "__digitalRead",
+    "__digitalWrite",
+    "__errno",
+    "__joybus_receive_bytes_veneer",
+    "__malloc_lock",
+    "__malloc_unlock",
+    "__mutex_enter_blocking_veneer",
+    "__mutex_exit_veneer",
+    "__pinMode",
+    "__time_us_64_veneer",
+    "__wrap___getreent",
+    "__wrap_calloc",
+    "__wrap_free",
+    "__wrap_malloc",
+    "_calloc_r",
+    "_free_r",
+    "_malloc_r",
+    "_malloc_trim_r",
+    "_pio_add_program_at_offset",
+    "_pio_find_offset_for_program.isra.0",
+    "_probe(int, unsigned char, unsigned char, int)",
+    "_sbrk",
+    "_sbrk_r",
+    "_watchdog_enable",
+    "arduino::Print::availableForWrite()",
+    "arduino::Print::flush()",
+    "arduino::Print::print(char const*)",
+    "arduino::Print::print(char)",
+    "arduino::Print::print(int, int)",
+    "arduino::Print::print(unsigned char, int)",
+    "arduino::Print::printNumber(unsigned long, unsigned char)",
+    "arduino::Print::println(char const*)",
+    "arduino::Print::println(unsigned char, int)",
+    "arduino::Print::write(unsigned char const*, unsigned int)",
+    "atexit",
+    "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+    "busy_wait_until",
+    "busy_wait_us",
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)",
+    "calloc",
+    "check_single_timeout_us",
+    "clock_get_hz",
+    "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+    "dcd_disconnect",
+    "delay",
+    "detect_boot_gamecube(unsigned long)",
+    "detect_boot_n64(unsigned long)",
+    "dma_claim_unused_channel",
+    "free",
+    "gpio_init",
+    "gpio_set_drive_strength",
+    "gpio_set_function",
+    "gpio_set_pulls",
+    "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+    "hw_claim_clear",
+    "hw_claim_lock",
+    "hw_claim_unlock",
+    "hw_claim_unused_from_range",
+    "hw_is_claimed",
+    "i2c_deinit",
+    "i2c_init",
+    "i2c_set_baudrate",
+    "i2c_set_slave_mode",
+    "i2c_write_blocking_internal",
+    "i2c_write_blocking_until",
+    "init_single_timeout_until",
+    "interrupts",
+    "irq_get_vtable_handler",
+    "irq_is_enabled",
+    "irq_remove_handler",
+    "irq_set_enabled",
+    "irq_set_exclusive_handler",
+    "irq_set_mask_enabled",
+    "joybus_port_reset",
+    "joybus_port_terminate",
+    "joybus_receive_byte",
+    "joybus_receive_bytes",
+    "loop1",
+    "malloc",
+    "micros",
+    "millis",
+    "multicore_fifo_push_blocking",
+    "multicore_fifo_push_blocking_inline",
+    "mutex_enter_blocking",
+    "mutex_exit",
+    "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)",
+    "native_metrics::ServiceCore(unsigned int)",
+    "noInterrupts",
+    "operator new(unsigned int)",
+    "operator new[](unsigned int)",
+    "operator new[](unsigned int, std::nothrow_t const&)",
+    "pio_add_program",
+    "pio_can_add_program",
+    "pio_claim_unused_sm",
+    "pio_remove_program",
+    "pio_sm_init",
+    "pio_sm_set_consecutive_pindirs",
+    "pio_sm_unclaim",
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)",
+    "profile_selection::FindEntry(ProfileStore const&, unsigned long)",
+    "profile_selection::Pending()",
+    "profile_selection::Request(unsigned long)",
+    "reboot_firmware()",
+    "set_raw_irq_handler_and_unlock",
+    "setup1",
+    "setup1::{lambda()#1}::_FUN()",
+    "setup1::{lambda()#2}::_FUN()",
+    "strlcpy",
+    "strlen",
+    "strnlen",
+    "time_us_64",
+    "tud_disconnect",
+    "watchdog_caused_reboot",
+    "watchdog_reboot",
+    "watchdog_update"
+  ],
+  "unchanged_shapes": {
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)": {
+      "frame": 16,
+      "calls": [
+        "Adafruit_SSD1306::clearDisplay()",
+        "Adafruit_GFX::setFont(GFXfont const*)",
+        "Adafruit_GFX::setTextSize(unsigned char)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::println(unsigned char, int)",
+        "Adafruit_SSD1306::display()",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::println(unsigned char, int)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(char const*)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)": {
+      "frame": 8,
+      "calls": [
+        "Adafruit_SSD1306::clearDisplay()",
+        "Adafruit_GFX::setFont(GFXfont const*)",
+        "Adafruit_GFX::setTextSize(unsigned char)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::println(unsigned char, int)",
+        "Adafruit_SSD1306::display()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "AboutMenu::AboutMenu(_Config&)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "frame": 24,
+      "calls": [
+        "CommunicationBackend::GetInputs()",
+        "Adafruit_GFX::setFont(GFXfont const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)": {
+      "frame": 72,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tfp",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)": {
+      "frame": 136,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr5",
+        "blx\tr3",
+        "blx\tr4",
+        "blx\tr8",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr4",
+        "blx\tfp",
+        "blx\tfp",
+        "blx\tr4",
+        "blx\tfp",
+        "blx\tr3",
+        "blx\tfp",
+        "blx\tfp",
+        "blx\tr4",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)": {
+      "frame": 72,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr8",
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tsl",
+        "blx\tsl",
+        "blx\tsl",
+        "blx\tr9",
+        "blx\tr8",
+        "blx\tr8",
+        "blx\tsl",
+        "blx\tr6",
+        "blx\tr2",
+        "blx\tr3",
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr6"
+      ]
+    },
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)": {
+      "frame": 40,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr8",
+        "blx\tr4",
+        "blx\tr4",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)": {
+      "frame": 56,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tfp",
+        "blx\tsl",
+        "blx\tfp",
+        "blx\tr5",
+        "blx\tr2",
+        "blx\tr3",
+        "blx\tfp",
+        "blx\tfp"
+      ]
+    },
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)": {
+      "frame": 88,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr8",
+        "blx\tr6",
+        "blx\tr8",
+        "blx\tr8",
+        "blx\tr4",
+        "blx\tr8",
+        "blx\tr8",
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr3",
+        "blx\tr8",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)": {
+      "frame": 56,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr6",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_GFX::fillScreen(unsigned short)": {
+      "frame": 48,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr6",
+        "blx\tr4",
+        "blx\tr3",
+        "blx\tr2"
+      ]
+    },
+    "Adafruit_GFX::setFont(GFXfont const*)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_GFX::setRotation(unsigned char)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_GFX::setTextSize(unsigned char)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_GFX::startWrite()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_GFX::write(unsigned char)": {
+      "frame": 48,
+      "calls": [
+        "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+        "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)": {
+      "frame": 24,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr4"
+      ]
+    },
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)": {
+      "frame": 24,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr4"
+      ]
+    },
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)": {
+      "frame": 56,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)": {
+      "frame": 56,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr7",
+        "blx\tr7"
+      ]
+    },
+    "Adafruit_GFX::writePixel(short, short, unsigned short)": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr4"
+      ]
+    },
+    "Adafruit_SSD1306::clearDisplay()": {
+      "frame": 8,
+      "calls": [
+        "__wrap_memset"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_SSD1306::display()": {
+      "frame": 40,
+      "calls": [
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)": {
+      "frame": 32,
+      "calls": [
+        "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]": {
+      "frame": 32,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)": {
+      "frame": 32,
+      "calls": [
+        "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_SSD1306::drawPixel(short, short, unsigned short)": {
+      "frame": 20,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "Adafruit_SSD1306::invertDisplay(bool)": {
+      "frame": 16,
+      "calls": [
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "__digitalWrite",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "__digitalWrite"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)": {
+      "frame": 32,
+      "calls": [
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]": {
+      "frame": 40,
+      "calls": [
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite",
+        "__digitalWrite"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)": {
+      "frame": 16,
+      "calls": [
+        "____wrap___aeabi_idiv_veneer"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "CFastLED::operator[](int)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CFastLED::setMaxRefreshRate(unsigned short, bool)": {
+      "frame": 8,
+      "calls": [
+        "____wrap___aeabi_idiv_veneer",
+        "____wrap___aeabi_idiv_veneer"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "CFastLED::show(unsigned char)": {
+      "frame": 56,
+      "calls": [
+        "micros",
+        "micros",
+        "micros",
+        "millis",
+        "____wrap___aeabi_uidiv_veneer",
+        "millis"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr9"
+      ]
+    },
+    "CLEDController::size()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": {
+      "frame": 128,
+      "calls": [
+        "__wrap___aeabi_memcpy",
+        "micros",
+        "__wrap_free",
+        "__wrap_calloc",
+        "____wrap___aeabi_idiv_veneer",
+        "____wrap___aeabi_idiv_veneer",
+        "____wrap___aeabi_idiv_veneer"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": {
+      "frame": 128,
+      "calls": [
+        "__wrap___aeabi_memcpy",
+        "micros",
+        "__wrap_free",
+        "__wrap_calloc",
+        "____wrap___aeabi_idiv_veneer",
+        "____wrap___aeabi_idiv_veneer",
+        "____wrap___aeabi_idiv_veneer"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()": {
+      "frame": 72,
+      "calls": [
+        "gpio_set_function",
+        "pio_claim_unused_sm",
+        "pio_can_add_program",
+        "pio_add_program",
+        "dma_claim_unused_channel",
+        "gpio_set_function",
+        "pio_sm_set_consecutive_pindirs",
+        "clock_get_hz",
+        "__wrap___aeabi_ui2f",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_fdiv",
+        "__wrap___aeabi_f2uiz",
+        "__wrap___aeabi_ui2f",
+        "__wrap___aeabi_fsub",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_f2uiz",
+        "pio_sm_init",
+        "pio_sm_unclaim",
+        "irq_set_exclusive_handler",
+        "irq_set_enabled"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)": {
+      "frame": 88,
+      "calls": [
+        "micros",
+        "__wrap_free",
+        "__wrap_calloc",
+        "micros"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "CommunicationBackend::BackendId()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)": {
+      "frame": 12,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CommunicationBackend::CurrentGameMode()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CommunicationBackend::GetInputs()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CommunicationBackend::GetOutputs()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "CommunicationBackend::SetGameMode(InputMode*)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 24,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr5",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr6",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "frame": 72,
+      "calls": [
+        "CommunicationBackend::GetInputs()",
+        "Adafruit_GFX::setFont(GFXfont const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::println(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::print(char const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::print(char)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr7",
+        "blx\tr3",
+        "blx\tr7",
+        "blx\tr7",
+        "blx\tr7",
+        "blx\tr4",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)": {
+      "frame": 56,
+      "calls": [
+        "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+        "__wrap_memset",
+        "operator new[](unsigned int)",
+        "strlcpy",
+        "InputMode::GetConfig()",
+        "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)",
+        "strlcpy",
+        "__cxa_guard_acquire",
+        "__cxa_guard_release",
+        "ProfileStore::Count() const",
+        "ProfileStore::Count() const",
+        "operator new[](unsigned int, std::nothrow_t const&)",
+        "operator new[](unsigned int, std::nothrow_t const&)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 16,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr6"
+      ]
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 16,
+      "calls": [
+        "IntegratedDisplay::Clear()",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()",
+        "tud_disconnect",
+        "IntegratedDisplay::UpdateDisplay()",
+        "reboot_firmware()"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 40,
+      "calls": [
+        "IntegratedDisplay::Clear()",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "IntegratedDisplay::UpdateDisplay()",
+        "CFastLED::operator[](int)",
+        "__wrap___aeabi_memcpy",
+        "CFastLED::show(unsigned char)",
+        "reboot_bootloader()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::Clear()",
+        "IntegratedDisplay::UpdateDisplay()",
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 24,
+      "calls": [
+        "profile_selection::Pending()",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)": {
+      "frame": 24,
+      "calls": [
+        "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+        "__wrap_memset",
+        "profile_selection::FindEntry(ProfileStore const&, unsigned long)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 16,
+      "calls": [
+        "tud_disconnect",
+        "delay",
+        "delay",
+        "reboot_firmware()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 8,
+      "calls": [
+        "profile_selection::Request(unsigned long)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": {
+      "frame": 16,
+      "calls": [
+        "InputMode::GetConfig()",
+        "tud_disconnect",
+        "delay",
+        "delay",
+        "reboot_firmware()"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)": {
+      "frame": 16,
+      "calls": [
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+        "__cxa_guard_acquire",
+        "__cxa_guard_release"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "InputMode::GetConfig()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "IntegratedDisplay::Clear()": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "IntegratedDisplay::HandleControls(DisplayMode*)": {
+      "frame": 24,
+      "calls": [
+        "time_us_64"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr7"
+      ]
+    },
+    "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)": {
+      "frame": 16,
+      "calls": [
+        "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)",
+        "__wrap___aeabi_memcpy",
+        "Adafruit_GFX::setTextSize(unsigned char)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "IntegratedDisplay::SendReport()": {
+      "frame": 24,
+      "calls": [
+        "IntegratedDisplay::HandleControls(DisplayMode*)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "IntegratedDisplay::SetDisplayMode(_DisplayModeId)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "IntegratedDisplay::UpdateDisplay()": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)": {
+      "frame": 16,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)": {
+      "frame": 16,
+      "calls": [
+        "InputMode::GetConfig()"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "NeoPixelBackend<(unsigned char)11, 76>::SendReport()": {
+      "frame": 32,
+      "calls": [
+        "__cxa_guard_acquire",
+        "time_us_64",
+        "____wrap___aeabi_uldivmod_veneer",
+        "__wrap___aeabi_ul2f",
+        "__wrap___aeabi_i2f",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_f2uiz",
+        "CFastLED::show(unsigned char)",
+        "time_us_64",
+        "__cxa_guard_release",
+        "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+        "CFastLED::show(unsigned char)",
+        "hsv2rgb_rainbow(CHSV const&, CRGB&)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)": {
+      "frame": 48,
+      "calls": [
+        "__wrap_memset",
+        "InputMode::GetConfig()",
+        "InputMode::GetConfig()",
+        "__wrap___aeabi_memcpy",
+        "__wrap___aeabi_memcpy"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 16,
+      "calls": [
+        "reboot_firmware()",
+        "IntegratedDisplay::Clear()",
+        "IntegratedDisplay::UpdateDisplay()",
+        "__mutex_enter_blocking_veneer",
+        "multicore_fifo_push_blocking",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()",
+        "reboot_firmware()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "frame": 56,
+      "calls": [
+        "CommunicationBackend::GetInputs()",
+        "Adafruit_GFX::setFont(GFXfont const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::print(char const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr7",
+        "blx\tr7",
+        "blx\tr4"
+      ]
+    },
+    "PackageStorageFence::MutationFenced()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ProfileStore::Count() const": {
+      "frame": 16,
+      "calls": [
+        "PackageStorageFence::MutationFenced()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "ProfileStore::EntryAt(unsigned int) const": {
+      "frame": 32,
+      "calls": [
+        "PackageStorageFence::MutationFenced()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "ProfileStore::IsReady() const": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "RemapMenu::RemapMenu()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "frame": 24,
+      "calls": [
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "frame": 8,
+      "calls": [
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "frame": 32,
+      "calls": [
+        "CommunicationBackend::GetInputs()",
+        "Adafruit_GFX::setFont(GFXfont const*)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "arduino::Print::print(unsigned char, int)",
+        "arduino::Print::print(char const*)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr6",
+        "blx\tr6",
+        "blx\tr5"
+      ]
+    },
+    "TwoWire::_handleTimeout(bool)": {
+      "frame": 24,
+      "calls": [
+        "irq_remove_handler",
+        "irq_set_enabled",
+        "i2c_deinit",
+        "__pinMode",
+        "__pinMode",
+        "i2c_deinit",
+        "__pinMode",
+        "__pinMode",
+        "i2c_init",
+        "i2c_set_slave_mode",
+        "gpio_set_function",
+        "gpio_set_pulls",
+        "gpio_set_function",
+        "gpio_set_pulls",
+        "i2c_set_baudrate",
+        "i2c_set_baudrate"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr2",
+        "blx\tr2",
+        "blx\tr2",
+        "blx\tr2"
+      ]
+    },
+    "TwoWire::begin()": {
+      "frame": 16,
+      "calls": [
+        "i2c_init",
+        "i2c_set_slave_mode",
+        "gpio_set_function",
+        "gpio_set_pulls",
+        "gpio_set_function",
+        "gpio_set_pulls"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "TwoWire::beginTransmission(unsigned char)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "TwoWire::end()": {
+      "frame": 16,
+      "calls": [
+        "irq_remove_handler",
+        "irq_set_enabled",
+        "i2c_deinit",
+        "__pinMode",
+        "__pinMode"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "TwoWire::endTransmission()": {
+      "frame": 56,
+      "calls": [
+        "_probe(int, unsigned char, unsigned char, int)",
+        "time_us_64",
+        "__wrap___aeabi_lmul",
+        "i2c_write_blocking_until",
+        "TwoWire::_handleTimeout(bool)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "TwoWire::endTransmission(bool)": {
+      "frame": 64,
+      "calls": [
+        "_probe(int, unsigned char, unsigned char, int)",
+        "time_us_64",
+        "__wrap___aeabi_lmul",
+        "i2c_write_blocking_until",
+        "TwoWire::_handleTimeout(bool)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "TwoWire::setClock(unsigned long)": {
+      "frame": 8,
+      "calls": [
+        "i2c_set_baudrate"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "TwoWire::write(unsigned char const*, unsigned int)": {
+      "frame": 40,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "TwoWire::write(unsigned char)": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__clearADCPin(unsigned char)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__cxa_guard_acquire": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__cxa_guard_release": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__digitalRead": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__digitalWrite": {
+      "frame": 16,
+      "calls": [
+        "gpio_set_function"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__errno": {
+      "frame": 8,
+      "calls": [
+        "__wrap___getreent"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__joybus_receive_bytes_veneer": {
+      "frame": 4,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__malloc_lock": {
+      "frame": 8,
+      "calls": [
+        "__retarget_lock_acquire_recursive"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__malloc_unlock": {
+      "frame": 8,
+      "calls": [
+        "__retarget_lock_release_recursive"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__mutex_enter_blocking_veneer": {
+      "frame": 4,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__mutex_exit_veneer": {
+      "frame": 4,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__pinMode": {
+      "frame": 24,
+      "calls": [
+        "gpio_init",
+        "gpio_set_drive_strength",
+        "__clearADCPin(unsigned char)",
+        "gpio_init",
+        "gpio_set_pulls",
+        "gpio_init",
+        "gpio_set_pulls",
+        "gpio_init",
+        "gpio_init",
+        "gpio_init",
+        "gpio_init",
+        "gpio_set_pulls"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__time_us_64_veneer": {
+      "frame": 4,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__wrap___getreent": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "__wrap_calloc": {
+      "frame": 16,
+      "calls": [
+        "noInterrupts",
+        "calloc",
+        "interrupts"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__wrap_free": {
+      "frame": 8,
+      "calls": [
+        "noInterrupts",
+        "free",
+        "interrupts"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "__wrap_malloc": {
+      "frame": 8,
+      "calls": [
+        "noInterrupts",
+        "malloc",
+        "interrupts"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_calloc_r": {
+      "frame": 24,
+      "calls": [
+        "_malloc_r",
+        "__errno",
+        "__wrap_memset"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_free_r": {
+      "frame": 24,
+      "calls": [
+        "__malloc_lock",
+        "_malloc_trim_r",
+        "__malloc_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_malloc_r": {
+      "frame": 40,
+      "calls": [
+        "__malloc_lock",
+        "__malloc_lock",
+        "__malloc_unlock",
+        "_sbrk_r",
+        "_sbrk_r",
+        "__malloc_unlock",
+        "_free_r"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_malloc_trim_r": {
+      "frame": 24,
+      "calls": [
+        "__malloc_lock",
+        "__malloc_unlock",
+        "_sbrk_r",
+        "_sbrk_r",
+        "_sbrk_r",
+        "__malloc_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_pio_add_program_at_offset": {
+      "frame": 32,
+      "calls": [
+        "panic"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_pio_find_offset_for_program.isra.0": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "_probe(int, unsigned char, unsigned char, int)": {
+      "frame": 40,
+      "calls": [
+        "__pinMode",
+        "__pinMode",
+        "gpio_set_function",
+        "gpio_set_function",
+        "__digitalWrite",
+        "____wrap___aeabi_idiv_veneer",
+        "sleep_us",
+        "__digitalWrite",
+        "time_us_64",
+        "time_us_64",
+        "__digitalRead",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalRead",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalWrite",
+        "sleep_us",
+        "time_us_64",
+        "time_us_64",
+        "__digitalRead",
+        "__digitalRead",
+        "sleep_us",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalWrite",
+        "sleep_us",
+        "gpio_set_function",
+        "gpio_set_function",
+        "__digitalRead",
+        "__digitalRead",
+        "__digitalWrite",
+        "sleep_us",
+        "__digitalWrite",
+        "time_us_64",
+        "time_us_64",
+        "__digitalRead",
+        "__digitalRead",
+        "sleep_us",
+        "__digitalWrite",
+        "__digitalRead"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_sbrk": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "_sbrk_r": {
+      "frame": 16,
+      "calls": [
+        "_sbrk"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "_watchdog_enable": {
+      "frame": 8,
+      "calls": [
+        "watchdog_update"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "arduino::Print::availableForWrite()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "arduino::Print::flush()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "arduino::Print::print(char const*)": {
+      "frame": 32,
+      "calls": [
+        "strlen"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr4"
+      ]
+    },
+    "arduino::Print::print(char)": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "arduino::Print::print(int, int)": {
+      "frame": 16,
+      "calls": [
+        "arduino::Print::printNumber(unsigned long, unsigned char)",
+        "arduino::Print::printNumber(unsigned long, unsigned char)",
+        "arduino::Print::printNumber(unsigned long, unsigned char)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "arduino::Print::print(unsigned char, int)": {
+      "frame": 8,
+      "calls": [
+        "arduino::Print::printNumber(unsigned long, unsigned char)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "arduino::Print::printNumber(unsigned long, unsigned char)": {
+      "frame": 72,
+      "calls": [
+        "____wrap___aeabi_uidivmod_veneer",
+        "strlen"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr5"
+      ]
+    },
+    "arduino::Print::println(char const*)": {
+      "frame": 32,
+      "calls": [
+        "strlen"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr4"
+      ]
+    },
+    "arduino::Print::println(unsigned char, int)": {
+      "frame": 16,
+      "calls": [
+        "arduino::Print::printNumber(unsigned long, unsigned char)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr6"
+      ]
+    },
+    "arduino::Print::write(unsigned char const*, unsigned int)": {
+      "frame": 24,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "atexit": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]": {
+      "frame": 56,
+      "calls": [
+        "time_us_64",
+        "pio_sm_init"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "busy_wait_until": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "busy_wait_us": {
+      "frame": 16,
+      "calls": [
+        "time_us_64",
+        "busy_wait_until"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)": {
+      "frame": 64,
+      "calls": [
+        "____wrap___aeabi_uidiv_veneer"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3"
+      ]
+    },
+    "calloc": {
+      "frame": 16,
+      "calls": [
+        "__wrap___getreent",
+        "_calloc_r"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "check_single_timeout_us": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "clock_get_hz": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)": {
+      "frame": 32,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "dcd_disconnect": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "delay": {
+      "frame": 8,
+      "calls": [
+        "sleep_ms"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "detect_boot_gamecube(unsigned long)": {
+      "frame": 96,
+      "calls": [
+        "__wrap_memset",
+        "pio_claim_unused_sm",
+        "pio_can_add_program",
+        "pio_add_program",
+        "gpio_set_function",
+        "clock_get_hz",
+        "____wrap___aeabi_uidiv_veneer",
+        "__wrap___aeabi_ui2f",
+        "__wrap___aeabi_f2uiz",
+        "joybus_port_reset",
+        "busy_wait_us",
+        "joybus_port_reset",
+        "__joybus_receive_bytes_veneer",
+        "busy_wait_us",
+        "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+        "pio_sm_set_consecutive_pindirs",
+        "joybus_port_terminate",
+        "pio_sm_unclaim",
+        "__wrap___aeabi_ui2f",
+        "__wrap___aeabi_fsub",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_f2uiz",
+        "__joybus_receive_bytes_veneer"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "detect_boot_n64(unsigned long)": {
+      "frame": 96,
+      "calls": [
+        "__wrap_memset",
+        "pio_claim_unused_sm",
+        "pio_can_add_program",
+        "pio_add_program",
+        "gpio_set_function",
+        "clock_get_hz",
+        "____wrap___aeabi_uidiv_veneer",
+        "__wrap___aeabi_ui2f",
+        "__wrap___aeabi_f2uiz",
+        "joybus_port_reset",
+        "busy_wait_us",
+        "joybus_port_reset",
+        "__joybus_receive_bytes_veneer",
+        "busy_wait_us",
+        "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+        "pio_sm_set_consecutive_pindirs",
+        "joybus_port_terminate",
+        "pio_sm_unclaim",
+        "__wrap___aeabi_ui2f",
+        "__wrap___aeabi_fsub",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_f2uiz",
+        "busy_wait_us",
+        "time_us_64",
+        "pio_sm_init",
+        "busy_wait_us"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "dma_claim_unused_channel": {
+      "frame": 16,
+      "calls": [
+        "hw_claim_unused_from_range"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "free": {
+      "frame": 8,
+      "calls": [
+        "__wrap___getreent",
+        "_free_r"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "gpio_init": {
+      "frame": 8,
+      "calls": [
+        "gpio_set_function"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "gpio_set_drive_strength": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "gpio_set_function": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "gpio_set_pulls": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "hsv2rgb_rainbow(CHSV const&, CRGB&)": {
+      "frame": 20,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "hw_claim_clear": {
+      "frame": 16,
+      "calls": [
+        "hw_claim_lock",
+        "hw_claim_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "hw_claim_lock": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "hw_claim_unlock": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "hw_claim_unused_from_range": {
+      "frame": 32,
+      "calls": [
+        "hw_claim_lock",
+        "hw_is_claimed",
+        "hw_claim_unlock",
+        "panic"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "hw_is_claimed": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "i2c_deinit": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "i2c_init": {
+      "frame": 16,
+      "calls": [
+        "i2c_set_baudrate"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "i2c_set_baudrate": {
+      "frame": 40,
+      "calls": [
+        "clock_get_hz",
+        "____wrap___aeabi_uidiv_veneer",
+        "____wrap___aeabi_uidiv_veneer",
+        "____wrap___aeabi_uidiv_veneer",
+        "____wrap___aeabi_uidiv_veneer",
+        "____wrap___aeabi_uidiv_veneer"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "i2c_set_slave_mode": {
+      "frame": 12,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "i2c_write_blocking_internal": {
+      "frame": 48,
+      "calls": [],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "i2c_write_blocking_until": {
+      "frame": 64,
+      "calls": [
+        "init_single_timeout_until",
+        "i2c_write_blocking_internal"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "init_single_timeout_until": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "interrupts": {
+      "frame": 8,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "irq_get_vtable_handler": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "irq_is_enabled": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "irq_remove_handler": {
+      "frame": 40,
+      "calls": [
+        "irq_is_enabled",
+        "irq_set_enabled",
+        "hard_assertion_failure",
+        "irq_set_enabled",
+        "set_raw_irq_handler_and_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "irq_set_enabled": {
+      "frame": 8,
+      "calls": [
+        "irq_set_mask_enabled"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "irq_set_exclusive_handler": {
+      "frame": 16,
+      "calls": [
+        "irq_get_vtable_handler",
+        "hard_assertion_failure",
+        "set_raw_irq_handler_and_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "irq_set_mask_enabled": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "joybus_port_reset": {
+      "frame": 16,
+      "calls": [
+        "pio_sm_init"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "joybus_port_terminate": {
+      "frame": 8,
+      "calls": [
+        "pio_sm_unclaim",
+        "pio_remove_program"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "joybus_receive_byte": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "joybus_receive_bytes": {
+      "frame": 56,
+      "calls": [
+        "joybus_receive_byte",
+        "__time_us_64_veneer"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "loop1": {
+      "frame": 72,
+      "calls": [
+        "native_metrics::ServiceCore(unsigned int)",
+        "__mutex_enter_blocking_veneer",
+        "__mutex_exit_veneer",
+        "__wrap_memset",
+        "InputMode::GetConfig()",
+        "InputMode::GetConfig()",
+        "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)",
+        "watchdog_caused_reboot",
+        "__cxa_guard_acquire",
+        "time_us_64",
+        "____wrap___aeabi_uldivmod_veneer",
+        "__wrap___aeabi_ul2f",
+        "__wrap___aeabi_i2f",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_f2uiz",
+        "CFastLED::show(unsigned char)",
+        "InputMode::GetConfig()",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "__cxa_guard_acquire",
+        "time_us_64",
+        "____wrap___aeabi_uldivmod_veneer",
+        "__wrap___aeabi_ul2f",
+        "__wrap___aeabi_i2f",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_fmul",
+        "__wrap___aeabi_f2uiz",
+        "CFastLED::show(unsigned char)",
+        "InputMode::GetConfig()",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "__wrap___aeabi_memcpy",
+        "__wrap___aeabi_memcpy",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "time_us_64",
+        "__cxa_guard_release",
+        "CFastLED::show(unsigned char)",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+        "CFastLED::show(unsigned char)",
+        "time_us_64",
+        "__cxa_guard_release",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+        "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+        "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+        "CFastLED::show(unsigned char)",
+        "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+        "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr7",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr2",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr9",
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "malloc": {
+      "frame": 8,
+      "calls": [
+        "__wrap___getreent",
+        "_malloc_r"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "micros": {
+      "frame": 8,
+      "calls": [
+        "time_us_64"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "millis": {
+      "frame": 8,
+      "calls": [
+        "time_us_64",
+        "____wrap___aeabi_uldivmod_veneer",
+        "____wrap___aeabi_uidiv_veneer"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "multicore_fifo_push_blocking": {
+      "frame": 8,
+      "calls": [
+        "multicore_fifo_push_blocking_inline"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "multicore_fifo_push_blocking_inline": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "mutex_enter_blocking": {
+      "frame": 12,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "mutex_exit": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)": {
+      "frame": 20,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "native_metrics::ServiceCore(unsigned int)": {
+      "frame": 48,
+      "calls": [
+        "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)",
+        "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "noInterrupts": {
+      "frame": 16,
+      "calls": [
+        "panic"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "operator new(unsigned int)": {
+      "frame": 8,
+      "calls": [
+        "__wrap_malloc"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "operator new[](unsigned int)": {
+      "frame": 8,
+      "calls": [
+        "__wrap_malloc"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "operator new[](unsigned int, std::nothrow_t const&)": {
+      "frame": 8,
+      "calls": [
+        "operator new[](unsigned int)"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_add_program": {
+      "frame": 24,
+      "calls": [
+        "hw_claim_lock",
+        "_pio_find_offset_for_program.isra.0",
+        "panic",
+        "_pio_add_program_at_offset",
+        "hw_claim_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_can_add_program": {
+      "frame": 16,
+      "calls": [
+        "hw_claim_lock",
+        "_pio_find_offset_for_program.isra.0",
+        "hw_claim_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_claim_unused_sm": {
+      "frame": 16,
+      "calls": [
+        "hw_claim_unused_from_range"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_remove_program": {
+      "frame": 16,
+      "calls": [
+        "hw_claim_lock",
+        "hw_claim_unlock"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_sm_init": {
+      "frame": 16,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_sm_set_consecutive_pindirs": {
+      "frame": 40,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "pio_sm_unclaim": {
+      "frame": 8,
+      "calls": [
+        "hw_claim_clear"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)": {
+      "frame": 56,
+      "calls": [
+        "ProfileStore::Count() const",
+        "ProfileStore::IsReady() const",
+        "ProfileStore::Count() const",
+        "ProfileStore::EntryAt(unsigned int) const",
+        "ProfileStore::Count() const",
+        "ProfileStore::EntryAt(unsigned int) const",
+        "__wrap___aeabi_memcpy"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "profile_selection::FindEntry(ProfileStore const&, unsigned long)": {
+      "frame": 16,
+      "calls": [
+        "ProfileStore::Count() const",
+        "ProfileStore::EntryAt(unsigned int) const",
+        "ProfileStore::Count() const"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "profile_selection::Pending()": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "profile_selection::Request(unsigned long)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "reboot_firmware()": {
+      "frame": 8,
+      "calls": [
+        "watchdog_reboot"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "set_raw_irq_handler_and_unlock": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "setup1": {
+      "frame": 56,
+      "calls": [
+        "__mutex_enter_blocking_veneer",
+        "__mutex_exit_veneer",
+        "delay",
+        "__mutex_enter_blocking_veneer",
+        "__mutex_exit_veneer",
+        "__cxa_guard_acquire",
+        "__cxa_guard_acquire",
+        "__cxa_guard_acquire",
+        "operator new(unsigned int)",
+        "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)",
+        "__cxa_guard_acquire",
+        "CFastLED::addLeds(CLEDController*, CRGB*, int, int)",
+        "CFastLED::setMaxRefreshRate(unsigned short, bool)",
+        "__cxa_guard_acquire",
+        "__cxa_guard_acquire",
+        "__cxa_guard_acquire",
+        "__cxa_guard_acquire",
+        "operator new(unsigned int)",
+        "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)",
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+        "CFastLED::show(unsigned char)",
+        "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)",
+        "atexit",
+        "__cxa_guard_release",
+        "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+        "atexit",
+        "__cxa_guard_release",
+        "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)",
+        "atexit",
+        "__cxa_guard_release",
+        "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)",
+        "atexit",
+        "__cxa_guard_release",
+        "__cxa_guard_release",
+        "RemapMenu::RemapMenu()",
+        "atexit",
+        "__cxa_guard_release",
+        "AboutMenu::AboutMenu(_Config&)",
+        "atexit",
+        "__cxa_guard_release",
+        "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)",
+        "atexit",
+        "__cxa_guard_release",
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+        "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+      ],
+      "tail": [],
+      "indirect": [
+        "blx\tr3",
+        "blx\tr3",
+        "blx\tr3"
+      ]
+    },
+    "setup1::{lambda()#1}::_FUN()": {
+      "frame": 8,
+      "calls": [
+        "Adafruit_SSD1306::clearDisplay()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "setup1::{lambda()#2}::_FUN()": {
+      "frame": 8,
+      "calls": [
+        "Adafruit_SSD1306::display()"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "strlcpy": {
+      "frame": 16,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "strlen": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "strnlen": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "time_us_64": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "tud_disconnect": {
+      "frame": 8,
+      "calls": [
+        "dcd_disconnect"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "watchdog_caused_reboot": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "watchdog_reboot": {
+      "frame": 16,
+      "calls": [
+        "_watchdog_enable"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "watchdog_update": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    }
+  },
+  "changed_shapes": {
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "old": {
+        "frame": 48,
+        "calls": [
+          "CommunicationBackend::GetInputs()",
+          "InputMode::GetConfig()",
+          "strnlen",
+          "arduino::Print::print(char const*)",
+          "strlen",
+          "arduino::Print::print(char const*)",
+          "Adafruit_GFX::drawCircle(short, short, short, unsigned short)",
+          "Adafruit_GFX::fillCircle(short, short, short, unsigned short)",
+          "arduino::Print::print(char const*)"
+        ],
+        "tail": [],
+        "indirect": [
+          "blx\tr3",
+          "blx\tr3"
+        ]
+      },
+      "current": {
+        "frame": 48,
+        "calls": [
+          "CommunicationBackend::GetInputs()",
+          "current_profile_label(InputMode const*, _CommunicationBackendId)",
+          "arduino::Print::print(char const*)",
+          "strlen",
+          "arduino::Print::print(char const*)",
+          "Adafruit_GFX::drawCircle(short, short, short, unsigned short)",
+          "Adafruit_GFX::fillCircle(short, short, short, unsigned short)"
+        ],
+        "tail": [],
+        "indirect": [
+          "blx\tr3",
+          "blx\tr3"
+        ]
+      }
+    },
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "old": {
+        "frame": 48,
+        "calls": [
+          "CommunicationBackend::GetInputs()",
+          "CommunicationBackend::GetOutputs()",
+          "CommunicationBackend::GetOutputs()",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+          "Adafruit_GFX::setFont(GFXfont const*)",
+          "Adafruit_GFX::setTextSize(unsigned char)",
+          "InputMode::GetConfig()",
+          "strnlen",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(char const*)",
+          "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "arduino::Print::print(char const*)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::setFont(GFXfont const*)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(char const*)"
+        ],
+        "tail": [],
+        "indirect": [
+          "blx\tr3",
+          "blx\tr3",
+          "blx\tr6",
+          "blx\tr6",
+          "blx\tr6",
+          "blx\tr6",
+          "blx\tr6",
+          "blx\tr6",
+          "blx\tr3"
+        ]
+      },
+      "current": {
+        "frame": 48,
+        "calls": [
+          "CommunicationBackend::GetInputs()",
+          "CommunicationBackend::GetOutputs()",
+          "CommunicationBackend::GetOutputs()",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+          "Adafruit_GFX::setFont(GFXfont const*)",
+          "Adafruit_GFX::setTextSize(unsigned char)",
+          "InputMode::GetConfig()",
+          "current_profile_label(InputMode const*, _CommunicationBackendId)",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(char const*)",
+          "arduino::Print::print(char const*)",
+          "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "arduino::Print::print(char const*)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+          "Adafruit_GFX::setFont(GFXfont const*)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(int, int)",
+          "arduino::Print::print(char const*)"
+        ],
+        "tail": [],
+        "indirect": [
+          "blx\tr3",
+          "blx\tr3",
+          "blx\tr3",
+          "blx\tr7",
+          "blx\tr7",
+          "blx\tr7",
+          "blx\tr7",
+          "blx\tr7",
+          "blx\tr7",
+          "blx\tr3"
+        ]
+      }
+    }
+  },
+  "new_reachable": {
+    "ProfileStore::ActiveId() const": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ProfileStore::ActiveProfile() const": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ProfileStore::IsReadOnlyRecovery() const": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "current_profile_label(InputMode const*, _CommunicationBackendId)": {
+      "frame": 32,
+      "calls": [
+        "ProfileStore::IsReady() const",
+        "ProfileStore::IsReadOnlyRecovery() const",
+        "ProfileStore::ActiveId() const",
+        "ProfileStore::ActiveProfile() const",
+        "ultimate_native::Lease(_UltimateProfile const&)",
+        "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)",
+        "ProfileStore::Count() const",
+        "ProfileStore::EntryAt(unsigned int) const",
+        "strnlen"
+      ],
+      "tail": [],
+      "indirect": []
+    },
+    "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    },
+    "ultimate_native::Lease(_UltimateProfile const&)": {
+      "frame": 0,
+      "calls": [],
+      "tail": [],
+      "indirect": []
+    }
+  }
+}

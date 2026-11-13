@@ -17,6 +17,11 @@
 
 #include "core/Persistence.hpp"
 #include "core/CompactConfigRecovery.hpp"
+#include "core/PackageStorageFence.hpp"
+#include "core/ConfigWireValidator.hpp"
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "core/ProfileStore.hpp"
+#endif
 #include "core/Sha256.hpp"
 
 #include "stdlib.hpp"
@@ -25,6 +30,7 @@
 #include <LittleFS.h>
 #include <pb_arduino.h>
 #include <pb_decode.h>
+#include <pb_common.h>
 #include "modes/UltimateNativeProfile.hpp"
 #include <pb_encode.h>
 
@@ -66,7 +72,7 @@ struct SavePhaseState {
 // preparation. Filenames below refer solely to the existing static constants.
 Config loaded_candidate;
 struct LoadPhaseState { CompactConfigRecovery::Source source; uint32_t crc; };
-struct SaveSourceContext { Persistence *owner; Config *config; };
+struct SaveSourceContext { Persistence *owner; Config *config; bool package = false; };
 union SourcePhaseContext { LoadPhaseState load{}; SaveSourceContext save; } source_phase{};
 #define load_phase source_phase.load
 #define save_context source_phase.save
@@ -82,7 +88,40 @@ struct ConfigFileReader {
     bool io_failed = false;
 };
 
-struct ReadWorkspace { ConfigFileReader reader; pb_istream_t stream; size_t file_size; };
+// One finite synchronous observation; these scalar outputs survive sibling
+// decode/wire/canonical phases, never another Config or encoded-body owner.
+struct PackageObservationState {
+    Config *into = nullptr;
+    Persistence::PackageConfigFacts *facts = nullptr;
+    bool *source_valid = nullptr;
+    const char *path = nullptr;
+    size_t maximum = 0;
+    bool decoded = false;
+    bool live = false;
+    bool historical_retained = false;
+} package_observation{};
+// Borrowed scalar inputs span only the synchronous package save phases.
+// Both fact objects live in the existing publication owner until completion.
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+struct PackageSaveState {
+    Persistence *persistence=nullptr;
+    const Persistence::PackageConfigFacts *baseline=nullptr,*expected=nullptr;
+    const void *owner=nullptr;
+    uint64_t token=0;
+} package_save{};
+#endif
+struct PackageObservationReset {
+    ~PackageObservationReset() { package_observation = {}; }
+};
+// Four is the frozen Config wire schema's complete message depth, including
+// legacy embedded UltimateProfile children. Streams borrow the same read file;
+// no Config/encoded-body owner or recursive filesystem decoder is added.
+struct ObservedMessageFrame { pb_istream_t stream; const pb_msgdesc_t *descriptor; void *message; };
+struct ObservedEncodingFrame { pb_field_iter_t field; size_t child_index; bool have_field; };
+struct ReadWorkspace {
+    ConfigFileReader reader; pb_istream_t stream; size_t file_size;
+    union { ObservedMessageFrame observed[4]; ObservedEncodingFrame encoding[4]; };
+};
 union SynchronousPhaseWorkspace { SavePhaseState save{}; ReadWorkspace read; } phase_workspace{};
 __attribute__((always_inline)) inline SavePhaseState &SavePhase(){return phase_workspace.save;}
 __attribute__((always_inline)) inline ReadWorkspace &ReadPhase(){return phase_workspace.read;}
@@ -112,7 +151,27 @@ bool read_config_file(pb_istream_t *stream,pb_byte_t *buffer,size_t count) {
     return true;
 }
 
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+__attribute__((noinline)) config_wire::Result ValidatePackageConfigWire(CheckedStorageFile &file, size_t bytes) {
+    config_wire::Workspace parser;
+    uint8_t chunk[32];
+    return config_wire::ValidateReader(parser,
+        [](void *context, size_t offset, uint8_t *into, size_t count) {
+            auto &source = *static_cast<CheckedStorageFile *>(context);
+            return source.seek(Persistence::config_offset + offset) &&
+                   source.read(into, count) == static_cast<int>(count);
+        }, &file, bytes, chunk, sizeof(chunk), package_observation.historical_retained);
+}
+
+#endif
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+bool CompareObservedConfigBytes(CheckedStorageFile &,const Config &,size_t);
+#endif
 bool compare_config_bytes(CheckedStorageFile &file, const Config &config, size_t encoded_size) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if(package_observation.live)return CompareObservedConfigBytes(file,config,encoded_size);
+#endif
     if (!file.seek(Persistence::config_offset)) return false;
     pb_ostream_t compare{};
     compare.callback = [](pb_ostream_t *out, const pb_byte_t *bytes, size_t count) {
@@ -180,10 +239,12 @@ bool select_config_filename(const char *current, const char *prior, const char *
 }  // namespace
 
 Persistence::Persistence() {
+    PackageStorageFence::BeginMountAttempt();
     _configuration_ok = LittleFS.setConfig(LittleFSConfig(false));
     if (_configuration_ok) {
         _mounted = LittleFS.begin();
     }
+    PackageStorageFence::FinishMountAttempt(_configuration_ok, _mounted);
 }
 
 Persistence::~Persistence() {
@@ -281,8 +342,13 @@ __attribute__((noinline)) bool Persistence::StageSaveConfig() {
     if(!encoded||!PositionStagedConfig())return FailStagedConfig();
     return CompleteStagedConfig();
 }
+// The exact existing slot holds CheckedStorageFile, so no virtual Print bridge
+// is needed. This callback owns no state and preserves byte-count semantics.
+static __attribute__((noinline)) bool WriteStagedBytes(pb_ostream_t *, const pb_byte_t *bytes, size_t count) {
+    return SynchronousFileScope<true>::File().CheckedStorageFile::write(bytes, count) == count;
+}
 __attribute__((noinline)) void Persistence::InitializeStagedStream() {
-    ::new (&save_phase.temporary.stream) pb_ostream_t(as_pb_ostream(SynchronousFileScope<true>::File()));
+    ::new (&save_phase.temporary.stream) pb_ostream_t{WriteStagedBytes, nullptr, SIZE_MAX, 0};
 }
 __attribute__((noinline)) bool Persistence::EncodeStagedConfig() {
     return pb_encode(&save_phase.temporary.stream,Config_fields,save_context.config)&&save_phase.temporary.stream.bytes_written==save_phase.encoded_size;
@@ -296,7 +362,7 @@ __attribute__((noinline)) bool Persistence::CompleteStagedConfig() {
     auto &file=SynchronousFileScope<true>::File();
     auto *owner=save_context.owner;
     auto &header=save_phase.header;
-    auto staging_failed=[owner,&file](){file.close();if(file.uncertain())owner->_mutation_fenced=true;return false;};
+    auto staging_failed=[owner,&file](){if(save_context.package)PackageStorageFence::Fence();file.close();if(file.uncertain()||save_context.package)owner->_mutation_fenced=true;return false;};
     CRC32 crc;
     for (size_t i = 0; i < save_phase.encoded_size; ++i) {
         int value = file.read();
@@ -311,7 +377,8 @@ __attribute__((noinline)) bool Persistence::CompleteStagedConfig() {
 }
 __attribute__((noinline)) bool Persistence::FailStagedConfig() {
     auto &file=SynchronousFileScope<true>::File();auto *owner=save_context.owner;
-    file.close();if(file.uncertain())owner->_mutation_fenced=true;return false;
+    if(save_context.package)PackageStorageFence::Fence();
+    file.close();if(file.uncertain()||save_context.package)owner->_mutation_fenced=true;return false;
 }
 __attribute__((noinline)) bool Persistence::InitializeStagedConfig() {
     auto &file=SynchronousFileScope<true>::File();
@@ -335,9 +402,11 @@ __attribute__((noinline)) bool Persistence::RotateSavedConfig() {
     if (!current && current.outcome != Outcome::NotFound) return false;
     save_phase.temporary.publication.current = bool(current);
     if (current) {
+#if !defined(GLYPH_PACKAGE_V1) || !GLYPH_PACKAGE_V1
         auto &prior_removed = save_phase.temporary.publication.operation;
         ::new (&prior_removed) Result(Remove(prior_compact_filename, Kind::Config));
         if (!prior_removed) { _mutation_fenced = prior_removed.outcome == Outcome::Uncertain; return false; }
+#endif
         auto &rotated = save_phase.temporary.publication.operation;
         ::new (&rotated) Result(Rename(config_filename, prior_compact_filename, Kind::Config));
         if (!rotated) { _mutation_fenced = rotated.outcome == Outcome::Uncertain; return false; }
@@ -378,6 +447,9 @@ __attribute__((noinline)) bool Persistence::PublishStagedConfig(Config &config) 
 }
 
 __attribute__((noinline)) bool Persistence::FinishSaveConfig(bool saved) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (!save_context.package) profile_store.EndOrdinaryConfigWrite();
+#endif
     std::memset(&save_phase,0,sizeof(save_phase));
     std::memset(&source_phase,0,sizeof(source_phase));
     return saved;
@@ -388,8 +460,15 @@ __attribute__((noinline)) void Persistence::InitializeSaveContext(Persistence *o
     std::memset(&save_phase,0,sizeof(save_phase));
     ::new (&save_phase.temporary.publication) SavePublicationState{};
 }
+__attribute__((noinline)) bool Persistence::InitializeOrdinarySaveContext(Persistence *owner, Config *config) {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (!profile_store.BeginOrdinaryConfigWrite(*config)) return false;
+#endif
+    InitializeSaveContext(owner, config);
+    return true;
+}
 bool Persistence::SaveConfig(Config &config) {
-    InitializeSaveContext(this,&config);
+    if (!InitializeOrdinarySaveContext(this,&config)) return false;
     return FinishSaveConfig(save_context.owner->PrepareSaveConfig(*save_context.config)&&
         save_context.owner->RemoveSaveTemporary()&&StageSaveConfig()&&
         save_context.owner->VerifyStagedConfig(*save_context.config)&&save_context.owner->RotateSavedConfig()&&
@@ -401,6 +480,11 @@ Persistence::SaveResult Persistence::ReconcileConfig(Config &authoritative) {
     // Reload the actually selected current/prior publication, never stale RAM.
     const auto loaded = LoadConfigDriver(authoritative);
     if (loaded != LoadResult::Loaded) return SaveResult::Uncertain;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // An observed predecessor cannot prove the outcome of current publication.
+    if (_config_selection != ConfigSelection::Current || PackageStorageFence::MutationFenced())
+        return SaveResult::Uncertain;
+#endif
     _mutation_fenced = false;
     return SaveResult::Saved;
 }
@@ -599,6 +683,7 @@ __attribute__((always_inline)) inline Persistence::LoadResult Persistence::ReadC
 }
 
 __attribute__((noinline)) Persistence::LoadResult Persistence::FinishLoadedConfig(Config &config) {
+#if !defined(GLYPH_PACKAGE_V1) || !GLYPH_PACKAGE_V1
     if (load_phase.source == CompactConfigRecovery::Source::PriorCompact) {
         auto restored = CheckedStorage::Rename(prior_compact_filename, config_filename, CheckedStorage::Kind::Config);
         if (!restored) {
@@ -606,12 +691,18 @@ __attribute__((noinline)) Persistence::LoadResult Persistence::FinishLoadedConfi
             return LoadResult::StorageFailure;
         }
     }
+#endif
+    // Package startup and recovery are observations. A prior is not current
+    // publication authority; classification must still refuse missing current.
+    _config_selection = load_phase.source == CompactConfigRecovery::Source::Current ? ConfigSelection::Current :
+        load_phase.source == CompactConfigRecovery::Source::PriorCompact ? ConfigSelection::Prior : ConfigSelection::Legacy;
     config = loaded_candidate;
     _config_generation = load_phase.crc;
     return LoadResult::Loaded;
 }
 __attribute__((always_inline)) inline Persistence::LoadResult Persistence::LoadConfigDriver(Config &config) {
     ::new (&source_phase.load) LoadPhaseState{};std::memset(&source_phase,0,sizeof(source_phase));LoadPhaseReset reset;
+    _config_selection = ConfigSelection::None;
     const auto prepared=ReadConfigCandidate();
     if(prepared!=LoadResult::Loaded)return prepared;
     return FinishLoadedConfig(config);
@@ -711,5 +802,354 @@ bool Persistence::CheckSavedConfig(CheckedStorageFile &config_file, LoadResult *
     }
     return crc.finalize() == header.config_crc;
 }
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+const char *Persistence::PackageFilename(PackageConfigFile file) {
+    switch (file) {
+        case PackageConfigFile::Current: return config_filename;
+        case PackageConfigFile::Prior: return prior_compact_filename;
+        case PackageConfigFile::Staged: return save_temporary_filename;
+        case PackageConfigFile::Legacy: return legacy_config_filename;
+        case PackageConfigFile::MigrationSource: return "/ultimate-migration.src";
+        case PackageConfigFile::MigrationTemporary: return "/ultimate-migration.tmp";
+    }
+    return nullptr;
+}
+
+// SHA compression/finalization scratch ends before the next filesystem read.
+static __attribute__((noinline)) void UpdatePackageHash(Sha256 &hash, const uint8_t *bytes, size_t count) {
+    hash.Update(bytes, count);
+}
+static __attribute__((noinline)) void FinalizePackageHash(Sha256 &hash, uint8_t out[32]) {
+    hash.Final(out);
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::ReadPackageFacts(
+    const char *path, size_t maximum, PackageConfigFacts &facts) {
+    facts = {};
+    SynchronousFileScope<false> scope(path);
+    auto &file = scope.File();
+    if (!file) return LoadResult::StorageFailure;
+    if (file.size() < config_offset || file.size() - config_offset > maximum) {
+        return file.close() ? LoadResult::Rejected : LoadResult::StorageFailure;
+    }
+    ConfigHeader header;
+    if (file.read(reinterpret_cast<uint8_t *>(&header), sizeof(header)) != static_cast<int>(sizeof(header)))
+        return LoadResult::StorageFailure;
+    if (header.config_size != file.size() - config_offset) {
+        return file.close() ? LoadResult::Rejected : LoadResult::StorageFailure;
+    }
+    Sha256 hash;
+    CRC32 crc;
+    uint8_t scratch[32];
+    size_t remaining = header.config_size;
+    while (remaining) {
+        const size_t count = remaining < sizeof(scratch) ? remaining : sizeof(scratch);
+        if (file.read(scratch, count) != static_cast<int>(count)) return LoadResult::StorageFailure;
+        UpdatePackageHash(hash, scratch, count); crc.update(scratch, count); remaining -= count;
+    }
+    if (file.position() != file.size() || !file.close()) return LoadResult::StorageFailure;
+    if (crc.finalize() != header.config_crc) return LoadResult::Rejected;
+    FinalizePackageHash(hash, facts.sha); facts.crc = header.config_crc; facts.bytes = header.config_size;
+    return LoadResult::Loaded;
+}
+
+__attribute__((noinline)) bool Persistence::ValidateObservedPackageConfig(const Config &config) const {
+    ConfigValidationError error;
+    // Current Config authority continues through the installed board validator.
+    // A retained precompact input is instead classified against the historical
+    // generic persistence contract; that contract deliberately excludes the
+    // later board/runtime RGB-adapter applicability rule.
+    if (package_observation.historical_retained) {
+        if (!validate_config_semantics(config,error)) return false;
+    } else if (!ValidateConfig(config,error)) return false;
+    // Historical retained-input recognition follows the generic source-proven
+    // persistence validator, not a board/runtime adapter target rule. In
+    // particular, BTN_UNSPECIFIED is a generated historical enum member; this
+    // observer never adopts the decoded historical Config as active runtime
+    // configuration.
+    return true;
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::PrepareObservedPackageConfig() {
+    auto &state = package_observation;
+    if (!IsAvailable() || !_validator) return LoadResult::StorageFailure;
+    const auto present = CheckedStorage::Stat(state.path, nullptr, CheckedStorage::Kind::Config);
+    if (present.outcome == CheckedStorage::Outcome::NotFound) return LoadResult::Absent;
+    if (!present) return LoadResult::StorageFailure;
+    if (state.maximum > 65536) return LoadResult::Rejected;
+    return ReadPackageFacts(state.path, state.maximum, *state.facts);
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::InitializeObservedPackageConfig() {
+    auto &file = SynchronousFileScope<false>::File();
+    auto &facts = *package_observation.facts;
+    if (!file) { facts = {}; return LoadResult::StorageFailure; }
+    const auto strict = ValidatePackageConfigWire(file, facts.bytes);
+    if (strict != config_wire::Result::Valid) {
+        const bool closed = file.close(); facts = {};
+        return !closed || strict == config_wire::Result::StorageFailure ? LoadResult::StorageFailure : LoadResult::Rejected;
+    }
+    if (!file.seek(config_offset)) { facts = {}; return LoadResult::StorageFailure; }
+    read_workspace.reader = {&file};
+    read_workspace.stream = {};
+    read_workspace.stream.callback = read_config_file;
+    read_workspace.stream.state = &read_workspace.reader;
+    read_workspace.stream.bytes_left = facts.bytes;
+    ultimate_native::RejectEmbedded(loaded_candidate);
+    return LoadResult::Loaded;
+}
+// Initialize only through the original generated descriptor. The frozen
+// schema has no required fields; callbacks retain nanopb's original default
+// policy, including the already-bound native-payload reject callback.
+__attribute__((noinline)) bool InitializeObservedMessage(ObservedMessageFrame &frame) {
+    if(frame.descriptor->required_field_count)return false;
+    auto empty=pb_istream_from_buffer(nullptr,0);
+    return pb_decode(&empty,frame.descriptor,frame.message);
+}
+__attribute__((noinline)) bool DecodeObservedField(size_t &depth) {
+    auto &frame=read_workspace.observed[depth];auto &stream=frame.stream;
+    auto &file=SynchronousFileScope<false>::File();
+    const size_t start=file.position(),remaining=stream.bytes_left;
+    pb_wire_type_t wire;uint32_t tag;bool eof;
+    if(!pb_decode_tag(&stream,&wire,&tag,&eof))return false;
+    pb_field_iter_t field;
+    if(!pb_field_iter_begin(&field,frame.descriptor,frame.message)||!pb_field_iter_find(&field,tag))return false;
+    if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER||PB_LTYPE(field.type)==PB_LTYPE_EXTENSION)return false;
+    if(PB_LTYPE_IS_SUBMSG(field.type)) {
+        // Unsupported descriptor representations cannot fall through to a
+        // recursive decode. The frozen schema uses STATIC SUBMESSAGE only.
+        if(PB_ATYPE(field.type)!=PB_ATYPE_STATIC||PB_LTYPE(field.type)!=PB_LTYPE_SUBMESSAGE||
+           wire!=PB_WT_STRING||depth+1>=sizeof(read_workspace.observed)/sizeof(*read_workspace.observed))return false;
+        void *destination=field.pField;
+        if(PB_HTYPE(field.type)==PB_HTYPE_REPEATED) {
+            if(!field.pSize)return false;
+            auto &count=*static_cast<pb_size_t*>(field.pSize);
+            if(count>=field.array_size)return false;
+            destination=static_cast<char*>(field.pField)+size_t(field.data_size)*count++;
+        } else if(PB_HTYPE(field.type)==PB_HTYPE_OPTIONAL) {
+            if(field.pSize)*static_cast<bool*>(field.pSize)=true;
+        } else return false;
+        auto &child=read_workspace.observed[depth+1];
+        child.descriptor=field.submsg_desc;child.message=destination;
+        if(!child.descriptor||!pb_make_string_substream(&stream,&child.stream)||!InitializeObservedMessage(child))return false;
+        ++depth;return true;
+    }
+    // Scalar, fixed bytes, callbacks and packed arrays retain the original
+    // descriptor decoder and its NOINIT accumulation/presence semantics. The
+    // exact one-field replay cannot enter a following submessage recursively.
+    if(!pb_skip_field(&stream,wire))return false;
+    const size_t after=stream.bytes_left;
+    if(!file.seek(start)){read_workspace.reader.io_failed=true;return false;}
+    stream.bytes_left=remaining-after;
+    if(!pb_decode_ex(&stream,frame.descriptor,frame.message,PB_DECODE_NOINIT)||stream.bytes_left)return false;
+    stream.bytes_left=after;return true;
+}
+__attribute__((noinline)) bool DecodeObservedConfigFields() {
+    ::new(static_cast<void*>(&read_workspace.observed))ObservedMessageFrame[4]{};
+    auto &root=read_workspace.observed[0];root={read_workspace.stream,Config_fields,&loaded_candidate};
+    size_t depth=0;
+    for(;;) {
+        auto &frame=read_workspace.observed[depth];
+        if(frame.stream.bytes_left){if(!DecodeObservedField(depth))return false;}
+        else if(depth){
+            if(!pb_close_string_substream(&read_workspace.observed[depth-1].stream,&frame.stream))return false;
+            frame={};--depth;
+        } else break;
+    }
+    read_workspace.stream=root.stream;
+    auto &file=SynchronousFileScope<false>::File();
+    return file.position()==file.size()&&!read_workspace.reader.io_failed;
+}
+namespace {
+__attribute__((noinline)) bool CompareObservedBytes(pb_ostream_t *out,const pb_byte_t *bytes,size_t count) {
+    auto &file=*static_cast<CheckedStorageFile*>(out->state);uint8_t actual[32];
+    while(count){const size_t chunk=count>sizeof(actual)?sizeof(actual):count;
+        if(file.read(actual,chunk)!=static_cast<int>(chunk)){read_workspace.reader.io_failed=true;return false;}
+        if(std::memcmp(actual,bytes,chunk))return false;
+        bytes+=chunk;count-=chunk;
+    }
+    return true;
+}
+void NextObservedEncodingField(ObservedEncodingFrame &frame) {
+    frame.child_index=0;frame.have_field=pb_field_iter_next(&frame.field);
+}
+__attribute__((noinline)) bool EncodeObservedField(pb_ostream_t &out,size_t &depth) {
+    auto &frame=read_workspace.encoding[depth];auto &field=frame.field;
+    if(package_observation.historical_retained && depth==0 && field.tag>201){
+        NextObservedEncodingField(frame);return true;
+    }
+    if(PB_HTYPE(field.type)==PB_HTYPE_ONEOF||PB_ATYPE(field.type)==PB_ATYPE_POINTER||PB_LTYPE(field.type)==PB_LTYPE_EXTENSION)return false;
+    if(PB_LTYPE_IS_SUBMSG(field.type)) {
+        if(PB_ATYPE(field.type)!=PB_ATYPE_STATIC||PB_LTYPE(field.type)!=PB_LTYPE_SUBMESSAGE||
+           !field.submsg_desc)return false;
+        const void *message=field.pField;
+        if(PB_HTYPE(field.type)==PB_HTYPE_REPEATED){
+            if(!field.pSize)return false;
+            const size_t count=*static_cast<const pb_size_t*>(field.pSize);
+            if(count>field.array_size)return false;
+            if(frame.child_index==count){NextObservedEncodingField(frame);return true;}
+            message=static_cast<const char*>(field.pField)+size_t(field.data_size)*frame.child_index++;
+        }else if(PB_HTYPE(field.type)==PB_HTYPE_OPTIONAL){
+            // Every optional submessage in the frozen schema has a has flag.
+            if(!field.pSize)return false;
+            if(frame.child_index||!*static_cast<const bool*>(field.pSize)){NextObservedEncodingField(frame);return true;}
+            frame.child_index=1;
+        }else return false;
+        if(depth+1>=sizeof(read_workspace.encoding)/sizeof(*read_workspace.encoding))return false;
+        size_t bytes=0;
+        // Sizing uses the original child descriptor after native callbacks have
+        // been cleared. secondary_backends remains null from generated defaults
+        // and strict callback-wire rejection; all sizing callbacks are null.
+        if(!pb_get_encoded_size(&bytes,field.submsg_desc,message)||
+           !pb_encode_tag(&out,PB_WT_STRING,field.tag)||!pb_encode_varint(&out,bytes))return false;
+        auto &child=read_workspace.encoding[depth+1];child={};
+        child.have_field=pb_field_iter_begin_const(&child.field,field.submsg_desc,message);
+        ++depth;return true;
+    }
+    // This exact original field-info record retains type, width, offsets,
+    // count/presence and packed/default/callback behavior. Its descriptor view
+    // contains no message field, so encoding cannot recurse over filesystem I/O.
+    const pb_msgdesc_t one{field.descriptor->field_info+field.field_info_index,nullptr,
+        field.descriptor->default_value,field.descriptor->field_callback,1,0,field.tag};
+    if(!pb_encode(&out,&one,field.message))return false;
+    NextObservedEncodingField(frame);return true;
+}
+__attribute__((noinline)) bool CompareObservedConfigBytes(CheckedStorageFile &file,const Config &config,size_t bytes) {
+    if(!file.seek(Persistence::config_offset))return false;
+    // Decode streams are dead before this mutually exclusive phase begins.
+    ::new(static_cast<void*>(&read_workspace.encoding))ObservedEncodingFrame[4]{};
+    auto &root=read_workspace.encoding[0];root.have_field=pb_field_iter_begin_const(&root.field,Config_fields,&config);
+    pb_ostream_t out{};out.callback=CompareObservedBytes;out.state=&file;out.max_size=bytes;
+    size_t depth=0;
+    for(;;){auto &frame=read_workspace.encoding[depth];
+        if(frame.have_field){if(!EncodeObservedField(out,depth))return false;}
+        else if(depth){frame={};--depth;}else break;
+    }
+    return out.bytes_written==bytes;
+}
+}
+__attribute__((noinline)) void Persistence::DecodeObservedPackageConfig() {
+    package_observation.decoded = DecodeObservedConfigFields();
+    ultimate_native::ClearEmbeddedCallbacks(loaded_candidate);
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::FinishObservedPackageConfig() {
+    auto &file = SynchronousFileScope<false>::File();
+    auto &state = package_observation;
+    auto &facts = *state.facts;
+    const bool canonical = state.decoded && compare_config_bytes(file, loaded_candidate, facts.bytes);
+    const bool io_failed=read_workspace.reader.io_failed||file.failed();
+    const bool closed = file.close();
+    if (io_failed||!closed) { facts = {}; return LoadResult::StorageFailure; }
+    if (!canonical) { facts = {}; return LoadResult::Rejected; }
+    *state.source_valid = ValidateObservedPackageConfig(loaded_candidate);
+    // Historical grammar forbids all new nested fields. They therefore remain
+    // generated zero defaults: nested sizing/encoding is exactly the old writer
+    // (new nested fields are omitted scalars or cleared null callbacks). Only
+    // top-level fixed-length byte fields205/209 needed explicit exclusion above.
+    if (!state.historical_retained) *state.into = loaded_candidate;
+    return LoadResult::Loaded;
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::ObservePackageConfig(
+    PackageConfigFile selection, Config &into, PackageConfigFacts &facts, bool &source_valid,size_t maximum) {
+    facts = {}; source_valid = false;
+    if (package_observation.live||package_save.persistence) return LoadResult::StorageFailure;
+    PackageObservationReset observation_reset;
+    if (!maximum) maximum = selection == PackageConfigFile::Current || selection == PackageConfigFile::Staged ? 8191 : 65536;
+    package_observation = {&into, &facts, &source_valid, PackageFilename(selection), maximum, false, true};
+    return RunObservedPackageConfig();
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::ObserveHistoricalRetainedConfig(
+    PackageConfigFacts &facts, bool &source_valid) {
+    facts = {}; source_valid = false;
+    if (package_observation.live||package_save.persistence) return LoadResult::StorageFailure;
+    PackageObservationReset observation_reset;
+    package_observation = {nullptr, &facts, &source_valid, legacy_config_filename, 65536, false, true, true};
+    return RunObservedPackageConfig();
+}
+__attribute__((noinline)) Persistence::LoadResult Persistence::RunObservedPackageConfig() {
+    const auto prepared = PrepareObservedPackageConfig();
+    if (prepared != LoadResult::Loaded) return prepared;
+    ResetReadWorkspace(); ReadWorkspaceReset reset;
+    loaded_candidate = Config_init_default;
+    SynchronousFileScope<false> scope(package_observation.path);
+    const auto initialized = InitializeObservedPackageConfig();
+    if (initialized != LoadResult::Loaded) return initialized;
+    DecodeObservedPackageConfig();
+    return FinishObservedPackageConfig();
+}
+
+__attribute__((noinline)) bool Persistence::MatchPackageConfig(
+    const char *path, const PackageConfigFacts &expected) {
+    PackageConfigFacts actual;
+    return ReadPackageFacts(path, 8191, actual) == LoadResult::Loaded && actual.bytes == expected.bytes &&
+           actual.crc == expected.crc && !std::memcmp(actual.sha, expected.sha, 32);
+}
+
+__attribute__((noinline)) bool Persistence::RotatePackagePrior() {
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Rename(config_filename,prior_compact_filename,CheckedStorage::Kind::Config));
+    return bool(operation);
+}
+__attribute__((noinline)) bool Persistence::VerifyPackagePrior() {
+    if(!package_save.persistence->MatchPackageConfig(prior_compact_filename,*package_save.baseline))return false;
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Stat(config_filename,nullptr,CheckedStorage::Kind::Config));
+    return operation.outcome==CheckedStorage::Outcome::NotFound;
+}
+__attribute__((noinline)) bool Persistence::RotatePackageFinal() {
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Rename(save_temporary_filename,config_filename,CheckedStorage::Kind::Config));
+    return bool(operation);
+}
+__attribute__((noinline)) bool Persistence::PublishPackageStaged() {
+    // Same-mount replacement; no delete, rollback, continuation or cleanup.
+    return RotatePackagePrior()&&VerifyPackagePrior()&&RotatePackageFinal();
+}
+
+__attribute__((noinline)) bool Persistence::PreparePackageConfig(
+    Config &config,const PackageConfigFacts &baseline,const PackageConfigFacts &expected,
+    const void *package_owner,uint64_t token) {
+    if(package_save.persistence||package_observation.live||!IsAvailable()||_mutation_fenced||PackageStorageFence::MutationFenced()||
+       !PackageStorageFence::IsPackageWriter(package_owner,token))return false;
+    package_save={this,&baseline,&expected,package_owner,token};
+    InitializeSaveContext(this,&config);save_context.package=true;
+    return true;
+}
+__attribute__((noinline)) bool Persistence::PreparePackageSave() {
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Stat(save_temporary_filename,nullptr,CheckedStorage::Kind::Config));
+    return operation.outcome==CheckedStorage::Outcome::NotFound&&
+        package_save.persistence->MatchPackageConfig(config_filename,*package_save.baseline)&&
+        package_save.persistence->PrepareSaveConfig(*save_context.config)&&
+        save_phase.encoded_size==package_save.expected->bytes&&package_save.expected->bytes&&package_save.expected->bytes<=8191;
+}
+__attribute__((noinline)) bool Persistence::VerifyPackageSave() {
+    return save_phase.header.config_crc==package_save.expected->crc&&
+        package_save.persistence->VerifyStagedConfig(*save_context.config)&&
+        package_save.persistence->MatchPackageConfig(save_temporary_filename,*package_save.expected);
+}
+__attribute__((noinline)) bool Persistence::VerifyPackageBaseline() {
+    return package_save.persistence->MatchPackageConfig(config_filename,*package_save.baseline);
+}
+__attribute__((noinline)) bool Persistence::VerifyPackagePublished() {
+    if(!package_save.persistence->MatchPackageConfig(config_filename,*package_save.expected))return false;
+    auto &operation=save_phase.temporary.publication.operation;
+    ::new (&operation) CheckedStorage::Result(CheckedStorage::Stat(save_temporary_filename,nullptr,CheckedStorage::Kind::Config));
+    return operation.outcome==CheckedStorage::Outcome::NotFound&&
+        PackageStorageFence::IsPackageWriter(package_save.owner,package_save.token);
+}
+__attribute__((noinline)) Persistence::SaveResult Persistence::FinishPackageSave(bool saved) {
+    if(saved)package_save.persistence->_config_generation=package_save.expected->crc;
+    else {package_save.persistence->_mutation_fenced=true;PackageStorageFence::Fence();}
+    FinishSaveConfig(saved);package_save={};
+    return saved?SaveResult::Saved:SaveResult::Uncertain;
+}
+__attribute__((noinline)) Persistence::SaveResult Persistence::PublishPreparedPackageConfig() {
+    if(package_save.persistence!=this)return SaveResult::Uncertain;
+    return FinishPackageSave(PreparePackageSave()&&StageSaveConfig()&&VerifyPackageSave()&&
+        VerifyPackageBaseline()&&PublishPackageStaged()&&VerifyPackagePublished());
+}
+
+Config &Persistence::PackageConfigScratch() { return loaded_candidate; }
+
+#endif
 
 Persistence persistence;

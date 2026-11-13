@@ -1,0 +1,30 @@
+{
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v2",
+  "status": "READY_FOR_FRESH_OWNER_APPROVAL_UNEXECUTED",
+  "owner_approval": null,
+  "packet_sha256": "42a9cff1101953cf739cde28f6c8160426f7cebb69476aa2008294ee1daf0348",
+  "preparation_manifest_sha256": "ca1f8d60a783d2ed4299643e22763ae5715c7515d380f4335365297b73030ebb",
+  "executor_sha256": "7dd1b996f370f2faaf710f5b51e6bc868d9504a028c3af6d9f5dcff6e0c910b3",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "uf2_sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+  "uf2_bytes": 1296896,
+  "limits": {
+    "configurator_sessions": 2,
+    "xinput_identity_sessions": 2,
+    "controller_exchanges": 70,
+    "manual_candidate_installs": 1,
+    "manual_bootloader_entries": 1,
+    "CREATE": 0,
+    "QUERY_PACKAGE": 0,
+    "protocol2_STATUS": 0,
+    "profile_mutations": 0,
+    "reference_rewrites": 0,
+    "managed_selection_or_activation": 0,
+    "automatic_retries_or_reconnects": 0,
+    "automatic_rollback_or_recovery": 0,
+    "saved_default_or_backend_changes": 0
+  },
+  "v1_terminal_result_unchanged": "75f83c4c11929b4b839b3a369c1cb7a40f0f1fa9",
+  "new_device_access": false,
+  "firmware_rebuilds": 0
+}

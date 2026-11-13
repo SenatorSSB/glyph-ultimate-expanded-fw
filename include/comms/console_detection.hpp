@@ -7,4 +7,6 @@
 
 CommunicationBackendId detect_console(const Pinout &pinout);
 
+CommunicationBackendId detect_console_at_boot(const Pinout &pinout);
+
 #endif

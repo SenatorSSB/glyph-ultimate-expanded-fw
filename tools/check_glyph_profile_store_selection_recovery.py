@@ -100,7 +100,9 @@ def main() -> int:
                 anchor = 'if (load_result != Persistence::LoadResult::Loaded) {\n        enter_recovery_configurator();'
                 assert anchor in boot
                 boot = boot.replace(anchor, 'if (load_result != Persistence::LoadResult::Loaded) {\n        refuse_boot(BootOutcome::StorageFailure, display_ready);',1)
-            (directory/'extracted_setup.inc').write_text(rec+'\n'+phases+'\n'+boot+'\n'+loop+'\n')
+            ownership = (ROOT/'include/core/PackageOwnership.hpp').read_text()
+            supported = function_body(ownership, 'SupportedLayout', 'inline bool')
+            (directory/'extracted_setup.inc').write_text('namespace package_ownership {\n'+supported+'\n}\n'+rec+'\n'+phases+'\n'+boot+'\n'+loop+'\n')
             exe = directory/'routes'
             run(['c++','-std=c++17','-fshort-enums','-Wall','-Wextra','-Werror',
                  '-Wno-missing-field-initializers','-fsanitize=address,undefined','-fno-omit-frame-pointer',

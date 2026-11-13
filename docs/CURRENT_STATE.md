@@ -1,5 +1,20 @@
 # Glyph Current State
 
+## Package-aware display and plate direction — 2026-11-12
+
+The owner-authorized display repair targets package-aware candidate c439b7c6,
+not canonical integration. Dashboard and Input Viewer must name the executing
+logical profile with execution proof; dashboard retains its row's plate.
+Every newly created complete Glyph package carries its selected plate. Future
+Builder local/portable persistence, preview, installation and exact readback must
+preserve it; neutral Profile JSON is unchanged. Ordinary managed selection stays
+protected. See [owner direction](agent_framework/USER_DIRECTION.md#package-aware-active-profile-display-repair--2026-11-12)
+and [candidate preparation](runtime_config/package_active_profile_display/README.md).
+No display-build hardware acceptance, source integration or source-authority repin is claimed.
+Parent c439 has bounded canonical CREATE/readback/preservation PASS; see the
+[candidate scope correction](runtime_config/package_active_profile_display/README.md#parent-acceptance-scope-correction--2026-11-13).
+
+
 ## Current full-package product priority — 2026-11-05
 
 The owner adopts one logical installed Glyph user profile = one dedicated

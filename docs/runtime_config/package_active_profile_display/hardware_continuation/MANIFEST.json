@@ -1,0 +1,16 @@
+{
+  "continuation_id": "GLYPH-DISPLAY-9E69188D-CONT-v1",
+  "files": {
+    "INHERITED.json": "e46450c8709d31467daff2e448ebf1146f8ca1eafd9b4ebad2fbba1b861ab44e",
+    "OWNER_DIRECTION.md": "4a1485bd595d21ad43665c424c7d588bfdc90e4d70cf8891976b38be9ec65fa2",
+    "README.md": "d0285bb075267e1b1e2112cec2216c0b760c68883fd21d9aa49f009a9469fe1f",
+    "TEST_RESULTS.json": "2cfa43ac6ff7b95dff05646b1127a1e743e6fa89cd2138f766187aded8a895b0",
+    "executor.py": "05f1eb49649cfb75f8edfee10dfd620fcc5d9c2fb17e60a7a815496271d45d06",
+    "offline-tests.log.gz": "c4a0f960f07b5c8a9931fe37a6fcbad394a74419bf47462fd9262cf4971a88a7",
+    "test_executor.py": "87dd4f602fbcfb0d5bbd5053193521a0d94b6b3a4306f8d58d822162702bea88"
+  },
+  "sealed_v2_packet_sha256": "42a9cff1101953cf739cde28f6c8160426f7cebb69476aa2008294ee1daf0348",
+  "sealed_v2_preparation_sha256": "ca1f8d60a783d2ed4299643e22763ae5715c7515d380f4335365297b73030ebb",
+  "new_exchanges_maximum": 36,
+  "new_installations": 0
+}

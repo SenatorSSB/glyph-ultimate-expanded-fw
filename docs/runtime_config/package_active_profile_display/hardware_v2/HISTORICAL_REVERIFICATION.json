@@ -1,0 +1,17 @@
+{
+  "result": "PASS_OFFLINE_REVERIFICATION",
+  "historical_READ_JSON_sha256": "fe9a1ad57ace2482e13267566d360be150b72e744f5138c1dad07d38fe3f07db",
+  "historical_LIST_JSON_sha256": "8aedfcab41dc09f41e5b719210e3d8603d5d1c934c003ba7db189449d52ada76",
+  "pinned_schema_sha256": "1b781f97e8a93c8840d26698e8c802b366feb812afb7ad45f06c5d3d9ad5ee33",
+  "historical_directory_payload_version": 1,
+  "historical_READ_schema": 3,
+  "revision": 1,
+  "historical_serialization": "Reconstructed deterministically from decoded historical JSON; NOT original raw historical wire capture",
+  "reconstructed_historical_wrapper_bytes": 3047,
+  "reconstructed_historical_wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+  "current_raw_decoded_response_sha256": "9e80e536c52451131b8defef7cf2990c5f5d76bc7a180b6e32be62daad9077db",
+  "current_raw_wrapper_sha256": "b8583459651f42bfbb108e4558627ce0a192be89bae229cbb5a74fb0e7dcd8d4",
+  "byte_equal": true,
+  "hardware_access": false,
+  "cause_of_old_metadata_discrepancy": "UNRESOLVED_NOT_REQUIRED_FOR_BOUNDED_HOST_FIX"
+}

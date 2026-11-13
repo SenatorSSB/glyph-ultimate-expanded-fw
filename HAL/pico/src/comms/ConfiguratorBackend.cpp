@@ -21,6 +21,10 @@
 #include "core/InputSource.hpp"
 #include "core/Persistence.hpp"
 #include "core/ProfileStore.hpp"
+#include "core/PackageOwnership.hpp"
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+#include "core/PackageRequestWire.hpp"
+#endif
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/ProfileStoreRequestIdentity.hpp"
 #include "core/ResourceDiagnostics.hpp"
@@ -491,8 +495,28 @@ static __attribute__((noinline)) void CaptureStoreCapacity(ProfileStore::Capacit
 }
 namespace {
 constexpr size_t kFrameLimit = 8192;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+union RequestOwner {
+    ProfileStoreRequest legacy;
+    glyph_package::EnvelopePhase package;
+};
+union ResponseOwner {
+    ProfileStoreResponse legacy;
+    PackageResponse package;
+};
+static_assert(sizeof(RequestOwner) == sizeof(ProfileStoreRequest), "request owner grew");
+static_assert(sizeof(ResponseOwner) == sizeof(ProfileStoreResponse), "response owner grew");
+#if defined(__arm__) || defined(__thumb__)
+static_assert(sizeof(RequestOwner) == 2312 && sizeof(ResponseOwner) == 3032,
+              "package owner target layout drift");
+#endif
+static RequestOwner request_owner = {ProfileStoreRequest_init_default};
+static ResponseOwner response_owner = {ProfileStoreResponse_init_default};
+static size_t package_received_bytes;
+#else
 static ProfileStoreRequest request;
 static ProfileStoreResponse response;
+#endif
 static uint8_t frame[kFrameLimit];
 static ultimate_native::PayloadLease incoming_native;
 static bool profile_received;
@@ -510,12 +534,30 @@ static __attribute__((noinline)) bool InvalidProfileTicket(const ProfileStoreReq
     return request.fault_kind||request.fault_operation||request.fault_phase||request.fault_result||request.fault_path_class||request.fault_skip||request.fault_clear||request.fault_ticket||request.liveness_trace;
 #endif
 }
+static __attribute__((noinline)) void ReleaseIncomingProfile() {
+    incoming_native.Release();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    request_owner.legacy.profile.native_payload = {};
+#endif
+}
 __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileStore() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+#endif
     dispatch_loaded=Persistence::LoadResult::Absent;
     incoming_native.Release();
-    struct IncomingScope { ~IncomingScope() { incoming_native.Release(); } } incoming_scope;
+    struct IncomingScope {
+        ~IncomingScope() { ReleaseIncomingProfile(); }
+    } incoming_scope;
     profile_received = false;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    package_received_bytes = 0;
+#endif
     const bool received = ReceiveProfileStore();
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    // The receive/decode frame must end before any package writer begins.
+    if (package_received_bytes) return HandlePackageRequest(package_received_bytes);
+#endif
     if (!profile_received) return received;
     {
         struct DispatchReset {
@@ -542,6 +584,9 @@ __attribute__((always_inline)) inline bool ConfiguratorBackend::HandleProfileSto
     return RespondProfileStore();
 }
 __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+#endif
     const size_t length = ReadPacket(frame, sizeof(frame));
     if (_packet_timed_out) {
 #if GLYPH_STRICT_HARDENING_CANDIDATE
@@ -565,6 +610,16 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
 #endif
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Profile store frame too large", 29);
     }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    const auto route = glyph_package::RouteProtocol(frame, length);
+    if (route == glyph_package::ProtocolRoute::Malformed) return false;
+    if (route == glyph_package::ProtocolRoute::Package) {
+        // Leave the receive frame before entering publication. No legacy
+        // reconciliation/admission/Config I/O runs for this request.
+        package_received_bytes = length;
+        return true;
+    }
+#endif
     request = ProfileStoreRequest_init_default;
     if (!ultimate_native::PrepareRequest(frame, length, request, incoming_native))
         return WriteProfilePacket(CMD_ERROR, (const uint8_t *)"Invalid profile store request", 29);
@@ -601,7 +656,93 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReceiveProfileStore() {
     profile_received = true;
     return true;
 }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+// No independent owner bytes: package phases borrow the existing request and
+// response unions. The storage driver owns its separate initializer/body union.
+namespace {
+struct PackageOwnerScope {
+    bool request_live = true;
+    PackageOwnerScope() = default;
+    void ReleaseRequest() {
+        if (!request_live) return;
+        request_owner.package.Release();
+        request_owner.package.~EnvelopePhase();
+        ::new (&request_owner.legacy) ProfileStoreRequest{};
+        request_live = false;
+    }
+    ~PackageOwnerScope() {
+        ReleaseRequest();
+        ::new (&response_owner.legacy) ProfileStoreResponse{};
+    }
+};
+}
+enum class PackageDecode { Drop, Invalid, Valid };
+static __attribute__((noinline)) PackageDecode DecodePackageFrame(size_t length) {
+    request_owner.legacy.profile.native_payload = {};
+    ::new (&request_owner.package) glyph_package::EnvelopePhase{};
+    ::new (&response_owner.package) PackageResponse{};
+    if(glyph_package::DecodeCanonicalRequest(frame, length, request_owner.package))return PackageDecode::Valid;
+    return glyph_package::TrustedOuterHeader(frame,length,request_owner.package)?PackageDecode::Invalid:PackageDecode::Drop;
+}
+__attribute__((noinline)) bool ConfiguratorBackend::HandlePackageRequest(size_t length) {
+    PackageOwnerScope owners;
+    auto &phase = request_owner.package;
+    auto &package_response = response_owner.package;
+    // Invalid/untrusted outer bytes are dropped. Never fall back to the legacy
+    // parser after any protocol3 field was found by the bounded routing probe.
+    const auto decoded=DecodePackageFrame(length);
+    if(decoded==PackageDecode::Drop)return false;
+    if(decoded==PackageDecode::Invalid) {
+        // A trustworthy correlation header permits only a read-only storage
+        // observation and a receipt-free INVALID refusal.
+        phase.request.operation=PackageOperation_PACKAGE_STATUS;
+        if(!profile_store.DispatchPackage(phase,package_response))return false;
+        package_response.status=PROFILE_STORE_INVALID;
+        owners.ReleaseRequest();
+        return RespondPackage();
+    }
+    if (!profile_store.DispatchPackage(phase, package_response)) return false;
+    if (package_response.protocol_version != 3 ||
+        package_response.request_token != phase.request.request_token) return false;
+    if (phase.request.operation == PackageOperation_CREATE_PACKAGE &&
+        package_response.status == PROFILE_STORE_OK &&
+        package_response.logical == PackageLogicalDisposition_COMMITTED &&
+        !package_response.write_fenced && !RefreshPackageConfig()) return false;
+    // DispatchPackage has ended every body/native callback lifetime. End the
+    // envelope lifetime before response encoding overwrites immutable RX bytes.
+    owners.ReleaseRequest();
+    return RespondPackage();
+}
+// A successful CREATE refreshes the saved Config snapshot without selecting a
+// mode, reloading the active program or changing any backend/default destination.
+// The read/hash workspace ends before response encoding and never spans a writer.
+__attribute__((noinline)) bool ConfiguratorBackend::RefreshPackageConfig() {
+    const auto &observed = response_owner.package;
+    Persistence::PackageConfigFacts facts;
+    bool valid = false;
+    auto &candidate = ConfigWriteCandidate();
+    if (!observed.has_config_sha ||
+        persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current, candidate, facts, valid) != Persistence::LoadResult::Loaded ||
+        !valid || facts.crc != observed.config_generation ||
+        std::memcmp(facts.sha, observed.config_sha, sizeof(facts.sha))) return false;
+    _config = candidate;
+    return true;
+}
+// Encoding scratch is not retained through any persistent writer call.
+__attribute__((noinline)) bool ConfiguratorBackend::RespondPackage() {
+    auto &package_response = response_owner.package;
+    constexpr size_t kPackageResponseLimit = 228;
+    static_assert(kPackageResponseLimit + 1 + 2 == 231,
+                  "raw command229 (<254) plus COBS code/delimiter2");
+    auto output = pb_ostream_from_buffer(frame, kPackageResponseLimit);
+    if (!pb_encode(&output, PackageResponse_fields, &package_response)) return false;
+    return WriteProfilePacket(CMD_PROFILE_STORE, frame, output.bytes_written);
+}
+#endif
 __attribute__((noinline)) void ConfiguratorBackend::LookupStoreMutation() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+#endif
     const bool query=request.operation==PROFILE_STORE_QUERY_TRANSACTION;
     // Both receipt domains share tokens. Look them up BEFORE checking any
     // stale expectations: exact completed requests replay their result.
@@ -609,6 +750,10 @@ __attribute__((noinline)) void ConfiguratorBackend::LookupStoreMutation() {
                    : profile_store.QueryTransaction(identity);
 }
 __attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
     const bool query = request.operation == PROFILE_STORE_QUERY_TRANSACTION;
     Config &candidate = ConfigWriteCandidate();
     const auto loaded=dispatch_loaded;
@@ -617,6 +762,9 @@ __attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
         candidate.profile_reference_token : profile_store.LastTransactionToken();
     response.transaction_token_high_water = high_water;
     if (loaded == Persistence::LoadResult::Loaded &&
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        persistence.SelectedConfig() == Persistence::ConfigSelection::Current &&
+#endif
         candidate.profile_reference_token == request.request_token) {
         if (!query && std::memcmp(candidate.profile_reference_digest, identity.digest, 32) != 0)
             result.status = ProfileStore::Status::Conflict;
@@ -642,7 +790,7 @@ __attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
         result.status = ProfileStore::Status::ReadOnlyRecovery;
     } else if (loaded != Persistence::LoadResult::Loaded) {
         result.status = ProfileStore::Status::IoFailure;
-    } else if (candidate.ultimate_profile_root_format != 2) {
+    } else if (!package_ownership::SupportedLayout(candidate)) {
         result.status = ProfileStore::Status::ReadOnlyRecovery;
     } else if (request.request_token <= high_water) {
         result.status = ProfileStore::Status::Conflict;
@@ -657,12 +805,19 @@ __attribute__((noinline)) unsigned ConfiguratorBackend::PrepareStoreMutation() {
     return 0;
 }
 __attribute__((noinline)) void ConfiguratorBackend::PerformCheckedReference() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
     Config &candidate = ConfigWriteCandidate();
     if (!profile_store.IsReady()) result.status = ProfileStore::Status::IoFailure;
     else if (request.expected_config_generation != persistence.ConfigGeneration(candidate) ||
              candidate.ultimate_profile_store_format != ProfileStore::kCompactConfigFormat ||
              candidate.ultimate_profile_store_incarnation != profile_store.Incarnation() ||
              request.mode_config_index >= candidate.game_mode_configs_count)
+        result.status = ProfileStore::Status::Conflict;
+    else if (package_ownership::Managed(candidate.game_mode_configs[request.mode_config_index]) ||
+             package_ownership::ManagedId(profile_store, request.profile_id))
         result.status = ProfileStore::Status::Conflict;
     else if (candidate.game_mode_configs[request.mode_config_index].mode_id != MODE_ULTIMATE)
         result.status = ProfileStore::Status::Invalid;
@@ -699,6 +854,10 @@ __attribute__((noinline)) void ConfiguratorBackend::PerformCheckedReference() {
     }
 }
 __attribute__((noinline)) bool ConfiguratorBackend::ReadStoreProfile() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
 #if GLYPH_STRICT_HARDENING_CANDIDATE
     struct TraceContext { ConfiguratorBackend *backend; const ProfileStoreRequest *request; } context{this, &request};
     ProfileStoreReadTrace::Scope trace(kStrictHardeningCandidate && request.liveness_trace
@@ -715,6 +874,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReadStoreProfile() {
     return true;
 }
 __attribute__((noinline)) bool ConfiguratorBackend::PrepareProfileDispatch() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
     response = ProfileStoreResponse_init_default;
     response.protocol_version = request.protocol_version;
     response.mutation_protocol_version = 2;
@@ -733,6 +896,9 @@ __attribute__((noinline)) bool ConfiguratorBackend::PrepareProfileDispatch() {
     return true;
 }
 __attribute__((noinline)) bool ConfiguratorBackend::ReconcileProfileDispatch() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+#endif
     const bool mutation=request.operation>=PROFILE_STORE_CREATE&&request.operation<=PROFILE_STORE_SET_MODE_REFERENCE;
     const bool query=request.operation==PROFILE_STORE_QUERY_TRANSACTION;
     const bool ticket_invalid=InvalidProfileTicket(request);
@@ -745,17 +911,50 @@ __attribute__((noinline)) bool ConfiguratorBackend::ReconcileProfileDispatch() {
     return false;
 }
 __attribute__((noinline)) bool ConfiguratorBackend::CompleteStatusDispatch() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
         if (_recovery_storage_available && !_recovery_config_invalid) {
             Config &durable = ConfigWriteCandidate();
             if (dispatch_loaded == Persistence::LoadResult::Loaded) {
                 if (durable.profile_reference_token > response.transaction_token_high_water)
                     response.transaction_token_high_water = durable.profile_reference_token;
-                if (durable.ultimate_profile_root_format != 2) {
+                if (!package_ownership::SupportedLayout(durable)) {
                     response.mutation_feasible = false;
                     response.recovery_flags |= 1u << 20;
                 }
             }
         }
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        // STATUS health requires the fresh selected current Config read to
+        // complete. Cached startup health cannot hide a checked read failure.
+        if(_recovery_storage_available && !_recovery_config_invalid &&
+           dispatch_loaded!=Persistence::LoadResult::Loaded) {
+            response.status=PROFILE_STORE_IO_FAILURE;
+            response.mutation_feasible=false;
+            if(response.diagnostic[0])strlcat(response.diagnostic,"; config.read_failed",sizeof(response.diagnostic));
+            else strlcpy(response.diagnostic,"config.read_failed",sizeof(response.diagnostic));
+        } else if(response.status==PROFILE_STORE_OK &&
+                  persistence.SelectedConfig()!=Persistence::ConfigSelection::Current) {
+            response.status=PROFILE_STORE_IO_FAILURE;
+            response.mutation_feasible=false;
+            strlcpy(response.diagnostic,"config.not_current",sizeof(response.diagnostic));
+        }
+        // Independent observations only; these bits grant no storage authority.
+        if(persistence.IsConfigMutationFenced()) response.recovery_flags |= 1u << 21;
+        if(PackageStorageFence::MutationFenced()) response.recovery_flags |= 1u << 22;
+        if(!PackageStorageFence::Available()) response.recovery_flags |= 1u << 23;
+        if(PackageStorageFence::StickyFenced()) response.recovery_flags |= 1u << 27;
+        const auto classified=PackageStorageFence::ObservedClassification();
+        if(classified==PackageStorageFence::Classification::Unclassified) response.recovery_flags |= 1u << 28;
+        if(classified==PackageStorageFence::Classification::Unsupported) response.recovery_flags |= 1u << 29;
+        if(classified==PackageStorageFence::Classification::Unresolved) response.recovery_flags |= 1u << 30;
+        const auto selected=persistence.SelectedConfig();
+        if(response.status!=PROFILE_STORE_OK && selected==Persistence::ConfigSelection::Current) response.recovery_flags |= 1u << 24;
+        if(response.status!=PROFILE_STORE_OK && selected==Persistence::ConfigSelection::Prior) response.recovery_flags |= 1u << 25;
+        if(response.status!=PROFILE_STORE_OK && selected==Persistence::ConfigSelection::Legacy) response.recovery_flags |= 1u << 26;
+#endif
         if (!TraceProfileStage(request, 6)) return false; // Config complete; before diagnostics
 #if GLYPH_STRICT_HARDENING_CANDIDATE
         const auto resources = ReadResourceDiagnostics();
@@ -772,6 +971,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::CompleteStatusDispatch() {
     return true;
 }
 __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
     const bool pulse=request.operation==PROFILE_STORE_LIVENESS;
     const bool mutation=request.operation>=PROFILE_STORE_CREATE&&request.operation<=PROFILE_STORE_SET_MODE_REFERENCE;
     const bool query=request.operation==PROFILE_STORE_QUERY_TRANSACTION;
@@ -810,7 +1013,16 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
             !profile_store.IsTransactionUncertain() ? PROFILE_STORE_OK : PROFILE_STORE_IO_FAILURE;
         if (!_recovery_storage_available) strlcpy(response.diagnostic, "filesystem.unavailable", sizeof(response.diagnostic));
         else if (_recovery_config_invalid) strlcpy(response.diagnostic, "config.invalid", sizeof(response.diagnostic));
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+        else if (_reference_unknown) strlcpy(response.diagnostic, "config.reference_unknown", sizeof(response.diagnostic));
+        else if (persistence.IsConfigMutationFenced()) strlcpy(response.diagnostic, "config.local_fence", sizeof(response.diagnostic));
+        else if (PackageStorageFence::MutationFenced()) {
+            strlcpy(response.diagnostic, "package: ", sizeof(response.diagnostic));
+            strlcat(response.diagnostic, profile_store.FenceDiagnostic(), sizeof(response.diagnostic));
+        }
+#else
         else if (persistence.IsMutationFenced() || _reference_unknown) strlcpy(response.diagnostic, "config.commit_unknown", sizeof(response.diagnostic));
+#endif
         else if (profile_store.IsTransactionUncertain()) strlcpy(response.diagnostic, "directory.commit_unknown", sizeof(response.diagnostic));
         else if (profile_store.MigrationPending()) strlcpy(response.diagnostic, "migration.fenced", sizeof(response.diagnostic));
         else if (profile_store.IsReadOnlyRecovery()) strlcpy(response.diagnostic, "directory.recovery", sizeof(response.diagnostic));
@@ -888,6 +1100,9 @@ __attribute__((noinline)) bool ConfiguratorBackend::DispatchProfileStore() {
 }
 
 __attribute__((noinline)) bool ConfiguratorBackend::ExecuteProfileStoreMutation() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+#endif
     if (!dispatch_pending) return true;
     Config &candidate = ConfigWriteCandidate();
     if (request.operation == PROFILE_STORE_CREATE) {
@@ -924,6 +1139,9 @@ __attribute__((noinline)) bool ConfiguratorBackend::ExecuteProfileStoreMutation(
 }
 
 __attribute__((noinline)) bool ConfiguratorBackend::FinalizeProfileStore() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &response = response_owner.legacy;
+#endif
     if (!dispatch_handled) {
         response.profile_id = result.id;
         response.profile_revision = result.revision;
@@ -965,6 +1183,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::FinalizeProfileStore() {
     return true;
 }
 __attribute__((noinline)) bool ConfiguratorBackend::RespondProfileStore() {
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    auto &request = request_owner.legacy;
+    auto &response = response_owner.legacy;
+#endif
     // Release the borrowed immutable RX bytes after all identity/transaction
     // work, before response encoding reuses that same frame. READ leases use
     // the separate record wire and remain synchronous through this encode.

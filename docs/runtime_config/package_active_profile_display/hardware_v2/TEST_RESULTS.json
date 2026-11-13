@@ -1,0 +1,23 @@
+{
+  "result": "PASS_OFFLINE_EXECUTOR_REGRESSION",
+  "test_methods": 23,
+  "subcases": "Full70-exchange7-stage success; captured legacy discrepancy; all supported legacy/native family guards; ID/revision/token/status/recovery/schema/header/native53; Config/metadata/raw-payload/schema before-after changes; admission/operation/stream/timeout/cancel/close/install/visual/no-resume failures. Actual CLI post-begin preflight/custody/cancellation/approval/binding/malformed-binding failures terminal; restored inputs cannot resume.",
+  "executor_sha256": "7dd1b996f370f2faaf710f5b51e6bc868d9504a028c3af6d9f5dcff6e0c910b3",
+  "tests_sha256": "0abaf304d8d514fffe592124de32c598eeaa233a588dd4b14648b78279c46ebd",
+  "test_input_manifest_sha256": "02f35254e34cc25dc720012dbf45bbb62a3c2eba4d540a035bf5a642e30276c1",
+  "evidence_log_sha256": "d6c5edfa934aba82917e19868743f5e62d099e22ce3f77d33c71887abc16cd27",
+  "complete_success": {
+    "application_exchanges": 70,
+    "configurator_sessions": 2,
+    "xinput_sessions": 2,
+    "saved_metadata_version_for4": 1,
+    "actual_payload_schema_for4": 3,
+    "all27_before_after_wrappers": "IDENTICAL_TEST_FIXTURES",
+    "managed54": "PRESERVED_UNSELECTED",
+    "manual_installation": "SYNTHETIC_OWNER_EVENT_ONLY"
+  },
+  "real_device_enumerations": 0,
+  "real_serial_opens": 0,
+  "firmware_rebuilds": 0,
+  "fixture_limit": "Uncaptured records and runtime identity are explicit IO/source doubles, not physical acceptance. Historical serialization is reconstruction, not raw historical wire."
+}

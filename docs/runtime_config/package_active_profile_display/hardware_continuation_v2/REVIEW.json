@@ -1,0 +1,11 @@
+{
+  "result": "DONE_FOCUSED_INDEPENDENT_REVIEW",
+  "reviewer": "/root/v2_final_review",
+  "manifest_sha256": "fc44f1b3b175f7c14af7e9210727d2eb24a5f3892922003103ef7a0679df8f10",
+  "executor_sha256": "b9527a3dc3d45fcbe4221b57ae83996d1b9b58b0ebaa51874b46b099b161ae1f",
+  "independent_tests": 12,
+  "offline_check": "PASS",
+  "material_findings": [],
+  "scope": "Named XInput route admission only; exact serial, one unit, ownership and actual screen confirmation preserved; strict runtime proof and Configurator admission unchanged.",
+  "device_access": false
+}

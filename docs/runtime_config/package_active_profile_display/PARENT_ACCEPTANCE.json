@@ -1,0 +1,13 @@
+{
+  "canonical_senscope_commit": "acf22010522ac5b2b17392e977d692195d39e154",
+  "canonical_path": "docs/project/hardware/phase-b-corrected-packet/terminal-evidence/summary.json",
+  "summary_sha256": "9e2c652a5e3219aaeb935387c91b63b03008f2a2cb9c66aef3bc89d7eccab22c",
+  "result": "PASS",
+  "outcome": "HARDWARE_VALIDATED",
+  "candidate_sha": "c439b7c6aab24ed8a0af3b497b7204ba3cd033c5",
+  "uf2_sha256": "f7827890313cabdbcbe962add049d0f6cccc089f5c78afe3033a5b8285f6c37a",
+  "packet_id": "FULLPKG-B2-KAZUYA-MANAGED-C439-PHASE-B-CORRECTED-UNAPPROVED-v1",
+  "packet_sha256": "87efb09d18c21fef1906d66fa93a0aafa7939abae7cdb14fafb9a888cd5cb578",
+  "scope": "One CREATE Kazuya Managed ID54/revision1 at appended row3; exact native readback/receipt and preservation of all26 prior directory entries, old Config rows/unrelated fields, RGB/defaults/backend destinations; no activation or gameplay. Managed record/root bytes reconstructed expected bytes, not raw exported device storage. Runtime Identity not build attestation.",
+  "source_evidence_unchanged": true
+}

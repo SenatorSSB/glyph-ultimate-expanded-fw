@@ -1,0 +1,174 @@
+{
+  "classification": "BOUNDED_DISPLAY_STACK_IMPACT_NO_REBUILD",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "elf_sha256": "30e5c15b61d4e2b1822aa521cf7e53ffbab9cfe568f63f792047069f965929ff",
+  "map_sha256": "8b9bb82ec6a6a67e9ff94f241b4bb58e1254bf5ce0b7583aad55a77a034f2f00",
+  "baseline_resource_candidate": "b34bd9bc0c19c3bbf060b9914381742727b6ed03",
+  "baseline_resource_elf_sha256": "c411c86db3e68c5630b9bd93949c82762ec8521de5fa40cc91536f7faf608443",
+  "baseline_resource_path": "/Users/rasmus.pekkarinen/.codex/worktrees/senscope-glyph-plate-direction/senscope/docs/project/goal-runs/fullpkg-b2-storage-fence-repair/evidence/resources",
+  "old_reachable_count": 224,
+  "unchanged_old_reachable_shapes": 222,
+  "changed_old_reachable_shapes": [
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)"
+  ],
+  "new_reachable": [
+    "ProfileStore::ActiveId() const",
+    "ProfileStore::ActiveProfile() const",
+    "ProfileStore::IsReadOnlyRecovery() const",
+    "current_profile_label(InputMode const*, _CommunicationBackendId)",
+    "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)",
+    "ultimate_native::Lease(_UltimateProfile const&)"
+  ],
+  "new_resolver_subtree_bound": 64,
+  "new_label_loop_path": {
+    "core1_wrapper": 8,
+    "main1": 8,
+    "loop1": 72,
+    "IntegratedDisplay::SendReport": 24,
+    "UpdateDisplay": 48,
+    "current_profile_label_including_children": 64,
+    "core1_IRQ_including_alignment": 68,
+    "sum": 292
+  },
+  "affected_graphics_loop_path_upper": 948,
+  "replayed_setup1": 960,
+  "replayed_loop1": 976,
+  "core1_composed_upper": 1060,
+  "retained_core1_upper": 1152,
+  "stack1_reservation": 2048,
+  "unknown": [],
+  "outer_irq_shapes": {
+    "main1": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 8,
+        "calls": [
+          "setup1",
+          "loop1",
+          "_MFIFO::registerCore() [clone .part.0]"
+        ],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "core1_wrapper": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 8,
+        "calls": [
+          "irq_init_priorities"
+        ],
+        "tail": [],
+        "indirect": [
+          "blx\tr4"
+        ]
+      }
+    },
+    "_MFIFO::_irq()": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 16,
+        "calls": [
+          "__noInterrupts_veneer",
+          "__multicore_fifo_pop_blocking_veneer",
+          "__interrupts_veneer",
+          "__interrupts_veneer"
+        ],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "noInterrupts": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 16,
+        "calls": [
+          "panic"
+        ],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "interrupts": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 8,
+        "calls": [],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "multicore_fifo_pop_blocking": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 8,
+        "calls": [
+          "multicore_fifo_pop_blocking_inline"
+        ],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "multicore_fifo_pop_blocking_inline": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 0,
+        "calls": [],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "__noInterrupts_veneer": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 4,
+        "calls": [],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "__interrupts_veneer": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 4,
+        "calls": [],
+        "tail": [],
+        "indirect": []
+      }
+    },
+    "__multicore_fifo_pop_blocking_veneer": {
+      "same_as_b34": true,
+      "shape": {
+        "frame": 4,
+        "calls": [],
+        "tail": [],
+        "indirect": []
+      }
+    }
+  },
+  "source_pin_matches": 89,
+  "source_pin_rows": 90,
+  "source_pin_exception": "Adafruit_SSD1306.cpp differs; all relied reachable linked frame/call/tail/indirect shapes plus SSD1306 vtable slot targets are unchanged. SSD1306 header matches. No blanket source identity claimed.",
+  "assumptions": [
+    "Normal supported non-RTOS core1 execution; no new core1 IRQ handler or dynamic target family beyond source-owned construction. config/glyph/common/src/config.cpp unchanged b34->9e691; lower SDK IRQ/ROM sources unchanged.",
+    "Existing ROM/time helper/graphics class and no-fault predicates are reused only after current linked shape/vtable comparison and SDK source pins. Hard fault/arbitrary corruption/panic paths remain outside supported execution just as in baseline.",
+    "core1 IRQ68 includes hardware32+MFIFO16+max(noInterrupts16,FIFO pop8,interrupts8)+alignment4. Veneer push4 is released before tail dispatch, not simultaneously live with target frame.",
+    "Resolver metadata iteration adds no recursion/dynamic allocation. Child bounds are maxima of sequential siblings, not summed. ProfileStore EntryAt32+MutationFenced0 dominates Count16 and leaf0 getters/Lease/IsOwnedView/strnlen.",
+    "Whole firmware resource or hardware acceptance is not newly claimed. This proves affected rendering stack impact and preserves prior source-bounded core1 equation only. Timing/highwater remain NOT_MEASURED."
+  ],
+  "analysis_inputs": {
+    "/Users/rasmus.pekkarinen/.codex/worktrees/senscope-glyph-plate-direction/senscope/docs/project/goal-runs/fullpkg-b2-storage-fence-repair/evidence/resources/functions.json": "c67b27b3926255d5dfc91d221c29c3ebf54a2cdeb1993bc73bd1e0981daf9e27",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/senscope-glyph-plate-direction/senscope/docs/project/goal-runs/fullpkg-b2-storage-fence-repair/evidence/resources/core1-bound-graph.json": "5ea42bceb4cad6c6564b32bc83e374da8eae82a4eae2d6fac9e1858edfe469c4",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/senscope-glyph-plate-direction/senscope/docs/project/goal-runs/fullpkg-b2-storage-fence-repair/evidence/resources/retained-core1_bound.py": "9398da65c18025b8a9ba5de126588ffb7f66173cabd2fad34da57c014201a799",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/senscope-glyph-plate-direction/senscope/docs/project/goal-runs/fullpkg-b2-storage-fence-repair/evidence/resources/report.json": "d331828ca0eac729c3791a96926c768277f21d4dd05cdf0349c8f75ca20fe8db",
+    "/Users/rasmus.pekkarinen/.codex/worktrees/senscope-glyph-plate-direction/senscope/docs/project/goal-runs/fullpkg-b2-storage-fence-repair/evidence/resources/resource-source-predicate-ledger.json": "851b50769544e8ea5118f773ef2a8fb370fd7a08a804cea713cd61c3cd5a5fab",
+    "/private/tmp/glyph-stack-specialist/extract.py": "2b592cf1a1d3668ed1e8a5036fc24cffddab453dbeceeefe78bf1060ea40e087",
+    "/private/tmp/glyph-stack-specialist/extract_linked_functions.py": "5495809331fdb3a3c90759e50f6f2526427f6e61e1c314bf478aba0389b95e44",
+    "/private/tmp/glyph-stack-specialist/current/functions.json": "e81778a1c14c1f64fcd593cd53035a6dd5a6b9c55d2c1f38273e9f160571e51d",
+    "/private/tmp/glyph-stack-specialist/current/vtables.json": "72b597ad76653445b8e72ceec05ab8abc46292c87717c4a68edb291659dc99bf",
+    "/private/tmp/glyph-stack-specialist/current/core1-bound-graph.json": "cf8490ea69f1659bdd292609590a5064769720c497b748ceadc430f3ab10f72d",
+    "/private/tmp/glyph-stack-specialist/lower-pin-comparison.json": "ade12d52543bf1b23fd71288446b45ddc8272f9057f91b02826b22dc3e845391",
+    "/private/tmp/glyph-stack-specialist/reachable-shape-comparison.json": "f47670f79ab31147388c97a3614954aac889d9360398eb3330ab1d06c83f25ab"
+  }
+}

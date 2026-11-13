@@ -1,0 +1,7 @@
+{
+  "result": "PASS_OFFLINE_ACTUAL_VISUAL_PROCESSOR_AND_CLI",
+  "test_methods": 6,
+  "scope": "Complete36-exchange fake continuation with explicit visibility limitation; actual CLI display/finish; wrong dashboard, navigation, visibility label, authority and missing final settlement rejected.",
+  "device_access": false,
+  "log_sha256": "824d9483afff4e6ffb31edfc2000d86e63a120afd7be2b0a84b0d488cbdcf176"
+}

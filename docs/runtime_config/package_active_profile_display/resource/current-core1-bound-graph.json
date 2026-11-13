@@ -1,0 +1,3813 @@
+{
+  "bounds": {
+    "detect_boot_gamecube(unsigned long)": {
+      "bound": 168,
+      "max_path": [
+        "detect_boot_gamecube(unsigned long)",
+        "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+        "pio_sm_init"
+      ]
+    },
+    "detect_boot_n64(unsigned long)": {
+      "bound": 168,
+      "max_path": [
+        "detect_boot_n64(unsigned long)",
+        "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+        "pio_sm_init"
+      ]
+    },
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)": {
+      "bound": 760,
+      "max_path": [
+        "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)": {
+      "bound": 768,
+      "max_path": [
+        "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "setup1": {
+      "bound": 960,
+      "max_path": [
+        "setup1",
+        "IntegratedDisplay::SendReport()",
+        "IntegratedDisplay::HandleControls(DisplayMode*)",
+        "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "loop1": {
+      "bound": 976,
+      "max_path": [
+        "loop1",
+        "IntegratedDisplay::SendReport()",
+        "IntegratedDisplay::HandleControls(DisplayMode*)",
+        "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "IntegratedDisplay::SendReport()": {
+      "bound": 904,
+      "max_path": [
+        "IntegratedDisplay::SendReport()",
+        "IntegratedDisplay::HandleControls(DisplayMode*)",
+        "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 792,
+      "max_path": [
+        "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 768,
+      "max_path": [
+        "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 124,
+      "max_path": [
+        "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+        "Adafruit_GFX::writePixel(short, short, unsigned short)",
+        "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+      ]
+    },
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 752,
+      "max_path": [
+        "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 464,
+      "max_path": [
+        "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "arduino::Print::print(char const*)",
+        "arduino::Print::write(unsigned char const*, unsigned int)",
+        "Adafruit_GFX::write(unsigned char)",
+        "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+        "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+        "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+        "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+        "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+        "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+      ]
+    },
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 768,
+      "max_path": [
+        "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": {
+      "bound": 776,
+      "max_path": [
+        "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+        "Adafruit_SSD1306::invertDisplay(bool)",
+        "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 832,
+      "max_path": [
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 856,
+      "max_path": [
+        "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 0,
+      "max_path": [
+        "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 8,
+      "max_path": [
+        "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+      ]
+    },
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": {
+      "bound": 784,
+      "max_path": [
+        "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+        "IntegratedDisplay::Clear()",
+        "setup1::{lambda()#2}::_FUN()",
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "CFastLED::show(unsigned char)": {
+      "bound": 448,
+      "max_path": [
+        "CFastLED::show(unsigned char)",
+        "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()": {
+      "bound": 136,
+      "max_path": [
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+        "__wrap___aeabi_f2uiz"
+      ]
+    },
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": {
+      "bound": 392,
+      "max_path": [
+        "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": {
+      "bound": 392,
+      "max_path": [
+        "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)": {
+      "bound": 264,
+      "max_path": [
+        "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "__wrap_malloc": {
+      "bound": 136,
+      "max_path": [
+        "__wrap_malloc",
+        "malloc",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "__wrap_calloc": {
+      "bound": 176,
+      "max_path": [
+        "__wrap_calloc",
+        "calloc",
+        "_calloc_r",
+        "_malloc_r",
+        "_free_r",
+        "_malloc_trim_r",
+        "__malloc_lock",
+        "__retarget_lock_acquire_recursive"
+      ]
+    },
+    "TwoWire::endTransmission()": {
+      "bound": 672,
+      "max_path": [
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    },
+    "Adafruit_SSD1306::display()": {
+      "bound": 752,
+      "max_path": [
+        "Adafruit_SSD1306::display()",
+        "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+        "TwoWire::endTransmission()",
+        "TwoWire::endTransmission(bool)",
+        "_probe(int, unsigned char, unsigned char, int)",
+        "sleep_us"
+      ]
+    }
+  },
+  "unknown": [],
+  "reachable_count": 230,
+  "reachable": [
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)",
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)",
+    "AboutMenu::AboutMenu(_Config&)",
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)",
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)",
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::fillScreen(unsigned short)",
+    "Adafruit_GFX::setFont(GFXfont const*)",
+    "Adafruit_GFX::setRotation(unsigned char)",
+    "Adafruit_GFX::setTextSize(unsigned char)",
+    "Adafruit_GFX::startWrite()",
+    "Adafruit_GFX::write(unsigned char)",
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+    "Adafruit_GFX::writePixel(short, short, unsigned short)",
+    "Adafruit_SSD1306::clearDisplay()",
+    "Adafruit_SSD1306::display()",
+    "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+    "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]",
+    "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+    "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+    "Adafruit_SSD1306::invertDisplay(bool)",
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)",
+    "CFastLED::operator[](int)",
+    "CFastLED::setMaxRefreshRate(unsigned short, bool)",
+    "CFastLED::show(unsigned char)",
+    "CLEDController::size()",
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const",
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+    "CommunicationBackend::BackendId()",
+    "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)",
+    "CommunicationBackend::CurrentGameMode()",
+    "CommunicationBackend::GetInputs()",
+    "CommunicationBackend::GetOutputs()",
+    "CommunicationBackend::SetGameMode(InputMode*)",
+    "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+    "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+    "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)",
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)",
+    "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "InputMode::GetConfig()",
+    "IntegratedDisplay::Clear()",
+    "IntegratedDisplay::HandleControls(DisplayMode*)",
+    "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)",
+    "IntegratedDisplay::SendReport()",
+    "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+    "IntegratedDisplay::UpdateDisplay()",
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)",
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "NeoPixelBackend<(unsigned char)11, 76>::SendReport()",
+    "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)",
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)",
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "PackageStorageFence::MutationFenced()",
+    "ProfileStore::ActiveId() const",
+    "ProfileStore::ActiveProfile() const",
+    "ProfileStore::Count() const",
+    "ProfileStore::EntryAt(unsigned int) const",
+    "ProfileStore::IsReadOnlyRecovery() const",
+    "ProfileStore::IsReady() const",
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "RemapMenu::RemapMenu()",
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+    "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)",
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "TwoWire::_handleTimeout(bool)",
+    "TwoWire::begin()",
+    "TwoWire::beginTransmission(unsigned char)",
+    "TwoWire::end()",
+    "TwoWire::endTransmission()",
+    "TwoWire::endTransmission(bool)",
+    "TwoWire::setClock(unsigned long)",
+    "TwoWire::write(unsigned char const*, unsigned int)",
+    "TwoWire::write(unsigned char)",
+    "__clearADCPin(unsigned char)",
+    "__cxa_guard_acquire",
+    "__cxa_guard_release",
+    "__digitalRead",
+    "__digitalWrite",
+    "__errno",
+    "__joybus_receive_bytes_veneer",
+    "__malloc_lock",
+    "__malloc_unlock",
+    "__mutex_enter_blocking_veneer",
+    "__mutex_exit_veneer",
+    "__pinMode",
+    "__time_us_64_veneer",
+    "__wrap___getreent",
+    "__wrap_calloc",
+    "__wrap_free",
+    "__wrap_malloc",
+    "_calloc_r",
+    "_free_r",
+    "_malloc_r",
+    "_malloc_trim_r",
+    "_pio_add_program_at_offset",
+    "_pio_find_offset_for_program.isra.0",
+    "_probe(int, unsigned char, unsigned char, int)",
+    "_sbrk",
+    "_sbrk_r",
+    "_watchdog_enable",
+    "arduino::Print::availableForWrite()",
+    "arduino::Print::flush()",
+    "arduino::Print::print(char const*)",
+    "arduino::Print::print(char)",
+    "arduino::Print::print(int, int)",
+    "arduino::Print::print(unsigned char, int)",
+    "arduino::Print::printNumber(unsigned long, unsigned char)",
+    "arduino::Print::println(char const*)",
+    "arduino::Print::println(unsigned char, int)",
+    "arduino::Print::write(unsigned char const*, unsigned int)",
+    "atexit",
+    "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+    "busy_wait_until",
+    "busy_wait_us",
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)",
+    "calloc",
+    "check_single_timeout_us",
+    "clock_get_hz",
+    "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+    "current_profile_label(InputMode const*, _CommunicationBackendId)",
+    "dcd_disconnect",
+    "delay",
+    "detect_boot_gamecube(unsigned long)",
+    "detect_boot_n64(unsigned long)",
+    "dma_claim_unused_channel",
+    "free",
+    "gpio_init",
+    "gpio_set_drive_strength",
+    "gpio_set_function",
+    "gpio_set_pulls",
+    "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+    "hw_claim_clear",
+    "hw_claim_lock",
+    "hw_claim_unlock",
+    "hw_claim_unused_from_range",
+    "hw_is_claimed",
+    "i2c_deinit",
+    "i2c_init",
+    "i2c_set_baudrate",
+    "i2c_set_slave_mode",
+    "i2c_write_blocking_internal",
+    "i2c_write_blocking_until",
+    "init_single_timeout_until",
+    "interrupts",
+    "irq_get_vtable_handler",
+    "irq_is_enabled",
+    "irq_remove_handler",
+    "irq_set_enabled",
+    "irq_set_exclusive_handler",
+    "irq_set_mask_enabled",
+    "joybus_port_reset",
+    "joybus_port_terminate",
+    "joybus_receive_byte",
+    "joybus_receive_bytes",
+    "loop1",
+    "malloc",
+    "micros",
+    "millis",
+    "multicore_fifo_push_blocking",
+    "multicore_fifo_push_blocking_inline",
+    "mutex_enter_blocking",
+    "mutex_exit",
+    "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)",
+    "native_metrics::ServiceCore(unsigned int)",
+    "noInterrupts",
+    "operator new(unsigned int)",
+    "operator new[](unsigned int)",
+    "operator new[](unsigned int, std::nothrow_t const&)",
+    "pio_add_program",
+    "pio_can_add_program",
+    "pio_claim_unused_sm",
+    "pio_remove_program",
+    "pio_sm_init",
+    "pio_sm_set_consecutive_pindirs",
+    "pio_sm_unclaim",
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)",
+    "profile_selection::FindEntry(ProfileStore const&, unsigned long)",
+    "profile_selection::Pending()",
+    "profile_selection::Request(unsigned long)",
+    "reboot_firmware()",
+    "set_raw_irq_handler_and_unlock",
+    "setup1",
+    "setup1::{lambda()#1}::_FUN()",
+    "setup1::{lambda()#2}::_FUN()",
+    "strlcpy",
+    "strlen",
+    "strnlen",
+    "time_us_64",
+    "tud_disconnect",
+    "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)",
+    "ultimate_native::Lease(_UltimateProfile const&)",
+    "watchdog_caused_reboot",
+    "watchdog_reboot",
+    "watchdog_update"
+  ],
+  "edges": {
+    "detect_boot_gamecube(unsigned long)": [
+      "____wrap___aeabi_uidiv_veneer",
+      "__joybus_receive_bytes_veneer",
+      "__wrap___aeabi_f2uiz",
+      "__wrap___aeabi_fmul",
+      "__wrap___aeabi_fsub",
+      "__wrap___aeabi_ui2f",
+      "__wrap_memset",
+      "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+      "busy_wait_us",
+      "clock_get_hz",
+      "gpio_set_function",
+      "joybus_port_reset",
+      "joybus_port_terminate",
+      "pio_add_program",
+      "pio_can_add_program",
+      "pio_claim_unused_sm",
+      "pio_sm_set_consecutive_pindirs",
+      "pio_sm_unclaim"
+    ],
+    "__joybus_receive_bytes_veneer": [
+      "joybus_receive_bytes"
+    ],
+    "joybus_receive_bytes": [
+      "__time_us_64_veneer",
+      "joybus_receive_byte"
+    ],
+    "__time_us_64_veneer": [
+      "time_us_64"
+    ],
+    "time_us_64": [],
+    "joybus_receive_byte": [],
+    "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]": [
+      "pio_sm_init",
+      "time_us_64"
+    ],
+    "pio_sm_init": [],
+    "busy_wait_us": [
+      "busy_wait_until",
+      "time_us_64"
+    ],
+    "busy_wait_until": [],
+    "clock_get_hz": [],
+    "gpio_set_function": [],
+    "joybus_port_reset": [
+      "pio_sm_init"
+    ],
+    "joybus_port_terminate": [
+      "pio_remove_program",
+      "pio_sm_unclaim"
+    ],
+    "pio_remove_program": [
+      "hw_claim_lock",
+      "hw_claim_unlock"
+    ],
+    "hw_claim_lock": [],
+    "hw_claim_unlock": [],
+    "pio_sm_unclaim": [
+      "hw_claim_clear"
+    ],
+    "hw_claim_clear": [
+      "hw_claim_lock",
+      "hw_claim_unlock"
+    ],
+    "pio_add_program": [
+      "_pio_add_program_at_offset",
+      "_pio_find_offset_for_program.isra.0",
+      "hw_claim_lock",
+      "hw_claim_unlock"
+    ],
+    "_pio_add_program_at_offset": [],
+    "_pio_find_offset_for_program.isra.0": [],
+    "pio_can_add_program": [
+      "_pio_find_offset_for_program.isra.0",
+      "hw_claim_lock",
+      "hw_claim_unlock"
+    ],
+    "pio_claim_unused_sm": [
+      "hw_claim_unused_from_range"
+    ],
+    "hw_claim_unused_from_range": [
+      "hw_claim_lock",
+      "hw_claim_unlock",
+      "hw_is_claimed"
+    ],
+    "hw_is_claimed": [],
+    "pio_sm_set_consecutive_pindirs": [],
+    "detect_boot_n64(unsigned long)": [
+      "____wrap___aeabi_uidiv_veneer",
+      "__joybus_receive_bytes_veneer",
+      "__wrap___aeabi_f2uiz",
+      "__wrap___aeabi_fmul",
+      "__wrap___aeabi_fsub",
+      "__wrap___aeabi_ui2f",
+      "__wrap_memset",
+      "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+      "busy_wait_us",
+      "clock_get_hz",
+      "gpio_set_function",
+      "joybus_port_reset",
+      "joybus_port_terminate",
+      "pio_add_program",
+      "pio_can_add_program",
+      "pio_claim_unused_sm",
+      "pio_sm_init",
+      "pio_sm_set_consecutive_pindirs",
+      "pio_sm_unclaim",
+      "time_us_64"
+    ],
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)": [
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "Adafruit_GFX::setTextSize(unsigned char)",
+      "Adafruit_SSD1306::clearDisplay()",
+      "Adafruit_SSD1306::display()",
+      "arduino::Print::println(char const*)",
+      "arduino::Print::println(unsigned char, int)"
+    ],
+    "Adafruit_GFX::setFont(GFXfont const*)": [],
+    "Adafruit_GFX::setTextSize(unsigned char)": [],
+    "Adafruit_SSD1306::clearDisplay()": [
+      "__wrap_memset"
+    ],
+    "Adafruit_SSD1306::display()": [
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::write(unsigned char)",
+      "__digitalWrite"
+    ],
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)": [
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::write(unsigned char)",
+      "__digitalWrite"
+    ],
+    "TwoWire::beginTransmission(unsigned char)": [],
+    "TwoWire::endTransmission()": [
+      "TwoWire::_handleTimeout(bool)",
+      "TwoWire::endTransmission(bool)",
+      "__wrap___aeabi_lmul",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "i2c_write_blocking_until",
+      "time_us_64"
+    ],
+    "TwoWire::_handleTimeout(bool)": [
+      "TwoWire::begin()",
+      "TwoWire::end()",
+      "TwoWire::setClock(unsigned long)",
+      "__pinMode",
+      "gpio_set_function",
+      "gpio_set_pulls",
+      "i2c_deinit",
+      "i2c_init",
+      "i2c_set_baudrate",
+      "i2c_set_slave_mode",
+      "irq_remove_handler",
+      "irq_set_enabled"
+    ],
+    "TwoWire::begin()": [
+      "gpio_set_function",
+      "gpio_set_pulls",
+      "i2c_init",
+      "i2c_set_slave_mode"
+    ],
+    "gpio_set_pulls": [],
+    "i2c_init": [
+      "i2c_set_baudrate"
+    ],
+    "i2c_set_baudrate": [
+      "____wrap___aeabi_uidiv_veneer",
+      "clock_get_hz"
+    ],
+    "i2c_set_slave_mode": [],
+    "TwoWire::end()": [
+      "__pinMode",
+      "i2c_deinit",
+      "irq_remove_handler",
+      "irq_set_enabled"
+    ],
+    "__pinMode": [
+      "__clearADCPin(unsigned char)",
+      "gpio_init",
+      "gpio_set_drive_strength",
+      "gpio_set_pulls"
+    ],
+    "__clearADCPin(unsigned char)": [],
+    "gpio_init": [
+      "gpio_set_function"
+    ],
+    "gpio_set_drive_strength": [],
+    "i2c_deinit": [],
+    "irq_remove_handler": [
+      "irq_is_enabled",
+      "irq_set_enabled",
+      "set_raw_irq_handler_and_unlock"
+    ],
+    "irq_is_enabled": [],
+    "irq_set_enabled": [
+      "irq_set_mask_enabled"
+    ],
+    "irq_set_mask_enabled": [],
+    "set_raw_irq_handler_and_unlock": [],
+    "TwoWire::setClock(unsigned long)": [
+      "i2c_set_baudrate"
+    ],
+    "TwoWire::endTransmission(bool)": [
+      "TwoWire::_handleTimeout(bool)",
+      "__wrap___aeabi_lmul",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "i2c_write_blocking_until",
+      "time_us_64"
+    ],
+    "_probe(int, unsigned char, unsigned char, int)": [
+      "____wrap___aeabi_idiv_veneer",
+      "__digitalRead",
+      "__digitalWrite",
+      "__pinMode",
+      "gpio_set_function",
+      "sleep_us",
+      "time_us_64"
+    ],
+    "__digitalRead": [],
+    "__digitalWrite": [
+      "gpio_set_function"
+    ],
+    "i2c_write_blocking_until": [
+      "i2c_write_blocking_internal",
+      "init_single_timeout_until"
+    ],
+    "i2c_write_blocking_internal": [
+      "check_single_timeout_us"
+    ],
+    "check_single_timeout_us": [],
+    "init_single_timeout_until": [],
+    "TwoWire::write(unsigned char const*, unsigned int)": [
+      "TwoWire::write(unsigned char)"
+    ],
+    "TwoWire::write(unsigned char)": [],
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]": [
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::write(unsigned char)",
+      "__digitalWrite"
+    ],
+    "arduino::Print::println(char const*)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "strlen"
+    ],
+    "Adafruit_GFX::write(unsigned char)": [
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)"
+    ],
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::startWrite()": [],
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]": [],
+    "Adafruit_GFX::writePixel(short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "Adafruit_SSD1306::drawPixel(short, short, unsigned short)": [],
+    "arduino::Print::write(unsigned char const*, unsigned int)": [
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "strlen": [],
+    "arduino::Print::println(unsigned char, int)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "arduino::Print::printNumber(unsigned long, unsigned char)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "____wrap___aeabi_uidivmod_veneer",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "strlen"
+    ],
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)": [
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "Adafruit_GFX::setTextSize(unsigned char)",
+      "Adafruit_SSD1306::clearDisplay()",
+      "Adafruit_SSD1306::display()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::println(char const*)",
+      "arduino::Print::println(unsigned char, int)"
+    ],
+    "arduino::Print::print(char const*)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "strlen"
+    ],
+    "setup1": [
+      "AboutMenu::AboutMenu(_Config&)",
+      "CFastLED::addLeds(CLEDController*, CRGB*, int, int)",
+      "CFastLED::setMaxRefreshRate(unsigned short, bool)",
+      "CFastLED::show(unsigned char)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)",
+      "InputMode::GetConfig()",
+      "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)",
+      "IntegratedDisplay::SendReport()",
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+      "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)",
+      "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "RemapMenu::RemapMenu()",
+      "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)",
+      "__cxa_guard_acquire",
+      "__cxa_guard_release",
+      "__mutex_enter_blocking_veneer",
+      "__mutex_exit_veneer",
+      "atexit",
+      "delay",
+      "operator new(unsigned int)"
+    ],
+    "AboutMenu::AboutMenu(_Config&)": [],
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+      "____wrap___aeabi_idiv_veneer"
+    ],
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const": [],
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()": [
+      "__wrap___aeabi_f2uiz",
+      "__wrap___aeabi_fdiv",
+      "__wrap___aeabi_fmul",
+      "__wrap___aeabi_fsub",
+      "__wrap___aeabi_ui2f",
+      "clock_get_hz",
+      "dma_claim_unused_channel",
+      "gpio_set_function",
+      "irq_set_enabled",
+      "irq_set_exclusive_handler",
+      "pio_add_program",
+      "pio_can_add_program",
+      "pio_claim_unused_sm",
+      "pio_sm_init",
+      "pio_sm_set_consecutive_pindirs",
+      "pio_sm_unclaim"
+    ],
+    "dma_claim_unused_channel": [
+      "hw_claim_unused_from_range"
+    ],
+    "irq_set_exclusive_handler": [
+      "irq_get_vtable_handler",
+      "set_raw_irq_handler_and_unlock"
+    ],
+    "irq_get_vtable_handler": [],
+    "CFastLED::setMaxRefreshRate(unsigned short, bool)": [
+      "____wrap___aeabi_idiv_veneer"
+    ],
+    "CFastLED::show(unsigned char)": [
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+      "____wrap___aeabi_uidiv_veneer",
+      "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)",
+      "micros",
+      "millis"
+    ],
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "____wrap___aeabi_idiv_veneer",
+      "__wrap___aeabi_memcpy",
+      "__wrap_calloc",
+      "__wrap_free",
+      "micros"
+    ],
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)": [
+      "__wrap_calloc",
+      "__wrap_free",
+      "micros"
+    ],
+    "__wrap_calloc": [
+      "calloc",
+      "interrupts",
+      "noInterrupts"
+    ],
+    "calloc": [
+      "__wrap___getreent",
+      "_calloc_r"
+    ],
+    "__wrap___getreent": [],
+    "_calloc_r": [
+      "__errno",
+      "__wrap_memset",
+      "_malloc_r"
+    ],
+    "__errno": [
+      "__wrap___getreent"
+    ],
+    "_malloc_r": [
+      "__malloc_lock",
+      "__malloc_unlock",
+      "_free_r",
+      "_sbrk_r"
+    ],
+    "__malloc_lock": [
+      "__retarget_lock_acquire_recursive"
+    ],
+    "__malloc_unlock": [
+      "__retarget_lock_release_recursive"
+    ],
+    "_free_r": [
+      "__malloc_lock",
+      "__malloc_unlock",
+      "_malloc_trim_r"
+    ],
+    "_malloc_trim_r": [
+      "__malloc_lock",
+      "__malloc_unlock",
+      "_sbrk_r"
+    ],
+    "_sbrk_r": [
+      "_sbrk"
+    ],
+    "_sbrk": [],
+    "interrupts": [],
+    "noInterrupts": [],
+    "__wrap_free": [
+      "free",
+      "interrupts",
+      "noInterrupts"
+    ],
+    "free": [
+      "__wrap___getreent",
+      "_free_r"
+    ],
+    "micros": [
+      "time_us_64"
+    ],
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)": [
+      "CLEDController::size()",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "CLEDController::size()": [],
+    "millis": [
+      "____wrap___aeabi_uidiv_veneer",
+      "____wrap___aeabi_uldivmod_veneer",
+      "time_us_64"
+    ],
+    "CommunicationBackend::BackendId()": [],
+    "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)": [],
+    "CommunicationBackend::CurrentGameMode()": [],
+    "CommunicationBackend::SetGameMode(InputMode*)": [],
+    "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "__cxa_guard_acquire",
+      "__cxa_guard_release"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "InputMode::GetConfig()",
+      "ProfileStore::Count() const",
+      "__cxa_guard_acquire",
+      "__cxa_guard_release",
+      "__wrap_memset",
+      "operator new[](unsigned int)",
+      "operator new[](unsigned int, std::nothrow_t const&)",
+      "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)",
+      "strlcpy"
+    ],
+    "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [],
+    "InputMode::GetConfig()": [],
+    "ProfileStore::Count() const": [
+      "PackageStorageFence::MutationFenced()"
+    ],
+    "PackageStorageFence::MutationFenced()": [],
+    "__cxa_guard_acquire": [],
+    "__cxa_guard_release": [],
+    "operator new[](unsigned int)": [
+      "__wrap_malloc"
+    ],
+    "__wrap_malloc": [
+      "interrupts",
+      "malloc",
+      "noInterrupts"
+    ],
+    "malloc": [
+      "__wrap___getreent",
+      "_malloc_r"
+    ],
+    "operator new[](unsigned int, std::nothrow_t const&)": [
+      "operator new[](unsigned int)"
+    ],
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)": [
+      "ProfileStore::Count() const",
+      "ProfileStore::EntryAt(unsigned int) const",
+      "ProfileStore::IsReady() const",
+      "__wrap___aeabi_memcpy"
+    ],
+    "ProfileStore::EntryAt(unsigned int) const": [
+      "PackageStorageFence::MutationFenced()"
+    ],
+    "ProfileStore::IsReady() const": [],
+    "strlcpy": [],
+    "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)": [],
+    "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)": [
+      "Adafruit_GFX::setTextSize(unsigned char)",
+      "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)",
+      "__wrap___aeabi_memcpy"
+    ],
+    "IntegratedDisplay::SendReport()": [
+      "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "IntegratedDisplay::HandleControls(DisplayMode*)",
+      "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "setup1::{lambda()#1}::_FUN()",
+      "setup1::{lambda()#2}::_FUN()"
+    ],
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "CommunicationBackend::GetInputs()",
+      "arduino::Print::print(char const*)"
+    ],
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "CommunicationBackend::GetInputs()": [],
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::GetInputs()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "InputMode::GetConfig()",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::print(char)",
+      "arduino::Print::println(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillScreen(unsigned short)": [
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::setRotation(unsigned char)": [],
+    "Adafruit_SSD1306::invertDisplay(bool)": [
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::write(unsigned char)",
+      "__digitalWrite"
+    ],
+    "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)": [],
+    "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)": [
+      "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "__wrap_memset",
+      "profile_selection::FindEntry(ProfileStore const&, unsigned long)"
+    ],
+    "profile_selection::FindEntry(ProfileStore const&, unsigned long)": [
+      "ProfileStore::Count() const",
+      "ProfileStore::EntryAt(unsigned int) const"
+    ],
+    "arduino::Print::availableForWrite()": [],
+    "arduino::Print::flush()": [],
+    "arduino::Print::print(char)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawCircle(short, short, short, unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillCircle(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::GetInputs()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "current_profile_label(InputMode const*, _CommunicationBackendId)",
+      "strlen"
+    ],
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)"
+    ],
+    "current_profile_label(InputMode const*, _CommunicationBackendId)": [
+      "ProfileStore::ActiveId() const",
+      "ProfileStore::ActiveProfile() const",
+      "ProfileStore::Count() const",
+      "ProfileStore::EntryAt(unsigned int) const",
+      "ProfileStore::IsReadOnlyRecovery() const",
+      "ProfileStore::IsReady() const",
+      "strnlen",
+      "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)",
+      "ultimate_native::Lease(_UltimateProfile const&)"
+    ],
+    "ProfileStore::ActiveId() const": [],
+    "ProfileStore::ActiveProfile() const": [],
+    "ProfileStore::IsReadOnlyRecovery() const": [],
+    "strnlen": [],
+    "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)": [],
+    "ultimate_native::Lease(_UltimateProfile const&)": [],
+    "IntegratedDisplay::HandleControls(DisplayMode*)": [
+      "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "time_us_64"
+    ],
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "IntegratedDisplay::SetDisplayMode(_DisplayModeId)": [],
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)",
+      "InputMode::GetConfig()",
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "IntegratedDisplay::Clear()",
+      "IntegratedDisplay::UpdateDisplay()",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "reboot_firmware()",
+      "tud_disconnect"
+    ],
+    "IntegratedDisplay::Clear()": [
+      "Adafruit_SSD1306::clearDisplay()",
+      "setup1::{lambda()#1}::_FUN()",
+      "setup1::{lambda()#2}::_FUN()"
+    ],
+    "setup1::{lambda()#1}::_FUN()": [
+      "Adafruit_SSD1306::clearDisplay()"
+    ],
+    "setup1::{lambda()#2}::_FUN()": [
+      "Adafruit_SSD1306::display()"
+    ],
+    "IntegratedDisplay::UpdateDisplay()": [
+      "Adafruit_SSD1306::display()",
+      "setup1::{lambda()#1}::_FUN()",
+      "setup1::{lambda()#2}::_FUN()"
+    ],
+    "reboot_firmware()": [
+      "watchdog_reboot"
+    ],
+    "watchdog_reboot": [
+      "_watchdog_enable"
+    ],
+    "_watchdog_enable": [
+      "watchdog_update"
+    ],
+    "watchdog_update": [],
+    "tud_disconnect": [
+      "dcd_disconnect"
+    ],
+    "dcd_disconnect": [],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "CFastLED::operator[](int)",
+      "CFastLED::show(unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "IntegratedDisplay::UpdateDisplay()",
+      "__wrap___aeabi_memcpy",
+      "reboot_bootloader()"
+    ],
+    "CFastLED::operator[](int)": [],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "IntegratedDisplay::Clear()",
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)",
+      "IntegratedDisplay::UpdateDisplay()"
+    ],
+    "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "delay",
+      "reboot_firmware()",
+      "tud_disconnect"
+    ],
+    "delay": [
+      "sleep_ms"
+    ],
+    "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [],
+    "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "profile_selection::Request(unsigned long)"
+    ],
+    "profile_selection::Request(unsigned long)": [],
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "delay",
+      "reboot_firmware()",
+      "tud_disconnect"
+    ],
+    "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "profile_selection::Pending()"
+    ],
+    "profile_selection::Pending()": [],
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "IntegratedDisplay::Clear()",
+      "IntegratedDisplay::UpdateDisplay()",
+      "__mutex_enter_blocking_veneer",
+      "multicore_fifo_push_blocking",
+      "reboot_firmware()"
+    ],
+    "__mutex_enter_blocking_veneer": [
+      "mutex_enter_blocking"
+    ],
+    "mutex_enter_blocking": [],
+    "multicore_fifo_push_blocking": [
+      "multicore_fifo_push_blocking_inline"
+    ],
+    "multicore_fifo_push_blocking_inline": [],
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [],
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::setTextSize(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::GetInputs()",
+      "CommunicationBackend::GetOutputs()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::print(int, int)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)",
+      "current_profile_label(InputMode const*, _CommunicationBackendId)"
+    ],
+    "CommunicationBackend::GetOutputs()": [],
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)": [
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()"
+    ],
+    "arduino::Print::print(int, int)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)": [],
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::GetInputs()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)"
+    ],
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::setFont(GFXfont const*)",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::GetInputs()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::print(unsigned char, int)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "arduino::Print::print(unsigned char, int)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)"
+    ],
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)": [
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputMode::GetConfig()"
+    ],
+    "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)": [],
+    "RemapMenu::RemapMenu()": [],
+    "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)": [],
+    "__mutex_exit_veneer": [
+      "mutex_exit"
+    ],
+    "mutex_exit": [],
+    "atexit": [],
+    "operator new(unsigned int)": [
+      "__wrap_malloc"
+    ],
+    "loop1": [
+      "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)",
+      "CFastLED::show(unsigned char)",
+      "CommunicationBackend::BackendId()",
+      "CommunicationBackend::CurrentGameMode()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)",
+      "InputMode::GetConfig()",
+      "IntegratedDisplay::SendReport()",
+      "NeoPixelBackend<(unsigned char)11, 76>::SendReport()",
+      "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)",
+      "____wrap___aeabi_uldivmod_veneer",
+      "__cxa_guard_acquire",
+      "__cxa_guard_release",
+      "__mutex_enter_blocking_veneer",
+      "__mutex_exit_veneer",
+      "__wrap___aeabi_f2uiz",
+      "__wrap___aeabi_fmul",
+      "__wrap___aeabi_i2f",
+      "__wrap___aeabi_memcpy",
+      "__wrap___aeabi_ul2f",
+      "__wrap_memset",
+      "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+      "native_metrics::ServiceCore(unsigned int)",
+      "time_us_64",
+      "watchdog_caused_reboot"
+    ],
+    "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)": [],
+    "NeoPixelBackend<(unsigned char)11, 76>::SendReport()": [
+      "CFastLED::show(unsigned char)",
+      "____wrap___aeabi_uldivmod_veneer",
+      "__cxa_guard_acquire",
+      "__cxa_guard_release",
+      "__wrap___aeabi_f2uiz",
+      "__wrap___aeabi_fmul",
+      "__wrap___aeabi_i2f",
+      "__wrap___aeabi_ul2f",
+      "hsv2rgb_rainbow(CHSV const&, CRGB&)",
+      "time_us_64"
+    ],
+    "hsv2rgb_rainbow(CHSV const&, CRGB&)": [],
+    "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)": [
+      "InputMode::GetConfig()",
+      "__wrap___aeabi_memcpy",
+      "__wrap_memset"
+    ],
+    "native_metrics::ServiceCore(unsigned int)": [
+      "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)"
+    ],
+    "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)": [],
+    "watchdog_caused_reboot": [],
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "____wrap___aeabi_idiv_veneer",
+      "__wrap___aeabi_memcpy",
+      "__wrap_calloc",
+      "__wrap_free",
+      "micros"
+    ]
+  },
+  "special_bounds": {
+    "__wrap___aeabi_drsub": 64,
+    "__wrap___aeabi_cdrcmple": 64,
+    "__wrap___aeabi_frsub": 64,
+    "__wrap___aeabi_fsub": 64,
+    "__wrap___aeabi_fadd": 64,
+    "__wrap___aeabi_fdiv": 64,
+    "__wrap___aeabi_fmul": 64,
+    "__wrap___aeabi_cfrcmple": 64,
+    "__wrap___aeabi_cfcmpeq": 64,
+    "__wrap___aeabi_cfcmple": 64,
+    "__wrap___aeabi_fcmpeq": 64,
+    "__wrap___aeabi_fcmple": 64,
+    "__wrap___aeabi_fcmpun": 64,
+    "__wrap___aeabi_ui2f": 64,
+    "__wrap___aeabi_i2f": 64,
+    "__wrap___aeabi_f2uiz": 64,
+    "__wrap___aeabi_ul2f": 64,
+    "__wrap___aeabi_lmul": 64,
+    "____wrap___aeabi_idivmod_veneer": 64,
+    "____wrap___aeabi_uidiv_veneer": 64,
+    "____wrap___aeabi_uldivmod_veneer": 64,
+    "____wrap___aeabi_uidivmod_veneer": 64,
+    "____wrap___aeabi_idiv_veneer": 64,
+    "__wrap___aeabi_idiv": 64,
+    "__wrap___aeabi_idivmod": 64,
+    "__wrap___aeabi_uidiv": 64,
+    "__wrap___aeabi_uidivmod": 64,
+    "__wrap___aeabi_ldivmod": 64,
+    "__wrap___aeabi_uldivmod": 64,
+    "____wrap___aeabi_lmul_veneer": 64,
+    "__wrap_memset": 8,
+    "__wrap___aeabi_memcpy": 12,
+    "__aeabi_llsr": 0,
+    "____aeabi_llsr_veneer": 4,
+    "sleep_us": 512,
+    "sleep_until": 496,
+    "sleep_ms": 520,
+    "best_effort_wfe_or_timeout": 512,
+    "__retarget_lock_acquire": 24,
+    "__retarget_lock_acquire_recursive": 24,
+    "__retarget_lock_release": 24,
+    "__retarget_lock_release_recursive": 24,
+    "reboot_bootloader()": 32
+  },
+  "special_notes": {
+    "__wrap___aeabi_drsub": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_cdrcmple": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_frsub": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fsub": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fadd": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fdiv": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fmul": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_cfrcmple": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_cfcmpeq": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_cfcmple": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fcmpeq": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fcmple": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_fcmpun": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_ui2f": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_i2f": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_f2uiz": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_ul2f": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_lmul": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "____wrap___aeabi_idivmod_veneer": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "____wrap___aeabi_uidiv_veneer": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "____wrap___aeabi_uldivmod_veneer": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "____wrap___aeabi_uidivmod_veneer": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "____wrap___aeabi_idiv_veneer": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_idiv": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_idivmod": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_uidiv": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_uidivmod": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_ldivmod": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap___aeabi_uldivmod": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "____wrap___aeabi_lmul_veneer": "Conservative actual integer/single-float child64; numeric CFG+ROM table proof.",
+    "__wrap_memset": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "__wrap___aeabi_memcpy": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "__aeabi_llsr": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "____aeabi_llsr_veneer": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "sleep_us": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "sleep_until": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "sleep_ms": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "best_effort_wfe_or_timeout": "ROM memory or fixed16-node time helper bound; conservative retained alternatives.",
+    "__retarget_lock_acquire": "__freeRTOSinitted false; own8 + veneer4 + mutex maximum12, conservatively additive.",
+    "__retarget_lock_acquire_recursive": "__freeRTOSinitted false; own8 + veneer4 + mutex maximum12, conservatively additive.",
+    "__retarget_lock_release": "__freeRTOSinitted false; own8 + veneer4 + mutex maximum12, conservatively additive.",
+    "__retarget_lock_release_recursive": "__freeRTOSinitted false; own8 + veneer4 + mutex maximum12, conservatively additive.",
+    "reboot_bootloader()": "own8+max(lookup8, ROM reset16), rounded32."
+  },
+  "excluded_precondition_faults": {
+    "pio_add_program": [
+      "panic"
+    ],
+    "_pio_add_program_at_offset": [
+      "panic"
+    ],
+    "hw_claim_unused_from_range": [
+      "panic"
+    ],
+    "irq_remove_handler": [
+      "hard_assertion_failure"
+    ],
+    "irq_set_exclusive_handler": [
+      "hard_assertion_failure"
+    ],
+    "noInterrupts": [
+      "panic"
+    ]
+  },
+  "dynamic_targets": {
+    "Adafruit_GFX::writePixel(short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillScreen(unsigned short)": [
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)": [
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)"
+    ],
+    "arduino::Print::write(unsigned char const*, unsigned int)": [
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::print(char const*)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::print(char)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::println(char const*)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::printNumber(unsigned long, unsigned char)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::print(unsigned char, int)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::println(unsigned char, int)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "arduino::Print::print(int, int)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)"
+    ],
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]": [
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::write(unsigned char)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)"
+    ],
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)": [
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::write(unsigned char)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)"
+    ],
+    "Adafruit_SSD1306::invertDisplay(bool)": [
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::write(unsigned char)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)"
+    ],
+    "Adafruit_SSD1306::begin(unsigned char, unsigned char, bool, bool)": [
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::write(unsigned char)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)"
+    ],
+    "Adafruit_SSD1306::display()": [
+      "TwoWire::setClock(unsigned long)",
+      "TwoWire::beginTransmission(unsigned char)",
+      "TwoWire::write(unsigned char)",
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)"
+    ],
+    "TwoWire::write(unsigned char const*, unsigned int)": [
+      "TwoWire::write(unsigned char)"
+    ],
+    "TwoWire::endTransmission()": [
+      "TwoWire::endTransmission(bool)"
+    ],
+    "TwoWire::_handleTimeout(bool)": [
+      "TwoWire::end()",
+      "TwoWire::begin()",
+      "TwoWire::setClock(unsigned long)"
+    ],
+    "i2c_write_blocking_internal": [
+      "check_single_timeout_us"
+    ],
+    "i2c_read_blocking_internal": [
+      "check_single_timeout_us"
+    ],
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const"
+    ],
+    "CFastLED::show(unsigned char)": [
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+      "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)"
+    ],
+    "CFastLED::showColor(CRGB const&, unsigned char)": [
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+      "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)"
+    ],
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)": [
+      "CLEDController::size()"
+    ],
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)"
+    ],
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)"
+    ],
+    "CLEDController::clearLeds(int)": [
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)"
+    ],
+    "IntegratedDisplay::SendReport()": [
+      "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "setup1::{lambda()#1}::_FUN()",
+      "setup1::{lambda()#2}::_FUN()"
+    ],
+    "IntegratedDisplay::HandleControls(DisplayMode*)": [
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+    ],
+    "IntegratedDisplay::Clear()": [
+      "Adafruit_SSD1306::clearDisplay()",
+      "setup1::{lambda()#1}::_FUN()",
+      "setup1::{lambda()#2}::_FUN()"
+    ],
+    "IntegratedDisplay::UpdateDisplay()": [
+      "Adafruit_SSD1306::display()",
+      "setup1::{lambda()#1}::_FUN()",
+      "setup1::{lambda()#2}::_FUN()"
+    ],
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()",
+      "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)"
+    ],
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()",
+      "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)",
+      "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)"
+    ],
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "arduino::Print::availableForWrite()",
+      "arduino::Print::flush()",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::startWrite()",
+      "Adafruit_GFX::setRotation(unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "setup1": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+      "IntegratedDisplay::SendReport()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ],
+    "loop1": [
+      "IntegratedDisplay::SendReport()",
+      "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)",
+      "NeoPixelBackend<(unsigned char)11, 76>::SendReport()",
+      "CommunicationBackend::SetGameMode(InputMode*)",
+      "CommunicationBackend::CurrentGameMode()",
+      "InputMode::GetConfig()",
+      "CommunicationBackend::BackendId()"
+    ]
+  },
+  "max_paths": {
+    "time_us_64": [
+      "time_us_64"
+    ],
+    "__time_us_64_veneer": [
+      "__time_us_64_veneer"
+    ],
+    "joybus_receive_byte": [
+      "joybus_receive_byte"
+    ],
+    "joybus_receive_bytes": [
+      "joybus_receive_bytes",
+      "__time_us_64_veneer"
+    ],
+    "__joybus_receive_bytes_veneer": [
+      "__joybus_receive_bytes_veneer",
+      "joybus_receive_bytes",
+      "__time_us_64_veneer"
+    ],
+    "pio_sm_init": [
+      "pio_sm_init"
+    ],
+    "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]": [
+      "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+      "pio_sm_init"
+    ],
+    "busy_wait_until": [
+      "busy_wait_until"
+    ],
+    "busy_wait_us": [
+      "busy_wait_us"
+    ],
+    "clock_get_hz": [
+      "clock_get_hz"
+    ],
+    "gpio_set_function": [
+      "gpio_set_function"
+    ],
+    "joybus_port_reset": [
+      "joybus_port_reset",
+      "pio_sm_init"
+    ],
+    "hw_claim_lock": [
+      "hw_claim_lock"
+    ],
+    "hw_claim_unlock": [
+      "hw_claim_unlock"
+    ],
+    "pio_remove_program": [
+      "pio_remove_program"
+    ],
+    "hw_claim_clear": [
+      "hw_claim_clear"
+    ],
+    "pio_sm_unclaim": [
+      "pio_sm_unclaim",
+      "hw_claim_clear"
+    ],
+    "joybus_port_terminate": [
+      "joybus_port_terminate",
+      "pio_sm_unclaim",
+      "hw_claim_clear"
+    ],
+    "_pio_add_program_at_offset": [
+      "_pio_add_program_at_offset"
+    ],
+    "_pio_find_offset_for_program.isra.0": [
+      "_pio_find_offset_for_program.isra.0"
+    ],
+    "pio_add_program": [
+      "pio_add_program",
+      "_pio_add_program_at_offset"
+    ],
+    "pio_can_add_program": [
+      "pio_can_add_program",
+      "_pio_find_offset_for_program.isra.0"
+    ],
+    "hw_is_claimed": [
+      "hw_is_claimed"
+    ],
+    "hw_claim_unused_from_range": [
+      "hw_claim_unused_from_range"
+    ],
+    "pio_claim_unused_sm": [
+      "pio_claim_unused_sm",
+      "hw_claim_unused_from_range"
+    ],
+    "pio_sm_set_consecutive_pindirs": [
+      "pio_sm_set_consecutive_pindirs"
+    ],
+    "detect_boot_gamecube(unsigned long)": [
+      "detect_boot_gamecube(unsigned long)",
+      "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+      "pio_sm_init"
+    ],
+    "detect_boot_n64(unsigned long)": [
+      "detect_boot_n64(unsigned long)",
+      "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]",
+      "pio_sm_init"
+    ],
+    "Adafruit_GFX::setFont(GFXfont const*)": [
+      "Adafruit_GFX::setFont(GFXfont const*)"
+    ],
+    "Adafruit_GFX::setTextSize(unsigned char)": [
+      "Adafruit_GFX::setTextSize(unsigned char)"
+    ],
+    "Adafruit_SSD1306::clearDisplay()": [
+      "Adafruit_SSD1306::clearDisplay()",
+      "__wrap_memset"
+    ],
+    "TwoWire::beginTransmission(unsigned char)": [
+      "TwoWire::beginTransmission(unsigned char)"
+    ],
+    "gpio_set_pulls": [
+      "gpio_set_pulls"
+    ],
+    "i2c_set_baudrate": [
+      "i2c_set_baudrate",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "i2c_init": [
+      "i2c_init",
+      "i2c_set_baudrate",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "i2c_set_slave_mode": [
+      "i2c_set_slave_mode"
+    ],
+    "TwoWire::begin()": [
+      "TwoWire::begin()",
+      "i2c_init",
+      "i2c_set_baudrate",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "__clearADCPin(unsigned char)": [
+      "__clearADCPin(unsigned char)"
+    ],
+    "gpio_init": [
+      "gpio_init",
+      "gpio_set_function"
+    ],
+    "gpio_set_drive_strength": [
+      "gpio_set_drive_strength"
+    ],
+    "__pinMode": [
+      "__pinMode",
+      "gpio_init",
+      "gpio_set_function"
+    ],
+    "i2c_deinit": [
+      "i2c_deinit"
+    ],
+    "irq_is_enabled": [
+      "irq_is_enabled"
+    ],
+    "irq_set_mask_enabled": [
+      "irq_set_mask_enabled"
+    ],
+    "irq_set_enabled": [
+      "irq_set_enabled"
+    ],
+    "set_raw_irq_handler_and_unlock": [
+      "set_raw_irq_handler_and_unlock"
+    ],
+    "irq_remove_handler": [
+      "irq_remove_handler",
+      "irq_set_enabled"
+    ],
+    "TwoWire::end()": [
+      "TwoWire::end()",
+      "irq_remove_handler",
+      "irq_set_enabled"
+    ],
+    "TwoWire::setClock(unsigned long)": [
+      "TwoWire::setClock(unsigned long)",
+      "i2c_set_baudrate",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "TwoWire::_handleTimeout(bool)": [
+      "TwoWire::_handleTimeout(bool)",
+      "TwoWire::begin()",
+      "i2c_init",
+      "i2c_set_baudrate",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "__digitalRead": [
+      "__digitalRead"
+    ],
+    "__digitalWrite": [
+      "__digitalWrite",
+      "gpio_set_function"
+    ],
+    "_probe(int, unsigned char, unsigned char, int)": [
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "check_single_timeout_us": [
+      "check_single_timeout_us"
+    ],
+    "i2c_write_blocking_internal": [
+      "i2c_write_blocking_internal",
+      "check_single_timeout_us"
+    ],
+    "init_single_timeout_until": [
+      "init_single_timeout_until"
+    ],
+    "i2c_write_blocking_until": [
+      "i2c_write_blocking_until",
+      "i2c_write_blocking_internal",
+      "check_single_timeout_us"
+    ],
+    "TwoWire::endTransmission(bool)": [
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "TwoWire::endTransmission()": [
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "TwoWire::write(unsigned char)": [
+      "TwoWire::write(unsigned char)"
+    ],
+    "TwoWire::write(unsigned char const*, unsigned int)": [
+      "TwoWire::write(unsigned char const*, unsigned int)",
+      "TwoWire::write(unsigned char)"
+    ],
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)": [
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]": [
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "Adafruit_SSD1306::display()": [
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "Adafruit_GFX::startWrite()": [
+      "Adafruit_GFX::startWrite()"
+    ],
+    "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]": [
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)": [
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_SSD1306::drawPixel(short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::writePixel(short, short, unsigned short)": [
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)": [
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::write(unsigned char)": [
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "arduino::Print::write(unsigned char const*, unsigned int)": [
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "strlen": [
+      "strlen"
+    ],
+    "arduino::Print::println(char const*)": [
+      "arduino::Print::println(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "arduino::Print::printNumber(unsigned long, unsigned char)": [
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "arduino::Print::println(unsigned char, int)": [
+      "arduino::Print::println(unsigned char, int)",
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)": [
+      "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "arduino::Print::print(char const*)": [
+      "arduino::Print::print(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)": [
+      "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "AboutMenu::AboutMenu(_Config&)": [
+      "AboutMenu::AboutMenu(_Config&)"
+    ],
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const"
+    ],
+    "dma_claim_unused_channel": [
+      "dma_claim_unused_channel",
+      "hw_claim_unused_from_range"
+    ],
+    "irq_get_vtable_handler": [
+      "irq_get_vtable_handler"
+    ],
+    "irq_set_exclusive_handler": [
+      "irq_set_exclusive_handler"
+    ],
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+      "__wrap___aeabi_f2uiz"
+    ],
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)": [
+      "CFastLED::addLeds(CLEDController*, CRGB*, int, int)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()",
+      "__wrap___aeabi_f2uiz"
+    ],
+    "CFastLED::setMaxRefreshRate(unsigned short, bool)": [
+      "CFastLED::setMaxRefreshRate(unsigned short, bool)",
+      "____wrap___aeabi_idiv_veneer"
+    ],
+    "__wrap___getreent": [
+      "__wrap___getreent"
+    ],
+    "__errno": [
+      "__errno"
+    ],
+    "__malloc_lock": [
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "__malloc_unlock": [
+      "__malloc_unlock",
+      "__retarget_lock_release_recursive"
+    ],
+    "_sbrk": [
+      "_sbrk"
+    ],
+    "_sbrk_r": [
+      "_sbrk_r"
+    ],
+    "_malloc_trim_r": [
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "_free_r": [
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "_malloc_r": [
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "_calloc_r": [
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "calloc": [
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "interrupts": [
+      "interrupts"
+    ],
+    "noInterrupts": [
+      "noInterrupts"
+    ],
+    "__wrap_calloc": [
+      "__wrap_calloc",
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "free": [
+      "free",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "__wrap_free": [
+      "__wrap_free",
+      "free",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "micros": [
+      "micros"
+    ],
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)": [
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "__wrap_calloc",
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": [
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "__wrap_calloc",
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "CLEDController::size()": [
+      "CLEDController::size()"
+    ],
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)": [
+      "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "millis": [
+      "millis",
+      "____wrap___aeabi_uidiv_veneer"
+    ],
+    "CFastLED::show(unsigned char)": [
+      "CFastLED::show(unsigned char)",
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "__wrap_calloc",
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "CommunicationBackend::BackendId()": [
+      "CommunicationBackend::BackendId()"
+    ],
+    "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)": [
+      "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)"
+    ],
+    "CommunicationBackend::CurrentGameMode()": [
+      "CommunicationBackend::CurrentGameMode()"
+    ],
+    "CommunicationBackend::SetGameMode(InputMode*)": [
+      "CommunicationBackend::SetGameMode(InputMode*)"
+    ],
+    "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)"
+    ],
+    "InputMode::GetConfig()": [
+      "InputMode::GetConfig()"
+    ],
+    "PackageStorageFence::MutationFenced()": [
+      "PackageStorageFence::MutationFenced()"
+    ],
+    "ProfileStore::Count() const": [
+      "ProfileStore::Count() const"
+    ],
+    "__cxa_guard_acquire": [
+      "__cxa_guard_acquire"
+    ],
+    "__cxa_guard_release": [
+      "__cxa_guard_release"
+    ],
+    "malloc": [
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "__wrap_malloc": [
+      "__wrap_malloc",
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "operator new[](unsigned int)": [
+      "operator new[](unsigned int)",
+      "__wrap_malloc",
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "operator new[](unsigned int, std::nothrow_t const&)": [
+      "operator new[](unsigned int, std::nothrow_t const&)",
+      "operator new[](unsigned int)",
+      "__wrap_malloc",
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "ProfileStore::EntryAt(unsigned int) const": [
+      "ProfileStore::EntryAt(unsigned int) const"
+    ],
+    "ProfileStore::IsReady() const": [
+      "ProfileStore::IsReady() const"
+    ],
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)": [
+      "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)",
+      "ProfileStore::EntryAt(unsigned int) const"
+    ],
+    "strlcpy": [
+      "strlcpy"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "operator new[](unsigned int, std::nothrow_t const&)",
+      "operator new[](unsigned int)",
+      "__wrap_malloc",
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)",
+      "operator new[](unsigned int, std::nothrow_t const&)",
+      "operator new[](unsigned int)",
+      "__wrap_malloc",
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)": [
+      "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)"
+    ],
+    "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)": [
+      "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)",
+      "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)"
+    ],
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)": [
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "CommunicationBackend::GetInputs()": [
+      "CommunicationBackend::GetInputs()"
+    ],
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "arduino::Print::print(char const*)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)": [
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)": [
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)": [
+      "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::fillScreen(unsigned short)": [
+      "Adafruit_GFX::fillScreen(unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "Adafruit_GFX::setRotation(unsigned char)": [
+      "Adafruit_GFX::setRotation(unsigned char)"
+    ],
+    "Adafruit_SSD1306::invertDisplay(bool)": [
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)": [
+      "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)"
+    ],
+    "profile_selection::FindEntry(ProfileStore const&, unsigned long)": [
+      "profile_selection::FindEntry(ProfileStore const&, unsigned long)",
+      "ProfileStore::EntryAt(unsigned int) const"
+    ],
+    "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)": [
+      "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)",
+      "profile_selection::FindEntry(ProfileStore const&, unsigned long)",
+      "ProfileStore::EntryAt(unsigned int) const"
+    ],
+    "arduino::Print::availableForWrite()": [
+      "arduino::Print::availableForWrite()"
+    ],
+    "arduino::Print::flush()": [
+      "arduino::Print::flush()"
+    ],
+    "arduino::Print::print(char)": [
+      "arduino::Print::print(char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)": [
+      "Adafruit_GFX::drawCircle(short, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)": [
+      "Adafruit_GFX::fillCircle(short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "ProfileStore::ActiveId() const": [
+      "ProfileStore::ActiveId() const"
+    ],
+    "ProfileStore::ActiveProfile() const": [
+      "ProfileStore::ActiveProfile() const"
+    ],
+    "ProfileStore::IsReadOnlyRecovery() const": [
+      "ProfileStore::IsReadOnlyRecovery() const"
+    ],
+    "strnlen": [
+      "strnlen"
+    ],
+    "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)": [
+      "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)"
+    ],
+    "ultimate_native::Lease(_UltimateProfile const&)": [
+      "ultimate_native::Lease(_UltimateProfile const&)"
+    ],
+    "current_profile_label(InputMode const*, _CommunicationBackendId)": [
+      "current_profile_label(InputMode const*, _CommunicationBackendId)",
+      "ProfileStore::EntryAt(unsigned int) const"
+    ],
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "IntegratedDisplay::SetDisplayMode(_DisplayModeId)": [
+      "IntegratedDisplay::SetDisplayMode(_DisplayModeId)"
+    ],
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "setup1::{lambda()#1}::_FUN()": [
+      "setup1::{lambda()#1}::_FUN()",
+      "Adafruit_SSD1306::clearDisplay()",
+      "__wrap_memset"
+    ],
+    "setup1::{lambda()#2}::_FUN()": [
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "IntegratedDisplay::Clear()": [
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "IntegratedDisplay::UpdateDisplay()": [
+      "IntegratedDisplay::UpdateDisplay()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "watchdog_update": [
+      "watchdog_update"
+    ],
+    "_watchdog_enable": [
+      "_watchdog_enable"
+    ],
+    "watchdog_reboot": [
+      "watchdog_reboot",
+      "_watchdog_enable"
+    ],
+    "reboot_firmware()": [
+      "reboot_firmware()",
+      "watchdog_reboot",
+      "_watchdog_enable"
+    ],
+    "dcd_disconnect": [
+      "dcd_disconnect"
+    ],
+    "tud_disconnect": [
+      "tud_disconnect"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "CFastLED::operator[](int)": [
+      "CFastLED::operator[](int)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)"
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "delay": [
+      "delay",
+      "sleep_ms"
+    ],
+    "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "delay",
+      "sleep_ms"
+    ],
+    "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)"
+    ],
+    "profile_selection::Request(unsigned long)": [
+      "profile_selection::Request(unsigned long)"
+    ],
+    "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)"
+    ],
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)": [
+      "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)"
+    ],
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "profile_selection::Pending()": [
+      "profile_selection::Pending()"
+    ],
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+    ],
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+    ],
+    "mutex_enter_blocking": [
+      "mutex_enter_blocking"
+    ],
+    "__mutex_enter_blocking_veneer": [
+      "__mutex_enter_blocking_veneer",
+      "mutex_enter_blocking"
+    ],
+    "multicore_fifo_push_blocking_inline": [
+      "multicore_fifo_push_blocking_inline"
+    ],
+    "multicore_fifo_push_blocking": [
+      "multicore_fifo_push_blocking"
+    ],
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+    ],
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": [
+      "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)"
+    ],
+    "IntegratedDisplay::HandleControls(DisplayMode*)": [
+      "IntegratedDisplay::HandleControls(DisplayMode*)",
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "CommunicationBackend::GetOutputs()": [
+      "CommunicationBackend::GetOutputs()"
+    ],
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)": [
+      "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)"
+    ],
+    "arduino::Print::print(int, int)": [
+      "arduino::Print::print(int, int)",
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)": [
+      "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)"
+    ],
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)",
+      "Adafruit_GFX::writePixel(short, short, unsigned short)",
+      "Adafruit_SSD1306::drawPixel(short, short, unsigned short)"
+    ],
+    "arduino::Print::print(unsigned char, int)": [
+      "arduino::Print::print(unsigned char, int)",
+      "arduino::Print::printNumber(unsigned long, unsigned char)",
+      "arduino::Print::write(unsigned char const*, unsigned int)",
+      "Adafruit_GFX::write(unsigned char)",
+      "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)",
+      "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)",
+      "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)",
+      "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]"
+    ],
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": [
+      "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+      "Adafruit_SSD1306::invertDisplay(bool)",
+      "Adafruit_SSD1306::ssd1306_command1(unsigned char)",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "IntegratedDisplay::SendReport()": [
+      "IntegratedDisplay::SendReport()",
+      "IntegratedDisplay::HandleControls(DisplayMode*)",
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)": [
+      "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)"
+    ],
+    "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)"
+    ],
+    "RemapMenu::RemapMenu()": [
+      "RemapMenu::RemapMenu()"
+    ],
+    "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)": [
+      "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)"
+    ],
+    "mutex_exit": [
+      "mutex_exit"
+    ],
+    "__mutex_exit_veneer": [
+      "__mutex_exit_veneer"
+    ],
+    "atexit": [
+      "atexit"
+    ],
+    "operator new(unsigned int)": [
+      "operator new(unsigned int)",
+      "__wrap_malloc",
+      "malloc",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "setup1": [
+      "setup1",
+      "IntegratedDisplay::SendReport()",
+      "IntegratedDisplay::HandleControls(DisplayMode*)",
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)": [
+      "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)"
+    ],
+    "hsv2rgb_rainbow(CHSV const&, CRGB&)": [
+      "hsv2rgb_rainbow(CHSV const&, CRGB&)"
+    ],
+    "NeoPixelBackend<(unsigned char)11, 76>::SendReport()": [
+      "NeoPixelBackend<(unsigned char)11, 76>::SendReport()",
+      "CFastLED::show(unsigned char)",
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "__wrap_calloc",
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ],
+    "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)": [
+      "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)",
+      "__wrap___aeabi_memcpy"
+    ],
+    "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)": [
+      "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)"
+    ],
+    "native_metrics::ServiceCore(unsigned int)": [
+      "native_metrics::ServiceCore(unsigned int)",
+      "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)"
+    ],
+    "watchdog_caused_reboot": [
+      "watchdog_caused_reboot"
+    ],
+    "loop1": [
+      "loop1",
+      "IntegratedDisplay::SendReport()",
+      "IntegratedDisplay::HandleControls(DisplayMode*)",
+      "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)",
+      "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)",
+      "IntegratedDisplay::Clear()",
+      "setup1::{lambda()#2}::_FUN()",
+      "Adafruit_SSD1306::display()",
+      "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]",
+      "TwoWire::endTransmission()",
+      "TwoWire::endTransmission(bool)",
+      "_probe(int, unsigned char, unsigned char, int)",
+      "sleep_us"
+    ],
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": [
+      "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)",
+      "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)",
+      "__wrap_calloc",
+      "calloc",
+      "_calloc_r",
+      "_malloc_r",
+      "_free_r",
+      "_malloc_trim_r",
+      "__malloc_lock",
+      "__retarget_lock_acquire_recursive"
+    ]
+  },
+  "all_function_bounds": {
+    "time_us_64": 0,
+    "__time_us_64_veneer": 4,
+    "joybus_receive_byte": 0,
+    "joybus_receive_bytes": 60,
+    "__joybus_receive_bytes_veneer": 64,
+    "pio_sm_init": 16,
+    "bool boot_joybus::SendBounded<(anonymous namespace)::BootJoybusPort>((anonymous namespace)::BootJoybusPort&, unsigned char const*, unsigned int, unsigned long) [clone .constprop.0]": 72,
+    "busy_wait_until": 0,
+    "busy_wait_us": 16,
+    "clock_get_hz": 0,
+    "gpio_set_function": 8,
+    "joybus_port_reset": 32,
+    "hw_claim_lock": 0,
+    "hw_claim_unlock": 0,
+    "pio_remove_program": 16,
+    "hw_claim_clear": 16,
+    "pio_sm_unclaim": 24,
+    "joybus_port_terminate": 32,
+    "_pio_add_program_at_offset": 32,
+    "_pio_find_offset_for_program.isra.0": 8,
+    "pio_add_program": 56,
+    "pio_can_add_program": 24,
+    "hw_is_claimed": 0,
+    "hw_claim_unused_from_range": 32,
+    "pio_claim_unused_sm": 48,
+    "pio_sm_set_consecutive_pindirs": 40,
+    "detect_boot_gamecube(unsigned long)": 168,
+    "detect_boot_n64(unsigned long)": 168,
+    "Adafruit_GFX::setFont(GFXfont const*)": 0,
+    "Adafruit_GFX::setTextSize(unsigned char)": 0,
+    "Adafruit_SSD1306::clearDisplay()": 16,
+    "TwoWire::beginTransmission(unsigned char)": 0,
+    "gpio_set_pulls": 0,
+    "i2c_set_baudrate": 104,
+    "i2c_init": 120,
+    "i2c_set_slave_mode": 12,
+    "TwoWire::begin()": 136,
+    "__clearADCPin(unsigned char)": 0,
+    "gpio_init": 16,
+    "gpio_set_drive_strength": 0,
+    "__pinMode": 40,
+    "i2c_deinit": 0,
+    "irq_is_enabled": 0,
+    "irq_set_mask_enabled": 0,
+    "irq_set_enabled": 8,
+    "set_raw_irq_handler_and_unlock": 0,
+    "irq_remove_handler": 48,
+    "TwoWire::end()": 64,
+    "TwoWire::setClock(unsigned long)": 112,
+    "TwoWire::_handleTimeout(bool)": 160,
+    "__digitalRead": 0,
+    "__digitalWrite": 24,
+    "_probe(int, unsigned char, unsigned char, int)": 552,
+    "check_single_timeout_us": 8,
+    "i2c_write_blocking_internal": 56,
+    "init_single_timeout_until": 0,
+    "i2c_write_blocking_until": 120,
+    "TwoWire::endTransmission(bool)": 616,
+    "TwoWire::endTransmission()": 672,
+    "TwoWire::write(unsigned char)": 8,
+    "TwoWire::write(unsigned char const*, unsigned int)": 48,
+    "Adafruit_SSD1306::ssd1306_command1(unsigned char)": 704,
+    "Adafruit_SSD1306::ssd1306_commandList(unsigned char const*, unsigned char) [clone .constprop.2]": 712,
+    "Adafruit_SSD1306::display()": 752,
+    "Adafruit_GFX::startWrite()": 0,
+    "Adafruit_SSD1306::drawFastHLineInternal(short, short, short, unsigned short) [clone .part.0]": 32,
+    "Adafruit_SSD1306::drawFastVLine(short, short, short, unsigned short)": 64,
+    "Adafruit_GFX::writeFastVLine(short, short, short, unsigned short)": 88,
+    "Adafruit_GFX::fillRect(short, short, short, short, unsigned short)": 144,
+    "Adafruit_GFX::writeFillRect(short, short, short, short, unsigned short)": 200,
+    "Adafruit_SSD1306::drawPixel(short, short, unsigned short)": 20,
+    "Adafruit_GFX::writePixel(short, short, unsigned short)": 28,
+    "Adafruit_GFX::drawChar(short, short, unsigned char, unsigned short, unsigned short, unsigned char, unsigned char)": 336,
+    "Adafruit_GFX::write(unsigned char)": 384,
+    "arduino::Print::write(unsigned char const*, unsigned int)": 408,
+    "strlen": 0,
+    "arduino::Print::println(char const*)": 440,
+    "arduino::Print::printNumber(unsigned long, unsigned char)": 480,
+    "arduino::Print::println(unsigned char, int)": 496,
+    "(anonymous namespace)::show_boot_stage(boot_diagnostics::Stage)": 760,
+    "arduino::Print::print(char const*)": 440,
+    "(anonymous namespace)::draw_recovery_page((anonymous namespace)::BootOutcome)": 768,
+    "AboutMenu::AboutMenu(_Config&)": 0,
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::getMaxRefreshRate() const": 0,
+    "dma_claim_unused_channel": 48,
+    "irq_get_vtable_handler": 0,
+    "irq_set_exclusive_handler": 16,
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::init()": 136,
+    "CFastLED::addLeds(CLEDController*, CRGB*, int, int)": 152,
+    "CFastLED::setMaxRefreshRate(unsigned short, bool)": 72,
+    "__wrap___getreent": 0,
+    "__errno": 8,
+    "__malloc_lock": 32,
+    "__malloc_unlock": 32,
+    "_sbrk": 0,
+    "_sbrk_r": 16,
+    "_malloc_trim_r": 56,
+    "_free_r": 80,
+    "_malloc_r": 120,
+    "_calloc_r": 144,
+    "calloc": 160,
+    "interrupts": 8,
+    "noInterrupts": 16,
+    "__wrap_calloc": 176,
+    "free": 88,
+    "__wrap_free": 96,
+    "micros": 8,
+    "ClocklessController<(unsigned char)11, 33, 82, 49, (EOrder)66, 0, false, 50>::showPixels(PixelController<(EOrder)66, 1, 4294967295ul>&)": 264,
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::show(CRGB const*, int, CRGB)": 392,
+    "CLEDController::size()": 0,
+    "calculate_max_brightness_for_power_mW(unsigned char, unsigned long)": 128,
+    "millis": 72,
+    "CFastLED::show(unsigned char)": 448,
+    "CommunicationBackend::BackendId()": 0,
+    "CommunicationBackend::CommunicationBackend(_InputState&, InputSource**, unsigned int)": 12,
+    "CommunicationBackend::CurrentGameMode()": 0,
+    "CommunicationBackend::SetGameMode(InputMode*)": 0,
+    "ConfigMenu::ConfigMenu(_Config&, CommunicationBackend**, unsigned int)": 8,
+    "InputMode::GetConfig()": 0,
+    "PackageStorageFence::MutationFenced()": 0,
+    "ProfileStore::Count() const": 16,
+    "__cxa_guard_acquire": 0,
+    "__cxa_guard_release": 0,
+    "malloc": 128,
+    "__wrap_malloc": 136,
+    "operator new[](unsigned int)": 144,
+    "operator new[](unsigned int, std::nothrow_t const&)": 152,
+    "ProfileStore::EntryAt(unsigned int) const": 32,
+    "ProfileStore::IsReady() const": 0,
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)": 88,
+    "strlcpy": 16,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)": 208,
+    "GlyphConfigMenu::GlyphConfigMenu(_Config&, CommunicationBackend**, unsigned int)": 224,
+    "InputDisplay::InputDisplay(_InputViewerButton*, unsigned int, _CommunicationBackendId)": 8,
+    "IntegratedDisplay::IntegratedDisplay(_InputState&, Adafruit_GFX&, void (*)(), void (*)(), _DisplayControls, DisplayMode**, unsigned int)": 28,
+    "Adafruit_GFX::drawBitmap(short, short, unsigned char const*, short, short, unsigned short)": 100,
+    "CommunicationBackend::GetInputs()": 0,
+    "AboutMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 464,
+    "Adafruit_SSD1306::drawFastHLine(short, short, short, unsigned short)": 64,
+    "Adafruit_GFX::writeFastHLine(short, short, short, unsigned short)": 88,
+    "Adafruit_GFX::writeLine(short, short, short, short, unsigned short)": 84,
+    "Adafruit_GFX::drawLine(short, short, short, short, unsigned short)": 128,
+    "Adafruit_GFX::drawRect(short, short, short, short, unsigned short)": 144,
+    "Adafruit_GFX::fillScreen(unsigned short)": 192,
+    "Adafruit_GFX::setRotation(unsigned char)": 0,
+    "Adafruit_SSD1306::invertDisplay(bool)": 720,
+    "ConfigMenu::ResolveItem(_MenuPage*, unsigned int)": 0,
+    "profile_selection::FindEntry(ProfileStore const&, unsigned long)": 48,
+    "DefaultConfigMenu::ResolveItem(_MenuPage*, unsigned int)": 72,
+    "arduino::Print::availableForWrite()": 0,
+    "arduino::Print::flush()": 0,
+    "arduino::Print::print(char)": 416,
+    "ConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 792,
+    "Adafruit_GFX::drawCircle(short, short, short, unsigned short)": 100,
+    "Adafruit_GFX::fillCircle(short, short, short, unsigned short)": 176,
+    "ProfileStore::ActiveId() const": 0,
+    "ProfileStore::ActiveProfile() const": 0,
+    "ProfileStore::IsReadOnlyRecovery() const": 0,
+    "strnlen": 0,
+    "ultimate_native::IsOwnedView(ultimate_native::PreparedView const&)": 0,
+    "ultimate_native::Lease(_UltimateProfile const&)": 0,
+    "current_profile_label(InputMode const*, _CommunicationBackendId)": 64,
+    "InputDisplay::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 768,
+    "IntegratedDisplay::SetDisplayMode(_DisplayModeId)": 0,
+    "AboutMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 8,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#1}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 8,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#2}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 736,
+    "setup1::{lambda()#1}::_FUN()": 24,
+    "setup1::{lambda()#2}::_FUN()": 760,
+    "IntegratedDisplay::Clear()": 768,
+    "IntegratedDisplay::UpdateDisplay()": 768,
+    "watchdog_update": 0,
+    "_watchdog_enable": 8,
+    "watchdog_reboot": 24,
+    "reboot_firmware()": 32,
+    "dcd_disconnect": 0,
+    "tud_disconnect": 8,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#3}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 784,
+    "CFastLED::operator[](int)": 0,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#4}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 808,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#5}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 0,
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)::{lambda(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)#6}::_FUN(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 776,
+    "delay": 528,
+    "DefaultConfigMenu::SetDefaultMode(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 544,
+    "DefaultConfigMenu::SetSocdType(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 0,
+    "profile_selection::Request(unsigned long)": 0,
+    "DefaultConfigMenu::SetStoredProfile(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 8,
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": 736,
+    "GlyphConfigMenu::ReturnToDashboard(IntegratedDisplay*)": 8,
+    "ConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 832,
+    "profile_selection::Pending()": 0,
+    "DefaultConfigMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 856,
+    "InputDisplay::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 8,
+    "MenuButtonHints::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 8,
+    "mutex_enter_blocking": 12,
+    "__mutex_enter_blocking_veneer": 16,
+    "multicore_fifo_push_blocking_inline": 0,
+    "multicore_fifo_push_blocking": 8,
+    "OopsieMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 784,
+    "RemapMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 0,
+    "RgbBrightnessMenu::HandleControls(IntegratedDisplay*, _DisplayControls const&, _Button)": 8,
+    "IntegratedDisplay::HandleControls(DisplayMode*)": 880,
+    "CommunicationBackend::GetOutputs()": 0,
+    "MenuButtonHints::UpdateButtonHints(IntegratedDisplay*)": 16,
+    "arduino::Print::print(int, int)": 496,
+    "currentInputIcon(_OutputState, _CommunicationBackendId, bool, bool)": 32,
+    "MenuButtonHints::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 768,
+    "OopsieMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 776,
+    "RemapMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 124,
+    "arduino::Print::print(unsigned char, int)": 488,
+    "RgbBrightnessMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)": 752,
+    "IntegratedDisplay::SendReport()": 904,
+    "MenuButtonHints::MenuButtonHints(CommunicationBackend**, unsigned int)": 16,
+    "OopsieMenu::OopsieMenu(_Config&, CommunicationBackend**, unsigned int)": 8,
+    "RemapMenu::RemapMenu()": 0,
+    "RgbBrightnessMenu::RgbBrightnessMenu(_Config&)": 0,
+    "mutex_exit": 0,
+    "__mutex_exit_veneer": 4,
+    "atexit": 0,
+    "operator new(unsigned int)": 144,
+    "setup1": 960,
+    "InputDisplay::UpdateButtonLayout(_InputViewerButton*, unsigned int)": 0,
+    "hsv2rgb_rainbow(CHSV const&, CRGB&)": 20,
+    "NeoPixelBackend<(unsigned char)11, 76>::SendReport()": 480,
+    "NeoPixelBackend<(unsigned char)11, 76>::SetGameMode(InputMode*)": 60,
+    "native_metrics::(anonymous namespace)::Publish(unsigned int, NativeMetricScanState&)": 20,
+    "native_metrics::ServiceCore(unsigned int)": 68,
+    "watchdog_caused_reboot": 0,
+    "loop1": 976,
+    "CPixelLEDController<(EOrder)66, 1, 4294967295ul>::showColor(CRGB const&, int, CRGB)": 392
+  }
+}

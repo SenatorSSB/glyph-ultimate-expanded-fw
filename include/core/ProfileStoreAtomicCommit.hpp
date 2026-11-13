@@ -7,6 +7,7 @@
 #include <cstring>
 
 #include "core/ProfileStoreStorage.hpp"
+#include "core/PackageStorageFence.hpp"
 
 class ProfileStoreAtomicCommit {
   public:
@@ -23,6 +24,10 @@ class ProfileStoreAtomicCommit {
                                     ProfileStoreIoStage *failure_stage = nullptr,
                                     ProfileStorePublicationKind kind = ProfileStorePublicationKind::Record) {
         if (failure_stage) *failure_stage = ProfileStoreIoStage::None;
+        // This historical delete-before-rename primitive is never a package
+        // publisher. Even injected adapters require the current legacy scope.
+        if (!PackageStorageFence::PermitLegacy(CheckedStorage::Operation::OpenWrite,temporary))
+            return false;
         // One synchronous core0 transaction owns this bounded scratch through
         // validation. Never overwrite the expected bytes during readback: a
         // stale but internally valid record/root is not the requested commit.
@@ -47,11 +52,14 @@ class ProfileStoreAtomicCommit {
         // publication has no destination, so do not require a strict
         // filesystem remove of an absent file. Losing an existing inactive
         // root before a failed rename leaves the current root intact.
-        if (storage.Exists(destination) && !storage.Remove(destination)) {
+        if (storage.Exists(destination) &&
+            (!PackageStorageFence::PermitLegacy(CheckedStorage::Operation::Remove,destination)||
+             !storage.Remove(destination))) {
             if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordDestRemove);
             return false;
         }
-        if (!storage.Rename(temporary, destination)) {
+        if (!PackageStorageFence::PermitLegacy(CheckedStorage::Operation::Rename,temporary,destination)||
+            !storage.Rename(temporary, destination)) {
             if (failure_stage) *failure_stage = ProfileStoreStage(kind, ProfileStoreIoStage::RecordRename);
             return false;
         }

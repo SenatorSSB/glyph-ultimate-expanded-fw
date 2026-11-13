@@ -80,7 +80,7 @@ def main():
                 target.write_bytes(content)
             validation = [ROOT / p for p in ["src/core/config_validation.cpp", "src/core/config_button_validation.cpp",
                           "src/core/config_usb_default_validation.cpp", "src/core/config_rgb_target_validation.cpp",
-                          "config/glyph/common/src/glyph_config_validation.cpp"]]
+                          "config/glyph/common/src/glyph_config_validation.cpp", "src/modes/UltimateNativeProfile.cpp"]]
             for name, source_root, extra in [("frozen_candidate", frozen, ["-DLIVENESS_FROZEN_ARM=1"]),
                                              ("current_candidate", ROOT, [])]:
                 probe = temp / (name + "_mounted.cpp")

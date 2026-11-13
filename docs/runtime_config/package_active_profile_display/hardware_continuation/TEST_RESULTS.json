@@ -1,0 +1,10 @@
+{
+  "result": "PASS_OFFLINE_ACTUAL_CONTINUATION_EXECUTOR",
+  "test_methods": 11,
+  "scope": "Actual Runner and full CLI begin+five stages,36 exchanges,3 closed sessions; actual captured before/raw READ fixtures; explicit IO doubles only. Identity/transport/schema/preservation/visual/stage/authority/terminal failures covered.",
+  "log_sha256": "6c32b2ae4c23c161a000cc24185a94ffd85308923ff1f095037ea745a33bbbe2",
+  "device_access": false,
+  "firmware_rebuilds": 0,
+  "new_installations": 0,
+  "v2_seal_mismatch_regressions": "Both fixed v2 packet and preparation hash mismatches stop before old dependency verification."
+}
