@@ -1,0 +1,22 @@
+{
+  "result": "PASS_OFFLINE_COMBINED_EVIDENCE_INTEGRITY",
+  "new_exchanges": 36,
+  "inherited_exchanges": 34,
+  "new_sessions_closed": 3,
+  "before_after_Config": "BYTE_EQUAL",
+  "before_after_directory": "BYTE_EQUAL_27_ENTRIES",
+  "before_after_all27_wrappers": "BYTE_EQUAL",
+  "metadata_and_payload_schemas": "INDEPENDENTLY_UNCHANGED",
+  "managed54": "PRESERVED_UNSELECTED",
+  "strict_runtime_first_and_final": "PASS_NATIVE53_REV1_SCHEMA5_PAYLOAD_DIGEST",
+  "dashboard": "OWNER_CONFIRMED",
+  "InputViewer_name": "NOT_VISIBLE_NOT_VERIFIED",
+  "visible_viewer_name_PASS": false,
+  "machine_build_attestation": false,
+  "private_files": 529,
+  "private_bytes": 533189,
+  "inventory_sha256": "d74b713416fe18f0c69a932e15e72f3a9df022558bd0346979b2a1d55fc17d37",
+  "older_seals_and_originals": "ALL_MATCH",
+  "terminal_marker_present": false,
+  "verifier_device_access": false
+}
