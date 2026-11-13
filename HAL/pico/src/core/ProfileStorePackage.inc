@@ -275,6 +275,10 @@ __attribute__((noinline)) bool QueryObservedPackage(NamespaceReader &reader,cons
     for(unsigned k=0;k<2;++k) {
         const auto &old=w.roots[k].intent;
         if(old.operation>=17 && old.token==token && old.terminal==3) {
+            if(std::memcmp(old.digest,digest,32)) {
+                ClearPackageReceipt(r); r.status=ProfileStoreStatus_PROFILE_STORE_CONFLICT;
+                return true;
+            }
             IntentReceipt(r,old,w,Logical::Committed);
             return true;
         }

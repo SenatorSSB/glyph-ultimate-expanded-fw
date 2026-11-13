@@ -462,7 +462,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::FinalizeSetConfig(bool saved
 
     // Reference receipts are firmware-owned. A whole-Config client cannot
     // forge a successful transaction receipt or erase its query evidence.
-    _config = candidate;
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+    if (!_package_reboot_pending)
+#endif
+        _config = candidate;
 
     WritePacket(CMD_SUCCESS, nullptr, 0);
     return true;
@@ -704,6 +707,9 @@ __attribute__((noinline)) bool ConfiguratorBackend::HandlePackageRequest(size_t 
     if (!profile_store.DispatchPackage(phase, package_response)) return false;
     if (package_response.protocol_version != phase.request.protocol_version ||
         package_response.request_token != phase.request.request_token) return false;
+    if (glyph_package::LifecycleOperation(phase.request.operation) &&
+        package_response.logical == PackageLogicalDisposition_COMMITTED)
+        _package_reboot_pending = true;
     if (phase.request.operation == PackageOperation_CREATE_PACKAGE &&
         package_response.status == PROFILE_STORE_OK &&
         package_response.logical == PackageLogicalDisposition_COMMITTED &&
@@ -725,7 +731,10 @@ __attribute__((noinline)) bool ConfiguratorBackend::RefreshPackageConfig() {
         persistence.ObservePackageConfig(Persistence::PackageConfigFile::Current, candidate, facts, valid) != Persistence::LoadResult::Loaded ||
         !valid || facts.crc != observed.config_generation ||
         std::memcmp(facts.sha, observed.config_sha, sizeof(facts.sha))) return false;
-    _config = candidate;
+    // Runtime mode objects retain pointers into _config. Following lifecycle
+    // compaction or replacement even a later CREATE must leave those rows
+    // untouched until boot. GET_CONFIG always streams the persisted image.
+    if (!_package_reboot_pending) _config = candidate;
     return true;
 }
 // Encoding scratch is not retained through any persistent writer call.
