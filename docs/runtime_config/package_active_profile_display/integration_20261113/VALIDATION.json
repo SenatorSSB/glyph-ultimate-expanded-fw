@@ -110,9 +110,15 @@
   },
   "initial_recording_setup_issue": "Direct importlib custody-helper load lacked tools on sys.path; corrected by ordinary tools import. No firmware/source change and no artifact/private-original mutation.",
   "docs_navigation": "PASS",
-  "diff_check": "PASS",
+  "diff_check": "PASS_INTEGRATION_DOCUMENTATION_SUCCESSOR_AND_WORKING_DIFF",
   "firmware_builds": 0,
   "controller_access": false,
   "host_hardware_executors_run": false,
-  "Senscope_source_repins": 0
+  "Senscope_source_repins": 0,
+  "whole_canonical_delta_whitespace": {
+    "result": "INHERITED_FROZEN_GENERATED_FIXTURE_DEBT",
+    "exit_code": 2,
+    "diagnostic": "tools/fixtures/glyph_package_v1/historical_config/config.pb.c:82: new blank line at EOF.\n",
+    "disposition": "Do not edit exact tested non-doc inputs; no firmware behavior/source-equivalence resolution needed."
+  }
 }

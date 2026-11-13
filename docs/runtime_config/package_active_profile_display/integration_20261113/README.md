@@ -102,3 +102,8 @@ and no new aggregate/CI PASS is claimed. Canonical publication requires the focu
 independent review, unchanged non-doc correspondence, fresh live B and normal
 non-force fast-forward. The final exact canonical SHA is verified and reported by
 the publishing agent; this document does not embed its own future commit SHA.
+
+The integration documentation diff passes whitespace checks. The whole B-to-F
+source range retains a pre-existing generated config.pb.c:82 extra-blank-line
+diagnostic. Its exact tested bytes are preserved; no blanket whole-range
+whitespace PASS or CI PASS is claimed.
