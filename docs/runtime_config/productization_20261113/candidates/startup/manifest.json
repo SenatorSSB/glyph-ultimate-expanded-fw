@@ -1,0 +1,31 @@
+{
+  "source": "d19c8a004ecfa2a66750e0d788af33459a450c64",
+  "classification": "isolated diagnostic candidate; physical acceptance pending",
+  "files": {
+    "firmware.uf2": {
+      "stored": "firmware.uf2",
+      "bytes": 1300480,
+      "sha256": "964db9027b6da712c1c8e3eb421c4dbb7e45c5d2778f157c89526f0d3809459c"
+    },
+    "firmware.elf": {
+      "stored": "firmware.elf.gz",
+      "bytes": 5760300,
+      "sha256": "f03724cabcb1f14ac90a7b607023d337b1de037e4c9ddda17164ec668d83a32f"
+    },
+    "firmware.bin": {
+      "stored": "firmware.bin.gz",
+      "bytes": 650036,
+      "sha256": "645f6927a64da87ca8ca7d6b5a327b61071963e16bb2004123232e0a56d23582"
+    },
+    "firmware.map": {
+      "stored": "firmware.map.gz",
+      "bytes": 3798901,
+      "sha256": "a94f6999cf897b4a145804ccc353e2f8c9d82035e10d47fe3252a6475cc626c9"
+    },
+    "build.log": {
+      "stored": "build.log.gz",
+      "bytes": 49143,
+      "sha256": "e0aeb7868526de460e5f926f88109aa69c6f47d584701fae33a833bb50d9454e"
+    }
+  }
+}

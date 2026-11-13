@@ -1,0 +1,36 @@
+{
+  "source": "2d32ea230d716f7f65f82dd71aa4959ff4a020e0",
+  "classification": "isolated diagnostic candidate; physical acceptance pending",
+  "files": {
+    "firmware.uf2": {
+      "stored": "firmware.uf2",
+      "bytes": 1299456,
+      "sha256": "5266113ca7f1e035124f0766e5813a0a454218c32e07660b96f056878bb85589"
+    },
+    "firmware.elf": {
+      "stored": "firmware.elf.gz",
+      "bytes": 5759780,
+      "sha256": "788b603ab2133bb76cba3754dc55a7592f216da45a2835ae933340bca41317f1"
+    },
+    "firmware.bin": {
+      "stored": "firmware.bin.gz",
+      "bytes": 649492,
+      "sha256": "ff0d84267d2bc406a788af29610e7aef1347c418c382c30bbbe7c33fdcf510bf"
+    },
+    "firmware.map": {
+      "stored": "firmware.map.gz",
+      "bytes": 4110144,
+      "sha256": "ee2c88a316dd5de62ce59089829b8a6cfaf107b4acd0ed4cc5db2e3bafd2fe5b"
+    },
+    "glyph-selection-reviewed-gate.log": {
+      "stored": "glyph-selection-reviewed-gate.log.gz",
+      "bytes": 1679,
+      "sha256": "1c7dbb6bed03808936cd3c117e99254f5a8325c94f8ed7a9d94ad890fdac5866"
+    },
+    "glyph-selection-revised-build.log": {
+      "stored": "glyph-selection-revised-build.log.gz",
+      "bytes": 48564,
+      "sha256": "d13da12835c161a28958f8eb2411343884aafbc94bde4c0dc7576b41f4c6407d"
+    }
+  }
+}
