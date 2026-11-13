@@ -1,0 +1,11 @@
+{
+  "result": "PASS_OFFLINE_ACTUAL_CONTINUATION_EXECUTOR",
+  "test_methods": 12,
+  "scope": "Actual Runner and full CLI begin+five stages,36 exchanges,3 closed sessions; actual captured before/raw READ fixtures; explicit IO doubles only. Identity/transport/schema/preservation/visual/stage/authority/terminal failures covered.",
+  "log_sha256": "79295558a0e46731f8d95edb89b16ccb372b989b292d2bafc903091e3c668ad3",
+  "device_access": false,
+  "firmware_rebuilds": 0,
+  "new_installations": 0,
+  "v2_seal_mismatch_regressions": "Both fixed v2 packet and preparation hash mismatches stop before old dependency verification.",
+  "admission_correction": "Both routes tested; wrong serial, duplicates, owned port, missing XInput screen and unsupported identifiers rejected before open/request."
+}
