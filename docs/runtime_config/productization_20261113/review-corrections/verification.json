@@ -1,0 +1,15 @@
+{
+  "source_fingerprint": "dcf4cb9718d848ccdfcc1d87e23fba63336b15e874f48d0e1622e7f41dd11fa2",
+  "tested": 6,
+  "passed": 6,
+  "failures": 0,
+  "complete": false,
+  "lifecycle_cut_cases": 108,
+  "transaction_regression_groups": 64,
+  "config_comparisons": 13,
+  "corruption_controls": 3839,
+  "committed_mismatch_episodes": 20,
+  "binary_sha256": "3cc0f3c5da7b569ad10f70e30983d4e6b74d4c74e0fc925a55623d1d530e4f69",
+  "firmware_source": "84556d904f067bda5a101e6297689239ecd04aae",
+  "hardware": "PENDING"
+}

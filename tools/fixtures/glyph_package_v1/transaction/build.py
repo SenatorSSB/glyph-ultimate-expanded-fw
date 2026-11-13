@@ -3,6 +3,26 @@
 from pathlib import Path
 import argparse,hashlib,json,os,re,subprocess,sys
 
+def profile_store_sources(repo):
+ repo=Path(repo)
+ return {repo/'HAL/pico/src/core/ProfileStore.cpp',* (repo/'HAL/pico/src/core').glob('ProfileStore*.inc')}
+
+def verify_build(repo,out):
+ repo=Path(repo).resolve();out=Path(out).resolve()
+ manifest=json.loads((out/'source-manifest.json').read_text())
+ for p in profile_store_sources(repo):
+  if str(p.relative_to(repo)) not in manifest['files']:
+   raise RuntimeError('build manifest omits compiled source; rebuild required: '+str(p))
+ for name,wanted in manifest['files'].items():
+  p=Path(name) if Path(name).is_absolute() else repo/name
+  if hashlib.sha256(p.read_bytes()).hexdigest()!=wanted:
+   raise RuntimeError('source/tool changed since build: '+str(p))
+ fingerprint=hashlib.sha256(json.dumps(manifest['files'],sort_keys=True).encode()).hexdigest()
+ if fingerprint!=manifest['fingerprint']:raise RuntimeError('build manifest fingerprint differs')
+ if hashlib.sha256((out/'package-fault-harness').read_bytes()).hexdigest()!=manifest['binary_sha256']:
+  raise RuntimeError('binary changed since build')
+ return fingerprint
+
 def build(repo,out,framework=None,nanopb=None,sanitize=True,boot_probe=False):
  repo=Path(repo).resolve();out=Path(out).resolve();out.mkdir(parents=True,exist_ok=True)
  here=Path(__file__).resolve().parent
@@ -38,7 +58,7 @@ def build(repo,out,framework=None,nanopb=None,sanitize=True,boot_probe=False):
  for p in cpp+cs:
   if not p.exists():raise FileNotFoundError(p)
  binary=out/'package-fault-harness';run([cxx,'-std=c++17',*flags,*args,*cpp,*objects,'-o',binary])
- files=set(cpp+cs+[version_header,repo/'HAL/pico/src/core/ProfileStore.cpp',repo/'HAL/pico/src/core/ProfileStorePackage.inc'])
+ files=set(cpp+cs+[version_header]) | profile_store_sources(repo)
  files.update(here.glob('*.py'))
  if boot_probe:
   files.update([here/'boot_probe.hpp',gen/'extracted_boot.inc',repo/'config/glyph/common/src/config.cpp'])
