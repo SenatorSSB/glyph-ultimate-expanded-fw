@@ -41,6 +41,32 @@ dependency claim. `branch_policy` is limited to `content_only`,
 `content_and_scope`, `named_evidence_branch`, and `not_run`, with applicability
 consistency enforced as curated metadata rather than checker-branch semantics.
 
+## Package descendants
+
+The original C023 proof runs on its exact milestone checkout. The accepted
+package correspondence runs at `f4146bedebb50559454954b8e20c9b641aeba616`.
+Current CI maintenance independently requires the same Git objects and modes
+outside its explicit host-only paths. Firmware changes produce a path inventory
+and require the current checks and applicable Mk6 build. Hardware acceptance
+remains bound to its original artifact.
+
+The manifest lists the replaced generation-bound commands and their current
+successors. Original source and results remain in Git history. Linux runs the
+current generated decoder/schema, two enum ABIs, mode binding and capacity,
+keyboard reports, USB selection, NeoPixel output, real storage and recovery,
+native table/evaluator vectors, and source mutations. A synthetic public
+package exercises production CREATE, unchanged retry, interruption and reboot.
+The full current aggregate still checks firmware input provenance, offline
+isolation, source-owned tooling and publication custody.
+
+<!-- validation-health-summary:start -->
+Current summary: manifest entries = 64; current load-bearing checks = 25.
+<!-- validation-health-summary:end -->
+
+## Historical validation records
+
+The following records describe the pre-package milestones.
+
 GP-CONFIG-010 semantic correspondence has two explicit proofs. The default
 current check requires a descendant of the reviewed canonical snapshot, exact
 accepted mode-selection and 28-table blobs, and the finite correspondence
@@ -74,9 +100,7 @@ The current source-owned contract is 28 ordered tables ending in
 `kLt1LowMagnitudeTable`, with semantic digest
 `b0082f068e0e552d479ec8ed8bf5867737a75a19e5e60aede55bafb72b883874`.
 
-<!-- validation-health-summary:start -->
-Current summary: manifest entries = 64; current load-bearing checks = 25.
-<!-- validation-health-summary:end -->
+
 
 The two repaired load-bearing baseline failures were
 `check_glyph_identity_runtime_table_source_sync.py` and

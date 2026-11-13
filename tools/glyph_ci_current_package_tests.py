@@ -34,6 +34,20 @@ def active_authority():
     authority.ensure_no_flashing_automation_changed([path.decode() for path in changed.split(b"\0") if path])
 
 
+def offline_source_tools():
+    import check_glyph_generated_source_owned_generator_contract as generator
+    import check_glyph_generated_source_owned_baseline_artifact as baseline
+    import check_glyph_generated_source_owned_artifact_install as installer
+    generator.validate_generator_behavior(generator.load_json_object(generator.INPUT_FIXTURE),
+                                         generator.load_json_object(generator.LAYOUT_SPEC_EXAMPLE))
+    baseline.validate_deterministic_generation()
+    baseline.validate_equivalence()
+    installer.validate_bridge_install_workflow(installer.validate_fixture(installer.load_json_object(installer.FIXTURE)))
+    script = ROOT / "tools/check_glyph_coordinate_native_runtime_profile_contract.py"
+    for option in ("--check-negative-fixtures", "--check-offline-pipeline", "--check-offline-export-package"):
+        subprocess.run([sys.executable, str(script), option], cwd=ROOT, check=True)
+
+
 def positive_create(temp, invoke):
     schema = ROOT / "schema/haybox"
     subprocess.run([sys.executable, "-m", "grpc_tools.protoc", "-I" + str(schema),
@@ -168,5 +182,6 @@ def run_package(temp):
 
 if __name__ == "__main__":
     active_authority()
+    offline_source_tools()
     with tempfile.TemporaryDirectory(prefix="glyph-public-package-") as scratch:
         run_package(Path(scratch))
