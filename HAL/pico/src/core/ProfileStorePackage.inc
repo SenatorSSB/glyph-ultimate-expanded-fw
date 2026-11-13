@@ -673,6 +673,9 @@ __attribute__((noinline)) bool ProfileStore::PreparePackageDispatch() {
     if(package_owner_live)return false;
     package_owner_live=true;
     if(!ObservePackageTransaction(*in.phase,*in.response))return false;
+    // Release the CREATE preparation frame entirely on lifecycle requests.
+    if(glyph_package::LifecycleOperation(in.phase->request.operation))
+        return PrepareLifecycleTransaction(*in.phase,*in.response);
     return PreparePackageTransaction(*in.phase,*in.response);
 }
 __attribute__((noinline)) void ProfileStore::FinishPackageDispatch(bool success) {
@@ -730,6 +733,10 @@ __attribute__((noinline)) bool ProfileStore::ObservePackageTransaction(glyph_pac
        std::memcmp(phase.request.expected_config_sha256,work.current.sha,32)) {
         EndClassifierOwner(); return false;
     }
+    const unsigned selected=SelectedObservedRoot(work);
+    if(!DecodeDirectory(work.roots[selected].prefix,3908,_directory,work.roots[selected].format==3)) {
+        UnavailablePackageResponse(response); EndClassifierOwner(); return false;
+    }
     ReleasePackageReader();
     return true;
 }
@@ -739,11 +746,6 @@ bool ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase &phase
     auto &work=PackageWorkspace();
     const auto &classification=work.classification;
     const unsigned selected=SelectedObservedRoot(work);
-    if(!DecodeDirectory(work.roots[selected].prefix,3908,_directory,work.roots[selected].format==3)) {
-        UnavailablePackageResponse(response); EndClassifierOwner(); return false;
-    }
-    if(glyph_package::LifecycleOperation(phase.request.operation))
-        return PrepareLifecycleTransaction(phase,response);
     response.status=ProfileStoreStatus_PROFILE_STORE_FULL;
     if(_directory->count>=64||work.current.rows>=30||work.current.rgbs>30||
        _directory->high_water_id==UINT32_MAX||classification.generation==UINT32_MAX||

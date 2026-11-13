@@ -66,9 +66,9 @@ __attribute__((noinline)) bool RetirePreviousPackageRecord() {
     size_t size=0;
     if(!package_call.storage->Probe(prepared_record.path,&size) || size>sizeof(prepared_record.record) ||
        !package_call.storage->CheckedRead(prepared_record.path,prepared_record.record,size,Kind::Record))return false;
-    uint8_t sha[32];
-    HashBytes(prepared_record.record,size,sha);
-    if(std::memcmp(sha,intent+412,32))return false;
+    // The publication readback lease has ended before retirement.
+    HashBytes(prepared_record.record,size,publication_readback);
+    if(std::memcmp(publication_readback,intent+412,32))return false;
     package_call.phase=PackageWritePhase::Garbage;
     return CheckedStorage::Remove(prepared_record.path) &&
         CheckedStorage::Stat(prepared_record.path).outcome==Outcome::NotFound;
@@ -110,11 +110,11 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     auto &mode=candidate.game_mode_configs[row];
     if(mode.managed_format!=1 || mode.ultimate_profile_id!=old.id || mode.rgb_config!=old.owned_rgb1)
         return refuse(ProfileStoreStatus_PROFILE_STORE_CONFLICT);
-    uint8_t old_sha[32];
-    if(!ReadLifecycleRecord(reader,old,state.incarnation,old_sha))
+    // Classification has returned. Reuse its retired-record digest slots until
+    // ConstructPackageIntent copies the new operation into the intent owner.
+    if(!ReadLifecycleRecord(reader,old,state.incarnation,work.old_record_sha))
         return refuse(ProfileStoreStatus_PROFILE_STORE_IO_FAILURE);
-    uint8_t old_native_sha[32];
-    HashBytes(prepared_record.record+128,prepared_record.n-128,old_native_sha);
+    HashBytes(prepared_record.record+128,prepared_record.n-128,work.old_wrapper_sha);
     std::memcpy(response.semantic_digest,work.digest,32);
     if(removing) {
         if(!DeleteOwnedRow(candidate,*_next,index,_active_id))return refuse(ProfileStoreStatus_PROFILE_STORE_CONFLICT);
@@ -203,8 +203,8 @@ bool ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase &pha
     Put16(intent+4,2);Put32(intent+8,operation);Put32(intent+72,old.revision+1);
     Put32(intent+376,candidate.game_mode_configs_count);Put32(intent+384,candidate.rgb_configs_count);
     Put32(intent+400,old.revision);Put32(intent+404,row);Put32(intent+408,old.owned_rgb1);
-    std::memcpy(intent+412,old_sha,32);
-    std::memcpy(intent+444,old_native_sha,32);
+    std::memcpy(intent+412,work.old_record_sha,32);
+    std::memcpy(intent+444,work.old_wrapper_sha,32);
     if(removing){std::memset(intent+168,0,96);std::memset(intent+328,0,32);}
     if(!IntentValid(intent))return refuse(ProfileStoreStatus_PROFILE_STORE_INVALID);
     EndClassifierOwner();

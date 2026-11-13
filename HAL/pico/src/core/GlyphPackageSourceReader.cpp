@@ -402,7 +402,8 @@ namespace {
 // them. Do not touch ConfigWriteCandidate, which may hold a pending save.
 bool ProjectLifecycleConfig(::Config &c, const package_storage::IntentFacts &i, bool before) {
     const bool erase = i.operation == 20;
-    if (c.game_mode_configs_count != (before ? i.baseline_rows : i.final_rows) ||
+    if (c.ultimate_profiles_count ||
+        c.game_mode_configs_count != (before ? i.baseline_rows : i.final_rows) ||
         c.rgb_configs_count != (before ? i.baseline_rgbs : i.final_rgbs) ||
         c.managed_sequence != (before ? i.baseline_sequence : i.sequence) ||
         c.managed_format != 1 || c.ultimate_profile_root_format != 3) return false;

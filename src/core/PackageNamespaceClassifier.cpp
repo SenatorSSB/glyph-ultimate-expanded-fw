@@ -501,8 +501,25 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   }
   if(!w.current.body_bytes||!Migration(*run_state.selected,w.current)||w.current.reference_token==Token(*run_state.selected))return result;
   if((intent.terminal!=3||run_state.baseline_prior)&&(!Eq(w.current.sha,intent.final_config)||w.current.crc!=intent.final_crc||w.current.body_bytes!=intent.config_bytes))return result;
+  run_state.next_phase=4; return result;
+ }
+ // The bounded file comparator and storage observation have separate call
+ // frames. The proof order and exclusive read-only classification are retained.
+ __attribute__((noinline)) void RunProjection(){
+  auto &run_state=w.run;
+  run_state.next_phase=0;
+  const auto &intent=w.roots[2].intent;
   if(run_state.baseline_prior && !(intent.operation==15 ? reader.AppendConfig(kPrior,kCurrent) :
-      reader.LifecycleConfig(kPrior,kCurrent,intent)))return result;
+      reader.LifecycleConfig(kPrior,kCurrent,intent)))return;
+  run_state.next_phase=5;
+ }
+ __attribute__((noinline)) Classification &RunInstalled(){
+  auto &result=w.classification;
+  auto &run_state=w.run; run_state.next_phase=0;
+  const auto &control=w.roots[2];
+  const auto &intent=control.intent;
+  auto *path=reinterpret_cast<char*>(w.read_chunk);
+  size_t n=0;
   bool superseded_present=false;
   if(LifecycleOperation(intent.operation)){
    if(!RecordPath(path,32,intent.id,intent.old_revision,false))return result;
@@ -562,6 +579,8 @@ void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owner
  if(owners.work.run.next_phase==1)classifier.RunRoots();
  if(owners.work.run.next_phase==2)classifier.RunBaseline();
  if(owners.work.run.next_phase==3)classifier.RunFinal();
+ if(owners.work.run.next_phase==4)classifier.RunProjection();
+ if(owners.work.run.next_phase==5)classifier.RunInstalled();
  FinishClassification(reader,owners);
  reader.EndClassification();
 }
