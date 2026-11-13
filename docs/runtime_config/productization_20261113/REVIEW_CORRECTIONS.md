@@ -18,7 +18,7 @@ Owner follow-up explicitly authorizes these three host-tooling/documentation cor
 - Candidate verifier: 2,591 UF2 blocks and663,212 binary bytes; ELF/BIN/map hashes verified. Firmware inputs equal84556d90; all retained candidate files unchanged from the handoff parent.
 - Semantic promotion gate: passed using the existing Senscope Python environment; 37 sources/212 memberships unchanged.
 
-The full clean-commit `npm run ci` result is recorded in the verification successor before publication. The first attempt stopped at the default Python3.15 missing pytest; the existing Senscope `.venv/bin` supplies it. No dependency or account settings were changed. The frozen corpus's generated Python7.35.1 code did not match the available protobuf6.33.6 runtime. A private temporary corpus copy regenerated only Python adapters from its unchanged schemas using the available grpc_tools; retained fixtures/provenance were not rewritten.
+The full clean-commit `npm run ci` passed on Senscope implementation `bb9f1c80f58a09bb2bdf67873d65ceaf5bd6dd7c`, including 594 production Chromium cases and79 compiler Python tests. The complete log is retained in the Senscope verification successor. The first attempt stopped at the default Python3.15 missing pytest; the existing Senscope `.venv/bin` supplies it. No dependency or account settings were changed. The frozen corpus's generated Python7.35.1 code did not match the available protobuf6.33.6 runtime. A private temporary corpus copy regenerated only Python adapters from its unchanged schemas using the available grpc_tools; retained fixtures/provenance were not rewritten.
 
 ## Reproduction
 
@@ -28,10 +28,19 @@ Use Python with grpc_tools for the harness build, cache tests, lifecycle regress
 python3 -B tools/hardware-acceptance/productization/test-config-preservation.py --glyph /path/to/exact/tooling-successor --production /path/to/fresh/lifecycle --binary /path/to/fresh/build/package-fault-harness
 ```
 
-Use the repository's existing Senscope Python environment first on PATH for `npm run ci` and `npm run check:semantic-promotion-gate`. All operator tests use fake ports; none opens a controller.
+Use the repository's existing Senscope Python environment first on PATH for `npm run ci` and `npm run check:semantic-promotion-gate`. This run also used the already-present compatible protobuf7.35.1 at `/private/tmp/glyph-startup-protobuf` on PYTHONPATH. The intermediate run with pytest but without protobuf stopped with `No module named google`; no installation was performed. All operator tests use fake ports; none opens a controller.
 
 ## Delegation and publication boundaries
 
 Native internal delegation was available and used: separate read-only cache and preservation/source reviewers, followed by a fresh independent implementation reviewer. Root owns integrated mutation, validation and Git. Code review: DONE; final verification metadata is reviewed separately. Publish tooling/documentation successors of the existing campaign branches only. Canonical branches and the firmware artifact are not promoted. The untracked Glyph `.pio` dependency symlink is excluded. Senscope uses a non-slash local branch because an existing local codex reflog file blocks a codex/ namespace; no old refs/logs were deleted.
 
 API-visible canonical Config equality does not prove raw NOR identity, installed-build attestation, physical runtime/display/input or board power-loss behavior. Direct GameCube/Switch runtime identity remains unverified. Core1 replay needs no change. Full package-authoring persistence beyond the completed plate work is outside this follow-up.
+
+## Published work and final verification
+
+- Senscope implementation: `bb9f1c80f58a09bb2bdf67873d65ceaf5bd6dd7c` on `codex-review-preservation-corrections-20261113`.
+- Glyph host tooling/handoff implementation: `1818d7e1bf693c87b696998f438be4ba2864fa32` on `codex/review-tooling-corrections-20261113`.
+- Both exact work SHAs were live-verified on those successor refs before this narrow verification metadata update. Canonical Senscope main remains `acf22010522ac5b2b17392e977d692195d39e154`; Glyph configurator remains `486aaecfd67c2f3b9731e3a3abcbb59a40cdf633`. No firmware integration/promotion follows.
+- Full CI log SHA-256: `db7619d5dfcedbc3c9e9cbf8cc8b208a4f6c2867d77cd26cae4efbebfb9cde27`. New full Config/terminal mismatch tests and the semantic gate passed; independent implementation and documentation review returned DONE.
+- The cached six-case smoke was repeated with the original unchanged frozen corpus using the already-present compatible protobuf runtime:6/6 passed, still explicitly incomplete coverage. The earlier private regenerated Python adapter copy was never published or treated as changed source authority.
+- Glyph documentation navigation checker and exact firmware/candidate-directory unchanged comparisons passed. Hardware acceptance remains pending.
