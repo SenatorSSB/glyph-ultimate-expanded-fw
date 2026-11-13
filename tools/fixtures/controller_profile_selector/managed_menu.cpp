@@ -64,5 +64,9 @@ int main() {
             profile_selection::Complete();
         }
     }
+    CommunicationBackend no_default(routes[0], nullptr);
+    CommunicationBackend *no_default_backends[] = {&no_default};
+    GlyphConfigMenu unselected(config, no_default_backends, 1);
+    check(unselected._gamemode_options_page.items_count == 2, "missing active mode can choose eligible pairs");
     std::puts("PASS production managed Profile menu, bound legacy pair, ordering, eligibility, plate, name and USB action");
 }

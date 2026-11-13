@@ -22,12 +22,16 @@ DefaultConfigMenu::DefaultConfigMenu(
     MenuPage::MenuItem *usb_backend_options =
         new MenuPage::MenuItem[config.communication_backend_configs_count];
 
+    const auto *primary = _backends_count && _backends ? _backends[0] : nullptr;
+    // The checked Config permits a backend without a default mode.
+    auto *active_mode = primary ? _backends[0]->CurrentGameMode() : nullptr;
+    const auto *active_config = active_mode ? active_mode->GetConfig() : nullptr;
     size_t usb_backend_options_count = 0;
     for (size_t i = 0; i < config.communication_backend_configs_count; i++) {
         CommunicationBackendConfig &backend_config = config.communication_backend_configs[i];
         MenuPage::MenuItem &current_option = usb_backend_options[usb_backend_options_count];
 
-        if(_backends[0]->CurrentGameMode()->GetConfig()->keyboard_mode_config != 0) {
+        if(active_config && active_config->keyboard_mode_config != 0) {
             if(backend_config.backend_id != COMMS_BACKEND_DINPUT) {
                 continue;
             }
@@ -38,8 +42,8 @@ DefaultConfigMenu::DefaultConfigMenu(
         }
 
 #if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
-        const auto &current = *_backends[0]->CurrentGameMode()->GetConfig();
-        if (current.managed_format && !profile_selection::Eligible(current, backend_config.backend_id)) continue;
+        if (active_config && active_config->managed_format &&
+            !profile_selection::Eligible(*active_config, backend_config.backend_id)) continue;
 #endif
         strlcpy(
             current_option.text,
@@ -57,7 +61,7 @@ DefaultConfigMenu::DefaultConfigMenu(
     };
 
     /* The Profile page belongs to the executing backend. */
-    const auto backend = _backends_count && _backends[0] ? _backends[0]->BackendId() : COMMS_BACKEND_UNSPECIFIED;
+    const auto backend = primary ? _backends[0]->BackendId() : COMMS_BACKEND_UNSPECIFIED;
     // Configurator is the only live store writer. Its display is the remapper,
     // so it must never enumerate the directory concurrently with that writer.
     const bool browse = backend != COMMS_BACKEND_CONFIGURATOR && backend != COMMS_BACKEND_UNSPECIFIED;
