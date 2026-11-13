@@ -21,6 +21,9 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Fetch historical failed-build object required by C020 replay
+      run: git fetch origin 0a5dd751c391198140ed146853a69fc825d902c7:refs/ci-evidence/c020-failed-build
+
     - name: Set trusted comparison base
       run: |
         if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
