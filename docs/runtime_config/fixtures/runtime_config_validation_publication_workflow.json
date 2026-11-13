@@ -30,7 +30,7 @@
     },
     {
       "path": ".github/workflows/build.yml",
-      "sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5",
+      "sha256": "b3cfd8e76bb35d765c078d0e1658c3290c6f4e9fc8a3c8535f89e26b83ac9a1a",
       "events": [
         "push",
         "pull_request"
@@ -86,7 +86,10 @@
       "git fetch --no-tags origin \"configurator:refs/remotes/origin/configurator\"",
       "fi",
       "test -n \"$GLYPH_CHECKER_BASE\"",
-      "git rev-parse --verify \"$GLYPH_CHECKER_BASE\""
+      "git rev-parse --verify \"$GLYPH_CHECKER_BASE\"",
+      "if ! git show-ref --verify --quiet refs/heads/configurator; then",
+      "git branch configurator refs/remotes/origin/configurator",
+      "fi"
     ]
   },
   "required_events": [
@@ -297,6 +300,16 @@
       "id": "setup_continuation_duplicate",
       "old": "    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json",
       "new": "    - name: Duplicate comparison operation\n      run: |\n        git fetch \\\n          --no-tags origin configurator\n\n    - name: Run current runtime-config validation\n      run: python3 tools/run_glyph_runtime_config_validation.py --json"
+    },
+    {
+      "id": "substituted_build_classifier",
+      "old": "tools/glyph_ci_build_inputs.py",
+      "new": "tools/unrelated.py"
+    },
+    {
+      "id": "inverted_build_condition",
+      "old": "if: needs.validation.outputs.firmware == 'true'",
+      "new": "if: needs.validation.outputs.firmware == 'false'"
     }
   ]
 }

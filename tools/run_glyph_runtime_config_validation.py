@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from contextvars import ContextVar
 import ast
 import hashlib
 import json
@@ -22,6 +23,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(ROOT / "tools"))
 from generate_glyph_checker_census import generate as generate_census, rendered as render_census  # noqa: E402
+
+import glyph_ci_package_scope as package_scope
 
 MANIFEST = ROOT / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json"
 CENSUS = ROOT / "docs/runtime_config/fixtures/glyph_checker_census.json"
@@ -44,12 +47,34 @@ def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
+# A single read-only manifest load often refers to the same production input
+# hundreds of times. Gather stage-zero metadata once per invocation; live mode
+# and regular-file checks still apply, as do the independent clean-tree proofs.
+_MANIFEST_INDEX = ContextVar("glyph_manifest_index", default=None)
+_C023_RESULT = ContextVar("glyph_manifest_c023_result", default=None)
+
+
+def regular_index_paths():
+    raw = git_value("ls-files", "--stage", "-z")
+    rows = {}
+    for record in raw.split("\0"):
+        if record:
+            metadata, path = record.split("\t", 1)
+            mode, _, stage = metadata.split()
+            rows.setdefault(path, []).append((mode, stage))
+    return {path for path, values in rows.items()
+            if len(values) == 1 and values[0] in (("100644", "0"), ("100755", "0"))}
+
+
 def tracked_regular_stage_zero(path: str) -> bool:
     if not path or path.startswith("/") or "\\" in path:
         return False
     pure = PurePosixPath(path)
     if pure.as_posix() != path or any(part in {"", ".", ".."} for part in pure.parts):
         return False
+    index = _MANIFEST_INDEX.get()
+    if index is not None:
+        return path in index and (ROOT / path).is_file() and not (ROOT / path).is_symlink()
     result = git("ls-files", "--stage", "--", path)
     records = [line.split("\t", 1)[0].split() for line in result.stdout.splitlines() if "\t" in line]
     return len(records) == 1 and records[0][0] in {"100644", "100755"} and (ROOT / path).is_file() and not (ROOT / path).is_symlink()
@@ -293,8 +318,17 @@ def validate_branch_policy(entry: dict[str, object]) -> None:
 
 
 def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
+    token = _MANIFEST_INDEX.set(regular_index_paths())
+    try:
+        return load_indexed_manifest()
+    finally:
+        _MANIFEST_INDEX.reset(token)
+
+
+def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     value = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=pairs)
-    if value.get("schema_version") != 4 or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
+    version = value.get("schema_version")
+    if version not in (4, 5) or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
         raise ValueError("invalid manifest root")
     categories = set(value["categories"])
     ids: set[str] = set()
@@ -306,7 +340,8 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         if not isinstance(checker_id, str) or checker_id in ids:
             raise ValueError(f"duplicate checker ID: {checker_id}")
         ids.add(checker_id)
-        campaign_arguments = c023_replay_arguments(entry) or c022_replay_arguments(entry) or c021_replay_arguments(entry) or campaign_guard_arguments(entry) or c017_replay_arguments(entry)
+        historical_package_entry = version == 5 and entry["applicability"] == "historical_only"
+        campaign_arguments = not historical_package_entry and (c023_replay_arguments(entry) or c022_replay_arguments(entry) or c021_replay_arguments(entry) or campaign_guard_arguments(entry) or c017_replay_arguments(entry))
         if entry["category"] not in categories:
             raise ValueError(f"invalid category: {entry['category']}")
         if not isinstance(entry["command"], list) or not all(isinstance(part, str) for part in entry["command"]):
@@ -325,7 +360,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
                     'docs/runtime_config/fixtures/gp_val035_accepted_transitions.json',
                     'tools/glyph_c017_campaign_transition.py')
     c017_ready = '9ce55e71eff2be6fee366b52434042985de263e6'
-    if (any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c017_markers) or
+    if version == 4 and (any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c017_markers) or
             git('merge-base', '--is-ancestor', c017_ready, 'HEAD').returncode == 0):
         for identity in ('neopixel_null_sendreport_characterization',
                          'gp_config017_neopixel_repaired_current'):
@@ -335,7 +370,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     c021_markers = ('docs/runtime_config/fixtures/gp_val038_c021_transition.json',
                     'docs/runtime_config/fixtures/gp_val038_accepted_transitions.json',
                     'tools/glyph_c021_campaign_transition.py')
-    if any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c021_markers):
+    if version == 4 and any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c021_markers):
         required038 = ('config_menu_invalid_state_characterization', 'configurator_setconfig_transaction', 'current_config_persistence_recovery_research', 'custom_modifier_cache_characterization', 'getconfig_raw_load_characterization', 'gp_config014_modifier_capacity', 'gp_config017_neopixel_repaired_current', 'gp_config019_usb_name_selection', 'gp_config020_button_validation', 'gp_config_012_button_mask_characterization', 'gp_config_013_usb_default_characterization', 'gp_kbd_001_keyboard_pipeline', 'neopixel_null_sendreport_characterization', 'setconfig_runtime_rebinding_characterization') + ('gp_config021_persisted_recovery',)
         for identity in required038:
             rows = [entry for entry in entries if entry['id'] == identity]
@@ -344,7 +379,7 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     c022_markers = ('docs/runtime_config/fixtures/gp_val039_c022_transition.json',
                     'docs/runtime_config/fixtures/gp_val039_accepted_transitions.json',
                     'tools/glyph_c022_campaign_transition.py')
-    if any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c022_markers):
+    if version == 4 and any((ROOT / path).exists() or (ROOT / path).is_symlink() for path in c022_markers):
         required039 = (
             'config_menu_invalid_state_characterization', 'configurator_setconfig_transaction',
             'current_config_persistence_recovery_research', 'custom_modifier_cache_characterization',
@@ -367,6 +402,8 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
         row = [entry for entry in entries if entry['id'] == 'gp_config023_usb_index_validation']
         if len(row) != 1 or not c023_replay_arguments(row[0]):
             raise ValueError('missing required042 exact C023 candidate replay')
+    if version == 5:
+        package_scope.verify_manifest_coverage(ROOT, entries)
     exclusions: list[dict[str, object]] = []
     exclusion_ids: set[str] = set()
     exclusion_paths: set[str] = set()
@@ -407,7 +444,13 @@ def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     if any(entry['id'] == 'gp_config023_usb_index_validation' and c023_replay_arguments(entry)
            for entry in entries):
         from glyph_c023_campaign_transition import replay_covered_checker_paths
-        replay_paths = replay_covered_checker_paths(ROOT)
+        if package_scope.package_lineage(ROOT):
+            with tempfile.TemporaryDirectory(prefix="glyph-c023-classify-") as directory:
+                proof = package_scope.original_proof(ROOT, Path(directory))
+            _C023_RESULT.set((ROOT, git_value("rev-parse", "HEAD"), proof))
+            replay_paths = frozenset(proof["covered"])
+        else:
+            replay_paths = replay_covered_checker_paths(ROOT)
     elif any(entry['id'] == 'gp_config022_rgb_target_validation' and c022_replay_arguments(entry)
            for entry in entries):
         from glyph_c022_campaign_transition import replay_covered_checker_paths
@@ -808,6 +851,11 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         ('gp_config023_usb_index_validation', ['python3', 'tools/check_glyph_c023_proof_replay.py']),
         ('gp_val039_c022_transition', ['python3', 'tools/test_glyph_c022_campaign_transition.py']),
     ))
+    if package_scope.package_lineage(ROOT):
+        # Current checker_context exercises synthetic branch scope and source
+        # guardrails. Its package path never consumes C020/C024 replay roots.
+        campaign_consumers = [(identity, command) for identity, command in campaign_consumers
+                              if identity != "checker_context"]
     if any(entry['applicability'] == 'current'
            and entry['id'] == identity and entry['command'] == command
            for entry in selected for identity, command in campaign_consumers):
@@ -823,7 +871,16 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
         # the predecessor's smaller object-root catalog.
         if c023_selected:
             from glyph_c023_campaign_transition import authenticate as authenticate_c023
-            proof = authenticate_c023(ROOT)
+            if package_scope.package_lineage(ROOT):
+                classified = _C023_RESULT.get()
+                if classified is not None and classified[:2] == (ROOT, git_value("rev-parse", "HEAD")):
+                    proof = classified[2]
+                else:
+                    with tempfile.TemporaryDirectory(prefix="glyph-c023-catalog-") as directory:
+                        proof = package_scope.original_proof(ROOT, Path(directory))
+                roots.add(package_scope.C023_DONE)
+            else:
+                proof = authenticate_c023(ROOT)
         else:
             proof = authenticate(ROOT)
         roots.update(ROOTS)
@@ -1064,7 +1121,10 @@ def main() -> int:
     parser.add_argument("--fail-fast", action="store_true")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--check-manifest", action="store_true")
+    parser.add_argument("--require-ci-maintenance", action="store_true",
+                        help="require exact accepted package inputs outside reviewed CI files")
     args = parser.parse_args()
+    proof_context = _C023_RESULT.set(None)
     previous_deadline, previous_env = DEADLINE, EXECUTION_ENV
     started = monotonic()
     DEADLINE = started + AGGREGATE_TIMEOUT_SECONDS
@@ -1099,6 +1159,12 @@ def main() -> int:
                 if empty:
                     raise ValueError("requested category selects zero current checks: " + ", ".join(empty))
             require_clean_source()
+            if package_scope.package_lineage(ROOT):
+                output["phase"] = "accepted_and_current_package_comparison"
+                output["package_evidence"] = package_scope.package_evidence(
+                    ROOT, parent, strict=args.require_ci_maintenance)
+            elif args.require_ci_maintenance:
+                raise ValueError("CI maintenance requires the accepted package baseline ancestry")
             if not args.check_manifest:
                 output["phase"] = "source_context"
                 context_data = immutable_source_context(selected)
@@ -1111,8 +1177,17 @@ def main() -> int:
                     output["phase"] = "checker:" + str(entry["id"])
                     remaining = require_budget(output["phase"])
                     timeout = min(CHECKER_TIMEOUT_SECONDS, remaining)
+                    active = clone
+                    checker_env = checker_environment(entry, env)
+                    is_c023 = (entry["id"] == "gp_config023_usb_index_validation"
+                               and package_scope.package_lineage(ROOT))
+                    if is_c023:
+                        active = package_scope.materialize(clone, package_scope.C023_DONE, parent)
+                        checker_env.update(GLYPH_CHECKER_BASE=package_scope.C023_DONE,
+                                           GLYPH_CHECKER_EXPECTED_MERGE_BASE=package_scope.C023_DONE)
+                        replay_before = canonical_fingerprint(active)
                     code, stdout, stderr, failure, duration = run_checker(
-                        execution_command(entry["command"]), clone, checker_environment(entry, env), timeout
+                        execution_command(entry["command"]), active, checker_env, timeout
                     )
                     if failure == "CHECKER_TIMEOUT" and remaining <= CHECKER_TIMEOUT_SECONDS:
                         failure = "AGGREGATE_TIMEOUT"
@@ -1121,9 +1196,11 @@ def main() -> int:
                               "failure_kind": failure, "timeout_seconds": timeout,
                               "stdout_summary": stdout.strip().splitlines()[-1:], "stderr_summary": stderr.strip().splitlines()[-1:],
                               "duration_seconds": round(duration, 3), "isolated_proof": "UNAVAILABLE"}
+                    if is_c023:
+                        result["historical_execution_source"] = package_scope.C023_DONE
                     output["results"].append(result)
                     try:
-                        if canonical_fingerprint(clone) != isolated_before:
+                        if canonical_fingerprint(clone) != isolated_before or (is_c023 and canonical_fingerprint(active) != replay_before):
                             result["isolated_proof"] = "MISMATCH"
                             failure = failure or "ISOLATED_REPOSITORY_MUTATION"
                         else:
@@ -1184,6 +1261,7 @@ def main() -> int:
             if previous_timer[0] > 0:
                 signal.setitimer(signal.ITIMER_REAL, max(.001, previous_timer[0] - (monotonic() - started)), previous_timer[1])
             DEADLINE, EXECUTION_ENV = previous_deadline, previous_env
+            _C023_RESULT.reset(proof_context)
     if args.json:
         print(json.dumps(output, sort_keys=True))
     elif args.check_manifest and output["status"] == "PASS":

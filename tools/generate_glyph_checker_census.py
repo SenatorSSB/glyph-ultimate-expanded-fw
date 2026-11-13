@@ -167,15 +167,16 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="fail if the committed artifact differs")
     args = parser.parse_args()
-    output = rendered(generate())
+    census = generate()
+    output = rendered(census)
     if args.check:
         if not ARTIFACT.is_file() or ARTIFACT.read_text(encoding="utf-8") != output:
             print("glyph_checker_census: FAIL: artifact drift; run tools/generate_glyph_checker_census.py")
             return 1
-        print(f"glyph_checker_census: PASS; entries={len(generate()['entries'])}")
+        print(f"glyph_checker_census: PASS; entries={len(census['entries'])}")
         return 0
     ARTIFACT.write_text(output, encoding="utf-8")
-    print(f"glyph_checker_census: generated {ARTIFACT.relative_to(ROOT)}; entries={len(generate()['entries'])}")
+    print(f"glyph_checker_census: generated {ARTIFACT.relative_to(ROOT)}; entries={len(census['entries'])}")
     return 0
 
 

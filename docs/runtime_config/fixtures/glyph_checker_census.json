@@ -2,6 +2,59 @@
   "entries": [
     {
       "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "accepted_character_profiles",
+      "defines_main": true,
+      "file_size_bytes": 8833,
+      "hard_coded_branch_like_strings": [
+        "evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 109,
+      "parse_error": null,
+      "path": "tools/check_glyph_accepted_character_profiles.py",
+      "potential_branch_identity_signals": [
+        "evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_accepted_character_profiles",
+      "referenced_repository_path_prefixes": [
+        "docs/runtime_config/accepted_character_profiles",
+        "tools/check_glyph_accepted_character_profiles.py",
+        "tools/check_glyph_profile_store_production_tool.py",
+        "tools/fixtures/",
+        "tools/glyph_profile_store_production_tool.py",
+        "tools/test_kazuya_profile_v5.py"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks",
+        "runtime_config_docs"
+      ],
+      "sha256": "e010f3b0fc17f4e4938f750538bfee3a093d384ba3f7a7aed9772f25d6dc3994",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
@@ -25,6 +78,57 @@
       ],
       "runtime_config_relevance_signals": [],
       "sha256": "40281b7cea5f5efb5cc8b4e52772751a6d91fb8a32d4953da0de22c84940c400",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "active_profile_display",
+      "defines_main": true,
+      "file_size_bytes": 2142,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 28,
+      "parse_error": null,
+      "path": "tools/check_glyph_active_profile_display.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_active_profile_display",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/display/CurrentProfileLabel.cpp",
+        "HAL/pico/src/display/InputDisplay.cpp",
+        "src/core/ControllerMode.cpp",
+        "src/core/InputMode.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/socd.cpp",
+        "src/display/MenuButtonHints.cpp",
+        "src/modes/Ultimate.cpp",
+        "src/modes/UltimateNativeEvaluator.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/active_profile_display/include",
+        "tools/fixtures/active_profile_display/labels.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "d0a883da9080209b342400a18f4d00795e6cf265e7c8595ea9d9b6c5655ea5b9",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -483,7 +587,7 @@
       },
       "checker_id": "agent_framework_docs",
       "defines_main": true,
-      "file_size_bytes": 186190,
+      "file_size_bytes": 214334,
       "hard_coded_branch_like_strings": [
         "_load_evidence_record",
         "branch",
@@ -509,9 +613,11 @@
         "configurator",
         "curation_branch",
         "curator_review_provenance.curation_branch",
+        "direct_return_evidence",
         "done_evidence",
         "evidence",
         "evidence-mutation",
+        "evidence.",
         "evidence.json",
         "evidence/contracts",
         "evidence/test.md",
@@ -544,7 +650,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 3848,
+      "line_count": 4310,
       "parse_error": null,
       "path": "tools/check_glyph_agent_framework_docs.py",
       "potential_branch_identity_signals": [
@@ -572,9 +678,11 @@
         "configurator",
         "curation_branch",
         "curator_review_provenance.curation_branch",
+        "direct_return_evidence",
         "done_evidence",
         "evidence",
         "evidence-mutation",
+        "evidence.",
         "evidence.json",
         "evidence/contracts",
         "evidence/test.md",
@@ -616,6 +724,7 @@
         "docs/agent_framework/",
         "docs/agent_framework/AUTHORIZATION_AND_RUNWAY.md",
         "docs/agent_framework/CYCLE_STATE_MACHINE.md",
+        "docs/agent_framework/FUTURE_DAEMON_BOOTSTRAP.md",
         "docs/agent_framework/HARDWARE_ARTIFACT_CUSTODY.md",
         "docs/agent_framework/HARDWARE_CORRESPONDENCE.md",
         "docs/agent_framework/HARDWARE_EVIDENCE.md",
@@ -633,6 +742,7 @@
         "docs/agent_framework/WORK_ORDER_TEMPLATE.md",
         "docs/agent_framework/curation_receipts",
         "docs/agent_framework/curation_receipts/",
+        "docs/agent_framework/curation_receipts/alias.json",
         "docs/agent_framework/curation_receipts/gp_test_001.json",
         "docs/agent_framework/examples/example_cycle_report.md",
         "docs/agent_framework/examples/example_subagent_handoff.md",
@@ -669,7 +779,7 @@
         "artifact_custody_provenance",
         "hardware_evidence_contracts"
       ],
-      "sha256": "8f531e45f0847d7fb6d0f014d8a1f1f10064edef065d11a001c44b9876c10262",
+      "sha256": "6ce02487e60ef94d0906a8a77fe11d6c20fcfc953671184ff23c7f404c03aa35",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -902,7 +1012,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "c03945e0cccdcbe818cd26094786c547743061be3f47cd6860d8b897086188dc",
+      "sha256": "9306943bf0719b06564ebad5c2b6b0687baca06453a383abd981fbca32bf807e",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -923,7 +1033,7 @@
       },
       "checker_id": "build_input_provenance_inventory",
       "defines_main": true,
-      "file_size_bytes": 40040,
+      "file_size_bytes": 40185,
       "hard_coded_branch_like_strings": [
         "candidate",
         "configurator",
@@ -934,7 +1044,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 604,
+      "line_count": 605,
       "parse_error": null,
       "path": "tools/check_glyph_build_input_provenance_inventory.py",
       "potential_branch_identity_signals": [
@@ -957,7 +1067,7 @@
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "0fe7e9555690b5e6c27c15dcedc0129665e0f506e5ab60ed6ea455e9b2bf5c0f",
+      "sha256": "0944104be43cf4a03c9dfb03c1cc4470ec20b6accafb2b4234564e5c7824ac52",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -1358,6 +1468,46 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "checked_storage_host",
+      "defines_main": true,
+      "file_size_bytes": 1602,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 25,
+      "parse_error": null,
+      "path": "tools/check_glyph_checked_storage_host.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_checked_storage_host",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "lib/littlefs",
+        "tools/fixtures/checked_storage_host/checked_storage_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "4f74553cb492761c8ec767a3e5f50fbb3aa9818d4122ec2409ddac9e5bf1d886",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "checker_census",
       "defines_main": true,
       "file_size_bytes": 2118,
@@ -1398,7 +1548,7 @@
       },
       "checker_id": "checker_context",
       "defines_main": true,
-      "file_size_bytes": 37808,
+      "file_size_bytes": 39571,
       "hard_coded_branch_like_strings": [
         "CTX-01-valid-feature-branch",
         "CTX-02-renamed-feature-branch",
@@ -1427,7 +1577,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 696,
+      "line_count": 730,
       "parse_error": null,
       "path": "tools/check_glyph_checker_context.py",
       "potential_branch_identity_signals": [
@@ -1479,6 +1629,7 @@
         "docs/runtime_config/runtime_config_webserial_device_write_source_authority.md",
         "include/committed.hpp",
         "include/core/config_button_validation.hpp",
+        "src/added.cpp",
         "src/committed.cpp",
         "src/configurator_only.cpp",
         "src/gp_val037_guard_negative.cpp",
@@ -1487,6 +1638,7 @@
         "src/renamed.cpp",
         "src/staged.cpp",
         "src/unstaged.cpp",
+        "tools/changed.py",
         "tools/check_glyph_runtime_config_webserial_device_write_source_authority.py",
         "tools/glyph_campaign_transition.py",
         "tools/glyph_hardware_correspondence.py",
@@ -1501,7 +1653,7 @@
         "generated_source_owned",
         "runtime_config_docs"
       ],
-      "sha256": "a16983cb730064514510c6d8ae100b84f69e455dbc15f05a57e225a9cedab3e1",
+      "sha256": "5861a89bb3dd813e3cbe76e9d91d9af9cbc9b65e465d5580d151d0cbde6eb7fa",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -2796,6 +2948,102 @@
     },
     {
       "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "configurator_usb_coordination",
+      "defines_main": true,
+      "file_size_bytes": 4883,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 63,
+      "parse_error": null,
+      "path": "tools/check_glyph_configurator_usb_coordination.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_configurator_usb_coordination",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "b3299f1ceb20dc9be5251dd21d1fb99c5f7bdafa8d6957dec387de2f3bfcd7fa",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "controller_profile_selector",
+      "defines_main": true,
+      "file_size_bytes": 4969,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 64,
+      "parse_error": null,
+      "path": "tools/check_glyph_controller_profile_selector.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_controller_profile_selector",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/core/Persistence.cpp",
+        "include/comms",
+        "include/reboot.hpp",
+        "src/config.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/core/profile_selection.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/config_menu_host/include",
+        "tools/fixtures/config_menu_host/include/comms/IntegratedDisplay.hpp",
+        "tools/fixtures/config_menu_host/include/reboot.hpp",
+        "tools/fixtures/controller_profile_selector/metadata_menu.cpp",
+        "tools/fixtures/controller_profile_selector/selection_persistence.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery",
+        "tools/fixtures/profile_store_config_persistence_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "1d9789240fb6c572f04b38fef54cc9422324370ecf3e2cd7c1375d9446ed277b",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
@@ -3724,7 +3972,7 @@
       },
       "checker_id": "docs_agent_surface",
       "defines_main": true,
-      "file_size_bytes": 23120,
+      "file_size_bytes": 23312,
       "hard_coded_branch_like_strings": [
         "branch",
         "branch.startswith",
@@ -3761,7 +4009,7 @@
       "imports_glyph_checker_context": true,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 576,
+      "line_count": 578,
       "parse_error": null,
       "path": "tools/check_glyph_docs_agent_surface.py",
       "potential_branch_identity_signals": [
@@ -3863,7 +4111,7 @@
         "runtime_config_docs",
         "source_authority_intake"
       ],
-      "sha256": "3982115c3f941be8867f1d1f9da81b2bed2188a857d79444c177ee77a8aac95b",
+      "sha256": "f1215cac913f75553b9054c9258b5254f244965fab6832d5cbe062f5a9c43dd3",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -5325,6 +5573,65 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gamecube_selector_liveness",
+      "defines_main": true,
+      "file_size_bytes": 9111,
+      "hard_coded_branch_like_strings": [
+        "failed-candidate"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 184,
+      "parse_error": null,
+      "path": "tools/check_glyph_gamecube_selector_liveness.py",
+      "potential_branch_identity_signals": [
+        "failed-candidate"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gamecube_selector_liveness",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/GamecubeBackend.hpp",
+        "HAL/pico/src/comms/GamecubeBackend.cpp",
+        "include/GamecubeConsole.hpp",
+        "include/gamecube_definitions.h",
+        "include/joybus.h",
+        "include/joybus.pio.h",
+        "lib/glyph-joybus-pio/",
+        "lib/glyph-joybus-pio/include/joybus.pio.h",
+        "lib/glyph-joybus-pio/src/joybus.pio",
+        "src/GamecubeConsole.cpp",
+        "src/config.cpp",
+        "src/core/profile_selection.cpp",
+        "src/joybus.c",
+        "src/joybus.pio",
+        "tools/check_glyph_controller_profile_selector.py",
+        "tools/fixtures/gamecube_selector_liveness"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "3f57b54e5ad664121d91e2aba48f32bab0b049d889fbf472df3a46d9a7fc385f",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "generated_config_invalid_corpus",
       "defines_main": true,
       "file_size_bytes": 7303,
@@ -6433,9 +6740,83 @@
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
+      "checker_id": "gp_bind_003_runtime_identity",
+      "defines_main": true,
+      "file_size_bytes": 23586,
+      "hard_coded_branch_like_strings": [
+        "branch",
+        "configurator"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 300,
+      "parse_error": null,
+      "path": "tools/check_glyph_gp_bind_003_runtime_identity.py",
+      "potential_branch_identity_signals": [
+        "branch",
+        "configurator"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_gp_bind_003_runtime_identity",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/RuntimeIdentity.hpp",
+        "include/core/RuntimeProfileDigest.hpp",
+        "src/comms/B0XXInputViewer.cpp",
+        "src/core/CommunicationBackend.cpp",
+        "src/core/ControllerMode.cpp",
+        "src/core/InputMode.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/core/socd.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/Ultimate.cpp",
+        "src/modes/UltimateNativeEvaluator.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "src/pb_arduino.cpp",
+        "tools/check_glyph_stage_b_ultimate_profiles.py",
+        "tools/fixtures/gp_bind_003_runtime_identity",
+        "tools/fixtures/profile_store_migration_lifecycle_host/checked_storage_unavailable.cpp",
+        "tools/fixtures/profile_store_migration_lifecycle_host/include",
+        "tools/fixtures/profile_store_timeout_host",
+        "tools/fixtures/stage_a_ultimate_profiles_dry_run.json",
+        "tools/fixtures/stage_b_ultimate_profiles_fixture.json",
+        "tools/fixtures/stage_c_ultimate_profiles_fixture.json",
+        "tools/glyph_runtime_identity_tool.py"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "d30bf450f76d91a22dbe1cf982bc84b3ef497266d2f7e1c16bfcdf72fc20ae9e",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
       "checker_id": "gp_config012_button_mask_characterization",
       "defines_main": true,
-      "file_size_bytes": 32007,
+      "file_size_bytes": 32816,
       "hard_coded_branch_like_strings": [
         "candidate",
         "candidate.",
@@ -6451,7 +6832,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 554,
+      "line_count": 564,
       "parse_error": null,
       "path": "tools/check_glyph_gp_config012_button_mask_characterization.py",
       "potential_branch_identity_signals": [
@@ -6496,7 +6877,7 @@
         "build_declarations_hooks",
         "runtime_config_docs"
       ],
-      "sha256": "81add926513a0e786ace99e932d9fc53ea2dece9f407251e09627319eb0d8774",
+      "sha256": "cfafed2378600752ec95e5a12c14700fbb563d39d50ee4757c6a53b0cef445c9",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -8669,6 +9050,53 @@
         "imports_argparse": true,
         "parser_add_argument_calls": 1
       },
+      "checker_id": "liveness_resource_safety",
+      "defines_main": true,
+      "file_size_bytes": 8170,
+      "hard_coded_branch_like_strings": [
+        "--hardware-evidence",
+        "args.hardware_evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 163,
+      "parse_error": null,
+      "path": "tools/check_glyph_liveness_resource_safety.py",
+      "potential_branch_identity_signals": [
+        "--hardware-evidence",
+        "args.hardware_evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_liveness_resource_safety",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [
+        "hardware_evidence_contracts"
+      ],
+      "sha256": "e7992ca70d40884c9a7390f4892f4da0bb1edd885d2f39b9b4054a102941df70",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
       "checker_id": "manual_hardware_owner_checklist",
       "defines_main": true,
       "file_size_bytes": 3191,
@@ -8766,6 +9194,121 @@
         "hardware_results": true,
         "identity_runtime_tables": false,
         "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "migration_diagnostics",
+      "defines_main": false,
+      "file_size_bytes": 14344,
+      "hard_coded_branch_like_strings": [
+        "--candidate",
+        "--nor-candidate",
+        "a.candidate",
+        "a.candidate/",
+        "a.nor_candidate",
+        "candidate",
+        "candidate_reason"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 162,
+      "parse_error": null,
+      "path": "tools/check_glyph_migration_diagnostics.py",
+      "potential_branch_identity_signals": [
+        "--candidate",
+        "--nor-candidate",
+        "a.candidate",
+        "a.candidate/",
+        "a.nor_candidate",
+        "candidate",
+        "candidate_reason"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_migration_diagnostics",
+      "referenced_repository_path_prefixes": [
+        "src/core/PackageNamespaceClassifier.cpp",
+        "src/core/PackageStorageFormat.cpp",
+        "tools/fixtures/glyph_package_v1/classifier_ffi.cpp",
+        "tools/fixtures/glyph_package_v1/transaction",
+        "tools/fixtures/glyph_package_v1/verify_classifier.py",
+        "tools/research"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "31cc9e0eceb0edc5cd5338f12fe231b2baf980d02992782367be6cc95ef7127e",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "native_target_metrics",
+      "defines_main": true,
+      "file_size_bytes": 11171,
+      "hard_coded_branch_like_strings": [
+        "candidate"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 139,
+      "parse_error": null,
+      "path": "tools/check_glyph_native_target_metrics.py",
+      "potential_branch_identity_signals": [
+        "candidate"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_native_target_metrics",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/core/NativeTargetMetrics.cpp",
+        "HAL/pico/src/core/NativeTargetMetricsEntry.S",
+        "docs/runtime_config/profile_native_ultimate/native_production_stack_final/compile_commands.json",
+        "include/core/RuntimeIdentityService.hpp",
+        "include/core/RuntimeIdentityWire.hpp",
+        "src/core/ControllerMode.cpp",
+        "tools/fixtures/native_target_metrics",
+        "tools/fixtures/profile_store_cdc_rx_progress/cdc_fixture_tail.c",
+        "tools/fixtures/profile_store_cdc_rx_progress/include"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "3f980a4d832935464aa2ae5bef96e33f605b00bd89eb023c4657ec2b18ab684d",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
         "source_owned": false,
         "y2_tilt3": false
       }
@@ -10505,6 +11048,50 @@
     },
     {
       "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "package_components",
+      "defines_main": false,
+      "file_size_bytes": 6071,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 91,
+      "parse_error": null,
+      "path": "tools/check_glyph_package_components.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_package_components",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "include/core/ConfigWireValidator.hpp",
+        "lib/littlefs",
+        "src/core",
+        "tools/research"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "3679a72797f65508e822744d21c6215a36b783f7f5540e253c9ac7d10b667ba0",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
@@ -11585,6 +12172,1212 @@
     },
     {
       "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_native_ultimate",
+      "defines_main": true,
+      "file_size_bytes": 37947,
+      "hard_coded_branch_like_strings": [
+        "design_evidence/maximum-native.body",
+        "evidence."
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 428,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_native_ultimate.py",
+      "potential_branch_identity_signals": [
+        "design_evidence/maximum-native.body",
+        "evidence."
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_native_ultimate",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/include/util/state_util.hpp",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "HAL/pico/src/core/NativeTargetMetrics.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "docs/runtime_config/profile_native_ultimate/design_evidence/maximum-native.body",
+        "include/core/ProfileStore.hpp",
+        "include/core/ProfileStoreRequestIdentity.hpp",
+        "include/core/state.hpp",
+        "include/modes/CustomControllerMode.hpp",
+        "lib/littlefs",
+        "src/core/CommunicationBackend.cpp",
+        "src/core/ControllerMode.cpp",
+        "src/core/InputMode.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/core/mode_selection.cpp",
+        "src/core/profile_selection.cpp",
+        "src/core/socd.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/lfs.c",
+        "src/lfs_util.c",
+        "src/modes/CustomControllerMode.cpp",
+        "src/modes/Ultimate.cpp",
+        "src/modes/UltimateNativeEvaluator.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "src/pb_arduino.cpp",
+        "tools/fixtures/mode_selection_host/include",
+        "tools/fixtures/native_target_metrics/include",
+        "tools/fixtures/native_target_metrics/runner_clock.cpp",
+        "tools/fixtures/profile_native_ultimate",
+        "tools/fixtures/profile_store_selection_recovery_host",
+        "tools/fixtures/profile_store_timeout_host",
+        "tools/fixtures/stage_c_ultimate_profiles_host",
+        "tools/fixtures/stage_c_ultimate_profiles_host/frozen",
+        "tools/fixtures/stage_c_ultimate_profiles_host/include",
+        "tools/fixtures/stage_c_ultimate_profiles_host/legacy_ultimate.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "6cddd72b4d56c1ac8dbe12317892b02a3dcd0e915b5a53f287824bbc4a2dd227",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": true,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_atomic_commit",
+      "defines_main": true,
+      "file_size_bytes": 960,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 24,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_atomic_commit.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_atomic_commit",
+      "referenced_repository_path_prefixes": [
+        "tools/fixtures/profile_store_atomic_commit_host.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "f97804f0fdb0b095863559ea6e8964e9cbab93cb58a2208d9e371d97f5c0a650",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_candidate_tool",
+      "defines_main": true,
+      "file_size_bytes": 16320,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate.MUTATIONS",
+        "candidate.build_message",
+        "candidate.main",
+        "candidate.os",
+        "candidate.parse_args",
+        "candidate.request",
+        "candidate.select",
+        "candidate.time",
+        "candidate.transport",
+        "candidate.verify_preflight",
+        "evidence",
+        "glyph-candidate-cli-",
+        "glyph_profile_store_candidate_tool",
+        "strict_hardening_candidate"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 180,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_candidate_tool.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate.MUTATIONS",
+        "candidate.build_message",
+        "candidate.main",
+        "candidate.os",
+        "candidate.parse_args",
+        "candidate.request",
+        "candidate.select",
+        "candidate.time",
+        "candidate.transport",
+        "candidate.verify_preflight",
+        "evidence",
+        "glyph-candidate-cli-",
+        "glyph_profile_store_candidate_tool",
+        "strict_hardening_candidate"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_candidate_tool",
+      "referenced_repository_path_prefixes": [
+        "tools/fixtures/profile_store_read_storage/physical_id1_response.json"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "efb5d2e693d4b2ed7be36dcc9ce5279163842c77d5be410ca20b5182d792a1db",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_cdc_progress",
+      "defines_main": true,
+      "file_size_bytes": 5405,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 81,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_cdc_progress.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_cdc_progress",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+        "HAL/pico/include/tusb_config_pico.h",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "src/cobs/Print.h",
+        "tools/fixtures/profile_store_cdc_progress"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "8f6fde8a815ec7ca97b501dcca859d0df177cc5409318f7586619820229b2a6e",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_cdc_rx_progress",
+      "defines_main": true,
+      "file_size_bytes": 9084,
+      "hard_coded_branch_like_strings": [
+        "glyph_profile_store_candidate_tool"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 104,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_cdc_rx_progress.py",
+      "potential_branch_identity_signals": [
+        "glyph_profile_store_candidate_tool"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_cdc_rx_progress",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include/comms/CoordinatedCdcStream.hpp",
+        "HAL/pico/include/tusb_config_pico.h",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "include/core/ProfileStoreRxDiagnostics.hpp",
+        "src/cobs/Print.h",
+        "src/cobs/Stream.h",
+        "tools/fixtures/profile_store_cdc_progress",
+        "tools/fixtures/profile_store_cdc_rx_progress"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "9ec6a98ecc005fe9317827754856fa247541ed9867a746f6c8b0127c5570f700",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_config_persistence",
+      "defines_main": true,
+      "file_size_bytes": 2964,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 42,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_config_persistence.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_config_persistence",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/core/Persistence.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/gp_config021_persisted_recovery",
+        "tools/fixtures/profile_store_config_persistence_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "3d85544990a2e4e62457e3fe85891e5469505fea45fed78753d7e39b15d21566",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_create_stack",
+      "defines_main": true,
+      "file_size_bytes": 12943,
+      "hard_coded_branch_like_strings": [
+        "branch.",
+        "branches",
+        "branches.items",
+        "evidence",
+        "known_foreground_branches_bytes"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 154,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_create_stack.py",
+      "potential_branch_identity_signals": [
+        "branch.",
+        "branches",
+        "branches.items",
+        "evidence",
+        "known_foreground_branches_bytes"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_create_stack",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/core/NativeTargetMetrics.cpp",
+        "src/config.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "511e1054b7cf0f3bbb03ab6faa554c8b1081f94c4b424b0153fe6fae95ab7fb1",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_directory_decoder",
+      "defines_main": true,
+      "file_size_bytes": 5240,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 83,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_directory_decoder.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_directory_decoder",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/profile_store_directory_decoder_host.cpp",
+        "tools/fixtures/profile_store_migration_lifecycle_host/include"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "bb7c3946524320707f7ec1804b79e79a5f89a7522b67661477e1a3edc6afd4d7",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_directory_stack",
+      "defines_main": true,
+      "file_size_bytes": 7830,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 145,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_directory_stack.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_directory_stack",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/core/ProfileStore.cpp"
+      ],
+      "runtime_config_relevance_signals": [
+        "build_declarations_hooks"
+      ],
+      "sha256": "454e908a9ffbcc5ba8a4d61e7d7cfc216689abbc38939b76aa8463649fc5ff24",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_littlefs_host",
+      "defines_main": true,
+      "file_size_bytes": 2526,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 48,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_littlefs_host.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_littlefs_host",
+      "referenced_repository_path_prefixes": [
+        "lib/littlefs",
+        "lib/littlefs/lfs.c",
+        "lib/littlefs/lfs.h",
+        "lib/littlefs/lfs_util.c",
+        "lib/littlefs/lfs_util.h",
+        "src/lfs.c",
+        "src/lfs_util.c",
+        "tools/fixtures/profile_store_littlefs_host/littlefs_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "d0e7f3a61398c229d29b8d17880081c9a25d6ba69d829deb63de6e75d2e549f1",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_liveness_host",
+      "defines_main": true,
+      "file_size_bytes": 8728,
+      "hard_coded_branch_like_strings": [
+        "current_candidate",
+        "frozen_candidate",
+        "frozen_candidate_mounted.cpp"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 136,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_liveness_host.py",
+      "potential_branch_identity_signals": [
+        "current_candidate",
+        "frozen_candidate",
+        "frozen_candidate_mounted.cpp"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_liveness_host",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core/CheckedStorage.hpp",
+        "include/core/ProfileStore.hpp",
+        "include/core/ProfileStoreFaultControls.hpp",
+        "include/core/ProfileStoreStorage.hpp",
+        "lib/littlefs",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/lfs.c",
+        "src/lfs_util.c",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/profile_store_liveness_host",
+        "tools/fixtures/profile_store_liveness_host/lfs_alloc.h",
+        "tools/fixtures/profile_store_liveness_host/liveness_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "9449db352334a7f2877a25d28a0f20441e97410d1fe3908b743b94023d0fa5c9",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_migration_lifecycle",
+      "defines_main": true,
+      "file_size_bytes": 5317,
+      "hard_coded_branch_like_strings": [
+        "evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 83,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_migration_lifecycle.py",
+      "potential_branch_identity_signals": [
+        "evidence"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_migration_lifecycle",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/profile_store_migration_lifecycle_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "34a6d582bd86c51d19cc01114b72dda0d58fb68b16f4db91a89f6f2d781862b1",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_production",
+      "defines_main": true,
+      "file_size_bytes": 4372,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 38,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_production.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.check_output"
+      ],
+      "python_module": "tools.check_glyph_profile_store_production",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "include/core/ProfileStoreFaultControls.hpp",
+        "include/core/ProfileStoreReadTrace.hpp",
+        "src/config.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "008c8e07063ec544a4a557eeae478dbc794477dd04de3fb6be1c3308bd355308",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_production_tool",
+      "defines_main": true,
+      "file_size_bytes": 17459,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate.verify_preflight",
+        "candidate_fixture_packet/forced_wins",
+        "configurator",
+        "glyph_profile_store_candidate_tool",
+        "strict_candidate_guard_preserved",
+        "tool.candidate_transport"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 192,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_production_tool.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate.verify_preflight",
+        "candidate_fixture_packet/forced_wins",
+        "configurator",
+        "glyph_profile_store_candidate_tool",
+        "strict_candidate_guard_preserved",
+        "tool.candidate_transport"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_production_tool",
+      "referenced_repository_path_prefixes": [
+        "docs/runtime_config/profile_native_ultimate/candidate_fixture_packet/forced_wins"
+      ],
+      "runtime_config_relevance_signals": [
+        "runtime_config_docs"
+      ],
+      "sha256": "0678d9196468b930d5728101ea3f4808df9bda2d0218255f3522bd77c45a80f5",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": true,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": true,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_read_stack",
+      "defines_main": true,
+      "file_size_bytes": 5102,
+      "hard_coded_branch_like_strings": [
+        "candidate_elf_sha256"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 49,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_read_stack.py",
+      "potential_branch_identity_signals": [
+        "candidate_elf_sha256"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_read_stack",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [],
+      "sha256": "9af7423f4b394312221c4fb3ef8abf09c4e0ef9f48dd4b31b87b22994cb9d15d",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_read_storage",
+      "defines_main": true,
+      "file_size_bytes": 12143,
+      "hard_coded_branch_like_strings": [
+        "--evidence-dir",
+        "args.evidence_dir",
+        "args.evidence_dir/",
+        "args.evidence_dir/f",
+        "current_candidate",
+        "evidence",
+        "evidence.read_bytes",
+        "evidence.read_text",
+        "evidence_path",
+        "evidence_sha256",
+        "frozen_candidate",
+        "retained_evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 161,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_read_storage.py",
+      "potential_branch_identity_signals": [
+        "--evidence-dir",
+        "args.evidence_dir",
+        "args.evidence_dir/",
+        "args.evidence_dir/f",
+        "current_candidate",
+        "evidence",
+        "evidence.read_bytes",
+        "evidence.read_text",
+        "evidence_path",
+        "evidence_sha256",
+        "frozen_candidate",
+        "retained_evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_read_storage",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "include/core/ProfileStoreReadTrace.hpp",
+        "lib/littlefs",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/lfs.c",
+        "src/lfs_util.c",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/profile_store_liveness_host/lfs_alloc.h",
+        "tools/fixtures/profile_store_liveness_host/liveness_harness.cpp",
+        "tools/fixtures/profile_store_read_storage",
+        "tools/fixtures/profile_store_strict_host/strict_harness.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "64cca35b581f395ffd5ca0ed084c2c2cbc44fabbdca3443e8dc96664e9f36110",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_request_identity",
+      "defines_main": true,
+      "file_size_bytes": 1834,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 33,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_request_identity.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_request_identity",
+      "referenced_repository_path_prefixes": [
+        "tools/fixtures/profile_store_request_identity_host.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "974d54054677de9170440443c207428074b9e76450d1651596ab30d1d8fd99d9",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_rx_host",
+      "defines_main": true,
+      "file_size_bytes": 9629,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate.request",
+        "evidence",
+        "glyph_profile_store_candidate_tool"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 144,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_rx_host.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate.request",
+        "evidence",
+        "glyph_profile_store_candidate_tool"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_rx_host",
+      "referenced_repository_path_prefixes": [
+        "tools/fixtures/profile_store_rx_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "d13b83d91df6e056a664a4e1d6cc3bc5f342ee9b759ba0ca66f586fb373584f4",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": true,
+        "parser_add_argument_calls": 1
+      },
+      "checker_id": "profile_store_rx_stack",
+      "defines_main": true,
+      "file_size_bytes": 3830,
+      "hard_coded_branch_like_strings": [
+        "candidate_elf_sha256"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": true,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 39,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_rx_stack.py",
+      "potential_branch_identity_signals": [
+        "candidate_elf_sha256"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_rx_stack",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [],
+      "sha256": "c0890a26b28d649dcab60d7881d6bb4145c53f009319a2887657f163fd5ba21d",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_selection_recovery",
+      "defines_main": true,
+      "file_size_bytes": 8794,
+      "hard_coded_branch_like_strings": [
+        "branch",
+        "configurator"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 136,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_selection_recovery.py",
+      "potential_branch_identity_signals": [
+        "branch",
+        "configurator"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_selection_recovery",
+      "referenced_repository_path_prefixes": [
+        "include/core/NativeTargetMetrics.hpp",
+        "include/core/PackageOwnership.hpp",
+        "include/core/ProfileStore.hpp",
+        "include/core/RecoveryInitialization.hpp",
+        "src/config.cpp",
+        "src/core/mode_selection.cpp",
+        "tools/fixtures/mode_selection_host/include",
+        "tools/fixtures/profile_store_selection_recovery_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "a4dc6f6a954828867b5b62ce5b373f7ac64c2e859a51b83546ea661c84cd3499",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_strict_host",
+      "defines_main": true,
+      "file_size_bytes": 4584,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 48,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_strict_host.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_strict_host",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/core/CheckedStorage.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "include/core",
+        "include/core/ProfileStore.hpp",
+        "include/core/ProfileStoreAtomicCommit.hpp",
+        "include/core/ProfileStoreCapacity.hpp",
+        "include/core/ProfileStorePaths.hpp",
+        "include/core/ProfileStoreStorage.hpp",
+        "lib/littlefs",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/lfs.c",
+        "src/lfs_util.c",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/profile_store_migration_lifecycle_host/include",
+        "tools/fixtures/profile_store_strict_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "1fb76187ce242572967921ac18ed5f9f6e2a7ca5452976898671e04faabd011f",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_strict_protocol",
+      "defines_main": true,
+      "file_size_bytes": 1381,
+      "hard_coded_branch_like_strings": [
+        "candidate_faults"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": false,
+      "line_count": 24,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_strict_protocol.py",
+      "potential_branch_identity_signals": [
+        "candidate_faults"
+      ],
+      "potential_mutation_signals": [],
+      "python_module": "tools.check_glyph_profile_store_strict_protocol",
+      "referenced_repository_path_prefixes": [],
+      "runtime_config_relevance_signals": [],
+      "sha256": "fe385469e02754833765bbe72d5e6cc8119e65da228a9e1804165e6beda58177",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "profile_store_timeout_resynchronization",
+      "defines_main": true,
+      "file_size_bytes": 12290,
+      "hard_coded_branch_like_strings": [
+        "candidate_faults",
+        "configurator",
+        "evidence"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 159,
+      "parse_error": null,
+      "path": "tools/check_glyph_profile_store_timeout_resynchronization.py",
+      "potential_branch_identity_signals": [
+        "candidate_faults",
+        "configurator",
+        "evidence"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_profile_store_timeout_resynchronization",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "HAL/pico/src/comms/ConfiguratorBackend.cpp",
+        "HAL/pico/src/core/ProfileStore.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "src/pb_arduino.cpp",
+        "tools/fixtures/profile_store_timeout_host"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "c8309321bffbd9b194204dc23e953b4d31301231a0ab300a153e8f20233b1765",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": false,
         "parser_add_argument_calls": 0
       },
@@ -11786,6 +13579,59 @@
     },
     {
       "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "real_predecessor_config",
+      "defines_main": true,
+      "file_size_bytes": 4534,
+      "hard_coded_branch_like_strings": [
+        "candidate",
+        "candidate_legacy_admission"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 78,
+      "parse_error": null,
+      "path": "tools/check_glyph_real_predecessor_config.py",
+      "potential_branch_identity_signals": [
+        "candidate",
+        "candidate_legacy_admission"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_real_predecessor_config",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "include/config_rgb_target_domain.hpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "tools/fixtures/profile_store_predecessor_host/replay_validation.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "17604ad8b3b7e5ed2c88a1d868b6df2b9757058fbd7f955f675fa81641cf3ba7",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
         "imports_argparse": true,
         "parser_add_argument_calls": 1
       },
@@ -11931,6 +13777,46 @@
         "runtime_config": true,
         "source_owned": true,
         "y2_tilt3": true
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "resource_diagnostics",
+      "defines_main": true,
+      "file_size_bytes": 3698,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 56,
+      "parse_error": null,
+      "path": "tools/check_glyph_resource_diagnostics.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_resource_diagnostics",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/src/core/ResourceDiagnostics.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "3cfd6a8814bf0380d078dee300a86f6a37bc59b7134e58f7179399828f43d7e8",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
       }
     },
     {
@@ -12845,7 +14731,7 @@
       },
       "checker_id": "runtime_config_validation_aggregate",
       "defines_main": true,
-      "file_size_bytes": 108745,
+      "file_size_bytes": 110076,
       "hard_coded_branch_like_strings": [
         "AGG-20-environment-and-branch-isolation",
         "branch",
@@ -12878,7 +14764,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 1775,
+      "line_count": 1800,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_aggregate.py",
       "potential_branch_identity_signals": [
@@ -12947,6 +14833,7 @@
         "tools/link.py",
         "tools/other.py",
         "tools/test_glyph_c022_campaign_transition.py",
+        "tools/unknown.py",
         "tools/untracked.py"
       ],
       "runtime_config_relevance_signals": [
@@ -12958,7 +14845,7 @@
         "hardware_evidence_contracts",
         "runtime_config_docs"
       ],
-      "sha256": "3fc31505ee1b9d312c99bffeecf0886c3cc15b529945ce224e2b7786364a957d",
+      "sha256": "9a227815e395566918231a37d498fd539f75b3f3a969f3f6c1d1c3b7a0b7155c",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": false,
@@ -12979,7 +14866,7 @@
       },
       "checker_id": "runtime_config_validation_health",
       "defines_main": true,
-      "file_size_bytes": 16234,
+      "file_size_bytes": 16457,
       "hard_coded_branch_like_strings": [
         ".feature_branch",
         ".feature_branch.result",
@@ -12997,7 +14884,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": false,
       "invokes_subprocess": false,
-      "line_count": 210,
+      "line_count": 212,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_health.py",
       "potential_branch_identity_signals": [
@@ -13034,7 +14921,7 @@
         "current_y2_layout",
         "runtime_config_docs"
       ],
-      "sha256": "181708d72856a3c496cd2685164df0791ac55ff672b247c9e6cdacae7eefc818",
+      "sha256": "1ebfe6ff5ef6d310ab6d6526e9005190a9e90dcf0a22ebc66047eb6047daaf8a",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -13055,7 +14942,7 @@
       },
       "checker_id": "runtime_config_validation_publication_workflow",
       "defines_main": true,
-      "file_size_bytes": 10189,
+      "file_size_bytes": 10760,
       "hard_coded_branch_like_strings": [
         "origin/configurator"
       ],
@@ -13064,7 +14951,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 223,
+      "line_count": 233,
       "parse_error": null,
       "path": "tools/check_glyph_runtime_config_validation_publication_workflow.py",
       "potential_branch_identity_signals": [
@@ -13076,13 +14963,14 @@
       "python_module": "tools.check_glyph_runtime_config_validation_publication_workflow",
       "referenced_repository_path_prefixes": [
         "docs/runtime_config/fixtures/runtime_config_validation_publication_workflow.json",
+        "tools/glyph_ci_build_inputs.py",
         "tools/run_glyph_runtime_config_validation.py"
       ],
       "runtime_config_relevance_signals": [
         "ci_workflows",
         "runtime_config_docs"
       ],
-      "sha256": "b86c10fe75a65fe7607327c5fb4f56d6bed4302bdca1a89d37ece85e426ced8c",
+      "sha256": "2c3d53392ef734c3e81333a5cc664c79468b395bab38dc616b6e33eb36c69090",
       "static_signals": {
         "agent_framework": false,
         "candidate_generation": false,
@@ -13600,7 +15488,7 @@
       },
       "checker_id": "source_owned_candidate_generation",
       "defines_main": true,
-      "file_size_bytes": 17523,
+      "file_size_bytes": 17428,
       "hard_coded_branch_like_strings": [
         "--candidate-branch",
         "branch",
@@ -13625,7 +15513,7 @@
       "imports_glyph_checker_context": false,
       "invokes_git": true,
       "invokes_subprocess": true,
-      "line_count": 349,
+      "line_count": 338,
       "parse_error": null,
       "path": "tools/check_glyph_source_owned_candidate_generation.py",
       "potential_branch_identity_signals": [
@@ -13648,6 +15536,7 @@
         "source_owned_candidate_generation_workflow.json"
       ],
       "potential_mutation_signals": [
+        "subprocess.check_output",
         "subprocess.run"
       ],
       "python_module": "tools.check_glyph_source_owned_candidate_generation",
@@ -13678,7 +15567,7 @@
         "source_authority_intake",
         "source_owned_generator_modes"
       ],
-      "sha256": "2e84b5115da692ff0671d0831e828445018950e8d015ab7c65dfc0129908d878",
+      "sha256": "2e479fb23ec9fee3588333a0d6b51965ace22b0cf09324b251b5957edc2f9459",
       "static_signals": {
         "agent_framework": true,
         "candidate_generation": true,
@@ -14224,6 +16113,177 @@
         "candidate_generation": false,
         "coordinate_native": false,
         "docs_navigation": true,
+        "generated_source_owned_artifacts": true,
+        "hardware_results": false,
+        "identity_runtime_tables": true,
+        "runtime_config": true,
+        "source_owned": true,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "stage_a_ultimate_profiles_dry_run",
+      "defines_main": true,
+      "file_size_bytes": 10946,
+      "hard_coded_branch_like_strings": [
+        "evidence."
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 224,
+      "parse_error": null,
+      "path": "tools/check_glyph_stage_a_ultimate_profiles_dry_run.py",
+      "potential_branch_identity_signals": [
+        "evidence."
+      ],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_stage_a_ultimate_profiles_dry_run",
+      "referenced_repository_path_prefixes": [
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/stage_a_ultimate_profiles_host/admission.cpp"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "69668d607c5b664bcdd629fb8345eaf851942c90f1d8954a86d84aa22c8545fe",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": true,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "stage_b_ultimate_profiles",
+      "defines_main": true,
+      "file_size_bytes": 10001,
+      "hard_coded_branch_like_strings": [],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": false,
+      "invokes_subprocess": true,
+      "line_count": 167,
+      "parse_error": null,
+      "path": "tools/check_glyph_stage_b_ultimate_profiles.py",
+      "potential_branch_identity_signals": [],
+      "potential_mutation_signals": [
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_stage_b_ultimate_profiles",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_validation.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/stage_a_ultimate_profiles_dry_run.json",
+        "tools/fixtures/stage_b_ultimate_profiles_fixture.json",
+        "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp",
+        "tools/fixtures/stage_c_ultimate_profiles_fixture.json"
+      ],
+      "runtime_config_relevance_signals": [],
+      "sha256": "b9c8d1afd6f84f075a496fad75d49ba7fc7f877fbec38049e343e00b11722769",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
+        "generated_source_owned_artifacts": false,
+        "hardware_results": false,
+        "identity_runtime_tables": false,
+        "runtime_config": false,
+        "source_owned": false,
+        "y2_tilt3": false
+      }
+    },
+    {
+      "argument_requirement_signals": {
+        "imports_argparse": false,
+        "parser_add_argument_calls": 0
+      },
+      "checker_id": "stage_c_ultimate_profiles",
+      "defines_main": true,
+      "file_size_bytes": 21788,
+      "hard_coded_branch_like_strings": [
+        "configurator"
+      ],
+      "imported_local_modules": [],
+      "imports_argparse": false,
+      "imports_glyph_checker_context": false,
+      "invokes_git": true,
+      "invokes_subprocess": true,
+      "line_count": 279,
+      "parse_error": null,
+      "path": "tools/check_glyph_stage_c_ultimate_profiles.py",
+      "potential_branch_identity_signals": [
+        "configurator"
+      ],
+      "potential_mutation_signals": [
+        "subprocess.check_output",
+        "subprocess.run"
+      ],
+      "python_module": "tools.check_glyph_stage_c_ultimate_profiles",
+      "referenced_repository_path_prefixes": [
+        "HAL/pico/include",
+        "backend/default",
+        "include/core/state.hpp",
+        "src/core/ControllerMode.cpp",
+        "src/core/InputMode.cpp",
+        "src/core/config_button_validation.cpp",
+        "src/core/config_rgb_target_validation.cpp",
+        "src/core/config_usb_default_validation.cpp",
+        "src/core/config_utils.cpp",
+        "src/core/config_validation.cpp",
+        "src/core/socd.cpp",
+        "src/glyph_config_validation.cpp",
+        "src/modes/Ultimate.cpp",
+        "src/modes/UltimateNativeEvaluator.cpp",
+        "src/modes/UltimateNativeProfile.cpp",
+        "tools/fixtures/profile_native_ultimate/frozen",
+        "tools/fixtures/profile_native_ultimate/frozen/modes/Ultimate.hpp",
+        "tools/fixtures/stage_a_ultimate_profiles_dry_run.json",
+        "tools/fixtures/stage_b_ultimate_profiles_host/admission.cpp",
+        "tools/fixtures/stage_c_ultimate_profiles_dry_run.json",
+        "tools/fixtures/stage_c_ultimate_profiles_host",
+        "tools/glyph_serial_config_tool.py"
+      ],
+      "runtime_config_relevance_signals": [
+        "generated_baseline",
+        "generated_source_owned",
+        "identity_runtime_tables",
+        "runtime_config_interpreter"
+      ],
+      "sha256": "7c371065c1e89ed592079ef593b8ccdd5488dbf12e0696fa7e1570a135d7431d",
+      "static_signals": {
+        "agent_framework": false,
+        "candidate_generation": false,
+        "coordinate_native": false,
+        "docs_navigation": false,
         "generated_source_owned_artifacts": true,
         "hardware_results": false,
         "identity_runtime_tables": true,

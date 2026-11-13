@@ -12,7 +12,7 @@
     {
       "path": ".github/workflows/build.yml",
       "git_mode": "100644",
-      "sha256": "97e8970d77658af99512383094993b9a56ca921b926aaf036b30fb7e85799de5"
+      "sha256": "b3cfd8e76bb35d765c078d0e1658c3290c6f4e9fc8a3c8535f89e26b83ac9a1a"
     },
     {
       "path": "builder_scripts/arduino_pico.py",
@@ -27,7 +27,7 @@
     {
       "path": "config/glyph/env.ini",
       "git_mode": "100644",
-      "sha256": "c754c2f504c8740763d3f65fa114cc61c21fe5d73bd489c728610c1299d1fccf"
+      "sha256": "ab5aff0bb43b47a18f460bd9504ce327e0c5db04568672c26b50de54fd396d36"
     },
     {
       "path": "config/glyph/meta.yaml",
@@ -42,7 +42,7 @@
     {
       "path": "platformio.ini",
       "git_mode": "100644",
-      "sha256": "99fc26f84f4cf2c118d08fde7269a13b9b37f6ed1efb2d32291ba9f0b8e780e9"
+      "sha256": "240fc35d948ccfd8cc0d6d610bdd0a5687a945e13a2014a3ad748f16820ba40f"
     },
     {
       "path": "scripts/build-glyph-mk6-quiet.sh",
@@ -196,7 +196,7 @@
       "category": "source_selection",
       "declaring_path": "platformio.ini",
       "declaration_context": "env.custom_nanopb_protos",
-      "raw_selector": "+<.pio/libdeps/${PIOENV}/HayBox-proto/config.proto>",
+      "raw_selector": "+<schema/haybox/config.proto>",
       "selector_class": "LOCAL_SOURCE_SELECTION",
       "resolution_state": "RUNTIME_RESOLVED_ONLY"
     },
@@ -277,9 +277,9 @@
       "category": "dependency",
       "declaring_path": "platformio.ini",
       "declaration_context": "arduino_pico_base.lib_deps",
-      "raw_selector": "adafruit/Adafruit GFX Library@^1.11.9",
-      "selector_class": "COMPATIBLE_VERSION_RANGE",
-      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
+      "raw_selector": "adafruit/Adafruit GFX Library@1.12.6",
+      "selector_class": "EXACT_VERSION",
+      "resolution_state": "DECLARED_EXACT_NOT_FETCHED"
     },
     {
       "id": "pio.lib.adafruit_ssd1306",
@@ -314,15 +314,6 @@
       "declaring_path": "platformio.ini",
       "declaration_context": "arduino_pico_base.lib_deps",
       "raw_selector": "https://github.com/FastLED/FastLED#6daa782",
-      "selector_class": "ABBREVIATED_GIT_COMMIT",
-      "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
-    },
-    {
-      "id": "pio.lib.joybus_pio",
-      "category": "dependency",
-      "declaring_path": "platformio.ini",
-      "declaration_context": "arduino_pico_base.lib_deps",
-      "raw_selector": "https://github.com/GregTurbo/joybus-pio#f2f59c0",
       "selector_class": "ABBREVIATED_GIT_COMMIT",
       "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
     },
@@ -379,6 +370,24 @@
       "raw_selector": "https://github.com/JonnyHaystack/Adafruit_TinyUSB_XInput#4b5617b",
       "selector_class": "ABBREVIATED_GIT_COMMIT",
       "resolution_state": "DECLARED_MOVABLE_NOT_RESOLVED"
+    },
+    {
+      "id": "pio.mk6.package_proto",
+      "category": "source_selection",
+      "declaring_path": "platformio.ini",
+      "declaration_context": "env:glyph_mk6.custom_nanopb_protos",
+      "raw_selector": "+<schema/haybox/package.proto>",
+      "selector_class": "LOCAL_SOURCE_SELECTION",
+      "resolution_state": "RUNTIME_RESOLVED_ONLY"
+    },
+    {
+      "id": "pio.mk6.resource_hook",
+      "category": "local_script",
+      "declaring_path": "platformio.ini",
+      "declaration_context": "env:glyph_mk6.extra_scripts",
+      "raw_selector": "pre:builder_scripts/native_target_metrics.py",
+      "selector_class": "LOCAL_TRACKED_FILE",
+      "resolution_state": "STATIC_TRACKED_BYTES"
     },
     {
       "id": "pio.source_filter.pico",

@@ -9,6 +9,9 @@ permissions:
 
 jobs:
   validation:
+    needs: current_host
+    outputs:
+      firmware: ${{ steps.inputs.outputs.firmware }}
     runs-on: ubuntu-latest
     env:
       GLYPH_CHECKER_BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || 'origin/configurator' }}
@@ -17,6 +20,9 @@ jobs:
       uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       with:
         fetch-depth: 0
+
+    - name: Fetch historical failed-build object required by C020 replay
+      run: git fetch origin 0a5dd751c391198140ed146853a69fc825d902c7:refs/ci-evidence/c020-failed-build
 
     - name: Set trusted comparison base
       run: |
@@ -27,11 +33,19 @@ jobs:
         fi
         test -n "$GLYPH_CHECKER_BASE"
         git rev-parse --verify "$GLYPH_CHECKER_BASE"
+        if ! git show-ref --verify --quiet refs/heads/configurator; then
+          git branch configurator refs/remotes/origin/configurator
+        fi
 
     - name: Run current runtime-config validation
       run: python3 tools/run_glyph_runtime_config_validation.py --json
 
+    - name: Classify firmware build inputs
+      id: inputs
+      run: python3 tools/glyph_ci_build_inputs.py >> "$GITHUB_OUTPUT"
+
   build:
+    if: needs.validation.outputs.firmware == 'true'
     runs-on: ubuntu-latest
     needs: validation
     env:
@@ -104,4 +118,59 @@ jobs:
       with:
         name: Glyph_FW
         path: ${{ env.PIO_ENV }}
-    
+
+  current_host:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out source code (actions/checkout v4.4.0)
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      with:
+        fetch-depth: 0
+
+    - name: Install offline host test dependencies
+      run: |
+        python3 -m venv "$RUNNER_TEMP/host-python"
+        "$RUNNER_TEMP/host-python/bin/pip" install grpcio-tools
+        echo "$RUNNER_TEMP/host-python/bin" >> "$GITHUB_PATH"
+        mkdir "$RUNNER_TEMP/host-clang"
+        ln -s /usr/bin/clang "$RUNNER_TEMP/host-clang/cc"
+        ln -s /usr/bin/clang++ "$RUNNER_TEMP/host-clang/c++"
+        echo "$RUNNER_TEMP/host-clang" >> "$GITHUB_PATH"
+        mkdir -p .pio/libdeps/glyph_mk6
+        git init -q .pio/libdeps/glyph_mk6/Nanopb
+        git -C .pio/libdeps/glyph_mk6/Nanopb fetch --depth=1 https://github.com/nanopb/nanopb.git cad3c18ef15a663e30e3e43e3a752b66378adec1
+        git -C .pio/libdeps/glyph_mk6/Nanopb checkout --detach FETCH_HEAD
+        test "$(git -C .pio/libdeps/glyph_mk6/Nanopb rev-parse HEAD)" = cad3c18ef15a663e30e3e43e3a752b66378adec1
+
+    - name: Resolve immutable public package test dependencies
+      run: |
+        git init -q "$RUNNER_TEMP/framework"
+        git -C "$RUNNER_TEMP/framework" fetch --depth=1 https://github.com/earlephilhower/arduino-pico.git 32e74d024e5e3ee5e7ec9593f5a4101641c61897
+        git -C "$RUNNER_TEMP/framework" checkout --detach FETCH_HEAD
+        test "$(git -C "$RUNNER_TEMP/framework" rev-parse HEAD)" = 32e74d024e5e3ee5e7ec9593f5a4101641c61897
+        git -C "$RUNNER_TEMP/framework" submodule update --init --depth=1 libraries/LittleFS/lib/littlefs
+        test "$(git -C "$RUNNER_TEMP/framework/libraries/LittleFS/lib/littlefs" rev-parse HEAD)" = 6a53d76e90af33f0656333c1db09bd337fa75d23
+        echo "GLYPH_ARDUINOPICO_FRAMEWORK=$RUNNER_TEMP/framework" >> "$GITHUB_ENV"
+        git init -q .pio/libdeps/glyph_mk6/PacketIO
+        git -C .pio/libdeps/glyph_mk6/PacketIO fetch --depth=1 https://github.com/eric-wieser/packet-io.git bb8387bf2d0ca9b87c141ee32992a42ce6be3b0b
+        git -C .pio/libdeps/glyph_mk6/PacketIO checkout --detach FETCH_HEAD
+        test "$(git -C .pio/libdeps/glyph_mk6/PacketIO rev-parse HEAD)" = bb8387bf2d0ca9b87c141ee32992a42ce6be3b0b
+
+    - name: Current host regressions
+      run: |
+        python3 tools/test_glyph_ci_build_inputs.py
+        python3 tools/check_glyph_checker_census.py
+        python3 tools/check_glyph_runtime_config_validation_health.py
+        python3 tools/check_glyph_build_input_provenance_inventory.py
+        python3 tools/check_glyph_build_input_non_selector_configuration.py
+        python3 tools/check_glyph_build_input_resolution_observations.py
+        python3 tools/check_glyph_runtime_config_validation_publication_workflow.py
+        python3 tools/check_glyph_artifact_postprocessor_workflow.py
+        python3 tools/check_glyph_active_profile_display.py
+        python3 tools/check_glyph_controller_profile_selector.py
+        python3 tools/check_glyph_profile_store_selection_recovery.py
+        python3 tools/check_glyph_profile_store_config_persistence.py
+        python3 tools/check_glyph_profile_store_production_tool.py
+        python3 tools/check_glyph_profile_store_littlefs_host.py
+        python3 tools/glyph_ci_current_firmware.py
+        python3 tools/glyph_ci_current_package_tests.py

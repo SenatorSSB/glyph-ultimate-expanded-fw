@@ -136,7 +136,9 @@ def validate_health(value: dict[str, Any], census_value: dict[str, Any], manifes
     exclusion_records = {item["id"]: item for item in exclusions}
     for record in expected_results:
         source = manifest_records.get(record["id"])
-        if source is None or source["path"] != record["path"] or source["applicability"] != "current" or source["load_bearing"] is not True or record["path"] not in census_paths:
+        historical = manifest["schema_version"] == 5 and record["id"] in {"identity_table_source_sync", "runtime_semantics_evaluator_bridge"}
+        expected_use = "historical_only" if historical else "current"
+        if source is None or source["path"] != record["path"] or source["applicability"] != expected_use or source["load_bearing"] != (not historical) or record["path"] not in census_paths:
             raise ValueError("current checker result source correspondence is stale")
     # The new C023 replay command has no implementation at B023 by design; it
     # is not a known failing checker and must not be recast as fixture drift.

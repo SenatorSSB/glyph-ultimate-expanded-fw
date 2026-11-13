@@ -131,6 +131,16 @@ def validate(text: str, fixture: dict[str, object]) -> None:
         )
     except WorkflowStepError as exc:
         raise WorkflowError(str(exc)) from exc
+    required_classifier = (
+        '    - name: Classify firmware build inputs\n'
+        '      id: inputs\n'
+        '      run: python3 tools/glyph_ci_build_inputs.py >> "$GITHUB_OUTPUT"'
+    )
+    if (text.count(required_classifier) != 1 or
+            text.count('      id: inputs') != 1 or
+            required_classifier not in job_blocks(text)[validation_job] or
+            "    if: needs.validation.outputs.firmware == 'true'" not in job_blocks(text)[publication_job]):
+        raise WorkflowError("missing or substituted firmware build eligibility contract")
     validate_trusted_comparison_setup(text, fixture)
     jobs = job_blocks(text)
     validation = jobs[validation_job]

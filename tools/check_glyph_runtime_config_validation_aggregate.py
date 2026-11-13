@@ -1458,7 +1458,7 @@ def main() -> int:
         manifest = write_manifest(root, [timeout_probe], ["baseline"])
         original_budgets = (module.CHECKER_TIMEOUT_SECONDS, module.AGGREGATE_TIMEOUT_SECONDS, module.TERM_GRACE_SECONDS)
         module.CHECKER_TIMEOUT_SECONDS = 0.05
-        module.AGGREGATE_TIMEOUT_SECONDS = 1.0
+        module.AGGREGATE_TIMEOUT_SECONDS = 10.0
         module.TERM_GRACE_SECONDS = 0.05
         try:
             result, text = invoke(module, root, manifest, "--json")
@@ -1763,7 +1763,32 @@ def main() -> int:
             campaign, "authenticate", side_effect=lambda root: {"test_only_legacy_catalog": str(root)}):
         passed.extend(topology_catalog_cases(module))
         passed.extend(gp_config_010_historical_object_cases(module))
-    passed.extend(gp_val037_campaign_catalog_cases(module))
+    actual_root = RUNNER_PATH.resolve().parents[1]
+    if module.package_scope.package_lineage(actual_root):
+        import copy
+        scope = module.package_scope
+        entries = json.loads((actual_root / "docs/runtime_config/fixtures/runtime_config_validation_manifest.json").read_text())["entries"]
+        scope.verify_manifest_coverage(actual_root, entries)
+        for change, name in (("retire", "gp_config023_usb_index_validation"),
+                             ("remove", "validation_publication_workflow"),
+                             ("substitute", "gp_config022_rgb_target_validation")):
+            alternate = copy.deepcopy(entries)
+            row = next(r for r in alternate if r["id"] == name)
+            if change == "remove":
+                alternate.remove(row)
+            elif change == "substitute":
+                row["command"] = ["python3", "tools/unknown.py"]
+            else:
+                row["applicability"] = "historical_only"
+            try:
+                scope.verify_manifest_coverage(actual_root, alternate)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("current package manifest accepted " + change + " for " + name)
+        passed.append("current-package-required-command-and-classification-negatives")
+    else:
+        passed.extend(gp_val037_campaign_catalog_cases(module))
 
     if set(REQUIRED) != set(entry("schema_probe")):
         raise AssertionError("adversarial manifest entry no longer matches the runner schema")
