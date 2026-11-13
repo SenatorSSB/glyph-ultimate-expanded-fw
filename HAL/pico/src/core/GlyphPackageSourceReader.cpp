@@ -452,9 +452,13 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::LifecycleConfig(const c
         const char *current, const package_storage::IntentFacts &intent) {
     uint8_t before[32], after[32];
     auto &c = _persistence.PackageConfigScratch();
-    return LoadNamedConfig(prior,8191) && _config_valid && ProjectLifecycleConfig(c,intent,true) &&
+    const bool matches=LoadNamedConfig(prior,8191) && _config_valid && ProjectLifecycleConfig(c,intent,true) &&
         HashMessage(Config_fields,&c,before) && LoadNamedConfig(current,8191) && _config_valid &&
         ProjectLifecycleConfig(c,intent,false) && HashMessage(Config_fields,&c,after) &&
         !std::memcmp(before,after,32);
+    // Projection deliberately edited the materialized scratch. Later Row/Native
+    // observations must obtain the exact file again even in this same lease.
+    _materialized=false;
+    return matches;
 }
 #endif
