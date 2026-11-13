@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from contextvars import ContextVar
 import ast
 import hashlib
 import json
@@ -46,12 +47,33 @@ def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
     return result
 
 
+# A single read-only manifest load often refers to the same production input
+# hundreds of times. Gather stage-zero metadata once per invocation; live mode
+# and regular-file checks still apply, as do the independent clean-tree proofs.
+_MANIFEST_INDEX = ContextVar("glyph_manifest_index", default=None)
+
+
+def regular_index_paths():
+    raw = git_value("ls-files", "--stage", "-z")
+    rows = {}
+    for record in raw.split("\0"):
+        if record:
+            metadata, path = record.split("\t", 1)
+            mode, _, stage = metadata.split()
+            rows.setdefault(path, []).append((mode, stage))
+    return {path for path, values in rows.items()
+            if len(values) == 1 and values[0] in (("100644", "0"), ("100755", "0"))}
+
+
 def tracked_regular_stage_zero(path: str) -> bool:
     if not path or path.startswith("/") or "\\" in path:
         return False
     pure = PurePosixPath(path)
     if pure.as_posix() != path or any(part in {"", ".", ".."} for part in pure.parts):
         return False
+    index = _MANIFEST_INDEX.get()
+    if index is not None:
+        return path in index and (ROOT / path).is_file() and not (ROOT / path).is_symlink()
     result = git("ls-files", "--stage", "--", path)
     records = [line.split("\t", 1)[0].split() for line in result.stdout.splitlines() if "\t" in line]
     return len(records) == 1 and records[0][0] in {"100644", "100755"} and (ROOT / path).is_file() and not (ROOT / path).is_symlink()
@@ -295,6 +317,14 @@ def validate_branch_policy(entry: dict[str, object]) -> None:
 
 
 def load() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
+    token = _MANIFEST_INDEX.set(regular_index_paths())
+    try:
+        return load_indexed_manifest()
+    finally:
+        _MANIFEST_INDEX.reset(token)
+
+
+def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, object]], set[str]]:
     value = json.loads(MANIFEST.read_text(encoding="utf-8"), object_pairs_hook=pairs)
     if value.get("schema_version") != 4 or not isinstance(value.get("categories"), list) or not isinstance(value.get("entries"), list) or not isinstance(value.get("strong_signal_exclusions"), list):
         raise ValueError("invalid manifest root")
