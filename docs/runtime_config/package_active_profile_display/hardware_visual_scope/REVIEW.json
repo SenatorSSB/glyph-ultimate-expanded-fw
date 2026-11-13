@@ -1,0 +1,11 @@
+{
+  "result": "DONE_FOCUSED_INDEPENDENT_REVIEW",
+  "reviewer": "/root/v2_final_review",
+  "manifest_sha256": "7382d3ab0dcc73b4c130fda2a72bdf0984c7e2814dd867c2f32f8fa5f1c8b756",
+  "processor_sha256": "c89a2f475a5a021cc9bbd6ea71e11f4d83c6d9414a3a6f5bca16e40faadb1bb7",
+  "test_methods": 6,
+  "offline_verify": "PASS",
+  "findings": [],
+  "scope": "Truthful NOT_VISIBLE_NOT_VERIFIED with false visible-name PASS; authority, final settlement and36new+34inherited enforced; transport unchanged.",
+  "device_access": false
+}

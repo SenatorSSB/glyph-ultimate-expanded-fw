@@ -1,0 +1,13 @@
+{
+  "files": {
+    "README.md": "b6f41fcc0b0e737b27eff784369c65072d8dd12e20f5eb6e4b8ea5818501fb27",
+    "TEST_RESULTS.json": "bd7769bd827d5259305232f7f791a90896c53af3fbbb732042bc7b02ee553353",
+    "accept_visual.py": "c89a2f475a5a021cc9bbd6ea71e11f4d83c6d9414a3a6f5bca16e40faadb1bb7",
+    "offline-tests.log.gz": "a8ac62c302a5a8f479fbb5b52787889c2372d33d235ffc0bf1f9125ed696c83d",
+    "test_visual.py": "fa1e3c47ee54b45ee6e6661dafdf7ce332c7b5e45666a00bdd971aba17fc76ff"
+  },
+  "adapter_manifest_sha256": "fc44f1b3b175f7c14af7e9210727d2eb24a5f3892922003103ef7a0679df8f10",
+  "adapter_executor_sha256": "b9527a3dc3d45fcbe4221b57ae83996d1b9b58b0ebaa51874b46b099b161ae1f",
+  "new_controller_requests": 0,
+  "viewer_name_result": "NOT_VISIBLE_NOT_VERIFIED"
+}
