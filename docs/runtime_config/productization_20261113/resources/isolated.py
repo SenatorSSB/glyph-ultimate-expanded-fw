@@ -27,11 +27,19 @@ if a.lane=='startup':
  total('classify_directory',680,'::ClassifyNamespaceInto(','Classifier::Run()', 'GlyphPackageSourceReader::ObjectAt(', 'CheckedStorage::Enumerate(', 'lfs_dir_open','lfs_dir_find','lfs_dir_fetchmatch','lfs_dir_find_match',64,20)
  total('ordinary_loop_time_capture', 'main','loop','::mark_first_mode_ready()',64,408)
 else:
- comparison='accepted separate branch proof covers evaluator; no startup directory-page families altered'
+ # Every old changed top-level function is a documented selector, loop, or
+ # display construction. All lower shared storage and codec shapes are checked.
+ allowed=('::request_mode_destination(', '::service_profile_selection()', 'DefaultConfigMenu::',
+          'profile_selection::BuildTargets(', 'setup_mode_activation_bindings(', 'loop')
+ assert all(any(w in k for w in allowed) for k in changed),changed
+ assert all(any(w in k for w in ('::NativeTemplate(', 'profile_selection::Persist<')) for k in removed),removed
+ assert all(any(w in k for w in ('::commit_mode_destination(', '::persist_managed_chord(', '::persist_ordinary_chord(',
+     'DefaultConfigMenu::UpdateDisplay(', 'profile_selection::', 'managed_chord_held(', 'managed_chord_admitted(')) for k in added),added
  total('ordinary.chord_full_depth', 'main','loop','::persist_ordinary_chord(', 'Persistence::LoadConfigChecked(',1208,24,300,348)
  total('managed.chord_unknown_skip','main','loop','::persist_managed_chord(', 'profile_selection::Persist<','Persistence::LoadConfigChecked(',1112,24,308,408)
  total('managed.menu_unknown_skip','main','loop','::service_profile_selection()', 'profile_selection::Persist<','Persistence::LoadConfigChecked(',1112,24,308,408)
  total('managed.physical_append', 'main','loop',max(fr('::service_profile_selection()'),fr('::persist_managed_chord(')), 'profile_selection::Persist<','Persistence::SaveConfigIfGenerationMatches(', 'Persistence::InitializeOrdinarySaveContext(', 'ProfileStore::BeginOrdinaryConfigWrite(', '::ClassifyNamespaceInto(','Classifier::RunFinal()', 'GlyphPackageSourceReader::AppendConfig(','::CompareAppendFiles(','::NextAppendField(',532,408)
+ total('managed.idle_decision','main','loop','managed_chord_admitted(',24,408)
  total('managed.gamecube_idle_wake','main','loop','GamecubeBackend::SendReport()', 'GamecubeConsole::WaitForPollStartBounded(', 'profile_selection::GamecubeSelectionPending()','managed_chord_held(',408)
  lower = ('pb_', 'lfs_', 'encode_', 'decode_', 'CheckedStorage::')
  assert {k for k in b if k.startswith(lower)} == {k for k in f if k.startswith(lower)}

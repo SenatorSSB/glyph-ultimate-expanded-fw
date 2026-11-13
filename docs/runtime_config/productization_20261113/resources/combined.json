@@ -1,0 +1,1956 @@
+{
+  "source": "84556d904f067bda5a101e6297689239ecd04aae",
+  "elf_sha256": "4fd3e2a0cea3246115a31f41195ed1df0ba7294cc98a08b9c7711327c36a0f8f",
+  "baseline_archive_sha256": "039f7517b0d373a43b3332346b43e3704d5fca332dbf47a3fdb8992b6ac46553",
+  "functions_sha256": "928a8a4d2640a0f5f94f41f1531983df7569181ca98adc1be2d2ff4b1a6a062e",
+  "lower_graph_functions_compared": 128,
+  "equivalence": "resolved frame, set of direct callees, indirect instruction union and tail destinations",
+  "routes": {
+    "create.compact_description": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "GlyphPackageSourceReader::DescribeConfig(_Config const&, package_storage::ConfigFacts&)",
+          24
+        ],
+        [
+          "(anonymous namespace)::EncodeConfigFacts(_Config const&, package_storage::ConfigFacts&)",
+          280
+        ],
+        [
+          "original_PB_encode",
+          712
+        ],
+        [
+          "(anonymous namespace)::EncodeConfigFacts(_Config const&, package_storage::ConfigFacts&)::{lambda(pb_ostream_s*, unsigned char const*, unsigned int)#1}::_FUN(pb_ostream_s*, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "(anonymous namespace)::UpdateConfigEncodingHash(Sha256&, unsigned char const*, unsigned int)",
+          184
+        ],
+        [
+          "ROM copy",
+          12
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1968
+    },
+    "lifecycle.compact_description": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "GlyphPackageSourceReader::DescribeConfig(_Config const&, package_storage::ConfigFacts&)",
+          24
+        ],
+        [
+          "(anonymous namespace)::EncodeConfigFacts(_Config const&, package_storage::ConfigFacts&)",
+          280
+        ],
+        [
+          "original_PB_encode",
+          712
+        ],
+        [
+          "(anonymous namespace)::EncodeConfigFacts(_Config const&, package_storage::ConfigFacts&)::{lambda(pb_ostream_s*, unsigned char const*, unsigned int)#1}::_FUN(pb_ostream_s*, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "(anonymous namespace)::UpdateConfigEncodingHash(Sha256&, unsigned char const*, unsigned int)",
+          184
+        ],
+        [
+          "ROM copy",
+          12
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1968
+    },
+    "publish.root_rename": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+          32
+        ],
+        [
+          "(anonymous namespace)::SegmentRename()",
+          32
+        ],
+        [
+          "generic_Rename_U",
+          1464
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 2044
+    },
+    "publish.config_rotation": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+          32
+        ],
+        [
+          "ProfileStore::PublishPackageConfigStage()",
+          8
+        ],
+        [
+          "Persistence::PublishPreparedPackageConfig()",
+          8
+        ],
+        [
+          "Persistence::PublishPackageStaged()",
+          8
+        ],
+        [
+          "rotate helper maximum",
+          8
+        ],
+        [
+          "generic_Rename_U",
+          1464
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 2044
+    },
+    "publish.retire_remove": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+          32
+        ],
+        [
+          "(anonymous namespace)::RetirePreviousPackageRecord()",
+          72
+        ],
+        [
+          "generic Remove upper",
+          1376
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1996
+    },
+    "publish.retire_checked_read": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+          32
+        ],
+        [
+          "(anonymous namespace)::RetirePreviousPackageRecord()",
+          72
+        ],
+        [
+          "(anonymous namespace)::MountedStorage::CheckedRead(char const*, unsigned char*, unsigned int, CheckedStorage::Kind)",
+          24
+        ],
+        [
+          "CheckedStorage::ReadFile(char const*, unsigned char*, unsigned int, CheckedStorage::Kind)",
+          208
+        ],
+        [
+          "checked read-only open/stat/read/close max",
+          540
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1392
+    },
+    "publish.segment_open": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+          32
+        ],
+        [
+          "segment open",
+          40
+        ],
+        [
+          "generic_open_U_adjusted",
+          1400
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1988
+    },
+    "publish.record_open": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PublishPackageTransaction() [clone .part.0]",
+          32
+        ],
+        [
+          "record Open wrapper from predecessor",
+          56
+        ],
+        [
+          "generic_open_U_adjusted",
+          1400
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 2004
+    },
+    "classify.roots.full historical Config semantic check + rejected alternatives": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunRoots() [clone .isra.0]",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::LoadConfigs()",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "full historical Config semantic check + rejected alternatives",
+          1000
+        ]
+      ],
+      "total": 1976
+    },
+    "classify.roots.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunRoots() [clone .isra.0]",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::LoadConfigs()",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ]
+      ],
+      "total": 1952
+    },
+    "classify.roots.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunRoots() [clone .isra.0]",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::LoadConfigs()",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ]
+      ],
+      "total": 1948
+    },
+    "classify.roots.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunRoots() [clone .isra.0]",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::LoadConfigs()",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ]
+      ],
+      "total": 1912
+    },
+    "classify.scan_recheck.full historical Config semantic check + rejected alternatives": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::Run() [clone .constprop.0] [clone .isra.0]",
+          128
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::HistoricalRetained()",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "full historical Config semantic check + rejected alternatives",
+          1000
+        ]
+      ],
+      "total": 2008
+    },
+    "classify.scan_recheck.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::Run() [clone .constprop.0] [clone .isra.0]",
+          128
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::HistoricalRetained()",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ]
+      ],
+      "total": 1984
+    },
+    "classify.scan_recheck.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::Run() [clone .constprop.0] [clone .isra.0]",
+          128
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::HistoricalRetained()",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ]
+      ],
+      "total": 1980
+    },
+    "classify.scan_recheck.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::Run() [clone .constprop.0] [clone .isra.0]",
+          128
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::HistoricalRetained()",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::Config(char const*, unsigned long, package_storage::ConfigFacts&)",
+          40
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ]
+      ],
+      "total": 1944
+    },
+    "classify.owned.native.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Native(char const*, unsigned int, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::MaterializeProjection(char const*)",
+          32
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ]
+      ],
+      "total": 2024
+    },
+    "classify.owned.native.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Native(char const*, unsigned int, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::MaterializeProjection(char const*)",
+          32
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ]
+      ],
+      "total": 2020
+    },
+    "classify.owned.native.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Native(char const*, unsigned int, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::MaterializeProjection(char const*)",
+          32
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ]
+      ],
+      "total": 1984
+    },
+    "classify.owned.native.compact Config validation with format1 and zero embedded profiles": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Native(char const*, unsigned int, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "GlyphPackageSourceReader::MaterializeProjection(char const*)",
+          32
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "compact Config validation with format1 and zero embedded profiles",
+          752
+        ]
+      ],
+      "total": 1800
+    },
+    "classify.owned.row.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ]
+      ],
+      "total": 2016
+    },
+    "classify.owned.row.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ]
+      ],
+      "total": 2012
+    },
+    "classify.owned.row.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ]
+      ],
+      "total": 1976
+    },
+    "classify.owned.row.compact Config validation with format1 and zero embedded profiles": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "compact Config validation with format1 and zero embedded profiles",
+          752
+        ]
+      ],
+      "total": 1792
+    },
+    "classify.owned.rgb.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Rgb(char const*, unsigned int, unsigned char*)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ]
+      ],
+      "total": 2016
+    },
+    "classify.owned.rgb.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Rgb(char const*, unsigned int, unsigned char*)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ]
+      ],
+      "total": 2012
+    },
+    "classify.owned.rgb.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Rgb(char const*, unsigned int, unsigned char*)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ]
+      ],
+      "total": 1976
+    },
+    "classify.owned.rgb.compact Config validation with format1 and zero embedded profiles": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "max baseline/terminal/installed frame for OwnedSet",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::OwnedSet(package_storage::RootFacts const&, char const*, package_storage::ConfigFacts const&, bool, unsigned long, unsigned long, package_storage::IntentFacts const*)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::Rgb(char const*, unsigned int, unsigned char*)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "compact Config validation with format1 and zero embedded profiles",
+          752
+        ]
+      ],
+      "total": 1792
+    },
+    "lifecycle.aggregate.full historical Config semantic check + rejected alternatives": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "full historical Config semantic check + rejected alternatives",
+          1000
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1996
+    },
+    "lifecycle.aggregate.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1972
+    },
+    "lifecycle.aggregate.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1968
+    },
+    "lifecycle.aggregate.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1932
+    },
+    "create.aggregate.full historical Config semantic check + rejected alternatives": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "full historical Config semantic check + rejected alternatives",
+          1000
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1996
+    },
+    "create.aggregate.iterative descriptor defaults + fixed 4-depth leaf": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "iterative descriptor defaults + fixed 4-depth leaf",
+          976
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1972
+    },
+    "create.aggregate.NOINIT scalar read through CheckedStorage without submessage recursion": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "NOINIT scalar read through CheckedStorage without submessage recursion",
+          972
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1968
+    },
+    "create.aggregate.canonical child sizing + 3-level child PB upper": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PreparePackageTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::ComputePackageAggregate(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, _Config const&, unsigned long) [clone .constprop.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::Row(char const*, unsigned int, package_storage::RowFacts&)",
+          48
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "canonical child sizing + 3-level child PB upper",
+          936
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1932
+    },
+    "classify.append_stat": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunProjection() [clone .isra.0]",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::AppendConfig(char const*, char const*)",
+          96
+        ],
+        [
+          "(anonymous namespace)::CompareAppendFiles(bool&, char const*, char const*, (anonymous namespace)::AppendShape const&, (anonymous namespace)::AppendShape const&, unsigned long, unsigned long, unsigned long, unsigned long) [clone .constprop.0]",
+          552
+        ],
+        [
+          "(anonymous namespace)::NextAppendField((anonymous namespace)::AppendCursor&, (anonymous namespace)::AppendField&, (anonymous namespace)::AppendShape const&, unsigned long, unsigned long, (anonymous namespace)::AppendProgress&, bool&)",
+          72
+        ],
+        [
+          "checked Stat upper",
+          532
+        ]
+      ],
+      "total": 2004
+    },
+    "classify.lifecycle_projection.full_config_hash": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunProjection() [clone .isra.0]",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::LifecycleConfig(char const*, char const*, package_storage::IntentFacts const&)",
+          112
+        ],
+        [
+          "(anonymous namespace)::HashMessage(pb_msgdesc_s const*, void const*, unsigned char*)",
+          160
+        ],
+        [
+          "original_PB_encode",
+          712
+        ],
+        [
+          "SHA callback max",
+          184
+        ],
+        [
+          "ROM copy",
+          12
+        ]
+      ],
+      "total": 1932
+    },
+    "classify.lifecycle_projection.reload": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunProjection() [clone .isra.0]",
+          16
+        ],
+        [
+          "GlyphPackageSourceReader::LifecycleConfig(char const*, char const*, package_storage::IntentFacts const&)",
+          112
+        ],
+        [
+          "GlyphPackageSourceReader::LoadNamedConfig(char const*, unsigned long, unsigned char*, unsigned long*, unsigned long*, bool*)",
+          40
+        ],
+        [
+          "Persistence::ObservePackageConfig(Persistence::PackageConfigFile, _Config&, Persistence::PackageConfigFacts&, bool&, unsigned int)",
+          32
+        ],
+        [
+          "Persistence::RunObservedPackageConfig()",
+          16
+        ],
+        [
+          "full historical Config semantic check + rejected alternatives",
+          1000
+        ]
+      ],
+      "total": 1952
+    },
+    "classify.root_object_read": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunRoots() [clone .isra.0]",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::LoadRoot(char const*, package_storage::RootFacts&, unsigned char*, bool)",
+          64
+        ],
+        [
+          "GlyphPackageSourceReader::Read(char const*, unsigned int, unsigned char*, unsigned int)",
+          200
+        ],
+        [
+          "checked read-only open/stat/read/close max",
+          540
+        ]
+      ],
+      "total": 1628
+    },
+    "classify.intent_hash": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::RunRoots() [clone .isra.0]",
+          88
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::LoadRoot(char const*, package_storage::RootFacts&, unsigned char*, bool)",
+          64
+        ],
+        [
+          "package_storage::(anonymous namespace)::ReadIntentFacts(unsigned char const*, package_storage::IntentFacts&)",
+          312
+        ],
+        [
+          "SHA final/compression upper",
+          240
+        ]
+      ],
+      "total": 1440
+    },
+    "legacy.full_config_description": {
+      "parts": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "ConfiguratorBackend::SendReport()",
+          24
+        ],
+        [
+          "conservative legacy SET handler",
+          8
+        ],
+        [
+          "Persistence::SaveConfig(_Config&)",
+          8
+        ],
+        [
+          "Persistence::InitializeOrdinarySaveContext(Persistence*, _Config*)",
+          16
+        ],
+        [
+          "ProfileStore::BeginOrdinaryConfigWrite(_Config const&)",
+          80
+        ],
+        [
+          "GlyphPackageSourceReader::DescribeConfig(_Config const&, package_storage::ConfigFacts&)",
+          24
+        ],
+        [
+          "(anonymous namespace)::EncodeConfigFacts(_Config const&, package_storage::ConfigFacts&)",
+          280
+        ],
+        [
+          "original_PB_encode",
+          944
+        ],
+        [
+          "(anonymous namespace)::EncodeConfigFacts(_Config const&, package_storage::ConfigFacts&)::{lambda(pb_ostream_s*, unsigned char const*, unsigned int)#1}::_FUN(pb_ostream_s*, unsigned char const*, unsigned int)",
+          24
+        ],
+        [
+          "(anonymous namespace)::UpdateConfigEncodingHash(Sha256&, unsigned char const*, unsigned int)",
+          184
+        ],
+        [
+          "ROM copy",
+          12
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 2032
+    },
+    "ordinary.chord_configurator_full_depth": {
+      "parts": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "(anonymous namespace)::persist_ordinary_chord(unsigned int)",
+          48
+        ],
+        [
+          "Persistence::LoadConfigChecked(_Config&)",
+          24
+        ],
+        [
+          "validated published D4 decoder",
+          1208
+        ],
+        [
+          "(anonymous namespace)::read_config_file(pb_istream_s*, unsigned char*, unsigned int)",
+          24
+        ],
+        [
+          "noninline legacy read",
+          300
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 2032
+    },
+    "managed.chord_physical_full_depth_unknown_field": {
+      "parts": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "(anonymous namespace)::persist_managed_chord(unsigned int)",
+          40
+        ],
+        [
+          "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+          32
+        ],
+        [
+          "Persistence::LoadConfigChecked(_Config&)",
+          24
+        ],
+        [
+          "D4 unknown skip",
+          1112
+        ],
+        [
+          "(anonymous namespace)::read_config_file(pb_istream_s*, unsigned char*, unsigned int)",
+          24
+        ],
+        [
+          "readonly lower",
+          308
+        ],
+        [
+          "physical IRQ",
+          408
+        ]
+      ],
+      "total": 2028
+    },
+    "legacy.SET_stage_write": {
+      "parts": [
+        [
+          "prior accepted non-IRQ foreground, write/flash/masked branch under same or smaller loop frame",
+          1700
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 2048
+    },
+    "classify.directory_scan": {
+      "parts": [
+        [
+          "max of boot/ordinary physical/recovery/configurator classifier contexts including IRQ",
+          680
+        ],
+        [
+          "package_storage::ClassifyNamespaceInto(package_storage::NamespaceReader&, package_storage::ClassifierOwners const&)",
+          56
+        ],
+        [
+          "package_storage::(anonymous namespace)::Classifier::Run() [clone .constprop.0] [clone .isra.0]",
+          128
+        ],
+        [
+          "GlyphPackageSourceReader::ObjectAt(unsigned int, package_storage::NamespaceObject&, bool&)",
+          72
+        ],
+        [
+          "CheckedStorage::Enumerate(char const*, bool (*)(void*, CheckedStorage::Entry const&), void*)",
+          216
+        ],
+        [
+          "lfs_dir_open",
+          56
+        ],
+        [
+          "lfs_dir_find",
+          96
+        ],
+        [
+          "lfs_dir_fetchmatch",
+          152
+        ],
+        [
+          "lfs_dir_find_match",
+          72
+        ],
+        [
+          "block read",
+          64
+        ],
+        [
+          "read or unsigned divide leaf",
+          20
+        ]
+      ],
+      "total": 1612
+    },
+    "lifecycle.geometry": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::MountedStorage::Geometry(CheckedStorage::Geometry&)",
+          24
+        ],
+        [
+          "CheckedStorage::Capacity(CheckedStorage::Geometry&)",
+          56
+        ],
+        [
+          "lfs_fs_size",
+          16
+        ],
+        [
+          "lfs_fs_rawtraverse.constprop.0",
+          96
+        ],
+        [
+          "lfs_dir_fetchmatch",
+          152
+        ],
+        [
+          "lfs_dir_find_match",
+          72
+        ],
+        [
+          "block read",
+          64
+        ],
+        [
+          "read or unsigned divide leaf",
+          20
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1232
+    },
+    "lifecycle.protected_root_enumeration": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::PackageProtectedBytes(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&, unsigned long, unsigned long, unsigned long long&) [clone .constprop.0]",
+          112
+        ],
+        [
+          "GlyphPackageSourceReader::ObjectAt(unsigned int, package_storage::NamespaceObject&, bool&)",
+          72
+        ],
+        [
+          "CheckedStorage::Enumerate(char const*, bool (*)(void*, CheckedStorage::Entry const&), void*)",
+          216
+        ],
+        [
+          "lfs_dir_open",
+          56
+        ],
+        [
+          "lfs_dir_find",
+          96
+        ],
+        [
+          "lfs_dir_fetchmatch",
+          152
+        ],
+        [
+          "lfs_dir_find_match",
+          72
+        ],
+        [
+          "block read",
+          64
+        ],
+        [
+          "read or unsigned divide leaf",
+          20
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1592
+    },
+    "lifecycle.stale_root_reread": {
+      "parts": [
+        [
+          "packet foreground + max(admission observation, publication) caller reserve",
+          168
+        ],
+        [
+          "ProfileStore::PrepareLifecycleTransaction(glyph_package::EnvelopePhase&, _PackageResponse&)",
+          216
+        ],
+        [
+          "(anonymous namespace)::RecheckPackageBaselineRoots(package_storage::NamespaceReader&, package_storage::ClassificationWorkspace&) [clone .constprop.0]",
+          248
+        ],
+        [
+          "GlyphPackageSourceReader::Read(char const*, unsigned int, unsigned char*, unsigned int)",
+          200
+        ],
+        [
+          "max checked RO open/stat/read/close",
+          540
+        ],
+        [
+          "configurator IRQ",
+          348
+        ]
+      ],
+      "total": 1720
+    },
+    "gamecube.chord_idle_predicate": {
+      "parts": [
+        [
+          "main",
+          48
+        ],
+        [
+          "loop",
+          32
+        ],
+        [
+          "GamecubeBackend::SendReport()",
+          24
+        ],
+        [
+          "GamecubeConsole::WaitForPollStartBounded(unsigned long (*)())",
+          56
+        ],
+        [
+          "actual predicate + sample",
+          36
+        ],
+        [
+          "physical IRQ",
+          408
+        ]
+      ],
+      "total": 604
+    }
+  },
+  "stack_ceiling_each_core": 2048,
+  "maximum_affected_route": 2048,
+  "new_lifecycle_maximum": 2044,
+  "measured_hardware_highwater": false
+}

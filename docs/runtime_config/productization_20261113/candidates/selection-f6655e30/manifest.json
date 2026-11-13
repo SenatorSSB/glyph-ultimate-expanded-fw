@@ -1,0 +1,71 @@
+{
+  "source": "f6655e30c6d94b4468711053e5c6c76c00be9cc7",
+  "classification": "pre-hardware candidate; physical acceptance pending",
+  "files": {
+    "firmware.bin": {
+      "stored": "firmware.bin.gz",
+      "bytes": 649972,
+      "sha256": "b6759ee7dd52ae67f58ddc5c5333161590f3838265c69a14173d926e48701739"
+    },
+    "firmware.uf2": {
+      "stored": "firmware.uf2",
+      "bytes": 1299968,
+      "sha256": "9d348290512fffa77b817b2a0c88aaa2a5b7aee522b6b02c0d1033c1903fe502"
+    },
+    "firmware.elf": {
+      "stored": "firmware.elf.gz",
+      "bytes": 5760516,
+      "sha256": "fe1e728a70f5c98015d13e8aa9345f3210163b2d23ee82218aba96397a83436a"
+    },
+    "firmware.map": {
+      "stored": "firmware.map.gz",
+      "bytes": 3978529,
+      "sha256": "7bea9da6e84ed19eb74421b8d88d269a7938b9be772b72619ec32e677183c216"
+    },
+    "build.log": {
+      "stored": "build.log.gz",
+      "bytes": 57780,
+      "sha256": "2592101aa5c002cd460bd6673d812ed833b72a30986354217e2b9594e017b4e6"
+    },
+    "resource/summary.json": {
+      "stored": "summary.json.gz",
+      "bytes": 3473,
+      "sha256": "afb70b35b5eb92195cac5e5da35ec5dc5133f570f6915fe16144ad4b8b429f16"
+    },
+    "resource/startup.json": {
+      "stored": "startup.json.gz",
+      "bytes": 1691,
+      "sha256": "c3c191e3e95a8a4bb25b9dda1a71948cc56fb9b7cee7f7a8d5355177992c9852"
+    },
+    "resource/display-stack-result.json": {
+      "stored": "display-stack-result.json.gz",
+      "bytes": 543,
+      "sha256": "3aae13123495699e3312165faea108a69207ae629950c233e5b85ae110075342"
+    },
+    "resource/functions.json": {
+      "stored": "functions.json.gz",
+      "bytes": 3330745,
+      "sha256": "8ab0442c20f699deb6292bfb05295321ae9512b2bf123ef1eb37fda98836ac7c"
+    },
+    "resource/vtables.json": {
+      "stored": "vtables.json.gz",
+      "bytes": 380773,
+      "sha256": "69b47f7e24ea9e9a89032512e5422bddd159e08e46e577346c283a5083c78812"
+    },
+    "selection.json": {
+      "stored": "selection.json.gz",
+      "bytes": 2646,
+      "sha256": "bd7d7bce58c771276d3a6a20d7beec26301801f93cdb645d4676c945ab51a4d2"
+    },
+    "productization-selector-f6655e30.log": {
+      "stored": "productization-selector-f6655e30.log.gz",
+      "bytes": 4507,
+      "sha256": "9500b6b61cf34b75f0633dd1854219ebc28acd20d75cc596d50dbd48e89e89b0"
+    },
+    "productization-selector-f6655e30-real.log": {
+      "stored": "productization-selector-f6655e30-real.log.gz",
+      "bytes": 293,
+      "sha256": "438392206b02c442f818e9efbd1113cfefaf2e3b73aafad985d7f6f189e05509"
+    }
+  }
+}

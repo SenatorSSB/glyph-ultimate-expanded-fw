@@ -1,0 +1,65 @@
+{
+  "source": "f6655e30c6d94b4468711053e5c6c76c00be9cc7",
+  "lane": "selection",
+  "elf_sha256": "fe1e728a70f5c98015d13e8aa9345f3210163b2d23ee82218aba96397a83436a",
+  "baseline_sha256": "98e3dadd1af9d61d277a4eae3d5722a9b0bb13664ec5f50191715f53e00b627e",
+  "changed": {
+    "(anonymous namespace)::request_mode_destination(_CommunicationBackendId, unsigned int, _Config const&)": [
+      32,
+      0
+    ],
+    "DefaultConfigMenu::DefaultConfigMenu(_Config&, CommunicationBackend**, unsigned int)": [
+      56,
+      64
+    ],
+    "(anonymous namespace)::service_profile_selection()": [
+      40,
+      40
+    ],
+    "setup_mode_activation_bindings(_GameModeConfig const*, unsigned int, unsigned long long)": [
+      56,
+      72
+    ],
+    "DefaultConfigMenu::SetUsbBackend(IntegratedDisplay*, ConfigMenu*, _Config&, unsigned char)": [
+      16,
+      24
+    ],
+    "loop": [
+      32,
+      32
+    ],
+    "profile_selection::BuildTargets(_Config const&, ProfileStore const&, _CommunicationBackendId, profile_selection::Target*, unsigned int)": [
+      56,
+      64
+    ]
+  },
+  "added": [
+    "(anonymous namespace)::commit_mode_destination(unsigned int, unsigned int)",
+    "(anonymous namespace)::persist_managed_chord(unsigned int)",
+    "(anonymous namespace)::persist_ordinary_chord(unsigned int)",
+    "DefaultConfigMenu::UpdateDisplay(IntegratedDisplay*, Adafruit_GFX&)",
+    "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&) [clone .isra.0]",
+    "managed_chord_admitted(CommunicationBackend*)",
+    "managed_chord_held(unsigned long long)",
+    "profile_selection::BoundPair(_Config const&, ProfileStore::Entry const&, unsigned int, _CommunicationBackendId)",
+    "profile_selection::GamecubeSelectionPending()",
+    "profile_selection::Request(unsigned long, _CommunicationBackendId)",
+    "profile_selection::RequestedBackend()"
+  ],
+  "removed": [
+    "ModeDestinationResult profile_selection::Persist<Persistence, ProfileStore>(Persistence&, ProfileStore&, _Config&, _CommunicationBackendId, unsigned long, unsigned int, unsigned int&, unsigned int&)",
+    "profile_selection::NativeTemplate(_GameModeConfig const&)"
+  ],
+  "affected_routes": {
+    "ordinary.chord_full_depth": 2032,
+    "managed.chord_unknown_skip": 2028,
+    "managed.menu_unknown_skip": 2028,
+    "managed.physical_append": 2036,
+    "managed.idle_decision": 520,
+    "managed.gamecube_idle_wake": 604
+  },
+  "maximum_affected": 2036,
+  "inherited_legacy_SET_stage": 2048,
+  "limit": 2048,
+  "hardware": false
+}
