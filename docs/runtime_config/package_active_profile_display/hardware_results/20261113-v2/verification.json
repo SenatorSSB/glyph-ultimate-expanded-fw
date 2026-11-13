@@ -1,0 +1,18 @@
+{
+  "result": "PASS_OFFLINE_EVIDENCE_INTEGRITY",
+  "hardware_outcome": "INCONCLUSIVE_TERMINAL_STOP",
+  "private_files": 251,
+  "private_bytes": 265275,
+  "inventory_sha256": "ad01cb794a20470421eb27af3587752ec2b06069172058f6d7bffdb42cb04589",
+  "correspondences_verified": 34,
+  "sealed_preparation_and_artifacts": "PASS",
+  "fresh_pre_snapshot": "PASS_27_COMPLETE",
+  "session_closed": true,
+  "owner_single_install_report": "RETAINED",
+  "required_fresh_volume_path": "NOT_SUPPLIED",
+  "install_result": "NO_PASS_TERMINAL_GUARD",
+  "later_stages": "NOT_ATTEMPTED",
+  "new_device_access_by_verifier": false,
+  "retry_or_reconciliation": false,
+  "firmware_rebuilds": 0
+}
