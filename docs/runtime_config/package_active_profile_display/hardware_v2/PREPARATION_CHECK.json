@@ -1,0 +1,22 @@
+{
+  "result": "PASS_OFFLINE_PREPUBLICATION",
+  "packet_sha256": "42a9cff1101953cf739cde28f6c8160426f7cebb69476aa2008294ee1daf0348",
+  "preparation_manifest_sha256": "ca1f8d60a783d2ed4299643e22763ae5715c7515d380f4335365297b73030ebb",
+  "offline_preparation": "PASS",
+  "regression_test_methods": 23,
+  "docs_navigation": "PASS",
+  "diff_check": "PASS",
+  "firmware_input_diff_from_3cc98ae4": "EMPTY",
+  "v1_original_inventory": {
+    "files": 84,
+    "bytes": 62257,
+    "all_hashes_unchanged": true
+  },
+  "live_refs": {
+    "Glyph_configurator": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+    "Glyph_v1_terminal_result": "75f83c4c11929b4b839b3a369c1cb7a40f0f1fa9",
+    "Senscope_main": "acf22010522ac5b2b17392e977d692195d39e154"
+  },
+  "new_device_access": false,
+  "firmware_rebuilds": 0
+}

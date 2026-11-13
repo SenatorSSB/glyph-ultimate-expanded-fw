@@ -1,0 +1,54 @@
+{
+  "classification": "PRIVATE_READ_ONLY_REGRESSION_INPUTS_NO_DEVICE_ACCESS",
+  "files": {
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/Config.body": {
+      "sha256": "913e9db4e3809b36f101ede84b6019c7fa60c3d52e3c94e97254ae95d82e8d42",
+      "bytes": 368
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/02-PACKAGE_STATUS-decoded.bin": {
+      "sha256": "49d8d80ccc7cbc2c945dc4ef65fa83b42c090fadc1db176af06ea0e4925f38e8",
+      "bytes": 89
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/04-LIST-0-decoded.bin": {
+      "sha256": "bfab13687ad8c4bba347b3aa97ac964a3edec3dc035805bcd8aa013faa969f65",
+      "bytes": 281
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/05-LIST-8-decoded.bin": {
+      "sha256": "6451c142a759066ed3a4744be58006075a88defed892dfa9652a51ca982bfc90",
+      "bytes": 201
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/06-LIST-16-decoded.bin": {
+      "sha256": "cc9a23aa76f8477f29599950e4567cc8f7d9fe2a528c916d1525d82666fd9aa3",
+      "bytes": 225
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/07-LIST-24-decoded.bin": {
+      "sha256": "f9d2d8bf36d0241d00a0fcb4c590bc207ddb1b7b79c0b1c1850791b937c950ee",
+      "bytes": 115
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/08-READ-1-decoded.bin": {
+      "sha256": "c5150de0f738054a872681d2168afea5d14a6a4a881bcc69c1435cc65d2e442f",
+      "bytes": 1997
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/09-READ-3-decoded.bin": {
+      "sha256": "56a3665987ca9ef19fad22b7c5fa5102bd6dc06d178812ff024658fd46eda3fd",
+      "bytes": 3079
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v1-20261113/pre_snapshot/10-READ-4-decoded.bin": {
+      "sha256": "9e80e536c52451131b8defef7cf2990c5f5d76bc7a180b6e32be62daad9077db",
+      "bytes": 3084
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/active_profile_display_hardware_20261025T172604Z/final-preservation/read-4.json": {
+      "sha256": "fe9a1ad57ace2482e13267566d360be150b72e744f5138c1dad07d38fe3f07db",
+      "bytes": 39389
+    },
+    "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/active_profile_display_hardware_20261025T172604Z/final-preservation/list-0.json": {
+      "sha256": "8aedfcab41dc09f41e5b719210e3d8603d5d1c934c003ba7db189449d52ada76",
+      "bytes": 1551
+    },
+    "/Users/rasmus.pekkarinen/Personal code/senscope-hardware-evidence/FULLPKG-B2-KAZUYA-MANAGED-C439-PHASE-B-CORRECTED-20261112/17-READ-response.cobs": {
+      "sha256": "a814416bc44d0c86b05586a8ae6dc8331d6cb7b285f676d560d5dc5c9a070cc1",
+      "bytes": 2221
+    }
+  },
+  "provenance": "Current raw READ1/3/4; historical ID4 decoded JSON reconstruction; known native payload bytes from PhaseB54; synthetic valid legacy doubles for unobserved slots. No physical/runtime53 proof supplied by these tests."
+}

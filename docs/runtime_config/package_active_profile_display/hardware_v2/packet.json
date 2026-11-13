@@ -1,0 +1,257 @@
+{
+  "packet_id": "GLYPH-DISPLAY-9E69188D-HW-v2",
+  "status": "FINAL_PROPOSAL_UNAPPROVED_NON_EXECUTABLE",
+  "owner_approval": null,
+  "prepared_date": "2026-11-13",
+  "timezone": "Europe/Helsinki",
+  "authority": "Direct owner offline correction request2026-11-13. Fresh exact v2 owner approval required before any new device access.",
+  "built_source_sha": "9e69188d857138a3884bcbe243f22188815e9355",
+  "built_source_tree": "cd0d8408b1c8b808a3a41529259b57c0896e2f7c",
+  "candidate_branch": "codex/package-active-profile-display-20261112",
+  "preparation_base_commit": "b4c59714310b927ffa0f750251da549df512f7d3",
+  "glyph_canonical_excluded": "d31a5edd433beca0354e4595c26d0c4b69c085e8",
+  "artifacts": {
+    "firmware.elf": {
+      "sha256": "30e5c15b61d4e2b1822aa521cf7e53ffbab9cfe568f63f792047069f965929ff",
+      "bytes": 5759256,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.elf"
+    },
+    "firmware.bin": {
+      "sha256": "8f9f60a2e5bdacd59c8f97a29d00cfcc6387c72005e042a967bf5891ef93b834",
+      "bytes": 648420,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.bin"
+    },
+    "firmware.uf2": {
+      "sha256": "da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc",
+      "bytes": 1296896,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.uf2"
+    },
+    "firmware.map": {
+      "sha256": "8b9bb82ec6a6a67e9ff94f241b4bb58e1254bf5ce0b7583aad55a77a034f2f00",
+      "bytes": 4712138,
+      "custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/hardware-artifacts/9e69188d857138a3884bcbe243f22188815e9355/da97bcaec0d4ebedc5aa3fee0efa76a614fc6e5bf971bc9cb82b81ca97ccf1fc/firmware.map"
+    }
+  },
+  "no_rebuild_or_substitution": true,
+  "target": {
+    "unit_count": 1,
+    "private_identity_record": "/Users/rasmus.pekkarinen/Personal code/senscope-hardware-evidence/G4-HW1-20261027/target-identification.json",
+    "record_sha256": "5bf2b230b9c526ded304c78f0fb328a0ea460d145403332c228a54b63a20463f",
+    "serial_utf8_sha256": "91eed08ea4e2a72d702c9364103b9905b730caac0978bad074f4f6d8e379b30e",
+    "serial_utf8_bytes": 16,
+    "configurator_pre_vid": "0x2e8a",
+    "configurator_pre_pids": [
+      "0x000a",
+      "0x1092"
+    ],
+    "configurator_candidate_vid_pid": {
+      "vid": "0x2e8a",
+      "supported_pids": [
+        "0x000a",
+        "0x1092"
+      ],
+      "meaning": "Retained source/observed supported route set; PID alone never supplies normal/runtime/build identity."
+    },
+    "xinput_candidate_vid_pid": [
+      "0x0738",
+      "0x4726"
+    ],
+    "bootloader": "Owner-held continuous physical custody of same unit; one new RPI-RP2 volume from manual BOOTSEL entry. Fresh path and UF2 board metadata are recorded; no stale path, other-unit substitution or discovery by write.",
+    "physical_observation_during_preparation": "NONE"
+  },
+  "baseline_binding_file": "BASELINE_BINDING.json",
+  "baseline_binding_sha256": "0a32692dfd73c99e44724f1452122a3a09acf0be2ee43fd5f652e3369cf6dc1d",
+  "resource_manifest_sha256": "75ab3dff87ca6e0cfcebb563f74f26b65a7ff442fa09a1f646cb06b6e838aef7",
+  "admission": [
+    "Actual owner approval binds exact packet SHA, preparation manifest SHA, built source and UF2; preparation markings alone are not approval.",
+    "One owner/operator, exclusive unit/session; no other serial reader/writer or unresolved episode. Verify private serial record and fresh USB unit count/owner chooser or exact port correspondence; no guessed device path.",
+    "Rehash all retained custody artifacts; reject missing/symlinked/nonregular/changed paths; UF2 exact1296896bytes; never rebuild.",
+    "Fresh pre-install Configurator normal identity status2/backend8, never recovery3. Require exact baseline Config SHA, ordered directory digest/count27, inc1/gen229/CRC1599895773/highwater17293822569102712133; healthy supported root3/managed1, no fence or uncertainty. Any drift stops before flash.",
+    "READ every admitted ID once; validate supported payload wire and legacy finite semantics or native header; require requested ID/revision/correlation/status, native-vs-legacy family agreement and strict native53 identity. Record directory_payload_version and actual payload_schema_version independently; no equality rule within supported legacy1..3.",
+    "Only unchanged saved USB XInput default, row index2/reference53/nameKazTest5 is eligible for this packet. No Profile/USB/default/chord destination selection and no reference rewrite."
+  ],
+  "transport": {
+    "configurator": "Existing normal CDC framing command byte + canonical protobuf, COBS delimiter; one115200/8N1/no-flow session per snapshot; DTRtrue RTSfalse before open; no1200-baud touch, reset or implicit preflight command. Use direct pinned transport/schema primitives and only explicit table, never CREATE runner or production CLI with implicit protocol2STATUS.",
+    "xinput": "Existing identity-only fixed16-byte request and strict72-byte response stream; one115200/DTRtrue/RTSfalse open per normal boot, fresh nonzero uint64 correlation token; admit only backend2/status0 row3/ref53/id53/rev1/schema5 and domain-separated payload digest matching preflight READ53.",
+    "deadlines_ms": {
+      "identity": 10000,
+      "each_other_request": 30000
+    },
+    "raw_capture": "Append-only private host custody created exclusively; fsync request intent before any send, retain exact TX/RX/COBS bytes, source/tool/token/phase/timestamps and response settlement; do not silently flush/skip malformed nonempty or leading-empty frames. First incomplete/ambiguous frame stops; no decoder resync retry.",
+    "fixed_profile_digest_domain": "SHA256(UTF8 Glyph.RuntimeIdentity.UltimateProfile.v1 + byte0 + exact raw standalone UltimateProfile wrapper bytes)"
+  },
+  "request_allowlist": [
+    {
+      "stage": "pre_snapshot",
+      "operations": [
+        {
+          "command": 10,
+          "operation": "CONFIGURATOR_RUNTIME_IDENTITY",
+          "count": 1
+        },
+        {
+          "command": 9,
+          "protocol": 3,
+          "operation": "PACKAGE_STATUS",
+          "operation_value": 1,
+          "count": 1
+        },
+        {
+          "command": 3,
+          "operation": "GET_CONFIG",
+          "count": 1
+        },
+        {
+          "command": 9,
+          "protocol": 2,
+          "operation": "LIST",
+          "operation_value": 2,
+          "page_size": 8,
+          "count": 4
+        },
+        {
+          "command": 9,
+          "protocol": 2,
+          "operation": "READ",
+          "operation_value": 3,
+          "ids": "each of27 freshly admitted directory IDs once",
+          "count": 27
+        }
+      ]
+    },
+    {
+      "stage": "first_xinput_boot",
+      "operations": [
+        {
+          "operation": "FIXED_RUNTIME_IDENTITY_XINPUT",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "stage": "post_snapshot",
+      "same_operations_as": "pre_snapshot",
+      "count": 34
+    },
+    {
+      "stage": "final_xinput_boot",
+      "operations": [
+        {
+          "operation": "FIXED_RUNTIME_IDENTITY_XINPUT",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "physical_plan": [
+    {
+      "step": "A",
+      "operation": "Owner uses normal Connect to.Configurator menu route (or source-supported heldRT2 alternative), without Profile/USB/default changes. Menu uses transient RAM USB override; normal Configurator boot skips saving and GET_CONFIG reads persisted raw bytes. Pre-snapshot34 exact read-only requests, close after PASS."
+    },
+    {
+      "step": "B",
+      "operation": "After A passes and owner confirms exact source/UF2 again, one manual BOOTSEL entry and one copy of retained exact UF2 to newly identified same-unit RPI-RP2; preserve host copy result/custody; no scripted updater or rollback."
+    },
+    {
+      "step": "C",
+      "operation": "Normal no-buttons USB boot to unchanged XInput default row2/ID53; one identity request; observe dashboard literal KazTest5 / Unknown Plate / XInput. Navigate only top-level Input.Viewer, Back to the top-level menu, then Back to dashboard, confirming the same name and return dashboard. Record literal text/photo or owner report and responsiveness; no gameplay."
+    },
+    {
+      "step": "D",
+      "operation": "One planned normal menu Configurator entry (or heldRT2 alternative), post-snapshot34 exact requests; require full saved Config/metadata and raw wrapper preservation; close after PASS."
+    },
+    {
+      "step": "E",
+      "operation": "One planned normal no-buttons XInput boot; one identity request and final dashboard observation with same ID53 and unchanged defaults. Close ownership and preserve terminal evidence."
+    }
+  ],
+  "limits": {
+    "configurator_sessions": 2,
+    "xinput_identity_sessions": 2,
+    "controller_exchanges": 70,
+    "manual_candidate_installs": 1,
+    "manual_bootloader_entries": 1,
+    "CREATE": 0,
+    "QUERY_PACKAGE": 0,
+    "protocol2_STATUS": 0,
+    "profile_mutations": 0,
+    "reference_rewrites": 0,
+    "managed_selection_or_activation": 0,
+    "automatic_retries_or_reconnects": 0,
+    "automatic_rollback_or_recovery": 0,
+    "saved_default_or_backend_changes": 0
+  },
+  "preservation": [
+    "PostConfig raw body byte-exact to preConfig and admitted canonical baseline; every row/reference/engine/backend/default/RGB/managed/root/sequence/unrelated field unchanged.",
+    "All27 directory entry encodings/order/IDs/names/ranks/revisions/schema metadata exact; all27 raw standalone profile wrappers byte-exact and SHA-equal to fresh pre-snapshot, including managed54 and legacy27/53. This does not export raw managed-record/root envelopes.",
+    "Protocol3 packageSTATUS remains supported, no write fence/uncertainty, same inc1/gen229/ConfigCRC/highwater; status fields compared within their documented meaning; no physical whole-filesystem/no-NOR-write claim.",
+    "Both XInput identities prove default53 persisted payload domain digest. Configurator identity is no gameplay identity and neither identifies installed Git build; installation identity relies on exact custody/owner one-copy continuity."
+  ],
+  "observations": [
+    {
+      "case": "reachable legacy default53 dashboard/viewer and Unknown Plate",
+      "physical_required": true
+    },
+    {
+      "case": "managed54 name and known Plat Fighter plate",
+      "physical_required": false,
+      "status": "HOST_ONLY_NOT_TESTED_PHYSICALLY",
+      "reason": "ordinary managed selection remains protected; no reference rewrite or guard removal"
+    },
+    {
+      "case": "other legacy profiles/backends, known supported plate variants, ordinary nonnative modes",
+      "physical_required": false,
+      "status": "NOT_TESTED_PHYSICALLY",
+      "reason": "no destination or plate changes permitted; retained focused host cases cover labels/fallbacks"
+    },
+    {
+      "case": "staleIDs/leases/generation/activation failure/recovery/unavailable/Configurator exclusion",
+      "physical_required": false,
+      "status": "HOST_ONLY",
+      "reason": "do not induce faults or unsafe state on hardware"
+    }
+  ],
+  "terminal_rules": [
+    "Any wrong unit/build continuity, custody/resource/review/admission mismatch or unexpected boot/recovery/fence: STOP, no next request or flash. Preserve exact result and missing rows.",
+    "Any request/copy/write timeout, lost acknowledgement, cancellation, disconnect, malformed/duplicate/wrong-token response or ambiguous re-enumeration is terminal INCONCLUSIVE/UNKNOWN. Do not resend, reconnect to infer success, query, repair, reset, compensate or auto-rollback. Planned stage changes are allowed only after preceding stage fully settled PASS.",
+    "After an ambiguous flash the installed build remains UNKNOWN. No return-to-old-build write is preapproved. Owner must separately approve any recovery/rollback; preserve failed episode and exact artifacts.",
+    "Visual/identity/preservation failure is FAIL or PARTIAL, never managed display PASS; no new candidate build/source change or canonical merge follows.",
+    "Close host ownership once, preserve raw evidence and settlement/cancellation errors, then stop. No additional scan, CREATE campaign replay or physical access during evidence publication."
+  ],
+  "result_schema": "Exact packet/source/tree/UF2 identity, owner approval and private target binding; stage request/response counts and settlement; literal observed dashboard name/plate/backend, viewer name, responsiveness; runtime identities/digests, Config/directory/all-profile comparisons; PASS/FAIL/PARTIAL/INCONCLUSIVE/NOT_TESTED per row; installed-build uncertainty and all gaps explicit.",
+  "source_pins": {
+    "tools/glyph_runtime_identity_tool.py": "bc2dfb18e46a00217844e9e968467a47d4a04c6a1ac36f72d5e48a61f21b5ead",
+    "tools/glyph_serial_config_tool.py": "0b86d82415064023e9fad20ed6a2f526131a87eed16c055f4f7127fe8024ba8c",
+    "schema/haybox/config.proto": "1b781f97e8a93c8840d26698e8c802b366feb812afb7ad45f06c5d3d9ad5ee33",
+    "schema/haybox/package.proto": "914f9ae7678ef0e1e8446eb2ee1d98b8a4e6a9a8138886c8b7dcd52438db484d",
+    "HAL/pico/src/display/DefaultConfigMenu.cpp": "448ed9d08ad8ab040ac065d4e95d636a9250ae7ee6e7ae0df32726aeacc5c789",
+    "HAL/pico/src/display/ConfigMenu.cpp": "fbbd6124ce97139e290465ddd5c2b7f6f38c754566845cbd8b765ab24943b09f",
+    "config/glyph/common/src/display/GlyphConfigMenu.cpp": "137fbcac8b6d95c6ee06a0e2be1b11769a56f2a03c75cd8060cc24bf3c7b8fdf",
+    "HAL/pico/src/comms/XInputBackend.cpp": "b2c18262eeced1db6ee752c8493b3379ab9a8d89ee2c84f219a0853a84fbf862",
+    "HAL/pico/src/comms/ConfiguratorBackend.cpp": "fd9454b1c725ad2ef834bde1c55cc2db0e4d836230103b784367760d17194e15",
+    "HAL/pico/src/comms/backend_init.cpp": "959e1afe28e854ca3401839875badbb2b314ed36f789bcac8a80ace18707c4aa"
+  },
+  "execution_note": "Only frozen executor.py CLI and exact preparation-bound dependencies may run after fresh owner v2 approval; no ad hoc replacement. Owner supplies physical events; executor never flashes. All7 phases and terminal paths are offline tested using same Runner with explicit IO doubles. The sole fixed v2 episode path is immutable and exclusive-create; a terminal or interrupted episode cannot be rearmed at another path with the same approval.",
+  "supersedes_execution": "v1 remains terminal at75f83c4c11929b4b839b3a369c1cb7a40f0f1fa9; no v1 authority or episode resume",
+  "executor_sha256": "7dd1b996f370f2faaf710f5b51e6bc868d9504a028c3af6d9f5dcff6e0c910b3",
+  "baseline": {
+    "config_sha256": "913e9db4e3809b36f101ede84b6019c7fa60c3d52e3c94e97254ae95d82e8d42",
+    "directory_sha256": "80dbc10ee89d4bde3223f5c3daa4e9852b39ed731d290e9bce53f104253ae85a"
+  },
+  "read_contract": {
+    "supported_schemas": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "legacy_directory_and_payload": "independently in1..3; exact equality not required",
+    "native_directory_and_payload": "both5, validated native wrapper/header; default53 exact source bytes/name/revision",
+    "raw_payload_schema_and_directory_metadata": "record separately; preserve each independently and preserve every raw wrapper byte before/after",
+    "unsupported_versions_or_cross_family": "STOP; no ID4 exception, skip flag or arbitrary mismatch admission"
+  },
+  "transient_RAM_route_clarification": "Menu entry may change RAM default_usb_backend_config for its normal Configurator boot; it does not take the source Save branch. No claim of unchanged RAM or raw filesystem state. Saved Config bytes/generation/default destinations must remain exact.",
+  "regression_source": "Historical decoded JSON reconstructed with pinned schema plus v1 sealed raw ID4 response; no historical raw-wire provenance asserted.",
+  "episode_custody": "/Users/rasmus.pekkarinen/Personal code/glyph-ultimate-expanded-fw/local_backups/display-hardware-results/GLYPH-DISPLAY-9E69188D-HW-v2-20261113",
+  "runtime_dependencies": "Exact repository helper/schema bytes, Python binary and loaded serial/protobuf/grpc module closure, and generated-binding hashes are sealed in PREPARATION_MANIFEST.json; mismatch stops offline before OS/device access."
+}
