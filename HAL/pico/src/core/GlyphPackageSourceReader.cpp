@@ -332,7 +332,7 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::ValidateMaterializedNat
     const auto &config=_persistence.PackageConfigScratch();
     if(index>=config.game_mode_configs_count||index>=sizeof(config.game_mode_configs)/sizeof(config.game_mode_configs[0]))return false;
     const auto &row=config.game_mode_configs[index];
-    if(!ProfileStoreNameValid(row.name,sizeof(row.name))||row.mode_id!=MODE_ULTIMATE||row.ultimate_profile_id!=Get32(record+12)||row.ultimate_profile_engine!=1||row.managed_format!=1||row.ultimate_profile_config||row.custom_mode_config||row.keyboard_mode_config||row.rgb_config!=Get32(record+76)||Get32(record+72)!=index)return false;
+    if(!ProfileStoreNameValid(row.name,sizeof(row.name))||row.mode_id!=MODE_ULTIMATE||row.ultimate_profile_id!=Get32(record+12)||row.ultimate_profile_engine!=1||row.managed_format!=1||row.ultimate_profile_config||row.custom_mode_config||row.keyboard_mode_config)return false;
     const bool valid=ultimate_native::DecodeProfile(record+128,bytes-128,_store._candidate_profile,_profile_lease)&&
         _store._candidate_profile.schema_version==ultimate_native::kSchema&&ValidateCandidateProfile()&&
         ultimate_native::ContextMatches(ultimate_native::CandidateView(),row)&&CanonicalCandidateProfile(record+128,bytes-128);
@@ -367,5 +367,70 @@ __attribute__((noinline)) bool GlyphPackageSourceReader::AppendConfig(const char
     if(second.game_mode_configs_count!=unsigned(old.rows)+1||second.rgb_configs_count>30||(second.rgb_configs_count!=old.rgbs&&second.rgb_configs_count!=unsigned(old.rgbs)+1)||second.ultimate_profile_root_format!=3||second.managed_format!=1||second.managed_sequence!=old.sequence+1)return false;
     const AppendShape next{uint8_t(second.game_mode_configs_count),uint8_t(second.rgb_configs_count),3,1,second.managed_sequence};
     return CompareAppendFiles(_failed,baseline,current,old,next,old_bytes,old_crc,next_bytes,next_crc);
+}
+#endif
+
+#if defined(GLYPH_PACKAGE_V1) && GLYPH_PACKAGE_V1
+namespace {
+// Project each side of the operation to the very same canonical Config. The
+// actual publisher and decoder are independent of this read-only verification.
+// All edits live in the reader's scratch and the next LoadNamedConfig replaces
+// them. Do not touch ConfigWriteCandidate, which may hold a pending save.
+bool ProjectLifecycleConfig(::Config &c, const package_storage::IntentFacts &i, bool before) {
+    const bool erase = i.operation == 20;
+    if (c.game_mode_configs_count != (before ? i.baseline_rows : i.final_rows) ||
+        c.rgb_configs_count != (before ? i.baseline_rgbs : i.final_rgbs) ||
+        c.managed_sequence != (before ? i.baseline_sequence : i.sequence) ||
+        c.managed_format != 1 || c.ultimate_profile_root_format != 3) return false;
+    if (before && erase) {
+        if (c.profile_reference_token && (c.profile_reference_result_mode_index >= i.row ||
+                                          c.profile_reference_result_id == i.id)) return false;
+        for (size_t j = 0; j < c.communication_backend_configs_count; ++j) {
+            auto &dest = c.communication_backend_configs[j].default_mode_config;
+            if (dest == i.row + 1) return false;
+            if (dest > i.row + 1) --dest;
+        }
+    }
+    if (before || !erase) {
+        if (i.row >= c.game_mode_configs_count) return false;
+        auto &target = c.game_mode_configs[i.row];
+        const uint32_t rgb = before ? i.old_rgb : i.rgb;
+        if (target.managed_format != 1 || target.ultimate_profile_id != i.id ||
+            target.rgb_config != rgb || target.mode_id != MODE_ULTIMATE) return false;
+        if (i.operation == 17 || erase) {
+            // Remove the owned row and RGB on both sides, accounting for
+            // dense references on every other row. No other field is elided.
+            if (rgb) {
+                if (rgb > c.rgb_configs_count) return false;
+                for (size_t k = 0; k < c.game_mode_configs_count; ++k) {
+                    if (k == i.row) continue;
+                    auto &other = c.game_mode_configs[k].rgb_config;
+                    if (other == rgb) return false;
+                    if (other > rgb) --other;
+                }
+                for (size_t k = rgb; k < c.rgb_configs_count; ++k)
+                    c.rgb_configs[k - 1] = c.rgb_configs[k];
+                --c.rgb_configs_count;
+            }
+            for (size_t k = i.row + 1; k < c.game_mode_configs_count; ++k)
+                c.game_mode_configs[k - 1] = c.game_mode_configs[k];
+            --c.game_mode_configs_count;
+        } else if (i.operation == 18) {
+            target.name[0] = 0;
+        }
+    }
+    c.managed_sequence = i.baseline_sequence;
+    return true;
+}
+}
+
+__attribute__((noinline)) bool GlyphPackageSourceReader::LifecycleConfig(const char *prior,
+        const char *current, const package_storage::IntentFacts &intent) {
+    uint8_t before[32], after[32];
+    auto &c = _persistence.PackageConfigScratch();
+    return LoadNamedConfig(prior,8191) && _config_valid && ProjectLifecycleConfig(c,intent,true) &&
+        HashMessage(Config_fields,&c,before) && LoadNamedConfig(current,8191) && _config_valid &&
+        ProjectLifecycleConfig(c,intent,false) && HashMessage(Config_fields,&c,after) &&
+        !std::memcmp(before,after,32);
 }
 #endif

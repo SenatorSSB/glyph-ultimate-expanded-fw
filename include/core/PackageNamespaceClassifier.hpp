@@ -27,6 +27,7 @@ struct NamespaceObject { char path[34]{}; size_t bytes = 0; bool directory = fal
 // ConfigFacts::source_valid must be actual configured source semantic-validator
 // output; wrapper/canonical validity alone is insufficient. Row/Rgb/Native bind
 // to the exact path and index; they may not use stale active/default Config.
+struct IntentFacts;
 class NamespaceReader {
   public:
     virtual ~NamespaceReader() = default;
@@ -51,6 +52,9 @@ class NamespaceReader {
     virtual bool LegacyProfile(const uint8_t *body, size_t bytes) = 0;
     // Exact append-only preceding rows/RGB and unrelated fields/presence/order.
     virtual bool AppendConfig(const char *baseline, const char *current) = 0;
+    // Verify bounded edits against both canonical Config files. Non-production
+    // adapters must implement the same proof before admitting lifecycle records.
+    virtual bool LifecycleConfig(const char *, const char *, const IntentFacts &) { return false; }
 };
 struct IntentFacts {
     uint32_t operation = 0, phase = 0, terminal = 0, flags = 0, incarnation = 0, id = 0,
@@ -58,6 +62,7 @@ struct IntentFacts {
         baseline_crc = 0, final_crc = 0, row = 0, rgb = 0, record_bytes = 0,
         config_bytes = 0, baseline_sequence = 0, baseline_rows = 0, final_rows = 0,
         baseline_rgbs = 0, final_rgbs = 0, baseline_high_id = 0;
+    uint32_t old_revision = 0, old_row = 0, old_rgb = 0;
     uint64_t token = 0, baseline_token = 0;
     uint8_t digest[32]{}, baseline_config[32]{}, final_config[32]{}, record[32]{},
         row_sha[32]{}, rgb_sha[32]{}, baseline_root[32]{}, aggregate[32]{}, receipt[32]{}, immutable[32]{};
@@ -100,6 +105,7 @@ struct ClassificationWorkspace {
         bool all_extra=false;
     } owned{};
     struct RunScratch { unsigned next_phase=0; const RootFacts *selected=nullptr; unsigned v2=0; bool baseline_root_found=false, baseline_selected=false, store_published=false, baseline_current=false, baseline_prior=false; } run{};
+    uint8_t old_record_sha[32]{}, old_wrapper_sha[32]{};
     uint64_t logical_bytes = 0;
     size_t namespace_files = 0;
     bool managed_observed = false, unsupported = false, corrupt = false;

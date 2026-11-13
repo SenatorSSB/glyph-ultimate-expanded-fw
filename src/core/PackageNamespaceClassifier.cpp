@@ -28,7 +28,7 @@ const uint8_t *Entry(const RootFacts &r,size_t i){return r.prefix+320+i*56;}
 bool Marked(const ConfigFacts &c){return c.root_format==3||c.managed_format||c.sequence||c.any_row_marker;}
 void ReadIntentFacts(const uint8_t *p,IntentFacts &i){
 #define U(name,offset) i.name=Get32(p+offset)
- U(operation,8);U(phase,12);U(terminal,16);U(flags,20);U(incarnation,64);U(id,68);U(revision,72);U(baseline_generation,76);U(generation,80);U(sequence,84);U(baseline_crc,88);U(final_crc,92);U(row,96);U(rgb,100);U(record_bytes,360);U(config_bytes,364);U(baseline_sequence,368);U(baseline_rows,372);U(final_rows,376);U(baseline_rgbs,380);U(final_rgbs,384);U(baseline_high_id,396);
+ U(operation,8);U(phase,12);U(terminal,16);U(flags,20);U(incarnation,64);U(id,68);U(revision,72);U(baseline_generation,76);U(generation,80);U(sequence,84);U(baseline_crc,88);U(final_crc,92);U(row,96);U(rgb,100);U(record_bytes,360);U(config_bytes,364);U(baseline_sequence,368);U(baseline_rows,372);U(final_rows,376);U(baseline_rgbs,380);U(final_rgbs,384);U(baseline_high_id,396);U(old_revision,400);U(old_row,404);U(old_rgb,408);
 #undef U
  i.token=Get64(p+24);i.baseline_token=Get64(p+388);
 #define H(name,offset) std::memcpy(i.name,p+offset,32)
@@ -98,7 +98,7 @@ class Classifier {
    }
    if(Starts(w.object.path,"/ultpkg-"))w.managed_observed=true;
    if((Starts(w.object.path,"/ultpkg-")||(Starts(w.object.path,"/ultimate-")&&(Ends(w.object.path,".bin")||Ends(w.object.path,".tmp"))))&&n>=8&&Get32(p)==0x31525055u){
-    const auto v=Get16(p+4);w.unsupported|=v>2||(v==2&&n>=120&&Get32(p+116)>1);
+    const auto v=Get16(p+4);w.unsupported|=v>2||(v==2&&n>=120&&(Get16(p+116)>2 || (Get16(p+116)==2 && Get16(p+118)>19)));
     if(v==2){w.managed_observed=true;if(!Starts(w.object.path,"/ultpkg-"))Corrupt("managed record namespace");}
    }
   }
@@ -134,6 +134,7 @@ class Classifier {
    RootView view{r.prefix,owners.intent,r.prefix+3904};if(!RootValid(view))return false;
    if(control&&(!ControlValid(owner,view)||!ControlPhaseValid(owner,owners.intent)))return false;
    HashRoot(view,r.sha);ReadIntentFacts(owners.intent,r.intent);
+   if(control){std::memcpy(w.old_record_sha,owners.intent+412,32);std::memcpy(w.old_wrapper_sha,owners.intent+444,32);}
   }else{
    if(!ValidV2(r.prefix))return false;
    Hash(r.prefix,3908,r.sha);r.intent={};
@@ -151,6 +152,10 @@ class Classifier {
   if(ga!=gb&&((ga&1u)!=0||(gb&1u)!=1))return false;
   if(a.format==3&&b.format==3){
    if(Sequence(newer)<Sequence(older))return false;
+   if(ga!=gb && LifecycleOperation(newer.intent.operation) && Generation(newer)==newer.intent.generation)
+    return LifecycleRootChange(older.prefix,newer.prefix,newer.intent.operation,newer.intent.id,
+                               newer.intent.old_revision,newer.intent.old_row,newer.intent.old_rgb,newer.intent.rgb);
+   if(Get32(newer.prefix+304)!=Get32(older.prefix+304))return false;
    for(size_t i=0;i<Count(older);++i){const auto *e=Entry(older,i);if(!e[53])continue;bool found=false;for(size_t j=0;j<Count(newer);++j)if(Eq(e,Entry(newer,j),56))found=true;if(!found)return false;}
   }
   return true;
@@ -165,7 +170,11 @@ class Classifier {
   for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof||TempPath(w.object.path))return false;}return true;
  }
  bool RootAppend(const RootFacts &base,const RootFacts &next,const IntentFacts &intent){
-  return Count(next)==Count(base)+1&&Eq(base.prefix+320,next.prefix+320,56*Count(base))&&Eq(base.prefix+20,next.prefix+20,4)&&Eq(base.prefix+80,next.prefix+80,184)&&Generation(next)==intent.generation&&Incarnation(next)==Incarnation(base);
+  if (LifecycleOperation(intent.operation))
+   return Generation(next)==intent.generation && Incarnation(next)==Incarnation(base) &&
+    Eq(base.prefix+20,next.prefix+20,4) && Eq(base.prefix+80,next.prefix+80,184) &&
+    LifecycleRootChange(base.prefix,next.prefix,intent.operation,intent.id,intent.old_revision,intent.old_row,intent.old_rgb,intent.rgb);
+  return Get32(base.prefix+304)==Get32(next.prefix+304)&&Count(next)==Count(base)+1&&Eq(base.prefix+320,next.prefix+320,56*Count(base))&&Eq(base.prefix+20,next.prefix+20,4)&&Eq(base.prefix+80,next.prefix+80,184)&&Generation(next)==intent.generation&&Incarnation(next)==Incarnation(base);
  }
  bool StoreReceiptEqual(const uint8_t *prefix,const uint8_t *record){
   return Eq(prefix+32,record+40)&&Get32(prefix+68)==Get32(record+12)&&Get32(prefix+72)==Get32(record+16)&&Get32(prefix+64)==0&&Get32(prefix+76)==Get32(record+120);
@@ -265,7 +274,7 @@ class Classifier {
    Hash(owners.record+32,n-32,w.digest);if(!Eq(w.digest,p+136+i*32))return Fail("migration: payload hash");
   }return true;
  }
- bool OwnedSet(const RootFacts &root,const char *config_path,const ConfigFacts &config,bool all_extra=false,uint32_t extra_id=0){
+ bool OwnedSet(const RootFacts &root,const char *config_path,const ConfigFacts &config,bool all_extra=false,uint32_t extra_id=0,uint32_t extra_revision=1,const IntentFacts *retired=nullptr){
   auto &scratch=w.owned; scratch={};
   scratch.root=&root; scratch.config=&config; scratch.config_path=config_path;
   scratch.all_extra=all_extra; scratch.extra_id=extra_id;
@@ -292,17 +301,37 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
     unsigned shares=0;for(size_t j=0;j<(*scratch.config).rows;++j){if(!reader.Row(scratch.config_path,j,w.other_row))return false;if(w.other_row.rgb==scratch.e[55])++shares;}if(shares!=1)return false;
    }
    auto *path=reinterpret_cast<char*>(w.read_chunk);if(!RecordPath(path,32,scratch.id,Get32(scratch.e+4),false))return false;
+   const bool target=retired && scratch.id==retired->id;
+   const bool absent=target && reader.Extent(path,scratch.n)==Probe::Absent;
+   if(absent){
+    // The exact baseline Config+root are already bound by the control intent.
+    // Its immutable old-record SHA lets us recompute the complete baseline set
+    // after precisely that superseded record has been retired.
+    if(Get32(scratch.e+4)!=retired->old_revision || scratch.e[54]!=retired->old_row+1 ||
+       scratch.e[55]!=retired->old_rgb)return false;
+    std::memcpy(w.record_sha,w.old_record_sha,32);
+   }else{
    scratch.n=0;if(!ReadObject(path,owners.record,4128,scratch.n)||!RecordValid(owners.record,scratch.n))return false;
    const auto *r=owners.record;scratch.token=Get64(r+32);scratch.sequence=Get32(r+124);
-   if(Get32(r+8)!=Incarnation((*scratch.root))||Get32(r+12)!=scratch.id||Get32(r+16)!=Get32(scratch.e+4)||Get32(r+72)!=unsigned(scratch.e[54]-1)||Get32(r+76)!=scratch.e[55]||Get32(r+120)>Generation((*scratch.root))||scratch.sequence>Sequence((*scratch.root))||scratch.token>Token((*scratch.root))||scratch.token==(*scratch.config).reference_token||!reader.Native(scratch.config_path,scratch.e[54]-1,r,scratch.n))return false;
-   Hash(r,scratch.n,w.record_sha);Hash(scratch.e,56,w.entry_sha);
+   if(Get32(r+8)!=Incarnation((*scratch.root))||Get32(r+12)!=scratch.id||Get32(r+16)!=Get32(scratch.e+4)||!RecordSlotsMatch(r,scratch.e[54],scratch.e[55],Get32(scratch.root->prefix+304))||Get32(r+120)>Generation((*scratch.root))||scratch.sequence>Sequence((*scratch.root))||scratch.token>Token((*scratch.root))||scratch.token==(*scratch.config).reference_token||!reader.Native(scratch.config_path,scratch.e[54]-1,r,scratch.n))return false;
+   Hash(r,scratch.n,w.record_sha);
    const auto &intent=(*scratch.root).intent;
    if(intent.operation&&scratch.id==intent.id){
     Hash(r,128,w.digest);
     if(scratch.n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||scratch.token!=intent.token||!Eq(r+40,intent.digest)||!Eq(r+80,intent.baseline_config)||Get32(r+120)!=intent.generation||scratch.sequence!=intent.sequence||!Eq(w.row_sha,intent.row_sha)||(intent.flags?!Eq(w.rgb_sha,intent.rgb_sha):!Zero(intent.rgb_sha,32)))return false;
    }
+    if(target){
+     if(!Eq(w.record_sha,w.old_record_sha))return false;
+     Hash(r+128,scratch.n-128,w.digest);
+     if(!Eq(w.digest,w.old_wrapper_sha))return false;
+    }
+   }
+   Hash(scratch.e,56,w.entry_sha);
    Put32(scratch.word,scratch.id);Put32(scratch.word+4,Get32(scratch.e+4));Put32(scratch.word+8,scratch.e[54]);Put32(scratch.word+12,scratch.e[55]);w.aggregate_hash.Update(scratch.word,16);w.aggregate_hash.Update(w.row_sha,32);w.aggregate_hash.Update(w.rgb_sha,32);w.aggregate_hash.Update(w.record_sha,32);w.aggregate_hash.Update(w.entry_sha,32);
+   if(absent)continue;
    for(size_t j=0;j<Count((*scratch.root));++j){const auto *old=Entry((*scratch.root),j);if(!old[53]||Get32(old)>=scratch.id)continue;
+    if(retired && Get32(old)==retired->id && RecordPath(path,32,Get32(old),Get32(old+4),false) &&
+       reader.Extent(path,scratch.n)==Probe::Absent)continue;
     if(!RecordPath(path,32,Get32(old),Get32(old+4),false)||!ReadObject(path,owners.record,4128,scratch.n)||!RecordValid(owners.record,scratch.n))return false;
     if(Get64(owners.record+32)==scratch.token||Get32(owners.record+124)==scratch.sequence)return false;
    }
@@ -312,7 +341,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof)return false;if(!Starts(w.object.path,"/ultpkg-"))continue;
    bool known=false;auto *path=reinterpret_cast<char*>(w.read_chunk);
    for(size_t j=0;j<Count((*scratch.root));++j){scratch.e=Entry((*scratch.root),j);if(scratch.e[53]&&RecordPath(path,32,Get32(scratch.e),Get32(scratch.e+4),false)&&Is(path,w.object.path))known=true;}
-   if(scratch.extra_id&&RecordPath(path,32,scratch.extra_id,1,false)&&Is(path,w.object.path))known=true;
+   if(scratch.extra_id&&RecordPath(path,32,scratch.extra_id,extra_revision,false)&&Is(path,w.object.path))known=true;
    if(!known)return false;
   }return true;
  }
@@ -365,7 +394,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
    const auto &selected=Generation(w.roots[0])>=Generation(w.roots[1])?w.roots[0]:w.roots[1];
    result.incarnation=Incarnation(selected);result.generation=Generation(selected);return result;
   }
-  if(control.format!=3||intent.operation!=15||Incarnation(control)!=intent.incarnation||HighId(control)<intent.id||Token(control)<intent.token){result.diagnostic="invalid package reservation";return result;}
+  if(control.format!=3||(intent.operation!=15&&!LifecycleOperation(intent.operation))||Incarnation(control)!=intent.incarnation||HighId(control)<intent.id||Token(control)<intent.token){result.diagnostic="invalid package reservation";return result;}
 
   for(unsigned i=0;i<2;++i){const auto &r=w.roots[i];
    if(Eq(r.sha,intent.baseline_root))run_state.baseline_root_found=true;
@@ -408,7 +437,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
    for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof)return result;
     if(!Starts(w.object.path,"/ultpkg-")||!Ends(w.object.path,".bin"))continue;
     size_t n=0;if(!ReadObject(w.object.path,owners.record,4128,n)||!RecordValid(owners.record,n))return result;
-    if(Get32(owners.record+12)!=intent.id&&Get64(owners.record+32)>high)high=Get64(owners.record+32);
+    if((Get32(owners.record+12)!=intent.id||Get32(owners.record+16)!=intent.revision)&&Get64(owners.record+32)>high)high=Get64(owners.record+32);
    }
    if(high!=intent.baseline_token){result.diagnostic="baseline omitted shared high-water";return result;}
   }
@@ -419,7 +448,8 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
    if(!baseline){if(intent.baseline_token<base.reference_token)return result;}
    else{
     if(Token(*baseline)>intent.baseline_token||base.reference_token>intent.baseline_token||HighId(*baseline)!=intent.baseline_high_id||Generation(*baseline)!=intent.baseline_generation||!Migration(*baseline,base))return result;
-    if(baseline->format==3){if(!OwnedSet(*baseline,base_path,base,false,intent.id)){result.diagnostic="baseline managed set mismatch";return result;}}
+    if(baseline->format==3){if(!OwnedSet(*baseline,base_path,base,false,intent.operation==20?0:intent.id,intent.revision,
+       LifecycleOperation(intent.operation)&&!run_state.baseline_current?&intent:nullptr)){result.diagnostic="baseline managed set mismatch";return result;}}
     else{
      if(base.managed_format||base.any_row_marker)return result;
      for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof)return result;if(!Starts(w.object.path,"/ultpkg-"))continue;auto *path=reinterpret_cast<char*>(w.read_chunk);if(!RecordPath(path,32,intent.id,1,false)||!Is(path,w.object.path))return result;}
@@ -435,9 +465,15 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   const auto &intent=control.intent;
   if(intent.terminal!=3&&!HistoricalPrior(intent)){result.diagnostic="marked prior unproven";return result;}
   if(!SharedReceipts()){result.diagnostic="shared transaction receipt conflict";return result;}
-  auto *path=reinterpret_cast<char*>(w.read_chunk);if(!RecordPath(path,32,intent.id,1,false))return result;
+  auto *path=reinterpret_cast<char*>(w.read_chunk);
+  if(!RecordPath(path,32,intent.id,intent.revision,false))return result;
   size_t n=0;const auto probe=reader.Extent(path,n);
   if(probe==Probe::Error)return result;
+  if(intent.operation==20){
+   // A tombstone has no positive record at the new revision. Until terminal
+   // checkpoints, neither its absence nor its presence alone proves a delete.
+   if(probe!=Probe::Absent)return result;
+  }else{
   if(probe==Probe::Absent){
    if(run_state.store_published||!run_state.baseline_current||(run_state.v2!=2&&!run_state.baseline_selected)||control.control_phase!=1)return result;
    result.logical=Logical::ProvenAborted;result.diagnostic="reserved identity; expected record absent";return result;
@@ -445,7 +481,12 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   if(n>4128||!reader.Read(path,0,owners.record,n)||!RecordValid(owners.record,n)){result.diagnostic="managed record invalid";return result;}
   const auto *record=owners.record;
   Hash(record,n,w.record_sha);Hash(record,128,w.digest);
-  if(n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||Get32(record+8)!=intent.incarnation||Get32(record+12)!=intent.id||Get64(record+32)!=intent.token||!Eq(record+40,intent.digest)||Get32(record+72)!=intent.row||Get32(record+76)!=intent.rgb||!Eq(record+80,intent.baseline_config)||Get32(record+120)!=intent.generation||Get32(record+124)!=intent.sequence||record[128]!=8||record[129]!=5||!reader.LegacyProfile(record+128,n-128)){result.diagnostic="managed receipt/native mismatch";return result;}
+  if(n<130||Get32(record+16)!=intent.revision||(Get16(record+116)==2&&Get16(record+118)!=intent.operation)||n!=intent.record_bytes||!Eq(w.record_sha,intent.record)||!Eq(w.digest,intent.receipt)||Get32(record+8)!=intent.incarnation||Get32(record+12)!=intent.id||Get64(record+32)!=intent.token||!Eq(record+40,intent.digest)||Get32(record+72)!=intent.row||Get32(record+76)!=intent.rgb||!Eq(record+80,intent.baseline_config)||Get32(record+120)!=intent.generation||Get32(record+124)!=intent.sequence||record[128]!=8||record[129]!=5||!reader.LegacyProfile(record+128,n-128)){result.diagnostic="managed receipt/native mismatch";return result;}
+   if(intent.operation==18||intent.operation==19){
+    Hash(record+128,n-128,w.digest);
+    if(!Eq(w.digest,w.old_wrapper_sha))return result;
+   }
+  }
   if(!run_state.store_published){
    if(!run_state.baseline_current||(control.control_phase!=1&&control.control_phase!=2)||(intent.phase!=1&&intent.phase!=2))return result;
    result.logical=Logical::Incomplete;result.diagnostic="record published; store absent";return result;
@@ -457,10 +498,27 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   }
   if(!w.current.body_bytes||!Migration(*run_state.selected,w.current)||w.current.reference_token==Token(*run_state.selected))return result;
   if((intent.terminal!=3||run_state.baseline_prior)&&(!Eq(w.current.sha,intent.final_config)||w.current.crc!=intent.final_crc||w.current.body_bytes!=intent.config_bytes))return result;
-  if(run_state.baseline_prior&&!reader.AppendConfig(kPrior,kCurrent))return result;
-  if(!OwnedSet(*run_state.selected,kCurrent,w.current)||!Eq(run_state.selected->prefix+264,intent.aggregate))return result;
+  if(run_state.baseline_prior && !(intent.operation==15 ? reader.AppendConfig(kPrior,kCurrent) :
+      reader.LifecycleConfig(kPrior,kCurrent,intent)))return result;
+  bool superseded_present=false;
+  if(LifecycleOperation(intent.operation)){
+   if(!RecordPath(path,32,intent.id,intent.old_revision,false))return result;
+   const auto old=reader.Extent(path,n);
+   if(old==Probe::Error)return result;
+   superseded_present=old==Probe::Present;
+   if(superseded_present){
+    if(!ReadObject(path,owners.record,4128,n)||!RecordValid(owners.record,n))return result;
+    Hash(owners.record,n,w.digest);
+    if(!Eq(w.digest,w.old_record_sha))return result;
+    Hash(owners.record+128,n-128,w.digest);
+    if(!Eq(w.digest,w.old_wrapper_sha))return result;
+   }
+  }
+  if(!OwnedSet(*run_state.selected,kCurrent,w.current,false,superseded_present?intent.id:0,intent.old_revision)||!Eq(run_state.selected->prefix+264,intent.aggregate))return result;
+  if(intent.operation!=20){
   if(!reader.Row(kCurrent,intent.row,w.row)||!Eq(w.row.sha,intent.row_sha))return result;
   if(intent.flags){if(!reader.Rgb(kCurrent,intent.rgb-1,w.rgb_sha)||!Eq(w.rgb_sha,intent.rgb_sha))return result;}else if(!Zero(intent.rgb_sha,32))return result;
+  }
   if(w.current.reference_token==intent.token)return result;
   if(w.prior.body_bytes&&!run_state.baseline_prior){
    if(w.prior.managed_format){bool matched=false;for(unsigned i=0;i<2;++i)if(w.roots[i].format==3&&OwnedSet(w.roots[i],kPrior,w.prior,true))matched=true;if(!matched)return result;}
@@ -468,7 +526,7 @@ Put32(scratch.word,Incarnation((*scratch.root)));Put32(scratch.word+4,scratch.ma
   }
   if(w.prior.body_bytes&&w.current.store_format==1&&w.prior.store_format==1&&w.current.incarnation==intent.incarnation&&w.prior.incarnation==intent.incarnation&&w.current.root_format==3&&w.prior.root_format==3&&w.current.managed_format==1&&w.prior.managed_format==1&&w.current.reference_token<w.prior.reference_token)return result;
   const bool terminal=control.control_phase==3&&intent.phase==5&&intent.terminal==3&&run_state.selected->intent.phase==5&&run_state.selected->intent.terminal==3;
-  if(terminal&&!Eq(control.sha,run_state.selected->sha))return result;
+  if(terminal&&(superseded_present||!Eq(control.sha,run_state.selected->sha)))return result;
   result.logical=Logical::Committed;result.write_fenced=!terminal;result.floor=terminal?Floor::Supported:Floor::Unresolved;result.diagnostic=terminal?"exact installed pair and terminal metadata":"exact installed pair; terminal metadata incomplete";
   result.incarnation=Incarnation(*run_state.selected);result.generation=Generation(*run_state.selected);result.package_sequence=Sequence(*run_state.selected);
   result.high_token=Token(control);for(unsigned i=0;i<2;++i)if(Token(w.roots[i])>result.high_token)result.high_token=Token(w.roots[i]);
