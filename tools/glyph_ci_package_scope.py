@@ -61,10 +61,8 @@ def original_proof(root, parent):
     frozen = materialize(root, C023_DONE, parent)
     # Import the original classifier in the original checkout. It checks C023
     # and authenticates the C022 replay paths using its original predicates.
-    code = ("import json,sys;from pathlib import Path;sys.path.insert(0,'tools');"
-            "from glyph_c023_campaign_transition import authenticate,replay_covered_checker_paths;"
-            "p=authenticate(Path.cwd());print(json.dumps(dict(contract=p['contract'],candidate=p['candidate'],object_roots=sorted(p['object_roots']),covered=sorted(replay_covered_checker_paths(Path.cwd())))))")
-    result = subprocess.run([sys.executable, "-I", "-B", "-c", code], cwd=frozen,
+    result = subprocess.run([sys.executable, "-I", "-B", str(Path(__file__).resolve()),
+                             "--historical-classifier"], cwd=frozen,
                             capture_output=True, text=True)
     if result.returncode:
         raise ValueError("C023 historical classifier failed: " + result.stderr.strip())
@@ -88,3 +86,30 @@ def materialize(snapshot, revision, parent):
     if actual != revision:
         raise ValueError("historical execution checkout identity changed")
     return path
+
+
+def run_historical_classifier():
+    # Keep the original per-invocation memoization of immutable Git object
+    # reads active across the proof and coverage calls. Neither result is
+    # computed from the current checkout's campaign classifier.
+    root = Path.cwd()
+    if subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip() != C023_DONE:
+        raise ValueError("historical classifier invoked outside its exact source")
+    sys.path.insert(0, str(root / "tools"))
+    from glyph_campaign_transition import _proof_invocation
+    from glyph_c023_campaign_transition import authenticate, replay_covered_checker_paths
+
+    @_proof_invocation
+    def classify():
+        proof = authenticate(root)
+        return {"contract": proof["contract"], "candidate": proof["candidate"],
+                "object_roots": sorted(proof["object_roots"]),
+                "covered": sorted(replay_covered_checker_paths(root))}
+
+    print(json.dumps(classify()))
+
+
+if __name__ == "__main__":
+    if sys.argv[1:] != ["--historical-classifier"]:
+        raise SystemExit("expected --historical-classifier")
+    run_historical_classifier()

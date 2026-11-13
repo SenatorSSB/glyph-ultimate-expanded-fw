@@ -51,6 +51,7 @@ def pairs(items: list[tuple[str, object]]) -> dict[str, object]:
 # hundreds of times. Gather stage-zero metadata once per invocation; live mode
 # and regular-file checks still apply, as do the independent clean-tree proofs.
 _MANIFEST_INDEX = ContextVar("glyph_manifest_index", default=None)
+_C023_RESULT = ContextVar("glyph_manifest_c023_result", default=None)
 
 
 def regular_index_paths():
@@ -443,6 +444,7 @@ def load_indexed_manifest() -> tuple[list[dict[str, object]], list[dict[str, obj
             package_scope.verify_current_package(ROOT)
             with tempfile.TemporaryDirectory(prefix="glyph-c023-classify-") as directory:
                 proof = package_scope.original_proof(ROOT, Path(directory))
+            _C023_RESULT.set((ROOT, git_value("rev-parse", "HEAD"), proof))
             replay_paths = frozenset(proof["covered"])
         else:
             replay_paths = replay_covered_checker_paths(ROOT)
@@ -863,8 +865,12 @@ def required_catalog(selected: list[dict[str, object]]) -> tuple[dict[str, str],
             from glyph_c023_campaign_transition import authenticate as authenticate_c023
             if package_scope.package_lineage(ROOT):
                 package_scope.verify_current_package(ROOT)
-                with tempfile.TemporaryDirectory(prefix="glyph-c023-catalog-") as directory:
-                    proof = package_scope.original_proof(ROOT, Path(directory))
+                classified = _C023_RESULT.get()
+                if classified is not None and classified[:2] == (ROOT, git_value("rev-parse", "HEAD")):
+                    proof = classified[2]
+                else:
+                    with tempfile.TemporaryDirectory(prefix="glyph-c023-catalog-") as directory:
+                        proof = package_scope.original_proof(ROOT, Path(directory))
                 roots.add(package_scope.C023_DONE)
             else:
                 proof = authenticate_c023(ROOT)
@@ -1109,6 +1115,7 @@ def main() -> int:
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--check-manifest", action="store_true")
     args = parser.parse_args()
+    proof_context = _C023_RESULT.set(None)
     previous_deadline, previous_env = DEADLINE, EXECUTION_ENV
     started = monotonic()
     DEADLINE = started + AGGREGATE_TIMEOUT_SECONDS
@@ -1239,6 +1246,7 @@ def main() -> int:
             if previous_timer[0] > 0:
                 signal.setitimer(signal.ITIMER_REAL, max(.001, previous_timer[0] - (monotonic() - started)), previous_timer[1])
             DEADLINE, EXECUTION_ENV = previous_deadline, previous_env
+            _C023_RESULT.reset(proof_context)
     if args.json:
         print(json.dumps(output, sort_keys=True))
     elif args.check_manifest and output["status"] == "PASS":
