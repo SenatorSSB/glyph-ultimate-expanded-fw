@@ -6,6 +6,7 @@
 #include "comms/ConfiguratorBackend.hpp"
 #include <lfs.h>
 #include <algorithm>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -246,6 +247,31 @@ if(!std::strcmp(argv[1],"wire-requests")){
   need(files()==all,"seed exact namespace");no_handles();output(argv[3],nor);shutdown();return 0;
  }
  need(argc>=5,"execute|inspect NOR REQUESTS OUTDIR");output_dir=argv[4];mount_image(argv[2]);need(persistence.SetValidator(validate_glyph_config),"configured actual source validator");
+ if(!std::strcmp(argv[1],"startup-work")){
+  // Observe the actual package classifier, including the mounted NOR callbacks.
+  // Measure only Begin, after Arduino facade setup and saved Config load.
+  Config saved=Config_init_default;
+  need(persistence.LoadConfigChecked(saved)==Persistence::LoadResult::Loaded,"load saved Config for classifier benchmark");
+  const auto before=nor;const auto before_reads=reads,before_programs=programs,before_erases=erases;
+  static size_t operations[unsigned(CheckedStorage::Operation::Enumerate)+1]{};
+  CheckedStorage::SetFaultHook([](CheckedStorage::Kind,CheckedStorage::Operation op,CheckedStorage::Phase phase,const char*){
+   if(phase==CheckedStorage::Phase::Before)++operations[unsigned(op)];
+   return CheckedStorage::Fault::None;
+  });
+  const auto start=std::chrono::steady_clock::now();
+  const bool ready=profile_store.Begin(saved.ultimate_profile_store_incarnation,saved.ultimate_profile_root_format);
+  const auto us=std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()-start).count();
+  CheckedStorage::SetFaultHook(nullptr);
+  need(ready&&!profile_store.IsReadOnlyRecovery(),"healthy startup required");
+  need(nor==before&&programs==before_programs&&erases==before_erases,"benchmark observation must be read-only");
+  no_handles();
+  std::cout<<"{\"enumerations\":"<<operations[unsigned(CheckedStorage::Operation::Enumerate)]
+    <<",\"opens\":"<<operations[unsigned(CheckedStorage::Operation::OpenRead)]
+    <<",\"seeks\":"<<operations[unsigned(CheckedStorage::Operation::Seek)]
+    <<",\"reads\":"<<operations[unsigned(CheckedStorage::Operation::Read)]
+    <<",\"nor_reads\":"<<(reads-before_reads)<<",\"host_us\":"<<us<<"}\n";
+  shutdown();return 0;
+ }
 #if defined(GLYPH_BOOT_PROBE)
  if(!std::strcmp(argv[1],"boot"))return boot_probe::run(argv[3]);
 #endif

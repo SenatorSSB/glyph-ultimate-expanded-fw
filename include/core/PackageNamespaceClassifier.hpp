@@ -31,6 +31,10 @@ struct IntentFacts;
 class NamespaceReader {
   public:
     virtual ~NamespaceReader() = default;
+    // Exclusive, read-only interval. Reusable observations must expire before
+    // returning to dispatch, which can run callbacks or start a transaction.
+    virtual void BeginClassification() {}
+    virtual void EndClassification() {}
     virtual bool MountedAndConfigured() const = 0;
     // Sticky for this entire observation, including every reread after Scan.
     // Canonical invalidity/source_valid=false is separate from checked I/O.

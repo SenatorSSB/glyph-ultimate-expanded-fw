@@ -14,6 +14,7 @@
 #include "core/ConfigWriteCandidate.hpp"
 #include "core/PackageOwnership.hpp"
 #include "core/BootDiagnostics.hpp"
+#include "core/BootTiming.hpp"
 #include "core/RecoveryInitialization.hpp"
 #include "core/RuntimeIdentityService.hpp"
 #include "core/state.hpp"
@@ -76,6 +77,33 @@ namespace {
 // SDK runtime initializes .mutex_array before main launches core1. setup1 can
 // therefore acquire this lock even while core0 has not entered setup yet.
 auto_init_mutex(boot_state_mutex);
+
+// Core0 writes the phase times before publishing normal boot. Core1 only
+// consumes them after acquiring that publication. The two later milestones
+// can race with the About page and are published under the same mutex.
+boot_timing::Times boot_times;
+uint32_t boot_start_ms=0, phase_start_ms=0;
+void time_boot_stage(boot_diagnostics::Stage stage) {
+    using Stage=boot_diagnostics::Stage;
+    switch(stage) {
+    case Stage::Enter: boot_start_ms=millis(); break;
+    case Stage::StoreBegin: case Stage::BackendBegin: phase_start_ms=millis(); break;
+    case Stage::StoreReady: boot_times.store_ms=millis()-phase_start_ms; break;
+    case Stage::BackendDone: boot_times.backend_ms=millis()-phase_start_ms; break;
+    default: break;
+    }
+}
+void mark_first_mode_ready() {
+    // Single writer (core0); no lock, calls to millis or backend queries on
+    // subsequent frames. Mode binding precedes entry to backend report service.
+    static bool recorded=false;
+    if(recorded || !backends[0]->CurrentGameMode())return;
+    const uint32_t elapsed=millis()-boot_start_ms;
+    mutex_enter_blocking(&boot_state_mutex);
+    boot_times.first_mode_ready_ms=elapsed;
+    mutex_exit(&boot_state_mutex);
+    recorded=true;
+}
 
 enum class BootOutcome {
     Pending,
@@ -144,7 +172,9 @@ void draw_recovery_page(BootOutcome outcome) {
 // End this display/I2C frame before entering any storage or backend phase.
 // Stage numbers describe the current phase, never successful installation.
 __attribute__((noinline)) void show_boot_stage(boot_diagnostics::Stage stage) {
+    time_boot_stage(stage);
     boot_diagnostics::Mark(watchdog_hw->scratch[3],stage);
+#if defined(GLYPH_DEBUG_BOOT_DISPLAY) && GLYPH_DEBUG_BOOT_DISPLAY
     if(!boot_display_ready)return;
     display.clearDisplay();
     display.setFont(nullptr);
@@ -154,6 +184,7 @@ __attribute__((noinline)) void show_boot_stage(boot_diagnostics::Stage stage) {
     display.println("Startup stage");
     display.println(boot_diagnostics::StageCode(watchdog_hw->scratch[3]));
     display.display();
+#endif
 }
 
 void refuse_boot(BootOutcome outcome, bool display_ready) {
@@ -415,6 +446,7 @@ void loop() {
         service_profile_selection();
     }
     select_mode(backends, backend_count, config);
+    mark_first_mode_ready();
 
     for (size_t i = 0; i < backend_count; i++) {
         backends[i]->SendReport();
@@ -431,6 +463,28 @@ void loop() {
 
 /* Second core handles OLED display */
 IntegratedDisplay *display_backend = nullptr;
+
+boot_timing::Times boot_timing::Snapshot() {
+    mutex_enter_blocking(&boot_state_mutex);
+    const Times times=boot_times;
+    mutex_exit(&boot_state_mutex);
+    return times;
+}
+
+void transfer_dashboard() {
+    display.display();
+    // Only core1 calls this display callback. Capture the first completed
+    // ordinary dashboard transfer, excluding splash/recovery/menu frames.
+    static bool recorded=false;
+    if(recorded || !boot_display_ready || !display_backend)return;
+    const auto mode=display_backend->CurrentDisplayMode();
+    if(mode!=DISPLAY_MODE_BUTTON_HINTS && mode!=DISPLAY_MODE_VIEWER)return;
+    const uint32_t elapsed=millis()-boot_start_ms;
+    mutex_enter_blocking(&boot_state_mutex);
+    boot_times.first_dashboard_ms=elapsed;
+    mutex_exit(&boot_state_mutex);
+    recorded=true;
+}
 
 InputDisplay *input_viewer = nullptr;
 
@@ -493,7 +547,7 @@ void setup1() {
         inputs,
         display,
         []() { display.clearDisplay(); },
-        []() { display.display(); },
+        transfer_dashboard,
         DisplayControls{ .back = BTN_MB1, .down = BTN_MB3, .up = BTN_MB2, .enter = BTN_MB4 },
         display_modes,
         display_modes_count

@@ -103,7 +103,7 @@ def main():
   assert boot['unchanged'],name
   if healthy:assert status.status==1 and status.recovery_flags==0,name
   else:assert status.status==8 and status.recovery_flags,name
-  if name=='migration-source-receipt-still-required':assert 'migration proof' in status.diagnostic,status.diagnostic
+  if name=='migration-source-receipt-still-required':assert status.diagnostic=='package: migration: source hash',status.diagnostic
   results.append(dict(name=name,healthy=healthy,diagnostic=status.diagnostic,raw_nor_unchanged=True))
  (a.out/'summary.json').write_text(json.dumps(dict(complete=True,observer_positive=len(positive),observer_negative=len(negative),namespace_cases=results,physical_filesystem_attestation=False,hardware_operations=0),indent=2)+'\n')
  print('historical compatibility:',len(positive),'positive,',len(negative),'negative,',len(cases),'namespace cases; read/seek/stat/open/close and short-read faults PASS')

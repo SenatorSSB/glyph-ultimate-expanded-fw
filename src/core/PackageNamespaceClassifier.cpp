@@ -70,7 +70,10 @@ class Classifier {
    if(w.object.directory)return Fail("unsupported namespace directory");
    size_t observed=0;if(reader.Extent(w.object.path,observed)!=Probe::Present||observed!=w.object.bytes)return Fail("namespace/probe disagreement");
    ++w.namespace_files;if(w.logical_bytes>UINT64_MAX-w.object.bytes)return false;w.logical_bytes+=w.object.bytes;
-   for(size_t o=0;o<w.object.bytes;){size_t take=w.object.bytes-o;if(take>sizeof(w.read_chunk))take=sizeof(w.read_chunk);if(!reader.Read(w.object.path,o,w.read_chunk,take))return Fail("probe/read uncertainty");o+=take;}
+   // The record owner is idle during the complete readability pass. Read up
+   // to one record per open, still checking every byte (including large and
+   // unrecognized files) before considering any future-format markers.
+   for(size_t o=0;o<w.object.bytes;){size_t take=w.object.bytes-o;if(take>4128)take=4128;if(!reader.Read(w.object.path,o,owners.record,take))return Fail("probe/read uncertainty");o+=take;}
   }
   for(size_t i=0;i<w.namespace_files;++i){bool eof=false;if(!reader.ObjectAt(i,w.object,eof)||eof)return false;
    auto *p=owners.root0;const auto n=w.object.bytes;const size_t head=n<320?n:320;
@@ -553,12 +556,14 @@ static __attribute__((noinline)) void FinishClassification(NamespaceReader &read
 void ClassifyNamespaceInto(NamespaceReader &reader,const ClassifierOwners &owners){
  // Placement construction never materializes a 4KiB automatic temporary.
  owners.work.~ClassificationWorkspace();::new(&owners.work)ClassificationWorkspace;
+ reader.BeginClassification();
  Classifier classifier(reader,owners);
  classifier.Run();
  if(owners.work.run.next_phase==1)classifier.RunRoots();
  if(owners.work.run.next_phase==2)classifier.RunBaseline();
  if(owners.work.run.next_phase==3)classifier.RunFinal();
  FinishClassification(reader,owners);
+ reader.EndClassification();
 }
 Classification ClassifyNamespace(NamespaceReader &reader,const ClassifierOwners &owners){
  ClassifyNamespaceInto(reader,owners);
