@@ -31,3 +31,15 @@ The 27-profile healthy startup image is unchanged by classification. Full enumer
 A linked review found that the combined lifecycle/selector stack initially exceeded the 2,048-byte core0 reservation. Forward commits split CREATE and lifecycle preparation, released the root intent hash before Config parsing, bounded the DescribeConfig phase, ended the timing helper before storage calls and separated chord scanning from persistence. GameCube managed chord saves then gained the same receiver idle protection as menu selection. Confirm exact resource records against the ELF in each candidate's manifest. Static call-graph bounds are distinct from measured controller stack high-water.
 
 The final combined image uses 198,888 static RAM bytes against the retained 199,632-byte budget. Both stacks reserve 2,048 bytes. The core0 review covers 50 affected paths; the largest new lifecycle path is 2,044 bytes. The inherited legacy SET staging path reaches all 2,048 bytes, leaving zero modeled margin on that path. Core1 is bounded at 1,068 bytes including its interrupt allowance, with 237 reachable functions and zero unresolved edges under the retained model. The startup-only core0 routes peak at 2,044 bytes with the same inherited 2,048-byte staging path. These results make high-water observation and stack re-review important for any subsequent source/toolchain change.
+
+## Retained candidates
+
+| Candidate | Exact source | UF2 bytes | UF2 SHA-256 |
+| --- | --- | ---: | --- |
+| [Combined](candidates/combined/manifest.json) | `84556d904f067bda5a101e6297689239ecd04aae` | 1,326,592 | `6b3fd3e2f71b839e7448ab6b0daa54e5d4f1d6473d0df917849413e3f4227ddb` |
+| [Isolated startup](candidates/startup-7d1f6a3b/manifest.json) | `7d1f6a3ba99627e88dfdaf404e08ff816902ccfc` | 1,300,480 | `46bf9d701376dba8b0d013efd8429b15ee36fde0fbf0964a2f9cc5866bcc3a57` |
+| [Isolated selection](candidates/selection-f6655e30/manifest.json) | `f6655e30c6d94b4468711053e5c6c76c00be9cc7` | 1,299,968 | `9d348290512fffa77b817b2a0c88aaa2a5b7aee522b6b02c0d1033c1903fe502` |
+
+Each manifest binds ELF, BIN, UF2 and MAP to the source named in the table. Reproduce the conditional stack calculations with the scripts and hashes in [resources](resources/REPORT.md). The candidate images differ when compiled from another source commit, including CI verification merges with a different embedded build version. Use the reviewed UF2 listed above for the proposed controller session.
+
+The final selector-only build uses 198,864 static RAM bytes. Its highest affected core0 path is 2,036 bytes and core1 is 1,060 bytes. The inherited legacy Config staging route is still 2,048 bytes. Its mandatory host tests checked the GameCube idle gate in both enum configurations and all persistence/recovery routes. Firmware and hardware acceptance remain separate from canonical CI maintenance.
